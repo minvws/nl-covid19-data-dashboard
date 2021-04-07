@@ -221,13 +221,6 @@ export function useHoverState<T extends TimestampedValue>({
       .filter(isDefined);
 
     /**
-     * If there are no points getting hovered, hover state should be undefined
-     */
-    if (!linePoints.length) {
-      return;
-    }
-
-    /**
      * Point markers on range data are rendered differently, so we split them
      * out here, so we avoid having to create a union type and complicate
      * things.
