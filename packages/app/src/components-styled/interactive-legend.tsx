@@ -1,38 +1,43 @@
-import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 
-interface AgeGroupLegendProps {
-  seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
-  ageGroupSelection: string[];
+interface SimplifiedSeriesConfig {
+  metricProperty: string;
+  label: string;
+  color: string;
+}
+
+interface InteractiveLegendProps {
+  helpText: string;
+  seriesConfig: SimplifiedSeriesConfig[];
+  selection: string[];
   onToggleAgeGroup: (ageGroupRange: string) => void;
   onReset: () => void;
 }
 
-export function AgeGroupLegend({
+export function InteractiveLegend({
+  helpText,
   seriesConfig,
-  ageGroupSelection,
+  selection,
   onToggleAgeGroup,
   onReset,
-}: AgeGroupLegendProps) {
+}: InteractiveLegendProps) {
   const { siteText } = useIntl();
-  const text = siteText.infected_per_age_group;
 
-  const hasSelection = ageGroupSelection.length !== 0;
+  const hasSelection = selection.length !== 0;
 
   return (
     <>
       <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
-        {text.legend_help_text}
+        {helpText}
       </Text>
       <Legend>
         <List>
           {seriesConfig.map((item) => {
-            const isSelected = ageGroupSelection.includes(item.metricProperty);
+            const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
                 <ItemButton
@@ -49,7 +54,7 @@ export function AgeGroupLegend({
           })}
           <Item>
             <ResetButton onClick={onReset} isVisible={hasSelection}>
-              {text.reset_button_label}
+              {siteText.common.interactive_legend.reset_button_label}
             </ResetButton>
           </Item>
         </List>

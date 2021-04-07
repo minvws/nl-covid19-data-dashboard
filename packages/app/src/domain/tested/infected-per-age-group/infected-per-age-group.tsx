@@ -1,4 +1,5 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import { InteractiveLegend } from '~/components-styled/interactive-legend';
 import { Legend, LegendItem } from '~/components-styled/legend';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TooltipSeriesList } from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
@@ -8,7 +9,6 @@ import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useList } from '~/utils/use-list';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { AgeGroupLegend } from './components/age-group-legend';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
@@ -108,9 +108,10 @@ export function InfectedPerAgeGroup({
           ],
         }}
       />
-      <AgeGroupLegend
+      <InteractiveLegend
+        helpText={text.legend_help_text}
         seriesConfig={dynamicLegendConfig}
-        ageGroupSelection={list}
+        selection={list}
         onToggleAgeGroup={toggle}
         onReset={clear}
       />
