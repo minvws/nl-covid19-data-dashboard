@@ -1512,7 +1512,8 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_metric_label": ""
   },
   "gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1636,7 +1637,8 @@
         "href": "https://data.rivm.nl/covid-19/COVID-19_gehandicaptenzorg.html",
         "text": "RIVM"
       }
-    }
+    },
+    "linechart_metric_label": ""
   },
   "veiligheidsregio_gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
