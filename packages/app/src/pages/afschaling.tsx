@@ -76,7 +76,9 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           )}
           <Heading level={2}>{content.explanationTitle}</Heading>
-          <DownScalableExplanation data={downScalableOption} />
+          {downScalableOption !== undefined && (
+            <DownScalableExplanation data={downScalableOption} />
+          )}
           <RichContent blocks={content.explanationDescription} />
         </ContentBlock>
       </Box>
