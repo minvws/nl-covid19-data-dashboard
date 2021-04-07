@@ -146,7 +146,7 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
-  downscaling?: NlDownscaling;
+  escalation_level_downscaling?: NlEscalationLevelDownscaling;
   g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
@@ -235,11 +235,11 @@ export interface NationalDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
-export interface NlDownscaling {
-  values: NlDownscalingValue[];
-  last_value: NlDownscalingValue;
+export interface NlEscalationLevelDownscaling {
+  values: NlEscalationLevelDownscalingValue[];
+  last_value: NlEscalationLevelDownscalingValue;
 }
-export interface NlDownscalingValue {
+export interface NlEscalationLevelDownscalingValue {
   is_downscaling_active: boolean;
   reproduction_is_cleared: boolean;
   reproduction_benchmark: number;

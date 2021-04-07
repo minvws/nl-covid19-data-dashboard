@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "nl_downscaling",
+  "title": "nl_escalation_level_downscaling",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "nl_downscaling_value",
+      "title": "nl_escalation_level_downscaling_value",
       "type": "object",
       "properties": {
         "is_downscaling_active": {
