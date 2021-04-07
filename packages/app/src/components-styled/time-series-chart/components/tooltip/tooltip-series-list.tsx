@@ -162,7 +162,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
   );
 }
 
-export const TooltipList = styled.ol<{ hasTwoColumns: boolean }>(
+export const TooltipList = styled.ol<{ hasTwoColumns?: boolean }>(
   ({ hasTwoColumns }) =>
     css({
       columns: hasTwoColumns ? 2 : 1,
