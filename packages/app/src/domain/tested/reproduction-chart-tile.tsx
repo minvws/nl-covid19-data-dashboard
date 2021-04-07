@@ -6,7 +6,7 @@ import {
   NationalReproduction,
   NationalReproductionValue,
 } from '@corona-dashboard/common';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TimeframeOption } from '~/utils/timeframe';
 
@@ -36,7 +36,7 @@ export function ReproductionChartTile({
   const last_value = last(values) as NationalReproductionValue;
 
   return (
-    <ChartTileWithTimeframe
+    <ChartTile
       title={text.linechart_titel}
       description={text.legenda_r}
       timeframeOptions={timeframeOptions}
@@ -66,6 +66,6 @@ export function ReproductionChartTile({
           }}
         />
       )}
-    </ChartTileWithTimeframe>
+    </ChartTile>
   );
 }

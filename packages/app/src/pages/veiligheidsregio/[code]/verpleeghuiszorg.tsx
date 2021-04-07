@@ -38,7 +38,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   const positiveTestedPeopleText =
     siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
   const deceased = siteText.veiligheidsregio_verpleeghuis_oversterfte;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const nursinghomeLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
@@ -114,7 +113,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -212,9 +210,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            ariaDescription={
-              graphDescriptions.verpleeghuiszorg_besmette_locaties
-            }
           >
             {(timeframe) => (
               <TimeSeriesChart

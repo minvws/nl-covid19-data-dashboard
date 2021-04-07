@@ -71,8 +71,6 @@ type ChartTileProps = {
   description?: string;
   timeframeInitialValue?: TimeframeOption;
   hasAdditionalNavigation?: boolean;
-  ariaLabelledBy?: string;
-  ariaDescription?: string;
 } & (
   | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
   {

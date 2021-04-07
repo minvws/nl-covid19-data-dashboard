@@ -42,8 +42,6 @@ export function LineChartTile<T extends TimestampedValue>({
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
-      ariaLabelledBy={ariaLabelledBy}
-      ariaDescription={ariaDescription}
     >
       {(timeframe) => (
         <>

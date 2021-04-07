@@ -186,7 +186,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={replaceVariablesInText(text.bar_chart_title, {
                 municipality: municipalityName,
               })}
-              ariaDescription={graphDescriptions.rioolwater_meetwaarde}
               metadata={{
                 date: [
                   sewerAverages.last_value.date_start_unix,
