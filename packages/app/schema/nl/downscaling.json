@@ -18,7 +18,7 @@
     "reproduction_threshold_day_span": {
       "type": "integer"
     },
-    "intensive_care_is_below_threshold": {
+    "intensive_care_nice_is_below_threshold": {
       "type": "boolean"
     },
     "intensive_care_nice_threshold_value": {
@@ -46,7 +46,7 @@
     "reproduction_is_below_threshold",
     "reproduction_threshold_value",
     "reproduction_threshold_day_span",
-    "intensive_care_is_below_threshold",
+    "intensive_care_nice_is_below_threshold",
     "intensive_care_nice_threshold_value",
     "intensive_care_nice_threshold_day_span",
     "hospital_nice_is_below_threshold",
