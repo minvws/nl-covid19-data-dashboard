@@ -2362,7 +2362,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Deliveries and stock",
-      "description": "Deliveries and stock",
+      "description": "Vaccine doses are delivered to the Netherlands every week. The majority of these are made available soon after some checks so people can be vaccinated. However, we hold some doses aside so there is enough vaccine to ensure those who have had their first dose are able to get their second dose. This page shows how many doses of vaccine are on their way and how many doses we hold aside. ",
       "reference": {
         "href": "/verantwoording#deliveries-and-vaccine-doses-in-stock",
         "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
