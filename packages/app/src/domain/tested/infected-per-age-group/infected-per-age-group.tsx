@@ -112,7 +112,7 @@ export function InfectedPerAgeGroup({
         helpText={text.legend_help_text}
         seriesConfig={dynamicLegendConfig}
         selection={list}
-        onToggleAgeGroup={toggle}
+        onToggleItem={toggle}
         onReset={clear}
       />
       <Legend items={staticLegendItems} />

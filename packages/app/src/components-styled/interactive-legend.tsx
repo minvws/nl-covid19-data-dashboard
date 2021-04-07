@@ -14,7 +14,7 @@ interface InteractiveLegendProps {
   helpText: string;
   seriesConfig: SimplifiedSeriesConfig[];
   selection: string[];
-  onToggleAgeGroup: (ageGroupRange: string) => void;
+  onToggleItem: (item: string) => void;
   onReset: () => void;
 }
 
@@ -22,7 +22,7 @@ export function InteractiveLegend({
   helpText,
   seriesConfig,
   selection,
-  onToggleAgeGroup,
+  onToggleItem,
   onReset,
 }: InteractiveLegendProps) {
   const { siteText } = useIntl();
@@ -41,7 +41,7 @@ export function InteractiveLegend({
             return (
               <Item key={item.label}>
                 <ItemButton
-                  onClick={() => onToggleAgeGroup(item.metricProperty)}
+                  onClick={() => onToggleItem(item.metricProperty)}
                   isActive={hasSelection && isSelected}
                   color={item.color}
                   data-text={item.label}
