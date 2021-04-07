@@ -1475,10 +1475,10 @@
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 16% of all positive tested persons are in their twenties (blue bar) and 13% of all Dutch people are in their twenties (gray bar). In this example, the age group twenties has relatively more positive tested people. The chart is updated daily and covers only the most recently reported cases.",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
-      "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
+      "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old",
       "infected_percentage_title": "Confirmed cases by age group",
-      "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old. ",
-      "age_group_range_tooltip": "{{ageGroupRange}} years old. ",
+      "infected_percentage_tooltip": "of the total amount of positive tested persons is {{ageGroupRange}} years old",
+      "age_group_range_tooltip": "{{ageGroupRange}} years old",
       "accessibility_description": "Graph with percentages for the distribution of the population and the distribution of positive tested age groups.",
       "clipped_value_message": "This value is higher than displayed in the figure.",
       "value_percentage_title": "Confirmed cases by age group",
