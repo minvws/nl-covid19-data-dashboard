@@ -7,6 +7,7 @@ import createSchema from 'part:@sanity/base/schema-creator';
 // import siteSettings from "./documents/siteSettings";
 import article from './documents/article';
 import editorial from './documents/editorial';
+import afschalingPage from './documents/pages/afschaling-page';
 import behaviorPage from './documents/pages/behavior-page';
 import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
 import deceasedPage from './documents/pages/deceased-page';
@@ -30,6 +31,7 @@ import localeRichContentBlock from './locale/locale-rich-content-block';
 import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
+import { binaryChoice, binaryChoiceOption } from './objects/binary-choice';
 import collapsible from './objects/collapsible';
 import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
@@ -68,6 +70,7 @@ export default createSchema({
     reproductionPage,
     sewerPage,
     vaccinationsPage,
+    afschalingPage,
 
     /** RESTRICTIONS */
     restrictionGroup,
@@ -82,6 +85,8 @@ export default createSchema({
     collapsible,
     milestone,
     faqQuestion,
+    binaryChoiceOption,
+    binaryChoice,
 
     /* LOCALE HELPERS */
     localeString,

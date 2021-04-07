@@ -62,6 +62,7 @@ const hiddenDocTypes = [
   'vaccinationsPage',
   'toegankelijkheid',
   'escalationLevelPage',
+  'afschalingPage',
 ];
 
 export default () =>
@@ -159,6 +160,12 @@ export default () =>
         RiPagesFill,
         'Vaccinaties',
         'vaccinationsPage'
+      ),
+      addListItem(
+        StructureBuilder,
+        RiPagesFill,
+        'Afschaling maatregelen',
+        'afschalingPage'
       ),
       addListItem(
         StructureBuilder,
