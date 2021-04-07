@@ -392,7 +392,9 @@ export interface NationalDisabilityCare {
 }
 export interface NationalDisabilityCareValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   deceased_daily: number;
+  deceased_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -493,8 +495,10 @@ export interface NationalElderlyAtHome {
 }
 export interface NationalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_moving_average: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -889,10 +893,12 @@ export interface RegionalDisabilityCare {
 }
 export interface RegionalDisabilityCareValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
+  deceased_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -970,8 +976,10 @@ export interface RegionalElderlyAtHome {
 }
 export interface RegionalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_moving_average: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
