@@ -1,5 +1,8 @@
+import { isEmpty } from 'lodash';
 import Head from 'next/head';
+import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
+import { WarningTile } from '~/components-styled/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -31,7 +34,20 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
 
       <div>
-        <MaxWidth></MaxWidth>
+        <MaxWidth>
+          {!isEmpty(
+            siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
+          ) && (
+            <Box mb={3}>
+              <WarningTile
+                message={
+                  siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
+                }
+                variant="emphasis"
+              />
+            </Box>
+          )}
+        </MaxWidth>
       </div>
     </Layout>
   );
