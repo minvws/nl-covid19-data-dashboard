@@ -25,7 +25,7 @@ import { Markdown } from '~/components-styled/markdown';
 import { MaxWidth } from '~/components-styled/max-width';
 import { Metadata } from '~/components-styled/metadata';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading, Text } from '~/components-styled/typography';
+import { Heading, InlineText, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -66,6 +66,8 @@ import { createDate } from '~/utils/createDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { Link } from '~/utils/link';
+import IconDown from '~/assets/pijl-omlaag.svg';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -120,6 +122,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const is_downscaling_possible = false;
+
+  const textYes =
+    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.';
+  const textNo =
+    'um fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae';
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -234,6 +243,68 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <TopicalTile>
               <TopicalSectionHeader
+                title={text.downscaling.title}
+                link={siteText.common_actueel.secties.risicokaart.link}
+              />
+
+              {text.risiconiveaus.belangrijk_bericht &&
+                !isEmpty(text.risiconiveaus.belangrijk_bericht) && (
+                  <Box mt={3} mb={4}>
+                    <WarningTile
+                      message={text.risiconiveaus.belangrijk_bericht}
+                      variant="emphasis"
+                    />
+                  </Box>
+                )}
+
+              <Text fontWeight="bold">{text.downscaling.sub_title}</Text>
+              <Box maxWidth="maxWidthText">
+                <Box
+                  height={18}
+                  width={18}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  backgroundColor={is_downscaling_possible ? '#0390D6' : 'red'}
+                  css={css({
+                    float: 'left',
+                    svg: {
+                      padding: '2px',
+                    },
+                    path: {
+                      fill: 'white',
+                    },
+                  })}
+                  mr={1}
+                  mt="2px"
+                  borderRadius="50%"
+                >
+                  {is_downscaling_possible ? (
+                    <IconDown />
+                  ) : (
+                    <Box width={8} height={2} bg="white" />
+                  )}
+                </Box>
+                <Text>
+                  <InlineText fontWeight="bold">
+                    {`${
+                      is_downscaling_possible
+                        ? text.downscaling.options.possible.bold_text
+                        : text.downscaling.options.no.bold_text
+                    } `}
+                  </InlineText>
+                  {is_downscaling_possible
+                    ? text.downscaling.options.possible.description
+                    : text.downscaling.options.no.description}
+                </Text>
+                <Link passHref href="#">
+                  Bekijk de cijfers van de mogelijke versoepeling.
+                </Link>
+              </Box>
+            </TopicalTile>
+
+            <TopicalTile>
+              <TopicalSectionHeader
                 title={siteText.common_actueel.secties.risicokaart.titel}
                 link={siteText.common_actueel.secties.risicokaart.link}
               />
@@ -266,15 +337,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   />
                 </Box>
                 <Box>
-                  {text.risiconiveaus.belangrijk_bericht &&
-                    !isEmpty(text.risiconiveaus.belangrijk_bericht) && (
-                      <Box mb={3}>
-                        <WarningTile
-                          message={text.risiconiveaus.belangrijk_bericht}
-                          variant="emphasis"
-                        />
-                      </Box>
-                    )}
                   <Box mb={3}>
                     <Markdown
                       content={replaceVariablesInText(

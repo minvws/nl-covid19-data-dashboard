@@ -2512,6 +2512,20 @@
       "positief_geteste_mensen": {
         "titel": "Confirmed cases in the Netherlands"
       }
+    },
+    "downscaling": {
+      "title": "National measures",
+      "sub_title": "Can the measure level be lowered?",
+      "options": {
+        "possible": {
+          "bold_text": "Basically yes",
+          "description": "Given that the IC admissions, hospital admissions and reproduction rate in the past 14 days were below the cut-off value, it can be decided whether fewer measures will apply across the country. The OMT does not make this decision solely on the basis of the figures."
+        },
+        "no": {
+          "bold_text": "No.",
+          "description": "Based on the exceeding of the limit value for hospital admissions and reproduction number in the past 14 days, it is not yet possible to look at relaxation."
+        }
+      }
     }
   },
   "common.tooltip.positive_tested_value": "",
