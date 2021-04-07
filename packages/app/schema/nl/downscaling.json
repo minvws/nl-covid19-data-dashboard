@@ -7,7 +7,7 @@
       "type": "boolean"
     },
     "current_level_of_measures": {
-      "type": "number"
+      "type": "integer"
     },
     "reproduction_is_below_threshold": {
       "type": "boolean"
