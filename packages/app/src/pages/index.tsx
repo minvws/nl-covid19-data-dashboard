@@ -25,7 +25,6 @@ import { Markdown } from '~/components-styled/markdown';
 import { MaxWidth } from '~/components-styled/max-width';
 import { Metadata } from '~/components-styled/metadata';
 import { TileList } from '~/components-styled/tile-list';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { Heading, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { WarningTile } from '~/components-styled/warning-tile';
@@ -63,7 +62,6 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -136,28 +134,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
         <MaxWidth id="content">
           <TileList>
-            <TimeSeriesChart
-              values={data.reproduction.values
-                .slice(250, data.reproduction.values.length)
-                .filter((x) => x.index_average)}
-              seriesConfig={[
-                {
-                  metricProperty: 'index_average',
-                  type: 'bar',
-                  color: colors.data.primary,
-                  label: 'R-waarde',
-                  aboveBenchmarkColor: '#f00',
-                  aboveBenchmarkFillOpacity: 1,
-                },
-              ]}
-              dataOptions={{
-                benchmark: {
-                  value: 1,
-                  label: siteText.common.signaalwaarde,
-                },
-              }}
-            />
-
             <TopicalSectionHeader
               lastGenerated={Number(lastGenerated)}
               title={replaceComponentsInText(
