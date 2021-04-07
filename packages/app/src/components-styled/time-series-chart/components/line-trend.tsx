@@ -1,3 +1,4 @@
+import { curveLinear, curveStep } from '@visx/curve';
 import { LinePath } from '@visx/shape';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -15,6 +16,7 @@ type LineTrendProps = {
   strokeWidth?: number;
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
+  curve?: 'linear' | 'step';
 };
 
 export function LineTrend({
@@ -24,6 +26,7 @@ export function LineTrend({
   color,
   getX,
   getY,
+  curve = 'linear',
 }: LineTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
@@ -37,6 +40,7 @@ export function LineTrend({
       y={getY}
       stroke={color}
       strokeWidth={strokeWidth}
+      curve={curve === 'linear' ? curveLinear : curveStep}
       strokeDasharray={style === 'dashed' ? 4 : undefined}
       strokeLinecap="butt"
       strokeLinejoin="round"

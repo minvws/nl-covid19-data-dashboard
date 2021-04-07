@@ -1,3 +1,4 @@
+import { curveLinear, curveStep } from '@visx/curve';
 import { AreaClosed, LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
 import { useMemo } from 'react';
@@ -16,6 +17,7 @@ type AreaTrendProps = {
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
   yScale: PositionScale;
+  curve?: 'linear' | 'step';
 };
 
 export function AreaTrend({
@@ -26,6 +28,7 @@ export function AreaTrend({
   getX,
   getY,
   yScale,
+  curve = 'linear',
 }: AreaTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
@@ -42,6 +45,7 @@ export function AreaTrend({
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
+        curve={curve === 'linear' ? curveLinear : curveStep}
       />
       <AreaClosed
         data={nonNullSeries}
@@ -49,6 +53,7 @@ export function AreaTrend({
         y={getY}
         fill={color}
         fillOpacity={fillOpacity}
+        curve={curve === 'linear' ? curveLinear : curveStep}
         yScale={yScale}
       />
     </>
