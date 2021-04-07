@@ -2373,7 +2373,7 @@
       "timeframe_recent_en_verwacht": "Toon recent en verwacht"
     },
     "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt.",
-    "stock_per_vaccine_chart": {
+    "stock_per_supplier_chart": {
       "title": "Verwachtte voorraad per vaccin type",
       "description": "Deze grafiek ....",
       "tooltip_title": "Verwachtte voorraad per vaccin type"

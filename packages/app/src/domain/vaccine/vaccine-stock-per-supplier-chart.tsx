@@ -10,7 +10,7 @@ export function VaccineStockPerSupplierChart({
   values,
 }: VaccineStockPerSupplierChartProps) {
   const { siteText } = useIntl();
-  const text = siteText.vaccinaties.stock_per_vaccine_chart;
+  const text = siteText.vaccinaties.stock_per_supplier_chart;
 
   return (
     <TimeSeriesChart

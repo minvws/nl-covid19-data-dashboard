@@ -455,8 +455,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineDeliveryAreaChart data={data} />
 
           <ChartTile
-            title={text.stock_per_vaccine_chart.title}
-            description={text.stock_per_vaccine_chart.description}
+            title={text.stock_per_supplier_chart.title}
+            description={text.stock_per_supplier_chart.description}
             metadata={{
               source: text.bronnen.rivm,
             }}
