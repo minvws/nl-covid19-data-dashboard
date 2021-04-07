@@ -686,7 +686,10 @@
     "miljoen": "miljoen",
     "signaalwaarde": "Signaalwaarde",
     "totaal": "Totaal",
-    "rond": "rond"
+    "rond": "rond",
+    "interactive_legend": {
+      "reset_button_label": "Reset"
+    }
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",

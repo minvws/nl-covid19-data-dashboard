@@ -1,13 +1,14 @@
-import css from '@styled-system/css';
+import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 export type LegendShape = 'line' | 'square' | 'circle';
+type LegendLineStyle = 'solid' | 'dashed';
 
 export type LegendItem = {
   label: string;
 } & (
-  | { shape: LegendShape; color: string }
+  | { shape: LegendShape; color: string; style?: LegendLineStyle }
   | { shape: 'custom'; shapeComponent: ReactNode }
 );
 
@@ -32,7 +33,9 @@ export function Legend({ items }: LegendProps) {
           <Item key={i}>
             {item.label}
             {item.shape === 'square' && <Square color={item.color} />}
-            {item.shape === 'line' && <Line color={item.color} />}
+            {item.shape === 'line' && (
+              <Line color={item.color} lineStyle={item.style ?? 'solid'} />
+            )}
             {item.shape === 'circle' && <Circle color={item.color} />}
           </Item>
         );
@@ -71,20 +74,10 @@ const CustomShape = styled.div(
 
 const Shape = styled.div<{ color: string }>((x) =>
   css({
-    content: '',
     display: 'block',
     position: 'absolute',
     left: 0,
     backgroundColor: x.color,
-  })
-);
-
-const Line = styled(Shape)(
-  css({
-    top: '10px',
-    width: '15px',
-    height: '3px',
-    borderRadius: '2px',
   })
 );
 
@@ -103,4 +96,20 @@ const Circle = styled(Shape)(
     height: '10px',
     borderRadius: '50%',
   })
+);
+
+const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(
+  ({ color, lineStyle }) =>
+    css({
+      display: 'block',
+      position: 'absolute',
+      borderTopColor: color as SystemStyleObject,
+      borderTopStyle: lineStyle,
+      borderTopWidth: '3px',
+      top: '10px',
+      width: '15px',
+      height: 0,
+      borderRadius: '2px',
+      left: 0,
+    })
 );
