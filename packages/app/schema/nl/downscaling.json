@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_downscaling",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_downscaling_value",
+      "type": "object",
+      "properties": {
+        "is_downscaling_possible": {
+          "type": "boolean"
+        },
+        "current_level_of_measures": {
+          "type": "number"
+        },
+        "reproduction_is_below_threshold": {
+          "type": "boolean"
+        },
+        "reproduction_threshold_value": {
+          "type": "number"
+        },
+        "reproduction_threshold_day_span": {
+          "type": "integer"
+        },
+        "intensive_care_is_below_threshold": {
+          "type": "boolean"
+        },
+        "intensive_care_nice_threshold_value": {
+          "type": "number"
+        },
+        "intensive_care_nice_threshold_day_span": {
+          "type": "integer"
+        },
+        "hospital_nice_is_below_threshold": {
+          "type": "boolean"
+        },
+        "hospital_nice_threshold_value": {
+          "type": "number"
+        },
+        "hospital_nice_threshold_day_span": {
+          "type": "integer"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "is_downscaling_possible",
+        "current_level_of_measures",
+        "reproduction_is_below_threshold",
+        "reproduction_threshold_value",
+        "reproduction_threshold_day_span",
+        "intensive_care_is_below_threshold",
+        "intensive_care_nice_threshold_value",
+        "intensive_care_nice_threshold_day_span",
+        "hospital_nice_is_below_threshold",
+        "hospital_nice_threshold_value",
+        "hospital_nice_threshold_day_span",
+        "date_end_unix",
+        "date_of_insertion_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

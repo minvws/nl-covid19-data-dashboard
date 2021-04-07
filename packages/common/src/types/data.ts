@@ -146,7 +146,7 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
-  escalation_level_downscaling?: NlEscalationLevelDownscaling;
+  downscaling?: NlDownscaling;
   g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
@@ -235,21 +235,23 @@ export interface NationalDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
-export interface NlEscalationLevelDownscaling {
-  values: NlEscalationLevelDownscalingValue[];
-  last_value: NlEscalationLevelDownscalingValue;
+export interface NlDownscaling {
+  values: NlDownscalingValue[];
+  last_value: NlDownscalingValue;
 }
-export interface NlEscalationLevelDownscalingValue {
-  is_downscaling_active: boolean;
-  reproduction_is_cleared: boolean;
-  reproduction_benchmark: number;
-  intensive_care_nice_is_cleared: boolean;
-  intensive_care_nice_benchmark: number;
-  hospital_nice_is_cleared: boolean;
-  hospital_nice_benchmark: number;
-  days_required_to_clear: number;
-  date_start_unix: number;
-  date_end_unix: number;
+export interface NlDownscalingValue {
+  is_downscaling_possible: boolean;
+  current_level_of_measures: number;
+  reproduction_is_below_threshold: boolean;
+  reproduction_threshold_value: number;
+  reproduction_threshold_day_span: number;
+  intensive_care_is_below_threshold: boolean;
+  intensive_care_nice_threshold_value: number;
+  intensive_care_nice_threshold_day_span: number;
+  hospital_nice_is_below_threshold: boolean;
+  hospital_nice_threshold_value: number;
+  hospital_nice_threshold_day_span: number;
+  date_unix?: number;
   date_of_insertion_unix: number;
 }
 export interface NlGNumber {
