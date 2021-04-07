@@ -6,8 +6,7 @@ import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-import { asResponsiveArray } from '~/style/utils';
-
+import styled from 'styled-components';
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
@@ -22,27 +21,43 @@ function ChartTileHeader({
   hasAdditionalNavigation,
 }: ChartTileHeaderProps) {
   return (
-    <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-      <Box maxWidth="maxWidthText" mr="auto" pr={{ _: 0, lg: 3 }}>
-        <Heading level={3}>{title}</Heading>
-        <Text> {description}</Text>
-      </Box>
-      {children && (
-        <Box
-          display="inline-table"
-          alignSelf={{ _: 'flex-start', lg: 'flex-end' }}
-          mb={hasAdditionalNavigation ? asResponsiveArray({ _: 3, lg: 0 }) : 3}
-          css={css({
-            transform: hasAdditionalNavigation
-              ? asResponsiveArray({ lg: 'translateY(100%)' })
-              : undefined,
-            zIndex: 3,
-          })}
-        >
-          {children}
-        </Box>
-      )}
-    </Box>
+    <div
+      css={css({
+        '@media (min-width: 1330px)': {
+          display: description ? undefined : 'flex',
+        },
+      })}
+    >
+      <Heading level={3} css={css({ flex: 1 })}>
+        {title}
+      </Heading>
+      <StyledBox>
+        {description && (
+          <Box pr={3} maxWidth={560}>
+            <Text> {description}</Text>
+          </Box>
+        )}
+        {children && (
+          <Box
+            display="inline-table"
+            alignSelf="flex-start"
+            css={css({
+              zIndex: 3,
+              mb: 3,
+              '@media (min-width: 1330px)': {
+                alignSelf: 'flex-end',
+                mb: hasAdditionalNavigation ? 0 : 3,
+                transform: hasAdditionalNavigation
+                  ? 'translateY(100%)'
+                  : undefined,
+              },
+            })}
+          >
+            {children}
+          </Box>
+        )}
+      </StyledBox>
+    </div>
   );
 }
 
@@ -55,7 +70,8 @@ type ChartTileProps = {
   ariaLabelledBy?: string;
   ariaDescription?: string;
 } & (
-  | {
+  | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
+  {
       timeframeOptions?: undefined;
       children: React.ReactNode;
     }
@@ -106,3 +122,14 @@ export function ChartTile({
     </ChartTileContainer>
   );
 }
+
+const StyledBox = styled(Box)(
+  css({
+    display: 'flex',
+    flexDirection: 'column',
+
+    '@media (min-width: 1330px)': {
+      flexDirection: 'row',
+    },
+  })
+);
