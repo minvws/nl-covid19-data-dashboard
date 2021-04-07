@@ -45,4 +45,8 @@ client
         encoding: 'utf8',
       }
     );
+  })
+  .catch((err) => {
+    console.log(`Export failed: ${err.message}`);
+    process.exit(1);
   });
