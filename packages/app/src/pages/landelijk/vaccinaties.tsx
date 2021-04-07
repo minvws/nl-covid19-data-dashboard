@@ -24,6 +24,7 @@ import {
 import { VaccineDeliveryAreaChart } from '~/domain/vaccine/vaccine-delivery-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
@@ -452,6 +453,16 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
           <VaccineDeliveryAreaChart data={data} />
+
+          <ChartTile
+            title={text.stock_per_vaccine_chart.title}
+            description={text.stock_per_vaccine_chart.description}
+            metadata={{
+              source: text.bronnen.rivm,
+            }}
+          >
+            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
+          </ChartTile>
 
           {(text.expected_page_additions.description ||
             additions.length > 0) && (
