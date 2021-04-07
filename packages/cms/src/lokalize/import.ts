@@ -26,6 +26,10 @@ const en = JSON.parse(
   })
 ) as Record<string, unknown>;
 
+/**
+ * Place some rate limits on the requests, until Sanity adds it to the client
+ * See https://github.com/sanity-io/sanity/issues/1177
+ */
 const queue = new Queue({
   concurrency: 4,
   interval: 1000 / 25,

@@ -33,7 +33,6 @@ export const lokalizeSubject = {
        */
       description:
         'A unique snake-cased key that will form the root-level JSON key.',
-      // hidden: true,
     },
     {
       title: 'Texts',

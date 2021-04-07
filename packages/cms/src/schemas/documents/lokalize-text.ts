@@ -45,6 +45,10 @@ export const lokalizeText = {
       return {
         title,
         subtitle:
+          /**
+           * @TODO check if shortening is actually necessary because Sanity might
+           * handle it already
+           */
           shortLength === SHORTEN_LENGTH
             ? `${shortSubtitle}...`
             : shortSubtitle,
