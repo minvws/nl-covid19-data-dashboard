@@ -146,6 +146,7 @@ const ItemButton = styled.button<{
 const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   css({
     backgroundColor: 'transparent',
+    cursor: 'pointer',
     color: 'blue',
     py: '6px',
     border: 'none',
