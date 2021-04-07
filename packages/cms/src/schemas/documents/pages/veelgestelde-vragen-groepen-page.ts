@@ -1,10 +1,4 @@
-import { selectedLanguages$ } from '../../../plugins/translate/datastore';
 import { prepareLocalized } from '../../../plugins/translate/prepare-localized';
-
-let selectedLanguage = 'nl';
-selectedLanguages$.subscribe((selected) => {
-  selectedLanguage = selected.length ? selected[0] : 'nl';
-});
 
 export default {
   name: 'veelgesteldeVragenGroups',

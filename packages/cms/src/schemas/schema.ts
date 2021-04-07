@@ -2,6 +2,10 @@
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 import createSchema from 'part:@sanity/base/schema-creator';
+/**
+ * Import the ones using named exports
+ */
+import * as allDocuments from './documents';
 // documents are items that are published/queriable
 // some of these are 'singletons' but that's not enforced by the API
 // import siteSettings from "./documents/siteSettings";
@@ -30,8 +34,8 @@ import localeRichContentBlock from './locale/locale-rich-content-block';
 // so it's easier to scan over the different imports and recognize patterns
 import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
-//objects are building blocks, but not queryable in itself
 import { binaryChoice, binaryChoiceOption } from './objects/binary-choice';
+//objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
@@ -71,6 +75,7 @@ export default createSchema({
     sewerPage,
     vaccinationsPage,
     afschalingPage,
+    ...Object.values(allDocuments),
 
     /** RESTRICTIONS */
     restrictionGroup,
@@ -85,8 +90,8 @@ export default createSchema({
     collapsible,
     milestone,
     faqQuestion,
-    binaryChoiceOption,
     binaryChoice,
+    binaryChoiceOption,
 
     /* LOCALE HELPERS */
     localeString,

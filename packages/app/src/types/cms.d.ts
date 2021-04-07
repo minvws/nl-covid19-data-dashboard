@@ -148,3 +148,26 @@ declare module 'picosanity' {
     fetch<R = never>(query: string, params?: QueryParams): Promise<R>;
   }
 }
+
+export type AfschalingsPage = {
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: 'afschalingPage';
+  _updatedAt: string;
+  explanationTitle: string;
+  downscalePossible: [BinaryChoice, BinaryChoice];
+  explanationDescription: RichContentBlock[];
+  measuresTitle: string;
+  measuresDescription: RichContentBlock[];
+  pageTitle: string;
+  pageDescription: RichContentBlock[];
+};
+
+export type BinaryChoice = {
+  _key: string;
+  _type: string;
+  binaryOption: boolean;
+  binaryOptionDescription: string;
+  binaryOptionLabel: string;
+};

@@ -2,11 +2,9 @@ import { getLastFilledValue } from '@corona-dashboard/common';
 import Repro from '~/assets/reproductiegetal.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
-import { Legend } from '~/components-styled/legend';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
+import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { PageBarScale } from '~/components-styled/page-barscale';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -43,7 +41,6 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.reproductiegetal;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -99,35 +96,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 
-          {data.reproduction.values && (
-            <LineChartTile
-              metadata={{ source: text.bronnen.rivm }}
-              title={text.linechart_titel}
-              values={data.reproduction.values}
-              ariaDescription={graphDescriptions.reproductiegetal_verloop}
-              linesConfig={[
-                {
-                  metricProperty: 'index_average',
-                },
-              ]}
-              signaalwaarde={1}
-              timeframeOptions={['all', '5weeks']}
-              hideFill={true}
-              footer={
-                <Box pl="30px">
-                  <Legend
-                    items={[
-                      {
-                        label: text.legenda_r,
-                        color: 'data.primary',
-                        shape: 'line',
-                      },
-                    ]}
-                  />
-                </Box>
-              }
-            />
-          )}
+          <ReproductionChartTile data={data.reproduction} />
         </TileList>
       </NationalLayout>
     </Layout>

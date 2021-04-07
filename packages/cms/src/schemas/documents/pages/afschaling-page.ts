@@ -31,6 +31,7 @@ export default {
     {
       fieldset: 'downScaleExplanation',
       ...binaryChoice,
+      name: 'downscalePossible',
       title: 'Uitleg wel/niet mogelijkheid tot afschalen',
     },
     {

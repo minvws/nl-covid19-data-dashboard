@@ -7,10 +7,17 @@ export const binaryChoiceOption = {
       title: 'Wel/niet',
       name: 'binaryOption',
       type: 'boolean',
+      validation: (Rule: any) => Rule.reset().required(),
+    },
+    {
+      title: 'Label',
+      name: 'binaryOptionLabel',
+      type: 'localeString',
+      validation: (Rule: any) => Rule.reset().required(),
     },
     {
       title: 'Uitleg',
-      name: 'choiceDescription',
+      name: 'binaryOptionDescription',
       description: 'Toelichting bij deze optie',
       type: 'localeText',
       validation: (Rule: any) =>
@@ -22,15 +29,8 @@ export const binaryChoiceOption = {
   ],
   preview: {
     select: {
-      title: 'choiceDescription.nl',
-      binaryOption: 'binaryOption',
-    },
-    prepare: (selection: any) => {
-      console.dir(selection);
-      return {
-        title: selection.binaryOption ? 'Keuze: Wel' : 'Keuze: Niet',
-        subtitle: selection.choiceDescription,
-      };
+      title: 'binaryOptionLabel.nl',
+      subtitle: 'binaryOptionDescription.nl',
     },
   },
 };

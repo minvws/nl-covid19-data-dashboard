@@ -1,79 +1,61 @@
-import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
-import css, { SystemStyleObject } from '@styled-system/css';
+import css from '@styled-system/css';
 import styled from 'styled-components';
-import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 
-interface AgeGroupLegendProps {
-  seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
-  alwaysEnabledConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[];
-  ageGroupSelection: string[];
-  onToggleAgeGroup: (ageGroupRange: string) => void;
+interface SimplifiedSeriesConfig {
+  metricProperty: string;
+  label: string;
+  color: string;
+}
+
+interface InteractiveLegendProps {
+  helpText: string;
+  seriesConfig: SimplifiedSeriesConfig[];
+  selection: string[];
+  onToggleItem: (item: string) => void;
   onReset: () => void;
 }
 
-export function AgeGroupLegend({
+export function InteractiveLegend({
+  helpText,
   seriesConfig,
-  alwaysEnabledConfig,
-  ageGroupSelection,
-  onToggleAgeGroup,
+  selection,
+  onToggleItem,
   onReset,
-}: AgeGroupLegendProps) {
+}: InteractiveLegendProps) {
   const { siteText } = useIntl();
-  const text = siteText.infected_per_age_group;
 
-  const hasSelection = ageGroupSelection.length !== 0;
+  const hasSelection = selection.length !== 0;
 
   return (
     <>
       <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
-        {text.legend_help_text}
+        {helpText}
       </Text>
       <Legend>
         <List>
           {seriesConfig.map((item) => {
-            const isSelected = ageGroupSelection.includes(item.metricProperty);
+            const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
                 <ItemButton
-                  onClick={() => onToggleAgeGroup(item.metricProperty)}
+                  onClick={() => onToggleItem(item.metricProperty)}
                   isActive={hasSelection && isSelected}
                   color={item.color}
                   data-text={item.label}
                 >
                   {item.label}
-                  <Line color={item.color} lineStyle={item.style ?? 'solid'} />
+                  <Line color={item.color} />
                 </ItemButton>
               </Item>
             );
           })}
           <Item>
             <ResetButton onClick={onReset} isVisible={hasSelection}>
-              {text.reset_button_label}
+              {siteText.common.interactive_legend.reset_button_label}
             </ResetButton>
-          </Item>
-        </List>
-      </Legend>
-      <Legend>
-        <List>
-          {alwaysEnabledConfig.map((item) => {
-            return (
-              <Item key={item.label}>
-                <ItemText color={item.color} data-text={item.label}>
-                  {item.label}
-                  <Line color={item.color} lineStyle={item.style ?? 'solid'} />
-                </ItemText>
-              </Item>
-            );
-          })}
-          <Item>
-            <ItemText data-text={text.line_chart_legend_inaccurate_label}>
-              {text.line_chart_legend_inaccurate_label}
-              <Square color={colors.data.underReported} />
-            </ItemText>
           </Item>
         </List>
       </Legend>
@@ -160,22 +142,11 @@ const ItemButton = styled.button<{
     },
   })
 );
-const ItemText = styled.span(
-  css({
-    pr: asResponsiveArray({ _: '5px', md: 10 }),
-    pl: asResponsiveArray({ _: 20, md: 25 }),
-    py: '6px',
-    fontSize: 1,
-    border: 'none',
-    fontWeight: 'normal',
-    fontFamily: 'inherit',
-    position: 'relative',
-  })
-);
 
 const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   css({
     backgroundColor: 'transparent',
+    cursor: 'pointer',
     color: 'blue',
     py: '6px',
     border: 'none',
@@ -188,35 +159,15 @@ const ResetButton = styled.button<{ isVisible: boolean }>(({ isVisible }) =>
   })
 );
 
-const Line = styled.div<{ color: string; lineStyle: 'dashed' | 'solid' }>(
-  ({ color, lineStyle }) =>
-    css({
-      display: 'block',
-      position: 'absolute',
-      left: asResponsiveArray({ _: '5px', md: 10 }),
-      borderTopColor: color as SystemStyleObject,
-      borderTopStyle: lineStyle,
-      borderTopWidth: '3px',
-      top: '10px',
-      width: '15px',
-      height: 0,
-      borderRadius: '2px',
-      [`${ItemText} &`]: {
-        left: asResponsiveArray({ _: 0, md: '5px' }),
-        top: 13,
-      },
-    })
-);
-
-const Square = styled.div<{ color: string }>(({ color }) =>
+const Line = styled.div<{ color: string }>(({ color }) =>
   css({
-    content: '',
+    top: '10px',
+    width: '15px',
+    height: '3px',
+    borderRadius: '2px',
     display: 'block',
     position: 'absolute',
-    left: asResponsiveArray({ _: 0, md: '5px' }),
+    left: asResponsiveArray({ _: '5px', md: 10 }),
     backgroundColor: color,
-    top: '5px',
-    width: '15px',
-    height: '15px',
   })
 );
