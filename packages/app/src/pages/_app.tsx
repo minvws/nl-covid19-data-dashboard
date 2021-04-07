@@ -7,6 +7,8 @@ import '~/components-styled/combo-box/combo-box.scss';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
+import { FeatureProvider } from '~/lib/feature-flags';
+
 import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
@@ -54,8 +56,10 @@ export default function App(props: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <IntlContext.Provider value={intlContext}>
-        <GlobalStyle />
-        <Component {...pageProps} />
+        <FeatureProvider features={['search']}>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </FeatureProvider>
       </IntlContext.Provider>
     </ThemeProvider>
   );

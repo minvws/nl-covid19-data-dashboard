@@ -67,6 +67,8 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
+import { useFeature } from '~/lib/feature-flags';
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
@@ -121,6 +123,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  const showSearch = useFeature('search');
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
@@ -145,9 +149,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               link={text.secties.actuele_situatie.link}
             />
 
-            <Box width={{ lg: '65%' }}>
-              <Search />
-            </Box>
+            {showSearch && (
+              <Box width={{ lg: '65%' }}>
+                <Search />
+              </Box>
+            )}
 
             <MiniTrendTileLayout id="metric-navigation">
               <MiniTrendTile
