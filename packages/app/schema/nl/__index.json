@@ -28,6 +28,7 @@
     "tested_ggd_daily",
     "tested_ggd_average",
     "tested_overall",
+    "tested_per_age_group",
     "vaccine_support",
     "vaccine_delivery",
     "vaccine_delivery_estimate",
@@ -68,6 +69,9 @@
     },
     "doctor": {
       "$ref": "doctor.json"
+    },
+    "downscaling": {
+      "$ref": "downscaling.json"
     },
     "g_number": {
       "$ref": "g_number.json"

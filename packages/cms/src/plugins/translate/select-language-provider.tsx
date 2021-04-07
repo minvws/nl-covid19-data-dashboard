@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useCurrentDocument } from '../../hooks/use-current-document.js';
-import config from './config.js';
+import { Subscription } from 'rxjs';
+import { useCurrentDocument } from '../../hooks/use-current-document';
+import config from './config';
 import { selectedLanguages$, setLangs } from './datastore';
 import SelectLanguage from './select-language';
 
 export default function SelectLanguageProvider() {
   const [selected, setSelected] = useState(['nl']);
-  const langSubscription = useRef();
-  const document = useCurrentDocument();
+  const langSubscription = useRef<Subscription | undefined>();
+  const currentDocument = useCurrentDocument();
 
   useEffect(() => {
     langSubscription.current = selectedLanguages$.subscribe((selected) => {
@@ -16,21 +17,21 @@ export default function SelectLanguageProvider() {
       }
     });
     return () => {
-      langSubscription.current.unsubscribe();
+      langSubscription.current?.unsubscribe();
     };
   }, []);
 
   return (
     <>
-      {document && (
+      {currentDocument && (
         <SelectLanguage
           languages={config.supportedLanguages}
           selected={selected}
           onChange={setLangs}
-          document={document}
+          document={currentDocument}
         />
       )}
-      {!document && <div></div>}
+      {!currentDocument && <div></div>}
     </>
   );
 }

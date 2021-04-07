@@ -1,15 +1,22 @@
+import {
+  MunicipalityProperties,
+  MunicipalSewerValue,
+  RegionalSewerValue,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { RegionControlOption } from '~/components-styled/chart-region-controls';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
@@ -18,6 +25,9 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
 import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -29,17 +39,9 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
-import {
-  MunicipalityProperties,
-  MunicipalSewerValue,
-  RegionalSewerValue,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -153,21 +155,32 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
-            title={text.linechart_titel}
+          <ChartTileWithTimeframe
             timeframeOptions={['all', '5weeks']}
+            title={text.linechart_titel}
             ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
-            values={sewerAverages.values}
-            linesConfig={[
-              {
-                metricProperty: 'average',
-              },
-            ]}
             metadata={{
               source: text.bronnen.rivm,
             }}
-            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-          />
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={sewerAverages.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'average',
+                    label: siteText.waarde_annotaties.riool_normalized,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+                }}
+              />
+            )}
+          </ChartTileWithTimeframe>
 
           <ChoroplethTile
             title={text.map_titel}

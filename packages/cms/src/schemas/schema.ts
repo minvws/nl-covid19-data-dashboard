@@ -23,12 +23,19 @@ import vaccinationsPage from './documents/pages/vaccinations-page';
 import veelgesteldeVragenGroepen from './documents/pages/veelgestelde-vragen-groepen-page';
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
 import toegankelijkheid from './documents/toegankelijkheid';
+
+/**
+ * Import the ones using named exports
+ */
+import * as allDocuments from './documents';
+
 import localeBlock from './locale/locale-block';
 import localeRichContentBlock from './locale/locale-rich-content-block';
 // These 2 locale helpers are technically objects too, but we keep them grouped here
 // so it's easier to scan over the different imports and recognize patterns
 import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
+
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import faqQuestion from './objects/faq-question';
@@ -68,6 +75,7 @@ export default createSchema({
     reproductionPage,
     sewerPage,
     vaccinationsPage,
+    ...Object.values(allDocuments),
 
     /** RESTRICTIONS */
     restrictionGroup,

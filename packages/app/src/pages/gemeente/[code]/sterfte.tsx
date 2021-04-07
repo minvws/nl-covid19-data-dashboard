@@ -4,11 +4,13 @@ import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { colors } from '~/style/theme';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -22,6 +24,7 @@ import {
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -47,6 +50,10 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.gemeente_sterfte;
+  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
+    dataRivm.values,
+    4
+  );
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -118,20 +125,46 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTileWithTimeframe
             timeframeOptions={['all', '5weeks']}
             title={text.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               text.section_deceased_rivm.line_chart_covid_daily_description
             }
-            values={dataRivm.values}
-            linesConfig={[
-              {
-                metricProperty: 'covid_daily',
-              },
-            ]}
             metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
-          />
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataRivm.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'covid_daily',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: dataRivmUnderReportedDateStart,
+                      end: Infinity,
+                      label:
+                        text.section_deceased_rivm
+                          .line_chart_covid_daily_legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
+            )}
+          </ChartTileWithTimeframe>
         </TileList>
       </MunicipalityLayout>
     </Layout>

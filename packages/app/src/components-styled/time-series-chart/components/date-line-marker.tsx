@@ -13,42 +13,6 @@ type LineProps = {
   color: string;
 };
 
-const LabelContainer = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '7px',
-  transform: 'translate(-50%, 0)',
-  width: 100,
-});
-
-const Label = styled.span(
-  css({
-    backgroundColor: 'white',
-    px: '0.5em',
-    fontSize: 12,
-    fontWeight: 'bold',
-  })
-);
-
-const Line = styled.div<LineProps>(
-  css({
-    width: '1px',
-    height: '100%',
-    borderLeftWidth: '1px',
-    borderLeftStyle: 'dashed',
-    borderLeftColor: (props) => props.color,
-  })
-);
-
-const Container = styled.div(
-  css({
-    position: 'absolute',
-    pointerEvents: 'none',
-    top: 0,
-    bottom: 0,
-  })
-);
-
 interface DateLineMarkerProps<T extends TimestampedValue> {
   point: HoveredPoint<T>;
   lineColor?: string;
@@ -68,11 +32,7 @@ export function DateLineMarker<T extends TimestampedValue>({
   const { formatDateFromSeconds } = useIntl();
 
   return (
-    <Container
-      style={{
-        left: point.x,
-      }}
-    >
+    <Container style={{ transform: `translateX(${point.x}px)` }}>
       <Line color={lineColor} />
       <LabelContainer>
         <Label>
@@ -90,3 +50,39 @@ export function DateLineMarker<T extends TimestampedValue>({
     </Container>
   );
 }
+
+const LabelContainer = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '7px',
+  transform: 'translate(-50%, 0)',
+  width: 100,
+});
+
+const Label = styled.span(
+  css({
+    backgroundColor: 'white',
+    px: '0.5em',
+    fontSize: 12,
+    fontWeight: 'bold',
+  })
+);
+
+const Line = styled.div<LineProps>((x) =>
+  css({
+    width: '1px',
+    height: '100%',
+    borderLeftWidth: '1px',
+    borderLeftStyle: 'dashed',
+    borderLeftColor: x.color,
+  })
+);
+
+const Container = styled.div(
+  css({
+    position: 'absolute',
+    pointerEvents: 'none',
+    top: 0,
+    bottom: 0,
+  })
+);

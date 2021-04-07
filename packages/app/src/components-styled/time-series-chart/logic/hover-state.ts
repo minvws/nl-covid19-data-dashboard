@@ -7,7 +7,7 @@ import {
 import { localPoint } from '@visx/event';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
-import { isEmpty } from 'lodash';
+import { isEmpty, throttle } from 'lodash';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Padding, TimespanAnnotationConfig } from './common';
@@ -41,6 +41,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
 
 interface HoverState<T> {
   valuesIndex: number;
+  barPoints: HoveredPoint<T>[];
   linePoints: HoveredPoint<T>[];
   rangePoints: HoveredPoint<T>[];
   nearestPoint: HoveredPoint<T>;
@@ -64,6 +65,12 @@ export function useHoverState<T extends TimestampedValue>({
   markNearestPointOnly,
 }: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
   const [point, setPoint] = useState<Point>();
+
+  const setPointThrottled = useMemo(
+    () => throttle((x: Point | undefined) => setPoint(x), 1000 / 60),
+    [setPoint]
+  );
+
   const timeoutRef = useRef<any>();
 
   const valuesDateUnix = useMemo(
@@ -129,10 +136,10 @@ export function useHoverState<T extends TimestampedValue>({
         clearTimeout(timeoutRef.current);
       }
 
-      const mousePoint = localPoint(event);
-      setPoint(mousePoint || undefined);
+      const mousePoint = localPoint(event) || undefined;
+      setPointThrottled(mousePoint);
     },
-    [values]
+    [values, setPointThrottled]
   );
 
   const hoverState = useMemo(() => {
@@ -153,6 +160,35 @@ export function useHoverState<T extends TimestampedValue>({
      * hover state elements for different types based on the series config.
      */
     const valuesIndex = bisect(values, pointX);
+
+    const barPoints: HoveredPoint<T>[] = seriesConfig
+      .filter(isVisible)
+      .map((config, index) => {
+        const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue;
+
+        const xValue = seriesValue.__date_unix;
+        const yValue = seriesValue.__value;
+
+        /**
+         * Filter series without Y value on the current valuesIndex
+         */
+        if (!isPresent(yValue)) {
+          return undefined;
+        }
+
+        switch (config.type) {
+          case 'bar':
+            return {
+              seriesValue,
+              x: xScale(xValue),
+              y: yScale(yValue),
+              color: config.color,
+              metricProperty: config.metricProperty,
+              seriesConfigIndex: index,
+            };
+        }
+      })
+      .filter(isDefined);
 
     const linePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
@@ -245,9 +281,16 @@ export function useHoverState<T extends TimestampedValue>({
      * of the mouse, since all series originate from the same original value
      * and are thus aligned with the same timestamp.
      */
-    const nearestPoint = [...linePoints, ...rangePoints].sort(
+    const nearestPoint = [...linePoints, ...rangePoints, ...barPoints].sort(
       (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
-    )[0];
+    )[0] as HoveredPoint<T> | undefined;
+
+    /**
+     * Empty hoverstate when there's no nearest point detected
+     */
+    if (!nearestPoint) {
+      return undefined;
+    }
 
     const timespanAnnotationIndex = timespanAnnotations
       ? findActiveTimespanAnnotationIndex(
@@ -258,6 +301,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const hoverState: HoverState<T> = {
       valuesIndex,
+      barPoints,
       linePoints: markNearestPointOnly
         ? linePoints.filter((x) => x === nearestPoint)
         : linePoints,

@@ -7,18 +7,21 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components-styled/base';
-import { InlineText } from '~/components-styled/typography';
+import { InlineText, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { SeriesConfig } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { TooltipData } from './types';
 import { useIntl } from '~/intl';
 import { isPresent } from 'ts-is-present';
+import { colors } from '~/style/theme';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
   data: tooltipData,
+  hasTwoColumns,
 }: {
   data: TooltipData<T>;
+  hasTwoColumns?: boolean;
 }) {
   const {
     value,
@@ -76,11 +79,11 @@ export function TooltipSeriesList<T extends TimestampedValue>({
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
       {timespanAnnotation && (
-        <InlineText>
+        <Text fontSize={0} color={colors.annotation} textAlign={'center'}>
           {timespanAnnotation.shortLabel || timespanAnnotation.label}
-        </InlineText>
+        </Text>
       )}
-      <TooltipList>
+      <TooltipList hasTwoColumns={hasTwoColumns}>
         {seriesConfig.map((x, index) => {
           switch (x.type) {
             case 'stacked-area':
@@ -159,11 +162,15 @@ export function TooltipSeriesList<T extends TimestampedValue>({
   );
 }
 
-const TooltipList = styled.ol`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`;
+export const TooltipList = styled.ol<{ hasTwoColumns?: boolean }>(
+  ({ hasTwoColumns }) =>
+    css({
+      columns: hasTwoColumns ? 2 : 1,
+      m: 0,
+      p: 0,
+      listStyle: 'none',
+    })
+);
 
 interface TooltipListItemProps {
   children: ReactNode;
