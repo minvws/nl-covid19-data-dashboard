@@ -42,8 +42,9 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
   label: string;
   shortLabel?: string;
   color: string;
-  colorAboveBenchmark?: string;
   fillOpacity?: number;
+  aboveBenchmarkColor?: string;
+  aboveBenchmarkFillOpacity?: number;
 };
 
 export type RangeSeriesDefinition<T extends TimestampedValue> = {

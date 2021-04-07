@@ -86,7 +86,8 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
-                  colorAboveBenchmark={config.colorAboveBenchmark}
+                  aboveBenchmarkColor={config.aboveBenchmarkColor}
+                  aboveBenchmarkFillOpacity={config.aboveBenchmarkFillOpacity}
                   benchmark={benchmark}
                   fillOpacity={config.fillOpacity}
                   getX={getX}

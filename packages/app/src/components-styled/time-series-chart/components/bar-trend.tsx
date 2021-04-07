@@ -21,7 +21,8 @@ type BarTrendProps = {
   bounds: Bounds;
   bandPadding?: number;
   benchmark?: BenchmarkConfig;
-  colorAboveBenchmark?: string;
+  aboveBenchmarkColor?: string;
+  aboveBenchmarkFillOpacity?: number;
 };
 
 export function BarTrend({
@@ -33,7 +34,8 @@ export function BarTrend({
   bounds,
   bandPadding = 0.2,
   benchmark,
-  colorAboveBenchmark,
+  aboveBenchmarkColor,
+  aboveBenchmarkFillOpacity = DEFAULT_FILL_OPACITY,
 }: BarTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
@@ -69,8 +71,8 @@ export function BarTrend({
       {nonNullSeries.map((item, index) => {
         const barHeight = bounds.height - getY(item);
 
-        if (benchmarkY && colorAboveBenchmark) {
-          const benchmarkHeight = benchmarkY - getY(item);
+        if (benchmarkY && aboveBenchmarkColor) {
+          const benchmarkHeight = Math.max(0, benchmarkY - getY(item));
 
           return (
             <Fragment key={index}>
@@ -79,11 +81,14 @@ export function BarTrend({
                 y={getY(item)}
                 height={benchmarkHeight}
                 width={barWidth}
-                fill={transparentize(1 - fillOpacity, colorAboveBenchmark)}
+                fill={transparentize(
+                  1 - aboveBenchmarkFillOpacity,
+                  aboveBenchmarkColor
+                )}
               />
               <rect
                 x={getX(item) - barWidth / 2}
-                y={benchmarkY}
+                y={getY(item) + benchmarkHeight}
                 height={barHeight - benchmarkHeight}
                 width={barWidth}
                 fill={transparentize(1 - fillOpacity, color)}

@@ -138,7 +138,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
           <TileList>
             <TimeSeriesChart
               values={data.reproduction.values
-                .slice(350, data.reproduction.values.length)
+                .slice(250, data.reproduction.values.length)
                 .filter((x) => x.index_average)}
               seriesConfig={[
                 {
@@ -146,7 +146,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   type: 'bar',
                   color: colors.data.primary,
                   label: 'R-waarde',
-                  colorAboveBenchmark: '#f00',
+                  aboveBenchmarkColor: '#f00',
+                  aboveBenchmarkFillOpacity: 1,
                 },
               ]}
               dataOptions={{
