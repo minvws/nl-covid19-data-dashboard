@@ -306,6 +306,7 @@ export function TimeSeriesChart<
             getY1={getY1}
             bounds={bounds}
             yScale={yScale}
+            benchmark={benchmark}
           />
 
           {benchmark && (

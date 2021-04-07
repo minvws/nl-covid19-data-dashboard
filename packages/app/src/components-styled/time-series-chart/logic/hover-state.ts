@@ -290,7 +290,14 @@ export function useHoverState<T extends TimestampedValue>({
      */
     const nearestPoint = [...linePoints, ...rangePoints, ...barPoints].sort(
       (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
-    )[0];
+    )[0] as HoveredPoint<T> | undefined;
+
+    /**
+     * Empty hoverstate when there's no nearest point detected
+     */
+    if (!nearestPoint) {
+      return undefined;
+    }
 
     const timespanAnnotationIndex = timespanAnnotations
       ? findActiveTimespanAnnotationIndex(

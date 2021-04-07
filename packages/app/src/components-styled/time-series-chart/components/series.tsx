@@ -1,8 +1,9 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
-import { AreaTrend, LineTrend, RangeTrend, BarTrend } from '.';
+import { AreaTrend, BarTrend, LineTrend, RangeTrend } from '.';
 import {
+  BenchmarkConfig,
   Bounds,
   GetX,
   GetY,
@@ -31,6 +32,7 @@ interface SeriesProps<T extends TimestampedValue> {
   getY1: GetY1;
   yScale: ScaleLinear<number, number>;
   bounds: Bounds;
+  benchmark?: BenchmarkConfig;
 }
 
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
@@ -44,6 +46,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
   getY1,
   yScale,
   bounds,
+  benchmark,
 }: SeriesProps<T>) {
   return (
     <>
@@ -83,6 +86,9 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
+                  aboveBenchmarkColor={config.aboveBenchmarkColor}
+                  aboveBenchmarkFillOpacity={config.aboveBenchmarkFillOpacity}
+                  benchmark={benchmark}
                   fillOpacity={config.fillOpacity}
                   getX={getX}
                   getY={getY}
