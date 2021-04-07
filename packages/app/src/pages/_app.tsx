@@ -1,7 +1,7 @@
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components-styled/combo-box/combo-box.scss';
 import { IntlContext } from '~/intl';
@@ -12,6 +12,16 @@ import { FeatureProvider } from '~/lib/feature-flags';
 import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
+
+import { client } from '~/lib/sanity';
+
+type Flag = {
+  key: string;
+  status: boolean | undefined;
+  title: string;
+  _key: string;
+  _type: string;
+};
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -29,6 +39,14 @@ if (typeof window !== 'undefined') {
   }
 }
 
+function createProviderFlags(flagsFromSanity: Flag[]) {
+  const filtered = flagsFromSanity
+    .filter((feature) => feature?.status === true)
+    .map((feature) => feature.key);
+  //always return an array
+  return filtered ? filtered : [];
+}
+
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
@@ -37,6 +55,10 @@ export default function App(props: AppProps) {
   const text = languages[locale as LanguageKey];
 
   const intlContext = useIntlHelperContext(locale, text);
+
+  const [featureflags, setFeatureFlags] = useState<Array<string> | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {
@@ -53,10 +75,30 @@ export default function App(props: AppProps) {
     };
   }, []);
 
+  // Sanity stores our feature flags
+  const query = '*[_type == "featureFlags"]';
+
+  useEffect(() => {
+    client.fetch(query).then((featureflags: Flag[]) => {
+      const flags = createProviderFlags(featureflags);
+      setFeatureFlags(flags);
+    });
+
+    const subscription = client.listen(query).subscribe((update) => {
+      if (update?.result?.flags) {
+        const flags = createProviderFlags(update.result.flags);
+        setFeatureFlags(flags);
+      }
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <IntlContext.Provider value={intlContext}>
-        <FeatureProvider features={['search']}>
+        <FeatureProvider features={featureflags}>
           <GlobalStyle />
           <Component {...pageProps} />
         </FeatureProvider>

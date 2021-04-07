@@ -49,6 +49,9 @@ import restrictionGroup from './restrictions/restriction-group';
 import restrictionGroupLockdown from './restrictions/restriction-group-lockdown';
 import roadmap from './restrictions/roadmap';
 
+//feature flags
+import featureFlags from './documents/feature-flags';
+
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -96,5 +99,8 @@ export default createSchema({
     localeBlock,
     localeRichContentBlock,
     localeText,
+
+    /* FEATURE FLAGS */
+    featureFlags,
   ]),
 });

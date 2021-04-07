@@ -1,5 +1,11 @@
 import { StructureBuilder as S } from '@sanity/structure';
-import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
+import {
+  BsCardChecklist,
+  BsLockFill,
+  BsMap,
+  BsTable,
+  BsToggles,
+} from 'react-icons/bs';
 import { FaLanguage } from 'react-icons/fa';
 import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
@@ -33,6 +39,7 @@ const hiddenDocTypes = [
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
+  'featureFlags',
 ];
 
 export default () =>
@@ -46,6 +53,15 @@ export default () =>
           S.documentTypeList('lokalizeSubject')
             .title('Keys')
             .child(S.editor().views([S.view.form()]))
+        ),
+      S.listItem()
+        .title('Feature flags')
+        .icon(BsToggles)
+        .child(
+          S.editor()
+            .title('Feature flags')
+            .schemaType('featureFlags')
+            .documentId('featureFlags')
         ),
       S.listItem()
         .title('Lockdown en Routekaart')

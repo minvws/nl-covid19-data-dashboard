@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode } from 'react';
 
 type ProviderProps = {
-  features: Array<string>;
+  features: Array<string> | undefined;
   children: ReactNode;
 };
 
