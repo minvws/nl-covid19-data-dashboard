@@ -2,13 +2,14 @@ export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number;
   isPercentage?: boolean;
-  benchmark?: {
-    value: number;
-    label: string;
-  };
+  benchmark?: BenchmarkConfig;
   timespanAnnotations?: TimespanAnnotationConfig[];
 }
 
+export interface BenchmarkConfig {
+  value: number;
+  label: string;
+}
 export interface TimespanAnnotationConfig {
   start: number;
   end: number;

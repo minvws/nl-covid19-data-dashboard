@@ -42,6 +42,7 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
   label: string;
   shortLabel?: string;
   color: string;
+  colorAboveBenchmark?: string;
   fillOpacity?: number;
 };
 
