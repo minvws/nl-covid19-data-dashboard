@@ -351,9 +351,18 @@ export function TimeSeriesChart<
               width={dateSpanWidth}
               point={hoverState.nearestPoint}
             />
+
             <DateLineMarker
               point={hoverState.nearestPoint}
-              lineColor="#5B5B5B"
+              lineColor={
+                /**
+                 * Only display a line when we have range- or line-points.
+                 * Bar-series have no markers, which defeats the need of a line.
+                 */
+                hoverState.rangePoints.length || hoverState.linePoints.length
+                  ? '#5B5B5B'
+                  : 'transparent'
+              }
               value={values[hoverState.valuesIndex]}
             />
             <PointMarkers points={hoverState.rangePoints} />
