@@ -67,6 +67,9 @@
     "doctor": {
       "$ref": "doctor.json"
     },
+    "downscaling": {
+      "$ref": "downscaling.json"
+    },
     "g_number": {
       "$ref": "g_number.json"
     },
