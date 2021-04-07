@@ -28,12 +28,16 @@ function ChartTileHeader({
         },
       })}
     >
-      <Heading level={3} css={css({ flex: 1 })}>
+      <Heading
+        level={3}
+        css={css({ flex: 1 })}
+        pr={{ _: 0, md: description ? undefined : 3 }}
+      >
         {title}
       </Heading>
       <StyledBox>
         {description && (
-          <Box pr={3} maxWidth={560}>
+          <Box pr={{ _: 0, md: 3 }} maxWidth={560}>
             <Text> {description}</Text>
           </Box>
         )}
