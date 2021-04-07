@@ -40,8 +40,6 @@ export default function SelectLanguage(props: SelectLanguageProps) {
   return (
     <ThemeProvider theme={studioTheme}>
       <Inline space={[3]}>
-        <Label size={2}>Kies een taal:</Label>
-
         <TabList space={1}>
           {languages.map((lang) => (
             <Tab
@@ -50,20 +48,12 @@ export default function SelectLanguage(props: SelectLanguageProps) {
               }}
               key={lang.id}
               icon={
-                <>
-                  <Flag
-                    code={lang.id === 'en' ? 'gb' : lang.id}
-                    width="24"
-                    height="12"
-                  />
-                  {validationErrors[lang.id] ? (
-                    <MdErrorOutline
-                      color={validationErrors[lang.id] ? 'red' : undefined}
-                    />
-                  ) : null}
-                </>
+                <Flag
+                  code={lang.id === 'en' ? 'gb' : lang.id}
+                  width="24"
+                  height="12"
+                />
               }
-              label={lang.title}
               onClick={() => onChange([lang.id])}
               selected={selected.includes(lang.id)}
               padding={2}

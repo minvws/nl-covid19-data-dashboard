@@ -50,7 +50,7 @@
     },
     {
       "implements": "part:@sanity/dashboard/config",
-      "path": "./src/dashboard-config.js"
+      "path": "./src/dashboard-config"
     }
   ]
 }
