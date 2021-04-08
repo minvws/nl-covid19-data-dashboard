@@ -1,5 +1,6 @@
 import { isEmpty } from 'lodash';
 import Head from 'next/head';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
@@ -76,7 +77,7 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           )}
           <Heading level={2}>{content.downscaling.title}</Heading>
-          {downscalableOption !== undefined && (
+          {isDefined(downscalableOption) && (
             <DownscalableExplanation
               data={downscalableOption}
               isPossible={isDownscalePossible}
