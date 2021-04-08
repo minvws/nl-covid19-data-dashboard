@@ -222,10 +222,10 @@
     "titel": "Positief geteste mensen",
     "pagina_toelichting": "Door het aantal positief geteste mensen bij te houden krijgen we een duidelijk beeld van hoe snel het virus zich verspreidt voordat het de intensive care bereikt. Hierdoor blijven we voorbereid.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
-    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn op het coronavirus.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
@@ -252,7 +252,7 @@
     "titel_sidebar": "Positieve testen",
     "metadata": {
       "title": "Positief geteste mensen | Coronadashboard | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van inwoners die positief getest zijn en COVID-19 hebben."
+      "description": "Landelijk overzicht van inwoners die positief getest zijn op het coronavirus."
     },
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
@@ -455,7 +455,7 @@
     "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "metadata": {
       "title": "Positief geteste bewoners verpleeghuizen | Coronadashboard | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van het aantal bewoners van verpleeghuizen die positief getest zijn en COVID-19 hebben."
+      "description": "Landelijk overzicht van het aantal bewoners van verpleeghuizen die positief getest zijn op het coronavirus."
     },
     "titel_kpi": "Aantal positief geteste bewoners per dag",
     "reference": {
@@ -786,10 +786,10 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
-    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn op het coronavirus.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
@@ -797,14 +797,20 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
     },
     "metadata": {
       "title": "Positief geteste mensen in {{safetyRegionName}} | Coronadashboard | Rijksoverheid.nl",
-      "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die positief getest zijn en COVID-19 hebben."
+      "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die positief getest zijn op het coronavirus."
     },
     "reference": {
       "href": "/verantwoording#positieve-testen",
@@ -915,10 +921,10 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} positief geteste personen.",
     "barscale_titel": "Gemiddeld aantal positief geteste mensen per 100.000 inwoners",
-    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn en COVID-19 hebben.",
+    "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn op het coronavirus.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn en COVID-19 hebben. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
@@ -939,7 +945,7 @@
     },
     "metadata": {
       "title": "Positief geteste mensen in {{municipalityName}} | Coronadashboard | Rijksoverheid.nl",
-      "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die positief getest zijn en COVID-19 hebben."
+      "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die positief getest zijn op het coronavirus."
     },
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
@@ -1227,7 +1233,7 @@
     "titel": "Verpleeghuiszorg – Aantal positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is en COVID-19 heeft.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
+    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is op het coronavirus.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
@@ -1522,7 +1528,7 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg – positief geteste bewoners",
     "barscale_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
-    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg waarvan dagelijks is gemeld dat ze positief getest zijn op COVID-19.",
+    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg waarvan dagelijks is gemeld dat ze positief getest zijn op het coronavirus.",
     "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom sinds 1 juli  bij of een positief geteste persoon in een instelling voor gehandicaptenzorg woont. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
@@ -1534,7 +1540,7 @@
     "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
     "metadata": {
       "title": "Positief geteste bewoners gehandicaptenzorglocaties | Coronadashboard | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van het aantal bewoners van gehandicaptenzorglocaties die positief getest zijn en COVID-19 hebben."
+      "description": "Landelijk overzicht van het aantal bewoners van gehandicaptenzorglocaties die positief getest zijn op het coronavirus."
     },
     "titel_kpi": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "reference": {
@@ -1699,7 +1705,7 @@
         }
       },
       "kpi_daily_title": "Aantal positief geteste thuiswonende 70-plussers",
-      "kpi_daily_description": "Het aantal70-plussers waarvan gisteren is gemeld dat ze positief zijn getest op COVID-19. Er wonen zo’n 2,3 miljoen 70-plussers zelfstandig.",
+      "kpi_daily_description": "Het aantal 70-plussers waarvan gisteren is gemeld dat ze positief zijn getest op COVID-19. Er wonen zo’n 2,3 miljoen 70-plussers zelfstandig.",
       "kpi_daily_per_100k_title": "Aantal positief geteste thuiswonende 70-plussers per dag, per 100.000",
       "kpi_daily_per_100k_description": "Dit getal laat zien van hoeveel thuiswonende personen van 70 jaar of ouder gisteren is gemeld dat ze positief zijn getest op COVID-19,  per 100.000 thuiswonende 70-plussers. Deze berekening maakt het mogelijk om regio’s beter met elkaar te vergelijken.",
       "line_chart_daily_title": "Nieuwe besmettingen onder 70-plussers door de tijd heen",
@@ -2040,7 +2046,7 @@
       "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts door de tijd heen.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
-      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten beschikbaar te krijgen en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling.",
+      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins in Nederland in totaal geleverd en gecontroleerd waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins er naar verwachting de komende weken worden geleverd en gecontroleerd en hoeveel prikken daarmee naar verwachting worden gezet. De grafiek bevat alleen de vaccins voor Europees Nederland en houdt rekening met 5% verspilling.",
       "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     },
@@ -2126,7 +2132,7 @@
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer:\n- vaccinatiegraad"
     },
     "grafiek": {
-      "titel": "Geleverde en beschikbare vaccins & gezette prikken in totaal",
+      "titel": "Geleverde en gecontroleerde vaccins & gezette prikken in totaal",
       "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling."
     },
     "verwachte_leveringen": {
@@ -2166,7 +2172,11 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2291,7 +2301,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2348,7 +2362,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Leveringen & voorraad",
-      "description": "Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins we krijgen en hoeveel vaccins we op voorraad hebben.",
+      "description": "Hoeveel prikken we kunnen zetten, hangt af van hoeveel vaccins we geleverd krijgen. Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins we krijgen en hoeveel vaccins we op voorraad hebben.",
       "reference": {
         "href": "/verantwoording#leveringen-en-voorraad-vaccins",
         "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
@@ -2356,20 +2370,21 @@
     },
     "stock": {
       "title": "Vaccins in voorraad",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt.",
+      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat afspraken in de komende dagen gewoon door kunnen gaan en iedereen op tijd de tweede prik krijgt.",
+      "per_vaccine": "{{amount}} {{label}} vaccins",
       "columns": {
-        "product_name": "Vaccin type",
+        "product_name": "Type vaccin",
         "available": "Beschikbaar",
-        "not_available": "Nog niet Beschikbaar"
+        "not_available": "Nog niet beschikbaar"
       }
     },
     "delivery_estimate_time_span": {
-      "title": "Verwachte leveringen komende {{weeks}} weken",
-      "description": "Dit getal laat zien hoeveel vaccins we in totaal verwachten in de komende 4 weken. Dit zijn verschillende vaccins. Het overgrote gedeelte van de geleverde vaccins wordt direct ingezet. Een klein gedeelte gaat naar de voorraad om deze op peil te houden."
+      "title": "Verwachte leveringen vaccins",
+      "description": "Aantal vaccins dat Nederland de komende vier weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie, behalve van het Janssen-vaccin. Van het Janssen-vaccin is één prik genoeg."
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
-      "omschrijving": "Deze grafiek laat zien hoeveel COVID-19-vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten.",
+      "omschrijving": "Deze grafiek laat zien hoeveel vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten.",
       "timeframe_recent_en_verwacht": "Toon recent en verwacht"
     },
     "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt."
