@@ -17,7 +17,7 @@ import IconDown from '~/assets/pijl-omlaag.svg';
 import css from '@styled-system/css';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { asResponsiveArray } from '~/style/utils';
-import styled from 'styled-components';
+
 import Arts from '~/assets/arts-small.svg';
 import Ziekenhuis from '~/assets/ziekenhuis-small.svg';
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
@@ -67,60 +67,43 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
           )}
 
           <Box
-            display={'flex'}
-            justifyContent={{ _: undefined, md: 'space-between' }}
-            flexDirection={{ _: 'column', md: 'row' }}
+            display="grid"
+            gridTemplateColumns={{ _: undefined, md: 'repeat(3, 1fr)' }}
+            css={css({ columnGap: 5 })}
             mb={5}
           >
-            <MiniTrendBox>
-              <MiniTrend
-                title="Reproductiegetal"
-                icon={Repro()}
-                is_below_threshold={reproduction_is_below_threshold}
-                threshold_day_span={reproduction_threshold_day_span}
-              >
-                <p>Hier komt de grafiek</p>
-              </MiniTrend>
-            </MiniTrendBox>
-            <MiniTrendBox>
-              <MiniTrend
-                title="IC-opnames"
-                icon={Arts()}
-                is_below_threshold={intensive_care_nice_is_below_threshold}
-                threshold_day_span={intensive_care_nice_threshold_day_span}
-              >
-                <p>Hier komt de grafiek</p>
-              </MiniTrend>
-            </MiniTrendBox>
-            <MiniTrendBox>
-              <MiniTrend
-                title="Ziekenhuisopnames (incl. IC)"
-                icon={Ziekenhuis()}
-                is_below_threshold={hospital_nice_is_below_threshold}
-                threshold_day_span={hospital_nice_threshold_day_span}
-              >
-                <p>Hier komt de grafiek</p>
-              </MiniTrend>
-            </MiniTrendBox>
+            <MiniTrend
+              title="Reproductiegetal"
+              icon={Repro()}
+              is_below_threshold={reproduction_is_below_threshold}
+              threshold_day_span={reproduction_threshold_day_span}
+            >
+              <p>Hier komt de grafiek</p>
+            </MiniTrend>
+
+            <MiniTrend
+              title="IC-opnames"
+              icon={Arts()}
+              is_below_threshold={intensive_care_nice_is_below_threshold}
+              threshold_day_span={intensive_care_nice_threshold_day_span}
+            >
+              <p>Hier komt de grafiek</p>
+            </MiniTrend>
+
+            <MiniTrend
+              title="Ziekenhuisopnames (incl. IC)"
+              icon={Ziekenhuis()}
+              is_below_threshold={hospital_nice_is_below_threshold}
+              threshold_day_span={hospital_nice_threshold_day_span}
+            >
+              <p>Hier komt de grafiek</p>
+            </MiniTrend>
           </Box>
         </MaxWidth>
       </div>
     </Layout>
   );
 };
-
-export const MiniTrendBox = styled.div(
-  css({
-    width: asResponsiveArray({
-      _: '100%',
-      md: 'calc(1 / 3 * 100% - 32px)',
-    }),
-    mb: asResponsiveArray({
-      _: 3,
-      md: undefined,
-    }),
-  })
-);
 
 interface MiniTrendProps {
   title: string;
@@ -142,7 +125,7 @@ function MiniTrend({
   const descriptionFalse = 'Grenswaarde is overschreden';
 
   return (
-    <Box mb={3}>
+    <Box mb={{ _: 3, md: 0 }}>
       <Box display="flex" alignItems="center" mb={1}>
         <Box width={25} display="flex" mt="-5px">
           {icon}
