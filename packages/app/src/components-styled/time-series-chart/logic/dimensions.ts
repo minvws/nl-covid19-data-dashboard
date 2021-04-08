@@ -22,11 +22,19 @@ export function useDimensions(
 ) {
   const isMounted = useIsMounted();
 
+  const paddedPaddingLeft = paddingLeft
+    ? /**
+       * Add some tiny extra padding due to browser miscalculations, but only
+       * do so when there's actually a paddingLeft set.
+       */
+      paddingLeft + 10
+    : paddingLeft;
+
   return useMemo(() => {
     const padding: Padding = {
       ...defaultPadding,
       left: isMounted
-        ? paddingLeft ?? defaultPadding.left
+        ? paddedPaddingLeft ?? defaultPadding.left
         : defaultPadding.left,
     };
 
@@ -36,5 +44,5 @@ export function useDimensions(
     };
 
     return { padding, bounds };
-  }, [width, height, paddingLeft, isMounted]);
+  }, [width, height, paddedPaddingLeft, isMounted]);
 }

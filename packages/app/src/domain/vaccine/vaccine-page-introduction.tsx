@@ -60,6 +60,7 @@ export function VaccinePageIntroduction({
                 </Heading>
                 <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
                 <VaccineAdministrationsOverTimeChart
+                  title={text.grafiek_gezette_prikken.titel}
                   values={data.vaccine_administered_total.values}
                 />
               </Box>
