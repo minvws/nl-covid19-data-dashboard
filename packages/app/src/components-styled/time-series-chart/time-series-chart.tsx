@@ -110,6 +110,12 @@ export type TimeSeriesChartProps<
    * will result in a user interacting with the single nearest point only.
    */
   markNearestPointOnly?: boolean;
+
+  /**
+   * Display only values inside the tooltip.
+   * This option only makes sense when we display a single trend.
+   */
+  displayTooltipValueOnly?: boolean;
 };
 
 export function TimeSeriesChart<
@@ -132,6 +138,7 @@ export function TimeSeriesChart<
   disableLegend,
   onSeriesClick,
   markNearestPointOnly,
+  displayTooltipValueOnly,
 }: TimeSeriesChartProps<T, C>) {
   const {
     tooltipData,
@@ -224,6 +231,7 @@ export function TimeSeriesChart<
           config: seriesConfig,
           configIndex: nearestPoint.seriesConfigIndex,
           markNearestPointOnly,
+          displayTooltipValueOnly,
           options: dataOptions || {},
           /**
            * Pass the full annotation data. We could just pass the index because
@@ -250,6 +258,7 @@ export function TimeSeriesChart<
     dataOptions,
     timespanAnnotations,
     markNearestPointOnly,
+    displayTooltipValueOnly,
   ]);
 
   useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
