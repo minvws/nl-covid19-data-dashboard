@@ -39,8 +39,8 @@ import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
 
 /**
- * A chart with a width below this threshold will be rendered with a "collapsed"
- * Y-axis. The collapsed axis will only display the top value.
+ * A chart with a width smaller than the threshold will be rendered with a
+ * "collapsed" Y-axis. The collapsed axis will only display the top value.
  */
 const COLLAPSE_Y_AXIS_THRESHOLD = 430;
 
@@ -300,7 +300,7 @@ export function TimeSeriesChart<
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
-            isYAxisCollapsed={width <= COLLAPSE_Y_AXIS_THRESHOLD}
+            isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
           />
 
           {/**

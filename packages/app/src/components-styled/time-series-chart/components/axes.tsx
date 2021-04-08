@@ -14,7 +14,6 @@ import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { Bounds } from '../logic';
 import { useIntl } from '~/intl';
-import { last } from 'lodash';
 
 type AxesProps = {
   bounds: Bounds;
@@ -39,7 +38,7 @@ type AxesProps = {
   formatYTickValue?: (value: number) => string;
 
   /**
-   * On narrow screens we'll "collapse" the Y-axis. Only the low- value will be
+   * On narrow screens we'll "collapse" the Y-axis. Only the low value will be
    * displayed.
    */
   isYAxisCollapsed?: boolean;
@@ -188,13 +187,15 @@ export const Axes = memo(function Axes({
 
         {/**
          * When the numGridLines is set to 0 we don't want to display the top
-         * value. This means we can skip rendering the axis component because
+         * value. Otherwise the top value would kind of be floating around,
+         * without the presence of a grid line.
+         * This means we can skip rendering the axis component because
          * that's all it does as a "collapsed" axis.
          */}
         {isYAxisCollapsed && numGridLines !== 0 && (
           <AxisLeft
             scale={yScale}
-            tickValues={[last(yScale.domain()) as number]}
+            tickValues={[yScale.domain()[1]]}
             numTicks={numGridLines}
             hideTicks
             hideAxisLine
