@@ -235,22 +235,17 @@ export interface NationalDoctorValue {
   date_of_insertion_unix: number;
 }
 export interface NlDownscaling {
-  values: NlDownscalingValue[];
-  last_value: NlDownscalingValue;
-}
-export interface NlDownscalingValue {
   is_downscaling_possible: boolean;
   current_level_of_measures: number;
   reproduction_is_below_threshold: boolean;
   reproduction_threshold_value: number;
   reproduction_threshold_day_span: number;
-  intensive_care_is_below_threshold: boolean;
+  intensive_care_nice_is_below_threshold: boolean;
   intensive_care_nice_threshold_value: number;
   intensive_care_nice_threshold_day_span: number;
   hospital_nice_is_below_threshold: boolean;
   hospital_nice_threshold_value: number;
   hospital_nice_threshold_day_span: number;
-  date_unix?: number;
   date_of_insertion_unix: number;
 }
 export interface NlGNumber {
