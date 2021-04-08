@@ -1,5 +1,8 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
-import { InteractiveLegend } from '~/components-styled/interactive-legend';
+import {
+  InteractiveLegend,
+  SelectOption,
+} from '~/components-styled/interactive-legend';
 import { Legend, LegendItem } from '~/components-styled/legend';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TooltipSeriesList } from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
@@ -35,6 +38,7 @@ export function InfectedPerAgeGroup({
       return {
         ...baseAgeGroup,
         type: 'line',
+        shape: 'line',
         label:
           baseAgeGroup.metricProperty in text.legend
             ? text.legend[baseAgeGroup.metricProperty]
@@ -63,7 +67,7 @@ export function InfectedPerAgeGroup({
       compareList.length === alwayEnabled.length
   );
 
-  const dynamicLegendConfig = seriesConfig.filter(
+  const interactiveLegendOptions: SelectOption[] = seriesConfig.filter(
     (item) => !alwayEnabled.includes(item.metricProperty)
   );
 
@@ -107,7 +111,7 @@ export function InfectedPerAgeGroup({
       />
       <InteractiveLegend
         helpText={text.legend_help_text}
-        seriesConfig={dynamicLegendConfig}
+        selectOptions={interactiveLegendOptions}
         selection={list}
         onToggleItem={toggle}
         onReset={clear}

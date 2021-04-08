@@ -2387,7 +2387,17 @@
       "omschrijving": "Deze grafiek laat zien hoeveel vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten.",
       "timeframe_recent_en_verwacht": "Toon recent en verwacht"
     },
-    "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt."
+    "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt.",
+    "stock_per_supplier_chart": {
+      "title": "Verwachtte voorraad per vaccin type",
+      "description": "Deze grafiek ....",
+      "tooltip_title": "Verwachtte voorraad per vaccin type",
+      "legend": {
+        "available" : "Beschikbare {{vaccineName}} vaccins in voorraad",
+        "total" : "Totaal aantal {{vaccineName}} vaccins in voorraad"
+      },
+      "select_help_text": "Selecteer vaccintype om de voorraad te bekijken"
+    }
   },
   "editorial_detail": {
     "back_link": {
