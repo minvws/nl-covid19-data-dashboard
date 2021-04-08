@@ -1,6 +1,9 @@
 import { NlVaccineStockValue } from '@corona-dashboard/common';
 import { useState } from 'react';
-import { InteractiveLegend } from '~/components-styled/interactive-legend';
+import {
+  InteractiveLegend,
+  SelectOption,
+} from '~/components-styled/interactive-legend';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
@@ -19,27 +22,24 @@ export function VaccineStockPerSupplierChart({
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
 
-  const vaccineSelectOptions = [
+  const vaccineSelectOptions: SelectOption[] = [
     {
       metricProperty: 'bio_n_tech_pfizer' as const,
       color: colors.data.vaccines.bio_n_tech_pfizer,
       label: productNames.pfizer,
-      shape: 'circle' as const,
-      type: 'line' as const,
+      shape: 'circle',
     },
     {
       metricProperty: 'moderna' as const,
       color: colors.data.vaccines.moderna,
       label: productNames.moderna,
-      shape: 'circle' as const,
-      type: 'line' as const,
+      shape: 'circle',
     },
     {
       metricProperty: 'astra_zeneca' as const,
       color: colors.data.vaccines.astra_zeneca,
       label: productNames.astra_zeneca,
-      shape: 'circle' as const,
-      type: 'line' as const,
+      shape: 'circle',
     },
   ];
 
@@ -56,6 +56,7 @@ export function VaccineStockPerSupplierChart({
       label: replaceVariablesInText(text.legend.available, {
         vaccineName: selectedVaccine.label,
       }),
+      type: 'line' as const,
     },
     {
       ...selectedVaccine,
@@ -64,6 +65,7 @@ export function VaccineStockPerSupplierChart({
         vaccineName: selectedVaccine.label,
       }),
       color: colors.lightGray,
+      type: 'line' as const,
     },
   ];
 
