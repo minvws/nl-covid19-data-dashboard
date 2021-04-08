@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
@@ -15,7 +16,7 @@ interface InteractiveLegendProps {
   seriesConfig: SimplifiedSeriesConfig[];
   selection: string[];
   onToggleItem: (item: string) => void;
-  onReset: () => void;
+  onReset?: () => void;
 }
 
 export function InteractiveLegend({
@@ -52,11 +53,13 @@ export function InteractiveLegend({
               </Item>
             );
           })}
-          <Item>
-            <ResetButton onClick={onReset} isVisible={hasSelection}>
-              {siteText.common.interactive_legend.reset_button_label}
-            </ResetButton>
-          </Item>
+          {isDefined(onReset) && (
+            <Item>
+              <ResetButton onClick={onReset} isVisible={hasSelection}>
+                {siteText.common.interactive_legend.reset_button_label}
+              </ResetButton>
+            </Item>
+          )}
         </List>
       </Legend>
     </>
