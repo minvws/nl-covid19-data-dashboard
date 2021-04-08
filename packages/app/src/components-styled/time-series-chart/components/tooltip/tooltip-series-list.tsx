@@ -219,10 +219,12 @@ function TooltipListItem({
           ) : (
             <Box width="1em" mt={1} />
           )}
-          <TooltipValueContainer>
-            <InlineText mr={2}>{label}:</InlineText>
-            {children}
-          </TooltipValueContainer>
+          <Box flexGrow={1}>
+            <TooltipValueContainer>
+              <InlineText mr={2}>{label}:</InlineText>
+              {children}
+            </TooltipValueContainer>
+          </Box>
         </>
       )}
     </Box>
