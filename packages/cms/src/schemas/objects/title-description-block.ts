@@ -11,4 +11,10 @@ export default {
       title: 'Toelichting',
     },
   ],
+  preview: {
+    select: {
+      title: 'title.nl',
+      subtitle: 'content.nl',
+    },
+  },
 };
