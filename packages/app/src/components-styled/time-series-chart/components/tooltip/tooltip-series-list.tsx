@@ -210,17 +210,22 @@ function TooltipListItem({
       display="flex"
       alignItems="stretch"
     >
-      {!displayTooltipValueOnly && iconComponent}
-      <Box flexGrow={1}>
-        <TooltipValueContainer>
-          {displayTooltipValueOnly ? (
+      {displayTooltipValueOnly ? (
+        <Box flexGrow={1}>
+          <TooltipValueContainer>
             <VisuallyHidden>{labelComponent}</VisuallyHidden>
-          ) : (
-            labelComponent
-          )}
-          {children}
-        </TooltipValueContainer>
-      </Box>
+            {children}
+          </TooltipValueContainer>
+        </Box>
+      ) : (
+        <>
+          {iconComponent}
+          <TooltipValueContainer>
+            {labelComponent}
+            {children}
+          </TooltipValueContainer>
+        </>
+      )}
     </Box>
   );
 }
