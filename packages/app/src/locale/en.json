@@ -222,14 +222,14 @@
     "titel": "Number of confirmed cases",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day.",
-    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
+    "map_toelichting": "These maps show how many confirmed cases of the coronavirus were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -252,7 +252,7 @@
     "titel_sidebar": "Confirmed cases",
     "metadata": {
       "title": "Confirmed cases | Coronavirus Dashboard | Government.nl",
-      "description": "National overview of confirmed cases in inhabitants with COVID-19."
+      "description": "National overview of confirmed cases in inhabitants with the coronavirus."
     },
     "titel_kpi": "Confirmed cases per day",
     "reference": {
@@ -455,7 +455,7 @@
     "map_toelichting": "These maps show the number of confirmed cases per 100,000 residents.",
     "metadata": {
       "title": "Confirmed cases in nursing homes | Coronavirus Dashboard | Government.nl",
-      "description": "Number of confirmed cases of COVID-19 in nursing homes in the Netherlands."
+      "description": "Number of confirmed cases of the coronavirus in nursing homes in the Netherlands."
     },
     "titel_kpi": "Number of confirmed cases per day",
     "reference": {
@@ -786,14 +786,14 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
-    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
-    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
+    "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this safety region per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period in this safety region per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -921,14 +921,14 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
-    "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in safety region of {{municipality}}",
-    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
+    "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this municipality per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period in this municipality per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -1528,8 +1528,8 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes - confirmed cases (residents)",
     "barscale_titel": "Disability care homes – daily confirmed cases (residents)",
-    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 daily.",
-    "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
+    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for the coronavirus daily.",
+    "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for the coronavirus lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
     "chloropleth_legenda": {
@@ -1537,10 +1537,10 @@
       "geen_meldingen": "No reports"
     },
     "map_titel": "Distribution of infected locations in the Netherlands",
-    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents | Coronavirus Dashboard | Government.nl",
-      "description": "National overview of the number of confirmed cases of disability care home residents for COVID-19."
+      "description": "National overview of the number of confirmed cases of disability care home residents for the coronavirus."
     },
     "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
     "reference": {
@@ -1554,7 +1554,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "kpi_titel": "Daily number of disability care home residents who were reported as testing positive for the coronavirus",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
@@ -1653,7 +1653,7 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes in {{safetyRegion}} – confirmed cases among residents",
     "barscale_titel": "Disability care homes - daily confirmed cases (residents)",
-    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
+    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for the coronavirus yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
@@ -1663,7 +1663,7 @@
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Regional overview of the number of confirmed cases of disability care home residents in {{safetyRegionName}} for COVID-19."
@@ -1679,7 +1679,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "kpi_titel": "Daily number of disability care home residents who were reported as testing positive",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
@@ -1706,7 +1706,7 @@
       },
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday. About 2,3 miljon people over 70 live at home.",
-      "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
+      "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home",
       "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home. This figure makes it easier to compare the situation in different regions.",
       "line_chart_daily_title": "Newly confirmed cases among over-70s over time",
       "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
