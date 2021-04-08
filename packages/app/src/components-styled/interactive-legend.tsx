@@ -1,26 +1,28 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 
-interface SimplifiedSeriesConfig {
+export interface SelectOption {
   metricProperty: string;
   label: string;
   color: string;
+  shape?: 'line' | 'circle';
 }
 
 interface InteractiveLegendProps {
   helpText: string;
-  seriesConfig: SimplifiedSeriesConfig[];
+  selectOptions: SelectOption[];
   selection: string[];
   onToggleItem: (item: string) => void;
-  onReset: () => void;
+  onReset?: () => void;
 }
 
 export function InteractiveLegend({
   helpText,
-  seriesConfig,
+  selectOptions,
   selection,
   onToggleItem,
   onReset,
@@ -36,7 +38,7 @@ export function InteractiveLegend({
       </Text>
       <Legend>
         <List>
-          {seriesConfig.map((item) => {
+          {selectOptions.map((item) => {
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
@@ -47,16 +49,19 @@ export function InteractiveLegend({
                   data-text={item.label}
                 >
                   {item.label}
-                  <Line color={item.color} />
+                  {item.shape === 'line' && <Line color={item.color} />}
+                  {item.shape === 'circle' && <Circle color={item.color} />}
                 </ItemButton>
               </Item>
             );
           })}
-          <Item>
-            <ResetButton onClick={onReset} isVisible={hasSelection}>
-              {siteText.common.interactive_legend.reset_button_label}
-            </ResetButton>
-          </Item>
+          {isDefined(onReset) && (
+            <Item>
+              <ResetButton onClick={onReset} isVisible={hasSelection}>
+                {siteText.common.interactive_legend.reset_button_label}
+              </ResetButton>
+            </Item>
+          )}
         </List>
       </Legend>
     </>
@@ -169,5 +174,18 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     left: asResponsiveArray({ _: '5px', md: 10 }),
     backgroundColor: color,
+  })
+);
+
+const Circle = styled.div<{ color: string }>(({ color }) =>
+  css({
+    display: 'block',
+    position: 'absolute',
+    left: asResponsiveArray({ _: '5px', md: 10 }),
+    backgroundColor: color,
+    top: '6.5px',
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
   })
 );
