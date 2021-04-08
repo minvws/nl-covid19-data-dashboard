@@ -193,15 +193,6 @@ function TooltipListItem({
   label,
   displayTooltipValueOnly,
 }: TooltipListItemProps) {
-  const labelComponent = <InlineText mr={2}>{label}:</InlineText>;
-  const iconComponent = icon ? (
-    <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
-      {icon}
-    </Box>
-  ) : (
-    <Box width="1em" mt={1} />
-  );
-
   return (
     <Box
       as="li"
@@ -213,15 +204,23 @@ function TooltipListItem({
       {displayTooltipValueOnly ? (
         <Box flexGrow={1}>
           <TooltipValueContainer>
-            <VisuallyHidden>{labelComponent}</VisuallyHidden>
+            <VisuallyHidden>
+              <InlineText mr={2}>{label}:</InlineText>
+            </VisuallyHidden>
             {children}
           </TooltipValueContainer>
         </Box>
       ) : (
         <>
-          {iconComponent}
+          {icon ? (
+            <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
+              {icon}
+            </Box>
+          ) : (
+            <Box width="1em" mt={1} />
+          )}
           <TooltipValueContainer>
-            {labelComponent}
+            <InlineText mr={2}>{label}:</InlineText>
             {children}
           </TooltipValueContainer>
         </>
