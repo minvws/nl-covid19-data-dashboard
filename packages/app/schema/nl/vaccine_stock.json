@@ -8,10 +8,13 @@
         "total_not_available",
         "bio_n_tech_pfizer_available",
         "bio_n_tech_pfizer_not_available",
+        "bio_n_tech_pfizer_total",
         "moderna_available",
         "moderna_not_available",
+        "moderna_total",
         "astra_zeneca_available",
         "astra_zeneca_not_available",
+        "astra_zeneca_total",
         "date_of_insertion_unix",
         "date_unix"
       ],
@@ -29,16 +32,25 @@
         "bio_n_tech_pfizer_not_available": {
           "type": ["integer", "null"]
         },
+        "bio_n_tech_pfizer_total": {
+          "type": ["integer", "null"]
+        },
         "moderna_available": {
           "type": ["integer", "null"]
         },
         "moderna_not_available": {
           "type": ["integer", "null"]
         },
+        "moderna_total": {
+          "type": ["integer", "null"]
+        },
         "astra_zeneca_available": {
           "type": ["integer", "null"]
         },
         "astra_zeneca_not_available": {
+          "type": ["integer", "null"]
+        },
+        "astra_zeneca_total": {
           "type": ["integer", "null"]
         },
         "date_of_insertion_unix": {

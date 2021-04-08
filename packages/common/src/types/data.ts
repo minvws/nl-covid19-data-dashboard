@@ -172,7 +172,6 @@ export interface National {
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
-  vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -597,18 +596,6 @@ export interface NlVaccineDeliveryPerSupplierValue {
   date_end_unix: number;
   date_of_report_unix: number;
 }
-export interface NlVaccineDeliveryEstimateTimeSpan {
-  values: NlVaccineDeliveryEstimateTimeSpanValue[];
-  last_value: NlVaccineDeliveryEstimateTimeSpanValue;
-}
-export interface NlVaccineDeliveryEstimateTimeSpanValue {
-  doses: number;
-  time_span_weeks: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_report_unix: number;
-}
 export interface NlVaccineAdministered {
   values: NlVaccineAdministeredValue[];
   last_value: NlVaccineAdministeredValue;
@@ -748,14 +735,17 @@ export interface NlVaccineStock {
   last_value: NlVaccineStockValue;
 }
 export interface NlVaccineStockValue {
-  total_available: number;
-  total_not_available: number;
-  bio_n_tech_pfizer_available: number;
-  bio_n_tech_pfizer_not_available: number;
-  moderna_available: number;
-  moderna_not_available: number;
-  astra_zeneca_available: number;
-  astra_zeneca_not_available: number;
+  total_available: number | null;
+  total_not_available: number | null;
+  bio_n_tech_pfizer_available: number | null;
+  bio_n_tech_pfizer_not_available: number | null;
+  bio_n_tech_pfizer_total: number | null;
+  moderna_available: number | null;
+  moderna_not_available: number | null;
+  moderna_total: number | null;
+  astra_zeneca_available: number | null;
+  astra_zeneca_not_available: number | null;
+  astra_zeneca_total: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
 }

@@ -1,6 +1,5 @@
 import { css } from '@styled-system/css';
 import { useState } from 'react';
-import styled from 'styled-components';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -66,7 +65,7 @@ export const getStaticProps = createGetStaticProps(
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, data, lastGenerated } = props;
 
-  const { siteText, formatNumber } = useIntl();
+  const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -356,100 +355,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          <TwoKpiSection>
-            <KpiTile
-              title={text.stock.title}
-              metadata={{
-                date: data.vaccine_stock.last_value.date_of_insertion_unix,
-                source: text.bronnen.stock,
-              }}
-            >
-              <Box as="ul" p={0}>
-                <Box
-                  as="li"
-                  display="flex"
-                  flexDirection="row"
-                  alignItems="stretch"
-                >
-                  <Box flex={0.2}>
-                    <InlineText>{text.stock.columns.product_name}</InlineText>
-                  </Box>
-                  <Box flex={0.4} display="flex" justifyContent="flex-end">
-                    <InlineText>{text.stock.columns.available}</InlineText>
-                  </Box>
-                  <Box flex={0.4} display="flex" justifyContent="flex-end">
-                    <InlineText>{text.stock.columns.not_available}</InlineText>
-                  </Box>
-                </Box>
-                <VaccineStockRow
-                  color={colors.data.vaccines.bio_n_tech_pfizer}
-                  productName="BioNTech/Pfizer"
-                  total={formatNumber(
-                    data.vaccine_stock.last_value.bio_n_tech_pfizer_available
-                  )}
-                  readyForDelivery={formatNumber(
-                    data.vaccine_stock.last_value
-                      .bio_n_tech_pfizer_not_available
-                  )}
-                />
-                <VaccineStockRow
-                  color={colors.data.vaccines.moderna}
-                  productName="Moderna"
-                  total={formatNumber(
-                    data.vaccine_stock.last_value.moderna_available
-                  )}
-                  readyForDelivery={formatNumber(
-                    data.vaccine_stock.last_value.moderna_not_available
-                  )}
-                />
-                <VaccineStockRow
-                  color={colors.data.vaccines.astra_zeneca}
-                  productName="AstraZeneca"
-                  total={formatNumber(
-                    data.vaccine_stock.last_value.astra_zeneca_available
-                  )}
-                  readyForDelivery={formatNumber(
-                    data.vaccine_stock.last_value.astra_zeneca_not_available
-                  )}
-                />
-              </Box>
-              <Text>{text.stock.description}</Text>
-            </KpiTile>
-
-            <KpiTile
-              title={replaceVariablesInText(
-                text.delivery_estimate_time_span.title,
-                {
-                  weeks:
-                    data.vaccine_delivery_estimate_time_span.last_value
-                      .time_span_weeks,
-                }
-              )}
-              metadata={{
-                date:
-                  data.vaccine_delivery_estimate_time_span.last_value
-                    .date_of_insertion_unix,
-                source: text.bronnen.delivery_estimate_time_span,
-              }}
-            >
-              <KpiValue
-                absolute={
-                  data.vaccine_delivery_estimate_time_span.last_value.doses
-                }
-              />
-              <Text mb={4}>
-                {replaceVariablesInText(
-                  text.delivery_estimate_time_span.description,
-                  {
-                    weeks:
-                      data.vaccine_delivery_estimate_time_span.last_value
-                        .time_span_weeks,
-                  }
-                )}
-              </Text>
-            </KpiTile>
-          </TwoKpiSection>
-
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
           <VaccineDeliveryAreaChart data={data} />
@@ -519,45 +424,5 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
         )}
       </InlineText>
     </Text>
-  );
-}
-
-const ColorIndicator = styled.span<{
-  color?: string;
-}>`
-  content: '';
-  display: ${(x) => (x.color ? 'inline-block' : 'none')};
-  height: 8px;
-  width: 8px;
-  border-radius: 50%;
-  background: ${(x) => x.color || 'black'};
-  margin-right: 0.5em;
-  flex-shrink: 0;
-`;
-
-type VaccineStockRowProps = {
-  color: string;
-  productName: string;
-  total: string;
-  readyForDelivery: string;
-};
-
-function VaccineStockRow(props: VaccineStockRowProps) {
-  const { color, productName, total, readyForDelivery } = props;
-  return (
-    <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
-      <Box flex={0.2} display="flex" alignItems="center">
-        <ColorIndicator color={color} />
-        <InlineText color={color} fontWeight="bold">
-          {productName}:
-        </InlineText>
-      </Box>
-      <Box flex={0.4} display="flex" justifyContent="flex-end">
-        <strong>{total}</strong>
-      </Box>
-      <Box flex={0.4} display="flex" justifyContent="flex-end">
-        <strong>{readyForDelivery}</strong>
-      </Box>
-    </Box>
   );
 }
