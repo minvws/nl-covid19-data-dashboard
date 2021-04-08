@@ -171,8 +171,8 @@ export interface National {
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
-  vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
-  vaccine_delivery_estimate_time_span?: NlVaccineDeliveryEstimateTimeSpan;
+  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
+  vaccine_delivery_estimate_time_span: NlVaccineDeliveryEstimateTimeSpan;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -185,7 +185,7 @@ export interface National {
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
-  vaccine_stock?: NlVaccineStock;
+  vaccine_stock: NlVaccineStock;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -587,6 +587,9 @@ export interface NlVaccineDeliveryPerSupplierValue {
   bio_n_tech_pfizer: number;
   moderna: number;
   astra_zeneca: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   is_estimate: boolean;
   week_number: number;
   date_of_insertion_unix: number;
@@ -745,10 +748,14 @@ export interface NlVaccineStock {
   last_value: NlVaccineStockValue;
 }
 export interface NlVaccineStockValue {
-  total: number;
-  bio_n_tech_pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
+  total_available: number;
+  total_not_available: number;
+  bio_n_tech_pfizer_available: number;
+  bio_n_tech_pfizer_not_available: number;
+  moderna_available: number;
+  moderna_not_available: number;
+  astra_zeneca_available: number;
+  astra_zeneca_not_available: number;
   date_of_insertion_unix: number;
   date_unix: number;
 }

@@ -1,13 +1,7 @@
-import {
-  NlVaccineAdministeredEstimateValue,
-  NlVaccineAdministeredValue,
-  NlVaccineDeliveryEstimateValue,
-  NlVaccineDeliveryValue,
-} from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { useState } from 'react';
+import styled from 'styled-components';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { AreaChart } from '~/components-styled/area-chart';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
@@ -15,7 +9,6 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { Legend } from '~/components-styled/legend';
 import { Markdown } from '~/components-styled/markdown';
 import { RadioGroup } from '~/components-styled/radio-group';
 import { TileList } from '~/components-styled/tile-list';
@@ -28,10 +21,8 @@ import {
   MilestonesView,
   MilestoneViewProps,
 } from '~/domain/vaccine/milestones-view';
-import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
-import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
+import { VaccineDeliveryAreaChart } from '~/domain/vaccine/vaccine-delivery-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -74,7 +65,7 @@ export const getStaticProps = createGetStaticProps(
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, data, lastGenerated } = props;
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.vaccinaties;
   const [selectedTab, setSelectedTab] = useState(
@@ -84,17 +75,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { milestones } = content;
 
   const additions = text.expected_page_additions.additions.filter(
-    (x) => x.length
+    (x) => x.trim().length
   );
-
-  const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
-
-  const [
-    vaccineDeliveryValues,
-    vaccineDeliveryEstimateValues,
-    vaccineAdministeredValues,
-    vaccineAdministeredEstimateValues,
-  ] = useVaccineDeliveryData(data);
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -253,113 +235,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.grafiek.titel}
-            description={text.grafiek.omschrijving}
-            metadata={{
-              date: data.vaccine_delivery.last_value.date_of_report_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <Box>
-              <AreaChart<
-                NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
-                NlVaccineAdministeredValue | NlVaccineAdministeredEstimateValue
-              >
-                valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-                timeframe="all"
-                formatTooltip={(values) =>
-                  FormatVaccinationsTooltip(values, siteText)
-                }
-                divider={{
-                  color: colors.annotation,
-                  leftLabel: text.data.vaccination_chart.left_divider_label,
-                  rightLabel: text.data.vaccination_chart.right_divider_label,
-                }}
-                trends={[
-                  {
-                    values: vaccineDeliveryValues,
-                    displays: [
-                      {
-                        metricProperty: 'total',
-                        strokeWidth: 3,
-                        color: 'black',
-                        legendLabel: text.data.vaccination_chart.delivered,
-                      },
-                    ],
-                  },
-                  {
-                    values: vaccineDeliveryEstimateValues,
-                    displays: [
-                      {
-                        metricProperty: 'total',
-                        style: 'dashed',
-                        strokeWidth: 3,
-                        legendLabel: text.data.vaccination_chart.estimated,
-                        color: 'black',
-                      },
-                    ],
-                  },
-                ]}
-                areas={[
-                  {
-                    values: vaccineAdministeredValues,
-                    displays: vaccineNames.map((key) => ({
-                      metricProperty: key as any,
-                      color: (colors.data.vaccines as any)[key],
-                      legendLabel: key,
-                    })),
-                  },
-                  {
-                    values: vaccineAdministeredEstimateValues,
-                    displays: vaccineNames.map((key) => ({
-                      metricProperty: key as any,
-                      pattern: 'hatched',
-                      color: (colors.data.vaccines as any)[key],
-                      legendLabel: key,
-                    })),
-                  },
-                ]}
-              />
-
-              <Legend
-                items={[
-                  {
-                    label: text.data.vaccination_chart.legend.available,
-                    color: 'black',
-                    shape: 'line',
-                  },
-                  {
-                    label: text.data.vaccination_chart.legend.expected,
-                    shape: 'custom',
-                    shapeComponent: <HatchedSquare />,
-                  },
-                ]}
-              />
-              <Legend
-                items={vaccineNames.map((key) => ({
-                  label: replaceVariablesInText(
-                    text.data.vaccination_chart.legend_label,
-                    {
-                      name: (text.data.vaccination_chart.product_names as any)[
-                        key
-                      ],
-                    }
-                  ),
-                  color: `data.vaccines.${key}`,
-                  shape: 'square',
-                }))}
-              />
-            </Box>
-          </ChartTile>
-
-          {data.vaccine_delivery_per_supplier ? (
-            <VaccineDeliveryBarChart
-              data={data.vaccine_delivery_per_supplier}
-              siteText={siteText}
-            />
-          ) : null}
-
           <MilestonesView
             title={milestones.title}
             description={milestones.description}
@@ -466,123 +341,134 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          {/*
-        @TODO re-enable when data is available
-
-        <ContentHeader
-          title={text.stock_and_delivery_section.title}
-          icon={scaledVaccineIcon}
-          subtitle={text.stock_and_delivery_section.description}
-          reference={text.stock_and_delivery_section.reference}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: 0 // TODO replace dates for correct source,
-            dateOfInsertionUnix: 0 // TODO replace dates for correct source,
-            dataSources: [],
-          }}
-        />
-
-        <TwoKpiSection>
-          <KpiTile
-            title={text.stock.title}
+          <ContentHeader
+            title={text.stock_and_delivery_section.title}
+            icon={scaledVaccineIcon}
+            subtitle={text.stock_and_delivery_section.description}
+            reference={text.stock_and_delivery_section.reference}
             metadata={{
-              date: data.vaccine_stock.last_value.date_of_insertion_unix,
-              source: text.bronnen.stock,
+              datumsText: text.datums,
+              dateOrRange: data.vaccine_stock.last_value.date_unix,
+              dateOfInsertionUnix:
+                data.vaccine_stock.last_value.date_of_insertion_unix,
+              dataSources: [],
             }}
-          >
-            <KpiValue absolute={data.vaccine_stock.last_value.total} />
-            <Text>{text.stock.description}</Text>
+          />
 
-            <Box as="ul" p={0}>
-              <Box as="li" display="block">
-                <ColorIndicator
+          <TwoKpiSection>
+            <KpiTile
+              title={text.stock.title}
+              metadata={{
+                date: data.vaccine_stock.last_value.date_of_insertion_unix,
+                source: text.bronnen.stock,
+              }}
+            >
+              <Box as="ul" p={0}>
+                <Box
+                  as="li"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="stretch"
+                >
+                  <Box flex={0.2}>
+                    <InlineText>{text.stock.columns.product_name}</InlineText>
+                  </Box>
+                  <Box flex={0.4} display="flex" justifyContent="flex-end">
+                    <InlineText>{text.stock.columns.available}</InlineText>
+                  </Box>
+                  <Box flex={0.4} display="flex" justifyContent="flex-end">
+                    <InlineText>{text.stock.columns.not_available}</InlineText>
+                  </Box>
+                </Box>
+                <VaccineStockRow
                   color={colors.data.vaccines.bio_n_tech_pfizer}
+                  productName="BioNTech/Pfizer"
+                  total={formatNumber(
+                    data.vaccine_stock.last_value.bio_n_tech_pfizer_available
+                  )}
+                  readyForDelivery={formatNumber(
+                    data.vaccine_stock.last_value
+                      .bio_n_tech_pfizer_not_available
+                  )}
                 />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(
-                        data.vaccine_stock.last_value.bio_n_tech_pfizer
-                      )}
-                    </strong>
-                  ),
-                  label: 'BioNTech/Pfizer',
-                })}
+                <VaccineStockRow
+                  color={colors.data.vaccines.moderna}
+                  productName="Moderna"
+                  total={formatNumber(
+                    data.vaccine_stock.last_value.moderna_available
+                  )}
+                  readyForDelivery={formatNumber(
+                    data.vaccine_stock.last_value.moderna_not_available
+                  )}
+                />
+                <VaccineStockRow
+                  color={colors.data.vaccines.astra_zeneca}
+                  productName="AstraZeneca"
+                  total={formatNumber(
+                    data.vaccine_stock.last_value.astra_zeneca_available
+                  )}
+                  readyForDelivery={formatNumber(
+                    data.vaccine_stock.last_value.astra_zeneca_not_available
+                  )}
+                />
               </Box>
-              <Box as="li" display="block">
-                <ColorIndicator color={colors.data.vaccines.moderna} />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(data.vaccine_stock.last_value.moderna)}
-                    </strong>
-                  ),
-                  label: 'Moderna',
-                })}
-              </Box>
-              <Box as="li" display="block">
-                <ColorIndicator color={colors.data.vaccines.astra_zeneca} />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(data.vaccine_stock.last_value.astra_zeneca)}
-                    </strong>
-                  ),
-                  label: 'AstraZeneca',
-                })}
-              </Box>
-            </Box>
-          </KpiTile>
+              <Text>{text.stock.description}</Text>
+            </KpiTile>
 
-          <KpiTile
-            title={replaceVariablesInText(
-              text.delivery_estimate_time_span.title,
-              {
-                weeks:
-                  data.vaccine_delivery_estimate_time_span.last_value
-                    .time_span_weeks,
-              }
-            )}
-            metadata={{
-              date:
-                data.vaccine_delivery_estimate_time_span.last_value
-                  .date_of_insertion_unix,
-              source: text.bronnen.delivery_estimate_time_span,
-            }}
-          >
-            <KpiValue
-              absolute={
-                data.vaccine_delivery_estimate_time_span.last_value.doses
-              }
-            />
-            <Text mb={4}>
-              {replaceVariablesInText(
-                text.delivery_estimate_time_span.description,
+            <KpiTile
+              title={replaceVariablesInText(
+                text.delivery_estimate_time_span.title,
                 {
                   weeks:
                     data.vaccine_delivery_estimate_time_span.last_value
                       .time_span_weeks,
                 }
               )}
-            </Text>
-          </KpiTile>
-        </TwoKpiSection>
-              */}
+              metadata={{
+                date:
+                  data.vaccine_delivery_estimate_time_span.last_value
+                    .date_of_insertion_unix,
+                source: text.bronnen.delivery_estimate_time_span,
+              }}
+            >
+              <KpiValue
+                absolute={
+                  data.vaccine_delivery_estimate_time_span.last_value.doses
+                }
+              />
+              <Text mb={4}>
+                {replaceVariablesInText(
+                  text.delivery_estimate_time_span.description,
+                  {
+                    weeks:
+                      data.vaccine_delivery_estimate_time_span.last_value
+                        .time_span_weeks,
+                  }
+                )}
+              </Text>
+            </KpiTile>
+          </TwoKpiSection>
 
-          {additions.length > 0 && (
-            <TwoKpiSection>
-              <KpiTile title={text.expected_page_additions.title}>
+          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
+
+          <VaccineDeliveryAreaChart data={data} />
+
+          {(text.expected_page_additions.description ||
+            additions.length > 0) && (
+            <KpiTile title={text.expected_page_additions.title}>
+              {text.expected_page_additions.description && (
+                <Text>{text.expected_page_additions.description}</Text>
+              )}
+              {additions.length > 0 && (
                 <ul>
-                  {text.expected_page_additions.additions
-                    .filter((x) => x.length)
-                    .map((addition) => (
-                      <li key={addition}>
-                        <InlineText>{addition}</InlineText>
-                      </li>
-                    ))}
+                  {additions.map((addition) => (
+                    <li key={addition}>
+                      <InlineText>{addition}</InlineText>
+                    </li>
+                  ))}
                 </ul>
-              </KpiTile>
-            </TwoKpiSection>
+              )}
+            </KpiTile>
           )}
         </TileList>
       </NationalLayout>
@@ -625,43 +511,42 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
   );
 }
 
-function HatchedSquare() {
+const ColorIndicator = styled.span<{
+  color?: string;
+}>`
+  content: '';
+  display: ${(x) => (x.color ? 'inline-block' : 'none')};
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: ${(x) => x.color || 'black'};
+  margin-right: 0.5em;
+  flex-shrink: 0;
+`;
+
+type VaccineStockRowProps = {
+  color: string;
+  productName: string;
+  total: string;
+  readyForDelivery: string;
+};
+
+function VaccineStockRow(props: VaccineStockRowProps) {
+  const { color, productName, total, readyForDelivery } = props;
   return (
-    <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
-    </svg>
+    <Box as="li" display="flex" flexDirection="row" alignItems="stretch">
+      <Box flex={0.2} display="flex" alignItems="center">
+        <ColorIndicator color={color} />
+        <InlineText color={color} fontWeight="bold">
+          {productName}:
+        </InlineText>
+      </Box>
+      <Box flex={0.4} display="flex" justifyContent="flex-end">
+        <strong>{total}</strong>
+      </Box>
+      <Box flex={0.4} display="flex" justifyContent="flex-end">
+        <strong>{readyForDelivery}</strong>
+      </Box>
+    </Box>
   );
 }
-
-// @TODO re-enable when data is available
-//
-// const ColorIndicator = styled.span<{
-//   color?: string;
-// }>`
-//   content: '';
-//   display: ${(x) => (x.color ? 'inline-block' : 'none')};
-//   height: 8px;
-//   width: 8px;
-//   border-radius: 50%;
-//   background: ${(x) => x.color || 'black'};
-//   margin-right: 0.5em;
-//   flex-shrink: 0;
-// `;

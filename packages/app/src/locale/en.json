@@ -797,13 +797,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2172,11 +2166,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2301,11 +2291,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2371,7 +2357,11 @@
     "stock": {
       "title": "Doses in stock",
       "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM) per vaccine type. We are not holding aside any more vaccine than is necessary to make sure everyone can receive a second dose on time. ",
-      "per_vaccine": "{{amount}} {{label}} vaccine doses"
+      "columns": {
+        "product_name": "",
+        "available": "",
+        "not_available": ""
+      }
     },
     "delivery_estimate_time_span": {
       "title": "",
@@ -2379,7 +2369,8 @@
     },
     "grafiek_leveringen": {
       "titel": "Deliveries",
-      "omschrijving": "This graph shows how many doses of each COVID-19 vaccine the Netherlands has received and is expecting to receive in a given week."
+      "omschrijving": "This graph shows how many doses of each COVID-19 vaccine the Netherlands has received and is expecting to receive in a given week.",
+      "timeframe_recent_en_verwacht": ""
     },
     "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks."
   },

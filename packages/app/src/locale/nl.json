@@ -797,13 +797,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2172,11 +2166,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2301,11 +2291,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2371,15 +2357,20 @@
     "stock": {
       "title": "Vaccins in voorraad",
       "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt.",
-      "per_vaccine": "{{amount}} {{label}} vaccins"
+      "columns": {
+        "product_name": "Vaccin type",
+        "available": "Beschikbaar",
+        "not_available": "Nog niet Beschikbaar"
+      }
     },
     "delivery_estimate_time_span": {
-      "title": "",
-      "description": "Dit getal laat zien hoeveel vaccins het RIVM op voorraad heeft per type vaccin. We houden niet meer vaccins in voorraad dan nodig is om te zorgen dat iedereen op tijd de tweede prik krijgt."
+      "title": "Verwachte leveringen komende {{weeks}} weken",
+      "description": "Dit getal laat zien hoeveel vaccins we in totaal verwachten in de komende 4 weken. Dit zijn verschillende vaccins. Het overgrote gedeelte van de geleverde vaccins wordt direct ingezet. Een klein gedeelte gaat naar de voorraad om deze op peil te houden."
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
-      "omschrijving": "Deze grafiek laat zien hoeveel COVID-19-vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten."
+      "omschrijving": "Deze grafiek laat zien hoeveel COVID-19-vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten.",
+      "timeframe_recent_en_verwacht": "Toon recent en verwacht"
     },
     "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt."
   },

@@ -4,26 +4,42 @@
       "title": "nl_vaccine_stock_value",
       "type": "object",
       "required": [
-        "total",
-        "bio_n_tech_pfizer",
-        "moderna",
-        "astra_zeneca",
+        "total_available",
+        "total_not_available",
+        "bio_n_tech_pfizer_available",
+        "bio_n_tech_pfizer_not_available",
+        "moderna_available",
+        "moderna_not_available",
+        "astra_zeneca_available",
+        "astra_zeneca_not_available",
         "date_of_insertion_unix",
         "date_unix"
       ],
       "additionalProperties": false,
       "properties": {
-        "total": {
-          "type": "integer"
+        "total_available": {
+          "type": ["integer", "null"]
         },
-        "bio_n_tech_pfizer": {
-          "type": "integer"
+        "total_not_available": {
+          "type": ["integer", "null"]
         },
-        "moderna": {
-          "type": "integer"
+        "bio_n_tech_pfizer_available": {
+          "type": ["integer", "null"]
         },
-        "astra_zeneca": {
-          "type": "integer"
+        "bio_n_tech_pfizer_not_available": {
+          "type": ["integer", "null"]
+        },
+        "moderna_available": {
+          "type": ["integer", "null"]
+        },
+        "moderna_not_available": {
+          "type": ["integer", "null"]
+        },
+        "astra_zeneca_available": {
+          "type": ["integer", "null"]
+        },
+        "astra_zeneca_not_available": {
+          "type": ["integer", "null"]
         },
         "date_of_insertion_unix": {
           "type": "integer"
