@@ -19,7 +19,7 @@ export function VaccineStockPerSupplierChart({
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
 
-  const vaccinesConfig = [
+  const vaccineSelectOptions = [
     {
       metricProperty: 'bio_n_tech_pfizer' as const,
       color: colors.data.vaccines.bio_n_tech_pfizer,
@@ -43,11 +43,11 @@ export function VaccineStockPerSupplierChart({
     },
   ];
 
-  const selectableOptions = vaccinesConfig.map((x) => x.metricProperty);
+  const selectableOptions = vaccineSelectOptions.map((x) => x.metricProperty);
   const [selected, setSelected] = useState<string>(selectableOptions[0]);
   const selectedVaccine =
-    vaccinesConfig.find((x) => x.metricProperty === selected) ??
-    vaccinesConfig[0];
+    vaccineSelectOptions.find((x) => x.metricProperty === selected) ??
+    vaccineSelectOptions[0];
 
   const chartConfig = [
     {
@@ -70,8 +70,8 @@ export function VaccineStockPerSupplierChart({
   return (
     <>
       <InteractiveLegend
-        helpText={text.legend_help_text}
-        seriesConfig={vaccinesConfig}
+        helpText={text.select_help_text}
+        selectOptions={vaccineSelectOptions}
         selection={[selected]}
         onToggleItem={setSelected}
       />

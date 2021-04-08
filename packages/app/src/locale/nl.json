@@ -2378,10 +2378,10 @@
       "description": "Deze grafiek ....",
       "tooltip_title": "Verwachtte voorraad per vaccin type",
       "legend": {
-        "available" : "Beschikbare {{vaccineName}} vaccins in voorrraad",
+        "available" : "Beschikbare {{vaccineName}} vaccins in voorraad",
         "total" : "Totaal aantal {{vaccineName}} vaccins in voorraad"
       },
-      "legend_help_text": "Selecteer vaccintype om de voorraad te bekijken"
+      "select_help_text": "Selecteer vaccintype om de voorraad te bekijken"
     }
   },
   "editorial_detail": {

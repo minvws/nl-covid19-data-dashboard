@@ -5,16 +5,16 @@ import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 
-export interface SimplifiedSeriesConfig {
+export interface SelectOption {
   metricProperty: string;
   label: string;
   color: string;
-  shape: 'line' | 'circle';
+  shape?: 'line' | 'circle';
 }
 
 interface InteractiveLegendProps {
   helpText: string;
-  seriesConfig: SimplifiedSeriesConfig[];
+  selectOptions: SelectOption[];
   selection: string[];
   onToggleItem: (item: string) => void;
   onReset?: () => void;
@@ -22,7 +22,7 @@ interface InteractiveLegendProps {
 
 export function InteractiveLegend({
   helpText,
-  seriesConfig,
+  selectOptions,
   selection,
   onToggleItem,
   onReset,
@@ -38,7 +38,7 @@ export function InteractiveLegend({
       </Text>
       <Legend>
         <List>
-          {seriesConfig.map((item) => {
+          {selectOptions.map((item) => {
             const isSelected = selection.includes(item.metricProperty);
             return (
               <Item key={item.label}>
