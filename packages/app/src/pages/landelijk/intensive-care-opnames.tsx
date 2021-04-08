@@ -78,9 +78,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-
           <ArticleStrip articles={content?.articles} />
-
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
@@ -157,7 +155,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTileWithTimeframe>
-
           <ChartTileWithTimeframe
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}

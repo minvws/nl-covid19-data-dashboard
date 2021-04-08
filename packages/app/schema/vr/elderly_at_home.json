@@ -23,11 +23,17 @@
         "positive_tested_daily": {
           "type": "integer"
         },
+        "positive_tested_daily_moving_average": {
+          "type": "number"
+        },
         "positive_tested_daily_per_100k": {
           "type": "number"
         },
         "deceased_daily": {
           "type": "integer"
+        },
+        "deceased_daily_moving_average": {
+          "type": "number"
         },
         "date_unix": {
           "type": "integer"
@@ -42,8 +48,10 @@
       },
       "required": [
         "positive_tested_daily",
+        "positive_tested_daily_moving_average",
         "positive_tested_daily_per_100k",
         "deceased_daily",
+        "deceased_daily_moving_average",
         "date_unix",
         "date_of_insertion_unix",
         "vrcode"

@@ -101,9 +101,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-
           <ArticleStrip articles={content.articles} />
-
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
@@ -122,7 +120,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             </KpiTile>
           </TwoKpiSection>
-
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
               safetyRegion: safetyRegionName,

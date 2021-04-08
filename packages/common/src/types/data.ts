@@ -23,6 +23,7 @@ export interface GmDeceasedRivm {
 }
 export interface GmDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average: number;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -53,6 +54,7 @@ export interface MunicipalHospitalNice {
 export interface MunicipalHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -64,6 +66,7 @@ export interface MunicipalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average: number;
   date_of_insertion_unix: number;
 }
 export interface MunicipalSewer {
@@ -236,22 +239,17 @@ export interface NationalDoctorValue {
   date_of_insertion_unix: number;
 }
 export interface NlDownscaling {
-  values: NlDownscalingValue[];
-  last_value: NlDownscalingValue;
-}
-export interface NlDownscalingValue {
   is_downscaling_possible: boolean;
   current_level_of_measures: number;
   reproduction_is_below_threshold: boolean;
   reproduction_threshold_value: number;
   reproduction_threshold_day_span: number;
-  intensive_care_is_below_threshold: boolean;
+  intensive_care_nice_is_below_threshold: boolean;
   intensive_care_nice_threshold_value: number;
   intensive_care_nice_threshold_day_span: number;
   hospital_nice_is_below_threshold: boolean;
   hospital_nice_threshold_value: number;
   hospital_nice_threshold_day_span: number;
-  date_unix?: number;
   date_of_insertion_unix: number;
 }
 export interface NlGNumber {
@@ -281,6 +279,7 @@ export interface NationalIntensiveCareNice {
 }
 export interface NationalIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average: number;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -292,6 +291,7 @@ export interface NationalTestedOverall {
 export interface NationalTestedOverallValue {
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -321,6 +321,7 @@ export interface NationalReproduction {
 export interface NationalReproductionValue {
   index_low: number | null;
   index_average: number | null;
+  index_average_moving_average: number;
   index_high: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -344,6 +345,7 @@ export interface NationalHospitalNice {
 }
 export interface NationalHospitalNiceValue {
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average: number;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -374,8 +376,11 @@ export interface NationalTestedGgdDaily {
 }
 export interface NationalTestedGgdDailyValue {
   infected: number;
+  infected_moving_average: number;
   infected_percentage: number;
+  infected_percentage_moving_average: number;
   tested_total: number;
+  tested_total_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -412,7 +417,9 @@ export interface NationalDisabilityCare {
 }
 export interface NationalDisabilityCareValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -479,6 +486,7 @@ export interface NationalDeceasedRivm {
 }
 export interface NationalDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average: number;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -513,8 +521,10 @@ export interface NationalElderlyAtHome {
 }
 export interface NationalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_daily_moving_average: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -850,6 +860,7 @@ export interface RegionalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average: number;
   date_of_insertion_unix: number;
 }
 export interface RegionalHospitalNice {
@@ -858,6 +869,7 @@ export interface RegionalHospitalNice {
 }
 export interface RegionalHospitalNiceValue {
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average: number;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -868,8 +880,11 @@ export interface RegionalTestedGgdDaily {
 }
 export interface RegionalTestedGgdDailyValue {
   infected: number;
+  infected_moving_average: number;
   infected_percentage: number;
+  infected_percentage_moving_average: number;
   tested_total: number;
+  tested_total_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -913,6 +928,7 @@ export interface RegionalDisabilityCareValue {
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -966,6 +982,7 @@ export interface RegionalDeceasedRivm {
 }
 export interface RegionalDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average: number;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -990,8 +1007,10 @@ export interface RegionalElderlyAtHome {
 }
 export interface RegionalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_daily_moving_average: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;

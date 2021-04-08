@@ -7,6 +7,7 @@
       "required": [
         "index_low",
         "index_average",
+        "index_average_moving_average",
         "index_high",
         "date_unix",
         "date_of_insertion_unix"
@@ -19,6 +20,9 @@
         "index_average": {
           "type": ["number", "null"],
           "nullable": true
+        },
+        "index_average_moving_average": {
+          "type": "number"
         },
         "index_high": {
           "type": ["number", "null"],
