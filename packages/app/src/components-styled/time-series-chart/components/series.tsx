@@ -63,6 +63,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   color={config.color}
                   style={config.style}
                   strokeWidth={config.strokeWidth}
+                  curve={config.curve}
                   getX={getX}
                   getY={getY}
                 />
@@ -75,6 +76,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   color={config.color}
                   fillOpacity={config.fillOpacity}
                   strokeWidth={config.strokeWidth}
+                  curve={config.curve}
                   getX={getX}
                   getY={getY}
                   yScale={yScale}
