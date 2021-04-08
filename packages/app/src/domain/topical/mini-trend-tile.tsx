@@ -22,7 +22,7 @@ type MiniTrendTileProps<T extends TimestampedValue> = {
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>
 ) {
-  const { formatNumber, siteText } = useIntl();
+  const { formatNumber } = useIntl();
 
   const { icon, title, text, trendData, metricProperty, href } = props;
 
