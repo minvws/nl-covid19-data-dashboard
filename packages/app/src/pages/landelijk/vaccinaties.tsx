@@ -1,5 +1,6 @@
 import { css } from '@styled-system/css';
 import { useState } from 'react';
+import { isDefined } from 'ts-is-present';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -341,33 +342,42 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <ContentHeader
-            title={text.stock_and_delivery_section.title}
-            icon={scaledVaccineIcon}
-            subtitle={text.stock_and_delivery_section.description}
-            reference={text.stock_and_delivery_section.reference}
-            metadata={{
-              datumsText: text.datums,
-              dateOrRange: data.vaccine_stock.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.vaccine_stock.last_value.date_of_insertion_unix,
-              dataSources: [],
-            }}
-          />
+          {isDefined(data.vaccine_stock) &&
+            isDefined(data.vaccine_delivery_per_supplier) && (
+              <>
+                <ContentHeader
+                  title={text.stock_and_delivery_section.title}
+                  icon={scaledVaccineIcon}
+                  subtitle={text.stock_and_delivery_section.description}
+                  reference={text.stock_and_delivery_section.reference}
+                  metadata={{
+                    datumsText: text.datums,
+                    dateOrRange: data.vaccine_stock.last_value.date_unix,
+                    dateOfInsertionUnix:
+                      data.vaccine_stock.last_value.date_of_insertion_unix,
+                    dataSources: [],
+                  }}
+                />
 
-          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
+                <VaccineDeliveryBarChart
+                  data={data.vaccine_delivery_per_supplier}
+                />
 
-          <VaccineDeliveryAreaChart data={data} />
+                <VaccineDeliveryAreaChart data={data} />
 
-          <ChartTile
-            title={text.stock_per_supplier_chart.title}
-            description={text.stock_per_supplier_chart.description}
-            metadata={{
-              source: text.bronnen.rivm,
-            }}
-          >
-            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
-          </ChartTile>
+                <ChartTile
+                  title={text.stock_per_supplier_chart.title}
+                  description={text.stock_per_supplier_chart.description}
+                  metadata={{
+                    source: text.bronnen.rivm,
+                  }}
+                >
+                  <VaccineStockPerSupplierChart
+                    values={data.vaccine_stock.values}
+                  />
+                </ChartTile>
+              </>
+            )}
 
           {(text.expected_page_additions.description ||
             additions.length > 0) && (
