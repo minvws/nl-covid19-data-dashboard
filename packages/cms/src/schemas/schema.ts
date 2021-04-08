@@ -34,12 +34,13 @@ import localeRichContentBlock from './locale/locale-rich-content-block';
 // so it's easier to scan over the different imports and recognize patterns
 import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
-import { binaryChoice, binaryChoiceOption } from './objects/binary-choice';
+import { binaryChoice } from './objects/binary-choice';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
 import milestone from './objects/milestone';
+import titleDescriptionBlock from './objects/title-description-block';
 import lockdown from './restrictions/lockdown';
 import restriction from './restrictions/restriction';
 import restrictionCategory from './restrictions/restriction-category';
@@ -91,7 +92,7 @@ export default createSchema({
     milestone,
     faqQuestion,
     binaryChoice,
-    binaryChoiceOption,
+    titleDescriptionBlock,
 
     /* LOCALE HELPERS */
     localeString,

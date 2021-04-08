@@ -16,11 +16,11 @@ import {
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
-import { AfschalingsPage, BinaryChoice } from '~/types/cms';
+import { BinaryOption, DownscalingPage } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<AfschalingsPage>(
+  createGetContent<DownscalingPage>(
     (_context) => `*[_type == 'afschalingPage'][0]`
   ),
   getNlData
@@ -31,11 +31,11 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated, content, data } = props;
 
   const isDownscalePossible =
-    data.downscaling?.last_value.is_downscaling_possible;
+    data.downscaling?.last_value.is_downscaling_possible || false;
 
-  const downScalableOption = content.downscalePossible.find(
-    (x) => x.binaryOption === isDownscalePossible
-  );
+  const downScalableOption = isDownscalePossible
+    ? content.downscalePossible.optionTrue
+    : content.downscalePossible.optionFalse;
 
   return (
     <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
@@ -60,8 +60,8 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             borderBottomColor="border"
             borderBottomStyle="solid"
           >
-            <Heading level={1}>{content.pageTitle}</Heading>
-            <RichContent blocks={content.pageDescription} />
+            <Heading level={1}>{content.page.title}</Heading>
+            <RichContent blocks={content.page.content} />
           </Box>
           {!isEmpty(
             siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
@@ -75,11 +75,14 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
               />
             </Box>
           )}
-          <Heading level={2}>{content.explanationTitle}</Heading>
+          <Heading level={2}>{content.downscaling.title}</Heading>
           {downScalableOption !== undefined && (
-            <DownScalableExplanation data={downScalableOption} />
+            <DownScalableExplanation
+              data={downScalableOption}
+              isPossible={isDownscalePossible}
+            />
           )}
-          <RichContent blocks={content.explanationDescription} />
+          <RichContent blocks={content.downscaling.content} />
         </ContentBlock>
       </Box>
     </Layout>
@@ -88,8 +91,14 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
 
 export default Afschaling;
 
-function DownScalableExplanation({ data }: { data: BinaryChoice }) {
-  const color = data.binaryOption ? '#1991D3' : '#FA475E';
+function DownScalableExplanation({
+  data,
+  isPossible,
+}: {
+  data: BinaryOption;
+  isPossible: boolean;
+}) {
+  const color = isPossible ? '#1991D3' : '#FA475E';
   return (
     <Box
       borderLeftColor={color}
@@ -97,8 +106,8 @@ function DownScalableExplanation({ data }: { data: BinaryChoice }) {
       borderLeftStyle="solid"
       pl={3}
     >
-      <InlineText fontWeight="bold">{data.binaryOptionLabel}</InlineText>.
-      <InlineText> {data.binaryOptionDescription}</InlineText>
+      <InlineText fontWeight="bold">{data.label}</InlineText>.
+      <InlineText> {data.description}</InlineText>
     </Box>
   );
 }

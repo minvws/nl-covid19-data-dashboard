@@ -149,25 +149,30 @@ declare module 'picosanity' {
   }
 }
 
-export type AfschalingsPage = {
+export type TitleDescriptionBlock = {
+  _type: 'titleDescriptionBlock';
+  content: RichContentBlock[];
+  title: string;
+};
+
+export type DownscalingPage = {
   _createdAt: string;
   _id: string;
   _rev: string;
   _type: 'afschalingPage';
   _updatedAt: string;
-  explanationTitle: string;
-  downscalePossible: [BinaryChoice, BinaryChoice];
-  explanationDescription: RichContentBlock[];
-  measuresTitle: string;
-  measuresDescription: RichContentBlock[];
-  pageTitle: string;
-  pageDescription: RichContentBlock[];
+  downscaling: TitleDescriptionBlock;
+  page: TitleDescriptionBlock;
+  measures: TitleDescriptionBlock;
+  downscalePossible: BinaryChoice;
+};
+
+export type BinaryOption = {
+  description: Block;
+  label: string;
 };
 
 export type BinaryChoice = {
-  _key: string;
-  _type: string;
-  binaryOption: boolean;
-  binaryOptionDescription: string;
-  binaryOptionLabel: string;
+  optionTrue: BinaryOption;
+  optionFalse: BinaryOption;
 };
