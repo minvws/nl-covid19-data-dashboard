@@ -33,7 +33,7 @@ const hiddenDocTypes = [
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
-  'afschalingPage',
+  'downscalePage',
 ];
 
 export default () =>
@@ -101,7 +101,7 @@ export default () =>
       addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
       addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
-      addListItem(RiPagesFill, 'Afschaling maatregelen', 'afschalingPage'),
+      addListItem(RiPagesFill, 'Afschaling maatregelen', 'downscalePage'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
 
       S.divider(),

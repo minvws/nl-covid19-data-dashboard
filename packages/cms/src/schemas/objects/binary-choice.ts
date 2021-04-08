@@ -6,9 +6,9 @@ const optionFields = [
     validation: (Rule: any) => Rule.reset().required(),
   },
   {
-    title: 'Uitleg',
+    title: 'Toelichting',
     name: 'description',
-    description: 'Toelichting bij deze optie',
+    description: 'Wat houdt deze optie precies in',
     type: 'localeText',
     validation: (Rule: any) =>
       Rule.fields({

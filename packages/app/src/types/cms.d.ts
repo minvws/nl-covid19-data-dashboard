@@ -151,7 +151,7 @@ declare module 'picosanity' {
 
 export type TitleDescriptionBlock = {
   _type: 'titleDescriptionBlock';
-  content: RichContentBlock[];
+  description: RichContentBlock[];
   title: string;
 };
 

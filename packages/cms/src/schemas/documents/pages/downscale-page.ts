@@ -1,7 +1,7 @@
 import { binaryChoice } from '../../objects/binary-choice';
 
 export default {
-  name: 'afschalingPage',
+  name: 'downscalePage',
   type: 'document',
   title: 'Afschaling maatregelen',
   fieldsets: [{ title: 'Afschalingsuitleg', name: 'downscaleExplanation' }],

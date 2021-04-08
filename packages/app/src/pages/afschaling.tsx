@@ -21,7 +21,7 @@ import { BinaryOption, DownscalingPage } from '~/types/cms';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<DownscalingPage>(
-    (_context) => `*[_type == 'afschalingPage'][0]`
+    (_context) => `*[_type == 'downscalePage'][0]`
   ),
   getNlData
 );
@@ -33,7 +33,7 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const isDownscalePossible =
     data.downscaling?.last_value.is_downscaling_possible || false;
 
-  const downScalableOption = isDownscalePossible
+  const downscalableOption = isDownscalePossible
     ? content.downscalePossible.optionTrue
     : content.downscalePossible.optionFalse;
 
@@ -61,7 +61,7 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             borderBottomStyle="solid"
           >
             <Heading level={1}>{content.page.title}</Heading>
-            <RichContent blocks={content.page.content} />
+            <RichContent blocks={content.page.description} />
           </Box>
           {!isEmpty(
             siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
@@ -76,13 +76,15 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           )}
           <Heading level={2}>{content.downscaling.title}</Heading>
-          {downScalableOption !== undefined && (
-            <DownScalableExplanation
-              data={downScalableOption}
+          {downscalableOption !== undefined && (
+            <DownscalableExplanation
+              data={downscalableOption}
               isPossible={isDownscalePossible}
             />
           )}
-          <RichContent blocks={content.downscaling.content} />
+          <RichContent blocks={content.downscaling.description} />
+          <Heading level={2}>{content.measures.title}</Heading>
+          <RichContent blocks={content.measures.description} />
         </ContentBlock>
       </Box>
     </Layout>
@@ -91,7 +93,7 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
 
 export default Afschaling;
 
-function DownScalableExplanation({
+function DownscalableExplanation({
   data,
   isPossible,
 }: {
