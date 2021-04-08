@@ -1,27 +1,27 @@
+import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
 import Head from 'next/head';
+import { ReactNode } from 'react';
+import Arts from '~/assets/arts-small.svg';
+import IconDown from '~/assets/pijl-omlaag.svg';
+import Repro from '~/assets/reproductiegetal-small.svg';
+import Ziekenhuis from '~/assets/ziekenhuis-small.svg';
 import { Box } from '~/components-styled/base';
 import { MaxWidth } from '~/components-styled/max-width';
+import { Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
-import { ReactNode } from 'react';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import Repro from '~/assets/reproductiegetal-small.svg';
-import { Text } from '~/components-styled/typography';
-import IconDown from '~/assets/pijl-omlaag.svg';
-import css from '@styled-system/css';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { asResponsiveArray } from '~/style/utils';
 
-import Arts from '~/assets/arts-small.svg';
-import Ziekenhuis from '~/assets/ziekenhuis-small.svg';
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
+// CONNECT WITH REAL DATA
 const reproduction_is_below_threshold = false;
 const reproduction_threshold_day_span = 14;
 
