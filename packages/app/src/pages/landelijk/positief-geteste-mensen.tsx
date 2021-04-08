@@ -246,10 +246,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected_per_100k,
                     color: colors.data.primary,
-                    /**
-                     * @TODO remove this before merging the PR
-                     */
-                    curve: 'step',
                   },
                   {
                     type: 'invisible',
