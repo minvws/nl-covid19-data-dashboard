@@ -5,10 +5,11 @@ import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 
-interface SimplifiedSeriesConfig {
+export interface SimplifiedSeriesConfig {
   metricProperty: string;
   label: string;
   color: string;
+  shape: 'line' | 'circle';
 }
 
 interface InteractiveLegendProps {
@@ -48,7 +49,8 @@ export function InteractiveLegend({
                   data-text={item.label}
                 >
                   {item.label}
-                  <Line color={item.color} />
+                  {item.shape === 'line' && <Line color={item.color} />}
+                  {item.shape === 'circle' && <Circle color={item.color} />}
                 </ItemButton>
               </Item>
             );
@@ -172,5 +174,18 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     left: asResponsiveArray({ _: '5px', md: 10 }),
     backgroundColor: color,
+  })
+);
+
+const Circle = styled.div<{ color: string }>(({ color }) =>
+  css({
+    display: 'block',
+    position: 'absolute',
+    left: asResponsiveArray({ _: '5px', md: 10 }),
+    backgroundColor: color,
+    top: '6.5px',
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
   })
 );

@@ -2376,7 +2376,12 @@
     "stock_per_supplier_chart": {
       "title": "Verwachtte voorraad per vaccin type",
       "description": "Deze grafiek ....",
-      "tooltip_title": "Verwachtte voorraad per vaccin type"
+      "tooltip_title": "Verwachtte voorraad per vaccin type",
+      "legend": {
+        "available" : "Beschikbare {{vaccineName}} vaccins in voorrraad",
+        "total" : "Totaal aantal {{vaccineName}} vaccins in voorraad"
+      },
+      "legend_help_text": "Selecteer vaccintype om de voorraad te bekijken"
     }
   },
   "editorial_detail": {

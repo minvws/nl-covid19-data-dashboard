@@ -1,5 +1,8 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
-import { InteractiveLegend } from '~/components-styled/interactive-legend';
+import {
+  InteractiveLegend,
+  SimplifiedSeriesConfig,
+} from '~/components-styled/interactive-legend';
 import { Legend, LegendItem } from '~/components-styled/legend';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TooltipSeriesList } from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
@@ -63,7 +66,7 @@ export function InfectedPerAgeGroup({
       compareList.length === alwayEnabled.length
   );
 
-  const dynamicLegendConfig = seriesConfig.filter(
+  const dynamicLegendConfig: SimplifiedSeriesConfig[] = seriesConfig.filter(
     (item) => !alwayEnabled.includes(item.metricProperty)
   );
 
