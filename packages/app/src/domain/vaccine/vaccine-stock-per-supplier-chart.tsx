@@ -81,18 +81,25 @@ export function VaccineStockPerSupplierChart({
       metadata={{
         source: siteText.vaccinaties.bronnen.rivm,
       }}
+      timeframeOptions={['all', '5weeks']}
+      timeframeInitialValue="5weeks"
     >
-      <InteractiveLegend
-        helpText={text.select_help_text}
-        selectOptions={optionsConfig}
-        selection={[selected]}
-        onToggleItem={setSelected}
-      />
-      <TimeSeriesChart
-        tooltipTitle={text.tooltip_title}
-        values={values}
-        seriesConfig={seriesConfig}
-      />
+      {(timeframe) => (
+        <>
+          <InteractiveLegend
+            helpText={text.select_help_text}
+            selectOptions={optionsConfig}
+            selection={[selected]}
+            onToggleItem={setSelected}
+          />
+          <TimeSeriesChart
+            tooltipTitle={text.tooltip_title}
+            values={values}
+            seriesConfig={seriesConfig}
+            timeframe={timeframe}
+          />
+        </>
+      )}
     </ChartTile>
   );
 }
