@@ -48,6 +48,8 @@ import restrictionGroup from './restrictions/restriction-group';
 import restrictionGroupLockdown from './restrictions/restriction-group-lockdown';
 import roadmap from './restrictions/roadmap';
 
+console.dir(allDocuments);
+
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema

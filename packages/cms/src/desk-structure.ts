@@ -34,6 +34,7 @@ const hiddenDocTypes = [
   'lokalizeString',
   'lokalizeText',
   'downscalePage',
+  'downscaleFaq',
 ];
 
 export default () =>
@@ -101,7 +102,27 @@ export default () =>
       addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
       addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
-      addListItem(RiPagesFill, 'Afschaling maatregelen', 'downscalePage'),
+
+      S.listItem()
+        .title('Afschaling')
+        .icon(RiPagesFill)
+        .child(
+          S.list()
+            .title('Afschaling info')
+            .items([
+              addListItem(
+                RiPagesFill,
+                'Afschaling maatregelen',
+                'downscalePage'
+              ),
+              // add the downscaleFaq without custom configuration. This way Sanity studio
+              // first lists the documents in a separate column with the editor displayed in the next
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'downscaleFaq'
+              ),
+            ])
+        ),
+
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
 
       S.divider(),
