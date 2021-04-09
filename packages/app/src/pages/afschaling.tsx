@@ -33,7 +33,7 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated, content, data } = props;
 
   const isDownscalePossible =
-    data.downscaling?.last_value.is_downscaling_possible || false;
+    data.downscaling?.is_downscaling_possible || false;
 
   const downscalableOption = isDownscalePossible
     ? content.downscalingPossible
