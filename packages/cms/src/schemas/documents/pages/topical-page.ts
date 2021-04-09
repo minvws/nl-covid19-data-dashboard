@@ -74,10 +74,14 @@ export default {
       validation: (Rule: any) => Rule.required().unique().length(2),
     },
     {
-      title: 'empty-for-toggle',
-      name: 'empty',
-      type: 'localeString',
-      hidden: true,
+      name: 'headerLink',
+      type: 'link',
+      title: "Landelijke maatregelen link"
+    },
+    {
+      name: 'downscalingLink',
+      type: 'link',
+      title: "Afschaling link"
     }
   ],
 };

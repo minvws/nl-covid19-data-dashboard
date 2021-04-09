@@ -25,7 +25,7 @@ import { Markdown } from '~/components-styled/markdown';
 import { MaxWidth } from '~/components-styled/max-width';
 import { Metadata } from '~/components-styled/metadata';
 import { TileList } from '~/components-styled/tile-list';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
 import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -68,6 +68,17 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { Link } from '~/utils/link';
 import IconDown from '~/assets/pijl-omlaag.svg';
+import { RichContentBlock, LinkType } from '~/types/cms';
+import { RichContent } from '~/components-styled/cms/rich-content';
+interface DownscalingProps {
+  downscalingPossible: RichContentBlock[];
+  downscalingNotPossible: RichContentBlock[];
+}
+
+interface LinksProps {
+  headerLink: LinkType;
+  downscalingLink: LinkType;
+}
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -82,6 +93,8 @@ export const getStaticProps = createGetStaticProps(
     articles: ArticleSummary[];
     weeklyHighlight: WeeklyHighlightProps;
     highlights: HighlightTeaserProps[];
+    downscaling: DownscalingProps;
+    links: LinksProps;
   }>(getTopicalPageQuery),
   () => {
     const data = getNlData();
@@ -124,11 +137,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const is_downscaling_possible = false;
-
-  const textYes =
-    'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.';
-  const textNo =
-    'um fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae';
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -244,7 +252,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <TopicalTile>
               <TopicalSectionHeader
                 title={text.downscaling.title}
-                link={siteText.common_actueel.secties.risicokaart.link}
+                link={content.links.headerLink}
               />
 
               {text.risiconiveaus.belangrijk_bericht &&
@@ -286,19 +294,18 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   )}
                 </Box>
                 <Text>
-                  <InlineText fontWeight="bold">
-                    {`${
-                      is_downscaling_possible
-                        ? text.downscaling.options.possible.bold_text
-                        : text.downscaling.options.no.bold_text
-                    } `}
-                  </InlineText>
-                  {is_downscaling_possible
-                    ? text.downscaling.options.possible.description
-                    : text.downscaling.options.no.description}
+                  {is_downscaling_possible ? (
+                    <RichContent
+                      blocks={content.downscaling.downscalingPossible}
+                    />
+                  ) : (
+                    <RichContent
+                      blocks={content.downscaling.downscalingNotPossible}
+                    />
+                  )}
                 </Text>
-                <Link passHref href="#">
-                  Bekijk de cijfers van de mogelijke versoepeling.
+                <Link passHref href={content.links.downscalingLink.href}>
+                  {content.links.downscalingLink.text}
                 </Link>
               </Box>
             </TopicalTile>

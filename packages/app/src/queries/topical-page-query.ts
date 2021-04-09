@@ -37,6 +37,14 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
           "asset": cover.asset->  
         }
       }
-    }[0].highlights
+    }[0].highlights,
+    "downscaling": *[_type == 'downscalePage']{
+      downscalingPossible,
+      downscalingNotPossible
+    }[0],
+    "links": *[_type=='topicalPage']{
+      headerLink,
+      downscalingLink
+    }[0] 
   }`;
 }

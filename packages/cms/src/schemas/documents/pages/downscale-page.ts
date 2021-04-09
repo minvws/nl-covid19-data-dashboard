@@ -36,7 +36,7 @@ export default {
       name: 'measures',
       type: 'titleDescriptionBlock',
       title: 'Maatregelen toelichting',
-    },
+    }
   ],
   preview: {
     select: {

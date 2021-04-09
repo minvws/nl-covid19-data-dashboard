@@ -167,3 +167,9 @@ export type DownscalingPage = {
   downscalingPossible: Block[];
   downscalingNotPossible: Block[];
 };
+
+export type LinkType = {
+  _type: 'link';
+  text: string;
+  href: string;
+}

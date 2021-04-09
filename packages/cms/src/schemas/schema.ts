@@ -40,6 +40,7 @@ import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
 import milestone from './objects/milestone';
 import titleDescriptionBlock from './objects/title-description-block';
+import link from './objects/link'
 import lockdown from './restrictions/lockdown';
 import restriction from './restrictions/restriction';
 import restrictionCategory from './restrictions/restriction-category';
@@ -91,6 +92,7 @@ export default createSchema({
     milestone,
     faqQuestion,
     titleDescriptionBlock,
+    link,
 
     /* LOCALE HELPERS */
     localeString,
