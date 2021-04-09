@@ -25,7 +25,7 @@ export function VaccineStockPerSupplierChart({
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
 
-  const vaccineSelectOptions: SelectOption[] = [
+  const optionsConfig: SelectOption[] = [
     {
       metricProperty: 'bio_n_tech_pfizer',
       color: colors.data.vaccines.bio_n_tech_pfizer,
@@ -46,29 +46,31 @@ export function VaccineStockPerSupplierChart({
     },
   ];
 
-  const selectableOptions = vaccineSelectOptions.map((x) => x.metricProperty);
-  const [selected, setSelected] = useState<string>(selectableOptions[0]);
-  const selectedVaccine =
-    vaccineSelectOptions.find((x) => x.metricProperty === selected) ??
-    vaccineSelectOptions[0];
+  const allOptions = optionsConfig.map((x) => x.metricProperty);
+  const [selected, setSelected] = useState<string>(allOptions[0]);
+
+  const selectedConfig =
+    optionsConfig.find((x) => x.metricProperty === selected) ??
+    optionsConfig[0];
 
   const seriesConfig: SeriesConfig<NlVaccineStockValue> = [
     {
-      ...selectedVaccine,
+      type: 'area',
       metricProperty: `${selected}_available` as keyof NlVaccineStockValue,
       label: replaceVariablesInText(text.legend.available, {
-        vaccineName: selectedVaccine.label,
+        vaccineName: selectedConfig.label,
       }),
-      type: 'line',
+      color: selectedConfig.color,
+      curve: 'step',
     },
     {
-      ...selectedVaccine,
+      type: 'line',
       metricProperty: `${selected}_total` as keyof NlVaccineStockValue,
       label: replaceVariablesInText(text.legend.total, {
-        vaccineName: selectedVaccine.label,
+        vaccineName: selectedConfig.label,
       }),
       color: colors.lightGray,
-      type: 'line',
+      curve: 'step',
     },
   ];
 
@@ -82,7 +84,7 @@ export function VaccineStockPerSupplierChart({
     >
       <InteractiveLegend
         helpText={text.select_help_text}
-        selectOptions={vaccineSelectOptions}
+        selectOptions={optionsConfig}
         selection={[selected]}
         onToggleItem={setSelected}
       />
