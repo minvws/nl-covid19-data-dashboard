@@ -1,5 +1,3 @@
-import { css } from '@styled-system/css';
-import { useState } from 'react';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -8,11 +6,8 @@ import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
-import { Markdown } from '~/components-styled/markdown';
-import { RadioGroup } from '~/components-styled/radio-group';
 import { TileList } from '~/components-styled/tile-list';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { InlineText, Text } from '~/components-styled/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -20,6 +15,7 @@ import {
   MilestonesView,
   MilestoneViewProps,
 } from '~/domain/vaccine/milestones-view';
+import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
@@ -68,9 +64,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;
-  const [selectedTab, setSelectedTab] = useState(
-    text.gezette_prikken.tab_first.title
-  );
 
   const { milestones } = content;
 
@@ -92,148 +85,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <ArticleStrip articles={content.highlight.articles} />
 
-          <TwoKpiSection>
-            <KpiTile
-              title={text.gezette_prikken.title}
-              metadata={{
-                date:
-                  data.vaccine_administered_total.last_value
-                    .date_of_insertion_unix,
-                source: text.bronnen.all_left,
-              }}
-            >
-              <Box
-                css={css({ '& div': { justifyContent: 'flex-start' } })}
-                mb={3}
-              >
-                <RadioGroup
-                  value={selectedTab}
-                  onChange={(value) => setSelectedTab(value)}
-                  items={[
-                    {
-                      label: text.gezette_prikken.tab_first.title,
-                      value: text.gezette_prikken.tab_first.title,
-                    },
-                    {
-                      label: text.gezette_prikken.tab_second.title,
-                      value: text.gezette_prikken.tab_second.title,
-                    },
-                  ]}
-                />
-              </Box>
-              {selectedTab == text.gezette_prikken.tab_first.title && (
-                <>
-                  <KpiValue
-                    absolute={
-                      data.vaccine_administered_total.last_value.estimated
-                    }
-                  />
-                  <Box
-                    display="flex"
-                    flexDirection={{ _: 'column', lg: 'row' }}
-                  >
-                    <Box flex={{ lg: '1 1 50%' }} mb={3}>
-                      <Markdown
-                        content={text.gezette_prikken.tab_first.description}
-                      />
-                    </Box>
-                    <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_ggd.last_value.estimated
-                        }
-                        description={text.gezette_prikken.estimated.ggd}
-                        date={
-                          data.vaccine_administered_ggd.last_value.date_unix
-                        }
-                        isReported
-                      />
+          <VaccineAdministrationsKpiSection data={data} />
 
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_hospitals.last_value
-                            .estimated
-                        }
-                        description={text.gezette_prikken.estimated.hospitals}
-                        date={
-                          data.vaccine_administered_hospitals.last_value
-                            .date_unix
-                        }
-                        isReported
-                      />
-
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_care_institutions.last_value
-                            .estimated
-                        }
-                        description={
-                          text.gezette_prikken.estimated.care_institutions
-                        }
-                        date={
-                          data.vaccine_administered_care_institutions.last_value
-                            .date_unix
-                        }
-                      />
-
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_doctors.last_value.estimated
-                        }
-                        description={text.gezette_prikken.estimated.doctors}
-                        date={
-                          data.vaccine_administered_doctors.last_value.date_unix
-                        }
-                      />
-                    </Box>
-                  </Box>
-                </>
-              )}
-              {selectedTab == text.gezette_prikken.tab_second.title && (
-                <>
-                  <KpiValue
-                    absolute={
-                      data.vaccine_administered_total.last_value.reported
-                    }
-                  />
-                  <Box
-                    display="flex"
-                    flexDirection={{ _: 'column', lg: 'row' }}
-                  >
-                    <Box flex={{ lg: '1 1 50%' }}>
-                      <Markdown
-                        content={text.gezette_prikken.tab_second.description}
-                      />
-                    </Box>
-                    <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_ggd_ghor.last_value.reported
-                        }
-                        description={text.gezette_prikken.reported.ggd_ghor}
-                        date={
-                          data.vaccine_administered_ggd_ghor.last_value
-                            .date_unix
-                        }
-                        isReported
-                      />
-
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_lnaz.last_value.reported
-                        }
-                        description={text.gezette_prikken.reported.lnaz}
-                        date={
-                          data.vaccine_administered_lnaz.last_value.date_unix
-                        }
-                        isReported
-                      />
-                    </Box>
-                  </Box>
-                </>
-              )}
-            </KpiTile>
-          </TwoKpiSection>
+          <VaccineDeliveryAndAdministrationsAreaChart data={data} />
 
           <MilestonesView
             title={milestones.title}
@@ -357,8 +211,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-          <VaccineDeliveryAndAdministrationsAreaChart data={data} />
-
           <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
 
           {(text.expected_page_additions.description ||
@@ -385,36 +237,3 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default VaccinationPage;
-
-interface VaccineAdministeredProps {
-  value: number;
-  date: number;
-  description: string;
-  isReported?: boolean;
-}
-
-function VaccineAdministeredItem(props: VaccineAdministeredProps) {
-  const { value, date, description, isReported } = props;
-
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
-
-  return (
-    <Text fontWeight="bold">
-      <InlineText css={css({ color: 'data.primary' })}>
-        {formatNumber(value)}
-      </InlineText>{' '}
-      {description}
-      <br />
-      <InlineText fontWeight="normal" fontSize={1} color="annotation">
-        {replaceVariablesInText(
-          isReported
-            ? siteText.vaccinaties.gezette_prikken.reported_until
-            : siteText.vaccinaties.gezette_prikken.estimated_until,
-          {
-            reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
-          }
-        )}
-      </InlineText>
-    </Text>
-  );
-}
