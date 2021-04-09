@@ -9,6 +9,7 @@ import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
+import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -85,9 +86,14 @@ export const Axes = memo(function Axes({
 
   const formatXAxis = useCallback(
     (date_unix: number) => {
-      if (isMounted) {
+      /**
+       * Display relative dates when it's today or yesterday
+       */
+      if (isMounted && differenceInDays(Date.now(), date_unix * 1000) < 2) {
         const relativeDate = formatRelativeDate({ seconds: date_unix });
-        if (relativeDate) return relativeDate;
+        if (relativeDate) {
+          return relativeDate;
+        }
       }
 
       const startYear = createDate(startUnix).getFullYear();
