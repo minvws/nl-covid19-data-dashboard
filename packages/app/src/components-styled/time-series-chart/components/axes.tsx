@@ -8,12 +8,13 @@
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
-import { ScaleLinear, ScaleBand } from 'd3-scale';
+import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { memo, Ref, useCallback } from 'react';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
-import { useIntl } from '~/intl';
 
 type AxesProps = {
   bounds: Bounds;
@@ -59,8 +60,14 @@ export const Axes = memo(function Axes({
   isYAxisCollapsed,
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
+  const isMounted = useIsMounted();
 
-  const { formatDateFromSeconds, formatNumber, formatPercentage } = useIntl();
+  const {
+    formatDateFromSeconds,
+    formatNumber,
+    formatPercentage,
+    formatRelativeDate,
+  } = useIntl();
 
   const formatYAxis = useCallback(
     (y: number) => {
@@ -78,6 +85,11 @@ export const Axes = memo(function Axes({
 
   const formatXAxis = useCallback(
     (date_unix: number) => {
+      if (isMounted) {
+        const relativeDate = formatRelativeDate({ seconds: date_unix });
+        if (relativeDate) return relativeDate;
+      }
+
       const startYear = createDate(startUnix).getFullYear();
       const endYear = createDate(endUnix).getFullYear();
 
@@ -87,7 +99,7 @@ export const Axes = memo(function Axes({
         ? formatDateFromSeconds(date_unix, 'axis-with-year')
         : formatDateFromSeconds(date_unix, 'axis');
     },
-    [startUnix, endUnix, formatDateFromSeconds]
+    [isMounted, formatRelativeDate, startUnix, endUnix, formatDateFromSeconds]
   );
 
   /**
@@ -95,7 +107,8 @@ export const Axes = memo(function Axes({
    * centered on the x-axis tick. Usually a short date has a 2 digit number plus
    * a space plus a three character month, which makes 6.
    */
-  const isLongLabel = formatXAxis(startUnix).length > 6;
+  const isLongStartLabel = formatXAxis(startUnix).length > 6;
+  const isLongEndLabel = formatXAxis(endUnix).length > 6;
 
   return (
     <g css={css({ pointerEvents: 'none' })}>
@@ -138,11 +151,11 @@ export const Axes = memo(function Axes({
            */
           textAnchor:
             x === startUnix
-              ? isLongLabel
+              ? isLongStartLabel
                 ? 'start'
                 : 'middle'
               : x === endUnix
-              ? isLongLabel
+              ? isLongEndLabel
                 ? 'end'
                 : 'middle'
               : 'middle',
