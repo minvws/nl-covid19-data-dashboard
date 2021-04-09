@@ -93,7 +93,7 @@
     },
     "chart_bedbezetting": {
       "title": "ICU bed occupancy over time",
-      "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
+      "description": "This graph shows the number of ICU beds occupied over time by patients with COVID-19. It represents not just the days on which patients were admitted to hospital but all days on which patients with COVID-19 were in hospital.",
       "legend_trend_label": "ICU beds occupied",
       "legend_inaccurate_label": "Data is less precise"
     },
@@ -192,7 +192,7 @@
     },
     "chart_bedbezetting": {
       "title": "Hospital bed occupancy over time (non ICU)",
-      "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
+      "description": "This graph shows the number of hospital beds (excluding ICU beds) occupied over time by patients with COVID-19. It represents not just the days on which patients were admitted to hospital but all days on which patients with COVID-19 were in hospital.",
       "legend_trend_label": "Regular hospital beds occupied by COVID-19 patients",
       "legend_inaccurate_label": "Data is less precise"
     },
@@ -222,14 +222,14 @@
     "titel": "Number of confirmed cases",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day.",
-    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
+    "map_toelichting": "These maps show how many confirmed cases of the coronavirus were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -252,7 +252,7 @@
     "titel_sidebar": "Confirmed cases",
     "metadata": {
       "title": "Confirmed cases | Coronavirus Dashboard | Government.nl",
-      "description": "National overview of confirmed cases in inhabitants with COVID-19."
+      "description": "National overview of confirmed cases in inhabitants with the coronavirus."
     },
     "titel_kpi": "Confirmed cases per day",
     "reference": {
@@ -783,14 +783,14 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
-    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
-    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
+    "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this safety region per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period in this safety region per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -918,12 +918,12 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
-    "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in safety region of {{municipality}}",
-    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
+    "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
     "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this municipality per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
@@ -1524,7 +1524,7 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes - confirmed cases (residents)",
     "barscale_titel": "Disability care homes – daily confirmed cases (residents)",
-    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 daily.",
+    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for the coronavirus daily.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
@@ -1869,9 +1869,9 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "In week 12, an estimated 3,100 deaths",
-      "published_text": "Date of publication: Friday 2 April",
-      "message": "In week 12 (22 to 28 March 2021 inclusive), the estimated number of deaths stood at 3,100. This is over 100 lower than expected for this period and nearly 100 higher than in the previous week (3,001). Mortality among long-term care users and people aged 80 years and over was below the expected level for this week; among the rest of the population, the number of deaths was approximately the same as expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021 inclusive, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. The estimated mortality for week 12 is below the expected mortality as well. However, there is no undermortality yet, as the lower number of deaths is still within the expectation interval (the light blue area in the figure). The National Institute for Public Health and the Environment (RIVM) registered 123 COVID-19 deaths in week 12 (as at 30 March).",
+      "title": "No news report on weekly mortality for week 13",
+      "published_text": "Date of publication: Friday 9 April",
+      "message": "There will be no news release on weekly mortality on 9 April 2021 because of Easter. The Easter break leads to a shift in delivery of death records, as commonly occurs around public holidays; therefore, an estimate will not be available for week 13 on 9 April. The next news release with the estimate for week 14 and provisional figures up to and including week 13 will be published on Friday 16 April.",
       "link": {
         "href": "https://www.cbs.nl/en-gb/news/2021/13/in-week-12-an-estimated-3-100-deaths",
         "text": "Read the full news item on the CBS website"
