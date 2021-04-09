@@ -24,6 +24,7 @@ export type LineSeriesDefinition<T extends TimestampedValue> = {
   color: string;
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
+  curve?: 'linear' | 'step';
 };
 
 export type AreaSeriesDefinition<T extends TimestampedValue> = {
@@ -34,6 +35,7 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   color: string;
   fillOpacity?: number;
   strokeWidth?: number;
+  curve?: 'linear' | 'step';
 };
 
 export type BarSeriesDefinition<T extends TimestampedValue> = {

@@ -6,9 +6,13 @@ import Arts from '~/assets/arts-small.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import Repro from '~/assets/reproductiegetal-small.svg';
 import Ziekenhuis from '~/assets/ziekenhuis-small.svg';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
+import { ContentBlock } from '~/components-styled/cms/content-block';
+import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
 import { Text } from '~/components-styled/typography';
+import { Heading } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -16,10 +20,22 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+  getNlData,
+} from '~/static-props/get-data';
+import { Block, DownscalingPage } from '~/types/cms';
+
+export const getStaticProps = createGetStaticProps(
+  getLastGeneratedDate,
+  createGetContent<DownscalingPage>(
+    (_context) => `*[_type == 'downscalePage'][0]`
+  ),
+  getNlData
+);
 
 /*
   @TODO Connect with data
@@ -35,7 +51,16 @@ const hospital_nice_threshold_day_span = 14;
 
 const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { lastGenerated } = props;
+  const { lastGenerated, content, data } = props;
+
+  const isDownscalePossible =
+    data.downscaling?.is_downscaling_possible || false;
+
+  console.log(content);
+
+  const downscalableOption = isDownscalePossible
+    ? content.downscalingPossible
+    : content.downscalingNotPossible;
 
   return (
     <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
@@ -53,59 +78,90 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
 
-      <div>
+      <Box fontSize={2} bg={'white'} pt={5} pb={4}>
         <MaxWidth>
-          {!isEmpty(
-            siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
-          ) && (
-            <Box mb={3}>
-              <WarningTile
-                message={
-                  siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
-                }
-                variant="emphasis"
-              />
+          <ContentBlock spacing={3} mb={5}>
+            <Box
+              borderBottom="1px"
+              borderBottomColor="border"
+              borderBottomStyle="solid"
+            >
+              <Heading level={1}>{content.page.title}</Heading>
+              <RichContent blocks={content.page.description} />
             </Box>
-          )}
 
-          <Box
-            display="grid"
-            gridTemplateColumns={{ _: undefined, md: 'repeat(3, 1fr)' }}
-            css={css({ columnGap: 5 })}
-            mb={5}
-          >
-            <MiniTrend
-              title={siteText.afschaling.trend_grafieken.reproductiegetal}
-              icon={Repro()}
-              isBelowThreshold={reproduction_is_below_threshold}
-              thresholdDaySpan={reproduction_threshold_day_span}
-            >
-              <p>Hier komt de grafiek</p>
-            </MiniTrend>
-
-            <MiniTrend
-              title={siteText.afschaling.trend_grafieken.ic_opnames}
-              icon={Arts()}
-              isBelowThreshold={intensive_care_nice_is_below_threshold}
-              thresholdDaySpan={intensive_care_nice_threshold_day_span}
-            >
-              <p>Hier komt de grafiek</p>
-            </MiniTrend>
-
-            <MiniTrend
-              title={siteText.afschaling.trend_grafieken.ziekenhuisopnames}
-              icon={Ziekenhuis()}
-              isBelowThreshold={hospital_nice_is_below_threshold}
-              thresholdDaySpan={hospital_nice_threshold_day_span}
-            >
-              <p>Hier komt de grafiek</p>
-            </MiniTrend>
-          </Box>
+            {!isEmpty(
+              siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
+            ) && (
+              <Box mb={3}>
+                <WarningTile
+                  message={
+                    siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
+                  }
+                  variant="emphasis"
+                />
+              </Box>
+            )}
+            <Heading level={2}>{content.downscaling.title}</Heading>
+            {isDefined(downscalableOption) && (
+              <DownscalableExplanation
+                text={downscalableOption}
+                isPossible={isDownscalePossible}
+              />
+            )}
+          </ContentBlock>
         </MaxWidth>
-      </div>
+
+        <Box
+          display="grid"
+          gridTemplateColumns={{ _: undefined, md: 'repeat(3, 1fr)' }}
+          css={css({ columnGap: 5 })}
+          mb={5}
+          maxWidth={{ _: 'contentWidth', md: 1100 }}
+          mx="auto"
+          px={4}
+        >
+          <MiniTrend
+            title={siteText.afschaling.trend_grafieken.reproductiegetal}
+            icon={Repro()}
+            isBelowThreshold={reproduction_is_below_threshold}
+            thresholdDaySpan={reproduction_threshold_day_span}
+          >
+            <Text mb={0}>Hier komt de grafiek</Text>
+          </MiniTrend>
+
+          <MiniTrend
+            title={siteText.afschaling.trend_grafieken.ic_opnames}
+            icon={Arts()}
+            isBelowThreshold={intensive_care_nice_is_below_threshold}
+            thresholdDaySpan={intensive_care_nice_threshold_day_span}
+          >
+            <Text mb={0}>Hier komt de grafiek</Text>
+          </MiniTrend>
+
+          <MiniTrend
+            title={siteText.afschaling.trend_grafieken.ziekenhuisopnames}
+            icon={Ziekenhuis()}
+            isBelowThreshold={hospital_nice_is_below_threshold}
+            thresholdDaySpan={hospital_nice_threshold_day_span}
+          >
+            <Text mb={0}>Hier komt de grafiek</Text>
+          </MiniTrend>
+        </Box>
+
+        <MaxWidth>
+          <ContentBlock spacing={3}>
+            {/* <RichContent blocks={content.downscaling.description} /> */}
+            <Heading level={2}>{content.measures.title}</Heading>
+            {/* <RichContent blocks={content.measures.description} /> */}
+          </ContentBlock>
+        </MaxWidth>
+      </Box>
     </Layout>
   );
 };
+
+export default Afschaling;
 
 interface MiniTrendProps {
   title: string;
@@ -174,4 +230,22 @@ function MiniTrend({
   );
 }
 
-export default Afschaling;
+function DownscalableExplanation({
+  text,
+  isPossible,
+}: {
+  text: Block[];
+  isPossible: boolean;
+}) {
+  const color = isPossible ? '#1991D3' : '#FA475E';
+  return (
+    <Box
+      borderLeftColor={color}
+      borderLeftWidth="3px"
+      borderLeftStyle="solid"
+      pl={3}
+    >
+      <RichContent blocks={text} />
+    </Box>
+  );
+}

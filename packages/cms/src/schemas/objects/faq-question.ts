@@ -1,5 +1,5 @@
 import { selectedLanguages$ } from '../../plugins/translate/datastore';
-import { prepareLocalized } from '../../plugins/translate/prepareLocalized';
+import { prepareLocalized } from '../../plugins/translate/prepare-localized';
 
 let selectedLanguage = 'nl';
 selectedLanguages$.subscribe((selected: any[]) => {

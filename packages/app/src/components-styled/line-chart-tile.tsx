@@ -6,7 +6,7 @@ import {
 } from '~/components-styled/line-chart/line-chart';
 import { assert } from '~/utils/assert';
 import { TimeframeOption } from '~/utils/timeframe';
-import { ChartTileWithTimeframe } from './chart-tile';
+import { ChartTile } from './chart-tile';
 import { MetadataProps } from './metadata';
 interface LineChartTileProps<T extends TimestampedValue>
   extends LineChartProps<T> {
@@ -36,14 +36,12 @@ export function LineChartTile<T extends TimestampedValue>({
   const ariaLabelledBy = slugify(title);
 
   return (
-    <ChartTileWithTimeframe
+    <ChartTile
       title={title}
       description={description}
       metadata={metadata}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
-      ariaLabelledBy={ariaLabelledBy}
-      ariaDescription={ariaDescription}
     >
       {(timeframe) => (
         <>
@@ -55,6 +53,6 @@ export function LineChartTile<T extends TimestampedValue>({
           {footer}
         </>
       )}
-    </ChartTileWithTimeframe>
+    </ChartTile>
   );
 }

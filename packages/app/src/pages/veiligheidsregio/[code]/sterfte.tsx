@@ -3,7 +3,7 @@ import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TileList } from '~/components-styled/tile-list';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
@@ -127,7 +127,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={text.section_deceased_rivm.line_chart_covid_daily_title}
             description={
@@ -164,7 +164,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ContentHeader
             title={siteText.section_sterftemonitor_vr.title}

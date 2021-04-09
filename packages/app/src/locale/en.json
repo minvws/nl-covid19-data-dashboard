@@ -93,7 +93,7 @@
     },
     "chart_bedbezetting": {
       "title": "ICU bed occupancy over time",
-      "description": "This graph shows the progression of the number of ICU beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
+      "description": "This graph shows the number of ICU beds occupied over time by patients with COVID-19. It represents not just the days on which patients were admitted to hospital but all days on which patients with COVID-19 were in hospital.",
       "legend_trend_label": "ICU beds occupied",
       "legend_inaccurate_label": "Data is less precise"
     },
@@ -192,7 +192,7 @@
     },
     "chart_bedbezetting": {
       "title": "Hospital bed occupancy over time (non ICU)",
-      "description": "This graph shows the progression of the number of non-ICU hospital beds occupied by COVID-19 patients. The data before the 1st of June is less reliable due to setting up the registration by LCPS.",
+      "description": "This graph shows the number of hospital beds (excluding ICU beds) occupied over time by patients with COVID-19. It represents not just the days on which patients were admitted to hospital but all days on which patients with COVID-19 were in hospital.",
       "legend_trend_label": "Regular hospital beds occupied by COVID-19 patients",
       "legend_inaccurate_label": "Data is less precise"
     },
@@ -222,14 +222,14 @@
     "titel": "Number of confirmed cases",
     "pagina_toelichting": "By keeping track of the number of confirmed cases, we are able to determine the rate at which the virus is spreading before it reaches the intensive care. This keeps us prepared.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day.",
-    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
-    "map_toelichting": "These maps show how many confirmed cases of COVID-19 were reported yesterday per 100,000 inhabitants.",
+    "map_toelichting": "These maps show how many confirmed cases of the coronavirus were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -252,7 +252,7 @@
     "titel_sidebar": "Confirmed cases",
     "metadata": {
       "title": "Confirmed cases | Coronavirus Dashboard | Government.nl",
-      "description": "National overview of confirmed cases in inhabitants with COVID-19."
+      "description": "National overview of confirmed cases in inhabitants with the coronavirus."
     },
     "titel_kpi": "Confirmed cases per day",
     "reference": {
@@ -455,7 +455,7 @@
     "map_toelichting": "These maps show the number of confirmed cases per 100,000 residents.",
     "metadata": {
       "title": "Confirmed cases in nursing homes | Coronavirus Dashboard | Government.nl",
-      "description": "Number of confirmed cases of COVID-19 in nursing homes in the Netherlands."
+      "description": "Number of confirmed cases of the coronavirus in nursing homes in the Netherlands."
     },
     "titel_kpi": "Number of confirmed cases per day",
     "reference": {
@@ -539,6 +539,7 @@
     "extra_uitleg": "The calculated average is based on all the wastewater measurements collected in one week. This figure also takes account of how many inhabitants are served by a wastewater treatment plant.",
     "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
     "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
+    "linechart_particle_trend_label": "Average number of virus particles x100 billion",
     "metadata": {
       "title": "Sewage water examination | Coronavirus Dashboard | Government.nl",
       "description": "Average number of virus particles per 100,000 inhabitants"
@@ -688,7 +689,7 @@
     "totaal": "Total",
     "rond": "rond",
     "interactive_legend": {
-      "reset_button_label": ""
+      "reset_button_label": "Reset"
     }
   },
   "seoHead": {
@@ -786,24 +787,18 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
-    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
-    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
+    "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this safety region per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period in this safety region per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -921,14 +916,14 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "screen_reader_graph_content": "{{value}} confirmed cases.",
     "barscale_titel": "Average number of confirmed cases per 100,000 inhabitants per day",
-    "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
     "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.",
     "map_titel": "Distribution of confirmed cases in safety region of {{municipality}}",
-    "map_toelichting": "This map shows how many confirmed cases of COVID-19 were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
+    "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
-    "linechart_toelichting": "This graph shows how many confirmed cases of COVID-19 were reported in the selected period in this municipality per 100,000 inhabitants.",
+    "linechart_toelichting": "This graph shows how many confirmed cases of the coronavirus were reported in the selected period in this municipality per 100,000 inhabitants.",
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
@@ -1528,8 +1523,8 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes - confirmed cases (residents)",
     "barscale_titel": "Disability care homes – daily confirmed cases (residents)",
-    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 daily.",
-    "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
+    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for the coronavirus daily.",
+    "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for the coronavirus lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} confirmed cases (residents)",
     "chloropleth_legenda": {
@@ -1537,10 +1532,10 @@
       "geen_meldingen": "No reports"
     },
     "map_titel": "Distribution of infected locations in the Netherlands",
-    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents | Coronavirus Dashboard | Government.nl",
-      "description": "National overview of the number of confirmed cases of disability care home residents for COVID-19."
+      "description": "National overview of the number of confirmed cases of disability care home residents for the coronavirus."
     },
     "titel_kpi": "Disability care homes - daily confirmed cases (residents)",
     "reference": {
@@ -1554,7 +1549,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "kpi_titel": "Daily number of disability care home residents who were reported as testing positive for the coronavirus",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
@@ -1653,7 +1648,7 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "titel": "Disability care homes in {{safetyRegion}} – confirmed cases among residents",
     "barscale_titel": "Disability care homes - daily confirmed cases (residents)",
-    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
+    "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for the coronavirus yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
@@ -1663,7 +1658,7 @@
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for COVID-19 (number of confirmed cases).",
+    "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Regional overview of the number of confirmed cases of disability care home residents in {{safetyRegionName}} for COVID-19."
@@ -1679,7 +1674,7 @@
         "text": "RIVM"
       }
     },
-    "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
+    "kpi_titel": "Daily number of disability care home residents who were reported as testing positive",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
@@ -1706,7 +1701,7 @@
       },
       "kpi_daily_title": "Confirmed cases among over-70s living at home",
       "kpi_daily_description": "The number of people over 70 living at home who were reported as testing positive for COVID-19 yesterday. About 2,3 miljon people over 70 live at home.",
-      "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home ",
+      "kpi_daily_per_100k_title": "Daily confirmed cases per 100,000 among over-70s living at home",
       "kpi_daily_per_100k_description": "This figure shows how many people over 70 living at home were reported as testing positive for COVID-19 yesterday, per 100,000 over-70s living at home. This figure makes it easier to compare the situation in different regions.",
       "line_chart_daily_title": "Newly confirmed cases among over-70s over time",
       "choropleth_daily_title": "Distribution of daily confirmed cases among over-70s living at home (per safety region)",
@@ -1734,7 +1729,7 @@
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily.",
-      "line_chart_legend_trend_label": "Aantal overledenen",
+      "line_chart_legend_trend_label": "Number of deceased",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
@@ -1820,9 +1815,9 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_trend_short_label": ""
+      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1854,9 +1849,9 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
+      "line_chart_covid_daily_legend_trend_label": "Reported number of deceased",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_trend_short_label": ""
+      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1876,9 +1871,9 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "In week 12, an estimated 3,100 deaths",
-      "published_text": "Date of publication: Friday 2 April",
-      "message": "In week 12 (22 to 28 March 2021 inclusive), the estimated number of deaths stood at 3,100. This is over 100 lower than expected for this period and nearly 100 higher than in the previous week (3,001). Mortality among long-term care users and people aged 80 years and over was below the expected level for this week; among the rest of the population, the number of deaths was approximately the same as expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021 inclusive, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. The estimated mortality for week 12 is below the expected mortality as well. However, there is no undermortality yet, as the lower number of deaths is still within the expectation interval (the light blue area in the figure). The National Institute for Public Health and the Environment (RIVM) registered 123 COVID-19 deaths in week 12 (as at 30 March).",
+      "title": "No news report on weekly mortality for week 13",
+      "published_text": "Date of publication: Friday 9 April",
+      "message": "There will be no news release on weekly mortality on 9 April 2021 because of Easter. The Easter break leads to a shift in delivery of death records, as commonly occurs around public holidays; therefore, an estimate will not be available for week 13 on 9 April. The next news release with the estimate for week 14 and provisional figures up to and including week 13 will be published on Friday 16 April.",
       "link": {
         "href": "https://www.cbs.nl/en-gb/news/2021/13/in-week-12-an-estimated-3-100-deaths",
         "text": "Read the full news item on the CBS website"
@@ -2046,7 +2041,7 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100,000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be available and how many doses are to be administered in the coming weeks.",
+      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered and checked in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and checked and how many doses are to be administered in the coming weeks.",
       "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
@@ -2132,7 +2127,7 @@
       "description": "More data on vaccinations will be added in the near future, including:\n- vaccination coverage"
     },
     "grafiek": {
-      "titel": "Delivered and available doses & doses administered in total",
+      "titel": "Delivered and checked doses & doses administered in total",
       "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
     },
     "verwachte_leveringen": {
@@ -2172,11 +2167,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2301,11 +2292,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2362,7 +2349,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Deliveries and stock",
-      "description": "Vaccine doses are delivered to the Netherlands every week. The majority of these are made available soon after some checks so people can be vaccinated. However, we hold some doses aside so there is enough vaccine to ensure those who have had their first dose are able to get their second dose. This page shows how many doses of vaccine are on their way and how many doses we hold aside. ",
+      "description": "How many vaccine doses can be administered depends on how many doses we receive. Vaccine doses are delivered to the Netherlands every week. The majority of these are made available soon after some checks so people can be vaccinated. However, we hold some doses aside so there is enough vaccine to ensure those who have had their first dose are able to get their second dose. This page shows how many doses of vaccine are on their way and how many doses we hold aside. ",
       "reference": {
         "href": "/verantwoording#deliveries-and-vaccine-doses-in-stock",
         "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
@@ -2370,18 +2357,34 @@
     },
     "stock": {
       "title": "Doses in stock",
-      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM) per vaccine type. We are not holding aside any more vaccine than is necessary to make sure everyone can receive a second dose on time. ",
-      "per_vaccine": "{{amount}} {{label}} vaccine doses"
+      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM) per vaccine type. We are not holding aside any more vaccine than is necessary to make sure everyone can receive a second dose on time.",
+      "per_vaccine": "{{amount}} {{label}} vaccine doses",
+      "columns": {
+        "product_name": "Vaccine type",
+        "available": "Available",
+        "not_available": "Not yet available"
+      }
     },
     "delivery_estimate_time_span": {
-      "title": "",
-      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM) per vaccine type. We are not holding aside any more vaccine than is necessary to make sure everyone can receive a second dose on time. "
+      "title": "Doses to be delivered",
+      "description": "This is the number of vaccine doses the Netherlands expects to receive over the next four weeks. The Netherlands will receive a new delivery each week. People need two separately administered doses for the vaccine to be maximally effective, except for the Janssen vaccine. One dose of the Janssen vaccine is enough."
     },
     "grafiek_leveringen": {
       "titel": "Deliveries",
-      "omschrijving": "This graph shows how many doses of each COVID-19 vaccine the Netherlands has received and is expecting to receive in a given week."
+      "omschrijving": "This graph shows how many doses of each vaccine the Netherlands has received and is expecting to receive in a given week.",
+      "timeframe_recent_en_verwacht": "Show recent and expected"
     },
-    "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks."
+    "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks.",
+    "stock_per_supplier_chart": {
+      "title": "Doses in stock per type of vaccine",
+      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The available stock is ready to use and includes the safety stock. The total stock consists of the available and not yet available stock. Stocks that are not yet available are vaccines that have yet to be checked. After the checks the vaccines are available.",
+      "tooltip_title": "Doses in stock",
+      "legend": {
+        "available": "Available doses in stock of {{vaccineName}} vaccine",
+        "total": "Total number of doses in stock of {{vaccineName}} vaccine"
+      },
+      "select_help_text": "Select type of vaccine to see the doses in stock"
+    }
   },
   "editorial_detail": {
     "back_link": {
@@ -2815,9 +2818,9 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this municipality reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this municipality reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "",
-      "line_chart_covid_daily_legend_trend_short_label": "",
-      "line_chart_covid_daily_legend_inaccurate_label": ""
+      "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
+      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },

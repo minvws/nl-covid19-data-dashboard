@@ -39,6 +39,12 @@ import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
 
 /**
+ * A chart with a width smaller than the threshold will be rendered with a
+ * "collapsed" Y-axis. The collapsed axis will only display the top value.
+ */
+const COLLAPSE_Y_AXIS_THRESHOLD = 430;
+
+/**
  * This chart started as a fork from MultiLineChart. It attempts to create a
  * more generic abstraction that can replace LineChart, MultiLineChart,
  * AreaChart and later possibly something like the vaccine delivery chart.
@@ -110,6 +116,12 @@ export type TimeSeriesChartProps<
    * will result in a user interacting with the single nearest point only.
    */
   markNearestPointOnly?: boolean;
+
+  /**
+   * Display only values inside the tooltip.
+   * This option only makes sense when we display a single trend.
+   */
+  displayTooltipValueOnly?: boolean;
 };
 
 export function TimeSeriesChart<
@@ -132,6 +144,7 @@ export function TimeSeriesChart<
   disableLegend,
   onSeriesClick,
   markNearestPointOnly,
+  displayTooltipValueOnly,
 }: TimeSeriesChartProps<T, C>) {
   const {
     tooltipData,
@@ -161,7 +174,7 @@ export function TimeSeriesChart<
   const { padding, bounds } = useDimensions(
     width,
     height,
-    paddingLeft ?? yAxisWidth + 10 // 10px seems to be enough padding
+    paddingLeft ?? yAxisWidth
   );
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
@@ -224,6 +237,7 @@ export function TimeSeriesChart<
           config: seriesConfig,
           configIndex: nearestPoint.seriesConfigIndex,
           markNearestPointOnly,
+          displayTooltipValueOnly,
           options: dataOptions || {},
           /**
            * Pass the full annotation data. We could just pass the index because
@@ -250,6 +264,7 @@ export function TimeSeriesChart<
     dataOptions,
     timespanAnnotations,
     markNearestPointOnly,
+    displayTooltipValueOnly,
   ]);
 
   useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
@@ -285,6 +300,7 @@ export function TimeSeriesChart<
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
+            isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
           />
 
           {/**

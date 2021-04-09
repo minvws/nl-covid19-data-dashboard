@@ -229,7 +229,7 @@ export function SewerChart(props: SewerChartProps) {
   return (
     <Box position="relative">
       {sewerStationSelectProps.options.length > 0 && (
-        <Box display="flex" justifyContent="flex-end">
+        <Box display="flex" justifyContent="flex-start" mb={3}>
           <Select
             placeholder={text.select_station_placeholder}
             {...sewerStationSelectProps}
