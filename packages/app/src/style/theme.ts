@@ -119,6 +119,7 @@ export const colors = {
   lightBlue: '#E0EEF6',
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',
+  cerulean: '#0390D6',
 
   data: {
     primary: '#007BC7',

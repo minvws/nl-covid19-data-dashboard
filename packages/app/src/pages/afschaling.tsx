@@ -21,7 +21,9 @@ import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-// CONNECT WITH REAL DATA
+/*
+  @TODO Connect with data
+*/
 const reproduction_is_below_threshold = false;
 const reproduction_threshold_day_span = 14;
 
@@ -73,28 +75,28 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             mb={5}
           >
             <MiniTrend
-              title="Reproductiegetal"
+              title={siteText.afschaling.trend_grafieken.reproductiegetal}
               icon={Repro()}
-              is_below_threshold={reproduction_is_below_threshold}
-              threshold_day_span={reproduction_threshold_day_span}
+              isBelowThreshold={reproduction_is_below_threshold}
+              thresholdDaySpan={reproduction_threshold_day_span}
             >
               <p>Hier komt de grafiek</p>
             </MiniTrend>
 
             <MiniTrend
-              title="IC-opnames"
+              title={siteText.afschaling.trend_grafieken.ic_opnames}
               icon={Arts()}
-              is_below_threshold={intensive_care_nice_is_below_threshold}
-              threshold_day_span={intensive_care_nice_threshold_day_span}
+              isBelowThreshold={intensive_care_nice_is_below_threshold}
+              thresholdDaySpan={intensive_care_nice_threshold_day_span}
             >
               <p>Hier komt de grafiek</p>
             </MiniTrend>
 
             <MiniTrend
-              title="Ziekenhuisopnames (incl. IC)"
+              title={siteText.afschaling.trend_grafieken.ziekenhuisopnames}
               icon={Ziekenhuis()}
-              is_below_threshold={hospital_nice_is_below_threshold}
-              threshold_day_span={hospital_nice_threshold_day_span}
+              isBelowThreshold={hospital_nice_is_below_threshold}
+              thresholdDaySpan={hospital_nice_threshold_day_span}
             >
               <p>Hier komt de grafiek</p>
             </MiniTrend>
@@ -108,28 +110,24 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
 interface MiniTrendProps {
   title: string;
   icon: ReactNode;
-  is_below_threshold: boolean;
-  threshold_day_span: number;
+  isBelowThreshold: boolean;
+  thresholdDaySpan: number;
   children: ReactNode;
 }
 
 function MiniTrend({
   title,
   icon,
-  is_below_threshold,
-  threshold_day_span,
+  isBelowThreshold,
+  thresholdDaySpan,
   children,
 }: MiniTrendProps) {
-  const descriptionTrue =
-    'Waarde is minder dan {{days}} dagen onder de grenswaarde';
-  const descriptionFalse = 'Grenswaarde is overschreden';
+  const { siteText } = useIntl();
 
   return (
     <Box mb={{ _: 3, md: 0 }}>
       <Box display="flex" alignItems="center" mb={1}>
-        <Box width={25} display="flex" mt="-5px">
-          {icon}
-        </Box>
+        <Box width={25}>{icon}</Box>
         <Text fontWeight="bold" mb={0}>
           {title}
         </Text>
@@ -137,11 +135,14 @@ function MiniTrend({
       <Box display="flex" mb={3}>
         <Box
           height={18}
-          width={18}
+          minWidth={18}
           display="flex"
           alignItems="center"
           justifyContent="center"
-          backgroundColor={is_below_threshold ? '#0390D6' : 'red'}
+          backgroundColor={isBelowThreshold ? 'cerulean' : 'red'}
+          mr={2}
+          mt="2px"
+          borderRadius="50%"
           css={css({
             svg: {
               padding: '2px',
@@ -150,22 +151,22 @@ function MiniTrend({
               fill: 'white',
             },
           })}
-          mr={1}
-          mt="2px"
-          borderRadius="50%"
         >
-          {is_below_threshold ? (
+          {isBelowThreshold ? (
             <IconDown />
           ) : (
             <Box width={8} height={2} bg="white" />
           )}
         </Box>
         <Text mb={0}>
-          {is_below_threshold
-            ? replaceVariablesInText(descriptionTrue, {
-                days: threshold_day_span,
-              })
-            : descriptionFalse}
+          {isBelowThreshold
+            ? replaceVariablesInText(
+                siteText.afschaling.trend_grafieken.grenswaarde_minder,
+                {
+                  days: thresholdDaySpan,
+                }
+              )
+            : siteText.afschaling.trend_grafieken.grenswaarde_meer}
         </Text>
       </Box>
       {children}
