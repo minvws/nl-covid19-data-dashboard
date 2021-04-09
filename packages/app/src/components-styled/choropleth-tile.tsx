@@ -1,5 +1,6 @@
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { DataProps } from '~/types/attributes';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
@@ -10,7 +11,6 @@ import {
 import { ChartTileContainer } from './chart-tile-container';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-
 interface ChoroplethTileProps extends DataProps {
   title: string;
   description?: string | React.ReactNode;
@@ -22,6 +22,7 @@ interface ChoroplethTileProps extends DataProps {
     thresholds: ChoroplethThresholdsValue[];
   };
   metadata?: MetadataProps;
+  valueAnnotation?: string;
 }
 
 export function ChoroplethTile({
@@ -32,6 +33,7 @@ export function ChoroplethTile({
   legend,
   children,
   metadata,
+  valueAnnotation,
   ...dataProps
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints(true);
@@ -74,14 +76,20 @@ export function ChoroplethTile({
               {legendaComponent}
             </Box>
           )}
+          {valueAnnotation && breakpoints.lg && (
+            <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
+          )}
         </Box>
 
         <Box flex={{ lg: 1 }} ml={[0, 0, 3]}>
           <div>{children}</div>
 
           {legendaComponent && !breakpoints.lg && (
-            <Box display="flex" justifyContent="center">
+            <Box display="flex" alignItems="center" flexDirection="column">
               {legendaComponent}
+              {valueAnnotation && (
+                <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
+              )}
             </Box>
           )}
         </Box>
