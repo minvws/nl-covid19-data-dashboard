@@ -2,6 +2,7 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
+  CollapsibleList,
   ImageBlock,
   InlineAttachment,
   RichContentImageBlock,
@@ -41,6 +42,10 @@ export function RichContent({
           {...props}
         />
       ),
+      collapsible: (props: { node: CollapsibleList }) => {
+        console.dir(props.node);
+        return <div>ref</div>;
+      },
     },
     marks: {
       inlineAttachment: InlineAttachmentMark,

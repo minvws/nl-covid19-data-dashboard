@@ -20,10 +20,41 @@ import {
 } from '~/static-props/get-data';
 import { Block, DownscalingPage } from '~/types/cms';
 
+const locale = process.env.NEXT_PUBLIC_LOCALE;
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<DownscalingPage>(
-    (_context) => `*[_type == 'downscalePage'][0]`
+    (_context) => `*[_type == 'downscalePage'][0]{
+      ...,
+      "measures": {
+        ...measures,
+        "description": {
+          "_type": measures.description._type,
+          "${locale}": [
+            ...measures.description.${locale}[]
+            {
+            ...,
+            _type == "image" => {
+            	...,
+              "asset": asset->
+            },
+            _type == "reference" => {
+        			...
+            }->{
+                collapsible != null => {
+                  ...collapsible,
+                  "content": [
+                    ...collapsible.content.${locale}[]
+                  ],
+                  "title": collapsible.title.${locale},
+                }
+              }
+            }
+          ]
+        },
+      },
+    }`
   ),
   getNlData
 );
@@ -33,7 +64,7 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated, content, data } = props;
 
   const isDownscalePossible =
-    data.downscaling?.last_value.is_downscaling_possible || false;
+    data.downscaling?.is_downscaling_possible || false;
 
   const downscalableOption = isDownscalePossible
     ? content.downscalingPossible

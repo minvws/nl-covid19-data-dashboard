@@ -118,7 +118,7 @@ export default () =>
               // add the downscaleFaq without custom configuration. This way Sanity studio
               // first lists the documents in a separate column with the editor displayed in the next
               ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'downscaleFaq'
+                (item) => item.getId() === 'downscaleCollapsibleContent'
               ),
             ])
         ),

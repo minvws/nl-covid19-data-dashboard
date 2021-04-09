@@ -5,7 +5,7 @@ import {
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -55,7 +55,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   const positiveTestedPeopleText =
     siteText.verpleeghuis_positief_geteste_personen;
   const deceased = siteText.verpleeghuis_oversterfte;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -102,10 +101,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
-            ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
             timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
@@ -148,7 +146,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ContentHeader
             id="besmette-locaties"
@@ -226,13 +224,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChoroplethTile>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            ariaDescription={
-              graphDescriptions.verpleeghuiszorg_besmette_locaties
-            }
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -250,7 +245,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ContentHeader
             id="sterfte"
@@ -284,7 +279,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: deceased.bronnen.rivm }}
             title={deceased.linechart_titel}
             timeframeOptions={['all', '5weeks']}
@@ -323,7 +318,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

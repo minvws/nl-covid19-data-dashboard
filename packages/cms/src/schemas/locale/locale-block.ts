@@ -31,6 +31,11 @@ export default {
           },
         ],
       },
+      {
+        type: 'reference',
+        to: { type: 'downscaleCollapsibleContent' },
+        title: 'Inklapbaar blok',
+      },
     ],
   })),
 };

@@ -25,34 +25,17 @@ export default {
       type: 'localeBlock',
       title: 'Uitleg voor wanneer afschaling mogelijk is',
       name: 'downscalingPossible',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
     },
     {
       fieldset: 'downscaleExplanation',
       type: 'localeBlock',
       title: 'Uitleg voor wanneer afschaling niet mogelijk is',
       name: 'downscalingNotPossible',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
     },
     {
       name: 'measures',
       type: 'titleDescriptionBlock',
       title: 'Maatregelen toelichting',
-    },
-    {
-      name: 'faqs',
-      title: 'Veelgestelde vragen',
-      type: 'array',
-      of: [{ type: 'reference', to: { type: 'downscaleFaq' } }],
-      validation: (Rule: any) => Rule.reset().unique(),
     },
   ],
   preview: {

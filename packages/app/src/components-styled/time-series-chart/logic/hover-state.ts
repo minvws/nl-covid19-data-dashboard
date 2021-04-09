@@ -221,13 +221,6 @@ export function useHoverState<T extends TimestampedValue>({
       .filter(isDefined);
 
     /**
-     * If there are no points getting hovered, hover state should be undefined
-     */
-    if (!linePoints.length) {
-      return;
-    }
-
-    /**
      * Point markers on range data are rendered differently, so we split them
      * out here, so we avoid having to create a union type and complicate
      * things.
@@ -290,7 +283,14 @@ export function useHoverState<T extends TimestampedValue>({
      */
     const nearestPoint = [...linePoints, ...rangePoints, ...barPoints].sort(
       (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
-    )[0];
+    )[0] as HoveredPoint<T> | undefined;
+
+    /**
+     * Empty hoverstate when there's no nearest point detected
+     */
+    if (!nearestPoint) {
+      return undefined;
+    }
 
     const timespanAnnotationIndex = timespanAnnotations
       ? findActiveTimespanAnnotationIndex(
