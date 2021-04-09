@@ -1,4 +1,4 @@
-import { HIGHLIGHTED_ARTICLES } from '../fields/highlighted-articles';
+import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
 
 export default {
   title: 'Rioolwater pagina',

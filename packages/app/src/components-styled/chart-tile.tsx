@@ -1,142 +1,90 @@
-import css from '@styled-system/css';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTileContainer } from './chart-tile-container';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
-import { Heading } from './typography';
-import { assert } from '~/utils/assert';
-import slugify from 'slugify';
-interface ChartTileProps {
-  children: React.ReactNode;
-  metadata: MetadataProps;
+import { Heading, Text } from './typography';
+interface ChartTileHeaderProps {
   title: string;
-  description?: React.ReactNode;
-  ariaDescription?: string;
-  ariaLabelledBy?: string;
-}
-
-interface ChartTileWithTimeframeProps extends Omit<ChartTileProps, 'children'> {
-  children: (timeframe: TimeframeOption) => React.ReactNode;
-  timeframeOptions?: TimeframeOption[];
-  timeframeInitialValue?: TimeframeOption;
-  ariaDescription?: string;
-  ariaLabelledBy?: string;
-}
-
-export function ChartTile({
-  title,
-  description,
-  metadata,
-  children,
-  ariaDescription,
-}: ChartTileProps) {
-  assert(
-    !(!description && !ariaDescription),
-    `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
-  );
-
-  /**
-   * Chart title should be unique on a page. If we instead use useUniqueId here
-   * the SSR markup doesn't match the client-side rendered id, which generates a
-   * warning and is probably problematic for screen readers.
-   */
-  const ariaLabelledBy = slugify(title);
-
-  return (
-    <ChartTileContainer metadata={metadata}>
-      <ChartTileHeader
-        title={title}
-        description={description}
-        ariaDescription={ariaDescription}
-        ariaLabelledBy={ariaLabelledBy}
-      />
-      {children}
-    </ChartTileContainer>
-  );
-}
-
-export function ChartTileWithTimeframe({
-  title,
-  description,
-  metadata,
-  timeframeOptions = ['all', '5weeks', 'week'],
-  timeframeInitialValue = 'all',
-  children,
-  ariaLabelledBy,
-  ariaDescription,
-}: ChartTileWithTimeframeProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>(
-    timeframeInitialValue
-  );
-
-  return (
-    <ChartTileContainer metadata={metadata}>
-      <ChartTileHeader
-        title={title}
-        description={description}
-        timeframe={timeframe}
-        timeframeOptions={timeframeOptions}
-        onTimeframeChange={setTimeframe}
-        ariaLabelledBy={ariaLabelledBy}
-        ariaDescription={ariaDescription}
-      />
-      {children(timeframe)}
-    </ChartTileContainer>
-  );
+  description?: string;
+  children?: React.ReactNode;
 }
 
 function ChartTileHeader({
   title,
   description,
-  timeframe,
-  timeframeOptions,
-  onTimeframeChange,
-  ariaLabelledBy,
-  ariaDescription,
-}: {
-  title: string;
-  description?: React.ReactNode;
-  timeframe?: TimeframeOption;
-  timeframeOptions?: TimeframeOption[];
-  onTimeframeChange?: (timeframe: TimeframeOption) => void;
-  ariaLabelledBy?: string;
-  ariaDescription?: string;
-}) {
+  children,
+}: ChartTileHeaderProps) {
   return (
-    <Box
-      mb={3}
-      display="flex"
-      flexDirection={{ _: 'column', lg: 'row' }}
-      justifyContent="space-between"
-    >
-      <div css={css({ mb: [3, null, null, null, 0], mr: [0, 0, 2] })}>
-        <Heading level={3}>{title}</Heading>
-
-        {description ? (
-          typeof description === 'string' ? (
-            <p id={ariaLabelledBy} css={css({ m: 0 })}>
-              {description}
-            </p>
-          ) : (
-            <div id={ariaLabelledBy}>{description}</div>
-          )
-        ) : (
-          <Box display="none" id={ariaLabelledBy}>
-            {ariaDescription}
+    <Box>
+      <Heading level={3}>{title}</Heading>
+      <Box>
+        {description && (
+          <Box maxWidth={560}>
+            <Text> {description}</Text>
           </Box>
         )}
-      </div>
-      {timeframe && onTimeframeChange && (
-        <div css={css({ ml: [0, 0, 2] })}>
+        {children && (
+          <Box display="inline-table" alignSelf="flex-start" mb={3}>
+            {children}
+          </Box>
+        )}
+      </Box>
+    </Box>
+  );
+}
+
+type ChartTileProps = {
+  title: string;
+  metadata: MetadataProps;
+  description?: string;
+  timeframeInitialValue?: TimeframeOption;
+} & (
+  | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
+  {
+      timeframeOptions?: undefined;
+      children: React.ReactNode;
+    }
+  | {
+      timeframeOptions: TimeframeOption[];
+      children: (timeframe: TimeframeOption) => React.ReactNode;
+    }
+);
+
+export function ChartTile({
+  title,
+  description,
+  children,
+  metadata,
+  timeframeOptions,
+  timeframeInitialValue = 'all',
+}: ChartTileProps) {
+  const [timeframe, setTimeframe] = useState<TimeframeOption>();
+
+  useEffect(() => {
+    if (timeframeOptions && !timeframeOptions.includes(timeframeInitialValue)) {
+      setTimeframe(timeframeOptions[0]);
+      return;
+    }
+    setTimeframe(timeframeInitialValue);
+  }, [timeframeOptions, timeframeInitialValue]);
+
+  return (
+    <ChartTileContainer metadata={metadata}>
+      <ChartTileHeader title={title} description={description}>
+        {timeframeOptions && timeframe && (
           <ChartTimeControls
             timeframeOptions={timeframeOptions}
             timeframe={timeframe}
-            onChange={onTimeframeChange}
+            onChange={setTimeframe}
           />
-        </div>
-      )}
-    </Box>
+        )}
+      </ChartTileHeader>
+      {(timeframeOptions || timeframeInitialValue) &&
+      typeof children === 'function'
+        ? children(timeframe as TimeframeOption)
+        : children}
+    </ChartTileContainer>
   );
 }

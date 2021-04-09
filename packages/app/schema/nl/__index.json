@@ -42,7 +42,9 @@
     "vaccine_administered_lnaz",
     "vaccine_administered_total",
     "vaccine_administered_rate_moving_average",
-    "vaccine_administered_planned"
+    "vaccine_administered_planned",
+    "vaccine_stock",
+    "vaccine_delivery_per_supplier"
   ],
   "additionalProperties": false,
   "properties": {
@@ -144,9 +146,6 @@
     },
     "vaccine_delivery_per_supplier": {
       "$ref": "vaccine_delivery_per_supplier.json"
-    },
-    "vaccine_delivery_estimate_time_span": {
-      "$ref": "vaccine_delivery_estimate_time_span.json"
     },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"

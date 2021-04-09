@@ -36,6 +36,12 @@ type AxesProps = {
   yTickValues?: number[];
   xTickValues: [number, number];
   formatYTickValue?: (value: number) => string;
+
+  /**
+   * On narrow screens we'll "collapse" the Y-axis. Only the low value will be
+   * displayed.
+   */
+  isYAxisCollapsed?: boolean;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -50,6 +56,7 @@ export const Axes = memo(function Axes({
   xTickValues,
   formatYTickValue,
   yAxisRef,
+  isYAxisCollapsed,
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
 
@@ -142,28 +149,74 @@ export const Axes = memo(function Axes({
         })}
         hideTicks
       />
-      <g ref={yAxisRef}>
-        <AxisLeft
-          scale={yScale}
-          tickValues={yTickValues}
-          numTicks={yTickValues?.length || numGridLines}
-          hideTicks
-          hideAxisLine
-          stroke={colors.silver}
-          tickFormat={
-            formatYTickValue
-              ? (formatYTickValue as AnyTickFormatter)
-              : isPercentage
-              ? (formatYAxisPercentage as AnyTickFormatter)
-              : (formatYAxis as AnyTickFormatter)
-          }
-          tickLabelProps={() => ({
-            fill: colors.data.axisLabels,
-            fontSize: 12,
-            textAnchor: 'end',
-            verticalAnchor: 'middle',
-          })}
-        />
+
+      <g>
+        {/**
+         * We have 2 different AxisLeft components. One of them is for wide screens,
+         * the other one for narrow screens.
+         * The former is wrapped inside a group with an yAxisRef. This ref is used
+         * by the calling context to measure the y-axis width. When we are rendering
+         * a collapsed y-axis this width should equal `0`, therefore we still
+         * mount this group but without any content.
+         */}
+        <g ref={yAxisRef}>
+          {!isYAxisCollapsed && (
+            <AxisLeft
+              scale={yScale}
+              tickValues={yTickValues}
+              numTicks={yTickValues?.length || numGridLines}
+              hideTicks
+              hideAxisLine
+              stroke={colors.silver}
+              tickFormat={
+                formatYTickValue
+                  ? (formatYTickValue as AnyTickFormatter)
+                  : isPercentage
+                  ? (formatYAxisPercentage as AnyTickFormatter)
+                  : (formatYAxis as AnyTickFormatter)
+              }
+              tickLabelProps={() => ({
+                fill: colors.data.axisLabels,
+                fontSize: 12,
+                textAnchor: 'end',
+                verticalAnchor: 'middle',
+              })}
+            />
+          )}
+        </g>
+
+        {/**
+         * When the numGridLines is set to 0 we don't want to display the top
+         * value. Otherwise the top value would kind of be floating around,
+         * without the presence of a grid line.
+         * This means we can skip rendering the axis component because
+         * that's all it does as a "collapsed" axis.
+         */}
+        {isYAxisCollapsed && numGridLines !== 0 && (
+          <AxisLeft
+            scale={yScale}
+            tickValues={[yScale.domain()[1]]}
+            numTicks={numGridLines}
+            hideTicks
+            hideAxisLine
+            stroke={colors.silver}
+            tickFormat={
+              formatYTickValue
+                ? (formatYTickValue as AnyTickFormatter)
+                : isPercentage
+                ? (formatYAxisPercentage as AnyTickFormatter)
+                : (formatYAxis as AnyTickFormatter)
+            }
+            tickLabelProps={() => ({
+              fill: colors.data.axisLabels,
+              fontSize: 12,
+              textAnchor: 'start',
+              // position the label above the chart
+              dx: 10,
+              dy: -5,
+            })}
+          />
+        )}
       </g>
     </g>
   );

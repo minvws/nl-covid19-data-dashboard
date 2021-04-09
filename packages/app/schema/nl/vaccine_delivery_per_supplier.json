@@ -29,6 +29,15 @@
         "astra_zeneca": {
           "type": "integer"
         },
+        "cure_vac": {
+          "type": "integer"
+        },
+        "janssen": {
+          "type": "integer"
+        },
+        "sanofi": {
+          "type": "integer"
+        },
         "is_estimate": {
           "type": "boolean"
         },

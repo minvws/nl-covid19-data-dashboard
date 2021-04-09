@@ -9,7 +9,7 @@ import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { colors } from '~/style/theme';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -125,7 +125,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={text.section_deceased_rivm.line_chart_covid_daily_title}
             description={
@@ -164,7 +164,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </MunicipalityLayout>
     </Layout>
