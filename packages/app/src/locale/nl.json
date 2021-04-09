@@ -2145,7 +2145,7 @@
       "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
       "tab_first": {
         "title": "Berekend aantal",
-        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie) \n\n**Door de prikpauze met AstraZeneca voor mensen jonger dan 60 jaar is onzeker hoeveel prikken met dit vaccin worden gezet. Daarom is vandaag in de berekening geen AstraZeneca meegeteld.**"
+        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie) \n\n**Door de prikpauze met AstraZeneca voor mensen jonger dan 60 jaar is onzeker hoeveel prikken met dit vaccin worden gezet. Daarom is per 7 april in de berekening geen AstraZeneca meegeteld.**"
       },
       "tab_second": {
         "title": "Gemeld aantal",

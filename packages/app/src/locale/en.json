@@ -2145,7 +2145,7 @@
       "reported_until": "Reported number till {{reportedDate}}",
       "tab_first": {
         "title": "Calculated number",
-        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)\n\n** Due to the pause from vaccinating with AstraZeneca for people younger than 60 years, it is uncertain how many injections will be given with this vaccine. Therefore, as of April 7, AstraZeneca is not included in the calculation. **"
       },
       "tab_second": {
         "title": "Reported number",
