@@ -1,10 +1,13 @@
-import { binaryChoice } from '../../objects/binary-choice';
-
 export default {
   name: 'downscalePage',
   type: 'document',
   title: 'Afschaling maatregelen',
-  fieldsets: [{ title: 'Afschalingsuitleg', name: 'downscaleExplanation' }],
+  fieldsets: [
+    {
+      title: 'Begeleidende teksten bij wel/niet mogelijkheid tot afschalen',
+      name: 'downscaleExplanation',
+    },
+  ],
   fields: [
     {
       name: 'page',
@@ -19,9 +22,15 @@ export default {
     },
     {
       fieldset: 'downscaleExplanation',
-      ...binaryChoice,
-      name: 'downscalePossible',
-      title: 'Uitleg wel/niet mogelijkheid tot afschalen',
+      type: 'localeBlock',
+      title: 'Uitleg voor wanneer afschaling mogelijk is',
+      name: 'downscalingPossible',
+    },
+    {
+      fieldset: 'downscaleExplanation',
+      type: 'localeBlock',
+      title: 'Uitleg voor wanneer afschaling niet mogelijk is',
+      name: 'downscalingNotPossible',
     },
     {
       name: 'measures',

@@ -164,15 +164,6 @@ export type DownscalingPage = {
   downscaling: TitleDescriptionBlock;
   page: TitleDescriptionBlock;
   measures: TitleDescriptionBlock;
-  downscalePossible: BinaryChoice;
-};
-
-export type BinaryOption = {
-  description: Block;
-  label: string;
-};
-
-export type BinaryChoice = {
-  optionTrue: BinaryOption;
-  optionFalse: BinaryOption;
+  downscalingPossible: Block[];
+  downscalingNotPossible: Block[];
 };

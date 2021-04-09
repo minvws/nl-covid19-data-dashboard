@@ -34,7 +34,6 @@ import localeRichContentBlock from './locale/locale-rich-content-block';
 // so it's easier to scan over the different imports and recognize patterns
 import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
-import { binaryChoice } from './objects/binary-choice';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import faqQuestion from './objects/faq-question';
@@ -91,7 +90,6 @@ export default createSchema({
     collapsible,
     milestone,
     faqQuestion,
-    binaryChoice,
     titleDescriptionBlock,
 
     /* LOCALE HELPERS */
