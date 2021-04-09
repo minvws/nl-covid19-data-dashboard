@@ -30,7 +30,7 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
       highlights[]{
         "title":title.${locale},
         "category": category.${locale},
-        "label":label.nl,
+        "label":label.${locale},
         href,
         "cover": {
           ...cover,
