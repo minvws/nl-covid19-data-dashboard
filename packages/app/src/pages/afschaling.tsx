@@ -37,9 +37,7 @@ export const getStaticProps = createGetStaticProps(
             	...,
               "asset": asset->
             },
-            _type == "reference" => {
-        			...
-            }->{
+            _type == "reference" => @->{
                 collapsible != null => {
                   ...collapsible,
                   "content": [
@@ -67,8 +65,6 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const downscalableOption = isDownscalePossible
     ? content.downscalingPossible
     : content.downscalingNotPossible;
-
-  console.dir(content);
 
   return (
     <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
