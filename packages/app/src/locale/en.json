@@ -688,7 +688,7 @@
     "totaal": "Total",
     "rond": "rond",
     "interactive_legend": {
-      "reset_button_label": ""
+      "reset_button_label": "Reset"
     }
   },
   "seoHead": {
@@ -1876,9 +1876,9 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "In week 12, an estimated 3,100 deaths",
-      "published_text": "Date of publication: Friday 2 April",
-      "message": "In week 12 (22 to 28 March 2021 inclusive), the estimated number of deaths stood at 3,100. This is over 100 lower than expected for this period and nearly 100 higher than in the previous week (3,001). Mortality among long-term care users and people aged 80 years and over was below the expected level for this week; among the rest of the population, the number of deaths was approximately the same as expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021 inclusive, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. The estimated mortality for week 12 is below the expected mortality as well. However, there is no undermortality yet, as the lower number of deaths is still within the expectation interval (the light blue area in the figure). The National Institute for Public Health and the Environment (RIVM) registered 123 COVID-19 deaths in week 12 (as at 30 March).",
+      "title": "No news report on weekly mortality for week 13",
+      "published_text": "Date of publication: Friday 9 April",
+      "message": "There will be no news release on weekly mortality on 9 April 2021 because of Easter. The Easter break leads to a shift in delivery of death records, as commonly occurs around public holidays; therefore, an estimate will not be available for week 13 on 9 April. The next news release with the estimate for week 14 and provisional figures up to and including week 13 will be published on Friday 16 April.",
       "link": {
         "href": "https://www.cbs.nl/en-gb/news/2021/13/in-week-12-an-estimated-3-100-deaths",
         "text": "Read the full news item on the CBS website"
@@ -2389,14 +2389,14 @@
     },
     "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks.",
     "stock_per_supplier_chart": {
-      "title": "Verwachtte voorraad per vaccin type",
-      "description": "Deze grafiek ....",
-      "tooltip_title": "Verwachtte voorraad per vaccin type",
+      "title": "Doses in stock per type of vaccine",
+      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The available stock is ready to use and includes the safety stock. The total stock consists of the available and not yet available stock. Stocks that are not yet available are vaccines that have yet to be checked. After the checks the vaccines are available.",
+      "tooltip_title": "Doses in stock",
       "legend": {
-        "available" : "Beschikbare {{vaccineName}} vaccins in voorraad",
-        "total" : "Totaal aantal {{vaccineName}} vaccins in voorraad"
+        "available": "Available doses in stock of {{vaccineName}} vaccine",
+        "total": "Total number of doses in stock of {{vaccineName}} vaccine"
       },
-      "select_help_text": "Selecteer vaccintype om de voorraad te bekijken"
+      "select_help_text": "Select type of vaccine to see the doses in stock"
     }
   },
   "editorial_detail": {
