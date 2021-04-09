@@ -8,7 +8,7 @@ import { Anchor } from '~/components-styled/anchor';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { Box } from '~/components-styled/base';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ChoroplethTile } from '~/components-styled/choropleth-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
@@ -164,12 +164,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
             metadata={{
               source: text.bronnen.rivm,
             }}
+            timeframeOptions={['all', '5weeks', 'week']}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -198,7 +199,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
@@ -302,7 +303,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
@@ -327,9 +328,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{ isPercentage: true }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
@@ -371,7 +372,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

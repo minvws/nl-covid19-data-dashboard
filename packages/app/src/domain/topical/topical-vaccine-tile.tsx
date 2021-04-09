@@ -58,7 +58,10 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
         {text.sub_title}
       </Text>
 
-      <VaccineAdministrationsOverTimeChart values={data.values} />
+      <VaccineAdministrationsOverTimeChart
+        title={text.title}
+        values={data.values}
+      />
     </Box>
   );
 }

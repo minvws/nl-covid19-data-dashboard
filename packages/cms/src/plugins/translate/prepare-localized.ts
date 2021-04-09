@@ -1,4 +1,4 @@
-import { selectedLanguages$ } from '../../plugins/translate/datastore';
+import { selectedLanguages$ } from './datastore';
 
 let selectedLanguage = 'nl';
 selectedLanguages$.subscribe((selected: any[]) => {

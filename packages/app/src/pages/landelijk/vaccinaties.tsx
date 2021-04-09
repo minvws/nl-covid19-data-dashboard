@@ -261,9 +261,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.grafiek_draagvlak.titel}
             description={text.grafiek_draagvlak.omschrijving}
-            ariaDescription={
-              siteText.accessibility.grafieken.vaccinatie_draagvlak
-            }
             metadata={{
               date: data.vaccine_support.last_value.date_of_insertion_unix,
               source: text.bronnen.rivm,

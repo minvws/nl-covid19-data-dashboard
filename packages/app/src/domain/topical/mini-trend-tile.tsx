@@ -1,19 +1,14 @@
-import css from '@styled-system/css';
-import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
-import { GridRows } from '@visx/grid';
-import { ReactNode } from 'react';
-import styled from 'styled-components';
-import { Box } from '~/components-styled/base';
-import { LineChart } from '~/components-styled/line-chart';
-import { ComponentCallbackInfo } from '~/components-styled/line-chart/components';
-import { NumberProperty } from '~/components-styled/line-chart/logic';
 import { TimestampedValue } from '@corona-dashboard/common';
+import { ReactNode } from 'react';
+import { ArrowIconRight } from '~/components-styled/arrow-icon';
+import { Box } from '~/components-styled/base';
+import { NumberProperty } from '~/components-styled/line-chart/logic';
 import { LinkWithIcon } from '~/components-styled/link-with-icon';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { Heading, Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
-
+import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/useBreakpoints';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
 
 type MiniTrendTileProps<T extends TimestampedValue> = {
   icon: JSX.Element;
@@ -63,116 +58,24 @@ export function MiniTrendTile<T extends TimestampedValue>(
         {formatNumber((value as unknown) as number)}
       </Text>
 
-      <StyledDiv>{text}</StyledDiv>
+      <Box>{text}</Box>
 
-      <LineChart
+      <TimeSeriesChart
         initialWidth={400}
         height={sm ? 180 : 140}
         timeframe="5weeks"
         values={trendData}
-        linesConfig={[{ metricProperty, areaFillOpacity: 0.2, strokeWidth: 3 }]}
-        componentCallback={ComponentCallback}
-        showMarkerLine
-        formatTooltip={(values) => formatNumber(values[0].__value)}
-        padding={{
-          top: 13,
-          left: 0,
-          right: 0,
-        }}
+        displayTooltipValueOnly
+        numGridLines={2}
+        seriesConfig={[
+          {
+            metricProperty,
+            type: 'area',
+            label: title,
+            color: colors.data.primary,
+          },
+        ]}
       />
     </Box>
   );
 }
-
-function ComponentCallback(callbackInfo: ComponentCallbackInfo) {
-  const { siteText } = useIntl();
-
-  const DAY_IN_SECONDS = 24 * 60 * 60;
-  function formatLastDate(date: Date, defaultFormat?: TickFormatter<any>) {
-    const days = Math.floor(
-      (Date.now() / 1000 - date.valueOf() / 1000) / DAY_IN_SECONDS
-    );
-
-    if (days < 1) {
-      return siteText.common.vandaag;
-    }
-
-    if (days < 2) {
-      return siteText.common.gisteren;
-    }
-
-    return defaultFormat ? defaultFormat(date, 0, []) : '';
-  }
-
-  switch (callbackInfo.type) {
-    case 'GridRows': {
-      const domain = callbackInfo.props.scale.domain();
-      const lastItem = domain[domain.length - 1];
-      return (
-        <GridRows
-          {...(callbackInfo.props as any)}
-          tickValues={[0, lastItem / 2, lastItem]}
-        />
-      );
-    }
-    case 'AxisBottom': {
-      const domain = callbackInfo.props.scale.domain();
-      const defaultTickFormat = callbackInfo.props.tickFormat;
-      const tickFormat = (d: Date) => {
-        if (d === domain[0]) {
-          return defaultTickFormat ? defaultTickFormat(d, 0, domain) : '';
-        }
-        return formatLastDate(d, defaultTickFormat);
-      };
-
-      const tickLabelProps = (value: Date, index: number) => {
-        const labelProps = callbackInfo.props.tickLabelProps
-          ? callbackInfo.props.tickLabelProps(value, index)
-          : {};
-        labelProps.textAnchor = value === domain[0] ? 'start' : 'end';
-        labelProps.dx = 0;
-        labelProps.dy = -4;
-        return labelProps;
-      };
-
-      return (
-        <AxisBottom
-          {...(callbackInfo.props as any)}
-          tickLabelProps={tickLabelProps}
-          tickFormat={tickFormat}
-          tickValues={domain}
-        />
-      );
-    }
-    case 'AxisLeft': {
-      const domain = callbackInfo.props.scale.domain();
-      const lastItem = domain[domain.length - 1];
-
-      const tickLabelProps = (value: Date, index: number) => {
-        const labelProps = callbackInfo.props.tickLabelProps
-          ? callbackInfo.props.tickLabelProps(value, index)
-          : {};
-        labelProps.textAnchor = 'start';
-        labelProps.dx = 10;
-        labelProps.dy = -9;
-        return labelProps;
-      };
-
-      return (
-        <AxisLeft
-          {...(callbackInfo.props as any)}
-          tickLabelProps={tickLabelProps}
-          tickValues={[lastItem]}
-        />
-      );
-    }
-  }
-}
-
-const StyledDiv = styled.div(
-  css({
-    p: {
-      marginTop: '0',
-    },
-  })
-);

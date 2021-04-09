@@ -2,6 +2,10 @@
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 import createSchema from 'part:@sanity/base/schema-creator';
+/**
+ * Import the ones using named exports
+ */
+import * as allDocuments from './documents';
 // documents are items that are published/queriable
 // some of these are 'singletons' but that's not enforced by the API
 // import siteSettings from "./documents/siteSettings";
@@ -10,6 +14,7 @@ import editorial from './documents/editorial';
 import behaviorPage from './documents/pages/behavior-page';
 import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
 import deceasedPage from './documents/pages/deceased-page';
+import downscalePage from './documents/pages/downscale-page';
 import escalationLevelPage from './documents/pages/escalation-level-page';
 import hospitalPage from './documents/pages/hospital-page';
 import intensiveCarePage from './documents/pages/intensive-care-page';
@@ -23,24 +28,18 @@ import vaccinationsPage from './documents/pages/vaccinations-page';
 import veelgesteldeVragenGroepen from './documents/pages/veelgestelde-vragen-groepen-page';
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
 import toegankelijkheid from './documents/toegankelijkheid';
-
-/**
- * Import the ones using named exports
- */
-import * as allDocuments from './documents';
-
 import localeBlock from './locale/locale-block';
 import localeRichContentBlock from './locale/locale-rich-content-block';
 // These 2 locale helpers are technically objects too, but we keep them grouped here
 // so it's easier to scan over the different imports and recognize patterns
 import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
-
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
 import milestone from './objects/milestone';
+import titleDescriptionBlock from './objects/title-description-block';
 import lockdown from './restrictions/lockdown';
 import restriction from './restrictions/restriction';
 import restrictionCategory from './restrictions/restriction-category';
@@ -75,6 +74,7 @@ export default createSchema({
     reproductionPage,
     sewerPage,
     vaccinationsPage,
+    downscalePage,
     ...Object.values(allDocuments),
 
     /** RESTRICTIONS */
@@ -90,6 +90,7 @@ export default createSchema({
     collapsible,
     milestone,
     faqQuestion,
+    titleDescriptionBlock,
 
     /* LOCALE HELPERS */
     localeString,
