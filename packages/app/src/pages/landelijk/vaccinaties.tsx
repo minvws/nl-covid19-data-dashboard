@@ -1,6 +1,5 @@
 import { css } from '@styled-system/css';
 import { useState } from 'react';
-import { isDefined } from 'ts-is-present';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
@@ -21,7 +20,7 @@ import {
   MilestonesView,
   MilestoneViewProps,
 } from '~/domain/vaccine/milestones-view';
-import { VaccineDeliveryAreaChart } from '~/domain/vaccine/vaccine-delivery-area-chart';
+import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
@@ -342,42 +341,25 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          {isDefined(data.vaccine_stock) &&
-            isDefined(data.vaccine_delivery_per_supplier) && (
-              <>
-                <ContentHeader
-                  title={text.stock_and_delivery_section.title}
-                  icon={scaledVaccineIcon}
-                  subtitle={text.stock_and_delivery_section.description}
-                  reference={text.stock_and_delivery_section.reference}
-                  metadata={{
-                    datumsText: text.datums,
-                    dateOrRange: data.vaccine_stock.last_value.date_unix,
-                    dateOfInsertionUnix:
-                      data.vaccine_stock.last_value.date_of_insertion_unix,
-                    dataSources: [],
-                  }}
-                />
+          <ContentHeader
+            title={text.stock_and_delivery_section.title}
+            icon={scaledVaccineIcon}
+            subtitle={text.stock_and_delivery_section.description}
+            reference={text.stock_and_delivery_section.reference}
+            metadata={{
+              datumsText: text.datums,
+              dateOrRange: data.vaccine_stock.last_value.date_unix,
+              dateOfInsertionUnix:
+                data.vaccine_stock.last_value.date_of_insertion_unix,
+              dataSources: [],
+            }}
+          />
 
-                <VaccineDeliveryBarChart
-                  data={data.vaccine_delivery_per_supplier}
-                />
+          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-                <VaccineDeliveryAreaChart data={data} />
+          <VaccineDeliveryAndAdministrationsAreaChart data={data} />
 
-                <ChartTile
-                  title={text.stock_per_supplier_chart.title}
-                  description={text.stock_per_supplier_chart.description}
-                  metadata={{
-                    source: text.bronnen.rivm,
-                  }}
-                >
-                  <VaccineStockPerSupplierChart
-                    values={data.vaccine_stock.values}
-                  />
-                </ChartTile>
-              </>
-            )}
+          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
 
           {(text.expected_page_additions.description ||
             additions.length > 0) && (

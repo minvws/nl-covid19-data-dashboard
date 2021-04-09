@@ -1,14 +1,17 @@
 import { NlVaccineStockValue } from '@corona-dashboard/common';
 import { useState } from 'react';
+import { ChartTile } from '~/components-styled/chart-tile';
 import {
   InteractiveLegend,
   SelectOption,
 } from '~/components-styled/interactive-legend';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import {
+  SeriesConfig,
+  TimeSeriesChart,
+} from '~/components-styled/time-series-chart';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { colors } from '~/style/theme';
-
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 interface VaccineStockPerSupplierChartProps {
   values: NlVaccineStockValue[];
 }
@@ -24,19 +27,19 @@ export function VaccineStockPerSupplierChart({
 
   const vaccineSelectOptions: SelectOption[] = [
     {
-      metricProperty: 'bio_n_tech_pfizer' as const,
+      metricProperty: 'bio_n_tech_pfizer',
       color: colors.data.vaccines.bio_n_tech_pfizer,
       label: productNames.pfizer,
       shape: 'circle',
     },
     {
-      metricProperty: 'moderna' as const,
+      metricProperty: 'moderna',
       color: colors.data.vaccines.moderna,
       label: productNames.moderna,
       shape: 'circle',
     },
     {
-      metricProperty: 'astra_zeneca' as const,
+      metricProperty: 'astra_zeneca',
       color: colors.data.vaccines.astra_zeneca,
       label: productNames.astra_zeneca,
       shape: 'circle',
@@ -49,14 +52,14 @@ export function VaccineStockPerSupplierChart({
     vaccineSelectOptions.find((x) => x.metricProperty === selected) ??
     vaccineSelectOptions[0];
 
-  const chartConfig = [
+  const seriesConfig: SeriesConfig<NlVaccineStockValue> = [
     {
       ...selectedVaccine,
       metricProperty: `${selected}_available` as keyof NlVaccineStockValue,
       label: replaceVariablesInText(text.legend.available, {
         vaccineName: selectedVaccine.label,
       }),
-      type: 'line' as const,
+      type: 'line',
     },
     {
       ...selectedVaccine,
@@ -65,12 +68,18 @@ export function VaccineStockPerSupplierChart({
         vaccineName: selectedVaccine.label,
       }),
       color: colors.lightGray,
-      type: 'line' as const,
+      type: 'line',
     },
   ];
 
   return (
-    <>
+    <ChartTile
+      title={text.title}
+      description={text.description}
+      metadata={{
+        source: siteText.vaccinaties.bronnen.rivm,
+      }}
+    >
       <InteractiveLegend
         helpText={text.select_help_text}
         selectOptions={vaccineSelectOptions}
@@ -80,8 +89,8 @@ export function VaccineStockPerSupplierChart({
       <TimeSeriesChart
         tooltipTitle={text.tooltip_title}
         values={values}
-        seriesConfig={chartConfig}
+        seriesConfig={seriesConfig}
       />
-    </>
+    </ChartTile>
   );
 }
