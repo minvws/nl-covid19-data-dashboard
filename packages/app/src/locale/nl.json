@@ -1876,9 +1876,9 @@
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "cbs_message": {
-      "title": "In week 12 naar schatting 3 100 mensen overleden",
-      "published_text": "Publicatiedatum: vrijdag 2 april",
-      "message": "In week 12 (22 tot en met 28 maart 2021) overleden naar schatting 3100 mensen. Dat zijn ruim 100 sterfgevallen minder dan verwacht voor deze periode en bijna 100 sterfgevallen meer dan in de week ervoor (3001). De sterfte bij Wlz-zorggebruikers en 80-plussers lag onder het voor deze week verwachte niveau, in de rest van de bevolking overleden ongeveer evenveel mensen als verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Van week 39 van 2020 tot en met week 6 van 2021 was de wekelijkse sterfte hoger dan verwacht. In week 7 was de sterfte ongeveer gelijk aan de verwachte sterfte voor deze periode en in de weken erna lag de sterfte eronder. De schatting van de sterfte in week 12 is ook lager dan de verwachte sterfte voor deze periode. Er is echter nog geen sprake geweest van ondersterfte, omdat de lagere sterfte nog wel binnen het verwachtingsinterval ligt (het lichtblauwe vlak in de figuur). Het RIVM registreerde 123 overleden COVID-19-patiënten in week 12 (stand 30 maart).",
+      "title": "Geen wekelijks nieuwsbericht over sterfte in week 13",
+      "published_text": "Publicatiedatum: vrijdag 9 april",
+      "message": "Vanwege Pasen verschijnt deze week geen nieuwsbericht over de wekelijkse sterfte. Vanwege vertraging in de aanlevering van de overlijdensberichten, wat gebruikelijk is rondom de feestdagen, is het dan niet mogelijk om een schatting van de sterfte in week 13 te geven. Het eerstvolgende nieuwsbericht, met de schatting van week 14 en de voorlopige cijfers tot en met week 13, zal op vrijdag 16 april gepubliceerd worden.",
       "link": {
         "href": "https://www.cbs.nl/nl-nl/nieuws/2021/13/in-week-12-naar-schatting-3100-mensen-overleden",
         "text": "Lees het volledige nieuwsbericht op de website van het CBS"
@@ -2389,14 +2389,14 @@
     },
     "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt.",
     "stock_per_supplier_chart": {
-      "title": "Verwachtte voorraad per vaccin type",
-      "description": "Deze grafiek ....",
-      "tooltip_title": "Verwachtte voorraad per vaccin type",
+      "title": "Voorraad per type vaccin",
+      "description": "Deze grafiek laat zien hoeveel vaccins het RIVM de afgelopen tijd op voorraad had per type vaccin. De beschikbare voorraad is klaar voor gebruik en bevat ook de veiligheidsvoorraad. De totale voorraad bestaat uit de beschikbare en de nog niet beschikbare voorraad. Nog niet beschikbare voorraad zijn vaccins die nog gecontroleerd moeten worden. Na de controle komen ze in de beschikbare voorraad.",
+      "tooltip_title": "Voorraad",
       "legend": {
-        "available" : "Beschikbare {{vaccineName}} vaccins in voorraad",
-        "total" : "Totaal aantal {{vaccineName}} vaccins in voorraad"
+        "available": "Beschikbare voorraad {{vaccineName}}",
+        "total": "Totale voorraad {{vaccineName}}"
       },
-      "select_help_text": "Selecteer vaccintype om de voorraad te bekijken"
+      "select_help_text": "Selecteer type vaccin om de voorraad te bekijken"
     }
   },
   "editorial_detail": {
