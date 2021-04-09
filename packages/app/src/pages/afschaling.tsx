@@ -29,9 +29,7 @@ export const getStaticProps = createGetStaticProps(
       ...,
       "measures": {
         ...measures,
-        "description": {
-          "_type": measures.description._type,
-          "${locale}": [
+        "description": [
             ...measures.description.${locale}[]
             {
             ...,
@@ -52,7 +50,7 @@ export const getStaticProps = createGetStaticProps(
               }
             }
           ]
-        },
+        ,
       },
     }`
   ),
@@ -69,6 +67,8 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const downscalableOption = isDownscalePossible
     ? content.downscalingPossible
     : content.downscalingNotPossible;
+
+  console.dir(content);
 
   return (
     <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
