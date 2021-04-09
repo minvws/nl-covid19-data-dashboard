@@ -170,7 +170,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'area',
                     metricProperty: 'average',
-                    label: siteText.waarde_annotaties.riool_normalized,
+                    label: text.linechart_particle_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
