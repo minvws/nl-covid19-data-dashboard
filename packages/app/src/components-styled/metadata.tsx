@@ -13,6 +13,7 @@ export interface MetadataProps {
   };
   obtained?: number;
   isTileFooter?: boolean;
+  datumsText?: string;
 }
 
 export function Metadata({
@@ -20,6 +21,7 @@ export function Metadata({
   source,
   obtained,
   isTileFooter,
+  datumsText,
 }: MetadataProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -49,15 +51,27 @@ export function Metadata({
       {isTileFooter && (
         <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
           <Text my={0} color="annotation" fontSize={1}>
-            {dateString}
-            {obtained &&
-              ` ${replaceVariablesInText(siteText.common.metadata.obtained, {
-                date: formatDateFromSeconds(obtained, 'weekday-medium'),
-              })}`}
-            {dateString && source ? ' · ' : null}
-            {source
-              ? `${siteText.common.metadata.source}: ${source.text}`
-              : null}
+            {datumsText && Array.isArray(date) ? (
+              replaceVariablesInText(datumsText, {
+                weekStart: formatDateFromSeconds(date[0], 'weekday-medium'),
+                weekEnd: formatDateFromSeconds(date[1], 'weekday-medium'),
+              })
+            ) : (
+              <>
+                {dateString}
+                {obtained &&
+                  ` ${replaceVariablesInText(
+                    siteText.common.metadata.obtained,
+                    {
+                      date: formatDateFromSeconds(obtained, 'weekday-medium'),
+                    }
+                  )}`}
+                {dateString && source ? ' · ' : null}
+                {source
+                  ? `${siteText.common.metadata.source}: ${source.text}`
+                  : null}
+              </>
+            )}
           </Text>
         </Box>
       )}
