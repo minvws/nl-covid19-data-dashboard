@@ -237,7 +237,8 @@ export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
      */
     function formatDateSpan(
       startDateDefinition: DateDefinition,
-      endDateDefinition: DateDefinition
+      endDateDefinition: DateDefinition,
+      format?: formatStyle
     ) {
       const startDate = parseDateDefinition(startDateDefinition);
       const endDate = parseDateDefinition(endDateDefinition);
@@ -246,8 +247,8 @@ export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
 
       const startDateText = isSameMonth
         ? `${startDate.getDate()}`
-        : formatDate(startDate);
-      const endDateText = formatDate(endDate);
+        : formatDate(startDate, format);
+      const endDateText = formatDate(endDate, format);
 
       return [startDateText, endDateText] as [start: string, end: string];
     }
