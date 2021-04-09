@@ -1,4 +1,4 @@
-import { ARTICLE_FIELDS } from './fields/article-fields';
+import { ARTICLE_FIELDS } from '../fields/article-fields';
 
 export default {
   title: 'Artikel',
