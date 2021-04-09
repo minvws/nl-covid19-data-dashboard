@@ -171,8 +171,7 @@ export interface National {
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
-  vaccine_delivery_per_supplier?: NlVaccineDeliveryPerSupplier;
-  vaccine_delivery_estimate_time_span?: NlVaccineDeliveryEstimateTimeSpan;
+  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
   vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
@@ -185,7 +184,7 @@ export interface National {
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
-  vaccine_stock?: NlVaccineStock;
+  vaccine_stock: NlVaccineStock;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -236,22 +235,17 @@ export interface NationalDoctorValue {
   date_of_insertion_unix: number;
 }
 export interface NlDownscaling {
-  values: NlDownscalingValue[];
-  last_value: NlDownscalingValue;
-}
-export interface NlDownscalingValue {
   is_downscaling_possible: boolean;
   current_level_of_measures: number;
   reproduction_is_below_threshold: boolean;
   reproduction_threshold_value: number;
   reproduction_threshold_day_span: number;
-  intensive_care_is_below_threshold: boolean;
+  intensive_care_nice_is_below_threshold: boolean;
   intensive_care_nice_threshold_value: number;
   intensive_care_nice_threshold_day_span: number;
   hospital_nice_is_below_threshold: boolean;
   hospital_nice_threshold_value: number;
   hospital_nice_threshold_day_span: number;
-  date_unix?: number;
   date_of_insertion_unix: number;
 }
 export interface NlGNumber {
@@ -587,20 +581,11 @@ export interface NlVaccineDeliveryPerSupplierValue {
   bio_n_tech_pfizer: number;
   moderna: number;
   astra_zeneca: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
   is_estimate: boolean;
   week_number: number;
-  date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_report_unix: number;
-}
-export interface NlVaccineDeliveryEstimateTimeSpan {
-  values: NlVaccineDeliveryEstimateTimeSpanValue[];
-  last_value: NlVaccineDeliveryEstimateTimeSpanValue;
-}
-export interface NlVaccineDeliveryEstimateTimeSpanValue {
-  doses: number;
-  time_span_weeks: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -745,10 +730,17 @@ export interface NlVaccineStock {
   last_value: NlVaccineStockValue;
 }
 export interface NlVaccineStockValue {
-  total: number;
-  bio_n_tech_pfizer: number;
-  moderna: number;
-  astra_zeneca: number;
+  total_available: number | null;
+  total_not_available: number | null;
+  bio_n_tech_pfizer_available: number | null;
+  bio_n_tech_pfizer_not_available: number | null;
+  bio_n_tech_pfizer_total: number | null;
+  moderna_available: number | null;
+  moderna_not_available: number | null;
+  moderna_total: number | null;
+  astra_zeneca_available: number | null;
+  astra_zeneca_not_available: number | null;
+  astra_zeneca_total: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
 }

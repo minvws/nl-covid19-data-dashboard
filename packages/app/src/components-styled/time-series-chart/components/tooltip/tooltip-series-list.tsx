@@ -29,6 +29,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     config,
     options,
     markNearestPointOnly,
+    displayTooltipValueOnly,
     timespanAnnotation,
   } = tooltipData;
 
@@ -88,37 +89,41 @@ export function TooltipSeriesList<T extends TimestampedValue>({
           switch (x.type) {
             case 'stacked-area':
               return (
-                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
-                  <TooltipValueContainer>
-                    <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
-                    <b>
-                      {getValueStringForKey(
-                        value,
-                        x.metricProperty,
-                        options.isPercentage
-                      )}
-                    </b>
-                  </TooltipValueContainer>
+                <TooltipListItem
+                  key={index}
+                  icon={<SeriesIcon config={x} />}
+                  label={x.shortLabel ?? x.label}
+                  displayTooltipValueOnly={displayTooltipValueOnly}
+                >
+                  <b>
+                    {getValueStringForKey(
+                      value,
+                      x.metricProperty,
+                      options.isPercentage
+                    )}
+                  </b>
                 </TooltipListItem>
               );
 
             case 'range':
               return (
-                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
-                  <TooltipValueContainer>
-                    <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
-                    <b css={css({ whiteSpace: 'nowrap' })}>
-                      {`${getValueStringForKey(
-                        value,
-                        x.metricPropertyLow,
-                        options.isPercentage
-                      )} - ${getValueStringForKey(
-                        value,
-                        x.metricPropertyHigh,
-                        options.isPercentage
-                      )}`}
-                    </b>
-                  </TooltipValueContainer>
+                <TooltipListItem
+                  key={index}
+                  icon={<SeriesIcon config={x} />}
+                  label={x.shortLabel ?? x.label}
+                  displayTooltipValueOnly={displayTooltipValueOnly}
+                >
+                  <b css={css({ whiteSpace: 'nowrap' })}>
+                    {`${getValueStringForKey(
+                      value,
+                      x.metricPropertyLow,
+                      options.isPercentage
+                    )} - ${getValueStringForKey(
+                      value,
+                      x.metricPropertyHigh,
+                      options.isPercentage
+                    )}`}
+                  </b>
                 </TooltipListItem>
               );
 
@@ -126,33 +131,36 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             case 'area':
             case 'bar':
               return (
-                <TooltipListItem key={index} icon={<SeriesIcon config={x} />}>
-                  <TooltipValueContainer>
-                    <InlineText mr={2}>{x.shortLabel || x.label}:</InlineText>
-                    <b>
-                      {getValueStringForKey(
-                        value,
-                        x.metricProperty,
-                        options.isPercentage
-                      )}
-                    </b>
-                  </TooltipValueContainer>
+                <TooltipListItem
+                  key={index}
+                  icon={<SeriesIcon config={x} />}
+                  label={x.shortLabel ?? x.label}
+                  displayTooltipValueOnly={displayTooltipValueOnly}
+                >
+                  <b>
+                    {getValueStringForKey(
+                      value,
+                      x.metricProperty,
+                      options.isPercentage
+                    )}
+                  </b>
                 </TooltipListItem>
               );
 
             case 'invisible':
               return (
-                <TooltipListItem key={index}>
-                  <TooltipValueContainer>
-                    <InlineText mr={2}>{x.label}:</InlineText>
-                    <b>
-                      {getValueStringForKey(
-                        value,
-                        x.metricProperty,
-                        x.isPercentage
-                      )}
-                    </b>
-                  </TooltipValueContainer>
+                <TooltipListItem
+                  key={index}
+                  label={x.label}
+                  displayTooltipValueOnly={displayTooltipValueOnly}
+                >
+                  <b>
+                    {getValueStringForKey(
+                      value,
+                      x.metricProperty,
+                      x.isPercentage
+                    )}
+                  </b>
                 </TooltipListItem>
               );
           }
@@ -174,10 +182,17 @@ export const TooltipList = styled.ol<{ hasTwoColumns?: boolean }>(
 
 interface TooltipListItemProps {
   children: ReactNode;
+  label?: string;
   icon?: ReactNode;
+  displayTooltipValueOnly?: boolean;
 }
 
-function TooltipListItem({ children, icon }: TooltipListItemProps) {
+function TooltipListItem({
+  children,
+  icon,
+  label,
+  displayTooltipValueOnly,
+}: TooltipListItemProps) {
   return (
     <Box
       as="li"
@@ -186,15 +201,32 @@ function TooltipListItem({ children, icon }: TooltipListItemProps) {
       display="flex"
       alignItems="stretch"
     >
-      {icon ? (
-        <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
-          {icon}
+      {displayTooltipValueOnly ? (
+        <Box flexGrow={1}>
+          <TooltipValueContainer>
+            <VisuallyHidden>
+              <InlineText mr={2}>{label}:</InlineText>
+            </VisuallyHidden>
+            {children}
+          </TooltipValueContainer>
         </Box>
       ) : (
-        <Box width="1em" mt={1} />
+        <>
+          {icon ? (
+            <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
+              {icon}
+            </Box>
+          ) : (
+            <Box width="1em" mt={1} />
+          )}
+          <Box flexGrow={1}>
+            <TooltipValueContainer>
+              <InlineText mr={2}>{label}:</InlineText>
+              {children}
+            </TooltipValueContainer>
+          </Box>
+        </>
       )}
-
-      <Box flexGrow={1}>{children}</Box>
     </Box>
   );
 }

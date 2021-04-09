@@ -37,6 +37,11 @@ export type TooltipData<T extends TimestampedValue> = {
    * Configuration to display the nearest point only in the tooltip
    */
   markNearestPointOnly?: boolean;
+
+  /**
+   * Configuration to display only a value in the tooltip
+   */
+  displayTooltipValueOnly?: boolean;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (
