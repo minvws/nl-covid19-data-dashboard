@@ -229,7 +229,7 @@
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
-    "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode gemeld is dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
@@ -452,7 +452,7 @@
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling positief geteste bewoners in Nederland",
-    "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "metadata": {
       "title": "Positief geteste bewoners verpleeghuizen | Coronadashboard | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal bewoners van verpleeghuizen die positief getest zijn op het coronavirus."
@@ -788,9 +788,9 @@
     "kpi_titel": "Aantal positief geteste mensen",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
-    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
-    "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze veiligheidsregio gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze veiligheidsregio gemeld is dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
@@ -923,9 +923,9 @@
     "kpi_titel": "Aantal positief geteste mensen",
     "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.",
     "map_titel": "Verdeling positief geteste mensen in veiligheidsregio van {{municipality}}",
-    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
-    "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze gemeente gemeld is dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "linechart_toelichting": "Deze grafiek laat zien van hoeveel mensen in de geselecteerde periode in deze gemeente gemeld is dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
@@ -1239,7 +1239,7 @@
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "metadata": {
       "title": "Positief geteste bewoners verpleeghuizen in {{safetyRegionName}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht aantal bewoners van verpleeghuizen in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
@@ -1524,7 +1524,7 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg – positief geteste bewoners",
     "barscale_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
-    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg waarvan dagelijks is gemeld dat ze positief getest zijn op COVID-19.",
+    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg waarvan dagelijks is gemeld dat ze positief getest zijn op het coronavirus.",
     "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom sinds 1 juli  bij of een positief geteste persoon in een instelling voor gehandicaptenzorg woont. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
@@ -1533,7 +1533,7 @@
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling positief geteste bewoners in Nederland",
-    "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel bewoners gisteren is gemeld dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "metadata": {
       "title": "Positief geteste bewoners gehandicaptenzorglocaties | Coronadashboard | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal bewoners van gehandicaptenzorglocaties die positief getest zijn op het coronavirus."
@@ -1648,7 +1648,7 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "titel": "Gehandicaptenzorg - positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
-    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg in deze regio waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
+    "extra_uitleg": "Het aantal bewoners van een instelling voor gehandicaptenzorg in deze regio waarvan gisteren is gemeld dat ze op het coronavirus.",
     "pagina_toelichting": "Bewoners van een instelling voor gehandicaptenzorg zijn vaak extra kwetsbaar bij een besmetting met het coronavirus. GGD’en houden daarom bij waneer een bewoner van een instelling positief test op COVID-19. Zo kunnen maatregelen worden genomen wanneer het aantal besmettingen in instellingen toeneemt.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
@@ -1658,7 +1658,7 @@
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling positief geteste mensen in Nederland",
-    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op COVID-19, per 100.000 inwoners.",
+    "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "metadata": {
       "title": "Positief geteste bewoners gehandicaptenzorglocaties in {{safetyRegionName}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht aantal bewoners van gehandicaptenzorglocaties in veiligheidsregio {{safetyRegionName}} waarbij COVID-19-besmetting is vastgesteld."
@@ -1705,7 +1705,7 @@
       "kpi_daily_per_100k_description": "Dit getal laat zien van hoeveel thuiswonende personen van 70 jaar of ouder gisteren is gemeld dat ze positief zijn getest op COVID-19, per 100.000 thuiswonende 70-plussers. Deze berekening maakt het mogelijk om regio’s beter met elkaar te vergelijken.",
       "line_chart_daily_title": "Nieuwe besmettingen onder 70-plussers door de tijd heen",
       "choropleth_daily_title": "Verdeling nieuwe besmettingen thuiswonende 70-plussers (per veiligheidsregio)",
-      "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 jaar of ouder per 100.000 thuiswonende personen van 70 jaar of ouder, waarvan gisteren is gemeld dat ze positief getest zijn op COVID-19.",
+      "choropleth_daily_description": "Deze kaart laat de verdeling zien van het aantal nieuwe besmettingen per dag onder thuiswonende personen van 70 jaar of ouder per 100.000 thuiswonende personen van 70 jaar of ouder, waarvan gisteren is gemeld dat ze positief getest zijn op het coronavirus.",
       "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
@@ -1869,9 +1869,9 @@
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
     "cbs_message": {
-      "title": "In week 12 naar schatting 3 100 mensen overleden",
-      "published_text": "Publicatiedatum: vrijdag 2 april",
-      "message": "In week 12 (22 tot en met 28 maart 2021) overleden naar schatting 3100 mensen. Dat zijn ruim 100 sterfgevallen minder dan verwacht voor deze periode en bijna 100 sterfgevallen meer dan in de week ervoor (3001). De sterfte bij Wlz-zorggebruikers en 80-plussers lag onder het voor deze week verwachte niveau, in de rest van de bevolking overleden ongeveer evenveel mensen als verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Van week 39 van 2020 tot en met week 6 van 2021 was de wekelijkse sterfte hoger dan verwacht. In week 7 was de sterfte ongeveer gelijk aan de verwachte sterfte voor deze periode en in de weken erna lag de sterfte eronder. De schatting van de sterfte in week 12 is ook lager dan de verwachte sterfte voor deze periode. Er is echter nog geen sprake geweest van ondersterfte, omdat de lagere sterfte nog wel binnen het verwachtingsinterval ligt (het lichtblauwe vlak in de figuur). Het RIVM registreerde 123 overleden COVID-19-patiënten in week 12 (stand 30 maart).",
+      "title": "Geen wekelijks nieuwsbericht over sterfte in week 13",
+      "published_text": "Publicatiedatum: vrijdag 9 april",
+      "message": "Vanwege Pasen verschijnt er deze week geen nieuwsbericht over de wekelijkse sterfte. Vanwege vertraging in de aanlevering van de overlijdensberichten, wat gebruikelijk is rondom de feestdagen, is het dan niet mogelijk om een schatting van de sterfte in week 13 te geven. Het eerstvolgende nieuwsbericht, met de schatting van week 14 en de voorlopige cijfers tot en met week 13, zal op vrijdag 16 april gepubliceerd worden.",
       "link": {
         "href": "https://www.cbs.nl/nl-nl/nieuws/2021/13/in-week-12-naar-schatting-3100-mensen-overleden",
         "text": "Lees het volledige nieuwsbericht op de website van het CBS"
@@ -2027,10 +2027,10 @@
       "reproductiegetal_verloop": "Deze grafiek toont het reproductiegetal door de tijd heen.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
       "intensive_care_opnames": "Deze grafiek toon de intensive care opnames door de tijd heen.",
-      "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
+      "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
       "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties door de tijd heen.",
-      "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op COVID-19.",
-      "gehandicaptenzorg_positief_getest": "Deze grafiek toont het aantal bewoners van instellingen voor gehandicaptenzorg waarvan gemeld is dat ze positief getest zijn op COVID-19.",
+      "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
+      "gehandicaptenzorg_positief_getest": "Deze grafiek toont het aantal bewoners van instellingen voor gehandicaptenzorg waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
       "gehandicaptenzorg_besmette_locaties": "Deze grafiek toont het totaal aantal besmette gehandicaptenzorglocaties door de tijd heen. ",
       "gehandicaptenzorg_overleden": "Deze grafiek toont het aantal overleden bewoners van instellingen voor gehandicaptenzorg door de tijd heen.",
       "thuiswonende_ouderen_besmettingen": "Deze grafiek toont het aantal besmettingen onder thuiswonende ouderen door de tijd heen.",
