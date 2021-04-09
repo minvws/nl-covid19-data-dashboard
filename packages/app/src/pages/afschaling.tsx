@@ -17,10 +17,6 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { lastGenerated } = props;
 
-  const reproduction_is_below_threshold = false;
-  const intensive_care_is_below_threshold = true;
-  const hospital_nice_is_below_threshold = false;
-
   return (
     <Layout {...siteText.over_metadata} lastGenerated={lastGenerated}>
       <Head>
@@ -51,10 +47,6 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
               />
             </Box>
           )}
-
-          <Box py={5}>
-            <Box>test</Box>
-          </Box>
         </MaxWidth>
       </div>
     </Layout>

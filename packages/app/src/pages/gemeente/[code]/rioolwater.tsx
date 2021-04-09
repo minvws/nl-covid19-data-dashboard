@@ -47,7 +47,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.gemeente_rioolwater_metingen;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const barChartData = useSewerWaterBarChartData(data);
 
