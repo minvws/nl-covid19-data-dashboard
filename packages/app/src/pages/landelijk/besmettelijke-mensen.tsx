@@ -1,6 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -76,7 +76,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
@@ -106,7 +106,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

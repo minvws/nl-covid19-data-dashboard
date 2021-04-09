@@ -3,10 +3,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components-styled/article-strip';
 import { ArticleSummary } from '~/components-styled/article-teaser';
 import { BarChart } from '~/components-styled/bar-chart/bar-chart';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
@@ -50,7 +47,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.gemeente_rioolwater_metingen;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const barChartData = useSewerWaterBarChartData(data);
 
@@ -159,7 +155,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
@@ -181,14 +177,13 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           {barChartData && (
             <ChartTile
               title={replaceVariablesInText(text.bar_chart_title, {
                 municipality: municipalityName,
               })}
-              ariaDescription={graphDescriptions.rioolwater_meetwaarde}
               metadata={{
                 date: [
                   sewerAverages.last_value.date_start_unix,

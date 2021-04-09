@@ -39,6 +39,12 @@ import { useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
 
 /**
+ * A chart with a width smaller than the threshold will be rendered with a
+ * "collapsed" Y-axis. The collapsed axis will only display the top value.
+ */
+const COLLAPSE_Y_AXIS_THRESHOLD = 430;
+
+/**
  * This chart started as a fork from MultiLineChart. It attempts to create a
  * more generic abstraction that can replace LineChart, MultiLineChart,
  * AreaChart and later possibly something like the vaccine delivery chart.
@@ -168,7 +174,7 @@ export function TimeSeriesChart<
   const { padding, bounds } = useDimensions(
     width,
     height,
-    paddingLeft ?? yAxisWidth + 10 // 10px seems to be enough padding
+    paddingLeft ?? yAxisWidth
   );
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
@@ -294,6 +300,7 @@ export function TimeSeriesChart<
             yScale={yScale}
             isPercentage={isPercentage}
             yAxisRef={yAxisRef}
+            isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
           />
 
           {/**

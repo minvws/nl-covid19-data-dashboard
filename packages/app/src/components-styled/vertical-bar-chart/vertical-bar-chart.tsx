@@ -98,7 +98,7 @@ export function VerticalBarChart<
   const { padding, bounds } = useDimensions(
     width,
     height,
-    paddingLeft ?? yAxisWidth + 10
+    paddingLeft ?? yAxisWidth
   );
 
   const values = useValuesInTimeframe(allValues, timeframe);
