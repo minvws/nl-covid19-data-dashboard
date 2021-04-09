@@ -2532,17 +2532,7 @@
     },
     "downscaling": {
       "title": "Landelijke maatregelen",
-      "sub_title": "Kan het maatregelenniveau verlaagd worden?",
-      "options": {
-        "possible": {
-          "bold_text": "In principe ja.",
-          "description": "Gezien dat het IC opnames, ziekenhuisopnames en reproductiegetal in de afgelopen 14 dagen onder de grenswaarde waren, het kan worden besloten of er minder maatregelen in het hele land gaan gelden. Deze beslissing neemt de OMT niet alleen op basis van de cijfers."
-        },
-        "no": {
-          "bold_text": "Nee.",
-          "description": "Op basis van de overschrijding van de grenswaarde voor Ziekenhuisopnames en Reproductiegetal in de afgelopen 14 dagen, kan nog niet gekeken worden naar versoeplingen."
-        }
-      }
+      "sub_title": "Kan het maatregelenniveau verlaagd worden?"
     }
   },
   "common.tooltip.positive_tested_value": "",
