@@ -2039,8 +2039,8 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100,000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be available and how many doses are to be administered in the coming weeks.",
-      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
+      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks.",
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
     "link_source": "Download date source for \"{{subject}}\" at {{source}}",
@@ -2126,7 +2126,7 @@
     },
     "grafiek": {
       "titel": "Delivered and available doses & doses administered in total",
-      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
