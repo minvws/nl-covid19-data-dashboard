@@ -2309,8 +2309,8 @@
           "janssen": "Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Expected delivered and available",
-        "estimated": "Expected deliveries",
+        "delivered": "Delivered and available",
+        "estimated": "Expected to be delivered and available",
         "left_divider_label": "Calculated number of",
         "right_divider_label": "Expected number",
         "legend": {

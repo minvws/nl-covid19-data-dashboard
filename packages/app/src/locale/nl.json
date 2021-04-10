@@ -2309,8 +2309,8 @@
           "janssen": "Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Verwacht geleverd en beschikbaar",
-        "estimated": "Verwachte leveringen",
+        "delivered": "Geleverd en beschikbaar",
+        "estimated": "Verwacht geleverd en beschikbaar",
         "left_divider_label": "Berekend aantal",
         "right_divider_label": "Verwacht aantal",
         "legend": {
