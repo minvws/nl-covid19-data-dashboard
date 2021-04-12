@@ -2047,8 +2047,8 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100,000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. The graph only contains the vaccines for the European Netherlands and takes into account 5% waste.",
-      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. In addition, the chart takes into account 5% waste from that point on.",
+      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. The graph only contains the vaccines for the European Netherlands. The calculation is based on a waste of 1%. This was 5%, but an analysis by the RIVM has shown that this is only 1%. As of April 12, the waste has been adjusted retroactively.",
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. The calculation is based on a waste of 1%. This was 5%, but an analysis by the RIVM has shown that this is only 1%. As of April 12, the waste has been adjusted retroactively.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
     "link_source": "Download date source for \"{{subject}}\" at {{source}}",
@@ -2134,7 +2134,7 @@
     },
     "grafiek": {
       "titel": "Delivered and checked doses & doses administered in total",
-      "omschrijving": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. In addition, the chart takes into account 5% waste from that point on."
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. The calculation is based on a waste of 1%. This was 5%, but an analysis by the RIVM has shown that this is only 1%. As of April 12, the waste has been adjusted retroactively."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
@@ -2146,7 +2146,7 @@
       "kpi_omschrijving": "Percentage of the population that wishes to be vaccinated against COVID-19",
       "tooltip_gemiddeld": "In total",
       "leeftijd_jaar": "{{ageGroup}} years old",
-      "metadata_tekst": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks."
+      "metadata_tekst": ""
     },
     "gezette_prikken": {
       "title": "Number of doses administered",
@@ -2394,15 +2394,15 @@
       "title": "Doses in stock per type of vaccine",
       "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The available stock can be used for vaccination and includes the safety stock. The total stock consists of the available and not yet available stock. Stocks that are not yet available are vaccines in quality control. After quality control the vaccines are available.",
       "tooltip_title": "Doses in stock",
-      "tooltip_labels": {
-        "available": "Available doses in stock",
-        "total": "Total number of doses in stock"
-      },
       "legend": {
         "available": "Available doses in stock of {{vaccineName}} vaccine",
         "total": "Total number of doses in stock of {{vaccineName}} vaccine"
       },
-      "select_help_text": "Select type of vaccine to see the doses in stock"
+      "select_help_text": "Select type of vaccine to see the doses in stock",
+      "tooltip_labels": {
+        "available": "",
+        "total": ""
+      }
     }
   },
   "editorial_detail": {
@@ -2924,7 +2924,7 @@
   },
   "infected_per_age_group": {
     "title": "Number of positive tests per age group over time",
-    "description": "This graph shows the trend in positive cases for each age group, per 100,000 people in that age group. The graph shows the seven-day rolling average. Please note that the numbers do not correspond to the number of positive people in other places on this page. This is because the data comes from a different data source. Other dates are used in this file. Read more about this in the frequently asked questions section.",
+    "description": "This graph shows the trend in positive cases for each age group, per 100,000 people in that age group. The graph shows the seven-day rolling average. Please note that the numbers do not correspond to the number of positive people in other places on this page. This is because the data comes from a different data source. Other dates are used in this file, namely especially the first day of illness. Read more about this in the section Explanation of the data presented.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
