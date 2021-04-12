@@ -193,6 +193,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
               title: text.legenda_titel,
               thresholds: regionThresholds.sewer.average,
