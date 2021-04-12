@@ -213,7 +213,6 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
                   corona_melder_app.waarschuwingen_over_tijd_grafiek
                     .ariaDescription
                 }
-                paddingLeft={40}
                 seriesConfig={[
                   {
                     type: 'area',
