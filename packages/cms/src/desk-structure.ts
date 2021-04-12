@@ -34,7 +34,6 @@ const hiddenDocTypes = [
   'lokalizeString',
   'lokalizeText',
   'downscalePage',
-  'downscaleFaq',
 ];
 
 export default () =>
