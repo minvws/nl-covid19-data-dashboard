@@ -139,6 +139,9 @@
       "href": "/verantwoording#huisartsen",
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
+    "tooltip_labels": {
+      "covid_klachten": "Patiënten met klachten"
+    },
     "bronnen": {
       "nivel": {
         "download": "https://www.nivel.nl/sites/default/files/covid/Nivel-verdenkingen-COVID-19.json",

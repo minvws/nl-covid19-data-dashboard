@@ -1,19 +1,21 @@
 import Arts from '~/assets/arts.svg';
+import { ChartTile } from '~/components-styled/chart-tile';
 import { ContentHeader } from '~/components-styled/content-header';
 import { KpiTile } from '~/components-styled/kpi-tile';
 import { KpiValue } from '~/components-styled/kpi-value';
 import { TileList } from '~/components-styled/tile-list';
+import { TimeSeriesChart } from '~/components-styled/time-series-chart';
 import { TwoKpiSection } from '~/components-styled/two-kpi-section';
 import { Text } from '~/components-styled/typography';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
-import { getNlData, getLastGeneratedDate } from '~/static-props/get-data';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -26,7 +28,6 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.verdenkingen_huisartsen;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -86,18 +87,26 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={text.linechart_titel}
-            values={data.doctor.values}
-            ariaDescription={graphDescriptions.verdenkingen_huisartsen}
-            linesConfig={[
-              {
-                metricProperty: 'covid_symptoms_per_100k',
-              },
-            ]}
             metadata={{ source: text.bronnen.nivel }}
-          />
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                timeframe={timeframe}
+                values={data.doctor.values}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'covid_symptoms_per_100k',
+                    label: text.tooltip_labels.covid_klachten,
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
+            )}
+          </ChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

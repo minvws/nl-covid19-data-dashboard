@@ -139,6 +139,9 @@
       "href": "/verantwoording#general-practitioners",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
+    "tooltip_labels": {
+      "covid_klachten": "Patients with complaints"
+    },
     "bronnen": {
       "nivel": {
         "download": "https://www.nivel.nl/sites/default/files/covid/Nivel-verdenkingen-COVID-19.json",
