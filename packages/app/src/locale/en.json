@@ -2363,7 +2363,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Deliveries and stock",
-      "description": "How many vaccine doses can be administered depends on how many doses we receive. Vaccine doses are delivered to the Netherlands every week. The majority of these are made available soon after some checks so people can be vaccinated. However, we hold some doses aside so there is enough vaccine to ensure those who have had their first dose are able to get their second dose. This page shows how many doses of vaccine were delivered to the Netherlands and how many doses are in stock.",
+      "description": "How many vaccine doses can be administered depends on how many doses we receive. Vaccine doses are delivered to the Netherlands every week. After quality control the majority of these are available for vaccination. We keep some doses in a safely stock to ensure enough vaccine doses for both appointments the first few days and the second dose. This page shows how many doses of vaccine were delivered to the Netherlands and how many doses are in stock.",
       "reference": {
         "href": "/verantwoording#deliveries-and-vaccine-doses-in-stock",
         "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
