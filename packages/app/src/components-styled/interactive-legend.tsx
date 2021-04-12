@@ -4,6 +4,7 @@ import { isDefined } from 'ts-is-present';
 import { Text } from '~/components-styled/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
+import { Box } from './base';
 
 export interface SelectOption {
   metricProperty: string;
@@ -32,7 +33,7 @@ export function InteractiveLegend({
   const hasSelection = selection.length !== 0;
 
   return (
-    <>
+    <Box mb={2}>
       <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
         {helpText}
       </Text>
@@ -64,7 +65,7 @@ export function InteractiveLegend({
           )}
         </List>
       </Legend>
-    </>
+    </Box>
   );
 }
 
