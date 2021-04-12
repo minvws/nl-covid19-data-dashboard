@@ -2145,7 +2145,8 @@
       "omschrijving": "Deze grafiek toont per leeftijdsgroep en in totaal hoeveel procent van de bevolking zelf een prik tegen corona wil hebben. De cijfers komen uit onderzoek waarin wordt gevraagd of mensen een prik willen krijgen. Het onderzoek wordt elke drie weken herhaald.",
       "kpi_omschrijving": "Percentage van de Nederlandse bevolking dat zelf een prik tegen corona wil hebben",
       "tooltip_gemiddeld": "Totaal",
-      "leeftijd_jaar": "{{ageGroup}} jaar"
+      "leeftijd_jaar": "{{ageGroup}} jaar",
+      "metadata_tekst": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt."
     },
     "gezette_prikken": {
       "title": "Aantal gezette prikken",

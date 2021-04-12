@@ -2145,7 +2145,8 @@
       "omschrijving": "This graph shows the percentage per age group and in total of the population that wishes to be vaccinated against COVID-19. The figures are taken from a survey where people are asked if they wish to be vaccinated. The survey is conducted every three weeks.",
       "kpi_omschrijving": "Percentage of the population that wishes to be vaccinated against COVID-19",
       "tooltip_gemiddeld": "In total",
-      "leeftijd_jaar": "{{ageGroup}} years old"
+      "leeftijd_jaar": "{{ageGroup}} years old",
+      "metadata_tekst": "This survey was carried out between {{weekStart}} and {{weekEnd}}. Is updated every 3 weeks."
     },
     "gezette_prikken": {
       "title": "Number of doses administered",

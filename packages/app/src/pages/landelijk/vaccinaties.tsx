@@ -115,8 +115,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={text.grafiek_draagvlak.titel}
             description={text.grafiek_draagvlak.omschrijving}
             metadata={{
-              date: data.vaccine_support.last_value.date_of_insertion_unix,
-              source: text.bronnen.rivm,
+              datumsText: siteText.vaccinaties.grafiek_draagvlak.metadata_tekst,
+              date: [
+                data.vaccine_support.last_value.date_start_unix,
+                data.vaccine_support.last_value.date_end_unix,
+              ],
             }}
           >
             <section>
