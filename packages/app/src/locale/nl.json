@@ -2047,8 +2047,8 @@
       "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts door de tijd heen.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
-      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. De grafiek bevat alleen de vaccins voor Europees Nederland en houdt rekening met 5% verspilling.",
-      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling.",
+      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. De grafiek bevat alleen de vaccins voor Europees Nederland. In de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast.",
+      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. In de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     },
     "link_source": "Download de databron van \"{{subject}}\" op {{source}}",
@@ -2134,7 +2134,7 @@
     },
     "grafiek": {
       "titel": "Geleverde en gecontroleerde vaccins & gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling."
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. In de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
@@ -2394,15 +2394,15 @@
       "title": "Voorraad per type vaccin",
       "description": "Deze grafiek laat zien hoeveel vaccins het RIVM de afgelopen tijd op voorraad had per type vaccin. De totale voorraad bestaat uit de beschikbare en de nog niet beschikbare voorraad. De beschikbare voorraad is klaar voor gebruik en bestaat deels uit veiligheidsvoorraad. Nog niet beschikbare voorraad zijn vaccins die nog gecontroleerd moeten worden. Na de controle komen ze in de beschikbare voorraad.",
       "tooltip_title": "Voorraad",
-      "tooltip_labels": {
-        "available": "Beschikbare voorraad",
-        "total": "Totale voorraad"
-      },
       "legend": {
         "available": "Beschikbare voorraad {{vaccineName}}",
         "total": "Totale voorraad {{vaccineName}}"
       },
-      "select_help_text": "Selecteer type vaccin om de voorraad te bekijken"
+      "select_help_text": "Selecteer type vaccin om de voorraad te bekijken",
+      "tooltip_labels": {
+        "available": "Beschikbare voorraad",
+        "total": "Totale voorraad"
+      }
     }
   },
   "editorial_detail": {
