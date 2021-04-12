@@ -2,13 +2,13 @@ import Head from 'next/head';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
+import { Heading } from '~/components-styled/typography';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
-
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -73,7 +73,7 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
 
       <Box bg="white" py={{ _: 4, md: 5 }}>
         <ContentBlock spacing={3}>
-          {content.title && <h2>{content.title}</h2>}
+          {content.title && <Heading level={1}>{content.title}</Heading>}
           {content.description && <RichContent blocks={content.description} />}
         </ContentBlock>
       </Box>

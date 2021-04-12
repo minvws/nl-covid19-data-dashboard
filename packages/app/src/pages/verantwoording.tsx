@@ -1,7 +1,11 @@
 import Head from 'next/head';
+import { Box } from '~/components-styled/base';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { MaxWidth } from '~/components-styled/max-width';
+import { Heading } from '~/components-styled/typography';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
@@ -13,9 +17,6 @@ import {
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-import { Box } from '~/components-styled/base';
-import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
 
 interface VerantwoordingData {
   title: string | null;
@@ -84,7 +85,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {content.title && <h2>{content.title}</h2>}
+            {content.title && <Heading level={1}>{content.title}</Heading>}
             {content.description && (
               <RichContent blocks={content.description} />
             )}

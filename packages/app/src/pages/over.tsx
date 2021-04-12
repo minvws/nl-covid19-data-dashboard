@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
-import { useIntl } from '~/intl';
+import { Heading } from '~/components-styled/typography';
 import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
@@ -66,7 +67,7 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
       <div className={styles.container}>
         <MaxWidth>
           <div className={styles.maxwidth}>
-            {content.title && <h2>{content.title}</h2>}
+            {content.title && <Heading level={1}>{content.title}</Heading>}
             {content.description && (
               <RichContent blocks={content.description} />
             )}
