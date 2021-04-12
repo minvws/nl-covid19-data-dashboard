@@ -2394,6 +2394,10 @@
       "title": "Voorraad per type vaccin",
       "description": "Deze grafiek laat zien hoeveel vaccins het RIVM de afgelopen tijd op voorraad had per type vaccin. De totale voorraad bestaat uit de beschikbare en de nog niet beschikbare voorraad. De beschikbare voorraad is klaar voor gebruik en bestaat deels uit veiligheidsvoorraad. Nog niet beschikbare voorraad zijn vaccins die nog gecontroleerd moeten worden. Na de controle komen ze in de beschikbare voorraad.",
       "tooltip_title": "Voorraad",
+      "tooltip_labels": {
+        "available": "Beschikbare voorraad",
+        "total": "Totale voorraad"
+      },
       "legend": {
         "available": "Beschikbare voorraad {{vaccineName}}",
         "total": "Totale voorraad {{vaccineName}}"

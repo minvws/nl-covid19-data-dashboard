@@ -73,6 +73,7 @@ export function VaccineStockPerSupplierChart({
       label: replaceVariablesInText(text.legend.available, {
         vaccineName: selectedConfig.label,
       }),
+      shortLabel: text.tooltip_labels.available,
       color: selectedConfig.color,
       curve: 'step',
     },
@@ -82,6 +83,7 @@ export function VaccineStockPerSupplierChart({
       label: replaceVariablesInText(text.legend.total, {
         vaccineName: selectedConfig.label,
       }),
+      shortLabel: text.tooltip_labels.total,
       color: colors.lightGray,
       curve: 'step',
     },

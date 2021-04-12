@@ -2394,6 +2394,10 @@
       "title": "Doses in stock per type of vaccine",
       "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The available stock can be used for vaccination and includes the safety stock. The total stock consists of the available and not yet available stock. Stocks that are not yet available are vaccines in quality control. After quality control the vaccines are available.",
       "tooltip_title": "Doses in stock",
+      "tooltip_labels": {
+        "available": "Available doses in stock",
+        "total": "Total number of doses in stock"
+      },
       "legend": {
         "available": "Available doses in stock of {{vaccineName}} vaccine",
         "total": "Total number of doses in stock of {{vaccineName}} vaccine"
