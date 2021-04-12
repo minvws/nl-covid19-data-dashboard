@@ -44,16 +44,13 @@ export function RichContent({
           {...props}
         />
       ),
-      collapsible: (props: { node: CollapsibleList }) => {
-        console.dir(props);
-        return (
-          <CollapsibleSection summary={props.node.title}>
-            <Box mt={3}>
-              <RichContent blocks={props.node.content || []} />
-            </Box>
-          </CollapsibleSection>
-        );
-      },
+      collapsible: (props: { node: CollapsibleList }) => (
+        <CollapsibleSection summary={props.node.title}>
+          <Box mt={3}>
+            <RichContent blocks={props.node.content || []} />
+          </Box>
+        </CollapsibleSection>
+      ),
     },
     marks: {
       inlineAttachment: InlineAttachmentMark,
