@@ -1,5 +1,7 @@
 import { NlVaccineStockValue } from '@corona-dashboard/common';
-import { useState } from 'react';
+import { pick } from 'lodash';
+import { useMemo, useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components-styled/chart-tile';
 import {
   InteractiveLegend,
@@ -12,6 +14,7 @@ import {
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+
 interface VaccineStockPerSupplierChartProps {
   values: NlVaccineStockValue[];
 }
@@ -21,6 +24,25 @@ export function VaccineStockPerSupplierChart({
 }: VaccineStockPerSupplierChartProps) {
   const { siteText } = useIntl();
   const text = siteText.vaccinaties.stock_per_supplier_chart;
+
+  const maximumValueForAllProperties = useMemo(
+    () =>
+      values.reduce(
+        (acc, value) =>
+          Math.max(
+            acc,
+            ...Object.values(
+              pick(value, [
+                'bio_n_tech_pfizer_total',
+                'moderna_total',
+                'astra_zeneca_total',
+              ])
+            ).filter(isPresent)
+          ),
+        0
+      ),
+    [values]
+  );
 
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
@@ -97,6 +119,7 @@ export function VaccineStockPerSupplierChart({
             values={values}
             seriesConfig={seriesConfig}
             timeframe={timeframe}
+            dataOptions={{ forcedMaximumValue: maximumValueForAllProperties }}
           />
         </>
       )}
