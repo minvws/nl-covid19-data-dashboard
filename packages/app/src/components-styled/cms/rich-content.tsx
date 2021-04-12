@@ -2,6 +2,7 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
+  CollapsibleList,
   ImageBlock,
   InlineAttachment,
   RichContentImageBlock,
@@ -43,11 +44,12 @@ export function RichContent({
           {...props}
         />
       ),
-      collapsible: (props: { node: any }) => {
+      collapsible: (props: { node: CollapsibleList }) => {
+        console.dir(props);
         return (
           <CollapsibleSection summary={props.node.title}>
             <Box mt={3}>
-              <RichContent blocks={props.node.content} />
+              <RichContent blocks={props.node.content || []} />
             </Box>
           </CollapsibleSection>
         );

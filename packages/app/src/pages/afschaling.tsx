@@ -27,6 +27,45 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<DownscalingPage>(
     (_context) => `*[_type == 'downscalePage'][0]{
       ...,
+      "page": {
+        ...page,
+        "description": [
+          ...page.description.${locale}[]
+          {
+          ...,
+          _type == "image" => {
+            ...,
+            "asset": asset->
+          }
+        }
+        ],
+      },
+      "downscalingPossible": {
+        ...downscalingPossible,
+        "description": [
+          ...downscalingPossible.description.${locale}[]
+          {
+          ...,
+          _type == "image" => {
+            ...,
+            "asset": asset->
+          }
+        }
+        ],
+      },
+      "downscalingNotPossible": {
+        ...downscalingNotPossible,
+        "description": [
+          ...downscalingNotPossible.description.${locale}[]
+          {
+          ...,
+          _type == "image" => {
+            ...,
+            "asset": asset->
+          }
+        }
+        ],
+      },
       "measures": {
         ...measures,
         "description": [
@@ -36,19 +75,9 @@ export const getStaticProps = createGetStaticProps(
             _type == "image" => {
             	...,
               "asset": asset->
-            },
-            _type == "reference" => @->{
-                collapsible != null => {
-                  ...collapsible,
-                  "content": [
-                    ...collapsible.content.${locale}[]
-                  ],
-                  "title": collapsible.title.${locale},
-                }
-              }
             }
-          ]
-        ,
+          }
+        ],
       },
     }`
   ),
