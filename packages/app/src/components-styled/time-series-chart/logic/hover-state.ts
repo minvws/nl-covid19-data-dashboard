@@ -218,7 +218,7 @@ export function useHoverState<T extends TimestampedValue>({
             };
         }
       })
-      .filter(isDefined);
+      .filter(isDefined)
 
     /**
      * Point markers on range data are rendered differently, so we split them

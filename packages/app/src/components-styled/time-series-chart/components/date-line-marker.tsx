@@ -1,13 +1,9 @@
-import {
-  DateSpanValue,
-  isDateSpanValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { isDateSpanValue, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { HoveredPoint } from '../logic';
-import { useIntl } from '~/intl';
 
 type LineProps = {
   color: string;
@@ -28,23 +24,21 @@ export function DateLineMarker<T extends TimestampedValue>({
   point,
   value,
 }: DateLineMarkerProps<T>) {
-  const isDateSpan = isDateSpanValue(value);
   const { formatDateFromSeconds } = useIntl();
-
   return (
     <Container style={{ transform: `translateX(${point.x}px)` }}>
       <Line color={lineColor} />
       <LabelContainer>
         <Label>
-          {isDateSpan
-            ? `${formatDateFromSeconds(
-                (value as DateSpanValue).date_start_unix,
-                'axis'
-              )} - ${formatDateFromSeconds(
-                (value as DateSpanValue).date_end_unix,
-                'axis'
-              )}`
-            : formatDateFromSeconds(point.seriesValue.__date_unix, 'axis')}
+          {isDateSpanValue(value) ? (
+            <>
+              {formatDateFromSeconds(value.date_start_unix, 'axis')}
+              <> &ndash; </>
+              {formatDateFromSeconds(value.date_end_unix, 'axis')}
+            </>
+          ) : (
+            formatDateFromSeconds(point.seriesValue.__date_unix, 'axis')
+          )}
         </Label>
       </LabelContainer>
     </Container>
