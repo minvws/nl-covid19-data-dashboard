@@ -1,3 +1,4 @@
+import { assert } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
@@ -75,8 +76,12 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
-      {timeframeOptions && typeof children === 'function'
-        ? children(timeframe as TimeframeOption)
+      {timeframeOptions
+        ? (assert(
+            typeof children === 'function',
+            'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
+          ),
+          children(timeframe))
         : children}
     </ChartTileContainer>
   );
