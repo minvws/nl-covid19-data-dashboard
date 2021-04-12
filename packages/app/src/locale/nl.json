@@ -156,7 +156,7 @@
     "titel": "Ziekenhuisopnames per dag",
     "pagina_toelichting": "Groei van het aantal opgenomen patiënten met COVID-19 kan ervoor zorgen dat ziekenhuizen het te druk krijgen. Daarnaast geeft dit cijfer een goed beeld van hoe de epidemie zich ontwikkelt. We houden hier het aantal patiënten bij dat met COVID-19 wordt opgenomen in ziekenhuizen en het aantal bedden op gewone ziekenhuisafdelingen die door patiënten met COVID-19 wordt bezet. We houden dit zowel landelijk als regionaal bij en dat doen we op basis van verschillende bronnen.",
     "barscale_titel": "Gemeld aantal ziekenhuisopnames per dag",
-    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen. ",
+    "extra_uitleg": "Aantal mensen met COVID-19 dat per dag in een ziekenhuis is opgenomen. Dit cijfer laat het aantal ziekenhuisopnames - inclusief directe IC-opnames - zien dat op één dag gemeld is. Dit kunnen ook meldingen zijn van opnames van eerdere dagen.",
     "map_titel": "Woonplaats opgenomen patiënten",
     "map_toelichting": "Deze kaart laat zien in welke gemeenten of veiligheidsregio’s patiënten wonen die met COVID-19 in het ziekenhuis zijn opgenomen. Patiënten kunnen ook in een ziekenhuis in een ander deel van Nederland worden opgenomen. Het gaat hier om de ziekenhuisopnames die op één dag gemeld zijn bij Stichting NICE.",
     "linechart_titel": "Ziekenhuisopnames door de tijd heen, op datum van opname",
@@ -264,7 +264,7 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM",
-        "aria_text": "Bekijk de databron van Postief geteste mensen op het RIVM"
+        "aria_text": "Bekijk de databron van positief geteste mensen op het RIVM"
       }
     },
     "tooltip_labels": {
@@ -539,7 +539,6 @@
     "extra_uitleg": "Het gemiddelde wordt berekend aan de hand van de uitkomsten van alle rioolmetingen van één week. Hierbij wordt rekening gehouden met hoeveel inwoners er zijn aangesloten per rioolwaterzuiveringsinstallatie.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
     "linechart_titel": "Gemiddeld aantal virusdeeltjes door de tijd heen (per 100.000 inwoners)",
-    "linechart_particle_trend_label": "Gemiddeld aantal virusdeeltjes x100 miljard",
     "metadata": {
       "title": "Rioolwatermeting | Coronadashboard | Rijksoverheid.nl",
       "description": "Gemiddeld aantal virusdeeltjes per 100.000 inwoners"
@@ -569,7 +568,8 @@
     "warning_method": "Deze manier van meten wordt nu nog getest. We hopen dat de rioolwatermetingen ons over een tijdje helpen om het virus op te sporen en te volgen. [Lees meer over dit programma op de website van het RIVM](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
     "total_measurements_title": "Aantal metingen per week",
     "total_measurements_description": "Meetlocaties kunnen meerdere metingen per week doorgeven. Per week kan het aantal metingen per locatie verschillen doordat niet alle metingen lukken.",
-    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week."
+    "total_measurements_locations": "In totaal hebben {{sampled_installation_count}} van de {{total_installation_count}} meetlocaties minimaal één meting doorgegeven in de week.",
+    "linechart_particle_trend_label": "Gemiddeld aantal virusdeeltjes x100 miljard"
   },
   "notfound_titel": {
     "text": "Er is iets misgegaan"
@@ -798,7 +798,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2028,7 +2034,7 @@
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek toont het reproductiegetal door de tijd heen.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
-      "intensive_care_opnames": "Deze grafiek toon de intensive care opnames door de tijd heen.",
+      "intensive_care_opnames": "Deze grafiek toon de intensive care-opnames door de tijd heen.",
       "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
       "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties door de tijd heen.",
       "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
@@ -2041,8 +2047,8 @@
       "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts door de tijd heen.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
-      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins in Nederland in totaal geleverd en gecontroleerd waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins er naar verwachting de komende weken worden geleverd en gecontroleerd en hoeveel prikken daarmee naar verwachting worden gezet. De grafiek bevat alleen de vaccins voor Europees Nederland en houdt rekening met 5% verspilling.",
-      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling.",
+      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. De grafiek bevat alleen de vaccins voor Europees Nederland en houdt rekening met 5% verspilling.",
+      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     },
     "link_source": "Download de databron van \"{{subject}}\" op {{source}}",
@@ -2128,7 +2134,7 @@
     },
     "grafiek": {
       "titel": "Geleverde en gecontroleerde vaccins & gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins Nederland in totaal heeft gekregen en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal verwachten te krijgen en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling."
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. Bovendien houdt de grafiek vanaf dat moment rekening met 5% verspilling."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
@@ -2147,7 +2153,7 @@
       "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
       "tab_first": {
         "title": "Berekend aantal",
-        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie) \n\n**Door de prikpauze met AstraZeneca voor mensen jonger dan 60 jaar is onzeker hoeveel prikken met dit vaccin worden gezet. Daarom is vandaag in de berekening geen AstraZeneca meegeteld.**"
+        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie) \n\n**Door de prikpauze met AstraZeneca voor mensen jonger dan 60 jaar is onzeker hoeveel prikken met dit vaccin worden gezet. Daarom is per 7 april in de berekening geen AstraZeneca meegeteld.**"
       },
       "tab_second": {
         "title": "Gemeld aantal",
@@ -2167,7 +2173,11 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2292,7 +2302,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2304,7 +2318,7 @@
           "sanofi": "Sanofi"
         },
         "delivered": "Geleverd en beschikbaar",
-        "estimated": "Verwachte leveringen",
+        "estimated": "Verwacht geleverd en beschikbaar",
         "left_divider_label": "Berekend aantal",
         "right_divider_label": "Verwacht aantal",
         "legend": {
@@ -2349,7 +2363,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Leveringen & voorraad",
-      "description": "Hoeveel prikken we kunnen zetten, hangt af van hoeveel vaccins we geleverd krijgen. Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins we krijgen en hoeveel vaccins we op voorraad hebben.",
+      "description": "Hoeveel prikken we kunnen zetten, hangt af van hoeveel vaccins we geleverd krijgen. Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins Nederland heeft gekregen en hoeveel vaccins we op voorraad hebben.",
       "reference": {
         "href": "/verantwoording#leveringen-en-voorraad-vaccins",
         "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
@@ -2366,7 +2380,7 @@
       }
     },
     "delivery_estimate_time_span": {
-      "title": "Verwachte leveringen vaccins",
+      "title": "Verwachte leveringen",
       "description": "Aantal vaccins dat Nederland de komende vier weken verwacht te krijgen. Elke week ontvangt Nederland een deel van de vaccins. Mensen hebben twee prikken nodig voor een volledige vaccinatie, behalve van het Janssen-vaccin. Van het Janssen-vaccin is één prik genoeg."
     },
     "grafiek_leveringen": {
@@ -2377,7 +2391,7 @@
     "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt.",
     "stock_per_supplier_chart": {
       "title": "Voorraad per type vaccin",
-      "description": "Deze grafiek laat zien hoeveel vaccins het RIVM de afgelopen tijd op voorraad had per type vaccin. De beschikbare voorraad is klaar voor gebruik en bevat ook de veiligheidsvoorraad. De totale voorraad bestaat uit de beschikbare en de nog niet beschikbare voorraad. Nog niet beschikbare voorraad zijn vaccins die nog gecontroleerd moeten worden. Na de controle komen ze in de beschikbare voorraad.",
+      "description": "Deze grafiek laat zien hoeveel vaccins het RIVM de afgelopen tijd op voorraad had per type vaccin. De totale voorraad bestaat uit de beschikbare en de nog niet beschikbare voorraad. De beschikbare voorraad is klaar voor gebruik en bestaat deels uit veiligheidsvoorraad. Nog niet beschikbare voorraad zijn vaccins die nog gecontroleerd moeten worden. Na de controle komen ze in de beschikbare voorraad.",
       "tooltip_title": "Voorraad",
       "legend": {
         "available": "Beschikbare voorraad {{vaccineName}}",

@@ -15,8 +15,8 @@
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/news/uk-variant-gains-ground-in-the-netherlands"
     },
-    "subtitel": "Wekelijkse landelijke toelichting",
-    "datum": "12 december 2020"
+    "subtitel": "Weekly national commentary",
+    "datum": "12 December 2020"
   },
   "error_titel": {
     "text": "Something went wrong"
@@ -69,11 +69,11 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "NICE via RIVM"
     },
-    "titel": "Intensive care admissions by day",
+    "titel": "Reported intensive care admissions by day",
     "pagina_toelichting": "Daily number of COVID-19 patients admitted to a hospital intensive care unit (ICU), directly or from a regular hospital ward. To avoid doubles only the first IC admission of a patient counts. This number gives information about the severity of the disease en helps track the development of the epidemic.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.\n\nNote: From 25 March, the dashboard will show the number of reported IC admissions per day instead of the average number of admissions over the past three days. The number above is therefore not comparable with the number that was previously on the dashboard.",
     "linechart_titel": "ICU admissions over time",
     "bronnen": {
       "nice": {
@@ -264,13 +264,13 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM",
-        "aria_text": "Bekijk de databron van Postief geteste mensen op het RIVM"
+        "aria_text": "View the data source of positive tested people at RIVM"
       }
     },
     "tooltip_labels": {
       "infected_per_100k": "Confirmed cases per 100.000",
       "infected_percentage": "Percentage confirmed cases",
-      "tested_total": "Total amount of confirmed cases",
+      "tested_total": "Total number of tests",
       "infected": "Number of confirmed cases"
     }
   },
@@ -539,7 +539,6 @@
     "extra_uitleg": "The calculated average is based on all the wastewater measurements collected in one week. This figure also takes account of how many inhabitants are served by a wastewater treatment plant.",
     "barscale_screenreader_text": "{{value}} virus particles per 100,000 inhabitants",
     "linechart_titel": "Average number of virus particles over time (per 100,000 inhabitants)",
-    "linechart_particle_trend_label": "Average number of virus particles x100 billion",
     "metadata": {
       "title": "Sewage water examination | Coronavirus Dashboard | Government.nl",
       "description": "Average number of virus particles per 100,000 inhabitants"
@@ -551,7 +550,7 @@
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100,000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100,000 inhabitants, per safety region.",
-    "legenda_titel": "Legenda",
+    "legenda_titel": "Legend",
     "map_tooltip": "per 100,000 inhabitants",
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
@@ -569,7 +568,8 @@
     "warning_method": "This monitoring method is still being developed. We hope wastewater monitoring will help us to detect and track the virus more effectively in the future. [Read more about this research programme on the website of the National Institute for Public Health and the Environment (RIVM)](https://www.rivm.nl/coronavirus-covid-19/onderzoek/rioolwater).",
     "total_measurements_title": "Number of measurements per week",
     "total_measurements_description": "Sampling locations can report multiple measurements per week. The number of measurements used per location per week can differ because not all measurements are successful.",
-    "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week."
+    "total_measurements_locations": "{{sampled_installation_count}} of the {{total_installation_count}} sampling locations reported at least one measurement in the given week.",
+    "linechart_particle_trend_label": "Average number of virus particles x100 billion"
   },
   "notfound_titel": {
     "text": "Something went wrong"
@@ -687,7 +687,7 @@
     "miljoen": "million",
     "signaalwaarde": "Alert value",
     "totaal": "Total",
-    "rond": "rond",
+    "rond": "around",
     "interactive_legend": {
       "reset_button_label": "Reset"
     }
@@ -798,7 +798,13 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
+    "barscale_keys": [
+      "0 to 20",
+      "20 to 40",
+      "40 to 60",
+      "60 to 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1236,7 +1242,7 @@
       "titel": "Number per 100,000 residents",
       "geen_meldingen": "No confirmed cases"
     },
-    "map_titel": "Confirmed cases in the Netherlands",
+    "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show the number of confirmed cases per 100,000 residents.",
     "metadata": {
       "title": "Confirmed cases in nursing homes in safety region {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1493,7 +1499,7 @@
     "kpi_titel": "Total no. of new infected locations",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case among residents, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total number of infected locations over time",
-    "barscale_screenreader_text": "{{value}} new reported locations with at least one confirmed case amongst residents per day.",
+    "barscale_screenreader_text": "{{value}} new locations where at least one resident has tested positive, per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected locations",
       "geen_meldingen": "No newly confirmed cases"
@@ -1550,7 +1556,7 @@
       }
     },
     "kpi_titel": "Daily number of disability care home residents who were reported as testing positive for the coronavirus",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "gehandicaptenzorg_oversterfte": {
@@ -1580,7 +1586,7 @@
       }
     },
     "kpi_titel": "Number of deceased residents",
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_trend_label": "Number of deceased residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
@@ -1595,8 +1601,8 @@
     "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
     "linechart_titel": "Number of deceased residents over time",
-    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
-    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
+    "map_titel": "Number of deceased disability care home residents in the Netherlands",
+    "map_toelichting": "These maps show the number of deceased residents in disabled care locations in the Netherlands per day.",
     "titel_sidebar": "Death per day",
     "metadata": {
       "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1613,7 +1619,7 @@
         "text": "RIVM"
       }
     },
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_trend_label": "Number of deceased residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
@@ -1625,7 +1631,7 @@
     "kpi_titel": "Total no. of infected locations ",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total number of infected locations over time",
-    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "barscale_screenreader_text": "{{value}} new locations where at least one resident has tested positive, per day",
     "metadata": {
       "title": "Infected disability care homes in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
@@ -1654,10 +1660,10 @@
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Number of confirmed cases (residents)",
     "chloropleth_legenda": {
-      "titel": "Aantal per 100.000 inwoners",
+      "titel": "Number per 100,000 residents",
       "geen_meldingen": "Geen meldingen"
     },
-    "map_titel": "Verdeling positief geteste mensen in Nederland",
+    "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "metadata": {
       "title": "Confirmed cases of disability care home residents in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1675,7 +1681,7 @@
       }
     },
     "kpi_titel": "Daily number of disability care home residents who were reported as testing positive",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "thuiswonende_ouderen": {
@@ -1708,7 +1714,7 @@
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
       "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-      "line_chart_legend_trend_label": "Nieuwe besmettingen",
+      "line_chart_legend_trend_label": "New confirmed cases",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
@@ -2041,8 +2047,8 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100,000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses have been delivered and checked in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and checked and how many doses are to be administered in the coming weeks.",
-      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks.",
+      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. The graph only contains the vaccines for the European Netherlands and takes into account 5% waste.",
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. In addition, the chart takes into account 5% waste from that point on.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
     "link_source": "Download date source for \"{{subject}}\" at {{source}}",
@@ -2128,7 +2134,7 @@
     },
     "grafiek": {
       "titel": "Delivered and checked doses & doses administered in total",
-      "omschrijving": "The left-hand side of the graph shows how many vaccine doses have been delivered to the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we expect will be delivered and how many doses are to be administered in the coming weeks."
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. In addition, the chart takes into account 5% waste from that point on."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
@@ -2147,7 +2153,7 @@
       "reported_until": "Reported number till {{reportedDate}}",
       "tab_first": {
         "title": "Calculated number",
-        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)\n\n** Due to the pause from vaccinating with AstraZeneca for people younger than 60 years, it is uncertain how many injections will be given with this vaccine. Therefore, as of April 7, AstraZeneca is not included in the calculation. **"
       },
       "tab_second": {
         "title": "Reported number",
@@ -2167,7 +2173,11 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2292,7 +2302,11 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2304,7 +2318,7 @@
           "sanofi": "Sanofi"
         },
         "delivered": "Delivered and available",
-        "estimated": "Expected deliveries",
+        "estimated": "Expected to be delivered and available",
         "left_divider_label": "Calculated number of",
         "right_divider_label": "Expected number",
         "legend": {
@@ -2349,7 +2363,7 @@
     },
     "stock_and_delivery_section": {
       "title": "Deliveries and stock",
-      "description": "How many vaccine doses can be administered depends on how many doses we receive. Vaccine doses are delivered to the Netherlands every week. The majority of these are made available soon after some checks so people can be vaccinated. However, we hold some doses aside so there is enough vaccine to ensure those who have had their first dose are able to get their second dose. This page shows how many doses of vaccine are on their way and how many doses we hold aside. ",
+      "description": "How many vaccine doses can be administered depends on how many doses we receive. Vaccine doses are delivered to the Netherlands every week. The majority of these are made available soon after some checks so people can be vaccinated. However, we hold some doses aside so there is enough vaccine to ensure those who have had their first dose are able to get their second dose. This page shows how many doses of vaccine were delivered to the Netherlands and how many doses are in stock.",
       "reference": {
         "href": "/verantwoording#deliveries-and-vaccine-doses-in-stock",
         "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
@@ -2371,13 +2385,13 @@
     },
     "grafiek_leveringen": {
       "titel": "Deliveries",
-      "omschrijving": "This graph shows how many doses of each vaccine the Netherlands has received and is expecting to receive in a given week.",
+      "omschrijving": "This graph shows how many doses of each vaccine the Netherlands has received or expects to receive in a given week.",
       "timeframe_recent_en_verwacht": "Show recent and expected"
     },
     "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks.",
     "stock_per_supplier_chart": {
       "title": "Doses in stock per type of vaccine",
-      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The available stock is ready to use and includes the safety stock. The total stock consists of the available and not yet available stock. Stocks that are not yet available are vaccines that have yet to be checked. After the checks the vaccines are available.",
+      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The available stock can be used for vaccination and includes the safety stock. The total stock consists of the available and not yet available stock. Stocks that are not yet available are vaccines in quality control. After quality control the vaccines are available.",
       "tooltip_title": "Doses in stock",
       "legend": {
         "available": "Available doses in stock of {{vaccineName}} vaccine",
@@ -2534,7 +2548,7 @@
   "common.tooltip.positive_tested_value": "",
   "search": {
     "placeholder": "Search for a municipality of safety region",
-    "clear": "Zoekopdracht wissen",
+    "clear": "Clear search",
     "no_hits": "No {{subject}} found with “{{search}}”"
   },
   "veiligheidsregio_actueel": {
@@ -2888,9 +2902,9 @@
     "verwacht": "Expected"
   },
   "section_sterftemonitor_vr": {
-    "title": "Sterftemonitor",
+    "title": "Mortality monitor",
     "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bronnen": {
       "cbs": {
         "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
