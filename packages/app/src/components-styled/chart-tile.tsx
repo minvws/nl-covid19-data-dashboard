@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { assert } from '@corona-dashboard/common';
+import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTileContainer } from './chart-tile-container';
@@ -8,7 +9,7 @@ import { Heading, Text } from './typography';
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 function ChartTileHeader({
@@ -44,11 +45,11 @@ type ChartTileProps = {
   | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
   {
       timeframeOptions?: undefined;
-      children: React.ReactNode;
+      children: ReactNode;
     }
   | {
       timeframeOptions: TimeframeOption[];
-      children: (timeframe: TimeframeOption) => React.ReactNode;
+      children: (timeframe: TimeframeOption) => ReactNode;
     }
 );
 
@@ -60,15 +61,9 @@ export function ChartTile({
   timeframeOptions,
   timeframeInitialValue = 'all',
 }: ChartTileProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>();
-
-  useEffect(() => {
-    if (timeframeOptions && !timeframeOptions.includes(timeframeInitialValue)) {
-      setTimeframe(timeframeOptions[0]);
-      return;
-    }
-    setTimeframe(timeframeInitialValue);
-  }, [timeframeOptions, timeframeInitialValue]);
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(
+    timeframeInitialValue
+  );
 
   return (
     <ChartTileContainer metadata={metadata}>
@@ -81,9 +76,12 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
-      {(timeframeOptions || timeframeInitialValue) &&
-      typeof children === 'function'
-        ? children(timeframe as TimeframeOption)
+      {timeframeOptions
+        ? (assert(
+            typeof children === 'function',
+            'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
+          ),
+          children(timeframe))
         : children}
     </ChartTileContainer>
   );

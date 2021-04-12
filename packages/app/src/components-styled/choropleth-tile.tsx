@@ -1,5 +1,5 @@
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
 import { DataProps } from '~/types/attributes';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { Box } from './base';
@@ -10,7 +10,6 @@ import {
 import { ChartTileContainer } from './chart-tile-container';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-
 interface ChoroplethTileProps extends DataProps {
   title: string;
   description?: string | React.ReactNode;
@@ -22,6 +21,7 @@ interface ChoroplethTileProps extends DataProps {
     thresholds: ChoroplethThresholdsValue[];
   };
   metadata?: MetadataProps;
+  valueAnnotation?: string;
 }
 
 export function ChoroplethTile({
@@ -32,11 +32,16 @@ export function ChoroplethTile({
   legend,
   children,
   metadata,
+  valueAnnotation,
   ...dataProps
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints(true);
   const legendaComponent = legend && (
-    <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
+    <ChoroplethLegenda
+      thresholds={legend.thresholds}
+      title={legend.title}
+      valueAnnotation={valueAnnotation}
+    />
   );
 
   return (
