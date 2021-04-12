@@ -1,5 +1,6 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
+import { isPresent } from 'ts-is-present';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
   CollapsibleList,
@@ -44,13 +45,15 @@ export function RichContent({
           {...props}
         />
       ),
-      collapsible: (props: { node: CollapsibleList }) => (
-        <CollapsibleSection summary={props.node.title}>
-          <Box mt={3}>
-            <RichContent blocks={props.node.content || []} />
-          </Box>
-        </CollapsibleSection>
-      ),
+      collapsible: (props: { node: CollapsibleList }) => {
+        return isPresent(props.node.content) ? (
+          <CollapsibleSection summary={props.node.title}>
+            <Box mt={3}>
+              <RichContent blocks={props.node.content} />
+            </Box>
+          </CollapsibleSection>
+        ) : null;
+      },
     },
     marks: {
       inlineAttachment: InlineAttachmentMark,
