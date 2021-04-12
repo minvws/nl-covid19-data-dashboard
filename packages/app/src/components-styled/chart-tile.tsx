@@ -64,14 +64,6 @@ export function ChartTile({
     timeframeInitialValue
   );
 
-  // useEffect(() => {
-  //   if (timeframeOptions && !timeframeOptions.includes(timeframeInitialValue)) {
-  //     setTimeframe(timeframeOptions[0]);
-  //     return;
-  //   }
-  //   setTimeframe(timeframeInitialValue);
-  // }, [timeframeOptions, timeframeInitialValue]);
-
   return (
     <ChartTileContainer metadata={metadata}>
       <ChartTileHeader title={title} description={description}>
