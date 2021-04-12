@@ -2027,7 +2027,7 @@
       }
     },
     "a11y": {
-      "tab_navigatie_button": "'Navigeer met Tab door alle {{subject}}"
+      "tab_navigatie_button": "'Navigeer met de tab-toets door alle {{subject}}"
     }
   },
   "accessibility": {
