@@ -85,7 +85,7 @@ const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholdsValu
   },
   {
     color: colors.data.scale.blue[0],
-    threshold: 1,
+    threshold: 0.1,
   },
   {
     color: colors.data.scale.blue[1],
