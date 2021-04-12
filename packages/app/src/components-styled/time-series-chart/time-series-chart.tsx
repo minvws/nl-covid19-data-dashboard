@@ -383,7 +383,7 @@ export function TimeSeriesChart<
               value={values[hoverState.valuesIndex]}
             />
             <PointMarkers points={hoverState.rangePoints} />
-            <PointMarkers points={hoverState.linePoints.reverse()} />
+            <PointMarkers points={hoverState.linePoints} />
           </Overlay>
         )}
       </Box>

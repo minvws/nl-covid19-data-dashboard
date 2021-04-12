@@ -29,18 +29,20 @@ export function PointMarkers<T extends TimestampedValue>(
         width: size,
       }}
     >
-      {points.map((point, index) => (
-        <PointMarker
-          color={point.color}
-          size={size}
-          /**
-           * Dynamic properties like y position are set via inline style because
-           * SC would dynamically generate and inject a new class for every position
-           */
-          style={{ transform: `translateY(${point.y - size / 2}px)` }}
-          key={index}
-        />
-      ))}
+      {points
+        .map((point, index) => (
+          <PointMarker
+            color={point.color}
+            size={size}
+            /**
+             * Dynamic properties like y position are set via inline style because
+             * SC would dynamically generate and inject a new class for every position
+             */
+            style={{ transform: `translateY(${point.y - size / 2}px)` }}
+            key={index}
+          />
+        ))
+        .reverse()}
     </Container>
   );
 }
