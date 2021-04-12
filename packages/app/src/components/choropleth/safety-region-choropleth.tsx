@@ -156,6 +156,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           stroke={isEscalationLevelTheme || isSelected ? '#fff' : undefined}
           strokeWidth={isEscalationLevelTheme || isSelected ? 3 : undefined}
           isSelected={isSelected}
+          key={vrcode}
           {...anchorEventHandlers}
         />
       );
