@@ -16,7 +16,11 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
-export function VaccineDeliveryAreaChart({ data }: { data: National }) {
+export function VaccineDeliveryAndAdministrationsAreaChart({
+  data,
+}: {
+  data: National;
+}) {
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;

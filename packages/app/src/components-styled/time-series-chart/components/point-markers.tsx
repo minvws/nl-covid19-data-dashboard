@@ -56,8 +56,6 @@ const Container = styled.div`
 
 const PointMarker = styled.div<MarkerProps>`
   position: absolute;
-
-  position: absolute;
   height: ${(x) => x.size}px;
   width: ${(x) => x.size}px;
   border-radius: 50%;
