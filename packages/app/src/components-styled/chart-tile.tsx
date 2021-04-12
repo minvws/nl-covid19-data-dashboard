@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTileContainer } from './chart-tile-container';
@@ -8,7 +8,7 @@ import { Heading, Text } from './typography';
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 function ChartTileHeader({
@@ -44,11 +44,11 @@ type ChartTileProps = {
   | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
   {
       timeframeOptions?: undefined;
-      children: React.ReactNode;
+      children: ReactNode;
     }
   | {
       timeframeOptions: TimeframeOption[];
-      children: (timeframe: TimeframeOption) => React.ReactNode;
+      children: (timeframe: TimeframeOption) => ReactNode;
     }
 );
 
@@ -60,15 +60,17 @@ export function ChartTile({
   timeframeOptions,
   timeframeInitialValue = 'all',
 }: ChartTileProps) {
-  const [timeframe, setTimeframe] = useState<TimeframeOption>();
+  const [timeframe, setTimeframe] = useState<TimeframeOption>(
+    timeframeInitialValue
+  );
 
-  useEffect(() => {
-    if (timeframeOptions && !timeframeOptions.includes(timeframeInitialValue)) {
-      setTimeframe(timeframeOptions[0]);
-      return;
-    }
-    setTimeframe(timeframeInitialValue);
-  }, [timeframeOptions, timeframeInitialValue]);
+  // useEffect(() => {
+  //   if (timeframeOptions && !timeframeOptions.includes(timeframeInitialValue)) {
+  //     setTimeframe(timeframeOptions[0]);
+  //     return;
+  //   }
+  //   setTimeframe(timeframeInitialValue);
+  // }, [timeframeOptions, timeframeInitialValue]);
 
   return (
     <ChartTileContainer metadata={metadata}>
@@ -81,8 +83,7 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
-      {(timeframeOptions || timeframeInitialValue) &&
-      typeof children === 'function'
+      {timeframeOptions && typeof children === 'function'
         ? children(timeframe as TimeframeOption)
         : children}
     </ChartTileContainer>
