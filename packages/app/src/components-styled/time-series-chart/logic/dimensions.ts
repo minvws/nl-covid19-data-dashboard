@@ -1,6 +1,13 @@
 import { useMemo } from 'react';
+import useResizeObserver from 'use-resize-observer';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds, Padding } from './common';
+
+/**
+ * A chart with a width smaller than the threshold will be rendered with a
+ * "collapsed" Y-axis. The collapsed axis will only display the top value.
+ */
+export const COLLAPSE_Y_AXIS_THRESHOLD = 430;
 
 const defaultPadding: Padding = {
   top: 10,
@@ -24,14 +31,19 @@ export function useDimensions(
 ) {
   const isMounted = useIsMounted();
 
+  const {
+    width: yAxisWidth = 0,
+    ref: yAxisRef,
+    // @ts-expect-error useResizeObserver expects element extending HTMLElement
+  } = useResizeObserver<SVGElement>();
+
   return useMemo(() => {
     /**
      * When there's a padding left set/measured we'll add 10px extra to give the
      * y-axis labels a bit more space, otherwise they could be cut off.
      */
-    const paddingLeftWithExtraSpace = paddingLeft
-      ? paddingLeft + 10
-      : paddingLeft;
+    const paddingLeftWithExtraSpace =
+      paddingLeft ?? (yAxisWidth ? yAxisWidth + 10 : yAxisWidth);
 
     const padding: Padding = {
       ...defaultPadding,
@@ -45,6 +57,8 @@ export function useDimensions(
       height: height - padding.top - padding.bottom,
     };
 
-    return { padding, bounds };
-  }, [width, height, paddingLeft, isMounted]);
+    console.log(padding);
+
+    return { padding, bounds, yAxisRef };
+  }, [paddingLeft, yAxisWidth, isMounted, width, height, yAxisRef]);
 }
