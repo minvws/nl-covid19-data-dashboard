@@ -19,6 +19,7 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { Block, DownscalingPage } from '~/types/cms';
+import { expandPortableTextBlock } from '~/utils/groq/expand-portable-text-block';
 
 const locale = process.env.NEXT_PUBLIC_LOCALE;
 
@@ -29,55 +30,27 @@ export const getStaticProps = createGetStaticProps(
       ...,
       "page": {
         ...page,
-        "description": [
-          ...page.description.${locale}[]
-          {
-          ...,
-          _type == "image" => {
-            ...,
-            "asset": asset->
-          }
-        }
-        ],
+        ${expandPortableTextBlock('description', 'page', locale || 'nl')},
       },
       "downscalingPossible": {
         ...downscalingPossible,
-        "description": [
-          ...downscalingPossible.description.${locale}[]
-          {
-          ...,
-          _type == "image" => {
-            ...,
-            "asset": asset->
-          }
-        }
-        ],
+        ${expandPortableTextBlock(
+          'description',
+          'downscalingPossible',
+          locale || 'nl'
+        )},
       },
       "downscalingNotPossible": {
         ...downscalingNotPossible,
-        "description": [
-          ...downscalingNotPossible.description.${locale}[]
-          {
-          ...,
-          _type == "image" => {
-            ...,
-            "asset": asset->
-          }
-        }
-        ],
+        ${expandPortableTextBlock(
+          'description',
+          'downscalingNotPossible',
+          locale || 'nl'
+        )},
       },
       "measures": {
         ...measures,
-        "description": [
-            ...measures.description.${locale}[]
-            {
-            ...,
-            _type == "image" => {
-            	...,
-              "asset": asset->
-            }
-          }
-        ],
+        ${expandPortableTextBlock('description', 'measures', locale || 'nl')},
       },
     }`
   ),
