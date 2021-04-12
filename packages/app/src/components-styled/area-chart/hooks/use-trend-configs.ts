@@ -1,5 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { TrendDescriptor } from '../area-chart';
 import { TrendConfig } from '../components/area-chart-graph';
@@ -9,11 +10,16 @@ export function useTrendConfigs<T extends TimestampedValue>(
   trendDescriptors: TrendDescriptor<T>[],
   timeframe: TimeframeOption
 ): TrendConfig<T & TimestampedTrendValue>[] {
+  const today = useCurrentDate();
   const trendConfigs = useMemo(
     () =>
       trendDescriptors
         .map((descriptor) => {
-          const series = getValuesInTimeframe(descriptor.values, timeframe);
+          const series = getValuesInTimeframe(
+            descriptor.values,
+            timeframe,
+            today
+          );
           return descriptor.displays.map<
             TrendConfig<T & TimestampedTrendValue>
           >((displayConfig) => {
@@ -29,7 +35,7 @@ export function useTrendConfigs<T extends TimestampedValue>(
           });
         })
         .flat(),
-    [trendDescriptors, timeframe]
+    [trendDescriptors, timeframe, today]
   );
 
   return trendConfigs;

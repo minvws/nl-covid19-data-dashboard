@@ -6,6 +6,7 @@ import { bisector } from 'd3-array';
 import { lineLength } from 'geometric';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { SelectProps } from '~/components-styled/select';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 
 export interface Dimensions {
@@ -27,6 +28,7 @@ export function useSewerChartValues(
   data: Regionaal | Municipal,
   timeframe: TimeframeOption
 ) {
+  const today = useCurrentDate();
   /**
    * Create average sewer data, used for the line chart
    */
@@ -36,6 +38,7 @@ export function useSewerChartValues(
         ? getFilteredValues(
             data.sewer.values,
             timeframe,
+            today,
             (x) => x.date_start_unix * 1000
           )
             .map((x) => ({
@@ -53,7 +56,7 @@ export function useSewerChartValues(
               id: [x.name, x.value, x.dateMs].join('-'),
             }))
         : [],
-    [data.sewer, timeframe]
+    [data.sewer, timeframe, today]
   );
 
   /**
@@ -67,6 +70,7 @@ export function useSewerChartValues(
               getFilteredValues(
                 value.values,
                 timeframe,
+                today,
                 (x) => x.date_unix * 1000
               )
                 .map((x) => ({
@@ -85,7 +89,7 @@ export function useSewerChartValues(
             .filter(dedupe('id'))
         : [],
 
-    [data.sewer_per_installation, timeframe]
+    [data.sewer_per_installation, timeframe, today]
   );
 
   return [averageValues, stationValues] as const;

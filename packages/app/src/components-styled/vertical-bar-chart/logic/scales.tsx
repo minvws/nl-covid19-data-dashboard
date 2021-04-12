@@ -10,6 +10,7 @@ import {
   GetX,
   GetY,
 } from '~/components-styled/time-series-chart/logic';
+import { useCurrentDate } from '~/utils/current-date-context';
 
 export const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
@@ -28,6 +29,7 @@ export function useScales<T extends TimestampedValue>(args: {
   bounds: Bounds;
   numTicks: number;
 }) {
+  const todayDate = useCurrentDate();
   const {
     maximumValue,
     minimumValue,
@@ -39,7 +41,7 @@ export function useScales<T extends TimestampedValue>(args: {
 
   return useMemo(() => {
     if (isEmpty(values)) {
-      const today = Date.now() / 1000;
+      const today = todayDate.getTime() / 1000;
       return {
         xScale: scaleBand({
           domain: [today, today + ONE_DAY_IN_SECONDS],
@@ -82,5 +84,14 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, minimumValue, bounds, numTicks, tickValues]);
+  }, [
+    values,
+    bounds.width,
+    bounds.height,
+    tickValues,
+    maximumValue,
+    minimumValue,
+    numTicks,
+    todayDate,
+  ]);
 }

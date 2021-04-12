@@ -10,6 +10,7 @@ import { ScaleLinear } from 'd3-scale';
 import { first, isEmpty, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { Bounds } from './common';
 import { SeriesDoubleValue, SeriesItem, SeriesSingleValue } from './series';
 
@@ -34,11 +35,12 @@ export function useScales<T extends TimestampedValue>(args: {
   bounds: Bounds;
   numTicks: number;
 }) {
+  const todayDate = useCurrentDate();
   const { maximumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
     if (isEmpty(values)) {
-      const today = Date.now() / 1000;
+      const today = todayDate.getTime() / 1000;
       return {
         xScale: scaleLinear({
           domain: [today, today + ONE_DAY_IN_SECONDS],
@@ -82,7 +84,7 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, bounds, numTicks]);
+  }, [values, maximumValue, bounds, numTicks, todayDate]);
 }
 
 /**

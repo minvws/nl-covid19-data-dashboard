@@ -9,7 +9,7 @@ import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { Markdown } from '~/components-styled/markdown';
 
-export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
+export function AppFooter({ lastGenerated }: { lastGenerated: number }) {
   const { siteText: text } = useIntl();
 
   return (
@@ -66,10 +66,10 @@ export function AppFooter({ lastGenerated }: { lastGenerated: string }) {
   );
 }
 
-function LastGeneratedMessage({ date }: { date: string }) {
+function LastGeneratedMessage({ date }: { date: number }) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
-  const dateIso = formatDateFromSeconds(Number(date), 'iso');
-  const dateLong = formatDateFromSeconds(Number(date), 'long');
+  const dateIso = formatDateFromSeconds(date, 'iso');
+  const dateLong = formatDateFromSeconds(date, 'long');
 
   return (
     <Box maxWidth={450}>

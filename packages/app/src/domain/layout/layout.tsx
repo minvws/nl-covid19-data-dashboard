@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SEOHead } from '~/components-styled/seo-head';
 import { AppFooter } from '~/components-styled/layout/app-footer';
 import { AppHeader } from '~/components-styled/layout/app-header';
+import { SEOHead } from '~/components-styled/seo-head';
 import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
 import { useIntl } from '~/intl';
+import { CurrentDateProvider } from '~/utils/current-date-context';
 
 interface LayoutProps {
   title: string;
@@ -52,9 +53,11 @@ export function Layout(
 
       <AppHeader />
 
-      <div>{children}</div>
+      <CurrentDateProvider dateInSeconds={Number(lastGenerated)}>
+        <div>{children}</div>
+      </CurrentDateProvider>
 
-      <AppFooter lastGenerated={lastGenerated} />
+      <AppFooter lastGenerated={Number(lastGenerated)} />
     </div>
   );
 }
