@@ -34,12 +34,10 @@
     "vaccine_delivery_estimate",
     "vaccine_administered",
     "vaccine_administered_estimate",
-    "vaccine_administered_care_institutions",
     "vaccine_administered_doctors",
     "vaccine_administered_ggd_ghor",
     "vaccine_administered_ggd",
-    "vaccine_administered_hospitals",
-    "vaccine_administered_lnaz",
+    "vaccine_administered_hospitals_and_care_institutions",
     "vaccine_administered_total",
     "vaccine_administered_rate_moving_average",
     "vaccine_administered_planned"
@@ -151,9 +149,6 @@
     "vaccine_administered_estimate": {
       "$ref": "vaccine_administered_estimate.json"
     },
-    "vaccine_administered_care_institutions": {
-      "$ref": "vaccine_administered_care_institutions.json"
-    },
     "vaccine_administered_doctors": {
       "$ref": "vaccine_administered_doctors.json"
     },
@@ -163,11 +158,8 @@
     "vaccine_administered_ggd": {
       "$ref": "vaccine_administered_ggd.json"
     },
-    "vaccine_administered_hospitals": {
-      "$ref": "vaccine_administered_hospitals.json"
-    },
-    "vaccine_administered_lnaz": {
-      "$ref": "vaccine_administered_lnaz.json"
+    "vaccine_administered_hospitals_and_care_institutions": {
+      "$ref": "vaccine_administered_hospitals_and_care_institutions.json"
     },
     "vaccine_administered_total": {
       "$ref": "vaccine_administered_total.json"
