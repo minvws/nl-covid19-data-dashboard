@@ -1,13 +1,20 @@
 import { NlVaccineStockValue } from '@corona-dashboard/common';
-import { useState } from 'react';
+import { pick } from 'lodash';
+import { useMemo, useState } from 'react';
+import { isPresent } from 'ts-is-present';
+import { ChartTile } from '~/components-styled/chart-tile';
 import {
   InteractiveLegend,
   SelectOption,
 } from '~/components-styled/interactive-legend';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import {
+  SeriesConfig,
+  TimeSeriesChart,
+} from '~/components-styled/time-series-chart';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { colors } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 interface VaccineStockPerSupplierChartProps {
   values: NlVaccineStockValue[];
@@ -22,66 +29,115 @@ export function VaccineStockPerSupplierChart({
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
 
-  const vaccineSelectOptions: SelectOption[] = [
+  const maximumValuesPerTimeframeOption = useMemo(
+    () =>
+      ({
+        all: getMaximumPropertyValueInTimeframe(values, 'all'),
+        '5weeks': getMaximumPropertyValueInTimeframe(values, '5weeks'),
+      } as Record<TimeframeOption, number>),
+    [values]
+  );
+
+  const optionsConfig: SelectOption[] = [
     {
-      metricProperty: 'bio_n_tech_pfizer' as const,
+      metricProperty: 'bio_n_tech_pfizer',
       color: colors.data.vaccines.bio_n_tech_pfizer,
       label: productNames.pfizer,
       shape: 'circle',
     },
     {
-      metricProperty: 'moderna' as const,
+      metricProperty: 'moderna',
       color: colors.data.vaccines.moderna,
       label: productNames.moderna,
       shape: 'circle',
     },
     {
-      metricProperty: 'astra_zeneca' as const,
+      metricProperty: 'astra_zeneca',
       color: colors.data.vaccines.astra_zeneca,
       label: productNames.astra_zeneca,
       shape: 'circle',
     },
   ];
 
-  const selectableOptions = vaccineSelectOptions.map((x) => x.metricProperty);
-  const [selected, setSelected] = useState<string>(selectableOptions[0]);
-  const selectedVaccine =
-    vaccineSelectOptions.find((x) => x.metricProperty === selected) ??
-    vaccineSelectOptions[0];
+  const allOptions = optionsConfig.map((x) => x.metricProperty);
+  const [selected, setSelected] = useState<string>(allOptions[0]);
 
-  const chartConfig = [
+  const selectedConfig =
+    optionsConfig.find((x) => x.metricProperty === selected) ??
+    optionsConfig[0];
+
+  const seriesConfig: SeriesConfig<NlVaccineStockValue> = [
     {
-      ...selectedVaccine,
+      type: 'area',
       metricProperty: `${selected}_available` as keyof NlVaccineStockValue,
       label: replaceVariablesInText(text.legend.available, {
-        vaccineName: selectedVaccine.label,
+        vaccineName: selectedConfig.label,
       }),
-      type: 'line' as const,
+      color: selectedConfig.color,
+      curve: 'step',
     },
     {
-      ...selectedVaccine,
+      type: 'line',
       metricProperty: `${selected}_total` as keyof NlVaccineStockValue,
       label: replaceVariablesInText(text.legend.total, {
-        vaccineName: selectedVaccine.label,
+        vaccineName: selectedConfig.label,
       }),
       color: colors.lightGray,
-      type: 'line' as const,
+      curve: 'step',
     },
   ];
 
   return (
-    <>
-      <InteractiveLegend
-        helpText={text.select_help_text}
-        selectOptions={vaccineSelectOptions}
-        selection={[selected]}
-        onToggleItem={setSelected}
-      />
-      <TimeSeriesChart
-        tooltipTitle={text.tooltip_title}
-        values={values}
-        seriesConfig={chartConfig}
-      />
-    </>
+    <ChartTile
+      title={text.title}
+      description={text.description}
+      metadata={{
+        source: siteText.vaccinaties.bronnen.rivm,
+      }}
+      timeframeOptions={['all', '5weeks']}
+      timeframeInitialValue="5weeks"
+    >
+      {(timeframe) => (
+        <>
+          <InteractiveLegend
+            helpText={text.select_help_text}
+            selectOptions={optionsConfig}
+            selection={[selected]}
+            onToggleItem={setSelected}
+          />
+          <TimeSeriesChart
+            tooltipTitle={text.tooltip_title}
+            values={values}
+            seriesConfig={seriesConfig}
+            timeframe={timeframe}
+            dataOptions={{
+              forcedMaximumValue: maximumValuesPerTimeframeOption[timeframe],
+            }}
+          />
+        </>
+      )}
+    </ChartTile>
+  );
+}
+
+function getMaximumPropertyValueInTimeframe(
+  values: NlVaccineStockValue[],
+  timeframe: TimeframeOption
+) {
+  const valuesInTimeframe = getValuesInTimeframe(values, timeframe);
+
+  return valuesInTimeframe.reduce(
+    (acc, value) =>
+      Math.max(
+        acc,
+        ...Object.values(
+          pick(value, [
+            'bio_n_tech_pfizer_total',
+            'moderna_total',
+            'astra_zeneca_total',
+          ])
+        ).filter(isPresent)
+      ),
+    0
   );
 }
