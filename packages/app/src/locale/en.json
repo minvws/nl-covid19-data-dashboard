@@ -15,8 +15,8 @@
       "text": "View the full message from the RIVM",
       "href": "https://www.rivm.nl/en/news/uk-variant-gains-ground-in-the-netherlands"
     },
-    "subtitel": "Wekelijkse landelijke toelichting",
-    "datum": "12 december 2020"
+    "subtitel": "Weekly national commentary",
+    "datum": "12 December 2020"
   },
   "error_titel": {
     "text": "Something went wrong"
@@ -69,11 +69,11 @@
       "href": "https://www.databronnencovid19.nl/Bron?naam=Nationale-Intensive-Care-Evaluatie",
       "text": "NICE via RIVM"
     },
-    "titel": "Intensive care admissions by day",
+    "titel": "Reported intensive care admissions by day",
     "pagina_toelichting": "Daily number of COVID-19 patients admitted to a hospital intensive care unit (ICU), directly or from a regular hospital ward. To avoid doubles only the first IC admission of a patient counts. This number gives information about the severity of the disease en helps track the development of the epidemic.",
     "barscale_titel": "Intensive care admissions per day",
     "barscale_screenreader_text": "{{value}} intensive care-admissions by day. Alert value: {{signaalwaarde}} admissions per day.",
-    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.",
+    "extra_uitleg": "Number of confirmed COVID-19 cases who are admitted to a hospital intensive care unit (ICU) per day. This figure shows how many hospital admissions are reported per day. It may include hospital admissions that occurred in previous days.\n\nNote: From 25 March, the dashboard will show the number of reported IC admissions per day instead of the average number of admissions over the past three days. The number above is therefore not comparable with the number that was previously on the dashboard.",
     "linechart_titel": "ICU admissions over time",
     "bronnen": {
       "nice": {
@@ -264,14 +264,14 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM",
-        "aria_text": "Bekijk de databron van Postief geteste mensen op het RIVM"
+        "aria_text": "View the data source of positive tested people at RIVM"
       }
     },
     "tooltip_labels": {
       "infected_per_100k": "Confirmed cases per 100.000",
-      "infected_percentage": "Percentage positieve testen",
-      "tested_total": "Totaal aantal testen",
-      "infected": "Aantal positieve testen"
+      "infected_percentage": "Percentage confirmed cases",
+      "tested_total": "Total number of tests",
+      "infected": "Number of confirmed cases"
     }
   },
   "besmettelijke_personen": {
@@ -550,7 +550,7 @@
     "rwzi_abbrev": "",
     "map_titel": "Average number of virus particles per 100,000 inhabitants",
     "map_toelichting": "This map shows the average number of virus particles per 100,000 inhabitants, per safety region.",
-    "legenda_titel": "Legenda",
+    "legenda_titel": "Legend",
     "map_tooltip": "per 100,000 inhabitants",
     "map_tooltip_value": "{{value}} x100 billion",
     "reference": {
@@ -686,7 +686,7 @@
     "miljoen": "million",
     "signaalwaarde": "Alert value",
     "totaal": "Total",
-    "rond": "rond"
+    "rond": "around"
   },
   "seoHead": {
     "default_description": "Information on the development of the coronavirus in the Netherlands.",
@@ -1495,7 +1495,7 @@
     "kpi_titel": "Total no. of new infected locations",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case among residents, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total number of infected locations over time",
-    "barscale_screenreader_text": "{{value}} new reported locations with at least one confirmed case amongst residents per day.",
+    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "chloropleth_legenda": {
       "titel": "Percentage of infected locations",
       "geen_meldingen": "No newly confirmed cases"
@@ -1551,7 +1551,7 @@
       }
     },
     "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "gehandicaptenzorg_oversterfte": {
@@ -1581,7 +1581,7 @@
       }
     },
     "kpi_titel": "Number of deceased residents",
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_trend_label": "Number of deceased residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
@@ -1596,8 +1596,8 @@
     "barscale_screenreader_text": "{{value}}deceased residents.",
     "extra_uitleg": "This is an estimate of the number of COVID-19 related deaths reported yesterday among disability care home residents in this region.",
     "linechart_titel": "Number of deceased residents over time",
-    "map_titel": "Gehandicaptenzorg oversterfte in Nederland",
-    "map_toelichting": "Deze kaarten laten zien hoe de oversterfte in gehandicaptenzorglocaties is in Nederland per dag.",
+    "map_titel": "Number of deceased disability care home residents in the Netherlands",
+    "map_toelichting": "These maps show the number of deceased residents in disabled care locations in the Netherlands per day.",
     "titel_sidebar": "Death per day",
     "metadata": {
       "title": "Deceased residents of disability care homes in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
@@ -1614,7 +1614,7 @@
         "text": "RIVM"
       }
     },
-    "line_chart_legend_trend_label": "Aantal overleden bewoners",
+    "line_chart_legend_trend_label": "Number of deceased residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
@@ -1626,7 +1626,7 @@
     "kpi_titel": "Total no. of infected locations ",
     "kpi_toelichting": "This figure shows the total number of disability care homes that have reported at least one confirmed COVID-19 case, based on a positive test, in the last 28 days. The percentage expresses the share of all disability care homes in the Netherlands with confirmed COVID-19 cases.",
     "linechart_titel": "Total number of infected locations over time",
-    "barscale_screenreader_text": "{{value}} nieuwe locaties waarbij tenminste één bewoner positief getest is, per dag.",
+    "barscale_screenreader_text": "{{value}} new locations where there is at least one confirmed case, per day.",
     "metadata": {
       "title": "Infected disability care homes in {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Regional overview of the disability care homes in {{safetyRegionName}} that have reported at least one confirmed COVID-19 case."
@@ -1651,10 +1651,10 @@
     "extra_uitleg": "The number of disability care home residents in this region who were reported as testing positive for COVID-19 yesterday.",
     "pagina_toelichting": "People who live in disability care homes are often extra vulnerable to coronavirus infection. Because of this, Municipal health services (GGDs) monitor whether a persons who tests positive for COVID-19 lives in a disability care home. By doing so, measures can be taken if the number of cases in residential care increases.",
     "linechart_titel": "Number of confirmed cases among residents over time",
-    "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
+    "barscale_screenreader_text": "{{value}} confirmed cases",
     "titel_sidebar": "Number of confirmed cases (residents)",
     "chloropleth_legenda": {
-      "titel": "Aantal per 100.000 inwoners",
+      "titel": "Number per 100,000 residents",
       "geen_meldingen": "Geen meldingen"
     },
     "map_titel": "Verdeling positief geteste mensen in Nederland",
@@ -1675,7 +1675,7 @@
       }
     },
     "kpi_titel": "Daily number of disabililty care home residents who were reported as testing positive for COVID-19",
-    "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
+    "line_chart_legend_trend_label": "Number of confirmed cases",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
   },
   "thuiswonende_ouderen": {
@@ -1708,7 +1708,7 @@
       "choropleth_daily_description": "This map shows the differences between safety regions in the number of confirmed cases per 100,000 among over-70s living at home, as reported yesterday.",
       "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
-      "line_chart_legend_trend_label": "Nieuwe besmettingen",
+      "line_chart_legend_trend_label": "New confirmed cases",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "section_deceased": {
@@ -1729,7 +1729,7 @@
       "kpi_daily_description": "The number of people over 70 living at home who were reported as deceased due to COVID-19 yesterday.",
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily.",
-      "line_chart_legend_trend_label": "Aantal overledenen",
+      "line_chart_legend_trend_label": "Number of deceased",
       "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Confirmed cases"
@@ -1815,7 +1815,7 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
@@ -1848,7 +1848,7 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
+      "line_chart_covid_daily_legend_trend_label": "Reported number of deceased",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
@@ -2524,7 +2524,7 @@
   "common.tooltip.positive_tested_value": "",
   "search": {
     "placeholder": "Search for a municipality of safety region",
-    "clear": "Zoekopdracht wissen",
+    "clear": "Clear search",
     "no_hits": "No {{subject}} found with “{{search}}”"
   },
   "veiligheidsregio_actueel": {
@@ -2875,9 +2875,9 @@
     "sewer_municipal": "Average number of virus particles:"
   },
   "section_sterftemonitor_vr": {
-    "title": "Sterftemonitor",
+    "title": "Mortality monitor",
     "description": "Every week the national office Statistics Netherlands (CBS) publishes data on the total number of deaths and compares this to the predicted number of deaths, corrected for extreme temperatures, epidemics, etc. If more deaths occur than predicted, these are considered excess deaths. This graph may show a more complete picture of COVID-19 related deaths than the numbers reported by the GGD because not everyone who dies from COVID-19 has been tested for it.",
-    "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
+    "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "bronnen": {
       "cbs": {
         "href": "https://mlzopendata.cbs.nl/#/MLZ/nl/dataset/40080NED",
