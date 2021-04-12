@@ -14,6 +14,7 @@ import {
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 interface VaccineStockPerSupplierChartProps {
   values: NlVaccineStockValue[];
@@ -25,27 +26,17 @@ export function VaccineStockPerSupplierChart({
   const { siteText } = useIntl();
   const text = siteText.vaccinaties.stock_per_supplier_chart;
 
-  const maximumValueForAllProperties = useMemo(
-    () =>
-      values.reduce(
-        (acc, value) =>
-          Math.max(
-            acc,
-            ...Object.values(
-              pick(value, [
-                'bio_n_tech_pfizer_total',
-                'moderna_total',
-                'astra_zeneca_total',
-              ])
-            ).filter(isPresent)
-          ),
-        0
-      ),
-    [values]
-  );
-
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
+
+  const maximumValuesPerTimeframeOption = useMemo(
+    () =>
+      ({
+        all: getMaximumPropertyValueInTimeframe(values, 'all'),
+        '5weeks': getMaximumPropertyValueInTimeframe(values, '5weeks'),
+      } as Record<TimeframeOption, number>),
+    [values]
+  );
 
   const optionsConfig: SelectOption[] = [
     {
@@ -119,10 +110,34 @@ export function VaccineStockPerSupplierChart({
             values={values}
             seriesConfig={seriesConfig}
             timeframe={timeframe}
-            dataOptions={{ forcedMaximumValue: maximumValueForAllProperties }}
+            dataOptions={{
+              forcedMaximumValue: maximumValuesPerTimeframeOption[timeframe],
+            }}
           />
         </>
       )}
     </ChartTile>
+  );
+}
+
+function getMaximumPropertyValueInTimeframe(
+  values: NlVaccineStockValue[],
+  timeframe: TimeframeOption
+) {
+  const valuesInTimeframe = getValuesInTimeframe(values, timeframe);
+
+  return valuesInTimeframe.reduce(
+    (acc, value) =>
+      Math.max(
+        acc,
+        ...Object.values(
+          pick(value, [
+            'bio_n_tech_pfizer_total',
+            'moderna_total',
+            'astra_zeneca_total',
+          ])
+        ).filter(isPresent)
+      ),
+    0
   );
 }
