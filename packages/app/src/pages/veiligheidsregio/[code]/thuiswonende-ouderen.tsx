@@ -72,6 +72,7 @@ const ElderlyAtHomeRegionalPage = (
             title={replaceVariablesInText(text.section_positive_tested.title, {
               safetyRegion: safetyRegionName,
             })}
+            headingLevel={1}
             icon={<ElderlyIcon />}
             subtitle={replaceVariablesInText(
               text.section_positive_tested.description,

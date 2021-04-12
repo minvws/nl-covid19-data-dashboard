@@ -78,6 +78,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
               municipalityName,
             })}
+            headingLevel={1}
             icon={<CoronaVirusIcon />}
             subtitle={text.section_deceased_rivm.description}
             reference={text.section_deceased_rivm.reference}

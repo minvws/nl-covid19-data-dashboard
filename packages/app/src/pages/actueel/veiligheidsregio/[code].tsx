@@ -39,11 +39,11 @@ import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/too
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';

@@ -136,7 +136,7 @@ export function ContentHeader(props: ContentHeaderProps) {
     <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={hasIcon}>
       <Box px={[3, null, 0]} spacing={1}>
         {category && (
-          <CategoryHeading level={1} hide={hideCategory} hasIcon={hasIcon}>
+          <CategoryHeading level={2} hide={hideCategory} hasIcon={hasIcon}>
             {category}
             {screenReaderCategory && (
               <AriaInlineText> - {screenReaderCategory}</AriaInlineText>

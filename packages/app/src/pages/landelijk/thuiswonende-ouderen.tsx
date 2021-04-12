@@ -74,6 +74,7 @@ const ElderlyAtHomeNationalPage = (
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
             title={text.section_positive_tested.title}
+            headingLevel={1}
             icon={<ElderlyIcon />}
             subtitle={text.section_positive_tested.description}
             metadata={{

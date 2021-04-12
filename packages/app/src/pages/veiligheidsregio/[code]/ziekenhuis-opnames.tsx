@@ -91,6 +91,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               safetyRegion: safetyRegionName,
             })}
+            headingLevel={1}
             icon={<Ziekenhuis />}
             subtitle={text.pagina_toelichting}
             metadata={{

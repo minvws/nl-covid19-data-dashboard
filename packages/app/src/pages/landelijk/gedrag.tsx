@@ -18,6 +18,9 @@ import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-ti
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -32,9 +35,6 @@ import {
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -70,6 +70,7 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
           <ContentHeader
             category={siteText.nationaal_layout.headings.gedrag}
             title={nl_gedrag.pagina.titel}
+            headingLevel={1}
             icon={<Gedrag />}
             subtitle={nl_gedrag.pagina.toelichting}
             metadata={{

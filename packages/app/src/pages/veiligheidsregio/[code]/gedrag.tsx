@@ -62,6 +62,7 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
           <ContentHeader
             category={siteText.nationaal_layout.headings.gedrag}
             title={text.pagina.titel}
+            headingLevel={1}
             icon={<Gedrag />}
             subtitle={text.pagina.toelichting}
             metadata={{

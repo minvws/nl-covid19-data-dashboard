@@ -100,6 +100,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               siteText.positief_geteste_personen.titel_sidebar
             }
             title={text.titel}
+            headingLevel={1}
             icon={<Getest />}
             subtitle={text.pagina_toelichting}
             metadata={{

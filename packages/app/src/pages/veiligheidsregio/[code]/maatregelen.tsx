@@ -113,6 +113,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 safetyRegionName,
               }
             )}
+            headingLevel={1}
           />
 
           {showLockdown && (

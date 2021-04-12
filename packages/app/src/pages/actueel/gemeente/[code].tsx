@@ -27,7 +27,8 @@ import { MaxWidth } from '~/components-styled/max-width';
 import { Metadata } from '~/components-styled/metadata';
 import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
 import { TileList } from '~/components-styled/tile-list';
-import { Text } from '~/components-styled/typography';
+import { Heading, Text } from '~/components-styled/typography';
+import { VisuallyHidden } from '~/components-styled/visually-hidden';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -38,11 +39,11 @@ import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/too
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
@@ -132,6 +133,14 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
+        <VisuallyHidden>
+          <Heading level={1}>
+            {replaceComponentsInText(text.title, {
+              municipalityName: municipalityName,
+            })}
+          </Heading>
+        </VisuallyHidden>
+
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader

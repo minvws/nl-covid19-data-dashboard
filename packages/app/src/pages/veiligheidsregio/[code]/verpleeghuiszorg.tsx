@@ -76,6 +76,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(positiveTestedPeopleText.titel, {
               safetyRegion: safetyRegionName,
             })}
+            headingLevel={1}
             icon={<Verpleeghuiszorg />}
             subtitle={replaceVariablesInText(
               positiveTestedPeopleText.pagina_toelichting,

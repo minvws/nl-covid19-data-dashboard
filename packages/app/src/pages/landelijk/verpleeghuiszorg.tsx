@@ -72,6 +72,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verpleeghuis_besmette_locaties.titel_sidebar
             }
             title={positiveTestedPeopleText.titel}
+            headingLevel={1}
             icon={<Verpleeghuiszorg />}
             subtitle={positiveTestedPeopleText.pagina_toelichting}
             metadata={{

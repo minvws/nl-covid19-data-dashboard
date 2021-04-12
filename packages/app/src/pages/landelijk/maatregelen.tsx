@@ -80,7 +80,10 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader title={siteText.nationaal_maatregelen.titel} />
+          <ContentHeader
+            title={siteText.nationaal_maatregelen.titel}
+            headingLevel={1}
+          />
 
           {showLockdown && (
             <KpiSection flexDirection="column">

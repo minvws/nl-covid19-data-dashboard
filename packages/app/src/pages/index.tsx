@@ -129,7 +129,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
          * a hidden H1 here.
          */}
         <VisuallyHidden>
-          <Heading level={1}>{text.title}</Heading>
+          <Heading level={1}>
+            {replaceComponentsInText(text.title, {
+              the_netherlands: text.the_netherlands,
+            })}
+          </Heading>
         </VisuallyHidden>
 
         <MaxWidth id="content">

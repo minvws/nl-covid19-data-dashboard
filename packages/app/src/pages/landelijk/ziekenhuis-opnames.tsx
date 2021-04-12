@@ -94,6 +94,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               siteText.ziekenhuisopnames_per_dag.titel_sidebar
             }
             title={text.titel}
+            headingLevel={1}
             icon={<Ziekenhuis />}
             subtitle={text.pagina_toelichting}
             metadata={{

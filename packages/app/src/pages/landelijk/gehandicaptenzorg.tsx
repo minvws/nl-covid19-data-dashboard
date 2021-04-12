@@ -70,6 +70,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
             }
             title={positiveTestedPeopleText.titel}
+            headingLevel={1}
             icon={<Gehandicaptenzorg />}
             subtitle={positiveTestedPeopleText.pagina_toelichting}
             metadata={{

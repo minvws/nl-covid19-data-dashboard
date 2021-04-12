@@ -83,6 +83,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               municipality: municipalityName,
             })}
+            headingLevel={1}
             icon={<Getest />}
             subtitle={text.pagina_toelichting}
             metadata={{

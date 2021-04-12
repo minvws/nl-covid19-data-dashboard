@@ -68,6 +68,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           <ContentHeader
             category={siteText.nationaal_layout.headings.besmettingen}
             title={text.section_deceased_rivm.title}
+            headingLevel={1}
             icon={<CoronaVirusIcon />}
             subtitle={text.section_deceased_rivm.description}
             reference={text.section_deceased_rivm.reference}

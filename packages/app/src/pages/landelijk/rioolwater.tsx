@@ -84,6 +84,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             category={siteText.nationaal_layout.headings.vroege_signalen}
             screenReaderCategory={siteText.rioolwater_metingen.titel_sidebar}
             title={text.titel}
+            headingLevel={1}
             icon={<RioolwaterMonitoring />}
             subtitle={text.pagina_toelichting}
             metadata={{

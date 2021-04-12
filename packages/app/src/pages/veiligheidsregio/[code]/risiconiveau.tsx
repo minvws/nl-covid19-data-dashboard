@@ -115,6 +115,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               safetyRegionName,
             })}
+            headingLevel={1}
             subtitle={text.pagina_toelichting}
             reference={text.reference}
             metadata={{

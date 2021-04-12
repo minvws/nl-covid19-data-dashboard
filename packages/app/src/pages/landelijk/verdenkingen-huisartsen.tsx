@@ -44,6 +44,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verdenkingen_huisartsen.titel_sidebar
             }
             title={text.titel}
+            headingLevel={1}
             icon={<Arts />}
             subtitle={text.pagina_toelichting}
             metadata={{
