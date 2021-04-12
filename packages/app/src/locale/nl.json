@@ -264,7 +264,7 @@
         "download": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv",
         "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
         "text": "RIVM",
-        "aria_text": "Bekijk de databron van Postief geteste mensen op het RIVM"
+        "aria_text": "Bekijk de databron van positief geteste mensen op het RIVM"
       }
     },
     "tooltip_labels": {
@@ -2026,7 +2026,7 @@
     "grafieken": {
       "reproductiegetal_verloop": "Deze grafiek toont het reproductiegetal door de tijd heen.",
       "ziekenhuisopnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
-      "intensive_care_opnames": "Deze grafiek toon de intensive care opnames door de tijd heen.",
+      "intensive_care_opnames": "Deze grafiek toon de intensive care-opnames door de tijd heen.",
       "verpleeghuiszorg_positief_getest": "Deze grafiek toont het aantal bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
       "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties door de tijd heen.",
       "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
