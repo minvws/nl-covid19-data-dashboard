@@ -118,13 +118,22 @@ export const Axes = memo(function Axes({
   }, []);
 
   const weekGridLines = [];
+  const weekNumbers = [];
+  let weekWidth = 0;
 
   if (showWeekGridLines) {
     const weekInSeconds = 7 * 24 * 60 * 60;
     const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
-    for (let i = 1; i <= weeks; ++i) {
-      weekGridLines.push(startUnix + i * weekInSeconds);
+    const firstMonday = getWeekInfo(new Date(startUnix * 1000));
+    const firstMondayUnix = firstMonday.weekStartDate.getTime() / 1000;
+    for (let i = 0; i <= weeks; ++i) {
+      weekGridLines.push(firstMondayUnix + i * weekInSeconds);
+      if (i > 0) {
+        weekNumbers.push(firstMondayUnix + i * weekInSeconds);
+      }
     }
+
+    weekWidth = xScale(weekGridLines[2]) - xScale(weekGridLines[1]);
   }
 
   /**
@@ -177,36 +186,26 @@ export const Axes = memo(function Axes({
             tickFormat={formatXAxis as AnyTickFormatter}
             top={bounds.height}
             stroke={colors.silver}
-            // tickLabelProps={(x) => ({
-            //   fill: colors.data.axisLabels,
-            //   fontSize: 12,
-            //   /**
-            //    * Using anchor middle the line marker label will fall nicely on top
-            //    * of the axis label.
-            //    *
-            //    * The only times at which we can not use middle is if we are
-            //    * rendering a year in the label, because it becomes too long.
-            //    */
-            //   textAnchor:
-            //     x === startUnix
-            //       ? isLongStartLabel
-            //         ? 'start'
-            //         : 'middle'
-            //       : x === endUnix
-            //       ? isLongEndLabel
-            //         ? 'end'
-            //         : 'middle'
-            //       : 'middle',
-            // })}
+            tickLabelProps={() => ({
+              fill: colors.data.axisLabels,
+              fontSize: 12,
+              textAnchor: 'middle',
+            })}
             hideTicks
           />
 
           <AxisTop
             scale={xScale}
-            tickValues={weekGridLines}
+            tickValues={weekNumbers}
             tickFormat={formatWeekNumberAxis as AnyTickFormatter}
             stroke={colors.silver}
             hideTicks
+            tickLabelProps={() => ({
+              fill: colors.data.axisLabels,
+              fontSize: 12,
+              textAnchor: 'middle',
+              transform: `translate(${weekWidth / 2} 0)`,
+            })}
           />
         </>
       )}
