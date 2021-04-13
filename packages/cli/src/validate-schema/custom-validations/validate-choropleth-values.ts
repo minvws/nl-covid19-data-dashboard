@@ -35,10 +35,7 @@ export const validateChoroplethValues = (
   codeProperty: string, //the gmcode or vrcode property name
   input: Record<string, any> //GM***.json or VR***.json
 ): string[] | undefined => {
-  const commonDataProperties = extractDataCommonProperties(
-    input,
-    collectionJson
-  );
+  const commonDataProperties = getCommonDataProperties(input, collectionJson);
 
   const code = input.code;
 
@@ -72,7 +69,7 @@ function haveEqualCommonProperties(
   collectionValue: any,
   propertyName: string
 ) {
-  const commonProperties = extractCommonProperties(collectionValue, lastValue);
+  const commonProperties = getCommonProperties(collectionValue, lastValue);
   const result = commonProperties
     .map((key) => {
       return lastValue[key] !== collectionValue[key]
@@ -83,11 +80,11 @@ function haveEqualCommonProperties(
   return result.length ? result.join(', ') : undefined;
 }
 
-function extractCommonProperties(left: any, right: any) {
+function getCommonProperties(left: any, right: any) {
   return Object.keys(left).filter((key) => right.hasOwnProperty(key));
 }
 
-function extractDataCommonProperties(left: any, right: any) {
+function getCommonDataProperties(left: any, right: any) {
   return Object.entries(left)
     .filter(([, values]) => typeof values === 'object')
     .map(([key]) => key)
