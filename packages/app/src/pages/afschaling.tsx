@@ -12,7 +12,7 @@ import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
 import { Tile } from '~/components-styled/tile';
-import { MiniTimeSeriesChart } from '~/components-styled/time-series-chart';
+import { TimeSeriesMiniBarChart } from '~/components-styled/time-series-chart';
 import { Heading, Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { Layout } from '~/domain/layout/layout';
@@ -126,26 +126,21 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             isBelowThreshold={reproduction_is_below_threshold}
             thresholdDaySpan={reproduction_threshold_day_span}
           >
-            <MiniTimeSeriesChart
-              displayTooltipValueOnly
+            <TimeSeriesMiniBarChart
               initialWidth={300}
               height={100}
-              numGridLines={0}
-              paddingLeft={10}
               values={data.reproduction.values
                 .filter((x) => x.index_average)
                 .slice(-14)}
-              seriesConfig={[
-                {
-                  type: 'bar',
-                  metricProperty: 'index_average',
-                  label: siteText.afschaling.trend_grafieken.reproductiegetal,
-                  color: colors.data.positive,
-                  fillOpacity: 1,
-                  aboveBenchmarkColor: colors.data.negative,
-                  aboveBenchmarkFillOpacity: 1,
-                },
-              ]}
+              seriesConfig={{
+                type: 'bar',
+                metricProperty: 'index_average',
+                label: siteText.afschaling.trend_grafieken.reproductiegetal,
+                color: colors.data.positive,
+                fillOpacity: 1,
+                aboveBenchmarkColor: colors.data.negative,
+                aboveBenchmarkFillOpacity: 1,
+              }}
               dataOptions={{
                 benchmark: {
                   value: 1,
@@ -160,25 +155,21 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             isBelowThreshold={intensive_care_nice_is_below_threshold}
             thresholdDaySpan={intensive_care_nice_threshold_day_span}
           >
-            <MiniTimeSeriesChart
-              displayTooltipValueOnly
+            <TimeSeriesMiniBarChart
               initialWidth={300}
               height={100}
-              numGridLines={0}
               values={data.intensive_care_nice.values
                 .filter((x) => x.admissions_on_date_of_reporting)
                 .slice(-14)}
-              seriesConfig={[
-                {
-                  type: 'bar',
-                  metricProperty: 'admissions_on_date_of_reporting',
-                  label: siteText.afschaling.trend_grafieken.reproductiegetal,
-                  color: colors.data.positive,
-                  fillOpacity: 1,
-                  aboveBenchmarkColor: colors.data.negative,
-                  aboveBenchmarkFillOpacity: 1,
-                },
-              ]}
+              seriesConfig={{
+                type: 'bar',
+                metricProperty: 'admissions_on_date_of_reporting',
+                label: siteText.afschaling.trend_grafieken.reproductiegetal,
+                color: colors.data.positive,
+                fillOpacity: 1,
+                aboveBenchmarkColor: colors.data.negative,
+                aboveBenchmarkFillOpacity: 1,
+              }}
               dataOptions={{
                 benchmark: {
                   value: 20,
@@ -193,25 +184,21 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             isBelowThreshold={hospital_nice_is_below_threshold}
             thresholdDaySpan={hospital_nice_threshold_day_span}
           >
-            <MiniTimeSeriesChart
-              displayTooltipValueOnly
+            <TimeSeriesMiniBarChart
               initialWidth={300}
               height={100}
-              numGridLines={0}
               values={data.hospital_nice.values
                 .filter((x) => x.admissions_on_date_of_reporting)
                 .slice(-14)}
-              seriesConfig={[
-                {
-                  type: 'bar',
-                  metricProperty: 'admissions_on_date_of_reporting',
-                  label: siteText.afschaling.trend_grafieken.reproductiegetal,
-                  color: colors.data.positive,
-                  fillOpacity: 1,
-                  aboveBenchmarkColor: colors.data.negative,
-                  aboveBenchmarkFillOpacity: 1,
-                },
-              ]}
+              seriesConfig={{
+                type: 'bar',
+                metricProperty: 'admissions_on_date_of_reporting',
+                label: siteText.afschaling.trend_grafieken.reproductiegetal,
+                color: colors.data.positive,
+                fillOpacity: 1,
+                aboveBenchmarkColor: colors.data.negative,
+                aboveBenchmarkFillOpacity: 1,
+              }}
               dataOptions={{
                 benchmark: {
                   value: 80,
@@ -227,25 +214,21 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             isBelowThreshold={hospital_nice_is_below_threshold}
             thresholdDaySpan={hospital_nice_threshold_day_span}
           >
-            <MiniTimeSeriesChart
-              displayTooltipValueOnly
+            <TimeSeriesMiniBarChart
               initialWidth={300}
               height={100}
-              numGridLines={0}
               values={data.hospital_nice.values
                 .filter((x) => x.admissions_on_date_of_reporting)
                 .slice(-14)}
-              seriesConfig={[
-                {
-                  type: 'bar',
-                  metricProperty: 'admissions_on_date_of_reporting',
-                  label: siteText.afschaling.trend_grafieken.reproductiegetal,
-                  color: colors.data.positive,
-                  fillOpacity: 1,
-                  aboveBenchmarkColor: colors.data.negative,
-                  aboveBenchmarkFillOpacity: 1,
-                },
-              ]}
+              seriesConfig={{
+                type: 'bar',
+                metricProperty: 'admissions_on_date_of_reporting',
+                label: siteText.afschaling.trend_grafieken.reproductiegetal,
+                color: colors.data.positive,
+                fillOpacity: 1,
+                aboveBenchmarkColor: colors.data.negative,
+                aboveBenchmarkFillOpacity: 1,
+              }}
               dataOptions={{
                 benchmark: {
                   value: 80,

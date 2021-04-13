@@ -88,11 +88,11 @@ export function VerticalBarChart<
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
   const { isPercentage } = dataOptions || {};
-  const { padding, bounds, yAxisRef } = useDimensions(
+  const { padding, bounds, leftPaddingRef } = useDimensions({
     width,
     height,
-    paddingLeft
-  );
+    paddingLeft,
+  });
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
@@ -175,7 +175,7 @@ export function VerticalBarChart<
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
-            yAxisRef={yAxisRef}
+            yAxisRef={leftPaddingRef}
             isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
           />
 

@@ -158,11 +158,11 @@ export function TimeSeriesChart<
     timespanAnnotations,
   } = dataOptions || {};
 
-  const { padding, bounds, yAxisRef } = useDimensions(
+  const { padding, bounds, leftPaddingRef } = useDimensions({
     width,
     height,
-    paddingLeft
-  );
+    paddingLeft,
+  });
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
 
@@ -286,7 +286,7 @@ export function TimeSeriesChart<
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
-            yAxisRef={yAxisRef}
+            yAxisRef={leftPaddingRef}
             isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
           />
 

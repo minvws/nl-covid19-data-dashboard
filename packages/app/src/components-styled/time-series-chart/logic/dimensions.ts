@@ -24,32 +24,50 @@ const defaultPadding: Padding = {
   left: 40,
 };
 
-export function useDimensions(
-  width: number,
-  height: number,
-  paddingLeft?: number
-) {
+interface DimensionProps {
+  width: number;
+  height: number;
+  paddingLeft?: number;
+  /**
+   * A symmetrical padding ensures the right padding equals the left padding
+   */
+  isSymmetricalPadding?: boolean;
+}
+
+export function useDimensions({
+  width,
+  height,
+  paddingLeft,
+  isSymmetricalPadding,
+}: DimensionProps) {
   const isMounted = useIsMounted();
 
   const {
-    width: yAxisWidth = 0,
-    ref: yAxisRef,
+    width: measuredLeftPadding = 0,
+    ref: leftPaddingRef,
     // @ts-expect-error useResizeObserver expects element extending HTMLElement
   } = useResizeObserver<SVGElement>();
 
   return useMemo(() => {
-    /**
-     * When there's a padding left set/measured we'll add 10px extra to give the
-     * y-axis labels a bit more space, otherwise they could be cut off.
-     */
-    const paddingLeftWithExtraSpace =
-      paddingLeft ?? (yAxisWidth ? yAxisWidth + 10 : yAxisWidth);
+    const paddingWithExtraSpace =
+      paddingLeft ??
+      (measuredLeftPadding > 0
+        ? /**
+           * A measured left padding is most likely measured on elements holding
+           * text. It looks like using this exact value can sometimes result in
+           * cut-off text, therefore we'll add a tiny bit of extra padding.
+           */
+          measuredLeftPadding + 5
+        : measuredLeftPadding);
+
+    const left = isMounted
+      ? paddingWithExtraSpace ?? defaultPadding.left
+      : defaultPadding.left;
 
     const padding: Padding = {
       ...defaultPadding,
-      left: isMounted
-        ? paddingLeftWithExtraSpace ?? defaultPadding.left
-        : defaultPadding.left,
+      left,
+      right: isSymmetricalPadding ? left : defaultPadding.right,
     };
 
     const bounds: Bounds = {
@@ -57,8 +75,14 @@ export function useDimensions(
       height: height - padding.top - padding.bottom,
     };
 
-    console.log(padding);
-
-    return { padding, bounds, yAxisRef };
-  }, [paddingLeft, yAxisWidth, isMounted, width, height, yAxisRef]);
+    return { padding, bounds, leftPaddingRef };
+  }, [
+    paddingLeft,
+    measuredLeftPadding,
+    isMounted,
+    isSymmetricalPadding,
+    width,
+    height,
+    leftPaddingRef,
+  ]);
 }
