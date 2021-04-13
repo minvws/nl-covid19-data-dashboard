@@ -146,7 +146,9 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                     label:
                       text.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_label,
-                    shortLabel: 'deaths',
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label,
                     color: colors.data.primary,
                   },
                 ]}

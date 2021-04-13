@@ -2,20 +2,25 @@ import { css } from '@styled-system/css';
 import styled from 'styled-components';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { Box } from './base';
-
+import { ValueAnnotation } from '~/components-styled/value-annotation';
 interface ChoroplethLegendaProps {
   title: string;
   thresholds: ChoroplethThresholdsValue[];
+  valueAnnotation?: string;
 }
 
 export function ChoroplethLegenda({
   title,
   thresholds,
+  valueAnnotation,
 }: ChoroplethLegendaProps) {
   return (
     <Box width="100%" maxWidth={300}>
       {title && <h4>{title}</h4>}
-      <List aria-label="legend">
+      <List
+        aria-label="legend"
+        hasValueAnnotation={valueAnnotation ? true : false}
+      >
         {thresholds.map(({ color, threshold, label }, index) => (
           <Item key={color + threshold}>
             <LegendaColor
@@ -27,17 +32,19 @@ export function ChoroplethLegenda({
           </Item>
         ))}
       </List>
+      <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
     </Box>
   );
 }
 
-const List = styled.ul(
+const List = styled.ul<{ hasValueAnnotation?: boolean }>((x) =>
   css({
     width: '100%',
     marginTop: 0,
     paddingLeft: 0,
     listStyle: 'none',
     display: 'flex',
+    mb: x.hasValueAnnotation ? 2 : 3,
   })
 );
 
