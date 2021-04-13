@@ -39,8 +39,7 @@
       }
     },
     "last_value": {
-      "$ref": "#/definitions/value",
-      "testKey": "code"
+      "$ref": "#/definitions/value"
     }
   }
 }
