@@ -51,7 +51,11 @@ export const validateChoroplethValues = (
         return `No item with property ${codeProperty} == ${code} was found in the ${propertyName} collection (${collectionJsonFilename})`;
       }
       const lastValue = input[propertyName].last_value;
-      return isEqual(lastValue, collectionValue, propertyName);
+      return haveEqualCommonProperties(
+        lastValue,
+        collectionValue,
+        propertyName
+      );
     })
     .filter(isDefined);
 
@@ -63,7 +67,11 @@ export const validateChoroplethValues = (
     : undefined;
 };
 
-function isEqual(lastValue: any, collectionValue: any, propertyName: string) {
+function haveEqualCommonProperties(
+  lastValue: any,
+  collectionValue: any,
+  propertyName: string
+) {
   const commonProperties = extractCommonProperties(collectionValue, lastValue);
   const result = commonProperties
     .map((key) => {
