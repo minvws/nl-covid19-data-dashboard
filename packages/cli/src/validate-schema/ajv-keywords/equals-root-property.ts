@@ -10,7 +10,7 @@
 export const equalsRootProperty = {
   type: 'string',
   validate: function validateRootPropertyEquality(
-    schema: string,
+    schema: any,
     data: any,
     _parentSchema?: any,
     _dataPath?: string,
@@ -19,7 +19,7 @@ export const equalsRootProperty = {
     rootData?: any | any[]
   ): boolean {
     if (rootData) {
-      const rootValue = (rootData as any)[schema];
+      const rootValue = (rootData as any)[schema as string];
       const validated = data === rootValue;
       if (!validated) {
         (validateRootPropertyEquality as any).errors = [
