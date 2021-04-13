@@ -31,7 +31,7 @@ export function createChoroplethValidation(
  */
 export const validateChoroplethValues = (
   collectionJsonFilename: string,
-  collectionJson: any, // The GM_COLLECTION.sjon or VR_COLLECTION.json
+  collectionJson: Record<string, any>, // The GM_COLLECTION.sjon or VR_COLLECTION.json
   codeProperty: string, //the gmcode or vrcode property name
   input: Record<string, any> //GM***.json or VR***.json
 ): string[] | undefined => {
@@ -47,6 +47,9 @@ export const validateChoroplethValues = (
       const collectionValue = collectionJson[propertyName].find(
         (x: any) => x[codeProperty] === code
       );
+      if (!collectionValue) {
+        return `No item with property ${codeProperty} == ${code} was found in the ${propertyName} collection (${collectionJsonFilename})`;
+      }
       const lastValue = input[propertyName].last_value;
       return isEqual(lastValue, collectionValue, propertyName);
     })
