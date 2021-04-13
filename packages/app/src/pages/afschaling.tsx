@@ -11,7 +11,6 @@ import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
-import { Tile } from '~/components-styled/tile';
 import { TimeSeriesMiniBarChart } from '~/components-styled/time-series-chart';
 import { Heading, Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
@@ -207,36 +206,6 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
             />
           </MiniTrend>
         </Box>
-        <Tile>
-          <MiniTrend
-            title={siteText.afschaling.trend_grafieken.ziekenhuisopnames}
-            icon={<Ziekenhuis />}
-            isBelowThreshold={hospital_nice_is_below_threshold}
-            thresholdDaySpan={hospital_nice_threshold_day_span}
-          >
-            <TimeSeriesMiniBarChart
-              initialWidth={300}
-              height={100}
-              values={data.hospital_nice.values
-                .filter((x) => x.admissions_on_date_of_reporting)
-                .slice(-14)}
-              seriesConfig={{
-                type: 'bar',
-                metricProperty: 'admissions_on_date_of_reporting',
-                label: siteText.afschaling.trend_grafieken.reproductiegetal,
-                color: colors.data.positive,
-                fillOpacity: 1,
-                aboveBenchmarkColor: colors.data.negative,
-                aboveBenchmarkFillOpacity: 1,
-              }}
-              dataOptions={{
-                benchmark: {
-                  value: 80,
-                },
-              }}
-            />
-          </MiniTrend>
-        </Tile>
 
         <MaxWidth>
           <ContentBlock spacing={3}>
