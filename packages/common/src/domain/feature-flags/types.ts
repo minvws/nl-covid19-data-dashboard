@@ -9,30 +9,39 @@ export interface FeatureDefinition<FeatureName> {
   description?: string;
 
   /**
+   * Metric scope defines the files in which we enforce the (non-)existence of
+   * metricNames.
+   */
+  metricScopes: MetricScope[];
+
+  /**
+   * A metricName is the root-level schema property used to hold the data in the
+   * NL/VR/GM files. By limiting a feature to only 1 metric name, we can keep
+   * the code and API simple. If your feature is using more than one metric
+   * name, simply split it into multiple named features.
+   */
+  metricName?: string;
+
+  /**
+   * If the feature was built on new metric properties of an existing metric
+   * name then you can use this field to enforce the (non)existence of only
+   * those properties. The metric name will still be allowed to exist when this
+   * feature is disabled.
+   */
+  metricProperties?: string[];
+
+  /**
    * The route to filter from the sitemap when this feature is disabled. I don't
-   * think we'll need to have more than one route per feature.
+   * think we'll need to have more than one route per feature as this is quite
+   * rare. And you can always choose to define multiple features if you need to
+   * cover multiple routes.
    */
   route?: string;
-
-  /**
-   * The metricProperties involved with this feature. Listing them here will
-   * enforce the data being available when the feature flag is enabled. It will
-   * also enforce the data to not be available when the feature is disabled.
-   *
-   * A metricName is the root-level schema property used to hold the data in the
-   * NL/VR/GM files.
-   *
-   * If the feature was built on new metric properties of an existing metric
-   * (name) then this field should be left blank, because we only enforce the
-   * existence / non-existence of metric data on the root level.
-   */
-  metricNames?: string[];
-
-  /**
-   * Metric scope defines the files in which we enforce the (non-)existence of
-   * metricNames. If no scope is give, all will be assumed.
-   */
-  metricScope?: MetricScope[];
 }
 
-type MetricScope = 'nl' | 'vr' | 'gm' | 'vr_collection' | 'gm_collection';
+export type MetricScope =
+  | 'nl'
+  | 'vr'
+  | 'gm'
+  | 'vr_collection'
+  | 'gm_collection';

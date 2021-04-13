@@ -1,10 +1,17 @@
-import { features } from '@corona-dashboard/common';
+import {
+  assert,
+  FeatureDefinition,
+  FeatureName,
+  features,
+  MetricScope,
+} from '@corona-dashboard/common';
 import chalk from 'chalk';
 import { isEmpty } from 'lodash';
 import meow from 'meow';
 import path from 'path';
+import { isDefined } from 'ts-is-present';
 import { jsonDirectory } from '../config';
-import { getSchemaInfo } from '../schema/get-schema-info';
+import { getSchemaInfo, SchemaInfo } from '../schema/get-schema-info';
 import { readObjectFromJsonFile } from '../utils';
 
 const logSuccess = (...args: unknown[]) =>
@@ -37,7 +44,10 @@ const cli = meow(
   }
 );
 
-type Failure = { fileName: string; metricName: string };
+type Failure = {
+  feature: FeatureDefinition<FeatureName>;
+  messages: string[];
+};
 
 async function main() {
   const directory = jsonDirectory;
@@ -50,14 +60,18 @@ async function main() {
   const allFailures: Failure[] = [];
 
   for (const feature of features) {
-    const data = await readObjectFromJsonFile(path.join(directory, file));
-
     if (isVerbose) {
       console.log(
         'Feature',
         feature.name,
         feature.isEnabled ? ': enabled' : ': disabled'
       );
+    }
+
+    const messages = await validateFeatureData(feature, schemaInfo);
+
+    if (messages) {
+      allFailures.push({ feature, messages });
     }
 
     if (cli.flags.failEarly && !isEmpty(allFailures)) {
@@ -71,11 +85,11 @@ async function main() {
   if (!isEmpty(allFailures)) {
     console.error(allFailures);
     logError(
-      `There were ${allFailures.length} instances that failed to validate their last_value data.`
+      `There were ${allFailures.length} features that failed to validate their data.`
     );
     process.exit(1);
   } else {
-    logSuccess('All last_value data was validated!');
+    logSuccess('All features data is valid!');
   }
 }
 
@@ -86,3 +100,126 @@ main().then(
     process.exit(1);
   }
 );
+
+/**
+ * Validate if the data is there or not there. Returns one validation error
+ * message per scope.
+ */
+async function validateFeatureData(
+  feature: FeatureDefinition<FeatureName>,
+  schemaInfo: SchemaInfo
+) {
+  if (feature.metricName) {
+    //   /**
+    //    * Without a metric name there is nothing to validate on the data. Possibly
+    //    * this feature only has a route attached to it.
+    //    */
+    //   return;
+    // }
+
+    const promisedResults = feature.metricScopes.map((scope) =>
+      validateMetricNameForScope(
+        feature.metricName!,
+        scope,
+        feature.isEnabled,
+        schemaInfo
+      )
+    );
+
+    const results = await Promise.all(promisedResults);
+
+    /**
+     * If errors occurred on the metric name level then we can already return and
+     * do not test the properties.
+     */
+    if (!isEmpty(results)) {
+      return results;
+    }
+  }
+
+  if (feature.metricProperties) {
+    assert(
+      feature.metricName,
+      'If a feature defines metricProperties it should also have a metricName'
+    );
+
+    const promisedResults = feature.metricScopes.map((scope) =>
+      validateMetricPropertiesForScope(
+        feature.metricName,
+        feature.metricProperties,
+        scope,
+        feature.isEnabled,
+        schemaInfo
+      )
+    );
+
+    const results = await Promise.all(promisedResults);
+
+    /**
+     * If errors occurred on the metric name level then we can already return and
+     * do not test the properties.
+     */
+    if (!isEmpty(results)) {
+      return results;
+    }
+  }
+}
+
+async function validateMetricNameForScope(
+  metricName: string,
+  scope: MetricScope,
+  isEnabled: boolean,
+  schemaInfo: SchemaInfo
+) {
+  const { files, basePath } = schemaInfo[scope];
+
+  const promisedResults = files.map(async (file) => {
+    const data = await readObjectFromJsonFile(path.join(basePath, file));
+
+    if (isEnabled && !!data[metricName]) {
+      return `-- ${file} is missing data for ${metricName}`;
+    }
+
+    if (!isEnabled && data[metricName]) {
+      return `++ ${file} contains data for ${metricName}`;
+    }
+  });
+
+  const results = await Promise.all(promisedResults);
+
+  /**
+   * Not sure if we want to see
+   */
+
+  return results.filter(isDefined).join('\n');
+}
+
+// async function validateMetricPropertiesForScope(
+//   metricName: string,
+//   metricProperties: string[],
+//   scope: MetricScope,
+//   isEnabled: boolean,
+//   schemaInfo: SchemaInfo
+// ) {
+//   const { files, basePath } = schemaInfo[scope];
+
+//   const promisedResults = files.map(async (file) => {
+//     const data = await readObjectFromJsonFile(path.join(basePath, file));
+
+//     if (isEnabled && !!data[metricName]) {
+//       return `-- ${file} is missing data for ${metricName}`;
+//     }
+
+//     if (!isEnabled && data[metricName]) {
+//       return `++ ${file} contains data for ${metricName}`;
+//     }
+//   });
+
+//   const results = await Promise.all(promisedResults);
+
+//   /**
+//    * Not sure if we want to see
+//    */
+
+//   return results.filter(isDefined).join('\n');
+// }

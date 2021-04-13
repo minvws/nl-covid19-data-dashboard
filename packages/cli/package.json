@@ -20,9 +20,10 @@
     "lint": "echo 'No linter configured for @corona-dashboard/cli'",
     "type-check": "echo 'No type-check configured for @corona-dashboard/cli'",
     "compile": "tsc --noEmit",
-    "validate-json": "ts-node src/scripts/validate-json.ts",
+    "validate-json": "ts-node src/scripts/validate-json-all.ts",
     "validate-single": "ts-node src/scripts/validate-json-single.ts",
     "validate-last-values": "ts-node src/scripts/validate-last-values.ts",
+    "validate-feature-flags": "ts-node src/scripts/validate-feature-flags.ts",
     "generate-typescript": "ts-node src/scripts/generate-data-types.ts"
   },
   "devDependencies": {

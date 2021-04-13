@@ -1,26 +1,28 @@
 import fs from 'fs';
 import { jsonDirectory, localeDirectory } from '../config';
 import { validatePlaceholders } from './validate-placeholders';
-import { assert } from '@corona-dashboard/common';
+import { assert, MetricScope } from '@corona-dashboard/common';
 import { getFileNames } from '../utils';
 
 type CustomValidationFunction = (
   input: Record<string, unknown>
 ) => string[] | undefined;
 
-export type SchemaItemInfo = {
+export type SchemaInfo = Record<MetricScope | 'locale', SchemaInfoItem>;
+
+export type SchemaInfoItem = {
   files: string[];
   basePath: string;
   customValidations?: CustomValidationFunction[];
   optional?: boolean;
 };
 
-export function getSchemaInfo(path: string = jsonDirectory) {
+export function getSchemaInfo(path: string = jsonDirectory): SchemaInfo {
   assert(fs.existsSync(path), `Path ${path} does not exist`);
 
   const fileList = fs.readdirSync(path);
 
-  const info: Record<string, SchemaItemInfo> = {
+  return {
     nl: { files: ['NL.json'], basePath: path },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
@@ -38,6 +40,4 @@ export function getSchemaInfo(path: string = jsonDirectory) {
       customValidations: [validatePlaceholders],
     },
   };
-
-  return info;
 }

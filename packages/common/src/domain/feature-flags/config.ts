@@ -6,10 +6,14 @@ import { FeatureDefinition } from './types';
  */
 export type FeatureName = 'vaccineStockPerSupplier' | 'someOtherFeature';
 
-export const features: FeatureDefinition<FeatureName>[] = [
+export type Features = FeatureDefinition<FeatureName>[];
+
+export const features: Features = [
   {
     name: 'vaccineStockPerSupplier',
     isEnabled: false,
-    metricNames: ['vaccine_stock'],
+    metricScopes: ['nl'],
+    metricName: 'vaccine_stock',
+    metricProperties: ['astra_zeneca_total', 'astra_zeneca_available'],
   },
 ];

@@ -7,7 +7,7 @@ import {
   createValidateFunction,
   executeValidations,
   getSchemaInfo,
-  SchemaItemInfo,
+  SchemaInfoItem,
 } from '../schema';
 
 const cli = meow(
@@ -84,7 +84,7 @@ Promise.all(promisedValidations)
  * @param schemaInfo An object describing the files, path and custom validations for the given schema name
  * @returns An array of promises that will resolve either to true or false dependent on the validation result
  */
-async function validate(schemaName: string, schemaInfo: SchemaItemInfo) {
+async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
   const validateFunction = await createValidateFunction(
     path.join(schemaDirectory, schemaName, `__index.json`)
   );
