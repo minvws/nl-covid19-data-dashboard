@@ -3,6 +3,7 @@ import { Box } from '~/components-styled/base';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { Heading } from '~/components-styled/typography';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -15,7 +16,6 @@ import {
 } from '~/static-props/get-data';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
-import styles from './over.module.scss';
 interface VerantwoordingData {
   title: string | null;
   description: RichContentBlock[] | null;
@@ -80,38 +80,26 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
 
-      <Box bg="white">
-        <Box
-          pb={5}
-          pt={6}
-          px={{ _: 3, sm: 0 }}
-          maxWidth="contentWidth"
-          mx="auto"
-        >
-          <div className={styles.maxwidth}>
-            {content.title && <Heading level={1}>{content.title}</Heading>}
-            {content.description && (
-              <RichContent blocks={content.description} />
-            )}
-            {content.collapsibleList && (
-              <article>
-                {content.collapsibleList.map((item) => {
-                  const id = getSkipLinkId(item.title);
-                  return item.content ? (
-                    <CollapsibleSection key={id} id={id} summary={item.title}>
-                      {item.content && (
-                        <Box mt={3}>
-                          <RichContent blocks={item.content} />
-                        </Box>
-                      )}
-                    </CollapsibleSection>
-                  ) : null;
-                })}
-              </article>
-            )}
-          </div>
-        </Box>
-      </Box>
+      <ContentLayout>
+        {content.title && <Heading level={1}>{content.title}</Heading>}
+        {content.description && <RichContent blocks={content.description} />}
+        {content.collapsibleList && (
+          <article>
+            {content.collapsibleList.map((item) => {
+              const id = getSkipLinkId(item.title);
+              return item.content ? (
+                <CollapsibleSection key={id} id={id} summary={item.title}>
+                  {item.content && (
+                    <Box mt={3}>
+                      <RichContent blocks={item.content} />
+                    </Box>
+                  )}
+                </CollapsibleSection>
+              ) : null;
+            })}
+          </article>
+        )}
+      </ContentLayout>
     </Layout>
   );
 };

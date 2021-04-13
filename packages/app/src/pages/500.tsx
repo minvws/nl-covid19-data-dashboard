@@ -1,5 +1,5 @@
-import { Box } from '~/components-styled/base';
 import { Heading, Text } from '~/components-styled/typography';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -16,18 +16,10 @@ const ErrorPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...siteText.error_metadata} lastGenerated={lastGenerated}>
-      <Box bg="white">
-        <Box
-          pb={5}
-          pt={6}
-          px={{ _: 3, sm: 0 }}
-          maxWidth="contentWidth"
-          mx="auto"
-        >
-          <Heading level={1}>{siteText.error_titel.text}</Heading>
-          <Text>{siteText.error_beschrijving.text}</Text>
-        </Box>
-      </Box>
+      <ContentLayout>
+        <Heading level={1}>{siteText.error_titel.text}</Heading>
+        <Text>{siteText.error_beschrijving.text}</Text>
+      </ContentLayout>
     </Layout>
   );
 };

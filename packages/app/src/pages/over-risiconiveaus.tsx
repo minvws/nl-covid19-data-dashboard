@@ -3,6 +3,7 @@ import { Box } from '~/components-styled/base';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { CollapsibleSection } from '~/components-styled/collapsible';
 import { Heading } from '~/components-styled/typography';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -81,34 +82,26 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           title="webpagina"
         />
       </Head>
-      <Box bg="white">
-        <Box
-          pb={5}
-          pt={6}
-          px={{ _: 3, sm: 0 }}
-          maxWidth="contentWidth"
-          mx="auto"
-        >
-          {content.title && <Heading level={1}>{content.title}</Heading>}
-          {content.description && <RichContent blocks={content.description} />}
-          {content.collapsibleList && (
-            <article>
-              {content.collapsibleList.map((item) => {
-                const id = getSkipLinkId(item.title);
-                return item.content ? (
-                  <CollapsibleSection key={id} id={id} summary={item.title}>
-                    {item.content && (
-                      <Box mt={3}>
-                        <RichContent blocks={item.content} />
-                      </Box>
-                    )}
-                  </CollapsibleSection>
-                ) : null;
-              })}
-            </article>
-          )}
-        </Box>
-      </Box>
+      <ContentLayout>
+        {content.title && <Heading level={1}>{content.title}</Heading>}
+        {content.description && <RichContent blocks={content.description} />}
+        {content.collapsibleList && (
+          <article>
+            {content.collapsibleList.map((item) => {
+              const id = getSkipLinkId(item.title);
+              return item.content ? (
+                <CollapsibleSection key={id} id={id} summary={item.title}>
+                  {item.content && (
+                    <Box mt={3}>
+                      <RichContent blocks={item.content} />
+                    </Box>
+                  )}
+                </CollapsibleSection>
+              ) : null;
+            })}
+          </article>
+        )}
+      </ContentLayout>
     </Layout>
   );
 };

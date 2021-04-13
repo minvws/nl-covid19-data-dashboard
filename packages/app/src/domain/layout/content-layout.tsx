@@ -8,7 +8,7 @@ interface ContentLayoutProps {
 export function ContentLayout({ children }: ContentLayoutProps) {
   return (
     <Box bg="white">
-      <Box pb={5} pt={6} px={{ _: 3, sm: 0 }} maxWidth="contentWidth" mx="auto">
+      <Box pt={6} pb={5} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
         {children}
       </Box>
     </Box>

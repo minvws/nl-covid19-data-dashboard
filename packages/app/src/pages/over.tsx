@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { Box } from '~/components-styled/base';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { Heading } from '~/components-styled/typography';
+import { ContentLayout } from '~/domain/layout/content-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -62,18 +62,10 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
 
-      <Box bg="white">
-        <Box
-          pb={5}
-          pt={6}
-          px={{ _: 3, sm: 0 }}
-          maxWidth="contentWidth"
-          mx="auto"
-        >
-          {content.title && <Heading level={2}>{content.title}</Heading>}
-          {content.description && <RichContent blocks={content.description} />}
-        </Box>
-      </Box>
+      <ContentLayout>
+        {content.title && <Heading level={2}>{content.title}</Heading>}
+        {content.description && <RichContent blocks={content.description} />}
+      </ContentLayout>
     </Layout>
   );
 };
