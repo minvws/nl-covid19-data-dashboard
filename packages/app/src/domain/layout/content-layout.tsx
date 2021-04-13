@@ -21,7 +21,7 @@ const StyledBox = styled(Box)(
     bg: 'white',
 
     p: {
-      fontSize: '1.1rem',
+      fontSize: '1.125rem',
     },
   })
 );
