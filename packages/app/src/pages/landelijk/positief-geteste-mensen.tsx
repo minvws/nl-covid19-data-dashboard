@@ -260,6 +260,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     label: siteText.common.signaalwaarde,
                   },
                 }}
+                showWeekGridLines
               />
             )}
           </ChartTile>

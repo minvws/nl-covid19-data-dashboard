@@ -6,8 +6,8 @@
  * layouts by forking this component.
  */
 import css from '@styled-system/css';
-import { AxisBottom, AxisLeft } from '@visx/axis';
-import { GridRows } from '@visx/grid';
+import { AxisBottom, AxisLeft, AxisTop } from '@visx/axis';
+import { GridColumns, GridRows } from '@visx/grid';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
@@ -16,6 +16,7 @@ import { colors } from '~/style/theme';
 import { createDate } from '~/utils/createDate';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
+import { getWeekInfo } from '~/components-styled/stacked-chart/logic';
 
 type AxesProps = {
   bounds: Bounds;
@@ -30,6 +31,7 @@ type AxesProps = {
    * label.
    */
   numGridLines: number;
+  showWeekGridLines?: boolean;
   /**
    * This ref is used for measuring the width of the Y-axis to automagically
    * calculate a left-padding.
@@ -50,6 +52,7 @@ type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
   numGridLines,
+  showWeekGridLines,
   bounds,
   isPercentage,
   xScale,
@@ -108,6 +111,22 @@ export const Axes = memo(function Axes({
     [isMounted, formatRelativeDate, startUnix, endUnix, formatDateFromSeconds]
   );
 
+  const formatWeekNumberAxis = useCallback((date_unix) => {
+    const date = new Date(date_unix * 1000);
+    const weekInfo = getWeekInfo(date);
+    return `Week ${weekInfo.weekNumber}`;
+  }, []);
+
+  const weekGridLines = [];
+
+  if (showWeekGridLines) {
+    const weekInSeconds = 7 * 24 * 60 * 60;
+    const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
+    for (let i = 1; i <= weeks; ++i) {
+      weekGridLines.push(startUnix + i * weekInSeconds);
+    }
+  }
+
   /**
    * Long labels (like the ones including a year, are too long to be positioned
    * centered on the x-axis tick. Usually a short date has a 2 digit number plus
@@ -139,6 +158,59 @@ export const Axes = memo(function Axes({
         tickValues={yTickValues}
         stroke={colors.silver}
       />
+
+      {showWeekGridLines && (
+        <>
+          <GridColumns
+            height={bounds.height}
+            scale={xScale}
+            numTicks={weekGridLines.length}
+            tickValues={weekGridLines}
+            stroke={'#DDD'}
+            width={bounds.width}
+            strokeDasharray="4 2"
+          />
+
+          <AxisBottom
+            scale={xScale}
+            tickValues={weekGridLines}
+            tickFormat={formatXAxis as AnyTickFormatter}
+            top={bounds.height}
+            stroke={colors.silver}
+            // tickLabelProps={(x) => ({
+            //   fill: colors.data.axisLabels,
+            //   fontSize: 12,
+            //   /**
+            //    * Using anchor middle the line marker label will fall nicely on top
+            //    * of the axis label.
+            //    *
+            //    * The only times at which we can not use middle is if we are
+            //    * rendering a year in the label, because it becomes too long.
+            //    */
+            //   textAnchor:
+            //     x === startUnix
+            //       ? isLongStartLabel
+            //         ? 'start'
+            //         : 'middle'
+            //       : x === endUnix
+            //       ? isLongEndLabel
+            //         ? 'end'
+            //         : 'middle'
+            //       : 'middle',
+            // })}
+            hideTicks
+          />
+
+          <AxisTop
+            scale={xScale}
+            tickValues={weekGridLines}
+            tickFormat={formatWeekNumberAxis as AnyTickFormatter}
+            stroke={colors.silver}
+            hideTicks
+          />
+        </>
+      )}
+
       <AxisBottom
         scale={xScale}
         tickValues={xTickValues}
