@@ -75,7 +75,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
   const { padding, bounds, leftPaddingRef } = useDimensions({
     width,
     height,
-    isSymmetricalPadding: true,
+    applySymmetricalPadding: true,
   });
 
   const values = useValuesInTimeframe(allValues, timeframe);

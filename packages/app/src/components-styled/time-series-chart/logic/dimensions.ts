@@ -31,14 +31,14 @@ interface DimensionProps {
   /**
    * A symmetrical padding ensures the right padding equals the left padding
    */
-  isSymmetricalPadding?: boolean;
+  applySymmetricalPadding?: boolean;
 }
 
 export function useDimensions({
   width,
   height,
   paddingLeft,
-  isSymmetricalPadding,
+  applySymmetricalPadding,
 }: DimensionProps) {
   const isMounted = useIsMounted();
 
@@ -49,25 +49,24 @@ export function useDimensions({
   } = useResizeObserver<SVGElement>();
 
   return useMemo(() => {
-    const paddingWithExtraSpace =
-      paddingLeft ??
-      (measuredLeftPadding > 0
+    const calculatedPaddingLeft =
+      measuredLeftPadding > 0
         ? /**
            * A measured left padding is most likely measured on elements holding
            * text. It looks like using this exact value can sometimes result in
            * cut-off text, therefore we'll add a tiny bit of extra padding.
            */
           measuredLeftPadding + 5
-        : measuredLeftPadding);
+        : measuredLeftPadding;
 
     const left = isMounted
-      ? paddingWithExtraSpace ?? defaultPadding.left
+      ? paddingLeft ?? calculatedPaddingLeft ?? defaultPadding.left
       : defaultPadding.left;
 
     const padding: Padding = {
       ...defaultPadding,
       left,
-      right: isSymmetricalPadding ? left : defaultPadding.right,
+      right: applySymmetricalPadding ? left : defaultPadding.right,
     };
 
     const bounds: Bounds = {
@@ -80,7 +79,7 @@ export function useDimensions({
     paddingLeft,
     measuredLeftPadding,
     isMounted,
-    isSymmetricalPadding,
+    applySymmetricalPadding,
     width,
     height,
     leftPaddingRef,
