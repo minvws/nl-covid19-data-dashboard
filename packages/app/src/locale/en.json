@@ -2149,7 +2149,7 @@
       },
       "tab_second": {
         "title": "Reported number",
-        "description": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This is the number of vaccine doses administered reported by GGD-GHOR. [Read more in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
       "estimated": {
         "ggd": "administered by GGDs",
@@ -2214,7 +2214,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
