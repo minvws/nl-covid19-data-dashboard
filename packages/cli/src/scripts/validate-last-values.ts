@@ -7,15 +7,18 @@ import {
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
 } from '@corona-dashboard/common';
-import chalk from 'chalk';
-import { isEmpty, pick } from 'lodash';
+import { chain, isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { jsonDirectory } from '../config';
-import { getFilesWithTimeSeries, logError, logSuccess } from '../utils';
-import { getTimeSeriesMetricNames, readObjectFromJsonFile } from '../utils';
-import { chain } from 'lodash';
+import {
+  getFilesWithTimeSeries,
+  getTimeSeriesMetricNames,
+  logError,
+  logSuccess,
+  readObjectFromJsonFile,
+} from '../utils';
 
 const cli = meow(
   `
