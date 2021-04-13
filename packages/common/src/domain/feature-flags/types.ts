@@ -1,5 +1,5 @@
-export interface FeatureDefinition {
-  name: string;
+export interface FeatureDefinition<FeatureName> {
+  name: FeatureName;
   isEnabled: boolean;
 
   /**
@@ -35,4 +35,4 @@ export interface FeatureDefinition {
   metricScope?: MetricScope[];
 }
 
-type MetricScope = 'nl' | 'vr' | 'gm';
+type MetricScope = 'nl' | 'vr' | 'gm' | 'vr_collection' | 'gm_collection';
