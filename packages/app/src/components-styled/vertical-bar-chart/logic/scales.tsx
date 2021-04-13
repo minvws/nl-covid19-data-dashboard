@@ -29,7 +29,8 @@ export function useScales<T extends TimestampedValue>(args: {
   bounds: Bounds;
   numTicks: number;
 }) {
-  const todayDate = useCurrentDate();
+  const today = useCurrentDate().getTime() / 1000;
+
   const {
     maximumValue,
     minimumValue,
@@ -41,7 +42,6 @@ export function useScales<T extends TimestampedValue>(args: {
 
   return useMemo(() => {
     if (isEmpty(values)) {
-      const today = todayDate.getTime() / 1000;
       return {
         xScale: scaleBand({
           domain: [today, today + ONE_DAY_IN_SECONDS],
@@ -84,14 +84,5 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [
-    values,
-    bounds.width,
-    bounds.height,
-    tickValues,
-    maximumValue,
-    minimumValue,
-    numTicks,
-    todayDate,
-  ]);
+  }, [values, bounds, tickValues, maximumValue, minimumValue, numTicks, today]);
 }
