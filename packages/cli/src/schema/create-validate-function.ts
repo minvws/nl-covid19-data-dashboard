@@ -2,19 +2,7 @@ import Ajv, { ValidateFunction } from 'ajv';
 import fs from 'fs';
 import path from 'path';
 import { equalsRootProperty, validRestrictionId } from './ajv-keywords';
-
-/**
- * Loads the given uri and parses its contents to JSON
- * @param basePath The given base directory name
- * @param uri The given filename
- */
-function loadSchema(basePath: string, uri: string): Promise<any> {
-  return fs.promises
-    .readFile(path.join(basePath, uri), {
-      encoding: 'utf8',
-    })
-    .then((data: string) => JSON.parse(data));
-}
+import { loadSchema } from './load-schema';
 
 /**
  * Creates an Ajv ValidateFunction for the given schema

@@ -3,9 +3,12 @@ import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
 import { schemaDirectory } from '../config';
-import { createValidateFunction } from './create-validate-function';
-import { executeValidations } from './execute-validations';
-import { getSchemaInfo, SchemaItemInfo } from '../schema-information';
+import {
+  createValidateFunction,
+  executeValidations,
+  getSchemaInfo,
+  SchemaItemInfo,
+} from '../schema';
 
 const cli = meow(
   `

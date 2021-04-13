@@ -1,7 +1,8 @@
 import fs from 'fs';
-import { jsonDirectory, localeDirectory } from './config';
-import { validatePlaceholders } from './validate-schema/custom-validations/validate-placeholders';
+import { jsonDirectory, localeDirectory } from '../config';
+import { validatePlaceholders } from './validate-placeholders';
 import { assert } from '@corona-dashboard/common';
+import { getFileNames } from '../utils';
 
 type CustomValidationFunction = (
   input: Record<string, unknown>
@@ -39,28 +40,4 @@ export function getSchemaInfo(path: string = jsonDirectory) {
   };
 
   return info;
-}
-
-export function getFilesWithTimeSeries(directory: string) {
-  assert(fs.existsSync(directory), `Directory ${directory} does not exist`);
-
-  const fileList = fs.readdirSync(jsonDirectory);
-
-  const timeSeriesFiles = [
-    ...getFileNames(fileList, /^NL.json$/),
-    ...getFileNames(fileList, /^VR[0-9]+.json$/),
-    ...getFileNames(fileList, /^GM[0-9]+.json$/),
-  ];
-
-  return timeSeriesFiles;
-}
-
-/**
- * Filters the given list of file names according to the given regular expression
- *
- * @param fileList The given list of file names
- * @param pattern The given regular expression
- */
-function getFileNames(fileList: string[], pattern: RegExp) {
-  return fileList.filter((filename) => filename.match(pattern));
 }

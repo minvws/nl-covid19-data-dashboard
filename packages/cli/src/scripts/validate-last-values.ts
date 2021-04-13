@@ -3,22 +3,19 @@
  * value in the values array for that same metric.
  */
 import {
+  SewerPerInstallationData,
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
-  SewerPerInstallationData,
 } from '@corona-dashboard/common';
 import chalk from 'chalk';
-import { isEmpty, pick, get } from 'lodash';
+import { isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { jsonDirectory } from '../config';
-import { getFilesWithTimeSeries } from '../schema-information';
-import {
-  getTimeSeriesMetricNames,
-  readObjectFromJsonFile,
-  validateLastValue,
-} from './logic';
+import { getFilesWithTimeSeries } from '../utils';
+import { getTimeSeriesMetricNames, readObjectFromJsonFile } from '../utils';
+import { chain } from 'lodash';
 
 const logSuccess = (...args: unknown[]) =>
   console.log(chalk.greenBright(...args));
@@ -63,7 +60,7 @@ async function main() {
   const allFailures: Failure[] = [];
 
   for (const file of files) {
-    const data = readObjectFromJsonFile(path.join(directory, file));
+    const data = await readObjectFromJsonFile(path.join(directory, file));
 
     sortTimeSeriesInDataInPlace(data);
 
@@ -146,3 +143,18 @@ main().then(
     process.exit(1);
   }
 );
+
+export function validateLastValue(metric: TimeSeriesMetric): boolean {
+  const assumedLastValue = metric.last_value;
+  const actualLastValue = metric.values[metric.values.length - 1];
+
+  const success = chain(assumedLastValue)
+    .entries()
+    .every(
+      ([key, value]) =>
+        actualLastValue[key as keyof typeof actualLastValue] === value
+    )
+    .value();
+
+  return success;
+}
