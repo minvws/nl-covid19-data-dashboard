@@ -35,10 +35,10 @@ export const validateChoroplethValues = (
   codeProperty: string, //the gmcode or vrcode property name
   input: Record<string, any> //GM***.json or VR***.json
 ): string[] | undefined => {
-  const commonDataProperties = Object.entries(input)
-    .filter(([, values]) => typeof values === 'object')
-    .map(([key]) => key)
-    .filter((key) => collectionJson.hasOwnProperty(key));
+  const commonDataProperties = extractDataCommonProperties(
+    input,
+    collectionJson
+  );
 
   const code = input.code;
 
@@ -48,7 +48,7 @@ export const validateChoroplethValues = (
         (x: any) => x[codeProperty] === code
       );
       const lastValue = input[propertyName].last_value;
-      return isEqual(lastValue, collectionValue, propertyName, codeProperty);
+      return isEqual(lastValue, collectionValue, propertyName);
     })
     .filter(isDefined);
 
@@ -60,14 +60,9 @@ export const validateChoroplethValues = (
     : undefined;
 };
 
-function isEqual(
-  lastValue: any,
-  collectionValue: any,
-  propertyName: string,
-  codeProperty: string
-) {
-  const result = Object.keys(collectionValue)
-    .filter((x) => x !== codeProperty)
+function isEqual(lastValue: any, collectionValue: any, propertyName: string) {
+  const commonProperties = extractCommonProperties(collectionValue, lastValue);
+  const result = commonProperties
     .map((key) => {
       return lastValue[key] !== collectionValue[key]
         ? `property ${propertyName}.${key} is not equal: (last_value) ${lastValue[key]} !== (choropleth data) ${collectionValue[key]}`
@@ -75,4 +70,15 @@ function isEqual(
     })
     .filter(isDefined);
   return result.length ? result.join(', ') : undefined;
+}
+
+function extractCommonProperties(left: any, right: any) {
+  return Object.keys(left).filter((key) => right.hasOwnProperty(key));
+}
+
+function extractDataCommonProperties(left: any, right: any) {
+  return Object.entries(left)
+    .filter(([, values]) => typeof values === 'object')
+    .map(([key]) => key)
+    .filter((key) => right.hasOwnProperty(key));
 }
