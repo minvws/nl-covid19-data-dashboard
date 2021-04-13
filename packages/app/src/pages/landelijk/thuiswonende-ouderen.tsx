@@ -226,9 +226,7 @@ const ElderlyAtHomeNationalPage = (
                   {
                     type: 'area',
                     metricProperty: 'deceased_daily',
-                    label:
-                      text.section_positive_tested
-                        .line_chart_legend_trend_label,
+                    label: text.section_deceased.line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
