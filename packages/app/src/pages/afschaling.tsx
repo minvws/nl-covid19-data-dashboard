@@ -19,11 +19,40 @@ import {
   getNlData,
 } from '~/static-props/get-data';
 import { Block, DownscalingPage } from '~/types/cms';
+import { expandPortableTextAssets } from '~/utils/groq/expand-portable-text-assets';
+
+const locale = process.env.NEXT_PUBLIC_LOCALE;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<DownscalingPage>(
-    (_context) => `*[_type == 'downscalePage'][0]`
+    (_context) => `*[_type == 'downscalePage'][0]{
+      ...,
+      "page": {
+        ...page,
+        ${expandPortableTextAssets('description', 'page', locale || 'nl')},
+      },
+      "downscalingPossible": {
+        ...downscalingPossible,
+        ${expandPortableTextAssets(
+          'description',
+          'downscalingPossible',
+          locale || 'nl'
+        )},
+      },
+      "downscalingNotPossible": {
+        ...downscalingNotPossible,
+        ${expandPortableTextAssets(
+          'description',
+          'downscalingNotPossible',
+          locale || 'nl'
+        )},
+      },
+      "measures": {
+        ...measures,
+        ${expandPortableTextAssets('description', 'measures', locale || 'nl')},
+      },
+    }`
   ),
   getNlData
 );
@@ -57,37 +86,41 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
 
       <Box fontSize={2} bg={'white'} pt={5} pb={4}>
         <MaxWidth>
-          <ContentBlock spacing={3}>
-            <Box
-              borderBottom="1px"
-              borderBottomColor="border"
-              borderBottomStyle="solid"
-            >
+          <ContentBlock spacing={5}>
+            <Box>
               <Heading level={1}>{content.page.title}</Heading>
-              <RichContent blocks={content.page.description} />
-            </Box>
-            {!isEmpty(
-              siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
-            ) && (
-              <Box mb={3}>
+              <Box fontSize={3}>
+                <RichContent blocks={content.page.description} />
+              </Box>
+              {!isEmpty(
+                siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
+              ) && (
                 <WarningTile
                   message={
                     siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
                   }
                   variant="emphasis"
                 />
-              </Box>
-            )}
-            <Heading level={2}>{content.downscaling.title}</Heading>
-            {isDefined(downscalableOption) && (
-              <DownscalableExplanation
-                text={downscalableOption}
-                isPossible={isDownscalePossible}
-              />
-            )}
-            <RichContent blocks={content.downscaling.description} />
-            <Heading level={2}>{content.measures.title}</Heading>
-            <RichContent blocks={content.measures.description} />
+              )}
+            </Box>
+            <Box>
+              <Heading level={2} fontSize={3}>
+                {content.downscaling.title}
+              </Heading>
+              {isDefined(downscalableOption) && (
+                <DownscalableExplanation
+                  text={downscalableOption}
+                  isPossible={isDownscalePossible}
+                />
+              )}
+              <RichContent blocks={content.downscaling.description} />
+            </Box>
+            <Box>
+              <Heading level={2} fontSize={3}>
+                {content.measures.title}
+              </Heading>
+              <RichContent blocks={content.measures.description} />
+            </Box>
           </ContentBlock>
         </MaxWidth>
       </Box>

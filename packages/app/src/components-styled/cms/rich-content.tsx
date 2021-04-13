@@ -1,12 +1,16 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
+import { isPresent } from 'ts-is-present';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
+  CollapsibleList,
   ImageBlock,
   InlineAttachment,
   RichContentImageBlock,
 } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { Box } from '../base';
+import { CollapsibleSection } from '../collapsible';
 import { ContentImage } from './content-image';
 
 interface RichContentProps {
@@ -41,6 +45,15 @@ export function RichContent({
           {...props}
         />
       ),
+      collapsible: (props: { node: CollapsibleList }) => {
+        return isPresent(props.node.content) ? (
+          <CollapsibleSection summary={props.node.title}>
+            <Box mt={3}>
+              <RichContent blocks={props.node.content} />
+            </Box>
+          </CollapsibleSection>
+        ) : null;
+      },
     },
     marks: {
       inlineAttachment: InlineAttachmentMark,

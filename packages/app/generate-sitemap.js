@@ -53,13 +53,15 @@ const generateSitemap = async function (
     '!./src/pages/api',
   ]);
 
-  const pathsFromPages = pages.map((page) =>
-    page
-      .replace('./src/pages', '')
-      .replace('.tsx', '')
-      .replace('/index.tsx', '')
-      .replace('/index', '')
-  );
+  const pathsFromPages = pages
+    .map((page) =>
+      page
+        .replace('./src/pages', '')
+        .replace('.tsx', '')
+        .replace('/index.tsx', '')
+        .replace('/index', '')
+    )
+    .filter((x) => x !== '/afschaling');
 
   const priorities = [
     { path: 'landelijk', value: 0.8 },
