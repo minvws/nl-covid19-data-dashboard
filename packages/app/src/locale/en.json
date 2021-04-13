@@ -139,15 +139,15 @@
       "href": "/verantwoording#general-practitioners",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
-    "tooltip_labels": {
-      "covid_klachten": "Patients with complaints"
-    },
     "bronnen": {
       "nivel": {
         "download": "https://www.nivel.nl/sites/default/files/covid/Nivel-verdenkingen-COVID-19.json",
         "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/monitor-cijfers-covid-19-achtige-klachten-huisartsenpraktijken#opendata",
         "text": "Nivel"
       }
+    },
+    "tooltip_labels": {
+      "covid_klachten": ""
     }
   },
   "ziekenhuisopnames_per_dag": {
@@ -1858,7 +1858,7 @@
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
-      "line_chart_covid_daily_legend_trend_label": "Reported number of deceased",
+      "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients"
     },
@@ -2157,11 +2157,11 @@
       "reported_until": "Reported number till {{reportedDate}}",
       "tab_first": {
         "title": "Calculated number",
-        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)\n\n** Due to the pause from vaccinating with AstraZeneca for people younger than 60 years, it is uncertain how many injections will be given with this vaccine. Therefore, as of April 7, AstraZeneca is not included in the calculation. **"
+        "description": "This figure is a calculation of the total number of vaccine doses that have been administered. The calculation is based on the number of vaccine doses that have been delivered to the locations where injections are given. [Read more about the calculation in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)."
       },
       "tab_second": {
         "title": "Reported number",
-        "description": "This is the number of vaccine doses administered reported by GGD-GHOR and LNAZ. [Read more in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
+        "description": "This is the number of vaccine doses administered reported by GGD-GHOR. [Read more in the 'Explanation of the data presented'.](https://coronadashboard.government.nl/verantwoording#vaccination)"
       },
       "estimated": {
         "ggd": "administered by GGDs",
@@ -2403,8 +2403,8 @@
       },
       "select_help_text": "Select type of vaccine to see the doses in stock",
       "tooltip_labels": {
-        "available": "",
-        "total": ""
+        "available": "Available stock",
+        "total": "Total stock count"
       }
     }
   },

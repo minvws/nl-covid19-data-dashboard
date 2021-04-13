@@ -139,15 +139,15 @@
       "href": "/verantwoording#huisartsen",
       "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
     },
-    "tooltip_labels": {
-      "covid_klachten": "Patiënten met klachten"
-    },
     "bronnen": {
       "nivel": {
         "download": "https://www.nivel.nl/sites/default/files/covid/Nivel-verdenkingen-COVID-19.json",
         "href": "https://www.nivel.nl/nl/nivel-zorgregistraties-eerste-lijn/monitor-cijfers-covid-19-achtige-klachten-huisartsenpraktijken#opendata",
         "text": "Nivel"
       }
+    },
+    "tooltip_labels": {
+      "covid_klachten": "Patiënten met klachten"
     }
   },
   "ziekenhuisopnames_per_dag": {
@@ -1858,7 +1858,7 @@
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
-      "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden",
+      "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten"
     },
@@ -2157,11 +2157,11 @@
       "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
       "tab_first": {
         "title": "Berekend aantal",
-        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie) \n\n**Door de prikpauze met AstraZeneca voor mensen jonger dan 60 jaar is onzeker hoeveel prikken met dit vaccin worden gezet. Daarom is per 7 april in de berekening geen AstraZeneca meegeteld.**"
+        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)."
       },
       "tab_second": {
         "title": "Gemeld aantal",
-        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
       },
       "estimated": {
         "ggd": "gezet door GGD'en",
