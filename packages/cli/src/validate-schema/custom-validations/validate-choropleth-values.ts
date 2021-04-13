@@ -1,3 +1,4 @@
+import { UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
@@ -48,7 +49,7 @@ export const validateChoroplethValues = (
         return `No item with property ${codeProperty} == ${code} was found in the ${propertyName} collection (${collectionJsonFilename})`;
       }
       const lastValue = input[propertyName].last_value;
-      return haveEqualCommonProperties(
+      return validateCommonPropertyEquality(
         lastValue,
         collectionValue,
         propertyName
@@ -64,9 +65,9 @@ export const validateChoroplethValues = (
     : undefined;
 };
 
-function haveEqualCommonProperties(
-  lastValue: any,
-  collectionValue: any,
+function validateCommonPropertyEquality(
+  lastValue: UnknownObject,
+  collectionValue: UnknownObject,
   propertyName: string
 ) {
   const commonProperties = getCommonProperties(collectionValue, lastValue);
@@ -80,11 +81,11 @@ function haveEqualCommonProperties(
   return result.length ? result.join(', ') : undefined;
 }
 
-function getCommonProperties(left: any, right: any) {
+function getCommonProperties(left: UnknownObject, right: UnknownObject) {
   return Object.keys(left).filter((key) => right.hasOwnProperty(key));
 }
 
-function getCommonDataProperties(left: any, right: any) {
+function getCommonDataProperties(left: UnknownObject, right: UnknownObject) {
   return Object.entries(left)
     .filter(([, values]) => typeof values === 'object')
     .map(([key]) => key)
