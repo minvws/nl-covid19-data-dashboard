@@ -31,10 +31,10 @@ type AxesProps = {
    */
   numGridLines: number;
   /**
-   * This ref is used for measuring the width of the Y-axis to automagically
+   * This ref can be used for measuring the width of the Y-axis to automagically
    * calculate a left-padding.
    */
-  yAxisRef: Ref<SVGGElement>;
+  yAxisRef?: Ref<SVGGElement>;
   yTickValues?: number[];
   xTickValues: [number, number];
   formatYTickValue?: (value: number) => string;
@@ -44,6 +44,13 @@ type AxesProps = {
    * displayed.
    */
   isYAxisCollapsed?: boolean;
+
+  /**
+   * The xRangePadding can be used to add padding to the x-axis. Note that this
+   * will only widen the x-axis line: it will not "push the trends together" nor
+   * it will move the Y-axis to the left.
+   */
+  xRangePadding?: number;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -59,6 +66,7 @@ export const Axes = memo(function Axes({
   formatYTickValue,
   yAxisRef,
   isYAxisCollapsed,
+  xRangePadding,
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
   const isMounted = useIsMounted();
@@ -145,6 +153,7 @@ export const Axes = memo(function Axes({
         tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={colors.silver}
+        rangePadding={xRangePadding}
         tickLabelProps={(x) => ({
           fill: colors.data.axisLabels,
           fontSize: 12,

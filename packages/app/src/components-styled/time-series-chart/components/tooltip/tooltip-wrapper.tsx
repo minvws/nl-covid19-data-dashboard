@@ -67,19 +67,21 @@ export function TooltipWrapper({
   );
 
   return (
-    <div ref={boundingBoxRef}>
-      <TooltipContainer
-        ref={ref}
-        style={{
-          opacity: isMounted ? 1 : 0,
-          transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
-          maxWidth,
-        }}
-      >
-        <TooltipContent title={title}>{children}</TooltipContent>
-      </TooltipContainer>
+    <>
+      <div ref={boundingBoxRef}>
+        <TooltipContainer
+          ref={ref}
+          style={{
+            opacity: isMounted ? 1 : 0,
+            transform: `translate(${x}px,${y}px)`,
+            maxWidth,
+          }}
+        >
+          <TooltipContent title={title}>{children}</TooltipContent>
+        </TooltipContainer>
+      </div>
       <Triangle left={targetX} top={targetY + height} isMounted={isMounted} />
-    </div>
+    </>
   );
 }
 
@@ -100,7 +102,10 @@ function Triangle({ left, top, isMounted }: TriangleProps) {
         zIndex: 1010,
         pointerEvents: 'none',
       })}
-      style={{ transform: `translate(${left}px, ${top}px)` }}
+      /**
+       * No idea why, but we need 1.5px extra to center the arrow 🤷‍♂️
+       */
+      style={{ transform: `translate(calc(${left + 1.5}px - 50%), ${top}px)` }}
     >
       <StyledTriangle width={16} />
     </div>
@@ -114,7 +119,7 @@ const StyledTriangle = styled.div<{ width: number }>((x) => {
   const borderWidth = Math.sqrt(Math.pow(x.width, 2) / 2) / 2;
 
   return css({
-    position: 'absolute',
+    position: 'relative',
     width: 0,
     height: 0,
     marginLeft: -borderWidth,

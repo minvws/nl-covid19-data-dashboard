@@ -2,17 +2,17 @@ import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
 import Head from 'next/head';
 import { ReactNode } from 'react';
+import { isDefined } from 'ts-is-present';
 import Arts from '~/assets/arts-small.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import Repro from '~/assets/reproductiegetal-small.svg';
 import Ziekenhuis from '~/assets/ziekenhuis-small.svg';
-import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
 import { ContentBlock } from '~/components-styled/cms/content-block';
 import { RichContent } from '~/components-styled/cms/rich-content';
 import { MaxWidth } from '~/components-styled/max-width';
-import { Text } from '~/components-styled/typography';
-import { Heading } from '~/components-styled/typography';
+import { TimeSeriesMiniBarChart } from '~/components-styled/time-series-chart';
+import { Heading, Text } from '~/components-styled/typography';
 import { WarningTile } from '~/components-styled/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -20,14 +20,14 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { Block, DownscalingPage } from '~/types/cms';
+import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -55,8 +55,6 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
 
   const isDownscalePossible =
     data.downscaling?.is_downscaling_possible || false;
-
-  console.log(content);
 
   const downscalableOption = isDownscalePossible
     ? content.downscalingPossible
@@ -123,29 +121,89 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
         >
           <MiniTrend
             title={siteText.afschaling.trend_grafieken.reproductiegetal}
-            icon={Repro()}
+            icon={<Repro />}
             isBelowThreshold={reproduction_is_below_threshold}
             thresholdDaySpan={reproduction_threshold_day_span}
           >
-            <Text mb={0}>Hier komt de grafiek</Text>
+            <TimeSeriesMiniBarChart
+              initialWidth={300}
+              height={100}
+              values={data.reproduction.values
+                .filter((x) => x.index_average)
+                .slice(-14)}
+              seriesConfig={{
+                type: 'bar',
+                metricProperty: 'index_average',
+                label: siteText.afschaling.trend_grafieken.reproductiegetal,
+                color: colors.data.positive,
+                fillOpacity: 1,
+                aboveBenchmarkColor: colors.data.negative,
+                aboveBenchmarkFillOpacity: 1,
+              }}
+              dataOptions={{
+                benchmark: {
+                  value: 1,
+                },
+              }}
+            />
           </MiniTrend>
 
           <MiniTrend
             title={siteText.afschaling.trend_grafieken.ic_opnames}
-            icon={Arts()}
+            icon={<Arts />}
             isBelowThreshold={intensive_care_nice_is_below_threshold}
             thresholdDaySpan={intensive_care_nice_threshold_day_span}
           >
-            <Text mb={0}>Hier komt de grafiek</Text>
+            <TimeSeriesMiniBarChart
+              initialWidth={300}
+              height={100}
+              values={data.intensive_care_nice.values
+                .filter((x) => x.admissions_on_date_of_reporting)
+                .slice(-14)}
+              seriesConfig={{
+                type: 'bar',
+                metricProperty: 'admissions_on_date_of_reporting',
+                label: siteText.afschaling.trend_grafieken.reproductiegetal,
+                color: colors.data.positive,
+                fillOpacity: 1,
+                aboveBenchmarkColor: colors.data.negative,
+                aboveBenchmarkFillOpacity: 1,
+              }}
+              dataOptions={{
+                benchmark: {
+                  value: 20,
+                },
+              }}
+            />
           </MiniTrend>
 
           <MiniTrend
             title={siteText.afschaling.trend_grafieken.ziekenhuisopnames}
-            icon={Ziekenhuis()}
+            icon={<Ziekenhuis />}
             isBelowThreshold={hospital_nice_is_below_threshold}
             thresholdDaySpan={hospital_nice_threshold_day_span}
           >
-            <Text mb={0}>Hier komt de grafiek</Text>
+            <TimeSeriesMiniBarChart
+              initialWidth={300}
+              height={100}
+              values={data.hospital_nice.values
+                .filter((x) => x.admissions_on_date_of_reporting)
+                .slice(-14)}
+              seriesConfig={{
+                type: 'bar',
+                metricProperty: 'admissions_on_date_of_reporting',
+                label: siteText.afschaling.trend_grafieken.reproductiegetal,
+                color: colors.data.positive,
+                fillOpacity: 1,
+                aboveBenchmarkColor: colors.data.negative,
+                aboveBenchmarkFillOpacity: 1,
+              }}
+              dataOptions={{
+                benchmark: {
+                  value: 80,
+                },
+              }}
+            />
           </MiniTrend>
         </Box>
 

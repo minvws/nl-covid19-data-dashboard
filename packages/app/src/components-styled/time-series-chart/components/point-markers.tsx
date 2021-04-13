@@ -23,41 +23,31 @@ export function PointMarkers<T extends TimestampedValue>(
   if (!points.length) return null;
 
   return (
-    <Container
-      style={{
-        transform: `translateX(${points[0].x - size / 2}px)`,
-        width: size,
-      }}
-    >
+    <>
       {points.map((point, index) => (
         <PointMarker
           color={point.color}
           size={size}
           /**
-           * Dynamic properties like y position are set via inline style because
+           * Dynamic properties like x/y position are set via inline style because
            * SC would dynamically generate and inject a new class for every position
            */
-          style={{ transform: `translateY(${point.y - size / 2}px)` }}
+          style={{
+            transform: `translate(calc(${point.x}px - 50%), ${
+              point.y - size / 2
+            }px)`,
+          }}
           key={index}
         />
       ))}
-    </Container>
+    </>
   );
 }
 
-const Container = styled.div`
+const PointMarker = styled.div<MarkerProps>`
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-`;
-
-const PointMarker = styled.div<MarkerProps>`
-  position: absolute;
-
-  position: absolute;
   height: ${(x) => x.size}px;
   width: ${(x) => x.size}px;
   border-radius: 50%;

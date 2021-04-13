@@ -20,7 +20,7 @@ interface ChartContainerProps {
   valueAnnotation?: string;
   ariaLabelledBy: string;
   onHover?: (event: Event) => void;
-  onClick: (event: Event) => void;
+  onClick?: (event: Event) => void;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
@@ -37,7 +37,19 @@ export function ChartContainer({
   return (
     <svg
       width={width}
-      viewBox={`0 0 ${width} ${height}`}
+      /**
+       * When, for example, a horizontal line with a 1px size is drawn on a Y-
+       * value of 2, the line itself will be rendered _exactly_ on coordinate
+       * (0,2). Due to the 1px size of that line, it will visually be drawn from
+       * (0,1.5) to (0,2.5), with the center of the line still on (0,2).
+       * Those half pixel values can result in blurry lines on some browsers or
+       * monitors.
+       *
+       * In order to fix the above the viewbox is moved for half a pixel.
+       *
+       * inspired by: https://vecta.io/blog/guide-to-getting-sharp-and-crisp-svg-images
+       */
+      viewBox={`-0.5 -0.5 ${width} ${height}`}
       role="img"
       aria-labelledby={ariaLabelledBy}
       style={{

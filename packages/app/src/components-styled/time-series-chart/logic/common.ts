@@ -8,8 +8,9 @@ export interface DataOptions {
 
 export interface BenchmarkConfig {
   value: number;
-  label: string;
+  label?: string;
 }
+
 export interface TimespanAnnotationConfig {
   start: number;
   end: number;

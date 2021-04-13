@@ -3,7 +3,6 @@ import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
 import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 // Time Series Chart components and logic
 import {
@@ -12,6 +11,7 @@ import {
   Overlay,
 } from '~/components-styled/time-series-chart/components';
 import {
+  COLLAPSE_Y_AXIS_THRESHOLD,
   DataOptions,
   useDimensions,
   useValuesInTimeframe,
@@ -88,18 +88,11 @@ export function VerticalBarChart<
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
   const { isPercentage } = dataOptions || {};
-
-  const {
-    width: yAxisWidth = 0,
-    ref: yAxisRef,
-    // @ts-expect-error useResizeObserver expects element extending HTMLElement
-  } = useResizeObserver<SVGElement>();
-
-  const { padding, bounds } = useDimensions(
+  const { padding, bounds, leftPaddingRef } = useDimensions({
     width,
     height,
-    paddingLeft ?? yAxisWidth
-  );
+    paddingLeft,
+  });
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
@@ -182,7 +175,8 @@ export function VerticalBarChart<
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
-            yAxisRef={yAxisRef}
+            yAxisRef={leftPaddingRef}
+            isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
           />
 
           {hoverState && (
