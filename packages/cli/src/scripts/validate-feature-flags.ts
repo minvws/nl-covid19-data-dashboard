@@ -6,7 +6,7 @@ import {
   MetricScope,
 } from '@corona-dashboard/common';
 import chalk from 'chalk';
-import { isEmpty } from 'lodash';
+import { isEmpty, get, flatten } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
@@ -89,7 +89,7 @@ async function main() {
     );
     process.exit(1);
   } else {
-    logSuccess('All features data is valid!');
+    logSuccess('All features are validated!');
   }
 }
 
@@ -110,13 +110,6 @@ async function validateFeatureData(
   schemaInfo: SchemaInfo
 ) {
   if (feature.metricName) {
-    //   /**
-    //    * Without a metric name there is nothing to validate on the data. Possibly
-    //    * this feature only has a route attached to it.
-    //    */
-    //   return;
-    // }
-
     const promisedResults = feature.metricScopes.map((scope) =>
       validateMetricNameForScope(
         feature.metricName!,
@@ -128,12 +121,14 @@ async function validateFeatureData(
 
     const results = await Promise.all(promisedResults);
 
+    const messages = results.filter(isDefined);
+
     /**
      * If errors occurred on the metric name level then we can already return and
      * do not test the properties.
      */
-    if (!isEmpty(results)) {
-      return results;
+    if (!isEmpty(messages)) {
+      return messages;
     }
   }
 
@@ -145,8 +140,8 @@ async function validateFeatureData(
 
     const promisedResults = feature.metricScopes.map((scope) =>
       validateMetricPropertiesForScope(
-        feature.metricName,
-        feature.metricProperties,
+        feature.metricName!,
+        feature.metricProperties!,
         scope,
         feature.isEnabled,
         schemaInfo
@@ -154,13 +149,14 @@ async function validateFeatureData(
     );
 
     const results = await Promise.all(promisedResults);
+    const messages = results.filter(isDefined);
 
     /**
      * If errors occurred on the metric name level then we can already return and
      * do not test the properties.
      */
-    if (!isEmpty(results)) {
-      return results;
+    if (!isEmpty(messages)) {
+      return messages;
     }
   }
 }
@@ -176,7 +172,7 @@ async function validateMetricNameForScope(
   const promisedResults = files.map(async (file) => {
     const data = await readObjectFromJsonFile(path.join(basePath, file));
 
-    if (isEnabled && !!data[metricName]) {
+    if (isEnabled && !data[metricName]) {
       return `-- ${file} is missing data for ${metricName}`;
     }
 
@@ -185,41 +181,52 @@ async function validateMetricNameForScope(
     }
   });
 
-  const results = await Promise.all(promisedResults);
+  const results = (await Promise.all(promisedResults)).filter(isDefined);
 
-  /**
-   * Not sure if we want to see
-   */
+  const messages = results.filter(isDefined);
 
-  return results.filter(isDefined).join('\n');
+  return isEmpty(messages) ? undefined : messages.join('\n');
 }
 
-// async function validateMetricPropertiesForScope(
-//   metricName: string,
-//   metricProperties: string[],
-//   scope: MetricScope,
-//   isEnabled: boolean,
-//   schemaInfo: SchemaInfo
-// ) {
-//   const { files, basePath } = schemaInfo[scope];
+async function validateMetricPropertiesForScope(
+  metricName: string,
+  metricProperties: string[],
+  scope: MetricScope,
+  isEnabled: boolean,
+  schemaInfo: SchemaInfo
+) {
+  const { files, basePath } = schemaInfo[scope];
 
-//   const promisedResults = files.map(async (file) => {
-//     const data = await readObjectFromJsonFile(path.join(basePath, file));
+  const promisedResults = files.map(async (file) => {
+    const data = await readObjectFromJsonFile(path.join(basePath, file));
 
-//     if (isEnabled && !!data[metricName]) {
-//       return `-- ${file} is missing data for ${metricName}`;
-//     }
+    const messages = [];
 
-//     if (!isEnabled && data[metricName]) {
-//       return `++ ${file} contains data for ${metricName}`;
-//     }
-//   });
+    for (const metricProperty of metricProperties) {
+      /**
+       * @TODO not sure what the best strategy here is. Not all metrics are
+       * defined the same and some will not have this last_value. So I think we
+       * should do two checks, one property check directly on the metric and one
+       * in last_value
+       */
+      if (isEnabled && !get(data, [metricName, 'last_value', metricProperty])) {
+        messages.push(
+          `-- ${file} is missing data for ${metricName}.${metricProperty}`
+        );
+      }
 
-//   const results = await Promise.all(promisedResults);
+      if (!isEnabled && get(data, [metricName, 'last_value', metricProperty])) {
+        messages.push(
+          `++ ${file} contains data for ${metricName}.${metricProperty}`
+        );
+      }
+    }
+    return messages;
+  });
 
-//   /**
-//    * Not sure if we want to see
-//    */
+  const results = await Promise.all(promisedResults);
 
-//   return results.filter(isDefined).join('\n');
-// }
+  const messages = results.flat().filter(isDefined);
+
+  return isEmpty(messages) ? undefined : messages.join('\n');
+}

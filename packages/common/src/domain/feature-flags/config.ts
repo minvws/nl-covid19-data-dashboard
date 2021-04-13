@@ -11,7 +11,7 @@ export type Features = FeatureDefinition<FeatureName>[];
 export const features: Features = [
   {
     name: 'vaccineStockPerSupplier',
-    isEnabled: false,
+    isEnabled: true,
     metricScopes: ['nl'],
     metricName: 'vaccine_stock',
     metricProperties: ['astra_zeneca_total', 'astra_zeneca_available'],
