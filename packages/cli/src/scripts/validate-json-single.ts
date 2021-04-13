@@ -7,6 +7,7 @@ import {
   createValidateFunction,
   executeValidations,
   getSchemaInfo,
+  SchemaInfo,
 } from '../schema';
 
 const schemaInformation = getSchemaInfo();
@@ -38,7 +39,7 @@ and json-filename must be a file associated with that schema.
   process.exit(1);
 }
 
-const schemaName = cliArgs[0];
+const schemaName = cliArgs[0] as keyof SchemaInfo;
 const jsonFileName = cliArgs[1];
 
 if (!validSchemaNames.includes(schemaName)) {

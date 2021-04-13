@@ -7,6 +7,7 @@ import {
   createValidateFunction,
   executeValidations,
   getSchemaInfo,
+  SchemaInfo,
   SchemaInfoItem,
 } from '../schema';
 
@@ -52,7 +53,7 @@ if (!customJsonPathArg) {
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
 const promisedValidations = Object.keys(schemaInfo).map((schemaName) =>
-  validate(schemaName, schemaInfo[schemaName])
+  validate(schemaName, schemaInfo[schemaName as keyof SchemaInfo])
 );
 
 // Here the script waits for all the validations to finish, the result of each run is simply

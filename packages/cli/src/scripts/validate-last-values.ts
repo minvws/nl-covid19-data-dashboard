@@ -13,13 +13,9 @@ import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { jsonDirectory } from '../config';
-import { getFilesWithTimeSeries } from '../utils';
+import { getFilesWithTimeSeries, logError, logSuccess } from '../utils';
 import { getTimeSeriesMetricNames, readObjectFromJsonFile } from '../utils';
 import { chain } from 'lodash';
-
-const logSuccess = (...args: unknown[]) =>
-  console.log(chalk.greenBright(...args));
-const logError = (...args: unknown[]) => console.error(chalk.red(...args));
 
 const cli = meow(
   `

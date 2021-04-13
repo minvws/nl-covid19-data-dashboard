@@ -5,18 +5,13 @@ import {
   features,
   MetricScope,
 } from '@corona-dashboard/common';
-import chalk from 'chalk';
-import { isEmpty, get, flatten } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { jsonDirectory } from '../config';
 import { getSchemaInfo, SchemaInfo } from '../schema/get-schema-info';
-import { readObjectFromJsonFile } from '../utils';
-
-const logSuccess = (...args: unknown[]) =>
-  console.log(chalk.greenBright(...args));
-const logError = (...args: unknown[]) => console.error(chalk.red(...args));
+import { logError, logSuccess, readObjectFromJsonFile } from '../utils';
 
 const cli = meow(
   `
