@@ -2039,8 +2039,8 @@
       "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts door de tijd heen.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
-      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten.",
-      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten.",
+      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten.\n\nIn de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast.",
+      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten.\n\nIn de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     },
     "link_source": "Download de databron van \"{{subject}}\" op {{source}}",
@@ -2126,7 +2126,7 @@
     },
     "grafiek": {
       "titel": "Geleverde en beschikbare vaccins & gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten."
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten.\n\nIn de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
@@ -2145,7 +2145,7 @@
       "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
       "tab_first": {
         "title": "Berekend aantal",
-        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)\n\n**Door de prikpauze met AstraZeneca voor mensen jonger dan 60 jaar is onzeker hoeveel prikken met dit vaccin worden gezet. Daarom is per 7 april in de berekening geen AstraZeneca meegeteld.** \n\nLet op: Deze getallen zijn voor het laatst bijgewerkt op 11 april (met de cijfers van 10 april). Onderaan dit blok staat in grijs dat het voor het laatst is bijgewerkt op 13 april. Dit komt doordat deze datum elke dag automatisch wordt aangepast, maar dat klopt in dit geval dus niet."
+        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)\n\n*In de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast.**"
       },
       "tab_second": {
         "title": "Gemeld aantal",
