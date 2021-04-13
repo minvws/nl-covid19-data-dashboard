@@ -42,7 +42,13 @@ export function Benchmark({
         stroke={color}
         strokeDasharray="4,3"
         from={{ x: 0, y: 0 }}
-        to={{ x: width + xRangePadding + xRangePadding, y: 0 }}
+        to={{
+          /**
+           * add twice the padding for left- and right-padding
+           */
+          x: width + xRangePadding + xRangePadding,
+          y: 0,
+        }}
       />
     </Group>
   );
