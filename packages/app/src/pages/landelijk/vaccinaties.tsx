@@ -182,7 +182,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                             .vaccine_administered_hospitals_and_care_institutions
                             .last_value.date_unix
                         }
-                        isReported
                       />
 
                       <VaccineAdministeredItem
