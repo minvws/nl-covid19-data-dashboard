@@ -82,10 +82,6 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
 
   const seriesList = useSeriesList(values, seriesConfig);
 
-  /**
-   * The maximum is calculated over all values, because you don't want the
-   * y-axis scaling to change when toggling the timeframe setting.
-   */
   const calculatedSeriesMax = useMemo(
     () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
     [seriesList, seriesConfig, benchmark?.value]

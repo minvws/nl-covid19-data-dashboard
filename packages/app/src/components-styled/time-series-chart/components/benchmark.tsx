@@ -9,11 +9,15 @@ interface BenchmarkProps {
   top: number;
   width: number;
   /**
-   * This ref can be used for measuring the width of the Y-axis to automagically
-   * calculate a left-padding.
+   * This ref can be used for measuring the width of the benchmark-text to
+   * automagically calculate a left-padding.
    */
   textRef?: Ref<SVGGElement>;
 
+  /**
+   * The xRangePadding can be used to add padding to the line. Note that this
+   * will only widen the line and make it break outside of its bounds.
+   */
   xRangePadding?: number;
 }
 
@@ -28,17 +32,17 @@ export function Benchmark({
   xRangePadding = 0,
 }: BenchmarkProps) {
   return (
-    <Group top={top}>
+    <Group top={top} left={-xRangePadding}>
       <g ref={textRef}>
-        <text fontSize="14px" dx={-xRangePadding} dy={-4} fill={color}>
+        <text fontSize="14px" dy={-4} fill={color}>
           {label ? `${label}: ${value}` : value}
         </text>
       </g>
       <Line
         stroke={color}
         strokeDasharray="4,3"
-        from={{ x: 0 - xRangePadding, y: 0 }}
-        to={{ x: width + xRangePadding, y: 0 }}
+        from={{ x: 0, y: 0 }}
+        to={{ x: width + xRangePadding + xRangePadding, y: 0 }}
       />
     </Group>
   );

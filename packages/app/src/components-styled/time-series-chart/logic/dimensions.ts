@@ -4,8 +4,8 @@ import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds, Padding } from './common';
 
 /**
- * A chart with a width smaller than the threshold will be rendered with a
- * "collapsed" Y-axis. The collapsed axis will only display the top value.
+ * A chart with a width smaller than the threshold can be rendered with a
+ * "collapsed" Y-axis.
  */
 export const COLLAPSE_Y_AXIS_THRESHOLD = 430;
 

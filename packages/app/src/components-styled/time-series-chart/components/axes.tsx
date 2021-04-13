@@ -47,7 +47,8 @@ type AxesProps = {
 
   /**
    * The xRangePadding can be used to add padding to the x-axis. Note that this
-   * will only widen the x-axis line.
+   * will only widen the x-axis line: it will not "push the trends together" nor
+   * it will move the Y-axis to the left.
    */
   xRangePadding?: number;
 };
