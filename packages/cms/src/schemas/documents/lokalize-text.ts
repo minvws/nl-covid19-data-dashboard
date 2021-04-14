@@ -14,7 +14,19 @@ export const lokalizeText = {
   name: 'lokalizeText',
   type: 'document',
   title: 'Text',
+  __experimental_actions: ['create', 'update', 'publish'],
   fields: [
+    {
+      title: 'Onderwerp',
+      name: 'subject',
+      type: 'string',
+      // description: 'Data path in dot notation from JSON root-level subject.',
+      /**
+       * This could be made editable later after we killed Lokalize. It would
+       * allow us to clean up the used names.
+       */
+      // readOnly: true,
+    },
     {
       title: 'Pad',
       name: 'path',

@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'part:@sanity/base/router';
+
 /**
  * A Lokalize Subject corresponds to one of the root-level keys that where
  * originally used in Lokalize. It contains a list of references to LokalizeText
@@ -38,12 +41,32 @@ export const lokalizeSubject = {
       title: 'Texts',
       name: 'texts',
       type: 'array',
-      description:
-        'A list of all strings under the subject key, sorted by their path field',
+      // description: 'A list of all strings under the subject key, sorted by their path field',
+      description: (
+        <span>
+          Files to be added here must be created first in the{' '}
+          <Link href={'/desk/resources;lokalizeText'}>Resource File list</Link>
+        </span>
+      ),
       /**
        * We can support multiple types for accommodating short and long texts.
        */
-      of: [{ type: 'lokalizeText' }],
+      // of: [{ type: 'lokalizeText' }],
+      of: [
+        {
+          type: 'reference',
+          to: { type: 'lokalizeText' },
+          options: {
+            filter: ({ document } /** document is type LokalizeText */) => {
+              console.log({ document });
+              return {
+                filter: 'subject == $subject',
+                params: { subject: document.key },
+              };
+            },
+          },
+        },
+      ],
     },
   ],
   preview: {
