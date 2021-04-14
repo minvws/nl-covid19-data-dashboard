@@ -1044,19 +1044,19 @@
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": "The situation is manageable. The number of new infections is fewer than 35 per 100,000 inhabitants per week. There is sufficient healthcare capacity"
+        "toelichting": "The situation is manageable. The number of new infections is low. There is sufficient healthcare capacity"
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The situation is becoming difficult to manage. The number of new infections is between 35 and 100 per 100,000 inhabitants per week. Pressure on healthcare capacity is increasing."
+        "toelichting": "The situation is becoming difficult to manage. There are many new infections. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The situation is serious. The number of new infections is between 100 and 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is very high."
+        "toelichting": "The situation is serious. There is a large number of new infections. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
-        "toelichting": "The situation is severe. The number of new infections is higher than 250 per 100,000 inhabitants per week. Pressure on healthcare capacity is extreme."
+        "toelichting": "The situation is severe. The number of new infections is extremely high. Pressure on healthcare capacity is extreme."
       },
       "5": {
         "titel": "Lockdown",
@@ -2050,8 +2050,8 @@
       "verdenkingen_huisartsen": "This graph shows the progression over time in the estimated number of patients who contacted the general practitioner for the first time due to COVID-19 like symptoms.",
       "ziekenhuis_opnames": "This graph shows the progression in hospital admissions over time.",
       "rioolwater_meetwaarde": "This graph shows the most recent measured value of the average amount of virus particles per 100,000 residents, per sewage processing facility.",
-      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. The graph only contains the vaccines for the European Netherlands. The calculation is based on a waste of 1%. This was 5%, but an analysis by the RIVM has shown that this is only 1%. As of April 12, the waste has been adjusted retroactively.",
-      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. The calculation is based on a waste of 1%. This was 5%, but an analysis by the RIVM has shown that this is only 1%. As of April 12, the waste has been adjusted retroactively.",
+      "verwachte_leveringen": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks.\n\nThe graph only contains the vaccines for the European Netherlands. The calculation is based on a waste of 1%.",
+      "vaccin_levering_en_prikken": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph.\n\nThe calculation is based on a waste of 1%.",
       "vaccinatie_draagvlak": "This graph shows the percentage of the population that wishes to be vaccinated against COVID-19."
     },
     "link_source": "Download date source for \"{{subject}}\" at {{source}}",
@@ -2137,7 +2137,7 @@
     },
     "grafiek": {
       "titel": "Delivered and checked doses & doses administered in total",
-      "omschrijving": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph. The calculation is based on a waste of 1%. This was 5%, but an analysis by the RIVM has shown that this is only 1%. As of April 12, the waste has been adjusted retroactively."
+      "omschrijving": "The left-hand side of the graph shows how many vaccine doses in total were available in the Netherlands and how many doses have been administered. The right-hand side of the graph shows how many vaccine doses we will have available in the coming weeks and how many doses are to be administered in the coming weeks. Until March 23, the chart also included deliveries for the Caribbean. As of 23 March, we only show vaccines for the European Netherlands in the entire graph.\n\nThe calculation is based on a waste of 1%."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} to week {{weekNumberTo}}",
@@ -2168,7 +2168,7 @@
         "hospitals": "administered in hospitals",
         "care_institutions": "administered in long-term care institutions",
         "doctors": "administered in general practices",
-        "hospitals_and_care_institutions": "administered in institutions (including hospitals)"
+        "hospitals_and_care_institutions": ""
       },
       "reported": {
         "ggd_ghor": "reported by GGD-GHOR",
@@ -2226,7 +2226,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
@@ -2370,7 +2370,7 @@
       "title": "Deliveries and stock",
       "description": "How many vaccine doses can be administered depends on how many doses we receive. Vaccine doses are delivered to the Netherlands every week. After quality control the majority of these are available for vaccination. We keep some doses in a safely stock to ensure enough vaccine doses for both appointments the first few days and the second dose. This page shows how many doses of vaccine were delivered to the Netherlands and how many doses are in stock.",
       "reference": {
-        "href": "/verantwoording#deliveries-and-vaccine-doses-in-stock",
+        "href": "/verantwoording#deliveries-and-available vaccines",
         "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
       }
     },
@@ -2390,13 +2390,13 @@
     },
     "grafiek_leveringen": {
       "titel": "Deliveries",
-      "omschrijving": "This graph shows how many doses of each vaccine the Netherlands has received or expects to receive in a given week.",
+      "omschrijving": "This graph shows how many doses of each vaccine the Netherlands has received or expects to receive in a given week. It assumes 6 doses per vaccine vial for BioNTech / Pfizer, 10 doses per vaccine vial for Moderna, 11 doses per vaccine vial for AstraZeneca and 5 doses per vaccine vial for Janssen.",
       "timeframe_recent_en_verwacht": "Show recent and expected"
     },
     "bereidheid_datums": "Last values obtained on {{dateOfInsertion}}. Is updated every three weeks.",
     "stock_per_supplier_chart": {
       "title": "Doses in stock per type of vaccine",
-      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The available stock can be used for vaccination and includes the safety stock. The total stock consists of the available and not yet available stock. Stocks that are not yet available are vaccines in quality control. After quality control the vaccines are available.",
+      "description": "This is the number of vaccine doses currently in stock at the National Institute for Public Health and the Environment (RIVM). The total stock consists of the available and not yet available stock. The available stock is ready for use and partly consists of safety stock. Stocks that are not yet available are vaccines in quality control. After quality control the vaccines are available.",
       "tooltip_title": "Doses in stock",
       "legend": {
         "available": "Available doses in stock of {{vaccineName}} vaccine",
