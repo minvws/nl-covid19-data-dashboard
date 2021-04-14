@@ -9,7 +9,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import theme from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIntl } from '~/intl';
 
 export function TopNavigation() {

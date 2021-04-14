@@ -1,6 +1,6 @@
 import { isDateValue, TimestampedValue } from '@corona-dashboard/common';
 import { assert } from './assert';
-import { createDate } from './createDate';
+import { createDate } from './create-date';
 
 type ValueWithUnixDate = {
   date_unix: number;

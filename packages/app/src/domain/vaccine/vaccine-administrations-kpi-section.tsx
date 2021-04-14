@@ -9,7 +9,7 @@ import { RadioGroup } from '~/components/radio-group';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function VaccineAdministrationsKpiSection({ data }: { data: National }) {
   const { siteText } = useIntl();

@@ -25,7 +25,7 @@ import {
   getVrData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSewerWaterBarChartData } from '~/utils/sewer-water/safety-region-sewer-water.util';
 import { useIntl } from '~/intl';
 

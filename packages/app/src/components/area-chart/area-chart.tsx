@@ -17,7 +17,7 @@ import { useIntl } from '~/intl';
 import theme from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { LegendShape } from '../legend';
 import {
   AreaChartGraph,

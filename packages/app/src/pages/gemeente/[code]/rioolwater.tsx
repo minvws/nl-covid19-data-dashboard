@@ -24,7 +24,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { Layout } from '~/domain/layout/layout';

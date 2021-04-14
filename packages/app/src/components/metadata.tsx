@@ -1,4 +1,4 @@
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
 import { Text } from './typography';
 import { useIntl } from '~/intl';

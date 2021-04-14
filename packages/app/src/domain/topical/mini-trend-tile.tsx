@@ -8,7 +8,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 type MiniTrendTileProps<T extends TimestampedValue> = {
   icon: JSX.Element;

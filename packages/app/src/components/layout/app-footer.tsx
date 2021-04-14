@@ -6,7 +6,7 @@ import { ExternalLink } from '~/components/external-link';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Markdown } from '~/components/markdown';
 
 export function AppFooter({ lastGenerated }: { lastGenerated: number }) {

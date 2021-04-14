@@ -14,7 +14,7 @@ import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function VaccineDeliveryAndAdministrationsAreaChart({
   data,

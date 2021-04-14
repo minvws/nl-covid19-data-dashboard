@@ -1,7 +1,7 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { DataProps } from '~/types/attributes';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import {
   ChartRegionControls,

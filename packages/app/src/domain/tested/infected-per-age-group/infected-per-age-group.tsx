@@ -11,7 +11,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useList } from '~/utils/use-list';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {

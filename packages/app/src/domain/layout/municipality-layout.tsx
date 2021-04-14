@@ -16,7 +16,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 

@@ -11,7 +11,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
-import { getSkipLinkId } from '~/utils/skipLinks';
+import { getSkipLinkId } from '~/utils/skip-links';
 import styles from './over.module.scss';
 import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';

@@ -5,7 +5,7 @@ import DatabaseIcon from '~/assets/database.svg';
 import DownloadIcon from '~/assets/download.svg';
 import { useIntl } from '~/intl';
 import theme from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { ExternalLink } from '../external-link';
 import { Text } from '../typography';

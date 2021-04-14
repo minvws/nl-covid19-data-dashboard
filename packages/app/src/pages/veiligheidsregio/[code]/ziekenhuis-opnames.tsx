@@ -16,7 +16,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
-import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import regionCodeToMunicipalCodeLookup from '~/data/region-code-to-municipal-code-lookup';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
@@ -33,7 +33,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/vr';

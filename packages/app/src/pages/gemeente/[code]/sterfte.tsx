@@ -21,7 +21,7 @@ import {
   getLastGeneratedDate,
   getGmData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';

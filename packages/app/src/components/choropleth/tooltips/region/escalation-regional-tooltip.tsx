@@ -8,7 +8,7 @@ import { Text } from '~/components/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function EscalationRegionalTooltip({
   context,

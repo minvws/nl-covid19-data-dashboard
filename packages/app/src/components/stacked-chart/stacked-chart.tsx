@@ -31,7 +31,7 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import {
   calculateSeriesMaximum,
   getSeriesData,

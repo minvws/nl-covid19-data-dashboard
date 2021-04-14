@@ -5,7 +5,7 @@
  * - machine readable iso dates
  */
 
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useIntl } from '~/intl';
 

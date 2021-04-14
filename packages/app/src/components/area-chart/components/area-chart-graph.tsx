@@ -15,7 +15,7 @@ import {
 import { AnyTickFormatter } from '~/components/line-chart/components/chart-axes';
 import { TrendValue } from '~/components/line-chart/logic';
 import { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export type TrendConfig<T> = {
   values: T[];

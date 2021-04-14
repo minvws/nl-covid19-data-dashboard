@@ -13,7 +13,7 @@ import {
   metricContainsPartialData,
 } from '~/metric-config';
 import { assert } from '~/utils/assert';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
 import { useIntl } from '~/intl';

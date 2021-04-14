@@ -14,7 +14,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
-import { getSkipLinkId } from '~/utils/skipLinks';
+import { getSkipLinkId } from '~/utils/skip-links';
 
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';

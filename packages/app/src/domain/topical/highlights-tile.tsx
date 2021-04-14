@@ -3,7 +3,7 @@ import {
   HighlightTeaser,
   HighlightTeaserProps,
 } from '~/components/highlight-teaser';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ArticleBox } from './article-list';
 import { Block, ImageBlock } from '~/types/cms';
 

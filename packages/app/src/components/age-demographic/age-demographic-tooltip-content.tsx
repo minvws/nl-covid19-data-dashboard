@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Text } from '~/components/typography';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 import { useIntl } from '~/intl';

@@ -9,7 +9,7 @@ import {
 import { getDataThresholds } from '~/components/choropleth/legenda/utils';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Heading, InlineText, Text } from './typography';
 import { useIntl } from '~/intl';
 

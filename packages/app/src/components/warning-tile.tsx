@@ -3,7 +3,7 @@ import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import WarningIcon from '~/assets/warning.svg';
 import { Tile } from '~/components/tile';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import { Markdown } from './markdown';
 

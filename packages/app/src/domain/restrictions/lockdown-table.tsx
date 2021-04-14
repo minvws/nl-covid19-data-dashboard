@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Box } from '~/components/base';
 import { Cell, Row, Table, TableBody } from '~/components/table';
 import { InlineText } from '~/components/typography';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { restrictionIcons } from './restriction-icons';
 import { LockdownData } from '~/types/cms';
 import { css } from '@styled-system/css';

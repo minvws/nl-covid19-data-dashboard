@@ -21,7 +21,7 @@ import {
   createGetContent,
   getVrData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { RichContent } from '~/components/cms/rich-content';
 
 export { getStaticPaths } from '~/static-paths/vr';

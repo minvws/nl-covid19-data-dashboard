@@ -7,7 +7,7 @@ import {
   TooltipCoordinates,
 } from '~/components/tooltip';
 import { useElementSize } from '~/utils/use-element-size';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
 import { AgeDemographicDefaultValue } from './types';
 

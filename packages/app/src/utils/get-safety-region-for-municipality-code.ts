@@ -1,5 +1,5 @@
 import regios from '~/data/index';
-import municipalities from '~/data/municipalSearchData';
+import municipalities from '~/data/municipal-search-data';
 
 /**
  * This function returns the safety region information for the given

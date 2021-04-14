@@ -3,7 +3,7 @@ import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
-import { getFilteredThresholdValues } from '~/utils/getFilteredThresholdValues';
+import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 
 interface TooltipSubjectProps {
   subject: string;

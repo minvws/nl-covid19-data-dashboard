@@ -12,7 +12,7 @@ import {
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 

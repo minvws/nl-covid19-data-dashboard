@@ -13,7 +13,7 @@ import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { createDate } from '~/utils/createDate';
+import { createDate } from '~/utils/create-date';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
 

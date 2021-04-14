@@ -33,7 +33,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 

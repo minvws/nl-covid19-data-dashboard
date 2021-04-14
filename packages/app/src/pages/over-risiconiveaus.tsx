@@ -10,7 +10,7 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
-import { getSkipLinkId } from '~/utils/skipLinks';
+import { getSkipLinkId } from '~/utils/skip-links';
 import styles from './over.module.scss';
 import { RichContent } from '~/components/cms/rich-content';
 import { Box } from '~/components/base';

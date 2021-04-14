@@ -11,7 +11,7 @@ import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 interface VaccineStockPerSupplierChartProps {

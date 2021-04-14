@@ -15,7 +15,7 @@ import { Select } from '~/components/select';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useIsMounted } from '~/utils/use-is-mounted';

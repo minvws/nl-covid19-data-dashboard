@@ -6,7 +6,7 @@ import { Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
 
 interface HitListProps {

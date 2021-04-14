@@ -2,8 +2,8 @@ import css from '@styled-system/css';
 import { scaleQuantile, scaleThreshold } from 'd3-scale';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useDynamicScale } from '~/utils/useDynamicScale';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useDynamicScale } from '~/utils/use-dynamic-scale';
 import { VisuallyHidden } from './visually-hidden';
 
 type GradientStop = {

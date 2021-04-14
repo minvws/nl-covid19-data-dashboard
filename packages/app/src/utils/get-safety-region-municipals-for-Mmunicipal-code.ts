@@ -1,5 +1,5 @@
-import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
-import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import municipalCodeToRegionCodeLookup from '~/data/municipal-code-to-region-code-lookup';
+import regionCodeToMunicipalCodeLookup from '~/data/region-code-to-municipal-code-lookup';
 
 /**
  * This method looks up all the municipal codes that belong to the same safety region

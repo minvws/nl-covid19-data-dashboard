@@ -8,7 +8,7 @@ import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { createDate } from '~/utils/createDate';
+import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';

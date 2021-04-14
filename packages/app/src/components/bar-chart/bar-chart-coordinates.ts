@@ -2,7 +2,7 @@ import { scaleBand, scaleLinear, ScaleTypeToD3Scale } from '@visx/scale';
 import { ScaleBand } from 'd3-scale';
 import { useMemo } from 'react';
 import theme from '~/style/theme';
-import { Breakpoints, useBreakpoints } from '~/utils/useBreakpoints';
+import { Breakpoints, useBreakpoints } from '~/utils/use-breakpoints';
 import { GetTooltipCoordinates } from '../tooltip';
 import { BAR_CHART_TOOLTIP_MAX_WIDTH } from './bar-chart-graph';
 

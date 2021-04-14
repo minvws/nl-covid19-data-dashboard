@@ -27,7 +27,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { Block, DownscalingPage } from '~/types/cms';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { expandPortableTextAssets } from '~/utils/groq/expand-portable-text-assets';
 
 const locale = process.env.NEXT_PUBLIC_LOCALE;

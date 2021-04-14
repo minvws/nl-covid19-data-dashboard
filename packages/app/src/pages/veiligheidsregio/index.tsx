@@ -22,10 +22,10 @@ import {
   createGetChoroplethData,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { createDate } from '~/utils/createDate';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { createDate } from '~/utils/create-date';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
