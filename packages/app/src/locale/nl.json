@@ -105,7 +105,7 @@
     "titel_kpi": "Het aantal IC-opnames dat op één dag gemeld is",
     "reference": {
       "href": "/verantwoording#intensive-care",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "kpi_titel": "Het aantal IC-opnames dat op één dag gemeld is",
     "linechart_legend_trend_label": "Intensive care-opnames",
@@ -137,7 +137,7 @@
     "titel_kpi": "Patiënten met eerste melding van COVID-19 klachten bij de huisarts",
     "reference": {
       "href": "/verantwoording#huisartsen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "nivel": {
@@ -208,7 +208,7 @@
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "tijdelijk_onbeschikbaar_titel": "",
     "tijdelijk_onbeschikbaar": "",
@@ -260,7 +260,7 @@
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -305,7 +305,7 @@
     "titel_kpi": "Aantal besmettelijke mensen",
     "reference": {
       "href": "/verantwoording#besmettelijke-mensen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -342,7 +342,7 @@
     "titel_kpi": "Meest recente reproductiegetal",
     "reference": {
       "href": "/verantwoording#reproductiegetal",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -405,7 +405,7 @@
       "text": "RIVM"
     },
     "titel": "Verpleeghuiszorg – Besmette locaties",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
+    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Cijferverantwoording'.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij ten minste één bewoner positief getest is. Een verpleeghuis telt mee als ‘nieuwe locatie’ als er een nieuwe besmetting is vastgesteld, terwijl in de voorgaande 28 dagen – dit is twee keer de incubatietijd – geen bewoners positief waren getest.",
     "kpi_titel": "Totaal aantal besmette locaties",
@@ -426,7 +426,7 @@
     "titel_kpi": "Aantal besmette locaties",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -446,7 +446,7 @@
     "titel": "Verpleeghuiszorg – Aantal positief geteste bewoners",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is. Er wonen zo’n 125.000 personen in een verpleegtehuis.",
-    "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is op het coronavirus.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
+    "pagina_toelichting": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag is gemeld. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is op het coronavirus.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Cijferverantwoording'.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
@@ -463,7 +463,7 @@
     "titel_kpi": "Aantal positief geteste bewoners per dag",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -504,7 +504,7 @@
     "titel_kpi": "Sterfte per dag",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -558,7 +558,7 @@
     "map_tooltip_value": "{{value}} x100 miljard",
     "reference": {
       "href": "/verantwoording#rioolwater",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -649,7 +649,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "De landelijke lockdown blijft van kracht tot en met ten minste 20 april. [De maatregelen van de lockdown gelden voor het hele land](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -768,7 +768,7 @@
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -818,7 +818,7 @@
     },
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -861,7 +861,7 @@
     "rwzi_abbrev": "",
     "reference": {
       "href": "/verantwoording#rioolwater",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -903,7 +903,7 @@
     "titel_kpi": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "reference": {
       "href": "/verantwoording#ziekenhuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -954,7 +954,7 @@
     "titel_kpi": "Positief geteste mensen per dag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -997,7 +997,7 @@
     "graph_range_description": "Gemiddeld aantal virusdeeltjes door de tijd heen (per 100.000 inwoners)",
     "reference": {
       "href": "/verantwoording#rioolwater",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1022,7 +1022,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "De landelijke lockdown blijft van kracht tot en met ten minste 20 april. [De maatregelen van de lockdown gelden voor het hele land](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1108,7 +1108,7 @@
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1147,7 +1147,7 @@
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1178,7 +1178,7 @@
     },
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1203,7 +1203,7 @@
       "text": "RIVM"
     },
     "titel": "Verpleeghuiszorg - Aantal besmette locaties in {{safetyRegion}}",
-    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
+    "pagina_toelichting": "Dit getal is een inschatting van het aantal nieuwe verpleeghuislocaties waar sprake is van tenminste een COVID-19 besmetting op basis van een positieve test.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Cijferverantwoording'.",
     "barscale_titel": "Aantal nieuwe locaties per dag",
     "barscale_toelichting": "Aantal nieuwe locaties waarbij ten minste één bewoner positief getest is. Een verpleeghuis telt mee als ‘nieuwe locatie’ als er een nieuwe besmetting is vastgesteld, terwijl in de voorgaande 28 dagen – dit is twee keer de incubatietijd – geen bewoners positief waren getest.",
     "kpi_titel": "Totaal aantal besmette locaties",
@@ -1217,7 +1217,7 @@
     "titel_sidebar": "Verpleeghuiszorg",
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1237,7 +1237,7 @@
     "titel": "Verpleeghuiszorg – Aantal positief geteste bewoners in {{safetyRegion}}",
     "barscale_titel": "Aantal positief geteste bewoners in verpleeghuizen per dag",
     "extra_uitleg": "Aantal nieuwe positief geteste bewoners in verpleeghuizen dat per dag gemeld is.",
-    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is op het coronavirus.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Uitleg bij de cijfers'.",
+    "pagina_toelichting": "Aantal positief geteste bewoners in verpleeghuizen per dag in {{safetyRegion}}. Dit getal is een inschatting van het aantal gemelde bewoners in verpleeghuizen dat in Nederland positief getest is op het coronavirus.\n\nDe rekenmethode is per 29 september verbeterd. Zie ook de 'Cijferverantwoording'.",
     "linechart_titel": "Aantal positief geteste bewoners door de tijd heen",
     "barscale_screenreader_text": "{{value}} positief geteste bewoners.",
     "titel_sidebar": "Positief geteste bewoners",
@@ -1253,7 +1253,7 @@
     },
     "reference": {
       "href": "/verantwoording#verpleeghuizen",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1377,7 +1377,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1442,7 +1442,7 @@
     },
     "reference": {
       "href": "https://coronadashboard.rijksoverheid.nl/verantwoording#gedrag",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1517,7 +1517,7 @@
     "titel_kpi": "Aantal besmette locaties",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1549,7 +1549,7 @@
     "titel_kpi": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1579,7 +1579,7 @@
     "titel_kpi": "Aantal overleden personen",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1613,7 +1613,7 @@
     },
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1642,7 +1642,7 @@
     "titel_sidebar": "Besmettelijke locaties",
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1674,7 +1674,7 @@
     },
     "reference": {
       "href": "/verantwoording#gehandicaptenzorg",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -1699,7 +1699,7 @@
       "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       },
       "bronnen": {
         "rivm": {
@@ -1725,7 +1725,7 @@
       "description": "Aantal thuiswonende personen van 70 jaar of ouder waarvan gisteren is gemeld dat ze zijn overleden aan COVID-19.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       },
       "bronnen": {
         "rivm": {
@@ -1755,7 +1755,7 @@
       "description": "Personen van 70 jaar of ouder zijn extra kwetsbaar bij een besmetting met het coronavirus. Door zicht te houden op het aantal besmettingen onder deze groep kunnen de juiste maatregelen genomen worden om het virus in te dammen. Het gaat hierbij alleen om zelfstandig wonende 70-plussers.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       },
       "bronnen": {
         "rivm": {
@@ -1778,7 +1778,7 @@
       "description": "Aantal thuiswonende personen van 70 jaar of ouder in deze veiligheidsregio die zijn overleden aan COVID-19, per dag.",
       "reference": {
         "href": "/verantwoording#thuiswonende-70-plussers",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       },
       "bronnen": {
         "rivm": {
@@ -1816,7 +1816,7 @@
       },
       "reference": {
         "href": "/verantwoording#sterfte",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       },
       "kpi_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten per dag",
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
@@ -1850,7 +1850,7 @@
       },
       "reference": {
         "href": "/verantwoording#sterfte",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       },
       "kpi_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten per dag",
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze veiligheidsregio waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
@@ -1877,7 +1877,7 @@
     },
     "reference": {
       "href": "/verantwoording#sterftemonitor-CBS",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "cbs_message": {
       "title": "Geen wekelijks nieuwsbericht over sterfte in week 13",
@@ -2092,7 +2092,7 @@
     "date_of_insertion_unix": "1613650547",
     "reference": {
       "href": "/verantwoording#vaccinatie",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "bronnen": {
       "rivm": {
@@ -2157,11 +2157,11 @@
       "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
       "tab_first": {
         "title": "Berekend aantal",
-        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen, de huisartspraktijken en langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)."
+        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen, de huisartspraktijken en langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Cijferverantwoording'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)."
       },
       "tab_second": {
         "title": "Gemeld aantal",
-        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
+        "description": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Cijferverantwoording'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)"
       },
       "estimated": {
         "ggd": "gezet door GGD'en",
@@ -2226,7 +2226,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Cijferverantwoording'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
@@ -2263,7 +2263,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen, de huisartspraktijken en langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen, de huisartspraktijken en langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Cijferverantwoording'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
           "description_second": ""
         }
       },
@@ -2363,7 +2363,7 @@
       "description": "Vaccinatie tegen het coronavirus is niet verplicht. Maar als iedereen zich laat vaccineren, kan het virus zich niet meer verspreiden. Het is daarom belangrijk om te weten hoeveel mensen zelf een prik tegen corona willen. Het RIVM vraagt elke drie weken aan een groep mensen of zij zich willen laten vaccineren.",
       "reference": {
         "href": "/verantwoording#vaccinatiebereidheid",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       }
     },
     "stock_and_delivery_section": {
@@ -2371,7 +2371,7 @@
       "description": "Hoeveel prikken we kunnen zetten, hangt af van hoeveel vaccins we geleverd krijgen. Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins Nederland krijgt en hoeveel vaccins we op voorraad hebben.",
       "reference": {
         "href": "/verantwoording#leveringen-voorraden-en-beschikbare-vaccins",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       }
     },
     "stock": {
@@ -2468,7 +2468,7 @@
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op {{last_update}} gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).",
-      "belangrijk_bericht": "De landelijke lockdown blijft van kracht tot en met ten minste 20 april. [De maatregelen van de lockdown gelden voor het hele land](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2833,7 +2833,7 @@
       },
       "reference": {
         "href": "/verantwoording#sterfte",
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       },
       "kpi_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten per dag",
       "kpi_covid_daily_description": "Dit getal toont het aantal COVID-19 patiënten in deze gemeente waarvan aan de GGD op die dag gemeld is dat ze zijn overleden. Een deel van de overlijdens is van eerdere dagen, die later zijn doorgegeven.",
@@ -2854,7 +2854,7 @@
       "description": "Om verspreiding van het coronavirus tegen te gaan, is de app CoronaMelder ontwikkeld. Deze app houdt bij wanneer gebruikers van de app langere tijd bij elkaar in de buurt zijn geweest. Wanneer een gebruiker van de CoronaMelder postitief test op COVID-19 kan (met hulp van de GGD) een waarschuwing worden verzonden naar andere appgebruikers die in de buurt zijn geweest. Zij kunnen zich dan laten testen en zo voorkomen dat ze onbewust andere mensen besmetten.",
       "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "reference": {
-        "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’.",
+        "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’.",
         "href": "/verantwoording#coronamelder"
       },
       "bronnen": {
@@ -2923,7 +2923,7 @@
     },
     "reference": {
       "href": "/verantwoording#sterftemonitor-CBS",
-      "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
+      "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     }
   },
   "infected_per_age_group": {
