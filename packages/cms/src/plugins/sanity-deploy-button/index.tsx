@@ -4,7 +4,6 @@ import Button from 'part:@sanity/components/buttons/default';
 import { useSecrets, SettingsView } from 'sanity-secrets';
 
 import styles from './deploy.css';
-import img from './github-actions-deployment.png';
 
 const namespace = 'github-actions-deployment';
 
@@ -73,7 +72,7 @@ function Deploy() {
           if the deployment is triggered.
         </p>
         <p>A deployment looks like this:</p>
-        <img src={img} />
+        <img src="/static/github-actions-deployment.png" />
       </div>
       <div className={styles.footer}>
         <Button
