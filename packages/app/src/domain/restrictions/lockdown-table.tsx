@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
-import { Box } from '~/components-styled/base';
-import { Cell, Row, Table, TableBody } from '~/components-styled/table';
-import { InlineText } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { Cell, Row, Table, TableBody } from '~/components/table';
+import { InlineText } from '~/components/typography';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { restrictionIcons } from './restriction-icons';
 import { LockdownData } from '~/types/cms';

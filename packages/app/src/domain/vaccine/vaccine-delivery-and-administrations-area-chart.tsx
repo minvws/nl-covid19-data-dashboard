@@ -5,10 +5,10 @@ import {
   NlVaccineDeliveryEstimateValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
-import { AreaChart } from '~/components-styled/area-chart';
-import { Box } from '~/components-styled/base';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { Legend } from '~/components-styled/legend';
+import { AreaChart } from '~/components/area-chart';
+import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
+import { Legend } from '~/components/legend';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
 import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
 import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';

@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer/polyfilled';
-import { Box } from '~/components-styled/base';
+import { Box } from '~/components/base';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useBreakpoints } from '~/utils/useBreakpoints';
 import { SearchContextProvider } from './context';

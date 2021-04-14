@@ -1,5 +1,5 @@
-import { Box } from '~/components-styled/base';
-import { Heading, Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { Heading, Text } from '~/components/typography';
 import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';

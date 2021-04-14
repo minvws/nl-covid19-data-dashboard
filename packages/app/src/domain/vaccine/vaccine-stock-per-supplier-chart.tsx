@@ -2,15 +2,12 @@ import { NlVaccineStockValue } from '@corona-dashboard/common';
 import { pick } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
-import { ChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components/chart-tile';
 import {
   InteractiveLegend,
   SelectOption,
-} from '~/components-styled/interactive-legend';
-import {
-  SeriesConfig,
-  TimeSeriesChart,
-} from '~/components-styled/time-series-chart';
+} from '~/components/interactive-legend';
+import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';

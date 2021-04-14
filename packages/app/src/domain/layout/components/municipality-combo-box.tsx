@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { ComboBox } from '~/components-styled/combo-box/combo-box';
+import { ComboBox } from '~/components/combo-box/combo-box';
 import municipalities from '~/data/municipalSearchData';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';

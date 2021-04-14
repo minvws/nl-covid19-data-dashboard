@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { CollapsibleSection } from '~/components-styled/collapsible';
-import { MaxWidth } from '~/components-styled/max-width';
+import { RichContent } from '~/components/cms/rich-content';
+import { CollapsibleSection } from '~/components/collapsible';
+import { MaxWidth } from '~/components/max-width';
 import {
   createGetStaticProps,
   StaticProps,
@@ -13,7 +13,7 @@ import {
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-import { Box } from '~/components-styled/base';
+import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 

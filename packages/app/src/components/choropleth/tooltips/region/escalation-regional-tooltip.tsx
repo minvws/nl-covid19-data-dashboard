@@ -2,9 +2,9 @@ import {
   EscalationLevels,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { Box } from '~/components-styled/base';
-import { EscalationLevelIcon } from '~/components-styled/escalation-level-icon';
-import { Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { EscalationLevelIcon } from '~/components/escalation-level-icon';
+import { Text } from '~/components/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';

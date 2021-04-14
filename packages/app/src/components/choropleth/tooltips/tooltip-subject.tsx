@@ -1,8 +1,8 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
-import { Box } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { Text } from '~/components/typography';
 import { getFilteredThresholdValues } from '~/utils/getFilteredThresholdValues';
 
 interface TooltipSubjectProps {

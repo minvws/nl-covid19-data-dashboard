@@ -2,12 +2,12 @@ import {
   EscalationLevels,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { Box } from '~/components-styled/base';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { Markdown } from '~/components-styled/markdown';
-import { TileList } from '~/components-styled/tile-list';
-import { WarningTile } from '~/components-styled/warning-tile';
+import { Box } from '~/components/base';
+import { ChoroplethTile } from '~/components/choropleth-tile';
+import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
+import { Markdown } from '~/components/markdown';
+import { TileList } from '~/components/tile-list';
+import { WarningTile } from '~/components/warning-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';

@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { CollapsibleSection } from '~/components-styled/collapsible';
-import { MaxWidth } from '~/components-styled/max-width';
+import { CollapsibleSection } from '~/components/collapsible';
+import { MaxWidth } from '~/components/max-width';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -12,8 +12,8 @@ import {
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skipLinks';
 import styles from './over.module.scss';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { Box } from '~/components-styled/base';
+import { RichContent } from '~/components/cms/rich-content';
+import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 
