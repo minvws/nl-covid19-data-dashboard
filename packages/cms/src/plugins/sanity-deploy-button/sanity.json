@@ -3,7 +3,7 @@
     {
       "name": "part:@sanity/dashboard/widget/deploy",
       "implements": "part:@sanity/dashboard/widget",
-      "path": "index.js"
+      "path": "index.tsx"
     }
   ]
 }

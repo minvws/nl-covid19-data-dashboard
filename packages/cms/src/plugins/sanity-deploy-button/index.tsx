@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import getIt from 'get-it';
-import jsonResponse from 'get-it/lib/middleware/jsonResponse';
-import promise from 'get-it/lib/middleware/promise';
+
 import Button from 'part:@sanity/components/buttons/default';
 import { useSecrets, SettingsView } from 'sanity-secrets';
 
@@ -13,18 +11,20 @@ const namespace = 'github-actions-deployment';
 const pluginConfigKeys = [
   {
     key: 'webhookUrl',
+    description: 'The webhook to trigger a deployment',
     title: 'The webhook to trigger a deployment',
   },
 ];
 
-const request = getIt([promise(), jsonResponse()]);
+type Secrets =
+  | {
+      webhookUrl?: string;
+    }
+  | undefined;
 
 function Deploy() {
-  const { secrets } = useSecrets(namespace);
+  const { secrets }: { secrets: Secrets } = useSecrets(namespace);
   const [showSettings, setShowSettings] = useState(false);
-
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
 
   // useEffect(() => {
   //   if (!secrets) {
@@ -33,18 +33,10 @@ function Deploy() {
   // }, [secrets]);
 
   function triggerDeploy() {
-    if (secrets.webhookUrl) {
-      request({
-        url: secrets.webhookUrl,
-      })
-        .then((response) => {
-          setData(response);
-        })
-        .catch((error) => {
-          setError(error);
-        });
+    if (secrets?.webhookUrl) {
+      fetch(secrets.webhookUrl);
     } else {
-      setError(
+      console.error(
         'The studio is missing the webhookUrl secret. Check your configuration'
       );
     }
@@ -58,6 +50,7 @@ function Deploy() {
       <div className={styles.content}>
         {showSettings && (
           <SettingsView
+            title="Deploy settings"
             namespace={namespace}
             keys={pluginConfigKeys}
             onClose={() => {
@@ -81,7 +74,6 @@ function Deploy() {
         </p>
         <p>A deployment looks like this:</p>
         <img src={img} />
-        {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
       </div>
       <div className={styles.footer}>
         <Button
