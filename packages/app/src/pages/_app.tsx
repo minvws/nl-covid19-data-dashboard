@@ -1,7 +1,7 @@
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
-import { useEffect, createContext } from 'react';
+import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import '~/components-styled/combo-box/combo-box.scss';
 import { IntlContext } from '~/intl';
@@ -10,10 +10,6 @@ import * as piwik from '~/lib/piwik';
 import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-import { features } from '~/config/features';
-
-export const FeaturesContext = createContext(features);
-FeaturesContext.displayName = 'FeatureFlags';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -57,12 +53,10 @@ export default function App(props: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <FeaturesContext.Provider value={features}>
-        <IntlContext.Provider value={intlContext}>
-          <GlobalStyle />
-          <Component {...pageProps} />
-        </IntlContext.Provider>
-      </FeaturesContext.Provider>
+      <IntlContext.Provider value={intlContext}>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </IntlContext.Provider>
     </ThemeProvider>
   );
 }
