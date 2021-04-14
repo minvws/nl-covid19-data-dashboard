@@ -5,6 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 export type SeriesConfig<T extends TimestampedValue> = (
@@ -117,9 +118,11 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
   timeframe: TimeframeOption
 ) {
-  return useMemo(() => getValuesInTimeframe(values, timeframe), [
+  const today = useCurrentDate();
+  return useMemo(() => getValuesInTimeframe(values, timeframe, today), [
     values,
     timeframe,
+    today,
   ]);
 }
 

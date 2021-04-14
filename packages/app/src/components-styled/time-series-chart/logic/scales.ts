@@ -10,6 +10,7 @@ import { ScaleLinear } from 'd3-scale';
 import { first, isEmpty, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { Bounds } from './common';
 import { SeriesDoubleValue, SeriesItem, SeriesSingleValue } from './series';
 
@@ -34,14 +35,16 @@ export function useScales<T extends TimestampedValue>(args: {
   bounds: Bounds;
   numTicks: number;
 }) {
+  const today = useCurrentDate().getTime() / 1000;
   const { maximumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
+    const [start, end] = getTimeDomain(values, { withPadding: true });
+
     if (isEmpty(values)) {
-      const today = Date.now() / 1000;
       return {
         xScale: scaleLinear({
-          domain: [today, today + ONE_DAY_IN_SECONDS],
+          domain: [start, end],
           range: [0, bounds.width],
         }),
         yScale: scaleLinear({
@@ -55,8 +58,6 @@ export function useScales<T extends TimestampedValue>(args: {
         dateSpanWidth: 0,
       };
     }
-
-    const [start, end] = getTimeDomain(values, { withPadding: true });
 
     const xScale = scaleLinear({
       domain: [start, end],
@@ -82,7 +83,7 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, bounds, numTicks]);
+  }, [values, maximumValue, bounds, numTicks, today]);
 }
 
 /**
@@ -99,6 +100,14 @@ export function getTimeDomain<T extends TimestampedValue>(
   values: T[],
   { withPadding }: { withPadding: boolean }
 ): [start: number, end: number] {
+  /**
+   * Return a sensible default when no values fall within the selected timeframe
+   */
+  if (isEmpty(values)) {
+    const today = Date.now() / 1000;
+    return [today, today + ONE_DAY_IN_SECONDS];
+  }
+
   /**
    * This code is assuming the values array is already sorted in time, so we
    * only need to pick the first and last values.
