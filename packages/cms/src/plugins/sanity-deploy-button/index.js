@@ -26,8 +26,6 @@ function Deploy() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  console.log({ secrets });
-
   // useEffect(() => {
   //   if (!secrets) {
   //     setShowSettings(true);
