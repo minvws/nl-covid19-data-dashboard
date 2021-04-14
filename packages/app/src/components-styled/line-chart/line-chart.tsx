@@ -28,6 +28,7 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { HoverPoint, Marker, Tooltip, Trend } from './components';
 import { calculateYMax, getTrendData, TrendValue } from './logic';
+import { useCurrentDate } from '~/utils/current-date-context';
 
 export type LineConfig<T extends TimestampedValue> = {
   metricProperty: keyof T;
@@ -133,9 +134,10 @@ export function LineChart<T extends TimestampedValue>({
     [signaalwaarde, text.common.signaalwaarde]
   );
 
+  const today = useCurrentDate();
   const trendsList = useMemo(
-    () => getTrendData(values, metricProperties as string[], timeframe),
-    [values, metricProperties, timeframe]
+    () => getTrendData(values, metricProperties as string[], timeframe, today),
+    [values, metricProperties, timeframe, today]
   );
 
   const calculatedSeriesMax = useMemo(
