@@ -1,5 +1,5 @@
-export interface FeatureDefinition<FeatureName> {
-  name: FeatureName;
+export interface Feature {
+  name: string;
   isEnabled: boolean;
 
   /**

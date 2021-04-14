@@ -1,15 +1,9 @@
-import {
-  assert,
-  FeatureDefinition,
-  FeatureName,
-  features,
-  MetricScope,
-} from '@corona-dashboard/common';
+import { assert, Feature, MetricScope } from '@corona-dashboard/common';
 import { get, isEmpty } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { jsonDirectory } from '../config';
+import { jsonDirectory, featureFlagsConfigFile } from '../config';
 import { getSchemaInfo, SchemaInfo } from '../schema/get-schema-info';
 import { logError, logSuccess, readObjectFromJsonFile } from '../utils';
 
@@ -40,7 +34,7 @@ const cli = meow(
 );
 
 type Failure = {
-  feature: FeatureDefinition<FeatureName>;
+  feature: Feature;
   messages: string[];
 };
 
@@ -54,12 +48,20 @@ async function main() {
 
   const allFailures: Failure[] = [];
 
+  /**
+   * The features configuration is imported dynamically here. We could include
+   * it in the common bundle and import from there, but it feels a little
+   * annoying having to place an app configuration in the common bundle and
+   * build it before it becomes effective.
+   */
+  const { features } = (await import(featureFlagsConfigFile)) as {
+    features: Feature[];
+  };
+
   for (const feature of features) {
     if (isVerbose) {
       console.log(
-        'Feature',
-        feature.name,
-        feature.isEnabled ? ': enabled' : ': disabled'
+        `Feature ${feature.name}: ${feature.isEnabled ? 'enabled' : 'disabled'}`
       );
     }
 
@@ -78,7 +80,13 @@ async function main() {
   }
 
   if (!isEmpty(allFailures)) {
-    console.error(allFailures);
+    allFailures.forEach((failure) =>
+      logError(
+        `Failed to validate ${
+          failure.feature.isEnabled ? 'enabled' : 'disabled'
+        } feature ${failure.feature.name}:\n${failure.messages}`
+      )
+    );
     logError(
       `There were ${allFailures.length} features that failed to validate their data.`
     );
@@ -100,10 +108,7 @@ main().then(
  * Validate if the data is there or not there. Returns one validation error
  * message per scope.
  */
-async function validateFeatureData(
-  feature: FeatureDefinition<FeatureName>,
-  schemaInfo: SchemaInfo
-) {
+async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
   if (feature.metricName) {
     const promisedResults = feature.metricScopes.map((scope) =>
       validateMetricNameForScope(
@@ -119,8 +124,8 @@ async function validateFeatureData(
     const messages = results.filter(isDefined);
 
     /**
-     * If errors occurred on the metric name level then we can already return and
-     * do not test the properties.
+     * If errors occurred on the metric name level then we can already return
+     * and do not test the properties.
      */
     if (!isEmpty(messages)) {
       return messages;
@@ -147,8 +152,8 @@ async function validateFeatureData(
     const messages = results.filter(isDefined);
 
     /**
-     * If errors occurred on the metric name level then we can already return and
-     * do not test the properties.
+     * If errors occurred on the metric name level then we can already return
+     * and do not test the properties.
      */
     if (!isEmpty(messages)) {
       return messages;
