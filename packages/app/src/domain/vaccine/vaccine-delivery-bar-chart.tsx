@@ -59,7 +59,7 @@ export function VaccineDeliveryBarChart({
           flexDirection="column"
           alignItems="flex-start"
         >
-          <Box flex={1} pr={{ md: 2 }}>
+          <Box flex={1} pr={{ md: 2 }} maxWidth={560}>
             <Text>{text.omschrijving}</Text>
           </Box>
           <Box
