@@ -17,11 +17,14 @@
     "tabs",
     "./src/plugins/translate",
     "@sanity/dashboard",
-    "dashboard-widget-document-list"
+    "dashboard-widget-document-list",
+    "sanity-deploy-button"
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"],
+      "plugins": [
+        "@sanity/vision"
+      ],
       "api": {
         "dataset": "development"
       }
