@@ -649,7 +649,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -1022,7 +1022,7 @@
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1480,7 +1480,6 @@
   "infected_age_groups": {
     "title": "Distribution by age",
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 16% of all positive tested persons are in their twenties (blue bar) and 13% of all Dutch people are in their twenties (gray bar). In this example, the age group twenties has relatively more positive tested people. The chart is updated daily and covers only the most recently reported cases.",
-    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1491,7 +1490,8 @@
       "clipped_value_message": "This value is higher than displayed in the figure.",
       "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
-    }
+    },
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -2226,7 +2226,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Cijferverantwoording'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
@@ -2468,7 +2468,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).",
-      "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2894,6 +2894,10 @@
       }
     }
   },
+  "milestones": {
+    "toon_meer": "Show earlier events",
+    "verwacht": "Expected"
+  },
   "choropleth_tooltip": {
     "patients": {
       "singular": "patient",
@@ -2905,10 +2909,6 @@
     "elderly_at_home": "People over 70 living at home:",
     "sewer_regional": "Average number of virus particles:",
     "sewer_municipal": "Average number of virus particles:"
-  },
-  "milestones": {
-    "toon_meer": "Show earlier events",
-    "verwacht": "Expected"
   },
   "section_sterftemonitor_vr": {
     "title": "Mortality monitor",
