@@ -33,7 +33,9 @@ function Deploy() {
 
   function triggerDeploy() {
     if (secrets?.webhookUrl) {
-      fetch(secrets.webhookUrl);
+      fetch(secrets.webhookUrl, {
+        mode: 'no-cors',
+      });
     } else {
       console.error(
         'The studio is missing the webhookUrl secret. Check your configuration'
