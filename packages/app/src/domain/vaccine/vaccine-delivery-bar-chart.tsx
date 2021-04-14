@@ -59,20 +59,15 @@ export function VaccineDeliveryBarChart({
           flexDirection="column"
           alignItems="flex-start"
         >
-          <Box pr={{ md: 2 }} maxWidth={560}>
+          <Box maxWidth={560}>
             <Text>{text.omschrijving}</Text>
           </Box>
-          <Box
-            css={css({
-              '> *': { whiteSpace: 'nowrap' },
-            })}
-          >
-            <RadioGroup
-              value={timeframe}
-              onChange={(x) => setTimeframe(x)}
-              items={timeframeOptions}
-            />
-          </Box>
+
+          <RadioGroup
+            value={timeframe}
+            onChange={(x) => setTimeframe(x)}
+            items={timeframeOptions}
+          />
         </Box>
         <StackedChart
           values={
