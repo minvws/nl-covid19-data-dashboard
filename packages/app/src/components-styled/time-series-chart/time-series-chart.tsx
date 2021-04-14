@@ -3,7 +3,6 @@ import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components-styled/base';
 import { Legend } from '~/components-styled/legend';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -27,22 +26,16 @@ import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
   DataOptions,
+  getTimeDomain,
   SeriesConfig,
   useHoverState,
   useLegendItems,
   useScales,
   useSeriesList,
   useValuesInTimeframe,
-  getTimeDomain,
 } from './logic';
-import { useDimensions } from './logic/dimensions';
+import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
-
-/**
- * A chart with a width smaller than the threshold will be rendered with a
- * "collapsed" Y-axis. The collapsed axis will only display the top value.
- */
-const COLLAPSE_Y_AXIS_THRESHOLD = 430;
 
 /**
  * This chart started as a fork from MultiLineChart. It attempts to create a
@@ -165,17 +158,11 @@ export function TimeSeriesChart<
     timespanAnnotations,
   } = dataOptions || {};
 
-  const {
-    width: yAxisWidth = 0,
-    ref: yAxisRef,
-    // @ts-expect-error useResizeObserver expects element extending HTMLElement
-  } = useResizeObserver<SVGElement>();
-
-  const { padding, bounds } = useDimensions(
+  const { padding, bounds, leftPaddingRef } = useDimensions({
     width,
     height,
-    paddingLeft ?? yAxisWidth
-  );
+    paddingLeft,
+  });
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
 
@@ -299,7 +286,7 @@ export function TimeSeriesChart<
             xScale={xScale}
             yScale={yScale}
             isPercentage={isPercentage}
-            yAxisRef={yAxisRef}
+            yAxisRef={leftPaddingRef}
             isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
           />
 

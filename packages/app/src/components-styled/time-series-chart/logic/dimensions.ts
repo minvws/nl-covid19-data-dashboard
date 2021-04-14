@@ -1,6 +1,13 @@
 import { useMemo } from 'react';
+import useResizeObserver from 'use-resize-observer';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds, Padding } from './common';
+
+/**
+ * A chart with a width smaller than the threshold can be rendered with a
+ * "collapsed" Y-axis.
+ */
+export const COLLAPSE_Y_AXIS_THRESHOLD = 430;
 
 const defaultPadding: Padding = {
   top: 10,
@@ -17,27 +24,49 @@ const defaultPadding: Padding = {
   left: 40,
 };
 
-export function useDimensions(
-  width: number,
-  height: number,
-  paddingLeft?: number
-) {
+interface DimensionProps {
+  width: number;
+  height: number;
+  paddingLeft?: number;
+  /**
+   * A symmetrical padding ensures the right padding equals the left padding
+   */
+  applySymmetricalPadding?: boolean;
+}
+
+export function useDimensions({
+  width,
+  height,
+  paddingLeft,
+  applySymmetricalPadding,
+}: DimensionProps) {
   const isMounted = useIsMounted();
 
+  const {
+    width: measuredLeftPadding = 0,
+    ref: leftPaddingRef,
+    // @ts-expect-error useResizeObserver expects element extending HTMLElement
+  } = useResizeObserver<SVGElement>();
+
   return useMemo(() => {
-    /**
-     * When there's a padding left set/measured we'll add 10px extra to give the
-     * y-axis labels a bit more space, otherwise they could be cut off.
-     */
-    const paddingLeftWithExtraSpace = paddingLeft
-      ? paddingLeft + 10
-      : paddingLeft;
+    const calculatedPaddingLeft =
+      measuredLeftPadding > 0
+        ? /**
+           * A measured left padding is most likely measured on elements holding
+           * text. It looks like using this exact value can sometimes result in
+           * cut-off text, therefore we'll add a tiny bit of extra padding.
+           */
+          measuredLeftPadding + 5
+        : measuredLeftPadding;
+
+    const left = isMounted
+      ? paddingLeft ?? calculatedPaddingLeft ?? defaultPadding.left
+      : defaultPadding.left;
 
     const padding: Padding = {
       ...defaultPadding,
-      left: isMounted
-        ? paddingLeftWithExtraSpace ?? defaultPadding.left
-        : defaultPadding.left,
+      left,
+      right: applySymmetricalPadding ? left : defaultPadding.right,
     };
 
     const bounds: Bounds = {
@@ -45,6 +74,14 @@ export function useDimensions(
       height: height - padding.top - padding.bottom,
     };
 
-    return { padding, bounds };
-  }, [width, height, paddingLeft, isMounted]);
+    return { padding, bounds, leftPaddingRef };
+  }, [
+    paddingLeft,
+    measuredLeftPadding,
+    isMounted,
+    applySymmetricalPadding,
+    width,
+    height,
+    leftPaddingRef,
+  ]);
 }

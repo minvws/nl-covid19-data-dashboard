@@ -2961,5 +2961,14 @@
         "text": "Ministry of Health, Welfare and Sport based on RIVM"
       }
     }
+  },
+  "afschaling": {
+    "trend_grafieken": {
+      "reproductiegetal": "Reproduction number",
+      "ic_opnames": "Intensive care admissions",
+      "ziekenhuisopnames": "Hospital admissions (incl. IC)",
+      "grenswaarde_meer": "Limit value has been exceeded",
+      "grenswaarde_minder": "Value is less than {{days}} days below the limit"
+    }
   }
 }

@@ -2961,5 +2961,14 @@
         "text": "Ministerie van VWS op basis van RIVM"
       }
     }
+  },
+  "afschaling": {
+    "trend_grafieken": {
+      "reproductiegetal": "Reproductiegetal",
+      "ic_opnames": "IC-opnames",
+      "ziekenhuisopnames": "Ziekenhuisopnames (incl. IC)",
+      "grenswaarde_meer": "Grenswaarde is overschreden",
+      "grenswaarde_minder": "Waarde is minder dan {{days}} dagen onder de grenswaarde"
+    }
   }
 }
