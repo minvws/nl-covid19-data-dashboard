@@ -86,37 +86,41 @@ const Afschaling = (props: StaticProps<typeof getStaticProps>) => {
 
       <Box fontSize={2} bg={'white'} pt={5} pb={4}>
         <MaxWidth>
-          <ContentBlock spacing={3}>
-            <Box
-              borderBottom="1px"
-              borderBottomColor="border"
-              borderBottomStyle="solid"
-            >
+          <ContentBlock spacing={5}>
+            <Box>
               <Heading level={1}>{content.page.title}</Heading>
-              <RichContent blocks={content.page.description} />
-            </Box>
-            {!isEmpty(
-              siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
-            ) && (
-              <Box mb={3}>
+              <Box fontSize={3}>
+                <RichContent blocks={content.page.description} />
+              </Box>
+              {!isEmpty(
+                siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
+              ) && (
                 <WarningTile
                   message={
                     siteText.nationaal_actueel.risiconiveaus.belangrijk_bericht
                   }
                   variant="emphasis"
                 />
-              </Box>
-            )}
-            <Heading level={2}>{content.downscaling.title}</Heading>
-            {isDefined(downscalableOption) && (
-              <DownscalableExplanation
-                text={downscalableOption}
-                isPossible={isDownscalePossible}
-              />
-            )}
-            <RichContent blocks={content.downscaling.description} />
-            <Heading level={2}>{content.measures.title}</Heading>
-            <RichContent blocks={content.measures.description} />
+              )}
+            </Box>
+            <Box>
+              <Heading level={2} fontSize={3}>
+                {content.downscaling.title}
+              </Heading>
+              {isDefined(downscalableOption) && (
+                <DownscalableExplanation
+                  text={downscalableOption}
+                  isPossible={isDownscalePossible}
+                />
+              )}
+              <RichContent blocks={content.downscaling.description} />
+            </Box>
+            <Box>
+              <Heading level={2} fontSize={3}>
+                {content.measures.title}
+              </Heading>
+              <RichContent blocks={content.measures.description} />
+            </Box>
           </ContentBlock>
         </MaxWidth>
       </Box>

@@ -60,9 +60,10 @@ export type TrendData = (TrendValue & TimestampedValue)[][];
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
   metricProperties: string[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ): TrendData {
-  const series = getValuesInTimeframe(values, timeframe);
+  const series = getValuesInTimeframe(values, timeframe, today);
 
   const trendData = metricProperties.map(
     (metricProperty) =>

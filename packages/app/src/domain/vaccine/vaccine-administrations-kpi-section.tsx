@@ -67,24 +67,16 @@ export function VaccineAdministrationsKpiSection({ data }: { data: National }) {
 
                 <VaccineAdministeredItem
                   value={
-                    data.vaccine_administered_hospitals.last_value.estimated
+                    data.vaccine_administered_hospitals_and_care_institutions
+                      .last_value.estimated
                   }
-                  description={text.gezette_prikken.estimated.hospitals}
+                  description={
+                    text.gezette_prikken.estimated
+                      .hospitals_and_care_institutions
+                  }
                   date={
-                    data.vaccine_administered_hospitals.last_value.date_unix
-                  }
-                  isReported
-                />
-
-                <VaccineAdministeredItem
-                  value={
-                    data.vaccine_administered_care_institutions.last_value
-                      .estimated
-                  }
-                  description={text.gezette_prikken.estimated.care_institutions}
-                  date={
-                    data.vaccine_administered_care_institutions.last_value
-                      .date_unix
+                    data.vaccine_administered_hospitals_and_care_institutions
+                      .last_value.date_unix
                   }
                 />
 
@@ -113,13 +105,6 @@ export function VaccineAdministrationsKpiSection({ data }: { data: National }) {
                   value={data.vaccine_administered_ggd_ghor.last_value.reported}
                   description={text.gezette_prikken.reported.ggd_ghor}
                   date={data.vaccine_administered_ggd_ghor.last_value.date_unix}
-                  isReported
-                />
-
-                <VaccineAdministeredItem
-                  value={data.vaccine_administered_lnaz.last_value.reported}
-                  description={text.gezette_prikken.reported.lnaz}
-                  date={data.vaccine_administered_lnaz.last_value.date_unix}
                   isReported
                 />
               </Box>

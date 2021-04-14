@@ -6,6 +6,7 @@ import {
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { timestampToDate } from '~/components-styled/stacked-chart/logic';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { createUniqueId } from '~/utils/use-unique-id';
 import { AreaDescriptor } from '../area-chart';
@@ -16,20 +17,22 @@ export function useAreaConfigs<T extends TimestampedValue>(
   areaDescriptors: AreaDescriptor<T>[],
   timeframe: TimeframeOption
 ): AreaConfig<T & TimestampedTrendValue>[] {
+  const today = useCurrentDate();
   const areaConfigs = useMemo(() => {
     return areaDescriptors.map<AreaConfig<T & TimestampedTrendValue>>(
       (descriptor) => ({
         values: getAreaData(
           descriptor.values,
           descriptor.displays.map((x) => x.metricProperty),
-          timeframe
+          timeframe,
+          today
         ),
         displays: [
           ...descriptor.displays.map((x) => ({ id: createUniqueId(), ...x })),
         ],
       })
     );
-  }, [areaDescriptors, timeframe]);
+  }, [areaDescriptors, timeframe, today]);
 
   return areaConfigs;
 }
@@ -37,9 +40,10 @@ export function useAreaConfigs<T extends TimestampedValue>(
 export function getAreaData<T extends TimestampedValue>(
   values: T[],
   metricProperties: (keyof T)[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ): (T & TimestampedTrendValue)[] {
-  const valuesInFrame = getTimeframeValues(values, timeframe);
+  const valuesInFrame = getTimeframeValues(values, timeframe, today);
 
   if (valuesInFrame.length === 0) {
     /**

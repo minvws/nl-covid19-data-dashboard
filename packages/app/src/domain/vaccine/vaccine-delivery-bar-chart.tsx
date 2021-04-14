@@ -1,5 +1,4 @@
 import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
@@ -53,17 +52,21 @@ export function VaccineDeliveryBarChart({
       }}
     >
       <>
-        <Box display="flex" flexDirection={{ _: 'column', md: 'row' }} mb={3}>
-          <Box flex={1} pr={{ md: 2 }}>
+        <Box
+          mb={3}
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+        >
+          <Box maxWidth={560}>
             <Text>{text.omschrijving}</Text>
           </Box>
-          <Box css={css({ '> *': { whiteSpace: 'nowrap' } })}>
-            <RadioGroup
-              value={timeframe}
-              onChange={(x) => setTimeframe(x)}
-              items={timeframeOptions}
-            />
-          </Box>
+
+          <RadioGroup
+            value={timeframe}
+            onChange={(x) => setTimeframe(x)}
+            items={timeframeOptions}
+          />
         </Box>
         <StackedChart
           values={
