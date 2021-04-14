@@ -34,3 +34,9 @@ yarn-debug.log*
 yarn-error.log*
 /*.code-workspace
 /debug.log
+
+# Compile outputs as a result of next.config.ts
+# TODO find a cleaner solution
+/src/config/features.js
+generate-sitemap.js
+next.config.js

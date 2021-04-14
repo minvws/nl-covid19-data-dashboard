@@ -8,7 +8,7 @@ export const features: Feature[] = [
   },
   {
     name: 'vaccineStockPerSupplier',
-    isEnabled: true,
+    isEnabled: false,
     metricScopes: ['nl'],
     metricName: 'vaccine_stock',
     metricProperties: ['astra_zeneca_total', 'astra_zeneca_available'],
