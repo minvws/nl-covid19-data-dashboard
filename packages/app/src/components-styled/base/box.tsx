@@ -20,6 +20,7 @@ import {
   TypographyProps,
 } from 'styled-system';
 import { spacing, SpacingProps } from '~/style/functions/spacing';
+import { transform, TransformProps } from '~/style/functions/transform';
 import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 export type BoxProps = SpaceProps &
@@ -31,7 +32,8 @@ export type BoxProps = SpaceProps &
   TypographyProps &
   BordersProps &
   ShadowProps &
-  GridProps;
+  GridProps &
+  TransformProps;
 
 /**
  * A fully generic styling component used for layouts throughout the app. For
@@ -52,5 +54,6 @@ export const Box = styled.div.withConfig({
   typography,
   borders,
   shadow,
-  grid
+  grid,
+  transform
 );
