@@ -59,14 +59,13 @@ export function VaccineDeliveryBarChart({
           flexDirection="column"
           alignItems="flex-start"
         >
-          <Box flex={1} pr={{ md: 2 }} maxWidth={560}>
+          <Box pr={{ md: 2 }} maxWidth={560}>
             <Text>{text.omschrijving}</Text>
           </Box>
           <Box
             css={css({
               '> *': { whiteSpace: 'nowrap' },
             })}
-            justifySelf="flex-start"
           >
             <RadioGroup
               value={timeframe}
