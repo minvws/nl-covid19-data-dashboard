@@ -1,5 +1,4 @@
 import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components-styled/base';
