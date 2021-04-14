@@ -3,16 +3,16 @@
  * value in the values array for that same metric.
  */
 import {
+  SewerPerInstallationData,
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
-  SewerPerInstallationData,
 } from '@corona-dashboard/common';
 import chalk from 'chalk';
-import { isEmpty, pick, get } from 'lodash';
+import { isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { jsonDirectory } from '../config';
+import { defaultJsonDirectory } from '../config';
 import { getFilesWithTimeSeries } from '../schema-information';
 import {
   getTimeSeriesMetricNames,
@@ -53,7 +53,7 @@ const cli = meow(
 type Failure = { fileName: string; metricName: string };
 
 async function main() {
-  const directory = jsonDirectory;
+  const directory = defaultJsonDirectory;
   const isVerbose = cli.flags.verbose;
 
   console.log('Fail early?', cli.flags.failEarly);
