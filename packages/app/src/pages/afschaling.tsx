@@ -269,7 +269,7 @@ function MiniTrend({
   const { siteText } = useIntl();
 
   return (
-    <Box mb={{ _: 3, md: 0 }}>
+    <Box mb={{ _: 3, md: 0 }} display="flex" flexDirection="column">
       <Box display="flex" alignItems="center" mb={1}>
         <Box width={25}>{icon}</Box>
         <Text fontWeight="bold" mb={0}>
@@ -313,7 +313,7 @@ function MiniTrend({
             : siteText.afschaling.trend_grafieken.grenswaarde_meer}
         </Text>
       </Box>
-      {children}
+      <Box mt="auto">{children}</Box>
     </Box>
   );
 }
