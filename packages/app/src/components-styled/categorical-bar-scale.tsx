@@ -67,9 +67,7 @@ export function CategoricalBarScale({
               left="0"
               fontSize={1}
               color="annotation"
-              css={css({
-                transform: 'translateX(-50%)',
-              })}
+              transform="translateX(-50%)"
             >
               {category.threshold}
             </Box>
@@ -82,8 +80,8 @@ export function CategoricalBarScale({
           bg="black"
           width={7}
           height={26}
+          transform="translateX(-50%)"
           css={css({
-            transform: 'translateX(-50%)',
             outline: '1px solid white',
           })}
         />
@@ -99,7 +97,7 @@ export function CategoricalBarScale({
               height="0.7rem"
               borderRadius="50%"
               bg={category.color}
-              css={css({ transform: 'translateY(.25px)' })}
+              transform="translateY(.25px)"
             />
             <InlineText
               ml={1}
