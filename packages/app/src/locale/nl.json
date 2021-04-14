@@ -1044,19 +1044,19 @@
     "types": {
       "1": {
         "titel": "Waakzaam",
-        "toelichting": "De situatie is onder controle te houden. Het aantal nieuwe besmettingen is laag: per week minder dan 35 mensen per 100.000 inwoners. De druk op de zorg valt mee."
+        "toelichting": "De situatie is onder controle te houden. Het aantal nieuwe besmettingen is laag. De druk op de zorg valt mee."
       },
       "2": {
         "titel": "Zorgelijk",
-        "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen: per week tussen de 35 en 100 mensen per 100.000 inwoners. De druk op de zorg is groot."
+        "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen. De druk op de zorg is groot."
       },
       "3": {
         "titel": "Ernstig",
-        "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen: per week tussen de 100 en 250 mensen per 100.000 inwoners. De druk op de zorg is erg groot."
+        "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen. De druk op de zorg is erg groot."
       },
       "4": {
         "titel": "Zeer Ernstig",
-        "toelichting": "De situatie is erg slecht. Er zijn extreem veel nieuwe besmettingen: per week boven de 250 mensen per 100.000 inwoners. De druk op de zorg is extreem groot."
+        "toelichting": "De situatie is erg slecht. Er zijn extreem veel nieuwe besmettingen. De druk op de zorg is extreem groot."
       },
       "5": {
         "titel": "Lockdown",
@@ -2050,8 +2050,8 @@
       "verdenkingen_huisartsen": "Deze grafiek toont het geschatte aantal patiënten dat voor het eerst met COVID-19-achtige klachten contact opnam met de huisarts door de tijd heen.",
       "ziekenhuis_opnames": "Deze grafiek toont het aantal ziekenhuisopnames door de tijd heen.",
       "rioolwater_meetwaarde": "Deze grafiek toont de meest recente meetwaarde van het gemiddeld aantal virusdeeltjes per 100.000 inwoners, per rioolwaterzuiveringslocatie.",
-      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. De grafiek bevat alleen de vaccins voor Europees Nederland. In de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast.",
-      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. In de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast.",
+      "verwachte_leveringen": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. De grafiek bevat alleen de vaccins voor Europees Nederland.\n\nIn de berekening is uitgegaan van een verspilling van 1%.",
+      "vaccin_levering_en_prikken": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland.\n\nIn de berekening is uitgegaan van een verspilling van 1%.",
       "vaccinatie_draagvlak": "Deze grafiek toont hoeveel procent van de bevolking zelf een prik tegen corona wil hebben."
     },
     "link_source": "Download de databron van \"{{subject}}\" op {{source}}",
@@ -2137,7 +2137,7 @@
     },
     "grafiek": {
       "titel": "Geleverde en gecontroleerde vaccins & gezette prikken in totaal",
-      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland. In de berekening is uitgegaan van een verspilling van 1%. Dit was 5%, maar uit een analyse van het RIVM is gebleken dat dit maar 1% is. Per 12 april is de verspilling met terugwerkende kracht aangepast."
+      "omschrijving": "Het linkerdeel van de grafiek laat zien hoeveel vaccins er in Nederland in totaal beschikbaar waren en hoeveel prikken daarmee zijn gezet. Het gestreepte deel rechts van de verticale lijn laat zien hoeveel vaccins we de komende weken in totaal beschikbaar hebben en hoeveel prikken we verwachten te zetten. Tot 23 maart bevatte de grafiek ook leveringen voor het Caribisch gebied. Per 23 maart tonen we in de hele grafiek alleen de vaccins voor Europees Nederland.\n\nIn de berekening is uitgegaan van een verspilling van 1%."
     },
     "verwachte_leveringen": {
       "van_week_tot_week": "Week {{weekNumberFrom}} tot week {{weekNumberTo}}",
@@ -2157,7 +2157,7 @@
       "reported_until": "Gemeld aantal tot en met {{reportedDate}}",
       "tab_first": {
         "title": "Berekend aantal",
-        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)."
+        "description": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen, de huisartspraktijken en langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)."
       },
       "tab_second": {
         "title": "Gemeld aantal",
@@ -2226,7 +2226,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR en LNAZ. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
@@ -2263,7 +2263,7 @@
               "report_date": ""
             }
           ],
-          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR en de ziekenhuiscijfers door het LNAZ. Voor de langdurige zorginstellingen en huisartsenpraktijken maakt het RIVM een berekening door te kijken naar de hoeveelheid vaccins die zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+          "description_first": "Dit getal is een berekening van hoeveel prikken in totaal zijn gezet. De GGD-cijfers worden gemeld door de GGD-GHOR. Voor de ziekenhuizen, de huisartspraktijken en langdurige zorginstellingen maakt het RIVM een berekening door te kijken naar hoeveel vaccins er zijn bezorgd bij priklocaties. [Lees meer over de berekening in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
           "description_second": ""
         }
       },
@@ -2368,9 +2368,9 @@
     },
     "stock_and_delivery_section": {
       "title": "Leveringen & voorraad",
-      "description": "Hoeveel prikken we kunnen zetten, hangt af van hoeveel vaccins we geleverd krijgen. Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins Nederland heeft gekregen en hoeveel vaccins we op voorraad hebben.",
+      "description": "Hoeveel prikken we kunnen zetten, hangt af van hoeveel vaccins we geleverd krijgen. Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins Nederland krijgt en hoeveel vaccins we op voorraad hebben.",
       "reference": {
-        "href": "/verantwoording#leveringen-en-voorraad-vaccins",
+        "href": "/verantwoording#leveringen-voorraden-en-beschikbare-vaccins",
         "text": "Lees meer over de informatie op deze pagina in de ‘Uitleg bij de cijfers’."
       }
     },
@@ -2390,13 +2390,13 @@
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
-      "omschrijving": "Deze grafiek laat zien hoeveel vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten.",
+      "omschrijving": "Deze grafiek laat zien hoeveel vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten. Er wordt uitgegaan van 6 doses per vaccinflacon voor BioNTech/Pfizer, 10 doses per vaccinflacon voor Moderna, 11 doses per vaccinflacon voor AstraZeneca en 5 doses per vaccinflacon voor Janssen.",
       "timeframe_recent_en_verwacht": "Toon recent en verwacht"
     },
     "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt.",
     "stock_per_supplier_chart": {
       "title": "Voorraad per type vaccin",
-      "description": "Deze grafiek laat zien hoeveel vaccins het RIVM de afgelopen tijd op voorraad had per type vaccin. De totale voorraad bestaat uit de beschikbare en de nog niet beschikbare voorraad. De beschikbare voorraad is klaar voor gebruik en bestaat deels uit veiligheidsvoorraad. Nog niet beschikbare voorraad zijn vaccins die nog gecontroleerd moeten worden. Na de controle komen ze in de beschikbare voorraad.",
+      "description": "Deze grafiek laat zien hoeveel vaccins het RIVM de afgelopen tijd op voorraad had per type vaccin. De totale voorraad bestaat uit de beschikbare en de nog niet beschikbare voorraad. De beschikbare voorraad is klaar voor gebruik en bestaat deels uit veiligheidsvoorraad. Nog niet beschikbare voorraad zijn vaccins die bijvoorbeeld nog gecontroleerd moeten worden. Na de controle komen ze in de beschikbare voorraad.",
       "tooltip_title": "Voorraad",
       "legend": {
         "available": "Beschikbare voorraad {{vaccineName}}",
