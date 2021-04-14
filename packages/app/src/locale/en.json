@@ -1044,7 +1044,7 @@
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": "The situation is manageable. The number of new infections is low. There is sufficient healthcare capacity"
+        "toelichting": "The situation is manageable. The number of new confirmed cases is low. There is sufficient healthcare capacity."
       },
       "2": {
         "titel": "Concern",
