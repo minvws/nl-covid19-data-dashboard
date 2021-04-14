@@ -1048,15 +1048,15 @@
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The situation is becoming difficult to manage. There are many new infections. Pressure on healthcare capacity is increasing."
+        "toelichting": "The situation is becoming difficult to manage. There are many new confirmed cases. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The situation is serious. There is a large number of new infections. Pressure on healthcare capacity is very high."
+        "toelichting": "The situation is serious. The number of new confirmed cases is large. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
-        "toelichting": "The situation is severe. The number of new infections is extremely high. Pressure on healthcare capacity is extreme."
+        "toelichting": "The situation is severe. The number of new confirmed cases is extremely high. Pressure on healthcare capacity is extreme."
       },
       "5": {
         "titel": "Lockdown",
