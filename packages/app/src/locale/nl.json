@@ -2390,7 +2390,7 @@
     },
     "grafiek_leveringen": {
       "titel": "Leveringen",
-      "omschrijving": "Deze grafiek laat zien hoeveel vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten. Er wordt uitgegaan van 6 doses per vaccinflacon voor BioNTech/Pfizer, 10 doses per vaccinflacon voor Moderna, 11 doses per vaccinflacon voor AstraZeneca en 5 doses per vaccinflacon voor Janssen.",
+      "omschrijving": "Deze grafiek laat zien hoeveel vaccins Nederland per week heeft gekregen en verwacht te krijgen van de verschillende producenten. Er wordt uitgegaan van 6 doses per flesje voor BioNTech/Pfizer, 10 doses per flesje voor Moderna, 11 doses per flesje voor AstraZeneca en 5 doses per flesje voor Janssen.",
       "timeframe_recent_en_verwacht": "Toon recent en verwacht"
     },
     "bereidheid_datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt elke drie weken bijgewerkt.",
