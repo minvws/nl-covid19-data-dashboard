@@ -27,6 +27,7 @@ import { InlineText } from '~/components-styled/typography';
 import { ValueAnnotation } from '~/components-styled/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
@@ -181,9 +182,11 @@ export function StackedChart<T extends TimestampedValue>(
     config,
   ]);
 
+  const today = useCurrentDate();
+
   const valuesInTimeframe = useMemo(
-    () => getValuesInTimeframe(values, timeframe),
-    [values, timeframe]
+    () => getValuesInTimeframe(values, timeframe, today),
+    [values, timeframe, today]
   );
 
   const series = useMemo(

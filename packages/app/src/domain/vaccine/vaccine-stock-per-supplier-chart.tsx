@@ -13,6 +13,7 @@ import {
 } from '~/components-styled/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
@@ -29,13 +30,14 @@ export function VaccineStockPerSupplierChart({
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
 
+  const today = useCurrentDate();
   const maximumValuesPerTimeframeOption = useMemo(
     () =>
       ({
-        all: getMaximumPropertyValueInTimeframe(values, 'all'),
-        '5weeks': getMaximumPropertyValueInTimeframe(values, '5weeks'),
+        all: getMaximumPropertyValueInTimeframe(values, 'all', today),
+        '5weeks': getMaximumPropertyValueInTimeframe(values, '5weeks', today),
       } as Record<TimeframeOption, number>),
-    [values]
+    [values, today]
   );
 
   const optionsConfig: SelectOption[] = [
@@ -124,9 +126,10 @@ export function VaccineStockPerSupplierChart({
 
 function getMaximumPropertyValueInTimeframe(
   values: NlVaccineStockValue[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ) {
-  const valuesInTimeframe = getValuesInTimeframe(values, timeframe);
+  const valuesInTimeframe = getValuesInTimeframe(values, timeframe, today);
 
   return valuesInTimeframe.reduce(
     (acc, value) =>

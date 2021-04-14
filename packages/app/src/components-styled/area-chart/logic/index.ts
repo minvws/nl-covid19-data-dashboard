@@ -55,9 +55,10 @@ export function calculateYMax(values: TrendValue[], signaalwaarde = -Infinity) {
  */
 export function getTimeframeValues(
   values: TimestampedValue[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ) {
-  const boundary = getTimeframeBoundaryUnix(timeframe);
+  const boundary = getTimeframeBoundaryUnix(timeframe, today);
 
   if (isDateSeries(values)) {
     return values.filter((x) => x.date_unix >= boundary);
@@ -72,12 +73,12 @@ export function getTimeframeValues(
 
 const oneDayInSeconds = 24 * 60 * 60;
 
-function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
+function getTimeframeBoundaryUnix(timeframe: TimeframeOption, today: Date) {
   if (timeframe === 'all') {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return Date.now() / 1000 - days * oneDayInSeconds;
+  return today.getTime() / 1000 - days * oneDayInSeconds;
 }
 
 export type TrendValue = {
@@ -90,9 +91,10 @@ export type TimestampedTrendValue = TrendValue & TimestampedValue;
 export function getTrendData<T extends TimestampedValue>(
   values: T[],
   metricProperties: (keyof T)[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ): (T & TimestampedTrendValue)[][] {
-  const series = getValuesInTimeframe(values, timeframe);
+  const series = getValuesInTimeframe(values, timeframe, today);
 
   const trendData = metricProperties.map(
     (metricProperty) =>
