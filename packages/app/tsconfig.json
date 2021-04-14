@@ -2,16 +2,33 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "module": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "target": "es5",
     "allowJs": false,
     "noEmit": true,
     "downlevelIteration": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": [
+        "src/*"
+      ]
     }
   },
-  "references": [{ "path": "../common" }],
-  "include": ["next-env.d.ts", "src"]
+  "references": [
+    {
+      "path": "../common"
+    }
+  ],
+  "include": [
+    "next-env.d.ts",
+    "src",
+    "generate-sitemap.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

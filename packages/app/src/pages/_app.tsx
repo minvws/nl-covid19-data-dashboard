@@ -10,7 +10,7 @@ import * as piwik from '~/lib/piwik';
 import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-import { features } from '@corona-dashboard/common';
+import { features } from '~/config/features';
 
 export const FeaturesContext = createContext(features);
 FeaturesContext.displayName = 'FeatureFlags';

@@ -12,7 +12,7 @@ export interface Feature {
    * Metric scope defines the files in which we enforce the (non-)existence of
    * metricNames.
    */
-  metricScopes: MetricScope[];
+  metricScopes?: MetricScope[];
 
   /**
    * A metricName is the root-level schema property used to hold the data in the

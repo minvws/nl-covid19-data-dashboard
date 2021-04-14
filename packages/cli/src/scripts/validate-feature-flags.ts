@@ -110,6 +110,10 @@ main().then(
  */
 async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
   if (feature.metricName) {
+    assert(
+      feature.metricScopes,
+      `Missing metricScopes configuration for feature ${feature.name}`
+    );
     const promisedResults = feature.metricScopes.map((scope) =>
       validateMetricNameForScope(
         feature.metricName!,
@@ -133,6 +137,11 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
   }
 
   if (feature.metricProperties) {
+    assert(
+      feature.metricScopes,
+      `Missing metricScopes configuration for feature ${feature.name}`
+    );
+
     assert(
       feature.metricName,
       'If a feature defines metricProperties it should also have a metricName'
