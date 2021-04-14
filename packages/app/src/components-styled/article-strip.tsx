@@ -66,7 +66,7 @@ function ArticleStripItem(props: ArticleStripItemProps) {
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledLink>
-        <Box width={122} maxHeight={122} overflow="hidden">
+        <Box width={122} minWidth={122} maxHeight={122} overflow="hidden">
           <SanityImage
             {...getImageProps(cover, {
               defaultWidth: 122,
