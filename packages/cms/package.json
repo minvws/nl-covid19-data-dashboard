@@ -41,6 +41,7 @@
     "sanity-mobile-preview": "^1.0.7",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.11",
     "sanity-plugin-tabs": "^2.0.1",
+    "sanity-secrets": "^0.0.4",
     "ts-is-present": "^1.2.1"
   },
   "devDependencies": {

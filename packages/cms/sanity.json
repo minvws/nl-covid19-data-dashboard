@@ -17,7 +17,8 @@
     "tabs",
     "./src/plugins/translate",
     "@sanity/dashboard",
-    "dashboard-widget-document-list"
+    "dashboard-widget-document-list",
+    "./src/plugins/sanity-deploy-button"
   ],
   "env": {
     "development": {
