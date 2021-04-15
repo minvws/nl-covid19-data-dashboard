@@ -1,5 +1,5 @@
 import { Children, ReactNode } from 'react';
-import { Box } from '~/components-styled/base';
+import { Box } from '~/components/base';
 
 type MiniTrendTileLayoutProps = {
   children: ReactNode;

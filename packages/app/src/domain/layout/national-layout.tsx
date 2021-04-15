@@ -18,12 +18,12 @@ import {
   Menu,
   MetricMenuItemLink,
   MetricMenuButtonLink,
-} from '~/components-styled/aside/menu';
-import { Box } from '~/components-styled/base';
-import { AppContent } from '~/components-styled/layout/app-content';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
+} from '~/components/aside/menu';
+import { Box } from '~/components/base';
+import { AppContent } from '~/components/layout/app-content';
+import { SidebarMetric } from '~/components/sidebar-metric';
 import { useIntl } from '~/intl';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 interface NationalLayoutProps {
   lastGenerated: string;

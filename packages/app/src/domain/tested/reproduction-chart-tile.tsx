@@ -6,8 +6,8 @@ import {
   NationalReproduction,
   NationalReproductionValue,
 } from '@corona-dashboard/common';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { ChartTile } from '~/components/chart-tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimeframeOption } from '~/utils/timeframe';
 
 interface ReproductionChartTileProps {

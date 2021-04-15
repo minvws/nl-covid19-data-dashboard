@@ -2,9 +2,9 @@ import {
   NationalDeceasedCbs,
   RegionalDeceasedCbs,
 } from '@corona-dashboard/common';
-import { AnchorTile } from '~/components-styled/anchor-tile';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { AnchorTile } from '~/components/anchor-tile';
+import { ChartTile } from '~/components/chart-tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 

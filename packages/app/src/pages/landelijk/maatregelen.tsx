@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
-import { ContentHeader } from '~/components-styled/content-header';
-import { Heading } from '~/components-styled/typography';
-import { KpiSection } from '~/components-styled/kpi-section';
+import { ContentHeader } from '~/components/content-header';
+import { Heading } from '~/components/typography';
+import { KpiSection } from '~/components/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { Box } from '~/components-styled/base/box';
-import { TileList } from '~/components-styled/tile-list';
+import { Box } from '~/components/base/box';
+import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -19,7 +19,7 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { LockdownData, RoadmapData } from '~/types/cms';
-import { RichContent } from '~/components-styled/cms/rich-content';
+import { RichContent } from '~/components/cms/rich-content';
 
 type MaatregelenData = {
   lockdown: LockdownData;
