@@ -19,6 +19,7 @@
     "@sanity/dashboard",
     "dashboard-widget-document-list",
     "media"
+    "./src/plugins/sanity-deploy-button"
   ],
   "env": {
     "development": {

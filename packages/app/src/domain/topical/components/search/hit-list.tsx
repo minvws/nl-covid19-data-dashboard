@@ -1,12 +1,12 @@
 import css from '@styled-system/css';
 import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
-import { Box } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
+import { Box } from '~/components/base';
+import { Text } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
 
 interface HitListProps {

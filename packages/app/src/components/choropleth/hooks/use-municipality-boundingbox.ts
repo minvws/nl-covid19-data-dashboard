@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
+import municipalCodeToRegionCodeLookup from '~/data/municipal-code-to-region-code-lookup';
 import { RegionGeoJSON } from '@corona-dashboard/common';
 
 /**

@@ -649,7 +649,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -1022,7 +1022,7 @@
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1044,19 +1044,19 @@
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": "The situation is manageable. The number of new infections is low. There is sufficient healthcare capacity"
+        "toelichting": "The situation is manageable. The number of new confirmed cases is low. There is sufficient healthcare capacity"
       },
       "2": {
         "titel": "Concern",
-        "toelichting": "The situation is becoming difficult to manage. There are many new infections. Pressure on healthcare capacity is increasing."
+        "toelichting": "The situation is becoming difficult to manage. There are many new confirmed cases. Pressure on healthcare capacity is increasing."
       },
       "3": {
         "titel": "Serious",
-        "toelichting": "The situation is serious. There is a large number of new infections. Pressure on healthcare capacity is very high."
+        "toelichting": "The situation is serious. The number of new confirmed cases is large. Pressure on healthcare capacity is very high."
       },
       "4": {
         "titel": "Severe",
-        "toelichting": "The situation is severe. The number of new infections is extremely high. Pressure on healthcare capacity is extreme."
+        "toelichting": "The situation is severe. The number of new confirmed cases is extremely high. Pressure on healthcare capacity is extreme."
       },
       "5": {
         "titel": "Lockdown",
@@ -2226,7 +2226,7 @@
             "report_date": ""
           }
         ],
-        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Uitleg bij de cijfers'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
+        "description_first": "Dit getal laat zien hoeveel prikken zijn gemeld door GGD-GHOR. [Lees meer over de registratie in de 'Cijferverantwoording'.](https://coronadashboard.rijksoverheid.nl/verantwoording#vaccinatie)",
         "description_second": "",
         "warning": "",
         "first_tab_title": "Berekend aantal",
@@ -2468,7 +2468,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).",
-      "belangrijk_bericht": "There remains a national lockdown until at least 20 April. [The lockdown measures apply throughout the whole country](https://coronadashboard.government.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2960,6 +2960,15 @@
         "href": "",
         "text": "Ministry of Health, Welfare and Sport based on RIVM"
       }
+    }
+  },
+  "afschaling": {
+    "trend_grafieken": {
+      "reproductiegetal": "",
+      "ic_opnames": "",
+      "ziekenhuisopnames": "",
+      "grenswaarde_meer": "",
+      "grenswaarde_minder": ""
     }
   }
 }

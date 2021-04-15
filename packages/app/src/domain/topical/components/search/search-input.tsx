@@ -3,8 +3,8 @@ import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
 import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon.svg';
-import { Box } from '~/components-styled/base';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
+import { Box } from '~/components/base';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useSearchContext } from './context';
 
