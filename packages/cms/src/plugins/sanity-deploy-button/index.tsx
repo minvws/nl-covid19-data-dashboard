@@ -22,7 +22,7 @@ type Secrets =
   | undefined;
 
 function Deploy() {
-  const { secrets }: { secrets: Secrets } = useSecrets(namespace);
+  const secrets = useSecrets(namespace).secrets as Secrets;
   const [showSettings, setShowSettings] = useState(false);
 
   // useEffect(() => {
