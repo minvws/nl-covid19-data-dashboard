@@ -10,14 +10,14 @@ import { logError, logSuccess, readObjectFromJsonFile } from '../utils';
 const cli = meow(
   `
     Usage
-      $ validate-feature-flags
+      $ validate-features
 
     Options
       --verbose, -v Enable verbose output
       --fail-early, -e Exit on first failure
 
     Examples
-      $ validate-feature-flags -e
+      $ validate-features -e
 `,
   {
     flags: {
