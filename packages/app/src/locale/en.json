@@ -1044,7 +1044,7 @@
     "types": {
       "1": {
         "titel": "Caution",
-        "toelichting": "The situation is manageable. The number of new infections is low. There is sufficient healthcare capacity"
+        "toelichting": "The situation is manageable. The number of new confirmed cases is low. There is sufficient healthcare capacity"
       },
       "2": {
         "titel": "Concern",
@@ -2964,11 +2964,11 @@
   },
   "afschaling": {
     "trend_grafieken": {
-      "reproductiegetal": "Reproduction number",
-      "ic_opnames": "Intensive care admissions",
-      "ziekenhuisopnames": "Hospital admissions (incl. IC)",
-      "grenswaarde_meer": "Limit value has been exceeded",
-      "grenswaarde_minder": "Value is less than {{days}} days below the limit"
+      "reproductiegetal": "",
+      "ic_opnames": "",
+      "ziekenhuisopnames": "",
+      "grenswaarde_meer": "",
+      "grenswaarde_minder": ""
     }
   }
 }

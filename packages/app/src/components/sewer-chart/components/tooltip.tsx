@@ -91,12 +91,12 @@ export function DateTooltip({ children, x, y, bounds }: DateTooltipProps) {
     <Box
       ref={ref}
       bg="white"
+      transform={`translate(${left}px,${top}px)`}
       style={{
         pointerEvents: 'none',
         position: 'absolute',
         left: 0,
         top: 0,
-        transform: `translate(${left}px,${top}px)`,
         transitionProperty: 'transform',
         transitionDuration: '75ms',
         transitionTimingFunction: 'ease-out',
