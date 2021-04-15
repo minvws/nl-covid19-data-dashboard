@@ -114,23 +114,31 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
    * case we only check the properties and do not enforce existence/absence of
    * the full metric.
    */
-  if (feature.metricProperties) {
+  const {
+    metricScopes,
+    metricName,
+    metricProperties,
+    name,
+    isEnabled,
+  } = feature;
+
+  if (metricProperties) {
     assert(
-      feature.metricScopes,
-      `Missing metricScopes configuration for feature ${feature.name}`
+      metricScopes,
+      `Missing metricScopes configuration for feature ${name}`
     );
 
     assert(
-      feature.metricName,
+      metricName,
       'If a feature defines metricProperties it should also have a metricName'
     );
 
-    const promisedResults = feature.metricScopes.map((scope) =>
+    const promisedResults = metricScopes.map((scope) =>
       validateMetricPropertiesForScope(
-        feature.metricName!,
-        feature.metricProperties!,
+        metricName,
+        metricProperties,
         scope,
-        feature.isEnabled,
+        isEnabled,
         schemaInfo
       )
     );
@@ -145,18 +153,13 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
     if (!isEmpty(messages)) {
       return messages;
     }
-  } else if (feature.metricName) {
+  } else if (metricName) {
     assert(
-      feature.metricScopes,
-      `Missing metricScopes configuration for feature ${feature.name}`
+      metricScopes,
+      `Missing metricScopes configuration for feature ${name}`
     );
-    const promisedResults = feature.metricScopes.map((scope) =>
-      validateMetricNameForScope(
-        feature.metricName!,
-        scope,
-        feature.isEnabled,
-        schemaInfo
-      )
+    const promisedResults = metricScopes.map((scope) =>
+      validateMetricNameForScope(metricName, scope, isEnabled, schemaInfo)
     );
 
     const results = await Promise.all(promisedResults);
