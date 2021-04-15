@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import { Box } from '~/components-styled/base';
+import { Box } from '~/components/base';
 import { TooltipSettings } from '../choropleth';
 
 type TTooltipProps = {

@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { MaxWidth } from '~/components-styled/max-width';
+import { RichContent } from '~/components/cms/rich-content';
+import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';
 import {

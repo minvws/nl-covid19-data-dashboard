@@ -7,13 +7,13 @@ import Arts from '~/assets/arts-small.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import Repro from '~/assets/reproductiegetal-small.svg';
 import Ziekenhuis from '~/assets/ziekenhuis-small.svg';
-import { Box } from '~/components-styled/base';
-import { ContentBlock } from '~/components-styled/cms/content-block';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { MaxWidth } from '~/components-styled/max-width';
-import { TimeSeriesMiniBarChart } from '~/components-styled/time-series-chart';
-import { Heading, Text } from '~/components-styled/typography';
-import { WarningTile } from '~/components-styled/warning-tile';
+import { Box } from '~/components/base';
+import { ContentBlock } from '~/components/cms/content-block';
+import { RichContent } from '~/components/cms/rich-content';
+import { MaxWidth } from '~/components/max-width';
+import { TimeSeriesMiniBarChart } from '~/components/time-series-chart';
+import { Heading, Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -27,7 +27,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { Block, DownscalingPage } from '~/types/cms';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { expandPortableTextAssets } from '~/utils/groq/expand-portable-text-assets';
 
 const locale = process.env.NEXT_PUBLIC_LOCALE;

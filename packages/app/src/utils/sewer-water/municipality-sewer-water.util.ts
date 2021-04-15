@@ -3,7 +3,7 @@ import { Municipal } from '@corona-dashboard/common';
 import { useIntl } from '~/intl';
 import { assert } from '../assert';
 import { colors } from '~/style/theme';
-import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
+import { BarChartValue } from '~/components/bar-chart/bar-chart-coordinates';
 
 /**
  * @TODO these helpers for VR and GM should be merged into one using generics.
