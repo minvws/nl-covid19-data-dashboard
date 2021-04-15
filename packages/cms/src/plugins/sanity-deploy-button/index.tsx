@@ -62,7 +62,7 @@ function Deploy() {
 
         <p>
           If you click on the button below, you'll trigger a new push to
-          production. You should do this if you've published new content in
+          staging. You should do this if you've published new content in
           Sanity which you want to go live as soon as possible.
         </p>
         <p>
