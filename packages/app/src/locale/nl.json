@@ -228,7 +228,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn op het coronavirus.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\n_Door een ICT-probleem bij de GGD heeft het RIVM niet alle meldingen ontvangen. Het dagcijfer van vandaag is daardoor niet compleet. In werkelijkheid ligt het cijfer hoger. Dit zal worden gecorrigeerd in de cijfers van de komende dagen, die daardoor hoger zullen uitvallen._",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\n_Door een eerdere ICT-storing bij de GGD zijn op woensdag niet alle meldingen ontvangen. De achterstanden komen erbij op donderdag en misschien vrijdag. Daardoor vallen de dagcijfers op deze dagen hoger uit dan werkelijk._",
     "map_titel": "Verdeling positief geteste mensen in Nederland",
     "map_toelichting": "Deze kaarten laten zien van hoeveel mensen gisteren is gemeld dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
@@ -793,7 +793,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn op het coronavirus.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\n_Door een ICT-probleem bij de GGD heeft het RIVM niet alle meldingen ontvangen. Het dagcijfer van vandaag is daardoor niet compleet. In werkelijkheid ligt het cijfer hoger. Dit zal worden gecorrigeerd in de cijfers van de komende dagen, die daardoor hoger zullen uitvallen._",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\n_Door een eerdere ICT-storing bij de GGD zijn op woensdag niet alle meldingen ontvangen. De achterstanden komen erbij op donderdag en misschien vrijdag. Daardoor vallen de dagcijfers op deze dagen hoger uit dan werkelijk._",
     "map_titel": "Verdeling positief geteste mensen in {{safetyRegion}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in de gemeenten van deze veiligheidsregio's gisteren gemeld is dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
@@ -928,7 +928,7 @@
     "barscale_toelichting": "Dit getal laat zien van hoeveel mensen gisteren per 100.000 inwoners gemeld is dat ze positief getest zijn op het coronavirus.",
     "barscale_screenreader_text": "{{value}} positief geteste mensen per dag.",
     "kpi_titel": "Aantal positief geteste mensen",
-    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\n_Door een ICT-probleem bij de GGD heeft het RIVM niet alle meldingen ontvangen. Het dagcijfer van vandaag is daardoor niet compleet. In werkelijkheid ligt het cijfer hoger. Dit zal worden gecorrigeerd in de cijfers van de komende dagen, die daardoor hoger zullen uitvallen._",
+    "kpi_toelichting": "Dit getal laat zien van hoeveel mensen gisteren gemeld is dat ze positief getest zijn op het coronavirus. Een deel van de meldingen zijn positieve tests van eerdere dagen, die later zijn doorgegeven.\n\n_Door een eerdere ICT-storing bij de GGD zijn op woensdag niet alle meldingen ontvangen. De achterstanden komen erbij op donderdag en misschien vrijdag. Daardoor vallen de dagcijfers op deze dagen hoger uit dan werkelijk._",
     "map_titel": "Verdeling positief geteste mensen in veiligheidsregio van {{municipality}}",
     "map_toelichting": "Deze kaart laat zien van hoeveel mensen in deze gemeente en in andere gemeenten in dezelfde veiligheidsregio gisteren gemeld is dat ze positief getest zijn op het coronavirus, per 100.000 inwoners.",
     "linechart_titel": "Aantal positief geteste mensen door de tijd heen (per 100.000 inwoners)",
@@ -1313,7 +1313,7 @@
       "title": "Meer onderzoeksresultaten",
       "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
       "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
-      "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek"
+      "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek/naleving-van-en-draagvlak-voor-basis-gedragsregels"
     }
   },
   "nl_gedrag": {
