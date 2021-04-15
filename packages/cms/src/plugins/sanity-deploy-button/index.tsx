@@ -46,7 +46,7 @@ function Deploy() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h2 className={styles.title}>Deploy to production</h2>
+        <h2 className={styles.title}>Deploy to staging</h2>
       </header>
       <div className={styles.content}>
         {showSettings && (
