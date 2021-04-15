@@ -18,14 +18,12 @@
     "./src/plugins/translate",
     "@sanity/dashboard",
     "dashboard-widget-document-list",
-    "media"
+    "media",
     "./src/plugins/sanity-deploy-button"
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ],
+      "plugins": ["@sanity/vision"],
       "api": {
         "dataset": "development"
       }
