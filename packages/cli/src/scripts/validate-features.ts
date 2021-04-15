@@ -3,8 +3,8 @@ import { get, isEmpty } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { jsonDirectory, featureFlagsConfigFile } from '../config';
-import { getSchemaInfo, SchemaInfo } from '../schema/get-schema-info';
+import { defaultJsonDirectory, featureFlagsConfigFile } from '../config';
+import { getSchemaInfo, SchemaInfo } from '../schema/schema-info';
 import { logError, logSuccess, readObjectFromJsonFile } from '../utils';
 
 const cli = meow(
@@ -39,7 +39,7 @@ type Failure = {
 };
 
 async function main() {
-  const directory = jsonDirectory;
+  const directory = defaultJsonDirectory;
   const isVerbose = cli.flags.verbose;
 
   console.log('Fail early?', cli.flags.failEarly);

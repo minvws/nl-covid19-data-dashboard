@@ -1,14 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import { defaultJsonDirectory, localeDirectory } from '../config';
-import { validatePlaceholders } from './validate-placeholders';
-import { assert, MetricScope } from '@corona-dashboard/common';
+import {
+  validatePlaceholders,
+  createChoroplethValidation,
+  CustomValidationFunction,
+} from './custom-validations';
+import { assert } from '@corona-dashboard/common';
 import { getFileNames } from '../utils';
-import { createChoroplethValidation } from './validate-choropleth-values';
 
-export type CustomValidationFunction = (
-  input: Record<string, unknown>
-) => string[] | undefined;
+import { MetricScope } from '@corona-dashboard/common';
 
 export type SchemaInfo = Record<MetricScope | 'locale', SchemaInfoItem>;
 
