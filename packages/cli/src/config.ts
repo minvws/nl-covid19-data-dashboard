@@ -9,7 +9,7 @@ const appBasePath = path.join(
 
 export const localeDirectory = path.join(appBasePath, 'src', 'locale');
 
-export const jsonDirectory = path.join(appBasePath, 'public', 'json');
+export const defaultJsonDirectory = path.join(appBasePath, 'public', 'json');
 
 export const schemaDirectory = path.join(appBasePath, 'schema');
 

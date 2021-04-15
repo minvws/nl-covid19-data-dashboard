@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useBreakpoints } from './useBreakpoints';
+import { useBreakpoints } from './use-breakpoints';
 
 export function useReverseRouter() {
   const breakpoints = useBreakpoints();

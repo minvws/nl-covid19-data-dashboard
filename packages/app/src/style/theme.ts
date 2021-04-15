@@ -112,13 +112,14 @@ export const colors = {
   annotation: '#595959',
   header: '#cd005a',
   notification: '#cd005a',
-  red: '#F35363',
+  red: '#F35065',
   sidebarLinkBorder: '#cd005a',
   category: '#6b6b6b',
   border: '#c4c4c4',
   lightBlue: '#E0EEF6',
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',
+  cerulean: '#0390D6',
 
   data: {
     primary: '#007BC7',
@@ -131,6 +132,8 @@ export const colors = {
     emphasis: '#F8E435',
     fill: 'rgba(0, 123, 199, .05)',
     margin: '#D0EDFF',
+    positive: '#5BADDB',
+    negative: '#F35065',
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
       magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],

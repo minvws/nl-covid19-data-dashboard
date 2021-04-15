@@ -1,10 +1,12 @@
 import fs from 'fs';
-import { jsonDirectory, localeDirectory } from '../config';
+import path from 'path';
+import { defaultJsonDirectory, localeDirectory } from '../config';
 import { validatePlaceholders } from './validate-placeholders';
 import { assert, MetricScope } from '@corona-dashboard/common';
 import { getFileNames } from '../utils';
+import { createChoroplethValidation } from './validate-choropleth-values';
 
-type CustomValidationFunction = (
+export type CustomValidationFunction = (
   input: Record<string, unknown>
 ) => string[] | undefined;
 
@@ -17,23 +19,37 @@ export type SchemaInfoItem = {
   optional?: boolean;
 };
 
-export function getSchemaInfo(path: string = jsonDirectory): SchemaInfo {
-  assert(fs.existsSync(path), `Path ${path} does not exist`);
+export function getSchemaInfo(
+  jsonDirectory: string = defaultJsonDirectory
+): SchemaInfo {
+  assert(fs.existsSync(jsonDirectory), `Path ${jsonDirectory} does not exist`);
 
-  const fileList = fs.readdirSync(path);
+  const fileList = fs.readdirSync(jsonDirectory);
 
   return {
-    nl: { files: ['NL.json'], basePath: path },
+    nl: { files: ['NL.json'], basePath: jsonDirectory },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
-      basePath: path,
+      basePath: jsonDirectory,
+      customValidations: [
+        createChoroplethValidation(
+          path.join(defaultJsonDirectory, 'VR_COLLECTION.json'),
+          'vrcode'
+        ),
+      ],
     },
     gm: {
       files: getFileNames(fileList, /^GM[0-9]+.json$/),
-      basePath: path,
+      basePath: jsonDirectory,
+      customValidations: [
+        createChoroplethValidation(
+          path.join(defaultJsonDirectory, 'GM_COLLECTION.json'),
+          'gmcode'
+        ),
+      ],
     },
-    gm_collection: { files: ['GM_COLLECTION.json'], basePath: path },
-    vr_collection: { files: ['VR_COLLECTION.json'], basePath: path },
+    gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
+    vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
     locale: {
       files: ['en.json', 'nl.json'],
       basePath: localeDirectory,

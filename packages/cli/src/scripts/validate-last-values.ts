@@ -11,7 +11,7 @@ import { chain, isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { jsonDirectory } from '../config';
+import { defaultJsonDirectory } from '../config';
 import {
   getFilesWithTimeSeries,
   getTimeSeriesMetricNames,
@@ -49,7 +49,7 @@ const cli = meow(
 type Failure = { fileName: string; metricName: string };
 
 async function main() {
-  const directory = jsonDirectory;
+  const directory = defaultJsonDirectory;
   const isVerbose = cli.flags.verbose;
 
   console.log('Fail early?', cli.flags.failEarly);

@@ -1,8 +1,8 @@
 import Ajv, { ValidateFunction } from 'ajv';
 import fs from 'fs';
 import path from 'path';
-import { equalsRootProperty, validRestrictionId } from './ajv-keywords';
 import { loadSchema } from './load-schema';
+import { equalsRootProperty } from './ajv-keywords';
 
 /**
  * Creates an Ajv ValidateFunction for the given schema
@@ -27,9 +27,7 @@ export function createValidateFunction(schemaPath: string) {
     $data: true,
     allErrors: true,
   });
-  validator
-    .addKeyword('equalsRootProperty', equalsRootProperty)
-    .addKeyword('validRestrictionId', validRestrictionId);
+  validator.addKeyword('equalsRootProperty', equalsRootProperty);
   return validator.compileAsync(schema).then((validate) => {
     return validate;
   }) as Promise<ValidateFunction>;

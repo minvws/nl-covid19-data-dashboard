@@ -1,10 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import {
-  ArticleSummary,
-  ArticleTeaser,
-} from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 
 type ArticleListProps = {
