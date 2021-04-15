@@ -228,7 +228,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n_Due to an ICT issue at the GGD, the RIVM has not received all confirmed cases. Today’s number is therefore incomplete. In reality, it is higher. Therefore, numbers of the next few days will be higher. _",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Wednesday. The backlog is added to the numbers on Thursday and maybe Friday. Therefore, numbers on these days are higher than in reality._",
     "map_titel": "Distribution of confirmed cases in the Netherlands",
     "map_toelichting": "These maps show how many confirmed cases of the coronavirus were reported yesterday per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
@@ -793,7 +793,7 @@
     "barscale_toelichting": "This figure shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n_Due to an ICT issue at the GGD, the RIVM has not received all confirmed cases. Today’s number is therefore incomplete. In reality, it is higher. Therefore, numbers of the next few days will be higher. _",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Wednesday. The backlog is added to the numbers on Thursday and maybe Friday. Therefore, numbers on these days are higher than in reality._",
     "map_titel": "Distribution of confirmed cases in {{safetyRegion}}",
     "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in the municipalities of this safety region per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
@@ -928,7 +928,7 @@
     "barscale_toelichting": "This number shows how many people per 100,000 inhabitants were reported yesterday as testing positive for the coronavirus (number of confirmed cases).",
     "barscale_screenreader_text": "{{value}} confirmed cases per day.",
     "kpi_titel": "Number of confirmed cases",
-    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n_Due to an ICT issue at the GGD, the RIVM has not received all confirmed cases. Today’s number is therefore incomplete. In reality, it is higher. Therefore, numbers of the next few days will be higher. _",
+    "kpi_toelichting": "This number shows how many confirmed cases were reported yesterday. Part of this number are positive tests of previous days, that have been reported later.\n\n_Due to a prior ICT issue at the GGD, not all confirmed cases had been received on Wednesday. The backlog is added to the numbers on Thursday and maybe Friday. Therefore, numbers on these days are higher than in reality._",
     "map_titel": "Distribution of confirmed cases in safety region of {{municipality}}",
     "map_toelichting": "This map shows how many confirmed cases of the coronavirus were reported yesterday in this municipality and other municipalities in the same safety region, per 100,000 inhabitants.",
     "linechart_titel": "Number of confirmed cases over time (per 100,000 inhabitants)",
@@ -1313,7 +1313,7 @@
       "title": "More research results",
       "description": "For more details please see the entire research on the website of RIVM.",
       "linkLabel": "View the entire research on the website of RIVM",
-      "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek"
+      "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek/naleving-van-en-draagvlak-voor-basis-gedragsregels"
     }
   },
   "nl_gedrag": {
@@ -2928,7 +2928,7 @@
   },
   "infected_per_age_group": {
     "title": "Number of positive tests per age group over time",
-    "description": "This graph shows the trend in positive cases for each age group, per 100,000 people in that age group. The graph shows the seven-day rolling average. Please note that the numbers do not correspond to the number of positive people in other places on this page. This is because the data comes from a different data source. Other dates are used in this file, namely especially the first day of illness. Read more about this in the section Explanation of the data presented.",
+    "description": "This graph shows the number of people per 100,000 who have tested positive for coronavirus, by age group. It uses averages from the previous seven days. Please note that the figures here may vary from the number of confirmed cases shown elsewhere on this page. That is because they are based on different data sets. The data set on which this graph is based uses, in most cases, the first day of illness. Read more about this in the explanation of data presented.",
     "legend": {
       "infected_age_0_9_per_100k": "0-9",
       "infected_age_10_19_per_100k": "10-19",
