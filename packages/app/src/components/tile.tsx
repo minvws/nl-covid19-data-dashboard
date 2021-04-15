@@ -5,18 +5,18 @@ import { asResponsiveArray } from '~/style/utils';
 interface TileProps {
   children: React.ReactNode;
   hasBlueBackground?: boolean;
-  isContentHeight?: boolean;
+  hasContentHeight?: boolean;
 }
 
 export function Tile({
   children,
   hasBlueBackground,
-  isContentHeight,
+  hasContentHeight,
 }: TileProps) {
   return (
     <StyledTile
       hasBlueBackground={hasBlueBackground}
-      isContentHeight={isContentHeight}
+      hasContentHeight={hasContentHeight}
     >
       {children}
     </StyledTile>
@@ -24,7 +24,7 @@ export function Tile({
 }
 const StyledTile = styled.article<{
   hasBlueBackground?: boolean;
-  isContentHeight?: boolean;
+  hasContentHeight?: boolean;
 }>((x) =>
   css({
     display: 'flex',
@@ -33,6 +33,6 @@ const StyledTile = styled.article<{
     p: asResponsiveArray({ _: 3, sm: 4 }),
     borderRadius: 1,
     boxShadow: 'tile',
-    height: x.isContentHeight ? '100%' : undefined,
+    height: x.hasContentHeight ? '100%' : undefined,
   })
 );

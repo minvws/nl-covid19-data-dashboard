@@ -80,7 +80,7 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
           <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
-            <Tile isContentHeight>
+            <Tile hasContentHeight>
               <Heading level={3}>{text.onderzoek_uitleg.titel}</Heading>
               <Text>{text.onderzoek_uitleg.toelichting}</Text>
             </Tile>
