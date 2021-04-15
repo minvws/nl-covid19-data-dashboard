@@ -2,10 +2,10 @@ import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Box } from '~/components-styled/base';
-import { Tile } from '~/components-styled/tile';
-import { PercentageBar } from '~/components-styled/percentage-bar';
-import { Heading } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { Tile } from '~/components/tile';
+import { PercentageBar } from '~/components/percentage-bar';
+import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import {
   NationalBehaviorValue,

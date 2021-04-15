@@ -1,15 +1,15 @@
 import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
-import { ArrowIconLeft, ArrowIconRight } from '~/components-styled/arrow-icon';
-import { Box } from '~/components-styled/base';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { RelativeDate } from '~/components-styled/relative-date';
+import { ArrowIconLeft, ArrowIconRight } from '~/components/arrow-icon';
+import { Box } from '~/components/base';
+import { LinkWithIcon } from '~/components/link-with-icon';
+import { RelativeDate } from '~/components/relative-date';
 import {
   Heading,
   HeadingLevel,
   InlineText,
   Text,
-} from '~/components-styled/typography';
+} from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 

@@ -1,4 +1,4 @@
-import { RadioGroup } from '~/components-styled/radio-group';
+import { RadioGroup } from '~/components/radio-group';
 import { BehaviorType } from '../behavior-types';
 import { useIntl } from '~/intl';
 

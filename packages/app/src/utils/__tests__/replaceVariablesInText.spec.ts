@@ -1,4 +1,4 @@
-import { replaceVariablesInText } from '../replaceVariablesInText';
+import { replaceVariablesInText } from '../replace-variables-in-text';
 
 describe('Util: replaceVariablesInText', () => {
   it('Should replace variables inside curly brackets with the variables supplied', () => {

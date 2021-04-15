@@ -1,4 +1,4 @@
-import { isBrowser } from '~/utils/isBrowser';
+import { isBrowser } from '~/utils/is-browser';
 
 /* eslint-disable no-console */
 declare global {

@@ -1,10 +1,10 @@
 import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
-import { Box } from '~/components-styled/base';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { CollapsibleSection } from '~/components-styled/collapsible';
-import { MaxWidth } from '~/components-styled/max-width';
-import { Heading } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { RichContent } from '~/components/cms/rich-content';
+import { CollapsibleSection } from '~/components/collapsible';
+import { MaxWidth } from '~/components/max-width';
+import { Heading } from '~/components/typography';
 import {
   createGetStaticProps,
   StaticProps,
@@ -14,7 +14,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
-import { getSkipLinkId } from '~/utils/skipLinks';
+import { getSkipLinkId } from '~/utils/skip-links';
 
 import { useIntl } from '~/intl';
 import { Layout } from '~/domain/layout/layout';

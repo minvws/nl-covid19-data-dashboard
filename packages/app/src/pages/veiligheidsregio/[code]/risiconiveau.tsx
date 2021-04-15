@@ -6,25 +6,25 @@ import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import Getest from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
   getCategoryLevel,
-} from '~/components-styled/categorical-bar-scale';
-import { ContentHeader } from '~/components-styled/content-header';
+} from '~/components/categorical-bar-scale';
+import { ContentHeader } from '~/components/content-header';
 import {
   EscalationLevelInfoLabel,
   EscalationLevelString,
-} from '~/components-styled/escalation-level';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Markdown } from '~/components-styled/markdown';
-import { Tile } from '~/components-styled/tile';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+} from '~/components/escalation-level';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { Tile } from '~/components/tile';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Heading, InlineText, Text } from '~/components/typography';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
@@ -43,9 +43,9 @@ import {
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(

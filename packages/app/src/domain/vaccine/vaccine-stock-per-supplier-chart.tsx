@@ -2,18 +2,16 @@ import { NlVaccineStockValue } from '@corona-dashboard/common';
 import { pick } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
-import { ChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components/chart-tile';
 import {
   InteractiveLegend,
   SelectOption,
-} from '~/components-styled/interactive-legend';
-import {
-  SeriesConfig,
-  TimeSeriesChart,
-} from '~/components-styled/time-series-chart';
+} from '~/components/interactive-legend';
+import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { useCurrentDate } from '~/utils/current-date-context';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 interface VaccineStockPerSupplierChartProps {
@@ -29,13 +27,14 @@ export function VaccineStockPerSupplierChart({
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
 
+  const today = useCurrentDate();
   const maximumValuesPerTimeframeOption = useMemo(
     () =>
       ({
-        all: getMaximumPropertyValueInTimeframe(values, 'all'),
-        '5weeks': getMaximumPropertyValueInTimeframe(values, '5weeks'),
+        all: getMaximumPropertyValueInTimeframe(values, 'all', today),
+        '5weeks': getMaximumPropertyValueInTimeframe(values, '5weeks', today),
       } as Record<TimeframeOption, number>),
-    [values]
+    [values, today]
   );
 
   const optionsConfig: SelectOption[] = [
@@ -125,9 +124,10 @@ export function VaccineStockPerSupplierChart({
 
 function getMaximumPropertyValueInTimeframe(
   values: NlVaccineStockValue[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ) {
-  const valuesInTimeframe = getValuesInTimeframe(values, timeframe);
+  const valuesInTimeframe = getValuesInTimeframe(values, timeframe, today);
 
   return valuesInTimeframe.reduce(
     (acc, value) =>
