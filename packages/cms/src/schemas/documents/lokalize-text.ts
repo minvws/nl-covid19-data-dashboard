@@ -8,13 +8,12 @@
  * This is the multi-line version of lokalizeString. Not sure if we need it but
  * seeing if this is useful...
  */
-const SHORTEN_LENGTH = 100;
 
 export const lokalizeText = {
   name: 'lokalizeText',
   type: 'document',
   title: 'Text',
-  __experimental_actions: ['create', 'update', 'publish'],
+  __experimental_actions: ['update', 'publish'],
   fields: [
     {
       title: 'Onderwerp',
@@ -25,7 +24,7 @@ export const lokalizeText = {
        * This could be made editable later after we killed Lokalize. It would
        * allow us to clean up the used names.
        */
-      // readOnly: true,
+      readOnly: true,
     },
     {
       title: 'Pad',
@@ -36,35 +35,26 @@ export const lokalizeText = {
        * This could be made editable later after we killed Lokalize. It would
        * allow us to clean up the used names.
        */
-      // readOnly: true,
+      readOnly: true,
     },
     {
       title: 'Text',
       name: 'text',
       type: 'localeText',
+      validation: (Rule: any) =>
+        /**
+         * Only NL is required. For EN we use NL as a fallback when exporting.
+         */
+        Rule.fields({
+          nl: (fieldRule: any) => fieldRule.reset().required(),
+          en: (fieldRule: any) => fieldRule.reset(),
+        }),
     },
   ],
   preview: {
     select: {
       title: 'path',
       subtitle: 'text.nl',
-    },
-    prepare(selection: { title: string; subtitle: string }) {
-      const { title, subtitle } = selection;
-
-      const shortSubtitle = subtitle.substr(0, SHORTEN_LENGTH);
-      const shortLength = shortSubtitle.length;
-      return {
-        title,
-        subtitle:
-          /**
-           * @TODO check if shortening is actually necessary because Sanity might
-           * handle it already
-           */
-          shortLength === SHORTEN_LENGTH
-            ? `${shortSubtitle}...`
-            : shortSubtitle,
-      };
     },
   },
 };

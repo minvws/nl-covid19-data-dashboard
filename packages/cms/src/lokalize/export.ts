@@ -13,18 +13,22 @@ const localeDirectory = path.resolve(
 );
 
 client
-  .fetch(`*[_type == 'lokalizeSubject'] | order(key asc)`)
+  .fetch(`*[_type == 'lokalizeText'] | order(subject asc)`)
   .then((result: any[]) => {
     const nl: Record<string, string> = {};
     const en: Record<string, string> = {};
 
     for (const document of result) {
-      for (const obj of document.texts) {
-        nl[`${document.key}.${obj.path}`] = obj.text.nl;
+      const key = `${document.subject}.${document.path}`;
+      nl[key] = document.text.nl;
+      en[key] = document.text.en;
+
+      if (!en[key]) {
         /**
          * Here we could make an automatic fallback to Dutch texts if English is missing.
          */
-        en[`${document.key}.${obj.path}`] = obj.text.en || obj.text.nl;
+        console.log('Missing english lokalize key:', key);
+        en[key] = nl[key];
       }
     }
 

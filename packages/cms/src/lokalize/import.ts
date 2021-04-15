@@ -79,9 +79,8 @@ for (const [key, dataText] of Object.entries(nl)) {
       return {
         _type: 'lokalizeText',
         _id: `jsonKey__${key}.${path}`,
-        _key: path, // _key is required for arrays in Sanity
+        path: path,
         subject: key,
-        path,
         text: {
           _type: 'localeText',
           nl: value,
@@ -104,7 +103,7 @@ for (const [key, dataText] of Object.entries(nl)) {
     continue;
   }
 
-  const promisedOperations = textDocuments.map((document) =>
+  textDocuments.forEach((document) =>
     queue.add(() =>
       client
         /**
@@ -122,46 +121,6 @@ for (const [key, dataText] of Object.entries(nl)) {
         })
     )
   );
-
-  Promise.all(promisedOperations).then(() => {
-    const document = {
-      _type: 'lokalizeSubject',
-      /**
-       * We use the key in the document id so that we can overwrite documents with
-       * updates from Lokalize. This is only required as long as we use Lokalize
-       * as our source for texts. Once we kill it, we can store these document
-       * with an opaque id which allows us to freely change the key name, to
-       * refactor the names we use in our code.
-       *
-       * The jsonKey__ prefix makes sure we don't clash with other documents in
-       * sanity that have a non-opaque document id.
-       */
-      _id: `jsonKey__${key}`,
-      key,
-      texts: textDocuments.map((x) => ({
-        _type: 'reference',
-        _key: x._key,
-        _ref: x._id,
-      })),
-    };
-
-    return queue.add(() =>
-      client
-        /**
-         * Strings from JSON will be overwriting whatever is in Sanity, because
-         * until we kill Lokalize those files are the source of truth. However,
-         * newly created text entries in Sanity will remain untouched, so we could
-         * already start to extend the Lokalize string set using Sanity if we want
-         * to.
-         */
-        .createOrReplace(document)
-        .catch((err) => {
-          console.error(
-            `Failed to create document for key ${key}: ${err.message}`
-          );
-        })
-    );
-  });
 }
 
 queue.on('idle', () => console.log(`There were ${issueCounter} issues`));
