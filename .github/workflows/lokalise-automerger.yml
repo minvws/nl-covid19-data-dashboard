@@ -5,7 +5,7 @@ on:
       - master
       - develop
     paths:
-      - "packages/app/src/locale/*.json"
+      - 'packages/app/src/locale/*.json'
 jobs:
   autocheckandapprove:
     # More handy functions: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#startswith
@@ -26,7 +26,7 @@ jobs:
       - name: Update Node version
         uses: actions/setup-node@v2-beta
         with:
-          node-version: "14"
+          node-version: '14'
       - name: Yarn install
         run: yarn install
       - name: Build @corona-dashboard/common package
@@ -34,9 +34,9 @@ jobs:
       - name: Ensure JSON directory for datafiles exists
         run: mkdir -p packages/app/public/json/
       - name: Validate en.json
-        run: yarn workspace @corona-dashboard/cli validate-single locale en.json
+        run: yarn workspace @corona-dashboard/cli validate-json-single locale en.json
       - name: Validate nl.json
-        run: yarn workspace @corona-dashboard/cli validate-single locale nl.json
+        run: yarn workspace @corona-dashboard/cli validate-json-single locale nl.json
 
       - name: Add label
         uses: buildsville/add-remove-label@v1

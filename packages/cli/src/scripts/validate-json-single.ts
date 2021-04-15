@@ -17,10 +17,10 @@ const validSchemaNames = Object.keys(schemaInformation);
 const cli = meow(
   `
     Usage
-      $ validate-single <schema-name> <json-path>
+      $ validate-json-single <schema-name> <json-path>
 
     Examples
-      $ validate-single national nl.json
+      $ validate-json-single national nl.json
 `
 );
 

@@ -14,10 +14,10 @@ import {
 const cli = meow(
   `
     Usage
-      $ validate-json <optional-json-path>
+      $ validate-json-all <optional-json-path>
 
     Examples
-      $ validate-json pages-tests/fixtures
+      $ validate-json-all pages-tests/fixtures
 `
 );
 

@@ -15,7 +15,7 @@ yarn
 yarn workspace @corona-dashboard/common build
 
 # Validate data
-yarn workspace @corona-dashboard/cli validate-json
+yarn workspace @corona-dashboard/cli validate-json-all
 yarn workspace @corona-dashboard/cli validate-last-values
 
 # Prepare types and assets
