@@ -121,7 +121,7 @@
     "analyze": "cross-env ANALYZE=true yarn build",
     "export": "next export",
     "dev": "next",
-    "build:compile-config": "npx tsc next.config.ts --module commonjs --target es6 --moduleResolution node --resolveJsonModule --esModuleInterop --skipLibCheck",
+    "build:compile-config": "yarn run tsc next.config.ts --module commonjs --target es6 --moduleResolution node --resolveJsonModule --esModuleInterop --skipLibCheck",
     "build": "yarn build:compile-config && cross-env NEXT_TELEMETRY_DISABLED=1 && next build",
     "build:en": "yarn build:compile-config && cross-env NEXT_PUBLIC_SANITY_DATASET=production NEXT_PUBLIC_LOCALE=en && yarn build",
     "start": "next start -H 0.0.0.0 -p 8080",
