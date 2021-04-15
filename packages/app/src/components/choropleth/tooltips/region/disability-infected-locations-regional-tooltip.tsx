@@ -2,7 +2,7 @@ import {
   RegionsDisabilityCare,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { InlineText } from '~/components-styled/typography';
+import { InlineText } from '~/components/typography';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';

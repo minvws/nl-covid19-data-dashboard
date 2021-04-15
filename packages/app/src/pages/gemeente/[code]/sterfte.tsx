@@ -1,15 +1,15 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { ChartTile } from '~/components-styled/chart-tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { ChartTile } from '~/components/chart-tile';
 import { colors } from '~/style/theme';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -21,7 +21,7 @@ import {
   getLastGeneratedDate,
   getGmData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';

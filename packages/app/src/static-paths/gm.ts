@@ -1,4 +1,4 @@
-import municipalities from '~/data/municipalSearchData';
+import municipalities from '~/data/municipal-search-data';
 
 /**
  * getStaticPaths creates an array of all the allowed `/gemeente/[code]` routes.

@@ -42,19 +42,34 @@ describe('Utils: getFilteredValues', () => {
   });
 
   it('should filter the list by week', () => {
-    const result = getFilteredValues(_testList, 'week', testCallback);
+    const result = getFilteredValues(
+      _testList,
+      'week',
+      new Date(),
+      testCallback
+    );
 
     expect(result.length).toEqual(2);
   });
 
   it('should filter the list by 5weeks', () => {
-    const result = getFilteredValues(_testList, '5weeks', testCallback);
+    const result = getFilteredValues(
+      _testList,
+      '5weeks',
+      new Date(),
+      testCallback
+    );
 
     expect(result.length).toEqual(4);
   });
 
   it('should filter the list by all', () => {
-    const result = getFilteredValues(_testList, 'all', testCallback);
+    const result = getFilteredValues(
+      _testList,
+      'all',
+      new Date(),
+      testCallback
+    );
 
     expect(result.length).toEqual(5);
   });

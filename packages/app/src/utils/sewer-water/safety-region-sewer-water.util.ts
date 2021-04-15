@@ -1,4 +1,4 @@
-import { BarChartValue } from '~/components-styled/bar-chart/bar-chart-coordinates';
+import { BarChartValue } from '~/components/bar-chart/bar-chart-coordinates';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { Regionaal } from '@corona-dashboard/common';

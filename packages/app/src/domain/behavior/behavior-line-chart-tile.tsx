@@ -6,11 +6,11 @@ import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { Box, Spacer } from '~/components-styled/base';
-import { Select } from '~/components-styled/select';
-import { Tile } from '~/components-styled/tile';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { Heading } from '~/components-styled/typography';
+import { Box, Spacer } from '~/components/base';
+import { Select } from '~/components/select';
+import { Tile } from '~/components/tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { Heading } from '~/components/typography';
 import { colors } from '~/style/theme';
 import {
   BehaviorIdentifier,

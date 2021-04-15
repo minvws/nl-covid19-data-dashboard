@@ -1,5 +1,5 @@
-import { Heading, Text } from '~/components-styled/typography';
-import { ContentLayout } from '~/domain/layout/content-layout';
+import { Heading, Text } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -16,10 +16,10 @@ const NotFound = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...siteText.notfound_metadata} lastGenerated={lastGenerated}>
-      <ContentLayout>
+      <Content>
         <Heading level={1}>{siteText.error_titel.text}</Heading>
         <Text>{siteText.error_beschrijving.text}</Text>
-      </ContentLayout>
+      </Content>
     </Layout>
   );
 };

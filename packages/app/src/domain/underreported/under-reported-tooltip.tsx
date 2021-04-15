@@ -1,6 +1,6 @@
-import { Box } from '~/components-styled/base';
-import { TrendValue } from '~/components-styled/line-chart/logic';
-import { InlineText } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { TrendValue } from '~/components/line-chart/logic';
+import { InlineText } from '~/components/typography';
 import { colors } from '~/style/theme';
 import { useIntl } from '~/intl';
 

@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import { Box } from '~/components-styled/base';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { CollapsibleSection } from '~/components-styled/collapsible';
-import { Heading } from '~/components-styled/typography';
-import { ContentLayout } from '~/domain/layout/content-layout';
+import { Box } from '~/components/base';
+import { RichContent } from '~/components/cms/rich-content';
+import { CollapsibleSection } from '~/components/collapsible';
+import { Heading } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -15,7 +15,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
-import { getSkipLinkId } from '~/utils/skipLinks';
+import { getSkipLinkId } from '~/utils/skip-links';
 
 interface OverRisiconiveausData {
   title: string | null;
@@ -82,7 +82,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           title="webpagina"
         />
       </Head>
-      <ContentLayout>
+      <Content>
         {content.title && <Heading level={1}>{content.title}</Heading>}
         {content.description && <RichContent blocks={content.description} />}
         {content.collapsibleList && (
@@ -101,7 +101,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
             })}
           </article>
         )}
-      </ContentLayout>
+      </Content>
     </Layout>
   );
 };

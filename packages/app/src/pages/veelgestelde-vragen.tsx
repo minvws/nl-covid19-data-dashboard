@@ -1,10 +1,10 @@
 import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
-import { Box } from '~/components-styled/base';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { CollapsibleSection } from '~/components-styled/collapsible';
-import { Heading } from '~/components-styled/typography';
-import { ContentLayout } from '~/domain/layout/content-layout';
+import { Box } from '~/components/base';
+import { RichContent } from '~/components/cms/rich-content';
+import { CollapsibleSection } from '~/components/collapsible';
+import { Heading } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -16,7 +16,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
-import { getSkipLinkId } from '~/utils/skipLinks';
+import { getSkipLinkId } from '~/utils/skip-links';
 
 interface VeelgesteldeVragenData {
   title: string | null;
@@ -92,7 +92,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
 
-      <ContentLayout>
+      <Content>
         {content.title && <Heading level={1}>{content.title}</Heading>}
         {content.description && <RichContent blocks={content.description} />}
         {Object.entries(groups).map(([group, questions]) => (
@@ -114,7 +114,7 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
             })}
           </Box>
         ))}
-      </ContentLayout>
+      </Content>
     </Layout>
   );
 };

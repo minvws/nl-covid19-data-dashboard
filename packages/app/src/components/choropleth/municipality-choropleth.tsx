@@ -9,7 +9,7 @@ import { ReactNode, useCallback } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,

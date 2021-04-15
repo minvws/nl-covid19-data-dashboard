@@ -22,13 +22,14 @@ export const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
 const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
 
 export const getMinimumUnixForTimeframe = (
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ): number => {
   if (timeframe === 'all') {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return new Date().getTime() - days * oneDayInMilliseconds;
+  return today.getTime() - days * oneDayInMilliseconds;
 };
 
 type CompareCallbackFunction<T> = (value: T) => number;
@@ -43,9 +44,10 @@ type CompareCallbackFunction<T> = (value: T) => number;
 export const getFilteredValues = <T>(
   values: T[],
   timeframe: TimeframeOption,
+  today: Date,
   compareCallback: CompareCallbackFunction<T>
 ): T[] => {
-  const minimumUnix = getMinimumUnixForTimeframe(timeframe);
+  const minimumUnix = getMinimumUnixForTimeframe(timeframe, today);
   return values.filter((value: T): boolean => {
     return compareCallback(value) >= minimumUnix;
   });
@@ -60,9 +62,10 @@ export const getFilteredValues = <T>(
  */
 export function getValuesInTimeframe<T extends TimestampedValue>(
   values: T[],
-  timeframe: TimeframeOption
+  timeframe: TimeframeOption,
+  today: Date
 ): T[] {
-  const boundary = getTimeframeBoundaryUnix(timeframe);
+  const boundary = getTimeframeBoundaryUnix(timeframe, today);
 
   if (isDateSeries(values)) {
     return values.filter((x: DateValue) => x.date_unix >= boundary) as T[];
@@ -79,10 +82,10 @@ export function getValuesInTimeframe<T extends TimestampedValue>(
 
 const oneDayInSeconds = 24 * 60 * 60;
 
-function getTimeframeBoundaryUnix(timeframe: TimeframeOption) {
+function getTimeframeBoundaryUnix(timeframe: TimeframeOption, today: Date) {
   if (timeframe === 'all') {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return Date.now() / 1000 - days * oneDayInSeconds;
+  return today.getTime() / 1000 - days * oneDayInSeconds;
 }

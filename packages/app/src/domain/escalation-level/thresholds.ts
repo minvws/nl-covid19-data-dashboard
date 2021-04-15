@@ -1,4 +1,4 @@
-import { CategoricalBarScaleCategory } from '~/components-styled/categorical-bar-scale';
+import { CategoricalBarScaleCategory } from '~/components/categorical-bar-scale';
 import { colors } from '~/style/theme';
 import { useIntl } from '~/intl';
 

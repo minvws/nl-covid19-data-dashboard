@@ -1,15 +1,15 @@
 import { National } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { useState } from 'react';
-import { Box } from '~/components-styled/base';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Markdown } from '~/components-styled/markdown';
-import { RadioGroup } from '~/components-styled/radio-group';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { InlineText, Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { RadioGroup } from '~/components/radio-group';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function VaccineAdministrationsKpiSection({ data }: { data: National }) {
   const { siteText } = useIntl();
@@ -67,24 +67,16 @@ export function VaccineAdministrationsKpiSection({ data }: { data: National }) {
 
                 <VaccineAdministeredItem
                   value={
-                    data.vaccine_administered_hospitals.last_value.estimated
+                    data.vaccine_administered_hospitals_and_care_institutions
+                      .last_value.estimated
                   }
-                  description={text.gezette_prikken.estimated.hospitals}
+                  description={
+                    text.gezette_prikken.estimated
+                      .hospitals_and_care_institutions
+                  }
                   date={
-                    data.vaccine_administered_hospitals.last_value.date_unix
-                  }
-                  isReported
-                />
-
-                <VaccineAdministeredItem
-                  value={
-                    data.vaccine_administered_care_institutions.last_value
-                      .estimated
-                  }
-                  description={text.gezette_prikken.estimated.care_institutions}
-                  date={
-                    data.vaccine_administered_care_institutions.last_value
-                      .date_unix
+                    data.vaccine_administered_hospitals_and_care_institutions
+                      .last_value.date_unix
                   }
                 />
 
@@ -113,13 +105,6 @@ export function VaccineAdministrationsKpiSection({ data }: { data: National }) {
                   value={data.vaccine_administered_ggd_ghor.last_value.reported}
                   description={text.gezette_prikken.reported.ggd_ghor}
                   date={data.vaccine_administered_ggd_ghor.last_value.date_unix}
-                  isReported
-                />
-
-                <VaccineAdministeredItem
-                  value={data.vaccine_administered_lnaz.last_value.reported}
-                  description={text.gezette_prikken.reported.lnaz}
-                  date={data.vaccine_administered_lnaz.last_value.date_unix}
                   isReported
                 />
               </Box>
