@@ -26,7 +26,7 @@ export function ArticleStrip(props: ArticleStripProps) {
   }
 
   return (
-    <Tile css={css({ bg: 'lightBlue' })}>
+    <Tile hasBlueBackground>
       <Heading level={4} as="h3">
         {siteText.article_strip_title}
       </Heading>

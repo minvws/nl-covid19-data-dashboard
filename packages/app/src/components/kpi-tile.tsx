@@ -21,7 +21,7 @@ export function KpiTile({
   metadata,
 }: KpiTileProps) {
   return (
-    <Tile height="100%">
+    <Tile isContentHeight>
       <Heading level={3}>{title}</Heading>
       <Box>{children}</Box>
       {description && (
