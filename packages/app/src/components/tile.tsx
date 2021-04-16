@@ -30,6 +30,6 @@ const StyledTile = styled.article<{
     p: asResponsiveArray({ _: 3, sm: 4 }),
     borderRadius: 1,
     boxShadow: 'tile',
-    height: x.height ? x.height : undefined,
+    height: x.height,
   })
 );
