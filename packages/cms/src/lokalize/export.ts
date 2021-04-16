@@ -27,7 +27,10 @@ client
         /**
          * Here we could make an automatic fallback to Dutch texts if English is missing.
          */
-        console.log('Missing english lokalize key:', key);
+        console.log(
+          'Missing english translation for path:',
+          document.lokalize_path
+        );
         en[key] = nl[key];
       }
     }

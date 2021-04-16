@@ -1,7 +1,6 @@
 import flatten from 'flat';
 import fs from 'fs';
 import { get, isEmpty } from 'lodash';
-import Queue from 'p-queue';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { client } from '../client';
@@ -25,15 +24,6 @@ const en = JSON.parse(
     encoding: 'utf8',
   })
 ) as Record<string, unknown>;
-
-/**
- * Place some rate limits on the requests, until Sanity adds it to the client
- * See https://github.com/sanity-io/sanity/issues/1177
- */
-const queue = new Queue({
-  concurrency: 4,
-  interval: 1000 / 25,
-});
 
 let issueCounter = 0;
 
@@ -108,24 +98,20 @@ for (const [key, dataText] of Object.entries(nl)) {
     continue;
   }
 
-  textDocuments.forEach((document) =>
-    queue.add(() =>
-      client
-        /**
-         * Strings from JSON will be overwriting whatever is in Sanity, because
-         * until we kill Lokalize those files are the source of truth. However,
-         * newly created text entries in Sanity will remain untouched, so we could
-         * already start to extend the Lokalize string set using Sanity if we want
-         * to.
-         */
-        .createOrReplace(document)
-        .catch((err) => {
-          console.error(
-            `Failed to create document for key ${key}: ${err.message}`
-          );
-        })
-    )
+  /**
+   * Strings from JSON will be overwriting whatever is in Sanity, because
+   * until we kill Lokalize those files are the source of truth. However,
+   * newly created text entries in Sanity will remain untouched, so we could
+   * already start to extend the Lokalize string set using Sanity if we want
+   * to.
+   */
+  const transaction = textDocuments.reduce(
+    (tx, document) => tx.createOrReplace(document),
+    client.transaction()
   );
-}
 
-queue.on('idle', () => console.log(`There were ${issueCounter} issues`));
+  transaction.commit().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
