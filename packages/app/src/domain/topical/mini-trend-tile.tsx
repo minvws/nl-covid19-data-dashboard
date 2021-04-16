@@ -32,7 +32,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
   return (
     <Box position="relative" pb={{ _: '1.5rem', md: 0 }}>
-      <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
+      <Box height="4rem" position="absolute" left={0} mr={1}>
         {icon}
       </Box>
       <Heading
