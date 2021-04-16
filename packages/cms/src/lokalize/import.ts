@@ -110,8 +110,11 @@ for (const [key, dataText] of Object.entries(nl)) {
     client.transaction()
   );
 
-  transaction.commit().catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+  transaction
+    .commit()
+    .then(() => console.log(`There were ${issueCounter} issues`))
+    .catch((err) => {
+      console.error(err);
+      process.exit(1);
+    });
 }
