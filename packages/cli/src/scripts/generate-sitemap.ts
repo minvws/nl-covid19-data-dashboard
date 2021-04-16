@@ -1,19 +1,20 @@
-import fs from 'fs';
-import path from 'path';
-import globby from 'globby';
-import prettier from 'prettier';
-import { gmCodes, vr } from '../data';
-import sanityClient from '@sanity/client';
-
-import { features } from '../../../app/src/config/features';
 import { assert } from '@corona-dashboard/common';
+import sanityClient from '@sanity/client';
+import fs from 'fs';
+import globby from 'globby';
+import path from 'path';
+import prettier from 'prettier';
+import { features } from '../../../app/src/config/features';
+import { gmData } from '../../../app/src/data/gm';
+import { vrData } from '../../../app/src/data/vr';
 import { logError } from '../utils';
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
   .map((x) => x.route);
 
-const vrCodes = vr.map((x) => x.code);
+const vrCodes = vrData.map((x) => x.code);
+const gmCodes = gmData.map((x) => x.gemcode);
 
 const publicOutputDirectory = path.resolve(
   __dirname,
