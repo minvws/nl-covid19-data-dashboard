@@ -78,11 +78,11 @@ for (const [key, dataText] of Object.entries(nl)) {
         lokalize_path: `${`${key}.${path}`.split('.').join('::')}`,
         text: {
           _type: 'localeText',
-          nl: value,
+          nl: value.trim(),
           /**
            * Fall back to NL text because the field is required
            */
-          en: get(en, `${key}.${path}`, value),
+          en: (get(en, `${key}.${path}`, value) as string).trim(),
         },
       };
     })

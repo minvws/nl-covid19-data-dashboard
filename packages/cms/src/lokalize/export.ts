@@ -20,8 +20,8 @@ client
 
     for (const document of result) {
       const key = `${document.subject}.${document.path}`;
-      nl[key] = document.text.nl;
-      en[key] = document.text.en;
+      nl[key] = document.text.nl.trim();
+      en[key] = document.text.en?.trim();
 
       if (!en[key]) {
         /**
