@@ -732,7 +732,7 @@ export interface NlEscalationThresholds {
   hospital_nice_sum: {
     admissions_per_1m: NlEscalationThresholdValue[];
   };
-  date_of_insertion_unix?: number;
+  date_of_insertion_unix: number;
 }
 export interface NlEscalationThresholdValue {
   escalation_level: number;
