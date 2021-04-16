@@ -44,6 +44,9 @@ export const lokalizeText = {
       title: 'Text',
       name: 'text',
       type: 'localeText',
+      options: {
+        ignoreLanguageSwitcher: true,
+      },
       validation: (Rule: any) =>
         /**
          * Only NL is required. For EN we use NL as a fallback when exporting.
