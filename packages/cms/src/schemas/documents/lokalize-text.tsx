@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * A lokalizeText type is referenced by a lokalizeSubject. There can be any number of
  * texts grouped under a subject. Each has a path which corresponds with the
@@ -9,6 +11,8 @@
  * seeing if this is useful...
  */
 
+// veiligheidsregio_actueel::data_driven_texts::intake_intensivecare_ma::difference::singular
+
 export const lokalizeText = {
   name: 'lokalizeText',
   type: 'document',
@@ -16,26 +20,25 @@ export const lokalizeText = {
   __experimental_actions: ['update', 'publish'],
   fields: [
     {
+      title: 'Lokalize pad',
+      name: 'lokalize_path',
+      type: 'string',
+      readOnly: true,
+      inputComponent: ReadOnlyPath,
+    },
+    {
       title: 'Onderwerp',
       name: 'subject',
       type: 'string',
-      // description: 'Data path in dot notation from JSON root-level subject.',
-      /**
-       * This could be made editable later after we killed Lokalize. It would
-       * allow us to clean up the used names.
-       */
       readOnly: true,
+      hidden: true,
     },
     {
       title: 'Pad',
       name: 'path',
       type: 'string',
-      description: 'Data path in dot notation from JSON root-level subject.',
-      /**
-       * This could be made editable later after we killed Lokalize. It would
-       * allow us to clean up the used names.
-       */
       readOnly: true,
+      hidden: true,
     },
     {
       title: 'Text',
@@ -58,3 +61,19 @@ export const lokalizeText = {
     },
   },
 };
+
+function ReadOnlyPath(x: { value: string; type: { title: string } }) {
+  return (
+    <div>
+      <strong>{x.type.title}</strong>
+      <div style={{ fontFamily: 'monospace' }}>
+        {x.value.split('::').map((x, i, list) => (
+          <span style={{ display: 'inline-block' }}>
+            {list[i - 1] && '::'}
+            {x}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -81,6 +81,11 @@ for (const [key, dataText] of Object.entries(nl)) {
         _id: `jsonKey__${key}.${path}`,
         path: path,
         subject: key,
+        /**
+         * The lokalize path is also stored (a::b::c) to make it findable
+         * with the Sanity search feature.
+         */
+        lokalize_path: `${`${key}.${path}`.split('.').join('::')}`,
         text: {
           _type: 'localeText',
           nl: value,
