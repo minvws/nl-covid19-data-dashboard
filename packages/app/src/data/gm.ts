@@ -6,7 +6,7 @@ type MunicipalityInfo = {
   searchTerms?: string[];
 };
 
-export const gm: MunicipalityInfo[] = [
+export const gmData: MunicipalityInfo[] = [
   {
     name: 'Aa en Hunze',
     safetyRegion: 'VR03',

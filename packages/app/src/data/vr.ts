@@ -1,4 +1,4 @@
-export const vr = [
+export const vrData = [
   { name: 'Groningen', code: 'VR01', id: 1 },
   { name: 'Fryslân', code: 'VR02', id: 2, searchTerms: ['Friesland'] },
   { name: 'Drenthe', code: 'VR03', id: 3 },

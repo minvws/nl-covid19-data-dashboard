@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { ComboBox } from '~/components/combo-box/combo-box';
-import { gm } from '~/data/gm';
+import { gmData } from '~/data/gm';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -12,7 +12,7 @@ export function MunicipalityComboBox() {
   return (
     <ComboBox
       placeholder={siteText.common.zoekveld_placeholder_gemeente}
-      options={gm}
+      options={gmData}
       onSelect={({ gemcode }) => router.push(reverseRouter.gm.index(gemcode))}
     />
   );

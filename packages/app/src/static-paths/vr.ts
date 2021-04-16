@@ -1,11 +1,11 @@
-import { vr } from '~/data/vr';
+import { vrData } from '~/data/vr';
 
 /**
  * getStaticPaths creates an array of all the allowed `/veiligheidsregio/[code]`
  * routes.
  */
 export function getStaticPaths() {
-  const filteredRegions = vr.filter((x) => x.code.indexOf('VR') === 0);
+  const filteredRegions = vrData.filter((x) => x.code.indexOf('VR') === 0);
   const paths = filteredRegions.map((x) => ({
     params: { code: x.code },
   }));

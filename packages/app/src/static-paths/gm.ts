@@ -1,10 +1,10 @@
-import { gm } from '~/data/gm';
+import { gmData } from '~/data/gm';
 
 /**
  * getStaticPaths creates an array of all the allowed `/gemeente/[code]` routes.
  */
 export function getStaticPaths() {
-  const paths = gm.map((x) => ({
+  const paths = gmData.map((x) => ({
     params: { code: x.gemcode },
   }));
 

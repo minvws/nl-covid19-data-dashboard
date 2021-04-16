@@ -1,8 +1,8 @@
 import { matchSorter } from 'match-sorter';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { vr } from '~/data/vr';
-import { gm } from '~/data/gm';
+import { vrData } from '~/data/vr';
+import { gmData } from '~/data/gm';
 
 export interface Option {
   type: 'gm' | 'vr';
@@ -73,14 +73,14 @@ function search(term: string, limit = 10) {
 }
 
 const ALL_HITS: Option[] = [
-  ...gm.map((x) => ({
+  ...gmData.map((x) => ({
     type: 'gm' as const,
     code: x.gemcode,
     name: x.displayName || x.name,
     searchTerms: [x.name, x.displayName].filter(isPresent),
     link: `/actueel/gemeente/${x.gemcode}`,
   })),
-  ...vr.map((x) => ({
+  ...vrData.map((x) => ({
     type: 'vr' as const,
     code: x.code,
     name: x.name,
