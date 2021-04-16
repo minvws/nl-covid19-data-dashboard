@@ -1,6 +1,10 @@
 # Ignore everything
-*
+node_modules
+.vercel
+packages/**/node_modules
+packages/app/out
+packages/app/.next
 
 # Allowlist
-!packages/app/*.conf
-!exports
+# !packages/app/*.conf
+# !exports
