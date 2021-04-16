@@ -1,7 +1,7 @@
 import { matchSorter } from 'match-sorter';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import {vr}} from '~/data/vr';
+import { vr } from '~/data/vr';
 import municipalities from '~/data/municipal-search-data';
 
 export interface Option {
