@@ -1,6 +1,6 @@
 import { NlEscalationThresholds } from '@corona-dashboard/common';
 import { useMemo } from 'react';
-import { CategoricalBarScaleCategory } from '~/components-styled/categorical-bar-scale';
+import { CategoricalBarScaleCategory } from '~/components/categorical-bar-scale';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
