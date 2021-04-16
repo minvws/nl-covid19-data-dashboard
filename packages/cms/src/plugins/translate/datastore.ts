@@ -1,8 +1,7 @@
 import { intersection } from 'lodash';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, publishReplay, refCount, startWith, tap } from 'rxjs/operators';
-import { SupportedLanguageId } from '../../language/supported-languages';
-import config from './config';
+import { filterField, supportedLanguages } from './config';
 
 const onSelect$ = new BehaviorSubject(['nl']);
 
@@ -26,7 +25,7 @@ const persistOn = (key: string, defaultValue: any) => (
   );
 };
 
-const SUPPORTED_LANG_IDS = config.supportedLanguages.map((lang) => lang.id);
+const SUPPORTED_LANG_IDS = supportedLanguages.map((lang) => lang.id);
 
 export const selectedLanguages$ = onSelect$.pipe(
   map((selectedLangs) => intersection(selectedLangs, SUPPORTED_LANG_IDS)),
@@ -34,16 +33,6 @@ export const selectedLanguages$ = onSelect$.pipe(
   refCount(),
   persistOn('language-filter/selected-languages', SUPPORTED_LANG_IDS)
 );
-
-const defaultFilterField = (
-  enclosingType: any,
-  field: any,
-  selectedLanguages: SupportedLanguageId[]
-) =>
-  !enclosingType.name.startsWith('locale') ||
-  selectedLanguages.includes(field.name);
-
-const filterField = config.filterField || defaultFilterField;
 
 export const filterFn$ = selectedLanguages$.pipe(
   map((langs) => {
