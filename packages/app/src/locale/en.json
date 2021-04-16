@@ -1880,11 +1880,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "No news report on weekly mortality for week 13",
-      "published_text": "Date of publication: Friday 9 April",
-      "message": "There will be no news release on weekly mortality on 9 April 2021 because of Easter. The Easter break leads to a shift in delivery of death records, as commonly occurs around public holidays; therefore, an estimate will not be available for week 13 on 9 April. The next news release with the estimate for week 14 and provisional figures up to and including week 13 will be published on Friday 16 April.",
+      "title": "Mortality in week 14 higher than expected",
+      "published_text": "Date of publication: Friday 16 April",
+      "message": "In week 14 (5 to 11 April 2021 inclusive), the estimated number of deaths stood at 3,150. This is approximately 100 more than expected for this period and roughly the same number as in the previous week (3,144). Mortality among long-term care users was below the expected level for this week; among the rest of the population, there were more deaths than expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. In week 13, the number of deaths was more or less the same again as expected, while estimated mortality for week 14 is slightly above the expected level. The National Institute for Public Health and the Environment (RIVM) registered 112 COVID-19 deaths in week 14 (as at 13 April).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/13/in-week-12-an-estimated-3-100-deaths",
+        "href": "https://www.cbs.nl/en-gb/news/2021/15/mortality-in-week-14-higher-than-expected",
         "text": "Read the full news item on the CBS website"
       }
     },
