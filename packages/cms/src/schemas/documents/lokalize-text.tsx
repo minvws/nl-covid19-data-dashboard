@@ -62,12 +62,21 @@ export const lokalizeText = {
   },
 };
 
-function ReadOnlyPath(x: { value: string; type: { title: string } }) {
+interface Field__incomplete {
+  value: string;
+  type: {
+    title: string;
+    [key: string]: unknown;
+  };
+  [key: string]: unknown;
+}
+
+function ReadOnlyPath({ value, type }: Field__incomplete) {
   return (
     <div>
-      <strong>{x.type.title}</strong>
+      <strong>{type.title}</strong>
       <div style={{ fontFamily: 'monospace' }}>
-        {x.value.split('::').map((x, i, list) => (
+        {value.split('::').map((x, i, list) => (
           <span style={{ display: 'inline-block' }}>
             {list[i - 1] && '::'}
             {x}
