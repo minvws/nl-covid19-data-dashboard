@@ -42,7 +42,8 @@
     "vaccine_administered_rate_moving_average",
     "vaccine_administered_planned",
     "vaccine_stock",
-    "vaccine_delivery_per_supplier"
+    "vaccine_delivery_per_supplier",
+    "escalation_thresholds"
   ],
   "additionalProperties": false,
   "properties": {
@@ -177,6 +178,9 @@
     },
     "vaccine_stock": {
       "$ref": "vaccine_stock.json"
+    },
+    "escalation_thresholds": {
+      "$ref": "escalation_thresholds.json"
     }
   }
 }

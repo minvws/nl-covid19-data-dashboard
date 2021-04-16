@@ -55,6 +55,20 @@ export function createGetContent<T>(
   };
 }
 
+export function selectNlData<T extends keyof National>(...metrics: T[]) {
+  return () => {
+    // clone data to prevent mutation of the original
+    const { data } = getNlData();
+
+    const selectedNlData: Pick<National, T> = {} as Pick<National, T>;
+    metrics.forEach((p) => {
+      selectedNlData[p] = data[p];
+    });
+
+    return { selectedNlData };
+  };
+}
+
 export function getNlData() {
   // clone data to prevent mutation of the original
   const data = JSON.parse(JSON.stringify(json.nl)) as National;
@@ -64,10 +78,25 @@ export function getNlData() {
   return { data };
 }
 
+export function selectVrData<T extends keyof Regionaal>(...metrics: T[]) {
+  return (context: GetStaticPropsContext) => {
+    const vrData = getVrData(context);
+
+    const selectedVrData: Pick<Regionaal, T> = {} as Pick<Regionaal, T>;
+    metrics.forEach((p) => {
+      selectedVrData[p] = vrData.data[p];
+    });
+
+    return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
+  };
+}
+
 export function getVrData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
-  if (!code) return null;
+  if (!code) {
+    throw Error('No valid vrcode found in context');
+  }
 
   const data = loadJsonFromDataFile<Regionaal>(`${code}.json`);
 
@@ -81,10 +110,25 @@ export function getVrData(context: GetStaticPropsContext) {
   };
 }
 
+export function selectGmData<T extends keyof Municipal>(...metrics: T[]) {
+  return (context: GetStaticPropsContext) => {
+    const gmData = getGmData(context);
+
+    const selectedGmData: Pick<Municipal, T> = {} as Pick<Municipal, T>;
+    metrics.forEach((p) => {
+      selectedGmData[p] = gmData.data[p];
+    });
+
+    return { selectedGmData, municipalityName: gmData.municipalityName };
+  };
+}
+
 export function getGmData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
-  if (!code) return null;
+  if (!code) {
+    throw Error('No valid gmcode found in context');
+  }
 
   const data = loadJsonFromDataFile<Municipal>(`${code}.json`);
 

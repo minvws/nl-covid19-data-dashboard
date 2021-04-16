@@ -39,6 +39,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
   getVrData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
@@ -51,6 +52,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   getVrData,
+  selectNlData('escalation_thresholds'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -60,7 +62,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { safetyRegionName, content, data, lastGenerated } = props;
+  const {
+    safetyRegionName,
+    content,
+    selectedNlData,
+    data,
+    lastGenerated,
+  } = props;
 
   const { siteText, formatDateFromSeconds } = useIntl();
   const breakpoints = useBreakpoints();
@@ -71,10 +79,11 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
   const currentLevel = escalation_level.level as EscalationLevel;
 
+  const thresholds = selectedNlData.escalation_thresholds;
   const {
     hospitalAdmissionsEscalationThresholds,
     positiveTestedEscalationThresholds,
-  } = useEscalationThresholds();
+  } = useEscalationThresholds(thresholds);
 
   const positiveTestedColor = useEscalationColor(
     getCategoryLevel(
