@@ -1,11 +1,11 @@
-import municipalities from '~/data/municipal-search-data';
+import { gm } from '~/data/gm';
 
 /**
  * getStaticPaths creates an array of all the allowed `/gemeente/[code]` routes.
  */
 export function getStaticPaths() {
-  const paths = municipalities.map((municipality) => ({
-    params: { code: municipality.gemcode },
+  const paths = gm.map((x) => ({
+    params: { code: x.gemcode },
   }));
 
   return {

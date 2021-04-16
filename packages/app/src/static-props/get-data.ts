@@ -8,7 +8,7 @@ import {
 } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
 import { vr } from '~/data/vr';
-import municipalities from '~/data/municipal-search-data';
+import { gm } from '~/data/gm';
 import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -88,8 +88,7 @@ export function getGmData(context: GetStaticPropsContext) {
 
   const data = loadJsonFromDataFile<Municipal>(`${code}.json`);
 
-  const municipalityName =
-    municipalities.find((r) => r.gemcode === code)?.name || '';
+  const municipalityName = gm.find((x) => x.gemcode === code)?.name || '';
 
   sortTimeSeriesInDataInPlace(data);
 
