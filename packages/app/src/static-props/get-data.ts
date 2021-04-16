@@ -7,7 +7,7 @@ import {
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
-import safetyRegions from '~/data/index';
+import { vr } from '~/data/vr';
 import municipalities from '~/data/municipal-search-data';
 import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
@@ -73,7 +73,7 @@ export function getVrData(context: GetStaticPropsContext) {
 
   sortTimeSeriesInDataInPlace(data);
 
-  const safetyRegion = safetyRegions.find((r) => r.code === code);
+  const safetyRegion = vr.find((x) => x.code === code);
 
   return {
     data,

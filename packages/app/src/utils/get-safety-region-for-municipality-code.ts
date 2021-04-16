@@ -1,4 +1,4 @@
-import regios from '~/data/index';
+import { vr } from '~/data/vr';
 import municipalities from '~/data/municipal-search-data';
 
 /**
@@ -14,9 +14,7 @@ export function getSafetyRegionForMunicipalityCode(
 
   if (!municipality) return undefined;
 
-  const regio = regios.find(
-    (regio) => regio.code === municipality.safetyRegion
-  );
+  const regio = vr.find((x) => x.code === municipality.safetyRegion);
 
   return regio;
 }
