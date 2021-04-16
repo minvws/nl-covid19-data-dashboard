@@ -10,13 +10,15 @@ import { AxisBottom, AxisLeft, AxisTop } from '@visx/axis';
 import { GridColumns, GridRows } from '@visx/grid';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { differenceInDays } from 'date-fns';
-import { memo, Ref, useCallback } from 'react';
+import { memo, Ref, useCallback, useMemo } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
-import { getWeekInfo } from '~/components-styled/stacked-chart/logic';
+import { getWeekInfo } from '~/components/stacked-chart/logic';
+import { RectClipPath } from '@visx/clip-path';
+import { useUniqueId } from '~/utils/use-unique-id';
 
 type AxesProps = {
   bounds: Bounds;
@@ -125,24 +127,71 @@ export const Axes = memo(function Axes({
     return `Week ${weekInfo.weekNumber}`;
   }, []);
 
-  const weekGridLines = [];
-  const weekNumbers = [];
-  let weekWidth = 0;
+  const {
+    weekGridLines,
+    weekWidth,
+    weekNumbersLabels,
+    weekDateLabels,
+  } = useMemo(() => {
+    /* Config */
+    const numberOfWeeks = 6;
+    const weekNumbersLabelPadding = 3; // show week numbers when they are at least X days inside startUnix/endUnix
+    const dateLabelPadding = 6; // show dates when they are at least X days inside startUnix/endUnix
 
-  if (showWeekGridLines) {
-    const weekInSeconds = 7 * 24 * 60 * 60;
-    const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
-    const firstMonday = getWeekInfo(new Date(startUnix * 1000));
-    const firstMondayUnix = firstMonday.weekStartDate.getTime() / 1000;
-    for (let i = 0; i <= weeks; ++i) {
-      weekGridLines.push(firstMondayUnix + i * weekInSeconds);
-      if (i > 0) {
-        weekNumbers.push(firstMondayUnix + i * weekInSeconds);
+    const weekGridLines = [];
+    const weekNumbersLabels = [];
+    const weekDateLabels = [];
+
+    let weekWidth = 0;
+
+    if (showWeekGridLines) {
+      const dayInSeconds = 24 * 60 * 60;
+      const weekInSeconds = 7 * dayInSeconds;
+
+      const dateLabelPaddingStartUnix =
+        startUnix + dateLabelPadding * dayInSeconds;
+      const dateLabelPaddingEndUnix = endUnix - dateLabelPadding * dayInSeconds;
+
+      const weekNumbersLabelPaddingStartUnix =
+        startUnix - weekNumbersLabelPadding * dayInSeconds;
+      const weekNumbersLabelPaddingEndUnix = endUnix + 0 * dayInSeconds;
+
+      const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
+      const firstMonday = getWeekInfo(new Date(startUnix * 1000));
+      const firstMondayUnix = firstMonday.weekStartDate.getTime() / 1000;
+      const alternateBy =
+        weeks > numberOfWeeks ? Math.ceil(weeks / numberOfWeeks) : 1;
+
+      const alternateWeekOffset =
+        alternateBy % 2 === 0 && firstMonday.weekNumber % 2 === 1 ? 1 : 0;
+
+      for (let i = 0; i <= weeks + 1; ++i) {
+        const weekStartUnix = firstMondayUnix + i * weekInSeconds;
+
+        weekGridLines.push(weekStartUnix);
+
+        if ((i + alternateWeekOffset) % alternateBy === 0) {
+          if (
+            weekStartUnix >= dateLabelPaddingStartUnix &&
+            weekStartUnix < dateLabelPaddingEndUnix
+          ) {
+            weekDateLabels.push(weekStartUnix);
+          }
+
+          if (
+            weekStartUnix >= weekNumbersLabelPaddingStartUnix &&
+            weekStartUnix < weekNumbersLabelPaddingEndUnix
+          ) {
+            weekNumbersLabels.push(weekStartUnix);
+          }
+        }
       }
+
+      weekWidth = xScale(weekGridLines[2]) - xScale(weekGridLines[1]);
     }
 
-    weekWidth = xScale(weekGridLines[2]) - xScale(weekGridLines[1]);
-  }
+    return { weekGridLines, weekWidth, weekNumbersLabels, weekDateLabels };
+  }, [startUnix, endUnix, xScale, showWeekGridLines]);
 
   /**
    * Long labels (like the ones including a year, are too long to be positioned
@@ -151,6 +200,8 @@ export const Axes = memo(function Axes({
    */
   const isLongStartLabel = formatXAxis(startUnix).length > 6;
   const isLongEndLabel = formatXAxis(endUnix).length > 6;
+
+  const id = useUniqueId();
 
   return (
     <g css={css({ pointerEvents: 'none' })}>
@@ -178,43 +229,56 @@ export const Axes = memo(function Axes({
 
       {showWeekGridLines && (
         <>
-          <GridColumns
-            height={bounds.height}
-            scale={xScale}
-            numTicks={weekGridLines.length}
-            tickValues={weekGridLines}
-            stroke={'#DDD'}
+          <RectClipPath
+            id={id}
             width={bounds.width}
-            strokeDasharray="4 2"
+            height={bounds.height + 200}
+            x={0}
+            y={-100}
           />
-
-          <AxisBottom
-            scale={xScale}
-            tickValues={weekGridLines}
-            tickFormat={formatXAxis as AnyTickFormatter}
-            top={bounds.height}
-            stroke={colors.silver}
-            tickLabelProps={() => ({
-              fill: colors.data.axisLabels,
-              fontSize: 12,
-              textAnchor: 'middle',
+          <g
+            css={css({
+              clipPath: `url(#${id})`,
             })}
-            hideTicks
-          />
+          >
+            <GridColumns
+              height={bounds.height}
+              scale={xScale}
+              numTicks={weekGridLines.length}
+              tickValues={weekGridLines}
+              stroke={'#DDD'}
+              width={bounds.width}
+              strokeDasharray="4 2"
+            />
 
-          <AxisTop
-            scale={xScale}
-            tickValues={weekNumbers}
-            tickFormat={formatWeekNumberAxis as AnyTickFormatter}
-            stroke={colors.silver}
-            hideTicks
-            tickLabelProps={() => ({
-              fill: colors.data.axisLabels,
-              fontSize: 12,
-              textAnchor: 'middle',
-              transform: `translate(${weekWidth / 2} 0)`,
-            })}
-          />
+            <AxisBottom
+              scale={xScale}
+              tickValues={weekDateLabels}
+              tickFormat={formatXAxis as AnyTickFormatter}
+              top={bounds.height}
+              stroke={colors.silver}
+              tickLabelProps={() => ({
+                fill: colors.data.axisLabels,
+                fontSize: 12,
+                textAnchor: 'middle',
+              })}
+              hideTicks
+            />
+
+            <AxisTop
+              scale={xScale}
+              tickValues={weekNumbersLabels}
+              tickFormat={formatWeekNumberAxis as AnyTickFormatter}
+              stroke={colors.silver}
+              hideTicks
+              tickLabelProps={() => ({
+                fill: colors.data.axisLabels,
+                fontSize: 12,
+                textAnchor: 'middle',
+                transform: `translate(${weekWidth / 2} 0)`,
+              })}
+            />
+          </g>
         </>
       )}
 
