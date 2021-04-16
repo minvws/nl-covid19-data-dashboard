@@ -45,8 +45,8 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -79,11 +79,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
   const currentLevel = escalation_level.level as EscalationLevel;
 
-  const thresholds = selectedNlData.escalation_thresholds;
   const {
     hospitalAdmissionsEscalationThresholds,
     positiveTestedEscalationThresholds,
-  } = useEscalationThresholds(thresholds);
+  } = useEscalationThresholds(selectedNlData.escalation_thresholds);
 
   const positiveTestedColor = useEscalationColor(
     getCategoryLevel(

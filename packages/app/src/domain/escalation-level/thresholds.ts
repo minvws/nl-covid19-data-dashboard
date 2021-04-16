@@ -25,6 +25,9 @@ export function useEscalationThresholds(thresholds: NlEscalationThresholds) {
         })
       ),
     };
+    // These last thresholds are only added for visual reasons, they are not provided by the
+    // backend since they are not involved in any calculations. They are purely here to determine
+    // the size of the last bar in the categorical chart
     escalationThresholds.positiveTestedEscalationThresholds.push({
       threshold: 300,
     });
