@@ -1,7 +1,20 @@
-import React from 'react';
-
 export default {
   widgets: [
+    {
+      type: '__experimental_group',
+      widgets: [
+        {
+          name: 'document-list',
+          options: {
+            title: 'Niet-vertaalde Lokalize-keys',
+            limit: 100,
+            query: `
+              *[_type == "lokalizeText" && (!defined(text.en) || text.en == "")] | order(_updatedAt asc)
+              `,
+          },
+        },
+      ],
+    },
     {
       name: 'document-list',
       options: {
@@ -26,47 +39,6 @@ export default {
         types: ['editorial'],
         createButtonText: 'Nieuw weekbericht',
       },
-    },
-    {
-      type: '__experimental_group',
-      widgets: [
-        {
-          name: 'document-list',
-          options: {
-            title: (
-              <span>
-                Lokalize zonder Engelse vertaling
-                <br />
-                <em style={{ fontSize: '0.8em' }}>gepubliceerd</em>
-              </span>
-            ),
-            query: `
-              *[
-                (_type == "lokalizeText" && (!defined(text.en) || text.en == "")) &&
-                !(_id in path("drafts.**"))
-              ]
-              `,
-          },
-        },
-        {
-          name: 'document-list',
-          options: {
-            title: (
-              <span>
-                Lokalize zonder Engelse vertaling
-                <br />
-                <em style={{ fontSize: '0.8em' }}>niet-gepubliceerd</em>
-              </span>
-            ),
-            query: `
-              *[
-                (_type == "lokalizeText" && (!defined(text.en) || text.en == "")) &&
-                (_id in path("drafts.**"))
-              ]
-              `,
-          },
-        },
-      ],
     },
   ],
 };
