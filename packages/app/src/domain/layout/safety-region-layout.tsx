@@ -12,8 +12,8 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
   Menu,
-  MetricMenuItemLink,
   MetricMenuButtonLink,
+  MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
@@ -24,12 +24,30 @@ import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
+export const safetyRegionMetricNames = [
+  'escalation_level',
+  'tested_overall',
+  'deceased_rivm',
+  'hospital_nice',
+  'nursing_home',
+  'disability_care',
+  'elderly_at_home',
+  'sewer',
+  'behavior',
+  'difference',
+] as const;
+
+export type SafetyRegionLayoutData = Pick<
+  Regionaal,
+  typeof safetyRegionMetricNames[number]
+>;
+
 type SafetyRegionLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
-      data: Regionaal;
+      data: SafetyRegionLayoutData;
       safetyRegionName: string;
     }
   | {

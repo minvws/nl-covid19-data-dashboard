@@ -27,7 +27,10 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import {
+  SafetyRegionLayout,
+  safetyRegionMetricNames,
+} from '~/domain/layout/safety-region-layout';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -38,8 +41,8 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
   selectNlData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
@@ -51,7 +54,12 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrData(
+    ...safetyRegionMetricNames,
+    'escalation_level',
+    'hospital_nice_sum',
+    'tested_overall_sum'
+  ),
   selectNlData('escalation_thresholds'),
   createGetContent<{
     articles?: ArticleSummary[];
@@ -66,7 +74,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     safetyRegionName,
     content,
     selectedNlData,
-    data,
+    selectedVrData: data,
     lastGenerated,
   } = props;
 
