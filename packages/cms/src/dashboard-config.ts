@@ -1,5 +1,6 @@
 export default {
   widgets: [
+    { name: 'deploy' },
     {
       name: 'document-list',
       options: {
