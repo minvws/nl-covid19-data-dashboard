@@ -1,10 +1,10 @@
 import { StructureBuilder as S } from '@sanity/structure';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
-import { FaLanguage } from 'react-icons/fa';
 import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
+import { lokalizeListItem } from './lokalize/structure-list-item';
 
 /**
  * This is a list of doc types we handle in the custom menu structure. All
@@ -40,14 +40,7 @@ export default () =>
   S.list()
     .title('Content')
     .items([
-      S.listItem()
-        .title('Lokalize')
-        .icon(FaLanguage)
-        .child(
-          S.documentTypeList('lokalizeSubject')
-            .title('Keys')
-            .child(S.editor().views([S.view.form()]))
-        ),
+      lokalizeListItem(),
       S.listItem()
         .title('Lockdown en Routekaart')
         .icon(BsTable)
