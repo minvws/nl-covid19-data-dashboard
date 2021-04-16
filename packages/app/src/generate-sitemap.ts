@@ -2,10 +2,10 @@
 import fs from 'fs';
 import globby from 'globby';
 import prettier from 'prettier';
-import { gmCodes } from './src/data/gm-codes';
+import { gmCodes } from './data/gm-codes';
 import sanityClient from '@sanity/client';
 
-import { features } from './src/config/features';
+import { features } from './config/features';
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
