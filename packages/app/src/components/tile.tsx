@@ -4,35 +4,32 @@ import { asResponsiveArray } from '~/style/utils';
 
 interface TileProps {
   children: React.ReactNode;
-  hasBlueBackground?: boolean;
-  hasContentHeight?: boolean;
+  height?: number | string;
 }
 
-export function Tile({
-  children,
-  hasBlueBackground,
-  hasContentHeight,
-}: TileProps) {
+export function Tile({ children, height }: TileProps) {
+  return <StyledTile height={height}>{children}</StyledTile>;
+}
+
+export function BlueTile({ children, height }: TileProps) {
   return (
-    <StyledTile
-      hasBlueBackground={hasBlueBackground}
-      hasContentHeight={hasContentHeight}
-    >
+    <StyledTile backgroundColor="lightBlue" height={height}>
       {children}
     </StyledTile>
   );
 }
+
 const StyledTile = styled.article<{
-  hasBlueBackground?: boolean;
-  hasContentHeight?: boolean;
+  height?: number | string;
+  backgroundColor?: string;
 }>((x) =>
   css({
     display: 'flex',
     flexDirection: 'column',
-    bg: x.hasBlueBackground ? 'lightBlue' : 'white',
+    bg: x.backgroundColor ? x.backgroundColor : 'white',
     p: asResponsiveArray({ _: 3, sm: 4 }),
     borderRadius: 1,
     boxShadow: 'tile',
-    height: x.hasContentHeight ? '100%' : undefined,
+    height: x.height ? x.height : undefined,
   })
 );

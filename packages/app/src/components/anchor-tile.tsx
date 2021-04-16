@@ -53,7 +53,6 @@ export function AnchorTile({
 
 const Container = styled.article<{ shadow: boolean }>((x) =>
   css({
-    // spacing: 2,
     display: 'flex',
     bg: 'white',
     p: asResponsiveArray({ _: 3, sm: 4 }),
@@ -97,9 +96,9 @@ const LinkContainer = styled.div(
     }),
     borderLeft: asResponsiveArray({ lg: '1px solid' }),
     borderLeftColor: asResponsiveArray({ lg: colors.silver }),
-    pt: asResponsiveArray({ _: 3, lg: undefined }),
+    pt: asResponsiveArray({ _: 3, lg: 0 }),
     pl: asResponsiveArray({ lg: 4 }),
     ml: asResponsiveArray({ lg: 4 }),
-    mt: asResponsiveArray({ _: 3, md: undefined }),
+    mt: asResponsiveArray({ _: 3, md: 0 }),
   })
 );
