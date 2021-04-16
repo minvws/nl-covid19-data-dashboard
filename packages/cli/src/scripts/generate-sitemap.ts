@@ -1,43 +1,39 @@
-/* eslint no-console: 0 */
 import fs from 'fs';
 import globby from 'globby';
 import prettier from 'prettier';
-import { gmCodes } from './data/gm-codes';
+import { gmCodes, vr } from '../data';
 import sanityClient from '@sanity/client';
 
-import { features } from './config/features';
+import { features } from '../../../app/src/config/features';
+import { assert } from '@corona-dashboard/common';
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
   .map((x) => x.route);
 
-// regioData being generated as we can't import an ES export into CommonJS
-const regioData = [...Array(25).keys()].map(
-  (n) => `VR${(n + 1).toString().padStart(2, '0')}`
-);
+const vrCodes = vr.map((x) => x.code);
 
-/**
- * Generates an xml sitemap depending on the given locale.
- *
- * @param locale
- */
-export async function generateSitemap(
-  locale: any,
-  dataset = 'production',
-  projectId = '',
-  useCdn = true
-) {
+export async function generateSitemap() {
+  assert(
+    process.env.NEXT_PUBLIC_SANITY_DATASET,
+    'Missing NEXT_PUBLIC_SANITY_DATASET env var'
+  );
+  assert(
+    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
+  );
+
   const config = {
-    dataset,
-    projectId,
-    useCdn,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    useCdn: true,
   };
 
-  console.log(config);
+  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
   const client = sanityClient(config);
 
-  console.log(`Generating sitemap '${locale || 'nl'}'`);
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
+  console.log(`Generating sitemap for locale '${locale}'`);
 
   const slugsQuery = `{
     'articles': *[_type == 'article'] {"slug":slug.current},
@@ -63,8 +59,8 @@ export async function generateSitemap(
   ]);
 
   const pathsFromPages = pages
-    .map((page) =>
-      page
+    .map((x) =>
+      x
         .replace('./src/pages', '')
         .replace('.tsx', '')
         .replace('/index.tsx', '')
@@ -85,7 +81,7 @@ export async function generateSitemap(
 
     return {
       path: path,
-      priority: priority !== undefined ? priority.value : 0.6,
+      priority: priority?.value ?? 0.6,
     };
   });
 
@@ -120,8 +116,8 @@ export async function generateSitemap(
   });
 
   regioPaths.forEach((p) => {
-    regioData.forEach((regioCode) => {
-      const pathWithCode = p.path.replace('[code]', regioCode);
+    vrCodes.forEach((code) => {
+      const pathWithCode = p.path.replace('[code]', code);
       allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
     });
   });
@@ -143,24 +139,22 @@ export async function generateSitemap(
         <priority>1.00</priority>
       </url>
       ${allPathsWithPriorities
-        .map((p) => {
-          return `
+        .map(
+          (p) => `
                 <url>
                     <loc>${`https://coronadashboard.${domain}.nl${p.path}`}</loc>
                     <priority>${p.priority}</priority>
                 </url>
-            `;
-        })
+            `
+        )
         .join('')}
     </urlset>
   `;
 
-  const formatted = prettier.format(sitemap, {
-    ...prettierConfig,
-    parser: 'html',
-  });
-
-  fs.writeFileSync('public/sitemap.xml', formatted);
+  fs.writeFileSync(
+    'public/sitemap.xml',
+    prettier.format(sitemap, { parser: 'html' })
+  );
 }
 
 function isParameterizedPath(path: string) {

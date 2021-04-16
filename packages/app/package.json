@@ -129,7 +129,7 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
     "type-check": "yarn compile",
-    "compile": "tsc --pretty --noEmit",
+    "compile": "tsc --pretty",
     "download": "node ./infra/download.js",
     "clean": "rimraf .next"
   },
