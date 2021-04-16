@@ -1,12 +1,12 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import { AnchorTile } from '~/components-styled/anchor-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiSection } from '~/components-styled/kpi-section';
+import { AnchorTile } from '~/components/anchor-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiSection } from '~/components/kpi-section';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
-import { TileList } from '~/components-styled/tile-list';
-import { Heading } from '~/components-styled/typography';
-import { Box } from '~/components-styled/base/box';
+import { TileList } from '~/components/tile-list';
+import { Heading } from '~/components/typography';
+import { Box } from '~/components/base/box';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
@@ -21,8 +21,8 @@ import {
   createGetContent,
   getVrData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { RichContent } from '~/components-styled/cms/rich-content';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { RichContent } from '~/components/cms/rich-content';
 
 export { getStaticPaths } from '~/static-paths/vr';
 

@@ -1,5 +1,5 @@
-import { AnchorTile } from '~/components-styled/anchor-tile';
-import { Text } from '~/components-styled/typography';
+import { AnchorTile } from '~/components/anchor-tile';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 export function MoreInformation() {

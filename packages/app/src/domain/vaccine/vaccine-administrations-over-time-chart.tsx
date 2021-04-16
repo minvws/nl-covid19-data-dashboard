@@ -1,7 +1,7 @@
 import { NlVaccineAdministeredTotalValue } from '@corona-dashboard/common';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export function VaccineAdministrationsOverTimeChart({
   title,

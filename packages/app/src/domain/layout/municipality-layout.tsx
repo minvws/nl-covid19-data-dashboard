@@ -5,18 +5,18 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { Category } from '~/components-styled/aside/category';
+import { Category } from '~/components/aside/category';
 import {
   CategoryMenu,
   Menu,
   MetricMenuItemLink,
-} from '~/components-styled/aside/menu';
-import { Box } from '~/components-styled/base';
-import { AppContent } from '~/components-styled/layout/app-content';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Text } from '~/components-styled/typography';
+} from '~/components/aside/menu';
+import { Box } from '~/components/base';
+import { AppContent } from '~/components/layout/app-content';
+import { SidebarMetric } from '~/components/sidebar-metric';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 

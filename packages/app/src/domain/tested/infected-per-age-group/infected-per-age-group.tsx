@@ -2,16 +2,16 @@ import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import {
   InteractiveLegend,
   SelectOption,
-} from '~/components-styled/interactive-legend';
-import { Legend, LegendItem } from '~/components-styled/legend';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TooltipSeriesList } from '~/components-styled/time-series-chart/components/tooltip/tooltip-series-list';
-import { LineSeriesDefinition } from '~/components-styled/time-series-chart/logic';
+} from '~/components/interactive-legend';
+import { Legend, LegendItem } from '~/components/legend';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
+import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useList } from '~/utils/use-list';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
