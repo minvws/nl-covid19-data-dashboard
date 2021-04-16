@@ -135,8 +135,6 @@ export const Axes = memo(function Axes({
   } = useMemo(() => {
     /* Config */
     const numberOfWeeks = 6;
-    const weekNumbersLabelPadding = 3; // show week numbers when they are at least X days inside startUnix/endUnix
-    const dateLabelPadding = 6; // show dates when they are at least X days inside startUnix/endUnix
 
     const weekGridLines = [];
     const weekNumbersLabels = [];
@@ -148,19 +146,21 @@ export const Axes = memo(function Axes({
       const dayInSeconds = 24 * 60 * 60;
       const weekInSeconds = 7 * dayInSeconds;
 
-      const dateLabelPaddingStartUnix =
-        startUnix + dateLabelPadding * dayInSeconds;
-      const dateLabelPaddingEndUnix = endUnix - dateLabelPadding * dayInSeconds;
-
-      const weekNumbersLabelPaddingStartUnix =
-        startUnix - weekNumbersLabelPadding * dayInSeconds;
-      const weekNumbersLabelPaddingEndUnix = endUnix + 0 * dayInSeconds;
-
       const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
       const firstMonday = getWeekInfo(new Date(startUnix * 1000));
       const firstMondayUnix = firstMonday.weekStartDate.getTime() / 1000;
       const alternateBy =
         weeks > numberOfWeeks ? Math.ceil(weeks / numberOfWeeks) : 1;
+
+      const dateLabelPadding = 2 * alternateBy;
+
+      const dateLabelPaddingStartUnix =
+        startUnix + dateLabelPadding * dayInSeconds;
+      const dateLabelPaddingEndUnix = endUnix - dateLabelPadding * dayInSeconds;
+
+      const weekNumbersLabelPaddingStartUnix = startUnix - 3 * dayInSeconds;
+      const weekNumbersLabelPaddingEndUnix =
+        endUnix - (5 + alternateBy) * dayInSeconds;
 
       const alternateWeekOffset =
         alternateBy % 2 === 0 && firstMonday.weekNumber % 2 === 1 ? 1 : 0;

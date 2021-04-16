@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash';
+import { useMemo } from 'react';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -78,33 +79,38 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  const dummyData = [
-    cloneDeep(data.vaccine_stock.values).splice(-14),
-    cloneDeep(data.vaccine_stock.values).splice(-28),
-    cloneDeep(data.vaccine_stock.values).splice(-29),
-    cloneDeep(data.vaccine_stock.values).splice(-30),
-    cloneDeep(data.vaccine_stock.values).splice(-31),
-    cloneDeep(data.vaccine_stock.values).splice(-32, 31),
-    cloneDeep(data.vaccine_stock.values).splice(-32, 30),
-    cloneDeep(data.vaccine_stock.values).splice(-32, 29),
-    cloneDeep(data.vaccine_stock.values).splice(-32, 28),
-    cloneDeep(data.vaccine_stock.values).splice(-32, 27),
-    cloneDeep(data.vaccine_stock.values).splice(-32, 26),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 70),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 71),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 72),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 73),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 74),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 75),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 76),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 77),
-    cloneDeep(data.vaccine_stock.values).splice(-80, 78),
-    cloneDeep(data.vaccine_stock.values).splice(-81, 78),
-    cloneDeep(data.vaccine_stock.values).splice(-82, 78),
-    cloneDeep(data.vaccine_stock.values).splice(-83, 78),
-    cloneDeep(data.vaccine_stock.values).splice(-84, 78),
-    cloneDeep(data.vaccine_stock.values),
-  ];
+  console.log(data.vaccine_stock.values);
+
+  const dummyData = useMemo(
+    () => [
+      cloneDeep(data.vaccine_stock.values).splice(-14),
+      cloneDeep(data.vaccine_stock.values).splice(-28),
+      cloneDeep(data.vaccine_stock.values).splice(-29),
+      cloneDeep(data.vaccine_stock.values).splice(-30),
+      cloneDeep(data.vaccine_stock.values).splice(-31),
+      cloneDeep(data.vaccine_stock.values).splice(-32, 31),
+      cloneDeep(data.vaccine_stock.values).splice(-32, 30),
+      cloneDeep(data.vaccine_stock.values).splice(-32, 29),
+      cloneDeep(data.vaccine_stock.values).splice(-32, 28),
+      cloneDeep(data.vaccine_stock.values).splice(-32, 27),
+      cloneDeep(data.vaccine_stock.values).splice(-32, 26),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 70),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 71),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 72),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 73),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 74),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 75),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 76),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 77),
+      cloneDeep(data.vaccine_stock.values).splice(-80, 78),
+      cloneDeep(data.vaccine_stock.values).splice(-81, 78),
+      cloneDeep(data.vaccine_stock.values).splice(-82, 78),
+      cloneDeep(data.vaccine_stock.values).splice(-83, 78),
+      cloneDeep(data.vaccine_stock.values).splice(-84, 78),
+      cloneDeep(data.vaccine_stock.values),
+    ],
+    [data.vaccine_stock.values]
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -241,7 +247,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
           {dummyData.map((d, i) => {
-            return <VaccineStockPerSupplierChart key={i} values={d} />;
+            return d.length ? (
+              <VaccineStockPerSupplierChart key={i} values={d} />
+            ) : null;
           })}
 
           {(text.expected_page_additions.description ||
