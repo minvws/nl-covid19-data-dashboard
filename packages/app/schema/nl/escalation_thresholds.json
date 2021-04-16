@@ -37,7 +37,11 @@
       "type": "integer"
     }
   },
-  "required": ["tested_overall_sum", "hospital_nice_sum"],
+  "required": [
+    "tested_overall_sum",
+    "hospital_nice_sum",
+    "date_of_insertion_unix"
+  ],
   "additionalProperties": false,
   "definitions": {
     "value": {
