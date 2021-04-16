@@ -3,7 +3,7 @@ start=`date +%s`
 set -e # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
 # Zip JSON files so the data is included in the build.
-cd packages/app/public/ && zip -qq latest-data.zip json/* && mv latest-data.zip json/ &&cd ../../../
+cd packages/app/public/ && zip -qq latest-data.zip json/* && mv latest-data.zip json/ && cd -
 
 # Prepare the export folders
 rm -rf ./exports
@@ -21,6 +21,7 @@ yarn workspace @corona-dashboard/cli validate-features
 
 # Prepare types and assets
 yarn workspace @corona-dashboard/cli generate-typescript
+yarn workspace @corona-dashboard/cli generate-sitemap
 yarn workspace @corona-dashboard/cms sync-assets
 
 # Build the Dutch application and move to export folder
