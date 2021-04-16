@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import globby from 'globby';
 import prettier from 'prettier';
 import { gmCodes, vr } from '../data';
@@ -6,6 +7,7 @@ import sanityClient from '@sanity/client';
 
 import { features } from '../../../app/src/config/features';
 import { assert } from '@corona-dashboard/common';
+import { logError } from '../utils';
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
@@ -13,20 +15,25 @@ const disabledRoutes = features
 
 const vrCodes = vr.map((x) => x.code);
 
-export async function generateSitemap() {
-  assert(
-    process.env.NEXT_PUBLIC_SANITY_DATASET,
-    'Missing NEXT_PUBLIC_SANITY_DATASET env var'
-  );
+const publicOutputDirectory = path.resolve(
+  __dirname,
+  '..', // src
+  '..', // cli
+  '..', // packages
+  'app/public'
+);
+
+async function main() {
   assert(
     process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
   );
 
   const config = {
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    useCdn: true,
+    useCdn: process.env.NODE_ENV === 'production',
+    apiVersion: '2021-03-25',
   };
 
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
@@ -151,8 +158,10 @@ export async function generateSitemap() {
     </urlset>
   `;
 
+  console.log('Writing sitemap to ', publicOutputDirectory, sitemap);
+
   fs.writeFileSync(
-    'public/sitemap.xml',
+    path.join(publicOutputDirectory, 'sitemap.xml'),
     prettier.format(sitemap, { parser: 'html' })
   );
 }
@@ -160,3 +169,11 @@ export async function generateSitemap() {
 function isParameterizedPath(path: string) {
   return ['code', 'slug'].some((fragment) => path.includes(fragment));
 }
+
+main().then(
+  () => process.exit(0),
+  (err: Error) => {
+    logError(err.message);
+    process.exit(1);
+  }
+);
