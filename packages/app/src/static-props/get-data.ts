@@ -8,7 +8,7 @@ import {
 } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
 import safetyRegions from '~/data/index';
-import municipalities from '~/data/municipalSearchData';
+import municipalities from '~/data/municipal-search-data';
 import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 

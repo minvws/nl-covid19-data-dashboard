@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { AppFooter } from '~/components-styled/layout/app-footer';
-import { AppHeader } from '~/components-styled/layout/app-header';
-import { SEOHead } from '~/components-styled/seo-head';
-import { SkipLinkMenu } from '~/components-styled/skip-link-menu';
+import { AppFooter } from '~/components/layout/app-footer';
+import { AppHeader } from '~/components/layout/app-header';
+import { SEOHead } from '~/components/seo-head';
+import { SkipLinkMenu } from '~/components/skip-link-menu';
 import { useIntl } from '~/intl';
 import { CurrentDateProvider } from '~/utils/current-date-context';
 

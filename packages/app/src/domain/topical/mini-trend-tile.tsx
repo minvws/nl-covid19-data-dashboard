@@ -1,14 +1,14 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { Box } from '~/components-styled/base';
-import { NumberProperty } from '~/components-styled/line-chart/logic';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { Heading, Text } from '~/components-styled/typography';
+import { ArrowIconRight } from '~/components/arrow-icon';
+import { Box } from '~/components/base';
+import { NumberProperty } from '~/components/line-chart/logic';
+import { LinkWithIcon } from '~/components/link-with-icon';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 type MiniTrendTileProps<T extends TimestampedValue> = {
   icon: JSX.Element;

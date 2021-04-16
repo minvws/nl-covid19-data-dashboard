@@ -1,9 +1,9 @@
-import { Box } from '~/components-styled/base';
+import { Box } from '~/components/base';
 import {
   HighlightTeaser,
   HighlightTeaserProps,
-} from '~/components-styled/highlight-teaser';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+} from '~/components/highlight-teaser';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ArticleBox } from './article-list';
 import { Block, ImageBlock } from '~/types/cms';
 

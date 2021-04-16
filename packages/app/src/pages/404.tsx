@@ -1,4 +1,4 @@
-import { MaxWidth } from '~/components-styled/max-width';
+import { MaxWidth } from '~/components/max-width';
 import styles from './over.module.scss';
 import {
   createGetStaticProps,

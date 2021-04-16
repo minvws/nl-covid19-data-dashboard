@@ -1,14 +1,14 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Repro from '~/assets/reproductiegetal.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiWithIllustrationTile } from '~/components-styled/kpi-with-illustration-tile';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { ContentHeader } from '~/components/content-header';
+import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
-import { PageBarScale } from '~/components-styled/page-barscale';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { PageBarScale } from '~/components/page-barscale';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {

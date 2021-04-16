@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { Box } from '~/components-styled/base';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { InlineText } from '~/components-styled/typography';
+import { ArrowIconRight } from '~/components/arrow-icon';
+import { Box } from '~/components/base';
+import { LinkWithIcon } from '~/components/link-with-icon';
+import { InlineText } from '~/components/typography';
 
 export type LinkGroupProps = {
   header?: string;
