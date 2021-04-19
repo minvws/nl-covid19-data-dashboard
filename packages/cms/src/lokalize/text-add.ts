@@ -14,118 +14,70 @@ import { LokalizeText } from './types';
       throw new Error(`Failed to fetch texts: ${err.message}`);
     })) as LokalizeText[];
 
-  const subjects = Object.keys(
+  const allSubjects = Object.keys(
     allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
   );
 
-  const newSubjectResponse = await prompts([
+  const subjectChoices = Object.keys(
+    allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
+  ).map((x) => ({ title: x, value: x }));
+
+  const response = await prompts([
     {
       type: 'confirm',
-      name: 'confirmed',
+      name: 'newSubject',
       message: 'Are you creating a new subject?',
+    },
+    {
+      type: (_, values) => (values.newSubject ? 'text' : null),
+      name: 'subject',
+      message: `What is the subject?`,
+      format: (x: string) => x.toLowerCase(),
+      validate: (x: string) => !allSubjects.includes(x),
+    },
+    {
+      type: (_, values) => (values.newSubject ? null : 'select'),
+      name: 'subject',
+      message: `What is the subject?`,
+      choices: subjectChoices,
     },
   ]);
 
-  if (newSubjectResponse.confirmed) {
-    const response = await prompts([
-      {
-        type: 'text',
-        name: 'subject',
-        message: `What is the subject?`,
-        format: (x: string) => x.toLowerCase(),
-      },
-    ]);
+  const { subject } = response;
 
-    const { subject } = response;
-    let continueCreating = true;
+  let continueCreating = true;
 
-    while (continueCreating) {
-      const textDocument = await createTextDocumentForSubject(
-        subject,
-        allTexts
-      );
+  while (continueCreating) {
+    const textDocument = await createTextDocumentForSubject(subject, allTexts);
 
-      const response = await prompts(
-        [
-          {
-            type: 'confirm',
-            name: 'confirmed',
-            message: `Does this look correct? \n\n
-            ${JSON.stringify(textDocument, null, 2)}`,
-          },
-          {
-            type: 'confirm',
-            name: 'continue',
-            message: 'Create another text in this subject?',
-          },
-        ],
+    console.table(textDocument);
+
+    const response = await prompts(
+      [
         {
-          onCancel: () => {
-            continueCreating = false;
-          },
-        }
-      );
-
-      if (response.confirmed) {
-        console.log('@TODO create text', textDocument);
+          type: 'confirm',
+          name: 'confirmed',
+          message: 'Does this look allright?',
+        },
+        {
+          type: 'confirm',
+          name: 'continue',
+          message: 'Create another text in the same subject?',
+        },
+      ],
+      {
+        onCancel: () => {
+          continueCreating = false;
+        },
       }
+    );
 
-      if (!response.continue) {
-        continueCreating = false;
-      }
+    if (response.confirmed) {
+      console.log('@TODO create text', textDocument);
     }
-  } else {
-    const choices = Object.keys(
-      allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
-    ).map((x) => ({ title: x, value: x }));
 
-    const response = await prompts([
-      {
-        type: 'select',
-        name: 'subject',
-        message: `What is the subject?`,
-        choices,
-      },
-    ]);
-
-    const { subject } = response;
-
-    let continueCreating = true;
-
-    while (continueCreating) {
-      const textDocument = await createTextDocumentForSubject(
-        subject,
-        allTexts
-      );
-
-      const response = await prompts(
-        [
-          {
-            type: 'confirm',
-            name: 'confirmed',
-            message: `Does this look correct? \n\n
-            ${JSON.stringify(textDocument, null, 2)}`,
-          },
-          {
-            type: 'confirm',
-            name: 'continue',
-            message: 'Create another text in this subject?',
-          },
-        ],
-        {
-          onCancel: () => {
-            continueCreating = false;
-          },
-        }
-      );
-
-      if (response.confirmed) {
-        console.log('@TODO create text', textDocument);
-      }
-
-      if (!response.continue) {
-        continueCreating = false;
-      }
+    if (!response.continue) {
+      continueCreating = false;
     }
   }
 })().catch((err) => {
@@ -141,7 +93,7 @@ async function createTextDocumentForSubject(
     {
       type: 'text',
       name: 'path',
-      message: `What is the path in dot notation?`,
+      message: 'What is the path in dot notation?',
       format: (x: string) => x.toLowerCase(),
       /**
        * Do not allow creating a text with a path that already exists
@@ -152,15 +104,18 @@ async function createTextDocumentForSubject(
     {
       type: 'text',
       name: 'nl',
-      message: `What is the Dutch text?`,
+      message: 'What is the Dutch text?',
       format: (x: string) => x.trim(),
       validate: (x: string) => x.length > 1,
     },
     {
       type: 'text',
       name: 'en',
-      message: `What is the English text? (optional)`,
-      format: (x: string) => x.trim(),
+      message: 'What is the English text? (optional)',
+      format: (x: string) => {
+        const value = x.trim();
+        return value.length > 0 ? value : undefined;
+      },
     },
   ]);
 
@@ -168,7 +123,7 @@ async function createTextDocumentForSubject(
     _type: 'lokalizeText',
     subject,
     path: response.path,
-    lokalize_path: `${`${subject}.${response.path}`.split('.').join('::')}`,
+    lokalize_path: `${subject}.${response.path}`.split('.').join('::'),
     text: {
       _type: 'localeText',
       nl: response.nl,
