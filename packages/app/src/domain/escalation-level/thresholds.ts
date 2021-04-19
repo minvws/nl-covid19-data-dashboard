@@ -6,24 +6,23 @@ import { colors } from '~/style/theme';
 
 export function useEscalationThresholds(thresholds: NlEscalationThresholds) {
   const { siteText } = useIntl();
-  const levels = siteText.escalatie_niveau.types;
+  const levels = siteText.escalatie_niveau.types as Record<
+    string,
+    { titel: string }
+  >;
 
   return useMemo(() => {
     const escalationThresholds = {
       positiveTestedEscalationThresholds: thresholds.tested_overall_sum.infected_per_100k.map<CategoricalBarScaleCategory>(
         (x, index) => ({
-          name: (levels as Record<string, { titel: string }>)[
-            x.escalation_level.toString()
-          ].titel,
+          name: levels[x.escalation_level.toString()].titel,
           threshold: x.threshold,
           color: colors.data.scale.magenta[index],
         })
       ),
       hospitalAdmissionsEscalationThresholds: thresholds.hospital_nice_sum.admissions_per_1m.map<CategoricalBarScaleCategory>(
         (x, index) => ({
-          name: (levels as Record<string, { titel: string }>)[
-            x.escalation_level.toString()
-          ].titel,
+          name: levels[x.escalation_level.toString()].titel,
           threshold: x.threshold,
           color: colors.data.scale.magenta[index],
         })
