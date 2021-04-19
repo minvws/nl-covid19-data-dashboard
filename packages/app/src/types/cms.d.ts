@@ -154,16 +154,3 @@ export type TitleDescriptionBlock = {
   description: RichContentBlock[];
   title: string;
 };
-
-export type DownscalingPage = {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: 'afschalingPage';
-  _updatedAt: string;
-  downscaling: TitleDescriptionBlock;
-  page: TitleDescriptionBlock;
-  measures: TitleDescriptionBlock;
-  downscalingPossible: Block[];
-  downscalingNotPossible: Block[];
-};
