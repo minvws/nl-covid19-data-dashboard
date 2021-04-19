@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { Tile } from '~/components/tile';
+import { BlueTile } from '~/components/tile';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { Heading, Text } from '~/components/typography';
 import { getImageProps } from '~/lib/sanity';
@@ -26,7 +26,7 @@ export function ArticleStrip(props: ArticleStripProps) {
   }
 
   return (
-    <Tile css={css({ bg: 'lightBlue' })}>
+    <BlueTile>
       <Heading level={4} as="h3">
         {siteText.article_strip_title}
       </Heading>
@@ -48,7 +48,7 @@ export function ArticleStrip(props: ArticleStripProps) {
           </Box>
         ))}
       </Box>
-    </Tile>
+    </BlueTile>
   );
 }
 
