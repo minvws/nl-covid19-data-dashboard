@@ -6,7 +6,6 @@ export function useReverseRouter() {
   const openMenuSuffix = !breakpoints.md ? '?menu=1' : '';
 
   return useMemo(() => {
-    // prettier-ignore
     const reverseRouter = {
       actueel: {
         vr: (code: string) => `/actueel/veiligheidsregio/${code}`,
