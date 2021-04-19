@@ -372,7 +372,7 @@ export interface NationalTestedGgdDaily {
 }
 export interface NationalTestedGgdDailyValue {
   infected: number;
-  infected_moving_average: number;
+  infected_moving_average: number | null;
   infected_percentage: number;
   infected_percentage_moving_average: number | null;
   tested_total: number;
@@ -854,7 +854,7 @@ export interface RegionalTestedGgdDaily {
 }
 export interface RegionalTestedGgdDailyValue {
   infected: number;
-  infected_moving_average: number;
+  infected_moving_average: number | null;
   infected_percentage: number;
   infected_percentage_moving_average: number | null;
   tested_total: number;

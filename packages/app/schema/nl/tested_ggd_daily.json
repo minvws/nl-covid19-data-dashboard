@@ -24,7 +24,7 @@
           "type": "integer"
         },
         "infected_moving_average": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "infected_percentage": {
           "type": "number"
