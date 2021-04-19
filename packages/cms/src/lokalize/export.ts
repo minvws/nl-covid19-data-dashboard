@@ -18,7 +18,14 @@ client
     const nl: Record<string, string> = {};
     const en: Record<string, string> = {};
 
-    for (const document of result) {
+    /**
+     * Both drafts as published documents are part of the query-result because
+     * the client is authenticated with a sanity token.
+     */
+    const drafts = result.filter((x) => x._id.startsWith('drafts.'));
+    const published = result.filter((x) => !x._id.startsWith('drafts.'));
+
+    for (const document of published) {
       const key = `${document.subject}.${document.path}`;
       nl[key] = document.text.nl.trim();
       en[key] = document.text.en?.trim();
@@ -32,6 +39,28 @@ client
           document.lokalize_path
         );
         en[key] = nl[key];
+      }
+    }
+
+    /**
+     * non-production builds will display draft translations
+     */
+    if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production') {
+      for (const document of drafts) {
+        const key = `${document.subject}.${document.path}`;
+        nl[key] = document.text.nl.trim();
+        en[key] = document.text.en?.trim();
+
+        if (!en[key]) {
+          /**
+           * Here we could make an automatic fallback to Dutch texts if English is missing.
+           */
+          console.log(
+            'Missing english DRAFT translation for path:',
+            document.lokalize_path
+          );
+          en[key] = nl[key];
+        }
       }
     }
 
