@@ -109,8 +109,8 @@ export function getTimeDomain<T extends TimestampedValue>({
    * Return a sensible default when no values fall within the selected timeframe
    */
   if (isEmpty(values)) {
-    const todayMs = today.getTime() / 1000;
-    return [todayMs, todayMs + ONE_DAY_IN_SECONDS];
+    const todaySeconds = today.getTime() / 1000;
+    return [todaySeconds, todaySeconds + ONE_DAY_IN_SECONDS];
   }
 
   /**
