@@ -1,43 +1,47 @@
-/* eslint no-console: 0 */
+import { assert } from '@corona-dashboard/common';
+import sanityClient from '@sanity/client';
 import fs from 'fs';
 import globby from 'globby';
+import path from 'path';
 import prettier from 'prettier';
-import { gmCodes } from './src/data/gm-codes';
-import sanityClient from '@sanity/client';
-
-import { features } from './src/config/features';
+import { features } from '../../../app/src/config/features';
+import { gmData } from '../../../app/src/data/gm';
+import { vrData } from '../../../app/src/data/vr';
+import { logError } from '../utils';
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
   .map((x) => x.route);
 
-// regioData being generated as we can't import an ES export into CommonJS
-const regioData = [...Array(25).keys()].map(
-  (n) => `VR${(n + 1).toString().padStart(2, '0')}`
+const vrCodes = vrData.map((x) => x.code);
+const gmCodes = gmData.map((x) => x.gemcode);
+
+const publicOutputDirectory = path.resolve(
+  __dirname,
+  '..', // src
+  '..', // cli
+  '..', // packages
+  'app/public'
 );
 
-/**
- * Generates an xml sitemap depending on the given locale.
- *
- * @param locale
- */
-export async function generateSitemap(
-  locale: any,
-  dataset = 'production',
-  projectId = '',
-  useCdn = true
-) {
+async function main() {
+  assert(
+    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
+  );
+
   const config = {
-    dataset,
-    projectId,
-    useCdn,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    useCdn: process.env.NODE_ENV === 'production',
+    apiVersion: '2021-03-25',
   };
 
-  console.log(config);
+  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+
   const client = sanityClient(config);
 
-  console.log(`Generating sitemap '${locale || 'nl'}'`);
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
+  console.log(`Generating sitemap for locale '${locale}'`);
 
   const slugsQuery = `{
     'articles': *[_type == 'article'] {"slug":slug.current},
@@ -63,8 +67,8 @@ export async function generateSitemap(
   ]);
 
   const pathsFromPages = pages
-    .map((page) =>
-      page
+    .map((x) =>
+      x
         .replace('./src/pages', '')
         .replace('.tsx', '')
         .replace('/index.tsx', '')
@@ -85,7 +89,7 @@ export async function generateSitemap(
 
     return {
       path: path,
-      priority: priority !== undefined ? priority.value : 0.6,
+      priority: priority?.value ?? 0.6,
     };
   });
 
@@ -120,8 +124,8 @@ export async function generateSitemap(
   });
 
   regioPaths.forEach((p) => {
-    regioData.forEach((regioCode) => {
-      const pathWithCode = p.path.replace('[code]', regioCode);
+    vrCodes.forEach((code) => {
+      const pathWithCode = p.path.replace('[code]', code);
       allPathsWithPriorities.push({ path: pathWithCode, priority: p.priority });
     });
   });
@@ -143,26 +147,34 @@ export async function generateSitemap(
         <priority>1.00</priority>
       </url>
       ${allPathsWithPriorities
-        .map((p) => {
-          return `
+        .map(
+          (p) => `
                 <url>
                     <loc>${`https://coronadashboard.${domain}.nl${p.path}`}</loc>
                     <priority>${p.priority}</priority>
                 </url>
-            `;
-        })
+            `
+        )
         .join('')}
     </urlset>
   `;
 
-  const formatted = prettier.format(sitemap, {
-    ...prettierConfig,
-    parser: 'html',
-  });
+  console.log('Writing sitemap to ', publicOutputDirectory, sitemap);
 
-  fs.writeFileSync('public/sitemap.xml', formatted);
+  fs.writeFileSync(
+    path.join(publicOutputDirectory, 'sitemap.xml'),
+    prettier.format(sitemap, { parser: 'html' })
+  );
 }
 
 function isParameterizedPath(path: string) {
   return ['code', 'slug'].some((fragment) => path.includes(fragment));
 }
+
+main().then(
+  () => process.exit(0),
+  (err: Error) => {
+    logError(err.message);
+    process.exit(1);
+  }
+);

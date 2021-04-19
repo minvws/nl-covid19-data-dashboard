@@ -1,7 +1,5 @@
-import withPlugins from 'next-compose-plugins';
-import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
-import { generateSitemap } from './generate-sitemap';
-
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const withPlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -66,19 +64,7 @@ const nextConfig = {
     ],
   },*/
 
-  webpack(config: any, { isServer }: { isServer: boolean }) {
-    if (
-      isServer &&
-      process.env.DISABLE_SITEMAP !== '1' &&
-      !process.env.DISABLE_SITEMAP
-    ) {
-      generateSitemap(
-        process.env.NEXT_PUBLIC_LOCALE,
-        process.env.NEXT_PUBLIC_SANITY_DATASET,
-        process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-      );
-    }
-
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
       use: [

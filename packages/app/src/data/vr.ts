@@ -1,4 +1,4 @@
-const regioData = [
+export const vrData = [
   { name: 'Groningen', code: 'VR01', id: 1 },
   { name: 'Fryslân', code: 'VR02', id: 2, searchTerms: ['Friesland'] },
   { name: 'Drenthe', code: 'VR03', id: 3 },
@@ -25,5 +25,3 @@ const regioData = [
   { name: 'Zuid-Limburg', code: 'VR24', id: 24 },
   { name: 'Flevoland', code: 'VR25', id: 25 },
 ];
-
-export default regioData;

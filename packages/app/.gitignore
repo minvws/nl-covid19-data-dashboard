@@ -35,9 +35,4 @@ yarn-error.log*
 /*.code-workspace
 /debug.log
 
-# Compile outputs as a result of next.config.ts build
-# TODO find a cleaner solution, maybe import features as JS from build output
-src/config/features.js
-src/data/gm-codes.js
-generate-sitemap.js
-next.config.js
+

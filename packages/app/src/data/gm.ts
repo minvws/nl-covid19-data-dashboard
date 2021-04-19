@@ -6,7 +6,7 @@ type MunicipalityInfo = {
   searchTerms?: string[];
 };
 
-const municipalities: MunicipalityInfo[] = [
+export const gmData: MunicipalityInfo[] = [
   {
     name: 'Aa en Hunze',
     safetyRegion: 'VR03',
@@ -1776,4 +1776,3 @@ const municipalities: MunicipalityInfo[] = [
     gemcode: 'GM0193',
   },
 ];
-export default municipalities;
