@@ -124,6 +124,8 @@ export const Axes = memo(function Axes({
   const isLongStartLabel = formatXAxis(startUnix).length > 6;
   const isLongEndLabel = formatXAxis(endUnix).length > 6;
 
+  console.dir(yScale.domain());
+
   return (
     <g css={css({ pointerEvents: 'none' })}>
       <GridRows
@@ -223,7 +225,7 @@ export const Axes = memo(function Axes({
         {isYAxisCollapsed && numGridLines !== 0 && (
           <AxisLeft
             scale={yScale}
-            tickValues={[yScale.domain()[1]]}
+            tickValues={yScale.domain()}
             numTicks={numGridLines}
             hideTicks
             hideAxisLine
