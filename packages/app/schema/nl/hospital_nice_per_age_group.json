@@ -21,7 +21,6 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        
         "admissions_age_0_19_per_100k",
         "admissions_age_20_29_per_100k",
         "admissions_age_30_39_per_100k",
