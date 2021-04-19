@@ -274,7 +274,8 @@ export function TimeSeriesChart<
           height={height}
           padding={padding}
           ariaLabelledBy={ariaLabelledBy || ''}
-          onHover={handleHover}
+          onHover={!tooltipData ? handleHover : undefined}
+          // onHover={handleHover}
           onClick={handleClick}
         >
           <Axes
