@@ -75,91 +75,6 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     ? [config[configIndex]]
     : [...config];
 
-  const seriesList = (
-    <TooltipList>
-      {seriesConfig.map((x, index) => {
-        switch (x.type) {
-          case 'stacked-area':
-            return (
-              <TooltipListItem
-                key={index}
-                icon={<SeriesIcon config={x} />}
-                label={x.shortLabel ?? x.label}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-              >
-                <b>
-                  {getValueStringForKey(
-                    value,
-                    x.metricProperty,
-                    options.isPercentage
-                  )}
-                </b>
-              </TooltipListItem>
-            );
-
-          case 'range':
-            return (
-              <TooltipListItem
-                key={index}
-                icon={<SeriesIcon config={x} />}
-                label={x.shortLabel ?? x.label}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-              >
-                <b css={css({ whiteSpace: 'nowrap' })}>
-                  {`${getValueStringForKey(
-                    value,
-                    x.metricPropertyLow,
-                    options.isPercentage
-                  )} - ${getValueStringForKey(
-                    value,
-                    x.metricPropertyHigh,
-                    options.isPercentage
-                  )}`}
-                </b>
-              </TooltipListItem>
-            );
-
-          case 'line':
-          case 'area':
-          case 'bar':
-            return (
-              <TooltipListItem
-                key={index}
-                icon={<SeriesIcon config={x} />}
-                label={x.shortLabel ?? x.label}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-              >
-                <b>
-                  {getValueStringForKey(
-                    value,
-                    x.metricProperty,
-                    options.isPercentage
-                  )}
-                </b>
-              </TooltipListItem>
-            );
-
-          case 'invisible':
-            return (
-              <TooltipListItem
-                key={index}
-                label={x.label}
-                displayTooltipValueOnly={displayTooltipValueOnly}
-              >
-                <b>
-                  {getValueStringForKey(
-                    value,
-                    x.metricProperty,
-                    x.isPercentage
-                  )}
-                </b>
-              </TooltipListItem>
-            );
-        }
-      })}
-    </TooltipList>
-  );
-
   return (
     <section>
       <VisuallyHidden>{dateString}</VisuallyHidden>
@@ -170,7 +85,90 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         </Text>
       )}
 
-      <Box css={css({ columnCount: hasTwoColumns ? 2 : 1 })}>{seriesList}</Box>
+      <Box css={css({ columnCount: hasTwoColumns ? 2 : 1 })}>
+        <TooltipList>
+          {seriesConfig.map((x, index) => {
+            switch (x.type) {
+              case 'stacked-area':
+                return (
+                  <TooltipListItem
+                    key={index}
+                    icon={<SeriesIcon config={x} />}
+                    label={x.shortLabel ?? x.label}
+                    displayTooltipValueOnly={displayTooltipValueOnly}
+                  >
+                    <b>
+                      {getValueStringForKey(
+                        value,
+                        x.metricProperty,
+                        options.isPercentage
+                      )}
+                    </b>
+                  </TooltipListItem>
+                );
+
+              case 'range':
+                return (
+                  <TooltipListItem
+                    key={index}
+                    icon={<SeriesIcon config={x} />}
+                    label={x.shortLabel ?? x.label}
+                    displayTooltipValueOnly={displayTooltipValueOnly}
+                  >
+                    <b css={css({ whiteSpace: 'nowrap' })}>
+                      {`${getValueStringForKey(
+                        value,
+                        x.metricPropertyLow,
+                        options.isPercentage
+                      )} - ${getValueStringForKey(
+                        value,
+                        x.metricPropertyHigh,
+                        options.isPercentage
+                      )}`}
+                    </b>
+                  </TooltipListItem>
+                );
+
+              case 'line':
+              case 'area':
+              case 'bar':
+                return (
+                  <TooltipListItem
+                    key={index}
+                    icon={<SeriesIcon config={x} />}
+                    label={x.shortLabel ?? x.label}
+                    displayTooltipValueOnly={displayTooltipValueOnly}
+                  >
+                    <b>
+                      {getValueStringForKey(
+                        value,
+                        x.metricProperty,
+                        options.isPercentage
+                      )}
+                    </b>
+                  </TooltipListItem>
+                );
+
+              case 'invisible':
+                return (
+                  <TooltipListItem
+                    key={index}
+                    label={x.label}
+                    displayTooltipValueOnly={displayTooltipValueOnly}
+                  >
+                    <b>
+                      {getValueStringForKey(
+                        value,
+                        x.metricProperty,
+                        x.isPercentage
+                      )}
+                    </b>
+                  </TooltipListItem>
+                );
+            }
+          })}
+        </TooltipList>
+      </Box>
     </section>
   );
 }
