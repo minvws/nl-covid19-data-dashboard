@@ -10,6 +10,7 @@ import * as piwik from '~/lib/piwik';
 import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
+import { assert } from '~/utils/assert';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
