@@ -142,7 +142,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   the_netherlands: text.the_netherlands,
                 }
               )}
-              link={text.secties.actuele_situatie.link}
+              link={{
+                ...text.secties.actuele_situatie.link,
+                href: reverseRouter.nl.index(),
+              }}
             />
 
             <Box width={{ lg: '65%' }}>
