@@ -27,29 +27,39 @@ import { LokalizeText } from './types';
     ]);
 
     const { subject } = response;
+    let continueCreating = true;
 
-    while (true) {
+    while (continueCreating) {
       const textDocument = await createTextDocumentForSubject(subject);
 
-      const response = await prompts([
-        {
-          type: 'confirm',
-          name: 'confirmed',
-          message: `Does this look correct? \n\n
+      const response = await prompts(
+        [
+          {
+            type: 'confirm',
+            name: 'confirmed',
+            message: `Does this look correct? \n\n
             ${JSON.stringify(textDocument, null, 2)}`,
-        },
-      ]);
+          },
+          {
+            type: 'confirm',
+            name: 'continue',
+            message: 'Create another text in this subject?',
+          },
+        ],
+        {
+          onCancel: () => {
+            continueCreating = false;
+          },
+        }
+      );
 
       if (response.confirmed) {
         console.log('@TODO create text', textDocument);
       }
 
-      /**
-       * @TODO Here we could do something clever, where we reuse the subject and ask the
-       * user to add more texts. It would be more convenient when you have to add
-       * multiple texts for the same subject.
-       */
-      continue;
+      if (!response.continue) {
+        continueCreating = false;
+      }
     }
   } else {
     const allTexts = (await client
@@ -73,29 +83,39 @@ import { LokalizeText } from './types';
 
     const { subject } = response;
 
-    while (true) {
+    let continueCreating = true;
+
+    while (continueCreating) {
       const textDocument = await createTextDocumentForSubject(subject);
 
-      const response = await prompts([
-        {
-          type: 'confirm',
-          name: 'confirmed',
-          message: `Does this look correct? \n\n
+      const response = await prompts(
+        [
+          {
+            type: 'confirm',
+            name: 'confirmed',
+            message: `Does this look correct? \n\n
             ${JSON.stringify(textDocument, null, 2)}`,
-        },
-      ]);
+          },
+          {
+            type: 'confirm',
+            name: 'continue',
+            message: 'Create another text in this subject?',
+          },
+        ],
+        {
+          onCancel: () => {
+            continueCreating = false;
+          },
+        }
+      );
 
       if (response.confirmed) {
         console.log('@TODO create text', textDocument);
       }
 
-      /**
-       * @TODO Here we could do something clever, where we reuse the subject and ask the
-       * user to add more texts. It would be more convenient when you have to add
-       * multiple texts for the same subject.
-       */
-
-      continue;
+      if (!response.continue) {
+        continueCreating = false;
+      }
     }
   }
 })().catch((err) => {
