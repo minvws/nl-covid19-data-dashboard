@@ -12,7 +12,10 @@ import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-til
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import {
+  SafetyRegionLayout,
+  safetyRegionMetricNames,
+} from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -22,14 +25,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrData,
 } from '~/static-props/get-data';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrData(...safetyRegionMetricNames),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -39,7 +42,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated, content, data, safetyRegionName } = props;
+  const {
+    lastGenerated,
+    content,
+    selectedVrData: data,
+    safetyRegionName,
+  } = props;
   const behaviorData = data.behavior;
 
   const { siteText } = useIntl();

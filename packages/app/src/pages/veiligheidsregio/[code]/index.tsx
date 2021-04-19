@@ -1,24 +1,27 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import {
+  SafetyRegionLayout,
+  safetyRegionMetricNames,
+} from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
+import { getLastGeneratedDate, selectVrData } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData
+  selectVrData(...safetyRegionMetricNames)
 );
 
 const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated, safetyRegionName } = props;
+  const { selectedVrData: data, lastGenerated, safetyRegionName } = props;
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();

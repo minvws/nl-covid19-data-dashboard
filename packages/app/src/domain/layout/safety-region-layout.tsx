@@ -37,7 +37,7 @@ export const safetyRegionMetricNames = [
   'difference',
 ] as const;
 
-export type SafetyRegionLayoutData = Pick<
+export type SafetyRegionMetricData = Pick<
   Regionaal,
   typeof safetyRegionMetricNames[number]
 >;
@@ -47,7 +47,7 @@ type SafetyRegionLayoutProps = {
   children?: React.ReactNode;
 } & (
   | {
-      data: SafetyRegionLayoutData;
+      data: SafetyRegionMetricData;
       safetyRegionName: string;
     }
   | {
