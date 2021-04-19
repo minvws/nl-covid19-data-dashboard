@@ -8,6 +8,16 @@ import { client } from '../client';
 import { LokalizeText } from './types';
 
 (async function run() {
+  const allTexts = (await client
+    .fetch(`*[_type == 'lokalizeText']`)
+    .catch((err) => {
+      throw new Error(`Failed to fetch texts: ${err.message}`);
+    })) as LokalizeText[];
+
+  const subjects = Object.keys(
+    allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
+  );
+
   const newSubjectResponse = await prompts([
     {
       type: 'confirm',
@@ -30,7 +40,10 @@ import { LokalizeText } from './types';
     let continueCreating = true;
 
     while (continueCreating) {
-      const textDocument = await createTextDocumentForSubject(subject);
+      const textDocument = await createTextDocumentForSubject(
+        subject,
+        allTexts
+      );
 
       const response = await prompts(
         [
@@ -62,12 +75,6 @@ import { LokalizeText } from './types';
       }
     }
   } else {
-    const allTexts = (await client
-      .fetch(`*[_type == 'lokalizeText']`)
-      .catch((err) => {
-        throw new Error(`Failed to fetch texts: ${err.message}`);
-      })) as LokalizeText[];
-
     const choices = Object.keys(
       allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
     ).map((x) => ({ title: x, value: x }));
@@ -86,7 +93,10 @@ import { LokalizeText } from './types';
     let continueCreating = true;
 
     while (continueCreating) {
-      const textDocument = await createTextDocumentForSubject(subject);
+      const textDocument = await createTextDocumentForSubject(
+        subject,
+        allTexts
+      );
 
       const response = await prompts(
         [
@@ -123,13 +133,21 @@ import { LokalizeText } from './types';
   process.exit(1);
 });
 
-async function createTextDocumentForSubject(subject: string) {
+async function createTextDocumentForSubject(
+  subject: string,
+  allTexts: LokalizeText[]
+) {
   const response = await prompts([
     {
       type: 'text',
       name: 'path',
       message: `What is the path in dot notation?`,
       format: (x: string) => x.toLowerCase(),
+      /**
+       * Do not allow creating a text with a path that already exists
+       */
+      validate: (x: string) =>
+        allTexts.find((text) => text.path == x) === undefined,
     },
     {
       type: 'text',
