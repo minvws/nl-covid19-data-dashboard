@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { compile, JSONSchema } from 'json-schema-to-typescript';
-import { createValidateFunction } from './validate-schema/create-validate-function';
-import { schemaDirectory } from './config';
+import { createValidateFunction } from '../schema';
+import { schemaDirectory } from '../config';
 
 // The directory where the resulting data.d.ts file will be saved
 const outputDirectory = path.join(

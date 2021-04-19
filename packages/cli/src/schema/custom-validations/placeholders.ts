@@ -8,7 +8,6 @@ import { isDefined } from 'ts-is-present';
  *
  * When such an occurrence is found an error message is generated indicating in which property
  * the error occurred along with the offending placeholder.
- *
  */
 export const validatePlaceholders = (
   input: Record<string, unknown>,

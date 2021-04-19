@@ -1,7 +1,7 @@
 // This lookup was generated with data downloaded from this location:
 // https://opendata.cbs.nl/statline/?dl=32C14#/CBS/nl/dataset/84929NED/table?ts=1608646266160
 
-const regionCodeToMunicipalCodeLookup: Record<string, string[]> = {
+export const gmCodesByVrCode: Record<string, string[]> = {
   VR03: [
     'GM1680',
     'GM0106',
@@ -383,5 +383,3 @@ const regionCodeToMunicipalCodeLookup: Record<string, string[]> = {
     'GM1950',
   ],
 };
-
-export default regionCodeToMunicipalCodeLookup;

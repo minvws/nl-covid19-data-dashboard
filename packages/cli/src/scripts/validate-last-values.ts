@@ -7,22 +7,18 @@ import {
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
 } from '@corona-dashboard/common';
-import chalk from 'chalk';
-import { isEmpty, pick } from 'lodash';
+import { chain, isEmpty, pick } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { defaultJsonDirectory } from '../config';
-import { getFilesWithTimeSeries } from '../schema-information';
 import {
+  getFilesWithTimeSeries,
   getTimeSeriesMetricNames,
+  logError,
+  logSuccess,
   readObjectFromJsonFile,
-  validateLastValue,
-} from './logic';
-
-const logSuccess = (...args: unknown[]) =>
-  console.log(chalk.greenBright(...args));
-const logError = (...args: unknown[]) => console.error(chalk.red(...args));
+} from '../utils';
 
 const cli = meow(
   `
@@ -63,7 +59,7 @@ async function main() {
   const allFailures: Failure[] = [];
 
   for (const file of files) {
-    const data = readObjectFromJsonFile(path.join(directory, file));
+    const data = await readObjectFromJsonFile(path.join(directory, file));
 
     sortTimeSeriesInDataInPlace(data);
 
@@ -146,3 +142,18 @@ main().then(
     process.exit(1);
   }
 );
+
+export function validateLastValue(metric: TimeSeriesMetric): boolean {
+  const assumedLastValue = metric.last_value;
+  const actualLastValue = metric.values[metric.values.length - 1];
+
+  const success = chain(assumedLastValue)
+    .entries()
+    .every(
+      ([key, value]) =>
+        actualLastValue[key as keyof typeof actualLastValue] === value
+    )
+    .value();
+
+  return success;
+}

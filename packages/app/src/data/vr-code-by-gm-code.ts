@@ -1,7 +1,7 @@
 // This lookup was generated with data downloaded from this location:
 // https://opendata.cbs.nl/statline/?dl=32C14#/CBS/nl/dataset/84929NED/table?ts=1608646266160
 
-const municipalCodeToRegionCodeLookup: Record<string, string> = {
+export const vrCodeByGmCode: Record<string, string> = {
   GM1680: 'VR03',
   GM0358: 'VR13',
   GM0197: 'VR06',
@@ -355,5 +355,3 @@ const municipalCodeToRegionCodeLookup: Record<string, string> = {
   GM0642: 'VR18',
   GM0193: 'VR04',
 };
-
-export default municipalCodeToRegionCodeLookup;
