@@ -85,7 +85,6 @@ const localeLanguageTagMap:Record<LanguageKey, string> = {
 export function useIntlHelperContext(locale: LanguageKey, siteText: AllLanguages) {
   return useMemo(() => {
     const languageTag = localeLanguageTagMap[locale]
-    assert(languageTag, `Encountered unknown language: ${locale}`)
 
     // Number formatting
     const NumberFormat = new Intl.NumberFormat(languageTag);

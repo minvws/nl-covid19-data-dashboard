@@ -34,6 +34,8 @@ export default function App(props: AppProps) {
   const locale = (process.env.NEXT_PUBLIC_LOCALE || 'nl') as LanguageKey;
   const text = languages[locale];
 
+  assert(text, `Encountered unknown language: ${locale}`);
+
   const intlContext = useIntlHelperContext(locale, text);
 
   useEffect(() => {
