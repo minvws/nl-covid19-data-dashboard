@@ -23,6 +23,7 @@ export interface GmDeceasedRivm {
 }
 export interface GmDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average: number;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -476,6 +477,7 @@ export interface NationalDeceasedRivm {
 }
 export interface NationalDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average: number;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -947,6 +949,7 @@ export interface RegionalDeceasedRivm {
 }
 export interface RegionalDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average: number;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
