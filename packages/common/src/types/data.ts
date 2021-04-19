@@ -64,6 +64,7 @@ export interface MunicipalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average: number;
   date_of_insertion_unix: number;
 }
 export interface MunicipalSewer {
@@ -284,6 +285,7 @@ export interface NationalTestedOverall {
 export interface NationalTestedOverallValue {
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -366,8 +368,11 @@ export interface NationalTestedGgdDaily {
 }
 export interface NationalTestedGgdDailyValue {
   infected: number;
+  infected_moving_average: number;
   infected_percentage: number;
+  infected_percentage_moving_average: number;
   tested_total: number;
+  tested_total_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -822,6 +827,7 @@ export interface RegionalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average: number;
   date_of_insertion_unix: number;
 }
 export interface RegionalHospitalNice {
@@ -840,8 +846,11 @@ export interface RegionalTestedGgdDaily {
 }
 export interface RegionalTestedGgdDailyValue {
   infected: number;
+  infected_moving_average: number;
   infected_percentage: number;
+  infected_percentage_moving_average: number;
   tested_total: number;
+  tested_total_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
