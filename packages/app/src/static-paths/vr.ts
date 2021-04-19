@@ -5,7 +5,7 @@ import { vrData } from '~/data/vr';
  * routes.
  */
 export function getStaticPaths() {
-  const filteredRegions = vrData.filter((x) => x.code.indexOf('VR') === 0);
+  const filteredRegions = vrData.filter((x) => x.code.startsWith('VR'));
   const paths = filteredRegions.map((x) => ({
     params: { code: x.code },
   }));
