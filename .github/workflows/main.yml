@@ -1,10 +1,6 @@
 name: Main
 
-on:
-  pull_request:
-    branches:
-      - master
-      - develop
+on: pull_request
 
 jobs:
   init:

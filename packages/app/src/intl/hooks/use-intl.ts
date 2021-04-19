@@ -1,7 +1,7 @@
 import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
 import { useContext, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { AllLanguages } from '~/locale';
+import { AllLanguages, LanguageKey } from '~/locale';
 import { assert } from '~/utils/assert';
 import { IntlContext } from '..';
 
@@ -77,10 +77,17 @@ function parseDateDefinition(dateDefinition: DateDefinition) {
 
 export type IntlContextProps = ReturnType<typeof useIntlHelperContext>;
 
-export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
+const localeLanguageTagMap:Record<LanguageKey, string> = {
+  nl: 'nl-NL',
+  en: 'en-GB'
+}
+
+export function useIntlHelperContext(locale: LanguageKey, siteText: AllLanguages) {
   return useMemo(() => {
+    const languageTag = localeLanguageTagMap[locale]
+
     // Number formatting
-    const NumberFormat = new Intl.NumberFormat(locale);
+    const NumberFormat = new Intl.NumberFormat(languageTag);
 
     function formatNumber(value: number | string | undefined | null): string {
       if (typeof value === 'undefined' || value === null) return '-';
@@ -94,49 +101,49 @@ export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
         maximumFractionDigits: number;
       }
     ) {
-      return new Intl.NumberFormat(locale, options).format(value);
+      return new Intl.NumberFormat(languageTag, options).format(value);
     }
 
     // Start of date formatting
 
     // Define all styles of formatting
-    const Time = new Intl.DateTimeFormat(locale, {
+    const Time = new Intl.DateTimeFormat(languageTag, {
       timeStyle: 'short',
       timeZone: 'Europe/Amsterdam',
     } as DateTimeFormatOptions);
 
-    const Long = new Intl.DateTimeFormat(locale, {
+    const Long = new Intl.DateTimeFormat(languageTag, {
       dateStyle: 'long',
       timeStyle: 'short',
       timeZone: 'Europe/Amsterdam',
     } as DateTimeFormatOptions);
 
-    const Medium = new Intl.DateTimeFormat(locale, {
+    const Medium = new Intl.DateTimeFormat(languageTag, {
       dateStyle: 'long',
       timeZone: 'Europe/Amsterdam',
     } as DateTimeFormatOptions);
 
     // Day Month or Month Day depending on the locale
-    const DayMonth = new Intl.DateTimeFormat(locale, {
+    const DayMonth = new Intl.DateTimeFormat(languageTag, {
       month: 'long',
       day: 'numeric',
       timeZone: 'Europe/Amsterdam',
     });
 
-    const DayMonthShort = new Intl.DateTimeFormat(locale, {
+    const DayMonthShort = new Intl.DateTimeFormat(languageTag, {
       month: 'short',
       day: 'numeric',
       timeZone: 'Europe/Amsterdam',
     });
 
-    const DayMonthShortYear = new Intl.DateTimeFormat(locale, {
+    const DayMonthShortYear = new Intl.DateTimeFormat(languageTag, {
       month: 'short',
       day: 'numeric',
       year: 'numeric',
       timeZone: 'Europe/Amsterdam',
     });
 
-    const WeekdayMedium = new Intl.DateTimeFormat(locale, {
+    const WeekdayMedium = new Intl.DateTimeFormat(languageTag, {
       weekday: 'long',
       month: 'long',
       day: 'numeric',

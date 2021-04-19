@@ -18,6 +18,12 @@ import {
   RegionControlOption,
 } from '~/components/chart-region-controls';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -29,20 +35,14 @@ import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
-import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
@@ -80,9 +80,9 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles: ArticleSummary[];
-    weeklyHighlight: WeeklyHighlightProps;
-    highlights: HighlightTeaserProps[];
+    articles?: ArticleSummary[];
+    weeklyHighlight?: WeeklyHighlightProps;
+    highlights?: HighlightTeaserProps[];
   }>(getTopicalPageQuery)
 );
 

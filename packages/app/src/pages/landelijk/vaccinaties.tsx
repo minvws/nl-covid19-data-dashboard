@@ -4,11 +4,10 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
-import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { InlineText, Text } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import {
@@ -66,10 +65,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.vaccinaties;
 
   const { milestones } = content;
-
-  const additions = text.expected_page_additions.additions.filter(
-    (x) => x.trim().length
-  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -212,24 +207,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
           <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
-
-          {(text.expected_page_additions.description ||
-            additions.length > 0) && (
-            <KpiTile title={text.expected_page_additions.title}>
-              {text.expected_page_additions.description && (
-                <Text>{text.expected_page_additions.description}</Text>
-              )}
-              {additions.length > 0 && (
-                <ul>
-                  {additions.map((addition) => (
-                    <li key={addition}>
-                      <InlineText>{addition}</InlineText>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </KpiTile>
-          )}
         </TileList>
       </NationalLayout>
     </Layout>

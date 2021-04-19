@@ -3,13 +3,16 @@ import {
   supportedLanguages,
 } from '../../language/supported-languages';
 
-export default {
-  supportedLanguages,
-  filterField: (
-    enclosingType: any,
-    field: any,
-    selectedLanguageIds: SupportedLanguageId[]
-  ) =>
+export { supportedLanguages };
+
+export function filterField(
+  enclosingType: any,
+  field: any,
+  selectedLanguageIds: SupportedLanguageId[]
+) {
+  return (
+    enclosingType.options.ignoreLanguageSwitcher ||
     !enclosingType.name.startsWith('locale') ||
-    selectedLanguageIds.includes(field.name),
-};
+    selectedLanguageIds.includes(field.name)
+  );
+}
