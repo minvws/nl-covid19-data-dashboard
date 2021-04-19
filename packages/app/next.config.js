@@ -18,7 +18,7 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
-  /*i18n: {
+  i18n: {
     // These are all the locales you want to support in
     // your application
     locales: ['nl', 'en'],
@@ -34,18 +34,18 @@ const nextConfig = {
     // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
     domains: [
       //Production environments
-      // {
-      //   domain: 'coronadashboard.nl',
-      //   defaultLocale: 'nl',
-      // },
-      // {
-      //   domain: 'coronadashboard.rijksoverheid.nl',
-      //   defaultLocale: 'nl',
-      // },
-      // {
-      //   domain: 'coronadashboard.government.com',
-      //   defaultLocale: 'en',
-      // },
+      {
+        domain: 'coronadashboard.nl',
+        defaultLocale: 'nl',
+      },
+      {
+        domain: 'coronadashboard.rijksoverheid.nl',
+        defaultLocale: 'nl',
+      },
+      {
+        domain: 'coronadashboard.government.com',
+        defaultLocale: 'en',
+      },
       // For convenience, the deploy previews are configured as well
       {
         domain: 'develop-en-covid19-data-dashboard.vercel.app',
@@ -64,7 +64,7 @@ const nextConfig = {
         defaultLocale: 'nl',
       },
     ],
-  },*/
+  },
 
   webpack(config, { isServer }) {
     if (
