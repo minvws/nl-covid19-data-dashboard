@@ -20,6 +20,7 @@ const documentAllowedActions = {
   veelgesteldeVragen: [DiscardChangesAction, PublishAction, UnpublishAction],
   cijferVerantwoording: [DiscardChangesAction, PublishAction, UnpublishAction],
   toegankelijkheid: [DiscardChangesAction, PublishAction, UnpublishAction],
+  lokalizeText: [DiscardChangesAction, PublishAction, UnpublishAction],
 };
 
 type DocumentTypes = keyof typeof documentAllowedActions;

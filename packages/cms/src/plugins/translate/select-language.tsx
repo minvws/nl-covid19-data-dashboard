@@ -4,14 +4,12 @@ import { useValidationStatus } from '@sanity/react-hooks';
 import { ValidationMarker } from '@sanity/types';
 import {
   Inline,
-  Label,
   studioTheme,
   Tab as TabAlias,
   TabList,
   ThemeProvider,
 } from '@sanity/ui';
 import React from 'react';
-import { MdErrorOutline } from 'react-icons/md';
 import Flag from 'react-world-flags';
 import {
   SupportedLanguage,
