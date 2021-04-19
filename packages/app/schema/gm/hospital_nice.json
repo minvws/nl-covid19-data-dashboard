@@ -19,7 +19,7 @@
           "type": "integer"
         },
         "admissions_on_date_of_admission_moving_average": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "admissions_on_date_of_reporting": {
           "type": "integer"

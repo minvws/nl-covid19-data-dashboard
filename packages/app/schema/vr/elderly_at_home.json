@@ -24,7 +24,7 @@
           "type": "integer"
         },
         "positive_tested_daily_moving_average": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "positive_tested_daily_per_100k": {
           "type": "number"
@@ -33,7 +33,7 @@
           "type": "integer"
         },
         "deceased_daily_moving_average": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"
