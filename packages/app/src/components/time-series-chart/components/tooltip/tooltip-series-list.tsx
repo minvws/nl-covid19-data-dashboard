@@ -177,7 +177,6 @@ export const TooltipList = styled.ol(
   css({
     display: 'grid',
     gridTemplateColumns: 'repeat(3, auto)',
-    maxWidth: 500,
     m: 0,
     p: 0,
     listStyle: 'none',
