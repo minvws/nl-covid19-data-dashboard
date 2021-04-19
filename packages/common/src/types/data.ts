@@ -515,8 +515,10 @@ export interface NationalElderlyAtHome {
 }
 export interface NationalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_daily_moving_average: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -978,8 +980,10 @@ export interface RegionalElderlyAtHome {
 }
 export interface RegionalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_daily_moving_average: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
