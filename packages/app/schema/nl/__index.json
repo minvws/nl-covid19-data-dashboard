@@ -94,6 +94,9 @@
     "hospital_nice": {
       "$ref": "hospital_nice.json"
     },
+    "hospital_nice_per_age_group": {
+      "$ref": "hospital_nice_per_age_group.json"
+    },
     "hospital_lcps": {
       "$ref": "hospital_lcps.json"
     },
