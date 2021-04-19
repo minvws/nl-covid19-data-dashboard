@@ -1,5 +1,5 @@
 /**
- * Add a text to the Sanity "Lokalize" dataset
+ * Delete one of multiple texts from the Sanity "Lokalize" dataset.
  */
 
 import prompts from 'prompts';
@@ -7,14 +7,6 @@ import { client } from '../client';
 import { LokalizeText } from './types';
 
 (async function run() {
-  const subjectResponse = await prompts([
-    {
-      type: 'text',
-      name: 'subject',
-      message: `What is the subject?`,
-    },
-  ]);
-
   const choices = await client
     .fetch(
       `*[_type == 'lokalizeText' && subject == 'charts']| order(subject asc)`
@@ -26,18 +18,13 @@ import { LokalizeText } from './types';
       throw new Error(`Failed to fetch localizeTexts: ${err.message}`);
     });
 
-  const pathsResponse = await prompts([
+  const response = await prompts([
     {
       type: 'multiselect',
       name: 'paths',
       message: `What path in ${subjectResponse.subject}?`,
       choices: choices,
     },
-  ]);
-
-  console.log(pathsResponse.paths);
-
-  const confirmResponse = await prompts([
     {
       type: 'confirm',
       name: 'confirmed',
@@ -47,7 +34,7 @@ import { LokalizeText } from './types';
     },
   ]);
 
-  if (confirmResponse.confirmed) {
+  if (response.confirmed) {
     console.log('@TODO Deleting stuff...');
   } else {
     console.log('Nothing got deleted');
