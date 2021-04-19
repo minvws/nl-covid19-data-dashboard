@@ -45,6 +45,7 @@
     "react-dom": "^17.0.1",
     "react-markdown": "^5.0.3",
     "remark-rehype": "^8.0.0",
+    "scroll-into-view-if-needed": "^2.2.28",
     "slugify": "^1.4.6",
     "styled-components": "^5.2.0",
     "styled-system": "^5.1.5",
