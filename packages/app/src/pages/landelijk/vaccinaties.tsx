@@ -79,8 +79,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
-  console.log(data.vaccine_stock.values);
-
   const dummyData = useMemo(
     () => [
       cloneDeep(data.vaccine_stock.values).splice(-14),

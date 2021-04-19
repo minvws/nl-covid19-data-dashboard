@@ -6,19 +6,17 @@
  * layouts by forking this component.
  */
 import css from '@styled-system/css';
-import { AxisBottom, AxisLeft, AxisTop } from '@visx/axis';
-import { GridColumns, GridRows } from '@visx/grid';
+import { AxisBottom, AxisLeft } from '@visx/axis';
+import { GridRows } from '@visx/grid';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { differenceInDays } from 'date-fns';
-import { memo, Ref, useCallback, useMemo } from 'react';
+import { memo, Ref, useCallback } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
-import { getWeekInfo } from '~/components/stacked-chart/logic';
-import { RectClipPath } from '@visx/clip-path';
-import { useUniqueId } from '~/utils/use-unique-id';
+import { WeekNumbers } from './week-numbers';
 
 type AxesProps = {
   bounds: Bounds;
@@ -121,78 +119,6 @@ export const Axes = memo(function Axes({
     [isMounted, formatRelativeDate, startUnix, endUnix, formatDateFromSeconds]
   );
 
-  const formatWeekNumberAxis = useCallback((date_unix) => {
-    const date = new Date(date_unix * 1000);
-    const weekInfo = getWeekInfo(date);
-    return `Week ${weekInfo.weekNumber}`;
-  }, []);
-
-  const {
-    weekGridLines,
-    weekWidth,
-    weekNumbersLabels,
-    weekDateLabels,
-  } = useMemo(() => {
-    /* Config */
-    const numberOfWeeks = 6;
-
-    const weekGridLines = [];
-    const weekNumbersLabels = [];
-    const weekDateLabels = [];
-
-    let weekWidth = 0;
-
-    if (showWeekGridLines) {
-      const dayInSeconds = 24 * 60 * 60;
-      const weekInSeconds = 7 * dayInSeconds;
-
-      const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
-      const firstMonday = getWeekInfo(new Date(startUnix * 1000));
-      const firstMondayUnix = firstMonday.weekStartDate.getTime() / 1000;
-      const alternateBy =
-        weeks > numberOfWeeks ? Math.ceil(weeks / numberOfWeeks) : 1;
-
-      const dateLabelPadding = 2 * alternateBy;
-
-      const dateLabelPaddingStartUnix =
-        startUnix + dateLabelPadding * dayInSeconds;
-      const dateLabelPaddingEndUnix = endUnix - dateLabelPadding * dayInSeconds;
-
-      const weekNumbersLabelPaddingStartUnix = startUnix - 3 * dayInSeconds;
-      const weekNumbersLabelPaddingEndUnix =
-        endUnix - (5 + alternateBy) * dayInSeconds;
-
-      const alternateWeekOffset =
-        alternateBy % 2 === 0 && firstMonday.weekNumber % 2 === 1 ? 1 : 0;
-
-      for (let i = 0; i <= weeks + 1; ++i) {
-        const weekStartUnix = firstMondayUnix + i * weekInSeconds;
-
-        weekGridLines.push(weekStartUnix);
-
-        if ((i + alternateWeekOffset) % alternateBy === 0) {
-          if (
-            weekStartUnix >= dateLabelPaddingStartUnix &&
-            weekStartUnix < dateLabelPaddingEndUnix
-          ) {
-            weekDateLabels.push(weekStartUnix);
-          }
-
-          if (
-            weekStartUnix >= weekNumbersLabelPaddingStartUnix &&
-            weekStartUnix < weekNumbersLabelPaddingEndUnix
-          ) {
-            weekNumbersLabels.push(weekStartUnix);
-          }
-        }
-      }
-
-      weekWidth = xScale(weekGridLines[2]) - xScale(weekGridLines[1]);
-    }
-
-    return { weekGridLines, weekWidth, weekNumbersLabels, weekDateLabels };
-  }, [startUnix, endUnix, xScale, showWeekGridLines]);
-
   /**
    * Long labels (like the ones including a year, are too long to be positioned
    * centered on the x-axis tick. Usually a short date has a 2 digit number plus
@@ -200,8 +126,6 @@ export const Axes = memo(function Axes({
    */
   const isLongStartLabel = formatXAxis(startUnix).length > 6;
   const isLongEndLabel = formatXAxis(endUnix).length > 6;
-
-  const id = useUniqueId();
 
   return (
     <g css={css({ pointerEvents: 'none' })}>
@@ -228,58 +152,13 @@ export const Axes = memo(function Axes({
       />
 
       {showWeekGridLines && (
-        <>
-          <RectClipPath
-            id={id}
-            width={bounds.width}
-            height={bounds.height + 200}
-            x={0}
-            y={-100}
-          />
-          <g
-            css={css({
-              clipPath: `url(#${id})`,
-            })}
-          >
-            <GridColumns
-              height={bounds.height}
-              scale={xScale}
-              numTicks={weekGridLines.length}
-              tickValues={weekGridLines}
-              stroke={'#DDD'}
-              width={bounds.width}
-              strokeDasharray="4 2"
-            />
-
-            <AxisBottom
-              scale={xScale}
-              tickValues={weekDateLabels}
-              tickFormat={formatXAxis as AnyTickFormatter}
-              top={bounds.height}
-              stroke={colors.silver}
-              tickLabelProps={() => ({
-                fill: colors.data.axisLabels,
-                fontSize: 12,
-                textAnchor: 'middle',
-              })}
-              hideTicks
-            />
-
-            <AxisTop
-              scale={xScale}
-              tickValues={weekNumbersLabels}
-              tickFormat={formatWeekNumberAxis as AnyTickFormatter}
-              stroke={colors.silver}
-              hideTicks
-              tickLabelProps={() => ({
-                fill: colors.data.axisLabels,
-                fontSize: 12,
-                textAnchor: 'middle',
-                transform: `translate(${weekWidth / 2} 0)`,
-              })}
-            />
-          </g>
-        </>
+        <WeekNumbers
+          startUnix={startUnix}
+          endUnix={endUnix}
+          bounds={bounds}
+          formatXAxis={formatXAxis}
+          xScale={xScale}
+        />
       )}
 
       <AxisBottom
