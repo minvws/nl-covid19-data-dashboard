@@ -10,6 +10,7 @@ import * as piwik from '~/lib/piwik';
 import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
+import { assert } from '~/utils/assert';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -31,8 +32,10 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   // const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
-  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-  const text = languages[locale as LanguageKey];
+  const locale = (process.env.NEXT_PUBLIC_LOCALE || 'nl') as LanguageKey;
+  const text = languages[locale];
+
+  assert(text, `Encountered unknown language: ${locale}`);
 
   const intlContext = useIntlHelperContext(locale, text);
 

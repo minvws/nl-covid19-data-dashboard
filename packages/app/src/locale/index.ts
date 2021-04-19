@@ -15,5 +15,5 @@ export type LanguageKey = keyof Languages;
 
 export const languages = {
   nl,
-  en,
+  en
 };

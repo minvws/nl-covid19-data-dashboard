@@ -4,9 +4,10 @@ import { client } from '../client';
 const queue = new Queue({
   concurrency: 4,
   interval: 1000 / 25,
+  autoStart: false,
 });
 
-client.fetch(`*[_type == 'lokalizeSubject']`).then((result: any[]) => {
+client.fetch(`*[_type == 'lokalizeText']`).then((result: any[]) => {
   for (const document of result) {
     queue.add(() =>
       client
@@ -20,3 +21,5 @@ client.fetch(`*[_type == 'lokalizeSubject']`).then((result: any[]) => {
     );
   }
 });
+
+queue.start();
