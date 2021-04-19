@@ -7,19 +7,19 @@ import {
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { RegionControlOption } from '~/components-styled/chart-region-controls';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TileList } from '~/components-styled/tile-list';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
-import { WarningTile } from '~/components-styled/warning-tile';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { RegionControlOption } from '~/components/chart-region-controls';
+import { ChartTile } from '~/components/chart-tile';
+import { ChoroplethTile } from '~/components/choropleth-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -64,7 +64,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { data, choropleth, content, lastGenerated } = props;
 
   const text = siteText.rioolwater_metingen;
-  const graphDescriptions = siteText.accessibility.grafieken;
+
   const sewerAverages = data.sewer;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
@@ -155,10 +155,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={text.linechart_titel}
-            ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
             metadata={{
               source: text.bronnen.rivm,
             }}
@@ -171,7 +170,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     type: 'area',
                     metricProperty: 'average',
-                    label: siteText.waarde_annotaties.riool_normalized,
+                    label: text.linechart_particle_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -180,7 +179,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ChoroplethTile
             title={text.map_titel}
@@ -194,6 +193,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
               title: text.legenda_titel,
               thresholds: regionThresholds.sewer.average,

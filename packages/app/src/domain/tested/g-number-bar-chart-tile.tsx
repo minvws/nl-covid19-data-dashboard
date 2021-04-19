@@ -1,7 +1,7 @@
 import { NlGNumber, VrGNumber } from '@corona-dashboard/common';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { InlineText } from '~/components-styled/typography';
-import { VerticalBarChart } from '~/components-styled/vertical-bar-chart';
+import { ChartTile } from '~/components/chart-tile';
+import { InlineText } from '~/components/typography';
+import { VerticalBarChart } from '~/components/vertical-bar-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -25,7 +25,7 @@ export function GNumberBarChartTile({
   const last_value = __data.last_value;
 
   return (
-    <ChartTileWithTimeframe
+    <ChartTile
       title={text.title}
       description={text.description}
       timeframeOptions={timeframeOptions}
@@ -66,6 +66,6 @@ export function GNumberBarChartTile({
           }}
         />
       )}
-    </ChartTileWithTimeframe>
+    </ChartTile>
   );
 }

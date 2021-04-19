@@ -1,15 +1,15 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { ChartTile } from '~/components/chart-tile';
 import {
   createGetStaticProps,
   StaticProps,
@@ -17,7 +17,7 @@ import {
 import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 
@@ -38,7 +38,6 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const positiveTestPeopleText =
     siteText.veiligheidsregio_gehandicaptenzorg_positief_geteste_personen;
   const mortalityText = siteText.veiligheidsregio_gehandicaptenzorg_oversterfte;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
@@ -107,12 +106,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
             title={positiveTestPeopleText.linechart_titel}
-            ariaDescription={
-              graphDescriptions.gehandicaptenzorg_positief_getest
-            }
+            timeframeOptions={['all', '5weeks', 'week']}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -139,7 +136,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ContentHeader
             id="besmette-locaties"
@@ -192,14 +189,12 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           {lastValue.infected_locations_total !== undefined && (
-            <ChartTileWithTimeframe
+            <ChartTile
               title={locationsText.linechart_titel}
               metadata={{
                 source: locationsText.bronnen.rivm,
               }}
-              ariaDescription={
-                graphDescriptions.gehandicaptenzorg_besmette_locaties
-              }
+              timeframeOptions={['all', '5weeks', 'week']}
             >
               {(timeframe) => (
                 <TimeSeriesChart
@@ -215,7 +210,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                   ]}
                 />
               )}
-            </ChartTileWithTimeframe>
+            </ChartTile>
           )}
 
           <ContentHeader
@@ -251,10 +246,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: mortalityText.bronnen.rivm }}
             title={mortalityText.linechart_titel}
-            ariaDescription={graphDescriptions.gehandicaptenzorg_overleden}
+            timeframeOptions={['all', '5weeks', 'week']}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -280,7 +275,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

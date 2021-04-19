@@ -1,6 +1,6 @@
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
-import { MaxWidth } from '~/components-styled/max-width';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
+import { MaxWidth } from '~/components/max-width';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
   createGetStaticProps,

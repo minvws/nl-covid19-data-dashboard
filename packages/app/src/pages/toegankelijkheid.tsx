@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { Box } from '~/components-styled/base';
-import { ContentBlock } from '~/components-styled/cms/content-block';
-import { RichContent } from '~/components-styled/cms/rich-content';
+import { Box } from '~/components/base';
+import { ContentBlock } from '~/components/cms/content-block';
+import { RichContent } from '~/components/cms/rich-content';
 import {
   createGetStaticProps,
   StaticProps,

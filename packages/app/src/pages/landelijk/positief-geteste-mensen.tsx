@@ -8,22 +8,22 @@ import css from '@styled-system/css';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { Anchor } from '~/components-styled/anchor';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
-import { RegionControlOption } from '~/components-styled/chart-region-controls';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Markdown } from '~/components-styled/markdown';
-import { PageBarScale } from '~/components-styled/page-barscale';
-import { TileList } from '~/components-styled/tile-list';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { Anchor } from '~/components/anchor';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
+import { RegionControlOption } from '~/components/chart-region-controls';
+import { ChartTile } from '~/components/chart-tile';
+import { ChoroplethTile } from '~/components/choropleth-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { PageBarScale } from '~/components/page-barscale';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Heading, InlineText, Text } from '~/components/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -227,12 +227,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChoroplethTile>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
             metadata={{
               source: text.bronnen.rivm,
             }}
+            timeframeOptions={['all', '5weeks', 'week']}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -261,9 +262,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             title={siteText.infected_per_age_group.title}
             description={siteText.infected_per_age_group.description}
             timeframeOptions={['all', '5weeks']}
@@ -277,7 +278,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <GNumberBarChartTile data={data.g_number} />
 
@@ -356,7 +357,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
@@ -381,9 +382,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{ isPercentage: true }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
@@ -425,7 +426,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

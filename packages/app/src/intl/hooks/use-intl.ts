@@ -43,8 +43,8 @@ if ('__setDefaultTimeZone' in Intl.DateTimeFormat) {
 
 // Helper functions
 
-function isDayBeforeYesterday(date: Date) {
-  return isSameDay(date, subDays(Date.now(), 2));
+function isDayBeforeYesterday(date: Date, compareDate: Date) {
+  return isSameDay(date, subDays(compareDate, 2));
 }
 
 type DateDefinition = Date | { seconds: number } | { milliseconds: number };
@@ -196,7 +196,7 @@ export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
         ? siteText.utils.date_today
         : isYesterday(date)
         ? siteText.utils.date_yesterday
-        : isDayBeforeYesterday(date)
+        : isDayBeforeYesterday(date, new Date())
         ? siteText.utils.date_day_before_yesterday
         : undefined;
     }
@@ -237,7 +237,8 @@ export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
      */
     function formatDateSpan(
       startDateDefinition: DateDefinition,
-      endDateDefinition: DateDefinition
+      endDateDefinition: DateDefinition,
+      format?: formatStyle
     ) {
       const startDate = parseDateDefinition(startDateDefinition);
       const endDate = parseDateDefinition(endDateDefinition);
@@ -246,8 +247,8 @@ export function useIntlHelperContext(locale: string, siteText: AllLanguages) {
 
       const startDateText = isSameMonth
         ? `${startDate.getDate()}`
-        : formatDate(startDate);
-      const endDateText = formatDate(endDate);
+        : formatDate(startDate, format);
+      const endDateText = formatDate(endDate, format);
 
       return [startDateText, endDateText] as [start: string, end: string];
     }

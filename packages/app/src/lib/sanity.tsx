@@ -3,7 +3,7 @@ import { assert, imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import sanityClient from '@sanity/client';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
-import { findClosestSize } from '~/utils/findClosestSize';
+import { findClosestSize } from '~/utils/find-closest-size';
 
 assert(
   process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -26,6 +26,7 @@ const config = {
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: process.env.NODE_ENV === 'production',
+  apiVersion: '2021-03-25',
   /**
    * Set useCdn to `false` if your application require the freshest possible
    * data always (potentially slightly slower and a bit more expensive).

@@ -10,7 +10,7 @@ import {
 } from 'react';
 import { assert } from '~/utils/assert';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useHitSelection } from './use-hit-selection';
 import { Hit, Option, useSearchResults } from './use-search-results';
 

@@ -148,3 +148,9 @@ declare module 'picosanity' {
     fetch<R = never>(query: string, params?: QueryParams): Promise<R>;
   }
 }
+
+export type TitleDescriptionBlock = {
+  _type: 'titleDescriptionBlock';
+  description: RichContentBlock[];
+  title: string;
+};
