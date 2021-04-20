@@ -1560,7 +1560,10 @@
     },
     "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
+    }
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1590,7 +1593,10 @@
     },
     "kpi_titel": "Aantal overleden personen",
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
+    }
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
