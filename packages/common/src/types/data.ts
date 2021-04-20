@@ -451,7 +451,9 @@ export interface NationalDisabilityCare {
 }
 export interface NationalDisabilityCareValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average?: number | null;
   deceased_daily: number;
+  deceased_daily_moving_average?: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -771,6 +773,9 @@ export interface NlVaccineStockValue {
   astra_zeneca_available: number | null;
   astra_zeneca_not_available: number | null;
   astra_zeneca_total: number | null;
+  janssen_available: number | null;
+  janssen_not_available: number | null;
+  janssen_total: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
 }
@@ -936,10 +941,12 @@ export interface RegionalDisabilityCare {
 }
 export interface RegionalDisabilityCareValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average?: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
+  deceased_daily_moving_average?: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
