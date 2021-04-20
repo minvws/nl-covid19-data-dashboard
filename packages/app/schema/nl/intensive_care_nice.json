@@ -14,6 +14,9 @@
         "admissions_on_date_of_admission": {
           "type": "integer"
         },
+        "admissions_on_date_of_admission_moving_average": {
+          "type": ["number", "null"]
+        },
         "admissions_on_date_of_reporting": {
           "type": "integer"
         },

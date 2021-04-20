@@ -15,6 +15,9 @@
         "astra_zeneca_available",
         "astra_zeneca_not_available",
         "astra_zeneca_total",
+        "janssen_available",
+        "janssen_not_available",
+        "janssen_total",
         "date_of_insertion_unix",
         "date_unix"
       ],
@@ -51,6 +54,15 @@
           "type": ["integer", "null"]
         },
         "astra_zeneca_total": {
+          "type": ["integer", "null"]
+        },
+        "janssen_available": {
+          "type": ["integer", "null"]
+        },
+        "janssen_not_available": {
+          "type": ["integer", "null"]
+        },
+        "janssen_total": {
           "type": ["integer", "null"]
         },
         "date_of_insertion_unix": {
