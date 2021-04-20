@@ -67,6 +67,12 @@ export function createGetContent<T>(
   };
 }
 
+/**
+ * This method returns all the national data that is required by the sidebar,
+ * optional extra metric property names can be added as separate arguments which will
+ * be added to the output
+ *
+ */
 export function selectNlPageMetricData<
   T extends keyof National = NationalPageMetricNames
 >(
@@ -77,6 +83,10 @@ export function selectNlPageMetricData<
   return selectNlData(...[...nationalPageMetricNames, ...additionalMetrics]);
 }
 
+/**
+ * This method selects only the specified metric properties from the national data
+ *
+ */
 export function selectNlData<T extends keyof National = never>(
   ...metrics: T[]
 ) {
@@ -160,6 +170,12 @@ export function getVrData(context: GetStaticPropsContext) {
   };
 }
 
+/**
+ * This method returns all the municipal data that is required by the sidebar,
+ * optional extra metric property names can be added as separate arguments which will
+ * be added to the output
+ *
+ */
 export function selectGmPageMetricData<
   T extends keyof Municipal = MunicipalPageMetricNames
 >(
@@ -173,6 +189,10 @@ export function selectGmPageMetricData<
   return selectGmData(...[...municipalPageMetricNames, ...additionalMetrics]);
 }
 
+/**
+ * This method selects only the specified metric properties from the municipal data
+ *
+ */
 export function selectGmData<T extends keyof Municipal = never>(
   ...metrics: T[]
 ) {
