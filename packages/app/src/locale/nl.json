@@ -801,13 +801,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2178,11 +2172,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2307,11 +2297,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2943,6 +2929,29 @@
       "infected_overall_per_100k": "Alle leeftijden"
     },
     "reset_button_label": "Reset",
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "inaccurate": "Niet compleet"
+    }
+  },
+  "hospital_admissions_per_age_group": {
+    "overall_chart_title": "Ziekenhuisopnames per leeftijdsgroep door de tijd heen",
+    "overall_chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep.",
+    "ic_chart_title": "Intensive care-opnames per leeftijdsgroep door de tijd heen",
+    "ic_chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep.",
+    "legend": {
+      "admissions_age_0_19_per_million": "0-19",
+      "admissions_age_20_29_per_million": "20-29",
+      "admissions_age_30_39_per_million": "30-39",
+      "admissions_age_40_49_per_million": "40-49",
+      "admissions_age_50_59_per_million": "50-59",
+      "admissions_age_60_69_per_million": "60-69",
+      "admissions_age_70_79_per_million": "70-79",
+      "admissions_age_80_89_per_million": "80-89",
+      "admissions_age_90_plus_per_million": "90+",
+      "admissions_overall_per_million": "Alle leeftijden"
+    },
     "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
     "tooltip_labels": {

@@ -11,6 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -155,6 +156,22 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
+              />
+            )}
+          </ChartTile>
+
+          <ChartTile
+            title={siteText.hospital_admissions_per_age_group.ic_chart_title}
+            description={
+              siteText.hospital_admissions_per_age_group.ic_chart_description
+            }
+            timeframeOptions={['all', '5weeks']}
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <AdmissionsPerAgeGroup
+                values={data.intensive_care_nice_per_age_group?.values}
+                timeframe={timeframe}
               />
             )}
           </ChartTile>
