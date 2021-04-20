@@ -1,4 +1,4 @@
-import { getSkipLinkId, ensureUniqueSkipLinkIds } from '../skipLinks';
+import { getSkipLinkId, ensureUniqueSkipLinkIds } from '../skip-links';
 
 describe('Util: skipLinks', () => {
   describe('getSkipLinkId', () => {

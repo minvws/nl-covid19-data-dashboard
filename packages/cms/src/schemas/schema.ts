@@ -14,7 +14,6 @@ import editorial from './documents/editorial';
 import behaviorPage from './documents/pages/behavior-page';
 import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
 import deceasedPage from './documents/pages/deceased-page';
-import downscalePage from './documents/pages/downscale-page';
 import escalationLevelPage from './documents/pages/escalation-level-page';
 import hospitalPage from './documents/pages/hospital-page';
 import intensiveCarePage from './documents/pages/intensive-care-page';
@@ -74,7 +73,6 @@ export default createSchema({
     reproductionPage,
     sewerPage,
     vaccinationsPage,
-    downscalePage,
     ...Object.values(allDocuments),
 
     /** RESTRICTIONS */

@@ -1,5 +1,5 @@
-import { Box } from '~/components-styled/base';
-import { EditorialDetail } from '~/components-styled/editorial-detail';
+import { Box } from '~/components/base';
+import { EditorialDetail } from '~/components/editorial-detail';
 import { client, getImageSrc, localize } from '~/lib/sanity';
 import {
   createGetStaticProps,

@@ -14,12 +14,12 @@ import {
   Menu,
   MetricMenuItemLink,
   MetricMenuButtonLink,
-} from '~/components-styled/aside/menu';
-import { Box } from '~/components-styled/base';
-import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
-import { AppContent } from '~/components-styled/layout/app-content';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Text } from '~/components-styled/typography';
+} from '~/components/aside/menu';
+import { Box } from '~/components/base';
+import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { AppContent } from '~/components/layout/app-content';
+import { SidebarMetric } from '~/components/sidebar-metric';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';

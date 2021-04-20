@@ -2,13 +2,14 @@ import { css } from '@styled-system/css';
 import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import VaccineIcon from '~/assets/vaccine.svg';
-import { Box } from '~/components-styled/base';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { Tile } from '~/components-styled/tile';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { RichContent } from '~/components/cms/rich-content';
+import { Tile } from '~/components/tile';
+import { Heading, InlineText, Text } from '~/components/typography';
 import { colors } from '~/style/theme';
 import { RichContentBlock } from '~/types/cms';
 import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
 
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
@@ -41,7 +42,7 @@ export function MilestonesView(props: MilestoneViewProps) {
   const handleExpand = () => setIsExpanded(true);
 
   return (
-    <Tile css={css({ overflow: 'hidden' })}>
+    <Tile>
       <Heading level={2} m={0}>
         {title}
       </Heading>
@@ -189,9 +190,12 @@ const ListItemLast = styled.li(
       content: '""',
       position: 'absolute',
       top: 0,
-      left: -4,
-      right: -4,
-      width: 'calc(4rem + 100%);',
+      left: asResponsiveArray({ _: -3, sm: -4 }),
+      right: asResponsiveArray({ sm: -4 }),
+      width: asResponsiveArray({
+        _: 'calc(2rem + 100%);',
+        sm: 'calc(4rem + 100%);',
+      }),
       height: '100%',
       backgroundColor: 'header',
       zIndex: 1,

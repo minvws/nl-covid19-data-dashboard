@@ -2,19 +2,16 @@ import { NlVaccineStockValue } from '@corona-dashboard/common';
 import { pick } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
-import { ChartTile } from '~/components-styled/chart-tile';
+import { ChartTile } from '~/components/chart-tile';
 import {
   InteractiveLegend,
   SelectOption,
-} from '~/components-styled/interactive-legend';
-import {
-  SeriesConfig,
-  TimeSeriesChart,
-} from '~/components-styled/time-series-chart';
+} from '~/components/interactive-legend';
+import { SeriesConfig, TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 interface VaccineStockPerSupplierChartProps {
@@ -57,6 +54,12 @@ export function VaccineStockPerSupplierChart({
       metricProperty: 'astra_zeneca',
       color: colors.data.vaccines.astra_zeneca,
       label: productNames.astra_zeneca,
+      shape: 'circle',
+    },
+    {
+      metricProperty: 'janssen',
+      color: colors.data.vaccines.janssen,
+      label: productNames.janssen,
       shape: 'circle',
     },
   ];
