@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Choropleth } from './choropleth';
 import {
   useMunicipalityNavigationData,

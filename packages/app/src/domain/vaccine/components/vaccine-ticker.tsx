@@ -2,8 +2,8 @@ import { NlVaccineAdministeredRateMovingAverageValue } from '@corona-dashboard/c
 import css from '@styled-system/css';
 import { shuffle } from 'lodash';
 import { useEffect, useState } from 'react';
-import { Box } from '~/components-styled/base';
-import { InlineText, Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';

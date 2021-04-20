@@ -4,10 +4,10 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
-import { Box } from '~/components-styled/base';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { Select } from '~/components-styled/select';
-import { Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { ChoroplethTile } from '~/components/choropleth-tile';
+import { Select } from '~/components/select';
+import { Text } from '~/components/typography';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';

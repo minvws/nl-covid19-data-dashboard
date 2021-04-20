@@ -2,7 +2,7 @@
 
 ## Basic usage
 
-From the root directory of the project run the following command: `yarn validate-json`
+From the root directory of the project run the following command: `yarn validate-json-all`
 
 This will automatically validate all of the json files present in the
 `<root-folder>`/public/json folder.
@@ -13,7 +13,7 @@ When generating data it can be useful to check simply one file instead of every
 file that lives in the public/json directory.
 
 Therefore it is also possible to execute this command with the given parameters:
-`yarn validate-single <schema-name> <json-filename>`
+`yarn validate-json-single <schema-name> <json-filename>`
 
 ## Technical details
 
