@@ -79,6 +79,9 @@
     "intensive_care_nice": {
       "$ref": "intensive_care_nice.json"
     },
+    "intensive_care_nice_per_age_group": {
+      "$ref": "intensive_care_nice_per_age_group.json"
+    },
     "tested_overall": {
       "$ref": "tested_overall.json"
     },

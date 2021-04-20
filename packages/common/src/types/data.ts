@@ -150,6 +150,7 @@ export interface National {
   g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
+  intensive_care_nice_per_age_group?: NlIntensiveCareNicePerAgeGroup;
   tested_overall: NationalTestedOverall;
   tested_per_age_group: NlTestedPerAgeGroup;
   reproduction: NationalReproduction;
@@ -275,6 +276,24 @@ export interface NationalIntensiveCareNice {
 export interface NationalIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlIntensiveCareNicePerAgeGroup {
+  values: NlIntensiveCareNicePerAgeGroupValue[];
+  last_value: NlIntensiveCareNicePerAgeGroupValue;
+}
+export interface NlIntensiveCareNicePerAgeGroupValue {
+  admissions_age_0_19_per_million: number;
+  admissions_age_20_29_per_million: number;
+  admissions_age_30_39_per_million: number;
+  admissions_age_40_49_per_million: number;
+  admissions_age_50_59_per_million: number;
+  admissions_age_60_69_per_million: number;
+  admissions_age_70_79_per_million: number;
+  admissions_age_80_89_per_million: number;
+  admissions_age_90_plus_per_million: number;
+  admissions_overall_per_million: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
