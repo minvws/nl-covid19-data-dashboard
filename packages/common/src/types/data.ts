@@ -155,6 +155,7 @@ export interface National {
   reproduction: NationalReproduction;
   sewer: NationalSewer;
   hospital_nice: NationalHospitalNice;
+  hospital_nice_per_age_group?: NlHospitalNicePerAgeGroup;
   hospital_lcps: NationalHospitalLcps;
   intensive_care_lcps: NationalIntensiveCareLcps;
   tested_ggd_daily: NationalTestedGgdDaily;
@@ -337,6 +338,24 @@ export interface NationalHospitalNice {
 export interface NationalHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlHospitalNicePerAgeGroup {
+  values: NlHospitalNicePerAgeGroupValue[];
+  last_value: NlHospitalNicePerAgeGroupValue;
+}
+export interface NlHospitalNicePerAgeGroupValue {
+  admissions_age_0_19_per_million: number;
+  admissions_age_20_29_per_million: number;
+  admissions_age_30_39_per_million: number;
+  admissions_age_40_49_per_million: number;
+  admissions_age_50_59_per_million: number;
+  admissions_age_60_69_per_million: number;
+  admissions_age_70_79_per_million: number;
+  admissions_age_80_89_per_million: number;
+  admissions_age_90_plus_per_million: number;
+  admissions_overall_per_million: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
