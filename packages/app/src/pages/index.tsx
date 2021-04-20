@@ -60,7 +60,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -81,27 +81,16 @@ export const getStaticProps = createGetStaticProps(
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
   }>(getTopicalPageQuery),
-  () => {
-    const data = getNlData();
-
-    for (const metric of Object.values(data)) {
-      if (typeof metric === 'object' && metric !== null) {
-        for (const [metricProperty, metricValue] of Object.entries(metric)) {
-          if (metricProperty === 'values') {
-            (metricValue as {
-              values: Array<unknown>;
-            }).values = [];
-          }
-        }
-      }
-    }
-
-    return data;
-  }
+  selectNlData(
+    'tested_overall',
+    'hospital_nice',
+    'difference',
+    'vaccine_administered_total'
+  )
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;

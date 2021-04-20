@@ -70,7 +70,13 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData('tested_overall', 'hospital_nice', 'code', 'escalation_level'),
+  selectVrData(
+    'tested_overall',
+    'hospital_nice',
+    'code',
+    'escalation_level',
+    'difference'
+  ),
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,

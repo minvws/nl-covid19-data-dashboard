@@ -14,16 +14,15 @@ import { DifferenceIndicator } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
-interface DataDrivenTextProps<
-  T extends keyof National | keyof Regionaal | keyof Municipal,
-  K = T extends keyof National
-    ? Pick<National, 'difference' | T>
-    : T extends keyof Regionaal
-    ? Pick<Regionaal, 'difference' | T>
-    : T extends keyof Municipal
-    ? Pick<Municipal, 'difference' | T>
-    : never
-> {
+type DataKeys = keyof National | keyof Regionaal | keyof Municipal;
+type DataFile<T> = T extends keyof National
+  ? Pick<National, 'difference' | T>
+  : T extends keyof Regionaal
+  ? Pick<Regionaal, 'difference' | T>
+  : T extends keyof Municipal
+  ? Pick<Municipal, 'difference' | T>
+  : never;
+interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   data: K;
   differenceKey: string;
   metricName: T;
@@ -32,16 +31,7 @@ interface DataDrivenTextProps<
   differenceTexts: PluralizationTexts;
 }
 
-export function DataDrivenText<
-  T extends keyof National | keyof Regionaal | keyof Municipal,
-  K = T extends keyof National
-    ? Pick<National, 'difference' | T>
-    : T extends keyof Regionaal
-    ? Pick<Regionaal, 'difference' | T>
-    : T extends keyof Municipal
-    ? Pick<Municipal, 'difference' | T>
-    : never
->({
+export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
   data,
   differenceKey,
   metricName,
