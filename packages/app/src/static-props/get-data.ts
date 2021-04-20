@@ -75,11 +75,7 @@ export function createGetContent<T>(
  */
 export function selectNlPageMetricData<
   T extends keyof National = NationalPageMetricNames
->(
-  ...additionalMetrics: T[]
-): () => {
-  selectedNlData: Pick<National, NationalPageMetricNames | T>;
-} {
+>(...additionalMetrics: T[]) {
   return selectNlData(...[...nationalPageMetricNames, ...additionalMetrics]);
 }
 
@@ -119,14 +115,7 @@ export function getNlData() {
  */
 export function selectVrPageMetricData<
   T extends keyof Regionaal = SafetyRegionPageMetricNames
->(
-  ...additionalMetrics: T[]
-): (
-  context: GetStaticPropsContext
-) => {
-  selectedVrData: Pick<Regionaal, SafetyRegionPageMetricNames | T>;
-  safetyRegionName: string;
-} {
+>(...additionalMetrics: T[]) {
   return selectVrData(
     ...[...safetyRegionPageMetricNames, ...additionalMetrics]
   );
@@ -178,14 +167,7 @@ export function getVrData(context: GetStaticPropsContext) {
  */
 export function selectGmPageMetricData<
   T extends keyof Municipal = MunicipalPageMetricNames
->(
-  ...additionalMetrics: T[]
-): (
-  context: GetStaticPropsContext
-) => {
-  selectedGmData: Pick<Municipal, MunicipalPageMetricNames | T>;
-  municipalityName: string;
-} {
+>(...additionalMetrics: T[]) {
   return selectGmData(...[...municipalPageMetricNames, ...additionalMetrics]);
 }
 
