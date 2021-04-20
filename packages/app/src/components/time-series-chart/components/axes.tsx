@@ -223,7 +223,7 @@ export const Axes = memo(function Axes({
         {isYAxisCollapsed && numGridLines !== 0 && (
           <AxisLeft
             scale={yScale}
-            tickValues={[yScale.domain()[1]]}
+            tickValues={yScale.domain()}
             numTicks={numGridLines}
             hideTicks
             hideAxisLine
