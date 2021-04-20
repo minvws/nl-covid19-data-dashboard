@@ -20,6 +20,7 @@ import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-c
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
 import {
@@ -59,6 +60,8 @@ export const getStaticProps = createGetStaticProps(
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, data, lastGenerated } = props;
+
+  const stockFeature = useFeature('vaccineStockPerSupplier');
 
   const { siteText } = useIntl();
 
@@ -206,7 +209,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
+          {stockFeature.isEnabled && (
+            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
+          )}
         </TileList>
       </NationalLayout>
     </Layout>

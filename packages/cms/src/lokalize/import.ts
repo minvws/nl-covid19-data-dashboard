@@ -25,6 +25,7 @@ const en = JSON.parse(
   })
 ) as Record<string, unknown>;
 
+const transaction = client.transaction();
 let issueCounter = 0;
 
 for (const [key, dataText] of Object.entries(nl)) {
@@ -105,16 +106,13 @@ for (const [key, dataText] of Object.entries(nl)) {
    * already start to extend the Lokalize string set using Sanity if we want
    * to.
    */
-  const transaction = textDocuments.reduce(
-    (tx, document) => tx.createOrReplace(document),
-    client.transaction()
-  );
-
-  transaction
-    .commit()
-    .then(() => console.log(`There were ${issueCounter} issues`))
-    .catch((err) => {
-      console.error(err);
-      process.exit(1);
-    });
+  textDocuments.forEach((document) => transaction.createOrReplace(document));
 }
+
+transaction
+  .commit()
+  .then(() => console.log(`There were ${issueCounter} issues`))
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

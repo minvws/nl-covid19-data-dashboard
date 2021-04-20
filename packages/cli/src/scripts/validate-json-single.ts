@@ -2,10 +2,13 @@ import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
-import { createValidateFunction } from './create-validate-function';
-import { executeValidations } from './execute-validations';
 import { schemaDirectory } from '../config';
-import { getSchemaInfo } from '../schema-information';
+import {
+  createValidateFunction,
+  executeValidations,
+  getSchemaInfo,
+  SchemaInfo,
+} from '../schema';
 
 const schemaInformation = getSchemaInfo();
 
@@ -14,10 +17,10 @@ const validSchemaNames = Object.keys(schemaInformation);
 const cli = meow(
   `
     Usage
-      $ validate-single <schema-name> <json-path>
+      $ validate-json-single <schema-name> <json-path>
 
     Examples
-      $ validate-single national nl.json
+      $ validate-json-single national nl.json
 `
 );
 
@@ -36,7 +39,7 @@ and json-filename must be a file associated with that schema.
   process.exit(1);
 }
 
-const schemaName = cliArgs[0];
+const schemaName = cliArgs[0] as keyof SchemaInfo;
 const jsonFileName = cliArgs[1];
 
 if (!validSchemaNames.includes(schemaName)) {

@@ -1,15 +1,13 @@
-import safetyRegions from '~/data/index';
+import { vrData } from '~/data/vr';
 
 /**
  * getStaticPaths creates an array of all the allowed `/veiligheidsregio/[code]`
  * routes.
  */
 export function getStaticPaths() {
-  const filteredRegions = safetyRegions.filter(
-    (region) => region.code.indexOf('VR') === 0
-  );
-  const paths = filteredRegions.map((region) => ({
-    params: { code: region.code },
+  const filteredRegions = vrData.filter((x) => x.code.startsWith('VR'));
+  const paths = filteredRegions.map((x) => ({
+    params: { code: x.code },
   }));
 
   return {

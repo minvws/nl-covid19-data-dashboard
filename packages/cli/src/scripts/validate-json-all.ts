@@ -3,17 +3,21 @@ import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
 import { schemaDirectory } from '../config';
-import { createValidateFunction } from './create-validate-function';
-import { executeValidations } from './execute-validations';
-import { getSchemaInfo, SchemaItemInfo } from '../schema-information';
+import {
+  createValidateFunction,
+  executeValidations,
+  getSchemaInfo,
+  SchemaInfo,
+  SchemaInfoItem,
+} from '../schema';
 
 const cli = meow(
   `
     Usage
-      $ validate-json <optional-json-path>
+      $ validate-json-all <optional-json-path>
 
     Examples
-      $ validate-json pages-tests/fixtures
+      $ validate-json-all pages-tests/fixtures
 `
 );
 
@@ -49,7 +53,7 @@ if (!customJsonPathArg) {
 
 // The validations are asynchronous so this reducer gathers all the Promises in one array.
 const promisedValidations = Object.keys(schemaInfo).map((schemaName) =>
-  validate(schemaName, schemaInfo[schemaName])
+  validate(schemaName, schemaInfo[schemaName as keyof SchemaInfo])
 );
 
 // Here the script waits for all the validations to finish, the result of each run is simply
@@ -81,7 +85,7 @@ Promise.all(promisedValidations)
  * @param schemaInfo An object describing the files, path and custom validations for the given schema name
  * @returns An array of promises that will resolve either to true or false dependent on the validation result
  */
-async function validate(schemaName: string, schemaInfo: SchemaItemInfo) {
+async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
   const validateFunction = await createValidateFunction(
     path.join(schemaDirectory, schemaName, `__index.json`)
   );

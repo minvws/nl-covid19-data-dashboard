@@ -1,6 +1,6 @@
 import { ErrorObject, ValidateFunction } from 'ajv';
 import { isDefined } from 'ts-is-present';
-import { SchemaItemInfo } from '../schema-information';
+import { SchemaInfoItem } from './schema-info';
 
 type ValidationResult = {
   isValid: boolean;
@@ -17,7 +17,7 @@ type ValidationResult = {
 export function executeValidations(
   validateFunction: ValidateFunction,
   data: any,
-  schemaInfo: SchemaItemInfo
+  schemaInfo: SchemaInfoItem
 ): ValidationResult {
   let isValid = validateFunction(data) as boolean;
   let schemaErrors: (ErrorObject | string)[] = validateFunction.errors ?? [];

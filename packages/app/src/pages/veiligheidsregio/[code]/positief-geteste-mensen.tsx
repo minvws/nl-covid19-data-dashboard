@@ -23,7 +23,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import regionCodeToMunicipalCodeLookup from '~/data/region-code-to-municipal-code-lookup';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
@@ -72,7 +72,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
 
-  const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
+  const municipalCodes = gmCodesByVrCode[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const metadata = {
