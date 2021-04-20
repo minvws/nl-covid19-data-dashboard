@@ -20,12 +20,12 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultNlData(),
+  selectNlPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {

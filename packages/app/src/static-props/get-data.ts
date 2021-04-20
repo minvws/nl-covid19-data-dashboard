@@ -7,11 +7,20 @@ import {
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
-import { vrData } from '~/data/vr';
 import { gmData } from '~/data/gm';
-import { municipalMetricNames } from '~/domain/layout/municipality-layout';
-import { nationalMetricNames } from '~/domain/layout/national-layout';
-import { safetyRegionMetricNames } from '~/domain/layout/safety-region-layout';
+import { vrData } from '~/data/vr';
+import {
+  MunicipalPageMetricNames,
+  municipalPageMetricNames,
+} from '~/domain/layout/municipality-layout';
+import {
+  NationalPageMetricNames,
+  nationalPageMetricNames,
+} from '~/domain/layout/national-layout';
+import {
+  SafetyRegionPageMetricNames,
+  safetyRegionPageMetricNames,
+} from '~/domain/layout/safety-region-layout';
 import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -58,25 +67,23 @@ export function createGetContent<T>(
   };
 }
 
-export function selectDefaultNlData<
-  T extends keyof National = typeof nationalMetricNames[number]
+export function selectNlPageMetricData<
+  T extends keyof National = NationalPageMetricNames
 >(
   ...additionalMetrics: T[]
 ): () => {
-  selectedNlData: Pick<National, typeof nationalMetricNames[number] | T>;
+  selectedNlData: Pick<National, NationalPageMetricNames | T>;
 } {
-  return selectSpecificNlData(
-    ...[...nationalMetricNames, ...additionalMetrics]
-  );
+  return selectNlData(...[...nationalPageMetricNames, ...additionalMetrics]);
 }
 
-export function selectSpecificNlData<T extends keyof National>(
+export function selectNlData<T extends keyof National = never>(
   ...metrics: T[]
 ) {
   return () => {
     const { data } = getNlData();
 
-    const selectedNlData: Pick<National, T> = {} as Pick<National, T>;
+    const selectedNlData = {} as Pick<National, T>;
     metrics.forEach((p) => {
       selectedNlData[p] = data[p];
     });
@@ -96,30 +103,30 @@ export function getNlData() {
 
 /**
  * This method returns all the region data that is required by the sidebar,
- * optional extra metric property names can be added as arguments which will
+ * optional extra metric property names can be added as separate arguments which will
  * be added to the output
  *
  */
-export function selectDefaultVrData<
-  T extends keyof Regionaal = typeof safetyRegionMetricNames[number]
+export function selectVrPageMetricData<
+  T extends keyof Regionaal = SafetyRegionPageMetricNames
 >(
   ...additionalMetrics: T[]
 ): (
   context: GetStaticPropsContext
 ) => {
-  selectedVrData: Pick<Regionaal, typeof safetyRegionMetricNames[number] | T>;
+  selectedVrData: Pick<Regionaal, SafetyRegionPageMetricNames | T>;
   safetyRegionName: string;
 } {
-  return selectSpecificVrData(
-    ...[...safetyRegionMetricNames, ...additionalMetrics]
+  return selectVrData(
+    ...[...safetyRegionPageMetricNames, ...additionalMetrics]
   );
 }
 
 /**
- * This method selects only the specified meric properties from the region data
+ * This method selects only the specified metric properties from the region data
  *
  */
-export function selectSpecificVrData<T extends keyof Regionaal>(
+export function selectVrData<T extends keyof Regionaal = never>(
   ...metrics: T[]
 ) {
   return (context: GetStaticPropsContext) => {
@@ -153,28 +160,26 @@ export function getVrData(context: GetStaticPropsContext) {
   };
 }
 
-export function selectDefaultGmData<
-  T extends keyof Municipal = typeof municipalMetricNames[number]
+export function selectGmPageMetricData<
+  T extends keyof Municipal = MunicipalPageMetricNames
 >(
   ...additionalMetrics: T[]
 ): (
   context: GetStaticPropsContext
 ) => {
-  selectedGmData: Pick<Municipal, typeof municipalMetricNames[number]> | T;
+  selectedGmData: Pick<Municipal, MunicipalPageMetricNames | T>;
   municipalityName: string;
 } {
-  return selectSpecificGmData(
-    ...[...municipalMetricNames, ...additionalMetrics]
-  );
+  return selectGmData(...[...municipalPageMetricNames, ...additionalMetrics]);
 }
 
-export function selectSpecificGmData<T extends keyof Municipal>(
+export function selectGmData<T extends keyof Municipal = never>(
   ...metrics: T[]
 ) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const selectedGmData: Pick<Municipal, T> = {} as Pick<Municipal, T>;
+    const selectedGmData = {} as Pick<Municipal, T>;
     metrics.forEach((p) => {
       selectedGmData[p] = gmData.data[p];
     });

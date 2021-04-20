@@ -20,7 +20,8 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-fo
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-export const municipalMetricNames = [
+export const municipalPageMetricNames = [
+  'code',
   'tested_overall',
   'deceased_rivm',
   'hospital_nice',
@@ -28,17 +29,16 @@ export const municipalMetricNames = [
   'difference',
 ] as const;
 
-export type MunicipalMetricData = Pick<
-  Municipal,
-  typeof municipalMetricNames[number]
->;
+export type MunicipalPageMetricNames = typeof municipalPageMetricNames[number];
+
+export type MunicipalPageMetricData = Pick<Municipal, MunicipalPageMetricNames>;
 
 type MunicipalityLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
-      data: MunicipalMetricData;
+      data: MunicipalPageMetricData;
       municipalityName: string;
     }
   | {

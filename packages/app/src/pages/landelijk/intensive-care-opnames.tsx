@@ -22,14 +22,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultNlData(),
+  selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {

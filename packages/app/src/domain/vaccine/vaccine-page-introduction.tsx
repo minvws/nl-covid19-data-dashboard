@@ -15,7 +15,12 @@ import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-o
 
 interface VaccinePageIntroductionProps {
   text: any;
-  data: National;
+  data: Pick<
+    National,
+    | 'vaccine_administered_planned'
+    | 'vaccine_administered_total'
+    | 'vaccine_administered_rate_moving_average'
+  >;
 }
 
 export function VaccinePageIntroduction({

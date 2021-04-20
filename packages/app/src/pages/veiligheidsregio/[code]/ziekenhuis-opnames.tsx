@@ -29,7 +29,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -40,7 +40,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultVrData(),
+  selectVrPageMetricData(),
   createGetChoroplethData({
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),

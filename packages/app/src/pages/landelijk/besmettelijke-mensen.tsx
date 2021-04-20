@@ -16,13 +16,13 @@ import {
 } from '~/static-props/create-get-static-props';
 import {
   getLastGeneratedDate,
-  selectDefaultNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultNlData()
+  selectNlPageMetricData()
 );
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {

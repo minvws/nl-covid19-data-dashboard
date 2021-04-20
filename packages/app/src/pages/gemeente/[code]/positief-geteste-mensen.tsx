@@ -30,7 +30,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultGmData,
+  selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -39,7 +39,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultGmData(),
+  selectGmPageMetricData(),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),

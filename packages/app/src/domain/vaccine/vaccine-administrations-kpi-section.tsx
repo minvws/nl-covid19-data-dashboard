@@ -11,7 +11,18 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-export function VaccineAdministrationsKpiSection({ data }: { data: National }) {
+export function VaccineAdministrationsKpiSection({
+  data,
+}: {
+  data: Pick<
+    National,
+    | 'vaccine_administered_total'
+    | 'vaccine_administered_ggd'
+    | 'vaccine_administered_hospitals_and_care_institutions'
+    | 'vaccine_administered_doctors'
+    | 'vaccine_administered_ggd_ghor'
+  >;
+}) {
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;

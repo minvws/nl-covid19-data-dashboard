@@ -30,7 +30,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
@@ -38,7 +38,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultNlData(),
+  selectNlPageMetricData('corona_melder_app'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),

@@ -22,14 +22,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultVrData(),
+  selectVrPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {

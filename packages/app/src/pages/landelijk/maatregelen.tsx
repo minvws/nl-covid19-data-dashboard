@@ -17,7 +17,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 
@@ -28,7 +28,7 @@ type MaatregelenData = {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultNlData(),
+  selectNlPageMetricData(),
   createGetContent<MaatregelenData>((_context) => {
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;

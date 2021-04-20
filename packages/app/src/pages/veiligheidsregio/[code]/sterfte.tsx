@@ -21,7 +21,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -31,7 +31,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultVrData('deceased_cbs', 'deceased_rivm'),
+  selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {

@@ -25,7 +25,7 @@ import { SidebarMetric } from '~/components/sidebar-metric';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-export const nationalMetricNames = [
+export const nationalPageMetricNames = [
   'vaccine_administered_total',
   'tested_overall',
   'infectious_people',
@@ -42,14 +42,13 @@ export const nationalMetricNames = [
   'difference',
 ] as const;
 
-export type NationalMetricData = Pick<
-  National,
-  typeof nationalMetricNames[number]
->;
+export type NationalPageMetricNames = typeof nationalPageMetricNames[number];
+
+export type NationalPageMetricData = Pick<National, NationalPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;
-  data: NationalMetricData;
+  data: NationalPageMetricData;
   children?: React.ReactNode;
 }
 

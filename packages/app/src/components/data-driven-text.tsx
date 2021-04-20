@@ -7,31 +7,48 @@ import {
 } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import { assert } from '~/utils/assert';
 import { useIntl } from '~/intl';
-
+import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { DifferenceIndicator } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
-interface DataDrivenTextProps {
-  data: National | Regionaal | Municipal;
+interface DataDrivenTextProps<
+  T extends keyof National | keyof Regionaal | keyof Municipal,
+  K = T extends keyof National
+    ? Pick<National, 'difference' | T>
+    : T extends keyof Regionaal
+    ? Pick<Regionaal, 'difference' | T>
+    : T extends keyof Municipal
+    ? Pick<Municipal, 'difference' | T>
+    : never
+> {
+  data: K;
   differenceKey: string;
-  metricName: keyof National;
+  metricName: T;
   metricProperty: string;
   valueTexts: PluralizationTexts;
   differenceTexts: PluralizationTexts;
 }
 
-export function DataDrivenText({
+export function DataDrivenText<
+  T extends keyof National | keyof Regionaal | keyof Municipal,
+  K = T extends keyof National
+    ? Pick<National, 'difference' | T>
+    : T extends keyof Regionaal
+    ? Pick<Regionaal, 'difference' | T>
+    : T extends keyof Municipal
+    ? Pick<Municipal, 'difference' | T>
+    : never
+>({
   data,
   differenceKey,
   metricName,
   metricProperty,
   valueTexts,
   differenceTexts,
-}: DataDrivenTextProps) {
+}: DataDrivenTextProps<T, K>) {
   const { siteText, formatNumber } = useIntl();
 
   const lastValue = get(data, [metricName, 'last_value']);

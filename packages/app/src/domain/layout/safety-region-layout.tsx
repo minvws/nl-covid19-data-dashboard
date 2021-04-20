@@ -24,7 +24,7 @@ import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
-export const safetyRegionMetricNames = [
+export const safetyRegionPageMetricNames = [
   'code',
   'escalation_level',
   'tested_overall',
@@ -38,9 +38,11 @@ export const safetyRegionMetricNames = [
   'difference',
 ] as const;
 
-export type SafetyRegionMetricData = Pick<
+export type SafetyRegionPageMetricNames = typeof safetyRegionPageMetricNames[number];
+
+export type SafetyRegionPageMetricData = Pick<
   Regionaal,
-  typeof safetyRegionMetricNames[number]
+  SafetyRegionPageMetricNames
 >;
 
 type SafetyRegionLayoutProps = {
@@ -48,7 +50,7 @@ type SafetyRegionLayoutProps = {
   children?: React.ReactNode;
 } & (
   | {
-      data: SafetyRegionMetricData;
+      data: SafetyRegionPageMetricData;
       safetyRegionName: string;
     }
   | {

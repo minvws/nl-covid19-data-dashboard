@@ -22,7 +22,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -31,7 +31,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultVrData('sewer_per_installation', 'sewer'),
+  selectVrPageMetricData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {

@@ -9,7 +9,7 @@ import {
 } from '~/static-props/create-get-static-props';
 import {
   getLastGeneratedDate,
-  selectDefaultVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -17,7 +17,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultVrData()
+  selectVrPageMetricData()
 );
 
 const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {

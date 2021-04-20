@@ -22,7 +22,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultGmData,
+  selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -31,7 +31,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultGmData(),
+  selectGmPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {

@@ -9,7 +9,7 @@ import {
 } from '~/static-props/create-get-static-props';
 import {
   getLastGeneratedDate,
-  selectDefaultGmData,
+  selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -17,7 +17,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultGmData()
+  selectGmPageMetricData()
 );
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {

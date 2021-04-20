@@ -38,7 +38,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectDefaultVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
@@ -50,7 +50,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectDefaultVrData(
+  selectVrPageMetricData(
     'escalation_level',
     'hospital_nice_sum',
     'tested_overall_sum'
