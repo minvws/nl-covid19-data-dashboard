@@ -1,12 +1,12 @@
-import { MaxWidth } from '~/components/max-width';
-import styles from './over.module.scss';
+import { Heading, Text } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -16,14 +16,10 @@ const NotFound = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...siteText.notfound_metadata} lastGenerated={lastGenerated}>
-      <div className={styles.container}>
-        <MaxWidth>
-          <div className={styles.maxwidth}>
-            <h2>{siteText.notfound_titel.text}</h2>
-            <p>{siteText.notfound_beschrijving.text}</p>
-          </div>
-        </MaxWidth>
-      </div>
+      <Content>
+        <Heading level={1}>{siteText.error_titel.text}</Heading>
+        <Text>{siteText.error_beschrijving.text}</Text>
+      </Content>
     </Layout>
   );
 };
