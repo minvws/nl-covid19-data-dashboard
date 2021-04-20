@@ -29,7 +29,7 @@ import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
  *
  *     export const getStaticProps = createGetStaticProps(
  *       getLastGeneratedDate,
- *       getVrData,
+ *       selectVrPageMetricData('metric_name1', 'metric_name2'),
  *       createGetChoroplethData({
  *         gm: x => ({ y: x.hospital_nice})
  *       })
