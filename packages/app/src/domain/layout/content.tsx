@@ -20,13 +20,6 @@ export function Content({ children }: ContentProps) {
 const StyledBox = styled(Box)(
   css({
     bg: 'white',
-
-    p: {
-      fontSize: '1.125rem',
-    },
-
-    li: {
-      fontSize: '1.125rem',
-    },
+    fontSize: '1.125rem',
   })
 );
