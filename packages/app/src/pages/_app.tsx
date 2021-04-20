@@ -3,7 +3,6 @@ import { AppProps } from 'next/app';
 import Router from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import '~/components/combo-box/combo-box.scss';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';

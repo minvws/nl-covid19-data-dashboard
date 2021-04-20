@@ -23,6 +23,9 @@
         "covid_daily": {
           "type": "integer"
         },
+        "covid_daily_moving_average": {
+          "type": ["number", "null"]
+        },
         "covid_total": {
           "type": "integer"
         },
