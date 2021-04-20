@@ -16,6 +16,17 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
+  rewrites: () => [
+    {
+      source: '/cms-image/:path*',
+      destination: 'https://cdn.sanity.io/images/5mog5ask/:path*',
+    },
+    {
+      source: '/cms-file/:path*',
+      destination: 'https://cdn.sanity.io/files/5mog5ask/:path*',
+    },
+  ],
+
   /*i18n: {
     // These are all the locales you want to support in
     // your application
