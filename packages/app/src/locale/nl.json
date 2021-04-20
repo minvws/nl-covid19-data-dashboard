@@ -109,6 +109,7 @@
     },
     "kpi_titel": "Het aantal IC-opnames dat op één dag gemeld is",
     "linechart_legend_trend_label": "Intensive care-opnames",
+    "linechart_legend_trend_label_moving_average": "Intensive care-opnames",
     "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
     "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is."
   },
@@ -214,6 +215,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_titel_moving_average": "Ziekenhuisopnames",
     "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "positief_geteste_personen": {
@@ -781,6 +783,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
     "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_titel_moving_average": "Ziekenhuisopnames",
     "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -801,13 +804,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -916,6 +913,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
+    "linechart_legend_titel_moving_average": "Ziekenhuisopnames",
     "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
   },
   "gemeente_positief_geteste_personen": {
@@ -2178,11 +2176,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2307,11 +2301,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
