@@ -5,7 +5,7 @@ import { Box } from '~/components/base';
 
 export function LanguageSwitcher() {
   const router = useRouter();
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
+  const { locale = 'nl' } = router;
 
   return (
     <Box height={55} mt={-55} textAlign="right">

@@ -1,6 +1,6 @@
 import { ArticleDetail } from '~/components/article-detail';
 import { Box } from '~/components/base';
-import { client, getImageSrc, localize } from '~/lib/sanity';
+import { client, getImageSrc } from '~/lib/sanity';
 import {
   createGetStaticProps,
   StaticProps,
@@ -12,17 +12,14 @@ import {
 import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { Layout } from '~/domain/layout/layout';
+import { useRouter } from 'next/router';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
-  //@TODO THIS NEEDS TO COME FROM CONTEXT OR SIMILAR?
-  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-
   const articlesData = await client.fetch(articlesQuery);
-  const articles = localize<{ slug: string }[]>(articlesData, [locale, 'nl']);
 
-  const paths = articles.map((article) => ({
+  const paths = articlesData.map((article: { slug: string }) => ({
     params: { slug: article.slug },
   }));
 
@@ -33,9 +30,7 @@ export async function getStaticPaths() {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
-    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    // const { locale } = context;
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+    const { locale = 'nl' } = context;
 
     assert(context?.params?.slug, 'Slug required to retrieve article');
     return `*[_type == 'article' && slug.current == '${context.params.slug}']{
@@ -75,6 +70,7 @@ export const getStaticProps = createGetStaticProps(
 
 const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
+  const { locale = 'nl' } = useRouter();
 
   const { cover } = content;
   const { asset } = cover;
@@ -82,7 +78,7 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const imgPath = getImageSrc(asset, 1200);
 
   const metadata = {
-    title: getTitle(props.content.title),
+    title: getTitle(props.content.title, locale),
     description: toPlainText(props.content.intro),
     openGraphImage: imgPath,
     twitterImage: imgPath,
@@ -99,9 +95,9 @@ const ArticleDetailPage = (props: StaticProps<typeof getStaticProps>) => {
 
 export default ArticleDetailPage;
 
-function getTitle(title: string) {
+function getTitle(title: string, locale: string) {
   const suffix =
-    process.env.NEXT_PUBLIC_LOCALE === 'nl'
+    locale === 'nl'
       ? 'Dashboard Coronavirus | Rijksoverheid.nl'
       : 'Dashboard Coronavirus | Government.nl';
 

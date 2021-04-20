@@ -16,7 +16,7 @@ const regioData = [...Array(25).keys()].map(
  * @param locale
  */
 const generateSitemap = async function (
-  locale,
+  locale = 'nl',
   dataset = 'production',
   projectId = '',
   useCdn = true
@@ -30,7 +30,7 @@ const generateSitemap = async function (
   console.log(config);
   const client = sanityClient(config);
 
-  console.log(`Generating sitemap '${locale || 'nl'}'`);
+  console.log(`Generating sitemap '${locale}'`);
   const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
 
   const slugsQuery = `{
@@ -40,9 +40,7 @@ const generateSitemap = async function (
 
   const slugsData = await client.fetch(slugsQuery);
 
-  const domain = `${
-    process.env.NEXT_PUBLIC_LOCALE === 'en' ? 'government' : 'rijksoverheid'
-  }`;
+  const domain = `${locale === 'en' ? 'government' : 'rijksoverheid'}`;
 
   // Ignore Next.js specific files and API routes.
   const pages = await globby([

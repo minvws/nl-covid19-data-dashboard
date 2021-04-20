@@ -30,23 +30,23 @@ import { Block, DownscalingPage } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { expandPortableTextAssets } from '~/utils/groq/expand-portable-text-assets';
 
-const locale = process.env.NEXT_PUBLIC_LOCALE;
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<DownscalingPage>(
-    (_context) => `*[_type == 'downscalePage'][0]{
+  createGetContent<DownscalingPage>((context) => {
+    const { locale = 'nl' } = context;
+
+    return `*[_type == 'downscalePage'][0]{
       ...,
       "page": {
         ...page,
-        ${expandPortableTextAssets('description', 'page', locale || 'nl')},
+        ${expandPortableTextAssets('description', 'page', locale)},
       },
       "downscalingPossible": {
         ...downscalingPossible,
         ${expandPortableTextAssets(
           'description',
           'downscalingPossible',
-          locale || 'nl'
+          locale
         )},
       },
       "downscalingNotPossible": {
@@ -59,10 +59,10 @@ export const getStaticProps = createGetStaticProps(
       },
       "measures": {
         ...measures,
-        ${expandPortableTextAssets('description', 'measures', locale || 'nl')},
+        ${expandPortableTextAssets('description', 'measures', locale)},
       },
-    }`
-  ),
+    }`;
+  }),
   getNlData
 );
 

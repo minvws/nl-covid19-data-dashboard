@@ -12,6 +12,7 @@ import {
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skip-links';
 import styles from './over.module.scss';
+
 import { RichContent } from '~/components/cms/rich-content';
 import { Box } from '~/components/base';
 import { Layout } from '~/domain/layout/layout';
@@ -25,10 +26,8 @@ interface OverRisiconiveausData {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverRisiconiveausData>((_context) => {
-    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    // const { locale } = context;
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+  createGetContent<OverRisiconiveausData>((context) => {
+    const { locale } = context;
     return `*[_type == 'overRisicoNiveaus']{
       ...,
       "description": {

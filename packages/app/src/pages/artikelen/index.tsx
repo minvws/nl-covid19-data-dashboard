@@ -15,10 +15,8 @@ import { Layout } from '~/domain/layout/layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<ArticleSummary[]>((_context) => {
-    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    // const { locale } = context;
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+  createGetContent<ArticleSummary[]>((context) => {
+    const { locale = 'nl' } = context;
 
     return `*[_type == 'article'] | order(publicationDate desc) {
         "title":title.${locale},

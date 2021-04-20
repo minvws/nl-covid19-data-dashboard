@@ -49,8 +49,8 @@ export const getStaticProps = createGetStaticProps(
     highlight: {
       articles?: ArticleSummary[];
     };
-  }>((_context) => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
     return `{
       "milestones": ${getVaccineMilestonesQuery()},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
