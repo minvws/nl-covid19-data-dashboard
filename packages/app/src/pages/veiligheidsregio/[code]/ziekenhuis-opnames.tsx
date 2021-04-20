@@ -16,7 +16,7 @@ import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import regionCodeToMunicipalCodeLookup from '~/data/region-code-to-municipal-code-lookup';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
@@ -66,7 +66,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
   const lastValue = data.hospital_nice.last_value;
 
-  const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
+  const municipalCodes = gmCodesByVrCode[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const underReportedRange = getBoundaryDateStartUnix(

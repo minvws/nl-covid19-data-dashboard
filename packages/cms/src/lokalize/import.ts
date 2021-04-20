@@ -1,7 +1,6 @@
 import flatten from 'flat';
 import fs from 'fs';
 import { get, isEmpty } from 'lodash';
-import Queue from 'p-queue';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { client } from '../client';
@@ -26,15 +25,7 @@ const en = JSON.parse(
   })
 ) as Record<string, unknown>;
 
-/**
- * Place some rate limits on the requests, until Sanity adds it to the client
- * See https://github.com/sanity-io/sanity/issues/1177
- */
-const queue = new Queue({
-  concurrency: 4,
-  interval: 1000 / 25,
-});
-
+const transaction = client.transaction();
 let issueCounter = 0;
 
 for (const [key, dataText] of Object.entries(nl)) {
@@ -57,7 +48,7 @@ for (const [key, dataText] of Object.entries(nl)) {
    */
   const flatText = flatten(dataText, { safe: true }) as Record<string, string>;
 
-  const texts = Object.entries(flatText)
+  const textDocuments = Object.entries(flatText)
     .map(([path, value]) => {
       /**
        * We do not import keys that currently have empty strings for NL locale,
@@ -78,15 +69,21 @@ for (const [key, dataText] of Object.entries(nl)) {
 
       return {
         _type: 'lokalizeText',
-        _key: path, // _key is required for arrays in Sanity
-        path,
+        _id: `jsonKey__${key}.${path}`,
+        path: path,
+        subject: key,
+        /**
+         * The lokalize path is also stored (a::b::c) to make it findable
+         * with the Sanity search feature.
+         */
+        lokalize_path: `${`${key}.${path}`.split('.').join('::')}`,
         text: {
           _type: 'localeText',
-          nl: value,
+          nl: value.trim(),
           /**
            * Fall back to NL text because the field is required
            */
-          en: get(en, `${key}.${path}`, value),
+          en: (get(en, `${key}.${path}`, value) as string).trim(),
         },
       };
     })
@@ -95,46 +92,27 @@ for (const [key, dataText] of Object.entries(nl)) {
      */
     .filter(isDefined);
 
-  if (isEmpty(texts)) {
+  if (isEmpty(textDocuments)) {
     /**
      * If no text entries survived for this key, we do not store anything
      */
     continue;
   }
 
-  const document = {
-    _type: 'lokalizeSubject',
-    /**
-     * We use the key in the document id so that we can overwrite documents with
-     * updates from Lokalize. This is only required as long as we use Lokalize
-     * as our source for texts. Once we kill it, we can store these document
-     * with an opaque id which allows us to freely change the key name, to
-     * refactor the names we use in our code.
-     *
-     * The jsonKey__ prefix makes sure we don't clash with other documents in
-     * sanity that have a non-opaque document id.
-     */
-    _id: `jsonKey__${key}`,
-    key,
-    texts,
-  };
-
-  queue.add(() =>
-    client
-      /**
-       * Strings from JSON will be overwriting whatever is in Sanity, because
-       * until we kill Lokalize those files are the source of truth. However,
-       * newly created text entries in Sanity will remain untouched, so we could
-       * already start to extend the Lokalize string set using Sanity if we want
-       * to.
-       */
-      .createOrReplace(document)
-      .catch((err) => {
-        console.error(
-          `Failed to create document for key ${key}: ${err.message}`
-        );
-      })
-  );
+  /**
+   * Strings from JSON will be overwriting whatever is in Sanity, because
+   * until we kill Lokalize those files are the source of truth. However,
+   * newly created text entries in Sanity will remain untouched, so we could
+   * already start to extend the Lokalize string set using Sanity if we want
+   * to.
+   */
+  textDocuments.forEach((document) => transaction.createOrReplace(document));
 }
 
-queue.on('idle', () => console.log(`There were ${issueCounter} issues`));
+transaction
+  .commit()
+  .then(() => console.log(`There were ${issueCounter} issues`))
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

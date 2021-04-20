@@ -7,8 +7,8 @@ import {
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
-import safetyRegions from '~/data/index';
-import municipalities from '~/data/municipal-search-data';
+import { vrData } from '~/data/vr';
+import { gmData } from '~/data/gm';
 import { municipalMetricNames } from '~/domain/layout/municipality-layout';
 import { nationalMetricNames } from '~/domain/layout/national-layout';
 import { safetyRegionMetricNames } from '~/domain/layout/safety-region-layout';
@@ -145,7 +145,7 @@ export function getVrData(context: GetStaticPropsContext) {
 
   sortTimeSeriesInDataInPlace(data);
 
-  const safetyRegion = safetyRegions.find((r) => r.code === code);
+  const safetyRegion = vrData.find((x) => x.code === code);
 
   return {
     data,
@@ -192,8 +192,7 @@ export function getGmData(context: GetStaticPropsContext) {
 
   const data = loadJsonFromDataFile<Municipal>(`${code}.json`);
 
-  const municipalityName =
-    municipalities.find((r) => r.gemcode === code)?.name || '';
+  const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
 
   sortTimeSeriesInDataInPlace(data);
 

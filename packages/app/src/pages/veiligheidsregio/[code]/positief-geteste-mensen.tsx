@@ -22,7 +22,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import regionCodeToMunicipalCodeLookup from '~/data/region-code-to-municipal-code-lookup';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
@@ -78,7 +78,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
 
-  const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
+  const municipalCodes = gmCodesByVrCode[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const metadata = {
