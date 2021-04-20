@@ -41,8 +41,7 @@
         }
       },
       "required": [
-        "covid_daily",
-        "covid_daily_moving_average",
+        "covid_daily", 
         "covid_total",
         "date_unix",
         "date_of_insertion_unix",

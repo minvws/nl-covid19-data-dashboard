@@ -7,7 +7,6 @@
       "required": [
         "infected",
         "infected_per_100k",
-        "infected_per_100k_moving_average",
         "date_unix",
         "date_of_insertion_unix"
       ],

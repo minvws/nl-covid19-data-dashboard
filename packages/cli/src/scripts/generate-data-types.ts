@@ -7,6 +7,7 @@ import { schemaDirectory } from '../config';
 // The directory where the resulting data.d.ts file will be saved
 const outputDirectory = path.join(
   __dirname,
+  '..', // src
   '..', // cli
   '..', // packages
   'common',
