@@ -25,21 +25,22 @@ import { LokalizeText } from './types';
   const response = await prompts([
     {
       type: 'confirm',
-      name: 'newSubject',
-      message: 'Are you creating a new subject?',
+      name: 'listSubjects',
+      message: 'List existing subjects?',
+      initial: false,
     },
     {
-      type: (_, values) => (values.newSubject ? 'text' : null),
+      type: (_, values) => (values.listSubjects ? 'select' : null),
+      name: 'subject',
+      message: `Select a subject`,
+      choices: subjectChoices,
+    },
+    {
+      type: (_, values) => (values.listSubjects ? null : 'text'),
       name: 'subject',
       message: `What is the subject?`,
       format: (x: string) => x.toLowerCase(),
       validate: (x: string) => !allSubjects.includes(x),
-    },
-    {
-      type: (_, values) => (values.newSubject ? null : 'select'),
-      name: 'subject',
-      message: `What is the subject?`,
-      choices: subjectChoices,
     },
   ]);
 
@@ -57,7 +58,7 @@ import { LokalizeText } from './types';
         {
           type: 'confirm',
           name: 'confirmed',
-          message: 'Does this look allright?',
+          message: 'Is this what you want to add?',
         },
         {
           type: 'confirm',
@@ -73,7 +74,11 @@ import { LokalizeText } from './types';
     );
 
     if (response.confirmed) {
-      console.log('@TODO create text', textDocument);
+      await client.create(textDocument);
+
+      console.log(
+        `Successfully created ${textDocument.subject}.${textDocument.path}`
+      );
     }
 
     if (!response.continue) {

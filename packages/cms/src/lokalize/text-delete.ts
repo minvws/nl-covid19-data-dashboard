@@ -5,20 +5,14 @@
 import prompts from 'prompts';
 import { client } from '../client';
 import { LokalizeText } from './types';
-import { set } from 'lodash';
-import { exists } from 'node:fs';
+import { set, isEmpty } from 'lodash';
+import { assert } from '@corona-dashboard/common';
 
 (async function run() {
-  // const allTexts = (await client
-  //   .fetch(`*[_type == 'lokalizeText']`)
-  //   .catch((err) => {
-  //     throw new Error(`Failed to fetch texts: ${err.message}`);
-  //   })) as LokalizeText[];
-
-  // const choices = Object.keys(
-  //   allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
-  // ).map((x) => ({ title: x, value: x }));
-
+  /**
+   * We are assuming you know the subject of the text you want to delete. Then
+   * we don't have to fetch all texts in advance.
+   */
   const subjectResponse = await prompts([
     {
       type: 'text',
@@ -30,28 +24,30 @@ import { exists } from 'node:fs';
   const { subject } = subjectResponse;
 
   {
-    const choices = await client
+    /**
+     * Fetch all texts in given subject
+     */
+    const allTexts = (await client
       .fetch(
         `*[_type == 'lokalizeText' && subject == '${subject}']| order(path asc)`
       )
-      .then((result: LokalizeText[]) =>
-        result.map((x) => ({ title: x.path, value: x.path }))
-      )
       .catch((err) => {
         throw new Error(`Failed to fetch localizeTexts: ${err.message}`);
-      });
+      })) as LokalizeText[];
 
-    if (choices.length === 0) {
-      console.log(`There are no known texts for subject ${subject}`);
-      process.exit(1);
-    }
+    assert(
+      !isEmpty(allTexts),
+      `There are no known texts for subject ${subject}`
+    );
+
+    const choices = allTexts.map((x) => ({ title: x.path, value: x.path }));
 
     const response = await prompts([
       {
         type: 'multiselect',
         name: 'paths',
         message: `What path in ${subjectResponse.subject}?`,
-        choices: choices,
+        choices,
       },
       {
         type: 'confirm',
@@ -64,9 +60,22 @@ import { exists } from 'node:fs';
     ]);
 
     if (response.confirmed) {
-      console.log('@TODO Deleting stuff...');
+      const documentIdsToDelete = allTexts
+        .filter((x) => response.paths.includes(x.path))
+        .map((x) => x._id);
+
+      const transaction = documentIdsToDelete.reduce(
+        (tx, id) => tx.delete(id),
+        client.transaction()
+      );
+
+      await transaction.commit();
+
+      console.log(
+        `Successfully deleted ${documentIdsToDelete.length} documents`
+      );
     } else {
-      console.log('Nothing got deleted');
+      console.log('No documents were deleted');
     }
   }
 })().catch((err) => {
