@@ -56,6 +56,12 @@ export function VaccineStockPerSupplierChart({
       label: productNames.astra_zeneca,
       shape: 'circle',
     },
+    {
+      metricProperty: 'janssen',
+      color: colors.data.vaccines.janssen,
+      label: productNames.janssen,
+      shape: 'circle',
+    },
   ];
 
   const allOptions = optionsConfig.map((x) => x.metricProperty);
