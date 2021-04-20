@@ -66,6 +66,44 @@ const nextConfig = {
     ],
   },
 
+  async headers() {
+    if (process.env.NODE_ENV !== 'production') {
+      return [];
+    }
+    return [
+      {
+        source: '/:any*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value:
+              "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl;",
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubdomains;',
+          },
+        ],
+      },
+    ];
+  },
+
   webpack(config, { isServer }) {
     if (
       isServer &&
