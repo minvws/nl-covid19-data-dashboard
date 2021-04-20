@@ -9,6 +9,9 @@ import {
 import { GetStaticPropsContext } from 'next';
 import safetyRegions from '~/data/index';
 import municipalities from '~/data/municipal-search-data';
+import { municipalMetricNames } from '~/domain/layout/municipality-layout';
+import { nationalMetricNames } from '~/domain/layout/national-layout';
+import { safetyRegionMetricNames } from '~/domain/layout/safety-region-layout';
 import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -55,9 +58,22 @@ export function createGetContent<T>(
   };
 }
 
-export function selectNlData<T extends keyof National>(...metrics: T[]) {
+export function selectDefaultNlData<
+  T extends keyof National = typeof nationalMetricNames[number]
+>(
+  ...additionalMetrics: T[]
+): () => {
+  selectedNlData: Pick<National, typeof nationalMetricNames[number] | T>;
+} {
+  return selectSpecificNlData(
+    ...[...nationalMetricNames, ...additionalMetrics]
+  );
+}
+
+export function selectSpecificNlData<T extends keyof National>(
+  ...metrics: T[]
+) {
   return () => {
-    // clone data to prevent mutation of the original
     const { data } = getNlData();
 
     const selectedNlData: Pick<National, T> = {} as Pick<National, T>;
@@ -78,11 +94,38 @@ export function getNlData() {
   return { data };
 }
 
-export function selectVrData<T extends keyof Regionaal>(...metrics: T[]) {
+/**
+ * This method returns all the region data that is required by the sidebar,
+ * optional extra metric property names can be added as arguments which will
+ * be added to the output
+ *
+ */
+export function selectDefaultVrData<
+  T extends keyof Regionaal = typeof safetyRegionMetricNames[number]
+>(
+  ...additionalMetrics: T[]
+): (
+  context: GetStaticPropsContext
+) => {
+  selectedVrData: Pick<Regionaal, typeof safetyRegionMetricNames[number] | T>;
+  safetyRegionName: string;
+} {
+  return selectSpecificVrData(
+    ...[...safetyRegionMetricNames, ...additionalMetrics]
+  );
+}
+
+/**
+ * This method selects only the specified meric properties from the region data
+ *
+ */
+export function selectSpecificVrData<T extends keyof Regionaal>(
+  ...metrics: T[]
+) {
   return (context: GetStaticPropsContext) => {
     const vrData = getVrData(context);
 
-    const selectedVrData: Pick<Regionaal, T> = {} as Pick<Regionaal, T>;
+    const selectedVrData = {} as Pick<Regionaal, T>;
     metrics.forEach((p) => {
       selectedVrData[p] = vrData.data[p];
     });
@@ -110,7 +153,24 @@ export function getVrData(context: GetStaticPropsContext) {
   };
 }
 
-export function selectGmData<T extends keyof Municipal>(...metrics: T[]) {
+export function selectDefaultGmData<
+  T extends keyof Municipal = typeof municipalMetricNames[number]
+>(
+  ...additionalMetrics: T[]
+): (
+  context: GetStaticPropsContext
+) => {
+  selectedGmData: Pick<Municipal, typeof municipalMetricNames[number]> | T;
+  municipalityName: string;
+} {
+  return selectSpecificGmData(
+    ...[...municipalMetricNames, ...additionalMetrics]
+  );
+}
+
+export function selectSpecificGmData<T extends keyof Municipal>(
+  ...metrics: T[]
+) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 

@@ -183,7 +183,6 @@ export interface National {
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock: NlVaccineStock;
-  escalation_thresholds: NlEscalationThresholds;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -724,19 +723,6 @@ export interface NlVaccineStockValue {
   astra_zeneca_total: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
-}
-export interface NlEscalationThresholds {
-  tested_overall_sum: {
-    infected_per_100k: NlEscalationThresholdValue[];
-  };
-  hospital_nice_sum: {
-    admissions_per_1m: NlEscalationThresholdValue[];
-  };
-  date_of_insertion_unix?: number;
-}
-export interface NlEscalationThresholdValue {
-  escalation_level: number;
-  threshold: number;
 }
 
 export interface Regionaal {

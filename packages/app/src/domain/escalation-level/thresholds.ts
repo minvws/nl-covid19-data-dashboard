@@ -1,40 +1,64 @@
-import { NlEscalationThresholds } from '@corona-dashboard/common';
-import { useMemo } from 'react';
 import { CategoricalBarScaleCategory } from '~/components/categorical-bar-scale';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
-export function useEscalationThresholds(thresholds: NlEscalationThresholds) {
+export function useEscalationThresholds() {
   const { siteText } = useIntl();
   const levels = siteText.escalatie_niveau.types;
 
-  return useMemo(() => {
-    const escalationThresholds = {
-      positiveTestedEscalationThresholds: thresholds.tested_overall_sum.infected_per_100k.map<CategoricalBarScaleCategory>(
-        (x, index) => ({
-          name: (levels as any)[x.escalation_level.toString()].titel,
-          threshold: x.threshold,
-          color: colors.data.scale.magenta[index],
-        })
-      ),
-      hospitalAdmissionsEscalationThresholds: thresholds.hospital_nice_sum.admissions_per_1m.map<CategoricalBarScaleCategory>(
-        (x, index) => ({
-          name: (levels as any)[x.escalation_level.toString()].titel,
-          threshold: x.threshold,
-          color: colors.data.scale.magenta[index],
-        })
-      ),
-    };
-    // These last thresholds are only added for visual reasons, they are not provided by the
-    // backend since they are not involved in any calculations. They are purely here to determine
-    // the size of the last bar in the categorical chart
-    escalationThresholds.positiveTestedEscalationThresholds.push({
+  const positiveTestedEscalationThresholds: CategoricalBarScaleCategory[] = [
+    {
+      name: levels['1'].titel,
+      threshold: 0,
+      color: colors.data.scale.magenta[0],
+    },
+    {
+      name: levels['2'].titel,
+      threshold: 35,
+      color: colors.data.scale.magenta[1],
+    },
+    {
+      name: levels['3'].titel,
+      threshold: 100,
+      color: colors.data.scale.magenta[2],
+    },
+    {
+      name: levels['4'].titel,
+      threshold: 250,
+      color: colors.data.scale.magenta[3],
+    },
+    {
       threshold: 300,
-    });
-    escalationThresholds.hospitalAdmissionsEscalationThresholds.push({
-      threshold: 30,
-    });
+    },
+  ];
 
-    return escalationThresholds;
-  }, [thresholds]);
+  const hospitalAdmissionsEscalationThresholds: CategoricalBarScaleCategory[] = [
+    {
+      name: levels['1'].titel,
+      threshold: 0,
+      color: colors.data.scale.magenta[0],
+    },
+    {
+      name: levels['2'].titel,
+      threshold: 4,
+      color: colors.data.scale.magenta[1],
+    },
+    {
+      name: levels['3'].titel,
+      threshold: 16,
+      color: colors.data.scale.magenta[2],
+    },
+    {
+      name: levels['4'].titel,
+      threshold: 27,
+      color: colors.data.scale.magenta[3],
+    },
+    {
+      threshold: 30,
+    },
+  ];
+  return {
+    positiveTestedEscalationThresholds,
+    hospitalAdmissionsEscalationThresholds,
+  };
 }

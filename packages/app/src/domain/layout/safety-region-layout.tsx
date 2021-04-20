@@ -25,6 +25,7 @@ import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
 export const safetyRegionMetricNames = [
+  'code',
   'escalation_level',
   'tested_overall',
   'deceased_rivm',

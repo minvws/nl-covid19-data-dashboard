@@ -7,13 +7,14 @@ import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SewerChart } from '~/components/sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { Layout } from '~/domain/layout/layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -22,18 +23,17 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectDefaultVrData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSewerWaterBarChartData } from '~/utils/sewer-water/safety-region-sewer-water.util';
-import { useIntl } from '~/intl';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectDefaultVrData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -43,7 +43,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, safetyRegionName, content, lastGenerated } = props;
+  const {
+    selectedVrData: data,
+    safetyRegionName,
+    content,
+    lastGenerated,
+  } = props;
 
   const { siteText } = useIntl();
 

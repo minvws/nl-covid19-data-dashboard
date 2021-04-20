@@ -1,23 +1,23 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Layout } from '~/domain/layout/layout';
-import {
-  SafetyRegionLayout,
-  safetyRegionMetricNames,
-} from '~/domain/layout/safety-region-layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, selectVrData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectDefaultVrData,
+} from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData(...safetyRegionMetricNames)
+  selectDefaultVrData()
 );
 
 const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {

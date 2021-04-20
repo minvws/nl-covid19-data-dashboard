@@ -30,7 +30,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectDefaultNlData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -43,7 +43,7 @@ const scaledVaccineIcon = (
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectDefaultNlData(),
   createGetContent<{
     milestones: MilestoneViewProps;
     highlight: {
@@ -59,7 +59,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, data, lastGenerated } = props;
+  const { content, selectedNlData: data, lastGenerated } = props;
 
   const { siteText } = useIntl();
 

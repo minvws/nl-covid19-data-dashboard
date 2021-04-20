@@ -12,28 +12,28 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { Layout } from '~/domain/layout/layout';
+import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { useIntl } from '~/intl';
 import {
   createGetContent,
-  getGmData,
   getLastGeneratedDate,
+  selectDefaultGmData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
-import { Layout } from '~/domain/layout/layout';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getGmData,
+  selectDefaultGmData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -43,7 +43,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, municipalityName, content, lastGenerated } = props;
+  const {
+    selectedGmData: data,
+    municipalityName,
+    content,
+    lastGenerated,
+  } = props;
   const { siteText } = useIntl();
 
   const text = siteText.gemeente_rioolwater_metingen;

@@ -8,10 +8,7 @@ import { KpiSection } from '~/components/kpi-section';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import {
-  SafetyRegionLayout,
-  safetyRegionMetricNames,
-} from '~/domain/layout/safety-region-layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
 import {
@@ -21,7 +18,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrData,
+  selectDefaultVrData,
 } from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -35,7 +32,7 @@ type MaatregelenData = {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData(...safetyRegionMetricNames),
+  selectDefaultVrData(),
   createGetContent<MaatregelenData>((_context) => {
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;

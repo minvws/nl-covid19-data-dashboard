@@ -10,16 +10,16 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import {
-  SafetyRegionLayout,
-  safetyRegionMetricNames,
-} from '~/domain/layout/safety-region-layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, selectVrData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectDefaultVrData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -28,7 +28,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData(...safetyRegionMetricNames)
+  selectDefaultVrData()
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {

@@ -12,10 +12,7 @@ import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-til
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { Layout } from '~/domain/layout/layout';
-import {
-  SafetyRegionLayout,
-  safetyRegionMetricNames,
-} from '~/domain/layout/safety-region-layout';
+import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -25,14 +22,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrData,
+  selectDefaultVrData,
 } from '~/static-props/get-data';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrData(...safetyRegionMetricNames),
+  selectDefaultVrData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {

@@ -1,14 +1,14 @@
+import { Regionaal } from '@corona-dashboard/common';
 import { BarChartValue } from '~/components/bar-chart/bar-chart-coordinates';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { Regionaal } from '@corona-dashboard/common';
 
 export interface SewerWaterBarChartData {
   values: BarChartValue[];
 }
 
 export function useSewerWaterBarChartData(
-  data: Regionaal
+  data: Pick<Regionaal, 'sewer' | 'sewer_per_installation'>
 ): SewerWaterBarChartData | undefined {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
   const text = siteText.veiligheidsregio_rioolwater_metingen;
