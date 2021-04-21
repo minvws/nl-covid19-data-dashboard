@@ -72,7 +72,7 @@ export function MilestonesView(props: MilestoneViewProps) {
             <Box pl={`calc(1rem + ${CIRCLE_SIZE}px)`}>
               <ExpandButton
                 color="link"
-                onClick={() => setIsExpanded(x => !x}
+                onClick={() => setIsExpanded((x) => !x)}
                 hasDashedLine={!isExpanded}
               >
                 {isExpanded
