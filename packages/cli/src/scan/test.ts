@@ -6,6 +6,10 @@ const siteText = {
   },
 };
 
+function yea() {
+  const instance = siteText.key;
+}
+
 const instance = siteText.key;
 const instance2 = instance.key2;
 const instance3 = instance2.key3;
