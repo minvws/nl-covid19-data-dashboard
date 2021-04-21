@@ -1,21 +1,38 @@
 import path from 'path';
-import { Project } from 'ts-morph';
+import { Identifier, Node, Project, SyntaxKind } from 'ts-morph';
 
 const project = new Project({});
 
 // add source files
-project.addSourceFilesAtPaths(path.join(__dirname, '../../../app/src/**/*.ts'));
 
-const sourceFile = project.getSourceFile('intl-context.ts');
+project.addSourceFilesAtPaths(path.join(__dirname, 'test.ts'));
 
-const func = sourceFile?.getVariableDeclaration('IntlContext');
+project.getSourceFiles().forEach((source, index) => {
+  const identifier = source
+    ?.getDescendantsOfKind(SyntaxKind.Identifier)
+    .filter((x) => {
+      return x.getText() === 'siteText' || hasAncestor(x);
+    })
+    .filter((x) => x.getParent().getKindName() === 'PropertyAccessExpression');
 
-console.dir(func?.getInitializer());
+  if (identifier.length) {
+    console.log(`source: ${source.getBaseName()}`);
+    console.dir(identifier?.map((x) => formatFull(x)));
+  }
+});
 
-/*const declarations = sourceFile?.getVariableDeclarations();
+function formatFull(identifier: Identifier) {
+  let current: Node | undefined = identifier.getParent();
+  while (current && current.getKindName() === 'Identifier') {
+    current = current.getParent();
+  }
+  return current?.getText();
+}
 
-declarations?.[0].forEachChild((x) => console.log(x.print()));
-
-const reference = declarations?.[0].findReferencesAsNodes();
-
-//console.dir(reference?.[0]);*/
+function hasAncestor(identifier: Identifier) {
+  let current: Node | undefined = identifier.getParent();
+  while (current && current.getKindName() === 'Identifier') {
+    current = current.getParent();
+  }
+  return current?.getText() === 'siteText';
+}
