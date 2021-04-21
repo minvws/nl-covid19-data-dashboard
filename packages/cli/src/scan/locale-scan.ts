@@ -1,26 +1,36 @@
 import path from 'path';
-import { Project, SyntaxKind } from 'ts-morph';
+import { Node, Project, PropertyAccessExpression, SyntaxKind } from 'ts-morph';
 
 const project = new Project({});
 
 // add source files
-// ../../../app/src/**/*{.ts,.tsx,.json}
-const paz = path.join(__dirname, 'test.ts');
+const paz = path.join(__dirname, '../../../app/src/**/*{.ts,.tsx,.json}');
 project.addSourceFilesAtPaths(paz);
 
 project.getSourceFiles().forEach((source) => {
-  const identifiers = source?.getDescendantsOfKind(
-    SyntaxKind.PropertyAccessExpression
-  );
-  //.filter((x) => x.getText().startsWith('siteText'));
+  const identifiers = source
+    ?.getDescendantsOfKind(SyntaxKind.PropertyAccessExpression)
+    .filter((x) => {
+      return x.getChildrenOfKind(SyntaxKind.Identifier).length > 0;
+    })
+    .filter((x) => {
+      return (
+        x.getFirstChildByKind(SyntaxKind.Identifier)?.getText() === 'siteText'
+      );
+    });
 
   if (identifiers.length) {
-    identifiers.forEach((x) => {
-      const refs = x.findReferences();
-      console.log(refs.length);
-    });
     console.log(`source: ${source.getFilePath()}`);
-    console.dir(identifiers?.map((x) => x.getType().getText()));
-    console.dir(identifiers?.map((x) => x.getText()));
+    console.dir(identifiers?.map((x) => getFullText(x)));
   }
 });
+
+function getFullText(x: PropertyAccessExpression) {
+  let parent: Node | undefined = x;
+  while (
+    parent?.getParent()?.getKind() === SyntaxKind.PropertyAccessExpression
+  ) {
+    parent = parent?.getParent();
+  }
+  return parent?.getText();
+}
