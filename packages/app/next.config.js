@@ -112,19 +112,16 @@ const nextConfig = {
     ];
   },
 
-  rewrites: () => {
-    console.log(SANITY_CDN_IMAGES);
-    return [
-      {
-        source: '/cms-images/:path*',
-        destination: `${SANITY_CDN_IMAGES}/:path*`,
-      },
-      {
-        source: '/cms-files/:path*',
-        destination: `${SANITY_CDN_FILES}/:path*`,
-      },
-    ];
-  },
+  rewrites: () => [
+    {
+      source: '/cms-images/:path*',
+      destination: `${SANITY_CDN_IMAGES}/:path*`,
+    },
+    {
+      source: '/cms-files/:path*',
+      destination: `${SANITY_CDN_FILES}/:path*`,
+    },
+  ],
 
   webpack(config, { isServer }) {
     if (
