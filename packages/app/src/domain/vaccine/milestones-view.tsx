@@ -281,7 +281,7 @@ const ExpandButton = styled.button<{ hasDashedLine: boolean }>((x) =>
       width: '2px',
       backgroundColor: 'white',
       backgroundImage: `linear-gradient(${colors.header} ${
-        x.hasDashedLine ? '50' : 100
+        x.hasDashedLine ? '50' : '100'
       }%, rgba(255,255,255,0) 0%)`,
       backgroundSize: '100% 7px',
       backgroundPosition: '0 3px',
