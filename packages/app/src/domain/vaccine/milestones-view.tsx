@@ -39,7 +39,9 @@ export function MilestonesView(props: MilestoneViewProps) {
 
   useEffect(() => setIsExpanded(false), []);
 
-  const handleExpand = () => setIsExpanded(!isExpanded);
+  const visibleMilestones = isExpanded
+    ? milestones
+    : milestones.slice(-MAX_ITEMS_VISIBLE);
 
   return (
     <Tile>
@@ -70,7 +72,7 @@ export function MilestonesView(props: MilestoneViewProps) {
             <Box pl={`calc(1rem + ${CIRCLE_SIZE}px)`}>
               <ExpandButton
                 color="link"
-                onClick={handleExpand}
+                onClick={() => setIsExpanded((x) => !x)}
                 hasDashedLine={!isExpanded}
               >
                 {isExpanded
@@ -81,64 +83,59 @@ export function MilestonesView(props: MilestoneViewProps) {
           </ListItem>
         )}
 
-        {milestones
-          .filter(
-            (_x, index) =>
-              isExpanded || index > milestones.length - 1 - MAX_ITEMS_VISIBLE
-          )
-          .map((milestone, index, list) => (
-            <Fragment key={index}>
-              {index !== list.length - 1 ? (
-                <ListItem>
-                  <CircleIcon>
-                    <VaccineIcon />
-                  </CircleIcon>
-                  <Box pl="3" maxWidth="maxWidthText" width="100%">
-                    <InlineText
-                      color="gray"
-                      css={css({ position: 'absolute', top: '-1.3rem' })}
-                    >
-                      {formatDate(new Date(milestone.date))}
-                    </InlineText>
-                    <Text m={0}>{milestone.title}</Text>
-                    {isExpanded &&
-                      index === milestones.length - 1 - MAX_ITEMS_VISIBLE && (
-                        <Box
-                          pt={3}
-                          mb={2}
-                          borderBottomWidth="1px"
-                          borderBottomStyle="solid"
-                          borderBottomColor="gray"
-                        ></Box>
-                      )}
-                  </Box>
-                </ListItem>
-              ) : (
-                <ListItemLast>
-                  <CircleIcon isLast={true}>
-                    <VaccineIcon />
-                  </CircleIcon>
-                  <Box
-                    pl="3"
-                    maxWidth="maxWidthText"
-                    position="relative"
-                    zIndex={2}
+        {visibleMilestones.map((milestone, index, list) => (
+          <Fragment key={index}>
+            {list[index + 1] ? (
+              <ListItem>
+                <CircleIcon>
+                  <VaccineIcon />
+                </CircleIcon>
+                <Box pl="3" maxWidth="maxWidthText" width="100%">
+                  <InlineText
+                    color="gray"
+                    css={css({ position: 'absolute', top: '-1.3rem' })}
                   >
-                    <InlineText
-                      color="white"
-                      fontWeight="bold"
-                      css={css({ position: 'absolute', top: '-1.3rem' })}
-                    >
-                      {formatDate(new Date(milestone.date))}
-                    </InlineText>
-                    <Text m={0} color="white" fontSize={3} fontWeight="bold">
-                      {milestone.title}
-                    </Text>
-                  </Box>
-                </ListItemLast>
-              )}
-            </Fragment>
-          ))}
+                    {formatDate(new Date(milestone.date))}
+                  </InlineText>
+                  <Text m={0}>{milestone.title}</Text>
+                  {isExpanded &&
+                    index === milestones.length - 1 - MAX_ITEMS_VISIBLE && (
+                      <Box
+                        pt={3}
+                        mb={2}
+                        borderBottomWidth="1px"
+                        borderBottomStyle="solid"
+                        borderBottomColor="gray"
+                      />
+                    )}
+                </Box>
+              </ListItem>
+            ) : (
+              <ListItemLast>
+                <CircleIcon isLast={true}>
+                  <VaccineIcon />
+                </CircleIcon>
+                <Box
+                  pl="3"
+                  maxWidth="maxWidthText"
+                  position="relative"
+                  zIndex={2}
+                >
+                  <InlineText
+                    color="white"
+                    fontWeight="bold"
+                    css={css({ position: 'absolute', top: '-1.3rem' })}
+                  >
+                    {formatDate(new Date(milestone.date))}
+                  </InlineText>
+                  <Text m={0} color="white" fontSize={3} fontWeight="bold">
+                    {milestone.title}
+                  </Text>
+                </Box>
+              </ListItemLast>
+            )}
+          </Fragment>
+        ))}
       </Box>
 
       {expectedMilestones && (
