@@ -91,7 +91,7 @@ export type TimeSeriesChartProps<
    * the vaccine support chart.
    */
   numGridLines?: number;
-  showWeekGridLines?: boolean;
+  showWeekNumbers?: boolean;
   tickValues?: number[];
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
@@ -130,7 +130,7 @@ export function TimeSeriesChart<
   formatTooltip,
   dataOptions,
   numGridLines = 3,
-  showWeekGridLines,
+  showWeekNumbers,
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
   paddingLeft,
@@ -282,7 +282,7 @@ export function TimeSeriesChart<
           <Axes
             bounds={bounds}
             numGridLines={numGridLines}
-            showWeekGridLines={showWeekGridLines}
+            showWeekNumbers={showWeekNumbers}
             yTickValues={yTickValues}
             xTickValues={xTickValues}
             formatYTickValue={formatYTickValue}

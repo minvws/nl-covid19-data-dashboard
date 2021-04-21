@@ -23,7 +23,7 @@ export function WeekNumbers({
   bounds,
   formatXAxis,
 }: WeekNumberProps) {
-  /* Config */
+  /* Show maximum this amount of weeks */
   const numberOfWeeks = 6;
 
   const weekGridLines = [];
@@ -38,11 +38,13 @@ export function WeekNumbers({
   const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
   const firstMonday = getWeekInfo(new Date(startUnix * 1000));
   const firstMondayUnix = firstMonday.weekStartDate.getTime() / 1000;
+
+  // Make sure to only show maximum `numberOfWeeks`
   const alternateBy =
     weeks > numberOfWeeks ? Math.ceil(weeks / numberOfWeeks) : 1;
 
+  // Filter weeknumbers and and date labels to show or hide them
   const dateLabelPadding = 2 * alternateBy;
-
   const dateLabelPaddingStartUnix = startUnix + dateLabelPadding * dayInSeconds;
   const dateLabelPaddingEndUnix = endUnix - dateLabelPadding * dayInSeconds;
 
@@ -50,9 +52,11 @@ export function WeekNumbers({
   const weekNumbersLabelPaddingEndUnix =
     endUnix - (5 + alternateBy) * dayInSeconds;
 
+  // Shift weeks to only show odd or even numbers
   const alternateWeekOffset =
     alternateBy % 2 === 0 && firstMonday.weekNumber % 2 === 1 ? 1 : 0;
 
+  // Create 3 arrays: for week lines, week numbers, and week start dates
   for (let i = 0; i <= weeks + 1; ++i) {
     const weekStartUnix = firstMondayUnix + i * weekInSeconds;
 

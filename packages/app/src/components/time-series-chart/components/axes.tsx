@@ -31,7 +31,7 @@ type AxesProps = {
    * label.
    */
   numGridLines: number;
-  showWeekGridLines?: boolean;
+  showWeekNumbers?: boolean;
   /**
    * This ref can be used for measuring the width of the Y-axis to automagically
    * calculate a left-padding.
@@ -59,7 +59,7 @@ type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
   numGridLines,
-  showWeekGridLines,
+  showWeekNumbers,
   bounds,
   isPercentage,
   xScale,
@@ -151,7 +151,7 @@ export const Axes = memo(function Axes({
         stroke={colors.silver}
       />
 
-      {showWeekGridLines && (
+      {showWeekNumbers && (
         <WeekNumbers
           startUnix={startUnix}
           endUnix={endUnix}
