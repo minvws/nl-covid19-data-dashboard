@@ -24,7 +24,7 @@ import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
-export const safetyRegionPageMetricNames = [
+export const vrPageMetricNames = [
   'code',
   'escalation_level',
   'tested_overall',
@@ -38,11 +38,11 @@ export const safetyRegionPageMetricNames = [
   'difference',
 ] as const;
 
-export type SafetyRegionPageMetricNames = typeof safetyRegionPageMetricNames[number];
+export type VRRegionPageMetricNames = typeof vrPageMetricNames[number];
 
 export type SafetyRegionPageMetricData = Pick<
   Regionaal,
-  SafetyRegionPageMetricNames
+  VRRegionPageMetricNames
 >;
 
 type SafetyRegionLayoutProps = {

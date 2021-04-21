@@ -25,7 +25,7 @@ import { SidebarMetric } from '~/components/sidebar-metric';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-export const nationalPageMetricNames = [
+export const nlPageMetricNames = [
   'vaccine_administered_total',
   'tested_overall',
   'infectious_people',
@@ -42,9 +42,9 @@ export const nationalPageMetricNames = [
   'difference',
 ] as const;
 
-export type NationalPageMetricNames = typeof nationalPageMetricNames[number];
+export type NLPageMetricNames = typeof nlPageMetricNames[number];
 
-export type NationalPageMetricData = Pick<National, NationalPageMetricNames>;
+export type NationalPageMetricData = Pick<National, NLPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;

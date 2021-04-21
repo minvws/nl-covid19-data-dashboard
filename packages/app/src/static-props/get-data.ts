@@ -10,16 +10,16 @@ import { GetStaticPropsContext } from 'next';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import {
-  MunicipalPageMetricNames,
-  municipalPageMetricNames,
+  gmPageMetricNames,
+  GMPageMetricNames,
 } from '~/domain/layout/municipality-layout';
 import {
-  NationalPageMetricNames,
-  nationalPageMetricNames,
+  NLPageMetricNames,
+  nlPageMetricNames,
 } from '~/domain/layout/national-layout';
 import {
-  SafetyRegionPageMetricNames,
-  safetyRegionPageMetricNames,
+  vrPageMetricNames,
+  VRRegionPageMetricNames,
 } from '~/domain/layout/safety-region-layout';
 import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
@@ -74,9 +74,9 @@ export function createGetContent<T>(
  *
  */
 export function selectNlPageMetricData<
-  T extends keyof National = NationalPageMetricNames
+  T extends keyof National = NLPageMetricNames
 >(...additionalMetrics: T[]) {
-  return selectNlData(...[...nationalPageMetricNames, ...additionalMetrics]);
+  return selectNlData(...[...nlPageMetricNames, ...additionalMetrics]);
 }
 
 /**
@@ -89,12 +89,12 @@ export function selectNlData<T extends keyof National = never>(
   return () => {
     const { data } = getNlData();
 
-    const selectedNlData = {} as Pick<National, T>;
+    const selectedNlData: Record<string, any> = {};
     metrics.forEach((p) => {
       selectedNlData[p] = data[p];
     });
 
-    return { selectedNlData };
+    return { selectedNlData } as { selectedNlData: Pick<National, T> };
   };
 }
 
@@ -114,11 +114,9 @@ export function getNlData() {
  *
  */
 export function selectVrPageMetricData<
-  T extends keyof Regionaal = SafetyRegionPageMetricNames
+  T extends keyof Regionaal = VRRegionPageMetricNames
 >(...additionalMetrics: T[]) {
-  return selectVrData(
-    ...[...safetyRegionPageMetricNames, ...additionalMetrics]
-  );
+  return selectVrData(...[...vrPageMetricNames, ...additionalMetrics]);
 }
 
 /**
@@ -131,12 +129,15 @@ export function selectVrData<T extends keyof Regionaal = never>(
   return (context: GetStaticPropsContext) => {
     const vrData = getVrData(context);
 
-    const selectedVrData = {} as Pick<Regionaal, T>;
+    const selectedVrData: Record<string, any> = {};
     metrics.forEach((p) => {
       selectedVrData[p] = vrData.data[p];
     });
 
-    return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
+    return { selectedVrData, safetyRegionName: vrData.safetyRegionName } as {
+      selectedVrData: Pick<Regionaal, T>;
+      safetyRegionName: string;
+    };
   };
 }
 
@@ -166,9 +167,9 @@ export function getVrData(context: GetStaticPropsContext) {
  *
  */
 export function selectGmPageMetricData<
-  T extends keyof Municipal = MunicipalPageMetricNames
+  T extends keyof Municipal = GMPageMetricNames
 >(...additionalMetrics: T[]) {
-  return selectGmData(...[...municipalPageMetricNames, ...additionalMetrics]);
+  return selectGmData(...[...gmPageMetricNames, ...additionalMetrics]);
 }
 
 /**
@@ -181,12 +182,15 @@ export function selectGmData<T extends keyof Municipal = never>(
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const selectedGmData = {} as Pick<Municipal, T>;
+    const selectedGmData: Record<string, any> = {};
     metrics.forEach((p) => {
       selectedGmData[p] = gmData.data[p];
     });
 
-    return { selectedGmData, municipalityName: gmData.municipalityName };
+    return { selectedGmData, municipalityName: gmData.municipalityName } as {
+      selectedGmData: Pick<Municipal, T>;
+      municipalityName: string;
+    };
   };
 }
 

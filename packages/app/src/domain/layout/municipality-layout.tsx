@@ -20,7 +20,7 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-fo
 import { Link } from '~/utils/link';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-export const municipalPageMetricNames = [
+export const gmPageMetricNames = [
   'code',
   'tested_overall',
   'deceased_rivm',
@@ -29,9 +29,9 @@ export const municipalPageMetricNames = [
   'difference',
 ] as const;
 
-export type MunicipalPageMetricNames = typeof municipalPageMetricNames[number];
+export type GMPageMetricNames = typeof gmPageMetricNames[number];
 
-export type MunicipalPageMetricData = Pick<Municipal, MunicipalPageMetricNames>;
+export type MunicipalPageMetricData = Pick<Municipal, GMPageMetricNames>;
 
 type MunicipalityLayoutProps = {
   lastGenerated: string;

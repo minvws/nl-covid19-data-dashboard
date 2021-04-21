@@ -15,6 +15,15 @@ import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
 type DataKeys = keyof National | keyof Regionaal | keyof Municipal;
+
+/**
+ * This type ensures that if a metricName of type keyof National is assigned,
+ * the data property HAS to be of type a Pick of National that includes the
+ * 'difference' key plus the key that was assigned to metricName.
+ *
+ * So, if metricName is 'vaccine_stock' then data needs to be assigned with Pick<National, 'difference'|'vaccine_stock'>
+ *
+ */
 type DataFile<T> = T extends keyof National
   ? Pick<National, 'difference' | T>
   : T extends keyof Regionaal
