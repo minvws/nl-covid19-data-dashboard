@@ -67,17 +67,19 @@ const nextConfig = {
   },
 
   async headers() {
-    if (process.env.NODE_ENV !== 'production') {
-      return [];
-    }
+    /* The CSP is disabled on development builds */
+    const contentSecurityPolicy =
+      process.env.NODE_ENV === 'production'
+        ? "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl;"
+        : '';
+
     return [
       {
         source: '/:any*',
         headers: [
           {
             key: 'Content-Security-Policy',
-            value:
-              "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl;",
+            value: contentSecurityPolicy,
           },
           {
             key: 'Referrer-Policy',
