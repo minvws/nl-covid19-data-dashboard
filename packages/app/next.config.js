@@ -1,3 +1,7 @@
+const path = require('path');
+const config = { path: path.resolve('.env.local') };
+require('dotenv').config(config);
+
 const withPlugins = require('next-compose-plugins');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
@@ -7,6 +11,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const COMMIT_ID = process.env.NEXT_PUBLIC_COMMIT_ID || 'no-version-found';
+const SANITY_CDN_IMAGES = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
+const SANITY_CDN_FILES = `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
 
 const nextConfig = {
   env: {
@@ -106,16 +112,19 @@ const nextConfig = {
     ];
   },
 
-  rewrites: () => [
-    {
-      source: '/cms-image/:path*',
-      destination: 'https://cdn.sanity.io/images/5mog5ask/development/:path*',
-    },
-    {
-      source: '/cms-file/:path*',
-      destination: 'https://cdn.sanity.io/files/5mog5ask/development/:path*',
-    },
-  ],
+  rewrites: () => {
+    console.log(SANITY_CDN_IMAGES);
+    return [
+      {
+        source: '/cms-images/:path*',
+        destination: `${SANITY_CDN_IMAGES}/:path*`,
+      },
+      {
+        source: '/cms-files/:path*',
+        destination: `${SANITY_CDN_FILES}/:path*`,
+      },
+    ];
+  },
 
   webpack(config, { isServer }) {
     if (

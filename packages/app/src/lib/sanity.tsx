@@ -109,7 +109,7 @@ export function getImageProps<T extends ImageBlock>(
   const { metadata } = asset;
 
   const {
-    defaultWidth = node.asset.metadata.dimensions.width,
+    defaultWidth = metadata.dimensions.width,
     sizes: sizesOption,
   } = options;
 
@@ -117,7 +117,10 @@ export function getImageProps<T extends ImageBlock>(
   const height = width / metadata.dimensions.aspectRatio;
 
   const src = getImageSrc(node.asset, defaultWidth);
-  let srcSet = undefined; //we keep this undefined for SVG's, which don't need srcSets
+
+  /* we keep these undefined for SVGs, which don't need srcSets */
+  let srcSet = undefined;
+  let srcSetWebp = undefined;
 
   if (asset.extension !== 'svg') {
     /**
@@ -126,6 +129,9 @@ export function getImageProps<T extends ImageBlock>(
      */
     srcSet = imageResizeTargets
       .map((size) => `${getImageSrc(asset, size)} ${size}w`)
+      .join(', ');
+    srcSetWebp = imageResizeTargets
+      .map((size) => `${getImageSrc(asset, size)}&fm=webp ${size}w`)
       .join(', ');
   }
 
@@ -140,6 +146,7 @@ export function getImageProps<T extends ImageBlock>(
   return {
     src,
     srcSet,
+    srcSetWebp,
     sizes,
     alt,
     width,
@@ -149,17 +156,17 @@ export function getImageProps<T extends ImageBlock>(
 }
 
 export function getFileSrc(asset: SanityFileProps) {
-  return `/cms/files/${asset.assetId}.${asset.extension}`;
+  return `/cms-files/${asset.assetId}.${asset.extension}`;
 }
 
 export function getImageSrc(
   asset: SanityImageProps,
   defaultWidth = asset.metadata.dimensions.width
 ) {
+  const filename = `${asset.assetId}-${asset.metadata.dimensions.width}x${asset.metadata.dimensions.height}.${asset.extension}`;
   if (asset.extension === 'svg') {
-    return `/cms/images/${asset.assetId}.svg`;
+    return `/cms-images/${filename}`;
   }
-  const filename = asset.path.split('/').reverse()[0];
   const size = findClosestSize(defaultWidth, imageResizeTargets);
-  return `/cms-image/${filename}?w=${size}`;
+  return `/cms-images/${filename}?w=${size}&q=65`;
 }
