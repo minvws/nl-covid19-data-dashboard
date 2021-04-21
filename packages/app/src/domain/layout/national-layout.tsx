@@ -42,9 +42,9 @@ export const nlPageMetricNames = [
   'difference',
 ] as const;
 
-export type NLPageMetricNames = typeof nlPageMetricNames[number];
+export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-export type NationalPageMetricData = Pick<National, NLPageMetricNames>;
+export type NationalPageMetricData = Pick<National, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;

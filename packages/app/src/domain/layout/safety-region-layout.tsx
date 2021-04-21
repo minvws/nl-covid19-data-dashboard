@@ -38,11 +38,11 @@ export const vrPageMetricNames = [
   'difference',
 ] as const;
 
-export type VRRegionPageMetricNames = typeof vrPageMetricNames[number];
+export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
 
 export type SafetyRegionPageMetricData = Pick<
   Regionaal,
-  VRRegionPageMetricNames
+  VrRegionPageMetricNames
 >;
 
 type SafetyRegionLayoutProps = {

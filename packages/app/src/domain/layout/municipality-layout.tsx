@@ -29,9 +29,9 @@ export const gmPageMetricNames = [
   'difference',
 ] as const;
 
-export type GMPageMetricNames = typeof gmPageMetricNames[number];
+export type GmPageMetricNames = typeof gmPageMetricNames[number];
 
-export type MunicipalPageMetricData = Pick<Municipal, GMPageMetricNames>;
+export type MunicipalPageMetricData = Pick<Municipal, GmPageMetricNames>;
 
 type MunicipalityLayoutProps = {
   lastGenerated: string;
