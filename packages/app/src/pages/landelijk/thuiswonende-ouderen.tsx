@@ -133,11 +133,19 @@ const ElderlyAtHomeNationalPage = (
                 values={elderlyAtHomeData.values}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'bar',
                     metricProperty: 'positive_tested_daily',
                     label:
                       text.section_positive_tested
                         .line_chart_legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'positive_tested_daily_moving_average',
+                    label:
+                      text.section_positive_tested.tooltip_labels
+                        .positive_tested_daily_moving_average,
                     color: colors.data.primary,
                   },
                 ]}
@@ -224,9 +232,17 @@ const ElderlyAtHomeNationalPage = (
                 values={elderlyAtHomeData.values}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'bar',
                     metricProperty: 'deceased_daily',
                     label: text.section_deceased.line_chart_legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'deceased_daily_moving_average',
+                    label:
+                      text.section_positive_tested.tooltip_labels
+                        .deceased_daily_daily_moving_average,
                     color: colors.data.primary,
                   },
                 ]}
