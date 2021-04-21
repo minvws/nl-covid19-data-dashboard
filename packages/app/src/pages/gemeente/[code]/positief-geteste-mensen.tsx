@@ -142,19 +142,19 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'bar',
-                    metricProperty: 'infected_per_100k',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k,
-                    color: colors.data.primary,
-                  },
-                  {
                     type: 'line',
                     metricProperty: 'infected_per_100k_moving_average',
                     label:
                       siteText.positief_geteste_personen.tooltip_labels
                         .infected_per_100k_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'infected_per_100k',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_per_100k,
                     color: colors.data.primary,
                   },
                   {
