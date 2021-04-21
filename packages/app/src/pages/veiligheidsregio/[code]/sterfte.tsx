@@ -141,17 +141,6 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'bar',
-                    metricProperty: 'covid_daily',
-                    label:
-                      text.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_label,
-                    shortLabel:
-                      text.section_deceased_rivm
-                        .line_chart_covid_daily_legend_trend_short_label,
-                    color: colors.data.primary,
-                  },
-                  {
                     type: 'line',
                     metricProperty: 'covid_daily_moving_average',
                     label:
@@ -160,6 +149,17 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                     shortLabel:
                       text.section_deceased_rivm
                         .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'covid_daily',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label,
                     color: colors.data.primary,
                   },
                 ]}
