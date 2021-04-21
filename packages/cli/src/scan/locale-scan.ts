@@ -1,45 +1,26 @@
 import path from 'path';
-import { Identifier, Node, Project, SyntaxKind } from 'ts-morph';
+import { Project, SyntaxKind } from 'ts-morph';
 
 const project = new Project({});
 
 // add source files
+// ../../../app/src/**/*{.ts,.tsx,.json}
+const paz = path.join(__dirname, 'test.ts');
+project.addSourceFilesAtPaths(paz);
 
-project.addSourceFilesAtPaths(path.join(__dirname, 'test.ts'));
-
-project.getSourceFiles().forEach((source, index) => {
-  const identifiers = source
-    ?.getDescendantsOfKind(SyntaxKind.Identifier)
-    .filter((x) => {
-      return x.getText() === 'siteText' || hasAncestor(x);
-    })
-    .filter((x) => x.getParent().getKindName() === 'PropertyAccessExpression');
+project.getSourceFiles().forEach((source) => {
+  const identifiers = source?.getDescendantsOfKind(
+    SyntaxKind.PropertyAccessExpression
+  );
+  //.filter((x) => x.getText().startsWith('siteText'));
 
   if (identifiers.length) {
-    console.log(`source: ${source.getBaseName()}`);
-    console.dir(identifiers);
-    console.dir(identifiers?.map((x) => x.getFullText()));
+    identifiers.forEach((x) => {
+      const refs = x.findReferences();
+      console.log(refs.length);
+    });
+    console.log(`source: ${source.getFilePath()}`);
+    console.dir(identifiers?.map((x) => x.getType().getText()));
+    console.dir(identifiers?.map((x) => x.getText()));
   }
 });
-
-function formatFull(identifier: Identifier) {
-  const result = [identifier.getText()];
-  let current: Node | undefined = identifier.getParent();
-  while (current?.getKindName() === 'Identifier') {
-    current = current.getParent();
-    if (current) {
-      result.push(current.getText());
-    }
-  }
-  return result.reverse().join('.');
-}
-
-function hasAncestor(identifier: Identifier) {
-  let current: Node | undefined = identifier.getParent();
-  while (current?.getKindName() === 'Identifier') {
-    current = current.getParent();
-  }
-  const result = current?.getText() === 'siteText';
-  console.log(result);
-  return result;
-}

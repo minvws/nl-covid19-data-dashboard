@@ -1,22 +1,18 @@
-const siteText = {
-  key: {
-    key2: {
-      key3: 'yes',
-    },
-  },
-};
+import locale from './test.json';
+
+export type Locale = typeof locale;
+
+const siteText: Locale = locale;
 
 function yea() {
   const instance = siteText.key;
 }
 
 const instance = siteText.key;
-const instance2 = instance.key2;
-const instance3 = instance2.key3;
+const instance3 = instance.key2;
 
 const instance4 = siteText.key;
 const instance5 = siteText.key;
-const instance6 = siteText.key.key2;
-const instance7 = siteText.key.key2.key3;
+const instance7 = siteText.key4;
 
 export {};
