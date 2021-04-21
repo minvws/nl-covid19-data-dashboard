@@ -160,16 +160,16 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'bar',
-                    metricProperty: 'admissions_on_date_of_admission',
-                    label: text.linechart_legend_titel,
-                    color: colors.data.primary,
-                  },
-                  {
                     type: 'line',
                     metricProperty:
                       'admissions_on_date_of_admission_moving_average',
                     label: text.linechart_legend_titel_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label: text.linechart_legend_titel,
                     color: colors.data.primary,
                   },
                 ]}
