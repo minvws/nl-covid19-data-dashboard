@@ -106,6 +106,17 @@ const nextConfig = {
     ];
   },
 
+  rewrites: () => [
+    {
+      source: '/cms-image/:path*',
+      destination: 'https://cdn.sanity.io/images/5mog5ask/development/:path*',
+    },
+    {
+      source: '/cms-file/:path*',
+      destination: 'https://cdn.sanity.io/files/5mog5ask/development/:path*',
+    },
+  ],
+
   webpack(config, { isServer }) {
     if (
       isServer &&

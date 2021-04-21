@@ -19,7 +19,7 @@ export function SanityImage(props: SanityImageProps) {
   return (
     <picture className={props.className}>
       <source
-        srcSet={srcSet.split(extension).join('webp')}
+        srcSet={srcSet.split(',').join('&fm=webp,')}
         sizes={sizes}
         type="image/webp"
       />

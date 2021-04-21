@@ -159,14 +159,7 @@ export function getImageSrc(
   if (asset.extension === 'svg') {
     return `/cms/images/${asset.assetId}.svg`;
   }
+  const filename = asset.path.split('/').reverse()[0];
   const size = findClosestSize(defaultWidth, imageResizeTargets);
-  return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
-}
-
-export function maybeCreateWebpUrl(url: string) {
-  const extensionRegex = /(.(png|gif|jpe?g))$/;
-
-  return url.startsWith('/cms/images') && extensionRegex.test(url)
-    ? url.replace(extensionRegex, '.webp')
-    : undefined;
+  return `/cms-image/${filename}?w=${size}`;
 }
