@@ -23,11 +23,17 @@
         "positive_tested_daily": {
           "type": "integer"
         },
+        "positive_tested_daily_moving_average": {
+          "type": ["number", "null"]
+        },
         "positive_tested_daily_per_100k": {
           "type": "number"
         },
         "deceased_daily": {
           "type": "integer"
+        },
+        "deceased_daily_moving_average": {
+          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"
