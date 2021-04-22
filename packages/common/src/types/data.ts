@@ -299,7 +299,7 @@ export interface NlIntensiveCareNicePerAgeGroupValue {
   admissions_age_90_plus_per_million: number;
   admissions_overall_per_million: number;
   date_start_unix: number;
-  date_end_unix?: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalTestedOverall {
@@ -383,7 +383,7 @@ export interface NlHospitalNicePerAgeGroupValue {
   admissions_age_90_plus_per_million: number;
   admissions_overall_per_million: number;
   date_start_unix: number;
-  date_end_unix?: number;
+  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalHospitalLcps {
