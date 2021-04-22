@@ -55,7 +55,7 @@ export function TopicalSectionHeader({
           alignItems="baseline"
         >
           <Heading
-            level={2}
+            level={1}
             fontWeight="bold"
             m={0}
             mb={{ _: 2, lg: 0 }}
