@@ -14,7 +14,7 @@ const original = JSON.parse(
   })
 );
 
-const sourceFile = project.getSourceFile('nl.ts');
+const sourceFile = project.getSourceFile('nl.json');
 
 const propertyAssignmentNodes = sourceFile
   ?.getDescendantsOfKind(SyntaxKind.PropertyAssignment)
@@ -23,6 +23,7 @@ const propertyAssignmentNodes = sourceFile
 const newObject = propertyAssignmentNodes
   ?.map((x) => getFullPath(x))
   .reduce((aggr, chain) => {
+    console.log(chain);
     const value = get(original, chain);
     if (typeof value === 'string') {
       aggr[chain] = value;
@@ -46,5 +47,8 @@ function getFullPath(pa: PropertyAssignment) {
     }
     node = node?.getParent();
   }
-  return result.reverse().join('.');
+  return result
+    .map((x) => x.substr(1, x.length - 2))
+    .reverse()
+    .join('.');
 }
