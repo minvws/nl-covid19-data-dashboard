@@ -62,7 +62,8 @@ for (let [key, dataText] of Object.entries(nl)) {
 
       return {
         _type: 'lokalizeText',
-        _id: `jsonKey__${key}.${path}`,
+        // ids with a `.` are marked as "private", we'll replace dots with dashes.
+        _id: `jsonKey__${key}.${path}`.replace(/\./g, '-'),
         path: path,
         subject: key,
         /**

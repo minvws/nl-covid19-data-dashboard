@@ -1,7 +1,7 @@
 // lib/sanity.ts
 import { assert, imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
-import sanityClient from '@sanity/client';
+import sanityClient, { ClientConfig } from '@sanity/client';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/find-closest-size';
 
@@ -15,7 +15,7 @@ assert(
   'NEXT_PUBLIC_SANITY_PROJECT_ID is undefined'
 );
 
-const config = {
+const config: ClientConfig = {
   /**
    * Find your project ID and dataset in `sanity.json` in your studio project.
    * These are considered “public”, but you can use environment variables
@@ -27,6 +27,7 @@ const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: process.env.NODE_ENV === 'production',
   apiVersion: '2021-03-25',
+  withCredentials: true,
   /**
    * Set useCdn to `false` if your application require the freshest possible
    * data always (potentially slightly slower and a bit more expensive).

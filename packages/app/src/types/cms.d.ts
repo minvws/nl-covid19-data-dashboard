@@ -154,3 +154,19 @@ export type TitleDescriptionBlock = {
   description: RichContentBlock[];
   title: string;
 };
+
+export interface LokalizeText {
+  _type: 'lokalizeText';
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+
+  lokalize_path: string;
+  subject: string;
+  path: string;
+  text: {
+    nl: string;
+    en: string;
+  };
+  displayEmpty: boolean;
+}
