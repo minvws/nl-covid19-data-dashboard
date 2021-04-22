@@ -92,7 +92,7 @@ export function AdmissionsPerAgeGroup({
 
   const text = siteText.hospital_admissions_per_age_group;
 
-  const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
+  const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
   const alwayEnabled = ['admissions_overall_per_million'];
 
   /* Enrich config with dynamic data / locale */
