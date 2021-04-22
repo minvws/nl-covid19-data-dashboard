@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import WarningIcon from '~/assets/warning.svg';
-import { Tile } from '~/components/tile';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import { Markdown } from './markdown';
@@ -28,7 +27,7 @@ export function WarningTile({
   const isSmallScreen = !breakpoints.md;
 
   return (
-    <StyledTile>
+    <StyledArticle>
       <WarningBox variant={variant}>
         {isSmallScreen ? (
           <Box width="6px" />
@@ -49,17 +48,18 @@ export function WarningTile({
           </Box>
         )}
       </WarningMessageBox>
-    </StyledTile>
+    </StyledArticle>
   );
 }
 
-const StyledTile = styled(Tile)(
+const StyledArticle = styled.article(
   css({
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     flexDirection: 'row',
     padding: 0,
     boxShadow: 'none',
     display: 'inline-flex',
+    borderRadius: 1,
   })
 );
 

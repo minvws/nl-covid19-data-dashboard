@@ -4,6 +4,7 @@ import { useTooltip } from '@visx/tooltip';
 import { useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
@@ -100,9 +101,10 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     }
   );
 
+  const today = useCurrentDate();
   const xTickValues = useMemo(
-    () => getTimeDomain(values, { withPadding: false }),
-    [values]
+    () => getTimeDomain({ values, today, withPadding: false }),
+    [values, today]
   );
 
   const [handleHover, hoverState] = useHoverState({

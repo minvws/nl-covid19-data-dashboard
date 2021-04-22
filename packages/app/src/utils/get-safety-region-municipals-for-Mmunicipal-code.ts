@@ -1,5 +1,5 @@
-import municipalCodeToRegionCodeLookup from '~/data/municipal-code-to-region-code-lookup';
-import regionCodeToMunicipalCodeLookup from '~/data/region-code-to-municipal-code-lookup';
+import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 
 /**
  * This method looks up all the municipal codes that belong to the same safety region
@@ -10,10 +10,8 @@ import regionCodeToMunicipalCodeLookup from '~/data/region-code-to-municipal-cod
 export function getSafetyRegionMunicipalsForMunicipalCode(
   code: string
 ): string[] | undefined {
-  const vrcode = municipalCodeToRegionCodeLookup[code];
-  const municipalCodes = vrcode
-    ? regionCodeToMunicipalCodeLookup[vrcode]
-    : undefined;
+  const vrcode = vrCodeByGmCode[code];
+  const municipalCodes = vrcode ? gmCodesByVrCode[vrcode] : undefined;
 
   return municipalCodes;
 }

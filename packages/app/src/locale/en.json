@@ -649,7 +649,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -1022,7 +1022,7 @@
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1880,11 +1880,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "No news report on weekly mortality for week 13",
-      "published_text": "Date of publication: Friday 9 April",
-      "message": "There will be no news release on weekly mortality on 9 April 2021 because of Easter. The Easter break leads to a shift in delivery of death records, as commonly occurs around public holidays; therefore, an estimate will not be available for week 13 on 9 April. The next news release with the estimate for week 14 and provisional figures up to and including week 13 will be published on Friday 16 April.",
+      "title": "Mortality in week 14 higher than expected",
+      "published_text": "Date of publication: Friday 16 April",
+      "message": "In week 14 (5 to 11 April 2021 inclusive), the estimated number of deaths stood at 3,150. This is approximately 100 more than expected for this period and roughly the same number as in the previous week (3,144). Mortality among long-term care users was below the expected level for this week; among the rest of the population, there were more deaths than expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. In week 13, the number of deaths was more or less the same again as expected, while estimated mortality for week 14 is slightly above the expected level. The National Institute for Public Health and the Environment (RIVM) registered 112 COVID-19 deaths in week 14 (as at 13 April).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/13/in-week-12-an-estimated-3-100-deaths",
+        "href": "https://www.cbs.nl/en-gb/news/2021/15/mortality-in-week-14-higher-than-expected",
         "text": "Read the full news item on the CBS website"
       }
     },
@@ -2322,8 +2322,8 @@
           "janssen": "Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Delivered and available",
-        "estimated": "Expected to be delivered and available",
+        "delivered": "Delivered and checked",
+        "estimated": "Expected to be delivered and checked",
         "left_divider_label": "Calculated number of",
         "right_divider_label": "Expected number",
         "legend": {
@@ -2429,7 +2429,7 @@
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
       "artikelen": {
-        "titel": "Current articles",
+        "titel": "Featured",
         "link": {
           "text": "View all articles",
           "href": "/artikelen"
@@ -2468,7 +2468,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).",
-      "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2908,7 +2908,8 @@
   },
   "milestones": {
     "toon_meer": "Show earlier events",
-    "verwacht": "Expected"
+    "verwacht": "Expected",
+    "toon_minder": ""
   },
   "section_sterftemonitor_vr": {
     "title": "Mortality monitor",

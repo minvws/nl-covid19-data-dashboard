@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
-import { Tile } from '~/components/tile';
 import { Heading } from '~/components/typography';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
 import { colors } from '~/style/theme';
+import { asResponsiveArray } from '~/style/utils';
 interface AnchorTileProps {
   title: string;
   href: string;
@@ -24,7 +24,7 @@ export function AnchorTile({
   shadow = false,
 }: AnchorTileProps) {
   return (
-    <Container spacing={2} shadow={shadow}>
+    <Container shadow={shadow}>
       <Content>
         <Heading level={3}>{title}</Heading>
         {children}
@@ -51,10 +51,13 @@ export function AnchorTile({
   );
 }
 
-const Container = styled(Tile)<{ shadow: boolean }>((x) =>
+const Container = styled.article<{ shadow: boolean }>((x) =>
   css({
     display: 'flex',
-    flexDirection: ['column', null, null, null, 'row'],
+    bg: 'white',
+    p: asResponsiveArray({ _: 3, sm: 4 }),
+    borderRadius: 1,
+    flexDirection: asResponsiveArray({ _: 'column', lg: 'row' }),
     boxShadow: x.shadow ? 'tile' : 'none',
   })
 );
@@ -79,23 +82,23 @@ const IconContainer = styled.span(
   })
 );
 
-/**
- * @TODO Refactor this linkContainer, its unreadable due to its responsive
- * styling.
- */
 const LinkContainer = styled.div(
   css({
     flexShrink: 1,
     flex: '1 1 30%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: ['center', 'center', null],
+    justifyContent: asResponsiveArray({ _: 'center', md: undefined }),
     border: 0,
-    borderTop: [`1px solid ${colors.silver}`, null, null, null, 'none'],
-    borderLeft: [null, null, null, null, '1px solid'],
-    borderLeftColor: [null, null, null, null, colors.silver],
-    pt: [3, 3, 3, 3, null],
-    pl: [null, null, null, null, 4],
-    ml: [null, null, null, null, 4],
+    borderTop: asResponsiveArray({
+      _: `1px solid ${colors.silver}`,
+      lg: 'none',
+    }),
+    borderLeft: asResponsiveArray({ lg: '1px solid' }),
+    borderLeftColor: asResponsiveArray({ lg: colors.silver }),
+    pt: asResponsiveArray({ _: 3, lg: 0 }),
+    pl: asResponsiveArray({ lg: 4 }),
+    ml: asResponsiveArray({ lg: 4 }),
+    mt: asResponsiveArray({ _: 3, md: 0 }),
   })
 );

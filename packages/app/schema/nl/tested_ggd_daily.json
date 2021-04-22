@@ -23,11 +23,20 @@
         "infected": {
           "type": "integer"
         },
+        "infected_moving_average": {
+          "type": ["number", "null"]
+        },
         "infected_percentage": {
           "type": "number"
         },
+        "infected_percentage_moving_average": {
+          "type": ["number", "null"]
+        },
         "tested_total": {
           "type": "integer"
+        },
+        "tested_total_moving_average": {
+          "type": ["number", "null"]
         },
         "date_unix": {
           "type": "integer"
@@ -37,9 +46,9 @@
         }
       },
       "required": [
-        "tested_total",
-        "infected_percentage",
         "infected",
+        "infected_percentage",
+        "tested_total",
         "date_unix",
         "date_of_insertion_unix"
       ],
