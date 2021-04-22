@@ -38,7 +38,7 @@ const propertyAssignmentNodes: PropertyAssignment[] = (
 ).filter((x) => x.findReferences().length > 1);
 
 const newLocaleObjects = propertyAssignmentNodes
-  ?.map((x) => createFullPropertyChain(x))
+  .map((x) => createFullPropertyChain(x))
   .concat(whitelist)
   .filter(
     (x, _i, l) =>
