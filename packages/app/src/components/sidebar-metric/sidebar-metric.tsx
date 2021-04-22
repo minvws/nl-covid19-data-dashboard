@@ -7,6 +7,8 @@ import {
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
+import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 import {
   DataScope,
   getMetricConfig,
@@ -16,8 +18,6 @@ import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SidebarBarScale } from './sidebar-barscale';
 import { SidebarKpiValue } from './sidebar-kpi-value';
-import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
 
 interface SidebarMetricProps<T extends { difference: unknown }> {
   scope: DataScope;
@@ -90,9 +90,10 @@ export function SidebarMetric<T extends { difference: unknown }>({
    * @TODO this should really be called sidebar_metric_description or something
    * as it's not a title at all.
    */
+  const text = siteText[localeTextKey];
   const title =
-    get(siteText, [localeTextKey, 'kpi_titel']) ||
-    get(siteText, [localeTextKey, 'titel_kpi']);
+    (typeof text === 'object' && 'kpi_titel' in text && text.kpi_titel) ||
+    (typeof text === 'object' && 'titel_kpi' in text && text.titel_kpi);
 
   assert(
     title,
