@@ -471,25 +471,24 @@
     "selecteer_toelichting": ""
   },
   "escalatie_niveau": {
-    "types": [
-      null,
-      {
+    "types": {
+      "1": {
         "titel": "Waakzaam",
         "toelichting": "De situatie is onder controle te houden. Het aantal nieuwe besmettingen is laag. De druk op de zorg valt mee."
       },
-      {
+      "2": {
         "titel": "Zorgelijk",
         "toelichting": "De situatie is lastig onder controle te houden. Er zijn veel nieuwe besmettingen. De druk op de zorg is groot."
       },
-      {
+      "3": {
         "titel": "Ernstig",
         "toelichting": "De situatie is slecht. Er is een groot aantal nieuwe besmettingen. De druk op de zorg is erg groot."
       },
-      {
+      "4": {
         "titel": "Zeer Ernstig",
         "toelichting": "De situatie is erg slecht. Er zijn extreem veel nieuwe besmettingen. De druk op de zorg is extreem groot."
       }
-    ],
+    },
     "legenda": {
       "titel": "Legenda",
       "geen_regio": "geen regio's",
@@ -1208,21 +1207,20 @@
       "value_annotation": "per 1 miljoen inwoners per week",
       "description": "Dit getal laat zien hoeveel mensen met COVID-19 uit deze veiligheidsregio in de afgelopen 7 dagen in een ziekenhuis zijn opgenomen per 1 miljoen inwoners. De balk laat zien hoe ernstig het aantal ziekenhuisopnames is."
     },
-    "types": [
-      null,
-      {
+    "types": {
+      "1": {
         "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       },
-      {
+      "2": {
         "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       },
-      {
+      "3": {
         "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       },
-      {
+      "4": {
         "toelichting": "Dit is het risiconiveau dat nu geldt in deze regio. Het risiconiveau wordt elke twee weken bepaald op basis van het aantal ziekenhuisopnames en het aantal positieve testen van dat moment."
       }
-    ],
+    },
     "momenteel": {
       "description_from_to": "",
       "last_determined": "Dit risiconiveau is bepaald op",

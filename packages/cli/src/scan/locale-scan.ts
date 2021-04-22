@@ -31,7 +31,7 @@ const newObject = propertyAssignmentNodes
     return aggr;
   }, {} as any);
 
-const newJson = unflatten(newObject);
+const newJson = unflatten(newObject, { object: true });
 fs.writeFileSync(
   path.join(__dirname, 'output.json'),
   JSON.stringify(newJson, null, 2),
