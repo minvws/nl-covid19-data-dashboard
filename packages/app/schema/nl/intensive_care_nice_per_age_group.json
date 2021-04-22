@@ -32,7 +32,7 @@
         "admissions_age_90_plus_per_million",
         "admissions_overall_per_million",
         "date_start_unix",
-        "dat_end_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
