@@ -11,6 +11,16 @@ export function createChoroplethValidation(
   choroplethCollectionPath: string,
   codeProperty: string
 ) {
+  if (!fs.existsSync(choroplethCollectionPath)) {
+    console.warn(
+      `${choroplethCollectionPath} does not exist, unable to create Choropleth validation`
+    );
+    return () => {
+      throw new Error(
+        `${choroplethCollectionPath} does not exist, unable to to validate!`
+      );
+    };
+  }
   const collectionJson = JSON.parse(
     fs.readFileSync(choroplethCollectionPath, { encoding: 'utf8' })
   );
