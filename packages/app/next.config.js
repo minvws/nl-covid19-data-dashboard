@@ -1,3 +1,7 @@
+const path = require('path');
+const config = { path: path.resolve('.env.local') };
+require('dotenv').config(config);
+
 const withPlugins = require('next-compose-plugins');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const sitemap = require('./generate-sitemap.js');
@@ -7,6 +11,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const COMMIT_ID = process.env.NEXT_PUBLIC_COMMIT_ID || 'no-version-found';
+
+const sanityImages = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
+const sanityFiles = `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
 
 const nextConfig = {
   env: {
@@ -105,6 +112,17 @@ const nextConfig = {
       },
     ];
   },
+
+  rewrites: () => [
+    {
+      source: '/cms-images/:path*',
+      destination: `${sanityImages}/:path*`,
+    },
+    {
+      source: '/cms-files/:path*',
+      destination: `${sanityFiles}/:path*`,
+    },
+  ],
 
   webpack(config, { isServer }) {
     if (

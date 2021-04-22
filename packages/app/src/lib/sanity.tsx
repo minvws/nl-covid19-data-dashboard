@@ -109,7 +109,7 @@ export function getImageProps<T extends ImageBlock>(
   const { metadata } = asset;
 
   const {
-    defaultWidth = node.asset.metadata.dimensions.width,
+    defaultWidth = metadata.dimensions.width,
     sizes: sizesOption,
   } = options;
 
@@ -117,7 +117,9 @@ export function getImageProps<T extends ImageBlock>(
   const height = width / metadata.dimensions.aspectRatio;
 
   const src = getImageSrc(node.asset, defaultWidth);
-  let srcSet = undefined; //we keep this undefined for SVG's, which don't need srcSets
+
+  /* we keep these undefined for SVGs, which don't need srcSets */
+  let srcSet: undefined | string;
 
   if (asset.extension !== 'svg') {
     /**
@@ -149,24 +151,17 @@ export function getImageProps<T extends ImageBlock>(
 }
 
 export function getFileSrc(asset: SanityFileProps) {
-  return `/cms/files/${asset.assetId}.${asset.extension}`;
+  return `/cms-files/${asset.assetId}.${asset.extension}`;
 }
 
 export function getImageSrc(
   asset: SanityImageProps,
   defaultWidth = asset.metadata.dimensions.width
 ) {
+  const filename = `${asset.assetId}-${asset.metadata.dimensions.width}x${asset.metadata.dimensions.height}.${asset.extension}`;
   if (asset.extension === 'svg') {
-    return `/cms/images/${asset.assetId}.svg`;
+    return `/cms-images/${filename}`;
   }
   const size = findClosestSize(defaultWidth, imageResizeTargets);
-  return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
-}
-
-export function maybeCreateWebpUrl(url: string) {
-  const extensionRegex = /(.(png|gif|jpe?g))$/;
-
-  return url.startsWith('/cms/images') && extensionRegex.test(url)
-    ? url.replace(extensionRegex, '.webp')
-    : undefined;
+  return `/cms-images/${filename}?w=${size}&q=65&auto=format`;
 }

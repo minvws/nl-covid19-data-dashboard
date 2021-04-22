@@ -11,7 +11,7 @@
     "test:ci": "yarn run test",
     "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
-    "sync-assets": "ts-node -r dotenv-flow/config scripts/sync-assets.ts",
+    "sync-assets": "echo 'Sync assets is deprecated' && exit 1",
     "lokalize:import": "ts-node src/lokalize/import.ts",
     "lokalize:export": "ts-node src/lokalize/export.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""

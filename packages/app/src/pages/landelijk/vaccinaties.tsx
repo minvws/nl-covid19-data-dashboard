@@ -52,7 +52,7 @@ export const getStaticProps = createGetStaticProps(
   }>((context) => {
     const { locale = 'nl' } = context;
     return `{
-      "milestones": ${getVaccineMilestonesQuery()},
+      "milestones": ${getVaccineMilestonesQuery(locale)},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
     }`;
   })

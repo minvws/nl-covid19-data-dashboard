@@ -1,8 +1,4 @@
-import { GetStaticPropsContext } from 'next';
-
-export function getVaccineMilestonesQuery(context: GetStaticPropsContext) {
-  const { locale = 'nl' } = context;
-
+export function getVaccineMilestonesQuery(locale: string) {
   return `
   *[_type=='vaccinationsPage']{
     "title": title.${locale},
