@@ -10,6 +10,7 @@ import { ScaleLinear } from 'd3-scale';
 import { first, isEmpty, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { Bounds } from './common';
 import { SeriesDoubleValue, SeriesItem, SeriesSingleValue } from './series';
 
@@ -34,10 +35,11 @@ export function useScales<T extends TimestampedValue>(args: {
   bounds: Bounds;
   numTicks: number;
 }) {
+  const today = useCurrentDate();
   const { maximumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
-    const [start, end] = getTimeDomain(values, { withPadding: true });
+    const [start, end] = getTimeDomain({ values, today, withPadding: true });
 
     if (isEmpty(values)) {
       return {
@@ -81,7 +83,7 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, maximumValue, bounds, numTicks]);
+  }, [values, today, bounds, maximumValue, numTicks]);
 }
 
 /**
@@ -94,16 +96,21 @@ export function useScales<T extends TimestampedValue>(args: {
  * series starts and where the last series ends, and that would remove all
  * "empty" space on both ends of the chart.
  */
-export function getTimeDomain<T extends TimestampedValue>(
-  values: T[],
-  { withPadding }: { withPadding: boolean }
-): [start: number, end: number] {
+export function getTimeDomain<T extends TimestampedValue>({
+  values,
+  today,
+  withPadding,
+}: {
+  values: T[];
+  today: Date;
+  withPadding: boolean;
+}): [start: number, end: number] {
   /**
    * Return a sensible default when no values fall within the selected timeframe
    */
   if (isEmpty(values)) {
-    const today = Date.now() / 1000;
-    return [today, today + ONE_DAY_IN_SECONDS];
+    const todayInSeconds = today.getTime() / 1000;
+    return [todayInSeconds, todayInSeconds + ONE_DAY_IN_SECONDS];
   }
 
   /**
