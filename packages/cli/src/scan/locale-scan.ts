@@ -4,6 +4,17 @@ import get from 'lodash/get';
 import path from 'path';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
 
+const whitelist = [
+  'choropleth.tested_overall',
+  'choropleth.escalation_levels',
+  'choropleth.hospital_nice',
+  'choropleth.nursing_home',
+  'choropleth.disability_care',
+  'choropleth.elderly_at_home',
+  'choropleth.sewer',
+  'choropleth.behavior',
+];
+
 const project = new Project({
   tsConfigFilePath: path.join(__dirname, '../../../app/tsconfig.json'),
 });
@@ -25,10 +36,9 @@ const propertyAssignmentNodes: PropertyAssignment[] = (
   sourceFile?.getDescendantsOfKind(SyntaxKind.PropertyAssignment) ?? []
 ).filter((x) => x.findReferences().length > 1);
 
-//const objectLiterals = sourceFile?.getDescendantsOfKind(SyntaxKind.ObjectLiteralExpression).map(x => x.)
-
 const newLocaleObjects = propertyAssignmentNodes
   ?.map((x) => getFullPath(x))
+  .concat(whitelist)
   .filter(
     (x, _i, l) =>
       l.findIndex((y) => y.startsWith(`${x}.`) && y.length > x.length + 1) ===
@@ -37,7 +47,6 @@ const newLocaleObjects = propertyAssignmentNodes
   .sort()
   .reduce(
     (aggr, chain) => {
-      console.log(chain);
       const NlValue = get(NlOriginal, chain);
       const EnValue = get(EnOriginal, chain);
       if (typeof NlValue === 'string') {

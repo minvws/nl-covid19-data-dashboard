@@ -14,15 +14,14 @@ import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 
 interface VaccinePageIntroductionProps {
-  text: any;
   data: National;
 }
 
 export function VaccinePageIntroduction({
-  text,
   data,
 }: VaccinePageIntroductionProps) {
   const { siteText, formatPercentage, formatDate } = useIntl();
+  const text = siteText.vaccinaties;
 
   const roundedMillion =
     Math.floor(

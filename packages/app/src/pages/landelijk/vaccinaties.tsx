@@ -79,7 +79,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <VaccinePageIntroduction data={data} text={text} />
+          <VaccinePageIntroduction data={data} />
 
           <ArticleStrip articles={content.highlight.articles} />
 
