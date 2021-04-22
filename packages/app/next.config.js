@@ -1,6 +1,4 @@
-const path = require('path');
-const config = { path: path.resolve('.env.local') };
-require('dotenv').config(config);
+require('@next/env').loadEnvConfig('./');
 
 const withPlugins = require('next-compose-plugins');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
