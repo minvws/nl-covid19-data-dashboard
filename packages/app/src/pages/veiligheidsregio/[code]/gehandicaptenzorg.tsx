@@ -117,17 +117,17 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
-                    metricProperty: 'newly_infected_people',
-                    label: positiveTestPeopleText.line_chart_legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                  {
                     type: 'line',
                     metricProperty: 'newly_infected_people_moving_average',
                     label:
                       positiveTestPeopleText.tooltip_labels
                         .newly_infected_people_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'area',
+                    metricProperty: 'newly_infected_people',
+                    label: positiveTestPeopleText.line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
@@ -265,17 +265,17 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'bar',
-                    metricProperty: 'deceased_daily',
-                    label: mortalityText.line_chart_legend_trend_label,
-                    color: colors.data.primary,
-                  },
-                  {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
                       mortalityText.tooltip_labels
                         .deceased_daily_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'deceased_daily',
+                    label: mortalityText.line_chart_legend_trend_label,
                     color: colors.data.primary,
                   },
                 ]}
