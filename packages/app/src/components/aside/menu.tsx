@@ -131,9 +131,6 @@ function isActivePath(router: NextRouter, href: Url) {
   return currentPath === hrefPath;
 }
 
-/**
- * The following css is copied from the layout.scss file, it can be cleaned up
- */
 const MetricMenuItem = styled.li(
   css({
     borderBottom: '1px solid',
