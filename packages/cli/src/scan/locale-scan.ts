@@ -31,7 +31,8 @@ const newLocaleObjects = propertyAssignmentNodes
   ?.map((x) => getFullPath(x))
   .filter(
     (x, _i, l) =>
-      l.findIndex((y) => y.startsWith(x) && y.length > x.length) === -1
+      l.findIndex((y) => y.startsWith(`${x}.`) && y.length > x.length + 1) ===
+      -1
   )
   .sort()
   .reduce(
