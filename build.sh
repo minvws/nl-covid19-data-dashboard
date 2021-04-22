@@ -15,7 +15,6 @@ yarn workspace @corona-dashboard/cli validate-last-values
 
 # Prepare types and assets
 yarn workspace @corona-dashboard/cli generate-typescript
-yarn workspace @corona-dashboard/cms sync-assets
 
 # Build the application in Docker 
 
