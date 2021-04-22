@@ -119,8 +119,7 @@ export function getImageProps<T extends ImageBlock>(
   const src = getImageSrc(node.asset, defaultWidth);
 
   /* we keep these undefined for SVGs, which don't need srcSets */
-  let srcSet = undefined;
-  let srcSetWebp = undefined;
+  let srcSet: undefined | string;
 
   if (asset.extension !== 'svg') {
     /**
@@ -129,9 +128,6 @@ export function getImageProps<T extends ImageBlock>(
      */
     srcSet = imageResizeTargets
       .map((size) => `${getImageSrc(asset, size)} ${size}w`)
-      .join(', ');
-    srcSetWebp = imageResizeTargets
-      .map((size) => `${getImageSrc(asset, size)}&fm=webp ${size}w`)
       .join(', ');
   }
 
@@ -146,7 +142,6 @@ export function getImageProps<T extends ImageBlock>(
   return {
     src,
     srcSet,
-    srcSetWebp,
     sizes,
     alt,
     width,
@@ -168,5 +163,5 @@ export function getImageSrc(
     return `/cms-images/${filename}`;
   }
   const size = findClosestSize(defaultWidth, imageResizeTargets);
-  return `/cms-images/${filename}?w=${size}&q=65`;
+  return `/cms-images/${filename}?w=${size}&q=65&auto=format`;
 }

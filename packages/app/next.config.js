@@ -11,8 +11,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const COMMIT_ID = process.env.NEXT_PUBLIC_COMMIT_ID || 'no-version-found';
-const SANITY_CDN_IMAGES = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
-const SANITY_CDN_FILES = `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
+
+const sanityImages = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
+const sanityFiles = `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
 
 const nextConfig = {
   env: {
@@ -115,11 +116,11 @@ const nextConfig = {
   rewrites: () => [
     {
       source: '/cms-images/:path*',
-      destination: `${SANITY_CDN_IMAGES}/:path*`,
+      destination: `${sanityImages}/:path*`,
     },
     {
       source: '/cms-files/:path*',
-      destination: `${SANITY_CDN_FILES}/:path*`,
+      destination: `${sanityFiles}/:path*`,
     },
   ],
 
