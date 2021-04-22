@@ -42,7 +42,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: compile
+    needs: init
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
