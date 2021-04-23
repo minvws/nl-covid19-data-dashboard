@@ -13,6 +13,10 @@ import { LokalizeText } from '~/types/cms';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { Subscription } from 'rxjs';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
+import {
+  createFlattenTexts,
+  parseLocaleTextDocument,
+} from '@corona-dashboard/common';
 
 export function useLokalizeText(
   locale: LanguageKey,
@@ -114,44 +118,6 @@ export function useLokalizeText(
   ) : null;
 
   return [paths || text, toggleEl] as const;
-}
-
-function createFlattenTexts(documents: LokalizeText[]) {
-  const nl: Record<string, string> = {};
-  const en: Record<string, string> = {};
-
-  const drafts = documents.filter((x) => x._id.startsWith('drafts.'));
-  const published = documents.filter((x) => !x._id.startsWith('drafts.'));
-
-  for (const document of published) {
-    const { key, localeText } = parseLocaleTextDocument(document);
-    nl[key] = localeText.nl;
-    en[key] = localeText.en;
-  }
-
-  for (const document of drafts) {
-    const { key, localeText } = parseLocaleTextDocument(document);
-    nl[key] = localeText.nl;
-    en[key] = localeText.en;
-  }
-
-  return { nl, en };
-}
-
-function parseLocaleTextDocument(document: LokalizeText) {
-  /**
-   * paths inside the `__root` subject should be placed under the path
-   * in the root of the exported json
-   */
-  const key =
-    document.subject === '__root'
-      ? document.path
-      : `${document.subject}.${document.path}`;
-
-  const nl = document.displayEmpty ? '' : document.text.nl?.trim() || '';
-  const en = document.displayEmpty ? '' : document.text.en?.trim() || nl;
-
-  return { key, localeText: { nl, en } };
 }
 
 function ToggleButton({

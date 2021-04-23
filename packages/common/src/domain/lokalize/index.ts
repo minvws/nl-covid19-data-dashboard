@@ -45,8 +45,8 @@ export function parseLocaleTextDocument(
       ? document.path
       : `${document.subject}.${document.path}`;
 
-  const nl = document.display_empty ? '' : document.text.nl?.trim() || '';
-  const en = document.display_empty
+  const nl = document.displayEmpty ? '' : document.text.nl?.trim() || '';
+  const en = document.displayEmpty
     ? ''
     : /**
        * Here make an automatic fallback to Dutch texts if English is missing.
