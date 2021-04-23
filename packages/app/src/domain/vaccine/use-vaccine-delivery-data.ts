@@ -8,7 +8,13 @@ import {
 import { useMemo } from 'react';
 
 export function useVaccineDeliveryData(
-  data: National
+  data: Pick<
+    National,
+    | 'vaccine_delivery'
+    | 'vaccine_administered'
+    | 'vaccine_delivery_estimate'
+    | 'vaccine_administered_estimate'
+  >
 ): [
   NlVaccineDeliveryValue[],
   NlVaccineDeliveryEstimateValue[],

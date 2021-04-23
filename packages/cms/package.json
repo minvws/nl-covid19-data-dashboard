@@ -17,16 +17,16 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
-    "@sanity/base": "^2.7.4",
+    "@sanity/base": "^2.8.0",
     "@sanity/components": "^2.2.6",
-    "@sanity/core": "^2.7.4",
+    "@sanity/core": "^2.8.0",
     "@sanity/dashboard": "^2.7.0",
-    "@sanity/default-layout": "^2.7.4",
-    "@sanity/default-login": "^2.7.0",
-    "@sanity/desk-tool": "^2.7.4",
+    "@sanity/default-layout": "^2.8.0",
+    "@sanity/default-login": "^2.8.0",
+    "@sanity/desk-tool": "^2.8.0",
     "@sanity/production-preview": "^2.2.6",
     "@sanity/ui": "^0.33.7",
-    "@sanity/vision": "^2.7.4",
+    "@sanity/vision": "^2.8.0",
     "braille": "^1.1.0",
     "download": "^8.0.0",
     "flat": "^5.0.2",
@@ -46,7 +46,7 @@
     "ts-is-present": "^1.2.1"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.7.4",
+    "@sanity/cli": "^2.8.0",
     "@types/download": "^6.2.4",
     "@types/flat": "^5.0.1",
     "@types/fs-extra": "^9.0.6",

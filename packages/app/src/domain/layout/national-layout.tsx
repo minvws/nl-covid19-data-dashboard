@@ -16,8 +16,8 @@ import Ziektegolf from '~/assets/ziektegolf.svg';
 import {
   CategoryMenu,
   Menu,
-  MetricMenuItemLink,
   MetricMenuButtonLink,
+  MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { AppContent } from '~/components/layout/app-content';
@@ -25,9 +25,30 @@ import { SidebarMetric } from '~/components/sidebar-metric';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
+export const nlPageMetricNames = [
+  'vaccine_administered_total',
+  'tested_overall',
+  'infectious_people',
+  'reproduction',
+  'deceased_rivm',
+  'hospital_nice',
+  'intensive_care_nice',
+  'nursing_home',
+  'disability_care',
+  'elderly_at_home',
+  'sewer',
+  'doctor',
+  'behavior',
+  'difference',
+] as const;
+
+export type NlPageMetricNames = typeof nlPageMetricNames[number];
+
+export type NationalPageMetricData = Pick<National, NlPageMetricNames>;
+
 interface NationalLayoutProps {
   lastGenerated: string;
-  data: National;
+  data: NationalPageMetricData;
   children?: React.ReactNode;
 }
 
