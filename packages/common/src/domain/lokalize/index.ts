@@ -54,7 +54,7 @@ export function parseLocaleTextDocument(
       document.text.en?.trim() || nl;
 
   if (warn && !document.text.en?.trim()) {
-    console.log(
+    console.warn(
       'Missing english translation for path:',
       document.lokalize_path
     );
