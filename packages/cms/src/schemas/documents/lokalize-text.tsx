@@ -53,8 +53,13 @@ export const lokalizeText = {
          */
         Rule.fields({
           nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset(),
+          en: (fieldRule: any) => fieldRule.reset().required().warning(),
         }),
+    },
+    {
+      title: 'Toon als lege tekst',
+      name: 'display_empty',
+      type: 'boolean',
     },
   ],
   preview: {
@@ -66,7 +71,7 @@ export const lokalizeText = {
 };
 
 interface Field__incomplete {
-  value: string;
+  value?: string;
   type: {
     title: string;
     [key: string]: unknown;
@@ -79,7 +84,7 @@ function ReadOnlyPath({ value, type }: Field__incomplete) {
     <div>
       <strong>{type.title}</strong>
       <div style={{ fontFamily: 'monospace' }}>
-        {value.split('::').map((x, i, list) => (
+        {value?.split('::').map((x, i, list) => (
           <span style={{ display: 'inline-block' }}>
             {list[i - 1] && '::'}
             {x}
