@@ -14,8 +14,9 @@
     "sync-assets": "ts-node -r dotenv-flow/config scripts/sync-assets.ts",
     "lokalize:import": "ts-node src/lokalize/import.ts",
     "lokalize:export": "ts-node src/lokalize/export.ts",
-    "lokalize:add": "ts-node src/lokalize/text-add.ts",
-    "lokalize:delete": "ts-node src/lokalize/text-delete.ts",
+    "lokalize:add": "ts-node src/lokalize/add-text.ts",
+    "lokalize:delete": "ts-node src/lokalize/delete-text.ts",
+    "lokalize:sync": "ts-node src/lokalize/apply-key-mutations.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
@@ -55,6 +56,7 @@
     "@types/prompts": "^2.0.9",
     "@types/react-world-flags": "^1.4.1",
     "dotenv-flow": "^3.2.0",
+    "fast-csv": "^4.3.6",
     "ts-node": "^9.1.1"
   }
 }

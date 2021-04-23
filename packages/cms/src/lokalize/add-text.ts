@@ -5,9 +5,15 @@
 import { set } from 'lodash';
 import prompts from 'prompts';
 import { client } from '../client';
+import { appendTextMutation } from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
+  /**
+   * @TODO We could cache the subjects in a temp location on disk and update
+   * them every time this CLI is run. This way we can avoid having to wait for
+   * the query to return.
+   */
   const allTexts = (await client
     .fetch(`*[_type == 'lokalizeText']`)
     .catch((err) => {
@@ -76,9 +82,10 @@ import { LokalizeText } from './types';
     if (response.confirmed) {
       await client.create(textDocument);
 
-      console.log(
-        `Successfully created ${textDocument.subject}.${textDocument.path}`
-      );
+      const key = `${textDocument.subject}.${textDocument.path}`;
+      await appendTextMutation('add', key);
+
+      console.log(`Successfully created ${key}`);
     }
 
     if (!response.continue) {

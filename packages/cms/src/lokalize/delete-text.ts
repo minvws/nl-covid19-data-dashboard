@@ -2,11 +2,12 @@
  * Delete one of multiple texts from the Sanity "Lokalize" dataset.
  */
 
+import { assert } from '@corona-dashboard/common';
+import { isEmpty } from 'lodash';
 import prompts from 'prompts';
 import { client } from '../client';
+import { appendTextMutation } from './logic';
 import { LokalizeText } from './types';
-import { set, isEmpty } from 'lodash';
-import { assert } from '@corona-dashboard/common';
 
 (async function run() {
   /**
@@ -48,14 +49,20 @@ import { assert } from '@corona-dashboard/common';
         name: 'paths',
         message: `What path in ${subjectResponse.subject}?`,
         choices,
+        validate: (x) => {
+          console.log('validate', x);
+          return x.length > 0;
+        },
       },
       {
-        type: 'confirm',
+        type: (prev) => (prev.length > 0 ? 'confirm' : null),
         name: 'confirmed',
-        message: (_, values) =>
-          `Are you sure you want to delete:\n\n${values.paths
+        message: (prev, values) => {
+          console.log('values', values, 'prev', prev);
+          return `Are you sure you want to delete:\n\n${values.paths
             .map((x: string) => `${subject}.${x}`)
-            .join('\n')}`,
+            .join('\n')}`;
+        },
       },
     ]);
 
@@ -64,12 +71,19 @@ import { assert } from '@corona-dashboard/common';
         .filter((x) => response.paths.includes(x.path))
         .map((x) => x._id);
 
+      console.log(response.paths, documentIdsToDelete);
+
       const transaction = documentIdsToDelete.reduce(
         (tx, id) => tx.delete(id),
         client.transaction()
       );
 
       await transaction.commit();
+
+      for (const path of response.paths) {
+        const key = `${subject}.${path}`;
+        appendTextMutation('delete', key);
+      }
 
       console.log(
         `Successfully deleted ${documentIdsToDelete.length} documents`
