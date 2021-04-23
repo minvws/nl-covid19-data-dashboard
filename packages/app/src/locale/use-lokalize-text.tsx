@@ -19,6 +19,23 @@ import { LokalizeText } from '~/types/cms';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 
+/**
+ * This hook will return an object which contains all lokalize translations.
+ *
+ * Additionally, with `enableHotReload: true` it can also connect with Sanity
+ * to receive real-time (hot) updates of draft translations.
+ *
+ * If enabled a tiny button will be rendered at the bottom-right which is only
+ * visible on hover.
+ *
+ * This button toggles though three states:
+ *
+ * - undefined (gray): app is rendered with translations from filesystem
+ * - live (green): app is listening to real-time sanity updates
+ * - paths (blue): app is displaying the pathnames of every key instead of the value
+ *
+ * The live/paths state can also be toggled with shortkey shift+t.
+ */
 export function useLokalizeText(
   locale: LanguageKey,
   { enableHotReload }: { enableHotReload?: boolean }
@@ -50,41 +67,43 @@ export function useLokalizeText(
     const setTextDebounced = debounce(setText, 500);
     const query = `*[_type == 'lokalizeText']`;
 
-    getClient()
-      .then((client) => client.fetch(query))
-      .then((documents: LokalizeText[]) => {
-        const flattenTexts = createFlattenTexts(documents)[locale];
-        setText(() => unflatten(flattenTexts, { object: true }));
-      })
-      .catch((err) => console.error(err));
-
     let subscription: Subscription | undefined;
 
-    getClient().then(
-      (client) =>
-        (subscription = client
-          .listen(query)
-          .subscribe((update: MutationEvent<LokalizeText>) => {
-            if (!isMountedRef.current) return;
+    getClient().then(async (client) => {
+      await client
+        .fetch(query)
+        .then((documents: LokalizeText[]) => {
+          if (!isMountedRef.current) return;
+          const flattenTexts = createFlattenTexts(documents)[locale];
+          setText(() => unflatten(flattenTexts, { object: true }));
+        })
+        .catch((err) => console.error(err));
 
-            /**
-             * we currently only handle "updates" to existing (draft) documents.
-             * This means for example that the "discard changes" action is not
-             * handled.
-             */
-            if (!update.result) return;
+      if (!isMountedRef.current) return;
 
-            const { key, localeText } = parseLocaleTextDocument(update.result);
+      subscription = client
+        .listen(query)
+        .subscribe((update: MutationEvent<LokalizeText>) => {
+          if (!isMountedRef.current) return;
 
-            /**
-             * We'll mutate text which lives in a reference and update the text
-             * state with a debounced handler. Otherwise the app can become quite
-             * slow when someone is typing in sanity lokalizeText documents.
-             */
-            set(textRef.current, key, localeText[locale]);
-            setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
-          }))
-    );
+          /**
+           * we currently only handle "updates" to existing (draft) documents.
+           * This means for example that the "discard changes" action is not
+           * handled.
+           */
+          if (!update.result) return;
+
+          const { key, localeText } = parseLocaleTextDocument(update.result);
+
+          /**
+           * We'll mutate text which lives in a reference and update the text
+           * state with a debounced handler. Otherwise the app can become quite
+           * slow when someone is typing in sanity lokalizeText documents.
+           */
+          set(textRef.current, key, localeText[locale]);
+          setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
+        });
+    });
 
     return () => {
       subscription?.unsubscribe();
