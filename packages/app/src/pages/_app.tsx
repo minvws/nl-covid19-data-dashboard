@@ -7,7 +7,7 @@ import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
 import { LanguageKey } from '~/locale';
-import { useLokalizeText } from '~/locale/use-text';
+import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 import { assert } from '~/utils/assert';
