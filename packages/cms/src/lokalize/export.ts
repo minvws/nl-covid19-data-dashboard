@@ -16,7 +16,7 @@ const cli = meow(
       --drafts, -d Include draft documents
 
     Examples
-      $ lokalize:export -e
+      $ lokalize:export -d
 `,
   {
     flags: {
