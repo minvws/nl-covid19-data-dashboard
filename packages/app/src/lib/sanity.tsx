@@ -27,7 +27,7 @@ const config: ClientConfig = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: process.env.NODE_ENV === 'production',
   apiVersion: '2021-03-25',
-  withCredentials: true,
+  withCredentials: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
   /**
    * Set useCdn to `false` if your application require the freshest possible
    * data always (potentially slightly slower and a bit more expensive).

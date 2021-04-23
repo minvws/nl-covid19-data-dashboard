@@ -2,8 +2,8 @@ import { assert } from '~/utils/assert';
 import { ReactNode, Fragment } from 'react';
 
 /**
- * When lokalize hot reload is enabled we don't want to validate strings
- * client-side
+ * When lokalize hot reload is enabled we will render "[#ERROR {{key}}]"
+ * instead of throwing an error when there's a validation error.
  */
 const shouldValidate =
   typeof window === 'undefined' ||
@@ -34,7 +34,7 @@ export function replaceComponentsInText(
           );
         }
 
-        const replacement = replacementMap[part] ?? `{{${part}}}`;
+        const replacement = replacementMap[part] ?? `[#ERROR {{${part}}}]`;
 
         return (
           <Fragment key={index}>{isVariable ? replacement : part}</Fragment>

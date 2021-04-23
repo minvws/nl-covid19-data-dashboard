@@ -61,6 +61,12 @@ export function useLokalizeText(
           .listen(query)
           .subscribe((update: MutationEvent<LokalizeText>) => {
             if (!isMountedRef.current) return;
+
+            /**
+             * we currently only handle "updates" to existing (draft) documents.
+             * This means for example that the "discard changes" action is not
+             * handled.
+             */
             if (!update.result) return;
 
             const { key, localeText } = parseLocaleTextDocument(update.result);

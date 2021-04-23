@@ -2,8 +2,8 @@ import { isDefined } from 'ts-is-present';
 import { assert } from './assert';
 
 /**
- * When lokalize hot reload is enabled we don't want to validate strings
- * client-side because values can be misformed
+ * When lokalize hot reload is enabled we will render "[#ERROR {{key}}]"
+ * instead of throwing an error when there's a validation error.
  */
 const shouldValidate =
   typeof window === 'undefined' ||
@@ -42,12 +42,13 @@ export function replaceVariablesInText(
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
     const trimmedName = variableName.trim();
+
     if (trimmedName in variables) {
       return (variables[trimmedName] ?? '').toString();
     }
 
     if (!shouldValidate) {
-      return `{{${trimmedName}}}`;
+      return `[#ERROR {{${trimmedName}}}]`;
     }
 
     throw new Error(
