@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
@@ -11,6 +11,7 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export function TopNavigation() {
   const router = useRouter();
@@ -18,13 +19,8 @@ export function TopNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const breakpoints = useBreakpoints(true);
   const isSmallScreen = !breakpoints.md;
-  const [needsMobileMenuLink, setNeedsMobileMenuLink] = useState(false);
+  const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
-
-  useEffect(() => {
-    // Workaround to get the mobile menu opened when linking to a sub-page.
-    setNeedsMobileMenuLink(isSmallScreen);
-  }, [isSmallScreen]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -69,9 +65,7 @@ export function TopNavigation() {
               {siteText.nav.links.actueel}
             </NavItem>
             <NavItem
-              href={`/landelijk/vaccinaties${
-                needsMobileMenuLink ? '?menu=1' : ''
-              }`}
+              href={reverseRouter.nl.index()}
               isActive={router.pathname.startsWith('/landelijk')}
             >
               {siteText.nav.links.index}

@@ -2,8 +2,6 @@ require('@next/env').loadEnvConfig('./');
 
 const withPlugins = require('next-compose-plugins');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const sitemap = require('./generate-sitemap.js');
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -122,19 +120,7 @@ const nextConfig = {
     },
   ],
 
-  webpack(config, { isServer }) {
-    if (
-      isServer &&
-      process.env.DISABLE_SITEMAP !== '1' &&
-      !process.env.DISABLE_SITEMAP
-    ) {
-      sitemap.generateSitemap(
-        process.env.NEXT_PUBLIC_LOCALE,
-        process.env.NEXT_PUBLIC_SANITY_DATASET,
-        process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-      );
-    }
-
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
       use: [

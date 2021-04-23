@@ -103,4 +103,67 @@ p {
     transition: none !important;
   }
 }
+
+// Global comobox styles copied from the old SCSS
+
+[data-reach-combobox] {
+  position: relative;
+}
+
+[data-reach-combobox]::after {
+  content: '';
+  background-image: url('/images/search.svg');
+  background-size: 1.5em 1.5em;
+  height: 1.5em;
+  width: 1.5em;
+  display: block;
+  position: absolute;
+  left: 1.6em;
+  top: 2.7em;
+  z-index: 100;
+}
+
+[data-reach-combobox-popover] {
+  z-index: 100;
+}
+
+[data-reach-combobox-popover] > span {
+  display: block;
+  padding: 0.75em 1em;
+  font-size: 1rem;
+}
+
+[data-reach-combobox-list] {
+  height: 30em;
+  overflow-y: scroll;
+  border: none;
+  box-shadow: 0 -1px 1px 0 #e5e5e5, 0 1px 1px 0 #e5e5e5, 0 2px 2px 0 #e5e5e5,
+  0 4px 4px 0 #e5e5e5, 0 6px 6px 0 #e5e5e5;
+}
+
+[data-reach-combobox-input] {
+  width: 100%;
+  padding: 0.75em 1em;
+  padding-left: 2.5em;
+  font-size: 1rem;
+  border: 1px solid #c4c4c4;
+}
+
+[data-reach-combobox-input]:focus {
+  border-color: ${(x) => x.theme.colors.icon};
+  outline: none;
+}
+
+[data-reach-combobox-option] {
+  padding: 0.75em 1em;
+}
+
+[data-reach-combobox-option]:hover, [data-reach-combobox-option]:focus {
+  background: ${(x) => x.theme.colors.page};
+}
+
+[data-reach-combobox-option] span {
+  font-size: 1rem;
+  font-weight: normal;
+}
 `;

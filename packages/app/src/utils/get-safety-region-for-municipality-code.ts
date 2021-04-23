@@ -1,5 +1,5 @@
-import regios from '~/data/index';
-import municipalities from '~/data/municipal-search-data';
+import { vrData } from '~/data/vr';
+import { gmData } from '~/data/gm';
 
 /**
  * This function returns the safety region information for the given
@@ -10,13 +10,11 @@ import municipalities from '~/data/municipal-search-data';
 export function getSafetyRegionForMunicipalityCode(
   code: string
 ): { name: string; code: string; id: number } | undefined {
-  const municipality = municipalities.find((mun) => mun.gemcode === code);
+  const municipality = gmData.find((x) => x.gemcode === code);
 
-  if (!municipality) return undefined;
+  if (!municipality) return;
 
-  const regio = regios.find(
-    (regio) => regio.code === municipality.safetyRegion
-  );
+  const regio = vrData.find((x) => x.code === municipality.safetyRegion);
 
   return regio;
 }

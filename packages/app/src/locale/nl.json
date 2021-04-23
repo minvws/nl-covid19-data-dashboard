@@ -649,7 +649,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -1022,7 +1022,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1098,7 +1098,7 @@
     "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
-    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde van zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} tests met een bekende uitslag.",
     "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
@@ -1137,7 +1137,7 @@
     "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
-    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde van zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
     "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
@@ -1311,8 +1311,8 @@
     "kpi_titel": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
     "meer_onderzoeksresultaten": {
       "title": "Meer onderzoeksresultaten",
-      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
-      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
+      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van het RIVM.",
+      "linkLabel": "Bekijk het gehele onderzoek op de website van het RIVM",
       "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek/naleving-van-en-draagvlak-voor-basis-gedragsregels"
     }
   },
@@ -1480,7 +1480,6 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 16% een twintiger (blauwe balk) en van alle Nederlanders is 13% een twintiger (grijze balk). De leeftijdsgroep twintigers heeft in dit voorbeeld naar verhouding meer positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1491,7 +1490,8 @@
       "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
-    }
+    },
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1880,11 +1880,11 @@
       "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "cbs_message": {
-      "title": "Geen wekelijks nieuwsbericht over sterfte in week 13",
-      "published_text": "Publicatiedatum: vrijdag 9 april",
-      "message": "Vanwege Pasen verschijnt deze week geen nieuwsbericht over de wekelijkse sterfte. Vanwege vertraging in de aanlevering van de overlijdensberichten, wat gebruikelijk is rondom de feestdagen, is het dan niet mogelijk om een schatting van de sterfte in week 13 te geven. Het eerstvolgende nieuwsbericht, met de schatting van week 14 en de voorlopige cijfers tot en met week 13, zal op vrijdag 16 april gepubliceerd worden.",
+      "title": "Oversterfte bij mensen tot 80 jaar in week 15",
+      "published_text": "Publicatiedatum: vrijdag 23 april",
+      "message": "In week 15 (12 tot en met 18 april 2021) overleden naar schatting iets minder dan 3.200 mensen. Dat zijn bijna 200 sterfgevallen meer dan verwacht voor deze periode, en iets meer sterfgevallen dan in de week ervoor (3.132). Er overleden vooral meer 65- tot 80-jarigen dan verwacht, en ook bij mensen jonger dan 65 jaar was er oversterfte. De sterfte onder Wlz-zorggebruikers lag opnieuw onder het verwachte niveau. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Van week 39 van 2020 tot en met week 6 van 2021 was de wekelijkse sterfte hoger dan verwacht. Tot aan week 3 was er oversterfte. In de weken erna was er geen oversterfte en schommelde de sterfte rond de verwachte aantallen voor die periode. De schatting in week 15 ligt bijna 200 sterfgevallen boven de verwachting, maar nog net binnen het interval van gewoonlijke fluctuaties (en is daarom geen oversterfte). Het RIVM registreerde 126 overleden COVID-19-patiënten in week 15 (stand 20 april).",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/13/in-week-12-naar-schatting-3100-mensen-overleden",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/16/oversterfte-bij-mensen-tot-80-jaar-in-week-15",
         "text": "Lees het volledige nieuwsbericht op de website van het CBS"
       }
     },
@@ -2042,7 +2042,7 @@
       "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties door de tijd heen.",
       "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
       "gehandicaptenzorg_positief_getest": "Deze grafiek toont het aantal bewoners van instellingen voor gehandicaptenzorg waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
-      "gehandicaptenzorg_besmette_locaties": "Deze grafiek toont het totaal aantal besmette gehandicaptenzorglocaties door de tijd heen. ",
+      "gehandicaptenzorg_besmette_locaties": "Deze grafiek toont het totaal aantal besmette gehandicaptenzorglocaties door de tijd heen.",
       "gehandicaptenzorg_overleden": "Deze grafiek toont het aantal overleden bewoners van instellingen voor gehandicaptenzorg door de tijd heen.",
       "thuiswonende_ouderen_besmettingen": "Deze grafiek toont het aantal besmettingen onder thuiswonende ouderen door de tijd heen.",
       "thuiswonende_ouderen_overleden": "Deze grafiek toont het aantal thuiswonende ouderen dat is overleden aan COVID-19 door de tijd heen.",
@@ -2322,8 +2322,8 @@
           "janssen": "Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Geleverd en beschikbaar",
-        "estimated": "Verwacht geleverd en beschikbaar",
+        "delivered": "Geleverd en gecontroleerd",
+        "estimated": "Verwacht geleverd en gecontroleerd",
         "left_divider_label": "Berekend aantal",
         "right_divider_label": "Verwacht aantal",
         "legend": {
@@ -2370,7 +2370,7 @@
       "title": "Leveringen & voorraad",
       "description": "Hoeveel prikken we kunnen zetten, hangt af van hoeveel vaccins we geleverd krijgen. Elke week krijgt Nederland vaccins. Het grootste deel van de vaccins is na een controle snel beschikbaar om mensen een prik te geven. Maar we houden ook een deel van de vaccins op voorraad om zeker te weten dat er genoeg vaccins zijn om afspraken in de komende dagen gewoon door te kunnen laten gaan en voor mensen die een tweede prik nodig hebben. De cijfers hieronder laten zien hoeveel vaccins Nederland krijgt en hoeveel vaccins we op voorraad hebben.",
       "reference": {
-        "href": "/verantwoording#leveringen-voorraden-en-beschikbare-vaccins",
+        "href": "/verantwoording#leveringen-en-voorraad-vaccins",
         "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
       }
     },
@@ -2429,7 +2429,7 @@
     "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}",
     "secties": {
       "artikelen": {
-        "titel": "Actuele artikelen",
+        "titel": "Uitgelicht",
         "link": {
           "text": "Bekijk alle artikelen",
           "href": "/artikelen"
@@ -2468,7 +2468,7 @@
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op {{last_update}} gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).",
-      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2894,6 +2894,10 @@
       }
     }
   },
+  "milestones": {
+    "toon_meer": "Toon eerdere gebeurtenissen",
+    "verwacht": "Verwacht"
+  },
   "choropleth_tooltip": {
     "patients": {
       "singular": "patiënt",
@@ -2905,10 +2909,6 @@
     "elderly_at_home": "Thuiswonende 70-plussers:",
     "sewer_regional": "Gemiddeld aantal virusdeeltjes:",
     "sewer_municipal": "Gemiddeld aantal virusdeeltjes:"
-  },
-  "milestones": {
-    "toon_meer": "Toon eerdere gebeurtenissen",
-    "verwacht": "Verwacht"
   },
   "section_sterftemonitor_vr": {
     "title": "Sterftemonitor",

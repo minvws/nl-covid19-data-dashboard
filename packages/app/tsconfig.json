@@ -12,7 +12,11 @@
       "~/*": ["src/*"]
     }
   },
-  "references": [{ "path": "../common" }],
-  "exclude": ["node_modules", ".next", "out"],
-  "include": ["next-env.d.ts", "src"]
+  "references": [
+    {
+      "path": "../common"
+    }
+  ],
+  "include": ["next-env.d.ts", "src"],
+  "exclude": ["node_modules"]
 }

@@ -145,42 +145,6 @@ export function useSewerStationSelectProps(values: SewerChartValue[]) {
   return props;
 }
 
-export function useSelectedStationValues(
-  value: string | undefined,
-  stationValues: SewerChartValue[],
-  averageValues: SewerChartValue[]
-) {
-  /**
-   * filter stationValues to only include values of a single station
-   */
-  const selectedStationValues = useMemo(() => {
-    return value ? stationValues.filter((x) => x.name === value) : [];
-  }, [stationValues, value]);
-
-  /**
-   * Here we determine the outlier limit: find the highest line-value and
-   * multiply it by 1.5 in order to display station values which are close to
-   * the highest value.
-   */
-  const outlierLimit =
-    Math.max(
-      getMax(averageValues, (x) => x.value),
-      getMax(selectedStationValues, (x) => x.value)
-    ) * 1.5;
-
-  /**
-   * If there's a station value GTE than the max line, it means we have outliers
-   * we might not want to display, based on the incoming boolean
-   */
-  const hasOutliers = getMax(stationValues, (x) => x.value) >= outlierLimit;
-
-  return {
-    selectedStationValues,
-    hasOutliers,
-    outlierLimit,
-  };
-}
-
 export function useScatterTooltip({
   values,
   scales,

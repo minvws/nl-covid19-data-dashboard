@@ -3,13 +3,13 @@ import { AppProps } from 'next/app';
 import Router, { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import '~/components/combo-box/combo-box.scss';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
 import { LanguageKey, languages } from '~/locale';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
+import { assert } from '~/utils/assert';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -33,7 +33,9 @@ export default function App(props: AppProps) {
   const { locale = 'nl' } = useRouter();
   const text = languages[locale as LanguageKey];
 
-  const intlContext = useIntlHelperContext(locale, text);
+  assert(text, `Encountered unknown language: ${locale}`);
+
+  const intlContext = useIntlHelperContext(locale as LanguageKey, text);
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {

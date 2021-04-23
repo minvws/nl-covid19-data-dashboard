@@ -8,3 +8,5 @@ packages/app/.next
 # Allowlist
 # !packages/app/*.conf
 # !exports
+
+.github

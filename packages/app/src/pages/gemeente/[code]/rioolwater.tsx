@@ -2,7 +2,6 @@ import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { BarChart } from '~/components/bar-chart/bar-chart';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
@@ -25,7 +24,6 @@ import {
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useSewerWaterBarChartData } from '~/utils/sewer-water/municipality-sewer-water.util';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { Layout } from '~/domain/layout/layout';
 
@@ -47,8 +45,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.gemeente_rioolwater_metingen;
-
-  const barChartData = useSewerWaterBarChartData(data);
 
   const sewerAverages = data.sewer;
 
@@ -178,29 +174,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
-
-          {barChartData && (
-            <ChartTile
-              title={replaceVariablesInText(text.bar_chart_title, {
-                municipality: municipalityName,
-              })}
-              metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <BarChart
-                values={barChartData.values}
-                xAxisTitle={text.bar_chart_axis_title}
-                accessibilityDescription={
-                  text.bar_chart_accessibility_description
-                }
-              />
-            </ChartTile>
-          )}
         </TileList>
       </MunicipalityLayout>
     </Layout>
