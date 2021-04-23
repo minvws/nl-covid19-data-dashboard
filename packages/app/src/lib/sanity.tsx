@@ -1,7 +1,7 @@
 // lib/sanity.ts
 import { assert, imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
-import sanityClient, { ClientConfig } from '@sanity/client';
+import { ClientConfig } from '@sanity/client';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/find-closest-size';
 
@@ -39,7 +39,10 @@ const config: ClientConfig = {
 export const PortableText = BlockContent;
 
 // Set up the client for fetching data in the getProps page functions
-export const client = sanityClient(config);
+export async function getClient() {
+  const { default: client } = await import('@sanity/client');
+  return client(config);
+}
 
 // const builder = imageUrlBuilder(client);
 /**

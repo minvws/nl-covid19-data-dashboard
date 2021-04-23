@@ -5,23 +5,30 @@ import { flatten, unflatten } from 'flat';
 import { debounce } from 'lodash';
 import set from 'lodash/set';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { isDefined } from 'ts-is-present';
 import DatabaseIcon from '~/assets/database.svg';
-import { client } from '~/lib/sanity';
+import { getClient } from '~/lib/sanity';
 import { LanguageKey, languages } from '~/locale';
 import { LokalizeText } from '~/types/cms';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
+import { Subscription } from 'rxjs';
+import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 
 export function useLokalizeText(
   locale: LanguageKey,
   { enableHotReload }: { enableHotReload?: boolean }
 ) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [isPathMode, setIsPathMode] = useState(false);
+  const isMountedRef = useIsMountedRef();
+  const [displayMode, setDisplayMode] = useState<'path' | 'live'>();
 
-  useHotkey('shift+t', () => setIsPathMode((x) => !x), {
-    isDisabled: !(enableHotReload && isEnabled),
-    disableTextInputs: true,
-  });
+  useHotkey(
+    'shift+t',
+    () => setDisplayMode((x) => (x === 'path' ? 'live' : 'path')),
+    {
+      isDisabled: !(enableHotReload && isDefined(displayMode)),
+      disableTextInputs: true,
+    }
+  );
 
   const [text, setText] = useState(languages[locale]);
   const textRef = useRef(text);
@@ -30,7 +37,7 @@ export function useLokalizeText(
   }, [text]);
 
   useEffect(() => {
-    if (!(enableHotReload && isEnabled)) {
+    if (!enableHotReload || !isDefined(displayMode)) {
       setText(languages[locale]);
       return;
     }
@@ -38,36 +45,48 @@ export function useLokalizeText(
     const setTextDebounced = debounce(setText, 500);
     const query = `*[_type == 'lokalizeText']`;
 
-    client.fetch(query).then((documents: LokalizeText[]) => {
-      const flattenTexts = createFlattenTexts(documents)[locale];
-      setText(() => unflatten(flattenTexts, { object: true }));
-    });
+    getClient()
+      .then((client) => client.fetch(query))
+      .then((documents: LokalizeText[]) => {
+        const flattenTexts = createFlattenTexts(documents)[locale];
+        setText(() => unflatten(flattenTexts, { object: true }));
+      })
+      .catch((err) => console.error(err));
 
-    const subscription = client
-      .listen(query)
-      .subscribe((update: MutationEvent<LokalizeText>) => {
-        if (!update.result) return;
+    let subscription: Subscription | undefined;
 
-        const { key, localeText } = parseLocaleTextDocument(update.result);
+    getClient().then(
+      (client) =>
+        (subscription = client
+          .listen(query)
+          .subscribe((update: MutationEvent<LokalizeText>) => {
+            if (!isMountedRef.current) return;
+            if (!update.result) return;
 
-        /**
-         * We'll mutate text which lives in a reference and update the text
-         * state with a debounced handler. Otherwise the app can become quite
-         * slow when someone is typing in sanity lokalizeText documents.
-         */
-        set(textRef.current, key, localeText[locale]);
-        setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
-      });
+            const { key, localeText } = parseLocaleTextDocument(update.result);
+
+            /**
+             * We'll mutate text which lives in a reference and update the text
+             * state with a debounced handler. Otherwise the app can become quite
+             * slow when someone is typing in sanity lokalizeText documents.
+             */
+            set(textRef.current, key, localeText[locale]);
+            setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
+          }))
+    );
 
     return () => {
-      subscription.unsubscribe();
+      subscription?.unsubscribe();
     };
-  }, [enableHotReload, isEnabled, locale]);
+  }, [enableHotReload, displayMode, locale, isMountedRef]);
 
   const paths = useMemo(
     () =>
-      isPathMode
-        ? (unflatten(
+      displayMode === 'path'
+        ? /**
+           * Here we map all locale text object values to their "path"
+           */
+          (unflatten(
             Object.keys(flatten(text)).reduce((res, key) => {
               res[key] = key.replace(/\./g, '::');
               return res;
@@ -75,34 +94,17 @@ export function useLokalizeText(
             { object: true }
           ) as typeof text)
         : undefined,
-    [isPathMode, text]
+    [displayMode, text]
   );
 
   const toggleEl = enableHotReload ? (
-    <>
-      <div
-        onClick={() => setIsEnabled((x) => !x)}
-        css={css({
-          position: 'fixed',
-          bottom: 10,
-          right: 30,
-          cursor: 'pointer',
-          zIndex: 9999,
-          borderRadius: 1,
-          bg: isEnabled ? 'green' : 'transparent',
-          p: 1,
-        })}
-      >
-        <DatabaseIcon
-          style={{
-            width: 20,
-            height: 20,
-            display: 'block',
-            color: isEnabled ? 'white' : 'gray',
-          }}
-        />
-      </div>
-    </>
+    <ToggleButton
+      isSelected={isDefined(displayMode)}
+      onClick={() =>
+        setDisplayMode((x) => (!x ? 'live' : x === 'live' ? 'path' : undefined))
+      }
+      color={displayMode === 'live' ? 'green' : 'blue'}
+    />
   ) : null;
 
   return [paths || text, toggleEl] as const;
@@ -144,4 +146,53 @@ function parseLocaleTextDocument(document: LokalizeText) {
   const en = document.displayEmpty ? '' : document.text.en?.trim() || nl;
 
   return { key, localeText: { nl, en } };
+}
+
+function ToggleButton({
+  isSelected,
+  onClick,
+  color,
+}: {
+  isSelected: boolean;
+  onClick: () => void;
+  color?: 'green' | 'blue';
+}) {
+  return (
+    <div
+      css={css({
+        opacity: isSelected ? 1 : 0,
+        '&:hover': { opacity: 1 },
+        transition: 'opacity 100ms linear',
+        position: 'fixed',
+        bottom: 0,
+        right: 0,
+        p: 3,
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        zIndex: 9999,
+      })}
+    >
+      <div
+        onClick={onClick}
+        css={css({
+          cursor: 'pointer',
+          borderRadius: 1,
+          color: isSelected ? 'white' : 'black',
+          bg: isSelected ? color : 'transparent',
+          transition: 'all 100ms linear',
+          p: 1,
+          display: 'inline-block',
+        })}
+      >
+        <DatabaseIcon
+          style={{
+            width: 20,
+            height: 20,
+            display: 'block',
+          }}
+        />
+      </div>
+    </div>
+  );
 }
