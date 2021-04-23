@@ -72,7 +72,8 @@ function generateDummyData() {
         dataPoint ? dataPoint.admissions_overall_per_million : undefined
       ),
       date_of_insertion_unix: 0,
-      date_unix: currentDate.getTime() / 1000,
+      date_start_unix: new Date(currentDate.getTime() - 7).getTime() / 1000,
+      date_end_unix: currentDate.getTime() / 1000,
     };
     data.push(dataPoint);
 
@@ -90,7 +91,7 @@ export function AdmissionsPerAgeGroup({
   const { list, toggle, clear } = useList<string>();
   const breakpoints = useBreakpoints(true);
 
-  const text = siteText.hospital_admissions_per_age_group;
+  const text = siteText.admissions_per_age_group_chart;
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
   const alwayEnabled = ['admissions_overall_per_million'];

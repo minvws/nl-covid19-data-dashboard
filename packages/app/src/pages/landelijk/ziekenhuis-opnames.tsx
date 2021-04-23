@@ -230,12 +230,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <ChartTile
-            title={
-              siteText.hospital_admissions_per_age_group.overall_chart_title
-            }
+            title={siteText.hospital_admissions_per_age_group.chart_title}
             description={
-              siteText.hospital_admissions_per_age_group
-                .overall_chart_description
+              siteText.hospital_admissions_per_age_group.chart_description
             }
             timeframeOptions={['all', '5weeks']}
             metadata={{ source: text.bronnen.nice }}

@@ -2944,7 +2944,7 @@
     "chart_title": "Intensive care-opnames per leeftijdsgroep door de tijd heen",
     "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
   },
-  "admissions_per_age_group": {
+  "admissions_per_age_group_chart": {
     "legend": {
       "admissions_age_0_19_per_million": "0-19",
       "admissions_age_20_29_per_million": "20-29",
