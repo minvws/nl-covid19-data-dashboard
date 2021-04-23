@@ -1,6 +1,6 @@
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 
-export function createFlattenTexts(
+export function createFlatTexts(
   documents: LokalizeText[],
   { warn }: { warn?: boolean } = {}
 ) {
@@ -54,10 +54,7 @@ export function parseLocaleTextDocument(
       document.text.en?.trim() || nl;
 
   if (warn && !document.text.en?.trim()) {
-    console.warn(
-      'Missing english translation for path:',
-      document.lokalize_path
-    );
+    console.warn('Missing english translation for path:', document.search_key);
   }
 
   return { key, localeText: { nl, en } };

@@ -21,7 +21,7 @@ export const lokalizeText = {
   fields: [
     {
       title: 'Lokalize pad',
-      name: 'lokalize_path',
+      name: 'search_key',
       type: 'string',
       readOnly: true,
       inputComponent: ReadOnlyPath,

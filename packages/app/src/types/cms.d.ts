@@ -161,7 +161,7 @@ export interface LokalizeText {
   _createdAt: string;
   _updatedAt: string;
 
-  lokalize_path: string;
+  search_key: string;
   subject: string;
   path: string;
   text: {

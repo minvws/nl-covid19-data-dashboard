@@ -39,7 +39,7 @@ export function lokalizeListItem() {
                           .child((id) =>
                             S.editor()
                               .title(
-                                id.replace('jsonKey__', '').replace(/-/g, '.')
+                                id.replace('lokalize__', '').replace(/-/g, '.')
                               )
                               .id(id)
                               .schemaType(type)

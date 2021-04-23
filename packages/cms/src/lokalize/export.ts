@@ -5,7 +5,7 @@ import path from 'path';
 import prettier from 'prettier';
 import { client } from '../client';
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { createFlattenTexts } from '@corona-dashboard/common';
+import { createFlatTexts } from '@corona-dashboard/common';
 
 const cli = meow(
   `
@@ -47,18 +47,18 @@ async function main() {
     : '&& !(_id in path("drafts.**"))';
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(lokalize_path asc)`
+    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(search_key asc)`
   );
 
-  let flattenTexts = createFlattenTexts(documents, { warn: true });
+  let flatTexts = createFlatTexts(documents, { warn: true });
 
   await writePrettyJson(
-    unflatten(flattenTexts.nl, { object: true }),
+    unflatten(flatTexts.nl, { object: true }),
     path.join(localeDirectory, 'nl_export.json')
   );
 
   await writePrettyJson(
-    unflatten(flattenTexts.en, { object: true }),
+    unflatten(flatTexts.en, { object: true }),
     path.join(localeDirectory, 'en_export.json')
   );
 

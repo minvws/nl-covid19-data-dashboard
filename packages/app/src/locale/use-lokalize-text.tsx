@@ -1,5 +1,5 @@
 import {
-  createFlattenTexts,
+  createFlatTexts,
   parseLocaleTextDocument,
 } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
@@ -28,7 +28,7 @@ import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
  * If enabled a tiny button will be rendered at the bottom-right which is only
  * visible on hover.
  *
- * This button toggles through three states:
+ * This button cycles through three states:
  *
  * - undefined (gray): app is rendered with translations from filesystem
  * - live (green): app is listening to real-time sanity updates
@@ -64,70 +64,64 @@ export function useLokalizeText(
       return;
     }
 
-    const setTextDebounced = debounce(setText, 500);
+    const setTextDebounced = debounce(setText, 1000);
     const query = `*[_type == 'lokalizeText']`;
 
     let subscription: Subscription | undefined;
 
-    getClient().then(async (client) => {
-      await client
-        .fetch(query)
-        .then((documents: LokalizeText[]) => {
-          if (!isMountedRef.current) return;
-          const flattenTexts = createFlattenTexts(documents)[locale];
-          setText(() => unflatten(flattenTexts, { object: true }));
-        })
-        .catch((err) => console.error(err));
+    getClient()
+      .then(async (client) => {
+        const documents = await client.fetch(query);
+        if (!isMountedRef.current) return;
 
-      if (!isMountedRef.current) return;
+        const flatTexts = createFlatTexts(documents)[locale];
 
-      subscription = client
-        .listen(query)
-        .subscribe((update: MutationEvent<LokalizeText>) => {
-          if (!isMountedRef.current) return;
+        setText(() => unflatten(flatTexts, { object: true }));
 
-          /**
-           * we currently only handle "updates" to existing (draft) documents.
-           * This means for example that the "discard changes" action is not
-           * handled.
-           */
-          if (!update.result) return;
+        subscription = client
+          .listen(query)
+          .subscribe((update: MutationEvent<LokalizeText>) => {
+            if (!isMountedRef.current) return;
 
-          const { key, localeText } = parseLocaleTextDocument(update.result);
+            /**
+             * we currently only handle "updates" to existing (draft) documents.
+             * This means for example that the "discard changes" action is not
+             * handled.
+             */
+            if (!update.result) return;
 
-          /**
-           * We'll mutate text which lives in a reference and update the text
-           * state with a debounced handler. Otherwise the app can become quite
-           * slow when someone is typing in sanity lokalizeText documents.
-           */
-          set(textRef.current, key, localeText[locale]);
-          setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
-        });
-    });
+            const { key, localeText } = parseLocaleTextDocument(update.result);
+
+            /**
+             * We'll mutate text which lives in a reference and update the text
+             * state with a debounced handler. Otherwise the app can become quite
+             * slow when someone is typing in sanity lokalizeText documents.
+             */
+            set(textRef.current, key, localeText[locale]);
+            setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
+          });
+      })
+      .catch((err) => console.error(err));
 
     return () => {
       subscription?.unsubscribe();
     };
   }, [enableHotReload, displayMode, locale, isMountedRef]);
 
-  const paths = useMemo(
-    () =>
-      displayMode === 'path'
-        ? /**
-           * Here we map all locale text object values to their "path"
-           */
-          (unflatten(
-            Object.keys(flatten(text)).reduce((res, key) => {
-              res[key] = key.replace(/\./g, '::');
-              return res;
-            }, {} as Record<string, string>),
-            { object: true }
-          ) as typeof text)
-        : undefined,
-    [displayMode, text]
-  );
+  const paths = useMemo(() => {
+    if (displayMode === 'path') {
+      const keys = Object.keys(flatten(text));
 
-  const toggleEl = enableHotReload ? (
+      const obj = keys.reduce(
+        (result, key) => set(result, key, key.replace(/\./g, '::')),
+        {} as Record<string, string>
+      );
+
+      return unflatten(obj, { object: true }) as typeof text;
+    }
+  }, [displayMode, text]);
+
+  const toggleButton = enableHotReload ? (
     <ToggleButton
       isActive={isDefined(displayMode)}
       onClick={() =>
@@ -137,7 +131,7 @@ export function useLokalizeText(
     />
   ) : null;
 
-  return [paths || text, toggleEl] as const;
+  return [paths || text, toggleButton] as const;
 }
 
 function ToggleButton({
