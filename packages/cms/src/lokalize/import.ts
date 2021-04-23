@@ -71,7 +71,7 @@ for (let [key, dataText] of Object.entries(nl)) {
          */
         lokalize_path: `${`${key}.${path}`.split('.').join('::')}`,
 
-        displayEmpty: !value,
+        display_empty: !value,
 
         text: {
           _type: 'localeText',

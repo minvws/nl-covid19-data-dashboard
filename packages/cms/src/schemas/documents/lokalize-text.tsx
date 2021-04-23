@@ -58,7 +58,7 @@ export const lokalizeText = {
     },
     {
       title: 'Toon als lege tekst',
-      name: 'displayEmpty',
+      name: 'display_empty',
       type: 'boolean',
     },
   ],

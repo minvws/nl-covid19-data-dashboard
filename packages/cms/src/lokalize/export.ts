@@ -30,8 +30,8 @@ client
           ? document.path
           : `${document.subject}.${document.path}`;
 
-      nl[key] = document.displayEmpty ? '' : document.text.nl.trim();
-      en[key] = document.displayEmpty ? '' : document.text.en?.trim();
+      nl[key] = document.display_empty ? '' : document.text.nl.trim();
+      en[key] = document.display_empty ? '' : document.text.en?.trim();
 
       if (!document.text.en?.trim()) {
         /**
