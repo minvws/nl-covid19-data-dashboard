@@ -35,7 +35,10 @@ const sourceFile = project.getSourceFile('nl.json');
 
 const propertyAssignmentNodes: PropertyAssignment[] = (
   sourceFile?.getDescendantsOfKind(SyntaxKind.PropertyAssignment) ?? []
-).filter((x) => x.findReferences().length > 1);
+)
+  // each assignment always has at least reference (the one in the file where its written),
+  // so here we only want the ones that have more than one ref. (The ones who are referenced in some other file)
+  .filter((x) => x.findReferences().length > 1);
 
 const newLocaleObjects = propertyAssignmentNodes
   .map((x) => createFullPropertyChain(x))
@@ -74,6 +77,10 @@ fs.writeFileSync(
   { encoding: 'utf-8' }
 );
 
+/**
+ * Takes a property assignment and walks up the parent tree to create a property chain.
+ * I.e. myObject.property1.property2.property3
+ */
 function createFullPropertyChain(assignment: PropertyAssignment) {
   const result = [assignment.getName()];
   let node: Node | undefined = assignment.getParent();
@@ -85,8 +92,11 @@ function createFullPropertyChain(assignment: PropertyAssignment) {
     node = node?.getParent();
   }
 
-  return result
-    .map((x) => x.substr(1, x.length - 2))
-    .reverse()
-    .join('.');
+  return (
+    result
+      //json properties are wrapped in quotes, so here we remove the first and last chars
+      .map((x) => x.substr(1, x.length - 2))
+      .reverse()
+      .join('.')
+  );
 }
