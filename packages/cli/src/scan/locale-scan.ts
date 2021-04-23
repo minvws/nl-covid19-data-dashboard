@@ -40,6 +40,7 @@ const propertyAssignmentNodes: PropertyAssignment[] = (
 const newLocaleObjects = propertyAssignmentNodes
   .map((x) => createFullPropertyChain(x))
   .concat(whitelist)
+  // Only keep the deepest paths:
   .filter(
     (x, _i, l) =>
       l.findIndex((y) => y.startsWith(`${x}.`) && y.length > x.length + 1) ===
