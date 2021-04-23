@@ -1880,11 +1880,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "Mortality in week 14 higher than expected",
-      "published_text": "Date of publication: Friday 16 April",
-      "message": "In week 14 (5 to 11 April 2021 inclusive), the estimated number of deaths stood at 3,150. This is approximately 100 more than expected for this period and roughly the same number as in the previous week (3,144). Mortality among long-term care users was below the expected level for this week; among the rest of the population, there were more deaths than expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. In week 13, the number of deaths was more or less the same again as expected, while estimated mortality for week 14 is slightly above the expected level. The National Institute for Public Health and the Environment (RIVM) registered 112 COVID-19 deaths in week 14 (as at 13 April).",
+      "title": "Excess mortality among people under 80 in week 15",
+      "published_text": "Date of publication: Friday 23 April",
+      "message": "In week 15 (12 to 18 April inclusive), the estimated number of deaths stood at slightly less than 3,200. This is nearly 200 more than expected for this period and slightly more than in the previous week (3,132). Mortality was higher than expected among people aged 65 to 79 in particular. There was also excess mortality was among people under 65. Mortality among long-term care users was again below the expected level. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. There was excess mortality until week 3. In the following weeks, mortality was not elevated and fluctuated around the expected numbers for that period. The estimate for week 15 is almost 200 deaths above the expected number, but is still just within the range of usual fluctuations (and is therefore not classified as excess mortality). The National Institute for Public Health and the Environment (RIVM) registered 126 COVID-19 deaths in week 15 (as at 20 April)..",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/15/mortality-in-week-14-higher-than-expected",
+        "href": "https://www.cbs.nl/en-gb/news/2021/16/excess-mortality-among-people-under-80-in-week-15",
         "text": "Read the full news item on the CBS website"
       }
     },
