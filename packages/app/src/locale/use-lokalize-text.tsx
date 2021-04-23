@@ -64,7 +64,7 @@ export function useLokalizeText(
       return;
     }
 
-    const setTextDebounced = debounce(setText, 1000);
+    const setTextDebounced = debounce(setText, 1000, { trailing: true });
     const query = `*[_type == 'lokalizeText']`;
 
     let subscription: Subscription | undefined;
