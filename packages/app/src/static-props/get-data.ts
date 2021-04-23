@@ -9,6 +9,7 @@ import {
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { gmData } from '~/data/gm';
+import { getClient, localize } from '~/lib/sanity';
 import { vrData } from '~/data/vr';
 import {
   gmPageMetricNames,
@@ -22,7 +23,6 @@ import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
 } from '~/domain/layout/safety-region-layout';
-import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -57,7 +57,7 @@ export function createGetContent<T>(
       typeof queryOrQueryGetter === 'function'
         ? queryOrQueryGetter(context)
         : queryOrQueryGetter;
-    const rawContent = await client.fetch<T>(query);
+    const rawContent = await (await getClient()).fetch<T>(query);
 
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;

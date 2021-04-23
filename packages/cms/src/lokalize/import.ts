@@ -62,14 +62,18 @@ for (let [key, dataText] of Object.entries(nl)) {
 
       return {
         _type: 'lokalizeText',
-        _id: `jsonKey__${key}.${path}`,
+        /**
+         * ids with a `.` are only accessible for authenticated users. We'll
+         * replace dots with dashes.
+         */
+        _id: `lokalize__${key}.${path}`.replace(/\./g, '-'),
         path: path,
         subject: key,
         /**
-         * The lokalize path is also stored (a::b::c) to make it findable
-         * with the Sanity search feature.
+         * The search_key is created with the subject and path.
+         * The `::` delimiter matches with lokalize for copywriter UX.
          */
-        lokalize_path: `${`${key}.${path}`.split('.').join('::')}`,
+        search_key: `${`${key}.${path}`.split('.').join('::')}`,
 
         display_empty: !value,
 
