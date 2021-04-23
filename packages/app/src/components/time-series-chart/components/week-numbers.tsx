@@ -1,19 +1,29 @@
-import { AxisBottom, AxisTop } from '@visx/axis';
-import { GridColumns } from '@visx/grid';
-import { RectClipPath } from '@visx/clip-path';
-import { useUniqueId } from '~/utils/use-unique-id';
-import { getWeekInfo } from '~/components/stacked-chart/logic';
 import css from '@styled-system/css';
-import { useCallback } from 'react';
-import { colors } from '~/style/theme';
+import { AxisBottom, AxisTop } from '@visx/axis';
+import { RectClipPath } from '@visx/clip-path';
+import { GridColumns } from '@visx/grid';
+import { ScaleBand, ScaleLinear } from 'd3-scale';
+import { useCallback, useMemo } from 'react';
 import { AnyTickFormatter } from '~/components/line-chart/components';
+import { getWeekInfo } from '~/components/stacked-chart/logic';
+import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useUniqueId } from '~/utils/use-unique-id';
+import { Bounds } from '../logic';
+
+/* Only show this amount of weeks */
+const maximumWeekCount = 6;
+
+const dayInSeconds = 24 * 60 * 60;
+const weekInSeconds = 7 * dayInSeconds;
 
 interface WeekNumberProps {
   startUnix: number;
   endUnix: number;
-  xScale: any;
-  bounds: any;
-  formatXAxis: any;
+  xScale: ScaleLinear<number, number> | ScaleBand<number>;
+  bounds: Bounds;
+  formatXAxis: (date_unix: number) => string;
 }
 
 export function WeekNumbers({
@@ -23,71 +33,30 @@ export function WeekNumbers({
   bounds,
   formatXAxis,
 }: WeekNumberProps) {
-  /* Show maximum this amount of weeks */
-  const numberOfWeeks = 6;
-
-  const weekGridLines = [];
-  const weekNumbersLabels = [];
-  const weekDateLabels = [];
-
-  let weekWidth = 0;
-
-  const dayInSeconds = 24 * 60 * 60;
-  const weekInSeconds = 7 * dayInSeconds;
-
-  const weeks = Math.floor((endUnix - startUnix) / weekInSeconds);
-  const firstMonday = getWeekInfo(new Date(startUnix * 1000));
-  const firstMondayUnix = firstMonday.weekStartDate.getTime() / 1000;
-
-  // Make sure to only show maximum `numberOfWeeks`
-  const alternateBy =
-    weeks > numberOfWeeks ? Math.ceil(weeks / numberOfWeeks) : 1;
-
-  // Filter weeknumbers and and date labels to show or hide them
-  const dateLabelPadding = 2 * alternateBy;
-  const dateLabelPaddingStartUnix = startUnix + dateLabelPadding * dayInSeconds;
-  const dateLabelPaddingEndUnix = endUnix - dateLabelPadding * dayInSeconds;
-
-  const weekNumbersLabelPaddingStartUnix = startUnix - 3 * dayInSeconds;
-  const weekNumbersLabelPaddingEndUnix =
-    endUnix - (5 + alternateBy) * dayInSeconds;
-
-  // Shift weeks to only show odd or even numbers
-  const alternateWeekOffset =
-    alternateBy % 2 === 0 && firstMonday.weekNumber % 2 === 1 ? 1 : 0;
-
-  // Create 3 arrays: for week lines, week numbers, and week start dates
-  for (let i = 0; i <= weeks + 1; ++i) {
-    const weekStartUnix = firstMondayUnix + i * weekInSeconds;
-
-    weekGridLines.push(weekStartUnix);
-
-    if ((i + alternateWeekOffset) % alternateBy === 0) {
-      if (
-        weekStartUnix >= dateLabelPaddingStartUnix &&
-        weekStartUnix < dateLabelPaddingEndUnix
-      ) {
-        weekDateLabels.push(weekStartUnix);
-      }
-
-      if (
-        weekStartUnix >= weekNumbersLabelPaddingStartUnix &&
-        weekStartUnix < weekNumbersLabelPaddingEndUnix
-      ) {
-        weekNumbersLabels.push(weekStartUnix);
-      }
-    }
-  }
-
+  /* Used for the clip path,
+   which prevents grid lines and axis from bleeding out of the graph */
   const id = useUniqueId();
+  const { siteText } = useIntl();
 
-  weekWidth = xScale(weekGridLines[2]) - xScale(weekGridLines[1]);
+  const { weekGridLines, weekDateLabels, weekNumbersLabels } = useMemo(
+    () => calculateWeekNumberAxis(startUnix, endUnix),
+    [startUnix, endUnix]
+  );
+  const weekRenderWidth = getWeekRenderWidth(
+    xScale(weekGridLines[2]),
+    xScale(weekGridLines[1])
+  );
 
-  const formatWeekNumberAxis = useCallback((date_unix) => {
-    const date = new Date(date_unix * 1000);
-    const weekInfo = getWeekInfo(date);
-    return `Week ${weekInfo.weekNumber}`;
-  }, []);
+  const formatWeekNumberAxis = useCallback(
+    (dateUnix: number) => {
+      const date = new Date(dateUnix * 1000);
+      const weekInfo = getWeekInfo(date);
+      return replaceVariablesInText(siteText.common.week_number_label, {
+        weekNumber: weekInfo.weekNumber,
+      });
+    },
+    [siteText.common]
+  );
 
   return (
     <>
@@ -108,7 +77,7 @@ export function WeekNumbers({
           scale={xScale}
           numTicks={weekGridLines.length}
           tickValues={weekGridLines}
-          stroke={'#DDD'}
+          stroke={colors.lightGray}
           width={bounds.width}
           strokeDasharray="4 2"
         />
@@ -137,10 +106,71 @@ export function WeekNumbers({
             fill: colors.data.axisLabels,
             fontSize: 12,
             textAnchor: 'middle',
-            transform: `translate(${weekWidth / 2} 0)`,
+            transform: `translate(${weekRenderWidth / 2} 0)`,
           })}
         />
       </g>
     </>
   );
+}
+
+function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
+  const weekCount = Math.floor((endUnix - startUnix) / weekInSeconds);
+  const firstWeek = getWeekInfo(new Date(startUnix * 1000));
+  const firstWeekUnix = firstWeek.weekStartDate.getTime() / 1000;
+
+  /* Make sure to only show maximum `numberOfWeeks` */
+  const alternateBy =
+    weekCount > maximumWeekCount ? Math.ceil(weekCount / maximumWeekCount) : 1;
+
+  /* Axis label visibility need some padding depending on the amount of weeks shown */
+  const dayPadding = dayInSeconds * alternateBy;
+
+  /* Generate all week lines, then filter axis labels that need to be shown */
+  const weekGridLines = getWeekGridLines(firstWeekUnix, weekCount);
+  const weekDateLabels = filterWeeks(
+    weekGridLines,
+    alternateBy,
+    startUnix + 2 * dayPadding,
+    endUnix - 2 * dayPadding
+  );
+  const weekNumbersLabels = filterWeeks(
+    weekGridLines,
+    alternateBy,
+    startUnix - 1 * dayPadding,
+    endUnix - 2 * dayPadding
+  );
+
+  return { weekGridLines, weekDateLabels, weekNumbersLabels };
+}
+
+function getWeekGridLines(firstWeekUnix: number, weekCount: number) {
+  return [...new Array(weekCount)].map(
+    (_, i) => firstWeekUnix + i * weekInSeconds
+  );
+}
+
+function filterWeeks(
+  weekGridLines: number[],
+  alternateBy: number,
+  startThresholdUnix: number,
+  endThresholdUnix: number
+) {
+  return weekGridLines.filter((weekStartUnix, index) => {
+    return (
+      (index + 0) % alternateBy === 0 &&
+      weekStartUnix >= startThresholdUnix &&
+      weekStartUnix < endThresholdUnix
+    );
+  });
+}
+
+function getWeekRenderWidth(
+  coordinateA: number | undefined,
+  coordinateB: number | undefined
+): number {
+  if (coordinateA === undefined || coordinateB === undefined) {
+    return 0;
+  }
+  return coordinateB - coordinateA;
 }
