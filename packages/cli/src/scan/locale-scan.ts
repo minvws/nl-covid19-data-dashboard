@@ -36,8 +36,8 @@ const sourceFile = project.getSourceFile('nl.json');
 const propertyAssignmentNodes: PropertyAssignment[] = (
   sourceFile?.getDescendantsOfKind(SyntaxKind.PropertyAssignment) ?? []
 )
-  // each assignment always has at least reference (the one in the file where its written),
-  // so here we only want the ones that have more than one ref. (The ones who are referenced in some other file)
+  // each assignment always has at least one reference (the one in the file where its written),
+  // so here we only want the ones that have more than one ref. (The ones who are referenced in some other file(s))
   .filter((x) => x.findReferences().length > 1);
 
 const newLocaleObjects = propertyAssignmentNodes
