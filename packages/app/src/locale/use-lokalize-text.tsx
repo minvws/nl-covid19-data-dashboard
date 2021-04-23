@@ -28,7 +28,7 @@ import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
  * If enabled a tiny button will be rendered at the bottom-right which is only
  * visible on hover.
  *
- * This button toggles though three states:
+ * This button toggles through three states:
  *
  * - undefined (gray): app is rendered with translations from filesystem
  * - live (green): app is listening to real-time sanity updates
