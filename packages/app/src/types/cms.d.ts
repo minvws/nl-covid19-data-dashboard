@@ -154,3 +154,19 @@ export type TitleDescriptionBlock = {
   description: RichContentBlock[];
   title: string;
 };
+
+export type DecoratedLink = {
+  title: string;
+  category: string;
+  href: string;
+  cover: ImageBlock;
+};
+
+export type VaccinationPageQuery = {
+  pageInfo: TitleDescriptionBlock;
+  pageLinks: DecoratedLink[];
+  title: string;
+  description: RichContentBlock[];
+  milestones: Milestones[];
+  expectedMilestones: ExpectedMilestones[];
+};
