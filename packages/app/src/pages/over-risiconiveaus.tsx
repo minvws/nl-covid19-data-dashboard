@@ -16,15 +16,6 @@ import {
 } from '~/static-props/get-data';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { getSkipLinkId } from '~/utils/skip-links';
-<<<<<<< HEAD
-import styles from './over.module.scss';
-
-import { RichContent } from '~/components/cms/rich-content';
-import { Box } from '~/components/base';
-import { Layout } from '~/domain/layout/layout';
-import { useIntl } from '~/intl';
-=======
->>>>>>> 310093fef760e1748e28b06462866265b14e5e38
 
 interface OverRisiconiveausData {
   title: string | null;
