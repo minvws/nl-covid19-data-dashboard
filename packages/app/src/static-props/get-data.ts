@@ -6,9 +6,22 @@ import {
   Regions,
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
+import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
-import { vrData } from '~/data/vr';
 import { gmData } from '~/data/gm';
+import { vrData } from '~/data/vr';
+import {
+  gmPageMetricNames,
+  GmPageMetricNames,
+} from '~/domain/layout/municipality-layout';
+import {
+  NlPageMetricNames,
+  nlPageMetricNames,
+} from '~/domain/layout/national-layout';
+import {
+  vrPageMetricNames,
+  VrRegionPageMetricNames,
+} from '~/domain/layout/safety-region-layout';
 import { client, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -17,7 +30,7 @@ import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
  *
  *     export const getStaticProps = createGetStaticProps(
  *       getLastGeneratedDate,
- *       getVrData,
+ *       selectVrPageMetricData('metric_name1', 'metric_name2'),
  *       createGetChoroplethData({
  *         gm: x => ({ y: x.hospital_nice})
  *       })
@@ -55,6 +68,37 @@ export function createGetContent<T>(
   };
 }
 
+/**
+ * This method returns all the national data that is required by the sidebar,
+ * optional extra metric property names can be added as separate arguments which will
+ * be added to the output
+ *
+ */
+export function selectNlPageMetricData<
+  T extends keyof National = NlPageMetricNames
+>(...additionalMetrics: T[]) {
+  return selectNlData(...[...nlPageMetricNames, ...additionalMetrics]);
+}
+
+/**
+ * This method selects only the specified metric properties from the national data
+ *
+ */
+export function selectNlData<T extends keyof National = never>(
+  ...metrics: T[]
+) {
+  return () => {
+    const { data } = getNlData();
+
+    const selectedNlData = metrics.reduce(
+      (acc, p) => set(acc, p, data[p]),
+      {} as Pick<National, T>
+    );
+
+    return { selectedNlData };
+  };
+}
+
 export function getNlData() {
   // clone data to prevent mutation of the original
   const data = JSON.parse(JSON.stringify(json.nl)) as National;
@@ -64,10 +108,43 @@ export function getNlData() {
   return { data };
 }
 
+/**
+ * This method returns all the region data that is required by the sidebar,
+ * optional extra metric property names can be added as separate arguments which will
+ * be added to the output
+ *
+ */
+export function selectVrPageMetricData<
+  T extends keyof Regionaal = VrRegionPageMetricNames
+>(...additionalMetrics: T[]) {
+  return selectVrData(...[...vrPageMetricNames, ...additionalMetrics]);
+}
+
+/**
+ * This method selects only the specified metric properties from the region data
+ *
+ */
+export function selectVrData<T extends keyof Regionaal = never>(
+  ...metrics: T[]
+) {
+  return (context: GetStaticPropsContext) => {
+    const vrData = getVrData(context);
+
+    const selectedVrData = metrics.reduce(
+      (acc, p) => set(acc, p, vrData.data[p]),
+      {} as Pick<Regionaal, T>
+    );
+
+    return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
+  };
+}
+
 export function getVrData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
-  if (!code) return null;
+  if (!code) {
+    throw Error('No valid vrcode found in context');
+  }
 
   const data = loadJsonFromDataFile<Regionaal>(`${code}.json`);
 
@@ -81,10 +158,43 @@ export function getVrData(context: GetStaticPropsContext) {
   };
 }
 
+/**
+ * This method returns all the municipal data that is required by the sidebar,
+ * optional extra metric property names can be added as separate arguments which will
+ * be added to the output
+ *
+ */
+export function selectGmPageMetricData<
+  T extends keyof Municipal = GmPageMetricNames
+>(...additionalMetrics: T[]) {
+  return selectGmData(...[...gmPageMetricNames, ...additionalMetrics]);
+}
+
+/**
+ * This method selects only the specified metric properties from the municipal data
+ *
+ */
+export function selectGmData<T extends keyof Municipal = never>(
+  ...metrics: T[]
+) {
+  return (context: GetStaticPropsContext) => {
+    const gmData = getGmData(context);
+
+    const selectedGmData = metrics.reduce(
+      (acc, p) => set(acc, p, gmData.data[p]),
+      {} as Pick<Regionaal, T>
+    );
+
+    return { selectedGmData, municipalityName: gmData.municipalityName };
+  };
+}
+
 export function getGmData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
-  if (!code) return null;
+  if (!code) {
+    throw Error('No valid gmcode found in context');
+  }
 
   const data = loadJsonFromDataFile<Municipal>(`${code}.json`);
 

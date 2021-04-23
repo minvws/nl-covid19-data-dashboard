@@ -1,25 +1,25 @@
 import css from '@styled-system/css';
-import { ContentHeader } from '~/components/content-header';
-import { Heading } from '~/components/typography';
-import { KpiSection } from '~/components/kpi-section';
-import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { Box } from '~/components/base/box';
+import { RichContent } from '~/components/cms/rich-content';
+import { ContentHeader } from '~/components/content-header';
+import { KpiSection } from '~/components/kpi-section';
 import { TileList } from '~/components/tile-list';
+import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
-import {
-  getNlData,
-  createGetContent,
-  getLastGeneratedDate,
-} from '~/static-props/get-data';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
+import {
+  createGetContent,
+  getLastGeneratedDate,
+  selectNlPageMetricData,
+} from '~/static-props/get-data';
 import { LockdownData, RoadmapData } from '~/types/cms';
-import { RichContent } from '~/components/cms/rich-content';
 
 type MaatregelenData = {
   lockdown: LockdownData;
@@ -28,7 +28,7 @@ type MaatregelenData = {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData(),
   createGetContent<MaatregelenData>((_context) => {
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;
@@ -60,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
 const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
-  const { content, lastGenerated, data } = props;
+  const { content, lastGenerated, selectedNlData: data } = props;
   const { lockdown } = content;
 
   const { showLockdown } = lockdown;

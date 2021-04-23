@@ -7,6 +7,9 @@ import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -14,9 +17,6 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -27,7 +27,7 @@ import {
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -35,14 +35,14 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData(),
   createGetChoroplethData({
     vr: ({ nursing_home }) => ({ nursing_home }),
   })
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, lastGenerated } = props;
   const nursinghomeDataLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
     data.nursing_home.values,
