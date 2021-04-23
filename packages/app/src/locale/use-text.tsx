@@ -140,12 +140,8 @@ function parseLocaleTextDocument(document: LokalizeText) {
       ? document.path
       : `${document.subject}.${document.path}`;
 
-  const nl = document.displayEmpty ? '' : document.text.nl.trim();
-  let en = document.displayEmpty ? '' : document.text.en?.trim();
-
-  if (!document.text.en?.trim()) {
-    en = nl;
-  }
+  const nl = document.displayEmpty ? '' : document.text.nl?.trim() || '';
+  const en = document.displayEmpty ? '' : document.text.en?.trim() || nl;
 
   return { key, localeText: { nl, en } };
 }

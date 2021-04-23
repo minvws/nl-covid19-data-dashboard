@@ -146,7 +146,7 @@ function createFlattenTexts(documents: LokalizeText[]) {
   return { nl, en };
 }
 
-function parseLocaleTextDocument(document: any) {
+function parseLocaleTextDocument(document: LokalizeText) {
   /**
    * paths inside the `__root` subject should be placed under the path
    * in the root of the exported json
@@ -156,18 +156,19 @@ function parseLocaleTextDocument(document: any) {
       ? document.path
       : `${document.subject}.${document.path}`;
 
-  const nl = document.displayEmpty ? '' : document.text.nl.trim();
-  let en = document.displayEmpty ? '' : document.text.en?.trim();
+  const nl = document.displayEmpty ? '' : document.text.nl?.trim() || '';
+  const en = document.displayEmpty
+    ? ''
+    : /**
+       * Here make an automatic fallback to Dutch texts if English is missing.
+       */
+      document.text.en?.trim() || nl;
 
   if (!document.text.en?.trim()) {
-    /**
-     * Here we could make an automatic fallback to Dutch texts if English is missing.
-     */
     console.log(
       'Missing english translation for path:',
       document.lokalize_path
     );
-    en = nl;
   }
 
   return { key, localeText: { nl, en } };

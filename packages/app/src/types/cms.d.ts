@@ -165,8 +165,8 @@ export interface LokalizeText {
   subject: string;
   path: string;
   text: {
-    nl: string;
-    en: string;
+    nl: string | undefined;
+    en: string | undefined;
   };
   displayEmpty: boolean;
 }

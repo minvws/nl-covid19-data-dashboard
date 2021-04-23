@@ -1,6 +1,14 @@
 import { isDefined } from 'ts-is-present';
 import { assert } from './assert';
 
+/**
+ * When lokalize hot reload is enabled we don't want to validate strings
+ * client-side because values can be misformed
+ */
+const shouldValidate =
+  typeof window === 'undefined' ||
+  process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE !== '1';
+
 const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 
 /**
@@ -23,18 +31,25 @@ export function replaceVariablesInText(
   translation: string,
   variables: { [key: string]: string | number | undefined }
 ) {
-  assert(
-    isDefined(translation),
-    `Missing a locale text with placeholders for: ${Object.keys(variables).join(
-      ','
-    )}`
-  );
+  if (shouldValidate) {
+    assert(
+      isDefined(translation),
+      `Missing a locale text with placeholders for: ${Object.keys(
+        variables
+      ).join(',')}`
+    );
+  }
 
   return translation.replace(curlyBracketRegex, (_string, variableName) => {
     const trimmedName = variableName.trim();
     if (trimmedName in variables) {
       return (variables[trimmedName] ?? '').toString();
     }
+
+    if (!shouldValidate) {
+      return `{{${trimmedName}}}`;
+    }
+
     throw new Error(
       `No value was supplied for placeholder ${trimmedName} in ${Object.keys(
         variables
