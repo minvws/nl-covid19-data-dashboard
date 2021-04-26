@@ -1297,8 +1297,8 @@
     "curfew": "Avondklok"
   },
   "gedrag_common": {
-    "compliance": "Naleving",
-    "support": "Draagvlak",
+    "compliance": "Volgt regels",
+    "support": "Steunt regels",
     "basisregels": {
       "header_percentage": "Percentage",
       "header_basisregel": "Gedragsregels",
@@ -1323,7 +1323,7 @@
     },
     "pagina": {
       "titel": "Coronaregels volgen en steunen",
-      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels naleven kunnen we corona onder controle krijgen."
+      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels volgen, kunnen we corona onder controle krijgen."
     },
     "sidebar": {
       "titel": "Coronaregels volgen en steunen"
@@ -1335,7 +1335,7 @@
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
-      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na? Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
+      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre volgen en steunen ze de regels? Aan elke enquête doet een andere groep mensen mee. Dit onderzoek wordt gecoördineerd en gepubliceerd door het RIVM. De praktische uitvoering wordt verzorgd door Kantar Public."
     },
     "kpi": {
       "aantal_respondenten": {
@@ -1394,7 +1394,7 @@
     },
     "pagina": {
       "titel": "Coronaregels volgen en steunen",
-      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels naleven kunnen we corona onder controle krijgen."
+      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels volgen, kunnen we corona onder controle krijgen."
     },
     "sidebar": {
       "titel": "Coronaregels volgen en steunen"
@@ -1406,7 +1406,7 @@
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
-      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na? Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
+      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre volgen en steunen ze de regels? Aan elke enquête doet een andere groep mensen mee. Dit onderzoek wordt gecoördineerd en gepubliceerd door het RIVM. De praktische uitvoering wordt verzorgd door Kantar Public."
     },
     "kpi": {
       "aantal_respondenten": {
