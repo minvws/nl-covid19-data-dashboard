@@ -33,23 +33,9 @@ export function ReproductionChartTile({
     0,
     data.values.findIndex((x) => !isPresent(x.index_average))
   );
-
-  /**
-   * Calculate the highest tick and round it up on the closet number on the 0.5 scales.
-   * Then create an array with every tickStep till the highestTick
-   * to use for the tickValues in the chart.
-   */
-  const tickStep = 0.5;
-
   const last_value = last(values) as NationalReproductionValue;
-  const maxIndexAverage = Math.max(
-    ...values.map((x) => x.index_average).filter(isPresent)
-  );
-  const highestTick = Math.ceil(maxIndexAverage * 2) / 2;
 
-  const tickSteps = Array(highestTick / tickStep + 1)
-    .fill(tickStep)
-    .map((step, index) => index * step);
+  const tickSteps = calculateTickValues(values, 0.5);
 
   return (
     <ChartTile
@@ -85,4 +71,23 @@ export function ReproductionChartTile({
       )}
     </ChartTile>
   );
+}
+
+/**
+ * Calculate the highest tick and round it up on the closet number on the 0.5 scales.
+ * Then create an array with every tickStep till the highestTick
+ * to use for the tickValues in the chart.
+ */
+function calculateTickValues(
+  values: NationalReproductionValue[],
+  tickStep: number
+) {
+  const maxIndexAverage = Math.max(
+    ...values.map((x) => x.index_average).filter(isPresent)
+  );
+  const highestTick = Math.ceil(maxIndexAverage * 2) / 2;
+
+  return Array(highestTick / tickStep + 1)
+    .fill(tickStep)
+    .map((step, index) => index * step);
 }
