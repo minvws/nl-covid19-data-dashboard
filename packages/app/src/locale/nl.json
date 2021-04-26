@@ -2848,6 +2848,10 @@
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
   "corona_melder_app": {
+    "sidebar": {
+      "titel": "Coronamelder"
+    },
+    "kpi_titel": "Hier komt de Coronamelder app",
     "header": {
       "category": "Preventie verspreiding",
       "title": "Gebruik CoronaMelder-app",
