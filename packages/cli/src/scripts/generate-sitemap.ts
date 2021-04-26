@@ -26,8 +26,6 @@ const publicOutputDirectory = path.resolve(
 );
 
 async function main() {
-  console.log(path.resolve('../app/.env.local'))
-
   assert(
     process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
