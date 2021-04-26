@@ -2025,8 +2025,8 @@
       "support": {
         "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
         "full_sentence_single": "Deze kaart toont dat {{first}}.",
-        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'",
-        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'"
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent steun {{verb}} voor de maatregel '{{restriction}}'",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent steun {{verb}} voor de maatregel '{{restriction}}'"
       }
     },
     "a11y": {
