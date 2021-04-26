@@ -4,6 +4,7 @@ import {
   Regionaal,
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
+import { Formatters } from './formatters';
 
 // Must be declared global to be detected by typescript (allows import/export)
 // eslint-disable @typescript/interface-name
@@ -57,6 +58,11 @@ declare global {
        *
        */
       checkHeadings(): void;
+
+      /**
+       * Date and number formatting functions
+       */
+      formatters: Formatters;
     }
   }
 }
