@@ -137,6 +137,7 @@ async function createTextDocumentForSubject(
     path: response.path,
     key: `${subject}.${response.path}`,
     is_newly_added: true,
+    publish_count: 0,
     text: {
       _type: 'localeText',
       nl: response.nl,

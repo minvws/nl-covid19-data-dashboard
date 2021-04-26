@@ -72,7 +72,13 @@ for (let [subject, dataText] of Object.entries(nl)) {
         path: path,
         key: `${subject}.${path}`,
         should_display_empty: !value,
-        is_newly_added: true,
+        /**
+         * We only flag newly added for the items that have been added later via
+         * the CLI. The imported texts are all translated anyway and require no
+         * extra attention.
+         */
+        is_newly_added: false,
+        publish_count: 0,
 
         text: {
           _type: 'localeText',
