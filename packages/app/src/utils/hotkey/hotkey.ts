@@ -215,7 +215,9 @@ function hasFocusOnTextInput() {
   }
 
   if (tagName === 'input') {
-    return (element as HTMLInputElement).type === 'text';
+    return ['text', 'email', 'password', 'search', 'tel', 'url'].includes(
+      (element as HTMLInputElement).type
+    );
   }
 
   return false;

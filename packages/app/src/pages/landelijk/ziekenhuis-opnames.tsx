@@ -38,7 +38,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -46,7 +46,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData('hospital_lcps'),
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),
@@ -60,7 +60,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
