@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * A text coming from the original Lokalize JSON structure is split into a
  * subject (the first name in the path) and the remaining JSON path. This way it
@@ -18,7 +16,7 @@ export const lokalizeText = {
       name: 'key',
       type: 'string',
       readOnly: true,
-      inputComponent: ReadOnlyPath,
+      hidden: true,
     },
     {
       title: 'Onderwerp',
@@ -80,28 +78,3 @@ export const lokalizeText = {
     },
   },
 };
-
-interface Field__incomplete {
-  value?: string;
-  type: {
-    title: string;
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-}
-
-function ReadOnlyPath({ value, type }: Field__incomplete) {
-  return (
-    <div>
-      <strong>{type.title}</strong>
-      <div style={{ fontFamily: 'monospace' }}>
-        {value?.split('.').map((x, i, list) => (
-          <span style={{ display: 'inline-block' }}>
-            {list[i - 1] && '.'}
-            {x}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
