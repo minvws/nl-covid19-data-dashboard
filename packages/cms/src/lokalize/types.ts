@@ -3,11 +3,10 @@ export interface LokalizeText {
   _id: string;
   path: string;
   subject: string;
-  /**
-   * The lokalize path is stored as a::b::c to make it findable
-   * with the Sanity search feature.
-   */
-  lokalize_path: string;
+  key: string;
+  should_display_empty: boolean;
+  is_newly_added: boolean;
+  publish_counter: number;
   text: {
     _type: 'localeText';
     nl: string;

@@ -47,7 +47,7 @@ async function main() {
     : '&& !(_id in path("drafts.**"))';
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(search_key asc)`
+    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(key asc)`
   );
 
   let flatTexts = createFlatTexts(documents, { warn: true });

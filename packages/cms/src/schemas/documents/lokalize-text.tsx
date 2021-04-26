@@ -1,14 +1,12 @@
 import React from 'react';
 
 /**
- * A lokalizeText type is referenced by a lokalizeSubject. There can be any number of
- * texts grouped under a subject. Each has a path which corresponds with the
- * JSON path from the root-level key (subject).
+ * A text coming from the original Lokalize JSON structure is split into a
+ * subject (the first name in the path) and the remaining JSON path. This way it
+ * is easy to group and list the documents.
  *
- * The text for both EN and NL are stored in a localeText.
- *
- * This is the multi-line version of lokalizeString. Not sure if we need it but
- * seeing if this is useful...
+ * The key is added with :: notation for easy access to the search function in
+ * both Lokalize and Sanity.
  */
 export const lokalizeText = {
   name: 'lokalizeText',
@@ -16,8 +14,8 @@ export const lokalizeText = {
   title: 'Text',
   fields: [
     {
-      title: 'Lokalize pad',
-      name: 'search_key',
+      title: 'Key',
+      name: 'key',
       type: 'string',
       readOnly: true,
       inputComponent: ReadOnlyPath,
@@ -72,7 +70,12 @@ export const lokalizeText = {
   ],
   preview: {
     select: {
-      title: 'search_key',
+      /**
+       * The key field works probably a little better for the searching results
+       * list, but the path field is cleaner when browsing texts because it
+       * avoids a lot of string duplication.
+       */
+      title: 'path',
       subtitle: 'text.nl',
     },
   },
@@ -92,9 +95,9 @@ function ReadOnlyPath({ value, type }: Field__incomplete) {
     <div>
       <strong>{type.title}</strong>
       <div style={{ fontFamily: 'monospace' }}>
-        {value?.split('::').map((x, i, list) => (
+        {value?.split('.').map((x, i, list) => (
           <span style={{ display: 'inline-block' }}>
-            {list[i - 1] && '::'}
+            {list[i - 1] && '.'}
             {x}
           </span>
         ))}

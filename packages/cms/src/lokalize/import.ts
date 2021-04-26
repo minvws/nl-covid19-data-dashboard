@@ -28,7 +28,7 @@ const en = JSON.parse(
 const transaction = client.transaction();
 let issueCounter = 0;
 
-for (let [key, dataText] of Object.entries(nl)) {
+for (let [subject, dataText] of Object.entries(nl)) {
   /**
    * Some root-level keys only contain string | string[] instead of an object structure.
    * We can't handle those in our logic, so they are moved to a `__root` subject.
@@ -36,11 +36,11 @@ for (let [key, dataText] of Object.entries(nl)) {
   if (typeof dataText === 'string' || Array.isArray(dataText)) {
     const type = typeof dataText === 'string' ? 'string' : 'array';
     console.warn(
-      `Transform root ${type} for key "${key}" to object value "{ __root: { ${key} } }"`
+      `Transform root ${type} for key "${subject}" to object value "{ __root: { ${subject} } }"`
     );
 
-    dataText = { [key]: dataText };
-    key = '__root';
+    dataText = { [subject]: dataText };
+    subject = '__root';
 
     issueCounter++;
   }
@@ -63,18 +63,14 @@ for (let [key, dataText] of Object.entries(nl)) {
       return {
         _type: 'lokalizeText',
         /**
-         * ids with a `.` are only accessible for authenticated users. We'll
-         * replace dots with dashes.
+         * Ids with a `.` are only accessible for authenticated users, so we
+         * replace dots with dashes to keep the dataset public in case anyone
+         * wants to clone it.
          */
-        _id: `lokalize__${key}.${path}`.replace(/\./g, '-'),
+        _id: `lokalize__${subject}.${path}`.replace(/\./g, '-'),
+        subject,
         path: path,
-        subject: key,
-        /**
-         * The search_key is created with the subject and path.
-         * The `::` delimiter matches with lokalize for copywriter UX.
-         */
-        search_key: `${`${key}.${path}`.split('.').join('::')}`,
-
+        key: `${subject}.${path}`,
         should_display_empty: !value,
         is_newly_added: true,
 
@@ -84,7 +80,7 @@ for (let [key, dataText] of Object.entries(nl)) {
           /**
            * Fall back to NL text because the field is required
            */
-          en: (get(en, `${key}.${path}`, value) as string).trim(),
+          en: (get(en, `${subject}.${path}`, value) as string).trim(),
         },
       };
     })
