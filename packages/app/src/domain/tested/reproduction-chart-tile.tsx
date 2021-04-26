@@ -49,7 +49,7 @@ export function ReproductionChartTile({
 
   const tickSteps = Array(highestTick / tickStep + 1)
     .fill(tickStep)
-    .map((v, i) => i * v);
+    .map((step, index) => index * step);
 
   return (
     <ChartTile
@@ -80,7 +80,7 @@ export function ReproductionChartTile({
               label: siteText.common.signaalwaarde,
             },
           }}
-          xtickValues={tickSteps}
+          tickValues={tickSteps}
         />
       )}
     </ChartTile>
