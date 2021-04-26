@@ -1360,7 +1360,7 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven.",
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in het dagelijks leven.",
         "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregel te steunen."
       },
       "voetnoot_asterisk": {
@@ -1371,8 +1371,8 @@
     "basisregels_over_tijd": {
       "title": "Het volgen van de gedragsregels door de tijd heen",
       "intro": {
-        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven.",
-        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in het dagelijks leven.",
+        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te steunen."
       }
     },
     "reference": {
@@ -1425,7 +1425,7 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven.",
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in het dagelijks leven.",
         "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregel te steunen."
       },
       "voetnoot_asterisk": {
@@ -1436,8 +1436,8 @@
     "basisregels_over_tijd": {
       "title": "Gedragsregels door de tijd heen",
       "intro": {
-        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven. ",
-        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in het dagelijks leven. ",
+        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te steunen."
       }
     },
     "reference": {
