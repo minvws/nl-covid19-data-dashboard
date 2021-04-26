@@ -123,16 +123,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'bar',
-                    metricProperty: 'newly_infected_people',
-                    color: colors.data.primary,
-                    label:
-                      positiveTestedPeopleText.line_chart_legend_trend_label,
-                    shortLabel:
-                      positiveTestedPeopleText.tooltip_labels
-                        .newly_infected_people,
-                  },
-                  {
                     type: 'line',
                     metricProperty: 'newly_infected_people_moving_average',
                     color: colors.data.primary,
@@ -141,6 +131,16 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     shortLabel:
                       positiveTestedPeopleText.tooltip_labels
                         .newly_infected_people_moving_average,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'newly_infected_people',
+                    color: colors.data.primary,
+                    label:
+                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                    shortLabel:
+                      positiveTestedPeopleText.tooltip_labels
+                        .newly_infected_people,
                   },
                 ]}
                 dataOptions={{
@@ -277,19 +277,19 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'bar',
-                    metricProperty: 'deceased_daily',
-                    label: deceased.line_chart_legend_trend_label,
-                    shortLabel: deceased.tooltip_labels.deceased_daily,
-                    color: colors.data.primary,
-                  },
-                  {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
                       deceased.line_chart_legend_trend_moving_average_label,
                     shortLabel:
                       deceased.tooltip_labels.deceased_daily_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'deceased_daily',
+                    label: deceased.line_chart_legend_trend_label,
+                    shortLabel: deceased.tooltip_labels.deceased_daily,
                     color: colors.data.primary,
                   },
                 ]}
