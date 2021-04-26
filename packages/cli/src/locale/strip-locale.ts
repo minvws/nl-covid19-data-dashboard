@@ -36,11 +36,12 @@ const EnOriginal = JSON.parse(
 const sourceFile = project.getSourceFile('nl.json');
 
 const propertyAssignmentNodes: PropertyAssignment[] = (
-  sourceFile?.getDescendantsOfKind(SyntaxKind.PropertyAssignment) ?? []
+  sourceFile?.getDescendantsOfKind(SyntaxKind.PropertyAssignment) ??
+  ([] as PropertyAssignment[])
 )
   // each assignment always has at least one reference (the one in the file where its written),
   // so here we only want the ones that have more than one ref. (The ones who are referenced in some other file(s))
-  .filter((x) => x.findReferences().length > 1);
+  .filter((x: PropertyAssignment) => x.findReferences().length > 1);
 
 const newLocaleObjects = propertyAssignmentNodes
   .map((x) => createFullPropertyChain(x))
@@ -62,10 +63,18 @@ const newLocaleObjects = propertyAssignmentNodes
       }
       return aggr;
     },
-    { nl: {}, en: {} } as any
+    { nl: {}, en: {} } as {
+      nl: Record<string, any | string>;
+      en: Record<string, any | string>;
+    }
   );
 
-const newJson: any = unflatten(newLocaleObjects, { object: true });
+const newJson: {
+  nl: Record<string, any | string>;
+  en: Record<string, any | string>;
+} = unflatten(newLocaleObjects, {
+  object: true,
+});
 
 fs.writeFileSync(
   path.join(APP_LOCALE_DIR, 'nl_stripped.json'),
