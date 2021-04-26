@@ -3,8 +3,12 @@ import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[0],
+    color: colors.data.underReported,
     threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0.1,
   },
   {
     color: colors.data.scale.blue[1],
@@ -57,7 +61,7 @@ const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
 
 const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: '#ffffff',
+    color: colors.data.underReported,
     threshold: 0,
   },
   {
@@ -88,8 +92,12 @@ const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
 
 const sewerThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[0],
+    color: colors.data.underReported,
     threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0.01,
   },
   {
     color: colors.data.scale.blue[1],

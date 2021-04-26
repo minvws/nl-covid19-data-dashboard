@@ -1,17 +1,17 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
-import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -21,7 +21,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -31,7 +31,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -42,9 +42,13 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    data,
+    selectedVrData: data,
     safetyRegionName,
-    data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference },
+    selectedVrData: {
+      deceased_cbs: dataCbs,
+      deceased_rivm: dataRivm,
+      difference,
+    },
     content,
     lastGenerated,
   } = props;

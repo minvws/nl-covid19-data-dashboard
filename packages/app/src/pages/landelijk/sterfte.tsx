@@ -22,14 +22,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData('deceased_cbs', 'deceased_rivm_per_age_group'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -39,11 +39,11 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated } = props;
 
-  const dataCbs = props.data.deceased_cbs;
-  const dataRivm = props.data.deceased_rivm;
-  const dataDeceasedPerAgeGroup = props.data.deceased_rivm_per_age_group;
+  const dataCbs = data.deceased_cbs;
+  const dataRivm = data.deceased_rivm;
+  const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
   const content = props.content;
 
   const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
@@ -92,7 +92,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="covid_daily"
                 absolute={dataRivm.last_value.covid_daily}
-                difference={props.data.difference.deceased_rivm__covid_daily}
+                difference={data.difference.deceased_rivm__covid_daily}
               />
               <Text>
                 {text.section_deceased_rivm.kpi_covid_daily_description}

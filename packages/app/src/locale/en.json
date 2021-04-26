@@ -1,4 +1,5 @@
 {
+
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",
@@ -649,7 +650,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -1016,7 +1017,7 @@
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1878,11 +1879,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "Mortality in week 14 higher than expected",
-      "published_text": "Date of publication: Friday 16 April",
-      "message": "In week 14 (5 to 11 April 2021 inclusive), the estimated number of deaths stood at 3,150. This is approximately 100 more than expected for this period and roughly the same number as in the previous week (3,144). Mortality among long-term care users was below the expected level for this week; among the rest of the population, there were more deaths than expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. In week 13, the number of deaths was more or less the same again as expected, while estimated mortality for week 14 is slightly above the expected level. The National Institute for Public Health and the Environment (RIVM) registered 112 COVID-19 deaths in week 14 (as at 13 April).",
+      "title": "Excess mortality among people under 80 in week 15",
+      "published_text": "Date of publication: Friday 23 April",
+      "message": "In week 15 (12 to 18 April inclusive), the estimated number of deaths stood at slightly less than 3,200. This is nearly 200 more than expected for this period and slightly more than in the previous week (3,132). Mortality was higher than expected among people aged 65 to 79 in particular. There was also excess mortality was among people under 65. Mortality among long-term care users was again below the expected level. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. There was excess mortality until week 3. In the following weeks, mortality was not elevated and fluctuated around the expected numbers for that period. The estimate for week 15 is almost 200 deaths above the expected number, but is still just within the range of usual fluctuations (and is therefore not classified as excess mortality). The National Institute for Public Health and the Environment (RIVM) registered 126 COVID-19 deaths in week 15 (as at 20 April).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/15/mortality-in-week-14-higher-than-expected",
+        "href": "https://www.cbs.nl/en-gb/news/2021/16/excess-mortality-among-people-under-80-in-week-15",
         "text": "Read the full news item on the CBS website"
       }
     },
@@ -2312,8 +2313,8 @@
           "janssen": "Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Delivered and available",
-        "estimated": "Expected to be delivered and available",
+        "delivered": "Delivered and checked",
+        "estimated": "Expected to be delivered and checked",
         "left_divider_label": "Calculated number of",
         "right_divider_label": "Expected number",
         "legend": {
@@ -2419,7 +2420,7 @@
     "laatst_bijgewerkt": "Last update: {{date}}",
     "secties": {
       "artikelen": {
-        "titel": "Current articles",
+        "titel": "Featured",
         "link": {
           "text": "View all articles",
           "href": "/artikelen"
@@ -2458,7 +2459,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).",
-      "belangrijk_bericht": "[The current measures apply nationwide until at least 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2840,6 +2841,10 @@
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "corona_melder_app": {
+    "sidebar": {
+      "titel": "Coronamelder"
+    },
+    "kpi_titel": "Here comes the Coronamelder app",
     "header": {
       "category": "Prevention",
       "title": "Use of the CoronaMelder app",
@@ -2900,7 +2905,8 @@
   },
   "milestones": {
     "toon_meer": "Show earlier events",
-    "verwacht": "Expected"
+    "verwacht": "Expected",
+    "toon_minder": ""
   },
   "section_sterftemonitor_vr": {
     "title": "Mortality monitor",
