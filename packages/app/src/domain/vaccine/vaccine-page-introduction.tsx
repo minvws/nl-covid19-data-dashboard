@@ -169,7 +169,7 @@ export function VaccinePageIntroduction({
           <DecoratedLinksTile>
             <Box>
               {pageLinks.map((x, index) => (
-                <DecoratedLink link={x} compact={index > 0} />
+                <DecoratedLink link={x} compact={index > 0} key={x.href} />
               ))}
             </Box>
           </DecoratedLinksTile>
