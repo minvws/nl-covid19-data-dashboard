@@ -22,7 +22,12 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 interface VaccinePageIntroductionProps {
-  data: National;
+  data: Pick<
+    National,
+    | 'vaccine_administered_planned'
+    | 'vaccine_administered_total'
+    | 'vaccine_administered_rate_moving_average'
+  >;
   pageInfo: TitleDescriptionBlock;
   pageLinks: CMSDecoratedLink[];
   pageLinksTitle: string;

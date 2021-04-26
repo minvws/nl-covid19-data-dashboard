@@ -155,6 +155,23 @@ export type TitleDescriptionBlock = {
   title: string;
 };
 
+export interface LokalizeText {
+  _type: 'lokalizeText';
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+
+  search_key: string;
+  subject: string;
+  path: string;
+  text: {
+    nl: string | undefined;
+    en: string | undefined;
+  };
+  display_empty: boolean;
+}
+
+
 export type DecoratedLink = {
   title: string;
   category: string;

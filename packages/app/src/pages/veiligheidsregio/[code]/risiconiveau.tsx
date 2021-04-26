@@ -38,19 +38,23 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData(
+    'escalation_level',
+    'hospital_nice_sum',
+    'tested_overall_sum'
+  ),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -60,7 +64,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { safetyRegionName, content, data, lastGenerated } = props;
+  const {
+    safetyRegionName,
+    content,
+    selectedVrData: data,
+    lastGenerated,
+  } = props;
 
   const { siteText, formatDateFromSeconds } = useIntl();
   const breakpoints = useBreakpoints();
