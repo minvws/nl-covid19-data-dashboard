@@ -6,10 +6,10 @@ import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { colors } from '~/style/theme';
-import { RichContentBlock } from '~/types/cms';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
+import { RichContentBlock } from '~/types/cms';
 
 const MAX_ITEMS_VISIBLE = 5;
 const CIRCLE_SIZE = 26;
@@ -39,7 +39,9 @@ export function MilestonesView(props: MilestoneViewProps) {
 
   useEffect(() => setIsExpanded(false), []);
 
-  const handleExpand = () => setIsExpanded(true);
+  const visibleMilestones = isExpanded
+    ? milestones
+    : milestones.slice(-MAX_ITEMS_VISIBLE);
 
   return (
     <Tile>
@@ -58,68 +60,79 @@ export function MilestonesView(props: MilestoneViewProps) {
         position="relative"
         css={css({ listStyleType: 'none' })}
       >
-        <ListItemFirst isExpanded={isExpanded}>
+        <ListItemFirst>
           <CircleSmall />
           <Text fontWeight="bold" m={0} pl={`calc(1rem)`}>
             2021
           </Text>
         </ListItemFirst>
 
-        {milestones.length > MAX_ITEMS_VISIBLE && !isExpanded && (
+        {milestones.length > MAX_ITEMS_VISIBLE && (
           <ListItem>
             <Box pl={`calc(1rem + ${CIRCLE_SIZE}px)`}>
-              <ExpandButton color="link" onClick={handleExpand}>
-                {siteText.milestones.toon_meer}
+              <ExpandButton
+                color="link"
+                onClick={() => setIsExpanded((x) => !x)}
+                hasDashedLine={!isExpanded}
+              >
+                {isExpanded
+                  ? siteText.milestones.toon_minder
+                  : siteText.milestones.toon_meer}
               </ExpandButton>
             </Box>
           </ListItem>
         )}
 
-        {milestones.map((milestone, index) => (
+        {visibleMilestones.map((milestone, index, list) => (
           <Fragment key={index}>
-            {(isExpanded ||
-              index > milestones.length - 1 - MAX_ITEMS_VISIBLE) && (
-              <>
-                {index !== milestones.length - 1 ? (
-                  <ListItem>
-                    <CircleIcon>
-                      <VaccineIcon />
-                    </CircleIcon>
-                    <Box pl="3" maxWidth="maxWidthText">
-                      <InlineText
-                        color="gray"
-                        css={css({ position: 'absolute', top: '-1.3rem' })}
-                      >
-                        {formatDate(new Date(milestone.date))}
-                      </InlineText>
-                      <Text m={0}>{milestone.title}</Text>
-                    </Box>
-                  </ListItem>
-                ) : (
-                  <ListItemLast>
-                    <CircleIcon isLast={true}>
-                      <VaccineIcon />
-                    </CircleIcon>
-                    <Box
-                      pl="3"
-                      maxWidth="maxWidthText"
-                      position="relative"
-                      zIndex={2}
-                    >
-                      <InlineText
-                        color="white"
-                        fontWeight="bold"
-                        css={css({ position: 'absolute', top: '-1.3rem' })}
-                      >
-                        {formatDate(new Date(milestone.date))}
-                      </InlineText>
-                      <Text m={0} color="white" fontSize={3} fontWeight="bold">
-                        {milestone.title}
-                      </Text>
-                    </Box>
-                  </ListItemLast>
-                )}
-              </>
+            {list[index + 1] ? (
+              <ListItem>
+                <CircleIcon>
+                  <VaccineIcon />
+                </CircleIcon>
+                <Box pl="3" maxWidth="maxWidthText" width="100%">
+                  <InlineText
+                    color="gray"
+                    css={css({ position: 'absolute', top: '-1.3rem' })}
+                  >
+                    {formatDate(new Date(milestone.date))}
+                  </InlineText>
+                  <Text m={0}>{milestone.title}</Text>
+                  {isExpanded &&
+                    index === milestones.length - 1 - MAX_ITEMS_VISIBLE && (
+                      <Box
+                        pt={3}
+                        mb={2}
+                        borderBottomWidth="1px"
+                        borderBottomStyle="solid"
+                        borderBottomColor="gray"
+                      />
+                    )}
+                </Box>
+              </ListItem>
+            ) : (
+              <ListItemLast>
+                <CircleIcon isLast={true}>
+                  <VaccineIcon />
+                </CircleIcon>
+                <Box
+                  pl="3"
+                  maxWidth="maxWidthText"
+                  position="relative"
+                  zIndex={2}
+                >
+                  <InlineText
+                    color="white"
+                    fontWeight="bold"
+                    css={css({ position: 'absolute', top: '-1.3rem' })}
+                  >
+                    {formatDate(new Date(milestone.date))}
+                  </InlineText>
+                  <Text m={0} color="white" fontSize={3} fontWeight="bold">
+                    {milestone.title}
+                  </Text>
+                </Box>
+              </ListItemLast>
             )}
           </Fragment>
         ))}
@@ -161,10 +174,10 @@ const commonListItemStyles = {
 
 const ListItem = styled.li(css(commonListItemStyles));
 
-const ListItemFirst = styled.li<{ isExpanded: boolean }>((x) =>
+const ListItemFirst = styled.li(
   css({
     ...commonListItemStyles,
-    paddingBottom: x.isExpanded ? 4 : 3,
+    paddingBottom: 3,
   })
 );
 
@@ -240,7 +253,7 @@ const CircleSmall = styled.div(
   })
 );
 
-const ExpandButton = styled.button(
+const ExpandButton = styled.button<{ hasDashedLine: boolean }>((x) =>
   css({
     position: 'relative',
     padding: 0,
@@ -264,7 +277,9 @@ const ExpandButton = styled.button(
       height: '100%',
       width: '2px',
       backgroundColor: 'white',
-      backgroundImage: `linear-gradient(${colors.header} 50%, rgba(255,255,255,0) 0%)`,
+      backgroundImage: `linear-gradient(${colors.header} ${
+        x.hasDashedLine ? '50' : '100'
+      }%, rgba(255,255,255,0) 0%)`,
       backgroundSize: '100% 7px',
       backgroundPosition: '0 3px',
       backgroundRepeat: 'repeat-y',

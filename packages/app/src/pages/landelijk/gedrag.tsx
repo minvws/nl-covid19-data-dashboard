@@ -18,6 +18,9 @@ import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-ti
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -27,18 +30,15 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData('corona_melder_app'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
@@ -53,7 +53,7 @@ export const getStaticProps = createGetStaticProps(
 const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatNumber } = useIntl();
 
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const behaviorLastValue = data.behavior.last_value;
   const { nl_gedrag, corona_melder_app } = siteText;
 

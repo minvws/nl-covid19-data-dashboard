@@ -649,7 +649,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -1022,7 +1022,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1098,7 +1098,7 @@
     "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
-    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde van zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} tests met een bekende uitslag.",
     "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
@@ -1137,7 +1137,7 @@
     "totaal_getest_week_titel": "Gemiddeld aantal GGD-testen per dag",
     "totaal_getest_week_uitleg": "Het gemiddelde aantal testen per dag, berekend over zeven dagen. De testen waarvan de uitslag nog niet bekend is, zijn niet meegenomen in dit gemiddelde.",
     "positief_getest_week_titel": "Positief geteste personen",
-    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde over zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
+    "positief_getest_week_uitleg": "Percentage positieve testen in de GGD-teststraten, waarvan de uitslag bekend is. Dit is het gemiddelde van zeven dagen. Voor het berekenen van het percentage worden alleen tests meegeteld waarvan de testuitslag bekend is.",
     "positief_getest_getest_week_uitleg": "Dit zijn {{numerator}} van {{denominator}} geteste personen",
     "linechart_percentage_titel": "Percentage positieve testen door de tijd heen",
     "linechart_percentage_toelichting": "Deze grafiek laat het dagelijks percentage GGD-testen zien met een positieve uitslag, ten opzichte van alle GGD-testen van die dag waarvan de uitslag bekend is. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
@@ -2322,8 +2322,8 @@
           "janssen": "Janssen",
           "sanofi": "Sanofi"
         },
-        "delivered": "Geleverd en beschikbaar",
-        "estimated": "Verwacht geleverd en beschikbaar",
+        "delivered": "Geleverd en gecontroleerd",
+        "estimated": "Verwacht geleverd en gecontroleerd",
         "left_divider_label": "Berekend aantal",
         "right_divider_label": "Verwacht aantal",
         "legend": {
@@ -2429,7 +2429,7 @@
     "laatst_bijgewerkt": "Laatst bijgewerkt: {{date}}",
     "secties": {
       "artikelen": {
-        "titel": "Actuele artikelen",
+        "titel": "Uitgelicht",
         "link": {
           "text": "Bekijk alle artikelen",
           "href": "/artikelen"
@@ -2468,7 +2468,7 @@
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op {{last_update}} gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).",
-      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met ten minste 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2908,7 +2908,8 @@
   },
   "milestones": {
     "toon_meer": "Toon eerdere gebeurtenissen",
-    "verwacht": "Verwacht"
+    "verwacht": "Verwacht",
+    "toon_minder": "Verberg eerdere gebeurtenissen"
   },
   "section_sterftemonitor_vr": {
     "title": "Sterftemonitor",
