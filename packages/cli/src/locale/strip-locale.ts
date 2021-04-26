@@ -2,6 +2,7 @@ import { unflatten } from 'flat';
 import fs from 'fs';
 import get from 'lodash/get';
 import path from 'path';
+import { isDefined } from 'ts-is-present';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
 
 // These keys aren't directly referenced in the code base, so we add them manually here
@@ -48,18 +49,19 @@ const newLocaleObjects = propertyAssignmentNodes
   .concat(whitelist)
   // Only keep the deepest paths:
   .filter(
-    (x, _i, l) =>
-      l.findIndex((y) => y.startsWith(`${x}.`) && y.length > x.length + 1) ===
-      -1
+    (subject, _i, list) =>
+      list.findIndex(
+        (y) => y.startsWith(`${subject}.`) && y.length > subject.length + 1
+      ) === -1
   )
   .sort()
   .reduce(
-    (aggr, chain) => {
-      const NlValue = get(NlOriginal, chain);
-      const EnValue = get(EnOriginal, chain);
-      if (NlValue !== undefined) {
-        aggr.nl[chain] = NlValue;
-        aggr.en[chain] = EnValue;
+    (aggr, propertyPath) => {
+      const NlValue = get(NlOriginal, propertyPath);
+      const EnValue = get(EnOriginal, propertyPath);
+      if (isDefined(NlValue)) {
+        aggr.nl[propertyPath] = NlValue;
+        aggr.en[propertyPath] = EnValue;
       }
       return aggr;
     },

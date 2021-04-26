@@ -91,9 +91,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
    * as it's not a title at all.
    */
   const text = siteText[localeTextKey];
-  const title =
-    (typeof text === 'object' && 'kpi_titel' in text && text.kpi_titel) ||
-    (typeof text === 'object' && 'titel_kpi' in text && text.titel_kpi);
+  const title = text?.kpi_titel || text?.titel_kpi;
 
   assert(
     title,
