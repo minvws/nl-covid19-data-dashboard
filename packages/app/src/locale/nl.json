@@ -1307,8 +1307,8 @@
       "trend_lager": "lager",
       "trend_gelijk": "gelijk"
     },
-    "titel_kpi": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
-    "kpi_titel": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
+    "titel_kpi": "Percentage mensen dat zich aan de gedragsregels houdt en het percentage mensen dat de gedragsregels steunt.",
+    "kpi_titel": "Percentage mensen dat zich aan de gedragsregels houdt en het percentage mensen dat de gedragsregels steunt.",
     "meer_onderzoeksresultaten": {
       "title": "Meer onderzoeksresultaten",
       "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van het RIVM.",
