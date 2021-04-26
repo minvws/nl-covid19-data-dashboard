@@ -12,6 +12,10 @@ type DecoratedLinkProps = {
   compact: boolean;
 };
 
+/**
+ * This component displays an image, a category, a title and an associated link.
+ * The compact version only shows the title with the link.
+ */
 export const DecoratedLink = (props: DecoratedLinkProps) => {
   const { link, compact } = props;
   return compact ? (
@@ -30,7 +34,7 @@ export const CompactDecoratedLink = ({
 }) => {
   return (
     <Link href={href}>
-      <a href={href} style={{ textDecoration: 'none' }}>
+      <a style={{ textDecoration: 'none' }}>
         <Box borderTop="1px solid gray" height="5rem">
           <Box display="flex" height="5rem">
             <Box
@@ -68,24 +72,24 @@ export const ExpandedDecoratedLink = ({
   link: DecoratedLinkDocument;
 }) => {
   return (
-    <Box display="flex">
-      <Box
-        width={122}
-        minWidth={122}
-        maxHeight={122}
-        overflow="hidden"
-        pl={3}
-        py={3}
-      >
-        <SanityImage
-          {...getImageProps(link.cover, {
-            defaultWidth: 122,
-          })}
-        />
-      </Box>
-      <Box display="flex" py={3} pl={3}>
-        <Link href={link.href}>
-          <a href={link.href} style={{ textDecoration: 'none' }}>
+    <Link href={link.href}>
+      <a style={{ textDecoration: 'none' }}>
+        <Box display="flex">
+          <Box
+            width={122}
+            minWidth={122}
+            maxHeight={122}
+            overflow="hidden"
+            pl={3}
+            py={3}
+          >
+            <SanityImage
+              {...getImageProps(link.cover, {
+                defaultWidth: 122,
+              })}
+            />
+          </Box>
+          <Box display="flex" py={3} pl={3}>
             <Box
               justifyContent="flex-start"
               display="flex"
@@ -102,20 +106,20 @@ export const ExpandedDecoratedLink = ({
                 {link.title}
               </InlineText>
             </Box>
-          </a>
-        </Link>
-        <Box
-          width="5rem"
-          display="flex"
-          alignSelf="center"
-          justifyContent="center"
-          alignItems="center"
-          marginLeft="auto"
-          color="link"
-        >
-          <ChevronIcon />
+            <Box
+              width="5rem"
+              display="flex"
+              alignSelf="center"
+              justifyContent="center"
+              alignItems="center"
+              marginLeft="auto"
+              color="link"
+            >
+              <ChevronIcon />
+            </Box>
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      </a>
+    </Link>
   );
 };

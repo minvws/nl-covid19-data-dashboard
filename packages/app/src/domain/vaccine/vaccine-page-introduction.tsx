@@ -144,7 +144,7 @@ export function VaccinePageIntroduction({
           <Heading level={3}>{pageInfo.title}</Heading>
           <Tile>
             <RichContent blocks={pageInfo.description} />
-            <Box spacing={{ _: 3, md: 0 }} display="flex">
+            <Box display="flex">
               <MetadataBox>
                 <Metadata
                   datumsText={text.datums}
@@ -169,7 +169,7 @@ export function VaccinePageIntroduction({
           <DecoratedLinksTile>
             <Box>
               {pageLinks.map((x, index) => (
-                <DecoratedLink link={x} compact={index > 0} key={x.href} />
+                <DecoratedLink link={x} compact={index > 0} key={index} />
               ))}
             </Box>
           </DecoratedLinksTile>
@@ -179,7 +179,7 @@ export function VaccinePageIntroduction({
   );
 }
 
-const MetadataBox = styled(Box)(
+const MetadataBox = styled.div(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
   })
