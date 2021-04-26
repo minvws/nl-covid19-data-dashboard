@@ -390,7 +390,7 @@
       {
         "icon": "/images/Gedragsonderzoeken.png",
         "text": "Gedragsonderzoeken",
-        "content": "Gegevens uit gedragsonderzoeken worden regelmatig verzameld door het RIVM. Dit geeft inzicht in trends in naleving en draagvlak van de op dat moment geldende gedragsregels zoals handen wassen, thuisblijven en het laten testen bij klachten."
+        "content": "Gegevens uit gedragsonderzoeken worden regelmatig verzameld door het RIVM. Dit geeft inzicht in trends in het volgen en steunen van de op dat moment geldende gedragsregels zoals handen wassen, thuisblijven en het laten testen bij klachten."
       }
     ]
   },
@@ -1311,22 +1311,22 @@
     "kpi_titel": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
     "meer_onderzoeksresultaten": {
       "title": "Meer onderzoeksresultaten",
-      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
-      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
+      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van het RIVM.",
+      "linkLabel": "Bekijk het gehele onderzoek op de website van het RIVM",
       "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek/naleving-van-en-draagvlak-voor-basis-gedragsregels"
     }
   },
   "nl_gedrag": {
     "metadata": {
-      "title": "Naleving en Draagvlak | Coronadashboard | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van naleving en draagvlak."
+      "title": "Coronaregels volgen en steunen | Coronadashboard | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van volgen en steunen coronaregels."
     },
     "pagina": {
-      "titel": "Naleving en Draagvlak",
+      "titel": "Coronaregels volgen en steunen",
       "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels naleven kunnen we corona onder controle krijgen."
     },
     "sidebar": {
-      "titel": "Naleving en Draagvlak"
+      "titel": "Coronaregels volgen en steunen"
     },
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
@@ -1389,15 +1389,15 @@
   },
   "regionaal_gedrag": {
     "metadata": {
-      "title": "Naleving en Draagvlak | Coronadashboard | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van naleving en draagvlak."
+      "title": "Coronaregels volgen en steunen | Coronadashboard | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van volgen en steunen coronaregels."
     },
     "pagina": {
-      "titel": "Naleving en Draagvlak",
+      "titel": "Coronaregels volgen en steunen",
       "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels naleven kunnen we corona onder controle krijgen."
     },
     "sidebar": {
-      "titel": "Naleving en Draagvlak"
+      "titel": "Coronaregels volgen en steunen"
     },
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
@@ -1880,11 +1880,11 @@
       "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "cbs_message": {
-      "title": "Sterfte in week 14 hoger dan verwacht",
-      "published_text": "Publicatiedatum: vrijdag 16 april",
-      "message": "In week 14 (5 tot en met 11 april 2021) overleden naar schatting 3 150 mensen. Dat zijn ongeveer 100 sterfgevallen meer dan verwacht voor deze periode en ongeveer evenveel sterfgevallen als in de week ervoor (3 144). De sterfte bij Wlz-zorggebruikers lag onder het voor deze week verwachte niveau, in de overige bevolking overleden meer mensen dan verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Van week 39 van 2020 tot en met week 6 van 2021 was de wekelijkse sterfte hoger dan verwacht. In week 7 was de sterfte ongeveer gelijk aan de verwachte sterfte voor deze periode en in de weken erna lag de sterfte eronder. In week 13 was de sterfte weer ongeveer gelijk aan de verwachte sterfte, de schatting in week 14 ligt er net boven. Het RIVM registreerde 112 overleden COVID-19-patiënten in week 14 (stand 13 april).",
+      "title": "Oversterfte bij mensen tot 80 jaar in week 15",
+      "published_text": "Publicatiedatum: vrijdag 23 april",
+      "message": "In week 15 (12 tot en met 18 april 2021) overleden naar schatting iets minder dan 3.200 mensen. Dat zijn bijna 200 sterfgevallen meer dan verwacht voor deze periode, en iets meer sterfgevallen dan in de week ervoor (3.132). Er overleden vooral meer 65- tot 80-jarigen dan verwacht, en ook bij mensen jonger dan 65 jaar was er oversterfte. De sterfte onder Wlz-zorggebruikers lag opnieuw onder het verwachte niveau. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Van week 39 van 2020 tot en met week 6 van 2021 was de wekelijkse sterfte hoger dan verwacht. Tot aan week 3 was er oversterfte. In de weken erna was er geen oversterfte en schommelde de sterfte rond de verwachte aantallen voor die periode. De schatting in week 15 ligt bijna 200 sterfgevallen boven de verwachting, maar nog net binnen het interval van gewoonlijke fluctuaties (en is daarom geen oversterfte). Het RIVM registreerde 126 overleden COVID-19-patiënten in week 15 (stand 20 april).",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/15/sterfte-in-week-14-hoger-dan-verwacht",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/16/oversterfte-bij-mensen-tot-80-jaar-in-week-15",
         "text": "Lees het volledige nieuwsbericht op de website van het CBS"
       }
     },
