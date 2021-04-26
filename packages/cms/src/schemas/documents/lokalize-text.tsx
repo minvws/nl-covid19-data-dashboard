@@ -1,5 +1,4 @@
 import React from 'react';
-import ComputedField from 'sanity-plugin-computed-field';
 
 /**
  * A lokalizeText type is referenced by a lokalizeSubject. There can be any number of
@@ -11,14 +10,10 @@ import ComputedField from 'sanity-plugin-computed-field';
  * This is the multi-line version of lokalizeString. Not sure if we need it but
  * seeing if this is useful...
  */
-
-// veiligheidsregio_actueel::data_driven_texts::intake_intensivecare_ma::difference::singular
-
 export const lokalizeText = {
   name: 'lokalizeText',
   type: 'document',
   title: 'Text',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     {
       title: 'Lokalize pad',
@@ -62,30 +57,17 @@ export const lokalizeText = {
       name: 'should_display_empty',
       type: 'boolean',
     },
-    // {
-    //   title: 'Is nieuw toegevoegde tekst',
-    //   name: 'is_newly_added',
-    //   type: 'boolean',
-    //   readOnly: true,
-    //   hidden: true,
-    // },
     {
-      name: 'is_newly_added', //Give your sanity field a name
-      type: 'boolean', //"number" or "text" or "string" or "boolean"
-      inputComponent: ComputedField,
-      options: {
-        editable: false,
-        buttonText: 'Markeer als verwerkt',
-        documentQuerySelection: `
-          _id,
-          "numberOfReferences": count(*[references(^._id)])
-        `,
-        reduceQueryResult: (__resultOfQuery: {
-          numberOfReferences: number;
-        }) => {
-          return false;
-        },
-      },
+      name: 'is_newly_added',
+      type: 'boolean',
+      readOnly: true,
+      hidden: true,
+    },
+    {
+      name: 'publish_count',
+      type: 'number',
+      readOnly: true,
+      hidden: true,
     },
   ],
   preview: {

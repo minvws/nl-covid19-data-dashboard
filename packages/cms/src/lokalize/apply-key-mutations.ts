@@ -27,7 +27,7 @@
 import sanityClient from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
-import sanityConfig from '../../sanity.json';
+// import sanityConfig from '../../sanity.json';
 import { collapseTextMutations, readTextMutations } from './logic';
 
 /**
@@ -39,8 +39,8 @@ dotenv.config({
 
 const sharedConfig = {
   apiVersion: '2021-03-25',
-  projectId: sanityConfig.api.projectId,
-  token: process.env.SANITY_TOKEN,
+  projectId: process.env.SANITY_STUDIO_API_PROJECT_ID,
+  token: process.env.SANITY_STUDIO_TOKEN,
   useCdn: false,
 };
 
