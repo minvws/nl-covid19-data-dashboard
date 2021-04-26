@@ -9,7 +9,6 @@ import {
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TimeframeOption } from '~/utils/timeframe';
-import { assert } from '~/utils/assert';
 
 interface ReproductionChartTileProps {
   data: NationalReproduction;
