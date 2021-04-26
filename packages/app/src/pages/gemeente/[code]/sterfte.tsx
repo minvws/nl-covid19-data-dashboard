@@ -1,16 +1,17 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { Layout } from '~/domain/layout/layout';
+import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { ChartTile } from '~/components/chart-tile';
-import { colors } from '~/style/theme';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -19,18 +20,17 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getGmData,
+  selectGmPageMetricData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getGmData,
+  selectGmPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -41,9 +41,9 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    data,
+    selectedGmData: data,
     municipalityName,
-    data: { deceased_rivm: dataRivm, difference },
+    selectedGmData: { deceased_rivm: dataRivm, difference },
     content,
     lastGenerated,
   } = props;

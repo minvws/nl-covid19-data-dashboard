@@ -1,11 +1,14 @@
+import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 import { useIntl } from '~/intl';
 import { LinkGroupProps } from './link-group';
-import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 
 export function useDataSitemap(
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
   code?: string,
-  data?: National | Regionaal | Municipal
+  data?:
+    | Pick<National, 'sewer'>
+    | Pick<Regionaal, 'sewer'>
+    | Pick<Municipal, 'sewer'>
 ): LinkGroupProps[] {
   const { siteText } = useIntl();
 

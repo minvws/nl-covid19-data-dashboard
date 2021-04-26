@@ -1,6 +1,6 @@
 import { ArticleDetail } from '~/components/article-detail';
 import { Box } from '~/components/base';
-import { client, getImageSrc, localize } from '~/lib/sanity';
+import { getClient, getImageSrc, localize } from '~/lib/sanity';
 import {
   createGetStaticProps,
   StaticProps,
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   //@TODO THIS NEEDS TO COME FROM CONTEXT OR SIMILAR?
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
-  const articlesData = await client.fetch(articlesQuery);
+  const articlesData = await (await getClient()).fetch(articlesQuery);
   const articles = localize<{ slug: string }[]>(articlesData, [locale, 'nl']);
 
   const paths = articles.map((article) => ({
