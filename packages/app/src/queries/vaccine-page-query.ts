@@ -18,6 +18,7 @@ export function getVaccinePageQuery() {
         "asset": cover.asset->
       }
     }],
+    "linksTitle": linksTitle.${locale},
     "title": title.${locale},
     "description": description.${locale},
     "milestones": [...milestones | order(date)[] {

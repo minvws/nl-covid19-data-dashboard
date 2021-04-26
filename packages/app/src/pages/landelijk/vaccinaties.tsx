@@ -81,6 +81,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             data={data}
             pageInfo={page.pageInfo}
             pageLinks={page.pageLinks}
+            pageLinksTitle={page.linksTitle}
           />
 
           <ArticleStrip articles={content.highlight.articles} />

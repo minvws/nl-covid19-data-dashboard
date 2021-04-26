@@ -1,12 +1,11 @@
 import { National } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ExternalLinkIcon from '~/assets/external-link.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
-import { ContentHeader } from '~/components/content-header';
 import { Metadata } from '~/components/content-header/metadata';
+import { DecoratedLink } from '~/components/decorated-link';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
@@ -14,22 +13,26 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
-import { DecoratedLink, TitleDescriptionBlock } from '~/types/cms';
+import {
+  DecoratedLink as CMSDecoratedLink,
+  TitleDescriptionBlock,
+} from '~/types/cms';
 import { createDate } from '~/utils/create-date';
-import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 interface VaccinePageIntroductionProps {
   data: National;
   pageInfo: TitleDescriptionBlock;
-  pageLinks: DecoratedLink[];
+  pageLinks: CMSDecoratedLink[];
+  pageLinksTitle: string;
 }
 
 export function VaccinePageIntroduction({
   data,
   pageInfo,
   pageLinks,
+  pageLinksTitle,
 }: VaccinePageIntroductionProps) {
   const { siteText, formatPercentage, formatDate } = useIntl();
 
@@ -136,12 +139,7 @@ export function VaccinePageIntroduction({
           <Heading level={3}>{pageInfo.title}</Heading>
           <Tile>
             <RichContent blocks={pageInfo.description} />
-            <Box
-              spacing={{ _: 3, md: 0 }}
-              display="flex"
-              flexDirection={['column', null, null, null, 'row']}
-              ml={[null, null, null, false ? 5 : null]}
-            >
+            <Box spacing={{ _: 3, md: 0 }} display="flex">
               <MetadataBox>
                 <Metadata
                   datumsText={text.datums}
@@ -162,32 +160,16 @@ export function VaccinePageIntroduction({
           </Tile>
         </Box>
         <Box>
-          <Heading level={3}>Ook Interessant</Heading>
-          <LinksTile>
-            <Box spacing={3}>
-              {pageLinks.map((l, index) => (
-                <DecoratedLinkView link={l} compact={index > 0} />
+          <Heading level={3}>{pageLinksTitle}</Heading>
+          <DecoratedLinksTile>
+            <Box>
+              {pageLinks.map((x, index) => (
+                <DecoratedLink link={x} compact={index > 0} />
               ))}
             </Box>
-          </LinksTile>
+          </DecoratedLinksTile>
         </Box>
       </TwoKpiSection>
-
-      <Box px={{ _: 3, sm: 4 }}>
-        <ContentHeader
-          subtitle={text.description}
-          reference={text.reference}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: data.vaccine_administered_total.last_value.date_unix,
-            dateOfInsertionUnix:
-              data.vaccine_administered_total.last_value.date_of_insertion_unix,
-            dataSources: [],
-            moreInformationLabel: text.more_information.label,
-            moreInformationLink: text.more_information.link,
-          }}
-        />
-      </Box>
     </Box>
   );
 }
@@ -198,58 +180,13 @@ const MetadataBox = styled(Box)(
   })
 );
 
-type DecoratedLinkViewProps = {
-  link: DecoratedLink;
-  compact: boolean;
-};
-
-const DecoratedLinkView = (props: DecoratedLinkViewProps) => {
-  const { link, compact } = props;
-  return compact ? (
-    <CompactDecoratedLink title={link.title} href={link.href} />
-  ) : (
-    <ExpandedDecoratedLink link={link} />
-  );
-};
-
-const CompactDecoratedLink = ({
-  title,
-  href,
-}: {
-  title: string;
-  href: string;
-}) => {
-  return (
-    <Box borderBottom="1px solid black" height="5rem">
-      <Link href={href}>
-        <Box as="a" display="flex">
-          <Text>{title}</Text>
-          <ExternalLinkIcon />
-        </Box>
-      </Link>
-    </Box>
-  );
-};
-
-const ExpandedDecoratedLink = ({ link }: { link: DecoratedLink }) => {
-  return (
-    <Box borderBottom="1px solid black" height="5rem">
-      {link.title}
-    </Box>
-  );
-};
-
-const LinksTile = styled.article<{
-  height?: number | string;
-  backgroundColor?: string;
-}>((x) =>
+const DecoratedLinksTile = styled.article(
   css({
     display: 'flex',
     flexDirection: 'column',
-    bg: x.backgroundColor ? x.backgroundColor : 'white',
+    bg: 'white',
     p: 0,
     borderRadius: 1,
     boxShadow: 'tile',
-    height: x.height,
   })
 );
