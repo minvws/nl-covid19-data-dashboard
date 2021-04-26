@@ -1,4 +1,4 @@
-import flatten from 'flat';
+import { flatten } from 'flat';
 import fs from 'fs';
 import { get, isEmpty } from 'lodash';
 import path from 'path';
@@ -28,34 +28,27 @@ const en = JSON.parse(
 const transaction = client.transaction();
 let issueCounter = 0;
 
-for (const [key, dataText] of Object.entries(nl)) {
+for (let [key, dataText] of Object.entries(nl)) {
   /**
-   * Some root-level keys only contain a string instead of an object structure.
-   * We can't handle those in our logic, so they are ignored. We should manually
-   * move these keys to a different location. Luckily there are only a few of
-   * them.
+   * Some root-level keys only contain string | string[] instead of an object structure.
+   * We can't handle those in our logic, so they are moved to a `__root` subject.
    */
-  if (typeof dataText === 'string') {
-    console.warn(`Ignoring string value for key ${key}`);
+  if (typeof dataText === 'string' || Array.isArray(dataText)) {
+    const type = typeof dataText === 'string' ? 'string' : 'array';
+    console.warn(
+      `Transform root ${type} for key "${key}" to object value "{ __root: { ${key} } }"`
+    );
+
+    dataText = { [key]: dataText };
+    key = '__root';
+
     issueCounter++;
-    continue;
   }
 
-  /**
-   * The safe option prevents automatic conversion of arrays. Since they are not
-   * supported by our logic we want to keep them as arrays so they can be
-   * detected and ignored.
-   */
-  const flatText = flatten(dataText, { safe: true }) as Record<string, string>;
+  const flatText = flatten(dataText) as Record<string, string>;
 
   const textDocuments = Object.entries(flatText)
     .map(([path, value]) => {
-      /**
-       * We do not import keys that currently have empty strings for NL locale,
-       * because they should be obsolete.
-       */
-      if (!value) return;
-
       /**
        * Anything that is not a string here is expected to be an array. If these
        * keys are still used in the app, the data will have to be converted or
@@ -69,14 +62,21 @@ for (const [key, dataText] of Object.entries(nl)) {
 
       return {
         _type: 'lokalizeText',
-        _id: `jsonKey__${key}.${path}`,
+        /**
+         * ids with a `.` are only accessible for authenticated users. We'll
+         * replace dots with dashes.
+         */
+        _id: `lokalize__${key}.${path}`.replace(/\./g, '-'),
         path: path,
         subject: key,
         /**
-         * The lokalize path is also stored (a::b::c) to make it findable
-         * with the Sanity search feature.
+         * The search_key is created with the subject and path.
+         * The `::` delimiter matches with lokalize for copywriter UX.
          */
-        lokalize_path: `${`${key}.${path}`.split('.').join('::')}`,
+        search_key: `${`${key}.${path}`.split('.').join('::')}`,
+
+        display_empty: !value,
+
         text: {
           _type: 'localeText',
           nl: value.trim(),

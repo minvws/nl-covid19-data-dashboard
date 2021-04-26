@@ -30,7 +30,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -43,7 +43,22 @@ const scaledVaccineIcon = (
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData(
+    'vaccine_stock',
+    'vaccine_delivery_per_supplier',
+    'vaccine_support',
+    'vaccine_administered_total',
+    'vaccine_administered_planned',
+    'vaccine_administered_rate_moving_average',
+    'vaccine_administered',
+    'vaccine_delivery',
+    'vaccine_delivery_estimate',
+    'vaccine_administered_estimate',
+    'vaccine_administered_ggd',
+    'vaccine_administered_hospitals_and_care_institutions',
+    'vaccine_administered_doctors',
+    'vaccine_administered_ggd_ghor'
+  ),
   createGetContent<{
     milestones: MilestoneViewProps;
     highlight: {
@@ -59,7 +74,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, data, lastGenerated } = props;
+  const { content, selectedNlData: data, lastGenerated } = props;
 
   const stockFeature = useFeature('vaccineStockPerSupplier');
 

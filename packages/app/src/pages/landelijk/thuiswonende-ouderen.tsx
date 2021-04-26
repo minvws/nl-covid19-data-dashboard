@@ -5,6 +5,9 @@ import {
 import ElderlyIcon from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -12,9 +15,6 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -25,7 +25,7 @@ import {
 import {
   createGetChoroplethData,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -33,7 +33,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData(),
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   })
@@ -42,7 +42,7 @@ export const getStaticProps = createGetStaticProps(
 const ElderlyAtHomeNationalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const { data, choropleth, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, lastGenerated } = props;
   const elderlyAtHomeData = data.elderly_at_home;
 
   const elderlyAtHomeInfectedUnderReportedRange = getBoundaryDateStartUnix(

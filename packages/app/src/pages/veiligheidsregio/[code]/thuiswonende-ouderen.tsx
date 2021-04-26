@@ -14,7 +14,10 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectVrPageMetricData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -23,13 +26,13 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData
+  selectVrPageMetricData()
 );
 
 const ElderlyAtHomeRegionalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const { safetyRegionName, data, lastGenerated } = props;
+  const { safetyRegionName, selectedVrData: data, lastGenerated } = props;
   const { elderly_at_home, difference } = data;
 
   const { siteText } = useIntl();
