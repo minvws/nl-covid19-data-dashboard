@@ -64,6 +64,7 @@ export function ReproductionChartTile({
               label: siteText.common.signaalwaarde,
             },
           }}
+          tickValues={[0, 0.5, 1.0, 1.5, 2, 2.5]}
         />
       )}
     </ChartTile>
