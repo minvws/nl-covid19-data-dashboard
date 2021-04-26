@@ -168,5 +168,6 @@ export interface LokalizeText {
     nl: string | undefined;
     en: string | undefined;
   };
-  display_empty: boolean;
+  should_display_empty: boolean;
+  is_newly_added: boolean;
 }

@@ -19,11 +19,14 @@
     "@sanity/dashboard",
     "dashboard-widget-document-list",
     "media",
-    "./src/plugins/sanity-deploy-button"
+    "./src/plugins/sanity-deploy-button",
+    "computed-field"
   ],
   "env": {
     "development": {
-      "plugins": ["@sanity/vision"],
+      "plugins": [
+        "@sanity/vision"
+      ],
       "api": {
         "dataset": "development"
       }

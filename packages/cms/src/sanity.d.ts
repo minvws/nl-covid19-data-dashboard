@@ -1,4 +1,5 @@
 declare module 'braille';
+declare module 'sanity-plugin-computed-field';
 declare module 'part:@sanity/form-builder/patch-event' {
   export * from '@sanity/form-builder/lib/PatchEvent';
 }

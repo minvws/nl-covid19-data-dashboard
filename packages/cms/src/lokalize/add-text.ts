@@ -135,7 +135,8 @@ async function createTextDocumentForSubject(
     _type: 'lokalizeText',
     subject,
     path: response.path,
-    lokalize_path: `${subject}.${response.path}`.split('.').join('::'),
+    search_key: `${subject}.${response.path}`.split('.').join('::'),
+    is_newly_added: true,
     text: {
       _type: 'localeText',
       nl: response.nl,

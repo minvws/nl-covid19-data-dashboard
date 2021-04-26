@@ -12,7 +12,8 @@ dotenv.config({
 
 export const client = sanityClient({
   apiVersion: '2021-03-25',
-  dataset: 'development',
+  // dataset: 'development',
+  dataset: 'production',
   projectId: sanityConfig.api.projectId,
   token: process.env.SANITY_TOKEN,
   useCdn: false,

@@ -75,7 +75,7 @@ for (let [key, dataText] of Object.entries(nl)) {
          */
         search_key: `${`${key}.${path}`.split('.').join('::')}`,
 
-        display_empty: !value,
+        should_display_empty: !value,
 
         text: {
           _type: 'localeText',
