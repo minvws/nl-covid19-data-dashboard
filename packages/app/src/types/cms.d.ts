@@ -171,7 +171,6 @@ export interface LokalizeText {
   display_empty: boolean;
 }
 
-
 export type DecoratedLink = {
   title: string;
   category: string;
