@@ -60,7 +60,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -70,7 +70,13 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrData(
+    'tested_overall',
+    'hospital_nice',
+    'code',
+    'escalation_level',
+    'difference'
+  ),
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -86,7 +92,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { choropleth, data, content, lastGenerated } = props;
+  const { choropleth, selectedVrData: data, content, lastGenerated } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText, formatDate } = useIntl();

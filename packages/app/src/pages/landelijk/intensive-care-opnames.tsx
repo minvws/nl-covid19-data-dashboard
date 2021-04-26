@@ -22,14 +22,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -44,7 +44,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.ic_opnames_per_dag;
   const graphDescriptions = siteText.accessibility.grafieken;
 
-  const { data, content, lastGenerated } = props;
+  const { selectedNlData: data, content, lastGenerated } = props;
   const dataIntake = data.intensive_care_nice;
 
   const bedsLastValue = getLastFilledValue(data.intensive_care_lcps);
