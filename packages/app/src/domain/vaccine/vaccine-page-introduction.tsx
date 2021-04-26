@@ -42,8 +42,6 @@ export function VaccinePageIntroduction({
   const { siteText, formatPercentage, formatDate } = useIntl();
   const text = siteText.vaccinaties;
 
-  const text = siteText.vaccinaties;
-
   const roundedMillion =
     Math.floor(
       (data.vaccine_administered_total.last_value.estimated / 1_000_000) * 10
