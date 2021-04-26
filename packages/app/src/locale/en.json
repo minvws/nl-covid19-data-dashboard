@@ -1,4 +1,5 @@
 {
+
   "andere_gegevens": "Other data",
   "blok_andere_gegevens": {
     "title": "Other data",
@@ -2848,6 +2849,10 @@
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
   "corona_melder_app": {
+    "sidebar": {
+      "titel": "Coronamelder"
+    },
+    "kpi_titel": "Here comes the Coronamelder app",
     "header": {
       "category": "Prevention",
       "title": "Use of the CoronaMelder app",
