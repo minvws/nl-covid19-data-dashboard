@@ -16,17 +16,19 @@ const whitelist = [
   'choropleth.behavior',
 ];
 
+const APP_LOCALE_DIR = path.join(__dirname, '../../../app/src/locale');
+
 const project = new Project({
   tsConfigFilePath: path.join(__dirname, '../../../app/tsconfig.json'),
 });
 
 const NlOriginal = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../../../app/src/locale/nl.json'), {
+  fs.readFileSync(path.join(APP_LOCALE_DIR, 'nl.json'), {
     encoding: 'utf-8',
   })
 );
 const EnOriginal = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../../../app/src/locale/en.json'), {
+  fs.readFileSync(path.join(APP_LOCALE_DIR, 'en.json'), {
     encoding: 'utf-8',
   })
 );
@@ -66,13 +68,13 @@ const newLocaleObjects = propertyAssignmentNodes
 const newJson: any = unflatten(newLocaleObjects, { object: true });
 
 fs.writeFileSync(
-  path.join(__dirname, 'nl.json'),
+  path.join(APP_LOCALE_DIR, 'nl_stripped.json'),
   JSON.stringify(newJson.nl, null, 2),
   { encoding: 'utf-8' }
 );
 
 fs.writeFileSync(
-  path.join(__dirname, 'en.json'),
+  path.join(APP_LOCALE_DIR, 'en_stripped.json'),
   JSON.stringify(newJson.en, null, 2),
   { encoding: 'utf-8' }
 );
