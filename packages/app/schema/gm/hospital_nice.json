@@ -6,6 +6,7 @@
       "additionalProperties": false,
       "required": [
         "admissions_on_date_of_admission",
+        "admissions_on_date_of_admission_moving_average",
         "admissions_on_date_of_reporting",
         "date_unix",
         "date_of_insertion_unix"
