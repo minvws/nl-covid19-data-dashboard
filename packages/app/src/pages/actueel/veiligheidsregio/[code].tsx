@@ -132,6 +132,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                   safetyRegionName: props.safetyRegionName,
                 }
               )}
+              headingLevel={1}
               link={{
                 text: replaceVariablesInText(
                   text.secties.actuele_situatie.link.text,

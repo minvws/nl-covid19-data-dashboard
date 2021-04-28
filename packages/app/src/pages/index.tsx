@@ -122,6 +122,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   the_netherlands: text.the_netherlands,
                 }
               )}
+              headingLevel={1}
               link={{
                 ...text.secties.actuele_situatie.link,
                 href: reverseRouter.nl.index(),
