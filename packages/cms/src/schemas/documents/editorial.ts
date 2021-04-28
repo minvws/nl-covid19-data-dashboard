@@ -28,8 +28,7 @@ export default {
       date: 'publicationDate',
       media: 'cover',
     },
-    prepare(selection: { title: string; date: string }) {
-      const { title, date } = selection;
+    prepare({ title, date }: { title: string; date: string }) {
       return {
         title,
         subtitle: new Date(date).toLocaleString(),
