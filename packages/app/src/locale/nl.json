@@ -110,7 +110,8 @@
     "kpi_titel": "Het aantal IC-opnames dat op één dag gemeld is",
     "linechart_legend_trend_label": "Intensive care-opnames",
     "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is."
+    "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is.",
+    "linechart_legend_trend_label_moving_average": "Gemiddeld aantal IC-opnames berekend over de afgelopen 7 dagen"
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -214,7 +215,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -390,7 +392,7 @@
       {
         "icon": "/images/Gedragsonderzoeken.png",
         "text": "Gedragsonderzoeken",
-        "content": "Gegevens uit gedragsonderzoeken worden regelmatig verzameld door het RIVM. Dit geeft inzicht in trends in naleving en draagvlak van de op dat moment geldende gedragsregels zoals handen wassen, thuisblijven en het laten testen bij klachten."
+        "content": "Gegevens uit gedragsonderzoeken worden regelmatig verzameld door het RIVM. Dit geeft inzicht in trends in het volgen en steunen van de op dat moment geldende gedragsregels zoals handen wassen, thuisblijven en het laten testen bij klachten."
       }
     ]
   },
@@ -649,7 +651,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land vanaf 28 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -781,7 +783,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -916,7 +919,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -1022,7 +1026,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land vanaf 28 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1297,8 +1301,8 @@
     "curfew": "Avondklok"
   },
   "gedrag_common": {
-    "compliance": "Naleving",
-    "support": "Draagvlak",
+    "compliance": "Volgt regels",
+    "support": "Steunt regels",
     "basisregels": {
       "header_percentage": "Percentage",
       "header_basisregel": "Gedragsregels",
@@ -1307,26 +1311,26 @@
       "trend_lager": "lager",
       "trend_gelijk": "gelijk"
     },
-    "titel_kpi": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
-    "kpi_titel": "Percentage mensen dat het eens is met de gedragsregels en het percentage dat zich vervolgens ook zelf aan de gedragsregels houdt.",
+    "titel_kpi": "Percentage mensen dat zich aan de gedragsregels houdt en het percentage mensen dat de gedragsregels steunt.",
+    "kpi_titel": "Percentage mensen dat zich aan de gedragsregels houdt en het percentage mensen dat de gedragsregels steunt.",
     "meer_onderzoeksresultaten": {
       "title": "Meer onderzoeksresultaten",
-      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van de RIVM.",
-      "linkLabel": "Bekijk het gehele onderzoek op de website van de RIVM",
+      "description": "Bekijk voor meer gedetailleerde resultaten het volledige onderzoek op de website van het RIVM. Het RIVM gebruikt de woorden 'naleving en draagvlak voor de gedragsregels'; op ons dashboard gebruiken wij de woorden 'coronaregels volgen en steunen'.",
+      "linkLabel": "Bekijk het gehele onderzoek op de website van het RIVM",
       "linkHref": "https://www.rivm.nl/gedragsonderzoek/trendonderzoek/naleving-van-en-draagvlak-voor-basis-gedragsregels"
     }
   },
   "nl_gedrag": {
     "metadata": {
-      "title": "Naleving en Draagvlak | Coronadashboard | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van naleving en draagvlak."
+      "title": "Coronaregels volgen en steunen | Coronadashboard | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van volgen en steunen coronaregels."
     },
     "pagina": {
-      "titel": "Naleving en Draagvlak",
-      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels naleven kunnen we corona onder controle krijgen."
+      "titel": "Coronaregels volgen en steunen",
+      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels volgen, kunnen we corona onder controle krijgen."
     },
     "sidebar": {
-      "titel": "Naleving en Draagvlak"
+      "titel": "Coronaregels volgen en steunen"
     },
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
@@ -1335,7 +1339,7 @@
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
-      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na? Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
+      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre volgen en steunen ze de regels? Aan elke enquête doet een andere groep mensen mee. Dit onderzoek wordt gecoördineerd en gepubliceerd door het RIVM. De praktische uitvoering wordt verzorgd door Kantar Public."
     },
     "kpi": {
       "aantal_respondenten": {
@@ -1360,8 +1364,8 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven.",
-        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in het dagelijks leven.",
+        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregel te steunen."
       },
       "voetnoot_asterisk": {
         "compliance": "* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting.",
@@ -1371,8 +1375,8 @@
     "basisregels_over_tijd": {
       "title": "Het volgen van de gedragsregels door de tijd heen",
       "intro": {
-        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven.",
-        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in het dagelijks leven.",
+        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te steunen."
       }
     },
     "reference": {
@@ -1389,15 +1393,15 @@
   },
   "regionaal_gedrag": {
     "metadata": {
-      "title": "Naleving en Draagvlak | Coronadashboard | Rijksoverheid.nl",
-      "description": "Landelijk overzicht van naleving en draagvlak."
+      "title": "Coronaregels volgen en steunen | Coronadashboard | Rijksoverheid.nl",
+      "description": "Landelijk overzicht van volgen en steunen coronaregels."
     },
     "pagina": {
-      "titel": "Naleving en Draagvlak",
-      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels naleven kunnen we corona onder controle krijgen."
+      "titel": "Coronaregels volgen en steunen",
+      "toelichting": "De Nederlandse corona-aanpak is erop gericht het virus maximaal te controleren, de zorg niet te overbelasten en kwetsbare mensen in de samenleving te beschermen. Alleen als we allemaal de basisregels volgen, kunnen we corona onder controle krijgen."
     },
     "sidebar": {
-      "titel": "Naleving en Draagvlak"
+      "titel": "Coronaregels volgen en steunen"
     },
     "datums": "Enquête is afgenomen tussen {{weekStart}} en {{weekEnd}}. Wordt 3-wekelijks bijgewerkt.",
     "bron": {
@@ -1406,7 +1410,7 @@
     },
     "onderzoek_uitleg": {
       "titel": "Onderzoek onder de Nederlandse bevolking",
-      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre steunen ze de regels en in hoeverre leven ze de regels ook na? Dit onderzoek wordt gecoördineerd en gepubliceerd door RIVM. De praktische uitvoering wordt verzorgd door Kantar Public. "
+      "toelichting": "Elke drie weken wordt een enquête gehouden onder een representatieve steekproef van de Nederlandse bevolking. Deelnemers aan deze enquête beantwoorden allemaal dezelfde vragen over de gedragsregels die de overheid opstelt vanwege corona. In hoeverre volgen en steunen ze de regels? Aan elke enquête doet een andere groep mensen mee. Dit onderzoek wordt gecoördineerd en gepubliceerd door het RIVM. De praktische uitvoering wordt verzorgd door Kantar Public."
     },
     "kpi": {
       "aantal_respondenten": {
@@ -1425,8 +1429,8 @@
         "support": ""
       },
       "voetnoot": {
-        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in zijn/haar dagelijks leven.",
-        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregels te volgen in het dagelijks leven.",
+        "support": "Deze tabel toont het percentage van de deelnemers aan het onderzoek dat aangeeft de gedragsregel te steunen."
       },
       "voetnoot_asterisk": {
         "compliance": "* De rechter kolom geeft aan of met minstens 95% zekerheid gezegd kan worden dat er een statistisch verantwoord verschil is vergeleken met de vorige meting.",
@@ -1436,8 +1440,8 @@
     "basisregels_over_tijd": {
       "title": "Gedragsregels door de tijd heen",
       "intro": {
-        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in zijn/haar dagelijks leven. ",
-        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft achter de gedragsregel te staan."
+        "compliance": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te volgen in het dagelijks leven. ",
+        "support": "Deze grafiek toont veranderingen in de loop van de tijd van het percentage van de respondenten dat aangeeft de gedragsregel te steunen."
       }
     },
     "reference": {
@@ -1526,7 +1530,9 @@
         "text": "RIVM"
       }
     },
-    "linechart_metric_label": "Geïnfecteerde locaties"
+    "linechart_metric_label": "Geïnfecteerde locaties",
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1560,7 +1566,9 @@
     },
     "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1590,7 +1598,9 @@
     },
     "kpi_titel": "Aantal overleden personen",
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1623,7 +1633,9 @@
       }
     },
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1685,7 +1697,9 @@
     },
     "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
@@ -1718,7 +1732,9 @@
       "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers - COVID-19 sterfte",
@@ -1739,7 +1755,9 @@
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1771,7 +1789,9 @@
       "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - COVID-19 sterfte",
@@ -1792,7 +1812,9 @@
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1826,7 +1848,9 @@
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1860,7 +1884,9 @@
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1880,11 +1906,11 @@
       "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
     "cbs_message": {
-      "title": "Sterfte in week 14 hoger dan verwacht",
-      "published_text": "Publicatiedatum: vrijdag 16 april",
-      "message": "In week 14 (5 tot en met 11 april 2021) overleden naar schatting 3 150 mensen. Dat zijn ongeveer 100 sterfgevallen meer dan verwacht voor deze periode en ongeveer evenveel sterfgevallen als in de week ervoor (3 144). De sterfte bij Wlz-zorggebruikers lag onder het voor deze week verwachte niveau, in de overige bevolking overleden meer mensen dan verwacht. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Van week 39 van 2020 tot en met week 6 van 2021 was de wekelijkse sterfte hoger dan verwacht. In week 7 was de sterfte ongeveer gelijk aan de verwachte sterfte voor deze periode en in de weken erna lag de sterfte eronder. In week 13 was de sterfte weer ongeveer gelijk aan de verwachte sterfte, de schatting in week 14 ligt er net boven. Het RIVM registreerde 112 overleden COVID-19-patiënten in week 14 (stand 13 april).",
+      "title": "Oversterfte bij mensen tot 80 jaar in week 15",
+      "published_text": "Publicatiedatum: vrijdag 23 april",
+      "message": "In week 15 (12 tot en met 18 april 2021) overleden naar schatting iets minder dan 3.200 mensen. Dat zijn bijna 200 sterfgevallen meer dan verwacht voor deze periode, en iets meer sterfgevallen dan in de week ervoor (3.132). Er overleden vooral meer 65- tot 80-jarigen dan verwacht, en ook bij mensen jonger dan 65 jaar was er oversterfte. De sterfte onder Wlz-zorggebruikers lag opnieuw onder het verwachte niveau. Dat meldt het CBS op basis van de voorlopige sterftecijfers per week. Van week 39 van 2020 tot en met week 6 van 2021 was de wekelijkse sterfte hoger dan verwacht. Tot aan week 3 was er oversterfte. In de weken erna was er geen oversterfte en schommelde de sterfte rond de verwachte aantallen voor die periode. De schatting in week 15 ligt bijna 200 sterfgevallen boven de verwachting, maar nog net binnen het interval van gewoonlijke fluctuaties (en is daarom geen oversterfte). Het RIVM registreerde 126 overleden COVID-19-patiënten in week 15 (stand 20 april).",
       "link": {
-        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/15/sterfte-in-week-14-hoger-dan-verwacht",
+        "href": "https://www.cbs.nl/nl-nl/nieuws/2021/16/oversterfte-bij-mensen-tot-80-jaar-in-week-15",
         "text": "Lees het volledige nieuwsbericht op de website van het CBS"
       }
     },
@@ -2025,8 +2051,8 @@
       "support": {
         "full_sentence": "Deze kaart toont dat {{first}} en {{last}}.",
         "full_sentence_single": "Deze kaart toont dat {{first}}.",
-        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'",
-        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent draagvlak {{verb}} voor de maatregel '{{restriction}}'"
+        "sentence": "{{count}} {{area}} tussen de {{rangeLow}} en {{rangeHigh}} procent steun {{verb}} voor de maatregel '{{restriction}}'",
+        "last_sentence": "{{count}} {{area}} meer dan {{rangeLow}} procent steun {{verb}} voor de maatregel '{{restriction}}'"
       }
     },
     "a11y": {
@@ -2468,7 +2494,7 @@
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op {{last_update}} gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).",
-      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land vanaf 28 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2843,7 +2869,9 @@
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2892,7 +2920,11 @@
       "labels": {
         "warnings": "Aantal waarschuwingen"
       }
-    }
+    },
+    "sidebar": {
+      "titel": "CoronaMelder-app"
+    },
+    "kpi_titel": "Aantal mensen dat anderen waarschuwde via CoronaMelder-app"
   },
   "choropleth_tooltip": {
     "patients": {
@@ -2970,6 +3002,33 @@
       "ziekenhuisopnames": "Ziekenhuisopnames (incl. IC)",
       "grenswaarde_meer": "Grenswaarde is overschreden",
       "grenswaarde_minder": "Waarde is minder dan {{days}} dagen onder de grenswaarde"
+    }
+  },
+  "hospital_admissions_per_age_group": {
+    "chart_title": "Ziekenhuisopnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+  },
+  "ic_admissions_per_age_group": {
+    "chart_title": "Intensive care-opnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+  },
+  "admissions_per_age_group_chart": {
+    "legend": {
+      "admissions_age_0_19_per_million": "0-19",
+      "admissions_age_20_29_per_million": "20-29",
+      "admissions_age_30_39_per_million": "30-39",
+      "admissions_age_40_49_per_million": "40-49",
+      "admissions_age_50_59_per_million": "50-59",
+      "admissions_age_60_69_per_million": "60-69",
+      "admissions_age_70_79_per_million": "70-79",
+      "admissions_age_80_89_per_million": "80-89",
+      "admissions_age_90_plus_per_million": "90+",
+      "admissions_overall_per_million": "Alle leeftijden"
+    },
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "inaccurate": "Niet compleet"
     }
   }
 }

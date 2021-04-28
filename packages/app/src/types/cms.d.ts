@@ -171,3 +171,20 @@ export interface LokalizeText {
   should_display_empty: boolean;
   is_newly_added: boolean;
 }
+
+export type DecoratedLink = {
+  title: string;
+  category: string;
+  href: string;
+  cover: ImageBlock;
+};
+
+export type VaccinationPageQuery = {
+  pageInfo: TitleDescriptionBlock;
+  pageLinks: DecoratedLink[];
+  linksTitle: string;
+  title: string;
+  description: RichContentBlock[];
+  milestones: Milestones[];
+  expectedMilestones: ExpectedMilestones[];
+};

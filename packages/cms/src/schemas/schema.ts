@@ -35,6 +35,7 @@ import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
+import decoratedLink from './objects/decorated-link';
 import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
 import milestone from './objects/milestone';
@@ -89,6 +90,7 @@ export default createSchema({
     milestone,
     faqQuestion,
     titleDescriptionBlock,
+    decoratedLink,
 
     /* LOCALE HELPERS */
     localeString,

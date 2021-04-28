@@ -25,6 +25,7 @@ import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -204,7 +205,14 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label: text.linechart_legend_titel_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'admissions_on_date_of_admission',
                     label: text.linechart_legend_titel,
                     color: colors.data.primary,
@@ -224,6 +232,22 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     },
                   ],
                 }}
+              />
+            )}
+          </ChartTile>
+
+          <ChartTile
+            title={siteText.hospital_admissions_per_age_group.chart_title}
+            description={
+              siteText.hospital_admissions_per_age_group.chart_description
+            }
+            timeframeOptions={['all', '5weeks']}
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <AdmissionsPerAgeGroup
+                values={data.hospital_nice_per_age_group.values}
+                timeframe={timeframe}
               />
             )}
           </ChartTile>

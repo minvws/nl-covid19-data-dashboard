@@ -5,6 +5,7 @@ import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Phone from '~/assets/phone.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -32,7 +33,9 @@ export const nlPageMetricNames = [
   'reproduction',
   'deceased_rivm',
   'hospital_nice',
+  'hospital_nice_per_age_group',
   'intensive_care_nice',
+  'intensive_care_nice_per_age_group',
   'nursing_home',
   'disability_care',
   'elderly_at_home',
@@ -344,6 +347,18 @@ export function NationalLayout(props: NationalLayoutProps) {
                     scope="nl"
                     metricName="behavior"
                     localeTextKey="gedrag_common"
+                  />
+                </MetricMenuItemLink>
+                <MetricMenuItemLink
+                  href="/landelijk/coronamelder"
+                  icon={<Phone />}
+                  title={siteText.corona_melder_app.sidebar.titel}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="behavior"
+                    localeTextKey="corona_melder_app"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

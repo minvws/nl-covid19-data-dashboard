@@ -33,8 +33,7 @@ import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { TileList } from '~/components/tile-list';
-import { Heading, Text } from '~/components/typography';
-import { VisuallyHidden } from '~/components/visually-hidden';
+import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -122,20 +121,6 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
-        {/**
-         * Since now the sections have a H2 heading I think we need to include
-         * a hidden H1 here.
-         *
-         * @TODO figure out what the title should be
-         */}
-        <VisuallyHidden>
-          <Heading level={1}>
-            {replaceComponentsInText(text.title, {
-              safetyRegionName: props.safetyRegionName,
-            })}
-          </Heading>
-        </VisuallyHidden>
-
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -147,6 +132,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                   safetyRegionName: props.safetyRegionName,
                 }
               )}
+              headingLevel={1}
               link={{
                 text: replaceVariablesInText(
                   text.secties.actuele_situatie.link.text,

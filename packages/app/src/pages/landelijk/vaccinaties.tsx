@@ -10,10 +10,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import {
-  MilestonesView,
-  MilestoneViewProps,
-} from '~/domain/vaccine/milestones-view';
+import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
@@ -22,7 +19,7 @@ import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
+import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -33,6 +30,7 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 const scaledVaccineIcon = (
@@ -60,14 +58,14 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_ggd_ghor'
   ),
   createGetContent<{
-    milestones: MilestoneViewProps;
+    page: VaccinationPageQuery;
     highlight: {
       articles?: ArticleSummary[];
     };
   }>((_context) => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
-      "milestones": ${getVaccineMilestonesQuery()},
+      "page": ${getVaccinePageQuery()},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
     }`;
   })
@@ -82,7 +80,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const text = siteText.vaccinaties;
 
-  const { milestones } = content;
+  const { page } = content;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -94,7 +92,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <VaccinePageIntroduction data={data} text={text} />
+          <VaccinePageIntroduction
+            data={data}
+            pageInfo={page.pageInfo}
+            pageLinks={page.pageLinks}
+            pageLinksTitle={page.linksTitle}
+          />
 
           <ArticleStrip articles={content.highlight.articles} />
 
@@ -103,10 +106,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineDeliveryAndAdministrationsAreaChart data={data} />
 
           <MilestonesView
-            title={milestones.title}
-            description={milestones.description}
-            milestones={milestones.milestones}
-            expectedMilestones={milestones.expectedMilestones}
+            title={page.title}
+            description={page.description}
+            milestones={page.milestones}
+            expectedMilestones={page.expectedMilestones}
           />
 
           <ContentHeader
