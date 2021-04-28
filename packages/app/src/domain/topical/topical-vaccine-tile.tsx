@@ -1,13 +1,12 @@
 import { National } from '@corona-dashboard/common';
 import Vaccinaties from '~/assets/vaccinaties.svg';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
-import { Box } from '~/components-styled/base';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { Heading, Text } from '~/components-styled/typography';
+import { ArrowIconRight } from '~/components/arrow-icon';
+import { Box } from '~/components/base';
+import { LinkWithIcon } from '~/components/link-with-icon';
+import { Heading, Text } from '~/components/typography';
 import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-
 interface TopicalVaccineProps {
   data: National;
 }
@@ -66,7 +65,8 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
       </Text>
 
       <VaccineAdministrationsOverTimeChart
-        values={data.vaccine_administered_total.values}
+        title={text.title}
+        values={data.values}
       />
     </Box>
   );

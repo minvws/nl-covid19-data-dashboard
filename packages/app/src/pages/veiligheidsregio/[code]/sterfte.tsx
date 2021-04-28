@@ -1,17 +1,17 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
+import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
-import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -21,17 +21,17 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -42,9 +42,13 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    data,
+    selectedVrData: data,
     safetyRegionName,
-    data: { deceased_cbs: dataCbs, deceased_rivm: dataRivm, difference },
+    selectedVrData: {
+      deceased_cbs: dataCbs,
+      deceased_rivm: dataRivm,
+      difference,
+    },
     content,
     lastGenerated,
   } = props;
@@ -52,7 +56,10 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_sterfte;
 
-  const dataRivmUnderReportedRange = getTrailingDateRange(dataRivm.values, 4);
+  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
+    dataRivm.values,
+    4
+  );
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -124,43 +131,57 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={text.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               text.section_deceased_rivm.line_chart_covid_daily_description
             }
-            values={dataRivm.values}
-            linesConfig={[
-              {
-                metricProperty: 'covid_daily',
-              },
-            ]}
             metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
-            componentCallback={addBackgroundRectangleCallback(
-              dataRivmUnderReportedRange,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataRivm.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'covid_daily_moving_average',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label_moving_average,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'covid_daily',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: dataRivmUnderReportedDateStart,
+                      end: Infinity,
+                      label:
+                        text.section_deceased_rivm
+                          .line_chart_covid_daily_legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
             )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label:
-                  text.section_deceased_rivm
-                    .line_chart_covid_daily_legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label:
-                  text.section_deceased_rivm
-                    .line_chart_covid_daily_legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTile>
 
           <ContentHeader
             title={siteText.section_sterftemonitor_vr.title}

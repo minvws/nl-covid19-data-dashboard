@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { DataValue } from './use-municipality-data';
 

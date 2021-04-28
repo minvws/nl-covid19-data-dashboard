@@ -1,19 +1,16 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import {
-  ArticleSummary,
-  ArticleTeaser,
-} from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 
 type ArticleListProps = {
-  articleSummaries: ArticleSummary[];
+  articleSummaries?: ArticleSummary[];
   hideLink?: boolean;
 };
 
 export function ArticleList({ articleSummaries }: ArticleListProps) {
-  if (articleSummaries.length === 0) {
+  if (!articleSummaries || articleSummaries.length === 0) {
     return null;
   }
 

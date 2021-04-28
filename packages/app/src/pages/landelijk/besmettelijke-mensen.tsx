@@ -1,29 +1,32 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TileList } from '~/components-styled/tile-list';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { ChartTile } from '~/components/chart-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectNlPageMetricData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData
+  selectNlPageMetricData()
 );
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated } = props;
   const { siteText } = useIntl();
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
@@ -76,7 +79,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
@@ -106,7 +109,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

@@ -31,6 +31,10 @@ export default {
           },
         ],
       },
+      {
+        type: 'collapsible',
+        title: 'Inklapbaar blok',
+      },
     ],
   })),
 };

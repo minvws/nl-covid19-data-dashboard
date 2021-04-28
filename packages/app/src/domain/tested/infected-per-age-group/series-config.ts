@@ -1,14 +1,6 @@
-import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
 
-export const SERIES_CONFIG: {
-  metricProperty: keyof Omit<
-    NlTestedPerAgeGroupValue,
-    'date_unix' | 'date_of_insertion_unix'
-  >;
-  color: string;
-  style?: 'dashed' | 'solid';
-}[] = [
+export const BASE_SERIES_CONFIG = [
   {
     metricProperty: 'infected_age_0_9_per_100k',
     color: colors.data.multiseries.cyan,
@@ -54,4 +46,4 @@ export const SERIES_CONFIG: {
     color: colors.gray,
     style: 'dashed',
   },
-];
+] as const;

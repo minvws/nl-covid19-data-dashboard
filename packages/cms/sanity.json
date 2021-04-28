@@ -17,7 +17,9 @@
     "tabs",
     "./src/plugins/translate",
     "@sanity/dashboard",
-    "dashboard-widget-document-list"
+    "dashboard-widget-document-list",
+    "media",
+    "./src/plugins/sanity-deploy-button"
   ],
   "env": {
     "development": {
@@ -50,7 +52,7 @@
     },
     {
       "implements": "part:@sanity/dashboard/config",
-      "path": "./src/dashboard-config.js"
+      "path": "./src/dashboard-config"
     }
   ]
 }

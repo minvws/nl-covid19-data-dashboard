@@ -1,22 +1,19 @@
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { BarChart } from '~/components-styled/bar-chart/bar-chart';
-import {
-  ChartTile,
-  ChartTileWithTimeframe,
-} from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { SewerChart } from '~/components/sewer-chart';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { SewerChart } from '~/components-styled/sewer-chart';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
-import { WarningTile } from '~/components-styled/warning-tile';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -25,18 +22,16 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useSewerWaterBarChartData } from '~/utils/sewer-water/safety-region-sewer-water.util';
-import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -46,14 +41,16 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, safetyRegionName, content, lastGenerated } = props;
+  const {
+    selectedVrData: data,
+    safetyRegionName,
+    content,
+    lastGenerated,
+  } = props;
 
   const { siteText } = useIntl();
 
   const text = siteText.veiligheidsregio_rioolwater_metingen;
-  const graphDescriptions = siteText.accessibility.grafieken;
-
-  const barChartData = useSewerWaterBarChartData(data);
 
   const sewerAverages = data.sewer;
 
@@ -151,9 +148,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             title={text.linechart_titel}
-            ariaDescription={graphDescriptions.rioolwater_meetwaarde}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
           >
@@ -174,31 +170,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
-
-          {barChartData && (
-            <ChartTile
-              title={replaceVariablesInText(text.bar_chart_title, {
-                safetyRegion: safetyRegionName,
-              })}
-              ariaDescription={graphDescriptions.rioolwater_meetwaarde}
-              metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <BarChart
-                values={barChartData.values}
-                xAxisTitle={text.bar_chart_axis_title}
-                accessibilityDescription={
-                  text.bar_chart_accessibility_description
-                }
-              />
-            </ChartTile>
-          )}
+          </ChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

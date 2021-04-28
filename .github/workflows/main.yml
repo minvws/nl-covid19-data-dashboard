@@ -1,14 +1,6 @@
 name: Main
 
-on:
-  push:
-    branches:
-      - master
-      - develop
-  pull_request:
-    branches:
-      - master
-      - develop
+on: pull_request
 
 jobs:
   init:
@@ -50,7 +42,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: compile
+    needs: init
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
