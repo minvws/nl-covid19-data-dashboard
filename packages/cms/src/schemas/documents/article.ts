@@ -25,8 +25,15 @@ export default {
   preview: {
     select: {
       title: 'title.nl',
-      subtitle: 'publicationDate',
+      date: 'publicationDate',
       media: 'cover',
+    },
+    prepare(selection: { title: string; date: string }) {
+      const { title, date } = selection;
+      return {
+        title,
+        subtitle: new Date(date).toLocaleString(),
+      };
     },
   },
 };
