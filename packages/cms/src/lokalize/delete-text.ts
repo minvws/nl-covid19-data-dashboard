@@ -1,15 +1,15 @@
 /**
  * Delete one of multiple texts from the Sanity "Lokalize" dataset.
  */
-
 import { assert } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import prompts from 'prompts';
-import { client } from '../client';
+import { getClient } from '../client';
 import { appendTextMutation } from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
+  const client = getClient('development');
   /**
    * We are assuming you know the subject of the text you want to delete. Then
    * we don't have to fetch all texts in advance.

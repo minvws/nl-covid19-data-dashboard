@@ -1,13 +1,16 @@
-import Queue from 'p-queue';
-import { client } from '../client';
+import { getClient } from '../client';
 
-client.fetch(`*[_type == 'lokalizeText']`).then((result: any[]) => {
-  const transaction = client.transaction();
-  result.forEach((document) => transaction.delete(document._id));
-  transaction.commit().catch((err) => exit('Failed to delete documents', err));
-});
+(async function run() {
+  const client = getClient();
 
-function exit(...args: unknown[]) {
-  console.error(...args);
-  process.exit(1);
-}
+  client.fetch(`*[_type == 'lokalizeText']`).then((result: any[]) => {
+    const transaction = client.transaction();
+
+    result.forEach((document) => transaction.delete(document._id));
+
+    transaction.commit().catch((err) => {
+      console.error(`Failed to delete documents: ${err.message}`);
+      process.exit(1);
+    });
+  });
+})();

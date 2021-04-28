@@ -1,14 +1,15 @@
 /**
  * Add one or multiple texts to the Sanity "Lokalize" dataset.
  */
-
 import { set } from 'lodash';
 import prompts from 'prompts';
-import { client } from '../client';
+import { getClient } from '../client';
 import { appendTextMutation } from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
+  const client = getClient('development');
+
   /**
    * @TODO We could cache the subjects in a temp location on disk and update
    * them every time this CLI is run. This way we can avoid having to wait for

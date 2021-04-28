@@ -17,42 +17,19 @@
  * of what texts got created a part of the current sprint, and add these texts
  * to production so that they can be prepared and released.
  *
- * After each release the log will be cleared (to avoid edge cases with actions
- * cancelling each other out). Also after each release we could
- * clean up the production set to making a diff on the keys from development to
+ * After each release the log will be cleared (to avoid possible edge cases with
+ * actions on the same keys spanning multiple releases
+ * cancelling each other out). After each release we can
+ * clean up the production set by making a diff with all the keys from development to
  * see which ones can be removed from production. These two tasks could be
  * bundled into one script; sync deletions and clear mutation history.
  */
 
-import sanityClient from '@sanity/client';
-import dotenv from 'dotenv';
-import path from 'path';
-// import sanityConfig from '../../sanity.json';
+import { getClient } from '../client';
 import { collapseTextMutations, readTextMutations } from './logic';
 
-/**
- * @TODO load dotenv elsewhere maybe and take dataset from env
- */
-dotenv.config({
-  path: path.resolve(process.cwd(), '.env.local'),
-});
-
-const sharedConfig = {
-  apiVersion: '2021-03-25',
-  projectId: process.env.SANITY_STUDIO_API_PROJECT_ID,
-  token: process.env.SANITY_STUDIO_TOKEN,
-  useCdn: false,
-};
-
-const devClient = sanityClient({
-  ...sharedConfig,
-  dataset: 'development',
-});
-
-const prdClient = sanityClient({
-  ...sharedConfig,
-  dataset: 'production',
-});
+const devClient = getClient('development');
+const prdClient = getClient('production');
 
 const TWO_WEEKS_IN_MS = 2 * 7 * 24 * 60 * 60 * 1000;
 const TWO_WEEKS_AGO = new Date(Date.now() - TWO_WEEKS_IN_MS).toISOString();

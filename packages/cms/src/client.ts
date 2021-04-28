@@ -1,5 +1,5 @@
 import { assert } from '@corona-dashboard/common';
-import sanityClient, { ClientConfig } from '@sanity/client';
+import sanityClient, { ClientConfig, SanityClient } from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -32,7 +32,10 @@ const clientConfig: ClientConfig = {
   dataset: process.env.SANITY_STUDIO_API_DATASET,
   token: process.env.SANITY_STUDIO_TOKEN,
   useCdn: false,
-  useProjectHostname: true,
 };
-console.log('clientConfig', clientConfig);
-export const client = sanityClient(clientConfig);
+
+export function getClient(dataset?: string) {
+  return dataset
+    ? sanityClient({ ...clientConfig, dataset })
+    : sanityClient(clientConfig);
+}
