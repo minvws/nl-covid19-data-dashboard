@@ -43,10 +43,7 @@ export function readTextMutations() {
     const stream = parse({ headers: true })
       .on('error', (err) => reject(err))
       .on('data', (x) => mutations.push(x))
-      .on('end', (rowCount: number) => {
-        console.log(`Parsed ${rowCount} rows`);
-        resolve(mutations);
-      });
+      .on('end', () => resolve(mutations));
 
     stream.write(fs.readFileSync(MUTATIONS_LOG_FILE));
     stream.end();
@@ -55,12 +52,11 @@ export function readTextMutations() {
 
 /**
  * This function collapses the mutations so that an add + delete (or vice-versa)
- * doesn't result in any sync action. It will return the action to take together
- * with the last mutation timestamp for that key. This way we can choose to
- * filter out "delete" actions or postpone any delete actions for x days, making
- * it possible to delete items from the production dataset without risking
- * deleting keys for items that might still be in use by the time the sync is
- * ran.
+ * doesn't result in any sync action. It will return the action together
+ * with the last mutation timestamp for that key. Deletions are filtered out so
+ * that we can run sync-additions half-way the sprint to pass keys to the
+ * communication team to prepare for release. Deletions are handled differently
+ * via the sync-deletions script.
  */
 export function collapseTextMutations(mutations: TextMutation[]) {
   const weightByAction = {
