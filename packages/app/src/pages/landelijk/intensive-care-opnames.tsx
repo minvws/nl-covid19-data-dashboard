@@ -149,7 +149,14 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label: text.linechart_legend_trend_label_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'admissions_on_date_of_admission',
                     label: text.linechart_legend_trend_label,
                     color: colors.data.primary,
