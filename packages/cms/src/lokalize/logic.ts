@@ -4,12 +4,23 @@ import { EOL } from 'os';
 import { parse } from '@fast-csv/parse';
 import { set } from 'lodash';
 
-export const MUTATIONS_LOG_FILE = path.join(__dirname, 'key-mutations.csv');
+const MUTATIONS_LOG_FILE = path.join(__dirname, 'key-mutations.csv');
+const HEADER = `timestamp,action,key${EOL}`;
 
 interface TextMutation {
   timestamp: string;
   action: 'add' | 'delete';
   key: string;
+}
+
+export function clearLogFile() {
+  try {
+    fs.writeFileSync(MUTATIONS_LOG_FILE, HEADER);
+  } catch (err) {
+    console.error(
+      `Failed to clear mutations log file ${MUTATIONS_LOG_FILE}: ${err.message}`
+    );
+  }
 }
 
 export function appendTextMutation(action: 'add' | 'delete', key: string) {

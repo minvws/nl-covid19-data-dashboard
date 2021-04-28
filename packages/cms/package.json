@@ -16,7 +16,8 @@
     "lokalize:export": "ts-node src/lokalize/export.ts",
     "lokalize:add": "ts-node src/lokalize/add-text.ts",
     "lokalize:delete": "ts-node src/lokalize/delete-text.ts",
-    "lokalize:sync": "ts-node src/lokalize/apply-key-mutations.ts",
+    "lokalize:inject-additions": "ts-node src/lokalize/inject-additions.ts",
+    "lokalize:sync-deletions": "ts-node src/lokalize/sync-deletions.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
