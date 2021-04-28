@@ -6,7 +6,7 @@ export interface LokalizeText {
   key: string;
   should_display_empty: boolean;
   is_newly_added: boolean;
-  publish_counter: number;
+  publish_count: number;
   text: {
     _type: 'localeText';
     nl: string;

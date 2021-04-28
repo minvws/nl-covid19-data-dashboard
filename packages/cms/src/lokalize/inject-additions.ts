@@ -56,7 +56,7 @@ const TWO_WEEKS_AGO = new Date(Date.now() - TWO_WEEKS_IN_MS).toISOString();
     const document = allDevTexts.find((x) => x.key === addition.key);
 
     if (document) {
-      transaction.createOrReplace({
+      const documentToInject: LokalizeText = {
         ...document,
         /**
          * At this point we can not assume that this flag is still set like it
@@ -66,7 +66,14 @@ const TWO_WEEKS_AGO = new Date(Date.now() - TWO_WEEKS_IN_MS).toISOString();
          * sure they show up as "new" there.
          */
         is_newly_added: true,
-      });
+        /**
+         * To know how often communication changes these texts we need to clear
+         * the counter from any publish actions we did ourselves in development.
+         */
+        publish_count: 0,
+      };
+
+      transaction.createOrReplace(documentToInject);
       successCount++;
     } else {
       /**
