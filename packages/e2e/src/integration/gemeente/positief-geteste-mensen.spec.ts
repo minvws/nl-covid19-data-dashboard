@@ -9,16 +9,12 @@ context('Gemeente - Positief geteste mensen', () => {
   it('Should show the correct KPI values', function (this: MunicipalContext) {
     const lastValue = this.municipalData.tested_overall.last_value;
 
-    console.log(cy.formatters.formatNumber(100));
-
     const kpiTestInfo = {
       infected_per_100k: cy.formatters.formatNumber(
         lastValue.infected_per_100k
       ),
       infected: cy.formatters.formatNumber(lastValue.infected),
     };
-
-    console.dir(kpiTestInfo);
 
     cy.checkKpiValues(kpiTestInfo);
   });
