@@ -43,7 +43,6 @@
     "react-icons": "^4.2.0",
     "react-world-flags": "^1.4.0",
     "sanity-mobile-preview": "^1.0.7",
-    "sanity-plugin-computed-field": "^1.0.1",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.11",
     "sanity-plugin-media": "^1.2.2",
     "sanity-plugin-tabs": "^2.0.1",

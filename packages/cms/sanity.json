@@ -17,7 +17,6 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/production-preview",
-    "computed-field",
     "dashboard-widget-document-list",
     "media",
     "tabs"
