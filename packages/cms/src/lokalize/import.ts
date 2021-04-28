@@ -70,11 +70,9 @@ import { getClient } from '../client';
           return;
         }
 
-        const key = `${subject}.${path}`;
-
         return {
           _type: 'lokalizeText',
-          key,
+          key: `${subject}.${path}`,
           subject,
           path: path,
           should_display_empty: !value,
