@@ -25,6 +25,7 @@ export function Title(props: TitleProps) {
       flexDirection="row"
       flexWrap="nowrap"
       alignItems="center"
+      m={0}
     >
       {icon && <Icon>{icon}</Icon>}
 
