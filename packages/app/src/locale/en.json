@@ -1596,7 +1596,6 @@
     "line_chart_legend_trend_label": "Number of deceased residents",
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "tooltip_labels": {
-      "newly_infected_people_moving_average": "Average number over the past 7 days",
       "deceased_daily_moving_average": "Average number over the past 7 days"
     }
   },
