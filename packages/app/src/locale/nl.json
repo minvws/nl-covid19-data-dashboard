@@ -2950,6 +2950,33 @@
       "inaccurate": "Niet compleet"
     }
   },
+  "hospital_admissions_per_age_group": {
+    "chart_title": "Ziekenhuisopnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+  },
+  "ic_admissions_per_age_group": {
+    "chart_title": "Intensive care-opnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+  },
+  "admissions_per_age_group_chart": {
+    "legend": {
+      "admissions_age_0_19_per_million": "0-19",
+      "admissions_age_20_29_per_million": "20-29",
+      "admissions_age_30_39_per_million": "30-39",
+      "admissions_age_40_49_per_million": "40-49",
+      "admissions_age_50_59_per_million": "50-59",
+      "admissions_age_60_69_per_million": "60-69",
+      "admissions_age_70_79_per_million": "70-79",
+      "admissions_age_80_89_per_million": "80-89",
+      "admissions_age_90_plus_per_million": "90+",
+      "admissions_overall_per_million": "Alle leeftijden"
+    },
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "inaccurate": "Niet compleet"
+    }
+  },
   "g_number": {
     "bar_chart": {
       "title": "Ontwikkeling aantal positieve tests (Groeigetal)",
