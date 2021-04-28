@@ -23,7 +23,7 @@ export interface GmDeceasedRivm {
 }
 export interface GmDeceasedRivmValue {
   covid_daily: number;
-  covid_daily_moving_average?: number | null;
+  covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -54,7 +54,7 @@ export interface MunicipalHospitalNice {
 export interface MunicipalHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -278,7 +278,7 @@ export interface NationalIntensiveCareNice {
 }
 export interface NationalIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -362,7 +362,7 @@ export interface NationalHospitalNice {
 }
 export interface NationalHospitalNiceValue {
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -453,9 +453,9 @@ export interface NationalDisabilityCare {
 }
 export interface NationalDisabilityCareValue {
   newly_infected_people: number;
-  newly_infected_people_moving_average?: number | null;
+  newly_infected_people_moving_average: number | null;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -522,7 +522,7 @@ export interface NationalDeceasedRivm {
 }
 export interface NationalDeceasedRivmValue {
   covid_daily: number;
-  covid_daily_moving_average?: number | null;
+  covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -557,10 +557,10 @@ export interface NationalElderlyAtHome {
 }
 export interface NationalElderlyAtHomeValue {
   positive_tested_daily: number;
-  positive_tested_daily_moving_average?: number | null;
+  positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -888,7 +888,7 @@ export interface RegionalHospitalNice {
 }
 export interface RegionalHospitalNiceValue {
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -943,12 +943,12 @@ export interface RegionalDisabilityCare {
 }
 export interface RegionalDisabilityCareValue {
   newly_infected_people: number;
-  newly_infected_people_moving_average?: number | null;
+  newly_infected_people_moving_average: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -1002,7 +1002,7 @@ export interface RegionalDeceasedRivm {
 }
 export interface RegionalDeceasedRivmValue {
   covid_daily: number;
-  covid_daily_moving_average?: number | null;
+  covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1027,10 +1027,10 @@ export interface RegionalElderlyAtHome {
 }
 export interface RegionalElderlyAtHomeValue {
   positive_tested_daily: number;
-  positive_tested_daily_moving_average?: number | null;
+  positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
