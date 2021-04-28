@@ -128,7 +128,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                   {
-                    type: 'area',
+                    type: 'bar',
                     metricProperty: 'newly_infected_people',
                     label: positiveTestPeopleText.line_chart_legend_trend_label,
                     color: colors.data.primary,
