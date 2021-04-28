@@ -5,8 +5,7 @@
 import { useState, useEffect } from 'react';
 import { useDocumentOperation } from '@sanity/react-hooks';
 import { DocumentActionProps } from './types';
-import { getClient } from '../../client';
-import { LokalizeText } from '../../lokalize/types';
+import { LokalizeText } from '../lokalize/types';
 import { assert } from '@corona-dashboard/common';
 
 export interface Operation {
@@ -23,7 +22,7 @@ export interface Operation {
  * In addition it will increment a counter so that we can track what documents
  * get publish most frequently.
  */
-export default function PublishOrAcceptAction(props: DocumentActionProps) {
+export function PublishOrAcceptAction(props: DocumentActionProps) {
   const { patch, publish } = useDocumentOperation(props.id, props.type) as {
     patch: Operation;
     publish: Operation;

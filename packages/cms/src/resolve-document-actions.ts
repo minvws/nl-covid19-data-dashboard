@@ -5,8 +5,7 @@ import defaultResolve, {
   PublishAction,
   UnpublishAction,
 } from 'part:@sanity/base/document-actions';
-import { ApproveAction } from './schemas/actions/approve-action';
-import { DocumentActionProps } from './schemas/actions/types';
+import { PublishOrAcceptAction, DocumentActionProps } from './actions';
 import { onDocument$ } from './hooks/helper/document-subject';
 
 const actionsByDocumentType = {
@@ -23,7 +22,7 @@ const actionsByDocumentType = {
   cijferVerantwoording: [DiscardChangesAction, PublishAction, UnpublishAction],
   toegankelijkheid: [DiscardChangesAction, PublishAction, UnpublishAction],
   lokalizeText: [
-    ApproveAction,
+    PublishOrAcceptAction,
     DiscardChangesAction,
     PublishAction,
     UnpublishAction,
