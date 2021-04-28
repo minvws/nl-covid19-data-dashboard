@@ -26,7 +26,7 @@
     "validate-last-values": "ts-node src/scripts/validate-last-values.ts",
     "validate-features": "ts-node src/scripts/validate-features.ts",
     "generate-typescript": "ts-node src/scripts/generate-data-types.ts",
-    "generate-sitemap": "ts-node src/scripts/generate-sitemap.ts"
+    "generate-sitemap": "echo 'generate-sitemap is deprecated' && exit 1"
   },
   "devDependencies": {
     "@types/meow": "^5.0.0"
