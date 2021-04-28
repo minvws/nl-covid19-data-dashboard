@@ -6,8 +6,10 @@ import {
   Regions,
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
+import pickBy from 'lodash/pickBy';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
+import { isDefined } from 'ts-is-present';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import {
@@ -90,9 +92,9 @@ export function selectNlData<T extends keyof National = never>(
   return () => {
     const { data } = getNlData();
 
-    const selectedNlData = metrics.reduce(
-      (acc, p) => set(acc, p, data[p] ?? null),
-      {} as Pick<National, T>
+    const selectedNlData = pickBy(
+      metrics.reduce((acc, p) => set(acc, p, data[p]), {} as Pick<National, T>),
+      isDefined
     );
 
     return { selectedNlData };
@@ -130,9 +132,12 @@ export function selectVrData<T extends keyof Regionaal = never>(
   return (context: GetStaticPropsContext) => {
     const vrData = getVrData(context);
 
-    const selectedVrData = metrics.reduce(
-      (acc, p) => set(acc, p, vrData.data[p] ?? null),
-      {} as Pick<Regionaal, T>
+    const selectedVrData = pickBy(
+      metrics.reduce(
+        (acc, p) => set(acc, p, vrData.data[p]),
+        {} as Pick<Regionaal, T>
+      ),
+      isDefined
     );
 
     return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
@@ -180,9 +185,12 @@ export function selectGmData<T extends keyof Municipal = never>(
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const selectedGmData = metrics.reduce(
-      (acc, p) => set(acc, p, gmData.data[p] ?? null),
-      {} as Pick<Regionaal, T>
+    const selectedGmData = pickBy(
+      metrics.reduce(
+        (acc, p) => set(acc, p, gmData.data[p]),
+        {} as Pick<Regionaal, T>
+      ),
+      isDefined
     );
 
     return { selectedGmData, municipalityName: gmData.municipalityName };
