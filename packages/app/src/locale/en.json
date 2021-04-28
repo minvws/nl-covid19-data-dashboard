@@ -110,6 +110,7 @@
     },
     "kpi_titel": "Number of ICU admissions reported on one day",
     "linechart_legend_trend_label": "ICU admissions",
+    "linechart_legend_trend_label_moving_average": "ICU admissions",
     "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "linechart_description": "This graph shows ICU admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for ICU admissions; data for the most recent days is therefore incomplete."
   },
@@ -215,6 +216,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
     "linechart_legend_titel": "Hospital admissions",
+    "linechart_legend_titel_moving_average": "Hospital admissions",
     "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "positief_geteste_personen": {
@@ -782,6 +784,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported daily.",
     "linechart_legend_titel": "Hospital admissions",
+    "linechart_legend_titel_moving_average": "Hospital admissions",
     "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "veiligheidsregio_positief_geteste_personen": {
@@ -802,13 +805,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -917,6 +914,7 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
     "linechart_legend_titel": "Hospital admissions",
+    "linechart_legend_titel_moving_average": "Hospital admissions",
     "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
   },
   "gemeente_positief_geteste_personen": {
@@ -1846,8 +1844,10 @@
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients"
+      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Deceased patients"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1880,8 +1880,10 @@
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients"
+      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Deceased patients"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -2199,11 +2201,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2328,11 +2326,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2863,7 +2857,9 @@
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
       "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this municipality reported dead, in the selected period.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
@@ -2973,6 +2969,33 @@
     "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
     "tooltip_labels": {
       "inaccurate": "Incomplete"
+    }
+  },
+  "hospital_admissions_per_age_group": {
+    "chart_title": "Ziekenhuisopnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+  },
+  "ic_admissions_per_age_group": {
+    "chart_title": "Intensive care-opnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+  },
+  "admissions_per_age_group_chart": {
+    "legend": {
+      "admissions_age_0_19_per_million": "0-19",
+      "admissions_age_20_29_per_million": "20-29",
+      "admissions_age_30_39_per_million": "30-39",
+      "admissions_age_40_49_per_million": "40-49",
+      "admissions_age_50_59_per_million": "50-59",
+      "admissions_age_60_69_per_million": "60-69",
+      "admissions_age_70_79_per_million": "70-79",
+      "admissions_age_80_89_per_million": "80-89",
+      "admissions_age_90_plus_per_million": "90+",
+      "admissions_overall_per_million": "Alle leeftijden"
+    },
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "inaccurate": "Niet compleet"
     }
   },
   "g_number": {
