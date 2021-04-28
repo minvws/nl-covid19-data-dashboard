@@ -1,4 +1,3 @@
-import { Municipal, Regionaal } from '@corona-dashboard/common';
 import { Point } from '@visx/point';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { voronoi } from '@visx/voronoi';
@@ -8,6 +7,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { SelectProps } from '~/components/select';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
+import { SewerChartData } from './sewer-chart';
 
 export interface Dimensions {
   bounds: Record<'width' | 'height', number>;
@@ -25,7 +25,7 @@ export type SewerChartValue = {
 );
 
 export function useSewerChartValues(
-  data: Regionaal | Municipal,
+  data: SewerChartData,
   timeframe: TimeframeOption
 ) {
   const today = useCurrentDate();

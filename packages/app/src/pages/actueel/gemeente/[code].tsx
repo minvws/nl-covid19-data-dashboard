@@ -58,8 +58,8 @@ import {
 import {
   createGetChoroplethData,
   createGetContent,
-  getGmData,
   getLastGeneratedDate,
+  selectGmData,
 } from '~/static-props/get-data';
 import { assert } from '~/utils/assert';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
@@ -71,7 +71,13 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getGmData,
+  selectGmData(
+    'tested_overall',
+    'hospital_nice',
+    'sewer',
+    'tested_overall',
+    'difference'
+  ),
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -87,7 +93,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { municipalityName, choropleth, data, content, lastGenerated } = props;
+  const {
+    municipalityName,
+    choropleth,
+    selectedGmData: data,
+    content,
+    lastGenerated,
+  } = props;
 
   const router = useRouter();
   const reverseRouter = useReverseRouter();

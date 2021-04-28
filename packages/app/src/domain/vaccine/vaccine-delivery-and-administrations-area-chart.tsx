@@ -19,7 +19,13 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export function VaccineDeliveryAndAdministrationsAreaChart({
   data,
 }: {
-  data: National;
+  data: Pick<
+    National,
+    | 'vaccine_administered'
+    | 'vaccine_delivery'
+    | 'vaccine_delivery_estimate'
+    | 'vaccine_administered_estimate'
+  >;
 }) {
   const { siteText } = useIntl();
 
