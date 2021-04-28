@@ -70,6 +70,11 @@ const prdClient = getClient('production');
         publish_count: 0,
       };
 
+      /**
+       * Using createIfNotExist we can safely run the script multiple times and
+       * we will never overwrite what has already been edited in the production
+       * set.
+       */
       transaction.createIfNotExists(documentToInject);
       successCount++;
     } else {
