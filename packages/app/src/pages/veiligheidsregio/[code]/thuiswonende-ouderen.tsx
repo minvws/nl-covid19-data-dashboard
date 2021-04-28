@@ -140,8 +140,11 @@ const ElderlyAtHomeRegionalPage = (
                     type: 'line',
                     metricProperty: 'positive_tested_daily_moving_average',
                     label:
-                      text.section_positive_tested.tooltip_labels
-                        .positive_tested_daily_moving_average,
+                      text.section_positive_tested
+                        .line_chart_positive_tested_daily_moving_average,
+                    shortLabel:
+                      text.section_positive_tested
+                        .line_chart_positive_tested_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {
@@ -220,8 +223,11 @@ const ElderlyAtHomeRegionalPage = (
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
-                      text.section_positive_tested.tooltip_labels
-                        .deceased_daily_daily_moving_average,
+                      text.section_deceased
+                        .line_chart_deceased_daily_moving_average,
+                    shortLabel:
+                      text.section_deceased
+                        .line_chart_deceased_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {

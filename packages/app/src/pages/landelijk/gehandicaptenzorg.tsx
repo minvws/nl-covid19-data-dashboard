@@ -115,8 +115,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty: 'newly_infected_people_moving_average',
                     color: colors.data.primary,
                     label:
-                      positiveTestedPeopleText.tooltip_labels
-                        .newly_infected_people_moving_average,
+                      positiveTestedPeopleText.line_chart_newly_infected_people_moving_average,
+                    shortLabel:
+                      positiveTestedPeopleText.line_chart_newly_infected_people_moving_average_short_label,
                   },
                   {
                     type: 'bar',
@@ -284,8 +285,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
-                      locationDeaths.tooltip_labels
-                        .deceased_daily_moving_average,
+                      locationDeaths.line_chart_deceased_daily_moving_average,
+                    shortLabel:
+                      locationDeaths.line_chart_deceased_daily_moving_average_short_label,
                     color: colors.data.primary,
                   },
                   {

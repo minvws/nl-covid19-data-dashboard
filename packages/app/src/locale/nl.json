@@ -1524,7 +1524,9 @@
         "text": "RIVM"
       }
     },
-    "linechart_metric_label": "Geïnfecteerde locaties"
+    "linechart_metric_label": "Geïnfecteerde locaties",
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1559,9 +1561,8 @@
     "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "tooltip_labels": {
-      "newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
-    }
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1592,9 +1593,8 @@
     "kpi_titel": "Aantal overleden personen",
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "tooltip_labels": {
-      "deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
-    }
+    "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1628,9 +1628,8 @@
     },
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "tooltip_labels": {
-      "deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
-    }
+    "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1693,9 +1692,8 @@
     "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "tooltip_labels": {
-      "newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
-    }
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
@@ -1729,10 +1727,8 @@
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
       "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "tooltip_labels": {
-        "positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
-        "deceased_daily_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
-      }
+      "line_chart_positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers - COVID-19 sterfte",
@@ -1753,7 +1749,9 @@
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1786,10 +1784,8 @@
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
       "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "tooltip_labels": {
-        "positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
-        "deceased_daily_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
-      }
+      "line_chart_positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - COVID-19 sterfte",
@@ -1810,7 +1806,9 @@
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
