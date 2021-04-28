@@ -13,4 +13,10 @@ export const features: Feature[] = [
     metricName: 'vaccine_stock',
     metricProperties: ['astra_zeneca_total', 'astra_zeneca_available'],
   },
+  {
+    name: 'vaccineCimsData',
+    isEnabled: false,
+    metricScopes: ['nl'],
+    metricName: 'vaccine_coverage',
+  },
 ];

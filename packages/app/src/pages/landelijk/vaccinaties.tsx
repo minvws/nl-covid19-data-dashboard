@@ -79,6 +79,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, selectedNlData: data, lastGenerated } = props;
 
   const stockFeature = useFeature('vaccineStockPerSupplier');
+  const vaccineCimsFeature = useFeature('vaccineCimsData');
 
   const { siteText } = useIntl();
 
@@ -109,11 +110,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryAndAdministrationsAreaChart data={data} />
 
-          {/**
-           * @TODO This check can be removed when vaccine_coverage is not
-           * optional anymore.
-           */}
-          {data.vaccine_coverage && (
+          {vaccineCimsFeature.isEnabled && data.vaccine_coverage && (
             <ChartTile
               title={text.grafiek_gevaccineerde_mensen.titel}
               description={text.grafiek_gevaccineerde_mensen.omschrijving}

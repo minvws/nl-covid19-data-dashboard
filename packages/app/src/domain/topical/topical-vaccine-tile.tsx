@@ -8,7 +8,7 @@ import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-ad
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 interface TopicalVaccineProps {
-  data: National;
+  data: Pick<National, 'vaccine_administered_total' | 'vaccine_coverage'>;
 }
 
 export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
@@ -66,7 +66,7 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
 
       <VaccineAdministrationsOverTimeChart
         title={text.title}
-        values={data.values}
+        values={data.vaccine_administered_total.values}
       />
     </Box>
   );

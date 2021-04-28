@@ -28,6 +28,7 @@ interface VaccinePageIntroductionProps {
     | 'vaccine_administered_planned'
     | 'vaccine_administered_total'
     | 'vaccine_administered_rate_moving_average'
+    | 'vaccine_coverage'
   >;
   pageInfo: TitleDescriptionBlock;
   pageLinks: CMSDecoratedLink[];
