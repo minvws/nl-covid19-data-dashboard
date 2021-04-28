@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { EditorialDetail } from '~/components/editorial-detail';
-import { client, getImageSrc, localize } from '~/lib/sanity';
+import { client, getImageSrc } from '~/lib/sanity';
 import {
   createGetStaticProps,
   StaticProps,
