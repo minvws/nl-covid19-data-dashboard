@@ -246,7 +246,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <AdmissionsPerAgeGroup
-                values={data.hospital_nice_per_age_group?.values}
+                values={data.hospital_nice_per_age_group.values}
                 timeframe={timeframe}
               />
             )}

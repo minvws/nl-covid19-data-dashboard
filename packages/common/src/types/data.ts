@@ -153,13 +153,13 @@ export interface National {
   g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
-  intensive_care_nice_per_age_group?: NlIntensiveCareNicePerAgeGroup;
+  intensive_care_nice_per_age_group: NlIntensiveCareNicePerAgeGroup;
   tested_overall: NationalTestedOverall;
   tested_per_age_group: NlTestedPerAgeGroup;
   reproduction: NationalReproduction;
   sewer: NationalSewer;
   hospital_nice: NationalHospitalNice;
-  hospital_nice_per_age_group?: NlHospitalNicePerAgeGroup;
+  hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NationalHospitalLcps;
   intensive_care_lcps: NationalIntensiveCareLcps;
   tested_ggd_daily: NationalTestedGgdDaily;

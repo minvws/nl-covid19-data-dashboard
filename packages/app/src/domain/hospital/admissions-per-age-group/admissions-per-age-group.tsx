@@ -22,69 +22,12 @@ type NLHospitalAdmissionPerAgeGroupValue =
   | NlHospitalNicePerAgeGroupValue;
 
 interface AdmissionsPerAgeGroup {
-  // TODO: Remove undefined when data is available
-  values: NLHospitalAdmissionPerAgeGroupValue[] | undefined;
+  values: NLHospitalAdmissionPerAgeGroupValue[];
   timeframe: 'all' | '5weeks' | 'week';
 }
 
-function generateDummyData() {
-  const data = [];
-  const currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0);
-
-  const adjustSemiRandomly = (x: number = Math.random() * 10) => {
-    const directionalFactor = Math.sin(x / Math.random()) * 2;
-    const newVal = x + Math.random() * directionalFactor;
-    return newVal < 0 ? newVal * -1 : newVal;
-  };
-  let dataPoint;
-
-  for (let i = 0; i < 5 * 7; ++i) {
-    dataPoint = {
-      admissions_age_0_19_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_0_19_per_million : undefined
-      ),
-      admissions_age_20_29_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_20_29_per_million : undefined
-      ),
-      admissions_age_30_39_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_30_39_per_million : undefined
-      ),
-      admissions_age_40_49_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_40_49_per_million : undefined
-      ),
-      admissions_age_50_59_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_50_59_per_million : undefined
-      ),
-      admissions_age_60_69_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_60_69_per_million : undefined
-      ),
-      admissions_age_70_79_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_70_79_per_million : undefined
-      ),
-      admissions_age_80_89_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_80_89_per_million : undefined
-      ),
-      admissions_age_90_plus_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_age_90_plus_per_million : undefined
-      ),
-      admissions_overall_per_million: adjustSemiRandomly(
-        dataPoint ? dataPoint.admissions_overall_per_million : undefined
-      ),
-      date_of_insertion_unix: 0,
-      date_start_unix: new Date(currentDate.getTime() - 7).getTime() / 1000,
-      date_end_unix: currentDate.getTime() / 1000,
-    };
-    data.push(dataPoint);
-
-    currentDate.setDate(currentDate.getDate() - 1);
-  }
-
-  return data.reverse();
-}
-
 export function AdmissionsPerAgeGroup({
-  values = generateDummyData() as NLHospitalAdmissionPerAgeGroupValue[],
+  values,
   timeframe,
 }: AdmissionsPerAgeGroup) {
   const { siteText } = useIntl();
