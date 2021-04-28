@@ -109,9 +109,9 @@
     },
     "kpi_titel": "Het aantal IC-opnames dat op één dag gemeld is",
     "linechart_legend_trend_label": "Intensive care-opnames",
-    "linechart_legend_trend_label_moving_average": "Intensive care-opnames",
     "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is."
+    "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is.",
+    "linechart_legend_trend_label_moving_average": "Gemiddeld aantal IC-opnames berekend over de afgelopen 7 dagen"
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -215,8 +215,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_titel_moving_average": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -651,7 +651,7 @@
     "select_region_municipality_legend": "Selecteer een gemeente:",
     "select_region_type_legend": "Toon cijfers van:",
     "your_municipality": "Gemeente",
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land vanaf 28 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -783,8 +783,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_titel_moving_average": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -804,7 +804,13 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
+    "barscale_keys": [
+      "0 tot 20",
+      "20 tot 40",
+      "40 tot 60",
+      "60 tot 80",
+      "80+"
+    ],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -913,8 +919,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_titel_moving_average": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -1020,7 +1026,7 @@
       "title": "Risiconiveaus per veiligheidsregio | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het huidige risiconiveau per veiligheidsregio in Nederland."
     },
-    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land vanaf 28 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Selecteer een gemeente",
@@ -1823,10 +1829,10 @@
       "line_chart_covid_daily_title": "Meldingen van aan COVID-19 overleden patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
-      "line_chart_covid_daily_legend_trend_label_moving_average": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1859,10 +1865,10 @@
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden patiënten",
-      "line_chart_covid_daily_legend_trend_label_moving_average": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2180,7 +2186,11 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": ["", "", ""]
+      "additions": [
+        "",
+        "",
+        ""
+      ]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2305,7 +2315,11 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": ["", "", ""]
+        "additions": [
+          "",
+          "",
+          ""
+        ]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2462,7 +2476,7 @@
     "risiconiveaus": {
       "selecteer_titel": "De risicokaart van Nederland",
       "selecteer_toelichting": "Iedere twee weken wordt bekeken of de situatie rond het coronavirus zich positief of negatief ontwikkelt. De laatste keer is dit op {{last_update}} gebeurd. Op welk niveau een regio zit, hangt af van het aantal positieve testen en het aantal ziekenhuisopnames. [Meer informatie over de risiconiveaus](/over-risiconiveaus).",
-      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land tot en met 27 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[De huidige maatregelen gelden voor het hele land vanaf 28 april](https://coronadashboard.rijksoverheid.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Onderwerpen op dit dashboard",
     "data_sitemap_toelichting": "Ga direct naar de volgende onderwerpen:",
@@ -2836,18 +2850,14 @@
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
-      "line_chart_covid_daily_legend_trend_label_moving_average": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Overleden patiënten",
-      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
   "corona_melder_app": {
-    "sidebar": {
-      "titel": "Coronamelder"
-    },
-    "kpi_titel": "Hier komt de Coronamelder app",
     "header": {
       "category": "Preventie verspreiding",
       "title": "Gebruik CoronaMelder-app",
@@ -2892,7 +2902,11 @@
       "labels": {
         "warnings": "Aantal waarschuwingen"
       }
-    }
+    },
+    "sidebar": {
+      "titel": "CoronaMelder-app"
+    },
+    "kpi_titel": "Aantal mensen dat anderen waarschuwde via CoronaMelder-app"
   },
   "choropleth_tooltip": {
     "patients": {
@@ -2950,6 +2964,28 @@
       "inaccurate": "Niet compleet"
     }
   },
+  "g_number": {
+    "bar_chart": {
+      "title": "Ontwikkeling aantal positieve tests (Groeigetal)",
+      "description": "Het Groeigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief zijn getest op corona dan in de 7 dagen ervoor. Bij een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt. De grafiek laat het Groeigetal van de laatste vijf weken zien.",
+      "negative_descriptor": "minder",
+      "positive_descriptor": "meer",
+      "bronnen": {
+        "download": "",
+        "href": "",
+        "text": "Ministerie van VWS op basis van RIVM"
+      }
+    }
+  },
+  "afschaling": {
+    "trend_grafieken": {
+      "reproductiegetal": "Reproductiegetal",
+      "ic_opnames": "IC-opnames",
+      "ziekenhuisopnames": "Ziekenhuisopnames (incl. IC)",
+      "grenswaarde_meer": "Grenswaarde is overschreden",
+      "grenswaarde_minder": "Waarde is minder dan {{days}} dagen onder de grenswaarde"
+    }
+  },
   "hospital_admissions_per_age_group": {
     "chart_title": "Ziekenhuisopnames per leeftijdsgroep door de tijd heen",
     "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
@@ -2975,28 +3011,6 @@
     "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
     "tooltip_labels": {
       "inaccurate": "Niet compleet"
-    }
-  },
-  "g_number": {
-    "bar_chart": {
-      "title": "Ontwikkeling aantal positieve tests (Groeigetal)",
-      "description": "Het Groeigetal (of G-getal) geeft in procenten weer of in de afgelopen 7 dagen meer of minder mensen positief zijn getest op corona dan in de 7 dagen ervoor. Bij een positief Groeigetal is de trend dat het aantal positieve tests toeneemt. Bij een negatief Groeigetal is de trend dat het aantal positieve tests afneemt. De grafiek laat het Groeigetal van de laatste vijf weken zien.",
-      "negative_descriptor": "minder",
-      "positive_descriptor": "meer",
-      "bronnen": {
-        "download": "",
-        "href": "",
-        "text": "Ministerie van VWS op basis van RIVM"
-      }
-    }
-  },
-  "afschaling": {
-    "trend_grafieken": {
-      "reproductiegetal": "Reproductiegetal",
-      "ic_opnames": "IC-opnames",
-      "ziekenhuisopnames": "Ziekenhuisopnames (incl. IC)",
-      "grenswaarde_meer": "Grenswaarde is overschreden",
-      "grenswaarde_minder": "Waarde is minder dan {{days}} dagen onder de grenswaarde"
     }
   }
 }
