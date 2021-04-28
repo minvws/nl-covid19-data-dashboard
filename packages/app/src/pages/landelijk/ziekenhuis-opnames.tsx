@@ -204,7 +204,14 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label: text.linechart_legend_titel_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'admissions_on_date_of_admission',
                     label: text.linechart_legend_titel,
                     color: colors.data.primary,
