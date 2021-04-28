@@ -70,7 +70,7 @@ const prdClient = getClient('production');
         publish_count: 0,
       };
 
-      transaction.createOrReplace(documentToInject);
+      transaction.createIfNotExists(documentToInject);
       successCount++;
     } else {
       /**
