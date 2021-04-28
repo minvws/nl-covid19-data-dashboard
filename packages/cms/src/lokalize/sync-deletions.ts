@@ -1,27 +1,33 @@
 /**
+ * THIS SCRIPT WILL POTENTIALLY BREAK PRODUCTION BUILD IF RAN HALFWAY SPRINT
+ *
  * This script prunes any LokalizeText documents from the production dataset
  * that are not present in the development dataset anymore. It is purely a
  * cleanup mechanism, as additional unused keys have no effect on the
  * application.
  *
- * This script should be ran only right after a major release at which point we
- * can be fairly certain that whatever keys are not in the development dataset
- * can also be removed from production.
+ * This code should be executed only right after a major release at which point
+ * we can be fairly certain that whatever keys are not in the development
+ * dataset can also be removed from production.
  *
  * As an extra this script will also look at any text documents that are in
  * development but not yet in production and add those. Normally documents
  * should flow via the mutations => sync-additions script, but there might be an
  * edge case were things fall through. Syncing those documents here will assure
- * us that we can always have production mirror development exactly. This is
- * based on the assumption that it can not hurt to inject a new key to
- * production that has been created around release time since these documents
- * typically contain placeholder texts.
+ * that we can always have production mirror development exactly. This is based
+ * on the assumption that it can not hurt to inject a new key to production that
+ * has been created around release time since these documents typically contain
+ * placeholder texts.
  *
  * @TODO to make this completely convenient and less scary we could choose to
  * move these documents to a different type (e.g. "lokalizeText__deprecated"),
  * instead of deleting them. If we then by accident delete a production key that
  * is still in use, we can run a script to simply restore the last batch of
- * moved documents.
+ * moved documents. Not sure if Sanity allows you to update a document by
+ * changing its _type field, but we can be a bit more clever about it.
+ *
+ * This script has been excluded from the yarn scripts in package.json to
+ * prevent triggering this by accident.
  */
 
 import { LokalizeText } from './types';
@@ -70,11 +76,11 @@ const prdClient = getClient('production');
     const documentToInject: LokalizeText = {
       ...document,
       /**
-       * At this point we can not assume that this flag is still set like it
-       * was when the CLI command added the document, because in the meantime
-       * we could hit publish in development which clears the flag. So all
-       * text that are injected into production get this flag set here to be
-       * sure they show up as "new" there.
+       * At this point we can not assume that this flag is still set like it was
+       * when the CLI command added the document, because in the meantime we
+       * could hit publish in development which clears the flag. So all text
+       * that are injected into production get this flag set here to be sure
+       * they show up as "new" there.
        */
       is_newly_added: true,
       /**
