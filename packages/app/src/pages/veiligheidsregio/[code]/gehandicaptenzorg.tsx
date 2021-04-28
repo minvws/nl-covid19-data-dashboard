@@ -120,7 +120,16 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty: 'newly_infected_people_moving_average',
+                    label:
+                      positiveTestPeopleText.line_chart_newly_infected_people_moving_average,
+                    shortLabel:
+                      positiveTestPeopleText.line_chart_newly_infected_people_moving_average_short_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'newly_infected_people',
                     label: positiveTestPeopleText.line_chart_legend_trend_label,
                     color: colors.data.primary,
@@ -260,7 +269,16 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty: 'deceased_daily_moving_average',
+                    label:
+                      mortalityText.line_chart_deceased_daily_moving_average,
+                    shortLabel:
+                      mortalityText.line_chart_deceased_daily_moving_average_short_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'deceased_daily',
                     label: mortalityText.line_chart_legend_trend_label,
                     color: colors.data.primary,
