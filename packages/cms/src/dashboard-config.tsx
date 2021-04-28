@@ -73,7 +73,7 @@ export default {
             title: 'Nieuwe Lokalize teksten',
             limit: 50,
             query: `
-              *[_type == "lokalizeText" && is_newly_added == true)] | order(key asc)
+              *[_type == "lokalizeText" && is_newly_added == true] | order(key asc)
               `,
           },
         },
