@@ -33,7 +33,7 @@ export function CategoryMenu({
   isFirstItem?: boolean;
 }) {
   return (
-    <Box as="li" spacing={3} pt={isFirstItem ? 4 : 5}>
+    <Box as="li" spacing={3} pt={isFirstItem ? 4 : '3rem'}>
       <Category>{title}</Category>
       <Menu>{children}</Menu>
     </Box>
@@ -60,7 +60,7 @@ export function MetricMenuItemLink({
 
   const content = (
     <>
-      <Title icon={icon} title={title} subtitle={subtitle} />
+      <Title icon={icon} title={title} subtitle={subtitle} m={0} />
       {children && (
         <Box mx={icon ? '2.5em' : 0}>
           <ChildrenWrapper>{children}</ChildrenWrapper>
