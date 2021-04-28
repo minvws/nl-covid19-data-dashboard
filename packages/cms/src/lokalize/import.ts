@@ -5,6 +5,14 @@ import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { getClient } from '../client';
 
+/**
+ * The import script is meant to be ran on an empty dataset. It will create a
+ * LokalizeText document for every key, and the ids for these documents are
+ * auto-generated. This means that running the script twice will just result in
+ * duplicate documents.
+ *
+ * You can run the lokalize/delete-all script to start fresh.
+ */
 (async function run() {
   const client = getClient();
 
@@ -33,8 +41,9 @@ import { getClient } from '../client';
 
   for (let [subject, dataText] of Object.entries(nl)) {
     /**
-     * Some root-level keys only contain string | string[] instead of an object structure.
-     * We can't handle those in our logic, so they are moved to a `__root` subject.
+     * Some root-level keys only contain string | string[] instead of an object
+     * structure. We can't handle those in our logic, so they are moved to a
+     * `__root` subject.
      */
     if (typeof dataText === 'string' || Array.isArray(dataText)) {
       const type = typeof dataText === 'string' ? 'string' : 'array';
@@ -51,9 +60,9 @@ import { getClient } from '../client';
     const textDocuments = Object.entries(flatText)
       .map(([path, value]) => {
         /**
-         * Anything that is not a string here is expected to be an array. If these
-         * keys are still used in the app, the data will have to be converted or
-         * otherwise moved.
+         * Anything that is not a string here is expected to be an array. If
+         * these keys are still used in the app, the data will have to be
+         * converted or otherwise moved.
          */
         if (typeof value !== 'string') {
           console.warn(`Ignoring value type ${typeof value} for path ${path}`);
@@ -61,22 +70,18 @@ import { getClient } from '../client';
           return;
         }
 
+        const key = `${subject}.${path}`;
+
         return {
           _type: 'lokalizeText',
-          /**
-           * Ids with a `.` are only accessible for authenticated users, so we
-           * replace dots with dashes to keep the dataset public in case anyone
-           * wants to clone it.
-           */
-          _id: `lokalize__${subject}.${path}`.replace(/\./g, '-'),
+          key,
           subject,
           path: path,
-          key: `${subject}.${path}`,
           should_display_empty: !value,
           /**
-           * We only flag newly added for the items that have been added later via
-           * the CLI. The imported texts are all translated anyway and require no
-           * extra attention.
+           * We only flag newly added for the items that have been added later
+           * via the CLI. The imported texts are all translated anyway and
+           * require no extra attention.
            */
           is_newly_added: false,
           publish_count: 0,
@@ -103,14 +108,7 @@ import { getClient } from '../client';
       continue;
     }
 
-    /**
-     * Strings from JSON will be overwriting whatever is in Sanity, because
-     * until we kill Lokalize those files are the source of truth. However,
-     * newly created text entries in Sanity will remain untouched, so we could
-     * already start to extend the Lokalize string set using Sanity if we want
-     * to.
-     */
-    textDocuments.forEach((document) => transaction.createOrReplace(document));
+    textDocuments.forEach((document) => transaction.create(document));
   }
 
   await transaction.commit();

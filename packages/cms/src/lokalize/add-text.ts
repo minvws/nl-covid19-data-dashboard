@@ -132,11 +132,13 @@ async function createTextDocumentForSubject(
     },
   ]);
 
+  const key = `${subject}.${response.path}`;
+
   return {
     _type: 'lokalizeText',
+    key,
     subject,
     path: response.path,
-    key: `${subject}.${response.path}`,
     is_newly_added: true,
     publish_count: 0,
     text: {

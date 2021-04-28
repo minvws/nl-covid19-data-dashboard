@@ -32,9 +32,6 @@ import { collapseTextMutations, readTextMutations } from './logic';
 const devClient = getClient('development');
 const prdClient = getClient('production');
 
-const TWO_WEEKS_IN_MS = 2 * 7 * 24 * 60 * 60 * 1000;
-const TWO_WEEKS_AGO = new Date(Date.now() - TWO_WEEKS_IN_MS).toISOString();
-
 (async function run() {
   const mutations = await readTextMutations();
 
