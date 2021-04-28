@@ -1823,8 +1823,10 @@
       "line_chart_covid_daily_title": "Meldingen van aan COVID-19 overleden patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Overleden patiënten"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1857,8 +1859,10 @@
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Overleden patiënten"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2832,7 +2836,9 @@
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
       "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
