@@ -8,6 +8,7 @@ import { Metadata } from '~/components/content-header/metadata';
 import { DecoratedLink } from '~/components/decorated-link';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -17,9 +18,8 @@ import {
   DecoratedLink as CMSDecoratedLink,
   TitleDescriptionBlock,
 } from '~/types/cms';
-import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 interface VaccinePageIntroductionProps {

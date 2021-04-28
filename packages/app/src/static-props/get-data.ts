@@ -9,7 +9,6 @@ import {
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { gmData } from '~/data/gm';
-import { getClient, localize } from '~/lib/sanity';
 import { vrData } from '~/data/vr';
 import {
   gmPageMetricNames,
@@ -23,6 +22,7 @@ import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
 } from '~/domain/layout/safety-region-layout';
+import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -91,7 +91,7 @@ export function selectNlData<T extends keyof National = never>(
     const { data } = getNlData();
 
     const selectedNlData = metrics.reduce(
-      (acc, p) => set(acc, p, data[p]),
+      (acc, p) => set(acc, p, data[p] ?? null),
       {} as Pick<National, T>
     );
 
@@ -131,7 +131,7 @@ export function selectVrData<T extends keyof Regionaal = never>(
     const vrData = getVrData(context);
 
     const selectedVrData = metrics.reduce(
-      (acc, p) => set(acc, p, vrData.data[p]),
+      (acc, p) => set(acc, p, vrData.data[p] ?? null),
       {} as Pick<Regionaal, T>
     );
 
@@ -181,7 +181,7 @@ export function selectGmData<T extends keyof Municipal = never>(
     const gmData = getGmData(context);
 
     const selectedGmData = metrics.reduce(
-      (acc, p) => set(acc, p, gmData.data[p]),
+      (acc, p) => set(acc, p, gmData.data[p] ?? null),
       {} as Pick<Regionaal, T>
     );
 
