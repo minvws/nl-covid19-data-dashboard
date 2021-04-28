@@ -111,7 +111,7 @@
     "linechart_legend_trend_label": "Intensive care-opnames",
     "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
     "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is.",
-    "linechart_legend_trend_label_moving_average": "Gemiddeld aantal IC-opnames berekend over de afgelopen 7 dagen"
+    "linechart_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -216,7 +216,7 @@
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
     "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -784,7 +784,7 @@
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
     "linechart_legend_titel": "Ziekenhuisopnames",
     "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -920,7 +920,7 @@
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
     "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "linechart_legend_titel_moving_average": "Gemiddeld aantal ziekenhuisopnames berekend over de afgelopen 7 dagen"
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -1849,8 +1849,8 @@
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
-      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1885,8 +1885,8 @@
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
-      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2870,8 +2870,8 @@
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal overleden patiënten berekend over de afgelopen 7 dagen",
-      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal overleden patiënten over de afgelopen 7 dagen"
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -3005,12 +3005,12 @@
     }
   },
   "hospital_admissions_per_age_group": {
-    "chart_title": "Ziekenhuisopnames per leeftijdsgroep door de tijd heen",
-    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+    "chart_title": "Aantal ziekenhuisopnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen."
   },
   "ic_admissions_per_age_group": {
-    "chart_title": "Intensive care-opnames per leeftijdsgroep door de tijd heen",
-    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen. In de grafiek worden weektotalen getoond die zijn omgerekend naar 1.000.000 personen in de leeftijdsgroep."
+    "chart_title": "Aantal IC-opnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep op de intensive care zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen."
   },
   "admissions_per_age_group_chart": {
     "legend": {
