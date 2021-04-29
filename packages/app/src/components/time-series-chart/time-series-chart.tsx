@@ -129,7 +129,7 @@ export function TimeSeriesChart<
   timeframe = 'all',
   formatTooltip,
   dataOptions,
-  numGridLines = 3,
+  numGridLines = 4,
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
   paddingLeft,
