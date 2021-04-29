@@ -3006,11 +3006,11 @@
   },
   "hospital_admissions_per_age_group": {
     "chart_title": "Aantal ziekenhuisopnames per leeftijdsgroep door de tijd heen",
-    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen."
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen van de opnames die in die week hebben plaatsgevonden."
   },
   "ic_admissions_per_age_group": {
     "chart_title": "Aantal IC-opnames per leeftijdsgroep door de tijd heen",
-    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep op de intensive care zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen."
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep op de intensive care zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen van de opnames die in die week hebben plaatsgevonden."
   },
   "admissions_per_age_group_chart": {
     "legend": {
