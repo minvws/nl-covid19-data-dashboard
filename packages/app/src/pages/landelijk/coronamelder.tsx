@@ -126,7 +126,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             description={
               corona_melder_app.waarschuwingen_over_tijd_grafiek.description
             }
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart

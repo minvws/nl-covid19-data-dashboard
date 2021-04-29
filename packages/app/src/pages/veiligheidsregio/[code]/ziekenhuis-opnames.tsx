@@ -163,7 +163,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             description={text.linechart_description}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart

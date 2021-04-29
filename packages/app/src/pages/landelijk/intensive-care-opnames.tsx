@@ -127,7 +127,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             description={text.linechart_description}
             metadata={{ source: text.bronnen.nice }}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -185,7 +185,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
             metadata={{ source: text.bronnen.lnaz }}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
