@@ -2378,10 +2378,10 @@
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
     },
     "more_information": {
-      "label": "Meer informatie en nieuws over vaccinaties kunt u vinden op",
+      "label": "",
       "link": {
-        "href": "https://www.coronavaccinatie.nl/",
-        "text": "coronavaccinatie.nl"
+        "href": "",
+        "text": ""
       }
     },
     "bereidheid_section": {
