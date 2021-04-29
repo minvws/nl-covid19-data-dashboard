@@ -71,7 +71,7 @@ export const CompactDecoratedLink = ({
 const StyledCompactDecoratedLink = styled.a(
   css({
     textDecoration: 'none',
-    '&:hover': { textDecoration: 'underline' },
+    '&:hover, &:focus': { textDecoration: 'underline' },
   })
 );
 
@@ -136,7 +136,7 @@ const StyledExpandedDecoratedLink = styled.a(
   css({
     textDecoration: 'none',
     color: 'body',
-    '&:hover': {
+    '&:hover, &:focus': {
       color: 'link',
     },
   })
