@@ -43,6 +43,7 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
+  'corona_melder_app',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
