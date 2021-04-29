@@ -3006,11 +3006,11 @@
   },
   "hospital_admissions_per_age_group": {
     "chart_title": "Number of hospital admissions per age group over time",
-    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to hospital, by age group. The graph shows the weekly totals."
+    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to hospital, by age group. The graph shows the weekly totals of the admissions that took place that week."
   },
   "ic_admissions_per_age_group": {
     "chart_title": "Number of ICU admissions per age group over time",
-    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to a hospital intensive care unit, by age group. The graph shows the weekly totals."
+    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to a hospital intensive care unit, by age group. The graph shows the weekly totals of the admissions that took place that week."
   },
   "admissions_per_age_group_chart": {
     "legend": {
