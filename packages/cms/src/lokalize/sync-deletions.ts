@@ -30,23 +30,31 @@
  * prevent triggering this by accident.
  */
 
-import { LokalizeText } from './types';
-import { getClient } from '../client';
-import { collapseTextMutations, readTextMutations } from './logic';
-import { difference } from 'lodash';
 import { assert } from '@corona-dashboard/common';
+import { difference } from 'lodash';
+import prompts from 'prompts';
+import { getClient } from '../client';
+import { LokalizeText } from './types';
 
 const devClient = getClient('development');
 const prdClient = getClient('production');
 
 (async function run() {
-  const mutations = await readTextMutations();
+  {
+    const response = await prompts([
+      {
+        type: 'confirm',
+        name: 'isConfirmed',
+        message:
+          'This script deletes keys from the production dataset. Are you aware of this?',
+        initial: false,
+      },
+    ]);
 
-  console.log('mutations', mutations);
-
-  const collapsedMutations = collapseTextMutations(mutations);
-
-  const additions = collapsedMutations.filter((x) => x.action === 'add');
+    if (!response.isConfirmed) {
+      process.exit(0);
+    }
+  }
 
   const allDevTexts = (await devClient.fetch(`*[_type == 'lokalizeText'] |
     order(subject asc)`)) as LokalizeText[];
@@ -58,6 +66,23 @@ const prdClient = getClient('production');
   const allPrdKeys = allPrdTexts.map((x) => x.key);
 
   const prdKeysMissingInDev = difference(allPrdKeys, allDevKeys);
+
+  {
+    const response = await prompts([
+      {
+        type: 'confirm',
+        name: 'isConfirmed',
+        message: `The following keys will be deleted from production:\n\n${prdKeysMissingInDev.join(
+          '\n'
+        )}\n\nAre you absolutely sure you want this to happen?`,
+        initial: false,
+      },
+    ]);
+
+    if (!response.isConfirmed) {
+      process.exit(0);
+    }
+  }
 
   /**
    * Maybe there could be an edge-case where a text addition on dev didn't make

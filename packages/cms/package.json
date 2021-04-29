@@ -18,6 +18,7 @@
     "lokalize:delete": "ts-node src/lokalize/delete-text.ts",
     "lokalize:clear-mutations-log": "ts-node src/lokalize/clear-mutations-log.ts",
     "lokalize:sync-additions": "ts-node src/lokalize/sync-additions.ts",
+    "lokalize:sync-deletions": "ts-node src/lokalize/sync-deletions.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
