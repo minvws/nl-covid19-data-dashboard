@@ -23,7 +23,7 @@ type NLHospitalAdmissionPerAgeGroupValue =
 
 interface AdmissionsPerAgeGroup {
   values: NLHospitalAdmissionPerAgeGroupValue[];
-  timeframe: 'all' | '5weeks' | 'week';
+  timeframe: 'all' | '5weeks';
 }
 
 export function AdmissionsPerAgeGroup({
