@@ -37,8 +37,6 @@ const prdClient = getClient('production');
 
   const collapsedMutations = collapseTextMutations(mutations);
 
-  console.log('collapsedMutations', collapsedMutations);
-
   const additions = collapsedMutations.filter((x) => x.action === 'add');
 
   const allDevTexts = (await devClient.fetch(`*[_type == 'lokalizeText'] |

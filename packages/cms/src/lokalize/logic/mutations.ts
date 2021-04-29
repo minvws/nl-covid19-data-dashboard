@@ -77,8 +77,6 @@ export function collapseTextMutations(mutations: TextMutation[]) {
     {} as Record<string, { weight: number; timestamp: string }>
   );
 
-  console.log('collapsedKeys', collapsedKeys);
-
   return (
     Object.entries(collapsedKeys)
       // For these keys the actions cancelled each other out
