@@ -27,7 +27,7 @@ export function AppHeader() {
           alignItems="center"
           justifyContent="space-between"
           pl={{ _: 3, sm: 4 }}
-          pr={{ _: 3, sm: 4, md: 2 }}
+          pr={{ _: 3, sm: 4, md: 3 }}
         >
           <Box py={[2, 2, 2, 3]} lineHeight={'1em'} fontWeight="bold">
             <Link href="/" passHref>
