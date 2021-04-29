@@ -67,7 +67,56 @@ const prdClient = getClient('production');
 
   const prdKeysMissingInDev = difference(allPrdKeys, allDevKeys);
 
-  {
+  /**
+   * Maybe there could be an edge-case where a text addition on dev didn't make
+   * it to prd and is also not in the mutation log anymore. We might as well fix
+   * that here now we have all the data.
+   */
+  const devKeysMissingInPrd = difference(allDevKeys, allPrdKeys);
+
+  /**
+   * Additions
+   */
+  if (devKeysMissingInPrd.length > 0) {
+    const transaction = prdClient.transaction();
+
+    for (const key of devKeysMissingInPrd) {
+      const document = allDevTexts.find((x) => x.key === key);
+
+      assert(document, `Unable to locate document for key ${key}`);
+
+      const documentToInject: LokalizeText = {
+        ...document,
+        /**
+         * At this point we can not assume that this flag is still set like it was
+         * when the CLI command added the document, because in the meantime we
+         * could hit publish in development which clears the flag. So all text
+         * that are injected into production get this flag set here to be sure
+         * they show up as "new" there.
+         */
+        is_newly_added: true,
+        /**
+         * To know how often communication changes these texts we need to clear
+         * the counter from any publish actions we did ourselves in development.
+         */
+        publish_count: 0,
+      };
+
+      transaction.createOrReplace(documentToInject);
+    }
+
+    await transaction.commit();
+
+    console.log(
+      'Successfully injected missing lokalize texts for keys:',
+      devKeysMissingInPrd
+    );
+  }
+
+  /**
+   * Deletions
+   */
+  if (prdKeysMissingInDev.length > 0) {
     const response = await prompts([
       {
         type: 'confirm',
@@ -82,62 +131,22 @@ const prdClient = getClient('production');
     if (!response.isConfirmed) {
       process.exit(0);
     }
+
+    const transaction = prdClient.transaction();
+    for (const key of prdKeysMissingInDev) {
+      const document = allPrdTexts.find((x) => x.key === key);
+
+      assert(document, `Unable to locate document for key ${key}`);
+
+      transaction.delete(document._id);
+    }
+
+    await transaction.commit();
+
+    console.log(
+      `Successfully deleted ${prdKeysMissingInDev.length} lokalize for keys`
+    );
   }
-
-  /**
-   * Maybe there could be an edge-case where a text addition on dev didn't make
-   * it to prd and is also not in the mutation log anymore. We might as well fix
-   * that here now we have all the data.
-   */
-  const devKeysMissingInPrd = difference(allDevKeys, allPrdKeys);
-
-  const transaction = prdClient.transaction();
-
-  for (const key of devKeysMissingInPrd) {
-    const document = allDevTexts.find((x) => x.key === key);
-
-    assert(document, `Unable to locate document for key ${key}`);
-
-    const documentToInject: LokalizeText = {
-      ...document,
-      /**
-       * At this point we can not assume that this flag is still set like it was
-       * when the CLI command added the document, because in the meantime we
-       * could hit publish in development which clears the flag. So all text
-       * that are injected into production get this flag set here to be sure
-       * they show up as "new" there.
-       */
-      is_newly_added: true,
-      /**
-       * To know how often communication changes these texts we need to clear
-       * the counter from any publish actions we did ourselves in development.
-       */
-      publish_count: 0,
-    };
-
-    transaction.createOrReplace(documentToInject);
-  }
-
-  await transaction.commit();
-
-  console.log(
-    'Successfully injected missing lokalize texts for keys:',
-    devKeysMissingInPrd
-  );
-
-  for (const key of prdKeysMissingInDev) {
-    const document = allPrdTexts.find((x) => x.key === key);
-
-    assert(document, `Unable to locate document for key ${key}`);
-
-    transaction.delete(document._id);
-  }
-
-  await transaction.commit();
-
-  console.log(
-    `Successfully deleted ${devKeysMissingInPrd.length} lokalize for keys`
-  );
 })().catch((err) => {
   console.error('An error occurred:', err.message);
   process.exit(1);
