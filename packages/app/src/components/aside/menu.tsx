@@ -194,7 +194,6 @@ const StyledLink = styled.a<{ isActive: boolean; isButton?: boolean }>((x) =>
     p: 3,
     py: x.isButton ? 3 : undefined,
     pr: x.isButton ? 0 : undefined,
-    pb: x.isButton ? 2 : undefined,
     display: 'block',
     borderRight: '5px solid transparent',
     color: 'black',
