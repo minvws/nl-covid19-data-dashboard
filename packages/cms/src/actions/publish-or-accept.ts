@@ -35,8 +35,6 @@ export function PublishOrAcceptAction(props: DocumentActionProps) {
 
   const document = (props.draft || props.published) as LokalizeText | null;
 
-  if (!document) return;
-
   const [isPublishing, setIsPublishing] = useState(false);
 
   useEffect(() => {
@@ -48,6 +46,8 @@ export function PublishOrAcceptAction(props: DocumentActionProps) {
       setIsPublishing(false);
     }
   }, [props.draft]);
+
+  if (!document) return;
 
   /**
    * It could be that we as developers already supplied the complete text
@@ -74,7 +74,7 @@ export function PublishOrAcceptAction(props: DocumentActionProps) {
   return {
     disabled,
     label,
-    onHandle: async () => {
+    onHandle: () => {
       setIsPublishing(true);
 
       const patchData: Partial<LokalizeText> = {

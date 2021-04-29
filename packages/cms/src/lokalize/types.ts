@@ -9,7 +9,7 @@ export interface LokalizeText {
   publish_count: number;
   text: {
     _type: 'localeText';
-    nl: string;
+    nl?: string;
     en?: string;
   };
 }

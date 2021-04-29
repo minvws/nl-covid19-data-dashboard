@@ -1,7 +1,7 @@
 /**
  * Add one or multiple texts to the Sanity "Lokalize" dataset.
  */
-import { set } from 'lodash';
+import { set, uniq } from 'lodash';
 import prompts from 'prompts';
 import { getClient } from '../client';
 import { appendTextMutation } from './logic';
@@ -21,13 +21,9 @@ import { LokalizeText } from './types';
       throw new Error(`Failed to fetch texts: ${err.message}`);
     })) as LokalizeText[];
 
-  const allSubjects = Object.keys(
-    allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
-  );
+  const allSubjects = uniq(allTexts.map((x) => x.subject));
 
-  const subjectChoices = Object.keys(
-    allTexts.reduce((acc, x) => set(acc, x.subject, true), {})
-  ).map((x) => ({ title: x, value: x }));
+  const subjectChoices = allSubjects.map((x) => ({ title: x, value: x }));
 
   const response = await prompts([
     {

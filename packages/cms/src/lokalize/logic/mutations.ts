@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { EOL } from 'os';
 import { parse } from '@fast-csv/parse';
-import { set } from 'lodash';
+import { sortBy } from 'lodash';
 
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 const HEADER = `timestamp,action,key${EOL}`;
@@ -64,19 +64,25 @@ export function collapseTextMutations(mutations: TextMutation[]) {
     delete: -1,
   } as const;
 
-  const collapsedKeys = mutations.reduce((acc, mut) => {
-    const prev = acc[mut.key] || { weight: 0, timestamp: 0 };
+  const collapsedKeys = sortBy(mutations, (x) => x.timestamp).reduce(
+    (acc, mutation) => {
+      const prev = acc[mutation.key] || { weight: 0, timestamp: 0 };
 
-    return set(acc, mut.key, {
-      weight: weightByAction[mut.action] + prev.weight,
-      timestamp: mut.timestamp,
-    });
-  }, {} as Record<string, { weight: number; timestamp: string }>);
+      acc[mutation.key] = {
+        weight: weightByAction[mutation.action] + prev.weight,
+        timestamp: mutation.timestamp,
+      };
+      return acc;
+    },
+    {} as Record<string, { weight: number; timestamp: string }>
+  );
+
+  console.log('collapsedKeys', collapsedKeys);
 
   return (
     Object.entries(collapsedKeys)
       // For these keys the actions cancelled each other out
-      .filter(([__key, v]) => v.weight === 0)
+      .filter(([__key, { weight }]) => weight !== 0)
       // For the others we map the data back to mutation objects
       .map(
         ([key, { weight, timestamp }]) =>

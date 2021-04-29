@@ -35,19 +35,24 @@ const prdClient = getClient('production');
 (async function run() {
   const mutations = await readTextMutations();
 
-  console.log('mutations', mutations);
-
   const collapsedMutations = collapseTextMutations(mutations);
+
+  console.log('collapsedMutations', collapsedMutations);
 
   const additions = collapsedMutations.filter((x) => x.action === 'add');
 
   const allDevTexts = (await devClient.fetch(`*[_type == 'lokalizeText'] |
     order(subject asc)`)) as LokalizeText[];
 
-  const transaction = prdClient.transaction();
+  const prdTransaction = prdClient.transaction();
 
   let successCount = 0;
   let failureCount = 0;
+
+  if (additions.length === 0) {
+    console.log('There are no mutations that result in additional keys');
+    process.exit(0);
+  }
 
   for (const addition of additions) {
     const document = allDevTexts.find((x) => x.key === addition.key);
@@ -75,7 +80,7 @@ const prdClient = getClient('production');
        * we will never overwrite what has already been edited in the production
        * set.
        */
-      transaction.createIfNotExists(documentToInject);
+      prdTransaction.createIfNotExists(documentToInject);
       successCount++;
     } else {
       /**
@@ -90,7 +95,7 @@ const prdClient = getClient('production');
     }
   }
 
-  await transaction.commit();
+  await prdTransaction.commit();
 
   if (failureCount === 0) {
     console.log(`Successfully injected all ${successCount} text keys`);

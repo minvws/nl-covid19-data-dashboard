@@ -78,7 +78,7 @@ const prdClient = getClient('production');
    * Additions
    */
   if (devKeysMissingInPrd.length > 0) {
-    const transaction = prdClient.transaction();
+    const prdTransaction = prdClient.transaction();
 
     for (const key of devKeysMissingInPrd) {
       const document = allDevTexts.find((x) => x.key === key);
@@ -102,10 +102,10 @@ const prdClient = getClient('production');
         publish_count: 0,
       };
 
-      transaction.createOrReplace(documentToInject);
+      prdTransaction.createOrReplace(documentToInject);
     }
 
-    await transaction.commit();
+    await prdTransaction.commit();
 
     console.log(
       'Successfully injected missing lokalize texts for keys:',
@@ -132,16 +132,16 @@ const prdClient = getClient('production');
       process.exit(0);
     }
 
-    const transaction = prdClient.transaction();
+    const prdTransaction = prdClient.transaction();
     for (const key of prdKeysMissingInDev) {
       const document = allPrdTexts.find((x) => x.key === key);
 
       assert(document, `Unable to locate document for key ${key}`);
 
-      transaction.delete(document._id);
+      prdTransaction.delete(document._id);
     }
 
-    await transaction.commit();
+    await prdTransaction.commit();
 
     console.log(
       `Successfully deleted ${prdKeysMissingInDev.length} lokalize for keys`
