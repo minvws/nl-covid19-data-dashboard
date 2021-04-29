@@ -110,7 +110,7 @@
     "kpi_titel": "Number of ICU admissions reported on one day",
     "linechart_legend_trend_label": "ICU admissions",
     "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-    "linechart_description": "This graph shows ICU admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for ICU admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows ICU admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for ICU admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of ICU admissions over the past seven days.",
     "linechart_legend_trend_label_moving_average": "Average number over the past 7 days"
   },
   "verdenkingen_huisartsen": {
@@ -200,7 +200,7 @@
       "legend_trend_label": "Regular hospital beds occupied by COVID-19 patients",
       "legend_inaccurate_label": "Data is less precise"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of hospital admissions over the past seven days.",
     "metadata": {
       "title": "Hospital admissions | Coronavirus Dashboard | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
@@ -762,7 +762,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of hospital admissions over the past seven days.",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
@@ -898,7 +898,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of hospital admissions over the past seven days.",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
@@ -1845,7 +1845,7 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period. The graph also shows averages over the past seven days.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
@@ -1881,7 +1881,7 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period. The graph also shows averages over the past seven days.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
@@ -2866,7 +2866,7 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this municipality reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this municipality reported dead, in the selected period.",
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period. The graph also shows averages over the past seven days.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
@@ -3006,7 +3006,7 @@
   },
   "hospital_admissions_per_age_group": {
     "chart_title": "Number of hospital admissions per age group over time",
-    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to hospital, by age group. The graph shows the weekly totals. "
+    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to hospital, by age group. The graph shows the weekly totals."
   },
   "ic_admissions_per_age_group": {
     "chart_title": "Number of ICU admissions per age group over time",
