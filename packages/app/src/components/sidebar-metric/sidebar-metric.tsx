@@ -155,7 +155,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   }
 
   return (
-    <Box spacing={1}>
+    <Box>
       <SidebarKpiValue
         title={title}
         value={propertyValue}

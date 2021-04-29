@@ -1707,7 +1707,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/asset-utils/-/asset-utils-1.1.4.tgz#fe3220794fab59a567b1ed4e20aadc896d246c77"
   integrity sha512-5EiUzZ7tRj8HQWZZH1EBJwg0kQ8fp/tWsf5aYkm2CrcbTKHMWmMYpD3B0TtwtqHuDzAmdmEvn1VbLJ7iCulncw==
 
-"@sanity/base@2.8.0", "@sanity/base@^2.7.4":
+"@sanity/base@2.8.0", "@sanity/base@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/base/-/base-2.8.0.tgz#8409b5f0e74809515727df306f33aabbc43638d8"
   integrity sha512-yHBsBtu9Nu13nF1AryruA99snjYjEz8KIpKU+V0+/lfEmiWKxKDw+nlx5NQ+o9Jivb488Bk6AsPKlStwz433+w==
@@ -1796,7 +1796,7 @@
     get-random-values "^1.2.0"
     lodash "^4.17.15"
 
-"@sanity/cli@^2.7.4":
+"@sanity/cli@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-2.8.0.tgz#2ac038ce2932c340d5093acf856af324e02bcd4b"
   integrity sha512-ebhJ7K6x+kffOIsDxrGmgsOIDIBedZ/F5GedrNRutv5ijdLgnwkZaRRgXSZQ2vDv+yp2HlIRrzfYZrQcbZudjw==
@@ -1834,7 +1834,7 @@
   resolved "https://registry.yarnpkg.com/@sanity/components/-/components-2.2.6.tgz#d1d6d1017a53ebb413ef026eabd5dd0b4a1bcdad"
   integrity sha512-KK+6eJgrgHEd9Hq+LbRamdAI64cNXYoVn/f/Dn3ES1GA55AvQyKQUay4T/zZ1yEITKSyIZgETQjpAl/Hg+72eQ==
 
-"@sanity/core@^2.7.4":
+"@sanity/core@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/core/-/core-2.8.0.tgz#5473cce158e203c81eb8a46ab809c91c1f9625c7"
   integrity sha512-OjjhS7qFeTYhuVPpVp8AN+emtpU7mvVmvgRgXrvwX4lgb89Jw3H5p1q7WlDcQN262ynqCHqhdrdIrRQGVjlxqA==
@@ -1926,7 +1926,7 @@
     "@sanity/generate-help-url" "2.2.6"
     lodash "^4.17.15"
 
-"@sanity/default-layout@^2.7.4":
+"@sanity/default-layout@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/default-layout/-/default-layout-2.8.0.tgz#fac44f02a5b5cbfe84e9a74662cdd014990dfb6b"
   integrity sha512-GwAqGRvH7KKwpNLxDbPEMy6RIlOuwYB+bmnoE+p6p4lK6mMNDT7FFDl75Fw9aYR4YksWHpoice8OLhtMl07m+w==
@@ -1946,7 +1946,7 @@
     rxjs "^6.5.3"
     styled-components "^5.2.1"
 
-"@sanity/default-login@^2.7.0":
+"@sanity/default-login@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/default-login/-/default-login-2.8.0.tgz#af7d73a67e082c4b9142ca942cacd594a110ff59"
   integrity sha512-4wiYuWejsUW8rf9Op8Qyz9wly+0pirNzI/oXJioqMZGBm3ibc7XoPM1qrQHKS6BDv2Jpd7P9o77mVu6jjx4zJg==
@@ -1955,7 +1955,7 @@
     prop-types "^15.6.0"
     rxjs "^6.5.3"
 
-"@sanity/desk-tool@^2.7.4":
+"@sanity/desk-tool@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/desk-tool/-/desk-tool-2.8.0.tgz#7f5870cce90f8c2b70712c4fa5c2353c6e56d5f3"
   integrity sha512-ai9npTsFu4K5vXMn+CIDGP178DL0H1FEEbaEhDC9YneHi7h+r08EWWgFCpDubpN0ienZCMZvoO43Y1/oc97sgw==
@@ -2384,7 +2384,7 @@
     es6-error "^4.0.2"
     type-of-is "^3.5.1"
 
-"@sanity/vision@^2.7.4":
+"@sanity/vision@^2.8.0":
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/@sanity/vision/-/vision-2.8.0.tgz#7b412e75dd52a438363779346982d8d1c173bb8b"
   integrity sha512-h45RU8PBxmE7Y2zzFQurRGfwiNKC05nwGUc/JxXTxEDSQwmEq8ailqmSbTRqRNyauCV9dQ3hLG/imQohRlIOug==
@@ -7789,6 +7789,7 @@ flat-cache@^3.0.4:
 flat@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/flat/-/flat-5.0.2.tgz#8ca6fe332069ffa9d324c327198c598259ceb241"
+  integrity sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==
 
 flatted@^3.1.0:
   version "3.1.1"

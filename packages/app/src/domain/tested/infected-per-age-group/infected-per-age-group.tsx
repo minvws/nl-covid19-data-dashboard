@@ -16,7 +16,7 @@ import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
   values: NlTestedPerAgeGroupValue[];
-  timeframe: 'all' | '5weeks' | 'week';
+  timeframe: 'all' | '5weeks';
 }
 
 export function InfectedPerAgeGroup({

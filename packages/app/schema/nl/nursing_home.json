@@ -24,13 +24,13 @@
           "type": "integer"
         },
         "newly_infected_people_moving_average": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "deceased_daily": {
           "type": "integer"
         },
         "deceased_daily_moving_average": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "newly_infected_locations": {
           "type": "integer"

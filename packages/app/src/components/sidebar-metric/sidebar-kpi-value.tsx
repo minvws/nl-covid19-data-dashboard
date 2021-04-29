@@ -33,14 +33,7 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
 
   return (
     <Box width="100%" minHeight="4rem">
-      <Heading
-        level={4}
-        fontSize={2}
-        fontWeight="normal"
-        marginBottom={3}
-        marginTop="0"
-        as="div"
-      >
+      <Heading level={4} fontSize={2} fontWeight="normal" m={0} as="div">
         {title}
       </Heading>
       <Box display="flex" alignItems="center" justifyContent="flex-start">

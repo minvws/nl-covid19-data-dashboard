@@ -154,3 +154,36 @@ export type TitleDescriptionBlock = {
   description: RichContentBlock[];
   title: string;
 };
+
+export interface LokalizeText {
+  _type: 'lokalizeText';
+  _id: string;
+  _createdAt: string;
+  _updatedAt: string;
+
+  search_key: string;
+  subject: string;
+  path: string;
+  text: {
+    nl: string | undefined;
+    en: string | undefined;
+  };
+  display_empty: boolean;
+}
+
+export type DecoratedLink = {
+  title: string;
+  category: string;
+  href: string;
+  cover: ImageBlock;
+};
+
+export type VaccinationPageQuery = {
+  pageInfo: TitleDescriptionBlock;
+  pageLinks: DecoratedLink[];
+  linksTitle: string;
+  title: string;
+  description: RichContentBlock[];
+  milestones: Milestones[];
+  expectedMilestones: ExpectedMilestones[];
+};

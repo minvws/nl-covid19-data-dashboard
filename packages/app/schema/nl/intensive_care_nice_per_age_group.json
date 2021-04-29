@@ -21,7 +21,6 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        
         "admissions_age_0_19_per_million",
         "admissions_age_20_29_per_million",
         "admissions_age_30_39_per_million",
@@ -32,7 +31,8 @@
         "admissions_age_80_89_per_million",
         "admissions_age_90_plus_per_million",
         "admissions_overall_per_million",
-        "date_unix",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -66,7 +66,10 @@
         "admissions_overall_per_million": {
           "type": "number"
         },
-        "date_unix": {
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {

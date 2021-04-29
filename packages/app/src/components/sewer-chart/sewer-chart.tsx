@@ -33,8 +33,12 @@ import {
   useSewerStationSelectProps,
 } from './logic';
 
+export type SewerChartData =
+  | Pick<Regionaal, 'sewer' | 'sewer_per_installation'>
+  | Pick<Municipal, 'sewer' | 'sewer_per_installation'>;
+
 interface SewerChartProps {
-  data: Regionaal | Municipal;
+  data: SewerChartData;
   timeframe: TimeframeOption;
   valueAnnotation: string;
   height?: number;
