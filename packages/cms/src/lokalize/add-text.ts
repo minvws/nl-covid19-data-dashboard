@@ -128,17 +128,20 @@ async function createTextDocumentForSubject(
     },
   ]);
 
-  return {
+  const text: Omit<LokalizeText, '_id'> = {
     _type: 'lokalizeText',
     key: `${subject}.${response.path}`,
     subject,
     path: response.path,
     is_newly_added: true,
     publish_count: 0,
+    should_display_empty: false,
     text: {
       _type: 'localeText',
       nl: response.nl,
       en: response.en,
     },
   };
+
+  return text;
 }
