@@ -20,7 +20,7 @@ export function LineChartTile<T extends TimestampedValue>({
   metadata,
   title,
   description,
-  timeframeOptions = ['all', '5weeks', 'week'],
+  timeframeOptions = ['all', '5weeks'],
   timeframeInitialValue = 'all',
   footer,
   ariaDescription,
