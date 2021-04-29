@@ -35,7 +35,7 @@ export function ReproductionChartTile({
   );
   const last_value = last(values) as NationalReproductionValue;
 
-  const tickSteps = calculateTickValues(values, 0.5);
+  // const tickSteps = calculateTickValues(values, 0.5)
 
   return (
     <ChartTile
@@ -66,7 +66,6 @@ export function ReproductionChartTile({
               label: siteText.common.signaalwaarde,
             },
           }}
-          tickValues={tickSteps}
         />
       )}
     </ChartTile>
@@ -78,16 +77,16 @@ export function ReproductionChartTile({
  * Then create an array with every tickStep till the highestTick
  * to use for the tickValues in the chart.
  */
-function calculateTickValues(
-  values: NationalReproductionValue[],
-  tickStep: number
-) {
-  const maxIndexAverage = Math.max(
-    ...values.map((x) => x.index_average).filter(isPresent)
-  );
-  const highestTick = Math.ceil(maxIndexAverage * 2) / 2;
+// function calculateTickValues(
+//   values: NationalReproductionValue[],
+//   tickStep: number
+// ) {
+//   const maxIndexAverage = Math.max(
+//     ...values.map((x) => x.index_average).filter(isPresent)
+//   );
+//   const highestTick = Math.ceil(maxIndexAverage * 2) / 2;
 
-  return Array(highestTick / tickStep + 1)
-    .fill(tickStep)
-    .map((step, index) => index * step);
-}
+//   return Array(highestTick / tickStep + 1)
+//     .fill(tickStep)
+//     .map((step, index) => index * step);
+// }
