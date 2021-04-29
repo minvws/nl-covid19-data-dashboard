@@ -5,6 +5,7 @@ import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Phone from '~/assets/phone.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -16,8 +17,8 @@ import Ziektegolf from '~/assets/ziektegolf.svg';
 import {
   CategoryMenu,
   Menu,
-  MetricMenuItemLink,
   MetricMenuButtonLink,
+  MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { AppContent } from '~/components/layout/app-content';
@@ -25,9 +26,33 @@ import { SidebarMetric } from '~/components/sidebar-metric';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
+export const nlPageMetricNames = [
+  'vaccine_administered_total',
+  'tested_overall',
+  'infectious_people',
+  'reproduction',
+  'deceased_rivm',
+  'hospital_nice',
+  'hospital_nice_per_age_group',
+  'intensive_care_nice',
+  'intensive_care_nice_per_age_group',
+  'nursing_home',
+  'disability_care',
+  'elderly_at_home',
+  'sewer',
+  'doctor',
+  'behavior',
+  'difference',
+  'corona_melder_app',
+] as const;
+
+export type NlPageMetricNames = typeof nlPageMetricNames[number];
+
+export type NationalPageMetricData = Pick<National, NlPageMetricNames>;
+
 interface NationalLayoutProps {
   lastGenerated: string;
-  data: National;
+  data: NationalPageMetricData;
   children?: React.ReactNode;
 }
 
@@ -323,6 +348,18 @@ export function NationalLayout(props: NationalLayoutProps) {
                     scope="nl"
                     metricName="behavior"
                     localeTextKey="gedrag_common"
+                  />
+                </MetricMenuItemLink>
+                <MetricMenuItemLink
+                  href="/landelijk/coronamelder"
+                  icon={<Phone />}
+                  title={siteText.corona_melder_app.sidebar.titel}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="corona_melder_app"
+                    localeTextKey="corona_melder_app"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

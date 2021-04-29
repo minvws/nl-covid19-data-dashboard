@@ -137,23 +137,24 @@ export const CollapsibleSection = ({
         </Summary>
 
         <Panel
-          ref={wrapperRef}
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
             height: open ? contentHeight : 0,
           }}
         >
-          <div
-            ref={ref}
-            css={css({
-              /**
-               * Outside margins of children are breaking height calculations ヽ(ಠ_ಠ)ノ..
-               * We'll add `overflow: hidden` in order to fix this.
-               */
-              overflow: 'hidden',
-            })}
-          >
-            {children}
+          <div ref={wrapperRef}>
+            <div
+              ref={ref}
+              css={css({
+                /**
+                 * Outside margins of children are breaking height calculations ヽ(ಠ_ಠ)ノ..
+                 * We'll add `overflow: hidden` in order to fix this.
+                 */
+                overflow: 'hidden',
+              })}
+            >
+              {children}
+            </div>
           </div>
         </Panel>
       </Disclosure>

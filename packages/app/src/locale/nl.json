@@ -110,7 +110,8 @@
     "kpi_titel": "Het aantal IC-opnames dat op één dag gemeld is",
     "linechart_legend_trend_label": "Intensive care-opnames",
     "linechart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-    "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is."
+    "linechart_description": "In deze grafiek staan de IC-opnames vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van IC-opnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal IC-opnames afneemt terwijl dit niet zo is. De grafiek laat ook een gemiddelde van het aantal IC-opnames over de afgelopen zeven dagen zien.",
+    "linechart_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "verdenkingen_huisartsen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt wekelijks bijgewerkt.",
@@ -199,7 +200,7 @@
       "legend_trend_label": "Bezetting gewone ziekenhuisbedden",
       "legend_inaccurate_label": "Cijfers zijn minder nauwkeurig"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is. De grafiek laat ook een gemiddelde van het aantal ziekenhuisopnames over de afgelopen zeven dagen zien.",
     "metadata": {
       "title": "Ziekenhuisopnames | Coronadashboard | Rijksoverheid.nl",
       "description": "Landelijk overzicht van het aantal mensen met COVID-19 dat een ziekenhuis is opgenomen."
@@ -214,7 +215,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -760,7 +762,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is. De grafiek laat ook een gemiddelde van het aantal ziekenhuisopnames over de afgelopen zeven dagen zien.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{safetyRegionName}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de veiligheidsregio {{safetyRegionName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
@@ -781,7 +783,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is. ",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -835,7 +838,7 @@
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
     "screen_reader_graph_content": "{{value}} virusdeeltjes per 100.000 inwoners",
     "barscale_titel": "Gemiddelde aantal virusdeeltjes per 100.000 inwoners",
-    "extra_uitleg": "Het gemiddelde wordt berekend aan de hand van de uitkomsten van alle rioolmetingen van één week. Hierbij wordt rekening gehouden met hoeveel inwoners er zijn aangesloten per rioolwaterzuiveringsinstallatie, en voor welk deel een rioolwaterzuiveringsinstallatie in de veiligheidsregio ligt.",
+    "extra_uitleg": "Een gemiddelde wordt berekend aan de hand van alle rioolmeetwaarden van één week. Er wordt hierbij rekening gehouden met hoeveel inwoners er zijn aangesloten per rioolwaterzuiveringsinstallatie, en voor welk deel een rioolwaterzuiveringsinstallatie in de veiligheidsregio ligt.",
     "barscale_screenreader_text": "{{value}} virusdeeltjes per 100.000 inwoners",
     "linechart_titel": "Gemiddeld aantal virusdeeltjes door de tijd heen (per 100.000 inwoners)",
     "bar_chart_title": "Meest recente meetwaarde per locatie in {{safetyRegion}}",
@@ -895,7 +898,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is.",
+    "linechart_description": "In deze grafiek staan de ziekenhuisopnames (inclusief directe IC-opnames) vermeld op de dag dat mensen ook echt zijn opgenomen, in plaats van op de dag dat ze gemeld zijn. Zo kunnen we namelijk de ontwikkeling van het coronavirus in Nederland goed zien. Let op: omdat het aanmelden van ziekenhuisopnames vaak een paar dagen later gebeurt, zijn de meest recente dagen nooit compleet en kan het lijken alsof het aantal ziekenhuisopnames afneemt terwijl dit niet zo is. De grafiek laat ook een gemiddelde van het aantal ziekenhuisopnames over de afgelopen zeven dagen zien.",
     "metadata": {
       "title": "Ziekenhuisopnames inwoners {{municipalityName}} | Coronadashboard | Rijksoverheid.nl",
       "description": "Overzicht van het aantal mensen in de gemeente {{municipalityName}} die met COVID-19 in het ziekenhuis zijn opgenomen."
@@ -916,7 +919,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Het aantal ziekenhuisopnames dat op één dag gemeld is.",
     "linechart_legend_titel": "Ziekenhuisopnames",
-    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "linechart_legend_underreported_titel": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "linechart_legend_titel_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Positief geteste mensen",
@@ -1480,6 +1484,7 @@
   "infected_age_groups": {
     "title": "Verdeling naar leeftijd",
     "description": "De blauwe rechterbalken in deze grafiek laten zien tot welke leeftijdsgroep positief geteste personen behoren. De grijze linkerbalken tonen hoe groot elke leeftijdsgroep is ten opzichte van de hele Nederlandse bevolking. De blauwe en grijze balken laten samen zien of leeftijdsgroepen naar verhouding meer of minder positief geteste personen hebben. Bijvoorbeeld: van alle positief geteste personen is 16% een twintiger (blauwe balk) en van alle Nederlanders is 13% een twintiger (grijze balk). De leeftijdsgroep twintigers heeft in dit voorbeeld naar verhouding meer positief geteste personen. De grafiek wordt dagelijks bijgewerkt en gaat alleen over de meest recent gemelde gevallen.",
+    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar.",
     "graph": {
       "age_group_percentage_title": "Verdeling leeftijdsgroepen in Nederland",
       "age_group_percentage_tooltip": "van de bevolking is {{ageGroupRange}} jaar",
@@ -1490,8 +1495,7 @@
       "clipped_value_message": "Deze waarde is groter dan in de grafiek is weergegeven",
       "value_percentage_title": "Positieve testen per leeftijdsgroep",
       "value_percentage_tooltip": "van het aantal positief geteste mensen is {{ageGroupRange}} jaar"
-    },
-    "example": "Bijvoorbeeld: Van alle positief geteste mensen is {{infectedPercentage}} tussen de {{ageGroupRange}} jaar. Van alle Nederlanders is {{ageGroupPercentage}} tussen de {{ageGroupRange}} jaar."
+    }
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1526,7 +1530,9 @@
         "text": "RIVM"
       }
     },
-    "linechart_metric_label": "Geïnfecteerde locaties"
+    "linechart_metric_label": "Geïnfecteerde locaties",
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1560,7 +1566,9 @@
     },
     "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1590,7 +1598,9 @@
     },
     "kpi_titel": "Aantal overleden personen",
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1623,7 +1633,9 @@
       }
     },
     "line_chart_legend_trend_label": "Aantal overleden bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Laatste waardes verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
@@ -1685,7 +1697,9 @@
     },
     "kpi_titel": "Aantal positief geteste bewoners van gehandicapteninstellingen per dag",
     "line_chart_legend_trend_label": "Aantal positief geteste bewoners",
-    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "line_chart_newly_infected_people_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+    "line_chart_newly_infected_people_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "Thuiswonende 70-plussers",
@@ -1718,7 +1732,9 @@
       "choropleth_daily_legenda": "Aantal per 100.000 thuiswonende 70-plussers",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers - COVID-19 sterfte",
@@ -1739,7 +1755,9 @@
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1771,7 +1789,9 @@
       "line_chart_daily_title": "Nieuwe besmettingen onder thuiswonenden van 70 jaar of ouder door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Nieuwe besmettingen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_positive_tested_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "section_deceased": {
       "title": "Thuiswonende 70-plussers in {{safetyRegion}} - COVID-19 sterfte",
@@ -1792,7 +1812,9 @@
       "line_chart_daily_title": "Aantal aan COVID-19 overleden 70-plussers door de tijd heen",
       "datums": "Laatste waarden verkregen op {{dateOfInsertion}}. Wordt dagelijks bijgewerkt.",
       "line_chart_legend_trend_label": "Aantal overledenen",
-      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_deceased_daily_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_deceased_daily_moving_average_short_label": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Aantal positief geteste mensen"
   },
@@ -1823,10 +1845,12 @@
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Meldingen van aan COVID-19 overleden patiënten door de tijd heen",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden.",
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden. In de grafiek worden ook gemiddelden over de afgelopen zeven dagen getoond.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -1857,10 +1881,12 @@
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze veiligheidsregio in de geselecteerde periode gemeld is dat ze zijn overleden.",
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden. In de grafiek worden ook gemiddelden over de afgelopen zeven dagen getoond.",
       "line_chart_covid_daily_legend_trend_label": "Gemeld aantal overleden patiënten",
       "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
-      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten"
+      "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2042,7 +2068,7 @@
       "verpleeghuiszorg_besmette_locaties": "Deze grafiek toont het aantal besmette verpleeghuislocaties door de tijd heen.",
       "verpleeghuiszorg_overleden_getest": "Deze grafiek toont het aantal overleden bewoners van verpleeghuislocaties waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
       "gehandicaptenzorg_positief_getest": "Deze grafiek toont het aantal bewoners van instellingen voor gehandicaptenzorg waarvan gemeld is dat ze positief getest zijn op het coronavirus.",
-      "gehandicaptenzorg_besmette_locaties": "Deze grafiek toont het totaal aantal besmette gehandicaptenzorglocaties door de tijd heen.",
+      "gehandicaptenzorg_besmette_locaties": "Deze grafiek toont het totaal aantal besmette gehandicaptenzorglocaties door de tijd heen. ",
       "gehandicaptenzorg_overleden": "Deze grafiek toont het aantal overleden bewoners van instellingen voor gehandicaptenzorg door de tijd heen.",
       "thuiswonende_ouderen_besmettingen": "Deze grafiek toont het aantal besmettingen onder thuiswonende ouderen door de tijd heen.",
       "thuiswonende_ouderen_overleden": "Deze grafiek toont het aantal thuiswonende ouderen dat is overleden aan COVID-19 door de tijd heen.",
@@ -2352,10 +2378,10 @@
       "description": "Dit is een schatting. Deze schatting is gemaakt met het gemiddelde van {{amount}} prikken per dag tussen 8.00 en 20.00 uur in de afgelopen zeven dagen."
     },
     "more_information": {
-      "label": "Meer informatie en nieuws over vaccinaties kunt u vinden op",
+      "label": "",
       "link": {
-        "href": "https://www.coronavaccinatie.nl/",
-        "text": "coronavaccinatie.nl"
+        "href": "",
+        "text": ""
       }
     },
     "bereidheid_section": {
@@ -2840,10 +2866,12 @@
       "kpi_covid_total_title": "Totaal aantal overleden COVID-19 patiënten",
       "kpi_covid_total_description": "Dit getal laat zien van hoeveel COVID-19 patiënten in deze gemeente in totaal is gemeld dat ze zijn overleden, sinds het begin van de meldingen.",
       "line_chart_covid_daily_title": "Gemelde aantal overleden COVID-19 patiënten door de tijd heen",
-      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in deze gemeente in de geselecteerde periode gemeld is dat ze zijn overleden.",
+      "line_chart_covid_daily_description": "Deze grafiek laat zien van hoeveel COVID-19 patiënten in de geselecteerde periode gemeld is dat ze zijn overleden. In de grafiek worden ook gemiddelden over de afgelopen zeven dagen getoond.",
       "line_chart_covid_daily_legend_trend_label": "Meldingen overleden patiënten",
       "line_chart_covid_daily_legend_trend_short_label": "Overleden patiënten",
-      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen"
+      "line_chart_covid_daily_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Gemiddeld aantal over de afgelopen 7 dagen"
     },
     "kpi_titel": "Gemeld aantal personen overleden aan COVID-19 per dag"
   },
@@ -2892,11 +2920,11 @@
       "labels": {
         "warnings": "Aantal waarschuwingen"
       }
-    }
-  },
-  "milestones": {
-    "toon_meer": "Toon eerdere gebeurtenissen",
-    "verwacht": "Verwacht"
+    },
+    "sidebar": {
+      "titel": "CoronaMelder-app"
+    },
+    "kpi_titel": "Aantal mensen dat anderen waarschuwde via CoronaMelder-app"
   },
   "choropleth_tooltip": {
     "patients": {
@@ -2909,6 +2937,11 @@
     "elderly_at_home": "Thuiswonende 70-plussers:",
     "sewer_regional": "Gemiddeld aantal virusdeeltjes:",
     "sewer_municipal": "Gemiddeld aantal virusdeeltjes:"
+  },
+  "milestones": {
+    "toon_meer": "Toon eerdere gebeurtenissen",
+    "verwacht": "Verwacht",
+    "toon_minder": "Verberg eerdere gebeurtenissen"
   },
   "section_sterftemonitor_vr": {
     "title": "Sterftemonitor",
@@ -2969,6 +3002,33 @@
       "ziekenhuisopnames": "Ziekenhuisopnames (incl. IC)",
       "grenswaarde_meer": "Grenswaarde is overschreden",
       "grenswaarde_minder": "Waarde is minder dan {{days}} dagen onder de grenswaarde"
+    }
+  },
+  "hospital_admissions_per_age_group": {
+    "chart_title": "Aantal ziekenhuisopnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep in het ziekenhuis zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen van de opnames die in die week hebben plaatsgevonden."
+  },
+  "ic_admissions_per_age_group": {
+    "chart_title": "Aantal IC-opnames per leeftijdsgroep door de tijd heen",
+    "chart_description": "Deze grafiek laat zien hoeveel mensen met het coronavirus in een bepaalde leeftijdsgroep op de intensive care zijn opgenomen, per 1.000.000 personen. De grafiek toont de weektotalen van de opnames die in die week hebben plaatsgevonden."
+  },
+  "admissions_per_age_group_chart": {
+    "legend": {
+      "admissions_age_0_19_per_million": "0-19",
+      "admissions_age_20_29_per_million": "20-29",
+      "admissions_age_30_39_per_million": "30-39",
+      "admissions_age_40_49_per_million": "40-49",
+      "admissions_age_50_59_per_million": "50-59",
+      "admissions_age_60_69_per_million": "60-69",
+      "admissions_age_70_79_per_million": "70-79",
+      "admissions_age_80_89_per_million": "80-89",
+      "admissions_age_90_plus_per_million": "90+",
+      "admissions_overall_per_million": "Alle leeftijden"
+    },
+    "legend_help_text": "Selecteer één of meerdere leeftijdsgroepen om deze te bekijken",
+    "line_chart_legend_inaccurate_label": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+    "tooltip_labels": {
+      "inaccurate": "Niet compleet"
     }
   }
 }
