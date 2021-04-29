@@ -2,6 +2,10 @@
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 import createSchema from 'part:@sanity/base/schema-creator';
+/**
+ * Import the ones using named exports
+ */
+import * as allDocuments from './documents';
 // documents are items that are published/queriable
 // some of these are 'singletons' but that's not enforced by the API
 // import siteSettings from "./documents/siteSettings";
@@ -20,6 +24,7 @@ import reproductionPage from './documents/pages/reproduction-page';
 import sewerPage from './documents/pages/sewer-page';
 import topicalPage from './documents/pages/topical-page';
 import vaccinationsPage from './documents/pages/vaccinations-page';
+import veelgesteldeVragenGroepen from './documents/pages/veelgestelde-vragen-groepen-page';
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
 import toegankelijkheid from './documents/toegankelijkheid';
 import localeBlock from './locale/locale-block';
@@ -30,8 +35,10 @@ import localeString from './locale/locale-string';
 import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
+import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
 import milestone from './objects/milestone';
+import titleDescriptionBlock from './objects/title-description-block';
 import lockdown from './restrictions/lockdown';
 import restriction from './restrictions/restriction';
 import restrictionCategory from './restrictions/restriction-category';
@@ -51,6 +58,7 @@ export default createSchema({
     article,
     editorial,
     veelgesteldeVragen,
+    veelgesteldeVragenGroepen,
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
@@ -65,6 +73,7 @@ export default createSchema({
     reproductionPage,
     sewerPage,
     vaccinationsPage,
+    ...Object.values(allDocuments),
 
     /** RESTRICTIONS */
     restrictionGroup,
@@ -78,6 +87,8 @@ export default createSchema({
     lineChart,
     collapsible,
     milestone,
+    faqQuestion,
+    titleDescriptionBlock,
 
     /* LOCALE HELPERS */
     localeString,

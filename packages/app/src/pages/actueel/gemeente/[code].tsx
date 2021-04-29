@@ -1,65 +1,98 @@
+import {
+  EscalationLevels,
+  MunicipalitiesTestedOverall,
+  MunicipalityProperties,
+  RegionsTestedOverall,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import { isEmpty } from 'lodash';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
-import { DataDrivenText } from '~/components-styled/data-driven-text';
-import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
-import { MaxWidth } from '~/components-styled/max-width';
-import { QuickLinks } from '~/components-styled/quick-links';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { SEOHead } from '~/components-styled/seo-head';
-import { TileList } from '~/components-styled/tile-list';
-import { WarningTile } from '~/components-styled/warning-tile';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
+import {
+  ChartRegionControls,
+  RegionControlOption,
+} from '~/components/chart-region-controls';
+import { ChoroplethLegenda } from '~/components/choropleth-legenda';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { escalationTooltip } from '~/components/choropleth/tooltips/region/escalation-tooltip';
-import { FCWithLayout, getDefaultLayout } from '~/domain/layout/layout';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
+import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { CollapsibleButton } from '~/components/collapsible';
+import { DataDrivenText } from '~/components/data-driven-text';
+import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
+import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { Markdown } from '~/components/markdown';
+import { MaxWidth } from '~/components/max-width';
+import { Metadata } from '~/components/metadata';
+import { RiskLevelIndicator } from '~/components/risk-level-indicator';
+import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
+import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
-import { DataSitemap } from '~/domain/topical/data-sitemap';
-import { EditorialSummary } from '~/domain/topical/editorial-teaser';
-import { EditorialTile } from '~/domain/topical/editorial-tile';
+import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
+import {
+  HighlightsTile,
+  WeeklyHighlightProps,
+} from '~/domain/topical/highlights-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
-import { TopicalChoroplethContainer } from '~/domain/topical/topical-choropleth-container';
+import { Sitemap } from '~/domain/topical/sitemap';
+import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { topicalPageQuery } from '~/queries/topical-page-query';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { useIntl } from '~/intl';
+import { getTopicalPageQuery } from '~/queries/topical-page-query';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getGmData,
   getLastGeneratedDate,
-  getText,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
-import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getText,
   getGmData,
   createGetChoroplethData({
-    vr: ({ escalation_levels }) => ({ escalation_levels }),
+    vr: ({ escalation_levels, tested_overall }) => ({
+      escalation_levels,
+      tested_overall,
+    }),
+    gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles: ArticleSummary[];
-    editorial: EditorialSummary;
-    highlight: HighlightTeaserProps;
-  }>(topicalPageQuery)
+    articles?: ArticleSummary[];
+    weeklyHighlight?: WeeklyHighlightProps;
+    highlights?: HighlightTeaserProps[];
+  }>(getTopicalPageQuery)
 );
 
-const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { text: siteText, municipalityName, choropleth, data, content } = props;
+const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
+  const { municipalityName, choropleth, data, content, lastGenerated } = props;
+
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
+  const { siteText, formatDate } = useIntl();
+
   const text = siteText.gemeente_actueel;
   const gmCode = router.query.code;
 
@@ -76,21 +109,28 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
     (item) => item.vrcode === safetyRegionForMunicipality?.code
   );
 
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
+    'municipal'
+  );
+
+  const dataSitemap = useDataSitemap('gemeente', gmCode as string, data);
+
   assert(
     filteredRegion && filteredRegion.level,
     `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
   );
 
+  const metadata = {
+    title: replaceVariablesInText(text.metadata.title, {
+      municipalityName,
+    }),
+    description: replaceVariablesInText(text.metadata.description, {
+      municipalityName,
+    }),
+  };
+
   return (
-    <>
-      <SEOHead
-        title={replaceVariablesInText(text.metadata.title, {
-          municipalityName,
-        })}
-        description={replaceVariablesInText(text.metadata.description, {
-          municipalityName,
-        })}
-      />
+    <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
         <MaxWidth id="content">
           <TileList>
@@ -116,10 +156,6 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
                     }
                   : undefined
               }
-            />
-            <WarningTile
-              message={siteText.regionaal_index.belangrijk_bericht}
-              variant="emphasis"
             />
 
             <MiniTrendTileLayout id="metric-navigation">
@@ -187,96 +223,205 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
-            <QuickLinks
-              header={text.quick_links.header}
-              links={[
-                {
-                  href: '/landelijk/vaccinaties',
-                  text: text.quick_links.links.nationaal,
-                },
-                safetyRegionForMunicipality
-                  ? {
-                      href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
-                      text: replaceVariablesInText(
-                        text.quick_links.links.veiligheidsregio,
-                        { safetyRegionName: safetyRegionForMunicipality.name }
-                      ),
-                    }
-                  : {
-                      href: '/veiligheidsregio',
-                      text: text.quick_links.links.veiligheidsregio_fallback,
-                    },
-                {
-                  href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
-                  text: replaceVariablesInText(
-                    text.quick_links.links.gemeente,
-                    {
-                      municipalityName: municipalityName,
-                    }
-                  ),
-                },
-              ]}
-            />
+            <CollapsibleButton
+              label={siteText.common_actueel.overview_links_header}
+            >
+              <Sitemap
+                quickLinksHeader={text.quick_links.header}
+                quickLinks={[
+                  {
+                    href: '/landelijk/vaccinaties',
+                    text: text.quick_links.links.nationaal,
+                  },
+                  safetyRegionForMunicipality
+                    ? {
+                        href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
+                        text: replaceVariablesInText(
+                          text.quick_links.links.veiligheidsregio,
+                          { safetyRegionName: safetyRegionForMunicipality.name }
+                        ),
+                      }
+                    : {
+                        href: '/veiligheidsregio',
+                        text: text.quick_links.links.veiligheidsregio_fallback,
+                      },
+                  {
+                    href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
+                    text: replaceVariablesInText(
+                      text.quick_links.links.gemeente,
+                      { municipalityName: municipalityName }
+                    ),
+                  },
+                ]}
+                dataSitemapHeader={replaceVariablesInText(
+                  text.data_sitemap_title,
+                  { municipalityName: municipalityName }
+                )}
+                dataSitemap={dataSitemap}
+              />
+            </CollapsibleButton>
 
-            {content.editorial && content.highlight && (
-              <>
+            {content.weeklyHighlight && content.highlights && (
+              <Box pt={3}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
                 />
-                <EditorialTile
-                  editorial={content.editorial}
-                  highlight={content.highlight}
+
+                <HighlightsTile
+                  weeklyHighlight={content.weeklyHighlight}
+                  highlights={content.highlights}
                 />
-              </>
+              </Box>
             )}
 
-            <Box pb={4}>
+            <TopicalTile>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.risicokaart.titel}
+                link={siteText.common_actueel.secties.risicokaart.link}
               />
-              <TopicalTile>
-                <TopicalChoroplethContainer
-                  description={
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: text.risiconiveaus.selecteer_toelichting,
-                      }}
-                    />
-                  }
-                  legendComponent={
-                    <EscalationMapLegenda
-                      data={choropleth.vr}
-                      metricName="escalation_levels"
-                      metricProperty="level"
-                    />
-                  }
-                >
+              <ChoroplethTwoColumnLayout
+                legendComponent={
+                  <EscalationMapLegenda
+                    data={choropleth.vr}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    lastDetermined={
+                      choropleth.vr.escalation_levels[0].last_determined_unix
+                    }
+                  />
+                }
+              >
+                <Box>
                   <SafetyRegionChoropleth
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="level"
-                    onSelect={createSelectRegionHandler(router, 'risiconiveau')}
-                    tooltipContent={escalationTooltip(
-                      createSelectRegionHandler(router, 'risiconiveau')
+                    getLink={reverseRouter.vr.risiconiveau}
+                    tooltipContent={(
+                      context: SafetyRegionProperties & EscalationLevels
+                    ) => (
+                      <EscalationRegionalTooltip
+                        context={context}
+                        getLink={reverseRouter.vr.risiconiveau}
+                      />
                     )}
-                    highlightCode={safetyRegionForMunicipality?.code}
                   />
-                </TopicalChoroplethContainer>
-              </TopicalTile>
-              <Box
-                borderTopWidth="1px"
-                borderTopStyle="solid"
-                borderTopColor={colors.silver}
-                mx={{ _: -3, md: 0 }}
-              />
-              <TopicalTile py={0}>
-                <Box mx={-3}>
-                  <EscalationLevelExplanations />
                 </Box>
-              </TopicalTile>
-            </Box>
+                <Box>
+                  {siteText.nationaal_actueel.risiconiveaus
+                    .belangrijk_bericht &&
+                    !isEmpty(
+                      siteText.nationaal_actueel.risiconiveaus
+                        .belangrijk_bericht
+                    ) && (
+                      <Box mb={3}>
+                        <WarningTile
+                          message={
+                            siteText.nationaal_actueel.risiconiveaus
+                              .belangrijk_bericht
+                          }
+                          variant="emphasis"
+                        />
+                      </Box>
+                    )}
+                  <Box mb={3}>
+                    <Markdown
+                      content={replaceVariablesInText(
+                        text.risiconiveaus.selecteer_toelichting,
+                        {
+                          last_update: formatDate(
+                            choropleth.vr.escalation_levels[0]
+                              .date_of_insertion_unix,
+                            'day-month'
+                          ),
+                        }
+                      )}
+                    />
+                  </Box>
+                </Box>
+              </ChoroplethTwoColumnLayout>
 
-            <DataSitemap />
+              <Box mt={4}>
+                <EscalationLevelExplanations />
+              </Box>
+            </TopicalTile>
+
+            <TopicalTile>
+              <TopicalSectionHeader
+                title={
+                  siteText.common_actueel.secties.positief_getest_kaart.titel
+                }
+              />
+
+              <ChoroplethTwoColumnLayout
+                legendComponent={
+                  <ChoroplethLegenda
+                    thresholds={
+                      regionThresholds.tested_overall.infected_per_100k
+                    }
+                    title={
+                      siteText.positief_geteste_personen.chloropleth_legenda
+                        .titel
+                    }
+                  />
+                }
+              >
+                <>
+                  {selectedMap === 'municipal' && (
+                    <MunicipalityChoropleth
+                      data={choropleth.gm}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      tooltipContent={(
+                        context: MunicipalityProperties &
+                          MunicipalitiesTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleMunicipalTooltip
+                          context={context}
+                        />
+                      )}
+                    />
+                  )}
+                  {selectedMap === 'region' && (
+                    <SafetyRegionChoropleth
+                      data={choropleth.vr}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      tooltipContent={(
+                        context: SafetyRegionProperties & RegionsTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleRegionalTooltip
+                          context={context}
+                        />
+                      )}
+                    />
+                  )}
+                </>
+
+                <Box>
+                  <Metadata
+                    date={
+                      choropleth.vr.escalation_levels[0].date_of_insertion_unix
+                    }
+                    source={siteText.positief_geteste_personen.bronnen.rivm}
+                  />
+                  <Text>
+                    {siteText.positief_geteste_personen.map_toelichting}
+                  </Text>
+                  <Box
+                    mb={4}
+                    css={css({ '> div': { justifyContent: 'flex-start' } })}
+                  >
+                    <ChartRegionControls
+                      value={selectedMap}
+                      onChange={setSelectedMap}
+                    />
+                  </Box>
+                </Box>
+              </ChoroplethTwoColumnLayout>
+            </TopicalTile>
 
             <Box pb={4}>
               <TopicalSectionHeader
@@ -291,10 +436,8 @@ const TopicalMunicipality: FCWithLayout<typeof getStaticProps> = (props) => {
           </TileList>
         </MaxWidth>
       </Box>
-    </>
+    </Layout>
   );
 };
-
-TopicalMunicipality.getLayout = getDefaultLayout();
 
 export default TopicalMunicipality;

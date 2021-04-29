@@ -15,6 +15,7 @@ export interface Municipal {
   tested_overall: MunicipalTestedOverall;
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
+  vaccine_coverage?: GmVaccineCoverage;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -22,6 +23,7 @@ export interface GmDeceasedRivm {
 }
 export interface GmDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average?: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -52,6 +54,7 @@ export interface MunicipalHospitalNice {
 export interface MunicipalHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average?: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -63,6 +66,7 @@ export interface MunicipalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average?: number | null;
   date_of_insertion_unix: number;
 }
 export interface MunicipalSewer {
@@ -91,6 +95,20 @@ export interface MunicipalSewerPerInstallationValue {
   rna_normalized: number;
   date_of_insertion_unix: number;
 }
+export interface GmVaccineCoverage {
+  values: GmVaccineCoverageValue[];
+  last_value: GmVaccineCoverageValue;
+}
+export interface GmVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface Municipalities {
   last_generated: string;
@@ -99,6 +117,7 @@ export interface Municipalities {
   code: string;
   hospital_nice: MunicipalitiesHospitalNice[];
   tested_overall: MunicipalitiesTestedOverall[];
+  sewer: MunicipalitiesSewer[];
 }
 export interface MunicipalitiesHospitalNice {
   date_unix: number;
@@ -114,6 +133,14 @@ export interface MunicipalitiesTestedOverall {
   infected: number;
   date_of_insertion_unix: number;
 }
+export interface MunicipalitiesSewer {
+  date_start_unix: number;
+  date_end_unix: number;
+  gmcode: string;
+  average: number;
+  total_installation_count: number;
+  date_of_insertion_unix: number;
+}
 
 export interface National {
   last_generated: string;
@@ -122,13 +149,17 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
+  downscaling?: NlDownscaling;
+  g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
+  intensive_care_nice_per_age_group?: NlIntensiveCareNicePerAgeGroup;
   tested_overall: NationalTestedOverall;
-  tested_per_age_group: NationalTestedPerAgeGroup;
+  tested_per_age_group: NlTestedPerAgeGroup;
   reproduction: NationalReproduction;
   sewer: NationalSewer;
   hospital_nice: NationalHospitalNice;
+  hospital_nice_per_age_group?: NlHospitalNicePerAgeGroup;
   hospital_lcps: NationalHospitalLcps;
   intensive_care_lcps: NationalIntensiveCareLcps;
   tested_ggd_daily: NationalTestedGgdDaily;
@@ -142,19 +173,21 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
+  vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
-  vaccine_delivery_estimate: NlVaccineEstimateDelivery;
+  vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
+  vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
   vaccine_administered: NlVaccineAdministered;
   vaccine_administered_estimate: NlVaccineAdministeredEstimate;
-  vaccine_administered_care_institutions: NlVaccineAdministeredCareInstitutions;
   vaccine_administered_doctors: NlVaccineAdministeredDoctors;
   vaccine_administered_ggd_ghor: NlVaccineAdministeredGgdGhor;
   vaccine_administered_ggd: NlVaccineAdministeredGgd;
-  vaccine_administered_hospitals: NlVaccineAdministeredHospitals;
-  vaccine_administered_lnaz: NlVaccineAdministeredLnaz;
+  vaccine_administered_hospitals_and_care_institutions: NlVaccineAdministeredHospitalsAndCareInstitutions;
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
+  vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
+  vaccine_stock: NlVaccineStock;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -166,7 +199,7 @@ export interface NationalDifference {
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
-  intensive_care_nice__admissions_moving_average: DifferenceDecimal;
+  intensive_care_nice__admissions_on_date_of_reporting: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
@@ -204,6 +237,30 @@ export interface NationalDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
+export interface NlDownscaling {
+  is_downscaling_possible: boolean;
+  current_level_of_measures: number;
+  reproduction_is_below_threshold: boolean;
+  reproduction_threshold_value: number;
+  reproduction_threshold_day_span: number;
+  intensive_care_nice_is_below_threshold: boolean;
+  intensive_care_nice_threshold_value: number;
+  intensive_care_nice_threshold_day_span: number;
+  hospital_nice_is_below_threshold: boolean;
+  hospital_nice_threshold_value: number;
+  hospital_nice_threshold_day_span: number;
+  date_of_insertion_unix: number;
+}
+export interface NlGNumber {
+  values: NlGNumberValue[];
+  last_value: NlGNumberValue;
+}
+export interface NlGNumberValue {
+  g_number: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NationalInfectiousPeople {
   values: NationalInfectiousPeopleValue[];
   last_value: NationalInfectiousPeopleValue;
@@ -220,7 +277,27 @@ export interface NationalIntensiveCareNice {
   last_value: NationalIntensiveCareNiceValue;
 }
 export interface NationalIntensiveCareNiceValue {
-  admissions_moving_average: number;
+  admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_reporting: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlIntensiveCareNicePerAgeGroup {
+  values: NlIntensiveCareNicePerAgeGroupValue[];
+  last_value: NlIntensiveCareNicePerAgeGroupValue;
+}
+export interface NlIntensiveCareNicePerAgeGroupValue {
+  admissions_age_0_19_per_million: number;
+  admissions_age_20_29_per_million: number;
+  admissions_age_30_39_per_million: number;
+  admissions_age_40_49_per_million: number;
+  admissions_age_50_59_per_million: number;
+  admissions_age_60_69_per_million: number;
+  admissions_age_70_79_per_million: number;
+  admissions_age_80_89_per_million: number;
+  admissions_age_90_plus_per_million: number;
+  admissions_overall_per_million: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -231,16 +308,26 @@ export interface NationalTestedOverall {
 export interface NationalTestedOverallValue {
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average?: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalTestedPerAgeGroup {
-  values: NationalTestedPerAgeGroupValue[];
+export interface NlTestedPerAgeGroup {
+  values: NlTestedPerAgeGroupValue[];
+  last_value: NlTestedPerAgeGroupValue;
 }
-export interface NationalTestedPerAgeGroupValue {
-  age_group_range: string;
-  infected_percentage: number;
-  age_group_percentage: number;
+export interface NlTestedPerAgeGroupValue {
+  infected_age_0_9_per_100k: number;
+  infected_age_10_19_per_100k: number;
+  infected_age_20_29_per_100k: number;
+  infected_age_30_39_per_100k: number;
+  infected_age_40_49_per_100k: number;
+  infected_age_50_59_per_100k: number;
+  infected_age_60_69_per_100k: number;
+  infected_age_70_79_per_100k: number;
+  infected_age_80_89_per_100k: number;
+  infected_age_90_plus_per_100k: number;
+  infected_overall_per_100k: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -274,7 +361,26 @@ export interface NationalHospitalNice {
 }
 export interface NationalHospitalNiceValue {
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average?: number | null;
   admissions_on_date_of_reporting: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlHospitalNicePerAgeGroup {
+  values: NlHospitalNicePerAgeGroupValue[];
+  last_value: NlHospitalNicePerAgeGroupValue;
+}
+export interface NlHospitalNicePerAgeGroupValue {
+  admissions_age_0_19_per_million: number;
+  admissions_age_20_29_per_million: number;
+  admissions_age_30_39_per_million: number;
+  admissions_age_40_49_per_million: number;
+  admissions_age_50_59_per_million: number;
+  admissions_age_60_69_per_million: number;
+  admissions_age_70_79_per_million: number;
+  admissions_age_80_89_per_million: number;
+  admissions_age_90_plus_per_million: number;
+  admissions_overall_per_million: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -304,8 +410,11 @@ export interface NationalTestedGgdDaily {
 }
 export interface NationalTestedGgdDailyValue {
   infected: number;
+  infected_moving_average?: number | null;
   infected_percentage: number;
+  infected_percentage_moving_average?: number | null;
   tested_total: number;
+  tested_total_moving_average?: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -327,7 +436,9 @@ export interface NationalNursingHome {
 }
 export interface NationalNursingHomeValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -340,7 +451,9 @@ export interface NationalDisabilityCare {
 }
 export interface NationalDisabilityCareValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average?: number | null;
   deceased_daily: number;
+  deceased_daily_moving_average?: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -407,6 +520,7 @@ export interface NationalDeceasedRivm {
 }
 export interface NationalDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average?: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -441,8 +555,10 @@ export interface NationalElderlyAtHome {
 }
 export interface NationalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_daily_moving_average?: number | null;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_daily_moving_average?: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -471,6 +587,20 @@ export interface NlCoronaMelderAppValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineCoverage {
+  values: NlVaccineCoverageValue[];
+  last_value: NlVaccineCoverageValue;
+}
+export interface NlVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlVaccineDelivery {
   values: NlVaccineDeliveryValue[];
   last_value: NlVaccineDeliveryValue;
@@ -478,10 +608,11 @@ export interface NlVaccineDelivery {
 export interface NlVaccineDeliveryValue {
   total: number;
   date_of_insertion_unix: number;
+  date_of_report_unix: number;
   date_start_unix: number;
   date_end_unix: number;
 }
-export interface NlVaccineEstimateDelivery {
+export interface NlVaccineDeliveryEstimate {
   values: NlVaccineDeliveryEstimateValue[];
   last_value: NlVaccineDeliveryEstimateValue;
 }
@@ -491,17 +622,37 @@ export interface NlVaccineDeliveryEstimateValue {
   date_start_unix: number;
   date_end_unix: number;
 }
+export interface NlVaccineDeliveryPerSupplier {
+  values: NlVaccineDeliveryPerSupplierValue[];
+  last_value: NlVaccineDeliveryPerSupplierValue;
+}
+export interface NlVaccineDeliveryPerSupplierValue {
+  total: number;
+  bio_n_tech_pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
+  cure_vac?: number;
+  janssen?: number;
+  sanofi?: number;
+  is_estimate: boolean;
+  week_number: number;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_report_unix: number;
+}
 export interface NlVaccineAdministered {
   values: NlVaccineAdministeredValue[];
   last_value: NlVaccineAdministeredValue;
 }
 export interface NlVaccineAdministeredValue {
-  pfizer?: number;
-  moderna?: number;
-  astra_zeneca?: number;
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
   cure_vac?: number;
   janssen?: number;
   sanofi?: number;
+  total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -511,24 +662,16 @@ export interface NlVaccineAdministeredEstimate {
   last_value: NlVaccineAdministeredEstimateValue;
 }
 export interface NlVaccineAdministeredEstimateValue {
-  pfizer?: number;
-  moderna?: number;
-  astra_zeneca?: number;
+  pfizer: number;
+  moderna: number;
+  astra_zeneca: number;
   cure_vac?: number;
   janssen?: number;
   sanofi?: number;
+  total: number;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
-}
-export interface NlVaccineAdministeredCareInstitutions {
-  values: NlVaccineAdministeredCareInstitutionsValue[];
-  last_value: NlVaccineAdministeredCareInstitutionsValue;
-}
-export interface NlVaccineAdministeredCareInstitutionsValue {
-  estimated: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
 }
 export interface NlVaccineAdministeredDoctors {
   values: NlVaccineAdministeredDoctorsValue[];
@@ -557,21 +700,12 @@ export interface NlVaccineAdministeredGgdValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineAdministeredHospitals {
-  values: NlVaccineAdministeredHospitalsValue[];
-  last_value: NlVaccineAdministeredHospitalsValue;
+export interface NlVaccineAdministeredHospitalsAndCareInstitutions {
+  values: NlVaccineAdministeredHospitalsAndCareInstitutionsValue[];
+  last_value: NlVaccineAdministeredHospitalsAndCareInstitutionsValue;
 }
-export interface NlVaccineAdministeredHospitalsValue {
+export interface NlVaccineAdministeredHospitalsAndCareInstitutionsValue {
   estimated: number;
-  date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NlVaccineAdministeredLnaz {
-  values: NlVaccineAdministeredLnazValue[];
-  last_value: NlVaccineAdministeredLnazValue;
-}
-export interface NlVaccineAdministeredLnazValue {
-  reported: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -607,6 +741,44 @@ export interface NlVaccineAdministeredPlannedValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlVaccineCoveragePerAgeGroup {
+  values: NlVaccineCoveragePerAgeGroupValue[];
+}
+export interface NlVaccineCoveragePerAgeGroupValue {
+  age_group_range: string;
+  age_group_percentage: number;
+  age_group_total: number;
+  fully_vaccinated: number;
+  partially_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_vaccinated_percentage: number;
+  partially_or_fully_vaccinated_percentage: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+}
+export interface NlVaccineStock {
+  values: NlVaccineStockValue[];
+  last_value: NlVaccineStockValue;
+}
+export interface NlVaccineStockValue {
+  total_available: number | null;
+  total_not_available: number | null;
+  bio_n_tech_pfizer_available: number | null;
+  bio_n_tech_pfizer_not_available: number | null;
+  bio_n_tech_pfizer_total: number | null;
+  moderna_available: number | null;
+  moderna_not_available: number | null;
+  moderna_total: number | null;
+  astra_zeneca_available: number | null;
+  astra_zeneca_not_available: number | null;
+  astra_zeneca_total: number | null;
+  janssen_available: number | null;
+  janssen_not_available: number | null;
+  janssen_total: number | null;
+  date_of_insertion_unix: number;
+  date_unix: number;
+}
 
 export interface Regionaal {
   last_generated: string;
@@ -614,6 +786,7 @@ export interface Regionaal {
   name: string;
   code: string;
   difference: RegionalDifference;
+  g_number: VrGNumber;
   sewer: RegionalSewer;
   sewer_per_installation: RegionalSewerPerInstallation;
   tested_overall: RegionalTestedOverall;
@@ -629,6 +802,7 @@ export interface Regionaal {
   escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
+  vaccine_coverage?: VrVaccineCoverage;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
@@ -658,6 +832,16 @@ export interface DifferenceInteger {
   difference: number;
   old_date_unix: number;
   new_date_unix: number;
+}
+export interface VrGNumber {
+  values: VrGNumberValue[];
+  last_value: VrGNumberValue;
+}
+export interface VrGNumberValue {
+  g_number: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface RegionalSewer {
   values: RegionalSewerValue[];
@@ -693,6 +877,7 @@ export interface RegionalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
+  infected_per_100k_moving_average?: number | null;
   date_of_insertion_unix: number;
 }
 export interface RegionalHospitalNice {
@@ -701,6 +886,7 @@ export interface RegionalHospitalNice {
 }
 export interface RegionalHospitalNiceValue {
   admissions_on_date_of_admission: number;
+  admissions_on_date_of_admission_moving_average?: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -711,8 +897,11 @@ export interface RegionalTestedGgdDaily {
 }
 export interface RegionalTestedGgdDailyValue {
   infected: number;
+  infected_moving_average?: number | null;
   infected_percentage: number;
+  infected_percentage_moving_average?: number | null;
   tested_total: number;
+  tested_total_moving_average?: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -736,10 +925,12 @@ export interface RegionalNursingHome {
 }
 export interface RegionalNursingHomeValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average: number;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
+  deceased_daily_moving_average: number;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -750,10 +941,12 @@ export interface RegionalDisabilityCare {
 }
 export interface RegionalDisabilityCareValue {
   newly_infected_people: number;
+  newly_infected_people_moving_average?: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
+  deceased_daily_moving_average?: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -807,6 +1000,7 @@ export interface RegionalDeceasedRivm {
 }
 export interface RegionalDeceasedRivmValue {
   covid_daily: number;
+  covid_daily_moving_average?: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -831,17 +1025,23 @@ export interface RegionalElderlyAtHome {
 }
 export interface RegionalElderlyAtHomeValue {
   positive_tested_daily: number;
+  positive_tested_daily_moving_average?: number | null;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
+  deceased_daily_moving_average?: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }
 export interface VrEscalationLevel {
-  date_unix: number;
   level: number;
-  valid_from_unix: number;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
   last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface VrTestedOverallSum {
@@ -862,6 +1062,20 @@ export interface VrHospitalNiceSumValue {
   admissions_per_1m: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrVaccineCoverage {
+  values: VrVaccineCoverageValue[];
+  last_value: VrVaccineCoverageValue;
+}
+export interface VrVaccineCoverageValue {
+  partially_vaccinated: number;
+  partially_vaccinated_percentage: number;
+  fully_vaccinated: number;
+  fully_vaccinated_percentage: number;
+  partially_or_fully_vaccinated: number;
+  date_unix: number;
+  date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
 
@@ -894,11 +1108,15 @@ export interface RegionsTestedOverall {
   date_of_insertion_unix: number;
 }
 export interface EscalationLevels {
-  date_unix: number;
   vrcode: string;
   level: number;
-  valid_from_unix: number;
+  positive_tested_per_100k: number;
+  hospital_admissions_per_million: number;
+  based_on_statistics_to_unix: number;
+  based_on_statistics_from_unix: number;
+  next_determined_unix: number;
   last_determined_unix: number;
+  valid_from_unix: number;
   date_of_insertion_unix: number;
 }
 export interface RegionsNursingHome {

@@ -1,19 +1,16 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import {
-  ArticleSummary,
-  ArticleTeaser,
-} from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 
 type ArticleListProps = {
-  articleSummaries: ArticleSummary[];
+  articleSummaries?: ArticleSummary[];
   hideLink?: boolean;
 };
 
 export function ArticleList({ articleSummaries }: ArticleListProps) {
-  if (articleSummaries.length === 0) {
+  if (!articleSummaries || articleSummaries.length === 0) {
     return null;
   }
 
@@ -44,14 +41,14 @@ export function ArticleList({ articleSummaries }: ArticleListProps) {
   );
 }
 
-const ArticleBox = styled.div(
+export const ArticleBox = styled.div(
   css({
     marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',
       sm: 'calc(50% - 16px)',
-      md: 'calc(33% - 32px)',
-      lg: 'calc(33% - 32px)',
+      md: 'calc(1 / 3 * 100% - 32px)',
+      lg: 'calc(1 / 3 * 100% - 32px)',
     }),
     '&:nth-child(even)': {
       ml: asResponsiveArray({ sm: '32px', md: 0, lg: 0, xl: 0 }),

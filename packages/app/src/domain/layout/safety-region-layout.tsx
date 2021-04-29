@@ -13,34 +13,34 @@ import {
   CategoryMenu,
   Menu,
   MetricMenuItemLink,
-} from '~/components-styled/aside/menu';
-import { Box } from '~/components-styled/base';
-import { AppContent } from '~/components-styled/layout/app-content';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Text } from '~/components-styled/typography';
-import { createSelectRegionHandler } from '~/components/choropleth/select-handlers/create-select-region-handler';
-import { getLayout as getSiteLayout } from '~/domain/layout/layout';
-import siteText from '~/locale/index';
-import { useBreakpoints } from '~/utils/useBreakpoints';
-import { SafetyRegionComboBox } from './components/safety-region-combo-box';
-import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
+  MetricMenuButtonLink,
+} from '~/components/aside/menu';
+import { Box } from '~/components/base';
+import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { AppContent } from '~/components/layout/app-content';
+import { SidebarMetric } from '~/components/sidebar-metric';
+import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
+import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
-interface SafetyRegionLayoutProps {
+type SafetyRegionLayoutProps = {
   lastGenerated: string;
-  data?: Regionaal;
-  safetyRegionName?: string;
   children?: React.ReactNode;
-}
-
-export function getSafetyRegionLayout() {
-  return function (page: React.ReactNode, pageProps: SafetyRegionLayoutProps) {
-    return getSiteLayout(
-      siteText.veiligheidsregio_metadata,
-      pageProps.lastGenerated
-    )(<SafetyRegionLayout {...pageProps}>{page}</SafetyRegionLayout>);
-  };
-}
+} & (
+  | {
+      data: Regionaal;
+      safetyRegionName: string;
+    }
+  | {
+      /**
+       * the route `/veiligheidsregio` can render without sidebar and thus without `data`
+       */
+      isLandingPage: true;
+      data?: undefined;
+      safetyRegionName?: undefined;
+    }
+);
 
 /**
  * SafetyRegionLayout is a composition of persistent layouts.
@@ -58,12 +58,12 @@ export function getSafetyRegionLayout() {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
+export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
-  const breakpoints = useBreakpoints();
-
   const router = useRouter();
+  const { siteText } = useIntl();
+
   const { code } = router.query;
 
   const isMainRoute =
@@ -71,12 +71,6 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
     router.route === `/veiligheidsregio/[code]`;
 
   const showMetricLinks = router.route !== '/veiligheidsregio';
-
-  const goToSafetyRegion = createSelectRegionHandler(
-    router,
-    'maatregelen',
-    !breakpoints.md
-  );
 
   return (
     <>
@@ -96,7 +90,7 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
 
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<SafetyRegionComboBox onSelect={goToSafetyRegion} />}
+        searchComponent={<SafetyRegionComboBox />}
         sidebarComponent={
           <>
             {/**
@@ -118,25 +112,27 @@ function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                 </Text>
 
                 <Menu>
-                  <MetricMenuItemLink
+                  <MetricMenuButtonLink
                     href={`/veiligheidsregio/${code}/maatregelen`}
                     title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
+                    buttonVariant="top"
                     subtitle={
                       siteText.veiligheidsregio_maatregelen.subtitel_sidebar
                     }
                   />
-                  <MetricMenuItemLink
+                  <MetricMenuButtonLink
                     href={`/veiligheidsregio/${code}/risiconiveau`}
                     title={siteText.veiligheidsregio_layout.headings.inschaling}
+                    buttonVariant="bottom"
                   >
                     <Box mt={2}>
                       <EscalationLevelInfoLabel
                         level={data.escalation_level.level as EscalationLevel}
-                        hasSmallIcon
+                        size="small"
                         useLevelColor
                       />
                     </Box>
-                  </MetricMenuItemLink>
+                  </MetricMenuButtonLink>
 
                   <CategoryMenu
                     title={

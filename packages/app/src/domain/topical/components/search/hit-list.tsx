@@ -1,12 +1,12 @@
 import css from '@styled-system/css';
 import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
-import { Box } from '~/components-styled/base';
-import { Text } from '~/components-styled/typography';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { default as siteText, default as text } from '~/locale';
+import { Box } from '~/components/base';
+import { Text } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
+import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
 
 interface HitListProps {
@@ -15,14 +15,17 @@ interface HitListProps {
 
 export function HitList({ scope }: HitListProps) {
   const { gmHits, vrHits, term, getOptionProps } = useSearchContext();
+  const { siteText } = useIntl();
 
   const isScopeVr = scope === 'vr';
 
   const hits = isScopeVr ? vrHits : gmHits;
-  const title = isScopeVr ? text.common.vr_plural : text.common.gm_plural;
-  const noHitsMessage = replaceVariablesInText(text.search.no_hits, {
+  const title = isScopeVr
+    ? siteText.common.vr_plural
+    : siteText.common.gm_plural;
+  const noHitsMessage = replaceVariablesInText(siteText.search.no_hits, {
     search: term,
-    subject: isScopeVr ? text.common.vr_plural : text.common.gm_plural,
+    subject: isScopeVr ? siteText.common.vr_plural : siteText.common.gm_plural,
   });
 
   return (

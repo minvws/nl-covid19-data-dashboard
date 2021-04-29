@@ -1,10 +1,13 @@
 import Head from 'next/head';
-import { Box } from '~/components-styled/base';
-import { ContentBlock } from '~/components-styled/cms/content-block';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText, { targetLanguage } from '~/locale/index';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { RichContent } from '~/components/cms/rich-content';
+import { Heading } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
@@ -18,33 +21,41 @@ interface AccessibilityPageData {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<AccessibilityPageData>(`
-  *[_type == 'toegankelijkheid']{
-    ...,
-    "description": {
-      ...,
-      "_type": description._type,
-      "${targetLanguage}": [
-        ...description.${targetLanguage}[]{
-          ...,
-          "asset": asset->,
-          markDefs[]{
-            ...,
-            "asset": asset->
-          }
-        }
-      ]
-    }
-  }[0]
+  createGetContent<AccessibilityPageData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
 
-  `)
+    return `*[_type == 'toegankelijkheid']{
+      ...,
+      "description": {
+        ...,
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]{
+            ...,
+            "asset": asset->,
+            markDefs[]{
+              ...,
+              "asset": asset->
+            }
+          }
+        ]
+      }
+    }[0]
+    `;
+  })
 );
 
-const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
+  const { siteText } = useIntl();
+  const { content, lastGenerated } = props;
 
   return (
-    <>
+    <Layout
+      {...siteText.toegankelijkheid_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"
@@ -59,20 +70,12 @@ const AccessibilityPage: FCWithLayout<typeof getStaticProps> = (props) => {
         />
       </Head>
 
-      <Box bg="white" py={{ _: 4, md: 5 }}>
-        <ContentBlock spacing={3}>
-          {content.title && <h2>{content.title}</h2>}
-          {content.description && <RichContent blocks={content.description} />}
-        </ContentBlock>
-      </Box>
-    </>
+      <Content>
+        {content.title && <Heading level={1}>{content.title}</Heading>}
+        {content.description && <RichContent blocks={content.description} />}
+      </Content>
+    </Layout>
   );
 };
-
-const metadata = {
-  ...siteText.toegankelijkheid_metadata,
-};
-
-AccessibilityPage.getLayout = getLayoutWithMetadata(metadata);
 
 export default AccessibilityPage;

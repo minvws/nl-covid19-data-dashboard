@@ -1,25 +1,27 @@
-import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import text from '~/locale/index';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { Heading, Text } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import styles from './error.module.scss';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const ErrorPage: FCWithLayout = () => {
+const ErrorPage = (props: StaticProps<typeof getStaticProps>) => {
+  const { lastGenerated } = props;
+  const { siteText } = useIntl();
+
   return (
-    <div className={styles.container}>
-      <MaxWidth>
-        <div className={styles.maxwidth}>
-          <h2>{text.error_titel.text}</h2>
-          <p>{text.error_beschrijving.text}</p>
-        </div>
-      </MaxWidth>
-    </div>
+    <Layout {...siteText.error_metadata} lastGenerated={lastGenerated}>
+      <Content>
+        <Heading level={1}>{siteText.error_titel.text}</Heading>
+        <Text>{siteText.error_beschrijving.text}</Text>
+      </Content>
+    </Layout>
   );
 };
-
-ErrorPage.getLayout = getLayoutWithMetadata(text.error_metadata);
 
 export default ErrorPage;

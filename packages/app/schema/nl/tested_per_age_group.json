@@ -1,8 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_tested_per_age_group",
+  "title": "nl_tested_per_age_group",
   "type": "object",
-  "required": ["values"],
   "additionalProperties": false,
   "properties": {
     "values": {
@@ -10,28 +9,64 @@
       "items": {
         "$ref": "#/definitions/value"
       }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
     }
   },
+  "required": ["values", "last_value"],
   "definitions": {
     "value": {
-      "title": "national_tested_per_age_group_value",
+      "title": "nl_tested_per_age_group_value",
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "age_group_range",
-        "infected_percentage",
-        "age_group_percentage",
+        "infected_age_0_9_per_100k",
+        "infected_age_10_19_per_100k",
+        "infected_age_20_29_per_100k",
+        "infected_age_30_39_per_100k",
+        "infected_age_40_49_per_100k",
+        "infected_age_50_59_per_100k",
+        "infected_age_60_69_per_100k",
+        "infected_age_70_79_per_100k",
+        "infected_age_80_89_per_100k",
+        "infected_age_90_plus_per_100k",
+        "infected_overall_per_100k",
         "date_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "age_group_range": {
-          "type": "string"
-        },
-        "infected_percentage": {
+        "infected_age_0_9_per_100k": {
           "type": "number"
         },
-        "age_group_percentage": {
+        "infected_age_10_19_per_100k": {
+          "type": "number"
+        },
+        "infected_age_20_29_per_100k": {
+          "type": "number"
+        },
+        "infected_age_30_39_per_100k": {
+          "type": "number"
+        },
+        "infected_age_40_49_per_100k": {
+          "type": "number"
+        },
+        "infected_age_50_59_per_100k": {
+          "type": "number"
+        },
+        "infected_age_60_69_per_100k": {
+          "type": "number"
+        },
+        "infected_age_70_79_per_100k": {
+          "type": "number"
+        },
+        "infected_age_80_89_per_100k": {
+          "type": "number"
+        },
+        "infected_age_90_plus_per_100k": {
+          "type": "number"
+        },
+        "infected_overall_per_100k": {
           "type": "number"
         },
         "date_unix": {

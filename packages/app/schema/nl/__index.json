@@ -13,6 +13,7 @@
     "disability_care",
     "doctor",
     "elderly_at_home",
+    "g_number",
     "hospital_lcps",
     "hospital_nice",
     "infectious_people",
@@ -33,15 +34,15 @@
     "vaccine_delivery_estimate",
     "vaccine_administered",
     "vaccine_administered_estimate",
-    "vaccine_administered_care_institutions",
     "vaccine_administered_doctors",
     "vaccine_administered_ggd_ghor",
     "vaccine_administered_ggd",
-    "vaccine_administered_hospitals",
-    "vaccine_administered_lnaz",
+    "vaccine_administered_hospitals_and_care_institutions",
     "vaccine_administered_total",
     "vaccine_administered_rate_moving_average",
-    "vaccine_administered_planned"
+    "vaccine_administered_planned",
+    "vaccine_stock",
+    "vaccine_delivery_per_supplier"
   ],
   "additionalProperties": false,
   "properties": {
@@ -66,11 +67,20 @@
     "doctor": {
       "$ref": "doctor.json"
     },
+    "downscaling": {
+      "$ref": "downscaling.json"
+    },
+    "g_number": {
+      "$ref": "g_number.json"
+    },
     "infectious_people": {
       "$ref": "infectious_people.json"
     },
     "intensive_care_nice": {
       "$ref": "intensive_care_nice.json"
+    },
+    "intensive_care_nice_per_age_group": {
+      "$ref": "intensive_care_nice_per_age_group.json"
     },
     "tested_overall": {
       "$ref": "tested_overall.json"
@@ -86,6 +96,9 @@
     },
     "hospital_nice": {
       "$ref": "hospital_nice.json"
+    },
+    "hospital_nice_per_age_group": {
+      "$ref": "hospital_nice_per_age_group.json"
     },
     "hospital_lcps": {
       "$ref": "hospital_lcps.json"
@@ -126,20 +139,23 @@
     "corona_melder_app": {
       "$ref": "corona_melder_app.json"
     },
+    "vaccine_coverage": {
+      "$ref": "vaccine_coverage.json"
+    },
     "vaccine_delivery": {
       "$ref": "vaccine_delivery.json"
     },
     "vaccine_delivery_estimate": {
       "$ref": "vaccine_delivery_estimate.json"
     },
+    "vaccine_delivery_per_supplier": {
+      "$ref": "vaccine_delivery_per_supplier.json"
+    },
     "vaccine_administered": {
       "$ref": "vaccine_administered.json"
     },
     "vaccine_administered_estimate": {
       "$ref": "vaccine_administered_estimate.json"
-    },
-    "vaccine_administered_care_institutions": {
-      "$ref": "vaccine_administered_care_institutions.json"
     },
     "vaccine_administered_doctors": {
       "$ref": "vaccine_administered_doctors.json"
@@ -150,11 +166,8 @@
     "vaccine_administered_ggd": {
       "$ref": "vaccine_administered_ggd.json"
     },
-    "vaccine_administered_hospitals": {
-      "$ref": "vaccine_administered_hospitals.json"
-    },
-    "vaccine_administered_lnaz": {
-      "$ref": "vaccine_administered_lnaz.json"
+    "vaccine_administered_hospitals_and_care_institutions": {
+      "$ref": "vaccine_administered_hospitals_and_care_institutions.json"
     },
     "vaccine_administered_total": {
       "$ref": "vaccine_administered_total.json"
@@ -164,6 +177,12 @@
     },
     "vaccine_administered_planned": {
       "$ref": "vaccine_administered_planned.json"
+    },
+    "vaccine_coverage_per_age_group": {
+      "$ref": "vaccine_coverage_per_age_group.json"
+    },
+    "vaccine_stock": {
+      "$ref": "vaccine_stock.json"
     }
   }
 }

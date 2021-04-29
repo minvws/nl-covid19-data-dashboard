@@ -1,25 +1,27 @@
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import { MaxWidth } from '~/components-styled/max-width';
-import text from '~/locale/index';
-import styles from './over.module.scss';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { Heading, Text } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const NotFound: FCWithLayout = () => {
+const NotFound = (props: StaticProps<typeof getStaticProps>) => {
+  const { lastGenerated } = props;
+  const { siteText } = useIntl();
+
   return (
-    <div className={styles.container}>
-      <MaxWidth>
-        <div className={styles.maxwidth}>
-          <h2>{text.notfound_titel.text}</h2>
-          <p>{text.notfound_beschrijving.text}</p>
-        </div>
-      </MaxWidth>
-    </div>
+    <Layout {...siteText.notfound_metadata} lastGenerated={lastGenerated}>
+      <Content>
+        <Heading level={1}>{siteText.error_titel.text}</Heading>
+        <Text>{siteText.error_beschrijving.text}</Text>
+      </Content>
+    </Layout>
   );
 };
-
-NotFound.getLayout = getLayoutWithMetadata(text.notfound_metadata);
 
 export default NotFound;

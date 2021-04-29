@@ -1,5 +1,11 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 
+export type FAQuestionAndAnswer = {
+  content: RichContentBlock[] | null;
+  title: string;
+  group: string;
+};
+
 export type CollapsibleList = {
   content: RichContentBlock[] | null;
   title: string;
@@ -43,6 +49,7 @@ export interface Article {
   metaDescription: string;
   publicationDate: string;
   isHighlighted: boolean;
+  category: string;
 }
 
 export interface ImageBlock {
@@ -141,3 +148,9 @@ declare module 'picosanity' {
     fetch<R = never>(query: string, params?: QueryParams): Promise<R>;
   }
 }
+
+export type TitleDescriptionBlock = {
+  _type: 'titleDescriptionBlock';
+  description: RichContentBlock[];
+  title: string;
+};

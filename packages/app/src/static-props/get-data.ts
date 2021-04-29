@@ -7,11 +7,9 @@ import {
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
-import safetyRegions from '~/data/index';
-import municipalities from '~/data/municipalSearchData';
+import { vrData } from '~/data/vr';
+import { gmData } from '~/data/gm';
 import { client, localize } from '~/lib/sanity';
-import { targetLanguage } from '~/locale/index';
-import { parseMarkdownInLocale } from '~/utils/parse-markdown-in-locale';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -48,15 +46,12 @@ export function createGetContent<T>(
         : queryOrQueryGetter;
     const rawContent = await client.fetch<T>(query);
 
-    const content = localize(rawContent ?? {}, [targetLanguage, 'nl']) as T;
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
 
     return { content };
-  };
-}
-
-export async function getText() {
-  return {
-    text: parseMarkdownInLocale((await import('../locale/index')).default),
   };
 }
 
@@ -78,7 +73,7 @@ export function getVrData(context: GetStaticPropsContext) {
 
   sortTimeSeriesInDataInPlace(data);
 
-  const safetyRegion = safetyRegions.find((r) => r.code === code);
+  const safetyRegion = vrData.find((x) => x.code === code);
 
   return {
     data,
@@ -93,8 +88,7 @@ export function getGmData(context: GetStaticPropsContext) {
 
   const data = loadJsonFromDataFile<Municipal>(`${code}.json`);
 
-  const municipalityName =
-    municipalities.find((r) => r.gemcode === code)?.name || '';
+  const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
 
   sortTimeSeriesInDataInPlace(data);
 

@@ -1,65 +1,83 @@
+import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
-import { RichContent } from '~/components-styled/cms/rich-content';
-import { CollapsibleSection } from '~/components-styled/collapsible';
-import { MaxWidth } from '~/components-styled/max-width';
-import { FCWithLayout, getLayoutWithMetadata } from '~/domain/layout/layout';
-import siteText, { targetLanguage } from '~/locale/index';
-import { createGetStaticProps } from '~/static-props/create-get-static-props';
+import { Box } from '~/components/base';
+import { RichContent } from '~/components/cms/rich-content';
+import { CollapsibleSection } from '~/components/collapsible';
+import { Heading } from '~/components/typography';
+import { Content } from '~/domain/layout/content';
+import { Layout } from '~/domain/layout/layout';
+import { useIntl } from '~/intl';
+import {
+  createGetStaticProps,
+  StaticProps,
+} from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
-import { CollapsibleList, RichContentBlock } from '~/types/cms';
-import { getSkipLinkId } from '~/utils/skipLinks';
-import styles from './over.module.scss';
-import { Box } from '~/components-styled/base';
+import { FAQuestionAndAnswer, RichContentBlock } from '~/types/cms';
+import { getSkipLinkId } from '~/utils/skip-links';
+
 interface VeelgesteldeVragenData {
   title: string | null;
   description: RichContentBlock[] | null;
-  questions: CollapsibleList[];
+  questions: FAQuestionAndAnswer[];
 }
-
-const query = `*[_type == 'veelgesteldeVragen']{
-  ...,
-  "description": {
-    "_type": description._type,
-    "${targetLanguage}": [
-      ...description.${targetLanguage}[]
-      {
-        ...,
-        "asset": asset->
-       },
-    ]
-  },
-  "questions": [
-    ...questions[]
-    {
-      ...,
-                
-      "content": {
-        ...content,
-        "${targetLanguage}": [...content.${targetLanguage}[]
-          {
-            ...,
-            "asset": asset->
-           },
-        ]
-      }
-  }]
-  
-}[0]
-`;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<VeelgesteldeVragenData>(query)
+  createGetContent<VeelgesteldeVragenData>((_context) => {
+    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
+    // const { locale } = context;
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+
+    return `*[_type == 'veelgesteldeVragen']{
+      ...,
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
+          {
+            ...,
+            "asset": asset->
+          },
+        ]
+      },
+      "questions": [
+        ...questions[]
+        {
+          ...,
+          "group": group->group.${locale},
+          "content": {
+            ...content,
+            "${locale}": [...content.${locale}[]
+              {
+                ...,
+                "asset": asset->
+              },
+            ]
+          }
+      }]
+      
+    }[0]
+    `;
+  })
 );
 
-const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
-  const { content } = props;
+const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
+  const { content, lastGenerated } = props;
+  const { siteText } = useIntl();
+
+  const groups = groupBy<FAQuestionAndAnswer>(
+    content.questions,
+    (x) => x.group
+  );
 
   return (
-    <>
+    <Layout
+      {...siteText.veelgestelde_vragen_metadata}
+      lastGenerated={lastGenerated}
+    >
       <Head>
         <link
           key="dc-type"
@@ -74,40 +92,31 @@ const Verantwoording: FCWithLayout<typeof getStaticProps> = (props) => {
         />
       </Head>
 
-      <div className={styles.container}>
-        <MaxWidth>
-          <div className={styles.maxwidth}>
-            {content.title && <h2>{content.title}</h2>}
-            {content.description && (
-              <RichContent blocks={content.description} />
-            )}
-            {content.questions && (
-              <article>
-                {content.questions.map((item) => {
-                  const id = getSkipLinkId(item.title);
-                  return (
-                    <CollapsibleSection key={id} id={id} summary={item.title}>
-                      {item.content && (
-                        <Box mt={3}>
-                          <RichContent blocks={item.content} />
-                        </Box>
-                      )}
-                    </CollapsibleSection>
-                  );
-                })}
-              </article>
-            )}
-          </div>
-        </MaxWidth>
-      </div>
-    </>
+      <Content>
+        {content.title && <Heading level={1}>{content.title}</Heading>}
+        {content.description && <RichContent blocks={content.description} />}
+        {Object.entries(groups).map(([group, questions]) => (
+          <Box as="article" mt={4} key={group}>
+            <Heading level={2} fontSize={3}>
+              {group}
+            </Heading>
+            {questions.map((item) => {
+              const id = getSkipLinkId(item.title);
+              return (
+                <CollapsibleSection key={id} id={id} summary={item.title}>
+                  {item.content && (
+                    <Box mt={3}>
+                      <RichContent blocks={item.content} />
+                    </Box>
+                  )}
+                </CollapsibleSection>
+              );
+            })}
+          </Box>
+        ))}
+      </Content>
+    </Layout>
   );
 };
-
-const metadata = {
-  ...siteText.veelgestelde_vragen_metadata,
-};
-
-Verantwoording.getLayout = getLayoutWithMetadata(metadata);
 
 export default Verantwoording;

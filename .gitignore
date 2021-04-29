@@ -21,3 +21,6 @@ node_modules
 /cypress/videos
 
 .vercel
+
+# TODO rename the Sanity locale exports to en/nl.json and ignore those files instead
+packages/app/src/locale/*_export.json

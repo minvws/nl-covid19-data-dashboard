@@ -1,5 +1,5 @@
 import { Children, ReactNode } from 'react';
-import { Box } from '~/components-styled/base';
+import { Box } from '~/components/base';
 
 type MiniTrendTileLayoutProps = {
   children: ReactNode;
@@ -16,12 +16,7 @@ export function MiniTrendTileLayout({
   const gutterSize = 4;
 
   return (
-    <Box
-      display={{ _: 'block', md: 'flex' }}
-      overflow="hidden"
-      mx={-gutterSize}
-      id={id}
-    >
+    <Box display={{ _: 'block', md: 'flex' }} mx={-gutterSize} id={id}>
       {tiles.map((tile: ReactNode, index: number) => (
         <Box flex={`1 1 ${columnWidth}`} key={index} mx={gutterSize}>
           {tile}

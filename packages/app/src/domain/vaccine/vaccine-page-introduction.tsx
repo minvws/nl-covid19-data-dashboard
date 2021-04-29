@@ -1,22 +1,20 @@
 import { National } from '@corona-dashboard/common';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
-import { Box } from '~/components-styled/base';
-import { ContentHeader } from '~/components-styled/content-header';
-import { HeadingWithIcon } from '~/components-styled/heading-with-icon';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Tile } from '~/components-styled/tile';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
-import siteText, { Locale } from '~/locale';
-import { createDate } from '~/utils/createDate';
-import { formatDate } from '~/utils/formatDate';
-import { formatPercentage } from '~/utils/formatNumber';
+import { Box } from '~/components/base';
+import { ContentHeader } from '~/components/content-header';
+import { HeadingWithIcon } from '~/components/heading-with-icon';
+import { KpiValue } from '~/components/kpi-value';
+import { Tile } from '~/components/tile';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Heading, InlineText, Text } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 
 interface VaccinePageIntroductionProps {
-  text: Locale['vaccinaties'];
+  text: any;
   data: National;
 }
 
@@ -24,6 +22,8 @@ export function VaccinePageIntroduction({
   text,
   data,
 }: VaccinePageIntroductionProps) {
+  const { siteText, formatPercentage, formatDate } = useIntl();
+
   const roundedMillion =
     Math.floor(
       (data.vaccine_administered_total.last_value.estimated / 1_000_000) * 10
@@ -60,6 +60,7 @@ export function VaccinePageIntroduction({
                 </Heading>
                 <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
                 <VaccineAdministrationsOverTimeChart
+                  title={text.grafiek_gezette_prikken.titel}
                   values={data.vaccine_administered_total.values}
                 />
               </Box>
@@ -129,6 +130,8 @@ export function VaccinePageIntroduction({
             dateOfInsertionUnix:
               data.vaccine_administered_total.last_value.date_of_insertion_unix,
             dataSources: [],
+            moreInformationLabel: text.more_information.label,
+            moreInformationLink: text.more_information.link,
           }}
         />
       </Box>
