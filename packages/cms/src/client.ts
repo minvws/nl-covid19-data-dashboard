@@ -1,4 +1,4 @@
-import sanityClient, { ClientConfig, SanityClient } from '@sanity/client';
+import sanityClient, { ClientConfig } from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
 import sanityJson from '../sanity.json';
