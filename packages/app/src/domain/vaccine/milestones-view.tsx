@@ -105,7 +105,7 @@ export function MilestonesView(props: MilestoneViewProps) {
                         mb={2}
                         borderBottomWidth="1px"
                         borderBottomStyle="solid"
-                        borderBottomColor="gray"
+                        borderBottomColor="border"
                       />
                     )}
                 </Box>

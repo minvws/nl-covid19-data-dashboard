@@ -1,3 +1,5 @@
+import css from '@styled-system/css';
+import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import ExternalLinkIcon from '~/assets/external-link-2.svg';
 import { getImageProps } from '~/lib/sanity';
@@ -33,9 +35,9 @@ export const CompactDecoratedLink = ({
   href: string;
 }) => {
   return (
-    <Link href={href}>
-      <a style={{ textDecoration: 'none' }}>
-        <Box borderTop="1px solid gray" height="5rem">
+    <Link href={href} passHref>
+      <StyledCompactDecoratedLink>
+        <Box borderTop="1px solid" borderTopColor="border" height="5rem">
           <Box display="flex" height="5rem">
             <Box
               pl={3}
@@ -61,10 +63,17 @@ export const CompactDecoratedLink = ({
             </Box>
           </Box>
         </Box>
-      </a>
+      </StyledCompactDecoratedLink>
     </Link>
   );
 };
+
+const StyledCompactDecoratedLink = styled.a(
+  css({
+    textDecoration: 'none',
+    '&:hover, &:focus': { textDecoration: 'underline' },
+  })
+);
 
 export const ExpandedDecoratedLink = ({
   link,
@@ -72,8 +81,8 @@ export const ExpandedDecoratedLink = ({
   link: DecoratedLinkDocument;
 }) => {
   return (
-    <Link href={link.href}>
-      <a style={{ textDecoration: 'none' }}>
+    <Link href={link.href} passHref>
+      <StyledExpandedDecoratedLink>
         <Box display="flex">
           <Box
             width={122}
@@ -84,9 +93,7 @@ export const ExpandedDecoratedLink = ({
             py={3}
           >
             <SanityImage
-              {...getImageProps(link.cover, {
-                defaultWidth: 122,
-              })}
+              {...getImageProps(link.cover, { defaultWidth: 122 })}
             />
           </Box>
           <Box display="flex" py={3} pl={3}>
@@ -99,6 +106,7 @@ export const ExpandedDecoratedLink = ({
                 color="gray"
                 fontWeight="bold"
                 textTransform="uppercase"
+                fontSize="0.75rem"
               >
                 {link.category}
               </InlineText>
@@ -115,11 +123,21 @@ export const ExpandedDecoratedLink = ({
               marginLeft="auto"
               color="link"
             >
-              <ChevronIcon />
+              <ChevronIcon width="9px" />
             </Box>
           </Box>
         </Box>
-      </a>
+      </StyledExpandedDecoratedLink>
     </Link>
   );
 };
+
+const StyledExpandedDecoratedLink = styled.a(
+  css({
+    textDecoration: 'none',
+    color: 'body',
+    '&:hover, &:focus': {
+      color: 'link',
+    },
+  })
+);
