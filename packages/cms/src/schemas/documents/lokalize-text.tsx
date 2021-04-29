@@ -1,30 +1,22 @@
-import React from 'react';
-
 /**
- * A lokalizeText type is referenced by a lokalizeSubject. There can be any number of
- * texts grouped under a subject. Each has a path which corresponds with the
- * JSON path from the root-level key (subject).
+ * A text coming from the original Lokalize JSON structure is split into a
+ * subject (the first name in the path) and the remaining JSON path. This way it
+ * is easy to group and list the documents.
  *
- * The text for both EN and NL are stored in a localeText.
- *
- * This is the multi-line version of lokalizeString. Not sure if we need it but
- * seeing if this is useful...
+ * The key is added with :: notation for easy access to the search function in
+ * both Lokalize and Sanity.
  */
-
-// veiligheidsregio_actueel::data_driven_texts::intake_intensivecare_ma::difference::singular
-
 export const lokalizeText = {
   name: 'lokalizeText',
   type: 'document',
   title: 'Text',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     {
-      title: 'Lokalize pad',
-      name: 'search_key',
+      title: 'Key',
+      name: 'key',
       type: 'string',
       readOnly: true,
-      inputComponent: ReadOnlyPath,
+      hidden: true,
     },
     {
       title: 'Onderwerp',
@@ -58,39 +50,31 @@ export const lokalizeText = {
     },
     {
       title: 'Toon als lege tekst',
-      name: 'display_empty',
+      name: 'should_display_empty',
       type: 'boolean',
+    },
+    {
+      name: 'is_newly_added',
+      type: 'boolean',
+      readOnly: true,
+      hidden: true,
+    },
+    {
+      name: 'publish_count',
+      type: 'number',
+      readOnly: true,
+      hidden: true,
     },
   ],
   preview: {
     select: {
+      /**
+       * The key field works probably a little better for the searching results
+       * list, but the path field is cleaner when browsing texts because it
+       * avoids a lot of string duplication.
+       */
       title: 'path',
       subtitle: 'text.nl',
     },
   },
 };
-
-interface Field__incomplete {
-  value?: string;
-  type: {
-    title: string;
-    [key: string]: unknown;
-  };
-  [key: string]: unknown;
-}
-
-function ReadOnlyPath({ value, type }: Field__incomplete) {
-  return (
-    <div>
-      <strong>{type.title}</strong>
-      <div style={{ fontFamily: 'monospace' }}>
-        {value?.split('::').map((x, i, list) => (
-          <span style={{ display: 'inline-block' }}>
-            {list[i - 1] && '::'}
-            {x}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
