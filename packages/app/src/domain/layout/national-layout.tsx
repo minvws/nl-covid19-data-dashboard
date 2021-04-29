@@ -357,7 +357,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="behavior"
+                    metricName="corona_melder_app"
                     localeTextKey="corona_melder_app"
                   />
                 </MetricMenuItemLink>
