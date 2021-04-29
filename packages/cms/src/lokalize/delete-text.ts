@@ -49,16 +49,12 @@ import { LokalizeText } from './types';
         name: 'paths',
         message: `What path in ${subjectResponse.subject}?`,
         choices,
-        validate: (x) => {
-          console.log('validate', x);
-          return x.length > 0;
-        },
+        validate: (x) => x.length > 0,
       },
       {
         type: (prev) => (prev.length > 0 ? 'confirm' : null),
         name: 'confirmed',
-        message: (prev, values) => {
-          console.log('values', values, 'prev', prev);
+        message: (_prev, values) => {
           return `Are you sure you want to delete:\n\n${values.paths
             .map((x: string) => `${subject}.${x}`)
             .join('\n')}`;
@@ -70,8 +66,6 @@ import { LokalizeText } from './types';
       const documentIdsToDelete = allTexts
         .filter((x) => response.paths.includes(x.path))
         .map((x) => x._id);
-
-      console.log(response.paths, documentIdsToDelete);
 
       const transaction = documentIdsToDelete.reduce(
         (tx, id) => tx.delete(id),

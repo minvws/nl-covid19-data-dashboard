@@ -13,4 +13,7 @@ import { getClient } from '../client';
       process.exit(1);
     });
   });
-})();
+})().catch((err) => {
+  console.error(`Delete all failed: ${err.message}`);
+  process.exit(1);
+});
