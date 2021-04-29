@@ -4,7 +4,7 @@ import { EOL } from 'os';
 import { parse } from '@fast-csv/parse';
 import { set } from 'lodash';
 
-const MUTATIONS_LOG_FILE = path.join(__dirname, 'key-mutations.csv');
+const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 const HEADER = `timestamp,action,key${EOL}`;
 
 interface TextMutation {
