@@ -43,6 +43,7 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
+  'corona_melder_app',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
@@ -357,7 +358,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="behavior"
+                    metricName="corona_melder_app"
                     localeTextKey="corona_melder_app"
                   />
                 </MetricMenuItemLink>
