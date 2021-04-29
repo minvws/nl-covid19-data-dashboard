@@ -201,9 +201,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   seriesConfig={[
                     {
                       type: 'area',
-                      metricProperty:
-                        'admissions_on_date_of_admission_moving_average',
-                      label: text.linechart_legend_titel_moving_average,
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: text.linechart_legend_titel,
                       color: colors.data.primary,
                     },
                   ]}
