@@ -2378,10 +2378,10 @@
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
     },
     "more_information": {
-      "label": "Read more about the",
+      "label": "",
       "link": {
-        "href": "https://www.government.nl/topics/coronavirus-covid-19/dutch-vaccination-programme",
-        "text": "Dutch vaccination programme against COVID-19"
+        "href": "",
+        "text": ""
       }
     },
     "bereidheid_section": {
