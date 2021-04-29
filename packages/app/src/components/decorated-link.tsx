@@ -97,23 +97,10 @@ export const ExpandedDecoratedLink = ({
             />
           </Box>
           <Box display="flex" py={3} pl={3}>
-            <Box
-              justifyContent="flex-start"
-              display="flex"
-              flexDirection="column"
-            >
-              <InlineText
-                color="gray"
-                fontWeight="bold"
-                textTransform="uppercase"
-                fontSize="0.75rem"
-              >
-                {link.category}
-              </InlineText>
-              <InlineText fontSize={2} fontWeight="bold">
-                {link.title}
-              </InlineText>
-            </Box>
+            <InlineText fontSize={2} fontWeight="bold">
+              {link.title}
+            </InlineText>
+
             <Box
               width="5rem"
               display="flex"
