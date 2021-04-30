@@ -12,24 +12,45 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
   Menu,
-  MetricMenuItemLink,
   MetricMenuButtonLink,
-} from '~/components-styled/aside/menu';
-import { Box } from '~/components-styled/base';
-import { EscalationLevelInfoLabel } from '~/components-styled/escalation-level';
-import { AppContent } from '~/components-styled/layout/app-content';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Text } from '~/components-styled/typography';
+  MetricMenuItemLink,
+} from '~/components/aside/menu';
+import { Box } from '~/components/base';
+import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { AppContent } from '~/components/layout/app-content';
+import { SidebarMetric } from '~/components/sidebar-metric';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
+
+export const vrPageMetricNames = [
+  'code',
+  'escalation_level',
+  'tested_overall',
+  'deceased_rivm',
+  'hospital_nice',
+  'nursing_home',
+  'disability_care',
+  'elderly_at_home',
+  'sewer',
+  'behavior',
+  'difference',
+] as const;
+
+export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
+
+export type SafetyRegionPageMetricData = Pick<
+  Regionaal,
+  VrRegionPageMetricNames
+>;
 
 type SafetyRegionLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
-      data: Regionaal;
+      data: SafetyRegionPageMetricData;
       safetyRegionName: string;
     }
   | {

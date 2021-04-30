@@ -1,40 +1,67 @@
 import { useMemo } from 'react';
-import { useBreakpoints } from './useBreakpoints';
+import { useBreakpoints } from './use-breakpoints';
 
 export function useReverseRouter() {
   const breakpoints = useBreakpoints();
   const openMenuSuffix = !breakpoints.md ? '?menu=1' : '';
 
   return useMemo(() => {
-    // prettier-ignore
-    const reverseRouter =  {
+    const reverseRouter = {
       actueel: {
         vr: (code: string) => `/actueel/veiligheidsregio/${code}`,
-        gm: (code: string) => `/actueel/gemeente/${code}`
+        gm: (code: string) => `/actueel/gemeente/${code}`,
+      },
+
+      nl: {
+        index: () => reverseRouter.nl.vaccinaties() + openMenuSuffix,
+        vaccinaties: () => `/landelijk/vaccinaties`,
+        positiefGetesteMensen: () => `/landelijk/positief-geteste-mensen`,
+        besmettelijkeMensen: () => `/landelijk/besmettelijke-mensen`,
+        reproductiegetal: () => `/landelijk/reproductiegetal`,
+        sterfte: () => `/landelijk/sterfte`,
+        ziekenhuisopnames: () => `/landelijk/ziekenhuis-opnames`,
+        intensiveCareOpnames: () => `/landelijk/intensive-care-opnames`,
+        verpleeghuiszorg: () => `/landelijk/verpleeghuiszorg`,
+        gehandicaptenzorg: () => `/landelijk/gehandicaptenzorg`,
+        thuiswonendeOuderen: () => `/landelijk/thuiswonende-ouderen`,
+        rioolwater: () => `/landelijk/rioolwater`,
+        verdenkingenHuisartsen: () => `/landelijk/verdenkingen-huisartsen`,
+        gedrag: () => `/landelijk/gedrag`,
+        maatregelen: () => `/landelijk/maatregelen`,
       },
 
       gm: {
-        index: (code: string) =>  reverseRouter.gm.positiefGetesteMensen(code) + openMenuSuffix,
-        positiefGetesteMensen: (code: string) => `/gemeente/${code}/positief-geteste-mensen`,
+        index: (code: string) =>
+          reverseRouter.gm.positiefGetesteMensen(code) + openMenuSuffix,
+        positiefGetesteMensen: (code: string) =>
+          `/gemeente/${code}/positief-geteste-mensen`,
         sterfte: (code: string) => `/gemeente/${code}/sterfte`,
-        ziekenhuisopnames: (code: string) => `/gemeente/${code}/ziekenhuis-opnames`,
+        ziekenhuisopnames: (code: string) =>
+          `/gemeente/${code}/ziekenhuis-opnames`,
         rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
       },
 
       vr: {
-        index: (code: string) =>  reverseRouter.vr.risiconiveau(code) + openMenuSuffix,
+        index: (code: string) =>
+          reverseRouter.vr.risiconiveau(code) + openMenuSuffix,
         maatregelen: (code: string) => `/veiligheidsregio/${code}/maatregelen`,
-        risiconiveau: (code: string) => `/veiligheidsregio/${code}/risiconiveau`,
-        positiefGetesteMensen: (code: string) => `/veiligheidsregio/${code}/positief-geteste-mensen`,
+        risiconiveau: (code: string) =>
+          `/veiligheidsregio/${code}/risiconiveau`,
+        positiefGetesteMensen: (code: string) =>
+          `/veiligheidsregio/${code}/positief-geteste-mensen`,
         sterfte: (code: string) => `/veiligheidsregio/${code}/sterfte`,
-        ziekenhuisopnames: (code: string) => `/veiligheidsregio/${code}/ziekenhuis-opnames`,
-        verpleeghuiszorg: (code: string) => `/veiligheidsregio/${code}/verpleeghuiszorg`,
-        gehandicaptenzorg: (code: string) => `/veiligheidsregio/${code}/gehandicaptenzorg`,
-        thuiswonendeOuderen: (code: string) => `/veiligheidsregio/${code}/thuiswonende-ouderen`,
+        ziekenhuisopnames: (code: string) =>
+          `/veiligheidsregio/${code}/ziekenhuis-opnames`,
+        verpleeghuiszorg: (code: string) =>
+          `/veiligheidsregio/${code}/verpleeghuiszorg`,
+        gehandicaptenzorg: (code: string) =>
+          `/veiligheidsregio/${code}/gehandicaptenzorg`,
+        thuiswonendeOuderen: (code: string) =>
+          `/veiligheidsregio/${code}/thuiswonende-ouderen`,
         rioolwater: (code: string) => `/veiligheidsregio/${code}/rioolwater`,
         gedrag: (code: string) => `/veiligheidsregio/${code}/gedrag`,
-      }
-    } as const
+      },
+    } as const;
 
     return reverseRouter;
   }, [openMenuSuffix]);

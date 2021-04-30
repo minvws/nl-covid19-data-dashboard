@@ -1,13 +1,16 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
+import { Layout } from '~/domain/layout/layout';
+import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -17,17 +20,17 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getGmData,
+  selectGmPageMetricData,
 } from '~/static-props/get-data';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { colors } from '~/style/theme';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getGmData,
+  selectGmPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -38,15 +41,19 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    data,
+    selectedGmData: data,
     municipalityName,
-    data: { deceased_rivm: dataRivm, difference },
+    selectedGmData: { deceased_rivm: dataRivm, difference },
     content,
     lastGenerated,
   } = props;
 
   const { siteText } = useIntl();
   const text = siteText.gemeente_sterfte;
+  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
+    dataRivm.values,
+    4
+  );
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -118,20 +125,57 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={text.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               text.section_deceased_rivm.line_chart_covid_daily_description
             }
-            values={dataRivm.values}
-            linesConfig={[
-              {
-                metricProperty: 'covid_daily',
-              },
-            ]}
             metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
-          />
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataRivm.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'covid_daily_moving_average',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label_moving_average,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'covid_daily',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: dataRivmUnderReportedDateStart,
+                      end: Infinity,
+                      label:
+                        text.section_deceased_rivm
+                          .line_chart_covid_daily_legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
+            )}
+          </ChartTile>
         </TileList>
       </MunicipalityLayout>
     </Layout>

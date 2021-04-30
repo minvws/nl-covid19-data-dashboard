@@ -2,8 +2,8 @@ import css from '@styled-system/css';
 import { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { Box } from '~/components-styled/base';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { Box } from '~/components/base';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 type CoverageRowProps = {
   children: [ReactNode, ReactNode, ReactNode];

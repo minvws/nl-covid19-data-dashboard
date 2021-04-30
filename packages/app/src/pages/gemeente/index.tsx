@@ -1,5 +1,5 @@
-import { Box } from '~/components-styled/base';
-import { Heading, Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { Heading, Text } from '~/components/typography';
 import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
@@ -12,7 +12,7 @@ import {
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 

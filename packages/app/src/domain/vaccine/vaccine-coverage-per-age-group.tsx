@@ -1,9 +1,9 @@
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
-import { InlineText } from '~/components-styled/typography';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
-import { useBreakpoints } from '~/utils/useBreakpoints';
-import { Box } from '../../components-styled/base';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { Box } from '../../components/base';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
 import { CoverageRow } from './components/coverage-row';
 

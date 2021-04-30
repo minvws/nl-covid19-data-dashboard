@@ -1,6 +1,6 @@
-import { CategoricalBarScaleCategory } from '~/components-styled/categorical-bar-scale';
-import { colors } from '~/style/theme';
+import { CategoricalBarScaleCategory } from '~/components/categorical-bar-scale';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 
 export function useEscalationThresholds() {
   const { siteText } = useIntl();

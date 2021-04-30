@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { asResponsiveArray } from '~/style/utils';
-import { Heading } from '~/components-styled/typography';
-import { Box } from '~/components-styled/base';
+import { Heading } from '~/components/typography';
+import { Box } from '~/components/base';
 import { LinkGroup, LinkItemProps, LinkGroupProps } from './link-group';
 
 type SitemapProps = {

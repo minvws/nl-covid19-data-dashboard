@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import municipalCodeToRegionCodeLookup from '~/data/municipalCodeToRegionCodeLookup';
+import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { RegionGeoJSON } from '@corona-dashboard/common';
 
 /**
@@ -18,7 +18,7 @@ export function useMunicipalityBoundingbox(
       return [undefined, undefined];
     }
 
-    const vrcode = municipalCodeToRegionCodeLookup[selectedMunicipality];
+    const vrcode = vrCodeByGmCode[selectedMunicipality];
 
     if (vrcode) {
       const vrFeature = regionGeo.features.find(

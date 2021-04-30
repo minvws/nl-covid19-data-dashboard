@@ -10,10 +10,21 @@
         "date_of_insertion_unix"
       ],
       "properties": {
-        "date_unix": { "type": "integer" },
-        "infected": { "type": "number" },
-        "infected_per_100k": { "type": "number" },
-        "date_of_insertion_unix": { "type": "integer" }
+        "date_unix": {
+          "type": "integer"
+        },
+        "infected": {
+          "type": "number"
+        },
+        "infected_per_100k": {
+          "type": "number"
+        },
+        "infected_per_100k_moving_average": {
+          "type": ["number", "null"]
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
       }
     }
   },

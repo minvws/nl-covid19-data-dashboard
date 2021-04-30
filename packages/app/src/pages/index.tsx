@@ -10,39 +10,38 @@ import { isEmpty } from 'lodash';
 import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import {
   ChartRegionControls,
   RegionControlOption,
-} from '~/components-styled/chart-region-controls';
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
-import { CollapsibleButton } from '~/components-styled/collapsible';
-import { DataDrivenText } from '~/components-styled/data-driven-text';
-import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
-import { Markdown } from '~/components-styled/markdown';
-import { MaxWidth } from '~/components-styled/max-width';
-import { Metadata } from '~/components-styled/metadata';
-import { TileList } from '~/components-styled/tile-list';
-import { Heading, Text } from '~/components-styled/typography';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { WarningTile } from '~/components-styled/warning-tile';
+} from '~/components/chart-region-controls';
+import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { CollapsibleButton } from '~/components/collapsible';
+import { DataDrivenText } from '~/components/data-driven-text';
+import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
+import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { Markdown } from '~/components/markdown';
+import { MaxWidth } from '~/components/max-width';
+import { Metadata } from '~/components/metadata';
+import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
 import { Search } from '~/domain/topical/components/search';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
@@ -60,11 +59,11 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlData,
 } from '~/static-props/get-data';
-import { createDate } from '~/utils/createDate';
+import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -77,31 +76,20 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles: ArticleSummary[];
-    weeklyHighlight: WeeklyHighlightProps;
-    highlights: HighlightTeaserProps[];
+    articles?: ArticleSummary[];
+    weeklyHighlight?: WeeklyHighlightProps;
+    highlights?: HighlightTeaserProps[];
   }>(getTopicalPageQuery),
-  () => {
-    const data = getNlData();
-
-    for (const metric of Object.values(data)) {
-      if (typeof metric === 'object' && metric !== null) {
-        for (const [metricProperty, metricValue] of Object.entries(metric)) {
-          if (metricProperty === 'values') {
-            (metricValue as {
-              values: Array<unknown>;
-            }).values = [];
-          }
-        }
-      }
-    }
-
-    return data;
-  }
+  selectNlData(
+    'tested_overall',
+    'hospital_nice',
+    'difference',
+    'vaccine_administered_total'
+  )
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -124,14 +112,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
-        {/**
-         * Since now the sections have a H2 heading I think we need to include
-         * a hidden H1 here.
-         */}
-        <VisuallyHidden>
-          <Heading level={1}>{text.title}</Heading>
-        </VisuallyHidden>
-
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -142,7 +122,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   the_netherlands: text.the_netherlands,
                 }
               )}
-              link={text.secties.actuele_situatie.link}
+              headingLevel={1}
+              link={{
+                ...text.secties.actuele_situatie.link,
+                href: reverseRouter.nl.index(),
+              }}
             />
 
             <Box width={{ lg: '65%' }}>
@@ -219,7 +203,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
             </CollapsibleButton>
 
-            {content.weeklyHighlight && content.highlights.length > 0 && (
+            {content.weeklyHighlight && content.highlights && (
               <Box pt={3}>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}

@@ -72,6 +72,10 @@ export default {
           },
         ],
       },
+      {
+        type: 'collapsible',
+        title: 'Inklapbaar blok',
+      },
       // @TODO
       // {
       //   type: "lineChart"

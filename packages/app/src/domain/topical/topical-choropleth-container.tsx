@@ -2,10 +2,10 @@ import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
 import { ReactNode } from 'react';
-import { Box } from '~/components-styled/base';
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
-import { Text } from '~/components-styled/typography';
-import { WarningTile } from '~/components-styled/warning-tile';
+import { Box } from '~/components/base';
+import { ChoroplethLegenda } from '~/components/choropleth-legenda';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { asResponsiveArray } from '~/style/utils';
 
 /**

@@ -4,28 +4,28 @@ import {
 } from '@corona-dashboard/common';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { Anchor } from '~/components-styled/anchor';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Markdown } from '~/components-styled/markdown';
-import { PageBarScale } from '~/components-styled/page-barscale';
-import { TileList } from '~/components-styled/tile-list';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+import { Anchor } from '~/components/anchor';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
+import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import regionCodeToMunicipalCodeLookup from '~/data/regionCodeToMunicipalCodeLookup';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { PageBarScale } from '~/components/page-barscale';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Heading, InlineText, Text } from '~/components/typography';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -36,17 +36,17 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData('tested_ggd_average', 'tested_ggd_daily', 'g_number'),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -59,7 +59,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, safetyRegionName, content, lastGenerated } = props;
+  const {
+    selectedVrData: data,
+    choropleth,
+    safetyRegionName,
+    content,
+    lastGenerated,
+  } = props;
 
   const { siteText, formatNumber, formatPercentage } = useIntl();
 
@@ -72,7 +78,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
 
-  const municipalCodes = regionCodeToMunicipalCodeLookup[data.code];
+  const municipalCodes = gmCodesByVrCode[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
 
   const metadata = {
@@ -164,12 +170,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
             metadata={{
               source: text.bronnen.rivm,
             }}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -198,7 +205,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
@@ -302,7 +309,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
@@ -327,9 +334,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{ isPercentage: true }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
@@ -371,7 +378,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

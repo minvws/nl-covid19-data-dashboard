@@ -7,26 +7,29 @@ import {
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic/background-rectangle';
-import { PageBarScale } from '~/components-styled/page-barscale';
-import { SEOHead } from '~/components-styled/seo-head';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
+import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
-import { UnderReportedTooltip } from '~/domain/underreported/under-reported-tooltip';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { PageBarScale } from '~/components/page-barscale';
+import { SEOHead } from '~/components/seo-head';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -36,22 +39,15 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { createDate } from '~/utils/createDate';
-import {
-  DateRange,
-  getTrailingDateRange,
-} from '~/utils/get-trailing-date-range';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData('hospital_lcps'),
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),
@@ -65,7 +61,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
@@ -75,14 +71,14 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const lastValueNice = data.hospital_nice.last_value;
   const lastValueLcps = data.hospital_lcps.last_value;
 
-  const underReportedRange = getTrailingDateRange(dataHospitalNice.values, 4);
+  const underReportedRange = getBoundaryDateStartUnix(
+    dataHospitalNice.values,
+    4
+  );
+
+  const featureHospitalMovingAverage = useFeature('hospitalMovingAverage');
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
-
-  const lcpsOldDataRange = [
-    createDate(dataHospitalLcps.values[0].date_unix),
-    new Date('1 June 2020'),
-  ] as DateRange;
 
   const { siteText } = useIntl();
   const text = siteText.ziekenhuisopnames_per_dag;
@@ -197,95 +193,131 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChoroplethTile>
 
-          <LineChartTile
+          <ChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
-            ariaDescription={graphDescriptions.ziekenhuisopnames}
-            values={dataHospitalNice.values}
-            signaalwaarde={40}
-            formatTooltip={(values) => {
-              const value = values[0];
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={value.__date >= underReportedRange[0]}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            linesConfig={[
-              {
-                metricProperty: 'admissions_on_date_of_admission',
-              },
-            ]}
             metadata={{
               source: text.bronnen.nice,
             }}
-            componentCallback={addBackgroundRectangleCallback(
-              underReportedRange,
-              {
-                fill: colors.data.underReported,
-              }
-            )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: text.linechart_legend_titel,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label: text.linechart_legend_underreported_titel,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+            timeframeOptions={['all', '5weeks']}
+          >
+            {(timeframe) =>
+              featureHospitalMovingAverage.isEnabled ? (
+                <TimeSeriesChart
+                  values={dataHospitalNice.values}
+                  timeframe={timeframe}
+                  ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty:
+                        'admissions_on_date_of_admission_moving_average',
+                      label: text.linechart_legend_titel_moving_average,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: text.linechart_legend_titel,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 40,
+                      label: siteText.common.signaalwaarde,
+                    },
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRange,
+                        end: Infinity,
+                        label: text.linechart_legend_underreported_titel,
+                        shortLabel: siteText.common.incomplete,
+                      },
+                    ],
+                  }}
+                />
+              ) : (
+                <TimeSeriesChart
+                  values={dataHospitalNice.values}
+                  timeframe={timeframe}
+                  ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: text.linechart_legend_titel,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 40,
+                      label: siteText.common.signaalwaarde,
+                    },
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRange,
+                        end: Infinity,
+                        label: text.linechart_legend_underreported_titel,
+                        shortLabel: siteText.common.incomplete,
+                      },
+                    ],
+                  }}
+                />
+              )
+            }
+          </ChartTile>
 
-          <LineChartTile
+          <ChartTile
+            title={siteText.hospital_admissions_per_age_group.chart_title}
+            description={
+              siteText.hospital_admissions_per_age_group.chart_description
+            }
+            timeframeOptions={['all', '5weeks']}
+            metadata={{ source: text.bronnen.nice }}
+          >
+            {(timeframe) => (
+              <AdmissionsPerAgeGroup
+                values={data.hospital_nice_per_age_group.values}
+                timeframe={timeframe}
+              />
+            )}
+          </ChartTile>
+
+          <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
-            values={dataHospitalLcps.values}
-            linesConfig={[
-              {
-                metricProperty: 'beds_occupied_covid',
-              },
-            ]}
             metadata={{
               source: text.bronnen.lnaz,
             }}
-            componentCallback={addBackgroundRectangleCallback(
-              lcpsOldDataRange,
-              {
-                fill: colors.data.underReported,
-              }
+            timeframeOptions={['all', '5weeks']}
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataHospitalLcps.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'area',
+                    metricProperty: 'beds_occupied_covid',
+                    label: text.chart_bedbezetting.legend_trend_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: dataHospitalLcps.values[0].date_unix,
+                      end: new Date('1 June 2020').getTime() / 1000,
+                      label: text.chart_bedbezetting.legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                    },
+                  ],
+                }}
+              />
             )}
-            formatTooltip={(values) => {
-              const value = values[0];
-              const isInaccurateValue = value.__date < lcpsOldDataRange[1];
-
-              return (
-                <UnderReportedTooltip
-                  value={value}
-                  isInUnderReportedRange={isInaccurateValue}
-                  underReportedText={siteText.common.incomplete}
-                />
-              );
-            }}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label: text.chart_bedbezetting.legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label: text.chart_bedbezetting.legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
 import { useMemo } from 'react';
 import styled from 'styled-components';
-import { Box } from '~/components-styled/base';
-import { InlineText } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { useBreakpoints } from '~/utils/useBreakpoints';
-import { useDynamicScale } from '~/utils/useDynamicScale';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useDynamicScale } from '~/utils/use-dynamic-scale';
 
 export function CoverageProgressBar(props: {
   partiallyVaccinated: number;

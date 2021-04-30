@@ -6,7 +6,7 @@
     },
     {
       "implements": "part:@sanity/desk-tool/language-select-component",
-      "path": "./select-language-provider.js"
+      "path": "./select-language-provider"
     }
   ]
 }
