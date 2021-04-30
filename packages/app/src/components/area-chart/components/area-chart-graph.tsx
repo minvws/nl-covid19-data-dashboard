@@ -204,8 +204,6 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
           </Group>
         )}
 
-        {children}
-
         {/**
          * Render the bar on top of the trends because it captures mouse hover when you are above the trend line
          */}
@@ -221,6 +219,11 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
           onMouseLeave={handleHover}
         />
       </Group>
+
+      {/**
+       * Render the dividers under the touch/mouse bar so it's always possible to interact with the graph
+       */}
+      {children}
     </StyledSvg>
   );
 }
