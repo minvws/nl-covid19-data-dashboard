@@ -1,19 +1,31 @@
-import sanityClient from '@sanity/client';
+import sanityClient, { ClientConfig } from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
-import sanityConfig from '../sanity.json';
+import sanityJson from '../sanity.json';
 
-/**
- * @TODO load dotenv elsewhere maybe and take dataset from env
- */
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
 });
 
-export const client = sanityClient({
+/**
+ * Sanity uses some predefined env variable names.
+ * For more info see: https://www.sanity.io/docs/studio-environment-variables
+ *
+ * Below we are using env vars instead of reading from sanity.json since it
+ * makes the code a little more flexible and also easier to move to CLI package
+ * where it probably fits better.
+ */
+
+const clientConfig: ClientConfig = {
   apiVersion: '2021-03-25',
-  dataset: 'development',
-  projectId: sanityConfig.api.projectId,
-  token: process.env.SANITY_TOKEN,
+  projectId: sanityJson.api.projectId,
+  dataset: sanityJson.api.dataset,
+  token: process.env.SANITY_STUDIO_TOKEN,
   useCdn: false,
-});
+};
+
+export function getClient(dataset?: string) {
+  return dataset
+    ? sanityClient({ ...clientConfig, dataset })
+    : sanityClient(clientConfig);
+}

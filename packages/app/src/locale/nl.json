@@ -804,13 +804,7 @@
     "barchart_titel": "Verdeling naar leeftijd (totaal aantal mensen)",
     "barchart_toelichting": "Deze grafiek toont de verdeling van het aantal positieve tests over leeftijdsgroepen.",
     "barchart_axis_titel": "Totaal aantal positief geteste mensen",
-    "barscale_keys": [
-      "0 tot 20",
-      "20 tot 40",
-      "40 tot 60",
-      "60 tot 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 tot 20", "20 tot 40", "40 tot 60", "60 tot 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -2120,6 +2114,25 @@
       "href": "/verantwoording#vaccinatie",
       "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
     },
+    "vaccination_coverage": {
+      "title": "Vaccinatiegraad per leeftijdsgroep",
+      "toelichting": "Dit zijn de fases waarin de verschillende groepen gevaccineerd zullen worden. Er is niet genoeg vaccin beschikbaar om iedereen in een keer te vaccineren. Om deze redenen vaccineren we de gehele bevolkingsgroep in fases.",
+      "headers": {
+        "agegroup": "Leeftijdsgroep",
+        "coverage": "Vaccinatiegraad",
+        "progress": "Voortgang (volledig en gedeeltelijk)"
+      },
+      "templates": {
+        "agegroup": {
+          "oldest": "{{age}} en ouder",
+          "group": "{{age_low}} tot {{age_high}} jaar",
+          "total": "Totaal (18+jaar)",
+          "total_people": "{{total}} mensen"
+        }
+      },
+      "partially": "gedeeltelijk",
+      "fully": "volledig"
+    },
     "bronnen": {
       "rivm": {
         "href": "",
@@ -2204,11 +2217,7 @@
     "expected_page_additions": {
       "title": "Verwachte toevoegingen aan deze pagina",
       "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2333,11 +2342,7 @@
       "kpi_expected_page_additions": {
         "title": "Verwachte toevoegingen aan deze pagina",
         "description": "De komende tijd plaatsen we meer data over vaccinaties op het dashboard. Verwachte toevoegingen zijn onder meer de vaccinatiegraad.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {
@@ -2433,6 +2438,23 @@
         "available": "Beschikbare voorraad",
         "total": "Totale voorraad"
       }
+    },
+    "kpi_vaccinatiegraad": {
+      "titel": "Vaccinatiegraad",
+      "omschrijving": "Percentage mensen in Nederland dat **volledig** gevaccineerd is ten opzicht van alle mensen in Nederland die voor vaccinatie in aanmerking komen."
+    },
+    "grafiek_gevaccineerde_mensen": {
+      "titel": "Aantal gevaccineerde mensen",
+      "omschrijving": "Deze grafiek laat zien hoeveel mensen in Nederland een prik hebben gehad en hoeveel mensen daarvan volledig en gedeeltelijk gevaccineerd zijn. Met de huidige vaccinatieplan verwachten we dat ieder persoon die in Nederland wil zich laten vaccineren zou bij eind juli 2021 een eerste prik mogen krijgen.",
+      "label_annotatie": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "tooltip_label_annotatie": "(niet compleet)",
+      "label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "tooltip_label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerde mensen",
+      "tooltip_label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerd",
+      "label_volledig_gevaccineerd": "Volledig gevaccineerde mensen",
+      "tooltip_label_volledig_gevaccineerd": "Volledig gevaccineerd",
+      "extra_bericht": "Let op: data over vaccinatie komt uit verschillende bronnen (RIVM en CIMS). CIMS is op dit moment incompleet.  \n[Lees meer over incomplete CIMS data.](#)"
     }
   },
   "editorial_detail": {

@@ -47,7 +47,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('hospital_lcps'),
+  selectNlPageMetricData('hospital_lcps', 'hospital_nice'),
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),

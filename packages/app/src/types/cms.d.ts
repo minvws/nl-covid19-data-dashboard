@@ -110,7 +110,7 @@ export type RoadmapData = {
 
 export type Restriction = {
   icon?: string;
-  _key: strinig;
+  _key: string;
   _type: 'restriction';
   text: string;
 };
@@ -161,14 +161,15 @@ export interface LokalizeText {
   _createdAt: string;
   _updatedAt: string;
 
-  search_key: string;
+  key: string;
   subject: string;
   path: string;
   text: {
     nl: string | undefined;
     en: string | undefined;
   };
-  display_empty: boolean;
+  should_display_empty: boolean;
+  is_newly_added: boolean;
 }
 
 export type DecoratedLink = {

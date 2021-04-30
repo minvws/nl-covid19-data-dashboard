@@ -96,7 +96,9 @@ export function SidebarMetric<T extends { difference: unknown }>({
 
   assert(
     title,
-    `Sidebar metric expects a title at ${localeTextKey}.kpi_titel or ${localeTextKey}.titel_kpi`
+    `Sidebar metric expects a title at ${String(
+      localeTextKey
+    )}.kpi_titel or ${String(localeTextKey)}.titel_kpi`
   );
 
   const config = getMetricConfig(

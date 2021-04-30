@@ -2116,6 +2116,25 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
+    "vaccination_coverage": {
+      "title": "",
+      "toelichting": "",
+      "headers": {
+        "agegroup": "",
+        "coverage": "",
+        "progress": ""
+      },
+      "templates": {
+        "agegroup": {
+          "oldest": "{{age}} en ouder",
+          "group": "{{age_low}} tot {{age_high}} jaar",
+          "total": "Totaal (18+jaar)",
+          "total_people": "{{total}} mensen"
+        }
+      },
+      "partially": "gedeeltelijk",
+      "fully": "volledig"
+    },
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
@@ -2433,6 +2452,23 @@
         "available": "Available stock",
         "total": "Total stock count"
       }
+    },
+    "kpi_vaccinatiegraad": {
+      "titel": "Vaccinatiegraad",
+      "omschrijving": "Percentage mensen in Nederland dat **volledig** gevaccineerd is ten opzicht van alle mensen in Nederland die voor vaccinatie in aanmerking komen."
+    },
+    "grafiek_gevaccineerde_mensen": {
+      "titel": "Aantal gevaccineerde mensen",
+      "omschrijving": "Deze grafiek laat zien hoeveel mensen in Nederland een prik hebben gehad en hoeveel mensen daarvan volledig en gedeeltelijk gevaccineerd zijn. Met de huidige vaccinatieplan verwachten we dat ieder persoon die in Nederland wil zich laten vaccineren zou bij eind juli 2021 een eerste prik mogen krijgen.",
+      "label_annotatie": "Laatste dagen zijn niet compleet omdat meldingen vertraagd binnenkomen",
+      "tooltip_label_annotatie": "(niet compleet)",
+      "label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "tooltip_label_geprikte_mensen": "Totaal aantal geprikte mensen",
+      "label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerde mensen",
+      "tooltip_label_gedeeltelijk_gevaccineerd": "Gedeeltelijk gevaccineerd",
+      "label_volledig_gevaccineerd": "Volledig gevaccineerde mensen",
+      "tooltip_label_volledig_gevaccineerd": "Volledig gevaccineerd",
+      "extra_bericht": "Let op: data over vaccinatie komt uit verschillende bronnen (RIVM en CIMS). CIMS is op dit moment incompleet.  \n[Lees meer over incomplete CIMS data.](#)"
     }
   },
   "editorial_detail": {

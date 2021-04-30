@@ -113,7 +113,7 @@ export function useLokalizeText(
       const keys = Object.keys(flatten(text));
 
       const obj = keys.reduce(
-        (result, key) => set(result, key, key.replace(/\./g, '::')),
+        (result, key) => set(result, key, key),
         {} as Record<string, string>
       );
 
