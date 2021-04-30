@@ -25,9 +25,6 @@
  * is still in use, we can run a script to simply restore the last batch of
  * moved documents. Not sure if Sanity allows you to update a document by
  * changing its _type field, but we can be a bit more clever about it.
- *
- * This script has been excluded from the yarn scripts in package.json to
- * prevent triggering this by accident.
  */
 
 import { assert } from '@corona-dashboard/common';
@@ -133,6 +130,7 @@ const prdClient = getClient('production');
     }
 
     const prdTransaction = prdClient.transaction();
+
     for (const key of prdKeysMissingInDev) {
       const document = allPrdTexts.find((x) => x.key === key);
 

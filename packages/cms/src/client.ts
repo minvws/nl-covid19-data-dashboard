@@ -1,7 +1,7 @@
-import { assert } from '@corona-dashboard/common';
-import sanityClient, { ClientConfig, SanityClient } from '@sanity/client';
+import sanityClient, { ClientConfig } from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
+import sanityJson from '../sanity.json';
 
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
@@ -16,20 +16,10 @@ dotenv.config({
  * where it probably fits better.
  */
 
-assert(
-  process.env.SANITY_STUDIO_API_PROJECT_ID,
-  'Missing SANITY_STUDIO_API_PROJECT_ID env var'
-);
-
-assert(
-  process.env.SANITY_STUDIO_API_DATASET,
-  'Missing SANITY_STUDIO_API_DATASET env var'
-);
-
 const clientConfig: ClientConfig = {
   apiVersion: '2021-03-25',
-  projectId: process.env.SANITY_STUDIO_API_PROJECT_ID,
-  dataset: process.env.SANITY_STUDIO_API_DATASET,
+  projectId: sanityJson.api.projectId,
+  dataset: sanityJson.api.dataset,
   token: process.env.SANITY_STUDIO_TOKEN,
   useCdn: false,
 };

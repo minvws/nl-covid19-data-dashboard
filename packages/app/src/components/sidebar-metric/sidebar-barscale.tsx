@@ -83,7 +83,9 @@ export function SidebarBarScale<T>({
 
   assert(
     text.barscale_screenreader_text,
-    `Missing screen reader text at ${localeTextKey}.barscale_screenreader_text`
+    `Missing screen reader text at ${String(
+      localeTextKey
+    )}.barscale_screenreader_text`
   );
 
   /**
