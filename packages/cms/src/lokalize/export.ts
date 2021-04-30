@@ -58,9 +58,12 @@ const localeDirectory = path.resolve(
   );
 
   const mutations = await readTextMutations();
+
   const deletedKeys = collapseTextMutations(mutations)
     .filter((x) => x.action === 'delete')
     .map((x) => x.key);
+
+  console.log('deletedKeys', deletedKeys);
 
   let flatTexts = createFlatTexts(documents, deletedKeys);
 

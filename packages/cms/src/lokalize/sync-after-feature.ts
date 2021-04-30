@@ -42,7 +42,7 @@ import { LokalizeText } from './types';
 
   const additions = collapsedMutations.filter((x) => x.action === 'add');
 
-  const deletions = collapsedMutations.filter((x) => x.action === 'add');
+  const deletions = collapsedMutations.filter((x) => x.action === 'delete');
 
   if (!additions.length && !deletions.length) {
     /**
@@ -68,7 +68,7 @@ async function syncAdditionsToProduction(
   allTextDocuments: LokalizeText[]
 ) {
   if (additions.length === 0) {
-    console.log('There are no mutations that result in additional keys');
+    console.log('There are no mutations that result in keys to add');
     process.exit(0);
   }
 
@@ -134,7 +134,7 @@ async function applyDeletionsToDevelopment(
   allTextDocuments: LokalizeText[]
 ) {
   if (deletions.length === 0) {
-    console.log('There are no mutations that result in deleted keys');
+    console.log('There are no mutations that result in keys to delete');
     process.exit(0);
   }
 
@@ -169,10 +169,10 @@ async function applyDeletionsToDevelopment(
   successCount = documentIdsToDelete.length;
 
   if (failureCount === 0) {
-    console.log(`Successfully injected all ${successCount} text keys`);
+    console.log(`Successfully deleted all ${successCount} text keys`);
   } else {
     console.log(
-      `Injected ${successCount} text keys. Failed to add ${failureCount}`
+      `Deleted ${successCount} text keys. Failed to add ${failureCount}`
     );
   }
 }
