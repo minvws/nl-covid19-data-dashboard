@@ -31,8 +31,7 @@ import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { TileList } from '~/components/tile-list';
-import { Heading, Text } from '~/components/typography';
-import { VisuallyHidden } from '~/components/visually-hidden';
+import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -113,14 +112,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
-        {/**
-         * Since now the sections have a H2 heading I think we need to include
-         * a hidden H1 here.
-         */}
-        <VisuallyHidden>
-          <Heading level={1}>{text.title}</Heading>
-        </VisuallyHidden>
-
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -131,6 +122,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   the_netherlands: text.the_netherlands,
                 }
               )}
+              headingLevel={1}
               link={{
                 ...text.secties.actuele_situatie.link,
                 href: reverseRouter.nl.index(),

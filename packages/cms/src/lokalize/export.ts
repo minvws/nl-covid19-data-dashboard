@@ -1,11 +1,11 @@
+import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
+import { createFlatTexts } from '@corona-dashboard/common';
 import { unflatten } from 'flat';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
 import prettier from 'prettier';
-import { client } from '../client';
-import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { createFlatTexts } from '@corona-dashboard/common';
+import { getClient } from '../client';
 
 const cli = meow(
   `
@@ -36,7 +36,8 @@ const localeDirectory = path.resolve(
   'app/src/locale'
 );
 
-async function main() {
+(async function run() {
+  const client = getClient();
   /**
    * The client will load drafts by default because it is authenticated with a
    * token. If the `drafts` flag is not set to true, we will manually
@@ -47,7 +48,7 @@ async function main() {
     : '&& !(_id in path("drafts.**"))';
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(search_key asc)`
+    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(key asc)`
   );
 
   let flatTexts = createFlatTexts(documents, { warn: true });
@@ -62,10 +63,11 @@ async function main() {
     path.join(localeDirectory, 'en_export.json')
   );
 
-  console.log('Successfully wrote locale files');
-}
-
-main().catch((err: Error) => exit(err));
+  console.log('Export completed');
+})().catch((err) => {
+  console.error(`Export failed: ${err.message}`);
+  process.exit(1);
+});
 
 async function writePrettyJson(data: Record<string, unknown>, path: string) {
   const json = prettier.format(JSON.stringify(data), { parser: 'json' });
@@ -74,9 +76,4 @@ async function writePrettyJson(data: Record<string, unknown>, path: string) {
       err ? reject(err) : resolve()
     )
   );
-}
-
-function exit(...args: unknown[]) {
-  console.error(...args);
-  process.exit(1);
 }

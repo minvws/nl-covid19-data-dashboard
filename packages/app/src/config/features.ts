@@ -14,6 +14,14 @@ export const features: Feature[] = [
     metricProperties: ['astra_zeneca_total', 'astra_zeneca_available'],
   },
   {
+    name: 'hospitalMovingAverage',
+    isEnabled: false,
+  },
+  {
+    name: 'intensiveCareMovingAverage',
+    isEnabled: false,
+  },
+  {
     name: 'vaccineCimsData',
     isEnabled: false,
     metricScopes: ['nl'],

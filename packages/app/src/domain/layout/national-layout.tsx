@@ -33,7 +33,9 @@ export const nlPageMetricNames = [
   'reproduction',
   'deceased_rivm',
   'hospital_nice',
+  'hospital_nice_per_age_group',
   'intensive_care_nice',
+  'intensive_care_nice_per_age_group',
   'nursing_home',
   'disability_care',
   'elderly_at_home',
@@ -41,6 +43,7 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
+  'corona_melder_app',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
@@ -355,7 +358,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="behavior"
+                    metricName="corona_melder_app"
                     localeTextKey="corona_melder_app"
                   />
                 </MetricMenuItemLink>

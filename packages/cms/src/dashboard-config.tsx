@@ -9,18 +9,16 @@ export default {
         {
           name: 'document-list',
           options: {
-            title: 'Niet-vertaalde Lokalize-keys',
-            limit: 100,
-            query: `
-              *[_type == "lokalizeText" && (!defined(text.en) || text.en == "")] | order(_updatedAt asc)
-              `,
+            title: 'Niet-gepubliceerde documenten',
+            query: '*[_id in path("drafts.**")] | order(_updatedAt desc)',
           },
         },
         {
           name: 'document-list',
           options: {
-            title: 'Niet-gepubliceerde documenten',
-            query: '*[_id in path("drafts.**")] | order(_updatedAt desc)',
+            title: 'Recent gepubliceerde documenten',
+            limit: 30,
+            query: '*[!(_id in path("drafts.**"))] | order(_publishedAt desc)',
           },
         },
         { name: 'deploy' },
@@ -48,6 +46,35 @@ export default {
             order: '_updatedAt desc',
             types: ['editorial'],
             createButtonText: 'Nieuw weekbericht',
+          },
+        },
+      ],
+    },
+
+    {
+      type: '__experimental_group',
+      layout: {
+        width: 'full',
+      },
+      widgets: [
+        {
+          name: 'document-list',
+          options: {
+            title: 'Onvertaalde Lokalize teksten',
+            limit: 50,
+            query: `
+              *[_type == "lokalizeText" && (!defined(text.en) || text.en == "")] | order(_updatedAt desc)
+              `,
+          },
+        },
+        {
+          name: 'document-list',
+          options: {
+            title: 'Nieuwe Lokalize teksten',
+            limit: 50,
+            query: `
+              *[_type == "lokalizeText" && is_newly_added == true] | order(key asc)
+              `,
           },
         },
       ],

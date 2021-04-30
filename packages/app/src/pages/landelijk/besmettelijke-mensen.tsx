@@ -92,19 +92,19 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ariaLabelledBy=""
                 seriesConfig={[
                   {
+                    type: 'line',
+                    metricProperty: 'estimate',
+                    label: text.legenda_line,
+                    shortLabel: text.lineLegendLabel,
+                    color: colors.data.primary,
+                  },
+                  {
                     type: 'range',
                     metricPropertyLow: 'margin_low',
                     metricPropertyHigh: 'margin_high',
                     label: text.legenda_marge,
                     shortLabel: text.rangeLegendLabel,
                     color: colors.data.margin,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'estimate',
-                    label: text.legenda_line,
-                    shortLabel: text.lineLegendLabel,
-                    color: colors.data.primary,
                   },
                 ]}
               />
