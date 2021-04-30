@@ -56,7 +56,7 @@ export function parseLocaleTextDocument(
       document.text.en?.trim() || nl;
 
   if (warn && !document.text.en?.trim()) {
-    console.warn('Missing english translation for path:', document.key);
+    console.warn('Missing english translation for key:', document.key);
   }
 
   return { key, localeText: { nl, en } };
