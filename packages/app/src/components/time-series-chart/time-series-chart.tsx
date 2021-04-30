@@ -21,6 +21,8 @@ import {
   Tooltip,
   TooltipData,
   TooltipFormatter,
+  useGetDoubleValueString,
+  useGetValueString,
 } from './components';
 import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
@@ -34,6 +36,7 @@ import {
   useScales,
   useSeriesList,
   useValuesInTimeframe,
+  SingleSeriesConfig,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -210,6 +213,46 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   });
 
+  const getValueString = useGetValueString();
+  const getDoubleValueString = useGetDoubleValueString();
+  const valueMinWidth = useMemo(() => {
+    if (formatTooltip) return undefined;
+
+    const valueLengths: number[] = [];
+    seriesConfig.forEach((config: SingleSeriesConfig<T>) => {
+      return valueLengths.push(
+        ...values.map((value) => {
+          switch (config.type) {
+            case 'line':
+            case 'area':
+            case 'bar':
+            case 'stacked-area':
+            case 'invisible':
+              return getValueString(
+                (value[config.metricProperty] as unknown) as number | null,
+                isPercentage
+              ).length;
+            case 'range':
+              return getDoubleValueString(
+                (value[config.metricPropertyLow] as unknown) as number | null,
+                (value[config.metricPropertyHigh] as unknown) as number | null,
+                isPercentage
+              ).length;
+          }
+        })
+      );
+    });
+
+    return `${Math.max(...valueLengths)}ch`;
+  }, [
+    values,
+    seriesConfig,
+    getValueString,
+    getDoubleValueString,
+    isPercentage,
+    formatTooltip,
+  ]);
+
   useEffect(() => {
     if (hoverState) {
       const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
@@ -237,6 +280,8 @@ export function TimeSeriesChart<
             timespanAnnotations && isDefined(timespanAnnotationIndex)
               ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
+
+          valueMinWidth,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -254,6 +299,7 @@ export function TimeSeriesChart<
     timespanAnnotations,
     markNearestPointOnly,
     displayTooltipValueOnly,
+    valueMinWidth,
   ]);
 
   useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());

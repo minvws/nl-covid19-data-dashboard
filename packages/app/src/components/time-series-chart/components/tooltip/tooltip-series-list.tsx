@@ -1,8 +1,4 @@
-import {
-  isDateSpanValue,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -12,9 +8,12 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { SeriesConfig } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { TooltipData } from './types';
-import { useIntl } from '~/intl';
-import { isPresent } from 'ts-is-present';
 import { colors } from '~/style/theme';
+import {
+  useGetDateStringFromValue,
+  useGetValueString,
+  useGetDoubleValueString,
+} from './formatStrings';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
   data: tooltipData,
@@ -31,43 +30,12 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     markNearestPointOnly,
     displayTooltipValueOnly,
     timespanAnnotation,
+    valueMinWidth,
   } = tooltipData;
 
-  const { formatDateFromSeconds, formatPercentage, formatNumber } = useIntl();
-
-  /**
-   * @TODO move this to a more common location
-   */
-  function getDateStringFromValue(value: TimestampedValue) {
-    if (isDateValue(value)) {
-      return formatDateFromSeconds(value.date_unix);
-    } else if (isDateSpanValue(value)) {
-      const dateStartString = formatDateFromSeconds(
-        value.date_start_unix,
-        'axis'
-      );
-      const dateEndString = formatDateFromSeconds(value.date_end_unix, 'axis');
-
-      return `${dateStartString} - ${dateEndString}`;
-    }
-  }
-
-  /**
-   * @TODO move this to a more common location
-   */
-  function getValueStringForKey<T extends TimestampedValue>(
-    value: T,
-    key: keyof T,
-    isPercentage?: boolean
-  ) {
-    const numberValue = (value[key] as unknown) as number | null;
-
-    return isPresent(numberValue)
-      ? isPercentage
-        ? `${formatPercentage(numberValue)}%`
-        : formatNumber(numberValue)
-      : '-';
-  }
+  const getValueString = useGetValueString();
+  const getDoubleValueString = useGetDoubleValueString();
+  const getDateStringFromValue = useGetDateStringFromValue();
 
   const dateString = getDateStringFromValue(value);
 
@@ -84,7 +52,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
           {timespanAnnotation.shortLabel || timespanAnnotation.label}
         </Text>
       )}
-      <TooltipList hasTwoColumns={hasTwoColumns}>
+      <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
         {seriesConfig.map((x, index) => {
           switch (x.type) {
             case 'stacked-area':
@@ -96,9 +64,8 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
                   <b>
-                    {getValueStringForKey(
-                      value,
-                      x.metricProperty,
+                    {getValueString(
+                      (value[x.metricProperty] as unknown) as number | null,
                       options.isPercentage
                     )}
                   </b>
@@ -114,15 +81,11 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
                   <b css={css({ whiteSpace: 'nowrap' })}>
-                    {`${getValueStringForKey(
-                      value,
-                      x.metricPropertyLow,
+                    {getDoubleValueString(
+                      (value[x.metricPropertyLow] as unknown) as number | null,
+                      (value[x.metricPropertyHigh] as unknown) as number | null,
                       options.isPercentage
-                    )} - ${getValueStringForKey(
-                      value,
-                      x.metricPropertyHigh,
-                      options.isPercentage
-                    )}`}
+                    )}
                   </b>
                 </TooltipListItem>
               );
@@ -138,9 +101,8 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
                   <b>
-                    {getValueStringForKey(
-                      value,
-                      x.metricProperty,
+                    {getValueString(
+                      (value[x.metricProperty] as unknown) as number | null,
                       options.isPercentage
                     )}
                   </b>
@@ -155,9 +117,8 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
                   <b>
-                    {getValueStringForKey(
-                      value,
-                      x.metricProperty,
+                    {getValueString(
+                      (value[x.metricProperty] as unknown) as number | null,
                       x.isPercentage
                     )}
                   </b>
@@ -169,16 +130,6 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     </section>
   );
 }
-
-export const TooltipList = styled.ol<{ hasTwoColumns?: boolean }>(
-  ({ hasTwoColumns }) =>
-    css({
-      columns: hasTwoColumns ? 2 : 1,
-      m: 0,
-      p: 0,
-      listStyle: 'none',
-    })
-);
 
 interface TooltipListItemProps {
   children: ReactNode;
@@ -203,12 +154,12 @@ function TooltipListItem({
     >
       {displayTooltipValueOnly ? (
         <Box flexGrow={1}>
-          <TooltipValueContainer>
+          <TooltipEntryContainer>
             <VisuallyHidden>
               <InlineText mr={2}>{label}:</InlineText>
             </VisuallyHidden>
-            {children}
-          </TooltipValueContainer>
+            <TooltipEntryValue>{children}</TooltipEntryValue>
+          </TooltipEntryContainer>
         </Box>
       ) : (
         <>
@@ -220,10 +171,10 @@ function TooltipListItem({
             <Box width="1em" mt={1} />
           )}
           <Box flexGrow={1}>
-            <TooltipValueContainer>
+            <TooltipEntryContainer>
               <InlineText mr={2}>{label}:</InlineText>
-              {children}
-            </TooltipValueContainer>
+              <TooltipEntryValue>{children}</TooltipEntryValue>
+            </TooltipEntryContainer>
           </Box>
         </>
       )}
@@ -231,9 +182,30 @@ function TooltipListItem({
   );
 }
 
-const TooltipValueContainer = styled.span`
+const TooltipEntryContainer = styled.span`
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
+`;
+
+const TooltipEntryValue = styled.span`
+  text-align: right;
+`;
+
+export const TooltipList = styled.ol<{
+  hasTwoColumns?: boolean;
+  valueMinWidth?: string;
+}>`
+  ${({ hasTwoColumns }) =>
+    css({
+      columns: hasTwoColumns ? 2 : 1,
+      m: 0,
+      p: 0,
+      listStyle: 'none',
+    })}
+
+  ${TooltipEntryValue} {
+    min-width: ${({ valueMinWidth }) => valueMinWidth ?? 'unset'};
+  }
 `;
