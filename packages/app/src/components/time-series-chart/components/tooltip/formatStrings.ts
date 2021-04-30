@@ -23,16 +23,16 @@ export function useGetValueString() {
 }
 
 export function useGetRangeValueString() {
-  const getValueStringForKey = useGetValueString();
+  const getValueString = useGetValueString();
 
   return useCallback(
     (valueA: number | null, valueB: number | null, isPercentage?: boolean) => {
-      return `${getValueStringForKey(
-        valueA,
+      return `${getValueString(valueA, isPercentage)} - ${getValueString(
+        valueB,
         isPercentage
-      )} - ${getValueStringForKey(valueB, isPercentage)}`;
+      )}`;
     },
-    [getValueStringForKey]
+    [getValueString]
   );
 }
 
