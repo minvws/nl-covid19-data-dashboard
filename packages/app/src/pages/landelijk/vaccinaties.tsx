@@ -79,6 +79,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const stockFeature = useFeature('vaccineStockPerSupplier');
 
+  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
+
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;
@@ -119,7 +121,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             expectedMilestones={page.expectedMilestones}
           />
 
-          {vaccine_coverage_per_age_group ? (
+          {vaccinationPerAgeGroupFeature.isEnabled ? (
             <Tile>
               <Heading level={2}>
                 {siteText.vaccinaties.vaccination_coverage.title}
