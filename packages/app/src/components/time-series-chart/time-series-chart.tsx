@@ -216,8 +216,6 @@ export function TimeSeriesChart<
   const getValueString = useGetValueString();
   const getDoubleValueString = useGetDoubleValueString();
   const valueMinWidth = useMemo(() => {
-    if (formatTooltip) return undefined;
-
     const valueLengths: number[] = [];
     seriesConfig.forEach((config: SingleSeriesConfig<T>) => {
       return valueLengths.push(
@@ -250,7 +248,6 @@ export function TimeSeriesChart<
     getValueString,
     getDoubleValueString,
     isPercentage,
-    formatTooltip,
   ]);
 
   useEffect(() => {
