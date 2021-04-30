@@ -226,7 +226,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
             </Box>
 
-            {!breakpoints.lg && (
+            {!breakpoints.lg && text.momenteel.link_text && (
               <Box mb={3}>
                 <Link
                   passHref
