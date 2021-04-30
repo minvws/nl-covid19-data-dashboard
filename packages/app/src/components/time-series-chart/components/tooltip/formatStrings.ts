@@ -22,7 +22,7 @@ export function useGetValueString() {
   );
 }
 
-export function useGetDoubleValueString() {
+export function useGetRangeValueString() {
   const getValueStringForKey = useGetValueString();
 
   return useCallback(

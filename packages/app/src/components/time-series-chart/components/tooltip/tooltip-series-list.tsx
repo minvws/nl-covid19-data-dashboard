@@ -12,7 +12,7 @@ import { colors } from '~/style/theme';
 import {
   useGetDateStringFromValue,
   useGetValueString,
-  useGetDoubleValueString,
+  useGetRangeValueString,
 } from './formatStrings';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
@@ -34,7 +34,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
   } = tooltipData;
 
   const getValueString = useGetValueString();
-  const getDoubleValueString = useGetDoubleValueString();
+  const getRangeValueString = useGetRangeValueString();
   const getDateStringFromValue = useGetDateStringFromValue();
 
   const dateString = getDateStringFromValue(value);
@@ -81,7 +81,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
                   <b css={css({ whiteSpace: 'nowrap' })}>
-                    {getDoubleValueString(
+                    {getRangeValueString(
                       (value[x.metricPropertyLow] as unknown) as number | null,
                       (value[x.metricPropertyHigh] as unknown) as number | null,
                       options.isPercentage

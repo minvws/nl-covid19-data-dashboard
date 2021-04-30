@@ -21,7 +21,7 @@ import {
   Tooltip,
   TooltipData,
   TooltipFormatter,
-  useGetDoubleValueString,
+  useGetRangeValueString,
   useGetValueString,
 } from './components';
 import { Benchmark } from './components/benchmark';
@@ -214,7 +214,7 @@ export function TimeSeriesChart<
   });
 
   const getValueString = useGetValueString();
-  const getDoubleValueString = useGetDoubleValueString();
+  const getRangeValueString = useGetRangeValueString();
   const valueMinWidth = useMemo(() => {
     const valueLengths: number[] = [];
     seriesConfig.forEach((config: SingleSeriesConfig<T>) => {
@@ -231,7 +231,7 @@ export function TimeSeriesChart<
                 isPercentage
               ).length;
             case 'range':
-              return getDoubleValueString(
+              return getRangeValueString(
                 (value[config.metricPropertyLow] as unknown) as number | null,
                 (value[config.metricPropertyHigh] as unknown) as number | null,
                 isPercentage
@@ -242,13 +242,7 @@ export function TimeSeriesChart<
     });
 
     return `${Math.max(...valueLengths)}ch`;
-  }, [
-    values,
-    seriesConfig,
-    getValueString,
-    getDoubleValueString,
-    isPercentage,
-  ]);
+  }, [values, seriesConfig, getValueString, getRangeValueString, isPercentage]);
 
   useEffect(() => {
     if (hoverState) {
