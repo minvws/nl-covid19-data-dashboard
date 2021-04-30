@@ -1,5 +1,5 @@
 /**
- * Request to delete one of multiple texts from the Sanity "Lokalize" dataset.
+ * Request to delete one or multiple texts from the Sanity "Lokalize" dataset.
  * This doesn't actually delete the key from the dataset straight away, but only
  * write to the mutations log.
  *
