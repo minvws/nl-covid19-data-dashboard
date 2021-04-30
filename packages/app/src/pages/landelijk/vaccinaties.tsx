@@ -6,8 +6,8 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiValue } from '~/components/kpi-value';
-import { Tile } from '~/components/tile';
 import { Markdown } from '~/components/markdown';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
@@ -62,7 +62,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor',
-    'vaccine_coverage'
+    'vaccine_coverage',
+    'vaccine_coverage_per_age_group'
   ),
   createGetContent<{
     page: VaccinationPageQuery;
@@ -93,8 +94,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { page } = content;
 
   // TODO: put this back this when data is available
-  //const {vaccine_coverage_per_age_group} = data;
-  const vaccine_coverage_per_age_group = mockCoverageData();
+  const { vaccine_coverage_per_age_group } = data;
+  //const vaccine_coverage_per_age_group = mockCoverageData();
 
   const metadata = {
     ...siteText.nationaal_metadata,

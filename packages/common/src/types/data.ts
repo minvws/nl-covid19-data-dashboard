@@ -173,7 +173,7 @@ export interface National {
   elderly_at_home: NationalElderlyAtHome;
   vaccine_support: NlVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
-  vaccine_coverage?: NlVaccineCoverage;
+  vaccine_coverage: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
   vaccine_delivery_per_supplier: NlVaccineDeliveryPerSupplier;
@@ -186,7 +186,7 @@ export interface National {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
-  vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_stock: NlVaccineStock;
 }
 export interface NationalDifference {
