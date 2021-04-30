@@ -152,6 +152,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               title={replaceComponentsInText(text.title, {
                 municipalityName: municipalityName,
               })}
+              headingLevel={1}
               link={
                 typeof gmCode === 'string'
                   ? {
