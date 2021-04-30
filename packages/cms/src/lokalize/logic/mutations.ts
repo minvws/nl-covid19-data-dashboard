@@ -7,7 +7,7 @@ import { sortBy } from 'lodash';
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 const HEADER = `timestamp,action,key${EOL}`;
 
-interface TextMutation {
+export interface TextMutation {
   timestamp: string;
   action: 'add' | 'delete';
   key: string;
@@ -69,7 +69,15 @@ export function collapseTextMutations(mutations: TextMutation[]) {
       const prev = acc[mutation.key] || { weight: 0, timestamp: 0 };
 
       acc[mutation.key] = {
-        weight: weightByAction[mutation.action] + prev.weight,
+        /**
+         * We will perform deletes by only writing to the mutation log, to
+         * prevent a delete in a feature branch from breaking the develop branch
+         * builds. But this also means that we have no easy way to prevent you
+         * from running multiple delete actions on the same key. To make the
+         * collapse work properly, we need to limit the "amount of deletes" to
+         * one when summing. This is done by cliping the weight to -1.
+         */
+        weight: Math.max(weightByAction[mutation.action] + prev.weight, -1),
         timestamp: mutation.timestamp,
       };
       return acc;
