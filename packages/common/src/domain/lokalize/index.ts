@@ -9,7 +9,7 @@ import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
  */
 export function createFlatTexts(
   documents: LokalizeText[],
-  deletedKeys: string[]
+  deletedKeys: string[] = []
 ) {
   const nl: Record<string, string> = {};
   const en: Record<string, string> = {};

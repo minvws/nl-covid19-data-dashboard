@@ -32,7 +32,7 @@ import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
  *
  * - undefined (gray): app is rendered with translations from filesystem
  * - live (green): app is listening to real-time sanity updates
- * - paths (blue): app is displaying the pathnames of every key instead of the value
+ * - paths (blue): app is displaying the path names of every key instead of the value
  *
  * The live/paths state can also be toggled with shortkey shift+t.
  */
