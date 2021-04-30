@@ -1,5 +1,4 @@
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -10,7 +9,7 @@ import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Heading, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
@@ -259,65 +258,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default VaccinationPage;
-
-interface VaccineAdministeredProps {
-  value: number;
-  date: number;
-  description: string;
-  isReported?: boolean;
-}
-
-function VaccineAdministeredItem(props: VaccineAdministeredProps) {
-  const { value, date, description, isReported } = props;
-
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
-
-  return (
-    <Text fontWeight="bold">
-      <InlineText css={css({ color: 'data.primary' })}>
-        {formatNumber(value)}
-      </InlineText>{' '}
-      {description}
-      <br />
-      <InlineText fontWeight="normal" fontSize={1} color="annotation">
-        {replaceVariablesInText(
-          isReported
-            ? siteText.vaccinaties.gezette_prikken.reported_until
-            : siteText.vaccinaties.gezette_prikken.estimated_until,
-          {
-            reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
-          }
-        )}
-      </InlineText>
-    </Text>
-  );
-}
-
-function HatchedSquare() {
-  return (
-    <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
-    </svg>
-  );
-}
 
 // @TODO re-enable when data is available
 //
