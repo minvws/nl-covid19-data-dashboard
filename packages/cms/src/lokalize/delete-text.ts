@@ -9,7 +9,7 @@ import { appendTextMutation } from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
-  const client = getClient('development');
+  const client = getClient();
   /**
    * We are assuming you know the subject of the text you want to delete. Then
    * we don't have to fetch all texts in advance.
