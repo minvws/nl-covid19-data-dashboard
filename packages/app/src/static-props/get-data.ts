@@ -93,9 +93,9 @@ export function selectNlData<T extends keyof National = never>(
     const { data } = getNlData();
 
     const selectedNlData = pickBy(
-      metrics.reduce((acc, p) => set(acc, p, data[p]), {} as Pick<National, T>),
+      metrics.reduce((acc, p) => set(acc, p, data[p]), {}),
       isDefined
-    );
+    ) as Pick<National, T>;
 
     return { selectedNlData };
   };
@@ -133,12 +133,9 @@ export function selectVrData<T extends keyof Regionaal = never>(
     const vrData = getVrData(context);
 
     const selectedVrData = pickBy(
-      metrics.reduce(
-        (acc, p) => set(acc, p, vrData.data[p]),
-        {} as Pick<Regionaal, T>
-      ),
+      metrics.reduce((acc, p) => set(acc, p, vrData.data[p]), {}),
       isDefined
-    );
+    ) as Pick<Regionaal, T>;
 
     return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
   };
@@ -186,12 +183,9 @@ export function selectGmData<T extends keyof Municipal = never>(
     const gmData = getGmData(context);
 
     const selectedGmData = pickBy(
-      metrics.reduce(
-        (acc, p) => set(acc, p, gmData.data[p]),
-        {} as Pick<Regionaal, T>
-      ),
+      metrics.reduce((acc, p) => set(acc, p, gmData.data[p]), {}),
       isDefined
-    );
+    ) as Pick<Regionaal, T>;
 
     return { selectedGmData, municipalityName: gmData.municipalityName };
   };
