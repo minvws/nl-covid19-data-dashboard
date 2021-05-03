@@ -30,5 +30,9 @@ export function getClient(dataset = 'development') {
    */
   const tokenFromLogIn = getUserConfig().get('authToken');
 
-  return sanityClient({ ...clientConfig, dataset, token: tokenFromLogIn });
+  return sanityClient({
+    ...clientConfig,
+    dataset,
+    token: tokenFromLogIn || process.env.SANITY_TOKEN,
+  });
 }
