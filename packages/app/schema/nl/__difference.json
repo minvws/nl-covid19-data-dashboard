@@ -18,7 +18,7 @@
     "tested_ggd_average__tested_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "tested_ggd_average__infected_percentage": {
+    "tested_ggd_average__infected_percentage_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "infectious_people__estimate": {
@@ -81,7 +81,7 @@
     "tested_ggd_daily__tested_total",
     "tested_ggd_daily__infected_percentage",
     "tested_ggd_average__tested_total",
-    "tested_ggd_average__infected_percentage",
+    "tested_ggd_average__infected_percentage_moving_average",
     "reproduction__index_average",
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting",
