@@ -6,7 +6,7 @@
     "tested_overall__infected_per_100k": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_overall__infected": {
+    "tested_overall__infected_moving_average": {
       "$ref": "#/definitions/diff_integer"
     },
     "hospital_nice__admissions_on_date_of_reporting": {
@@ -21,7 +21,7 @@
   },
   "required": [
     "tested_overall__infected_per_100k",
-    "tested_overall__infected",
+    "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting",
     "deceased_rivm__covid_daily"
   ],
