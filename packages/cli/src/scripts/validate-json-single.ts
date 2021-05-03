@@ -17,22 +17,23 @@ const validSchemaNames = Object.keys(schemaInformation);
 const cli = meow(
   `
     Usage
-      $ validate-json-single <schema-name> <json-path>
+      $ validate-json-single <schema-name> <json-path> <optional-metric-name>
 
     Examples
-      $ validate-json-single national nl.json
+      $ validate-json-single national nl.json vaccine_coverage
 `
 );
 
 const cliArgs = cli.input;
 
-if (cliArgs.length !== 2) {
+if (cliArgs.length < 2 || cliArgs.length > 3) {
   console.error(
     `
-Expected two command line arguments: schema-name and json-filename.
+Expected at least two command line arguments: schema-name and json-filename, and optionally a third one: metric-name
 
-Where schema-name must be one of these values: ${validSchemaNames.join(', ')}
-and json-filename must be a file associated with that schema.
+Where schema-name must be one of these values: ${validSchemaNames.join(', ')},
+json-filename must be a file associated with that schema and metric-name must be a valid
+metric in the specified schema.
 
 `
   );
@@ -41,6 +42,7 @@ and json-filename must be a file associated with that schema.
 
 const schemaName = cliArgs[0] as keyof SchemaInfo;
 const jsonFileName = cliArgs[1];
+const metricName = cliArgs[2];
 
 if (!validSchemaNames.includes(schemaName)) {
   console.error(
