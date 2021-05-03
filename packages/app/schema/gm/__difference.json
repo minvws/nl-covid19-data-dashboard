@@ -15,7 +15,7 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "deceased_rivm__covid_daily": {
+    "deceased_rivm__covid_daily_moving_average": {
       "$ref": "#/definitions/diff_integer"
     }
   },
@@ -23,7 +23,7 @@
     "tested_overall__infected_per_100k",
     "tested_overall__infected",
     "hospital_nice__admissions_on_date_of_reporting",
-    "deceased_rivm__covid_daily"
+    "deceased_rivm__covid_daily_moving_average"
   ],
   "additionalProperties": false,
   "definitions": {
