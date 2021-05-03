@@ -88,8 +88,8 @@ export function collapseTextMutations(mutations: TextMutation[]) {
 
   /**
    * Because new keys are added immediately, but deletions are only scheduled
-   * for later. We still need to mark the keys that were first newly create, but
-   * later delete as action "delete" otherwise they will not be removed from the
+   * for later. We still need to mark the keys that were first newly created, but
+   * later deleted as action "delete" otherwise they will not be removed from the
    * dataset.
    *
    * On the other hand, if a key existed at first and in this branch was deleted
