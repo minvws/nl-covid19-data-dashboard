@@ -195,7 +195,7 @@ export interface NationalDifference {
   tested_ggd_daily__tested_total: DifferenceInteger;
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
   tested_ggd_average__tested_total: DifferenceInteger;
-  tested_ggd_average__infected_percentage: DifferenceDecimal;
+  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
@@ -810,7 +810,7 @@ export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceInteger;
   tested_ggd_average__tested_total: DifferenceInteger;
-  tested_ggd_average__infected_percentage: DifferenceDecimal;
+  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
   tested_ggd_daily__tested_total: DifferenceInteger;
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
