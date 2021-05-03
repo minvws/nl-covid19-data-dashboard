@@ -535,6 +535,8 @@ export interface NlBehaviorPerAgeGroup {
   work_from_home_compliance: NlBehaviorPerAgeGroupValue;
   work_from_home_support: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 export interface NlBehaviorPerAgeGroupValue {
   "16_24": number;
