@@ -537,11 +537,11 @@ export interface NlBehaviorPerAgeGroup {
   date_of_insertion_unix: number;
 }
 export interface NlBehaviorPerAgeGroupValue {
-  "16_24": number | null;
-  "25_39": number | null;
-  "40_54": number | null;
-  "55_69": number | null;
-  "70_plus": number | null;
+  "16_24": number;
+  "25_39": number;
+  "40_54": number;
+  "55_69": number;
+  "70_plus": number;
 }
 export interface NationalDeceasedRivm {
   values: NationalDeceasedRivmValue[];
