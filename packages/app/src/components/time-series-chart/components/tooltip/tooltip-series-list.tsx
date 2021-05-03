@@ -5,15 +5,10 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { SeriesConfig } from '../../logic';
+import { SeriesConfig, useStringFormatting } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { TooltipData } from './types';
 import { colors } from '~/style/theme';
-import {
-  useGetDateStringFromValue,
-  useGetValueString,
-  useGetRangeValueString,
-} from './formatStrings';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
   data: tooltipData,
@@ -33,9 +28,11 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     valueMinWidth,
   } = tooltipData;
 
-  const getValueString = useGetValueString();
-  const getRangeValueString = useGetRangeValueString();
-  const getDateStringFromValue = useGetDateStringFromValue();
+  const {
+    getValueString,
+    getRangeValueString,
+    getDateStringFromValue,
+  } = useStringFormatting();
 
   const dateString = getDateStringFromValue(value);
 

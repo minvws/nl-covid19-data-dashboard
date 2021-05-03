@@ -46,7 +46,7 @@ export type TooltipData<T extends TimestampedValue> = {
   /**
    * Configure the minimum width of the value element. Example use case is
    * assigning a width that is large enough to hold the largest value so the
-   * tooltip content does not change in width due to differeing value lengths
+   * tooltip content does not change in width due to differing value lengths
    */
   valueMinWidth?: string;
 };

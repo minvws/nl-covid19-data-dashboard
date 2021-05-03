@@ -6,22 +6,18 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 
-export function useGetValueString() {
-  const { formatPercentage, formatNumber } = useIntl();
+export function useStringFormatting() {
+  const { formatPercentage, formatNumber, formatDateFromSeconds } = useIntl();
 
-  return (value: number | null, isPercentage?: boolean) => {
+  const getValueString = (value: number | null, isPercentage?: boolean) => {
     return isPresent(value)
       ? isPercentage
         ? `${formatPercentage(value)}%`
         : formatNumber(value)
       : '-';
   };
-}
 
-export function useGetRangeValueString() {
-  const getValueString = useGetValueString();
-
-  return (
+  const getRangeValueString = (
     valueA: number | null,
     valueB: number | null,
     isPercentage?: boolean
@@ -31,12 +27,8 @@ export function useGetRangeValueString() {
       isPercentage
     )}`;
   };
-}
 
-export function useGetDateStringFromValue() {
-  const { formatDateFromSeconds } = useIntl();
-
-  return (value: TimestampedValue) => {
+  const getDateStringFromValue = (value: TimestampedValue) => {
     if (isDateValue(value)) {
       return formatDateFromSeconds(value.date_unix);
     } else if (isDateSpanValue(value)) {
@@ -48,5 +40,11 @@ export function useGetDateStringFromValue() {
 
       return `${dateStartString} - ${dateEndString}`;
     }
+  };
+
+  return {
+    getValueString,
+    getRangeValueString,
+    getDateStringFromValue,
   };
 }

@@ -21,8 +21,6 @@ import {
   Tooltip,
   TooltipData,
   TooltipFormatter,
-  useGetRangeValueString,
-  useGetValueString,
 } from './components';
 import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
@@ -36,7 +34,7 @@ import {
   useScales,
   useSeriesList,
   useValuesInTimeframe,
-  SingleSeriesConfig,
+  useValueWidth,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -213,36 +211,7 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   });
 
-  const getValueString = useGetValueString();
-  const getRangeValueString = useGetRangeValueString();
-  const valueMinWidth = useMemo(() => {
-    const valueLengths: number[] = [];
-    seriesConfig.forEach((config: SingleSeriesConfig<T>) => {
-      return valueLengths.push(
-        ...values.map((value) => {
-          switch (config.type) {
-            case 'line':
-            case 'area':
-            case 'bar':
-            case 'stacked-area':
-            case 'invisible':
-              return getValueString(
-                (value[config.metricProperty] as unknown) as number | null,
-                isPercentage
-              ).length;
-            case 'range':
-              return getRangeValueString(
-                (value[config.metricPropertyLow] as unknown) as number | null,
-                (value[config.metricPropertyHigh] as unknown) as number | null,
-                isPercentage
-              ).length;
-          }
-        })
-      );
-    });
-
-    return `${Math.max(...valueLengths)}ch`;
-  }, [values, seriesConfig, getValueString, getRangeValueString, isPercentage]);
+  const valueMinWidth = useValueWidth(seriesConfig, values, isPercentage);
 
   useEffect(() => {
     if (hoverState) {

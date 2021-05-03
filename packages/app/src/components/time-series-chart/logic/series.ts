@@ -8,15 +8,14 @@ import { isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
-export type SeriesConfig<T extends TimestampedValue> = SingleSeriesConfig<T>[];
-
-export type SingleSeriesConfig<T extends TimestampedValue> =
+export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
   | RangeSeriesDefinition<T>
   | AreaSeriesDefinition<T>
   | StackedAreaSeriesDefinition<T>
   | BarSeriesDefinition<T>
-  | InvisibleSeriesDefinition<T>;
+  | InvisibleSeriesDefinition<T>
+)[];
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
   type: 'line';
