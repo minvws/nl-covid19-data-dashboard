@@ -204,7 +204,7 @@ export interface NationalDifference {
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
   sewer__average: DifferenceDecimal;
-  nursing_home__newly_infected_people: DifferenceInteger;
+  nursing_home__newly_infected_people_moving_average: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
   reproduction__index_average: DifferenceDecimal;
@@ -815,7 +815,7 @@ export interface RegionalDifference {
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
   sewer__average: DifferenceDecimal;
-  nursing_home__newly_infected_people: DifferenceInteger;
+  nursing_home__newly_infected_people_moving_average: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
   disability_care__newly_infected_people: DifferenceInteger;
