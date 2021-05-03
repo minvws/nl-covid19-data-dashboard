@@ -5,7 +5,6 @@ context('Gemeente - Rioolwater', () => {
     cy.beforeMunicipalTests('rioolwater');
   });
 
-  // @ts-ignore
   it('Should show the correct KPI values', function (this: MunicipalContext) {
     const lastValue = this.municipalData.sewer?.last_value;
 

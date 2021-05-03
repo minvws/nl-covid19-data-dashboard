@@ -10,7 +10,6 @@ context('Regionaal - Sterfte', () => {
 
     const kpiTestInfo = {
       covid_daily: cy.formatters.formatNumber(rivmLastValue.covid_daily),
-      covid_total: cy.formatters.formatNumber(rivmLastValue.covid_total),
     };
 
     cy.checkKpiValues(kpiTestInfo);

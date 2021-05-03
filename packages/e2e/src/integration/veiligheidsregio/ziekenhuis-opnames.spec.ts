@@ -5,7 +5,7 @@ context('Regionaal - Ziekenhuis opnames', () => {
     cy.beforeRegionTests('ziekenhuis-opnames');
   });
 
-  xit('Should show the correct KPI values', async function (this: RegionalContext) {
+  it('Should show the correct KPI values', async function (this: RegionalContext) {
     const lastValue = this.regionData.hospital_nice.last_value;
 
     const kpiTestInfo = {

@@ -5,7 +5,6 @@ context('Gemeente - Positief geteste mensen', () => {
     cy.beforeMunicipalTests('positief-geteste-mensen');
   });
 
-  // @ts-ignore
   it('Should show the correct KPI values', function (this: MunicipalContext) {
     const lastValue = this.municipalData.tested_overall.last_value;
 
