@@ -14,7 +14,10 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectVrPageMetricData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -23,13 +26,13 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData
+  selectVrPageMetricData()
 );
 
 const ElderlyAtHomeRegionalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const { safetyRegionName, data, lastGenerated } = props;
+  const { safetyRegionName, selectedVrData: data, lastGenerated } = props;
   const { elderly_at_home, difference } = data;
 
   const { siteText } = useIntl();
@@ -134,7 +137,18 @@ const ElderlyAtHomeRegionalPage = (
                 values={elderly_at_home.values}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty: 'positive_tested_daily_moving_average',
+                    label:
+                      text.section_positive_tested
+                        .line_chart_positive_tested_daily_moving_average,
+                    shortLabel:
+                      text.section_positive_tested
+                        .line_chart_positive_tested_daily_moving_average_short_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'positive_tested_daily',
                     label:
                       text.section_positive_tested
@@ -206,7 +220,18 @@ const ElderlyAtHomeRegionalPage = (
                 values={elderly_at_home.values}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty: 'deceased_daily_moving_average',
+                    label:
+                      text.section_deceased
+                        .line_chart_deceased_daily_moving_average,
+                    shortLabel:
+                      text.section_deceased
+                        .line_chart_deceased_daily_moving_average_short_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'deceased_daily',
                     label: text.section_deceased.line_chart_legend_trend_label,
                     color: colors.data.primary,

@@ -8,18 +8,18 @@
     "dataset": "production"
   },
   "plugins": [
+    "./src/plugins/sanity-deploy-button",
+    "./src/plugins/translate",
     "@sanity/base",
     "@sanity/components",
+    "@sanity/dashboard",
     "@sanity/default-layout",
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/production-preview",
-    "tabs",
-    "./src/plugins/translate",
-    "@sanity/dashboard",
     "dashboard-widget-document-list",
     "media",
-    "./src/plugins/sanity-deploy-button"
+    "tabs"
   ],
   "env": {
     "development": {

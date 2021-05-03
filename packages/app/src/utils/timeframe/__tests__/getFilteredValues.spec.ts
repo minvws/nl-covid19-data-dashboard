@@ -41,17 +41,6 @@ describe('Utils: getFilteredValues', () => {
     _testList = createTestValues();
   });
 
-  it('should filter the list by week', () => {
-    const result = getFilteredValues(
-      _testList,
-      'week',
-      new Date(),
-      testCallback
-    );
-
-    expect(result.length).toEqual(2);
-  });
-
   it('should filter the list by 5weeks', () => {
     const result = getFilteredValues(
       _testList,

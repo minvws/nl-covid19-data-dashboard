@@ -1,8 +1,32 @@
+import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
+import { createFlatTexts } from '@corona-dashboard/common';
 import { unflatten } from 'flat';
 import fs from 'fs';
-import { client } from '../client';
-import prettier from 'prettier';
+import meow from 'meow';
 import path from 'path';
+import prettier from 'prettier';
+import { getClient } from '../client';
+
+const cli = meow(
+  `
+    Usage
+      $ lokalize:export
+
+    Options
+      --drafts, -d Include draft documents
+
+    Examples
+      $ lokalize:export -d
+`,
+  {
+    flags: {
+      drafts: {
+        type: 'boolean',
+        alias: 'd',
+      },
+    },
+  }
+);
 
 const localeDirectory = path.resolve(
   __dirname,
@@ -12,48 +36,44 @@ const localeDirectory = path.resolve(
   'app/src/locale'
 );
 
-client
-  .fetch(`*[_type == 'lokalizeText'] | order(subject asc)`)
-  .then((result: any[]) => {
-    const nl: Record<string, string> = {};
-    const en: Record<string, string> = {};
+(async function run() {
+  const client = getClient();
+  /**
+   * The client will load drafts by default because it is authenticated with a
+   * token. If the `drafts` flag is not set to true, we will manually
+   * exclude draft-documents on query-level.
+   */
+  const draftsQueryPart = cli.flags.drafts
+    ? ''
+    : '&& !(_id in path("drafts.**"))';
 
-    for (const document of result) {
-      const key = `${document.subject}.${document.path}`;
-      nl[key] = document.text.nl.trim();
-      en[key] = document.text.en?.trim();
+  const documents: LokalizeText[] = await client.fetch(
+    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(key asc)`
+  );
 
-      if (!en[key]) {
-        /**
-         * Here we could make an automatic fallback to Dutch texts if English is missing.
-         */
-        console.log(
-          'Missing english translation for path:',
-          document.lokalize_path
-        );
-        en[key] = nl[key];
-      }
-    }
+  let flatTexts = createFlatTexts(documents, { warn: true });
 
-    fs.writeFileSync(
-      /**
-       * @TODO rename these files ones we make the switch
-       */
-      path.join(localeDirectory, 'nl_export.json'),
-      prettier.format(JSON.stringify(unflatten(nl)), { parser: 'json' }),
-      {
-        encoding: 'utf8',
-      }
-    );
-    fs.writeFileSync(
-      path.join(localeDirectory, 'en_export.json'),
-      prettier.format(JSON.stringify(unflatten(en)), { parser: 'json' }),
-      {
-        encoding: 'utf8',
-      }
-    );
-  })
-  .catch((err) => {
-    console.log(`Export failed: ${err.message}`);
-    process.exit(1);
-  });
+  await writePrettyJson(
+    unflatten(flatTexts.nl, { object: true }),
+    path.join(localeDirectory, 'nl_export.json')
+  );
+
+  await writePrettyJson(
+    unflatten(flatTexts.en, { object: true }),
+    path.join(localeDirectory, 'en_export.json')
+  );
+
+  console.log('Export completed');
+})().catch((err) => {
+  console.error(`Export failed: ${err.message}`);
+  process.exit(1);
+});
+
+async function writePrettyJson(data: Record<string, unknown>, path: string) {
+  const json = prettier.format(JSON.stringify(data), { parser: 'json' });
+  return new Promise<void>((resolve, reject) =>
+    fs.writeFile(path, json, { encoding: 'utf8' }, (err) =>
+      err ? reject(err) : resolve()
+    )
+  );
+}

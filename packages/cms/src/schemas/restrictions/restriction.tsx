@@ -29,9 +29,7 @@ export default {
       title: 'text.nl',
       icon: 'icon',
     },
-    prepare(selection: { icon: RestrictionIcon; title: string }) {
-      const { title, icon } = selection;
-
+    prepare({ title, icon }: { icon: RestrictionIcon; title: string }) {
       return {
         title: title,
         media: (

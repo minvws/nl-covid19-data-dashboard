@@ -31,6 +31,7 @@ export function TopicalSectionHeader({
   showBackLink,
   link,
   description,
+  headingLevel = 2,
 }: TopicalSectionHeaderProps) {
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
@@ -55,7 +56,7 @@ export function TopicalSectionHeader({
           alignItems="baseline"
         >
           <Heading
-            level={2}
+            level={headingLevel}
             fontWeight="bold"
             m={0}
             mb={{ _: 2, lg: 0 }}

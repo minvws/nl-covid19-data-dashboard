@@ -11,6 +11,12 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -19,15 +25,11 @@ import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
-import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
+import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -37,7 +39,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -45,7 +47,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData('hospital_lcps'),
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),
@@ -59,7 +61,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
   const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
     'region'
@@ -73,6 +75,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     dataHospitalNice.values,
     4
   );
+
+  const featureHospitalMovingAverage = useFeature('hospitalMovingAverage');
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
 
@@ -195,35 +199,88 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: text.bronnen.nice,
             }}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
+          >
+            {(timeframe) =>
+              featureHospitalMovingAverage.isEnabled ? (
+                <TimeSeriesChart
+                  values={dataHospitalNice.values}
+                  timeframe={timeframe}
+                  ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty:
+                        'admissions_on_date_of_admission_moving_average',
+                      label: text.linechart_legend_titel_moving_average,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: text.linechart_legend_titel,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 40,
+                      label: siteText.common.signaalwaarde,
+                    },
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRange,
+                        end: Infinity,
+                        label: text.linechart_legend_underreported_titel,
+                        shortLabel: siteText.common.incomplete,
+                      },
+                    ],
+                  }}
+                />
+              ) : (
+                <TimeSeriesChart
+                  values={dataHospitalNice.values}
+                  timeframe={timeframe}
+                  ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'admissions_on_date_of_admission',
+                      label: text.linechart_legend_titel,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 40,
+                      label: siteText.common.signaalwaarde,
+                    },
+                    timespanAnnotations: [
+                      {
+                        start: underReportedRange,
+                        end: Infinity,
+                        label: text.linechart_legend_underreported_titel,
+                        shortLabel: siteText.common.incomplete,
+                      },
+                    ],
+                  }}
+                />
+              )
+            }
+          </ChartTile>
+
+          <ChartTile
+            title={siteText.hospital_admissions_per_age_group.chart_title}
+            description={
+              siteText.hospital_admissions_per_age_group.chart_description
+            }
+            timeframeOptions={['all', '5weeks']}
+            metadata={{ source: text.bronnen.nice }}
           >
             {(timeframe) => (
-              <TimeSeriesChart
-                values={dataHospitalNice.values}
+              <AdmissionsPerAgeGroup
+                values={data.hospital_nice_per_age_group.values}
                 timeframe={timeframe}
-                ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'admissions_on_date_of_admission',
-                    label: text.linechart_legend_titel,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  benchmark: {
-                    value: 40,
-                    label: siteText.common.signaalwaarde,
-                  },
-                  timespanAnnotations: [
-                    {
-                      start: underReportedRange,
-                      end: Infinity,
-                      label: text.linechart_legend_underreported_titel,
-                      shortLabel: siteText.common.incomplete,
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>
@@ -234,7 +291,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: text.bronnen.lnaz,
             }}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
