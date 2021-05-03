@@ -36,8 +36,12 @@ import { LokalizeText } from './types';
     return;
   }
 
+  /**
+   * Only query published documents, we do not want to inject drafts from
+   * development as drafts into production.
+   */
   const allDevTexts = (await getClient('development')
-    .fetch(`*[_type == 'lokalizeText'] |
+    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
   order(subject asc)`)) as LokalizeText[];
 
   await applyDeletionsToDevelopment(deletions, allDevTexts);

@@ -50,12 +50,16 @@ import { LokalizeText } from './types';
     }
   }
 
+  /**
+   * Only query published documents, we do not want to inject drafts from
+   * development as drafts into production.
+   */
   const allDevTexts = (await getClient('development')
-    .fetch(`*[_type == 'lokalizeText'] |
+    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
     order(subject asc)`)) as LokalizeText[];
 
   const allPrdTexts = (await getClient('production')
-    .fetch(`*[_type == 'lokalizeText'] |
+    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
     order(subject asc)`)) as LokalizeText[];
 
   await syncMissingTextsToPrd(allDevTexts, allPrdTexts);
