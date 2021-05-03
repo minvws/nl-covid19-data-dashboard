@@ -3,8 +3,8 @@
  * It reads mutations that have been performed on the Sanity development dataset
  * as part of the work on the feature branch.
  *
- * - New texts are injected to the production dataset, so communication
- *   can already start preparing them for release.
+ * - New texts are injected to the production dataset, so communication can
+ *   already start preparing them for release.
  * - Texts that were marked for deletion are _actually_ deleted from the
  *   development dataset. Deletions can not happen immediately because it would
  *   break other development branches, so keys are marked and only deleted by
@@ -29,37 +29,27 @@ import { LokalizeText } from './types';
 
   const deletions = collapsedMutations.filter((x) => x.action === 'delete');
 
-  if (!additions.length && !deletions.length) {
-    /**
-     * No need to query documents if there are no mutations
-     */
-    return;
-  }
+  await applyDeletionsToDevelopment(deletions);
 
-  /**
-   * Only query published documents, we do not want to inject drafts from
-   * development as drafts into production.
-   */
-  const allDevTexts = (await getClient('development')
-    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
-  order(subject asc)`)) as LokalizeText[];
-
-  await applyDeletionsToDevelopment(deletions, allDevTexts);
-
-  await syncAdditionsToProduction(additions, allDevTexts);
+  await syncAdditionsToProduction(additions);
 })().catch((err) => {
   console.error('An error occurred:', err.message);
   process.exit(1);
 });
 
-async function syncAdditionsToProduction(
-  additions: TextMutation[],
-  allTextDocuments: LokalizeText[]
-) {
+async function syncAdditionsToProduction(additions: TextMutation[]) {
   if (additions.length === 0) {
     console.log('There are no mutations that result in keys to add');
     process.exit(0);
   }
+
+  /**
+   * Only query published documents, because we do not want to inject drafts
+   * from development as drafts into production.
+   */
+  const allPublishedTexts = (await getClient('development')
+    .fetch(`*[_type == 'lokalizeText' && !(_id in path("drafts.**"))] |
+ order(subject asc)`)) as LokalizeText[];
 
   const prdTransaction = getClient('production').transaction();
 
@@ -67,7 +57,7 @@ async function syncAdditionsToProduction(
   let failureCount = 0;
 
   for (const addition of additions) {
-    const document = allTextDocuments.find((x) => x.key === addition.key);
+    const document = allPublishedTexts.find((x) => x.key === addition.key);
 
     if (document) {
       const documentToInject: LokalizeText = {
@@ -118,36 +108,26 @@ async function syncAdditionsToProduction(
   }
 }
 
-async function applyDeletionsToDevelopment(
-  deletions: TextMutation[],
-  allTextDocuments: LokalizeText[]
-) {
+async function applyDeletionsToDevelopment(deletions: TextMutation[]) {
   if (deletions.length === 0) {
     console.log('There are no mutations that result in keys to delete');
     process.exit(0);
   }
 
-  let successCount = 0;
-  let failureCount = 0;
+  /**
+   * Query both published and draft documents, because we want to delete both
+   * from development.
+   */
+  const allTexts = (await getClient('development')
+    .fetch(`*[_type == 'lokalizeText'] |
+ order(subject asc)`)) as LokalizeText[];
 
+  /**
+   * We need to find both draft and published versions of the document
+   */
   const documentIdsToDelete = deletions
-    .map(({ key }) => allTextDocuments.find((x) => x.key === key))
-    .map((x) => x?._id)
-    .filter(isDefined);
-
-  if (documentIdsToDelete.length !== deletions.length) {
-    /**
-     * This should not happen, but maybe it's not severe enough to halt this
-     * process as that could lead to more problems. Since this script is meant
-     * to be run automatically after merge we should probably just delete
-     * whatever keys we can.
-     */
-    console.warn(
-      `There were ${deletions.length} deletions requested, but only ${documentIdsToDelete} documents were found in the dataset.`
-    );
-
-    failureCount = deletions.length - documentIdsToDelete.length;
-  }
+    .flatMap(({ key }) => allTexts.filter((x) => x.key === key))
+    .map((x) => x._id);
 
   const devTransaction = getClient('development').transaction();
 
@@ -155,13 +135,7 @@ async function applyDeletionsToDevelopment(
 
   await devTransaction.commit();
 
-  successCount = documentIdsToDelete.length;
-
-  if (failureCount === 0) {
-    console.log(`Successfully deleted all ${successCount} text keys`);
-  } else {
-    console.log(
-      `Deleted ${successCount} text keys. Failed to add ${failureCount}`
-    );
-  }
+  console.log(
+    `Deleted ${documentIdsToDelete} text documents (including draft versions)`
+  );
 }
