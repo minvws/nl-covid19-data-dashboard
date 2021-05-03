@@ -1,12 +1,16 @@
+import { ValidateFunction } from 'ajv';
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
+import { isDefined } from 'ts-is-present';
 import { schemaDirectory } from '../config';
 import {
-  createValidateFunction,
+  createValidateFunctionFromSchemaObject,
+  createValidateFunctionFromSchemaPath,
   executeValidations,
   getSchemaInfo,
+  loadRootSchema,
   SchemaInfo,
 } from '../schema';
 
@@ -53,7 +57,7 @@ if (!validSchemaNames.includes(schemaName)) {
   process.exit(1);
 }
 
-const basePath = schemaInformation[schemaName].basePath;
+const jsonBasePath = schemaInformation[schemaName].basePath;
 
 if (!schemaInformation[schemaName].files.includes(jsonFileName)) {
   console.error(
@@ -62,17 +66,15 @@ if (!schemaInformation[schemaName].files.includes(jsonFileName)) {
   process.exit(1);
 }
 
-if (!fs.existsSync(path.join(basePath, jsonFileName))) {
+if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
   console.error(
-    `Invalid json filename argument '${jsonFileName}', file does not exist in directory ${basePath}.`
+    `Invalid json filename argument '${jsonFileName}', file does not exist in directory ${jsonBasePath}.`
   );
   process.exit(1);
 }
 
-createValidateFunction(
-  path.join(schemaDirectory, schemaName, `__index.json`)
-).then((validateFunction) => {
-  const fileName = path.join(basePath, jsonFileName);
+const handleCompilation = (validateFunction: ValidateFunction) => {
+  const fileName = path.join(jsonBasePath, jsonFileName);
   const schemaInfo = schemaInformation[schemaName];
   const contentAsString = fs.readFileSync(fileName, {
     encoding: 'utf8',
@@ -101,4 +103,32 @@ createValidateFunction(
   }
 
   console.log(chalk.green.bold(`  ${jsonFileName} is valid  \n`));
-});
+};
+
+if (metricName) {
+  const schemaBasePath = path.join(schemaDirectory, schemaName);
+  const rootSchema = loadRootSchema(path.join(schemaBasePath, `__index.json`));
+
+  if (!isDefined(rootSchema.properties[metricName])) {
+    console.error(
+      chalk.bgRed.bold(
+        `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
+      )
+    );
+    process.exit(1);
+  }
+
+  rootSchema.required = [metricName];
+  rootSchema.properties = {
+    [metricName]: { ...rootSchema.properties[metricName] },
+  };
+  rootSchema.additionalProperties = true;
+
+  createValidateFunctionFromSchemaObject(rootSchema, schemaBasePath).then(
+    handleCompilation
+  );
+} else {
+  createValidateFunctionFromSchemaPath(
+    path.join(schemaDirectory, schemaName, `__index.json`)
+  ).then(handleCompilation);
+}
