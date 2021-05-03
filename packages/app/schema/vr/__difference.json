@@ -27,7 +27,7 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "nursing_home__newly_infected_people": {
+    "nursing_home__newly_infected_people_moving_average": {
       "$ref": "#/definitions/diff_integer"
     },
     "nursing_home__infected_locations_total": {
@@ -58,7 +58,7 @@
     "tested_ggd_average__tested_total",
     "tested_ggd_average__infected_percentage",
     "sewer__average",
-    "nursing_home__newly_infected_people",
+    "nursing_home__newly_infected_people_moving_average",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
     "disability_care__newly_infected_people",

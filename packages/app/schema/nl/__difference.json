@@ -45,7 +45,7 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "nursing_home__newly_infected_people": {
+    "nursing_home__newly_infected_people_moving_average": {
       "$ref": "#/definitions/diff_integer"
     },
     "nursing_home__infected_locations_total": {
@@ -89,7 +89,7 @@
     "doctor__covid_symptoms_per_100k",
     "doctor__covid_symptoms",
     "sewer__average",
-    "nursing_home__newly_infected_people",
+    "nursing_home__newly_infected_people_moving_average",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
     "corona_melder_app__warned_daily",
