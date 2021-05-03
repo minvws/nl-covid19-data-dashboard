@@ -141,6 +141,50 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
+
+              <CategoryMenu
+                title={siteText.nationaal_layout.headings.ziekenhuizen}
+              >
+                <MetricMenuItemLink
+                  href="/landelijk/ziekenhuis-opnames"
+                  icon={<Ziekenhuis />}
+                  title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
+                >
+                  {/**
+                   * A next step could be to embed the SidebarMetric component in an even
+                   * higher-level component which would also include the link and the
+                   * Title, seeing that both appear to use the same localeTextKey,
+                   * and it would make sense to enforce the existence of standardized
+                   * properties like title_sidebar.
+                   */}
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="hospital_nice"
+                    metricProperty="admissions_on_date_of_reporting"
+                    localeTextKey="ziekenhuisopnames_per_dag"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    showBarScale={true}
+                  />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href="/landelijk/intensive-care-opnames"
+                  icon={<Arts />}
+                  title={siteText.ic_opnames_per_dag.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="intensive_care_nice"
+                    metricProperty="admissions_on_date_of_reporting"
+                    localeTextKey="ic_opnames_per_dag"
+                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting"
+                    showBarScale={true}
+                  />
+                </MetricMenuItemLink>
+              </CategoryMenu>
+
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.besmettingen}
               >
@@ -210,48 +254,22 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
-              <CategoryMenu
-                title={siteText.nationaal_layout.headings.ziekenhuizen}
-              >
-                <MetricMenuItemLink
-                  href="/landelijk/ziekenhuis-opnames"
-                  icon={<Ziekenhuis />}
-                  title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
-                >
-                  {/**
-                   * A next step could be to embed the SidebarMetric component in an even
-                   * higher-level component which would also include the link and the
-                   * Title, seeing that both appear to use the same localeTextKey,
-                   * and it would make sense to enforce the existence of standardized
-                   * properties like title_sidebar.
-                   */}
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="hospital_nice"
-                    metricProperty="admissions_on_date_of_reporting"
-                    localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
-                    showBarScale={true}
-                  />
-                </MetricMenuItemLink>
 
+              <CategoryMenu title={siteText.nationaal_layout.headings.gedrag}>
                 <MetricMenuItemLink
-                  href="/landelijk/intensive-care-opnames"
-                  icon={<Arts />}
-                  title={siteText.ic_opnames_per_dag.titel_sidebar}
+                  href="/landelijk/gedrag"
+                  icon={<Gedrag />}
+                  title={siteText.nl_gedrag.sidebar.titel}
                 >
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="intensive_care_nice"
-                    metricProperty="admissions_on_date_of_reporting"
-                    localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting"
-                    showBarScale={true}
+                    metricName="behavior"
+                    localeTextKey="gedrag_common"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
+
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.kwetsbare_groepen}
               >
@@ -337,19 +355,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
               </CategoryMenu>
 
-              <CategoryMenu title={siteText.nationaal_layout.headings.gedrag}>
-                <MetricMenuItemLink
-                  href="/landelijk/gedrag"
-                  icon={<Gedrag />}
-                  title={siteText.nl_gedrag.sidebar.titel}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="behavior"
-                    localeTextKey="gedrag_common"
-                  />
-                </MetricMenuItemLink>
+              <CategoryMenu title={'Extra'}>
                 <MetricMenuItemLink
                   href="/landelijk/coronamelder"
                   icon={<Phone />}
