@@ -27,4 +27,8 @@ export const features: Feature[] = [
     name: 'intensiveCareMovingAverage',
     isEnabled: false,
   },
+  {
+    name: 'infectionsMovingAverage',
+    isEnabled: false,
+  },
 ];
