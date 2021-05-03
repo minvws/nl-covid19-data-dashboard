@@ -4,7 +4,7 @@ import path from 'path';
 import { isDefined } from 'ts-is-present';
 
 export type CustomValidationFunction = (
-  input: Record<string, unknown>
+  input: Record<string, any>
 ) => string[] | undefined;
 
 export function createChoroplethValidation(
