@@ -19,7 +19,7 @@ dotenv.config({
 const clientConfig: ClientConfig = {
   apiVersion: '2021-03-25',
   projectId: sanityJson.api.projectId,
-  token: process.env.SANITY_STUDIO_TOKEN,
+  token: process.env.SANITY_TOKEN,
   useCdn: false,
 };
 
