@@ -84,7 +84,8 @@ export const getStaticProps = createGetStaticProps(
     'tested_overall',
     'hospital_nice',
     'difference',
-    'vaccine_administered_total'
+    'vaccine_administered_total',
+    'vaccine_coverage'
   )
 );
 
