@@ -33,8 +33,7 @@ import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { TileList } from '~/components/tile-list';
-import { Heading, Text } from '~/components/typography';
-import { VisuallyHidden } from '~/components/visually-hidden';
+import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -60,7 +59,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -70,7 +69,13 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrData(
+    'tested_overall',
+    'hospital_nice',
+    'code',
+    'escalation_level',
+    'difference'
+  ),
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -86,7 +91,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { choropleth, data, content, lastGenerated } = props;
+  const { choropleth, selectedVrData: data, content, lastGenerated } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText, formatDate } = useIntl();
@@ -116,20 +121,6 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
-        {/**
-         * Since now the sections have a H2 heading I think we need to include
-         * a hidden H1 here.
-         *
-         * @TODO figure out what the title should be
-         */}
-        <VisuallyHidden>
-          <Heading level={1}>
-            {replaceComponentsInText(text.title, {
-              safetyRegionName: props.safetyRegionName,
-            })}
-          </Heading>
-        </VisuallyHidden>
-
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -141,6 +132,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                   safetyRegionName: props.safetyRegionName,
                 }
               )}
+              headingLevel={1}
               link={{
                 text: replaceVariablesInText(
                   text.secties.actuele_situatie.link.text,

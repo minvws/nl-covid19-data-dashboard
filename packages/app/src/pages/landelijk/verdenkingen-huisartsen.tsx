@@ -14,16 +14,19 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectNlPageMetricData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData
+  selectNlPageMetricData()
 );
 
 const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated } = props;
   const lastValue = data.doctor.last_value;
 
   const { siteText } = useIntl();

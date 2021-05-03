@@ -14,19 +14,24 @@
     "sync-assets": "echo 'Sync assets is deprecated' && exit 1",
     "lokalize:import": "ts-node src/lokalize/import.ts",
     "lokalize:export": "ts-node src/lokalize/export.ts",
+    "lokalize:add": "ts-node src/lokalize/add-text.ts",
+    "lokalize:delete": "ts-node src/lokalize/delete-text.ts",
+    "lokalize:clear-mutations-log": "ts-node src/lokalize/clear-mutations-log.ts",
+    "lokalize:sync-additions": "ts-node src/lokalize/sync-additions.ts",
+    "lokalize:sync-deletions": "ts-node src/lokalize/sync-deletions.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
-    "@sanity/base": "^2.7.4",
+    "@sanity/base": "^2.8.0",
     "@sanity/components": "^2.2.6",
-    "@sanity/core": "^2.7.4",
+    "@sanity/core": "^2.8.0",
     "@sanity/dashboard": "^2.7.0",
-    "@sanity/default-layout": "^2.7.4",
-    "@sanity/default-login": "^2.7.0",
-    "@sanity/desk-tool": "^2.7.4",
+    "@sanity/default-layout": "^2.8.0",
+    "@sanity/default-login": "^2.8.0",
+    "@sanity/desk-tool": "^2.8.0",
     "@sanity/production-preview": "^2.2.6",
     "@sanity/ui": "^0.33.7",
-    "@sanity/vision": "^2.7.4",
+    "@sanity/vision": "^2.8.0",
     "braille": "^1.1.0",
     "download": "^8.0.0",
     "flat": "^5.0.2",
@@ -46,13 +51,16 @@
     "ts-is-present": "^1.2.1"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.7.4",
+    "@sanity/cli": "^2.8.0",
     "@types/download": "^6.2.4",
     "@types/flat": "^5.0.1",
     "@types/fs-extra": "^9.0.6",
+    "@types/meow": "^5.0.0",
     "@types/prompts": "^2.0.9",
     "@types/react-world-flags": "^1.4.1",
     "dotenv-flow": "^3.2.0",
+    "fast-csv": "^4.3.6",
+    "meow": "^9.0.0",
     "ts-node": "^9.1.1"
   }
 }

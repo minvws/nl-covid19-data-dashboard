@@ -7,6 +7,9 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
+import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
+import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -15,9 +18,6 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
@@ -29,8 +29,8 @@ import {
 import {
   createGetChoroplethData,
   createGetContent,
-  getGmData,
   getLastGeneratedDate,
+  selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -39,7 +39,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getGmData,
+  selectGmPageMetricData(),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -52,7 +52,13 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, municipalityName, content, lastGenerated } = props;
+  const {
+    selectedGmData: data,
+    choropleth,
+    municipalityName,
+    content,
+    lastGenerated,
+  } = props;
 
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -133,7 +139,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: text.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart

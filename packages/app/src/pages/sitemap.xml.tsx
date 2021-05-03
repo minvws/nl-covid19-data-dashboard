@@ -84,17 +84,17 @@ async function getAllPathsWithPriorities() {
 
   // Ignore Next.js specific files and API routes.
   const pages = await globby([
-    './src/pages/**/*{.tsx,.mdx}',
-    '!./src/pages/404.tsx',
-    '!./src/pages/500.tsx',
-    '!./src/pages/_*.tsx',
-    '!./src/pages/api',
+    '../app/src/pages/**/*{.tsx,.mdx}',
+    '!../app/src/pages/404.tsx',
+    '!../app/src/pages/500.tsx',
+    '!../app/src/pages/_*.tsx',
+    '!../app/src/pages/api',
   ]);
 
   const pathsFromPages = pages
     .map((x) =>
       x
-        .replace('./src/pages', '')
+        .replace('../app/src/pages', '')
         .replace('.tsx', '')
         .replace('/index.tsx', '')
         .replace('/index', '')

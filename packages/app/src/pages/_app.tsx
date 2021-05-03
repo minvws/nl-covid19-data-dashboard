@@ -6,7 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
-import { LanguageKey, languages } from '~/locale';
+import { LanguageKey } from '~/locale';
+import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 import { assert } from '~/utils/assert';
@@ -31,7 +32,10 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   const { locale = 'nl' } = useRouter();
-  const text = languages[locale as LanguageKey];
+
+  const [text, toggleHotReloadButton] = useLokalizeText(locale as LanguageKey, {
+    enableHotReload: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
+  });
 
   assert(text, `Encountered unknown language: ${locale}`);
 
@@ -58,6 +62,7 @@ export default function App(props: AppProps) {
         <GlobalStyle />
         <Component {...pageProps} />
       </IntlContext.Provider>
+      {toggleHotReloadButton}
     </ThemeProvider>
   );
 }

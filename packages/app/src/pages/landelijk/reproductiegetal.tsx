@@ -4,11 +4,13 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
-import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { PageBarScale } from '~/components/page-barscale';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
+import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -18,14 +20,12 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((context) => {
@@ -35,7 +35,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, content, lastGenerated } = props;
+  const { selectedNlData: data, content, lastGenerated } = props;
 
   const lastFilledValue = getLastFilledValue(data.reproduction);
 

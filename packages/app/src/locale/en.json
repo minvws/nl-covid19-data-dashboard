@@ -110,7 +110,8 @@
     "kpi_titel": "Number of ICU admissions reported on one day",
     "linechart_legend_trend_label": "ICU admissions",
     "linechart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-    "linechart_description": "This graph shows ICU admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for ICU admissions; data for the most recent days is therefore incomplete."
+    "linechart_description": "This graph shows ICU admissions. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for ICU admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of ICU admissions over the past seven days.",
+    "linechart_legend_trend_label_moving_average": "Average number over the past 7 days"
   },
   "verdenkingen_huisartsen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a weekly basis.",
@@ -199,7 +200,7 @@
       "legend_trend_label": "Regular hospital beds occupied by COVID-19 patients",
       "legend_inaccurate_label": "Data is less precise"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of hospital admissions over the past seven days.",
     "metadata": {
       "title": "Hospital admissions | Coronavirus Dashboard | Government.nl",
       "description": "Number of confirmed COVID-19 cases who are admitted to a hospital in the Netherlands."
@@ -214,7 +215,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
     "linechart_legend_titel": "Hospital admissions",
-    "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
+    "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays",
+    "linechart_legend_titel_moving_average": "Average number over the past 7 days"
   },
   "positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -649,7 +651,7 @@
     "select_region_municipality_legend": "Select a municipality:",
     "select_region_type_legend": "Show numbers from:",
     "your_municipality": "Municipality",
-    "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide as of 28 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "common": {
     "metadata": {
@@ -760,7 +762,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of hospital admissions over the past seven days.",
     "metadata": {
       "title": "Hospital admissions residents {{safetyRegionName}} | Coronavirus Dashboard | Government.nl",
       "description": "Confirmed cases of COVID-19 in safety region {{safetyRegionName}} who are admitted to a hospital."
@@ -781,7 +783,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported daily.",
     "linechart_legend_titel": "Hospital admissions",
-    "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
+    "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays",
+    "linechart_legend_titel_moving_average": "Average number over the past 7 days"
   },
   "veiligheidsregio_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -895,7 +898,7 @@
       "href": "https://data.rivm.nl/covid-19/COVID-19_ziekenhuisopnames.html",
       "text": "NICE via RIVM"
     },
-    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete.",
+    "linechart_description": "This graph shows hospital admissions, including admissions directly to ICU. The figure for each day indicates the number of people actually admitted on that day, not the number of admissions reported on that day. This gives a clear picture of the development of coronavirus in the Netherlands. There are often reporting delays of a few days for hospital admissions; data for the most recent days is therefore incomplete. The graph also shows an average of the number of hospital admissions over the past seven days.",
     "metadata": {
       "title": "Hospital admissions {{municipalityName}} | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the number of confirmed COVID-19 cases in {{municipalityName}} who are admitted to a hospital per day."
@@ -916,7 +919,8 @@
     "tijdelijk_onbeschikbaar": "",
     "kpi_titel": "Number of hospital admissions reported on one day. ",
     "linechart_legend_titel": "Hospital admissions",
-    "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays"
+    "linechart_legend_underreported_titel": "Data for recent days is incomplete due to reporting delays",
+    "linechart_legend_titel_moving_average": "Average number over the past 7 days"
   },
   "gemeente_positief_geteste_personen": {
     "titel_sidebar": "Confirmed cases",
@@ -1022,7 +1026,7 @@
       "title": "Level of risk per safety region | Coronavirus Dashboard | Government.nl",
       "description": "Overview of the level of risk per safety region in the Netherlands."
     },
-    "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+    "belangrijk_bericht": "[The current measures apply nationwide as of 28 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
   },
   "gemeente_index": {
     "selecteer_titel": "Select your municipality",
@@ -1480,6 +1484,7 @@
   "infected_age_groups": {
     "title": "Distribution by age",
     "description": "The blue (right) bars in this graph show which age group positive tested persons belong to. The gray (left) bars show how large each age group is in relation to the entire Dutch population. The blue and gray bars together show whether age groups have relatively more or less positive tested persons. For example: 16% of all positive tested persons are in their twenties (blue bar) and 13% of all Dutch people are in their twenties (gray bar). In this example, the age group twenties has relatively more positive tested people. The chart is updated daily and covers only the most recently reported cases.",
+    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. ",
     "graph": {
       "age_group_percentage_title": "Distribution of age groups in the Netherlands",
       "age_group_percentage_tooltip": "of the population is {{ageGroupRange}} years old.",
@@ -1490,8 +1495,7 @@
       "clipped_value_message": "This value is higher than displayed in the figure.",
       "value_percentage_title": "Confirmed cases by age group",
       "value_percentage_tooltip": "of the confirmed cases are {{ageGroupRange}} years old"
-    },
-    "example": "For example: of all positive tested people is {{infectedPercentage}} between {{ageGroupRange}} years old. Of all Dutch people is {{ageGroupPercentage}} between {{ageGroupRange}} years old. "
+    }
   },
   "gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1526,7 +1530,9 @@
         "text": "RIVM"
       }
     },
-    "linechart_metric_label": ""
+    "linechart_metric_label": "",
+    "line_chart_newly_infected_people_moving_average": "Average number over the past 7 days",
+    "line_chart_newly_infected_people_moving_average_short_label": "Average number over the past 7 days"
   },
   "gehandicaptenzorg_positief_geteste_personen": {
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1560,7 +1566,9 @@
     },
     "kpi_titel": "Daily number of disability care home residents who were reported as testing positive for the coronavirus",
     "line_chart_legend_trend_label": "Number of confirmed cases",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_newly_infected_people_moving_average": "Average number over the past 7 days",
+    "line_chart_newly_infected_people_moving_average_short_label": "Average number over the past 7 days"
   },
   "gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1590,7 +1598,9 @@
     },
     "kpi_titel": "Number of deceased residents",
     "line_chart_legend_trend_label": "Number of deceased residents",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_deceased_daily_moving_average": "Average number over the past 7 days",
+    "line_chart_deceased_daily_moving_average_short_label": "Average number over the past 7 days"
   },
   "veiligheidsregio_gehandicaptenzorg_oversterfte": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1623,7 +1633,9 @@
       }
     },
     "line_chart_legend_trend_label": "Number of deceased residents",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_deceased_daily_moving_average": "Average number over the past 7 days",
+    "line_chart_deceased_daily_moving_average_short_label": "Average number over the past 7 days"
   },
   "veiligheidsregio_gehandicaptenzorg_besmette_locaties": {
     "datums": "Latest values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
@@ -1685,7 +1697,9 @@
     },
     "kpi_titel": "Daily number of disability care home residents who were reported as testing positive",
     "line_chart_legend_trend_label": "Number of confirmed cases",
-    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+    "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+    "line_chart_newly_infected_people_moving_average": "Average number over the past 7 days",
+    "line_chart_newly_infected_people_moving_average_short_label": "Average number over the past 7 days"
   },
   "thuiswonende_ouderen": {
     "titel_sidebar": "People over 70 living at home",
@@ -1718,7 +1732,9 @@
       "choropleth_daily_legenda": "Number per 100,000 over-70s living at home",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "line_chart_legend_trend_label": "New confirmed cases",
-      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+      "line_chart_positive_tested_daily_moving_average": "Average number over the past 7 days",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Average number over the past 7 days"
     },
     "section_deceased": {
       "title": "People over 70 living at home - COVID-19 deaths",
@@ -1739,7 +1755,9 @@
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Updated daily.",
       "line_chart_legend_trend_label": "Number of deceased",
-      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+      "line_chart_deceased_daily_moving_average": "Average number over the past 7 days",
+      "line_chart_deceased_daily_moving_average_short_label": "Average number over the past 7 days"
     },
     "kpi_titel": "Confirmed cases"
   },
@@ -1771,7 +1789,9 @@
       "line_chart_daily_title": "Daily confirmed cases among over-70s living at home: progression over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "line_chart_legend_trend_label": "New confirmed cases",
-      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+      "line_chart_positive_tested_daily_moving_average": "Average number over the past 7 days",
+      "line_chart_positive_tested_daily_moving_average_short_label": "Average number over the past 7 days"
     },
     "section_deceased": {
       "title": "People over 70 in {{safetyRegion}} living at home – COVID-19 deaths",
@@ -1792,7 +1812,9 @@
       "line_chart_daily_title": "Number of COVID-19 deaths among over-70s living at home over time",
       "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
       "line_chart_legend_trend_label": "Number of deceased",
-      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+      "line_chart_deceased_daily_moving_average": "Average number over the past 7 days",
+      "line_chart_deceased_daily_moving_average_short_label": "Average number over the past 7 days"
     },
     "kpi_titel": "Confirmed cases"
   },
@@ -1823,10 +1845,12 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of reported deaths from COVID-19 over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period.",
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period. The graph also shows averages over the past seven days.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients"
+      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Average number over the past 7 days",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Average number over the past 7 days"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1857,10 +1881,12 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this safety region reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this safety region reported dead, in the selected period.",
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period. The graph also shows averages over the past seven days.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
-      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients"
+      "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Average number over the past 7 days",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Average number over the past 7 days"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -1880,11 +1906,11 @@
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
     },
     "cbs_message": {
-      "title": "Mortality in week 14 higher than expected",
-      "published_text": "Date of publication: Friday 16 April",
-      "message": "In week 14 (5 to 11 April 2021 inclusive), the estimated number of deaths stood at 3,150. This is approximately 100 more than expected for this period and roughly the same number as in the previous week (3,144). Mortality among long-term care users was below the expected level for this week; among the rest of the population, there were more deaths than expected. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. In week 7, the number of deaths was more or less the same as the expected mortality for this period; it was lower than expected in the subsequent weeks. In week 13, the number of deaths was more or less the same again as expected, while estimated mortality for week 14 is slightly above the expected level. The National Institute for Public Health and the Environment (RIVM) registered 112 COVID-19 deaths in week 14 (as at 13 April).",
+      "title": "Excess mortality among people under 80 in week 15",
+      "published_text": "Date of publication: Friday 23 April",
+      "message": "In week 15 (12 to 18 April inclusive), the estimated number of deaths stood at slightly less than 3,200. This is nearly 200 more than expected for this period and slightly more than in the previous week (3,132). Mortality was higher than expected among people aged 65 to 79 in particular. There was also excess mortality was among people under 65. Mortality among long-term care users was again below the expected level. Statistics Netherlands (CBS) reports this based on the provisional weekly mortality figures. From week 39 of 2020 to week 6 of 2021, weekly mortality was higher than expected. There was excess mortality until week 3. In the following weeks, mortality was not elevated and fluctuated around the expected numbers for that period. The estimate for week 15 is almost 200 deaths above the expected number, but is still just within the range of usual fluctuations (and is therefore not classified as excess mortality). The National Institute for Public Health and the Environment (RIVM) registered 126 COVID-19 deaths in week 15 (as at 20 April).",
       "link": {
-        "href": "https://www.cbs.nl/en-gb/news/2021/15/mortality-in-week-14-higher-than-expected",
+        "href": "https://www.cbs.nl/en-gb/news/2021/16/excess-mortality-among-people-under-80-in-week-15",
         "text": "Read the full news item on the CBS website"
       }
     },
@@ -2090,6 +2116,25 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
+    "vaccination_coverage": {
+      "title": "",
+      "toelichting": "",
+      "headers": {
+        "agegroup": "",
+        "coverage": "",
+        "progress": ""
+      },
+      "templates": {
+        "agegroup": {
+          "oldest": "{{age}} en ouder",
+          "group": "{{age_low}} tot {{age_high}} jaar",
+          "total": "Totaal (18+jaar)",
+          "total_people": "{{total}} mensen"
+        }
+      },
+      "partially": "gedeeltelijk",
+      "fully": "volledig"
+    },
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
@@ -2352,10 +2397,10 @@
       "description": "This is an estimate. The estimated figure is based on an average of {{amount}} doses per day between 08.00 and 20.00 over the past seven days."
     },
     "more_information": {
-      "label": "Read more about the",
+      "label": "",
       "link": {
-        "href": "https://www.government.nl/topics/coronavirus-covid-19/dutch-vaccination-programme",
-        "text": "Dutch vaccination programme against COVID-19"
+        "href": "",
+        "text": ""
       }
     },
     "bereidheid_section": {
@@ -2468,7 +2513,7 @@
     "risiconiveaus": {
       "selecteer_titel": "Risk level map of the Netherlands",
       "selecteer_toelichting": "Every two weeks the coronavirus situation is assessed to see whether it is developing in a positive or negative direction, most recently on {{last_update}}. The risk level in a particular region is based on the number of positive tests and the number of hospital admissions. [More information about the risk levels](/over-risiconiveaus).",
-      "belangrijk_bericht": "[The current measures apply nationwide until 27 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
+      "belangrijk_bericht": "[The current measures apply nationwide as of 28 April](https://coronadashboard.government.nl/landelijk/maatregelen)."
     },
     "data_sitemap_titel": "Topics on this dashboard",
     "data_sitemap_toelichting": "Go directly to the following topics:",
@@ -2840,10 +2885,12 @@
       "kpi_covid_total_title": "Total number of COVID-19 patients reported dead",
       "kpi_covid_total_description": "This figure shows the number of COVID-19 patients in this municipality reported dead, since the reporting of COVID-19 deaths started.",
       "line_chart_covid_daily_title": "Number of COVID-19 patients reported dead over time",
-      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients in this municipality reported dead, in the selected period.",
+      "line_chart_covid_daily_description": "This graph shows the number of COVID-19 patients reported dead, in the selected period. The graph also shows averages over the past seven days.",
       "line_chart_covid_daily_legend_trend_label": "Reported number of deceased patients",
       "line_chart_covid_daily_legend_trend_short_label": "Deceased patients",
-      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays"
+      "line_chart_covid_daily_legend_inaccurate_label": "Data for recent days is incomplete due to reporting delays",
+      "line_chart_covid_daily_legend_trend_label_moving_average": "Average number over the past 7 days",
+      "line_chart_covid_daily_legend_trend_short_label_moving_average": "Average number over the past 7 days"
     },
     "kpi_titel": "Daily reported deaths from COVID-19"
   },
@@ -2892,11 +2939,11 @@
       "labels": {
         "warnings": "Number of warnings"
       }
-    }
-  },
-  "milestones": {
-    "toon_meer": "Show earlier events",
-    "verwacht": "Expected"
+    },
+    "sidebar": {
+      "titel": "CoronaMelder app"
+    },
+    "kpi_titel": "Number of people who alerted others via the CoronaMelder app"
   },
   "choropleth_tooltip": {
     "patients": {
@@ -2909,6 +2956,11 @@
     "elderly_at_home": "People over 70 living at home:",
     "sewer_regional": "Average number of virus particles:",
     "sewer_municipal": "Average number of virus particles:"
+  },
+  "milestones": {
+    "toon_meer": "Show earlier events",
+    "verwacht": "Expected",
+    "toon_minder": ""
   },
   "section_sterftemonitor_vr": {
     "title": "Mortality monitor",
@@ -2969,6 +3021,33 @@
       "ziekenhuisopnames": "",
       "grenswaarde_meer": "",
       "grenswaarde_minder": ""
+    }
+  },
+  "hospital_admissions_per_age_group": {
+    "chart_title": "Number of hospital admissions per age group over time",
+    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to hospital, by age group. The graph shows the weekly totals of the admissions that took place that week."
+  },
+  "ic_admissions_per_age_group": {
+    "chart_title": "Number of ICU admissions per age group over time",
+    "chart_description": "This graph shows the number of people per 1.000.000 who were admitted to a hospital intensive care unit, by age group. The graph shows the weekly totals of the admissions that took place that week."
+  },
+  "admissions_per_age_group_chart": {
+    "legend": {
+      "admissions_age_0_19_per_million": "0-19",
+      "admissions_age_20_29_per_million": "20-29",
+      "admissions_age_30_39_per_million": "30-39",
+      "admissions_age_40_49_per_million": "40-49",
+      "admissions_age_50_59_per_million": "50-59",
+      "admissions_age_60_69_per_million": "60-69",
+      "admissions_age_70_79_per_million": "70-79",
+      "admissions_age_80_89_per_million": "80-89",
+      "admissions_age_90_plus_per_million": "90+",
+      "admissions_overall_per_million": "All age groups"
+    },
+    "legend_help_text": "Select one or more age groups to view them",
+    "line_chart_legend_inaccurate_label": "Last days are not complete because reports are delayed",
+    "tooltip_labels": {
+      "inaccurate": "Not complete"
     }
   }
 }

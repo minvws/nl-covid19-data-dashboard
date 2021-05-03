@@ -38,7 +38,6 @@ export function lokalizeListItem() {
                           .params({ subject })
                           .child((id) =>
                             S.editor()
-                              .title(id.replace('jsonKey__', ''))
                               .id(id)
                               .schemaType(type)
                               .documentId(id)

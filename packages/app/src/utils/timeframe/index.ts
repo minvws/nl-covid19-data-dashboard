@@ -6,13 +6,10 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 
-export type TimeframeOption = 'all' | '5weeks' | 'week';
+export type TimeframeOption = 'all' | '5weeks';
 
 export const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
   // adds 1 extra day to capture the intended amount of days
-  if (timeframe === 'week') {
-    return 8;
-  }
   if (timeframe === '5weeks') {
     return 36;
   }

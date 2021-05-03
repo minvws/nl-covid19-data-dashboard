@@ -22,14 +22,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((context) => {
@@ -39,7 +39,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated, content, data, safetyRegionName } = props;
+  const {
+    lastGenerated,
+    content,
+    selectedVrData: data,
+    safetyRegionName,
+  } = props;
   const behaviorData = data.behavior;
 
   const { siteText } = useIntl();

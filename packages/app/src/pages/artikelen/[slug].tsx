@@ -1,6 +1,6 @@
 import { ArticleDetail } from '~/components/article-detail';
 import { Box } from '~/components/base';
-import { client, getImageSrc } from '~/lib/sanity';
+import { getClient, getImageSrc } from '~/lib/sanity';
 import {
   createGetStaticProps,
   StaticProps,
@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
-  const articlesData = await client.fetch(articlesQuery);
+  const articlesData = await (await getClient()).fetch(articlesQuery);
 
   const paths = articlesData.map((article: { slug: string }) => ({
     params: { slug: article.slug },

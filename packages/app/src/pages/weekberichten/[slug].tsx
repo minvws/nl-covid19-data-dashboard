@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { EditorialDetail } from '~/components/editorial-detail';
-import { client, getImageSrc } from '~/lib/sanity';
+import { getClient, getImageSrc } from '~/lib/sanity';
 import {
   createGetStaticProps,
   StaticProps,
@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
-  const editorialData = await client.fetch(editorialsQuery);
+  const editorialData = await (await getClient()).fetch(editorialsQuery);
 
   const paths = editorialData.map((editorial: { slug: string }) => ({
     params: { slug: editorial.slug },

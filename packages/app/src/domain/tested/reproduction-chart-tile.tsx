@@ -64,6 +64,7 @@ export function ReproductionChartTile({
               label: siteText.common.signaalwaarde,
             },
           }}
+          numGridLines={timeframe === 'all' ? 4 : 3}
         />
       )}
     </ChartTile>
