@@ -10,9 +10,9 @@ context('Gemeente - Rioolwater', () => {
     const lastValue = this.municipalData.sewer?.last_value;
 
     const kpiTestInfo = {
-      barscale_value: cy.formatters.formatNumber(lastValue?.average),
-      total_installation_count: cy.formatters.formatNumber(
-        lastValue?.total_installation_count
+      average: cy.formatters.formatNumber(lastValue?.average),
+      total_number_of_samples: cy.formatters.formatNumber(
+        lastValue?.total_number_of_samples
       ),
     };
 
