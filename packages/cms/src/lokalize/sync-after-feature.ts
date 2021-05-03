@@ -11,7 +11,6 @@
  *   this script when the feature gets merged.
  */
 
-import prompts from 'prompts';
 import { isDefined } from 'ts-is-present';
 import { getClient } from '../client';
 import {
@@ -22,20 +21,6 @@ import {
 import { LokalizeText } from './types';
 
 (async function run() {
-  const response = await prompts([
-    {
-      type: 'confirm',
-      name: 'isConfirmed',
-      message:
-        'This script should be run (automatically) on develop, right after a feature branch got merged. Are you aware of this?',
-      initial: false,
-    },
-  ]);
-
-  if (!response.isConfirmed) {
-    process.exit(0);
-  }
-
   const mutations = await readTextMutations();
 
   const collapsedMutations = collapseTextMutations(mutations);
