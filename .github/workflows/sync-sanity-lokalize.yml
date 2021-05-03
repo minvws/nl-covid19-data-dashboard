@@ -1,0 +1,22 @@
+name: Synchronize Sanity Lokalize
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  sync-after-feature:
+    runs-on: ubuntu-latest
+    needs: init
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Build common module
+        run: yarn workspace @corona-dashboard/common build
+      - name: Synchronize texts
+        run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
+        env:
+          SANITY_TOKEN: ${{ secrets.sanity_token }}
