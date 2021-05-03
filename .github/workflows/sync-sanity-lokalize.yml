@@ -32,5 +32,5 @@ jobs:
         run: yarn workspace @corona-dashboard/common build
       - name: Synchronize texts
         run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
-        with:
-          sanity_token: ${{ github.sanity_token }}
+        env:
+          SANITY_TOKEN: ${{ github.sanity_token }}
