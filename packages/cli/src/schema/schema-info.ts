@@ -6,9 +6,9 @@ import { getFileNames } from '../utils';
 import {
   createChoroplethValidation,
   CustomValidationFunction,
+  validateMovingAverages,
   validatePlaceholders,
 } from './custom-validations';
-import { validateMovingAverages } from './custom-validations/moving-averages';
 
 export type SchemaInfo = Record<MetricScope | 'locale', SchemaInfoItem>;
 
