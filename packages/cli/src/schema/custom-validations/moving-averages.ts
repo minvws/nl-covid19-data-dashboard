@@ -67,11 +67,7 @@ function hasNonConsecutiveNullValuesInMetric(
       while (currentValue === null) {
         currentValue = collection[++i]?.[propertyName];
       }
-      if (
-        currentValue !== null &&
-        currentValue !== undefined &&
-        i < collection.length
-      ) {
+      if (isDefined(currentValue) && i < collection.length) {
         return true;
       }
     }
