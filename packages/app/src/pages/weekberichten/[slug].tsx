@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { EditorialDetail } from '~/components/editorial-detail';
-import { client, getImageSrc, localize } from '~/lib/sanity';
+import { getClient, getImageSrc, localize } from '~/lib/sanity';
 import {
   createGetStaticProps,
   StaticProps,
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
   //@TODO THIS NEED TO COME FROM CONTEXT
   const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
-  const editorialData = await client.fetch(editorialsQuery);
+  const editorialData = await (await getClient()).fetch(editorialsQuery);
   const editorials = localize<{ slug: string }[]>(editorialData, [
     locale,
     'nl',

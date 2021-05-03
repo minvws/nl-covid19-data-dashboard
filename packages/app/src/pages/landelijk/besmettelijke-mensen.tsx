@@ -7,23 +7,26 @@ import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
+import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getNlData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectNlPageMetricData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData
+  selectNlPageMetricData()
 );
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated } = props;
   const { siteText } = useIntl();
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
@@ -89,19 +92,19 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                 ariaLabelledBy=""
                 seriesConfig={[
                   {
+                    type: 'line',
+                    metricProperty: 'estimate',
+                    label: text.legenda_line,
+                    shortLabel: text.lineLegendLabel,
+                    color: colors.data.primary,
+                  },
+                  {
                     type: 'range',
                     metricPropertyLow: 'margin_low',
                     metricPropertyHigh: 'margin_high',
                     label: text.legenda_marge,
                     shortLabel: text.rangeLegendLabel,
                     color: colors.data.margin,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'estimate',
-                    label: text.legenda_line,
-                    shortLabel: text.lineLegendLabel,
-                    color: colors.data.primary,
                   },
                 ]}
               />

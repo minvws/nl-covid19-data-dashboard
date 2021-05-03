@@ -34,6 +34,23 @@ import gedeeltelijkOpenRugzak from './assets/restrictions/gedeeltelijk-open-rugz
 import geenWedstrijden from './assets/restrictions/geen-wedstrijden.svg';
 import sporterMetZweetband from './assets/restrictions/sporter-met-zweetband.svg';
 
+import Stap1HorecaMax from './assets/restrictions/stap_1-horeca_max.svg'
+import Stap1HorecaPerTafel from './assets/restrictions/stap_1-horeca_pertafel.svg'
+import Stap1HorecaReserveren from './assets/restrictions/stap_1-horeca_reserveren.svg'
+import Stap1HorecaSportAccomodaties from './assets/restrictions/stap_1-horeca_sportaccomodaties.svg'
+import Stap1HorecaTerras from './assets/restrictions/stap_1-horeca_terras.svg'
+import Stap1HorecaVerplaatsen from './assets/restrictions/stap_1-horeca_verplaatsen.svg'
+import Stap1OnderwijsBibliotheek from './assets/restrictions/stap_1-onderwijs_bibliotheek.svg'
+import Stap1OnderwijsOpen from './assets/restrictions/stap_1-onderwijs_open.svg'
+import Stap1Theorie from './assets/restrictions/stap_1-theorie.svg'
+import Stap1Thuisbezoek from './assets/restrictions/stap_1-thuisbezoek.svg'
+import Stap1Uitvaarten from './assets/restrictions/stap_1-uitvaarten.svg'
+import Stap1WinkelsAlleen from './assets/restrictions/stap_1-winkels_alleen.svg'
+import Stap1WinkelsMarkten from './assets/restrictions/stap_1-winkels_markten.svg'
+import Stap1WinkelsMax from './assets/restrictions/stap_1-winkels_max.svg'
+import Stap1WikelsOpen from './assets/restrictions/stap_1-winkels_open.svg'
+import Stap1Avondklok from './assets/restrictions/stap-1_avondklok.svg'
+
 export type RestrictionIcon = keyof typeof restrictionIcons;
 
 export const restrictionIcons = {
@@ -89,4 +106,20 @@ export const restrictionIcons = {
   gedeeltelijkOpenRugzak,
   geenWedstrijden,
   sporterMetZweetband,
+  'stap_1-horeca_max': Stap1HorecaMax,
+  'stap_1-horeca_per_tafel': Stap1HorecaPerTafel,
+  'stap_1-horeca_reserveren': Stap1HorecaReserveren,
+  'stap_1-horeca_sportaccomodaties': Stap1HorecaSportAccomodaties,
+  'stap_1-horeca_terras': Stap1HorecaTerras,
+  'stap_1-horeca_verplaatsen': Stap1HorecaVerplaatsen,
+  'stap_1-onderwijs_bibliotheek': Stap1OnderwijsBibliotheek,
+  'stap_1-onderwijs_open': Stap1OnderwijsOpen,
+  'stap_1-theorie': Stap1Theorie,
+  'stap_1-thuisbezoek': Stap1Thuisbezoek,
+  'stap_1-uitvaarten': Stap1Uitvaarten,
+  'stap_1-winkels_alleen': Stap1WinkelsAlleen,
+  'stap_1-winkels_markten': Stap1WinkelsMarkten,
+  'stap_1-winkels_max': Stap1WinkelsMax,
+  'stap_1-winkels_open': Stap1WikelsOpen,
+  'stap-1_avondklok': Stap1Avondklok,
 } as const;

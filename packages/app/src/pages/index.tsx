@@ -31,8 +31,7 @@ import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { TileList } from '~/components/tile-list';
-import { Heading, Text } from '~/components/typography';
-import { VisuallyHidden } from '~/components/visually-hidden';
+import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -60,7 +59,7 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlData,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -81,27 +80,16 @@ export const getStaticProps = createGetStaticProps(
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
   }>(getTopicalPageQuery),
-  () => {
-    const data = getNlData();
-
-    for (const metric of Object.values(data)) {
-      if (typeof metric === 'object' && metric !== null) {
-        for (const [metricProperty, metricValue] of Object.entries(metric)) {
-          if (metricProperty === 'values') {
-            (metricValue as {
-              values: Array<unknown>;
-            }).values = [];
-          }
-        }
-      }
-    }
-
-    return data;
-  }
+  selectNlData(
+    'tested_overall',
+    'hospital_nice',
+    'difference',
+    'vaccine_administered_total'
+  )
 );
 
 const Home = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -124,14 +112,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
-        {/**
-         * Since now the sections have a H2 heading I think we need to include
-         * a hidden H1 here.
-         */}
-        <VisuallyHidden>
-          <Heading level={1}>{text.title}</Heading>
-        </VisuallyHidden>
-
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -142,6 +122,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   the_netherlands: text.the_netherlands,
                 }
               )}
+              headingLevel={1}
               link={{
                 ...text.secties.actuele_situatie.link,
                 href: reverseRouter.nl.index(),

@@ -6,7 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
-import { LanguageKey, languages } from '~/locale';
+import { LanguageKey } from '~/locale';
+import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 import { assert } from '~/utils/assert';
@@ -32,7 +33,10 @@ export default function App(props: AppProps) {
 
   // const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
   const locale = (process.env.NEXT_PUBLIC_LOCALE || 'nl') as LanguageKey;
-  const text = languages[locale];
+
+  const [text, toggleHotReloadButton] = useLokalizeText(locale, {
+    enableHotReload: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
+  });
 
   assert(text, `Encountered unknown language: ${locale}`);
 
@@ -59,6 +63,7 @@ export default function App(props: AppProps) {
         <GlobalStyle />
         <Component {...pageProps} />
       </IntlContext.Provider>
+      {toggleHotReloadButton}
     </ThemeProvider>
   );
 }
