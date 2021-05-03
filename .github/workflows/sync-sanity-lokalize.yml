@@ -19,4 +19,4 @@ jobs:
       - name: Synchronize texts
         run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
         env:
-          SANITY_TOKEN: ${{ github.sanity_token }}
+          SANITY_TOKEN: ${{ secrets.sanity_token }}
