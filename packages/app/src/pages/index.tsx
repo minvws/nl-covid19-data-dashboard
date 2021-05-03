@@ -177,7 +177,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 href="/landelijk/ziekenhuis-opnames"
               />
 
-              <TopicalVaccineTile data={data} />
+              <TopicalVaccineTile data={data.vaccine_administered_total} />
             </MiniTrendTileLayout>
 
             <CollapsibleButton

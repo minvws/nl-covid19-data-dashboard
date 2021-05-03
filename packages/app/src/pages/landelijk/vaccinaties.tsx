@@ -6,7 +6,6 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiValue } from '~/components/kpi-value';
-import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -43,8 +42,6 @@ const scaledVaccineIcon = (
   </Box>
 );
 
-const DAY_IN_SECONDS = 24 * 60 * 60;
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(
@@ -61,9 +58,9 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_ggd',
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_doctors',
-    'vaccine_administered_ggd_ghor',
     'vaccine_coverage',
-    'vaccine_coverage_per_age_group'
+    'vaccine_coverage_per_age_group',
+    'vaccine_administered_ggd_ghor'
   ),
   createGetContent<{
     page: VaccinationPageQuery;
@@ -83,7 +80,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, selectedNlData: data, lastGenerated } = props;
 
   const stockFeature = useFeature('vaccineStockPerSupplier');
-  const vaccineCimsFeature = useFeature('vaccineCimsData');
 
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
 
@@ -119,89 +115,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineAdministrationsKpiSection data={data} />
 
           <VaccineDeliveryAndAdministrationsAreaChart data={data} />
-
-          {vaccineCimsFeature.isEnabled && data.vaccine_coverage && (
-            <ChartTile
-              title={text.grafiek_gevaccineerde_mensen.titel}
-              description={text.grafiek_gevaccineerde_mensen.omschrijving}
-              metadata={{
-                date: data.vaccine_coverage.last_value.date_of_report_unix,
-                source: text.bronnen.rivm,
-              }}
-            >
-              <Box spacing={3}>
-                <TimeSeriesChart
-                  tooltipTitle={text.grafiek_gevaccineerde_mensen.titel}
-                  values={data.vaccine_coverage.values}
-                  formatTickValue={(x) => `${x / 1_000_000}`}
-                  dataOptions={{
-                    valueAnnotation: siteText.waarde_annotaties.x_miljoen,
-                    timespanAnnotations: [
-                      {
-                        start:
-                          data.vaccine_coverage.last_value.date_unix -
-                          DAY_IN_SECONDS * 5,
-                        end: data.vaccine_coverage.last_value.date_unix,
-                        label:
-                          text.grafiek_gevaccineerde_mensen.label_annotatie,
-                        shortLabel:
-                          text.grafiek_gevaccineerde_mensen
-                            .tooltip_label_annotatie,
-                      },
-                    ],
-                  }}
-                  seriesConfig={[
-                    {
-                      metricProperty: 'partially_or_fully_vaccinated',
-                      type: 'line',
-                      label:
-                        text.grafiek_gevaccineerde_mensen.label_geprikte_mensen,
-                      shortLabel:
-                        text.grafiek_gevaccineerde_mensen
-                          .tooltip_label_geprikte_mensen,
-                      color: 'black',
-                      strokeWidth: 3,
-                    },
-                    {
-                      metricProperty: 'partially_vaccinated',
-                      type: 'stacked-area',
-                      label:
-                        text.grafiek_gevaccineerde_mensen
-                          .label_gedeeltelijk_gevaccineerd,
-                      shortLabel:
-                        text.grafiek_gevaccineerde_mensen
-                          .tooltip_label_gedeeltelijk_gevaccineerd,
-                      color: colors.data.multiseries.cyan,
-                      fillOpacity: 1,
-                    },
-                    {
-                      metricProperty: 'fully_vaccinated',
-                      type: 'stacked-area',
-                      label:
-                        text.grafiek_gevaccineerde_mensen
-                          .label_volledig_gevaccineerd,
-                      shortLabel:
-                        text.grafiek_gevaccineerde_mensen
-                          .tooltip_label_volledig_gevaccineerd,
-                      color: colors.data.multiseries.cyan_dark,
-                      fillOpacity: 1,
-                    },
-                  ]}
-                />
-                {text.grafiek_gevaccineerde_mensen.extra_bericht && (
-                  <Markdown
-                    content={text.grafiek_gevaccineerde_mensen.extra_bericht}
-                  />
-                )}
-              </Box>
-            </ChartTile>
-          )}
-
-          {data.vaccine_delivery_per_supplier ? (
-            <VaccineDeliveryBarChart
-              data={data.vaccine_delivery_per_supplier}
-            />
-          ) : null}
 
           <MilestonesView
             title={page.title}
