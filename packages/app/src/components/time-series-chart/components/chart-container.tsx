@@ -8,6 +8,7 @@
  * attempt to render normal DOM components like the Markers or Tooltip
  * components as part of its children.
  */
+import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
 import { Padding } from '../logic';
@@ -64,7 +65,11 @@ export function ChartContainer({
       onMouseLeave={onHover}
       onClick={onClick}
     >
-      <Group left={padding.left} top={padding.top}>
+      <Group
+        left={padding.left}
+        top={padding.top}
+        css={css({ pointerEvents: 'none' })}
+      >
         {children}
       </Group>
     </svg>

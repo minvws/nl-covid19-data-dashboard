@@ -33,7 +33,6 @@ const TooltipContainer = styled.div(
 );
 
 export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
-  const isMounted = useIsMounted({ delayMs: 1 });
   const { width = 0, height = 0, ref } = useResizeObserver<HTMLDivElement>();
 
   const left = Math.min(bounds.right - width, Math.max(0, x - width / 2));
@@ -63,10 +62,7 @@ export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
       ref={ref}
       style={{
         top: 0,
-        opacity: isMounted ? 1 : 0,
         transform: `translate(${left}px,${top}px)`,
-        willChange: 'transform',
-        transition: `transform ${isMounted ? '75ms' : '0ms'} ease-out`,
         maxWidth: bounds.right - bounds.left,
       }}
     >
@@ -97,9 +93,6 @@ export function DateTooltip({ children, x, y, bounds }: DateTooltipProps) {
         position: 'absolute',
         left: 0,
         top: 0,
-        transitionProperty: 'transform',
-        transitionDuration: '75ms',
-        transitionTimingFunction: 'ease-out',
       }}
       color="data.benchmark"
       fontSize={1}
