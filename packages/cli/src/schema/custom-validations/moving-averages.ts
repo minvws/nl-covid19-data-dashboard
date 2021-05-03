@@ -2,8 +2,11 @@ import { isDefined } from 'ts-is-present';
 
 export function validateMovingAverages(input: Record<string, any>) {
   const result = Object.entries(input)
+    // first filter out all the non-metric properties (we only want the ones with a values collection)
     .filter(([_p, value]) => value.hasOwnProperty('values'))
+    // Then filter out all the metrics that contain no properties with a '_moving_average' suffix
     .filter(([_p, value]) => hasMovingAverages(value.values[0]))
+    // Map to objects that ONLY contain the moving average properties
     .map(([propertyName, value]) => ({
       [propertyName]: value.values.map((x: Record<string, unknown>) => {
         const movingAverageProperties = findMovingAverages(x);
@@ -13,6 +16,7 @@ export function validateMovingAverages(input: Record<string, any>) {
         }, {} as Record<string, unknown>);
       }),
     }))
+    // Perform the validations on those moving averages
     .map((x) =>
       Object.entries(x).map(([propertyName, values]) => {
         const propsWithValuesInFirstSixEntries = hasValuesInFirstSixEntries(
