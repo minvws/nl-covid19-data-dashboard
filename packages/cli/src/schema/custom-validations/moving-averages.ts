@@ -27,11 +27,11 @@ export function validateMovingAverages(input: Record<string, any>) {
             ' and '
           )}`;
         }
-        const propsWithNullValuesInOtherEntries = hasNullValuesInOtherEntries(
+        const propsWithNonConsecutiveNullValues = hasNonConsecutiveNullValues(
           values
         );
-        if (propsWithNullValuesInOtherEntries.length) {
-          return `${propertyName} has NULL values in items above index 5 of metric ${propsWithNullValuesInOtherEntries.join(
+        if (propsWithNonConsecutiveNullValues.length) {
+          return `${propertyName} has non consecutive NULL values in metric ${propsWithNonConsecutiveNullValues.join(
             ' and '
           )}`;
         }
@@ -44,17 +44,39 @@ export function validateMovingAverages(input: Record<string, any>) {
   return result.length ? result : undefined;
 }
 
-function hasNullValuesInOtherEntries(values: Record<string, unknown>[]) {
-  return values
-    .slice(6)
-    .map((x) =>
-      Object.entries(x).map(([propertyName, value]) =>
-        value === null ? propertyName : undefined
-      )
-    )
-    .flat()
-    .filter((x, index, arr) => index === arr.indexOf(x))
-    .filter(isDefined);
+function hasNonConsecutiveNullValues(values: Record<string, unknown>[]) {
+  const trailingValues = values.slice(6);
+  if (!trailingValues.length) {
+    return [];
+  }
+  const propertyNames = Object.keys(trailingValues[0]);
+  return propertyNames.filter((propertyName) =>
+    hasNonConsecutiveNullValuesInMetric(propertyName, trailingValues)
+  );
+}
+
+function hasNonConsecutiveNullValuesInMetric(
+  propertyName: string,
+  collection: Record<string, unknown>[]
+) {
+  let i = -1;
+  let currentValue: unknown = '-';
+  while (isDefined(currentValue)) {
+    currentValue = collection[++i]?.[propertyName];
+    if (currentValue === null) {
+      while (currentValue === null) {
+        currentValue = collection[++i]?.[propertyName];
+      }
+      if (
+        currentValue !== null &&
+        currentValue !== undefined &&
+        i < collection.length
+      ) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 function hasValuesInFirstSixEntries(values: Record<string, unknown>[]) {
