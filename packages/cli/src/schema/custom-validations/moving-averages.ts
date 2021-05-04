@@ -66,13 +66,17 @@ function hasNonConsecutiveValuesInMetric(
   collection: Record<string, unknown>[]
 ) {
   const values = collection.slice(6).map((x) => x[propertyName]);
-  let lastValue = values.pop();
+  let lastValue;
 
-  while (lastValue === null && values.length) {
-    lastValue = values.pop();
+  for (const value of values) {
+    if (lastValue === null && value !== null) {
+      return true;
+    }
+
+    lastValue = value;
   }
 
-  return values.indexOf(null) > -1;
+  return false;
 }
 
 function hasValuesInFirstSixEntries(values: Record<string, unknown>[]) {
