@@ -264,6 +264,14 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
+  const cutValuesConfig = timespanAnnotations
+    ?.filter((x) => isDefined(x.cutValuesFromMetricProperties))
+    .map((x) => ({
+      start: x.start,
+      end: x.end,
+      metricProperties: x.cutValuesFromMetricProperties as string[],
+    }));
+
   return (
     <Box ref={sizeRef}>
       {valueAnnotation && (
@@ -312,6 +320,7 @@ export function TimeSeriesChart<
             bounds={bounds}
             yScale={yScale}
             benchmark={benchmark}
+            cutValuesConfig={cutValuesConfig}
           />
 
           {benchmark && (

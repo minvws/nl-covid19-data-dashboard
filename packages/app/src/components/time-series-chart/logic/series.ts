@@ -3,8 +3,9 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { findIndex } from 'lodash';
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
+import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
@@ -93,6 +94,12 @@ export type InvisibleSeriesDefinition<T extends TimestampedValue> = {
   isPercentage?: boolean;
 };
 
+export type CutValuesConfig = {
+  start: number;
+  end: number;
+  metricProperties: string[];
+}[];
+
 /**
  * There are some places where we want to handle only series that are visually
  * present in the chart. This is a reverse type guard that you can use in a
@@ -106,11 +113,13 @@ export function isVisible<T extends TimestampedValue>(
 
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: SeriesConfig<T>
+  seriesConfig: SeriesConfig<T>,
+  cutValuesConfig: CutValuesConfig
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig), [
+  return useMemo(() => getSeriesList(values, seriesConfig, cutValuesConfig), [
     values,
     seriesConfig,
+    cutValuesConfig,
   ]);
 }
 
@@ -182,45 +191,48 @@ export function isSeriesSingleValue(
  * with TimestampedValue as the LineChart because types got simplified in other
  * places.
  */
-export type SeriesList = (SeriesSingleValue[] | SeriesDoubleValue[])[];
+export type SingleSeries = SeriesSingleValue[] | SeriesDoubleValue[];
+export type SeriesList = SingleSeries[];
 
 export function getSeriesList<T extends TimestampedValue>(
   values: T[],
-  seriesConfig: SeriesConfig<T>
+  seriesConfig: SeriesConfig<T>,
+  cutValuesConfig: CutValuesConfig
 ): SeriesList {
-  return seriesConfig
-    .filter(isVisible)
-    .map((config) =>
-      config.type === 'stacked-area'
-        ? getStackedAreaSeriesData(
-            values,
-            config.metricProperty,
-            seriesConfig.filter(
-              (x) => x.type === 'stacked-area'
-            ) as StackedAreaSeriesDefinition<T>[]
-          )
-        : config.type === 'range'
-        ? getRangeSeriesData(
-            values,
-            config.metricPropertyLow,
-            config.metricPropertyHigh
-          )
-        : getSeriesData(values, config.metricProperty)
-    );
+  return seriesConfig.filter(isVisible).map((config) =>
+    config.type === 'stacked-area'
+      ? getStackedAreaSeriesData(values, config.metricProperty, seriesConfig)
+      : config.type === 'range'
+      ? getRangeSeriesData(
+          values,
+          config.metricPropertyLow,
+          config.metricPropertyHigh
+        )
+      : /**
+         * Cutting values based on annotation is only supported for single line series
+         */
+        getSeriesData(values, config.metricProperty, cutValuesConfig)
+  );
 }
 
 function getStackedAreaSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T,
-  stackedAreaSeries: StackedAreaSeriesDefinition<T>[]
+  seriesConfig: SeriesConfig<T>
 ) {
   /**
    * Stacked area series are rendered from top to bottom. The sum of a Y-value
    * of all series below the current series equals the low value of a current
    * series's Y-value.
    */
-  const seriesBelowCurrentSeries = stackedAreaSeries.slice(
-    stackedAreaSeries.findIndex((x) => x.metricProperty === metricProperty) + 1
+  const stackedAreaDefinitions = seriesConfig.filter(
+    hasValueAtKey('type', 'stacked-area' as const)
+  );
+
+  const seriesBelowCurrentSeries = stackedAreaDefinitions.slice(
+    stackedAreaDefinitions.findIndex(
+      (x) => x.metricProperty === metricProperty
+    ) + 1
   );
 
   const seriesHigh = getSeriesData(values, metricProperty);
@@ -269,7 +281,8 @@ function getRangeSeriesData<T extends TimestampedValue>(
 
 function getSeriesData<T extends TimestampedValue>(
   values: T[],
-  metricProperty: keyof T
+  metricProperty: keyof T,
+  cutValuesConfig?: CutValuesConfig
 ): SeriesSingleValue[] {
   if (values.length === 0) {
     /**
@@ -280,8 +293,12 @@ function getSeriesData<T extends TimestampedValue>(
     return [];
   }
 
+  const relevantCuts = cutValuesConfig?.filter((x) =>
+    x.metricProperties.includes(metricProperty as string)
+  );
+
   if (isDateSeries(values)) {
-    return values.map((x) => ({
+    const uncutValues = values.map((x) => ({
       /**
        * This is messy and could be improved.
        */
@@ -289,10 +306,12 @@ function getSeriesData<T extends TimestampedValue>(
       // @ts-expect-error @TODO figure out why the type guard doesn't work
       __date_unix: x.date_unix,
     }));
+
+    return relevantCuts ? cutValues(uncutValues, relevantCuts) : uncutValues;
   }
 
   if (isDateSpanSeries(values)) {
-    return values.map((x) => ({
+    const uncutValues = values.map((x) => ({
       /**
        * This is messy and could be improved.
        */
@@ -305,7 +324,70 @@ function getSeriesData<T extends TimestampedValue>(
         // @ts-expect-error @TODO figure out why the type guard doesn't work
         x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
     }));
+
+    return relevantCuts ? cutValues(uncutValues, relevantCuts) : uncutValues;
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
+}
+
+function cutValues(
+  values: SeriesSingleValue[],
+  cuts: { start: number; end: number }[]
+): SeriesSingleValue[] {
+  const result = [...values]; // clone because we will mutate this.
+
+  for (const cut of cuts) {
+    /**
+     * By passing result as the values, we incrementally mutate the input array
+     */
+    const [startIndex, length] = getCutIndexAndLength(
+      result,
+      cut.start,
+      cut.end
+    );
+
+    result.splice(startIndex, length);
+  }
+
+  return result;
+}
+
+/**
+ * Figure out the position and length of the cut to be applied to the values
+ * array, based on start/end timestamps
+ */
+function getCutIndexAndLength(
+  values: SeriesSingleValue[],
+  start: number,
+  end: number
+) {
+  const startIndex = findIndex(
+    values,
+    (x) => x.__date_unix > start && x.__date_unix < end
+  );
+
+  if (startIndex === -1) {
+    /**
+     * If the values do not fall within the range of this cut, there is nothing
+     * to cut.
+     */
+    return [];
+  }
+
+  /**
+   * The endIndex is the last index before we pass the end boundary
+   */
+  const endIndex = findIndex(values, (x) => x.__date_unix > end) - 1;
+
+  if (startIndex === -1) {
+    /**
+     * If the end is not reached, that means that this cut is extended beyond
+     * the last value. In which case the endIndex will be the last index in the
+     * values array.
+     */
+    return [startIndex, values.length - startIndex];
+  } else {
+    return [startIndex, endIndex - startIndex];
+  }
 }
