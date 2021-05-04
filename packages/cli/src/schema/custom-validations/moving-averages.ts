@@ -1,15 +1,18 @@
 import set from 'lodash/set';
 import { isDefined } from 'ts-is-present';
+import { JSONValue } from './types';
 
 function hasValuesProperty(
-  input: [string, { values?: Record<string, unknown>[] }]
-): input is [string, { values: Record<string, unknown>[] }] {
-  return input[1].hasOwnProperty('values');
+  input: [string, JSONValue]
+): input is [string, { values: Record<string, JSONValue>[] }] {
+  return (
+    input[1] !== null &&
+    typeof input[1] === 'object' &&
+    input[1].hasOwnProperty('values')
+  );
 }
 
-export function validateMovingAverages(
-  input: Record<string, { values?: Record<string, unknown>[] }>
-) {
+export function validateMovingAverages(input: Record<string, JSONValue>) {
   const result = Object.entries(input)
     // first filter out all the non-metric properties (we only want the ones with a values collection)
     .filter(hasValuesProperty)
