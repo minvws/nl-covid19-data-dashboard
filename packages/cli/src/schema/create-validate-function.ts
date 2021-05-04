@@ -3,13 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import { equalsRootProperty } from './keywords';
 
-export function createValidateFunctionFromSchemaObject(
-  schema: any,
-  basePath: string
-) {
-  return compileValidator(schema, loadSchema.bind(null, basePath));
-}
-
 export function loadRootSchema(schemaPath: string) {
   try {
     return JSON.parse(
@@ -27,12 +20,16 @@ export function loadRootSchema(schemaPath: string) {
  *
  * @returns A Promise object that will resolve to a ValidateFunction.
  */
-export function createValidateFunctionFromSchemaPath(schemaPath: string) {
-  const basePath = path.dirname(schemaPath);
+export function createValidateFunction(
+  schemaOrPath: string | any,
+  schemaBasePath: string
+) {
+  const schema =
+    typeof schemaOrPath === 'string'
+      ? loadRootSchema(schemaOrPath)
+      : schemaOrPath;
 
-  const schema = loadRootSchema(schemaPath);
-
-  return compileValidator(schema, loadSchema.bind(null, basePath));
+  return compileValidator(schema, loadSchema.bind(null, schemaBasePath));
 }
 
 function compileValidator(

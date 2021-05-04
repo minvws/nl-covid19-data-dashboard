@@ -1,4 +1,3 @@
-import { ValidateFunction } from 'ajv';
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
@@ -6,8 +5,7 @@ import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { schemaDirectory } from '../config';
 import {
-  createValidateFunctionFromSchemaObject,
-  createValidateFunctionFromSchemaPath,
+  createValidateFunction,
   executeValidations,
   getSchemaInfo,
   loadRootSchema,
@@ -73,16 +71,43 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
   process.exit(1);
 }
 
-const handleCompilation = (validateFunction: ValidateFunction) => {
+function loadStrippedSchema(metricName: string, basePath: string) {
+  const strippedSchema = loadRootSchema(path.join(basePath, `__index.json`));
+
+  if (!isDefined(strippedSchema.properties[metricName])) {
+    console.error(
+      chalk.bgRed.bold(
+        `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
+      )
+    );
+    process.exit(1);
+  }
+
+  strippedSchema.required = [metricName];
+  strippedSchema.properties = {
+    [metricName]: { ...strippedSchema.properties[metricName] },
+  };
+  strippedSchema.additionalProperties = true;
+
+  return strippedSchema;
+}
+
+const schemaBasePath = path.join(schemaDirectory, schemaName);
+let rootSchema = metricName
+  ? loadStrippedSchema(metricName, schemaBasePath)
+  : path.join(schemaBasePath, `__index.json`);
+
+createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
   const fileName = path.join(jsonBasePath, jsonFileName);
   const schemaInfo = schemaInformation[schemaName];
+
   const contentAsString = fs.readFileSync(fileName, {
     encoding: 'utf8',
   });
 
-  let data: any = null;
+  let jsonData: any = null;
   try {
-    data = JSON.parse(contentAsString);
+    jsonData = JSON.parse(contentAsString);
   } catch (e) {
     console.group();
     console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
@@ -92,7 +117,7 @@ const handleCompilation = (validateFunction: ValidateFunction) => {
 
   const { isValid, schemaErrors } = executeValidations(
     validateFunction,
-    data,
+    jsonData,
     schemaInfo
   );
 
@@ -103,32 +128,4 @@ const handleCompilation = (validateFunction: ValidateFunction) => {
   }
 
   console.log(chalk.green.bold(`  ${jsonFileName} is valid  \n`));
-};
-
-if (metricName) {
-  const schemaBasePath = path.join(schemaDirectory, schemaName);
-  const rootSchema = loadRootSchema(path.join(schemaBasePath, `__index.json`));
-
-  if (!isDefined(rootSchema.properties[metricName])) {
-    console.error(
-      chalk.bgRed.bold(
-        `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
-      )
-    );
-    process.exit(1);
-  }
-
-  rootSchema.required = [metricName];
-  rootSchema.properties = {
-    [metricName]: { ...rootSchema.properties[metricName] },
-  };
-  rootSchema.additionalProperties = true;
-
-  createValidateFunctionFromSchemaObject(rootSchema, schemaBasePath).then(
-    handleCompilation
-  );
-} else {
-  createValidateFunctionFromSchemaPath(
-    path.join(schemaDirectory, schemaName, `__index.json`)
-  ).then(handleCompilation);
-}
+});
