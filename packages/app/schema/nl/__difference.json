@@ -30,9 +30,6 @@
     "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
-    "intensive_care_nice__admissions_on_date_of_reporting": {
-      "$ref": "#/definitions/diff_decimal"
-    },
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
@@ -87,7 +84,6 @@
     "tested_ggd_average__infected_percentage",
     "reproduction__index_average",
     "infectious_people__estimate",
-    "intensive_care_nice__admissions_on_date_of_reporting",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
     "doctor__covid_symptoms_per_100k",
