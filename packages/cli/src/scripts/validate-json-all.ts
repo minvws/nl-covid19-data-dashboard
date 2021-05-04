@@ -4,7 +4,7 @@ import meow from 'meow';
 import path from 'path';
 import { schemaDirectory } from '../config';
 import {
-  createValidateFunctionFromSchemaPath,
+  createValidateFunction,
   executeValidations,
   getSchemaInfo,
   SchemaInfo,
@@ -86,8 +86,9 @@ Promise.all(promisedValidations)
  * @returns An array of promises that will resolve either to true or false dependent on the validation result
  */
 async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
-  const validateFunction = await createValidateFunctionFromSchemaPath(
-    path.join(schemaDirectory, schemaName, `__index.json`)
+  const validateFunction = await createValidateFunction(
+    '__index.json',
+    path.join(schemaDirectory, schemaName)
   );
 
   return schemaInfo.files.map((fileName) => {

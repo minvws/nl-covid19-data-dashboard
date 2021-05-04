@@ -16,24 +16,24 @@ export function loadRootSchema(schemaPath: string) {
 }
 
 /**
- * Creates an Ajv ValidateFunction for the given schema
+ * Creates an Ajv ValidateFunction for the given schema or schema filename
  *
  * @returns A Promise object that will resolve to a ValidateFunction.
  */
 export function createValidateFunction(
-  schemaOrPath: string | any,
+  schemaOrFilename: string | object,
   schemaBasePath: string
 ) {
   const schema =
-    typeof schemaOrPath === 'string'
-      ? loadRootSchema(schemaOrPath)
-      : schemaOrPath;
+    typeof schemaOrFilename === 'string'
+      ? loadRootSchema(path.join(schemaBasePath, schemaOrFilename))
+      : schemaOrFilename;
 
   return compileValidator(schema, loadSchema.bind(null, schemaBasePath));
 }
 
 function compileValidator(
-  rootSchema: any,
+  rootSchema: object,
   loadSchema: (
     uri: string,
     cb?: (err: Error, schema: object) => void

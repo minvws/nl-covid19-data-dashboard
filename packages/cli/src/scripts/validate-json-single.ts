@@ -12,6 +12,35 @@ import {
   SchemaInfo,
 } from '../schema';
 
+/**
+ * When a single metric name is specified to be validated, we first load the associated schema.
+ * Then we set the specified metricName as the sole required property, set additionalProperties to true
+ * and remove all of the other property definitions.
+ *
+ * This way only the specified metric will be processed and all the rest of the data file will be ignored.
+ *
+ */
+function loadStrippedSchema(metricName: string, basePath: string) {
+  const strippedSchema = loadRootSchema(path.join(basePath, `__index.json`));
+
+  if (!isDefined(strippedSchema.properties[metricName])) {
+    console.error(
+      chalk.bgRed.bold(
+        `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
+      )
+    );
+    process.exit(1);
+  }
+
+  strippedSchema.required = [metricName];
+  strippedSchema.properties = {
+    [metricName]: { ...strippedSchema.properties[metricName] },
+  };
+  strippedSchema.additionalProperties = true;
+
+  return strippedSchema;
+}
+
 const schemaInformation = getSchemaInfo();
 
 const validSchemaNames = Object.keys(schemaInformation);
@@ -71,31 +100,10 @@ if (!fs.existsSync(path.join(jsonBasePath, jsonFileName))) {
   process.exit(1);
 }
 
-function loadStrippedSchema(metricName: string, basePath: string) {
-  const strippedSchema = loadRootSchema(path.join(basePath, `__index.json`));
-
-  if (!isDefined(strippedSchema.properties[metricName])) {
-    console.error(
-      chalk.bgRed.bold(
-        `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
-      )
-    );
-    process.exit(1);
-  }
-
-  strippedSchema.required = [metricName];
-  strippedSchema.properties = {
-    [metricName]: { ...strippedSchema.properties[metricName] },
-  };
-  strippedSchema.additionalProperties = true;
-
-  return strippedSchema;
-}
-
 const schemaBasePath = path.join(schemaDirectory, schemaName);
 let rootSchema = metricName
   ? loadStrippedSchema(metricName, schemaBasePath)
-  : path.join(schemaBasePath, `__index.json`);
+  : '__index.json';
 
 createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
   const fileName = path.join(jsonBasePath, jsonFileName);
