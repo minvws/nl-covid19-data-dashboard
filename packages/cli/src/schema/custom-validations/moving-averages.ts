@@ -5,10 +5,11 @@ import { JSONValue } from './types';
 function hasValuesProperty(
   input: [string, JSONValue]
 ): input is [string, { values: Record<string, JSONValue>[] }] {
+  const value = input[1];
   return (
-    input[1] !== null &&
-    typeof input[1] === 'object' &&
-    input[1].hasOwnProperty('values')
+    value !== null &&
+    typeof value === 'object' &&
+    value.hasOwnProperty('values')
   );
 }
 
@@ -31,7 +32,7 @@ export function validateMovingAverages(input: Record<string, JSONValue>) {
     // Perform the validations on those moving averages (make sure the first six items have explicit NULL values and check if there are no non-consecutive values in the rest of the array)
     .map((x) =>
       Object.entries(x).map(([propertyName, values]) => {
-        const propsWithValuesInFirstSixEntries = hasValuesInFirstSixEntries(
+        const propsWithValuesInFirstSixEntries = findPropertiesWithValuesInFirstSixEntries(
           values
         );
         if (propsWithValuesInFirstSixEntries.length) {
@@ -39,7 +40,9 @@ export function validateMovingAverages(input: Record<string, JSONValue>) {
             ' and '
           )}`;
         }
-        const propsWithNonConsecutiveValues = hasNonConsecutiveValues(values);
+        const propsWithNonConsecutiveValues = findPropertiesWithNonConsecutiveValues(
+          values
+        );
         if (propsWithNonConsecutiveValues.length) {
           return `${propertyName} has non consecutive values in metric ${propsWithNonConsecutiveValues.join(
             ' and '
@@ -54,7 +57,9 @@ export function validateMovingAverages(input: Record<string, JSONValue>) {
   return result.length ? result : undefined;
 }
 
-function hasNonConsecutiveValues(values: Record<string, unknown>[]) {
+function findPropertiesWithNonConsecutiveValues(
+  values: Record<string, unknown>[]
+) {
   const propertyNames = Object.keys(values[0]);
   return propertyNames.filter((propertyName) =>
     hasNonConsecutiveValuesInMetric(propertyName, values)
@@ -79,7 +84,9 @@ function hasNonConsecutiveValuesInMetric(
   return false;
 }
 
-function hasValuesInFirstSixEntries(values: Record<string, unknown>[]) {
+function findPropertiesWithValuesInFirstSixEntries(
+  values: Record<string, unknown>[]
+) {
   return values
     .slice(0, 5)
     .map((x) =>
