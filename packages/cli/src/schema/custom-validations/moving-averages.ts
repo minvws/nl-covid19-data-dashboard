@@ -1,10 +1,18 @@
 import set from 'lodash/set';
 import { isDefined } from 'ts-is-present';
 
-export function validateMovingAverages(input: Record<string, any>) {
+function hasValuesProperty(
+  input: [string, { values?: Record<string, unknown>[] }]
+): input is [string, { values: Record<string, unknown>[] }] {
+  return input[1].hasOwnProperty('values');
+}
+
+export function validateMovingAverages(
+  input: Record<string, { values?: Record<string, unknown>[] }>
+) {
   const result = Object.entries(input)
     // first filter out all the non-metric properties (we only want the ones with a values collection)
-    .filter(([_p, value]) => value.hasOwnProperty('values'))
+    .filter(hasValuesProperty)
     // Then filter out all the metrics that contain no properties with a '_moving_average' suffix
     .filter(([_p, value]) => hasMovingAverages(value.values[0]))
     // Map to objects that ONLY contain the moving average properties
