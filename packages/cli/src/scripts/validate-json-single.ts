@@ -66,6 +66,7 @@ Where schema-name must be one of these values: ${validSchemaNames.join(', ')},
 json-filename must be a file associated with that schema and metric-name must be a valid
 metric in the specified schema.
 
+${cli.help}
 `
   );
   process.exit(1);
