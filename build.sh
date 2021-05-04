@@ -23,6 +23,7 @@ yarn workspace @corona-dashboard/cli validate-features
 yarn workspace @corona-dashboard/cli generate-typescript
 yarn workspace @corona-dashboard/cli generate-sitemap
 yarn workspace @corona-dashboard/cms sync-assets
+yarn workspace @corona-dashboard/cms lokalize:export
 
 # Build the Dutch application and move to export folder
 export NEXT_PUBLIC_LOCALE="nl"

@@ -2116,6 +2116,25 @@
     "datums": "Last values obtained on {{dateOfInsertion}}. Is updated on a daily basis.",
     "date_unix": "1613650547",
     "date_of_insertion_unix": "1613650547",
+    "vaccination_coverage": {
+      "title": "",
+      "toelichting": "",
+      "headers": {
+        "agegroup": "",
+        "coverage": "",
+        "progress": ""
+      },
+      "templates": {
+        "agegroup": {
+          "oldest": "{{age}} en ouder",
+          "group": "{{age_low}} tot {{age_high}} jaar",
+          "total": "Totaal (18+jaar)",
+          "total_people": "{{total}} mensen"
+        }
+      },
+      "partially": "gedeeltelijk",
+      "fully": "volledig"
+    },
     "reference": {
       "href": "/verantwoording#vaccination",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."

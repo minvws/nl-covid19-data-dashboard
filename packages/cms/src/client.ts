@@ -1,7 +1,9 @@
-import { assert } from '@corona-dashboard/common';
-import sanityClient, { ClientConfig, SanityClient } from '@sanity/client';
+import sanityClient, { ClientConfig } from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
+import sanityJson from '../sanity.json';
+// @ts-ignore Creates a ts-node compile error at "run-time"
+import getUserConfig from '@sanity/cli/lib/util/getUserConfig';
 
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
@@ -16,26 +18,21 @@ dotenv.config({
  * where it probably fits better.
  */
 
-assert(
-  process.env.SANITY_STUDIO_API_PROJECT_ID,
-  'Missing SANITY_STUDIO_API_PROJECT_ID env var'
-);
-
-assert(
-  process.env.SANITY_STUDIO_API_DATASET,
-  'Missing SANITY_STUDIO_API_DATASET env var'
-);
-
 const clientConfig: ClientConfig = {
   apiVersion: '2021-03-25',
-  projectId: process.env.SANITY_STUDIO_API_PROJECT_ID,
-  dataset: process.env.SANITY_STUDIO_API_DATASET,
-  token: process.env.SANITY_STUDIO_TOKEN,
+  projectId: sanityJson.api.projectId,
   useCdn: false,
 };
 
-export function getClient(dataset?: string) {
-  return dataset
-    ? sanityClient({ ...clientConfig, dataset })
-    : sanityClient(clientConfig);
+export function getClient(dataset = 'development') {
+  /**
+   * This is an undocumented feature. Taken from the Sanity CLI code.
+   */
+  const tokenFromLogIn = getUserConfig().get('authToken');
+
+  return sanityClient({
+    ...clientConfig,
+    dataset,
+    token: tokenFromLogIn || process.env.SANITY_TOKEN,
+  });
 }
