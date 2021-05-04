@@ -28,7 +28,7 @@ export function validateMovingAverages(input: Record<string, JSONValue>) {
         );
       }),
     }))
-    // Perform the validations on those moving averages
+    // Perform the validations on those moving averages (make sure the first six items have explicit NULL values and check if there are no non-consecutive values in the rest of the array)
     .map((x) =>
       Object.entries(x).map(([propertyName, values]) => {
         const propsWithValuesInFirstSixEntries = hasValuesInFirstSixEntries(
