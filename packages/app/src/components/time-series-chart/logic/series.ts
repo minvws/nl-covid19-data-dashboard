@@ -332,6 +332,10 @@ function getSeriesData<T extends TimestampedValue>(
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
 }
 
+/**
+ * Technically cutting values means filling __value with null. We still want
+ * them to be fully qualified series items.
+ */
 function cutValues(
   values: SeriesSingleValue[],
   cuts: { start: number; end: number }[]
@@ -342,13 +346,13 @@ function cutValues(
     /**
      * By passing result as the values, we incrementally mutate the input array
      */
-    const [startIndex, length] = getCutIndexAndLength(
+    const [startIndex, endIndex] = getCutIndexStartEnd(
       result,
       cut.start,
       cut.end
     );
 
-    result.splice(startIndex, length);
+    clearValues(result, startIndex, endIndex);
   }
 
   return result;
@@ -358,7 +362,7 @@ function cutValues(
  * Figure out the position and length of the cut to be applied to the values
  * array, based on start/end timestamps
  */
-function getCutIndexAndLength(
+function getCutIndexStartEnd(
   values: SeriesSingleValue[],
   start: number,
   end: number
@@ -384,9 +388,9 @@ function getCutIndexAndLength(
      * the last value. In which case the endIndex will be the last index in the
      * values array.
      */
-    return [startIndex, values.length - startIndex];
+    return [startIndex, values.length - 1];
   } else {
-    return [startIndex, endIndex - startIndex];
+    return [startIndex, endIndex];
   }
 }
 
@@ -410,4 +414,14 @@ export function extractCutValuesConfig(
         : undefined
     )
     .filter(isDefined);
+}
+
+function clearValues(
+  values: SeriesSingleValue[],
+  startIndex: number,
+  endIndex: number
+) {
+  for (let index = startIndex; index <= endIndex; ++index) {
+    if (values[index]) values[index].__value = undefined;
+  }
 }
