@@ -21,6 +21,7 @@ interface DifferenceIndicatorProps {
   context?: 'sidebar' | 'tile' | 'inline';
   maximumFractionDigits?: number;
   staticTimespan?: string;
+  isMovingAverage?: boolean;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
@@ -136,11 +137,13 @@ function TileIndicator({
   isDecimal,
   staticTimespan,
   maximumFractionDigits,
+  isMovingAverage,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   maximumFractionDigits?: number;
   staticTimespan?: string;
+  isMovingAverage?: boolean;
 }) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const text = siteText.toe_en_afname;
@@ -165,11 +168,12 @@ function TileIndicator({
           <IconUp />
         </IconContainer>
         <Span fontWeight="bold" mr="0.3em">
-          {differenceFormattedString} {splitText[0]}
+          {differenceFormattedString} {splitText[0]}{' '}
         </Span>
 
         <Span color="annotation">
           {splitText[1]} {timespanTextNode}
+          {isMovingAverage ? 'NEE' : 'JA'}
         </Span>
       </Container>
     );
@@ -188,6 +192,7 @@ function TileIndicator({
         </Span>
         <Span>
           {splitText[1]} {timespanTextNode}
+          {isMovingAverage ? ' NEE' : ' JA'}
         </Span>
       </Container>
     );
@@ -200,6 +205,7 @@ function TileIndicator({
       </IconContainer>
       <Span>
         {text.gelijk} {timespanTextNode}
+        {isMovingAverage ? 'NEE GELIJK' : 'JA gelijk'}
       </Span>
     </Container>
   );

@@ -128,6 +128,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="infected"
                 absolute={dataOverallLastValue.infected}
                 difference={data.difference.tested_overall__infected}
+                isMovingAverage
               />
 
               <Box mb={4}>
