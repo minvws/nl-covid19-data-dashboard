@@ -51,7 +51,7 @@ const cli = meow(
       $ validate-json-single <schema-name> <json-path> <optional-metric-name>
 
     Examples
-      $ validate-json-single national NL.json vaccine_coverage
+      $ validate-json-single nl NL.json vaccine_coverage
 `
 );
 
