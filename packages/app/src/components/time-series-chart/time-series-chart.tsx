@@ -27,6 +27,7 @@ import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
   DataOptions,
+  extractCutValuesConfig,
   getTimeDomain,
   SeriesConfig,
   useHoverState,
@@ -169,7 +170,11 @@ export function TimeSeriesChart<
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
-  const seriesList = useSeriesList(values, seriesConfig);
+  const seriesList = useSeriesList(
+    values,
+    seriesConfig,
+    extractCutValuesConfig(timespanAnnotations)
+  );
 
   /**
    * The maximum is calculated over all values, because you don't want the
@@ -264,14 +269,6 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
-  const cutValuesConfig = timespanAnnotations
-    ?.filter((x) => isDefined(x.cutValuesFromMetricProperties))
-    .map((x) => ({
-      start: x.start,
-      end: x.end,
-      metricProperties: x.cutValuesFromMetricProperties as string[],
-    }));
-
   return (
     <Box ref={sizeRef}>
       {valueAnnotation && (
@@ -320,7 +317,6 @@ export function TimeSeriesChart<
             bounds={bounds}
             yScale={yScale}
             benchmark={benchmark}
-            cutValuesConfig={cutValuesConfig}
           />
 
           {benchmark && (

@@ -8,6 +8,7 @@ import { useMemo } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
+import { TimespanAnnotationConfig } from './common';
 
 export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
@@ -98,7 +99,7 @@ export type CutValuesConfig = {
   start: number;
   end: number;
   metricProperties: string[];
-}[];
+};
 
 /**
  * There are some places where we want to handle only series that are visually
@@ -114,7 +115,7 @@ export function isVisible<T extends TimestampedValue>(
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  cutValuesConfig: CutValuesConfig
+  cutValuesConfig?: CutValuesConfig[]
 ) {
   return useMemo(() => getSeriesList(values, seriesConfig, cutValuesConfig), [
     values,
@@ -197,7 +198,7 @@ export type SeriesList = SingleSeries[];
 export function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  cutValuesConfig: CutValuesConfig
+  cutValuesConfig?: CutValuesConfig[]
 ): SeriesList {
   return seriesConfig.filter(isVisible).map((config) =>
     config.type === 'stacked-area'
@@ -282,7 +283,7 @@ function getRangeSeriesData<T extends TimestampedValue>(
 function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T,
-  cutValuesConfig?: CutValuesConfig
+  cutValuesConfig?: CutValuesConfig[]
 ): SeriesSingleValue[] {
   if (values.length === 0) {
     /**
@@ -296,6 +297,8 @@ function getSeriesData<T extends TimestampedValue>(
   const relevantCuts = cutValuesConfig?.filter((x) =>
     x.metricProperties.includes(metricProperty as string)
   );
+
+  console.log('relevantCuts', cutValuesConfig, relevantCuts);
 
   if (isDateSeries(values)) {
     const uncutValues = values.map((x) => ({
@@ -390,4 +393,20 @@ function getCutIndexAndLength(
   } else {
     return [startIndex, endIndex - startIndex];
   }
+}
+
+export function extractCutValuesConfig(
+  timespanAnnotations?: TimespanAnnotationConfig[]
+) {
+  return timespanAnnotations
+    ?.map((x) =>
+      x.cutValuesForMetricProperties
+        ? ({
+            metricProperties: x.cutValuesForMetricProperties,
+            start: x.start,
+            end: x.end,
+          } as CutValuesConfig)
+        : undefined
+    )
+    .filter(isDefined);
 }
