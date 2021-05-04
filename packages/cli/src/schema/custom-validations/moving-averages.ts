@@ -1,3 +1,4 @@
+import isObject from 'lodash/isObject';
 import set from 'lodash/set';
 import { isDefined } from 'ts-is-present';
 import { JSONValue } from './types';
@@ -6,11 +7,7 @@ function hasValuesProperty(
   input: [string, JSONValue]
 ): input is [string, { values: Record<string, JSONValue>[] }] {
   const value = input[1];
-  return (
-    value !== null &&
-    typeof value === 'object' &&
-    value.hasOwnProperty('values')
-  );
+  return isObject(value) && 'values' in value;
 }
 
 export function validateMovingAverages(input: Record<string, JSONValue>) {
@@ -89,14 +86,12 @@ function findPropertiesWithValuesInFirstSixEntries(
 ) {
   return values
     .slice(0, 5)
-    .map((x) =>
+    .flatMap((x) =>
       Object.entries(x).map(([propertyName, value]) =>
         value !== null ? propertyName : undefined
       )
     )
-    .flat()
-    .filter((x, index, arr) => index === arr.indexOf(x))
-    .filter(isDefined);
+    .filter((x, index, arr) => isDefined(x) && index === arr.indexOf(x));
 }
 
 function hasMovingAverages(input: Record<string, unknown>) {
