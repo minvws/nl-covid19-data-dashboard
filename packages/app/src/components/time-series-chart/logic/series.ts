@@ -294,11 +294,9 @@ function getSeriesData<T extends TimestampedValue>(
     return [];
   }
 
-  const relevantCuts = cutValuesConfig?.filter((x) =>
+  const activeCuts = cutValuesConfig?.filter((x) =>
     x.metricProperties.includes(metricProperty as string)
   );
-
-  console.log('relevantCuts', cutValuesConfig, relevantCuts);
 
   if (isDateSeries(values)) {
     const uncutValues = values.map((x) => ({
@@ -310,7 +308,7 @@ function getSeriesData<T extends TimestampedValue>(
       __date_unix: x.date_unix,
     }));
 
-    return relevantCuts ? cutValues(uncutValues, relevantCuts) : uncutValues;
+    return activeCuts ? cutValues(uncutValues, activeCuts) : uncutValues;
   }
 
   if (isDateSpanSeries(values)) {
@@ -328,7 +326,7 @@ function getSeriesData<T extends TimestampedValue>(
         x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2,
     }));
 
-    return relevantCuts ? cutValues(uncutValues, relevantCuts) : uncutValues;
+    return activeCuts ? cutValues(uncutValues, activeCuts) : uncutValues;
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
@@ -378,12 +376,9 @@ function getCutIndexAndLength(
     return [];
   }
 
-  /**
-   * The endIndex is the last index before we pass the end boundary
-   */
-  const endIndex = findIndex(values, (x) => x.__date_unix > end) - 1;
+  const endIndex = findIndex(values, (x) => x.__date_unix >= end);
 
-  if (startIndex === -1) {
+  if (endIndex === -1) {
     /**
      * If the end is not reached, that means that this cut is extended beyond
      * the last value. In which case the endIndex will be the last index in the
@@ -395,6 +390,12 @@ function getCutIndexAndLength(
   }
 }
 
+/**
+ * Convert timespanAnnotations to a simplified the type used to process the
+ * series. We could just pass down the full annotations type but that would
+ * create a bit of an odd dependency between the two mostly independent
+ * concepts.
+ */
 export function extractCutValuesConfig(
   timespanAnnotations?: TimespanAnnotationConfig[]
 ) {
