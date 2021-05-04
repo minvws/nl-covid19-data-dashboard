@@ -31,7 +31,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
