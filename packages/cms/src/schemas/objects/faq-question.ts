@@ -9,7 +9,7 @@ selectedLanguages$.subscribe((selected: any[]) => {
 export default {
   title: 'Veelgestelde vraag',
   name: 'faqQuestion',
-  type: 'object',
+  type: 'document',
   fields: [
     {
       name: 'title',

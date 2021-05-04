@@ -1,5 +1,6 @@
 export default {
   type: 'object',
+  title: 'Een link voorzien van een image, categorie en label',
   name: 'decoratedLink',
   preview: {
     select: {

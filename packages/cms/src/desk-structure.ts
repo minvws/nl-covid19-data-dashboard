@@ -15,6 +15,7 @@ const hiddenDocTypes = [
   'topicalPage',
   'veelgesteldeVragen',
   'veelgesteldeVragenGroups',
+  'faqQuestion',
   'cijferVerantwoording',
   'overDitDashboard',
   'overRisicoNiveaus',
@@ -70,8 +71,11 @@ export default () =>
               ),
               addListItem(
                 MdQuestionAnswer,
-                'Veelgestelde vragen',
+                'Veelgestelde vragen pagina',
                 'veelgesteldeVragen'
+              ),
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'faqQuestion'
               ),
             ])
         ),
