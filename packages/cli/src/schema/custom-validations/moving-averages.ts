@@ -1,3 +1,4 @@
+import set from 'lodash/set';
 import { isDefined } from 'ts-is-present';
 
 export function validateMovingAverages(input: Record<string, any>) {
@@ -10,10 +11,10 @@ export function validateMovingAverages(input: Record<string, any>) {
     .map(([propertyName, value]) => ({
       [propertyName]: value.values.map((x: Record<string, unknown>) => {
         const movingAverageProperties = findMovingAverages(x);
-        return movingAverageProperties.reduce((aggr, p) => {
-          aggr[p] = x[p];
-          return aggr;
-        }, {} as Record<string, unknown>);
+        return movingAverageProperties.reduce(
+          (aggr, p) => set(aggr, p, x[p]),
+          {} as Record<string, unknown>
+        );
       }),
     }))
     // Perform the validations on those moving averages
@@ -27,11 +28,9 @@ export function validateMovingAverages(input: Record<string, any>) {
             ' and '
           )}`;
         }
-        const propsWithNonConsecutiveNullValues = hasNonConsecutiveNullValues(
-          values
-        );
-        if (propsWithNonConsecutiveNullValues.length) {
-          return `${propertyName} has non consecutive NULL values in metric ${propsWithNonConsecutiveNullValues.join(
+        const propsWithNonConsecutiveValues = hasNonConsecutiveValues(values);
+        if (propsWithNonConsecutiveValues.length) {
+          return `${propertyName} has non consecutive values in metric ${propsWithNonConsecutiveValues.join(
             ' and '
           )}`;
         }
@@ -44,35 +43,25 @@ export function validateMovingAverages(input: Record<string, any>) {
   return result.length ? result : undefined;
 }
 
-function hasNonConsecutiveNullValues(values: Record<string, unknown>[]) {
-  const trailingValues = values.slice(6);
-  if (!trailingValues.length) {
-    return [];
-  }
-  const propertyNames = Object.keys(trailingValues[0]);
+function hasNonConsecutiveValues(values: Record<string, unknown>[]) {
+  const propertyNames = Object.keys(values[0]);
   return propertyNames.filter((propertyName) =>
-    hasNonConsecutiveNullValuesInMetric(propertyName, trailingValues)
+    hasNonConsecutiveValuesInMetric(propertyName, values)
   );
 }
 
-function hasNonConsecutiveNullValuesInMetric(
+function hasNonConsecutiveValuesInMetric(
   propertyName: string,
   collection: Record<string, unknown>[]
 ) {
-  let i = -1;
-  let currentValue: unknown = '-';
-  while (isDefined(currentValue)) {
-    currentValue = collection[++i]?.[propertyName];
-    if (currentValue === null) {
-      while (currentValue === null) {
-        currentValue = collection[++i]?.[propertyName];
-      }
-      if (isDefined(currentValue) && i < collection.length) {
-        return true;
-      }
-    }
+  const values = collection.slice(6).map((x) => x[propertyName]);
+  let lastValue = values.pop();
+
+  while (lastValue === null && values.length) {
+    lastValue = values.pop();
   }
-  return false;
+
+  return values.indexOf(null) > -1;
 }
 
 function hasValuesInFirstSixEntries(values: Record<string, unknown>[]) {
