@@ -368,7 +368,7 @@ function getCutIndexStartEnd(
   end: number
 ) {
   const startIndex = values.findIndex(
-    (x) => x.__date_unix > start && x.__date_unix < end
+    (x) => x.__date_unix >= start && x.__date_unix < end
   );
 
   if (startIndex === -1) {
