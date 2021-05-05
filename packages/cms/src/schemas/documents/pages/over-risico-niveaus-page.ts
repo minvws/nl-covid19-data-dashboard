@@ -1,4 +1,4 @@
-export default {
+export const overRisicoNiveaus = {
   name: 'overRisicoNiveaus',
   type: 'document',
   title: 'Over risico niveaus',

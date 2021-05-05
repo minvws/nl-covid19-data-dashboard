@@ -6,40 +6,9 @@ import createSchema from 'part:@sanity/base/schema-creator';
  * Import the ones using named exports
  */
 import * as allDocuments from './documents';
-import behaviorPage from './documents/pages/behavior-page';
-import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
-import deceasedPage from './documents/pages/deceased-page';
-import escalationLevelPage from './documents/pages/escalation-level-page';
-import hospitalPage from './documents/pages/hospital-page';
-import intensiveCarePage from './documents/pages/intensive-care-page';
-import overDitDashboard from './documents/pages/over-dit-dashboard-page';
-import overRisicoNiveaus from './documents/pages/over-risico-niveaus-page';
-import positiveTestsPage from './documents/pages/positive-tests-page';
-import reproductionPage from './documents/pages/reproduction-page';
-import sewerPage from './documents/pages/sewer-page';
-import topicalPage from './documents/pages/topical-page';
-import vaccinationsPage from './documents/pages/vaccinations-page';
-import veelgesteldeVragenGroepen from './documents/pages/veelgestelde-vragen-groepen-page';
-import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
-import localeBlock from './locale/locale-block';
-import localeRichContentBlock from './locale/locale-rich-content-block';
-// These 2 locale helpers are technically objects too, but we keep them grouped here
-// so it's easier to scan over the different imports and recognize patterns
-import localeString from './locale/locale-string';
-import localeText from './locale/locale-text';
-//objects are building blocks, but not queryable in itself
-import collapsible from './objects/collapsible';
-import decoratedLink from './objects/decorated-link';
-import lineChart from './objects/line-chart';
-import milestone from './objects/milestone';
-import titleDescriptionBlock from './objects/title-description-block';
-import lockdown from './restrictions/lockdown';
-import restriction from './restrictions/restriction';
-import restrictionCategory from './restrictions/restriction-category';
-// routekaart en maatregelen
-import restrictionGroup from './restrictions/restriction-group';
-import restrictionGroupLockdown from './restrictions/restriction-group-lockdown';
-import roadmap from './restrictions/roadmap';
+import * as localeHelpers from './locale';
+import * as allObjects from './objects';
+import * as restrictionDocuments from './restrictions';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -48,43 +17,12 @@ export default createSchema({
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    /* DOCUMENTS */
-    veelgesteldeVragen,
-    veelgesteldeVragenGroepen,
-    cijferVerantwoording,
-    overRisicoNiveaus,
-    overDitDashboard,
-    topicalPage,
-    deceasedPage,
-    escalationLevelPage,
-    behaviorPage,
-    hospitalPage,
-    intensiveCarePage,
-    positiveTestsPage,
-    reproductionPage,
-    sewerPage,
-    vaccinationsPage,
     ...Object.values(allDocuments),
 
-    /** RESTRICTIONS */
-    restrictionGroup,
-    restrictionGroupLockdown,
-    restrictionCategory,
-    roadmap,
-    lockdown,
-    restriction,
+    ...Object.values(restrictionDocuments),
 
-    /* OBJECTS */
-    lineChart,
-    collapsible,
-    milestone,
-    titleDescriptionBlock,
-    decoratedLink,
+    ...Object.values(allObjects),
 
-    /* LOCALE HELPERS */
-    localeString,
-    localeBlock,
-    localeRichContentBlock,
-    localeText,
+    ...Object.values(localeHelpers),
   ]),
 });

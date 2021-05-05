@@ -1,4 +1,4 @@
-export default {
+export const lockdown = {
   name: 'lockdown',
   type: 'document',
   title: 'Lockdown',

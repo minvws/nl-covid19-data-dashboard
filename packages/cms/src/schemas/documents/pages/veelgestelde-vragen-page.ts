@@ -1,4 +1,4 @@
-export default {
+export const veelgesteldeVragen = {
   name: 'veelgesteldeVragen',
   type: 'document',
   title: 'Veelgestelde vragen pagina',

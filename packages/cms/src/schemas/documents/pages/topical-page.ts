@@ -1,4 +1,4 @@
-export default {
+export const topicalPage = {
   title: 'Actueel pagina',
   name: 'topicalPage',
   type: 'document',
@@ -12,8 +12,8 @@ export default {
           type: 'object',
           preview: {
             select: {
-              title: 'title.nl'
-            }
+              title: 'title.nl',
+            },
           },
           fields: [
             {
@@ -68,8 +68,8 @@ export default {
               ],
               validation: (Rule: any) => Rule.required(),
             },
-          ]
-        }
+          ],
+        },
       ],
       validation: (Rule: any) => Rule.required().unique().length(2),
     },
@@ -78,6 +78,6 @@ export default {
       name: 'empty',
       type: 'localeString',
       hidden: true,
-    }
+    },
   ],
 };

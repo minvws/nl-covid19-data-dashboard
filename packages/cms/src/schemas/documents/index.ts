@@ -3,8 +3,9 @@
  */
 
 export * from './article';
-export * from './cijfer-verantwoording-item';
 export * from './editorial';
 export * from './faq-question';
+export * from './figure-explanation-item';
 export * from './lokalize-text';
+export * from './pages';
 export * from './toegankelijkheid';

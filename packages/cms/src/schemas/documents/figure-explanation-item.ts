@@ -1,6 +1,6 @@
-export const cijferVerantwoordingItem = {
+export const figureExplanationItem = {
   title: 'Inklapbare titel en inhoud voor cijferverantwoording',
-  name: 'cijferVerantwoordingItem',
+  name: 'figureExplanationItem',
   type: 'object',
   fields: [
     {

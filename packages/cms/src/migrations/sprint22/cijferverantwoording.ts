@@ -5,13 +5,13 @@ const client = getClient();
 const fetchVerantwoording = () =>
   client.fetch(`*[_type == 'cijferVerantwoording']`);
 
-const buildPatches = (docs: any[], collapsibleDocuments: any[]) => {
+const buildPatches = (docs: any[], figureExplanationItems: any[]) => {
   return docs
     .map((doc) => ({
       id: doc._id,
       patch: {
         set: {
-          collapsibleList: collapsibleDocuments.map((x: any) => ({
+          collapsibleList: figureExplanationItems.map((x: any) => ({
             _type: 'reference',
             _ref: x._id,
           })),
@@ -39,7 +39,7 @@ const saveCollapsiblesAsDocuments = (collapsibleObjects: any[]) => {
       .map((x) =>
         client.create({
           ...x,
-          _type: 'cijferVerantwoordingItem',
+          _type: 'figureExplanationItem',
           _key: undefined,
         })
       )

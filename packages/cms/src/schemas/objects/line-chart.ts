@@ -4,7 +4,7 @@
  * @ToDo: More fields / configuration for this is needed.
  */
 
-export default {
+export const lineChart = {
   title: 'Lijngrafiek',
   name: 'lineChart',
   type: 'object',
