@@ -11,6 +11,7 @@ import * as allDocuments from './documents';
 // import siteSettings from "./documents/siteSettings";
 import article from './documents/article';
 import editorial from './documents/editorial';
+import faqQuestion from './documents/faq-question';
 import behaviorPage from './documents/pages/behavior-page';
 import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
 import deceasedPage from './documents/pages/deceased-page';
@@ -36,7 +37,6 @@ import localeText from './locale/locale-text';
 //objects are building blocks, but not queryable in itself
 import collapsible from './objects/collapsible';
 import decoratedLink from './objects/decorated-link';
-import faqQuestion from './objects/faq-question';
 import lineChart from './objects/line-chart';
 import milestone from './objects/milestone';
 import titleDescriptionBlock from './objects/title-description-block';

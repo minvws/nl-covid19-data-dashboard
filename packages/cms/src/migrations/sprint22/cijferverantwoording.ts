@@ -2,15 +2,16 @@ import { getClient } from '../../client';
 
 const client = getClient();
 
-const fetchFAQ = () => client.fetch(`*[_type == 'veelgesteldeVragen']`);
+const fetchVerantwoording = () =>
+  client.fetch(`*[_type == 'cijferVerantwoording']`);
 
-const buildPatches = (docs: any[], faqDocuments: any[]) => {
+const buildPatches = (docs: any[], collapsibleDocuments: any[]) => {
   return docs
     .map((doc) => ({
       id: doc._id,
       patch: {
         set: {
-          questions: faqDocuments.map((x: any) => ({
+          collapsibleList: collapsibleDocuments.map((x: any) => ({
             _type: 'reference',
             _ref: x._id,
           })),
@@ -31,13 +32,14 @@ const createTransaction = (patches: any[]) =>
 
 const commitTransaction = (tx: any) => tx.commit();
 
-const saveFaqQuestionsAsDocuments = (questionObjects: any[]) => {
+const saveCollapsiblesAsDocuments = (collapsibleObjects: any[]) => {
   return Promise.all(
-    questionObjects
-      .filter((x) => x._type === 'faqQuestion')
+    collapsibleObjects
+      .filter((x) => x._type === 'collapsible')
       .map((x) =>
         client.create({
           ...x,
+          _type: 'collapsibleDocument',
           _key: undefined,
         })
       )
@@ -45,16 +47,18 @@ const saveFaqQuestionsAsDocuments = (questionObjects: any[]) => {
 };
 
 const migrateNextBatch = async (): Promise<any> => {
-  const faqs = await fetchFAQ();
+  const pages = await fetchVerantwoording();
 
-  const questions =
-    faqs.length === 1
-      ? faqs[0].questions
-      : faqs.find((x: any) => x._id.startsWith('drafts.'))?.questions;
+  const collapsibles =
+    pages.length === 1
+      ? pages[0].questions
+      : pages.find((x: any) => x._id.startsWith('drafts.'))?.collapsibleList;
 
-  const faqDocuments = await saveFaqQuestionsAsDocuments(questions);
+  const collapsibleDocuments = await saveCollapsiblesAsDocuments(collapsibles);
 
-  const patches = faqDocuments.length ? buildPatches(faqs, faqDocuments) : [];
+  const patches = collapsibleDocuments.length
+    ? buildPatches(pages, collapsibleDocuments)
+    : [];
 
   if (patches.length === 0) {
     console.log('No more documents to migrate!');

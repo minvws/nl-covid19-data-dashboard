@@ -66,13 +66,13 @@ export default () =>
           S.list()
             .title('Groepen en Vragen')
             .items([
-              ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'veelgesteldeVragenGroups'
-              ),
               addListItem(
                 MdQuestionAnswer,
                 'Veelgestelde vragen pagina',
                 'veelgesteldeVragen'
+              ),
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'veelgesteldeVragenGroups'
               ),
               ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'faqQuestion'

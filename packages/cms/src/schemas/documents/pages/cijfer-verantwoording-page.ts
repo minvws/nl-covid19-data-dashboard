@@ -19,7 +19,7 @@ export default {
       title: 'Verantwoordingen',
       description:
         'Je kan verantwoordingen toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
-      of: [{ type: 'collapsible' }],
+      of: [{ type: 'reference', to: { type: 'collapsibleDocument' } }],
     },
   ],
   preview: {
