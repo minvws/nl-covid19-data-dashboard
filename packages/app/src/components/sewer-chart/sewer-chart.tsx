@@ -6,7 +6,7 @@ import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar, LinePath } from '@visx/shape';
 import { transparentize } from 'polished';
-import { PointerEvent, useCallback, useMemo, useState } from 'react';
+import { PointerEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from '~/components/base';
@@ -170,12 +170,16 @@ export function SewerChart(props: SewerChartProps) {
   );
 
   /**
-   * Manually set Y axis values, as per design
+   * Manually set Y axis values, as per design.
+   * The middle calculation finds first the difference between the higehst
+   * and the lowest, then divide it by 2 and add the lowest value
+   * to find value exact value in between.
    */
   const tickValuesY = useMemo(
     () => [
       scales.yScale.domain()[0],
-      scales.yScale.domain()[1] / 2,
+      (scales.yScale.domain()[1] - scales.yScale.domain()[0]) / 2 +
+        scales.yScale.domain()[0],
       scales.yScale.domain()[1],
     ],
     [scales.yScale]
@@ -328,10 +332,12 @@ export function SewerChart(props: SewerChartProps) {
             <AxisLeft
               scale={scales.yScale}
               tickValues={tickValuesY}
+              numTicks={tickValuesY.length}
+              tickFormat={(x) => formatNumber(x as number)}
               hideTicks
               hideAxisLine
               stroke={colors.data.axis}
-              tickFormat={(x) => formatNumber(x as number)}
+              // tickFormat={(x) => formatNumber(x as number)}
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
                 fontSize: 14,
