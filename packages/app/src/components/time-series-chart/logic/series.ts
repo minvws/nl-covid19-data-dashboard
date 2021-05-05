@@ -3,7 +3,7 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { findIndex, omit, pick } from 'lodash';
+import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
@@ -367,8 +367,7 @@ function getCutIndexStartEnd(
   start: number,
   end: number
 ) {
-  const startIndex = findIndex(
-    values,
+  const startIndex = values.findIndex(
     (x) => x.__date_unix > start && x.__date_unix < end
   );
 
@@ -380,7 +379,7 @@ function getCutIndexStartEnd(
     return [];
   }
 
-  const endIndex = findIndex(values, (x) => x.__date_unix >= end);
+  const endIndex = values.findIndex((x) => x.__date_unix >= end);
 
   if (endIndex === -1) {
     /**
