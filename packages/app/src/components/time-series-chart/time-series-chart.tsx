@@ -26,6 +26,7 @@ import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
+  omitValuePropertiesForAnnotation,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
@@ -226,8 +227,17 @@ export function TimeSeriesChart<
            * nearest/active hover property and the full series configuration.
            * With these three arguments we should be able to render any sort of
            * tooltip.
+           *
+           * If we are hovering a timespanAnnotation, we use that data to cut
+           * out any property values that should be blocked from the tooltip.
            */
-          value: values[valuesIndex],
+          value:
+            timespanAnnotations && isDefined(timespanAnnotationIndex)
+              ? omitValuePropertiesForAnnotation(
+                  values[valuesIndex],
+                  timespanAnnotations[timespanAnnotationIndex]
+                )
+              : values[valuesIndex],
           config: seriesConfig,
           configIndex: nearestPoint.seriesConfigIndex,
           markNearestPointOnly,

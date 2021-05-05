@@ -3,7 +3,7 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { findIndex } from 'lodash';
+import { findIndex, omit, pick } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
@@ -333,7 +333,7 @@ function getSeriesData<T extends TimestampedValue>(
 }
 
 /**
- * Technically cutting values means filling __value with null. We still want
+ * Cutting values means setting series item.__value to undefined. We still want
  * them to be fully qualified series items.
  */
 function cutValues(
@@ -395,10 +395,9 @@ function getCutIndexStartEnd(
 }
 
 /**
- * Convert timespanAnnotations to a simplified the type used to process the
- * series. We could just pass down the full annotations type but that would
- * create a bit of an odd dependency between the two mostly independent
- * concepts.
+ * Convert timespanAnnotations to a simplified type used to cut the series data.
+ * We could just pass down the full annotations type but that would create a bit
+ * of an odd dependency between two mostly independent concepts.
  */
 export function extractCutValuesConfig(
   timespanAnnotations?: TimespanAnnotationConfig[]
@@ -423,5 +422,16 @@ function clearValues(
 ) {
   for (let index = startIndex; index <= endIndex; ++index) {
     if (values[index]) values[index].__value = undefined;
+  }
+}
+
+export function omitValuePropertiesForAnnotation<T extends TimestampedValue>(
+  value: T,
+  timespan: TimespanAnnotationConfig
+) {
+  if (timespan.cutValuesForMetricProperties) {
+    return omit(value, timespan.cutValuesForMetricProperties) as T;
+  } else {
+    return value;
   }
 }
