@@ -570,11 +570,11 @@ export interface NlVaccineSupport {
 }
 export interface NlVaccineSupportValue {
   percentage_average: number;
-  percentage_70_plus: number;
-  percentage_55_69: number;
-  percentage_40_54: number;
-  percentage_25_39: number;
-  percentage_16_24: number;
+  percentage_70_plus: number | null;
+  percentage_55_69: number | null;
+  percentage_40_54: number | null;
+  percentage_25_39: number | null;
+  percentage_16_24: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

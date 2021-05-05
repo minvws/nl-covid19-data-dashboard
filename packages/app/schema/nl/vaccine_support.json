@@ -24,19 +24,19 @@
           "type": "number"
         },
         "percentage_70_plus": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "percentage_55_69": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "percentage_40_54": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "percentage_25_39": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "percentage_16_24": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "date_start_unix": {
           "type": "integer"
