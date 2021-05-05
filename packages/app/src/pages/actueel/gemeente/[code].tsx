@@ -179,12 +179,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="tested_overall"
                     metricProperty="infected"
-                    differenceKey="tested_overall__infected"
+                    differenceKey="tested_overall__infected_moving_average"
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
                     differenceTexts={
-                      text.data_driven_texts.infected_people_total.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
@@ -201,10 +201,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceTexts={
-                      text.data_driven_texts.intake_hospital_ma.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }

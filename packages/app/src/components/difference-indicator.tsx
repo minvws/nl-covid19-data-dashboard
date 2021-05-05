@@ -157,7 +157,10 @@ function TileIndicator({
       )
     : formatNumber(Math.abs(difference));
 
-  const timespanTextNode = staticTimespan ?? text.vorige_waarde;
+  const timespanTextNode =
+    staticTimespan ?? isMovingAverage
+      ? text.zeven_daags_gemiddelde
+      : text.vorige_waarde;
 
   if (difference > 0) {
     const splitText = text.toename.split(' ');
@@ -173,7 +176,6 @@ function TileIndicator({
 
         <Span color="annotation">
           {splitText[1]} {timespanTextNode}
-          {isMovingAverage ? 'NEE' : 'JA'}
         </Span>
       </Container>
     );
@@ -192,7 +194,6 @@ function TileIndicator({
         </Span>
         <Span>
           {splitText[1]} {timespanTextNode}
-          {isMovingAverage ? ' NEE' : ' JA'}
         </Span>
       </Container>
     );
@@ -205,8 +206,36 @@ function TileIndicator({
       </IconContainer>
       <Span>
         {text.gelijk} {timespanTextNode}
-        {isMovingAverage ? 'NEE GELIJK' : 'JA gelijk'}
       </Span>
+    </Container>
+  );
+}
+
+export function InlineIndicatorWithoutValue({ value }: { value: number }) {
+  if (value > 0)
+    return (
+      <Container>
+        hoger
+        <IconContainer color="data.primary">
+          <IconUp />
+        </IconContainer>
+      </Container>
+    );
+  if (value < 0)
+    return (
+      <Container>
+        lager
+        <IconContainer color="red">
+          <IconDown />
+        </IconContainer>
+      </Container>
+    );
+  return (
+    <Container>
+      in lijn
+      <IconContainer color="data.primary">
+        <IconDown />
+      </IconContainer>
     </Container>
   );
 }
@@ -219,7 +248,7 @@ const IconContainer = styled(Span)(
     svg: {
       mr: 1,
       width: '19px',
-      height: '19px',
+      height: '19qpx',
     },
   })
 );
