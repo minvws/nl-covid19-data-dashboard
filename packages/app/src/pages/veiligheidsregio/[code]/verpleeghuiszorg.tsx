@@ -152,6 +152,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                         positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                       shortLabel:
                         positiveTestedPeopleText.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: [
+                        'newly_infected_people_moving_average',
+                      ],
                     },
                   ],
                 }}
@@ -300,6 +303,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label: deceased.line_chart_legend_inaccurate_label,
                       shortLabel: deceased.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: [
+                        'deceased_daily_moving_average',
+                      ],
                     },
                   ],
                 }}

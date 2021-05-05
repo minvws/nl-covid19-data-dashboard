@@ -8,7 +8,7 @@ import { appendTextMutation } from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
-  const client = getClient('development');
+  const client = getClient();
 
   /**
    * @TODO We could cache the subjects in a temp location on disk and update

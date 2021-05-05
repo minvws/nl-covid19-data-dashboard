@@ -1,5 +1,14 @@
 /**
- * Delete one of multiple texts from the Sanity "Lokalize" dataset.
+ * Request to delete one or multiple texts from the Sanity "Lokalize" dataset.
+ * This doesn't actually delete the key from the dataset straight away, but only
+ * write to the mutations log.
+ *
+ * This prevents us from breaking the build for other branches that still depend
+ * on those keys.
+ *
+ * After this script an export will be triggered, and the export will then
+ * apply the mutations to the output. This way you can write your feature branch
+ * with a set of texts that have mutations that only apply to your branch.
  */
 import { assert } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
@@ -9,7 +18,6 @@ import { appendTextMutation } from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
-  const client = getClient('development');
   /**
    * We are assuming you know the subject of the text you want to delete. Then
    * we don't have to fetch all texts in advance.
@@ -28,7 +36,7 @@ import { LokalizeText } from './types';
     /**
      * Fetch all texts in given subject
      */
-    const allTexts = (await client
+    const allTexts = (await getClient()
       .fetch(
         `*[_type == 'lokalizeText' && subject == '${subject}']| order(path asc)`
       )
@@ -63,27 +71,14 @@ import { LokalizeText } from './types';
     ]);
 
     if (response.confirmed) {
-      const documentIdsToDelete = allTexts
-        .filter((x) => response.paths.includes(x.path))
-        .map((x) => x._id);
-
-      const transaction = documentIdsToDelete.reduce(
-        (tx, id) => tx.delete(id),
-        client.transaction()
-      );
-
-      await transaction.commit();
-
       for (const path of response.paths) {
         const key = `${subject}.${path}`;
         appendTextMutation('delete', key);
       }
 
-      console.log(
-        `Successfully deleted ${documentIdsToDelete.length} documents`
-      );
+      console.log(`Marked ${response.paths} documents for deletion`);
     } else {
-      console.log('No documents were deleted');
+      console.log('No documents were marked for deletion');
     }
   }
 })().catch((err) => {

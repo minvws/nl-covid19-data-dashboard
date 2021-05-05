@@ -1,3 +1,8 @@
+/**
+ * This script exports LokalizeText documents from Sanity as a locale JSON file,
+ * and strips any keys that have been marked by the key-mutations.csv file as a
+ * result of text changes via the CLI.
+ */
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { createFlatTexts } from '@corona-dashboard/common';
 import { unflatten } from 'flat';
@@ -6,6 +11,7 @@ import meow from 'meow';
 import path from 'path';
 import prettier from 'prettier';
 import { getClient } from '../client';
+import { collapseTextMutations, readTextMutations } from './logic';
 
 const cli = meow(
   `
@@ -51,7 +57,15 @@ const localeDirectory = path.resolve(
     `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(key asc)`
   );
 
-  let flatTexts = createFlatTexts(documents, { warn: true });
+  const mutations = await readTextMutations();
+
+  const deletedKeys = collapseTextMutations(mutations)
+    .filter((x) => x.action === 'delete')
+    .map((x) => x.key);
+
+  console.log('deletedKeys', deletedKeys);
+
+  let flatTexts = createFlatTexts(documents, deletedKeys);
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
