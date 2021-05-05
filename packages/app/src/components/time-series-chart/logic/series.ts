@@ -420,7 +420,12 @@ function clearValues(
   endIndex: number
 ) {
   for (let index = startIndex; index <= endIndex; ++index) {
-    if (values[index]) values[index].__value = undefined;
+    const originalValue = values[index];
+
+    values[index] = {
+      ...originalValue,
+      __value: undefined,
+    };
   }
 }
 
