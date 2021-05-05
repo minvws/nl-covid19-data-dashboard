@@ -33,7 +33,7 @@ export interface MunicipalDifference {
   tested_overall__infected: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
   sewer__average?: DifferenceDecimal;
-  deceased_rivm__covid_daily_moving_average: DifferenceInteger;
+  deceased_rivm__covid_daily_moving_average: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -212,7 +212,7 @@ export interface NationalDifference {
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
-  deceased_rivm__covid_daily_moving_average: DifferenceInteger;
+  deceased_rivm__covid_daily_moving_average: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -821,7 +821,7 @@ export interface RegionalDifference {
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
-  deceased_rivm__covid_daily_moving_average: DifferenceInteger;
+  deceased_rivm__covid_daily_moving_average: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
