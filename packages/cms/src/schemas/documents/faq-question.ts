@@ -6,7 +6,7 @@ selectedLanguages$.subscribe((selected: any[]) => {
   selectedLanguage = selected.length ? selected[0] : 'nl';
 });
 
-export default {
+export const faqQuestion = {
   title: 'Veelgestelde vraag',
   name: 'faqQuestion',
   type: 'document',

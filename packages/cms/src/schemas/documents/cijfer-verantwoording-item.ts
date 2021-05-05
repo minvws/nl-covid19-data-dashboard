@@ -1,6 +1,6 @@
-export default {
-  title: 'Inklapbare titel en inhoud',
-  name: 'collapsibleDocument',
+export const cijferVerantwoordingItem = {
+  title: 'Inklapbare titel en inhoud voor cijferverantwoording',
+  name: 'cijferVerantwoordingItem',
   type: 'object',
   fields: [
     {

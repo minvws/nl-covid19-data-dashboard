@@ -6,12 +6,6 @@ import createSchema from 'part:@sanity/base/schema-creator';
  * Import the ones using named exports
  */
 import * as allDocuments from './documents';
-// documents are items that are published/queriable
-// some of these are 'singletons' but that's not enforced by the API
-// import siteSettings from "./documents/siteSettings";
-import article from './documents/article';
-import editorial from './documents/editorial';
-import faqQuestion from './documents/faq-question';
 import behaviorPage from './documents/pages/behavior-page';
 import cijferVerantwoording from './documents/pages/cijfer-verantwoording-page';
 import deceasedPage from './documents/pages/deceased-page';
@@ -27,7 +21,6 @@ import topicalPage from './documents/pages/topical-page';
 import vaccinationsPage from './documents/pages/vaccinations-page';
 import veelgesteldeVragenGroepen from './documents/pages/veelgestelde-vragen-groepen-page';
 import veelgesteldeVragen from './documents/pages/veelgestelde-vragen-page';
-import toegankelijkheid from './documents/toegankelijkheid';
 import localeBlock from './locale/locale-block';
 import localeRichContentBlock from './locale/locale-rich-content-block';
 // These 2 locale helpers are technically objects too, but we keep them grouped here
@@ -56,14 +49,11 @@ export default createSchema({
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
     /* DOCUMENTS */
-    article,
-    editorial,
     veelgesteldeVragen,
     veelgesteldeVragenGroepen,
     cijferVerantwoording,
     overRisicoNiveaus,
     overDitDashboard,
-    toegankelijkheid,
     topicalPage,
     deceasedPage,
     escalationLevelPage,
@@ -88,7 +78,6 @@ export default createSchema({
     lineChart,
     collapsible,
     milestone,
-    faqQuestion,
     titleDescriptionBlock,
     decoratedLink,
 

@@ -79,11 +79,23 @@ export default () =>
               ),
             ])
         ),
-      addListItem(
-        BsCardChecklist,
-        'Cijferverantwoording',
-        'cijferVerantwoording'
-      ),
+      S.listItem()
+        .title('Cijferverantwoording')
+        .icon(BsCardChecklist)
+        .child(
+          S.list()
+            .title('Groepen en Vragen')
+            .items([
+              addListItem(
+                MdQuestionAnswer,
+                'CijferVerantwoording pagina',
+                'cijferVerantwoording'
+              ),
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'cijferVerantwoordingItem'
+              ),
+            ])
+        ),
       addListItem(
         RiPagesFill,
         'Inschaling risiconiveau',

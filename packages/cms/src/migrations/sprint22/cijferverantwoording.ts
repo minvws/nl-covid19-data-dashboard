@@ -39,7 +39,7 @@ const saveCollapsiblesAsDocuments = (collapsibleObjects: any[]) => {
       .map((x) =>
         client.create({
           ...x,
-          _type: 'collapsibleDocument',
+          _type: 'cijferVerantwoordingItem',
           _key: undefined,
         })
       )
