@@ -28,13 +28,13 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "nursing_home__newly_infected_people_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "nursing_home__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
     "nursing_home__deceased_daily_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "disability_care__newly_infected_people": {
       "$ref": "#/definitions/diff_integer"
