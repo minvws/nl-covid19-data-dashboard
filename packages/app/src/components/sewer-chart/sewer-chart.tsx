@@ -6,7 +6,7 @@ import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { Bar, LinePath } from '@visx/shape';
 import { transparentize } from 'polished';
-import { PointerEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { PointerEvent, useCallback, useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useDebouncedCallback } from 'use-debounce';
 import { Box } from '~/components/base';
