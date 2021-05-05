@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
@@ -11,6 +10,8 @@ import {
   loadRootSchema,
   SchemaInfo,
 } from '../schema';
+import { JSONType } from '../schema/custom-validations';
+import { logError, logSuccess } from '../utils';
 
 /**
  * When a single metric name is specified to be validated, we first load the associated schema.
@@ -24,10 +25,8 @@ function loadStrippedSchema(metricName: string, basePath: string) {
   const strippedSchema = loadRootSchema(path.join(basePath, `__index.json`));
 
   if (!isDefined(strippedSchema.properties[metricName])) {
-    console.error(
-      chalk.bgRed.bold(
-        `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
-      )
+    logError(
+      `  ${metricName} is not a metric in the specified schema '${schemaName}'  \n`
     );
     process.exit(1);
   }
@@ -114,12 +113,12 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
     encoding: 'utf8',
   });
 
-  let jsonData: any = null;
+  let jsonData: JSONType | null = null;
   try {
     jsonData = JSON.parse(contentAsString);
   } catch (e) {
     console.group();
-    console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
+    logError(`  ${fileName} cannot be parsed  \n`);
     console.groupEnd();
     process.exit(1);
   }
@@ -132,9 +131,9 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
 
   if (!isValid) {
     console.error(schemaErrors);
-    console.error(chalk.bgRed.bold(`  ${jsonFileName} is invalid  \n`));
+    logError(`  ${jsonFileName} is invalid  \n`);
     process.exit(1);
   }
 
-  console.log(chalk.green.bold(`  ${jsonFileName} is valid  \n`));
+  logSuccess(`  ${jsonFileName} is valid  \n`);
 });

@@ -1,8 +1,9 @@
 import { UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
+import isObject from 'lodash/isObject';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { CustomValidationFunction } from './types';
+import { CustomValidationFunction, JSONType, JSONValue } from './types';
 
 export function createChoroplethValidation(
   choroplethCollectionPath: string,
@@ -29,6 +30,10 @@ export function createChoroplethValidation(
   ) as CustomValidationFunction;
 }
 
+function isJsonObject(value: JSONValue): value is { [key: string]: JSONValue } {
+  return typeof value === 'object';
+}
+
 /**
  * This validation function receives a data file (either VR of GM) and a choropleth data file (GM_COLLECTION or VR_COLLECTION).
  * It extracts all of the data points that both files have in common, then it
@@ -44,9 +49,9 @@ export function createChoroplethValidation(
  */
 export const validateChoroplethValues = (
   collectionJsonFilename: string,
-  collectionJson: Record<string, any>, // The GM_COLLECTION.sjon or VR_COLLECTION.json
+  collectionJson: JSONType, // The GM_COLLECTION.sjon or VR_COLLECTION.json
   codeProperty: string, //the gmcode or vrcode property name
-  input: Record<string, any> //GM***.json or VR***.json
+  input: JSONType //GM***.json or VR***.json
 ): string[] | undefined => {
   const commonDataProperties = getCommonDataProperties(input, collectionJson);
 
@@ -54,16 +59,17 @@ export const validateChoroplethValues = (
 
   const results = commonDataProperties
     .map((propertyName) => {
-      const collectionValue = collectionJson[propertyName].find(
-        (x: any) => x[codeProperty] === code
-      );
+      const collectionValue = (collectionJson[propertyName] as JSONValue[])
+        ?.filter(isJsonObject)
+        .find((x) => x[codeProperty] === code);
       if (!collectionValue) {
         return `No item with property ${codeProperty} == ${code} was found in the ${propertyName} collection (${collectionJsonFilename})`;
       }
-      const lastValue = input[propertyName].last_value;
+      const lastValue = (input[propertyName] as { last_value: UnknownObject })
+        ?.last_value;
       return validateCommonPropertyEquality(
         lastValue,
-        collectionValue,
+        collectionValue as UnknownObject,
         propertyName
       );
     })
@@ -85,7 +91,9 @@ function validateCommonPropertyEquality(
   const commonProperties = getCommonProperties(collectionValue, lastValue);
   const result = commonProperties
     .map((key) => {
-      return lastValue[key] !== collectionValue[key]
+      return isObject(lastValue) && isObject(collectionValue)
+        ? lastValue[key] !== collectionValue[key]
+        : false
         ? `property ${propertyName}.${key} is not equal: (last_value) ${lastValue[key]} !== (choropleth data) ${collectionValue[key]}`
         : undefined;
     })
@@ -94,12 +102,16 @@ function validateCommonPropertyEquality(
 }
 
 function getCommonProperties(left: UnknownObject, right: UnknownObject) {
-  return Object.keys(left).filter((key) => right.hasOwnProperty(key));
+  return isObject(left) && isObject(right)
+    ? Object.keys(left).filter((key) => right.hasOwnProperty(key))
+    : [];
 }
 
 function getCommonDataProperties(left: UnknownObject, right: UnknownObject) {
-  return Object.entries(left)
-    .filter(([, values]) => typeof values === 'object')
-    .map(([key]) => key)
-    .filter((key) => right.hasOwnProperty(key));
+  return isObject(left) && isObject(right)
+    ? Object.entries(left)
+        .filter(([, values]) => typeof values === 'object')
+        .map(([key]) => key)
+        .filter((key) => right.hasOwnProperty(key))
+    : [];
 }
