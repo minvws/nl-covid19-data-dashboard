@@ -125,6 +125,19 @@ export function useDataSitemap(
       ],
     },
     {
+      header: siteText.nationaal_layout.headings.ziekenhuizen,
+      links: [
+        {
+          text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
+          href: '/landelijk/ziekenhuis-opnames',
+        },
+        {
+          text: siteText.ic_opnames_per_dag.titel_sidebar,
+          href: '/landelijk/intensive-care-opnames',
+        },
+      ],
+    },
+    {
       header: siteText.nationaal_layout.headings.besmettingen,
       links: [
         {
@@ -142,19 +155,6 @@ export function useDataSitemap(
         {
           text: siteText.sterfte.titel_sidebar,
           href: '/landelijk/sterfte',
-        },
-      ],
-    },
-    {
-      header: siteText.nationaal_layout.headings.ziekenhuizen,
-      links: [
-        {
-          text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
-          href: '/landelijk/ziekenhuis-opnames',
-        },
-        {
-          text: siteText.ic_opnames_per_dag.titel_sidebar,
-          href: '/landelijk/intensive-care-opnames',
         },
       ],
     },
@@ -194,6 +194,10 @@ export function useDataSitemap(
         {
           text: siteText.nl_gedrag.sidebar.titel,
           href: '/landelijk/gedrag',
+        },
+        {
+          text: siteText.corona_melder_app.sidebar.titel,
+          href: '/landelijk/coronamelder',
         },
       ],
     },

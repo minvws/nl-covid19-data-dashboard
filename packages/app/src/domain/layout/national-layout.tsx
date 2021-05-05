@@ -355,7 +355,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
               </CategoryMenu>
 
-              <CategoryMenu title={'Extra'}>
+              <CategoryMenu title={siteText.nationaal_layout.headings.extra}>
                 <MetricMenuItemLink
                   href="/landelijk/coronamelder"
                   icon={<Phone />}
