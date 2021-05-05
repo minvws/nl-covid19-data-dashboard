@@ -2,10 +2,7 @@ import { getClient } from '../../client';
 
 const client = getClient();
 
-const fetchVerantwoording = () =>
-  client.fetch(`*[_type == 'cijferVerantwoording']`);
-
-const buildPatches = (docs: any[], figureExplanationItems: any[]) => {
+function buildPatches(docs: any[], figureExplanationItems: any[]) {
   return docs
     .map((doc) => ({
       id: doc._id,
@@ -22,17 +19,16 @@ const buildPatches = (docs: any[], figureExplanationItems: any[]) => {
       },
     }))
     .filter((x) => x !== undefined);
-};
+}
 
-const createTransaction = (patches: any[]) =>
-  patches.reduce(
+function createTransaction(patches: any[]) {
+  return patches.reduce(
     (tx, patch) => tx.patch(patch.id, patch.patch),
     client.transaction()
   );
+}
 
-const commitTransaction = (tx: any) => tx.commit();
-
-const saveCollapsiblesAsDocuments = (collapsibleObjects: any[]) => {
+function saveCollapsiblesAsDocuments(collapsibleObjects: any[]) {
   return Promise.all(
     collapsibleObjects
       .filter((x) => x._type === 'collapsible')
@@ -44,10 +40,10 @@ const saveCollapsiblesAsDocuments = (collapsibleObjects: any[]) => {
         })
       )
   );
-};
+}
 
-const migrateNextBatch = async (): Promise<any> => {
-  const pages = await fetchVerantwoording();
+async function migrateNextBatch(): Promise<any> {
+  const pages = await client.fetch(`*[_type == 'cijferVerantwoording']`);
 
   const collapsibles =
     pages.length === 1
@@ -71,14 +67,14 @@ const migrateNextBatch = async (): Promise<any> => {
       .map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
       .join('\n')
   );
-  const transaction = createTransaction(patches);
 
-  await commitTransaction(transaction);
+  const transaction = createTransaction(patches);
+  await transaction.commit();
 
   return migrateNextBatch();
-};
+}
 
-migrateNextBatch().catch((err: any) => {
+migrateNextBatch().catch((err: Error) => {
   console.error(err);
   process.exit(1);
 });

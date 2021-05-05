@@ -2,9 +2,7 @@ import { getClient } from '../../client';
 
 const client = getClient();
 
-const fetchFAQ = () => client.fetch(`*[_type == 'veelgesteldeVragen']`);
-
-const buildPatches = (docs: any[], faqDocuments: any[]) => {
+function buildPatches(docs: any[], faqDocuments: any[]) {
   return docs
     .map((doc) => ({
       id: doc._id,
@@ -21,17 +19,16 @@ const buildPatches = (docs: any[], faqDocuments: any[]) => {
       },
     }))
     .filter((x) => x !== undefined);
-};
+}
 
-const createTransaction = (patches: any[]) =>
-  patches.reduce(
+function createTransaction(patches: any[]) {
+  return patches.reduce(
     (tx, patch) => tx.patch(patch.id, patch.patch),
     client.transaction()
   );
+}
 
-const commitTransaction = (tx: any) => tx.commit();
-
-const saveFaqQuestionsAsDocuments = (questionObjects: any[]) => {
+function saveFaqQuestionsAsDocuments(questionObjects: any[]) {
   return Promise.all(
     questionObjects
       .filter((x) => x._type === 'faqQuestion')
@@ -42,10 +39,10 @@ const saveFaqQuestionsAsDocuments = (questionObjects: any[]) => {
         })
       )
   );
-};
+}
 
-const migrateNextBatch = async (): Promise<any> => {
-  const faqs = await fetchFAQ();
+async function migrateNextBatch(): Promise<any> {
+  const faqs = await client.fetch(`*[_type == 'veelgesteldeVragen']`);
 
   const questions =
     faqs.length === 1
@@ -67,14 +64,14 @@ const migrateNextBatch = async (): Promise<any> => {
       .map((patch: any) => `${patch.id} => ${JSON.stringify(patch.patch)}`)
       .join('\n')
   );
-  const transaction = createTransaction(patches);
 
-  await commitTransaction(transaction);
+  const transaction = createTransaction(patches);
+  await transaction.commit();
 
   return migrateNextBatch();
-};
+}
 
-migrateNextBatch().catch((err: any) => {
+migrateNextBatch().catch((err: Error) => {
   console.error(err);
   process.exit(1);
 });
