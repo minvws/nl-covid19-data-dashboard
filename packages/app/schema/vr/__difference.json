@@ -37,13 +37,13 @@
       "$ref": "#/definitions/diff_integer"
     },
     "disability_care__newly_infected_people_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "disability_care__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
     "elderly_at_home__positive_tested_daily_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"
