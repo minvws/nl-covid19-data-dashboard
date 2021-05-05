@@ -173,7 +173,7 @@ export function SewerChart(props: SewerChartProps) {
    * Manually set Y axis values, as per design.
    * The middle calculation finds first the difference between the highest
    * and the lowest. Then divide it by 2 and add the lowest value to find value
-   * exact value in between.
+   * exact in between.
    */
   const tickValuesY = useMemo(
     () => [
