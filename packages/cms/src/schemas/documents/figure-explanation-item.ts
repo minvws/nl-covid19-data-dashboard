@@ -1,7 +1,7 @@
 export const figureExplanationItem = {
   title: 'Inklapbare titel en inhoud voor cijferverantwoording',
   name: 'figureExplanationItem',
-  type: 'object',
+  type: 'document',
   fields: [
     {
       name: 'title',

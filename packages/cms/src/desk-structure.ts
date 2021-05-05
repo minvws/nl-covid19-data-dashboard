@@ -92,7 +92,7 @@ export default () =>
                 'cijferVerantwoording'
               ),
               ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'cijferVerantwoordingItem'
+                (item) => item.getId() === 'figureExplanationItem'
               ),
             ])
         ),
