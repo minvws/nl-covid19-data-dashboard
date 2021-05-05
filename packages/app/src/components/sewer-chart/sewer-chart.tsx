@@ -337,7 +337,6 @@ export function SewerChart(props: SewerChartProps) {
               hideTicks
               hideAxisLine
               stroke={colors.data.axis}
-              // tickFormat={(x) => formatNumber(x as number)}
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
                 fontSize: 14,
