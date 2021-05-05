@@ -125,15 +125,10 @@ function InlineDifferenceIndicator({ difference }: { difference: number }) {
       </Container>
     );
 
-  return (
-    <Container iconColor="data.primary">
-      {text.trend_gelijk}
-      <IconDown />
-    </Container>
-  );
+  return <Container>{text.trend_gelijk}</Container>;
 }
 
-const Container = styled.span<{ iconColor: string }>((x) =>
+const Container = styled.span<{ iconColor?: string }>((x) =>
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
