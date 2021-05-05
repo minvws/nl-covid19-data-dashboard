@@ -171,11 +171,12 @@ export function TimeSeriesChart<
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
-  const seriesList = useSeriesList(
-    values,
-    seriesConfig,
-    extractCutValuesConfig(timespanAnnotations)
+  const cutValuesConfig = useMemo(
+    () => extractCutValuesConfig(timespanAnnotations),
+    [timespanAnnotations]
   );
+
+  const seriesList = useSeriesList(values, seriesConfig, cutValuesConfig);
 
   /**
    * The maximum is calculated over all values, because you don't want the
