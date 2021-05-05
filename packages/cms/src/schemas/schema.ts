@@ -5,10 +5,10 @@ import createSchema from 'part:@sanity/base/schema-creator';
 /**
  * Import the ones using named exports
  */
-import * as allDocuments from './documents';
-import * as localeHelpers from './locale';
-import * as allObjects from './objects';
-import * as restrictionDocuments from './restrictions';
+import * as documents from './documents';
+import * as locale from './locale';
+import * as objects from './objects';
+import * as restrictions from './restrictions';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -17,12 +17,12 @@ export default createSchema({
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
   types: schemaTypes.concat([
-    ...Object.values(allDocuments),
+    ...Object.values(documents),
 
-    ...Object.values(restrictionDocuments),
+    ...Object.values(restrictions),
 
-    ...Object.values(allObjects),
+    ...Object.values(objects),
 
-    ...Object.values(localeHelpers),
+    ...Object.values(locale),
   ]),
 });
