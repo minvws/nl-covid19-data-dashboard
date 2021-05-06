@@ -38,6 +38,10 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
   }
 }
 
+function MovingAverageDifferenceIndicator() {
+  return <p>Hoi</p>;
+}
+
 function SidebarIndicator({
   value,
 }: {
@@ -196,16 +200,6 @@ function TileIndicator({
   }
 
   if (difference < 0) {
-    if (absoluteMovingAverage)
-      return (
-        <Container>
-          <IconContainer color="red">
-            <IconUp />
-          </IconContainer>
-          lager dan het gemiddelde van de afgelopen 7 dagen (NUMMER)
-        </Container>
-      );
-
     const splitText = text.afname.split(' ');
 
     return (
@@ -231,35 +225,6 @@ function TileIndicator({
       <Span>
         {text.gelijk} {timespanTextNode}
       </Span>
-    </Container>
-  );
-}
-
-export function InlineIndicatorWithoutValue({ value }: { value: number }) {
-  if (value > 0)
-    return (
-      <Container>
-        hoger
-        <IconContainer color="data.primary">
-          <IconUp />
-        </IconContainer>
-      </Container>
-    );
-  if (value < 0)
-    return (
-      <Container>
-        lager
-        <IconContainer color="red">
-          <IconDown />
-        </IconContainer>
-      </Container>
-    );
-  return (
-    <Container>
-      in lijn
-      <IconContainer color="data.primary">
-        <IconDown />
-      </IconContainer>
     </Container>
   );
 }

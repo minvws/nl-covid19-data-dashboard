@@ -34,6 +34,7 @@ const StyledValue = styled.div(
     fontWeight: 600,
     fontVariantNumeric: 'tabular-nums',
     lineHeight: 1,
+    paddingBottom: '.5rem',
   },
   color
 );

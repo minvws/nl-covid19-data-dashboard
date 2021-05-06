@@ -126,7 +126,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
                 localeTextKey="ziekenhuisopnames_per_dag"
-                differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average_moving_average"
+                differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
               />
             </KpiTile>
 
