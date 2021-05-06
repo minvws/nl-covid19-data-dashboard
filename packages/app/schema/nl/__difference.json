@@ -7,7 +7,7 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_overall__infected_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "tested_ggd_daily__tested_total": {
       "$ref": "#/definitions/diff_integer"
@@ -16,7 +16,7 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_ggd_average__tested_total_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "tested_ggd_average__infected_percentage_moving_average": {
       "$ref": "#/definitions/diff_decimal"
