@@ -93,7 +93,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
           /**
            * The key is unique for every date to make sure a screenreader
            * will read `[label]: [value]`. Otherwise it would read the
-           * changed content which would only be `[value]` and thus miss a some
+           * changed content which would only be `[value]` and thus miss some
            * context.
            */
           const key = index + getDateUnixString(value);

@@ -18,7 +18,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from './series';
-import { useKeyboardIndex } from './use-keyboad-index';
+import { useKeyboardNavigation } from './use-keyboard-navigation';
 
 export type HoveredPoint<T> = {
   seriesValue: SeriesSingleValue | SeriesDoubleValue;
@@ -66,7 +66,7 @@ export function useHoverState<T extends TimestampedValue>({
   const [point, setPoint] = useState<Point>();
   const [hasFocus, setHasFocus] = useState(false);
   const [valuesIndex, setValuesIndex] = useState<number>(0);
-  const keyboard = useKeyboardIndex(setValuesIndex, values.length);
+  const keyboard = useKeyboardNavigation(setValuesIndex, values.length);
 
   useEffect(() => {
     hasFocus ? keyboard.enable() : keyboard.disable();
