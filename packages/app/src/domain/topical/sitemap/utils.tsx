@@ -51,8 +51,6 @@ export function useDataSitemap(
   }
 
   if (base === 'veiligheidsregio' && code) {
-    const baseUrl = `/${base}/${code}`;
-
     return [
       {
         header: siteText.nationaal_layout.headings.besmettingen,
