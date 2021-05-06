@@ -9,7 +9,7 @@ import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 
-const RADIUS = 55;
+const RADIUS = 60;
 const CONTAINER_WIDTH = RADIUS * 2 + 12;
 const CONTAINER_HEIGHT = RADIUS * 2 + 12;
 
@@ -123,6 +123,8 @@ function Clock({ progress }: ClockProps) {
         width: '100%',
         height: '100%',
         minWidth: CONTAINER_WIDTH,
+        borderRadius: '50%',
+        overflow: 'hidden',
       })}
     >
       {Array(60)
@@ -157,15 +159,15 @@ function Mark({ index, isActive }: MarkProps) {
         transform: `
           translate(-50%, -50%)
           rotate(${angle}rad)
-          translateY(${CONTAINER_WIDTH / 2 - (isHourMark ? 5 : 0)}px)
+          translateY(${CONTAINER_WIDTH / 2 - (isHourMark ? 10 : 5)}px)
         `,
         height: isHourMark ? 20 : 10,
-        width: isHourMark ? 6 : 7.5,
+        width: isHourMark ? 6 : 8,
         top: '50%',
         left: '50%',
         backgroundColor: isActive ? colors.data.primary : '#e7e7e7',
         transitionProperty: 'background-color',
-        transitionDuration: isActive ? '10ms' : '400ms',
+        transitionDuration: isActive ? '0ms' : '400ms',
         transitionDelay: isActive ? '0ms' : `${index * 15}ms`,
         zIndex: isActive ? 5 : 4,
       }}
