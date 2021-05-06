@@ -14,6 +14,7 @@ import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import { useIntl } from '~/intl';
+import { InlineText } from '~/components/typography';
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
@@ -21,7 +22,7 @@ interface DifferenceIndicatorProps {
   context?: 'sidebar' | 'tile' | 'inline';
   maximumFractionDigits?: number;
   staticTimespan?: string;
-  isMovingAverage?: boolean;
+  absoluteMovingAverage?: number;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
@@ -137,13 +138,13 @@ function TileIndicator({
   isDecimal,
   staticTimespan,
   maximumFractionDigits,
-  isMovingAverage,
+  absoluteMovingAverage,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   maximumFractionDigits?: number;
   staticTimespan?: string;
-  isMovingAverage?: boolean;
+  absoluteMovingAverage?: number;
 }) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const text = siteText.toe_en_afname;
@@ -157,13 +158,26 @@ function TileIndicator({
       )
     : formatNumber(Math.abs(difference));
 
-  const timespanTextNode =
-    staticTimespan ?? isMovingAverage
-      ? text.zeven_daags_gemiddelde
-      : text.vorige_waarde;
+  const timespanTextNode = staticTimespan ?? text.vorige_waarde;
 
   if (difference > 0) {
     const splitText = text.toename.split(' ');
+
+    if (absoluteMovingAverage)
+      return (
+        <Container>
+          <IconContainer color="red">
+            <IconUp />
+          </IconContainer>
+          <InlineText fontWeight="bold">
+            {formatNumber(value.difference)} {siteText.toe_en_afname.hoger}{' '}
+          </InlineText>
+          <InlineText>
+            {siteText.toe_en_afname.zeven_daags_gemiddelde}
+            {` (${formatNumber(absoluteMovingAverage)})`}
+          </InlineText>
+        </Container>
+      );
 
     return (
       <Container>
@@ -182,6 +196,16 @@ function TileIndicator({
   }
 
   if (difference < 0) {
+    if (absoluteMovingAverage)
+      return (
+        <Container>
+          <IconContainer color="red">
+            <IconUp />
+          </IconContainer>
+          lager dan het gemiddelde van de afgelopen 7 dagen (NUMMER)
+        </Container>
+      );
+
     const splitText = text.afname.split(' ');
 
     return (

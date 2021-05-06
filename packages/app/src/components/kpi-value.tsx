@@ -15,7 +15,7 @@ interface KpiValueProps {
   differenceStaticTimespan?: string;
   text?: string;
   color?: string;
-  isMovingAverage?: boolean;
+  absoluteMovingAverage?: number;
 }
 
 /**
@@ -49,7 +49,7 @@ export function KpiValue({
   differenceStaticTimespan,
   text,
   color = 'data.primary',
-  isMovingAverage,
+  absoluteMovingAverage,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -77,7 +77,7 @@ export function KpiValue({
         <DifferenceIndicator
           value={difference}
           staticTimespan={differenceStaticTimespan}
-          isMovingAverage={isMovingAverage}
+          absoluteMovingAverage={absoluteMovingAverage}
         />
       )}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

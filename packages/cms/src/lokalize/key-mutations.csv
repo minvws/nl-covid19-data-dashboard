@@ -6,3 +6,5 @@ timestamp,action,key
 2021-05-04T13:21:05.138Z,add,common_actueel.trend_hoger
 2021-05-04T13:21:35.640Z,add,common_actueel.trend_lager
 2021-05-05T07:02:02.892Z,add,common_actueel.secties.kpi.zeven_daags_gemiddelde
+2021-05-06T06:43:10.468Z,add,toe_en_afname.hoger
+2021-05-06T06:43:26.165Z,add,toe_en_afname.lager

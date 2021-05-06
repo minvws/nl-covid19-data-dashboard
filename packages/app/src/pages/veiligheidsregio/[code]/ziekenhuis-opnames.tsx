@@ -128,7 +128,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   data.difference
                     .hospital_nice__admissions_on_date_of_reporting_is_moving_average
                 }
-                isMovingAverage
+                absoluteMovingAverage={
+                  lastValue.admissions_on_date_of_reporting_moving_average
+                }
               />
             </KpiTile>
           </TwoKpiSection>
