@@ -21,6 +21,9 @@ ENV NODE_ENV production
 # Build the application
 RUN npx next telemetry disable
 RUN yarn workspace @corona-dashboard/common build
+
+RUN yarn workspace @corona-dashboard/cli generate-typescript
+RUN yarn workspace @corona-dashboard/cms lokalize:export
 RUN yarn workspace @corona-dashboard/app build
 
 
