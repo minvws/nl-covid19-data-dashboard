@@ -14,8 +14,8 @@ export const features: Feature[] = [
     metricProperties: ['astra_zeneca_total', 'astra_zeneca_available'],
   },
   {
-    name: 'vaccinationPerAgegroup',
-    isEnabled: false,
+    name: 'vaccinationPerAgeGroup',
+    isEnabled: true,
     metricScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
   },

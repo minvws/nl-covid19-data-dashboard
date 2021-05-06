@@ -1,4 +1,3 @@
-import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -47,6 +46,7 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(
     'vaccine_stock',
     'vaccine_delivery_per_supplier',
+    'vaccine_coverage_per_age_group',
     'vaccine_support',
     'vaccine_administered_total',
     'vaccine_administered_planned',
@@ -79,17 +79,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const stockFeature = useFeature('vaccineStockPerSupplier');
 
-  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
+  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
 
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;
 
   const { page } = content;
-
-  // TODO: put this back this when data is available
-  //const {vaccine_coverage_per_age_group} = data;
-  const vaccine_coverage_per_age_group = mockCoverageData();
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -121,19 +117,20 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             expectedMilestones={page.expectedMilestones}
           />
 
-          {vaccinationPerAgeGroupFeature.isEnabled ? (
-            <Tile>
-              <Heading level={2}>
-                {siteText.vaccinaties.vaccination_coverage.title}
-              </Heading>
-              <Text>
-                {siteText.vaccinaties.vaccination_coverage.toelichting}
-              </Text>
-              <VaccineCoveragePerAgeGroup
-                values={vaccine_coverage_per_age_group.values}
-              />
-            </Tile>
-          ) : null}
+          {vaccinationPerAgeGroupFeature.isEnabled &&
+            data.vaccine_coverage_per_age_group && (
+              <Tile>
+                <Heading level={2}>
+                  {siteText.vaccinaties.vaccination_coverage.title}
+                </Heading>
+                <Text>
+                  {siteText.vaccinaties.vaccination_coverage.toelichting}
+                </Text>
+                <VaccineCoveragePerAgeGroup
+                  values={data.vaccine_coverage_per_age_group.values}
+                />
+              </Tile>
+            )}
 
           <ContentHeader
             title={text.bereidheid_section.title}
@@ -260,62 +257,3 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default VaccinationPage;
-
-// @TODO re-enable when data is available
-//
-// const ColorIndicator = styled.span<{
-//   color?: string;
-// }>`
-//   content: '';
-//   display: ${(x) => (x.color ? 'inline-block' : 'none')};
-//   height: 8px;
-//   width: 8px;
-//   border-radius: 50%;
-//   background: ${(x) => x.color || 'black'};
-//   margin-right: 0.5em;
-//   flex-shrink: 0;
-// `;
-
-// TODO: remove this when data is available
-function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
-  const values = [
-    'total',
-    '18-29',
-    '30-39',
-    '40-49',
-    '50-59',
-    '60-69',
-    '70-79',
-    '80+',
-  ]
-    .map(createCoverageRow)
-    .reverse();
-
-  values[2].fully_vaccinated = 0;
-  values[2].fully_vaccinated_percentage = 0;
-
-  return { values };
-}
-
-function createCoverageRow(
-  ageGroup: string
-): NlVaccineCoveragePerAgeGroupValue {
-  const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
-  const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-  const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-
-  return {
-    age_group_range: ageGroup,
-    age_group_percentage: Math.floor(Math.random() * 100) + 1,
-    age_group_total: ageGroupTotal,
-    fully_vaccinated: fullyVaccinated,
-    partially_vaccinated: partiallyVaccinated,
-    fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
-    partially_vaccinated_percentage:
-      (partiallyVaccinated / ageGroupTotal) * 100,
-    partially_or_fully_vaccinated_percentage: 0,
-    date_of_insertion_unix: 1616544000,
-    date_of_report_unix: 1616544000,
-    date_unix: 1616544000,
-  };
-}
