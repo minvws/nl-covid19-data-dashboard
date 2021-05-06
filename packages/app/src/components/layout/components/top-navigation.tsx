@@ -70,10 +70,12 @@ export function TopNavigation() {
             >
               {siteText.nav.links.index}
             </NavItem>
-            <NavItem href="/veiligheidsregio">
+            <NavItem href={reverseRouter.vr.index()}>
               {siteText.nav.links.veiligheidsregio}
             </NavItem>
-            <NavItem href="/gemeente">{siteText.nav.links.gemeente}</NavItem>
+            <NavItem href={reverseRouter.gm.index()}>
+              {siteText.nav.links.gemeente}
+            </NavItem>
 
             <NavItem href="/over">{siteText.nav.links.over}</NavItem>
           </NavList>
