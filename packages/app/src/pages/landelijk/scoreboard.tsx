@@ -46,6 +46,8 @@ const Scoreboard = (props: StaticProps<typeof getStaticProps>) => {
 
   const text = siteText.rioolwater_metingen;
 
+  console.log(text);
+
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
