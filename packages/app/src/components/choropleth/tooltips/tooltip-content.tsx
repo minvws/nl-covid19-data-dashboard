@@ -17,7 +17,11 @@ export function TooltipContent(props: IProps) {
   const isTouch = useIsTouchDevice();
 
   return (
-    <StyledTooltipContent isInteractive={isTouch} onClick={onSelect}>
+    <StyledTooltipContent
+      isInteractive={isTouch}
+      onClick={onSelect}
+      aria-live="polite"
+    >
       <TooltipHeader href={link}>
         <Heading
           level={3}

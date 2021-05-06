@@ -73,7 +73,11 @@ export function TooltipWrapper({
           ref={ref}
           style={{
             opacity: isMounted ? 1 : 0,
-            transform: `translate(${x}px,${y}px)`,
+            /**
+             * No idea why, but we need to align the div at half pixels to avoid
+             * blurry text 🤷‍♂️ (non-retina screen)
+             */
+            transform: `translate(${Math.floor(x) + 0.5}px,${y}px)`,
             maxWidth,
           }}
         >
@@ -156,7 +160,7 @@ export function TooltipContent(props: TooltipContentProps) {
   const { title, onSelect, children } = props;
 
   return (
-    <StyledTooltipContent onClick={onSelect}>
+    <StyledTooltipContent onClick={onSelect} aria-live="polite">
       {title && <TooltipHeading title={title} />}
       {children && (
         <TooltipChildren hasTitle={isDefined(title)}>
