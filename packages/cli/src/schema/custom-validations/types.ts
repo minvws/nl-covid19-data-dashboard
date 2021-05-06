@@ -6,8 +6,8 @@ export type JSONValue =
   | JSONValue[]
   | { [key: string]: JSONValue };
 
-export type JSONType = Record<string, JSONValue>;
+export type JSONObject = Record<string, JSONValue>;
 
 export type CustomValidationFunction = (
-  input: JSONType
+  input: JSONObject
 ) => string[] | undefined;

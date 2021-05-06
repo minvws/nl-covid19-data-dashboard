@@ -2,7 +2,7 @@ import { UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { CustomValidationFunction, JSONType, JSONValue } from './types';
+import { CustomValidationFunction, JSONObject, JSONValue } from './types';
 
 export function createChoroplethValidation(
   choroplethCollectionPath: string,
@@ -44,9 +44,9 @@ export function createChoroplethValidation(
  */
 export const validateChoroplethValues = (
   collectionJsonFilename: string,
-  collectionJson: JSONType, // The GM_COLLECTION.sjon or VR_COLLECTION.json
+  collectionJson: JSONObject, // The GM_COLLECTION.sjon or VR_COLLECTION.json
   codeProperty: string, //the gmcode or vrcode property name
-  input: JSONType //GM***.json or VR***.json
+  input: JSONObject //GM***.json or VR***.json
 ): string[] | undefined => {
   const commonDataProperties = getCommonDataProperties(input, collectionJson);
 

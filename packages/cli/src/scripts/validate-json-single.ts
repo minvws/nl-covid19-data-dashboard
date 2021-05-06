@@ -10,7 +10,7 @@ import {
   loadRootSchema,
   SchemaInfo,
 } from '../schema';
-import { JSONType } from '../schema/custom-validations';
+import { JSONObject } from '../schema/custom-validations';
 import { logError, logSuccess } from '../utils';
 
 /**
@@ -113,7 +113,7 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
     encoding: 'utf8',
   });
 
-  let jsonData: JSONType | null = null;
+  let jsonData: JSONObject | null = null;
   try {
     jsonData = JSON.parse(contentAsString);
   } catch (e) {
