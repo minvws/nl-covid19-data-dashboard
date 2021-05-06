@@ -1,6 +1,6 @@
 import {
-  NlIntensiveCareNicePerAgeGroupValue,
   NlHospitalNicePerAgeGroupValue,
+  NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import {
   InteractiveLegend,
@@ -13,8 +13,8 @@ import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { useList } from '~/utils/use-list';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 type NLHospitalAdmissionPerAgeGroupValue =
@@ -94,6 +94,13 @@ export function AdmissionsPerAgeGroup({
 
   return (
     <>
+      <InteractiveLegend
+        helpText={text.legend_help_text}
+        selectOptions={interactiveLegendOptions}
+        selection={list}
+        onToggleItem={toggle}
+        onReset={clear}
+      />
       <TimeSeriesChart
         values={values}
         timeframe={timeframe}
@@ -113,13 +120,6 @@ export function AdmissionsPerAgeGroup({
             },
           ],
         }}
-      />
-      <InteractiveLegend
-        helpText={text.legend_help_text}
-        selectOptions={interactiveLegendOptions}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
       />
       <Legend items={staticLegendItems} />
     </>
