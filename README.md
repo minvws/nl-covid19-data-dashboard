@@ -10,3 +10,5 @@ We've switched to a monorepo that contains both the front-end and the CMS config
 
 `yarn download`
 `yarn dev`
+
+test
