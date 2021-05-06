@@ -38,32 +38,38 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
             ? Infinity
             : b.age_group_range.localeCompare(a.age_group_range)
         )
-        .map((value, index, arr) => (
-          <CoverageRow
-            borderColor={index === arr.length - 1 ? 'black' : undefined}
-            key={value.age_group_range}
-          >
-            <AgeGroup
-              range={formatAgeGroup(value.age_group_range, templates.agegroup)}
-              total={replaceVariablesInText(templates.agegroup.total_people, {
-                total: formatNumber(value.age_group_total),
-              })}
-            />
-            <VaccinationCoveragePercentage
-              value={`${formatPercentage(value.fully_vaccinated_percentage, {
-                maximumFractionDigits: 1,
-              })}%`}
-            />
-            <CoverageProgressBar
-              partialCount={value.partially_vaccinated}
-              partialPercentage={value.partially_vaccinated_percentage}
-              fullCount={value.fully_vaccinated}
-              fullPercentage={value.fully_vaccinated_percentage}
-              total={value.age_group_total}
-              isLarge={index === arr.length - 1}
-            />
-          </CoverageRow>
-        ))}
+        .map((value, index, array) => {
+          const isLastItem = index === array.length - 1;
+          return (
+            <CoverageRow
+              borderColor={isLastItem ? 'black' : undefined}
+              key={value.age_group_range}
+            >
+              <AgeGroup
+                range={formatAgeGroup(
+                  value.age_group_range,
+                  templates.agegroup
+                )}
+                total={replaceVariablesInText(templates.agegroup.total_people, {
+                  total: formatNumber(value.age_group_total),
+                })}
+              />
+              <VaccinationCoveragePercentage
+                value={`${formatPercentage(value.fully_vaccinated_percentage, {
+                  maximumFractionDigits: 1,
+                })}%`}
+              />
+              <CoverageProgressBar
+                partialCount={value.partially_vaccinated}
+                partialPercentage={value.partially_vaccinated_percentage}
+                fullCount={value.fully_vaccinated}
+                fullPercentage={value.fully_vaccinated_percentage}
+                total={value.age_group_total}
+                isLarge={isLastItem}
+              />
+            </CoverageRow>
+          );
+        })}
     </Box>
   );
 }
