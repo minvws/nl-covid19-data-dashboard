@@ -1,7 +1,7 @@
 import { NlVaccineAdministeredRateMovingAverageValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { shuffle } from 'lodash';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -13,7 +13,7 @@ const RADIUS = 55;
 const CONTAINER_WIDTH = RADIUS * 2 + 12;
 const CONTAINER_HEIGHT = RADIUS * 2 + 12;
 
-const MINUTE = 60;
+const MINUTE_IN_SECONDS = 60;
 const FRAMES_PER_MINUTE = 25;
 
 interface VaccineTickerProps {
@@ -26,9 +26,9 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
   const dosesPerMinute = data.doses_per_second * 60;
 
   const isMountedRef = useIsMountedRef();
-  const [timerOffset, setTimerOffset] = useState(0);
   const [animationProgress, setAnimationProgress] = useState(0);
-  const [counter, setCounter] = useState(0);
+  const [shapeIndex, setShapeIndex] = useState(0);
+  const timerOffsetRef = useRef(new Date().getSeconds());
 
   useEffect(() => {
     let timeoutId: number;
@@ -37,36 +37,28 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
 
       const now = new Date();
 
-      /*
-        Use the offset at page boot to offset the clock
-        Opening page => clock at 0
-      */
-      if (timerOffset === 0) {
-        setTimerOffset(now.getSeconds());
-      }
-
       const seconds =
         (now.getSeconds() +
-          MINUTE -
-          timerOffset +
+          MINUTE_IN_SECONDS -
+          timerOffsetRef.current +
           now.getMilliseconds() / 1000) %
-        MINUTE;
+        MINUTE_IN_SECONDS;
 
-      /* Reset at the first frame of the new clock cycle */
+      /**
+       * Reset at the first frame of the new clock cycle.
+       * It uses a multiplier 1.5 to be sure to actually capture the first frame.
+       */
       if (Math.ceil(seconds - (FRAMES_PER_MINUTE * 1.5) / 1000) === 0) {
-        setCounter((x) => x + 1);
+        setShapeIndex((x) => x + 1);
       }
 
-      setAnimationProgress(seconds / MINUTE);
+      setAnimationProgress(seconds / MINUTE_IN_SECONDS);
 
-      timeoutId = (setTimeout(
-        animate,
-        1000 / FRAMES_PER_MINUTE
-      ) as unknown) as number;
+      timeoutId = window.setTimeout(animate, 1000 / FRAMES_PER_MINUTE);
     }
     animate();
     return () => window.clearTimeout(timeoutId);
-  }, [isMountedRef, timerOffset]);
+  }, [isMountedRef]);
 
   return (
     <Box
@@ -94,7 +86,7 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
 
       <Box my={2} pl={{ xs: 3, md: 4 }}>
         <Text fontSize="1.625rem" m={0}>
-          <Shapes counter={counter} />
+          <Shapes index={shapeIndex} />
           {replaceComponentsInText(
             siteText.vaccinaties.clock.title_doses_per_minute,
             {
@@ -139,7 +131,7 @@ function Clock({ progress }: ClockProps) {
           <Mark
             index={index}
             key={index}
-            isActive={index < progress * MINUTE}
+            isActive={index < progress * MINUTE_IN_SECONDS}
           />
         ))}
     </div>
@@ -151,9 +143,11 @@ interface MarkProps {
   isActive: boolean;
 }
 function Mark({ index, isActive }: MarkProps) {
-  const angle = ((index / MINUTE) * 2 - 1) * Math.PI;
+  const angle = ((index / MINUTE_IN_SECONDS) * 2 - 1) * Math.PI;
 
-  /* The hour mark is positioned more to the middle and has a different 'height' */
+  /**
+   * The hour mark is positioned more to the middle and has a different 'height'
+   */
   const isHourMark = index % 5 === 0;
 
   return (
@@ -171,8 +165,8 @@ function Mark({ index, isActive }: MarkProps) {
         left: '50%',
         backgroundColor: isActive ? colors.data.primary : '#e7e7e7',
         transitionProperty: 'background-color',
-        transitionDuration: isActive ? '10ms' : '600ms',
-        transitionDelay: isActive ? '0ms' : `${index * 25}ms`,
+        transitionDuration: isActive ? '10ms' : '400ms',
+        transitionDelay: isActive ? '0ms' : `${index * 15}ms`,
         zIndex: isActive ? 5 : 4,
       }}
     />
@@ -184,8 +178,11 @@ interface CounterProps {
   dosesPerMinute: number;
 }
 function Counter({ progress, dosesPerMinute }: CounterProps) {
-  const pause = 3; // percentage of 1 minute
-  const displayMax = 1 - pause / 100;
+  /**
+   * Pause the counter animation for the last `pausePercentage` of the cycle.
+   */
+  const pausePercentage = 3;
+  const displayMax = 1 - pausePercentage / 100;
 
   const currentCount = Math.round(
     Math.min(progress / displayMax, 1) * dosesPerMinute
@@ -205,9 +202,9 @@ function Counter({ progress, dosesPerMinute }: CounterProps) {
   );
 }
 
-function Shapes({ counter }: { counter: number }) {
+function Shapes({ index }: { index: number }) {
   const shapes = useShapes();
-  const currentShapeIndex = counter % shapes.length;
+  const currentShapeIndex = index % shapes.length;
 
   return (
     <svg
