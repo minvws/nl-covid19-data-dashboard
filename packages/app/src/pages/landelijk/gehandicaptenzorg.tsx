@@ -104,6 +104,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={positiveTestedPeopleText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -226,6 +227,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               source: infectedLocationsText.bronnen.rivm,
             }}
             timeframeOptions={['all', '5weeks']}
+            description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -278,6 +280,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: locationDeaths.bronnen.rivm }}
             title={locationDeaths.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={locationDeaths.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart

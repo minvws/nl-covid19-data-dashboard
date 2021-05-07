@@ -107,8 +107,8 @@ async function createTextDocumentForSubject(
       /**
        * Do not allow creating a text with a path that already exists
        */
-      validate: (x: string) =>
-        allTexts.find((text) => text.path == x) === undefined,
+      // validate: (x: string) =>
+      //   allTexts.find((text) => text.path == x) === undefined,
     },
     {
       type: 'text',
