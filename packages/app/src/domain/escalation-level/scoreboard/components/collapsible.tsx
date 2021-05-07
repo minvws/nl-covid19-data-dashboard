@@ -3,6 +3,8 @@ import { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
+import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { RegionCubes } from './region-cubes';
 
 type CollapsibleProps = {
   level: 1 | 2 | 3 | 4;
@@ -18,12 +20,24 @@ export function Collapsible(props: CollapsibleProps) {
   const { ref, height: contentHeight } = useResizeObserver();
 
   return (
-    <Box borderTopColor="lightGray" borderTopStyle="solid" borderTopWidth="1">
-      <Summary
+    <Box borderTopColor="lightGray" borderTopStyle="solid" borderTopWidth="1px">
+      <Header
         open={open}
         onClick={() => setOpen((x) => !x)}
         showChevron={count > 0}
-      ></Summary>
+      >
+        <Box flex="0.2">
+          <EscalationLevelInfoLabel
+            level={level}
+            fontSize={3}
+            useLevelColor
+            size="medium"
+          />
+        </Box>
+        <Box ml={2} flex="0.8">
+          <RegionCubes count={count} level={level} />
+        </Box>
+      </Header>
       {count > 0 && (
         <Panel
           open={open}
@@ -35,10 +49,6 @@ export function Collapsible(props: CollapsibleProps) {
           <div
             ref={ref}
             css={css({
-              /**
-               * Outside margins of children are breaking height calculations ヽ(ಠ_ಠ)ノ..
-               * We'll add `overflow: hidden` in order to fix this.
-               */
               overflow: 'hidden',
             })}
           >
@@ -54,18 +64,16 @@ const Panel = styled((props) => <div {...props} />)((props) =>
   css({
     display: 'block',
     overflow: 'hidden',
-    px: 3,
-    py: 0,
     transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
     opacity: props.open ? 1 : 0,
   })
 );
 
-const Summary = styled((props) => <button {...props} />)((props) =>
+const Header = styled((props) => <button {...props} />)((props) =>
   css({
     display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'space-left',
     overflow: 'visible',
     width: '100%',
     m: 0,
@@ -74,7 +82,6 @@ const Summary = styled((props) => <button {...props} />)((props) =>
     border: 'none',
     color: 'blue',
     fontFamily: 'body',
-    fontWeight: 'bold',
     fontSize: '1.25rem',
     textAlign: 'left',
     cursor: props.showChevron ? 'pointer' : 'default',
@@ -84,17 +91,16 @@ const Summary = styled((props) => <button {...props} />)((props) =>
           backgroundImage: 'url("/images/chevron-down.svg")',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '0.9em 0.55em',
           transform: props.open ? undefined : 'rotate(-90deg)',
           content: '""',
-          flex: '0 0 1.9em',
-          height: '0.55em',
-          mt: '0.35em',
+          flex: '0 0 3em',
+          height: '1.25rem',
           py: 0,
         }
       : {
           content: '""',
-          height: '0.55em',
+          height: '1.25rem',
+          flex: '0 0 3em',
         },
   })
 );

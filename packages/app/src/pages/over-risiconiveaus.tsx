@@ -1,19 +1,36 @@
+import css from '@styled-system/css';
+import Head from 'next/head';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
+import { Box } from '~/components/base';
+import { RichContent } from '~/components/cms/rich-content';
+import { Heading } from '~/components/typography';
 import { vrData } from '~/data/vr';
+import {
+  Scoreboard,
+  ScoreBoardData,
+} from '~/domain/escalation-level/scoreboard';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
-import { Scoreboard, ScoreBoardData } from '~/domain/risiconiveaus/scoreboard';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
+  createGetContent,
   getLastGeneratedDate,
   loadAndSortVrData,
   selectData,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
+import { CollapsibleList, RichContentBlock } from '~/types/cms';
+
+interface OverRisiconiveausData {
+  title: string | null;
+  description: RichContentBlock[] | null;
+  collapsibleList: CollapsibleList[];
+}
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -43,28 +60,97 @@ export const getStaticProps = createGetStaticProps(
     return {
       scoreboardData,
     };
+  }),
+  createGetContent<OverRisiconiveausData>((_) => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE;
+    return `*[_type == 'overRisicoNiveaus']{
+      ...,
+      "description": {
+        "_type": description._type,
+        "${locale}": [
+          ...description.${locale}[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ]
+      },
+      "collapsibleList": [...collapsibleList[]
+        {
+          ...,
+          "content": {
+            ...content,
+            "${locale}": [
+              ...content.${locale}[]
+              {
+                ...,
+                "asset": asset->
+               },
+            ]
+          }
+      }]
+    }[0]
+    `;
   })
 );
 
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { selectedNlData: data, lastGenerated, scoreboardData } = props;
-
-  const text = siteText.rioolwater_metingen;
-
-  const metadata = {
-    ...siteText.nationaal_metadata,
-    title: text.metadata.title,
-    description: text.metadata.description,
-  };
+  const {
+    selectedNlData: data,
+    lastGenerated,
+    scoreboardData,
+    content,
+  } = props;
 
   return (
-    <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+    <Layout
+      {...siteText.over_risiconiveaus_metadata}
+      lastGenerated={lastGenerated}
+    >
+      <Head>
+        <link
+          key="dc-type"
+          rel="dcterms:type"
+          href="https://standaarden.overheid.nl/owms/terms/webpagina"
+        />
+        <link
+          key="dc-type-title"
+          rel="dcterms:type"
+          href="https://standaarden.overheid.nl/owms/terms/webpagina"
+          title="webpagina"
+        />
+      </Head>
+      <Content>
+        <Box pb={3} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
+          {content.title && <Heading level={1}>{content.title}</Heading>}
+          {content.description && <RichContent blocks={content.description} />}
+        </Box>
         <Scoreboard data={scoreboardData} />
-      </NationalLayout>
+      </Content>
     </Layout>
   );
 };
 
 export default OverRisicoNiveaus;
+
+interface ContentProps {
+  children: ReactNode;
+}
+
+export function Content({ children }: ContentProps) {
+  return (
+    <StyledBox>
+      <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth={1000} mx="auto">
+        {children}
+      </Box>
+    </StyledBox>
+  );
+}
+
+const StyledBox = styled(Box)(
+  css({
+    bg: 'white',
+    fontSize: '1.125rem',
+  })
+);

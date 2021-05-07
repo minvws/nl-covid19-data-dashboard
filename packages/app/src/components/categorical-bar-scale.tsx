@@ -10,6 +10,8 @@ const BAR_BORDER_RADIUS = '3px';
 interface CategoricalBarScaleProps {
   value: number;
   categories: CategoricalBarScaleCategory[];
+  hideLegend?: boolean;
+  hideNumbers?: boolean;
 }
 
 export interface CategoricalBarScaleCategory {
@@ -29,6 +31,8 @@ export function getCategoryLevel(
 export function CategoricalBarScale({
   value,
   categories,
+  hideLegend = false,
+  hideNumbers = false,
 }: CategoricalBarScaleProps) {
   const maxValue = categories.reduce((maxValue, category) => {
     return Math.max(category.threshold, maxValue);
@@ -61,16 +65,18 @@ export function CategoricalBarScale({
             borderTopRightRadius={category.isLast ? BAR_BORDER_RADIUS : 0}
             borderBottomRightRadius={category.isLast ? BAR_BORDER_RADIUS : 0}
           >
-            <Box
-              position="absolute"
-              top="100%"
-              left="0"
-              fontSize={1}
-              color="annotation"
-              transform="translateX(-50%)"
-            >
-              {category.threshold}
-            </Box>
+            {!hideNumbers && (
+              <Box
+                position="absolute"
+                top="100%"
+                left="0"
+                fontSize={1}
+                color="annotation"
+                transform="translateX(-50%)"
+              >
+                {category.threshold}
+              </Box>
+            )}
           </Box>
         ))}
         <Box
@@ -87,29 +93,31 @@ export function CategoricalBarScale({
         />
       </Box>
 
-      <Box mb={3}>
-        {barPieces.map((category) => (
-          <Fragment key={category.name}>
-            {/* 0.25px offset is used for sharper rendering of the circle */}
-            <Box
-              display="inline-block"
-              width="0.7rem"
-              height="0.7rem"
-              borderRadius="50%"
-              bg={category.color}
-              transform="translateY(.25px)"
-            />
-            <InlineText
-              ml={1}
-              mr={3}
-              fontWeight={category.isActive ? 'bold' : 'normal'}
-              fontSize={1}
-            >
-              {category.name}
-            </InlineText>
-          </Fragment>
-        ))}
-      </Box>
+      {!hideLegend && (
+        <Box mb={3}>
+          {barPieces.map((category) => (
+            <Fragment key={category.name}>
+              {/* 0.25px offset is used for sharper rendering of the circle */}
+              <Box
+                display="inline-block"
+                width="0.7rem"
+                height="0.7rem"
+                borderRadius="50%"
+                bg={category.color}
+                transform="translateY(.25px)"
+              />
+              <InlineText
+                ml={1}
+                mr={3}
+                fontWeight={category.isActive ? 'bold' : 'normal'}
+                fontSize={1}
+              >
+                {category.name}
+              </InlineText>
+            </Fragment>
+          ))}
+        </Box>
+      )}
     </>
   );
 }
