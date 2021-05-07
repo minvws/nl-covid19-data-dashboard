@@ -51,60 +51,53 @@ export function VaccineDeliveryBarChart({
         source: intl.siteText.vaccinaties.bronnen.rivm,
       }}
     >
-      <>
-        <Box
-          mb={3}
-          display="flex"
-          flexDirection="column"
-          alignItems="flex-start"
-        >
-          <Box maxWidth={560}>
-            <Text>{text.omschrijving}</Text>
-          </Box>
-
-          <RadioGroup
-            value={timeframe}
-            onChange={(x) => setTimeframe(x)}
-            items={timeframeOptions}
-          />
+      <Box mb={3} display="flex" flexDirection="column" alignItems="flex-start">
+        <Box maxWidth={560}>
+          <Text>{text.omschrijving}</Text>
         </Box>
-        <StackedChart
-          values={
-            timeframe === 'all'
-              ? data.values
-              : data.values.slice(estimateIndex - 4, estimateIndex + 4)
-          }
-          valueAnnotation={intl.siteText.waarde_annotaties.x_100k}
-          formatTickValue={(x) => `${x / 100_000}`}
-          config={[
-            {
-              metricProperty: 'bio_n_tech_pfizer' as const,
-              color: colors.data.vaccines.bio_n_tech_pfizer,
-              label: productNames.pfizer,
-            },
-            {
-              metricProperty: 'moderna' as const,
-              color: colors.data.vaccines.moderna,
-              label: productNames.moderna,
-            },
-            {
-              metricProperty: 'astra_zeneca' as const,
-              color: colors.data.vaccines.astra_zeneca,
-              label: productNames.astra_zeneca,
-            },
-            'janssen' in data.last_value
-              ? {
-                  metricProperty: 'janssen' as const,
-                  color: colors.data.vaccines.janssen,
-                  label: productNames.janssen,
-                }
-              : undefined,
-          ].filter(isDefined)}
-          expectedLabel={
-            intl.siteText.vaccinaties.data.vaccination_chart.legend.expected
-          }
+
+        <RadioGroup
+          value={timeframe}
+          onChange={(x) => setTimeframe(x)}
+          items={timeframeOptions}
         />
-      </>
+      </Box>
+      <StackedChart
+        values={
+          timeframe === 'all'
+            ? data.values
+            : data.values.slice(estimateIndex - 4, estimateIndex + 4)
+        }
+        valueAnnotation={intl.siteText.waarde_annotaties.x_100k}
+        formatTickValue={(x) => `${x / 100_000}`}
+        config={[
+          {
+            metricProperty: 'bio_n_tech_pfizer' as const,
+            color: colors.data.vaccines.bio_n_tech_pfizer,
+            label: productNames.pfizer,
+          },
+          {
+            metricProperty: 'moderna' as const,
+            color: colors.data.vaccines.moderna,
+            label: productNames.moderna,
+          },
+          {
+            metricProperty: 'astra_zeneca' as const,
+            color: colors.data.vaccines.astra_zeneca,
+            label: productNames.astra_zeneca,
+          },
+          'janssen' in data.last_value
+            ? {
+                metricProperty: 'janssen' as const,
+                color: colors.data.vaccines.janssen,
+                label: productNames.janssen,
+              }
+            : undefined,
+        ].filter(isDefined)}
+        expectedLabel={
+          intl.siteText.vaccinaties.data.vaccination_chart.legend.expected
+        }
+      />
     </ChartTile>
   );
 }

@@ -1,4 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
 import { first, last } from 'lodash';
@@ -15,9 +16,9 @@ import {
   useDimensions,
   useValuesInTimeframe,
 } from '~/components/time-series-chart/logic';
-import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
   BarHover,
   BarTrend,
@@ -188,19 +189,21 @@ export function VerticalBarChart<
           />
         )}
 
-        {seriesList.map((series, index) => (
-          <BarTrend
-            key={0}
-            series={series}
-            color={seriesConfig[index].color}
-            secondaryColor={seriesConfig[index].secondaryColor}
-            getX={getX}
-            getY={getY}
-            barWidth={xScale.bandwidth()}
-            yScale={yScale}
-            onHover={handleHover}
-          />
-        ))}
+        <g css={css({ pointerEvents: 'all' })}>
+          {seriesList.map((series, index) => (
+            <BarTrend
+              key={0}
+              series={series}
+              color={seriesConfig[index].color}
+              secondaryColor={seriesConfig[index].secondaryColor}
+              getX={getX}
+              getY={getY}
+              barWidth={xScale.bandwidth()}
+              yScale={yScale}
+              onHover={handleHover}
+            />
+          ))}
+        </g>
 
         {hasNegativeValues && (
           <Bar
