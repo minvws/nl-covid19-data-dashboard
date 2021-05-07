@@ -6,18 +6,19 @@ import {
   memo,
   MutableRefObject,
   ReactNode,
+  RefObject,
   useEffect,
   useRef,
   useState,
 } from 'react';
+import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { useChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltip-container';
 import { countryGeo } from './topology';
-import { useUniqueId } from '~/utils/use-unique-id';
-import { colors } from '~/style/theme';
 
 export type TooltipSettings = {
   left: number;
@@ -211,7 +212,7 @@ const ChoroplethMap: <T1, T3>(
           width={width}
           viewBox={`0 0 ${width} ${height}`}
           css={css({ display: 'block', bg: 'transparent', width: '100%' })}
-          onMouseMove={createSvgMouseOverHandler(timeout, setTooltip)}
+          onMouseMove={createSvgMouseOverHandler(timeout, setTooltip, ref)}
           onMouseOut={
             isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
           }
@@ -321,19 +322,23 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
 
 const createSvgMouseOverHandler = (
   timeout: MutableRefObject<number>,
-  setTooltip: (settings: TooltipSettings | undefined) => void
+  setTooltip: (settings: TooltipSettings | undefined) => void,
+  ref: RefObject<HTMLElement>
 ) => {
   return (event: React.MouseEvent) => {
     const elm = event.target as HTMLElement | SVGElement;
     const id = elm.getAttribute('data-id');
 
-    if (id) {
+    if (id && ref.current) {
       if (timeout.current > -1) {
         clearTimeout(timeout.current);
         timeout.current = -1;
       }
 
-      const coords = localPoint(event);
+      /**
+       * Pass the DOM node to fix positioning in Firefox
+       */
+      const coords = localPoint(ref.current, event);
 
       if (coords) {
         setTooltip({
