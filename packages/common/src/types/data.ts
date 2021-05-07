@@ -167,6 +167,7 @@ export interface National {
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
   behavior: NationalBehavior;
+  behavior_per_age_group?: NlBehaviorPerAgeGroup;
   deceased_rivm: NationalDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
@@ -515,6 +516,34 @@ export interface NationalBehaviorValue {
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
+}
+export interface NlBehaviorPerAgeGroup {
+  avoid_crowds_compliance: NlBehaviorPerAgeGroupValue;
+  avoid_crowds_support: NlBehaviorPerAgeGroupValue;
+  curfew_compliance: NlBehaviorPerAgeGroupValue;
+  curfew_support: NlBehaviorPerAgeGroupValue;
+  keep_distance_compliance: NlBehaviorPerAgeGroupValue;
+  keep_distance_support: NlBehaviorPerAgeGroupValue;
+  max_visitors_compliance: NlBehaviorPerAgeGroupValue;
+  max_visitors_support: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_compliance: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_support: NlBehaviorPerAgeGroupValue;
+  wash_hands_compliance: NlBehaviorPerAgeGroupValue;
+  wash_hands_support: NlBehaviorPerAgeGroupValue;
+  wear_mask_public_indoors_compliance: NlBehaviorPerAgeGroupValue;
+  wear_mask_public_indoors_support: NlBehaviorPerAgeGroupValue;
+  work_from_home_compliance: NlBehaviorPerAgeGroupValue;
+  work_from_home_support: NlBehaviorPerAgeGroupValue;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlBehaviorPerAgeGroupValue {
+  "16_24": number;
+  "25_39": number;
+  "40_54": number;
+  "55_69": number;
+  "70_plus": number;
 }
 export interface NationalDeceasedRivm {
   values: NationalDeceasedRivmValue[];

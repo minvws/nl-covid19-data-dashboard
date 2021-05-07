@@ -122,7 +122,8 @@
     "export": "next export",
     "dev": "next",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 && next build",
-    "build:en": "cross-env NEXT_PUBLIC_SANITY_DATASET=production NEXT_PUBLIC_LOCALE=en && yarn build",
+    "build:nl": "cross-env NEXT_PUBLIC_LOCALE=nl && yarn build",
+    "build:en": "cross-env NEXT_PUBLIC_LOCALE=en && yarn build",
     "start": "next start -H 0.0.0.0 -p 8080",
     "test": "jest --watch",
     "test:ci": "jest --ci",
@@ -131,7 +132,10 @@
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
-    "clean": "rimraf .next"
+    "clean": "rimraf .next",
+    "vercel-install": "yarn install && yarn download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cli validate-features && yarn workspace @corona-dashboard/cms sync-assets && yarn workspace @corona-dashboard/cms lokalize:export",
+    "vercel-build:nl": "yarn build:nl && next export",
+    "vercel-build:en": "yarn build:en && next export"
   },
   "browserslist": [
     "defaults",

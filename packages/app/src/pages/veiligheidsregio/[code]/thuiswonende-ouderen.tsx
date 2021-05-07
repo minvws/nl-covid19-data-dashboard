@@ -165,6 +165,9 @@ const ElderlyAtHomeRegionalPage = (
                         text.section_deceased
                           .line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'positive_tested_daily_moving_average',
+                      ],
                     },
                   ],
                 }}
@@ -246,6 +249,9 @@ const ElderlyAtHomeRegionalPage = (
                         text.section_deceased
                           .line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'deceased_daily_moving_average',
+                      ],
                     },
                   ],
                 }}

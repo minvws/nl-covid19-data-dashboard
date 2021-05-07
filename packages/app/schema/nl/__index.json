@@ -123,6 +123,9 @@
     "behavior": {
       "$ref": "behavior.json"
     },
+    "behavior_per_age_group": {
+      "$ref": "behavior_per_age_group.json"
+    },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"
     },
