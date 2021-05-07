@@ -1,13 +1,15 @@
+import css from '@styled-system/css';
+import { useState } from 'react';
 import CloseIcon from '~/assets/close-thin.svg';
 import ExpandIcon from '~/assets/expand.svg';
-import { Spacer } from './base';
 import { Tile } from '~/components/tile';
-import { Metadata, MetadataProps } from './metadata';
-import { useState } from 'react';
+import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { Modal } from './modal';
-import css from '@styled-system/css';
+import { Spacer } from './base';
 import { IconButton } from './icon-button';
+import { Metadata, MetadataProps } from './metadata';
+import { Modal } from './modal';
 
 export function ChartTileContainer({
   children,
@@ -19,6 +21,14 @@ export function ChartTileContainer({
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const breakpoints = useBreakpoints();
+  const intl = useIntl();
+
+  const label = replaceVariablesInText(
+    isFullscreen
+      ? intl.siteText.common.modal_close
+      : intl.siteText.common.modal_open,
+    { subject: intl.siteText.common.grafiek_singular }
+  );
 
   const tile = (
     <Tile height="100%">
@@ -41,7 +51,11 @@ export function ChartTileContainer({
             '&:hover': { color: 'gray' },
           })}
         >
-          <IconButton onClick={() => setIsFullscreen((x) => !x)} size={36}>
+          <IconButton
+            title={label}
+            onClick={() => setIsFullscreen((x) => !x)}
+            size={36}
+          >
             {isFullscreen ? <CloseIcon /> : <ExpandIcon />}
           </IconButton>
         </div>
