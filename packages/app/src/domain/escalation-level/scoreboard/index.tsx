@@ -1,5 +1,8 @@
 import { VrEscalationLevel } from '@corona-dashboard/common';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
+import { InlineText } from '~/components/typography';
 import { Collapsible } from './components/collapsible';
 import { SafetyRegionRow } from './components/safety-region-row';
 
@@ -41,8 +44,24 @@ const Headers = () => {
   return (
     <Box display="flex" width="100%" alignItems="center">
       <Box flex="0.8" />
-      <Box flex="1">Positieve testen</Box>
-      <Box flex="1">Ziekenhuisopnames</Box>
+      <Box flex="1" display="flex" flexDirection="column">
+        <Box display="flex" alignItems="center">
+          <GetestIcon width="32px" height="32px" />
+          <InlineText>Positieve testen</InlineText>
+        </Box>
+        <Box>
+          <InlineText>per 100.000 inwoners / week</InlineText>
+        </Box>
+      </Box>
+      <Box flex="1">
+        <Box display="flex" alignItems="center">
+          <Ziekenhuis width="32px" height="32px" />
+          <InlineText>Ziekenhuisopnames</InlineText>
+        </Box>
+        <Box>
+          <InlineText>per 1 miljoen inwoners / week</InlineText>
+        </Box>
+      </Box>
     </Box>
   );
 };
