@@ -2,9 +2,7 @@ import {
   NationalBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -121,11 +119,3 @@ export function BehaviorLineChartTile({
     </ChartTile>
   );
 }
-
-const Header = styled.header(
-  css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: ['column', null, null, 'row'],
-  })
-);

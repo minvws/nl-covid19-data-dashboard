@@ -16,8 +16,8 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import theme from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
-import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { LegendShape } from '../legend';
 import {
   AreaChartGraph,
@@ -34,7 +34,6 @@ import { useDomains } from './hooks/use-domains';
 import { useTooltip } from './hooks/use-tooltip';
 import { useTrendConfigs } from './hooks/use-trend-configs';
 import { TimestampedTrendValue } from './logic';
-import { useResponsiveContainer } from '~/utils/use-responsive-container';
 
 const NUM_TICKS = 3;
 

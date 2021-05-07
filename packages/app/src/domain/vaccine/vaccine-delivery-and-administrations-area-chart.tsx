@@ -6,7 +6,6 @@ import {
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
 import { AreaChart } from '~/components/area-chart';
-import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Legend } from '~/components/legend';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';

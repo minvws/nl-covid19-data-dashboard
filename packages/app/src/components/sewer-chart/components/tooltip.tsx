@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
-import { useIsMounted } from '~/utils/use-is-mounted';
 
 type Bounds = {
   left: number;
