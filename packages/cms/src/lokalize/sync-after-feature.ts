@@ -111,7 +111,7 @@ async function syncAdditionsToProduction(additions: TextMutation[]) {
 async function applyDeletionsToDevelopment(deletions: TextMutation[]) {
   if (deletions.length === 0) {
     console.log('There are no mutations that result in keys to delete');
-    process.exit(0);
+    return;
   }
 
   /**
