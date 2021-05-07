@@ -4,7 +4,7 @@ import {
   National,
   Regionaal,
   Regions,
-  sortTimeSeriesInDataInPlace,
+  sortTimeSeriesInDataInPlace
 } from '@corona-dashboard/common';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
@@ -12,15 +12,15 @@ import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import {
   gmPageMetricNames,
-  GmPageMetricNames,
+  GmPageMetricNames
 } from '~/domain/layout/municipality-layout';
 import {
   NlPageMetricNames,
-  nlPageMetricNames,
+  nlPageMetricNames
 } from '~/domain/layout/national-layout';
 import {
   vrPageMetricNames,
-  VrRegionPageMetricNames,
+  VrRegionPageMetricNames
 } from '~/domain/layout/safety-region-layout';
 import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
@@ -216,7 +216,7 @@ export function getGmData(context: GetStaticPropsContext) {
   return { data, municipalityName };
 }
 
-export function selectCustomData<T extends (...args: any) => any>(
+export function selectData<T extends (...args: any) => any>(
   dataSelector: T
 ): () => ReturnType<T> {
   return () => dataSelector();
