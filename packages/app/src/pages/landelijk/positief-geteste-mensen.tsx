@@ -127,7 +127,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="infected"
                 absolute={dataOverallLastValue.infected}
-                absoluteMovingAverage={dataOverallLastValue.infected}
+                currentValue={
+                  ta.difference.tested_overall__infected_moving_average
+                }
                 difference={data.difference.tested_overall__infected}
               />
 
@@ -178,9 +180,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected_per_100k"
                 localeTextKey="positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k"
-                absoluteMovingAverage={
-                  data.tested_overall.last_value.infected_per_100k
-                }
+                currentValue={data.tested_overall.last_value.infected_per_100k}
               />
 
               <Text>{text.barscale_toelichting}</Text>
@@ -325,7 +325,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="ggd_tested_total"
                 absolute={dataGgdAverageLastValue.tested_total}
                 difference={data.difference.tested_ggd_average__tested_total}
-                absoluteMovingAverage={dataGgdAverageLastValue.tested_total}
+                currentValue={dataGgdAverageLastValue.tested_total}
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
@@ -345,9 +345,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.tested_ggd_average__infected_percentage
                 }
-                absoluteMovingAverage={
-                  dataGgdAverageLastValue.infected_percentage
-                }
+                currentValue={dataGgdAverageLastValue.infected_percentage}
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
 

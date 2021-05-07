@@ -22,7 +22,6 @@ interface DifferenceIndicatorProps {
   context?: 'sidebar' | 'tile' | 'inline';
   maximumFractionDigits?: number;
   staticTimespan?: string;
-  absoluteMovingAverage?: number;
 }
 
 export function DifferenceIndicator(props: DifferenceIndicatorProps) {
@@ -36,10 +35,6 @@ export function DifferenceIndicator(props: DifferenceIndicatorProps) {
     default:
       return <TileIndicator {...props} />;
   }
-}
-
-function MovingAverageDifferenceIndicator() {
-  return <p>Hoi</p>;
 }
 
 function SidebarIndicator({
@@ -142,13 +137,11 @@ function TileIndicator({
   isDecimal,
   staticTimespan,
   maximumFractionDigits,
-  absoluteMovingAverage,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   maximumFractionDigits?: number;
   staticTimespan?: string;
-  absoluteMovingAverage?: number;
 }) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const text = siteText.toe_en_afname;
@@ -166,22 +159,6 @@ function TileIndicator({
 
   if (difference > 0) {
     const splitText = text.toename.split(' ');
-
-    if (absoluteMovingAverage)
-      return (
-        <Container>
-          <IconContainer color="red">
-            <IconUp />
-          </IconContainer>
-          <InlineText fontWeight="bold">
-            {formatNumber(value.difference)} {siteText.toe_en_afname.hoger}{' '}
-          </InlineText>
-          <InlineText>
-            {siteText.toe_en_afname.zeven_daags_gemiddelde}
-            {` (${formatNumber(absoluteMovingAverage)})`}
-          </InlineText>
-        </Container>
-      );
 
     return (
       <Container>
@@ -225,6 +202,61 @@ function TileIndicator({
       <Span>
         {text.gelijk} {timespanTextNode}
       </Span>
+    </Container>
+  );
+}
+
+export function MovingAverageDifferenceIndicator({
+  value,
+  currentValue,
+}: {
+  value: DifferenceDecimal | DifferenceInteger;
+  currentValue: number;
+}) {
+  const { difference } = value;
+  const { siteText, formatNumber } = useIntl();
+
+  if (difference > 0)
+    return (
+      <Container>
+        <IconContainer color="red">
+          <IconUp />
+        </IconContainer>
+        <InlineText fontWeight="bold">
+          {formatNumber(value.difference)} {siteText.toe_en_afname.hoger}{' '}
+        </InlineText>
+        <InlineText>
+          {siteText.toe_en_afname.zeven_daags_gemiddelde}
+          {` (${formatNumber(currentValue)})`}
+        </InlineText>
+      </Container>
+    );
+
+  if (difference < 0)
+    return (
+      <Container>
+        <IconContainer color="data.primary">
+          <IconDown />
+        </IconContainer>
+        <InlineText fontWeight="bold">
+          {formatNumber(value.difference)} {siteText.toe_en_afname.lager}{' '}
+        </InlineText>
+        <InlineText>
+          {siteText.toe_en_afname.zeven_daags_gemiddelde}
+          {` (${formatNumber(currentValue)})`}
+        </InlineText>
+      </Container>
+    );
+
+  return (
+    <Container>
+      <InlineText fontWeight="bold">
+        {formatNumber(value.difference)} {siteText.toe_en_afname.gelijk}{' '}
+      </InlineText>
+      <InlineText>
+        {siteText.toe_en_afname.zeven_daags_gemiddelde}
+        {` (${formatNumber(currentValue)})`}
+      </InlineText>
     </Container>
   );
 }
