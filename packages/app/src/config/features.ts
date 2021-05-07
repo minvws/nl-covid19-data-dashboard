@@ -29,7 +29,7 @@ export const features: Feature[] = [
   },
   {
     name: 'vaccineCimsData',
-    isEnabled: false,
+    isEnabled: true,
     metricScopes: ['nl'],
     metricName: 'vaccine_coverage',
   },
