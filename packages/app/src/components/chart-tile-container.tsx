@@ -1,9 +1,13 @@
+import CloseIcon from '~/assets/close-thin.svg';
+import ExpandIcon from '~/assets/expand.svg';
 import { Spacer } from './base';
 import { Tile } from '~/components/tile';
 import { Metadata, MetadataProps } from './metadata';
 import { useState } from 'react';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { FullscreenButton, Modal } from './modal';
+import { Modal } from './modal';
+import css from '@styled-system/css';
+import { IconButton } from './icon-button';
 
 export function ChartTileContainer({
   children,
@@ -27,8 +31,20 @@ export function ChartTileContainer({
         </>
       )}
 
-      {breakpoints.md && (isFullscreen || isButtonVisible) && (
-        <FullscreenButton onClick={() => setIsFullscreen((x) => !x)} />
+      {breakpoints.md && (isButtonVisible || isFullscreen) && (
+        <div
+          css={css({
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            color: 'silver',
+            '&:hover': { color: 'gray' },
+          })}
+        >
+          <IconButton onClick={() => setIsFullscreen((x) => !x)} size={36}>
+            {isFullscreen ? <CloseIcon /> : <ExpandIcon />}
+          </IconButton>
+        </div>
       )}
     </Tile>
   );
