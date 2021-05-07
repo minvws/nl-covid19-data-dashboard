@@ -30,13 +30,13 @@ export function VaccineDeliveryBarChart({
   const timeframeOptions = [
     {
       label: intl.siteText.charts.time_controls.all,
-      value: 'all',
+      value: 'all' as Timeframe,
     },
     {
       label:
         intl.siteText.vaccinaties.grafiek_leveringen
           .timeframe_recent_en_verwacht,
-      value: 'recent_and_coming',
+      value: 'recent_and_coming' as Timeframe,
     },
   ];
 

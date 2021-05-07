@@ -10,11 +10,10 @@ import {
 import { ChartTileContainer } from './chart-tile-container';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-interface ChoroplethTileProps extends DataProps {
+
+type ChoroplethTileProps = DataProps & {
   title: string;
   description?: string | React.ReactNode;
-  onChartRegionChange?: (v: RegionControlOption) => void;
-  chartRegion?: 'municipal' | 'region';
   children: React.ReactNode;
   legend?: {
     title: string;
@@ -22,7 +21,16 @@ interface ChoroplethTileProps extends DataProps {
   };
   metadata?: MetadataProps;
   valueAnnotation?: string;
-}
+} & (
+    | {
+        onChartRegionChange: (v: RegionControlOption) => void;
+        chartRegion: 'municipal' | 'region';
+      }
+    | {
+        onChartRegionChange?: undefined;
+        chartRegion?: undefined;
+      }
+  );
 
 export function ChoroplethTile({
   title,
@@ -61,7 +69,7 @@ export function ChoroplethTile({
             ) : (
               description
             )}
-            {onChartRegionChange && (
+            {onChartRegionChange && chartRegion && (
               <Box
                 display="flex"
                 justifyContent={{ _: 'center', lg: 'flex-start' }}
