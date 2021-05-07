@@ -52,7 +52,7 @@ export function CategoricalBarScale({
 
   return (
     <>
-      <Box position="relative" width="100%" display="flex" my={4}>
+      <Box position="relative" width="100%" display="flex" py={4}>
         {barPieces.map((category, index) => (
           <Box
             key={category.name}
@@ -82,7 +82,7 @@ export function CategoricalBarScale({
         <Box
           position="absolute"
           left={`${(value / maxValue) * 100}%`}
-          top={-14}
+          top={18}
           bg="black"
           width={7}
           height={26}

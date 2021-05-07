@@ -85,6 +85,7 @@ const Header = styled((props) => <button {...props} />)((props) =>
     fontSize: '1.25rem',
     textAlign: 'left',
     cursor: props.showChevron ? 'pointer' : 'default',
+    borderBottom: props.open ? '1px solid lightGray' : undefined,
 
     '&::before': props.showChevron
       ? {

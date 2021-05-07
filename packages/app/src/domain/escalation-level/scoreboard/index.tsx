@@ -42,8 +42,16 @@ export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
 
 const Headers = () => {
   return (
-    <Box display="flex" width="100%" alignItems="center">
-      <Box flex="0.8" />
+    <Box
+      display="flex"
+      width="100%"
+      alignItems="center"
+      borderBottomColor="lightGray"
+      borderBottomStyle="solid"
+      borderBottomWidth="1px"
+      pb={3}
+    >
+      <Box flex={{ _: 0, lg: 0.8 }} />
       <Box flex="1" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center">
           <GetestIcon width="32px" height="32px" />

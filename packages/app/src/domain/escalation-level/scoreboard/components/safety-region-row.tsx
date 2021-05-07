@@ -8,6 +8,7 @@ import {
 import { InlineText } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -28,7 +29,7 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
 
   return (
     <Box
-      display="flex"
+      display={{ _: 'block', lg: 'flex' }}
       width="100%"
       alignItems="center"
       borderBottomColor="lightGray"
@@ -42,14 +43,16 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
           </StyledLink>
         </Link>
       </LinkBox>
-      <BarScaleCell
-        value={vrData.data.positive_tested_per_100k}
-        thresholds={positiveTestedEscalationThresholds}
-      />
-      <BarScaleCell
-        value={vrData.data.hospital_admissions_per_million}
-        thresholds={hospitalAdmissionsEscalationThresholds}
-      />
+      <Box display="flex" flex="2">
+        <BarScaleCell
+          value={vrData.data.positive_tested_per_100k}
+          thresholds={positiveTestedEscalationThresholds}
+        />
+        <BarScaleCell
+          value={vrData.data.hospital_admissions_per_million}
+          thresholds={hospitalAdmissionsEscalationThresholds}
+        />
+      </Box>
     </Box>
   );
 }
@@ -64,11 +67,16 @@ const BarScaleCell = ({
   const { formatNumber } = useIntl();
 
   return (
-    <Box flex="1" display="flex" alignItems="center">
-      <Box width="2rem" display="flex" justifyContent="flex-end" mr="0.5rem">
+    <Box flex="1" display="flex" alignItems="center" width="100%">
+      <Box
+        flex="0.1"
+        display={{ _: 'block', lg: 'flex' }}
+        justifyContent={{ lg: 'flex-end' }}
+        mr={{ _: '1.5rem', lg: '1rem' }}
+      >
         <InlineText fontWeight="bold">{formatNumber(value)}</InlineText>
       </Box>
-      <Box width="50%">
+      <Box flex="0.9" pr={{ _: 3, lg: 5 }}>
         <CategoricalBarScale
           hideLegend
           hideNumbers
@@ -92,17 +100,21 @@ const StyledLink = styled.a(
 
 const LinkBox = styled.div<{ color: string }>((x) =>
   css({
-    flex: '0.8',
-    '&::before': {
-      content: '""',
-      display: 'inline-block',
-      height: '12px',
-      width: '12px',
-      borderRadius: '50%',
-      background: x.color,
-      marginRight: '0.5em',
-      flexShrink: 0,
-    },
+    flex: 0.8,
+    mt: asResponsiveArray({ _: 4, lg: 0 }),
+    '&::before': asResponsiveArray({
+      _: undefined,
+      lg: {
+        content: '""',
+        display: 'inline-block',
+        height: '12px',
+        width: '12px',
+        borderRadius: '50%',
+        background: x.color,
+        marginRight: '0.5em',
+        flexShrink: 0,
+      },
+    }),
     '&::after': {
       backgroundImage: 'url("/images/chevron-black.svg")',
       backgroundPosition: 'center',
