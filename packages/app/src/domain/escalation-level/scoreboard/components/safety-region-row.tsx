@@ -29,7 +29,8 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
 
   return (
     <Box
-      display={{ _: 'block', lg: 'flex' }}
+      display="flex"
+      flexDirection={{ sm: 'column' }}
       width="100%"
       alignItems="center"
       borderBottomColor="lightGray"
