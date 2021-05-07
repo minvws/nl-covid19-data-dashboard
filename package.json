@@ -21,7 +21,8 @@
     "e2e:ci": "yarn workspace @corona-dashboard/e2e e2e:ci",
     "cms": "yarn workspace @corona-dashboard/cms start",
     "vercel-install": "yarn install && yarn workspace @corona-dashboard/app download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cli validate-features && yarn workspace @corona-dashboard/cms sync-assets && yarn workspace @corona-dashboard/cms lokalize:export",
-    "vercel-build": "yarn workspace @corona-dashboard/app build && next export"
+    "vercel-build:nl": "yarn workspace @corona-dashboard/app build:nl && next export",
+    "vercel-build:en": "yarn workspace @corona-dashboard/app build:en && next export"
   },
   "workspaces": {
     "packages": [
