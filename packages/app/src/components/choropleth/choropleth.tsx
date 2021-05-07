@@ -14,8 +14,8 @@ import {
 import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { useChartDimensions } from './hooks/use-chart-dimensions';
 import { Path } from './path';
 import { Tooltip } from './tooltips/tooltip-container';
 import { countryGeo } from './topology';
@@ -28,6 +28,7 @@ export type TooltipSettings = {
 
 type TProps<T1, T3> = {
   initialWidth?: number;
+  minHeight?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;
@@ -130,14 +131,19 @@ const ChoroplethMap: <T1, T3>(
     description,
     renderHighlight,
     initialWidth = 850,
+    minHeight = 400,
     showTooltipOnFocus,
   } = props;
 
   const ratio = 1.2;
-  const [ref, dimensions] = useChartDimensions<HTMLDivElement>(
+
+  const { ResponsiveContainer, ...responsive } = useResponsiveContainer(
     initialWidth,
-    ratio
+    minHeight
   );
+
+  const width = responsive.width;
+  const height = Math.min(responsive.height, width * ratio);
 
   const clipPathId = useUniqueId();
   const dataDescriptionId = useUniqueId();
@@ -145,16 +151,7 @@ const ChoroplethMap: <T1, T3>(
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
-  const {
-    width,
-    height,
-    marginLeft,
-    marginTop,
-    boundedWidth,
-    boundedHeight,
-  } = dimensions;
-
-  const fitSize: FitSize = [[boundedWidth, boundedHeight], boundingBox];
+  const fitSize: FitSize = [[width, height], boundingBox];
 
   useEffect(() => {
     if (!showTooltipOnFocus) {
@@ -162,7 +159,7 @@ const ChoroplethMap: <T1, T3>(
       return;
     }
 
-    const container = ref.current;
+    const container = responsive.ref.current;
 
     function handleBubbledFocusIn(event: FocusEvent) {
       const link = event.target as HTMLAnchorElement;
@@ -200,19 +197,23 @@ const ChoroplethMap: <T1, T3>(
       container?.removeEventListener('focusin', handleBubbledFocusIn);
       container?.removeEventListener('focusout', handleBubbledFocusOut);
     };
-  }, [ref, setTooltip, showTooltipOnFocus, isTouch]);
+  }, [responsive.ref, setTooltip, showTooltipOnFocus, isTouch]);
 
   return (
     <>
       <span id={dataDescriptionId} style={{ display: 'none' }}>
         {description}
       </span>
-      <div ref={ref}>
+      <ResponsiveContainer height={height}>
         <svg
           width={width}
           viewBox={`0 0 ${width} ${height}`}
           css={css({ display: 'block', bg: 'transparent', width: '100%' })}
-          onMouseMove={createSvgMouseOverHandler(timeout, setTooltip, ref)}
+          onMouseMove={createSvgMouseOverHandler(
+            timeout,
+            setTooltip,
+            responsive.ref
+          )}
           onMouseOut={
             isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
           }
@@ -220,16 +221,7 @@ const ChoroplethMap: <T1, T3>(
           aria-labelledby={dataDescriptionId}
         >
           <clipPath id={clipPathId}>
-            <rect
-              x={dimensions.marginLeft}
-              y={0}
-              height={dimensions.boundedHeight}
-              width={
-                (dimensions.boundedWidth ?? 0) -
-                (dimensions.marginLeft ?? 0) -
-                (dimensions.marginRight ?? 0)
-              }
-            />
+            <rect x={0} y={0} height={height} width={width} />
           </clipPath>
           <rect
             x={0}
@@ -239,10 +231,7 @@ const ChoroplethMap: <T1, T3>(
             fill={'none'}
             rx={14}
           />
-          <g
-            transform={`translate(${marginLeft},${marginTop})`}
-            clipPath={`url(#${clipPathId})`}
-          >
+          <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
             <MercatorGroup
               data={featureCollection.features}
               render={renderFeature}
@@ -270,7 +259,7 @@ const ChoroplethMap: <T1, T3>(
             )}
           </g>
         </svg>
-      </div>
+      </ResponsiveContainer>
     </>
   );
 });

@@ -60,6 +60,7 @@ export function ChoroplethTile({
         m={0}
         as="figure"
         {...dataProps}
+        height="100%"
       >
         <Box mb={3} flex={{ lg: 1 }} as="figcaption">
           <Box mb={[0, 2]}>
@@ -89,8 +90,14 @@ export function ChoroplethTile({
           )}
         </Box>
 
-        <Box flex={{ lg: 1 }} ml={[0, 0, 3]}>
-          <div>{children}</div>
+        <Box
+          flex={{ lg: 1 }}
+          ml={[0, 0, 3]}
+          display="flex"
+          flexDirection="column"
+          height="100%"
+        >
+          <Box height="100%">{children}</Box>
 
           {legendaComponent && !breakpoints.lg && (
             <Box display="flex" justifyContent="center">

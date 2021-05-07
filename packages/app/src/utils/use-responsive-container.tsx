@@ -31,9 +31,15 @@ export function useResponsiveContainer(initialWidth = 0, minHeight = 0) {
   const height = Math.floor(Math.max(measuredHeight, minHeight));
 
   const ResponsiveContainer = useCallback(
-    ({ children }: { children: ReactNode }) => (
+    ({
+      children,
+      height = '100%',
+    }: {
+      children: ReactNode;
+      height?: string | number;
+    }) => (
       <Box ref={ref} height="100%" minHeight={minHeight} position="relative">
-        <Box position="absolute" width="100%" height="100%">
+        <Box position="absolute" width="100%" height={height}>
           {children}
         </Box>
       </Box>
