@@ -40,7 +40,7 @@ import { LokalizeText } from './types';
 async function syncAdditionsToProduction(additions: TextMutation[]) {
   if (additions.length === 0) {
     console.log('There are no mutations that result in keys to add');
-    process.exit(0);
+    return;
   }
 
   /**
