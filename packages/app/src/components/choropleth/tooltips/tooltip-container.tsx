@@ -24,13 +24,13 @@ export function Tooltip({ left, top, children }: TTooltipProps) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
   const ref = useRef<HTMLDivElement>(null);
-  const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
+  const { width = 0 } = useResizeObserver<HTMLDivElement>({ ref });
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
   /**
    * nudge the top to render the tooltip a little bit on top of the chart
    */
-  const targetY = top - height - 20;
+  const targetY = top + 20;
   const targetX = left + padding.left;
 
   const maxWidth = Math.min(400, viewportSize.width - VIEWPORT_PADDING * 2);
@@ -44,7 +44,7 @@ export function Tooltip({ left, top, children }: TTooltipProps) {
   const x = Math.max(
     minLeft, // stay within left side of viewport
     Math.min(
-      targetX - width / 2, // center tooltip
+      targetX, // center tooltip
       maxLeft // stay within right side of viewport
     )
   );
