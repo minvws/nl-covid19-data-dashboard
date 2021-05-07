@@ -21,10 +21,10 @@ export const features: Feature[] = [
   },
   {
     name: 'hospitalMovingAverage',
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     name: 'intensiveCareMovingAverage',
-    isEnabled: false,
+    isEnabled: true,
   },
 ];

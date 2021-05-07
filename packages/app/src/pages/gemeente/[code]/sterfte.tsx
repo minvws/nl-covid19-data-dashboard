@@ -170,6 +170,9 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                         text.section_deceased_rivm
                           .line_chart_covid_daily_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'covid_daily_moving_average',
+                      ],
                     },
                   ],
                 }}

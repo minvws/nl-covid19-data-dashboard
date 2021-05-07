@@ -198,6 +198,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                         end: Infinity,
                         label: text.linechart_legend_underreported_titel,
                         shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average',
+                        ],
                       },
                     ],
                   }}
