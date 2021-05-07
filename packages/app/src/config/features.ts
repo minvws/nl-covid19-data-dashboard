@@ -27,4 +27,10 @@ export const features: Feature[] = [
     name: 'intensiveCareMovingAverage',
     isEnabled: true,
   },
+  {
+    name: 'vaccineCimsData',
+    isEnabled: false,
+    metricScopes: ['nl'],
+    metricName: 'vaccine_coverage',
+  },
 ];
