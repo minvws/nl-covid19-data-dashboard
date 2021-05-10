@@ -54,7 +54,14 @@ export function MiniTrendTile<T extends TimestampedValue>(
           {title}
         </LinkWithIcon>
       </Heading>
-      <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
+      <Text
+        fontSize="2.25rem"
+        fontWeight="bold"
+        my={0}
+        lineHeight={0}
+        mb={2}
+        data-cy={metricProperty}
+      >
         {formatNumber((value as unknown) as number)}
       </Text>
 

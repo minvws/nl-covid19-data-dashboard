@@ -1,7 +1,7 @@
 import { MdAttachFile } from 'react-icons/md';
 import { supportedLanguages } from '../../language/supported-languages';
 
-export default {
+export const localeRichContentBlock = {
   name: 'localeRichContentBlock',
   type: 'object',
   title: 'Content',

@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { vrData } from '~/data/vr';
 import { gmData } from '~/data/gm';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export interface Option {
   type: 'gm' | 'vr';
@@ -31,15 +32,30 @@ export interface Hit<T> {
 }
 
 export function useSearchResults(term: string) {
+  const reverseRouter = useReverseRouter();
   const termTrimmed = term.trim();
 
   const { hits, vrHits, gmHits } = useMemo(() => {
-    const hits = search(termTrimmed);
+    const hits: Hit<Option>[] = search(termTrimmed).map((x) => {
+      const link =
+        x.data.type === 'gm'
+          ? reverseRouter.actueel.gm(x.data.code)
+          : reverseRouter.actueel.vr(x.data.code);
+
+      return {
+        ...x,
+        data: {
+          ...x.data,
+          link,
+        },
+      };
+    });
+
     const gmHits = hits.filter((x) => x.data.type === 'gm');
     const vrHits = hits.filter((x) => x.data.type === 'vr');
 
     return { hits, gmHits, vrHits };
-  }, [termTrimmed]);
+  }, [termTrimmed, reverseRouter]);
 
   return { hits, gmHits, vrHits };
 }
@@ -66,25 +82,23 @@ function search(term: string, limit = 10) {
          * Set score based on the order of the initial hits
          */
         score: 1 - options.indexOf(data) / options.length,
-      } as Hit<Option>)
+      } as Hit<Omit<Option, 'link'>>)
   );
 
   return hits;
 }
 
-const ALL_HITS: Option[] = [
+const ALL_HITS: Omit<Option, 'link'>[] = [
   ...gmData.map((x) => ({
     type: 'gm' as const,
     code: x.gemcode,
     name: x.displayName || x.name,
     searchTerms: [x.name, x.displayName].filter(isPresent),
-    link: `/actueel/gemeente/${x.gemcode}`,
   })),
   ...vrData.map((x) => ({
     type: 'vr' as const,
     code: x.code,
     name: x.name,
     searchTerms: [x.name, ...(x.searchTerms || [])].filter(isPresent),
-    link: `/actueel/veiligheidsregio/${x.code}`,
   })),
 ].sort((a, b) => a.name.localeCompare(b.name));

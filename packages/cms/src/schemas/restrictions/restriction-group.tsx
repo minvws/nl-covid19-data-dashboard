@@ -7,7 +7,7 @@ import {
   restrictionIcons,
 } from '../../components/icons/icons';
 
-export default {
+export const restrictionGroup = {
   title: 'Maatregel groep',
   name: 'restrictionGroup',
   type: 'object',

@@ -211,7 +211,7 @@ export function TimeSeriesChart<
     [values, today]
   );
 
-  const [handleHover, hoverState] = useHoverState({
+  const [hoverState, chartEventHandlers] = useHoverState({
     values,
     padding,
     seriesConfig,
@@ -297,8 +297,10 @@ export function TimeSeriesChart<
             height={height}
             padding={padding}
             ariaLabelledBy={ariaLabelledBy || ''}
-            onHover={handleHover}
             onClick={handleClick}
+            onHover={chartEventHandlers.handleHover}
+            onFocus={chartEventHandlers.handleFocus}
+            onBlur={chartEventHandlers.handleBlur}
           >
             <Axes
               bounds={bounds}
@@ -398,7 +400,6 @@ export function TimeSeriesChart<
           )}
         </Box>
       </ResponsiveContainer>
-
       {!disableLegend && legendItems.length > 0 && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />

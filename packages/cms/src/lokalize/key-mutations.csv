@@ -24,3 +24,5 @@ timestamp,action,key
 2021-05-07T11:41:30.154Z,add,common.modal_close
 2021-05-07T11:42:01.546Z,add,common.grafiek_singular
 2021-05-07T11:42:17.279Z,add,common.grafiek_plural
+2021-05-10T11:07:55.275Z,add,common.risiconiveau_singular
+2021-05-10T11:08:57.458Z,add,common.risiconiveau_plural
