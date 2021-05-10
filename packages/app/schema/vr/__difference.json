@@ -45,8 +45,8 @@
     "elderly_at_home__positive_tested_daily_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "deceased_rivm__covid_daily": {
-      "$ref": "#/definitions/diff_integer"
+    "deceased_rivm__covid_daily_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
@@ -64,7 +64,7 @@
     "disability_care__newly_infected_people_moving_average",
     "disability_care__infected_locations_total_moving_average",
     "elderly_at_home__positive_tested_daily_moving_average",
-    "deceased_rivm__covid_daily"
+    "deceased_rivm__covid_daily_moving_average"
   ],
   "additionalProperties": false,
   "definitions": {

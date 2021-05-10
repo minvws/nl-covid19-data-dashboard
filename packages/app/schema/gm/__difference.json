@@ -15,15 +15,15 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "deceased_rivm__covid_daily": {
-      "$ref": "#/definitions/diff_integer"
+    "deceased_rivm__covid_daily_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
     "tested_overall__infected_per_100k_moving_average",
     "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
-    "deceased_rivm__covid_daily"
+    "deceased_rivm__covid_daily_moving_average"
   ],
   "additionalProperties": false,
   "definitions": {
