@@ -37,13 +37,13 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
       borderBottomStyle="solid"
       borderBottomWidth="1px"
     >
-      <LinkBox color={escalationColor}>
+      <VrLinkCell color={escalationColor}>
         <Link href={reverserRouter.vr.risiconiveau(vrData.vrCode)}>
           <StyledLink>
             <InlineText>{vrData.safetyRegionName}</InlineText>
           </StyledLink>
         </Link>
-      </LinkBox>
+      </VrLinkCell>
       <Box display="flex" flex="2">
         <BarScaleCell
           value={vrData.data.positive_tested_per_100k}
@@ -68,7 +68,13 @@ const BarScaleCell = ({
   const { formatNumber } = useIntl();
 
   return (
-    <Box flex="1" display="flex" alignItems="center" width="100%">
+    <Box
+      flex="1"
+      display="flex"
+      alignItems="flex-start"
+      justifyItems="center"
+      width="100%"
+    >
       <Box
         flex="0.1"
         display={{ _: 'block', lg: 'flex' }}
@@ -99,7 +105,7 @@ const StyledLink = styled.a(
   })
 );
 
-const LinkBox = styled.div<{ color: string }>((x) =>
+const VrLinkCell = styled.div<{ color: string }>((x) =>
   css({
     flex: 0.8,
     mt: asResponsiveArray({ _: 4, lg: 0 }),

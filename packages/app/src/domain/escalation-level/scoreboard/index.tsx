@@ -25,12 +25,16 @@ export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
       borderBottomWidth="1px"
     >
       {data.map((lvl) => (
-        <Collapsible level={lvl.escalatationLevel} count={lvl.vrData.length}>
+        <Collapsible
+          level={lvl.escalatationLevel}
+          count={lvl.vrData.length}
+          key={lvl.escalatationLevel}
+        >
           <Box bg="tileGray" p={-2}>
             <Box p={4}>
               <Headers />
               {lvl.vrData.map((vr) => (
-                <SafetyRegionRow vrData={vr} />
+                <SafetyRegionRow vrData={vr} key={vr.vrCode} />
               ))}
             </Box>
           </Box>

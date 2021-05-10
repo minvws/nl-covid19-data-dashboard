@@ -69,7 +69,7 @@ const Panel = styled((props) => <div {...props} />)((props) =>
   })
 );
 
-const Header = styled((props) => <button {...props} />)((props) =>
+const Header = styled.button<{ showChevron: boolean; open: boolean }>((props) =>
   css({
     display: 'flex',
     alignItems: 'center',
@@ -92,7 +92,7 @@ const Header = styled((props) => <button {...props} />)((props) =>
           backgroundImage: 'url("/images/chevron-down.svg")',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          transform: props.open ? undefined : 'rotate(-90deg)',
+          transform: props.open ? 'rotate(0deg)' : 'rotate(-90deg)',
           content: '""',
           flex: '0 0 3em',
           height: '1.25rem',
