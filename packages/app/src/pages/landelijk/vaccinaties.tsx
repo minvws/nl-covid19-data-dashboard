@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
