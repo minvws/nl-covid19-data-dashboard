@@ -3,13 +3,22 @@
   "title": "regional_difference",
   "type": "object",
   "properties": {
+    "tested_overall__infected_per_100k": {
+      "$ref": "#/definitions/diff_decimal"
+    },
     "tested_overall__infected_per_100k_moving_average": {
       "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_overall__infected": {
+      "$ref": "#/definitions/diff_integer"
     },
     "tested_overall__infected_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_ggd_average__tested_total_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "tested_ggd_average__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_ggd_average__infected_percentage_moving_average": {
@@ -21,11 +30,17 @@
     "tested_ggd_daily__infected_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
+    "hospital_nice__admissions_on_date_of_reporting": {
+      "$ref": "#/definitions/diff_integer"
+    },
     "hospital_nice__admissions_on_date_of_reporting_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
+    },
+    "nursing_home__newly_infected_people": {
+      "$ref": "#/definitions/diff_integer"
     },
     "nursing_home__newly_infected_people_moving_average": {
       "$ref": "#/definitions/diff_decimal"
@@ -33,8 +48,14 @@
     "nursing_home__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
+    "nursing_home__deceased_daily": {
+      "$ref": "#/definitions/diff_integer"
+    },
     "nursing_home__deceased_daily_moving_average": {
       "$ref": "#/definitions/diff_decimal"
+    },
+    "disability_care__newly_infected_people": {
+      "$ref": "#/definitions/diff_integer"
     },
     "disability_care__newly_infected_people_moving_average": {
       "$ref": "#/definitions/diff_decimal"
@@ -42,28 +63,44 @@
     "disability_care__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
+    "elderly_at_home__positive_tested_daily": {
+      "$ref": "#/definitions/diff_integer"
+    },
     "elderly_at_home__positive_tested_daily_moving_average": {
       "$ref": "#/definitions/diff_decimal"
+    },
+    "deceased_rivm__covid_daily": {
+      "$ref": "#/definitions/diff_integer"
     },
     "deceased_rivm__covid_daily_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
+    "tested_overall__infected_per_100k",
     "tested_overall__infected_per_100k_moving_average",
+    "tested_overall__infected",
     "tested_overall__infected_moving_average",
+    "hospital_nice__admissions_on_date_of_reporting",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "tested_ggd_daily__tested_total",
     "tested_ggd_daily__infected_percentage",
+    "tested_ggd_average__tested_total",
     "tested_ggd_average__tested_total_moving_average",
+    "tested_ggd_average__infected_percentage",
     "tested_ggd_average__infected_percentage_moving_average",
     "sewer__average",
+    "nursing_home__newly_infected_people",
     "nursing_home__newly_infected_people_moving_average",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
+    "disability_care__newly_infected_people",
     "disability_care__newly_infected_people_moving_average",
+    "disability_care__infected_locations_total",
     "disability_care__infected_locations_total_moving_average",
+    "elderly_at_home__positive_tested_daily",
     "elderly_at_home__positive_tested_daily_moving_average",
+    "deceased_rivm__covid_daily",
     "deceased_rivm__covid_daily_moving_average"
   ],
   "additionalProperties": false,
