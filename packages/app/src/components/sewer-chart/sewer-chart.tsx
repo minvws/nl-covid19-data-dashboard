@@ -170,16 +170,12 @@ export function SewerChart(props: SewerChartProps) {
   );
 
   /**
-   * Manually set Y axis values, as per design.
-   * The middle calculation finds first the difference between the highest
-   * and the lowest. Then divide it by 2 and add the lowest value to find value
-   * exact in between.
+   * Manually set Y axis values, as per design
    */
   const tickValuesY = useMemo(
     () => [
       scales.yScale.domain()[0],
-      (scales.yScale.domain()[1] - scales.yScale.domain()[0]) / 2 +
-        scales.yScale.domain()[0],
+      scales.yScale.domain()[1] / 2,
       scales.yScale.domain()[1],
     ],
     [scales.yScale]
@@ -332,11 +328,10 @@ export function SewerChart(props: SewerChartProps) {
             <AxisLeft
               scale={scales.yScale}
               tickValues={tickValuesY}
-              numTicks={tickValuesY.length}
-              tickFormat={(x) => formatNumber(x as number)}
               hideTicks
               hideAxisLine
               stroke={colors.data.axis}
+              tickFormat={(x) => formatNumber(x as number)}
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
                 fontSize: 12,
