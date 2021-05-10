@@ -3,16 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { equalsRootProperty } from './keywords';
 
-/**
- * Creates an Ajv ValidateFunction for the given schema
- *
- * @returns A Promise object that will resolve to a ValidateFunction.
- */
-export function createValidateFunction(schemaPath: string) {
-  const basePath = path.dirname(schemaPath);
-  let schema = null;
+export function loadRootSchema(schemaPath: string) {
   try {
-    schema = JSON.parse(
+    return JSON.parse(
       fs.readFileSync(schemaPath, {
         encoding: 'utf8',
       })
@@ -20,14 +13,39 @@ export function createValidateFunction(schemaPath: string) {
   } catch (e) {
     throw new Error(`Error while parsing file ${schemaPath}:\n${e.message}`);
   }
+}
 
+/**
+ * Creates an Ajv ValidateFunction for the given schema or schema filename
+ *
+ * @returns A Promise object that will resolve to a ValidateFunction.
+ */
+export function createValidateFunction(
+  schemaOrFilename: string | object,
+  schemaBasePath: string
+) {
+  const schema =
+    typeof schemaOrFilename === 'string'
+      ? loadRootSchema(path.join(schemaBasePath, schemaOrFilename))
+      : schemaOrFilename;
+
+  return compileValidator(schema, loadSchema.bind(null, schemaBasePath));
+}
+
+function compileValidator(
+  rootSchema: object,
+  loadSchema: (
+    uri: string,
+    cb?: (err: Error, schema: object) => void
+  ) => PromiseLike<object | boolean>
+) {
   const validator = new Ajv({
-    loadSchema: loadSchema.bind(null, basePath),
+    loadSchema: loadSchema,
     $data: true,
     allErrors: true,
   });
   validator.addKeyword('equalsRootProperty', equalsRootProperty);
-  return validator.compileAsync(schema).then((validate) => {
+  return validator.compileAsync(rootSchema).then((validate) => {
     return validate;
   }) as Promise<ValidateFunction>;
 }

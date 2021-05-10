@@ -126,6 +126,9 @@ const ElderlyAtHomeNationalPage = (
             timeframeOptions={['all', '5weeks']}
             title={text.section_positive_tested.line_chart_daily_title}
             metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+            description={
+              text.section_positive_tested.line_chart_daily_description
+            }
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -231,6 +234,7 @@ const ElderlyAtHomeNationalPage = (
             timeframeOptions={['all', '5weeks']}
             title={text.section_deceased.line_chart_daily_title}
             metadata={{ source: text.section_positive_tested.bronnen.rivm }}
+            description={text.section_deceased.line_chart_daily_description}
           >
             {(timeframe) => (
               <TimeSeriesChart

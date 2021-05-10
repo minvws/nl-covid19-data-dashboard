@@ -7,6 +7,7 @@ import { Heading, Text } from '~/components/typography';
 import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 interface TopicalVaccineProps {
   data: Pick<National, 'vaccine_administered_total' | 'vaccine_coverage'>;
 }
@@ -14,6 +15,7 @@ interface TopicalVaccineProps {
 export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
   const estimated = data.vaccine_administered_total.last_value.estimated;
 
+  const reverseRouter = useReverseRouter();
   const { siteText, formatNumber } = useIntl();
 
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
@@ -33,7 +35,7 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
         fontSize="1.25rem"
       >
         <LinkWithIcon
-          href={'/landelijk/vaccinaties'}
+          href={reverseRouter.nl.vaccinaties()}
           icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"

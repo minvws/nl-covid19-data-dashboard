@@ -2,7 +2,7 @@ import { UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { CustomValidationFunction } from './types';
+import { CustomValidationFunction, JSONObject, JSONValue } from './types';
 
 export function createChoroplethValidation(
   choroplethCollectionPath: string,
@@ -44,9 +44,9 @@ export function createChoroplethValidation(
  */
 export const validateChoroplethValues = (
   collectionJsonFilename: string,
-  collectionJson: Record<string, any>, // The GM_COLLECTION.sjon or VR_COLLECTION.json
+  collectionJson: JSONObject, // The GM_COLLECTION.sjon or VR_COLLECTION.json
   codeProperty: string, //the gmcode or vrcode property name
-  input: Record<string, any> //GM***.json or VR***.json
+  input: JSONObject //GM***.json or VR***.json
 ): string[] | undefined => {
   const commonDataProperties = getCommonDataProperties(input, collectionJson);
 
@@ -54,13 +54,18 @@ export const validateChoroplethValues = (
 
   const results = commonDataProperties
     .map((propertyName) => {
-      const collectionValue = collectionJson[propertyName].find(
+      const collectionValue = (collectionJson[
+        propertyName
+      ] as JSONValue[])?.find(
         (x: any) => x[codeProperty] === code
-      );
+      ) as UnknownObject;
+
       if (!collectionValue) {
         return `No item with property ${codeProperty} == ${code} was found in the ${propertyName} collection (${collectionJsonFilename})`;
       }
-      const lastValue = input[propertyName].last_value;
+
+      const lastValue = (input[propertyName] as { last_value: UnknownObject })
+        .last_value;
       return validateCommonPropertyEquality(
         lastValue,
         collectionValue,
