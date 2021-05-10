@@ -1,10 +1,4 @@
-import {
-  ReactNode,
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import { useCallbackRef } from 'use-callback-ref';
 import { Box } from '~/components/base';
@@ -20,7 +14,7 @@ import { Box } from '~/components/base';
  * container. Client side this may become larger when the parent component gives
  * more height.
  */
-export function useResponsiveContainer(initialWidth = 0, minHeight = 0) {
+export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
   const {
     height: measuredHeight = minHeight,
     width: measuredWidth = initialWidth,
@@ -54,6 +48,7 @@ type Size = {
   width: number | undefined;
   height: number | undefined;
 };
+
 function useResizeObserver<T extends HTMLElement | SVGSVGElement>() {
   const [size, setSize] = useState<Size>({
     width: undefined,
@@ -84,7 +79,7 @@ function useResizeObserver<T extends HTMLElement | SVGSVGElement>() {
     if (node) observer.current?.observe(node);
   }, [connect, node]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     observe();
     return () => disconnect();
   }, [disconnect, observe]);
