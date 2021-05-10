@@ -300,7 +300,7 @@ export function SewerChart(props: SewerChartProps) {
               tickFormat={(x) => formatDate(x as number, 'axis')}
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
-                fontSize: 14,
+                fontSize: 12,
                 textAnchor: 'middle',
               })}
             />
@@ -339,7 +339,7 @@ export function SewerChart(props: SewerChartProps) {
               stroke={colors.data.axis}
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
-                fontSize: 14,
+                fontSize: 12,
                 dx: 0,
                 textAnchor: 'end',
                 verticalAnchor: 'middle',

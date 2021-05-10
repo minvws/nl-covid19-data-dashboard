@@ -21,6 +21,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/type';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
@@ -83,9 +84,10 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
   const { children, data, safetyRegionName } = props;
 
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
-  const { code } = router.query;
+  const code = router.query.code as string;
 
   const isMainRoute =
     router.route === '/veiligheidsregio' ||
@@ -134,7 +136,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
 
                 <Menu>
                   <MetricMenuButtonLink
-                    href={`/veiligheidsregio/${code}/maatregelen`}
+                    href={reverseRouter.vr.maatregelen(code)}
                     title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
                     buttonVariant="top"
                     subtitle={
@@ -142,7 +144,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     }
                   />
                   <MetricMenuButtonLink
-                    href={`/veiligheidsregio/${code}/risiconiveau`}
+                    href={reverseRouter.vr.risiconiveau(code)}
                     title={siteText.veiligheidsregio_layout.headings.inschaling}
                     buttonVariant="bottom"
                   >
@@ -161,7 +163,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     }
                   >
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/positief-geteste-mensen`}
+                      href={reverseRouter.vr.positiefGetesteMensen(code)}
                       icon={<GetestIcon />}
                       title={
                         siteText.veiligheidsregio_positief_geteste_personen
@@ -184,7 +186,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     </MetricMenuItemLink>
 
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/sterfte`}
+                      href={reverseRouter.vr.sterfte(code)}
                       icon={<VirusIcon />}
                       title={siteText.veiligheidsregio_sterfte.titel_sidebar}
                     >
@@ -204,7 +206,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     }
                   >
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/ziekenhuis-opnames`}
+                      href={reverseRouter.vr.ziekenhuisopnames(code)}
                       icon={<Ziekenhuis />}
                       title={
                         siteText.veiligheidsregio_ziekenhuisopnames_per_dag
@@ -228,7 +230,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     }
                   >
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/verpleeghuiszorg`}
+                      href={reverseRouter.vr.verpleeghuiszorg(code)}
                       icon={<Verpleeghuiszorg />}
                       title={
                         siteText.veiligheidsregio_verpleeghuis_besmette_locaties
@@ -246,7 +248,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     </MetricMenuItemLink>
 
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/gehandicaptenzorg`}
+                      href={reverseRouter.vr.gehandicaptenzorg(code)}
                       icon={<Gehandicaptenzorg />}
                       title={
                         siteText.gehandicaptenzorg_besmette_locaties
@@ -264,7 +266,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     </MetricMenuItemLink>
 
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/thuiswonende-ouderen`}
+                      href={reverseRouter.vr.thuiswonendeOuderen(code)}
                       icon={<ElderlyIcon />}
                       title={
                         siteText.veiligheidsregio_thuiswonende_ouderen
@@ -287,7 +289,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     }
                   >
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/rioolwater`}
+                      href={reverseRouter.vr.rioolwater(code)}
                       icon={<RioolwaterMonitoring />}
                       title={
                         siteText.veiligheidsregio_rioolwater_metingen
@@ -310,7 +312,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                     title={siteText.veiligheidsregio_layout.headings.gedrag}
                   >
                     <MetricMenuItemLink
-                      href={`/veiligheidsregio/${code}/gedrag`}
+                      href={reverseRouter.vr.gedrag(code)}
                       icon={<Gedrag />}
                       title={siteText.regionaal_gedrag.sidebar.titel}
                     >

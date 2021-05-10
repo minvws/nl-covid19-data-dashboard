@@ -73,7 +73,7 @@ export const lokalizeText = {
        * list, but the path field is cleaner when browsing texts because it
        * avoids a lot of string duplication.
        */
-      title: 'path',
+      title: 'key',
       subtitle: 'text.nl',
     },
   },

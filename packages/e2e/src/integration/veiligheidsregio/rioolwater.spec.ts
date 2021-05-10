@@ -1,21 +1,20 @@
-// import { RegionalContext } from '~/integration/types';
-// import { formatNumber } from '@corona-dashboard/common';
+import { RegionalContext } from '~/integration/types';
 
-// context('Regionaal - Rioolwater', () => {
-//   before(() => {
-//     cy.beforeRegionTests('rioolwater');
-//   });
+context('Regionaal - Rioolwater', () => {
+  before(() => {
+    cy.beforeRegionTests('rioolwater');
+  });
 
-//   it('Should show the correct KPI values', function (this: RegionalContext) {
-//     const lastValue = this.regionData.sewer.last_value;
+  it('Should show the correct KPI values', function (this: RegionalContext) {
+    const lastValue = this.regionData.sewer.last_value;
 
-//     const kpiTestInfo = {
-//       riool_normalized: formatNumber(lastValue.average),
-//       total_installation_count: formatNumber(
-//         lastValue.total_installation_count
-//       ),
-//     };
+    const kpiTestInfo = {
+      average: cy.formatters.formatNumber(lastValue.average),
+      total_number_of_samples: cy.formatters.formatNumber(
+        lastValue.total_number_of_samples
+      ),
+    };
 
-//     cy.checkKpiValues(kpiTestInfo);
-//   });
-// });
+    cy.checkKpiValues(kpiTestInfo);
+  });
+});

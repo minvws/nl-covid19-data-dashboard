@@ -1,4 +1,4 @@
-export default {
+export const roadmap = {
   name: 'roadmap',
   type: 'document',
   title: 'Routekaart',

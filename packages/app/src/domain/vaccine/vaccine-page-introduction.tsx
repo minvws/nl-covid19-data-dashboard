@@ -40,7 +40,6 @@ export function VaccinePageIntroduction({
   pageLinksTitle,
 }: VaccinePageIntroductionProps) {
   const { siteText, formatPercentage, formatDate } = useIntl();
-
   const text = siteText.vaccinaties;
 
   const roundedMillion =
