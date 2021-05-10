@@ -31,7 +31,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -160,6 +160,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
+            description={text.linechart_description}
           >
             {(timeframe) => (
               <SewerChart

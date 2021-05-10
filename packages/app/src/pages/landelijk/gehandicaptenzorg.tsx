@@ -104,6 +104,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={positiveTestedPeopleText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -135,6 +136,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       label:
                         positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'newly_infected_people_moving_average',
+                      ],
                     },
                   ],
                 }}
@@ -223,6 +227,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               source: infectedLocationsText.bronnen.rivm,
             }}
             timeframeOptions={['all', '5weeks']}
+            description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -275,6 +280,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: locationDeaths.bronnen.rivm }}
             title={locationDeaths.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={locationDeaths.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -304,6 +310,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label: locationDeaths.line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'deceased_daily_moving_average',
+                      ],
                     },
                   ],
                 }}

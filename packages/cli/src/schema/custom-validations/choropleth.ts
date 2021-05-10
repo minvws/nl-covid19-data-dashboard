@@ -2,10 +2,7 @@ import { UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-
-export type CustomValidationFunction = (
-  input: Record<string, unknown>
-) => string[] | undefined;
+import { CustomValidationFunction } from './types';
 
 export function createChoroplethValidation(
   choroplethCollectionPath: string,
