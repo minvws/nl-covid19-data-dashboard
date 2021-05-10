@@ -218,7 +218,7 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   });
 
-  const valueMinWidth = useValueWidth(seriesConfig, values, isPercentage);
+  const valueMinWidth = useValueWidth(values, seriesConfig, isPercentage);
 
   useEffect(() => {
     if (hoverState) {
