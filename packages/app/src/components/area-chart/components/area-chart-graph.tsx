@@ -218,12 +218,12 @@ export function AreaChartGraph<T extends TrendValue, K extends TrendValue>(
           onMouseMove={handleHover}
           onMouseLeave={handleHover}
         />
-      </Group>
 
-      {/**
-       * Render the dividers under the touch/mouse bar so it's always possible to interact with the graph
-       */}
-      {children}
+        {/**
+         * Render the dividers under the touch/mouse bar so it's always possible to interact with the graph
+         */}
+        {children}
+      </Group>
     </StyledSvg>
   );
 }
