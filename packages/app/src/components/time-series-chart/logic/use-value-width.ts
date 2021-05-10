@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { SeriesConfig } from './series';
-import { useStringFormatting } from './use-string-formatting';
+import { useFormatSeriesValue } from './use-format-series-value';
 import { TimestampedValue } from '@corona-dashboard/common';
 
 export function useValueWidth<T extends TimestampedValue>(
@@ -8,13 +8,15 @@ export function useValueWidth<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   isPercentage: boolean | undefined
 ) {
-  const { formatSeriesValue } = useStringFormatting();
+  const formatSeriesValue = useFormatSeriesValue();
   const valueMaxWidth = useMemo(() => {
     const valueLengths: number[] = [];
     seriesConfig.forEach((config) => {
       return valueLengths.push(
-        ...values.map(
-          (value) => formatSeriesValue(value, config, isPercentage).length
+        Math.max(
+          ...values.map(
+            (value) => formatSeriesValue(value, config, isPercentage).length
+          )
         )
       );
     });

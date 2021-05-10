@@ -2,13 +2,9 @@ import { useIntl } from '~/intl';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { SeriesConfig } from './series';
-import {
-  isDateSpanValue,
-  isDateValue,
-  TimestampedValue,
-} from '@corona-dashboard/common';
+import { TimestampedValue } from '@corona-dashboard/common';
 
-export function useStringFormatting() {
+export function useFormatSeriesValue() {
   const intl = useIntl();
 
   return useMemo(() => {
@@ -53,26 +49,6 @@ export function useStringFormatting() {
       }
     }
 
-    const getDateStringFromValue = (value: TimestampedValue) => {
-      if (isDateValue(value)) {
-        return intl.formatDateFromSeconds(value.date_unix);
-      } else if (isDateSpanValue(value)) {
-        const dateStartString = intl.formatDateFromSeconds(
-          value.date_start_unix,
-          'axis'
-        );
-        const dateEndString = intl.formatDateFromSeconds(
-          value.date_end_unix,
-          'axis'
-        );
-
-        return `${dateStartString} - ${dateEndString}`;
-      }
-    };
-
-    return {
-      getDateStringFromValue,
-      formatSeriesValue,
-    };
+    return formatSeriesValue;
   }, [intl]);
 }

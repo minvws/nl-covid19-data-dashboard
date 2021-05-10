@@ -1,11 +1,16 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import {
+  isDateSpanValue,
+  isDateValue,
+  TimestampedValue,
+} from '@corona-dashboard/common';
+import { useIntl } from '~/intl';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { SeriesConfig, useStringFormatting } from '../../logic';
+import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { TooltipData } from './types';
 import { colors } from '~/style/theme';
@@ -28,7 +33,23 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     valueMinWidth,
   } = tooltipData;
 
-  const { formatSeriesValue, getDateStringFromValue } = useStringFormatting();
+  const { formatDateFromSeconds } = useIntl();
+
+  const formatSeriesValue = useFormatSeriesValue();
+
+  const getDateStringFromValue = (value: TimestampedValue) => {
+    if (isDateValue(value)) {
+      return formatDateFromSeconds(value.date_unix);
+    } else if (isDateSpanValue(value)) {
+      const dateStartString = formatDateFromSeconds(
+        value.date_start_unix,
+        'axis'
+      );
+      const dateEndString = formatDateFromSeconds(value.date_end_unix, 'axis');
+
+      return `${dateStartString} - ${dateEndString}`;
+    }
+  };
 
   const dateString = getDateStringFromValue(value);
 
