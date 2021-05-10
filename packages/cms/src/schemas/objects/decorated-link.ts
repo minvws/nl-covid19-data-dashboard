@@ -1,5 +1,6 @@
-export default {
+export const decoratedLink = {
   type: 'object',
+  title: 'Een link voorzien van een image, categorie en label',
   name: 'decoratedLink',
   preview: {
     select: {

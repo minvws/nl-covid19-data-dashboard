@@ -1,6 +1,6 @@
 import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
 
-export default {
+export const escalationLevelPage = {
   title: 'Inschaling risiconiveau',
   name: 'escalationLevelPage',
   type: 'document',

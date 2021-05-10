@@ -1,7 +1,7 @@
-export default {
+export const veelgesteldeVragen = {
   name: 'veelgesteldeVragen',
   type: 'document',
-  title: 'Veelgestelde vragen',
+  title: 'Veelgestelde vragen pagina',
   fields: [
     {
       name: 'title',
@@ -19,7 +19,7 @@ export default {
       title: 'Vragen',
       description:
         'Je kan veel gestelde vragen toevoegen, de volgorde veranderen, de tekst bijwerken of verwijderen',
-      of: [{ type: 'faqQuestion' }],
+      of: [{ type: 'reference', to: { type: 'faqQuestion' } }],
     },
   ],
   preview: {
