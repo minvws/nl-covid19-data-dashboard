@@ -216,9 +216,9 @@ export interface NationalDifference {
   nursing_home__deceased_daily_moving_average: DifferenceDecimal;
   reproduction__index_average: DifferenceDecimal;
   corona_melder_app__warned_daily: DifferenceInteger;
-  disability_care__newly_infected_people: DifferenceInteger;
+  disability_care__newly_infected_people_moving_average: DifferenceDecimal;
   disability_care__infected_locations_total: DifferenceInteger;
-  elderly_at_home__positive_tested_daily: DifferenceInteger;
+  elderly_at_home__positive_tested_daily_moving_average: DifferenceDecimal;
   deceased_rivm__covid_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {
@@ -852,10 +852,15 @@ export interface RegionalDifference {
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people_moving_average: DifferenceDecimal;
   nursing_home__infected_locations_total: DifferenceInteger;
+<<<<<<< HEAD
   nursing_home__deceased_daily_moving_average: DifferenceDecimal;
   disability_care__newly_infected_people: DifferenceInteger;
+=======
+  nursing_home__deceased_daily: DifferenceInteger;
+  disability_care__newly_infected_people_moving_average: DifferenceDecimal;
+>>>>>>> topic/schema-7-day-average-vulnerable-people
   disability_care__infected_locations_total: DifferenceInteger;
-  elderly_at_home__positive_tested_daily: DifferenceInteger;
+  elderly_at_home__positive_tested_daily_moving_average: DifferenceDecimal;
   deceased_rivm__covid_daily: DifferenceInteger;
 }
 export interface DifferenceDecimal {

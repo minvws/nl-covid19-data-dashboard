@@ -60,14 +60,14 @@
     "corona_melder_app__warned_daily": {
       "$ref": "#/definitions/diff_integer"
     },
-    "disability_care__newly_infected_people": {
-      "$ref": "#/definitions/diff_integer"
+    "disability_care__newly_infected_people_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "disability_care__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "elderly_at_home__positive_tested_daily": {
-      "$ref": "#/definitions/diff_integer"
+    "elderly_at_home__positive_tested_daily_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"
@@ -93,9 +93,9 @@
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily_moving_average",
     "corona_melder_app__warned_daily",
-    "disability_care__newly_infected_people",
+    "disability_care__newly_infected_people_moving_average",
     "disability_care__infected_locations_total",
-    "elderly_at_home__positive_tested_daily",
+    "elderly_at_home__positive_tested_daily_moving_average",
     "deceased_rivm__covid_daily"
   ],
   "additionalProperties": false,
