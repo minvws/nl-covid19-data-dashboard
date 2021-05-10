@@ -47,6 +47,14 @@ export function TooltipSeriesList<T extends TimestampedValue>({
       )}
       <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
         {seriesConfig.map((x, index) => {
+          /**
+           * The key is unique for every date to make sure a screenreader
+           * will read `[label]: [value]`. Otherwise it would read the
+           * changed content which would only be `[value]` and thus miss some
+           * context.
+           */
+          const key = index + getDateUnixString(value);
+
           switch (x.type) {
             case 'stacked-area':
             case 'line':
@@ -54,7 +62,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             case 'bar':
               return (
                 <TooltipListItem
-                  key={index}
+                  key={key}
                   icon={<SeriesIcon config={x} />}
                   label={x.shortLabel ?? x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
@@ -66,7 +74,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             case 'range':
               return (
                 <TooltipListItem
-                  key={index}
+                  key={key}
                   icon={<SeriesIcon config={x} />}
                   label={x.shortLabel ?? x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
@@ -80,7 +88,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
             case 'invisible':
               return (
                 <TooltipListItem
-                  key={index}
+                  key={key}
                   label={x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
@@ -171,3 +179,9 @@ export const TooltipList = styled.ol<{
     },
   })
 );
+
+function getDateUnixString(value: TimestampedValue) {
+  return 'date_unix' in value
+    ? `${value.date_unix}`
+    : `${value.date_start_unix}-${value.date_end_unix}`;
+}

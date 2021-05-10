@@ -8,6 +8,7 @@
  * attempt to render normal DOM components like the Markers or Tooltip
  * components as part of its children.
  */
+import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
 import { Padding } from '../logic';
@@ -21,6 +22,8 @@ interface ChartContainerProps {
   ariaLabelledBy: string;
   onHover?: (event: Event) => void;
   onClick?: (event: Event) => void;
+  onFocus?: (event: React.FocusEvent) => void;
+  onBlur?: (event: React.FocusEvent) => void;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
@@ -33,6 +36,8 @@ export function ChartContainer({
   children,
   onHover,
   onClick,
+  onFocus,
+  onBlur,
 }: ChartContainerProps) {
   return (
     <svg
@@ -52,17 +57,20 @@ export function ChartContainer({
       viewBox={`-0.5 -0.5 ${width} ${height}`}
       role="img"
       aria-labelledby={ariaLabelledBy}
-      style={{
+      css={css({
         touchAction: 'pan-y',
         userSelect: 'none',
         width: '100%',
         overflow: 'visible',
-      }}
+      })}
       onTouchStart={onHover}
       onTouchMove={onHover}
       onMouseMove={onHover}
       onMouseLeave={onHover}
+      onFocus={onFocus}
+      onBlur={onBlur}
       onClick={onClick}
+      tabIndex={onFocus ? 0 : -1}
     >
       <Group left={padding.left} top={padding.top}>
         {children}
