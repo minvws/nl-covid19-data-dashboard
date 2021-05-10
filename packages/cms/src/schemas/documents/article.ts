@@ -1,6 +1,6 @@
 import { ARTICLE_FIELDS } from '../fields/article-fields';
 
-export default {
+export const article = {
   title: 'Artikel',
   name: 'article',
   type: 'document',

@@ -1,4 +1,4 @@
-export default {
+export const milestone = {
   title: 'Single milestone',
   name: 'milestone',
   type: 'object',
@@ -17,14 +17,14 @@ export default {
   preview: {
     select: {
       title: 'title.nl',
-      date: 'date'
+      date: 'date',
     },
-    prepare(selection: { title: string; date: string}) {
-      const {title, date} = selection
+    prepare(selection: { title: string; date: string }) {
+      const { title, date } = selection;
       return {
         title: title,
-        subtitle: date
-      }
-    }
-  }
+        subtitle: date,
+      };
+    },
+  },
 };
