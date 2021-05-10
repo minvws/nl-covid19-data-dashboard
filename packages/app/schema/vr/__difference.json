@@ -27,26 +27,26 @@
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "nursing_home__newly_infected_people_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+    "nursing_home__newly_infected_people": {
+      "$ref": "#/definitions/diff_integer"
     },
     "nursing_home__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "nursing_home__deceased_daily_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+    "nursing_home__deceased_daily": {
+      "$ref": "#/definitions/diff_integer"
     },
-    "disability_care__newly_infected_people_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+    "disability_care__newly_infected_people": {
+      "$ref": "#/definitions/diff_integer"
     },
     "disability_care__infected_locations_total": {
       "$ref": "#/definitions/diff_integer"
     },
-    "elderly_at_home__positive_tested_daily_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+    "elderly_at_home__positive_tested_daily": {
+      "$ref": "#/definitions/diff_integer"
     },
-    "deceased_rivm__covid_daily_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+    "deceased_rivm__covid_daily": {
+      "$ref": "#/definitions/diff_integer"
     }
   },
   "required": [
@@ -58,13 +58,13 @@
     "tested_ggd_average__tested_total_moving_average",
     "tested_ggd_average__infected_percentage_moving_average",
     "sewer__average",
-    "nursing_home__newly_infected_people_moving_average",
+    "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
-    "disability_care__newly_infected_people_moving_average",
+    "disability_care__newly_infected_people",
     "disability_care__infected_locations_total_moving_average",
-    "elderly_at_home__positive_tested_daily_moving_average",
-    "deceased_rivm__covid_daily_moving_average"
+    "elderly_at_home__positive_tested_daily",
+    "deceased_rivm__covid_daily"
   ],
   "additionalProperties": false,
   "definitions": {
