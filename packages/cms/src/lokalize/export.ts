@@ -63,8 +63,6 @@ const localeDirectory = path.resolve(
     .filter((x) => x.action === 'delete')
     .map((x) => x.key);
 
-  console.log('deletedKeys', deletedKeys);
-
   let flatTexts = createFlatTexts(documents, deletedKeys);
 
   await writePrettyJson(
