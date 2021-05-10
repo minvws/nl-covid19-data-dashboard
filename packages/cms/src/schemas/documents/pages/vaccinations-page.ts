@@ -1,6 +1,6 @@
 import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
 
-export default {
+export const vaccinationsPage = {
   title: 'Vaccinaties pagina',
   name: 'vaccinationsPage',
   type: 'document',

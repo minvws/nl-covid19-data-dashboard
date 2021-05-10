@@ -47,7 +47,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('hospital_lcps', 'hospital_nice'),
+  selectNlPageMetricData('hospital_lcps'),
   createGetChoroplethData({
     vr: ({ hospital_nice }) => ({ hospital_nice }),
     gm: ({ hospital_nice }) => ({ hospital_nice }),
@@ -233,6 +233,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                         end: Infinity,
                         label: text.linechart_legend_underreported_titel,
                         shortLabel: siteText.common.incomplete,
+                        cutValuesForMetricProperties: [
+                          'admissions_on_date_of_admission_moving_average',
+                        ],
                       },
                     ],
                   }}

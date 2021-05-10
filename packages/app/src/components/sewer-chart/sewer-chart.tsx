@@ -33,9 +33,12 @@ import {
   useSewerStationSelectProps,
 } from './logic';
 
-export type SewerChartData =
-  | Pick<Regionaal, 'sewer' | 'sewer_per_installation'>
-  | Pick<Municipal, 'sewer' | 'sewer_per_installation'>;
+export interface SewerChartData {
+  sewer: Regionaal['sewer'] | Municipal['sewer'];
+  sewer_per_installation:
+    | Regionaal['sewer_per_installation']
+    | Municipal['sewer_per_installation'];
+}
 
 interface SewerChartProps {
   data: SewerChartData;
@@ -293,7 +296,7 @@ export function SewerChart(props: SewerChartProps) {
               tickFormat={(x) => formatDate(x as number, 'axis')}
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
-                fontSize: 14,
+                fontSize: 12,
                 textAnchor: 'middle',
               })}
             />
@@ -331,7 +334,7 @@ export function SewerChart(props: SewerChartProps) {
               tickFormat={(x) => formatNumber(x as number)}
               tickLabelProps={() => ({
                 fill: colors.data.axisLabels,
-                fontSize: 14,
+                fontSize: 12,
                 dx: 0,
                 textAnchor: 'end',
                 verticalAnchor: 'middle',

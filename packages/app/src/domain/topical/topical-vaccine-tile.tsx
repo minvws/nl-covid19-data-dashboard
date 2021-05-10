@@ -1,19 +1,21 @@
-import { National } from '@corona-dashboard/common';
+import { NlVaccineAdministeredTotal } from '@corona-dashboard/common';
+
 import Vaccinaties from '~/assets/vaccinaties.svg';
-import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Heading, Text } from '~/components/typography';
-import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { ArrowIconRight } from '~/components/arrow-icon';
+import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 interface TopicalVaccineProps {
-  data: Pick<National, 'vaccine_administered_total' | 'vaccine_coverage'>;
+  data: NlVaccineAdministeredTotal;
 }
 
 export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
-  const estimated = data.vaccine_administered_total.last_value.estimated;
-
+  const estimated = data.last_value.estimated;
+  const reverseRouter = useReverseRouter();
   const { siteText, formatNumber } = useIntl();
 
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
@@ -33,7 +35,7 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
         fontSize="1.25rem"
       >
         <LinkWithIcon
-          href={'/landelijk/vaccinaties'}
+          href={reverseRouter.nl.vaccinaties()}
           icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"
@@ -50,13 +52,6 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
       <Text mt={0}>
         {replaceComponentsInText(text.administered_tests, {
           administeredVaccines: <strong>{formatNumber(estimated)}</strong>,
-          vaccine_coverage: data.vaccine_coverage ? (
-            <strong>
-              `${data.vaccine_coverage.last_value.fully_vaccinated_percentage}%`
-            </strong>
-          ) : (
-            <></>
-          ),
         })}
       </Text>
 
@@ -66,7 +61,7 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
 
       <VaccineAdministrationsOverTimeChart
         title={text.title}
-        values={data.vaccine_administered_total.values}
+        values={data.values}
       />
     </Box>
   );

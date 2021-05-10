@@ -116,6 +116,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={positiveTestedPeopleText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -152,6 +153,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                         positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                       shortLabel:
                         positiveTestedPeopleText.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: [
+                        'newly_infected_people_moving_average',
+                      ],
                     },
                   ],
                 }}
@@ -213,6 +217,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -270,6 +275,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: deceased.bronnen.rivm }}
             title={deceased.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={deceased.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -300,6 +306,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label: deceased.line_chart_legend_inaccurate_label,
                       shortLabel: deceased.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: [
+                        'deceased_daily_moving_average',
+                      ],
                     },
                   ],
                 }}

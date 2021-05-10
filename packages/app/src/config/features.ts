@@ -21,16 +21,10 @@ export const features: Feature[] = [
   },
   {
     name: 'hospitalMovingAverage',
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     name: 'intensiveCareMovingAverage',
-    isEnabled: false,
-  },
-  {
-    name: 'vaccineCimsData',
-    isEnabled: false,
-    metricScopes: ['nl'],
-    metricName: 'vaccine_coverage',
+    isEnabled: true,
   },
 ];

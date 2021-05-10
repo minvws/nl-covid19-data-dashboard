@@ -1,8 +1,8 @@
 import fs from 'fs';
-import path from 'path';
 import { compile, JSONSchema } from 'json-schema-to-typescript';
-import { createValidateFunction } from '../schema';
+import path from 'path';
 import { schemaDirectory } from '../config';
+import { createValidateFunction } from '../schema';
 
 // The directory where the resulting data.d.ts file will be saved
 const outputDirectory = path.join(
@@ -48,7 +48,8 @@ async function generateTypeScriptFromSchema(schemaName: string) {
   };
 
   const validate = await createValidateFunction(
-    path.join(schemaDirectory, schemaName, `__index.json`)
+    '__index.json',
+    path.join(schemaDirectory, schemaName)
   );
 
   const typeDefinition = await compile(

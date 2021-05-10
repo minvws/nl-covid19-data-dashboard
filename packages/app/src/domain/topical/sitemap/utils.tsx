@@ -1,5 +1,6 @@
 import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 import { useIntl } from '~/intl';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkGroupProps } from './link-group';
 
 export function useDataSitemap(
@@ -11,21 +12,20 @@ export function useDataSitemap(
     | Pick<Municipal, 'sewer'>
 ): LinkGroupProps[] {
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
 
   if (base === 'gemeente' && code) {
-    const baseUrl = `/${base}/${code}`;
-
     return [
       {
         header: siteText.nationaal_layout.headings.besmettingen,
         links: [
           {
             text: siteText.positief_geteste_personen.titel_sidebar,
-            href: baseUrl + '/positief-geteste-mensen',
+            href: reverseRouter.gm.positiefGetesteMensen(code),
           },
           {
             text: siteText.sterfte.titel_sidebar,
-            href: baseUrl + '/sterfte',
+            href: reverseRouter.gm.sterfte(code),
           },
         ],
       },
@@ -34,7 +34,7 @@ export function useDataSitemap(
         links: [
           {
             text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
-            href: baseUrl + '/ziekenhuis-opnames',
+            href: reverseRouter.gm.ziekenhuisopnames(code),
           },
         ],
       },
@@ -43,7 +43,7 @@ export function useDataSitemap(
         links: [
           {
             text: siteText.rioolwater_metingen.titel_sidebar,
-            href: data?.sewer ? baseUrl + '/rioolwater' : undefined,
+            href: data?.sewer ? reverseRouter.gm.rioolwater(code) : undefined,
           },
         ],
       },
@@ -51,19 +51,17 @@ export function useDataSitemap(
   }
 
   if (base === 'veiligheidsregio' && code) {
-    const baseUrl = `/${base}/${code}`;
-
     return [
       {
         header: siteText.nationaal_layout.headings.besmettingen,
         links: [
           {
             text: siteText.positief_geteste_personen.titel_sidebar,
-            href: baseUrl + '/positief-geteste-mensen',
+            href: reverseRouter.vr.positiefGetesteMensen(code),
           },
           {
             text: siteText.sterfte.titel_sidebar,
-            href: baseUrl + '/sterfte',
+            href: reverseRouter.vr.sterfte(code),
           },
         ],
       },
@@ -72,7 +70,7 @@ export function useDataSitemap(
         links: [
           {
             text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
-            href: baseUrl + '/ziekenhuis-opnames',
+            href: reverseRouter.vr.ziekenhuisopnames(code),
           },
         ],
       },
@@ -81,15 +79,15 @@ export function useDataSitemap(
         links: [
           {
             text: siteText.verpleeghuis_besmette_locaties.titel_sidebar,
-            href: baseUrl + '/verpleeghuiszorg',
+            href: reverseRouter.vr.verpleeghuiszorg(code),
           },
           {
             text: siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar,
-            href: baseUrl + '/gehandicaptenzorg',
+            href: reverseRouter.vr.gehandicaptenzorg(code),
           },
           {
             text: siteText.thuiswonende_ouderen.titel_sidebar,
-            href: baseUrl + '/thuiswonende-ouderen',
+            href: reverseRouter.vr.thuiswonendeOuderen(code),
           },
         ],
       },
@@ -98,7 +96,7 @@ export function useDataSitemap(
         links: [
           {
             text: siteText.rioolwater_metingen.titel_sidebar,
-            href: baseUrl + '/rioolwater',
+            href: reverseRouter.vr.rioolwater(code),
           },
         ],
       },
@@ -107,7 +105,7 @@ export function useDataSitemap(
         links: [
           {
             text: siteText.nl_gedrag.sidebar.titel,
-            href: baseUrl + '/gedrag',
+            href: reverseRouter.vr.gedrag(code),
           },
         ],
       },
@@ -120,7 +118,7 @@ export function useDataSitemap(
       links: [
         {
           text: siteText.vaccinaties.titel_sidebar,
-          href: '/landelijk/vaccinaties',
+          href: reverseRouter.nl.vaccinaties(),
         },
       ],
     },
@@ -129,19 +127,19 @@ export function useDataSitemap(
       links: [
         {
           text: siteText.positief_geteste_personen.titel_sidebar,
-          href: '/landelijk/positief-geteste-mensen',
+          href: reverseRouter.nl.positiefGetesteMensen(),
         },
         {
           text: siteText.besmettelijke_personen.titel_sidebar,
-          href: '/landelijk/besmettelijke-mensen',
+          href: reverseRouter.nl.besmettelijkeMensen(),
         },
         {
           text: siteText.reproductiegetal.titel_sidebar,
-          href: '/landelijk/reproductiegetal',
+          href: reverseRouter.nl.reproductiegetal(),
         },
         {
           text: siteText.sterfte.titel_sidebar,
-          href: '/landelijk/sterfte',
+          href: reverseRouter.nl.sterfte(),
         },
       ],
     },
@@ -150,11 +148,11 @@ export function useDataSitemap(
       links: [
         {
           text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
-          href: '/landelijk/ziekenhuis-opnames',
+          href: reverseRouter.nl.ziekenhuisopnames(),
         },
         {
           text: siteText.ic_opnames_per_dag.titel_sidebar,
-          href: '/landelijk/intensive-care-opnames',
+          href: reverseRouter.nl.intensiveCareOpnames(),
         },
       ],
     },
@@ -163,15 +161,15 @@ export function useDataSitemap(
       links: [
         {
           text: siteText.verpleeghuis_besmette_locaties.titel_sidebar,
-          href: '/landelijk/verpleeghuiszorg',
+          href: reverseRouter.nl.verpleeghuiszorg(),
         },
         {
           text: siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar,
-          href: '/landelijk/gehandicaptenzorg',
+          href: reverseRouter.nl.gehandicaptenzorg(),
         },
         {
           text: siteText.thuiswonende_ouderen.titel_sidebar,
-          href: '/landelijk/thuiswonende-ouderen',
+          href: reverseRouter.nl.thuiswonendeOuderen(),
         },
       ],
     },
@@ -180,11 +178,11 @@ export function useDataSitemap(
       links: [
         {
           text: siteText.rioolwater_metingen.titel_sidebar,
-          href: '/landelijk/rioolwater',
+          href: reverseRouter.nl.rioolwater(),
         },
         {
           text: siteText.verdenkingen_huisartsen.titel_sidebar,
-          href: '/landelijk/verdenkingen-huisartsen',
+          href: reverseRouter.nl.verdenkingenHuisartsen(),
         },
       ],
     },
@@ -193,7 +191,11 @@ export function useDataSitemap(
       links: [
         {
           text: siteText.nl_gedrag.sidebar.titel,
-          href: '/landelijk/gedrag',
+          href: reverseRouter.nl.gedrag(),
+        },
+        {
+          text: siteText.corona_melder_app.sidebar.titel,
+          href: reverseRouter.nl.coronamelder(),
         },
       ],
     },
