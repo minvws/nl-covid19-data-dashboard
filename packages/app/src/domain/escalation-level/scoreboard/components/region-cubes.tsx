@@ -17,7 +17,7 @@ export function RegionCubes({
   const escalationColor = useEscalationColor(level);
 
   return (
-    <Box display="flex">
+    <Box display="flex" flexWrap="wrap">
       {count > 0 && (
         <Container>
           {items.map((_, index) => (
@@ -35,17 +35,19 @@ export function RegionCubes({
 const Container = styled.div(
   css({
     display: 'flex',
+    alignItems: 'center',
     mr: 2,
-    maxWidth: '90%',
+    flexWrap: 'wrap',
   })
 );
 
 const Cube = styled.div<{ color: string }>((x) =>
   css({
-    minWidth: asResponsiveArray({ _: '0.5em', lg: '1em' }),
-    width: asResponsiveArray({ _: '0.5em', lg: '1.5em' }),
-    height: asResponsiveArray({ _: '0.5em', lg: '1em' }),
+    minWidth: asResponsiveArray({ _: '0.5em', sm: '1em' }),
+    width: asResponsiveArray({ _: '0.5em', sm: '1em' }),
+    height: '1em',
     bg: x.color,
+    mt: '1px',
     ml: '1px',
     '&:first-child': {
       borderTopLeftRadius: '4px',

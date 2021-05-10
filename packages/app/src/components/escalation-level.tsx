@@ -23,27 +23,42 @@ export function EscalationLevelInfoLabel({
   fontSize = 2,
   useLevelColor = false,
 }: EscalationLevelProps) {
-  const escalationColor = useEscalationColor(level);
-  const { siteText } = useIntl();
-
-  const color = useLevelColor ? escalationColor : 'inherit';
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
       <EscalationLevelIcon level={level} size={size} />
-      <Text
-        as="span"
-        ml={2}
-        fontWeight="bold"
-        fontSize={fontSize}
-        color={color}
-      >
-        {
-          siteText.escalatie_niveau.types[
-            level.toString() as EscalationLevelString
-          ].titel
-        }
-      </Text>
+      <Box ml={2}>
+        <EscalationLevelLabel
+          level={level}
+          fontSize={fontSize}
+          useLevelColor={useLevelColor}
+        />
+      </Box>
     </Box>
+  );
+}
+
+export function EscalationLevelLabel({
+  level,
+  fontSize,
+  useLevelColor = false,
+}: {
+  level: EscalationLevel;
+  fontSize: number;
+  useLevelColor?: boolean;
+}) {
+  const { siteText } = useIntl();
+  const escalationColor = useEscalationColor(level);
+
+  const color = useLevelColor ? escalationColor : 'inherit';
+
+  return (
+    <Text as="span" fontWeight="bold" fontSize={fontSize} color={color}>
+      {
+        siteText.escalatie_niveau.types[
+          level.toString() as EscalationLevelString
+        ].titel
+      }
+    </Text>
   );
 }
 
