@@ -30,9 +30,9 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
   return (
     <Box
       display="flex"
-      flexDirection={{ sm: 'column' }}
+      flexDirection={{ _: 'column', lg: 'row' }}
       width="100%"
-      alignItems="center"
+      justifyItems="flex-start"
       borderBottomColor="lightGray"
       borderBottomStyle="solid"
       borderBottomWidth="1px"
@@ -44,7 +44,7 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
           </StyledLink>
         </Link>
       </VrLinkCell>
-      <Box display="flex" flex="2">
+      <Box display="flex" flex="2" justifyItems="center">
         <BarScaleCell
           value={vrData.data.positive_tested_per_100k}
           thresholds={positiveTestedEscalationThresholds}
@@ -68,16 +68,11 @@ const BarScaleCell = ({
   const { formatNumber } = useIntl();
 
   return (
-    <Box
-      flex="1"
-      display="flex"
-      alignItems="flex-start"
-      justifyItems="center"
-      width="100%"
-    >
+    <Box flex="1" display="flex" width="100%">
       <Box
         flex="0.1"
-        display={{ _: 'block', lg: 'flex' }}
+        alignItems="center"
+        display="flex"
         justifyContent={{ lg: 'flex-end' }}
         mr={{ _: '1.5rem', lg: '1rem' }}
       >
@@ -108,6 +103,8 @@ const StyledLink = styled.a(
 const VrLinkCell = styled.div<{ color: string }>((x) =>
   css({
     flex: 0.8,
+    display: 'flex',
+    alignItems: 'center',
     mt: asResponsiveArray({ _: 4, lg: 0 }),
     '&::before': asResponsiveArray({
       _: undefined,

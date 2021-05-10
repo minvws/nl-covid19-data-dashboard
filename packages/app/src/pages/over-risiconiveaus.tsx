@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
@@ -36,26 +35,24 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(),
   selectData(() => {
-    const scoreboardData = vrData
-      .reduce<ScoreBoardData[]>(
-        (sbData, vr) => {
-          const vrData = loadAndSortVrData(vr.code);
-          const index = vrData.escalation_level.level - 1;
+    const scoreboardData = vrData.reduce<ScoreBoardData[]>(
+      (sbData, vr) => {
+        const vrData = loadAndSortVrData(vr.code);
+        const index = vrData.escalation_level.level - 1;
 
-          sbData[index].vrData.push({
-            data: vrData.escalation_level,
-            safetyRegionName: vr.name,
-            vrCode: vr.code,
-          });
+        sbData[index].vrData.push({
+          data: vrData.escalation_level,
+          safetyRegionName: vr.name,
+          vrCode: vr.code,
+        });
 
-          return sbData;
-        },
-        [1, 2, 3, 4].map<ScoreBoardData>((x) => ({
-          escalatationLevel: x as 1 | 2 | 3 | 4,
-          vrData: [],
-        }))
-      )
-      .filter(isDefined);
+        return sbData;
+      },
+      [1, 2, 3, 4].map<ScoreBoardData>((x) => ({
+        escalatationLevel: x as 1 | 2 | 3 | 4,
+        vrData: [],
+      }))
+    );
 
     return {
       scoreboardData,
