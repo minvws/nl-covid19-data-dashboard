@@ -35,6 +35,7 @@ export function RegionCubes({
 const Container = styled.div(
   css({
     display: 'flex',
+    gap: '1px',
     alignItems: 'center',
     mr: 2,
     flexWrap: 'wrap',
@@ -47,8 +48,6 @@ const Cube = styled.div<{ color: string }>((x) =>
     width: asResponsiveArray({ _: '0.5em', sm: '1em' }),
     height: '1em',
     bg: x.color,
-    mt: '1px',
-    ml: '1px',
     '&:first-child': {
       borderTopLeftRadius: '4px',
       borderBottomLeftRadius: '4px',
