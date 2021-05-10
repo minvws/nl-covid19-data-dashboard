@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import { VisuallyHidden } from './visually-hidden';
 
@@ -11,26 +11,23 @@ interface IconButtonrops {
   onClick?: (evt: React.MouseEvent) => void;
 }
 
-export function IconButton({
-  children,
-  size,
-  title,
-  color = 'currentColor',
-  onClick,
-}: IconButtonrops) {
-  return (
-    <StyledIconButton
-      title={title}
-      type="button"
-      onClick={onClick}
-      size={size}
-      color={color}
-    >
-      <VisuallyHidden>{title}</VisuallyHidden>
-      {children}
-    </StyledIconButton>
-  );
-}
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonrops>(
+  ({ children, size, title, color = 'currentColor', onClick }, ref) => {
+    return (
+      <StyledIconButton
+        ref={ref}
+        title={title}
+        type="button"
+        onClick={onClick}
+        size={size}
+        color={color}
+      >
+        <VisuallyHidden>{title}</VisuallyHidden>
+        {children}
+      </StyledIconButton>
+    );
+  }
+);
 
 const StyledIconButton = styled.button<{ color: string; size: number }>((x) =>
   css({

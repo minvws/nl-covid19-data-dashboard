@@ -1,11 +1,12 @@
 import css from '@styled-system/css';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CloseIcon from '~/assets/close-thin.svg';
 import ExpandIcon from '~/assets/expand.svg';
 import { Tile } from '~/components/tile';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { usePrevious } from '~/utils/use-previous';
 import { Spacer } from './base';
 import { IconButton } from './icon-button';
 import { Metadata, MetadataProps } from './metadata';
@@ -20,8 +21,16 @@ export function ChartTileContainer({
 }) {
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const wasFullscreen = usePrevious(isFullscreen);
   const breakpoints = useBreakpoints();
   const intl = useIntl();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (wasFullscreen && !isFullscreen) {
+      buttonRef.current?.focus();
+    }
+  }, [wasFullscreen, isFullscreen]);
 
   const label = replaceVariablesInText(
     isFullscreen
@@ -41,17 +50,18 @@ export function ChartTileContainer({
         </>
       )}
 
-      {breakpoints.md && (isButtonVisible || isFullscreen) && (
+      {breakpoints.md && (
         <div
           css={css({
             position: 'absolute',
             top: '10px',
             right: '10px',
-            color: 'silver',
-            '&:hover': { color: 'gray' },
+            color: isFullscreen || isButtonVisible ? 'silver' : 'white',
+            '&:focus-within, &:hover': { color: 'gray' },
           })}
         >
           <IconButton
+            ref={isFullscreen ? undefined : buttonRef}
             title={label}
             onClick={() => setIsFullscreen((x) => !x)}
             size={36}
