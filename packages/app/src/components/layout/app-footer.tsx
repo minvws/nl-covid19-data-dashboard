@@ -8,8 +8,10 @@ import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Markdown } from '~/components/markdown';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export function AppFooter({ lastGenerated }: { lastGenerated: number }) {
+  const reverseRouter = useReverseRouter();
   const { siteText: text } = useIntl();
 
   return (
@@ -33,13 +35,15 @@ export function AppFooter({ lastGenerated }: { lastGenerated: number }) {
             >
               <FooterList>
                 <Item href="/">{text.nav.links.actueel}</Item>
-                <Item href="/landelijk/vaccinaties">
+                <Item href={reverseRouter.nl.index()}>
                   {text.nav.links.index}
                 </Item>
-                <Item href="/veiligheidsregio">
+                <Item href={reverseRouter.vr.index()}>
                   {text.nav.links.veiligheidsregio}
                 </Item>
-                <Item href="/gemeente">{text.nav.links.gemeente}</Item>
+                <Item href={reverseRouter.gm.index()}>
+                  {text.nav.links.gemeente}
+                </Item>
                 <Item href="/over">{text.nav.links.over}</Item>
                 <Item href="/veelgestelde-vragen">
                   {text.nav.links.veelgestelde_vragen}

@@ -18,6 +18,7 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
 import { Link } from '~/utils/link';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
 export const gmPageMetricNames = [
@@ -72,14 +73,15 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
   const { siteText } = useIntl();
   const router = useRouter();
-  const { code } = router.query;
+  const reverseRouter = useReverseRouter();
+  const code = router.query.code as string;
 
   const showMetricLinks = router.route !== '/gemeente';
 
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const safetyRegion = getSafetyRegionForMunicipalityCode(code as string);
+  const safetyRegion = getSafetyRegionForMunicipalityCode(code);
 
   return (
     <>
@@ -114,9 +116,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   {safetyRegion && (
                     <Text pl={3}>
                       {siteText.common.veiligheidsregio_label}{' '}
-                      <Link
-                        href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
-                      >
+                      <Link href={reverseRouter.vr.index(safetyRegion.code)}>
                         <a>{safetyRegion.name}</a>
                       </Link>
                     </Text>
@@ -129,7 +129,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         title={siteText.gemeente_layout.headings.besmettingen}
                       >
                         <MetricMenuItemLink
-                          href={`/gemeente/${code}/positief-geteste-mensen`}
+                          href={reverseRouter.gm.positiefGetesteMensen(code)}
                           icon={<GetestIcon />}
                           title={
                             siteText.gemeente_positief_geteste_personen
@@ -147,7 +147,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         </MetricMenuItemLink>
 
                         <MetricMenuItemLink
-                          href={`/gemeente/${code}/sterfte`}
+                          href={reverseRouter.gm.sterfte(code)}
                           icon={<VirusIcon />}
                           title={
                             siteText.veiligheidsregio_sterfte.titel_sidebar
@@ -167,7 +167,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
                       >
                         <MetricMenuItemLink
-                          href={`/gemeente/${code}/ziekenhuis-opnames`}
+                          href={reverseRouter.gm.ziekenhuisopnames(code)}
                           icon={<Ziekenhuis />}
                           title={
                             siteText.gemeente_ziekenhuisopnames_per_dag
@@ -190,7 +190,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     title={siteText.gemeente_layout.headings.vroege_signalen}
                   >
                     <MetricMenuItemLink
-                      href={data?.sewer && `/gemeente/${code}/rioolwater`}
+                      href={data?.sewer && reverseRouter.gm.rioolwater(code)}
                       icon={<RioolwaterMonitoring />}
                       title={
                         siteText.gemeente_rioolwater_metingen.titel_sidebar

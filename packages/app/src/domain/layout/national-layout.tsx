@@ -25,6 +25,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const nlPageMetricNames = [
   'vaccine_administered_total',
@@ -75,6 +76,7 @@ interface NationalLayoutProps {
 export function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
   const { siteText } = useIntl();
 
@@ -114,7 +116,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_maatregelen.titel_sidebar}
                 subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 href={{
-                  pathname: '/landelijk/maatregelen',
+                  pathname: reverseRouter.nl.maatregelen(),
                   query: breakpoints.md
                     ? {} // only add menu flags on narrow devices
                     : isMenuOpen
@@ -128,7 +130,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 isFirstItem
               >
                 <MetricMenuItemLink
-                  href="/landelijk/vaccinaties"
+                  href={reverseRouter.nl.vaccinaties()}
                   icon={<VaccinatieIcon />}
                   title={siteText.vaccinaties.titel_sidebar}
                 >
@@ -145,7 +147,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.besmettingen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/positief-geteste-mensen"
+                  href={reverseRouter.nl.positiefGetesteMensen()}
                   icon={<GetestIcon />}
                   title={siteText.positief_geteste_personen.titel_sidebar}
                 >
@@ -165,7 +167,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/besmettelijke-mensen"
+                  href={reverseRouter.nl.besmettelijkeMensen()}
                   icon={<Ziektegolf />}
                   title={siteText.besmettelijke_personen.titel_sidebar}
                 >
@@ -180,7 +182,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/reproductiegetal"
+                  href={reverseRouter.nl.reproductiegetal()}
                   icon={<ReproIcon />}
                   title={siteText.reproductiegetal.titel_sidebar}
                 >
@@ -196,7 +198,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/sterfte"
+                  href={reverseRouter.nl.sterfte()}
                   icon={<VirusIcon />}
                   title={siteText.sterfte.titel_sidebar}
                 >
@@ -214,7 +216,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.ziekenhuizen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/ziekenhuis-opnames"
+                  href={reverseRouter.nl.ziekenhuisopnames()}
                   icon={<Ziekenhuis />}
                   title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                 >
@@ -237,7 +239,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/intensive-care-opnames"
+                  href={reverseRouter.nl.intensiveCareOpnames()}
                   icon={<Arts />}
                   title={siteText.ic_opnames_per_dag.titel_sidebar}
                 >
@@ -256,7 +258,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.kwetsbare_groepen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/verpleeghuiszorg"
+                  href={reverseRouter.nl.verpleeghuiszorg()}
                   icon={<Verpleeghuiszorg />}
                   title={siteText.verpleeghuis_besmette_locaties.titel_sidebar}
                 >
@@ -271,7 +273,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/gehandicaptenzorg"
+                  href={reverseRouter.nl.gehandicaptenzorg()}
                   icon={<Gehandicaptenzorg />}
                   title={
                     siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar
@@ -288,7 +290,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/thuiswonende-ouderen"
+                  href={reverseRouter.nl.thuiswonendeOuderen()}
                   icon={<ElderlyIcon />}
                   title={siteText.thuiswonende_ouderen.titel_sidebar}
                 >
@@ -306,7 +308,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.vroege_signalen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/rioolwater"
+                  href={reverseRouter.nl.rioolwater()}
                   icon={<RioolwaterMonitoring />}
                   title={siteText.rioolwater_metingen.titel_sidebar}
                 >
@@ -322,7 +324,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/verdenkingen-huisartsen"
+                  href={reverseRouter.nl.verdenkingenHuisartsen()}
                   icon={<Arts />}
                   title={siteText.verdenkingen_huisartsen.titel_sidebar}
                 >
@@ -339,7 +341,7 @@ export function NationalLayout(props: NationalLayoutProps) {
 
               <CategoryMenu title={siteText.nationaal_layout.headings.gedrag}>
                 <MetricMenuItemLink
-                  href="/landelijk/gedrag"
+                  href={reverseRouter.nl.gedrag()}
                   icon={<Gedrag />}
                   title={siteText.nl_gedrag.sidebar.titel}
                 >
@@ -351,7 +353,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
                 <MetricMenuItemLink
-                  href="/landelijk/coronamelder"
+                  href={reverseRouter.nl.coronamelder()}
                   icon={<Phone />}
                   title={siteText.corona_melder_app.sidebar.titel}
                 >
