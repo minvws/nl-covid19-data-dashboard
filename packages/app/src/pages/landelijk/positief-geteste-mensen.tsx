@@ -358,7 +358,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="ggd_tested_total"
                 absolute={dataGgdAverageLastValue.tested_total}
-                difference={data.difference.tested_ggd_average__tested_total}
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
@@ -375,9 +374,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="ggd_infected"
                 percentage={dataGgdAverageLastValue.infected_percentage}
-                difference={
-                  data.difference.tested_ggd_average__infected_percentage
-                }
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
 
