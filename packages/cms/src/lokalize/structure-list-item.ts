@@ -38,9 +38,6 @@ export function lokalizeListItem() {
                           .params({ subject })
                           .child((id) =>
                             S.editor()
-                              .title(
-                                id.replace('lokalize__', '').replace(/-/g, '.')
-                              )
                               .id(id)
                               .schemaType(type)
                               .documentId(id)

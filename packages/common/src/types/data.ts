@@ -23,7 +23,7 @@ export interface GmDeceasedRivm {
 }
 export interface GmDeceasedRivmValue {
   covid_daily: number;
-  covid_daily_moving_average?: number | null;
+  covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -54,7 +54,7 @@ export interface MunicipalHospitalNice {
 export interface MunicipalHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
@@ -153,13 +153,13 @@ export interface National {
   g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
-  intensive_care_nice_per_age_group?: NlIntensiveCareNicePerAgeGroup;
+  intensive_care_nice_per_age_group: NlIntensiveCareNicePerAgeGroup;
   tested_overall: NationalTestedOverall;
   tested_per_age_group: NlTestedPerAgeGroup;
   reproduction: NationalReproduction;
   sewer: NationalSewer;
   hospital_nice: NationalHospitalNice;
-  hospital_nice_per_age_group?: NlHospitalNicePerAgeGroup;
+  hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NationalHospitalLcps;
   intensive_care_lcps: NationalIntensiveCareLcps;
   tested_ggd_daily: NationalTestedGgdDaily;
@@ -167,6 +167,7 @@ export interface National {
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
   behavior: NationalBehavior;
+  behavior_per_age_group?: NlBehaviorPerAgeGroup;
   deceased_rivm: NationalDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
@@ -278,7 +279,7 @@ export interface NationalIntensiveCareNice {
 }
 export interface NationalIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -362,7 +363,7 @@ export interface NationalHospitalNice {
 }
 export interface NationalHospitalNiceValue {
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -453,9 +454,9 @@ export interface NationalDisabilityCare {
 }
 export interface NationalDisabilityCareValue {
   newly_infected_people: number;
-  newly_infected_people_moving_average?: number | null;
+  newly_infected_people_moving_average: number | null;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
@@ -516,13 +517,41 @@ export interface NationalBehaviorValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlBehaviorPerAgeGroup {
+  avoid_crowds_compliance: NlBehaviorPerAgeGroupValue;
+  avoid_crowds_support: NlBehaviorPerAgeGroupValue;
+  curfew_compliance: NlBehaviorPerAgeGroupValue;
+  curfew_support: NlBehaviorPerAgeGroupValue;
+  keep_distance_compliance: NlBehaviorPerAgeGroupValue;
+  keep_distance_support: NlBehaviorPerAgeGroupValue;
+  max_visitors_compliance: NlBehaviorPerAgeGroupValue;
+  max_visitors_support: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_compliance: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_support: NlBehaviorPerAgeGroupValue;
+  wash_hands_compliance: NlBehaviorPerAgeGroupValue;
+  wash_hands_support: NlBehaviorPerAgeGroupValue;
+  wear_mask_public_indoors_compliance: NlBehaviorPerAgeGroupValue;
+  wear_mask_public_indoors_support: NlBehaviorPerAgeGroupValue;
+  work_from_home_compliance: NlBehaviorPerAgeGroupValue;
+  work_from_home_support: NlBehaviorPerAgeGroupValue;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlBehaviorPerAgeGroupValue {
+  "16_24": number;
+  "25_39": number;
+  "40_54": number;
+  "55_69": number;
+  "70_plus": number;
+}
 export interface NationalDeceasedRivm {
   values: NationalDeceasedRivmValue[];
   last_value: NationalDeceasedRivmValue;
 }
 export interface NationalDeceasedRivmValue {
   covid_daily: number;
-  covid_daily_moving_average?: number | null;
+  covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -557,10 +586,10 @@ export interface NationalElderlyAtHome {
 }
 export interface NationalElderlyAtHomeValue {
   positive_tested_daily: number;
-  positive_tested_daily_moving_average?: number | null;
+  positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -570,11 +599,11 @@ export interface NlVaccineSupport {
 }
 export interface NlVaccineSupportValue {
   percentage_average: number;
-  percentage_70_plus: number;
-  percentage_55_69: number;
-  percentage_40_54: number;
-  percentage_25_39: number;
-  percentage_16_24: number;
+  percentage_70_plus: number | null;
+  percentage_55_69: number | null;
+  percentage_40_54: number | null;
+  percentage_25_39: number | null;
+  percentage_16_24: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -888,7 +917,7 @@ export interface RegionalHospitalNice {
 }
 export interface RegionalHospitalNiceValue {
   admissions_on_date_of_admission: number;
-  admissions_on_date_of_admission_moving_average?: number | null;
+  admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -943,12 +972,12 @@ export interface RegionalDisabilityCare {
 }
 export interface RegionalDisabilityCareValue {
   newly_infected_people: number;
-  newly_infected_people_moving_average?: number | null;
+  newly_infected_people_moving_average: number | null;
   newly_infected_locations: number;
   infected_locations_total: number;
   infected_locations_percentage: number;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
@@ -1002,7 +1031,7 @@ export interface RegionalDeceasedRivm {
 }
 export interface RegionalDeceasedRivmValue {
   covid_daily: number;
-  covid_daily_moving_average?: number | null;
+  covid_daily_moving_average: number | null;
   covid_total: number;
   date_unix: number;
   date_of_insertion_unix: number;
@@ -1027,10 +1056,10 @@ export interface RegionalElderlyAtHome {
 }
 export interface RegionalElderlyAtHomeValue {
   positive_tested_daily: number;
-  positive_tested_daily_moving_average?: number | null;
+  positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;
-  deceased_daily_moving_average?: number | null;
+  deceased_daily_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;

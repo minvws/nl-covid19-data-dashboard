@@ -66,7 +66,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
       ? isPercentage
         ? `${formatPercentage(numberValue)}%`
         : formatNumber(numberValue)
-      : '-';
+      : '–';
   }
 
   const dateString = getDateStringFromValue(value);

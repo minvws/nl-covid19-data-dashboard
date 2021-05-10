@@ -3,6 +3,8 @@ declare module 'part:@sanity/form-builder/patch-event' {
   export * from '@sanity/form-builder/lib/PatchEvent';
 }
 
+declare module '@sanity/cli/lib/util/getUserConfig';
+
 declare module 'part:@sanity/components/selects/default';
 
 declare module 'part:@sanity/components/buttons/default';

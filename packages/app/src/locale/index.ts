@@ -1,5 +1,5 @@
-import en from './en.json';
-import nl from './nl.json';
+import nl from './nl_export.json';
+import en from './en_export.json';
 
 export type NlLocale = typeof nl;
 export type EnLocale = typeof en;

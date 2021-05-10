@@ -1,8 +1,15 @@
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 
+/**
+ * Create a flat structure from which the JSON is rebuilt. Here we filter out
+ * any deleted keys from the mutations file, so that any  deletions that
+ * happened locally in your branch (but are not committed to the dataset yet)
+ * are stripped from the output and your feature code sees the correct dataset
+ * as it will be after merging the branch.
+ */
 export function createFlatTexts(
   documents: LokalizeText[],
-  { warn }: { warn?: boolean } = {}
+  deletedKeys: string[] = []
 ) {
   const nl: Record<string, string> = {};
   const en: Record<string, string> = {};
@@ -14,9 +21,12 @@ export function createFlatTexts(
    * First write all published document texts
    */
   for (const document of published) {
-    const { key, localeText } = parseLocaleTextDocument(document, { warn });
-    nl[key] = localeText.nl;
-    en[key] = localeText.en;
+    if (deletedKeys.includes(document.key)) continue;
+
+    const { jsonKey, localeText } = parseLocaleTextDocument(document);
+
+    nl[jsonKey] = localeText.nl;
+    en[jsonKey] = localeText.en;
   }
 
   /**
@@ -24,38 +34,33 @@ export function createFlatTexts(
    * draft version.
    */
   for (const document of drafts) {
-    const { key, localeText } = parseLocaleTextDocument(document, { warn });
-    nl[key] = localeText.nl;
-    en[key] = localeText.en;
+    if (deletedKeys.includes(document.key)) continue;
+
+    const { jsonKey, localeText } = parseLocaleTextDocument(document);
+
+    nl[jsonKey] = localeText.nl;
+    en[jsonKey] = localeText.en;
   }
 
   return { nl, en };
 }
 
-export function parseLocaleTextDocument(
-  document: LokalizeText,
-  { warn }: { warn?: boolean } = {}
-) {
+export function parseLocaleTextDocument(document: LokalizeText) {
   /**
-   * paths inside the `__root` subject should be placed under the path
-   * in the root of the exported json
+   * Paths inside the `__root` subject should be placed under the path in the
+   * root of the exported json
    */
-  const key =
-    document.subject === '__root'
-      ? document.path
-      : `${document.subject}.${document.path}`;
+  const jsonKey = document.subject === '__root' ? document.path : document.key;
 
-  const nl = document.display_empty ? '' : document.text.nl?.trim() || '';
-  const en = document.display_empty
+  const nl = document.should_display_empty
+    ? ''
+    : document.text.nl?.trim() || '';
+  const en = document.should_display_empty
     ? ''
     : /**
        * Here make an automatic fallback to Dutch texts if English is missing.
        */
       document.text.en?.trim() || nl;
 
-  if (warn && !document.text.en?.trim()) {
-    console.warn('Missing english translation for path:', document.search_key);
-  }
-
-  return { key, localeText: { nl, en } };
+  return { jsonKey, localeText: { nl, en } };
 }

@@ -65,8 +65,13 @@ export function useScales<T extends TimestampedValue>(args: {
       round: true, // round the output values so we render on round pixels
     });
 
+    /**
+    For some reason visx-scaleLinear doesn't handle een domain of [0,0] correctly.
+    In that particular case calling yScale(0) will return the (bounds.height / 2), instead of just bounds.height.
+    A work-around turns out to be setting the max value to Infinity.
+    */
     const yScale = scaleLinear({
-      domain: [0, maximumValue],
+      domain: [0, maximumValue > 0 ? maximumValue : Infinity],
       range: [bounds.height, 0],
       nice: numTicks,
       round: true, // round the output values so we render on round pixels

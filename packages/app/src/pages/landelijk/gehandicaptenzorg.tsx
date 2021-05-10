@@ -103,7 +103,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
+            description={positiveTestedPeopleText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -111,7 +112,16 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty: 'newly_infected_people_moving_average',
+                    color: colors.data.primary,
+                    label:
+                      positiveTestedPeopleText.line_chart_newly_infected_people_moving_average,
+                    shortLabel:
+                      positiveTestedPeopleText.line_chart_newly_infected_people_moving_average_short_label,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'newly_infected_people',
                     label:
                       positiveTestedPeopleText.line_chart_legend_trend_label,
@@ -126,6 +136,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       label:
                         positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'newly_infected_people_moving_average',
+                      ],
                     },
                   ],
                 }}
@@ -213,7 +226,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: infectedLocationsText.bronnen.rivm,
             }}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
+            description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -265,7 +279,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             metadata={{ source: locationDeaths.bronnen.rivm }}
             title={locationDeaths.linechart_titel}
-            timeframeOptions={['all', '5weeks', 'week']}
+            timeframeOptions={['all', '5weeks']}
+            description={locationDeaths.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -273,7 +288,16 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'area',
+                    type: 'line',
+                    metricProperty: 'deceased_daily_moving_average',
+                    label:
+                      locationDeaths.line_chart_deceased_daily_moving_average,
+                    shortLabel:
+                      locationDeaths.line_chart_deceased_daily_moving_average_short_label,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
                     metricProperty: 'deceased_daily',
                     label: locationDeaths.line_chart_legend_trend_label,
                     color: colors.data.primary,
@@ -286,6 +310,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label: locationDeaths.line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'deceased_daily_moving_average',
+                      ],
                     },
                   ],
                 }}

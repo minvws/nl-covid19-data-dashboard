@@ -88,7 +88,9 @@ export function SidebarBarScale<T>({
     typeof text === 'object' &&
       'barscale_screenreader_text' in text &&
       text.barscale_screenreader_text,
-    `Missing screen reader text at ${localeTextKey}.barscale_screenreader_text`
+    `Missing screen reader text at ${String(
+      localeTextKey
+    )}.barscale_screenreader_text`
   );
 
   /**

@@ -10,13 +10,13 @@ import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { useList } from '~/utils/use-list';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
   values: NlTestedPerAgeGroupValue[];
-  timeframe: 'all' | '5weeks' | 'week';
+  timeframe: 'all' | '5weeks';
 }
 
 export function InfectedPerAgeGroup({
@@ -89,6 +89,13 @@ export function InfectedPerAgeGroup({
 
   return (
     <>
+      <InteractiveLegend
+        helpText={text.legend_help_text}
+        selectOptions={interactiveLegendOptions}
+        selection={list}
+        onToggleItem={toggle}
+        onReset={clear}
+      />
       <TimeSeriesChart
         values={values}
         timeframe={timeframe}
@@ -108,13 +115,6 @@ export function InfectedPerAgeGroup({
             },
           ],
         }}
-      />
-      <InteractiveLegend
-        helpText={text.legend_help_text}
-        selectOptions={interactiveLegendOptions}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
       />
       <Legend items={staticLegendItems} />
     </>

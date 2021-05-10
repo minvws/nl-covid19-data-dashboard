@@ -14,7 +14,7 @@ export function AppHeader() {
 
   return (
     <Box as="header" zIndex={4} position="relative" bg="white">
-      <MaxWidth px={{ _: 3, sm: 4, md: 3, lg: 4 }}>
+      <MaxWidth px={{ _: 1, sm: 3 }}>
         <Logo />
         <Box px={3} zIndex={1} position="relative">
           <LanguageSwitcher />
@@ -26,7 +26,8 @@ export function AppHeader() {
           flexWrap="wrap"
           alignItems="center"
           justifyContent="space-between"
-          px={{ _: 3, sm: 4, md: 3, lg: 4 }}
+          pl={{ _: 3, sm: 4 }}
+          pr={{ _: 3, sm: 4, md: 3 }}
         >
           <Box py={[2, 2, 2, 3]} lineHeight={'1em'} fontWeight="bold">
             <Link href="/" passHref>
