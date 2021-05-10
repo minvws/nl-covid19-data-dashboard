@@ -41,7 +41,7 @@ export function WeekNumbers({
   const id = useUniqueId();
   const { siteText } = useIntl();
 
-  const { weekGridLines, weekNumbersLabels } = useMemo(
+  const { weekGridLines, weekNumberLabels } = useMemo(
     () => calculateWeekNumberAxis(startUnix, endUnix),
     [startUnix, endUnix]
   );
@@ -50,6 +50,7 @@ export function WeekNumbers({
    * Measure the width of a displayed week, used to offset the week number label.
    * Needs to be index 1 and 2 at least,
    * since between index 0 and 1 a partial week could occur.
+   * The default offset is 0 in case there are no 3 data points.
    */
   const weekRenderWidth = getWeekRenderWidth(
     xScale(weekGridLines[2]),
@@ -93,7 +94,7 @@ export function WeekNumbers({
 
         <AxisTop
           scale={xScale}
-          tickValues={weekNumbersLabels}
+          tickValues={weekNumberLabels}
           tickFormat={formatWeekNumberAxis as AnyTickFormatter}
           stroke={colors.silver}
           hideTicks
@@ -130,14 +131,14 @@ function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
    * Filtering is done to prevent cut off dates or week numbers at the start and end of the graph.
    */
   const weekGridLines = getWeekGridLines(firstWeekUnix, weekCount);
-  const weekNumbersLabels = filterWeeks(
+  const weekNumberLabels = filterWeeks(
     weekGridLines,
     alternateBy,
     startUnix - dayPadding,
     endUnix + 5 * DAY_IN_SECONDS - 1.5 * dayPadding
   );
 
-  return { weekGridLines, weekNumbersLabels };
+  return { weekGridLines, weekNumberLabels };
 }
 
 function getWeekGridLines(firstWeekUnix: number, weekCount: number) {
