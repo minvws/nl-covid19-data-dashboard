@@ -28,3 +28,5 @@ timestamp,action,key
 2021-05-10T08:38:56.897Z,add,positief_geteste_personen_ggd.linechart_positivetests_legend_label_moving_average
 2021-05-10T08:56:45.999Z,add,veiligheidsregio_positief_geteste_personen_ggd.linechart_totaltests_legend_label_moving_average
 2021-05-10T08:57:14.416Z,add,veiligheidsregio_positief_geteste_personen_ggd.linechart_positivetests_legend_label_moving_average
+2021-05-10T11:07:55.275Z,add,common.risiconiveau_singular
+2021-05-10T11:08:57.458Z,add,common.risiconiveau_plural

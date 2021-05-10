@@ -1,6 +1,6 @@
-context("Over risiconiveau's", () => {
+context('Artikelen', () => {
   before(() => {
-    cy.beforeGeneralTests('over-risiconiveaus');
+    cy.beforeGeneralTests('artikelen');
   });
 
   it('dummy to trigger the before() tests', () => {
