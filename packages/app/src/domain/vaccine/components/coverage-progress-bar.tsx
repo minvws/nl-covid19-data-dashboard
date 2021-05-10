@@ -4,6 +4,7 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useDynamicScale } from '~/utils/use-dynamic-scale';
 
 export function CoverageProgressBar(props: {
   partialCount: number;
@@ -27,6 +28,9 @@ export function CoverageProgressBar(props: {
   } = siteText.vaccinaties.vaccination_coverage;
 
   const breakpoints = useBreakpoints(true);
+
+  // const scale = useDynamicScale(maxValue, 0, total);
+
   const barHeight = breakpoints.md ? (isLarge ? 26 : 16) : 11;
 
   const partialColor = '#239BE6';
@@ -52,19 +56,20 @@ export function CoverageProgressBar(props: {
               height="3"
               fill="#C1C1C1"
             />
+
+            <rect
+              x={0}
+              y={0}
+              width={`${partialPercentage + fullPercentage}%`}
+              height={barHeight}
+              fill={fullColor}
+            />
             <rect
               x={0}
               y={0}
               width={`${partialPercentage}%`}
               height={barHeight}
               fill={partialColor}
-            />
-            <rect
-              x={0}
-              y={0}
-              width={`${fullPercentage}%`}
-              height={barHeight}
-              fill={fullColor}
             />
           </g>
         </svg>
