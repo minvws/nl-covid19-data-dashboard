@@ -125,6 +125,7 @@
     "build:nl": "cross-env NEXT_PUBLIC_LOCALE=nl && yarn build",
     "build:en": "cross-env NEXT_PUBLIC_LOCALE=en && yarn build",
     "start": "next start -H 0.0.0.0 -p 8080",
+    "start-e2e": "next start -H 0.0.0.0 -p 3000",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
