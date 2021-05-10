@@ -130,6 +130,7 @@ export interface MunicipalitiesTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
+  infected_per_100k_moving_average: number | null;
   infected: number;
   date_of_insertion_unix: number;
 }
@@ -427,8 +428,11 @@ export interface NationalTestedGgdAverage {
 }
 export interface NationalTestedGgdAverageValue {
   infected: number;
+  infected_moving_average: number | null;
   infected_percentage: number;
+  infected_percentage_moving_average: number | null;
   tested_total: number;
+  tested_total_moving_average: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -943,8 +947,11 @@ export interface RegionalTestedGgdAverage {
 }
 export interface RegionalTestedGgdAverageValue {
   infected: number;
+  infected_moving_average: number | null;
   infected_percentage: number;
+  infected_percentage_moving_average: number | null;
   tested_total: number;
+  tested_total_moving_average: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
