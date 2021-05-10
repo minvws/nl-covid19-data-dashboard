@@ -12,11 +12,13 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds } from '../logic';
 
-/* Only show this amount of weeks */
+/**
+ * Only show this amount of week numbers
+ */
 const maximumWeekCount = 6;
 
-const dayInSeconds = 24 * 60 * 60;
-const weekInSeconds = 7 * dayInSeconds;
+const DAY_IN_SECONDS = 24 * 60 * 60;
+const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
 
 interface WeekNumberProps {
   startUnix: number;
@@ -33,8 +35,10 @@ export function WeekNumbers({
   bounds,
   formatXAxis,
 }: WeekNumberProps) {
-  /* Used for the clip path,
-   which prevents grid lines and axis from bleeding out of the graph */
+  /**
+   * Used for the clip path,
+   * which prevents grid lines and axis from bleeding out of the graph
+   */
   const id = useUniqueId();
   const { siteText } = useIntl();
 
@@ -115,18 +119,25 @@ export function WeekNumbers({
 }
 
 function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
-  const weekCount = Math.floor((endUnix - startUnix) / weekInSeconds);
+  const weekCount = Math.floor((endUnix - startUnix) / WEEK_IN_SECONDS);
   const firstWeek = getWeekInfo(new Date(startUnix * 1000));
   const firstWeekUnix = firstWeek.weekStartDate.getTime() / 1000;
 
-  /* Make sure to only show maximum `numberOfWeeks` */
+  /**
+   * Make sure to only show maximum `numberOfWeeks`
+   */
   const alternateBy =
     weekCount > maximumWeekCount ? Math.ceil(weekCount / maximumWeekCount) : 1;
 
-  /* Axis label visibility need some padding depending on the amount of weeks shown */
-  const dayPadding = dayInSeconds * alternateBy;
+  /**
+   * Axis label visibility need some padding depending on the amount of weeks shown
+   */
+  const dayPadding = DAY_IN_SECONDS * alternateBy;
 
-  /* Generate all week lines, then filter axis labels that need to be shown */
+  /**
+   * Generate all week lines, then filter axis labels that need to be shown.
+   * Filtering is done to prevent cut off dates or week numbers at the start and end of the graph.
+   */
   const weekGridLines = getWeekGridLines(firstWeekUnix, weekCount);
   const weekDateLabels = filterWeeks(
     weekGridLines,
@@ -137,16 +148,16 @@ function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
   const weekNumbersLabels = filterWeeks(
     weekGridLines,
     alternateBy,
-    startUnix - 1 * dayPadding,
-    endUnix - 2 * dayPadding
+    startUnix - dayPadding,
+    endUnix + 5 * DAY_IN_SECONDS - 1.5 * dayPadding
   );
 
   return { weekGridLines, weekDateLabels, weekNumbersLabels };
 }
 
 function getWeekGridLines(firstWeekUnix: number, weekCount: number) {
-  return [...new Array(weekCount)].map(
-    (_, i) => firstWeekUnix + i * weekInSeconds
+  return [...new Array(weekCount + 2)].map(
+    (_, i) => firstWeekUnix + i * WEEK_IN_SECONDS
   );
 }
 

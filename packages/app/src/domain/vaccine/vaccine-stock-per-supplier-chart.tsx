@@ -102,7 +102,7 @@ export function VaccineStockPerSupplierChart({
         source: siteText.vaccinaties.bronnen.rivm,
       }}
       timeframeOptions={['all', '5weeks']}
-      timeframeInitialValue="all"
+      timeframeInitialValue="5weeks"
     >
       {(timeframe) => (
         <>
