@@ -26,6 +26,11 @@ export function TooltipContent(props: IProps) {
         <Heading
           level={3}
           m={0}
+          /**
+           * do not read the tooltip title because a screenreader will also read
+           * the choropleth link which contains the name of a region.
+           */
+          aria-hidden="true"
           fontSize="1.125rem"
           css={css({
             overflow: 'hidden',
