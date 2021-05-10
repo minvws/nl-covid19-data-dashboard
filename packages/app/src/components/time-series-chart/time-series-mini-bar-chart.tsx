@@ -107,7 +107,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     [values, today]
   );
 
-  const [handleHover, hoverState] = useHoverState({
+  const [hoverState, chartEventHandlers] = useHoverState({
     values,
     padding,
     seriesConfig,
@@ -155,7 +155,9 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
           height={height}
           padding={padding}
           ariaLabelledBy={ariaLabelledBy || ''}
-          onHover={handleHover}
+          onHover={chartEventHandlers.handleHover}
+          onFocus={chartEventHandlers.handleFocus}
+          onBlur={chartEventHandlers.handleBlur}
         >
           <Axes
             bounds={bounds}

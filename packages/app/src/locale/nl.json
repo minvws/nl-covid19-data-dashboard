@@ -274,9 +274,13 @@
     },
     "tooltip_labels": {
       "infected_per_100k": "Positief getest per 100.000",
+      "infected_per_100k_moving_average": "Positief getest per 100.000",
       "infected_percentage": "Percentage positieve testen",
+      "infected_percentage_moving_average": "Percentage positieve testen",
       "tested_total": "Totaal aantal testen",
-      "infected": "Aantal positieve testen"
+      "tested_total_moving_average": "Totaal aantal testen",
+      "infected": "Aantal positieve testen",
+      "infected_moving_average": "Aantal positieve testen"
     }
   },
   "besmettelijke_personen": {
@@ -1103,7 +1107,9 @@
     "linechart_totaltests_titel": "Aantal testen door de tijd heen",
     "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten door de tijd heen zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
+    "linechart_totaltests_legend_label_moving_average": "GGD-testen waarvan uitslag bekend is",
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
+    "linechart_positivetests_legend_label_moving_average": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."
@@ -1142,7 +1148,9 @@
     "linechart_totaltests_titel": "Aantal testen door de tijd heen",
     "linechart_totaltests_toelichting": "Deze grafiek laat het dagelijks aantal bekende testuitslagen in de GGD-teststraten door de tijd heen zien, en hoeveel daarvan een positieve uitslag hebben. De gegevens zijn gesorteerd op de datum waarop de test bij de GGD plaatsvond. Het duurt gemiddeld één tot twee dagen voordat testuitslagen bekend zijn.",
     "linechart_totaltests_legend_label": "GGD-testen waarvan uitslag bekend is",
+    "linechart_totaltests_legend_label_moving_average": "GGD-testen waarvan uitslag bekend is",
     "linechart_positivetests_legend_label": "GGD-testen met een positieve uitslag",
+    "linechart_positivetests_legend_label_moving_average": "GGD-testen met een positieve uitslag",
     "reference": {
       "href": "/verantwoording#positieve-testen",
       "text": "Lees meer over de informatie op deze pagina in de ‘Cijferverantwoording’."

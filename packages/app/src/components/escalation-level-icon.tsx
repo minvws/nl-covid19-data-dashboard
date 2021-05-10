@@ -4,6 +4,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { asResponsiveArray } from '~/style/utils';
 import { useIntl } from '~/intl';
+import { VisuallyHidden } from './visually-hidden';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
@@ -21,15 +22,14 @@ export function EscalationLevelIcon({
   /* Colors are in a 0-indexed array */
   const color = escalationThresholds[level - 1].color;
 
-  const { siteText } = useIntl();
+  const intl = useIntl();
 
   return (
     <div css={css({ display: 'inline-block' })}>
-      <StyledEscalationLevelIcon
-        color={color}
-        title={`${siteText.common.niveau} ${level}`}
-        size={size}
-      >
+      <StyledEscalationLevelIcon color={color} size={size}>
+        <VisuallyHidden>
+          {intl.siteText.common.risiconiveau_singular}
+        </VisuallyHidden>{' '}
         {level}
       </StyledEscalationLevelIcon>
     </div>
