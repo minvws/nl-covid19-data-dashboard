@@ -28,11 +28,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     valueMinWidth,
   } = tooltipData;
 
-  const {
-    getValueString,
-    getRangeValueString,
-    getDateStringFromValue,
-  } = useStringFormatting();
+  const { formatSeriesValue, getDateStringFromValue } = useStringFormatting();
 
   const dateString = getDateStringFromValue(value);
 
@@ -53,6 +49,9 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         {seriesConfig.map((x, index) => {
           switch (x.type) {
             case 'stacked-area':
+            case 'line':
+            case 'area':
+            case 'bar':
               return (
                 <TooltipListItem
                   key={index}
@@ -60,12 +59,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   label={x.shortLabel ?? x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
-                  <b>
-                    {getValueString(
-                      (value[x.metricProperty] as unknown) as number | null,
-                      options.isPercentage
-                    )}
-                  </b>
+                  <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
                 </TooltipListItem>
               );
 
@@ -78,30 +72,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
                   <b css={css({ whiteSpace: 'nowrap' })}>
-                    {getRangeValueString(
-                      (value[x.metricPropertyLow] as unknown) as number | null,
-                      (value[x.metricPropertyHigh] as unknown) as number | null,
-                      options.isPercentage
-                    )}
-                  </b>
-                </TooltipListItem>
-              );
-
-            case 'line':
-            case 'area':
-            case 'bar':
-              return (
-                <TooltipListItem
-                  key={index}
-                  icon={<SeriesIcon config={x} />}
-                  label={x.shortLabel ?? x.label}
-                  displayTooltipValueOnly={displayTooltipValueOnly}
-                >
-                  <b>
-                    {getValueString(
-                      (value[x.metricProperty] as unknown) as number | null,
-                      options.isPercentage
-                    )}
+                    {formatSeriesValue(value, x, options.isPercentage)}
                   </b>
                 </TooltipListItem>
               );
@@ -113,12 +84,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   label={x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
                 >
-                  <b>
-                    {getValueString(
-                      (value[x.metricProperty] as unknown) as number | null,
-                      x.isPercentage
-                    )}
-                  </b>
+                  <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
                 </TooltipListItem>
               );
           }
@@ -193,16 +159,15 @@ const TooltipEntryValue = styled.span`
 export const TooltipList = styled.ol<{
   hasTwoColumns?: boolean;
   valueMinWidth?: string;
-}>`
-  ${({ hasTwoColumns }) =>
-    css({
-      columns: hasTwoColumns ? 2 : 1,
-      m: 0,
-      p: 0,
-      listStyle: 'none',
-    })}
+}>((x) =>
+  css({
+    columns: x.hasTwoColumns ? 2 : 1,
+    m: 0,
+    p: 0,
+    listStyle: 'none',
 
-  ${TooltipEntryValue} {
-    min-width: ${({ valueMinWidth }) => valueMinWidth ?? 'unset'};
-  }
-`;
+    [TooltipEntryValue]: {
+      minWidth: x.valueMinWidth ?? 'unset',
+    },
+  })
+);
