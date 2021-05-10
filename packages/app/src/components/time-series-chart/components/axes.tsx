@@ -55,7 +55,7 @@ type AxesProps = {
   xRangePadding?: number;
 };
 
-type AnyTickFormatter = (value: any) => string;
+export type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
   numGridLines,

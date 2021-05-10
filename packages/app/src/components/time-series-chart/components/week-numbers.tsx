@@ -5,21 +5,26 @@ import { GridColumns } from '@visx/grid';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { AnyTickFormatter } from '~/components/line-chart/components';
-import { getWeekInfo } from '~/components/stacked-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { createDate } from '~/utils/create-date';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { Bounds } from '../logic';
+import { Bounds, getWeekInfo } from '../logic';
+import { AnyTickFormatter } from './axes';
 
 /**
  * Only show this amount of week numbers
  */
-const maximumWeekCount = 6;
+const MAXIMUM_WEEK_COUNT = 6;
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
 const WEEK_IN_SECONDS = 7 * DAY_IN_SECONDS;
+
+/**
+ * Space to render above and below the graph
+ */
+const DRAWING_BUFFER = 100;
 
 interface WeekNumberProps {
   startUnix: number;
@@ -59,7 +64,7 @@ export function WeekNumbers({
 
   const formatWeekNumberAxis = useCallback(
     (dateUnix: number) => {
-      const date = new Date(dateUnix * 1000);
+      const date = createDate(dateUnix);
       const weekInfo = getWeekInfo(date);
       return replaceVariablesInText(siteText.common.week_number_label, {
         weekNumber: weekInfo.weekNumber,
@@ -73,9 +78,9 @@ export function WeekNumbers({
       <RectClipPath
         id={id}
         width={bounds.width}
-        height={bounds.height + 200}
+        height={bounds.height + DRAWING_BUFFER * 2}
         x={0}
-        y={-100}
+        y={-DRAWING_BUFFER}
       />
       <g
         css={css({
@@ -112,14 +117,16 @@ export function WeekNumbers({
 
 function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
   const weekCount = Math.floor((endUnix - startUnix) / WEEK_IN_SECONDS);
-  const firstWeek = getWeekInfo(new Date(startUnix * 1000));
+  const firstWeek = getWeekInfo(createDate(startUnix));
   const firstWeekUnix = firstWeek.weekStartDate.getTime() / 1000;
 
   /**
    * Make sure to only show maximum `numberOfWeeks`
    */
   const alternateBy =
-    weekCount > maximumWeekCount ? Math.ceil(weekCount / maximumWeekCount) : 1;
+    weekCount > MAXIMUM_WEEK_COUNT
+      ? Math.ceil(weekCount / MAXIMUM_WEEK_COUNT)
+      : 1;
 
   /**
    * Axis label visibility need some padding depending on the amount of weeks shown
@@ -142,9 +149,9 @@ function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
 }
 
 function getWeekGridLines(firstWeekUnix: number, weekCount: number) {
-  return [...new Array(weekCount + 2)].map(
-    (_, i) => firstWeekUnix + i * WEEK_IN_SECONDS
-  );
+  return new Array(weekCount + 2)
+    .fill(0)
+    .map((_, i) => firstWeekUnix + i * WEEK_IN_SECONDS);
 }
 
 function filterWeeks(
@@ -163,8 +170,8 @@ function filterWeeks(
 }
 
 function getWeekRenderWidth(
-  coordinateA: number | undefined,
-  coordinateB: number | undefined
+  coordinateA?: number,
+  coordinateB?: number
 ): number {
   if (isDefined(coordinateA) && isDefined(coordinateB)) {
     return coordinateB - coordinateA;
