@@ -1,7 +1,7 @@
-export const titleDescriptionBlock = {
-  title: 'Titel en toelichting blok',
-  name: 'titleDescriptionBlock',
-  type: 'object',
+export const figureExplanationItem = {
+  title: 'Inklapbare titel en inhoud voor cijferverantwoording',
+  name: 'figureExplanationItem',
+  type: 'document',
   fields: [
     {
       name: 'title',
@@ -14,9 +14,9 @@ export const titleDescriptionBlock = {
         }),
     },
     {
-      name: 'description',
+      name: 'content',
       type: 'localeBlock',
-      title: 'Toelichting',
+      title: 'Inhoud',
       validation: (Rule: any) =>
         Rule.fields({
           nl: (fieldRule: any) => fieldRule.reset().required(),
