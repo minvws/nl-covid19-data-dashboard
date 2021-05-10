@@ -9,8 +9,8 @@
     "tested_overall__infected": {
       "$ref": "#/definitions/diff_integer"
     },
-    "hospital_nice__admissions_on_date_of_reporting": {
-      "$ref": "#/definitions/diff_integer"
+    "hospital_nice__admissions_on_date_of_reporting_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
@@ -22,7 +22,7 @@
   "required": [
     "tested_overall__infected_per_100k",
     "tested_overall__infected",
-    "hospital_nice__admissions_on_date_of_reporting",
+    "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "deceased_rivm__covid_daily"
   ],
   "additionalProperties": false,

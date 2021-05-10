@@ -31,7 +31,7 @@ export interface GmDeceasedRivmValue {
 export interface MunicipalDifference {
   tested_overall__infected_per_100k: DifferenceDecimal;
   tested_overall__infected: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceDecimal;
   deceased_rivm__covid_daily: DifferenceInteger;
 }
@@ -198,7 +198,7 @@ export interface NationalDifference {
   tested_ggd_average__tested_total: DifferenceInteger;
   tested_ggd_average__infected_percentage: DifferenceDecimal;
   infectious_people__estimate: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
   intensive_care_nice__admissions_on_date_of_reporting: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
@@ -842,7 +842,7 @@ export interface RegionalDifference {
   tested_ggd_average__infected_percentage: DifferenceDecimal;
   tested_ggd_daily__tested_total: DifferenceInteger;
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
