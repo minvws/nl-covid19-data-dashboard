@@ -65,7 +65,7 @@ const Headers = () => {
           <InlineText>per 100.000 inwoners / week</InlineText>
         </Box>
       </Box>
-      <Box flex="1">
+      <Box flex="1" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center">
           <Ziekenhuis width="32px" height="32px" />
           <InlineText>Ziekenhuisopnames</InlineText>

@@ -74,7 +74,7 @@ const BarScaleCell = ({
         alignItems="center"
         display="flex"
         justifyContent={{ lg: 'flex-end' }}
-        mr={{ _: '1.5rem', lg: '1rem' }}
+        mr={{ _: '2.5rem', lg: '1rem' }}
       >
         <InlineText fontWeight="bold">{formatNumber(value)}</InlineText>
       </Box>
