@@ -5,7 +5,7 @@ export * from './escalation-level-page';
 export * from './hospital-page';
 export * from './intensive-care-page';
 export * from './over-dit-dashboard-page';
-export * from './over-risico-niveaus-page';
+export * from './over-risiconiveaus-page';
 export * from './positive-tests-page';
 export * from './reproduction-page';
 export * from './sewer-page';
