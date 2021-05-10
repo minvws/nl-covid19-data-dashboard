@@ -99,6 +99,10 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           '&:focus': {
             outline: 'none',
           },
+          // For the bottom axes, the tickLabelProps or labelProps won't change the fontSize
+          '.visx-axis-bottom tspan': {
+            fontSize: 12,
+          },
         })}
       >
         <VisxText
@@ -208,6 +212,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
               <VisxText
                 textAnchor="middle"
                 verticalAnchor="middle"
+                fontSize="12"
                 y={
                   ageGroupRangePoint(value) + ageGroupRangeScale.bandwidth() / 2
                 }

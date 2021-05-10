@@ -24,13 +24,13 @@
     "infectious_people__estimate": {
       "$ref": "#/definitions/diff_integer"
     },
-    "hospital_nice__admissions_on_date_of_reporting": {
-      "$ref": "#/definitions/diff_integer"
+    "hospital_nice__admissions_on_date_of_reporting_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
-    "intensive_care_nice__admissions_on_date_of_reporting": {
+    "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "intensive_care_lcps__beds_occupied_covid": {
@@ -76,7 +76,7 @@
   "required": [
     "tested_overall__infected_per_100k_moving_average",
     "tested_overall__infected_moving_average",
-    "hospital_nice__admissions_on_date_of_reporting",
+    "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "hospital_lcps__beds_occupied_covid",
     "tested_ggd_daily__tested_total",
     "tested_ggd_daily__infected_percentage",
@@ -84,7 +84,7 @@
     "tested_ggd_average__infected_percentage_moving_average",
     "reproduction__index_average",
     "infectious_people__estimate",
-    "intensive_care_nice__admissions_on_date_of_reporting",
+    "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
     "intensive_care_lcps__beds_occupied_covid",
     "doctor__covid_symptoms_per_100k",
     "doctor__covid_symptoms",

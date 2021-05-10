@@ -29,9 +29,15 @@ export interface GmDeceasedRivmValue {
   date_of_insertion_unix: number;
 }
 export interface MunicipalDifference {
+<<<<<<< HEAD
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+=======
+  tested_overall__infected_per_100k: DifferenceDecimal;
+  tested_overall__infected: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
+>>>>>>> topic/moving-averages-schemas-together
   sewer__average?: DifferenceDecimal;
   deceased_rivm__covid_daily: DifferenceInteger;
 }
@@ -167,6 +173,7 @@ export interface National {
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
   behavior: NationalBehavior;
+  behavior_per_age_group?: NlBehaviorPerAgeGroup;
   deceased_rivm: NationalDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
@@ -197,7 +204,7 @@ export interface NationalDifference {
   tested_ggd_average__tested_total_moving_average: DifferenceDecimal;
   tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
   infectious_people__estimate: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
   intensive_care_nice__admissions_on_date_of_reporting: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
@@ -516,6 +523,34 @@ export interface NationalBehaviorValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface NlBehaviorPerAgeGroup {
+  avoid_crowds_compliance: NlBehaviorPerAgeGroupValue;
+  avoid_crowds_support: NlBehaviorPerAgeGroupValue;
+  curfew_compliance: NlBehaviorPerAgeGroupValue;
+  curfew_support: NlBehaviorPerAgeGroupValue;
+  keep_distance_compliance: NlBehaviorPerAgeGroupValue;
+  keep_distance_support: NlBehaviorPerAgeGroupValue;
+  max_visitors_compliance: NlBehaviorPerAgeGroupValue;
+  max_visitors_support: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_compliance: NlBehaviorPerAgeGroupValue;
+  sneeze_cough_elbow_support: NlBehaviorPerAgeGroupValue;
+  wash_hands_compliance: NlBehaviorPerAgeGroupValue;
+  wash_hands_support: NlBehaviorPerAgeGroupValue;
+  wear_mask_public_indoors_compliance: NlBehaviorPerAgeGroupValue;
+  wear_mask_public_indoors_support: NlBehaviorPerAgeGroupValue;
+  work_from_home_compliance: NlBehaviorPerAgeGroupValue;
+  work_from_home_support: NlBehaviorPerAgeGroupValue;
+  date_of_insertion_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
+}
+export interface NlBehaviorPerAgeGroupValue {
+  "16_24": number;
+  "25_39": number;
+  "40_54": number;
+  "55_69": number;
+  "70_plus": number;
+}
 export interface NationalDeceasedRivm {
   values: NationalDeceasedRivmValue[];
   last_value: NationalDeceasedRivmValue;
@@ -570,11 +605,11 @@ export interface NlVaccineSupport {
 }
 export interface NlVaccineSupportValue {
   percentage_average: number;
-  percentage_70_plus: number;
-  percentage_55_69: number;
-  percentage_40_54: number;
-  percentage_25_39: number;
-  percentage_16_24: number;
+  percentage_70_plus: number | null;
+  percentage_55_69: number | null;
+  percentage_40_54: number | null;
+  percentage_25_39: number | null;
+  percentage_16_24: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -813,7 +848,7 @@ export interface RegionalDifference {
   tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
   tested_ggd_daily__tested_total: DifferenceInteger;
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
