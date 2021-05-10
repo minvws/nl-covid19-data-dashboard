@@ -29,25 +29,13 @@ export interface GmDeceasedRivmValue {
   date_of_insertion_unix: number;
 }
 export interface MunicipalDifference {
-<<<<<<< HEAD
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
-=======
-  tested_overall__infected_per_100k: DifferenceDecimal;
-  tested_overall__infected: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
->>>>>>> topic/moving-averages-schemas-together
   sewer__average?: DifferenceDecimal;
   deceased_rivm__covid_daily_moving_average: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
-  old_value: number;
-  difference: number;
-  old_date_unix: number;
-  new_date_unix: number;
-}
-export interface DifferenceInteger {
   old_value: number;
   difference: number;
   old_date_unix: number;
@@ -206,7 +194,7 @@ export interface NationalDifference {
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
-  intensive_care_nice__admissions_on_date_of_reporting: DifferenceDecimal;
+  intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
@@ -218,13 +206,8 @@ export interface NationalDifference {
   corona_melder_app__warned_daily: DifferenceInteger;
   disability_care__newly_infected_people_moving_average: DifferenceDecimal;
   disability_care__infected_locations_total: DifferenceInteger;
-<<<<<<< HEAD
   elderly_at_home__positive_tested_daily_moving_average: DifferenceDecimal;
-  deceased_rivm__covid_daily: DifferenceInteger;
-=======
-  elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily_moving_average: DifferenceDecimal;
->>>>>>> topic/schema-7-day-average_deceased_rivm__covid_daily
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -857,21 +840,11 @@ export interface RegionalDifference {
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people_moving_average: DifferenceDecimal;
   nursing_home__infected_locations_total: DifferenceInteger;
-<<<<<<< HEAD
-  nursing_home__deceased_daily_moving_average: DifferenceDecimal;
-  disability_care__newly_infected_people: DifferenceInteger;
-=======
-  nursing_home__deceased_daily: DifferenceInteger;
+  nursing_home__deceased_daily_moving_average?: DifferenceDecimal;
   disability_care__newly_infected_people_moving_average: DifferenceDecimal;
->>>>>>> topic/schema-7-day-average-vulnerable-people
-  disability_care__infected_locations_total: DifferenceInteger;
-<<<<<<< HEAD
+  disability_care__infected_locations_total?: DifferenceInteger;
   elderly_at_home__positive_tested_daily_moving_average: DifferenceDecimal;
-  deceased_rivm__covid_daily: DifferenceInteger;
-=======
-  elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily_moving_average: DifferenceDecimal;
->>>>>>> topic/schema-7-day-average_deceased_rivm__covid_daily
 }
 export interface DifferenceDecimal {
   old_value: number;
