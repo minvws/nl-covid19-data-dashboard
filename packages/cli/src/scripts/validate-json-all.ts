@@ -87,7 +87,8 @@ Promise.all(promisedValidations)
  */
 async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
   const validateFunction = await createValidateFunction(
-    path.join(schemaDirectory, schemaName, `__index.json`)
+    '__index.json',
+    path.join(schemaDirectory, schemaName)
   );
 
   return schemaInfo.files.map((fileName) => {
