@@ -5,6 +5,9 @@ import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
 
+type LocaleData = string | Record<string, string>;
+type LocaleFile = Record<string, LocaleData>;
+
 // These keys aren't directly referenced in the code base, so we add them manually here
 const whitelist = [
   'choropleth.tested_overall',
@@ -66,14 +69,14 @@ const newLocaleObjects = propertyAssignmentNodes
       return aggr;
     },
     { nl: {}, en: {} } as {
-      nl: Record<string, any | string>;
-      en: Record<string, any | string>;
+      nl: LocaleFile;
+      en: LocaleFile;
     }
   );
 
 const newJson: {
-  nl: Record<string, any | string>;
-  en: Record<string, any | string>;
+  nl: LocaleFile;
+  en: LocaleFile;
 } = unflatten(newLocaleObjects, {
   object: true,
 });

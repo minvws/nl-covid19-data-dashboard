@@ -30,7 +30,7 @@
     "validate-features": "ts-node src/scripts/validate-features.ts",
     "generate-typescript": "ts-node src/scripts/generate-data-types.ts",
     "generate-sitemap": "ts-node src/scripts/generate-sitemap.ts",
-    "strip-locale": "ts-node src/locale/strip-locale.ts"
+    "strip-unused-locale-keys": "ts-node src/locale/strip-unused-locale-keys.ts"
   },
   "devDependencies": {
     "@types/meow": "^5.0.0"
