@@ -38,7 +38,11 @@ export const CollapsibleButton = ({
   const height = buttonHeight + (isOpen ? contentHeight : 0) || undefined;
 
   return (
-    <Container style={{ height }} isOpen={isOpen} buttonWidth={buttonWidth}>
+    <Container
+      style={{ maxHeight: height }}
+      isOpen={isOpen}
+      buttonWidth={buttonWidth}
+    >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer ref={buttonRef}>
           <div ref={buttonContainerRef} css={css({ display: 'flex' })}>
@@ -135,7 +139,9 @@ const Container = styled(Box).attrs({ as: 'section' })<{
     //panel
     '[data-reach-disclosure-panel]': {
       position: 'relative',
-      transition: 'height 0.5s, border-color 1.5s',
+      transition: 'max-height 0.5s, border-color 1.5s',
+      // transitionProperty: 'max-height, opacity',
+      // transitionDuration: '0.5s',
       width: '100%',
       overflow: 'hidden',
       opacity: 0,
@@ -156,7 +162,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       '> div': {
         transition: 'opacity 0.6s',
         transitionDelay: '0.4s',
-        opacity: x.isOpen ? 1 : 0,
+        // opacity: x.isOpen ? 1 : 0,
       },
     },
 
@@ -165,7 +171,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
     },
 
     '[data-reach-disclosure-panel][data-state="collapsed"]': {
-      height: 0,
+      maxHeight: 0,
       opacity: 0,
     },
   })
