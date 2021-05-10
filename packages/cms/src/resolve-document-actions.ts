@@ -7,7 +7,7 @@ import defaultResolve, {
 } from 'part:@sanity/base/document-actions';
 import { DocumentActionProps, PublishOrAcceptAction } from './actions';
 import { onDocument$ } from './hooks/helper/document-subject';
-import * as pages from './schemas/documents';
+import * as documents from './schemas/documents';
 
 /**
  * Actions are shown in this order, so the Publish button is the default
@@ -21,7 +21,7 @@ const defaultPublishingActions = [
 /**
  * Here we set the default actions on all documents
  */
-const documentsWithDefaultActions = Object.values(pages).reduce(
+const documentsWithDefaultActions = Object.values(documents).reduce(
   (pages, schema) => ({ ...pages, [schema.name]: defaultPublishingActions }),
   {}
 );
