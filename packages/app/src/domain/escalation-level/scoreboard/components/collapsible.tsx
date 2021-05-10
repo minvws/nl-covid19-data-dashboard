@@ -93,6 +93,7 @@ const Header = styled.button<{ showChevron: boolean; open: boolean }>((props) =>
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           transform: props.open ? 'rotate(0deg)' : 'rotate(-90deg)',
+          transition: 'transform 0.4s ease-in-out, opacity 0.4s ease-in-out',
           content: '""',
           flex: '0 0 3em',
           height: '1.25rem',
