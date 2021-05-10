@@ -16,6 +16,7 @@ export interface TimespanAnnotationConfig {
   end: number;
   label: string;
   shortLabel?: string;
+  cutValuesForMetricProperties?: string[];
 }
 
 /**

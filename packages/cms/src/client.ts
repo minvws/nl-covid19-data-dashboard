@@ -2,6 +2,8 @@ import sanityClient, { ClientConfig } from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
 import sanityJson from '../sanity.json';
+// @ts-ignore Creates a ts-node compile error at "run-time"
+import getUserConfig from '@sanity/cli/lib/util/getUserConfig';
 
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
@@ -19,13 +21,18 @@ dotenv.config({
 const clientConfig: ClientConfig = {
   apiVersion: '2021-03-25',
   projectId: sanityJson.api.projectId,
-  dataset: sanityJson.api.dataset,
-  token: process.env.SANITY_STUDIO_TOKEN,
   useCdn: false,
 };
 
-export function getClient(dataset?: string) {
-  return dataset
-    ? sanityClient({ ...clientConfig, dataset })
-    : sanityClient(clientConfig);
+export function getClient(dataset = 'development') {
+  /**
+   * This is an undocumented feature. Taken from the Sanity CLI code.
+   */
+  const tokenFromLogIn = getUserConfig().get('authToken');
+
+  return sanityClient({
+    ...clientConfig,
+    dataset,
+    token: tokenFromLogIn || process.env.SANITY_TOKEN,
+  });
 }
