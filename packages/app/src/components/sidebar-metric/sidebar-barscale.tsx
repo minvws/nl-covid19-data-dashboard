@@ -1,17 +1,20 @@
+import {
+  getLastFilledValue,
+  Metric,
+  MetricKeys,
+} from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
-import { Metric, MetricKeys } from '@corona-dashboard/common';
+import { useIntl } from '~/intl';
+import { AllLanguages } from '~/locale';
 import { assert } from '~/utils/assert';
-import { getLastFilledValue } from '@corona-dashboard/common';
 import {
   DataScope,
   getMetricConfig,
   metricContainsPartialData,
 } from '../../metric-config';
 import { Box } from '../base';
-import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
 
 interface SidebarBarScaleProps<T> {
   scope: DataScope;
@@ -30,7 +33,7 @@ export function SidebarBarScale<T>({
 }: SidebarBarScaleProps<T>) {
   const { siteText } = useIntl();
 
-  const text = siteText[localeTextKey] as Record<string, string>;
+  const text = siteText[localeTextKey];
   /**
    * @TODO this is still a bit messy due to improper typing. Not sure how to
    * fix this easily. The getLastFilledValue function is now strongly typed on
@@ -82,7 +85,9 @@ export function SidebarBarScale<T>({
   );
 
   assert(
-    text.barscale_screenreader_text,
+    typeof text === 'object' &&
+      'barscale_screenreader_text' in text &&
+      text.barscale_screenreader_text,
     `Missing screen reader text at ${String(
       localeTextKey
     )}.barscale_screenreader_text`

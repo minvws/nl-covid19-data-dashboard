@@ -28,11 +28,14 @@ export function useReverseRouter() {
         verdenkingenHuisartsen: () => `/landelijk/verdenkingen-huisartsen`,
         gedrag: () => `/landelijk/gedrag`,
         maatregelen: () => `/landelijk/maatregelen`,
+        coronamelder: () => `/landelijk/coronamelder`,
       },
 
       gm: {
-        index: (code: string) =>
-          reverseRouter.gm.positiefGetesteMensen(code) + openMenuSuffix,
+        index: (code?: string) =>
+          code
+            ? reverseRouter.gm.positiefGetesteMensen(code) + openMenuSuffix
+            : `/gemeente`,
         positiefGetesteMensen: (code: string) =>
           `/gemeente/${code}/positief-geteste-mensen`,
         sterfte: (code: string) => `/gemeente/${code}/sterfte`,
@@ -42,8 +45,10 @@ export function useReverseRouter() {
       },
 
       vr: {
-        index: (code: string) =>
-          reverseRouter.vr.risiconiveau(code) + openMenuSuffix,
+        index: (code?: string) =>
+          code
+            ? reverseRouter.vr.risiconiveau(code) + openMenuSuffix
+            : '/veiligheidsregio',
         maatregelen: (code: string) => `/veiligheidsregio/${code}/maatregelen`,
         risiconiveau: (code: string) =>
           `/veiligheidsregio/${code}/risiconiveau`,

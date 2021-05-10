@@ -36,6 +36,7 @@ import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
+import { useFeature } from '~/lib/features';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -75,6 +76,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
       municipalityName,
     }),
   };
+
+  const featureInfectionsMovingAverage = useFeature('infectionsMovingAverage');
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -142,33 +145,69 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             timeframeOptions={['all', '5weeks']}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                values={data.tested_overall.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'infected_per_100k',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'invisible',
-                    metricProperty: 'infected',
-                    label: siteText.common.totaal,
-                  },
-                ]}
-                dataOptions={{
-                  benchmark: {
-                    value: 7,
-                    label: siteText.common.signaalwaarde,
-                  },
-                }}
-              />
-            )}
+            {(timeframe) =>
+              featureInfectionsMovingAverage.isEnabled ? (
+                <TimeSeriesChart
+                  values={data.tested_overall.values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_per_100k_moving_average',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_per_100k_moving_average,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'infected_per_100k',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_per_100k,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'invisible',
+                      metricProperty: 'infected',
+                      label: siteText.common.totaal,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 7,
+                      label: siteText.common.signaalwaarde,
+                    },
+                  }}
+                />
+              ) : (
+                <TimeSeriesChart
+                  values={data.tested_overall.values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'infected_per_100k',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_per_100k,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'invisible',
+                      metricProperty: 'infected',
+                      label: siteText.common.totaal,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 7,
+                      label: siteText.common.signaalwaarde,
+                    },
+                  }}
+                />
+              )
+            }
           </ChartTile>
 
           <ChoroplethTile
