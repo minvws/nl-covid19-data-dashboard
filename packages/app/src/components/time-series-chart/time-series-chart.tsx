@@ -167,6 +167,7 @@ export function TimeSeriesChart<
     width,
     height,
     paddingLeft,
+    paddingTop: showWeekNumbers ? 20 : undefined,
   });
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);

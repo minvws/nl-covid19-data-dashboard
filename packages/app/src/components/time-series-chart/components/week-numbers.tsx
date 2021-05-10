@@ -1,9 +1,10 @@
 import css from '@styled-system/css';
-import { AxisBottom, AxisTop } from '@visx/axis';
+import { AxisTop } from '@visx/axis';
 import { RectClipPath } from '@visx/clip-path';
 import { GridColumns } from '@visx/grid';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { AnyTickFormatter } from '~/components/line-chart/components';
 import { getWeekInfo } from '~/components/stacked-chart/logic';
 import { useIntl } from '~/intl';
@@ -25,7 +26,6 @@ interface WeekNumberProps {
   endUnix: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   bounds: Bounds;
-  formatXAxis: (date_unix: number) => string;
 }
 
 export function WeekNumbers({
@@ -33,7 +33,6 @@ export function WeekNumbers({
   endUnix,
   xScale,
   bounds,
-  formatXAxis,
 }: WeekNumberProps) {
   /**
    * Used for the clip path,
@@ -42,10 +41,16 @@ export function WeekNumbers({
   const id = useUniqueId();
   const { siteText } = useIntl();
 
-  const { weekGridLines, weekDateLabels, weekNumbersLabels } = useMemo(
+  const { weekGridLines, weekNumbersLabels } = useMemo(
     () => calculateWeekNumberAxis(startUnix, endUnix),
     [startUnix, endUnix]
   );
+
+  /**
+   * Measure the width of a displayed week, used to offset the week number label.
+   * Needs to be index 1 and 2 at least,
+   * since between index 0 and 1 a partial week could occur.
+   */
   const weekRenderWidth = getWeekRenderWidth(
     xScale(weekGridLines[2]),
     xScale(weekGridLines[1])
@@ -84,20 +89,6 @@ export function WeekNumbers({
           stroke={colors.lightGray}
           width={bounds.width}
           strokeDasharray="4 2"
-        />
-
-        <AxisBottom
-          scale={xScale}
-          tickValues={weekDateLabels}
-          tickFormat={formatXAxis as AnyTickFormatter}
-          top={bounds.height}
-          stroke={colors.silver}
-          tickLabelProps={() => ({
-            fill: colors.data.axisLabels,
-            fontSize: 12,
-            textAnchor: 'middle',
-          })}
-          hideTicks
         />
 
         <AxisTop
@@ -139,12 +130,6 @@ function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
    * Filtering is done to prevent cut off dates or week numbers at the start and end of the graph.
    */
   const weekGridLines = getWeekGridLines(firstWeekUnix, weekCount);
-  const weekDateLabels = filterWeeks(
-    weekGridLines,
-    alternateBy,
-    startUnix + 2 * dayPadding,
-    endUnix - 2 * dayPadding
-  );
   const weekNumbersLabels = filterWeeks(
     weekGridLines,
     alternateBy,
@@ -152,7 +137,7 @@ function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
     endUnix + 5 * DAY_IN_SECONDS - 1.5 * dayPadding
   );
 
-  return { weekGridLines, weekDateLabels, weekNumbersLabels };
+  return { weekGridLines, weekNumbersLabels };
 }
 
 function getWeekGridLines(firstWeekUnix: number, weekCount: number) {
@@ -169,7 +154,7 @@ function filterWeeks(
 ) {
   return weekGridLines.filter((weekStartUnix, index) => {
     return (
-      (index + 0) % alternateBy === 0 &&
+      index % alternateBy === 0 &&
       weekStartUnix >= startThresholdUnix &&
       weekStartUnix < endThresholdUnix
     );
@@ -180,8 +165,8 @@ function getWeekRenderWidth(
   coordinateA: number | undefined,
   coordinateB: number | undefined
 ): number {
-  if (coordinateA === undefined || coordinateB === undefined) {
-    return 0;
+  if (isDefined(coordinateA) && isDefined(coordinateB)) {
+    return coordinateB - coordinateA;
   }
-  return coordinateB - coordinateA;
+  return 0;
 }
