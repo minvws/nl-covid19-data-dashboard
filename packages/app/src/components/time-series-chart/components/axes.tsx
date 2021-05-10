@@ -156,7 +156,6 @@ export const Axes = memo(function Axes({
           startUnix={startUnix}
           endUnix={endUnix}
           bounds={bounds}
-          formatXAxis={formatXAxis}
           xScale={xScale}
         />
       )}
