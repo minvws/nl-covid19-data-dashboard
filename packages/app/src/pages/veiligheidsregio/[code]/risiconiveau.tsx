@@ -46,6 +46,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -74,6 +75,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatDateFromSeconds } = useIntl();
   const breakpoints = useBreakpoints();
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.vr_risiconiveau;
 
@@ -110,6 +112,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const escalationColor = useEscalationColor(currentLevel);
+
+  const vrCode = router.query.code as string;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -228,10 +232,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
             {!breakpoints.lg && text.momenteel.link_text && (
               <Box mb={3}>
-                <Link
-                  passHref
-                  href={`/veiligheidsregio/${router.query.code}/maatregelen`}
-                >
+                <Link passHref href={reverseRouter.vr.maatregelen(vrCode)}>
                   {text.momenteel.link_text}
                 </Link>
               </Box>

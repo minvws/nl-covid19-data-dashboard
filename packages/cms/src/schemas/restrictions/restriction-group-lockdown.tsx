@@ -1,11 +1,11 @@
 import React from 'react';
 import { Icon } from '../../components/icons/icon';
 import {
-  restrictionIcons,
   RestrictionIcon,
+  restrictionIcons,
 } from '../../components/icons/icons';
 
-export default {
+export const restrictionGroupLockdown = {
   title: 'Lockdown groep',
   name: 'restrictionGroupLockdown',
   type: 'object',
