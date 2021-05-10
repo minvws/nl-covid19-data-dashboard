@@ -21,13 +21,13 @@
       "type": "object",
       "properties": {
         "infected": {
-          "type": "integer"
+          "type": "number"
         },
         "infected_percentage": {
           "type": "number"
         },
         "tested_total": {
-          "type": "integer"
+          "type": "number"
         },
         "date_start_unix": {
           "type": "integer"
