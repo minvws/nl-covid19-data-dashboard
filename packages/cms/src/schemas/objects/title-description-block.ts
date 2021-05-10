@@ -1,4 +1,4 @@
-export default {
+export const titleDescriptionBlock = {
   title: 'Titel en toelichting blok',
   name: 'titleDescriptionBlock',
   type: 'object',

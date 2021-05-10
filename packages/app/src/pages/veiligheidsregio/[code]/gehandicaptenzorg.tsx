@@ -113,6 +113,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestPeopleText.bronnen.rivm }}
             title={positiveTestPeopleText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={positiveTestPeopleText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -143,6 +144,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       label:
                         positiveTestPeopleText.line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'newly_infected_people_moving_average',
+                      ],
                     },
                   ],
                 }}
@@ -207,6 +211,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 source: locationsText.bronnen.rivm,
               }}
               timeframeOptions={['all', '5weeks']}
+              description={locationsText.linechart_description}
             >
               {(timeframe) => (
                 <TimeSeriesChart
@@ -262,6 +267,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: mortalityText.bronnen.rivm }}
             title={mortalityText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={mortalityText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -291,6 +297,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label: mortalityText.line_chart_legend_inaccurate_label,
                       shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'deceased_daily_moving_average',
+                      ],
                     },
                   ],
                 }}

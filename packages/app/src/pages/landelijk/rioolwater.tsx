@@ -161,6 +161,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: text.bronnen.rivm,
             }}
+            description={text.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart

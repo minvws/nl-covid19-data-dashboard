@@ -1,6 +1,6 @@
 import { supportedLanguages } from '../../language/supported-languages';
 
-export default {
+export const localeBlock = {
   name: 'localeBlock',
   type: 'object',
   title: 'Locale Block Content',

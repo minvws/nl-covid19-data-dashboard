@@ -1,6 +1,6 @@
 import { ARTICLE_FIELDS } from '../fields/article-fields';
 
-export default {
+export const editorial = {
   title: 'Weekbericht',
   name: 'editorial',
   type: 'document',
