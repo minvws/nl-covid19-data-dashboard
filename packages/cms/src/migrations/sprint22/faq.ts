@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { getClient } from '../../client';
 
 const client = getClient();
@@ -35,7 +36,7 @@ function saveFaqQuestionsAsDocuments(questionObjects: any[]) {
       .map((x) =>
         client.create({
           ...x,
-          _key: undefined,
+          _key: uuidv4(),
         })
       )
   );

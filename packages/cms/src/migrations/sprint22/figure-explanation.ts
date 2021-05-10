@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { getClient } from '../../client';
 
 const client = getClient();
@@ -36,7 +37,7 @@ function saveCollapsiblesAsDocuments(collapsibleObjects: any[]) {
         client.create({
           ...x,
           _type: 'figureExplanationItem',
-          _key: undefined,
+          _key: uuidv4(),
         })
       )
   );
@@ -47,7 +48,7 @@ async function migrateNextBatch(): Promise<any> {
 
   const collapsibles =
     pages.length === 1
-      ? pages[0].questions
+      ? pages[0].collapsibleList
       : pages.find((x: any) => x._id.startsWith('drafts.'))?.collapsibleList;
 
   const collapsibleDocuments = await saveCollapsiblesAsDocuments(collapsibles);
