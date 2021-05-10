@@ -15,6 +15,7 @@ const hiddenDocTypes = [
   'topicalPage',
   'veelgesteldeVragen',
   'veelgesteldeVragenGroups',
+  'faqQuestion',
   'cijferVerantwoording',
   'overDitDashboard',
   'overRisicoNiveaus',
@@ -65,21 +66,36 @@ export default () =>
           S.list()
             .title('Groepen en Vragen')
             .items([
+              addListItem(
+                MdQuestionAnswer,
+                'Veelgestelde vragen pagina',
+                'veelgesteldeVragen'
+              ),
               ...S.documentTypeListItems().filter(
                 (item) => item.getId() === 'veelgesteldeVragenGroups'
               ),
-              addListItem(
-                MdQuestionAnswer,
-                'Veelgestelde vragen',
-                'veelgesteldeVragen'
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'faqQuestion'
               ),
             ])
         ),
-      addListItem(
-        BsCardChecklist,
-        'Cijferverantwoording',
-        'cijferVerantwoording'
-      ),
+      S.listItem()
+        .title('Cijferverantwoording')
+        .icon(BsCardChecklist)
+        .child(
+          S.list()
+            .title('Groepen en Vragen')
+            .items([
+              addListItem(
+                MdQuestionAnswer,
+                'CijferVerantwoording pagina',
+                'cijferVerantwoording'
+              ),
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'figureExplanationItem'
+              ),
+            ])
+        ),
       addListItem(
         RiPagesFill,
         'Inschaling risiconiveau',

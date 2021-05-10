@@ -21,3 +21,5 @@ timestamp,action,key
 2021-05-07T08:37:55.866Z,add,veiligheidsregio_rioolwater_metingen.linechart_description
 2021-05-07T08:47:30.850Z,add,gemeente_rioolwater_metingen.linechart_description
 2021-05-10T06:57:25.328Z,add,common.week_number_label
+2021-05-10T11:07:55.275Z,add,common.risiconiveau_singular
+2021-05-10T11:08:57.458Z,add,common.risiconiveau_plural

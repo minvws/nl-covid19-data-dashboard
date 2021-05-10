@@ -1,4 +1,4 @@
-export default {
+export const cijferVerantwoording = {
   name: 'cijferVerantwoording',
   type: 'document',
   title: 'Cijferverantwoording',
@@ -19,7 +19,7 @@ export default {
       title: 'Verantwoordingen',
       description:
         'Je kan verantwoordingen toevoegen, de volgorde veranderen, de teksten bijwerken of verwijderen',
-      of: [{ type: 'collapsible' }],
+      of: [{ type: 'reference', to: { type: 'figureExplanationItem' } }],
     },
   ],
   preview: {
