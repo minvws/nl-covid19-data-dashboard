@@ -1,6 +1,6 @@
 import { supportedLanguages } from '../../language/supported-languages';
 
-export default {
+export const localeString = {
   name: 'localeString',
   type: 'object',
   title: 'Locale String Content',

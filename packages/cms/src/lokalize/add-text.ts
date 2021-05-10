@@ -43,7 +43,6 @@ import { LokalizeText } from './types';
       name: 'subject',
       message: `What is the subject?`,
       format: (x: string) => x.toLowerCase(),
-      validate: (x: string) => !allSubjects.includes(x),
     },
   ]);
 
@@ -105,10 +104,10 @@ async function createTextDocumentForSubject(
       message: 'What is the path in dot notation?',
       format: (x: string) => x.toLowerCase(),
       /**
-       * Do not allow creating a text with a path that already exists
+       * Do not allow creating a text with a key that already exists
        */
       validate: (x: string) =>
-        allTexts.find((text) => text.path == x) === undefined,
+        allTexts.find((text) => text.key === `${subject}.${x}`) === undefined,
     },
     {
       type: 'text',

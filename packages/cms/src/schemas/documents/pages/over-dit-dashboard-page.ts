@@ -1,4 +1,4 @@
-export default {
+export const overDitDashboard = {
   name: 'overDitDashboard',
   type: 'document',
   title: 'Over dit dashboard',

@@ -4,6 +4,7 @@ import {
   Regionaal,
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
+import { Formatters } from './formatters';
 
 // Must be declared global to be detected by typescript (allows import/export)
 // eslint-disable @typescript/interface-name
@@ -28,7 +29,11 @@ declare global {
        * @param pageName
        * @param gmcode
        */
-      beforeMunicipalTests(pageName: string, gmcode?: string): void;
+      beforeMunicipalTests(
+        pageName: string,
+        gmcode?: string,
+        prefix?: string
+      ): void;
       /**
        * Fixture loading and page navigation for national page tests
        *
@@ -41,7 +46,11 @@ declare global {
        * @param pageName
        * @param vrcode
        */
-      beforeRegionTests(pageName: string, vrcode?: string): void;
+      beforeRegionTests(
+        pageName: string,
+        vrcode?: string,
+        prefix?: string
+      ): void;
       /**
        * Ignores any errors coming out of the ResizeObserver
        */
@@ -57,6 +66,11 @@ declare global {
        *
        */
       checkHeadings(): void;
+
+      /**
+       * Date and number formatting functions
+       */
+      formatters: Formatters;
     }
   }
 }
@@ -77,12 +91,12 @@ Cypress.Commands.add('beforeGeneralTests', (pageName: string) => {
 
 Cypress.Commands.add(
   'beforeMunicipalTests',
-  (pageName: string, gmcode = 'GM0363') => {
+  (pageName: string, gmcode = 'GM0363', prefix = '') => {
     cy.swallowResizeObserverError();
 
     cy.fixture<Municipal>(`${gmcode}.json`)
       .as('municipalData')
-      .visit(`/gemeente/${gmcode}/${pageName}`);
+      .visit(`${prefix}/gemeente/${gmcode}/${pageName}`);
 
     cy.checkHeadings();
   }
@@ -103,12 +117,12 @@ Cypress.Commands.add('beforeNationalTests', (pageName: string) => {
 
 Cypress.Commands.add(
   'beforeRegionTests',
-  (pageName: string, vrcode = 'VR13') => {
+  (pageName: string, vrcode = 'VR13', prefix = '') => {
     cy.swallowResizeObserverError();
 
     cy.fixture<Regionaal>(`${vrcode}.json`)
       .as('regionData')
-      .visit(`/veiligheidsregio/${vrcode}/${pageName}`);
+      .visit(`${prefix}/veiligheidsregio/${vrcode}/${pageName}`);
 
     cy.checkHeadings();
   }
