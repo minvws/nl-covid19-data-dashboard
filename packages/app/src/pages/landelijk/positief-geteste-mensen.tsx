@@ -48,6 +48,7 @@ import {
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { useFeature } from '~/lib/features';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -94,6 +95,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const featureInfectionsMovingAverage = useFeature('infectionsMovingAverage');
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -240,33 +243,69 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             timeframeOptions={['all', '5weeks']}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                values={data.tested_overall.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'infected_per_100k',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_per_100k,
-                    color: colors.data.primary,
-                  },
-                  {
-                    type: 'invisible',
-                    metricProperty: 'infected',
-                    label: siteText.common.totaal,
-                  },
-                ]}
-                dataOptions={{
-                  benchmark: {
-                    value: 7,
-                    label: siteText.common.signaalwaarde,
-                  },
-                }}
-              />
-            )}
+            {(timeframe) =>
+              featureInfectionsMovingAverage.isEnabled ? (
+                <TimeSeriesChart
+                  values={data.tested_overall.values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_per_100k_moving_average',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_per_100k_moving_average,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'infected_per_100k',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_per_100k,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'invisible',
+                      metricProperty: 'infected',
+                      label: siteText.common.totaal,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 7,
+                      label: siteText.common.signaalwaarde,
+                    },
+                  }}
+                />
+              ) : (
+                <TimeSeriesChart
+                  values={data.tested_overall.values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'infected_per_100k',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_per_100k,
+                      color: colors.data.primary,
+                    },
+                    {
+                      type: 'invisible',
+                      metricProperty: 'infected',
+                      label: siteText.common.totaal,
+                    },
+                  ]}
+                  dataOptions={{
+                    benchmark: {
+                      value: 7,
+                      label: siteText.common.signaalwaarde,
+                    },
+                  }}
+                />
+              )
+            }
           </ChartTile>
 
           <ChartTile
@@ -370,23 +409,49 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: ggdText.bronnen.rivm,
             }}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                timeframe={timeframe}
-                values={dataGgdDailyValues}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'infected_percentage',
-                    color: colors.data.primary,
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_percentage,
-                  },
-                ]}
-                dataOptions={{ isPercentage: true }}
-              />
-            )}
+            {(timeframe) =>
+              featureInfectionsMovingAverage.isEnabled ? (
+                <TimeSeriesChart
+                  timeframe={timeframe}
+                  values={dataGgdDailyValues}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_percentage_moving_average',
+                      color: colors.data.primary,
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_percentage_moving_average,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'infected_percentage',
+                      color: colors.data.primary,
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_percentage,
+                    },
+                  ]}
+                  dataOptions={{ isPercentage: true }}
+                />
+              ) : (
+                <TimeSeriesChart
+                  timeframe={timeframe}
+                  values={dataGgdDailyValues}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'infected_percentage',
+                      color: colors.data.primary,
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_percentage,
+                    },
+                  ]}
+                  dataOptions={{ isPercentage: true }}
+                />
+              )
+            }
           </ChartTile>
 
           <ChartTile
@@ -397,40 +462,95 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: ggdText.bronnen.rivm,
             }}
           >
-            {(timeframe) => (
-              <TimeSeriesChart
-                timeframe={timeframe}
-                values={dataGgdDailyValues}
-                seriesConfig={[
-                  {
-                    type: 'line',
-                    metricProperty: 'tested_total',
-                    color: colors.data.secondary,
-                    label: ggdText.linechart_totaltests_legend_label,
-                    shortLabel:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .tested_total,
-                  },
-                  {
-                    type: 'line',
-                    metricProperty: 'infected',
-                    color: colors.data.primary,
-                    label: ggdText.linechart_positivetests_legend_label,
-                    shortLabel:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected,
-                  },
-                  {
-                    type: 'invisible',
-                    metricProperty: 'infected_percentage',
-                    label:
-                      siteText.positief_geteste_personen.tooltip_labels
-                        .infected_percentage,
-                    isPercentage: true,
-                  },
-                ]}
-              />
-            )}
+            {(timeframe) =>
+              featureInfectionsMovingAverage.isEnabled ? (
+                <TimeSeriesChart
+                  timeframe={timeframe}
+                  values={dataGgdDailyValues}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'tested_total_moving_average',
+                      color: colors.data.secondary,
+                      label:
+                        ggdText.linechart_totaltests_legend_label_moving_average,
+                      shortLabel:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .tested_total_moving_average,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'tested_total',
+                      color: colors.data.secondary,
+                      label: ggdText.linechart_totaltests_legend_label,
+                      shortLabel:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .tested_total,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'infected_moving_average',
+                      color: colors.data.primary,
+                      label:
+                        ggdText.linechart_positivetests_legend_label_moving_average,
+                      shortLabel:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_moving_average,
+                    },
+                    {
+                      type: 'bar',
+                      metricProperty: 'infected',
+                      color: colors.data.primary,
+                      label: ggdText.linechart_positivetests_legend_label,
+                      shortLabel:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected,
+                    },
+                    {
+                      type: 'invisible',
+                      metricProperty: 'infected_percentage',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_percentage,
+                      isPercentage: true,
+                    },
+                  ]}
+                />
+              ) : (
+                <TimeSeriesChart
+                  timeframe={timeframe}
+                  values={dataGgdDailyValues}
+                  seriesConfig={[
+                    {
+                      type: 'line',
+                      metricProperty: 'tested_total',
+                      color: colors.data.secondary,
+                      label: ggdText.linechart_totaltests_legend_label,
+                      shortLabel:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .tested_total,
+                    },
+                    {
+                      type: 'line',
+                      metricProperty: 'infected',
+                      color: colors.data.primary,
+                      label: ggdText.linechart_positivetests_legend_label,
+                      shortLabel:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected,
+                    },
+                    {
+                      type: 'invisible',
+                      metricProperty: 'infected_percentage',
+                      label:
+                        siteText.positief_geteste_personen.tooltip_labels
+                          .infected_percentage,
+                      isPercentage: true,
+                    },
+                  ]}
+                />
+              )
+            }
           </ChartTile>
         </TileList>
       </NationalLayout>
