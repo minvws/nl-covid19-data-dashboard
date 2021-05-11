@@ -210,20 +210,13 @@ interface ContentProps {
 
 export function Content({ children }: ContentProps) {
   return (
-    <StyledBox>
+    <Box bg="white" fontSize="1.125rem">
       <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth={1000} mx="auto">
         {children}
       </Box>
-    </StyledBox>
+    </Box>
   );
 }
-
-const StyledBox = styled.div(
-  css({
-    bg: 'white',
-    fontSize: '1.125rem',
-  })
-);
 
 const UnorderedList = styled.ul(() =>
   css({
