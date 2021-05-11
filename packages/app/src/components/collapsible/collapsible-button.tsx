@@ -76,7 +76,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
     position: 'relative',
     padding: 0,
     transitionProperty: 'height',
-    transitionDuration: '0.5s',
+    transitionDuration: '0.4s',
 
     //button
     '[data-reach-disclosure-button]': {
@@ -113,6 +113,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
         border: '1px solid',
+        borderRadius: 1,
         borderColor: x.isOpen ? 'lightGray' : 'rgba(0, 0, 0, 0)',
         content: '""',
       },
@@ -130,7 +131,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       width: '100%',
       overflow: 'hidden',
       display: 'block',
-      transition: 'opacity 1.0s',
+      transition: 'opacity 0.5s',
       opacity: x.isOpen ? 1 : 0,
 
       '&:before': {
@@ -147,7 +148,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
     },
 
     '[data-reach-disclosure-panel][data-state="collapsed"]': {
-      height: 0,
+      // height: 0,
     },
   })
 );
