@@ -4,8 +4,10 @@ import { LegendItem } from '~/components/legend';
 import { SeriesIcon, TimespanAnnotationIcon } from '../components';
 import { DataOptions } from './common';
 import { SeriesConfig, isVisible } from './series';
+import { first, last } from 'lodash';
 
 export function useLegendItems<T extends TimestampedValue>(
+  domain: number[],
   config: SeriesConfig<T>,
   dataOptions?: DataOptions
 ) {
@@ -22,10 +24,14 @@ export function useLegendItems<T extends TimestampedValue>(
      */
     if (dataOptions?.timespanAnnotations) {
       for (const annotation of dataOptions.timespanAnnotations) {
+        const annotationVisible =
+          first(domain) <= annotation.end && annotation.start <= last(domain);
+
         items.push({
           label: annotation.label,
           shape: 'custom',
           shapeComponent: <TimespanAnnotationIcon />,
+          hidden: !annotationVisible,
         } as LegendItem);
       }
     }
@@ -39,7 +45,7 @@ export function useLegendItems<T extends TimestampedValue>(
      * a boolean on the chart props.
      */
     return items.length > 1 ? items : [];
-  }, [config, dataOptions]);
+  }, [config, dataOptions, domain]);
 
   return legendItems;
 }

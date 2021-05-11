@@ -7,8 +7,13 @@ type LegendLineStyle = 'solid' | 'dashed';
 
 export type LegendItem = {
   label: string;
+  hidden?: boolean;
 } & (
-  | { shape: LegendShape; color: string; style?: LegendLineStyle }
+  | {
+      shape: LegendShape;
+      color: string;
+      style?: LegendLineStyle;
+    }
   | { shape: 'custom'; shapeComponent: ReactNode }
 );
 
@@ -19,27 +24,29 @@ interface LegendProps {
 export function Legend({ items }: LegendProps) {
   return (
     <List>
-      {items.map((item, i) => {
-        if (item.shape === 'custom') {
+      {items
+        .filter((item) => !item.hidden)
+        .map((item, i) => {
+          if (item.shape === 'custom') {
+            return (
+              <Item key={i}>
+                {item.label}
+                <CustomShape>{item.shapeComponent}</CustomShape>
+              </Item>
+            );
+          }
+
           return (
             <Item key={i}>
               {item.label}
-              <CustomShape>{item.shapeComponent}</CustomShape>
+              {item.shape === 'square' && <Square color={item.color} />}
+              {item.shape === 'line' && (
+                <Line color={item.color} lineStyle={item.style ?? 'solid'} />
+              )}
+              {item.shape === 'circle' && <Circle color={item.color} />}
             </Item>
           );
-        }
-
-        return (
-          <Item key={i}>
-            {item.label}
-            {item.shape === 'square' && <Square color={item.color} />}
-            {item.shape === 'line' && (
-              <Line color={item.color} lineStyle={item.style ?? 'solid'} />
-            )}
-            {item.shape === 'circle' && <Circle color={item.color} />}
-          </Item>
-        );
-      })}
+        })}
     </List>
   );
 }
