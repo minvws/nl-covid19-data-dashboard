@@ -32,7 +32,7 @@ export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
           count={lvl.vrData.length}
           key={lvl.escalationLevel}
         >
-          <Box bg="tileGray" p={-2}>
+          <Box bg="tileGray">
             <Box p={{ _: 3, sm: 4 }}>
               <Headers />
               {lvl.vrData.map((vr) => (

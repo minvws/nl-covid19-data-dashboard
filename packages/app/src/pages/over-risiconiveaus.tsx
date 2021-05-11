@@ -149,7 +149,6 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               <SafetyRegionChoropleth
                 minHeight={200}
                 data={choropleth.vr}
-                getLink={reverseRouter.vr.index}
                 metricName="escalation_levels"
                 metricProperty="level"
                 tooltipContent={(

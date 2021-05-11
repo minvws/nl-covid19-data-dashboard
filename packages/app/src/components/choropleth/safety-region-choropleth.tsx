@@ -30,7 +30,7 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   highlightSelection?: boolean;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   highlightCode?: string;
-  getLink: (code: string) => string;
+  getLink?: (code: string) => string;
   minHeight?: number;
 };
 
@@ -150,7 +150,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
       return (
         <HoverPathLink
-          href={getLink(vrcode)}
+          href={getLink ? getLink(vrcode) : undefined}
           title={vrname}
           isTabInteractive={isTabInteractive}
           id={vrcode}
