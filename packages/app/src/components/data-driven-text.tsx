@@ -82,6 +82,8 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
 
   const baseText = getPluralizedText(valueTexts, propertyValue);
 
+  console.log(data.hospital_nice.last_value);
+
   return (
     <Text>
       {replaceComponentsInText(baseText, {
