@@ -133,7 +133,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.tested_overall__infected_moving_average
                 }
-                isDifferenceMovingAverage
+                isMovingAverageDifference
               />
 
               <Box mb={4}>
@@ -183,7 +183,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected_per_100k"
                 localeTextKey="positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k_moving_average"
-                isDifferenceMovingAverage
+                isMovingAverageDifference
               />
 
               <Text>{text.barscale_toelichting}</Text>

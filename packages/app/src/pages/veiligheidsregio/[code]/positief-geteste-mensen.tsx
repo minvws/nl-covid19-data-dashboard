@@ -137,7 +137,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.tested_overall__infected_moving_average
                 }
-                isDifferenceMovingAverage
+                isMovingAverageDifference
               />
               <Markdown content={text.kpi_toelichting} />
 
@@ -171,7 +171,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected_per_100k"
                 localeTextKey="veiligheidsregio_positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k_moving_average"
-                isDifferenceMovingAverage
+                isMovingAverageDifference
               />
               <Text>{text.barscale_toelichting}</Text>
             </KpiTile>
