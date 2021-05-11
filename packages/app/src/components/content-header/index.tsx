@@ -23,7 +23,7 @@ import { isDefined } from 'ts-is-present';
  * skip-link behavior in IE11.
  *
  * The hack makes part of the sidebar non-clickable because the padding is
- * overlapping it. This is fixed by setting a pointer-event none on the
+ * obscuring it. This is fixed by setting pointer-events none on the
  * HeaderBox element if there is a skip-link and create a new child element with
  * the PointerEventBox that resets the pointer-events again so it works as
  * expected.
