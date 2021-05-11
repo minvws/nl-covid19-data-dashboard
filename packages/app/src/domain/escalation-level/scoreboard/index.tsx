@@ -75,7 +75,6 @@ const Headers = () => {
           css={css({
             hyphens: 'auto',
           })}
-          lang="nl-NL"
         >
           <Box minWidth="24px">
             <Ziekenhuis width="32px" height="32px" />

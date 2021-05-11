@@ -12,6 +12,7 @@ import { Box } from '~/components/base';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { RichContent } from '~/components/cms/rich-content';
+import { CollapsibleSection } from '~/components/collapsible';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { vrData } from '~/data/vr';
 import {
@@ -34,6 +35,7 @@ import {
 import { asResponsiveArray } from '~/style/utils';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { getSkipLinkId } from '~/utils/skip-links';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface OverRisiconiveausData {
@@ -133,14 +135,16 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         </Box>
         <Box
           display="flex"
-          py={4}
+          py={{ _: 2, sm: 4 }}
           borderTopStyle="solid"
           borderTopWidth="1px"
           borderTopColor="lightGray"
+          flexDirection={{ _: 'column', sm: 'row' }}
         >
           <Box flex="0.3" display="flex" justifyContent="center">
             <Box width="12em">
               <SafetyRegionChoropleth
+                minHeight={200}
                 data={choropleth.vr}
                 getLink={reverseRouter.vr.index}
                 metricName="escalation_levels"
@@ -187,6 +191,22 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         </Box>
         <Scoreboard data={scoreboardData} />
+        {content.collapsibleList && (
+          <article>
+            {content.collapsibleList.map((item) => {
+              const id = getSkipLinkId(item.title);
+              return item.content ? (
+                <CollapsibleSection key={id} id={id} summary={item.title}>
+                  {item.content && (
+                    <Box mt={3}>
+                      <RichContent blocks={item.content} />
+                    </Box>
+                  )}
+                </CollapsibleSection>
+              ) : null;
+            })}
+          </article>
+        )}
       </Content>
     </Layout>
   );

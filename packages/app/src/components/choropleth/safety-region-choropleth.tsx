@@ -31,6 +31,7 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   highlightCode?: string;
   getLink: (code: string) => string;
+  minHeight?: number;
 };
 
 /**
@@ -57,6 +58,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     highlightCode,
     highlightSelection,
     getLink,
+    minHeight,
   } = props;
 
   const { siteText } = useIntl();
@@ -183,6 +185,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
+        minHeight={minHeight}
         description={dataDescription}
         featureCollection={regionGeo}
         hovers={hasData ? regionGeo : undefined}
