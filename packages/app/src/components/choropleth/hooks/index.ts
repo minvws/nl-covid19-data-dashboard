@@ -1,4 +1,3 @@
-export * from './use-chart-dimensions';
 export * from './use-choropleth-color-scale';
 export * from './use-municipality-boundingbox';
 export * from './use-municipality-data';

@@ -14,6 +14,7 @@ import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import { useIntl } from '~/intl';
+import { InlineText } from '~/components/typography';
 
 interface DifferenceIndicatorProps {
   value: DifferenceDecimal | DifferenceInteger;
@@ -165,7 +166,7 @@ function TileIndicator({
           <IconUp />
         </IconContainer>
         <Span fontWeight="bold" mr="0.3em">
-          {differenceFormattedString} {splitText[0]}
+          {differenceFormattedString} {splitText[0]}{' '}
         </Span>
 
         <Span color="annotation">
@@ -205,6 +206,65 @@ function TileIndicator({
   );
 }
 
+export function MovingAverageDifferenceIndicator({
+  differenceValue,
+}: {
+  differenceValue: DifferenceDecimal | DifferenceInteger;
+}) {
+  const { difference, old_value } = differenceValue;
+  const { siteText, formatNumber } = useIntl();
+
+  if (difference > 0)
+    return (
+      <Container>
+        <IconContainer color="red">
+          <IconUp />
+        </IconContainer>
+        <InlineText fontWeight="bold">
+          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.hoger}{' '}
+        </InlineText>
+        <InlineText>
+          {siteText.toe_en_afname.zeven_daags_gemiddelde}
+          <InlineText fontWeight="bold">{` (${formatNumber(
+            old_value
+          )})`}</InlineText>
+        </InlineText>
+      </Container>
+    );
+
+  if (difference < 0)
+    return (
+      <Container>
+        <IconContainer color="data.primary">
+          <IconDown />
+        </IconContainer>
+        <InlineText fontWeight="bold">
+          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.lager}{' '}
+        </InlineText>
+        <InlineText>
+          {siteText.toe_en_afname.zeven_daags_gemiddelde}
+          <InlineText fontWeight="bold">{` (${formatNumber(
+            old_value
+          )})`}</InlineText>
+        </InlineText>
+      </Container>
+    );
+
+  return (
+    <Container>
+      <InlineText fontWeight="bold">
+        {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.gelijk}{' '}
+      </InlineText>
+      <InlineText>
+        {siteText.toe_en_afname.zeven_daags_gemiddelde}
+        <InlineText fontWeight="bold">{` (${formatNumber(
+          old_value
+        )})`}</InlineText>
+      </InlineText>
+    </Container>
+  );
+}
+
 type SpanProps = SpaceProps & ColorProps & TypographyProps;
 
 const Span = styled.span<SpanProps>(compose(color, space, typography));
@@ -220,7 +280,6 @@ const IconContainer = styled(Span)(
 
 const Container = styled.span(
   css({
-    whiteSpace: 'nowrap',
     display: 'inline-block',
     fontSize: 2,
     svg: {

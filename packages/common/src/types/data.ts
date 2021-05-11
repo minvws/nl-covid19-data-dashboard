@@ -29,9 +29,9 @@ export interface GmDeceasedRivmValue {
   date_of_insertion_unix: number;
 }
 export interface MunicipalDifference {
-  tested_overall__infected_per_100k: DifferenceDecimal;
-  tested_overall__infected: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
+  tested_overall__infected_moving_average: DifferenceDecimal;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceDecimal;
   deceased_rivm__covid_daily: DifferenceInteger;
 }
@@ -191,16 +191,16 @@ export interface National {
   vaccine_stock: NlVaccineStock;
 }
 export interface NationalDifference {
-  tested_overall__infected_per_100k: DifferenceDecimal;
-  tested_overall__infected: DifferenceInteger;
+  tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
+  tested_overall__infected_moving_average: DifferenceDecimal;
   tested_ggd_daily__tested_total: DifferenceInteger;
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
-  tested_ggd_average__tested_total: DifferenceInteger;
-  tested_ggd_average__infected_percentage: DifferenceDecimal;
+  tested_ggd_average__tested_total_moving_average: DifferenceDecimal;
+  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
   infectious_people__estimate: DifferenceInteger;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
-  intensive_care_nice__admissions_on_date_of_reporting: DifferenceDecimal;
+  intensive_care_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   intensive_care_lcps__beds_occupied_covid: DifferenceInteger;
   doctor__covid_symptoms_per_100k: DifferenceDecimal;
   doctor__covid_symptoms: DifferenceInteger;
@@ -427,8 +427,11 @@ export interface NationalTestedGgdAverage {
 }
 export interface NationalTestedGgdAverageValue {
   infected: number;
+  infected_moving_average: number | null;
   infected_percentage: number;
+  infected_percentage_moving_average: number | null;
   tested_total: number;
+  tested_total_moving_average: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -836,13 +839,13 @@ export interface Regionaal {
   vaccine_coverage?: VrVaccineCoverage;
 }
 export interface RegionalDifference {
-  tested_overall__infected_per_100k: DifferenceDecimal;
-  tested_overall__infected: DifferenceInteger;
-  tested_ggd_average__tested_total: DifferenceInteger;
-  tested_ggd_average__infected_percentage: DifferenceDecimal;
+  tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
+  tested_overall__infected_moving_average: DifferenceDecimal;
+  tested_ggd_average__tested_total_moving_average: DifferenceDecimal;
+  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
   tested_ggd_daily__tested_total: DifferenceInteger;
   tested_ggd_daily__infected_percentage: DifferenceDecimal;
-  hospital_nice__admissions_on_date_of_reporting: DifferenceInteger;
+  hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people: DifferenceInteger;
   nursing_home__infected_locations_total: DifferenceInteger;
@@ -943,8 +946,11 @@ export interface RegionalTestedGgdAverage {
 }
 export interface RegionalTestedGgdAverageValue {
   infected: number;
+  infected_moving_average: number | null;
   infected_percentage: number;
+  infected_percentage_moving_average: number | null;
   tested_total: number;
+  tested_total_moving_average: number | null;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;

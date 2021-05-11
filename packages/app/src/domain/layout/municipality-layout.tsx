@@ -142,7 +142,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             metricName="tested_overall"
                             metricProperty="infected"
                             localeTextKey="gemeente_positief_geteste_personen"
-                            differenceKey="tested_overall__infected"
+                            differenceKey="tested_overall__infected_moving_average"
                           />
                         </MetricMenuItemLink>
 
@@ -180,7 +180,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             metricName="hospital_nice"
                             metricProperty="admissions_on_date_of_reporting"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                            differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

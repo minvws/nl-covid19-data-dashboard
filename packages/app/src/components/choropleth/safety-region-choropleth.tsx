@@ -180,7 +180,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   };
 
   return (
-    <div css={css({ position: 'relative', bg: 'transparent' })}>
+    <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
         description={dataDescription}

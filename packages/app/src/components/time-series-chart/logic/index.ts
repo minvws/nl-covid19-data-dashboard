@@ -5,3 +5,5 @@ export * from './common';
 export * from './legend';
 export * from './dimensions';
 export * from './curves';
+export * from './use-format-series-value';
+export * from './use-value-width';
