@@ -122,8 +122,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="admissions_on_date_of_reporting"
                 absolute={lastValue.admissions_on_date_of_reporting}
                 difference={
-                  data.difference.hospital_nice__admissions_on_date_of_reporting
+                  data.difference
+                    .hospital_nice__admissions_on_date_of_reporting_moving_average
                 }
+                isMovingAverageDifference
               />
             </KpiTile>
           </TwoKpiSection>

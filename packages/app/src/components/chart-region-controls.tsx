@@ -4,7 +4,7 @@ import { useIntl } from '~/intl';
 export type RegionControlOption = 'municipal' | 'region';
 
 interface ChartRegionControlsProps {
-  value?: 'municipal' | 'region';
+  value: RegionControlOption;
   onChange: (value: RegionControlOption) => void;
 }
 
@@ -16,11 +16,11 @@ export function ChartRegionControls(props: ChartRegionControlsProps) {
   const items = [
     {
       label: siteText.charts.region_controls.municipal,
-      value: 'municipal',
+      value: 'municipal' as RegionControlOption,
     },
     {
       label: siteText.charts.region_controls.region,
-      value: 'region',
+      value: 'region' as RegionControlOption,
     },
   ];
 

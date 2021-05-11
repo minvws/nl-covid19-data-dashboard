@@ -180,7 +180,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                           metricProperty: 'infected_per_100k',
                         }}
                         localeTextKey="veiligheidsregio_positief_geteste_personen"
-                        differenceKey="tested_overall__infected"
+                        differenceKey="tested_overall__infected_moving_average"
                         showBarScale={true}
                       />
                     </MetricMenuItemLink>
@@ -219,7 +219,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         metricName="hospital_nice"
                         metricProperty="admissions_on_date_of_reporting"
                         localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
-                        differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                        differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

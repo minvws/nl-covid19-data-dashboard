@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { DifferenceIndicator } from '~/components/difference-indicator';
+import {
+  DifferenceIndicator,
+  MovingAverageDifferenceIndicator,
+} from '~/components/difference-indicator';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 
@@ -15,6 +18,7 @@ interface KpiValueProps {
   differenceStaticTimespan?: string;
   text?: string;
   color?: string;
+  isMovingAverageDifference?: boolean;
 }
 
 /**
@@ -33,6 +37,7 @@ const StyledValue = styled.div(
     fontWeight: 600,
     fontVariantNumeric: 'tabular-nums',
     lineHeight: 1,
+    paddingBottom: '.5rem',
   },
   color
 );
@@ -48,6 +53,7 @@ export function KpiValue({
   differenceStaticTimespan,
   text,
   color = 'data.primary',
+  isMovingAverageDifference,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -71,12 +77,16 @@ export function KpiValue({
           {formatNumber(absolute)}
         </StyledValue>
       )}
-      {difference && (
-        <DifferenceIndicator
-          value={difference}
-          staticTimespan={differenceStaticTimespan}
-        />
-      )}
+
+      {isDefined(difference) &&
+        (isMovingAverageDifference ? (
+          <MovingAverageDifferenceIndicator differenceValue={difference} />
+        ) : (
+          <DifferenceIndicator
+            value={difference}
+            staticTimespan={differenceStaticTimespan}
+          />
+        ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
     </Box>
   );

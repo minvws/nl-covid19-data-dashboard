@@ -72,7 +72,11 @@ export function ChartContainer({
       onClick={onClick}
       tabIndex={onFocus ? 0 : -1}
     >
-      <Group left={padding.left} top={padding.top}>
+      <Group
+        left={padding.left}
+        top={padding.top}
+        css={css({ pointerEvents: 'none' })}
+      >
         {children}
       </Group>
     </svg>

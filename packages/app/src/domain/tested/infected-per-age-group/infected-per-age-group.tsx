@@ -100,7 +100,7 @@ export function InfectedPerAgeGroup({
         values={values}
         timeframe={timeframe}
         seriesConfig={chartConfig}
-        height={breakpoints.md ? 300 : 250}
+        minHeight={breakpoints.md ? 300 : 250}
         disableLegend
         formatTooltip={(data) => (
           <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
