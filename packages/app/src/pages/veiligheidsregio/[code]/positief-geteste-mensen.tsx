@@ -135,9 +135,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="infected"
                 absolute={Math.round(dataOverallLastValue.infected)}
                 difference={
-                  data.difference.tested_overall__infected_is_moving_average
+                  data.difference.tested_overall__infected_moving_average
                 }
-                currentValue={dataOverallLastValue.infected_moving_average}
+                isDifferenceMovingAverage
               />
               <Markdown content={text.kpi_toelichting} />
 
@@ -170,7 +170,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
                 localeTextKey="veiligheidsregio_positief_geteste_personen"
-                differenceKey="tested_overall__infected_per_100k_is_moving_average"
+                differenceKey="tested_overall__infected_per_100k_moving_average"
+                isDifferenceMovingAverage
               />
               <Text>{text.barscale_toelichting}</Text>
             </KpiTile>

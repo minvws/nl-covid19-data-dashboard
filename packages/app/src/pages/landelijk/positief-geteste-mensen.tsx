@@ -98,11 +98,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const featureInfectionsMovingAverage = useFeature('infectionsMovingAverage');
 
-  // console.log(dataOverallLastValue.infected, data.difference.tested_overall__infected_moving_average.difference);
-  // console.log(
-  //   data
-  // );
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
