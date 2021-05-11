@@ -20,9 +20,17 @@ export function useLegendItems<T extends TimestampedValue>(
     }));
 
     /**
+     * Maximum number of legend items
+     *
+     * Used to determine if there are enough items to render a legend
+     */
+    let maxNumItems: number = items.length;
+
+    /**
      * Add annotations to the legend
      */
     if (dataOptions?.timespanAnnotations) {
+      maxNumItems += dataOptions?.timespanAnnotations.length;
       for (const annotation of dataOptions.timespanAnnotations) {
         const annotationVisible =
           (first(domain) as number) <= annotation.end &&
@@ -46,10 +54,7 @@ export function useLegendItems<T extends TimestampedValue>(
      * This prevents us from having to manually set (and possibly forget to set)
      * a boolean on the chart props.
      */
-    const numAnnotations = dataOptions?.timespanAnnotations
-      ? dataOptions?.timespanAnnotations.length
-      : 0;
-    return items.length + numAnnotations > 1 ? items : [];
+    return maxNumItems > 1 ? items : [];
   }, [config, dataOptions, domain]);
 
   return legendItems;
