@@ -161,7 +161,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                       metricProperty: 'infected_per_100k',
                     }}
                     localeTextKey="positief_geteste_personen"
-                    differenceKey="tested_overall__infected"
+                    differenceKey="tested_overall__infected_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -233,7 +233,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -249,7 +249,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                     metricName="intensive_care_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting"
+                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>

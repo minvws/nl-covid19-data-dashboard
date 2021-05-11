@@ -15,7 +15,7 @@ export function VaccineAdministrationsOverTimeChart({
   return (
     <TimeSeriesChart
       initialWidth={400}
-      height={sm ? 180 : 140}
+      minHeight={sm ? 180 : 140}
       timeframe="all"
       values={values}
       displayTooltipValueOnly
