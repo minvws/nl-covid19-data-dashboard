@@ -308,10 +308,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 source: ggdText.bronnen.rivm,
               }}
             >
-              <KpiValue
-                absolute={dataGgdAverageLastValue.tested_total}
-                difference={data.difference.tested_ggd_average__tested_total}
-              />
+              <KpiValue absolute={dataGgdAverageLastValue.tested_total} />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
             <KpiTile
@@ -323,9 +320,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             >
               <KpiValue
                 percentage={dataGgdAverageLastValue.infected_percentage}
-                difference={
-                  data.difference.tested_ggd_average__infected_percentage
-                }
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
               <Text fontWeight="bold">
