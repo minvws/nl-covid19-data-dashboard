@@ -5,6 +5,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const nextDomainsConfig = require('./next.domains.config');
 
 const COMMIT_ID = process.env.NEXT_PUBLIC_COMMIT_ID || 'no-version-found';
 
@@ -35,38 +36,7 @@ const nextConfig = {
     // This is a list of locale domains and the default locale they
     // should handle (these are only required when setting up domain routing)
     // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
-    domains: [
-      //Production environments
-      {
-        domain: 'coronadashboard.nl',
-        defaultLocale: 'nl',
-      },
-      {
-        domain: 'coronadashboard.rijksoverheid.nl',
-        defaultLocale: 'nl',
-      },
-      {
-        domain: 'coronadashboard.government.com',
-        defaultLocale: 'en',
-      },
-      // For convenience, the deploy previews are configured as well
-      {
-        domain: 'develop-en-covid19-data-dashboard.vercel.app',
-        defaultLocale: 'en',
-      },
-      {
-        domain: 'master-en-covid19-data-dashboard.vercel.app',
-        defaultLocale: 'en',
-      },
-      {
-        domain: 'develop-nl-covid19-data-dashboard.vercel.app',
-        defaultLocale: 'nl',
-      },
-      {
-        domain: 'master-nl-covid19-data-dashboard.vercel.app',
-        defaultLocale: 'nl',
-      },
-    ],
+    domains: nextDomainsConfig,
   },
 
   async headers() {
