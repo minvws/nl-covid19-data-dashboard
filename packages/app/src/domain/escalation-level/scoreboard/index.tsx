@@ -33,7 +33,7 @@ export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
           key={lvl.escalationLevel}
         >
           <Box bg="tileGray" p={-2}>
-            <Box p={4}>
+            <Box p={{ _: 3, sm: 4 }}>
               <Headers />
               {lvl.vrData.map((vr) => (
                 <SafetyRegionRow vrData={vr} key={vr.vrCode} />

@@ -138,6 +138,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         <Box
           display="flex"
           py={{ _: 2, sm: 4 }}
+          px={{ _: 3, sm: 0 }}
           borderTopStyle="solid"
           borderTopWidth="1px"
           borderTopColor="lightGray"
