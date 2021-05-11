@@ -28,12 +28,13 @@ export function useLegendItems<T extends TimestampedValue>(
           (first(domain) as number) <= annotation.end &&
           annotation.start <= (last(domain) as number);
 
-        items.push({
-          label: annotation.label,
-          shape: 'custom',
-          shapeComponent: <TimespanAnnotationIcon />,
-          hidden: !annotationVisible,
-        } as LegendItem);
+        if (annotationVisible) {
+          items.push({
+            label: annotation.label,
+            shape: 'custom',
+            shapeComponent: <TimespanAnnotationIcon />,
+          } as LegendItem);
+        }
       }
     }
 
@@ -45,7 +46,10 @@ export function useLegendItems<T extends TimestampedValue>(
      * This prevents us from having to manually set (and possibly forget to set)
      * a boolean on the chart props.
      */
-    return items.length > 1 ? items : [];
+    const numAnnotations = dataOptions?.timespanAnnotations
+      ? dataOptions?.timespanAnnotations.length
+      : 0;
+    return items.length + numAnnotations > 1 ? items : [];
   }, [config, dataOptions, domain]);
 
   return legendItems;

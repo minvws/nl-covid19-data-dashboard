@@ -7,7 +7,6 @@ type LegendLineStyle = 'solid' | 'dashed';
 
 export type LegendItem = {
   label: string;
-  hidden?: boolean;
 } & (
   | {
       shape: LegendShape;
@@ -24,29 +23,27 @@ interface LegendProps {
 export function Legend({ items }: LegendProps) {
   return (
     <List>
-      {items
-        .filter((item) => !item.hidden)
-        .map((item, i) => {
-          if (item.shape === 'custom') {
-            return (
-              <Item key={i}>
-                {item.label}
-                <CustomShape>{item.shapeComponent}</CustomShape>
-              </Item>
-            );
-          }
-
+      {items.map((item, i) => {
+        if (item.shape === 'custom') {
           return (
             <Item key={i}>
               {item.label}
-              {item.shape === 'square' && <Square color={item.color} />}
-              {item.shape === 'line' && (
-                <Line color={item.color} lineStyle={item.style ?? 'solid'} />
-              )}
-              {item.shape === 'circle' && <Circle color={item.color} />}
+              <CustomShape>{item.shapeComponent}</CustomShape>
             </Item>
           );
-        })}
+        }
+
+        return (
+          <Item key={i}>
+            {item.label}
+            {item.shape === 'square' && <Square color={item.color} />}
+            {item.shape === 'line' && (
+              <Line color={item.color} lineStyle={item.style ?? 'solid'} />
+            )}
+            {item.shape === 'circle' && <Circle color={item.color} />}
+          </Item>
+        );
+      })}
     </List>
   );
 }
