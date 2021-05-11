@@ -1,6 +1,6 @@
 import { prepareLocalized } from '../../../plugins/translate/prepare-localized';
 
-export default {
+export const veelgesteldeVragenGroups = {
   name: 'veelgesteldeVragenGroups',
   type: 'document',
   title: 'Veelgestelde vragen groepen',

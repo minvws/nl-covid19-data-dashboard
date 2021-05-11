@@ -6,7 +6,6 @@ import {
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
 import { AreaChart } from '~/components/area-chart';
-import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Legend } from '~/components/legend';
 import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
@@ -49,94 +48,90 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
         source: text.bronnen.rivm,
       }}
     >
-      <Box>
-        <AreaChart<
-          NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
-          NlVaccineAdministeredValue | NlVaccineAdministeredEstimateValue
-        >
-          valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-          timeframe="all"
-          formatTooltip={(values) =>
-            FormatVaccinationsTooltip(values, siteText)
-          }
-          divider={{
-            color: colors.annotation,
-            leftLabel: text.data.vaccination_chart.left_divider_label,
-            rightLabel: text.data.vaccination_chart.right_divider_label,
-          }}
-          trends={[
-            {
-              values: vaccineDeliveryValues,
-              displays: [
-                {
-                  metricProperty: 'total',
-                  strokeWidth: 3,
-                  color: 'black',
-                  legendLabel: text.data.vaccination_chart.delivered,
-                },
-              ],
-            },
-            {
-              values: vaccineDeliveryEstimateValues,
-              displays: [
-                {
-                  metricProperty: 'total',
-                  style: 'dashed',
-                  strokeWidth: 3,
-                  legendLabel: text.data.vaccination_chart.estimated,
-                  color: 'black',
-                },
-              ],
-            },
-          ]}
-          areas={[
-            {
-              values: vaccineAdministeredValues,
-              displays: vaccineNames.map((key) => ({
-                metricProperty: key as any,
-                color: (colors.data.vaccines as any)[key],
-                legendLabel: key,
-              })),
-            },
-            {
-              values: vaccineAdministeredEstimateValues,
-              displays: vaccineNames.map((key) => ({
-                metricProperty: key as any,
-                pattern: 'hatched',
-                color: (colors.data.vaccines as any)[key],
-                legendLabel: key,
-              })),
-            },
-          ]}
-        />
-
-        <Legend
-          items={[
-            {
-              label: text.data.vaccination_chart.legend.available,
-              color: 'black',
-              shape: 'line',
-            },
-            {
-              label: text.data.vaccination_chart.legend.expected,
-              shape: 'custom',
-              shapeComponent: <HatchedSquare />,
-            },
-          ]}
-        />
-        <Legend
-          items={vaccineNames.map((key) => ({
-            label: replaceVariablesInText(
-              text.data.vaccination_chart.legend_label,
+      <AreaChart<
+        NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
+        NlVaccineAdministeredValue | NlVaccineAdministeredEstimateValue
+      >
+        valueAnnotation={siteText.waarde_annotaties.x_miljoen}
+        timeframe="all"
+        formatTooltip={(values) => FormatVaccinationsTooltip(values, siteText)}
+        divider={{
+          color: colors.annotation,
+          leftLabel: text.data.vaccination_chart.left_divider_label,
+          rightLabel: text.data.vaccination_chart.right_divider_label,
+        }}
+        trends={[
+          {
+            values: vaccineDeliveryValues,
+            displays: [
               {
-                name: (text.data.vaccination_chart.product_names as any)[key],
-              }
-            ),
-            color: `data.vaccines.${key}`,
-            shape: 'square',
-          }))}
-        />
-      </Box>
+                metricProperty: 'total',
+                strokeWidth: 3,
+                color: 'black',
+                legendLabel: text.data.vaccination_chart.delivered,
+              },
+            ],
+          },
+          {
+            values: vaccineDeliveryEstimateValues,
+            displays: [
+              {
+                metricProperty: 'total',
+                style: 'dashed',
+                strokeWidth: 3,
+                legendLabel: text.data.vaccination_chart.estimated,
+                color: 'black',
+              },
+            ],
+          },
+        ]}
+        areas={[
+          {
+            values: vaccineAdministeredValues,
+            displays: vaccineNames.map((key) => ({
+              metricProperty: key as any,
+              color: (colors.data.vaccines as any)[key],
+              legendLabel: key,
+            })),
+          },
+          {
+            values: vaccineAdministeredEstimateValues,
+            displays: vaccineNames.map((key) => ({
+              metricProperty: key as any,
+              pattern: 'hatched',
+              color: (colors.data.vaccines as any)[key],
+              legendLabel: key,
+            })),
+          },
+        ]}
+      />
+
+      <Legend
+        items={[
+          {
+            label: text.data.vaccination_chart.legend.available,
+            color: 'black',
+            shape: 'line',
+          },
+          {
+            label: text.data.vaccination_chart.legend.expected,
+            shape: 'custom',
+            shapeComponent: <HatchedSquare />,
+          },
+        ]}
+      />
+      <Legend
+        items={vaccineNames.map((key) => ({
+          label: replaceVariablesInText(
+            text.data.vaccination_chart.legend_label,
+            {
+              name: (text.data.vaccination_chart.product_names as any)[key],
+            }
+          ),
+          color: `data.vaccines.${key}`,
+          shape: 'square',
+        }))}
+      />
     </ChartTile>
   );
 }

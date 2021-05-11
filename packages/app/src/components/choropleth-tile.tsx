@@ -7,14 +7,13 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from './chart-region-controls';
-import { ChartTileContainer } from './chart-tile-container';
+import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-interface ChoroplethTileProps extends DataProps {
+
+type ChoroplethTileProps = DataProps & {
   title: string;
   description?: string | React.ReactNode;
-  onChartRegionChange?: (v: RegionControlOption) => void;
-  chartRegion?: 'municipal' | 'region';
   children: React.ReactNode;
   legend?: {
     title: string;
@@ -22,7 +21,16 @@ interface ChoroplethTileProps extends DataProps {
   };
   metadata?: MetadataProps;
   valueAnnotation?: string;
-}
+} & (
+    | {
+        onChartRegionChange: (v: RegionControlOption) => void;
+        chartRegion: 'municipal' | 'region';
+      }
+    | {
+        onChartRegionChange?: undefined;
+        chartRegion?: undefined;
+      }
+  );
 
 export function ChoroplethTile({
   title,
@@ -45,13 +53,14 @@ export function ChoroplethTile({
   );
 
   return (
-    <ChartTileContainer metadata={metadata}>
+    <FullscreenChartTile metadata={metadata}>
       <Box
         display="flex"
         flexDirection={{ _: 'column', lg: 'row' }}
         m={0}
         as="figure"
         {...dataProps}
+        height="100%"
       >
         <Box mb={3} flex={{ lg: 1 }} as="figcaption">
           <Box mb={[0, 2]}>
@@ -61,7 +70,7 @@ export function ChoroplethTile({
             ) : (
               description
             )}
-            {onChartRegionChange && (
+            {onChartRegionChange && chartRegion && (
               <Box
                 display="flex"
                 justifyContent={{ _: 'center', lg: 'flex-start' }}
@@ -81,8 +90,14 @@ export function ChoroplethTile({
           )}
         </Box>
 
-        <Box flex={{ lg: 1 }} ml={[0, 0, 3]}>
-          <div>{children}</div>
+        <Box
+          flex={{ lg: 1 }}
+          ml={[0, 0, 3]}
+          display="flex"
+          flexDirection="column"
+          height="100%"
+        >
+          <Box height="100%">{children}</Box>
 
           {legendaComponent && !breakpoints.lg && (
             <Box display="flex" justifyContent="center">
@@ -91,6 +106,6 @@ export function ChoroplethTile({
           )}
         </Box>
       </Box>
-    </ChartTileContainer>
+    </FullscreenChartTile>
   );
 }

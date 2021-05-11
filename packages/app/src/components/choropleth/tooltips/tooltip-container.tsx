@@ -1,5 +1,9 @@
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
+import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
+import { useBoundingBox } from '~/utils/use-bounding-box';
+import { useIsMounted } from '~/utils/use-is-mounted';
+import { useViewport } from '~/utils/use-viewport';
 import { TooltipSettings } from '../choropleth';
 
 type TTooltipProps = {
@@ -9,45 +13,61 @@ type TTooltipProps = {
   children: React.ReactNode;
 };
 
-export function Tooltip(props: TTooltipProps) {
-  const { left, top, setTooltip, children } = props;
+const VIEWPORT_PADDING = 10;
+
+const padding = {
+  left: 0,
+  right: 0,
+};
+
+export function Tooltip({ left, top, children }: TTooltipProps) {
+  const viewportSize = useViewport();
+  const isMounted = useIsMounted({ delayMs: 10 });
   const ref = useRef<HTMLDivElement>(null);
+  const { width = 0 } = useResizeObserver<HTMLDivElement>({ ref });
+  const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
-  useEffect(() => {
-    if (ref.current && (left || top)) {
-      const viewPort = { width: window.innerWidth, height: window.innerHeight };
+  /**
+   * nudge the top to render the tooltip a little bit on top of the chart
+   */
+  const targetY = top + 20;
+  const targetX = left + padding.left;
 
-      const boundingRect = ref.current.getBoundingClientRect();
+  const maxWidth = Math.min(400, viewportSize.width - VIEWPORT_PADDING * 2);
 
-      const rightPos = boundingRect.left + boundingRect.width;
-      const bottomPos = boundingRect.top + boundingRect.height;
+  const relativeLeft = boundingBox?.left ?? 0;
 
-      const leftNudged =
-        rightPos > viewPort.width ? left - (rightPos - viewPort.width) : left;
+  const minLeft = -relativeLeft + VIEWPORT_PADDING;
+  const maxLeft = viewportSize.width - width - relativeLeft - VIEWPORT_PADDING;
 
-      const topNudged =
-        bottomPos > viewPort.height ? top - (bottomPos - viewPort.height) : top;
-
-      if (leftNudged !== left || topNudged !== top) {
-        setTooltip(
-          (tooltip) =>
-            tooltip && { ...tooltip, left: leftNudged, top: topNudged }
-        );
-      }
-    }
-  }, [left, top, setTooltip]);
+  const y = targetY;
+  const x = Math.max(
+    minLeft, // stay within left side of viewport
+    Math.min(
+      targetX, // center tooltip
+      maxLeft // stay within right side of viewport
+    )
+  );
 
   return (
-    <Box
-      bg="white"
-      position="absolute"
-      ref={ref}
-      style={{ left, top }}
-      boxShadow="rgba(33, 33, 33, 0.2) 0px 1px 2px"
-      borderRadius={1}
-      zIndex={1000}
-    >
-      {children}
-    </Box>
+    <div ref={boundingBoxRef}>
+      <Box
+        bg="white"
+        position="absolute"
+        ref={ref}
+        style={{
+          top: 0,
+          left: 0,
+          opacity: isMounted ? 1 : 0,
+          transform: `translate(${Math.round(x)}px,${Math.round(y)}px)`,
+          maxWidth,
+        }}
+        boxShadow="rgba(33, 33, 33, 0.2) 0px 1px 2px"
+        borderRadius={1}
+        zIndex={1000}
+      >
+        {children}
+      </Box>
+    </div>
   );
 }

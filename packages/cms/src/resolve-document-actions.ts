@@ -5,27 +5,58 @@ import defaultResolve, {
   PublishAction,
   UnpublishAction,
 } from 'part:@sanity/base/document-actions';
-import { PublishOrAcceptAction, DocumentActionProps } from './actions';
+import { DocumentActionProps, PublishOrAcceptAction } from './actions';
 import { onDocument$ } from './hooks/helper/document-subject';
+import * as documents from './schemas/documents';
 
+/**
+ * Actions are shown in this order, so the Publish button is the default
+ */
+const defaultPublishingActions = [
+  PublishAction,
+  DiscardChangesAction,
+  UnpublishAction,
+];
+
+/**
+ * Here we set the default actions on all documents
+ */
+const documentsWithDefaultActions = Object.values(documents).reduce(
+  (pages, schema) => ({ ...pages, [schema.name]: defaultPublishingActions }),
+  {}
+);
+
+/**
+ * And here we override some of them while constructing the actual lookup
+ */
 const actionsByDocumentType = {
+  ...documentsWithDefaultActions,
   article: [
-    DiscardChangesAction,
-    DeleteAction,
     PublishAction,
+    DiscardChangesAction,
     UnpublishAction,
     DuplicateAction,
+    DeleteAction,
   ],
-  topicalPage: [DiscardChangesAction, PublishAction, UnpublishAction],
-  overDitDashboard: [DiscardChangesAction, PublishAction, UnpublishAction],
-  veelgesteldeVragen: [DiscardChangesAction, PublishAction, UnpublishAction],
-  cijferVerantwoording: [DiscardChangesAction, PublishAction, UnpublishAction],
-  toegankelijkheid: [DiscardChangesAction, PublishAction, UnpublishAction],
   lokalizeText: [
     PublishOrAcceptAction,
     DiscardChangesAction,
     PublishAction,
     UnpublishAction,
+  ],
+  faqQuestion: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
+  ],
+  figureExplanationItem: [
+    PublishAction,
+    DiscardChangesAction,
+    UnpublishAction,
+    DuplicateAction,
+    DeleteAction,
   ],
 };
 
@@ -35,6 +66,7 @@ export default function resolveDocumentActions(document: DocumentActionProps) {
   /**
    * This is placing the current document on the observer that is driving
    * the useCurrentDocument hook. This hook is used for the language switcher.
+   *
    * At the time this was the only way to get a hold of the document. Possibly
    * there is now an official way to achieve this @TODO find out.
    */

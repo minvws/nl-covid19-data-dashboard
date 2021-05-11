@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_behavior_per_age_group",
+  "type": "object",
+  "properties": {
+    "avoid_crowds_compliance": { "$ref": "#/definitions/value" },
+    "avoid_crowds_support": { "$ref": "#/definitions/value" },
+
+    "curfew_compliance": { "$ref": "#/definitions/value" },
+    "curfew_support": { "$ref": "#/definitions/value" },
+
+    "keep_distance_compliance": { "$ref": "#/definitions/value" },
+    "keep_distance_support": { "$ref": "#/definitions/value" },
+
+    "max_visitors_compliance": { "$ref": "#/definitions/value" },
+    "max_visitors_support": { "$ref": "#/definitions/value" },
+
+    "sneeze_cough_elbow_compliance": { "$ref": "#/definitions/value" },
+    "sneeze_cough_elbow_support": { "$ref": "#/definitions/value" },
+
+    "wash_hands_compliance": { "$ref": "#/definitions/value" },
+    "wash_hands_support": { "$ref": "#/definitions/value" },
+
+    "wear_mask_public_indoors_compliance": { "$ref": "#/definitions/value" },
+    "wear_mask_public_indoors_support": { "$ref": "#/definitions/value" },
+
+    "work_from_home_compliance": { "$ref": "#/definitions/value" },
+    "work_from_home_support": { "$ref": "#/definitions/value" },
+
+    "date_of_insertion_unix": { "type": "integer" },
+    "date_start_unix": { "type": "integer" },
+    "date_end_unix": { "type": "integer" }
+  },
+  "required": [
+    "avoid_crowds_compliance",
+    "avoid_crowds_support",
+    "curfew_compliance",
+    "curfew_support",
+    "keep_distance_compliance",
+    "keep_distance_support",
+    "max_visitors_compliance",
+    "max_visitors_support",
+    "sneeze_cough_elbow_compliance",
+    "sneeze_cough_elbow_support",
+    "wash_hands_compliance",
+    "wash_hands_support",
+    "wear_mask_public_indoors_compliance",
+    "wear_mask_public_indoors_support",
+    "work_from_home_compliance",
+    "work_from_home_support",
+    "date_of_insertion_unix",
+    "date_start_unix",
+    "date_end_unix"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "nl_behavior_per_age_group_value",
+      "type": "object",
+      "properties": {
+        "16_24": { "type": "integer" },
+        "25_39": { "type": "integer" },
+        "40_54": { "type": "integer" },
+        "55_69": { "type": "integer" },
+        "70_plus": { "type": "integer" }
+      },
+      "required": ["16_24", "25_39", "40_54", "55_69", "70_plus"],
+      "additionalProperties": false
+    }
+  }
+}

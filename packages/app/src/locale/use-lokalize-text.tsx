@@ -32,7 +32,7 @@ import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
  *
  * - undefined (gray): app is rendered with translations from filesystem
  * - live (green): app is listening to real-time sanity updates
- * - paths (blue): app is displaying the pathnames of every key instead of the value
+ * - paths (blue): app is displaying the path names of every key instead of the value
  *
  * The live/paths state can also be toggled with shortkey shift+t.
  */
@@ -90,14 +90,16 @@ export function useLokalizeText(
              */
             if (!update.result) return;
 
-            const { key, localeText } = parseLocaleTextDocument(update.result);
+            const { jsonKey, localeText } = parseLocaleTextDocument(
+              update.result
+            );
 
             /**
              * We'll mutate text which lives in a reference and update the text
              * state with a debounced handler. Otherwise the app can become quite
              * slow when someone is typing in sanity lokalizeText documents.
              */
-            set(textRef.current, key, localeText[locale]);
+            set(textRef.current, jsonKey, localeText[locale]);
             setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
           });
       })
