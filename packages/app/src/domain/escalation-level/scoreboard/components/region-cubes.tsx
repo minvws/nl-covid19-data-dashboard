@@ -19,7 +19,8 @@ export function RegionCubes({
 
   const { siteText } = useIntl();
 
-  const regionLabels = siteText.over_risiconiveaus.scoreboard.regions;
+  const regionLabels =
+    siteText.over_risiconiveaus.scoreboard.current_level.regions;
 
   const regionLabel =
     count > 1

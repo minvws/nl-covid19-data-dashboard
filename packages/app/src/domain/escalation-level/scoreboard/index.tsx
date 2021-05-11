@@ -4,6 +4,7 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { Collapsible } from './components/collapsible';
 import { SafetyRegionRow } from './components/safety-region-row';
 
@@ -46,6 +47,8 @@ export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
 }
 
 const Headers = () => {
+  const { siteText } = useIntl();
+
   return (
     <Box
       display="flex"
@@ -62,10 +65,20 @@ const Headers = () => {
           <Box minWidth="24px">
             <GetestIcon width="32px" height="32px" />
           </Box>
-          <InlineText>Positieve testen</InlineText>
+          <InlineText>
+            {
+              siteText.over_risiconiveaus.scoreboard.current_level
+                .header_positive_tests.title
+            }
+          </InlineText>
         </Box>
         <Box>
-          <InlineText>per 100.000 inwoners / week</InlineText>
+          <InlineText>
+            {
+              siteText.over_risiconiveaus.scoreboard.current_level
+                .header_positive_tests.subtitle
+            }
+          </InlineText>
         </Box>
       </Box>
       <Box flex="1" display="flex" flexDirection="column">
@@ -79,10 +92,20 @@ const Headers = () => {
           <Box minWidth="24px">
             <Ziekenhuis width="32px" height="32px" />
           </Box>
-          <InlineText>Ziekenhuisopnames</InlineText>
+          <InlineText>
+            {
+              siteText.over_risiconiveaus.scoreboard.current_level
+                .header_hospital_admissions.title
+            }
+          </InlineText>
         </Box>
         <Box>
-          <InlineText>per 1 miljoen inwoners / week</InlineText>
+          <InlineText>
+            {
+              siteText.over_risiconiveaus.scoreboard.current_level
+                .header_hospital_admissions.subtitle
+            }
+          </InlineText>
         </Box>
       </Box>
     </Box>
