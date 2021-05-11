@@ -12,7 +12,7 @@ import { IconButton } from './icon-button';
 import { Metadata, MetadataProps } from './metadata';
 import { Modal } from './modal';
 
-export function ChartTileContainer({
+export function FullscreenChartTile({
   children,
   metadata,
 }: {

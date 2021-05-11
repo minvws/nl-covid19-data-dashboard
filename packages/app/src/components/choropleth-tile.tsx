@@ -7,7 +7,7 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from './chart-region-controls';
-import { ChartTileContainer } from './chart-tile-container';
+import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
 
@@ -53,7 +53,7 @@ export function ChoroplethTile({
   );
 
   return (
-    <ChartTileContainer metadata={metadata}>
+    <FullscreenChartTile metadata={metadata}>
       <Box
         display="flex"
         flexDirection={{ _: 'column', lg: 'row' }}
@@ -106,6 +106,6 @@ export function ChoroplethTile({
           )}
         </Box>
       </Box>
-    </ChartTileContainer>
+    </FullscreenChartTile>
   );
 }
