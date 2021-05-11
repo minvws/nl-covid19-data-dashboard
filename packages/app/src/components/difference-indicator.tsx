@@ -221,7 +221,7 @@ export function MovingAverageDifferenceIndicator({
           <IconUp />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {formatNumber(difference)} {siteText.toe_en_afname.hoger}{' '}
+          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.hoger}{' '}
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
@@ -239,7 +239,7 @@ export function MovingAverageDifferenceIndicator({
           <IconDown />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {formatNumber(difference)} {siteText.toe_en_afname.lager}{' '}
+          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.lager}{' '}
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
@@ -253,7 +253,7 @@ export function MovingAverageDifferenceIndicator({
   return (
     <Container>
       <InlineText fontWeight="bold">
-        {formatNumber(difference)} {siteText.toe_en_afname.gelijk}{' '}
+        {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.gelijk}{' '}
       </InlineText>
       <InlineText>
         {siteText.toe_en_afname.zeven_daags_gemiddelde}
@@ -280,7 +280,6 @@ const IconContainer = styled(Span)(
 
 const Container = styled.span(
   css({
-    whiteSpace: 'nowrap',
     display: 'inline-block',
     fontSize: 2,
     svg: {
