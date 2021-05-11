@@ -1,7 +1,7 @@
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { DataValue } from './use-municipality-data';
 
 /**
@@ -93,8 +93,10 @@ function useDynamicTextTemplates<T>(
 
   if (metricName === 'behavior') {
     const parts = metricProperty.split('_');
-    const restrictionKey = parts.slice(0, -1).join('_');
-    const restriction = (siteText.gedrag_onderwerpen as any)[restrictionKey];
+    const restrictionKey = parts
+      .slice(0, -1)
+      .join('_') as keyof typeof siteText.gedrag_onderwerpen;
+    const restriction = siteText.gedrag_onderwerpen[restrictionKey];
     const type = parts.slice(-1).join('');
     const texts = (siteText.choropleth as any)[metricName]?.[type];
     return {

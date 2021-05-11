@@ -207,13 +207,13 @@ function TileIndicator({
 }
 
 export function MovingAverageDifferenceIndicator({
-  value,
-  currentValue,
+  differenceValue,
+  absoluteValue,
 }: {
-  value: DifferenceDecimal | DifferenceInteger;
-  currentValue: number;
+  differenceValue: DifferenceDecimal | DifferenceInteger;
+  absoluteValue: number;
 }) {
-  const { difference } = value;
+  const { difference } = differenceValue;
   const { siteText, formatNumber } = useIntl();
 
   if (difference > 0)
@@ -223,11 +223,11 @@ export function MovingAverageDifferenceIndicator({
           <IconUp />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {formatNumber(value.difference)} {siteText.toe_en_afname.hoger}{' '}
+          {formatNumber(difference)} {siteText.toe_en_afname.hoger}{' '}
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {` (${formatNumber(currentValue)})`}
+          {` (${formatNumber(absoluteValue)})`}
         </InlineText>
       </Container>
     );
@@ -239,11 +239,11 @@ export function MovingAverageDifferenceIndicator({
           <IconDown />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {formatNumber(value.difference)} {siteText.toe_en_afname.lager}{' '}
+          {formatNumber(difference)} {siteText.toe_en_afname.lager}{' '}
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {` (${formatNumber(currentValue)})`}
+          {` (${formatNumber(absoluteValue)})`}
         </InlineText>
       </Container>
     );
@@ -251,11 +251,11 @@ export function MovingAverageDifferenceIndicator({
   return (
     <Container>
       <InlineText fontWeight="bold">
-        {formatNumber(value.difference)} {siteText.toe_en_afname.gelijk}{' '}
+        {formatNumber(difference)} {siteText.toe_en_afname.gelijk}{' '}
       </InlineText>
       <InlineText>
         {siteText.toe_en_afname.zeven_daags_gemiddelde}
-        {` (${formatNumber(currentValue)})`}
+        {` (${formatNumber(absoluteValue)})`}
       </InlineText>
     </Container>
   );
@@ -269,7 +269,7 @@ const IconContainer = styled(Span)(
     svg: {
       mr: 1,
       width: '19px',
-      height: '19qpx',
+      height: '19px',
     },
   })
 );

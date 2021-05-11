@@ -136,7 +136,7 @@ export function PageBarScale<T>({
         showAxis
       />
 
-      {differenceKey && !currentValue && (
+      {isDefined(differenceKey) && !isDefined(currentValue) && (
         <DifferenceIndicator
           value={differenceValue}
           isDecimal={config.isDecimal}
@@ -145,10 +145,10 @@ export function PageBarScale<T>({
         />
       )}
 
-      {differenceKey && currentValue && (
+      {isDefined(differenceKey) && isDefined(currentValue) && (
         <MovingAverageDifferenceIndicator
-          value={differenceValue}
-          currentValue={currentValue}
+          differenceValue={differenceValue}
+          absoluteValue={currentValue}
         />
       )}
     </Box>

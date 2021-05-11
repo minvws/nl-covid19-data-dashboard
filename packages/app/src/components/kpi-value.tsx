@@ -78,17 +78,17 @@ export function KpiValue({
         </StyledValue>
       )}
 
-      {difference && !currentValue && (
+      {isDefined(difference) && !isDefined(currentValue) && (
         <DifferenceIndicator
           value={difference}
           staticTimespan={differenceStaticTimespan}
         />
       )}
 
-      {difference && currentValue && (
+      {isDefined(difference) && isDefined(currentValue) && (
         <MovingAverageDifferenceIndicator
-          value={difference}
-          currentValue={currentValue}
+          differenceValue={difference}
+          absoluteValue={currentValue}
         />
       )}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

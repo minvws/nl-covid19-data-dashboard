@@ -83,6 +83,7 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: text.bronnen.rivm }}
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={text.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart

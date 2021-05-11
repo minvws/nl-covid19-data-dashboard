@@ -5,5 +5,5 @@
   "screenshotsFolder": "screenshots",
   "supportFile": "src/support/index.ts",
   "videosFolder": "videos",
-  "baseUrl": "https://cdb-develop-nl.vws-cdb-tst.test.overheid.standaardplatform.rijksapps.nl"
+  "baseUrl": "https://develop-nl-covid19-data-dashboard.vercel.app"
 }

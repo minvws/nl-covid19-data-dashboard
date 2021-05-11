@@ -153,7 +153,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
-                href="/landelijk/positief-geteste-mensen"
+                href={reverseRouter.nl.positiefGetesteMensen()}
               />
 
               <MiniTrendTile
@@ -173,7 +173,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
-                href="/landelijk/ziekenhuis-opnames"
+                href={reverseRouter.nl.ziekenhuisopnames()}
               />
 
               <TopicalVaccineTile data={data.vaccine_administered_total} />
@@ -186,15 +186,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
-                    href: '/landelijk/vaccinaties',
+                    href: reverseRouter.nl.index(),
                     text: text.quick_links.links.nationaal,
                   },
                   {
-                    href: '/veiligheidsregio',
+                    href: reverseRouter.vr.index(),
                     text: text.quick_links.links.veiligheidsregio,
                   },
                   {
-                    href: '/gemeente',
+                    href: reverseRouter.gm.index(),
                     text: text.quick_links.links.gemeente,
                   },
                 ]}

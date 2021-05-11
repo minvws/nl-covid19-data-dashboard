@@ -3,14 +3,14 @@
   "title": "municipal_difference",
   "type": "object",
   "properties": {
-    "tested_overall__infected_per_100k": {
+    "tested_overall__infected_per_100k_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_overall__infected": {
-      "$ref": "#/definitions/diff_integer"
+    "tested_overall__infected_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
-    "hospital_nice__admissions_on_date_of_reporting": {
-      "$ref": "#/definitions/diff_integer"
+    "hospital_nice__admissions_on_date_of_reporting_moving_average": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
@@ -20,9 +20,9 @@
     }
   },
   "required": [
-    "tested_overall__infected_per_100k",
-    "tested_overall__infected",
-    "hospital_nice__admissions_on_date_of_reporting",
+    "tested_overall__infected_per_100k_moving_average",
+    "tested_overall__infected_moving_average",
+    "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "deceased_rivm__covid_daily"
   ],
   "additionalProperties": false,
