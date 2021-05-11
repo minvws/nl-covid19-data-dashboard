@@ -196,7 +196,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         </Box>
         <Scoreboard data={scoreboardData} />
-        <Box mt={3}>
+        <Box mt={5} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
           <RichContent blocks={content.riskLevelExplanations} />
         </Box>
       </Content>
