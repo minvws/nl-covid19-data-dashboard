@@ -65,6 +65,11 @@ export const getStaticProps = createGetStaticProps(
         vrData: [],
       }))
     );
+    scoreboardData.forEach((x) =>
+      x.vrData.sort((a, b) =>
+        a.safetyRegionName > b.safetyRegionName ? 1 : -1
+      )
+    );
 
     return {
       scoreboardData,
