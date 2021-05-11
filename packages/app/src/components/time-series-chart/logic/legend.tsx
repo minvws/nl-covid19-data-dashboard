@@ -25,7 +25,8 @@ export function useLegendItems<T extends TimestampedValue>(
     if (dataOptions?.timespanAnnotations) {
       for (const annotation of dataOptions.timespanAnnotations) {
         const annotationVisible =
-          first(domain) <= annotation.end && annotation.start <= last(domain);
+          (first(domain) as number) <= annotation.end &&
+          annotation.start <= (last(domain) as number);
 
         items.push({
           label: annotation.label,
