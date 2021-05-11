@@ -1,7 +1,7 @@
 import { NlVaccineAdministeredRateMovingAverageValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { shuffle } from 'lodash';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -9,37 +9,56 @@ import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 
-const RADIUS = 55;
+const RADIUS = 60;
 const CONTAINER_WIDTH = RADIUS * 2 + 12;
 const CONTAINER_HEIGHT = RADIUS * 2 + 12;
+
+const MINUTE_IN_SECONDS = 60;
+const FRAMES_PER_MINUTE = 25;
 
 interface VaccineTickerProps {
   data: NlVaccineAdministeredRateMovingAverageValue;
 }
 
 export function VaccineTicker({ data }: VaccineTickerProps) {
-  const { siteText, formatPercentage, formatNumber } = useIntl();
+  const { siteText, formatNumber } = useIntl();
+
+  const dosesPerMinute = data.doses_per_second * 60;
 
   const isMountedRef = useIsMountedRef();
-  const tickDuration = data.seconds_per_dose * 1000;
-  const tickCount = Math.floor(data.doses_per_second * 60);
-  const [counter, setCounter] = useState(0);
+  const [animationProgress, setAnimationProgress] = useState(0);
+  const [shapeIndex, setShapeIndex] = useState(0);
+  const timerOffsetRef = useRef(new Date().getSeconds());
 
   useEffect(() => {
     let timeoutId: number;
-    function tick() {
+    function animate() {
       if (!isMountedRef.current) return;
 
-      setCounter((x) => x + 1);
+      const now = new Date();
 
-      timeoutId = window.setTimeout(
-        () => requestAnimationFrame(tick),
-        tickDuration
-      );
+      const seconds =
+        (now.getSeconds() +
+          MINUTE_IN_SECONDS -
+          timerOffsetRef.current +
+          now.getMilliseconds() / 1000) %
+        MINUTE_IN_SECONDS;
+
+      /**
+       * Reset at the first frame of the new clock cycle.
+       * It uses a multiplier 1.5 to be sure to actually capture the first frame.
+       */
+      if (Math.ceil(seconds - (FRAMES_PER_MINUTE * 1.5) / 1000) === 0) {
+        setShapeIndex((x) => x + 1);
+      }
+
+      setAnimationProgress(seconds / MINUTE_IN_SECONDS);
+
+      timeoutId = window.setTimeout(animate, 1000 / FRAMES_PER_MINUTE);
     }
-    tick();
+    animate();
     return () => window.clearTimeout(timeoutId);
-  }, [isMountedRef, tickDuration]);
+  }, [isMountedRef]);
 
   return (
     <Box
@@ -56,33 +75,28 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
           height={CONTAINER_HEIGHT}
           position="relative"
         >
-          <TickCircle
-            numTicks={tickCount}
-            currentTick={counter % tickCount}
-            tickDuration={tickDuration}
-            tickWidth={2}
-            tickLength={10}
-          />
+          <Clock progress={animationProgress} />
 
-          <Box
-            position="absolute"
-            top="calc(50% - 35px)"
-            left="calc(50% - 35px)"
-          >
-            <Shapes counter={counter} tickDuration={tickDuration} />
-          </Box>
+          <Counter
+            progress={animationProgress}
+            dosesPerMinute={dosesPerMinute}
+          />
         </Box>
       </div>
 
       <Box my={2} pl={{ xs: 3, md: 4 }}>
         <Text fontSize="1.625rem" m={0}>
-          {replaceComponentsInText(siteText.vaccinaties.clock.title, {
-            seconds: (
-              <InlineText color={colors.data.primary} fontWeight="bold">
-                {formatPercentage(data.seconds_per_dose)}
-              </InlineText>
-            ),
-          })}
+          <Shapes index={shapeIndex} />
+          {replaceComponentsInText(
+            siteText.vaccinaties.clock.title_doses_per_minute,
+            {
+              dosesPerMinute: (
+                <InlineText color={colors.data.primary} fontWeight="bold">
+                  {formatNumber(dosesPerMinute)}
+                </InlineText>
+              ),
+            }
+          )}
         </Text>
         <Text m={0}>
           {replaceComponentsInText(siteText.vaccinaties.clock.description, {
@@ -98,122 +112,118 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
   );
 }
 
-function TickCircle({
-  numTicks,
-  currentTick,
-  tickDuration,
-  tickWidth,
-  tickLength,
-}: {
-  numTicks: number;
-  currentTick: number;
-  tickDuration: number;
-  tickWidth: number;
-  tickLength: number;
-}) {
-  const stepRadius = (2 * Math.PI) / numTicks;
-  const stepDegree = 360 / numTicks;
-
+interface ClockProps {
+  progress: number;
+}
+function Clock({ progress }: ClockProps) {
   return (
     <div
       css={css({
-        transform: `rotate(180deg)`,
-        display: 'inline-flex',
         position: 'relative',
         width: '100%',
         height: '100%',
         minWidth: CONTAINER_WIDTH,
+        borderRadius: '50%',
+        overflow: 'hidden',
       })}
     >
-      {Array(numTicks)
+      {Array(60)
         .fill(null)
         .map((_, index) => (
-          <Tick
-            rotation={index * stepDegree + 360 / numTicks}
-            angle={Math.PI / 2 + stepRadius * (index + 1)}
+          <Mark
             index={index}
             key={index}
-            tickDuration={tickDuration}
-            isLast={index === numTicks - 1}
-            tickWidth={tickWidth}
-            tickLength={tickLength}
-            isSelected={
-              currentTick === numTicks - 1 && index !== numTicks - 1
-                ? false
-                : index <= currentTick
-            }
+            isActive={index < progress * MINUTE_IN_SECONDS}
           />
         ))}
     </div>
   );
 }
 
-function Tick({
-  index,
-  angle,
-  rotation,
-  isSelected,
-  isLast,
-  tickDuration,
-  tickWidth,
-  tickLength,
-}: {
+interface MarkProps {
   index: number;
-  angle: number;
-  rotation: number;
-  isSelected: boolean;
-  isLast: boolean;
-  tickDuration: number;
-  tickWidth: number;
-  tickLength: number;
-}) {
-  const translateX =
-    RADIUS * Math.cos(angle) - tickWidth / 2 + CONTAINER_WIDTH / 2;
-  const translateY =
-    RADIUS * Math.sin(angle) - tickLength / 2 + CONTAINER_HEIGHT / 2;
+  isActive: boolean;
+}
+function Mark({ index, isActive }: MarkProps) {
+  const angle = ((index / MINUTE_IN_SECONDS) * 2 - 1) * Math.PI;
+
+  /**
+   * The hour mark is positioned more to the middle and has a different 'height'
+   */
+  const isHourMark = index % 5 === 0;
 
   return (
     <div
       style={{
         position: 'absolute',
         transform: `
-          translate(${translateX}px, ${translateY}px)
-          rotate(${rotation}deg)
+          translate(-50%, -50%)
+          rotate(${angle}rad)
+          translateY(${CONTAINER_WIDTH / 2 - (isHourMark ? 10 : 5)}px)
         `,
-        width: tickWidth,
-        height: tickLength,
-        backgroundColor: isSelected ? colors.data.primary : '#e7e7e7',
+        height: isHourMark ? 20 : 10,
+        width: isHourMark ? 6 : 8,
+        top: '50%',
+        left: '50%',
+        backgroundColor: isActive ? colors.data.primary : '#e7e7e7',
         transitionProperty: 'background-color',
-        transitionDuration: isSelected ? `${tickDuration / 2}ms` : '600ms',
-        transitionDelay: isSelected
-          ? '0ms'
-          : `${index * 25 - (isLast ? tickDuration : 0)}ms`,
+        transitionDuration: isActive ? '0ms' : '400ms',
+        transitionDelay: isActive ? '0ms' : `${index * 15}ms`,
+        zIndex: isActive ? 5 : 4,
       }}
     />
   );
 }
 
-function Shapes({
-  counter,
-  tickDuration,
-}: {
-  counter: number;
-  tickDuration: number;
-}) {
-  const shapes = useShapes();
-  const currentShapeIndex = counter % shapes.length;
+interface CounterProps {
+  progress: number;
+  dosesPerMinute: number;
+}
+function Counter({ progress, dosesPerMinute }: CounterProps) {
+  /**
+   * Pause the counter animation for the last `pausePercentage` of the cycle.
+   */
+  const pausePercentage = 3;
+  const displayMax = 1 - pausePercentage / 100;
+
+  const currentCount = Math.round(
+    Math.min(progress / displayMax, 1) * dosesPerMinute
+  );
 
   return (
-    <svg width="70" height="70" viewBox="0 0 40 40">
+    <Box
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+    >
+      <Text fontSize={4} fontWeight="bold" color="data.primary" m={0}>
+        {currentCount}
+      </Text>
+    </Box>
+  );
+}
+
+function Shapes({ index }: { index: number }) {
+  const shapes = useShapes();
+  const currentShapeIndex = index % shapes.length;
+
+  return (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 40 40"
+      style={{ verticalAlign: 'middle', marginRight: 5, paddingBottom: 5 }}
+    >
       {shapes.map((path, index) => (
         <path
           key={index}
           d={path}
-          fill={colors.data.primary}
+          fill={colors.body}
           style={{
             opacity: currentShapeIndex === index ? 1 : 0,
             transitionProperty: 'opacity',
-            transitionDuration: `${tickDuration / 2}ms`,
+            transitionDuration: `300ms`,
           }}
         />
       ))}

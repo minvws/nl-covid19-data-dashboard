@@ -6,13 +6,17 @@ export function useBoundingBox<T extends HTMLElement>() {
   const [boundingRect, setBoundingRect] = useState<DOMRect>();
 
   useEffect(() => {
-    const handleResize = throttle(() => {
+    const setRect = throttle(() => {
       setBoundingRect(ref.current?.getBoundingClientRect());
     }, 100);
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    setRect();
+    window.addEventListener('resize', setRect);
+    window.addEventListener('scroll', setRect);
+    return () => {
+      window.removeEventListener('resize', setRect);
+      window.addEventListener('scroll', setRect);
+    };
   }, []);
 
   return [boundingRect, ref] as const;

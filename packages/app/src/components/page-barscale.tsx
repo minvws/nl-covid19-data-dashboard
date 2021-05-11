@@ -13,7 +13,10 @@ import {
   metricContainsPartialData,
 } from '../metric-config';
 import { Box } from './base';
-import { DifferenceIndicator } from './difference-indicator';
+import {
+  DifferenceIndicator,
+  MovingAverageDifferenceIndicator,
+} from './difference-indicator';
 import { useIntl } from '~/intl';
 import { NlLocale } from '~/locale';
 
@@ -32,6 +35,8 @@ interface PageBarScaleProps<T> {
   differenceKey?: string;
   differenceStaticTimespan?: string;
   differenceFractionDigits?: number;
+  currentValue?: number;
+  isMovingAverageDifference?: boolean;
 }
 
 export function PageBarScale<T>({
@@ -43,6 +48,7 @@ export function PageBarScale<T>({
   differenceKey,
   differenceStaticTimespan,
   differenceFractionDigits,
+  isMovingAverageDifference,
 }: PageBarScaleProps<T>) {
   const { siteText } = useIntl();
 
@@ -130,14 +136,18 @@ export function PageBarScale<T>({
         showValue
         showAxis
       />
-      {differenceKey && (
-        <DifferenceIndicator
-          value={differenceValue}
-          isDecimal={config.isDecimal}
-          staticTimespan={differenceStaticTimespan}
-          maximumFractionDigits={differenceFractionDigits}
-        />
-      )}
+
+      {isDefined(differenceKey) &&
+        (isMovingAverageDifference ? (
+          <MovingAverageDifferenceIndicator differenceValue={differenceValue} />
+        ) : (
+          <DifferenceIndicator
+            value={differenceValue}
+            isDecimal={config.isDecimal}
+            staticTimespan={differenceStaticTimespan}
+            maximumFractionDigits={differenceFractionDigits}
+          />
+        ))}
     </Box>
   );
 }

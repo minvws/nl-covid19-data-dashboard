@@ -1,5 +1,5 @@
 import { css } from '@styled-system/css';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
 import { useUniqueId } from '~/utils/use-unique-id';
@@ -47,8 +47,8 @@ const StyledLabel = styled.label(
 );
 
 interface RadioGroupProps<T extends string> {
-  onChange: (value: any) => void;
-  value?: T;
+  onChange: (value: T) => void;
+  value: T;
   items: RadioGroupItem<T>[];
 }
 
@@ -58,30 +58,19 @@ interface RadioGroupProps<T extends string> {
  */
 export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
   const { onChange, items, value } = props;
-  const [selectedValue, setSelectedValue] = useState<T>(
-    value ?? items[0].value
-  );
-
   const id = useUniqueId();
-
-  const onLocalChange = (value: T): void => {
-    if (value !== selectedValue) {
-      setSelectedValue(value);
-      onChange(value);
-    }
-  };
 
   return (
     <Box bg="white" display="flex" justifyContent="center" data-cy="radiogroup">
       {items.map((item, index) => (
         <Fragment key={`radiogroup-${id}-input-${index}`}>
           <StyledInput
-            onChange={() => onLocalChange(item.value)}
+            onChange={() => onChange(item.value)}
             id={`radiogroup-${item.value}-${id}-${index}`}
             type="radio"
             name={`radiogroup-${id}-item-${item.value}`}
             value={item.value}
-            checked={selectedValue === item.value}
+            checked={value === item.value}
           />
           <StyledLabel htmlFor={`radiogroup-${item.value}-${id}-${index}`}>
             {item.label}
