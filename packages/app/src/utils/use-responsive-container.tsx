@@ -45,15 +45,12 @@ export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
 }
 
 type Size = {
-  width: number | undefined;
-  height: number | undefined;
+  width: number;
+  height: number;
 };
 
 function useResizeObserver<T extends HTMLElement | SVGSVGElement>() {
-  const [size, setSize] = useState<Size>({
-    width: undefined,
-    height: undefined,
-  });
+  const [size, setSize] = useState<Size>();
 
   const [node, setNode] = useState<T | null>(null);
   const ref = useCallbackRef<T>(null, (node) => setNode(node));
