@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
@@ -16,6 +17,17 @@ export function RegionCubes({
 
   const escalationColor = useEscalationColor(level);
 
+  const { siteText } = useIntl();
+
+  const regionLabels = siteText.over_risiconiveaus.scoreboard.regions;
+
+  const regionLabel =
+    count > 1
+      ? regionLabels.plural
+      : count === 1
+      ? regionLabels.single
+      : regionLabels.none;
+
   return (
     <Box display="flex" flexWrap="wrap">
       {count > 0 && (
@@ -26,7 +38,7 @@ export function RegionCubes({
         </Container>
       )}
       <InlineText color="black" fontSize={2}>
-        {count} regio's
+        {count > 0 ? count : undefined} {regionLabel}
       </InlineText>
     </Box>
   );

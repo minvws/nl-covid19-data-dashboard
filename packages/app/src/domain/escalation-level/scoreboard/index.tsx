@@ -14,7 +14,7 @@ export type VrScoreboardData = {
 };
 
 export type ScoreBoardData = {
-  escalatationLevel: 1 | 2 | 3 | 4;
+  escalationLevel: 1 | 2 | 3 | 4;
   vrData: VrScoreboardData[];
 };
 
@@ -27,9 +27,9 @@ export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
     >
       {data.map((lvl) => (
         <Collapsible
-          level={lvl.escalatationLevel}
+          level={lvl.escalationLevel}
           count={lvl.vrData.length}
-          key={lvl.escalatationLevel}
+          key={lvl.escalationLevel}
         >
           <Box bg="tileGray" p={-2}>
             <Box p={4}>

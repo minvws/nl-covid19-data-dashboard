@@ -12,7 +12,6 @@ import { Box } from '~/components/base';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { RichContent } from '~/components/cms/rich-content';
-import { CollapsibleSection } from '~/components/collapsible';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { vrData } from '~/data/vr';
 import {
@@ -35,12 +34,14 @@ import {
 import { asResponsiveArray } from '~/style/utils';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { getSkipLinkId } from '~/utils/skip-links';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface OverRisiconiveausData {
-  title: string | null;
-  description: RichContentBlock[] | null;
+  title: string;
+  description: RichContentBlock[];
+  scoreBoardTitle: string;
+  scoreBoardDescription: string;
+  riskLevelExplanations: RichContentBlock[];
   collapsibleList: CollapsibleList[];
 }
 
@@ -61,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
         return sbData;
       },
       [1, 2, 3, 4].map<ScoreBoardData>((x) => ({
-        escalatationLevel: x as 1 | 2 | 3 | 4,
+        escalationLevel: x as 1 | 2 | 3 | 4,
         vrData: [],
       }))
     );
@@ -76,7 +77,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<OverRisiconiveausData>((_) => {
     const locale = process.env.NEXT_PUBLIC_LOCALE;
     return `*[_type == 'overRisicoNiveaus']{
-      ...,
+      "title": title.${locale},
       "description": {
         "_type": description._type,
         "${locale}": [
@@ -87,17 +88,18 @@ export const getStaticProps = createGetStaticProps(
            },
         ]
       },
-      "collapsibleList": [...collapsibleList[]
-        {
-          "content":  [
-              ...content.${locale}[]
-              {
-                ...,
-                "asset": asset->
-               },
-            ],
-          "title": title.${locale}
-      }]
+      "scoreBoardTitle": scoreBoardTitle.${locale},
+      "scoreBoardDescription": scoreBoardDescription.${locale},
+      "riskLevelExplanations": {
+        "_type": riskLevelExplanations._type,
+        "${locale}": [
+          ...riskLevelExplanations.${locale}[]
+          {
+            ...,
+            "asset": asset->
+           },
+        ]
+      },
     }[0]
     `;
   })
@@ -130,8 +132,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
       <Content>
         <Box pb={3} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
-          {content.title && <Heading level={1}>{content.title}</Heading>}
-          {content.description && <RichContent blocks={content.description} />}
+          <Heading level={1}>{content.title}</Heading>
+          <RichContent blocks={content.description} />
         </Box>
         <Box
           display="flex"
@@ -158,23 +160,23 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
             </Box>
           </Box>
           <Box flex="0.7">
-            <Heading level={2}>
-              Huidige risiconiveaus per veiligheidsregio
-            </Heading>
-            <Text>
-              De risiconiveaus geven een beeld van de situatie per
-              veiligheidsregio. In geval van regionale maatregelen worden deze
-              bepaalt op basis van deze niveaus
-            </Text>
+            <Heading level={2}>{content.scoreBoardTitle}</Heading>
+            <Text>{content.scoreBoardDescription}</Text>
             {lastValue && (
               <UnorderedList>
                 <ListItem
-                  title="Laatste inschaling"
+                  title={
+                    siteText.over_risiconiveaus.scoreboard.current_level
+                      .last_determined
+                  }
                   icon={<Calender />}
                   date={lastValue.last_determined_unix}
                 />
                 <ListItem
-                  title="Op basis van cijfers van"
+                  title={
+                    siteText.over_risiconiveaus.scoreboard.current_level
+                      .established_with
+                  }
                   icon={<BarChart />}
                   date={[
                     lastValue.based_on_statistics_from_unix,
@@ -182,7 +184,10 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                   ]}
                 />
                 <ListItem
-                  title="Volgende inschaling"
+                  title={
+                    siteText.over_risiconiveaus.scoreboard.current_level
+                      .next_determined
+                  }
                   icon={<Calender />}
                   date={lastValue.next_determined_unix}
                 />
@@ -191,22 +196,9 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           </Box>
         </Box>
         <Scoreboard data={scoreboardData} />
-        {content.collapsibleList && (
-          <article>
-            {content.collapsibleList.map((item) => {
-              const id = getSkipLinkId(item.title);
-              return item.content ? (
-                <CollapsibleSection key={id} id={id} summary={item.title}>
-                  {item.content && (
-                    <Box mt={3}>
-                      <RichContent blocks={item.content} />
-                    </Box>
-                  )}
-                </CollapsibleSection>
-              ) : null;
-            })}
-          </article>
-        )}
+        <Box mt={3}>
+          <RichContent blocks={content.riskLevelExplanations} />
+        </Box>
       </Content>
     </Layout>
   );
