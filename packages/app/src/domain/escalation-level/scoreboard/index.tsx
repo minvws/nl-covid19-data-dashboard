@@ -50,15 +50,7 @@ const Headers = () => {
   const { siteText } = useIntl();
 
   return (
-    <Box
-      display="flex"
-      width="100%"
-      alignItems="center"
-      borderBottomColor="lightGray"
-      borderBottomStyle="solid"
-      borderBottomWidth="1px"
-      pb={3}
-    >
+    <Box display="flex" width="100%" alignItems="center" pb={3}>
       <Box flex={{ _: 0, lg: 0.8 }} />
       <Box flex="1" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center">

@@ -33,14 +33,9 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
       flexDirection={{ _: 'column', lg: 'row' }}
       width="100%"
       justifyItems="flex-start"
-      borderBottomColor="lightGray"
-      borderBottomStyle="solid"
-      borderBottomWidth="1px"
-      css={css({
-        '&:last-child': {
-          borderBottomWidth: 0,
-        },
-      })}
+      borderTopColor="lightGray"
+      borderTopStyle="solid"
+      borderTopWidth="1px"
     >
       <VrLinkCell color={escalationColor}>
         <Link href={reverserRouter.vr.risiconiveau(vrData.vrCode)}>
