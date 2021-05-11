@@ -32,11 +32,11 @@ export function useLegendItems<T extends TimestampedValue>(
     if (dataOptions?.timespanAnnotations) {
       maxNumItems += dataOptions?.timespanAnnotations.length;
       for (const annotation of dataOptions.timespanAnnotations) {
-        const annotationVisible =
+        const isAnnotationVisible =
           (first(domain) as number) <= annotation.end &&
           annotation.start <= (last(domain) as number);
 
-        if (annotationVisible) {
+        if (isAnnotationVisible) {
           items.push({
             label: annotation.label,
             shape: 'custom',
