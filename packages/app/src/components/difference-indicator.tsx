@@ -251,8 +251,11 @@ export function MovingAverageDifferenceIndicator({
 
   return (
     <Container>
+      <IconContainer color="data.neutral">
+        <IconGelijk />
+      </IconContainer>
       <InlineText fontWeight="bold">
-        {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.gelijk}{' '}
+        {siteText.toe_en_afname.gelijk}{' '}
       </InlineText>
       <InlineText>
         {siteText.toe_en_afname.zeven_daags_gemiddelde}

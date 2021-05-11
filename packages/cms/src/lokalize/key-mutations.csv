@@ -1,4 +1,5 @@
 timestamp,action,key
+2021-05-05T14:36:25.308Z,add,vaccinaties.clock.title_doses_per_minute
 2021-05-04T12:16:42.774Z,add,toe_en_afname.7_daags_gemiddelde
 2021-05-04T12:21:31.510Z,delete,toe_en_afname.7_daags_gemiddelde
 2021-05-04T12:22:46.378Z,add,toe_en_afname.zeven_daags_gemiddelde
