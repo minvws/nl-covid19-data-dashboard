@@ -20,6 +20,10 @@ timestamp,action,key
 2021-05-07T08:33:04.176Z,add,rioolwater_metingen.linechart_description
 2021-05-07T08:37:55.866Z,add,veiligheidsregio_rioolwater_metingen.linechart_description
 2021-05-07T08:47:30.850Z,add,gemeente_rioolwater_metingen.linechart_description
+2021-05-07T11:40:58.486Z,add,common.modal_open
+2021-05-07T11:41:30.154Z,add,common.modal_close
+2021-05-07T11:42:01.546Z,add,common.grafiek_singular
+2021-05-07T11:42:17.279Z,add,common.grafiek_plural
 2021-05-10T08:18:08.025Z,add,positief_geteste_personen.tooltip_labels.infected_per_100k_moving_average
 2021-05-10T08:19:08.127Z,add,positief_geteste_personen.tooltip_labels.infected_percentage_moving_average
 2021-05-10T08:19:37.578Z,add,positief_geteste_personen.tooltip_labels.tested_total_moving_average

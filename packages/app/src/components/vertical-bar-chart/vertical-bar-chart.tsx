@@ -1,9 +1,9 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
 import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
-import { Box } from '~/components/base';
 // Time Series Chart components and logic
 import {
   Axes,
@@ -17,8 +17,8 @@ import {
   useValuesInTimeframe,
 } from '~/components/time-series-chart/logic';
 import { TimeframeOption } from '~/utils/timeframe';
-import { useElementSize } from '~/utils/use-element-size';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
   BarHover,
   BarTrend,
@@ -48,7 +48,7 @@ export type VerticalBarChartProps<
   seriesConfig: C;
   initialWidth?: number;
   ariaLabelledBy: string;
-  height?: number;
+  minHeight?: number;
   timeframe?: TimeframeOption;
   formatTooltip: TooltipFormatter<T>;
   numGridLines?: number;
@@ -65,7 +65,7 @@ export function VerticalBarChart<
   values: allValues,
   seriesConfig,
   initialWidth = 840,
-  height = 250,
+  minHeight = 250,
   timeframe = 'all',
   formatTooltip,
   dataOptions,
@@ -85,7 +85,10 @@ export function VerticalBarChart<
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+  const { ResponsiveContainer, ref, width, height } = useResponsiveContainer(
+    initialWidth,
+    minHeight
+  );
 
   const { isPercentage } = dataOptions || {};
   const { padding, bounds, leftPaddingRef } = useDimensions({
@@ -125,7 +128,7 @@ export function VerticalBarChart<
     yScale,
   });
 
-  useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
+  useOnClickOutside([ref], () => tooltipData && hideTooltip());
 
   const handleClick = useCallback(() => {
     if (onSeriesClick && tooltipData) {
@@ -158,35 +161,35 @@ export function VerticalBarChart<
 
   const hasNegativeValues = yScale.domain()[0] < 0;
   return (
-    <Box ref={sizeRef}>
-      <Box position="relative">
-        <ChartContainer
-          width={width}
-          height={height}
-          padding={padding}
-          ariaLabelledBy={ariaLabelledBy}
-          onClick={handleClick}
-        >
-          <Axes
+    <ResponsiveContainer>
+      <ChartContainer
+        width={width}
+        height={minHeight}
+        padding={padding}
+        ariaLabelledBy={ariaLabelledBy}
+        onClick={handleClick}
+      >
+        <Axes
+          bounds={bounds}
+          numGridLines={numGridLines}
+          yTickValues={tickValues}
+          xTickValues={xTickValues}
+          xScale={xScale}
+          yScale={yScale}
+          isPercentage={isPercentage}
+          yAxisRef={leftPaddingRef}
+          isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+        />
+
+        {hoverState && (
+          <BarHover
+            point={hoverState.nearestPoint}
             bounds={bounds}
-            numGridLines={numGridLines}
-            yTickValues={tickValues}
-            xTickValues={xTickValues}
-            xScale={xScale}
-            yScale={yScale}
-            isPercentage={isPercentage}
-            yAxisRef={leftPaddingRef}
-            isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+            barWidth={xScale.bandwidth()}
           />
+        )}
 
-          {hoverState && (
-            <BarHover
-              point={hoverState.nearestPoint}
-              bounds={bounds}
-              barWidth={xScale.bandwidth()}
-            />
-          )}
-
+        <g css={css({ pointerEvents: 'all' })}>
           {seriesList.map((series, index) => (
             <BarTrend
               key={0}
@@ -200,37 +203,37 @@ export function VerticalBarChart<
               onHover={handleHover}
             />
           ))}
+        </g>
 
-          {hasNegativeValues && (
-            <Bar
-              // Highlights 0 on the y-axis when there are negative values
-              x={0}
-              y={yScale(0) - 1}
-              width={bounds.width}
-              height={2}
-              fill="black"
-            />
-          )}
-        </ChartContainer>
-
-        {tooltipOpen && tooltipData && (
-          <Tooltip
-            title={title}
-            data={tooltipData}
-            left={tooltipLeft}
-            top={tooltipTop}
-            bounds={bounds}
-            padding={padding}
-            formatTooltip={formatTooltip}
+        {hasNegativeValues && (
+          <Bar
+            // Highlights 0 on the y-axis when there are negative values
+            x={0}
+            y={yScale(0) - 1}
+            width={bounds.width}
+            height={2}
+            fill="black"
           />
         )}
+      </ChartContainer>
 
-        {hoverState && (
-          <Overlay bounds={bounds} padding={padding}>
-            <DateMarker point={hoverState.nearestPoint} />
-          </Overlay>
-        )}
-      </Box>
-    </Box>
+      {tooltipOpen && tooltipData && (
+        <Tooltip
+          title={title}
+          data={tooltipData}
+          left={tooltipLeft}
+          top={tooltipTop}
+          bounds={bounds}
+          padding={padding}
+          formatTooltip={formatTooltip}
+        />
+      )}
+
+      {hoverState && (
+        <Overlay bounds={bounds} padding={padding}>
+          <DateMarker point={hoverState.nearestPoint} />
+        </Overlay>
+      )}
+    </ResponsiveContainer>
   );
 }
