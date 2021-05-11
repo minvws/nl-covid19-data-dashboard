@@ -1,4 +1,5 @@
 import { VrEscalationLevel } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
@@ -58,7 +59,9 @@ const Headers = () => {
       <Box flex={{ _: 0, lg: 0.8 }} />
       <Box flex="1" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center">
-          <GetestIcon width="32px" height="32px" />
+          <Box minWidth="24px">
+            <GetestIcon width="32px" height="32px" />
+          </Box>
           <InlineText>Positieve testen</InlineText>
         </Box>
         <Box>
@@ -66,8 +69,17 @@ const Headers = () => {
         </Box>
       </Box>
       <Box flex="1" display="flex" flexDirection="column">
-        <Box display="flex" alignItems="center">
-          <Ziekenhuis width="32px" height="32px" />
+        <Box
+          display="flex"
+          alignItems="center"
+          css={css({
+            hyphens: 'auto',
+          })}
+          lang="nl-NL"
+        >
+          <Box minWidth="24px">
+            <Ziekenhuis width="32px" height="32px" />
+          </Box>
           <InlineText>Ziekenhuisopnames</InlineText>
         </Box>
         <Box>
