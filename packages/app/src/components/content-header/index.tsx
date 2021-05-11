@@ -12,15 +12,19 @@ import {
 import { Link } from '~/utils/link';
 import { asResponsiveArray } from '~/style/utils';
 import { Box } from '../base';
+import { isDefined } from 'ts-is-present';
 
-/*
-  the left margin '-100w' and left padding '100w' hack ensures skip link anchors to have a (non visible) start at the left side of the screen.
-  This fixes odd skip-link behavior in IE11
-
-  Since this hack makes the part of the sidebar unclickable because the padding is overlapping it.
-  This is fixed by first setting a pointer even none to the HeaderBox element if there is a skip-link and create
-  a new child element with the PointerEventBox that resets the pointer-events again so it works as expected.
-*/
+/**
+ * The left margin '-100w' and left padding '100w' ensure skip link anchors have
+ * a (non-visible) start at the left side of the screen. This fixes odd
+ * skip-link behavior in IE11.
+ *
+ * The hack makes part of the sidebar non-clickable because the padding is
+ * overlapping it. This is fixed by setting a pointer-event none on the
+ * HeaderBox element if there is a skip-link and create a new child element with
+ * the PointerEventBox that resets the pointer-events again so it works as
+ * expected.
+ */
 const HeaderBox = styled.header<{
   hasIcon: boolean;
   skipLinkAnchor?: boolean;
@@ -127,7 +131,7 @@ export function ContentHeader(props: ContentHeaderProps) {
     id,
   } = props;
 
-  const hasIcon = icon !== undefined;
+  const hasIcon = isDefined(icon);
 
   return (
     <Header id={id} skipLinkAnchor={skipLinkAnchor} hasIcon={hasIcon}>
@@ -140,24 +144,18 @@ export function ContentHeader(props: ContentHeaderProps) {
             )}
           </CategoryHeading>
         )}
-        {title && (
-          <>
-            {icon ? (
-              <HeadingWithIcon
-                icon={icon}
-                title={title}
-                headingLevel={headingLevel}
-              />
-            ) : (
-              <Box display="flex" flexWrap="nowrap" alignItems="center" mb={-2}>
-                <Box>
-                  <Heading level={headingLevel} mb={0} lineHeight={1.3}>
-                    {title}
-                  </Heading>
-                </Box>
-              </Box>
-            )}
-          </>
+        {icon ? (
+          <HeadingWithIcon
+            icon={icon}
+            title={title}
+            headingLevel={headingLevel}
+          />
+        ) : (
+          <Box display="flex" flexWrap="nowrap" alignItems="center" mb={-2}>
+            <Heading level={headingLevel} mb={0} lineHeight={1.3}>
+              {title}
+            </Heading>
+          </Box>
         )}
 
         <Box
@@ -192,7 +190,7 @@ export function ContentHeader(props: ContentHeaderProps) {
 
 interface ContentHeaderProps {
   id?: string;
-  title?: string;
+  title: string;
   subtitle?: string;
   metadata?: MetadataProps;
   reference?: {
