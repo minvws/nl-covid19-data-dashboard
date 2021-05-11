@@ -16,8 +16,8 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import theme from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
-import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { LegendShape } from '../legend';
 import {
   AreaChartGraph,
@@ -123,14 +123,17 @@ export function AreaChart<
     HoverPoint<(T & TimestampedTrendValue) | (K & TimestampedTrendValue)>
   >();
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
-
   const breakpoints = useBreakpoints(true);
+  const isExtraSmallScreen = !breakpoints.sm;
+  const minHeight = isExtraSmallScreen ? 200 : 400;
+
+  const { ResponsiveContainer, width, height } = useResponsiveContainer(
+    initialWidth,
+    minHeight
+  );
+
   const trendConfigs = useTrendConfigs(trends, timeframe);
   const areaConfigs = useAreaConfigs(areas, timeframe);
-
-  const isExtraSmallScreen = !breakpoints.sm;
-  const height = isExtraSmallScreen ? 200 : 400;
 
   const allValues = [
     ...trendConfigs.map((x) => x.values).flat(),
@@ -213,62 +216,64 @@ export function AreaChart<
       {isDefined(valueAnnotation) && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
-      <Box position="relative" ref={sizeRef}>
-        <AreaChartGraph
-          trends={trendConfigs}
-          areas={areaConfigs}
-          bounds={bounds}
-          width={width}
-          height={height}
-          padding={padding}
-          scales={scales}
-          formatXAxis={formatXAxis}
-          formatYAxis={isPercentage ? formatYAxisPercentageFn : formatYAxisFn}
-          numTicks={6}
-          onHover={handleHover}
-        >
-          {divider && (
-            <Dividers
-              areas={areaConfigs as any}
-              divider={divider}
-              height={height}
-              padding={padding}
-              xScale={xScale}
-              smallscreen={!breakpoints.lg}
-            />
-          )}
-        </AreaChartGraph>
+      <ResponsiveContainer>
+        <Box position="relative">
+          <AreaChartGraph
+            trends={trendConfigs}
+            areas={areaConfigs}
+            bounds={bounds}
+            width={width}
+            height={height}
+            padding={padding}
+            scales={scales}
+            formatXAxis={formatXAxis}
+            formatYAxis={isPercentage ? formatYAxisPercentageFn : formatYAxisFn}
+            numTicks={6}
+            onHover={handleHover}
+          >
+            {divider && (
+              <Dividers
+                areas={areaConfigs as any}
+                divider={divider}
+                height={height}
+                padding={padding}
+                xScale={xScale}
+                smallscreen={!breakpoints.lg}
+              />
+            )}
+          </AreaChartGraph>
 
-        <Box
-          height={yMax}
-          width={xMax}
-          position="absolute"
-          top={padding.top}
-          left={padding.left}
-          style={{
-            pointerEvents: 'none',
-          }}
-        >
-          {markerProps && (
-            <Marker
-              {...markerProps}
-              showLine={true}
-              height={height}
-              padding={padding}
-            />
+          <Box
+            height={yMax}
+            width={xMax}
+            position="absolute"
+            top={padding.top}
+            left={padding.left}
+            style={{
+              pointerEvents: 'none',
+            }}
+          >
+            {markerProps && (
+              <Marker
+                {...markerProps}
+                showLine={true}
+                height={height}
+                padding={padding}
+              />
+            )}
+          </Box>
+
+          {isDefined(tooltipData) && (
+            <Tooltip
+              bounds={{ right: width, left: 0, top: 0, bottom: height }}
+              x={tooltipLeft + padding.left}
+              y={tooltipTop + padding.top}
+            >
+              {formatTooltip(tooltipData, isPercentage)}
+            </Tooltip>
           )}
         </Box>
-
-        {isDefined(tooltipData) && (
-          <Tooltip
-            bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + padding.left}
-            y={tooltipTop + padding.top}
-          >
-            {formatTooltip(tooltipData, isPercentage)}
-          </Tooltip>
-        )}
-      </Box>
+      </ResponsiveContainer>
     </>
   );
 }

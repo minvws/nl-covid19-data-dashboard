@@ -17,8 +17,8 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { TimeframeOption } from '~/utils/timeframe';
-import { useElementSize } from '~/utils/use-element-size';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { Path } from './components/path';
 import { ScatterPlot } from './components/scatter-plot';
 import { ToggleOutlierButton } from './components/toggle-outlier-button';
@@ -44,7 +44,7 @@ interface SewerChartProps {
   data: SewerChartData;
   timeframe: TimeframeOption;
   valueAnnotation: string;
-  height?: number;
+  minHeight?: number;
   text: {
     select_station_placeholder: string;
     average_label_text: string;
@@ -57,9 +57,12 @@ interface SewerChartProps {
 }
 
 export function SewerChart(props: SewerChartProps) {
-  const { data, timeframe, valueAnnotation, height = 300, text } = props;
+  const { data, timeframe, valueAnnotation, minHeight = 300, text } = props;
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(840);
+  const { ResponsiveContainer, width, height } = useResponsiveContainer(
+    840,
+    minHeight
+  );
 
   const { siteText, formatDate, formatNumber } = useIntl();
 
@@ -234,7 +237,7 @@ export function SewerChart(props: SewerChartProps) {
   );
 
   return (
-    <Box position="relative">
+    <>
       {sewerStationSelectProps.options.length > 0 && (
         <Box display="flex" justifyContent="flex-start" mb={3}>
           <Select
@@ -265,131 +268,107 @@ export function SewerChart(props: SewerChartProps) {
         </ToggleOutlierButton>
       </Box>
 
-      <Box position="relative" ref={sizeRef} css={css({ userSelect: 'none' })}>
-        <svg
-          role="img"
-          width={width}
-          height={height}
-          viewBox={`0 0 ${width} ${height}`}
-          onPointerMove={handlePointerMove}
-          onPointerLeave={handlePointerLeave}
-          style={{
-            touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
-            width: '100%',
-            overflow: 'hidden',
-          }}
-        >
-          <Group left={dimensions.padding.left} top={dimensions.padding.top}>
-            <GridRows
-              scale={scales.yScale}
-              width={dimensions.bounds.width}
-              tickValues={tickValuesY}
-              stroke={colors.data.axis}
-            />
+      <ResponsiveContainer>
+        <div css={css({ userSelect: 'none' })}>
+          <svg
+            role="img"
+            width={width}
+            height={height}
+            viewBox={`0 0 ${width} ${height}`}
+            onPointerMove={handlePointerMove}
+            onPointerLeave={handlePointerLeave}
+            style={{
+              touchAction: 'pan-y', // allow vertical scroll, but capture horizontal
+              width: '100%',
+              overflow: 'hidden',
+            }}
+          >
+            <Group
+              left={dimensions.padding.left}
+              top={dimensions.padding.top}
+              css={css({ pointerEvents: 'none' })}
+            >
+              <GridRows
+                scale={scales.yScale}
+                width={dimensions.bounds.width}
+                tickValues={tickValuesY}
+                stroke={colors.data.axis}
+              />
 
-            <AxisBottom
-              scale={scales.xScale}
-              top={dimensions.bounds.height}
-              hideTicks
-              numTicks={Math.floor(width / 200)} // approx 200px per tick
-              stroke={colors.data.axis}
-              tickFormat={(x) => formatDate(x as number, 'axis')}
-              tickLabelProps={() => ({
-                fill: colors.data.axisLabels,
-                fontSize: 12,
-                textAnchor: 'middle',
-              })}
-            />
-
-            {lineTooltip.point && (
-              <Bar
-                x={
-                  lineTooltip.datum.dateStartMs
-                    ? scales.xScale(lineTooltip.datum.dateStartMs)
-                    : lineTooltip.point.x - 4
-                }
-                width={
-                  lineTooltip.datum.dateStartMs
-                    ? scales.xScale(lineTooltip.datum.dateEndMs) -
-                      scales.xScale(lineTooltip.datum.dateStartMs)
-                    : 8
-                }
-                height={dimensions.bounds.height}
-                fill="rgba(192, 232, 252, 0.5)"
-                css={css({
-                  willChange: 'transform',
-                  transitionProperty: 'x',
-                  transitionDuration: '75ms',
-                  transitionTimingFunction: 'ease-out',
+              <AxisBottom
+                scale={scales.xScale}
+                top={dimensions.bounds.height}
+                hideTicks
+                numTicks={Math.floor(width / 200)} // approx 200px per tick
+                stroke={colors.data.axis}
+                tickFormat={(x) => formatDate(x as number, 'axis')}
+                tickLabelProps={() => ({
+                  fill: colors.data.axisLabels,
+                  fontSize: 12,
+                  textAnchor: 'middle',
                 })}
               />
-            )}
 
-            <AxisLeft
-              scale={scales.yScale}
-              tickValues={tickValuesY}
-              hideTicks
-              hideAxisLine
-              stroke={colors.data.axis}
-              tickFormat={(x) => formatNumber(x as number)}
-              tickLabelProps={() => ({
-                fill: colors.data.axisLabels,
-                fontSize: 12,
-                dx: 0,
-                textAnchor: 'end',
-                verticalAnchor: 'middle',
-              })}
-            />
-
-            <ScatterPlot
-              isAnimated={isMounted}
-              data={stationScatterDataLimited}
-              getX={scales.getX}
-              getY={getScatterY}
-              color="rgba(89, 89, 89, 0.3)"
-              radius={2}
-              /**
-               * disable animations when the timeframe changes
-               */
-              key={timeframe}
-            />
-
-            <LinePath x={scales.getX} y={scales.getY}>
-              {({ path }) => (
-                <Path
-                  isAnimated={isMounted}
-                  fill="transparent"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  path={path(averageLineData) || ''}
-                  stroke={
-                    hasSelectedStation
-                      ? colors.data.neutral
-                      : colors.data.primary
+              {lineTooltip.point && (
+                <Bar
+                  x={
+                    lineTooltip.datum.dateStartMs
+                      ? scales.xScale(lineTooltip.datum.dateStartMs)
+                      : lineTooltip.point.x - 4
                   }
-                  strokeWidth={4}
-                  /**
-                   * disable animations when the timeframe changes
-                   */
-                  key={timeframe}
+                  width={
+                    lineTooltip.datum.dateStartMs
+                      ? scales.xScale(lineTooltip.datum.dateEndMs) -
+                        scales.xScale(lineTooltip.datum.dateStartMs)
+                      : 8
+                  }
+                  height={dimensions.bounds.height}
+                  fill="rgba(192, 232, 252, 0.5)"
                 />
               )}
-            </LinePath>
 
-            {hasSelectedStation && (
-              <LinePath
-                x={scales.getX}
-                y={scales.getY}
-                key={sewerStationSelectProps.value}
-              >
+              <AxisLeft
+                scale={scales.yScale}
+                tickValues={tickValuesY}
+                hideTicks
+                hideAxisLine
+                stroke={colors.data.axis}
+                tickFormat={(x) => formatNumber(x as number)}
+                tickLabelProps={() => ({
+                  fill: colors.data.axisLabels,
+                  fontSize: 12,
+                  dx: 0,
+                  textAnchor: 'end',
+                  verticalAnchor: 'middle',
+                })}
+              />
+
+              <ScatterPlot
+                isAnimated={isMounted}
+                data={stationScatterDataLimited}
+                getX={scales.getX}
+                getY={getScatterY}
+                color="rgba(89, 89, 89, 0.3)"
+                radius={2}
+                /**
+                 * disable animations when the timeframe changes
+                 */
+                key={timeframe}
+              />
+
+              <LinePath x={scales.getX} y={scales.getY}>
                 {({ path }) => (
                   <Path
                     isAnimated={isMounted}
                     fill="transparent"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    path={path(selectedLineData) || ''}
-                    stroke={colors.data.secondary}
+                    path={path(averageLineData) || ''}
+                    stroke={
+                      hasSelectedStation
+                        ? colors.data.neutral
+                        : colors.data.primary
+                    }
                     strokeWidth={4}
                     /**
                      * disable animations when the timeframe changes
@@ -398,72 +377,96 @@ export function SewerChart(props: SewerChartProps) {
                   />
                 )}
               </LinePath>
-            )}
 
-            {lineTooltip.point && (
-              <Group left={lineTooltip.point.x} top={lineTooltip.point.y}>
-                <circle
-                  r={12}
-                  fill={transparentize(
-                    0.6,
-                    hasSelectedStation
-                      ? colors.data.secondary
-                      : colors.data.primary
+              {hasSelectedStation && (
+                <LinePath
+                  x={scales.getX}
+                  y={scales.getY}
+                  key={sewerStationSelectProps.value}
+                >
+                  {({ path }) => (
+                    <Path
+                      isAnimated={isMounted}
+                      fill="transparent"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      path={path(selectedLineData) || ''}
+                      stroke={colors.data.secondary}
+                      strokeWidth={4}
+                      /**
+                       * disable animations when the timeframe changes
+                       */
+                      key={timeframe}
+                    />
                   )}
-                />
-                <circle r={7} fill="#fff" />
-                <circle
-                  r={5}
-                  fill={
-                    hasSelectedStation
-                      ? colors.data.secondary
-                      : colors.data.primary
-                  }
-                />
-              </Group>
-            )}
-          </Group>
-        </svg>
+                </LinePath>
+              )}
 
-        {lineTooltip.datum && (
-          <DateTooltip
-            bounds={{ left: 0, top: 0, right: width, bottom: height }}
-            x={lineTooltip.point.x + dimensions.padding.left}
-            y={dimensions.bounds.height + dimensions.padding.top + 2}
-          >
-            {lineTooltip.datum.dateStartMs ? (
-              <>
-                {formatDate(lineTooltip.datum.dateStartMs, 'axis')}
-                {' – '}
-                {formatDate(lineTooltip.datum.dateEndMs, 'axis')}
-              </>
-            ) : (
-              formatDate(lineTooltip.datum.dateMs, 'axis')
-            )}
-          </DateTooltip>
-        )}
+              {lineTooltip.point && (
+                <Group left={lineTooltip.point.x} top={lineTooltip.point.y}>
+                  <circle
+                    r={12}
+                    fill={transparentize(
+                      0.6,
+                      hasSelectedStation
+                        ? colors.data.secondary
+                        : colors.data.primary
+                    )}
+                  />
+                  <circle r={7} fill="#fff" />
+                  <circle
+                    r={5}
+                    fill={
+                      hasSelectedStation
+                        ? colors.data.secondary
+                        : colors.data.primary
+                    }
+                  />
+                </Group>
+              )}
+            </Group>
+          </svg>
 
-        {lineTooltip.point && lineTooltip.datum && (
-          <Tooltip
-            title={
-              hasSelectedStation
-                ? lineTooltip.datum.name
-                : text.average_label_text
-            }
-            bounds={{ left: 0, top: 0, right: width, bottom: height }}
-            x={lineTooltip.point.x + dimensions.padding.left}
-            y={lineTooltip.point.y + dimensions.padding.top}
-          >
-            <Box display="inline-block">
-              <b>
-                {formatNumber(lineTooltip.datum.value)} per{' '}
-                {formatNumber(100_000)}
-              </b>
-            </Box>{' '}
-            {siteText.common.inwoners}
-          </Tooltip>
-        )}
-      </Box>
+          {lineTooltip.datum && (
+            <DateTooltip
+              bounds={{ left: 0, top: 0, right: width, bottom: height }}
+              x={lineTooltip.point.x + dimensions.padding.left}
+              y={dimensions.bounds.height + dimensions.padding.top + 2}
+            >
+              {lineTooltip.datum.dateStartMs ? (
+                <>
+                  {formatDate(lineTooltip.datum.dateStartMs, 'axis')}
+                  {' – '}
+                  {formatDate(lineTooltip.datum.dateEndMs, 'axis')}
+                </>
+              ) : (
+                formatDate(lineTooltip.datum.dateMs, 'axis')
+              )}
+            </DateTooltip>
+          )}
+
+          {lineTooltip.point && lineTooltip.datum && (
+            <Tooltip
+              title={
+                hasSelectedStation
+                  ? lineTooltip.datum.name
+                  : text.average_label_text
+              }
+              bounds={{ left: 0, top: 0, right: width, bottom: height }}
+              x={lineTooltip.point.x + dimensions.padding.left}
+              y={lineTooltip.point.y + dimensions.padding.top}
+            >
+              <Box display="inline-block">
+                <b>
+                  {formatNumber(lineTooltip.datum.value)} per{' '}
+                  {formatNumber(100_000)}
+                </b>
+              </Box>{' '}
+              {siteText.common.inwoners}
+            </Tooltip>
+          )}
+        </div>
+      </ResponsiveContainer>
 
       <Legend
         items={[
@@ -492,6 +495,6 @@ export function SewerChart(props: SewerChartProps) {
             : undefined,
         ].filter(isPresent)}
       />
-    </Box>
+    </>
   );
 }

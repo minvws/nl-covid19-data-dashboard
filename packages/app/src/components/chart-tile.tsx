@@ -2,7 +2,7 @@ import { assert } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
-import { ChartTileContainer } from './chart-tile-container';
+import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { ChartTimeControls } from './chart-time-controls';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
@@ -66,7 +66,7 @@ export function ChartTile({
   );
 
   return (
-    <ChartTileContainer metadata={metadata}>
+    <FullscreenChartTile metadata={metadata}>
       <ChartTileHeader title={title} description={description}>
         {timeframeOptions && timeframe && (
           <ChartTimeControls
@@ -83,6 +83,6 @@ export function ChartTile({
           ),
           children(timeframe))
         : children}
-    </ChartTileContainer>
+    </FullscreenChartTile>
   );
 }
