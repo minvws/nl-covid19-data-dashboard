@@ -57,32 +57,43 @@ export function CoverageProgressBar(props: {
             <rect
               x={0}
               y={0}
-              width={`${fullPercentage + partialPercentage}%`}
-              height={barHeight}
-              fill={partialColor}
-            />
-            <rect
-              x={0}
-              y={0}
               width={`${fullPercentage}%`}
               height={barHeight}
               fill={fullColor}
+            />
+            <rect
+              x={`${fullPercentage}%`}
+              y={0}
+              width={`${partialPercentage}%`}
+              height={barHeight}
+              fill={partialColor}
+            />
+
+            <rect
+              /**
+               * Render a white divider of 2px which covers 1px off each bar.
+               */
+              x={`calc(${fullPercentage}% - 1px)`}
+              y={0}
+              width={2}
+              height={barHeight}
+              fill="white"
             />
           </g>
         </svg>
       </Box>
       <Box display="flex" spacing={2} spacingHorizontal>
         <LegendItem
-          color={partialColor}
-          percentage={partialPercentage}
-          label={partialLabel}
-          count={partialCount}
-        />
-        <LegendItem
           color={fullColor}
           percentage={fullPercentage}
           label={fullLabel}
           count={fullCount}
+        />
+        <LegendItem
+          color={partialColor}
+          percentage={partialPercentage}
+          label={partialLabel}
+          count={partialCount}
         />
       </Box>
     </Box>
