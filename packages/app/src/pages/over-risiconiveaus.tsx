@@ -34,7 +34,6 @@ import {
 import { asResponsiveArray } from '~/style/utils';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface OverRisiconiveausData {
   title: string;
@@ -107,7 +106,6 @@ export const getStaticProps = createGetStaticProps(
 
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const reverseRouter = useReverseRouter();
   const { lastGenerated, scoreboardData, content, choropleth } = props;
 
   const lastValue = scoreboardData.find((x) => x.vrData.length)?.vrData[0].data;
