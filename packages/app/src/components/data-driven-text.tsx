@@ -5,12 +5,15 @@ import {
   National,
   Regionaal,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { get } from 'lodash';
+import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
+import IconUp from '~/assets/pijl-omhoog.svg';
+import IconDown from '~/assets/pijl-omlaag.svg';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { DifferenceIndicator } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
@@ -37,7 +40,7 @@ interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   metricName: T;
   metricProperty: string;
   valueTexts: PluralizationTexts;
-  differenceTexts: PluralizationTexts;
+  differenceTexts: string;
 }
 
 export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
@@ -78,10 +81,6 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
   );
 
   const baseText = getPluralizedText(valueTexts, propertyValue);
-  const additionalText = getPluralizedText(
-    differenceTexts,
-    differenceValue.difference
-  );
 
   return (
     <Text>
@@ -95,22 +94,53 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
         ),
         propertyValue: <strong>{formatNumber(propertyValue)}</strong>,
       })}{' '}
-      {replaceComponentsInText(additionalText, {
-        differenceIndicator: (
-          <DifferenceIndicator value={differenceValue} context="inline" />
+      {replaceComponentsInText(differenceTexts, {
+        differenceTrend: (
+          <InlineDifferenceIndicator difference={differenceValue.difference} />
         ),
-        oldDate: siteText.toe_en_afname.vorige_waarde,
-        relativeOldDate: (
-          <RelativeDate
-            dateInSeconds={differenceValue.old_date_unix}
-            isCapitalized={additionalText.indexOf('{{relativeOldDate}}') === 0}
-            absoluteDateTemplate={siteText.common.absolute_date_template}
-          />
+        differenceAverage: (
+          <strong>{formatNumber(differenceValue.old_value)}</strong>
         ),
       })}
     </Text>
   );
 }
+
+function InlineDifferenceIndicator({ difference }: { difference: number }) {
+  const { siteText } = useIntl();
+  const text = siteText.common_actueel;
+
+  if (difference > 0)
+    return (
+      <Container iconColor="data.primary">
+        {text.trend_hoger}
+        <IconUp />
+      </Container>
+    );
+  if (difference < 0)
+    return (
+      <Container iconColor="red">
+        {text.trend_lager}
+        <IconDown />
+      </Container>
+    );
+
+  return <Container>{text.trend_gelijk}</Container>;
+}
+
+const Container = styled.span<{ iconColor?: string }>((x) =>
+  css({
+    whiteSpace: 'nowrap',
+    display: 'inline-block',
+    fontWeight: 'bold',
+    svg: {
+      color: x.iconColor,
+      verticalAlign: 'text-bottom',
+      width: '19px',
+      height: '19px',
+    },
+  })
+);
 
 type PluralizationTexts = Record<'zero' | 'singular' | 'plural', string>;
 

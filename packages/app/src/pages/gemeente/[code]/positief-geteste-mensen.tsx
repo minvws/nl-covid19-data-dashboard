@@ -116,7 +116,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="infected"
                 absolute={lastValue.infected}
-                difference={data.difference.tested_overall__infected}
+                difference={
+                  data.difference.tested_overall__infected_moving_average
+                }
+                isMovingAverageDifference
               />
               <Markdown content={text.kpi_toelichting} />
             </KpiTile>
@@ -131,7 +134,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="infected_per_100k"
                 absolute={lastValue.infected_per_100k}
-                difference={data.difference.tested_overall__infected_per_100k}
+                difference={
+                  data.difference
+                    .tested_overall__infected_per_100k_moving_average
+                }
+                isMovingAverageDifference
               />
               <Text>{text.barscale_toelichting}</Text>
             </KpiTile>
