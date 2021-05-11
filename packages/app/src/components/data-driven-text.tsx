@@ -82,8 +82,6 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
 
   const baseText = getPluralizedText(valueTexts, propertyValue);
 
-  console.log(data.hospital_nice.last_value);
-
   return (
     <Text>
       {replaceComponentsInText(baseText, {
@@ -101,7 +99,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
           <InlineDifferenceIndicator difference={differenceValue.difference} />
         ),
         differenceAverage: (
-          <strong>{formatNumber(differenceValue.difference)}</strong>
+          <strong>{formatNumber(differenceValue.old_value)}</strong>
         ),
       })}
     </Text>

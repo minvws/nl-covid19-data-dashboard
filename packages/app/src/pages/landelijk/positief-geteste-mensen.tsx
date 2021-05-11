@@ -98,6 +98,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const featureInfectionsMovingAverage = useFeature('infectionsMovingAverage');
 
+  // console.log(dataOverallLastValue.infected, data.difference.tested_overall__infected_moving_average.difference);
+  // console.log(
+  //   data
+  // );
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
@@ -130,10 +135,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="infected"
                 absolute={dataOverallLastValue.infected}
-                currentValue={
-                  ta.difference.tested_overall__infected_moving_average
+                difference={
+                  data.difference.tested_overall__infected_moving_average
                 }
-                difference={data.difference.tested_overall__infected}
+                isDifferenceMovingAverage
               />
 
               <Box mb={4}>
@@ -182,8 +187,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
                 localeTextKey="positief_geteste_personen"
-                differenceKey="tested_overall__infected_per_100k"
-                currentValue={data.tested_overall.last_value.infected_per_100k}
+                differenceKey="tested_overall__infected_per_100k_moving_average"
+                isDifferenceMovingAverage
               />
 
               <Text>{text.barscale_toelichting}</Text>

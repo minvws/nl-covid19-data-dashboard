@@ -36,6 +36,7 @@ interface PageBarScaleProps<T> {
   differenceStaticTimespan?: string;
   differenceFractionDigits?: number;
   currentValue?: number;
+  isDifferenceMovingAverage?: boolean;
 }
 
 export function PageBarScale<T>({
@@ -47,7 +48,7 @@ export function PageBarScale<T>({
   differenceKey,
   differenceStaticTimespan,
   differenceFractionDigits,
-  currentValue,
+  isDifferenceMovingAverage,
 }: PageBarScaleProps<T>) {
   const { siteText } = useIntl();
 
@@ -136,21 +137,17 @@ export function PageBarScale<T>({
         showAxis
       />
 
-      {isDefined(differenceKey) && !isDefined(currentValue) && (
-        <DifferenceIndicator
-          value={differenceValue}
-          isDecimal={config.isDecimal}
-          staticTimespan={differenceStaticTimespan}
-          maximumFractionDigits={differenceFractionDigits}
-        />
-      )}
-
-      {isDefined(differenceKey) && isDefined(currentValue) && (
-        <MovingAverageDifferenceIndicator
-          differenceValue={differenceValue}
-          absoluteValue={currentValue}
-        />
-      )}
+      {isDefined(differenceKey) &&
+        (isDifferenceMovingAverage ? (
+          <MovingAverageDifferenceIndicator differenceValue={differenceValue} />
+        ) : (
+          <DifferenceIndicator
+            value={differenceValue}
+            isDecimal={config.isDecimal}
+            staticTimespan={differenceStaticTimespan}
+            maximumFractionDigits={differenceFractionDigits}
+          />
+        ))}
     </Box>
   );
 }

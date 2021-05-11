@@ -208,12 +208,10 @@ function TileIndicator({
 
 export function MovingAverageDifferenceIndicator({
   differenceValue,
-  absoluteValue,
 }: {
   differenceValue: DifferenceDecimal | DifferenceInteger;
-  absoluteValue: number;
 }) {
-  const { difference } = differenceValue;
+  const { difference, old_value } = differenceValue;
   const { siteText, formatNumber } = useIntl();
 
   if (difference > 0)
@@ -227,7 +225,9 @@ export function MovingAverageDifferenceIndicator({
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {` (${formatNumber(absoluteValue)})`}
+          <InlineText fontWeight="bold">{` (${formatNumber(
+            old_value
+          )})`}</InlineText>
         </InlineText>
       </Container>
     );
@@ -243,7 +243,9 @@ export function MovingAverageDifferenceIndicator({
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {` (${formatNumber(absoluteValue)})`}
+          <InlineText fontWeight="bold">{` (${formatNumber(
+            old_value
+          )})`}</InlineText>
         </InlineText>
       </Container>
     );
@@ -255,7 +257,9 @@ export function MovingAverageDifferenceIndicator({
       </InlineText>
       <InlineText>
         {siteText.toe_en_afname.zeven_daags_gemiddelde}
-        {` (${formatNumber(absoluteValue)})`}
+        <InlineText fontWeight="bold">{` (${formatNumber(
+          old_value
+        )})`}</InlineText>
       </InlineText>
     </Container>
   );
