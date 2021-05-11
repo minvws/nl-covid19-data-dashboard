@@ -166,9 +166,8 @@ function TileIndicator({
           <IconUp />
         </IconContainer>
         <Span fontWeight="bold" mr="0.3em">
-          {differenceFormattedString} {splitText[0]}{' '}
+          {differenceFormattedString} {splitText[0]}
         </Span>
-
         <Span color="annotation">
           {splitText[1]} {timespanTextNode}
         </Span>
