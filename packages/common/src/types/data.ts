@@ -130,7 +130,6 @@ export interface MunicipalitiesTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
-  infected_per_100k_moving_average: number | null;
   infected: number;
   date_of_insertion_unix: number;
 }
