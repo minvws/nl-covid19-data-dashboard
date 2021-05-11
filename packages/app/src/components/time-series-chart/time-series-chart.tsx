@@ -36,6 +36,7 @@ import {
   useScales,
   useSeriesList,
   useValuesInTimeframe,
+  useValueWidth,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -222,6 +223,8 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   });
 
+  const valueMinWidth = useValueWidth(values, seriesConfig, isPercentage);
+
   useEffect(() => {
     if (hoverState) {
       const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
@@ -258,6 +261,8 @@ export function TimeSeriesChart<
             timespanAnnotations && isDefined(timespanAnnotationIndex)
               ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
+
+          valueMinWidth,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -275,6 +280,7 @@ export function TimeSeriesChart<
     timespanAnnotations,
     markNearestPointOnly,
     displayTooltipValueOnly,
+    valueMinWidth,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
