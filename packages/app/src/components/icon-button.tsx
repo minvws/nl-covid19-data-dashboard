@@ -3,7 +3,7 @@ import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import { VisuallyHidden } from './visually-hidden';
 
-interface IconButtonrops {
+interface IconButtonProps {
   children: ReactNode;
   size: number;
   title: string;
@@ -11,7 +11,7 @@ interface IconButtonrops {
   onClick?: (evt: React.MouseEvent) => void;
 }
 
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonrops>(
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ children, size, title, color = 'currentColor', onClick }, ref) => {
     return (
       <StyledIconButton
