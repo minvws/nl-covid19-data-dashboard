@@ -274,9 +274,13 @@
     },
     "tooltip_labels": {
       "infected_per_100k": "Confirmed cases per 100.000",
+      "infected_per_100k_moving_average": "Confirmed cases per 100.000",
       "infected_percentage": "Percentage confirmed cases",
+      "infected_percentage_moving_average": "Percentage confirmed cases",
       "tested_total": "Total number of tests",
-      "infected": "Number of confirmed cases"
+      "tested_total_moving_average": "Total number of tests",
+      "infected": "Number of confirmed cases",
+      "infected_moving_average": "Number of confirmed cases"
     }
   },
   "besmettelijke_personen": {
@@ -804,13 +808,7 @@
     "barchart_titel": "New cases by age group",
     "barchart_toelichting": "This figure shows the distribution of confirmed cases by age group. This is based on only the new cases that have been reported in comparison to the day before.",
     "barchart_axis_titel": "Total number of confirmed cases",
-    "barscale_keys": [
-      "0 to 20",
-      "20 to 40",
-      "40 to 60",
-      "60 to 80",
-      "80+"
-    ],
+    "barscale_keys": ["0 to 20", "20 to 40", "40 to 60", "60 to 80", "80+"],
     "bron": {
       "href": "https://data.rivm.nl/geonetwork/srv/dut/catalog.search#/metadata/5f6bc429-1596-490e-8618-1ed8fd768427",
       "text": "RIVM"
@@ -1109,7 +1107,10 @@
     "linechart_totaltests_titel": "Number of test results over time",
     "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_legend_label": "GGD tests for which results are known",
+    "linechart_totaltests_legend_label_moving_average": "GGD tests for which results are known",
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
+    "linechart_positivetests_legend_label_moving_average": "GGD tests with a positive result",
+
     "reference": {
       "href": "/verantwoording#confirmed-cases",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
@@ -1148,7 +1149,9 @@
     "linechart_totaltests_titel": "Number of test results over time",
     "linechart_totaltests_toelichting": "This graph shows the daily number of tests conducted at GGD test locations for which the results are known and the number of known results that are positive, over time. The data is organised based on the date on which the tests were conducted by the GGD. On average it takes one to two days before test results are known.",
     "linechart_totaltests_legend_label": "GGD tests for which results are known",
+    "linechart_totaltests_legend_label_moving_average": "GGD tests for which results are known",
     "linechart_positivetests_legend_label": "GGD tests with a positive result",
+    "linechart_positivetests_legend_label_moving_average": "GGD tests with a positive result",
     "reference": {
       "href": "/verantwoording#confirmed-cases",
       "text": "To find out more about the information on this page, go to ‘Explanation of the data presented’."
@@ -2223,11 +2226,7 @@
     "expected_page_additions": {
       "title": "Expected data on vaccinations",
       "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-      "additions": [
-        "",
-        "",
-        ""
-      ]
+      "additions": ["", "", ""]
     },
     "data": {
       "difference": "Do not remove this key. It is required as a temporary workaround",
@@ -2352,11 +2351,7 @@
       "kpi_expected_page_additions": {
         "title": "Expected data on vaccinations",
         "description": "More data on vaccinations will be added in the near future, including the vaccination coverage.",
-        "additions": [
-          "",
-          "",
-          ""
-        ]
+        "additions": ["", "", ""]
       },
       "vaccination_chart": {
         "product_names": {

@@ -2,15 +2,13 @@ import {
   NationalBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { Select } from '~/components/select';
-import { Tile } from '~/components/tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { Heading } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import {
   BehaviorIdentifier,
@@ -18,7 +16,6 @@ import {
   BehaviorType,
 } from './behavior-types';
 import { BehaviorTypeControl } from './components/behavior-type-control';
-import { useIntl } from '~/intl';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[] | RegionalBehaviorValue[];
@@ -63,13 +60,7 @@ export function BehaviorLineChartTile({
     .filter(isPresent);
 
   return (
-    <Tile>
-      <Header>
-        <Box mr={{ lg: '1em' }} mb={{ lg: '1em' }}>
-          <Heading level={3}>{title}</Heading>
-        </Box>
-      </Header>
-
+    <ChartTile title={title} metadata={{}}>
       <Box display="flex" justifyContent="start" mb={3}>
         <BehaviorTypeControl value={type} onChange={setType} />
       </Box>
@@ -125,14 +116,6 @@ export function BehaviorLineChartTile({
         }}
         markNearestPointOnly
       />
-    </Tile>
+    </ChartTile>
   );
 }
-
-const Header = styled.header(
-  css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: ['column', null, null, 'row'],
-  })
-);

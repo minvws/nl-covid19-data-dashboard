@@ -8,8 +8,10 @@
  * attempt to render normal DOM components like the Markers or Tooltip
  * components as part of its children.
  */
+import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Padding } from '../logic';
 
 interface ChartContainerProps {
@@ -21,6 +23,8 @@ interface ChartContainerProps {
   ariaLabelledBy: string;
   onHover?: (event: Event) => void;
   onClick?: (event: Event) => void;
+  onFocus?: (event: React.FocusEvent) => void;
+  onBlur?: (event: React.FocusEvent) => void;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
@@ -33,7 +37,11 @@ export function ChartContainer({
   children,
   onHover,
   onClick,
+  onFocus,
+  onBlur,
 }: ChartContainerProps) {
+  const isTouch = useIsTouchDevice();
+
   return (
     <svg
       width={width}
@@ -52,19 +60,27 @@ export function ChartContainer({
       viewBox={`-0.5 -0.5 ${width} ${height}`}
       role="img"
       aria-labelledby={ariaLabelledBy}
-      style={{
+      css={css({
         touchAction: 'pan-y',
         userSelect: 'none',
         width: '100%',
         overflow: 'visible',
-      }}
+        outline: isTouch ? 'none' : undefined,
+      })}
       onTouchStart={onHover}
       onTouchMove={onHover}
       onMouseMove={onHover}
       onMouseLeave={onHover}
+      onFocus={onFocus}
+      onBlur={onBlur}
       onClick={onClick}
+      tabIndex={onFocus ? 0 : -1}
     >
-      <Group left={padding.left} top={padding.top}>
+      <Group
+        left={padding.left}
+        top={padding.top}
+        css={css({ pointerEvents: 'none' })}
+      >
         {children}
       </Group>
     </svg>

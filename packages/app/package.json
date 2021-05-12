@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
+    "@charlietango/use-focus-trap": "^1.3.0",
     "@formatjs/intl-datetimeformat": "^3.2.7",
     "@formatjs/intl-getcanonicallocales": "^1.4.5",
     "@formatjs/intl-locale": "^2.4.14",
@@ -52,6 +53,7 @@
     "swr": "^0.4.2",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.1.5",
+    "use-callback-ref": "^1.2.5",
     "use-debounce": "^5.2.0",
     "use-resize-observer": "^7.0.0"
   },
@@ -122,8 +124,10 @@
     "export": "next export",
     "dev": "next",
     "build": "cross-env NEXT_TELEMETRY_DISABLED=1 && next build",
-    "build:en": "cross-env NEXT_PUBLIC_SANITY_DATASET=production NEXT_PUBLIC_LOCALE=en && yarn build",
+    "build:nl": "cross-env NEXT_PUBLIC_LOCALE=nl && yarn build",
+    "build:en": "cross-env NEXT_PUBLIC_LOCALE=en && yarn build",
     "start": "next start -H 0.0.0.0 -p 8080",
+    "start-e2e": "next start -H 0.0.0.0 -p 3000",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
@@ -131,7 +135,10 @@
     "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
-    "clean": "rimraf .next"
+    "clean": "rimraf .next",
+    "vercel-install": "yarn install && yarn download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cms sync-assets && yarn workspace @corona-dashboard/cms lokalize:export",
+    "vercel-build:nl": "yarn build:nl && next export",
+    "vercel-build:en": "yarn build:en && next export"
   },
   "browserslist": [
     "defaults",

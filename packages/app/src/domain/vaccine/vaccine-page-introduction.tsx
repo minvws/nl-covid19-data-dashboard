@@ -78,10 +78,12 @@ export function VaccinePageIntroduction({
                   {text.grafiek_gezette_prikken.titel}
                 </Heading>
                 <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
-                <VaccineAdministrationsOverTimeChart
-                  title={text.grafiek_gezette_prikken.titel}
-                  values={data.vaccine_administered_total.values}
-                />
+                <div css={css({ position: 'relative' })}>
+                  <VaccineAdministrationsOverTimeChart
+                    title={text.grafiek_gezette_prikken.titel}
+                    values={data.vaccine_administered_total.values}
+                  />
+                </div>
               </Box>
 
               <Box as="article" spacing={3}>

@@ -111,7 +111,7 @@ export function useSewerChartScales(
     }).range([0, bounds.width]);
 
     const yScale = scaleLinear<number>({
-      domain: [Math.min(...valuesY), Math.max(...valuesY)],
+      domain: [0, Math.max(...valuesY)],
       nice: true,
     }).range([bounds.height, 0]);
 

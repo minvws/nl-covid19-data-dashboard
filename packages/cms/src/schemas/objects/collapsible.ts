@@ -1,4 +1,4 @@
-export default {
+export const collapsible = {
   title: 'Inklapbare titel en inhoud',
   name: 'collapsible',
   type: 'object',

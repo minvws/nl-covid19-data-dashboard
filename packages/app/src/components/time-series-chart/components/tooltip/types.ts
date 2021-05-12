@@ -42,6 +42,13 @@ export type TooltipData<T extends TimestampedValue> = {
    * Configuration to display only a value in the tooltip
    */
   displayTooltipValueOnly?: boolean;
+
+  /**
+   * Configure the minimum width of the value element. Example use case is
+   * assigning a width that is large enough to hold the largest value so the
+   * tooltip content does not change in width due to differing value lengths
+   */
+  valueMinWidth?: string;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (
