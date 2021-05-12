@@ -3,7 +3,6 @@ import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
-import { isDefined } from 'ts-is-present';
 import { schemaDirectory } from '../config';
 import {
   createValidateFunction,
@@ -117,17 +116,8 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
       encoding: 'utf8',
     });
 
-    let data: JSONObject | undefined;
     try {
-      data = JSON.parse(contentAsString);
-    } catch (e) {
-      console.group();
-      console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
-      console.groupEnd();
-      return false;
-    }
-
-    if (isDefined(data)) {
+      const data: JSONObject = JSON.parse(contentAsString);
       sortTimeSeriesInDataInPlace(data);
 
       const { isValid, schemaErrors } = executeValidations(
@@ -143,6 +133,11 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
         console.groupEnd();
         return false;
       }
+    } catch (e) {
+      console.group();
+      console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
+      console.groupEnd();
+      return false;
     }
 
     console.log(chalk.green.bold(`${fileName} is valid`));

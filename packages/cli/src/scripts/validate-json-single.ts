@@ -114,17 +114,9 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
     encoding: 'utf8',
   });
 
-  let jsonData: JSONObject | undefined;
   try {
-    jsonData = JSON.parse(contentAsString);
-  } catch (e) {
-    console.group();
-    logError(`  ${fileName} cannot be parsed  \n`);
-    console.groupEnd();
-    process.exit(1);
-  }
+    const jsonData: JSONObject = JSON.parse(contentAsString);
 
-  if (isDefined(jsonData)) {
     sortTimeSeriesInDataInPlace(jsonData);
 
     const { isValid, schemaErrors } = executeValidations(
@@ -138,6 +130,11 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
       logError(`  ${jsonFileName} is invalid  \n`);
       process.exit(1);
     }
+  } catch (e) {
+    console.group();
+    logError(`  ${fileName} cannot be parsed  \n`);
+    console.groupEnd();
+    process.exit(1);
   }
 
   logSuccess(`  ${jsonFileName} is valid  \n`);
