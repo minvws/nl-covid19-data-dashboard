@@ -109,7 +109,6 @@ const VrLinkCell = styled.div<{ color: string }>((x) =>
     alignItems: 'center',
     mt: asResponsiveArray({ _: 4, lg: 0 }),
     '&::before': asResponsiveArray({
-      _: undefined,
       lg: {
         content: '""',
         display: 'inline-block',
