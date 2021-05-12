@@ -28,7 +28,7 @@ export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
       {data.map((lvl) => (
         <Collapsible
           level={lvl.escalationLevel}
-          count={lvl.vrData.length}
+          rowCount={lvl.vrData.length}
           key={lvl.escalationLevel}
         >
           <Box bg="tileGray">
