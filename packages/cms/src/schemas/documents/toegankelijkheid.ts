@@ -1,4 +1,4 @@
-export default {
+export const toegankelijkheid = {
   name: 'toegankelijkheid',
   type: 'document',
   title: 'Toegankelijkheid',

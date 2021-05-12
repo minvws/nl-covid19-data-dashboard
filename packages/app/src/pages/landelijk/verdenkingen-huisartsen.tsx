@@ -94,6 +94,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks']}
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.nivel }}
+            description={text.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart

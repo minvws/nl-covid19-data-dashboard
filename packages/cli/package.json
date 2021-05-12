@@ -6,11 +6,14 @@
   "dependencies": {
     "ajv": "^6",
     "chalk": "^4.1.0",
+    "flat": "^5.0.2",
     "dotenv": "^8.2.0",
     "json-schema-to-typescript": "^9",
+    "lodash": "^4.17.21",
     "meow": "^9.0.0",
     "p-memoize": "^4.0.1",
     "ts-is-present": "^1.2.1",
+    "ts-morph": "^10.0.2",
     "ts-node": "^9.1.1"
   },
   "scripts": {
@@ -27,7 +30,8 @@
     "validate-last-values": "ts-node src/scripts/validate-last-values.ts",
     "validate-features": "ts-node src/scripts/validate-features.ts",
     "generate-typescript": "ts-node src/scripts/generate-data-types.ts",
-    "generate-sitemap": "echo 'generate-sitemap is deprecated' && exit 1"
+    "generate-sitemap": "echo 'generate-sitemap is deprecated' && exit 1",
+    "strip-unused-locale-keys": "ts-node src/locale/strip-unused-locale-keys.ts"
   },
   "devDependencies": {
     "@types/meow": "^5.0.0"

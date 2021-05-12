@@ -10,8 +10,8 @@ import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { useList } from '~/utils/use-list';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
@@ -89,11 +89,18 @@ export function InfectedPerAgeGroup({
 
   return (
     <>
+      <InteractiveLegend
+        helpText={text.legend_help_text}
+        selectOptions={interactiveLegendOptions}
+        selection={list}
+        onToggleItem={toggle}
+        onReset={clear}
+      />
       <TimeSeriesChart
         values={values}
         timeframe={timeframe}
         seriesConfig={chartConfig}
-        height={breakpoints.md ? 300 : 250}
+        minHeight={breakpoints.md ? 300 : 250}
         disableLegend
         formatTooltip={(data) => (
           <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
@@ -108,13 +115,6 @@ export function InfectedPerAgeGroup({
             },
           ],
         }}
-      />
-      <InteractiveLegend
-        helpText={text.legend_help_text}
-        selectOptions={interactiveLegendOptions}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
       />
       <Legend items={staticLegendItems} />
     </>

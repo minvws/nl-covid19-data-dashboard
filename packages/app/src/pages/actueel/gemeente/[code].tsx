@@ -106,30 +106,34 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatDate } = useIntl();
 
   const text = siteText.gemeente_actueel;
-  const gmCode = router.query.code;
+  const gmCode = router.query.code as string;
 
-  const safetyRegionForMunicipality =
-    typeof gmCode === 'string'
-      ? getSafetyRegionForMunicipalityCode(gmCode)
-      : undefined;
+  const safetyRegionForMunicipality = getSafetyRegionForMunicipalityCode(
+    gmCode
+  );
+
+  assert(
+    safetyRegionForMunicipality,
+    `Unable to get safety region for gm code "${gmCode}"`
+  );
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
   const escalationText = siteText.escalatie_niveau;
 
   const filteredRegion = props.choropleth.vr.escalation_levels.find(
-    (item) => item.vrcode === safetyRegionForMunicipality?.code
+    (item) => item.vrcode === safetyRegionForMunicipality.code
   );
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
 
-  const dataSitemap = useDataSitemap('gemeente', gmCode as string, data);
+  const dataSitemap = useDataSitemap('gemeente', gmCode, data);
 
   assert(
     filteredRegion && filteredRegion.level,
-    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
+    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality.code} to get the the current "level" of it.`
   );
 
   const metadata = {
@@ -153,22 +157,18 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 municipalityName: municipalityName,
               })}
               headingLevel={1}
-              link={
-                typeof gmCode === 'string'
-                  ? {
-                      text: replaceVariablesInText(
-                        text.secties.actuele_situatie.link.text,
-                        {
-                          municipalityName: municipalityName,
-                        }
-                      ),
-                      href: replaceVariablesInText(
-                        text.secties.actuele_situatie.link.href,
-                        { gmCode }
-                      ),
-                    }
-                  : undefined
-              }
+              link={{
+                text: replaceVariablesInText(
+                  text.secties.actuele_situatie.link.text,
+                  {
+                    municipalityName: municipalityName,
+                  }
+                ),
+                href: replaceVariablesInText(
+                  text.secties.actuele_situatie.link.href,
+                  { gmCode }
+                ),
+              }}
             />
 
             <MiniTrendTileLayout id="metric-navigation">
@@ -179,19 +179,19 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="tested_overall"
                     metricProperty="infected"
-                    differenceKey="tested_overall__infected"
+                    differenceKey="tested_overall__infected_moving_average"
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
                     differenceTexts={
-                      text.data_driven_texts.infected_people_total.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
-                href={`/gemeente/${router.query.code}/positief-geteste-mensen`}
+                href={reverseRouter.gm.positiefGetesteMensen(gmCode)}
               />
 
               <MiniTrendTile
@@ -201,17 +201,17 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceTexts={
-                      text.data_driven_texts.intake_hospital_ma.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
-                href={`/gemeente/${router.query.code}/ziekenhuis-opnames`}
+                href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
               />
 
               <RiskLevelIndicator
@@ -220,19 +220,19 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 level={filteredRegion.level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
-                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/risiconiveau`}
-              >
-                {safetyRegionForMunicipality && (
-                  <>
-                    {siteText.common.vr_singular}:
-                    <br />
-                    <Link
-                      href={`/actueel/veiligheidsregio/${safetyRegionForMunicipality.code}`}
-                    >
-                      <a>{safetyRegionForMunicipality.name}</a>
-                    </Link>
-                  </>
+                href={reverseRouter.vr.risiconiveau(
+                  safetyRegionForMunicipality.code
                 )}
+              >
+                {siteText.common.vr_singular}:
+                <br />
+                <Link
+                  href={reverseRouter.actueel.vr(
+                    safetyRegionForMunicipality.code
+                  )}
+                >
+                  <a>{safetyRegionForMunicipality.name}</a>
+                </Link>
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
@@ -243,23 +243,20 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
-                    href: '/landelijk/vaccinaties',
+                    href: reverseRouter.nl.index(),
                     text: text.quick_links.links.nationaal,
                   },
-                  safetyRegionForMunicipality
-                    ? {
-                        href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
-                        text: replaceVariablesInText(
-                          text.quick_links.links.veiligheidsregio,
-                          { safetyRegionName: safetyRegionForMunicipality.name }
-                        ),
-                      }
-                    : {
-                        href: '/veiligheidsregio',
-                        text: text.quick_links.links.veiligheidsregio_fallback,
-                      },
                   {
-                    href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
+                    href: reverseRouter.vr.index(
+                      safetyRegionForMunicipality.code
+                    ),
+                    text: replaceVariablesInText(
+                      text.quick_links.links.veiligheidsregio,
+                      { safetyRegionName: safetyRegionForMunicipality.name }
+                    ),
+                  },
+                  {
+                    href: reverseRouter.gm.index(gmCode),
                     text: replaceVariablesInText(
                       text.quick_links.links.gemeente,
                       { municipalityName: municipalityName }

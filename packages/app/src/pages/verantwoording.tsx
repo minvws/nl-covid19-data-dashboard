@@ -39,20 +39,16 @@ export const getStaticProps = createGetStaticProps(
            },
         ]
       },
-      "collapsibleList": [...collapsibleList[]
+      "collapsibleList": [...collapsibleList[]->
         {
-          ...,
-                    
-          "content": {
-            ...content,
-            "${locale}": [
+          "content": [
               ...content.${locale}[]
               {
                 ...,
                 "asset": asset->
-               },
-            ]
-          }
+              },
+          ],
+          "title": title.${locale},
       }]
     }[0]
     `;

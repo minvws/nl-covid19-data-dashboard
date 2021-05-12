@@ -7,8 +7,8 @@ import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
-import { useElementSize } from '~/utils/use-element-size';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -36,6 +36,7 @@ import {
   useScales,
   useSeriesList,
   useValuesInTimeframe,
+  useValueWidth,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
@@ -82,7 +83,7 @@ export type TimeSeriesChartProps<
    * use the available width when the chart mounts.
    */
   initialWidth?: number;
-  height?: number;
+  minHeight?: number;
   timeframe?: TimeframeOption;
   formatTooltip?: TooltipFormatter<T>;
   /**
@@ -127,7 +128,7 @@ export function TimeSeriesChart<
   values: allValues,
   seriesConfig,
   initialWidth = 840,
-  height = 250,
+  minHeight = 250,
   timeframe = 'all',
   formatTooltip,
   dataOptions,
@@ -151,8 +152,6 @@ export function TimeSeriesChart<
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
-
   const {
     valueAnnotation,
     isPercentage,
@@ -160,6 +159,13 @@ export function TimeSeriesChart<
     benchmark,
     timespanAnnotations,
   } = dataOptions || {};
+
+  const {
+    ResponsiveContainer,
+    ref: containerRef,
+    width,
+    height,
+  } = useResponsiveContainer(initialWidth, minHeight);
 
   const { padding, bounds, leftPaddingRef } = useDimensions({
     width,
@@ -206,7 +212,7 @@ export function TimeSeriesChart<
     [values, today]
   );
 
-  const [handleHover, hoverState] = useHoverState({
+  const [hoverState, chartEventHandlers] = useHoverState({
     values,
     padding,
     seriesConfig,
@@ -216,6 +222,8 @@ export function TimeSeriesChart<
     timespanAnnotations,
     markNearestPointOnly,
   });
+
+  const valueMinWidth = useValueWidth(values, seriesConfig, isPercentage);
 
   useEffect(() => {
     if (hoverState) {
@@ -253,6 +261,8 @@ export function TimeSeriesChart<
             timespanAnnotations && isDefined(timespanAnnotationIndex)
               ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
+
+          valueMinWidth,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -270,9 +280,10 @@ export function TimeSeriesChart<
     timespanAnnotations,
     markNearestPointOnly,
     displayTooltipValueOnly,
+    valueMinWidth,
   ]);
 
-  useOnClickOutside([sizeRef], () => tooltipData && hideTooltip());
+  useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
 
   const handleClick = useCallback(() => {
     if (onSeriesClick && tooltipData) {
@@ -281,123 +292,125 @@ export function TimeSeriesChart<
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
   return (
-    <Box ref={sizeRef}>
+    <>
       {valueAnnotation && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
+      <ResponsiveContainer>
+        <Box position="relative" css={css({ userSelect: 'none' })}>
+          <ChartContainer
+            width={width}
+            height={height}
+            padding={padding}
+            ariaLabelledBy={ariaLabelledBy || ''}
+            onClick={handleClick}
+            onHover={chartEventHandlers.handleHover}
+            onFocus={chartEventHandlers.handleFocus}
+            onBlur={chartEventHandlers.handleBlur}
+          >
+            <Axes
+              bounds={bounds}
+              numGridLines={numGridLines}
+              yTickValues={yTickValues}
+              xTickValues={xTickValues}
+              formatYTickValue={formatYTickValue}
+              xScale={xScale}
+              yScale={yScale}
+              isPercentage={isPercentage}
+              yAxisRef={leftPaddingRef}
+              isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+            />
 
-      <Box position="relative" css={css({ userSelect: 'none' })}>
-        <ChartContainer
-          width={width}
-          height={height}
-          padding={padding}
-          ariaLabelledBy={ariaLabelledBy || ''}
-          onHover={handleHover}
-          onClick={handleClick}
-        >
-          <Axes
-            bounds={bounds}
-            numGridLines={numGridLines}
-            yTickValues={yTickValues}
-            xTickValues={xTickValues}
-            formatYTickValue={formatYTickValue}
-            xScale={xScale}
-            yScale={yScale}
-            isPercentage={isPercentage}
-            yAxisRef={leftPaddingRef}
-            isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
-          />
+            {/**
+             * The renderSeries() callback has been replaced by this component. As
+             * long as we use only very standardized series this might be a good
+             * idea because it removes quite some lines of code from the main
+             * component.
+             *
+             * With this amount of props if does feel like the wrong type of
+             * abstraction, but I still think it's an improvement over
+             * having it mixed in with the main component.
+             */}
+            <Series
+              seriesConfig={seriesConfig}
+              seriesList={seriesList}
+              getX={getX}
+              getY={getY}
+              getY0={getY0}
+              getY1={getY1}
+              bounds={bounds}
+              yScale={yScale}
+              benchmark={benchmark}
+            />
 
-          {/**
-           * The renderSeries() callback has been replaced by this component. As
-           * long as we use only very standardized series this might be a good
-           * idea because it removes quite some lines of code from the main
-           * component.
-           *
-           * With this amount of props if does feel like the wrong type of
-           * abstraction, but I still think it's an improvement over
-           * having it mixed in with the main component.
-           */}
-          <Series
-            seriesConfig={seriesConfig}
-            seriesList={seriesList}
-            getX={getX}
-            getY={getY}
-            getY0={getY0}
-            getY1={getY1}
-            bounds={bounds}
-            yScale={yScale}
-            benchmark={benchmark}
-          />
+            {benchmark && (
+              <Benchmark
+                value={benchmark.value}
+                label={benchmark.label}
+                top={yScale(benchmark.value)}
+                width={bounds.width}
+              />
+            )}
 
-          {benchmark && (
-            <Benchmark
-              value={benchmark.value}
-              label={benchmark.label}
-              top={yScale(benchmark.value)}
-              width={bounds.width}
+            {/**
+             * Timespan annotations are rendered on top of the chart. It is
+             * transparent thanks to the `mix-blend-mode` set to `multiply`.
+             */}
+            {timespanAnnotations?.map((x, index) => (
+              <TimespanAnnotation
+                key={index}
+                start={x.start}
+                end={x.end}
+                domain={xScale.domain() as [number, number]}
+                getX={getX}
+                height={bounds.height}
+              />
+            ))}
+          </ChartContainer>
+
+          {tooltipOpen && tooltipData && (
+            <Tooltip
+              title={tooltipTitle}
+              data={tooltipData}
+              left={tooltipLeft}
+              top={tooltipTop}
+              formatTooltip={formatTooltip}
+              bounds={bounds}
+              padding={padding}
             />
           )}
 
-          {/**
-           * Timespan annotations are rendered on top of the chart. It is
-           * transparent thanks to the `mix-blend-mode` set to `multiply`.
-           */}
-          {timespanAnnotations?.map((x, index) => (
-            <TimespanAnnotation
-              key={index}
-              start={x.start}
-              end={x.end}
-              domain={xScale.domain() as [number, number]}
-              getX={getX}
-              height={bounds.height}
-            />
-          ))}
-        </ChartContainer>
+          {hoverState && (
+            <Overlay bounds={bounds} padding={padding}>
+              <DateSpanMarker
+                width={dateSpanWidth}
+                point={hoverState.nearestPoint}
+              />
 
-        {tooltipOpen && tooltipData && (
-          <Tooltip
-            title={tooltipTitle}
-            data={tooltipData}
-            left={tooltipLeft}
-            top={tooltipTop}
-            formatTooltip={formatTooltip}
-            bounds={bounds}
-            padding={padding}
-          />
-        )}
-
-        {hoverState && (
-          <Overlay bounds={bounds} padding={padding}>
-            <DateSpanMarker
-              width={dateSpanWidth}
-              point={hoverState.nearestPoint}
-            />
-
-            <DateLineMarker
-              point={hoverState.nearestPoint}
-              lineColor={
-                /**
-                 * Only display a line when we have range- or line-points.
-                 * Bar-series have no markers, which defeats the need of a line.
-                 */
-                hoverState.rangePoints.length || hoverState.linePoints.length
-                  ? '#5B5B5B'
-                  : 'transparent'
-              }
-              value={values[hoverState.valuesIndex]}
-            />
-            <PointMarkers points={hoverState.rangePoints} />
-            <PointMarkers points={hoverState.linePoints} />
-          </Overlay>
-        )}
-      </Box>
-
+              <DateLineMarker
+                point={hoverState.nearestPoint}
+                lineColor={
+                  /**
+                   * Only display a line when we have range- or line-points.
+                   * Bar-series have no markers, which defeats the need of a line.
+                   */
+                  hoverState.rangePoints.length || hoverState.linePoints.length
+                    ? '#5B5B5B'
+                    : 'transparent'
+                }
+                value={values[hoverState.valuesIndex]}
+              />
+              <PointMarkers points={hoverState.rangePoints} />
+              <PointMarkers points={hoverState.linePoints} />
+            </Overlay>
+          )}
+        </Box>
+      </ResponsiveContainer>
       {!disableLegend && legendItems.length > 0 && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>
       )}
-    </Box>
+    </>
   );
 }

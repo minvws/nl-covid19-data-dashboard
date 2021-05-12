@@ -155,19 +155,19 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="tested_overall"
                     metricProperty="infected"
-                    differenceKey="tested_overall__infected"
+                    differenceKey="tested_overall__infected_moving_average"
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
                     differenceTexts={
-                      text.data_driven_texts.infected_people_total.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
-                href={`/veiligheidsregio/${router.query.code}/positief-geteste-mensen`}
+                href={reverseRouter.vr.positiefGetesteMensen(vrCode)}
               />
 
               <MiniTrendTile
@@ -177,17 +177,17 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceTexts={
-                      text.data_driven_texts.intake_hospital_ma.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
-                href={`/veiligheidsregio/${router.query.code}/ziekenhuis-opnames`}
+                href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
               />
 
               <RiskLevelIndicator
@@ -196,9 +196,9 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 level={data.escalation_level.level}
                 code={data.code}
                 escalationTypes={escalationText.types}
-                href={`/veiligheidsregio/${router.query.code}/risiconiveau`}
+                href={reverseRouter.vr.risiconiveau(vrCode)}
               >
-                <Link href={`/veiligheidsregio/${vrCode}/maatregelen`}>
+                <Link href={reverseRouter.vr.maatregelen(vrCode)}>
                   <a>{text.risoconiveau_maatregelen.bekijk_href}</a>
                 </Link>
               </RiskLevelIndicator>
@@ -211,17 +211,20 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
-                    href: '/landelijk/vaccinaties',
+                    href: reverseRouter.nl.index(),
                     text: text.quick_links.links.nationaal,
                   },
                   {
-                    href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
+                    href: reverseRouter.vr.index(router.query.code as string),
                     text: replaceVariablesInText(
                       text.quick_links.links.veiligheidsregio,
                       { safetyRegionName: props.safetyRegionName }
                     ),
                   },
-                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                  {
+                    href: reverseRouter.gm.index(),
+                    text: text.quick_links.links.gemeente,
+                  },
                 ]}
                 dataSitemapHeader={replaceVariablesInText(
                   text.data_sitemap_title,

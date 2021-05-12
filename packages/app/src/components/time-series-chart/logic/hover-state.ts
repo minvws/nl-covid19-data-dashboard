@@ -1,14 +1,14 @@
-import { Point } from '@visx/point';
 import {
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
+import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
 import { isEmpty, throttle } from 'lodash';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Padding, TimespanAnnotationConfig } from './common';
 import {
@@ -18,6 +18,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from './series';
+import { useKeyboardNavigation } from './use-keyboard-navigation';
 
 export type HoveredPoint<T> = {
   seriesValue: SeriesSingleValue | SeriesDoubleValue;
@@ -52,8 +53,6 @@ type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
 export type HoverHandler = (event: Event, seriesIndex?: number) => void;
 
-type UseHoverStateResponse<T> = [HoverHandler, HoverState<T> | undefined];
-
 export function useHoverState<T extends TimestampedValue>({
   values,
   seriesList,
@@ -63,15 +62,15 @@ export function useHoverState<T extends TimestampedValue>({
   yScale,
   timespanAnnotations,
   markNearestPointOnly,
-}: UseHoverStateArgs<T>): UseHoverStateResponse<T> {
+}: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
+  const [hasFocus, setHasFocus] = useState(false);
+  const [valuesIndex, setValuesIndex] = useState<number>(0);
+  const keyboard = useKeyboardNavigation(setValuesIndex, values.length);
 
-  const setPointThrottled = useMemo(
-    () => throttle((x: Point | undefined) => setPoint(x), 1000 / 60),
-    [setPoint]
-  );
-
-  const timeoutRef = useRef<any>();
+  useEffect(() => {
+    hasFocus ? keyboard.enable() : keyboard.disable();
+  }, [hasFocus, keyboard]);
 
   const valuesDateUnix = useMemo(
     () =>
@@ -112,6 +111,29 @@ export function useHoverState<T extends TimestampedValue>({
     [xScale, valuesDateUnix]
   );
 
+  const setPointThrottled = useMemo(
+    () =>
+      throttle((point: Point | undefined) => {
+        if (!point) {
+          return setPoint(undefined);
+        }
+
+        /**
+         * Align point coordinates with actual data points by subtracting padding
+         */
+        point.x -= padding.left;
+        point.y -= padding.top;
+
+        setPoint(point);
+        setValuesIndex(bisect(values, point.x));
+      }, 1000 / 60),
+    [bisect, padding.left, padding.top, values]
+  );
+
+  const handleFocus = useCallback(() => setHasFocus(true), []);
+  const handleBlur = useCallback(() => setHasFocus(false), []);
+
+  const timeoutRef = useRef<any>();
   const handleHover = useCallback(
     (event: Event) => {
       if (isEmpty(values)) {
@@ -119,6 +141,7 @@ export function useHoverState<T extends TimestampedValue>({
       }
 
       if (event.type === 'mouseleave') {
+        !hasFocus && keyboard.disable();
         /**
          * Here a timeout is used on the clear hover state to prevent the
          * tooltip from getting jittery. Individual elements in the chart can
@@ -138,28 +161,14 @@ export function useHoverState<T extends TimestampedValue>({
 
       const mousePoint = localPoint(event) || undefined;
       setPointThrottled(mousePoint);
+      keyboard.enable();
     },
-    [values, setPointThrottled]
+    [values, setPointThrottled, keyboard, hasFocus]
   );
 
   const hoverState = useMemo(() => {
-    if (!point) return undefined;
-
-    let [pointX, pointY] = point.toArray();
-
-    /**
-     * Align point coordinates with actual data points by subtracting padding
-     */
-    pointX -= padding.left;
-    pointY -= padding.top;
-
-    /**
-     * Bisect here is working directly on the original values (as opposed to
-     * individual trends in LineChart. This should be more efficient since we
-     * only need to do it once. It also provides flexibility in constructing
-     * hover state elements for different types based on the series config.
-     */
-    const valuesIndex = bisect(values, pointX);
+    if (!point && !hasFocus) return undefined;
+    const pointY = point?.y ?? 0;
 
     const barPoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
@@ -218,7 +227,7 @@ export function useHoverState<T extends TimestampedValue>({
             };
         }
       })
-      .filter(isDefined)
+      .filter(isDefined);
 
     /**
      * Point markers on range data are rendered differently, so we split them
@@ -314,19 +323,19 @@ export function useHoverState<T extends TimestampedValue>({
 
     return hoverState;
   }, [
-    bisect,
-    markNearestPointOnly,
-    padding,
     point,
+    hasFocus,
     seriesConfig,
-    seriesList,
     timespanAnnotations,
     values,
+    valuesIndex,
+    markNearestPointOnly,
+    seriesList,
     xScale,
     yScale,
   ]);
 
-  return [handleHover, hoverState];
+  return [hoverState, { handleHover, handleFocus, handleBlur }] as const;
 }
 
 function findActiveTimespanAnnotationIndex(

@@ -54,7 +54,14 @@ export function MiniTrendTile<T extends TimestampedValue>(
           {title}
         </LinkWithIcon>
       </Heading>
-      <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
+      <Text
+        fontSize="2.25rem"
+        fontWeight="bold"
+        my={0}
+        lineHeight={0}
+        mb={2}
+        data-cy={metricProperty}
+      >
         {formatNumber((value as unknown) as number)}
       </Text>
 
@@ -62,7 +69,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
       <TimeSeriesChart
         initialWidth={400}
-        height={sm ? 180 : 140}
+        minHeight={sm ? 180 : 140}
         timeframe="5weeks"
         values={trendData}
         displayTooltipValueOnly

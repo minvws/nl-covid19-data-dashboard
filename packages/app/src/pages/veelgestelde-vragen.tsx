@@ -42,7 +42,7 @@ export const getStaticProps = createGetStaticProps(
         ]
       },
       "questions": [
-        ...questions[]
+        ...questions[]->
         {
           ...,
           "group": group->group.${locale},

@@ -116,7 +116,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <KpiValue
-                data-cy="sewer_average"
+                data-cy="average"
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
@@ -161,6 +161,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               source: text.bronnen.rivm,
             }}
+            description={text.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart

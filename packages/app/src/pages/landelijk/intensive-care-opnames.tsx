@@ -101,7 +101,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="intensive_care_nice"
                 metricProperty="admissions_on_date_of_reporting"
                 localeTextKey="ic_opnames_per_dag"
-                differenceKey="intensive_care_nice__admissions_on_date_of_reporting"
+                differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
+                isMovingAverageDifference
               />
               <Text>{text.extra_uitleg}</Text>
             </KpiTile>
@@ -122,6 +123,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     difference={
                       data.difference.intensive_care_lcps__beds_occupied_covid
                     }
+                    isMovingAverageDifference
                   />
                 )}
               <Text>{text.kpi_bedbezetting.description}</Text>
