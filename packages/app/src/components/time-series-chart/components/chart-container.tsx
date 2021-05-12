@@ -11,7 +11,6 @@
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
-import { asResponsiveArray } from '~/style/utils';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Padding } from '../logic';
 
