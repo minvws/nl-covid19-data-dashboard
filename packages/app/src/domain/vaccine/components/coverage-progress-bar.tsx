@@ -72,8 +72,13 @@ export function CoverageProgressBar(props: {
             <rect
               /**
                * Render a white divider of 2px which covers 1px off each bar.
+               * Calc can not be used on the x property because it will not be
+               * re-evaluated when container is resized, so we use CSS transform
+               * instead.
                */
-              x={`calc(${fullPercentage}% - 1px)`}
+              style={{
+                transform: `translate(calc(${fullPercentage}% - 1px), 0)`,
+              }}
               y={0}
               width={2}
               height={barHeight}
