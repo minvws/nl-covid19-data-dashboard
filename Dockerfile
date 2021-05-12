@@ -37,7 +37,7 @@ RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-json-all \
 && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
 && yarn workspace @corona-dashboard/cli validate-features --fail-early \
-&& yarn workspace @corona-dashboard/cms lokalize:export \
+&& yarn workspace @corona-dashboard/cms lokalize:export --dataset=$ARG_NEXT_PUBLIC_SANITY_DATASET \
 && yarn workspace @corona-dashboard/app build
 
 RUN addgroup -g 1001 -S nodejs \
