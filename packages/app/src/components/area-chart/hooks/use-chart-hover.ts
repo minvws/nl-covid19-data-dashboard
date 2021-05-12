@@ -60,14 +60,14 @@ export function useChartHover<
         return;
       }
 
-      const { xScale, yScale } = scales;
-
       const point = localPoint(event);
 
       if (!point) {
+        toggleHoverElements(true);
         return;
       }
 
+      const { xScale, yScale } = scales;
       const sortByNearestHorizontal = createSortNearestHorizontal<T | K>(point);
 
       // First gather all the trends and areas that are closest to the current mouse pointer

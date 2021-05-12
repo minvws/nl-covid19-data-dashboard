@@ -207,9 +207,11 @@ export function AreaChart<
 
   const scales = { xScale, yScale };
 
-  const handleHover = (
-    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
-  ) => onHover(event, scales);
+  const handleHover = useCallback(
+    (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) =>
+      onHover(event, scales),
+    [scales]
+  );
 
   return (
     <>
