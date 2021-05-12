@@ -6,7 +6,7 @@ import { getFileNames } from '../utils';
 import {
   createChoroplethValidation,
   CustomValidationFunction,
-  // validateMovingAverages,
+  validateMovingAverages,
   validatePlaceholders,
 } from './custom-validations';
 
@@ -36,7 +36,7 @@ export function getSchemaInfo(
           path.join(defaultJsonDirectory, 'VR_COLLECTION.json'),
           'vrcode'
         ),
-        // validateMovingAverages,
+        validateMovingAverages,
       ],
     },
     gm: {
@@ -47,7 +47,7 @@ export function getSchemaInfo(
           path.join(defaultJsonDirectory, 'GM_COLLECTION.json'),
           'gmcode'
         ),
-        // validateMovingAverages,
+        validateMovingAverages,
       ],
     },
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
