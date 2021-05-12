@@ -121,7 +121,7 @@ function formatAgeGroup(
 function VaccinationCoveragePercentage({ value }: { value: string }) {
   return (
     <Box display="flex" width="50%" justifyContent="flex-end">
-      <InlineText color="blue" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
+      <InlineText color="#005083" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
         {value}
       </InlineText>
     </Box>
