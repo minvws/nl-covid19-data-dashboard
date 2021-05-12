@@ -64,7 +64,6 @@ const Cube = styled.div<{ color: string }>((x) =>
     '&:first-child': {
       borderTopLeftRadius: '4px',
       borderBottomLeftRadius: '4px',
-      ml: 0,
     },
     '&:last-child': {
       borderTopRightRadius: '4px',
