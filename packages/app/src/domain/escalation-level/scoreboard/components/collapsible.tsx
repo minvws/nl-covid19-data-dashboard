@@ -8,19 +8,18 @@ import {
   EscalationLevelLabel,
 } from '~/components/escalation-level';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
-import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { RegionCubes } from './region-cubes';
 
 type CollapsibleProps = {
   level: 1 | 2 | 3 | 4;
-  count: number;
+  rowCount: number;
   children: ReactNode;
 };
 
 export function Collapsible(props: CollapsibleProps) {
-  const { level, count, children } = props;
+  const { level, rowCount, children } = props;
 
   const [open, setOpen] = useState(false);
 
@@ -28,14 +27,12 @@ export function Collapsible(props: CollapsibleProps) {
 
   const breakpoints = useBreakpoints(true);
 
-  const { siteText } = useIntl();
-
   return (
     <Box borderTopColor="lightGray" borderTopStyle="solid" borderTopWidth="1px">
       <Header
         open={open}
         onClick={() => setOpen((x) => !x)}
-        showChevron={count > 0}
+        showChevron={rowCount > 0}
       >
         <Box flex={{ _: '0.1', sm: '0.2' }} color="black">
           {breakpoints.sm ? (
@@ -52,10 +49,10 @@ export function Collapsible(props: CollapsibleProps) {
           {!breakpoints.sm && (
             <EscalationLevelLabel level={level} fontSize={2} />
           )}
-          <RegionCubes count={count} level={level} />
+          <RegionCubes count={rowCount} level={level} />
         </Box>
       </Header>
-      {count > 0 && (
+      {rowCount > 0 && (
         <Panel
           open={open}
           style={{
