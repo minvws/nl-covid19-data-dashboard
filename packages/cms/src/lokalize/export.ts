@@ -23,7 +23,7 @@ const cli = meow(
       --dataset Define dataset to export, default is "development"
 
     Examples
-      $ lokalize:export -d --dataset=development
+      $ lokalize:export --drafts --dataset=development
 `,
   {
     flags: {
