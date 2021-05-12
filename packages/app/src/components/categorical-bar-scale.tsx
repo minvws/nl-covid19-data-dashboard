@@ -55,10 +55,10 @@ export function CategoricalBarScale({
       <Box position="relative" width="100%" display="flex" py={4}>
         {barPieces.map((category, index) => (
           <Box
+            style={{ width: `${(category.width / maxValue) * 100}%` }}
             key={category.name}
             height={12}
             bg={category.color}
-            width={`${(category.width / maxValue) * 100}%`}
             position="relative"
             borderTopLeftRadius={index === 0 ? BAR_BORDER_RADIUS : 0}
             borderBottomLeftRadius={index === 0 ? BAR_BORDER_RADIUS : 0}

@@ -21,8 +21,10 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
     positiveTestedEscalationThresholds,
   } = useEscalationThresholds();
 
+  const escalationLevelData = vrData.data;
+
   const escalationColor = useEscalationColor(
-    vrData.data.level as EscalationLevel
+    escalationLevelData.level as EscalationLevel
   );
 
   const reverserRouter = useReverseRouter();
@@ -46,11 +48,11 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
       </VrLinkCell>
       <Box display="flex" flex="2" justifyItems="center">
         <BarScaleCell
-          value={vrData.data.positive_tested_per_100k}
+          value={escalationLevelData.positive_tested_per_100k}
           thresholds={positiveTestedEscalationThresholds}
         />
         <BarScaleCell
-          value={vrData.data.hospital_admissions_per_million}
+          value={escalationLevelData.hospital_admissions_per_million}
           thresholds={hospitalAdmissionsEscalationThresholds}
         />
       </Box>
