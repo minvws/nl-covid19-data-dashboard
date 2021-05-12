@@ -33,7 +33,7 @@ export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
       height?: string | number;
     }) => (
       <Box ref={ref} height="100%" minHeight={minHeight} position="relative">
-        <Box position="absolute" width="100%" height={height}>
+        <Box position="absolute" width="100%" style={{ height }}>
           {children}
         </Box>
       </Box>

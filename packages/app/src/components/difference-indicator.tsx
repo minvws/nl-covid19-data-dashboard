@@ -166,9 +166,8 @@ function TileIndicator({
           <IconUp />
         </IconContainer>
         <Span fontWeight="bold" mr="0.3em">
-          {differenceFormattedString} {splitText[0]}{' '}
+          {differenceFormattedString} {splitText[0]}
         </Span>
-
         <Span color="annotation">
           {splitText[1]} {timespanTextNode}
         </Span>
@@ -252,8 +251,11 @@ export function MovingAverageDifferenceIndicator({
 
   return (
     <Container>
+      <IconContainer color="data.neutral">
+        <IconGelijk />
+      </IconContainer>
       <InlineText fontWeight="bold">
-        {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.gelijk}{' '}
+        {siteText.toe_en_afname.gelijk}{' '}
       </InlineText>
       <InlineText>
         {siteText.toe_en_afname.zeven_daags_gemiddelde}

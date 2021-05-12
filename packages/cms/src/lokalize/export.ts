@@ -19,16 +19,20 @@ const cli = meow(
       $ lokalize:export
 
     Options
-      --drafts, -d Include draft documents
+      --drafts Include draft documents
+      --dataset Define dataset to export, default is "development"
 
     Examples
-      $ lokalize:export -d
+      $ lokalize:export --drafts --dataset=development
 `,
   {
     flags: {
       drafts: {
         type: 'boolean',
-        alias: 'd',
+      },
+      dataset: {
+        type: 'string',
+        default: 'development',
       },
     },
   }
@@ -43,7 +47,8 @@ const localeDirectory = path.resolve(
 );
 
 (async function run() {
-  const client = getClient();
+  const dataset = cli.flags.dataset;
+  const client = getClient(dataset);
   /**
    * The client will load drafts by default because it is authenticated with a
    * token. If the `drafts` flag is not set to true, we will manually
@@ -75,7 +80,7 @@ const localeDirectory = path.resolve(
     path.join(localeDirectory, 'en_export.json')
   );
 
-  console.log('Export completed');
+  console.log(`Export dataset "${dataset}" completed`);
 })().catch((err) => {
   console.error(`Export failed: ${err.message}`);
   process.exit(1);
