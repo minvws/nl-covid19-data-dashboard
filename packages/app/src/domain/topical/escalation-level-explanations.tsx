@@ -31,9 +31,9 @@ export function EscalationLevelExplanations() {
   const { siteText } = useIntl();
 
   return (
-    <Box px={{ _: 3, xs: 4, md: 5, lg: '8rem' }}>
+    <Box px={{ md: 5, lg: '8rem' }}>
       <CollapsibleButton label={siteText.escalatie_niveau.tile_title}>
-        <Box py={3} px={4}>
+        <Box py={3} px={{ _: 3, xs: 4 }}>
           <EscalationLevelExplanation
             level={1}
             explanation={siteText.escalatie_niveau.types['1'].toelichting}

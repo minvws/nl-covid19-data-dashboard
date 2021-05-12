@@ -39,7 +39,6 @@ export const CollapsibleButton = ({
   /**
    * Calculate the clip path where the content needs to animate to,
    * this is alligned with the position of the button percentage wise based of the content wrapper
-   *
    */
   const clipPathCalculation = useMemo(() => {
     if (!buttonWidth || !contentWidth || !buttonHeight || !contentHeight)
