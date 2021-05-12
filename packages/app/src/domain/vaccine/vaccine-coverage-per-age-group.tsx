@@ -4,7 +4,10 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { CoverageProgressBar } from './components/coverage-progress-bar';
+import {
+  CoverageProgressBar,
+  fullColor,
+} from './components/coverage-progress-bar';
 import { CoverageRow } from './components/coverage-row';
 
 type Props = {
@@ -121,7 +124,11 @@ function formatAgeGroup(
 function VaccinationCoveragePercentage({ value }: { value: string }) {
   return (
     <Box display="flex" width="50%" justifyContent="flex-end">
-      <InlineText color="#005083" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
+      <InlineText
+        color={fullColor}
+        fontSize={{ _: 3, lg: 4 }}
+        fontWeight="bold"
+      >
         {value}
       </InlineText>
     </Box>

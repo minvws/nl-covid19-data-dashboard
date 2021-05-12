@@ -5,6 +5,9 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
+export const partialColor = '#239BE6';
+export const fullColor = '#005083';
+
 export function CoverageProgressBar(props: {
   partialCount: number;
   partialPercentage: number;
@@ -29,9 +32,6 @@ export function CoverageProgressBar(props: {
   const breakpoints = useBreakpoints(true);
 
   const barHeight = breakpoints.md ? (isLarge ? 26 : 16) : 11;
-
-  const partialColor = '#239BE6';
-  const fullColor = '#005083';
 
   return (
     <Box width="100%" mt={{ _: 4, md: 0 }}>
