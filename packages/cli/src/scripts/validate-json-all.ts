@@ -1,7 +1,9 @@
+import { sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
+import { isDefined } from 'ts-is-present';
 import { schemaDirectory } from '../config';
 import {
   createValidateFunction,
@@ -10,6 +12,7 @@ import {
   SchemaInfo,
   SchemaInfoItem,
 } from '../schema';
+import { JSONObject } from '../schema/custom-validations';
 
 const cli = meow(
   `
@@ -114,7 +117,7 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
       encoding: 'utf8',
     });
 
-    let data: any = null;
+    let data: JSONObject | undefined;
     try {
       data = JSON.parse(contentAsString);
     } catch (e) {
@@ -124,18 +127,22 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
       return false;
     }
 
-    const { isValid, schemaErrors } = executeValidations(
-      validateFunction,
-      data,
-      schemaInfo
-    );
+    if (isDefined(data)) {
+      sortTimeSeriesInDataInPlace(data);
 
-    if (!isValid) {
-      console.group();
-      console.error(schemaErrors);
-      console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
-      console.groupEnd();
-      return false;
+      const { isValid, schemaErrors } = executeValidations(
+        validateFunction,
+        data,
+        schemaInfo
+      );
+
+      if (!isValid) {
+        console.group();
+        console.error(schemaErrors);
+        console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
+        console.groupEnd();
+        return false;
+      }
     }
 
     console.log(chalk.green.bold(`${fileName} is valid`));

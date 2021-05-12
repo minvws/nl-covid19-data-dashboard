@@ -1,3 +1,4 @@
+import { sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
@@ -113,7 +114,7 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
     encoding: 'utf8',
   });
 
-  let jsonData: JSONObject | null = null;
+  let jsonData: JSONObject | undefined;
   try {
     jsonData = JSON.parse(contentAsString);
   } catch (e) {
@@ -123,16 +124,20 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
     process.exit(1);
   }
 
-  const { isValid, schemaErrors } = executeValidations(
-    validateFunction,
-    jsonData,
-    schemaInfo
-  );
+  if (isDefined(jsonData)) {
+    sortTimeSeriesInDataInPlace(jsonData);
 
-  if (!isValid) {
-    console.error(schemaErrors);
-    logError(`  ${jsonFileName} is invalid  \n`);
-    process.exit(1);
+    const { isValid, schemaErrors } = executeValidations(
+      validateFunction,
+      jsonData,
+      schemaInfo
+    );
+
+    if (!isValid) {
+      console.error(schemaErrors);
+      logError(`  ${jsonFileName} is invalid  \n`);
+      process.exit(1);
+    }
   }
 
   logSuccess(`  ${jsonFileName} is valid  \n`);
