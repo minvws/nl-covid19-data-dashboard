@@ -27,7 +27,6 @@ import {
 import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
 import { useAreaConfigs } from './hooks/use-area-configs';
-import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
 import { useChartPadding } from './hooks/use-chart-padding';
 import { useDomains } from './hooks/use-domains';
@@ -180,13 +179,11 @@ export function AreaChart<
     [showTooltip, hideTooltip]
   );
 
-  const bisect = useBisect(padding);
-
   const onHover = useChartHover(
     toggleHoverElements,
     trendConfigs,
     areaConfigs,
-    bisect
+    padding
   );
 
   const bounds: ChartBounds = {
@@ -269,7 +266,7 @@ export function AreaChart<
             <Tooltip
               bounds={{ right: width, left: 0, top: 0, bottom: height }}
               x={tooltipLeft + padding.left}
-              y={tooltipTop + padding.top}
+              y={padding.top}
             >
               {formatTooltip(tooltipData, isPercentage)}
             </Tooltip>

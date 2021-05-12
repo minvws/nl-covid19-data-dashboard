@@ -2,8 +2,8 @@ import { memo, useCallback } from 'react';
 import styled from 'styled-components';
 import { ChartPadding } from '~/components/line-chart/components';
 import { Text } from '~/components/typography';
-import { colors } from '~/style/theme';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { TimestampedTrendValue } from '../logic';
 
 const MARKER_POINT_SIZE = 18;
@@ -147,7 +147,7 @@ function MarkerUnmemoized<T extends TimestampedTrendValue>(
             style={{
               // +10 makes it align better, not sure why
               bottom: padding.top + 10,
-              height: `${height - topY - (padding.top + padding.bottom)}px`,
+              height: `${height - (padding.top + padding.bottom)}px`,
             }}
           />
           <Label>

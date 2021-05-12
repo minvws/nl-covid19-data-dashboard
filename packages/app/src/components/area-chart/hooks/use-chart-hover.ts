@@ -3,11 +3,10 @@ import { Point } from '@visx/point';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ChartScales } from '~/components/line-chart/components';
+import { ChartPadding, ChartScales } from '~/components/line-chart/components';
 import { AreaConfig, TrendConfig } from '../components/area-chart-graph';
 import { HoverPoint } from '../components/marker';
-import { TimestampedTrendValue } from '../logic';
-import { BisectFunction } from './use-bisect';
+import { bisect, TimestampedTrendValue } from '../logic';
 
 export function useChartHover<
   T extends TimestampedTrendValue,
@@ -20,7 +19,7 @@ export function useChartHover<
   ) => void,
   trends: TrendConfig<T>[],
   areas: AreaConfig<K>[],
-  bisect: BisectFunction
+  padding: ChartPadding
 ) {
   // This is a bit of a hack because to fit the charts neatly against each other,
   // the last value of one area list is added as the first to the next. Which means
@@ -66,6 +65,7 @@ export function useChartHover<
         toggleHoverElements(true);
         return;
       }
+      point.x = point.x - padding.left;
 
       const { xScale, yScale } = scales;
       const sortByNearestHorizontal = createSortNearestHorizontal(point);
@@ -73,10 +73,8 @@ export function useChartHover<
       // First gather all the trends and areas that are closest to the current mouse pointer
       // and turn them into hoverpoints.
 
-      console.dir(_trends.map(bisectTrends<T>(bisect, point, xScale)));
-
       const trendHoverPoints = _trends
-        .map(bisectTrends<T>(bisect, point, xScale))
+        .map(bisectTrends<T>(point, xScale))
         .filter(isDefined)
         .map(createHoverPointFactory(xScale, yScale))
         .sort(sortByNearestHorizontal);
@@ -97,7 +95,7 @@ export function useChartHover<
 
       // Grab the areas that share the same date and create hover points
       const nearestAreas = _areas
-        .map(getNearestByDate(nearestTime))
+        .map(getTrendValuesWithDate(nearestTime))
         .flat()
         .map(createHoverPointFactory(xScale, yScale));
 
@@ -110,7 +108,6 @@ export function useChartHover<
 }
 
 function bisectTrends<T extends TimestampedTrendValue>(
-  bisect: BisectFunction,
   point: Point,
   xScale: ScaleTime<number, number>
 ) {
@@ -132,7 +129,7 @@ type AreaInfo<T extends TimestampedTrendValue> = {
   label?: string;
 };
 
-function getNearestByDate<T extends TimestampedTrendValue>(time: number) {
+function getTrendValuesWithDate<T extends TimestampedTrendValue>(time: number) {
   return (config: AreaConfig<T>) => {
     const trendValue = config.values.find((x) => x.__date.getTime() == time);
     return trendValue
