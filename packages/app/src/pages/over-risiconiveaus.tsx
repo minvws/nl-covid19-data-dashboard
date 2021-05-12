@@ -67,7 +67,7 @@ export const getStaticProps = createGetStaticProps(
     );
     scoreboardData.forEach((x) =>
       x.vrData.sort((a, b) =>
-        a.safetyRegionName > b.safetyRegionName ? 1 : -1
+        a.safetyRegionName.localeCompare(b.safetyRegionName)
       )
     );
 
