@@ -24,6 +24,10 @@ export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
   const width = Math.floor(measuredWidth);
   const height = Math.floor(Math.max(measuredHeight, minHeight));
 
+  /**
+   * Do NOT change the `style={{ height }}` to `height={height}` since
+   * this will lead to countless runtime classes being generated.
+   */
   const ResponsiveContainer = useCallback(
     ({
       children,
