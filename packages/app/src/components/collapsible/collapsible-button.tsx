@@ -42,12 +42,17 @@ export const CollapsibleButton = ({
    */
   const clipPathCalculation = useMemo(() => {
     if (!buttonWidth || !contentWidth || !buttonHeight || !contentHeight)
-      return { width: 0, height: 0 };
+      return '0 0, 100% 0, 100% 0, 0 0';
 
-    return {
-      width: ((buttonWidth / contentWidth) * 100 - 100) / 2,
-      height: (buttonHeight / contentHeight) * 100 * -1,
-    };
+    const width = ((buttonWidth / contentWidth) * 100 - 100) / 2;
+    const height = (buttonHeight / contentHeight) * 100 * -1;
+
+    return `
+      ${width * -1}% ${height}%,
+      ${width - 100 * -1}% ${height}%,
+      ${width - 100 * -1}% 0%,
+      ${width * -1}% 0%
+  `;
   }, [buttonWidth, contentWidth, buttonHeight, contentHeight]);
 
   /**
@@ -101,10 +106,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
   contentWidth: number;
   contentHeight: number;
   buttonHeight: number;
-  clipPathCalculation: {
-    width: number;
-    height: number;
-  };
+  clipPathCalculation: string;
 }>((x) =>
   css({
     position: 'relative',
@@ -113,7 +115,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
     transitionDuration: '0.4s',
     willChange: 'height',
 
-    //button
+    // Button
     '[data-reach-disclosure-button]': {
       display: 'flex',
       justifyContent: 'center',
@@ -177,16 +179,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       willChange: 'clip-path',
       clipPath: x.isOpen
         ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
-        : `polygon(
-            ${x.clipPathCalculation.width * -1}% ${
-            x.clipPathCalculation.height
-          }%,
-            ${x.clipPathCalculation.width - 100 * -1}% ${
-            x.clipPathCalculation.height
-          }%,
-            ${x.clipPathCalculation.width - 100 * -1}% 0%,
-            ${x.clipPathCalculation.width * -1}% 0%
-        )`,
+        : `polygon(${x.clipPathCalculation})`,
 
       '&:before': {
         content: '""',
