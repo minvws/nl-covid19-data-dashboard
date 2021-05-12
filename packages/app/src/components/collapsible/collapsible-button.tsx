@@ -68,13 +68,13 @@ export const CollapsibleButton = ({
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
-          <div ref={buttonRef} css={css({ display: 'flex' })}>
+          <Box ref={buttonRef} display="flex">
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}
               <Chevron open={isOpen} />
             </DisclosureButton>
-          </div>
+          </Box>
         </ButtonContainer>
 
         <DisclosurePanel>
