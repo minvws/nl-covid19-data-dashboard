@@ -95,7 +95,7 @@ export function useChartHover<
 
       // Grab the areas that share the same date and create hover points
       const nearestAreas = _areas
-        .map(getTrendValuesWithDate(nearestTime))
+        .map(getTrendValuesWithNearestDate(nearestTime))
         .flat()
         .map(createHoverPointFactory(xScale, yScale));
 
@@ -129,9 +129,13 @@ type AreaInfo<T extends TimestampedTrendValue> = {
   label?: string;
 };
 
-function getTrendValuesWithDate<T extends TimestampedTrendValue>(time: number) {
+function getTrendValuesWithNearestDate<T extends TimestampedTrendValue>(
+  nearestDate: number
+) {
   return (config: AreaConfig<T>) => {
-    const trendValue = config.values.find((x) => x.__date.getTime() == time);
+    const trendValue = config.values.find(
+      (x) => x.__date.getTime() == nearestDate
+    );
     return trendValue
       ? config.displays.map<AreaInfo<T>>((x) => ({
           data: trendValue,
