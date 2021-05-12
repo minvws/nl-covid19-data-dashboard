@@ -57,7 +57,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
-    4
+    3
   );
 
   const metadata = {
