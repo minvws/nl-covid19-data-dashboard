@@ -16,7 +16,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { vrData } from '~/data/vr';
 import {
   Scoreboard,
-  ScoreBoardData,
+  ScoreboardRow,
 } from '~/domain/escalation-level/scoreboard';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -47,7 +47,7 @@ interface OverRisiconiveausData {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectData(() => {
-    const scoreboardData = vrData.reduce<ScoreBoardData[]>(
+    const scoreboardRows = vrData.reduce<ScoreboardRow[]>(
       (sbData, vr) => {
         const vrData = loadAndSortVrData(vr.code);
         const index = vrData.escalation_level.level - 1;
@@ -60,19 +60,19 @@ export const getStaticProps = createGetStaticProps(
 
         return sbData;
       },
-      [1, 2, 3, 4].map<ScoreBoardData>((x) => ({
+      [1, 2, 3, 4].map<ScoreboardRow>((x) => ({
         escalationLevel: x as 1 | 2 | 3 | 4,
         vrData: [],
       }))
     );
-    scoreboardData.forEach((x) =>
+    scoreboardRows.forEach((x) =>
       x.vrData.sort((a, b) =>
         a.safetyRegionName.localeCompare(b.safetyRegionName)
       )
     );
 
     return {
-      scoreboardData,
+      scoreboardRows,
     };
   }),
   createGetChoroplethData({
@@ -111,9 +111,9 @@ export const getStaticProps = createGetStaticProps(
 
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { lastGenerated, scoreboardData, content, choropleth } = props;
+  const { lastGenerated, scoreboardRows, content, choropleth } = props;
 
-  const lastValue = scoreboardData.find((x) => x.vrData.length)?.vrData[0].data;
+  const lastValue = scoreboardRows.find((x) => x.vrData.length)?.vrData[0].data;
 
   return (
     <Layout
@@ -198,7 +198,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </Box>
         </Box>
-        <Scoreboard data={scoreboardData} />
+        <Scoreboard rows={scoreboardRows} />
         <Box mt={5} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
           <RichContent blocks={content.riskLevelExplanations} />
         </Box>

@@ -13,28 +13,28 @@ export type VrScoreboardData = {
   vrCode: string;
 };
 
-export type ScoreBoardData = {
+export type ScoreboardRow = {
   escalationLevel: 1 | 2 | 3 | 4;
   vrData: VrScoreboardData[];
 };
 
-export function Scoreboard({ data }: { data: ScoreBoardData[] }) {
+export function Scoreboard({ rows }: { rows: ScoreboardRow[] }) {
   return (
     <Box
       borderBottomColor="lightGray"
       borderBottomStyle="solid"
       borderBottomWidth="1px"
     >
-      {data.map((lvl) => (
+      {rows.map((escalationLevelRow) => (
         <Collapsible
-          level={lvl.escalationLevel}
-          rowCount={lvl.vrData.length}
-          key={lvl.escalationLevel}
+          level={escalationLevelRow.escalationLevel}
+          rowCount={escalationLevelRow.vrData.length}
+          key={escalationLevelRow.escalationLevel}
         >
           <Box bg="tileGray">
             <Box p={{ _: 3, sm: 4 }}>
               <Headers />
-              {lvl.vrData.map((vr) => (
+              {escalationLevelRow.vrData.map((vr) => (
                 <SafetyRegionRow vrData={vr} key={vr.vrCode} />
               ))}
             </Box>
