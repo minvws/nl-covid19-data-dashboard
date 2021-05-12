@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
@@ -21,15 +21,35 @@ export const CollapsibleButton = ({
   children,
   icon,
 }: CollapsibleButtonProps) => {
-  const { ref: contentRef, height: contentHeight = 0 } = useResizeObserver();
-  const { ref: buttonRef, height: buttonHeight = 0 } = useResizeObserver();
   const {
-    ref: buttonContainerRef,
+    ref: contentRef,
+    height: contentHeight = 0,
+    width: contentWidth = 0,
+  } = useResizeObserver();
+
+  const {
+    ref: buttonRef,
     width: buttonWidth = 0,
+    height: buttonHeight = 0,
   } = useResizeObserver();
 
   const [isOpen, setIsOpen] = useState(false);
   const { wrapperRef } = useSetLinkTabbability(isOpen);
+
+  /**
+   * Calculate the clip path where the content needs to animate to,
+   * this is alligned with the position of the button percentage wise based of the content wrapper
+   *
+   */
+  const clipPathCalculation = useMemo(() => {
+    if (!buttonWidth || !contentWidth || !buttonHeight || !contentHeight)
+      return { width: 0, height: 0 };
+
+    return {
+      width: ((buttonWidth / contentWidth) * 100 - 100) / 2,
+      height: (buttonHeight / contentHeight) * 100 * -1,
+    };
+  }, [buttonWidth, contentWidth, buttonHeight, contentHeight]);
 
   /**
    * falback to `undefined` to prevent an initial animation from `0` to
@@ -38,10 +58,18 @@ export const CollapsibleButton = ({
   const height = buttonHeight + (isOpen ? contentHeight : 0) || undefined;
 
   return (
-    <Container style={{ height }} isOpen={isOpen} buttonWidth={buttonWidth}>
+    <Container
+      style={{ height }}
+      isOpen={isOpen}
+      contentWidth={contentWidth}
+      contentHeight={contentHeight}
+      buttonHeight={buttonHeight}
+      buttonWidth={buttonWidth}
+      clipPathCalculation={clipPathCalculation}
+    >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
-        <ButtonContainer ref={buttonRef}>
-          <div ref={buttonContainerRef} css={css({ display: 'flex' })}>
+        <ButtonContainer>
+          <div ref={buttonRef} css={css({ display: 'flex' })}>
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}
@@ -71,18 +99,27 @@ const ButtonContainer = styled.div(
 const Container = styled(Box).attrs({ as: 'section' })<{
   isOpen: boolean;
   buttonWidth: number;
+  contentWidth: number;
+  contentHeight: number;
+  buttonHeight: number;
+  clipPathCalculation: {
+    width: number;
+    height: number;
+  };
 }>((x) =>
   css({
     position: 'relative',
     padding: 0,
     transitionProperty: 'height',
     transitionDuration: '0.4s',
+    willChange: 'height',
 
     //button
     '[data-reach-disclosure-button]': {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      overflow: 'hidden',
       zIndex: 1,
       width: x.isOpen ? '100%' : 'fit-content',
       border: '1px solid',
@@ -95,27 +132,33 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       font: 'inherit',
       fontWeight: 'bold',
       cursor: 'pointer',
-      transition: 'color 0.2s ease-out, border-color 0.2s ease-out',
+      transition: 'color 0.2s ease-out',
 
       '&:hover': {
         color: 'blue',
-        borderColor: x.isOpen ? 'rgba(0, 0, 0, 0)' : 'data.primary',
 
         svg: {
           fill: 'blue',
         },
+
+        '&:before': {
+          borderColor: x.isOpen ? 'lightGray' : 'data.primary',
+        },
       },
 
+      // Outside border
       '&:before': {
-        transition: 'transform 0.3s ease-in, width 0.5s',
+        transition: 'width 0.4s',
         position: 'absolute',
         top: 0,
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
         border: '1px solid',
         borderRadius: 1,
-        borderColor: x.isOpen ? 'lightGray' : 'rgba(0, 0, 0, 0)',
+        borderColor: 'lightGray',
+        zIndex: -1,
         content: '""',
+        pointerEvents: 'none',
       },
     },
 
@@ -131,24 +174,31 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       width: '100%',
       overflow: 'hidden',
       display: 'block',
-      transition: 'opacity 0.5s',
-      opacity: x.isOpen ? 1 : 0,
+      transition: 'clip-path 0.4s',
+      willChange: 'clip-path',
+      clipPath: x.isOpen
+        ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
+        : `polygon(
+            ${x.clipPathCalculation.width * -1}% ${
+            x.clipPathCalculation.height
+          }%,
+            ${x.clipPathCalculation.width - 100 * -1}% ${
+            x.clipPathCalculation.height
+          }%,
+            ${x.clipPathCalculation.width - 100 * -1}% 0%,
+            ${x.clipPathCalculation.width * -1}% 0%
+        )`,
 
       '&:before': {
         content: '""',
         position: 'absolute',
         top: 0,
-        left: x.isOpen ? '5%' : '0%',
-        width: x.isOpen ? '90%' : '0%',
+        width: x.isOpen ? '100%' : '0%',
         height: '1px',
         backgroundColor: 'lightGray',
         transform: x.isOpen ? 'scaleX(1)' : 'scale(0)',
-        transition: 'transform 0.5s',
+        transition: 'transform 0.8s',
       },
-    },
-
-    '[data-reach-disclosure-panel][data-state="collapsed"]': {
-      // height: 0,
     },
   })
 );
