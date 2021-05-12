@@ -11,6 +11,7 @@
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Padding } from '../logic';
 
 interface ChartContainerProps {
@@ -39,6 +40,8 @@ export function ChartContainer({
   onFocus,
   onBlur,
 }: ChartContainerProps) {
+  const isTouch = useIsTouchDevice();
+
   return (
     <svg
       width={width}
@@ -62,6 +65,7 @@ export function ChartContainer({
         userSelect: 'none',
         width: '100%',
         overflow: 'visible',
+        outline: isTouch ? 'none' : undefined,
       })}
       onTouchStart={onHover}
       onTouchMove={onHover}
