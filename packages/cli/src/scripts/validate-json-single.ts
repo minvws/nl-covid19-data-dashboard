@@ -132,6 +132,7 @@ createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
     }
   } catch (e) {
     console.group();
+    console.error(e);
     logError(`  ${fileName} cannot be parsed  \n`);
     console.groupEnd();
     process.exit(1);

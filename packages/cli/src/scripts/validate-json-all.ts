@@ -135,6 +135,7 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
       }
     } catch (e) {
       console.group();
+      console.error(e);
       console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
       console.groupEnd();
       return false;
