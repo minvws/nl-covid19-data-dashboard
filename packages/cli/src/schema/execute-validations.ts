@@ -1,5 +1,6 @@
 import { ErrorObject, ValidateFunction } from 'ajv';
 import { isDefined } from 'ts-is-present';
+import { JSONObject } from './custom-validations';
 import { SchemaInfoItem } from './schema-info';
 
 type ValidationResult = {
@@ -16,7 +17,7 @@ type ValidationResult = {
  */
 export function executeValidations(
   validateFunction: ValidateFunction,
-  data: any,
+  data: JSONObject,
   schemaInfo: SchemaInfoItem
 ): ValidationResult {
   let isValid = validateFunction(data) as boolean;

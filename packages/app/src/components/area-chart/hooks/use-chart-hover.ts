@@ -3,11 +3,10 @@ import { Point } from '@visx/point';
 import { ScaleLinear, ScaleTime } from 'd3-scale';
 import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ChartScales } from '~/components/line-chart/components';
+import { ChartPadding, ChartScales } from '~/components/line-chart/components';
 import { AreaConfig, TrendConfig } from '../components/area-chart-graph';
 import { HoverPoint } from '../components/marker';
-import { TimestampedTrendValue } from '../logic';
-import { BisectFunction } from './use-bisect';
+import { bisect, TimestampedTrendValue } from '../logic';
 
 export function useChartHover<
   T extends TimestampedTrendValue,
@@ -20,7 +19,7 @@ export function useChartHover<
   ) => void,
   trends: TrendConfig<T>[],
   areas: AreaConfig<K>[],
-  bisect: BisectFunction
+  padding: ChartPadding
 ) {
   // This is a bit of a hack because to fit the charts neatly against each other,
   // the last value of one area list is added as the first to the next. Which means
@@ -31,7 +30,7 @@ export function useChartHover<
   const _trends = useMemo(() => {
     const result = trends.map((x) => ({
       ...x,
-      values: x.values.map((x) => ({ ...x })),
+      values: x.values.slice(),
     }));
 
     result[1].values.shift();
@@ -42,7 +41,7 @@ export function useChartHover<
   const _areas = useMemo(() => {
     const result = areas.map((x) => ({
       ...x,
-      values: x.values.map((x) => ({ ...x })),
+      values: x.values.slice(),
     }));
 
     result[1].values.shift();
@@ -60,60 +59,60 @@ export function useChartHover<
         return;
       }
 
-      const { xScale, yScale } = scales;
-
       const point = localPoint(event);
 
       if (!point) {
+        toggleHoverElements(true);
+        return;
+      }
+      point.x = point.x - padding.left;
+
+      const { xScale, yScale } = scales;
+      const sortByNearestHorizontal = createSortNearestHorizontal(point);
+
+      // First gather all the trends and areas that are closest to the current mouse pointer
+      // and turn them into hoverpoints.
+
+      const trendHoverPoints = _trends
+        .map(bisectTrends<T>(point, xScale))
+        .filter(isDefined)
+        .map(createHoverPointFactory(xScale, yScale))
+        .sort(sortByNearestHorizontal);
+
+      const nearestTime = trendHoverPoints.length
+        ? trendHoverPoints[0].data.__date.getTime()
+        : undefined;
+
+      if (!isDefined(nearestTime)) {
+        toggleHoverElements(true);
         return;
       }
 
-      const sortByNearestHorizontal = createSortNearestHorizontal<T | K>(point);
-
-      // First gather all the trends and areas that are closest to the current mouse pointer
-      // and turn them into hoverpoints
-      const trendHoverPoints = _trends
-        .map(calculateNearestTrend(bisect, point, xScale))
-        .filter(isDefined)
-        .map<HoverPoint<T>>(createHoverPoint(xScale, yScale));
-
-      // Sort all of the points with the hoverpoint with its x coord
-      // closest to the mouse pointer first
-      let nearestTrends = [...trendHoverPoints].sort(sortByNearestHorizontal);
-      const nearestTime = nearestTrends[0].data.__date.getTime();
-
-      // Now only grab the trends with the exact same date as the nearest point.
-      nearestTrends = nearestTrends.filter(
+      // Only grab the trends with the exact same date as the nearest point.
+      const nearestTrends = trendHoverPoints.filter(
         (x) => x.data.__date.getTime() === nearestTime
       );
 
-      // Grab the areas that share the same date, dedupe and create hover points
+      // Grab the areas that share the same date and create hover points
       const nearestAreas = _areas
-        .map(calculateNearestByDate(nearestTrends[0].data.__date))
+        .map(getTrendValuesWithNearestDate(nearestTime))
         .flat()
-        .filter(isDefined)
-        .map<HoverPoint<K>>(createHoverPoint(xScale, yScale));
+        .map(createHoverPointFactory(xScale, yScale));
 
-      const hoverPoints = [
-        ...trendHoverPoints.filter(
-          (x) => x.data.__date.getTime() === nearestTime
-        ),
-        ...nearestAreas,
-      ];
+      const hoverPoints = [...nearestTrends, ...nearestAreas];
 
       toggleHoverElements(false, hoverPoints, nearestTrends[0]);
     },
-    [bisect, _trends, _areas, toggleHoverElements]
+    [_trends, _areas, toggleHoverElements, padding.left]
   );
 }
 
-function calculateNearestTrend<T extends TimestampedTrendValue>(
-  bisect: BisectFunction,
+function bisectTrends<T extends TimestampedTrendValue>(
   point: Point,
   xScale: ScaleTime<number, number>
 ) {
   return (config: TrendConfig<T>) => {
-    const trendValue = bisect(config.values, point.x, xScale);
+    const trendValue = bisect(config.values, point.x, xScale) as T;
     return trendValue
       ? {
           data: trendValue,
@@ -124,18 +123,21 @@ function calculateNearestTrend<T extends TimestampedTrendValue>(
   };
 }
 
-type PointInfo = {
-  data: TimestampedTrendValue;
+type AreaInfo<T extends TimestampedTrendValue> = {
+  data: T;
   color?: string;
   label?: string;
 };
 
-function calculateNearestByDate<T extends TimestampedTrendValue>(date: Date) {
-  const time = date.getTime();
+function getTrendValuesWithNearestDate<T extends TimestampedTrendValue>(
+  nearestDate: number
+) {
   return (config: AreaConfig<T>) => {
-    const trendValue = config.values.find((x) => x.__date.getTime() == time);
+    const trendValue = config.values.find(
+      (x) => x.__date.getTime() == nearestDate
+    );
     return trendValue
-      ? config.displays.map<PointInfo>((x) => ({
+      ? config.displays.map<AreaInfo<T>>((x) => ({
           data: trendValue,
           color: x.color,
           label: x.legendLabel,
@@ -144,7 +146,7 @@ function calculateNearestByDate<T extends TimestampedTrendValue>(date: Date) {
   };
 }
 
-function createHoverPoint<T extends TimestampedTrendValue>(
+function createHoverPointFactory<T extends TimestampedTrendValue>(
   xScale: ScaleTime<number, number>,
   yScale: ScaleLinear<number, number>
 ) {
@@ -153,7 +155,7 @@ function createHoverPoint<T extends TimestampedTrendValue>(
     color,
     label,
   }: {
-    data: any;
+    data: T;
     color?: string;
     label?: string;
   }): HoverPoint<T> => ({
@@ -165,10 +167,8 @@ function createHoverPoint<T extends TimestampedTrendValue>(
   });
 }
 
-function createSortNearestHorizontal<T extends TimestampedTrendValue>(
-  point: Point
-) {
-  return (left: HoverPoint<T>, right: HoverPoint<T>) => {
+function createSortNearestHorizontal(point: Point) {
+  return (left: HoverPoint<unknown>, right: HoverPoint<unknown>) => {
     return Math.abs(point.x - left.x) - Math.abs(point.x - right.x);
   };
 }
