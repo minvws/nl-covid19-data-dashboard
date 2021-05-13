@@ -120,7 +120,9 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
          * lower-snake-case paths in dot notation.
          *
          * @TODO improve the regexp so that the key is not allowed to end in a
-         * dot. https://regex101.com/r/RJaXUv/1
+         * dot. Also we should enforce at least 1 dot to have subject+path
+         * separation in Sanity.
+         * https://regex101.com/r/RJaXUv/1
          */
         return (
           existingKeys.find((key) => key === x) === undefined &&
