@@ -61,6 +61,7 @@ import {
         initial: initialKey,
         message: `What is the key?`,
         validate: (x) => existingKeys.includes(x),
+        onState,
       },
       {
         type: 'confirm',
@@ -68,6 +69,7 @@ import {
         message: (prev) => {
           return `Are you sure you want to delete key: ${prev}`;
         },
+        onState,
       },
     ]);
 
@@ -82,6 +84,7 @@ import {
         name: 'keys',
         message: `What keys do you want to delete?`,
         choices,
+        onState,
       },
       {
         type: (prev) => (prev.length > 0 ? 'confirm' : null),
@@ -91,6 +94,7 @@ import {
             '\n'
           )}`;
         },
+        onState,
       },
     ]);
 
@@ -113,3 +117,16 @@ import {
   console.error('An error occurred:', err.message);
   process.exit(1);
 });
+
+/**
+ * There is currently no native way to exit prompts on ctrl-c. This is a
+ * workaround that needs to be added to every prompts instance. For more info
+ * see: https://github.com/terkelg/prompts/issues/252#issuecomment-778683666
+ */
+function onState(state: { aborted: boolean }) {
+  if (state.aborted) {
+    process.nextTick(() => {
+      process.exit(0);
+    });
+  }
+}
