@@ -10,76 +10,98 @@
  * apply the mutations to the output. This way you can write your feature branch
  * with a set of texts that have mutations that only apply to your branch.
  */
-import { assert } from '@corona-dashboard/common';
-import { isEmpty } from 'lodash';
+import meow from 'meow';
 import prompts from 'prompts';
-import { getClient } from '../client';
-import { appendTextMutation } from './logic';
-import { LokalizeText } from './types';
+import { appendTextMutation, fetchExistingKeys } from './logic';
 
 (async function run() {
-  /**
-   * We are assuming you know the subject of the text you want to delete. Then
-   * we don't have to fetch all texts in advance.
-   */
-  const subjectResponse = await prompts([
+  const cli = meow(
+    `
+      Usage
+        $ delete-text
+
+      Options
+        --key, -k The text key to delete in dot-notation.
+
+      Examples
+        $ delete-text -k some.existing.path
+    `,
     {
-      type: 'text',
-      name: 'subject',
-      message: `What is the subject?`,
-    },
-  ]);
+      flags: {
+        key: {
+          type: 'string',
+          alias: 'k',
+        },
+      },
+    }
+  );
 
-  const { subject } = subjectResponse;
+  const existingKeys = await fetchExistingKeys();
 
-  {
+  const initialKey = cli.flags.key;
+
+  let deletionsCounter = 0;
+
+  const choices = existingKeys.map((x) => ({ title: x, value: x }));
+
+  if (initialKey) {
     /**
-     * Fetch all texts in given subject
+     * When an initial key is provided via the --key flag we do not show a multi
+     * select, because there is no nice state before you start typing. It always
+     * shows a full list of choices.
      */
-    const allTexts = (await getClient()
-      .fetch(
-        `*[_type == 'lokalizeText' && subject == '${subject}']| order(path asc)`
-      )
-      .catch((err) => {
-        throw new Error(`Failed to fetch localizeTexts: ${err.message}`);
-      })) as LokalizeText[];
-
-    assert(
-      !isEmpty(allTexts),
-      `There are no known texts for subject ${subject}`
-    );
-
-    const choices = allTexts.map((x) => ({ title: x.path, value: x.path }));
-
     const response = await prompts([
       {
-        type: 'multiselect',
-        name: 'paths',
-        message: `What path in ${subjectResponse.subject}?`,
-        choices,
-        validate: (x) => x.length > 0,
+        type: 'text',
+        name: 'key',
+        initial: initialKey,
+        message: `What is the key?`,
+        validate: (x) => existingKeys.includes(x),
       },
       {
-        type: (prev) => (prev.length > 0 ? 'confirm' : null),
+        type: 'confirm',
         name: 'confirmed',
-        message: (_prev, values) => {
-          return `Are you sure you want to delete:\n\n${values.paths
-            .map((x: string) => `${subject}.${x}`)
-            .join('\n')}`;
+        message: (prev) => {
+          return `Are you sure you want to delete key: ${prev}`;
         },
       },
     ]);
 
     if (response.confirmed) {
-      for (const path of response.paths) {
-        const key = `${subject}.${path}`;
-        appendTextMutation('delete', key);
-      }
-
-      console.log(`Marked ${response.paths} documents for deletion`);
-    } else {
-      console.log('No documents were marked for deletion');
+      appendTextMutation('delete', response.key);
+      deletionsCounter++;
     }
+  } else {
+    const response = await prompts([
+      {
+        type: 'autocompleteMultiselect',
+        name: 'keys',
+        message: `What keys do you want to delete?`,
+        choices,
+      },
+      {
+        type: (prev) => (prev.length > 0 ? 'confirm' : null),
+        name: 'confirmed',
+        message: (_prev, values) => {
+          return `Are you sure you want to delete:\n\n${values.keys.join(
+            '\n'
+          )}`;
+        },
+      },
+    ]);
+
+    if (response.confirmed) {
+      for (const key of response.keys) {
+        appendTextMutation('delete', key);
+        deletionsCounter++;
+      }
+    }
+  }
+
+  if (deletionsCounter > 0) {
+    console.log(`Marked ${deletionsCounter} documents for deletion`);
+  } else {
+    console.log('No documents were marked for deletion');
   }
 })().catch((err) => {
   console.error('An error occurred:', err.message);

@@ -4,7 +4,11 @@
 import meow from 'meow';
 import prompts from 'prompts';
 import { getClient } from '../client';
-import { appendTextMutation, exportLokalizeTexts } from './logic';
+import {
+  appendTextMutation,
+  exportLokalizeTexts,
+  fetchExistingKeys,
+} from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
@@ -29,15 +33,7 @@ import { LokalizeText } from './types';
     }
   );
 
-  const client = getClient();
-
-  const allTexts = (await client
-    .fetch(`*[_type == 'lokalizeText']`)
-    .catch((err) => {
-      throw new Error(`Failed to fetch texts: ${err.message}`);
-    })) as LokalizeText[];
-
-  const existingKeys = allTexts.map((x) => x.key);
+  const existingKeys = await fetchExistingKeys();
 
   let additionsCounter = 0;
 
@@ -61,6 +57,8 @@ import { LokalizeText } from './types';
       ]);
 
       if (response.confirmed) {
+        const client = getClient();
+
         await client.create(textDocument);
 
         await appendTextMutation('add', textDocument.key);
