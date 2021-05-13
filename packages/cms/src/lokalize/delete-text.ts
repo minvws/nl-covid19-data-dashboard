@@ -59,7 +59,7 @@ import {
         type: 'text',
         name: 'key',
         initial: initialKey,
-        message: `What is the key?`,
+        message: `What key do you want to delete?`,
         validate: (x) => existingKeys.includes(x),
         onState,
       },
@@ -67,7 +67,7 @@ import {
         type: 'confirm',
         name: 'confirmed',
         message: (prev) => {
-          return `Are you sure you want to delete key: ${prev}`;
+          return `Are you sure you want to delete: ${prev}`;
         },
         onState,
       },
