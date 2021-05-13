@@ -85,7 +85,7 @@ import { LokalizeText } from './types';
           console.log('Updating text export...');
           await exportLokalizeTexts();
         }
-        process.exit();
+        break;
       }
     }
   }
