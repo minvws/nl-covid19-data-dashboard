@@ -11,6 +11,8 @@ import {
 } from './logic';
 import { LokalizeText } from './types';
 
+let additionsCounter = 0;
+
 (async function run() {
   const cli = meow(
     `
@@ -34,8 +36,6 @@ import { LokalizeText } from './types';
   );
 
   const existingKeys = await fetchExistingKeys();
-
-  let additionsCounter = 0;
 
   while (true) {
     const textDocument = await createTextDocument(existingKeys, cli.flags.key);
@@ -101,9 +101,16 @@ import { LokalizeText } from './types';
  */
 function onState(state: { aborted: boolean }) {
   if (state.aborted) {
-    process.nextTick(() => {
-      process.exit(0);
-    });
+    if (additionsCounter > 0) {
+      console.log('Updating text export...');
+      exportLokalizeTexts().finally(() => {
+        process.exit(0);
+      });
+    } else {
+      process.nextTick(() => {
+        process.exit(0);
+      });
+    }
   }
 }
 

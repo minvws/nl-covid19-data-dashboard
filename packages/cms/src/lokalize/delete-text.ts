@@ -18,6 +18,8 @@ import {
   fetchExistingKeys,
 } from './logic';
 
+let deletionsCounter = 0;
+
 (async function run() {
   const cli = meow(
     `
@@ -43,8 +45,6 @@ import {
   const existingKeys = await fetchExistingKeys();
 
   const initialKey = cli.flags.key;
-
-  let deletionsCounter = 0;
 
   const choices = existingKeys.map((x) => ({ title: x, value: x }));
 
@@ -125,8 +125,16 @@ import {
  */
 function onState(state: { aborted: boolean }) {
   if (state.aborted) {
-    process.nextTick(() => {
-      process.exit(0);
-    });
+    if (deletionsCounter > 0) {
+      console.log(`Marked ${deletionsCounter} documents for deletion`);
+      console.log('Updating text export...');
+      exportLokalizeTexts().finally(() => {
+        process.exit(0);
+      });
+    } else {
+      process.nextTick(() => {
+        process.exit(0);
+      });
+    }
   }
 }
