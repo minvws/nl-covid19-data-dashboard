@@ -54,7 +54,9 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
       >
         valueAnnotation={siteText.waarde_annotaties.x_miljoen}
         timeframe="all"
-        formatTooltip={(values) => FormatVaccinationsTooltip(values, siteText)}
+        formatTooltip={(values) => (
+          <FormatVaccinationsTooltip values={values} text={siteText} />
+        )}
         divider={{
           color: colors.annotation,
           leftLabel: text.data.vaccination_chart.left_divider_label,
