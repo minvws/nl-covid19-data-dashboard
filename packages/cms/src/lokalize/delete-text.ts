@@ -1,7 +1,7 @@
 /**
  * Request to delete one or multiple texts from the Sanity "Lokalize" dataset.
  * This doesn't actually delete the key from the dataset straight away, but only
- * write to the mutations log.
+ * writes to the mutations log.
  *
  * This prevents us from breaking the build for other branches that still depend
  * on those keys.
@@ -12,7 +12,11 @@
  */
 import meow from 'meow';
 import prompts from 'prompts';
-import { appendTextMutation, fetchExistingKeys } from './logic';
+import {
+  appendTextMutation,
+  exportLokalizeTexts,
+  fetchExistingKeys,
+} from './logic';
 
 (async function run() {
   const cli = meow(
@@ -100,6 +104,8 @@ import { appendTextMutation, fetchExistingKeys } from './logic';
 
   if (deletionsCounter > 0) {
     console.log(`Marked ${deletionsCounter} documents for deletion`);
+    console.log('Updating text export...');
+    await exportLokalizeTexts();
   } else {
     console.log('No documents were marked for deletion');
   }
