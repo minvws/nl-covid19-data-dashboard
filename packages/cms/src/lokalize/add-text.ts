@@ -124,7 +124,10 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
       validate: (x: string) => {
         /**
          * Validation requires the key to be new and also to only contain
-         * lower-snake-case paths in dot notation
+         * lower-snake-case paths in dot notation.
+         *
+         * @TODO improve the regexp so that the key is not allowed to end in a
+         * dot. https://regex101.com/r/RJaXUv/1
          */
         return (
           existingKeys.find((key) => key === x) === undefined &&
