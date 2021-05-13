@@ -123,10 +123,6 @@ function MarkerUnmemoized<T extends TimestampedTrendValue>(
     padding,
   } = props;
 
-  const topY = data.reduce((min, d) => {
-    return Math.min(d.y, min);
-  }, Infinity);
-
   return (
     <>
       {/**

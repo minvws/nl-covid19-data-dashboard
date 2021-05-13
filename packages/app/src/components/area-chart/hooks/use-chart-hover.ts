@@ -103,7 +103,7 @@ export function useChartHover<
 
       toggleHoverElements(false, hoverPoints, nearestTrends[0]);
     },
-    [bisect, _trends, _areas, toggleHoverElements]
+    [_trends, _areas, toggleHoverElements, padding.left]
   );
 }
 

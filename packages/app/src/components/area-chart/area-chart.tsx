@@ -4,7 +4,14 @@ import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleTime } from 'd3-scale';
-import { memo, MouseEvent, TouchEvent, useCallback, useState } from 'react';
+import {
+  memo,
+  MouseEvent,
+  TouchEvent,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import {
@@ -112,13 +119,7 @@ export function AreaChart<
     divider,
     formatTooltip,
   } = props;
-  const {
-    tooltipData,
-    tooltipLeft = 0,
-    tooltipTop = 0,
-    showTooltip,
-    hideTooltip,
-  } = useTooltip<
+  const { tooltipData, tooltipLeft = 0, showTooltip, hideTooltip } = useTooltip<
     HoverPoint<(T & TimestampedTrendValue) | (K & TimestampedTrendValue)>
   >();
 
@@ -191,23 +192,27 @@ export function AreaChart<
     height: height - padding.top - padding.bottom,
   };
 
-  const xScale = scaleTime({
-    domain: xDomain,
-    range: [0, bounds.width],
-  });
+  const scales = useMemo(() => {
+    const xScale = scaleTime({
+      domain: xDomain,
+      range: [0, bounds.width],
+    });
 
-  const yScale = scaleLinear({
-    domain: yDomain,
-    range: [bounds.height, 0],
-    nice: NUM_TICKS,
-  });
+    const yScale = scaleLinear({
+      domain: yDomain,
+      range: [bounds.height, 0],
+      nice: NUM_TICKS,
+    });
 
-  const scales = { xScale, yScale };
+    const scales = { xScale, yScale };
+
+    return scales;
+  }, [xDomain, yDomain, bounds.width, bounds.height]);
 
   const handleHover = useCallback(
     (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) =>
       onHover(event, scales),
-    [scales]
+    [onHover, scales]
   );
 
   return (
@@ -236,7 +241,7 @@ export function AreaChart<
                 divider={divider}
                 height={height}
                 padding={padding}
-                xScale={xScale}
+                xScale={scales.xScale}
                 smallscreen={!breakpoints.lg}
               />
             )}
