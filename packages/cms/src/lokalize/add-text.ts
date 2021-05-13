@@ -31,11 +31,6 @@ import { LokalizeText } from './types';
 
   const client = getClient();
 
-  /**
-   * @TODO We could cache the subjects in a temp location on disk and update
-   * them every time this CLI is run. This way we can avoid having to wait for
-   * the query to return.
-   */
   const allTexts = (await client
     .fetch(`*[_type == 'lokalizeText']`)
     .catch((err) => {
