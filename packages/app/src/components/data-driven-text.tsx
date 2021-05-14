@@ -10,7 +10,7 @@ import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { DifferenceIndicator } from './difference-indicator';
+import { InlineDifference } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
@@ -96,9 +96,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
         propertyValue: <strong>{formatNumber(propertyValue)}</strong>,
       })}{' '}
       {replaceComponentsInText(differenceTexts, {
-        differenceTrend: (
-          <DifferenceIndicator value={differenceValue} context="inline" />
-        ),
+        differenceTrend: <InlineDifference value={differenceValue} />,
         differenceAverage: (
           <strong>{formatNumber(differenceValue.old_value)}</strong>
         ),

@@ -4,14 +4,14 @@ import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { Container, IconContainer } from './components/containers';
+import { Container, IconContainer } from './containers';
 
-export function MovingAverageDifferenceIndicator({
-  differenceValue,
+export function TileAverageDifference({
+  value,
 }: {
-  differenceValue: DifferenceDecimal | DifferenceInteger;
+  value: DifferenceDecimal | DifferenceInteger;
 }) {
-  const { difference, old_value } = differenceValue;
+  const { difference, old_value } = value;
   const { siteText, formatNumber } = useIntl();
 
   if (difference > 0)

@@ -6,7 +6,7 @@ import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
 import { InlineText } from '~/components/typography';
 
-export function TileIndicator({
+export function TileDifference({
   value,
   isDecimal,
   staticTimespan,
@@ -36,10 +36,10 @@ export function TileIndicator({
 
     return (
       <Container>
-        <IconContainer color="red">
+        <IconContainer color="red" mr={1}>
           <IconUp />
         </IconContainer>
-        <InlineText fontWeight="bold" mr="0.3em">
+        <InlineText fontWeight="bold">
           {differenceFormattedString} {splitText[0]}
         </InlineText>
         <InlineText color="annotation">
@@ -54,10 +54,10 @@ export function TileIndicator({
 
     return (
       <Container>
-        <IconContainer color="data.primary">
+        <IconContainer color="data.primary" mr={1}>
           <IconDown />
         </IconContainer>
-        <InlineText fontWeight="bold" mr="0.3em">
+        <InlineText fontWeight="bold">
           {differenceFormattedString} {splitText[0]}
         </InlineText>
         <InlineText>
@@ -69,7 +69,7 @@ export function TileIndicator({
 
   return (
     <Container>
-      <IconContainer color="lightGray">
+      <IconContainer color="lightGray" mr={1}>
         <IconGelijk />
       </IconContainer>
       <InlineText>

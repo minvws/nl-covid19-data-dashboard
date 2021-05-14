@@ -1,41 +1,40 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
+import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
 
-export function SidebarIndicator({
+export function InlineDifference({
   value,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
 }) {
-  const { difference } = value;
+  const { siteText } = useIntl();
+  const text = siteText.common_actueel;
 
-  if (difference > 0) {
+  if (value.difference > 0)
     return (
       <Container>
-        <IconContainer color="red">
+        <InlineText fontWeight="bold">{text.trend_hoger}</InlineText>
+        <IconContainer color="data.primary">
           <IconUp />
         </IconContainer>
       </Container>
     );
-  }
-
-  if (difference < 0) {
+  if (value.difference < 0)
     return (
       <Container>
-        <IconContainer color="data.primary">
+        <InlineText fontWeight="bold">{text.trend_lager}</InlineText>
+        <IconContainer color="red">
           <IconDown />
         </IconContainer>
       </Container>
     );
-  }
 
   return (
     <Container>
-      <IconContainer color="lightGray">
-        <IconGelijk />
-      </IconContainer>
+      <InlineText fontWeight="bold">{text.trend_gelijk}</InlineText>
     </Container>
   );
 }

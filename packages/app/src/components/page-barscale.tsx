@@ -13,10 +13,7 @@ import {
   metricContainsPartialData,
 } from '../metric-config';
 import { Box } from './base';
-import {
-  DifferenceIndicator,
-  MovingAverageDifferenceIndicator,
-} from './difference-indicator';
+import { TileAverageDifference, TileDifference } from './difference-indicator';
 import { useIntl } from '~/intl';
 import { NlLocale } from '~/locale';
 
@@ -139,9 +136,9 @@ export function PageBarScale<T>({
 
       {isDefined(differenceKey) &&
         (isMovingAverageDifference ? (
-          <MovingAverageDifferenceIndicator differenceValue={differenceValue} />
+          <TileAverageDifference value={differenceValue} />
         ) : (
-          <DifferenceIndicator
+          <TileDifference
             value={differenceValue}
             isDecimal={config.isDecimal}
             staticTimespan={differenceStaticTimespan}

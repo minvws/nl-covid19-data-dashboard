@@ -1,10 +1,11 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { Span } from '~/components/base';
 
-export const IconContainer = styled.span(
+export const IconContainer = styled(Span)(
   css({
     svg: {
-      mr: 1,
+      verticalAlign: 'text-bottom',
       width: '19px',
       height: '19px',
     },
@@ -15,10 +16,5 @@ export const Container = styled.span(
   css({
     display: 'inline-block',
     fontSize: 2,
-    svg: {
-      mr: 1,
-      width: '1.2em',
-      verticalAlign: 'text-bottom',
-    },
   })
 );
