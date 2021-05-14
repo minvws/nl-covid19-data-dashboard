@@ -112,14 +112,14 @@ function InlineDifferenceIndicator({ difference }: { difference: number }) {
 
   if (difference > 0)
     return (
-      <Container iconColor="data.primary">
+      <Container iconColor="red">
         {text.trend_hoger}
         <IconUp />
       </Container>
     );
   if (difference < 0)
     return (
-      <Container iconColor="red">
+      <Container iconColor="data.primary">
         {text.trend_lager}
         <IconDown />
       </Container>
