@@ -1,66 +1,73 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import IconGelijk from '~/assets/gelijk.svg';
+import css from '@styled-system/css';
+import styled from 'styled-components';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
-import { useIntl } from '~/intl';
-import { Container, IconContainer } from './containers';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { IconContainer } from './containers';
 
 export function InlineIndicator({
   value,
-  isDecimal,
-  maximumFractionDigits,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
-  isDecimal?: boolean;
-  maximumFractionDigits?: number;
 }) {
-  const { siteText, formatPercentage, formatNumber } = useIntl();
-  const text = siteText.toe_en_afname;
+  const { siteText } = useIntl();
+  const text = siteText.common_actueel;
 
-  const { difference } = value;
-
-  const differenceFormattedString = isDecimal
-    ? formatPercentage(
-        Math.abs(difference),
-        maximumFractionDigits ? { maximumFractionDigits } : undefined
-      )
-    : formatNumber(Math.abs(difference));
-
-  if (difference > 0) {
-    const splitText = text.toename.split(' ');
-
+  if (value.difference > 0)
     return (
-      <Container>
-        <InlineText fontWeight="bold">{differenceFormattedString}</InlineText>
-        <IconContainer color="red">
+      <InlineContainer>
+        <InlineText fontWeight="bold">{text.trend_hoger}</InlineText>
+        <IconContainer color="data.primary">
           <IconUp />
         </IconContainer>
-        <InlineText>{splitText[0]}</InlineText>
-      </Container>
+      </InlineContainer>
     );
-  }
-
-  if (difference < 0) {
-    const splitText = text.afname.split(' ');
-
+  if (value.difference < 0)
     return (
-      <Container>
-        <InlineText fontWeight="bold">{differenceFormattedString}</InlineText>
-        <IconContainer color="data.primary">
+      <InlineContainer>
+        <InlineText fontWeight="bold">{text.trend_lager}</InlineText>
+        <IconContainer color="red">
           <IconDown />
         </IconContainer>
-        <InlineText>{splitText[0]}</InlineText>
-      </Container>
+      </InlineContainer>
     );
-  }
 
   return (
-    <Container>
-      <IconContainer color="lightGray">
-        <IconGelijk />
-      </IconContainer>
-      <InlineText>{text.gelijk}</InlineText>
-    </Container>
+    <InlineContainer>
+      <InlineText fontWeight="bold">{text.trend_gelijk}</InlineText>
+    </InlineContainer>
   );
 }
+
+// const Container = styled.span(
+//   css({
+//     display: 'inline-block',
+//     fontSize: 2,
+//     svg: {
+//       mr: 1,
+//       width: '1.2em',
+//       verticalAlign: 'text-bottom',
+//     },
+//   })
+// );
+
+/**
+ * The InlineIndicator uses a slightly different container from the other
+ * flavors that use the shared container from ./components/containers.
+ */
+const InlineContainer = styled.span(
+  css({
+    display: 'inline-block',
+    whiteSpace: 'nowrap',
+    // fontWeight: 'bold',
+
+    svg: {
+      // color: x.iconColor,
+      verticalAlign: 'text-bottom',
+      width: '19px',
+      height: '19px',
+    },
+  })
+);
