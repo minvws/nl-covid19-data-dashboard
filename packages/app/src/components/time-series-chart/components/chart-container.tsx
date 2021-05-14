@@ -11,11 +11,13 @@
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
+import { isDefined } from 'ts-is-present';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Padding } from '../logic';
 
 interface ChartContainerProps {
   children: React.ReactNode;
+  defs?: React.ReactNode;
   width: number;
   height: number;
   padding: Padding;
@@ -39,6 +41,7 @@ export function ChartContainer({
   onClick,
   onFocus,
   onBlur,
+  defs,
 }: ChartContainerProps) {
   const isTouch = useIsTouchDevice();
 
@@ -76,6 +79,7 @@ export function ChartContainer({
       onClick={onClick}
       tabIndex={onFocus ? 0 : -1}
     >
+      {isDefined(defs) && <defs>{defs}</defs>}
       <Group
         left={padding.left}
         top={padding.top}

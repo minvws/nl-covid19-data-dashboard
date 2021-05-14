@@ -155,6 +155,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timespanAnnotations: [
                     {
+                      type: 'bar',
                       start: dataRivmUnderReportedDateStart,
                       end: Infinity,
                       label:

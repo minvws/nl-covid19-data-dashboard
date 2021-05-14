@@ -1,6 +1,6 @@
 import { Bar } from '@visx/shape';
 import { colors } from '~/style/theme';
-import { GetX } from '../logic';
+import { GetX, TimespanAnnotationConfigType } from '../logic';
 
 const DEFAULT_COLOR = colors.data.underReported;
 
@@ -10,12 +10,16 @@ export function TimespanAnnotation({
   domain,
   getX,
   height,
+  type,
+  chartId,
 }: {
   start: number;
   end: number;
   domain: [number, number];
   height: number;
   getX: GetX;
+  type: TimespanAnnotationConfigType;
+  chartId: string;
 }) {
   const [min, max] = domain;
 
@@ -37,17 +41,31 @@ export function TimespanAnnotation({
 
   if (width <= 0) return null;
 
-  return (
-    <Bar
-      pointerEvents="none"
-      height={height}
-      x={x0}
-      width={width}
-      fill={colors.data.underReported}
-      opacity={1}
-      style={{ mixBlendMode: 'multiply' }}
-    />
-  );
+  switch (type) {
+    case 'bar':
+      return (
+        <Bar
+          pointerEvents="none"
+          height={height}
+          x={x0}
+          width={width}
+          fill={colors.data.underReported}
+          opacity={1}
+          style={{ mixBlendMode: 'multiply' }}
+        />
+      );
+    case 'estimate':
+      return (
+        <Bar
+          pointerEvents="none"
+          height={height}
+          x={x0}
+          width={width}
+          fill={`url(#${chartId}_estimate_pattern)`}
+          clip-path={`url(#${chartId}_estimate_clippath)`}
+        />
+      );
+  }
 }
 
 interface TimespanAnnotationIconProps {

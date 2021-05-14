@@ -1,6 +1,7 @@
 import { assert, NlVaccineAdministeredValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { colors } from '~/style/theme';
+import { VaccineAdministeredAndDeliveredValue } from './data-selection/selected-delivery-and-administration-data';
 
 /**
  * Beware: the order of names in this array also dictates the rendering order in
@@ -24,9 +25,11 @@ vaccines.forEach((x) =>
 );
 
 export function useVaccineNames(
-  lastValue: NlVaccineAdministeredValue
+  lastValue?: NlVaccineAdministeredValue | VaccineAdministeredAndDeliveredValue
 ): string[] {
   return useMemo(() => {
-    return vaccines.filter((x) => (lastValue as any)[x] !== undefined);
+    return lastValue
+      ? vaccines.filter((x) => (lastValue as any)[x] !== undefined)
+      : [];
   }, [lastValue]);
 }

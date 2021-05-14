@@ -149,6 +149,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     },
                     timespanAnnotations: [
                       {
+                        type: 'bar',
                         start: intakeUnderReportedRange,
                         end: Infinity,
                         label: text.linechart_legend_inaccurate_label,
@@ -187,6 +188,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     },
                     timespanAnnotations: [
                       {
+                        type: 'bar',
                         start: intakeUnderReportedRange,
                         end: Infinity,
                         label: text.linechart_legend_inaccurate_label,
@@ -234,6 +236,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timespanAnnotations: [
                     {
+                      type: 'bar',
                       start: data.intensive_care_lcps.values[0].date_unix,
                       end: new Date('1 June 2020').getTime() / 1000,
                       label: text.chart_bedbezetting.legend_inaccurate_label,

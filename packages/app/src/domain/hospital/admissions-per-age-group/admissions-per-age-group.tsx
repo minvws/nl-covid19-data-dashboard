@@ -113,6 +113,7 @@ export function AdmissionsPerAgeGroup({
         dataOptions={{
           timespanAnnotations: [
             {
+              type: 'bar',
               start: underReportedDateStart,
               end: Infinity,
               label: text.line_chart_legend_inaccurate_label,

@@ -131,6 +131,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timespanAnnotations: [
                     {
+                      type: 'bar',
                       start: underReportedDateStart,
                       end: Infinity,
                       label:
@@ -306,6 +307,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timespanAnnotations: [
                     {
+                      type: 'bar',
                       start: underReportedDateStart,
                       end: Infinity,
                       label: locationDeaths.line_chart_legend_inaccurate_label,

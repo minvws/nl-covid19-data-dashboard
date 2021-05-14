@@ -11,7 +11,10 @@ export interface BenchmarkConfig {
   label?: string;
 }
 
+export type TimespanAnnotationConfigType = 'estimate' | 'bar';
+
 export interface TimespanAnnotationConfig {
+  type: TimespanAnnotationConfigType;
   start: number;
   end: number;
   label: string;

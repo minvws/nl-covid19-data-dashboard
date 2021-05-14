@@ -12,10 +12,12 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import { selectedDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/selected-delivery-and-administration-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
+import { VaccineDeliveryAndAdministrationsAreaChart2 } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart2';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
@@ -30,6 +32,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  selectData,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
@@ -60,6 +63,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor'
   ),
+  selectData(selectedDeliveryAndAdministrationData),
   createGetContent<{
     page: VaccinationPageQuery;
     highlight: {
@@ -75,7 +79,12 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, selectedNlData: data, lastGenerated } = props;
+  const {
+    content,
+    selectedNlData: data,
+    lastGenerated,
+    deliveryAndAdministration,
+  } = props;
 
   const stockFeature = useFeature('vaccineStockPerSupplier');
 
@@ -113,6 +122,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccineAdministrationsKpiSection data={data} />
 
           <VaccineDeliveryAndAdministrationsAreaChart data={data} />
+
+          <VaccineDeliveryAndAdministrationsAreaChart2
+            data={deliveryAndAdministration}
+          />
 
           <MilestonesView
             title={page.title}

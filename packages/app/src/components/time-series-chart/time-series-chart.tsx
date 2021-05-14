@@ -9,6 +9,7 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useUniqueId } from '../../utils/use-unique-id';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -23,13 +24,15 @@ import {
   TooltipFormatter,
 } from './components';
 import { Benchmark } from './components/benchmark';
+import { ClipPath } from './components/clip-path';
+import { Patterns } from './components/patterns';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
-  omitValuePropertiesForAnnotation,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
+  omitValuePropertiesForAnnotation,
   SeriesConfig,
   useHoverState,
   useLegendItems,
@@ -151,6 +154,8 @@ export function TimeSeriesChart<
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
+
+  const chartId = useUniqueId();
 
   const {
     valueAnnotation,
@@ -307,6 +312,19 @@ export function TimeSeriesChart<
             onHover={chartEventHandlers.handleHover}
             onFocus={chartEventHandlers.handleFocus}
             onBlur={chartEventHandlers.handleBlur}
+            defs={
+              <>
+                <ClipPath
+                  timespanAnnotations={timespanAnnotations}
+                  chartId={chartId}
+                  seriesConfig={seriesConfig}
+                />
+                <Patterns
+                  timespanAnnotations={timespanAnnotations}
+                  chartId={chartId}
+                />
+              </>
+            }
           >
             <Axes
               bounds={bounds}
@@ -341,6 +359,7 @@ export function TimeSeriesChart<
               bounds={bounds}
               yScale={yScale}
               benchmark={benchmark}
+              chartId={chartId}
             />
 
             {benchmark && (
@@ -358,12 +377,14 @@ export function TimeSeriesChart<
              */}
             {timespanAnnotations?.map((x, index) => (
               <TimespanAnnotation
+                chartId={chartId}
                 key={index}
                 start={x.start}
                 end={x.end}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
                 height={bounds.height}
+                type={x.type}
               />
             ))}
           </ChartContainer>

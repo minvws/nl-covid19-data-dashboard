@@ -231,6 +231,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     },
                     timespanAnnotations: [
                       {
+                        type: 'bar',
                         start: underReportedRange,
                         end: Infinity,
                         label: text.linechart_legend_underreported_titel,
@@ -262,6 +263,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     },
                     timespanAnnotations: [
                       {
+                        type: 'bar',
                         start: underReportedRange,
                         end: Infinity,
                         label: text.linechart_legend_underreported_titel,
@@ -313,6 +315,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timespanAnnotations: [
                     {
+                      type: 'bar',
                       start: dataHospitalLcps.values[0].date_unix,
                       end: new Date('1 June 2020').getTime() / 1000,
                       label: text.chart_bedbezetting.legend_inaccurate_label,
