@@ -17,7 +17,7 @@ export function InlineDifference({
     return (
       <Container>
         <InlineText fontWeight="bold">{text.trend_hoger}</InlineText>
-        <IconContainer color="data.primary">
+        <IconContainer color="red">
           <IconUp />
         </IconContainer>
       </Container>
@@ -26,7 +26,7 @@ export function InlineDifference({
     return (
       <Container>
         <InlineText fontWeight="bold">{text.trend_lager}</InlineText>
-        <IconContainer color="red">
+        <IconContainer color="data.primary">
           <IconDown />
         </IconContainer>
       </Container>
