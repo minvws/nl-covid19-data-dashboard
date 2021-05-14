@@ -72,12 +72,12 @@ const localeDirectory = path.resolve(
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
-    path.join(localeDirectory, 'nl_export.json')
+    path.join(localeDirectory, 'nl.json')
   );
 
   await writePrettyJson(
     unflatten(flatTexts.en, { object: true }),
-    path.join(localeDirectory, 'en_export.json')
+    path.join(localeDirectory, 'en.json')
   );
 
   console.log(`Export dataset "${dataset}" completed`);
