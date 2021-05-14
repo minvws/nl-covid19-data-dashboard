@@ -4,7 +4,14 @@ import { scaleLinear, scaleTime } from '@visx/scale';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import { ScaleTime } from 'd3-scale';
-import { memo, MouseEvent, TouchEvent, useCallback, useState } from 'react';
+import {
+  memo,
+  MouseEvent,
+  TouchEvent,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import {
@@ -16,8 +23,8 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import theme from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
-import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { LegendShape } from '../legend';
 import {
   AreaChartGraph,
@@ -27,7 +34,6 @@ import {
 import { Marker } from './components/marker';
 import { Tooltip } from './components/tooltip';
 import { useAreaConfigs } from './hooks/use-area-configs';
-import { useBisect } from './hooks/use-bisect';
 import { useChartHover } from './hooks/use-chart-hover';
 import { useChartPadding } from './hooks/use-chart-padding';
 import { useDomains } from './hooks/use-domains';
@@ -113,24 +119,21 @@ export function AreaChart<
     divider,
     formatTooltip,
   } = props;
-  const {
-    tooltipData,
-    tooltipLeft = 0,
-    tooltipTop = 0,
-    showTooltip,
-    hideTooltip,
-  } = useTooltip<
+  const { tooltipData, tooltipLeft = 0, showTooltip, hideTooltip } = useTooltip<
     HoverPoint<(T & TimestampedTrendValue) | (K & TimestampedTrendValue)>
   >();
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
-
   const breakpoints = useBreakpoints(true);
+  const isExtraSmallScreen = !breakpoints.sm;
+  const minHeight = isExtraSmallScreen ? 200 : 400;
+
+  const { ResponsiveContainer, width, height } = useResponsiveContainer(
+    initialWidth,
+    minHeight
+  );
+
   const trendConfigs = useTrendConfigs(trends, timeframe);
   const areaConfigs = useAreaConfigs(areas, timeframe);
-
-  const isExtraSmallScreen = !breakpoints.sm;
-  const height = isExtraSmallScreen ? 200 : 400;
 
   const allValues = [
     ...trendConfigs.map((x) => x.values).flat(),
@@ -177,13 +180,11 @@ export function AreaChart<
     [showTooltip, hideTooltip]
   );
 
-  const bisect = useBisect(padding);
-
   const onHover = useChartHover(
     toggleHoverElements,
     trendConfigs,
     areaConfigs,
-    bisect
+    padding
   );
 
   const bounds: ChartBounds = {
@@ -191,84 +192,92 @@ export function AreaChart<
     height: height - padding.top - padding.bottom,
   };
 
-  const xScale = scaleTime({
-    domain: xDomain,
-    range: [0, bounds.width],
-  });
+  const scales = useMemo(() => {
+    const xScale = scaleTime({
+      domain: xDomain,
+      range: [0, bounds.width],
+    });
 
-  const yScale = scaleLinear({
-    domain: yDomain,
-    range: [bounds.height, 0],
-    nice: NUM_TICKS,
-  });
+    const yScale = scaleLinear({
+      domain: yDomain,
+      range: [bounds.height, 0],
+      nice: NUM_TICKS,
+    });
 
-  const scales = { xScale, yScale };
+    const scales = { xScale, yScale };
 
-  const handleHover = (
-    event: TouchEvent<SVGElement> | MouseEvent<SVGElement>
-  ) => onHover(event, scales);
+    return scales;
+  }, [xDomain, yDomain, bounds.width, bounds.height]);
+
+  const handleHover = useCallback(
+    (event: TouchEvent<SVGElement> | MouseEvent<SVGElement>) =>
+      onHover(event, scales),
+    [onHover, scales]
+  );
 
   return (
     <>
       {isDefined(valueAnnotation) && (
         <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
       )}
-      <Box position="relative" ref={sizeRef}>
-        <AreaChartGraph
-          trends={trendConfigs}
-          areas={areaConfigs}
-          bounds={bounds}
-          width={width}
-          height={height}
-          padding={padding}
-          scales={scales}
-          formatXAxis={formatXAxis}
-          formatYAxis={isPercentage ? formatYAxisPercentageFn : formatYAxisFn}
-          numTicks={6}
-          onHover={handleHover}
-        >
-          {divider && (
-            <Dividers
-              areas={areaConfigs as any}
-              divider={divider}
-              height={height}
-              padding={padding}
-              xScale={xScale}
-              smallscreen={!breakpoints.lg}
-            />
-          )}
-        </AreaChartGraph>
+      <ResponsiveContainer>
+        <Box position="relative">
+          <AreaChartGraph
+            trends={trendConfigs}
+            areas={areaConfigs}
+            bounds={bounds}
+            width={width}
+            height={height}
+            padding={padding}
+            scales={scales}
+            formatXAxis={formatXAxis}
+            formatYAxis={isPercentage ? formatYAxisPercentageFn : formatYAxisFn}
+            numTicks={6}
+            onHover={handleHover}
+          >
+            {divider && (
+              <Dividers
+                areas={areaConfigs as any}
+                divider={divider}
+                height={height}
+                padding={padding}
+                xScale={scales.xScale}
+                smallscreen={!breakpoints.lg}
+              />
+            )}
+          </AreaChartGraph>
 
-        <Box
-          height={yMax}
-          width={xMax}
-          position="absolute"
-          top={padding.top}
-          left={padding.left}
-          style={{
-            pointerEvents: 'none',
-          }}
-        >
-          {markerProps && (
-            <Marker
-              {...markerProps}
-              showLine={true}
-              height={height}
-              padding={padding}
-            />
+          <Box
+            height={yMax}
+            width={xMax}
+            position="absolute"
+            top={padding.top}
+            left={padding.left}
+            style={{
+              pointerEvents: 'none',
+            }}
+          >
+            {markerProps && (
+              <Marker
+                {...markerProps}
+                showLine={true}
+                height={height}
+                padding={padding}
+              />
+            )}
+          </Box>
+
+          {isDefined(tooltipData) && (
+            <Tooltip
+              bounds={{ right: width, left: 0, top: 0, bottom: height }}
+              x={tooltipLeft + padding.left}
+              y={padding.top}
+            >
+              {formatTooltip(tooltipData, isPercentage)}
+            </Tooltip>
           )}
         </Box>
-
-        {isDefined(tooltipData) && (
-          <Tooltip
-            bounds={{ right: width, left: 0, top: 0, bottom: height }}
-            x={tooltipLeft + padding.left}
-            y={tooltipTop + padding.top}
-          >
-            {formatTooltip(tooltipData, isPercentage)}
-          </Tooltip>
-        )}
-      </Box>
+      </ResponsiveContainer>
     </>
   );
 }

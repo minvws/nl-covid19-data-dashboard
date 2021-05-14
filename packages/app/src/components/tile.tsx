@@ -24,6 +24,7 @@ const StyledTile = styled.article<{
   backgroundColor?: string;
 }>((x) =>
   css({
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     bg: x.backgroundColor ? x.backgroundColor : 'white',

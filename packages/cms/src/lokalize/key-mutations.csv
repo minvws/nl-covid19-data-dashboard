@@ -1,4 +1,14 @@
 timestamp,action,key
+2021-05-05T14:36:25.308Z,add,vaccinaties.clock.title_doses_per_minute
+2021-05-04T12:16:42.774Z,add,toe_en_afname.7_daags_gemiddelde
+2021-05-04T12:21:31.510Z,delete,toe_en_afname.7_daags_gemiddelde
+2021-05-04T12:22:46.378Z,add,toe_en_afname.zeven_daags_gemiddelde
+2021-05-04T13:20:49.988Z,add,common_actueel.trend_gelijk
+2021-05-04T13:21:05.138Z,add,common_actueel.trend_hoger
+2021-05-04T13:21:35.640Z,add,common_actueel.trend_lager
+2021-05-05T07:02:02.892Z,add,common_actueel.secties.kpi.zeven_daags_gemiddelde
+2021-05-06T06:43:10.468Z,add,toe_en_afname.hoger
+2021-05-06T06:43:26.165Z,add,toe_en_afname.lager
 2021-05-07T07:22:17.264Z,add,verpleeghuis_positief_geteste_personen.linechart_description
 2021-05-07T07:43:44.553Z,add,verpleeghuis_besmette_locaties.linechart_description
 2021-05-07T07:45:37.901Z,add,verpleeghuis_oversterfte.linechart_description
@@ -21,6 +31,10 @@ timestamp,action,key
 2021-05-07T08:37:55.866Z,add,veiligheidsregio_rioolwater_metingen.linechart_description
 2021-05-07T08:47:30.850Z,add,gemeente_rioolwater_metingen.linechart_description
 2021-05-10T06:57:25.328Z,add,common.week_number_label
+2021-05-07T11:40:58.486Z,add,common.modal_open
+2021-05-07T11:41:30.154Z,add,common.modal_close
+2021-05-07T11:42:01.546Z,add,common.grafiek_singular
+2021-05-07T11:42:17.279Z,add,common.grafiek_plural
 2021-05-10T08:18:08.025Z,add,positief_geteste_personen.tooltip_labels.infected_per_100k_moving_average
 2021-05-10T08:19:08.127Z,add,positief_geteste_personen.tooltip_labels.infected_percentage_moving_average
 2021-05-10T08:19:37.578Z,add,positief_geteste_personen.tooltip_labels.tested_total_moving_average

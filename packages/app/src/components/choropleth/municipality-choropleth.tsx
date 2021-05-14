@@ -184,7 +184,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
   };
 
   return (
-    <div css={css({ bg: 'transparent', position: 'relative' })}>
+    <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
         description={dataDescription}

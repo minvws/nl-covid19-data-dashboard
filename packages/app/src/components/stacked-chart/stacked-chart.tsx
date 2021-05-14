@@ -29,9 +29,9 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
-import { useElementSize } from '~/utils/use-element-size';
-import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
   calculateSeriesMaximum,
   getSeriesData,
@@ -134,7 +134,16 @@ export function StackedChart<T extends TimestampedValue>(
     timeframe = 'all',
   } = props;
 
-  const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
+  const breakpoints = useBreakpoints();
+  const isExtraSmallScreen = !breakpoints.sm;
+  const isTinyScreen = !breakpoints.xs;
+
+  const minHeight = isExtraSmallScreen ? 200 : 400;
+
+  const { ResponsiveContainer, width, height } = useResponsiveContainer(
+    initialWidth,
+    minHeight
+  );
 
   const {
     siteText,
@@ -155,10 +164,6 @@ export function StackedChart<T extends TimestampedValue>(
 
   const isMountedRef = useIsMountedRef();
 
-  const breakpoints = useBreakpoints();
-  const isExtraSmallScreen = !breakpoints.sm;
-  const isTinyScreen = !breakpoints.xs;
-
   const {
     width: yAxisWidth = 0,
     ref: yAxisRef,
@@ -175,8 +180,6 @@ export function StackedChart<T extends TimestampedValue>(
       } as const),
     [isExtraSmallScreen, yAxisWidth]
   );
-
-  const height = isExtraSmallScreen ? 200 : 400;
 
   const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
     config,
@@ -475,173 +478,175 @@ export function StackedChart<T extends TimestampedValue>(
   });
 
   return (
-    <Box>
-      <Box position="relative" ref={sizeRef}>
-        {valueAnnotation && (
-          <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
-        )}
-
-        <svg
-          width={width}
-          viewBox={`0 0 ${width} ${height}`}
-          css={css({ width: '100%' })}
-          role="img"
-        >
-          <HatchedPattern />
-
-          <Group left={padding.left} top={padding.top}>
-            <GridRows
-              scale={yScale}
-              width={bounds.width}
-              stroke={colors.data.axis}
-            />
-            <AxisBottom
-              scale={xScale}
-              tickValues={xScale.domain()}
-              top={bounds.height}
-              stroke={colors.data.axis}
-              tickFormat={props.formatXAxis ?? formatDateString}
-              tickLabelProps={() => {
-                return {
-                  textAnchor: 'middle',
-                  fill: colors.data.axisLabels,
-                  fontSize: 12,
-                };
-              }}
-              hideTicks
-            />
-            <g ref={yAxisRef}>
-              <AxisLeft
-                scale={yScale}
-                hideTicks
-                hideAxisLine
-                stroke={colors.data.axis}
-                tickFormat={
-                  formatYTickValue
-                    ? (formatYTickValue as AnyTickFormatter)
-                    : isPercentage
-                    ? (formatYAxisPercentage as AnyTickFormatter)
-                    : (formatYAxis as AnyTickFormatter)
-                }
-                tickLabelProps={() => ({
-                  fill: colors.data.axisLabels,
-                  fontSize: 12,
-                  dx: 0,
-                  textAnchor: 'end',
-                  verticalAnchor: 'middle',
-                })}
-              />
-            </g>
-            <BarStack<SeriesValue, string>
-              data={series}
-              keys={metricProperties as string[]}
-              x={getDate}
-              xScale={xScale}
-              yScale={yScale}
-              color={colorScale}
+    <>
+      {valueAnnotation && (
+        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+      )}
+      <Box height="100%">
+        <ResponsiveContainer>
+          <Box position="relative">
+            <svg
+              width={width}
+              viewBox={`0 0 ${width} ${height}`}
+              css={css({ width: '100%' })}
+              role="img"
             >
-              {(barStacks) =>
-                barStacks.map((barStack) =>
-                  barStack.bars.map((bar) => {
-                    const barId = `bar-stack-${barStack.index}-${bar.index}`;
-                    const fillColor =
-                      hoveredIndex === NO_HOVER_INDEX
-                        ? bar.color
-                        : barStack.index === hoveredIndex
-                        ? bar.color
-                        : hoverColors[barStack.index];
+              <HatchedPattern />
 
-                    /**
-                     * Capture the bar data for the hover handler using a
-                     * closure for each bar.
-                     */
-                    const handleHoverWithBar = (event: HoverEvent) =>
-                      handleHover(event, bar, barStack.index);
+              <Group left={padding.left} top={padding.top}>
+                <GridRows
+                  scale={yScale}
+                  width={bounds.width}
+                  stroke={colors.data.axis}
+                />
+                <AxisBottom
+                  scale={xScale}
+                  tickValues={xScale.domain()}
+                  top={bounds.height}
+                  stroke={colors.data.axis}
+                  tickFormat={props.formatXAxis ?? formatDateString}
+                  tickLabelProps={() => {
+                    return {
+                      textAnchor: 'middle',
+                      fill: colors.data.axisLabels,
+                      fontSize: 12,
+                    };
+                  }}
+                  hideTicks
+                />
+                <g ref={yAxisRef}>
+                  <AxisLeft
+                    scale={yScale}
+                    hideTicks
+                    hideAxisLine
+                    stroke={colors.data.axis}
+                    tickFormat={
+                      formatYTickValue
+                        ? (formatYTickValue as AnyTickFormatter)
+                        : isPercentage
+                        ? (formatYAxisPercentage as AnyTickFormatter)
+                        : (formatYAxis as AnyTickFormatter)
+                    }
+                    tickLabelProps={() => ({
+                      fill: colors.data.axisLabels,
+                      fontSize: 12,
+                      dx: 0,
+                      textAnchor: 'end',
+                      verticalAnchor: 'middle',
+                    })}
+                  />
+                </g>
+                <BarStack<SeriesValue, string>
+                  data={series}
+                  keys={metricProperties as string[]}
+                  x={getDate}
+                  xScale={xScale}
+                  yScale={yScale}
+                  color={colorScale}
+                >
+                  {(barStacks) =>
+                    barStacks.map((barStack) =>
+                      barStack.bars.map((bar) => {
+                        const barId = `bar-stack-${barStack.index}-${bar.index}`;
+                        const fillColor =
+                          hoveredIndex === NO_HOVER_INDEX
+                            ? bar.color
+                            : barStack.index === hoveredIndex
+                            ? bar.color
+                            : hoverColors[barStack.index];
 
-                    return (
-                      <Group key={barId}>
-                        <rect
-                          id={barId}
-                          key={barId}
-                          x={bar.x}
-                          /**
-                           * Create a little gap between the stacked bars. Bars
-                           * can be 0 height so we need to clip it on 0 since
-                           * negative height is not allowed.
-                           */
-                          y={bar.y + (isTinyScreen ? 1 : 2)}
-                          height={Math.max(
-                            0,
-                            bar.height - (isTinyScreen ? 1 : 2)
-                          )}
-                          width={bar.width}
-                          fill={fillColor}
-                          onMouseLeave={handleHoverWithBar}
-                          onMouseMove={handleHoverWithBar}
-                          onTouchStart={handleHoverWithBar}
-                        />
-                        {bar.index >= hatchedFromIndex && (
-                          <rect
-                            pointerEvents="none"
-                            x={bar.x}
-                            /**
-                             * Create a little gap between the stacked bars. Bars
-                             * can be 0 height so we need to clip it on 0 since
-                             * negative height is not allowed.
-                             */
-                            y={bar.y + (isTinyScreen ? 1 : 2)}
-                            height={Math.max(
-                              0,
-                              bar.height - (isTinyScreen ? 1 : 2)
+                        /**
+                         * Capture the bar data for the hover handler using a
+                         * closure for each bar.
+                         */
+                        const handleHoverWithBar = (event: HoverEvent) =>
+                          handleHover(event, bar, barStack.index);
+
+                        return (
+                          <Group key={barId}>
+                            <rect
+                              id={barId}
+                              key={barId}
+                              x={bar.x}
+                              /**
+                               * Create a little gap between the stacked bars. Bars
+                               * can be 0 height so we need to clip it on 0 since
+                               * negative height is not allowed.
+                               */
+                              y={bar.y + (isTinyScreen ? 1 : 2)}
+                              height={Math.max(
+                                0,
+                                bar.height - (isTinyScreen ? 1 : 2)
+                              )}
+                              width={bar.width}
+                              fill={fillColor}
+                              onMouseLeave={handleHoverWithBar}
+                              onMouseMove={handleHoverWithBar}
+                              onTouchStart={handleHoverWithBar}
+                            />
+                            {bar.index >= hatchedFromIndex && (
+                              <rect
+                                pointerEvents="none"
+                                x={bar.x}
+                                /**
+                                 * Create a little gap between the stacked bars. Bars
+                                 * can be 0 height so we need to clip it on 0 since
+                                 * negative height is not allowed.
+                                 */
+                                y={bar.y + (isTinyScreen ? 1 : 2)}
+                                height={Math.max(
+                                  0,
+                                  bar.height - (isTinyScreen ? 1 : 2)
+                                )}
+                                width={bar.width}
+                                fill={
+                                  breakpoints.lg
+                                    ? 'url(#pattern-hatched)'
+                                    : 'url(#pattern-hatched-small)'
+                                }
+                                onMouseLeave={handleHoverWithBar}
+                                onMouseMove={handleHoverWithBar}
+                                onTouchStart={handleHoverWithBar}
+                              />
                             )}
-                            width={bar.width}
-                            fill={
-                              breakpoints.lg
-                                ? 'url(#pattern-hatched)'
-                                : 'url(#pattern-hatched-small)'
-                            }
-                            onMouseLeave={handleHoverWithBar}
-                            onMouseMove={handleHoverWithBar}
-                            onTouchStart={handleHoverWithBar}
-                          />
-                        )}
-                      </Group>
-                    );
-                  })
-                )
-              }
-            </BarStack>
-          </Group>
-        </svg>
+                          </Group>
+                        );
+                      })
+                    )
+                  }
+                </BarStack>
+              </Group>
+            </svg>
+          </Box>
 
-        {tooltipOpen && tooltipData && (
-          <TooltipWithBounds
-            left={tooltipLeft}
-            top={tooltipTop}
-            style={tooltipStyles}
-            offsetLeft={isTinyScreen ? 0 : 10}
-          >
-            <TooltipContainer>
-              {props.formatTooltip
-                ? props.formatTooltip(
-                    tooltipData.bar.data,
-                    tooltipData.key,
-                    tooltipData.color
-                  )
-                : formatTooltip(
-                    tooltipData.bar.data,
-                    tooltipData.key,
-                    tooltipData.color
-                  )}
-            </TooltipContainer>
-          </TooltipWithBounds>
-        )}
-
-        <Box pl={`${padding.left}px`}>
-          <Legend items={legendaItems} />
-        </Box>
+          {tooltipOpen && tooltipData && (
+            <TooltipWithBounds
+              left={tooltipLeft}
+              top={tooltipTop}
+              style={tooltipStyles}
+              offsetLeft={isTinyScreen ? 0 : 10}
+            >
+              <TooltipContainer>
+                {props.formatTooltip
+                  ? props.formatTooltip(
+                      tooltipData.bar.data,
+                      tooltipData.key,
+                      tooltipData.color
+                    )
+                  : formatTooltip(
+                      tooltipData.bar.data,
+                      tooltipData.key,
+                      tooltipData.color
+                    )}
+              </TooltipContainer>
+            </TooltipWithBounds>
+          )}
+        </ResponsiveContainer>
       </Box>
-    </Box>
+      <Box pl={`${padding.left}px`}>
+        <Legend items={legendaItems} />
+      </Box>
+    </>
   );
 }
 

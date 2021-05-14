@@ -69,7 +69,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
       <TimeSeriesChart
         initialWidth={400}
-        height={sm ? 180 : 140}
+        minHeight={sm ? 180 : 140}
         timeframe="5weeks"
         values={trendData}
         displayTooltipValueOnly

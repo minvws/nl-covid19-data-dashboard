@@ -141,7 +141,7 @@ function calculateWeekNumberAxis(startUnix: number, endUnix: number) {
   const weekNumberLabels = filterWeeks(
     weekGridLines,
     alternateBy,
-    startUnix - dayPadding,
+    startUnix + 3 * DAY_IN_SECONDS + dayPadding,
     endUnix + 5 * DAY_IN_SECONDS - 1.5 * dayPadding
   );
 

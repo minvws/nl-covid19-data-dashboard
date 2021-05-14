@@ -11,10 +11,7 @@ import sneeze_cough_elbow from '~/assets/gedrag/sneeze_cough_elbow.svg';
 import max_visitors from '~/assets/gedrag/max_visitors.svg';
 import { BehaviorIdentifier } from '../behavior-types';
 
-const icons: Record<
-  BehaviorIdentifier,
-  React.FunctionComponent<{ width: number; height: number }>
-> = {
+const icons: Record<BehaviorIdentifier, typeof curfew> = {
   curfew,
   wash_hands,
   keep_distance,
