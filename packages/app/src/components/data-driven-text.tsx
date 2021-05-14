@@ -42,7 +42,7 @@ interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   metricName: T;
   metricProperty: string;
   valueTexts: PluralizationTexts;
-  differenceTexts: string;
+  differenceText: string;
 }
 
 export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
@@ -51,7 +51,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
   metricName,
   metricProperty,
   valueTexts,
-  differenceTexts,
+  differenceText: differenceTexts,
 }: DataDrivenTextProps<T, K>) {
   const { siteText, formatNumber } = useIntl();
 
