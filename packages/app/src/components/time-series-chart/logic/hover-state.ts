@@ -239,6 +239,10 @@ export function useHoverState<T extends TimestampedValue>({
       .flatMap((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as SeriesDoubleValue;
 
+        if (!isPresent(seriesValue)) {
+          return undefined;
+        }
+
         const xValue = seriesValue.__date_unix;
         const yValueA = seriesValue.__value_a;
         const yValueB = seriesValue.__value_b;
