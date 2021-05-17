@@ -11,7 +11,7 @@ mkdir -p exports/nl
 mkdir -p exports/en
 
 # Install dependencies
-yarn
+yarn install --frozen-lockfile
 yarn workspace @corona-dashboard/common build
 yarn workspace @corona-dashboard/cms lokalize:export --dataset=production
 
