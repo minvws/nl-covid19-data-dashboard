@@ -26,10 +26,10 @@ import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
-  omitValuePropertiesForAnnotation,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
+  omitValuePropertiesForAnnotation,
   SeriesConfig,
   useHoverState,
   useLegendItems,
@@ -197,14 +197,21 @@ export function TimeSeriesChart<
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      bounds,
-      numTicks: yTickValues?.length || numGridLines,
-    }
-  );
+  const {
+    xScale,
+    yScale,
+    getX,
+    getY,
+    getY0,
+    getY1,
+    dateSpanWidth,
+    allZeroValues,
+  } = useScales({
+    values,
+    maximumValue: seriesMax,
+    bounds,
+    numTicks: yTickValues?.length || numGridLines,
+  });
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -319,6 +326,7 @@ export function TimeSeriesChart<
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
               isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+              allZeroValues={allZeroValues}
             />
 
             {/**

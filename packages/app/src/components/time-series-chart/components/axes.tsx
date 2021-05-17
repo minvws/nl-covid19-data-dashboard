@@ -52,6 +52,12 @@ type AxesProps = {
    * it will move the Y-axis to the left.
    */
   xRangePadding?: number;
+
+  /**
+   * Indicates if the chart contains a series that only has values of zero.
+   * (In case this needs special rendering)
+   */
+  allZeroValues?: boolean;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -68,6 +74,7 @@ export const Axes = memo(function Axes({
   yAxisRef,
   isYAxisCollapsed,
   xRangePadding,
+  allZeroValues,
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
   const isMounted = useIsMounted();
@@ -127,19 +134,17 @@ export const Axes = memo(function Axes({
 
   /**
    * We make an exception for the situation where all the values in the chart are zero.
-   * In that case the top range has been set to Infinity, but we want to draw exactly
+   * In that case the top range has been set to zero, but we want to draw exactly
    * two gridlines in this case (at the top and bottom of the chart). So therefore we
    * check for this case here and create a scale and gridline count accordingly.
    */
-  const isAllZeroState = yScale.domain()[1] === Infinity;
-
-  const darkGridRowScale = isAllZeroState
+  const darkGridRowScale = allZeroValues
     ? scaleLinear({
         domain: [0, 1],
         range: yScale.range(),
       })
     : yScale;
-  const numDarkGridLines = isAllZeroState ? 1 : numGridLines;
+  const numDarkGridLines = allZeroValues ? 1 : numGridLines;
 
   return (
     <g css={css({ pointerEvents: 'none' })}>
