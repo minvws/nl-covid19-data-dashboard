@@ -30,33 +30,35 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
   const reverserRouter = useReverseRouter();
 
   return (
-    <Box
-      display="flex"
-      flexDirection={{ _: 'column', lg: 'row' }}
-      width="100%"
-      justifyItems="flex-start"
-      borderTopColor="lightGray"
-      borderTopStyle="solid"
-      borderTopWidth="1px"
-    >
-      <VrLinkCell color={escalationColor}>
-        <Link href={reverserRouter.vr.risiconiveau(vrData.vrCode)}>
-          <StyledLink>
-            <InlineText>{vrData.safetyRegionName}</InlineText>
-          </StyledLink>
-        </Link>
-      </VrLinkCell>
-      <Box display="flex" flex="2" justifyItems="center">
-        <BarScaleCell
-          value={escalationLevelData.positive_tested_per_100k}
-          thresholds={positiveTestedEscalationThresholds}
-        />
-        <BarScaleCell
-          value={escalationLevelData.hospital_admissions_per_million}
-          thresholds={hospitalAdmissionsEscalationThresholds}
-        />
+    <Link href={reverserRouter.vr.risiconiveau(vrData.vrCode)} passHref>
+      <Box
+        as="a"
+        color="black"
+        fontWeight="bold"
+        display="flex"
+        flexDirection={{ _: 'column', lg: 'row' }}
+        width="100%"
+        justifyItems="flex-start"
+        borderTopColor="lightGray"
+        borderTopStyle="solid"
+        borderTopWidth="1px"
+        css={css({ cursor: 'pointer', textDecoration: 'none' })}
+      >
+        <VrLinkCell color={escalationColor}>
+          <InlineText>{vrData.safetyRegionName}</InlineText>
+        </VrLinkCell>
+        <Box display="flex" flex="2" justifyItems="center">
+          <BarScaleCell
+            value={escalationLevelData.positive_tested_per_100k}
+            thresholds={positiveTestedEscalationThresholds}
+          />
+          <BarScaleCell
+            value={escalationLevelData.hospital_admissions_per_million}
+            thresholds={hospitalAdmissionsEscalationThresholds}
+          />
+        </Box>
       </Box>
-    </Box>
+    </Link>
   );
 }
 
@@ -91,16 +93,6 @@ const BarScaleCell = ({
     </Box>
   );
 };
-
-const StyledLink = styled.a(
-  css({
-    fontSize: 2,
-    color: 'black',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    textDecoration: 'none',
-  })
-);
 
 const VrLinkCell = styled.div<{ color: string }>((x) =>
   css({

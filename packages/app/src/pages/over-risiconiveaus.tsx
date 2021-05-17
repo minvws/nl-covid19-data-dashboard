@@ -216,14 +216,14 @@ interface ContentProps {
 export function Content({ children }: ContentProps) {
   return (
     <Box bg="white" fontSize="1.125rem">
-      <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth={1000} mx="auto">
+      <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth="infoWidth" mx="auto">
         {children}
       </Box>
     </Box>
   );
 }
 
-const UnorderedList = styled.ul(() =>
+const UnorderedList = styled.ul(
   css({
     margin: 0,
     padding: 0,

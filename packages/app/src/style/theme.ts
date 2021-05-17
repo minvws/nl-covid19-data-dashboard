@@ -169,6 +169,7 @@ const shadows = {
 
 const sizes = {
   maxWidth: 1400,
+  infoWidth: 1000,
   contentWidth: 700,
   maxWidthText: 600,
 };
