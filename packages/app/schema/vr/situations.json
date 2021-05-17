@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "vr_situations",
+  "type": "object",
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "required": [
+    "values",
+    "last_value"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "value": {
+      "title": "vr_situations_value",
+      "type": "object",
+      "properties": {
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
+        },
+        "complete_data": {
+          "type": "boolean"
+        },
+        "situation_known_percentage": {
+          "type": "number"
+        },
+        "situation_known_count": {
+          "type": "integer"
+        },
+        "investigations_count": {
+          "type": "integer"
+        },
+        "home": {
+          "type": ["number", "null"]
+        },
+        "visit": {
+          "type": ["number", "null"]
+        },
+        "work": {
+          "type": ["number", "null"]
+        },
+        "school_daycare": {
+          "type": ["number", "null"]
+        },
+        "general_practitioner": {
+          "type": ["number", "null"]
+        },
+        "hospital": {
+          "type": ["number", "null"]
+        },
+        "health_care_other": {
+          "type": ["number", "null"]
+        },
+        "nursing_home": {
+          "type": ["number", "null"]
+        },
+        "residential_care_disabled": {
+          "type": ["number", "null"]
+        },
+        "residential_care_other": {
+          "type": ["number", "null"]
+        },
+        "daycare_elderly_disabled": {
+          "type": ["number", "null"]
+        },
+        "daycare_other": {
+          "type": ["number", "null"]
+        },
+        "hospice": {
+          "type": ["number", "null"]
+        },
+        "gathering": {
+          "type": ["number", "null"]
+        },
+        "travel": {
+          "type": ["number", "null"]
+        },
+        "flight": {
+          "type": ["number", "null"]
+        },
+        "hospitality": {
+          "type": ["number", "null"]
+        },
+        "student_activity": {
+          "type": ["number", "null"]
+        },
+        "leisure": {
+          "type": ["number", "null"]
+        },
+        "religious_activity": {
+          "type": ["number", "null"]
+        },
+        "choir": {
+          "type": ["number", "null"]
+        },
+        "funeral": {
+          "type": ["number", "null"]
+        },
+        "other": {
+          "type": ["number", "null"]
+        }
+      },
+      "required": [
+        "date_start_unix",
+        "date_end_unix",
+        "vrcode",
+        "complete_data",
+        "situation_known_percentage",
+        "situation_known_count",
+        "investigations_count",
+        "home",
+        "visit",
+        "work",
+        "school_daycare",
+        "general_practitioner",
+        "hospital",
+        "health_care_other",
+        "nursing_home",
+        "residential_care_disabled",
+        "residential_care_other",
+        "daycare_elderly_disabled",
+        "daycare_other",
+        "hospice",
+        "gathering",
+        "travel",
+        "flight",
+        "hospitality",
+        "student_activity",
+        "leisure",
+        "religious_activity",
+        "choir",
+        "funeral",
+        "other"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
