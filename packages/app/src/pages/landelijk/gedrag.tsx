@@ -31,7 +31,7 @@ import {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('corona_melder_app'),
+  selectNlPageMetricData('behavior_per_age_group'),
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
@@ -62,7 +62,7 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         {featureBehaviorPage.isEnabled ? (
-          <BehaviorPageNational data={data} />
+          <BehaviorPageNational data={data} content={content} />
         ) : (
           <TileList>
             <ContentHeader

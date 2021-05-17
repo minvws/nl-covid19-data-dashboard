@@ -67,7 +67,7 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
         lastGenerated={lastGenerated}
       >
         {featureBehaviorPage.isEnabled ? (
-          <BehaviorPageSafetyRegion data={data} />
+          <BehaviorPageSafetyRegion data={data} content={content} />
         ) : (
           <TileList>
             <ContentHeader
