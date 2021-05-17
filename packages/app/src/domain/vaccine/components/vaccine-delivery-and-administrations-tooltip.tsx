@@ -83,7 +83,7 @@ export function VaccineDeliveryAndAdministrationsTooltip({
           <TooltipListItem key={config.label}>
             <span>
               <ColorIndicator color={config.color} />
-              {formatLabel(config.label, siteText)}:
+              {formatLabel(config.shortLabel ?? config.label, siteText)}:
             </span>
             <TooltipValueContainer>
               <strong>

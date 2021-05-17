@@ -79,6 +79,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
                 name: (productNames as any)[x],
               }
             ),
+            shortLabel: (productNames as any)[x],
             color: (colors.data.vaccines as any)[x],
             fillOpacity: 1,
             strokeWidth: 0,
