@@ -27,7 +27,7 @@ interface UseScalesResult {
   getY0: GetY0;
   getY1: GetY1;
   dateSpanWidth: number;
-  allZeroValues: boolean;
+  hasAllZeroValues: boolean;
 }
 
 export function useScales<T extends TimestampedValue>(args: {
@@ -57,7 +57,7 @@ export function useScales<T extends TimestampedValue>(args: {
         getY0: (_x: SeriesDoubleValue) => 0,
         getY1: (_x: SeriesDoubleValue) => 0,
         dateSpanWidth: 0,
-        allZeroValues: false,
+        hasAllZeroValues: false,
       };
     }
 
@@ -88,7 +88,7 @@ export function useScales<T extends TimestampedValue>(args: {
       getY0: (x: SeriesDoubleValue) => yScale(x.__value_a ?? NaN),
       getY1: (x: SeriesDoubleValue) => yScale(x.__value_b ?? NaN),
       dateSpanWidth: getDateSpanWidth(values, xScale),
-      allZeroValues: maximumDomainValue === Infinity,
+      hasAllZeroValues: maximumDomainValue === Infinity,
     };
 
     return result;

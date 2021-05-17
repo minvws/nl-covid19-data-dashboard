@@ -57,7 +57,7 @@ type AxesProps = {
    * Indicates if the chart contains a series that only has values of zero.
    * (In case this needs special rendering)
    */
-  allZeroValues?: boolean;
+  hasAllZeroValues?: boolean;
 };
 
 type AnyTickFormatter = (value: any) => string;
@@ -74,7 +74,7 @@ export const Axes = memo(function Axes({
   yAxisRef,
   isYAxisCollapsed,
   xRangePadding,
-  allZeroValues,
+  hasAllZeroValues: allZeroValues,
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
   const isMounted = useIsMounted();

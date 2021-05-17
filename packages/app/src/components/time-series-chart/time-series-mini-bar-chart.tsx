@@ -100,7 +100,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     getY0,
     getY1,
     dateSpanWidth,
-    allZeroValues,
+    hasAllZeroValues,
   } = useScales({
     values,
     maximumValue: seriesMax,
@@ -175,7 +175,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
             isPercentage={isPercentage}
             isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
             xRangePadding={padding.left}
-            allZeroValues={allZeroValues}
+            hasAllZeroValues={hasAllZeroValues}
           />
 
           <Series

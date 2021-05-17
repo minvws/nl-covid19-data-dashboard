@@ -205,7 +205,7 @@ export function TimeSeriesChart<
     getY0,
     getY1,
     dateSpanWidth,
-    allZeroValues,
+    hasAllZeroValues,
   } = useScales({
     values,
     maximumValue: seriesMax,
@@ -326,7 +326,7 @@ export function TimeSeriesChart<
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
               isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
-              allZeroValues={allZeroValues}
+              hasAllZeroValues={hasAllZeroValues}
             />
 
             {/**
