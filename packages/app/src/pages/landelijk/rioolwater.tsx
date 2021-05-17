@@ -1,22 +1,33 @@
+import {
+  MunicipalityProperties,
+  MunicipalSewerValue,
+  RegionalSewerValue,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { RegionControlOption } from '~/components-styled/chart-region-controls';
-import { ChoroplethTile } from '~/components-styled/choropleth-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
-import { WarningTile } from '~/components-styled/warning-tile';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { RegionControlOption } from '~/components/chart-region-controls';
+import { ChartTile } from '~/components/chart-tile';
+import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
 import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
+import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -26,26 +37,15 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useIntl } from '~/intl';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
-import {
-  MunicipalityProperties,
-  MunicipalSewerValue,
-  RegionalSewerValue,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { SplitLineChart } from '~/components-styled/split-line-chart';
-import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData(),
   createGetChoroplethData({
     vr: ({ sewer }) => ({ sewer }),
     gm: ({ sewer }) => ({ sewer }),
@@ -61,10 +61,10 @@ export const getStaticProps = createGetStaticProps(
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
-  const { data, choropleth, content, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const text = siteText.rioolwater_metingen;
-  const graphDescriptions = siteText.accessibility.grafieken;
+
   const sewerAverages = data.sewer;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
@@ -116,7 +116,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <KpiValue
-                data-cy="sewer_average"
+                data-cy="average"
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
@@ -155,16 +155,16 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
-            title={text.linechart_titel}
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
-            ariaDescription={graphDescriptions.rioolwater_virusdeeltjes}
+            title={text.linechart_titel}
             metadata={{
               source: text.bronnen.rivm,
             }}
+            description={text.linechart_description}
           >
             {(timeframe) => (
-              <SplitLineChart
+              <TimeSeriesChart
                 values={sewerAverages.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -210,7 +210,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ChoroplethTile
             title={text.map_titel}
@@ -224,6 +224,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
+            valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
               title: text.legenda_titel,
               thresholds: regionThresholds.sewer.average,

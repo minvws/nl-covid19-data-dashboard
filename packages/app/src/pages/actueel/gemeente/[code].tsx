@@ -11,38 +11,38 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import {
   ChartRegionControls,
   RegionControlOption,
-} from '~/components-styled/chart-region-controls';
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
-import { CollapsibleButton } from '~/components-styled/collapsible';
-import { DataDrivenText } from '~/components-styled/data-driven-text';
-import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
-import { Markdown } from '~/components-styled/markdown';
-import { MaxWidth } from '~/components-styled/max-width';
-import { Metadata } from '~/components-styled/metadata';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { TileList } from '~/components-styled/tile-list';
-import { Text } from '~/components-styled/typography';
-import { WarningTile } from '~/components-styled/warning-tile';
+} from '~/components/chart-region-controls';
+import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { CollapsibleButton } from '~/components/collapsible';
+import { DataDrivenText } from '~/components/data-driven-text';
+import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
+import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { Markdown } from '~/components/markdown';
+import { MaxWidth } from '~/components/max-width';
+import { Metadata } from '~/components/metadata';
+import { RiskLevelIndicator } from '~/components/risk-level-indicator';
+import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
@@ -58,20 +58,26 @@ import {
 import {
   createGetChoroplethData,
   createGetContent,
-  getGmData,
   getLastGeneratedDate,
+  selectGmData,
 } from '~/static-props/get-data';
 import { assert } from '~/utils/assert';
-import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getGmData,
+  selectGmData(
+    'tested_overall',
+    'hospital_nice',
+    'sewer',
+    'tested_overall',
+    'difference'
+  ),
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -80,44 +86,54 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles: ArticleSummary[];
-    weeklyHighlight: WeeklyHighlightProps;
-    highlights: HighlightTeaserProps[];
+    articles?: ArticleSummary[];
+    weeklyHighlight?: WeeklyHighlightProps;
+    highlights?: HighlightTeaserProps[];
   }>(getTopicalPageQuery)
 );
 
 const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { municipalityName, choropleth, data, content, lastGenerated } = props;
+  const {
+    municipalityName,
+    choropleth,
+    selectedGmData: data,
+    content,
+    lastGenerated,
+  } = props;
 
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText, formatDate } = useIntl();
 
   const text = siteText.gemeente_actueel;
-  const gmCode = router.query.code;
+  const gmCode = router.query.code as string;
 
-  const safetyRegionForMunicipality =
-    typeof gmCode === 'string'
-      ? getSafetyRegionForMunicipalityCode(gmCode)
-      : undefined;
+  const safetyRegionForMunicipality = getSafetyRegionForMunicipalityCode(
+    gmCode
+  );
+
+  assert(
+    safetyRegionForMunicipality,
+    `Unable to get safety region for gm code "${gmCode}"`
+  );
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
   const escalationText = siteText.escalatie_niveau;
 
   const filteredRegion = props.choropleth.vr.escalation_levels.find(
-    (item) => item.vrcode === safetyRegionForMunicipality?.code
+    (item) => item.vrcode === safetyRegionForMunicipality.code
   );
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
 
-  const dataSitemap = useDataSitemap('gemeente', gmCode as string, data);
+  const dataSitemap = useDataSitemap('gemeente', gmCode, data);
 
   assert(
     filteredRegion && filteredRegion.level,
-    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality?.code} to get the the current "level" of it.`
+    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality.code} to get the the current "level" of it.`
   );
 
   const metadata = {
@@ -140,22 +156,19 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               title={replaceComponentsInText(text.title, {
                 municipalityName: municipalityName,
               })}
-              link={
-                typeof gmCode === 'string'
-                  ? {
-                      text: replaceVariablesInText(
-                        text.secties.actuele_situatie.link.text,
-                        {
-                          municipalityName: municipalityName,
-                        }
-                      ),
-                      href: replaceVariablesInText(
-                        text.secties.actuele_situatie.link.href,
-                        { gmCode }
-                      ),
-                    }
-                  : undefined
-              }
+              headingLevel={1}
+              link={{
+                text: replaceVariablesInText(
+                  text.secties.actuele_situatie.link.text,
+                  {
+                    municipalityName: municipalityName,
+                  }
+                ),
+                href: replaceVariablesInText(
+                  text.secties.actuele_situatie.link.href,
+                  { gmCode }
+                ),
+              }}
             />
 
             <MiniTrendTileLayout id="metric-navigation">
@@ -166,19 +179,19 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="tested_overall"
                     metricProperty="infected"
-                    differenceKey="tested_overall__infected"
+                    differenceKey="tested_overall__infected_moving_average"
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
                     differenceTexts={
-                      text.data_driven_texts.infected_people_total.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
-                href={`/gemeente/${router.query.code}/positief-geteste-mensen`}
+                href={reverseRouter.gm.positiefGetesteMensen(gmCode)}
               />
 
               <MiniTrendTile
@@ -188,17 +201,17 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceTexts={
-                      text.data_driven_texts.intake_hospital_ma.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
-                href={`/gemeente/${router.query.code}/ziekenhuis-opnames`}
+                href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
               />
 
               <RiskLevelIndicator
@@ -207,19 +220,19 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 level={filteredRegion.level}
                 code={filteredRegion.vrcode}
                 escalationTypes={escalationText.types}
-                href={`/veiligheidsregio/${safetyRegionForMunicipality?.code}/risiconiveau`}
-              >
-                {safetyRegionForMunicipality && (
-                  <>
-                    {siteText.common.vr_singular}:
-                    <br />
-                    <Link
-                      href={`/actueel/veiligheidsregio/${safetyRegionForMunicipality.code}`}
-                    >
-                      <a>{safetyRegionForMunicipality.name}</a>
-                    </Link>
-                  </>
+                href={reverseRouter.vr.risiconiveau(
+                  safetyRegionForMunicipality.code
                 )}
+              >
+                {siteText.common.vr_singular}:
+                <br />
+                <Link
+                  href={reverseRouter.actueel.vr(
+                    safetyRegionForMunicipality.code
+                  )}
+                >
+                  <a>{safetyRegionForMunicipality.name}</a>
+                </Link>
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
 
@@ -230,23 +243,20 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
-                    href: '/landelijk/vaccinaties',
+                    href: reverseRouter.nl.index(),
                     text: text.quick_links.links.nationaal,
                   },
-                  safetyRegionForMunicipality
-                    ? {
-                        href: `/veiligheidsregio/${safetyRegionForMunicipality.code}/positief-geteste-mensen`,
-                        text: replaceVariablesInText(
-                          text.quick_links.links.veiligheidsregio,
-                          { safetyRegionName: safetyRegionForMunicipality.name }
-                        ),
-                      }
-                    : {
-                        href: '/veiligheidsregio',
-                        text: text.quick_links.links.veiligheidsregio_fallback,
-                      },
                   {
-                    href: `/gemeente/${router.query.code}/positief-geteste-mensen`,
+                    href: reverseRouter.vr.index(
+                      safetyRegionForMunicipality.code
+                    ),
+                    text: replaceVariablesInText(
+                      text.quick_links.links.veiligheidsregio,
+                      { safetyRegionName: safetyRegionForMunicipality.name }
+                    ),
+                  },
+                  {
+                    href: reverseRouter.gm.index(gmCode),
                     text: replaceVariablesInText(
                       text.quick_links.links.gemeente,
                       { municipalityName: municipalityName }

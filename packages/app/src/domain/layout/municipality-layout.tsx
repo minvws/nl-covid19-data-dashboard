@@ -5,27 +5,41 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { Category } from '~/components-styled/aside/category';
+import { Category } from '~/components/aside/category';
 import {
   CategoryMenu,
   Menu,
   MetricMenuItemLink,
-} from '~/components-styled/aside/menu';
-import { Box } from '~/components-styled/base';
-import { AppContent } from '~/components-styled/layout/app-content';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
-import { Text } from '~/components-styled/typography';
+} from '~/components/aside/menu';
+import { Box } from '~/components/base';
+import { AppContent } from '~/components/layout/app-content';
+import { SidebarMetric } from '~/components/sidebar-metric';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { getSafetyRegionForMunicipalityCode } from '~/utils/getSafetyRegionForMunicipalityCode';
+import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
 import { Link } from '~/utils/link';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
+
+export const gmPageMetricNames = [
+  'code',
+  'tested_overall',
+  'deceased_rivm',
+  'hospital_nice',
+  'sewer',
+  'difference',
+] as const;
+
+export type GmPageMetricNames = typeof gmPageMetricNames[number];
+
+export type MunicipalPageMetricData = Pick<Municipal, GmPageMetricNames>;
 
 type MunicipalityLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
-      data: Municipal;
+      data: MunicipalPageMetricData;
       municipalityName: string;
     }
   | {
@@ -59,14 +73,15 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
 
   const { siteText } = useIntl();
   const router = useRouter();
-  const { code } = router.query;
+  const reverseRouter = useReverseRouter();
+  const code = router.query.code as string;
 
   const showMetricLinks = router.route !== '/gemeente';
 
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const safetyRegion = getSafetyRegionForMunicipalityCode(code as string);
+  const safetyRegion = getSafetyRegionForMunicipalityCode(code);
 
   return (
     <>
@@ -101,9 +116,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   {safetyRegion && (
                     <Text pl={3}>
                       {siteText.common.veiligheidsregio_label}{' '}
-                      <Link
-                        href={`/veiligheidsregio/${safetyRegion.code}/positief-geteste-mensen`}
-                      >
+                      <Link href={reverseRouter.vr.index(safetyRegion.code)}>
                         <a>{safetyRegion.name}</a>
                       </Link>
                     </Text>
@@ -116,7 +129,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         title={siteText.gemeente_layout.headings.besmettingen}
                       >
                         <MetricMenuItemLink
-                          href={`/gemeente/${code}/positief-geteste-mensen`}
+                          href={reverseRouter.gm.positiefGetesteMensen(code)}
                           icon={<GetestIcon />}
                           title={
                             siteText.gemeente_positief_geteste_personen
@@ -129,12 +142,12 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             metricName="tested_overall"
                             metricProperty="infected"
                             localeTextKey="gemeente_positief_geteste_personen"
-                            differenceKey="tested_overall__infected"
+                            differenceKey="tested_overall__infected_moving_average"
                           />
                         </MetricMenuItemLink>
 
                         <MetricMenuItemLink
-                          href={`/gemeente/${code}/sterfte`}
+                          href={reverseRouter.gm.sterfte(code)}
                           icon={<VirusIcon />}
                           title={
                             siteText.veiligheidsregio_sterfte.titel_sidebar
@@ -154,7 +167,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
                       >
                         <MetricMenuItemLink
-                          href={`/gemeente/${code}/ziekenhuis-opnames`}
+                          href={reverseRouter.gm.ziekenhuisopnames(code)}
                           icon={<Ziekenhuis />}
                           title={
                             siteText.gemeente_ziekenhuisopnames_per_dag
@@ -167,7 +180,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             metricName="hospital_nice"
                             metricProperty="admissions_on_date_of_reporting"
                             localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                            differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>
@@ -177,7 +190,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     title={siteText.gemeente_layout.headings.vroege_signalen}
                   >
                     <MetricMenuItemLink
-                      href={data?.sewer && `/gemeente/${code}/rioolwater`}
+                      href={data?.sewer && reverseRouter.gm.rioolwater(code)}
                       icon={<RioolwaterMonitoring />}
                       title={
                         siteText.gemeente_rioolwater_metingen.titel_sidebar

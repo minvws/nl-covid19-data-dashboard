@@ -5,11 +5,11 @@ import {
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
 import styled from 'styled-components';
-import { HoverPoint } from '~/components-styled/area-chart/components/marker';
-import { TimestampedTrendValue } from '~/components-styled/area-chart/logic';
-import { Spacer } from '~/components-styled/base';
-import { Heading } from '~/components-styled/typography';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
+import { HoverPoint } from '~/components/area-chart/components/marker';
+import { TimestampedTrendValue } from '~/components/area-chart/logic';
+import { Spacer } from '~/components/base';
+import { Heading } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { AllLanguages } from '~/locale';
 
@@ -21,10 +21,11 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-export function FormatVaccinationsTooltip(
-  values: HoverPoint<TooltipValue>[],
-  text: AllLanguages
-) {
+export function FormatVaccinationsTooltip(props: {
+  values: HoverPoint<TooltipValue>[];
+  text: AllLanguages;
+}) {
+  const { values, text } = props;
   const { formatDateFromSeconds, formatNumber } = useIntl();
 
   if (!values.length) {

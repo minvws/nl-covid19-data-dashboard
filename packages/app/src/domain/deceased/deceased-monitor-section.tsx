@@ -2,9 +2,9 @@ import {
   NationalDeceasedCbs,
   RegionalDeceasedCbs,
 } from '@corona-dashboard/common';
-import { AnchorTile } from '~/components-styled/anchor-tile';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
+import { AnchorTile } from '~/components/anchor-tile';
+import { ChartTile } from '~/components/chart-tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
@@ -42,15 +42,6 @@ export function DeceasedMonitorSection({
           ariaLabelledBy=""
           seriesConfig={[
             {
-              type: 'range',
-              metricPropertyLow: 'expected_min',
-              metricPropertyHigh: 'expected_max',
-              label: text.deceased_monitor_chart_legenda_expected_margin,
-              shortLabel:
-                text.deceased_monitor_chart_legenda_expected_margin_short,
-              color: colors.data.margin,
-            },
-            {
               type: 'line',
               metricProperty: 'expected',
               label: text.deceased_monitor_chart_legenda_expected,
@@ -64,6 +55,15 @@ export function DeceasedMonitorSection({
               shortLabel: text.deceased_monitor_chart_legenda_registered_short,
               color: colors.data.secondary,
               strokeWidth: 4,
+            },
+            {
+              type: 'range',
+              metricPropertyLow: 'expected_min',
+              metricPropertyHigh: 'expected_max',
+              label: text.deceased_monitor_chart_legenda_expected_margin,
+              shortLabel:
+                text.deceased_monitor_chart_legenda_expected_margin_short,
+              color: colors.data.margin,
             },
           ]}
         />

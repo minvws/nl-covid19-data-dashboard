@@ -1,41 +1,28 @@
-import {
-  NlVaccineAdministeredEstimateValue,
-  NlVaccineAdministeredValue,
-  NlVaccineDeliveryEstimateValue,
-  NlVaccineDeliveryValue,
-} from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
-import { useState } from 'react';
+import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { AreaChart } from '~/components-styled/area-chart';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Legend } from '~/components-styled/legend';
-import { Markdown } from '~/components-styled/markdown';
-import { RadioGroup } from '~/components-styled/radio-group';
-import { TileList } from '~/components-styled/tile-list';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { InlineText, Text } from '~/components-styled/typography';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiValue } from '~/components/kpi-value';
+import { Tile } from '~/components/tile';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { Heading, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import {
-  MilestonesView,
-  MilestoneViewProps,
-} from '~/domain/vaccine/milestones-view';
-import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
-import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
+import { MilestonesView } from '~/domain/vaccine/milestones-view';
+import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
+import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
+import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { getVaccineMilestonesQuery } from '~/queries/vaccine-milestones-query';
+import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -43,10 +30,11 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { VaccinationPageQuery } from '~/types/cms';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 const scaledVaccineIcon = (
   <Box p={2}>
@@ -56,45 +44,52 @@ const scaledVaccineIcon = (
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData(
+    'vaccine_stock',
+    'vaccine_delivery_per_supplier',
+    'vaccine_support',
+    'vaccine_administered_total',
+    'vaccine_administered_planned',
+    'vaccine_administered_rate_moving_average',
+    'vaccine_administered',
+    'vaccine_delivery',
+    'vaccine_delivery_estimate',
+    'vaccine_administered_estimate',
+    'vaccine_administered_ggd',
+    'vaccine_administered_hospitals_and_care_institutions',
+    'vaccine_administered_doctors',
+    'vaccine_administered_ggd_ghor'
+  ),
   createGetContent<{
-    milestones: MilestoneViewProps;
+    page: VaccinationPageQuery;
     highlight: {
       articles?: ArticleSummary[];
     };
   }>((_context) => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
-      "milestones": ${getVaccineMilestonesQuery()},
+      "page": ${getVaccinePageQuery()},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
     }`;
   })
 );
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { content, data, lastGenerated } = props;
+  const { content, selectedNlData: data, lastGenerated } = props;
+
+  const stockFeature = useFeature('vaccineStockPerSupplier');
+
+  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
 
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;
-  const [selectedTab, setSelectedTab] = useState(
-    text.gezette_prikken.tab_first.title
-  );
 
-  const { milestones } = content;
+  const { page } = content;
 
-  const additions = text.expected_page_additions.additions.filter(
-    (x) => x.length
-  );
-
-  const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
-
-  const [
-    vaccineDeliveryValues,
-    vaccineDeliveryEstimateValues,
-    vaccineAdministeredValues,
-    vaccineAdministeredEstimateValues,
-  ] = useVaccineDeliveryData(data);
+  // TODO: put this back this when data is available
+  //const {vaccine_coverage_per_age_group} = data;
+  const vaccine_coverage_per_age_group = mockCoverageData();
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -106,266 +101,39 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <VaccinePageIntroduction data={data} text={text} />
+          <VaccinePageIntroduction
+            data={data}
+            pageInfo={page.pageInfo}
+            pageLinks={page.pageLinks}
+            pageLinksTitle={page.linksTitle}
+          />
 
           <ArticleStrip articles={content.highlight.articles} />
 
-          <TwoKpiSection>
-            <KpiTile
-              title={text.gezette_prikken.title}
-              metadata={{
-                date:
-                  data.vaccine_administered_total.last_value
-                    .date_of_insertion_unix,
-                source: text.bronnen.all_left,
-              }}
-            >
-              <Box
-                css={css({ '& div': { justifyContent: 'flex-start' } })}
-                mb={3}
-              >
-                <RadioGroup
-                  value={selectedTab}
-                  onChange={(value) => setSelectedTab(value)}
-                  items={[
-                    {
-                      label: text.gezette_prikken.tab_first.title,
-                      value: text.gezette_prikken.tab_first.title,
-                    },
-                    {
-                      label: text.gezette_prikken.tab_second.title,
-                      value: text.gezette_prikken.tab_second.title,
-                    },
-                  ]}
-                />
-              </Box>
-              {selectedTab == text.gezette_prikken.tab_first.title && (
-                <>
-                  <KpiValue
-                    absolute={
-                      data.vaccine_administered_total.last_value.estimated
-                    }
-                  />
-                  <Box
-                    display="flex"
-                    flexDirection={{ _: 'column', lg: 'row' }}
-                  >
-                    <Box flex={{ lg: '1 1 50%' }} mb={3}>
-                      <Markdown
-                        content={text.gezette_prikken.tab_first.description}
-                      />
-                    </Box>
-                    <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_ggd.last_value.estimated
-                        }
-                        description={text.gezette_prikken.estimated.ggd}
-                        date={
-                          data.vaccine_administered_ggd.last_value.date_unix
-                        }
-                        isReported
-                      />
+          <VaccineAdministrationsKpiSection data={data} />
 
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_hospitals.last_value
-                            .estimated
-                        }
-                        description={text.gezette_prikken.estimated.hospitals}
-                        date={
-                          data.vaccine_administered_hospitals.last_value
-                            .date_unix
-                        }
-                        isReported
-                      />
-
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_care_institutions.last_value
-                            .estimated
-                        }
-                        description={
-                          text.gezette_prikken.estimated.care_institutions
-                        }
-                        date={
-                          data.vaccine_administered_care_institutions.last_value
-                            .date_unix
-                        }
-                      />
-
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_doctors.last_value.estimated
-                        }
-                        description={text.gezette_prikken.estimated.doctors}
-                        date={
-                          data.vaccine_administered_doctors.last_value.date_unix
-                        }
-                      />
-                    </Box>
-                  </Box>
-                </>
-              )}
-              {selectedTab == text.gezette_prikken.tab_second.title && (
-                <>
-                  <KpiValue
-                    absolute={
-                      data.vaccine_administered_total.last_value.reported
-                    }
-                  />
-                  <Box
-                    display="flex"
-                    flexDirection={{ _: 'column', lg: 'row' }}
-                  >
-                    <Box flex={{ lg: '1 1 50%' }}>
-                      <Markdown
-                        content={text.gezette_prikken.tab_second.description}
-                      />
-                    </Box>
-                    <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_ggd_ghor.last_value.reported
-                        }
-                        description={text.gezette_prikken.reported.ggd_ghor}
-                        date={
-                          data.vaccine_administered_ggd_ghor.last_value
-                            .date_unix
-                        }
-                        isReported
-                      />
-
-                      <VaccineAdministeredItem
-                        value={
-                          data.vaccine_administered_lnaz.last_value.reported
-                        }
-                        description={text.gezette_prikken.reported.lnaz}
-                        date={
-                          data.vaccine_administered_lnaz.last_value.date_unix
-                        }
-                        isReported
-                      />
-                    </Box>
-                  </Box>
-                </>
-              )}
-            </KpiTile>
-          </TwoKpiSection>
-
-          <ChartTile
-            title={text.grafiek.titel}
-            description={text.grafiek.omschrijving}
-            metadata={{
-              date: data.vaccine_delivery.last_value.date_of_report_unix,
-              source: text.bronnen.rivm,
-            }}
-          >
-            <Box>
-              <AreaChart<
-                NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
-                NlVaccineAdministeredValue | NlVaccineAdministeredEstimateValue
-              >
-                valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-                timeframe="all"
-                formatTooltip={(values) =>
-                  FormatVaccinationsTooltip(values, siteText)
-                }
-                divider={{
-                  color: colors.annotation,
-                  leftLabel: text.data.vaccination_chart.left_divider_label,
-                  rightLabel: text.data.vaccination_chart.right_divider_label,
-                }}
-                trends={[
-                  {
-                    values: vaccineDeliveryValues,
-                    displays: [
-                      {
-                        metricProperty: 'total',
-                        strokeWidth: 3,
-                        color: 'black',
-                        legendLabel: text.data.vaccination_chart.delivered,
-                      },
-                    ],
-                  },
-                  {
-                    values: vaccineDeliveryEstimateValues,
-                    displays: [
-                      {
-                        metricProperty: 'total',
-                        style: 'dashed',
-                        strokeWidth: 3,
-                        legendLabel: text.data.vaccination_chart.estimated,
-                        color: 'black',
-                      },
-                    ],
-                  },
-                ]}
-                areas={[
-                  {
-                    values: vaccineAdministeredValues,
-                    displays: vaccineNames.map((key) => ({
-                      metricProperty: key as any,
-                      color: (colors.data.vaccines as any)[key],
-                      legendLabel: key,
-                    })),
-                  },
-                  {
-                    values: vaccineAdministeredEstimateValues,
-                    displays: vaccineNames.map((key) => ({
-                      metricProperty: key as any,
-                      pattern: 'hatched',
-                      color: (colors.data.vaccines as any)[key],
-                      legendLabel: key,
-                    })),
-                  },
-                ]}
-              />
-
-              <Legend
-                items={[
-                  {
-                    label: text.data.vaccination_chart.legend.available,
-                    color: 'black',
-                    shape: 'line',
-                  },
-                  {
-                    label: text.data.vaccination_chart.legend.expected,
-                    shape: 'custom',
-                    shapeComponent: <HatchedSquare />,
-                  },
-                ]}
-              />
-              <Legend
-                items={vaccineNames.map((key) => ({
-                  label: replaceVariablesInText(
-                    text.data.vaccination_chart.legend_label,
-                    {
-                      name: (text.data.vaccination_chart.product_names as any)[
-                        key
-                      ],
-                    }
-                  ),
-                  color: `data.vaccines.${key}`,
-                  shape: 'square',
-                }))}
-              />
-            </Box>
-          </ChartTile>
-
-          {data.vaccine_delivery_per_supplier ? (
-            <VaccineDeliveryBarChart
-              data={data.vaccine_delivery_per_supplier}
-              siteText={siteText}
-            />
-          ) : null}
+          <VaccineDeliveryAndAdministrationsAreaChart data={data} />
 
           <MilestonesView
-            title={milestones.title}
-            description={milestones.description}
-            milestones={milestones.milestones}
-            expectedMilestones={milestones.expectedMilestones}
+            title={page.title}
+            description={page.description}
+            milestones={page.milestones}
+            expectedMilestones={page.expectedMilestones}
           />
+
+          {vaccinationPerAgeGroupFeature.isEnabled ? (
+            <Tile>
+              <Heading level={2}>
+                {siteText.vaccinaties.vaccination_coverage.title}
+              </Heading>
+              <Text>
+                {siteText.vaccinaties.vaccination_coverage.toelichting}
+              </Text>
+              <VaccineCoveragePerAgeGroup
+                values={vaccine_coverage_per_age_group.values}
+              />
+            </Tile>
+          ) : null}
 
           <ContentHeader
             title={text.bereidheid_section.title}
@@ -385,12 +153,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.grafiek_draagvlak.titel}
             description={text.grafiek_draagvlak.omschrijving}
-            ariaDescription={
-              siteText.accessibility.grafieken.vaccinatie_draagvlak
-            }
             metadata={{
-              date: data.vaccine_support.last_value.date_of_insertion_unix,
-              source: text.bronnen.rivm,
+              datumsText: siteText.vaccinaties.grafiek_draagvlak.metadata_tekst,
+              date: [
+                data.vaccine_support.last_value.date_start_unix,
+                data.vaccine_support.last_value.date_end_unix,
+              ],
             }}
           >
             <section>
@@ -466,123 +234,24 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          {/*
-        @TODO re-enable when data is available
-
-        <ContentHeader
-          title={text.stock_and_delivery_section.title}
-          icon={scaledVaccineIcon}
-          subtitle={text.stock_and_delivery_section.description}
-          reference={text.stock_and_delivery_section.reference}
-          metadata={{
-            datumsText: text.datums,
-            dateOrRange: 0 // TODO replace dates for correct source,
-            dateOfInsertionUnix: 0 // TODO replace dates for correct source,
-            dataSources: [],
-          }}
-        />
-
-        <TwoKpiSection>
-          <KpiTile
-            title={text.stock.title}
+          <ContentHeader
+            title={text.stock_and_delivery_section.title}
+            icon={scaledVaccineIcon}
+            subtitle={text.stock_and_delivery_section.description}
+            reference={text.stock_and_delivery_section.reference}
             metadata={{
-              date: data.vaccine_stock.last_value.date_of_insertion_unix,
-              source: text.bronnen.stock,
+              datumsText: text.datums,
+              dateOrRange: data.vaccine_stock.last_value.date_unix,
+              dateOfInsertionUnix:
+                data.vaccine_stock.last_value.date_of_insertion_unix,
+              dataSources: [],
             }}
-          >
-            <KpiValue absolute={data.vaccine_stock.last_value.total} />
-            <Text>{text.stock.description}</Text>
+          />
 
-            <Box as="ul" p={0}>
-              <Box as="li" display="block">
-                <ColorIndicator
-                  color={colors.data.vaccines.bio_n_tech_pfizer}
-                />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(
-                        data.vaccine_stock.last_value.bio_n_tech_pfizer
-                      )}
-                    </strong>
-                  ),
-                  label: 'BioNTech/Pfizer',
-                })}
-              </Box>
-              <Box as="li" display="block">
-                <ColorIndicator color={colors.data.vaccines.moderna} />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(data.vaccine_stock.last_value.moderna)}
-                    </strong>
-                  ),
-                  label: 'Moderna',
-                })}
-              </Box>
-              <Box as="li" display="block">
-                <ColorIndicator color={colors.data.vaccines.astra_zeneca} />
-                {replaceComponentsInText(text.stock.per_vaccine, {
-                  amount: (
-                    <strong>
-                      {formatNumber(data.vaccine_stock.last_value.astra_zeneca)}
-                    </strong>
-                  ),
-                  label: 'AstraZeneca',
-                })}
-              </Box>
-            </Box>
-          </KpiTile>
+          <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-          <KpiTile
-            title={replaceVariablesInText(
-              text.delivery_estimate_time_span.title,
-              {
-                weeks:
-                  data.vaccine_delivery_estimate_time_span.last_value
-                    .time_span_weeks,
-              }
-            )}
-            metadata={{
-              date:
-                data.vaccine_delivery_estimate_time_span.last_value
-                  .date_of_insertion_unix,
-              source: text.bronnen.delivery_estimate_time_span,
-            }}
-          >
-            <KpiValue
-              absolute={
-                data.vaccine_delivery_estimate_time_span.last_value.doses
-              }
-            />
-            <Text mb={4}>
-              {replaceVariablesInText(
-                text.delivery_estimate_time_span.description,
-                {
-                  weeks:
-                    data.vaccine_delivery_estimate_time_span.last_value
-                      .time_span_weeks,
-                }
-              )}
-            </Text>
-          </KpiTile>
-        </TwoKpiSection>
-              */}
-
-          {additions.length > 0 && (
-            <TwoKpiSection>
-              <KpiTile title={text.expected_page_additions.title}>
-                <ul>
-                  {text.expected_page_additions.additions
-                    .filter((x) => x.length)
-                    .map((addition) => (
-                      <li key={addition}>
-                        <InlineText>{addition}</InlineText>
-                      </li>
-                    ))}
-                </ul>
-              </KpiTile>
-            </TwoKpiSection>
+          {stockFeature.isEnabled && (
+            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
           )}
         </TileList>
       </NationalLayout>
@@ -591,65 +260,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default VaccinationPage;
-
-interface VaccineAdministeredProps {
-  value: number;
-  date: number;
-  description: string;
-  isReported?: boolean;
-}
-
-function VaccineAdministeredItem(props: VaccineAdministeredProps) {
-  const { value, date, description, isReported } = props;
-
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
-
-  return (
-    <Text fontWeight="bold">
-      <InlineText css={css({ color: 'data.primary' })}>
-        {formatNumber(value)}
-      </InlineText>{' '}
-      {description}
-      <br />
-      <InlineText fontWeight="normal" fontSize={1} color="annotation">
-        {replaceVariablesInText(
-          isReported
-            ? siteText.vaccinaties.gezette_prikken.reported_until
-            : siteText.vaccinaties.gezette_prikken.estimated_until,
-          {
-            reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
-          }
-        )}
-      </InlineText>
-    </Text>
-  );
-}
-
-function HatchedSquare() {
-  return (
-    <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
-    </svg>
-  );
-}
 
 // @TODO re-enable when data is available
 //
@@ -665,3 +275,47 @@ function HatchedSquare() {
 //   margin-right: 0.5em;
 //   flex-shrink: 0;
 // `;
+
+// TODO: remove this when data is available
+function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
+  const values = [
+    'total',
+    '18-29',
+    '30-39',
+    '40-49',
+    '50-59',
+    '60-69',
+    '70-79',
+    '80+',
+  ]
+    .map(createCoverageRow)
+    .reverse();
+
+  values[2].fully_vaccinated = 0;
+  values[2].fully_vaccinated_percentage = 0;
+
+  return { values };
+}
+
+function createCoverageRow(
+  ageGroup: string
+): NlVaccineCoveragePerAgeGroupValue {
+  const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
+  const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+  const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+
+  return {
+    age_group_range: ageGroup,
+    age_group_percentage: Math.floor(Math.random() * 100) + 1,
+    age_group_total: ageGroupTotal,
+    fully_vaccinated: fullyVaccinated,
+    partially_vaccinated: partiallyVaccinated,
+    fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
+    partially_vaccinated_percentage:
+      (partiallyVaccinated / ageGroupTotal) * 100,
+    partially_or_fully_vaccinated_percentage: 0,
+    date_of_insertion_unix: 1616544000,
+    date_of_report_unix: 1616544000,
+    date_unix: 1616544000,
+  };
+}

@@ -11,39 +11,38 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import {
   ChartRegionControls,
   RegionControlOption,
-} from '~/components-styled/chart-region-controls';
-import { ChoroplethLegenda } from '~/components-styled/choropleth-legenda';
-import { CollapsibleButton } from '~/components-styled/collapsible';
-import { DataDrivenText } from '~/components-styled/data-driven-text';
-import { EscalationMapLegenda } from '~/components-styled/escalation-map-legenda';
-import { HighlightTeaserProps } from '~/components-styled/highlight-teaser';
-import { Markdown } from '~/components-styled/markdown';
-import { MaxWidth } from '~/components-styled/max-width';
-import { Metadata } from '~/components-styled/metadata';
-import { RiskLevelIndicator } from '~/components-styled/risk-level-indicator';
-import { TileList } from '~/components-styled/tile-list';
-import { Heading, Text } from '~/components-styled/typography';
-import { VisuallyHidden } from '~/components-styled/visually-hidden';
-import { WarningTile } from '~/components-styled/warning-tile';
+} from '~/components/chart-region-controls';
+import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { CollapsibleButton } from '~/components/collapsible';
+import { DataDrivenText } from '~/components/data-driven-text';
+import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
+import { HighlightTeaserProps } from '~/components/highlight-teaser';
+import { Markdown } from '~/components/markdown';
+import { MaxWidth } from '~/components/max-width';
+import { Metadata } from '~/components/metadata';
+import { RiskLevelIndicator } from '~/components/risk-level-indicator';
+import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
+import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
   WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
-import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { Sitemap } from '~/domain/topical/sitemap';
@@ -60,17 +59,23 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrData,
 } from '~/static-props/get-data';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrData(
+    'tested_overall',
+    'hospital_nice',
+    'code',
+    'escalation_level',
+    'difference'
+  ),
   createGetChoroplethData({
     vr: ({ escalation_levels, tested_overall }) => ({
       escalation_levels,
@@ -79,14 +84,14 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles: ArticleSummary[];
-    weeklyHighlight: WeeklyHighlightProps;
-    highlights: HighlightTeaserProps[];
+    articles?: ArticleSummary[];
+    weeklyHighlight?: WeeklyHighlightProps;
+    highlights?: HighlightTeaserProps[];
   }>(getTopicalPageQuery)
 );
 
 const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { choropleth, data, content, lastGenerated } = props;
+  const { choropleth, selectedVrData: data, content, lastGenerated } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText, formatDate } = useIntl();
@@ -116,20 +121,6 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <Box bg="white" pb={4}>
-        {/**
-         * Since now the sections have a H2 heading I think we need to include
-         * a hidden H1 here.
-         *
-         * @TODO figure out what the title should be
-         */}
-        <VisuallyHidden>
-          <Heading level={1}>
-            {replaceComponentsInText(text.title, {
-              safetyRegionName: props.safetyRegionName,
-            })}
-          </Heading>
-        </VisuallyHidden>
-
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -141,6 +132,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                   safetyRegionName: props.safetyRegionName,
                 }
               )}
+              headingLevel={1}
               link={{
                 text: replaceVariablesInText(
                   text.secties.actuele_situatie.link.text,
@@ -163,19 +155,19 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="tested_overall"
                     metricProperty="infected"
-                    differenceKey="tested_overall__infected"
+                    differenceKey="tested_overall__infected_moving_average"
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
                     differenceTexts={
-                      text.data_driven_texts.infected_people_total.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<GetestIcon />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
-                href={`/veiligheidsregio/${router.query.code}/positief-geteste-mensen`}
+                href={reverseRouter.vr.positiefGetesteMensen(vrCode)}
               />
 
               <MiniTrendTile
@@ -185,17 +177,17 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                     data={data}
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
                     differenceTexts={
-                      text.data_driven_texts.intake_hospital_ma.difference
+                      siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
                 }
                 icon={<ZiekenhuisIcon />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
-                href={`/veiligheidsregio/${router.query.code}/ziekenhuis-opnames`}
+                href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
               />
 
               <RiskLevelIndicator
@@ -204,9 +196,9 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 level={data.escalation_level.level}
                 code={data.code}
                 escalationTypes={escalationText.types}
-                href={`/veiligheidsregio/${router.query.code}/risiconiveau`}
+                href={reverseRouter.vr.risiconiveau(vrCode)}
               >
-                <Link href={`/veiligheidsregio/${vrCode}/maatregelen`}>
+                <Link href={reverseRouter.vr.maatregelen(vrCode)}>
                   <a>{text.risoconiveau_maatregelen.bekijk_href}</a>
                 </Link>
               </RiskLevelIndicator>
@@ -219,17 +211,20 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 quickLinksHeader={text.quick_links.header}
                 quickLinks={[
                   {
-                    href: '/landelijk/vaccinaties',
+                    href: reverseRouter.nl.index(),
                     text: text.quick_links.links.nationaal,
                   },
                   {
-                    href: `/veiligheidsregio/${router.query.code}/positief-geteste-mensen`,
+                    href: reverseRouter.vr.index(router.query.code as string),
                     text: replaceVariablesInText(
                       text.quick_links.links.veiligheidsregio,
                       { safetyRegionName: props.safetyRegionName }
                     ),
                   },
-                  { href: '/gemeente', text: text.quick_links.links.gemeente },
+                  {
+                    href: reverseRouter.gm.index(),
+                    text: text.quick_links.links.gemeente,
+                  },
                 ]}
                 dataSitemapHeader={replaceVariablesInText(
                   text.data_sitemap_title,

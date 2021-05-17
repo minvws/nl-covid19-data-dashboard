@@ -1,4 +1,4 @@
-import { RadioGroup } from '~/components-styled/radio-group';
+import { RadioGroup } from '~/components/radio-group';
 import { BehaviorType } from '../behavior-types';
 import { useIntl } from '~/intl';
 
@@ -13,11 +13,11 @@ export function BehaviorTypeControl(props: BehaviorTypeControlProps) {
   const items = [
     {
       label: siteText.gedrag_common.compliance,
-      value: 'compliance',
+      value: 'compliance' as BehaviorType,
     },
     {
       label: siteText.gedrag_common.support,
-      value: 'support',
+      value: 'support' as BehaviorType,
     },
   ];
   return <RadioGroup {...props} items={items} />;

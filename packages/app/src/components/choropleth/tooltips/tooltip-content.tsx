@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import Locatie from '~/assets/locatie.svg';
-import { Heading } from '~/components-styled/typography';
+import { Heading } from '~/components/typography';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface IProps {
@@ -17,11 +17,20 @@ export function TooltipContent(props: IProps) {
   const isTouch = useIsTouchDevice();
 
   return (
-    <StyledTooltipContent isInteractive={isTouch} onClick={onSelect}>
+    <StyledTooltipContent
+      isInteractive={isTouch}
+      onClick={onSelect}
+      aria-live="polite"
+    >
       <TooltipHeader href={link}>
         <Heading
           level={3}
           m={0}
+          /**
+           * do not read the tooltip title because a screenreader will also read
+           * the choropleth link which contains the name of a region.
+           */
+          aria-hidden="true"
           fontSize="1.125rem"
           css={css({
             overflow: 'hidden',

@@ -4,14 +4,12 @@ import { useValidationStatus } from '@sanity/react-hooks';
 import { ValidationMarker } from '@sanity/types';
 import {
   Inline,
-  Label,
   studioTheme,
   Tab as TabAlias,
   TabList,
   ThemeProvider,
 } from '@sanity/ui';
 import React from 'react';
-import { MdErrorOutline } from 'react-icons/md';
 import Flag from 'react-world-flags';
 import {
   SupportedLanguage,
@@ -40,8 +38,6 @@ export default function SelectLanguage(props: SelectLanguageProps) {
   return (
     <ThemeProvider theme={studioTheme}>
       <Inline space={[3]}>
-        <Label size={2}>Kies een taal:</Label>
-
         <TabList space={1}>
           {languages.map((lang) => (
             <Tab
@@ -50,20 +46,12 @@ export default function SelectLanguage(props: SelectLanguageProps) {
               }}
               key={lang.id}
               icon={
-                <>
-                  <Flag
-                    code={lang.id === 'en' ? 'gb' : lang.id}
-                    width="24"
-                    height="12"
-                  />
-                  {validationErrors[lang.id] ? (
-                    <MdErrorOutline
-                      color={validationErrors[lang.id] ? 'red' : undefined}
-                    />
-                  ) : null}
-                </>
+                <Flag
+                  code={lang.id === 'en' ? 'gb' : lang.id}
+                  width="24"
+                  height="12"
+                />
               }
-              label={lang.title}
               onClick={() => onChange([lang.id])}
               selected={selected.includes(lang.id)}
               padding={2}

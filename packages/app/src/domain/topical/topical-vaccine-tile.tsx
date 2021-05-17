@@ -1,20 +1,21 @@
 import { NlVaccineAdministeredTotal } from '@corona-dashboard/common';
 
 import Vaccinaties from '~/assets/vaccinaties.svg';
-import { Box } from '~/components-styled/base';
-import { LinkWithIcon } from '~/components-styled/link-with-icon';
-import { Heading, Text } from '~/components-styled/typography';
+import { Box } from '~/components/base';
+import { LinkWithIcon } from '~/components/link-with-icon';
+import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { ArrowIconRight } from '~/components-styled/arrow-icon';
+import { ArrowIconRight } from '~/components/arrow-icon';
 import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 interface TopicalVaccineProps {
   data: NlVaccineAdministeredTotal;
 }
 
 export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
   const estimated = data.last_value.estimated;
-
+  const reverseRouter = useReverseRouter();
   const { siteText, formatNumber } = useIntl();
 
   const text = siteText.nationaal_actueel.mini_trend_tiles.toegediende_vaccins;
@@ -34,7 +35,7 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
         fontSize="1.25rem"
       >
         <LinkWithIcon
-          href={'/landelijk/vaccinaties'}
+          href={reverseRouter.nl.vaccinaties()}
           icon={<ArrowIconRight />}
           iconPlacement="right"
           fontWeight="bold"
@@ -58,7 +59,10 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
         {text.sub_title}
       </Text>
 
-      <VaccineAdministrationsOverTimeChart values={data.values} />
+      <VaccineAdministrationsOverTimeChart
+        title={text.title}
+        values={data.values}
+      />
     </Box>
   );
 }

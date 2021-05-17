@@ -1,6 +1,6 @@
 import { supportedLanguages } from '../../language/supported-languages';
 
-export default {
+export const localeBlock = {
   name: 'localeBlock',
   type: 'object',
   title: 'Locale Block Content',
@@ -30,6 +30,10 @@ export default {
             type: 'text',
           },
         ],
+      },
+      {
+        type: 'collapsible',
+        title: 'Inklapbaar blok',
       },
     ],
   })),

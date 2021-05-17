@@ -1,14 +1,14 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { ChartTileWithTimeframe } from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { TileList } from '~/components-styled/tile-list';
-import { TimeSeriesChart } from '~/components-styled/time-series-chart';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { ChartTile } from '~/components/chart-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
@@ -16,20 +16,23 @@ import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
-import { getLastGeneratedDate, getVrData } from '~/static-props/get-data';
+import {
+  getLastGeneratedDate,
+  selectVrPageMetricData,
+} from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData
+  selectVrPageMetricData()
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, safetyRegionName, lastGenerated } = props;
+  const { selectedVrData: data, safetyRegionName, lastGenerated } = props;
 
   const { siteText } = useIntl();
 
@@ -38,7 +41,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   const positiveTestedPeopleText =
     siteText.veiligheidsregio_verpleeghuis_positief_geteste_personen;
   const deceased = siteText.veiligheidsregio_verpleeghuis_oversterfte;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const nursinghomeLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
@@ -110,27 +112,17 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            ariaDescription={graphDescriptions.verpleeghuiszorg_positief_getest}
+            description={positiveTestedPeopleText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
-                  {
-                    type: 'bar',
-                    metricProperty: 'newly_infected_people',
-                    color: colors.data.primary,
-                    label:
-                      positiveTestedPeopleText.line_chart_legend_trend_label,
-                    shortLabel:
-                      positiveTestedPeopleText.tooltip_labels
-                        .newly_infected_people,
-                  },
                   {
                     type: 'line',
                     metricProperty: 'newly_infected_people_moving_average',
@@ -140,6 +132,16 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                     shortLabel:
                       positiveTestedPeopleText.tooltip_labels
                         .newly_infected_people_moving_average,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'newly_infected_people',
+                    color: colors.data.primary,
+                    label:
+                      positiveTestedPeopleText.line_chart_legend_trend_label,
+                    shortLabel:
+                      positiveTestedPeopleText.tooltip_labels
+                        .newly_infected_people,
                   },
                 ]}
                 dataOptions={{
@@ -151,12 +153,15 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                         positiveTestedPeopleText.line_chart_legend_inaccurate_label,
                       shortLabel:
                         positiveTestedPeopleText.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: [
+                        'newly_infected_people_moving_average',
+                      ],
                     },
                   ],
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ContentHeader
             id="besmette-locaties"
@@ -208,13 +213,11 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: infectedLocationsText.bronnen.rivm }}
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
-            ariaDescription={
-              graphDescriptions.verpleeghuiszorg_besmette_locaties
-            }
+            description={infectedLocationsText.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -232,7 +235,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 ]}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
 
           <ContentHeader
             id="sterfte"
@@ -268,10 +271,11 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTileWithTimeframe
+          <ChartTile
             metadata={{ source: deceased.bronnen.rivm }}
             title={deceased.linechart_titel}
             timeframeOptions={['all', '5weeks']}
+            description={deceased.linechart_description}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -279,19 +283,19 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'bar',
-                    metricProperty: 'deceased_daily',
-                    label: deceased.line_chart_legend_trend_label,
-                    shortLabel: deceased.tooltip_labels.deceased_daily,
-                    color: colors.data.primary,
-                  },
-                  {
                     type: 'line',
                     metricProperty: 'deceased_daily_moving_average',
                     label:
                       deceased.line_chart_legend_trend_moving_average_label,
                     shortLabel:
                       deceased.tooltip_labels.deceased_daily_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'deceased_daily',
+                    label: deceased.line_chart_legend_trend_label,
+                    shortLabel: deceased.tooltip_labels.deceased_daily,
                     color: colors.data.primary,
                   },
                 ]}
@@ -302,12 +306,15 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                       end: Infinity,
                       label: deceased.line_chart_legend_inaccurate_label,
                       shortLabel: deceased.tooltip_labels.inaccurate,
+                      cutValuesForMetricProperties: [
+                        'deceased_daily_moving_average',
+                      ],
                     },
                   ],
                 }}
               />
             )}
-          </ChartTileWithTimeframe>
+          </ChartTile>
         </TileList>
       </SafetyRegionLayout>
     </Layout>

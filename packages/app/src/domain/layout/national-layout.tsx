@@ -5,6 +5,7 @@ import Arts from '~/assets/arts.svg';
 import ElderlyIcon from '~/assets/elderly.svg';
 import Gedrag from '~/assets/gedrag.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
+import Phone from '~/assets/phone.svg';
 import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
@@ -16,18 +17,43 @@ import Ziektegolf from '~/assets/ziektegolf.svg';
 import {
   CategoryMenu,
   Menu,
-  MetricMenuItemLink,
   MetricMenuButtonLink,
-} from '~/components-styled/aside/menu';
-import { Box } from '~/components-styled/base';
-import { AppContent } from '~/components-styled/layout/app-content';
-import { SidebarMetric } from '~/components-styled/sidebar-metric';
+  MetricMenuItemLink,
+} from '~/components/aside/menu';
+import { Box } from '~/components/base';
+import { AppContent } from '~/components/layout/app-content';
+import { SidebarMetric } from '~/components/sidebar-metric';
 import { useIntl } from '~/intl';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+
+export const nlPageMetricNames = [
+  'vaccine_administered_total',
+  'tested_overall',
+  'infectious_people',
+  'reproduction',
+  'deceased_rivm',
+  'hospital_nice',
+  'hospital_nice_per_age_group',
+  'intensive_care_nice',
+  'intensive_care_nice_per_age_group',
+  'nursing_home',
+  'disability_care',
+  'elderly_at_home',
+  'sewer',
+  'doctor',
+  'behavior',
+  'difference',
+  'corona_melder_app',
+] as const;
+
+export type NlPageMetricNames = typeof nlPageMetricNames[number];
+
+export type NationalPageMetricData = Pick<National, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;
-  data: National;
+  data: NationalPageMetricData;
   children?: React.ReactNode;
 }
 
@@ -50,6 +76,7 @@ interface NationalLayoutProps {
 export function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
   const { siteText } = useIntl();
 
@@ -89,7 +116,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_maatregelen.titel_sidebar}
                 subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
                 href={{
-                  pathname: '/landelijk/maatregelen',
+                  pathname: reverseRouter.nl.maatregelen(),
                   query: breakpoints.md
                     ? {} // only add menu flags on narrow devices
                     : isMenuOpen
@@ -103,7 +130,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 isFirstItem
               >
                 <MetricMenuItemLink
-                  href="/landelijk/vaccinaties"
+                  href={reverseRouter.nl.vaccinaties()}
                   icon={<VaccinatieIcon />}
                   title={siteText.vaccinaties.titel_sidebar}
                 >
@@ -120,7 +147,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.besmettingen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/positief-geteste-mensen"
+                  href={reverseRouter.nl.positiefGetesteMensen()}
                   icon={<GetestIcon />}
                   title={siteText.positief_geteste_personen.titel_sidebar}
                 >
@@ -134,13 +161,13 @@ export function NationalLayout(props: NationalLayoutProps) {
                       metricProperty: 'infected_per_100k',
                     }}
                     localeTextKey="positief_geteste_personen"
-                    differenceKey="tested_overall__infected"
+                    differenceKey="tested_overall__infected_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/besmettelijke-mensen"
+                  href={reverseRouter.nl.besmettelijkeMensen()}
                   icon={<Ziektegolf />}
                   title={siteText.besmettelijke_personen.titel_sidebar}
                 >
@@ -155,7 +182,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/reproductiegetal"
+                  href={reverseRouter.nl.reproductiegetal()}
                   icon={<ReproIcon />}
                   title={siteText.reproductiegetal.titel_sidebar}
                 >
@@ -171,7 +198,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/sterfte"
+                  href={reverseRouter.nl.sterfte()}
                   icon={<VirusIcon />}
                   title={siteText.sterfte.titel_sidebar}
                 >
@@ -189,7 +216,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.ziekenhuizen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/ziekenhuis-opnames"
+                  href={reverseRouter.nl.ziekenhuisopnames()}
                   icon={<Ziekenhuis />}
                   title={siteText.ziekenhuisopnames_per_dag.titel_sidebar}
                 >
@@ -206,13 +233,13 @@ export function NationalLayout(props: NationalLayoutProps) {
                     metricName="hospital_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ziekenhuisopnames_per_dag"
-                    differenceKey="hospital_nice__admissions_on_date_of_reporting"
+                    differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/intensive-care-opnames"
+                  href={reverseRouter.nl.intensiveCareOpnames()}
                   icon={<Arts />}
                   title={siteText.ic_opnames_per_dag.titel_sidebar}
                 >
@@ -222,7 +249,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                     metricName="intensive_care_nice"
                     metricProperty="admissions_on_date_of_reporting"
                     localeTextKey="ic_opnames_per_dag"
-                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting"
+                    differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                     showBarScale={true}
                   />
                 </MetricMenuItemLink>
@@ -231,7 +258,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.kwetsbare_groepen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/verpleeghuiszorg"
+                  href={reverseRouter.nl.verpleeghuiszorg()}
                   icon={<Verpleeghuiszorg />}
                   title={siteText.verpleeghuis_besmette_locaties.titel_sidebar}
                 >
@@ -246,7 +273,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/gehandicaptenzorg"
+                  href={reverseRouter.nl.gehandicaptenzorg()}
                   icon={<Gehandicaptenzorg />}
                   title={
                     siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar
@@ -263,7 +290,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/thuiswonende-ouderen"
+                  href={reverseRouter.nl.thuiswonendeOuderen()}
                   icon={<ElderlyIcon />}
                   title={siteText.thuiswonende_ouderen.titel_sidebar}
                 >
@@ -281,7 +308,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 title={siteText.nationaal_layout.headings.vroege_signalen}
               >
                 <MetricMenuItemLink
-                  href="/landelijk/rioolwater"
+                  href={reverseRouter.nl.rioolwater()}
                   icon={<RioolwaterMonitoring />}
                   title={siteText.rioolwater_metingen.titel_sidebar}
                 >
@@ -297,7 +324,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href="/landelijk/verdenkingen-huisartsen"
+                  href={reverseRouter.nl.verdenkingenHuisartsen()}
                   icon={<Arts />}
                   title={siteText.verdenkingen_huisartsen.titel_sidebar}
                 >
@@ -314,7 +341,7 @@ export function NationalLayout(props: NationalLayoutProps) {
 
               <CategoryMenu title={siteText.nationaal_layout.headings.gedrag}>
                 <MetricMenuItemLink
-                  href="/landelijk/gedrag"
+                  href={reverseRouter.nl.gedrag()}
                   icon={<Gedrag />}
                   title={siteText.nl_gedrag.sidebar.titel}
                 >
@@ -323,6 +350,18 @@ export function NationalLayout(props: NationalLayoutProps) {
                     scope="nl"
                     metricName="behavior"
                     localeTextKey="gedrag_common"
+                  />
+                </MetricMenuItemLink>
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.coronamelder()}
+                  icon={<Phone />}
+                  title={siteText.corona_melder_app.sidebar.titel}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="corona_melder_app"
+                    localeTextKey="corona_melder_app"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

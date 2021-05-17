@@ -6,25 +6,25 @@ import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import Getest from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { Box } from '~/components-styled/base';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
   getCategoryLevel,
-} from '~/components-styled/categorical-bar-scale';
-import { ContentHeader } from '~/components-styled/content-header';
+} from '~/components/categorical-bar-scale';
+import { ContentHeader } from '~/components/content-header';
 import {
   EscalationLevelInfoLabel,
   EscalationLevelString,
-} from '~/components-styled/escalation-level';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { Markdown } from '~/components-styled/markdown';
-import { Tile } from '~/components-styled/tile';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components-styled/typography';
+} from '~/components/escalation-level';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { Tile } from '~/components/tile';
+import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Heading, InlineText, Text } from '~/components/typography';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
@@ -38,19 +38,24 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { replaceVariablesInText } from '~/utils/replaceVariablesInText';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useEscalationColor } from '~/utils/use-escalation-color';
-import { useBreakpoints } from '~/utils/useBreakpoints';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getVrData,
+  selectVrPageMetricData(
+    'escalation_level',
+    'hospital_nice_sum',
+    'tested_overall_sum'
+  ),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -60,11 +65,17 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const { safetyRegionName, content, data, lastGenerated } = props;
+  const {
+    safetyRegionName,
+    content,
+    selectedVrData: data,
+    lastGenerated,
+  } = props;
 
   const { siteText, formatDateFromSeconds } = useIntl();
   const breakpoints = useBreakpoints();
   const router = useRouter();
+  const reverseRouter = useReverseRouter();
 
   const text = siteText.vr_risiconiveau;
 
@@ -101,6 +112,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   };
 
   const escalationColor = useEscalationColor(currentLevel);
+
+  const vrCode = router.query.code as string;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -217,12 +230,9 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
             </Box>
 
-            {!breakpoints.lg && (
+            {!breakpoints.lg && text.momenteel.link_text && (
               <Box mb={3}>
-                <Link
-                  passHref
-                  href={`/veiligheidsregio/${router.query.code}/maatregelen`}
-                >
+                <Link passHref href={reverseRouter.vr.maatregelen(vrCode)}>
                   {text.momenteel.link_text}
                 </Link>
               </Box>

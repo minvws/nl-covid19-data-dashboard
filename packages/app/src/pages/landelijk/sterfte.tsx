@@ -1,17 +1,18 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { AgeDemographic } from '~/components-styled/age-demographic';
-import { ArticleStrip } from '~/components-styled/article-strip';
-import { ArticleSummary } from '~/components-styled/article-teaser';
-import { ChartTile } from '~/components-styled/chart-tile';
-import { ContentHeader } from '~/components-styled/content-header';
-import { KpiTile } from '~/components-styled/kpi-tile';
-import { KpiValue } from '~/components-styled/kpi-value';
-import { LineChartTile } from '~/components-styled/line-chart-tile';
-import { addBackgroundRectangleCallback } from '~/components-styled/line-chart/logic';
-import { TileList } from '~/components-styled/tile-list';
-import { TwoKpiSection } from '~/components-styled/two-kpi-section';
-import { Text } from '~/components-styled/typography';
+import { AgeDemographic } from '~/components/age-demographic';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
+import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { TileList } from '~/components/tile-list';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
+import { Layout } from '~/domain/layout/layout';
+import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -21,16 +22,14 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getTrailingDateRange } from '~/utils/get-trailing-date-range';
-import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  getNlData,
+  selectNlPageMetricData('deceased_cbs', 'deceased_rivm_per_age_group'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -40,14 +39,17 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated } = props;
 
-  const dataCbs = props.data.deceased_cbs;
-  const dataRivm = props.data.deceased_rivm;
-  const dataDeceasedPerAgeGroup = props.data.deceased_rivm_per_age_group;
+  const dataCbs = data.deceased_cbs;
+  const dataRivm = data.deceased_rivm;
+  const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
   const content = props.content;
 
-  const dataRivmUnderReportedRange = getTrailingDateRange(dataRivm.values, 4);
+  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
+    dataRivm.values,
+    4
+  );
 
   const { siteText } = useIntl();
 
@@ -90,7 +92,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="covid_daily"
                 absolute={dataRivm.last_value.covid_daily}
-                difference={props.data.difference.deceased_rivm__covid_daily}
+                difference={data.difference.deceased_rivm__covid_daily}
               />
               <Text>
                 {text.section_deceased_rivm.kpi_covid_daily_description}
@@ -113,43 +115,60 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <LineChartTile
+          <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={text.section_deceased_rivm.line_chart_covid_daily_title}
             description={
               text.section_deceased_rivm.line_chart_covid_daily_description
             }
-            values={dataRivm.values}
-            linesConfig={[
-              {
-                metricProperty: 'covid_daily',
-              },
-            ]}
             metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
-            componentCallback={addBackgroundRectangleCallback(
-              dataRivmUnderReportedRange,
-              {
-                fill: colors.data.underReported,
-              }
+          >
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataRivm.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'covid_daily_moving_average',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label_moving_average,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'covid_daily',
+                    label:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_label,
+                    shortLabel:
+                      text.section_deceased_rivm
+                        .line_chart_covid_daily_legend_trend_short_label,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
+                    {
+                      start: dataRivmUnderReportedDateStart,
+                      end: Infinity,
+                      label:
+                        text.section_deceased_rivm
+                          .line_chart_covid_daily_legend_inaccurate_label,
+                      shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
+                        'covid_daily_moving_average',
+                      ],
+                    },
+                  ],
+                }}
+              />
             )}
-            legendItems={[
-              {
-                color: colors.data.primary,
-                label:
-                  text.section_deceased_rivm
-                    .line_chart_covid_daily_legend_trend_label,
-                shape: 'line',
-              },
-              {
-                color: colors.data.underReported,
-                label:
-                  text.section_deceased_rivm
-                    .line_chart_covid_daily_legend_inaccurate_label,
-                shape: 'square',
-              },
-            ]}
-            showLegend
-          />
+          </ChartTile>
 
           <ChartTile
             title={siteText.deceased_age_groups.title}

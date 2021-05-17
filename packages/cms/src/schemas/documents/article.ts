@@ -1,6 +1,6 @@
-import { ARTICLE_FIELDS } from './fields/article-fields';
+import { ARTICLE_FIELDS } from '../fields/article-fields';
 
-export default {
+export const article = {
   title: 'Artikel',
   name: 'article',
   type: 'document',
@@ -25,8 +25,14 @@ export default {
   preview: {
     select: {
       title: 'title.nl',
-      subtitle: 'publicationDate',
+      date: 'publicationDate',
       media: 'cover',
+    },
+    prepare({ title, date }: { title: string; date: string }) {
+      return {
+        title,
+        subtitle: new Date(date).toLocaleString(),
+      };
     },
   },
 };

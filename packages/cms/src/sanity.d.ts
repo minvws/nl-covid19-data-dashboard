@@ -3,11 +3,19 @@ declare module 'part:@sanity/form-builder/patch-event' {
   export * from '@sanity/form-builder/lib/PatchEvent';
 }
 
+declare module '@sanity/cli/lib/util/getUserConfig';
+
 declare module 'part:@sanity/components/selects/default';
 
 declare module 'part:@sanity/components/buttons/default';
 
-declare module 'part:@sanity/base/client';
+declare module 'part:@sanity/base/datastore/document';
+
+declare module 'part:@sanity/base/client' {
+  import { SanityClient } from '@sanity/client';
+  const client: SanityClient;
+  export default client;
+}
 
 declare module 'part:@sanity/base/document-actions';
 
