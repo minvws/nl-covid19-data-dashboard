@@ -178,27 +178,27 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                      */
                     splitPoints: [
                       {
-                        value: 0,
+                        value: 200,
                         color: colors.data.scale.blue[0],
                         label: '0 - 200',
                       },
                       {
-                        value: 200,
+                        value: 400,
                         color: colors.data.scale.blue[1],
                         label: '200 - 400',
                       },
                       {
-                        value: 400,
+                        value: 600,
                         color: colors.data.scale.blue[2],
                         label: '400 - 600',
                       },
                       {
-                        value: 600,
+                        value: 800,
                         color: colors.data.scale.blue[3],
                         label: '600 - 800',
                       },
                       {
-                        value: 800,
+                        value: Infinity,
                         color: colors.data.scale.blue[4],
                         label: '800 - 1000',
                       },
