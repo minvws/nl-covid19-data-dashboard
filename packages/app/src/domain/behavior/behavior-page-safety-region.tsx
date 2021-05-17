@@ -8,7 +8,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
-interface behaviorPageSafetyRegionProps {
+interface BehaviorPageSafetyRegionProps {
   data: any;
   content: any;
 }
@@ -16,7 +16,7 @@ interface behaviorPageSafetyRegionProps {
 export function BehaviorPageSafetyRegion({
   data,
   content,
-}: behaviorPageSafetyRegionProps) {
+}: BehaviorPageSafetyRegionProps) {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
   const { regionaal_gedrag } = siteText;

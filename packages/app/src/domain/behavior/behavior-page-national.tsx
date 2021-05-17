@@ -8,7 +8,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-interface behaviourPageNationalProps {
+interface BehaviourPageNationalProps {
   data: any;
   content: any;
 }
@@ -16,7 +16,7 @@ interface behaviourPageNationalProps {
 export function BehaviorPageNational({
   data,
   content,
-}: behaviourPageNationalProps) {
+}: BehaviourPageNationalProps) {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
   const { nl_gedrag } = siteText;
