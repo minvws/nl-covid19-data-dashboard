@@ -35,5 +35,4 @@ yarn-error.log*
 /*.code-workspace
 /debug.log
 
-src/locale/nl.json
-src/locale/en.json
+src/locale/*_export.json

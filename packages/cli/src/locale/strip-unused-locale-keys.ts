@@ -26,12 +26,12 @@ const project = new Project({
 });
 
 const texts = JSON.parse(
-  fs.readFileSync(path.join(APP_LOCALE_DIR, 'nl.json'), {
+  fs.readFileSync(path.join(APP_LOCALE_DIR, 'nl_export.json'), {
     encoding: 'utf-8',
   })
 );
 
-const sourceFile = project.getSourceFile('nl.json');
+const sourceFile = project.getSourceFile('nl_export.json');
 
 const flatStrippedTexts = sourceFile
   ?.getDescendantsOfKind(SyntaxKind.PropertyAssignment)
@@ -52,9 +52,9 @@ const flatStrippedTexts = sourceFile
   )
   .sort()
   .reduce<Record<string, unknown>>((aggr, propertyPath) => {
-    const NlValue = get(texts, propertyPath);
-    if (isDefined(NlValue)) {
-      aggr[propertyPath] = NlValue;
+    const text = get(texts, propertyPath);
+    if (isDefined(text)) {
+      aggr[propertyPath] = text;
     }
     return aggr;
   }, {});

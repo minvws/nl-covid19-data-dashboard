@@ -53,7 +53,7 @@ export function getSchemaInfo(
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
     vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
     locale: {
-      files: ['en.json', 'nl.json'],
+      files: ['en_export.json', 'nl_export.json'],
       basePath: localeDirectory,
       customValidations: [validatePlaceholders],
     },
