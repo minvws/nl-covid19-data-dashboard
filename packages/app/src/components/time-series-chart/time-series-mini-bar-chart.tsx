@@ -95,14 +95,21 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      bounds,
-      numTicks: 0,
-    }
-  );
+  const {
+    xScale,
+    yScale,
+    getX,
+    getY,
+    getY0,
+    getY1,
+    dateSpanWidth,
+    hasAllZeroValues,
+  } = useScales({
+    values,
+    maximumValue: seriesMax,
+    bounds,
+    numTicks: 0,
+  });
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -171,6 +178,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
             isPercentage={isPercentage}
             isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
             xRangePadding={padding.left}
+            hasAllZeroValues={hasAllZeroValues}
           />
 
           <Series

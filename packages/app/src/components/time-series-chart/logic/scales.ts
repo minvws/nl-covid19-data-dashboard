@@ -27,6 +27,7 @@ interface UseScalesResult {
   getY0: GetY0;
   getY1: GetY1;
   dateSpanWidth: number;
+  hasAllZeroValues: boolean;
 }
 
 export function useScales<T extends TimestampedValue>(args: {
@@ -56,6 +57,7 @@ export function useScales<T extends TimestampedValue>(args: {
         getY0: (_x: SeriesDoubleValue) => 0,
         getY1: (_x: SeriesDoubleValue) => 0,
         dateSpanWidth: 0,
+        hasAllZeroValues: false,
       };
     }
 
@@ -66,12 +68,13 @@ export function useScales<T extends TimestampedValue>(args: {
     });
 
     /**
-    For some reason visx-scaleLinear doesn't handle een domain of [0,0] correctly.
-    In that particular case calling yScale(0) will return the (bounds.height / 2), instead of just bounds.height.
-    A work-around turns out to be setting the max value to Infinity.
-    */
+     * For some reason visx-scaleLinear doesn't handle een domain of [0,0] correctly.
+     * In that particular case calling yScale(0) will return the (bounds.height / 2), instead of just bounds.height.
+     * A work-around turns out to be setting the max value to Infinity.
+     */
+    const maximumDomainValue = maximumValue > 0 ? maximumValue : Infinity;
     const yScale = scaleLinear({
-      domain: [0, maximumValue > 0 ? maximumValue : Infinity],
+      domain: [0, maximumValue > 0 ? maximumValue : maximumDomainValue],
       range: [bounds.height, 0],
       nice: numTicks,
       round: true, // round the output values so we render on round pixels
@@ -85,6 +88,7 @@ export function useScales<T extends TimestampedValue>(args: {
       getY0: (x: SeriesDoubleValue) => yScale(x.__value_a ?? NaN),
       getY1: (x: SeriesDoubleValue) => yScale(x.__value_b ?? NaN),
       dateSpanWidth: getDateSpanWidth(values, xScale),
+      hasAllZeroValues: maximumDomainValue === Infinity,
     };
 
     return result;

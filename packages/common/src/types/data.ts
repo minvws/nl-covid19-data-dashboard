@@ -9,6 +9,7 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
+  population_count?: number;
   deceased_rivm: GmDeceasedRivm;
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
@@ -147,6 +148,7 @@ export interface National {
   proto_name: "NL";
   name: string;
   code: string;
+  population_count?: number;
   difference: NationalDifference;
   doctor: NationalDoctor;
   downscaling?: NlDownscaling;
@@ -168,6 +170,7 @@ export interface National {
   disability_care: NationalDisabilityCare;
   behavior: NationalBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
+  behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
   deceased_rivm: NationalDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
@@ -548,6 +551,21 @@ export interface NlBehaviorPerAgeGroupValue {
   "55_69": number;
   "70_plus": number;
 }
+export interface NlBehaviorGetTestedSupportPerAgeGroup {
+  values: NlBehaviorGetTestedSupportPerAgeGroupValue[];
+  last_value: NlBehaviorGetTestedSupportPerAgeGroupValue;
+}
+export interface NlBehaviorGetTestedSupportPerAgeGroupValue {
+  percentage_average: number;
+  percentage_70_plus: number;
+  percentage_55_69: number;
+  percentage_40_54: number;
+  percentage_25_39: number;
+  percentage_16_24: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NationalDeceasedRivm {
   values: NationalDeceasedRivmValue[];
   last_value: NationalDeceasedRivmValue;
@@ -819,6 +837,7 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
+  population_count?: number;
   difference: RegionalDifference;
   g_number: VrGNumber;
   sewer: RegionalSewer;

@@ -74,9 +74,13 @@ export function useHoverState<T extends TimestampedValue>({
 
       const barPoints: HoveredPoint<T>[] = seriesConfig
         .map((config, index) => {
-          const seriesValue = seriesList[index][
-            valuesIndex
-          ] as SeriesSingleValue;
+          const seriesValue = seriesList[index][valuesIndex] as
+            | SeriesSingleValue
+            | undefined;
+
+          if (!isPresent(seriesValue)) {
+            return undefined;
+          }
 
           const xValue = seriesValue.__date_unix;
           const yValue = seriesValue.__value;

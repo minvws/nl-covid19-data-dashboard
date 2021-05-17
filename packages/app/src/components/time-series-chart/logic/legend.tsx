@@ -1,4 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { LegendItem } from '~/components/legend';
 import { SeriesIcon, TimespanAnnotationIcon } from '../components';
@@ -6,6 +7,7 @@ import { DataOptions } from './common';
 import { isVisible, SeriesConfig } from './series';
 
 export function useLegendItems<T extends TimestampedValue>(
+  domain: number[],
   config: SeriesConfig<T>,
   dataOptions?: DataOptions
 ) {
@@ -18,17 +20,31 @@ export function useLegendItems<T extends TimestampedValue>(
     }));
 
     /**
+     * Maximum number of legend items
+     *
+     * Used to determine if there are enough items to render a legend
+     */
+    let maxNumItems: number = items.length;
+
+    /**
      * Add annotations to the legend
      */
     if (dataOptions?.timespanAnnotations) {
+      maxNumItems += dataOptions?.timespanAnnotations.length;
       for (const annotation of dataOptions.timespanAnnotations) {
-        items.push({
-          label: annotation.label,
-          shape: 'custom',
-          shapeComponent: annotation.shapeComponent ?? (
-            <TimespanAnnotationIcon />
-          ),
-        } as LegendItem);
+        const isAnnotationVisible =
+          (first(domain) as number) <= annotation.end &&
+          annotation.start <= (last(domain) as number);
+
+        if (isAnnotationVisible) {
+          items.push({
+            label: annotation.label,
+            shape: 'custom',
+            shapeComponent: annotation.shapeComponent ?? (
+              <TimespanAnnotationIcon />
+            ),
+          } as LegendItem);
+        }
       }
     }
 
@@ -40,8 +56,8 @@ export function useLegendItems<T extends TimestampedValue>(
      * This prevents us from having to manually set (and possibly forget to set)
      * a boolean on the chart props.
      */
-    return items.length > 1 ? items : [];
-  }, [config, dataOptions]);
+    return maxNumItems > 1 ? items : [];
+  }, [config, dataOptions, domain]);
 
   return legendItems;
 }

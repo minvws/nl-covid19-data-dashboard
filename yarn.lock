@@ -3254,7 +3254,7 @@
     "@types/react-dom" "*"
     prop-types "^15.5.10"
 
-"@visx/clip-path@1.7.0":
+"@visx/clip-path@1.7.0", "@visx/clip-path@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@visx/clip-path/-/clip-path-1.7.0.tgz#684ea6ae15c877d139c0b8f3cdfacb106c6bf4f9"
   dependencies:
