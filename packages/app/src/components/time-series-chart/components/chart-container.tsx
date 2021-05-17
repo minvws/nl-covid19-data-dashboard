@@ -79,7 +79,7 @@ export function ChartContainer({
       <Group
         left={padding.left}
         top={padding.top}
-        css={css({ pointerEvents: 'none' })}
+        style={{ pointerEvents: 'none' }}
       >
         {children}
       </Group>

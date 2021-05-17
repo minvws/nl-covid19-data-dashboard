@@ -95,6 +95,7 @@ export type TimeSeriesChartProps<
    * the vaccine support chart.
    */
   numGridLines?: number;
+  showWeekNumbers?: boolean;
   tickValues?: number[];
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
@@ -132,6 +133,7 @@ export function TimeSeriesChart<
   timeframe = 'all',
   formatTooltip,
   dataOptions,
+  showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
@@ -171,6 +173,7 @@ export function TimeSeriesChart<
     width,
     height,
     paddingLeft,
+    paddingTop: showWeekNumbers ? 20 : undefined,
   });
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
@@ -319,6 +322,7 @@ export function TimeSeriesChart<
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
               isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+              showWeekNumbers={showWeekNumbers}
             />
 
             {/**
