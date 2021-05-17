@@ -189,7 +189,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         height: '1px',
         backgroundColor: 'lightGray',
         transform: x.isOpen ? 'scaleX(1)' : 'scale(0)',
-        transition: 'transform 0.8s',
+        transition: 'transform 0.4s',
       },
     },
   })
