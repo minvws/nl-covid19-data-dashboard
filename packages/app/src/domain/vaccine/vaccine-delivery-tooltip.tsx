@@ -11,7 +11,7 @@ import { Spacer } from '~/components/base';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
+import { SiteText } from '~/locale';
 
 export type TooltipValue = (
   | NlVaccineDeliveryValue
@@ -23,7 +23,7 @@ export type TooltipValue = (
 
 export function FormatVaccinationsTooltip(props: {
   values: HoverPoint<TooltipValue>[];
-  text: AllLanguages;
+  text: SiteText;
 }) {
   const { values, text } = props;
   const { formatDateFromSeconds, formatNumber } = useIntl();
@@ -97,7 +97,7 @@ export function FormatVaccinationsTooltip(props: {
   );
 }
 
-function formatLabel(labelKey: string | undefined, text: AllLanguages) {
+function formatLabel(labelKey: string | undefined, text: SiteText) {
   const labelText = labelKey
     ? (text.vaccinaties.data.vaccination_chart.product_names as any)[labelKey]
     : undefined;

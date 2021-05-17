@@ -137,7 +137,7 @@
     "compile": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
     "clean": "rimraf .next",
-    "vercel-install": "yarn install && yarn download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cms sync-assets && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$SANITY_DATASET",
+    "vercel-install": "yarn install --frozen-lockfile && yarn download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$SANITY_DATASET && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cms sync-assets",
     "vercel-build:nl": "yarn build:nl && next export",
     "vercel-build:en": "yarn build:en && next export"
   },

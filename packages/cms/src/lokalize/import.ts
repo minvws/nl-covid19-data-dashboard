@@ -25,13 +25,13 @@ import { getClient } from '../client';
   );
 
   const nl = JSON.parse(
-    fs.readFileSync(path.join(localeDirectory, 'nl.json'), {
+    fs.readFileSync(path.join(localeDirectory, 'nl_export.json'), {
       encoding: 'utf8',
     })
   ) as Record<string, unknown>;
 
   const en = JSON.parse(
-    fs.readFileSync(path.join(localeDirectory, 'en.json'), {
+    fs.readFileSync(path.join(localeDirectory, 'en_export.json'), {
       encoding: 'utf8',
     })
   ) as Record<string, unknown>;

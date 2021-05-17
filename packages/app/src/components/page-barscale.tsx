@@ -18,7 +18,7 @@ import {
   MovingAverageDifferenceIndicator,
 } from './difference-indicator';
 import { useIntl } from '~/intl';
-import { NlLocale } from '~/locale';
+import { SiteText } from '~/locale';
 
 /**
  * This component originated from SidebarBarScale, but is used on pages and
@@ -29,7 +29,7 @@ import { NlLocale } from '~/locale';
 interface PageBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof NlLocale;
+  localeTextKey: keyof SiteText;
   metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
