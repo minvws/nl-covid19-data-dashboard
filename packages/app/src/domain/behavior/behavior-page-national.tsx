@@ -8,6 +8,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { BehaviorTable } from '~/domain/behavior/behavior-table';
 interface behaviourPageNationalProps {
   data: any;
   content: any;
@@ -28,6 +29,11 @@ export function BehaviorPageNational({
 
   return (
     <TileList>
+      <BehaviorTable
+        sortedCompliance={sortedCompliance}
+        sortedSupport={sortedSupport}
+      />
+
       <ContentHeader
         category={siteText.nationaal_layout.headings.gedrag}
         title={nl_gedrag.pagina.titel}
