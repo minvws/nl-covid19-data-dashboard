@@ -5,6 +5,14 @@ type PatternsProps = {
   chartId: string;
 };
 
+/**
+ * For now only the estimate timespan annotation requires a pattern to be registered
+ * in the defs section, so I'm keeping that logic here.
+ *
+ * Should there be other components/annotations/etc that require these then I suggest
+ * we come up with a more generic approach to this when it becomes a requirement.
+ *
+ */
 export function Patterns({ timespanAnnotations, chartId }: PatternsProps) {
   const estimates =
     timespanAnnotations?.filter((x) => x.type === 'estimate') ?? [];
