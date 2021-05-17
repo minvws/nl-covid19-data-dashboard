@@ -173,7 +173,13 @@ export function useHoverState<T extends TimestampedValue>({
     const barPoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
       .map((config, index) => {
-        const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue;
+        const seriesValue = seriesList[index][valuesIndex] as
+          | SeriesSingleValue
+          | undefined;
+
+        if (!isPresent(seriesValue)) {
+          return undefined;
+        }
 
         const xValue = seriesValue.__date_unix;
         const yValue = seriesValue.__value;
@@ -202,7 +208,13 @@ export function useHoverState<T extends TimestampedValue>({
     const linePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
       .map((config, index) => {
-        const seriesValue = seriesList[index][valuesIndex] as SeriesSingleValue;
+        const seriesValue = seriesList[index][valuesIndex] as
+          | SeriesSingleValue
+          | undefined;
+
+        if (!isPresent(seriesValue)) {
+          return undefined;
+        }
 
         const xValue = seriesValue.__date_unix;
         const yValue = seriesValue.__value;
@@ -237,7 +249,13 @@ export function useHoverState<T extends TimestampedValue>({
     const rangePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
       .flatMap((config, index) => {
-        const seriesValue = seriesList[index][valuesIndex] as SeriesDoubleValue;
+        const seriesValue = seriesList[index][valuesIndex] as
+          | SeriesDoubleValue
+          | undefined;
+
+        if (!isPresent(seriesValue)) {
+          return undefined;
+        }
 
         const xValue = seriesValue.__date_unix;
         const yValueA = seriesValue.__value_a;
