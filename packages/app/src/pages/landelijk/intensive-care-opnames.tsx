@@ -57,7 +57,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   const intakeUnderReportedRange = getBoundaryDateStartUnix(
     dataIntake.values,
-    4
+    3
   );
 
   const metadata = {
@@ -123,7 +123,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                     difference={
                       data.difference.intensive_care_lcps__beds_occupied_covid
                     }
-                    isMovingAverageDifference
                   />
                 )}
               <Text>{text.kpi_bedbezetting.description}</Text>

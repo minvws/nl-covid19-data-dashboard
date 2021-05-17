@@ -699,7 +699,8 @@
     "rond": "rond",
     "interactive_legend": {
       "reset_button_label": "Reset"
-    }
+    },
+    "week_number_label": "Week {{weekNumber}}"
   },
   "seoHead": {
     "default_description": "Informatie over de ontwikkeling van het coronavirus in Nederland.",

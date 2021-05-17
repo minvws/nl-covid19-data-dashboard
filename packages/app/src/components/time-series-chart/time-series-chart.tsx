@@ -26,10 +26,10 @@ import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
-  omitValuePropertiesForAnnotation,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
+  omitValuePropertiesForAnnotation,
   SeriesConfig,
   useHoverState,
   useLegendItems,
@@ -95,6 +95,7 @@ export type TimeSeriesChartProps<
    * the vaccine support chart.
    */
   numGridLines?: number;
+  showWeekNumbers?: boolean;
   tickValues?: number[];
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
@@ -132,6 +133,7 @@ export function TimeSeriesChart<
   timeframe = 'all',
   formatTooltip,
   dataOptions,
+  showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
@@ -171,6 +173,7 @@ export function TimeSeriesChart<
     width,
     height,
     paddingLeft,
+    paddingTop: showWeekNumbers ? 20 : undefined,
   });
 
   const legendItems = useLegendItems(seriesConfig, dataOptions);
@@ -197,14 +200,21 @@ export function TimeSeriesChart<
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      bounds,
-      numTicks: yTickValues?.length || numGridLines,
-    }
-  );
+  const {
+    xScale,
+    yScale,
+    getX,
+    getY,
+    getY0,
+    getY1,
+    dateSpanWidth,
+    hasAllZeroValues,
+  } = useScales({
+    values,
+    maximumValue: seriesMax,
+    bounds,
+    numTicks: yTickValues?.length || numGridLines,
+  });
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -319,6 +329,8 @@ export function TimeSeriesChart<
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
               isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+              hasAllZeroValues={hasAllZeroValues}
+              showWeekNumbers={showWeekNumbers}
             />
 
             {/**
