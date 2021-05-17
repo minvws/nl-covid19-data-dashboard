@@ -9,7 +9,7 @@ import {
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
+import { SiteText } from '~/locale';
 import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/selected-delivery-and-administration-data';
 
 function isLineConfig(
@@ -112,7 +112,7 @@ export function VaccineDeliveryAndAdministrationsTooltip({
   );
 }
 
-function formatLabel(labelKey: string | undefined, text: AllLanguages) {
+function formatLabel(labelKey: string | undefined, text: SiteText) {
   const labelText = labelKey
     ? (text.vaccinaties.data.vaccination_chart.product_names as any)[labelKey]
     : undefined;
