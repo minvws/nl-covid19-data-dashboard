@@ -67,7 +67,10 @@ const obsoleteKeys = difference(
 ).sort();
 
 for (const key of obsoleteKeys) {
-  appendTextMutation('delete', key);
+  const text = texts[key];
+  const isRootvalue = typeof text === 'string' || Array.isArray(text);
+
+  appendTextMutation('delete', isRootvalue ? `__root.${key}` : key);
 }
 
 console.log(`Marked ${obsoleteKeys.length} documents for deletion`);
