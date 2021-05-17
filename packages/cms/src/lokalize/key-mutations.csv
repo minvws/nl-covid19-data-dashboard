@@ -229,17 +229,6 @@ timestamp,action,key
 2021-05-17T06:51:46.503Z,delete,notificatie.titel
 2021-05-17T06:51:46.504Z,delete,over_disclaimer.text
 2021-05-17T06:51:46.504Z,delete,over_disclaimer.title
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.established_with
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.header_hospital_admissions.subtitle
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.header_hospital_admissions.title
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.header_positive_tests.subtitle
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.header_positive_tests.title
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.last_determined
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.next_determined
-2021-05-17T06:51:46.504Z,delete,over_risiconiveaus.scoreboard.current_level.regions.none
-2021-05-17T06:51:46.505Z,delete,over_risiconiveaus.scoreboard.current_level.regions.plural
-2021-05-17T06:51:46.505Z,delete,over_risiconiveaus.scoreboard.current_level.regions.single
-2021-05-17T06:51:46.505Z,delete,over_risiconiveaus.scoreboard.header.title
 2021-05-17T06:51:46.505Z,delete,over_veelgestelde_vragen.paragraaf
 2021-05-17T06:51:46.505Z,delete,over_veelgestelde_vragen.text
 2021-05-17T06:51:46.505Z,delete,over_veelgestelde_vragen.titel
