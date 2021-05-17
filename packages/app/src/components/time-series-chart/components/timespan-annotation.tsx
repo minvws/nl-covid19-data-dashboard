@@ -1,5 +1,9 @@
-import { Bar } from '@visx/shape';
-import { colors } from '~/style/theme';
+import { Group } from '@visx/group';
+import { Bar, Line } from '@visx/shape';
+import { Text } from '@visx/text';
+import { useIntl } from '~/intl';
+import theme, { colors } from '~/style/theme';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { GetX, TimespanAnnotationConfigType } from '../logic';
 
 const DEFAULT_COLOR = colors.data.underReported;
@@ -23,6 +27,9 @@ export function TimespanAnnotation({
 }) {
   const [min, max] = domain;
 
+  const breakpoints = useBreakpoints(true);
+  const { siteText } = useIntl();
+
   /**
    * Clip the start / end dates to the domain of the x-axis, so that we can
    * conveniently pass in things like Infinity for end date.
@@ -38,6 +45,8 @@ export function TimespanAnnotation({
    * the unix timestamps are used directly for the xScale.
    */
   const width = x1 - x0;
+
+  const fontSize = !breakpoints.lg ? theme.fontSizes[0] : theme.fontSizes[1];
 
   if (width <= 0) return null;
 
@@ -56,14 +65,44 @@ export function TimespanAnnotation({
       );
     case 'estimate':
       return (
-        <Bar
-          pointerEvents="none"
-          height={height}
-          x={x0}
-          width={width}
-          fill={`url(#${chartId}_estimate_pattern)`}
-          clip-path={`url(#${chartId}_estimate_clippath)`}
-        />
+        <>
+          <Bar
+            pointerEvents="none"
+            height={height}
+            x={x0}
+            width={width}
+            fill={`url(#${chartId}_estimate_pattern)`}
+          />
+          <Group>
+            <Text
+              fontSize={fontSize}
+              x={x0 - 15}
+              y={15}
+              textAnchor="end"
+              fill="grey"
+            >
+              {siteText.vaccinaties.data.vaccination_chart.left_divider_label}
+            </Text>
+            <Text
+              fontSize={fontSize}
+              x={x0 + 15}
+              y={15}
+              textAnchor="start"
+              fill="grey"
+            >
+              {siteText.vaccinaties.data.vaccination_chart.right_divider_label}
+            </Text>
+
+            <Line
+              x1={x0}
+              x2={x0}
+              y1={height}
+              y2={0}
+              stroke="grey"
+              strokeWidth="2"
+            />
+          </Group>
+        </>
       );
   }
 }

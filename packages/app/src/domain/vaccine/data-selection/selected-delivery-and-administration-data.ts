@@ -6,13 +6,13 @@ import { first } from 'lodash';
 import last from 'lodash/last';
 import { getNlData } from '~/static-props/get-data';
 
-export type VaccineAdministeredAndDeliveredValue = Optional<
+export type VaccineDeliveryAndAdministrationsValue = Optional<
   Omit<NlVaccineDeliveryValue, 'total'>,
   'date_of_report_unix'
 > & { total_delivered: number } & NlVaccineAdministeredValue;
 
 export type DeliveryAndAdministrationData = {
-  values: VaccineAdministeredAndDeliveredValue[];
+  values: VaccineDeliveryAndAdministrationsValue[];
   estimatedRange: [number, number];
 };
 
@@ -27,7 +27,7 @@ export function selectedDeliveryAndAdministrationData(): {
     vaccine_delivery_estimate,
   } = nlData;
 
-  const values: VaccineAdministeredAndDeliveredValue[] = [
+  const values: VaccineDeliveryAndAdministrationsValue[] = [
     ...vaccine_administered.values.map((x, index) => ({
       ...{
         ...vaccine_delivery.values[index],

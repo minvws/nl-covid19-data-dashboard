@@ -24,7 +24,6 @@ import {
   TooltipFormatter,
 } from './components';
 import { Benchmark } from './components/benchmark';
-import { ClipPath } from './components/clip-path';
 import { Patterns } from './components/patterns';
 import { Series } from './components/series';
 import {
@@ -313,17 +312,10 @@ export function TimeSeriesChart<
             onFocus={chartEventHandlers.handleFocus}
             onBlur={chartEventHandlers.handleBlur}
             defs={
-              <>
-                <ClipPath
-                  timespanAnnotations={timespanAnnotations}
-                  chartId={chartId}
-                  seriesConfig={seriesConfig}
-                />
-                <Patterns
-                  timespanAnnotations={timespanAnnotations}
-                  chartId={chartId}
-                />
-              </>
+              <Patterns
+                timespanAnnotations={timespanAnnotations}
+                chartId={chartId}
+              />
             }
           >
             <Axes

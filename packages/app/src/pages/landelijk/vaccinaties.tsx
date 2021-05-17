@@ -17,7 +17,6 @@ import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
-import { VaccineDeliveryAndAdministrationsAreaChart2 } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart2';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
@@ -54,10 +53,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_total',
     'vaccine_administered_planned',
     'vaccine_administered_rate_moving_average',
-    'vaccine_administered',
-    'vaccine_delivery',
-    'vaccine_delivery_estimate',
-    'vaccine_administered_estimate',
     'vaccine_administered_ggd',
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_doctors',
@@ -121,9 +116,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineAdministrationsKpiSection data={data} />
 
-          <VaccineDeliveryAndAdministrationsAreaChart data={data} />
-
-          <VaccineDeliveryAndAdministrationsAreaChart2
+          <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
           />
 

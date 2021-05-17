@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number;
@@ -20,6 +22,7 @@ export interface TimespanAnnotationConfig {
   label: string;
   shortLabel?: string;
   cutValuesForMetricProperties?: string[];
+  shapeComponent?: ReactNode;
 }
 
 /**

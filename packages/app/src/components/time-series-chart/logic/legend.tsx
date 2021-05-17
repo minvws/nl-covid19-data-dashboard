@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { LegendItem } from '~/components/legend';
 import { SeriesIcon, TimespanAnnotationIcon } from '../components';
 import { DataOptions } from './common';
-import { SeriesConfig, isVisible } from './series';
+import { isVisible, SeriesConfig } from './series';
 
 export function useLegendItems<T extends TimestampedValue>(
   config: SeriesConfig<T>,
@@ -25,7 +25,9 @@ export function useLegendItems<T extends TimestampedValue>(
         items.push({
           label: annotation.label,
           shape: 'custom',
-          shapeComponent: <TimespanAnnotationIcon />,
+          shapeComponent: annotation.shapeComponent ?? (
+            <TimespanAnnotationIcon />
+          ),
         } as LegendItem);
       }
     }
