@@ -45,19 +45,6 @@ class MyDocument extends Document {
       <Html lang={locale} className="has-no-js">
         <Head>
           <script src="/init.js" />
-          {/**
-           * Because we add the nomodule attribute polyfill.io is only called on IE11
-           * IE11 will never complain about CSP policies, and modern browsers don't
-           * need to load the polyfills.
-           *
-           * IMPORTANT:
-           * This polyfill only loads for IE11.
-           * Other polyfills should be imported in _app.ts!
-           * */}
-          <script
-            noModule
-            src="https://polyfill.io/v3/polyfill.js?features=Intl.~locale.en,Intl.~locale.nl%2CDate.now%2CDate.prototype.toISOString%2CIntl.DateTimeFormat%2CIntl.DateTimeFormat.prototype.formatToParts%2CIntl.getCanonicalLocales"
-          />
           <Fonts />
         </Head>
         <body>

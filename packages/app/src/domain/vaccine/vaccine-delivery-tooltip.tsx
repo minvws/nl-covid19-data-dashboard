@@ -21,10 +21,11 @@ export type TooltipValue = (
 ) &
   TimestampedTrendValue;
 
-export function FormatVaccinationsTooltip(
-  values: HoverPoint<TooltipValue>[],
-  text: AllLanguages
-) {
+export function FormatVaccinationsTooltip(props: {
+  values: HoverPoint<TooltipValue>[];
+  text: AllLanguages;
+}) {
+  const { values, text } = props;
   const { formatDateFromSeconds, formatNumber } = useIntl();
 
   if (!values.length) {

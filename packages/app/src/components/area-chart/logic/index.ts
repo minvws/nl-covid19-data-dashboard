@@ -5,12 +5,14 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { bisectLeft } from 'd3-array';
+import { ScaleTime } from 'd3-scale';
 import { isPresent } from 'ts-is-present';
 import { timestampToDate } from '~/components/stacked-chart/logic';
 import {
   getDaysForTimeframe,
-  TimeframeOption,
   getValuesInTimeframe,
+  TimeframeOption,
 } from '~/utils/timeframe';
 
 // This type limits the allowed property names to those with a number type,
@@ -161,4 +163,28 @@ export function getSingleTrendData<T extends TimestampedValue>(
   }
 
   throw new Error(`Incompatible timestamps are used in value ${values[0]}`);
+}
+
+export function bisect(
+  trendValues: TimestampedTrendValue[],
+  xPosition: number,
+  xScale: ScaleTime<number, number>
+) {
+  if (!trendValues.length) return;
+  if (trendValues.length === 1) return trendValues[0];
+
+  const date = xScale.invert(xPosition);
+
+  const index = bisectLeft(
+    trendValues.map((x) => x.__date),
+    date,
+    1
+  );
+
+  const d0 = trendValues[index - 1];
+  const d1 = trendValues[index];
+
+  if (!d1) return d0;
+
+  return +date - +d0.__date > +d1.__date - +date ? d1 : d0;
 }

@@ -17,6 +17,7 @@ import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
+import { WeekNumbers } from './week-numbers';
 
 type AxesProps = {
   bounds: Bounds;
@@ -31,6 +32,7 @@ type AxesProps = {
    * label.
    */
   numGridLines: number;
+  showWeekNumbers?: boolean;
   /**
    * This ref can be used for measuring the width of the Y-axis to automagically
    * calculate a left-padding.
@@ -60,10 +62,11 @@ type AxesProps = {
   hasAllZeroValues?: boolean;
 };
 
-type AnyTickFormatter = (value: any) => string;
+export type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
   numGridLines,
+  showWeekNumbers,
   bounds,
   isPercentage,
   xScale,
@@ -169,6 +172,16 @@ export const Axes = memo(function Axes({
         tickValues={yTickValues}
         stroke={colors.silver}
       />
+
+      {showWeekNumbers && (
+        <WeekNumbers
+          startUnix={startUnix}
+          endUnix={endUnix}
+          bounds={bounds}
+          xScale={xScale}
+        />
+      )}
+
       <AxisBottom
         scale={xScale}
         tickValues={xTickValues}
