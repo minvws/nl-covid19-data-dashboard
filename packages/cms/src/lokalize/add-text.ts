@@ -129,7 +129,7 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
          */
         return (
           existingKeys.find((key) => key === x) === undefined &&
-          /^[a-z_\.]+[a-z_]+$/.test(x)
+          /^[a-z_]+(\.[a-z0-9_]+)+$/.test(x)
         );
       },
       onState,
