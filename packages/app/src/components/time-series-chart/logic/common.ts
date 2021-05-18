@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number;
@@ -29,11 +27,14 @@ export type TimespanAnnotationConfig =
       label: string;
       shortLabel?: string;
       cutValuesForMetricProperties?: string[];
-      shapeComponent?: ReactNode;
+    }
+  | {
+      type: 'divider';
+      start: number;
+      end: number;
       leftLabel: string;
       rightLabel: string;
     };
-
 /**
  * @TODO find a more common place for this.
  */

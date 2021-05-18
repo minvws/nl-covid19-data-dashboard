@@ -60,44 +60,45 @@ export function TimespanAnnotation({
       );
     case 'hatched':
       return (
-        <>
-          <Bar
-            pointerEvents="none"
-            height={height}
-            x={x0}
-            width={width}
-            fill={`url(#${chartId}_hatched_pattern)`}
-          />
-          <Group>
-            <Text
-              fontSize={fontSize}
-              x={x0 - 15}
-              y={15}
-              textAnchor="end"
-              fill="grey"
-            >
-              {config.leftLabel}
-            </Text>
-            <Text
-              fontSize={fontSize}
-              x={x0 + 15}
-              y={15}
-              textAnchor="start"
-              fill="grey"
-            >
-              {config.rightLabel}
-            </Text>
+        <Bar
+          pointerEvents="none"
+          height={height}
+          x={x0}
+          width={width}
+          fill={`url(#${chartId}_hatched_pattern)`}
+        />
+      );
+    case 'divider':
+      return (
+        <Group>
+          <Text
+            fontSize={fontSize}
+            x={x0 - 15}
+            y={15}
+            textAnchor="end"
+            fill="grey"
+          >
+            {config.leftLabel}
+          </Text>
+          <Text
+            fontSize={fontSize}
+            x={x0 + 15}
+            y={15}
+            textAnchor="start"
+            fill="grey"
+          >
+            {config.rightLabel}
+          </Text>
 
-            <Line
-              x1={x0}
-              x2={x0}
-              y1={height}
-              y2={0}
-              stroke="grey"
-              strokeWidth="2"
-            />
-          </Group>
-        </>
+          <Line
+            x1={x0}
+            x2={x0}
+            y1={height}
+            y2={0}
+            stroke="gray"
+            strokeWidth="2"
+          />
+        </Group>
       );
   }
 }

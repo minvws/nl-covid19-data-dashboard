@@ -66,7 +66,11 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
               end: data.estimatedRange[1],
               label:
                 siteText.vaccinaties.data.vaccination_chart.legend.expected,
-              shapeComponent: <HatchedSquare />,
+            },
+            {
+              type: 'divider',
+              start: data.estimatedRange[0],
+              end: data.estimatedRange[1],
               leftLabel:
                 siteText.vaccinaties.data.vaccination_chart.left_divider_label,
               rightLabel:
@@ -103,42 +107,16 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
             label: replaceVariablesInText(
               siteText.vaccinaties.data.vaccination_chart.legend_label,
               {
-                name: (productNames as any)[x],
+                name: (productNames as Record<string, string>)[x],
               }
             ),
-            shortLabel: (productNames as any)[x],
-            color: (colors.data.vaccines as any)[x],
+            shortLabel: (productNames as Record<string, string>)[x],
+            color: (colors.data.vaccines as Record<string, string>)[x],
             fillOpacity: 1,
             strokeWidth: 0,
           })),
         ]}
       />
     </ChartTile>
-  );
-}
-
-function HatchedSquare() {
-  return (
-    <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
-    </svg>
   );
 }
