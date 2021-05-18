@@ -403,7 +403,7 @@ export function extractCutValuesConfig(
 ) {
   return timespanAnnotations
     ?.map((x) =>
-      x.type !== 'divider' && x.cutValuesForMetricProperties
+      x.cutValuesForMetricProperties
         ? ({
             metricProperties: x.cutValuesForMetricProperties,
             start: x.start,
@@ -433,7 +433,7 @@ export function omitValuePropertiesForAnnotation<T extends TimestampedValue>(
   value: T,
   timespan: TimespanAnnotationConfig
 ) {
-  if (timespan.type !== 'divider' && timespan.cutValuesForMetricProperties) {
+  if (timespan.cutValuesForMetricProperties) {
     return omit(value, timespan.cutValuesForMetricProperties) as T;
   } else {
     return value;

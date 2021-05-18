@@ -61,7 +61,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     <section>
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
-      {timespanAnnotation && timespanAnnotation.type !== 'divider' && (
+      {timespanAnnotation && (
         <Text fontSize={0} color={colors.annotation} textAlign={'center'}>
           {timespanAnnotation.shortLabel || timespanAnnotation.label}
         </Text>

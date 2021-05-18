@@ -4,6 +4,7 @@ export interface DataOptions {
   isPercentage?: boolean;
   benchmark?: BenchmarkConfig;
   timespanAnnotations?: TimespanAnnotationConfig[];
+  timeAnnotations?: TimeAnnotationConfig[];
 }
 
 export interface BenchmarkConfig {
@@ -27,14 +28,15 @@ export type TimespanAnnotationConfig =
       label: string;
       shortLabel?: string;
       cutValuesForMetricProperties?: string[];
-    }
-  | {
-      type: 'divider';
-      start: number;
-      end: number;
-      leftLabel: string;
-      rightLabel: string;
     };
+
+export type TimeAnnotationConfig = {
+  type: 'divider';
+  position: number;
+  leftLabel: string;
+  rightLabel: string;
+};
+
 /**
  * @TODO find a more common place for this.
  */

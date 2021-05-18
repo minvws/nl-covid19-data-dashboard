@@ -1,8 +1,5 @@
-import { Group } from '@visx/group';
-import { Bar, Line } from '@visx/shape';
-import { Text } from '@visx/text';
-import theme, { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/use-breakpoints';
+import { Bar } from '@visx/shape';
+import { colors } from '~/style/theme';
 import { GetX, TimespanAnnotationConfig } from '../logic';
 
 const DEFAULT_COLOR = colors.data.underReported;
@@ -23,8 +20,6 @@ export function TimespanAnnotation({
   const [min, max] = domain;
   const { start, end } = config;
 
-  const breakpoints = useBreakpoints(true);
-
   /**
    * Clip the start / end dates to the domain of the x-axis, so that we can
    * conveniently pass in things like Infinity for end date.
@@ -40,8 +35,6 @@ export function TimespanAnnotation({
    * the unix timestamps are used directly for the xScale.
    */
   const width = x1 - x0;
-
-  const fontSize = !breakpoints.lg ? theme.fontSizes[0] : theme.fontSizes[1];
 
   if (width <= 0) return null;
 
@@ -68,51 +61,19 @@ export function TimespanAnnotation({
           fill={`url(#${chartId}_hatched_pattern)`}
         />
       );
-    case 'divider':
-      return (
-        <Group>
-          <Text
-            fontSize={fontSize}
-            x={x0 - 15}
-            y={15}
-            textAnchor="end"
-            fill="grey"
-          >
-            {config.leftLabel}
-          </Text>
-          <Text
-            fontSize={fontSize}
-            x={x0 + 15}
-            y={15}
-            textAnchor="start"
-            fill="grey"
-          >
-            {config.rightLabel}
-          </Text>
-
-          <Line
-            x1={x0}
-            x2={x0}
-            y1={height}
-            y2={0}
-            stroke="gray"
-            strokeWidth="2"
-          />
-        </Group>
-      );
   }
 }
 
-interface TimespanAnnotationIconProps {
+interface SolidTimespanAnnotationIconProps {
   fillOpacity?: number;
   width?: number;
   height?: number;
 }
 
-export function TimespanAnnotationIcon({
+export function SolidTimespanAnnotationIcon({
   width = 15,
   height = 15,
-}: TimespanAnnotationIconProps) {
+}: SolidTimespanAnnotationIconProps) {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <rect
@@ -125,6 +86,32 @@ export function TimespanAnnotationIcon({
         rx={2}
         style={{ mixBlendMode: 'multiply' }}
       />
+    </svg>
+  );
+}
+
+export function HatchedTimespanAnnotationIcon() {
+  return (
+    <svg height="15" width="15">
+      <defs>
+        <pattern
+          id="hatch"
+          width="4"
+          height="4"
+          patternTransform="rotate(-45 0 0)"
+          patternUnits="userSpaceOnUse"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="5"
+            style={{ stroke: 'grey', strokeWidth: 3 }}
+          />
+        </pattern>
+      </defs>
+      <rect height="15" width="15" fill="white" />
+      <rect height="15" width="15" fill="url(#hatch)" />
     </svg>
   );
 }

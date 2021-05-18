@@ -26,6 +26,7 @@ import {
 import { Benchmark } from './components/benchmark';
 import { HatchedPattern } from './components/hatched-pattern';
 import { Series } from './components/series';
+import { TimeAnnotation } from './components/time-annotation';
 import {
   calculateSeriesMaximum,
   DataOptions,
@@ -164,6 +165,7 @@ export function TimeSeriesChart<
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
+    timeAnnotations,
   } = dataOptions || {};
 
   const {
@@ -384,6 +386,15 @@ export function TimeSeriesChart<
             {timespanAnnotations?.map((x, index) => (
               <TimespanAnnotation
                 chartId={chartId}
+                key={index}
+                domain={xScale.domain() as [number, number]}
+                getX={getX}
+                height={bounds.height}
+                config={x}
+              />
+            ))}
+            {timeAnnotations?.map((x, index) => (
+              <TimeAnnotation
                 key={index}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}

@@ -2,7 +2,11 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { LegendItem } from '~/components/legend';
-import { SeriesIcon, TimespanAnnotationIcon } from '../components';
+import {
+  HatchedTimespanAnnotationIcon,
+  SeriesIcon,
+  SolidTimespanAnnotationIcon,
+} from '../components';
 import { DataOptions } from './common';
 import { isVisible, SeriesConfig } from './series';
 
@@ -37,22 +41,16 @@ export function useLegendItems<T extends TimestampedValue>(
           annotation.start <= (last(domain) as number);
 
         if (isAnnotationVisible) {
-          switch (annotation.type) {
-            case 'solid':
-              items.push({
-                label: annotation.label,
-                shape: 'custom',
-                shapeComponent: <TimespanAnnotationIcon />,
-              } as LegendItem);
-              break;
-            case 'hatched':
-              items.push({
-                label: annotation.label,
-                shape: 'custom',
-                shapeComponent: <HatchedSquare />,
-              } as LegendItem);
-              break;
-          }
+          items.push({
+            label: annotation.label,
+            shape: 'custom',
+            shapeComponent:
+              annotation.type === 'solid' ? (
+                <SolidTimespanAnnotationIcon />
+              ) : (
+                <HatchedTimespanAnnotationIcon />
+              ),
+          } as LegendItem);
         }
       }
     }
@@ -69,30 +67,4 @@ export function useLegendItems<T extends TimestampedValue>(
   }, [config, dataOptions, domain]);
 
   return legendItems;
-}
-
-function HatchedSquare() {
-  return (
-    <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
-    </svg>
-  );
 }

@@ -67,10 +67,11 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
               label:
                 siteText.vaccinaties.data.vaccination_chart.legend.expected,
             },
+          ],
+          timeAnnotations: [
             {
               type: 'divider',
-              start: data.estimatedRange[0],
-              end: data.estimatedRange[1],
+              position: data.estimatedRange[0],
               leftLabel:
                 siteText.vaccinaties.data.vaccination_chart.left_divider_label,
               rightLabel:
