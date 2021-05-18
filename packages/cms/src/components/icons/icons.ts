@@ -51,6 +51,12 @@ import Stap1WinkelsMax from './assets/restrictions/stap_1-winkels_max.svg'
 import Stap1WikelsOpen from './assets/restrictions/stap_1-winkels_open.svg'
 import Stap1Avondklok from './assets/restrictions/stap-1_avondklok.svg'
 
+import testbewijs from './assets/restrictions/testbewijs.svg'
+import reizen from './assets/restrictions/reizen.svg'
+import recreatie from './assets/restrictions/recreatie.svg'
+import binnensporten from './assets/restrictions/binnensporten.svg'
+import bibliotheken from './assets/restrictions/bibliotheken.svg'
+
 export type RestrictionIcon = keyof typeof restrictionIcons;
 
 export const restrictionIcons = {
@@ -122,4 +128,8 @@ export const restrictionIcons = {
   'stap_1-winkels_max': Stap1WinkelsMax,
   'stap_1-winkels_open': Stap1WikelsOpen,
   'stap-1_avondklok': Stap1Avondklok,
+  reizen,
+  recreatie,
+  binnensporten,
+  bibliotheken,
 } as const;
