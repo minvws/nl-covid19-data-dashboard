@@ -13,7 +13,7 @@ import {
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 
-interface BehaviorFormatted {
+export interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
   percentage: number;

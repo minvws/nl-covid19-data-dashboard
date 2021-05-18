@@ -62,7 +62,11 @@ const BehaviorPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         {featureBehaviorPage.isEnabled ? (
-          <BehaviorPageNational data={data} content={content} />
+          <BehaviorPageNational
+            data={data}
+            content={content}
+            behaviorData={choropleth.vr.behavior}
+          />
         ) : (
           <TileList>
             <ContentHeader

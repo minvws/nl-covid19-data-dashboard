@@ -8,14 +8,19 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { BehaviorChoropleth } from '~/domain/behavior/behavior-choropleth';
+// import { Select } from '~/components/select';
+import { RegionsBehavior } from '@corona-dashboard/common';
 interface BehaviourPageNationalProps {
   data: any;
   content: any;
+  behaviorData: RegionsBehavior[];
 }
 
 export function BehaviorPageNational({
   data,
   content,
+  behaviorData,
 }: BehaviourPageNationalProps) {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -28,6 +33,12 @@ export function BehaviorPageNational({
 
   return (
     <TileList>
+      <BehaviorChoropleth
+        title={nl_gedrag.verdeling_in_nederland.titel}
+        description={nl_gedrag.verdeling_in_nederland.intro}
+        data={behaviorData}
+      />
+
       <ContentHeader
         category={siteText.nationaal_layout.headings.gedrag}
         title={nl_gedrag.pagina.titel}
