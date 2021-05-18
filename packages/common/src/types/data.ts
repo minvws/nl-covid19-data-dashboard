@@ -189,6 +189,7 @@ export interface National {
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock: NlVaccineStock;
+  situations?: NlSituations;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -813,6 +814,39 @@ export interface NlVaccineStockValue {
   date_of_insertion_unix: number;
   date_unix: number;
 }
+export interface NlSituations {
+  values: NlSituationsValue[];
+  last_value: NlSituationsValue;
+}
+export interface NlSituationsValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  regions_with_sufficient_responses_total: number;
+  situation_known_percentage?: number;
+  home: number | null;
+  visit: number | null;
+  work: number | null;
+  school_and_day_care: number | null;
+  doctor: number | null;
+  hospital: number | null;
+  other_health_care: number | null;
+  nursing_home: number | null;
+  residential_care_disabled: number | null;
+  residential_care_other: number | null;
+  day_care_elderly_disabled: number | null;
+  day_care_other: number | null;
+  hospice: number | null;
+  social_gathering: number | null;
+  travel: number | null;
+  flight: number | null;
+  hospitality: number | null;
+  student_activity: number | null;
+  leisure: number | null;
+  religious_activity: number | null;
+  choir: number | null;
+  funeral: number | null;
+  other: number | null;
+}
 
 export interface Regionaal {
   last_generated: string;
@@ -837,6 +871,7 @@ export interface Regionaal {
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
+  situations?: VrSituations;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -1115,6 +1150,42 @@ export interface VrVaccineCoverageValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface VrSituations {
+  values: VrSituationsValue[];
+  last_value: VrSituationsValue;
+}
+export interface VrSituationsValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  vrcode: string;
+  has_sufficient_responses: boolean;
+  situations_known_percentage: number;
+  situations_known_total: number;
+  investigations_total: number;
+  home: number | null;
+  visit: number | null;
+  work: number | null;
+  school_and_day_care: number | null;
+  doctor: number | null;
+  hospital: number | null;
+  other_health_care: number | null;
+  nursing_home: number | null;
+  residential_care_disabled: number | null;
+  residential_care_other: number | null;
+  day_care_elderly_disabled: number | null;
+  day_care_other: number | null;
+  hospice: number | null;
+  social_gathering: number | null;
+  travel: number | null;
+  flight: number | null;
+  hospitality: number | null;
+  student_activity: number | null;
+  leisure: number | null;
+  religious_activity: number | null;
+  choir: number | null;
+  funeral: number | null;
+  other: number | null;
+}
 
 export interface Regions {
   last_generated: string;
@@ -1129,6 +1200,7 @@ export interface Regions {
   behavior: RegionsBehavior[];
   disability_care: RegionsDisabilityCare[];
   elderly_at_home: RegionsElderlyAtHome[];
+  situations?: VrCollectionSituations[];
 }
 export interface RegionsHospitalNice {
   date_unix: number;
@@ -1230,4 +1302,10 @@ export interface RegionsElderlyAtHome {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface VrCollectionSituations {
+  date_start_unix: number;
+  date_end_unix: number;
+  vrcode: string;
+  has_sufficient_responses: boolean;
 }
