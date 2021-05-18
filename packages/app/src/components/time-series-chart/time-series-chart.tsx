@@ -325,13 +325,11 @@ export function TimeSeriesChart<
             onHover={chartEventHandlers.handleHover}
             onFocus={chartEventHandlers.handleFocus}
             onBlur={chartEventHandlers.handleBlur}
-            defs={
-              <Patterns
-                timespanAnnotations={timespanAnnotations}
-                chartId={chartId}
-              />
-            }
           >
+            <Patterns
+              timespanAnnotations={timespanAnnotations}
+              chartId={chartId}
+            />
             <Axes
               bounds={bounds}
               numGridLines={numGridLines}

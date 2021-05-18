@@ -12,7 +12,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import { selectedDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/selected-delivery-and-administration-data';
+import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
@@ -31,7 +31,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectData,
+  getNlData,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
@@ -58,7 +58,10 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor'
   ),
-  selectData(selectedDeliveryAndAdministrationData),
+  () => {
+    const nlData = getNlData().data;
+    return selectDeliveryAndAdministrationData(nlData);
+  },
   createGetContent<{
     page: VaccinationPageQuery;
     highlight: {

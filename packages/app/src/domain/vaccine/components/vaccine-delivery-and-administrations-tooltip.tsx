@@ -10,7 +10,7 @@ import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/selected-delivery-and-administration-data';
+import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/select-delivery-and-administration-data';
 
 function isLineConfig(
   input: SeriesConfig<VaccineDeliveryAndAdministrationsValue>[number]

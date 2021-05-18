@@ -1,7 +1,7 @@
 import { assert, NlVaccineAdministeredValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { colors } from '~/style/theme';
-import { VaccineDeliveryAndAdministrationsValue } from './data-selection/selected-delivery-and-administration-data';
+import { VaccineDeliveryAndAdministrationsValue } from './data-selection/select-delivery-and-administration-data';
 
 /**
  * Beware: the order of names in this array also dictates the rendering order in

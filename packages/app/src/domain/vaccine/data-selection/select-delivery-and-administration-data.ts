@@ -1,10 +1,10 @@
 import {
+  National,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
-import { first } from 'lodash';
+import first from 'lodash/first';
 import last from 'lodash/last';
-import { getNlData } from '~/static-props/get-data';
 
 export type VaccineDeliveryAndAdministrationsValue = Optional<
   Omit<NlVaccineDeliveryValue, 'total'>,
@@ -16,10 +16,7 @@ export type DeliveryAndAdministrationData = {
   estimatedRange: [number, number];
 };
 
-export function selectedDeliveryAndAdministrationData(): {
-  deliveryAndAdministration: DeliveryAndAdministrationData;
-} {
-  const nlData = getNlData().data;
+export function selectDeliveryAndAdministrationData(nlData: National) {
   const {
     vaccine_administered,
     vaccine_administered_estimate,

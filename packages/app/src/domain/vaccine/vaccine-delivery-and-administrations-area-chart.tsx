@@ -1,4 +1,6 @@
+import { assert } from '@corona-dashboard/common';
 import { first } from 'lodash';
+import { useMemo } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { StackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
@@ -9,8 +11,23 @@ import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-d
 import {
   DeliveryAndAdministrationData,
   VaccineDeliveryAndAdministrationsValue,
-} from './data-selection/selected-delivery-and-administration-data';
-import { useVaccineNames } from './use-vaccine-names';
+} from './data-selection/select-delivery-and-administration-data';
+
+const vaccines = [
+  'pfizer',
+  'moderna',
+  'astra_zeneca',
+  'cure_vac',
+  'janssen',
+  'sanofi',
+] as (keyof Pick<
+  VaccineDeliveryAndAdministrationsValue,
+  'pfizer' | 'moderna' | 'astra_zeneca' | 'cure_vac' | 'janssen' | 'sanofi'
+>)[];
+
+vaccines.forEach((x) =>
+  assert(colors.data.vaccines[x], `missing vaccine color for vaccine ${x}`)
+);
 
 export function VaccineDeliveryAndAdministrationsAreaChart({
   data,
@@ -19,7 +36,13 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
 }) {
   const { siteText, formatNumber } = useIntl();
   const firstValue = first(data.values);
-  const vaccineNames = useVaccineNames(firstValue).reverse();
+  const vaccineNames = useMemo(
+    () =>
+      vaccines
+        .filter((x) => firstValue && firstValue[x] !== undefined)
+        .reverse(),
+    [vaccines, firstValue]
+  );
 
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;

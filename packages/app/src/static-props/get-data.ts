@@ -1,4 +1,5 @@
 import {
+  assert,
   Municipal,
   Municipalities,
   National,
@@ -158,7 +159,8 @@ export function getVrData(context: GetStaticPropsContext) {
 
 export function getVrName(code: string) {
   const safetyRegion = vrData.find((x) => x.code === code);
-  return safetyRegion?.name || '';
+  assert(safetyRegion, `Could not find safety region with code ${code}`);
+  return safetyRegion.name;
 }
 
 export function loadAndSortVrData(vrcode: string) {
@@ -214,12 +216,6 @@ export function getGmData(context: GetStaticPropsContext) {
   sortTimeSeriesInDataInPlace(data);
 
   return { data, municipalityName };
-}
-
-export function selectData<T extends (...args: any) => any>(
-  dataSelector: T
-): () => ReturnType<T> {
-  return () => dataSelector();
 }
 
 export function createGetChoroplethData<T1, T2>(settings?: {
