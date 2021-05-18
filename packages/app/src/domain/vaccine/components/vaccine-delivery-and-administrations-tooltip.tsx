@@ -9,7 +9,6 @@ import {
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
 import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/select-delivery-and-administration-data';
 
 function isLineConfig(
@@ -31,11 +30,11 @@ export function VaccineDeliveryAndAdministrationsTooltip({
   data: TooltipData<VaccineDeliveryAndAdministrationsValue>;
   estimateRange: [number, number];
 }) {
+  data.timespanAnnotation;
+
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
 
-  const isEstimate =
-    data.value.date_start_unix >= estimateRange[0] &&
-    data.value.date_end_unix <= estimateRange[1];
+  const isEstimate = data.timespanAnnotation?.type === 'hatched';
 
   const firstValue = data.value.total_delivered;
   const firstConfig = data.config
@@ -83,7 +82,7 @@ export function VaccineDeliveryAndAdministrationsTooltip({
           <TooltipListItem key={config.label}>
             <span>
               <ColorIndicator color={config.color} />
-              {formatLabel(config.shortLabel ?? config.label, siteText)}:
+              {config.shortLabel ?? config.label}:
             </span>
             <TooltipValueContainer>
               <strong>
@@ -110,13 +109,6 @@ export function VaccineDeliveryAndAdministrationsTooltip({
       </TooltipList>
     </>
   );
-}
-
-function formatLabel(labelKey: string | undefined, text: SiteText) {
-  const labelText = labelKey
-    ? (text.vaccinaties.data.vaccination_chart.product_names as any)[labelKey]
-    : undefined;
-  return labelText ?? labelKey;
 }
 
 const TooltipList = styled.ol`
