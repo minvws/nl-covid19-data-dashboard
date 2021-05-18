@@ -162,7 +162,7 @@ const ElderlyAtHomeRegionalPage = (
                 dataOptions={{
                   timespanAnnotations: [
                     {
-                      type: 'bar',
+                      type: 'solid',
                       start: elderlyAtHomeUnderReportedRange,
                       end: Infinity,
                       label:
@@ -248,7 +248,7 @@ const ElderlyAtHomeRegionalPage = (
                 dataOptions={{
                   timespanAnnotations: [
                     {
-                      type: 'bar',
+                      type: 'solid',
                       start: elderlyAtHomeDeceasedUnderReportedRange,
                       end: Infinity,
                       label:

@@ -24,7 +24,7 @@ import {
   TooltipFormatter,
 } from './components';
 import { Benchmark } from './components/benchmark';
-import { Patterns } from './components/patterns';
+import { HatchedPattern } from './components/hatched-pattern';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
@@ -326,7 +326,7 @@ export function TimeSeriesChart<
             onFocus={chartEventHandlers.handleFocus}
             onBlur={chartEventHandlers.handleBlur}
           >
-            <Patterns
+            <HatchedPattern
               timespanAnnotations={timespanAnnotations}
               chartId={chartId}
             />

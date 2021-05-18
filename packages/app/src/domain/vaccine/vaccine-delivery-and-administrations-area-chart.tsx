@@ -61,7 +61,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
           valueAnnotation: siteText.waarde_annotaties.x_miljoen,
           timespanAnnotations: [
             {
-              type: 'estimate',
+              type: 'hatched',
               start: data.estimatedRange[0],
               end: data.estimatedRange[1],
               label:

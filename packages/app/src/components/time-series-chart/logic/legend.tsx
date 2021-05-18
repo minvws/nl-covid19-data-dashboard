@@ -40,9 +40,12 @@ export function useLegendItems<T extends TimestampedValue>(
           items.push({
             label: annotation.label,
             shape: 'custom',
-            shapeComponent: annotation.shapeComponent ?? (
-              <TimespanAnnotationIcon />
-            ),
+            shapeComponent:
+              annotation.type === 'hatched' && annotation.shapeComponent ? (
+                annotation.shapeComponent
+              ) : (
+                <TimespanAnnotationIcon />
+              ),
           } as LegendItem);
         }
       }

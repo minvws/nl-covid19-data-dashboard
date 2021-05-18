@@ -46,7 +46,7 @@ export function TimespanAnnotation({
   if (width <= 0) return null;
 
   switch (config.type) {
-    case 'bar':
+    case 'solid':
       return (
         <Bar
           pointerEvents="none"
@@ -58,7 +58,7 @@ export function TimespanAnnotation({
           style={{ mixBlendMode: 'multiply' }}
         />
       );
-    case 'estimate':
+    case 'hatched':
       return (
         <>
           <Bar
@@ -66,7 +66,7 @@ export function TimespanAnnotation({
             height={height}
             x={x0}
             width={width}
-            fill={`url(#${chartId}_estimate_pattern)`}
+            fill={`url(#${chartId}_hatched_pattern)`}
           />
           <Group>
             <Text

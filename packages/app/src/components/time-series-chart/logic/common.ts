@@ -15,16 +15,15 @@ export interface BenchmarkConfig {
 
 export type TimespanAnnotationConfig =
   | {
-      type: 'bar';
+      type: 'solid';
       start: number;
       end: number;
       label: string;
       shortLabel?: string;
       cutValuesForMetricProperties?: string[];
-      shapeComponent?: ReactNode;
     }
   | {
-      type: 'estimate';
+      type: 'hatched';
       start: number;
       end: number;
       label: string;

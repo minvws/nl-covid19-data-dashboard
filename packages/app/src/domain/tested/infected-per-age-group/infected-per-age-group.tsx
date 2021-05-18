@@ -108,7 +108,7 @@ export function InfectedPerAgeGroup({
         dataOptions={{
           timespanAnnotations: [
             {
-              type: 'bar',
+              type: 'solid',
               start: underReportedDateStart,
               end: Infinity,
               label: text.line_chart_legend_inaccurate_label,
