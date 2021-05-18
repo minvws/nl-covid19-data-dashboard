@@ -175,7 +175,7 @@ export interface National {
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
-  vaccinated_or_vaccine_support: NlVaccinatedOrVaccineSupport;
+  vaccine_vaccinated_or_support: NlVaccineVaccinatedOrSupport;
   corona_melder_app: NlCoronaMelderApp;
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
@@ -485,8 +485,8 @@ export interface NationalBehaviorValue {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_if_necessary_compliance?: number | null;
-  symptoms_stay_home_if_necessary_compliance_trend?: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_if_mandatory_compliance?: number | null;
+  symptoms_stay_home_if_mandatory_compliance_trend?: ("up" | "down" | "equal") | null;
   symptoms_get_tested_compliance?: number | null;
   symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
@@ -507,8 +507,8 @@ export interface NationalBehaviorValue {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_if_necessary_support?: number | null;
-  symptoms_stay_home_if_necessary_support_trend?: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_if_mandatory_support?: number | null;
+  symptoms_stay_home_if_mandatory_support_trend?: ("up" | "down" | "equal") | null;
   symptoms_get_tested_support?: number | null;
   symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
@@ -614,11 +614,11 @@ export interface NationalElderlyAtHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccinatedOrVaccineSupport {
-  values: NlVaccinatedOrVaccineSupportValue[];
-  last_value: NlVaccinatedOrVaccineSupportValue;
+export interface NlVaccineVaccinatedOrSupport {
+  values: NlVaccineVaccinatedOrSupportValue[];
+  last_value: NlVaccineVaccinatedOrSupportValue;
 }
-export interface NlVaccinatedOrVaccineSupportValue {
+export interface NlVaccineVaccinatedOrSupportValue {
   percentage_average: number;
   percentage_70_plus: number | null;
   percentage_55_69: number | null;
