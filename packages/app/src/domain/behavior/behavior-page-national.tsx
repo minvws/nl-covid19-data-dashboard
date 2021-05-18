@@ -6,9 +6,9 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
+import { BehaviorTable } from '~/domain/behavior/behavior-table';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { BehaviorTable } from '~/domain/behavior/behavior-table';
 
 interface BehaviourPageNationalProps {
   data: any;
@@ -30,11 +30,6 @@ export function BehaviorPageNational({
 
   return (
     <TileList>
-      <BehaviorTable
-        sortedCompliance={sortedCompliance}
-        sortedSupport={sortedSupport}
-      />
-
       <ContentHeader
         category={siteText.nationaal_layout.headings.gedrag}
         title={nl_gedrag.pagina.titel}
@@ -110,6 +105,16 @@ export function BehaviorPageNational({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <BehaviorTable
+        title={nl_gedrag.basisregels.title}
+        description={nl_gedrag.basisregels.description}
+        complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}
+        supportExplanation={nl_gedrag.basisregels.steunen_beschrijving}
+        sortedCompliance={sortedCompliance}
+        sortedSupport={sortedSupport}
+        annotation={nl_gedrag.basisregels.annotatie}
+      />
     </TileList>
   );
 }

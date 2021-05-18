@@ -27,9 +27,10 @@ const icons: Record<BehaviorIdentifier, typeof curfew> = {
 
 interface BehaviorIconProps {
   name: BehaviorIdentifier;
+  size?: number;
 }
 
-export function BehaviorIcon({ name }: BehaviorIconProps) {
+export function BehaviorIcon({ name, size = 32 }: BehaviorIconProps) {
   const Icon = icons[name];
-  return <Icon width={32} height={32} />;
+  return <Icon width={size} height={size} />;
 }
