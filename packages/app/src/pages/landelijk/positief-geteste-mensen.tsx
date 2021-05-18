@@ -90,7 +90,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
   const dataGgdDailyLastValue = data.tested_ggd_daily.last_value;
-  const differences = data.difference;
+  const difference = data.difference;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -132,7 +132,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 data-cy="infected"
                 absolute={dataOverallLastValue.infected}
-                difference={differences.tested_overall__infected_moving_average}
+                difference={difference.tested_overall__infected_moving_average}
                 isMovingAverageDifference
               />
 
@@ -357,7 +357,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="ggd_tested_total"
                 absolute={dataGgdDailyLastValue.tested_total}
                 difference={
-                  differences.tested_ggd_average__tested_total_moving_average
+                  difference.tested_ggd_average__tested_total_moving_average
                 }
                 isMovingAverageDifference
               />
@@ -374,7 +374,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="ggd_infected"
                 percentage={dataGgdDailyLastValue.infected_percentage}
                 difference={
-                  differences.tested_ggd_average__infected_percentage_moving_average
+                  difference.tested_ggd_average__infected_percentage_moving_average
                 }
                 isMovingAverageDifference
               />
