@@ -485,8 +485,8 @@ export interface NationalBehaviorValue {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_compliance?: number | null;
-  symptoms_stay_home_compliance_trend?: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_if_necessary_compliance?: number | null;
+  symptoms_stay_home_if_necessary_compliance_trend?: ("up" | "down" | "equal") | null;
   symptoms_get_tested_compliance?: number | null;
   symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
@@ -507,8 +507,8 @@ export interface NationalBehaviorValue {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_support?: number | null;
-  symptoms_stay_home_support_trend?: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_if_necessary_support?: number | null;
+  symptoms_stay_home_if_necessary_support_trend?: ("up" | "down" | "equal") | null;
   symptoms_get_tested_support?: number | null;
   symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
