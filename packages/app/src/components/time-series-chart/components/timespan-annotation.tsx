@@ -1,7 +1,6 @@
 import { Group } from '@visx/group';
 import { Bar, Line } from '@visx/shape';
 import { Text } from '@visx/text';
-import { useIntl } from '~/intl';
 import theme, { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { GetX, TimespanAnnotationConfig } from '../logic';
@@ -25,7 +24,6 @@ export function TimespanAnnotation({
   const { start, end } = config;
 
   const breakpoints = useBreakpoints(true);
-  const { siteText } = useIntl();
 
   /**
    * Clip the start / end dates to the domain of the x-axis, so that we can
