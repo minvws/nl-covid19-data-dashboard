@@ -58,10 +58,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor'
   ),
-  () => {
-    const nlData = getNlData().data;
-    return selectDeliveryAndAdministrationData(nlData);
-  },
+  () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
     page: VaccinationPageQuery;
     highlight: {
