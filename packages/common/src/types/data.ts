@@ -175,7 +175,7 @@ export interface National {
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
-  vaccine_support: NlVaccineSupport;
+  vaccinated_or_vaccine_support: NlVaccinatedOrVaccineSupport;
   corona_melder_app: NlCoronaMelderApp;
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
@@ -614,11 +614,11 @@ export interface NationalElderlyAtHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineSupport {
-  values: NlVaccineSupportValue[];
-  last_value: NlVaccineSupportValue;
+export interface NlVaccinatedOrVaccineSupport {
+  values: NlVaccinatedOrVaccineSupportValue[];
+  last_value: NlVaccinatedOrVaccineSupportValue;
 }
-export interface NlVaccineSupportValue {
+export interface NlVaccinatedOrVaccineSupportValue {
   percentage_average: number;
   percentage_70_plus: number | null;
   percentage_55_69: number | null;
