@@ -26,7 +26,7 @@
         "date_end_unix": {
           "type": "integer"
         },
-        "complete_data_count": {
+        "regions_with_sufficient_responses_total": {
           "type": "integer"
         },
         "situation_known_percentage": {
@@ -41,16 +41,16 @@
         "work": {
           "type": ["number", "null"]
         },
-        "school_daycare": {
+        "school_and_day_care": {
           "type": ["number", "null"]
         },
-        "general_practitioner": {
+        "doctor": {
           "type": ["number", "null"]
         },
         "hospital": {
           "type": ["number", "null"]
         },
-        "health_care_other": {
+        "other_health_care": {
           "type": ["number", "null"]
         },
         "nursing_home": {
@@ -62,16 +62,16 @@
         "residential_care_other": {
           "type": ["number", "null"]
         },
-        "daycare_elderly_disabled": {
+        "day_care_elderly_disabled": {
           "type": ["number", "null"]
         },
-        "daycare_other": {
+        "day_care_other": {
           "type": ["number", "null"]
         },
         "hospice": {
           "type": ["number", "null"]
         },
-        "gathering": {
+        "social_gathering": {
           "type": ["number", "null"]
         },
         "travel": {
@@ -105,22 +105,22 @@
       "required": [
         "date_start_unix",
         "date_end_unix",
-        "complete_data_count",
-        "situation_known_percentage",
+        "regions_with_sufficient_responses_total",
+        "situations_known_percentage",
         "home",
         "visit",
         "work",
-        "school_daycare",
-        "general_practitioner",
+        "school_and_day_care",
+        "doctor",
         "hospital",
-        "health_care_other",
+        "other_health_care",
         "nursing_home",
         "residential_care_disabled",
         "residential_care_other",
-        "daycare_elderly_disabled",
-        "daycare_other",
+        "day_care_elderly_disabled",
+        "day_care_other",
         "hospice",
-        "gathering",
+        "social_gathering",
         "travel",
         "flight",
         "hospitality",

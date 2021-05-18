@@ -33,16 +33,16 @@
           "type": "string",
           "equalsRootProperty": "code"
         },
-        "complete_data": {
+        "has_sufficient_responses": {
           "type": "boolean"
         },
-        "situation_known_percentage": {
+        "situations_known_percentage": {
           "type": "number"
         },
-        "situation_known_count": {
+        "situations_known_total": {
           "type": "integer"
         },
-        "investigations_count": {
+        "investigations_total": {
           "type": "integer"
         },
         "home": {
@@ -54,16 +54,16 @@
         "work": {
           "type": ["number", "null"]
         },
-        "school_daycare": {
+        "school_and_day_care": {
           "type": ["number", "null"]
         },
-        "general_practitioner": {
+        "doctor": {
           "type": ["number", "null"]
         },
         "hospital": {
           "type": ["number", "null"]
         },
-        "health_care_other": {
+        "other_health_care": {
           "type": ["number", "null"]
         },
         "nursing_home": {
@@ -75,16 +75,16 @@
         "residential_care_other": {
           "type": ["number", "null"]
         },
-        "daycare_elderly_disabled": {
+        "day_care_elderly_disabled": {
           "type": ["number", "null"]
         },
-        "daycare_other": {
+        "day_care_other": {
           "type": ["number", "null"]
         },
         "hospice": {
           "type": ["number", "null"]
         },
-        "gathering": {
+        "social_gathering": {
           "type": ["number", "null"]
         },
         "travel": {
@@ -119,24 +119,24 @@
         "date_start_unix",
         "date_end_unix",
         "vrcode",
-        "complete_data",
-        "situation_known_percentage",
-        "situation_known_count",
-        "investigations_count",
+        "has_sufficient_responses",
+        "situations_known_percentage",
+        "situations_known_total",
+        "investigations_total",
         "home",
         "visit",
         "work",
-        "school_daycare",
-        "general_practitioner",
+        "school_and_day_care",
+        "doctor",
         "hospital",
-        "health_care_other",
+        "other_health_care",
         "nursing_home",
         "residential_care_disabled",
         "residential_care_other",
-        "daycare_elderly_disabled",
-        "daycare_other",
+        "day_care_elderly_disabled",
+        "day_care_other",
         "hospice",
-        "gathering",
+        "social_gathering",
         "travel",
         "flight",
         "hospitality",
