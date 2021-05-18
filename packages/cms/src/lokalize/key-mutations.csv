@@ -57,6 +57,11 @@ timestamp,action,key
 2021-05-11T15:32:10.103Z,add,over_risiconiveaus.scoreboard.current_level.header_positive_tests.subtitle
 2021-05-11T15:32:39.015Z,add,over_risiconiveaus.scoreboard.current_level.header_hospital_admissions.title
 2021-05-11T15:33:10.582Z,add,over_risiconiveaus.scoreboard.current_level.header_hospital_admissions.subtitle
+2021-05-13T12:53:21.451Z,add,aljsdf.alds
+2021-05-13T12:53:57.581Z,add,aljsdf.aldsadf
+2021-05-13T13:28:09.646Z,add,aljsdf.aldsf
+2021-05-13T13:54:57.322Z,delete,aljsdf.alds
+2021-05-13T13:56:12.988Z,delete,aljsdf.aldsadf
 2021-05-17T11:46:06.284Z,delete,accessibility.grafieken.gehandicaptenzorg_besmette_locaties
 2021-05-17T11:46:06.285Z,delete,accessibility.grafieken.gehandicaptenzorg_overleden
 2021-05-17T11:46:06.285Z,delete,accessibility.grafieken.gehandicaptenzorg_positief_getest

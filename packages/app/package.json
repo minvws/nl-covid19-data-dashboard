@@ -41,7 +41,7 @@
     "geometric": "^2.2.6",
     "lodash": "^4.17.20",
     "match-sorter": "^6.2.0",
-    "next": "10.0.8",
+    "next": "^10.2.0",
     "polished": "^4.1.0",
     "proxy-polyfill": "^0.3.2",
     "react": "^17.0.1",
@@ -59,8 +59,8 @@
     "use-resize-observer": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
     "@next/bundle-analyzer": "^10.0.6",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -112,7 +112,7 @@
     "react-refresh": "^0.9.0",
     "start-server-and-test": "^1.12.0",
     "ts-jest": "^26.5.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.2.4"
   },
   "lint-staged": {
     "*.@(ts|tsx)": [

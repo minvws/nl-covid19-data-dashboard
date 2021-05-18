@@ -4,8 +4,8 @@ import { color } from 'styled-system';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import {
-  DifferenceIndicator,
-  MovingAverageDifferenceIndicator,
+  TileAverageDifference,
+  TileDifference,
 } from '~/components/difference-indicator';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
@@ -80,9 +80,9 @@ export function KpiValue({
 
       {isDefined(difference) &&
         (isMovingAverageDifference ? (
-          <MovingAverageDifferenceIndicator differenceValue={difference} />
+          <TileAverageDifference value={difference} />
         ) : (
-          <DifferenceIndicator
+          <TileDifference
             value={difference}
             staticTimespan={differenceStaticTimespan}
           />

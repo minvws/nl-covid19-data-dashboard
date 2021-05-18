@@ -29,6 +29,9 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
+    "population_count": {
+      "type": "integer"
+    },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"
     },

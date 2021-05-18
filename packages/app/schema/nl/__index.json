@@ -63,6 +63,9 @@
       "type": "string",
       "const": { "$data": "1/proto_name" }
     },
+    "population_count": {
+      "type": "integer"
+    },
     "difference": {
       "$ref": "__difference.json"
     },
@@ -125,6 +128,9 @@
     },
     "behavior_per_age_group": {
       "$ref": "behavior_per_age_group.json"
+    },
+    "behavior_get_tested_support_per_age_group": {
+      "$ref": "behavior_get_tested_support_per_age_group.json"
     },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"

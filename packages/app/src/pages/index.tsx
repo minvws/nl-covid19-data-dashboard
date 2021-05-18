@@ -145,7 +145,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
-                    differenceTexts={
+                    differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
@@ -165,7 +165,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty="admissions_on_date_of_reporting"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceTexts={
+                    differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
