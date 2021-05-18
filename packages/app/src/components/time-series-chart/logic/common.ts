@@ -13,17 +13,27 @@ export interface BenchmarkConfig {
   label?: string;
 }
 
-export type TimespanAnnotationConfigType = 'estimate' | 'bar';
-
-export interface TimespanAnnotationConfig {
-  type: TimespanAnnotationConfigType;
-  start: number;
-  end: number;
-  label: string;
-  shortLabel?: string;
-  cutValuesForMetricProperties?: string[];
-  shapeComponent?: ReactNode;
-}
+export type TimespanAnnotationConfig =
+  | {
+      type: 'bar';
+      start: number;
+      end: number;
+      label: string;
+      shortLabel?: string;
+      cutValuesForMetricProperties?: string[];
+      shapeComponent?: ReactNode;
+    }
+  | {
+      type: 'estimate';
+      start: number;
+      end: number;
+      label: string;
+      shortLabel?: string;
+      cutValuesForMetricProperties?: string[];
+      shapeComponent?: ReactNode;
+      leftLabel: string;
+      rightLabel: string;
+    };
 
 /**
  * @TODO find a more common place for this.

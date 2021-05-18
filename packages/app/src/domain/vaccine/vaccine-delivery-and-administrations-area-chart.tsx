@@ -44,6 +44,10 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
               label:
                 siteText.vaccinaties.data.vaccination_chart.legend.expected,
               shapeComponent: <HatchedSquare />,
+              leftLabel:
+                siteText.vaccinaties.data.vaccination_chart.left_divider_label,
+              rightLabel:
+                siteText.vaccinaties.data.vaccination_chart.right_divider_label,
             },
           ],
         }}

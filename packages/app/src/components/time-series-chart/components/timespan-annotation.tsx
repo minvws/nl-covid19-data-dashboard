@@ -4,28 +4,25 @@ import { Text } from '@visx/text';
 import { useIntl } from '~/intl';
 import theme, { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { GetX, TimespanAnnotationConfigType } from '../logic';
+import { GetX, TimespanAnnotationConfig } from '../logic';
 
 const DEFAULT_COLOR = colors.data.underReported;
 
 export function TimespanAnnotation({
-  start,
-  end,
   domain,
   getX,
   height,
-  type,
   chartId,
+  config,
 }: {
-  start: number;
-  end: number;
   domain: [number, number];
   height: number;
   getX: GetX;
-  type: TimespanAnnotationConfigType;
   chartId: string;
+  config: TimespanAnnotationConfig;
 }) {
   const [min, max] = domain;
+  const { start, end } = config;
 
   const breakpoints = useBreakpoints(true);
   const { siteText } = useIntl();
@@ -50,7 +47,7 @@ export function TimespanAnnotation({
 
   if (width <= 0) return null;
 
-  switch (type) {
+  switch (config.type) {
     case 'bar':
       return (
         <Bar
@@ -81,7 +78,7 @@ export function TimespanAnnotation({
               textAnchor="end"
               fill="grey"
             >
-              {siteText.vaccinaties.data.vaccination_chart.left_divider_label}
+              {config.leftLabel}
             </Text>
             <Text
               fontSize={fontSize}
@@ -90,7 +87,7 @@ export function TimespanAnnotation({
               textAnchor="start"
               fill="grey"
             >
-              {siteText.vaccinaties.data.vaccination_chart.right_divider_label}
+              {config.rightLabel}
             </Text>
 
             <Line

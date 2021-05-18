@@ -387,12 +387,10 @@ export function TimeSeriesChart<
               <TimespanAnnotation
                 chartId={chartId}
                 key={index}
-                start={x.start}
-                end={x.end}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
                 height={bounds.height}
-                type={x.type}
+                config={x}
               />
             ))}
           </ChartContainer>
