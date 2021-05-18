@@ -50,4 +50,9 @@ export const restrictionIcons: Record<string, string | null> = {
   'stap_1-winkels_max': 'stap_1-winkels_max.svg',
   'stap_1-winkels_open': 'stap_1-winkels_open.svg',
   'stap-1_avondklok': 'stap-1_avondklok.svg',
+  testbewijs: 'testbewijs.svg',
+  reizen: 'reizen.svg',
+  recreatie: 'recreatie.svg',
+  binnensporten: 'binnensporten.svg',
+  bibliotheken: 'bibliotheken.svg',
 };
