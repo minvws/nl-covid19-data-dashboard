@@ -37,11 +37,11 @@ export function BehaviorLineChartTile({
        */
       const complianceHasEnoughData =
         (values as NationalBehaviorValue[])
-          .map((x) => x[`${id}_compliance`])
+          .map((x) => x[`${id}_compliance` as keyof NationalBehaviorValue])
           .filter(isPresent).length > 1;
       const supportHasEnoughData =
         (values as NationalBehaviorValue[])
-          .map((x) => x[`${id}_support`])
+          .map((x) => x[`${id}_support` as keyof NationalBehaviorValue])
           .filter(isPresent).length > 1;
 
       return complianceHasEnoughData || supportHasEnoughData
