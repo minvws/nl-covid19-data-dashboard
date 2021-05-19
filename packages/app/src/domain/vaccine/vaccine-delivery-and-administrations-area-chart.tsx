@@ -108,7 +108,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
             label: replaceVariablesInText(
               siteText.vaccinaties.data.vaccination_chart.legend_label,
               {
-                name: (productNames as Record<string, string>)[x],
+                name: productNames[x],
               }
             ),
             shortLabel: productNames[x],
