@@ -47,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(
     'vaccine_stock',
     'vaccine_delivery_per_supplier',
-    'vaccine_support',
+    'vaccine_vaccinated_or_support',
     'vaccine_administered_total',
     'vaccine_administered_planned',
     'vaccine_administered_rate_moving_average',
@@ -143,9 +143,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: text.bereidheid_datums,
               dateOrRange:
-                data.vaccine_support.last_value.date_of_insertion_unix,
+                data.vaccine_vaccinated_or_support.last_value
+                  .date_of_insertion_unix,
               dateOfInsertionUnix:
-                data.vaccine_support.last_value.date_of_insertion_unix,
+                data.vaccine_vaccinated_or_support.last_value
+                  .date_of_insertion_unix,
               dataSources: [],
             }}
           />
@@ -156,22 +158,25 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{
               datumsText: siteText.vaccinaties.grafiek_draagvlak.metadata_tekst,
               date: [
-                data.vaccine_support.last_value.date_start_unix,
-                data.vaccine_support.last_value.date_end_unix,
+                data.vaccine_vaccinated_or_support.last_value.date_start_unix,
+                data.vaccine_vaccinated_or_support.last_value.date_end_unix,
               ],
             }}
           >
             <section>
               <KpiValue
-                percentage={data.vaccine_support.last_value.percentage_average}
+                percentage={
+                  data.vaccine_vaccinated_or_support.last_value
+                    .percentage_average
+                }
               />
               <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
             </section>
 
             <TimeSeriesChart
               tooltipTitle={text.grafiek_draagvlak.titel}
-              ariaLabelledBy="chart_vaccine_support"
-              values={data.vaccine_support.values}
+              ariaLabelledBy="chart_vaccine_vaccinated_or_support"
+              values={data.vaccine_vaccinated_or_support.values}
               numGridLines={20}
               tickValues={[0, 25, 50, 75, 100]}
               dataOptions={{

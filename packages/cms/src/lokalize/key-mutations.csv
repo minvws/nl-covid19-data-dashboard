@@ -586,3 +586,7 @@ timestamp,action,key
 2021-05-17T11:46:06.331Z,delete,ziekenhuisopnames_per_dag.chloropleth_legenda.geen_meldingen
 2021-05-17T11:46:06.331Z,delete,ziekenhuisopnames_per_dag.tijdelijk_onbeschikbaar
 2021-05-17T11:46:06.332Z,delete,ziekenhuisopnames_per_dag.tijdelijk_onbeschikbaar_titel
+2021-05-18T09:18:05.608Z,add,gedrag_onderwerpen.symptoms_stay_home_if_mandatory
+2021-05-18T09:19:53.053Z,delete,gedrag_onderwerpen.symptoms_stay_home
+2021-05-18T12:30:34.009Z,delete,gedrag_onderwerpen.symptoms_stay_home_if_necessary
+2021-05-18T12:31:34.675Z,add,gedrag_onderwerpen.symptoms_stay_home_if_mandatory
