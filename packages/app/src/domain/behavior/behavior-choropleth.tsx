@@ -1,11 +1,23 @@
 import { Box } from '~/components/base';
 import { Tile } from '~/components/tile';
 import { Text, Heading } from '~/components/typography';
-// import { Select } from '~/components/select';
-// import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { RegionsBehavior } from '@corona-dashboard/common';
-import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
+import { useEffect, useState } from 'react';
+import {
+  RegionsBehavior,
+  SafetyRegionProperties,
+} from '@corona-dashboard/common';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import css from '@styled-system/css';
+import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
+import { ChoroplethLegenda } from '~/components/choropleth-legenda';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 
+const blacklistedItems = [
+  'symptoms_get_tested',
+  'symptoms_stay_home',
+  'wear_mask_public_transport',
+];
 interface BehaviorChoroplethProps {
   title: string;
   description: string;
@@ -16,24 +28,17 @@ export function BehaviorChoropleth({
   title,
   description,
   data,
+  sorted,
 }: BehaviorChoroplethProps) {
-  const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(data[0]);
+  const [currentMetric, setCurrentMetric] = useState(sorted[4]);
+  const [isMetricAvaliable, setIsMetricAvaliable] = useState(true);
 
-  console.log(sortedCompliance);
+  const changeMetric = (newMetric) =>
+    setCurrentMetric(sorted.find((x) => x.id === newMetric));
 
-  // const filteredCompliance = data.behavior.map((vrRegion, index) => {
-  //   const { sortedCompliance } = test(vrRegion);
-  //   return sortedCompliance;
-  // });
-
-  // console.log(test);
-  // console.log(sortedCompliance, sortedSupport);
-
-  // const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(
-  //   behaviorData[0]
-  // );
-
-  // const testmappie = console.log(sortedCompliance, sortedSupport);
+  useEffect(() => {
+    setIsMetricAvaliable(!blacklistedItems.includes(currentMetric.id));
+  }, [currentMetric]);
 
   return (
     <Tile>
@@ -41,31 +46,101 @@ export function BehaviorChoropleth({
       <Box maxWidth="maxWidthText">
         <Text>{description}</Text>
       </Box>
-      {/* <Select
-        value={currentId}
-        onChange={setCurrentId}
-        options={behaviorIdentifiers
-          .filter((id) =>
-            // filter the dropdown to only show behaviors with data
-            data.behavior.find((data) => {
-              const key = `${id}_${type}` as keyof RegionsBehavior;
-              return typeof data[key] === 'number';
-            })
-          )
-          .map((id) => ({
-            value: id,
-            label: siteText.gedrag_onderwerpen[id],
-          }))}
-      /> */}
+      <form>
+        <select
+          onChange={(event) => changeMetric(event.target.value)}
+          value={currentMetric.description}
+        >
+          <option key={'empty'} value={'empty'}>
+            empty
+          </option>
+          {sorted.map((item: any) => (
+            <option key={item.id} value={item.id}>
+              {item.description}
+            </option>
+          ))}
+        </select>
+      </form>
+
       <Box display="flex" flexWrap="wrap">
-        <Box pr={{ lg: 3 }} width={{ _: '100%', lg: '50%' }}>
-          <p>Hier komt een mapie</p>
-          {/* <SafetyRegionChoropleth /> */}
-        </Box>
-        <Box pl={{ lg: 3 }} width={{ _: '100%', lg: '50%' }}>
-          <p>Hier komt een mapie</p>
-        </Box>
+        <ChoroplethBlock
+          data={{ behavior_compliance: data }}
+          metricName="compliance"
+          currentMetric={currentMetric}
+          isMetricAvaliable={isMetricAvaliable}
+          title="Naleving van de regels"
+          threshold={regionThresholds.behavior_compliance}
+        />
+        <ChoroplethBlock
+          data={{ behavior_support: data }}
+          metricName="support"
+          currentMetric={currentMetric}
+          isMetricAvaliable={isMetricAvaliable}
+          title="Draagvlak van de regels"
+          threshold={regionThresholds.behavior_support}
+        />
       </Box>
     </Tile>
+  );
+}
+
+function ChoroplethBlock({
+  data,
+  metricName,
+  currentMetric,
+  isMetricAvaliable,
+  title,
+  threshold,
+}) {
+  const reverseRouter = useReverseRouter();
+
+  return (
+    <Box width={{ _: '100%', lg: '50%' }}>
+      <Heading level={4} textAlign="center">
+        {title}
+      </Heading>
+      <Box position="relative">
+        {!isMetricAvaliable && (
+          <Box
+            position="absolute"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            top={0}
+            width="100%"
+            height="100%"
+            css={css({ zIndex: 9 })}
+          >
+            <Text textAlign="center" m={0} css={css({ maxWidth: '300px' })}>
+              Op dit moment is er geen data beschikbaar voor deze basisregel per
+              regio
+            </Text>
+          </Box>
+        )}
+        <SafetyRegionChoropleth
+          data={data}
+          getLink={reverseRouter.vr.gedrag}
+          metricName={`behavior_${metricName}`}
+          metricProperty={`${currentMetric.id}_${metricName}`}
+          minHeight={400}
+          tooltipContent={(
+            context: RegionsBehavior & SafetyRegionProperties
+          ) => {
+            const currentComplianceValue = `${currentMetric.id}_compliance` as keyof RegionsBehavior;
+            const currentSupportValue = `${currentMetric.id}_support` as keyof RegionsBehavior;
+
+            return (
+              <BehaviorTooltip
+                context={context}
+                currentMetric={currentMetric}
+                currentComplianceValue={context[currentComplianceValue]}
+                currentSupportValue={context[currentSupportValue]}
+              />
+            );
+          }}
+        />
+      </Box>
+      <ChoroplethLegenda thresholds={threshold} title={'Percentage'} />
+    </Box>
   );
 }

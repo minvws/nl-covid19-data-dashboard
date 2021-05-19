@@ -37,6 +37,7 @@ export function BehaviorPageNational({
         title={nl_gedrag.verdeling_in_nederland.titel}
         description={nl_gedrag.verdeling_in_nederland.intro}
         data={behaviorData}
+        sorted={sortedCompliance}
       />
 
       <ContentHeader
