@@ -27,10 +27,6 @@ export function BehaviorLineChartTile({
   const { siteText } = useIntl();
   const chartText = siteText.gedrag_common.line_chart;
 
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
-  const selectedComplianceValueKey = `${currentId}_compliance` as keyof NationalBehaviorValue;
-  const selectedSupportValueKey = `${currentId}_support` as keyof NationalBehaviorValue;
-
   const behaviorIdentifierWithData = behaviorIdentifiers
     .map((id) => {
       const label = siteText.gedrag_onderwerpen[id];
@@ -41,11 +37,11 @@ export function BehaviorLineChartTile({
        */
       const complianceHasEnoughData =
         (values as NationalBehaviorValue[])
-          .map((x) => x[selectedComplianceValueKey])
+          .map((x) => x[`${id}_compliance`])
           .filter(isPresent).length > 1;
       const supportHasEnoughData =
         (values as NationalBehaviorValue[])
-          .map((x) => x[selectedSupportValueKey])
+          .map((x) => x[`${id}_support`])
           .filter(isPresent).length > 1;
 
       return complianceHasEnoughData || supportHasEnoughData
@@ -56,6 +52,12 @@ export function BehaviorLineChartTile({
         : undefined;
     })
     .filter(isPresent);
+
+  const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
+    behaviorIdentifierWithData[0].id
+  );
+  const selectedComplianceValueKey = `${currentId}_compliance` as keyof NationalBehaviorValue;
+  const selectedSupportValueKey = `${currentId}_support` as keyof NationalBehaviorValue;
 
   return (
     <ChartTile title={chartText.title} metadata={metadata}>
