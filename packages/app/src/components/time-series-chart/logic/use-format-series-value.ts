@@ -10,6 +10,7 @@ export function useFormatSeriesValue() {
   return useMemo(() => {
     const getValueString = (value: unknown, isPercentage?: boolean) => {
       const numberValue = value as number | null;
+
       return isPresent(numberValue)
         ? isPercentage
           ? `${intl.formatPercentage(numberValue)}%`
@@ -35,6 +36,7 @@ export function useFormatSeriesValue() {
     ) {
       switch (config.type) {
         case 'line':
+        case 'split-line':
         case 'area':
         case 'bar':
         case 'stacked-area':
