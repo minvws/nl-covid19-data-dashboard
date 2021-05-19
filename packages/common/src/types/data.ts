@@ -9,7 +9,7 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
-  population_count?: number;
+  static_values?: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
@@ -17,6 +17,9 @@ export interface Municipal {
   sewer?: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
+}
+export interface GmStaticValues {
+  population_count?: number;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -148,7 +151,6 @@ export interface National {
   proto_name: "NL";
   name: string;
   code: string;
-  population_count?: number;
   difference: NationalDifference;
   doctor: NationalDoctor;
   downscaling?: NlDownscaling;
@@ -837,7 +839,6 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
-  population_count?: number;
   difference: RegionalDifference;
   g_number: VrGNumber;
   sewer: RegionalSewer;
