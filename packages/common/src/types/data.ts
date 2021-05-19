@@ -526,8 +526,6 @@ export interface NationalBehaviorValue {
 export interface NlBehaviorPerAgeGroup {
   avoid_crowds_compliance: NlBehaviorPerAgeGroupValue;
   avoid_crowds_support: NlBehaviorPerAgeGroupValue;
-  curfew_compliance: NlBehaviorPerAgeGroupValue;
-  curfew_support: NlBehaviorPerAgeGroupValue;
   keep_distance_compliance: NlBehaviorPerAgeGroupValue;
   keep_distance_support: NlBehaviorPerAgeGroupValue;
   max_visitors_compliance: NlBehaviorPerAgeGroupValue;
