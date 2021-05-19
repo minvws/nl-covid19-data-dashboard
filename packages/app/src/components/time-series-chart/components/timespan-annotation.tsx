@@ -19,6 +19,7 @@ export function TimespanAnnotation({
 }) {
   const [min, max] = domain;
   const { start, end } = config;
+  const fill = config.fill ?? 'solid';
 
   /**
    * Clip the start / end dates to the domain of the x-axis, so that we can
@@ -38,29 +39,20 @@ export function TimespanAnnotation({
 
   if (width <= 0) return null;
 
-  switch (config.type) {
-    case 'solid':
-      return (
-        <Bar
-          pointerEvents="none"
-          height={height}
-          x={x0}
-          width={width}
-          fill={colors.data.underReported}
-          style={{ mixBlendMode: 'multiply' }}
-        />
-      );
-    case 'hatched':
-      return (
-        <Bar
-          pointerEvents="none"
-          height={height}
-          x={x0}
-          width={width}
-          fill={`url(#${chartId}_hatched_pattern)`}
-        />
-      );
-  }
+  return (
+    <Bar
+      pointerEvents="none"
+      height={height}
+      x={x0}
+      width={width}
+      fill={
+        fill === 'solid'
+          ? colors.data.underReported
+          : `url(#${chartId}_hatched_pattern)`
+      }
+      style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
+    />
+  );
 }
 
 interface SolidTimespanAnnotationIconProps {
@@ -90,8 +82,8 @@ export function SolidTimespanAnnotationIcon({
 }
 
 type HatchedTimespanAnnotationIconProps = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 };
 
 export function HatchedTimespanAnnotationIcon({

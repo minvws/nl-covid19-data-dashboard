@@ -188,7 +188,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   dataOptions={{
                     timespanAnnotations: [
                       {
-                        type: 'solid',
                         start: underReportedRange,
                         end: Infinity,
                         label: text.linechart_legend_underreported_titel,
@@ -215,7 +214,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   dataOptions={{
                     timespanAnnotations: [
                       {
-                        type: 'solid',
                         start: underReportedRange,
                         end: Infinity,
                         label: text.linechart_legend_underreported_titel,

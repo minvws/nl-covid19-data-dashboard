@@ -61,7 +61,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
           valueAnnotation: siteText.waarde_annotaties.x_miljoen,
           timespanAnnotations: [
             {
-              type: 'hatched',
+              fill: 'hatched',
               start: data.estimatedRange[0],
               end: data.estimatedRange[1],
               label:
@@ -87,10 +87,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
         numGridLines={6}
         formatTickValue={(x) => formatNumber(x / 1000000)}
         formatTooltip={(x) => (
-          <VaccineDeliveryAndAdministrationsTooltip
-            data={x}
-            estimateRange={data.estimatedRange}
-          />
+          <VaccineDeliveryAndAdministrationsTooltip data={x} />
         )}
         seriesConfig={[
           {

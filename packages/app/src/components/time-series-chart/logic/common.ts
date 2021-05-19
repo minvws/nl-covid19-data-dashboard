@@ -12,23 +12,14 @@ export interface BenchmarkConfig {
   label?: string;
 }
 
-export type TimespanAnnotationConfig =
-  | {
-      type: 'solid';
-      start: number;
-      end: number;
-      label: string;
-      shortLabel?: string;
-      cutValuesForMetricProperties?: string[];
-    }
-  | {
-      type: 'hatched';
-      start: number;
-      end: number;
-      label: string;
-      shortLabel?: string;
-      cutValuesForMetricProperties?: string[];
-    };
+export type TimespanAnnotationConfig = {
+  fill?: 'solid' | 'hatched';
+  start: number;
+  end: number;
+  label: string;
+  shortLabel?: string;
+  cutValuesForMetricProperties?: string[];
+};
 
 export type TimeAnnotationConfig = {
   type: 'divider';

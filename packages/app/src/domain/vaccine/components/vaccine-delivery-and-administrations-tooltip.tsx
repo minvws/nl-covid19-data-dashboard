@@ -25,16 +25,14 @@ function isStackedConfig(
 
 export function VaccineDeliveryAndAdministrationsTooltip({
   data,
-  estimateRange,
 }: {
   data: TooltipData<VaccineDeliveryAndAdministrationsValue>;
-  estimateRange: [number, number];
 }) {
   data.timespanAnnotation;
 
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
 
-  const isEstimate = data.timespanAnnotation?.type === 'hatched';
+  const isEstimate = data.timespanAnnotation?.fill === 'hatched';
 
   const firstValue = data.value.total_delivered;
   const firstConfig = data.config

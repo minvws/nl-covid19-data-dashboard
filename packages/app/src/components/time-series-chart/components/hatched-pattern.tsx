@@ -11,7 +11,7 @@ export function HatchedPattern({
   chartId,
 }: HatchedPatternProps) {
   const hasHatchedAnnotation = isDefined(
-    timespanAnnotations?.find((x) => x.type === 'hatched')
+    timespanAnnotations?.find((x) => x.fill === 'hatched')
   );
 
   if (!hasHatchedAnnotation) {

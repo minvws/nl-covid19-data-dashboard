@@ -170,7 +170,6 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   timespanAnnotations: [
                     {
-                      type: 'solid',
                       start: dataRivmUnderReportedDateStart,
                       end: Infinity,
                       label:
