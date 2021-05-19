@@ -129,8 +129,8 @@ export function HatchedTimespanAnnotationIcon({
           />
         </pattern>
       </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
+      <rect height={height} width={width} fill="white" />
+      <rect height={height} width={width} fill="url(#hatch)" />
     </svg>
   );
 }
