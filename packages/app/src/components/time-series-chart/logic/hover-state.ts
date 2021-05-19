@@ -167,7 +167,8 @@ export function useHoverState<T extends TimestampedValue>({
   );
 
   const hoverState = useMemo(() => {
-    if (!point && !hasFocus) return undefined;
+    if (!point && !hasFocus) return;
+
     const pointY = point?.y ?? 0;
 
     const barPoints: HoveredPoint<T>[] = seriesConfig
@@ -178,7 +179,7 @@ export function useHoverState<T extends TimestampedValue>({
           | undefined;
 
         if (!isPresent(seriesValue)) {
-          return undefined;
+          return;
         }
 
         const xValue = seriesValue.__date_unix;
@@ -188,7 +189,7 @@ export function useHoverState<T extends TimestampedValue>({
          * Filter series without Y value on the current valuesIndex
          */
         if (!isPresent(yValue)) {
-          return undefined;
+          return;
         }
 
         switch (config.type) {
@@ -213,7 +214,7 @@ export function useHoverState<T extends TimestampedValue>({
           | undefined;
 
         if (!isPresent(seriesValue)) {
-          return undefined;
+          return;
         }
 
         const xValue = seriesValue.__date_unix;
@@ -223,7 +224,7 @@ export function useHoverState<T extends TimestampedValue>({
          * Filter series without Y value on the current valuesIndex
          */
         if (!isPresent(yValue)) {
-          return undefined;
+          return;
         }
 
         switch (config.type) {
@@ -266,7 +267,7 @@ export function useHoverState<T extends TimestampedValue>({
           | undefined;
 
         if (!isPresent(seriesValue)) {
-          return undefined;
+          return;
         }
 
         const xValue = seriesValue.__date_unix;
@@ -277,7 +278,7 @@ export function useHoverState<T extends TimestampedValue>({
          * Filter series without Y value on the current valuesIndex
          */
         if (!isPresent(yValueA) || !isPresent(yValueB)) {
-          return undefined;
+          return;
         }
 
         switch (config.type) {
@@ -328,7 +329,7 @@ export function useHoverState<T extends TimestampedValue>({
      * Empty hoverstate when there's no nearest point detected
      */
     if (!nearestPoint) {
-      return undefined;
+      return;
     }
 
     const timespanAnnotationIndex = timespanAnnotations

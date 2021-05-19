@@ -14,7 +14,7 @@ export function useSafetyRegionBoundingbox(
 ) {
   return useMemo(() => {
     if (!selectedRegion) {
-      return undefined;
+      return;
     }
 
     const feature = regionGeo.features.find(
@@ -22,7 +22,7 @@ export function useSafetyRegionBoundingbox(
     );
 
     if (!feature) {
-      return undefined;
+      return;
     }
 
     return {
