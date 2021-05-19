@@ -111,7 +111,7 @@ export function HatchedTimespanAnnotationIcon({
   height = 15,
 }: HatchedTimespanAnnotationIconProps) {
   return (
-    <svg height={width} width={height}>
+    <svg height={width} width={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
         <pattern
           id="hatch"
