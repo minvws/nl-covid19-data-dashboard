@@ -90,9 +90,17 @@ export function SolidTimespanAnnotationIcon({
   );
 }
 
-export function HatchedTimespanAnnotationIcon() {
+type HatchedTimespanAnnotationIconProps = {
+  width: number;
+  height: number;
+};
+
+export function HatchedTimespanAnnotationIcon({
+  width = 15,
+  height = 15,
+}: HatchedTimespanAnnotationIconProps) {
   return (
-    <svg height="15" width="15">
+    <svg height={width} width={height}>
       <defs>
         <pattern
           id="hatch"
@@ -106,7 +114,7 @@ export function HatchedTimespanAnnotationIcon() {
             y1="0"
             x2="0"
             y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
+            style={{ stroke: 'gray', strokeWidth: 3 }}
           />
         </pattern>
       </defs>

@@ -41,7 +41,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
       vaccines
         .filter((x) => firstValue && firstValue[x] !== undefined)
         .reverse(),
-    [vaccines, firstValue]
+    [firstValue]
   );
 
   const productNames =
