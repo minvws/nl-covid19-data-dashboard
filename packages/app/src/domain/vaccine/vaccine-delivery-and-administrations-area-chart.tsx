@@ -13,17 +13,7 @@ import {
   VaccineDeliveryAndAdministrationsValue,
 } from './data-selection/select-delivery-and-administration-data';
 
-const vaccines = [
-  'pfizer',
-  'moderna',
-  'astra_zeneca',
-  'cure_vac',
-  'janssen',
-  'sanofi',
-] as (keyof Pick<
-  VaccineDeliveryAndAdministrationsValue,
-  'pfizer' | 'moderna' | 'astra_zeneca' | 'cure_vac' | 'janssen' | 'sanofi'
->)[];
+const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
 
 vaccines.forEach((x) =>
   assert(colors.data.vaccines[x], `missing vaccine color for vaccine ${x}`)
