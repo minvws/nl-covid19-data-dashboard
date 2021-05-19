@@ -89,12 +89,14 @@ export type SplitLineDefinition<T extends TimestampedValue> = {
   metricProperty: keyof T;
   label: string;
   shortLabel?: string;
-  splitPoints: {
-    value: number;
-    color: string;
-    label: string;
-  }[];
+  splitPoints: SplitPoint[];
   strokeWidth?: number;
+};
+
+export type SplitPoint = {
+  value: number;
+  color: string;
+  label: string;
 };
 
 /**
