@@ -12,6 +12,7 @@ import css from '@styled-system/css';
 import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { BehaviorIdentifier } from './behavior-types';
 
 const blacklistedItems = [
   'symptoms_get_tested',
@@ -33,7 +34,7 @@ export function BehaviorChoropleth({
   const [currentMetric, setCurrentMetric] = useState(sorted[4]);
   const [isMetricAvaliable, setIsMetricAvaliable] = useState(true);
 
-  const changeMetric = (newMetric) =>
+  const changeMetric = (newMetric: BehaviorIdentifier) =>
     setCurrentMetric(sorted.find((x) => x.id === newMetric));
 
   useEffect(() => {
@@ -48,7 +49,9 @@ export function BehaviorChoropleth({
       </Box>
       <form>
         <select
-          onChange={(event) => changeMetric(event.target.value)}
+          onChange={(event) =>
+            changeMetric(event.target.value as BehaviorIdentifier)
+          }
           value={currentMetric.description}
         >
           <option key={'empty'} value={'empty'}>
@@ -84,6 +87,15 @@ export function BehaviorChoropleth({
   );
 }
 
+interface ChoroplethBlockProps {
+  data: any;
+  metricName: any;
+  currentMetric: any;
+  isMetricAvaliable: any;
+  title: any;
+  threshold: any;
+}
+
 function ChoroplethBlock({
   data,
   metricName,
@@ -91,7 +103,7 @@ function ChoroplethBlock({
   isMetricAvaliable,
   title,
   threshold,
-}) {
+}: ChoroplethBlockProps) {
   const reverseRouter = useReverseRouter();
 
   return (
@@ -120,7 +132,7 @@ function ChoroplethBlock({
         <SafetyRegionChoropleth
           data={data}
           getLink={reverseRouter.vr.gedrag}
-          metricName={`behavior_${metricName}`}
+          metricName={`behavior_${metricName}` as any}
           metricProperty={`${currentMetric.id}_${metricName}`}
           minHeight={400}
           tooltipContent={(
@@ -128,6 +140,8 @@ function ChoroplethBlock({
           ) => {
             const currentComplianceValue = `${currentMetric.id}_compliance` as keyof RegionsBehavior;
             const currentSupportValue = `${currentMetric.id}_support` as keyof RegionsBehavior;
+
+            if (!isMetricAvaliable) return null;
 
             return (
               <BehaviorTooltip
