@@ -111,8 +111,8 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
                 name: (productNames as Record<string, string>)[x],
               }
             ),
-            shortLabel: (productNames as Record<string, string>)[x],
-            color: (colors.data.vaccines as Record<string, string>)[x],
+            shortLabel: productNames[x],
+            color: colors.data.vaccines[x],
             fillOpacity: 1,
             strokeWidth: 0,
           })),
