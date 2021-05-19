@@ -40,18 +40,38 @@ export function TimespanAnnotation({
   if (width <= 0) return null;
 
   return (
-    <Bar
-      pointerEvents="none"
-      height={height}
-      x={x0}
-      width={width}
-      fill={
-        fill === 'solid'
-          ? colors.data.underReported
-          : `url(#${chartId}_hatched_pattern)`
-      }
-      style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
-    />
+    <>
+      {fill === 'hatched' && (
+        <pattern
+          id={`${chartId}_hatched_pattern`}
+          width="8"
+          height="8"
+          patternTransform="rotate(-45 0 0)"
+          patternUnits="userSpaceOnUse"
+        >
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="8"
+            style={{ stroke: 'white', strokeWidth: 4 }}
+          ></line>
+        </pattern>
+      )}
+
+      <Bar
+        pointerEvents="none"
+        height={height}
+        x={x0}
+        width={width}
+        fill={
+          fill === 'solid'
+            ? colors.data.underReported
+            : `url(#${chartId}_hatched_pattern)`
+        }
+        style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
+      />
+    </>
   );
 }
 

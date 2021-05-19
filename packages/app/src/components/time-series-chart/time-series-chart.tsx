@@ -24,7 +24,6 @@ import {
   TooltipFormatter,
 } from './components';
 import { Benchmark } from './components/benchmark';
-import { HatchedPattern } from './components/hatched-pattern';
 import { Series } from './components/series';
 import { TimeAnnotation } from './components/time-annotation';
 import {
@@ -328,10 +327,6 @@ export function TimeSeriesChart<
             onFocus={chartEventHandlers.handleFocus}
             onBlur={chartEventHandlers.handleBlur}
           >
-            <HatchedPattern
-              timespanAnnotations={timespanAnnotations}
-              chartId={chartId}
-            />
             <Axes
               bounds={bounds}
               numGridLines={numGridLines}
