@@ -158,7 +158,7 @@ async function syncDeletionsToProd(
     await prdTransaction.commit();
 
     console.log(
-      `Successfully deleted ${prdKeysMissingInDev.length} lokalize for keys`
+      `Successfully deleted ${prdKeysMissingInDev.length} lokalize keys`
     );
   }
 }

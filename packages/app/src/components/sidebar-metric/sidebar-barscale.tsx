@@ -7,7 +7,7 @@ import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
 import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
+import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import {
   DataScope,
@@ -19,7 +19,7 @@ import { Box } from '../base';
 interface SidebarBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof AllLanguages;
+  localeTextKey: keyof SiteText;
   metricName: MetricKeys<T>;
   metricProperty: string;
 }

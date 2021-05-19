@@ -177,8 +177,6 @@ export function TimeSeriesChart<
     paddingTop: showWeekNumbers ? 20 : undefined,
   });
 
-  const legendItems = useLegendItems(seriesConfig, dataOptions);
-
   const values = useValuesInTimeframe(allValues, timeframe);
 
   const cutValuesConfig = useMemo(
@@ -216,6 +214,12 @@ export function TimeSeriesChart<
     bounds,
     numTicks: yTickValues?.length || numGridLines,
   });
+
+  const legendItems = useLegendItems(
+    xScale.domain(),
+    seriesConfig,
+    dataOptions
+  );
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
