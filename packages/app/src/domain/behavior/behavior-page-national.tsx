@@ -105,7 +105,16 @@ export function BehaviorPageNational({
 
       <ArticleStrip articles={content.articles} />
 
-      <BehaviorLineChartTile values={data.behavior.values} />
+      <BehaviorLineChartTile
+        values={data.behavior.values}
+        metadata={{
+          date: [
+            behaviorLastValue.date_start_unix,
+            behaviorLastValue.date_end_unix,
+          ],
+          source: nl_gedrag.bronnen.rivm,
+        }}
+      />
     </TileList>
   );
 }
