@@ -47,7 +47,6 @@ export function TimespanAnnotation({
           x={x0}
           width={width}
           fill={colors.data.underReported}
-          opacity={1}
           style={{ mixBlendMode: 'multiply' }}
         />
       );
