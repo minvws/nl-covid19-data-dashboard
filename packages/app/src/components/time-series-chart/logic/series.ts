@@ -9,6 +9,7 @@ import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { TimespanAnnotationConfig } from './common';
+import { SplitPoint } from './split';
 
 export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
@@ -17,7 +18,7 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | StackedAreaSeriesDefinition<T>
   | BarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
-  | SplitLineDefinition<T>
+  | SplitAreaDefinition<T>
 )[];
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
@@ -79,24 +80,18 @@ export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
  * Adding the split series definition here even though it might not end up as
  * part of this chart. For starters this makes it easier because then we can
  * reuse the whole hoverstate and tooltip logic from TimeSeriesChart directly in
- * SplitLineChart.
+ * SplitAreaChart.
  *
  * If the amount of changes for the chart are limited we could maybe merge it in
  * completely.
  */
-export type SplitLineDefinition<T extends TimestampedValue> = {
+export type SplitAreaDefinition<T extends TimestampedValue> = {
   type: 'split-line';
   metricProperty: keyof T;
   label: string;
   shortLabel?: string;
   splitPoints: SplitPoint[];
   strokeWidth?: number;
-};
-
-export type SplitPoint = {
-  value: number;
-  color: string;
-  label: string;
 };
 
 /**

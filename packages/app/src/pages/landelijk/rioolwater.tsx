@@ -174,7 +174,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                     label: 'Weekgemiddelde',
 
                     /**
-                     * @TODO use this config to implement SplitLineTrend based
+                     * @TODO use this config to implement SplitAreaTrend based
                      * on this https://airbnb.io/visx/splitlinepath
                      */
                     splitPoints: [

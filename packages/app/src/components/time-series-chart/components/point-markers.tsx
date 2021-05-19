@@ -1,7 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
-import { HoveredPoint } from '../logic/hover-state';
+import { HoveredPoint } from '../logic';
 
 const MARKER_POINT_SIZE = 8;
 

@@ -14,6 +14,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { SplitAreaTrend } from './split-line-trend';
 import { StackedAreaTrend } from './stacked-area-trend';
 
 interface SeriesProps<T extends TimestampedValue> {
@@ -121,6 +122,17 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY0={getY0}
                   getY1={getY1}
                   bounds={bounds}
+                />
+              );
+            case 'split-line':
+              return (
+                <SplitAreaTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  splitPoints={config.splitPoints}
+                  strokeWidth={config.strokeWidth}
+                  getX={getX}
+                  getY={getY}
                 />
               );
           }
