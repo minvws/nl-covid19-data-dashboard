@@ -8,6 +8,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
 interface BehaviourPageNationalProps {
   data: any;
   content: any;
@@ -103,6 +104,8 @@ export function BehaviorPageNational({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <BehaviorLineChartTile values={data.behavior.values} />
     </TileList>
   );
 }

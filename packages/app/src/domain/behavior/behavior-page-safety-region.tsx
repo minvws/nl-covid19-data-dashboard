@@ -7,6 +7,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
 
 interface BehaviorPageSafetyRegionProps {
   data: any;
@@ -71,6 +72,8 @@ export function BehaviorPageSafetyRegion({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <BehaviorLineChartTile values={data.behavior.values} />
     </TileList>
   );
 }
