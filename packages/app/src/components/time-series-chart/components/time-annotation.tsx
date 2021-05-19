@@ -21,13 +21,11 @@ export function TimeAnnotation({
 
   const breakpoints = useBreakpoints(true);
 
-  /**
-   * Clip the position to the domain of the x-axis, so that we can
-   * conveniently pass in things like Infinity for end date.
-   */
-  const clippedPosition = Math.min(Math.max(position, min), max);
+  if (position < min || position > max) {
+    return null;
+  }
 
-  const x = getX({ __date_unix: clippedPosition });
+  const x = getX({ __date_unix: position });
 
   const fontSize = !breakpoints.lg ? theme.fontSizes[0] : theme.fontSizes[1];
 
