@@ -37,10 +37,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
   const { siteText, formatNumber } = useIntl();
   const firstValue = first(data.values);
   const vaccineNames = useMemo(
-    () =>
-      vaccines
-        .filter((x) => firstValue && firstValue[x] !== undefined)
-        .reverse(),
+    () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
     [firstValue]
   );
 
