@@ -44,3 +44,7 @@ timestamp,action,key
 2021-05-10T08:57:14.416Z,add,veiligheidsregio_positief_geteste_personen_ggd.linechart_positivetests_legend_label_moving_average
 2021-05-10T11:07:55.275Z,add,common.risiconiveau_singular
 2021-05-10T11:08:57.458Z,add,common.risiconiveau_plural
+2021-05-18T09:18:05.608Z,add,gedrag_onderwerpen.symptoms_stay_home_if_mandatory
+2021-05-18T09:19:53.053Z,delete,gedrag_onderwerpen.symptoms_stay_home
+2021-05-18T12:30:34.009Z,delete,gedrag_onderwerpen.symptoms_stay_home_if_necessary
+2021-05-18T12:31:34.675Z,add,gedrag_onderwerpen.symptoms_stay_home_if_mandatory

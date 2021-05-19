@@ -64,10 +64,10 @@
         "avoid_crowds_compliance_trend": {
           "$ref": "#/definitions/value_trend"
         },
-        "symptoms_stay_home_compliance": {
+        "symptoms_stay_home_if_mandatory_compliance": {
           "type": ["integer", "null"]
         },
-        "symptoms_stay_home_compliance_trend": {
+        "symptoms_stay_home_if_mandatory_compliance_trend": {
           "$ref": "#/definitions/value_trend"
         },
         "symptoms_get_tested_compliance": {
@@ -130,10 +130,10 @@
         "avoid_crowds_support_trend": {
           "$ref": "#/definitions/value_trend"
         },
-        "symptoms_stay_home_support": {
+        "symptoms_stay_home_if_mandatory_support": {
           "type": ["integer", "null"]
         },
-        "symptoms_stay_home_support_trend": {
+        "symptoms_stay_home_if_mandatory_support_trend": {
           "$ref": "#/definitions/value_trend"
         },
         "symptoms_get_tested_support": {
