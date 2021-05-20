@@ -14,6 +14,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { SplitBarTrend } from './split-bar-trend';
 import { StackedAreaTrend } from './stacked-area-trend';
 
 interface SeriesProps<T extends TimestampedValue> {
@@ -91,6 +92,19 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   aboveBenchmarkColor={config.aboveBenchmarkColor}
                   aboveBenchmarkFillOpacity={config.aboveBenchmarkFillOpacity}
                   benchmark={benchmark}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  bounds={bounds}
+                />
+              );
+            case 'split-bar':
+              return (
+                <SplitBarTrend
+                  key={index}
+                  yScale={yScale}
+                  series={series as SeriesSingleValue[]}
+                  splitPoints={config.splitPoints}
                   fillOpacity={config.fillOpacity}
                   getX={getX}
                   getY={getY}

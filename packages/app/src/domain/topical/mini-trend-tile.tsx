@@ -22,7 +22,7 @@ type MiniTrendTileProps<T extends TimestampedValue> = {
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>
 ) {
-  const { formatNumber } = useIntl();
+  const intl = useIntl();
 
   const { icon, title, text, trendData, metricProperty, href } = props;
 
@@ -62,7 +62,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
         mb={2}
         data-cy={metricProperty}
       >
-        {formatNumber((value as unknown) as number)}
+        {intl.formatNumber(value as unknown as number)}
       </Text>
 
       <Box>{text}</Box>
@@ -77,9 +77,31 @@ export function MiniTrendTile<T extends TimestampedValue>(
         seriesConfig={[
           {
             metricProperty,
-            type: 'area',
+            type: 'split-bar',
             label: title,
-            color: colors.data.primary,
+            fillOpacity: 1,
+            splitPoints: [
+              {
+                color: colors.data.scale.blue[0],
+                label: intl.siteText.escalatie_niveau.types['1'].titel,
+                value: 1100,
+              },
+              {
+                color: colors.data.scale.blue[1],
+                label: intl.siteText.escalatie_niveau.types['2'].titel,
+                value: 2600,
+              },
+              {
+                color: colors.data.scale.blue[2],
+                label: intl.siteText.escalatie_niveau.types['3'].titel,
+                value: 4800,
+              },
+              {
+                color: colors.data.scale.blue[4],
+                label: intl.siteText.escalatie_niveau.types['4'].titel,
+                value: Infinity,
+              },
+            ],
           },
         ]}
       />

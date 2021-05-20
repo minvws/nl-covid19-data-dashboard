@@ -192,6 +192,15 @@ export function useHoverState<T extends TimestampedValue>({
         }
 
         switch (config.type) {
+          case 'split-bar':
+            return {
+              seriesValue,
+              x: xScale(xValue),
+              y: yScale(yValue),
+              color: config.splitPoints[0].color,
+              metricProperty: config.metricProperty,
+              seriesConfigIndex: index,
+            };
           case 'bar':
             return {
               seriesValue,

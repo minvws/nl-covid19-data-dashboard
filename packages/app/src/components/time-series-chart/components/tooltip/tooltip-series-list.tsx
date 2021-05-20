@@ -116,6 +116,25 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
                 </TooltipListItem>
               );
+
+            case 'split-bar':
+              return (
+                <TooltipListItem
+                  key={key}
+                  icon={
+                    <SeriesIcon
+                      config={x}
+                      value={
+                        value[x.metricProperty] as unknown as number | null
+                      }
+                    />
+                  }
+                  label={x.shortLabel ?? x.label}
+                  displayTooltipValueOnly={displayTooltipValueOnly}
+                >
+                  <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
+                </TooltipListItem>
+              );
           }
         })}
       </TooltipList>
