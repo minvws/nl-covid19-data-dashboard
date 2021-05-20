@@ -90,7 +90,15 @@ export function VaccinePageIntroduction({
                   {text.kpi_geplande_prikken_deze_week.titel}
                 </Heading>
                 <KpiValue
-                  absolute={data.vaccine_administered_planned.last_value.doses}
+                  absolute={
+                    /**
+                     * allow overriding the value from the cms, fallback to data
+                     */
+                    parseInt(
+                      siteText.data_overwrite.nl.vaccine_administered_planned
+                        .doses
+                    ) || data.vaccine_administered_planned.last_value.doses
+                  }
                 />
                 <Text m={0}>
                   {(() => {
