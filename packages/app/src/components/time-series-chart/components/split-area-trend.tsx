@@ -65,7 +65,7 @@ export function SplitAreaTrend({
         data={nonNullSeries}
         x={getX}
         y={getY}
-        stroke={'#000'}
+        stroke={'#ccc'}
         strokeOpacity={5}
         // stroke={transparentize(80, 'white')}
         strokeWidth={strokeWidth}
