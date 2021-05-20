@@ -7,7 +7,7 @@ function hasValuesProperty(
   input: [string, JSONValue]
 ): input is [string, { values: Record<string, JSONValue>[] }] {
   const value = input[1];
-  return isObject(value) && 'values' in value;
+  return !Array.isArray(value) && isObject(value) && 'values' in value;
 }
 
 export function validateMovingAverages(input: JSONObject) {

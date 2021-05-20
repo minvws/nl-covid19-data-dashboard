@@ -5,15 +5,12 @@ import {
   National,
   Regionaal,
 } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { get } from 'lodash';
-import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import IconUp from '~/assets/pijl-omhoog.svg';
-import IconDown from '~/assets/pijl-omlaag.svg';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { InlineDifference } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
@@ -24,7 +21,12 @@ type DataKeys = keyof National | keyof Regionaal | keyof Municipal;
  * the data property HAS to be of type a Pick of National that includes the
  * 'difference' key plus the key that was assigned to metricName.
  *
- * So, if metricName is 'vaccine_stock' then data needs to be assigned with Pick<National, 'difference'|'vaccine_stock'>
+ * So, if metricName is 'vaccine_stock' then data needs to be assigned with
+ * Pick<National, 'difference'|'vaccine_stock'>
+ *
+ * @TODO These types don't seem to work, as we need to use Lodash get plus
+ * casting to get to them. Normal accessors give type errors. Lodash get is very
+ * forgiving because it will work on any data structure.
  *
  */
 type DataFile<T> = T extends keyof National
@@ -40,7 +42,7 @@ interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   metricName: T;
   metricProperty: string;
   valueTexts: PluralizationTexts;
-  differenceTexts: string;
+  differenceText: string;
 }
 
 export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
@@ -49,7 +51,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
   metricName,
   metricProperty,
   valueTexts,
-  differenceTexts,
+  differenceText: differenceTexts,
 }: DataDrivenTextProps<T, K>) {
   const { siteText, formatNumber } = useIntl();
 
@@ -68,11 +70,10 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
       .join(':')}`
   );
 
-  const differenceValue:
-    | DifferenceInteger
-    | DifferenceDecimal
-    | undefined = differenceKey
-    ? get(data, ['difference', differenceKey])
+  const differenceValue = differenceKey
+    ? (get(data, ['difference', differenceKey]) as
+        | DifferenceInteger
+        | DifferenceDecimal)
     : undefined;
 
   assert(
@@ -95,9 +96,7 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
         propertyValue: <strong>{formatNumber(propertyValue)}</strong>,
       })}{' '}
       {replaceComponentsInText(differenceTexts, {
-        differenceTrend: (
-          <InlineDifferenceIndicator difference={differenceValue.difference} />
-        ),
+        differenceTrend: <InlineDifference value={differenceValue} />,
         differenceAverage: (
           <strong>{formatNumber(differenceValue.old_value)}</strong>
         ),
@@ -105,42 +104,6 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
     </Text>
   );
 }
-
-function InlineDifferenceIndicator({ difference }: { difference: number }) {
-  const { siteText } = useIntl();
-  const text = siteText.common_actueel;
-
-  if (difference > 0)
-    return (
-      <Container iconColor="red">
-        {text.trend_hoger}
-        <IconUp />
-      </Container>
-    );
-  if (difference < 0)
-    return (
-      <Container iconColor="data.primary">
-        {text.trend_lager}
-        <IconDown />
-      </Container>
-    );
-
-  return <Container>{text.trend_gelijk}</Container>;
-}
-
-const Container = styled.span<{ iconColor?: string }>((x) =>
-  css({
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
-    fontWeight: 'bold',
-    svg: {
-      color: x.iconColor,
-      verticalAlign: 'text-bottom',
-      width: '19px',
-      height: '19px',
-    },
-  })
-);
 
 type PluralizationTexts = Record<'zero' | 'singular' | 'plural', string>;
 
