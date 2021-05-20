@@ -9,6 +9,10 @@ export type SplitPoint = {
 
 export type Segment = { items: SeriesSingleValue[]; splitIndex: number };
 
+/**
+ * Split the series into an array of segments that can be used for the Visx
+ * SplitLinePath component.
+ */
 export function splitSeriesIntoSegments(
   series: SeriesSingleValue[],
   splitPoints: SplitPoint[]
