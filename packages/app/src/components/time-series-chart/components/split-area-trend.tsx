@@ -1,6 +1,7 @@
 import { ClipPath } from '@visx/clip-path';
 import { LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
+import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Bounds, SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
@@ -20,7 +21,7 @@ type SplitAreaTrendProps = {
   yScale: PositionScale;
 };
 
-// type Point = { x: number; y: number };
+type Point = { x: number; y: number };
 
 export function SplitAreaTrend({
   series,
@@ -38,31 +39,45 @@ export function SplitAreaTrend({
     [series]
   );
 
+  const trendPath = nonNullSeries.map((value) => ({
+    x: getX(value),
+    y: getY(value),
+  }));
+
+  const closedTrendPath = closeTrendPathAlongAxis(trendPath, bounds);
+
   return (
     <g>
       <ColorStack splitPoints={splitPoints} bounds={bounds} yScale={yScale} />
-      <LinePath
-        data={nonNullSeries}
-        x={getX}
-        y={getY}
-        stroke={splitPoints[0].color}
-        strokeWidth={strokeWidth}
-        strokeLinecap="butt"
-        strokeLinejoin="round"
-      />
+
       <ClipPath id="todo_some_unique_id">
         <LinePath
-          data={nonNullSeries}
-          x={getX}
-          y={getY}
+          data={closedTrendPath}
+          x={(v) => v.x}
+          y={(v) => v.y}
           stroke={splitPoints[0].color}
           strokeWidth={strokeWidth}
           strokeLinecap="butt"
           strokeLinejoin="round"
         />
       </ClipPath>
+      <LinePath
+        data={nonNullSeries}
+        x={getX}
+        y={getY}
+        stroke={'#000'}
+        strokeOpacity={5}
+        // stroke={transparentize(80, 'white')}
+        strokeWidth={strokeWidth}
+        strokeLinecap="butt"
+        strokeLinejoin="round"
+      />
 
-      {/* <SplitLinePath
+      {/*
+        Split line path currently has a bug
+        https://github.com/airbnb/visx/issues/920
+
+      <SplitLinePath
         segments={segments.map((x) => x.items)}
         x={getX}
         y={getY}
@@ -111,4 +126,15 @@ export function SplitAreaTrendIcon({
       />
     </svg>
   );
+}
+
+function closeTrendPathAlongAxis(path: Point[], bounds: Bounds): Point[] {
+  const firstPoint = first(path) as Point;
+  const lastPoint = last(path) as Point;
+
+  return [
+    ...path,
+    { x: lastPoint.x, y: bounds.height },
+    { x: firstPoint.x, y: bounds.height },
+  ];
 }
