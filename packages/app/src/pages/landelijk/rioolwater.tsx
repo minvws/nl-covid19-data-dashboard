@@ -20,6 +20,7 @@ import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/se
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { NewSewerChart } from '~/components/sewer-chart/new-sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -159,65 +160,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           {sewerSplitAreaChart.isEnabled ? (
-            <ChartTile
-              timeframeOptions={['all', '5weeks']}
-              title={text.linechart_titel}
-              metadata={{
-                source: text.bronnen.rivm,
-              }}
-              description={text.linechart_description}
-            >
-              {(timeframe) => (
-                <TimeSeriesChart
-                  values={sewerAverages.values}
-                  timeframe={timeframe}
-                  seriesConfig={[
-                    {
-                      type: 'split-area',
-                      metricProperty: 'average',
-                      label: 'Weekgemiddelde',
-
-                      /**
-                       * @TODO use this config to implement SplitAreaTrend based
-                       * on this https://airbnb.io/visx/splitlinepath
-                       */
-                      splitPoints: [
-                        {
-                          value: 200,
-                          color: colors.data.scale.blue[0],
-                          label: '0 - 200',
-                        },
-                        {
-                          value: 400,
-                          color: colors.data.scale.blue[1],
-                          label: '200 - 400',
-                        },
-                        {
-                          value: 600,
-                          color: colors.data.scale.blue[2],
-                          // color: 'hotpink',
-                          label: '400 - 600',
-                        },
-                        {
-                          value: 800,
-                          color: colors.data.scale.blue[3],
-                          label: '600 - 800',
-                        },
-                        {
-                          value: Infinity,
-                          color: colors.data.scale.blue[4],
-                          label: '800 - 1000',
-                        },
-                      ],
-                    },
-                  ]}
-                  dataOptions={{
-                    valueAnnotation:
-                      siteText.waarde_annotaties.riool_normalized,
-                  }}
-                />
-              )}
-            </ChartTile>
+            <NewSewerChart dataAverages={data.sewer} siteText={siteText} />
           ) : (
             <ChartTile
               timeframeOptions={['all', '5weeks']}

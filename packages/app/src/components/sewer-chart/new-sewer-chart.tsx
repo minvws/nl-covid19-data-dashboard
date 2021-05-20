@@ -73,7 +73,7 @@ export function NewSewerChart({
               {
                 type: 'line',
                 metricProperty: 'selected_instalation_value',
-                label: 'Weekgemiddelde',
+                label: selectedInstallation,
                 color: 'hotpink',
               },
               {
