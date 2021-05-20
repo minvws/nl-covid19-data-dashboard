@@ -1,3 +1,4 @@
+import avondklok from './assets/restrictions/avondklok.svg';
 import BasisregelsAfstand from './assets/restrictions/basisregels_afstand.svg';
 import BasisregelsThuisBlijven from './assets/restrictions/basisregels_blijf-thuis.svg';
 import BasisregelsDrukte from './assets/restrictions/basisregels_drukte.svg';
@@ -6,50 +7,51 @@ import BasisregelsGeenBezoek from './assets/restrictions/basisregels_geen-bezoek
 import BasisregelsHandenWassen from './assets/restrictions/basisregels_handenwassen.svg';
 import BasisregelsMondkapje from './assets/restrictions/basisregels_mondkapje.svg';
 import BasisregelsTesten from './assets/restrictions/basisregels_testen.svg';
+import bezoek from './assets/restrictions/bezoek.svg';
+import bibliotheken from './assets/restrictions/bibliotheken.svg';
+import binnensporten from './assets/restrictions/binnensporten.svg';
 import ContactBeroepen from './assets/restrictions/contactberoepen.svg';
+import eenPersoonDoorgestreept from './assets/restrictions/een-persoon-doorgestreept.svg';
+import gedeeltelijkOpenRugzak from './assets/restrictions/gedeeltelijk-open-rugzak.svg';
+import geenWedstrijden from './assets/restrictions/geen-wedstrijden.svg';
 import Groepen from './assets/restrictions/groepen.svg';
 import HorecaBestellen from './assets/restrictions/horeca-en-evenementen_bestellen.svg';
 import HorecaEtenEnDrinken from './assets/restrictions/horeca-en-evenementen_etendrinken.svg';
 import HorecaEvenementen from './assets/restrictions/horeca-en-evenementen_evenementen.svg';
+import lopend from './assets/restrictions/lopend.svg';
 import OnderwijsKinderopvang from './assets/restrictions/onderwijs-en-kinderopvang_kinderopvang.svg';
 import OnderwijsNoodopvang from './assets/restrictions/onderwijs-en-kinderopvang_noodopvang.svg';
 import OnderwijsOpAfstand from './assets/restrictions/onderwijs-en-kinderopvang_op-afstand.svg';
 import PubliekeLocaties from './assets/restrictions/publiek-toegankelijke-locaties.svg';
+import recreatie from './assets/restrictions/recreatie.svg';
+import reizen from './assets/restrictions/reizen.svg';
+import sporterMetZweetband from './assets/restrictions/sporter-met-zweetband.svg';
 import SportBinnen from './assets/restrictions/sport_binnensportlocaties.svg';
 import SportBuiten from './assets/restrictions/sport_buiten.svg';
 import SportWedstrijden from './assets/restrictions/sport_wedstrijden.svg';
+import Stap1Avondklok from './assets/restrictions/stap-1_avondklok.svg';
+import Stap1HorecaMax from './assets/restrictions/stap_1-horeca_max.svg';
+import Stap1HorecaPerTafel from './assets/restrictions/stap_1-horeca_pertafel.svg';
+import Stap1HorecaReserveren from './assets/restrictions/stap_1-horeca_reserveren.svg';
+import Stap1HorecaSportAccomodaties from './assets/restrictions/stap_1-horeca_sportaccomodaties.svg';
+import Stap1HorecaTerras from './assets/restrictions/stap_1-horeca_terras.svg';
+import Stap1HorecaVerplaatsen from './assets/restrictions/stap_1-horeca_verplaatsen.svg';
+import Stap1OnderwijsBibliotheek from './assets/restrictions/stap_1-onderwijs_bibliotheek.svg';
+import Stap1OnderwijsOpen from './assets/restrictions/stap_1-onderwijs_open.svg';
+import Stap1Theorie from './assets/restrictions/stap_1-theorie.svg';
+import Stap1Thuisbezoek from './assets/restrictions/stap_1-thuisbezoek.svg';
+import Stap1Uitvaarten from './assets/restrictions/stap_1-uitvaarten.svg';
+import Stap1WinkelsAlleen from './assets/restrictions/stap_1-winkels_alleen.svg';
+import Stap1WinkelsMarkten from './assets/restrictions/stap_1-winkels_markten.svg';
+import Stap1WinkelsMax from './assets/restrictions/stap_1-winkels_max.svg';
+import Stap1WikelsOpen from './assets/restrictions/stap_1-winkels_open.svg';
+import testbewijs from './assets/restrictions/testbewijs.svg';
 import Thuis from './assets/restrictions/thuis.svg';
 import VervoerReizenBlijfThuis from './assets/restrictions/vervoer-en-reizen_blijfthuis.svg';
 import VervoerReizenBuitenland from './assets/restrictions/vervoer-en-reizen_buitenland.svg';
 import VervoerReizenOV from './assets/restrictions/vervoer-en-reizen_ov.svg';
 import WinkelsAlcohol from './assets/restrictions/winkelen-en-boodschappen_alcohol.svg';
 import WinkelsBoodschappen from './assets/restrictions/winkelen-en-boodschappen_open.svg';
-
-import avondklok from './assets/restrictions/avondklok.svg';
-import lopend from './assets/restrictions/lopend.svg';
-import bezoek from './assets/restrictions/bezoek.svg';
-
-import eenPersoonDoorgestreept from './assets/restrictions/een-persoon-doorgestreept.svg';
-import gedeeltelijkOpenRugzak from './assets/restrictions/gedeeltelijk-open-rugzak.svg';
-import geenWedstrijden from './assets/restrictions/geen-wedstrijden.svg';
-import sporterMetZweetband from './assets/restrictions/sporter-met-zweetband.svg';
-
-import Stap1HorecaMax from './assets/restrictions/stap_1-horeca_max.svg'
-import Stap1HorecaPerTafel from './assets/restrictions/stap_1-horeca_pertafel.svg'
-import Stap1HorecaReserveren from './assets/restrictions/stap_1-horeca_reserveren.svg'
-import Stap1HorecaSportAccomodaties from './assets/restrictions/stap_1-horeca_sportaccomodaties.svg'
-import Stap1HorecaTerras from './assets/restrictions/stap_1-horeca_terras.svg'
-import Stap1HorecaVerplaatsen from './assets/restrictions/stap_1-horeca_verplaatsen.svg'
-import Stap1OnderwijsBibliotheek from './assets/restrictions/stap_1-onderwijs_bibliotheek.svg'
-import Stap1OnderwijsOpen from './assets/restrictions/stap_1-onderwijs_open.svg'
-import Stap1Theorie from './assets/restrictions/stap_1-theorie.svg'
-import Stap1Thuisbezoek from './assets/restrictions/stap_1-thuisbezoek.svg'
-import Stap1Uitvaarten from './assets/restrictions/stap_1-uitvaarten.svg'
-import Stap1WinkelsAlleen from './assets/restrictions/stap_1-winkels_alleen.svg'
-import Stap1WinkelsMarkten from './assets/restrictions/stap_1-winkels_markten.svg'
-import Stap1WinkelsMax from './assets/restrictions/stap_1-winkels_max.svg'
-import Stap1WikelsOpen from './assets/restrictions/stap_1-winkels_open.svg'
-import Stap1Avondklok from './assets/restrictions/stap-1_avondklok.svg'
 
 export type RestrictionIcon = keyof typeof restrictionIcons;
 
@@ -122,4 +124,9 @@ export const restrictionIcons = {
   'stap_1-winkels_max': Stap1WinkelsMax,
   'stap_1-winkels_open': Stap1WikelsOpen,
   'stap-1_avondklok': Stap1Avondklok,
+  testbewijs,
+  reizen,
+  recreatie,
+  binnensporten,
+  bibliotheken,
 } as const;

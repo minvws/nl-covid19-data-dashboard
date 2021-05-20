@@ -26,10 +26,10 @@ import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
 import {
   calculateSeriesMaximum,
-  omitValuePropertiesForAnnotation,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
+  omitValuePropertiesForAnnotation,
   SeriesConfig,
   useHoverState,
   useLegendItems,
@@ -176,8 +176,6 @@ export function TimeSeriesChart<
     paddingTop: showWeekNumbers ? 20 : undefined,
   });
 
-  const legendItems = useLegendItems(seriesConfig, dataOptions);
-
   const values = useValuesInTimeframe(allValues, timeframe);
 
   const cutValuesConfig = useMemo(
@@ -200,13 +198,26 @@ export function TimeSeriesChart<
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      bounds,
-      numTicks: yTickValues?.length || numGridLines,
-    }
+  const {
+    xScale,
+    yScale,
+    getX,
+    getY,
+    getY0,
+    getY1,
+    dateSpanWidth,
+    hasAllZeroValues,
+  } = useScales({
+    values,
+    maximumValue: seriesMax,
+    bounds,
+    numTicks: yTickValues?.length || numGridLines,
+  });
+
+  const legendItems = useLegendItems(
+    xScale.domain(),
+    seriesConfig,
+    dataOptions
   );
 
   const today = useCurrentDate();
@@ -322,6 +333,7 @@ export function TimeSeriesChart<
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
               isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+              hasAllZeroValues={hasAllZeroValues}
               showWeekNumbers={showWeekNumbers}
             />
 
