@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
