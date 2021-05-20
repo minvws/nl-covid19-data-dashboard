@@ -109,11 +109,13 @@ export function getTimeDomain<T extends TimestampedValue>({
   values,
   today,
   withPadding,
+  tickCount = 2,
 }: {
   values: T[];
   today: Date;
   withPadding: boolean;
-}): [start: number, end: number] {
+  tickCount?: number;
+}): number[] {
   /**
    * Return a sensible default when no values fall within the selected timeframe
    */
@@ -121,6 +123,19 @@ export function getTimeDomain<T extends TimestampedValue>({
     const todayInSeconds = today.getTime() / 1000;
     return [todayInSeconds, todayInSeconds + ONE_DAY_IN_SECONDS];
   }
+
+  /**
+   * The gap between each tick between start and end
+   */
+  const gap = Math.floor(values.length / (tickCount - 1));
+  /**
+   * Prepare an array of indexes that can be mapped to the needed dates
+   * (Minus the start and end, we just want the ticks in between)
+   */
+  const tickIndexes =
+    gap > 1
+      ? new Array(tickCount - 2).fill(gap).map((x, i) => x * (i + 1))
+      : [];
 
   /**
    * This code is assuming the values array is already sorted in time, so we
@@ -133,6 +148,9 @@ export function getTimeDomain<T extends TimestampedValue>({
       isDefined(start) && isDefined(end),
       `Missing start or end timestamp in [${start}, ${end}]`
     );
+    const middle: number[] = tickIndexes.map(
+      (index) => values[index].date_unix
+    );
 
     /**
      * In cases where we render daily data, it is probably good to add a bit of
@@ -140,8 +158,12 @@ export function getTimeDomain<T extends TimestampedValue>({
      * within the "stretched" domain on both ends of the graph.
      */
     return withPadding
-      ? [start - ONE_DAY_IN_SECONDS / 2, end + ONE_DAY_IN_SECONDS / 2]
-      : [start, end];
+      ? [
+          start - ONE_DAY_IN_SECONDS / 2,
+          ...middle,
+          end + ONE_DAY_IN_SECONDS / 2,
+        ]
+      : [start, ...middle, end];
   }
 
   if (isDateSpanSeries(values)) {
@@ -151,7 +173,15 @@ export function getTimeDomain<T extends TimestampedValue>({
       isDefined(start) && isDefined(end),
       `Missing start or end timestamp in [${start}, ${end}]`
     );
-    return [start, end];
+    const middle: number[] = tickIndexes.map((index) => {
+      const value = values[index];
+      const midweek =
+        value.date_start_unix +
+        (value.date_end_unix - value.date_start_unix) / 2;
+      return midweek;
+    });
+
+    return [start, ...middle, end];
   }
 
   throw new Error(

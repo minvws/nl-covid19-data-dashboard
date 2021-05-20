@@ -39,6 +39,7 @@ import {
   useValueWidth,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
+import { useXTickCount } from './logic/use-x-tick-count';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -220,10 +221,18 @@ export function TimeSeriesChart<
     dataOptions
   );
 
+  const xTickCount = useXTickCount(values);
+
   const today = useCurrentDate();
   const xTickValues = useMemo(
-    () => getTimeDomain({ values, today, withPadding: false }),
-    [values, today]
+    () =>
+      getTimeDomain({
+        values,
+        today,
+        withPadding: false,
+        tickCount: xTickCount,
+      }),
+    [values, today, xTickCount]
   );
 
   const [hoverState, chartEventHandlers] = useHoverState({

@@ -11,10 +11,11 @@ import { GridRows } from '@visx/grid';
 import { scaleLinear } from '@visx/scale';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { differenceInDays } from 'date-fns';
+import first from 'lodash/first';
+import last from 'lodash/last';
 import { memo, Ref, useCallback } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { createDate } from '~/utils/create-date';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
@@ -39,7 +40,7 @@ type AxesProps = {
    */
   yAxisRef?: Ref<SVGGElement>;
   yTickValues?: number[];
-  xTickValues: [number, number];
+  xTickValues: number[];
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -79,7 +80,8 @@ export const Axes = memo(function Axes({
   xRangePadding,
   hasAllZeroValues: allZeroValues,
 }: AxesProps) {
-  const [startUnix, endUnix] = xTickValues;
+  const startUnix = first(xTickValues) ?? 0;
+  const endUnix = last(xTickValues) ?? 0;
   const isMounted = useIsMounted();
 
   const {
@@ -115,16 +117,13 @@ export const Axes = memo(function Axes({
         }
       }
 
-      const startYear = createDate(startUnix).getFullYear();
-      const endYear = createDate(endUnix).getFullYear();
-
-      const isMultipleYearSpan = startYear !== endYear;
-
-      return isMultipleYearSpan && [startUnix, endUnix].includes(date_unix)
-        ? formatDateFromSeconds(date_unix, 'axis-with-year')
-        : formatDateFromSeconds(date_unix, 'axis');
+      if (xTickValues.length < 6) {
+        return formatDateFromSeconds(date_unix, 'axis-with-year-long');
+      } else {
+        return formatDateFromSeconds(date_unix, 'axis-with-year');
+      }
     },
-    [isMounted, formatRelativeDate, startUnix, endUnix, formatDateFromSeconds]
+    [isMounted, formatRelativeDate, formatDateFromSeconds, xTickValues.length]
   );
 
   /**

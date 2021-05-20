@@ -15,6 +15,7 @@ export type formatStyle =
   | 'iso'
   | 'axis'
   | 'axis-with-year'
+  | 'axis-with-year-long'
   | 'weekday-medium'
   | 'day-month';
 
@@ -117,6 +118,13 @@ export function createFormatting(
     timeZone: 'Europe/Amsterdam',
   });
 
+  const DayMonthLongYear = new Intl.DateTimeFormat(languageTag, {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'Europe/Amsterdam',
+  });
+
   const WeekdayMedium = new Intl.DateTimeFormat(languageTag, {
     weekday: 'long',
     month: 'long',
@@ -152,6 +160,9 @@ export function createFormatting(
 
       case 'axis-with-year': // '23 jul. 2021'
         return DayMonthShortYear.format(date);
+
+      case 'axis-with-year-long': // '23 jul. 2021'
+        return DayMonthLongYear.format(date);
 
       case 'weekday-medium':
         return WeekdayMedium.format(date);
