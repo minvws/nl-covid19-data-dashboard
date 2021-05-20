@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
+import { useSetLinkTabbability } from '~/components/collapsible/use-set-link-tabbability';
 import {
   EscalationLevelInfoLabel,
   EscalationLevelLabel,
@@ -21,20 +22,24 @@ type CollapsibleProps = {
 export function Collapsible(props: CollapsibleProps) {
   const { level, rowCount, children } = props;
 
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { ref, height: contentHeight } = useResizeObserver();
 
   const breakpoints = useBreakpoints(true);
+  const { wrapperRef } = useSetLinkTabbability(isOpen);
 
   return (
     <Box borderTopColor="lightGray" borderTopStyle="solid" borderTopWidth="1px">
       <Header
-        open={open}
-        onClick={() => setOpen((x) => !x)}
+        open={isOpen}
+        onClick={rowCount > 0 ? () => setIsOpen((x) => !x) : undefined}
         showChevron={rowCount > 0}
       >
-        <Box flex={{ _: '0.1', sm: '0.2' }} color="black">
+        <Box
+          color="black"
+          minWidth={{ _: '2rem', sm: '13.5rem', lg: '15.5rem' }}
+        >
           {breakpoints.sm ? (
             <EscalationLevelInfoLabel
               level={level}
@@ -45,7 +50,7 @@ export function Collapsible(props: CollapsibleProps) {
             <EscalationLevelIcon level={level} size="medium" />
           )}
         </Box>
-        <Box ml={2} flex={{ _: '0.9', sm: '0.8' }} color="black">
+        <Box ml={2} color="black">
           {!breakpoints.sm && (
             <EscalationLevelLabel level={level} fontSize={2} />
           )}
@@ -54,10 +59,10 @@ export function Collapsible(props: CollapsibleProps) {
       </Header>
       {rowCount > 0 && (
         <Panel
-          open={open}
+          open={isOpen}
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
-            height: open ? contentHeight : 0,
+            height: isOpen ? contentHeight : 0,
           }}
         >
           <div
@@ -66,7 +71,7 @@ export function Collapsible(props: CollapsibleProps) {
               overflow: 'hidden',
             })}
           >
-            {children}
+            <div ref={wrapperRef}>{children}</div>
           </div>
         </Panel>
       )}
@@ -99,7 +104,8 @@ const Header = styled.button<{ showChevron: boolean; open: boolean }>((props) =>
     fontSize: '1.25rem',
     textAlign: 'left',
     cursor: props.showChevron ? 'pointer' : 'default',
-    borderBottom: props.open ? '1px solid lightGray' : undefined,
+    borderBottom: '1px solid',
+    borderBottomColor: props.open ? 'lightGray' : 'transparent',
 
     '&::before': props.showChevron
       ? {
@@ -109,14 +115,14 @@ const Header = styled.button<{ showChevron: boolean; open: boolean }>((props) =>
           transform: props.open ? 'rotate(0deg)' : 'rotate(-90deg)',
           transition: 'transform 0.4s ease-in-out',
           content: '""',
-          flex: asResponsiveArray({ _: '0 0 1.5em', lg: '0 0 3em' }),
+          flex: '0 0 3rem',
           height: '1.25rem',
           py: 0,
         }
       : {
           content: '""',
           height: '1.25rem',
-          flex: asResponsiveArray({ _: '0 0 1.5em', lg: '0 0 3em' }),
+          flex: '0 0 3rem',
         },
   })
 );

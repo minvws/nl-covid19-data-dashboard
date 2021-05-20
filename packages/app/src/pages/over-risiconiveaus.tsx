@@ -147,8 +147,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           borderTopColor="lightGray"
           flexDirection={{ _: 'column', sm: 'row' }}
         >
-          <Box flex="0.3" display="flex" justifyContent="center">
-            <Box width="12em">
+          <Box display="flex" justifyContent="center">
+            <Box p={1} minWidth={{ _: '16rem', lg: '20rem' }} flex={0}>
               <SafetyRegionChoropleth
                 minHeight={200}
                 data={choropleth.vr}
@@ -162,8 +162,10 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               />
             </Box>
           </Box>
-          <Box flex="0.7">
-            <Heading level={2}>{content.scoreBoardTitle}</Heading>
+          <Box pr={{ md: 4 }} flex={1} maxWidth="maxWidthText">
+            <Heading level={3} as={'h2'}>
+              {content.scoreBoardTitle}
+            </Heading>
             <Text>{content.scoreBoardDescription}</Text>
             {lastValue && (
               <UnorderedList>
@@ -215,7 +217,7 @@ interface ContentProps {
 
 export function Content({ children }: ContentProps) {
   return (
-    <Box bg="white" fontSize="1.125rem">
+    <Box bg="white" fontSize={{ md: '1.125rem' }}>
       <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth="infoWidth" mx="auto">
         {children}
       </Box>

@@ -30,7 +30,7 @@ export function RegionCubes({
       : regionLabels.none;
 
   return (
-    <Box display="flex" flexWrap="wrap">
+    <Box display={{ sm: 'flex' }} flexWrap="wrap">
       {count > 0 && (
         <Container>
           {items.map((_, index) => (
@@ -52,22 +52,23 @@ const Container = styled.div(
     alignItems: 'center',
     mr: 2,
     flexWrap: 'wrap',
+    my: asResponsiveArray({ _: 1, sm: 0 }),
   })
 );
 
 const Cube = styled.div<{ color: string }>((x) =>
   css({
-    minWidth: asResponsiveArray({ _: '0.5em', sm: '1em' }),
-    width: asResponsiveArray({ _: '0.5em', sm: '1em' }),
+    minWidth: asResponsiveArray({ _: '0.5em', md: '1em' }),
+    width: asResponsiveArray({ _: '0.5em', md: '1em' }),
     height: '1em',
     bg: x.color,
     '&:first-child': {
-      borderTopLeftRadius: '4px',
-      borderBottomLeftRadius: '4px',
+      borderTopLeftRadius: '3px',
+      borderBottomLeftRadius: '3px',
     },
     '&:last-child': {
-      borderTopRightRadius: '4px',
-      borderBottomRightRadius: '4px',
+      borderTopRightRadius: '3px',
+      borderBottomRightRadius: '3px',
     },
   })
 );

@@ -14,8 +14,21 @@ import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { VrScoreboardData } from '../';
 import { useEscalationThresholds } from '../../thresholds';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactNode } from 'react';
 
-export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
+interface SafetyRegionRowProps {
+  vrData: VrScoreboardData;
+  maxHospitalAdmissionsPerMillion: number;
+  maxPositiveTestedPer100k: number;
+}
+
+export function SafetyRegionRow({
+  vrData,
+  maxHospitalAdmissionsPerMillion,
+  maxPositiveTestedPer100k,
+}: SafetyRegionRowProps) {
   const {
     hospitalAdmissionsEscalationThresholds,
     positiveTestedEscalationThresholds,
@@ -35,26 +48,51 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
         as="a"
         color="black"
         fontWeight="bold"
-        display="flex"
-        flexDirection={{ _: 'column', lg: 'row' }}
+        display={{ _: 'block', lg: 'flex' }}
         width="100%"
         justifyItems="flex-start"
         borderTopColor="lightGray"
         borderTopStyle="solid"
         borderTopWidth="1px"
-        css={css({ cursor: 'pointer', textDecoration: 'none' })}
+        css={css({
+          cursor: 'pointer',
+          textDecoration: 'none',
+          '&:hover, &:focus': {
+            color: 'blue',
+          },
+        })}
       >
         <VrLinkCell color={escalationColor}>
           <InlineText>{vrData.safetyRegionName}</InlineText>
         </VrLinkCell>
-        <Box display="flex" flex="2" justifyItems="center">
+        <Box
+          display={{ _: 'block', sm: 'flex' }}
+          flex="2"
+          justifyItems="center"
+        >
           <BarScaleCell
             value={escalationLevelData.positive_tested_per_100k}
             thresholds={positiveTestedEscalationThresholds}
+            maxValue={maxPositiveTestedPer100k}
+            icon={
+              <GetestIcon
+                width="32px"
+                height="32px"
+                style={{ minWidth: '24px' }}
+              />
+            }
           />
           <BarScaleCell
             value={escalationLevelData.hospital_admissions_per_million}
             thresholds={hospitalAdmissionsEscalationThresholds}
+            maxValue={maxHospitalAdmissionsPerMillion}
+            icon={
+              <Ziekenhuis
+                width="32px"
+                height="32px"
+                style={{ minWidth: '24px' }}
+              />
+            }
           />
         </Box>
       </Box>
@@ -65,16 +103,28 @@ export function SafetyRegionRow({ vrData }: { vrData: VrScoreboardData }) {
 const BarScaleCell = ({
   value,
   thresholds,
+  maxValue,
+  icon,
 }: {
   value: number;
   thresholds: CategoricalBarScaleCategory[];
+  maxValue: number;
+  icon: ReactNode;
 }) => {
   const { formatNumber } = useIntl();
 
   return (
-    <Box flex="1" display="flex" width="100%">
+    <Box
+      flex="1"
+      display="flex"
+      width="100%"
+      pb={{ _: 2, lg: 3 }}
+      pt={{ _: 0, lg: 2 }}
+      color="black"
+    >
+      <Box display={{ sm: 'none' }}>{icon}</Box>
       <Box
-        flex="0.1"
+        flex="0 0 1.5rem"
         alignItems="center"
         display="flex"
         justifyContent={{ lg: 'flex-end' }}
@@ -82,12 +132,18 @@ const BarScaleCell = ({
       >
         <InlineText fontWeight="bold">{formatNumber(value)}</InlineText>
       </Box>
-      <Box flex="0.9" pr={{ _: 3, lg: 5 }}>
+      <Box
+        flex={{ _: '9', md: '39' }}
+        pr={5}
+        pb={2}
+        maxWidth={{ _: '300px', lg: '250px' }}
+      >
         <CategoricalBarScale
           hideLegend
           hideNumbers
           categories={thresholds}
           value={value}
+          maxValue={maxValue}
         />
       </Box>
     </Box>
@@ -96,10 +152,12 @@ const BarScaleCell = ({
 
 const VrLinkCell = styled.div<{ color: string }>((x) =>
   css({
-    flex: 0.8,
+    flex: '0 0 18rem',
     display: 'flex',
     alignItems: 'center',
-    mt: asResponsiveArray({ _: 4, lg: 0 }),
+    mt: asResponsiveArray({ _: 3, lg: 0 }),
+    pr: 2,
+    minWidth: '11em',
     '&::before': asResponsiveArray({
       lg: {
         content: '""',
@@ -121,6 +179,10 @@ const VrLinkCell = styled.div<{ color: string }>((x) =>
       flex: '0 0 1rem',
       height: '1rem',
       pl: '2rem',
+      fill: 'currentColor',
+    },
+    'a:hover &::after, a:focus &::after': {
+      backgroundImage: 'url("/images/chevron.svg")',
     },
   })
 );

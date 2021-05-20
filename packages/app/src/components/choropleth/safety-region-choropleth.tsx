@@ -132,15 +132,12 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [highlightCode]
   );
 
-  const {
-    isTabInteractive,
-    tabInteractiveButton,
-    anchorEventHandlers,
-  } = useTabInteractiveButton(
-    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-      subject: siteText.choropleth.vr.plural,
-    })
-  );
+  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
+    useTabInteractiveButton(
+      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+        subject: siteText.choropleth.vr.plural,
+      })
+    );
 
   const renderHover = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
@@ -152,7 +149,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         <HoverPathLink
           href={getLink ? getLink(vrcode) : undefined}
           title={vrname}
-          isTabInteractive={isTabInteractive}
+          isTabInteractive={getLink ? isTabInteractive : false}
           id={vrcode}
           pathData={path}
           stroke={isEscalationLevelTheme || isSelected ? '#fff' : undefined}
@@ -183,7 +180,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
   return (
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
-      {tabInteractiveButton}
+      {getLink ? tabInteractiveButton : null}
       <Choropleth
         minHeight={minHeight}
         description={dataDescription}

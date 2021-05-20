@@ -12,6 +12,7 @@ interface CategoricalBarScaleProps {
   categories: CategoricalBarScaleCategory[];
   hideLegend?: boolean;
   hideNumbers?: boolean;
+  maxValue?: number;
 }
 
 export interface CategoricalBarScaleCategory {
@@ -33,10 +34,11 @@ export function CategoricalBarScale({
   categories,
   hideLegend = false,
   hideNumbers = false,
+  maxValue: givenMaxValue,
 }: CategoricalBarScaleProps) {
   const maxValue = categories.reduce((maxValue, category) => {
     return Math.max(category.threshold, maxValue);
-  }, value);
+  }, givenMaxValue ?? value);
 
   const barPieces = categories
     .filter((x) => isDefined(x.name))
@@ -52,7 +54,13 @@ export function CategoricalBarScale({
 
   return (
     <>
-      <Box position="relative" width="100%" display="flex" py={4}>
+      <Box
+        position="relative"
+        width="100%"
+        display="flex"
+        pt={14}
+        pb={!hideNumbers || !hideLegend ? 4 : undefined}
+      >
         {barPieces.map((category, index) => (
           <Box
             style={{ width: `${(category.width / maxValue) * 100}%` }}
@@ -82,7 +90,7 @@ export function CategoricalBarScale({
         <Box
           position="absolute"
           left={`${(value / maxValue) * 100}%`}
-          top={18}
+          top={0}
           bg="black"
           width={7}
           height={26}
