@@ -28,6 +28,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -69,6 +70,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
     'municipal'
   );
+
+  const sewerSplitAreaChart = useFeature('sewerSplitAreaChart');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -155,64 +158,95 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            timeframeOptions={['all', '5weeks']}
-            title={text.linechart_titel}
-            metadata={{
-              source: text.bronnen.rivm,
-            }}
-            description={text.linechart_description}
-          >
-            {(timeframe) => (
-              <TimeSeriesChart
-                values={sewerAverages.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'split-area',
-                    metricProperty: 'average',
-                    label: 'Weekgemiddelde',
+          {sewerSplitAreaChart.isEnabled ? (
+            <ChartTile
+              timeframeOptions={['all', '5weeks']}
+              title={text.linechart_titel}
+              metadata={{
+                source: text.bronnen.rivm,
+              }}
+              description={text.linechart_description}
+            >
+              {(timeframe) => (
+                <TimeSeriesChart
+                  values={sewerAverages.values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'split-area',
+                      metricProperty: 'average',
+                      label: 'Weekgemiddelde',
 
-                    /**
-                     * @TODO use this config to implement SplitAreaTrend based
-                     * on this https://airbnb.io/visx/splitlinepath
-                     */
-                    splitPoints: [
-                      {
-                        value: 200,
-                        color: colors.data.scale.blue[0],
-                        label: '0 - 200',
-                      },
-                      {
-                        value: 400,
-                        color: colors.data.scale.blue[1],
-                        label: '200 - 400',
-                      },
-                      {
-                        value: 600,
-                        // color: colors.data.scale.blue[2],
-                        color: 'hotpink',
-                        label: '400 - 600',
-                      },
-                      {
-                        value: 800,
-                        color: colors.data.scale.blue[3],
-                        label: '600 - 800',
-                      },
-                      {
-                        value: Infinity,
-                        color: colors.data.scale.blue[4],
-                        label: '800 - 1000',
-                      },
-                    ],
-                  },
-                ]}
-                dataOptions={{
-                  valueAnnotation: siteText.waarde_annotaties.riool_normalized,
-                }}
-              />
-            )}
-          </ChartTile>
+                      /**
+                       * @TODO use this config to implement SplitAreaTrend based
+                       * on this https://airbnb.io/visx/splitlinepath
+                       */
+                      splitPoints: [
+                        {
+                          value: 200,
+                          color: colors.data.scale.blue[0],
+                          label: '0 - 200',
+                        },
+                        {
+                          value: 400,
+                          color: colors.data.scale.blue[1],
+                          label: '200 - 400',
+                        },
+                        {
+                          value: 600,
+                          color: colors.data.scale.blue[2],
+                          // color: 'hotpink',
+                          label: '400 - 600',
+                        },
+                        {
+                          value: 800,
+                          color: colors.data.scale.blue[3],
+                          label: '600 - 800',
+                        },
+                        {
+                          value: Infinity,
+                          color: colors.data.scale.blue[4],
+                          label: '800 - 1000',
+                        },
+                      ],
+                    },
+                  ]}
+                  dataOptions={{
+                    valueAnnotation:
+                      siteText.waarde_annotaties.riool_normalized,
+                  }}
+                />
+              )}
+            </ChartTile>
+          ) : (
+            <ChartTile
+              timeframeOptions={['all', '5weeks']}
+              title={text.linechart_titel}
+              metadata={{
+                source: text.bronnen.rivm,
+              }}
+              description={text.linechart_description}
+            >
+              {(timeframe) => (
+                <TimeSeriesChart
+                  values={sewerAverages.values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'average',
+                      label: text.linechart_particle_trend_label,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    valueAnnotation:
+                      siteText.waarde_annotaties.riool_normalized,
+                  }}
+                />
+              )}
+            </ChartTile>
+          )}
 
           <ChoroplethTile
             title={text.map_titel}
