@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
@@ -21,17 +21,8 @@ export const CollapsibleButton = ({
   children,
   icon,
 }: CollapsibleButtonProps) => {
-  const {
-    ref: contentRef,
-    height: contentHeight = 0,
-    width: contentWidth = 0,
-  } = useResizeObserver();
-
-  const {
-    ref: buttonRef,
-    width: buttonWidth = 0,
-    height: buttonHeight = 0,
-  } = useResizeObserver();
+  const contentObserver = useResizeObserver();
+  const buttonObserver = useResizeObserver();
 
   const [isOpen, setIsOpen] = useState(false);
   const { wrapperRef } = useSetLinkTabbability(isOpen);
@@ -41,11 +32,23 @@ export const CollapsibleButton = ({
    * this is alligned with the position of the button percentage wise based of the content wrapper
    */
   const clipPathCalculation = useMemo(() => {
-    if (!buttonWidth || !contentWidth || !buttonHeight || !contentHeight)
+    if (
+      !buttonObserver.width ||
+      !buttonObserver.height ||
+      !contentObserver.width ||
+      !contentObserver.height
+    )
       return '0 0, 100% 0, 100% 0, 0 0';
 
-    const width = ((buttonWidth / contentWidth) * 100 - 100) / 2;
-    const height = (buttonHeight / contentHeight) * 100 * -1;
+    /**
+     * First find the percentage of how much is the button is the width of the size of the container.
+     * Deduct 100 and divide it by 2 to make it negative value for the left side of the mask to make
+     * it fully expand to the left edge of the container.
+     * In the return the value it's becoming a positive one so it can animate the mask to the right edge of the container.
+     */
+    const width =
+      ((buttonObserver.width / contentObserver.width) * 100 - 100) / 2;
+    const height = (buttonObserver.height / contentObserver.height) * 100 * -1;
 
     return `
       ${width * -1}% ${height}%,
@@ -53,27 +56,34 @@ export const CollapsibleButton = ({
       ${width - 100 * -1}% 0%,
       ${width * -1}% 0%
   `;
-  }, [buttonWidth, contentWidth, buttonHeight, contentHeight]);
+  }, [
+    buttonObserver.width,
+    buttonObserver.height,
+    contentObserver.width,
+    contentObserver.height,
+  ]);
 
   /**
    * falback to `undefined` to prevent an initial animation from `0` to
    * measured height
    */
-  const height = buttonHeight + (isOpen ? contentHeight : 0) || undefined;
+  const height =
+    (buttonObserver.height ?? 0) + (isOpen ? contentObserver.height ?? 0 : 0) ||
+    undefined;
 
   return (
     <Container
       style={{ height }}
       isOpen={isOpen}
-      contentWidth={contentWidth}
-      contentHeight={contentHeight}
-      buttonHeight={buttonHeight}
-      buttonWidth={buttonWidth}
-      clipPathCalculation={clipPathCalculation}
+      buttonWidth={buttonObserver.width ?? 0}
+      buttonHeight={buttonObserver.height ?? 0}
+      contentWidth={contentObserver.width ?? 0}
+      contentHeight={contentObserver.height ?? 0}
+      clipPathCalculation={clipPathCalculation ?? 0}
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
-          <Box ref={buttonRef} display="flex">
+          <Box ref={buttonObserver.ref} display="flex">
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}
@@ -83,7 +93,7 @@ export const CollapsibleButton = ({
         </ButtonContainer>
 
         <DisclosurePanel>
-          <div ref={contentRef}>
+          <div ref={contentObserver.ref}>
             <div ref={wrapperRef}>{children}</div>
           </div>
         </DisclosurePanel>
@@ -125,7 +135,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       width: x.isOpen ? '100%' : 'fit-content',
       border: '1px solid',
       borderRadius: 1,
-      borderColor: x.isOpen ? 'rgba(0, 0, 0, 0)' : 'lightGray',
+      borderColor: x.isOpen ? 'transparent' : 'lightGray',
       px: asResponsiveArray({ _: 1, sm: 3 }),
       py: 3,
       background: 'none',
@@ -166,7 +176,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
     '[data-reach-disclosure-button]:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
-      outlineColor: x.isOpen ? 'rgba(0, 0, 0, 0)' : 'blue',
+      outlineColor: x.isOpen ? 'transparent' : 'blue',
     },
 
     //panel

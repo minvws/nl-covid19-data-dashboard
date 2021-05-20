@@ -65,7 +65,7 @@ import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import GrafiekIcon from '~/assets/grafiek.svg';
+import GrafiekIcon from '~/assets/chart.svg';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
