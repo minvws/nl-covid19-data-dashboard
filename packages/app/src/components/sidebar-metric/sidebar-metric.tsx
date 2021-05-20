@@ -8,7 +8,7 @@ import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
+import { SiteText } from '~/locale';
 import {
   DataScope,
   getMetricConfig,
@@ -28,7 +28,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
    * Currently only behavior is doing that.
    */
   metricProperty?: string;
-  localeTextKey: keyof AllLanguages;
+  localeTextKey: keyof SiteText;
   differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
