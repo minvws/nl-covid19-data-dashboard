@@ -238,7 +238,7 @@ export function useHoverState<T extends TimestampedValue>({
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
             };
-          case 'split-line':
+          case 'split-area':
             return {
               seriesValue,
               x: xScale(xValue),

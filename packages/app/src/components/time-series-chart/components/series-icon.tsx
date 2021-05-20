@@ -10,6 +10,12 @@ import { findSplitPointForValue } from '../logic';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
+  /**
+   * Value here is passed in from looking up the metricProperty in the original
+   * values array that was passed to the chart. These values can be number or
+   * null, but we also want the value to be optional because other than
+   * 'split-area' types we do not need to use this value.
+   */
   value?: number | null;
 }
 
@@ -50,7 +56,7 @@ SeriesIconProps<T>) {
       return (
         <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
       );
-    case 'split-line':
+    case 'split-area':
       return isPresent(value) ? (
         <AreaTrendIcon
           color={findSplitPointForValue(config.splitPoints, value).color}

@@ -169,7 +169,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 seriesConfig={[
                   {
-                    type: 'split-line',
+                    type: 'split-area',
                     metricProperty: 'average',
                     label: 'Weekgemiddelde',
 
@@ -190,7 +190,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                       },
                       {
                         value: 600,
-                        color: colors.data.scale.blue[2],
+                        // color: colors.data.scale.blue[2],
+                        color: 'hotpink',
                         label: '400 - 600',
                       },
                       {

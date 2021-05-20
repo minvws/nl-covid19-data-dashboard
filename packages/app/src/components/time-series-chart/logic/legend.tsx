@@ -14,7 +14,7 @@ export function useLegendItems<T extends TimestampedValue>(
   const legendItems = useMemo(() => {
     const items = config.filter(isVisible).flatMap<LegendItem>((x) => {
       switch (x.type) {
-        case 'split-line':
+        case 'split-area':
           return x.splitPoints.map((v) => ({
             color: v.color,
             label: v.label,

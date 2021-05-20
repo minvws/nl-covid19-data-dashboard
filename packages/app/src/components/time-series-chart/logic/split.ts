@@ -1,11 +1,46 @@
-import { isPresent } from 'ts-is-present';
-import { first, last } from 'lodash';
+import { first } from 'lodash';
+import { SeriesSingleValue } from './series';
 
 export type SplitPoint = {
   value: number;
   color: string;
   label: string;
 };
+
+export type Segment = { items: SeriesSingleValue[]; splitIndex: number };
+
+export function splitSeriesIntoSegments(
+  series: SeriesSingleValue[],
+  splitPoints: SplitPoint[]
+) {
+  let segmentCounter = 0;
+
+  /**
+   * Keep a running split index. Whenever the value enters a different
+   * split-point it is detected by a change in index, and the loop will start
+   * recording items to a new segment. The initial segment split index is based
+   * on the value of the first series item.
+   */
+  let runningSplitIndex = findSplitIndexForValue(
+    splitPoints,
+    first(series)?.__value
+  );
+
+  const segments: Segment[] = [{ items: [], splitIndex: runningSplitIndex }];
+
+  for (const item of series) {
+    const splitIndex = findSplitIndexForValue(splitPoints, item.__value);
+
+    if (splitIndex !== runningSplitIndex) {
+      segments[++segmentCounter] = { items: [], splitIndex };
+      runningSplitIndex = splitIndex;
+    }
+
+    segments[segmentCounter].items.push(item);
+  }
+
+  return segments;
+}
 
 /**
  * Find the split point belonging to the given value.
@@ -19,17 +54,25 @@ export type SplitPoint = {
  */
 export function findSplitPointForValue(
   splitPoints: SplitPoint[],
-  value: number | null
+  value?: number | null
 ) {
-  if (!isPresent(value)) {
-    first(splitPoints) as SplitPoint;
+  const index = findSplitIndexForValue(splitPoints, value);
+
+  return splitPoints[index];
+}
+
+export function findSplitIndexForValue(
+  splitPoints: SplitPoint[],
+  value?: number | null
+) {
+  /**
+   * If the value is 0 or null we return the first split
+   */
+  if (!value) {
+    return 0;
   }
 
-  for (const split of splitPoints) {
-    if (isPresent(value) && value < split.value) {
-      return split;
-    }
-  }
+  const index = splitPoints.findIndex((split) => split.value > value);
 
-  return last(splitPoints) as SplitPoint;
+  return index === -1 ? splitPoints.length - 1 : index;
 }

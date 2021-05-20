@@ -36,7 +36,7 @@ export function useFormatSeriesValue() {
     ) {
       switch (config.type) {
         case 'line':
-        case 'split-line':
+        case 'split-area':
         case 'area':
         case 'bar':
         case 'stacked-area':

@@ -86,7 +86,7 @@ export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
  * completely.
  */
 export type SplitAreaDefinition<T extends TimestampedValue> = {
-  type: 'split-line';
+  type: 'split-area';
   metricProperty: keyof T;
   label: string;
   shortLabel?: string;

@@ -1,5 +1,10 @@
-import { LinePath, SplitLinePath } from '@visx/shape';
-import { SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
+import { ClipPath } from '@visx/clip-path';
+import { LinePath } from '@visx/shape';
+import { PositionScale } from '@visx/shape/lib/types';
+import { useMemo } from 'react';
+import { isPresent } from 'ts-is-present';
+import { Bounds, SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
+import { ColorStack } from './color-stack';
 
 export type LineStyle = 'solid' | 'dashed';
 
@@ -11,54 +16,71 @@ type SplitAreaTrendProps = {
   strokeWidth?: number;
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
+  bounds: Bounds;
+  yScale: PositionScale;
 };
 
-type Point = { x: number; y: number };
+// type Point = { x: number; y: number };
 
 export function SplitAreaTrend({
   series,
   strokeWidth = DEFAULT_STROKE_WIDTH,
-  splitPoints: __,
+  splitPoints,
   getX,
   getY,
+  bounds,
+  yScale,
 }: SplitAreaTrendProps) {
-  // const nonNullSeries = useMemo(
-  //   () => series.filter((x) => isPresent(x.__value)),
-  //   [series]
-  // );
-  // console.log
+  // const segments = splitSeriesIntoSegments(series, splitPoints);
 
-  const lineSegments = [series];
+  const nonNullSeries = useMemo(
+    () => series.filter((x) => isPresent(x.__value)),
+    [series]
+  );
 
   return (
-    // <LinePath
-    //   data={nonNullSeries}
-    //   x={getX}
-    //   y={getY}
-    //   stroke={color}
-    //   strokeWidth={strokeWidth}
-    //   strokeLinecap="butt"
-    //   strokeLinejoin="round"
-    // />
-
-    <SplitLinePath
-      segments={lineSegments}
-      x={getX}
-      y={getY}
-      styles={lineSegments.map((x) => ({ stroke: x.color }))}
-    >
-      {({ segment, styles }) => (
+    <g>
+      <ColorStack splitPoints={splitPoints} bounds={bounds} yScale={yScale} />
+      <LinePath
+        data={nonNullSeries}
+        x={getX}
+        y={getY}
+        stroke={splitPoints[0].color}
+        strokeWidth={strokeWidth}
+        strokeLinecap="butt"
+        strokeLinejoin="round"
+      />
+      <ClipPath id="todo_some_unique_id">
         <LinePath
-          data={segment}
-          /* x={getX} y={getY} */ {...styles}
-          x={(d: Point) => d.x || 0}
-          y={(d: Point) => d.y || 0}
+          data={nonNullSeries}
+          x={getX}
+          y={getY}
+          stroke={splitPoints[0].color}
+          strokeWidth={strokeWidth}
           strokeLinecap="butt"
           strokeLinejoin="round"
-          strokeWidth={strokeWidth}
         />
-      )}
-    </SplitLinePath>
+      </ClipPath>
+
+      {/* <SplitLinePath
+        segments={segments.map((x) => x.items)}
+        x={getX}
+        y={getY}
+        styles={segments.map((x) => ({
+          stroke: splitPoints[x.splitIndex].color,
+        }))}
+      >
+        {({ segment, styles }) => (
+          <LinePath
+            data={segment}
+            {...styles}
+            x={(d: Point) => d.x || 0}
+            y={(d: Point) => d.y || 0}
+            strokeWidth={strokeWidth}
+          />
+        )}
+      </SplitLinePath> */}
+    </g>
   );
 }
 
