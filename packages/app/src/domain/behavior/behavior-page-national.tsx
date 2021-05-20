@@ -1,3 +1,4 @@
+import { RegionsBehavior } from '@corona-dashboard/common';
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ContentHeader } from '~/components/content-header';
@@ -5,12 +6,10 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { BehaviorChoropleth } from '~/domain/behavior/behavior-choropleth';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { BehaviorChoropleth } from '~/domain/behavior/behavior-choropleth';
-// import { Select } from '~/components/select';
-import { RegionsBehavior } from '@corona-dashboard/common';
 interface BehaviourPageNationalProps {
   data: any;
   content: any;
@@ -27,19 +26,11 @@ export function BehaviorPageNational({
   const { nl_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(
-    behaviorLastValue
-  );
+  const { sortedCompliance, sortedSupport } =
+    useFormatAndSortBehavior(behaviorLastValue);
 
   return (
     <TileList>
-      <BehaviorChoropleth
-        title={nl_gedrag.verdeling_in_nederland.titel}
-        description={nl_gedrag.verdeling_in_nederland.intro}
-        data={behaviorData}
-        sorted={sortedCompliance}
-      />
-
       <ContentHeader
         category={siteText.nationaal_layout.headings.gedrag}
         title={nl_gedrag.pagina.titel}
@@ -115,6 +106,12 @@ export function BehaviorPageNational({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <BehaviorChoropleth
+        title={nl_gedrag.verdeling_in_nederland.titel}
+        description={nl_gedrag.verdeling_in_nederland.description}
+        data={behaviorData}
+      />
     </TileList>
   );
 }

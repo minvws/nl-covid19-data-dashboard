@@ -1,24 +1,23 @@
-import { Box } from '~/components/base';
-import { Tile } from '~/components/tile';
-import { Text, Heading } from '~/components/typography';
-import { useEffect, useState } from 'react';
 import {
+  ChoroplethThresholdsValue,
   RegionsBehavior,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import css from '@styled-system/css';
-import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
+import { useState } from 'react';
+import { Box } from '~/components/base';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { BehaviorIdentifier } from './behavior-types';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
+import { Select } from '~/components/select';
+import { Tile } from '~/components/tile';
+import { Heading, Text } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
 
-const blacklistedItems = [
-  'symptoms_get_tested',
-  'symptoms_stay_home',
-  'wear_mask_public_transport',
-];
 interface BehaviorChoroplethProps {
   title: string;
   description: string;
@@ -29,17 +28,22 @@ export function BehaviorChoropleth({
   title,
   description,
   data,
-  sorted,
 }: BehaviorChoroplethProps) {
-  const [currentMetric, setCurrentMetric] = useState(sorted[4]);
-  const [isMetricAvaliable, setIsMetricAvaliable] = useState(true);
+  const { siteText } = useIntl();
+  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
-  const changeMetric = (newMetric: BehaviorIdentifier) =>
-    setCurrentMetric(sorted.find((x) => x.id === newMetric));
+  // Find all the keys that only doesn't exist on VR level but does on NL
+  const keysWithoutData = behaviorIdentifiers.filter(
+    (item) => !Object.keys(data[0]).find((a) => a.includes(item))
+  );
 
-  useEffect(() => {
-    setIsMetricAvaliable(!blacklistedItems.includes(currentMetric.id));
-  }, [currentMetric]);
+  const behaviorIndentifiersData = behaviorIdentifiers.map((id) => {
+    const label = siteText.gedrag_onderwerpen[id];
+    return {
+      label,
+      value: id,
+    };
+  });
 
   return (
     <Tile>
@@ -47,40 +51,32 @@ export function BehaviorChoropleth({
       <Box maxWidth="maxWidthText">
         <Text>{description}</Text>
       </Box>
-      <form>
-        <select
-          onChange={(event) =>
-            changeMetric(event.target.value as BehaviorIdentifier)
-          }
-          value={currentMetric.description}
-        >
-          <option key={'empty'} value={'empty'}>
-            empty
-          </option>
-          {sorted.map((item: any) => (
-            <option key={item.id} value={item.id}>
-              {item.description}
-            </option>
-          ))}
-        </select>
-      </form>
+
+      <Box mb={4}>
+        <Select
+          value={currentId}
+          onChange={setCurrentId}
+          options={behaviorIndentifiersData}
+        />
+      </Box>
 
       <Box display="flex" flexWrap="wrap">
         <ChoroplethBlock
+          title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
           data={{ behavior_compliance: data }}
           metricName="compliance"
-          currentMetric={currentMetric}
-          isMetricAvaliable={isMetricAvaliable}
-          title="Naleving van de regels"
-          threshold={regionThresholds.behavior_compliance}
+          currentId={currentId}
+          keysWithoutData={keysWithoutData}
+          thresholds={regionThresholds.behavior_compliance}
         />
+
         <ChoroplethBlock
+          title={siteText.nl_gedrag.verdeling_in_nederland.support_title}
           data={{ behavior_support: data }}
           metricName="support"
-          currentMetric={currentMetric}
-          isMetricAvaliable={isMetricAvaliable}
-          title="Draagvlak van de regels"
-          threshold={regionThresholds.behavior_support}
+          currentId={currentId}
+          keysWithoutData={keysWithoutData}
+          thresholds={regionThresholds.behavior_support}
         />
       </Box>
     </Tile>
@@ -88,22 +84,23 @@ export function BehaviorChoropleth({
 }
 
 interface ChoroplethBlockProps {
-  data: any;
-  metricName: any;
-  currentMetric: any;
-  isMetricAvaliable: any;
-  title: any;
-  threshold: any;
+  data: { [key: string]: RegionsBehavior[] };
+  keysWithoutData: BehaviorIdentifier[];
+  metricName: 'compliance' | 'support';
+  currentId: BehaviorIdentifier;
+  title: string;
+  thresholds: ChoroplethThresholdsValue[];
 }
 
 function ChoroplethBlock({
   data,
+  keysWithoutData,
   metricName,
-  currentMetric,
-  isMetricAvaliable,
+  currentId,
   title,
-  threshold,
+  thresholds,
 }: ChoroplethBlockProps) {
+  const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
 
   return (
@@ -112,7 +109,7 @@ function ChoroplethBlock({
         {title}
       </Heading>
       <Box position="relative">
-        {!isMetricAvaliable && (
+        {keysWithoutData.includes(currentId) && (
           <Box
             position="absolute"
             display="flex"
@@ -124,37 +121,44 @@ function ChoroplethBlock({
             css={css({ zIndex: 9 })}
           >
             <Text textAlign="center" m={0} css={css({ maxWidth: '300px' })}>
-              Op dit moment is er geen data beschikbaar voor deze basisregel per
-              regio
+              {siteText.nl_gedrag.verdeling_in_nederland.geen_beschikbare_data}
             </Text>
           </Box>
         )}
         <SafetyRegionChoropleth
-          data={data}
+          data={data as { behavior: RegionsBehavior[] }}
           getLink={reverseRouter.vr.gedrag}
-          metricName={`behavior_${metricName}` as any}
-          metricProperty={`${currentMetric.id}_${metricName}`}
+          metricName={`behavior_${metricName}` as 'behavior'}
+          metricProperty={`${currentId}_${metricName}`}
           minHeight={400}
+          hasNoDataFillColor={colors.page}
           tooltipContent={(
             context: RegionsBehavior & SafetyRegionProperties
           ) => {
-            const currentComplianceValue = `${currentMetric.id}_compliance` as keyof RegionsBehavior;
-            const currentSupportValue = `${currentMetric.id}_support` as keyof RegionsBehavior;
+            const currentComplianceValue =
+              `${currentId}_compliance` as keyof RegionsBehavior;
+            const currentSupportValue =
+              `${currentId}_support` as keyof RegionsBehavior;
 
-            if (!isMetricAvaliable) return null;
+            // Return null when there is no data available to prevent breaking the application when using tab
+            if (keysWithoutData.includes(currentId)) return null;
 
             return (
               <BehaviorTooltip
                 context={context}
-                currentMetric={currentMetric}
-                currentComplianceValue={context[currentComplianceValue]}
-                currentSupportValue={context[currentSupportValue]}
+                currentMetric={currentId}
+                currentComplianceValue={
+                  context[currentComplianceValue] as number
+                }
+                currentSupportValue={context[currentSupportValue] as number}
               />
             );
           }}
         />
       </Box>
-      <ChoroplethLegenda thresholds={threshold} title={'Percentage'} />
+      <Box display="flex" justifyContent="center">
+        <ChoroplethLegenda thresholds={thresholds} title={'Percentage'} />
+      </Box>
     </Box>
   );
 }

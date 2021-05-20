@@ -2,34 +2,32 @@ import {
   RegionsBehavior,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
-import { InlineText, Text } from '~/components/typography';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import { useIntl } from '~/intl';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { regionThresholds } from '../../region-thresholds';
-import { Box } from '~/components/base';
-import { BehaviorFormatted } from '~/domain/behavior/behavior-logic';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { Box } from '~/components/base';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { InlineText, Text } from '~/components/typography';
+import { BehaviorIdentifier } from '~/domain/behavior/behavior-types';
+import { useIntl } from '~/intl';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { useReverseRouter } from '~/utils/use-reverse-router';
+import { regionThresholds } from '../../region-thresholds';
+
+interface BehaviorTooltipProps {
+  context: RegionsBehavior & SafetyRegionProperties;
+  currentMetric: BehaviorIdentifier;
+  currentComplianceValue: number;
+  currentSupportValue: number;
+}
 
 export function BehaviorTooltip({
   context,
   currentMetric,
   currentComplianceValue,
   currentSupportValue,
-}: {
-  context: RegionsBehavior & SafetyRegionProperties;
-  currentMetric: BehaviorFormatted;
-  currentComplianceValue: string | number | null;
-  currentSupportValue: string | number | null;
-}) {
+}: BehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
-  // const subject = siteText.choropleth_tooltip.infected_locations;
-  // const thresholdValues =
-  //   regionThresholds.nursing_home.infected_locations_percentage;
 
   const complianceFilteredThreshold = getFilteredThresholdValues(
     regionThresholds.behavior_compliance,
@@ -46,16 +44,16 @@ export function BehaviorTooltip({
       title={context.vrname}
       link={reverseRouter.vr.gedrag(context.vrcode)}
     >
-      <Box maxWidth="240px">
+      <Box maxWidth="15rem">
         <Text m={0} mb={2} fontWeight="bold">
-          {currentMetric.description}
+          {siteText.gedrag_onderwerpen[currentMetric]}
         </Text>
-        <TestItem
+        <TooltipInfo
           title="Naleving"
           value={currentComplianceValue}
           background={complianceFilteredThreshold.color}
         />
-        <TestItem
+        <TooltipInfo
           title="Draagvlak"
           value={currentSupportValue}
           background={supportFilteredThreshold.color}
@@ -65,12 +63,18 @@ export function BehaviorTooltip({
   );
 }
 
-function TestItem({ title, value, background }) {
+interface TooltipInfoProps {
+  title: string;
+  value: number;
+  background: string;
+}
+
+function TooltipInfo({ title, value, background }: TooltipInfoProps) {
   return (
     <Box display="flex" alignItems="center" justifyContent="space-between">
       {title}
       <Box display="flex" alignItems="center">
-        <InlineText fontWeight="bold">{value}%</InlineText>
+        <InlineText fontWeight="bold">{`${value}%`}</InlineText>
         <LegendaColorBox backgroundColor={background} />
       </Box>
     </Box>

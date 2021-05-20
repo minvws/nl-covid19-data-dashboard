@@ -51,3 +51,7 @@ timestamp,action,key
 2021-05-17T13:39:33.658Z,add,nl_gedrag.kpi.titel
 2021-05-17T13:56:34.250Z,add,regionaal_gedrag.kpi.titel
 2021-05-17T13:56:50.376Z,add,regionaal_gedrag.kpi.deelgenomen_mensen
+2021-05-20T12:56:42.844Z,add,nl_gedrag.verdeling_in_nederland.description
+2021-05-20T12:58:09.369Z,add,nl_gedrag.verdeling_in_nederland.compliance_title
+2021-05-20T12:59:44.101Z,add,nl_gedrag.verdeling_in_nederland.support_title
+2021-05-20T13:00:47.564Z,add,nl_gedrag.verdeling_in_nederland.geen_beschikbare_data
