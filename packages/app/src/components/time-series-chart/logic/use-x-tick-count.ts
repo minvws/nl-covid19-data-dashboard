@@ -6,7 +6,7 @@ import {
 } from '@corona-dashboard/common';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-interface TickConfiguration {
+interface XTickConfiguration {
   date: {
     long: { count: number; format?: any };
     short: { count: number; format?: any };
@@ -17,30 +17,30 @@ interface TickConfiguration {
   };
 }
 
-interface TickConfigurations {
+interface XTickConfigurations {
   /**
    * ~420px
    */
-  xs?: TickConfiguration;
+  xs?: XTickConfiguration;
   /**
    * ~768px
    */
-  sm?: TickConfiguration;
+  sm?: XTickConfiguration;
   /**
    * ~960px
    */
-  md?: TickConfiguration;
+  md?: XTickConfiguration;
   /**
    * ~1200px
    */
-  lg?: TickConfiguration;
+  lg?: XTickConfiguration;
   /**
    * ~1600px
    */
-  xl?: TickConfiguration;
+  xl?: XTickConfiguration;
 }
 
-const configurations: TickConfigurations = {
+const xTickConfigurations: XTickConfigurations = {
   xs: {
     date: {
       long: { count: 3 },
@@ -84,7 +84,11 @@ export function useXTickCount<T extends TimestampedValue>(values: T[]) {
   const period = values.length < 36 ? 'short' : 'long';
 
   const breakpoints = useBreakpoints(true);
-  const screenSize = sizes.find((x) => breakpoints[x] && configurations[x]);
+  const screenSize = sizes.find(
+    (x) => breakpoints[x] && xTickConfigurations[x]
+  );
 
-  return screenSize ? configurations[screenSize]?.[type][period].count ?? 2 : 2;
+  return screenSize
+    ? xTickConfigurations[screenSize]?.[type][period].count ?? 2
+    : 2;
 }
