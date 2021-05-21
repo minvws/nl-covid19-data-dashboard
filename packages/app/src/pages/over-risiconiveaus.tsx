@@ -3,7 +3,6 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { flatten } from 'lodash';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -14,11 +13,8 @@ import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-ch
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { vrData } from '~/data/vr';
-import {
-  Scoreboard,
-  ScoreboardRow,
-} from '~/domain/escalation-level/scoreboard';
+import { Scoreboard } from '~/domain/escalation-level/scoreboard';
+import { selectScoreboardData } from '~/domain/escalation-level/scoreboard/data-selection/select-scoreboard-data';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -29,8 +25,6 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  loadAndSortVrData,
-  selectData,
 } from '~/static-props/get-data';
 import { asResponsiveArray } from '~/style/utils';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
@@ -47,48 +41,7 @@ interface OverRisiconiveausData {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectData(() => {
-    const scoreboardRows = vrData.reduce<ScoreboardRow[]>(
-      (sbData, vr) => {
-        const vrData = loadAndSortVrData(vr.code);
-        const index = vrData.escalation_level.level - 1;
-
-        sbData[index].vrData.push({
-          data: vrData.escalation_level,
-          safetyRegionName: vr.name,
-          vrCode: vr.code,
-        });
-
-        return sbData;
-      },
-      [1, 2, 3, 4].map<ScoreboardRow>((x) => ({
-        escalationLevel: x as 1 | 2 | 3 | 4,
-        vrData: [],
-      }))
-    );
-    scoreboardRows.forEach((x) =>
-      x.vrData.sort((a, b) =>
-        a.safetyRegionName.localeCompare(b.safetyRegionName)
-      )
-    );
-
-    const allScoreboardRows = flatten(
-      scoreboardRows.map((row) => row.vrData)
-    ).map((vr) => vr.data);
-
-    const maxHospitalAdmissionsPerMillion = Math.max(
-      ...allScoreboardRows.map((data) => data.hospital_admissions_per_million)
-    );
-    const maxPositiveTestedPer100k = Math.max(
-      ...allScoreboardRows.map((data) => data.positive_tested_per_100k)
-    );
-
-    return {
-      scoreboardRows,
-      maxHospitalAdmissionsPerMillion,
-      maxPositiveTestedPer100k,
-    };
-  }),
+  selectScoreboardData,
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   }),
