@@ -82,6 +82,10 @@ const List = styled.ul(
 const Item = styled.li(
   css({
     listStyle: 'none',
-    marginBottom: 2,
+    mb: 2,
+
+    ':last-child': {
+      mb: 0,
+    },
   })
 );
