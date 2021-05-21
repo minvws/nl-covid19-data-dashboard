@@ -179,8 +179,8 @@ function mergeData(
   for (const value of dataAverages.values) {
     /**
      * For averages pick the date in the middle of the week, because that's how
-     * the values are displayed when just viewing averages, but now we need to
-     * convert everything to day timestamps.
+     * the values are displayed when just viewing averages, but for this merged
+     * set we'll need to use day timestamps.
      */
     const date_unix =
       value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
@@ -191,7 +191,7 @@ function mergeData(
 
     /**
      * If we happen to fall exactly on an existing installation timestamp we
-     * want to merge that data.
+     * want to combine the two property values.
      */
     if (existingValue) {
       mergedValuesByTimestamp[date_unix] = {
@@ -208,7 +208,7 @@ function mergeData(
   }
 
   /**
-   * Convert the map to a series of plain timestamped values.
+   * Convert the map to a series of sorted timestamped values.
    */
   return Object.entries(mergedValuesByTimestamp)
     .map(([date_unix, obj]) => ({
