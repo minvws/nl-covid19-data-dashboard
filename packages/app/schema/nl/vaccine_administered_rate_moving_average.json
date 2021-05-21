@@ -6,6 +6,7 @@
       "required": [
         "doses_per_day",
         "doses_per_second",
+        "doses_per_minute",
         "seconds_per_dose",
         "date_start_unix",
         "date_end_unix",
@@ -17,6 +18,9 @@
           "type": "number"
         },
         "doses_per_second": {
+          "type": "number"
+        },
+        "doses_per_minute": {
           "type": "number"
         },
         "seconds_per_dose": {
