@@ -157,6 +157,15 @@ export function useDataSitemap(
       ],
     },
     {
+      header: siteText.nationaal_layout.headings.gedrag,
+      links: [
+        {
+          text: siteText.nl_gedrag.sidebar.titel,
+          href: reverseRouter.nl.gedrag(),
+        },
+      ],
+    },
+    {
       header: siteText.nationaal_layout.headings.kwetsbare_groepen,
       links: [
         {
@@ -187,12 +196,8 @@ export function useDataSitemap(
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.gedrag,
+      header: siteText.nationaal_layout.headings.overig,
       links: [
-        {
-          text: siteText.nl_gedrag.sidebar.titel,
-          href: reverseRouter.nl.gedrag(),
-        },
         {
           text: siteText.corona_melder_app.sidebar.titel,
           href: reverseRouter.nl.coronamelder(),
