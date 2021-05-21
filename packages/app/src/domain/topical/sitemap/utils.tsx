@@ -123,6 +123,19 @@ export function useDataSitemap(
       ],
     },
     {
+      header: siteText.nationaal_layout.headings.ziekenhuizen,
+      links: [
+        {
+          text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
+          href: reverseRouter.nl.ziekenhuisopnames(),
+        },
+        {
+          text: siteText.ic_opnames_per_dag.titel_sidebar,
+          href: reverseRouter.nl.intensiveCareOpnames(),
+        },
+      ],
+    },
+    {
       header: siteText.nationaal_layout.headings.besmettingen,
       links: [
         {
@@ -140,19 +153,6 @@ export function useDataSitemap(
         {
           text: siteText.sterfte.titel_sidebar,
           href: reverseRouter.nl.sterfte(),
-        },
-      ],
-    },
-    {
-      header: siteText.nationaal_layout.headings.ziekenhuizen,
-      links: [
-        {
-          text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
-          href: reverseRouter.nl.ziekenhuisopnames(),
-        },
-        {
-          text: siteText.ic_opnames_per_dag.titel_sidebar,
-          href: reverseRouter.nl.intensiveCareOpnames(),
         },
       ],
     },
