@@ -74,7 +74,7 @@ export function StackedAreaTrend({
           y={getY0}
           stroke="white"
           strokeWidth={2}
-          strokeLinecap="butt"
+          strokeLinecap="round"
           strokeLinejoin="round"
         />
       )}

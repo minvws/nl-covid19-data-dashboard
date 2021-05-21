@@ -50,7 +50,7 @@ export function SplitAreaTrend({
         fill="transparent"
         strokeWidth={strokeWidth}
         stroke={`url(#${gradientId})`}
-        strokeLinecap="butt"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
 
