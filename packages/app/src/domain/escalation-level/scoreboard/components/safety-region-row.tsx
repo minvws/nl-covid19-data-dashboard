@@ -76,8 +76,8 @@ export function SafetyRegionRow({
             maxValue={maxPositiveTestedPer100k}
             icon={
               <GetestIcon
-                width="32px"
-                height="32px"
+                width="24px"
+                height="24px"
                 style={{ minWidth: '24px' }}
               />
             }
@@ -88,8 +88,8 @@ export function SafetyRegionRow({
             maxValue={maxHospitalAdmissionsPerMillion}
             icon={
               <Ziekenhuis
-                width="32px"
-                height="32px"
+                width="24px"
+                height="24px"
                 style={{ minWidth: '24px' }}
               />
             }
@@ -118,33 +118,38 @@ const BarScaleCell = ({
       flex="1"
       display="flex"
       width="100%"
-      pb={{ _: 2, lg: 3 }}
+      pb={{ _: 2, lg: 2 }}
       pt={{ _: 0, lg: 2 }}
       color="black"
     >
-      <Box display={{ sm: 'none' }}>{icon}</Box>
       <Box
-        flex="0 0 1.5rem"
+        display={{ _: 'flex', sm: 'none' }}
+        alignItems="center"
+        mr={1}
+        pb={1}
+        flexGrow={0}
+      >
+        {icon}
+      </Box>
+      <Box
         alignItems="center"
         display="flex"
-        justifyContent={{ lg: 'flex-end' }}
-        mr={{ _: '2.5rem', lg: '1rem' }}
+        justifyContent={{ sm: 'flex-end' }}
+        mr={{ _: '1rem', lg: '1rem' }}
+        width="2.5em"
       >
         <InlineText fontWeight="bold">{formatNumber(value)}</InlineText>
       </Box>
-      <Box
-        flex={{ _: '9', md: '39' }}
-        pr={5}
-        pb={2}
-        maxWidth={{ _: '300px', lg: '250px' }}
-      >
-        <CategoricalBarScale
-          hideLegend
-          hideNumbers
-          categories={thresholds}
-          value={value}
-          maxValue={maxValue}
-        />
+      <Box pr={{ _: 3, sm: 5 }} pb={2} flexGrow={1}>
+        <Box mb={{ _: 2, md: 1 }} maxWidth={{ _: '300px', lg: '250px' }}>
+          <CategoricalBarScale
+            hideLegend
+            hideNumbers
+            categories={thresholds}
+            value={value}
+            maxValue={maxValue}
+          />
+        </Box>
       </Box>
     </Box>
   );
@@ -156,6 +161,7 @@ const VrLinkCell = styled.div<{ color: string }>((x) =>
     display: 'flex',
     alignItems: 'center',
     mt: asResponsiveArray({ _: 3, lg: 0 }),
+    mb: asResponsiveArray({ _: 2, lg: 0 }),
     pr: 2,
     minWidth: '11em',
     '&::before': asResponsiveArray({

@@ -168,8 +168,13 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           borderTopColor="lightGray"
           flexDirection={{ _: 'column', sm: 'row' }}
         >
-          <Box display="flex" justifyContent="center">
-            <Box p={1} minWidth={{ _: '17.25rem', lg: '20rem' }} flex={0}>
+          <Box display="flex" justifyContent="center" py={{ _: 2, sm: 0 }}>
+            <Box
+              p={1}
+              minWidth={{ _: '30rem', sm: '17.25rem', lg: '20rem' }}
+              minHeight={{ _: '20rem', sm: 0 }}
+              flex={0}
+            >
               <SafetyRegionChoropleth
                 minHeight={200}
                 data={choropleth.vr}
@@ -252,8 +257,9 @@ export function Content({ children }: ContentProps) {
 
 const UnorderedList = styled.ul(
   css({
-    margin: 0,
-    padding: 0,
+    m: 0,
+    px: 0,
+    py: asResponsiveArray({ _: 2, sm: 0 }),
     listStyleType: 'none',
 
     svg: {

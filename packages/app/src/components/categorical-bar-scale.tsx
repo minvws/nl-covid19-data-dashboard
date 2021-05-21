@@ -5,7 +5,7 @@ import { EscalationLevel } from '~/domain/restrictions/type';
 import { Box } from './base';
 import { InlineText } from './typography';
 
-const BAR_BORDER_RADIUS = '3px';
+const BAR_BORDER_RADIUS = '2.5px';
 
 interface CategoricalBarScaleProps {
   value: number;
