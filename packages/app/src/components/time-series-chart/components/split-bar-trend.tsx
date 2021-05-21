@@ -1,4 +1,3 @@
-import { ClipPath } from '@visx/clip-path';
 import { scaleBand } from '@visx/scale';
 import { PositionScale } from '@visx/shape/lib/types';
 import { useMemo } from 'react';
@@ -6,7 +5,7 @@ import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, GetX, GetY, SeriesSingleValue } from '../logic';
 import { SplitPoint } from '../logic/split';
-import { ColorStack } from './color-stack';
+import { SplitPointGradient } from './split-point-gradient';
 
 const DEFAULT_FILL_OPACITY = 0.2;
 
@@ -53,28 +52,27 @@ export function SplitBarTrend({
    */
   const barWidth = Math.max(xScale.bandwidth(), 1);
 
-  const clipPathId = useUniqueId();
+  const gradientId = useUniqueId();
 
   return (
     <>
-      <ColorStack
-        id={clipPathId}
-        splitPoints={splitPoints}
-        bounds={bounds}
+      <SplitPointGradient
+        id={gradientId}
         yScale={yScale}
-        fillOpacity={fillOpacity}
+        splitPoints={splitPoints}
       />
-      <ClipPath id={clipPathId}>
-        {nonNullSeries.map((item, index) => (
-          <rect
-            key={index}
-            x={getX(item) - barWidth / 2}
-            y={getY(item)}
-            height={bounds.height - getY(item)}
-            width={barWidth}
-          />
-        ))}
-      </ClipPath>
+
+      {nonNullSeries.map((item, index) => (
+        <rect
+          key={index}
+          x={getX(item) - barWidth / 2}
+          y={getY(item)}
+          height={bounds.height - getY(item)}
+          width={barWidth}
+          fill={`url(#${gradientId})`}
+          opacity={fillOpacity}
+        />
+      ))}
     </>
   );
 }
