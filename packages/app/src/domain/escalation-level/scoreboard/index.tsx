@@ -19,16 +19,17 @@ export type ScoreboardRow = {
   vrData: VrScoreboardData[];
 };
 
-export function Scoreboard({ rows }: { rows: ScoreboardRow[] }) {
-  const vrData = flatten(rows.map((row) => row.vrData)).map((vr) => vr.data);
+interface ScoreboardProps {
+  rows: ScoreboardRow[];
+  maxHospitalAdmissionsPerMillion: number;
+  maxPositiveTestedPer100k: number;
+}
 
-  const maxHospitalAdmissionsPerMillion = Math.max(
-    ...vrData.map((data) => data.hospital_admissions_per_million)
-  );
-  const maxPositiveTestedPer100k = Math.max(
-    ...vrData.map((data) => data.positive_tested_per_100k)
-  );
-
+export function Scoreboard({
+  rows,
+  maxHospitalAdmissionsPerMillion,
+  maxPositiveTestedPer100k,
+}: ScoreboardProps) {
   return (
     <Box
       borderBottomColor="lightGray"

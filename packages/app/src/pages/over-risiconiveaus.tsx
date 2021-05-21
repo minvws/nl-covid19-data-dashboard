@@ -3,6 +3,7 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { flatten } from 'lodash';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
@@ -71,8 +72,21 @@ export const getStaticProps = createGetStaticProps(
       )
     );
 
+    const allScoreboardRows = flatten(
+      scoreboardRows.map((row) => row.vrData)
+    ).map((vr) => vr.data);
+
+    const maxHospitalAdmissionsPerMillion = Math.max(
+      ...allScoreboardRows.map((data) => data.hospital_admissions_per_million)
+    );
+    const maxPositiveTestedPer100k = Math.max(
+      ...allScoreboardRows.map((data) => data.positive_tested_per_100k)
+    );
+
     return {
       scoreboardRows,
+      maxHospitalAdmissionsPerMillion,
+      maxPositiveTestedPer100k,
     };
   }),
   createGetChoroplethData({
@@ -111,7 +125,14 @@ export const getStaticProps = createGetStaticProps(
 
 const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { lastGenerated, scoreboardRows, content, choropleth } = props;
+  const {
+    lastGenerated,
+    scoreboardRows,
+    content,
+    choropleth,
+    maxHospitalAdmissionsPerMillion,
+    maxPositiveTestedPer100k,
+  } = props;
 
   const lastValue = scoreboardRows.find((x) => x.vrData.length)?.vrData[0].data;
 
@@ -148,7 +169,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           flexDirection={{ _: 'column', sm: 'row' }}
         >
           <Box display="flex" justifyContent="center">
-            <Box p={1} minWidth={{ _: '16rem', lg: '20rem' }} flex={0}>
+            <Box p={1} minWidth={{ _: '17.25rem', lg: '20rem' }} flex={0}>
               <SafetyRegionChoropleth
                 minHeight={200}
                 data={choropleth.vr}
@@ -200,7 +221,11 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </Box>
         </Box>
-        <Scoreboard rows={scoreboardRows} />
+        <Scoreboard
+          rows={scoreboardRows}
+          maxHospitalAdmissionsPerMillion={maxHospitalAdmissionsPerMillion}
+          maxPositiveTestedPer100k={maxPositiveTestedPer100k}
+        />
         <Box mt={5} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
           <RichContent blocks={content.riskLevelExplanations} />
         </Box>
