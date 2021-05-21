@@ -51,46 +51,16 @@ export function NewSewerChart({
       } as SewerPerInstallationData)
   );
 
-  const valuesForInstallation = selectedInstallation
-    ? dataPerInstallation?.values.find(
-        (x) => x.rwzi_awzi_name === selectedInstallation
-      )?.values
-    : undefined;
+  /**
+   * If there is installation data, and an installation was selected we need to
+   * convert the data to combine the two.
+   */
+  const chartInputValues =
+    dataPerInstallation && selectedInstallation
+      ? mergeData(dataAverages, dataPerInstallation, selectedInstallation)
+      : dataAverages.values;
 
-  const valuesForInstallationByTimestamp =
-    valuesForInstallation?.reduce(
-      (acc, v) => set(acc, v.date_unix, v.rna_normalized),
-      {} as Record<number, number>
-      /**
-       * Assigning an empty record as a fallback makes it a little easier to
-       * work with the type below.
-       */
-    ) || ({} as Record<number, number>);
-
-  const valuesForAverageByTimestamp = dataAverages.values.reduce(
-    (acc, v) => set(acc, v.date_start_unix, v.average),
-    {} as Record<number, number>
-  );
-
-  const mergedValues = valuesForInstallation
-    ? valuesForInstallation.map((x) => ({
-        ...x,
-        selected_instalation_value: x.rna_normalized,
-        average: valuesForAverageByTimestamp[x.date_unix] || null,
-      }))
-    : dataAverages.values.map((x) => ({
-        ...x,
-        selected_instalation_value:
-          valuesForInstallationByTimestamp[x.date_start_unix] || null,
-      }));
-
-  // const mergedValues = dataAverages.values.map((x) => ({
-  //   ...x,
-  //   selected_instalation_value:
-  //     selectedInstallation && valuesForInstallationByTimestamp
-  //       ? valuesForInstallationByTimestamp[x.date_start_unix]
-  //       : null,
-  // }));
+  console.log('chartInputValues', chartInputValues);
 
   return (
     <ChartTile
@@ -114,7 +84,8 @@ export function NewSewerChart({
           )}
 
           <TimeSeriesChart
-            values={mergedValues}
+            // @ts-expect-error
+            values={chartInputValues}
             timeframe={timeframe}
             /**
              * Not sure why TS is complaining here. Can't seem to make part of
@@ -122,10 +93,10 @@ export function NewSewerChart({
              */
             // @ts-expect-error
             seriesConfig={[
-              selectedInstallation
+              dataPerInstallation && selectedInstallation
                 ? {
                     type: 'line',
-                    metricProperty: 'selected_instalation_value',
+                    metricProperty: 'selected_installation_rna_normalized',
                     label: selectedInstallation,
                     color: 'black',
                     style: 'dashed',
@@ -173,4 +144,46 @@ export function NewSewerChart({
       )}
     </ChartTile>
   );
+}
+
+function mergeData(
+  dataAverages: RegionalSewer | MunicipalSewer,
+  dataPerInstallation: SewerPerInstallationData,
+  selectedInstallation?: string
+) {
+  const valuesForInstallation = selectedInstallation
+    ? dataPerInstallation?.values.find(
+        (x) => x.rwzi_awzi_name === selectedInstallation
+      )?.values
+    : undefined;
+
+  const valuesForInstallationByTimestamp =
+    valuesForInstallation?.reduce(
+      (acc, v) => set(acc, v.date_unix, v.rna_normalized),
+      {} as Record<number, number>
+      /**
+       * Assigning an empty record as a fallback makes it a little easier to
+       * work with the type below.
+       */
+    ) || ({} as Record<number, number>);
+
+  const valuesForAverageByTimestamp = dataAverages.values.reduce(
+    (acc, v) => set(acc, v.date_start_unix, v.average),
+    {} as Record<number, number>
+  );
+
+  const mergedValues = valuesForInstallation
+    ? valuesForInstallation.map((x) => ({
+        ...x,
+        selected_installation_rna_normalized: x.rna_normalized,
+        average: valuesForAverageByTimestamp[x.date_unix] || null,
+      }))
+    : dataAverages.values.map((x) => ({
+        ...x,
+        selected_installation_rna_normalized:
+          valuesForInstallationByTimestamp[x.date_start_unix] || null,
+      }));
+
+  console.log(mergedValues);
+  return mergedValues;
 }

@@ -38,6 +38,7 @@ export function ColorStack({
             height={segmentHeight}
             fill={splitPoint.color}
             clipPath={id ? `url(#${id})` : undefined}
+            fillOpacity={0.5}
           />
         );
 

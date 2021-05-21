@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Bounds, SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
 import { ColorStack } from './color-stack';
-import { GradientPurpleOrange } from '@visx/gradient';
+import { SplitPointGradient } from './split-point-gradient';
 
 export type LineStyle = 'solid' | 'dashed';
 
@@ -35,8 +35,6 @@ export function SplitAreaTrend({
   yScale,
   id,
 }: SplitAreaTrendProps) {
-  // const segments = splitSeriesIntoSegments(series, splitPoints);
-
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
     [series]
@@ -66,32 +64,22 @@ export function SplitAreaTrend({
           data={closedTrendPath}
           x={(v) => v.x}
           y={(v) => v.y}
-          stroke={splitPoints[0].color}
           strokeWidth={strokeWidth}
-          strokeLinecap="butt"
-          strokeLinejoin="round"
         />
       </ClipPath>
-      {/*https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient */}
-      <defs>
-        <linearGradient id="myGradient" gradientTransform="rotate(90)">
-          <stop offset="5%" stop-color="gold" />
-          <stop offset="95%" stop-color="red" />
-        </linearGradient>
-      </defs>
-
-      <GradientPurpleOrange id={gradientId} />
+      <SplitPointGradient
+        id={gradientId}
+        splitPoints={splitPoints}
+        yScale={yScale}
+      />
 
       <LinePath
         data={nonNullSeries}
         x={getX}
         y={getY}
         fill="transparent"
-        // stroke="url(#stroke)"
-        strokeWidth={3}
-        // stroke={'#ccc'}
+        strokeWidth={strokeWidth}
         stroke={`url(#${gradientId})`}
-        // strokeWidth={strokeWidth}
         strokeLinecap="butt"
         strokeLinejoin="round"
       />

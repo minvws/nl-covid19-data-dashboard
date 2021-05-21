@@ -11,5 +11,7 @@ export * from './point-markers';
 export * from './range-trend';
 export * from './series';
 export * from './series-icon';
+export * from './split-area-trend';
+export * from './split-point-gradient';
 export * from './timespan-annotation';
 export * from './tooltip';
