@@ -65,6 +65,7 @@ import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import GrafiekIcon from '~/assets/chart.svg';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -181,6 +182,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
+              icon={<GrafiekIcon />}
             >
               <Sitemap
                 quickLinksHeader={text.quick_links.header}
