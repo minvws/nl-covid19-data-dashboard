@@ -3510,14 +3510,6 @@
     d3-geo "^1.11.3"
     prop-types "^15.5.10"
 
-"@visx/gradient@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@visx/gradient/-/gradient-1.7.0.tgz#0578d27ef01204f36ce73db208141976d218adc4"
-  integrity sha512-KtlzpgY+1tEIxEhFwyGp7nVwDjaPs9bcLO5Wkm3uw5ehQtRMYQBC3O2N+GEKdQM2yNZVApvtSMiXQDxGTFK67g==
-  dependencies:
-    "@types/react" "*"
-    prop-types "^15.5.7"
-
 "@visx/grid@1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@visx/grid/-/grid-1.4.0.tgz#802ab931568c92f1bd551e7af371f9791fae7fdf"
