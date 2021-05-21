@@ -4,7 +4,7 @@ export const behaviorIdentifiers = [
   'keep_distance',
   'work_from_home',
   'avoid_crowds',
-  'symptoms_stay_home',
+  'symptoms_stay_home_if_mandatory',
   'symptoms_get_tested',
   'wear_mask_public_indoors',
   'wear_mask_public_transport',
