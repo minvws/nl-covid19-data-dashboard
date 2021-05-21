@@ -1,70 +1,42 @@
-import { ClipPath } from '@visx/clip-path';
-import { LinePath } from '@visx/shape';
+import { AreaClosed, LinePath } from '@visx/shape';
 import { PositionScale } from '@visx/shape/lib/types';
-import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { Bounds, SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
-import { ColorStack } from './color-stack';
+import { useUniqueId } from '~/utils/use-unique-id';
+import { SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
 import { SplitPointGradient } from './split-point-gradient';
 
 const DEFAULT_STROKE_WIDTH = 2;
+const DEFAULT_FILL_OPACITY = 0.5;
 
 type SplitAreaTrendProps = {
-  id: string;
   series: SeriesSingleValue[];
   splitPoints: SplitPoint[];
-  strokeWidth?: number;
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
-  bounds: Bounds;
   yScale: PositionScale;
+  strokeWidth?: number;
+  fillOpacity?: number;
 };
-
-type Point = { x: number; y: number };
 
 export function SplitAreaTrend({
   series,
-  strokeWidth = DEFAULT_STROKE_WIDTH,
   splitPoints,
   getX,
   getY,
-  bounds,
   yScale,
-  id,
+  strokeWidth = DEFAULT_STROKE_WIDTH,
+  fillOpacity = DEFAULT_FILL_OPACITY,
 }: SplitAreaTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
     [series]
   );
 
-  const trendPath = nonNullSeries.map((value) => ({
-    x: getX(value),
-    y: getY(value),
-  }));
-
-  const closedTrendPath = closeTrendPathAlongAxis(trendPath, bounds);
-
-  const clippingId = `${id}_clipping`;
-  const gradientId = `${id}_gradient`;
+  const gradientId = useUniqueId();
 
   return (
     <g>
-      <ColorStack
-        id={clippingId}
-        splitPoints={splitPoints}
-        bounds={bounds}
-        yScale={yScale}
-      />
-
-      <ClipPath id={clippingId}>
-        <LinePath
-          data={closedTrendPath}
-          x={(v) => v.x}
-          y={(v) => v.y}
-          strokeWidth={strokeWidth}
-        />
-      </ClipPath>
       <SplitPointGradient
         id={gradientId}
         splitPoints={splitPoints}
@@ -82,34 +54,21 @@ export function SplitAreaTrend({
         strokeLinejoin="round"
       />
 
-      {/*
-        Split line path currently has a bug
-        https://github.com/airbnb/visx/issues/920
-
-      <SplitLinePath
-        segments={segments.map((x) => x.items)}
+      <AreaClosed
+        data={nonNullSeries}
         x={getX}
         y={getY}
-        styles={segments.map((x) => ({
-          stroke: splitPoints[x.splitIndex].color,
-        }))}
-      >
-        {({ segment, styles }) => (
-          <LinePath
-            data={segment}
-            {...styles}
-            x={(d: Point) => d.x || 0}
-            y={(d: Point) => d.y || 0}
-            strokeWidth={strokeWidth}
-          />
-        )}
-      </SplitLinePath> */}
+        fill={`url(#${gradientId})`}
+        fillOpacity={fillOpacity}
+        yScale={yScale}
+      />
     </g>
   );
 }
 
 interface SplitAreaTrendIconProps {
   color: string;
+  fillOpacity?: number;
   strokeWidth?: number;
   width?: number;
   height?: number;
@@ -117,33 +76,37 @@ interface SplitAreaTrendIconProps {
 
 export function SplitAreaTrendIcon({
   color,
+  fillOpacity = DEFAULT_FILL_OPACITY,
   strokeWidth = DEFAULT_STROKE_WIDTH,
   width = 15,
   height = 15,
 }: SplitAreaTrendIconProps) {
+  const maskId = useUniqueId();
+
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-      <line
-        stroke={color}
-        strokeWidth={strokeWidth}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        x1={2}
-        y1={height / 2}
-        x2={width - 2}
-        y2={height / 2}
-      />
+      <mask id={maskId}>
+        <rect rx={2} x={0} y={0} width={width} height={height} fill={'white'} />
+      </mask>
+      <g mask={`url(#${maskId})`}>
+        <line
+          stroke={color}
+          strokeWidth={strokeWidth}
+          x1={0}
+          y1={strokeWidth / 2}
+          x2={width}
+          y2={strokeWidth / 2}
+        />
+        <rect
+          rx={2}
+          x={0}
+          y={0}
+          width={width}
+          height={height}
+          fill={color}
+          opacity={fillOpacity}
+        />
+      </g>
     </svg>
   );
-}
-
-function closeTrendPathAlongAxis(path: Point[], bounds: Bounds): Point[] {
-  const firstPoint = first(path) as Point;
-  const lastPoint = last(path) as Point;
-
-  return [
-    ...path,
-    { x: lastPoint.x, y: bounds.height },
-    { x: firstPoint.x, y: bounds.height },
-  ];
 }

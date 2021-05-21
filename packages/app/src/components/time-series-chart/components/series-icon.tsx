@@ -3,6 +3,7 @@ import { SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
+import { SplitAreaTrendIcon } from './split-area-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
 import { BarTrendIcon } from './bar-trend';
 import { isPresent } from 'ts-is-present';
@@ -58,7 +59,7 @@ SeriesIconProps<T>) {
       );
     case 'split-area':
       return isPresent(value) ? (
-        <AreaTrendIcon
+        <SplitAreaTrendIcon
           color={findSplitPointForValue(config.splitPoints, value).color}
           fillOpacity={1}
           strokeWidth={config.strokeWidth}

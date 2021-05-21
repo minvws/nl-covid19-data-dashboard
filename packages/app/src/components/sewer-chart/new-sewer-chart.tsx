@@ -61,8 +61,6 @@ export function NewSewerChart({
       ? mergeData(dataAverages, dataPerInstallation, selectedInstallation)
       : dataAverages.values;
 
-  console.log('chartInputValues', chartInputValues);
-
   return (
     <ChartTile
       timeframeOptions={['all', '5weeks']}
@@ -88,6 +86,7 @@ export function NewSewerChart({
             // @ts-expect-error
             values={chartInputValues}
             timeframe={timeframe}
+            markNearestPointOnly
             /**
              * Not sure why TS is complaining here. Can't seem to make part of
              * the config conditional.
@@ -172,7 +171,7 @@ function mergeData(
     (acc, v) =>
       set(acc, v.date_unix, {
         selected_installation_rna_normalized: v.rna_normalized,
-        average: Math.random() * 200,
+        average: null,
       }),
     {}
   );
@@ -182,10 +181,6 @@ function mergeData(
      * For averages pick the date in the middle of the week, because that's how
      * the values are displayed when just viewing averages, but now we need to
      * convert everything to day timestamps.
-     *
-     * @TODO alternatively we could pick start or end, and they would line up
-     * with at least some of the installation samples, but it also means the
-     * average trend gets a little distorted when selecting an installation.
      */
     const date_unix =
       value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
@@ -212,7 +207,9 @@ function mergeData(
     }
   }
 
-  // console.log('mergedValuesByTimestamp', mergedValuesByTimestamp);
+  /**
+   * Convert the map to a series of plain timestamped values.
+   */
   return Object.entries(mergedValuesByTimestamp)
     .map(([date_unix, obj]) => ({
       date_unix: Number(date_unix),

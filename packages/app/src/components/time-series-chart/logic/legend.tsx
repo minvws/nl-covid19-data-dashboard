@@ -19,7 +19,7 @@ export function useLegendItems<T extends TimestampedValue>(
             color: v.color,
             label: v.label,
             shape: 'custom',
-            shapeComponent: <SeriesIcon config={x} />,
+            shapeComponent: <SeriesIcon config={x} value={v.value} />,
           }));
         default:
           return {

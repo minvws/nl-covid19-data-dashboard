@@ -133,7 +133,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   strokeWidth={config.strokeWidth}
                   getX={getX}
                   getY={getY}
-                  bounds={bounds}
                   yScale={yScale}
                 />
               );
