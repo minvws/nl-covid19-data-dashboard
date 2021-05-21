@@ -21,7 +21,7 @@ export default {
             query: '*[!(_id in path("drafts.**"))] | order(_publishedAt desc)',
           },
         },
-        { name: 'deploy' },
+        // { name: 'deploy' },
       ],
     },
     {
