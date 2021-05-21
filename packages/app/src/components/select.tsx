@@ -13,7 +13,10 @@ export type SelectProps<T extends string> = {
   value: string | undefined;
   onChange: (value: T) => void;
   onClear?: () => void;
-  placeholder?: string;
+  /**
+   * Without a placeholder there is no "unselected state" so making this mandatory
+   */
+  placeholder: string;
 };
 
 export function Select<T extends string>({

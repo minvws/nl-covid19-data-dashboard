@@ -6,12 +6,14 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Bounds, SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
 import { ColorStack } from './color-stack';
+import { GradientPurpleOrange } from '@visx/gradient';
 
 export type LineStyle = 'solid' | 'dashed';
 
 const DEFAULT_STROKE_WIDTH = 2;
 
 type SplitAreaTrendProps = {
+  id: string;
   series: SeriesSingleValue[];
   splitPoints: SplitPoint[];
   strokeWidth?: number;
@@ -31,6 +33,7 @@ export function SplitAreaTrend({
   getY,
   bounds,
   yScale,
+  id,
 }: SplitAreaTrendProps) {
   // const segments = splitSeriesIntoSegments(series, splitPoints);
 
@@ -46,11 +49,19 @@ export function SplitAreaTrend({
 
   const closedTrendPath = closeTrendPathAlongAxis(trendPath, bounds);
 
+  const clippingId = `${id}_clipping`;
+  const gradientId = `${id}_gradient`;
+
   return (
     <g>
-      <ColorStack splitPoints={splitPoints} bounds={bounds} yScale={yScale} />
+      <ColorStack
+        id={clippingId}
+        splitPoints={splitPoints}
+        bounds={bounds}
+        yScale={yScale}
+      />
 
-      <ClipPath id="todo_some_unique_id">
+      <ClipPath id={clippingId}>
         <LinePath
           data={closedTrendPath}
           x={(v) => v.x}
@@ -61,14 +72,26 @@ export function SplitAreaTrend({
           strokeLinejoin="round"
         />
       </ClipPath>
+      {/*https://developer.mozilla.org/en-US/docs/Web/SVG/Element/linearGradient */}
+      <defs>
+        <linearGradient id="myGradient" gradientTransform="rotate(90)">
+          <stop offset="5%" stop-color="gold" />
+          <stop offset="95%" stop-color="red" />
+        </linearGradient>
+      </defs>
+
+      <GradientPurpleOrange id={gradientId} />
+
       <LinePath
         data={nonNullSeries}
         x={getX}
         y={getY}
-        stroke={'#ccc'}
-        strokeOpacity={5}
-        // stroke={transparentize(80, 'white')}
-        strokeWidth={strokeWidth}
+        fill="transparent"
+        // stroke="url(#stroke)"
+        strokeWidth={3}
+        // stroke={'#ccc'}
+        stroke={`url(#${gradientId})`}
+        // strokeWidth={strokeWidth}
         strokeLinecap="butt"
         strokeLinejoin="round"
       />

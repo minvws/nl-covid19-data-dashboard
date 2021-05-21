@@ -3,6 +3,8 @@ import {
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
+import { set } from 'lodash';
+import { isDefined } from 'ts-is-present';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -21,6 +23,11 @@ export function NewSewerChart({
 }) {
   const { siteText } = useIntl();
 
+  /**
+   * @TODO I'm assuming nl/gm/vr share use the same texts really but should check if
+   * this is correct. Maybe we can make the switch here if not based on a
+   * "context" prop if their texts are different but the structure is compatible.
+   */
   const text = siteText.veiligheidsregio_rioolwater_metingen;
 
   const {
@@ -29,25 +36,61 @@ export function NewSewerChart({
     onChange,
     onClear,
   } = useSewerStationSelectPropsSimplified(
-    dataPerInstallation ??
+    dataPerInstallation ||
       ({
         values: [
           {
+            /**
+             * Here I'm using a little hack because hooks can't be used
+             * conditionally but NL doesn't have "per installation" data. So
+             * this provides some mock data that is filtered out later.
+             */
             rwzi_awzi_name: '__no_installations',
           },
         ],
       } as SewerPerInstallationData)
   );
 
-  const mergedValues = dataAverages.values.map((x) => ({
-    ...x,
-    /**
-     * @TODO pick the right value based on timestamp
-     */
-    selected_instalation_value: selectedInstallation
-      ? Math.random() * 400
-      : null,
-  }));
+  const valuesForInstallation = selectedInstallation
+    ? dataPerInstallation?.values.find(
+        (x) => x.rwzi_awzi_name === selectedInstallation
+      )?.values
+    : undefined;
+
+  const valuesForInstallationByTimestamp =
+    valuesForInstallation?.reduce(
+      (acc, v) => set(acc, v.date_unix, v.rna_normalized),
+      {} as Record<number, number>
+      /**
+       * Assigning an empty record as a fallback makes it a little easier to
+       * work with the type below.
+       */
+    ) || ({} as Record<number, number>);
+
+  const valuesForAverageByTimestamp = dataAverages.values.reduce(
+    (acc, v) => set(acc, v.date_start_unix, v.average),
+    {} as Record<number, number>
+  );
+
+  const mergedValues = valuesForInstallation
+    ? valuesForInstallation.map((x) => ({
+        ...x,
+        selected_instalation_value: x.rna_normalized,
+        average: valuesForAverageByTimestamp[x.date_unix] || null,
+      }))
+    : dataAverages.values.map((x) => ({
+        ...x,
+        selected_instalation_value:
+          valuesForInstallationByTimestamp[x.date_start_unix] || null,
+      }));
+
+  // const mergedValues = dataAverages.values.map((x) => ({
+  //   ...x,
+  //   selected_instalation_value:
+  //     selectedInstallation && valuesForInstallationByTimestamp
+  //       ? valuesForInstallationByTimestamp[x.date_start_unix]
+  //       : null,
+  // }));
 
   return (
     <ChartTile
@@ -60,22 +103,34 @@ export function NewSewerChart({
     >
       {(timeframe) => (
         <div>
-          <Select
-            options={options}
-            onChange={onChange}
-            onClear={onClear}
-            value={selectedInstallation}
-          />
+          {options[0].value !== '__no_installations' && (
+            <Select
+              options={options}
+              onChange={onChange}
+              onClear={onClear}
+              value={selectedInstallation}
+              placeholder={text.graph_selected_rwzi_placeholder}
+            />
+          )}
+
           <TimeSeriesChart
             values={mergedValues}
             timeframe={timeframe}
+            /**
+             * Not sure why TS is complaining here. Can't seem to make part of
+             * the config conditional.
+             */
+            // @ts-expect-error
             seriesConfig={[
-              {
-                type: 'line',
-                metricProperty: 'selected_instalation_value',
-                label: selectedInstallation,
-                color: 'hotpink',
-              },
+              selectedInstallation
+                ? {
+                    type: 'line',
+                    metricProperty: 'selected_instalation_value',
+                    label: selectedInstallation,
+                    color: 'black',
+                    style: 'dashed',
+                  }
+                : undefined,
               {
                 type: 'split-area',
                 metricProperty: 'average',
@@ -109,7 +164,7 @@ export function NewSewerChart({
                   },
                 ],
               },
-            ]}
+            ].filter(isDefined)}
             dataOptions={{
               valueAnnotation: siteText.waarde_annotaties.riool_normalized,
             }}

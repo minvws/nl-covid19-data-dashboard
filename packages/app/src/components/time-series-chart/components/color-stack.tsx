@@ -5,7 +5,9 @@ export function ColorStack({
   splitPoints,
   bounds,
   yScale,
+  id,
 }: {
+  id?: string;
   splitPoints: SplitPoint[];
   bounds: Bounds;
   yScale: PositionScale;
@@ -35,7 +37,7 @@ export function ColorStack({
             width={bounds.width}
             height={segmentHeight}
             fill={splitPoint.color}
-            clipPath="url(#todo_some_unique_id)"
+            clipPath={id ? `url(#${id})` : undefined}
           />
         );
 
