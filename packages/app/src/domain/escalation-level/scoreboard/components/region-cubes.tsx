@@ -47,11 +47,7 @@ export function RegionCubes({
 
 const Container = styled.div(
   css({
-    // display: 'flex',
-    // gap: '1px',
-    // alignItems: 'center',
     mr: 2,
-    // flexWrap: 'wrap',
     my: asResponsiveArray({ _: 1, sm: 0 }),
   })
 );
