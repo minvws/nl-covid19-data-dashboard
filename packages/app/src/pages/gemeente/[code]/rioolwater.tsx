@@ -33,6 +33,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmPageMetricData('sewer_per_installation', 'sewer'),
+  // TODO: Integrate data before merging
   // selectGmPageMetricData('sewer_per_installation', 'sewer', 'population_count'),
   createGetContent<{
     articles?: ArticleSummary[];
