@@ -26,12 +26,14 @@ import {
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { CollapsibleContent } from '~/components/collapsible';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmPageMetricData('sewer_per_installation', 'sewer'),
+  // selectGmPageMetricData('sewer_per_installation', 'sewer', 'population_count'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -52,6 +54,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.gemeente_rioolwater_metingen;
 
   const sewerAverages = data.sewer;
+  const populationCount = data.population_count ?? 100;
 
   if (!sewerAverages) {
     /**
@@ -107,7 +110,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
-              description={text.extra_uitleg}
               metadata={{
                 date: [
                   sewerAverages.last_value.date_start_unix,
@@ -122,6 +124,30 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
               />
+              <Text>
+                {replaceComponentsInText(
+                  siteText.gemeente_index.population_count,
+                  {
+                    municipalityName: municipalityName,
+                    populationCount: <strong>{populationCount}</strong>,
+                  }
+                )}
+              </Text>
+
+              <Text>{text.extra_uitleg}</Text>
+
+              <CollapsibleContent
+                label={
+                  siteText.gemeente_index.population_count_explanation_title
+                }
+              >
+                <Text>
+                  {replaceComponentsInText(text.population_count_explanation, {
+                    municipalityName: <strong>{municipalityName}</strong>,
+                    value: <strong>{sewerAverages.last_value.average}</strong>,
+                  })}
+                </Text>
+              </CollapsibleContent>
             </KpiTile>
 
             <KpiTile
