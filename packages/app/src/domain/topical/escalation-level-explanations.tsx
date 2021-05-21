@@ -31,34 +31,36 @@ export function EscalationLevelExplanations() {
   const { siteText } = useIntl();
 
   return (
-    <CollapsibleButton label={siteText.escalatie_niveau.tile_title}>
-      <Box py={3} px={{ _: 3, xs: 4, md: 5, lg: '12rem' }}>
-        <EscalationLevelExplanation
-          level={1}
-          explanation={siteText.escalatie_niveau.types['1'].toelichting}
-        />
-        <EscalationLevelExplanation
-          level={2}
-          explanation={siteText.escalatie_niveau.types['2'].toelichting}
-        />
-        <EscalationLevelExplanation
-          level={3}
-          explanation={siteText.escalatie_niveau.types['3'].toelichting}
-        />
-        <EscalationLevelExplanation
-          level={4}
-          explanation={siteText.escalatie_niveau.types['4'].toelichting}
-        />
-        <Box my={4}>
-          <LinkWithIcon
-            href="/over-risiconiveaus"
-            icon={<ArrowIconRight />}
-            iconPlacement="right"
-          >
-            {siteText.escalatie_niveau.lees_meer}
-          </LinkWithIcon>
+    <Box px={{ md: 5, lg: '8rem' }}>
+      <CollapsibleButton label={siteText.escalatie_niveau.tile_title}>
+        <Box py={3} px={{ _: 3, xs: 4 }}>
+          <EscalationLevelExplanation
+            level={1}
+            explanation={siteText.escalatie_niveau.types['1'].toelichting}
+          />
+          <EscalationLevelExplanation
+            level={2}
+            explanation={siteText.escalatie_niveau.types['2'].toelichting}
+          />
+          <EscalationLevelExplanation
+            level={3}
+            explanation={siteText.escalatie_niveau.types['3'].toelichting}
+          />
+          <EscalationLevelExplanation
+            level={4}
+            explanation={siteText.escalatie_niveau.types['4'].toelichting}
+          />
+          <Box my={4}>
+            <LinkWithIcon
+              href="/over-risiconiveaus"
+              icon={<ArrowIconRight />}
+              iconPlacement="right"
+            >
+              {siteText.escalatie_niveau.lees_meer}
+            </LinkWithIcon>
+          </Box>
         </Box>
-      </Box>
-    </CollapsibleButton>
+      </CollapsibleButton>
+    </Box>
   );
 }
