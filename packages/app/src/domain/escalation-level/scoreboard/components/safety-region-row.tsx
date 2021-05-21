@@ -134,14 +134,14 @@ const BarScaleCell = ({
       <Box
         alignItems="center"
         display="flex"
-        justifyContent={{ sm: 'flex-end' }}
-        mr={{ _: '1rem', lg: '1rem' }}
+        justifyContent={{ lg: 'flex-end' }}
+        mr="1rem"
         width="2.5em"
       >
         <InlineText fontWeight="bold">{formatNumber(value)}</InlineText>
       </Box>
       <Box pr={{ _: 3, sm: 5 }} pb={2} flexGrow={1}>
-        <Box mb={{ _: 2, md: 1 }} maxWidth={{ _: '300px', lg: '250px' }}>
+        <Box mb={{ _: 2, md: 1 }} width={200}>
           <CategoricalBarScale
             hideLegend
             hideNumbers
