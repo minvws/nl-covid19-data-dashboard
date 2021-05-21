@@ -1,4 +1,5 @@
 import {
+  assert,
   MunicipalSewer,
   RegionalSewer,
   SewerPerInstallationData,
@@ -149,41 +150,73 @@ export function NewSewerChart({
 function mergeData(
   dataAverages: RegionalSewer | MunicipalSewer,
   dataPerInstallation: SewerPerInstallationData,
-  selectedInstallation?: string
+  selectedInstallation: string
 ) {
-  const valuesForInstallation = selectedInstallation
-    ? dataPerInstallation?.values.find(
-        (x) => x.rwzi_awzi_name === selectedInstallation
-      )?.values
-    : undefined;
+  const valuesForInstallation = dataPerInstallation.values.find(
+    (x) => x.rwzi_awzi_name === selectedInstallation
+  )?.values;
 
-  const valuesForInstallationByTimestamp =
-    valuesForInstallation?.reduce(
-      (acc, v) => set(acc, v.date_unix, v.rna_normalized),
-      {} as Record<number, number>
-      /**
-       * Assigning an empty record as a fallback makes it a little easier to
-       * work with the type below.
-       */
-    ) || ({} as Record<number, number>);
-
-  const valuesForAverageByTimestamp = dataAverages.values.reduce(
-    (acc, v) => set(acc, v.date_start_unix, v.average),
-    {} as Record<number, number>
+  assert(
+    valuesForInstallation,
+    `Failed to find data for rwzi_awzi_name ${selectedInstallation}`
   );
 
-  const mergedValues = valuesForInstallation
-    ? valuesForInstallation.map((x) => ({
-        ...x,
-        selected_installation_rna_normalized: x.rna_normalized,
-        average: valuesForAverageByTimestamp[x.date_unix] || null,
-      }))
-    : dataAverages.values.map((x) => ({
-        ...x,
-        selected_installation_rna_normalized:
-          valuesForInstallationByTimestamp[x.date_start_unix] || null,
-      }));
+  type MergedValue = {
+    average: number | null;
+    selected_installation_rna_normalized: number | null;
+  };
 
-  console.log(mergedValues);
-  return mergedValues;
+  type MergedValuesByTimestamp = Record<number, MergedValue>;
+
+  const mergedValuesByTimestamp = valuesForInstallation.reduce<MergedValuesByTimestamp>(
+    (acc, v) =>
+      set(acc, v.date_unix, {
+        selected_installation_rna_normalized: v.rna_normalized,
+        average: Math.random() * 200,
+      }),
+    {}
+  );
+
+  for (const value of dataAverages.values) {
+    /**
+     * For averages pick the date in the middle of the week, because that's how
+     * the values are displayed when just viewing averages, but now we need to
+     * convert everything to day timestamps.
+     *
+     * @TODO alternatively we could pick start or end, and they would line up
+     * with at least some of the installation samples, but it also means the
+     * average trend gets a little distorted when selecting an installation.
+     */
+    const date_unix =
+      value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
+
+    const existingValue = mergedValuesByTimestamp[date_unix] as
+      | MergedValue
+      | undefined;
+
+    /**
+     * If we happen to fall exactly on an existing installation timestamp we
+     * want to merge that data.
+     */
+    if (existingValue) {
+      mergedValuesByTimestamp[date_unix] = {
+        average: value.average,
+        selected_installation_rna_normalized:
+          existingValue.selected_installation_rna_normalized,
+      };
+    } else {
+      mergedValuesByTimestamp[date_unix] = {
+        average: value.average,
+        selected_installation_rna_normalized: null,
+      };
+    }
+  }
+
+  // console.log('mergedValuesByTimestamp', mergedValuesByTimestamp);
+  return Object.entries(mergedValuesByTimestamp)
+    .map(([date_unix, obj]) => ({
+      date_unix: Number(date_unix),
+      ...obj,
+    }))
+    .sort((a, b) => a.date_unix - b.date_unix);
 }

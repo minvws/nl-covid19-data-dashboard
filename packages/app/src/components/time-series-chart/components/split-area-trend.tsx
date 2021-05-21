@@ -8,8 +8,6 @@ import { Bounds, SeriesItem, SeriesSingleValue, SplitPoint } from '../logic';
 import { ColorStack } from './color-stack';
 import { SplitPointGradient } from './split-point-gradient';
 
-export type LineStyle = 'solid' | 'dashed';
-
 const DEFAULT_STROKE_WIDTH = 2;
 
 type SplitAreaTrendProps = {
