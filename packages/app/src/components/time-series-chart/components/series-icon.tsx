@@ -23,8 +23,7 @@ interface SeriesIconProps<T extends TimestampedValue> {
 export function SeriesIcon<T extends TimestampedValue>({
   config,
   value,
-}: // @TODO we need a value here to pick the right color for the split line
-SeriesIconProps<T>) {
+}: SeriesIconProps<T>) {
   switch (config.type) {
     case 'line':
       return (
