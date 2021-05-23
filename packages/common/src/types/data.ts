@@ -837,6 +837,7 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
+  static_values?: GmStaticValues;
   difference: RegionalDifference;
   g_number: VrGNumber;
   sewer: RegionalSewer;
@@ -855,6 +856,9 @@ export interface Regionaal {
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
+}
+export interface GmStaticValues {
+  population_count?: number;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
