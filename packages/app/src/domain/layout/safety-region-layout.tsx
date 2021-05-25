@@ -156,7 +156,29 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                       />
                     </Box>
                   </MetricMenuButtonLink>
-
+                  <CategoryMenu
+                    title={
+                      siteText.veiligheidsregio_layout.headings.ziekenhuizen
+                    }
+                  >
+                    <MetricMenuItemLink
+                      href={reverseRouter.vr.ziekenhuisopnames(code)}
+                      icon={<Ziekenhuis />}
+                      title={
+                        siteText.veiligheidsregio_ziekenhuisopnames_per_dag
+                          .titel_sidebar
+                      }
+                    >
+                      <SidebarMetric
+                        data={data}
+                        scope="vr"
+                        metricName="hospital_nice"
+                        metricProperty="admissions_on_date_of_reporting"
+                        localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
+                        differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                      />
+                    </MetricMenuItemLink>
+                  </CategoryMenu>
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings.besmettingen
@@ -200,29 +222,24 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
+
                   <CategoryMenu
-                    title={
-                      siteText.veiligheidsregio_layout.headings.ziekenhuizen
-                    }
+                    title={siteText.veiligheidsregio_layout.headings.gedrag}
                   >
                     <MetricMenuItemLink
-                      href={reverseRouter.vr.ziekenhuisopnames(code)}
-                      icon={<Ziekenhuis />}
-                      title={
-                        siteText.veiligheidsregio_ziekenhuisopnames_per_dag
-                          .titel_sidebar
-                      }
+                      href={reverseRouter.vr.gedrag(code)}
+                      icon={<Gedrag />}
+                      title={siteText.regionaal_gedrag.sidebar.titel}
                     >
                       <SidebarMetric
                         data={data}
                         scope="vr"
-                        metricName="hospital_nice"
-                        metricProperty="admissions_on_date_of_reporting"
-                        localeTextKey="veiligheidsregio_ziekenhuisopnames_per_dag"
-                        differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                        metricName="behavior"
+                        localeTextKey="gedrag_common"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
+
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings
@@ -304,23 +321,6 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         localeTextKey="veiligheidsregio_rioolwater_metingen"
                         differenceKey="sewer__average"
                         annotationKey="riool_normalized"
-                      />
-                    </MetricMenuItemLink>
-                  </CategoryMenu>
-
-                  <CategoryMenu
-                    title={siteText.veiligheidsregio_layout.headings.gedrag}
-                  >
-                    <MetricMenuItemLink
-                      href={reverseRouter.vr.gedrag(code)}
-                      icon={<Gedrag />}
-                      title={siteText.regionaal_gedrag.sidebar.titel}
-                    >
-                      <SidebarMetric
-                        data={data}
-                        scope="vr"
-                        metricName="behavior"
-                        localeTextKey="gedrag_common"
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

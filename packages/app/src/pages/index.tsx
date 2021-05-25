@@ -100,9 +100,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
 
   const metadata = {
     ...siteText.nationaal_metadata,
