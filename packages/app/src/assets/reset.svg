@@ -1,1 +1,13 @@
-<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect x="4.21" y="-1.29" width="1.57" height="12.57" transform="translate(-2.07 5) rotate(-45)" fill="#fff"/><polygon points="1.11 0 0 1.11 8.89 10 10 8.89 1.11 0 1.11 0" fill="#595959"/><rect x="-1.29" y="4.21" width="12.57" height="1.57" transform="translate(-2.07 5) rotate(-45)" fill="#fff"/><polygon points="8.89 0 0 8.89 1.11 10 10 1.11 8.89 0 8.89 0" fill="#595959"/></svg>
+<svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" xmlns="http://www.w3.org/2000/svg" focusable="false">
+	<g clip-path="url(#clip0)">
+		<path d="M1.10503 0.000754932L-0.00512695 1.11091L8.8832 9.99924L9.99336 8.88909L1.10503 0.000754932Z" fill="#595959" />
+		<path d="M1.11012 0L0.000121192 1.11L8.89012 10L10.0001 8.89L1.11012 0Z" fill="#595959" />
+		<path d="M8.8832 0.000755805L-0.00512695 8.88909L1.10503 9.99925L9.99336 1.11091L8.8832 0.000755805Z" fill="#595959" />
+		<path d="M8.89012 0L0.000121192 8.89L1.11012 10L10.0001 1.11L8.89012 0Z" fill="#595959" />
+	</g>
+	<defs>
+		<clipPath id="clip0">
+			<rect width="10" height="10" fill="white" />
+		</clipPath>
+	</defs>
+</svg>

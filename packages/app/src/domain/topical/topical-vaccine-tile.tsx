@@ -1,14 +1,14 @@
 import { NlVaccineAdministeredTotal } from '@corona-dashboard/common';
-
 import Vaccinaties from '~/assets/vaccinaties.svg';
+import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Heading, Text } from '~/components/typography';
+import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { ArrowIconRight } from '~/components/arrow-icon';
-import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
 interface TopicalVaccineProps {
   data: NlVaccineAdministeredTotal;
 }
@@ -22,28 +22,22 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
 
   return (
     <Box position="relative">
-      <Box width="3.5rem" height="3.5rem" position="absolute" left={0} mr={1}>
-        <Vaccinaties />
+      <Box display="flex" alignItems="center">
+        <Box width="36px" height="36px">
+          <Vaccinaties />
+        </Box>
+        <Heading level={3} as="h2" mb={0} fontSize="1.25rem">
+          <LinkWithIcon
+            href={reverseRouter.nl.vaccinaties()}
+            icon={<ArrowIconRight />}
+            iconPlacement="right"
+            fontWeight="bold"
+            headingLink
+          >
+            {text.title}
+          </LinkWithIcon>
+        </Heading>
       </Box>
-      <Heading
-        level={3}
-        as="h2"
-        py={2}
-        pl="3.5rem"
-        mb={2}
-        lineHeight={{ md: 0, lg: 1 }}
-        fontSize="1.25rem"
-      >
-        <LinkWithIcon
-          href={reverseRouter.nl.vaccinaties()}
-          icon={<ArrowIconRight />}
-          iconPlacement="right"
-          fontWeight="bold"
-          headingLink
-        >
-          {text.title}
-        </LinkWithIcon>
-      </Heading>
 
       <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
         {formatNumber(estimated)}

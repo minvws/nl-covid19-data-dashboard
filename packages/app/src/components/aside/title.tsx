@@ -1,6 +1,6 @@
-import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import { Box } from '../base';
+import { IconContainer } from '../icon-container';
 import { Heading, HeadingLevel, HeadingProps } from '../typography';
 
 type TitleProps = {
@@ -27,7 +27,7 @@ export function Title(props: TitleProps) {
       alignItems="center"
       m={0}
     >
-      {icon && <Icon>{icon}</Icon>}
+      {icon && <IconContainer width="2rem">{icon}</IconContainer>}
 
       <Box>
         <Heading
@@ -42,33 +42,6 @@ export function Title(props: TitleProps) {
         </Heading>
         {subtitle}
       </Box>
-    </Box>
-  );
-}
-
-function Icon({ children }: { children: ReactNode }) {
-  return (
-    <Box
-      role="img"
-      aria-hidden="true"
-      flex="0 0 auto"
-      display="flex"
-      flexDirection="row"
-      flexWrap="nowrap"
-      justifyContent="center"
-      alignItems="center"
-      padding={0}
-      marginRight={0}
-      css={css({
-        width: '2.5rem',
-        height: '2.5rem',
-        '& svg': {
-          width: '2.5rem',
-          height: '2.5rem',
-        },
-      })}
-    >
-      {children}
     </Box>
   );
 }

@@ -1,3 +1,4 @@
-<svg  focusable="false" width="36" height="36" viewBox="0 0 36 36" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M11 11L18 18M25 11L18 18M25 25L18 18M11 25L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+<svg width="36" height="36" viewBox="0 0 36 36" fill="currentColor" xmlns="http://www.w3.org/2000/svg" focusable="false">
+	<path d="M11 11L18 18L11 11ZM25 11L18 18L25 11ZM25 25L18 18L25 25ZM11 25L18 18L11 25Z" fill="currentColor" />
+	<path d="M11 25L18 18M11 11L18 18L11 11ZM25 11L18 18L25 11ZM25 25L18 18L25 25Z" stroke="black" stroke-width="1.5" stroke-linecap="round" />
 </svg>
