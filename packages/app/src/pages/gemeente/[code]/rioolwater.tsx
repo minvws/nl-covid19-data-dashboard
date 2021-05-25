@@ -53,7 +53,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.gemeente_rioolwater_metingen;
 
   const sewerAverages = data.sewer;
-  const populationCount = data.static_values?.population_count;
+  const populationCount = data.static_values.population_count;
 
   if (!sewerAverages) {
     /**

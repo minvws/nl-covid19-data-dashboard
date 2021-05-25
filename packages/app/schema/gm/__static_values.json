@@ -7,6 +7,6 @@
       "type": "integer"
     }
   },
-  "required": [],
+  "required": ["population_count"],
   "additionalProperties": false
 }

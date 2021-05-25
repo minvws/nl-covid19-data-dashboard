@@ -19,7 +19,7 @@ export interface Municipal {
   vaccine_coverage?: GmVaccineCoverage;
 }
 export interface GmStaticValues {
-  population_count?: number;
+  population_count: number;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -855,7 +855,7 @@ export interface Regionaal {
   vaccine_coverage?: VrVaccineCoverage;
 }
 export interface VrStaticValues {
-  population_count?: number;
+  population_count: number;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
