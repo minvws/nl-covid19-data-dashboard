@@ -27,6 +27,7 @@ import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -43,7 +44,6 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
-import { useFeature } from '~/lib/features';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -78,6 +78,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
   const dataGgdDailyValues = data.tested_ggd_daily.values;
+  const dataGgdDailyLastValue = data.tested_ggd_daily.last_value;
+  const difference = data.difference;
 
   const municipalCodes = gmCodesByVrCode[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -290,12 +292,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             subtitle={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,
-              dateOfInsertionUnix:
-                dataGgdAverageLastValue.date_of_insertion_unix,
-              dateOrRange: {
-                start: dataGgdAverageLastValue.date_start_unix,
-                end: dataGgdAverageLastValue.date_end_unix,
-              },
+              dateOfInsertionUnix: dataGgdDailyLastValue.date_of_insertion_unix,
+              dateOrRange: dataGgdDailyLastValue.date_unix,
               dataSources: [ggdText.bronnen.rivm],
             }}
             reference={text.reference}
@@ -305,25 +303,32 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={ggdText.totaal_getest_week_titel}
               metadata={{
-                date: [
-                  dataGgdAverageLastValue.date_start_unix,
-                  dataGgdAverageLastValue.date_end_unix,
-                ],
+                date: dataGgdDailyLastValue.date_unix,
                 source: ggdText.bronnen.rivm,
               }}
             >
-              <KpiValue absolute={dataGgdAverageLastValue.tested_total} />
+              <KpiValue
+                absolute={dataGgdDailyLastValue.tested_total}
+                difference={
+                  difference.tested_ggd_average__tested_total_moving_average
+                }
+                isMovingAverageDifference
+              />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
             <KpiTile
               title={ggdText.positief_getest_week_titel}
               metadata={{
-                date: dataGgdAverageLastValue.date_end_unix,
+                date: dataGgdDailyLastValue.date_unix,
                 source: ggdText.bronnen.rivm,
               }}
             >
               <KpiValue
-                percentage={dataGgdAverageLastValue.infected_percentage}
+                percentage={dataGgdDailyLastValue.infected_percentage}
+                difference={
+                  difference.tested_ggd_average__infected_percentage_moving_average
+                }
+                isMovingAverageDifference
               />
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
               <Text fontWeight="bold">
@@ -332,12 +337,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     numerator: (
                       <InlineText color="data.primary">
-                        {formatNumber(dataGgdAverageLastValue.infected)}
+                        {formatNumber(dataGgdDailyLastValue.infected)}
                       </InlineText>
                     ),
                     denominator: (
                       <InlineText color="data.primary">
-                        {formatNumber(dataGgdAverageLastValue.tested_total)}
+                        {formatNumber(dataGgdDailyLastValue.tested_total)}
                       </InlineText>
                     ),
                   }

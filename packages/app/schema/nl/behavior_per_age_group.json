@@ -6,9 +6,6 @@
     "avoid_crowds_compliance": { "$ref": "#/definitions/value" },
     "avoid_crowds_support": { "$ref": "#/definitions/value" },
 
-    "curfew_compliance": { "$ref": "#/definitions/value" },
-    "curfew_support": { "$ref": "#/definitions/value" },
-
     "keep_distance_compliance": { "$ref": "#/definitions/value" },
     "keep_distance_support": { "$ref": "#/definitions/value" },
 
@@ -34,8 +31,6 @@
   "required": [
     "avoid_crowds_compliance",
     "avoid_crowds_support",
-    "curfew_compliance",
-    "curfew_support",
     "keep_distance_compliance",
     "keep_distance_support",
     "max_visitors_compliance",

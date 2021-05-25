@@ -8,7 +8,11 @@ type LegendLineStyle = 'solid' | 'dashed';
 export type LegendItem = {
   label: string;
 } & (
-  | { shape: LegendShape; color: string; style?: LegendLineStyle }
+  | {
+      shape: LegendShape;
+      color: string;
+      style?: LegendLineStyle;
+    }
   | { shape: 'custom'; shapeComponent: ReactNode }
 );
 

@@ -1,5 +1,6 @@
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
@@ -12,7 +13,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 interface BehaviourPageNationalProps {
   data: any;
-  content: any;
+  content: { articles?: ArticleSummary[] | undefined };
 }
 
 export function BehaviorPageNational({
@@ -24,9 +25,8 @@ export function BehaviorPageNational({
   const { nl_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(
-    behaviorLastValue
-  );
+  const { sortedCompliance, sortedSupport } =
+    useFormatAndSortBehavior(behaviorLastValue);
 
   return (
     <TileList>
@@ -62,42 +62,42 @@ export function BehaviorPageNational({
                 </InlineText>
               ),
               date_start: (
-                <span>
+                <InlineText>
                   {formatDateFromSeconds(behaviorLastValue.date_start_unix)}
-                </span>
+                </InlineText>
               ),
               date_end: (
-                <span>
+                <InlineText>
                   {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
-                </span>
+                </InlineText>
               ),
             })}
           </Text>
           <Text>
             {replaceComponentsInText(nl_gedrag.kpi.hoogste_gevolgde_regel, {
               highest_compliance_description: (
-                <span>{sortedCompliance[0].description}</span>
+                <InlineText>{sortedCompliance[0].description}</InlineText>
               ),
               highest_complience_percentage: (
-                <span>{sortedCompliance[0].percentage}</span>
+                <InlineText>{sortedCompliance[0].percentage}</InlineText>
               ),
               highest_complience_percentage_support: (
-                <span>
+                <InlineText>
                   {
                     sortedSupport.find((x) => sortedCompliance[0].id === x.id)
                       ?.percentage
                   }
-                </span>
+                </InlineText>
               ),
             })}
           </Text>
           <Text>
             {replaceComponentsInText(nl_gedrag.kpi.hoogste_draagvlak, {
               highest_support_description: (
-                <span>{sortedSupport[0].description}</span>
+                <InlineText>{sortedSupport[0].description}</InlineText>
               ),
               highest_complience_support: (
-                <span>{sortedSupport[0].percentage}</span>
+                <InlineText>{sortedSupport[0].percentage}</InlineText>
               ),
             })}
           </Text>
