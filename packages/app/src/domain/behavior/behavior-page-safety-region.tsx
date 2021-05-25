@@ -1,5 +1,6 @@
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
@@ -7,10 +8,9 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-
 interface BehaviorPageSafetyRegionProps {
   data: any;
-  content: any;
+  content: { articles?: ArticleSummary[] | undefined };
 }
 
 export function BehaviorPageSafetyRegion({
@@ -56,14 +56,14 @@ export function BehaviorPageSafetyRegion({
                 </InlineText>
               ),
               date_start: (
-                <span>
+                <InlineText>
                   {formatDateFromSeconds(behaviorLastValue.date_start_unix)}
-                </span>
+                </InlineText>
               ),
               date_end: (
-                <span>
+                <InlineText>
                   {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
-                </span>
+                </InlineText>
               ),
             })}
           </Text>
