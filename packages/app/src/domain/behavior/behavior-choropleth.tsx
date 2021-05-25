@@ -104,7 +104,7 @@ function ChoroplethBlock({
   const reverseRouter = useReverseRouter();
 
   return (
-    <Box width={{ _: '100%', lg: '50%' }}>
+    <Box width={{ _: '100%', lg: '49=9%' }}>
       <Heading level={4} textAlign="center">
         {title}
       </Heading>
@@ -156,8 +156,11 @@ function ChoroplethBlock({
           }}
         />
       </Box>
-      <Box display="flex" justifyContent="center">
-        <ChoroplethLegenda thresholds={thresholds} title={'Percentage'} />
+      <Box display="flex" justifyContent={{ _: 'center', lg: 'flex-start' }}>
+        <ChoroplethLegenda
+          thresholds={thresholds}
+          title={siteText.gedrag_common.basisregels.header_percentage}
+        />
       </Box>
     </Box>
   );

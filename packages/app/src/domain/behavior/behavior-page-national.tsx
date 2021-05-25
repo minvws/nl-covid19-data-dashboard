@@ -13,12 +13,8 @@ import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 interface BehaviourPageNationalProps {
   data: any;
-<<<<<<< HEAD
-  content: any;
-  behaviorData: RegionsBehavior[];
-=======
   content: { articles?: ArticleSummary[] | undefined };
->>>>>>> feature/add-bbehaviour-page-flag
+  behaviorData: RegionsBehavior[];
 }
 
 export function BehaviorPageNational({
