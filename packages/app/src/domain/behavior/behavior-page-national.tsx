@@ -9,6 +9,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
 interface BehaviourPageNationalProps {
   data: any;
   content: { articles?: ArticleSummary[] | undefined };
@@ -103,6 +104,8 @@ export function BehaviorPageNational({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <MoreInformation />
     </TileList>
   );
 }
