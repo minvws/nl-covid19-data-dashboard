@@ -8,24 +8,25 @@ const {
 const dotenv = require('dotenv');
 const path = require('path');
 
+const SIX_MONTHS_IN_SECONDS = 15768000;
+
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
 });
 
-if (
-  !process.env.NEXT_PUBLIC_SANITY_DATASET ||
-  !process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-) {
-  throw new Error(
-    'Provide NEXT_PUBLIC_SANITY_DATASET and NEXT_PUBLIC_SANITY_PROJECT_ID'
-  );
+if (!process.env.NEXT_PUBLIC_SANITY_DATASET) {
+  throw new Error('Provide NEXT_PUBLIC_SANITY_DATASET');
 }
 
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+  throw new Error('Provide NEXT_PUBLIC_SANITY_PROJECT_ID');
+}
+
+const isProduction = process.env.NODE_ENV === 'production';
+const app = next({ dev: !isProduction });
 const handle = app.getRequestHandler();
 
-const PORT = process.env.EXPRESS_PORT || (dev ? 3000 : 8080);
+const PORT = process.env.EXPRESS_PORT || (isProduction ? 8080 : 3000);
 const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
 
 (async function () {
@@ -80,7 +81,7 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
    */
   server.use(function (req, res) {
     const isHtml = req.url.indexOf('.') === -1;
-    setResponseHeaders(res, 15768000, isHtml);
+    setResponseHeaders(res, SIX_MONTHS_IN_SECONDS, isHtml);
     return handle(req, res);
   });
 
@@ -95,7 +96,11 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
   /**
    * Set headers for a response
    */
-  function setResponseHeaders(res, maxAge = 15768000, noCache = false) {
+  function setResponseHeaders(
+    res,
+    maxAge = SIX_MONTHS_IN_SECONDS,
+    noCache = false
+  ) {
     const contentSecurityPolicy = dev
       ? ''
       : "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'";
