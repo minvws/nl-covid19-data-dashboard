@@ -772,6 +772,7 @@ export interface NlVaccineAdministeredRateMovingAverage {
 export interface NlVaccineAdministeredRateMovingAverageValue {
   doses_per_day: number;
   doses_per_second: number;
+  doses_per_minute: number;
   seconds_per_dose: number;
   date_start_unix: number;
   date_end_unix: number;
