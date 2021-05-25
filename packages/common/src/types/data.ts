@@ -834,7 +834,7 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
-  static_values?: GmStaticValues;
+  static_values?: VrStaticValues;
   difference: RegionalDifference;
   g_number: VrGNumber;
   sewer: RegionalSewer;
@@ -854,7 +854,7 @@ export interface Regionaal {
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
 }
-export interface GmStaticValues {
+export interface VrStaticValues {
   population_count?: number;
 }
 export interface RegionalDifference {

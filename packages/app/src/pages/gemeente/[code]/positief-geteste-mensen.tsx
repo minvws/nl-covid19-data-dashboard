@@ -42,7 +42,7 @@ import { CollapsibleContent } from '~/components/collapsible';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('static_values'),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -67,7 +67,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
-  const populationCount = data.population_count;
+  const populationCount = data.static_values?.population_count;
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
