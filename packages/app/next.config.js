@@ -9,9 +9,6 @@ const nextDomainsConfig = require('./next.domains.config');
 
 const COMMIT_ID = process.env.NEXT_PUBLIC_COMMIT_ID || 'no-version-found';
 
-const sanityImages = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
-const sanityFiles = `https://cdn.sanity.io/files/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
-
 const nextConfig = {
   env: {
     COMMIT_ID,
@@ -38,61 +35,6 @@ const nextConfig = {
     // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
     domains: nextDomainsConfig,
   },
-
-  async headers() {
-    /* The CSP is disabled on development builds */
-    const contentSecurityPolicy =
-      process.env.NODE_ENV === 'production'
-        ? "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl;"
-        : '';
-
-    return [
-      {
-        source: '/:any*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: contentSecurityPolicy,
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin',
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubdomains;',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'interest-cohort=()',
-          },
-        ],
-      },
-    ];
-  },
-
-  rewrites: () => [
-    {
-      source: '/cms-images/:path*',
-      destination: `${sanityImages}/:path*`,
-    },
-    {
-      source: '/cms-files/:path*',
-      destination: `${sanityFiles}/:path*`,
-    },
-  ],
 
   webpack(config) {
     config.module.rules.push({
