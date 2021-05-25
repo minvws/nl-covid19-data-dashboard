@@ -32,7 +32,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('sewer_per_installation', 'sewer', 'static_values'),
+  selectGmPageMetricData('sewer_per_installation', 'static_values'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -48,7 +48,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     content,
     lastGenerated,
   } = props;
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.gemeente_rioolwater_metingen;
 
@@ -128,7 +128,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                   siteText.gemeente_index.population_count,
                   {
                     municipalityName: municipalityName,
-                    populationCount: <strong>{populationCount}</strong>,
+                    populationCount: (
+                      <strong>{formatNumber(populationCount)}</strong>
+                    ),
                   }
                 )}
               </Text>
@@ -143,7 +145,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 <Text>
                   {replaceComponentsInText(text.population_count_explanation, {
                     municipalityName: <strong>{municipalityName}</strong>,
-                    value: <strong>{sewerAverages.last_value.average}</strong>,
+                    value: (
+                      <strong>
+                        {formatNumber(sewerAverages.last_value.average)}
+                      </strong>
+                    ),
                   })}
                 </Text>
               </CollapsibleContent>

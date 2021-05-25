@@ -9,12 +9,12 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
-  static_values?: GmStaticValues;
+  static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
   tested_overall: MunicipalTestedOverall;
-  sewer?: MunicipalSewer;
+  sewer: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
 }

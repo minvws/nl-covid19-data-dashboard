@@ -63,7 +63,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
@@ -128,7 +128,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   siteText.gemeente_index.population_count,
                   {
                     municipalityName,
-                    populationCount: <strong>{populationCount}</strong>,
+                    populationCount: (
+                      <strong>{formatNumber(populationCount)}</strong>
+                    ),
                   }
                 )}
               </Text>
@@ -161,7 +163,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 <Text>
                   {replaceComponentsInText(text.population_count_explanation, {
                     municipalityName: <strong>{municipalityName}</strong>,
-                    value: <strong>{lastValue.infected_per_100k}</strong>,
+                    value: (
+                      <strong>
+                        {formatNumber(lastValue.infected_per_100k)}
+                      </strong>
+                    ),
                   })}
                 </Text>
               </CollapsibleContent>
