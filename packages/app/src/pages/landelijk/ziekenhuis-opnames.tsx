@@ -146,7 +146,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   difference={
                     data.difference.hospital_lcps__beds_occupied_covid
                   }
-                  isMovingAverageDifference
                 />
               )}
             </KpiTile>
