@@ -101,9 +101,9 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
     maxAge = SIX_MONTHS_IN_SECONDS,
     noCache = false
   ) {
-    const contentSecurityPolicy = dev
-      ? ''
-      : "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'";
+    const contentSecurityPolicy = isProduction
+      ? "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'"
+      : '';
 
     res.set(
       'Cache-control',
