@@ -101,7 +101,6 @@ export const CollapsibleContent = ({
           <div ref={wrapperRef}>
             <div
               ref={ref}
-              id="tempYo"
               css={css({
                 /**
                  * Outside margins of children are breaking height calculations ヽ(ಠ_ಠ)ノ..
