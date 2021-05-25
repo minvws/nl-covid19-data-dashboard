@@ -12,12 +12,24 @@ export function useLegendItems<T extends TimestampedValue>(
   dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    const items = config.filter(isVisible).map<LegendItem>((x) => ({
-      color: x.color,
-      label: x.label,
-      shape: 'custom',
-      shapeComponent: <SeriesIcon config={x} />,
-    }));
+    const items = config.filter(isVisible).flatMap<LegendItem>((x) => {
+      switch (x.type) {
+        case 'split-bar':
+          return x.splitPoints.map((v) => ({
+            color: v.color,
+            label: v.label,
+            shape: 'custom',
+            shapeComponent: <SeriesIcon config={x} value={v.value - 1} />,
+          }));
+        default:
+          return {
+            color: x.color,
+            label: x.label,
+            shape: 'custom',
+            shapeComponent: <SeriesIcon config={x} />,
+          };
+      }
+    });
 
     /**
      * Maximum number of legend items
