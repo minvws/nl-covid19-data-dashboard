@@ -596,3 +596,11 @@ timestamp,action,key
 2021-05-18T09:19:53.053Z,delete,gedrag_onderwerpen.symptoms_stay_home
 2021-05-18T12:30:34.009Z,delete,gedrag_onderwerpen.symptoms_stay_home_if_necessary
 2021-05-18T12:31:34.675Z,add,gedrag_onderwerpen.symptoms_stay_home_if_mandatory
+2021-05-25T13:22:22.626Z,add,gedrag_leeftijden.tabel.70_plus
+2021-05-25T13:22:51.765Z,add,gedrag_leeftijden.tabel.55_69
+2021-05-25T13:23:26.594Z,add,gedrag_leeftijden.tabel.40_54
+2021-05-25T13:23:48.906Z,add,gedrag_leeftijden.tabel.25_39
+2021-05-25T13:24:19.857Z,add,gedrag_leeftijden.tabel.16_24
+2021-05-25T14:16:05.138Z,add,gedrag_leeftijden.tabel.age_group
+2021-05-25T14:16:40.175Z,add,gedrag_leeftijden.tabel.recent_research
+2021-05-25T14:17:04.237Z,add,gedrag_leeftijden.tabel.error

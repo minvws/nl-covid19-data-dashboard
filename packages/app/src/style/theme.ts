@@ -134,6 +134,8 @@ export const colors = {
     margin: '#D0EDFF',
     positive: '#5BADDB',
     negative: '#F35065',
+    cyan: "#219BE6",
+    yellow: "#FFC000",
     scale: {
       blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
       magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],

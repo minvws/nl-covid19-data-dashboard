@@ -9,6 +9,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 interface BehaviourPageNationalProps {
   data: any;
   content: { articles?: ArticleSummary[] | undefined };
@@ -28,6 +29,16 @@ export function BehaviorPageNational({
 
   return (
     <TileList>
+      <BehaviorPerAgeGroup
+        title="Naleving & Draagvlak per leeftijdsgroep"
+        description="Selecteer een maatregel om de verdeling van naleving en draagvlak verdeelt over leeftijdsgroep te zien."
+        complianceExplanation={
+          'Naleving: gedragsregel volgen in dagelijks leven'
+        }
+        supportExplanation={'Draagvlak: achter een gedragsregel te staan'}
+        data={data.behavior_per_age_group}
+      />
+
       <ContentHeader
         category={siteText.nationaal_layout.headings.gedrag}
         title={nl_gedrag.pagina.titel}
