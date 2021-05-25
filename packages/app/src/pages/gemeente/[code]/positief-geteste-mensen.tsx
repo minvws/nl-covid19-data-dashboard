@@ -67,8 +67,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
-  // TODO: Integrate data before merging
-  const populationCount = data.population_count ?? 100;
+  const populationCount = data.population_count;
 
   const metadata = {
     ...siteText.gemeente_index.metadata,

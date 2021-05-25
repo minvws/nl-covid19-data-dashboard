@@ -32,9 +32,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('sewer_per_installation', 'sewer'),
-  // TODO: Integrate data before merging
-  // selectGmPageMetricData('sewer_per_installation', 'sewer', 'population_count'),
+  selectGmPageMetricData('sewer_per_installation', 'sewer', 'population_count'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((_context) => {
@@ -55,7 +53,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.gemeente_rioolwater_metingen;
 
   const sewerAverages = data.sewer;
-  const populationCount = data.population_count ?? 100;
+  const populationCount = data.population_count;
 
   if (!sewerAverages) {
     /**
