@@ -16,9 +16,7 @@
   "additionalProperties": false,
   "properties": {
     "level": {
-      "type": "number",
-      "minimum": 1,
-      "maximum": 4
+      "enum": [null, 1, 2, 3, 4]
     },
     "positive_tested_per_100k": {
       "type": "number"

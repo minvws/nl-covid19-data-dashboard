@@ -9,12 +9,13 @@ import {
   EscalationLevelLabel,
 } from '~/components/escalation-level';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { RegionCubes } from './region-cubes';
 
 type CollapsibleProps = {
-  level: 1 | 2 | 3 | 4;
+  level: EscalationLevel;
   rowCount: number;
   children: ReactNode;
 };

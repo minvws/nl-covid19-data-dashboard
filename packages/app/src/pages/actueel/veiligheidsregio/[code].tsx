@@ -35,6 +35,7 @@ import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
@@ -103,9 +104,8 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
 
   const dataSitemap = useDataSitemap('veiligheidsregio', vrCode);
 
@@ -195,7 +195,11 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 description={text.risoconiveau_maatregelen.description}
                 level={data.escalation_level.level}
                 code={data.code}
-                escalationTypes={escalationText.types}
+                levelTitle={
+                  escalationText.types[
+                    getEscalationLevelIndexKey(data.escalation_level.level)
+                  ].titel
+                }
                 href={reverseRouter.vr.risiconiveau(vrCode)}
               >
                 <Link href={reverseRouter.vr.maatregelen(vrCode)}>

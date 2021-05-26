@@ -6,7 +6,6 @@ import {
   CategoricalBarScaleCategory,
 } from '~/components/categorical-bar-scale';
 import { InlineText } from '~/components/typography';
-import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
@@ -36,9 +35,7 @@ export function SafetyRegionRow({
 
   const escalationLevelData = vrData.data;
 
-  const escalationColor = useEscalationColor(
-    escalationLevelData.level as EscalationLevel
-  );
+  const escalationColor = useEscalationColor(escalationLevelData.level);
 
   const reverserRouter = useReverseRouter();
 
@@ -62,7 +59,11 @@ export function SafetyRegionRow({
           },
         })}
       >
-        <VrLinkCell color={escalationColor}>
+        <VrLinkCell
+          color={
+            escalationLevelData.level === null ? undefined : escalationColor
+          }
+        >
           <InlineText>{vrData.safetyRegionName}</InlineText>
         </VrLinkCell>
         <Box
@@ -155,7 +156,7 @@ const BarScaleCell = ({
   );
 };
 
-const VrLinkCell = styled.div<{ color: string }>((x) =>
+const VrLinkCell = styled.div<{ color?: string }>((x) =>
   css({
     flex: '0 0 18rem',
     display: 'flex',

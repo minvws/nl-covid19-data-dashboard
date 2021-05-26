@@ -3,6 +3,7 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { Collapsible } from './components/collapsible';
 import { SafetyRegionRow } from './components/safety-region-row';
@@ -14,7 +15,7 @@ export type VrScoreboardData = {
 };
 
 export type ScoreboardRow = {
-  escalationLevel: 1 | 2 | 3 | 4;
+  escalationLevel: EscalationLevel;
   vrData: VrScoreboardData[];
 };
 
