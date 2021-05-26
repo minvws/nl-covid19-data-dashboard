@@ -9,11 +9,11 @@ import {
   behaviorIdentifiers,
   BehaviorTrendType,
   BehaviorType,
-} from './behavior-types';
+} from '../behavior-types';
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 
-interface BehaviorFormatted {
+export interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
   percentage: number;
@@ -72,9 +72,7 @@ export function sortBehavior(
   return { sortedCompliance, sortedSupport };
 }
 
-export function useFormatAndSortBehavior(
-  behavior: BehaviorValue
-): {
+export function useFormatAndSortBehavior(behavior: BehaviorValue): {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
 } {

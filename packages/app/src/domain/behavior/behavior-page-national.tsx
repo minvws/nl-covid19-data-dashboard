@@ -6,11 +6,13 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
+import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
+import { BehaviorTable } from '~/domain/behavior/behavior-table';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { NationalPageMetricData } from '~/domain/layout/national-layout';
+
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -105,6 +107,16 @@ export function BehaviorPageNational({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <BehaviorTable
+        title={nl_gedrag.basisregels.title}
+        description={nl_gedrag.basisregels.description}
+        complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}
+        supportExplanation={nl_gedrag.basisregels.steunen_beschrijving}
+        sortedCompliance={sortedCompliance}
+        sortedSupport={sortedSupport}
+        annotation={nl_gedrag.basisregels.annotatie}
+      />
 
       <MoreInformation />
     </TileList>
