@@ -46,10 +46,12 @@ function Deploy() {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h2 className={styles.title}>Deploy to staging</h2>
+        <h2 className={styles.title}>Deploy to staging (DISABLED)</h2>
       </header>
       <div className={styles.content}>
-        {showSettings && (
+        <p>This panel has been disabled due to changes in infrastructure.</p>
+
+        {/* {showSettings && (
           <SettingsView
             title="Deploy settings"
             namespace={namespace}
@@ -62,8 +64,8 @@ function Deploy() {
 
         <p>
           If you click on the button below, you'll trigger a new push to
-          staging. You should do this if you've published new content in
-          Sanity which you want to go live as soon as possible.
+          staging. You should do this if you've published new content in Sanity
+          which you want to go live as soon as possible.
         </p>
         <p>
           Important: The button will not give any feedback on deployment status.
@@ -74,14 +76,15 @@ function Deploy() {
           if the deployment is triggered.
         </p>
         <p>A deployment looks like this:</p>
-        <img src="/static/github-actions-deployment.png" />
+        <img src="/static/github-actions-deployment.png" /> */}
       </div>
       <div className={styles.footer}>
         <Button
           bleed
           color="primary"
           kind="simple"
-          onClick={() => triggerDeploy()}
+          disabled
+          // onClick={() => triggerDeploy()}
         >
           Trigger a deployment
         </Button>

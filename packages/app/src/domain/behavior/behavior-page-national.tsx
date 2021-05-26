@@ -1,31 +1,40 @@
+import { RegionsBehavior } from '@corona-dashboard/common';
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
+import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
+import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
+import { BehaviorTable } from '~/domain/behavior/behavior-table';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
+import { NationalPageMetricData } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
+
 interface BehaviourPageNationalProps {
-  data: any;
-  content: any;
+  data: NationalPageMetricData;
+  content: { articles?: ArticleSummary[] | undefined };
+  behaviorData: RegionsBehavior[];
 }
 
 export function BehaviorPageNational({
   data,
   content,
+  behaviorData,
 }: BehaviourPageNationalProps) {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
   const { nl_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(
-    behaviorLastValue
-  );
+  const { sortedCompliance, sortedSupport } =
+    useFormatAndSortBehavior(behaviorLastValue);
 
   return (
     <TileList>
@@ -61,42 +70,42 @@ export function BehaviorPageNational({
                 </InlineText>
               ),
               date_start: (
-                <span>
+                <InlineText>
                   {formatDateFromSeconds(behaviorLastValue.date_start_unix)}
-                </span>
+                </InlineText>
               ),
               date_end: (
-                <span>
+                <InlineText>
                   {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
-                </span>
+                </InlineText>
               ),
             })}
           </Text>
           <Text>
             {replaceComponentsInText(nl_gedrag.kpi.hoogste_gevolgde_regel, {
               highest_compliance_description: (
-                <span>{sortedCompliance[0].description}</span>
+                <InlineText>{sortedCompliance[0].description}</InlineText>
               ),
-              highest_complience_percentage: (
-                <span>{sortedCompliance[0].percentage}</span>
+              highest_compliance_percentage: (
+                <InlineText>{sortedCompliance[0].percentage}</InlineText>
               ),
-              highest_complience_percentage_support: (
-                <span>
+              highest_support_percentage: (
+                <InlineText>
                   {
                     sortedSupport.find((x) => sortedCompliance[0].id === x.id)
                       ?.percentage
                   }
-                </span>
+                </InlineText>
               ),
             })}
           </Text>
           <Text>
             {replaceComponentsInText(nl_gedrag.kpi.hoogste_draagvlak, {
               highest_support_description: (
-                <span>{sortedSupport[0].description}</span>
+                <InlineText>{sortedSupport[0].description}</InlineText>
               ),
-              highest_complience_support: (
-                <span>{sortedSupport[0].percentage}</span>
+              highest_compliance_support: (
+                <InlineText>{sortedSupport[0].percentage}</InlineText>
               ),
             })}
           </Text>
@@ -104,6 +113,16 @@ export function BehaviorPageNational({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <BehaviorTable
+        title={nl_gedrag.basisregels.title}
+        description={nl_gedrag.basisregels.description}
+        complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}
+        supportExplanation={nl_gedrag.basisregels.steunen_beschrijving}
+        sortedCompliance={sortedCompliance}
+        sortedSupport={sortedSupport}
+        annotation={nl_gedrag.basisregels.annotatie}
+      />
 
       <BehaviorLineChartTile
         values={data.behavior.values}
@@ -115,6 +134,26 @@ export function BehaviorPageNational({
           source: nl_gedrag.bronnen.rivm,
         }}
       />
+
+      <BehaviorChoroplethsTile
+        title={nl_gedrag.verdeling_in_nederland.titel}
+        description={nl_gedrag.verdeling_in_nederland.description}
+        data={behaviorData}
+      />
+
+      <BehaviorPerAgeGroup
+        title={siteText.nl_gedrag.tabel_per_leeftijdsgroep.title}
+        description={nl_gedrag.tabel_per_leeftijdsgroep.description}
+        complianceExplanation={
+          nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
+        }
+        supportExplanation={
+          nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
+        }
+        data={data.behavior_per_age_group}
+      />
+
+      <MoreInformation />
     </TileList>
   );
 }

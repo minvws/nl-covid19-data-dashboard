@@ -11,7 +11,9 @@
     "tested_overall",
     "hospital_nice",
     "deceased_rivm",
-    "difference"
+    "difference",
+    "static_values",
+    "sewer"
   ],
   "properties": {
     "last_generated": {
@@ -28,6 +30,9 @@
     "code": {
       "type": "string",
       "const": { "$data": "1/proto_name" }
+    },
+    "static_values": {
+      "$ref": "__static_values.json"
     },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"
