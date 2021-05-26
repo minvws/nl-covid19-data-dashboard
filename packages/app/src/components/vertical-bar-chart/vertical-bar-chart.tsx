@@ -20,7 +20,6 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { useChartBreakpoints } from '../time-series-chart/logic/use-chart-breakpoints';
 import { useXTickConfiguration } from '../time-series-chart/logic/use-x-tick-configuration';
 import {
   BarHover,
@@ -115,8 +114,6 @@ export function VerticalBarChart<
     bounds,
     numTicks: tickValues?.length || numGridLines,
   });
-
-  const chartBreakpoints = useChartBreakpoints(width);
 
   const xAxisTickConfiguration = useXTickConfiguration(values, width);
 

@@ -21,7 +21,6 @@ export function TimeAnnotation({
   const [min, max] = domain;
   const { position } = config;
 
-  console.log('chartWidth', chartWidth);
   const chartBreakpoints = useChartBreakpoints(chartWidth);
 
   if (position < min || position > max) {
