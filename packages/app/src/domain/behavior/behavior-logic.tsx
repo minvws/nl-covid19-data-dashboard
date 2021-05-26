@@ -72,9 +72,7 @@ export function sortBehavior(
   return { sortedCompliance, sortedSupport };
 }
 
-export function useFormatAndSortBehavior(
-  behavior: BehaviorValue
-): {
+export function useFormatAndSortBehavior(behavior: BehaviorValue): {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
 } {

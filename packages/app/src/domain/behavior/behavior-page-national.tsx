@@ -1,4 +1,3 @@
-import { RegionsBehavior } from '@corona-dashboard/common';
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -7,20 +6,20 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorChoropleth } from '~/domain/behavior/behavior-choropleth';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { NationalPageMetricData } from '~/domain/layout/national-layout';
+import { BehaviorChoropleth } from '~/domain/behavior/behavior-choropleth';
 interface BehaviourPageNationalProps {
-  data: any;
+  data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
-  behaviorData: RegionsBehavior[];
 }
 
 export function BehaviorPageNational({
   data,
   content,
-  behaviorData,
 }: BehaviourPageNationalProps) {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -111,8 +110,9 @@ export function BehaviorPageNational({
       <BehaviorChoropleth
         title={nl_gedrag.verdeling_in_nederland.titel}
         description={nl_gedrag.verdeling_in_nederland.description}
-        data={behaviorData}
+        data={data.behavior}
       />
+      <MoreInformation />
     </TileList>
   );
 }

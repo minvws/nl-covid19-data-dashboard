@@ -30,7 +30,7 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   highlightSelection?: boolean;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
   highlightCode?: string;
-  getLink: (code: string) => string;
+  getLink?: (code: string) => string;
   minHeight?: number;
   hasNoDataFillColor?: string;
 };
@@ -135,15 +135,12 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     [highlightCode]
   );
 
-  const {
-    isTabInteractive,
-    tabInteractiveButton,
-    anchorEventHandlers,
-  } = useTabInteractiveButton(
-    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-      subject: siteText.choropleth.vr.plural,
-    })
-  );
+  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
+    useTabInteractiveButton(
+      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+        subject: siteText.choropleth.vr.plural,
+      })
+    );
 
   const renderHover = useCallback(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
@@ -153,9 +150,9 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
       return (
         <HoverPathLink
-          href={getLink(vrcode)}
+          href={getLink ? getLink(vrcode) : undefined}
           title={vrname}
-          isTabInteractive={isTabInteractive}
+          isTabInteractive={getLink ? isTabInteractive : false}
           id={vrcode}
           pathData={path}
           stroke={isEscalationLevelTheme || isSelected ? '#fff' : undefined}
@@ -186,8 +183,9 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
   return (
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
-      {tabInteractiveButton}
+      {getLink ? tabInteractiveButton : null}
       <Choropleth
+        minHeight={minHeight}
         description={dataDescription}
         featureCollection={regionGeo}
         hovers={hasData ? regionGeo : undefined}
@@ -197,7 +195,6 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         getTooltipContent={getTooltipContent}
         renderHighlight={renderHighlight}
         showTooltipOnFocus={isTabInteractive}
-        minHeight={minHeight}
       />
     </div>
   );
