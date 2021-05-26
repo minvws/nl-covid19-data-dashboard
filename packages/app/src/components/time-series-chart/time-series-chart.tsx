@@ -221,7 +221,7 @@ export function TimeSeriesChart<
     dataOptions
   );
 
-  const xTickCount = useXTickCount(values);
+  const xTickCount = useXTickCount(values, width);
 
   const today = useCurrentDate();
   const xTickValues = useMemo(

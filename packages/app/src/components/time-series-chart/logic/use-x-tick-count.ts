@@ -1,94 +1,88 @@
-import {
-  assert,
-  isDateSeries,
-  isDateSpanSeries,
-  TimestampedValue,
-} from '@corona-dashboard/common';
-import { useBreakpoints } from '~/utils/use-breakpoints';
+import { isDateSeries, TimestampedValue } from '@corona-dashboard/common';
+import { useChartBreakpoints } from './use-chart-breakpoints';
 
-interface XTickConfiguration {
+interface XAxisTickConfiguration {
   date: {
-    long: { count: number; format?: any };
-    short: { count: number; format?: any };
+    long: number;
+    short: number;
   };
   span: {
-    long: { count: number; format?: any };
-    short: { count: number; format?: any };
+    long: number;
+    short: number;
   };
 }
 
-interface XTickConfigurations {
+interface XAxisTickConfigurations {
   /**
    * ~420px
    */
-  xs?: XTickConfiguration;
+  xs?: XAxisTickConfiguration;
   /**
    * ~768px
    */
-  sm?: XTickConfiguration;
+  sm?: XAxisTickConfiguration;
   /**
    * ~960px
    */
-  md?: XTickConfiguration;
+  md?: XAxisTickConfiguration;
   /**
    * ~1200px
    */
-  lg?: XTickConfiguration;
+  lg?: XAxisTickConfiguration;
   /**
    * ~1600px
    */
-  xl?: XTickConfiguration;
+  xl?: XAxisTickConfiguration;
 }
 
-const xTickConfigurations: XTickConfigurations = {
+const xTickConfigurations: XAxisTickConfigurations = {
   xs: {
     date: {
-      long: { count: 3 },
-      short: { count: 2 },
+      long: 3,
+      short: 2,
     },
     span: {
-      long: { count: 3 },
-      short: { count: 2 },
+      long: 3,
+      short: 2,
     },
   },
   sm: {
     date: {
-      long: { count: 4 },
-      short: { count: 3 },
+      long: 4,
+      short: 3,
     },
     span: {
-      long: { count: 4 },
-      short: { count: 3 },
+      long: 4,
+      short: 3,
     },
   },
   lg: {
     date: {
-      long: { count: 6 },
-      short: { count: 4 },
+      long: 6,
+      short: 4,
     },
     span: {
-      long: { count: 6 },
-      short: { count: 4 },
+      long: 6,
+      short: 4,
     },
   },
 };
 
 const sizes = ['xl', 'lg', 'md', 'sm', 'xs'] as const;
 
-export function useXTickCount<T extends TimestampedValue>(values: T[]) {
+export function useXTickCount<T extends TimestampedValue>(
+  values: T[],
+  chartWidth: number
+) {
   const isDateValues = isDateSeries(values);
-  const isDateSpanValues = isDateSpanSeries(values);
-  assert(isDateValues || isDateSpanValues, 'Unknown date series encountered');
 
   const type = isDateValues ? 'date' : 'span';
   const period = values.length < 36 ? 'short' : 'long';
 
-  const breakpoints = useBreakpoints(true);
+  const breakpoints = useChartBreakpoints(chartWidth);
   const screenSize = sizes.find(
     (x) => breakpoints[x] && xTickConfigurations[x]
   );
 
-  return screenSize
-    ? xTickConfigurations[screenSize]?.[type][period].count ?? 2
-    : 2;
+  return screenSize ? xTickConfigurations[screenSize]?.[type][period] ?? 2 : 2;
 }
