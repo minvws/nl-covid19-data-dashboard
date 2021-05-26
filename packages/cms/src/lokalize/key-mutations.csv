@@ -51,6 +51,14 @@ timestamp,action,key
 2021-05-17T13:39:33.658Z,add,nl_gedrag.kpi.titel
 2021-05-17T13:56:34.250Z,add,regionaal_gedrag.kpi.titel
 2021-05-17T13:56:50.376Z,add,regionaal_gedrag.kpi.deelgenomen_mensen
+2021-05-18T09:49:12.565Z,add,nl_gedrag.basisregels.description
+2021-05-18T09:50:16.007Z,add,nl_gedrag.basisregels.volgen_beschrijving
+2021-05-18T09:50:44.666Z,add,nl_gedrag.basisregels.steunen_beschrijving
+2021-05-18T09:51:07.693Z,add,nl_gedrag.basisregels.annotatie
+2021-05-18T10:02:12.588Z,add,regionaal_gedrag.basisregels.description
+2021-05-18T10:02:31.634Z,add,regionaal_gedrag.basisregels.volgen_beschrijving
+2021-05-18T10:02:50.043Z,add,regionaal_gedrag.basisregels.steunen_beschrijving
+2021-05-18T10:03:11.571Z,add,regionaal_gedrag.basisregels.annotatie
 2021-05-10T16:07:11.126Z,add,over_risiconiveaus.scoreboard.header.title
 2021-05-10T16:09:37.259Z,delete,over_risiconiveaus.scoreboard.header.title
 2021-05-11T15:28:12.081Z,add,over_risiconiveaus.scoreboard.current_level.last_determined

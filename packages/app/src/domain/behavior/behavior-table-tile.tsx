@@ -31,7 +31,7 @@ interface BehaviorTileProps {
   footerAsterisk: Record<BehaviorType, string>;
 }
 
-interface BehaviorFormatted {
+export interface BehaviorFormatted {
   id: BehaviorIdentifier;
   description: string;
   percentage: number;
@@ -108,9 +108,7 @@ function sortBehavior(
   return { sortedCompliance, sortedSupport };
 }
 
-function useFormatAndSortBehavior(
-  behavior: BehaviorValue
-): {
+function useFormatAndSortBehavior(behavior: BehaviorValue): {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
 } {
@@ -127,9 +125,8 @@ export function BehaviorTableTile({
   footer,
   footerAsterisk,
 }: BehaviorTileProps) {
-  const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(
-    behavior
-  );
+  const { sortedCompliance, sortedSupport } =
+    useFormatAndSortBehavior(behavior);
   const [behaviorType, setBehaviorType] = useState<BehaviorType>('compliance');
 
   const { siteText, formatPercentage } = useIntl();
