@@ -173,7 +173,7 @@ export function getTimeDomain<T extends TimestampedValue>({
       isDefined(start) && isDefined(end),
       `Missing start or end timestamp in [${start}, ${end}]`
     );
-    const middle: number[] = tickIndexes.map((index) => {
+    const middle = tickIndexes.map((index) => {
       const value = values[index];
       const midweek =
         value.date_start_unix +

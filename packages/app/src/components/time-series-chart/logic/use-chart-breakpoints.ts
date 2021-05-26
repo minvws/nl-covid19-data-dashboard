@@ -1,5 +1,10 @@
 import { useMemo } from 'react';
 
+export type ChartBreakPoints = ReturnType<typeof useChartBreakpoints>;
+
+/**
+ * This hook returns a set of booleans that indicate at which size the chart is rendered.
+ */
 export function useChartBreakpoints(chartWidth: number) {
   return useMemo(
     () => ({

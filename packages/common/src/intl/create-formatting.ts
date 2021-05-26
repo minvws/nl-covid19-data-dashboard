@@ -161,7 +161,7 @@ export function createFormatting(
       case 'axis-with-year': // '23 jul. 2021'
         return DayMonthShortYear.format(date);
 
-      case 'axis-with-year-long': // '23 jul. 2021'
+      case 'axis-with-year-long': // '23 july 2021'
         return DayMonthLongYear.format(date);
 
       case 'weekday-medium':

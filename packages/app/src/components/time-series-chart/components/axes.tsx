@@ -18,6 +18,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
+import { ChartBreakPoints } from '../logic/use-chart-breakpoints';
 import { WeekNumbers } from './week-numbers';
 
 type AxesProps = {
@@ -61,6 +62,11 @@ type AxesProps = {
    * (In case this needs special rendering)
    */
   hasAllZeroValues?: boolean;
+
+  /**
+   *
+   */
+  chartBreakpoints: ChartBreakPoints;
 };
 
 export type AnyTickFormatter = (value: any) => string;
@@ -78,7 +84,8 @@ export const Axes = memo(function Axes({
   yAxisRef,
   isYAxisCollapsed,
   xRangePadding,
-  hasAllZeroValues: allZeroValues,
+  hasAllZeroValues,
+  chartBreakpoints,
 }: AxesProps) {
   const startUnix = first(xTickValues) ?? 0;
   const endUnix = last(xTickValues) ?? 0;
@@ -117,13 +124,22 @@ export const Axes = memo(function Axes({
         }
       }
 
-      if (xTickValues.length < 6) {
+      if (
+        (xTickValues.length < 6 && chartBreakpoints.xl) ||
+        chartBreakpoints.xl
+      ) {
         return formatDateFromSeconds(date_unix, 'axis-with-year-long');
       } else {
         return formatDateFromSeconds(date_unix, 'axis-with-year');
       }
     },
-    [isMounted, formatRelativeDate, formatDateFromSeconds, xTickValues.length]
+    [
+      isMounted,
+      formatRelativeDate,
+      formatDateFromSeconds,
+      xTickValues.length,
+      chartBreakpoints.xl,
+    ]
   );
 
   /**
@@ -140,13 +156,13 @@ export const Axes = memo(function Axes({
    * two gridlines in this case (at the top and bottom of the chart). So therefore we
    * check for this case here and create a scale and gridline count accordingly.
    */
-  const darkGridRowScale = allZeroValues
+  const darkGridRowScale = hasAllZeroValues
     ? scaleLinear({
         domain: [0, 1],
         range: yScale.range(),
       })
     : yScale;
-  const numDarkGridLines = allZeroValues ? 1 : numGridLines;
+  const numDarkGridLines = hasAllZeroValues ? 1 : numGridLines;
 
   return (
     <g css={css({ pointerEvents: 'none' })}>

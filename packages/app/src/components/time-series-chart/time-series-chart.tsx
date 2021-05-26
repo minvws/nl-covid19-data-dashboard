@@ -226,7 +226,7 @@ export function TimeSeriesChart<
     dataOptions
   );
 
-  const xTickCount = useXTickCount(values, width);
+  const [xTickCount, chartBreakpoints] = useXTickCount(values, width);
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -337,6 +337,7 @@ export function TimeSeriesChart<
             onBlur={chartEventHandlers.handleBlur}
           >
             <Axes
+              chartBreakpoints={chartBreakpoints}
               bounds={bounds}
               numGridLines={numGridLines}
               yTickValues={yTickValues}

@@ -1,4 +1,5 @@
 import { isDateSeries, TimestampedValue } from '@corona-dashboard/common';
+import { useMemo } from 'react';
 import { useChartBreakpoints } from './use-chart-breakpoints';
 
 interface XAxisTickConfiguration {
@@ -66,6 +67,16 @@ const xTickConfigurations: XAxisTickConfigurations = {
       short: 4,
     },
   },
+  xl: {
+    date: {
+      long: 8,
+      short: 8,
+    },
+    span: {
+      long: 8,
+      short: 8,
+    },
+  },
 };
 
 const sizes = ['xl', 'lg', 'md', 'sm', 'xs'] as const;
@@ -74,15 +85,22 @@ export function useXTickCount<T extends TimestampedValue>(
   values: T[],
   chartWidth: number
 ) {
-  const isDateValues = isDateSeries(values);
+  const chartBreakpoints = useChartBreakpoints(chartWidth);
 
-  const type = isDateValues ? 'date' : 'span';
-  const period = values.length < 36 ? 'short' : 'long';
+  return useMemo(() => {
+    const isDateValues = isDateSeries(values);
 
-  const breakpoints = useChartBreakpoints(chartWidth);
-  const screenSize = sizes.find(
-    (x) => breakpoints[x] && xTickConfigurations[x]
-  );
+    const type = isDateValues ? 'date' : 'span';
+    const period = values.length < 36 ? 'short' : 'long';
 
-  return screenSize ? xTickConfigurations[screenSize]?.[type][period] ?? 2 : 2;
+    const screenSize = sizes.find(
+      (x) => chartBreakpoints[x] && xTickConfigurations[x]
+    );
+
+    const xTickCount = screenSize
+      ? xTickConfigurations[screenSize]?.[type][period] ?? 2
+      : 2;
+
+    return [xTickCount, chartBreakpoints] as const;
+  }, [values, chartBreakpoints]);
 }
