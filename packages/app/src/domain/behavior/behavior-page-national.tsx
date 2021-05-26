@@ -85,7 +85,7 @@ export function BehaviorPageNational({
               highest_compliance_percentage: (
                 <InlineText>{sortedCompliance[0].percentage}</InlineText>
               ),
-              highest_compliance_percentage_support: (
+              highest_support_percentage: (
                 <InlineText>
                   {
                     sortedSupport.find((x) => sortedCompliance[0].id === x.id)

@@ -32,7 +32,7 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   highlightCode?: string;
   getLink?: (code: string) => string;
   minHeight?: number;
-  hasNoDataFillColor?: string;
+  noDataFillColor?: string;
 };
 
 /**
@@ -60,7 +60,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     highlightSelection,
     getLink,
     minHeight,
-    hasNoDataFillColor,
+    noDataFillColor,
   } = props;
 
   const { siteText } = useIntl();
@@ -99,7 +99,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
       const { vrcode } = feature.properties;
       const fill =
-        ((hasData && getFillColor(vrcode)) || hasNoDataFillColor) ?? 'white';
+        ((hasData && getFillColor(vrcode)) || noDataFillColor) ?? 'white';
       /**
        * @TODO this should actually be some kind of function returning
        * the "brightness" of a given color.
@@ -116,7 +116,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         />
       );
     },
-    [getFillColor, hasData, hasNoDataFillColor]
+    [getFillColor, hasData, noDataFillColor]
   );
 
   const renderHighlight = useCallback(

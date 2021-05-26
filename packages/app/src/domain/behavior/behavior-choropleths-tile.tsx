@@ -131,7 +131,7 @@ function ChoroplethBlock({
           metricName={`behavior_${metricName}` as 'behavior'}
           metricProperty={`${currentId}_${metricName}`}
           minHeight={400}
-          hasNoDataFillColor={colors.page}
+          noDataFillColor={colors.page}
           tooltipContent={(
             context: RegionsBehavior & SafetyRegionProperties
           ) => {
