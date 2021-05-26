@@ -7,9 +7,9 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
+import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 interface BehaviourPageNationalProps {
   data: any;
   content: { articles?: ArticleSummary[] | undefined };
