@@ -6,12 +6,14 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
 import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { BehaviorTable } from '~/domain/behavior/behavior-table';
-import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
+
 interface BehaviorPageSafetyRegionProps {
   data: SafetyRegionPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -87,6 +89,17 @@ export function BehaviorPageSafetyRegion({
         sortedCompliance={sortedCompliance}
         sortedSupport={sortedSupport}
         annotation={regionaal_gedrag.basisregels.annotatie}
+      />
+
+      <BehaviorLineChartTile
+        values={data.behavior.values}
+        metadata={{
+          date: [
+            behaviorLastValue.date_start_unix,
+            behaviorLastValue.date_end_unix,
+          ],
+          source: regionaal_gedrag.bronnen.rivm,
+        }}
       />
 
       <MoreInformation />

@@ -1,5 +1,5 @@
-import Gedrag from '~/assets/gedrag.svg';
 import { RegionsBehavior } from '@corona-dashboard/common';
+import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
@@ -7,14 +7,15 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
-import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { BehaviorTable } from '~/domain/behavior/behavior-table';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
+import { NationalPageMetricData } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { MoreInformation } from '~/domain/behavior/components/more-information';
-import { NationalPageMetricData } from '~/domain/layout/national-layout';
-import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
+import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
 
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
@@ -121,6 +122,17 @@ export function BehaviorPageNational({
         sortedCompliance={sortedCompliance}
         sortedSupport={sortedSupport}
         annotation={nl_gedrag.basisregels.annotatie}
+      />
+
+      <BehaviorLineChartTile
+        values={data.behavior.values}
+        metadata={{
+          date: [
+            behaviorLastValue.date_start_unix,
+            behaviorLastValue.date_end_unix,
+          ],
+          source: nl_gedrag.bronnen.rivm,
+        }}
       />
 
       <BehaviorChoroplethsTile
