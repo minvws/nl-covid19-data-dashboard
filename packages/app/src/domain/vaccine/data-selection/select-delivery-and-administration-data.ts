@@ -24,22 +24,23 @@ export function selectDeliveryAndAdministrationData(nlData: National) {
     vaccine_delivery_estimate,
   } = nlData;
 
-  const values: VaccineDeliveryAndAdministrationsValue[] = [
-    ...vaccine_administered.values.map((x, index) => ({
-      ...{
-        ...vaccine_delivery.values[index],
-        total_delivered: vaccine_delivery.values[index].total,
-      },
-      ...x,
-    })),
-    ...vaccine_administered_estimate.values.map((x, index) => ({
-      ...{
-        ...vaccine_delivery_estimate.values[index],
-        total_delivered: vaccine_delivery_estimate.values[index].total,
-      },
-      ...x,
-    })),
-  ];
+  const values: VaccineDeliveryAndAdministrationsValue[] = [];
+
+  for (const [index] of vaccine_administered.values.entries()) {
+    values.push({
+      total_delivered: vaccine_delivery.values[index].total,
+      ...vaccine_delivery.values[index],
+      ...vaccine_administered.values[index],
+    });
+  }
+
+  for (const [index] of vaccine_administered_estimate.values.entries()) {
+    values.push({
+      total_delivered: vaccine_delivery_estimate.values[index].total,
+      ...vaccine_delivery_estimate.values[index],
+      ...vaccine_administered_estimate.values[index],
+    });
+  }
 
   const deliveryAndAdministration: DeliveryAndAdministrationData = {
     values,

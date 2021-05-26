@@ -1,5 +1,5 @@
+import css from '@styled-system/css';
 import styled from 'styled-components';
-import { Spacer } from '~/components/base';
 import { TooltipData } from '~/components/time-series-chart/components';
 import {
   LineSeriesDefinition,
@@ -90,8 +90,7 @@ export function VaccineDeliveryAndAdministrationsTooltip({
           </TooltipListItem>
         ))}
 
-        <Spacer mb={1} />
-        <TooltipListItem>
+        <TooltipListItem mt={1}>
           <span>
             <ColorIndicator color="transparent" />
             {
@@ -130,13 +129,18 @@ const ColorIndicator = styled.span<{
   }
 `;
 
-const TooltipListItem = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+const TooltipListItem = styled.li<{ mt?: number }>((props: { mt?: number }) =>
+  css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    mt: props.mt,
+  })
+);
 
-const TooltipValueContainer = styled.span`
-  font-weight: bold;
-  margin-left: 1em;
-`;
+const TooltipValueContainer = styled.span(
+  css({
+    fontWeight: 'bold',
+    ml: '1em',
+  })
+);

@@ -1,7 +1,7 @@
 import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
-import theme from '~/style/theme';
+import theme, { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { GetX, TimeAnnotationConfig } from '../logic';
 
@@ -38,7 +38,7 @@ export function TimeAnnotation({
             x={x - 15}
             y={15}
             textAnchor="end"
-            fill="grey"
+            fill={colors.gray}
           >
             {config.leftLabel}
           </Text>
@@ -47,7 +47,7 @@ export function TimeAnnotation({
             x={x + 15}
             y={15}
             textAnchor="start"
-            fill="grey"
+            fill={colors.gray}
           >
             {config.rightLabel}
           </Text>
@@ -57,7 +57,7 @@ export function TimeAnnotation({
             x2={x}
             y1={height}
             y2={0}
-            stroke="gray"
+            stroke={colors.gray}
             strokeWidth="2"
           />
         </Group>

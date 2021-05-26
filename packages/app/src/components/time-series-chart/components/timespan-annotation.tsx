@@ -20,6 +20,7 @@ export function TimespanAnnotation({
   const [min, max] = domain;
   const { start, end } = config;
   const fill = config.fill ?? 'solid';
+  const patternId = `${chartId}_hatched_pattern`;
 
   /**
    * Clip the start / end dates to the domain of the x-axis, so that we can
@@ -43,7 +44,7 @@ export function TimespanAnnotation({
     <>
       {fill === 'hatched' && (
         <pattern
-          id={`${chartId}_hatched_pattern`}
+          id={`${patternId}`}
           width="8"
           height="8"
           patternTransform="rotate(-45 0 0)"
@@ -65,9 +66,7 @@ export function TimespanAnnotation({
         x={x0}
         width={width}
         fill={
-          fill === 'solid'
-            ? colors.data.underReported
-            : `url(#${chartId}_hatched_pattern)`
+          fill === 'solid' ? colors.data.underReported : `url(#${patternId})`
         }
         style={fill === 'solid' ? { mixBlendMode: 'multiply' } : undefined}
       />
@@ -125,7 +124,7 @@ export function HatchedTimespanAnnotationIcon({
             y1="0"
             x2="0"
             y2="5"
-            style={{ stroke: 'gray', strokeWidth: 3 }}
+            style={{ stroke: colors.gray, strokeWidth: 3 }}
           />
         </pattern>
       </defs>
