@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { FocusEvent, MouseEvent, useCallback } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface PathProps {
@@ -35,7 +36,7 @@ export function Path({
 }
 
 interface HoverPathLinkProps extends PathProps {
-  href: string;
+  href?: string;
   title: string;
   isTabInteractive: boolean;
   onFocus: (evt: FocusEvent<HTMLAnchorElement>) => void;
@@ -77,8 +78,9 @@ export function HoverPathLink({
       onClick={handleClick}
       onFocus={onFocus}
       onBlur={onBlur}
+      css={css({ outline: isDefined(href) ? undefined : 'none !important' })}
     >
-      <HoverPath isClickable {...pathProps} />
+      <HoverPath isClickable={isDefined(href)} {...pathProps} />
     </a>
   );
 }
