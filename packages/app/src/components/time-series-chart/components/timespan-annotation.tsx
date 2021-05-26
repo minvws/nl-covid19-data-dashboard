@@ -44,7 +44,7 @@ export function TimespanAnnotation({
     <>
       {fill === 'hatched' && (
         <pattern
-          id={`${patternId}`}
+          id={patternId}
           width="8"
           height="8"
           patternTransform="rotate(-45 0 0)"

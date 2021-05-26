@@ -11,6 +11,7 @@ import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 import { assert } from '~/utils/assert';
+import { BreakpointContextProvider } from '~/utils/use-breakpoints';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -61,7 +62,9 @@ export default function App(props: AppProps) {
     <ThemeProvider theme={theme}>
       <IntlContext.Provider value={intlContext}>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <BreakpointContextProvider>
+          <Component {...pageProps} />
+        </BreakpointContextProvider>
       </IntlContext.Provider>
       {toggleHotReloadButton}
     </ThemeProvider>

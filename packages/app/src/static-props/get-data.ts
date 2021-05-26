@@ -1,5 +1,4 @@
 import {
-  assert,
   Municipal,
   Municipalities,
   National,
@@ -159,8 +158,7 @@ export function getVrData(context: GetStaticPropsContext) {
 
 export function getVrName(code: string) {
   const safetyRegion = vrData.find((x) => x.code === code);
-  assert(safetyRegion, `Could not find safety region with code ${code}`);
-  return safetyRegion.name;
+  return safetyRegion?.name || '';
 }
 
 export function loadAndSortVrData(vrcode: string) {
@@ -195,7 +193,7 @@ export function selectGmData<T extends keyof Municipal = never>(
 
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, gmData.data[p]),
-      {} as Pick<Regionaal, T>
+      {} as Pick<Municipal, T>
     );
 
     return { selectedGmData, municipalityName: gmData.municipalityName };
