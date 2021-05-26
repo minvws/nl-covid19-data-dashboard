@@ -10,9 +10,11 @@ import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { BehaviorTable } from '~/domain/behavior/behavior-table';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { NationalPageMetricData } from '~/domain/layout/national-layout';
 
 interface BehaviourPageNationalProps {
-  data: any;
+  data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
 }
 
@@ -115,6 +117,8 @@ export function BehaviorPageNational({
         sortedSupport={sortedSupport}
         annotation={nl_gedrag.basisregels.annotatie}
       />
+
+      <MoreInformation />
     </TileList>
   );
 }

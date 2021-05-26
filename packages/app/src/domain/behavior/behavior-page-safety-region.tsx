@@ -10,8 +10,9 @@ import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { BehaviorTable } from '~/domain/behavior/behavior-table';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
 interface BehaviorPageSafetyRegionProps {
-  data: any;
+  data: SafetyRegionPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
 }
 
@@ -24,9 +25,8 @@ export function BehaviorPageSafetyRegion({
   const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const { sortedCompliance, sortedSupport } = useFormatAndSortBehavior(
-    behaviorLastValue
-  );
+  const { sortedCompliance, sortedSupport } =
+    useFormatAndSortBehavior(behaviorLastValue);
 
   return (
     <TileList>
