@@ -14,8 +14,8 @@ export function createFlatTexts(
   const nl: Record<string, string> = {};
   const en: Record<string, string> = {};
 
-  const drafts = documents.filter((x) => x._id.startsWith('drafts.'));
   const published = documents.filter((x) => !x._id.startsWith('drafts.'));
+  const drafts = documents.filter((x) => x._id.startsWith('drafts.'));
 
   /**
    * First write all published document texts

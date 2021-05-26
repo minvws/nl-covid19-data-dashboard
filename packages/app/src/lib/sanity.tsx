@@ -39,12 +39,13 @@ const config: ClientConfig = {
 export const PortableText = BlockContent;
 
 // Set up the client for fetching data
-let clientInstance: SanityClient | undefined;
-export async function getClient() {
-  if (clientInstance) return clientInstance;
-
-  clientInstance = (await import('@sanity/client')).default(config);
-  return clientInstance;
+export async function getClient(
+  dataset = config.dataset as 'production' | 'development'
+) {
+  return (await import('@sanity/client')).default({
+    ...config,
+    dataset,
+  });
 }
 
 // const builder = imageUrlBuilder(client);
@@ -60,7 +61,7 @@ export function localize<T>(value: T | T[], languages: string[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {
-    return (value.map((v: unknown) => localize(v, languages)) as unknown) as T;
+    return value.map((v: unknown) => localize(v, languages)) as unknown as T;
   }
 
   if (typeof value == 'object' && value !== null) {
