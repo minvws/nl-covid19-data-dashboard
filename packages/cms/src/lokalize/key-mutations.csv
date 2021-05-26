@@ -45,6 +45,12 @@ timestamp,action,key
 2021-05-10T08:57:14.416Z,add,veiligheidsregio_positief_geteste_personen_ggd.linechart_positivetests_legend_label_moving_average
 2021-05-10T11:07:55.275Z,add,common.risiconiveau_singular
 2021-05-10T11:08:57.458Z,add,common.risiconiveau_plural
+2021-05-17T11:46:15.901Z,add,nl_gedrag.kpi.deelgenomen_mensen
+2021-05-17T12:52:43.274Z,add,nl_gedrag.kpi.hoogste_gevolgde_regel
+2021-05-17T12:53:42.362Z,add,nl_gedrag.kpi.hoogste_draagvlak
+2021-05-17T13:39:33.658Z,add,nl_gedrag.kpi.titel
+2021-05-17T13:56:34.250Z,add,regionaal_gedrag.kpi.titel
+2021-05-17T13:56:50.376Z,add,regionaal_gedrag.kpi.deelgenomen_mensen
 2021-05-10T16:07:11.126Z,add,over_risiconiveaus.scoreboard.header.title
 2021-05-10T16:09:37.259Z,delete,over_risiconiveaus.scoreboard.header.title
 2021-05-11T15:28:12.081Z,add,over_risiconiveaus.scoreboard.current_level.last_determined
