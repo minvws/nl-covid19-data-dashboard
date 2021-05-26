@@ -1,10 +1,14 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { LegendItem } from '~/components/legend';
-import { SeriesIcon, TimespanAnnotationIcon } from '../components';
+import {
+  HatchedTimespanAnnotationIcon,
+  SeriesIcon,
+  SolidTimespanAnnotationIcon,
+} from '../components';
 import { DataOptions } from './common';
-import { SeriesConfig, isVisible } from './series';
-import { first, last } from 'lodash';
+import { isVisible, SeriesConfig } from './series';
 
 export function useLegendItems<T extends TimestampedValue>(
   domain: number[],
@@ -12,12 +16,24 @@ export function useLegendItems<T extends TimestampedValue>(
   dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    const items = config.filter(isVisible).map<LegendItem>((x) => ({
-      color: x.color,
-      label: x.label,
-      shape: 'custom',
-      shapeComponent: <SeriesIcon config={x} />,
-    }));
+    const items = config.filter(isVisible).flatMap<LegendItem>((x) => {
+      switch (x.type) {
+        case 'split-bar':
+          return x.splitPoints.map((v) => ({
+            color: v.color,
+            label: v.label,
+            shape: 'custom',
+            shapeComponent: <SeriesIcon config={x} value={v.value - 1} />,
+          }));
+        default:
+          return {
+            color: x.color,
+            label: x.label,
+            shape: 'custom',
+            shapeComponent: <SeriesIcon config={x} />,
+          };
+      }
+    });
 
     /**
      * Maximum number of legend items
@@ -40,7 +56,12 @@ export function useLegendItems<T extends TimestampedValue>(
           items.push({
             label: annotation.label,
             shape: 'custom',
-            shapeComponent: <TimespanAnnotationIcon />,
+            shapeComponent:
+              annotation.fill === 'solid' ? (
+                <SolidTimespanAnnotationIcon />
+              ) : (
+                <HatchedTimespanAnnotationIcon />
+              ),
           } as LegendItem);
         }
       }
