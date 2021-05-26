@@ -2,24 +2,27 @@ import { Group } from '@visx/group';
 import { Line } from '@visx/shape';
 import { Text } from '@visx/text';
 import theme, { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { GetX, TimeAnnotationConfig } from '../logic';
+import { useChartBreakpoints } from '../logic/use-chart-breakpoints';
 
 export function TimeAnnotation({
   domain,
   getX,
   height,
   config,
+  chartWidth,
 }: {
   domain: [number, number];
   height: number;
   getX: GetX;
   config: TimeAnnotationConfig;
+  chartWidth: number;
 }) {
   const [min, max] = domain;
   const { position } = config;
 
-  const breakpoints = useBreakpoints(true);
+  console.log('chartWidth', chartWidth);
+  const chartBreakpoints = useChartBreakpoints(chartWidth);
 
   if (position < min || position > max) {
     return null;
@@ -27,7 +30,12 @@ export function TimeAnnotation({
 
   const x = getX({ __date_unix: position });
 
-  const fontSize = !breakpoints.lg ? theme.fontSizes[0] : theme.fontSizes[1];
+  const fontSize = !chartBreakpoints.md
+    ? theme.fontSizes[0]
+    : theme.fontSizes[1];
+
+  const leftAngle = chartBreakpoints.md ? 0 : -90;
+  const rightRotate = chartBreakpoints.md ? 0 : 90;
 
   switch (config.type) {
     case 'divider':
@@ -35,19 +43,21 @@ export function TimeAnnotation({
         <Group>
           <Text
             fontSize={fontSize}
-            x={x - 15}
+            x={x - 10}
             y={15}
             textAnchor="end"
             fill={colors.gray}
+            angle={leftAngle}
           >
             {config.leftLabel}
           </Text>
           <Text
             fontSize={fontSize}
-            x={x + 15}
+            x={x + 10}
             y={15}
             textAnchor="start"
             fill={colors.gray}
+            angle={rightRotate}
           >
             {config.rightLabel}
           </Text>

@@ -400,6 +400,7 @@ export function TimeSeriesChart<
             ))}
             {timeAnnotations?.map((x, index) => (
               <TimeAnnotation
+                chartWidth={width}
                 key={index}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
