@@ -6,7 +6,7 @@ import { Box } from '~/components/base';
 import { PercentageBar } from '~/components/percentage-bar';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorFormatted } from '~/domain/behavior/behavior-logic';
+import { BehaviorFormatted } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -102,8 +102,14 @@ export function BehaviorTable({
                 </Cell>
                 <Cell>
                   <Box display="flex" flexDirection="column">
-                    <BehaviorTrend trend={behavior.trend} />
-                    <BehaviorTrend trend={sortedSupport[index].trend} />
+                    <BehaviorTrend
+                      trend={behavior.trend}
+                      color={colors.data.neutral}
+                    />
+                    <BehaviorTrend
+                      trend={sortedSupport[index].trend}
+                      color={colors.data.neutral}
+                    />
                   </Box>
                 </Cell>
               </tr>

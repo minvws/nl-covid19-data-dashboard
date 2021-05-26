@@ -9,7 +9,7 @@ import {
   behaviorIdentifiers,
   BehaviorTrendType,
   BehaviorType,
-} from './behavior-types';
+} from '../behavior-types';
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 

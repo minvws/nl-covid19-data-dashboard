@@ -6,11 +6,12 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
+import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { BehaviorTable } from '~/domain/behavior/behavior-table';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
 interface BehaviorPageSafetyRegionProps {
   data: SafetyRegionPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -87,6 +88,8 @@ export function BehaviorPageSafetyRegion({
         sortedSupport={sortedSupport}
         annotation={regionaal_gedrag.basisregels.annotatie}
       />
+
+      <MoreInformation />
     </TileList>
   );
 }
