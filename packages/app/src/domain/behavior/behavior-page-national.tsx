@@ -1,4 +1,5 @@
 import Gedrag from '~/assets/gedrag.svg';
+import { RegionsBehavior } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
@@ -15,11 +16,13 @@ import { BehaviorChoropleth } from '~/domain/behavior/behavior-choropleth';
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
+  behaviorData: RegionsBehavior[];
 }
 
 export function BehaviorPageNational({
   data,
   content,
+  behaviorData,
 }: BehaviourPageNationalProps) {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -110,7 +113,7 @@ export function BehaviorPageNational({
       <BehaviorChoropleth
         title={nl_gedrag.verdeling_in_nederland.titel}
         description={nl_gedrag.verdeling_in_nederland.description}
-        data={data.behavior}
+        data={behaviorData}
       />
       <MoreInformation />
     </TileList>
