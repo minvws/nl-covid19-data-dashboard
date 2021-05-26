@@ -48,3 +48,6 @@ timestamp,action,key
 2021-05-18T09:19:53.053Z,delete,gedrag_onderwerpen.symptoms_stay_home
 2021-05-18T12:30:34.009Z,delete,gedrag_onderwerpen.symptoms_stay_home_if_necessary
 2021-05-18T12:31:34.675Z,add,gedrag_onderwerpen.symptoms_stay_home_if_mandatory
+2021-05-26T10:07:52.493Z,add,escalatie_niveau.types.onbekend.titel
+2021-05-26T10:08:27.516Z,add,escalatie_niveau.types.onbekend.toelichting
+2021-05-26T10:32:09.125Z,add,vr_risiconiveau.types.onbekend.toelichting

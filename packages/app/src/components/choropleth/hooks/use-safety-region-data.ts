@@ -15,7 +15,7 @@ interface RegionMetricValue extends SafetyRegionProperties {
 }
 
 interface RegionChoroplethValue extends RegionMetricValue {
-  __color_value: number;
+  __color_value: number | null;
 }
 
 export type GetRegionDataFunctionType = (id: string) => RegionChoroplethValue;
@@ -63,7 +63,7 @@ export function useSafetyRegionData<K extends RegionsMetricName>(
         value: x[metricProperty],
       })) ?? [];
 
-    const metricForAllRegions = (data[metricName] as unknown) as
+    const metricForAllRegions = data[metricName] as unknown as
       | RegionMetricValue[]
       | undefined;
 
@@ -95,7 +95,7 @@ export function useSafetyRegionData<K extends RegionsMetricName>(
         /**
          * The metric value used to define the fill color in the choropleth
          */
-        __color_value: Number(value[metricProperty]),
+        __color_value: value[metricProperty] as number | null,
       };
 
       return set(acc, value.vrcode, choroplethValue);
