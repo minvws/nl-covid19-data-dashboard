@@ -1,8 +1,12 @@
-import { isDateSeries, TimestampedValue } from '@corona-dashboard/common';
+import {
+  formatStyle,
+  isDateSeries,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { useChartBreakpoints } from './use-chart-breakpoints';
 
-interface XAxisTickConfiguration {
+interface XAxisTickCountConfiguration {
   date: {
     long: number;
     short: number;
@@ -13,30 +17,30 @@ interface XAxisTickConfiguration {
   };
 }
 
-interface XAxisTickConfigurations {
+interface XAxisTickCountConfigurations {
   /**
    * ~420px
    */
-  xs?: XAxisTickConfiguration;
+  xs?: XAxisTickCountConfiguration;
   /**
    * ~768px
    */
-  sm?: XAxisTickConfiguration;
+  sm?: XAxisTickCountConfiguration;
   /**
    * ~960px
    */
-  md?: XAxisTickConfiguration;
+  md?: XAxisTickCountConfiguration;
   /**
    * ~1200px
    */
-  lg?: XAxisTickConfiguration;
+  lg?: XAxisTickCountConfiguration;
   /**
    * ~1600px
    */
-  xl?: XAxisTickConfiguration;
+  xl?: XAxisTickCountConfiguration;
 }
 
-const xTickConfigurations: XAxisTickConfigurations = {
+const xTickCountConfigurations: XAxisTickCountConfigurations = {
   xs: {
     date: {
       long: 3,
@@ -81,7 +85,9 @@ const xTickConfigurations: XAxisTickConfigurations = {
 
 const sizes = ['xl', 'lg', 'md', 'sm', 'xs'] as const;
 
-export function useXTickCount<T extends TimestampedValue>(
+export type XAxisTickConfiguration = ReturnType<typeof useXTickConfiguration>;
+
+export function useXTickConfiguration<T extends TimestampedValue>(
   values: T[],
   chartWidth: number
 ) {
@@ -94,13 +100,18 @@ export function useXTickCount<T extends TimestampedValue>(
     const period = values.length < 36 ? 'short' : 'long';
 
     const screenSize = sizes.find(
-      (x) => chartBreakpoints[x] && xTickConfigurations[x]
+      (x) => chartBreakpoints[x] && xTickCountConfigurations[x]
     );
 
     const xTickCount = screenSize
-      ? xTickConfigurations[screenSize]?.[type][period] ?? 2
+      ? xTickCountConfigurations[screenSize]?.[type][period] ?? 2
       : 2;
 
-    return [xTickCount, chartBreakpoints] as const;
+    const format: formatStyle =
+      (xTickCount < 6 && chartBreakpoints.lg) || chartBreakpoints.xl
+        ? 'axis-with-year-long'
+        : 'axis-with-year';
+
+    return { xTickCount, format };
   }, [values, chartBreakpoints]);
 }

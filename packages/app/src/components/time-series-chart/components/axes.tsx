@@ -18,7 +18,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
-import { ChartBreakPoints } from '../logic/use-chart-breakpoints';
+import { XAxisTickConfiguration } from '../logic/use-x-tick-configuration';
 import { WeekNumbers } from './week-numbers';
 
 type AxesProps = {
@@ -66,7 +66,7 @@ type AxesProps = {
   /**
    *
    */
-  chartBreakpoints: ChartBreakPoints;
+  xAxisTickConfiguration: XAxisTickConfiguration;
 };
 
 export type AnyTickFormatter = (value: any) => string;
@@ -85,7 +85,7 @@ export const Axes = memo(function Axes({
   isYAxisCollapsed,
   xRangePadding,
   hasAllZeroValues,
-  chartBreakpoints,
+  xAxisTickConfiguration,
 }: AxesProps) {
   const startUnix = first(xTickValues) ?? 0;
   const endUnix = last(xTickValues) ?? 0;
@@ -124,21 +124,13 @@ export const Axes = memo(function Axes({
         }
       }
 
-      if (
-        (xTickValues.length < 6 && chartBreakpoints.xl) ||
-        chartBreakpoints.xl
-      ) {
-        return formatDateFromSeconds(date_unix, 'axis-with-year-long');
-      } else {
-        return formatDateFromSeconds(date_unix, 'axis-with-year');
-      }
+      return formatDateFromSeconds(date_unix, xAxisTickConfiguration.format);
     },
     [
       isMounted,
       formatRelativeDate,
       formatDateFromSeconds,
-      xTickValues.length,
-      chartBreakpoints.xl,
+      xAxisTickConfiguration.format,
     ]
   );
 

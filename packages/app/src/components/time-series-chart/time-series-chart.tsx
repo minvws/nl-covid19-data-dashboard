@@ -41,7 +41,7 @@ import {
   useValueWidth,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
-import { useXTickCount } from './logic/use-x-tick-count';
+import { useXTickConfiguration } from './logic/use-x-tick-configuration';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -226,7 +226,7 @@ export function TimeSeriesChart<
     dataOptions
   );
 
-  const [xTickCount, chartBreakpoints] = useXTickCount(values, width);
+  const xAxisTickConfiguration = useXTickConfiguration(values, width);
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -235,9 +235,9 @@ export function TimeSeriesChart<
         values,
         today,
         withPadding: false,
-        tickCount: xTickCount,
+        tickCount: xAxisTickConfiguration.xTickCount,
       }),
-    [values, today, xTickCount]
+    [values, today, xAxisTickConfiguration.xTickCount]
   );
 
   const [hoverState, chartEventHandlers] = useHoverState({
@@ -337,7 +337,7 @@ export function TimeSeriesChart<
             onBlur={chartEventHandlers.handleBlur}
           >
             <Axes
-              chartBreakpoints={chartBreakpoints}
+              xAxisTickConfiguration={xAxisTickConfiguration}
               bounds={bounds}
               numGridLines={numGridLines}
               yTickValues={yTickValues}

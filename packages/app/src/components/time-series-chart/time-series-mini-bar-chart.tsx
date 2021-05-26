@@ -31,6 +31,7 @@ import {
   useValuesInTimeframe,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
+import { useXTickConfiguration } from './logic/use-x-tick-configuration';
 
 export type TimeSeriesMiniBarChart<T extends TimestampedValue> = {
   values: T[];
@@ -111,9 +112,17 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     numTicks: 0,
   });
 
+  const xAxisTickConfiguration = useXTickConfiguration(values, width);
+
   const today = useCurrentDate();
   const xTickValues = useMemo(
-    () => getTimeDomain({ values, today, withPadding: false }),
+    () =>
+      getTimeDomain({
+        values,
+        today,
+        withPadding: false,
+        tickCount: xAxisTickConfiguration.xTickCount,
+      }),
     [values, today]
   );
 
@@ -170,6 +179,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
           onBlur={chartEventHandlers.handleBlur}
         >
           <Axes
+            xAxisTickConfiguration={xAxisTickConfiguration}
             bounds={bounds}
             numGridLines={0}
             xTickValues={xTickValues}

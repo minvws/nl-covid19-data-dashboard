@@ -19,6 +19,7 @@ import {
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useChartBreakpoints } from '../time-series-chart/logic/use-chart-breakpoints';
 import {
   BarHover,
   BarTrend,
@@ -101,10 +102,8 @@ export function VerticalBarChart<
 
   const seriesList = useSeriesList(values, seriesConfig);
 
-  const {
-    max: calculatedMax,
-    min: calculatedMin,
-  } = useCalculatedSeriesExtremes(values, seriesConfig);
+  const { max: calculatedMax, min: calculatedMin } =
+    useCalculatedSeriesExtremes(values, seriesConfig);
 
   const { xScale, yScale, getX, getY } = useScales({
     values,
@@ -114,6 +113,8 @@ export function VerticalBarChart<
     bounds,
     numTicks: tickValues?.length || numGridLines,
   });
+
+  const chartBreakpoints = useChartBreakpoints(width);
 
   const xTickValues = useMemo(
     () => [first(xScale.domain()), last(xScale.domain())] as [number, number],
@@ -170,6 +171,7 @@ export function VerticalBarChart<
         onClick={handleClick}
       >
         <Axes
+          chartBreakpoints={chartBreakpoints}
           bounds={bounds}
           numGridLines={numGridLines}
           yTickValues={tickValues}
