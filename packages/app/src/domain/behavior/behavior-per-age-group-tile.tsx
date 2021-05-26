@@ -1,15 +1,15 @@
+import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
-import { Heading, Text, InlineText } from '~/components/typography';
+import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
-import css from '@styled-system/css';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-
+import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
+import { isDefined } from 'ts-is-present';
 export interface BehaviorPerAgeGroupProps {
   title: string;
   description: string;
@@ -60,8 +60,8 @@ export function BehaviorPerAgeGroup({
         />
       </Box>
       <Box overflow="auto">
-        {typeof data[`${currentId}_compliance`] !== 'undefined' ||
-        typeof data[`${currentId}_support`] !== 'undefined' ? (
+        {isDefined(data[`${currentId}_compliance`]) ||
+        isDefined(data[`${currentId}_support`]) ? (
           <Box overflow="auto">
             <StyledTable>
               <thead>

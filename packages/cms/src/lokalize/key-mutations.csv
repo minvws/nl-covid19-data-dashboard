@@ -622,3 +622,15 @@ timestamp,action,key
 2021-05-21T09:37:41.578Z,add,gemeente_index.population_count_explanation_title
 2021-05-21T09:43:32.924Z,add,gemeente_positief_geteste_personen.population_count_explanation
 2021-05-21T09:45:29.412Z,add,gemeente_rioolwater_metingen.population_count_explanation
+2021-05-26T12:36:51.640Z,add,nl_gedrag.tabel_per_leeftijdsgroep.title
+2021-05-26T12:38:17.878Z,add,nl_gedrag.tabel_per_leeftijdsgroep.description
+2021-05-26T12:40:38.941Z,add,nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
+2021-05-26T12:40:58.972Z,add,nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
+2021-05-26T12:51:53.893Z,add,regionaal_gedrag.tabel_per_leeftijdsgroep.title
+2021-05-26T12:52:19.934Z,add,regionaal_gedrag.tabel_per_leeftijdsgroep.description
+2021-05-26T12:51:53.893Z,delete,regionaal_gedrag.tabel_per_leeftijdsgroep.title
+2021-05-26T12:52:19.934Z,delete,regionaal_gedrag.tabel_per_leeftijdsgroep.description
+2021-05-26T12:52:56.360Z,add,gedrag_common.tabel_per_leeftijdsgroep.explanation.compliance
+2021-05-26T12:53:19.906Z,add,gedrag_common.tabel_per_leeftijdsgroep.explanation.support
+2021-05-26T12:52:56.360Z,delete,gedrag_common.tabel_per_leeftijdsgroep.explanation.compliance
+2021-05-26T12:53:19.906Z,delete,gedrag_common.tabel_per_leeftijdsgroep.explanation.support
