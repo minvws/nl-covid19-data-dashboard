@@ -182,7 +182,7 @@ export function VerticalBarChart<
         onClick={handleClick}
       >
         <Axes
-          xAxisTickConfiguration={xAxisTickConfiguration}
+          xAxisTickFormat={xAxisTickConfiguration.format}
           bounds={bounds}
           numGridLines={numGridLines}
           yTickValues={tickValues}

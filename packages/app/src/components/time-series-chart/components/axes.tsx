@@ -5,6 +5,7 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
+import { formatStyle } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -18,7 +19,6 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
-import { XAxisTickConfiguration } from '../logic/use-x-tick-configuration';
 import { WeekNumbers } from './week-numbers';
 
 type AxesProps = {
@@ -66,7 +66,7 @@ type AxesProps = {
   /**
    *
    */
-  xAxisTickConfiguration: XAxisTickConfiguration;
+  xAxisTickFormat: formatStyle;
 };
 
 export type AnyTickFormatter = (value: any) => string;
@@ -85,7 +85,7 @@ export const Axes = memo(function Axes({
   isYAxisCollapsed,
   xRangePadding,
   hasAllZeroValues,
-  xAxisTickConfiguration,
+  xAxisTickFormat,
 }: AxesProps) {
   const startUnix = first(xTickValues) ?? 0;
   const endUnix = last(xTickValues) ?? 0;
@@ -124,14 +124,9 @@ export const Axes = memo(function Axes({
         }
       }
 
-      return formatDateFromSeconds(date_unix, xAxisTickConfiguration.format);
+      return formatDateFromSeconds(date_unix, xAxisTickFormat);
     },
-    [
-      isMounted,
-      formatRelativeDate,
-      formatDateFromSeconds,
-      xAxisTickConfiguration.format,
-    ]
+    [isMounted, formatRelativeDate, formatDateFromSeconds, xAxisTickFormat]
   );
 
   /**

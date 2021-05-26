@@ -337,7 +337,7 @@ export function TimeSeriesChart<
             onBlur={chartEventHandlers.handleBlur}
           >
             <Axes
-              xAxisTickConfiguration={xAxisTickConfiguration}
+              xAxisTickFormat={xAxisTickConfiguration.format}
               bounds={bounds}
               numGridLines={numGridLines}
               yTickValues={yTickValues}

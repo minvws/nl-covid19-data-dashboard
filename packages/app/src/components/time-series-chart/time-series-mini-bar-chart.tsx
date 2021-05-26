@@ -179,7 +179,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
           onBlur={chartEventHandlers.handleBlur}
         >
           <Axes
-            xAxisTickConfiguration={xAxisTickConfiguration}
+            xAxisTickFormat={xAxisTickConfiguration.format}
             bounds={bounds}
             numGridLines={0}
             xTickValues={xTickValues}
