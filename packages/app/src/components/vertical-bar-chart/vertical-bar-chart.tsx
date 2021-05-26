@@ -2,7 +2,6 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
-import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 // Time Series Chart components and logic
 import {
@@ -13,13 +12,16 @@ import {
 import {
   COLLAPSE_Y_AXIS_THRESHOLD,
   DataOptions,
+  getTimeDomain,
   useDimensions,
   useValuesInTimeframe,
 } from '~/components/time-series-chart/logic';
+import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useChartBreakpoints } from '../time-series-chart/logic/use-chart-breakpoints';
+import { useXTickConfiguration } from '../time-series-chart/logic/use-x-tick-configuration';
 import {
   BarHover,
   BarTrend,
@@ -116,9 +118,18 @@ export function VerticalBarChart<
 
   const chartBreakpoints = useChartBreakpoints(width);
 
+  const xAxisTickConfiguration = useXTickConfiguration(values, width);
+
+  const today = useCurrentDate();
   const xTickValues = useMemo(
-    () => [first(xScale.domain()), last(xScale.domain())] as [number, number],
-    [xScale]
+    () =>
+      getTimeDomain({
+        values,
+        today,
+        withPadding: false,
+        tickCount: xAxisTickConfiguration.count,
+      }),
+    [values, today, xAxisTickConfiguration.count]
   );
 
   const [handleHover, hoverState] = useHoverState({
@@ -171,7 +182,7 @@ export function VerticalBarChart<
         onClick={handleClick}
       >
         <Axes
-          chartBreakpoints={chartBreakpoints}
+          xAxisTickConfiguration={xAxisTickConfiguration}
           bounds={bounds}
           numGridLines={numGridLines}
           yTickValues={tickValues}

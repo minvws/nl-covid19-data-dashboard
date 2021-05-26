@@ -121,9 +121,9 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
         values,
         today,
         withPadding: false,
-        tickCount: xAxisTickConfiguration.xTickCount,
+        tickCount: xAxisTickConfiguration.count,
       }),
-    [values, today]
+    [values, today, xAxisTickConfiguration.count]
   );
 
   const [hoverState, chartEventHandlers] = useHoverState({

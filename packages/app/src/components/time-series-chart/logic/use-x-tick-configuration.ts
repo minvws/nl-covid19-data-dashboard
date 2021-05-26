@@ -112,6 +112,6 @@ export function useXTickConfiguration<T extends TimestampedValue>(
         ? 'axis-with-year-long'
         : 'axis-with-year';
 
-    return { xTickCount, format };
+    return { count: xTickCount, format };
   }, [values, chartBreakpoints]);
 }

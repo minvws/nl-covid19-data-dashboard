@@ -235,9 +235,9 @@ export function TimeSeriesChart<
         values,
         today,
         withPadding: false,
-        tickCount: xAxisTickConfiguration.xTickCount,
+        tickCount: xAxisTickConfiguration.count,
       }),
-    [values, today, xAxisTickConfiguration.xTickCount]
+    [values, today, xAxisTickConfiguration.count]
   );
 
   const [hoverState, chartEventHandlers] = useHoverState({
