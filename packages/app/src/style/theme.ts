@@ -148,6 +148,13 @@ export const colors = {
 
     multiseries,
 
+    behavior: {
+      scale: {
+        blue: ['#e9f5fc', '#bce1f7', '#90cdf2', '#219be5', '#1779b6', '#1a618f', '#005082'],
+        yellow: ['#fff2cc', '#ffe699', '#ffd34d', '#ffc000', '#e8b61b', '#d6ab26', '#cf9c00'],
+      }
+    },
+
     vaccines: {
       bio_n_tech_pfizer: multiseries.cyan,
       moderna: multiseries.yellow,

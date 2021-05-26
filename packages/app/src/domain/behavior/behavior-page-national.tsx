@@ -1,4 +1,5 @@
 import Gedrag from '~/assets/gedrag.svg';
+import { RegionsBehavior } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
@@ -13,15 +14,18 @@ import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { NationalPageMetricData } from '~/domain/layout/national-layout';
+import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
 
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
+  behaviorData: RegionsBehavior[];
 }
 
 export function BehaviorPageNational({
   data,
   content,
+  behaviorData,
 }: BehaviourPageNationalProps) {
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -109,6 +113,22 @@ export function BehaviorPageNational({
 
       <ArticleStrip articles={content.articles} />
 
+      <BehaviorTable
+        title={nl_gedrag.basisregels.title}
+        description={nl_gedrag.basisregels.description}
+        complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}
+        supportExplanation={nl_gedrag.basisregels.steunen_beschrijving}
+        sortedCompliance={sortedCompliance}
+        sortedSupport={sortedSupport}
+        annotation={nl_gedrag.basisregels.annotatie}
+      />
+
+      <BehaviorChoroplethsTile
+        title={nl_gedrag.verdeling_in_nederland.titel}
+        description={nl_gedrag.verdeling_in_nederland.description}
+        data={behaviorData}
+      />
+
       <BehaviorPerAgeGroup
         title={siteText.nl_gedrag.tabel_per_leeftijdsgroep.title}
         description={nl_gedrag.tabel_per_leeftijdsgroep.description}
@@ -119,15 +139,6 @@ export function BehaviorPageNational({
           nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
         }
         data={data.behavior_per_age_group}
-      />
-      <BehaviorTable
-        title={nl_gedrag.basisregels.title}
-        description={nl_gedrag.basisregels.description}
-        complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}
-        supportExplanation={nl_gedrag.basisregels.steunen_beschrijving}
-        sortedCompliance={sortedCompliance}
-        sortedSupport={sortedSupport}
-        annotation={nl_gedrag.basisregels.annotatie}
       />
 
       <MoreInformation />
