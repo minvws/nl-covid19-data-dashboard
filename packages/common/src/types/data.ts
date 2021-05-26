@@ -9,17 +9,17 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
-  static_values?: GmStaticValues;
+  static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
   tested_overall: MunicipalTestedOverall;
-  sewer?: MunicipalSewer;
+  sewer: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
 }
 export interface GmStaticValues {
-  population_count?: number;
+  population_count: number;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -834,7 +834,7 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
-  static_values?: GmStaticValues;
+  static_values?: VrStaticValues;
   difference: RegionalDifference;
   g_number: VrGNumber;
   sewer: RegionalSewer;
@@ -854,8 +854,8 @@ export interface Regionaal {
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
 }
-export interface GmStaticValues {
-  population_count?: number;
+export interface VrStaticValues {
+  population_count: number;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;

@@ -604,3 +604,7 @@ timestamp,action,key
 2021-05-18T12:31:34.675Z,add,gedrag_onderwerpen.symptoms_stay_home_if_mandatory
 2021-05-21T06:50:43.253Z,add,nationaal_layout.headings.overig
 2021-05-25T09:18:08.061Z,add,nationaal_layout.headings.overig
+2021-05-21T09:36:11.579Z,add,gemeente_index.population_count
+2021-05-21T09:37:41.578Z,add,gemeente_index.population_count_explanation_title
+2021-05-21T09:43:32.924Z,add,gemeente_positief_geteste_personen.population_count_explanation
+2021-05-21T09:45:29.412Z,add,gemeente_rioolwater_metingen.population_count_explanation
