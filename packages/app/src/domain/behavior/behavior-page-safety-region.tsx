@@ -8,8 +8,9 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
 interface BehaviorPageSafetyRegionProps {
-  data: any;
+  data: SafetyRegionPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
 }
 

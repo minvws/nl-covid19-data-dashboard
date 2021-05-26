@@ -8,10 +8,12 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useFormatAndSortBehavior } from '~/domain/behavior/behavior-logic';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
-import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { useIntl } from '~/intl';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { NationalPageMetricData } from '~/domain/layout/national-layout';
 interface BehaviourPageNationalProps {
-  data: any;
+  data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
 }
 
@@ -114,6 +116,8 @@ export function BehaviorPageNational({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <MoreInformation />
     </TileList>
   );
 }

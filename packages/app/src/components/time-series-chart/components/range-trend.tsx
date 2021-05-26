@@ -1,7 +1,6 @@
 import { Threshold } from '@visx/threshold';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.6;
@@ -14,6 +13,7 @@ type RangeTrendProps = {
   getX: (v: SeriesItem) => number;
   getY0: (v: SeriesDoubleValue) => number;
   getY1: (v: SeriesDoubleValue) => number;
+  id: string;
 };
 
 export function RangeTrend({
@@ -24,9 +24,8 @@ export function RangeTrend({
   bounds,
   color,
   fillOpacity = DEFAULT_FILL_OPACITY,
+  id,
 }: RangeTrendProps) {
-  const id = useUniqueId();
-
   const nonNullSeries = useMemo(
     () =>
       series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)),

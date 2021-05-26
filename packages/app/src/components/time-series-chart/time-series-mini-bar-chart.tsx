@@ -8,6 +8,7 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useUniqueId } from '~/utils/use-unique-id';
 import {
   Axes,
   ChartContainer,
@@ -67,6 +68,8 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     hideTooltip,
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
+
+  const chartId = useUniqueId();
 
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
@@ -179,6 +182,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
           />
 
           <Series
+            chartId={chartId}
             seriesConfig={seriesConfig}
             seriesList={seriesList}
             getX={getX}
