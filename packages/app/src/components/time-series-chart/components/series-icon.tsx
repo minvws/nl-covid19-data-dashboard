@@ -1,5 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { SeriesConfig } from '../logic';
+import { findSplitPointForValue, SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
@@ -7,7 +7,6 @@ import { SplitAreaTrendIcon } from './split-area-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
 import { BarTrendIcon } from './bar-trend';
 import { isPresent } from 'ts-is-present';
-import { findSplitPointForValue } from '../logic';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
@@ -62,6 +61,13 @@ export function SeriesIcon<T extends TimestampedValue>({
           color={findSplitPointForValue(config.splitPoints, value).color}
           fillOpacity={1}
           strokeWidth={config.strokeWidth}
+        />
+      ) : null;
+    case 'split-bar':
+      return isPresent(value) ? (
+        <BarTrendIcon
+          color={findSplitPointForValue(config.splitPoints, value).color}
+          fillOpacity={config.fillOpacity}
         />
       ) : null;
     default:

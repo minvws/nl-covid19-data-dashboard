@@ -9,14 +9,17 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
-  population_count?: number;
+  static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
   tested_overall: MunicipalTestedOverall;
-  sewer?: MunicipalSewer;
+  sewer: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
+}
+export interface GmStaticValues {
+  population_count: number;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -39,13 +42,11 @@ export interface MunicipalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface MunicipalHospitalNice {
@@ -148,7 +149,6 @@ export interface National {
   proto_name: "NL";
   name: string;
   code: string;
-  population_count?: number;
   difference: NationalDifference;
   doctor: NationalDoctor;
   downscaling?: NlDownscaling;
@@ -221,13 +221,11 @@ export interface NationalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface NationalDoctor {
@@ -776,6 +774,7 @@ export interface NlVaccineAdministeredRateMovingAverage {
 export interface NlVaccineAdministeredRateMovingAverageValue {
   doses_per_day: number;
   doses_per_second: number;
+  doses_per_minute: number;
   seconds_per_dose: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -835,7 +834,7 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
-  population_count?: number;
+  static_values?: VrStaticValues;
   difference: RegionalDifference;
   g_number: VrGNumber;
   sewer: RegionalSewer;
@@ -854,6 +853,9 @@ export interface Regionaal {
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
+}
+export interface VrStaticValues {
+  population_count: number;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -875,13 +877,11 @@ export interface RegionalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface VrGNumber {

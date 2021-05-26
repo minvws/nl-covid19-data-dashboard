@@ -35,4 +35,8 @@ export const features: Feature[] = [
     name: 'sewerSplitAreaChart',
     isEnabled: true,
   },
+  {
+    name: 'behaviorPage',
+    isEnabled: false,
+  },
 ];

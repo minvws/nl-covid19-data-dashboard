@@ -17,6 +17,7 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | AreaSeriesDefinition<T>
   | StackedAreaSeriesDefinition<T>
   | BarSeriesDefinition<T>
+  | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
   | SplitAreaDefinition<T>
 )[];
@@ -52,6 +53,15 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
   fillOpacity?: number;
   aboveBenchmarkColor?: string;
   aboveBenchmarkFillOpacity?: number;
+};
+
+export type SplitBarSeriesDefinition<T extends TimestampedValue> = {
+  type: 'split-bar';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  fillOpacity?: number;
+  splitPoints: SplitPoint[];
 };
 
 export type RangeSeriesDefinition<T extends TimestampedValue> = {
@@ -137,11 +147,10 @@ export function useSeriesList<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   cutValuesConfig?: CutValuesConfig[]
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig, cutValuesConfig), [
-    values,
-    seriesConfig,
-    cutValuesConfig,
-  ]);
+  return useMemo(
+    () => getSeriesList(values, seriesConfig, cutValuesConfig),
+    [values, seriesConfig, cutValuesConfig]
+  );
 }
 
 export function useValuesInTimeframe<T extends TimestampedValue>(
@@ -149,11 +158,10 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
   timeframe: TimeframeOption
 ) {
   const today = useCurrentDate();
-  return useMemo(() => getValuesInTimeframe(values, timeframe, today), [
-    values,
-    timeframe,
-    today,
-  ]);
+  return useMemo(
+    () => getValuesInTimeframe(values, timeframe, today),
+    [values, timeframe, today]
+  );
 }
 
 /**

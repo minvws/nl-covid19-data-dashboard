@@ -10,3 +10,4 @@ export * from './split';
 export * from './use-format-series-value';
 export * from './use-keyboard-navigation';
 export * from './use-value-width';
+export * from './split';

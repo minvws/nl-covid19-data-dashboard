@@ -39,6 +39,7 @@ export function useFormatSeriesValue() {
         case 'split-area':
         case 'area':
         case 'bar':
+        case 'split-bar':
         case 'stacked-area':
         case 'invisible':
           return getValueString(value[config.metricProperty], isPercentage);
