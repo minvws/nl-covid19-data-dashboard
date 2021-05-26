@@ -6,6 +6,7 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
 import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { BehaviorTable } from '~/domain/behavior/behavior-table';
 import { useIntl } from '~/intl';
@@ -80,10 +81,10 @@ export function BehaviorPageNational({
               highest_compliance_description: (
                 <InlineText>{sortedCompliance[0].description}</InlineText>
               ),
-              highest_complience_percentage: (
+              highest_compliance_percentage: (
                 <InlineText>{sortedCompliance[0].percentage}</InlineText>
               ),
-              highest_complience_percentage_support: (
+              highest_support_percentage: (
                 <InlineText>
                   {
                     sortedSupport.find((x) => sortedCompliance[0].id === x.id)
@@ -98,7 +99,7 @@ export function BehaviorPageNational({
               highest_support_description: (
                 <InlineText>{sortedSupport[0].description}</InlineText>
               ),
-              highest_complience_support: (
+              highest_compliance_support: (
                 <InlineText>{sortedSupport[0].percentage}</InlineText>
               ),
             })}
@@ -108,6 +109,17 @@ export function BehaviorPageNational({
 
       <ArticleStrip articles={content.articles} />
 
+      <BehaviorPerAgeGroup
+        title={siteText.nl_gedrag.tabel_per_leeftijdsgroep.title}
+        description={nl_gedrag.tabel_per_leeftijdsgroep.description}
+        complianceExplanation={
+          nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
+        }
+        supportExplanation={
+          nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
+        }
+        data={data.behavior_per_age_group}
+      />
       <BehaviorTable
         title={nl_gedrag.basisregels.title}
         description={nl_gedrag.basisregels.description}
