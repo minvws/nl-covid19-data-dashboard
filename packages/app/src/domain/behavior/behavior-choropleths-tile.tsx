@@ -18,17 +18,17 @@ import { colors } from '~/style/theme';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
 
-interface BehaviorChoroplethProps {
+interface BehaviorChoroplethsTileProps {
   title: string;
   description: string;
   data: RegionsBehavior[];
 }
 
-export function BehaviorChoropleth({
+export function BehaviorChoroplethsTile({
   title,
   description,
   data,
-}: BehaviorChoroplethProps) {
+}: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
@@ -104,7 +104,7 @@ function ChoroplethBlock({
   const reverseRouter = useReverseRouter();
 
   return (
-    <Box width={{ _: '100%', lg: '49=9%' }}>
+    <Box width={{ _: '100%', lg: '50%' }}>
       <Heading level={4} textAlign="center">
         {title}
       </Heading>

@@ -12,7 +12,7 @@ import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { NationalPageMetricData } from '~/domain/layout/national-layout';
-import { BehaviorChoropleth } from '~/domain/behavior/behavior-choropleth';
+import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -82,10 +82,10 @@ export function BehaviorPageNational({
               highest_compliance_description: (
                 <InlineText>{sortedCompliance[0].description}</InlineText>
               ),
-              highest_complience_percentage: (
+              highest_compliance_percentage: (
                 <InlineText>{sortedCompliance[0].percentage}</InlineText>
               ),
-              highest_complience_percentage_support: (
+              highest_compliance_percentage_support: (
                 <InlineText>
                   {
                     sortedSupport.find((x) => sortedCompliance[0].id === x.id)
@@ -100,7 +100,7 @@ export function BehaviorPageNational({
               highest_support_description: (
                 <InlineText>{sortedSupport[0].description}</InlineText>
               ),
-              highest_complience_support: (
+              highest_compliance_support: (
                 <InlineText>{sortedSupport[0].percentage}</InlineText>
               ),
             })}
@@ -110,7 +110,7 @@ export function BehaviorPageNational({
 
       <ArticleStrip articles={content.articles} />
 
-      <BehaviorChoropleth
+      <BehaviorChoroplethsTile
         title={nl_gedrag.verdeling_in_nederland.titel}
         description={nl_gedrag.verdeling_in_nederland.description}
         data={behaviorData}

@@ -49,12 +49,12 @@ export function BehaviorTooltip({
           {siteText.gedrag_onderwerpen[currentMetric]}
         </Text>
         <TooltipInfo
-          title="Naleving"
+          title={siteText.nl_gedrag.tooltip_labels.compliance}
           value={currentComplianceValue}
           background={complianceFilteredThreshold.color}
         />
         <TooltipInfo
-          title="Draagvlak"
+          title={siteText.nl_gedrag.tooltip_labels.support}
           value={currentSupportValue}
           background={supportFilteredThreshold.color}
         />

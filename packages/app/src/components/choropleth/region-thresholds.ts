@@ -168,7 +168,7 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const behaviorComplienceThresholds: ChoroplethThresholdsValue[] = [
+const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.behavior.scale.blue[0],
     threshold: 0,
@@ -310,7 +310,7 @@ export const regionThresholds = {
     average: sewerThresholds,
   },
   behavior: behaviorThresholds,
-  behavior_compliance: behaviorComplienceThresholds,
+  behavior_compliance: behaviorComplianceThresholds,
   behavior_support: behaviorSupportThresholds,
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
