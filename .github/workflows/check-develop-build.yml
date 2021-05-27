@@ -1,4 +1,4 @@
-name: Check lokalize export on develop
+name: Check develop build
 
 on:
   push:
