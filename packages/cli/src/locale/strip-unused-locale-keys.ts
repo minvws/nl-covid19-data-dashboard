@@ -1,12 +1,11 @@
-import { unflatten } from 'flat';
+import { appendTextMutation } from '@corona-dashboard/cms/src/lokalize/logic/mutations';
+import { flatten, unflatten } from 'flat';
 import fs from 'fs';
+import { difference } from 'lodash';
 import get from 'lodash/get';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
-
-type LocaleData = string | Record<string, string>;
-type LocaleFile = Record<string, LocaleData>;
 
 // These keys aren't directly referenced in the code base, so we add them manually here
 const whitelist = [
@@ -26,28 +25,22 @@ const project = new Project({
   tsConfigFilePath: path.join(__dirname, '../../../app/tsconfig.json'),
 });
 
-const NlOriginal = JSON.parse(
-  fs.readFileSync(path.join(APP_LOCALE_DIR, 'nl.json'), {
-    encoding: 'utf-8',
-  })
-);
-const EnOriginal = JSON.parse(
-  fs.readFileSync(path.join(APP_LOCALE_DIR, 'en.json'), {
+const texts = JSON.parse(
+  fs.readFileSync(path.join(APP_LOCALE_DIR, 'nl_export.json'), {
     encoding: 'utf-8',
   })
 );
 
-const sourceFile = project.getSourceFile('nl.json');
+const sourceFile = project.getSourceFile('nl_export.json');
 
-const propertyAssignmentNodes: PropertyAssignment[] = (
-  sourceFile?.getDescendantsOfKind(SyntaxKind.PropertyAssignment) ??
-  ([] as PropertyAssignment[])
-)
-  // each assignment always has at least one reference (the one in the file where its written),
-  // so here we only want the ones that have more than one ref. (The ones who are referenced in some other file(s))
-  .filter((x: PropertyAssignment) => x.findReferences().length > 1);
-
-const newLocaleObjects = propertyAssignmentNodes
+const flatStrippedTexts = sourceFile
+  ?.getDescendantsOfKind(SyntaxKind.PropertyAssignment)
+  /**
+   * each assignment always has at least one reference (the one in the file
+   * where its written), so here we only want the ones that have more than one
+   * ref. (The ones who are referenced in some other file(s))
+   */
+  .filter((x: PropertyAssignment) => x.findReferences().length > 1)
   .map((x) => createFullPropertyChain(x))
   .concat(whitelist)
   // Only keep the deepest paths:
@@ -58,40 +51,29 @@ const newLocaleObjects = propertyAssignmentNodes
       ) === -1
   )
   .sort()
-  .reduce(
-    (aggr, propertyPath) => {
-      const NlValue = get(NlOriginal, propertyPath);
-      const EnValue = get(EnOriginal, propertyPath);
-      if (isDefined(NlValue)) {
-        aggr.nl[propertyPath] = NlValue;
-        aggr.en[propertyPath] = EnValue;
-      }
-      return aggr;
-    },
-    { nl: {}, en: {} } as {
-      nl: LocaleFile;
-      en: LocaleFile;
+  .reduce<Record<string, unknown>>((aggr, propertyPath) => {
+    const text = get(texts, propertyPath);
+    if (isDefined(text)) {
+      aggr[propertyPath] = text;
     }
-  );
+    return aggr;
+  }, {});
 
-const newJson: {
-  nl: LocaleFile;
-  en: LocaleFile;
-} = unflatten(newLocaleObjects, {
-  object: true,
-});
+const newTexts = unflatten(flatStrippedTexts, { object: true });
 
-fs.writeFileSync(
-  path.join(APP_LOCALE_DIR, 'nl_stripped.json'),
-  JSON.stringify(newJson.nl, null, 2),
-  { encoding: 'utf-8' }
-);
+const obsoleteKeys = difference(
+  Object.keys(flatten(texts)),
+  Object.keys(flatten(newTexts))
+).sort();
 
-fs.writeFileSync(
-  path.join(APP_LOCALE_DIR, 'en_stripped.json'),
-  JSON.stringify(newJson.en, null, 2),
-  { encoding: 'utf-8' }
-);
+for (const key of obsoleteKeys) {
+  const text = texts[key];
+  const isRootvalue = typeof text === 'string' || Array.isArray(text);
+
+  appendTextMutation('delete', isRootvalue ? `__root.${key}` : key);
+}
+
+console.log(`Marked ${obsoleteKeys.length} documents for deletion`);
 
 /**
  * Takes a property assignment and walks up the parent tree to create a property chain.
@@ -102,8 +84,8 @@ function createFullPropertyChain(assignment: PropertyAssignment) {
   let node: Node | undefined = assignment.getParent();
 
   while (node) {
-    if (node.getKind() === SyntaxKind.PropertyAssignment) {
-      result.push((node as PropertyAssignment).getName());
+    if (nodeIsPropertyAssignment(node)) {
+      result.push(node.getName());
     }
     node = node?.getParent();
   }
@@ -115,4 +97,8 @@ function createFullPropertyChain(assignment: PropertyAssignment) {
       .reverse()
       .join('.')
   );
+}
+
+function nodeIsPropertyAssignment(node: Node): node is PropertyAssignment {
+  return node.getKind() === SyntaxKind.PropertyAssignment;
 }

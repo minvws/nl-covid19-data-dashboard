@@ -2,7 +2,6 @@ import { LinePath } from '@visx/shape';
 import { Threshold } from '@visx/threshold';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { useUniqueId } from '~/utils/use-unique-id';
 import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.6;
@@ -11,10 +10,12 @@ type StackedAreaTrendProps = {
   series: SeriesDoubleValue[];
   color: string;
   fillOpacity?: number;
+  strokeWidth?: number;
   bounds: Bounds;
   getX: (v: SeriesItem) => number;
   getY0: (v: SeriesDoubleValue) => number;
   getY1: (v: SeriesDoubleValue) => number;
+  id: string;
 };
 
 export function StackedAreaTrend({
@@ -25,9 +26,9 @@ export function StackedAreaTrend({
   bounds,
   color,
   fillOpacity = DEFAULT_FILL_OPACITY,
+  strokeWidth = 2,
+  id,
 }: StackedAreaTrendProps) {
-  const id = useUniqueId();
-
   const nonNullSeries = useMemo(
     () =>
       series.filter((x) => isPresent(x.__value_a) && isPresent(x.__value_b)),
@@ -49,6 +50,7 @@ export function StackedAreaTrend({
         belowAreaProps={{
           fill: color,
           fillOpacity,
+          id,
         }}
         /**
          * When "value a" becomes higher than "value b", this will render the fill
@@ -67,13 +69,13 @@ export function StackedAreaTrend({
        * serie, which should touch the X-axis, shouldn't render its linePath
        * because that would overlap with the X-axis.
        */}
-      {!isBottomSeries && (
+      {!isBottomSeries && strokeWidth > 0 && (
         <LinePath
           data={nonNullSeries}
           x={getX}
           y={getY0}
           stroke="white"
-          strokeWidth={2}
+          strokeWidth={strokeWidth}
           strokeLinecap="butt"
           strokeLinejoin="round"
         />

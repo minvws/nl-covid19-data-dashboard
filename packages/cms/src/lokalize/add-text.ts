@@ -1,91 +1,92 @@
 /**
  * Add one or multiple texts to the Sanity "Lokalize" dataset.
  */
-import { set, uniq } from 'lodash';
+import meow from 'meow';
 import prompts from 'prompts';
 import { getClient } from '../client';
-import { appendTextMutation } from './logic';
+import {
+  appendTextMutation,
+  exportLokalizeTexts,
+  fetchExistingKeys,
+} from './logic';
 import { LokalizeText } from './types';
 
+let additionsCounter = 0;
+
 (async function run() {
-  const client = getClient();
+  const cli = meow(
+    `
+      Usage
+        $ add-text
 
-  /**
-   * @TODO We could cache the subjects in a temp location on disk and update
-   * them every time this CLI is run. This way we can avoid having to wait for
-   * the query to return.
-   */
-  const allTexts = (await client
-    .fetch(`*[_type == 'lokalizeText']`)
-    .catch((err) => {
-      throw new Error(`Failed to fetch texts: ${err.message}`);
-    })) as LokalizeText[];
+      Options
+        --key, -k The new text key to add in dot-notation
 
-  const allSubjects = uniq(allTexts.map((x) => x.subject));
-
-  const subjectChoices = allSubjects.map((x) => ({ title: x, value: x }));
-
-  const response = await prompts([
+      Examples
+        $ add-text -k some.unique.path
+    `,
     {
-      type: 'confirm',
-      name: 'listSubjects',
-      message: 'List existing subjects?',
-      initial: false,
-    },
+      flags: {
+        key: {
+          type: 'string',
+          alias: 'k',
+        },
+      },
+    }
+  );
+
+  const existingKeys = await fetchExistingKeys();
+
+  while (true) {
+    const textDocument = await createTextDocument(existingKeys, cli.flags.key);
+
+    console.log({
+      key: textDocument.key,
+      nl: textDocument.text.nl,
+      en: textDocument.text.en,
+    });
+
     {
-      type: (_, values) => (values.listSubjects ? 'select' : null),
-      name: 'subject',
-      message: `Select a subject`,
-      choices: subjectChoices,
-    },
-    {
-      type: (_, values) => (values.listSubjects ? null : 'text'),
-      name: 'subject',
-      message: `What is the subject?`,
-      format: (x: string) => x.toLowerCase(),
-    },
-  ]);
-
-  const { subject } = response;
-
-  let continueCreating = true;
-
-  while (continueCreating) {
-    const textDocument = await createTextDocumentForSubject(subject, allTexts);
-
-    console.table(textDocument);
-
-    const response = await prompts(
-      [
+      const response = await prompts([
         {
           type: 'confirm',
           name: 'confirmed',
-          message: 'Is this what you want to add?',
+          message: 'Is this correct?',
+          onState,
         },
+      ]);
+
+      if (response.confirmed) {
+        const client = getClient();
+
+        await client.create(textDocument);
+
+        await appendTextMutation('add', textDocument.key);
+
+        console.log(`Successfully created ${textDocument.key}`);
+
+        existingKeys.push(textDocument.key);
+
+        additionsCounter++;
+      }
+    }
+    {
+      const response = await prompts([
         {
           type: 'confirm',
           name: 'continue',
-          message: 'Create another text in the same subject?',
+          message: 'Add another text?',
+          onState,
         },
-      ],
-      {
-        onCancel: () => {
-          continueCreating = false;
-        },
+      ]);
+
+      if (!response.continue) {
+        if (additionsCounter > 0) {
+          console.log('Updating text export...');
+          await exportLokalizeTexts();
+        }
+        break;
       }
-    );
-
-    if (response.confirmed) {
-      await client.create(textDocument);
-
-      const key = `${textDocument.subject}.${textDocument.path}`;
-      await appendTextMutation('add', key);
-
-      console.log(`Successfully created ${key}`);
-    }
-
-    if (!response.continue) {
-      continueCreating = false;
     }
   }
 })().catch((err) => {
@@ -93,21 +94,45 @@ import { LokalizeText } from './types';
   process.exit(1);
 });
 
-async function createTextDocumentForSubject(
-  subject: string,
-  allTexts: LokalizeText[]
-) {
+/**
+ * There is currently no native way to exit prompts on ctrl-c. This is a
+ * workaround that needs to be added to every prompts instance. For more info
+ * see: https://github.com/terkelg/prompts/issues/252#issuecomment-778683666
+ */
+function onState(state: { aborted: boolean }) {
+  if (state.aborted) {
+    if (additionsCounter > 0) {
+      console.log('Updating text export...');
+      exportLokalizeTexts().finally(() => {
+        process.exit(0);
+      });
+    } else {
+      process.nextTick(() => {
+        process.exit(0);
+      });
+    }
+  }
+}
+
+async function createTextDocument(existingKeys: string[], initialKey?: string) {
   const response = await prompts([
     {
       type: 'text',
-      name: 'path',
-      message: 'What is the path in dot notation?',
-      format: (x: string) => x.toLowerCase(),
-      /**
-       * Do not allow creating a text with a key that already exists
-       */
-      validate: (x: string) =>
-        allTexts.find((text) => text.key === `${subject}.${x}`) === undefined,
+      name: 'key',
+      message: 'What is the key? (Use snake_cased.dot.notation)',
+      initial: initialKey,
+      validate: (x: string) => {
+        /**
+         * Validation requires the key to be new and also to only contain
+         * lower-snake-case paths in dot notation.
+         * https://regexr.com/5t2lg
+         */
+        return (
+          existingKeys.find((key) => key === x) === undefined &&
+          /^[a-z_]+(\.[a-z0-9_]+)+$/.test(x)
+        );
+      },
+      onState,
     },
     {
       type: 'text',
@@ -115,6 +140,7 @@ async function createTextDocumentForSubject(
       message: 'What is the Dutch text?',
       format: (x: string) => x.trim(),
       validate: (x: string) => x.length > 1,
+      onState,
     },
     {
       type: 'text',
@@ -124,14 +150,25 @@ async function createTextDocumentForSubject(
         const value = x.trim();
         return value.length > 0 ? value : undefined;
       },
+      onState,
     },
   ]);
 
+  /**
+   * Here we split the key into a subject and (remaining) path. This is required
+   * for the way LokalizeText documents are queried in Sanity. But possibly we
+   * can work with just the key and omit subject+path from the object.
+   *
+   * @TODO see if key is enough to build the UI in Sanity.
+   */
+  const [subject, ...pathElements] = response.key.split('.');
+  const path = pathElements.join('.');
+
   const text: Omit<LokalizeText, '_id'> = {
     _type: 'lokalizeText',
-    key: `${subject}.${response.path}`,
+    key: response.key,
     subject,
-    path: response.path,
+    path,
     is_newly_added: true,
     publish_count: 0,
     should_display_empty: false,

@@ -31,7 +31,7 @@
     "tested_ggd_average",
     "tested_overall",
     "tested_per_age_group",
-    "vaccine_support",
+    "vaccine_vaccinated_or_support",
     "vaccine_delivery",
     "vaccine_delivery_estimate",
     "vaccine_administered",
@@ -126,6 +126,9 @@
     "behavior_per_age_group": {
       "$ref": "behavior_per_age_group.json"
     },
+    "behavior_get_tested_support_per_age_group": {
+      "$ref": "behavior_get_tested_support_per_age_group.json"
+    },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"
     },
@@ -138,8 +141,8 @@
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
     },
-    "vaccine_support": {
-      "$ref": "vaccine_support.json"
+    "vaccine_vaccinated_or_support": {
+      "$ref": "vaccine_vaccinated_or_support.json"
     },
     "corona_melder_app": {
       "$ref": "corona_melder_app.json"

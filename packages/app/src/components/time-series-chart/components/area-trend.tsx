@@ -3,7 +3,7 @@ import { PositionScale } from '@visx/shape/lib/types';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { SeriesItem, SeriesSingleValue, curves } from '../logic';
+import { curves, SeriesItem, SeriesSingleValue } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.2;
 const DEFAULT_STROKE_WIDTH = 2;
@@ -17,6 +17,7 @@ type AreaTrendProps = {
   getY: (v: SeriesSingleValue) => number;
   yScale: PositionScale;
   curve?: 'linear' | 'step';
+  id: string;
 };
 
 export function AreaTrend({
@@ -28,6 +29,7 @@ export function AreaTrend({
   getY,
   yScale,
   curve = 'linear',
+  id,
 }: AreaTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
@@ -54,6 +56,7 @@ export function AreaTrend({
         fillOpacity={fillOpacity}
         curve={curves[curve]}
         yScale={yScale}
+        id={id}
       />
     </>
   );

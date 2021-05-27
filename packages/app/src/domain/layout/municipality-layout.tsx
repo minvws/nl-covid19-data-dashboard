@@ -126,6 +126,27 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   {data && (
                     <>
                       <CategoryMenu
+                        title={siteText.gemeente_layout.headings.ziekenhuizen}
+                      >
+                        <MetricMenuItemLink
+                          href={reverseRouter.gm.ziekenhuisopnames(code)}
+                          icon={<Ziekenhuis />}
+                          title={
+                            siteText.gemeente_ziekenhuisopnames_per_dag
+                              .titel_sidebar
+                          }
+                        >
+                          <SidebarMetric
+                            data={data}
+                            scope="gm"
+                            metricName="hospital_nice"
+                            metricProperty="admissions_on_date_of_reporting"
+                            localeTextKey="gemeente_ziekenhuisopnames_per_dag"
+                            differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                          />
+                        </MetricMenuItemLink>
+                      </CategoryMenu>
+                      <CategoryMenu
                         title={siteText.gemeente_layout.headings.besmettingen}
                       >
                         <MetricMenuItemLink
@@ -160,27 +181,6 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                             metricProperty="covid_daily"
                             localeTextKey="gemeente_sterfte"
                             differenceKey="deceased_rivm__covid_daily"
-                          />
-                        </MetricMenuItemLink>
-                      </CategoryMenu>
-                      <CategoryMenu
-                        title={siteText.gemeente_layout.headings.ziekenhuizen}
-                      >
-                        <MetricMenuItemLink
-                          href={reverseRouter.gm.ziekenhuisopnames(code)}
-                          icon={<Ziekenhuis />}
-                          title={
-                            siteText.gemeente_ziekenhuisopnames_per_dag
-                              .titel_sidebar
-                          }
-                        >
-                          <SidebarMetric
-                            data={data}
-                            scope="gm"
-                            metricName="hospital_nice"
-                            metricProperty="admissions_on_date_of_reporting"
-                            localeTextKey="gemeente_ziekenhuisopnames_per_dag"
-                            differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                           />
                         </MetricMenuItemLink>
                       </CategoryMenu>

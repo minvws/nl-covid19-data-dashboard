@@ -123,6 +123,19 @@ export function useDataSitemap(
       ],
     },
     {
+      header: siteText.nationaal_layout.headings.ziekenhuizen,
+      links: [
+        {
+          text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
+          href: reverseRouter.nl.ziekenhuisopnames(),
+        },
+        {
+          text: siteText.ic_opnames_per_dag.titel_sidebar,
+          href: reverseRouter.nl.intensiveCareOpnames(),
+        },
+      ],
+    },
+    {
       header: siteText.nationaal_layout.headings.besmettingen,
       links: [
         {
@@ -144,15 +157,11 @@ export function useDataSitemap(
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.ziekenhuizen,
+      header: siteText.nationaal_layout.headings.gedrag,
       links: [
         {
-          text: siteText.ziekenhuisopnames_per_dag.titel_sidebar,
-          href: reverseRouter.nl.ziekenhuisopnames(),
-        },
-        {
-          text: siteText.ic_opnames_per_dag.titel_sidebar,
-          href: reverseRouter.nl.intensiveCareOpnames(),
+          text: siteText.nl_gedrag.sidebar.titel,
+          href: reverseRouter.nl.gedrag(),
         },
       ],
     },
@@ -187,12 +196,8 @@ export function useDataSitemap(
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.gedrag,
+      header: siteText.nationaal_layout.headings.overig,
       links: [
-        {
-          text: siteText.nl_gedrag.sidebar.titel,
-          href: reverseRouter.nl.gedrag(),
-        },
         {
           text: siteText.corona_melder_app.sidebar.titel,
           href: reverseRouter.nl.coronamelder(),

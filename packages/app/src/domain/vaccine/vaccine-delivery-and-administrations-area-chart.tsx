@@ -1,165 +1,107 @@
-import {
-  National,
-  NlVaccineAdministeredEstimateValue,
-  NlVaccineAdministeredValue,
-  NlVaccineDeliveryEstimateValue,
-  NlVaccineDeliveryValue,
-} from '@corona-dashboard/common';
-import { AreaChart } from '~/components/area-chart';
+import { assert } from '@corona-dashboard/common';
+import { first } from 'lodash';
+import { useMemo } from 'react';
 import { ChartTile } from '~/components/chart-tile';
-import { Legend } from '~/components/legend';
-import { useVaccineDeliveryData } from '~/domain/vaccine/use-vaccine-delivery-data';
-import { useVaccineNames } from '~/domain/vaccine/use-vaccine-names';
-import { FormatVaccinationsTooltip } from '~/domain/vaccine/vaccine-delivery-tooltip';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { StackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
+import {
+  DeliveryAndAdministrationData,
+  VaccineDeliveryAndAdministrationsValue,
+} from './data-selection/select-delivery-and-administration-data';
+
+const vaccines = ['pfizer', 'moderna', 'astra_zeneca', 'janssen'] as const;
+
+vaccines.forEach((x) =>
+  assert(colors.data.vaccines[x], `missing vaccine color for vaccine ${x}`)
+);
 
 export function VaccineDeliveryAndAdministrationsAreaChart({
   data,
 }: {
-  data: Pick<
-    National,
-    | 'vaccine_administered'
-    | 'vaccine_delivery'
-    | 'vaccine_delivery_estimate'
-    | 'vaccine_administered_estimate'
-  >;
+  data: DeliveryAndAdministrationData;
 }) {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
+  const firstValue = first(data.values);
+  const vaccineNames = useMemo(
+    () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
+    [firstValue]
+  );
 
-  const text = siteText.vaccinaties;
-
-  const vaccineNames = useVaccineNames(data.vaccine_administered.last_value);
-
-  const [
-    vaccineDeliveryValues,
-    vaccineDeliveryEstimateValues,
-    vaccineAdministeredValues,
-    vaccineAdministeredEstimateValues,
-  ] = useVaccineDeliveryData(data);
+  const productNames =
+    siteText.vaccinaties.data.vaccination_chart.product_names;
 
   return (
     <ChartTile
-      title={text.grafiek.titel}
-      description={text.grafiek.omschrijving}
+      title={siteText.vaccinaties.grafiek.titel}
+      description={siteText.vaccinaties.grafiek.omschrijving}
       metadata={{
-        date: data.vaccine_delivery.last_value.date_of_report_unix,
-        source: text.bronnen.rivm,
+        date: firstValue?.date_of_report_unix,
+        source: siteText.vaccinaties.bronnen.rivm,
       }}
     >
-      <AreaChart<
-        NlVaccineDeliveryValue | NlVaccineDeliveryEstimateValue,
-        NlVaccineAdministeredValue | NlVaccineAdministeredEstimateValue
-      >
-        valueAnnotation={siteText.waarde_annotaties.x_miljoen}
-        timeframe="all"
-        formatTooltip={(values) => (
-          <FormatVaccinationsTooltip values={values} text={siteText} />
-        )}
-        divider={{
-          color: colors.annotation,
-          leftLabel: text.data.vaccination_chart.left_divider_label,
-          rightLabel: text.data.vaccination_chart.right_divider_label,
-        }}
-        trends={[
-          {
-            values: vaccineDeliveryValues,
-            displays: [
-              {
-                metricProperty: 'total',
-                strokeWidth: 3,
-                color: 'black',
-                legendLabel: text.data.vaccination_chart.delivered,
-              },
-            ],
-          },
-          {
-            values: vaccineDeliveryEstimateValues,
-            displays: [
-              {
-                metricProperty: 'total',
-                style: 'dashed',
-                strokeWidth: 3,
-                legendLabel: text.data.vaccination_chart.estimated,
-                color: 'black',
-              },
-            ],
-          },
-        ]}
-        areas={[
-          {
-            values: vaccineAdministeredValues,
-            displays: vaccineNames.map((key) => ({
-              metricProperty: key as any,
-              color: (colors.data.vaccines as any)[key],
-              legendLabel: key,
-            })),
-          },
-          {
-            values: vaccineAdministeredEstimateValues,
-            displays: vaccineNames.map((key) => ({
-              metricProperty: key as any,
-              pattern: 'hatched',
-              color: (colors.data.vaccines as any)[key],
-              legendLabel: key,
-            })),
-          },
-        ]}
-      />
-
-      <Legend
-        items={[
-          {
-            label: text.data.vaccination_chart.legend.available,
-            color: 'black',
-            shape: 'line',
-          },
-          {
-            label: text.data.vaccination_chart.legend.expected,
-            shape: 'custom',
-            shapeComponent: <HatchedSquare />,
-          },
-        ]}
-      />
-      <Legend
-        items={vaccineNames.map((key) => ({
-          label: replaceVariablesInText(
-            text.data.vaccination_chart.legend_label,
+      <TimeSeriesChart
+        dataOptions={{
+          valueAnnotation: siteText.waarde_annotaties.x_miljoen,
+          timespanAnnotations: [
             {
-              name: (text.data.vaccination_chart.product_names as any)[key],
-            }
-          ),
-          color: `data.vaccines.${key}`,
-          shape: 'square',
-        }))}
+              fill: 'hatched',
+              start: data.estimatedRange[0],
+              end: data.estimatedRange[1],
+              label:
+                siteText.vaccinaties.data.vaccination_chart.legend.expected,
+            },
+          ],
+          timeAnnotations: [
+            {
+              type: 'divider',
+              position: data.estimatedRange[0],
+              leftLabel:
+                siteText.vaccinaties.data.vaccination_chart.left_divider_label,
+              rightLabel:
+                siteText.vaccinaties.data.vaccination_chart.right_divider_label,
+            },
+          ],
+        }}
+        initialWidth={400}
+        minHeight={400}
+        timeframe="all"
+        values={data.values}
+        displayTooltipValueOnly
+        numGridLines={6}
+        formatTickValue={(x) => formatNumber(x / 1000000)}
+        formatTooltip={(x) => (
+          <VaccineDeliveryAndAdministrationsTooltip data={x} />
+        )}
+        seriesConfig={[
+          {
+            metricProperty: 'total_delivered',
+            type: 'line',
+            label: siteText.vaccinaties.data.vaccination_chart.legend.available,
+            color: 'black',
+            strokeWidth: 3,
+          },
+          ...vaccineNames.map<
+            StackedAreaSeriesDefinition<VaccineDeliveryAndAdministrationsValue>
+          >((x) => ({
+            metricProperty: x as keyof VaccineDeliveryAndAdministrationsValue,
+            type: 'stacked-area',
+            label: replaceVariablesInText(
+              siteText.vaccinaties.data.vaccination_chart.legend_label,
+              {
+                name: productNames[x],
+              }
+            ),
+            shortLabel: productNames[x],
+            color: colors.data.vaccines[x],
+            fillOpacity: 1,
+            strokeWidth: 0,
+          })),
+        ]}
       />
     </ChartTile>
-  );
-}
-
-function HatchedSquare() {
-  return (
-    <svg height="15" width="15">
-      <defs>
-        <pattern
-          id="hatch"
-          width="4"
-          height="4"
-          patternTransform="rotate(-45 0 0)"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="5"
-            style={{ stroke: 'grey', strokeWidth: 3 }}
-          />
-        </pattern>
-      </defs>
-      <rect height="15" width="15" fill="white" />
-      <rect height="15" width="15" fill="url(#hatch)" />
-    </svg>
   );
 }

@@ -11,7 +11,6 @@
  *   this script when the feature gets merged.
  */
 
-import { isDefined } from 'ts-is-present';
 import { getClient } from '../client';
 import {
   collapseTextMutations,
@@ -100,7 +99,9 @@ async function syncAdditionsToProduction(additions: TextMutation[]) {
   await prdTransaction.commit();
 
   if (failureCount === 0) {
-    console.log(`Successfully injected all ${successCount} text keys`);
+    console.log(
+      `Successfully injected all ${successCount} text keys (if they didn't exist already)`
+    );
   } else {
     console.log(
       `Injected ${successCount} text keys. Failed to add ${failureCount}`
@@ -136,6 +137,6 @@ async function applyDeletionsToDevelopment(deletions: TextMutation[]) {
   await devTransaction.commit();
 
   console.log(
-    `Deleted ${documentIdsToDelete} text documents (including draft versions)`
+    `Deleted ${documentIdsToDelete.length} text documents (including draft versions)`
   );
 }

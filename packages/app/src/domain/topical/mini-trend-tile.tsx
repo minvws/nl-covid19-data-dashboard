@@ -62,7 +62,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
         mb={2}
         data-cy={metricProperty}
       >
-        {formatNumber((value as unknown) as number)}
+        {formatNumber(value as unknown as number)}
       </Text>
 
       <Box>{text}</Box>

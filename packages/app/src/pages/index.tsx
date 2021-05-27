@@ -65,6 +65,7 @@ import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import GrafiekIcon from '~/assets/chart.svg';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -99,9 +100,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -145,7 +145,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
-                    differenceTexts={
+                    differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
@@ -165,7 +165,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty="admissions_on_date_of_reporting"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceTexts={
+                    differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
@@ -181,6 +181,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
+              icon={<GrafiekIcon />}
             >
               <Sitemap
                 quickLinksHeader={text.quick_links.header}
