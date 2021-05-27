@@ -29,9 +29,9 @@ const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
  * If enabled, a button will be rendered at the bottom-right which is only
  * visible on hover.
  */
-export function useLokalizeText(_locale: LanguageKey) {
+export function useLokalizeText(initialLocale: LanguageKey) {
   const [isActive, setIsActive] = useState(false);
-  const [locale, setLocale] = useState(_locale);
+  const [locale, setLocale] = useState(initialLocale);
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
 
@@ -65,7 +65,7 @@ export function useLokalizeText(_locale: LanguageKey) {
     });
 
     if (!isActive) {
-      setText(languages[_locale]);
+      setText(languages[initialLocale]);
     }
 
     if (isActive) {
@@ -124,7 +124,7 @@ export function useLokalizeText(_locale: LanguageKey) {
         subscription?.unsubscribe();
       };
     }
-  }, [_locale, dataset, isActive, locale]);
+  }, [initialLocale, dataset, isActive, locale]);
 
   return [text, toggleButton] as const;
 }
