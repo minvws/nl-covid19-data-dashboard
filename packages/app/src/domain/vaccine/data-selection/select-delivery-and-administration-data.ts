@@ -30,7 +30,7 @@ export function selectDeliveryAndAdministrationData(nlData: National) {
   const values: VaccineDeliveryAndAdministrationsValue[] = [];
 
   for (const [index] of vaccine_administered.values.entries()) {
-    let value = {
+    const value = {
       total_delivered: vaccine_delivery.values[index].total,
       date_unix: vaccine_delivery.values[index].date_start_unix,
       ...vaccine_delivery.values[index],
@@ -42,7 +42,7 @@ export function selectDeliveryAndAdministrationData(nlData: National) {
   }
 
   for (const [index] of vaccine_administered_estimate.values.entries()) {
-    let value = {
+    const value = {
       total_delivered: vaccine_delivery_estimate.values[index].total,
       date_unix: vaccine_delivery_estimate.values[index].date_start_unix,
       ...vaccine_delivery_estimate.values[index],
