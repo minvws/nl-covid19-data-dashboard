@@ -19,6 +19,23 @@
     "value": {
       "title": "vr_situations_value",
       "type": "object",
+      "required": [
+        "date_start_unix",
+        "date_end_unix",
+        "vrcode",
+        "has_sufficient_responses",
+        "situations_known_percentage",
+        "situations_known_total",
+        "investigations_total",
+        "home_and_visits",
+        "work",
+        "school_and_day_care",
+        "health_care",
+        "gathering",
+        "travel",
+        "hospitality",
+        "other"
+      ],
       "properties": {
         "date_start_unix": {
           "type": "integer"
@@ -51,7 +68,7 @@
         "school_and_day_care": {
           "type": ["number", "null"]
         },
-        "gatherings": {
+        "gathering": {
           "type": ["number", "null"]
         },
         "travel": {
@@ -64,22 +81,6 @@
           "type": ["number", "null"]
         }
       },
-      "required": [
-        "date_start_unix",
-        "date_end_unix",
-        "vrcode",
-        "has_sufficient_responses",
-        "situations_known_percentage",
-        "situations_known_total",
-        "investigations_total",
-        "home_and_visits",
-        "work",
-        "school_and_day_care",
-        "gatherings",
-        "travel",
-        "hospitality",
-        "other"
-      ],
       "additionalProperties": false
     }
   }
