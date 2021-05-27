@@ -170,6 +170,10 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         zIndex: -1,
         content: '""',
         pointerEvents: 'none',
+
+        '.has-no-js &': {
+          content: 'unset',
+        },
       },
     },
 
@@ -200,6 +204,23 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         backgroundColor: 'lightGray',
         transform: x.isOpen ? 'scaleX(1)' : 'scale(0)',
         transition: 'transform 0.4s',
+      },
+
+      '.has-no-js &': {
+        maxHeight: 0,
+        animation: `show-collapsible 1s forwards`,
+        animationDelay: '1s',
+        clipPath: 'none',
+      },
+
+      [`@keyframes show-collapsible`]: {
+        from: {
+          maxHeight: 0,
+        },
+
+        to: {
+          maxHeight: '100%',
+        },
       },
     },
   })
