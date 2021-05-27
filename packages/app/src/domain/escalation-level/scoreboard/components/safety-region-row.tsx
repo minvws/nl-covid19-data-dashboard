@@ -16,6 +16,7 @@ import { useEscalationThresholds } from '../../thresholds';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ReactNode } from 'react';
+import { isPresent } from 'ts-is-present';
 
 interface SafetyRegionRowProps {
   vrData: VrScoreboardData;
@@ -66,36 +67,39 @@ export function SafetyRegionRow({
         >
           <InlineText>{vrData.safetyRegionName}</InlineText>
         </VrLinkCell>
-        <Box
-          display={{ _: 'block', sm: 'flex' }}
-          flex="2"
-          justifyItems="center"
-        >
-          <BarScaleCell
-            value={escalationLevelData.positive_tested_per_100k}
-            thresholds={positiveTestedEscalationThresholds}
-            maxValue={maxPositiveTestedPer100k}
-            icon={
-              <GetestIcon
-                width="24px"
-                height="24px"
-                style={{ minWidth: '24px' }}
+        {isPresent(escalationLevelData.positive_tested_per_100k) &&
+          isPresent(escalationLevelData.hospital_admissions_per_million) && (
+            <Box
+              display={{ _: 'block', sm: 'flex' }}
+              flex="2"
+              justifyItems="center"
+            >
+              <BarScaleCell
+                value={escalationLevelData.positive_tested_per_100k}
+                thresholds={positiveTestedEscalationThresholds}
+                maxValue={maxPositiveTestedPer100k}
+                icon={
+                  <GetestIcon
+                    width="24px"
+                    height="24px"
+                    style={{ minWidth: '24px' }}
+                  />
+                }
               />
-            }
-          />
-          <BarScaleCell
-            value={escalationLevelData.hospital_admissions_per_million}
-            thresholds={hospitalAdmissionsEscalationThresholds}
-            maxValue={maxHospitalAdmissionsPerMillion}
-            icon={
-              <Ziekenhuis
-                width="24px"
-                height="24px"
-                style={{ minWidth: '24px' }}
+              <BarScaleCell
+                value={escalationLevelData.hospital_admissions_per_million}
+                thresholds={hospitalAdmissionsEscalationThresholds}
+                maxValue={maxHospitalAdmissionsPerMillion}
+                icon={
+                  <Ziekenhuis
+                    width="24px"
+                    height="24px"
+                    style={{ minWidth: '24px' }}
+                  />
+                }
               />
-            }
-          />
-        </Box>
+            </Box>
+          )}
       </Box>
     </Link>
   );

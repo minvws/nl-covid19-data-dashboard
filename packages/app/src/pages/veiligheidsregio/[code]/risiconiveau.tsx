@@ -179,69 +179,74 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
               {
                 /**
-                 * Only display risk level details when there's a known level
+                 * Only display risk level details when there's a known level and
+                 * data is available
                  */
-                isPresent(currentLevel) && (
-                  <Box
-                    width={{ _: '100%', lg: '50%' }}
-                    pl={{ _: 0, lg: 3 }}
-                    mb={3}
-                  >
-                    <UnorderedList>
-                      <ListItem
-                        title={text.momenteel.last_determined}
-                        icon={<Calender />}
-                        date={data.escalation_level.last_determined_unix}
-                      />
-                      <ListItem
-                        title={text.momenteel.established_with.title}
-                        icon={<BarChart />}
-                        date={[
-                          data.escalation_level.based_on_statistics_from_unix,
-                          data.escalation_level.based_on_statistics_to_unix,
-                        ]}
-                      >
-                        <UnorderedList>
-                          <ListItem
-                            title={text.momenteel.positive_tests.title}
-                            icon={<Getest />}
-                          >
-                            <DataDescription
-                              description={
-                                text.momenteel.positive_tests.description
-                              }
-                              escalationColor={escalationColor}
-                              amount={
-                                data.escalation_level.positive_tested_per_100k
-                              }
-                            />
-                          </ListItem>
-                          <ListItem
-                            title={text.momenteel.hospital_admissions.title}
-                            icon={<Ziekenhuis />}
-                          >
-                            <DataDescription
-                              description={
-                                text.momenteel.hospital_admissions.description
-                              }
-                              escalationColor={escalationColor}
-                              amount={
-                                data.escalation_level
-                                  .hospital_admissions_per_million
-                              }
-                            />
-                          </ListItem>
-                        </UnorderedList>
-                      </ListItem>
-                      <ListItem
-                        title={text.momenteel.next_determined}
-                        icon={<Calender />}
-                        date={data.escalation_level.next_determined_unix}
-                        isAroundDate
-                      />
-                    </UnorderedList>
-                  </Box>
-                )
+                isPresent(currentLevel) &&
+                  isPresent(data.escalation_level.positive_tested_per_100k) &&
+                  isPresent(
+                    data.escalation_level.hospital_admissions_per_million
+                  ) && (
+                    <Box
+                      width={{ _: '100%', lg: '50%' }}
+                      pl={{ _: 0, lg: 3 }}
+                      mb={3}
+                    >
+                      <UnorderedList>
+                        <ListItem
+                          title={text.momenteel.last_determined}
+                          icon={<Calender />}
+                          date={data.escalation_level.last_determined_unix}
+                        />
+                        <ListItem
+                          title={text.momenteel.established_with.title}
+                          icon={<BarChart />}
+                          date={[
+                            data.escalation_level.based_on_statistics_from_unix,
+                            data.escalation_level.based_on_statistics_to_unix,
+                          ]}
+                        >
+                          <UnorderedList>
+                            <ListItem
+                              title={text.momenteel.positive_tests.title}
+                              icon={<Getest />}
+                            >
+                              <DataDescription
+                                description={
+                                  text.momenteel.positive_tests.description
+                                }
+                                escalationColor={escalationColor}
+                                amount={
+                                  data.escalation_level.positive_tested_per_100k
+                                }
+                              />
+                            </ListItem>
+                            <ListItem
+                              title={text.momenteel.hospital_admissions.title}
+                              icon={<Ziekenhuis />}
+                            >
+                              <DataDescription
+                                description={
+                                  text.momenteel.hospital_admissions.description
+                                }
+                                escalationColor={escalationColor}
+                                amount={
+                                  data.escalation_level
+                                    .hospital_admissions_per_million
+                                }
+                              />
+                            </ListItem>
+                          </UnorderedList>
+                        </ListItem>
+                        <ListItem
+                          title={text.momenteel.next_determined}
+                          icon={<Calender />}
+                          date={data.escalation_level.next_determined_unix}
+                          isAroundDate
+                        />
+                      </UnorderedList>
+                    </Box>
+                  )
               }
             </Box>
 

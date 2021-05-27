@@ -55,10 +55,14 @@ export function selectScoreboardData() {
   ).map((vr) => vr.data);
 
   const maxHospitalAdmissionsPerMillion = Math.max(
-    ...allScoreboardRows.map((data) => data.hospital_admissions_per_million)
+    ...allScoreboardRows.map(
+      (data) => data.hospital_admissions_per_million ?? -Infinity
+    )
   );
   const maxPositiveTestedPer100k = Math.max(
-    ...allScoreboardRows.map((data) => data.positive_tested_per_100k)
+    ...allScoreboardRows.map(
+      (data) => data.positive_tested_per_100k ?? -Infinity
+    )
   );
 
   return {
