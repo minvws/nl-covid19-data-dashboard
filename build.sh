@@ -13,7 +13,7 @@ mkdir -p exports/en
 # Install dependencies
 yarn install --frozen-lockfile
 yarn workspace @corona-dashboard/common build
-yarn workspace @corona-dashboard/cms lokalize:export --dataset=production
+yarn workspace @corona-dashboard/cms lokalize:export --dataset=$NEXT_PUBLIC_SANITY_DATASET
 
 # Validate data
 yarn workspace @corona-dashboard/cli validate-json-all
