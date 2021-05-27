@@ -1,5 +1,4 @@
 import css from '@styled-system/css';
-import { useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
@@ -8,7 +7,7 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
+import { behaviorIdentifiers } from './behavior-types';
 import { isDefined } from 'ts-is-present';
 export interface BehaviorPerAgeGroupProps {
   title: string;
@@ -16,6 +15,8 @@ export interface BehaviorPerAgeGroupProps {
   complianceExplanation: string;
   supportExplanation: string;
   data: any;
+  currentId: any;
+  setCurrentId: any;
 }
 
 type ageStringTypes = {
@@ -32,10 +33,10 @@ export function BehaviorPerAgeGroup({
   data,
   complianceExplanation,
   supportExplanation,
+  currentId,
+  setCurrentId,
 }: BehaviorPerAgeGroupProps) {
   const { siteText } = useIntl();
-
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
   const behaviorIndentifiersData = behaviorIdentifiers.map((id) => {
     const label = siteText.gedrag_onderwerpen[id];

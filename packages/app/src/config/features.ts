@@ -33,6 +33,6 @@ export const features: Feature[] = [
   },
   {
     name: 'behaviorPage', 
-    isEnabled: false,
+    isEnabled: true,
   }
 ];

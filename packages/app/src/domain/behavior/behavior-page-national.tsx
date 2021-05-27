@@ -16,7 +16,8 @@ import { NationalPageMetricData } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
-
+import { BehaviorIdentifier } from './behavior-types';
+import { useEffect, useState } from 'react';
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -32,6 +33,12 @@ export function BehaviorPageNational({
 
   const { nl_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
+
+  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+
+  useEffect(() => {
+    console.log(currentId);
+  }, [currentId]);
 
   const { sortedCompliance, sortedSupport } =
     useFormatAndSortBehavior(behaviorLastValue);
@@ -122,6 +129,7 @@ export function BehaviorPageNational({
         sortedCompliance={sortedCompliance}
         sortedSupport={sortedSupport}
         annotation={nl_gedrag.basisregels.annotatie}
+        setCurrentId={setCurrentId}
       />
 
       <BehaviorLineChartTile
@@ -133,12 +141,16 @@ export function BehaviorPageNational({
           ],
           source: nl_gedrag.bronnen.rivm,
         }}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
 
       <BehaviorChoroplethsTile
         title={nl_gedrag.verdeling_in_nederland.titel}
         description={nl_gedrag.verdeling_in_nederland.description}
         data={behaviorData}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
 
       <BehaviorPerAgeGroup
@@ -151,6 +163,8 @@ export function BehaviorPageNational({
           nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
         }
         data={data.behavior_per_age_group}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
 
       <MoreInformation />

@@ -20,6 +20,7 @@ interface BehaviorTableProps {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
   annotation: string;
+  setCurrentId: any;
 }
 
 export function BehaviorTable({
@@ -30,6 +31,7 @@ export function BehaviorTable({
   sortedCompliance,
   sortedSupport,
   annotation,
+  setCurrentId,
 }: BehaviorTableProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
@@ -87,7 +89,11 @@ export function BehaviorTable({
                     <Box minWidth={32} color="black" pr={2} display="flex">
                       <BehaviorIcon name={behavior.id} size={20} />
                     </Box>
-                    <DescriptionWithIcon description={behavior.description} />
+                    <DescriptionWithIcon
+                      description={behavior.description}
+                      id={behavior.id}
+                      setCurrentId={setCurrentId}
+                    />
                   </Box>
                 </Cell>
                 <Cell>
@@ -128,11 +134,23 @@ export function BehaviorTable({
  * Render every word in a span and add the chevron to the last word.
  * this is for the word wrapping when the screen gets smaller.
  */
-function DescriptionWithIcon({ description }: { description: string }) {
+function DescriptionWithIcon({
+  description,
+  id,
+  setCurrentId,
+}: {
+  description: string;
+  id: any;
+  setCurrentId: any;
+}) {
   const splittedWords = description.split(' ');
 
+  const buttonClickHandler = () => {
+    setCurrentId(id);
+  };
+
   return (
-    <Button>
+    <Button onClick={buttonClickHandler}>
       {splittedWords.map((word, index) => (
         <InlineText key={index} css={css({ whiteSpace: 'pre-wrap' })}>
           {splittedWords.length - 1 === index ? (

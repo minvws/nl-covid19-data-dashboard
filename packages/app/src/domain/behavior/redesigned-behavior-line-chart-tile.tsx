@@ -3,7 +3,6 @@ import {
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -13,16 +12,20 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
+import { behaviorIdentifiers } from './behavior-types';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[] | RegionalBehaviorValue[];
   metadata: MetadataProps;
+  currentId: any;
+  setCurrentId: any;
 }
 
 export function BehaviorLineChartTile({
   values,
   metadata,
+  currentId,
+  setCurrentId,
 }: BehaviorLineChartTileProps) {
   const { siteText } = useIntl();
   const chartText = siteText.gedrag_common.line_chart;
@@ -53,11 +56,10 @@ export function BehaviorLineChartTile({
     })
     .filter(isPresent);
 
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
-    behaviorIdentifierWithData[0].id
-  );
-  const selectedComplianceValueKey = `${currentId}_compliance` as keyof NationalBehaviorValue;
-  const selectedSupportValueKey = `${currentId}_support` as keyof NationalBehaviorValue;
+  const selectedComplianceValueKey =
+    `${currentId}_compliance` as keyof NationalBehaviorValue;
+  const selectedSupportValueKey =
+    `${currentId}_support` as keyof NationalBehaviorValue;
 
   return (
     <ChartTile title={chartText.title} metadata={metadata}>
