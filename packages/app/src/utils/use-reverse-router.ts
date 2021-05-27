@@ -34,7 +34,7 @@ export function useReverseRouter() {
       gm: {
         index: (code?: string) =>
           code
-            ? reverseRouter.gm.positiefGetesteMensen(code) + openMenuSuffix
+            ? reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
             : `/gemeente`,
         positiefGetesteMensen: (code: string) =>
           `/gemeente/${code}/positief-geteste-mensen`,
