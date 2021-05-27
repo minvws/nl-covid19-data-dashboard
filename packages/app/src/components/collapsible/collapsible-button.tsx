@@ -220,7 +220,6 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 
         to: {
           maxHeight: '100%',
-          clipPath: 'none',
         },
       },
     },
