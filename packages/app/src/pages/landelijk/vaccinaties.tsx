@@ -2,7 +2,6 @@ import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiValue } from '~/components/kpi-value';
@@ -37,12 +36,6 @@ import {
 import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
-const scaledVaccineIcon = (
-  <Box p={2}>
-    <VaccinatiesIcon />
-  </Box>
-);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -145,7 +138,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={text.bereidheid_section.title}
             subtitle={text.bereidheid_section.description}
             reference={text.bereidheid_section.reference}
-            icon={scaledVaccineIcon}
+            icon={<VaccinatiesIcon />}
             metadata={{
               datumsText: text.bereidheid_datums,
               dateOrRange:
@@ -247,7 +240,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <ContentHeader
             title={text.stock_and_delivery_section.title}
-            icon={scaledVaccineIcon}
+            icon={<VaccinatiesIcon />}
             subtitle={text.stock_and_delivery_section.description}
             reference={text.stock_and_delivery_section.reference}
             metadata={{

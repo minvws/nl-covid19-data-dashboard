@@ -18,6 +18,7 @@ import {
   EscalationLevelInfoLabel,
   EscalationLevelString,
 } from '~/components/escalation-level';
+import { IconContainer } from '~/components/icon-container';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -311,7 +312,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 interface ListItemProps {
-  icon: ReactNode;
+  icon: JSX.Element;
   title: string;
   date?: number | number[];
   children?: ReactNode;
@@ -337,17 +338,9 @@ function ListItem({
       })}
     >
       <Box display="flex">
-        <Box
-          display="flex"
-          alignItems="center"
-          minWidth="26px"
-          width={26}
-          height={18}
-          mt="2px"
-          mr={2}
-        >
+        <IconContainer width="2rem" height="1.6rem">
           {icon}
-        </Box>
+        </IconContainer>
         <Text
           m={0}
           css={css({
@@ -417,10 +410,6 @@ const UnorderedList = styled.ul(() =>
     margin: 0,
     padding: 0,
     listStyleType: 'none',
-
-    svg: {
-      width: '100%',
-    },
 
     'ul:first-of-type li': {
       borderBottom: 0,
