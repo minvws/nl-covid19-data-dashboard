@@ -39,6 +39,9 @@
     "school_and_day_care": {
       "type": ["number", "null"]
     },
+    "health_care": {
+      "type": ["number", "null"]
+    },
     "gathering": {
       "type": ["number", "null"]
     },

@@ -192,7 +192,6 @@ export interface National {
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock: NlVaccineStock;
-  situations?: NlSituations;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -829,39 +828,6 @@ export interface NlVaccineStockValue {
   date_of_insertion_unix: number;
   date_unix: number;
 }
-export interface NlSituations {
-  values: NlSituationsValue[];
-  last_value: NlSituationsValue;
-}
-export interface NlSituationsValue {
-  date_start_unix: number;
-  date_end_unix: number;
-  regions_with_sufficient_responses_total: number;
-  situation_known_percentage?: number;
-  home: number | null;
-  visit: number | null;
-  work: number | null;
-  school_and_day_care: number | null;
-  doctor: number | null;
-  hospital: number | null;
-  other_health_care: number | null;
-  nursing_home: number | null;
-  residential_care_disabled: number | null;
-  residential_care_other: number | null;
-  day_care_elderly_disabled: number | null;
-  day_care_other: number | null;
-  hospice: number | null;
-  social_gathering: number | null;
-  travel: number | null;
-  flight: number | null;
-  hospitality: number | null;
-  student_activity: number | null;
-  leisure: number | null;
-  religious_activity: number | null;
-  choir: number | null;
-  funeral: number | null;
-  other: number | null;
-}
 
 export interface Regionaal {
   last_generated: string;
@@ -1179,28 +1145,13 @@ export interface VrSituationsValue {
   situations_known_percentage: number;
   situations_known_total: number;
   investigations_total: number;
-  home: number | null;
-  visit: number | null;
+  home_and_visits: number | null;
   work: number | null;
   school_and_day_care: number | null;
-  doctor: number | null;
-  hospital: number | null;
-  other_health_care: number | null;
-  nursing_home: number | null;
-  residential_care_disabled: number | null;
-  residential_care_other: number | null;
-  day_care_elderly_disabled: number | null;
-  day_care_other: number | null;
-  hospice: number | null;
-  social_gathering: number | null;
+  health_care: number | null;
+  gathering: number | null;
   travel: number | null;
-  flight: number | null;
   hospitality: number | null;
-  student_activity: number | null;
-  leisure: number | null;
-  religious_activity: number | null;
-  choir: number | null;
-  funeral: number | null;
   other: number | null;
 }
 
@@ -1325,4 +1276,12 @@ export interface VrCollectionSituations {
   date_end_unix: number;
   vrcode: string;
   has_sufficient_responses: boolean;
+  home_and_visits: number | null;
+  work: number | null;
+  school_and_day_care: number | null;
+  health_care: number | null;
+  gathering: number | null;
+  travel: number | null;
+  hospitality: number | null;
+  other: number | null;
 }
