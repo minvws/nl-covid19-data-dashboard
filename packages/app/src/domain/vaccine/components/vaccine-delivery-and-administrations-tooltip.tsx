@@ -46,7 +46,7 @@ export function VaccineDeliveryAndAdministrationsTooltip({
   }
 
   const dateEndString = formatDateFromSeconds(
-    data.value.date_end_unix,
+    data.value.date_unix,
     'day-month'
   );
 
