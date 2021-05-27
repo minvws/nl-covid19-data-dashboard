@@ -1,7 +1,7 @@
 // lib/sanity.ts
 import { assert, imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
-import { ClientConfig, SanityClient } from '@sanity/client';
+import { ClientConfig } from '@sanity/client';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/find-closest-size';
 
