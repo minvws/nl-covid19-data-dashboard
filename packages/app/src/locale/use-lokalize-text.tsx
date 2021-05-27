@@ -18,7 +18,7 @@ import { LokalizeText } from '~/types/cms';
 const datasets = ['development', 'production', 'keys'] as const;
 
 const query = `*[_type == 'lokalizeText']`;
-const enableHotReload = process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1';
+const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
 
 /**
  * This hook will return an object which contains all lokalize translations.
