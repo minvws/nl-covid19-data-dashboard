@@ -13,10 +13,7 @@
       "$ref": "#/definitions/value"
     }
   },
-  "required": [
-    "values",
-    "last_value"
-  ],
+  "required": ["values", "last_value"],
   "additionalProperties": false,
   "definitions": {
     "value": {
@@ -45,10 +42,7 @@
         "investigations_total": {
           "type": "integer"
         },
-        "home": {
-          "type": ["number", "null"]
-        },
-        "visit": {
+        "home_and_visits": {
           "type": ["number", "null"]
         },
         "work": {
@@ -57,58 +51,13 @@
         "school_and_day_care": {
           "type": ["number", "null"]
         },
-        "doctor": {
-          "type": ["number", "null"]
-        },
-        "hospital": {
-          "type": ["number", "null"]
-        },
-        "other_health_care": {
-          "type": ["number", "null"]
-        },
-        "nursing_home": {
-          "type": ["number", "null"]
-        },
-        "residential_care_disabled": {
-          "type": ["number", "null"]
-        },
-        "residential_care_other": {
-          "type": ["number", "null"]
-        },
-        "day_care_elderly_disabled": {
-          "type": ["number", "null"]
-        },
-        "day_care_other": {
-          "type": ["number", "null"]
-        },
-        "hospice": {
-          "type": ["number", "null"]
-        },
-        "social_gathering": {
+        "gatherings": {
           "type": ["number", "null"]
         },
         "travel": {
           "type": ["number", "null"]
         },
-        "flight": {
-          "type": ["number", "null"]
-        },
         "hospitality": {
-          "type": ["number", "null"]
-        },
-        "student_activity": {
-          "type": ["number", "null"]
-        },
-        "leisure": {
-          "type": ["number", "null"]
-        },
-        "religious_activity": {
-          "type": ["number", "null"]
-        },
-        "choir": {
-          "type": ["number", "null"]
-        },
-        "funeral": {
           "type": ["number", "null"]
         },
         "other": {
@@ -123,28 +72,12 @@
         "situations_known_percentage",
         "situations_known_total",
         "investigations_total",
-        "home",
-        "visit",
+        "home_and_visits",
         "work",
         "school_and_day_care",
-        "doctor",
-        "hospital",
-        "other_health_care",
-        "nursing_home",
-        "residential_care_disabled",
-        "residential_care_other",
-        "day_care_elderly_disabled",
-        "day_care_other",
-        "hospice",
-        "social_gathering",
+        "gatherings",
         "travel",
-        "flight",
         "hospitality",
-        "student_activity",
-        "leisure",
-        "religious_activity",
-        "choir",
-        "funeral",
         "other"
       ],
       "additionalProperties": false
