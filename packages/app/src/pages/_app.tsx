@@ -1,3 +1,4 @@
+import { assert } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
 import Router from 'next/router';

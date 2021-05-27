@@ -56,10 +56,10 @@ export function useLokalizeText(_locale: LanguageKey) {
 
     function updateSiteText() {
       if (isCancelled) return;
-      setText(
-        createSiteTextFromLokalizeDocuments(lokalizeTextsRef.current, locale)
-      );
+      const flatTexts = createFlatTexts(lokalizeTextsRef.current);
+      setText(() => unflatten(flatTexts[locale], { object: true }));
     }
+
     const updateSiteTextDebounced = debounce(updateSiteText, 1000, {
       trailing: true,
     });
@@ -82,36 +82,46 @@ export function useLokalizeText(_locale: LanguageKey) {
         subscription = client
           .listen(query)
           .subscribe((update: MutationEvent<LokalizeText>) => {
-            if (update.result && update.transition === 'appear') {
+            /**
+             * `appear`-transition is emitted for newly created documents/drafts
+             */
+            if (update.transition === 'appear' && update.result) {
               lokalizeTextsRef.current.push(update.result);
+              updateSiteTextDebounced();
             }
 
-            if (update.result && update.transition === 'update') {
+            /**
+             * `update`-transition is emitted for updated documents/drafts
+             */
+            if (update.transition === 'update' && update.result) {
               const index = lokalizeTextsRef.current.findIndex(
                 (x) => x._id === update.documentId
               );
 
               if (index > -1) {
                 lokalizeTextsRef.current[index] = update.result;
+                updateSiteTextDebounced();
               }
             }
 
+            /**
+             * `disappear`-transition is emitted for deleted documents/drafts
+             */
             if (update.transition === 'disappear') {
               const index = lokalizeTextsRef.current.findIndex(
                 (x) => x._id === update.documentId
               );
               if (index > -1) {
                 lokalizeTextsRef.current.splice(index, 1);
+                updateSiteTextDebounced();
               }
             }
-
-            updateSiteTextDebounced();
           });
       });
 
       return () => {
-        subscription?.unsubscribe();
         isCancelled = true;
+        subscription?.unsubscribe();
       };
     }
   }, [_locale, dataset, isActive, locale]);
@@ -119,6 +129,15 @@ export function useLokalizeText(_locale: LanguageKey) {
   return [text, toggleButton] as const;
 }
 
+/**
+ * replace values with their paths, eg:
+ *
+ * input:
+ *     { foo: { bar: 1, baz: 2 }}
+ *
+ * output:
+ *     { foo: { bar: 'foo.bar', baz: 'foo.baz' }}
+ */
 function mapSiteTextValuesToKeys(siteText: SiteText) {
   const keys = Object.keys(flatten(siteText));
 
@@ -128,14 +147,6 @@ function mapSiteTextValuesToKeys(siteText: SiteText) {
   );
 
   return unflatten(obj, { object: true }) as SiteText;
-}
-
-function createSiteTextFromLokalizeDocuments(
-  documents: SanityDocument<LokalizeText>[],
-  locale: LanguageKey
-) {
-  const flatTexts = createFlatTexts(documents);
-  return unflatten(flatTexts[locale], { object: true }) as SiteText;
 }
 
 interface ToggleProps<T extends string> {
@@ -163,7 +174,9 @@ function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
             display: 'inline-block',
             bg: x === value ? 'blue' : 'white',
             color: x === value ? 'white' : 'inherit',
-            cursor: 'pointer',
+            cursor: x === value ? 'default' : 'pointer',
+            transition: 'background 100ms linear',
+            '&:hover': { bg: x === value ? 'blue' : 'tileGray' },
           })}
         >
           <VisuallyHidden>
@@ -193,7 +206,7 @@ function ToggleButton({
 }) {
   return (
     <Container isActive={isActive}>
-      <ToggleChildren>{isActive && children}</ToggleChildren>
+      <DisplayOnHover>{isActive && children}</DisplayOnHover>
       <StyledToggleButton isActive={isActive} color={color} onClick={onClick}>
         <DatabaseIcon
           style={{
@@ -207,7 +220,7 @@ function ToggleButton({
   );
 }
 
-const ToggleChildren = styled.div(
+const DisplayOnHover = styled.div(
   css({
     opacity: 0,
     display: 'flex',
@@ -220,7 +233,10 @@ const ToggleChildren = styled.div(
 const Container = styled.div<{ isActive: boolean }>((x) =>
   css({
     opacity: x.isActive ? 1 : 0,
-    '&:hover': { opacity: 1, [ToggleChildren]: { opacity: 1 } },
+    '&:hover': {
+      opacity: 1,
+      [DisplayOnHover]: { opacity: 1 },
+    },
     transition: 'opacity 100ms linear',
     position: 'fixed',
     bottom: 0,
