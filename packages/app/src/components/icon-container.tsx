@@ -1,16 +1,18 @@
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import { Children, cloneElement } from 'react';
 import { DisplayProps, HeightProps, WidthProps } from 'styled-system';
 import { Box } from './base';
 
 type Props = {
-  children: ReactNode;
+  children: JSX.Element;
+  centered?: boolean;
 } & WidthProps &
   HeightProps &
   DisplayProps;
 
 export function IconContainer(props: Props) {
-  const { width, height = width, children, display = 'inline-block' } = props;
+  const { width, height, children, display = 'inline-block', centered } = props;
+  const aspectRatio = centered ? 'xMidYMid meet' : 'xMinYMid meet';
   return (
     <Box
       role="img"
@@ -20,13 +22,17 @@ export function IconContainer(props: Props) {
       display={display}
       css={css({
         '& svg': {
-          height,
-          flexGrow: 0,
-          flexShrink: 0,
+          height: '100%',
+          width: '100%',
         },
       })}
     >
-      {children}
+      {Children.map(children, (child) => {
+        return cloneElement(child, {
+          preserveAspectRatio: aspectRatio,
+          focusable: 'false',
+        });
+      })}
     </Box>
   );
 }

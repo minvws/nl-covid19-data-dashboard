@@ -346,7 +346,7 @@ const createSvgMouseOutHandler = (
 ) => {
   return () => {
     if (timeout.current < 0) {
-      timeout.current = window.setTimeout(() => setTooltip(undefined), 500);
+      timeout.current = window.setTimeout(() => setTooltip(undefined), 10);
     }
   };
 };

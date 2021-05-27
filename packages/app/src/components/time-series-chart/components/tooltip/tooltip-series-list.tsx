@@ -3,17 +3,17 @@ import {
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { useIntl } from '~/intl';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
+import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { TooltipData } from './types';
-import { colors } from '~/style/theme';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
   data: tooltipData,

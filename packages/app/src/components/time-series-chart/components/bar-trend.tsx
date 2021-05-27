@@ -24,6 +24,7 @@ type BarTrendProps = {
   benchmark?: BenchmarkConfig;
   aboveBenchmarkColor?: string;
   aboveBenchmarkFillOpacity?: number;
+  id: string;
 };
 
 export function BarTrend({
@@ -37,6 +38,7 @@ export function BarTrend({
   benchmark,
   aboveBenchmarkColor,
   aboveBenchmarkFillOpacity = DEFAULT_FILL_OPACITY,
+  id,
 }: BarTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
@@ -111,6 +113,7 @@ export function BarTrend({
             height={barHeight}
             width={barWidth}
             fill={transparentize(1 - fillOpacity, color)}
+            id={id}
           />
         );
       })}

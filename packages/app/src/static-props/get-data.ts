@@ -193,7 +193,7 @@ export function selectGmData<T extends keyof Municipal = never>(
 
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, gmData.data[p]),
-      {} as Pick<Regionaal, T>
+      {} as Pick<Municipal, T>
     );
 
     return { selectedGmData, municipalityName: gmData.municipalityName };

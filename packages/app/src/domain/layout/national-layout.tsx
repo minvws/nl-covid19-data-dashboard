@@ -45,6 +45,7 @@ export const nlPageMetricNames = [
   'behavior',
   'difference',
   'corona_melder_app',
+  'behavior_per_age_group',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];

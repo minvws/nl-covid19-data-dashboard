@@ -1,19 +1,20 @@
-import { useMemo, useState } from 'react';
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { asResponsiveArray } from '~/style/utils';
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from '@reach/disclosure';
+import css from '@styled-system/css';
+import { useMemo, useState } from 'react';
+import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
+import { asResponsiveArray } from '~/style/utils';
+import { IconContainer } from '../icon-container';
 import { useSetLinkTabbability } from './use-set-link-tabbability';
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;
-  icon?: React.ReactNode;
+  icon?: JSX.Element;
 }
 
 export const CollapsibleButton = ({
@@ -85,7 +86,7 @@ export const CollapsibleButton = ({
         <ButtonContainer>
           <Box ref={buttonObserver.ref} display="flex">
             <DisclosureButton>
-              {icon && <IconContainer>{icon}</IconContainer>}
+              {icon && <IconContainer width={'2.5rem'}>{icon}</IconContainer>}
               {label}
               <Chevron open={isOpen} />
             </DisclosureButton>
@@ -201,17 +202,6 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         transform: x.isOpen ? 'scaleX(1)' : 'scale(0)',
         transition: 'transform 0.4s',
       },
-    },
-  })
-);
-
-const IconContainer = styled.div(
-  css({
-    mr: 2,
-
-    svg: {
-      transition: 'fill 0.2s ease-out',
-      fill: 'black',
     },
   })
 );

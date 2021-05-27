@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Box } from '../base';
 import { IconContainer } from '../icon-container';
 import { Heading, HeadingLevel, HeadingProps } from '../typography';
 
 type TitleProps = {
   title: string;
-  icon?: ReactNode;
+  icon?: JSX.Element;
   subtitle?: string;
   level?: HeadingLevel;
 } & Omit<HeadingProps, 'children' | 'level'>;
@@ -27,7 +27,11 @@ export function Title(props: TitleProps) {
       alignItems="center"
       m={0}
     >
-      {icon && <IconContainer width="2rem">{icon}</IconContainer>}
+      {icon && (
+        <IconContainer width="2.5rem" height="2.5rem">
+          {icon}
+        </IconContainer>
+      )}
 
       <Box>
         <Heading
