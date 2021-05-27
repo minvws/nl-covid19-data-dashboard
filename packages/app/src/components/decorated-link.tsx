@@ -7,6 +7,7 @@ import { DecoratedLink as DecoratedLinkDocument } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { Box } from './base';
 import { SanityImage } from './cms/sanity-image';
+import { IconContainer } from './icon-container';
 import { InlineText } from './typography';
 
 type DecoratedLinkProps = {
@@ -51,15 +52,15 @@ export const CompactDecoratedLink = ({
               </InlineText>
             </Box>
             <Box
-              width="5rem"
-              display="flex"
-              alignSelf="center"
-              justifyContent="center"
-              alignItems="center"
               marginLeft="auto"
               color="link"
+              width="5rem"
+              display="flex"
+              justifyContent="center"
             >
-              <ExternalLinkIcon />
+              <IconContainer height="5rem">
+                <ExternalLinkIcon />
+              </IconContainer>
             </Box>
           </Box>
         </Box>
@@ -102,15 +103,15 @@ export const ExpandedDecoratedLink = ({
             </InlineText>
 
             <Box
-              width="5rem"
-              display="flex"
-              alignSelf="center"
-              justifyContent="center"
-              alignItems="center"
               marginLeft="auto"
               color="link"
+              width="5rem"
+              display="flex"
+              justifyContent="center"
             >
-              <ChevronIcon width="9px" />
+              <IconContainer height="5rem">
+                <ChevronIcon />
+              </IconContainer>
             </Box>
           </Box>
         </Box>
