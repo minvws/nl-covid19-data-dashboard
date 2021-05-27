@@ -43,9 +43,9 @@ export function Scoreboard({
           key={row.escalationLevel}
         >
           <Box bg="tileGray">
-            <Box px={{ _: '1.5rem', sm: 4 }} pb={2}>
-              <Headers />
-              {row.vrData.map((vr) => (
+            <Box px={{ _: '1.5rem', sm: 4 }}>
+              {row.escalationLevel !== null && <Headers />}
+              {row.vrData.map((vr, index) => (
                 <SafetyRegionRow
                   vrData={vr}
                   key={vr.vrCode}
@@ -53,6 +53,11 @@ export function Scoreboard({
                     maxHospitalAdmissionsPerMillion
                   }
                   maxPositiveTestedPer100k={maxPositiveTestedPer100k}
+                  /**
+                   * The "onbekend" section has no <Header /> which would
+                   * result in a double border
+                   */
+                  hideBorder={row.escalationLevel === null && index === 0}
                 />
               ))}
             </Box>

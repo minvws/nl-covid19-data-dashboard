@@ -22,12 +22,14 @@ interface SafetyRegionRowProps {
   vrData: VrScoreboardData;
   maxHospitalAdmissionsPerMillion: number;
   maxPositiveTestedPer100k: number;
+  hideBorder?: boolean;
 }
 
 export function SafetyRegionRow({
   vrData,
   maxHospitalAdmissionsPerMillion,
   maxPositiveTestedPer100k,
+  hideBorder,
 }: SafetyRegionRowProps) {
   const {
     hospitalAdmissionsEscalationThresholds,
@@ -51,7 +53,9 @@ export function SafetyRegionRow({
         justifyItems="flex-start"
         borderTopColor="lightGray"
         borderTopStyle="solid"
-        borderTopWidth="1px"
+        borderTopWidth={hideBorder ? 0 : '1px'}
+        minHeight={48}
+        py={3}
         css={css({
           cursor: 'pointer',
           textDecoration: 'none',
@@ -59,6 +63,7 @@ export function SafetyRegionRow({
             color: 'blue',
           },
         })}
+        spacing={{ _: 3, lg: 0 }}
       >
         <VrLinkCell
           color={
@@ -67,13 +72,16 @@ export function SafetyRegionRow({
         >
           <InlineText>{vrData.safetyRegionName}</InlineText>
         </VrLinkCell>
-        {isPresent(escalationLevelData.positive_tested_per_100k) &&
-          isPresent(escalationLevelData.hospital_admissions_per_million) && (
-            <Box
-              display={{ _: 'block', sm: 'flex' }}
-              flex="2"
-              justifyItems="center"
-            >
+
+        {(isPresent(escalationLevelData.positive_tested_per_100k) ||
+          isPresent(escalationLevelData.hospital_admissions_per_million)) && (
+          <Box
+            display={{ _: 'block', sm: 'flex' }}
+            flex="2"
+            justifyItems="center"
+            spacing={{ _: 3, sm: 0 }}
+          >
+            {isPresent(escalationLevelData.positive_tested_per_100k) && (
               <BarScaleCell
                 value={escalationLevelData.positive_tested_per_100k}
                 thresholds={positiveTestedEscalationThresholds}
@@ -86,6 +94,8 @@ export function SafetyRegionRow({
                   />
                 }
               />
+            )}
+            {isPresent(escalationLevelData.hospital_admissions_per_million) && (
               <BarScaleCell
                 value={escalationLevelData.hospital_admissions_per_million}
                 thresholds={hospitalAdmissionsEscalationThresholds}
@@ -98,8 +108,9 @@ export function SafetyRegionRow({
                   />
                 }
               />
-            </Box>
-          )}
+            )}
+          </Box>
+        )}
       </Box>
     </Link>
   );
@@ -119,14 +130,7 @@ const BarScaleCell = ({
   const { formatNumber } = useIntl();
 
   return (
-    <Box
-      flex="1"
-      display="flex"
-      width="100%"
-      pb={{ _: 2, lg: 2 }}
-      pt={{ _: 0, lg: 2 }}
-      color="black"
-    >
+    <Box flex="1" display="flex" alignItems="center" width="100%" color="black">
       <Box
         display={{ _: 'flex', sm: 'none' }}
         alignItems="center"
@@ -145,33 +149,30 @@ const BarScaleCell = ({
       >
         <InlineText fontWeight="bold">{formatNumber(value)}</InlineText>
       </Box>
-      <Box pr={{ _: 3, sm: 5 }} pb={2} flexGrow={1}>
-        <Box mb={{ _: 2, md: 1 }} width={200}>
-          <CategoricalBarScale
-            hideLegend
-            hideNumbers
-            categories={thresholds}
-            value={value}
-            maxValue={maxValue}
-          />
-        </Box>
+
+      <Box width={200}>
+        <CategoricalBarScale
+          hideLegend
+          hideNumbers
+          categories={thresholds}
+          value={value}
+          maxValue={maxValue}
+        />
       </Box>
     </Box>
   );
 };
 
-const VrLinkCell = styled.div<{ color?: string }>((x) =>
+export const VrLinkCell = styled.div<{ color?: string }>((x) =>
   css({
     flex: '0 0 18rem',
     display: 'flex',
     alignItems: 'center',
-    mt: asResponsiveArray({ _: 3, lg: 0 }),
-    mb: asResponsiveArray({ _: 2, lg: 0 }),
     pr: 2,
     minWidth: '11em',
     '&::before': asResponsiveArray({
       lg: {
-        content: '""',
+        content: x.color ? '""' : undefined,
         display: 'inline-block',
         height: '12px',
         width: '12px',
