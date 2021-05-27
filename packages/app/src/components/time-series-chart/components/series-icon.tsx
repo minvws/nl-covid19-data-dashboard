@@ -1,17 +1,26 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { SeriesConfig } from '../logic';
+import { findSplitPointForValue, SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
 import { BarTrendIcon } from './bar-trend';
+import { isPresent } from 'ts-is-present';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
+  /**
+   * Value here is passed in from looking up the metricProperty in the original
+   * values array that was passed to the chart. These values can be number or
+   * null, but we also want the value to be optional because other than
+   * 'split-area' types we do not need to use this value.
+   */
+  value?: number | null;
 }
 
 export function SeriesIcon<T extends TimestampedValue>({
   config,
+  value,
 }: SeriesIconProps<T>) {
   switch (config.type) {
     case 'line':
@@ -45,6 +54,13 @@ export function SeriesIcon<T extends TimestampedValue>({
       return (
         <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
       );
+    case 'split-bar':
+      return isPresent(value) ? (
+        <BarTrendIcon
+          color={findSplitPointForValue(config.splitPoints, value).color}
+          fillOpacity={config.fillOpacity}
+        />
+      ) : null;
     default:
       return null;
   }

@@ -9,6 +9,7 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useUniqueId } from '../../utils/use-unique-id';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -24,12 +25,13 @@ import {
 } from './components';
 import { Benchmark } from './components/benchmark';
 import { Series } from './components/series';
+import { TimeAnnotation } from './components/time-annotation';
 import {
   calculateSeriesMaximum,
-  omitValuePropertiesForAnnotation,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
+  omitValuePropertiesForAnnotation,
   SeriesConfig,
   useHoverState,
   useLegendItems,
@@ -95,6 +97,7 @@ export type TimeSeriesChartProps<
    * the vaccine support chart.
    */
   numGridLines?: number;
+  showWeekNumbers?: boolean;
   tickValues?: number[];
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
@@ -132,6 +135,7 @@ export function TimeSeriesChart<
   timeframe = 'all',
   formatTooltip,
   dataOptions,
+  showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
@@ -152,12 +156,15 @@ export function TimeSeriesChart<
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
+  const chartId = useUniqueId();
+
   const {
     valueAnnotation,
     isPercentage,
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
+    timeAnnotations,
   } = dataOptions || {};
 
   const {
@@ -171,9 +178,8 @@ export function TimeSeriesChart<
     width,
     height,
     paddingLeft,
+    paddingTop: showWeekNumbers ? 20 : undefined,
   });
-
-  const legendItems = useLegendItems(seriesConfig, dataOptions);
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
@@ -197,13 +203,26 @@ export function TimeSeriesChart<
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      bounds,
-      numTicks: yTickValues?.length || numGridLines,
-    }
+  const {
+    xScale,
+    yScale,
+    getX,
+    getY,
+    getY0,
+    getY1,
+    dateSpanWidth,
+    hasAllZeroValues,
+  } = useScales({
+    values,
+    maximumValue: seriesMax,
+    bounds,
+    numTicks: yTickValues?.length || numGridLines,
+  });
+
+  const legendItems = useLegendItems(
+    xScale.domain(),
+    seriesConfig,
+    dataOptions
   );
 
   const today = useCurrentDate();
@@ -319,6 +338,8 @@ export function TimeSeriesChart<
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
               isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+              hasAllZeroValues={hasAllZeroValues}
+              showWeekNumbers={showWeekNumbers}
             />
 
             {/**
@@ -341,6 +362,7 @@ export function TimeSeriesChart<
               bounds={bounds}
               yScale={yScale}
               benchmark={benchmark}
+              chartId={chartId}
             />
 
             {benchmark && (
@@ -358,12 +380,21 @@ export function TimeSeriesChart<
              */}
             {timespanAnnotations?.map((x, index) => (
               <TimespanAnnotation
+                chartId={chartId}
                 key={index}
-                start={x.start}
-                end={x.end}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
                 height={bounds.height}
+                config={x}
+              />
+            ))}
+            {timeAnnotations?.map((x, index) => (
+              <TimeAnnotation
+                key={index}
+                domain={xScale.domain() as [number, number]}
+                getX={getX}
+                height={bounds.height}
+                config={x}
               />
             ))}
           </ChartContainer>

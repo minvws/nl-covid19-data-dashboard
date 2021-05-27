@@ -168,6 +168,68 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.behavior.scale.blue[0],
+    threshold: 0,
+  },
+  {
+    color: colors.data.behavior.scale.blue[1],
+    threshold: 40,
+  },
+  {
+    color: colors.data.behavior.scale.blue[2],
+    threshold: 50,
+  },
+  {
+    color: colors.data.behavior.scale.blue[3],
+    threshold: 60,
+  },
+  {
+    color: colors.data.behavior.scale.blue[4],
+    threshold: 70,
+  },
+  {
+    color: colors.data.behavior.scale.blue[5],
+    threshold: 80,
+  },
+  {
+    color: colors.data.behavior.scale.blue[6],
+    threshold: 90,
+  },
+];
+
+const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
+  { 
+    color: colors.data.behavior.scale.yellow[0],
+    threshold: 0,
+  },
+  {
+    color: colors.data.behavior.scale.yellow[1],
+    threshold: 40,
+  },
+  {
+    color: colors.data.behavior.scale.yellow[2],
+    threshold: 50,
+  },
+  {
+    color: colors.data.behavior.scale.yellow[3],
+    threshold: 60,
+  },
+  {
+    color: colors.data.behavior.scale.yellow[4],
+    threshold: 70,
+  },
+  {
+    color: colors.data.behavior.scale.yellow[5],
+    threshold: 80,
+  },
+  {
+    color: colors.data.behavior.scale.yellow[6],
+    threshold: 90,
+  },
+];
+
 const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.underReported,
@@ -248,6 +310,8 @@ export const regionThresholds = {
     average: sewerThresholds,
   },
   behavior: behaviorThresholds,
+  behavior_compliance: behaviorComplianceThresholds,
+  behavior_support: behaviorSupportThresholds,
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
   },

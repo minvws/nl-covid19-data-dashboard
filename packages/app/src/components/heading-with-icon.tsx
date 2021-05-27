@@ -57,7 +57,15 @@ export function HeadingWithIcon(props: HeadingWithIconProps) {
       <Icon small={headingLevel > 2}>{icon}</Icon>
 
       <Box>
-        <Heading level={headingLevel} mb={0} lineHeight={1.3} {...headingProps}>
+        <Heading
+          level={headingLevel}
+          mb={0}
+          lineHeight={1.3}
+          {...headingProps}
+          css={css({
+            hyphens: 'auto',
+          })}
+        >
           {title}
         </Heading>
         {subtitle}

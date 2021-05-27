@@ -8,6 +8,7 @@ import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useElementSize } from '~/utils/use-element-size';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useUniqueId } from '~/utils/use-unique-id';
 import {
   Axes,
   ChartContainer,
@@ -68,6 +69,8 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
+  const chartId = useUniqueId();
+
   const [sizeRef, { width }] = useElementSize<HTMLDivElement>(initialWidth);
 
   const { isPercentage, forcedMaximumValue, benchmark, timespanAnnotations } =
@@ -92,14 +95,21 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      bounds,
-      numTicks: 0,
-    }
-  );
+  const {
+    xScale,
+    yScale,
+    getX,
+    getY,
+    getY0,
+    getY1,
+    dateSpanWidth,
+    hasAllZeroValues,
+  } = useScales({
+    values,
+    maximumValue: seriesMax,
+    bounds,
+    numTicks: 0,
+  });
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -168,9 +178,11 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
             isPercentage={isPercentage}
             isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
             xRangePadding={padding.left}
+            hasAllZeroValues={hasAllZeroValues}
           />
 
           <Series
+            chartId={chartId}
             seriesConfig={seriesConfig}
             seriesList={seriesList}
             getX={getX}

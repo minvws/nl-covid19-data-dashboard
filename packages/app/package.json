@@ -17,6 +17,7 @@
     "@styled-system/should-forward-prop": "^5.1.5",
     "@visx/annotation": "^1.5.0",
     "@visx/axis": "1.4.0",
+    "@visx/clip-path": "^1.7.0",
     "@visx/curve": "^1.0.0",
     "@visx/event": "1.3.0",
     "@visx/geo": "1.0.0",
@@ -40,7 +41,7 @@
     "geometric": "^2.2.6",
     "lodash": "^4.17.20",
     "match-sorter": "^6.2.0",
-    "next": "10.0.8",
+    "next": "^10.2.0",
     "polished": "^4.1.0",
     "proxy-polyfill": "^0.3.2",
     "react": "^17.0.1",
@@ -58,8 +59,8 @@
     "use-resize-observer": "^7.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
     "@next/bundle-analyzer": "^10.0.6",
     "@svgr/webpack": "^5.4.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -111,7 +112,7 @@
     "react-refresh": "^0.9.0",
     "start-server-and-test": "^1.12.0",
     "ts-jest": "^26.5.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.2.4"
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
@@ -136,7 +137,7 @@
     "compile": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
     "clean": "rimraf .next",
-    "vercel-install": "yarn install && yarn download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cms sync-assets && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$SANITY_DATASET",
+    "vercel-install": "yarn install --frozen-lockfile && yarn download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$SANITY_DATASET && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cms sync-assets",
     "vercel-build:nl": "yarn build:nl && next export",
     "vercel-build:en": "yarn build:en && next export"
   },

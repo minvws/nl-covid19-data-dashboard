@@ -28,6 +28,7 @@ interface DimensionProps {
   width: number;
   height: number;
   paddingLeft?: number;
+  paddingTop?: number;
   /**
    * A symmetrical padding ensures the right padding equals the left padding
    */
@@ -38,6 +39,7 @@ export function useDimensions({
   width,
   height,
   paddingLeft,
+  paddingTop,
   applySymmetricalPadding,
 }: DimensionProps) {
   const isMounted = useIsMounted();
@@ -66,6 +68,7 @@ export function useDimensions({
     const padding: Padding = {
       ...defaultPadding,
       left,
+      top: paddingTop ?? defaultPadding.top,
       right: applySymmetricalPadding ? left : defaultPadding.right,
     };
 
@@ -77,6 +80,7 @@ export function useDimensions({
     return { padding, bounds, leftPaddingRef };
   }, [
     paddingLeft,
+    paddingTop,
     measuredLeftPadding,
     isMounted,
     applySymmetricalPadding,

@@ -1,6 +1,6 @@
 import { createFormatting } from '@corona-dashboard/common';
 import { useContext, useMemo } from 'react';
-import { AllLanguages, LanguageKey } from '~/locale';
+import { SiteText, LanguageKey } from '~/locale';
 import { IntlContext } from '..';
 
 // Adding the Europe/Amsterdam time zone manually since its the only being used.
@@ -29,10 +29,7 @@ const localeLanguageTagMap: Record<LanguageKey, string> = {
   en: 'en-GB',
 };
 
-export function useIntlHelperContext(
-  locale: LanguageKey,
-  siteText: AllLanguages
-) {
+export function useIntlHelperContext(locale: LanguageKey, siteText: SiteText) {
   return useMemo(() => {
     const languageTag = localeLanguageTagMap[locale];
 

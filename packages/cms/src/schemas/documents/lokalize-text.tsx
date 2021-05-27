@@ -1,3 +1,5 @@
+import { isDefined } from 'ts-is-present';
+
 /**
  * A text coming from the original Lokalize JSON structure is split into a
  * subject (the first name in the path) and the remaining JSON path. This way it
@@ -44,8 +46,12 @@ export const lokalizeText = {
          * Only NL is required. For EN we use NL as a fallback when exporting.
          */
         Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required().warning(),
+          nl: (fieldRule: any) =>
+            fieldRule.required().custom(validateTextPlaceholders),
+          en: (fieldRule: any) => [
+            fieldRule.required().warning(),
+            fieldRule.custom(validateTextPlaceholders),
+          ],
         }),
     },
     {
@@ -78,3 +84,26 @@ export const lokalizeText = {
     },
   },
 };
+
+/**
+ * A valid placeholder is considered to look like ``{{placeholderName}}``.
+ * This validator looks for mistakes such as ``{placeHolderName}}`` or
+ * ``{{placeHolderName}}}``.
+ */
+function validateTextPlaceholders(text = '') {
+  const faultyVariables = [...(text.matchAll(/{+[^}]+}+/g) as any)]
+    .map((matchInfo: string[]) => {
+      const match = matchInfo[0].match(/{{2}[^{}]+}{2}/);
+      if (!match || match[0] !== matchInfo[0]) {
+        return matchInfo[0];
+      }
+      return undefined;
+    })
+    .filter(isDefined);
+
+  return faultyVariables.length > 0
+    ? `De volgende variabelen zijn niet juist geformatteerd: ${faultyVariables
+        .map((x) => `"${x}"`)
+        .join(', ')}`
+    : true;
+}

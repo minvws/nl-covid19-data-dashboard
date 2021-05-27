@@ -1,0 +1,72 @@
+import css from '@styled-system/css';
+import styled from 'styled-components';
+import { Box } from '~/components/base';
+import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
+import { useEscalationColor } from '~/utils/use-escalation-color';
+
+export function RegionCubes({
+  count,
+  level,
+}: {
+  count: number;
+  level: 1 | 2 | 3 | 4;
+}) {
+  const items = new Array(count).fill(0);
+
+  const escalationColor = useEscalationColor(level);
+
+  const { siteText } = useIntl();
+
+  const regionLabels =
+    siteText.over_risiconiveaus.scoreboard.current_level.regions;
+
+  const regionLabel =
+    count > 1
+      ? regionLabels.plural
+      : count === 1
+      ? regionLabels.single
+      : regionLabels.none;
+
+  return (
+    <Box display={{ sm: 'flex' }} flexWrap="wrap">
+      {count > 0 && (
+        <Container>
+          {items.map((_, index) => (
+            <Cube color={escalationColor} key={index} />
+          ))}
+        </Container>
+      )}
+      <InlineText color="black" fontSize={2}>
+        {count > 0 ? count : undefined} {regionLabel}
+      </InlineText>
+    </Box>
+  );
+}
+
+const Container = styled.div(
+  css({
+    mr: 2,
+    my: asResponsiveArray({ _: 1, sm: 0 }),
+  })
+);
+
+const Cube = styled.div<{ color: string }>((x) =>
+  css({
+    display: 'inline-block',
+    mr: '1px',
+    minWidth: asResponsiveArray({ _: '0.5em', md: '1em' }),
+    width: asResponsiveArray({ _: '0.5em', md: '1em' }),
+    height: '1em',
+    bg: x.color,
+    '&:first-child': {
+      borderTopLeftRadius: '3px',
+      borderBottomLeftRadius: '3px',
+    },
+    '&:last-child': {
+      borderTopRightRadius: '3px',
+      borderBottomRightRadius: '3px',
+    },
+  })
+);

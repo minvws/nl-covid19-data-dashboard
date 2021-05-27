@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
@@ -7,46 +7,93 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@reach/disclosure';
-
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { useSetLinkTabbability } from './use-set-link-tabbability';
-
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;
+  icon?: React.ReactNode;
 }
 
 export const CollapsibleButton = ({
   label,
   children,
+  icon,
 }: CollapsibleButtonProps) => {
-  const { ref: contentRef, height: contentHeight = 0 } = useResizeObserver();
-  const { ref: buttonRef, height: buttonHeight = 0 } = useResizeObserver();
+  const contentObserver = useResizeObserver();
+  const buttonObserver = useResizeObserver();
+
   const [isOpen, setIsOpen] = useState(false);
   const { wrapperRef } = useSetLinkTabbability(isOpen);
+
+  /**
+   * Calculate the clip path where the content needs to animate to,
+   * this is alligned with the position of the button percentage wise based of the content wrapper
+   */
+  const clipPathCalculation = useMemo(() => {
+    if (
+      !buttonObserver.width ||
+      !buttonObserver.height ||
+      !contentObserver.width ||
+      !contentObserver.height
+    )
+      return '0 0, 100% 0, 100% 0, 0 0';
+
+    /**
+     * First find the percentage of how much is the button is the width of the size of the container.
+     * Deduct 100 and divide it by 2 to make it negative value for the left side of the mask to make
+     * it fully expand to the left edge of the container.
+     * In the return the value it's becoming a positive one so it can animate the mask to the right edge of the container.
+     */
+    const width =
+      ((buttonObserver.width / contentObserver.width) * 100 - 100) / 2;
+    const height = (buttonObserver.height / contentObserver.height) * 100 * -1;
+
+    return `
+      ${width * -1}% ${height}%,
+      ${width - 100 * -1}% ${height}%,
+      ${width - 100 * -1}% 0%,
+      ${width * -1}% 0%
+  `;
+  }, [
+    buttonObserver.width,
+    buttonObserver.height,
+    contentObserver.width,
+    contentObserver.height,
+  ]);
 
   /**
    * falback to `undefined` to prevent an initial animation from `0` to
    * measured height
    */
-  const height = buttonHeight + (isOpen ? contentHeight : 0) || undefined;
+  const height =
+    (buttonObserver.height ?? 0) + (isOpen ? contentObserver.height ?? 0 : 0) ||
+    undefined;
 
   return (
-    <Container style={{ height }}>
+    <Container
+      style={{ height }}
+      isOpen={isOpen}
+      buttonWidth={buttonObserver.width ?? 0}
+      buttonHeight={buttonObserver.height ?? 0}
+      contentWidth={contentObserver.width ?? 0}
+      contentHeight={contentObserver.height ?? 0}
+      clipPathCalculation={clipPathCalculation ?? 0}
+    >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
-        <div
-          ref={buttonRef}
-          css={css({ display: 'flex', justifyContent: 'center' })}
-        >
-          <DisclosureButton>
-            {label}
-            <Chevron open={isOpen} />
-          </DisclosureButton>
-        </div>
+        <ButtonContainer>
+          <Box ref={buttonObserver.ref} display="flex">
+            <DisclosureButton>
+              {icon && <IconContainer>{icon}</IconContainer>}
+              {label}
+              <Chevron open={isOpen} />
+            </DisclosureButton>
+          </Box>
+        </ButtonContainer>
 
         <DisclosurePanel>
-          <div ref={contentRef}>
+          <div ref={contentObserver.ref}>
             <div ref={wrapperRef}>{children}</div>
           </div>
         </DisclosurePanel>
@@ -55,62 +102,137 @@ export const CollapsibleButton = ({
   );
 };
 
-const Container = styled(Box).attrs({ as: 'section' })(
+const ButtonContainer = styled.div(
   css({
-    borderRadius: 1,
-    position: 'relative',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    padding: 0,
-    margin: '0 auto',
-    transitionProperty: 'height',
-    transitionDuration: '0.5s',
-    bg: 'tileGray',
-    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    mx: 'auto',
+  })
+);
 
-    //button
+const Container = styled(Box).attrs({ as: 'section' })<{
+  isOpen: boolean;
+  buttonWidth: number;
+  contentWidth: number;
+  contentHeight: number;
+  buttonHeight: number;
+  clipPathCalculation: string;
+}>((x) =>
+  css({
+    position: 'relative',
+    padding: 0,
+    transitionProperty: 'height',
+    transitionDuration: '0.4s',
+    willChange: 'height',
+
+    // Button
     '[data-reach-disclosure-button]': {
-      position: 'relative',
-      px: asResponsiveArray({ _: 2, sm: 4 }),
-      py: 3,
-      border: 'none',
-      background: 'none',
-      font: 'inherit',
-      color: 'blue',
-      cursor: 'pointer',
-      fontWeight: 'bold',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      overflow: 'hidden',
       zIndex: 1,
-      width: '100%',
+      width: x.isOpen ? '100%' : 'fit-content',
+      border: '1px solid',
+      borderRadius: 1,
+      borderColor: x.isOpen ? 'transparent' : 'lightGray',
+      px: asResponsiveArray({ _: 1, sm: 3 }),
+      py: 3,
+      background: 'none',
+      color: 'black',
+      font: 'inherit',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      transition: 'color 0.2s ease-out',
+
+      '&:hover': {
+        color: 'blue',
+
+        svg: {
+          fill: 'blue',
+        },
+
+        '&:before': {
+          borderColor: x.isOpen ? 'lightGray' : 'data.primary',
+        },
+      },
+
+      // Outside border
+      '&:before': {
+        transition: 'width 0.4s',
+        position: 'absolute',
+        top: 0,
+        width: x.isOpen ? '100%' : x.buttonWidth,
+        height: '100%',
+        border: '1px solid',
+        borderRadius: 1,
+        borderColor: 'lightGray',
+        zIndex: -1,
+        content: '""',
+        pointerEvents: 'none',
+
+        '.has-no-js &': {
+          content: 'unset',
+        },
+      },
     },
+
     '[data-reach-disclosure-button]:focus': {
       outlineWidth: '1px',
       outlineStyle: 'dashed',
-      outlineColor: 'blue',
+      outlineColor: x.isOpen ? 'transparent' : 'blue',
     },
-    '[data-reach-disclosure-button][data-state="open"]:after': {
-      content: '""',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      bg: 'lightGray',
-      height: '1px',
-    },
+
     //panel
     '[data-reach-disclosure-panel]': {
-      transitionProperty: 'height, opacity',
-      transitionDuration: '0.5s',
+      position: 'relative',
       width: '100%',
       overflow: 'hidden',
-      opacity: 0,
       display: 'block',
+      transition: 'clip-path 0.4s',
+      willChange: 'clip-path',
+      clipPath: x.isOpen
+        ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'
+        : `polygon(${x.clipPathCalculation})`,
+
+      '&:before': {
+        content: '""',
+        position: 'absolute',
+        top: 0,
+        width: x.isOpen ? '100%' : '0%',
+        height: '1px',
+        backgroundColor: 'lightGray',
+        transform: x.isOpen ? 'scaleX(1)' : 'scale(0)',
+        transition: 'transform 0.4s',
+      },
+
+      '.has-no-js &': {
+        maxHeight: 0,
+        animation: `show-collapsible 1s forwards`,
+        animationDelay: '1s',
+        clipPath: 'none',
+      },
+
+      [`@keyframes show-collapsible`]: {
+        from: {
+          maxHeight: 0,
+        },
+
+        to: {
+          maxHeight: '100%',
+        },
+      },
     },
-    '[data-reach-disclosure-panel][data-state="open"]': {
-      opacity: 1,
-    },
-    '[data-reach-disclosure-panel][data-state="collapsed"]': {
-      height: 0,
-      opacity: 0,
+  })
+);
+
+const IconContainer = styled.div(
+  css({
+    mr: 2,
+
+    svg: {
+      transition: 'fill 0.2s ease-out',
+      fill: 'black',
     },
   })
 );
