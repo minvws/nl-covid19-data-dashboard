@@ -5,7 +5,7 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
-import { Collapsible } from './components/collapsible';
+import { SafetyRegionGroup } from './components/safety-region-group';
 import { SafetyRegionRow } from './components/safety-region-row';
 
 export type VrScoreboardData = {
@@ -37,7 +37,7 @@ export function Scoreboard({
       borderBottomWidth="1px"
     >
       {rows.map((row) => (
-        <Collapsible
+        <SafetyRegionGroup
           level={row.escalationLevel}
           rowCount={row.vrData.length}
           key={row.escalationLevel}
@@ -62,7 +62,7 @@ export function Scoreboard({
               ))}
             </Box>
           </Box>
-        </Collapsible>
+        </SafetyRegionGroup>
       ))}
     </Box>
   );
