@@ -7,18 +7,18 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
-import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
-import { BehaviorTable } from '~/domain/behavior/behavior-table';
+import { BehaviorChoroplethsTile } from '~/domain/behavior/redesign/behavior-choropleths-tile';
+import { BehaviorPerAgeGroup } from '~/domain/behavior/redesign/behavior-per-age-group-tile';
+import { BehaviorTableTile } from '~/domain/behavior/redesign/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { NationalPageMetricData } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
-import { BehaviorIdentifier } from './behavior-types';
-import { useEffect, useState, useRef } from 'react';
-import { DateSpanMarker } from '~/components/time-series-chart/components';
+import { BehaviorLineChartTile } from './behavior-line-chart-tile';
+import { BehaviorIdentifier } from '../behavior-types';
+import { useState, useRef } from 'react';
+
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -119,7 +119,7 @@ export function BehaviorPageNational({
 
       <ArticleStrip articles={content.articles} />
 
-      <BehaviorTable
+      <BehaviorTableTile
         title={nl_gedrag.basisregels.title}
         description={nl_gedrag.basisregels.description}
         complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}

@@ -7,26 +7,25 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { behaviorIdentifiers } from './behavior-types';
 import { isDefined } from 'ts-is-present';
+import { BehaviorIcon } from '../components/behavior-icon';
+import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
+import {
+  NlBehaviorPerAgeGroup,
+  NlBehaviorPerAgeGroupValue,
+  NationalBehaviorValue,
+} from '@corona-dashboard/common';
+import { assert } from '~/utils/assert';
+
 export interface BehaviorPerAgeGroupProps {
   title: string;
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  data: any;
-  currentId: any;
-  setCurrentId: any;
+  data: NlBehaviorPerAgeGroup | undefined;
+  currentId: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
-
-type ageStringTypes = {
-  '70_plus': string;
-  '55_69': string;
-  '40_54': string;
-  '25_39': string;
-  '16_24': string;
-};
-
 export function BehaviorPerAgeGroup({
   title,
   description,
@@ -45,8 +44,15 @@ export function BehaviorPerAgeGroup({
       value: id,
     };
   });
+  assert(data, `The data for the per-age-group-tile is undefined`);
+  const orderedAgeKeys = Object.keys(
+    data.wash_hands_support
+  ).reverse() as (keyof NlBehaviorPerAgeGroup['wash_hands_support'])[];
 
-  const orderedAgeKeys = Object.keys(data.wash_hands_support).reverse();
+  const selectedComplianceValueKey =
+    data[`${currentId}_compliance` as keyof NlBehaviorPerAgeGroup];
+  const selectedSupportValueKey =
+    data[`${currentId}_support` as keyof NlBehaviorPerAgeGroup];
 
   return (
     <Tile>
@@ -58,11 +64,12 @@ export function BehaviorPerAgeGroup({
           value={currentId}
           onChange={setCurrentId}
           options={behaviorIndentifiersData}
+          icon={<BehaviorIcon name={currentId} size={20} />}
         />
       </Box>
       <Box overflow="auto">
-        {isDefined(data[`${currentId}_compliance`]) ||
-        isDefined(data[`${currentId}_support`]) ? (
+        {isDefined(selectedComplianceValueKey) ||
+        isDefined(selectedSupportValueKey) ? (
           <Box overflow="auto">
             <StyledTable>
               <thead>
@@ -85,18 +92,18 @@ export function BehaviorPerAgeGroup({
                     <Cell>
                       {
                         siteText.gedrag_leeftijden.tabel[
-                          age as keyof ageStringTypes
+                          age as keyof NlBehaviorPerAgeGroupValue
                         ]
                       }
                     </Cell>
                     <Cell>
                       <PercentageBar
                         color={colors.data.cyan}
-                        amount={data[`${currentId}_compliance`][age]}
+                        amount={selectedComplianceValueKey[age]}
                       />
                       <PercentageBar
                         color={colors.data.yellow}
-                        amount={data[`${currentId}_support`][age]}
+                        amount={selectedSupportValueKey[age]}
                       />
                     </Cell>
                   </tr>

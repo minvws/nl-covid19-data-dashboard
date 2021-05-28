@@ -12,7 +12,8 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { behaviorIdentifiers } from './behavior-types';
+import { behaviorIdentifiers } from '../behavior-types';
+import { BehaviorIcon } from '../components/behavior-icon';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[] | RegionalBehaviorValue[];
@@ -68,6 +69,7 @@ export function BehaviorLineChartTile({
         <Select
           value={currentId}
           onChange={setCurrentId}
+          icon={<BehaviorIcon name={currentId} size={20} />}
           options={behaviorIdentifierWithData.map(({ id, label }) => ({
             value: id,
             label,

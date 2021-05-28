@@ -15,14 +15,15 @@ import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
+import { BehaviorIcon } from '../components/behavior-icon';
 
 interface BehaviorChoroplethsTileProps {
   title: string;
   description: string;
   data: RegionsBehavior[];
-  currentId: any;
-  setCurrentId: any;
+  currentId: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
 
 export function BehaviorChoroplethsTile({
@@ -60,6 +61,7 @@ export function BehaviorChoroplethsTile({
           value={currentId}
           onChange={setCurrentId}
           options={behaviorIndentifiersData}
+          icon={<BehaviorIcon name={currentId} size={20} />}
         />
       </Box>
 

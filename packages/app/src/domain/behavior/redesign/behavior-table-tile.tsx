@@ -10,10 +10,12 @@ import { BehaviorFormatted } from '~/domain/behavior/hooks/useFormatAndSortBehav
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { BehaviorIcon } from './components/behavior-icon';
-import { BehaviorTrend } from './components/behavior-trend';
+import { BehaviorIcon } from '../components/behavior-icon';
+import { BehaviorTrend } from '../components/behavior-trend';
 import scrollIntoView from 'scroll-into-view-if-needed';
-interface BehaviorTableProps {
+import { BehaviorIdentifier } from '../behavior-types';
+
+interface BehaviorTableTileProps {
   title: string;
   description: string;
   complianceExplanation: string;
@@ -21,10 +23,11 @@ interface BehaviorTableProps {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
   annotation: string;
-  setCurrentId: any;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  scrollRef: { current: HTMLDivElement | null };
 }
 
-export function BehaviorTable({
+export function BehaviorTableTile({
   title,
   description,
   complianceExplanation,
@@ -34,7 +37,7 @@ export function BehaviorTable({
   annotation,
   setCurrentId,
   scrollRef,
-}: BehaviorTableProps) {
+}: BehaviorTableTileProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
 
@@ -144,14 +147,15 @@ function DescriptionWithIcon({
   scrollRef,
 }: {
   description: string;
-  id: any;
-  setCurrentId: any;
+  id: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  scrollRef: { current: HTMLDivElement | null };
 }) {
   const splittedWords = description.split(' ');
 
   const buttonClickHandler = () => {
+    scrollIntoView(scrollRef.current as Element);
     setCurrentId(id);
-    scrollIntoView(scrollRef.current);
   };
 
   return (

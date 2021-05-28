@@ -7,9 +7,9 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
+import { BehaviorLineChartTile } from './behavior-line-chart-tile';
 import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
-import { BehaviorTable } from '~/domain/behavior/behavior-table';
+import { BehaviorTableTile } from '~/domain/behavior/redesign/behavior-table-tile';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
@@ -81,7 +81,7 @@ export function BehaviorPageSafetyRegion({
 
       <ArticleStrip articles={content.articles} />
 
-      <BehaviorTable
+      {/* <BehaviorTable
         title={regionaal_gedrag.basisregels.title}
         description={regionaal_gedrag.basisregels.description}
         complianceExplanation={regionaal_gedrag.basisregels.volgen_beschrijving}
@@ -100,7 +100,7 @@ export function BehaviorPageSafetyRegion({
           ],
           source: regionaal_gedrag.bronnen.rivm,
         }}
-      />
+      /> */}
 
       <MoreInformation />
     </TileList>
