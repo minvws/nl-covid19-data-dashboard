@@ -144,6 +144,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       fontWeight: 'bold',
       cursor: 'pointer',
       transition: 'color 0.2s ease-out',
+      minWidth: x.isOpen ? undefined : x.buttonWidth,
 
       '&:hover': {
         color: 'blue',
