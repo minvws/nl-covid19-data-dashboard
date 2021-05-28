@@ -153,19 +153,21 @@ export function BehaviorPageNational({
         setCurrentId={setCurrentId}
       />
 
-      <BehaviorPerAgeGroup
-        title={siteText.nl_gedrag.tabel_per_leeftijdsgroep.title}
-        description={nl_gedrag.tabel_per_leeftijdsgroep.description}
-        complianceExplanation={
-          nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
-        }
-        supportExplanation={
-          nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
-        }
-        data={data.behavior_per_age_group}
-        currentId={currentId}
-        setCurrentId={setCurrentId}
-      />
+      {data.behavior_per_age_group && (
+        <BehaviorPerAgeGroup
+          title={siteText.nl_gedrag.tabel_per_leeftijdsgroep.title}
+          description={nl_gedrag.tabel_per_leeftijdsgroep.description}
+          complianceExplanation={
+            nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
+          }
+          supportExplanation={
+            nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
+          }
+          data={data.behavior_per_age_group}
+          currentId={currentId}
+          setCurrentId={setCurrentId}
+        />
+      )}
 
       <MoreInformation />
     </TileList>
