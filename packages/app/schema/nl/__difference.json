@@ -110,15 +110,14 @@
         "difference": {
           "type": "integer"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -135,11 +134,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "new_date_unix"],
       "additionalProperties": false
     }
   }

@@ -226,6 +226,7 @@ export interface DifferenceDecimal {
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix?: number;
   new_date_unix: number;
 }
 export interface NationalDoctor {
