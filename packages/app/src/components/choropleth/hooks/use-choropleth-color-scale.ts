@@ -5,6 +5,7 @@ import { assert } from '~/utils/assert';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { GetRegionDataFunctionType } from './use-safety-region-data';
 import { GetMunicipalityDataFunctionType } from './use-municipality-data';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 /**
  * This hook return a color scale for the given domain and gradient.
@@ -42,12 +43,18 @@ export function useChoroplethColorScale(
     return color;
   }, [thresholds]);
 
+  const unknownLevelColor = useEscalationColor(null);
+
   return useCallback(
     (id: string) => {
       const data = getChoroplethValue(id);
 
-      return isDefined(data) ? colorScale(data.__color_value) : defaultColor;
+      return isDefined(data)
+        ? data.__color_value === null
+          ? unknownLevelColor
+          : colorScale(data.__color_value)
+        : defaultColor;
     },
-    [colorScale, getChoroplethValue, defaultColor]
+    [getChoroplethValue, unknownLevelColor, colorScale, defaultColor]
   );
 }

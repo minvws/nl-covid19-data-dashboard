@@ -9,6 +9,7 @@ import { colors } from '~/style/theme';
 
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | undefined;
+  color?: string;
 }
 
 const Trend = styled.span((a) =>
@@ -26,7 +27,7 @@ const Trend = styled.span((a) =>
   })
 );
 
-export function BehaviorTrend({ trend }: BehaviorTrendProps) {
+export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
 
@@ -35,7 +36,7 @@ export function BehaviorTrend({ trend }: BehaviorTrendProps) {
   }
   if (trend === 'up') {
     return (
-      <Trend>
+      <Trend color={color}>
         <PijlOmhoog />
         {commonText.basisregels.trend_hoger}
       </Trend>
@@ -43,14 +44,14 @@ export function BehaviorTrend({ trend }: BehaviorTrendProps) {
   }
   if (trend === 'down') {
     return (
-      <Trend>
+      <Trend color={color}>
         <PijlOmlaag />
         {commonText.basisregels.trend_lager}
       </Trend>
     );
   }
   return (
-    <Trend color={colors.data.neutral}>
+    <Trend color={color ?? colors.data.neutral}>
       <Gelijk />
       {commonText.basisregels.trend_gelijk}
     </Trend>

@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { useEscalationColor } from '~/utils/use-escalation-color';
@@ -11,7 +12,7 @@ export function RegionCubes({
   level,
 }: {
   count: number;
-  level: 1 | 2 | 3 | 4;
+  level: EscalationLevel;
 }) {
   const items = new Array(count).fill(0);
 

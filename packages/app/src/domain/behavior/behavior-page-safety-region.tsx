@@ -7,8 +7,13 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
+import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
+import { BehaviorTable } from '~/domain/behavior/behavior-table';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+
 interface BehaviorPageSafetyRegionProps {
   data: SafetyRegionPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -22,6 +27,9 @@ export function BehaviorPageSafetyRegion({
 
   const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
+
+  const { sortedCompliance, sortedSupport } =
+    useFormatAndSortBehavior(behaviorLastValue);
 
   return (
     <TileList>
@@ -72,6 +80,29 @@ export function BehaviorPageSafetyRegion({
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
+
+      <BehaviorTable
+        title={regionaal_gedrag.basisregels.title}
+        description={regionaal_gedrag.basisregels.description}
+        complianceExplanation={regionaal_gedrag.basisregels.volgen_beschrijving}
+        supportExplanation={regionaal_gedrag.basisregels.steunen_beschrijving}
+        sortedCompliance={sortedCompliance}
+        sortedSupport={sortedSupport}
+        annotation={regionaal_gedrag.basisregels.annotatie}
+      />
+
+      <BehaviorLineChartTile
+        values={data.behavior.values}
+        metadata={{
+          date: [
+            behaviorLastValue.date_start_unix,
+            behaviorLastValue.date_end_unix,
+          ],
+          source: regionaal_gedrag.bronnen.rivm,
+        }}
+      />
+
+      <MoreInformation />
     </TileList>
   );
 }

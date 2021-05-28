@@ -1,1 +1,3 @@
-export type EscalationLevel = 1 | 2 | 3 | 4;
+import { EscalationLevels } from '@corona-dashboard/common';
+
+export type EscalationLevel = EscalationLevels['level'];
