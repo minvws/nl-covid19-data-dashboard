@@ -3,7 +3,6 @@ import {
   NlVaccineAdministeredValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
-import first from 'lodash/first';
 import last from 'lodash/last';
 
 export type VaccineDeliveryAndAdministrationsValue = Optional<
@@ -56,7 +55,7 @@ export function selectDeliveryAndAdministrationData(nlData: National) {
   const deliveryAndAdministration: DeliveryAndAdministrationData = {
     values,
     estimatedRange: [
-      first(vaccine_delivery_estimate.values)?.date_end_unix || 0,
+      last(vaccine_delivery.values)?.date_end_unix || 0,
       last(vaccine_delivery_estimate.values)?.date_end_unix || 0,
     ],
   };
