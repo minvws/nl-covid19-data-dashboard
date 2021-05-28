@@ -12,6 +12,7 @@ import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
+import scrollIntoView from 'scroll-into-view-if-needed';
 interface BehaviorTableProps {
   title: string;
   description: string;
@@ -32,6 +33,7 @@ export function BehaviorTable({
   sortedSupport,
   annotation,
   setCurrentId,
+  scrollRef,
 }: BehaviorTableProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
@@ -93,6 +95,7 @@ export function BehaviorTable({
                       description={behavior.description}
                       id={behavior.id}
                       setCurrentId={setCurrentId}
+                      scrollRef={scrollRef}
                     />
                   </Box>
                 </Cell>
@@ -138,6 +141,7 @@ function DescriptionWithIcon({
   description,
   id,
   setCurrentId,
+  scrollRef,
 }: {
   description: string;
   id: any;
@@ -147,6 +151,7 @@ function DescriptionWithIcon({
 
   const buttonClickHandler = () => {
     setCurrentId(id);
+    scrollIntoView(scrollRef.current);
   };
 
   return (

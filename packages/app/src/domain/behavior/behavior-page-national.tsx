@@ -17,7 +17,8 @@ import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
 import { BehaviorIdentifier } from './behavior-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { DateSpanMarker } from '~/components/time-series-chart/components';
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -35,10 +36,7 @@ export function BehaviorPageNational({
   const behaviorLastValue = data.behavior.last_value;
 
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
-
-  useEffect(() => {
-    console.log(currentId);
-  }, [currentId]);
+  const scrollToRef = useRef<HTMLDivElement>(null);
 
   const { sortedCompliance, sortedSupport } =
     useFormatAndSortBehavior(behaviorLastValue);
@@ -130,8 +128,10 @@ export function BehaviorPageNational({
         sortedSupport={sortedSupport}
         annotation={nl_gedrag.basisregels.annotatie}
         setCurrentId={setCurrentId}
+        scrollRef={scrollToRef}
       />
 
+      <span ref={scrollToRef} />
       <BehaviorLineChartTile
         values={data.behavior.values}
         metadata={{
