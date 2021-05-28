@@ -60,14 +60,14 @@ export function localize<T>(value: T | T[], languages: string[]): T {
   const anyValue = value as any;
 
   if (Array.isArray(value)) {
-    return (value.map((v: unknown) => localize(v, languages)) as unknown) as T;
+    return value.map((v: unknown) => localize(v, languages)) as unknown as T;
   }
 
   if (typeof value == 'object' && value !== null) {
     if (/^locale[A-Z]/.test(anyValue._type)) {
       const language = languages.find((lang: string) => (value as any)[lang]);
 
-      return (language && anyValue[language]) ?? null;
+      return (language && localize(anyValue[language], languages)) ?? null;
     }
 
     return Object.keys(anyValue).reduce(
