@@ -658,3 +658,7 @@ timestamp,action,key
 2021-05-26T12:53:19.906Z,add,gedrag_common.tabel_per_leeftijdsgroep.explanation.support
 2021-05-26T12:52:56.360Z,delete,gedrag_common.tabel_per_leeftijdsgroep.explanation.compliance
 2021-05-26T12:53:19.906Z,delete,gedrag_common.tabel_per_leeftijdsgroep.explanation.support
+2021-05-26T12:53:19.906Z,add,nl_gedrag.verdeling_in_nederland.compliance_title
+2021-05-26T12:53:19.906Z,add,nl_gedrag.verdeling_in_nederland.support_title
+2021-05-26T12:53:19.906Z,add,nl_gedrag.verdeling_in_nederland.geen_beschikbare_data
+2021-05-26T12:53:19.906Z,add,nl_gedrag.verdeling_in_nederland.description
