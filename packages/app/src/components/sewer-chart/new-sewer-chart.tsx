@@ -4,8 +4,8 @@ import {
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { set } from 'lodash';
-import { isDefined } from 'ts-is-present';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -52,15 +52,6 @@ export function NewSewerChart({
       } as SewerPerInstallationData)
   );
 
-  /**
-   * If there is installation data, and an installation was selected we need to
-   * convert the data to combine the two.
-   */
-  const chartInputValues =
-    dataPerInstallation && selectedInstallation
-      ? mergeData(dataAverages, dataPerInstallation, selectedInstallation)
-      : dataAverages.values;
-
   return (
     <ChartTile
       timeframeOptions={['all', '5weeks']}
@@ -71,80 +62,98 @@ export function NewSewerChart({
       description={text.linechart_description}
     >
       {(timeframe) => (
-        <div>
+        <>
           {options[0].value !== '__no_installations' && (
-            <Select
-              options={options}
-              onChange={onChange}
-              onClear={onClear}
-              value={selectedInstallation}
-              placeholder={text.graph_selected_rwzi_placeholder}
-            />
+            <div css={css({ alignSelf: 'flex-start', mb: 2 })}>
+              <Select
+                options={options}
+                onChange={onChange}
+                onClear={onClear}
+                value={selectedInstallation}
+                placeholder={text.graph_selected_rwzi_placeholder}
+              />
+            </div>
           )}
 
-          <TimeSeriesChart
-            // @ts-expect-error
-            values={chartInputValues}
-            timeframe={timeframe}
-            markNearestPointOnly
+          {
             /**
-             * Not sure why TS is complaining here. Can't seem to make part of
-             * the config conditional.
+             * If there is installation data, and an installation was selected we need to
+             * convert the data to combine the two.
              */
-            // @ts-expect-error
-            seriesConfig={[
-              dataPerInstallation && selectedInstallation
-                ? {
+            dataPerInstallation && selectedInstallation ? (
+              <TimeSeriesChart
+                values={mergeData(
+                  dataAverages,
+                  dataPerInstallation,
+                  selectedInstallation
+                )}
+                timeframe={timeframe}
+                markNearestPointOnly
+                seriesConfig={[
+                  {
                     type: 'line',
                     metricProperty: 'selected_installation_rna_normalized',
                     label: selectedInstallation,
                     color: 'black',
                     style: 'dashed',
-                  }
-                : undefined,
-              {
-                type: 'split-area',
-                metricProperty: 'average',
-                label: 'Weekgemiddelde',
-                splitPoints: [
-                  {
-                    value: 200,
-                    color: colors.data.scale.blue[0],
-                    label: '0 - 200',
                   },
                   {
-                    value: 400,
-                    color: colors.data.scale.blue[1],
-                    label: '200 - 400',
+                    type: 'split-area',
+                    metricProperty: 'average',
+                    label: 'Weekgemiddelde',
+                    splitPoints: averageSplitPoints,
                   },
+                ]}
+              />
+            ) : (
+              <TimeSeriesChart
+                values={dataAverages.values}
+                timeframe={timeframe}
+                markNearestPointOnly
+                seriesConfig={[
                   {
-                    value: 600,
-                    color: colors.data.scale.blue[2],
-                    // color: 'hotpink',
-                    label: '400 - 600',
+                    type: 'split-area',
+                    metricProperty: 'average',
+                    label: 'Weekgemiddelde',
+                    splitPoints: averageSplitPoints,
                   },
-                  {
-                    value: 800,
-                    color: colors.data.scale.blue[3],
-                    label: '600 - 800',
-                  },
-                  {
-                    value: Infinity,
-                    color: colors.data.scale.blue[4],
-                    label: '800 - 1000',
-                  },
-                ],
-              },
-            ].filter(isDefined)}
-            dataOptions={{
-              valueAnnotation: siteText.waarde_annotaties.riool_normalized,
-            }}
-          />
-        </div>
+                ]}
+              />
+            )
+          }
+        </>
       )}
     </ChartTile>
   );
 }
+
+const averageSplitPoints = [
+  {
+    value: 200,
+    color: colors.data.scale.blue[0],
+    label: '0 - 200',
+  },
+  {
+    value: 400,
+    color: colors.data.scale.blue[1],
+    label: '200 - 400',
+  },
+  {
+    value: 600,
+    color: colors.data.scale.blue[2],
+    label: '400 - 600',
+  },
+  {
+    value: 800,
+    color: colors.data.scale.blue[3],
+    label: '600 - 800',
+  },
+  {
+    value: Infinity,
+    color: colors.data.scale.blue[4],
+    label: '800 - 1000',
+  },
+];
 
 function mergeData(
   dataAverages: RegionalSewer | MunicipalSewer,
@@ -167,14 +176,15 @@ function mergeData(
 
   type MergedValuesByTimestamp = Record<number, MergedValue>;
 
-  const mergedValuesByTimestamp = valuesForInstallation.reduce<MergedValuesByTimestamp>(
-    (acc, v) =>
-      set(acc, v.date_unix, {
-        selected_installation_rna_normalized: v.rna_normalized,
-        average: null,
-      }),
-    {}
-  );
+  const mergedValuesByTimestamp =
+    valuesForInstallation.reduce<MergedValuesByTimestamp>(
+      (acc, v) =>
+        set(acc, v.date_unix, {
+          selected_installation_rna_normalized: v.rna_normalized,
+          average: null,
+        }),
+      {}
+    );
 
   for (const value of dataAverages.values) {
     /**
