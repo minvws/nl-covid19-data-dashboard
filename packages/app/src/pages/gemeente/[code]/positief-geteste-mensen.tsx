@@ -33,14 +33,16 @@ import {
   selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 import { useFeature } from '~/lib/features';
+import { CollapsibleContent } from '~/components/collapsible';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('static_values'),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -61,10 +63,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.gemeente_positief_geteste_personen;
   const lastValue = data.tested_overall.last_value;
+  const populationCount = data.static_values.population_count;
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -120,6 +123,17 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 isMovingAverageDifference
               />
+              <Text>
+                {replaceComponentsInText(
+                  siteText.gemeente_index.population_count,
+                  {
+                    municipalityName,
+                    populationCount: (
+                      <strong>{formatNumber(populationCount)}</strong>
+                    ),
+                  }
+                )}
+              </Text>
               <Markdown content={text.kpi_toelichting} />
             </KpiTile>
 
@@ -140,6 +154,23 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isMovingAverageDifference
               />
               <Text>{text.barscale_toelichting}</Text>
+
+              <CollapsibleContent
+                label={
+                  siteText.gemeente_index.population_count_explanation_title
+                }
+              >
+                <Text>
+                  {replaceComponentsInText(text.population_count_explanation, {
+                    municipalityName: <strong>{municipalityName}</strong>,
+                    value: (
+                      <strong>
+                        {formatNumber(lastValue.infected_per_100k)}
+                      </strong>
+                    ),
+                  })}
+                </Text>
+              </CollapsibleContent>
             </KpiTile>
           </TwoKpiSection>
 

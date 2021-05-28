@@ -1,16 +1,15 @@
 import { assert, MetricScope } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
-import { defaultJsonDirectory, localeDirectory } from '../config';
+import { defaultJsonDirectory } from '../config';
 import { getFileNames } from '../utils';
 import {
   createChoroplethValidation,
   CustomValidationFunction,
-  // validateMovingAverages,
-  validatePlaceholders,
+  validateMovingAverages,
 } from './custom-validations';
 
-export type SchemaInfo = Record<MetricScope | 'locale', SchemaInfoItem>;
+export type SchemaInfo = Record<MetricScope, SchemaInfoItem>;
 
 export type SchemaInfoItem = {
   files: string[];
@@ -36,7 +35,7 @@ export function getSchemaInfo(
           path.join(defaultJsonDirectory, 'VR_COLLECTION.json'),
           'vrcode'
         ),
-        // validateMovingAverages,
+        validateMovingAverages,
       ],
     },
     gm: {
@@ -47,15 +46,10 @@ export function getSchemaInfo(
           path.join(defaultJsonDirectory, 'GM_COLLECTION.json'),
           'gmcode'
         ),
-        // validateMovingAverages,
+        validateMovingAverages,
       ],
     },
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
     vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
-    locale: {
-      files: ['en.json', 'nl.json'],
-      basePath: localeDirectory,
-      customValidations: [validatePlaceholders],
-    },
   };
 }

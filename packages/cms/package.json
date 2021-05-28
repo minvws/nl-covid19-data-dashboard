@@ -13,8 +13,8 @@
     "lint": "echo '@TODO add eslint'",
     "sync-assets": "echo 'Sync assets is deprecated' && exit 1",
     "lokalize:export": "ts-node src/lokalize/export.ts",
-    "lokalize:add": "ts-node src/lokalize/add-text.ts && yarn lokalize:export",
-    "lokalize:delete": "ts-node src/lokalize/delete-text.ts && yarn lokalize:export",
+    "lokalize:add": "ts-node src/lokalize/add-text.ts",
+    "lokalize:delete": "ts-node src/lokalize/delete-text.ts",
     "lokalize:sync-after-release": "ts-node src/lokalize/sync-after-release.ts",
     "lokalize:sync-after-feature": "ts-node src/lokalize/sync-after-feature.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""

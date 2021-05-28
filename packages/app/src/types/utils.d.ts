@@ -17,3 +17,11 @@ type Await<T> = T extends {
 }
   ? U
   : T;
+
+/**
+ * Make one or more properties optional on a type.
+ *
+ * @example
+ *  Optional<MyType, 'thisPropertyWillBecomeOptional'>
+ */
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;

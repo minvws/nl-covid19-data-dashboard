@@ -31,4 +31,8 @@ export const features: Feature[] = [
     name: 'infectionsMovingAverage',
     isEnabled: true,
   },
+  {
+    name: 'behaviorPage', 
+    isEnabled: false,
+  }
 ];

@@ -9,13 +9,17 @@ export interface Municipal {
   proto_name: string;
   name: string;
   code: string;
+  static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: MunicipalDifference;
   hospital_nice: MunicipalHospitalNice;
   tested_overall: MunicipalTestedOverall;
-  sewer?: MunicipalSewer;
+  sewer: MunicipalSewer;
   sewer_per_installation?: MunicipalSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
+}
+export interface GmStaticValues {
+  population_count: number;
 }
 export interface GmDeceasedRivm {
   values: GmDeceasedRivmValue[];
@@ -38,13 +42,11 @@ export interface MunicipalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface MunicipalHospitalNice {
@@ -168,11 +170,12 @@ export interface National {
   disability_care: NationalDisabilityCare;
   behavior: NationalBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
+  behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
   deceased_rivm: NationalDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
-  vaccine_support: NlVaccineSupport;
+  vaccine_vaccinated_or_support: NlVaccineVaccinatedOrSupport;
   corona_melder_app: NlCoronaMelderApp;
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
@@ -218,13 +221,11 @@ export interface NationalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface NationalDoctor {
@@ -482,8 +483,8 @@ export interface NationalBehaviorValue {
   work_from_home_compliance_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_compliance: number | null;
   avoid_crowds_compliance_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_compliance?: number | null;
-  symptoms_stay_home_compliance_trend?: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_if_mandatory_compliance?: number | null;
+  symptoms_stay_home_if_mandatory_compliance_trend?: ("up" | "down" | "equal") | null;
   symptoms_get_tested_compliance?: number | null;
   symptoms_get_tested_compliance_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_compliance: number | null;
@@ -504,8 +505,8 @@ export interface NationalBehaviorValue {
   work_from_home_support_trend: ("up" | "down" | "equal") | null;
   avoid_crowds_support: number | null;
   avoid_crowds_support_trend: ("up" | "down" | "equal") | null;
-  symptoms_stay_home_support?: number | null;
-  symptoms_stay_home_support_trend?: ("up" | "down" | "equal") | null;
+  symptoms_stay_home_if_mandatory_support?: number | null;
+  symptoms_stay_home_if_mandatory_support_trend?: ("up" | "down" | "equal") | null;
   symptoms_get_tested_support?: number | null;
   symptoms_get_tested_support_trend?: ("up" | "down" | "equal") | null;
   wear_mask_public_indoors_support: number | null;
@@ -523,8 +524,6 @@ export interface NationalBehaviorValue {
 export interface NlBehaviorPerAgeGroup {
   avoid_crowds_compliance: NlBehaviorPerAgeGroupValue;
   avoid_crowds_support: NlBehaviorPerAgeGroupValue;
-  curfew_compliance: NlBehaviorPerAgeGroupValue;
-  curfew_support: NlBehaviorPerAgeGroupValue;
   keep_distance_compliance: NlBehaviorPerAgeGroupValue;
   keep_distance_support: NlBehaviorPerAgeGroupValue;
   max_visitors_compliance: NlBehaviorPerAgeGroupValue;
@@ -547,6 +546,21 @@ export interface NlBehaviorPerAgeGroupValue {
   "40_54": number;
   "55_69": number;
   "70_plus": number;
+}
+export interface NlBehaviorGetTestedSupportPerAgeGroup {
+  values: NlBehaviorGetTestedSupportPerAgeGroupValue[];
+  last_value: NlBehaviorGetTestedSupportPerAgeGroupValue;
+}
+export interface NlBehaviorGetTestedSupportPerAgeGroupValue {
+  percentage_average: number;
+  percentage_70_plus: number;
+  percentage_55_69: number;
+  percentage_40_54: number;
+  percentage_25_39: number;
+  percentage_16_24: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
 }
 export interface NationalDeceasedRivm {
   values: NationalDeceasedRivmValue[];
@@ -596,11 +610,11 @@ export interface NationalElderlyAtHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlVaccineSupport {
-  values: NlVaccineSupportValue[];
-  last_value: NlVaccineSupportValue;
+export interface NlVaccineVaccinatedOrSupport {
+  values: NlVaccineVaccinatedOrSupportValue[];
+  last_value: NlVaccineVaccinatedOrSupportValue;
 }
-export interface NlVaccineSupportValue {
+export interface NlVaccineVaccinatedOrSupportValue {
   percentage_average: number;
   percentage_70_plus: number | null;
   percentage_55_69: number | null;
@@ -760,6 +774,7 @@ export interface NlVaccineAdministeredRateMovingAverage {
 export interface NlVaccineAdministeredRateMovingAverageValue {
   doses_per_day: number;
   doses_per_second: number;
+  doses_per_minute: number;
   seconds_per_dose: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -819,6 +834,7 @@ export interface Regionaal {
   proto_name: string;
   name: string;
   code: string;
+  static_values?: VrStaticValues;
   difference: RegionalDifference;
   g_number: VrGNumber;
   sewer: RegionalSewer;
@@ -837,6 +853,9 @@ export interface Regionaal {
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
+}
+export interface VrStaticValues {
+  population_count: number;
 }
 export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -858,13 +877,11 @@ export interface RegionalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
-  old_date_unix: number;
   new_date_unix: number;
 }
 export interface VrGNumber {

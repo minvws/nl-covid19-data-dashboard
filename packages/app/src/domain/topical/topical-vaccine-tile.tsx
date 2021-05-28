@@ -15,7 +15,6 @@ interface TopicalVaccineProps {
 
 export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
   const estimated = data.last_value.estimated;
-
   const reverseRouter = useReverseRouter();
   const { siteText, formatNumber } = useIntl();
 

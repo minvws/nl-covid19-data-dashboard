@@ -3,9 +3,9 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
+import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { Text } from '~/components/typography';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -13,9 +13,11 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export function EscalationRegionalTooltip({
   context,
   getLink,
+  hideValidFrom = false,
 }: {
   context: SafetyRegionProperties & EscalationLevels;
-  getLink: (code: string) => string;
+  getLink?: (code: string) => string;
+  hideValidFrom?: boolean;
 }) {
   const level = context.level as EscalationLevel;
 
@@ -35,14 +37,17 @@ export function EscalationRegionalTooltip({
   );
 
   return (
-    <TooltipContent title={context.vrname} link={getLink(context.vrcode)}>
+    <TooltipContent
+      title={context.vrname}
+      link={getLink ? getLink(context.vrcode) : undefined}
+    >
       <Box display="flex" alignItems="flex-start" spacing={2} spacingHorizontal>
         <EscalationLevelIcon level={level} />
         <div>
           <Text m={0} fontWeight="bold">
             {escalationText.titel}
           </Text>
-          <Text m={0}>{validFromText}</Text>
+          {!hideValidFrom && <Text m={0}>{validFromText}</Text>}
         </div>
       </Box>
     </TooltipContent>

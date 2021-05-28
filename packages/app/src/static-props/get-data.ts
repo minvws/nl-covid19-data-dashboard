@@ -9,7 +9,6 @@ import {
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { gmData } from '~/data/gm';
-import { getClient, localize } from '~/lib/sanity';
 import { vrData } from '~/data/vr';
 import {
   gmPageMetricNames,
@@ -23,6 +22,7 @@ import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
 } from '~/domain/layout/safety-region-layout';
+import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -144,16 +144,27 @@ export function getVrData(context: GetStaticPropsContext) {
     throw Error('No valid vrcode found in context');
   }
 
-  const data = loadJsonFromDataFile<Regionaal>(`${code}.json`);
+  const data = loadAndSortVrData(code);
 
-  sortTimeSeriesInDataInPlace(data);
-
-  const safetyRegion = vrData.find((x) => x.code === code);
+  const safetyRegionName = getVrName(code);
 
   return {
     data,
-    safetyRegionName: safetyRegion?.name || '',
+    safetyRegionName,
   };
+}
+
+export function getVrName(code: string) {
+  const safetyRegion = vrData.find((x) => x.code === code);
+  return safetyRegion?.name || '';
+}
+
+export function loadAndSortVrData(vrcode: string) {
+  const data = loadJsonFromDataFile<Regionaal>(`${vrcode}.json`);
+
+  sortTimeSeriesInDataInPlace(data);
+
+  return data;
 }
 
 /**
@@ -180,7 +191,7 @@ export function selectGmData<T extends keyof Municipal = never>(
 
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, gmData.data[p]),
-      {} as Pick<Regionaal, T>
+      {} as Pick<Municipal, T>
     );
 
     return { selectedGmData, municipalityName: gmData.municipalityName };
