@@ -11,8 +11,14 @@ mkdir -p exports/nl
 mkdir -p exports/en
 
 # Install dependencies
-yarn
+yarn install --frozen-lockfile
 yarn workspace @corona-dashboard/common build
+
+if [ $NEXT_PUBLIC_PHASE == "develop" ]; then
+yarn workspace @corona-dashboard/cms lokalize:export --dataset=development
+else
+yarn workspace @corona-dashboard/cms lokalize:export --dataset=production
+fi
 
 # Validate data
 yarn workspace @corona-dashboard/cli validate-json-all
@@ -23,7 +29,6 @@ yarn workspace @corona-dashboard/cli validate-features
 yarn workspace @corona-dashboard/cli generate-typescript
 yarn workspace @corona-dashboard/cli generate-sitemap
 yarn workspace @corona-dashboard/cms sync-assets
-yarn workspace @corona-dashboard/cms lokalize:export --dataset=production
 
 # Build the Dutch application and move to export folder
 export NEXT_PUBLIC_LOCALE="nl"

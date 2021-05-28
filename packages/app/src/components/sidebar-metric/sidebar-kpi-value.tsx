@@ -2,7 +2,7 @@ import { isDefined } from 'ts-is-present';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { Box } from '../base';
-import { DifferenceIndicator } from '../difference-indicator';
+import { SidebarDifference } from '../difference-indicator';
 import { Heading, InlineText } from '../typography';
 import { useIntl } from '~/intl';
 
@@ -50,7 +50,7 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
 
         {isDefined(difference) && (
           <Box fontSize={3} display="flex" alignItems="center" marginRight={1}>
-            <DifferenceIndicator value={difference} context="sidebar" />
+            <SidebarDifference value={difference} />
           </Box>
         )}
 

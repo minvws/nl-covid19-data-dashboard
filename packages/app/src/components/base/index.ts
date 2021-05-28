@@ -5,3 +5,4 @@
 
 export * from './box';
 export * from './spacer';
+export * from './span';

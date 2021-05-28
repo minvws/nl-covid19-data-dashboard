@@ -18,6 +18,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from './series';
+import { findSplitPointForValue } from './split';
 import { useKeyboardNavigation } from './use-keyboard-navigation';
 
 export type HoveredPoint<T> = {
@@ -192,6 +193,15 @@ export function useHoverState<T extends TimestampedValue>({
         }
 
         switch (config.type) {
+          case 'split-bar':
+            return {
+              seriesValue,
+              x: xScale(xValue),
+              y: yScale(yValue),
+              color: findSplitPointForValue(config.splitPoints, yValue).color,
+              metricProperty: config.metricProperty,
+              seriesConfigIndex: index,
+            };
           case 'bar':
             return {
               seriesValue,

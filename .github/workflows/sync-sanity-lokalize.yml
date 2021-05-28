@@ -19,3 +19,7 @@ jobs:
         run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
         env:
           SANITY_TOKEN: ${{ secrets.sanity_token }}
+      - name: Export production texts
+        run: yarn workspace @corona-dashboard/cms lokalize:export --dataset=production
+      - name: Compile all code with production texts
+        run: yarn workspace @corona-dashboard/app compile

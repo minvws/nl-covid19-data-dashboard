@@ -35,7 +35,7 @@ import {
 
 export interface SewerChartData {
   sewer: Regionaal['sewer'] | Municipal['sewer'];
-  sewer_per_installation:
+  sewer_per_installation?:
     | Regionaal['sewer_per_installation']
     | Municipal['sewer_per_installation'];
 }
@@ -89,9 +89,8 @@ export function SewerChart(props: SewerChartProps) {
   /**
    * create props for the station select dropdown
    */
-  const sewerStationSelectProps = useSewerStationSelectProps(
-    stationScatterData
-  );
+  const sewerStationSelectProps =
+    useSewerStationSelectProps(stationScatterData);
   const hasSelectedStation = !!sewerStationSelectProps.value;
 
   /**
@@ -149,7 +148,7 @@ export function SewerChart(props: SewerChartProps) {
   const dimensions = useMemo<Dimensions>(() => {
     const padding = {
       top: 20,
-      right: 35,
+      right: 10,
       bottom: 30,
       left: 50,
     };
@@ -165,10 +164,10 @@ export function SewerChart(props: SewerChartProps) {
    * Get scales and "value -> coordinate" getters (getX, getY)
    */
   const scales = useSewerChartScales(
-    useMemo(() => [...averageLineData, ...stationScatterDataLimited], [
-      averageLineData,
-      stationScatterDataLimited,
-    ]),
+    useMemo(
+      () => [...averageLineData, ...stationScatterDataLimited],
+      [averageLineData, stationScatterDataLimited]
+    ),
     dimensions.bounds
   );
 
