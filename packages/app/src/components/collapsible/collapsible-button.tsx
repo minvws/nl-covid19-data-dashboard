@@ -1,14 +1,14 @@
-import { useMemo, useState } from 'react';
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { asResponsiveArray } from '~/style/utils';
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from '@reach/disclosure';
+import css from '@styled-system/css';
+import { useMemo, useState } from 'react';
+import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
+import { asResponsiveArray } from '~/style/utils';
 import { useSetLinkTabbability } from './use-set-link-tabbability';
 interface CollapsibleButtonProps {
   children: React.ReactNode;
