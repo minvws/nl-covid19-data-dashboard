@@ -70,7 +70,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
   const breakpoints = useBreakpoints();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
@@ -216,9 +216,9 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                                   text.momenteel.positive_tests.description
                                 }
                                 escalationColor={escalationColor}
-                                amount={
+                                amount={formatNumber(
                                   data.escalation_level.positive_tested_per_100k
-                                }
+                                )}
                               />
                             </ListItem>
                             <ListItem
@@ -230,10 +230,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                                   text.momenteel.hospital_admissions.description
                                 }
                                 escalationColor={escalationColor}
-                                amount={
+                                amount={formatNumber(
                                   data.escalation_level
                                     .hospital_admissions_per_million
-                                }
+                                )}
                               />
                             </ListItem>
                           </UnorderedList>
@@ -403,7 +403,7 @@ function ListItem({
 interface DataDescriptionProps {
   escalationColor: string;
   description: string;
-  amount: number;
+  amount: string;
 }
 
 function DataDescription({

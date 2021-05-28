@@ -7,6 +7,7 @@ import { StackedAreaSeriesDefinition } from '~/components/time-series-chart/logi
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { VaccineDeliveryAndAdministrationsTooltip } from './components/vaccine-delivery-and-administrations-tooltip';
 import {
   DeliveryAndAdministrationData,
@@ -30,6 +31,8 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
     () => vaccines.filter((x) => firstValue?.[x] !== undefined).reverse(),
     [firstValue]
   );
+
+  const breakpoints = useBreakpoints(true);
 
   const productNames =
     siteText.vaccinaties.data.vaccination_chart.product_names;
@@ -67,7 +70,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
           ],
         }}
         initialWidth={400}
-        minHeight={400}
+        minHeight={breakpoints.md ? 400 : 250}
         timeframe="all"
         values={data.values}
         displayTooltipValueOnly
