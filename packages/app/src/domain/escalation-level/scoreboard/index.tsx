@@ -3,8 +3,9 @@ import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
-import { Collapsible } from './components/collapsible';
+import { SafetyRegionGroup } from './components/safety-region-group';
 import { SafetyRegionRow } from './components/safety-region-row';
 
 export type VrScoreboardData = {
@@ -14,7 +15,7 @@ export type VrScoreboardData = {
 };
 
 export type ScoreboardRow = {
-  escalationLevel: 1 | 2 | 3 | 4;
+  escalationLevel: EscalationLevel;
   vrData: VrScoreboardData[];
 };
 
@@ -36,15 +37,15 @@ export function Scoreboard({
       borderBottomWidth="1px"
     >
       {rows.map((row) => (
-        <Collapsible
+        <SafetyRegionGroup
           level={row.escalationLevel}
           rowCount={row.vrData.length}
           key={row.escalationLevel}
         >
           <Box bg="tileGray">
-            <Box px={{ _: '1.5rem', sm: 4 }} pb={2}>
-              <Headers />
-              {row.vrData.map((vr) => (
+            <Box px={{ _: '1.5rem', sm: 4 }}>
+              {row.escalationLevel !== null && <Headers />}
+              {row.vrData.map((vr, index) => (
                 <SafetyRegionRow
                   vrData={vr}
                   key={vr.vrCode}
@@ -52,11 +53,16 @@ export function Scoreboard({
                     maxHospitalAdmissionsPerMillion
                   }
                   maxPositiveTestedPer100k={maxPositiveTestedPer100k}
+                  /**
+                   * The "onbekend" section has no <Header /> which would
+                   * result in a double border
+                   */
+                  hideBorder={row.escalationLevel === null && index === 0}
                 />
               ))}
             </Box>
           </Box>
-        </Collapsible>
+        </SafetyRegionGroup>
       ))}
     </Box>
   );

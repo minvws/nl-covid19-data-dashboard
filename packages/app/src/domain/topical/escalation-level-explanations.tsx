@@ -15,6 +15,9 @@ type EscalationLevelExplanationProps = {
 
 function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
   const { level, explanation } = props;
+
+  if (explanation === '') return null;
+
   return (
     <Box display="flex" flexDirection={{ _: 'column', md: 'row' }} py={3}>
       <Box width="10rem" display="flex" flexGrow={0} flexShrink={0}>
@@ -49,6 +52,10 @@ export function EscalationLevelExplanations() {
           <EscalationLevelExplanation
             level={4}
             explanation={siteText.escalatie_niveau.types['4'].toelichting}
+          />
+          <EscalationLevelExplanation
+            level={null}
+            explanation={siteText.escalatie_niveau.types.onbekend.toelichting}
           />
           <Box my={4}>
             <LinkWithIcon

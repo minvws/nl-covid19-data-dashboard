@@ -98,7 +98,11 @@ function NavItem({
   return (
     <StyledListItem>
       <Link passHref href={href}>
-        <NavLink isActive={isActive ?? pathname.startsWith(href)}>
+        <NavLink
+          isActive={
+            isActive ?? (pathname === href || pathname.startsWith(`${href}/`))
+          }
+        >
           <NavLinkSpan data-text={children}>{children}</NavLinkSpan>
         </NavLink>
       </Link>

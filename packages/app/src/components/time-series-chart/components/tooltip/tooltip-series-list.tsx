@@ -169,7 +169,9 @@ function TooltipListItem({
             <VisuallyHidden>
               <InlineText mr={2}>{label}:</InlineText>
             </VisuallyHidden>
-            <TooltipEntryValue>{children}</TooltipEntryValue>
+            <TooltipEntryValue isCentered={displayTooltipValueOnly}>
+              {children}
+            </TooltipEntryValue>
           </TooltipEntryContainer>
         </Box>
       ) : (
@@ -184,7 +186,9 @@ function TooltipListItem({
           <Box flexGrow={1}>
             <TooltipEntryContainer>
               <InlineText mr={2}>{label}:</InlineText>
-              <TooltipEntryValue>{children}</TooltipEntryValue>
+              <TooltipEntryValue isCentered={displayTooltipValueOnly}>
+                {children}
+              </TooltipEntryValue>
             </TooltipEntryContainer>
           </Box>
         </>
@@ -200,9 +204,13 @@ const TooltipEntryContainer = styled.span`
   align-items: flex-end;
 `;
 
-const TooltipEntryValue = styled.span`
-  text-align: right;
-`;
+const TooltipEntryValue = styled.span<{
+  isCentered?: boolean;
+}>((x) =>
+  css({
+    textAlign: x.isCentered ? 'center' : 'right',
+  })
+);
 
 export const TooltipList = styled.ol<{
   hasTwoColumns?: boolean;

@@ -9,17 +9,18 @@ import {
   EscalationLevelLabel,
 } from '~/components/escalation-level';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { RegionCubes } from './region-cubes';
 
-type CollapsibleProps = {
-  level: 1 | 2 | 3 | 4;
+type SafetyRegionGroupProps = {
+  level: EscalationLevel;
   rowCount: number;
   children: ReactNode;
 };
 
-export function Collapsible(props: CollapsibleProps) {
+export function SafetyRegionGroup(props: SafetyRegionGroupProps) {
   const { level, rowCount, children } = props;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +48,9 @@ export function Collapsible(props: CollapsibleProps) {
               size="medium"
             />
           ) : (
-            <EscalationLevelIcon level={level} size="medium" />
+            level !== null && (
+              <EscalationLevelIcon level={level} size="medium" />
+            )
           )}
         </Box>
         <Box ml={2} color="black">
