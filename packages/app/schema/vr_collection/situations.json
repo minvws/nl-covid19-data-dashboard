@@ -5,6 +5,7 @@
   "required": [
     "date_start_unix",
     "date_end_unix",
+    "date_of_insertion_unix",
     "vrcode",
     "has_sufficient_responses",
     "home_and_visits",
@@ -21,6 +22,9 @@
       "type": "integer"
     },
     "date_end_unix": {
+      "type": "integer"
+    },
+    "date_of_insertion_unix": {
       "type": "integer"
     },
     "vrcode": {

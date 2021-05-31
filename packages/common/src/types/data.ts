@@ -1274,6 +1274,7 @@ export interface RegionsElderlyAtHome {
 export interface VrCollectionSituations {
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
   vrcode: string;
   has_sufficient_responses: boolean;
   home_and_visits: number | null;
