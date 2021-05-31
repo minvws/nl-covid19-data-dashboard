@@ -6,7 +6,7 @@ import { ChartTimeControls } from './chart-time-controls';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
-import { Heading, Text } from './typography';
+import { Heading } from './typography';
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
@@ -17,7 +17,6 @@ interface ChartTileHeaderProps {
 function ChartTileHeader({
   title,
   description,
-  descriptionIsMarkdown,
   children,
 }: ChartTileHeaderProps) {
   return (
@@ -26,11 +25,7 @@ function ChartTileHeader({
       <Box>
         {description && (
           <Box maxWidth={560}>
-            {descriptionIsMarkdown ? (
-              <Markdown content={description} />
-            ) : (
-              <Text>{description}</Text>
-            )}
+            <Markdown content={description} />
           </Box>
         )}
         {children && (
@@ -48,7 +43,6 @@ type ChartTileProps = {
   metadata: MetadataProps;
   description?: string;
   timeframeInitialValue?: TimeframeOption;
-  descriptionIsMarkdown?: boolean;
 } & (
   | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
   {
@@ -66,7 +60,6 @@ export function ChartTile({
   description,
   children,
   metadata,
-  descriptionIsMarkdown,
   timeframeOptions,
   timeframeInitialValue = 'all',
 }: ChartTileProps) {
@@ -76,11 +69,7 @@ export function ChartTile({
 
   return (
     <FullscreenChartTile metadata={metadata}>
-      <ChartTileHeader
-        title={title}
-        description={description}
-        descriptionIsMarkdown
-      >
+      <ChartTileHeader title={title} description={description}>
         {timeframeOptions && timeframe && (
           <ChartTimeControls
             timeframeOptions={timeframeOptions}
