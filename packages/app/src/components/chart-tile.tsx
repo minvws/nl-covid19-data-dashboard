@@ -2,19 +2,22 @@ import { assert } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
-import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { ChartTimeControls } from './chart-time-controls';
+import { FullscreenChartTile } from './fullscreen-chart-tile';
+import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
   children?: ReactNode;
+  descriptionIsMarkdown?: boolean;
 }
 
 function ChartTileHeader({
   title,
   description,
+  descriptionIsMarkdown,
   children,
 }: ChartTileHeaderProps) {
   return (
@@ -23,7 +26,11 @@ function ChartTileHeader({
       <Box>
         {description && (
           <Box maxWidth={560}>
-            <Text> {description}</Text>
+            {descriptionIsMarkdown ? (
+              <Markdown content={description} />
+            ) : (
+              <Text>{description}</Text>
+            )}
           </Box>
         )}
         {children && (
@@ -41,6 +48,7 @@ type ChartTileProps = {
   metadata: MetadataProps;
   description?: string;
   timeframeInitialValue?: TimeframeOption;
+  descriptionIsMarkdown?: boolean;
 } & (
   | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
   {
@@ -58,6 +66,7 @@ export function ChartTile({
   description,
   children,
   metadata,
+  descriptionIsMarkdown,
   timeframeOptions,
   timeframeInitialValue = 'all',
 }: ChartTileProps) {
@@ -67,7 +76,11 @@ export function ChartTile({
 
   return (
     <FullscreenChartTile metadata={metadata}>
-      <ChartTileHeader title={title} description={description}>
+      <ChartTileHeader
+        title={title}
+        description={description}
+        descriptionIsMarkdown
+      >
         {timeframeOptions && timeframe && (
           <ChartTimeControls
             timeframeOptions={timeframeOptions}
