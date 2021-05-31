@@ -35,7 +35,7 @@ export const restrictionIcons: Record<string, string | null> = {
   geenWedstrijden: 'geen-wedstrijden.svg',
   sporterMetZweetband: 'sporter-met-zweetband.svg',
   'stap_1-horeca_max': 'stap_1-horeca_max.svg',
-  'stap-1_horeca_per_tafel': 'stap_1-horeca_pertafel.svg',
+  'stap-1_horeca_per_tafel':'stap_1-horeca_pertafel.svg',
   'stap_1-horeca_reserveren': 'stap_1-horeca_reserveren.svg',
   'stap_1-horeca_sportaccomodaties': 'stap_1-horeca_sportaccomodaties.svg',
   'stap_1-horeca_terras': 'stap_1-horeca_terras.svg',
@@ -55,7 +55,4 @@ export const restrictionIcons: Record<string, string | null> = {
   recreatie: 'recreatie.svg',
   binnensporten: 'binnensporten.svg',
   bibliotheken: 'bibliotheken.svg',
-  horeca_evenementen: 'horeca_evenementen.svg',
-  kunstcultuur_musea: 'kunstcultuur_musea.svg',
-  ontmoetingen_bezoek: 'ontmoetingen_bezoek.svg',
 };
