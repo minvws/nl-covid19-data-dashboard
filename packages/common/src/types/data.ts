@@ -1140,6 +1140,7 @@ export interface VrSituations {
 export interface VrSituationsValue {
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion_unix: number;
   vrcode: string;
   has_sufficient_responses: boolean;
   situations_known_percentage: number;

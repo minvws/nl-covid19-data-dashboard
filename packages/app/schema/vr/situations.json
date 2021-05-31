@@ -22,6 +22,7 @@
       "required": [
         "date_start_unix",
         "date_end_unix",
+        "date_of_insertion_unix",
         "vrcode",
         "has_sufficient_responses",
         "situations_known_percentage",
@@ -41,6 +42,9 @@
           "type": "integer"
         },
         "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
           "type": "integer"
         },
         "vrcode": {
