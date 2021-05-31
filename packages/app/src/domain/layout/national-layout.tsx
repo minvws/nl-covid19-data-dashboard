@@ -367,9 +367,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                     data={data}
                     scope="nl"
                     metricName="corona_melder_app"
-                    metricProperty="warned_daily"
                     localeTextKey="corona_melder_app"
-                    differenceKey="corona_melder_app__warned_daily"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

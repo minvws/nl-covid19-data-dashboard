@@ -2,9 +2,9 @@ import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import IconGelijk from '~/assets/gelijk.svg';
 import IconUp from '~/assets/pijl-omhoog.svg';
 import IconDown from '~/assets/pijl-omlaag.svg';
-import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
+import { InlineText } from '~/components/typography';
 
 export function TileDifference({
   value,
@@ -41,7 +41,7 @@ export function TileDifference({
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString} {splitText[0]}
-        </InlineText>{' '}
+        </InlineText>
         <InlineText color="annotation">
           {splitText[1]} {timespanTextNode}
         </InlineText>
@@ -59,7 +59,7 @@ export function TileDifference({
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString} {splitText[0]}
-        </InlineText>{' '}
+        </InlineText>
         <InlineText>
           {splitText[1]} {timespanTextNode}
         </InlineText>
