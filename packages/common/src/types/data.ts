@@ -853,6 +853,7 @@ export interface Regionaal {
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
+  situations?: VrSituations;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1132,6 +1133,28 @@ export interface VrVaccineCoverageValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface VrSituations {
+  values: VrSituationsValue[];
+  last_value: VrSituationsValue;
+}
+export interface VrSituationsValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+  has_sufficient_responses: boolean;
+  situations_known_percentage: number;
+  situations_known_total: number;
+  investigations_total: number;
+  home_and_visits: number | null;
+  work: number | null;
+  school_and_day_care: number | null;
+  health_care: number | null;
+  gathering: number | null;
+  travel: number | null;
+  hospitality: number | null;
+  other: number | null;
+}
 
 export interface Regions {
   last_generated: string;
@@ -1146,6 +1169,7 @@ export interface Regions {
   behavior: RegionsBehavior[];
   disability_care: RegionsDisabilityCare[];
   elderly_at_home: RegionsElderlyAtHome[];
+  situations?: VrCollectionSituations[];
 }
 export interface RegionsHospitalNice {
   date_unix: number;
@@ -1247,4 +1271,19 @@ export interface RegionsElderlyAtHome {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface VrCollectionSituations {
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+  has_sufficient_responses: boolean;
+  home_and_visits: number | null;
+  work: number | null;
+  school_and_day_care: number | null;
+  health_care: number | null;
+  gathering: number | null;
+  travel: number | null;
+  hospitality: number | null;
+  other: number | null;
 }
