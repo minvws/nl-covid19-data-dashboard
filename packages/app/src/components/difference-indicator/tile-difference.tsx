@@ -52,9 +52,6 @@ export function TileDifference({
   if (difference < 0) {
     const splitText = text.afname.split(' ');
 
-    console.log('differenceFormattedString', differenceFormattedString);
-    console.log('splitText[0]', splitText[0]);
-
     return (
       <Container>
         <IconContainer color="data.primary" mr={1}>
