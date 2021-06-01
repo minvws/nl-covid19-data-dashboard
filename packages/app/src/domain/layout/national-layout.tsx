@@ -23,6 +23,7 @@ import {
 import { Box } from '~/components/base';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
+import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -254,6 +255,14 @@ export function NationalLayout(props: NationalLayoutProps) {
                     localeTextKey="sterfte"
                     differenceKey="deceased_rivm__covid_daily"
                   />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.brononderzoek()}
+                  icon={<GetestIcon />}
+                  title={siteText.brononderzoek.titel_sidebar}
+                >
+                  <SidebarKpiValue title={siteText.brononderzoek.kpi_titel} />
                 </MetricMenuItemLink>
               </CategoryMenu>
 

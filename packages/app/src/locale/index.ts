@@ -2,7 +2,7 @@ import nl from './nl_export.json';
 import en from './en_export.json';
 
 type NlLocale = typeof nl;
-type EnLocale = typeof en;
+type EnLocale = typeof nl;
 
 export type Languages = {
   nl: NlLocale;

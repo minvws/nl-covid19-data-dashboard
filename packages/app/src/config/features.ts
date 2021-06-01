@@ -32,7 +32,13 @@ export const features: Feature[] = [
     isEnabled: true,
   },
   {
-    name: 'behaviorPage', 
+    name: 'behaviorPage',
     isEnabled: false,
-  }
+  },
+  {
+    name: 'situationsPage',
+    isEnabled: true,
+    metricScopes: ['vr', 'vr_collection'],
+    metricName: 'situations',
+  },
 ];

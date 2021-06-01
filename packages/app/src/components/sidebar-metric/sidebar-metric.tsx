@@ -63,7 +63,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
    * a certain metric but here we don't have that type as input.
    */
   const lastValue = metricContainsPartialData(metricName as string)
-    ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
+    ? getLastFilledValue(data[metricName] as unknown as Metric<unknown>)
     : get(data, [metricName as string, 'last_value']);
 
   const propertyValue = metricProperty && lastValue?.[metricProperty];
@@ -104,7 +104,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
 
   const config = getMetricConfig(
     scope,
-    (metricName as unknown) as string,
+    metricName as unknown as string,
     metricProperty
   );
 
@@ -126,7 +126,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   }
 
   const differenceValue = differenceKey
-    ? get(data, ['difference', (differenceKey as unknown) as string])
+    ? get(data, ['difference', differenceKey as unknown as string])
     : undefined;
 
   if (differenceKey) {
