@@ -12,3 +12,4 @@ timestamp,action,key
 2021-06-01T08:59:28.917Z,add,brononderzoek.bronnen.rivm.download
 2021-06-01T08:59:29.938Z,add,brononderzoek.bronnen.rivm.href
 2021-06-01T08:59:30.960Z,add,brononderzoek.bronnen.rivm.text
+2021-06-01T11:10:47.582Z,add,common.subject_in_location
