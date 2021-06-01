@@ -17,6 +17,11 @@ type GappedLinedTrendProps = {
 export function GappedLinedTrend(props: GappedLinedTrendProps) {
   const { series, color, style, strokeWidth, getX, getY, curve, id } = props;
 
+  /**
+   * Here we loop through the series and each time a null value is encountered a
+   * new SeriesSingleValue array is created. Effectively creating separate lines
+   * for each consecutive list of defined values.
+   */
   const gappedSeries = series.reduce<SeriesSingleValue[][]>(
     (list, item) => {
       let currentList = last(list) || [];
