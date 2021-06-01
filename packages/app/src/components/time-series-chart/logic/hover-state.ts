@@ -238,6 +238,7 @@ export function useHoverState<T extends TimestampedValue>({
 
         switch (config.type) {
           case 'line':
+          case 'gapped-line':
           case 'area':
             return {
               seriesValue,
