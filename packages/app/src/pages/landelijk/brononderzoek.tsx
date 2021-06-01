@@ -1,17 +1,21 @@
 import { assert } from '@corona-dashboard/common';
 import GatheringsIcon from '~/assets/situations/gatherings.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
@@ -23,6 +27,12 @@ export const getStaticProps = withFeatureNotFoundPage(
     selectNlPageMetricData(),
     createGetChoroplethData({
       vr: ({ situations }) => ({ situations }),
+    }),
+    createGetContent<{
+      articles?: ArticleSummary[];
+    }>((_context) => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      return createPageArticlesQuery('situationsPage', locale);
     })
   )
 );
@@ -30,7 +40,7 @@ export const getStaticProps = withFeatureNotFoundPage(
 export default function BrononderzoekPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { choropleth, selectedNlData: data, lastGenerated } = props;
+  const { choropleth, selectedNlData: data, lastGenerated, content } = props;
 
   const intl = useIntl();
 
@@ -68,6 +78,8 @@ export default function BrononderzoekPage(
               dataSources: [text.bronnen.rivm],
             }}
           />
+
+          <ArticleStrip articles={content.articles} />
         </TileList>
       </NationalLayout>
     </Layout>
