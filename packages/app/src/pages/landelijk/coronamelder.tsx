@@ -59,6 +59,10 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                 Hoi{' '}
                 <Toggletip description="Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie" />
               </h1>
+              {/* <h1>
+                Hoi{' '}
+                <Toggletip description="Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie" />
+              </h1> */}
               {/* <Toggletip description="Dit is een toggle tippie" /> */}
             </Box>
           </Tile>
