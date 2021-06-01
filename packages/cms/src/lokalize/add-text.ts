@@ -1,6 +1,7 @@
 /**
  * Add one or multiple texts to the Sanity "Lokalize" dataset.
  */
+import flatten from 'flat';
 import meow from 'meow';
 import prompts from 'prompts';
 import { getClient } from '../client';
@@ -9,7 +10,6 @@ import {
   exportLokalizeTexts,
   fetchExistingKeys,
 } from './logic';
-import { LokalizeText } from './types';
 
 let additionsCounter = 0;
 
@@ -21,9 +21,11 @@ let additionsCounter = 0;
 
       Options
         --key, -k The new text key to add in dot-notation
+        --json -j Display *single-line* json prompt to add multiple texts at once
 
       Examples
         $ add-text -k some.unique.path
+        $ add-text --json
     `,
     {
       flags: {
@@ -31,14 +33,74 @@ let additionsCounter = 0;
           type: 'string',
           alias: 'k',
         },
+        json: {
+          type: 'boolean',
+          alias: 'j',
+        },
       },
     }
   );
 
   const existingKeys = await fetchExistingKeys();
 
+  if (cli.flags.json) {
+    const jsonResponse = await prompts([
+      {
+        type: 'text',
+        name: 'json',
+        message: 'Enter the new text documents as single-line json string',
+        format: (x: string) => x.trim(),
+        validate: (x: string) => x.length > 1,
+        onState,
+      },
+    ]);
+
+    const textDocuments = await createTextDocumentsFromJson(
+      existingKeys,
+      jsonResponse.json
+    );
+
+    console.log(
+      textDocuments.map((textDocument) => ({
+        key: textDocument.key,
+        nl: textDocument.text.nl,
+        en: textDocument.text.en,
+      }))
+    );
+
+    const response = await prompts([
+      {
+        type: 'confirm',
+        name: 'confirmed',
+        message: 'Is this correct?',
+        onState,
+      },
+    ]);
+
+    if (response.confirmed) {
+      const client = getClient();
+
+      for (const textDocument of textDocuments) {
+        await client.create(textDocument);
+
+        await appendTextMutation('add', textDocument.key);
+
+        console.log(`Successfully created ${textDocument.key}`);
+
+        existingKeys.push(textDocument.key);
+
+        additionsCounter++;
+      }
+    }
+
+    return;
+  }
+
   while (true) {
-    const textDocument = await createTextDocument(existingKeys, cli.flags.key);
+    const textDocument = await createTextDocumentFromPrompt(
+      existingKeys,
+      cli.flags.key
+    );
 
     console.log({
       key: textDocument.key,
@@ -114,24 +176,17 @@ function onState(state: { aborted: boolean }) {
   }
 }
 
-async function createTextDocument(existingKeys: string[], initialKey?: string) {
+async function createTextDocumentFromPrompt(
+  existingKeys: string[],
+  initialKey?: string
+) {
   const response = await prompts([
     {
       type: 'text',
       name: 'key',
       message: 'What is the key? (Use snake_cased.dot.notation)',
       initial: initialKey,
-      validate: (x: string) => {
-        /**
-         * Validation requires the key to be new and also to only contain
-         * lower-snake-case paths in dot notation.
-         * https://regexr.com/5t2lg
-         */
-        return (
-          existingKeys.find((key) => key === x) === undefined &&
-          /^[a-z_]+(\.[a-z0-9_]+)+$/.test(x)
-        );
-      },
+      validate: (key: string) => isValidKey(key, existingKeys),
       onState,
     },
     {
@@ -154,6 +209,25 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
     },
   ]);
 
+  return createTextDocument(response.key, response.nl, response.en);
+}
+
+async function createTextDocumentsFromJson(
+  existingKeys: string[],
+  json: string
+) {
+  const texts = flatten(JSON.parse(json)) as Record<string, string>;
+
+  return Object.entries(texts).map(([key, nlText]) => {
+    if (!isValidKey(key, existingKeys)) {
+      throw new Error(`Cannot create existing key "${key}"`);
+    }
+
+    return createTextDocument(key, nlText);
+  });
+}
+
+function createTextDocument(key: string, nl: string, en = '') {
   /**
    * Here we split the key into a subject and (remaining) path. This is required
    * for the way LokalizeText documents are queried in Sanity. But possibly we
@@ -161,12 +235,12 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
    *
    * @TODO see if key is enough to build the UI in Sanity.
    */
-  const [subject, ...pathElements] = response.key.split('.');
+  const [subject, ...pathElements] = key.split('.');
   const path = pathElements.join('.');
 
-  const text: Omit<LokalizeText, '_id'> = {
+  return {
     _type: 'lokalizeText',
-    key: response.key,
+    key,
     subject,
     path,
     is_newly_added: true,
@@ -174,10 +248,20 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
     should_display_empty: false,
     text: {
       _type: 'localeText',
-      nl: response.nl,
-      en: response.en,
+      nl,
+      en,
     },
   };
+}
 
-  return text;
+function isValidKey(key: string, existingKeys: string[]) {
+  /**
+   * Validation requires the key to be new and also to only contain
+   * lower-snake-case paths in dot notation.
+   * https://regexr.com/5t2lg
+   */
+  return (
+    existingKeys.find((x) => x === key) === undefined &&
+    /^[a-z_]+(\.[a-z0-9_]+)+$/.test(key)
+  );
 }
