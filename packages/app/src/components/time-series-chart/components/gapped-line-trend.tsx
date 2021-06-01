@@ -1,4 +1,5 @@
 import { last } from 'lodash';
+import { isDefined } from 'ts-is-present';
 import { SeriesItem, SeriesSingleValue } from '../logic';
 import { LineTrend } from './line-trend';
 
@@ -18,17 +19,19 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
   const gappedSeries = series.reduce<SeriesSingleValue[][]>(
     (list, item) => {
       let currentList = last(list) || [];
-      if (currentList.length && item.__value === null) {
+      if (currentList.length && !isDefined(item.__value)) {
         list.push([]);
         currentList = last(list) || [];
       }
-      if (item.__value !== null) {
+      if (isDefined(item.__value)) {
         currentList.push(item);
       }
       return list;
     },
     [[]]
   );
+
+  console.dir(gappedSeries);
 
   return (
     <>

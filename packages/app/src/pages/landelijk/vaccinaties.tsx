@@ -191,7 +191,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
               seriesConfig={[
                 {
-                  type: 'gapped-line',
+                  type: 'line',
                   metricProperty: 'percentage_70_plus',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
