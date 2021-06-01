@@ -25,5 +25,10 @@ export function withFeatureNotFoundPage<T>(name: string, getProps: T): T {
 
   return feature.isEnabled
     ? getProps
-    : ((() => ({ notFound: true })) as unknown as T);
+    : /**
+       * return a `getStaticProps` instance with { notFound: true } to return
+       * a 404 status + page.
+       * To prevent TS errors on the calling-context the function is cast to T.
+       */
+      ((() => ({ notFound: true })) as unknown as T);
 }
