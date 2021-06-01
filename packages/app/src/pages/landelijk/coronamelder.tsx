@@ -26,6 +26,8 @@ import {
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { Toggletip } from '~/components/toggletip';
+import { Box } from '~/components/base';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -51,6 +53,15 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
+          <Tile>
+            <Box display="flex" justifyContent="space-around">
+              <h1>
+                Hoi{' '}
+                <Toggletip description="Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie Dit is een toggle tippie" />
+              </h1>
+              {/* <Toggletip description="Dit is een toggle tippie" /> */}
+            </Box>
+          </Tile>
           <ContentHeader
             category={corona_melder_app.header.category}
             title={corona_melder_app.header.title}
