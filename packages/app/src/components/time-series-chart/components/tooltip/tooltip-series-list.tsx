@@ -78,6 +78,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
           switch (x.type) {
             case 'stacked-area':
+            case 'gapped-line':
             case 'line':
             case 'area':
             case 'bar':
@@ -125,7 +126,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                     <SeriesIcon
                       config={x}
                       value={
-                        value[x.metricProperty] as unknown as number | null
+                        (value[x.metricProperty] as unknown) as number | null
                       }
                     />
                   }
