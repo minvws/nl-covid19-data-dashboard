@@ -1,6 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { first, last } from 'lodash';
 import { useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components/legend';
 import {
   HatchedTimespanAnnotationIcon,
@@ -57,7 +58,7 @@ export function useLegendItems<T extends TimestampedValue>(
             label: annotation.label,
             shape: 'custom',
             shapeComponent:
-              annotation.fill === 'solid' ? (
+              annotation.fill === 'solid' || !isDefined(annotation.fill) ? (
                 <SolidTimespanAnnotationIcon />
               ) : (
                 <HatchedTimespanAnnotationIcon />

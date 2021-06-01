@@ -9,6 +9,7 @@ import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { Heading, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -84,6 +85,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const stockFeature = useFeature('vaccineStockPerSupplier');
 
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
+
+  const gappedLineAnnotations = useGappedLineAnnotations(
+    data.vaccine_vaccinated_or_support.values,
+    'percentage_70_plus',
+    'Onbeschikbaar'
+  );
 
   const { siteText } = useIntl();
 
@@ -188,10 +195,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               dataOptions={{
                 isPercentage: true,
                 forcedMaximumValue: 100,
+                timespanAnnotations: gappedLineAnnotations,
               }}
               seriesConfig={[
                 {
-                  type: 'line',
+                  type: 'gapped-line',
                   metricProperty: 'percentage_70_plus',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
@@ -200,7 +208,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   color: colors.data.multiseries.magenta,
                 },
                 {
-                  type: 'line',
+                  type: 'gapped-line',
                   metricProperty: 'percentage_55_69',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
@@ -209,7 +217,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   color: colors.data.multiseries.orange,
                 },
                 {
-                  type: 'line',
+                  type: 'gapped-line',
                   metricProperty: 'percentage_40_54',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
@@ -218,7 +226,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   color: colors.data.multiseries.turquoise,
                 },
                 {
-                  type: 'line',
+                  type: 'gapped-line',
                   metricProperty: 'percentage_25_39',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
@@ -227,7 +235,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   color: colors.data.multiseries.yellow,
                 },
                 {
-                  type: 'line',
+                  type: 'gapped-line',
                   metricProperty: 'percentage_16_24',
                   label: replaceVariablesInText(
                     text.grafiek_draagvlak.leeftijd_jaar,
