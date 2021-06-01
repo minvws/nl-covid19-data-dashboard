@@ -16,12 +16,14 @@ type GappedLinedTrendProps = {
 
 export function GappedLinedTrend(props: GappedLinedTrendProps) {
   const { series, color, style, strokeWidth, getX, getY, curve, id } = props;
+
   const gappedSeries = series.reduce<SeriesSingleValue[][]>(
     (list, item) => {
       let currentList = last(list) || [];
       if (currentList.length && !isDefined(item.__value)) {
-        list.push([]);
-        currentList = last(list) || [];
+        const newList: SeriesSingleValue[] = [];
+        list.push(newList);
+        currentList = newList;
       }
       if (isDefined(item.__value)) {
         currentList.push(item);
@@ -30,8 +32,6 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
     },
     [[]]
   );
-
-  console.dir(gappedSeries);
 
   return (
     <>
