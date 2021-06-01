@@ -23,17 +23,17 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
    * for each consecutive list of defined values.
    */
   const gappedSeries = series.reduce<SeriesSingleValue[][]>(
-    (list, item) => {
-      let currentList = last(list) || [];
+    (lists, item) => {
+      let currentList = last(lists) || [];
       if (currentList.length && !isDefined(item.__value)) {
         const newList: SeriesSingleValue[] = [];
-        list.push(newList);
+        lists.push(newList);
         currentList = newList;
       }
       if (isDefined(item.__value)) {
         currentList.push(item);
       }
-      return list;
+      return lists;
     },
     [[]]
   );
