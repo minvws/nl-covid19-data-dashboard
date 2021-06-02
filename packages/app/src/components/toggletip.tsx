@@ -2,15 +2,16 @@ import css from '@styled-system/css';
 import { InlineText, Text } from '~/components/typography';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { useViewport } from '~/utils/use-viewport';
+import Informatie from '~/assets/informatie.svg';
 
 const BUTTON_SIZE = 30;
 const ARROW_SIZE = 20;
-const TOOLTIP_BOUNDING_SMALL_SCREEN = 10;
-const MAX_WIDTH = 250;
+const BOUNDING = 20;
+const MAX_WIDTH = 350;
 
 interface ToggletipProps {
   description: any;
@@ -18,57 +19,42 @@ interface ToggletipProps {
 
 export function Toggletip({ description }: ToggletipProps) {
   const [isActive, setIsActive] = useState(false);
-  const resizeEvent = useViewport(250);
+  const resizeEvent = useViewport({ delayMs: 250 });
   const uniqueId = useUniqueId();
   const boundingBoxRef = useRef<HTMLDivElement>(null);
 
-  const [isTooNarrow, setIsTooNarrow] = useState(false);
   const [transformX, setTransformX] = useState(0);
 
-  // HIER MOET NOG MEE GEDAAN WORDEN MET DE FOCUS
-  const onMouseOverHandler = () => setIsActive(true);
-  const onMouseLeaveHandler = () => setIsActive(false);
-  const onFocusHandler = () => setIsActive(true);
-  const onBlurHandler = () => setIsActive(false);
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!boundingBoxRef.current) return;
 
     const bounding = boundingBoxRef.current.getBoundingClientRect();
 
-    if (MAX_WIDTH < window.innerWidth) setIsTooNarrow(false);
-
-    if (
-      bounding.width > window.innerWidth &&
-      bounding.right >
-        (window.innerWidth || document.documentElement.clientWidth) &&
-      bounding.x < 0
-    ) {
-      setIsTooNarrow(true);
-      setTransformX(0);
-    }
-
-    if (bounding.x < 0 && !isTooNarrow) {
-      setTransformX(Math.ceil(bounding.x * -1));
+    if (bounding.x < 0) {
+      console.log('Left');
+      setTransformX(Math.ceil(bounding.x * -1) + BOUNDING);
+      return;
     }
 
     if (
       bounding.right >
-        (window.innerWidth || document.documentElement.clientWidth) &&
-      !isTooNarrow
+      (window.innerWidth || document.documentElement.clientWidth)
     ) {
-      setTransformX(
-        (bounding.right + BUTTON_SIZE / 2 - window.innerWidth ||
-          document.documentElement.clientWidth) * -1
-      );
-    }
+      console.log('Right');
 
-    // if (!isTooNarrow) setTransformX(0);
-  }, [resizeEvent, boundingBoxRef, isTooNarrow]);
+      setTransformX((bounding.right - window.innerWidth) * -1 - BOUNDING);
+      return;
+    }
+  }, [resizeEvent, boundingBoxRef]);
 
   useHotkey('escape', () => {
     if (isActive) setIsActive(false);
   });
+
+  const onMouseOverHandler = () => setIsActive(true);
+  const onMouseLeaveHandler = () => setIsActive(false);
+  const onFocusHandler = () => setIsActive(true);
+  const onBlurHandler = () => setIsActive(false);
 
   return (
     <Box
@@ -77,7 +63,7 @@ export function Toggletip({ description }: ToggletipProps) {
       aria-expanded={isActive}
       aria-labelledby={uniqueId}
     >
-      <Circle
+      <Button
         onMouseOver={onMouseOverHandler}
         onMouseLeave={onMouseLeaveHandler}
         onFocus={onFocusHandler}
@@ -85,11 +71,11 @@ export function Toggletip({ description }: ToggletipProps) {
         isActive={isActive}
         type="button"
       >
-        I
-      </Circle>
-
+        <Informatie />
+      </Button>
       <Box
         position="absolute"
+        zIndex={9}
         top={0}
         transform={`translateX(${transformX}px)`}
       >
@@ -97,7 +83,6 @@ export function Toggletip({ description }: ToggletipProps) {
           aria-hidden={!isActive}
           isActive={isActive}
           ref={boundingBoxRef}
-          isTooNarrow={isTooNarrow}
         >
           <Text as="span" m={0} fontWeight="normal" id={uniqueId}>
             {description}
@@ -108,7 +93,7 @@ export function Toggletip({ description }: ToggletipProps) {
   );
 }
 
-const Circle = styled.button<{ isActive: boolean }>(({ isActive }) =>
+const Button = styled.button<{ isActive: boolean }>(({ isActive }) =>
   css({
     all: 'unset',
     position: 'relative',
@@ -119,71 +104,69 @@ const Circle = styled.button<{ isActive: boolean }>(({ isActive }) =>
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
+    cursor: 'help',
+
+    svg: {
+      color: 'white',
+      width: 7,
+      height: 15,
+      pr: '1px',
+      pb: '1px',
+    },
 
     '&:before': {
       position: 'absolute',
-      // width: 0,
-      // height: 0,
-      // borderLeft: '1rem solid transparent',
-      // borderRight: '1rem solid transparent',
-
-      // borderTop: '1rem solid #fff',
       left: `calc(50% - ${ARROW_SIZE / 2}px)`,
-      top: -24,
+      top: -25,
       height: ARROW_SIZE,
       width: ARROW_SIZE,
       content: '""',
       backgroundColor: '#fff',
       transform: 'rotate(45deg)',
-      zIndex: 0,
-      boxShadow: '0px 2px 12px rgba(0, 0, 0, 0.1)',
-      opacity: isActive ? 1 : 1,
-      // clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0% 100%)',
+      zIndex: 99,
+      boxShadow: '10px 10px 8px 3px rgba(0, 0, 0, 0.1)',
+      opacity: isActive ? 1 : 0,
     },
 
     '&:focus': {
       outline: '2px dotted black',
     },
 
-    // Fancy way of enabling the tooltip when
-    // there is no interaction possible with Javascript
-    // '&:hover, &:focus': {
-    //   '.has-no-js &': {
-    //     '+ div': {
-    //       opacity: 1,
-    //       pointerEvents: 'auto',
-    //       backgroundColor: 'cyan',
+    '&:hover, &:focus-visible': {
+      '&:before': {
+        '.has-no-js &': {
+          opacity: 1,
+        },
+      },
 
-    //       '&:before': {
-    //         backgroundColor: 'cyan',
-    //       },
-    //     },
-    //   },
-    // },
+      '+ div > div': {
+        '.has-no-js &': {
+          opacity: 1,
+        },
+      },
+    },
   })
 );
 
 const DescriptionCloud = styled.div<{
   isActive: boolean;
-  isTooNarrow: boolean;
-}>(({ isActive, isTooNarrow }) =>
+}>(({ isActive }) =>
   css({
     top: 0,
     width: 'max-content',
-    maxWidth: isTooNarrow ? '90vw' : MAX_WIDTH,
+    maxWidth: MAX_WIDTH,
     display: 'flex',
     position: 'absolute',
     py: 12,
     px: 10,
     backgroundColor: 'white',
-    boxShadow: 'tooltip',
+    boxShadow: '0px 3px 8px rgba(0, 0, 0, 0.1)',
     borderRadius: 1,
     transform: `translate(calc(-50% + ${
       BUTTON_SIZE / 2
     }px), calc(-100% - 10px))`,
-    zIndex: 99,
-
-    opacity: isActive ? 1 : 1,
+    zIndex: 20,
+    opacity: isActive ? 1 : 0,
     pointerEvents: 'none',
   })
 );
