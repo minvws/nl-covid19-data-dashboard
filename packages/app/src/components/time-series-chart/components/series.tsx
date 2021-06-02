@@ -15,6 +15,7 @@ import {
   SeriesSingleValue,
 } from '../logic';
 import { SplitAreaTrend } from './split-area-trend';
+import { GappedLinedTrend } from './gapped-line-trend';
 import { SplitBarTrend } from './split-bar-trend';
 import { StackedAreaTrend } from './stacked-area-trend';
 
@@ -59,6 +60,20 @@ function SeriesUnmemoized<T extends TimestampedValue>({
           const config = seriesConfig[index];
 
           switch (config.type) {
+            case 'gapped-line':
+              return (
+                <GappedLinedTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  style={config.style}
+                  strokeWidth={config.strokeWidth}
+                  curve={config.curve}
+                  getX={getX}
+                  getY={getY}
+                  id={`${chartId}_${config.metricProperty}`}
+                />
+              );
             case 'line':
               return (
                 <LineTrend

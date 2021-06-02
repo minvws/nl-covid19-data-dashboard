@@ -164,15 +164,20 @@ export function ContentHeader(props: ContentHeaderProps) {
           flexDirection={['column', null, null, null, 'row']}
           ml={[null, null, null, hasIcon ? 5 : null]}
         >
-          {reference && (
+          {(reference || subtitle) && (
             <ReferenceBox>
               <Text m={0}>
-                {subtitle}{' '}
-                <Link href={reference.href}>
-                  <Text as="a" href={reference.href}>
-                    {reference.text}
-                  </Text>
-                </Link>
+                {subtitle}
+                {reference && (
+                  <>
+                    {' '}
+                    <Link href={reference.href}>
+                      <Text as="a" href={reference.href}>
+                        {reference.text}
+                      </Text>
+                    </Link>
+                  </>
+                )}
               </Text>
             </ReferenceBox>
           )}

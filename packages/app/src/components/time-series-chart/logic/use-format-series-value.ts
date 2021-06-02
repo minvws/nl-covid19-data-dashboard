@@ -1,8 +1,8 @@
-import { useIntl } from '~/intl';
+import { TimestampedValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
+import { useIntl } from '~/intl';
 import { SeriesConfig } from './series';
-import { TimestampedValue } from '@corona-dashboard/common';
 
 export function useFormatSeriesValue() {
   const intl = useIntl();
@@ -49,6 +49,8 @@ export function useFormatSeriesValue() {
             value[config.metricPropertyHigh],
             isPercentage
           );
+        default:
+          return getValueString(value[config.metricProperty], isPercentage);
       }
     }
 

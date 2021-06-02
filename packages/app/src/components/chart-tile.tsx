@@ -2,14 +2,16 @@ import { assert } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
-import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { ChartTimeControls } from './chart-time-controls';
+import { FullscreenChartTile } from './fullscreen-chart-tile';
+import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
-import { Heading, Text } from './typography';
+import { Heading } from './typography';
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
   children?: ReactNode;
+  descriptionIsMarkdown?: boolean;
 }
 
 function ChartTileHeader({
@@ -23,7 +25,7 @@ function ChartTileHeader({
       <Box>
         {description && (
           <Box maxWidth={560}>
-            <Text> {description}</Text>
+            <Markdown content={description} />
           </Box>
         )}
         {children && (

@@ -20,7 +20,19 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
   | SplitAreaDefinition<T>
+  | GappedLineSeriesDefinition<T>
 )[];
+
+export type GappedLineSeriesDefinition<T extends TimestampedValue> = {
+  type: 'gapped-line';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'dashed';
+  strokeWidth?: number;
+  curve?: 'linear' | 'step';
+};
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
   type: 'line';

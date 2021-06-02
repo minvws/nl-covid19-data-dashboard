@@ -1,5 +1,12 @@
 import css from '@styled-system/css';
-import { MouseEvent, ReactNode, useCallback, useRef, useState } from 'react';
+import {
+  MouseEvent,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Box } from '~/components/base';
 
 export interface TooltipCoordinates {
@@ -49,6 +56,14 @@ export function useTooltip<T>({
     coordinates,
     value,
   };
+
+  useEffect(() => {
+    return () => {
+      if (timer.current > -1) {
+        window.clearTimeout(timer.current);
+      }
+    };
+  }, []);
 
   // This timeout smoothens the display of the tooltip for mouse users
   function debounceMouseEvents(callback: () => void) {
