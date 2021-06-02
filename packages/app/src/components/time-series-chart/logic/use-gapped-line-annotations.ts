@@ -40,13 +40,13 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
                 : NaN;
 
               let current = last(newItems);
-              if (!isDefined(current) || current.end > -1) {
-                current = { start: startDate, end: -1 };
+              if (!isDefined(current) || !isNaN(current.end)) {
+                current = { start: startDate, end: NaN };
                 newItems.push(current);
               }
 
               if (
-                index + 1 > array.length - 1 ||
+                index === array.length - 1 ||
                 isPresent(array[index + 1]?.[property])
               ) {
                 current.end = endDate;
