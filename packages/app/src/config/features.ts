@@ -32,7 +32,7 @@ export const features: Feature[] = [
     isEnabled: true,
   },
   {
-    name: 'behaviorPage', 
-    isEnabled: false,
-  }
+    name: 'behaviorPage',
+    isEnabled: true,
+  },
 ];
