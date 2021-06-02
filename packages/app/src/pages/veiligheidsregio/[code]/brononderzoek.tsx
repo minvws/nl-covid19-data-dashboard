@@ -1,11 +1,11 @@
 import { assert } from '@corona-dashboard/common';
-import GatheringsIcon from '~/assets/situations/gatherings.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { SituationIcon } from '~/domain/situations/logic/situation-icon';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -80,7 +80,7 @@ export default function BrononderzoekPage(
                 location: safetyRegionName,
               }
             )}
-            icon={<GatheringsIcon />}
+            icon={<SituationIcon id="gathering" />}
             subtitle={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

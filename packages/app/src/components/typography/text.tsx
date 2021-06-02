@@ -5,6 +5,7 @@ import {
   margin,
   padding,
   color,
+  layout,
   SpaceProps,
   LayoutProps,
   ColorProps,
@@ -30,11 +31,17 @@ export type TextProps = SpaceProps &
  */
 export const Text = styled.p.withConfig({
   shouldForwardProp: styledShouldForwardProp,
-})<TextProps>(compose(margin, padding, typography, color), textTransform);
+})<TextProps>(
+  compose(margin, padding, typography, color, layout),
+  textTransform
+);
 
 export const InlineText = styled.span.withConfig({
   shouldForwardProp: styledShouldForwardProp,
-})<TextProps>(compose(margin, padding, typography, color), textTransform);
+})<TextProps>(
+  compose(margin, padding, typography, color, layout),
+  textTransform
+);
 
 /**
  * By setting defaultProps we can set themed defaults for the text component to
