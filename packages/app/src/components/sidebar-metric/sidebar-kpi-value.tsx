@@ -13,7 +13,7 @@ type SidebarKpiValueProps = {
    * Currently only `Behavior` is doing that.
    */
   value?: number;
-  description: string;
+  description?: string;
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
   isPercentage?: boolean;

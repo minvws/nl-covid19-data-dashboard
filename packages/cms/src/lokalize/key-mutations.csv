@@ -2,3 +2,14 @@ timestamp,action,key
 2021-05-26T10:07:52.493Z,add,escalatie_niveau.types.onbekend.titel
 2021-05-26T10:08:27.516Z,add,escalatie_niveau.types.onbekend.toelichting
 2021-05-26T10:32:09.125Z,add,vr_risiconiveau.types.onbekend.toelichting
+2021-06-01T08:59:21.782Z,add,brononderzoek.kpi_titel
+2021-06-01T08:59:22.800Z,add,brononderzoek.titel_sidebar
+2021-06-01T08:59:23.824Z,add,brononderzoek.titel
+2021-06-01T08:59:24.909Z,add,brononderzoek.metadata.description
+2021-06-01T08:59:25.908Z,add,brononderzoek.metadata.title
+2021-06-01T08:59:26.956Z,add,brononderzoek.pagina_toelichting
+2021-06-01T08:59:27.900Z,add,brononderzoek.datums
+2021-06-01T08:59:28.917Z,add,brononderzoek.bronnen.rivm.download
+2021-06-01T08:59:29.938Z,add,brononderzoek.bronnen.rivm.href
+2021-06-01T08:59:30.960Z,add,brononderzoek.bronnen.rivm.text
+2021-06-01T11:10:47.582Z,add,common.subject_in_location
