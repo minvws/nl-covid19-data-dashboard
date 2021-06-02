@@ -1142,10 +1142,10 @@ export interface VrSituationsValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
-  has_sufficient_responses: boolean;
-  situations_known_percentage: number;
-  situations_known_total: number;
-  investigations_total: number;
+  has_sufficient_data: boolean;
+  situations_known_percentage: number | null;
+  situations_known_total: number | null;
+  investigations_total: number | null;
   home_and_visits: number | null;
   work: number | null;
   school_and_day_care: number | null;
@@ -1277,7 +1277,7 @@ export interface VrCollectionSituations {
   date_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
-  has_sufficient_responses: boolean;
+  has_sufficient_data: boolean;
   home_and_visits: number | null;
   work: number | null;
   school_and_day_care: number | null;

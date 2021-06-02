@@ -24,7 +24,7 @@
         "date_end_unix",
         "date_of_insertion_unix",
         "vrcode",
-        "has_sufficient_responses",
+        "has_sufficient_data",
         "situations_known_percentage",
         "situations_known_total",
         "investigations_total",
@@ -51,17 +51,17 @@
           "type": "string",
           "equalsRootProperty": "code"
         },
-        "has_sufficient_responses": {
+        "has_sufficient_data": {
           "type": "boolean"
         },
         "situations_known_percentage": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "situations_known_total": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "investigations_total": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "home_and_visits": {
           "type": ["number", "null"]
