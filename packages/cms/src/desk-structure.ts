@@ -23,6 +23,7 @@ const hiddenDocTypes = [
   'lockdown',
   'behaviorPage',
   'deceasedPage',
+  'situationsPage',
   'hospitalPage',
   'intensiveCarePage',
   'positiveTestsPage',
@@ -102,6 +103,7 @@ export default () =>
         'escalationLevelPage'
       ),
       addListItem(RiPagesFill, 'Sterfte', 'deceasedPage'),
+      addListItem(RiPagesFill, 'Brononderzoek GGD', 'situationsPage'),
       addListItem(RiPagesFill, 'Gedrag en naleving', 'behaviorPage'),
       addListItem(RiPagesFill, 'Ziekenhuis opnames', 'hospitalPage'),
       addListItem(RiPagesFill, 'IC opnames', 'intensiveCarePage'),

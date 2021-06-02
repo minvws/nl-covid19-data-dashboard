@@ -28,11 +28,11 @@ export function VaccineDeliveryAndAdministrationsTooltip({
 }: {
   data: TooltipData<VaccineDeliveryAndAdministrationsValue>;
 }) {
-  data.timespanAnnotation;
-
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
 
-  const isEstimate = data.timespanAnnotation?.fill === 'hatched';
+  const isEstimate =
+    data.timespanAnnotation?.fill === 'hatched' &&
+    data.timespanAnnotation.start !== data.value.date_unix;
 
   const firstValue = data.value.total_delivered;
   const firstConfig = data.config
@@ -46,7 +46,7 @@ export function VaccineDeliveryAndAdministrationsTooltip({
   }
 
   const dateEndString = formatDateFromSeconds(
-    data.value.date_end_unix,
+    data.value.date_unix,
     'day-month'
   );
 

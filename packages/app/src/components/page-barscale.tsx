@@ -6,6 +6,8 @@ import {
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
+import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import {
   DataScope,
@@ -14,8 +16,6 @@ import {
 } from '../metric-config';
 import { Box } from './base';
 import { TileAverageDifference, TileDifference } from './difference-indicator';
-import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
 
 /**
  * This component originated from SidebarBarScale, but is used on pages and

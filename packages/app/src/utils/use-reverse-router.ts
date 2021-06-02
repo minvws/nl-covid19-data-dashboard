@@ -29,12 +29,13 @@ export function useReverseRouter() {
         gedrag: () => `/landelijk/gedrag`,
         maatregelen: () => `/landelijk/maatregelen`,
         coronamelder: () => `/landelijk/coronamelder`,
+        brononderzoek: () => `/landelijk/brononderzoek`,
       },
 
       gm: {
         index: (code?: string) =>
           code
-            ? reverseRouter.gm.positiefGetesteMensen(code) + openMenuSuffix
+            ? reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
             : `/gemeente`,
         positiefGetesteMensen: (code: string) =>
           `/gemeente/${code}/positief-geteste-mensen`,
