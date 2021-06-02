@@ -23,6 +23,7 @@
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix",
+        "vrcode",
         "has_sufficient_data",
         "situations_known_percentage",
         "situations_known_total",
@@ -45,6 +46,10 @@
         },
         "date_of_insertion_unix": {
           "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
         },
         "has_sufficient_data": {
           "type": "boolean"
