@@ -68,9 +68,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.rioolwater_metingen;
 
   const sewerAverages = data.sewer;
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
 
   const sewerSplitAreaChart = useFeature('sewerSplitAreaChart');
 
@@ -160,7 +159,14 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           </TwoKpiSection>
 
           {sewerSplitAreaChart.isEnabled ? (
-            <NewSewerChart dataAverages={data.sewer} siteText={siteText} />
+            <NewSewerChart
+              dataAverages={data.sewer}
+              text={{
+                title: text.linechart_titel,
+                source: text.bronnen.rivm,
+                description: text.linechart_description,
+              }}
+            />
           ) : (
             <ChartTile
               timeframeOptions={['all', '5weeks']}

@@ -155,7 +155,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             <NewSewerChart
               dataAverages={data.sewer}
               dataPerInstallation={data.sewer_per_installation}
-              siteText={siteText}
+              text={{
+                title: text.linechart_titel,
+                source: text.bronnen.rivm,
+                description: text.linechart_description,
+                selectPlaceholder: text.graph_selected_rwzi_placeholder,
+              }}
             />
           ) : (
             <ChartTile

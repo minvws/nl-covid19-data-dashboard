@@ -9,28 +9,26 @@ import { set } from 'lodash';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { useIntl } from '~/intl';
-import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
 import { ChartTile } from '../chart-tile';
 
 export function NewSewerChart({
   dataAverages,
   dataPerInstallation,
+  text,
 }: {
   dataAverages: RegionalSewer | MunicipalSewer;
   dataPerInstallation?: SewerPerInstallationData;
-  siteText: SiteText;
+  text: {
+    title: string;
+    description: string;
+    source: {
+      href: string;
+      text: string;
+    };
+    selectPlaceholder?: string;
+  };
 }) {
-  const { siteText } = useIntl();
-
-  /**
-   * @TODO I'm assuming nl/gm/vr share use the same texts really but should check if
-   * this is correct. Maybe we can make the switch here if not based on a
-   * "context" prop if their texts are different but the structure is compatible.
-   */
-  const text = siteText.veiligheidsregio_rioolwater_metingen;
-
   const {
     options,
     value: selectedInstallation,
@@ -55,22 +53,22 @@ export function NewSewerChart({
   return (
     <ChartTile
       timeframeOptions={['all', '5weeks']}
-      title={text.linechart_titel}
+      title={text.title}
       metadata={{
-        source: text.bronnen.rivm,
+        source: text.source,
       }}
-      description={text.linechart_description}
+      description={text.description}
     >
       {(timeframe) => (
         <>
-          {options[0].value !== '__no_installations' && (
+          {dataPerInstallation && (
             <div css={css({ alignSelf: 'flex-start', mb: 2 })}>
               <Select
                 options={options}
                 onChange={onChange}
                 onClear={onClear}
                 value={selectedInstallation}
-                placeholder={text.graph_selected_rwzi_placeholder}
+                placeholder={text.selectPlaceholder || '__no_placeholder'}
               />
             </div>
           )}
