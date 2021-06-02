@@ -1,3 +1,4 @@
+import { assert } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
@@ -10,7 +11,6 @@ import { LanguageKey } from '~/locale';
 import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-import { assert } from '~/utils/assert';
 import { BreakpointContextProvider } from '~/utils/use-breakpoints';
 
 if (typeof window !== 'undefined') {
@@ -35,9 +35,7 @@ export default function App(props: AppProps) {
   // const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
   const locale = (process.env.NEXT_PUBLIC_LOCALE || 'nl') as LanguageKey;
 
-  const [text, toggleHotReloadButton] = useLokalizeText(locale, {
-    enableHotReload: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
-  });
+  const [text, toggleHotReloadButton] = useLokalizeText(locale);
 
   assert(text, `Encountered unknown language: ${locale}`);
 

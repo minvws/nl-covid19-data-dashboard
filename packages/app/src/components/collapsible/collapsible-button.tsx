@@ -1,14 +1,15 @@
-import { useMemo, useState } from 'react';
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { asResponsiveArray } from '~/style/utils';
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from '@reach/disclosure';
+import css from '@styled-system/css';
+import { useMemo, useState } from 'react';
+import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
+import { asResponsiveArray } from '~/style/utils';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useSetLinkTabbability } from './use-set-link-tabbability';
 interface CollapsibleButtonProps {
   children: React.ReactNode;
@@ -27,6 +28,7 @@ export const CollapsibleButton = ({
   const [isOpen, setIsOpen] = useState(false);
   const { wrapperRef } = useSetLinkTabbability(isOpen);
 
+  const isMounted = useIsMounted({ delayMs: 10 });
   /**
    * Calculate the clip path where the content needs to animate to,
    * this is alligned with the position of the button percentage wise based of the content wrapper
@@ -80,6 +82,7 @@ export const CollapsibleButton = ({
       contentWidth={contentObserver.width ?? 0}
       contentHeight={contentObserver.height ?? 0}
       clipPathCalculation={clipPathCalculation ?? 0}
+      isMounted={isMounted}
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
@@ -117,6 +120,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
   contentHeight: number;
   buttonHeight: number;
   clipPathCalculation: string;
+  isMounted: boolean;
 }>((x) =>
   css({
     position: 'relative',
@@ -168,7 +172,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         borderRadius: 1,
         borderColor: 'lightGray',
         zIndex: -1,
-        content: '""',
+        content: x.isMounted ? '""' : 'unset',
         pointerEvents: 'none',
 
         '.has-no-js &': {
@@ -185,6 +189,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 
     //panel
     '[data-reach-disclosure-panel]': {
+      maxHeight: x.isMounted ? undefined : 0,
       position: 'relative',
       width: '100%',
       overflow: 'hidden',

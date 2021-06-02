@@ -18,10 +18,13 @@ import Groepen from './assets/restrictions/groepen.svg';
 import HorecaBestellen from './assets/restrictions/horeca-en-evenementen_bestellen.svg';
 import HorecaEtenEnDrinken from './assets/restrictions/horeca-en-evenementen_etendrinken.svg';
 import HorecaEvenementen from './assets/restrictions/horeca-en-evenementen_evenementen.svg';
+import horeca_evenementen from './assets/restrictions/horeca_evenementen.svg';
+import kunstcultuur_musea from './assets/restrictions/kunstcultuur_musea.svg';
 import lopend from './assets/restrictions/lopend.svg';
 import OnderwijsKinderopvang from './assets/restrictions/onderwijs-en-kinderopvang_kinderopvang.svg';
 import OnderwijsNoodopvang from './assets/restrictions/onderwijs-en-kinderopvang_noodopvang.svg';
 import OnderwijsOpAfstand from './assets/restrictions/onderwijs-en-kinderopvang_op-afstand.svg';
+import ontmoetingen_bezoek from './assets/restrictions/ontmoetingen_bezoek.svg';
 import PubliekeLocaties from './assets/restrictions/publiek-toegankelijke-locaties.svg';
 import recreatie from './assets/restrictions/recreatie.svg';
 import reizen from './assets/restrictions/reizen.svg';
@@ -129,4 +132,7 @@ export const restrictionIcons = {
   recreatie,
   binnensporten,
   bibliotheken,
+  horeca_evenementen,
+  kunstcultuur_musea,
+  ontmoetingen_bezoek,
 } as const;

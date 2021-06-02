@@ -12,6 +12,9 @@ import { regionGeo } from '~/components/choropleth/topology';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Heading, InlineText, Text } from './typography';
 import { useIntl } from '~/intl';
+import { EscalationLevel } from '~/domain/restrictions/type';
+import { useEscalationColor } from '~/utils/use-escalation-color';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
@@ -41,6 +44,8 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
     metricProperty
   );
 
+  const unknownLevelColor = useEscalationColor(null);
+
   const getFillColor = useChoroplethColorScale(
     getChoroplethValue,
     selectedThreshold
@@ -51,16 +56,36 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   const sortedEscalationArray = useMemo(() => {
     if (!hasData) return [];
 
+    const sortedEscalationArray = [] as {
+      color: string;
+      threshold: EscalationLevel;
+      amount: number;
+    }[];
+
     // Add an amount key to the escalation object to count the amount of items
-    const sortedEscalationArray = escalationThresholds.map((item) => ({
-      ...item,
-      amount: regionGeo.features.filter(
-        (x) => item.color === getFillColor(x.properties.vrcode)
-      ).length,
-    }));
+    for (const item of escalationThresholds) {
+      sortedEscalationArray.push({
+        ...item,
+        amount: regionGeo.features.filter(
+          (x) => item.color === getFillColor(x.properties.vrcode)
+        ).length,
+      });
+    }
+
+    const unknownCount = regionGeo.features.filter(
+      (x) => unknownLevelColor === getFillColor(x.properties.vrcode)
+    ).length;
+
+    if (unknownCount) {
+      sortedEscalationArray.push({
+        color: unknownLevelColor,
+        threshold: null,
+        amount: unknownCount,
+      });
+    }
 
     return sortedEscalationArray;
-  }, [getFillColor, hasData]);
+  }, [getFillColor, hasData, unknownLevelColor]);
 
   return (
     <Box aria-label="legend" width="100%">
@@ -83,9 +108,17 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
               spacingHorizontal
               width={{ _: '8rem', sm: '10rem' }}
             >
-              <EscalationLevelIcon level={info.threshold} />
-              <InlineText pl={2}>
-                {siteText.escalatie_niveau.types[info.threshold].titel}
+              {info.threshold !== null && (
+                <Box pr={2}>
+                  <EscalationLevelIcon level={info.threshold} />
+                </Box>
+              )}
+              <InlineText>
+                {
+                  siteText.escalatie_niveau.types[
+                    getEscalationLevelIndexKey(info.threshold)
+                  ].titel
+                }
               </InlineText>
             </Box>
             <EscalationBarLegenda

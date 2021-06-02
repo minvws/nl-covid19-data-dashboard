@@ -12,25 +12,18 @@ import { ArrowIconRight } from '~/components/arrow-icon';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
-type escalationTypesType = {
-  titel: string;
-  toelichting: string;
-};
-
-type escalationRecord = EscalationLevel | number;
-
 interface RiskLevelIndicatorProps {
   title: string;
   description: string;
   code: string;
-  escalationTypes: Record<escalationRecord, escalationTypesType>;
-  level: EscalationLevel | number;
+  level: EscalationLevel;
+  levelTitle: string;
   children?: ReactNode;
   href: string;
 }
 
 export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
-  const { title, description, children, escalationTypes, level, href } = props;
+  const { title, description, children, level, levelTitle, href } = props;
 
   const filteredEscalationLevel = escalationThresholds.find(
     (item) => item.threshold === level
@@ -76,15 +69,13 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
           spacingHorizontal
         >
           <span>{level}</span>
-          <span>{escalationTypes[level].titel}</span>
+          <span>{levelTitle}</span>
         </Box>
       </Box>
 
       <Text>
         {description} {level}:{' '}
-        <EscalationLevelTitle>
-          {escalationTypes[level].titel.toLowerCase()}
-        </EscalationLevelTitle>
+        <EscalationLevelTitle>{levelTitle}</EscalationLevelTitle>
       </Text>
 
       {children}
@@ -95,5 +86,6 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
 const EscalationLevelTitle = styled.span(
   css({
     fontWeight: 'bold',
+    textTransform: 'lowercase'
   })
 );

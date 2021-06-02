@@ -78,32 +78,33 @@ const escalationThresholds: ChoroplethThresholdsValue<1 | 2 | 3 | 4>[] = [
   },
 ];
 
-const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
-  {
-    color: colors.data.underReported,
-    threshold: 0,
-  },
-  {
-    color: colors.data.scale.blue[0],
-    threshold: 0.1,
-  },
-  {
-    color: colors.data.scale.blue[1],
-    threshold: 10,
-  },
-  {
-    color: colors.data.scale.blue[2],
-    threshold: 20,
-  },
-  {
-    color: colors.data.scale.blue[3],
-    threshold: 30,
-  },
-  {
-    color: colors.data.scale.blue[4],
-    threshold: 40,
-  },
-];
+const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] =
+  [
+    {
+      color: colors.data.underReported,
+      threshold: 0,
+    },
+    {
+      color: colors.data.scale.blue[0],
+      threshold: 0.1,
+    },
+    {
+      color: colors.data.scale.blue[1],
+      threshold: 10,
+    },
+    {
+      color: colors.data.scale.blue[2],
+      threshold: 20,
+    },
+    {
+      color: colors.data.scale.blue[3],
+      threshold: 30,
+    },
+    {
+      color: colors.data.scale.blue[4],
+      threshold: 40,
+    },
+  ];
 
 const sewerThresholds: ChoroplethThresholdsValue[] = [
   {
@@ -200,7 +201,7 @@ const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
 ];
 
 const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
-  { 
+  {
     color: colors.data.behavior.scale.yellow[0],
     threshold: 0,
   },
@@ -301,10 +302,12 @@ export const regionThresholds = {
     level: escalationThresholds,
   },
   nursing_home: {
-    infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
+    infected_locations_percentage:
+      nursingHomeInfectedLocationsPercentageThresholds,
   },
   disability_care: {
-    infected_locations_percentage: nursingHomeInfectedLocationsPercentageThresholds,
+    infected_locations_percentage:
+      nursingHomeInfectedLocationsPercentageThresholds,
   },
   sewer: {
     average: sewerThresholds,
@@ -317,5 +320,19 @@ export const regionThresholds = {
   },
   vaccine: {
     coverage_percentage: vaccineCoverageThresholds,
+  },
+  /**
+   * @TODO proper thresholds should be implemented along with the situations features.
+   */
+  situations: {
+    has_sufficient_responses: positiveTestedThresholds,
+    home_and_visits: positiveTestedThresholds,
+    work: positiveTestedThresholds,
+    school_and_day_care: positiveTestedThresholds,
+    health_care: positiveTestedThresholds,
+    gathering: positiveTestedThresholds,
+    travel: positiveTestedThresholds,
+    hospitality: positiveTestedThresholds,
+    other: positiveTestedThresholds,
   },
 } as const;

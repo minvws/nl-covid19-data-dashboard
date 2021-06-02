@@ -95,6 +95,14 @@
       "items": {
         "$ref": "elderly_at_home.json"
       }
+    },
+    "situations": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "situations.json"
+      }
     }
   }
 }

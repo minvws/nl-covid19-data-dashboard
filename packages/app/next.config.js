@@ -4,13 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-const COMMIT_ID = process.env.NEXT_PUBLIC_COMMIT_ID || 'no-version-found';
-
 const nextConfig = {
-  env: {
-    COMMIT_ID,
-  },
-
   /**
    * Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
    */

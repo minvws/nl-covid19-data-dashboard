@@ -4,8 +4,10 @@ import {
   SizeVariants,
 } from '~/components/escalation-level-icon';
 import { Text } from '~/components/typography';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export type EscalationLevelProps = {
@@ -15,8 +17,6 @@ export type EscalationLevelProps = {
   size?: SizeVariants;
 };
 
-export type EscalationLevelString = '1' | '2' | '3' | '4';
-
 export function EscalationLevelInfoLabel({
   level,
   size,
@@ -25,8 +25,12 @@ export function EscalationLevelInfoLabel({
 }: EscalationLevelProps) {
   return (
     <Box display="flex" alignItems="center" justifyContent="flex-start">
-      <EscalationLevelIcon level={level} size={size} />
-      <Box ml={2}>
+      {level !== null && (
+        <Box mr={2} display="inline-block">
+          <EscalationLevelIcon level={level} size={size} />
+        </Box>
+      )}
+      <Box>
         <EscalationLevelLabel
           level={level}
           fontSize={fontSize}
@@ -49,15 +53,15 @@ export function EscalationLevelLabel({
   const { siteText } = useIntl();
   const escalationColor = useEscalationColor(level);
 
-  const color = useLevelColor ? escalationColor : 'inherit';
+  const color = useLevelColor
+    ? level === null
+      ? colors.gray
+      : escalationColor
+    : 'inherit';
 
   return (
     <Text as="span" fontWeight="bold" fontSize={fontSize} color={color}>
-      {
-        siteText.escalatie_niveau.types[
-          level.toString() as EscalationLevelString
-        ].titel
-      }
+      {siteText.escalatie_niveau.types[getEscalationLevelIndexKey(level)].titel}
     </Text>
   );
 }

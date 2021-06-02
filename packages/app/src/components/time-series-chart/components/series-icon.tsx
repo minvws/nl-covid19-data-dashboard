@@ -1,11 +1,11 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { isPresent } from 'ts-is-present';
 import { findSplitPointForValue, SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
+import { BarTrendIcon } from './bar-trend';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
-import { BarTrendIcon } from './bar-trend';
-import { isPresent } from 'ts-is-present';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
@@ -24,6 +24,7 @@ export function SeriesIcon<T extends TimestampedValue>({
 }: SeriesIconProps<T>) {
   switch (config.type) {
     case 'line':
+    case 'gapped-line':
       return (
         <LineTrendIcon
           color={config.color}

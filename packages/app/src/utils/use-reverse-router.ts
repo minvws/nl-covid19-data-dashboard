@@ -29,6 +29,7 @@ export function useReverseRouter() {
         gedrag: () => `/landelijk/gedrag`,
         maatregelen: () => `/landelijk/maatregelen`,
         coronamelder: () => `/landelijk/coronamelder`,
+        brononderzoek: () => `/landelijk/brononderzoek`,
       },
 
       gm: {
