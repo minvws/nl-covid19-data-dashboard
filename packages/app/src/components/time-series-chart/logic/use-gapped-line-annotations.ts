@@ -23,44 +23,38 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
 ) {
   return useMemo(
     () =>
-      values
-        .reduce<{ start: number; end: number }[]>(
-          (newItems, item, index, array) => {
-            if (!isPresent(item[property])) {
-              const startDate = isDateValue(item)
-                ? item.date_unix
-                : isDateSpanValue(item)
-                ? item.date_start_unix
-                : NaN;
+      values.reduce<TimespanAnnotationConfig[]>(
+        (newItems, item, index, array) => {
+          if (!isPresent(item[property])) {
+            const startDate = isDateValue(item)
+              ? item.date_unix
+              : isDateSpanValue(item)
+              ? item.date_start_unix
+              : NaN;
 
-              const endDate = isDateValue(item)
-                ? item.date_unix
-                : isDateSpanValue(item)
-                ? item.date_end_unix
-                : NaN;
+            const endDate = isDateValue(item)
+              ? item.date_unix
+              : isDateSpanValue(item)
+              ? item.date_end_unix
+              : NaN;
 
-              let current = last(newItems);
-              if (!isDefined(current) || !isNaN(current.end)) {
-                current = { start: startDate, end: NaN };
-                newItems.push(current);
-              }
-
-              if (
-                index === array.length - 1 ||
-                isPresent(array[index + 1]?.[property])
-              ) {
-                current.end = endDate;
-              }
+            let current = last(newItems);
+            if (!isDefined(current) || !isNaN(current.end)) {
+              current = { start: startDate, end: NaN, label };
+              newItems.push(current);
             }
-            return newItems;
-          },
-          []
-        )
-        .map<TimespanAnnotationConfig>((item) => ({
-          start: item.start,
-          end: item.end,
-          label,
-        })),
+
+            if (
+              index === array.length - 1 ||
+              isPresent(array[index + 1]?.[property])
+            ) {
+              current.end = endDate;
+            }
+          }
+          return newItems;
+        },
+        []
+      ),
     [values, property, label]
   );
 }
