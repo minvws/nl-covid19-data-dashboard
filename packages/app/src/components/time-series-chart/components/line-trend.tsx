@@ -34,6 +34,10 @@ export function LineTrend({
     [series]
   );
 
+  if (!nonNullSeries.length) {
+    return null;
+  }
+
   return (
     <LinePath
       data={nonNullSeries}

@@ -19,7 +19,19 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | BarSeriesDefinition<T>
   | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
+  | GappedLineSeriesDefinition<T>
 )[];
+
+export type GappedLineSeriesDefinition<T extends TimestampedValue> = {
+  type: 'gapped-line';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'dashed';
+  strokeWidth?: number;
+  curve?: 'linear' | 'step';
+};
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
   type: 'line';
@@ -128,10 +140,11 @@ export function useSeriesList<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   cutValuesConfig?: CutValuesConfig[]
 ) {
-  return useMemo(
-    () => getSeriesList(values, seriesConfig, cutValuesConfig),
-    [values, seriesConfig, cutValuesConfig]
-  );
+  return useMemo(() => getSeriesList(values, seriesConfig, cutValuesConfig), [
+    values,
+    seriesConfig,
+    cutValuesConfig,
+  ]);
 }
 
 export function useValuesInTimeframe<T extends TimestampedValue>(
@@ -139,10 +152,11 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
   timeframe: TimeframeOption
 ) {
   const today = useCurrentDate();
-  return useMemo(
-    () => getValuesInTimeframe(values, timeframe, today),
-    [values, timeframe, today]
-  );
+  return useMemo(() => getValuesInTimeframe(values, timeframe, today), [
+    values,
+    timeframe,
+    today,
+  ]);
 }
 
 /**

@@ -7,7 +7,7 @@
     "date_end_unix",
     "date_of_insertion_unix",
     "vrcode",
-    "has_sufficient_responses",
+    "has_sufficient_data",
     "home_and_visits",
     "work",
     "school_and_day_care",
@@ -31,7 +31,7 @@
       "type": "string",
       "pattern": "^VR[0-9]+$"
     },
-    "has_sufficient_responses": {
+    "has_sufficient_data": {
       "type": "boolean"
     },
     "home_and_visits": {
