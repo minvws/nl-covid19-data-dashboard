@@ -9,6 +9,9 @@ import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { KpiValue } from '~/components/kpi-value';
+import { Text } from '~/components/typography';
 import {
   createGetStaticProps,
   StaticProps,
@@ -49,6 +52,7 @@ export default function BrononderzoekPage(
   const intl = useIntl();
 
   const text = intl.siteText.brononderzoek;
+  const text2 = intl.siteText.gemeente_sterfte;
 
   const metadata = {
     ...intl.siteText.nationaal_metadata,
@@ -94,6 +98,20 @@ export default function BrononderzoekPage(
           />
 
           <ArticleStrip articles={content.articles} />
+
+          <TwoKpiSection>
+            <KpiTile
+              title={'Brononderzoeken met resultaat'}
+              metadata={{
+                date: 1622644588,
+                source: text2.section_deceased_rivm.bronnen.rivm,
+              }}
+            >
+              <KpiValue data-cy="covid_total" absolute={23423} />
+              <Text>hoi</Text>
+            </KpiTile>
+            <Tile>1 AFFOE PLUS</Tile>
+          </TwoKpiSection>
         </TileList>
       </SafetyRegionLayout>
     </Layout>
