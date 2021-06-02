@@ -12,14 +12,14 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { behaviorIdentifiers } from '../behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
 import { BehaviorIcon } from '../components/behavior-icon';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[] | RegionalBehaviorValue[];
   metadata: MetadataProps;
-  currentId: any;
-  setCurrentId: any;
+  currentId: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
 
 export function BehaviorLineChartTile({
