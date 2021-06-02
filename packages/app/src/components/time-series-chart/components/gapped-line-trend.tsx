@@ -14,6 +14,8 @@ type GappedLinedTrendProps = {
   id: string;
 };
 
+const DAY_IN_SECONDS = 24 * 60 * 60;
+
 export function GappedLinedTrend(props: GappedLinedTrendProps) {
   const { series, color, style, strokeWidth, getX, getY, curve, id } = props;
 
@@ -37,6 +39,21 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
     },
     [[]]
   );
+
+  gappedSeries.forEach((item, index, array) => {
+    if (item.length === 1) {
+      array[index] = [
+        {
+          __value: item[0].__value,
+          __date_unix: item[0].__date_unix - 3 * DAY_IN_SECONDS,
+        },
+        {
+          __value: item[0].__value,
+          __date_unix: item[0].__date_unix + 3 * DAY_IN_SECONDS,
+        },
+      ];
+    }
+  });
 
   return (
     <>

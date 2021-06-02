@@ -27,27 +27,26 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
         .reduce<{ start: number; end: number }[]>(
           (newItems, item, index, array) => {
             if (!isPresent(item[property])) {
-              let current = last(newItems);
-
               const startDate = isDateValue(item)
                 ? item.date_unix
                 : isDateSpanValue(item)
                 ? item.date_start_unix
-                : 0;
+                : NaN;
 
               const endDate = isDateValue(item)
                 ? item.date_unix
                 : isDateSpanValue(item)
                 ? item.date_end_unix
-                : 0;
+                : NaN;
 
-              if (!isDefined(current)) {
+              let current = last(newItems);
+              if (!isDefined(current) || current.end > -1) {
                 current = { start: startDate, end: -1 };
                 newItems.push(current);
               }
 
               if (
-                !isDefined(array[index + 1]) ||
+                index + 1 > array.length - 1 ||
                 isPresent(array[index + 1]?.[property])
               ) {
                 current.end = endDate;
