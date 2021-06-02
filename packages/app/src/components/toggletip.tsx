@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { InlineText, Text } from '~/components/typography';
+import { Text } from '~/components/typography';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
@@ -19,33 +19,33 @@ interface ToggletipProps {
 
 export function Toggletip({ description }: ToggletipProps) {
   const [isActive, setIsActive] = useState(false);
-  const resizeEvent = useViewport({ delayMs: 250 });
+  // const resizeEvent = useViewport({ delayMs: 250 });
   const uniqueId = useUniqueId();
   const boundingBoxRef = useRef<HTMLDivElement>(null);
 
   const [transformX, setTransformX] = useState(0);
 
-  useEffect(() => {
-    if (!boundingBoxRef.current) return;
+  // useEffect(() => {
+  //   if (!boundingBoxRef.current) return;
 
-    const bounding = boundingBoxRef.current.getBoundingClientRect();
+  //   const bounding = boundingBoxRef.current.getBoundingClientRect();
 
-    if (bounding.x < 0) {
-      console.log('Left');
-      setTransformX(Math.ceil(bounding.x * -1) + BOUNDING);
-      return;
-    }
+  //   if (bounding.x < 0) {
+  //     console.log('Left');
+  //     setTransformX(Math.ceil(bounding.x * -1) + BOUNDING);
+  //     return;
+  //   }
 
-    if (
-      bounding.right >
-      (window.innerWidth || document.documentElement.clientWidth)
-    ) {
-      console.log('Right');
+  //   if (
+  //     bounding.right >
+  //     (window.innerWidth || document.documentElement.clientWidth)
+  //   ) {
+  //     console.log('Right');
 
-      setTransformX((bounding.right - window.innerWidth) * -1 - BOUNDING);
-      return;
-    }
-  }, [resizeEvent, boundingBoxRef]);
+  //     setTransformX((bounding.right - window.innerWidth) * -1 - BOUNDING);
+  //     return;
+  //   }
+  // }, [resizeEvent, boundingBoxRef]);
 
   useHotkey('escape', () => {
     if (isActive) setIsActive(false);
@@ -79,7 +79,7 @@ export function Toggletip({ description }: ToggletipProps) {
         top={0}
         transform={`translateX(${transformX}px)`}
       >
-        <DescriptionCloud
+        <Content
           aria-hidden={!isActive}
           isActive={isActive}
           ref={boundingBoxRef}
@@ -87,7 +87,7 @@ export function Toggletip({ description }: ToggletipProps) {
           <Text as="span" m={0} fontWeight="normal" id={uniqueId}>
             {description}
           </Text>
-        </DescriptionCloud>
+        </Content>
       </Box>
     </Box>
   );
@@ -132,6 +132,7 @@ const Button = styled.button<{ isActive: boolean }>(({ isActive }) =>
       outline: '2px dotted black',
     },
 
+    // Some selectors to enable the interaction when there is no Javascript
     '&:hover, &:focus-visible': {
       '&:before': {
         '.has-no-js &': {
@@ -148,7 +149,7 @@ const Button = styled.button<{ isActive: boolean }>(({ isActive }) =>
   })
 );
 
-const DescriptionCloud = styled.div<{
+const Content = styled.div<{
   isActive: boolean;
 }>(({ isActive }) =>
   css({
