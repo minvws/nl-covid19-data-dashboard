@@ -2,54 +2,28 @@ import css from '@styled-system/css';
 import { InlineText, Text } from '~/components/typography';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { useEffect, useState, useRef, useMemo } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
-import { useBoundingBox } from '~/utils/use-bounding-box';
-import { usePopper } from 'react-popper';
+import { useViewport } from '~/utils/use-viewport';
 
 const BUTTON_SIZE = 30;
 const ARROW_SIZE = 20;
 const TOOLTIP_BOUNDING_SMALL_SCREEN = 10;
+const MAX_WIDTH = 250;
 
 interface ToggletipProps {
   description: any;
 }
 
 export function Toggletip({ description }: ToggletipProps) {
-  const [showPopper, setShowPopper] = useState(false);
-  const buttonRef = useRef(null);
-  const popperRef = useRef(null);
-
-  // the ref for the arrow must be a callback ref
-  const [arrowRef, setArrowRef] = useState(null);
-
-  const { styles, attributes } = usePopper(
-    buttonRef.current,
-    popperRef.current,
-    {
-      modifiers: [
-        {
-          name: 'arrow',
-          options: {
-            element: arrowRef,
-          },
-        },
-        {
-          name: 'offset',
-          options: {
-            offset: [0, 10],
-          },
-        },
-      ],
-    }
-  );
-
-  const uniqueId = useUniqueId();
   const [isActive, setIsActive] = useState(false);
+  const resizeEvent = useViewport(250);
+  const uniqueId = useUniqueId();
+  const boundingBoxRef = useRef<HTMLDivElement>(null);
+
   const [isTooNarrow, setIsTooNarrow] = useState(false);
-  // const descriptionRef = useRef<HTMLElement>(null);
-  const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
+  const [transformX, setTransformX] = useState(0);
 
   // HIER MOET NOG MEE GEDAAN WORDEN MET DE FOCUS
   const onMouseOverHandler = () => setIsActive(true);
@@ -57,40 +31,44 @@ export function Toggletip({ description }: ToggletipProps) {
   const onFocusHandler = () => setIsActive(true);
   const onBlurHandler = () => setIsActive(false);
 
-  // const transformBox = useMemo(() => {
-  //   if (!boundingBox) return;
+  useLayoutEffect(() => {
+    if (!boundingBoxRef.current) return;
 
-  //   if (boundingBox.width > window.innerWidth) {
-  //     setIsTooNarrow(true);
-  //     return `translateX(0px)`;
-  //   }
+    const bounding = boundingBoxRef.current.getBoundingClientRect();
 
-  //   setIsTooNarrow(false);
+    if (MAX_WIDTH < window.innerWidth) setIsTooNarrow(false);
 
-  //   if (boundingBox.x < 0) {
-  //     return `translateX(${Math.ceil(
-  //       boundingBox.x * -1 + TOOLTIP_BOUNDING_SMALL_SCREEN
-  //     )}px)`;
-  //   }
+    if (
+      bounding.width > window.innerWidth &&
+      bounding.right >
+        (window.innerWidth || document.documentElement.clientWidth) &&
+      bounding.x < 0
+    ) {
+      setIsTooNarrow(true);
+      setTransformX(0);
+    }
 
-  //   if (
-  //     boundingBox.right + BUTTON_SIZE / 2 >
-  //     (window.innerWidth || document.documentElement.clientWidth)
-  //   ) {
-  //     return `translateX(${
-  //       (boundingBox.right + BUTTON_SIZE / 2 - window.innerWidth ||
-  //         document.documentElement.clientWidth) *
-  //         -1 -
-  //       TOOLTIP_BOUNDING_SMALL_SCREEN
-  //     }px)`;
-  //   }
+    if (bounding.x < 0 && !isTooNarrow) {
+      setTransformX(Math.ceil(bounding.x * -1));
+    }
 
-  //   return `translateX(0px)`;
-  // }, [boundingBox]);
+    if (
+      bounding.right >
+        (window.innerWidth || document.documentElement.clientWidth) &&
+      !isTooNarrow
+    ) {
+      setTransformX(
+        (bounding.right + BUTTON_SIZE / 2 - window.innerWidth ||
+          document.documentElement.clientWidth) * -1
+      );
+    }
 
-  // useHotkey('escape', () => {
-  //   if (isActive) setIsActive(false);
-  // });
+    // if (!isTooNarrow) setTransformX(0);
+  }, [resizeEvent, boundingBoxRef, isTooNarrow]);
+
+  useHotkey('escape', () => {
+    if (isActive) setIsActive(false);
+  });
 
   return (
     <Box
@@ -99,32 +77,33 @@ export function Toggletip({ description }: ToggletipProps) {
       aria-expanded={isActive}
       aria-labelledby={uniqueId}
     >
-      <div ref={buttonRef}>
-        <Circle
-          onMouseOver={onMouseOverHandler}
-          onMouseLeave={onMouseLeaveHandler}
-          onFocus={onFocusHandler}
-          onBlur={onBlurHandler}
+      <Circle
+        onMouseOver={onMouseOverHandler}
+        onMouseLeave={onMouseLeaveHandler}
+        onFocus={onFocusHandler}
+        onBlur={onBlurHandler}
+        isActive={isActive}
+        type="button"
+      >
+        I
+      </Circle>
+
+      <Box
+        position="absolute"
+        top={0}
+        transform={`translateX(${transformX}px)`}
+      >
+        <DescriptionCloud
+          aria-hidden={!isActive}
           isActive={isActive}
-          type="button"
+          ref={boundingBoxRef}
+          isTooNarrow={isTooNarrow}
         >
-          I
-        </Circle>
-      </div>
-      <div ref={setArrowRef} style={styles.arrow} id="arrow" />
-      <div ref={popperRef} style={styles.popper} {...attributes.popper}>
-        <Box position="absolute" top={0}>
-          <DescriptionCloud
-            aria-hidden={!isActive}
-            isActive={isActive}
-            ref={boundingBoxRef}
-          >
-            <Text as="span" m={0} fontWeight="normal" id={uniqueId}>
-              {description}
-            </Text>
-          </DescriptionCloud>
-        </Box>
-      </div>
+          <Text as="span" m={0} fontWeight="normal" id={uniqueId}>
+            {description}
+          </Text>
+        </DescriptionCloud>
+      </Box>
     </Box>
   );
 }
@@ -143,14 +122,23 @@ const Circle = styled.button<{ isActive: boolean }>(({ isActive }) =>
 
     '&:before': {
       position: 'absolute',
+      // width: 0,
+      // height: 0,
+      // borderLeft: '1rem solid transparent',
+      // borderRight: '1rem solid transparent',
+
+      // borderTop: '1rem solid #fff',
       left: `calc(50% - ${ARROW_SIZE / 2}px)`,
-      top: `-25px`,
+      top: -24,
       height: ARROW_SIZE,
       width: ARROW_SIZE,
       content: '""',
-      backgroundColor: 'red',
+      backgroundColor: '#fff',
       transform: 'rotate(45deg)',
+      zIndex: 0,
+      boxShadow: '0px 2px 12px rgba(0, 0, 0, 0.1)',
       opacity: isActive ? 1 : 1,
+      // clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0% 100%)',
     },
 
     '&:focus': {
@@ -177,19 +165,22 @@ const Circle = styled.button<{ isActive: boolean }>(({ isActive }) =>
 
 const DescriptionCloud = styled.div<{
   isActive: boolean;
-}>(({ isActive }) =>
+  isTooNarrow: boolean;
+}>(({ isActive, isTooNarrow }) =>
   css({
     top: 0,
     width: 'max-content',
-    maxWidth: 260,
+    maxWidth: isTooNarrow ? '90vw' : MAX_WIDTH,
     display: 'flex',
     position: 'absolute',
-    p: 2,
-    backgroundColor: 'red',
+    py: 12,
+    px: 10,
+    backgroundColor: 'white',
+    boxShadow: 'tooltip',
     borderRadius: 1,
-    // transform: `translate(calc(-50% + ${
-    //   BUTTON_SIZE / 2
-    // }px), calc(-100% - 10px))`,
+    transform: `translate(calc(-50% + ${
+      BUTTON_SIZE / 2
+    }px), calc(-100% - 10px))`,
     zIndex: 99,
 
     opacity: isActive ? 1 : 1,
