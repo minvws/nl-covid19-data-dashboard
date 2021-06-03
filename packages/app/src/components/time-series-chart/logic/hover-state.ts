@@ -25,7 +25,7 @@ export type HoveredPoint<T> = {
   seriesValue: SeriesSingleValue | SeriesDoubleValue;
   metricProperty: keyof T;
   seriesConfigIndex: number;
-  color?: string;
+  color: string;
   x: number;
   y: number;
 };
@@ -254,8 +254,8 @@ export function useHoverState<T extends TimestampedValue>({
             return {
               seriesValue,
               x: xScale(xValue),
-              y: yValue ? yScale(yValue) : -Infinity,
-              color: yValue ? config.color : undefined,
+              y: yValue ? yScale(yValue) : 0,
+              color: yValue ? config.color : 'transparent',
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
             };

@@ -1,7 +1,6 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
 import { HoveredPoint } from '../logic/hover-state';
 
 const MARKER_POINT_SIZE = 8;
@@ -13,12 +12,6 @@ type MarkerProps = {
 
 interface PointMarkerProps<T extends TimestampedValue> {
   points: HoveredPoint<T>[];
-}
-
-function hasColor<T extends TimestampedValue>(
-  hoverPoint: HoveredPoint<T>
-): hoverPoint is HoveredPoint<T> & { color: string } {
-  return isDefined(hoverPoint.color);
 }
 
 export function PointMarkers<T extends TimestampedValue>(
@@ -37,7 +30,6 @@ export function PointMarkers<T extends TimestampedValue>(
       }}
     >
       {points
-        .filter(hasColor)
         .map((point, index) => (
           <PointMarker
             color={point.color}
