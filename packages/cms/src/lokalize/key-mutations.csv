@@ -13,3 +13,10 @@ timestamp,action,key
 2021-06-01T08:59:29.938Z,add,brononderzoek.bronnen.rivm.href
 2021-06-01T08:59:30.960Z,add,brononderzoek.bronnen.rivm.text
 2021-06-01T11:10:47.582Z,add,common.subject_in_location
+2021-06-03T08:09:07.407Z,add,vr_brononderzoek.kpi_result.title
+2021-06-03T08:09:34.107Z,add,vr_brononderzoek.kpi_result.description
+2021-06-03T08:11:24.751Z,add,vr_onderzoek.kpi_result.description_known
+2021-06-03T08:11:24.751Z,delete,vr_onderzoek.kpi_result.description_known
+2021-06-03T08:13:47.833Z,add,vr_brononderzoek.description_known
+2021-06-03T08:13:47.833Z,delete,vr_brononderzoek.description_known
+2021-06-03T08:18:30.744Z,add,vr_brononderzoek.kpi_result.description_known

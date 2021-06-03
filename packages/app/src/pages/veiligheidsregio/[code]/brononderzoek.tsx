@@ -10,8 +10,11 @@ import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { KpiTile } from '~/components/kpi-tile';
+import { Tile } from '~/components/tile';
 import { KpiValue } from '~/components/kpi-value';
-import { Text } from '~/components/typography';
+import { Text, InlineText } from '~/components/typography';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import {
   createGetStaticProps,
   StaticProps,
@@ -50,15 +53,17 @@ export default function BrononderzoekPage(
   } = props;
 
   const intl = useIntl();
+  const { formatNumber, formatDateFromSeconds, siteText } = intl;
 
   const text = intl.siteText.brononderzoek;
-  const text2 = intl.siteText.gemeente_sterfte;
 
   const metadata = {
     ...intl.siteText.nationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const has_sufficient_data = true;
 
   assert(data.situations, 'no situations data found');
 
@@ -100,17 +105,52 @@ export default function BrononderzoekPage(
           <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
-            <KpiTile
-              title={'Brononderzoeken met resultaat'}
-              metadata={{
-                date: 1622644588,
-                source: text2.section_deceased_rivm.bronnen.rivm,
-              }}
-            >
-              <KpiValue data-cy="covid_total" absolute={23423} />
-              <Text>hoi</Text>
-            </KpiTile>
-            <Tile>1 AFFOE PLUS</Tile>
+            <Tile>Tile</Tile>
+            {has_sufficient_data ? (
+              <KpiTile
+                title={siteText.vr_brononderzoek.kpi_result.title}
+                metadata={{
+                  date: 1622644588, // situations_known_percentage
+                  source: text.bronnen.rivm,
+                }}
+              >
+                <KpiValue data-cy="covid_total" percentage={68.2} />
+                <Text>
+                  {replaceComponentsInText(
+                    siteText.vr_brononderzoek.kpi_result.description,
+                    {
+                      date_start_unix: (
+                        <InlineText>
+                          {formatDateFromSeconds(1622644588)}
+                        </InlineText>
+                      ),
+                      date_end_unix: (
+                        <InlineText>
+                          {formatDateFromSeconds(1622644588)}
+                        </InlineText>
+                      ),
+                    }
+                  )}
+                </Text>
+                <Text fontWeight="bold">
+                  {replaceComponentsInText(
+                    siteText.vr_brononderzoek.kpi_result.description_known,
+                    {
+                      situations_known_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(1866)}
+                        </InlineText>
+                      ), // situations_known_total
+                      investigations_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(2763)}
+                        </InlineText>
+                      ), // investigations_total
+                    }
+                  )}
+                </Text>
+              </KpiTile>
+            ) : undefined}
           </TwoKpiSection>
         </TileList>
       </SafetyRegionLayout>
