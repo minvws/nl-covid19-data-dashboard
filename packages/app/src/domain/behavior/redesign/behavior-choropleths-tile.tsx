@@ -160,7 +160,11 @@ function ChoroplethBlock({
           }}
         />
       </Box>
-      <Box display="flex" justifyContent={{ _: 'center', lg: 'flex-start' }}>
+      <Box
+        display="flex"
+        justifyContent={{ _: 'center', lg: 'flex-start' }}
+        maxWidth={300}
+      >
         <ChoroplethLegenda
           thresholds={thresholds}
           title={siteText.gedrag_common.basisregels.header_percentage}

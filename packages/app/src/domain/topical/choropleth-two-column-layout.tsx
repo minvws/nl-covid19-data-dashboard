@@ -32,7 +32,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
           <Box flex={{ _: '1 1 0%' }} px={{ _: 0, sm: '6rem' }} pb={4}>
             {childrenArray[0]}
           </Box>
-          {legendComponent}
+          <Box maxWidth={300}>{legendComponent}</Box>
         </>
       ) : (
         <>

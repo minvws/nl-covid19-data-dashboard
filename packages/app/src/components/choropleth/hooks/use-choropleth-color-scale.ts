@@ -1,6 +1,6 @@
 import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { GetRegionDataFunctionType } from './use-safety-region-data';
@@ -43,18 +43,14 @@ export function useChoroplethColorScale(
     return color;
   }, [thresholds]);
 
-  const unknownLevelColor = useEscalationColor(null);
-
   return useCallback(
     (id: string) => {
       const data = getChoroplethValue(id);
 
-      return isDefined(data)
-        ? data.__color_value === null
-          ? unknownLevelColor
-          : colorScale(data.__color_value)
+      return isPresent(data?.__color_value)
+        ? colorScale(data.__color_value)
         : defaultColor;
     },
-    [getChoroplethValue, unknownLevelColor, colorScale, defaultColor]
+    [getChoroplethValue, colorScale, defaultColor]
   );
 }
