@@ -1,15 +1,15 @@
-import { Tile } from '~/components/tile';
-import { Metadata, MetadataProps } from '~/components/metadata';
-import { Text, Heading, InlineText } from '~/components/typography';
-import { Box } from '~/components/base';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { colors } from '~/style/theme';
+import { Box } from '~/components/base';
+import { Metadata, MetadataProps } from '~/components/metadata';
+import { Tile } from '~/components/tile';
+import { Heading, InlineText, Text } from '~/components/typography';
+import { situations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
-import { SituationIdentifier } from '~/domain/situations/situation-types';
-import School from '~/assets/situations/school.svg';
+import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { SituationIcon } from './components/situation-icon';
 
 interface SituationsTableTileProps {
   title: string;
@@ -17,17 +17,6 @@ interface SituationsTableTileProps {
   descriptionDate: string;
   metadata: MetadataProps;
 }
-
-const ORDER_KEYS = [
-  'homevisit',
-  'work',
-  'school',
-  'healthcare',
-  'gatherings',
-  'travelling',
-  'horeca',
-  'other',
-];
 
 export function SituationsTableTile({
   title,
@@ -75,17 +64,13 @@ export function SituationsTableTile({
               borderTopColor: 'lightGrey',
             })}
           >
-            {ORDER_KEYS.map((situation, index) => (
+            {situations.map((situation, index) => (
               <tr key={index}>
                 <Cell>
                   <Box display="flex" alignItems="center">
-                    <School />
+                    <SituationIcon id={situation} />
                     <InlineText>
-                      {
-                        siteText.vr_brononderzoek.table[
-                          situation as SituationIdentifier
-                        ]
-                      }
+                      {siteText.vr_brononderzoek.table[situation]}
                     </InlineText>
                     <InformationIcon />
                   </Box>

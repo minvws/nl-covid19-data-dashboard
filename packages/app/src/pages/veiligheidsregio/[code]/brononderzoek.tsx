@@ -19,7 +19,6 @@ import {
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
-import { Tile } from '~/components/tile';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 
@@ -67,9 +66,9 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
-  // assert(data.situations, 'no situations data found');
+  assert(data.situations, 'no situations data found');
 
-  // const singleValue = data.situations.last_value;
+  const singleValue = data.situations.last_value;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -79,7 +78,7 @@ export default function BrononderzoekPage(
         lastGenerated={lastGenerated}
       >
         <TileList>
-          {/* <ContentHeader
+          <ContentHeader
             category={intl.siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
               intl.siteText.positief_geteste_personen.titel_sidebar
@@ -102,7 +101,7 @@ export default function BrononderzoekPage(
               dateOfInsertionUnix: singleValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-          /> */}
+          />
 
           <ArticleStrip articles={content.articles} />
 
@@ -111,7 +110,7 @@ export default function BrononderzoekPage(
             description={brononderzoek_text.table.description}
             descriptionDate={brononderzoek_text.table.description_date}
             metadata={{
-              date: 1622716237,
+              date: singleValue.date_end_unix,
               source: text.bronnen.rivm,
             }}
           />
