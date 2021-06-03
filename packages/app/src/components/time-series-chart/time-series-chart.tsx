@@ -452,7 +452,7 @@ export function TimeSeriesChart<
               flexDirection={['column', 'row']}
               alignItems="baseline"
             >
-              <InlineText pr={2}>{x.label}:</InlineText>
+              <InlineText pr={3}>{x.label}:</InlineText>
               <Legend items={x.items} />
             </Box>
           ))}
