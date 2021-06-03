@@ -34,7 +34,6 @@ export function BehaviorChoroplethsTile({
   setCurrentId,
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
-  // const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
   // Find all the keys that only doesn't exist on VR level but does on NL
   const keysWithoutData = behaviorIdentifiers.filter(
