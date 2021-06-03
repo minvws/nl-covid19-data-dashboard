@@ -9,7 +9,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { useIntl } from '~/intl';
 import { SituationIcon } from './components/situation-icon';
-import { Situation, SituationKey, useSituations } from './logic/situations';
+import { useSituations } from './logic/situations';
 
 import MeerInformatie from '~/assets/meer-informatie.svg';
 import { Box } from '~/components/base';
