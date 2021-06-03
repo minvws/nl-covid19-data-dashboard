@@ -86,7 +86,6 @@ export function NewSewerChart({
                   selectedInstallation
                 )}
                 timeframe={timeframe}
-                markNearestPointOnly
                 seriesConfig={[
                   {
                     type: 'line',
