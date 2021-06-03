@@ -8,8 +8,8 @@ import styled from 'styled-components';
 import { ChartTile } from '~/components/chart-tile';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { useIntl } from '~/intl';
-import { SituationIcon } from './logic/situation-icon';
-import { SituationKey, situations } from './logic/situations';
+import { SituationIcon } from './components/situation-icon';
+import { Situation, SituationKey, useSituations } from './logic/situations';
 
 import MeerInformatie from '~/assets/meer-informatie.svg';
 import { Box } from '~/components/base';
@@ -26,6 +26,7 @@ export function SituationsOverviewChoroplethTile({
   data,
 }: SmallMultiplesChoroplethTileProps) {
   const intl = useIntl();
+  const situations = useSituations();
   const text = intl.siteText.brononderzoek;
   const singleValue = data[0];
 
@@ -47,12 +48,16 @@ export function SituationsOverviewChoroplethTile({
       }}
     >
       <ChoroplethGrid>
-        {situations.map((situationId) => (
-          <ChoroplethGridItem id={situationId} key={situationId}>
+        {situations.map((situation) => (
+          <ChoroplethGridItem
+            icon={<SituationIcon id={situation.id} />}
+            title={situation.title}
+            key={situation.id}
+          >
             <SafetyRegionChoropleth
               data={{ situations: data }}
               metricName={'situations'}
-              metricProperty={situationId}
+              metricProperty={situation.id}
               minHeight={200}
               tooltipPlacement="top-center"
               tooltipContent={(
@@ -60,9 +65,9 @@ export function SituationsOverviewChoroplethTile({
               ) => (
                 <Tooltip
                   isPercentage
-                  value={context[situationId]}
+                  value={context[situation.id]}
                   regionName={context.vrname}
-                  thresholds={regionThresholds.situations[situationId]}
+                  thresholds={regionThresholds.situations[situation.id]}
                 />
               )}
             />
@@ -105,13 +110,14 @@ const ChoroplethGrid = styled.div(
 );
 
 function ChoroplethGridItem({
+  icon,
+  title,
   children,
-  id: id,
 }: {
+  icon: ReactNode;
+  title: string;
   children: ReactNode;
-  id: SituationKey;
 }) {
-  const intl = useIntl();
   return (
     <Box
       /** add a little bit of bottom-padding to match whitespace from design */
@@ -125,10 +131,8 @@ function ChoroplethGridItem({
         spacingHorizontal
         mb={3}
       >
-        <SituationIcon id={id} />
-        <span css={css({ fontWeight: 'heavy', fontSize: 2 })}>
-          {intl.siteText.brononderzoek.situaties[id].titel}
-        </span>
+        {icon}
+        <span css={css({ fontWeight: 'heavy', fontSize: 2 })}>{title}</span>
         <MeerInformatie />
       </Box>
 

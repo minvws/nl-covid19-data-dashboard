@@ -6,7 +6,7 @@ import other from '~/assets/situations/other.svg';
 import school_and_day_care from '~/assets/situations/school_and_day_care.svg';
 import travel from '~/assets/situations/travel.svg';
 import work from '~/assets/situations/work.svg';
-import { SituationKey } from './situations';
+import { SituationKey } from '../logic/situations';
 
 const icons = {
   home_and_visits,

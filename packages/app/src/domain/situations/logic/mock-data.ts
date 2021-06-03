@@ -3,7 +3,7 @@ import {
   VrSituationsValue,
 } from '@corona-dashboard/common';
 import { vrData } from '~/data/vr';
-import { SituationKey, situations } from './logic/situations';
+import { SituationKey, situations } from './situations';
 
 const NOW_IN_SECONDS = Math.round(Date.now() / 1000);
 const ONE_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
