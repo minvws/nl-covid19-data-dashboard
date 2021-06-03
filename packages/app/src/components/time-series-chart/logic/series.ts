@@ -140,11 +140,10 @@ export function useSeriesList<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   cutValuesConfig?: CutValuesConfig[]
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig, cutValuesConfig), [
-    values,
-    seriesConfig,
-    cutValuesConfig,
-  ]);
+  return useMemo(
+    () => getSeriesList(values, seriesConfig, cutValuesConfig),
+    [values, seriesConfig, cutValuesConfig]
+  );
 }
 
 export function useValuesInTimeframe<T extends TimestampedValue>(
@@ -152,11 +151,10 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
   timeframe: TimeframeOption
 ) {
   const today = useCurrentDate();
-  return useMemo(() => getValuesInTimeframe(values, timeframe, today), [
-    values,
-    timeframe,
-    today,
-  ]);
+  return useMemo(
+    () => getValuesInTimeframe(values, timeframe, today),
+    [values, timeframe, today]
+  );
 }
 
 /**
