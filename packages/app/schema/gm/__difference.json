@@ -7,10 +7,10 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_overall__infected_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "hospital_nice__admissions_on_date_of_reporting_moving_average": {
-      "$ref": "#/definitions/diff_integer"
+      "$ref": "#/definitions/diff_decimal"
     },
     "sewer__average": {
       "$ref": "#/definitions/diff_decimal"
