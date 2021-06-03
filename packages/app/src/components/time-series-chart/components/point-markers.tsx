@@ -1,6 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { HoveredPoint } from '../logic/hover-state';
 
 const MARKER_POINT_SIZE = 8;
@@ -30,6 +31,7 @@ export function PointMarkers<T extends TimestampedValue>(
       }}
     >
       {points
+        .filter((x) => isDefined(x.color))
         .map((point, index) => (
           <PointMarker
             color={point.color}
