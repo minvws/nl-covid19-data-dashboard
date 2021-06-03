@@ -15,6 +15,12 @@ interface PointMarkerProps<T extends TimestampedValue> {
   points: HoveredPoint<T>[];
 }
 
+function hasColor<T extends TimestampedValue>(
+  hoverPoint: HoveredPoint<T>
+): hoverPoint is HoveredPoint<T> & { color: string } {
+  return isDefined(hoverPoint.color);
+}
+
 export function PointMarkers<T extends TimestampedValue>(
   props: PointMarkerProps<T>
 ) {
@@ -31,7 +37,7 @@ export function PointMarkers<T extends TimestampedValue>(
       }}
     >
       {points
-        .filter((x) => isDefined(x.color))
+        .filter(hasColor)
         .map((point, index) => (
           <PointMarker
             color={point.color}

@@ -25,7 +25,7 @@ export type HoveredPoint<T> = {
   seriesValue: SeriesSingleValue | SeriesDoubleValue;
   metricProperty: keyof T;
   seriesConfigIndex: number;
-  color: string;
+  color?: string;
   x: number;
   y: number;
 };

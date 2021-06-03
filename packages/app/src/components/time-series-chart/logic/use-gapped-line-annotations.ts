@@ -61,7 +61,7 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
         },
         []
       ),
-    [values, property, label]
+    [values, property, label, formatDateFromSeconds]
   );
 }
 
