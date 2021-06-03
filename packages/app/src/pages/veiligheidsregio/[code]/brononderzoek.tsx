@@ -63,8 +63,6 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
-  const has_sufficient_data = true;
-
   assert(data.situations, 'no situations data found');
 
   const singleValue = data.situations.last_value;
@@ -105,28 +103,33 @@ export default function BrononderzoekPage(
           <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
-            <Tile>Tile</Tile>
-            {has_sufficient_data ? (
+            <Tile>Empty tile</Tile>
+            {data.has_sufficient_data ? (
               <KpiTile
                 title={siteText.vr_brononderzoek.kpi_result.title}
                 metadata={{
-                  date: 1622644588, // situations_known_percentage
+                  date: data.situations.date_of_insertion_unix,
                   source: text.bronnen.rivm,
                 }}
               >
-                <KpiValue data-cy="covid_total" percentage={68.2} />
+                <KpiValue
+                  data-cy="covid_total"
+                  percentage={data.situations.known_percentage}
+                />
                 <Text>
                   {replaceComponentsInText(
                     siteText.vr_brononderzoek.kpi_result.description,
                     {
                       date_start_unix: (
                         <InlineText>
-                          {formatDateFromSeconds(1622644588)}
+                          {formatDateFromSeconds(
+                            data.situations.date_start_unix
+                          )}
                         </InlineText>
                       ),
                       date_end_unix: (
                         <InlineText>
-                          {formatDateFromSeconds(1622644588)}
+                          {formatDateFromSeconds(data.situations.date_end_unix)}
                         </InlineText>
                       ),
                     }
@@ -138,14 +141,14 @@ export default function BrononderzoekPage(
                     {
                       situations_known_total: (
                         <InlineText color="data.primary">
-                          {formatNumber(1866)}
+                          {formatNumber(data.situations_known_total)}
                         </InlineText>
-                      ), // situations_known_total
+                      ),
                       investigations_total: (
                         <InlineText color="data.primary">
-                          {formatNumber(2763)}
+                          {formatNumber(data.investigations_total)}
                         </InlineText>
-                      ), // investigations_total
+                      ),
                     }
                   )}
                 </Text>
