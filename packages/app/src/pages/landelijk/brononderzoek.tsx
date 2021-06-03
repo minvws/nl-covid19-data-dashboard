@@ -6,6 +6,7 @@ import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { SituationIcon } from '~/domain/situations/logic/situation-icon';
+import { mockVrCollectionSituations } from '~/domain/situations/mock-data';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -27,7 +28,9 @@ export const getStaticProps = withFeatureNotFoundPage(
     getLastGeneratedDate,
     selectNlPageMetricData(),
     createGetChoroplethData({
-      vr: ({ situations }) => ({ situations }),
+      vr: ({ situations }) => ({
+        situations: situations || mockVrCollectionSituations(),
+      }),
     }),
     createGetContent<{
       articles?: ArticleSummary[];
