@@ -62,7 +62,7 @@ export function NewSewerChart({
       {(timeframe) => (
         <>
           {dataPerInstallation && (
-            <Box alignSelf={'flex-start'} mb={3}>
+            <Box alignSelf="flex-start" mb={3}>
               <Select
                 options={options}
                 onChange={onChange}
