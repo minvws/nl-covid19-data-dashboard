@@ -58,7 +58,7 @@ async function reportIsFocusable(tippyInstance: Instance) {
   if (triggerTargets.some((x) => !x.matches(isFocusableSelector))) {
     console.error({ tippyInstance, unfocusableTriggerTargets });
     throw new Error(
-      `A tooltip has been wrapped around an element which cannot receive focus state. Please make it focusable for a11y by setting tab-index: 0`
+      `A tooltip has been wrapped around an element which cannot receive focus state. Please make it focusable for a11y by setting tabIndex={0}`
     );
   }
 }

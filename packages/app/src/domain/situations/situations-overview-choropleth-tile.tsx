@@ -5,18 +5,18 @@ import {
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { ChartTile } from '~/components/chart-tile';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { useIntl } from '~/intl';
-import { SituationIcon } from './components/situation-icon';
-import { useSituations } from './logic/situations';
-
 import MeerInformatie from '~/assets/meer-informatie.svg';
 import { Box } from '~/components/base';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { InlineText } from '~/components/typography';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { ChartTile } from '~/components/chart-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { Tooltip } from '~/lib/tooltip';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { SituationIcon } from './components/situation-icon';
+import { useSituations } from './logic/situations';
 
 interface SmallMultiplesChoroplethTileProps {
   data: VrCollectionSituations[];
@@ -52,6 +52,7 @@ export function SituationsOverviewChoroplethTile({
           <ChoroplethGridItem
             icon={<SituationIcon id={situation.id} />}
             title={situation.title}
+            description={situation.description}
             key={situation.id}
           >
             <SafetyRegionChoropleth
@@ -63,7 +64,7 @@ export function SituationsOverviewChoroplethTile({
               tooltipContent={(
                 context: SafetyRegionProperties & VrCollectionSituations
               ) => (
-                <Tooltip
+                <ChoroplethTooltip
                   isPercentage
                   value={context[situation.id]}
                   regionName={context.vrname}
@@ -78,7 +79,12 @@ export function SituationsOverviewChoroplethTile({
   );
 }
 
-function Tooltip({ value, isPercentage, regionName, thresholds }: any) {
+function ChoroplethTooltip({
+  value,
+  isPercentage,
+  regionName,
+  thresholds,
+}: any) {
   const intl = useIntl();
   return (
     <Box px={3} py={2} display="inline-block">
@@ -112,10 +118,12 @@ const ChoroplethGrid = styled.div(
 function ChoroplethGridItem({
   icon,
   title,
+  description,
   children,
 }: {
   icon: ReactNode;
   title: string;
+  description: string;
   children: ReactNode;
 }) {
   return (
@@ -133,7 +141,9 @@ function ChoroplethGridItem({
       >
         {icon}
         <span css={css({ fontWeight: 'heavy', fontSize: 2 })}>{title}</span>
-        <MeerInformatie />
+        <Tooltip content={description}>
+          <MeerInformatie tabIndex={0} />
+        </Tooltip>
       </Box>
 
       <div>{children}</div>
