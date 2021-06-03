@@ -1,5 +1,4 @@
 import {
-  assert,
   isDateSeries,
   isDateSpanSeries,
   TimestampedValue,
@@ -19,6 +18,6 @@ export function useTimespan<T extends TimestampedValue>(values: T[]) {
       return value.date_end_unix - value.date_start_unix;
     }
 
-    assert(false, 'Encountered an invalid time series');
+    throw new Error('Encountered an invalid time series');
   }, [values]);
 }
