@@ -7,7 +7,7 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_overall__infected_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+      "$ref": "#/definitions/diff_integer"
     },
     "tested_ggd_daily__tested_total": {
       "$ref": "#/definitions/diff_integer"
@@ -16,7 +16,7 @@
       "$ref": "#/definitions/diff_decimal"
     },
     "tested_ggd_average__tested_total_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+      "$ref": "#/definitions/diff_integer"
     },
     "tested_ggd_average__infected_percentage_moving_average": {
       "$ref": "#/definitions/diff_decimal"
@@ -25,13 +25,13 @@
       "$ref": "#/definitions/diff_integer"
     },
     "hospital_nice__admissions_on_date_of_reporting_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+      "$ref": "#/definitions/diff_integer"
     },
     "hospital_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
     },
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
+      "$ref": "#/definitions/diff_integer"
     },
     "intensive_care_lcps__beds_occupied_covid": {
       "$ref": "#/definitions/diff_integer"
