@@ -1,4 +1,5 @@
 import {
+  assert,
   isDateSeries,
   isDateSpanSeries,
   TimestampedValue,
@@ -8,16 +9,16 @@ import { useMemo } from 'react';
 export function useTimespan<T extends TimestampedValue>(values: T[]) {
   return useMemo(() => {
     if (!values.length) {
-      return NaN;
+      return 0;
     }
 
     if (isDateSeries(values)) {
-      return 1;
+      return 0;
     } else if (isDateSpanSeries(values)) {
       const value = values[0];
       return value.date_end_unix - value.date_start_unix;
     }
 
-    return NaN;
+    assert(false, 'Encountered an invalid time series');
   }, [values]);
 }

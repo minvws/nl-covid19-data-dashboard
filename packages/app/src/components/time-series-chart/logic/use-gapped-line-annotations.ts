@@ -1,20 +1,12 @@
 import {
-  DateSpanValue,
-  DateValue,
+  isDateSpanValue,
+  isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { TimespanAnnotationConfig } from './common';
-
-function isDateValue(value: TimestampedValue): value is DateValue {
-  return isDefined((value as DateValue).date_unix);
-}
-
-function isDateSpanValue(value: TimestampedValue): value is DateSpanValue {
-  return isDefined((value as DateSpanValue).date_start_unix);
-}
 
 export function useGappedLineAnnotations<T extends TimestampedValue>(
   values: T[],
@@ -38,17 +30,23 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
               ? item.date_end_unix
               : NaN;
 
-            let current = last(newItems);
-            if (!isDefined(current) || !isNaN(current.end)) {
-              current = { start: startDate, end: NaN, label };
-              newItems.push(current);
+            let currentAnnotation = last(newItems);
+            if (
+              !isDefined(currentAnnotation) ||
+              !isNaN(currentAnnotation.end)
+            ) {
+              currentAnnotation = { start: startDate, end: NaN, label };
+              newItems.push(currentAnnotation);
             }
 
+            // If this is either the last item in the list or the next
+            // item in the list has a valid property, this means the current
+            // annotation ends here, so we assign the end date.
             if (
               index === array.length - 1 ||
               isPresent(array[index + 1]?.[property])
             ) {
-              current.end = endDate;
+              currentAnnotation.end = endDate;
             }
           }
           return newItems;

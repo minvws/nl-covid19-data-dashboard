@@ -89,7 +89,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const gappedLineAnnotations = useGappedLineAnnotations(
     data.vaccine_vaccinated_or_support.values,
     'percentage_70_plus',
-    'Onbeschikbaar'
+    'Niet genoeg gegevens'
   );
 
   const { siteText } = useIntl();
