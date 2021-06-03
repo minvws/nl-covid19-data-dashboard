@@ -42,7 +42,7 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
 
   const halfOfTimespan = timespan / 2;
   gappedSeries.forEach((item, index, array) => {
-    if (item.length === 1 && timespan > 1) {
+    if (item.length === 1 && timespan > 0) {
       array[index] = [
         {
           __value: item[0].__value,
