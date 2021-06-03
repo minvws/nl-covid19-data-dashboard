@@ -135,6 +135,14 @@ export function useHoverState<T extends TimestampedValue>({
   const handleBlur = useCallback(() => setHasFocus(false), []);
 
   const timeoutRef = useRef<any>();
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleHover = useCallback(
     (event: Event) => {
       if (isEmpty(values)) {
@@ -230,9 +238,12 @@ export function useHoverState<T extends TimestampedValue>({
         const yValue = seriesValue.__value;
 
         /**
-         * Filter series without Y value on the current valuesIndex
+         * Filter series without Y value on the current valuesIndex.
+         *
+         * Except when a gapped line is shown, in that case the tooltip still needs
+         * to be shown to indicate why the gap is there.
          */
-        if (!isPresent(yValue)) {
+        if (!isPresent(yValue) && config.type !== 'gapped-line') {
           return undefined;
         }
 
@@ -243,8 +254,8 @@ export function useHoverState<T extends TimestampedValue>({
             return {
               seriesValue,
               x: xScale(xValue),
-              y: yScale(yValue),
-              color: config.color,
+              y: yValue ? yScale(yValue) : 0,
+              color: yValue ? config.color : 'transparent',
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
             };

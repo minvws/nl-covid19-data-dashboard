@@ -22,6 +22,7 @@ import { useChoroplethDataDescription } from './hooks/use-choropleth-data-descri
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { HoverPathLink, Path } from './path';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
@@ -31,6 +32,7 @@ type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   selectedCode?: string;
   highlightSelection?: boolean;
   tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
+  tooltipPlacement?: ChoroplethTooltipPlacement;
   getLink: (code: string) => string;
 } & DataProps;
 
@@ -56,6 +58,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     metricName,
     metricProperty,
     tooltipContent,
+    tooltipPlacement,
     highlightSelection = true,
     getLink,
   } = props;
@@ -128,15 +131,12 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     [getFillColor, hasData, safetyRegionMunicipalCodes, selectedCode]
   );
 
-  const {
-    isTabInteractive,
-    tabInteractiveButton,
-    anchorEventHandlers,
-  } = useTabInteractiveButton(
-    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-      subject: siteText.choropleth.gm.plural,
-    })
-  );
+  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
+    useTabInteractiveButton(
+      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+        subject: siteText.choropleth.gm.plural,
+      })
+    );
 
   const renderHover = useCallback(
     (feature: Feature<MultiPolygon, MunicipalityProperties>, path: string) => {
@@ -194,6 +194,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
         renderFeature={renderFeature}
         renderHover={renderHover}
         getTooltipContent={getTooltipContent}
+        tooltipPlacement={tooltipPlacement}
         showTooltipOnFocus={isTabInteractive}
       />
     </div>

@@ -31,6 +31,7 @@ import {
   useValuesInTimeframe,
 } from './logic';
 import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
+import { useTimespan } from './logic/use-timespan';
 
 export type TimeSeriesMiniBarChart<T extends TimestampedValue> = {
   values: T[];
@@ -85,6 +86,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
   const values = useValuesInTimeframe(allValues, timeframe);
 
   const seriesList = useSeriesList(values, seriesConfig);
+  const timespan = useTimespan(values);
 
   const calculatedSeriesMax = useMemo(
     () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
@@ -192,6 +194,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
             bounds={bounds}
             yScale={yScale}
             benchmark={benchmark}
+            timespan={timespan}
           />
 
           {benchmark && (

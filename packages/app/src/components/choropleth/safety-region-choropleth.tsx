@@ -20,6 +20,7 @@ import {
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
 import { HoverPathLink, Path } from './path';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, regionGeo } from './topology';
 
 type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
@@ -29,6 +30,7 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   selectedCode?: string;
   highlightSelection?: boolean;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
+  tooltipPlacement?: ChoroplethTooltipPlacement;
   highlightCode?: string;
   getLink?: (code: string) => string;
   minHeight?: number;
@@ -56,6 +58,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     metricName,
     metricProperty,
     tooltipContent,
+    tooltipPlacement,
     highlightCode,
     highlightSelection,
     getLink,
@@ -193,6 +196,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         renderFeature={renderFeature}
         renderHover={renderHover}
         getTooltipContent={getTooltipContent}
+        tooltipPlacement={tooltipPlacement}
         renderHighlight={renderHighlight}
         showTooltipOnFocus={isTabInteractive}
       />

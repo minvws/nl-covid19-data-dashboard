@@ -27,10 +27,11 @@ export function TooltipContent(props: IProps) {
           level={3}
           m={0}
           /**
-           * do not read the tooltip title because a screenreader will also read
-           * the choropleth link which contains the name of a region.
+           * If there's no link do not read the tooltip title because a
+           * screenreader will also read the choropleth link which contains the
+           * name of a region.
            */
-          aria-hidden="true"
+          aria-hidden={link ? 'true' : 'false'}
           fontSize="1.125rem"
           css={css({
             overflow: 'hidden',
