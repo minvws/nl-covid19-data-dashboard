@@ -11,6 +11,7 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
+import { InlineText } from '../typography';
 import {
   Axes,
   Benchmark,
@@ -38,6 +39,7 @@ import {
   useLegendItems,
   useScales,
   useSeriesList,
+  useSplitLegendGroups,
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
@@ -225,6 +227,8 @@ export function TimeSeriesChart<
     seriesConfig,
     dataOptions
   );
+
+  const splitLegendGroups = useSplitLegendGroups(seriesConfig);
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -438,6 +442,22 @@ export function TimeSeriesChart<
           )}
         </Box>
       </ResponsiveContainer>
+      {!disableLegend && splitLegendGroups.length > 0 && (
+        <>
+          {splitLegendGroups.map((x) => (
+            <Box
+              key={x.label}
+              pl={paddingLeft}
+              display="flex"
+              flexDirection={['column', 'row']}
+              alignItems="baseline"
+            >
+              <InlineText pr={2}>{x.label}:</InlineText>
+              <Legend items={x.items} />
+            </Box>
+          ))}
+        </>
+      )}
       {!disableLegend && legendItems.length > 0 && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />

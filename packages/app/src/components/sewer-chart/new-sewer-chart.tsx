@@ -4,12 +4,12 @@ import {
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { set } from 'lodash';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
+import { Box } from '../base';
 import { ChartTile } from '../chart-tile';
 
 export function NewSewerChart({
@@ -62,7 +62,7 @@ export function NewSewerChart({
       {(timeframe) => (
         <>
           {dataPerInstallation && (
-            <div css={css({ alignSelf: 'flex-start', mb: 2 })}>
+            <Box alignSelf={'flex-start'} mb={3}>
               <Select
                 options={options}
                 onChange={onChange}
@@ -70,7 +70,7 @@ export function NewSewerChart({
                 value={selectedInstallation}
                 placeholder={text.selectPlaceholder || '__no_placeholder'}
               />
-            </div>
+            </Box>
           )}
 
           {

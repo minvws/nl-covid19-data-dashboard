@@ -1,6 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import { first, last } from 'lodash';
 import { useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components/legend';
 import {
   HatchedTimespanAnnotationIcon,
@@ -16,25 +17,28 @@ export function useLegendItems<T extends TimestampedValue>(
   dataOptions?: DataOptions
 ) {
   const legendItems = useMemo(() => {
-    const items = config.filter(isVisible).flatMap<LegendItem>((x) => {
-      switch (x.type) {
-        case 'split-area':
-        case 'split-bar':
-          return x.splitPoints.map((v) => ({
-            color: v.color,
-            label: v.label,
-            shape: 'custom',
-            shapeComponent: <SeriesIcon config={x} value={v.value} />,
-          }));
-        default:
-          return {
-            color: x.color,
-            label: x.label,
-            shape: 'custom',
-            shapeComponent: <SeriesIcon config={x} />,
-          };
-      }
-    });
+    const items = config
+      .filter(isVisible)
+      .map<LegendItem | undefined>((x) => {
+        switch (x.type) {
+          case 'split-area':
+          case 'split-bar':
+            /**
+             * Split type items are omitted from the normal legend, so that we can
+             * render them in a separate per split labelled legend. Not using a
+             * filter on type for TS type narrowing reasons.
+             */
+            return;
+          default:
+            return {
+              color: x.color,
+              label: x.label,
+              shape: 'custom',
+              shapeComponent: <SeriesIcon config={x} />,
+            };
+        }
+      })
+      .filter(isDefined);
 
     /**
      * Maximum number of legend items
@@ -80,4 +84,32 @@ export function useLegendItems<T extends TimestampedValue>(
   }, [config, dataOptions, domain]);
 
   return legendItems;
+}
+
+type SplitLegendGroup = { label: string; items: LegendItem[] };
+
+export function useSplitLegendGroups<T extends TimestampedValue>(
+  config: SeriesConfig<T>
+) {
+  return useMemo(
+    () =>
+      config
+        .map<SplitLegendGroup | undefined>((x) => {
+          switch (x.type) {
+            case 'split-area':
+            case 'split-bar':
+              return {
+                label: x.label,
+                items: x.splitPoints.map((v) => ({
+                  color: v.color,
+                  label: v.label,
+                  shape: 'custom',
+                  shapeComponent: <SeriesIcon config={x} value={v.value} />,
+                })),
+              };
+          }
+        })
+        .filter(isDefined),
+    [config]
+  );
 }
