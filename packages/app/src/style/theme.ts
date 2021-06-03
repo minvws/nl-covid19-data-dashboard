@@ -150,8 +150,8 @@ export const colors = {
 
     behavior: {
       scale: {
-        blue: ['#e9f5fc', '#bce1f7', '#90cdf2', '#219be5', '#1779b6', '#1a618f', '#005082'],
-        yellow: ['#fff2cc', '#ffe699', '#ffd34d', '#ffc000', '#e8b61b', '#d6ab26', '#cf9c00'],
+        cyan: ['#e9f5fc', '#bce1f7', '#90cdf2', '#219be5', '#1779b6', '#1a618f', '#005082'],
+        yellow: ['#FFF2CC', '#FFE699', '#FFD34D', '#FABC00', '#E5A400', '#C98600', '#9E6900'],
       }
     },
 

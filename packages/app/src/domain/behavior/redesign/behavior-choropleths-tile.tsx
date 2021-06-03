@@ -4,7 +4,6 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useState } from 'react';
 import { Box } from '~/components/base';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -16,21 +15,25 @@ import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
+import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
+import { BehaviorIcon } from '../components/behavior-icon';
 
 interface BehaviorChoroplethsTileProps {
   title: string;
   description: string;
   data: RegionsBehavior[];
+  currentId: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
 
 export function BehaviorChoroplethsTile({
   title,
   description,
   data,
+  currentId,
+  setCurrentId,
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
   // Find all the keys that only doesn't exist on VR level but does on NL
   const keysWithoutData = behaviorIdentifiers.filter(
@@ -57,6 +60,7 @@ export function BehaviorChoroplethsTile({
           value={currentId}
           onChange={setCurrentId}
           options={behaviorIndentifiersData}
+          icon={<BehaviorIcon name={currentId} size={20} />}
         />
       </Box>
 

@@ -171,31 +171,31 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
 
 const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.behavior.scale.blue[0],
+    color: colors.data.behavior.scale.cyan[0],
     threshold: 0,
   },
   {
-    color: colors.data.behavior.scale.blue[1],
+    color: colors.data.behavior.scale.cyan[1],
     threshold: 40,
   },
   {
-    color: colors.data.behavior.scale.blue[2],
+    color: colors.data.behavior.scale.cyan[2],
     threshold: 50,
   },
   {
-    color: colors.data.behavior.scale.blue[3],
+    color: colors.data.behavior.scale.cyan[3],
     threshold: 60,
   },
   {
-    color: colors.data.behavior.scale.blue[4],
+    color: colors.data.behavior.scale.cyan[4],
     threshold: 70,
   },
   {
-    color: colors.data.behavior.scale.blue[5],
+    color: colors.data.behavior.scale.cyan[5],
     threshold: 80,
   },
   {
-    color: colors.data.behavior.scale.blue[6],
+    color: colors.data.behavior.scale.cyan[6],
     threshold: 90,
   },
 ];

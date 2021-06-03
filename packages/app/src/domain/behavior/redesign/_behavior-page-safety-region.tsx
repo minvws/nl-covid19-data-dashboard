@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -6,14 +7,14 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { useIntl } from '~/intl';
-import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
-import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
-import { BehaviorTable } from '~/domain/behavior/behavior-table';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
-
+import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
+import { BehaviorTableTile } from '~/domain/behavior/redesign/behavior-table-tile';
+import { SafetyRegionPageMetricData } from '~/domain/layout/safety-region-layout';
+import { useIntl } from '~/intl';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { BehaviorIdentifier } from '../behavior-types';
+import { BehaviorLineChartTile } from './behavior-line-chart-tile';
 interface BehaviorPageSafetyRegionProps {
   data: SafetyRegionPageMetricData;
   content: { articles?: ArticleSummary[] | undefined };
@@ -27,6 +28,9 @@ export function BehaviorPageSafetyRegion({
 
   const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
+
+  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const scrollToRef = useRef<HTMLDivElement>(null);
 
   const { sortedCompliance, sortedSupport } =
     useFormatAndSortBehavior(behaviorLastValue);
@@ -81,7 +85,7 @@ export function BehaviorPageSafetyRegion({
 
       <ArticleStrip articles={content.articles} />
 
-      <BehaviorTable
+      <BehaviorTableTile
         title={regionaal_gedrag.basisregels.title}
         description={regionaal_gedrag.basisregels.description}
         complianceExplanation={regionaal_gedrag.basisregels.volgen_beschrijving}
@@ -89,8 +93,11 @@ export function BehaviorPageSafetyRegion({
         sortedCompliance={sortedCompliance}
         sortedSupport={sortedSupport}
         annotation={regionaal_gedrag.basisregels.annotatie}
+        setCurrentId={setCurrentId}
+        scrollRef={scrollToRef}
       />
 
+      <span ref={scrollToRef} />
       <BehaviorLineChartTile
         values={data.behavior.values}
         metadata={{
@@ -100,6 +107,8 @@ export function BehaviorPageSafetyRegion({
           ],
           source: regionaal_gedrag.bronnen.rivm,
         }}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
 
       <MoreInformation />

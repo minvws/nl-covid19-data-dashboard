@@ -10,9 +10,12 @@ import { BehaviorFormatted } from '~/domain/behavior/hooks/useFormatAndSortBehav
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { BehaviorIcon } from './components/behavior-icon';
-import { BehaviorTrend } from './components/behavior-trend';
-interface BehaviorTableProps {
+import { BehaviorIcon } from '../components/behavior-icon';
+import { BehaviorTrend } from '../components/behavior-trend';
+import scrollIntoView from 'scroll-into-view-if-needed';
+import { BehaviorIdentifier } from '../behavior-types';
+
+interface BehaviorTableTileProps {
   title: string;
   description: string;
   complianceExplanation: string;
@@ -20,9 +23,11 @@ interface BehaviorTableProps {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
   annotation: string;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  scrollRef: { current: HTMLDivElement | null };
 }
 
-export function BehaviorTable({
+export function BehaviorTableTile({
   title,
   description,
   complianceExplanation,
@@ -30,7 +35,9 @@ export function BehaviorTable({
   sortedCompliance,
   sortedSupport,
   annotation,
-}: BehaviorTableProps) {
+  setCurrentId,
+  scrollRef,
+}: BehaviorTableTileProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
 
@@ -87,7 +94,12 @@ export function BehaviorTable({
                     <Box minWidth={32} color="black" pr={2} display="flex">
                       <BehaviorIcon name={behavior.id} size={20} />
                     </Box>
-                    <DescriptionWithIcon description={behavior.description} />
+                    <DescriptionWithIcon
+                      description={behavior.description}
+                      id={behavior.id}
+                      setCurrentId={setCurrentId}
+                      scrollRef={scrollRef}
+                    />
                   </Box>
                 </Cell>
                 <Cell>
@@ -128,11 +140,26 @@ export function BehaviorTable({
  * Render every word in a span and add the chevron to the last word.
  * this is for the word wrapping when the screen gets smaller.
  */
-function DescriptionWithIcon({ description }: { description: string }) {
+function DescriptionWithIcon({
+  description,
+  id,
+  setCurrentId,
+  scrollRef,
+}: {
+  description: string;
+  id: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  scrollRef: { current: HTMLDivElement | null };
+}) {
   const splittedWords = description.split(' ');
 
+  const buttonClickHandler = () => {
+    scrollIntoView(scrollRef.current as Element);
+    setCurrentId(id);
+  };
+
   return (
-    <Button>
+    <Button onClick={buttonClickHandler}>
       {splittedWords.map((word, index) => (
         <InlineText key={index} css={css({ whiteSpace: 'pre-wrap' })}>
           {splittedWords.length - 1 === index ? (
