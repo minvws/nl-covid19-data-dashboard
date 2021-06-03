@@ -32,19 +32,6 @@ export function useReverseRouter() {
         brononderzoek: () => `/landelijk/brononderzoek`,
       },
 
-      gm: {
-        index: (code?: string) =>
-          code
-            ? reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
-            : `/gemeente`,
-        positiefGetesteMensen: (code: string) =>
-          `/gemeente/${code}/positief-geteste-mensen`,
-        sterfte: (code: string) => `/gemeente/${code}/sterfte`,
-        ziekenhuisopnames: (code: string) =>
-          `/gemeente/${code}/ziekenhuis-opnames`,
-        rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
-      },
-
       vr: {
         index: (code?: string) =>
           code
@@ -66,6 +53,21 @@ export function useReverseRouter() {
           `/veiligheidsregio/${code}/thuiswonende-ouderen`,
         rioolwater: (code: string) => `/veiligheidsregio/${code}/rioolwater`,
         gedrag: (code: string) => `/veiligheidsregio/${code}/gedrag`,
+        brononderzoek: (code: string) =>
+          `/veiligheidsregio/${code}/brononderzoek`,
+      },
+
+      gm: {
+        index: (code?: string) =>
+          code
+            ? reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
+            : `/gemeente`,
+        positiefGetesteMensen: (code: string) =>
+          `/gemeente/${code}/positief-geteste-mensen`,
+        sterfte: (code: string) => `/gemeente/${code}/sterfte`,
+        ziekenhuisopnames: (code: string) =>
+          `/gemeente/${code}/ziekenhuis-opnames`,
+        rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
       },
     } as const;
 

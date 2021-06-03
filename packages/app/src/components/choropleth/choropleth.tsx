@@ -17,7 +17,10 @@ import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Path } from './path';
-import { Tooltip } from './tooltips/tooltip-container';
+import {
+  ChoroplethTooltipPlacement,
+  Tooltip,
+} from './tooltips/tooltip-container';
 import { countryGeo } from './topology';
 
 export type TooltipSettings = {
@@ -61,6 +64,7 @@ type TProps<T1, T3> = {
   // This callback is invoked right before a tooltip is shown for one of the features in the featureCollection property.
   // The id is the value that is assigned to the data-id attribute in the renderFeature.
   getTooltipContent: (id: string) => ReactNode;
+  tooltipPlacement?: ChoroplethTooltipPlacement;
   description?: string;
   showTooltipOnFocus?: boolean;
 };
@@ -77,6 +81,7 @@ type TProps<T1, T3> = {
 
 export function Choropleth<T1, T3>({
   getTooltipContent,
+  tooltipPlacement,
   ...props
 }: TProps<T1, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
@@ -97,6 +102,7 @@ export function Choropleth<T1, T3>({
           style={{ pointerEvents: isTouch ? 'all' : 'none' }}
         >
           <Tooltip
+            placement={tooltipPlacement}
             left={tooltip.left}
             top={tooltip.top}
             setTooltip={setTooltip}
@@ -111,7 +117,10 @@ export function Choropleth<T1, T3>({
 
 type FitSize = [[number, number], any];
 
-type ChoroplethMapProps<T1, T3> = Omit<TProps<T1, T3>, 'getTooltipContent'> & {
+type ChoroplethMapProps<T1, T3> = Omit<
+  TProps<T1, T3>,
+  'getTooltipContent' | 'tooltipPlacement'
+> & {
   setTooltip: (tooltip: TooltipSettings | undefined) => void;
 };
 
