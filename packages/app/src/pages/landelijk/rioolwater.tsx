@@ -165,6 +165,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 title: text.linechart_titel,
                 source: text.bronnen.rivm,
                 description: text.linechart_description,
+                splitLabels: siteText.rioolwater_metingen.split_labels,
               }}
             />
           ) : (

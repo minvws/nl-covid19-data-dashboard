@@ -27,6 +27,13 @@ export function NewSewerChart({
       text: string;
     };
     selectPlaceholder?: string;
+    splitLabels: {
+      waarde_0_200: string;
+      waarde_200_400: string;
+      waarde_400_600: string;
+      waarde_600_800: string;
+      waarde_800_plus: string;
+    };
   };
 }) {
   const {
@@ -49,6 +56,34 @@ export function NewSewerChart({
         ],
       } as SewerPerInstallationData)
   );
+
+  const averageSplitPoints = [
+    {
+      value: 200,
+      color: colors.data.scale.blue[0],
+      label: text.splitLabels.waarde_0_200,
+    },
+    {
+      value: 400,
+      color: colors.data.scale.blue[1],
+      label: text.splitLabels.waarde_200_400,
+    },
+    {
+      value: 600,
+      color: colors.data.scale.blue[2],
+      label: text.splitLabels.waarde_400_600,
+    },
+    {
+      value: 800,
+      color: colors.data.scale.blue[3],
+      label: text.splitLabels.waarde_600_800,
+    },
+    {
+      value: Infinity,
+      color: colors.data.scale.blue[4],
+      label: text.splitLabels.waarde_800_plus,
+    },
+  ];
 
   return (
     <ChartTile
@@ -123,7 +158,7 @@ export function NewSewerChart({
     </ChartTile>
   );
 }
-
+/*
 const averageSplitPoints = [
   {
     value: 200,
@@ -151,6 +186,7 @@ const averageSplitPoints = [
     label: '800 - 1000',
   },
 ];
+*/
 
 function mergeData(
   dataAverages: RegionalSewer | MunicipalSewer,
