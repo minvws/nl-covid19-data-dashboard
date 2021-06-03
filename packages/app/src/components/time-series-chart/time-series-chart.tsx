@@ -442,7 +442,7 @@ export function TimeSeriesChart<
           )}
         </Box>
       </ResponsiveContainer>
-      {!disableLegend && splitLegendGroups.length > 0 && (
+      {!disableLegend && splitLegendGroups && (
         <>
           {splitLegendGroups.map((x) => (
             <Box
@@ -458,7 +458,7 @@ export function TimeSeriesChart<
           ))}
         </>
       )}
-      {!disableLegend && legendItems.length > 0 && (
+      {!disableLegend && legendItems && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>
