@@ -45,6 +45,7 @@ export function SituationsDataCoverageChoroplethTile({
         source: text.bronnen.rivm,
       }}
     >
+      <Heading level={3}>{text.situaties_kaarten_uitkomsten.titel}</Heading>
       <Box
         display="flex"
         flexDirection={{ _: 'column', lg: 'row' }}
@@ -54,9 +55,6 @@ export function SituationsDataCoverageChoroplethTile({
       >
         <Box mb={3} flex={{ lg: 1 }} as="figcaption">
           <Box mb={[0, 4]}>
-            <Heading level={3}>
-              {text.situaties_kaarten_uitkomsten.titel}
-            </Heading>
             <Markdown
               content={replaceVariablesInText(
                 text.situaties_kaarten_uitkomsten.beschrijving,
