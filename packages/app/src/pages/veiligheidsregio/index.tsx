@@ -26,6 +26,7 @@ import { createDate } from '~/utils/create-date';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -45,6 +46,8 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
   };
+
+  const unknownLevelColor = useEscalationColor(null);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -99,6 +102,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.vr.index}
               metricName="escalation_levels"
               metricProperty="level"
+              noDataFillColor={unknownLevelColor}
               tooltipContent={(
                 context: SafetyRegionProperties & EscalationLevels
               ) => (

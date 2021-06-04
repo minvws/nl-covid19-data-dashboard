@@ -6,7 +6,7 @@ import { Text } from '~/components/typography';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 
 interface TooltipSubjectProps {
-  subject: string;
+  subject?: string;
   thresholdValues: ChoroplethThresholdsValue[];
   filterBelow: number;
   children: ReactNode;
@@ -22,11 +22,15 @@ export function TooltipSubject(props: TooltipSubjectProps) {
 
   return (
     <>
-      <Text m={0} mb={1} fontWeight="bold">
-        {subject}
-      </Text>
-      <Text
+      {subject && (
+        <Text m={0} mb={1} fontWeight="bold">
+          {subject}
+        </Text>
+      )}
+      <Box
         m={0}
+        spacing={2}
+        spacingHorizontal
         css={css({
           display: 'flex',
           alignItems: 'center',
@@ -42,7 +46,7 @@ export function TooltipSubject(props: TooltipSubjectProps) {
           ml={'auto'}
           backgroundColor={filteredThreshold.color}
         />
-      </Text>
+      </Box>
     </>
   );
 }

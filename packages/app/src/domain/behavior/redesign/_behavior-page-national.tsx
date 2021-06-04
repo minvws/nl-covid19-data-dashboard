@@ -7,15 +7,17 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
-import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
-import { BehaviorTable } from '~/domain/behavior/behavior-table';
+import { BehaviorChoroplethsTile } from '~/domain/behavior/redesign/behavior-choropleths-tile';
+import { BehaviorPerAgeGroup } from '~/domain/behavior/redesign/behavior-per-age-group-tile';
+import { BehaviorTableTile } from '~/domain/behavior/redesign/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { NationalPageMetricData } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { BehaviorLineChartTile } from './redesigned-behavior-line-chart-tile';
+import { BehaviorLineChartTile } from './behavior-line-chart-tile';
+import { BehaviorIdentifier } from '../behavior-types';
+import { useState, useRef } from 'react';
 
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
@@ -32,6 +34,9 @@ export function BehaviorPageNational({
 
   const { nl_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
+
+  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const scrollToRef = useRef<HTMLDivElement>(null);
 
   const { sortedCompliance, sortedSupport } =
     useFormatAndSortBehavior(behaviorLastValue);
@@ -114,7 +119,7 @@ export function BehaviorPageNational({
 
       <ArticleStrip articles={content.articles} />
 
-      <BehaviorTable
+      <BehaviorTableTile
         title={nl_gedrag.basisregels.title}
         description={nl_gedrag.basisregels.description}
         complianceExplanation={nl_gedrag.basisregels.volgen_beschrijving}
@@ -122,8 +127,11 @@ export function BehaviorPageNational({
         sortedCompliance={sortedCompliance}
         sortedSupport={sortedSupport}
         annotation={nl_gedrag.basisregels.annotatie}
+        setCurrentId={setCurrentId}
+        scrollRef={scrollToRef}
       />
 
+      <span ref={scrollToRef} />
       <BehaviorLineChartTile
         values={data.behavior.values}
         metadata={{
@@ -133,25 +141,33 @@ export function BehaviorPageNational({
           ],
           source: nl_gedrag.bronnen.rivm,
         }}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
 
       <BehaviorChoroplethsTile
         title={nl_gedrag.verdeling_in_nederland.titel}
         description={nl_gedrag.verdeling_in_nederland.description}
         data={behaviorData}
+        currentId={currentId}
+        setCurrentId={setCurrentId}
       />
 
-      <BehaviorPerAgeGroup
-        title={siteText.nl_gedrag.tabel_per_leeftijdsgroep.title}
-        description={nl_gedrag.tabel_per_leeftijdsgroep.description}
-        complianceExplanation={
-          nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
-        }
-        supportExplanation={
-          nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
-        }
-        data={data.behavior_per_age_group}
-      />
+      {data.behavior_per_age_group && (
+        <BehaviorPerAgeGroup
+          title={siteText.nl_gedrag.tabel_per_leeftijdsgroep.title}
+          description={nl_gedrag.tabel_per_leeftijdsgroep.description}
+          complianceExplanation={
+            nl_gedrag.tabel_per_leeftijdsgroep.explanation.compliance
+          }
+          supportExplanation={
+            nl_gedrag.tabel_per_leeftijdsgroep.explanation.support
+          }
+          data={data.behavior_per_age_group}
+          currentId={currentId}
+          setCurrentId={setCurrentId}
+        />
+      )}
 
       <MoreInformation />
     </TileList>

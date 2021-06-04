@@ -19,10 +19,12 @@ import { Box } from '~/components/base';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
+import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/type';
+import { SituationIcon } from '../situations/components/situation-icon';
 import { SafetyRegionComboBox } from './components/safety-region-combo-box';
 
 export const vrPageMetricNames = [
@@ -219,6 +221,16 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                         metricProperty="covid_daily"
                         localeTextKey="veiligheidsregio_sterfte"
                         differenceKey="deceased_rivm__covid_daily"
+                      />
+                    </MetricMenuItemLink>
+
+                    <MetricMenuItemLink
+                      href={reverseRouter.vr.brononderzoek(code)}
+                      icon={<SituationIcon id="gathering" />}
+                      title={siteText.brononderzoek.titel_sidebar}
+                    >
+                      <SidebarKpiValue
+                        title={siteText.brononderzoek.kpi_titel}
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
