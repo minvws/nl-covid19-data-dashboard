@@ -1,18 +1,17 @@
+import { VrSituationsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import CheckIcon from '~/assets/check.svg';
 import CrossIcon from '~/assets/cross.svg';
-import { Tile } from '~/components/tile';
-import { Heading, InlineText, Text } from '~/components/typography';
-import { useIntl } from '~/intl';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { Box } from '~/components/base';
+import { Markdown } from '~/components/markdown';
+import { Tile } from '~/components/tile';
+import { Heading } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
 interface SituationsDataCoverageTileProps {
-  data: {
-    has_sufficient_data: boolean;
-    date_start_unix: number;
-    date_end_unix: number;
-  };
+  data: VrSituationsValue;
 }
 
 export function SituationsDataCoverageTile({
@@ -39,23 +38,17 @@ export function SituationsDataCoverageTile({
             : text.title_not_enough_coverage}
         </CoverageIndicator>
         <Box maxWidth="maxWidthText">
-          <Text>
-            {replaceComponentsInText(
+          <Markdown
+            content={replaceVariablesInText(
               data.has_sufficient_data
                 ? text.description_enough_coverage
                 : text.description_not_enough_coverage,
               {
-                date_text: (
-                  <InlineText fontWeight="bold">
-                    {replaceComponentsInText(text.date_text, {
-                      date_from: <InlineText>{date_from}</InlineText>,
-                      date_to: <InlineText>{date_to}</InlineText>,
-                    })}
-                  </InlineText>
-                ),
+                date_to,
+                date_from,
               }
             )}
-          </Text>
+          />
         </Box>
       </Box>
     </Tile>
