@@ -20,12 +20,23 @@ export function mockVrSituations(vrcode: string) {
     )
     .sort((a, b) => a.date_end_unix - b.date_end_unix);
 
+  values[10] = makeInsufficentValue(values[10]);
+  values[4] = makeInsufficentValue(values[11]);
+
   const value = {
     values,
     last_value: values[values.length - 1],
   };
 
   return value;
+}
+
+function makeInsufficentValue(value: VrSituationsValue) {
+  return {
+    ...value,
+    has_sufficient_data: false,
+    ...getSituationsValues(false),
+  };
 }
 
 function getVrSituationsValue(vrcode: string, date_end_unix: number) {
@@ -36,38 +47,45 @@ function getVrSituationsValue(vrcode: string, date_end_unix: number) {
   const situations_known_percentage =
     situations_known_total / investigations_total;
 
+  const has_sufficient_data = Math.random() < 1;
+
   const value: VrSituationsValue = {
     date_start_unix: date_end_unix - 60 * 60 * 24 * 7,
     date_end_unix,
     date_of_insertion_unix: date_end_unix,
     vrcode,
-    has_sufficient_data: investigations_total > 1000,
+    has_sufficient_data,
     investigations_total,
     situations_known_percentage,
     situations_known_total,
-    ...getSituationsValues(),
+    ...getSituationsValues(has_sufficient_data),
   };
 
   return value;
 }
 
 function getVrCollectionSituationsValue(vrcode: string) {
+  const has_sufficient_data = Math.random() < 1;
+
   const value: VrCollectionSituations = {
     date_start_unix: NOW_IN_SECONDS - ONE_WEEK_IN_SECONDS,
     date_end_unix: NOW_IN_SECONDS,
     date_of_insertion_unix: NOW_IN_SECONDS,
     vrcode,
-    has_sufficient_data: Math.random() < 0.5,
-    ...getSituationsValues(),
+    has_sufficient_data,
+    ...getSituationsValues(has_sufficient_data),
   };
 
   return value;
 }
 
-function getSituationsValues() {
+function getSituationsValues(hasSufficientData: boolean) {
   const getPercentage = splitNParts(100, 8);
   return Object.fromEntries(
-    situations.map((x) => [x, getPercentage.next().value || null])
+    situations.map((x) => [
+      x,
+      hasSufficientData ? getPercentage.next().value : null,
+    ])
   ) as Pick<VrSituationsValue, SituationKey>;
 }
 

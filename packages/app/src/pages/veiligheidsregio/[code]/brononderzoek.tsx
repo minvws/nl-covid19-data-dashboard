@@ -1,12 +1,14 @@
 import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
 import { mockVrSituations } from '~/domain/situations/logic/mock-data';
+import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -66,6 +68,7 @@ export default function BrononderzoekPage(
 
   assert(data.situations, 'no situations data found');
 
+  const values = data.situations.values;
   const singleValue = data.situations.last_value;
 
   return (
@@ -102,6 +105,22 @@ export default function BrononderzoekPage(
           />
 
           <ArticleStrip articles={content.articles} />
+
+          {values && (
+            <ChartTile
+              title={'title'}
+              description={'description'}
+              timeframeOptions={['all', '5weeks']}
+              metadata={{ source: text.bronnen.rivm }}
+            >
+              {(timeframe) => (
+                <SituationsOverTimeChart
+                  timeframe={timeframe}
+                  values={values}
+                />
+              )}
+            </ChartTile>
+          )}
         </TileList>
       </SafetyRegionLayout>
     </Layout>
