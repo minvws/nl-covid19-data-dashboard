@@ -18,9 +18,7 @@ import { SituationsDataCoverageTooltip } from './components/situations-data-cove
 
 interface SituationsDataCoverageChoroplethTileProps {
   data: {
-    vr: {
-      situations: VrCollectionSituations[];
-    };
+    situations: VrCollectionSituations[];
   };
 }
 
@@ -31,17 +29,17 @@ export function SituationsDataCoverageChoroplethTile({
   const reverseRouter = useReverseRouter();
 
   const text = siteText.brononderzoek;
-  const singleValue = data.vr.situations[0];
+  const { date_start_unix, date_end_unix } = data.situations[0];
 
   const [date_from, date_to] = formatDateSpan(
-    { seconds: singleValue.date_start_unix },
-    { seconds: singleValue.date_end_unix }
+    { seconds: date_start_unix },
+    { seconds: date_end_unix }
   );
 
   return (
     <FullscreenChartTile
       metadata={{
-        date: [singleValue.date_start_unix, singleValue.date_end_unix],
+        date: [date_start_unix, date_end_unix],
         source: text.bronnen.rivm,
       }}
     >
@@ -99,7 +97,7 @@ export function SituationsDataCoverageChoroplethTile({
         >
           <Box height="100%">
             <SafetyRegionChoropleth
-              data={data.vr}
+              data={data}
               getLink={reverseRouter.vr.brononderzoek}
               metricName="situations"
               metricProperty="has_sufficient_data"
@@ -114,7 +112,7 @@ export function SituationsDataCoverageChoroplethTile({
   );
 }
 
-const LegendItem = ({
+function LegendItem({
   color,
   icon,
   title,
@@ -124,7 +122,7 @@ const LegendItem = ({
   icon: JSX.Element;
   title: string;
   description: string;
-}) => {
+}) {
   return (
     <Box display="flex" css={css({ gap: '.5rem' })}>
       <LegendIcon color={color}>{icon}</LegendIcon>
@@ -136,4 +134,4 @@ const LegendItem = ({
       </Box>
     </Box>
   );
-};
+}

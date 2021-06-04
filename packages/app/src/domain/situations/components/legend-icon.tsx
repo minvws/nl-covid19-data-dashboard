@@ -1,13 +1,13 @@
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 
-export const LegendIcon = ({
+export function LegendIcon({
   color,
   children,
 }: {
   color: string;
   children: JSX.Element;
-}) => {
+}) {
   return (
     <Box
       css={css({
@@ -29,4 +29,4 @@ export const LegendIcon = ({
       {children}
     </Box>
   );
-};
+}

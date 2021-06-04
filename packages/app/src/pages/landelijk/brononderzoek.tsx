@@ -86,7 +86,7 @@ export default function BrononderzoekPage(
 
           <ArticleStrip articles={content.articles} />
 
-          <SituationsDataCoverageChoroplethTile data={choropleth} />
+          <SituationsDataCoverageChoroplethTile data={choropleth.vr} />
 
           <SituationsOverviewChoroplethTile data={choropleth.vr.situations} />
         </TileList>

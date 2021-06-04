@@ -21,37 +21,37 @@ export function SituationsDataCoverageTooltip({
   const text = siteText.brononderzoek;
   const reverseRouter = useReverseRouter();
 
-  const Icon = context.has_sufficient_data ? Check : Cross;
-  const color = context.has_sufficient_data ? 'data.primary' : 'gray';
-  const label = context.has_sufficient_data
+  const { has_sufficient_data } = context;
+
+  const Icon = has_sufficient_data ? Check : Cross;
+  const color = has_sufficient_data ? 'data.primary' : 'gray';
+  const label = has_sufficient_data
     ? text.situaties_kaarten_uitkomsten.tooltip.voldoende_data
     : text.situaties_kaarten_uitkomsten.tooltip.onvoldoende_data;
 
   return (
-    context && (
-      <TooltipContent
-        title={context.vrname}
-        link={reverseRouter.vr.brononderzoek(context.vrcode)}
+    <TooltipContent
+      title={context.vrname}
+      link={reverseRouter.vr.brononderzoek(context.vrcode)}
+    >
+      <Box
+        m={0}
+        spacing={2}
+        spacingHorizontal
+        css={css({
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'nowrap',
+          whiteSpace: 'pre-wrap',
+        })}
       >
-        <Box
-          m={0}
-          spacing={2}
-          spacingHorizontal
-          css={css({
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'nowrap',
-            whiteSpace: 'pre-wrap',
-          })}
-        >
-          <LegendIcon color={color}>
-            <Icon />
-          </LegendIcon>
-          <InlineText color={color} fontWeight="bold">
-            {label}
-          </InlineText>
-        </Box>
-      </TooltipContent>
-    )
+        <LegendIcon color={color}>
+          <Icon />
+        </LegendIcon>
+        <InlineText color={color} fontWeight="bold">
+          {label}
+        </InlineText>
+      </Box>
+    </TooltipContent>
   );
 }
