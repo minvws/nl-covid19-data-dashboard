@@ -1,9 +1,11 @@
 import { VrSituationsValue } from '@corona-dashboard/common';
+import { InteractiveLegend } from '~/components/interactive-legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { colors } from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useList } from '~/utils/use-list';
 import { SituationKey, useSituations } from './logic/situations';
 
 interface SituationsTimeSeriesChartProps {
@@ -16,36 +18,43 @@ export function SituationsOverTimeChart({
   timeframe,
 }: SituationsTimeSeriesChartProps) {
   const situations = useSituations();
+  const { list, toggle, reset } = useList<string>(situations.map((x) => x.id));
 
   const timespanAnnotations = useGappedLineAnnotations(
     values,
     'has_sufficient_data',
-    'bleehhh'
+    'Onvoldoende gegevens'
   );
 
-  console.dir(timespanAnnotations);
+  const seriesConfig = situations.map<
+    GappedLineSeriesDefinition<VrSituationsValue>
+  >((situation) => ({
+    type: 'gapped-line',
+    metricProperty: situation.id,
+    color: seriesColors[situation.id],
+    label: situation.title,
+    shape: 'line',
+  }));
+
+  const compareList = list.concat();
+  const chartConfig = seriesConfig.filter((item) =>
+    compareList.includes(item.metricProperty)
+  );
 
   return (
     <>
-      {/* <InteractiveLegend
-    helpText={'text.legend_help_text'}
-    selectOptions={interactiveLegendOptions}
-    selection={list}
-    onToggleItem={toggle}
-    onReset={clear}
-  /> */}
+      <InteractiveLegend
+        helpText={'text.legend_help_text'}
+        selectOptions={seriesConfig}
+        selection={list}
+        onToggleItem={toggle}
+        onReset={reset}
+      />
       <TimeSeriesChart
         values={values}
         timeframe={timeframe}
         dataOptions={{ timespanAnnotations }}
-        seriesConfig={situations.map<
-          GappedLineSeriesDefinition<VrSituationsValue>
-        >((situation) => ({
-          type: 'gapped-line',
-          metricProperty: situation.id,
-          color: seriesColors[situation.id],
-          label: situation.title,
-        }))}
+        seriesConfig={chartConfig}
         disableLegend
       />
       {/* <Legend items={staticLegendItems} /> */}

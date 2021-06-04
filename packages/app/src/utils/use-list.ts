@@ -20,6 +20,8 @@ export function useList<T>(initialValue: T[] = []) {
 
   const clear = useCallback(() => setList([]), []);
 
+  const reset = useCallback(() => setList(initialValue), [initialValue]);
+
   return useMemo(
     () => ({
       list,
@@ -27,7 +29,8 @@ export function useList<T>(initialValue: T[] = []) {
       remove,
       toggle,
       clear,
+      reset,
     }),
-    [list, add, remove, toggle, clear]
+    [list, add, remove, toggle, clear, reset]
   );
 }
