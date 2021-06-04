@@ -23,8 +23,7 @@ export function SituationsOverTimeChart({
     'bleehhh'
   );
 
-  console.log(values);
-  console.log(timespanAnnotations);
+  console.dir(timespanAnnotations);
 
   return (
     <>

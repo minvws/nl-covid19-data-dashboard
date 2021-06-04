@@ -4,7 +4,8 @@ import {
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { last } from 'lodash';
+import isBoolean from 'lodash/isBoolean';
+import last from 'lodash/last';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
@@ -21,7 +22,9 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
     () =>
       values.reduce<TimespanAnnotationConfig[]>(
         (newItems, item, index, array) => {
-          if (!isPresent(item[property])) {
+          const value = item[property] as unknown;
+          const isValid = createIsValidCheck(value);
+          if (!isValid(value)) {
             const startDate = isDateValue(item)
               ? item.date_unix
               : isDateSpanValue(item)
@@ -48,7 +51,7 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
             // annotation ends here, so we assign the end date.
             if (
               index === array.length - 1 ||
-              isPresent(array[index + 1]?.[property])
+              isValid(array[index + 1]?.[property])
             ) {
               currentAnnotation.end = endDate;
               currentAnnotation.label = formatLabel(
@@ -72,4 +75,11 @@ function formatLabel(
   const start = formatDateFromSeconds(annotation.start, 'axis');
   const end = formatDateFromSeconds(annotation.end, 'axis');
   return `${start} - ${end}: ${annotation.label}`;
+}
+
+function createIsValidCheck(value: unknown) {
+  if (isBoolean(value)) {
+    return (val: unknown) => val === true;
+  }
+  return (val: unknown) => isPresent(val);
 }
