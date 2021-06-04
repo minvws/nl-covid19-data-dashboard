@@ -292,7 +292,7 @@ const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const situationsThreshold = [
+const situationsThreshold: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.scale.blue[0],
     threshold: 0,
@@ -327,6 +327,7 @@ const situationsThreshold = [
     color: colors.data.scale.blue[6],
     threshold: 60,
     label: '60%',
+    endLabel: '100%',
   },
 ];
 

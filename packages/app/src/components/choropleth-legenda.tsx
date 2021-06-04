@@ -10,14 +10,12 @@ interface ChoroplethLegendaProps {
   title: string;
   thresholds: ChoroplethThresholdsValue[];
   valueAnnotation?: string;
-  endLabel?: string;
 }
 
 export function ChoroplethLegenda({
   title,
   thresholds,
   valueAnnotation,
-  endLabel,
 }: ChoroplethLegendaProps) {
   const { width = 0, ref } = useResizeObserver<HTMLSpanElement>();
 
@@ -28,22 +26,19 @@ export function ChoroplethLegenda({
         aria-label="legend"
         hasValueAnnotation={valueAnnotation ? true : false}
       >
-        {thresholds.map(({ color, threshold, label }, index) => {
+        {thresholds.map(({ color, threshold, label, endLabel }, index) => {
           const isFirst = index === 0;
           const isLast = index === thresholds.length - 1;
           return (
             <Item key={color + threshold}>
               <LegendaColor color={color} first={isFirst} last={isLast} />
-              <Label
-                css={isFirst ? css({ transform: 'translateX(0%)' }) : undefined}
-              >
-                {label ?? threshold}
-              </Label>
-              {endLabel && isLast && (
-                <Label ref={ref} alignRight>
-                  {endLabel}
-                </Label>
+              {isFirst ? (
+                <StartLabel>{label ?? threshold}</StartLabel>
+              ) : (
+                <Label>{label ?? threshold}</Label>
               )}
+
+              {isLast && endLabel && <EndLabel ref={ref}>{endLabel}</EndLabel>}
             </Item>
           );
         })}
@@ -86,17 +81,26 @@ const LegendaColor = styled.div<{
   })
 );
 
-const Label = styled.span<{ alignRight?: boolean }>((x) =>
+const Label = styled.span<{ alignRight?: boolean }>(
   css({
     pt: 1,
     display: 'inline-block',
     transform: 'translateX(-50%)',
     fontSize: [0, null, 1],
-    ...(x.alignRight && {
-      position: 'absolute',
-      top: 10,
-      right: 0,
-      transform: 'translateX(50%)',
-    }),
+  })
+);
+
+const StartLabel = styled(Label)(
+  css({
+    transform: 'translateX(0)',
+  })
+);
+
+const EndLabel = styled(Label)(
+  css({
+    position: 'absolute',
+    top: 10,
+    right: 0,
+    transform: 'translateX(50%)',
   })
 );

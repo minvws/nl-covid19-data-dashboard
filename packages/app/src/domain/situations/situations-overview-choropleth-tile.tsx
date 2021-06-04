@@ -58,7 +58,6 @@ export function SituationsOverviewChoroplethTile({
           <ChoroplethLegenda
             title={text.situaties_kaarten_overzicht.legenda.titel}
             thresholds={regionThresholds.situations.gathering}
-            endLabel="100%"
           />
         </Box>
         <Box display="flex" alignItems="flex-end">
