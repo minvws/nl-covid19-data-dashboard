@@ -95,7 +95,8 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
   const getFillColor = useChoroplethColorScale(
     getChoroplethValue,
-    selectedThreshold
+    selectedThreshold,
+    noDataFillColor
   );
 
   const renderFeature = useCallback(
@@ -115,7 +116,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
           pathData={path}
           fill={fill}
           stroke={isWhiteFill ? colors.silver : '#fff'}
-          strokeWidth={1}
+          strokeWidth={0.5}
         />
       );
     },
