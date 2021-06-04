@@ -22,7 +22,7 @@ export function SituationsDataCoverageTooltip({
   const reverseRouter = useReverseRouter();
 
   const Icon = context.has_sufficient_data ? Check : Cross;
-  const color = context.has_sufficient_data ? 'data.primary' : 'silver';
+  const color = context.has_sufficient_data ? 'data.primary' : 'gray';
   const label = context.has_sufficient_data
     ? text.situaties_kaarten_uitkomsten.tooltip.voldoende_data
     : text.situaties_kaarten_uitkomsten.tooltip.onvoldoende_data;

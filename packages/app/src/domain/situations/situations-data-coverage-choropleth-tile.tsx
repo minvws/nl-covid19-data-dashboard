@@ -78,7 +78,7 @@ export function SituationsDataCoverageChoroplethTile({
               }
             />
             <LegendItem
-              color="silver"
+              color="gray"
               icon={<Cross />}
               title={
                 text.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.titel
