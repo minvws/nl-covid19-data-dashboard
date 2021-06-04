@@ -34,3 +34,13 @@ timestamp,action,key
 2021-06-03T09:34:40.512Z,add,brononderzoek.situaties_kaarten_overzicht.legenda.onvoldoende_data
 2021-06-03T09:34:41.530Z,add,brononderzoek.situaties_kaarten_overzicht.select_help_text
 2021-06-03T09:34:42.543Z,add,brononderzoek.situaties_kaarten_overzicht.titel
+2021-06-04T12:39:20.103Z,add,brononderzoek.situaties_kaarten_uitkomsten.titel
+2021-06-04T12:39:59.324Z,add,brononderzoek.situaties_kaarten_uitkomsten.beschrijving
+2021-06-04T12:40:50.379Z,add,brononderzoek.situaties_kaarten_uitkomsten.legenda.voldoende_data.titel
+2021-06-04T12:41:21.273Z,add,brononderzoek.situaties_kaarten_uitkomsten.legenda.voldoende_data.omschrijving
+2021-06-04T12:41:52.436Z,add,brononderzoek.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.titel
+2021-06-04T12:42:25.469Z,add,brononderzoek.situaties_kaarten_uitkomsten.tooltip.voldoende_data
+2021-06-04T12:42:47.498Z,add,brononderzoek.situaties_kaarten_uitkomsten.tooltip.onvoldoende_data
+2021-06-04T12:46:42.767Z,add,brononderzoek.situaties_kaarten_overzicht.onvoldoende_data.omschrijving
+2021-06-04T12:50:14.931Z,delete,brononderzoek.situaties_kaarten_overzicht.onvoldoende_data.omschrijving
+2021-06-04T12:51:14.103Z,add,brononderzoek.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.omschrijving
