@@ -120,7 +120,7 @@ export const colors = {
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',
   cerulean: '#0390D6',
-  
+
   data: {
     primary: '#007BC7',
     secondary: '#154273',
@@ -134,10 +134,18 @@ export const colors = {
     margin: '#D0EDFF',
     positive: '#5BADDB',
     negative: '#F35065',
-    cyan: "#219BE6",
-    yellow: "#FFC000",
+    cyan: '#219BE6',
+    yellow: '#FFC000',
     scale: {
-      blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
+      blue: [
+        '#8FCAE7',
+        '#5BADDB',
+        '#248FCF',
+        '#0070BB',
+        '#00529D',
+        '#003580',
+        '#001D45',
+      ],
       magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
     },
     gradient: {
@@ -150,9 +158,25 @@ export const colors = {
 
     behavior: {
       scale: {
-        cyan: ['#e9f5fc', '#bce1f7', '#90cdf2', '#219be5', '#1779b6', '#1a618f', '#005082'],
-        yellow: ['#FFF2CC', '#FFE699', '#FFD34D', '#FABC00', '#E5A400', '#C98600', '#9E6900'],
-      }
+        cyan: [
+          '#e9f5fc',
+          '#bce1f7',
+          '#90cdf2',
+          '#219be5',
+          '#1779b6',
+          '#1a618f',
+          '#005082',
+        ],
+        yellow: [
+          '#FFF2CC',
+          '#FFE699',
+          '#FFD34D',
+          '#FABC00',
+          '#E5A400',
+          '#C98600',
+          '#9E6900',
+        ],
+      },
     },
 
     vaccines: {

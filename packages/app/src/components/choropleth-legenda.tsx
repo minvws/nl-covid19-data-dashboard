@@ -1,8 +1,11 @@
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
-import { Box } from './base';
+import useResizeObserver from 'use-resize-observer';
 import { ValueAnnotation } from '~/components/value-annotation';
+import { Box } from './base';
+import { Heading } from './typography';
+
 interface ChoroplethLegendaProps {
   title: string;
   thresholds: ChoroplethThresholdsValue[];
@@ -14,23 +17,31 @@ export function ChoroplethLegenda({
   thresholds,
   valueAnnotation,
 }: ChoroplethLegendaProps) {
+  const { width = 0, ref } = useResizeObserver<HTMLSpanElement>();
+
   return (
-    <Box width="100%" maxWidth={300}>
-      {title && <h4>{title}</h4>}
+    <Box width="100%" pr={`${width / 2}px`}>
+      {title && <Heading level={4}>{title}</Heading>}
       <List
         aria-label="legend"
         hasValueAnnotation={valueAnnotation ? true : false}
       >
-        {thresholds.map(({ color, threshold, label }, index) => (
-          <Item key={color + threshold}>
-            <LegendaColor
-              color={color}
-              first={index === 0}
-              last={index === thresholds.length - 1}
-            />
-            <Label>{label ?? threshold}</Label>
-          </Item>
-        ))}
+        {thresholds.map(({ color, threshold, label, endLabel }, index) => {
+          const isFirst = index === 0;
+          const isLast = index === thresholds.length - 1;
+          return (
+            <Item key={color + threshold}>
+              <LegendaColor color={color} first={isFirst} last={isLast} />
+              {isFirst ? (
+                <StartLabel>{label ?? threshold}</StartLabel>
+              ) : (
+                <Label>{label ?? threshold}</Label>
+              )}
+
+              {isLast && endLabel && <EndLabel ref={ref}>{endLabel}</EndLabel>}
+            </Item>
+          );
+        })}
       </List>
       <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
     </Box>
@@ -44,20 +55,20 @@ const List = styled.ul<{ hasValueAnnotation?: boolean }>((x) =>
     paddingLeft: 0,
     listStyle: 'none',
     display: 'flex',
-    mb: x.hasValueAnnotation ? 2 : 3,
+    mb: x.hasValueAnnotation ? 2 : 0,
   })
 );
 
 const Item = styled.li(
   css({
     flex: 1,
-    fontSize: [0, null, 1],
+    position: 'relative',
   })
 );
 
 const LegendaColor = styled.div<{
-  first: boolean;
-  last: boolean;
+  first?: boolean;
+  last?: boolean;
   color: string;
 }>((x) =>
   css({
@@ -70,10 +81,26 @@ const LegendaColor = styled.div<{
   })
 );
 
-const Label = styled.span(
+const Label = styled.span<{ alignRight?: boolean }>(
   css({
-    py: 1,
+    pt: 1,
     display: 'inline-block',
     transform: 'translateX(-50%)',
+    fontSize: [0, null, 1],
+  })
+);
+
+const StartLabel = styled(Label)(
+  css({
+    transform: 'translateX(0)',
+  })
+);
+
+const EndLabel = styled(Label)(
+  css({
+    position: 'absolute',
+    top: 10,
+    right: 0,
+    transform: 'translateX(50%)',
   })
 );

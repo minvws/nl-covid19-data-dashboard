@@ -38,7 +38,12 @@ export function TopicalChoroplethContainer({
 }: TopicalChoroplethContainerProps) {
   const legendaComponent =
     (legend && (
-      <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
+      <Box maxWidth={300} width="100%">
+        <ChoroplethLegenda
+          thresholds={legend.thresholds}
+          title={legend.title}
+        />
+      </Box>
     )) ??
     legendComponent;
 
