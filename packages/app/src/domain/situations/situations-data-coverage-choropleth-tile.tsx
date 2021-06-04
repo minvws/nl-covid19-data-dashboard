@@ -53,7 +53,7 @@ export function SituationsDataCoverageChoroplethTile({
         height="100%"
       >
         <Box mb={3} flex={{ lg: 1 }} as="figcaption">
-          <Box mb={[0, 2]}>
+          <Box mb={[0, 4]}>
             <Heading level={3}>
               {text.situaties_kaarten_uitkomsten.titel}
             </Heading>
