@@ -6,7 +6,10 @@ import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
-import { mockVrSituations } from '~/domain/situations/logic/mock-data';
+import {
+  mockVrSituations,
+  mockKpiBlock,
+} from '~/domain/situations/logic/mock-data';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -71,6 +74,8 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
+  const mockData = mockKpiBlock();
+
   assert(data.situations, 'no situations data found');
 
   const singleValue = data.situations.last_value;
@@ -112,17 +117,17 @@ export default function BrononderzoekPage(
 
           <TwoKpiSection>
             <Tile>Empty tile</Tile>
-            {data.has_sufficient_data ? (
+            {mockData.has_sufficient_data ? (
               <KpiTile
                 title={siteText.vr_brononderzoek.kpi_result.title}
                 metadata={{
-                  date: data.situations.date_of_insertion_unix,
+                  date: mockData.date_of_insertion_unix,
                   source: text.bronnen.rivm,
                 }}
               >
                 <KpiValue
                   data-cy="covid_total"
-                  percentage={data.situations.known_percentage}
+                  percentage={mockData.known_percentage}
                 />
                 <Text>
                   {replaceComponentsInText(
@@ -130,14 +135,12 @@ export default function BrononderzoekPage(
                     {
                       date_start_unix: (
                         <InlineText>
-                          {formatDateFromSeconds(
-                            data.situations.date_start_unix
-                          )}
+                          {formatDateFromSeconds(mockData.date_start_unix)}
                         </InlineText>
                       ),
                       date_end_unix: (
                         <InlineText>
-                          {formatDateFromSeconds(data.situations.date_end_unix)}
+                          {formatDateFromSeconds(mockData.date_end_unix)}
                         </InlineText>
                       ),
                     }
@@ -149,12 +152,12 @@ export default function BrononderzoekPage(
                     {
                       situations_known_total: (
                         <InlineText color="data.primary">
-                          {formatNumber(data.situations_known_total)}
+                          {formatNumber(mockData.situations_known_total)}
                         </InlineText>
                       ),
                       investigations_total: (
                         <InlineText color="data.primary">
-                          {formatNumber(data.investigations_total)}
+                          {formatNumber(mockData.investigations_total)}
                         </InlineText>
                       ),
                     }
