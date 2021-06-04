@@ -156,7 +156,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         <HoverPathLink
           href={getLink ? getLink(vrcode) : undefined}
           title={vrname}
-          isTabInteractive={getLink ? isTabInteractive : false}
+          isTabInteractive={isTabInteractive}
           id={vrcode}
           pathData={path}
           stroke={isEscalationLevelTheme || isSelected ? '#fff' : undefined}
@@ -187,7 +187,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
 
   return (
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
-      {getLink ? tabInteractiveButton : null}
+      {tabInteractiveButton}
       <Choropleth
         minHeight={minHeight}
         description={dataDescription}

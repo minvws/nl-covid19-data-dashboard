@@ -7,6 +7,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
 import { mockVrCollectionSituations } from '~/domain/situations/logic/mock-data';
+import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -84,6 +85,8 @@ export default function BrononderzoekPage(
           />
 
           <ArticleStrip articles={content.articles} />
+
+          <SituationsDataCoverageChoroplethTile data={choropleth.vr} />
 
           <SituationsOverviewChoroplethTile data={choropleth.vr.situations} />
         </TileList>
