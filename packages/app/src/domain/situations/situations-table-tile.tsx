@@ -11,7 +11,7 @@ import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';
-
+import { InlineTooltip } from '~/components/inline-tooltip';
 interface SituationsTableTileProps {
   data: any;
   metadata: MetadataProps;
@@ -70,10 +70,9 @@ export function SituationsTableTile({
                 <Cell>
                   <Box display="flex" alignItems="center">
                     <SituationIcon id={situation.id} />
-                    <InlineText>
-                      {situation.title}
-                      <>{situation.description}</>
-                    </InlineText>
+                    <InlineTooltip content={situation.description}>
+                      <InlineText>{situation.title}</InlineText>
+                    </InlineTooltip>
                   </Box>
                 </Cell>
 
