@@ -49,6 +49,10 @@ export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;
   threshold: T;
   label?: string;
+  /**
+   * Optiobally define the label which explains the "end" of a threshold
+   */
+  endLabel?: string;
 };
 
 export type Dictionary<T> = Partial<Record<string, T>>;
