@@ -1,6 +1,9 @@
+import { VrSituationsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
+import { InlineTooltip } from '~/components/inline-tooltip';
 import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
@@ -11,9 +14,8 @@ import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';
-import { InlineTooltip } from '~/components/inline-tooltip';
 interface SituationsTableTileProps {
-  data: any;
+  data: VrSituationsValue;
   metadata: MetadataProps;
 }
 
@@ -77,9 +79,9 @@ export function SituationsTableTile({
                 </Cell>
 
                 <Cell>
-                  {data[situation.id] ? (
+                  {isPresent(data[situation.id]) ? (
                     <PercentageBar
-                      amount={data[situation.id]}
+                      amount={data[situation.id] as number}
                       color={colors.data.primary}
                     />
                   ) : (
