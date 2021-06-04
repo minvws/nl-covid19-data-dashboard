@@ -5,15 +5,14 @@ import {
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import MeerInformatie from '~/assets/meer-informatie.svg';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { Tooltip } from '~/lib/tooltip';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';
 import { useSituations } from './logic/situations';
@@ -140,10 +139,12 @@ function ChoroplethGridItem({
         mb={3}
       >
         {icon}
-        <span css={css({ fontWeight: 'heavy', fontSize: 2 })}>{title}</span>
-        <Tooltip content={description}>
-          <MeerInformatie tabIndex={0} />
-        </Tooltip>
+        <InlineTooltip
+          content={description}
+          css={css({ fontWeight: 'heavy', fontSize: 2 })}
+        >
+          {title}
+        </InlineTooltip>
       </Box>
 
       <div>{children}</div>
