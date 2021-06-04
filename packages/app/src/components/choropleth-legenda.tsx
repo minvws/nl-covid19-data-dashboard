@@ -1,5 +1,5 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
-import { css } from '@styled-system/css';
+import { css, SystemStyleObject } from '@styled-system/css';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { ValueAnnotation } from '~/components/value-annotation';
@@ -81,23 +81,25 @@ const LegendaColor = styled.div<{
   })
 );
 
-const Label = styled.span<{ alignRight?: boolean }>(
-  css({
-    pt: 1,
-    display: 'inline-block',
-    transform: 'translateX(-50%)',
-    fontSize: [0, null, 1],
-  })
-);
+const labelStyles: SystemStyleObject = {
+  pt: 1,
+  display: 'inline-block',
+  transform: 'translateX(-50%)',
+  fontSize: [0, null, 1],
+};
 
-const StartLabel = styled(Label)(
+const Label = styled.span(css(labelStyles));
+
+const StartLabel = styled.span(
   css({
+    ...labelStyles,
     transform: 'translateX(0)',
   })
 );
 
-const EndLabel = styled(Label)(
+const EndLabel = styled.span(
   css({
+    ...labelStyles,
     position: 'absolute',
     top: 10,
     right: 0,

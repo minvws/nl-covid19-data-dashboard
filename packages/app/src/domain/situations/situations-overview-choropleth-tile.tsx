@@ -5,13 +5,13 @@ import {
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import MeerInformatie from '~/assets/meer-informatie.svg';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -80,6 +80,7 @@ export function SituationsOverviewChoroplethTile({
           <ChoroplethGridItem
             icon={<SituationIcon id={situation.id} />}
             title={situation.title}
+            description={situation.description}
             key={situation.id}
           >
             <SafetyRegionChoropleth
@@ -92,7 +93,7 @@ export function SituationsOverviewChoroplethTile({
               tooltipContent={(
                 context: SafetyRegionProperties & VrCollectionSituations
               ) => (
-                <Tooltip
+                <ChoroplethTooltip
                   isPercentage
                   value={context[situation.id]}
                   regionName={context.vrname}
@@ -107,7 +108,12 @@ export function SituationsOverviewChoroplethTile({
   );
 }
 
-function Tooltip({ value, isPercentage, regionName, thresholds }: any) {
+function ChoroplethTooltip({
+  value,
+  isPercentage,
+  regionName,
+  thresholds,
+}: any) {
   const intl = useIntl();
   return (
     <Box px={3} py={2} display="inline-block">
@@ -141,10 +147,12 @@ const ChoroplethGrid = styled.div(
 function ChoroplethGridItem({
   icon,
   title,
+  description,
   children,
 }: {
   icon: ReactNode;
   title: string;
+  description: string;
   children: ReactNode;
 }) {
   return (
@@ -161,8 +169,12 @@ function ChoroplethGridItem({
         mb={3}
       >
         {icon}
-        <span css={css({ fontWeight: 'heavy', fontSize: 2 })}>{title}</span>
-        <MeerInformatie />
+        <InlineTooltip
+          content={description}
+          css={css({ fontWeight: 'heavy', fontSize: 2 })}
+        >
+          {title}
+        </InlineTooltip>
       </Box>
 
       <div>{children}</div>
