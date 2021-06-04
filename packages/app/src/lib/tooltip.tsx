@@ -31,7 +31,7 @@ export function TooltipContext({ children }: { children: ReactNode }) {
  */
 type TooltipProps = Pick<TippyProps, 'children' | 'content'>;
 
-export function Tooltip({ children, content }: TooltipProps) {
+export function WithTooltip({ children, content }: TooltipProps) {
   const target = useContext(tooltipContext);
   assert(target, 'missing TooltipContext in component tree');
 
