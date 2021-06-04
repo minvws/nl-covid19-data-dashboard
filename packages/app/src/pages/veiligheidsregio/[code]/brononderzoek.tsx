@@ -108,8 +108,8 @@ export default function BrononderzoekPage(
 
           {values && (
             <ChartTile
-              title={'title'}
-              description={'description'}
+              title={text.situaties_over_tijd_grafiek.titel}
+              description={text.situaties_over_tijd_grafiek.omschrijving}
               timeframeOptions={['all', '5weeks']}
               metadata={{ source: text.bronnen.rivm }}
             >

@@ -1,8 +1,10 @@
 import { VrSituationsValue } from '@corona-dashboard/common';
 import { InteractiveLegend } from '~/components/interactive-legend';
+import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useList } from '~/utils/use-list';
@@ -17,13 +19,24 @@ export function SituationsOverTimeChart({
   values,
   timeframe,
 }: SituationsTimeSeriesChartProps) {
+  const { siteText } = useIntl();
   const situations = useSituations();
   const { list, toggle, clear } = useList<string>();
+
+  const text = siteText.brononderzoek.situaties_over_tijd_grafiek;
+
+  const staticLegendItems: LegendItem[] = [
+    {
+      shape: 'square',
+      color: colors.data.underReported,
+      label: text.legenda.onvoldoende_gegevens,
+    },
+  ];
 
   const timespanAnnotations = useGappedLineAnnotations(
     values,
     'has_sufficient_data',
-    'Onvoldoende gegevens'
+    text.tooltip.onvoldoende_gegevens
   );
 
   const seriesConfig = situations.map<
@@ -45,7 +58,7 @@ export function SituationsOverTimeChart({
   return (
     <>
       <InteractiveLegend
-        helpText={'text.legend_help_text'}
+        helpText={text.legenda.help_text}
         selectOptions={seriesConfig}
         selection={list}
         onToggleItem={toggle}
@@ -58,7 +71,7 @@ export function SituationsOverTimeChart({
         seriesConfig={chartConfig}
         disableLegend
       />
-      {/* <Legend items={staticLegendItems} /> */}
+      {<Legend items={staticLegendItems} />}
     </>
   );
 }
