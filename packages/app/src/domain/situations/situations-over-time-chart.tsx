@@ -18,7 +18,7 @@ export function SituationsOverTimeChart({
   timeframe,
 }: SituationsTimeSeriesChartProps) {
   const situations = useSituations();
-  const { list, toggle, reset } = useList<string>(situations.map((x) => x.id));
+  const { list, toggle, clear } = useList<string>();
 
   const timespanAnnotations = useGappedLineAnnotations(
     values,
@@ -37,8 +37,9 @@ export function SituationsOverTimeChart({
   }));
 
   const compareList = list.concat();
-  const chartConfig = seriesConfig.filter((item) =>
-    compareList.includes(item.metricProperty)
+  const chartConfig = seriesConfig.filter(
+    (item) =>
+      compareList.includes(item.metricProperty) || compareList.length === 0
   );
 
   return (
@@ -48,7 +49,7 @@ export function SituationsOverTimeChart({
         selectOptions={seriesConfig}
         selection={list}
         onToggleItem={toggle}
-        onReset={reset}
+        onReset={clear}
       />
       <TimeSeriesChart
         values={values}
