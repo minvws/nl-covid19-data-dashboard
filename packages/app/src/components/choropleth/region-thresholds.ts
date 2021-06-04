@@ -1,4 +1,5 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import { SituationKey } from '~/domain/situations/logic/situations';
 import { colors } from '~/style/theme';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
@@ -291,6 +292,45 @@ const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const situationsThreshold: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0,
+    label: '0%',
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 10,
+    label: '10%',
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 20,
+    label: '20%',
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 30,
+    label: '30%',
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 40,
+    label: '40%',
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 50,
+    label: '50%',
+  },
+  {
+    color: colors.data.scale.blue[6],
+    threshold: 60,
+    label: '60%',
+    endLabel: '100%',
+  },
+];
+
 const hasSufficientDataThresholds = [
   {
     color: colors.silver,
@@ -332,18 +372,15 @@ export const regionThresholds = {
   vaccine: {
     coverage_percentage: vaccineCoverageThresholds,
   },
-  /**
-   * @TODO proper thresholds should be implemented along with the situations features.
-   */
-  situations: {
+  situations: <Record<SituationKey, ChoroplethThresholdsValue[]>>{
     has_sufficient_data: hasSufficientDataThresholds,
-    home_and_visits: positiveTestedThresholds,
-    work: positiveTestedThresholds,
-    school_and_day_care: positiveTestedThresholds,
-    health_care: positiveTestedThresholds,
-    gathering: positiveTestedThresholds,
-    travel: positiveTestedThresholds,
-    hospitality: positiveTestedThresholds,
-    other: positiveTestedThresholds,
+    home_and_visits: situationsThreshold,
+    work: situationsThreshold,
+    school_and_day_care: situationsThreshold,
+    health_care: situationsThreshold,
+    gathering: situationsThreshold,
+    travel: situationsThreshold,
+    hospitality: situationsThreshold,
+    other: situationsThreshold,
   },
 } as const;

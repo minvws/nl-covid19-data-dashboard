@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
+import { TooltipContext } from '~/lib/tooltip';
 import { LanguageKey } from '~/locale';
 import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
@@ -61,7 +62,9 @@ export default function App(props: AppProps) {
       <IntlContext.Provider value={intlContext}>
         <GlobalStyle />
         <BreakpointContextProvider>
-          <Component {...pageProps} />
+          <TooltipContext>
+            <Component {...pageProps} />
+          </TooltipContext>
         </BreakpointContextProvider>
       </IntlContext.Provider>
       {toggleHotReloadButton}
