@@ -72,7 +72,7 @@ export function HoverPathLink({
       href={href}
       aria-label={title}
       title={title}
-      tabIndex={isTabInteractive ? undefined : -1}
+      tabIndex={isTabInteractive ? 0 : -1}
       aria-hidden={isTabInteractive ? undefined : 'true'}
       data-id={pathProps.id}
       onClick={handleClick}
