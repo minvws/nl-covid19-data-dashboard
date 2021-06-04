@@ -58,7 +58,6 @@ export default function BrononderzoekPage(
   const intl = useIntl();
 
   const text = intl.siteText.brononderzoek;
-  const vrText = intl.siteText.vr_brononderzoek;
 
   const metadata = {
     ...intl.siteText.nationaal_metadata,
@@ -68,7 +67,7 @@ export default function BrononderzoekPage(
 
   assert(data.situations, 'no situations data found');
 
-  const singleValue = data.situations.last_value;
+  const lastValue = data.situations.last_value;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -95,25 +94,17 @@ export default function BrononderzoekPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: singleValue.date_start_unix,
-                end: singleValue.date_end_unix,
+                start: lastValue.date_start_unix,
+                end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: singleValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
           />
 
           <ArticleStrip articles={content.articles} />
-          <SituationsDataCoverageTile
-            title={vrText.tile_coverage.title}
-            descriptionEnoughCoverage={
-              vrText.tile_coverage.description_enough_coverage
-            }
-            descriptionNotEnoughCoverage={
-              vrText.tile_coverage.description_not_enough_coverage
-            }
-            dateText={vrText.tile_coverage.date_text}
-          />
+
+          <SituationsDataCoverageTile data={lastValue} />
         </TileList>
       </SafetyRegionLayout>
     </Layout>

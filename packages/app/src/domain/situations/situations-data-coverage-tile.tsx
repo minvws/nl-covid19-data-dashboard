@@ -1,69 +1,63 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import CheckIcon from '~/assets/check.svg';
-import CloseIcon from '~/assets/close.svg';
+import CrossIcon from '~/assets/cross.svg';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { mockDataCoverage } from '~/domain/situations/logic/mock-data';
-
+import { Box } from '~/components/base';
 interface SituationsDataCoverageTileProps {
-  title: string;
-  descriptionEnoughCoverage: string;
-  descriptionNotEnoughCoverage: string;
-  dateText: string;
+  data: {
+    has_sufficient_data: boolean;
+    date_start_unix: number;
+    date_end_unix: number;
+  };
 }
 
 export function SituationsDataCoverageTile({
-  title,
-  descriptionEnoughCoverage,
-  descriptionNotEnoughCoverage,
-  dateText,
+  data,
 }: SituationsDataCoverageTileProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDateSpan } = useIntl();
   const text = siteText.vr_brononderzoek.tile_coverage;
 
-  const data = mockDataCoverage();
+  const [date_from, date_to] = formatDateSpan(
+    { seconds: data.date_start_unix },
+    { seconds: data.date_end_unix }
+  );
 
   return (
     <Tile>
-      <Heading level={3} mb={1}>
-        {title}
-      </Heading>
-      <CoverageIndicator hasSufficientData={data.has_sufficient_data}>
-        <IndicatorCircle hasSufficientData={data.has_sufficient_data}>
-          {data.has_sufficient_data ? <CheckIcon /> : <CloseIcon />}
-        </IndicatorCircle>
-        {data.has_sufficient_data
-          ? text.title_enough_coverage
-          : text.title_not_enough_coverage}
-      </CoverageIndicator>
-      <Text>
-        {replaceComponentsInText(
-          data.has_sufficient_data
-            ? descriptionEnoughCoverage
-            : descriptionNotEnoughCoverage,
-          {
-            date_text: (
-              <InlineText fontWeight="bold">
-                {replaceComponentsInText(dateText, {
-                  date_start_unix: (
-                    <InlineText>
-                      {formatDateFromSeconds(data.date_start_unix)}
-                    </InlineText>
-                  ),
-                  date_end_unix: (
-                    <InlineText>
-                      {formatDateFromSeconds(data.date_end_unix)}
-                    </InlineText>
-                  ),
-                })}
-              </InlineText>
-            ),
-          }
-        )}
-      </Text>
+      <Box spacing={2}>
+        <Heading level={3}>{text.title}</Heading>
+        <CoverageIndicator hasSufficientData={data.has_sufficient_data}>
+          <IndicatorCircle>
+            {data.has_sufficient_data ? <CheckIcon /> : <CrossIcon />}
+          </IndicatorCircle>
+          {data.has_sufficient_data
+            ? text.title_enough_coverage
+            : text.title_not_enough_coverage}
+        </CoverageIndicator>
+        <Box maxWidth="maxWidthText">
+          <Text>
+            {replaceComponentsInText(
+              data.has_sufficient_data
+                ? text.description_enough_coverage
+                : text.description_not_enough_coverage,
+              {
+                date_text: (
+                  <InlineText fontWeight="bold">
+                    {replaceComponentsInText(text.date_text, {
+                      date_from: <InlineText>{date_from}</InlineText>,
+                      date_to: <InlineText>{date_to}</InlineText>,
+                    })}
+                  </InlineText>
+                ),
+              }
+            )}
+          </Text>
+        </Box>
+      </Box>
     </Tile>
   );
 }
@@ -72,7 +66,6 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
   css({
     display: 'flex',
     alignItems: 'center',
-    paddingBottom: 3,
     fontSize: 3,
     fontWeight: 600,
     lineHeight: 1,
@@ -81,22 +74,17 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
   })
 );
 
-const IndicatorCircle = styled.div<{ hasSufficientData: boolean }>((x) =>
+const IndicatorCircle = styled.div(
   css({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 22,
-    height: 22,
+    width: 23,
+    height: 23,
     mr: 2,
-    mb: 1,
+    mb: '3px',
     borderRadius: '50%',
-    backgroundColor: x.hasSufficientData ? 'data.primary' : 'gray',
-    color: 'white',
+    backgroundColor: 'currentColor',
 
     svg: {
-      p: x.hasSufficientData ? undefined : '2px',
-      mt: x.hasSufficientData ? '1px' : undefined,
+      color: 'white',
     },
   })
 );

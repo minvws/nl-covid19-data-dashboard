@@ -12,14 +12,6 @@ export function mockVrCollectionSituations() {
   return vrData.map((x) => getVrCollectionSituationsValue(x.code));
 }
 
-export function mockDataCoverage() {
-  return {
-    date_start_unix: 1612716358,
-    date_end_unix: 1622796358,
-    has_sufficient_data: Math.random() > 0.5 ? true : false
-  }
-}
-
 export function mockVrSituations(vrcode: string) {
   const values = Array(20)
     .fill(null)
