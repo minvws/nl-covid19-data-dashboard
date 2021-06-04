@@ -12,6 +12,27 @@ export function mockVrCollectionSituations() {
   return vrData.map((x) => getVrCollectionSituationsValue(x.code));
 }
 
+export function mockTableData() {
+  const dataOrNull = Math.random() > 0.5 ? true: false
+  const getRandomPercentageOrNull = () => Math.floor(Math.random() * 50) + 1
+
+  const value = {
+    has_sufficient_data: dataOrNull,
+    date_start_unix: 1622727076,
+    date_end_unix: 1622727076,
+    home_and_visits: dataOrNull ? getRandomPercentageOrNull() : null,
+    work: dataOrNull ? getRandomPercentageOrNull() : null,
+    school_and_day_care: dataOrNull ? getRandomPercentageOrNull() : null,
+    health_care: dataOrNull ? getRandomPercentageOrNull() : null,
+    gathering: dataOrNull ? getRandomPercentageOrNull() : null,
+    travel: dataOrNull ? getRandomPercentageOrNull() : null,
+    hospitality: dataOrNull ? getRandomPercentageOrNull() : null,
+    other: dataOrNull ? getRandomPercentageOrNull() : null,
+  } 
+
+  return value;
+}
+
 export function mockVrSituations(vrcode: string) {
   const values = Array(20)
     .fill(null)

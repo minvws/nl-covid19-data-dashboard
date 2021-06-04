@@ -4,12 +4,14 @@ import { Box } from '~/components/base';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { mockTableData } from '~/domain/situations/logic/mock-data';
 import { situations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { SituationIcon } from './components/situation-icon';
+import { useMemo } from 'react';
 
 interface SituationsTableTileProps {
   title: string;
@@ -27,7 +29,7 @@ export function SituationsTableTile({
   const { siteText, formatDateFromSeconds } = useIntl();
   const text = siteText.vr_brononderzoek;
 
-  const hasData = true;
+  const data = useMemo(() => mockTableData(), []);
 
   return (
     <Tile>
@@ -37,8 +39,8 @@ export function SituationsTableTile({
           {description}{' '}
           <InlineText fontWeight="bold">
             {replaceComponentsInText(descriptionDate, {
-              date_start_unix: formatDateFromSeconds(1622727076),
-              date_end_unix: formatDateFromSeconds(1622727076),
+              date_start_unix: formatDateFromSeconds(data.date_start_unix),
+              date_end_unix: formatDateFromSeconds(data.date_end_unix),
             })}
           </InlineText>
         </Text>
@@ -61,7 +63,7 @@ export function SituationsTableTile({
           <tbody
             css={css({
               borderTop: '1px solid',
-              borderTopColor: 'lightGrey',
+              borderTopColor: 'lightGray',
             })}
           >
             {situations.map((situation, index) => (
@@ -71,20 +73,29 @@ export function SituationsTableTile({
                     <SituationIcon id={situation} />
                     <InlineText>
                       {siteText.vr_brononderzoek.table[situation]}
+                      {/* Needs to be wrapped in a tooltip element */}
+                      <>
+                        {
+                          siteText.vr_brononderzoek.table[
+                            `${situation}_description` as typeof situation
+                          ]
+                        }
+                      </>
                     </InlineText>
-                    <InformationIcon />
                   </Box>
                 </Cell>
 
                 <Cell>
-                  {hasData ? (
+                  {data.has_sufficient_data ? (
                     <PercentageBar
                       amount={Math.floor(Math.random() * 50) + 1}
                       color={colors.data.primary}
                     />
                   ) : (
                     <Box display="flex" alignSelf="center">
-                      <InlineText>{text.table.no_data}</InlineText>
+                      <InlineText color="data.axisLabels">
+                        {text.table.no_data}
+                      </InlineText>
                     </Box>
                   )}
                 </Cell>
@@ -117,42 +128,24 @@ const Cell = styled.td((x) =>
   css({
     color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGrey',
+    borderBottomColor: 'lightGray',
     p: 0,
     py: 2,
   })
 );
-
-const InformationIcon = styled.div(
-  css({
-    position: 'relative',
-    ml: 1,
-    height: 17,
-    width: 17,
-    backgroundColor: 'data.primary',
-    borderRadius: '50%',
-
-    '&:before': {
-      position: 'absolute',
-      fontSize: '1rem',
-      content: '"i"',
-      color: '#fff',
-      textAlign: 'center',
-      width: '100%',
-      mt: '-3px',
-    },
-  })
-);
-
 interface PercentageBarProps {
   amount: number;
   color: string;
 }
 
 function PercentageBar({ amount, color }: PercentageBarProps) {
+  const { formatPercentage } = useIntl();
+
   return (
     <Box display="flex" alignItems="center">
-      <InlineText css={css({ minWidth: 40 })}>{`${amount}%`}</InlineText>
+      <InlineText css={css({ minWidth: 40 })}>{`${formatPercentage(
+        amount
+      )}%`}</InlineText>
       <Box width="100%" pr={4}>
         <Box width={`${amount * 2}%`} height={12} backgroundColor={color} />
       </Box>

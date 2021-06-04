@@ -62,3 +62,11 @@ timestamp,action,key
 2021-06-03T14:15:55.692Z,add,vr_brononderzoek.table.gathering
 2021-06-03T14:16:10.490Z,add,vr_brononderzoek.table.travel
 2021-06-03T14:16:42.806Z,add,vr_brononderzoek.table.hospitality
+2021-06-04T10:20:40.013Z,add,vr_brononderzoek.table.home_and_visits_description
+2021-06-04T10:20:58.853Z,add,vr_brononderzoek.table.work_description
+2021-06-04T10:21:21.052Z,add,vr_brononderzoek.table.school_and_day_care_description
+2021-06-04T10:21:49.235Z,add,vr_brononderzoek.table.health_care_description
+2021-06-04T10:22:20.034Z,add,vr_brononderzoek.table.gathering_description
+2021-06-04T10:22:39.309Z,add,vr_brononderzoek.table.travel_description
+2021-06-04T10:23:12.201Z,add,vr_brononderzoek.table.hospitality_description
+2021-06-04T10:23:28.361Z,add,vr_brononderzoek.table.other_description
