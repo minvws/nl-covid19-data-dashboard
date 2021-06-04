@@ -29,6 +29,7 @@ import {
 import { asResponsiveArray } from '~/style/utils';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 interface OverRisiconiveausData {
   title: string;
@@ -89,6 +90,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
 
   const lastValue = scoreboardRows.find((x) => x.vrData.length)?.vrData[0].data;
 
+  const unknownLevelColor = useEscalationColor(null);
+
   return (
     <Layout
       {...siteText.over_risiconiveaus_metadata}
@@ -132,6 +135,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                 minHeight={200}
                 data={choropleth.vr}
                 metricName="escalation_levels"
+                noDataFillColor={unknownLevelColor}
                 metricProperty="level"
                 tooltipContent={(
                   context: SafetyRegionProperties & EscalationLevels

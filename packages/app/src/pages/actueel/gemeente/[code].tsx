@@ -67,6 +67,7 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-fo
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -124,6 +125,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const filteredRegion = props.choropleth.vr.escalation_levels.find(
     (item) => item.vrcode === safetyRegionForMunicipality.code
   );
+
+  const unknownLevelColor = useEscalationColor(null);
 
   const [selectedMap, setSelectedMap] =
     useState<RegionControlOption>('municipal');
@@ -309,6 +312,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="level"
+                    noDataFillColor={unknownLevelColor}
                     getLink={reverseRouter.vr.risiconiveau}
                     tooltipContent={(
                       context: SafetyRegionProperties & EscalationLevels
