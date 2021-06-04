@@ -7,7 +7,7 @@ import { InlineTooltip } from '~/components/inline-tooltip';
 import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Heading, InlineText } from '~/components/typography';
 import { useSituations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -37,14 +37,12 @@ export function SituationsTableTile({
     <Tile>
       <Heading level={3}>{text.title}</Heading>
       <Box maxWidth="maxWidthText">
-        <Text>
-          <Markdown
-            content={replaceVariablesInText(text.description, {
-              date_from: date_from,
-              date_to: date_to,
-            })}
-          />
-        </Text>
+        <Markdown
+          content={replaceVariablesInText(text.description, {
+            date_from: date_from,
+            date_to: date_to,
+          })}
+        />
       </Box>
 
       <Box overflow="auto" mb={3}>
