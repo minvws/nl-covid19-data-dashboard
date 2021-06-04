@@ -39,8 +39,8 @@ export function SituationsTableTile({
       <Box maxWidth="maxWidthText">
         <Markdown
           content={replaceVariablesInText(text.description, {
-            date_from: date_from,
-            date_to: date_to,
+            date_from,
+            date_to,
           })}
         />
       </Box>
