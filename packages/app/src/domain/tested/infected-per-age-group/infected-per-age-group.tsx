@@ -86,8 +86,6 @@ export function InfectedPerAgeGroup({
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
-  console.dir(chartConfig);
-
   return (
     <>
       <InteractiveLegend
