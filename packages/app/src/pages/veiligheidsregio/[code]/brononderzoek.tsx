@@ -10,6 +10,7 @@ import { mockVrSituations } from '~/domain/situations/logic/mock-data';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
 import {
   createGetStaticProps,
   StaticProps,
@@ -57,6 +58,7 @@ export default function BrononderzoekPage(
   const intl = useIntl();
 
   const text = intl.siteText.brononderzoek;
+  const vrText = intl.siteText.vr_brononderzoek;
 
   const metadata = {
     ...intl.siteText.nationaal_metadata,
@@ -102,6 +104,16 @@ export default function BrononderzoekPage(
           />
 
           <ArticleStrip articles={content.articles} />
+          <SituationsDataCoverageTile
+            title={vrText.tile_coverage.title}
+            descriptionEnoughCoverage={
+              vrText.tile_coverage.description_enough_coverage
+            }
+            descriptionNotEnoughCoverage={
+              vrText.tile_coverage.description_not_enough_coverage
+            }
+            dateText={vrText.tile_coverage.date_text}
+          />
         </TileList>
       </SafetyRegionLayout>
     </Layout>
