@@ -1,11 +1,11 @@
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils/assert';
-import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
-import { GetRegionDataFunctionType } from './use-safety-region-data';
-import { GetMunicipalityDataFunctionType } from './use-municipality-data';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { GetMunicipalityDataFunctionType } from './use-municipality-data';
+import { GetRegionDataFunctionType } from './use-safety-region-data';
 
 /**
  * This hook return a color scale for the given domain and gradient.

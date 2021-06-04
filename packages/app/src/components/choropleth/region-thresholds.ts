@@ -1,5 +1,5 @@
-import { colors } from '~/style/theme';
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import { colors } from '~/style/theme';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {
@@ -291,6 +291,17 @@ const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const hasSufficientDataThresholds = [
+  {
+    color: colors.silver,
+    threshold: 0,
+  },
+  {
+    color: colors.data.primary,
+    threshold: 1,
+  },
+];
+
 export const regionThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
@@ -325,7 +336,7 @@ export const regionThresholds = {
    * @TODO proper thresholds should be implemented along with the situations features.
    */
   situations: {
-    has_sufficient_responses: positiveTestedThresholds,
+    has_sufficient_data: hasSufficientDataThresholds,
     home_and_visits: positiveTestedThresholds,
     work: positiveTestedThresholds,
     school_and_day_care: positiveTestedThresholds,
