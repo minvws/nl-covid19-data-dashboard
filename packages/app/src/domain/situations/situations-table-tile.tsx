@@ -1,48 +1,47 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { mockTableData } from '~/domain/situations/logic/mock-data';
-import { situations } from '~/domain/situations/logic/situations';
+import { useSituations } from '~/domain/situations/logic/situations';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { SituationIcon } from './components/situation-icon';
-import { useMemo } from 'react';
 
 interface SituationsTableTileProps {
-  title: string;
-  description: string;
-  descriptionDate: string;
+  data: any;
   metadata: MetadataProps;
 }
 
 export function SituationsTableTile({
-  title,
-  description,
-  descriptionDate,
   metadata,
+  data,
 }: SituationsTableTileProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
-  const text = siteText.vr_brononderzoek;
+  const { siteText, formatDateSpan } = useIntl();
+  const text = siteText.vr_brononderzoek.table;
 
-  const data = useMemo(() => mockTableData(), []);
+  const situations = useSituations();
+
+  const [date_from, date_to] = formatDateSpan(
+    { seconds: data.date_start_unix },
+    { seconds: data.date_end_unix }
+  );
 
   return (
     <Tile>
-      <Heading level={3}>{title}</Heading>
+      <Heading level={3}>{text.title}</Heading>
       <Box maxWidth="maxWidthText">
         <Text>
-          {description}{' '}
-          <InlineText fontWeight="bold">
-            {replaceComponentsInText(descriptionDate, {
-              date_start_unix: formatDateFromSeconds(data.date_start_unix),
-              date_end_unix: formatDateFromSeconds(data.date_end_unix),
+          <Markdown
+            content={replaceVariablesInText(text.description, {
+              date_from: date_from,
+              date_to: date_to,
             })}
-          </InlineText>
+          />
         </Text>
       </Box>
 
@@ -50,13 +49,13 @@ export function SituationsTableTile({
         <StyledTable>
           <thead>
             <tr>
-              <HeaderCell> {text.table.situation}</HeaderCell>
+              <HeaderCell> {text.situation}</HeaderCell>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({ _: 150, md: 350 }),
                 })}
               >
-                {text.table.research}
+                {text.research}
               </HeaderCell>
             </tr>
           </thead>
@@ -70,31 +69,24 @@ export function SituationsTableTile({
               <tr key={index}>
                 <Cell>
                   <Box display="flex" alignItems="center">
-                    <SituationIcon id={situation} />
+                    <SituationIcon id={situation.id} />
                     <InlineText>
-                      {siteText.vr_brononderzoek.table[situation]}
-                      {/* Needs to be wrapped in a tooltip element */}
-                      <>
-                        {
-                          siteText.vr_brononderzoek.table[
-                            `${situation}_description` as typeof situation
-                          ]
-                        }
-                      </>
+                      {situation.title}
+                      <>{situation.description}</>
                     </InlineText>
                   </Box>
                 </Cell>
 
                 <Cell>
-                  {data.has_sufficient_data ? (
+                  {data[situation.id] ? (
                     <PercentageBar
-                      amount={Math.floor(Math.random() * 50) + 1}
+                      amount={data[situation.id]}
                       color={colors.data.primary}
                     />
                   ) : (
                     <Box display="flex" alignSelf="center">
                       <InlineText color="data.axisLabels">
-                        {text.table.no_data}
+                        {text.no_data}
                       </InlineText>
                     </Box>
                   )}

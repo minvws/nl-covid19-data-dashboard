@@ -58,7 +58,6 @@ export default function BrononderzoekPage(
   const intl = useIntl();
 
   const text = intl.siteText.brononderzoek;
-  const brononderzoek_text = intl.siteText.vr_brononderzoek;
 
   const metadata = {
     ...intl.siteText.nationaal_metadata,
@@ -68,7 +67,7 @@ export default function BrononderzoekPage(
 
   assert(data.situations, 'no situations data found');
 
-  const singleValue = data.situations.last_value;
+  const lastValue = data.situations.last_value;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -95,10 +94,10 @@ export default function BrononderzoekPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: singleValue.date_start_unix,
-                end: singleValue.date_end_unix,
+                start: lastValue.date_start_unix,
+                end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: singleValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
           />
@@ -106,11 +105,9 @@ export default function BrononderzoekPage(
           <ArticleStrip articles={content.articles} />
 
           <SituationsTableTile
-            title={brononderzoek_text.table.title}
-            description={brononderzoek_text.table.description}
-            descriptionDate={brononderzoek_text.table.description_date}
+            data={lastValue}
             metadata={{
-              date: singleValue.date_end_unix,
+              date: lastValue.date_end_unix,
               source: text.bronnen.rivm,
             }}
           />
