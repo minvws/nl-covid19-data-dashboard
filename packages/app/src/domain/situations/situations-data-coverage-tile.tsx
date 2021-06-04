@@ -95,6 +95,7 @@ const IndicatorCircle = styled.div<{ hasSufficientData: boolean }>((x) =>
     color: 'white',
 
     svg: {
+      p: x.hasSufficientData ? undefined : '2px',
       mt: x.hasSufficientData ? '1px' : undefined,
     },
   })
