@@ -331,6 +331,17 @@ const situationsThreshold: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const hasSufficientDataThresholds = [
+  {
+    color: colors.silver,
+    threshold: 0,
+  },
+  {
+    color: colors.data.primary,
+    threshold: 1,
+  },
+];
+
 export const regionThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
@@ -362,7 +373,7 @@ export const regionThresholds = {
     coverage_percentage: vaccineCoverageThresholds,
   },
   situations: <Record<SituationKey, ChoroplethThresholdsValue[]>>{
-    has_sufficient_responses: situationsThreshold,
+    has_sufficient_data: hasSufficientDataThresholds,
     home_and_visits: situationsThreshold,
     work: situationsThreshold,
     school_and_day_care: situationsThreshold,
