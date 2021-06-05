@@ -76,13 +76,24 @@ export function SituationsOverTimeChart({
   );
 }
 
+const {
+  cyan,
+  turquoise,
+  turquoise_dark,
+  yellow,
+  yellow_dark,
+  orange,
+  orange_dark,
+  magenta,
+} = colors.data.multiseries;
+
 const seriesColors: Record<SituationKey, string> = {
-  home_and_visits: colors.data.multiseries.cyan,
-  work: colors.data.multiseries.turquoise,
-  school_and_day_care: colors.data.multiseries.turquoise_dark,
-  health_care: colors.data.multiseries.yellow,
-  gathering: colors.data.multiseries.yellow_dark,
-  travel: colors.data.multiseries.orange,
-  hospitality: colors.data.multiseries.orange_dark,
-  other: colors.data.multiseries.magenta,
+  home_and_visits: cyan,
+  work: turquoise,
+  school_and_day_care: turquoise_dark,
+  health_care: yellow,
+  gathering: yellow_dark,
+  travel: orange,
+  hospitality: orange_dark,
+  other: magenta,
 };
