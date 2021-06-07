@@ -35,7 +35,7 @@ export function BehaviorChoroplethsTile({
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
 
-  // Find all the keys that only doesn't exist on VR level but does on NL
+  // Find all the keys that doesn't exist on VR level but does on NL
   const keysWithoutData = behaviorIdentifiers.filter(
     (item) => !Object.keys(data[0]).find((a) => a.includes(item))
   );
