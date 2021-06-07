@@ -23,7 +23,8 @@
     "escalation_level",
     "tested_overall_sum",
     "hospital_nice_sum",
-    "g_number"
+    "g_number",
+    "situations"
   ],
   "additionalProperties": false,
   "properties": {

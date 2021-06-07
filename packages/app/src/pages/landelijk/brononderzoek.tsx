@@ -1,4 +1,3 @@
-import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
@@ -6,7 +5,6 @@ import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
-import { mockVrCollectionSituations } from '~/domain/situations/logic/mock-data';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
@@ -30,7 +28,7 @@ export const getStaticProps = withFeatureNotFoundPage(
     selectNlPageMetricData(),
     createGetChoroplethData({
       vr: ({ situations }) => ({
-        situations: situations || mockVrCollectionSituations(),
+        situations,
       }),
     }),
     createGetContent<{
@@ -56,8 +54,6 @@ export default function BrononderzoekPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  assert(choropleth.vr.situations, 'no situations data found');
 
   const singleValue = choropleth.vr.situations[0];
 

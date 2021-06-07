@@ -853,7 +853,7 @@ export interface Regionaal {
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
-  situations?: VrSituations;
+  situations: VrSituations;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1169,7 +1169,7 @@ export interface Regions {
   behavior: RegionsBehavior[];
   disability_care: RegionsDisabilityCare[];
   elderly_at_home: RegionsElderlyAtHome[];
-  situations?: VrCollectionSituations[];
+  situations: VrCollectionSituations[];
 }
 export interface RegionsHospitalNice {
   date_unix: number;

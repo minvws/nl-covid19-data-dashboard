@@ -1,4 +1,3 @@
-import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
@@ -7,7 +6,6 @@ import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
-import { mockVrSituations } from '~/domain/situations/logic/mock-data';
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -29,14 +27,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    (context) => {
-      const data = selectVrPageMetricData('situations')(context);
-      data.selectedVrData.situations =
-        data.selectedVrData.situations ||
-        mockVrSituations(context.params?.code as string);
-
-      return data;
-    },
+    selectVrPageMetricData('situations'),
     createGetContent<{
       articles?: ArticleSummary[];
     }>((_context) => {
@@ -65,8 +56,6 @@ export default function BrononderzoekPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  assert(data.situations, 'no situations data found');
 
   const values = data.situations.values;
   const singleValue = data.situations.last_value;
