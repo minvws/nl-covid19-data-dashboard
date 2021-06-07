@@ -17,20 +17,18 @@ export function ErrorBoundary({ children }: { children: ReactNode }) {
 
 function ErrorFallback({ error }: { error: Error }) {
   const { siteText } = useIntl();
-  const [copied, setCopied] = useState(false);
-  const [threwCopyError, setThrewCopyError] = useState(false);
+  const [clipboardState, setClipboardState] =
+    useState<'init' | 'copied' | 'error'>('init');
   const errorReport = formatErrorMessage(error);
 
   const copyErrorReport = () => {
-    setThrewCopyError(false);
-    setCopied(false);
+    setClipboardState('init');
     copyErrorMessage(errorReport).then(
       () => {
-        setCopied(true);
+        setClipboardState('copied');
       },
       () => {
-        setCopied(false);
-        setThrewCopyError(true);
+        setClipboardState('error');
       }
     );
   };
@@ -42,13 +40,13 @@ function ErrorFallback({ error }: { error: Error }) {
         <Button onClick={() => copyErrorReport()}>
           {siteText.common.kopieer_foutmelding}
         </Button>
-        {copied && (
+        {clipboardState === 'copied' && (
           <InlineText m={0}>
             {siteText.common.foutmelding_is_gekopieerd}
           </InlineText>
         )}
       </Box>
-      {threwCopyError && (
+      {clipboardState === 'error' && (
         <InlineText color="red" fontStyle="italic">
           {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
         </InlineText>
