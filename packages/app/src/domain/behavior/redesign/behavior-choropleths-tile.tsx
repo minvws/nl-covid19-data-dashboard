@@ -36,14 +36,14 @@ export function BehaviorChoroplethsTile({
   const { siteText } = useIntl();
   const firstRegionData = data[0];
 
-  // Find all the keys that doesn't exist on VR level but does on NL
+  // Find all the keys that don't exist on VR level but do on NL
   const keysWithoutData = behaviorIdentifiers.filter(
     (item) => !Object.keys(firstRegionData).find((a) => a.includes(item))
   );
 
   /**
    * Since e.g. the curfew has no data anymore and returns null that also needs to be filtered out
-   * First we check if there are some keys that contains a value of null
+   * First we check if there are some keys that contain a value of null
    * Second we slice everything before the underscore, since only the id name is important and not _support or _compliance
    * Lastly we remove all the duplicates in the array and add it to all the keys without data
    */
