@@ -8,7 +8,7 @@ import { features } from '../../../app/src/config/features';
 import { gmData } from '../../../app/src/data/gm';
 import { vrData } from '../../../app/src/data/vr';
 import { logError } from '../utils';
-require('dotenv').config({ path: '../app/.env.local' })
+require('dotenv').config({ path: '../app/.env.local' });
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
@@ -49,7 +49,7 @@ async function main() {
     'editorials': *[_type == 'editorial'] {"slug":slug.current},
   }`;
 
-const slugsData = (await client.fetch(slugsQuery)) as {
+  const slugsData = (await client.fetch(slugsQuery)) as {
     articles: { slug: string }[];
     editorials: { slug: string }[];
   };

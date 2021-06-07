@@ -225,8 +225,9 @@ export function useScatterTooltip({
   return { datum, point, findClosest: setInputPoint, clear } as const;
 }
 
-const bisectDate = bisector<SewerChartValue, Date>((d) => new Date(d.dateMs))
-  .left;
+const bisectDate = bisector<SewerChartValue, Date>(
+  (d) => new Date(d.dateMs)
+).left;
 
 export function useLineTooltip({
   values,

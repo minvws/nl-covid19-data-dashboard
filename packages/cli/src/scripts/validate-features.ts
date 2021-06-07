@@ -114,13 +114,8 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
    * case we only check the properties and do not enforce existence/absence of
    * the full metric.
    */
-  const {
-    metricScopes,
-    metricName,
-    metricProperties,
-    name,
-    isEnabled,
-  } = feature;
+  const { metricScopes, metricName, metricProperties, name, isEnabled } =
+    feature;
 
   if (metricProperties) {
     assert(
