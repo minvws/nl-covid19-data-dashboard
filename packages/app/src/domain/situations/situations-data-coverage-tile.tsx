@@ -18,7 +18,7 @@ export function SituationsDataCoverageTile({
   data,
 }: SituationsDataCoverageTileProps) {
   const { siteText, formatDateSpan } = useIntl();
-  const text = siteText.vr_brononderzoek.tile_coverage;
+  const text = siteText.brononderzoek.veiligheidsregio_dekking;
 
   const [date_from, date_to] = formatDateSpan(
     { seconds: data.date_start_unix },
@@ -28,24 +28,24 @@ export function SituationsDataCoverageTile({
   return (
     <Tile>
       <Box spacing={2}>
-        <Heading level={3}>{text.title}</Heading>
+        <Heading level={3}>{text.titel}</Heading>
         <CoverageIndicator hasSufficientData={data.has_sufficient_data}>
           <IndicatorCircle>
             {data.has_sufficient_data ? <CheckIcon /> : <CrossIcon />}
           </IndicatorCircle>
           {data.has_sufficient_data
-            ? text.title_enough_coverage
-            : text.title_not_enough_coverage}
+            ? text.titel_genoeg_dekking
+            : text.titel_niet_genoeg_dekking}
         </CoverageIndicator>
         <Box maxWidth="maxWidthText">
           <Markdown
             content={replaceVariablesInText(
               data.has_sufficient_data
-                ? text.description_enough_coverage
-                : text.description_not_enough_coverage,
+                ? text.beschrijving_genoeg_dekking
+                : text.beschrijving_niet_genoeg_dekking,
               {
-                date_to,
                 date_from,
+                date_to,
               }
             )}
           />
