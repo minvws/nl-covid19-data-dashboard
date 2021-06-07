@@ -42,9 +42,9 @@ export function BehaviorChoroplethsTile({
   );
 
   /**
-   * Since e.g. the curfew has no data anymore and returns null that's also needs to be filtered out
-   * First we check if there are some keys and values that contain null
-   * Second we slice everything before the underscore since only the id name is important and not _support or _compliance
+   * Since e.g. the curfew has no data anymore and returns null that also needs to be filtered out
+   * First we check if there are some keys that contains a value of null
+   * Second we slice everything before the underscore, since only the id name is important and not _support or _compliance
    * Lastly we remove all the duplicates in the array and add it to all the keys without data
    */
   const idsThatContainNull = Object.keys(firstRegionData)
