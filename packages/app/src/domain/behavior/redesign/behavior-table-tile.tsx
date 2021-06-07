@@ -230,7 +230,7 @@ const Cell = styled.td((x) =>
   css({
     color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGrey',
+    borderBottomColor: 'lightGray',
     p: 0,
     py: 2,
   })

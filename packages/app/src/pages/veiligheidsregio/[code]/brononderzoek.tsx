@@ -20,6 +20,7 @@ import {
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -58,7 +59,7 @@ export default function BrononderzoekPage(
   };
 
   const values = data.situations.values;
-  const singleValue = data.situations.last_value;
+  const lastValue = data.situations.last_value;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -85,15 +86,23 @@ export default function BrononderzoekPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: singleValue.date_start_unix,
-                end: singleValue.date_end_unix,
+                start: lastValue.date_start_unix,
+                end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: singleValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
           />
 
           <ArticleStrip articles={content.articles} />
+
+          <SituationsTableTile
+            data={lastValue}
+            metadata={{
+              date: [lastValue.date_start_unix, lastValue.date_end_unix],
+              source: text.bronnen.rivm,
+            }}
+          />
 
           {values && (
             <ChartTile
