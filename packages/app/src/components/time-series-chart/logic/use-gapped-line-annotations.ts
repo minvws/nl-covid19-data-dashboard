@@ -61,7 +61,8 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
             newItems.push(currentAnnotation);
           }
 
-          /** If this is either the last item in the list or the next
+          /** 
+           * If this is either the last item in the list or the next
            * item in the list has a valid property, this means the current
            * annotation ends here, so we assign the end date.
            */
