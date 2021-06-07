@@ -9,11 +9,11 @@ import { KeyboardEvent, memo, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
-import { useIntl } from '~/intl';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
@@ -78,7 +78,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     (value) =>
       getIsClipped(value.age_group_percentage, displayMaxPercentage) ||
       getIsClipped(
-        (value[metricProperty] as unknown) as number,
+        value[metricProperty] as unknown as number,
         displayMaxPercentage
       )
   );
@@ -178,7 +178,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           );
 
           const isClippedInfectedPercentage = getIsClipped(
-            (value[metricProperty] as unknown) as number,
+            value[metricProperty] as unknown as number,
             displayMaxPercentage
           );
 
@@ -284,6 +284,8 @@ const StyledHoverBar = styled(Bar)(
 
 function getIsClipped(value: number, maxValue: number | undefined) {
   if (!maxValue) return false;
+
+  throw new Error('asdasd');
 
   return value * 100 > maxValue;
 }
