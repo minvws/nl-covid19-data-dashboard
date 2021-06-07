@@ -18,3 +18,4 @@ timestamp,action,key
 2021-06-03T11:24:55.403Z,add,rioolwater_metingen.split_labels.waarde_400_600
 2021-06-03T11:24:56.506Z,add,rioolwater_metingen.split_labels.waarde_600_800
 2021-06-03T11:24:57.521Z,add,rioolwater_metingen.split_labels.waarde_800_plus
+2021-06-07T08:58:31.907Z,add,common.weekgemiddelde

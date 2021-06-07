@@ -34,6 +34,7 @@ export function NewSewerChart({
       waarde_600_800: string;
       waarde_800_plus: string;
     };
+    averagesDataLabel: string;
   };
 }) {
   const {
@@ -132,7 +133,7 @@ export function NewSewerChart({
                   {
                     type: 'split-area',
                     metricProperty: 'average',
-                    label: 'Weekgemiddelde',
+                    label: text.averagesDataLabel,
                     splitPoints: averageSplitPoints,
                   },
                 ]}
@@ -146,7 +147,7 @@ export function NewSewerChart({
                   {
                     type: 'split-area',
                     metricProperty: 'average',
-                    label: 'Weekgemiddelde',
+                    label: text.averagesDataLabel,
                     splitPoints: averageSplitPoints,
                   },
                 ]}
