@@ -118,7 +118,7 @@ export default function BrononderzoekPage(
 
           <TwoKpiSection>
             <Tile>Empty tile</Tile>
-            {lastValue.has_sufficient_data && (
+            {true && (
               <KpiTile
                 title={text.veiligheidsregio_kpi.titel}
                 metadata={{
@@ -126,10 +126,7 @@ export default function BrononderzoekPage(
                   source: text.bronnen.rivm,
                 }}
               >
-                <KpiValue
-                  data-cy="covid_total"
-                  percentage={lastValue.situations_known_percentage}
-                />
+                <KpiValue percentage={lastValue.situations_known_percentage} />
                 <Markdown
                   content={replaceVariablesInText(
                     text.veiligheidsregio_kpi.beschrijving,
