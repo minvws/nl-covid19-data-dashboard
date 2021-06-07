@@ -22,7 +22,7 @@ function ErrorFallback({ error }: { error: Error }) {
     useState<'init' | 'copied' | 'error'>('init');
   const errorReport = formatErrorMessage(error);
 
-  const copyErrorReport = () => {
+  function copyErrorReport() {
     setClipboardState('init');
     copyErrorMessage(errorReport).then(
       () => {
@@ -32,7 +32,7 @@ function ErrorFallback({ error }: { error: Error }) {
         setClipboardState('error');
       }
     );
-  };
+  }
 
   const mail = siteText.common.foutmelding_email_adres;
 
