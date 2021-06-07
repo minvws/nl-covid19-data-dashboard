@@ -34,6 +34,11 @@ timestamp,action,key
 2021-06-03T09:34:40.512Z,add,brononderzoek.situaties_kaarten_overzicht.legenda.onvoldoende_data
 2021-06-03T09:34:41.530Z,add,brononderzoek.situaties_kaarten_overzicht.select_help_text
 2021-06-03T09:34:42.543Z,add,brononderzoek.situaties_kaarten_overzicht.titel
+2021-06-04T15:30:12.647Z,add,brononderzoek.situaties_over_tijd_grafiek.titel
+2021-06-04T15:30:39.283Z,add,brononderzoek.situaties_over_tijd_grafiek.omschrijving
+2021-06-04T15:31:44.286Z,add,brononderzoek.situaties_over_tijd_grafiek.legenda.onvoldoende_gegevens
+2021-06-04T15:32:19.817Z,add,brononderzoek.situaties_over_tijd_grafiek.tooltip.onvoldoende_gegevens
+2021-06-04T15:33:06.370Z,add,brononderzoek.situaties_over_tijd_grafiek.legenda.help_text
 2021-06-04T12:39:20.103Z,add,brononderzoek.situaties_kaarten_uitkomsten.titel
 2021-06-04T12:39:59.324Z,add,brononderzoek.situaties_kaarten_uitkomsten.beschrijving
 2021-06-04T12:40:50.379Z,add,brononderzoek.situaties_kaarten_uitkomsten.legenda.voldoende_data.titel

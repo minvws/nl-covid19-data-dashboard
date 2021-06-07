@@ -33,8 +33,8 @@ export function InfectedPerAgeGroup({
   const alwayEnabled = ['infected_overall_per_100k'];
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map(
-    (baseAgeGroup) => {
+  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] =
+    BASE_SERIES_CONFIG.map((baseAgeGroup) => {
       return {
         ...baseAgeGroup,
         type: 'line',
@@ -44,8 +44,7 @@ export function InfectedPerAgeGroup({
             ? text.legend[baseAgeGroup.metricProperty]
             : baseAgeGroup.metricProperty,
       };
-    }
-  );
+    });
 
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
