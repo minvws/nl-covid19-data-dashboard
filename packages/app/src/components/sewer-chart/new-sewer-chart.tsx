@@ -104,7 +104,7 @@ export function NewSewerChart({
                 onChange={onChange}
                 onClear={onClear}
                 value={selectedInstallation}
-                placeholder={text.selectPlaceholder || '__no_placeholder'}
+                placeholder={text.selectPlaceholder}
               />
             </Box>
           )}
