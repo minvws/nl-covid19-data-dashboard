@@ -48,9 +48,9 @@ export function BehaviorChoroplethsTile({
    * Lastly we remove all the duplicates in the array and add it to all the keys without data
    */
   const idsThatContainNull = Object.keys(firstRegionData)
-    .filter((key) => firstRegionData[key as keyof RegionsBehavior] === null) // check if a value has null
-    .map((item) => item.slice(0, item.indexOf('_'))) // Slice everything after the underscore to find the behaviorIdentifier
-    .filter((item, pos) => item.indexOf(item) == pos); // Remove duplicate names
+    .filter((key) => firstRegionData[key as keyof RegionsBehavior] === null)
+    .map((item) => item.slice(0, item.indexOf('_')))
+    .filter((item, pos) => item.indexOf(item) == pos);
 
   keysWithoutData.push(...(idsThatContainNull as BehaviorIdentifier[]));
 

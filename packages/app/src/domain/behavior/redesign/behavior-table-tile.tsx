@@ -156,9 +156,7 @@ function DescriptionWithIcon({
   const splittedWords = description.split(' ');
 
   const buttonClickHandler = () => {
-    scrollIntoView(scrollRef.current as Element, {
-      behavior: 'smooth',
-    });
+    scrollIntoView(scrollRef.current as Element);
     setCurrentId(id);
   };
 
