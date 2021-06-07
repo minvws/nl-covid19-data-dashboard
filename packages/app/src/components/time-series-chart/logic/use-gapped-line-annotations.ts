@@ -93,9 +93,6 @@ function formatLabel(
   return `${start} - ${end}: ${annotation.label}`;
 }
 
-function createIsValidCheck(value: unknown) {
-  if (isBoolean(value)) {
-    return (val: unknown) => val === true;
-  }
-  return (val: unknown) => isPresent(val);
+function hasValue(value: unknown) {
+  return isBoolean(value) ? val === true : isPresent(val)
 }
