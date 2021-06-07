@@ -285,7 +285,5 @@ const StyledHoverBar = styled(Bar)(
 function getIsClipped(value: number, maxValue: number | undefined) {
   if (!maxValue) return false;
 
-  throw new Error('asdasd');
-
   return value * 100 > maxValue;
 }
