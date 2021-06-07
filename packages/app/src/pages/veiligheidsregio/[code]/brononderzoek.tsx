@@ -1,12 +1,12 @@
-import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
-import { mockVrSituations } from '~/domain/situations/logic/mock-data';
+import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -28,14 +28,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    (context) => {
-      const data = selectVrPageMetricData('situations')(context);
-      data.selectedVrData.situations =
-        data.selectedVrData.situations ||
-        mockVrSituations(context.params?.code as string);
-
-      return data;
-    },
+    selectVrPageMetricData('situations'),
     createGetContent<{
       articles?: ArticleSummary[];
     }>((_context) => {
@@ -65,8 +58,7 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
-  assert(data.situations, 'no situations data found');
-
+  const values = data.situations.values;
   const lastValue = data.situations.last_value;
 
   return (
@@ -111,6 +103,22 @@ export default function BrononderzoekPage(
               source: text.bronnen.rivm,
             }}
           />
+
+          {values && (
+            <ChartTile
+              title={text.situaties_over_tijd_grafiek.titel}
+              description={text.situaties_over_tijd_grafiek.omschrijving}
+              timeframeOptions={['all', '5weeks']}
+              metadata={{ source: text.bronnen.rivm }}
+            >
+              {(timeframe) => (
+                <SituationsOverTimeChart
+                  timeframe={timeframe}
+                  values={values}
+                />
+              )}
+            </ChartTile>
+          )}
         </TileList>
       </SafetyRegionLayout>
     </Layout>

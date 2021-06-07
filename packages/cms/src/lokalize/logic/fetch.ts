@@ -1,19 +1,19 @@
-import fs from 'fs';
-import path from 'path';
 import flatten from 'flat';
+import fs from 'fs';
+import mapKeys from 'lodash/mapKeys';
+import path from 'path';
 import { getClient } from '../../client';
 import { LokalizeText } from '../types';
 import { localeDirectory } from './export';
-import mapKeys from 'lodash/mapKeys';
 
 export async function fetchExistingKeys() {
   const client = getClient();
 
-  const allTexts = (await client
-    .fetch(`*[_type == 'lokalizeText']`)
+  const allTexts = await client
+    .fetch<LokalizeText[]>(`*[_type == 'lokalizeText']`)
     .catch((err) => {
       throw new Error(`Failed to fetch texts: ${err.message}`);
-    })) as LokalizeText[];
+    });
 
   return allTexts.map((x) => x.key);
 }
@@ -26,7 +26,7 @@ export async function fetchLocalTextsFlatten() {
   );
 
   const flattenTexts = mapKeys(
-    flatten(texts) as Record<string, string>,
+    flatten<unknown, Record<string, string>>(texts),
     (_value, key) => (key.includes('.') ? key : `__root.${key}`)
   );
 

@@ -116,7 +116,7 @@ function ChoroplethTooltip({
 }: any) {
   const intl = useIntl();
   return (
-    <Box px={3} py={2} display="inline-block">
+    <Box px={3} py={2} display="inline-block" aria-live="polite">
       <TooltipSubject thresholdValues={thresholds} filterBelow={value}>
         {regionName + ': '}
         <InlineText
