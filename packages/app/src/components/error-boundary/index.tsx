@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { InlineText } from '../typography';
@@ -33,9 +34,19 @@ function ErrorFallback({ error }: { error: Error }) {
     );
   };
 
+  const mail = siteText.common.foutmelding_email_adres;
+
+  const subject = encodeURIComponent('Foutmelding op corona dashboard');
+  const body = 'test'; //;encodeURIComponent(errorReport);
+  const markdownEmail = `[${mail}](mailto:${mail}?subject=${subject}&body=${body})`;
+
   return (
     <ErrorBox>
-      <Markdown content={siteText.common.algemene_foutmelding} />
+      <Markdown
+        content={replaceVariablesInText(siteText.common.algemene_foutmelding, {
+          email_address: markdownEmail,
+        })}
+      />
       <Box display="flex" alignItems="center">
         <Button onClick={() => copyErrorReport()}>
           {siteText.common.kopieer_foutmelding}
