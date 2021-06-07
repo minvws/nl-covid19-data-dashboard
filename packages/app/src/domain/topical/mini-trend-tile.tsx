@@ -32,43 +32,42 @@ export function MiniTrendTile<T extends TimestampedValue>(
   const { sm } = useBreakpoints(true);
 
   return (
-    <ErrorBoundary>
-      <Box position="relative" pb={{ _: '1.5rem', md: 0 }}>
-        <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
-          {icon}
-        </Box>
-        <Heading
-          level={3}
-          as="h2"
-          py={2}
-          pl="3.5rem"
-          mb={2}
-          lineHeight={{ md: 0, lg: 1 }}
-          fontSize="1.25rem"
-        >
-          <LinkWithIcon
-            href={href}
-            icon={<ArrowIconRight />}
-            iconPlacement="right"
-            fontWeight="bold"
-            headingLink
-          >
-            {title}
-          </LinkWithIcon>
-        </Heading>
-        <Text
-          fontSize="2.25rem"
+    <Box position="relative" pb={{ _: '1.5rem', md: 0 }}>
+      <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
+        {icon}
+      </Box>
+      <Heading
+        level={3}
+        as="h2"
+        py={2}
+        pl="3.5rem"
+        mb={2}
+        lineHeight={{ md: 0, lg: 1 }}
+        fontSize="1.25rem"
+      >
+        <LinkWithIcon
+          href={href}
+          icon={<ArrowIconRight />}
+          iconPlacement="right"
           fontWeight="bold"
-          my={0}
-          lineHeight={0}
-          mb={2}
-          data-cy={metricProperty}
+          headingLink
         >
-          {formatNumber(value as unknown as number)}
-        </Text>
+          {title}
+        </LinkWithIcon>
+      </Heading>
+      <Text
+        fontSize="2.25rem"
+        fontWeight="bold"
+        my={0}
+        lineHeight={0}
+        mb={2}
+        data-cy={metricProperty}
+      >
+        {formatNumber(value as unknown as number)}
+      </Text>
 
-        <Box>{text}</Box>
-
+      <Box>{text}</Box>
+      <ErrorBoundary>
         <TimeSeriesChart
           initialWidth={400}
           minHeight={sm ? 180 : 140}
@@ -85,7 +84,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
             },
           ]}
         />
-      </Box>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </Box>
   );
 }
