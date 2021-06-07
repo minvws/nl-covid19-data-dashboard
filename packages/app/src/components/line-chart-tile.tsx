@@ -30,7 +30,6 @@ export function LineChartTile<T extends TimestampedValue>({
     description || ariaDescription,
     `This graph doesn't include a valid description nor an ariaDescription, please add one of them.`
   );
-  const ariaLabelledBy = slugify(title);
 
   return (
     <ChartTile
@@ -42,11 +41,7 @@ export function LineChartTile<T extends TimestampedValue>({
     >
       {(timeframe) => (
         <>
-          <LineChart
-            {...chartProps}
-            timeframe={timeframe}
-            ariaLabelledBy={ariaLabelledBy}
-          />
+          <LineChart {...chartProps} timeframe={timeframe} />
           {footer}
         </>
       )}

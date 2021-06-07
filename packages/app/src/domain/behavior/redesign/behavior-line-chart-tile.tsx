@@ -81,7 +81,6 @@ export function BehaviorLineChartTile({
 
       <TimeSeriesChart
         values={values}
-        ariaLabelledBy=""
         seriesConfig={[
           {
             type: 'line',

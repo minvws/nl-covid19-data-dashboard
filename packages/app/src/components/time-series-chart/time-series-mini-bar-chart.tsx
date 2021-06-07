@@ -36,7 +36,6 @@ import { useTimespan } from './logic/use-timespan';
 export type TimeSeriesMiniBarChart<T extends TimestampedValue> = {
   values: T[];
   seriesConfig: BarSeriesDefinition<T>;
-  ariaLabelledBy?: string;
   initialWidth?: number;
   height?: number;
   timeframe?: TimeframeOption;
@@ -58,7 +57,6 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
   height = 250,
   timeframe = 'all',
   dataOptions,
-  ariaLabelledBy,
 }: TimeSeriesMiniBarChart<T>) {
   const seriesConfig = useMemo(() => [_seriesConfig], [_seriesConfig]);
   const {
@@ -166,7 +164,6 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
           width={width}
           height={height}
           padding={padding}
-          ariaLabelledBy={ariaLabelledBy || ''}
           onHover={chartEventHandlers.handleHover}
           onFocus={chartEventHandlers.handleFocus}
           onBlur={chartEventHandlers.handleBlur}

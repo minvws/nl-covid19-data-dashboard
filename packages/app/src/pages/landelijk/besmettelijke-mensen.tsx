@@ -90,7 +90,6 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
                 timeframe={timeframe}
                 tooltipTitle={text.linechart_titel}
                 values={data.infectious_people.values}
-                ariaLabelledBy=""
                 seriesConfig={[
                   {
                     type: 'line',

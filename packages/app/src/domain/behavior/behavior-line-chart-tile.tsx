@@ -95,7 +95,6 @@ export function BehaviorLineChartTile({
             : siteText.gedrag_common.support
         }
         values={values}
-        ariaLabelledBy=""
         seriesConfig={[...behaviorIdentifierWithData]
           .sort((x) => (x.valueKey === selectedValueKey ? 1 : -1))
           .map((x) => ({

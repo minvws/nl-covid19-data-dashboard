@@ -80,7 +80,6 @@ export type TimeSeriesChartProps<
    * @TODO making it optional for now until we figure out how we want to enforce
    * aria labels and descriptions
    */
-  ariaLabelledBy?: string;
   /**
    * The initial width of the chart is used for server-side rendering. it will
    * use the available width when the chart mounts.
@@ -141,7 +140,6 @@ export function TimeSeriesChart<
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
   paddingLeft,
-  ariaLabelledBy,
   tooltipTitle,
   disableLegend,
   onSeriesClick,
@@ -323,7 +321,6 @@ export function TimeSeriesChart<
             width={width}
             height={height}
             padding={padding}
-            ariaLabelledBy={ariaLabelledBy || ''}
             onClick={handleClick}
             onHover={chartEventHandlers.handleHover}
             onFocus={chartEventHandlers.handleFocus}

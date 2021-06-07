@@ -67,7 +67,6 @@ type ChartAxesProps = {
   formatYAxis: TickFormatter<number>;
   children: (props: ChartScales) => ReactNode;
   componentCallback?: ComponentCallbackFunction;
-  ariaLabelledBy?: string;
   dateSpanWidth: number;
   yTickValues?: number[];
 };
@@ -87,7 +86,6 @@ export const ChartAxes = memo(function ChartAxes({
   formatYAxis,
   children,
   componentCallback = () => undefined,
-  ariaLabelledBy,
   dateSpanWidth,
   yTickValues,
 }: ChartAxesProps) {
@@ -138,7 +136,6 @@ export const ChartAxes = memo(function ChartAxes({
       width={width}
       viewBox={`0 0 ${width} ${height}`}
       role="img"
-      aria-labelledby={ariaLabelledBy}
       css={css({ overflow: 'visible', width: '100%' })}
     >
       <Group left={padding.left} top={padding.top}>

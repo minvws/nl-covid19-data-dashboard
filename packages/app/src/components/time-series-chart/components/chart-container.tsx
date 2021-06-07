@@ -20,7 +20,6 @@ interface ChartContainerProps {
   height: number;
   padding: Padding;
   valueAnnotation?: string;
-  ariaLabelledBy: string;
   onHover?: (event: Event) => void;
   onClick?: (event: Event) => void;
   onFocus?: (event: React.FocusEvent) => void;
@@ -33,7 +32,6 @@ export function ChartContainer({
   width,
   height,
   padding,
-  ariaLabelledBy,
   children,
   onHover,
   onClick,
@@ -59,7 +57,6 @@ export function ChartContainer({
        */
       viewBox={`-0.5 -0.5 ${width} ${height}`}
       role="img"
-      aria-labelledby={ariaLabelledBy}
       css={css({
         touchAction: 'pan-y',
         userSelect: 'none',

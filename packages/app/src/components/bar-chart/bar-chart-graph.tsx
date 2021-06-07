@@ -64,7 +64,6 @@ export function BarChartGraph({
       width={width}
       viewBox={`0 0 ${width} ${height}`}
       role="img"
-      aria-label={accessibilityDescription}
       tabIndex={0}
       onKeyUp={(event: KeyboardEvent<SVGElement>) => onKeyInput(event)}
       css={css({ width: '100%' })}

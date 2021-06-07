@@ -155,7 +155,6 @@ const ChoroplethMap: <T1, T3>(
   const height = Math.min(responsive.height, width * ratio);
 
   const clipPathId = useUniqueId();
-  const dataDescriptionId = useUniqueId();
 
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
@@ -210,9 +209,6 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
-      <span id={dataDescriptionId} style={{ display: 'none' }}>
-        {description}
-      </span>
       <ResponsiveContainer height={height}>
         <svg
           width={width}
@@ -227,7 +223,6 @@ const ChoroplethMap: <T1, T3>(
             isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
           }
           data-cy="choropleth-map"
-          aria-labelledby={dataDescriptionId}
         >
           <clipPath id={clipPathId}>
             <rect x={0} y={0} height={height} width={width} />

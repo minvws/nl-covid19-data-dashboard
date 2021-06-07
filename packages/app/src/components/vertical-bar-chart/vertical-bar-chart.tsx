@@ -47,7 +47,6 @@ export type VerticalBarChartProps<
   values: T[];
   seriesConfig: C;
   initialWidth?: number;
-  ariaLabelledBy: string;
   minHeight?: number;
   timeframe?: TimeframeOption;
   formatTooltip: TooltipFormatter<T>;
@@ -72,7 +71,6 @@ export function VerticalBarChart<
   numGridLines = 3,
   tickValues,
   paddingLeft,
-  ariaLabelledBy,
   onSeriesClick,
   title,
 }: VerticalBarChartProps<T, C>) {
@@ -101,10 +99,8 @@ export function VerticalBarChart<
 
   const seriesList = useSeriesList(values, seriesConfig);
 
-  const {
-    max: calculatedMax,
-    min: calculatedMin,
-  } = useCalculatedSeriesExtremes(values, seriesConfig);
+  const { max: calculatedMax, min: calculatedMin } =
+    useCalculatedSeriesExtremes(values, seriesConfig);
 
   const { xScale, yScale, getX, getY } = useScales({
     values,
@@ -166,7 +162,6 @@ export function VerticalBarChart<
         width={width}
         height={minHeight}
         padding={padding}
-        ariaLabelledBy={ariaLabelledBy}
         onClick={handleClick}
       >
         <Axes

@@ -140,7 +140,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 <TimeSeriesChart
                   values={dataIntake.values}
                   timeframe={timeframe}
-                  ariaLabelledBy={graphDescriptions.intensive_care_opnames}
                   dataOptions={{
                     benchmark: {
                       value: 10,
@@ -178,7 +177,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 <TimeSeriesChart
                   values={dataIntake.values}
                   timeframe={timeframe}
-                  ariaLabelledBy={graphDescriptions.intensive_care_opnames}
                   dataOptions={{
                     benchmark: {
                       value: 10,

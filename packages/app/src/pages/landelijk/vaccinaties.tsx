@@ -181,7 +181,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
             <TimeSeriesChart
               tooltipTitle={text.grafiek_draagvlak.titel}
-              ariaLabelledBy="chart_vaccine_vaccinated_or_support"
               values={data.vaccine_vaccinated_or_support.values}
               numGridLines={20}
               tickValues={[0, 25, 50, 75, 100]}

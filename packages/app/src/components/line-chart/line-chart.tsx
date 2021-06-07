@@ -60,7 +60,6 @@ export type LineChartProps<T extends TimestampedValue> = {
   showLegend?: boolean;
   legendItems?: LegendItem[];
   componentCallback?: ComponentCallbackFunction;
-  ariaLabelledBy?: string;
   seriesMax?: number;
 };
 
@@ -93,7 +92,6 @@ export function LineChart<T extends TimestampedValue>({
       }))
     : undefined,
   componentCallback,
-  ariaLabelledBy,
   seriesMax: overrideSeriesMax,
 }: LineChartProps<T>) {
   const {
@@ -187,9 +185,10 @@ export function LineChart<T extends TimestampedValue>({
     [xMax, timespanMarkerData]
   );
 
-  const [markerProps, setMarkerProps] = useState<{
-    data: HoverPoint<T>[];
-  }>();
+  const [markerProps, setMarkerProps] =
+    useState<{
+      data: HoverPoint<T>[];
+    }>();
 
   const bisect = useCallback(
     (
@@ -346,7 +345,6 @@ export function LineChart<T extends TimestampedValue>({
           onHover={handleHover}
           benchmark={benchmark}
           componentCallback={componentCallback}
-          ariaLabelledBy={ariaLabelledBy}
           dateSpanWidth={dateSpanScale.bandwidth()}
         >
           {renderTrendLines}

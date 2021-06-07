@@ -135,10 +135,6 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 timeframe={timeframe}
                 values={data.corona_melder_app.values}
-                ariaLabelledBy={
-                  corona_melder_app.waarschuwingen_over_tijd_grafiek
-                    .ariaDescription
-                }
                 seriesConfig={[
                   {
                     type: 'area',

@@ -33,7 +33,6 @@ export function GNumberBarChartTile({
       }}
     >
       <VerticalBarChart
-        ariaLabelledBy="chart_g_number"
         values={values}
         timeframe={timeframeInitialValue}
         numGridLines={3}
