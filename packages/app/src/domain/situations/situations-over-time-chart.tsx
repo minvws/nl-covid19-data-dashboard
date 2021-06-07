@@ -49,10 +49,8 @@ export function SituationsOverTimeChart({
     shape: 'line',
   }));
 
-  const compareList = list.concat();
   const chartConfig = seriesConfig.filter(
-    (item) =>
-      compareList.includes(item.metricProperty) || compareList.length === 0
+    (item) => list.includes(item.metricProperty) || list.length === 0
   );
 
   return (
