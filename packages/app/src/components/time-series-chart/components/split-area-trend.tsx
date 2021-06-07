@@ -89,14 +89,6 @@ export function SplitAreaTrendIcon({
         <rect rx={2} x={0} y={0} width={width} height={height} fill={'white'} />
       </mask>
       <g mask={`url(#${maskId})`}>
-        <line
-          stroke={color}
-          strokeWidth={strokeWidth}
-          x1={0}
-          y1={strokeWidth / 2}
-          x2={width}
-          y2={strokeWidth / 2}
-        />
         <rect
           rx={2}
           x={0}
@@ -105,6 +97,14 @@ export function SplitAreaTrendIcon({
           height={height}
           fill={color}
           opacity={fillOpacity}
+        />
+        <line
+          stroke={color}
+          strokeWidth={strokeWidth}
+          x1={0}
+          y1={strokeWidth / 2}
+          x2={width}
+          y2={strokeWidth / 2}
         />
       </g>
     </svg>

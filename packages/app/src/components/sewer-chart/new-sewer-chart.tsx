@@ -4,12 +4,12 @@ import {
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { set } from 'lodash';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
+import { Box } from '../base';
 import { ChartTile } from '../chart-tile';
 
 export function NewSewerChart({
@@ -27,6 +27,13 @@ export function NewSewerChart({
       text: string;
     };
     selectPlaceholder?: string;
+    splitLabels: {
+      waarde_0_200: string;
+      waarde_200_400: string;
+      waarde_400_600: string;
+      waarde_600_800: string;
+      waarde_800_plus: string;
+    };
   };
 }) {
   const {
@@ -50,6 +57,34 @@ export function NewSewerChart({
       } as SewerPerInstallationData)
   );
 
+  const averageSplitPoints = [
+    {
+      value: 200,
+      color: colors.data.scale.blue[0],
+      label: text.splitLabels.waarde_0_200,
+    },
+    {
+      value: 400,
+      color: colors.data.scale.blue[1],
+      label: text.splitLabels.waarde_200_400,
+    },
+    {
+      value: 600,
+      color: colors.data.scale.blue[2],
+      label: text.splitLabels.waarde_400_600,
+    },
+    {
+      value: 800,
+      color: colors.data.scale.blue[3],
+      label: text.splitLabels.waarde_600_800,
+    },
+    {
+      value: Infinity,
+      color: colors.data.scale.blue[4],
+      label: text.splitLabels.waarde_800_plus,
+    },
+  ];
+
   return (
     <ChartTile
       timeframeOptions={['all', '5weeks']}
@@ -62,7 +97,7 @@ export function NewSewerChart({
       {(timeframe) => (
         <>
           {dataPerInstallation && (
-            <div css={css({ alignSelf: 'flex-start', mb: 2 })}>
+            <Box alignSelf="flex-start" mb={3}>
               <Select
                 options={options}
                 onChange={onChange}
@@ -70,7 +105,7 @@ export function NewSewerChart({
                 value={selectedInstallation}
                 placeholder={text.selectPlaceholder || '__no_placeholder'}
               />
-            </div>
+            </Box>
           )}
 
           {
@@ -123,34 +158,6 @@ export function NewSewerChart({
     </ChartTile>
   );
 }
-
-const averageSplitPoints = [
-  {
-    value: 200,
-    color: colors.data.scale.blue[0],
-    label: '0 - 200',
-  },
-  {
-    value: 400,
-    color: colors.data.scale.blue[1],
-    label: '200 - 400',
-  },
-  {
-    value: 600,
-    color: colors.data.scale.blue[2],
-    label: '400 - 600',
-  },
-  {
-    value: 800,
-    color: colors.data.scale.blue[3],
-    label: '600 - 800',
-  },
-  {
-    value: Infinity,
-    color: colors.data.scale.blue[4],
-    label: '800 - 1000',
-  },
-];
 
 function mergeData(
   dataAverages: RegionalSewer | MunicipalSewer,

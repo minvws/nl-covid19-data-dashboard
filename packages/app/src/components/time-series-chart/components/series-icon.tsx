@@ -57,13 +57,22 @@ export function SeriesIcon<T extends TimestampedValue>({
         <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
       );
     case 'split-area':
-      return isPresent(value) ? (
+      /**
+       * Here we return the icon even if there is no value, because it
+       * makes the tooltip rendering more stable for the sewer chart when a
+       * location is selected. The color of the rendered icon will not match
+       * whatever the other hoverstate is intersecting with, but I don't think
+       * it matters much as the value is shown as non-existing.
+       *
+       * @TODO Possibly we want this behavior for split-bar as well...
+       */
+      return (
         <SplitAreaTrendIcon
           color={findSplitPointForValue(config.splitPoints, value).color}
-          fillOpacity={1}
+          fillOpacity={config.fillOpacity}
           strokeWidth={config.strokeWidth}
         />
-      ) : null;
+      );
     case 'split-bar':
       return isPresent(value) ? (
         <BarTrendIcon

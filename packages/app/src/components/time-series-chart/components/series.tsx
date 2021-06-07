@@ -168,6 +168,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   series={series as SeriesSingleValue[]}
                   splitPoints={config.splitPoints}
                   strokeWidth={config.strokeWidth}
+                  fillOpacity={config.fillOpacity}
                   getX={getX}
                   getY={getY}
                   yScale={yScale}

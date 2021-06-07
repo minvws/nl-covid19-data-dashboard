@@ -34,7 +34,7 @@ export function findSplitIndexForValue(
     return 0;
   }
 
-  const index = splitPoints.findIndex((split) => split.value > value);
+  const index = splitPoints.findIndex((split) => split.value >= value);
 
   return index === -1 ? splitPoints.length - 1 : index;
 }

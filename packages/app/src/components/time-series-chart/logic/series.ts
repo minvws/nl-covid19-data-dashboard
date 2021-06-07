@@ -114,6 +114,7 @@ export type SplitAreaDefinition<T extends TimestampedValue> = {
   shortLabel?: string;
   splitPoints: SplitPoint[];
   strokeWidth?: number;
+  fillOpacity?: number;
 };
 
 /**
