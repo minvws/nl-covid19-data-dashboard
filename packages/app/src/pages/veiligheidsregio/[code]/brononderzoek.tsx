@@ -118,45 +118,47 @@ export default function BrononderzoekPage(
 
           <TwoKpiSection>
             <Tile>Empty tile</Tile>
-            <KpiTile
-              title={text.veiligheidsregio_kpi.titel}
-              metadata={{
-                date: [lastValue.date_start_unix, lastValue.date_end_unix],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="covid_total"
-                percentage={lastValue.situations_known_percentage}
-              />
-              <Markdown
-                content={replaceVariablesInText(
-                  text.veiligheidsregio_kpi.beschrijving,
-                  {
-                    date_to,
-                    date_from,
-                  }
-                )}
-              />
+            {lastValue.has_sufficient_data && (
+              <KpiTile
+                title={text.veiligheidsregio_kpi.titel}
+                metadata={{
+                  date: [lastValue.date_start_unix, lastValue.date_end_unix],
+                  source: text.bronnen.rivm,
+                }}
+              >
+                <KpiValue
+                  data-cy="covid_total"
+                  percentage={lastValue.situations_known_percentage}
+                />
+                <Markdown
+                  content={replaceVariablesInText(
+                    text.veiligheidsregio_kpi.beschrijving,
+                    {
+                      date_to,
+                      date_from,
+                    }
+                  )}
+                />
 
-              <Text fontWeight="bold">
-                {replaceComponentsInText(
-                  text.veiligheidsregio_kpi.beschrijving_bekend,
-                  {
-                    situations_known_total: (
-                      <InlineText color="data.primary">
-                        {formatNumber(lastValue.situations_known_total)}
-                      </InlineText>
-                    ),
-                    investigations_total: (
-                      <InlineText color="data.primary">
-                        {formatNumber(lastValue.investigations_total)}
-                      </InlineText>
-                    ),
-                  }
-                )}
-              </Text>
-            </KpiTile>
+                <Text fontWeight="bold">
+                  {replaceComponentsInText(
+                    text.veiligheidsregio_kpi.beschrijving_bekend,
+                    {
+                      situations_known_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(lastValue.situations_known_total)}
+                        </InlineText>
+                      ),
+                      investigations_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(lastValue.investigations_total)}
+                        </InlineText>
+                      ),
+                    }
+                  )}
+                </Text>
+              </KpiTile>
+            )}
           </TwoKpiSection>
         </TileList>
       </SafetyRegionLayout>
