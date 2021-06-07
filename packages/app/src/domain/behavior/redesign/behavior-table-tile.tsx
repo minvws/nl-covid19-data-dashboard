@@ -12,7 +12,7 @@ import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from '../components/behavior-icon';
 import { BehaviorTrend } from '../components/behavior-trend';
-import maybeScrollIntoView from 'scroll-into-view-if-needed';
+import scrollIntoView from 'scroll-into-view-if-needed';
 import { BehaviorIdentifier } from '../behavior-types';
 
 interface BehaviorTableTileProps {
@@ -156,7 +156,7 @@ function DescriptionWithIcon({
   const splittedWords = description.split(' ');
 
   const buttonClickHandler = () => {
-    maybeScrollIntoView(scrollRef.current as Element, {
+    scrollIntoView(scrollRef.current as Element, {
       behavior: 'smooth',
     });
     setCurrentId(id);
