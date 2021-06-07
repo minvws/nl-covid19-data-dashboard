@@ -131,6 +131,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 
     // Button
     '[data-reach-disclosure-button]': {
+      m: 0,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
