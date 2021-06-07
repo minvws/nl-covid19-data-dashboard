@@ -13,6 +13,13 @@ timestamp,action,key
 2021-06-01T08:59:29.938Z,add,brononderzoek.bronnen.rivm.href
 2021-06-01T08:59:30.960Z,add,brononderzoek.bronnen.rivm.text
 2021-06-01T11:10:47.582Z,add,common.subject_in_location
+2021-06-03T08:09:07.407Z,add,vr_brononderzoek.kpi_result.title
+2021-06-03T08:09:34.107Z,add,vr_brononderzoek.kpi_result.description
+2021-06-03T08:11:24.751Z,add,vr_onderzoek.kpi_result.description_known
+2021-06-03T08:11:24.751Z,delete,vr_onderzoek.kpi_result.description_known
+2021-06-03T08:13:47.833Z,add,vr_brononderzoek.description_known
+2021-06-03T08:13:47.833Z,delete,vr_brononderzoek.description_known
+2021-06-03T08:18:30.744Z,add,vr_brononderzoek.kpi_result.description_known
 2021-06-03T11:24:52.943Z,add,rioolwater_metingen.split_labels.waarde_0_200
 2021-06-03T11:24:54.117Z,add,rioolwater_metingen.split_labels.waarde_200_400
 2021-06-03T11:24:55.403Z,add,rioolwater_metingen.split_labels.waarde_400_600
@@ -46,6 +53,12 @@ timestamp,action,key
 2021-06-03T09:34:40.512Z,add,brononderzoek.situaties_kaarten_overzicht.legenda.onvoldoende_data
 2021-06-03T09:34:41.530Z,add,brononderzoek.situaties_kaarten_overzicht.select_help_text
 2021-06-03T09:34:42.543Z,add,brononderzoek.situaties_kaarten_overzicht.titel
+2021-06-07T08:30:55.900Z,delete,vr_brononderzoek.kpi_result.title
+2021-06-07T08:30:55.900Z,delete,vr_brononderzoek.kpi_result.description_known
+2021-06-07T08:30:55.902Z,delete,vr_brononderzoek.kpi_result.description
+2021-06-07T08:32:13.649Z,add,brononderzoek.veiligheidsregio_kpi.titel
+2021-06-07T08:32:55.599Z,add,brononderzoek.veiligheidsregio_kpi.beschrijving
+2021-06-07T08:34:17.780Z,add,brononderzoek.veiligheidsregio_kpi.beschrijving_bekend
 2021-06-04T08:49:55.177Z,add,vr_brononderzoek.tile_coverage.title
 2021-06-04T08:53:07.423Z,add,vr_brononderzoek.tile_coverage.description_enough_coverage
 2021-06-04T08:53:42.448Z,add,vr_brononderzoek.tile_coverage.description_not_enough_coverage
