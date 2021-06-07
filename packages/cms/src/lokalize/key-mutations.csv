@@ -41,3 +41,9 @@ timestamp,action,key
 2021-06-03T09:34:40.512Z,add,brononderzoek.situaties_kaarten_overzicht.legenda.onvoldoende_data
 2021-06-03T09:34:41.530Z,add,brononderzoek.situaties_kaarten_overzicht.select_help_text
 2021-06-03T09:34:42.543Z,add,brononderzoek.situaties_kaarten_overzicht.titel
+2021-06-07T08:30:55.900Z,delete,vr_brononderzoek.kpi_result.title
+2021-06-07T08:30:55.900Z,delete,vr_brononderzoek.kpi_result.description_known
+2021-06-07T08:30:55.902Z,delete,vr_brononderzoek.kpi_result.description
+2021-06-07T08:32:13.649Z,add,brononderzoek.veiligheidsregio_kpi.titel
+2021-06-07T08:32:55.599Z,add,brononderzoek.veiligheidsregio_kpi.beschrijving
+2021-06-07T08:34:17.780Z,add,brononderzoek.veiligheidsregio_kpi.beschrijving_bekend

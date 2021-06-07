@@ -12,20 +12,6 @@ export function mockVrCollectionSituations() {
   return vrData.map((x) => getVrCollectionSituationsValue(x.code));
 }
 
-export function mockKpiBlock() {
-  const value = {
-    has_sufficient_data: Math.random() > 0.5 ? true : false,
-    date_of_insertion_unix: 1622799681,
-    known_percentage: Math.floor(Math.random() * 99) + 1,
-    date_start_unix: 1422799681,
-    date_end_unix: 1522799681,
-    situations_known_total: 200 + Math.floor(Math.random() * 800) + 1,
-    investigations_total: 1000 + Math.floor(Math.random() * 1500) + 1,
-
-  }
-  return value
-}
-
 export function mockVrSituations(vrcode: string) {
   const values = Array(20)
     .fill(null)

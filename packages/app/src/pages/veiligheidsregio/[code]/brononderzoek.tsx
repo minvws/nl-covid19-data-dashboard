@@ -2,23 +2,20 @@ import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
-import {
-  mockVrSituations,
-  mockKpiBlock,
-} from '~/domain/situations/logic/mock-data';
+import { mockVrSituations } from '~/domain/situations/logic/mock-data';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { KpiTile } from '~/components/kpi-tile';
-import { Tile } from '~/components/tile';
-import { KpiValue } from '~/components/kpi-value';
-import { Text, InlineText } from '~/components/typography';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import {
   createGetStaticProps,
   StaticProps,
@@ -28,6 +25,7 @@ import {
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -64,7 +62,7 @@ export default function BrononderzoekPage(
   } = props;
 
   const intl = useIntl();
-  const { formatNumber, formatDateFromSeconds, siteText } = intl;
+  const { formatNumber, formatDateSpan } = intl;
 
   const text = intl.siteText.brononderzoek;
 
@@ -74,11 +72,14 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
-  const mockData = mockKpiBlock();
-
   assert(data.situations, 'no situations data found');
 
-  const singleValue = data.situations.last_value;
+  const lastValue = data.situations.last_value;
+
+  const [date_from, date_to] = formatDateSpan(
+    { seconds: lastValue.date_start_unix },
+    { seconds: lastValue.date_end_unix }
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -105,10 +106,10 @@ export default function BrononderzoekPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: singleValue.date_start_unix,
-                end: singleValue.date_end_unix,
+                start: lastValue.date_start_unix,
+                end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: singleValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
           />
@@ -117,54 +118,45 @@ export default function BrononderzoekPage(
 
           <TwoKpiSection>
             <Tile>Empty tile</Tile>
-            {mockData.has_sufficient_data ? (
-              <KpiTile
-                title={siteText.vr_brononderzoek.kpi_result.title}
-                metadata={{
-                  date: mockData.date_of_insertion_unix,
-                  source: text.bronnen.rivm,
-                }}
-              >
-                <KpiValue
-                  data-cy="covid_total"
-                  percentage={mockData.known_percentage}
-                />
-                <Text>
-                  {replaceComponentsInText(
-                    siteText.vr_brononderzoek.kpi_result.description,
-                    {
-                      date_start_unix: (
-                        <InlineText>
-                          {formatDateFromSeconds(mockData.date_start_unix)}
-                        </InlineText>
-                      ),
-                      date_end_unix: (
-                        <InlineText>
-                          {formatDateFromSeconds(mockData.date_end_unix)}
-                        </InlineText>
-                      ),
-                    }
-                  )}
-                </Text>
-                <Text fontWeight="bold">
-                  {replaceComponentsInText(
-                    siteText.vr_brononderzoek.kpi_result.description_known,
-                    {
-                      situations_known_total: (
-                        <InlineText color="data.primary">
-                          {formatNumber(mockData.situations_known_total)}
-                        </InlineText>
-                      ),
-                      investigations_total: (
-                        <InlineText color="data.primary">
-                          {formatNumber(mockData.investigations_total)}
-                        </InlineText>
-                      ),
-                    }
-                  )}
-                </Text>
-              </KpiTile>
-            ) : undefined}
+            <KpiTile
+              title={text.veiligheidsregio_kpi.titel}
+              metadata={{
+                date: [lastValue.date_start_unix, lastValue.date_end_unix],
+                source: text.bronnen.rivm,
+              }}
+            >
+              <KpiValue
+                data-cy="covid_total"
+                percentage={lastValue.situations_known_percentage}
+              />
+              <Markdown
+                content={replaceVariablesInText(
+                  text.veiligheidsregio_kpi.beschrijving,
+                  {
+                    date_to,
+                    date_from,
+                  }
+                )}
+              />
+
+              <Text fontWeight="bold">
+                {replaceComponentsInText(
+                  text.veiligheidsregio_kpi.beschrijving_bekend,
+                  {
+                    situations_known_total: (
+                      <InlineText color="data.primary">
+                        {formatNumber(lastValue.situations_known_total)}
+                      </InlineText>
+                    ),
+                    investigations_total: (
+                      <InlineText color="data.primary">
+                        {formatNumber(lastValue.investigations_total)}
+                      </InlineText>
+                    ),
+                  }
+                )}
+              </Text>
+            </KpiTile>
           </TwoKpiSection>
         </TileList>
       </SafetyRegionLayout>
