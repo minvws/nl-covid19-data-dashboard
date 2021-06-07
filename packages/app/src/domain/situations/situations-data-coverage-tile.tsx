@@ -1,8 +1,8 @@
 import { VrSituationsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import CheckIcon from '~/assets/check.svg';
-import CrossIcon from '~/assets/cross.svg';
+import CheckIcon from '~/assets/check-small.svg';
+import CrossIcon from '~/assets/cross-small.svg';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
@@ -69,12 +69,15 @@ const CoverageIndicator = styled.div<{ hasSufficientData: boolean }>((x) =>
 
 const IndicatorCircle = styled.div(
   css({
-    width: 23,
-    height: 23,
+    width: 24,
+    height: 24,
     mr: 2,
     mb: '3px',
     borderRadius: '50%',
     backgroundColor: 'currentColor',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
 
     svg: {
       color: 'white',
