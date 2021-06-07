@@ -1,5 +1,6 @@
 import { Box } from '~/components/base';
 import { Tooltip, useTooltip } from '~/components/tooltip';
+import { ErrorBoundary } from '../error-boundary';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
@@ -26,28 +27,26 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
-  const {
-    openTooltip,
-    closeTooltip,
-    keyboardNavigateTooltip,
-    tooltipState,
-  } = useTooltip<T>({
-    values: coordinates.values,
-    getTooltipCoordinates: coordinates.getTooltipCoordinates,
-  });
+  const { openTooltip, closeTooltip, keyboardNavigateTooltip, tooltipState } =
+    useTooltip<T>({
+      values: coordinates.values,
+      getTooltipCoordinates: coordinates.getTooltipCoordinates,
+    });
 
   return (
     <Box position="relative">
       <div ref={ref}>
-        <AgeDemographicChart
-          coordinates={coordinates}
-          onMouseMoveBar={openTooltip}
-          onMouseLeaveBar={closeTooltip}
-          onKeyInput={keyboardNavigateTooltip}
-          displayMaxPercentage={displayMaxPercentage}
-          metricProperty={metricProperty}
-          text={text}
-        />
+        <ErrorBoundary>
+          <AgeDemographicChart
+            coordinates={coordinates}
+            onMouseMoveBar={openTooltip}
+            onMouseLeaveBar={closeTooltip}
+            onKeyInput={keyboardNavigateTooltip}
+            displayMaxPercentage={displayMaxPercentage}
+            metricProperty={metricProperty}
+            text={text}
+          />
+        </ErrorBoundary>
       </div>
 
       <Tooltip

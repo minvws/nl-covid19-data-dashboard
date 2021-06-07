@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTimeControls } from './chart-time-controls';
+import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
@@ -78,13 +79,15 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
-      {timeframeOptions
-        ? (assert(
-            typeof children === 'function',
-            'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
-          ),
-          children(timeframe))
-        : children}
+      <ErrorBoundary>
+        {timeframeOptions
+          ? (assert(
+              typeof children === 'function',
+              'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
+            ),
+            children(timeframe))
+          : children}
+      </ErrorBoundary>
     </FullscreenChartTile>
   );
 }
