@@ -21,6 +21,7 @@ import {
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -97,6 +98,14 @@ export default function BrononderzoekPage(
           <ArticleStrip articles={content.articles} />
 
           <SituationsDataCoverageTile data={lastValue} />
+
+          <SituationsTableTile
+            data={lastValue}
+            metadata={{
+              date: [lastValue.date_start_unix, lastValue.date_end_unix],
+              source: text.bronnen.rivm,
+            }}
+          />
 
           {values && (
             <ChartTile
