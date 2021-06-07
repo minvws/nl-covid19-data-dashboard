@@ -6,7 +6,6 @@ import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
-import { mockVrSituations } from '~/domain/situations/logic/mock-data';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -27,14 +26,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    (context) => {
-      const data = selectVrPageMetricData('situations')(context);
-      data.selectedVrData.situations =
-        data.selectedVrData.situations ||
-        mockVrSituations(context.params?.code as string);
-
-      return data;
-    },
+    (context) => selectVrPageMetricData('situations')(context),
     createGetContent<{
       articles?: ArticleSummary[];
     }>((_context) => {

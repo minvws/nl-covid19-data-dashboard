@@ -15,7 +15,8 @@
     "hospital_nice",
     "elderly_at_home",
     "disability_care",
-    "sewer"
+    "sewer",
+    "situations"
   ],
   "properties": {
     "last_generated": {
