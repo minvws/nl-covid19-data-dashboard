@@ -21,7 +21,7 @@ function ErrorFallback({ error }: { error: Error }) {
   const [threwCopyError, setThrewCopyError] = useState(false);
   const errorReport = formatErrorMessage(error);
 
-  const copyErrorReport = (error: Error) => {
+  const copyErrorReport = () => {
     setThrewCopyError(false);
     setCopied(false);
     copyErrorMessage(errorReport).then(
@@ -39,7 +39,7 @@ function ErrorFallback({ error }: { error: Error }) {
     <ErrorBox>
       <Markdown content={siteText.common.algemene_foutmelding} />
       <Box display="flex" alignItems="center">
-        <Button onClick={() => copyErrorReport(error)}>
+        <Button onClick={() => copyErrorReport()}>
           {siteText.common.kopieer_foutmelding}
         </Button>
         {copied && (
