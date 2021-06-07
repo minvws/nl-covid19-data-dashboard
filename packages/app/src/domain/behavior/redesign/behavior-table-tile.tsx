@@ -12,7 +12,7 @@ import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from '../components/behavior-icon';
 import { BehaviorTrend } from '../components/behavior-trend';
-import scrollIntoView from 'scroll-into-view-if-needed';
+import maybeScrollIntoView from 'scroll-into-view-if-needed';
 import { BehaviorIdentifier } from '../behavior-types';
 
 interface BehaviorTableTileProps {
@@ -156,7 +156,9 @@ function DescriptionWithIcon({
   const splittedWords = description.split(' ');
 
   const buttonClickHandler = () => {
-    scrollIntoView(scrollRef.current as Element);
+    maybeScrollIntoView(scrollRef.current as Element, {
+      behavior: 'smooth',
+    });
     setCurrentId(id);
   };
 
@@ -174,7 +176,7 @@ function DescriptionWithIcon({
           {splittedWords.length - 1 === index ? (
             <InlineText css={css({ display: 'flex', position: 'relative' })}>
               {word}
-              <Box position="absolute" right={-14}>
+              <Box position="absolute" right={-14} top={0}>
                 <ChevronIcon width="7px" />
               </Box>
             </InlineText>
