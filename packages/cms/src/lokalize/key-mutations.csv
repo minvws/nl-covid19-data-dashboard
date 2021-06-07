@@ -51,6 +51,11 @@ timestamp,action,key
 2021-06-07T08:11:15.532Z,add,brononderzoek.veiligheidsregio_dekking.beschrijving_niet_genoeg_dekking
 2021-06-07T08:11:33.251Z,add,brononderzoek.veiligheidsregio_dekking.titel_genoeg_dekking
 2021-06-07T08:11:57.750Z,add,brononderzoek.veiligheidsregio_dekking.titel_niet_genoeg_dekking
+2021-06-04T15:30:12.647Z,add,brononderzoek.situaties_over_tijd_grafiek.titel
+2021-06-04T15:30:39.283Z,add,brononderzoek.situaties_over_tijd_grafiek.omschrijving
+2021-06-04T15:31:44.286Z,add,brononderzoek.situaties_over_tijd_grafiek.legenda.onvoldoende_gegevens
+2021-06-04T15:32:19.817Z,add,brononderzoek.situaties_over_tijd_grafiek.tooltip.onvoldoende_gegevens
+2021-06-04T15:33:06.370Z,add,brononderzoek.situaties_over_tijd_grafiek.legenda.help_text
 2021-06-04T12:39:20.103Z,add,brononderzoek.situaties_kaarten_uitkomsten.titel
 2021-06-04T12:39:59.324Z,add,brononderzoek.situaties_kaarten_uitkomsten.beschrijving
 2021-06-04T12:40:50.379Z,add,brononderzoek.situaties_kaarten_uitkomsten.legenda.voldoende_data.titel

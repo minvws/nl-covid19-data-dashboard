@@ -1,10 +1,12 @@
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
+import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -57,6 +59,7 @@ export default function BrononderzoekPage(
   };
 
   const lastValue = data.situations.last_value;
+  const values = data.situations.values;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -94,6 +97,22 @@ export default function BrononderzoekPage(
           <ArticleStrip articles={content.articles} />
 
           <SituationsDataCoverageTile data={lastValue} />
+
+          {values && (
+            <ChartTile
+              title={text.situaties_over_tijd_grafiek.titel}
+              description={text.situaties_over_tijd_grafiek.omschrijving}
+              timeframeOptions={['all', '5weeks']}
+              metadata={{ source: text.bronnen.rivm }}
+            >
+              {(timeframe) => (
+                <SituationsOverTimeChart
+                  timeframe={timeframe}
+                  values={values}
+                />
+              )}
+            </ChartTile>
+          )}
         </TileList>
       </SafetyRegionLayout>
     </Layout>
