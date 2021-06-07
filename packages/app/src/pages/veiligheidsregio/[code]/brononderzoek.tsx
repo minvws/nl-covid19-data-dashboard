@@ -107,7 +107,7 @@ export default function BrononderzoekPage(
           <SituationsTableTile
             data={lastValue}
             metadata={{
-              date: lastValue.date_end_unix,
+              date: [lastValue.date_start_unix, lastValue.date_end_unix],
               source: text.bronnen.rivm,
             }}
           />

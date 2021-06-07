@@ -24,7 +24,7 @@ export function SituationsTableTile({
   data,
 }: SituationsTableTileProps) {
   const { siteText, formatDateSpan } = useIntl();
-  const text = siteText.vr_brononderzoek.table;
+  const text = siteText.brononderzoek.veiligheidsregio_tabel;
 
   const situations = useSituations();
 
@@ -35,10 +35,10 @@ export function SituationsTableTile({
 
   return (
     <Tile>
-      <Heading level={3}>{text.title}</Heading>
+      <Heading level={3}>{text.titel}</Heading>
       <Box maxWidth="maxWidthText">
         <Markdown
-          content={replaceVariablesInText(text.description, {
+          content={replaceVariablesInText(text.beschrijving, {
             date_from,
             date_to,
           })}
@@ -49,13 +49,13 @@ export function SituationsTableTile({
         <StyledTable>
           <thead>
             <tr>
-              <HeaderCell> {text.situation}</HeaderCell>
+              <HeaderCell> {text.soort_situatie}</HeaderCell>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({ _: 150, md: 350 }),
                 })}
               >
-                {text.research}
+                {text.laatste_onderzoek}
               </HeaderCell>
             </tr>
           </thead>
@@ -85,7 +85,7 @@ export function SituationsTableTile({
                   ) : (
                     <Box display="flex" alignSelf="center">
                       <InlineText color="data.axisLabels">
-                        {text.no_data}
+                        {text.niet_genoeg_gegevens}
                       </InlineText>
                     </Box>
                   )}
