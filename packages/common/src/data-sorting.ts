@@ -1,4 +1,8 @@
 import { isDefined } from 'ts-is-present';
+import {
+  MunicipalSewerPerInstallationValue,
+  RegionalSewerPerInstallationValue,
+} from './types';
 
 export type UnknownObject = Record<string, unknown>;
 
@@ -28,7 +32,10 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
     }
 
     nestedSeries.values = nestedSeries.values.map((x) => {
-      x.values = sortTimeSeriesValues(x.values);
+      x.values = sortTimeSeriesValues(x.values) as
+        | RegionalSewerPerInstallationValue[]
+        | MunicipalSewerPerInstallationValue[];
+
       return x;
     });
   }
@@ -83,7 +90,9 @@ export interface TimeSeriesMetric<T = TimestampedValue> {
 }
 
 export interface SewerPerInstallationData {
-  values: (TimeSeriesMetric & {
+  values: (TimeSeriesMetric<
+    RegionalSewerPerInstallationValue | MunicipalSewerPerInstallationValue
+  > & {
     rwzi_awzi_name: string;
   })[];
 }

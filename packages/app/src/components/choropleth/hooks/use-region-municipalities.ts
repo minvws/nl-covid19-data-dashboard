@@ -12,7 +12,7 @@ export function useRegionMunicipalities(
 ): string[] | undefined {
   return useMemo(() => {
     if (!municipalCode) {
-      return undefined;
+      return;
     }
 
     return getSafetyRegionMunicipalsForMunicipalCode(municipalCode);

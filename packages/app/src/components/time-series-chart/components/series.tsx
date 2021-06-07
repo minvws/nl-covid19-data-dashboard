@@ -14,6 +14,7 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { SplitAreaTrend } from './split-area-trend';
 import { GappedLinedTrend } from './gapped-line-trend';
 import { SplitBarTrend } from './split-bar-trend';
 import { StackedAreaTrend } from './stacked-area-trend';
@@ -161,6 +162,19 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY1={getY1}
                   bounds={bounds}
                   id={`${chartId}_${config.metricProperty}`}
+                />
+              );
+            case 'split-area':
+              return (
+                <SplitAreaTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  splitPoints={config.splitPoints}
+                  strokeWidth={config.strokeWidth}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  yScale={yScale}
                 />
               );
           }

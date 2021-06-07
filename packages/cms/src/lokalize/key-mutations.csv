@@ -13,6 +13,12 @@ timestamp,action,key
 2021-06-01T08:59:29.938Z,add,brononderzoek.bronnen.rivm.href
 2021-06-01T08:59:30.960Z,add,brononderzoek.bronnen.rivm.text
 2021-06-01T11:10:47.582Z,add,common.subject_in_location
+2021-06-03T11:24:52.943Z,add,rioolwater_metingen.split_labels.waarde_0_200
+2021-06-03T11:24:54.117Z,add,rioolwater_metingen.split_labels.waarde_200_400
+2021-06-03T11:24:55.403Z,add,rioolwater_metingen.split_labels.waarde_400_600
+2021-06-03T11:24:56.506Z,add,rioolwater_metingen.split_labels.waarde_600_800
+2021-06-03T11:24:57.521Z,add,rioolwater_metingen.split_labels.waarde_800_plus
+2021-06-07T08:58:31.907Z,add,common.weekgemiddelde
 2021-06-03T12:39:28.125Z,delete,vr_brononderzoek.healthcare
 2021-06-03T13:50:07.769Z,add,vr_brononderzoek.table.title
 2021-06-03T13:50:28.822Z,add,vr_brononderzoek.table.description

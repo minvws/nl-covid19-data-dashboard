@@ -16,38 +16,34 @@ export function useLegendItems<T extends TimestampedValue>(
   config: SeriesConfig<T>,
   dataOptions?: DataOptions
 ) {
-  const legendItems = useMemo(() => {
-    const items = config.filter(isVisible).flatMap<LegendItem>((x) => {
-      switch (x.type) {
-        case 'split-bar':
-          return x.splitPoints.map((v) => ({
-            color: v.color,
-            label: v.label,
-            shape: 'custom',
-            shapeComponent: <SeriesIcon config={x} value={v.value - 1} />,
-          }));
-        default:
-          return {
-            color: x.color,
-            label: x.label,
-            shape: 'custom',
-            shapeComponent: <SeriesIcon config={x} />,
-          };
-      }
-    });
-
-    /**
-     * Maximum number of legend items
-     *
-     * Used to determine if there are enough items to render a legend
-     */
-    let maxNumItems: number = items.length;
+  return useMemo(() => {
+    const items = config
+      .filter(isVisible)
+      .map<LegendItem | undefined>((x) => {
+        switch (x.type) {
+          case 'split-area':
+          case 'split-bar':
+            /**
+             * Split type items are omitted from the normal legend, so that we can
+             * render them in a separate per split labelled legend. Not using a
+             * filter on type for TS type narrowing reasons.
+             */
+            return;
+          default:
+            return {
+              color: x.color,
+              label: x.label,
+              shape: 'custom',
+              shapeComponent: <SeriesIcon config={x} />,
+            };
+        }
+      })
+      .filter(isDefined);
 
     /**
      * Add annotations to the legend
      */
     if (dataOptions?.timespanAnnotations) {
-      maxNumItems += dataOptions?.timespanAnnotations.length;
       for (const annotation of dataOptions.timespanAnnotations) {
         const isAnnotationVisible =
           (first(domain) as number) <= annotation.end &&
@@ -69,15 +65,43 @@ export function useLegendItems<T extends TimestampedValue>(
     }
 
     /**
-     * In current charts we only show a legend if there are more than 1 items. So
-     * for example a line plus an date span annotation. If it's just one line
-     * then no legend is displayed, so in that case we return an empty array.
-     *
-     * This prevents us from having to manually set (and possibly forget to set)
-     * a boolean on the chart props.
+     * Define how many legend "items" there will be (counting split series as
+     * one) to determine if a legend is required. We only have to render a
+     * legend when there's at least two items.
      */
-    return maxNumItems > 1 ? items : [];
-  }, [config, dataOptions, domain]);
+    const isLegendRequired =
+      config.filter(isVisible).length +
+        (dataOptions?.timespanAnnotations?.length ?? 0) >
+      1;
 
-  return legendItems;
+    return isLegendRequired ? items : undefined;
+  }, [config, dataOptions, domain]);
+}
+
+type SplitLegendGroup = { label: string; items: LegendItem[] };
+
+export function useSplitLegendGroups<T extends TimestampedValue>(
+  config: SeriesConfig<T>
+) {
+  return useMemo(() => {
+    const items = config
+      .map<SplitLegendGroup | undefined>((x) => {
+        switch (x.type) {
+          case 'split-area':
+          case 'split-bar':
+            return {
+              label: x.label,
+              items: x.splitPoints.map((v) => ({
+                color: v.color,
+                label: v.label,
+                shape: 'custom',
+                shapeComponent: <SeriesIcon config={x} value={v.value} />,
+              })),
+            };
+        }
+      })
+      .filter(isDefined);
+
+    return items.length > 0 ? items : undefined;
+  }, [config]);
 }

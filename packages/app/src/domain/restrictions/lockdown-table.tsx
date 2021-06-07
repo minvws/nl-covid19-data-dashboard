@@ -49,7 +49,7 @@ function getEscalationFilter(escalationLevel: 1 | 2 | 3 | 4) {
     case 4:
       return 'invert(9%) sepia(48%) saturate(6614%) hue-rotate(322deg) brightness(85%) contrast(103%)';
     default:
-      return undefined;
+      return;
   }
 }
 

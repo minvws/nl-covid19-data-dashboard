@@ -47,7 +47,7 @@ export function LineTrend({
       strokeWidth={strokeWidth}
       curve={curves[curve]}
       strokeDasharray={style === 'dashed' ? 4 : undefined}
-      strokeLinecap="butt"
+      strokeLinecap="round"
       strokeLinejoin="round"
       id={id}
     />
