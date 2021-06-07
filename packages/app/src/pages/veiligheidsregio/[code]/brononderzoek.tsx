@@ -10,6 +10,7 @@ import { SituationsOverTimeChart } from '~/domain/situations/situations-over-tim
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
 import {
   createGetStaticProps,
   StaticProps,
@@ -58,8 +59,8 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
-  const values = data.situations.values;
   const lastValue = data.situations.last_value;
+  const values = data.situations.values;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -95,6 +96,8 @@ export default function BrononderzoekPage(
           />
 
           <ArticleStrip articles={content.articles} />
+
+          <SituationsDataCoverageTile data={lastValue} />
 
           <SituationsTableTile
             data={lastValue}
