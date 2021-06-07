@@ -1,4 +1,3 @@
-import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
@@ -55,8 +54,6 @@ export default function BrononderzoekPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  assert(choropleth.vr.situations, 'no situations data found');
 
   const singleValue = choropleth.vr.situations[0];
 

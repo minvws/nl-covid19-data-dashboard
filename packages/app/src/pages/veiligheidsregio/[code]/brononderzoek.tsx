@@ -1,4 +1,3 @@
-import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
@@ -26,7 +25,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    (context) => selectVrPageMetricData('situations')(context),
+    selectVrPageMetricData('situations'),
     createGetContent<{
       articles?: ArticleSummary[];
     }>((_context) => {
@@ -55,8 +54,6 @@ export default function BrononderzoekPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  assert(data.situations, 'no situations data found');
 
   const singleValue = data.situations.last_value;
 
