@@ -42,8 +42,9 @@ import {
   useSplitLegendGroups,
   useValuesInTimeframe,
   useValueWidth,
+  COLLAPSE_Y_AXIS_THRESHOLD,
 } from './logic';
-import { COLLAPSE_Y_AXIS_THRESHOLD } from './logic/dimensions';
+import { useTimespan } from './logic/use-timespan';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -192,6 +193,7 @@ export function TimeSeriesChart<
   );
 
   const seriesList = useSeriesList(values, seriesConfig, cutValuesConfig);
+  const timespan = useTimespan(values);
 
   /**
    * The maximum is calculated over all values, because you don't want the
@@ -368,6 +370,7 @@ export function TimeSeriesChart<
               yScale={yScale}
               benchmark={benchmark}
               chartId={chartId}
+              timespan={timespan}
             />
 
             {benchmark && (

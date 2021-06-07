@@ -32,7 +32,8 @@ export function BehaviorLineChartTile({
 
   const [type, setType] = useState<BehaviorType>('compliance');
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
-  const selectedValueKey = `${currentId}_${type}` as keyof NationalBehaviorValue;
+  const selectedValueKey =
+    `${currentId}_${type}` as keyof NationalBehaviorValue;
 
   const behaviorIdentifierWithData = behaviorIdentifiers
     .map((id) => {

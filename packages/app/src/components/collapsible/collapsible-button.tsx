@@ -149,6 +149,14 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       cursor: 'pointer',
       transition: 'color 0.2s ease-out',
 
+      /**
+       * Since we copy the width of the button for animation purposes for the `before` element
+       * sometimes it occurs that the width of the button has 1 or 2 decimals.
+       * Javascript rounds the value when applied to the before element so it could show a double border sometimes
+       * when applying this minimum width also to the button it uses the same rounding for both elements.
+       */
+      minWidth: x.isOpen ? undefined : x.buttonWidth,
+
       '&:hover': {
         color: 'blue',
 

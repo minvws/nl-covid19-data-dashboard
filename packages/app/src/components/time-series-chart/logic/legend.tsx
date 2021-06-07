@@ -54,7 +54,7 @@ export function useLegendItems<T extends TimestampedValue>(
             label: annotation.label,
             shape: 'custom',
             shapeComponent:
-              annotation.fill === 'solid' ? (
+              annotation.fill === 'solid' || !isDefined(annotation.fill) ? (
                 <SolidTimespanAnnotationIcon />
               ) : (
                 <HatchedTimespanAnnotationIcon />

@@ -120,7 +120,8 @@ export function useHoverState<T extends TimestampedValue>({
         }
 
         /**
-         * Align point coordinates with actual data points by subtracting padding
+         * Align point coordinates with actual data points by subtracting
+         * padding
          */
         point.x -= padding.left;
         point.y -= padding.top;
@@ -135,6 +136,14 @@ export function useHoverState<T extends TimestampedValue>({
   const handleBlur = useCallback(() => setHasFocus(false), []);
 
   const timeoutRef = useRef<any>();
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleHover = useCallback(
     (event: Event) => {
       if (isEmpty(values)) {
@@ -231,9 +240,11 @@ export function useHoverState<T extends TimestampedValue>({
         const yValue = seriesValue.__value;
 
         /**
-         * Filter series without Y value on the current valuesIndex
+         * Filter series without Y value on the current valuesIndex, except when
+         * a gapped line is shown. In that case the tooltip still needs to be
+         * shown to indicate why the gap is there.
          */
-        if (!isPresent(yValue)) {
+        if (!isPresent(yValue) && config.type !== 'gapped-line') {
           return;
         }
 
@@ -244,8 +255,8 @@ export function useHoverState<T extends TimestampedValue>({
             return {
               seriesValue,
               x: xScale(xValue),
-              y: yScale(yValue),
-              color: config.color,
+              y: yValue ? yScale(yValue) : 0,
+              color: yValue ? config.color : 'transparent',
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
             };
@@ -253,7 +264,7 @@ export function useHoverState<T extends TimestampedValue>({
             return {
               seriesValue,
               x: xScale(xValue),
-              y: yScale(yValue),
+              y: yValue ? yScale(yValue) : 0,
               color: findSplitPointForValue(config.splitPoints, yValue).color,
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
@@ -325,9 +336,9 @@ export function useHoverState<T extends TimestampedValue>({
       .filter(isDefined);
 
     /**
-     * For nearest point calculation we only need to look at the y component
-     * of the mouse, since all series originate from the same original value
-     * and are thus aligned with the same timestamp.
+     * For nearest point calculation we only need to look at the y component of
+     * the mouse, since all series originate from the same original value and
+     * are thus aligned with the same timestamp.
      */
     const nearestPoint = [...linePoints, ...rangePoints, ...barPoints].sort(
       (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
@@ -396,8 +407,7 @@ function findActiveTimespanAnnotationIndex(
    */
   for (const [index, annotation] of [...timespanAnnotations].entries()) {
     /**
-     * Tesing overlap of two ranges
-     * x1 <= y2 && y1 <= x2
+     * Tesing overlap of two ranges x1 <= y2 && y1 <= x2
      */
     if (valueSpanStart <= annotation.end && annotation.start <= valueSpanEnd) {
       return index;

@@ -11,7 +11,7 @@ import { Heading, Text } from '~/components/typography';
 import { BehaviorChoroplethTile } from '~/domain/behavior/behavior-choropleth-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
-import { BehaviorPageNational } from '~/domain/behavior/behavior-page-national';
+import { BehaviorPageNational } from '~/domain/behavior/redesign/_behavior-page-national';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';

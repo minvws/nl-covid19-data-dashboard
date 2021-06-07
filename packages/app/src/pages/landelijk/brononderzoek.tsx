@@ -1,11 +1,12 @@
-import { assert } from '@corona-dashboard/common';
-import GatheringsIcon from '~/assets/situations/gatherings.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import { SituationIcon } from '~/domain/situations/components/situation-icon';
+import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
+import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -26,7 +27,9 @@ export const getStaticProps = withFeatureNotFoundPage(
     getLastGeneratedDate,
     selectNlPageMetricData(),
     createGetChoroplethData({
-      vr: ({ situations }) => ({ situations }),
+      vr: ({ situations }) => ({
+        situations,
+      }),
     }),
     createGetContent<{
       articles?: ArticleSummary[];
@@ -52,8 +55,6 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
-  assert(choropleth.vr.situations, 'no situations data found');
-
   const singleValue = choropleth.vr.situations[0];
 
   return (
@@ -66,7 +67,7 @@ export default function BrononderzoekPage(
               intl.siteText.positief_geteste_personen.titel_sidebar
             }
             title={text.titel}
-            icon={<GatheringsIcon />}
+            icon={<SituationIcon id="gathering" />}
             subtitle={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
@@ -80,6 +81,10 @@ export default function BrononderzoekPage(
           />
 
           <ArticleStrip articles={content.articles} />
+
+          <SituationsDataCoverageChoroplethTile data={choropleth.vr} />
+
+          <SituationsOverviewChoroplethTile data={choropleth.vr.situations} />
         </TileList>
       </NationalLayout>
     </Layout>

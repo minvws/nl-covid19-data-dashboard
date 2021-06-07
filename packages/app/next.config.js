@@ -68,6 +68,10 @@ const nextConfig = {
             typescript: false,
             dimensions: true,
             svgo: false,
+            /**
+             * Forward ref to the root SVG tag
+             */
+            ref: true,
           },
         },
       ],

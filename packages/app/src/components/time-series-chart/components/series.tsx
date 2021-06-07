@@ -37,6 +37,7 @@ interface SeriesProps<T extends TimestampedValue> {
   bounds: Bounds;
   benchmark?: BenchmarkConfig;
   chartId: string;
+  timespan: number;
 }
 
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
@@ -52,6 +53,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
   bounds,
   benchmark,
   chartId,
+  timespan,
 }: SeriesProps<T>) {
   return (
     <>
@@ -72,6 +74,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getX={getX}
                   getY={getY}
                   id={`${chartId}_${config.metricProperty}`}
+                  timespan={timespan}
                 />
               );
             case 'line':

@@ -1,6 +1,7 @@
+import { NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { useState } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
@@ -8,34 +9,31 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { BehaviorIdentifier, behaviorIdentifiers } from './behavior-types';
-import { isDefined } from 'ts-is-present';
+import { assert } from '~/utils/assert';
+import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
+import { BehaviorIcon } from '../components/behavior-icon';
+
+const AGE_KEYS = ['70_plus', '55_69', '40_54', '25_39', '16_24'] as const;
+
 export interface BehaviorPerAgeGroupProps {
   title: string;
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  data: any;
+  data: NlBehaviorPerAgeGroup;
+  currentId: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
-
-type ageStringTypes = {
-  '70_plus': string;
-  '55_69': string;
-  '40_54': string;
-  '25_39': string;
-  '16_24': string;
-};
-
 export function BehaviorPerAgeGroup({
   title,
   description,
   data,
   complianceExplanation,
   supportExplanation,
+  currentId,
+  setCurrentId,
 }: BehaviorPerAgeGroupProps) {
   const { siteText } = useIntl();
-
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
 
   const behaviorIndentifiersData = behaviorIdentifiers.map((id) => {
     const label = siteText.gedrag_onderwerpen[id];
@@ -45,7 +43,17 @@ export function BehaviorPerAgeGroup({
     };
   });
 
-  const orderedAgeKeys = Object.keys(data.wash_hands_support).reverse();
+  const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
+  const supportValue = data[`${currentId}_support` as keyof typeof data];
+
+  assert(
+    typeof complianceValue !== 'number',
+    'There is a problem by filtering the numbers out'
+  );
+  assert(
+    typeof supportValue !== 'number',
+    'There is a problem by filtering the numbers out'
+  );
 
   return (
     <Tile>
@@ -57,11 +65,11 @@ export function BehaviorPerAgeGroup({
           value={currentId}
           onChange={setCurrentId}
           options={behaviorIndentifiersData}
+          icon={<BehaviorIcon name={currentId} size={20} />}
         />
       </Box>
       <Box overflow="auto">
-        {isDefined(data[`${currentId}_compliance`]) ||
-        isDefined(data[`${currentId}_support`]) ? (
+        {isDefined(complianceValue) || isDefined(supportValue) ? (
           <Box overflow="auto">
             <StyledTable>
               <thead>
@@ -79,23 +87,17 @@ export function BehaviorPerAgeGroup({
                 </tr>
               </thead>
               <tbody>
-                {orderedAgeKeys.map((age, index) => (
+                {AGE_KEYS.map((age, index) => (
                   <tr key={index}>
-                    <Cell>
-                      {
-                        siteText.gedrag_leeftijden.tabel[
-                          age as keyof ageStringTypes
-                        ]
-                      }
-                    </Cell>
+                    <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
                     <Cell>
                       <PercentageBar
                         color={colors.data.cyan}
-                        amount={data[`${currentId}_compliance`][age]}
+                        amount={complianceValue[age]}
                       />
                       <PercentageBar
                         color={colors.data.yellow}
-                        amount={data[`${currentId}_support`][age]}
+                        amount={supportValue[age]}
                       />
                     </Cell>
                   </tr>
