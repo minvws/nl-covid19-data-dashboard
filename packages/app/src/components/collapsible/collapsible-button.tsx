@@ -11,6 +11,7 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useSetLinkTabbability } from './use-set-link-tabbability';
+import { colors } from '~/style/theme';
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;
@@ -141,7 +142,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       border: '1px solid',
       borderRadius: 1,
       borderColor: x.isOpen ? 'transparent' : 'lightGray',
-      px: asResponsiveArray({ _: 1, sm: 3 }),
+      px: asResponsiveArray({ _: 2, sm: 3 }),
       py: 3,
       background: 'none',
       color: 'black',
@@ -165,21 +166,24 @@ const Container = styled(Box).attrs({ as: 'section' })<{
           fill: 'blue',
         },
 
+        // The inset box shadow has the same working as a border but can animate on Safari
         '&:before': {
-          borderColor: x.isOpen ? 'lightGray' : 'data.primary',
+          boxShadow: x.isOpen
+            ? `inset 0 0 0 1px ${colors.lightGray}`
+            : `inset 0 0 0 1px ${colors.data.primary}`,
         },
       },
 
       // Outside border
       '&:before': {
+        display: 'block',
         transition: 'width 0.4s',
         position: 'absolute',
         top: 0,
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
-        border: '1px solid',
+        boxShadow: `inset 0 0 0 1px ${colors.lightGray}`,
         borderRadius: 1,
-        borderColor: 'lightGray',
         zIndex: -1,
         content: x.isMounted ? '""' : 'unset',
         pointerEvents: 'none',
