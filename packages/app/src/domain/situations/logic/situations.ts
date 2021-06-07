@@ -19,7 +19,7 @@ export const situations: SituationKey[] = [
   'travel',
   'hospitality',
   'other',
-];
+]; 
 
 export function useSituations() {
   const siteText = useIntl().siteText;

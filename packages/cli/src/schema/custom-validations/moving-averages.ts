@@ -45,7 +45,7 @@ export function validateMovingAverages(input: JSONObject) {
             ' and '
           )}`;
         }
-        return undefined;
+        return;
       })
     )
     .flat()

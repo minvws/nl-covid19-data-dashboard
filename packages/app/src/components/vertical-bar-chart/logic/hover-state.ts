@@ -79,7 +79,7 @@ export function useHoverState<T extends TimestampedValue>({
             | undefined;
 
           if (!isPresent(seriesValue)) {
-            return undefined;
+            return;
           }
 
           const xValue = seriesValue.__date_unix;
@@ -89,7 +89,7 @@ export function useHoverState<T extends TimestampedValue>({
            * Filter series without Y value on the current valuesIndex
            */
           if (!isPresent(yValue)) {
-            return undefined;
+            return;
           }
 
           return {

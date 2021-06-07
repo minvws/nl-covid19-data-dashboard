@@ -118,6 +118,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                 </TooltipListItem>
               );
 
+            case 'split-area':
             case 'split-bar':
               return (
                 <TooltipListItem

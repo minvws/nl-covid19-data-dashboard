@@ -50,7 +50,7 @@ const Cell = styled.td((x) =>
   css({
     color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGrey',
+    borderBottomColor: 'lightGray',
     px: 3,
     py: 2,
   })
