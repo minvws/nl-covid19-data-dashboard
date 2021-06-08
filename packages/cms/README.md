@@ -20,7 +20,7 @@ In summary these are the most important things you should be aware of:
   contain all the texts which are referenced in the code.
 - Use the command line tool to add and remove short-copy texts to/from the
   Sanity development dataset. Every mutation is logged to `key-mutations.csv`.
-  This file is used synchronize the changes to the production dataset when
+  This file is used to synchronize the changes to the production dataset when
   needed. If you need to add multiple keys you can do this by editing the JSON
   file (read more below). You should **never** have to manually edit the
   mutations file.
@@ -47,19 +47,15 @@ The mutation file is used to synchronize texts at different times in the
 development/release flow.
 
 You should not have to edit this file manually. The mutations log can be cleared
-after a release, but if this doesn't happen it also wont hurt to append
-mutations at the end for multiple sprints.
-
-The sync logic should be clever enough to figure out what mutations are still
-relevant.
+after a release, but if this doesn't happen it also won't hurt to keep appending
+mutations over multiple sprints. The sync logic should be clever enough to
+figure out what mutations are still relevant.
 
 Whenever the mutations file is read, the different mutations are "collapsed" so
-that additions and deletions cancel each other out where needed.
-
-The timestamps in this file do not have to be in order, as all rows get sorted
+that additions and deletions cancel each other out where needed. The timestamps in this file do not have to be in order, as all rows get sorted
 by the sync scripts.
 
-Merge conflicts in this file will be common. You should always "accept both
+Merge conflicts in this file will be very common. You should always "accept both
 changes" when resolving conflicts, so that none of the lines are ever deleted.
 
 ### Export
@@ -67,25 +63,25 @@ changes" when resolving conflicts, so that none of the lines are ever deleted.
 The application reads its locale strings from
 `packages/app/public/nl-export.json` and `packages/app/public/en-export.json`.
 These JSONs are exported from the Sanity lokalize documents but they are not
-part of the repository. Therefor you will regularly need to run `yarn lokalize:export` in order to keep your local JSON file up-to-date with the
+part of the repository. Therefore you will regularly need to run `yarn lokalize:export` in order to keep your local JSON file up-to-date with the
 Sanity dataset. For Typescript these JSONs are a static data source, so it will
 complain when they do not contain all the keys that are used in the code.
 
 ### Adding Texts
 
-You can run `yarn lokalize:add-text` from the repository root to add a text to
+You can run `yarn lokalize:add` from the repository root to add a text to
 the Sanity lokalize section in the development dataset. There are a few
 different flavors for convenience.
 
 New texts only need an NL string when they are added. EN is optional and will
 use NL as a fallback.
 
-After adding a text, the export script is called to update the JSON file.
+After adding a text, the export script is called to update your local JSON file.
 
 #### Flags
 
 Without any flags the user is presented with an interactive prompt to specify
-what key you want to add. This using autocompletion on existing keys to easily
+what key you want to add. This is using auto-completion on existing keys to easily
 find a nested location.
 
 Using the `-k` or `--key` flag you can pre-specify the key/path in dot notation
@@ -94,8 +90,9 @@ that the new text should get.
 Using the `-s` or `--sync` flag allows you to easily add multiple texts at once
 by simply making your edits directly in the JSON file at
 `packages/app/public/nl-export.json`. The script will then compare all the keys
-in your local JSON file with the Sanity dataset, and present you with a prompt
-of all the ones that would be additions. You can then select which ones to add.
+in your local JSON file with the Sanity dataset and present you with a list of
+all keys that would become additions. You can then select which ones to actually
+add, and it injects the existing texts for each.
 
 #### Flow to Production
 
@@ -108,7 +105,7 @@ prepare them for an upcoming release.
 
 ### Deletings Texts
 
-Texts can be deleted via `yarn lokalize:add-text`
+Texts can be deleted via `yarn lokalize:delete`
 
 Because all feature branches plus the development deployment all use the same
 Sanity dataset, we can not simply remove a lokalize text document from the
