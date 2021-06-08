@@ -220,6 +220,8 @@ export const TooltipList = styled.ol<{
 }>((x) =>
   css({
     columns: x.hasTwoColumns ? 2 : 1,
+    columnRule: x.hasTwoColumns ? `1px solid ${colors.lightGray}` : 'unset',
+    columnGap: x.hasTwoColumns ? '2em' : 'unset',
     m: 0,
     p: 0,
     listStyle: 'none',
