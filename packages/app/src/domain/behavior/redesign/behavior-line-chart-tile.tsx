@@ -103,6 +103,7 @@ export function BehaviorLineChartTile({
         dataOptions={{
           isPercentage: true,
         }}
+        numGridLines={0}
         tickValues={[0, 25, 50, 75, 100]}
       />
     </ChartTile>

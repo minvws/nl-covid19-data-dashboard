@@ -159,6 +159,15 @@ export const colors = {
         '#001d45',
       ],
       magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
+      yellow: [
+        '#FFF2CC',
+        '#FFE699',
+        '#FFD34D',
+        '#FABC00',
+        '#E5A400',
+        '#C98600',
+        '#9E6900',
+      ],
     },
     gradient: {
       green: '#69c253',
@@ -167,29 +176,6 @@ export const colors = {
     },
 
     multiseries,
-
-    behavior: {
-      scale: {
-        cyan: [
-          '#e9f5fc',
-          '#bce1f7',
-          '#90cdf2',
-          '#219be5',
-          '#1779b6',
-          '#1a618f',
-          '#005082',
-        ],
-        yellow: [
-          '#FFF2CC',
-          '#FFE699',
-          '#FFD34D',
-          '#FABC00',
-          '#E5A400',
-          '#C98600',
-          '#9E6900',
-        ],
-      },
-    },
 
     vaccines: {
       bio_n_tech_pfizer: multiseries.cyan,

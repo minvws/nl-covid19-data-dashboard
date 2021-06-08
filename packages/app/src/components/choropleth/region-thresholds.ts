@@ -172,62 +172,62 @@ const behaviorThresholds: ChoroplethThresholdsValue[] = [
 
 const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.behavior.scale.cyan[0],
+    color: colors.data.scale.blue[6],
     threshold: 0,
   },
   {
-    color: colors.data.behavior.scale.cyan[1],
+    color: colors.data.scale.blue[5],
     threshold: 40,
   },
   {
-    color: colors.data.behavior.scale.cyan[2],
+    color: colors.data.scale.blue[4],
     threshold: 50,
   },
   {
-    color: colors.data.behavior.scale.cyan[3],
+    color: colors.data.scale.blue[3],
     threshold: 60,
   },
   {
-    color: colors.data.behavior.scale.cyan[4],
+    color: colors.data.scale.blue[2],
     threshold: 70,
   },
   {
-    color: colors.data.behavior.scale.cyan[5],
+    color: colors.data.scale.blue[1],
     threshold: 80,
   },
   {
-    color: colors.data.behavior.scale.cyan[6],
+    color: colors.data.scale.blue[0],
     threshold: 90,
   },
 ];
 
 const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.behavior.scale.yellow[0],
+    color: colors.data.scale.yellow[6],
     threshold: 0,
   },
   {
-    color: colors.data.behavior.scale.yellow[1],
+    color: colors.data.scale.yellow[5],
     threshold: 40,
   },
   {
-    color: colors.data.behavior.scale.yellow[2],
+    color: colors.data.scale.yellow[4],
     threshold: 50,
   },
   {
-    color: colors.data.behavior.scale.yellow[3],
+    color: colors.data.scale.yellow[3],
     threshold: 60,
   },
   {
-    color: colors.data.behavior.scale.yellow[4],
+    color: colors.data.scale.yellow[2],
     threshold: 70,
   },
   {
-    color: colors.data.behavior.scale.yellow[5],
+    color: colors.data.scale.yellow[1],
     threshold: 80,
   },
   {
-    color: colors.data.behavior.scale.yellow[6],
+    color: colors.data.scale.yellow[0],
     threshold: 90,
   },
 ];
