@@ -51,7 +51,7 @@ export function SituationsOverviewChoroplethTile({
     >
       <Box
         display="grid"
-        gridTemplateColumns="repeat(auto-fit, minmax(300px,1fr))"
+        gridTemplateColumns="repeat(auto-fit, minmax(256px,1fr))"
         mb={3}
         css={css({ gap: 20 })}
       >
@@ -70,7 +70,7 @@ export function SituationsOverviewChoroplethTile({
               position="relative"
               top={'3px'}
             />
-            <InlineText m={0} fontSize={1}>
+            <InlineText m={0} fontSize={[0, null, 1]}>
               {text.situaties_kaarten_overzicht.legenda.onvoldoende_data}
             </InlineText>
           </Box>
