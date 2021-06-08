@@ -54,7 +54,7 @@ that additions and deletions cancel each other out where needed. The timestamps
 in this file do not have to be in order, as all rows get sorted by the sync
 scripts.
 
-Merge conflicts in this file will be very common. You should always "accept both
+Merge conflicts in this file are common. You should always "accept both
 changes" when resolving conflicts, so that none of the lines are ever deleted.
 
 ### Export
