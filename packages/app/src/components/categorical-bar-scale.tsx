@@ -96,7 +96,7 @@ export function CategoricalBarScale({
       </Box>
 
       {!hideLegend && (
-        <Box mb={3}>
+        <Box mb={3} mt={4}>
           {barPieces.map((category) => (
             <Fragment key={category.name}>
               {/* 0.25px offset is used for sharper rendering of the circle */}
