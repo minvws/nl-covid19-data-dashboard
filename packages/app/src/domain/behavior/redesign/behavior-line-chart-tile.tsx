@@ -97,7 +97,7 @@ export function BehaviorLineChartTile({
             label: chartText.support_label,
             shortLabel: chartText.support_short_label,
             strokeWidth: 3,
-            color: colors.data.emphasis,
+            color: colors.data.yellow,
           },
         ]}
         dataOptions={{
