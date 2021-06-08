@@ -1,4 +1,5 @@
 import {
+  ChoroplethThresholdsValue,
   SafetyRegionProperties,
   VrCollectionSituations,
 } from '@corona-dashboard/common';
@@ -98,6 +99,7 @@ export function SituationsOverviewChoroplethTile({
                   value={context[situation.id]}
                   regionName={context.vrname}
                   thresholds={regionThresholds.situations[situation.id]}
+                  noDataFillColor={colors.data.underReported}
                 />
               )}
             />
@@ -108,16 +110,29 @@ export function SituationsOverviewChoroplethTile({
   );
 }
 
+interface ChoroplethTooltipProps {
+  value: number | null;
+  regionName: string;
+  thresholds: ChoroplethThresholdsValue[];
+  isPercentage: boolean;
+  noDataFillColor?: string;
+}
+
 function ChoroplethTooltip({
   value,
   isPercentage,
   regionName,
   thresholds,
-}: any) {
+  noDataFillColor,
+}: ChoroplethTooltipProps) {
   const intl = useIntl();
   return (
     <Box px={3} py={2} display="inline-block" aria-live="polite">
-      <TooltipSubject thresholdValues={thresholds} filterBelow={value}>
+      <TooltipSubject
+        thresholdValues={thresholds}
+        filterBelow={value}
+        noDataFillColor={noDataFillColor}
+      >
         {regionName + ': '}
         <InlineText
           ml={3}
