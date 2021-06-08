@@ -84,9 +84,9 @@ After adding a text, the export script is called to update the JSON file.
 
 #### Flags
 
-Without any flags the user is presented with an interactive prompt to specify what
-key you want to add. This using autocompletion on existing keys to easily find a
-nested location.
+Without any flags the user is presented with an interactive prompt to specify
+what key you want to add. This using autocompletion on existing keys to easily
+find a nested location.
 
 Using the `-k` or `--key` flag you can pre-specify the key/path in dot notation
 that the new text should get.
@@ -139,12 +139,13 @@ The `sync-after-feature` script is triggered automatically by a Github Action
 whenever a feature branch is merged to the develop branch. It contains the
 following logic:
 
-1. Apply deletions to the development set. This will likely break other feature branches, but at this point those branches can be updated with the develop
+1. Apply deletions to the development set. This will likely break other feature
+   branches, but at this point those branches can be updated with the develop
    new commits.
 2. Sync additions to the production set. Any text that was added as part of this
-   feature branch is added to the production set so that the
-   communication team can prepare the texts for the upcoming release. These text
-   get a special flag so they appear in their own list on the Sanity dashboard.
+   feature branch is added to the production set so that the communication team
+   can prepare the texts for the upcoming release. These text get a special flag
+   so they appear in their own list on the Sanity dashboard.
 
 If the text additions of a feature branch get deleted after the branch was
 merged, those deletions will propagate to production after the release using the
@@ -154,15 +155,13 @@ merged, those deletions will propagate to production after the release using the
 
 The `sync-after-release` script should be triggered manually shortly after a
 release has been deployed to production. It can not really hurt to forget to run
-it, but
-it can break the production build when it is triggered at the wrong time, so
-make sure you understand the logic behind it.
+it, but it can break the production build when it is triggered at the wrong
+time, so make sure you understand the logic behind it.
 
 1. Prune the production set by applying deletions. Any key that has been deleted
-   from the development set as part
-   of a feature branch, or a key
-   that was added in a feature branch but later got deleted anyway, will be removed
-   from production.
+   from the development set as part of a feature branch, or a key that was added
+   in a feature branch but later got deleted anyway, will be removed from
+   production.
 2. Find any keys that are in development but not yet in production and add
    those. This is a safe-guard to catch any edge-cases that might have appeared
    through wrong use of the mutations file or something.
@@ -174,6 +173,7 @@ It is possible that right after a release there are already new texts in the
 development set. Those will get added to production as well, but this can't
 really hurt.
 
-One thing we to keep in mind is to **not delete text from development
-between deploying the release and running the `sync-after-release` script**. Because then those keys
-will get removed from the production set and block the deployment.
+One thing we to keep in mind is to **not delete text from development between
+deploying the release and running the** `sync-after-release` **script**. Because
+then those keys will get removed from the production set and block the
+deployment.
