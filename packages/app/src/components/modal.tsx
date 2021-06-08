@@ -10,12 +10,21 @@ interface ModalProps {
   id: string;
   onClose: () => void;
   isFullheight?: boolean;
+  focusSelector?: string;
 }
 
-export function Modal({ id, children, onClose, isFullheight }: ModalProps) {
+export function Modal({
+  id,
+  children,
+  onClose,
+  isFullheight,
+  focusSelector,
+}: ModalProps) {
   const clickRef = useRef<HTMLDivElement>(null);
   useHotkey('esc', onClose);
-  const focusRef = useFocusTrap();
+  const focusRef = useFocusTrap(true, {
+    focusSelector,
+  });
 
   return (
     <ModalPortal id={id}>
