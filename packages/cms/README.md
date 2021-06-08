@@ -28,13 +28,13 @@ In summary these are the most important things you should be aware of:
   choose to **accept both changes**, so that you never remove any mutations. You
   do not have to worry about the order of the timestamps, as these mutations are
   sorted before they are applied.
-- When a feature branch gets merged, the `sync-after-feature` script is ran
-  which adds new texts to production so that the communication team can prepare
-  them for upcoming release.
-- After a release, we run the `sync-after-release`, which then strips all keys
-  from production that are not in use in development anymore. This also clears
-  the mutations log file which should then be committed. **Do not delete texts
-  from development between deploying the release and running the
+- When a feature branch gets merged into develop, the `sync-after-feature`
+  script is ran which adds new texts to production so that the communication
+  team can prepare them for upcoming release.
+- After a release, we manually run the `sync-after-release`, which then strips
+  all keys from production that are not in use in development anymore. This also
+  clears the mutations log file which should then be committed. **Do not delete
+  texts from development between deploying the release and running the
   `sync-after-release` script**.
 
 ### Mutations File
@@ -52,8 +52,9 @@ mutations over multiple sprints. The sync logic should be clever enough to
 figure out what mutations are still relevant.
 
 Whenever the mutations file is read, the different mutations are "collapsed" so
-that additions and deletions cancel each other out where needed. The timestamps in this file do not have to be in order, as all rows get sorted
-by the sync scripts.
+that additions and deletions cancel each other out where needed. The timestamps
+in this file do not have to be in order, as all rows get sorted by the sync
+scripts.
 
 Merge conflicts in this file will be very common. You should always "accept both
 changes" when resolving conflicts, so that none of the lines are ever deleted.
@@ -69,9 +70,9 @@ complain when they do not contain all the keys that are used in the code.
 
 ### Adding Texts
 
-You can run `yarn lokalize:add` from the repository root to add a text to
-the Sanity lokalize section in the development dataset. There are a few
-different flavors for convenience.
+You can run `yarn lokalize:add` from the repository root to add a text to the
+Sanity lokalize section in the development dataset. There are a few different
+flavors for convenience.
 
 New texts only need an NL string when they are added. EN is optional and will
 use NL as a fallback.
@@ -81,8 +82,8 @@ After adding a text, the export script is called to update your local JSON file.
 #### Flags
 
 Without any flags the user is presented with an interactive prompt to specify
-what key you want to add. This is using auto-completion on existing keys to easily
-find a nested location.
+what key you want to add. This is using auto-completion on existing keys to
+easily find a nested location.
 
 Using the `-k` or `--key` flag you can pre-specify the key/path in dot notation
 that the new text should get.
@@ -107,15 +108,15 @@ prepare them for an upcoming release.
 
 Texts can be deleted via `yarn lokalize:delete`
 
-Because feature branches plus the development deployment all use the same
-Sanity dataset, we can not simply remove a lokalize text document from the
-dataset without potentially breaking other branches.
+Because feature branches plus the development deployment all use the same Sanity
+dataset, we can not simply remove a lokalize text document from the dataset
+without potentially breaking other branches.
 
 For this reason, when you delete a lokalize text, it will append the delete
 action to the mutations file but not actually delete the document. This script
-also triggers an export which then filters out any deletions that were
-logged to the mutations file. So in effect you end up with a local JSON file that
-has the deleted key removed, and the TS compiler sees the correct dataset.
+also triggers an export which then filters out any deletions that were logged to
+the mutations file. So in effect you end up with a local JSON file that has the
+deleted key removed, and the TS compiler sees the correct dataset.
 
 The actual deletions from Sanity only happen in the `sync-after-feature` phase,
 describe below.
@@ -156,21 +157,21 @@ it, but it can break the production build when it is triggered at the wrong
 time, so make sure you understand the logic behind it.
 
 1. Prune the production set by applying deletions. Any key that has been deleted
-   from the development set as part of a feature branch, or a key that was added
-   in a feature branch but later got deleted anyway, will be removed from
+   from the development set as part of a feature branch (or a key that was added
+   in a feature branch but later got deleted anyway), will be removed from
    production.
 2. Find any keys that are in development but not yet in production and add
-   those. This is a safe-guard to catch any edge-cases that might have appeared
+   those. This is a safe-guard to solve any edge-cases that might have appeared
    through wrong use of the mutations file or something.
 
-After the two steps above the production dataset should be a mirror of the
-development dataset.
+After these two steps the production dataset should be considered a mirror of
+the development dataset.
 
 It is possible that right after a release there are already new texts in the
-development set. Those will get added to production as well, but this can't
-really hurt.
+development set which are part of the next sprint. Those will get added to
+production as well but this won't be much of a problem.
 
-One thing we to keep in mind is to **not delete text from development between
-deploying the release and running the** `sync-after-release` **script**. Because
-then those keys will get removed from the production set and block the
+**NOTE:** One thing we need to keep in mind is to not delete texts from
+development between deploying the release and running the `sync-after-release`.
+Because then those keys will get removed from the production set and block the
 deployment.
