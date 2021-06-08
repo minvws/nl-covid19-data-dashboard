@@ -13,22 +13,22 @@ though they now live as documents in Sanity, we still tend to refer to them as
 In summary these are the most important things you should be aware of:
 
 - Commands are run with `yarn lokalize:[command]` from the `packages/cms` root
-- The `export` command brings your local JSON files up-to-date with the
-  Sanity dataset. The Typescript compiler will error when your JSON files do not
+- The `export` command brings your local JSON files up-to-date with the Sanity
+  dataset. The Typescript compiler will error when your JSON files do not
   contain all the texts which are referenced in the code.
-- Use the `add` and `delete` commands to add/remove
-  short-copy texts to/from the Sanity development dataset. Every mutation is
-  logged to `key-mutations.csv`. This file is used to synchronize the changes to
-  the production dataset when needed. If you need to add multiple keys you can
-  do this by editing the JSON file (read more below). You should **never** have
-  to manually edit the mutations file.
-- Merge conflicts in the mutations file are common, but **always**
-  choose to **accept both changes**, so that you never remove any mutations. You
-  do not have to worry about the order of the timestamps, as these mutations are
-  sorted before they are applied.
+- Use the `add` and `delete` commands to add/remove short-copy texts to/from the
+  Sanity development dataset. Every mutation is logged to `key-mutations.csv`.
+  This file is used to synchronize the changes to the production dataset when
+  needed. If you need to add multiple keys you can do this by editing the JSON
+  file (read more below). You should **never** have to manually edit the
+  mutations file.
+- Merge conflicts in the mutations file are common, but **always** choose to
+  **accept both changes**, so that you never remove any mutations. You do not
+  have to worry about the order of the timestamps, as these mutations are sorted
+  before they are applied.
 - When a feature branch gets merged into develop, the `sync-after-feature`
-  command runs which adds new texts to production so that the communication
-  team can prepare them for upcoming release.
+  command runs which adds new texts to production so that the communication team
+  can prepare them for upcoming release.
 - After a release, we manually run the `sync-after-release`, which then strips
   all keys from production that are not in use in development anymore. This also
   clears the mutations log file which should then be committed. **Do not delete
@@ -54,8 +54,8 @@ that additions and deletions cancel each other out where needed. The timestamps
 in this file do not have to be in order, as all rows get sorted by the sync
 scripts.
 
-Merge conflicts in this file are common. You should always "accept both
-changes" when resolving conflicts, so that none of the lines are ever deleted.
+Merge conflicts in this file are common. You should always "accept both changes"
+when resolving conflicts, so that none of the lines are ever deleted.
 
 ### Export
 
@@ -86,8 +86,8 @@ easily find a nested location.
 Using the `-k` or `--key` flag you can pre-specify the key/path in dot notation
 that the new text should get.
 
-Using the `-s` or `--sync` flag allows you to add multiple texts at once
-by making your edits directly in the JSON file at
+Using the `-s` or `--sync` flag allows you to add multiple texts at once by
+making your edits directly in the JSON file at
 `packages/app/public/nl-export.json`. The script will then compare all the keys
 in your local JSON file with the Sanity dataset and present you with a list of
 all keys that would become additions. You can then select which ones to actually
