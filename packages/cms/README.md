@@ -107,18 +107,18 @@ prepare them for an upcoming release.
 
 Texts can be deleted via `yarn lokalize:delete`
 
-Because all feature branches plus the development deployment all use the same
+Because feature branches plus the development deployment all use the same
 Sanity dataset, we can not simply remove a lokalize text document from the
 dataset without potentially breaking other branches.
 
 For this reason, when you delete a lokalize text, it will append the delete
-action to the mutations file but not actually delete the document. This actions
-also triggers an export and the export filters out any deletions that were
-logged to the mutations file. In effect you locally end up with a JSON file that
-has the key removed, so the TS compiler has the correct dataset to work with.
+action to the mutations file but not actually delete the document. This script
+also triggers an export which then filters out any deletions that were
+logged to the mutations file. So in effect you end up with a local JSON file that
+has the deleted key removed, and the TS compiler sees the correct dataset.
 
-The actual deletions from Sanity only happen in the `sync-after-feature` phase
-(see below).
+The actual deletions from Sanity only happen in the `sync-after-feature` phase,
+describe below.
 
 #### Undo Delete
 
