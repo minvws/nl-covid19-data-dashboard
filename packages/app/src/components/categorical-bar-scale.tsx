@@ -54,7 +54,12 @@ export function CategoricalBarScale({
 
   return (
     <>
-      <Box position="relative" width="100%" display="flex">
+      <Box
+        position="relative"
+        width="100%"
+        display="flex"
+        mb={hideLegend ? undefined : 4}
+      >
         {barPieces.map((category, index) => (
           <Box
             style={{ width: `${(category.width / maxValue) * 100}%` }}
@@ -96,7 +101,7 @@ export function CategoricalBarScale({
       </Box>
 
       {!hideLegend && (
-        <Box mb={3} mt={4}>
+        <Box mb={3}>
           {barPieces.map((category) => (
             <Fragment key={category.name}>
               {/* 0.25px offset is used for sharper rendering of the circle */}
