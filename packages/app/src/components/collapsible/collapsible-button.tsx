@@ -247,10 +247,14 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 const IconContainer = styled.div(
   css({
     mr: 2,
+    display: 'flex',
+    alignItems: 'center',
 
     svg: {
+      transform: 'scale(0.8)',
       transition: 'fill 0.2s ease-out',
       fill: 'black',
+      width: asResponsiveArray({ _: 24, md: undefined }),
     },
   })
 );
