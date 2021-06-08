@@ -15,6 +15,7 @@ import { CollapsibleSection } from '../collapsible';
 import { ContentImage } from './content-image';
 import { ExternalLink } from '~/components/external-link';
 import { Link } from '~/utils/link';
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
@@ -76,14 +77,12 @@ function InlineAttachmentMark(props: {
   );
 }
 
-const isExternalURL = (url: string) => /^https?:\/\//.test(url);
-
 function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   const { mark, children } = props;
 
   if (!mark.href) return null;
 
-  return isExternalURL(mark.href) ? (
+  return isAbsoluteUrl(mark.href) ? (
     <ExternalLink href={mark.href}>{children}</ExternalLink>
   ) : (
     <Link href={mark.href} passHref>

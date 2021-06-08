@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
-
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 interface MarkdownProps {
   content: string;
 }
@@ -10,14 +10,12 @@ interface LinkProps {
   href: string;
 }
 
-const isExternalURL = (url: string) => /^https?:\/\//.test(url);
-
 const renderers = {
   link: (props: LinkProps) => (
     <a
       href={props.href}
       rel="noreferrer noopener"
-      target={isExternalURL(props.href) ? '_blank' : undefined}
+      target={isAbsoluteUrl(props.href) ? '_blank' : undefined}
     >
       {props.children}
     </a>
