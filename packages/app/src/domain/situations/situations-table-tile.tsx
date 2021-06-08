@@ -52,7 +52,11 @@ export function SituationsTableTile({
               <HeaderCell> {text.soort_situatie}</HeaderCell>
               <HeaderCell
                 css={css({
-                  width: asResponsiveArray({ _: 150, md: 350 }),
+                  width: asResponsiveArray({
+                    xs: 150,
+                    sm: 200,
+                    lg: 350,
+                  }),
                 })}
               >
                 {text.laatste_onderzoek}
@@ -134,11 +138,15 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
 
   return (
     <Box display="flex" alignItems="center">
-      <InlineText css={css({ minWidth: 40 })}>{`${formatPercentage(
-        amount
-      )}%`}</InlineText>
+      <InlineText
+        textAlign="right"
+        css={css({ minWidth: 40 })}
+        mr={2}
+      >{`${formatPercentage(amount, {
+        minimumFractionDigits: 1,
+      })}%`}</InlineText>
       <Box width="100%" pr={4}>
-        <Box width={`${amount * 2}%`} height={12} backgroundColor={color} />
+        <Box width={`${amount}%`} height={12} backgroundColor={color} />
       </Box>
     </Box>
   );

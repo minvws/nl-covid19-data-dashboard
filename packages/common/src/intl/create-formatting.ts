@@ -72,7 +72,8 @@ export function createFormatting(
   function formatPercentage(
     value: number,
     options?: {
-      maximumFractionDigits: number;
+      maximumFractionDigits?: number;
+      minimumFractionDigits?: number;
     }
   ) {
     return new Intl.NumberFormat(languageTag, options).format(value);
