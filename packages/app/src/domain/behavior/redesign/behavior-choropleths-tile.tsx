@@ -34,11 +34,25 @@ export function BehaviorChoroplethsTile({
   setCurrentId,
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
+  const firstRegionData = data[0];
 
-  // Find all the keys that only doesn't exist on VR level but does on NL
+  // Find all the keys that don't exist on VR level but do on NL
   const keysWithoutData = behaviorIdentifiers.filter(
-    (item) => !Object.keys(data[0]).find((a) => a.includes(item))
+    (item) => !Object.keys(firstRegionData).find((a) => a.includes(item))
   );
+
+  /**
+   * Since e.g. the curfew has no data anymore and returns null that also needs to be filtered out
+   * First we check if there are some keys that contain a value of null
+   * Second we slice everything before the underscore, since only the id name is important and not _support or _compliance
+   * Lastly we remove all the duplicates in the array and add it to all the keys without data
+   */
+  const idsThatContainNull = Object.keys(firstRegionData)
+    .filter((key) => firstRegionData[key as keyof RegionsBehavior] === null)
+    .map((item) => item.slice(0, item.indexOf('_')))
+    .filter((item, pos) => item.indexOf(item) == pos);
+
+  keysWithoutData.push(...(idsThatContainNull as BehaviorIdentifier[]));
 
   const behaviorIndentifiersData = behaviorIdentifiers.map((id) => {
     const label = siteText.gedrag_onderwerpen[id];
@@ -64,7 +78,7 @@ export function BehaviorChoroplethsTile({
         />
       </Box>
 
-      <Box display="flex" flexWrap="wrap">
+      <Box display="flex" flexWrap="wrap" spacing={{ _: 4, lg: undefined }}>
         <ChoroplethBlock
           title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
           data={{ behavior_compliance: data }}
