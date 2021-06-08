@@ -101,10 +101,8 @@ export function VerticalBarChart<
 
   const seriesList = useSeriesList(values, seriesConfig);
 
-  const {
-    max: calculatedMax,
-    min: calculatedMin,
-  } = useCalculatedSeriesExtremes(values, seriesConfig);
+  const { max: calculatedMax, min: calculatedMin } =
+    useCalculatedSeriesExtremes(values, seriesConfig);
 
   const { xScale, yScale, getX, getY } = useScales({
     values,

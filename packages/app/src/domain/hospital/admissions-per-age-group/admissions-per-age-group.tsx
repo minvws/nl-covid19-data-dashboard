@@ -40,8 +40,8 @@ export function AdmissionsPerAgeGroup({
   const alwayEnabled = ['admissions_overall_per_million'];
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map(
-    (baseAgeGroup) => {
+  const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] =
+    BASE_SERIES_CONFIG.map((baseAgeGroup) => {
       return {
         ...baseAgeGroup,
         type: 'line',
@@ -51,8 +51,7 @@ export function AdmissionsPerAgeGroup({
             ? text.legend[baseAgeGroup.metricProperty]
             : baseAgeGroup.metricProperty,
       };
-    }
-  );
+    });
 
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
