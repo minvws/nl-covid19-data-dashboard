@@ -6,36 +6,34 @@ This document is aimed at developers with access to the Sanity CMS. It describes
 some of the ins and outs around locale texts that we use to translate
 short-copy. These text strings used to be in a tool called Lokalize and even
 though they now live as documents in Sanity, we still tend to refer to them as
-lokalize texts.
-
-The scripts mentioned in this document are currently available from the
-`packages/cms` root.
+"lokalize texts".
 
 ### Key Takeaways
 
 In summary these are the most important things you should be aware of:
 
-- Run `yarn lokalize:export` to bring your local JSON files up-to-date with the
+- Commands are run with `yarn lokalize:[command]` from the `packages/cms` root
+- The `export` command brings your local JSON files up-to-date with the
   Sanity dataset. The Typescript compiler will error when your JSON files do not
   contain all the texts which are referenced in the code.
-- Use the command line tool to add and remove short-copy texts to/from the
-  Sanity development dataset. Every mutation is logged to `key-mutations.csv`.
-  This file is used to synchronize the changes to the production dataset when
-  needed. If you need to add multiple keys you can do this by editing the JSON
-  file (read more below). You should **never** have to manually edit the
-  mutations file.
-- Merge conflicts in the mutations file will be very common, but **always**
+- Use the `add` and `delete` commands to add/remove
+  short-copy texts to/from the Sanity development dataset. Every mutation is
+  logged to `key-mutations.csv`. This file is used to synchronize the changes to
+  the production dataset when needed. If you need to add multiple keys you can
+  do this by editing the JSON file (read more below). You should **never** have
+  to manually edit the mutations file.
+- Merge conflicts in the mutations file are common, but **always**
   choose to **accept both changes**, so that you never remove any mutations. You
   do not have to worry about the order of the timestamps, as these mutations are
   sorted before they are applied.
 - When a feature branch gets merged into develop, the `sync-after-feature`
-  script is ran which adds new texts to production so that the communication
+  command runs which adds new texts to production so that the communication
   team can prepare them for upcoming release.
 - After a release, we manually run the `sync-after-release`, which then strips
   all keys from production that are not in use in development anymore. This also
   clears the mutations log file which should then be committed. **Do not delete
   texts from development between deploying the release and running the
-  `sync-after-release` script**.
+  `sync-after-release` command**.
 
 ### Mutations File
 
@@ -88,8 +86,8 @@ easily find a nested location.
 Using the `-k` or `--key` flag you can pre-specify the key/path in dot notation
 that the new text should get.
 
-Using the `-s` or `--sync` flag allows you to easily add multiple texts at once
-by simply making your edits directly in the JSON file at
+Using the `-s` or `--sync` flag allows you to add multiple texts at once
+by making your edits directly in the JSON file at
 `packages/app/public/nl-export.json`. The script will then compare all the keys
 in your local JSON file with the Sanity dataset and present you with a list of
 all keys that would become additions. You can then select which ones to actually
@@ -133,7 +131,7 @@ mutation from the log file and run export again.
 
 ### Sync After Feature
 
-The `sync-after-feature` script is triggered automatically by a Github Action
+The `sync-after-feature` command is triggered automatically by a Github Action
 whenever a feature branch is merged to the develop branch. It contains the
 following logic:
 
@@ -147,18 +145,18 @@ following logic:
 
 If the text additions of a feature branch get deleted after the branch was
 merged, those deletions will propagate to production after the release using the
-`sync-after-release` script.
+`sync-after-release` command.
 
 ### Sync After Release
 
-The `sync-after-release` script should be triggered manually shortly after a
+The `sync-after-release` command should be triggered manually shortly after a
 release has been deployed to production. It can not really hurt to forget to run
 it, but it can break the production build when it is triggered at the wrong
 time, so make sure you understand the logic behind it.
 
 1. Prune the production set by applying deletions. Any key that has been deleted
    from the development set as part of a feature branch (or a key that was added
-   in a feature branch but later got deleted anyway), will be removed from
+   in a feature branch but later got deleted anyway), is removed from
    production.
 2. Find any keys that are in development but not yet in production and add
    those. This is a safe-guard to solve any edge-cases that might have appeared
