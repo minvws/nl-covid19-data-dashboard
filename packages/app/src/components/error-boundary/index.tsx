@@ -22,22 +22,20 @@ function ErrorFallback({ error }: { error: Error }) {
     useState<'init' | 'copied' | 'error'>('init');
   const errorReport = formatErrorMessage(error);
 
-  function copyErrorReport() {
+  async function copyErrorReport() {
     setClipboardState('init');
-    copyErrorMessage(errorReport).then(
-      () => {
-        setClipboardState('copied');
-      },
-      () => {
-        setClipboardState('error');
-      }
-    );
+    try {
+      await navigator.clipboard.writeText(errorReport);
+      setClipboardState('copied');
+    } catch (e) {
+      setClipboardState('error');
+    }
   }
 
   const mail = siteText.common.foutmelding_email_adres;
 
   const subject = encodeURIComponent('Foutmelding op corona dashboard');
-  const body = 'test'; //;encodeURIComponent(errorReport);
+  const body = encodeURIComponent(errorReport);
   const markdownEmail = `[${mail}](mailto:${mail}?subject=${subject}&body=${body})`;
 
   return (
@@ -78,14 +76,6 @@ screen resolution: ${window.screen.width * window.devicePixelRatio}x${
 error: ${error.message}
 stacktrace:
 ${error.stack}`;
-}
-
-function copyErrorMessage(errorReport: string) {
-  try {
-    return navigator.clipboard.writeText(errorReport);
-  } catch (e) {
-    return Promise.reject(e);
-  }
 }
 
 const ErrorBox = styled.div.attrs({
