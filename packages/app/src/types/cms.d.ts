@@ -188,3 +188,9 @@ export type VaccinationPageQuery = {
   milestones: Milestones[];
   expectedMilestones: ExpectedMilestones[];
 };
+
+export type InlineLink = {
+  _key: string;
+  _type: 'link';
+  href: string;
+};
