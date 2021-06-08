@@ -251,10 +251,9 @@ const IconContainer = styled.div(
     alignItems: 'center',
 
     svg: {
-      transform: 'scale(0.8)',
       transition: 'fill 0.2s ease-out',
       fill: 'black',
-      width: asResponsiveArray({ _: 24, md: undefined }),
+      width: asResponsiveArray({ _: 20, md: undefined }),
     },
   })
 );
