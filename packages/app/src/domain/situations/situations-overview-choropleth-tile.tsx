@@ -88,7 +88,7 @@ export function SituationsOverviewChoroplethTile({
               data={{ situations: data }}
               metricName={'situations'}
               metricProperty={situation.id}
-              minHeight={200}
+              minHeight={280}
               tooltipPlacement="top-center"
               noDataFillColor={colors.data.underReported}
               tooltipContent={(
