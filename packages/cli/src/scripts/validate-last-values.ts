@@ -95,7 +95,8 @@ async function main() {
      * other time series data so we validate it separately.
      */
     if (isDefined(data.sewer_per_installation)) {
-      const perInstallationData = data.sewer_per_installation as SewerPerInstallationData;
+      const perInstallationData =
+        data.sewer_per_installation as SewerPerInstallationData;
 
       const results = perInstallationData.values.map((metricData) => {
         const installationName = metricData.rwzi_awzi_name;

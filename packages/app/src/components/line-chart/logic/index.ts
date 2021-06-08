@@ -67,7 +67,7 @@ export function getTrendData<T extends TimestampedValue>(
 
   const trendData = metricProperties.map(
     (metricProperty) =>
-      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
+      getSingleTrendData(series, metricProperty) as unknown as (TrendValue &
         TimestampedValue)[]
   );
 

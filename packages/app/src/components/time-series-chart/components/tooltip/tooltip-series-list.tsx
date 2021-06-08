@@ -127,7 +127,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                     <SeriesIcon
                       config={x}
                       value={
-                        (value[x.metricProperty] as unknown) as number | null
+                        value[x.metricProperty] as unknown as number | null
                       }
                     />
                   }

@@ -24,15 +24,11 @@ export function BarChart({
 
   const coordinates = useBarChartCoordinates(values, size.width);
 
-  const {
-    openTooltip,
-    closeTooltip,
-    keyboardNavigateTooltip,
-    tooltipState,
-  } = useTooltip<BarChartValue>({
-    values: coordinates.values,
-    getTooltipCoordinates: coordinates.getTooltipCoordinates,
-  });
+  const { openTooltip, closeTooltip, keyboardNavigateTooltip, tooltipState } =
+    useTooltip<BarChartValue>({
+      values: coordinates.values,
+      getTooltipCoordinates: coordinates.getTooltipCoordinates,
+    });
 
   return (
     <Box position="relative">

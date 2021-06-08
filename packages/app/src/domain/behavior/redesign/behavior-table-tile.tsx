@@ -44,7 +44,9 @@ export function BehaviorTableTile({
   return (
     <Tile>
       <Heading level={3}>{title}</Heading>
-      <Text mb={4}>{description}</Text>
+      <Box maxWidth="maxWidthText">
+        <Text mb={4}>{description}</Text>
+      </Box>
       <Box display="flex" flexWrap="wrap" mb={{ _: 2, xs: 4 }}>
         <Box mr={3} mb={1}>
           <ExplanationBox background={colors.data.cyan} />
@@ -161,11 +163,18 @@ function DescriptionWithIcon({
   return (
     <Button onClick={buttonClickHandler}>
       {splittedWords.map((word, index) => (
-        <InlineText key={index} css={css({ whiteSpace: 'pre-wrap' })}>
+        <InlineText
+          key={index}
+          css={css({
+            whiteSpace: 'pre-wrap',
+            fontFamily: 'body',
+            fontSize: '1rem',
+          })}
+        >
           {splittedWords.length - 1 === index ? (
             <InlineText css={css({ display: 'flex', position: 'relative' })}>
               {word}
-              <Box position="absolute" right={-12} top={-1}>
+              <Box position="absolute" right={-14} top={0}>
                 <ChevronIcon width="7px" />
               </Box>
             </InlineText>

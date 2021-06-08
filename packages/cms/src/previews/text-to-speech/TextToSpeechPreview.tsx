@@ -60,11 +60,11 @@ class TextToSpeechPreview extends React.Component<any> {
       return null;
     }
 
-    if (typeof displayed[(activeField as unknown) as string] === 'string') {
-      return displayed[(activeField as unknown) as string];
+    if (typeof displayed[activeField as unknown as string] === 'string') {
+      return displayed[activeField as unknown as string];
     }
     // we're in Portable Text now, digging into blocks
-    return blocksToText(displayed[(activeField as unknown) as string]);
+    return blocksToText(displayed[activeField as unknown as string]);
   }
 
   handleFieldChange = (field: any) => {

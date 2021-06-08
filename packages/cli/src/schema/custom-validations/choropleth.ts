@@ -54,11 +54,9 @@ export const validateChoroplethValues = (
 
   const results = commonDataProperties
     .map((propertyName) => {
-      const collectionValue = (collectionJson[
-        propertyName
-      ] as JSONValue[])?.find(
-        (x: any) => x[codeProperty] === code
-      ) as UnknownObject;
+      const collectionValue = (
+        collectionJson[propertyName] as JSONValue[]
+      )?.find((x: any) => x[codeProperty] === code) as UnknownObject;
 
       if (!collectionValue) {
         return `No item with property ${codeProperty} == ${code} was found in the ${propertyName} collection (${collectionJsonFilename})`;
