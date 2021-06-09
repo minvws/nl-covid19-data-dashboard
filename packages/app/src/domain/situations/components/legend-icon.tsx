@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { Children, cloneElement } from 'react';
 import { Box } from '~/components/base';
 
 export function LegendIcon({
@@ -12,21 +13,26 @@ export function LegendIcon({
     <Box
       css={css({
         bg: color,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         color: 'white',
-        minHeight: '20px',
-        minWidth: '20px',
-        maxHeight: '20px',
-        maxWidth: '20px',
-        padding: '2px',
-        paddingTop: '1px',
-        borderRadius: '10px',
+        minHeight: '1.4em',
+        minWidth: '1.4em',
+        maxHeight: '1.4em',
+        maxWidth: '1.4em',
+        borderRadius: '.7em',
         '& svg': {
-          height: '16px',
-          width: '16px',
+          height: '1em',
+          width: '1em',
         },
       })}
     >
-      {children}
+      {Children.map(children, (child) => {
+        return cloneElement(child, {
+          preserveAspectRatio: 'xMinYMid meet',
+        });
+      })}
     </Box>
   );
 }
