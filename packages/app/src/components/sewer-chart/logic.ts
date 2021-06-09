@@ -1,3 +1,4 @@
+import { SewerPerInstallationData } from '@corona-dashboard/common';
 import { Point } from '@visx/point';
 import { scaleLinear, scaleTime } from '@visx/scale';
 import { voronoi } from '@visx/voronoi';
@@ -145,6 +146,35 @@ export function useSewerStationSelectProps(values: SewerChartValue[]) {
   return props;
 }
 
+/**
+ * Using the original data as input instead of the specific scatter plot
+ * processed format. This is used the by the new sewer water chart based on
+ * TimeSeriesChart
+ */
+export function useSewerStationSelectPropsSimplified(
+  data: SewerPerInstallationData
+) {
+  const [value, setValue] = useState<string>();
+  const options = useMemo(
+    () =>
+      data.values
+        .map((x) => ({ label: x.rwzi_awzi_name, value: x.rwzi_awzi_name }))
+        .sort((a, b) => a.label.localeCompare(b.label)),
+    [data.values]
+  );
+
+  const onClear = useCallback(() => setValue(undefined), []);
+
+  const props: SelectProps<string> = {
+    options,
+    value,
+    onChange: setValue,
+    onClear,
+  };
+
+  return props;
+}
+
 export function useScatterTooltip({
   values,
   scales,
@@ -195,8 +225,9 @@ export function useScatterTooltip({
   return { datum, point, findClosest: setInputPoint, clear } as const;
 }
 
-const bisectDate = bisector<SewerChartValue, Date>((d) => new Date(d.dateMs))
-  .left;
+const bisectDate = bisector<SewerChartValue, Date>(
+  (d) => new Date(d.dateMs)
+).left;
 
 export function useLineTooltip({
   values,
@@ -290,8 +321,8 @@ export function getMax<T>(
 }
 
 /**
- * create dedupe-filter to be used within an Array.filter().
- * It will deduplicate items based on the comparison of the object's keys.
+ * create dedupe-filter to be used within an Array.filter(). It will deduplicate
+ * items based on the comparison of the object's keys.
  *
  * example:
  *

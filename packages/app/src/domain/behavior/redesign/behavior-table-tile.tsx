@@ -44,7 +44,9 @@ export function BehaviorTableTile({
   return (
     <Tile>
       <Heading level={3}>{title}</Heading>
-      <Text mb={4}>{description}</Text>
+      <Box maxWidth="maxWidthText">
+        <Text mb={4}>{description}</Text>
+      </Box>
       <Box display="flex" flexWrap="wrap" mb={{ _: 2, xs: 4 }}>
         <Box mr={3} mb={1}>
           <ExplanationBox background={colors.data.cyan} />
@@ -59,15 +61,23 @@ export function BehaviorTableTile({
         <StyledTable>
           <thead>
             <tr>
-              <HeaderCell>
+              <HeaderCell
+                css={css({
+                  width: asResponsiveArray({
+                    _: 200,
+                    sm: 300,
+                    xl: 400,
+                  }),
+                })}
+              >
                 {commonText.basisregels.header_basisregel}
               </HeaderCell>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({
-                    _: 120,
-                    sm: 150,
-                    xl: 200,
+                    _: 100,
+                    sm: 100,
+                    xl: 150,
                   }),
                 })}
               >
@@ -75,11 +85,7 @@ export function BehaviorTableTile({
               </HeaderCell>
               <HeaderCell
                 css={css({
-                  width: asResponsiveArray({
-                    _: 120,
-                    sm: 150,
-                    xl: 200,
-                  }),
+                  width: 125,
                 })}
               >
                 {commonText.basisregels.header_trend}
@@ -89,10 +95,14 @@ export function BehaviorTableTile({
           <tbody>
             {sortedCompliance.map((behavior, index) => (
               <tr key={behavior.id}>
-                <Cell>
+                <Cell
+                  css={css({
+                    minWidth: asResponsiveArray({ _: '60vw', sm: 300 }),
+                  })}
+                >
                   <Box display="flex" mr={2}>
                     <Box minWidth={32} color="black" pr={2} display="flex">
-                      <BehaviorIcon name={behavior.id} size={20} />
+                      <BehaviorIcon name={behavior.id} size={25} />
                     </Box>
                     <DescriptionWithIcon
                       description={behavior.description}
@@ -102,7 +112,7 @@ export function BehaviorTableTile({
                     />
                   </Box>
                 </Cell>
-                <Cell>
+                <Cell css={css({ minWidth: 200 })}>
                   <PercentageBarWithNumber
                     percentage={behavior.percentage}
                     color={colors.data.cyan}
@@ -112,7 +122,7 @@ export function BehaviorTableTile({
                     color={colors.data.yellow}
                   />
                 </Cell>
-                <Cell>
+                <Cell css={css({ minWidth: 125 })}>
                   <Box display="flex" flexDirection="column">
                     <BehaviorTrend
                       trend={behavior.trend}
@@ -161,11 +171,18 @@ function DescriptionWithIcon({
   return (
     <Button onClick={buttonClickHandler}>
       {splittedWords.map((word, index) => (
-        <InlineText key={index} css={css({ whiteSpace: 'pre-wrap' })}>
+        <InlineText
+          key={index}
+          css={css({
+            whiteSpace: 'pre-wrap',
+            fontFamily: 'body',
+            fontSize: '1rem',
+          })}
+        >
           {splittedWords.length - 1 === index ? (
             <InlineText css={css({ display: 'flex', position: 'relative' })}>
               {word}
-              <Box position="absolute" right={-12} top={-1}>
+              <Box position="absolute" right={-14} top={0}>
                 <ChevronIcon width="7px" />
               </Box>
             </InlineText>
@@ -226,11 +243,10 @@ const HeaderCell = styled.th(
   })
 );
 
-const Cell = styled.td((x) =>
+const Cell = styled.td(
   css({
-    color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGrey',
+    borderBottomColor: 'lightGray',
     p: 0,
     py: 2,
   })
@@ -248,6 +264,7 @@ const Button = styled.button(
     p: 0,
     m: 0,
     pr: 3,
+    flexWrap: 'wrap',
 
     '&:focus': {
       borderColor: 'lightGray',

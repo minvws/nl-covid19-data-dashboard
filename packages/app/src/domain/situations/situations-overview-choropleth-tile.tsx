@@ -1,4 +1,5 @@
 import {
+  ChoroplethThresholdsValue,
   SafetyRegionProperties,
   VrCollectionSituations,
 } from '@corona-dashboard/common';
@@ -49,64 +50,75 @@ export function SituationsOverviewChoroplethTile({
         source: text.bronnen.rivm,
       }}
     >
-      <Box
-        display="grid"
-        gridTemplateColumns="repeat(auto-fit, minmax(300px,1fr))"
-        mb={3}
-        css={css({ gap: 20 })}
-      >
-        <Box>
-          <ChoroplethLegenda
-            title={text.situaties_kaarten_overzicht.legenda.titel}
-            thresholds={regionThresholds.situations.gathering}
-          />
-        </Box>
-        <Box display="flex" alignItems="flex-end">
-          <Box display="flex" alignItems="baseline" height={42}>
-            <Box
-              size={15}
-              mr={2}
-              bg={colors.data.underReported}
-              position="relative"
-              top={'3px'}
+      <Box spacing={4}>
+        <Box
+          display="grid"
+          gridTemplateColumns="repeat(auto-fit, minmax(256px,1fr))"
+          mb={3}
+          css={css({ gap: 20 })}
+        >
+          <Box>
+            <ChoroplethLegenda
+              title={text.situaties_kaarten_overzicht.legenda.titel}
+              thresholds={regionThresholds.situations.gathering}
             />
-            <InlineText m={0} fontSize={1}>
-              {text.situaties_kaarten_overzicht.legenda.onvoldoende_data}
-            </InlineText>
+          </Box>
+          <Box display="flex" alignItems="flex-end">
+            <Box display="flex" alignItems="baseline" height={42}>
+              <Box
+                size={15}
+                mr={2}
+                bg={colors.data.underReported}
+                position="relative"
+                top={'3px'}
+              />
+              <InlineText m={0} fontSize={[0, null, 1]}>
+                {text.situaties_kaarten_overzicht.legenda.onvoldoende_data}
+              </InlineText>
+            </Box>
           </Box>
         </Box>
+        <ChoroplethGrid>
+          {situations.map((situation) => (
+            <ChoroplethGridItem
+              icon={<SituationIcon id={situation.id} />}
+              title={situation.title}
+              description={situation.description}
+              key={situation.id}
+            >
+              <SafetyRegionChoropleth
+                data={{ situations: data }}
+                metricName={'situations'}
+                metricProperty={situation.id}
+                minHeight={280}
+                tooltipPlacement="top-center"
+                noDataFillColor={colors.data.underReported}
+                tooltipContent={(
+                  context: SafetyRegionProperties & VrCollectionSituations
+                ) => (
+                  <ChoroplethTooltip
+                    isPercentage
+                    value={context[situation.id]}
+                    regionName={context.vrname}
+                    thresholds={regionThresholds.situations[situation.id]}
+                    noDataFillColor={colors.data.underReported}
+                  />
+                )}
+              />
+            </ChoroplethGridItem>
+          ))}
+        </ChoroplethGrid>
       </Box>
-      <ChoroplethGrid>
-        {situations.map((situation) => (
-          <ChoroplethGridItem
-            icon={<SituationIcon id={situation.id} />}
-            title={situation.title}
-            description={situation.description}
-            key={situation.id}
-          >
-            <SafetyRegionChoropleth
-              data={{ situations: data }}
-              metricName={'situations'}
-              metricProperty={situation.id}
-              minHeight={200}
-              tooltipPlacement="top-center"
-              noDataFillColor={colors.data.underReported}
-              tooltipContent={(
-                context: SafetyRegionProperties & VrCollectionSituations
-              ) => (
-                <ChoroplethTooltip
-                  isPercentage
-                  value={context[situation.id]}
-                  regionName={context.vrname}
-                  thresholds={regionThresholds.situations[situation.id]}
-                />
-              )}
-            />
-          </ChoroplethGridItem>
-        ))}
-      </ChoroplethGrid>
     </ChartTile>
   );
+}
+
+interface ChoroplethTooltipProps {
+  value: number | null;
+  regionName: string;
+  thresholds: ChoroplethThresholdsValue[];
+  isPercentage: boolean;
+  noDataFillColor?: string;
 }
 
 function ChoroplethTooltip({
@@ -114,11 +126,16 @@ function ChoroplethTooltip({
   isPercentage,
   regionName,
   thresholds,
-}: any) {
+  noDataFillColor,
+}: ChoroplethTooltipProps) {
   const intl = useIntl();
   return (
     <Box px={3} py={2} display="inline-block" aria-live="polite">
-      <TooltipSubject thresholdValues={thresholds} filterBelow={value}>
+      <TooltipSubject
+        thresholdValues={thresholds}
+        filterBelow={value}
+        noDataFillColor={noDataFillColor}
+      >
         {regionName + ': '}
         <InlineText
           ml={3}

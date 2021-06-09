@@ -15,6 +15,7 @@ import {
   SeriesSingleValue,
 } from '../logic';
 import { GappedLinedTrend } from './gapped-line-trend';
+import { SplitAreaTrend } from './split-area-trend';
 import { SplitBarTrend } from './split-bar-trend';
 import { StackedAreaTrend } from './stacked-area-trend';
 
@@ -36,7 +37,6 @@ interface SeriesProps<T extends TimestampedValue> {
   bounds: Bounds;
   benchmark?: BenchmarkConfig;
   chartId: string;
-  timespan: number;
 }
 
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
@@ -52,7 +52,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
   bounds,
   benchmark,
   chartId,
-  timespan,
 }: SeriesProps<T>) {
   return (
     <>
@@ -73,7 +72,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getX={getX}
                   getY={getY}
                   id={`${chartId}_${config.metricProperty}`}
-                  timespan={timespan}
                 />
               );
             case 'line':
@@ -161,6 +159,19 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY1={getY1}
                   bounds={bounds}
                   id={`${chartId}_${config.metricProperty}`}
+                />
+              );
+            case 'split-area':
+              return (
+                <SplitAreaTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  splitPoints={config.splitPoints}
+                  strokeWidth={config.strokeWidth}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  yScale={yScale}
                 />
               );
           }

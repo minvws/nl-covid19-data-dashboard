@@ -66,16 +66,19 @@ function ErrorFallback({ error }: { error: Error }) {
 }
 
 function formatErrorMessage(error: Error) {
-  return `url: ${window.location.href}
-platform: ${navigator.platform}
-userAgent: ${navigator.userAgent}
-browser dimensions: ${window.innerWidth}x${window.innerHeight}
-screen resolution: ${window.screen.width * window.devicePixelRatio}x${
-    window.screen.height * window.devicePixelRatio
-  }
-error: ${error.message}
-stacktrace:
-${error.stack}`;
+  const report = [`url: ${window.location.href}`];
+  report.push(`platform: ${navigator.platform}`);
+  report.push(`userAgent: ${navigator.userAgent}`);
+  report.push(`browser dimensions: ${window.innerWidth}x${window.innerHeight}`);
+  report.push(
+    `screen resolution: ${window.screen.width * window.devicePixelRatio}x${
+      window.screen.height * window.devicePixelRatio
+    }`
+  );
+  report.push(`error: ${error.message}`);
+  report.push(`stacktrace:`);
+  report.push(error.stack ?? 'No stack trace available');
+  return report.join('\n');
 }
 
 const ErrorBox = styled.div.attrs({
@@ -93,7 +96,8 @@ const ErrorBox = styled.div.attrs({
 const Button = styled.button(
   css({
     bg: 'transparent',
-    border: '1px solid silver',
+    border: '1px solid',
+    borderColor: 'silver',
     borderRadius: '5px',
     padding: 3,
     mr: 3,
@@ -106,7 +110,8 @@ const Button = styled.button(
 
 const ErrorReport = styled.pre(
   css({
-    border: '1px solid silver',
+    border: '1px solid',
+    borderColor: 'silver',
     overflow: 'auto',
     padding: 2,
     fontSize: 0,

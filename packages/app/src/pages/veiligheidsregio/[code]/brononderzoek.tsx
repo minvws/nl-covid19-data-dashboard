@@ -2,11 +2,18 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
+import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
+import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -19,6 +26,7 @@ import {
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -48,6 +56,7 @@ export default function BrononderzoekPage(
   } = props;
 
   const intl = useIntl();
+  const { formatNumber, formatDateSpan } = intl;
 
   const text = intl.siteText.brononderzoek;
 
@@ -57,8 +66,13 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
+  const lastValue = data.situations.last_value;
   const values = data.situations.values;
-  const singleValue = data.situations.last_value;
+
+  const [date_from, date_to] = formatDateSpan(
+    { seconds: lastValue.date_start_unix },
+    { seconds: lastValue.date_end_unix }
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -85,29 +99,77 @@ export default function BrononderzoekPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: singleValue.date_start_unix,
-                end: singleValue.date_end_unix,
+                start: lastValue.date_start_unix,
+                end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: singleValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
           />
 
           <ArticleStrip articles={content.articles} />
 
+          <TwoKpiSection>
+            <SituationsDataCoverageTile data={lastValue} />
+            {lastValue.has_sufficient_data && (
+              <KpiTile
+                title={text.veiligheidsregio_kpi.titel}
+                metadata={{
+                  date: [lastValue.date_start_unix, lastValue.date_end_unix],
+                  source: text.bronnen.rivm,
+                }}
+              >
+                {lastValue.situations_known_percentage && (
+                  <KpiValue
+                    percentage={lastValue.situations_known_percentage}
+                  />
+                )}
+                <Markdown
+                  content={replaceVariablesInText(
+                    text.veiligheidsregio_kpi.beschrijving,
+                    {
+                      date_to,
+                      date_from,
+                    }
+                  )}
+                />
+
+                <Text fontWeight="bold">
+                  {replaceComponentsInText(
+                    text.veiligheidsregio_kpi.beschrijving_bekend,
+                    {
+                      situations_known_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(lastValue.situations_known_total)}
+                        </InlineText>
+                      ),
+                      investigations_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(lastValue.investigations_total)}
+                        </InlineText>
+                      ),
+                    }
+                  )}
+                </Text>
+              </KpiTile>
+            )}
+          </TwoKpiSection>
+
+          <SituationsTableTile
+            data={lastValue}
+            metadata={{
+              date: [lastValue.date_start_unix, lastValue.date_end_unix],
+              source: text.bronnen.rivm,
+            }}
+          />
+
           {values && (
             <ChartTile
               title={text.situaties_over_tijd_grafiek.titel}
               description={text.situaties_over_tijd_grafiek.omschrijving}
-              timeframeOptions={['all', '5weeks']}
               metadata={{ source: text.bronnen.rivm }}
             >
-              {(timeframe) => (
-                <SituationsOverTimeChart
-                  timeframe={timeframe}
-                  values={values}
-                />
-              )}
+              <SituationsOverTimeChart timeframe={'all'} values={values} />
             </ChartTile>
           )}
         </TileList>

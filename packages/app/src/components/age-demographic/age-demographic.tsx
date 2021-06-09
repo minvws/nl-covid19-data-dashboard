@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
-import { ErrorBoundary } from '../error-boundary';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,

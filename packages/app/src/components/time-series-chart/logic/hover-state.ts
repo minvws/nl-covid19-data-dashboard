@@ -120,7 +120,8 @@ export function useHoverState<T extends TimestampedValue>({
         }
 
         /**
-         * Align point coordinates with actual data points by subtracting padding
+         * Align point coordinates with actual data points by subtracting
+         * padding
          */
         point.x -= padding.left;
         point.y -= padding.top;
@@ -176,7 +177,8 @@ export function useHoverState<T extends TimestampedValue>({
   );
 
   const hoverState = useMemo(() => {
-    if (!point && !hasFocus) return undefined;
+    if (!point && !hasFocus) return;
+
     const pointY = point?.y ?? 0;
 
     const barPoints: HoveredPoint<T>[] = seriesConfig
@@ -187,7 +189,7 @@ export function useHoverState<T extends TimestampedValue>({
           | undefined;
 
         if (!isPresent(seriesValue)) {
-          return undefined;
+          return;
         }
 
         const xValue = seriesValue.__date_unix;
@@ -197,7 +199,7 @@ export function useHoverState<T extends TimestampedValue>({
          * Filter series without Y value on the current valuesIndex
          */
         if (!isPresent(yValue)) {
-          return undefined;
+          return;
         }
 
         switch (config.type) {
@@ -231,20 +233,19 @@ export function useHoverState<T extends TimestampedValue>({
           | undefined;
 
         if (!isPresent(seriesValue)) {
-          return undefined;
+          return;
         }
 
         const xValue = seriesValue.__date_unix;
         const yValue = seriesValue.__value;
 
         /**
-         * Filter series without Y value on the current valuesIndex.
-         *
-         * Except when a gapped line is shown, in that case the tooltip still needs
-         * to be shown to indicate why the gap is there.
+         * Filter series without Y value on the current valuesIndex, except when
+         * a gapped line is shown. In that case the tooltip still needs to be
+         * shown to indicate why the gap is there.
          */
         if (!isPresent(yValue) && config.type !== 'gapped-line') {
-          return undefined;
+          return;
         }
 
         switch (config.type) {
@@ -256,6 +257,15 @@ export function useHoverState<T extends TimestampedValue>({
               x: xScale(xValue),
               y: yValue ? yScale(yValue) : 0,
               color: yValue ? config.color : 'transparent',
+              metricProperty: config.metricProperty,
+              seriesConfigIndex: index,
+            };
+          case 'split-area':
+            return {
+              seriesValue,
+              x: xScale(xValue),
+              y: yValue ? yScale(yValue) : 0,
+              color: findSplitPointForValue(config.splitPoints, yValue).color,
               metricProperty: config.metricProperty,
               seriesConfigIndex: index,
             };
@@ -276,7 +286,7 @@ export function useHoverState<T extends TimestampedValue>({
           | undefined;
 
         if (!isPresent(seriesValue)) {
-          return undefined;
+          return;
         }
 
         const xValue = seriesValue.__date_unix;
@@ -287,7 +297,7 @@ export function useHoverState<T extends TimestampedValue>({
          * Filter series without Y value on the current valuesIndex
          */
         if (!isPresent(yValueA) || !isPresent(yValueB)) {
-          return undefined;
+          return;
         }
 
         switch (config.type) {
@@ -326,9 +336,9 @@ export function useHoverState<T extends TimestampedValue>({
       .filter(isDefined);
 
     /**
-     * For nearest point calculation we only need to look at the y component
-     * of the mouse, since all series originate from the same original value
-     * and are thus aligned with the same timestamp.
+     * For nearest point calculation we only need to look at the y component of
+     * the mouse, since all series originate from the same original value and
+     * are thus aligned with the same timestamp.
      */
     const nearestPoint = [...linePoints, ...rangePoints, ...barPoints].sort(
       (a, b) => Math.abs(a.y - pointY) - Math.abs(b.y - pointY)
@@ -338,7 +348,7 @@ export function useHoverState<T extends TimestampedValue>({
      * Empty hoverstate when there's no nearest point detected
      */
     if (!nearestPoint) {
-      return undefined;
+      return;
     }
 
     const timespanAnnotationIndex = timespanAnnotations
@@ -397,8 +407,7 @@ function findActiveTimespanAnnotationIndex(
    */
   for (const [index, annotation] of [...timespanAnnotations].entries()) {
     /**
-     * Tesing overlap of two ranges
-     * x1 <= y2 && y1 <= x2
+     * Tesing overlap of two ranges x1 <= y2 && y1 <= x2
      */
     if (valueSpanStart <= annotation.end && annotation.start <= valueSpanEnd) {
       return index;
