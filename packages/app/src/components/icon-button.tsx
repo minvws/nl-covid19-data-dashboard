@@ -9,11 +9,10 @@ interface IconButtonProps {
   title: string;
   color?: string;
   onClick?: (evt: React.MouseEvent) => void;
-  id?: string;
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ children, size, title, color = 'currentColor', onClick, id }, ref) => {
+  ({ children, size, title, color = 'currentColor', onClick }, ref) => {
     return (
       <StyledIconButton
         ref={ref}
@@ -22,7 +21,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         onClick={onClick}
         size={size}
         color={color}
-        id={id}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
         {children}
