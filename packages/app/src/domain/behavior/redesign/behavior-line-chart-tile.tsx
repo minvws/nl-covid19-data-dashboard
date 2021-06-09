@@ -89,7 +89,7 @@ export function BehaviorLineChartTile({
             label: chartText.compliance_label,
             shortLabel: chartText.compliance_short_label,
             strokeWidth: 3,
-            color: colors.data.primary,
+            color: colors.data.cyan,
           },
           {
             type: 'line',
