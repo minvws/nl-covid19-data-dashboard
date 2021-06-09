@@ -14,6 +14,7 @@ import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
 import { BehaviorIcon } from '../components/behavior-icon';
@@ -120,9 +121,12 @@ function ChoroplethBlock({
 }: ChoroplethBlockProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const breakpoints = useBreakpoints();
+
+  const isSmallScreen = breakpoints.sm;
 
   return (
-    <Box width={{ _: '100%', lg: '50%' }}>
+    <Box width={{ _: '100%', lg: '50%' }} px={4}>
       <Heading level={4} textAlign="center">
         {title}
       </Heading>
@@ -148,7 +152,7 @@ function ChoroplethBlock({
           getLink={reverseRouter.vr.gedrag}
           metricName={`behavior_${metricName}` as 'behavior'}
           metricProperty={`${currentId}_${metricName}`}
-          minHeight={400}
+          minHeight={!isSmallScreen ? 350 : 400}
           noDataFillColor={colors.page}
           tooltipContent={(
             context: RegionsBehavior & SafetyRegionProperties

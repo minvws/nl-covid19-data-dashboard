@@ -61,15 +61,23 @@ export function BehaviorTableTile({
         <StyledTable>
           <thead>
             <tr>
-              <HeaderCell>
+              <HeaderCell
+                css={css({
+                  width: asResponsiveArray({
+                    _: 200,
+                    sm: 300,
+                    xl: 400,
+                  }),
+                })}
+              >
                 {commonText.basisregels.header_basisregel}
               </HeaderCell>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({
-                    _: 120,
-                    sm: 150,
-                    xl: 200,
+                    _: 100,
+                    sm: 100,
+                    xl: 150,
                   }),
                 })}
               >
@@ -77,11 +85,7 @@ export function BehaviorTableTile({
               </HeaderCell>
               <HeaderCell
                 css={css({
-                  width: asResponsiveArray({
-                    _: 120,
-                    sm: 150,
-                    xl: 200,
-                  }),
+                  width: 125,
                 })}
               >
                 {commonText.basisregels.header_trend}
@@ -91,10 +95,14 @@ export function BehaviorTableTile({
           <tbody>
             {sortedCompliance.map((behavior, index) => (
               <tr key={behavior.id}>
-                <Cell>
+                <Cell
+                  css={css({
+                    minWidth: asResponsiveArray({ _: '60vw', sm: 300 }),
+                  })}
+                >
                   <Box display="flex" mr={2}>
                     <Box minWidth={32} color="black" pr={2} display="flex">
-                      <BehaviorIcon name={behavior.id} size={20} />
+                      <BehaviorIcon name={behavior.id} size={25} />
                     </Box>
                     <DescriptionWithIcon
                       description={behavior.description}
@@ -104,7 +112,7 @@ export function BehaviorTableTile({
                     />
                   </Box>
                 </Cell>
-                <Cell>
+                <Cell css={css({ minWidth: 200 })}>
                   <PercentageBarWithNumber
                     percentage={behavior.percentage}
                     color={colors.data.cyan}
@@ -114,7 +122,7 @@ export function BehaviorTableTile({
                     color={colors.data.yellow}
                   />
                 </Cell>
-                <Cell>
+                <Cell css={css({ minWidth: 125 })}>
                   <Box display="flex" flexDirection="column">
                     <BehaviorTrend
                       trend={behavior.trend}
@@ -235,9 +243,8 @@ const HeaderCell = styled.th(
   })
 );
 
-const Cell = styled.td((x) =>
+const Cell = styled.td(
   css({
-    color: x.color,
     borderBottom: '1px solid',
     borderBottomColor: 'lightGray',
     p: 0,
@@ -257,6 +264,7 @@ const Button = styled.button(
     p: 0,
     m: 0,
     pr: 3,
+    flexWrap: 'wrap',
 
     '&:focus': {
       borderColor: 'lightGray',
