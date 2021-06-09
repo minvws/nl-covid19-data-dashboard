@@ -41,6 +41,22 @@ export function BehaviorTooltip({
     currentSupportValue
   );
 
+  const complianceTooltipInfo = (
+    <TooltipInfo
+      title={siteText.nl_gedrag.tooltip_labels.compliance}
+      value={currentComplianceValue}
+      background={complianceFilteredThreshold.color}
+    />
+  );
+
+  const supportTooltipInfo = (
+    <TooltipInfo
+      title={siteText.nl_gedrag.tooltip_labels.support}
+      value={currentSupportValue}
+      background={supportFilteredThreshold.color}
+    />
+  );
+
   return (
     <TooltipContent
       title={context.vrname}
@@ -54,29 +70,13 @@ export function BehaviorTooltip({
         {/* Change order of the info based on the metric name */}
         {metricName === 'compliance' ? (
           <>
-            <TooltipInfo
-              title={siteText.nl_gedrag.tooltip_labels.compliance}
-              value={currentComplianceValue}
-              background={complianceFilteredThreshold.color}
-            />
-            <TooltipInfo
-              title={siteText.nl_gedrag.tooltip_labels.support}
-              value={currentSupportValue}
-              background={supportFilteredThreshold.color}
-            />
+            {complianceTooltipInfo}
+            {supportTooltipInfo}
           </>
         ) : (
           <>
-            <TooltipInfo
-              title={siteText.nl_gedrag.tooltip_labels.support}
-              value={currentSupportValue}
-              background={supportFilteredThreshold.color}
-            />
-            <TooltipInfo
-              title={siteText.nl_gedrag.tooltip_labels.compliance}
-              value={currentComplianceValue}
-              background={complianceFilteredThreshold.color}
-            />
+            {supportTooltipInfo}
+            {complianceTooltipInfo}
           </>
         )}
       </Box>
