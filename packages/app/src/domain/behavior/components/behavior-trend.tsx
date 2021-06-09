@@ -51,7 +51,7 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
     );
   }
   return (
-    <Trend color={color ?? colors.data.neutral}>
+    <Trend color={colors.data.neutral}>
       <Gelijk />
       {commonText.basisregels.trend_gelijk}
     </Trend>
