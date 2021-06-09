@@ -25,8 +25,7 @@
         "partially_vaccinated_percentage",
         "partially_or_fully_vaccinated_percentage",
         "date_of_insertion_unix",
-        "date_start_unix",
-        "date_end_unix",
+        "date_unix",
         "date_of_report_unix",
         "fully_vaccinated",
         "partially_vaccinated"
@@ -56,10 +55,7 @@
         "partially_or_fully_vaccinated_percentage": {
           "type": "number"
         },
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
