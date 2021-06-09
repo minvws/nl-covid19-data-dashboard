@@ -18,6 +18,7 @@ interface BehaviorTooltipProps {
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number;
   currentSupportValue: number;
+  behaviorType: 'compliance' | 'support';
 }
 
 export function BehaviorTooltip({
@@ -25,6 +26,7 @@ export function BehaviorTooltip({
   currentMetric,
   currentComplianceValue,
   currentSupportValue,
+  behaviorType,
 }: BehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -39,6 +41,22 @@ export function BehaviorTooltip({
     currentSupportValue
   );
 
+  const complianceTooltipInfo = (
+    <TooltipInfo
+      title={siteText.nl_gedrag.tooltip_labels.compliance}
+      value={currentComplianceValue}
+      background={complianceFilteredThreshold.color}
+    />
+  );
+
+  const supportTooltipInfo = (
+    <TooltipInfo
+      title={siteText.nl_gedrag.tooltip_labels.support}
+      value={currentSupportValue}
+      background={supportFilteredThreshold.color}
+    />
+  );
+
   return (
     <TooltipContent
       title={context.vrname}
@@ -48,16 +66,19 @@ export function BehaviorTooltip({
         <Text m={0} mb={2} fontWeight="bold">
           {siteText.gedrag_onderwerpen[currentMetric]}
         </Text>
-        <TooltipInfo
-          title={siteText.nl_gedrag.tooltip_labels.compliance}
-          value={currentComplianceValue}
-          background={complianceFilteredThreshold.color}
-        />
-        <TooltipInfo
-          title={siteText.nl_gedrag.tooltip_labels.support}
-          value={currentSupportValue}
-          background={supportFilteredThreshold.color}
-        />
+
+        {/* Change order of the info based on the metric name */}
+        {behaviorType === 'compliance' ? (
+          <>
+            {complianceTooltipInfo}
+            {supportTooltipInfo}
+          </>
+        ) : (
+          <>
+            {supportTooltipInfo}
+            {complianceTooltipInfo}
+          </>
+        )}
       </Box>
     </TooltipContent>
   );
