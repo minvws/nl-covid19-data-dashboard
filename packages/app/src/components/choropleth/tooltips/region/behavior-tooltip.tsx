@@ -18,7 +18,7 @@ interface BehaviorTooltipProps {
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number;
   currentSupportValue: number;
-  metricName: 'compliance' | 'support';
+  metricPropertyGroup: 'compliance' | 'support';
 }
 
 export function BehaviorTooltip({
@@ -26,7 +26,7 @@ export function BehaviorTooltip({
   currentMetric,
   currentComplianceValue,
   currentSupportValue,
-  metricName,
+  metricPropertyGroup,
 }: BehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -68,7 +68,7 @@ export function BehaviorTooltip({
         </Text>
 
         {/* Change order of the info based on the metric name */}
-        {metricName === 'compliance' ? (
+        {metricPropertyGroup === 'compliance' ? (
           <>
             {complianceTooltipInfo}
             {supportTooltipInfo}

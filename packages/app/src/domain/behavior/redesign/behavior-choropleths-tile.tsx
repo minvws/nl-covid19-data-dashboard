@@ -83,7 +83,7 @@ export function BehaviorChoroplethsTile({
         <ChoroplethBlock
           title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
           data={{ behavior_compliance: data }}
-          metricName="compliance"
+          metricPropertyGroup="compliance"
           currentId={currentId}
           keysWithoutData={keysWithoutData}
           thresholds={regionThresholds.behavior_compliance}
@@ -92,7 +92,7 @@ export function BehaviorChoroplethsTile({
         <ChoroplethBlock
           title={siteText.nl_gedrag.verdeling_in_nederland.support_title}
           data={{ behavior_support: data }}
-          metricName="support"
+          metricPropertyGroup="support"
           currentId={currentId}
           keysWithoutData={keysWithoutData}
           thresholds={regionThresholds.behavior_support}
@@ -105,7 +105,7 @@ export function BehaviorChoroplethsTile({
 interface ChoroplethBlockProps {
   data: { [key: string]: RegionsBehavior[] };
   keysWithoutData: BehaviorIdentifier[];
-  metricName: 'compliance' | 'support';
+  metricPropertyGroup: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
   title: string;
   thresholds: ChoroplethThresholdsValue[];
@@ -114,7 +114,7 @@ interface ChoroplethBlockProps {
 function ChoroplethBlock({
   data,
   keysWithoutData,
-  metricName,
+  metricPropertyGroup,
   currentId,
   title,
   thresholds,
@@ -150,8 +150,8 @@ function ChoroplethBlock({
         <SafetyRegionChoropleth
           data={data as { behavior: RegionsBehavior[] }}
           getLink={reverseRouter.vr.gedrag}
-          metricName={`behavior_${metricName}` as 'behavior'}
-          metricProperty={`${currentId}_${metricName}`}
+          metricName={`behavior_${metricPropertyGroup}` as 'behavior'}
+          metricProperty={`${currentId}_${metricPropertyGroup}`}
           minHeight={!isSmallScreen ? 350 : 400}
           noDataFillColor={colors.page}
           tooltipContent={(
@@ -167,7 +167,7 @@ function ChoroplethBlock({
 
             return (
               <BehaviorTooltip
-                metricName={metricName}
+                metricPropertyGroup={metricPropertyGroup}
                 context={context}
                 currentMetric={currentId}
                 currentComplianceValue={
