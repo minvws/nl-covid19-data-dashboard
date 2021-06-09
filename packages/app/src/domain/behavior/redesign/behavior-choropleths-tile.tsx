@@ -5,6 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
+import { AccessibilityDescription } from '~/components/accessibility-description';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
@@ -129,36 +130,40 @@ function ChoroplethBlock({
             </Text>
           </Box>
         )}
-        <SafetyRegionChoropleth
-          data={data as { behavior: RegionsBehavior[] }}
-          getLink={reverseRouter.vr.gedrag}
-          metricName={`behavior_${metricName}` as 'behavior'}
-          metricProperty={`${currentId}_${metricName}`}
-          minHeight={400}
-          noDataFillColor={colors.page}
-          tooltipContent={(
-            context: RegionsBehavior & SafetyRegionProperties
-          ) => {
-            const currentComplianceValue =
-              `${currentId}_compliance` as keyof RegionsBehavior;
-            const currentSupportValue =
-              `${currentId}_support` as keyof RegionsBehavior;
+        <AccessibilityDescription
+          options={{ key: `behavior_${metricName}__choropleth` }}
+        >
+          <SafetyRegionChoropleth
+            data={data as { behavior: RegionsBehavior[] }}
+            getLink={reverseRouter.vr.gedrag}
+            metricName={`behavior_${metricName}` as 'behavior'}
+            metricProperty={`${currentId}_${metricName}`}
+            minHeight={400}
+            noDataFillColor={colors.page}
+            tooltipContent={(
+              context: RegionsBehavior & SafetyRegionProperties
+            ) => {
+              const currentComplianceValue =
+                `${currentId}_compliance` as keyof RegionsBehavior;
+              const currentSupportValue =
+                `${currentId}_support` as keyof RegionsBehavior;
 
-            // Return null when there is no data available to prevent breaking the application when using tab
-            if (keysWithoutData.includes(currentId)) return null;
+              // Return null when there is no data available to prevent breaking the application when using tab
+              if (keysWithoutData.includes(currentId)) return null;
 
-            return (
-              <BehaviorTooltip
-                context={context}
-                currentMetric={currentId}
-                currentComplianceValue={
-                  context[currentComplianceValue] as number
-                }
-                currentSupportValue={context[currentSupportValue] as number}
-              />
-            );
-          }}
-        />
+              return (
+                <BehaviorTooltip
+                  context={context}
+                  currentMetric={currentId}
+                  currentComplianceValue={
+                    context[currentComplianceValue] as number
+                  }
+                  currentSupportValue={context[currentSupportValue] as number}
+                />
+              );
+            }}
+          />
+        </AccessibilityDescription>
       </Box>
       <Box
         display="flex"

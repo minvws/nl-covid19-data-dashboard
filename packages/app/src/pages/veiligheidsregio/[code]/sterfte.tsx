@@ -137,6 +137,10 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             description={
               text.section_deceased_rivm.line_chart_covid_daily_description
             }
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
           >
             {(timeframe) => (

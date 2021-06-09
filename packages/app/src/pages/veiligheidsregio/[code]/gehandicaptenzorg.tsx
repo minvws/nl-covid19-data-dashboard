@@ -114,6 +114,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={positiveTestPeopleText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             description={positiveTestPeopleText.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -212,6 +216,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               }}
               timeframeOptions={['all', '5weeks']}
               description={locationsText.linechart_description}
+              accessibility={{
+                description: 'Line chart with keyboard interaction, something',
+                features: ['keyboard_line_chart'],
+              }}
             >
               {(timeframe) => (
                 <TimeSeriesChart
@@ -268,6 +276,10 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={mortalityText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             description={mortalityText.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart

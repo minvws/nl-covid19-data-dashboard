@@ -3,6 +3,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { Box } from '~/components/base';
+import { AccessibilityDescription } from '~/components/accessibility-description';
 import { RichContent } from '~/components/cms/rich-content';
 import { Metadata } from '~/components/content-header/metadata';
 import { DecoratedLink } from '~/components/decorated-link';
@@ -77,12 +78,18 @@ export function VaccinePageIntroduction({
                   {text.grafiek_gezette_prikken.titel}
                 </Heading>
                 <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
-                <div css={css({ position: 'relative' })}>
-                  <VaccineAdministrationsOverTimeChart
-                    title={text.grafiek_gezette_prikken.titel}
-                    values={data.vaccine_administered_total.values}
-                  />
-                </div>
+                <AccessibilityDescription
+                  options={{
+                    key: 'vaccine_introduction_administrations_over_time',
+                  }}
+                >
+                  <div css={css({ position: 'relative' })}>
+                    <VaccineAdministrationsOverTimeChart
+                      title={text.grafiek_gezette_prikken.titel}
+                      values={data.vaccine_administered_total.values}
+                    />
+                  </div>
+                </AccessibilityDescription>
               </Box>
 
               <Box as="article" spacing={3}>

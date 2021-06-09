@@ -63,7 +63,14 @@ export function BehaviorLineChartTile({
     `${currentId}_support` as keyof NationalBehaviorValue;
 
   return (
-    <ChartTile title={chartText.title} metadata={metadata}>
+    <ChartTile
+      title={chartText.title}
+      metadata={metadata}
+      accessibility={{
+        description: 'Line chart with keyboard interaction, something',
+        features: ['keyboard_line_chart'],
+      }}
+    >
       <Text css={css({ maxWidth: '30em' })}>{chartText.description}</Text>
       <Box>
         <Select

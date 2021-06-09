@@ -66,9 +66,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.rioolwater_metingen;
 
   const sewerAverages = data.sewer;
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -162,6 +161,10 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
             description={text.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart

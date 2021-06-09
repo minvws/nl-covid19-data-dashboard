@@ -132,6 +132,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{ source: text.bronnen.nice }}
             timeframeOptions={['all', '5weeks']}
           >
@@ -207,6 +211,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={siteText.ic_admissions_per_age_group.chart_title}
             description={siteText.ic_admissions_per_age_group.chart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             timeframeOptions={['all', '5weeks']}
             metadata={{ source: text.bronnen.nice }}
           >
@@ -221,6 +229,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{ source: text.bronnen.lnaz }}
             timeframeOptions={['all', '5weeks']}
           >

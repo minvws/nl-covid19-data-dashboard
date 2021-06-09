@@ -2,6 +2,10 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
+import {
+  AccessibilityDescription,
+  AccessibilityOptions,
+} from '~/components/accessibility-description';
 import { NumberProperty } from '~/components/line-chart/logic';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -17,6 +21,7 @@ type MiniTrendTileProps<T extends TimestampedValue> = {
   trendData: T[];
   metricProperty: NumberProperty<T>;
   href: string;
+  accessibility: AccessibilityOptions;
 };
 
 export function MiniTrendTile<T extends TimestampedValue>(
@@ -24,7 +29,8 @@ export function MiniTrendTile<T extends TimestampedValue>(
 ) {
   const { formatNumber } = useIntl();
 
-  const { icon, title, text, trendData, metricProperty, href } = props;
+  const { icon, title, text, trendData, metricProperty, href, accessibility } =
+    props;
 
   const value = trendData[trendData.length - 1][metricProperty];
 
@@ -67,22 +73,24 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
       <Box>{text}</Box>
 
-      <TimeSeriesChart
-        initialWidth={400}
-        minHeight={sm ? 180 : 140}
-        timeframe="5weeks"
-        values={trendData}
-        displayTooltipValueOnly
-        numGridLines={2}
-        seriesConfig={[
-          {
-            metricProperty,
-            type: 'area',
-            label: title,
-            color: colors.data.primary,
-          },
-        ]}
-      />
+      <AccessibilityDescription options={accessibility}>
+        <TimeSeriesChart
+          initialWidth={400}
+          minHeight={sm ? 180 : 140}
+          timeframe="5weeks"
+          values={trendData}
+          displayTooltipValueOnly
+          numGridLines={2}
+          seriesConfig={[
+            {
+              metricProperty,
+              type: 'area',
+              label: title,
+              color: colors.data.primary,
+            },
+          ]}
+        />
+      </AccessibilityDescription>
     </Box>
   );
 }

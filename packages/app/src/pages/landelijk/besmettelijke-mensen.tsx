@@ -84,6 +84,10 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             description={text.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart

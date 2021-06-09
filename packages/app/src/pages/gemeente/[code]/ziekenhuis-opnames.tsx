@@ -162,6 +162,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
           >

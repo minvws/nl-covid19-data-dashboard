@@ -133,6 +133,10 @@ const ElderlyAtHomeRegionalPage = (
             description={
               text.section_positive_tested.line_chart_daily_description
             }
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -220,6 +224,10 @@ const ElderlyAtHomeRegionalPage = (
             title={text.section_deceased.line_chart_daily_title}
             metadata={{ source: text.section_positive_tested.bronnen.rivm }}
             description={text.section_deceased.line_chart_daily_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart

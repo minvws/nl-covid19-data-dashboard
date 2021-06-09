@@ -72,19 +72,14 @@ export const getStaticProps = createGetStaticProps(
 
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
-  const {
-    siteText,
-    formatNumber,
-    formatPercentage,
-    formatDateFromSeconds,
-  } = useIntl();
+  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+    useIntl();
   const reverseRouter = useReverseRouter();
 
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
@@ -198,6 +193,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
             description={text.map_toelichting}
+            accessibility={{
+              key: `tested_overal_${selectedMap}_choropleth`,
+            }}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
             legend={{
@@ -243,6 +241,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               source: text.bronnen.rivm,
             }}
@@ -316,6 +318,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={siteText.infected_per_age_group.title}
             description={siteText.infected_per_age_group.description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             timeframeOptions={['all', '5weeks']}
             metadata={{
               source: text.bronnen.rivm,
@@ -404,6 +410,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               source: ggdText.bronnen.rivm,
             }}
@@ -457,6 +467,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               source: ggdText.bronnen.rivm,
             }}

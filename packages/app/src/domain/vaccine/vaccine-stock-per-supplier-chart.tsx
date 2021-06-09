@@ -98,6 +98,10 @@ export function VaccineStockPerSupplierChart({
     <ChartTile
       title={text.title}
       description={text.description}
+      accessibility={{
+        description: 'Line chart with keyboard interaction, something',
+        features: ['keyboard_line_chart'],
+      }}
       metadata={{
         source: siteText.vaccinaties.bronnen.rivm,
       }}

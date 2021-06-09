@@ -13,6 +13,7 @@ import {
 import { getLastGeneratedDate } from '~/static-props/get-data';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { AccessibilityDescription } from '~/components/accessibility-description';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -51,14 +52,18 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             maxHeight={960}
             margin="0 auto"
           >
-            <MunicipalityNavigationMap
-              tooltipContent={(context) => (
-                <TooltipContent
-                  title={context.gemnaam}
-                  link={reverseRouter.gm.index(context.gmcode)}
-                />
-              )}
-            />
+            <AccessibilityDescription
+              options={{ key: 'municipality_navigation_map' }}
+            >
+              <MunicipalityNavigationMap
+                tooltipContent={(context) => (
+                  <TooltipContent
+                    title={context.gemnaam}
+                    link={reverseRouter.gm.index(context.gmcode)}
+                  />
+                )}
+              />
+            </AccessibilityDescription>
           </Box>
         </Box>
       </MunicipalityLayout>

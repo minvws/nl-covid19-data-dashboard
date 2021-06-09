@@ -35,6 +35,10 @@ export function DeceasedMonitorSection({
         metadata={{ source: text.bronnen.cbs }}
         title={text.deceased_monitor_chart_title}
         description={text.deceased_monitor_chart_description}
+        accessibility={{
+          description: 'Line chart with keyboard interaction, something',
+          features: ['keyboard_line_chart'],
+        }}
       >
         <TimeSeriesChart
           tooltipTitle={text.deceased_monitor_chart_title}

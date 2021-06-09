@@ -177,6 +177,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               source: text.bronnen.rivm,
             }}

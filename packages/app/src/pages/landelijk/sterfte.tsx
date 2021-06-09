@@ -121,6 +121,10 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             description={
               text.section_deceased_rivm.line_chart_covid_daily_description
             }
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{ source: text.section_deceased_rivm.bronnen.rivm }}
           >
             {(timeframe) => (
@@ -173,6 +177,10 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={siteText.deceased_age_groups.title}
             description={siteText.deceased_age_groups.description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               date: dataRivm.last_value.date_unix,
               source: siteText.deceased_age_groups.bronnen.rivm,

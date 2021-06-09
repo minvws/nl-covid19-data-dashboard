@@ -105,6 +105,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             description={positiveTestedPeopleText.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
@@ -233,6 +237,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             description={infectedLocationsText.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart
@@ -289,6 +297,10 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={deceased.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             description={deceased.linechart_description}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) => (
               <TimeSeriesChart

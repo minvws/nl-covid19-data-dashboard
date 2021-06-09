@@ -61,7 +61,14 @@ export function BehaviorLineChartTile({
     .filter(isPresent);
 
   return (
-    <ChartTile title={title} metadata={{}}>
+    <ChartTile
+      title={title}
+      metadata={{}}
+      accessibility={{
+        key: 'behavior_line_chart',
+        features: ['keyboard_line_chart'],
+      }}
+    >
       <Box display="flex" justifyContent="start" mb={3}>
         <BehaviorTypeControl value={type} onChange={setType} />
       </Box>

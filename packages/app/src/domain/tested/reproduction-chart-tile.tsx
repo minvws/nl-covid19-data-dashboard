@@ -39,6 +39,10 @@ export function ReproductionChartTile({
     <ChartTile
       title={text.linechart_titel}
       description={text.legenda_r}
+      accessibility={{
+        description: 'Line chart with keyboard interaction, something',
+        features: ['keyboard_line_chart'],
+      }}
       timeframeOptions={timeframeOptions}
       timeframeInitialValue={timeframeInitialValue}
       metadata={{

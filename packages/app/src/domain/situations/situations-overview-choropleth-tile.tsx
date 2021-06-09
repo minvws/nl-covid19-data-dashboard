@@ -43,6 +43,10 @@ export function SituationsOverviewChoroplethTile({
         text.situaties_kaarten_overzicht.beschrijving,
         { date_from, date_to }
       )}
+      accessibility={{
+        description: 'Line chart with keyboard interaction, something',
+        features: ['keyboard_line_chart'],
+      }}
       metadata={{
         date: [singleValue.date_start_unix, singleValue.date_end_unix],
         source: text.bronnen.rivm,

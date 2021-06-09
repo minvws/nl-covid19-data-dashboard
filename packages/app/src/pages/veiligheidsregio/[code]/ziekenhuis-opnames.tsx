@@ -168,6 +168,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             description={text.linechart_description}
             timeframeOptions={['all', '5weeks']}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
           >
             {(timeframe) =>
               featureHospitalMovingAverage.isEnabled ? (

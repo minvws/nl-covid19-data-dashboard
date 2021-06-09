@@ -182,6 +182,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               source: text.bronnen.rivm,
             }}
@@ -355,6 +359,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               source: ggdText.bronnen.rivm,
             }}
@@ -408,6 +416,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
+            accessibility={{
+              description: 'Line chart with keyboard interaction, something',
+              features: ['keyboard_line_chart'],
+            }}
             metadata={{
               source: ggdText.bronnen.rivm,
             }}

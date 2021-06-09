@@ -1,6 +1,10 @@
 import { assert } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
 import { TimeframeOption } from '~/utils/timeframe';
+import {
+  AccessibilityDescription,
+  AccessibilityOptions,
+} from './accessibility-description';
 import { Box } from './base';
 import { ChartTimeControls } from './chart-time-controls';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
@@ -41,6 +45,7 @@ function ChartTileHeader({
 type ChartTileProps = {
   title: string;
   metadata: MetadataProps;
+  accessibility: AccessibilityOptions;
   description?: string;
   timeframeInitialValue?: TimeframeOption;
 } & (
@@ -58,6 +63,7 @@ type ChartTileProps = {
 export function ChartTile({
   title,
   description,
+  accessibility,
   children,
   metadata,
   timeframeOptions,
@@ -78,13 +84,15 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
-      {timeframeOptions
-        ? (assert(
-            typeof children === 'function',
-            'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
-          ),
-          children(timeframe))
-        : children}
+      <AccessibilityDescription options={accessibility}>
+        {timeframeOptions
+          ? (assert(
+              typeof children === 'function',
+              'When using timeframeOptions, we expect a function-as-child component to handle the timeframe value.'
+            ),
+            children(timeframe))
+          : children}
+      </AccessibilityDescription>
     </FullscreenChartTile>
   );
 }
