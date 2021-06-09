@@ -1,6 +1,6 @@
 import { StructureBuilder as S } from '@sanity/structure';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
-import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
+import { GrCircleInformation, GrDashboard, GrSplits } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
@@ -35,6 +35,7 @@ const hiddenDocTypes = [
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
+  'footer',
 ];
 
 export default () =>
@@ -111,6 +112,7 @@ export default () =>
       addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
       addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
+      addListItem(GrSplits, 'Footer', 'footer'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
 
       S.divider(),
