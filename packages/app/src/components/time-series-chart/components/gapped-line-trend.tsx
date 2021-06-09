@@ -12,12 +12,10 @@ type GappedLinedTrendProps = {
   getY: (v: SeriesSingleValue) => number;
   curve?: 'linear' | 'step';
   id: string;
-  timespan: number;
 };
 
 export function GappedLinedTrend(props: GappedLinedTrendProps) {
-  const { series, color, style, strokeWidth, getX, getY, curve, id, timespan } =
-    props;
+  const { series, color, style, strokeWidth, getX, getY, curve, id } = props;
 
   /**
    * Here we loop through the series and each time a null value is encountered a
@@ -39,22 +37,6 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
     },
     [[]]
   );
-
-  const halfOfTimespan = timespan / 2;
-  gappedSeries.forEach((item, index, array) => {
-    if (item.length === 1 && timespan > 0) {
-      array[index] = [
-        {
-          __value: item[0].__value,
-          __date_unix: item[0].__date_unix - halfOfTimespan,
-        },
-        {
-          __value: item[0].__value,
-          __date_unix: item[0].__date_unix + halfOfTimespan,
-        },
-      ];
-    }
-  });
 
   return (
     <>
