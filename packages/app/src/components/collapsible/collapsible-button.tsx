@@ -11,7 +11,6 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useSetLinkTabbability } from './use-set-link-tabbability';
-import { colors } from '~/style/theme';
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;
