@@ -15,10 +15,10 @@ interface ModalProps {
 
 export function Modal({ id, children, onClose, isFullheight }: ModalProps) {
   const clickRef = useRef<HTMLDivElement>(null);
-  const divId = useUniqueId();
+  const focusId = useUniqueId();
   useHotkey('esc', onClose);
   const focusRef = useFocusTrap(true, {
-    focusSelector: `#${divId}`,
+    focusSelector: `#${focusId}`,
   });
 
   return (
@@ -29,7 +29,7 @@ export function Modal({ id, children, onClose, isFullheight }: ModalProps) {
           css={css({ p: 5, height: isFullheight ? '100%' : undefined })}
           onClick={(evt) => evt.target === clickRef.current && onClose()}
           ref={clickRef}
-          id={divId}
+          id={focusId}
         >
           {children}
         </div>
