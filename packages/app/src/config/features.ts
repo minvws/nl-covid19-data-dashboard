@@ -33,7 +33,7 @@ export const features: Feature[] = [
   },
   {
     name: 'sewerSplitAreaChart',
-    isEnabled: true,
+    isEnabled: false,
   },
   {
     name: 'behaviorPage',
