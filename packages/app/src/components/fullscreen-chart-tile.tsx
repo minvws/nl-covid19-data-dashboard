@@ -7,7 +7,6 @@ import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { usePrevious } from '~/utils/use-previous';
-import { useUniqueId } from '~/utils/use-unique-id';
 import { Spacer } from './base';
 import { IconButton } from './icon-button';
 import { Metadata, MetadataProps } from './metadata';
@@ -40,8 +39,6 @@ export function FullscreenChartTile({
     { subject: intl.siteText.common.grafiek_singular }
   );
 
-  const closeButtonId = useUniqueId();
-
   const tile = (
     <Tile height="100%">
       {children}
@@ -68,7 +65,6 @@ export function FullscreenChartTile({
             title={label}
             onClick={() => setIsFullscreen((x) => !x)}
             size={36}
-            id={isFullscreen ? closeButtonId : undefined}
           >
             {isFullscreen ? <CloseIcon /> : <ExpandIcon />}
           </IconButton>
@@ -90,7 +86,6 @@ export function FullscreenChartTile({
         <Modal
           id="chart-tile-container"
           onClose={() => setIsFullscreen(false)}
-          focusSelector={`#${closeButtonId}`}
           isFullheight
         >
           {tile}
