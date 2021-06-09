@@ -133,7 +133,6 @@ export function SEOHead(props: SEOHeadProps) {
         type="font/woff"
       />
 
-      <link rel="icon" href="/images/touch-icon.png" />
       <link rel="apple-touch-icon" href="/images/touch-icon.png" />
 
       <meta key="description" name="description" content={description} />
