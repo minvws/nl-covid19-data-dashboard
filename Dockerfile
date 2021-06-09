@@ -37,6 +37,8 @@ RUN yarn workspace @corona-dashboard/common build \
 
 # Layer that always gets executed
 FROM builder
+
+# Yarn download uses the API_URL env variable to download the zip with JSONs from the provided URL.
 RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-json-all \
 && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
