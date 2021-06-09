@@ -19,7 +19,7 @@ type LineTrendProps = {
   id: string;
 };
 
-const FOUR_HOURS = 24 * 60 * 60;
+const ONE_DAY = 24 * 60 * 60;
 
 export function LineTrend({
   series,
@@ -36,11 +36,11 @@ export function LineTrend({
     if (nonNull.length === 1) {
       nonNull = [
         {
-          __date_unix: nonNull[0].__date_unix - FOUR_HOURS,
+          __date_unix: nonNull[0].__date_unix - ONE_DAY,
           __value: nonNull[0].__value,
         },
         {
-          __date_unix: nonNull[0].__date_unix + FOUR_HOURS,
+          __date_unix: nonNull[0].__date_unix + ONE_DAY,
           __value: nonNull[0].__value,
         },
       ];
