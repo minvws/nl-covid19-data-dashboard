@@ -10,7 +10,7 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { TimespanAnnotationConfig } from './common';
 
-const HALF_DAY_IN_SECONDS = (24 * 60 * 60) / 2;
+const HALF_DAY_IN_SECONDS = 12 * 60 * 60;
 
 /**
  * This hook scans the given values collection for consecutive items with invalid/incomplete
