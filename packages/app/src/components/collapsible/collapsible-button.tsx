@@ -136,7 +136,6 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
       zIndex: 1,
       width: x.isOpen ? '100%' : 'fit-content',
       border: '1px solid',
