@@ -166,11 +166,8 @@ const Container = styled(Box).attrs({ as: 'section' })<{
           fill: 'blue',
         },
 
-        // The inset box shadow has the same working as a border but can animate on Safari
         '&:before': {
-          boxShadow: x.isOpen
-            ? `inset 0 0 0 1px ${colors.lightGray}`
-            : `inset 0 0 0 1px ${colors.data.primary}`,
+          borderColor: x.isOpen ? 'lightGray' : 'data.primary',
         },
       },
 
@@ -182,11 +179,13 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         top: 0,
         width: x.isOpen ? '100%' : x.buttonWidth,
         height: '100%',
-        boxShadow: `inset 0 0 0 1px ${colors.lightGray}`,
+        border: '1px solid',
         borderRadius: 1,
+        borderColor: 'lightGray',
         zIndex: -1,
         content: x.isMounted ? '""' : 'unset',
         pointerEvents: 'none',
+        transform: 'translateZ(0)',
 
         '.has-no-js &': {
           content: 'unset',
