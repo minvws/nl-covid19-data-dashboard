@@ -126,7 +126,7 @@ function ChoroplethBlock({
   const isSmallScreen = breakpoints.sm;
 
   return (
-    <Box width={{ _: '100%', lg: '50%' }} px={4}>
+    <Box width={{ _: '100%', lg: '50%' }}>
       <Heading level={4} textAlign="center">
         {title}
       </Heading>
