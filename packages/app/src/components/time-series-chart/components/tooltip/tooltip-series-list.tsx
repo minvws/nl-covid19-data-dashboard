@@ -78,6 +78,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 
           switch (x.type) {
             case 'stacked-area':
+            case 'gapped-line':
             case 'line':
             case 'area':
             case 'bar':
@@ -117,6 +118,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                 </TooltipListItem>
               );
 
+            case 'split-area':
             case 'split-bar':
               return (
                 <TooltipListItem
@@ -169,7 +171,9 @@ function TooltipListItem({
             <VisuallyHidden>
               <InlineText mr={2}>{label}:</InlineText>
             </VisuallyHidden>
-            <TooltipEntryValue>{children}</TooltipEntryValue>
+            <TooltipEntryValue isCentered={displayTooltipValueOnly}>
+              {children}
+            </TooltipEntryValue>
           </TooltipEntryContainer>
         </Box>
       ) : (
@@ -184,7 +188,9 @@ function TooltipListItem({
           <Box flexGrow={1}>
             <TooltipEntryContainer>
               <InlineText mr={2}>{label}:</InlineText>
-              <TooltipEntryValue>{children}</TooltipEntryValue>
+              <TooltipEntryValue isCentered={displayTooltipValueOnly}>
+                {children}
+              </TooltipEntryValue>
             </TooltipEntryContainer>
           </Box>
         </>
@@ -200,9 +206,13 @@ const TooltipEntryContainer = styled.span`
   align-items: flex-end;
 `;
 
-const TooltipEntryValue = styled.span`
-  text-align: right;
-`;
+const TooltipEntryValue = styled.span<{
+  isCentered?: boolean;
+}>((x) =>
+  css({
+    textAlign: x.isCentered ? 'center' : 'right',
+  })
+);
 
 export const TooltipList = styled.ol<{
   hasTwoColumns?: boolean;
@@ -210,6 +220,8 @@ export const TooltipList = styled.ol<{
 }>((x) =>
   css({
     columns: x.hasTwoColumns ? 2 : 1,
+    columnRule: x.hasTwoColumns ? `1px solid ${colors.lightGray}` : 'unset',
+    columnGap: x.hasTwoColumns ? '2em' : 'unset',
     m: 0,
     p: 0,
     listStyle: 'none',

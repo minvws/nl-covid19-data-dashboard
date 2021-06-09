@@ -19,7 +19,20 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | BarSeriesDefinition<T>
   | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
+  | SplitAreaDefinition<T>
+  | GappedLineSeriesDefinition<T>
 )[];
+
+export type GappedLineSeriesDefinition<T extends TimestampedValue> = {
+  type: 'gapped-line';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'dashed';
+  strokeWidth?: number;
+  curve?: 'linear' | 'step';
+};
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
   type: 'line';
@@ -83,6 +96,25 @@ export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
   style?: 'solid' | 'hatched';
   fillOpacity?: number;
   strokeWidth?: number;
+};
+
+/**
+ * Adding the split series definition here even though it might not end up as
+ * part of this chart. For starters this makes it easier because then we can
+ * reuse the whole hoverstate and tooltip logic from TimeSeriesChart directly in
+ * SplitAreaChart.
+ *
+ * If the amount of changes for the chart are limited we could maybe merge it in
+ * completely.
+ */
+export type SplitAreaDefinition<T extends TimestampedValue> = {
+  type: 'split-area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  splitPoints: SplitPoint[];
+  strokeWidth?: number;
+  fillOpacity?: number;
 };
 
 /**

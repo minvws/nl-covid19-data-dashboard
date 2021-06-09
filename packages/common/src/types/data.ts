@@ -853,6 +853,7 @@ export interface Regionaal {
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
+  situations: VrSituations;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1088,9 +1089,9 @@ export interface RegionalElderlyAtHomeValue {
   vrcode: string;
 }
 export interface VrEscalationLevel {
-  level: number;
-  positive_tested_per_100k: number;
-  hospital_admissions_per_million: number;
+  level: null | 1 | 2 | 3 | 4;
+  positive_tested_per_100k: number | null;
+  hospital_admissions_per_million: number | null;
   based_on_statistics_to_unix: number;
   based_on_statistics_from_unix: number;
   next_determined_unix: number;
@@ -1132,6 +1133,28 @@ export interface VrVaccineCoverageValue {
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
+export interface VrSituations {
+  values: VrSituationsValue[];
+  last_value: VrSituationsValue;
+}
+export interface VrSituationsValue {
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+  has_sufficient_data: boolean;
+  situations_known_percentage: number | null;
+  situations_known_total: number | null;
+  investigations_total: number | null;
+  home_and_visits: number | null;
+  work: number | null;
+  school_and_day_care: number | null;
+  health_care: number | null;
+  gathering: number | null;
+  travel: number | null;
+  hospitality: number | null;
+  other: number | null;
+}
 
 export interface Regions {
   last_generated: string;
@@ -1146,6 +1169,7 @@ export interface Regions {
   behavior: RegionsBehavior[];
   disability_care: RegionsDisabilityCare[];
   elderly_at_home: RegionsElderlyAtHome[];
+  situations: VrCollectionSituations[];
 }
 export interface RegionsHospitalNice {
   date_unix: number;
@@ -1163,7 +1187,7 @@ export interface RegionsTestedOverall {
 }
 export interface EscalationLevels {
   vrcode: string;
-  level: number;
+  level: null | 1 | 2 | 3 | 4;
   positive_tested_per_100k: number;
   hospital_admissions_per_million: number;
   based_on_statistics_to_unix: number;
@@ -1247,4 +1271,19 @@ export interface RegionsElderlyAtHome {
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
+}
+export interface VrCollectionSituations {
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+  vrcode: string;
+  has_sufficient_data: boolean;
+  home_and_visits: number | null;
+  work: number | null;
+  school_and_day_care: number | null;
+  health_care: number | null;
+  gathering: number | null;
+  travel: number | null;
+  hospitality: number | null;
+  other: number | null;
 }

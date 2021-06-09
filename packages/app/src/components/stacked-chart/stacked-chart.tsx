@@ -181,9 +181,10 @@ export function StackedChart<T extends TimestampedValue>(
     [isExtraSmallScreen, yAxisWidth]
   );
 
-  const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
-    config,
-  ]);
+  const metricProperties = useMemo(
+    () => config.map((x) => x.metricProperty),
+    [config]
+  );
 
   const today = useCurrentDate();
 
@@ -219,7 +220,7 @@ export function StackedChart<T extends TimestampedValue>(
    * like is_estimate to trigger the hatched pattern in all charts.
    */
   const hatchedFromIndex = valuesInTimeframe.findIndex(
-    (v) => ((v as unknown) as { is_estimate?: boolean }).is_estimate === true
+    (v) => (v as unknown as { is_estimate?: boolean }).is_estimate === true
   );
 
   /**
@@ -323,7 +324,7 @@ export function StackedChart<T extends TimestampedValue>(
             acc,
             x.metricProperty,
             getTotalSumForMetricProperty(
-              (series as unknown) as Record<string, number>[],
+              series as unknown as Record<string, number>[],
               x.metricProperty as string
             )
           ),

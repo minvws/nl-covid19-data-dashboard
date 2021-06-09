@@ -10,9 +10,12 @@ import { BehaviorFormatted } from '~/domain/behavior/hooks/useFormatAndSortBehav
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { BehaviorIcon } from './components/behavior-icon';
-import { BehaviorTrend } from './components/behavior-trend';
-interface BehaviorTableProps {
+import { BehaviorIcon } from '../components/behavior-icon';
+import { BehaviorTrend } from '../components/behavior-trend';
+import scrollIntoView from 'scroll-into-view-if-needed';
+import { BehaviorIdentifier } from '../behavior-types';
+
+interface BehaviorTableTileProps {
   title: string;
   description: string;
   complianceExplanation: string;
@@ -20,9 +23,11 @@ interface BehaviorTableProps {
   sortedCompliance: BehaviorFormatted[];
   sortedSupport: BehaviorFormatted[];
   annotation: string;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  scrollRef: { current: HTMLDivElement | null };
 }
 
-export function BehaviorTable({
+export function BehaviorTableTile({
   title,
   description,
   complianceExplanation,
@@ -30,14 +35,18 @@ export function BehaviorTable({
   sortedCompliance,
   sortedSupport,
   annotation,
-}: BehaviorTableProps) {
+  setCurrentId,
+  scrollRef,
+}: BehaviorTableTileProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
 
   return (
     <Tile>
       <Heading level={3}>{title}</Heading>
-      <Text mb={4}>{description}</Text>
+      <Box maxWidth="maxWidthText">
+        <Text mb={4}>{description}</Text>
+      </Box>
       <Box display="flex" flexWrap="wrap" mb={{ _: 2, xs: 4 }}>
         <Box mr={3} mb={1}>
           <ExplanationBox background={colors.data.cyan} />
@@ -52,15 +61,23 @@ export function BehaviorTable({
         <StyledTable>
           <thead>
             <tr>
-              <HeaderCell>
+              <HeaderCell
+                css={css({
+                  width: asResponsiveArray({
+                    _: 200,
+                    sm: 300,
+                    xl: 400,
+                  }),
+                })}
+              >
                 {commonText.basisregels.header_basisregel}
               </HeaderCell>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({
-                    _: 120,
-                    sm: 150,
-                    xl: 200,
+                    _: 100,
+                    sm: 100,
+                    xl: 150,
                   }),
                 })}
               >
@@ -68,11 +85,7 @@ export function BehaviorTable({
               </HeaderCell>
               <HeaderCell
                 css={css({
-                  width: asResponsiveArray({
-                    _: 120,
-                    sm: 150,
-                    xl: 200,
-                  }),
+                  width: 125,
                 })}
               >
                 {commonText.basisregels.header_trend}
@@ -82,15 +95,24 @@ export function BehaviorTable({
           <tbody>
             {sortedCompliance.map((behavior, index) => (
               <tr key={behavior.id}>
-                <Cell>
+                <Cell
+                  css={css({
+                    minWidth: asResponsiveArray({ _: '60vw', sm: 300 }),
+                  })}
+                >
                   <Box display="flex" mr={2}>
                     <Box minWidth={32} color="black" pr={2} display="flex">
-                      <BehaviorIcon name={behavior.id} size={20} />
+                      <BehaviorIcon name={behavior.id} size={25} />
                     </Box>
-                    <DescriptionWithIcon description={behavior.description} />
+                    <DescriptionWithIcon
+                      description={behavior.description}
+                      id={behavior.id}
+                      setCurrentId={setCurrentId}
+                      scrollRef={scrollRef}
+                    />
                   </Box>
                 </Cell>
-                <Cell>
+                <Cell css={css({ minWidth: 200 })}>
                   <PercentageBarWithNumber
                     percentage={behavior.percentage}
                     color={colors.data.cyan}
@@ -100,7 +122,7 @@ export function BehaviorTable({
                     color={colors.data.yellow}
                   />
                 </Cell>
-                <Cell>
+                <Cell css={css({ minWidth: 125 })}>
                   <Box display="flex" flexDirection="column">
                     <BehaviorTrend
                       trend={behavior.trend}
@@ -128,17 +150,39 @@ export function BehaviorTable({
  * Render every word in a span and add the chevron to the last word.
  * this is for the word wrapping when the screen gets smaller.
  */
-function DescriptionWithIcon({ description }: { description: string }) {
+function DescriptionWithIcon({
+  description,
+  id,
+  setCurrentId,
+  scrollRef,
+}: {
+  description: string;
+  id: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  scrollRef: { current: HTMLDivElement | null };
+}) {
   const splittedWords = description.split(' ');
 
+  const buttonClickHandler = () => {
+    scrollIntoView(scrollRef.current as Element);
+    setCurrentId(id);
+  };
+
   return (
-    <Button>
+    <Button onClick={buttonClickHandler}>
       {splittedWords.map((word, index) => (
-        <InlineText key={index} css={css({ whiteSpace: 'pre-wrap' })}>
+        <InlineText
+          key={index}
+          css={css({
+            whiteSpace: 'pre-wrap',
+            fontFamily: 'body',
+            fontSize: '1rem',
+          })}
+        >
           {splittedWords.length - 1 === index ? (
             <InlineText css={css({ display: 'flex', position: 'relative' })}>
               {word}
-              <Box position="absolute" right={-12} top={-1}>
+              <Box position="absolute" right={-14} top={0}>
                 <ChevronIcon width="7px" />
               </Box>
             </InlineText>
@@ -199,11 +243,10 @@ const HeaderCell = styled.th(
   })
 );
 
-const Cell = styled.td((x) =>
+const Cell = styled.td(
   css({
-    color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGrey',
+    borderBottomColor: 'lightGray',
     p: 0,
     py: 2,
   })
@@ -221,6 +264,7 @@ const Button = styled.button(
     p: 0,
     m: 0,
     pr: 3,
+    flexWrap: 'wrap',
 
     '&:focus': {
       borderColor: 'lightGray',

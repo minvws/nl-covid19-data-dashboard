@@ -97,7 +97,7 @@ function validateTextPlaceholders(text = '') {
       if (!match || match[0] !== matchInfo[0]) {
         return matchInfo[0];
       }
-      return undefined;
+      return;
     })
     .filter(isDefined);
 

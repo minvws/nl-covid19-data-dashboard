@@ -57,7 +57,7 @@ export function PageBarScale<T>({
    * a certain metric but here we don't have that type as input.
    */
   const lastValue = metricContainsPartialData(metricName as string)
-    ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
+    ? getLastFilledValue(data[metricName] as unknown as Metric<unknown>)
     : get(data, [metricName as string, 'last_value']);
 
   const propertyValue = lastValue && lastValue[metricProperty];
@@ -83,7 +83,7 @@ export function PageBarScale<T>({
 
   const config = getMetricConfig(
     scope,
-    (metricName as unknown) as string,
+    metricName as unknown as string,
     metricProperty
   );
 
@@ -107,7 +107,7 @@ export function PageBarScale<T>({
   );
 
   const differenceValue = differenceKey
-    ? get(data, ['difference', (differenceKey as unknown) as string])
+    ? get(data, ['difference', differenceKey as unknown as string])
     : undefined;
 
   if (differenceKey) {

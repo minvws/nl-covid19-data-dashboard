@@ -7,6 +7,7 @@ import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { SewerChart } from '~/components/sewer-chart';
+import { NewSewerChart } from '~/components/sewer-chart/new-sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
@@ -14,6 +15,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -49,6 +51,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const { siteText } = useIntl();
+  const sewerSplitAreaChart = useFeature('sewerSplitAreaChart');
 
   const text = siteText.veiligheidsregio_rioolwater_metingen;
 
@@ -148,30 +151,45 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.linechart_titel}
-            metadata={{ source: text.bronnen.rivm }}
-            timeframeOptions={['all', '5weeks']}
-            description={text.linechart_description}
-          >
-            {(timeframe) => (
-              <SewerChart
-                data={data}
-                timeframe={timeframe}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                text={{
-                  select_station_placeholder:
-                    text.graph_selected_rwzi_placeholder,
-                  average_label_text: text.graph_average_label_text,
-                  secondary_label_text: text.graph_secondary_label_text,
-                  daily_label_text: text.graph_daily_label_text_rwzi,
-                  range_description: text.graph_range_description,
-                  display_outliers: text.display_outliers,
-                  hide_outliers: text.hide_outliers,
-                }}
-              />
-            )}
-          </ChartTile>
+          {sewerSplitAreaChart.isEnabled ? (
+            <NewSewerChart
+              dataAverages={data.sewer}
+              dataPerInstallation={data.sewer_per_installation}
+              text={{
+                title: text.linechart_titel,
+                source: text.bronnen.rivm,
+                description: text.linechart_description,
+                selectPlaceholder: text.graph_selected_rwzi_placeholder,
+                splitLabels: siteText.rioolwater_metingen.split_labels,
+                averagesDataLabel: siteText.common.weekgemiddelde,
+              }}
+            />
+          ) : (
+            <ChartTile
+              title={text.linechart_titel}
+              metadata={{ source: text.bronnen.rivm }}
+              timeframeOptions={['all', '5weeks']}
+              description={text.linechart_description}
+            >
+              {(timeframe) => (
+                <SewerChart
+                  data={data}
+                  timeframe={timeframe}
+                  valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                  text={{
+                    select_station_placeholder:
+                      text.graph_selected_rwzi_placeholder,
+                    average_label_text: text.graph_average_label_text,
+                    secondary_label_text: text.graph_secondary_label_text,
+                    daily_label_text: text.graph_daily_label_text_rwzi,
+                    range_description: text.graph_range_description,
+                    display_outliers: text.display_outliers,
+                    hide_outliers: text.hide_outliers,
+                  }}
+                />
+              )}
+            </ChartTile>
+          )}
         </TileList>
       </SafetyRegionLayout>
     </Layout>

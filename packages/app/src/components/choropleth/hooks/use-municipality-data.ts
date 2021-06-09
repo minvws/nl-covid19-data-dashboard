@@ -96,7 +96,7 @@ export function useMunicipalityData<K extends MunicipalitiesMetricName>(
         value: x[metricProperty],
       })) ?? [];
 
-    const metricsForAllMunicipalities = (data[metricName] as unknown) as
+    const metricsForAllMunicipalities = data[metricName] as unknown as
       | MunicipalityMetricValue[]
       | undefined;
 

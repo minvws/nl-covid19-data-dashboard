@@ -1,11 +1,12 @@
 import { TimestampedValue } from '@corona-dashboard/common';
+import { isPresent } from 'ts-is-present';
 import { findSplitPointForValue, SeriesConfig } from '../logic';
 import { AreaTrendIcon } from './area-trend';
+import { BarTrendIcon } from './bar-trend';
 import { LineTrendIcon } from './line-trend';
 import { RangeTrendIcon } from './range-trend';
+import { SplitAreaTrendIcon } from './split-area-trend';
 import { StackedAreaTrendIcon } from './stacked-area-trend';
-import { BarTrendIcon } from './bar-trend';
-import { isPresent } from 'ts-is-present';
 
 interface SeriesIconProps<T extends TimestampedValue> {
   config: SeriesConfig<T>[number];
@@ -24,6 +25,7 @@ export function SeriesIcon<T extends TimestampedValue>({
 }: SeriesIconProps<T>) {
   switch (config.type) {
     case 'line':
+    case 'gapped-line':
       return (
         <LineTrendIcon
           color={config.color}
@@ -53,6 +55,23 @@ export function SeriesIcon<T extends TimestampedValue>({
     case 'bar':
       return (
         <BarTrendIcon color={config.color} fillOpacity={config.fillOpacity} />
+      );
+    case 'split-area':
+      /**
+       * Here we return the icon even if there is no value, because it
+       * makes the tooltip rendering more stable for the sewer chart when a
+       * location is selected. The color of the rendered icon will not match
+       * whatever the other hoverstate is intersecting with, but I don't think
+       * it matters much as the value is shown as non-existing.
+       *
+       * @TODO Possibly we want this behavior for split-bar as well...
+       */
+      return (
+        <SplitAreaTrendIcon
+          color={findSplitPointForValue(config.splitPoints, value).color}
+          fillOpacity={config.fillOpacity}
+          strokeWidth={config.strokeWidth}
+        />
       );
     case 'split-bar':
       return isPresent(value) ? (

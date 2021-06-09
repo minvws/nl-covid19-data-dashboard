@@ -66,6 +66,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import GrafiekIcon from '~/assets/chart.svg';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -102,6 +103,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const [selectedMap, setSelectedMap] =
     useState<RegionControlOption>('municipal');
+
+  const unknownLevelColor = useEscalationColor(null);
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -240,6 +243,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     getLink={reverseRouter.vr.risiconiveau}
                     metricName="escalation_levels"
                     metricProperty="level"
+                    noDataFillColor={unknownLevelColor}
                     tooltipContent={(
                       context: SafetyRegionProperties & EscalationLevels
                     ) => (

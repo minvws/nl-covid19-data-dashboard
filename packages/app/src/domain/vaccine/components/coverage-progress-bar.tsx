@@ -24,10 +24,8 @@ export function CoverageProgressBar(props: {
     showTotals,
   } = props;
   const { siteText, formatPercentage, formatNumber } = useIntl();
-  const {
-    partially: partialLabel,
-    fully: fullyLabel,
-  } = siteText.vaccinaties.vaccination_coverage;
+  const { partially: partialLabel, fully: fullyLabel } =
+    siteText.vaccinaties.vaccination_coverage;
   const maxValue = Math.max(partiallyVaccinated, fullyVaccinated);
   const scale = useDynamicScale(maxValue, 0, total);
   const breakpoints = useBreakpoints(true);

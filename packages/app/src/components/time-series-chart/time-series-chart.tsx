@@ -5,42 +5,45 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
+import { ValueAnnotation } from '~/components/value-annotation';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
-import { ValueAnnotation } from '../value-annotation';
+import { InlineText } from '../typography';
 import {
   Axes,
+  Benchmark,
   ChartContainer,
   DateLineMarker,
   DateSpanMarker,
   Overlay,
   PointMarkers,
+  Series,
   TimespanAnnotation,
   Tooltip,
   TooltipData,
   TooltipFormatter,
 } from './components';
-import { Benchmark } from './components/benchmark';
-import { Series } from './components/series';
 import { TimeAnnotation } from './components/time-annotation';
 import {
   calculateSeriesMaximum,
+  COLLAPSE_Y_AXIS_THRESHOLD,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
   omitValuePropertiesForAnnotation,
   SeriesConfig,
+  useDimensions,
   useHoverState,
   useLegendItems,
   useScales,
   useSeriesList,
+  useSplitLegendGroups,
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
-import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -224,6 +227,8 @@ export function TimeSeriesChart<
     seriesConfig,
     dataOptions
   );
+
+  const splitLegendGroups = useSplitLegendGroups(seriesConfig);
 
   const today = useCurrentDate();
   const xTickValues = useMemo(
@@ -437,7 +442,23 @@ export function TimeSeriesChart<
           )}
         </Box>
       </ResponsiveContainer>
-      {!disableLegend && legendItems.length > 0 && (
+      {!disableLegend && splitLegendGroups && (
+        <>
+          {splitLegendGroups.map((x) => (
+            <Box
+              key={x.label}
+              pl={paddingLeft}
+              display="flex"
+              flexDirection={['column', 'row']}
+              alignItems="baseline"
+            >
+              <InlineText pr={3}>{x.label}:</InlineText>
+              <Legend items={x.items} />
+            </Box>
+          ))}
+        </>
+      )}
+      {!disableLegend && legendItems && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>
