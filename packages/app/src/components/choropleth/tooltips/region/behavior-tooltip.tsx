@@ -18,6 +18,7 @@ interface BehaviorTooltipProps {
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number;
   currentSupportValue: number;
+  metricName: 'compliance' | 'support';
 }
 
 export function BehaviorTooltip({
@@ -25,6 +26,7 @@ export function BehaviorTooltip({
   currentMetric,
   currentComplianceValue,
   currentSupportValue,
+  metricName,
 }: BehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -48,16 +50,35 @@ export function BehaviorTooltip({
         <Text m={0} mb={2} fontWeight="bold">
           {siteText.gedrag_onderwerpen[currentMetric]}
         </Text>
-        <TooltipInfo
-          title={siteText.nl_gedrag.tooltip_labels.compliance}
-          value={currentComplianceValue}
-          background={complianceFilteredThreshold.color}
-        />
-        <TooltipInfo
-          title={siteText.nl_gedrag.tooltip_labels.support}
-          value={currentSupportValue}
-          background={supportFilteredThreshold.color}
-        />
+
+        {/* Change order of the info based on the metric name */}
+        {metricName === 'compliance' ? (
+          <>
+            <TooltipInfo
+              title={siteText.nl_gedrag.tooltip_labels.compliance}
+              value={currentComplianceValue}
+              background={complianceFilteredThreshold.color}
+            />
+            <TooltipInfo
+              title={siteText.nl_gedrag.tooltip_labels.support}
+              value={currentSupportValue}
+              background={supportFilteredThreshold.color}
+            />
+          </>
+        ) : (
+          <>
+            <TooltipInfo
+              title={siteText.nl_gedrag.tooltip_labels.support}
+              value={currentSupportValue}
+              background={supportFilteredThreshold.color}
+            />
+            <TooltipInfo
+              title={siteText.nl_gedrag.tooltip_labels.compliance}
+              value={currentComplianceValue}
+              background={complianceFilteredThreshold.color}
+            />
+          </>
+        )}
       </Box>
     </TooltipContent>
   );

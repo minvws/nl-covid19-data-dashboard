@@ -167,6 +167,7 @@ function ChoroplethBlock({
 
             return (
               <BehaviorTooltip
+                metricName={metricName}
                 context={context}
                 currentMetric={currentId}
                 currentComplianceValue={
