@@ -136,9 +136,11 @@ const ListItem = styled.li(
 const linkStyle = css({
   color: 'inherit',
   textDecoration: 'none',
+
   '&:hover': {
     textDecoration: 'underline',
   },
+
   '&:focus': {
     outline: '2px dotted white',
   },
