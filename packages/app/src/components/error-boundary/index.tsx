@@ -20,7 +20,7 @@ function ErrorFallback({ error }: { error: Error }) {
   const { siteText } = useIntl();
   const [clipboardState, setClipboardState] =
     useState<'init' | 'copied' | 'error'>('init');
-  const errorReport = formatErrorMessage(error);
+  const errorReport = formatErrorReport(error);
 
   async function copyErrorReport() {
     setClipboardState('init');
@@ -65,20 +65,19 @@ function ErrorFallback({ error }: { error: Error }) {
   );
 }
 
-function formatErrorMessage(error: Error) {
-  const report = [`url: ${window.location.href}`];
-  report.push(`platform: ${navigator.platform}`);
-  report.push(`userAgent: ${navigator.userAgent}`);
-  report.push(`browser dimensions: ${window.innerWidth}x${window.innerHeight}`);
-  report.push(
+function formatErrorReport(error: Error) {
+  return [
+    `url: ${window.location.href}`,
+    `platform: ${navigator.platform}`,
+    `userAgent: ${navigator.userAgent}`,
+    `browser dimensions: ${window.innerWidth}x${window.innerHeight}`,
     `screen resolution: ${window.screen.width * window.devicePixelRatio}x${
       window.screen.height * window.devicePixelRatio
-    }`
-  );
-  report.push(`error: ${error.message}`);
-  report.push(`stacktrace:`);
-  report.push(error.stack ?? 'No stack trace available');
-  return report.join('\n');
+    }`,
+    `error: ${error.message}`,
+    `stacktrace:`,
+    error.stack ?? 'No stack trace available',
+  ].join('\n');
 }
 
 const ErrorBox = styled.div.attrs({
