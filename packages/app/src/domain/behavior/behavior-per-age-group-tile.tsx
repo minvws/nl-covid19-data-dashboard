@@ -10,12 +10,15 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
-import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
-import { BehaviorIcon } from '../components/behavior-icon';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from './logic/behavior-types';
+import { BehaviorIcon } from './components/behavior-icon';
 
 const AGE_KEYS = ['70_plus', '55_69', '40_54', '25_39', '16_24'] as const;
 
-export interface BehaviorPerAgeGroupProps {
+interface BehaviorPerAgeGroupProps {
   title: string;
   description: string;
   complianceExplanation: string;
@@ -24,6 +27,7 @@ export interface BehaviorPerAgeGroupProps {
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
+
 export function BehaviorPerAgeGroup({
   title,
   description,

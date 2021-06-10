@@ -9,7 +9,7 @@ import {
   behaviorIdentifiers,
   BehaviorTrendType,
   BehaviorType,
-} from '../behavior-types';
+} from './behavior-types';
 
 type BehaviorValue = NationalBehaviorValue | RegionalBehaviorValue;
 
@@ -21,7 +21,7 @@ export interface BehaviorFormatted {
 }
 
 /* Format raw list of behaviors into list for compliance or for support */
-export function useFormatBehaviorType(
+function useFormatBehaviorType(
   behavior: BehaviorValue,
   type: BehaviorType
 ): BehaviorFormatted[] {
@@ -49,7 +49,7 @@ export function useFormatBehaviorType(
 }
 
 /* Sort lists of formatted compliance and support behaviors */
-export function sortBehavior(
+function sortBehavior(
   compliance: BehaviorFormatted[],
   support: BehaviorFormatted[]
 ): {

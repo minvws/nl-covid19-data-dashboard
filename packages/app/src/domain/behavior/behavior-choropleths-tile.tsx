@@ -16,8 +16,11 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
-import { BehaviorIcon } from '../components/behavior-icon';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from './logic/behavior-types';
+import { BehaviorIcon } from './components/behavior-icon';
 
 interface BehaviorChoroplethsTileProps {
   title: string;
