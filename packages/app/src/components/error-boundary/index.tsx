@@ -69,12 +69,12 @@ function formatErrorReport(error: Error) {
   return [
     `url: ${window.location.href}`,
     `platform: ${navigator.platform}`,
-    `userAgent: ${navigator.userAgent}`,
+    `user agent: ${navigator.userAgent}`,
     `browser dimensions: ${window.innerWidth}x${window.innerHeight}`,
     `screen resolution: ${window.screen.width * window.devicePixelRatio}x${
       window.screen.height * window.devicePixelRatio
     }`,
-    `error: ${error.message}`,
+    `message: ${error.message}`,
     `stacktrace:`,
     error.stack ?? 'No stack trace available',
   ].join('\n');
