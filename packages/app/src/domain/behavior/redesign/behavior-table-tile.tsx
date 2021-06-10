@@ -124,13 +124,10 @@ export function BehaviorTableTile({
                 </Cell>
                 <Cell css={css({ minWidth: 125 })}>
                   <Box display="flex" flexDirection="column">
-                    <BehaviorTrend
-                      trend={behavior.trend}
-                      color={colors.data.neutral}
-                    />
+                    <BehaviorTrend trend={behavior.trend} color={colors.body} />
                     <BehaviorTrend
                       trend={sortedSupport[index].trend}
-                      color={colors.data.neutral}
+                      color={colors.body}
                     />
                   </Box>
                 </Cell>
