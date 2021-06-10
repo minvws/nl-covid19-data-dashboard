@@ -1,27 +1,31 @@
+import {
+  NationalBehaviorValue,
+  RegionalBehaviorValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import React from 'react';
+import React, { useMemo } from 'react';
+import scrollIntoView from 'scroll-into-view-if-needed';
 import styled from 'styled-components';
+import { isDefined, isPresent } from 'ts-is-present';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { PercentageBar } from '~/components/percentage-bar';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorFormatted } from '~/domain/behavior/logic/use-format-and-sort-behavior';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { BehaviorIcon } from './components/behavior-icon';
 import { BehaviorTrend } from './components/behavior-trend';
-import scrollIntoView from 'scroll-into-view-if-needed';
 import { BehaviorIdentifier } from './logic/behavior-types';
+import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
 
 interface BehaviorTableTileProps {
   title: string;
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  sortedCompliance: BehaviorFormatted[];
-  sortedSupport: BehaviorFormatted[];
+  value: NationalBehaviorValue | RegionalBehaviorValue;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
@@ -32,14 +36,14 @@ export function BehaviorTableTile({
   description,
   complianceExplanation,
   supportExplanation,
-  sortedCompliance,
-  sortedSupport,
+  value,
   annotation,
   setCurrentId,
   scrollRef,
 }: BehaviorTableTileProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
+  const behaviorsTableData = useBehaviorTableData(value);
 
   return (
     <Tile>
@@ -93,7 +97,7 @@ export function BehaviorTableTile({
             </tr>
           </thead>
           <tbody>
-            {sortedCompliance.map((behavior, index) => (
+            {behaviorsTableData.map((behavior) => (
               <tr key={behavior.id}>
                 <Cell
                   css={css({
@@ -114,19 +118,22 @@ export function BehaviorTableTile({
                 </Cell>
                 <Cell css={css({ minWidth: 200 })}>
                   <PercentageBarWithNumber
-                    percentage={behavior.percentage}
+                    percentage={behavior.compliancePercentage}
                     color={colors.data.cyan}
                   />
                   <PercentageBarWithNumber
-                    percentage={sortedSupport[index].percentage}
+                    percentage={behavior.supportPercentage}
                     color={colors.data.yellow}
                   />
                 </Cell>
                 <Cell css={css({ minWidth: 125 })}>
                   <Box display="flex" flexDirection="column">
-                    <BehaviorTrend trend={behavior.trend} color={colors.body} />
                     <BehaviorTrend
-                      trend={sortedSupport[index].trend}
+                      trend={behavior.complianceTrend}
+                      color={colors.body}
+                    />
+                    <BehaviorTrend
+                      trend={behavior.supportTrend}
                       color={colors.body}
                     />
                   </Box>
@@ -281,3 +288,38 @@ const Button = styled.button(
     },
   })
 );
+
+function useBehaviorTableData(value: NationalBehaviorValue) {
+  const behaviorLookupKeys = useBehaviorLookupKeys();
+
+  return useMemo(() => {
+    return behaviorLookupKeys
+      .map((x) => {
+        const compliancePercentage = value[x.complianceKey];
+        const complianceTrend = value[`${x.complianceKey}_trend` as const];
+
+        const supportPercentage = value[x.supportKey];
+        const supportTrend = value[`${x.supportKey}_trend` as const];
+
+        if (
+          isPresent(supportPercentage) &&
+          isPresent(supportTrend) &&
+          isPresent(compliancePercentage) &&
+          isPresent(complianceTrend)
+        ) {
+          return {
+            id: x.key,
+            description: x.description,
+            compliancePercentage,
+            complianceTrend,
+            supportPercentage,
+            supportTrend,
+          };
+        }
+      })
+      .filter(isDefined)
+      .sort(
+        (a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0)
+      );
+  }, [value, behaviorLookupKeys]);
+}

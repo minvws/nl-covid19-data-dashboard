@@ -9,18 +9,17 @@ import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
-import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { SelectBehavior } from './components/select-behavior';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
 } from './logic/behavior-types';
-import { BehaviorIcon } from './components/behavior-icon';
 
 interface BehaviorChoroplethsTileProps {
   title: string;
@@ -58,14 +57,6 @@ export function BehaviorChoroplethsTile({
 
   keysWithoutData.push(...(idsThatContainNull as BehaviorIdentifier[]));
 
-  const behaviorIndentifiersData = behaviorIdentifiers.map((id) => {
-    const label = siteText.gedrag_onderwerpen[id];
-    return {
-      label,
-      value: id,
-    };
-  });
-
   return (
     <Tile>
       <Heading level={3}>{title}</Heading>
@@ -74,12 +65,7 @@ export function BehaviorChoroplethsTile({
       </Box>
 
       <Box mb={4}>
-        <Select
-          value={currentId}
-          onChange={setCurrentId}
-          options={behaviorIndentifiersData}
-          icon={<BehaviorIcon name={currentId} size={20} />}
-        />
+        <SelectBehavior value={currentId} onChange={setCurrentId} />
       </Box>
 
       <Box display="flex" flexWrap="wrap" spacing={{ _: 4, lg: undefined }}>

@@ -7,11 +7,10 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
-import { MoreInformation } from '~/domain/behavior/components/more-information';
-import { useFormatAndSortBehavior } from '~/domain/behavior/logic/use-format-and-sort-behavior';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
@@ -65,9 +64,6 @@ export default function BehaviorPageSafetyRegion(
 
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
   const scrollToRef = useRef<HTMLDivElement>(null);
-
-  const { sortedCompliance, sortedSupport } =
-    useFormatAndSortBehavior(behaviorLastValue);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -141,8 +137,7 @@ export default function BehaviorPageSafetyRegion(
             supportExplanation={
               regionaal_gedrag.basisregels.steunen_beschrijving
             }
-            sortedCompliance={sortedCompliance}
-            sortedSupport={sortedSupport}
+            value={behaviorLastValue}
             annotation={regionaal_gedrag.basisregels.annotatie}
             setCurrentId={setCurrentId}
             scrollRef={scrollToRef}
