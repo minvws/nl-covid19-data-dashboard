@@ -128,3 +128,9 @@ timestamp,action,key
 2021-06-10T13:47:20.171Z,add,nav.meer_informatie
 2021-06-10T13:47:39.691Z,add,nav.contact
 2021-06-10T13:48:02.438Z,add,nav.contact_beschrijving
+2021-06-10T10:05:25.058Z,add,nl_gedrag.kpi_recente_inzichten.titel
+2021-06-10T10:05:26.082Z,add,nl_gedrag.kpi_recente_inzichten.tekst
+2021-06-10T10:10:18.591Z,delete,nl_gedrag.kpi.deelgenomen_mensen
+2021-06-10T10:10:18.592Z,delete,nl_gedrag.kpi.hoogste_gevolgde_regel
+2021-06-10T10:10:18.592Z,delete,nl_gedrag.kpi.hoogste_draagvlak
+2021-06-10T10:10:18.592Z,delete,nl_gedrag.kpi.titel
