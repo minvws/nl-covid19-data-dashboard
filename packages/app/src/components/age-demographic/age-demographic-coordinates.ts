@@ -109,7 +109,7 @@ function calculateAgeDemographicCoordinates<
   // Helper functions to retrieve parts of the values
   const ageGroupPercentage = (value: T) => value.age_group_percentage * 100;
   const getValue = (value: T) =>
-    ((value[metricProperty] as unknown) as number) * 100;
+    (value[metricProperty] as unknown as number) * 100;
   const ageGroupRange = (value: T) => value.age_group_range;
 
   // Scales to map between values and coordinates

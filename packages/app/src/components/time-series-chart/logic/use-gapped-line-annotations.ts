@@ -1,5 +1,4 @@
 import {
-  formatStyle,
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
@@ -9,6 +8,8 @@ import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { TimespanAnnotationConfig } from './common';
+
+const HALF_DAY_IN_SECONDS = 12 * 60 * 60;
 
 /**
  * This hook scans the given values collection for consecutive items with invalid/incomplete
@@ -41,17 +42,19 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
       (newItems, item, index, array) => {
         const value = item[property] as unknown;
         if (!hasValue(value)) {
-          const startDate = isDateValue(item)
-            ? item.date_unix
-            : isDateSpanValue(item)
-            ? item.date_start_unix
-            : NaN;
+          const startDate =
+            (isDateValue(item)
+              ? item.date_unix
+              : isDateSpanValue(item)
+              ? item.date_start_unix
+              : NaN) - HALF_DAY_IN_SECONDS;
 
-          const endDate = isDateValue(item)
-            ? item.date_unix
-            : isDateSpanValue(item)
-            ? item.date_end_unix
-            : NaN;
+          const endDate =
+            (isDateValue(item)
+              ? item.date_unix
+              : isDateSpanValue(item)
+              ? item.date_end_unix
+              : NaN) + HALF_DAY_IN_SECONDS;
 
           let currentAnnotation = last(newItems);
           if (!isDefined(currentAnnotation) || !isNaN(currentAnnotation.end)) {
@@ -69,10 +72,6 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
             hasValue(array[index + 1]?.[property])
           ) {
             currentAnnotation.end = endDate;
-            currentAnnotation.label = formatLabel(
-              currentAnnotation,
-              formatDateFromSeconds
-            );
           }
         }
         return newItems;
@@ -80,15 +79,6 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
       []
     );
   }, [values, property, label, formatDateFromSeconds]);
-}
-
-function formatLabel(
-  annotation: TimespanAnnotationConfig,
-  formatDateFromSeconds: (seconds: number, style?: formatStyle) => string
-) {
-  const start = formatDateFromSeconds(annotation.start, 'axis');
-  const end = formatDateFromSeconds(annotation.end, 'axis');
-  return `${start} - ${end}: ${annotation.label}`;
 }
 
 function hasValue(value: unknown) {

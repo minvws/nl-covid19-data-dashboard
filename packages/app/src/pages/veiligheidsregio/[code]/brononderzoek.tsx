@@ -11,11 +11,12 @@ import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
+import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
+import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,7 +28,6 @@ import {
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -167,15 +167,9 @@ export default function BrononderzoekPage(
             <ChartTile
               title={text.situaties_over_tijd_grafiek.titel}
               description={text.situaties_over_tijd_grafiek.omschrijving}
-              timeframeOptions={['all', '5weeks']}
               metadata={{ source: text.bronnen.rivm }}
             >
-              {(timeframe) => (
-                <SituationsOverTimeChart
-                  timeframe={timeframe}
-                  values={values}
-                />
-              )}
+              <SituationsOverTimeChart timeframe={'all'} values={values} />
             </ChartTile>
           )}
         </TileList>

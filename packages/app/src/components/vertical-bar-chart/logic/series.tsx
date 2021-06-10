@@ -21,10 +21,10 @@ export function useSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig), [
-    values,
-    seriesConfig,
-  ]);
+  return useMemo(
+    () => getSeriesList(values, seriesConfig),
+    [values, seriesConfig]
+  );
 }
 
 export type SeriesList = SeriesSingleValue[][];
@@ -73,10 +73,10 @@ export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {
-  return useMemo(() => calculateSeriesExtremes(values, seriesConfig), [
-    values,
-    seriesConfig,
-  ]);
+  return useMemo(
+    () => calculateSeriesExtremes(values, seriesConfig),
+    [values, seriesConfig]
+  );
 }
 
 /**

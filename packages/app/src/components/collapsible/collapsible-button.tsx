@@ -135,13 +135,12 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      overflow: 'hidden',
       zIndex: 1,
       width: x.isOpen ? '100%' : 'fit-content',
       border: '1px solid',
       borderRadius: 1,
       borderColor: x.isOpen ? 'transparent' : 'lightGray',
-      px: asResponsiveArray({ _: 1, sm: 3 }),
+      px: asResponsiveArray({ _: 2, sm: 3 }),
       py: 3,
       background: 'none',
       color: 'black',
@@ -172,6 +171,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 
       // Outside border
       '&:before': {
+        display: 'block',
         transition: 'width 0.4s',
         position: 'absolute',
         top: 0,
@@ -183,6 +183,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
         zIndex: -1,
         content: x.isMounted ? '""' : 'unset',
         pointerEvents: 'none',
+        transform: 'translateZ(0)',
 
         '.has-no-js &': {
           content: 'unset',
@@ -243,10 +244,13 @@ const Container = styled(Box).attrs({ as: 'section' })<{
 const IconContainer = styled.div(
   css({
     mr: 2,
+    display: 'flex',
+    alignItems: 'center',
 
     svg: {
       transition: 'fill 0.2s ease-out',
       fill: 'black',
+      width: asResponsiveArray({ _: 20, md: undefined }),
     },
   })
 );

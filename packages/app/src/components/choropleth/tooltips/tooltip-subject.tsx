@@ -8,17 +8,22 @@ import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-value
 interface TooltipSubjectProps {
   subject?: string;
   thresholdValues: ChoroplethThresholdsValue[];
-  filterBelow: number;
+  filterBelow: number | null;
   children: ReactNode;
+  noDataFillColor?: string;
 }
 
-export function TooltipSubject(props: TooltipSubjectProps) {
-  const { subject, thresholdValues, filterBelow, children } = props;
-
-  const filteredThreshold = getFilteredThresholdValues(
-    thresholdValues,
-    filterBelow
-  );
+export function TooltipSubject({
+  subject,
+  thresholdValues,
+  filterBelow,
+  children,
+  noDataFillColor,
+}: TooltipSubjectProps) {
+  const color =
+    filterBelow === null
+      ? noDataFillColor || getFilteredThresholdValues(thresholdValues, 0).color
+      : getFilteredThresholdValues(thresholdValues, filterBelow).color;
 
   return (
     <>
@@ -44,7 +49,7 @@ export function TooltipSubject(props: TooltipSubjectProps) {
           width={13}
           borderRadius={'2px'}
           ml={'auto'}
-          backgroundColor={filteredThreshold.color}
+          backgroundColor={color}
         />
       </Box>
     </>

@@ -187,9 +187,10 @@ export function LineChart<T extends TimestampedValue>({
     [xMax, timespanMarkerData]
   );
 
-  const [markerProps, setMarkerProps] = useState<{
-    data: HoverPoint<T>[];
-  }>();
+  const [markerProps, setMarkerProps] =
+    useState<{
+      data: HoverPoint<T>[];
+    }>();
 
   const bisect = useCallback(
     (

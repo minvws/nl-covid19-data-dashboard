@@ -10,7 +10,7 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
-    const timeSeries = (data[propertyName] as unknown) as TimeSeriesMetric;
+    const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
   }
 

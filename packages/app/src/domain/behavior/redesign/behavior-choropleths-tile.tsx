@@ -14,6 +14,7 @@ import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
 import { BehaviorIcon } from '../components/behavior-icon';
@@ -34,11 +35,25 @@ export function BehaviorChoroplethsTile({
   setCurrentId,
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
+  const firstRegionData = data[0];
 
-  // Find all the keys that only doesn't exist on VR level but does on NL
+  // Find all the keys that don't exist on VR level but do on NL
   const keysWithoutData = behaviorIdentifiers.filter(
-    (item) => !Object.keys(data[0]).find((a) => a.includes(item))
+    (item) => !Object.keys(firstRegionData).find((a) => a.includes(item))
   );
+
+  /**
+   * Since e.g. the curfew has no data anymore and returns null that also needs to be filtered out
+   * First we check if there are some keys that contain a value of null
+   * Second we slice everything before the underscore, since only the id name is important and not _support or _compliance
+   * Lastly we remove all the duplicates in the array and add it to all the keys without data
+   */
+  const idsThatContainNull = Object.keys(firstRegionData)
+    .filter((key) => firstRegionData[key as keyof RegionsBehavior] === null)
+    .map((item) => item.slice(0, item.indexOf('_')))
+    .filter((item, pos) => item.indexOf(item) == pos);
+
+  keysWithoutData.push(...(idsThatContainNull as BehaviorIdentifier[]));
 
   const behaviorIndentifiersData = behaviorIdentifiers.map((id) => {
     const label = siteText.gedrag_onderwerpen[id];
@@ -64,11 +79,11 @@ export function BehaviorChoroplethsTile({
         />
       </Box>
 
-      <Box display="flex" flexWrap="wrap">
+      <Box display="flex" flexWrap="wrap" spacing={{ _: 4, lg: undefined }}>
         <ChoroplethBlock
           title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
           data={{ behavior_compliance: data }}
-          metricName="compliance"
+          behaviorType="compliance"
           currentId={currentId}
           keysWithoutData={keysWithoutData}
           thresholds={regionThresholds.behavior_compliance}
@@ -77,7 +92,7 @@ export function BehaviorChoroplethsTile({
         <ChoroplethBlock
           title={siteText.nl_gedrag.verdeling_in_nederland.support_title}
           data={{ behavior_support: data }}
-          metricName="support"
+          behaviorType="support"
           currentId={currentId}
           keysWithoutData={keysWithoutData}
           thresholds={regionThresholds.behavior_support}
@@ -90,7 +105,7 @@ export function BehaviorChoroplethsTile({
 interface ChoroplethBlockProps {
   data: { [key: string]: RegionsBehavior[] };
   keysWithoutData: BehaviorIdentifier[];
-  metricName: 'compliance' | 'support';
+  behaviorType: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
   title: string;
   thresholds: ChoroplethThresholdsValue[];
@@ -99,13 +114,16 @@ interface ChoroplethBlockProps {
 function ChoroplethBlock({
   data,
   keysWithoutData,
-  metricName,
+  behaviorType,
   currentId,
   title,
   thresholds,
 }: ChoroplethBlockProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const breakpoints = useBreakpoints();
+
+  const isSmallScreen = breakpoints.sm;
 
   return (
     <Box width={{ _: '100%', lg: '50%' }}>
@@ -132,9 +150,9 @@ function ChoroplethBlock({
         <SafetyRegionChoropleth
           data={data as { behavior: RegionsBehavior[] }}
           getLink={reverseRouter.vr.gedrag}
-          metricName={`behavior_${metricName}` as 'behavior'}
-          metricProperty={`${currentId}_${metricName}`}
-          minHeight={400}
+          metricName={`behavior_${behaviorType}` as 'behavior'}
+          metricProperty={`${currentId}_${behaviorType}`}
+          minHeight={!isSmallScreen ? 350 : 400}
           noDataFillColor={colors.page}
           tooltipContent={(
             context: RegionsBehavior & SafetyRegionProperties
@@ -149,6 +167,7 @@ function ChoroplethBlock({
 
             return (
               <BehaviorTooltip
+                behaviorType={behaviorType}
                 context={context}
                 currentMetric={currentId}
                 currentComplianceValue={
