@@ -1,23 +1,30 @@
-import { RegionsBehavior } from '@corona-dashboard/common';
+import {
+  assert,
+  NationalBehaviorValue,
+  RegionsBehavior,
+} from '@corona-dashboard/common';
+import { maxBy } from 'lodash';
+import { useMemo, useRef, useState } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
+import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Heading, Text } from '~/components/typography';
+import { MoreInformation } from '~/domain/behavior/components/more-information';
+import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { BehaviorChoroplethsTile } from '~/domain/behavior/redesign/behavior-choropleths-tile';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/redesign/behavior-per-age-group-tile';
 import { BehaviorTableTile } from '~/domain/behavior/redesign/behavior-table-tile';
-import { MoreInformation } from '~/domain/behavior/components/more-information';
-import { useFormatAndSortBehavior } from '~/domain/behavior/hooks/useFormatAndSortBehavior';
 import { NationalPageMetricData } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
 import { BehaviorLineChartTile } from './behavior-line-chart-tile';
-import { BehaviorIdentifier } from '../behavior-types';
-import { useState, useRef } from 'react';
 
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
@@ -30,7 +37,7 @@ export function BehaviorPageNational({
   content,
   behaviorData,
 }: BehaviourPageNationalProps) {
-  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
+  const { siteText } = useIntl();
 
   const { nl_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
@@ -65,56 +72,7 @@ export function BehaviorPageNational({
           <Heading level={3}>{nl_gedrag.onderzoek_uitleg.titel}</Heading>
           <Text>{nl_gedrag.onderzoek_uitleg.toelichting}</Text>
         </Tile>
-        <Tile>
-          <Heading level={3}>{nl_gedrag.kpi.titel}</Heading>
-          <Text>
-            {replaceComponentsInText(nl_gedrag.kpi.deelgenomen_mensen, {
-              number_of_participants: (
-                <InlineText fontWeight="bold">
-                  {formatNumber(behaviorLastValue.number_of_participants)}
-                </InlineText>
-              ),
-              date_start: (
-                <InlineText>
-                  {formatDateFromSeconds(behaviorLastValue.date_start_unix)}
-                </InlineText>
-              ),
-              date_end: (
-                <InlineText>
-                  {formatDateFromSeconds(behaviorLastValue.date_end_unix)}
-                </InlineText>
-              ),
-            })}
-          </Text>
-          <Text>
-            {replaceComponentsInText(nl_gedrag.kpi.hoogste_gevolgde_regel, {
-              highest_compliance_description: (
-                <InlineText>{sortedCompliance[0].description}</InlineText>
-              ),
-              highest_compliance_percentage: (
-                <InlineText>{sortedCompliance[0].percentage}</InlineText>
-              ),
-              highest_support_percentage: (
-                <InlineText>
-                  {
-                    sortedSupport.find((x) => sortedCompliance[0].id === x.id)
-                      ?.percentage
-                  }
-                </InlineText>
-              ),
-            })}
-          </Text>
-          <Text>
-            {replaceComponentsInText(nl_gedrag.kpi.hoogste_draagvlak, {
-              highest_support_description: (
-                <InlineText>{sortedSupport[0].description}</InlineText>
-              ),
-              highest_compliance_support: (
-                <InlineText>{sortedSupport[0].percentage}</InlineText>
-              ),
-            })}
-          </Text>
-        </Tile>
+        <RecentInsightsTile behaviorLastValue={behaviorLastValue} />
       </TwoKpiSection>
 
       <ArticleStrip articles={content.articles} />
@@ -171,5 +129,101 @@ export function BehaviorPageNational({
 
       <MoreInformation />
     </TileList>
+  );
+}
+
+interface Behavior {
+  id: BehaviorIdentifier;
+  complianceId: `${BehaviorIdentifier}_compliance`;
+  supportId: `${BehaviorIdentifier}_support`;
+
+  description: string;
+
+  compliancePercentage: number;
+  supportPercentage: number;
+}
+
+function RecentInsightsTile({
+  behaviorLastValue,
+}: {
+  behaviorLastValue: NationalBehaviorValue;
+}) {
+  const intl = useIntl();
+
+  const behaviorsSortedByCompliance = useMemo(() => {
+    return behaviorIdentifiers
+      .map((id) => {
+        const complianceId =
+          `${id}_compliance` as `${BehaviorIdentifier}_compliance`;
+        const supportId = `${id}_support` as `${BehaviorIdentifier}_support`;
+        const compliancePercentage = behaviorLastValue[complianceId];
+        const supportPercentage = behaviorLastValue[supportId];
+        const description = intl.siteText.gedrag_onderwerpen[id];
+
+        if (isPresent(compliancePercentage) && isPresent(supportPercentage)) {
+          const value: Behavior = {
+            id,
+            description,
+            complianceId,
+            supportId,
+            compliancePercentage,
+            supportPercentage,
+          };
+          return value;
+        }
+      })
+      .filter(isDefined)
+      .sort(
+        (a, b) => (b.compliancePercentage ?? 0) - (a.compliancePercentage ?? 0)
+      );
+  }, [behaviorLastValue, intl]);
+
+  const highestCompliance = behaviorsSortedByCompliance[0];
+  const highestSupport = maxBy(
+    behaviorsSortedByCompliance,
+    (x) => x.supportPercentage
+  );
+
+  assert(highestSupport, 'highestSupport cannot be undefined');
+
+  return (
+    <Tile>
+      <Heading level={3}>
+        {intl.siteText.nl_gedrag.kpi_recente_inzichten.titel}
+      </Heading>
+
+      <Markdown
+        content={replaceVariablesInText(
+          intl.siteText.nl_gedrag.kpi_recente_inzichten.tekst,
+          {
+            number_of_participants: intl.formatNumber(
+              behaviorLastValue.number_of_participants
+            ),
+            date_start: intl.formatDateFromSeconds(
+              behaviorLastValue.date_start_unix
+            ),
+            date_end: intl.formatDateFromSeconds(
+              behaviorLastValue.date_end_unix
+            ),
+
+            highest_compliance_description: highestCompliance.description,
+            highest_compliance_compliance_percentage: intl.formatPercentage(
+              highestCompliance.compliancePercentage
+            ),
+            highest_compliance_support_percentage: intl.formatPercentage(
+              highestCompliance.supportPercentage
+            ),
+
+            highest_support_description: highestSupport.description,
+            highest_support_compliance_percentage: intl.formatPercentage(
+              highestSupport.compliancePercentage
+            ),
+            highest_support_support_percentage: intl.formatPercentage(
+              highestSupport.supportPercentage
+            ),
+          }
+        )}
+      />
+    </Tile>
   );
 }
