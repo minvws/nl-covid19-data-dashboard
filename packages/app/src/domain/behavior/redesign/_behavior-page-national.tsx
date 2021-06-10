@@ -18,6 +18,8 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { BehaviorLineChartTile } from './behavior-line-chart-tile';
 import { BehaviorIdentifier } from '../behavior-types';
 import { useState, useRef } from 'react';
+import { Markdown } from '~/components/markdown';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 interface BehaviourPageNationalProps {
   data: NationalPageMetricData;
@@ -30,7 +32,8 @@ export function BehaviorPageNational({
   content,
   behaviorData,
 }: BehaviourPageNationalProps) {
-  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
+  const { siteText, formatDateFromSeconds, formatNumber, formatPercentage } =
+    useIntl();
 
   const { nl_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
@@ -40,6 +43,12 @@ export function BehaviorPageNational({
 
   const { sortedCompliance, sortedSupport } =
     useFormatAndSortBehavior(behaviorLastValue);
+
+  const highestSupport = [...sortedSupport].sort(
+    (a, b) => (b.percentage ?? 0) - (a.percentage ?? 0)
+  );
+
+  console.log(sortedCompliance[0].id, sortedSupport[0].id);
 
   return (
     <TileList>
@@ -86,34 +95,59 @@ export function BehaviorPageNational({
               ),
             })}
           </Text>
-          <Text>
+          <Markdown
+            content={replaceVariablesInText(gekkeUniekestring, {
+              number_of_participants: formatNumber(
+                behaviorLastValue.number_of_participants
+              ),
+              date_start: formatDateFromSeconds(
+                behaviorLastValue.date_start_unix
+              ),
+              date_end: formatDateFromSeconds(behaviorLastValue.date_end_unix),
+
+              highest_compliance_description: sortedCompliance[0].description,
+              highest_compliance_compliance_percentage: formatPercentage(
+                sortedCompliance[0].percentage
+              ),
+              highest_compliance_support_percentage: formatPercentage(
+                sortedSupport[0].percentage
+              ),
+
+              highest_support_description: sortedSupport[0].description,
+              highest_support_compliance_percentage: formatPercentage(
+                sortedSupport[0].percentage
+              ),
+              highest_support_support_percentage: formatPercentage(
+                highestSupport[0].percentage
+              ),
+            })}
+          ></Markdown>
+          {/* <Text>
             {replaceComponentsInText(nl_gedrag.kpi.hoogste_gevolgde_regel, {
-              highest_compliance_description: (
-                <InlineText>{sortedCompliance[0].description}</InlineText>
+              description: (
+                <InlineText>{sortedSupport[0].description}</InlineText>
               ),
-              highest_compliance_percentage: (
-                <InlineText>{sortedCompliance[0].percentage}</InlineText>
+              support_percentage: (
+                <InlineText>{sortedSupport[0].percentage}</InlineText>
               ),
-              highest_support_percentage: (
-                <InlineText>
-                  {
-                    sortedSupport.find((x) => sortedCompliance[0].id === x.id)
-                      ?.percentage
-                  }
-                </InlineText>
-              ),
+              compliance_percentage: (
+                <InlineText></InlineText>
+              )
             })}
           </Text>
           <Text>
             {replaceComponentsInText(nl_gedrag.kpi.hoogste_draagvlak, {
-              highest_support_description: (
+              description: (
                 <InlineText>{sortedSupport[0].description}</InlineText>
               ),
-              highest_compliance_support: (
+              support_percentage: (
                 <InlineText>{sortedSupport[0].percentage}</InlineText>
               ),
+              compliance_percentage: (
+                <InlineText></InlineText>
+              )
             })}
-          </Text>
+          </Text> */}
         </Tile>
       </TwoKpiSection>
 
