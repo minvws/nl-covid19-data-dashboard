@@ -9,6 +9,7 @@ import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { Markdown } from '~/components/markdown';
+import { asResponsiveArray } from '~/style/utils';
 
 export function AppFooter() {
   const reverseRouter = useReverseRouter();
@@ -26,9 +27,10 @@ export function AppFooter() {
       >
         <MaxWidth
           display="grid"
-          gridTemplateColumns="repeat(3, 1fr)"
+          gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }}
           css={css({
-            columnGap: '48px',
+            columnGap: asResponsiveArray({ sm: '32px', md: '48px' }),
+            rowGap: asResponsiveArray({ _: 4, md: null }),
           })}
           spacingHorizontal
           px={{ _: 3, sm: 4, md: 3, lg: 4 }}
@@ -51,7 +53,7 @@ export function AppFooter() {
             </nav>
           </Box>
           <Box>
-            <Title>{text.nav.title}</Title>
+            <Title>{text.nav.meer_informatie}</Title>
             <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
               <FooterList>
                 <Item href="/over">{text.nav.links.over}</Item>
@@ -75,9 +77,9 @@ export function AppFooter() {
           </Box>
 
           <Box>
-            <Title>{text.nav.title}</Title>
+            <Title>{text.nav.contact}</Title>
             <StyledMarkdown>
-              <Markdown content="Voor vragen over de cijfers en grafieken op dit dashboard kunt u terecht op de pagina [Cijferverantwoording](/cijferverantwoording) en de pagina met [veelgestelde vragen](/veelgestelde-vragen). Hebt u tips voor het Coronadashboard of kunt u het antwoord op een vraag niet vinden, [neem dan contact op](mailto:coronadashboard@minvws.nl)." />
+              <Markdown content={text.nav.contact_beschrijving} />
             </StyledMarkdown>
           </Box>
         </MaxWidth>
@@ -125,15 +127,14 @@ const FooterList = styled.ol(
   css({
     p: 0,
     m: 0,
-    listStyle: 'none',
     fontSize: 2,
+    listStyle: 'none',
   })
 );
 
 const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
   css({
     position: 'relative',
-    // py: 2,
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'baseline',
@@ -168,7 +169,7 @@ const IconContainer = styled.div(
 
 const StyledMarkdown = styled.div(
   css({
-    maxWidth: 280,
+    maxWidth: asResponsiveArray({ sm: '90%', md: 280 }),
 
     p: {
       fontSize: 2,

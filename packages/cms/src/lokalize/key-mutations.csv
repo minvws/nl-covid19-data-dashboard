@@ -125,3 +125,6 @@ timestamp,action,key
 2021-06-04T12:50:14.931Z,delete,brononderzoek.situaties_kaarten_overzicht.onvoldoende_data.omschrijving
 2021-06-04T12:51:14.103Z,add,brononderzoek.situaties_kaarten_uitkomsten.legenda.onvoldoende_data.omschrijving
 2021-06-09T10:32:43.073Z,delete,brononderzoek.situaties_kaarten_overzicht.select_help_text
+2021-06-10T13:47:20.171Z,add,nav.meer_informatie
+2021-06-10T13:47:39.691Z,add,nav.contact
+2021-06-10T13:48:02.438Z,add,nav.contact_beschrijving
