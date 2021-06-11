@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Gelijk from '~/assets/gelijk.svg';
 import PijlOmhoog from '~/assets/pijl-omhoog.svg';
 import PijlOmlaag from '~/assets/pijl-omlaag.svg';
-import { BehaviorTrendType } from '../behavior-types';
+import { BehaviorTrendType } from '../logic/behavior-types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 

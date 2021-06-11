@@ -9,7 +9,7 @@ import wear_mask_public_indoors from '~/assets/gedrag/wear_mask_public_indoors.s
 import wear_mask_public_transport from '~/assets/gedrag/wear_mask_public_transport.svg';
 import sneeze_cough_elbow from '~/assets/gedrag/sneeze_cough_elbow.svg';
 import max_visitors from '~/assets/gedrag/max_visitors.svg';
-import { BehaviorIdentifier } from '../behavior-types';
+import { BehaviorIdentifier } from '../logic/behavior-types';
 
 const icons: Record<BehaviorIdentifier, typeof curfew> = {
   curfew,
