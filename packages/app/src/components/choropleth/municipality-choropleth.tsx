@@ -6,6 +6,7 @@ import {
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
+import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
@@ -184,19 +185,23 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
   };
 
   return (
-    <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
+    <Box position="relative">
       {tabInteractiveButton}
-      <Choropleth
-        description={dataDescription}
-        featureCollection={municipalGeo}
-        hovers={hasData ? municipalGeo : undefined}
-        boundingBox={boundingbox || countryGeo}
-        renderFeature={renderFeature}
-        renderHover={renderHover}
-        getTooltipContent={getTooltipContent}
-        tooltipPlacement={tooltipPlacement}
-        showTooltipOnFocus={isTabInteractive}
-      />
-    </div>
+      <div
+        css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
+      >
+        <Choropleth
+          description={dataDescription}
+          featureCollection={municipalGeo}
+          hovers={hasData ? municipalGeo : undefined}
+          boundingBox={boundingbox || countryGeo}
+          renderFeature={renderFeature}
+          renderHover={renderHover}
+          getTooltipContent={getTooltipContent}
+          tooltipPlacement={tooltipPlacement}
+          showTooltipOnFocus={isTabInteractive}
+        />
+      </div>
+    </Box>
   );
 }
