@@ -1,38 +1,43 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
+import ExternalIcon from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { Markdown } from '~/components/markdown';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { Markdown } from '~/components/markdown';
+import { asResponsiveArray } from '~/style/utils';
 
-export function AppFooter({ lastGenerated }: { lastGenerated: number }) {
+export function AppFooter() {
   const reverseRouter = useReverseRouter();
   const { siteText: text } = useIntl();
 
   return (
     <footer>
-      <Box bg="blue" color="white" py={4} zIndex={4} position="relative">
+      <Box
+        bg="blue"
+        color="white"
+        py={5}
+        zIndex={4}
+        position="relative"
+        id="footer-navigation"
+      >
         <MaxWidth
-          display="flex"
-          flexDirection={['column', null, 'row']}
-          spacing={4}
+          display="grid"
+          gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }}
+          css={css({
+            columnGap: asResponsiveArray({ sm: '32px', md: '48px' }),
+            rowGap: asResponsiveArray({ _: 4, md: null }),
+          })}
           spacingHorizontal
           px={{ _: 3, sm: 4, md: 3, lg: 4 }}
         >
           <Box>
-            <Box fontSize={3} fontWeight="bold">
-              {text.nav.title}
-            </Box>
-            <nav
-              aria-label={text.aria_labels.footer_keuze}
-              role="navigation"
-              id="footer-navigation"
-            >
+            <Title>{text.nav.title}</Title>
+            <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
               <FooterList>
                 <Item href="/">{text.nav.links.actueel}</Item>
                 <Item href={reverseRouter.nl.index()}>
@@ -44,18 +49,27 @@ export function AppFooter({ lastGenerated }: { lastGenerated: number }) {
                 <Item href={reverseRouter.gm.index()}>
                   {text.nav.links.gemeente}
                 </Item>
-                <Item href="/over">{text.nav.links.over}</Item>
-                <Item href="/veelgestelde-vragen">
+              </FooterList>
+            </nav>
+          </Box>
+          <Box>
+            <Title>{text.nav.meer_informatie}</Title>
+            <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
+              <FooterList>
+                <Item href={reverseRouter.algemeen.over()}>
+                  {text.nav.links.over}
+                </Item>
+                <Item href={reverseRouter.algemeen.veelgesteldeVragen()}>
                   {text.nav.links.veelgestelde_vragen}
                 </Item>
-                <Item href="/toegankelijkheid">
-                  {text.nav.links.toegankelijkheid}
+                <Item href={reverseRouter.algemeen.verantwoording()}>
+                  {text.nav.links.verantwoording}
                 </Item>
-                <Item href="/over-risiconiveaus">
+                <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
                   {text.nav.links.over_risiconiveaus}
                 </Item>
-                <Item href="/verantwoording">
-                  {text.nav.links.verantwoording}
+                <Item href={reverseRouter.algemeen.toegankelijkheid()}>
+                  {text.nav.links.toegankelijkheid}
                 </Item>
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
@@ -63,39 +77,18 @@ export function AppFooter({ lastGenerated }: { lastGenerated: number }) {
               </FooterList>
             </nav>
           </Box>
-          <LastGeneratedMessage date={lastGenerated} />
+
+          <Box>
+            <Title>{text.nav.contact}</Title>
+            <StyledMarkdown>
+              <Markdown content={text.nav.contact_beschrijving} />
+            </StyledMarkdown>
+          </Box>
         </MaxWidth>
       </Box>
     </footer>
   );
 }
-
-function LastGeneratedMessage({ date }: { date: number }) {
-  const { siteText: text, formatDateFromSeconds } = useIntl();
-  const dateIso = formatDateFromSeconds(date, 'iso');
-  const dateLong = formatDateFromSeconds(date, 'long');
-
-  return (
-    <Box maxWidth={450}>
-      <Box fontSize={3} fontWeight="bold" mb={3}>
-        {text.laatst_bijgewerkt.title}
-      </Box>
-      <Markdown
-        content={replaceVariablesInText(text.laatst_bijgewerkt.message, {
-          dateOfInsertion: `<time datetime=${dateIso}>${dateLong}</time>`,
-        })}
-      />
-    </Box>
-  );
-}
-
-const FooterList = styled.ol(
-  css({
-    p: 0,
-    listStyle: 'none',
-    fontSize: '1.125em',
-  })
-);
 
 function Item({
   href,
@@ -107,9 +100,14 @@ function Item({
   isExternal?: boolean;
 }) {
   return (
-    <ListItem>
+    <ListItem isExternal={isExternal}>
       {isExternal ? (
-        <StyledExternalLink href={href}>{children}</StyledExternalLink>
+        <>
+          <IconContainer>
+            <ExternalIcon />
+          </IconContainer>
+          <StyledExternalLink href={href}>{children}</StyledExternalLink>
+        </>
       ) : (
         <Link href={href} passHref>
           <FooterLink>{children}</FooterLink>
@@ -119,16 +117,68 @@ function Item({
   );
 }
 
-const ListItem = styled.li(
+const Title = styled.div(
   css({
-    p: 2,
-    pl: 0,
+    mb: 3,
+    fontSize: 3,
+    fontWeight: 'bold',
+  })
+);
+
+const FooterList = styled.ol(
+  css({
+    p: 0,
+    m: 0,
+    fontSize: 2,
+    listStyle: 'none',
+  })
+);
+
+const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
+  css({
+    position: 'relative',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'baseline',
+    pl: 3,
+    mb: 2,
+
     '&:before': {
-      content: '"›"',
-      mr: 3,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      content: x.isExternal ? null : '"›"',
+    },
+
+    '&:last-of-type': {
+      mb: 0,
+    },
+  })
+);
+
+const IconContainer = styled.div(
+  css({
+    position: 'absolute',
+    left: '-10px',
+    top: 0,
+
+    svg: {
+      width: 24,
+      height: 24,
+    },
+  })
+);
+
+const StyledMarkdown = styled.div(
+  css({
+    maxWidth: asResponsiveArray({ sm: '90%', md: 280 }),
+
+    p: {
+      fontSize: 2,
+    },
+
+    a: {
+      color: 'white',
     },
   })
 );

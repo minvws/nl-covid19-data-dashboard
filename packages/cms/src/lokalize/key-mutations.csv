@@ -1,4 +1,7 @@
 timestamp,action,key
+2021-06-10T13:47:20.171Z,add,nav.meer_informatie
+2021-06-10T13:47:39.691Z,add,nav.contact
+2021-06-10T13:48:02.438Z,add,nav.contact_beschrijving
 2021-06-11T07:31:54.985Z,add,brononderzoek.reference.href
 2021-06-11T07:31:56.002Z,add,brononderzoek.reference.text
 2021-06-07T14:22:00.259Z,add,common.algemene_foutmelding
