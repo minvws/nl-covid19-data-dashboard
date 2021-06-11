@@ -116,7 +116,15 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
 
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<SafetyRegionComboBox />}
+        searchComponent={
+          <Box
+            backgroundColor="white"
+            maxWidth={{ _: '38rem', md: undefined }}
+            mx="auto"
+          >
+            <SafetyRegionComboBox />
+          </Box>
+        }
         sidebarComponent={
           <>
             {/**
@@ -132,6 +140,9 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
                 spacing={3}
+                backgroundColor="white"
+                maxWidth={{ _: '38rem', md: undefined }}
+                mx="auto"
               >
                 <Text fontSize={3} fontWeight="bold" px={3} m={0}>
                   {safetyRegionName}
