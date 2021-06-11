@@ -39,11 +39,7 @@ export function BehaviorLineChartTile({
     <ChartTile title={chartText.title} metadata={metadata}>
       <Text css={css({ maxWidth: '30em' })}>{chartText.description}</Text>
       <Box>
-        <SelectBehavior
-          value={currentId}
-          onChange={setCurrentId}
-          filter={(id) => behaviorHasEnoughLineData(id, values)}
-        />
+        <SelectBehavior value={currentId} onChange={setCurrentId} />
       </Box>
 
       <Spacer mb={4} />
@@ -77,25 +73,4 @@ export function BehaviorLineChartTile({
       />
     </ChartTile>
   );
-}
-
-function behaviorHasEnoughLineData(
-  id: BehaviorIdentifier,
-  values: NationalBehaviorValue[] | RegionalBehaviorValue[]
-) {
-  /**
-   * We'll only render behaviors with 2 or more values, otherwise it cannot
-   * result in a "line" in our line-chart.
-   */
-  const complianceHasEnoughData =
-    (values as NationalBehaviorValue[])
-      .map((x) => x[`${id}_compliance` as const])
-      .filter(isPresent).length > 1;
-
-  const supportHasEnoughData =
-    (values as NationalBehaviorValue[])
-      .map((x) => x[`${id}_support` as const])
-      .filter(isPresent).length > 1;
-
-  return complianceHasEnoughData || supportHasEnoughData;
 }
