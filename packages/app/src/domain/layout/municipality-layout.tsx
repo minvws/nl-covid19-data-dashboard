@@ -12,6 +12,7 @@ import {
   MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
@@ -217,7 +218,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
           </>
         }
       >
-        {children}
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );

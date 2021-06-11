@@ -12,6 +12,7 @@ import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -194,7 +195,9 @@ function ChoroplethGridItem({
         </InlineTooltip>
       </Box>
 
-      <div>{children}</div>
+      <div>
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </div>
     </Box>
   );
 }
