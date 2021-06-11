@@ -8,7 +8,7 @@ import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { InlineText } from '../typography';
 
-export function ErrorBoundary({ children }: { children: ReactNode }) {
+export function ErrorBoundary({ children = null }: { children: ReactNode }) {
   return (
     <ReactErrorBoundary FallbackComponent={ErrorFallback}>
       {children}
