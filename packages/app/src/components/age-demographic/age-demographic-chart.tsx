@@ -9,11 +9,11 @@ import { KeyboardEvent, memo, MouseEvent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
-import { useIntl } from '~/intl';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 

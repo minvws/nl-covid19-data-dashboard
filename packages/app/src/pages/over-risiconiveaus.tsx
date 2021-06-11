@@ -12,6 +12,7 @@ import { Box } from '~/components/base';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { RichContent } from '~/components/cms/rich-content';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { Scoreboard } from '~/domain/escalation-level/scoreboard';
 import { selectScoreboardData } from '~/domain/escalation-level/scoreboard/data-selection/select-scoreboard-data';
@@ -131,18 +132,23 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               minHeight={{ _: '20rem', sm: 0 }}
               flex={0}
             >
-              <SafetyRegionChoropleth
-                minHeight={200}
-                data={choropleth.vr}
-                metricName="escalation_levels"
-                noDataFillColor={unknownLevelColor}
-                metricProperty="level"
-                tooltipContent={(
-                  context: SafetyRegionProperties & EscalationLevels
-                ) => (
-                  <EscalationRegionalTooltip context={context} hideValidFrom />
-                )}
-              />
+              <ErrorBoundary>
+                <SafetyRegionChoropleth
+                  minHeight={200}
+                  data={choropleth.vr}
+                  metricName="escalation_levels"
+                  noDataFillColor={unknownLevelColor}
+                  metricProperty="level"
+                  tooltipContent={(
+                    context: SafetyRegionProperties & EscalationLevels
+                  ) => (
+                    <EscalationRegionalTooltip
+                      context={context}
+                      hideValidFrom
+                    />
+                  )}
+                />
+              </ErrorBoundary>
             </Box>
           </Box>
           <Box pr={{ md: 4 }} flex={1} maxWidth="maxWidthText">

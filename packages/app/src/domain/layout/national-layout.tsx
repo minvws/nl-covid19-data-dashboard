@@ -21,6 +21,7 @@ import {
   MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
@@ -387,7 +388,7 @@ export function NationalLayout(props: NationalLayoutProps) {
           </Box>
         }
       >
-        {children}
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );

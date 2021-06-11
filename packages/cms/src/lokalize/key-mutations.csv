@@ -1,3 +1,8 @@
 timestamp,action,key
 2021-06-11T07:31:54.985Z,add,brononderzoek.reference.href
 2021-06-11T07:31:56.002Z,add,brononderzoek.reference.text
+2021-06-07T14:22:00.259Z,add,common.algemene_foutmelding
+2021-06-07T14:22:28.511Z,add,common.kopieer_foutmelding
+2021-06-07T14:22:50.606Z,add,common.foutmelding_is_gekopieerd
+2021-06-07T14:23:11.624Z,add,common.foutmelding_kon_niet_gekopieerd_worden
+2021-06-07T15:50:34.368Z,add,common.foutmelding_email_adres
