@@ -78,6 +78,7 @@ export default function BrononderzoekPage(
               dateOfInsertionUnix: singleValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
+            reference={text.reference}
           />
 
           <ArticleStrip articles={content.articles} />
