@@ -1,5 +1,4 @@
 import {
-  formatStyle,
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
@@ -73,10 +72,6 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
             hasValue(array[index + 1]?.[property])
           ) {
             currentAnnotation.end = endDate;
-            currentAnnotation.label = formatLabel(
-              currentAnnotation,
-              formatDateFromSeconds
-            );
           }
         }
         return newItems;
@@ -84,15 +79,6 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
       []
     );
   }, [values, property, label, formatDateFromSeconds]);
-}
-
-function formatLabel(
-  annotation: TimespanAnnotationConfig,
-  formatDateFromSeconds: (seconds: number, style?: formatStyle) => string
-) {
-  const start = formatDateFromSeconds(annotation.start, 'axis');
-  const end = formatDateFromSeconds(annotation.end, 'axis');
-  return `${start} - ${end}: ${annotation.label}`;
 }
 
 function hasValue(value: unknown) {

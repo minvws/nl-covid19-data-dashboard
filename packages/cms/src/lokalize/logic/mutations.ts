@@ -14,7 +14,7 @@ export interface TextMutation {
   key: string;
 }
 
-export function clearLogFile() {
+export function clearMutationsLogFile() {
   try {
     fs.writeFileSync(MUTATIONS_LOG_FILE, HEADER);
   } catch (err) {
