@@ -1,5 +1,4 @@
 import {
-  ChoroplethThresholdsValue,
   RegionsBehavior,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
@@ -24,7 +23,7 @@ import {
 interface BehaviorChoroplethsTileProps {
   title: string;
   description: string;
-  data: RegionsBehavior[];
+  data: { behavior: RegionsBehavior[] };
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
@@ -37,7 +36,7 @@ export function BehaviorChoroplethsTile({
   setCurrentId,
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
-  const firstRegionData = data[0];
+  const firstRegionData = data.behavior[0];
 
   // Find all the keys that don't exist on VR level but do on NL
   const keysWithoutData = behaviorIdentifiers.filter(
@@ -71,20 +70,18 @@ export function BehaviorChoroplethsTile({
       <Box display="flex" flexWrap="wrap" spacing={{ _: 4, lg: undefined }}>
         <ChoroplethBlock
           title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
-          data={{ behavior_compliance: data }}
+          data={data}
           behaviorType="compliance"
           currentId={currentId}
           keysWithoutData={keysWithoutData}
-          thresholds={regionThresholds.behavior_compliance}
         />
 
         <ChoroplethBlock
           title={siteText.nl_gedrag.verdeling_in_nederland.support_title}
-          data={{ behavior_support: data }}
+          data={data}
           behaviorType="support"
           currentId={currentId}
           keysWithoutData={keysWithoutData}
-          thresholds={regionThresholds.behavior_support}
         />
       </Box>
     </Tile>
@@ -92,12 +89,11 @@ export function BehaviorChoroplethsTile({
 }
 
 interface ChoroplethBlockProps {
-  data: { [key: string]: RegionsBehavior[] };
+  data: { behavior: RegionsBehavior[] };
   keysWithoutData: BehaviorIdentifier[];
   behaviorType: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
   title: string;
-  thresholds: ChoroplethThresholdsValue[];
 }
 
 function ChoroplethBlock({
@@ -106,13 +102,13 @@ function ChoroplethBlock({
   behaviorType,
   currentId,
   title,
-  thresholds,
 }: ChoroplethBlockProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
   const breakpoints = useBreakpoints();
 
   const isSmallScreen = breakpoints.sm;
+  const metricProperty = `${currentId}_${behaviorType}` as const;
 
   return (
     <Box width={{ _: '100%', lg: '50%' }}>
@@ -137,10 +133,10 @@ function ChoroplethBlock({
           </Box>
         )}
         <SafetyRegionChoropleth
-          data={data as { behavior: RegionsBehavior[] }}
+          data={data}
           getLink={reverseRouter.vr.gedrag}
-          metricName={`behavior_${behaviorType}` as 'behavior'}
-          metricProperty={`${currentId}_${behaviorType}`}
+          metricName="behavior"
+          metricProperty={metricProperty}
           minHeight={!isSmallScreen ? 350 : 400}
           noDataFillColor={colors.page}
           tooltipContent={(
@@ -174,7 +170,7 @@ function ChoroplethBlock({
         maxWidth={300}
       >
         <ChoroplethLegenda
-          thresholds={thresholds}
+          thresholds={regionThresholds.behavior[metricProperty]}
           title={siteText.gedrag_common.basisregels.header_percentage}
         />
       </Box>

@@ -183,7 +183,7 @@ export default function BehaviorPage(
           <BehaviorChoroplethsTile
             title={nl_gedrag.verdeling_in_nederland.titel}
             description={nl_gedrag.verdeling_in_nederland.description}
-            data={choropleth.vr.behavior}
+            data={choropleth.vr}
             currentId={currentId}
             setCurrentId={setCurrentId}
           />

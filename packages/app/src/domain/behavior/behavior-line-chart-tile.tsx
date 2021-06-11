@@ -3,7 +3,6 @@ import {
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { isPresent } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';

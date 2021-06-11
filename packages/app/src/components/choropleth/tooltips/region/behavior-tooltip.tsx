@@ -30,14 +30,15 @@ export function BehaviorTooltip({
 }: BehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const thresholdKey = `${currentMetric}_${behaviorType}` as const;
 
   const complianceFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior_compliance,
+    regionThresholds.behavior[thresholdKey],
     currentComplianceValue
   );
 
   const supportFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior_support,
+    regionThresholds.behavior[thresholdKey],
     currentSupportValue
   );
 
