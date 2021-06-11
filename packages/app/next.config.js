@@ -10,6 +10,10 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
+  future: {
+    webpack5: true,
+  },
+
   /*i18n: {
     // These are all the locales you want to support in
     // your application
@@ -75,9 +79,7 @@ const nextConfig = {
           },
         },
       ],
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
+      issuer: /\.(js|ts)x?$/,
     });
 
     config.resolve.alias = {

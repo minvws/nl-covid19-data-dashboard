@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
 import { Content } from '~/domain/layout/content';
@@ -71,6 +72,7 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
 
       <Content>
+        <EuropeChoropleth />
         {content.title && <Heading level={1}>{content.title}</Heading>}
         {content.description && <RichContent blocks={content.description} />}
       </Content>
