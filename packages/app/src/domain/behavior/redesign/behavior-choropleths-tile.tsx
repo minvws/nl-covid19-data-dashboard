@@ -9,6 +9,7 @@ import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
@@ -147,37 +148,39 @@ function ChoroplethBlock({
             </Text>
           </Box>
         )}
-        <SafetyRegionChoropleth
-          data={data as { behavior: RegionsBehavior[] }}
-          getLink={reverseRouter.vr.gedrag}
-          metricName={`behavior_${behaviorType}` as 'behavior'}
-          metricProperty={`${currentId}_${behaviorType}`}
-          minHeight={!isSmallScreen ? 350 : 400}
-          noDataFillColor={colors.page}
-          tooltipContent={(
-            context: RegionsBehavior & SafetyRegionProperties
-          ) => {
-            const currentComplianceValue =
-              `${currentId}_compliance` as keyof RegionsBehavior;
-            const currentSupportValue =
-              `${currentId}_support` as keyof RegionsBehavior;
+        <ErrorBoundary>
+          <SafetyRegionChoropleth
+            data={data as { behavior: RegionsBehavior[] }}
+            getLink={reverseRouter.vr.gedrag}
+            metricName={`behavior_${behaviorType}` as 'behavior'}
+            metricProperty={`${currentId}_${behaviorType}`}
+            minHeight={!isSmallScreen ? 350 : 400}
+            noDataFillColor={colors.page}
+            tooltipContent={(
+              context: RegionsBehavior & SafetyRegionProperties
+            ) => {
+              const currentComplianceValue =
+                `${currentId}_compliance` as keyof RegionsBehavior;
+              const currentSupportValue =
+                `${currentId}_support` as keyof RegionsBehavior;
 
-            // Return null when there is no data available to prevent breaking the application when using tab
-            if (keysWithoutData.includes(currentId)) return null;
+              // Return null when there is no data available to prevent breaking the application when using tab
+              if (keysWithoutData.includes(currentId)) return null;
 
-            return (
-              <BehaviorTooltip
-                behaviorType={behaviorType}
-                context={context}
-                currentMetric={currentId}
-                currentComplianceValue={
-                  context[currentComplianceValue] as number
-                }
-                currentSupportValue={context[currentSupportValue] as number}
-              />
-            );
-          }}
-        />
+              return (
+                <BehaviorTooltip
+                  behaviorType={behaviorType}
+                  context={context}
+                  currentMetric={currentId}
+                  currentComplianceValue={
+                    context[currentComplianceValue] as number
+                  }
+                  currentSupportValue={context[currentSupportValue] as number}
+                />
+              );
+            }}
+          />
+        </ErrorBoundary>
       </Box>
       <Box
         display="flex"

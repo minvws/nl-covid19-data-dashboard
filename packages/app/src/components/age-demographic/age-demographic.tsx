@@ -1,4 +1,5 @@
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
 import {
   AgeDemographicChart,
@@ -35,15 +36,17 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   return (
     <Box position="relative">
       <div ref={ref}>
-        <AgeDemographicChart
-          coordinates={coordinates}
-          onMouseMoveBar={openTooltip}
-          onMouseLeaveBar={closeTooltip}
-          onKeyInput={keyboardNavigateTooltip}
-          displayMaxPercentage={displayMaxPercentage}
-          metricProperty={metricProperty}
-          text={text}
-        />
+        <ErrorBoundary>
+          <AgeDemographicChart
+            coordinates={coordinates}
+            onMouseMoveBar={openTooltip}
+            onMouseLeaveBar={closeTooltip}
+            onKeyInput={keyboardNavigateTooltip}
+            displayMaxPercentage={displayMaxPercentage}
+            metricProperty={metricProperty}
+            text={text}
+          />
+        </ErrorBoundary>
       </div>
 
       <Tooltip
