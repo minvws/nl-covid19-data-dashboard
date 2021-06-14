@@ -107,7 +107,8 @@ export interface GmVaccineCoverageValue {
   fully_vaccinated: number;
   fully_vaccinated_percentage: number;
   partially_or_fully_vaccinated: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
@@ -645,7 +646,8 @@ export interface NlVaccineCoverageValue {
   fully_vaccinated: number;
   fully_vaccinated_percentage: number;
   partially_or_fully_vaccinated: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
@@ -1129,7 +1131,8 @@ export interface VrVaccineCoverageValue {
   fully_vaccinated: number;
   fully_vaccinated_percentage: number;
   partially_or_fully_vaccinated: number;
-  date_unix: number;
+  date_start_unix: number;
+  date_end_unix: number;
   date_of_report_unix: number;
   date_of_insertion_unix: number;
 }
