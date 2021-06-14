@@ -109,11 +109,35 @@ const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(
       position: 'absolute',
       borderTopColor: color as SystemStyleObject,
       borderTopStyle: lineStyle,
-      borderTopWidth: '3px',
+      borderTopWidth: lineStyle === 'solid' ? '3px' : '0',
       top: '10px',
       width: '15px',
-      height: 0,
       borderRadius: '2px',
       left: 0,
+      height: '3px',
+
+      /**
+       * Since a dashed border with such a small width won't show the gaps on Safari iOS,
+       * resulting that it looks like a solid line. With this linear gradient technique we are recreating
+       * a dashed border with a different approach but vissualy the same.
+       */
+      '&:before': {
+        content: lineStyle === 'dashed' ? '""' : 'none',
+        height: '3px',
+        width: '15px',
+        top: 0,
+        left: 0,
+        position: 'absolute',
+
+        borderRadius: '2px',
+        backgroundImage: `linear-gradient(to right,
+        ${color} 45%,
+        rgba(0,0,0,0) 45%,
+        rgba(0,0,0,0) 55%,
+        ${color} 55%)`,
+        backgroundPosition: 'left',
+        backgroundSize: '15px 3px',
+        backgroundRepeat: 'repeat-x',
+      },
     })
 );
