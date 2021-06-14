@@ -16,6 +16,18 @@
         "delta_percentage",
         "delta_occurrence",
         "delta_is_variant_of_concern",
+        "eta_percentage",
+        "eta_occurrence",
+        "eta_is_variant_of_concern",
+        "epsilon_percentage",
+        "epsilon_occurrence",
+        "epsilon_is_variant_of_concern",
+        "theta_percentage",
+        "theta_occurrence",
+        "theta_is_variant_of_concern",
+        "kappa_percentage",
+        "kappa_occurrence",
+        "kappa_is_variant_of_concern",
         "other_percentage",
         "other_occurrence",
         "other_is_variant_of_concern",
@@ -59,6 +71,42 @@
           "type": "integer"
         },
         "delta_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "eta_percentage": {
+          "type": "number"
+        },
+        "eta_occurrence": {
+          "type": "integer"
+        },
+        "eta_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "epsilon_percentage": {
+          "type": "number"
+        },
+        "epsilon_occurrence": {
+          "type": "integer"
+        },
+        "epsilon_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "theta_percentage": {
+          "type": "number"
+        },
+        "theta_occurrence": {
+          "type": "integer"
+        },
+        "theta_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "kappa_percentage": {
+          "type": "number"
+        },
+        "kappa_occurrence": {
+          "type": "integer"
+        },
+        "kappa_is_variant_of_concern": {
           "type": "boolean"
         },
         "other_percentage": {

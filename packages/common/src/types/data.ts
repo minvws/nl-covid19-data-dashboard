@@ -219,15 +219,14 @@ export interface NationalDifference {
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
   variants__alpha_percentage: DifferenceDecimal;
-  variants__alpha_occurrence: DifferenceInteger;
   variants__beta_percentage: DifferenceDecimal;
-  variants__beta_occurrence: DifferenceInteger;
   variants__gamma_percentage: DifferenceDecimal;
-  variants__gamma_occurrence: DifferenceInteger;
   variants__delta_percentage: DifferenceDecimal;
-  variants__delta_occurrence: DifferenceInteger;
+  variants__eta_percentage: DifferenceDecimal;
+  variants__epsilon_percentage: DifferenceDecimal;
+  variants__theta_percentage: DifferenceDecimal;
+  variants__kappa_percentage: DifferenceDecimal;
   variants__other_percentage: DifferenceDecimal;
-  variants__other_occurrence: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -856,6 +855,18 @@ export interface NationalVariantsValue {
   delta_percentage: number;
   delta_occurrence: number;
   delta_is_variant_of_concern: boolean;
+  eta_percentage: number;
+  eta_occurrence: number;
+  eta_is_variant_of_concern: boolean;
+  epsilon_percentage: number;
+  epsilon_occurrence: number;
+  epsilon_is_variant_of_concern: boolean;
+  theta_percentage: number;
+  theta_occurrence: number;
+  theta_is_variant_of_concern: boolean;
+  kappa_percentage: number;
+  kappa_occurrence: number;
+  kappa_is_variant_of_concern: boolean;
   other_percentage: number;
   other_occurrence: number;
   other_is_variant_of_concern: boolean;

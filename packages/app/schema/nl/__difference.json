@@ -75,32 +75,29 @@
     "variants__alpha_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "variants__alpha_occurrence": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "variants__beta_percentage": {
       "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__beta_occurrence": {
-      "$ref": "#/definitions/diff_integer"
     },
     "variants__gamma_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "variants__gamma_occurrence": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "variants__delta_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "variants__delta_occurrence": {
-      "$ref": "#/definitions/diff_integer"
+    "variants__eta_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "variants__epsilon_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "variants__theta_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
+    "variants__kappa_percentage": {
+      "$ref": "#/definitions/diff_decimal"
     },
     "variants__other_percentage": {
       "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__other_occurrence": {
-      "$ref": "#/definitions/diff_integer"
     }
   },
   "required": [
@@ -128,15 +125,14 @@
     "elderly_at_home__positive_tested_daily",
     "deceased_rivm__covid_daily",
     "variants__alpha_percentage",
-    "variants__alpha_occurrence",
     "variants__beta_percentage",
-    "variants__beta_occurrence",
     "variants__gamma_percentage",
-    "variants__gamma_occurrence",
     "variants__delta_percentage",
-    "variants__delta_occurrence",
-    "variants__other_percentage",
-    "variants__other_occurrence"
+    "variants__eta_percentage",
+    "variants__epsilon_percentage",
+    "variants__theta_percentage",
+    "variants__kappa_percentage",
+    "variants__other_percentage"
   ],
   "additionalProperties": false,
   "definitions": {
