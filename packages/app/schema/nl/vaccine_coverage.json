@@ -5,13 +5,10 @@
       "type": "object",
       "required": [
         "partially_vaccinated",
-        "partially_vaccinated_percentage",
         "fully_vaccinated",
-        "fully_vaccinated_percentage",
         "partially_or_fully_vaccinated",
         "date_start_unix",
         "date_end_unix",
-        "date_of_report_unix",
         "date_of_insertion_unix"
       ],
       "additionalProperties": false,
@@ -19,14 +16,8 @@
         "partially_vaccinated": {
           "type": "integer"
         },
-        "partially_vaccinated_percentage": {
-          "type": "number"
-        },
         "fully_vaccinated": {
           "type": "integer"
-        },
-        "fully_vaccinated_percentage": {
-          "type": "number"
         },
         "partially_or_fully_vaccinated": {
           "type": "integer"
@@ -35,9 +26,6 @@
           "type": "integer"
         },
         "date_end_unix": {
-          "type": "integer"
-        },
-        "date_of_report_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
