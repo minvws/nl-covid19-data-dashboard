@@ -192,6 +192,7 @@ export interface National {
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock: NlVaccineStock;
+  variants?: NationalVariants;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -217,6 +218,16 @@ export interface NationalDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
+  variants__alpha_percentage: DifferenceDecimal;
+  variants__alpha_occurrence: DifferenceInteger;
+  variants__beta_percentage: DifferenceDecimal;
+  variants__beta_occurrence: DifferenceInteger;
+  variants__gamma_percentage: DifferenceDecimal;
+  variants__gamma_occurrence: DifferenceInteger;
+  variants__delta_percentage: DifferenceDecimal;
+  variants__delta_occurrence: DifferenceInteger;
+  variants__other_percentage: DifferenceDecimal;
+  variants__other_occurrence: DifferenceInteger;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -827,6 +838,30 @@ export interface NlVaccineStockValue {
   janssen_total: number | null;
   date_of_insertion_unix: number;
   date_unix: number;
+}
+export interface NationalVariants {
+  values: NationalVariantsValue[];
+  last_value: NationalVariantsValue;
+}
+export interface NationalVariantsValue {
+  alpha_percentage: number;
+  alpha_occurrence: number;
+  alpha_is_variant_of_concern: boolean;
+  beta_percentage: number;
+  beta_occurrence: number;
+  beta_is_variant_of_concern: boolean;
+  gamma_percentage: number;
+  gamma_occurrence: number;
+  gamma_is_variant_of_concern: boolean;
+  delta_percentage: number;
+  delta_occurrence: number;
+  delta_is_variant_of_concern: boolean;
+  other_percentage: number;
+  other_occurrence: number;
+  other_is_variant_of_concern: boolean;
+  sample_size: number;
+  date_start_unix: number;
+  date_end_unix: number;
 }
 
 export interface Regionaal {
