@@ -7,7 +7,8 @@ import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
 import { fileURLToPath } from 'url';
-const __dirname = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // These keys aren't directly referenced in the code base, so we add them manually here
 const whitelist = [

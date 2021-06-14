@@ -7,7 +7,7 @@ import {
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
 } from '@corona-dashboard/common';
-import { chain, isEmpty, pick } from 'lodash-es';
+import { every, isEmpty, pick } from 'lodash-es';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
@@ -33,6 +33,7 @@ const cli = meow(
       $ validate-last-values -e
 `,
   {
+    importMeta: import.meta,
     flags: {
       failEarly: {
         type: 'boolean',
@@ -148,13 +149,11 @@ export function validateLastValue(metric: TimeSeriesMetric): boolean {
   const assumedLastValue = metric.last_value;
   const actualLastValue = metric.values[metric.values.length - 1];
 
-  const success = chain(assumedLastValue)
-    .entries()
-    .every(
-      ([key, value]) =>
-        actualLastValue[key as keyof typeof actualLastValue] === value
-    )
-    .value();
+  const success = every(
+    Object.entries(assumedLastValue),
+    ([key, value]) =>
+      actualLastValue[key as keyof typeof actualLastValue] === value
+  );
 
   return success;
 }

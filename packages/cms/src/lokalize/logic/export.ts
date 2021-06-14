@@ -12,7 +12,8 @@ import prettier from 'prettier';
 import { fileURLToPath } from 'url';
 import { collapseTextMutations, readTextMutations } from '.';
 import { getClient } from '../../client';
-const __dirname = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const localeDirectory = path.resolve(
   __dirname,

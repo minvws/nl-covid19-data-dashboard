@@ -13,7 +13,8 @@ import {
   SchemaInfoItem,
 } from '../schema';
 import { JSONObject } from '../schema/custom-validations';
-const __dirname = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const cli = meow(
   `
@@ -22,7 +23,8 @@ const cli = meow(
 
     Examples
       $ validate-json-all pages-tests/fixtures
-`
+`,
+  { importMeta: import.meta }
 );
 
 const cliArgs = cli.input;

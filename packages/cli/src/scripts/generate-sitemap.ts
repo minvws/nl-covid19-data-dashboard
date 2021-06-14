@@ -9,7 +9,8 @@ import { features } from '../../../app/src/config/features';
 import { gmData } from '../../../app/src/data/gm';
 import { vrData } from '../../../app/src/data/vr';
 import { logError } from '../utils';
-const __dirname = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 require('dotenv').config({ path: '../app/.env.local' });
 

@@ -4,7 +4,6 @@
  * result of text changes via the CLI.
  */
 import meow from 'meow';
-import path from 'path';
 import { exportLokalizeTexts } from './logic/export';
 
 const cli = meow(
@@ -20,6 +19,7 @@ const cli = meow(
       $ lokalize:export --drafts --dataset=development
 `,
   {
+    importMeta: import.meta,
     flags: {
       drafts: {
         type: 'boolean',

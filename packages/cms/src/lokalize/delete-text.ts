@@ -33,6 +33,7 @@ let deletionsCounter = 0;
         $ delete-text -k some.existing.path
     `,
     {
+      importMeta: import.meta,
       flags: {
         key: {
           type: 'string',

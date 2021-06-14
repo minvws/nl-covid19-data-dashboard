@@ -28,6 +28,7 @@ let additionsCounter = 0;
         $ add-text --sync
     `,
     {
+      importMeta: import.meta,
       flags: {
         key: {
           type: 'string',

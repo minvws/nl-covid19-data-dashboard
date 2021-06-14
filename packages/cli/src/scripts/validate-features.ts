@@ -20,6 +20,7 @@ const cli = meow(
       $ validate-features -e
 `,
   {
+    importMeta: import.meta,
     flags: {
       failEarly: {
         type: 'boolean',

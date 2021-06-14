@@ -52,7 +52,8 @@ const cli = meow(
 
     Examples
       $ validate-json-single nl NL.json vaccine_coverage
-`
+`,
+  { importMeta: import.meta }
 );
 
 const cliArgs = cli.input;
