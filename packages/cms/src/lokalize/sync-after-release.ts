@@ -31,6 +31,7 @@ import { assert } from '@corona-dashboard/common';
 import { difference } from 'lodash';
 import prompts from 'prompts';
 import { getClient } from '../client';
+import { clearMutationsLogFile } from './logic';
 import { LokalizeText } from './types';
 
 (async function run() {
@@ -64,6 +65,8 @@ import { LokalizeText } from './types';
 
   await syncMissingTextsToPrd(allDevTexts, allPrdTexts);
   await syncDeletionsToProd(allDevTexts, allPrdTexts);
+
+  await clearMutationsLogFile();
 })().catch((err) => {
   console.error('An error occurred:', err.message);
   process.exit(1);

@@ -11,6 +11,7 @@ import {
 import { assert } from '~/utils/assert';
 import { Box } from '../base';
 import { CollapsibleSection } from '../collapsible';
+import { ErrorBoundary } from '../error-boundary';
 import { ContentImage } from './content-image';
 
 interface RichContentProps {
@@ -60,7 +61,11 @@ export function RichContent({
     },
   };
 
-  return <PortableText blocks={blocks} serializers={serializers} />;
+  return (
+    <ErrorBoundary>
+      <PortableText blocks={blocks} serializers={serializers} />
+    </ErrorBoundary>
+  );
 }
 
 function InlineAttachmentMark(props: {

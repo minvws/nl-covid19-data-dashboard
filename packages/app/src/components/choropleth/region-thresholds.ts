@@ -1,4 +1,8 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from '~/domain/behavior/logic/behavior-types';
 import { SituationKey } from '~/domain/situations/logic/situations';
 import { colors } from '~/style/theme';
 
@@ -138,49 +142,17 @@ const sewerThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const behaviorThresholds: ChoroplethThresholdsValue[] = [
-  {
-    color: colors.data.scale.blue[5],
-    threshold: 0,
-  },
-  {
-    color: colors.data.scale.blue[4],
-    threshold: 40,
-  },
-  {
-    color: colors.data.scale.blue[3],
-    threshold: 50,
-  },
-  {
-    color: colors.data.scale.blue[2],
-    threshold: 60,
-  },
-  {
-    color: colors.data.scale.blue[1],
-    threshold: 70,
-  },
-  {
-    color: colors.data.scale.blue[0],
-    threshold: 80,
-  },
-  {
-    // this color is not part of the scale (as discussed with design / AG)
-    color: '#DDEFF8',
-    threshold: 90,
-  },
-];
-
 const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[6],
+    color: colors.data.scale.blue[0],
     threshold: 0,
   },
   {
-    color: colors.data.scale.blue[5],
+    color: colors.data.scale.blue[1],
     threshold: 40,
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.data.scale.blue[2],
     threshold: 50,
   },
   {
@@ -188,30 +160,30 @@ const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
     threshold: 60,
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.data.scale.blue[4],
     threshold: 70,
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.data.scale.blue[5],
     threshold: 80,
   },
   {
-    color: colors.data.scale.blue[0],
+    color: colors.data.scale.blue[6],
     threshold: 90,
   },
 ];
 
 const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.yellow[6],
+    color: colors.data.scale.yellow[0],
     threshold: 0,
   },
   {
-    color: colors.data.scale.yellow[5],
+    color: colors.data.scale.yellow[1],
     threshold: 40,
   },
   {
-    color: colors.data.scale.yellow[4],
+    color: colors.data.scale.yellow[2],
     threshold: 50,
   },
   {
@@ -219,15 +191,15 @@ const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
     threshold: 60,
   },
   {
-    color: colors.data.scale.yellow[2],
+    color: colors.data.scale.yellow[4],
     threshold: 70,
   },
   {
-    color: colors.data.scale.yellow[1],
+    color: colors.data.scale.yellow[5],
     threshold: 80,
   },
   {
-    color: colors.data.scale.yellow[0],
+    color: colors.data.scale.yellow[6],
     threshold: 90,
   },
 ];
@@ -357,6 +329,21 @@ const hasSufficientDataThresholds = [
   },
 ];
 
+const behaviorThresholds = {
+  ...(Object.fromEntries(
+    behaviorIdentifiers.map((key) => [
+      `${key}_support`,
+      behaviorSupportThresholds,
+    ])
+  ) as Record<`${BehaviorIdentifier}_support`, ChoroplethThresholdsValue[]>),
+  ...(Object.fromEntries(
+    behaviorIdentifiers.map((key) => [
+      `${key}_compliance`,
+      behaviorComplianceThresholds,
+    ])
+  ) as Record<`${BehaviorIdentifier}_compliance`, ChoroplethThresholdsValue[]>),
+};
+
 export const regionThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
@@ -379,8 +366,6 @@ export const regionThresholds = {
     average: sewerThresholds,
   },
   behavior: behaviorThresholds,
-  behavior_compliance: behaviorComplianceThresholds,
-  behavior_support: behaviorSupportThresholds,
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
   },

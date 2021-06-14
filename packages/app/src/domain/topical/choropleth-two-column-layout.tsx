@@ -1,5 +1,6 @@
 import { Children, ReactNode } from 'react';
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 interface TopicalChoroplethTileProps {
@@ -37,7 +38,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
       ) : (
         <>
           <Box flex={{ _: '1 1 0%', lg: '0.40 1 0%' }} px={{ _: 4, lg: 5 }}>
-            {childrenArray[0]}
+            <ErrorBoundary>{childrenArray[0]}</ErrorBoundary>
           </Box>
           <Box
             display="flex"
@@ -48,8 +49,10 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
             pl={{ _: 4, lg: 5 }}
             maxWidth={500}
           >
-            {childrenArray[1]}
-            {legendComponent}
+            <ErrorBoundary>
+              {childrenArray[1]}
+              {legendComponent}
+            </ErrorBoundary>
           </Box>
         </>
       )}
