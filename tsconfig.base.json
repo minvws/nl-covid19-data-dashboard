@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2020",
     "lib": ["esnext", "dom"],
     "target": "es2018",
     "moduleResolution": "node",

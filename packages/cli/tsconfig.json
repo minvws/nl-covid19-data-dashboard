@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
     "lib": ["esnext"],
-    "target": "ES2018",
     "allowJs": false
   },
   "references": [{ "path": "../common" }],

@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "target": "es5",
     "allowJs": false,
