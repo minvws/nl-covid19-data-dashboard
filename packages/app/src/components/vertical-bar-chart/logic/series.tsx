@@ -3,8 +3,8 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { pick } from 'lodash-es';
 import { useMemo } from 'react';
-import { pick } from 'lodash';
 import { isPresent } from 'ts-is-present';
 import { SeriesSingleValue } from '~/components/time-series-chart/logic/series';
 

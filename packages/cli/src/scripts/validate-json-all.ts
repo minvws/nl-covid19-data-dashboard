@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { schemaDirectory } from '../config';
 import {
   createValidateFunction,
@@ -12,6 +13,7 @@ import {
   SchemaInfoItem,
 } from '../schema';
 import { JSONObject } from '../schema/custom-validations';
+const __dirname = fileURLToPath(import.meta.url);
 
 const cli = meow(
   `

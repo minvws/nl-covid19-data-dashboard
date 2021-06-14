@@ -1,5 +1,5 @@
 import { assert, Feature, MetricScope } from '@corona-dashboard/common';
-import { get, isEmpty } from 'lodash';
+import { get, isEmpty } from 'lodash-es';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';

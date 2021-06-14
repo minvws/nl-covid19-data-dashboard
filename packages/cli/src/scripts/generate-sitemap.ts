@@ -4,10 +4,13 @@ import fs from 'fs';
 import globby from 'globby';
 import path from 'path';
 import prettier from 'prettier';
+import { fileURLToPath } from 'url';
 import { features } from '../../../app/src/config/features';
 import { gmData } from '../../../app/src/data/gm';
 import { vrData } from '../../../app/src/data/vr';
 import { logError } from '../utils';
+const __dirname = fileURLToPath(import.meta.url);
+
 require('dotenv').config({ path: '../app/.env.local' });
 
 const disabledRoutes = features

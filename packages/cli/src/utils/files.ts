@@ -1,6 +1,6 @@
 import { assert, UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
-import { isArray } from 'lodash';
+import { isArray } from 'lodash-es';
 import pMemoize from 'p-memoize';
 
 /**

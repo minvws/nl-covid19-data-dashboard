@@ -1,13 +1,13 @@
-import { set } from 'lodash';
-import { useMemo } from 'react';
-import { Municipalities } from '@corona-dashboard/common';
-import { assert } from '~/utils/assert';
 import {
   Dictionary,
   MunicipalGeoJSON,
+  Municipalities,
   MunicipalitiesMetricName,
   MunicipalityProperties,
 } from '@corona-dashboard/common';
+import { set } from 'lodash-es';
+import { useMemo } from 'react';
+import { assert } from '~/utils/assert';
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/municipalities.json

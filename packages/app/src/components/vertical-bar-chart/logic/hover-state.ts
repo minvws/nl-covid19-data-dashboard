@@ -1,10 +1,10 @@
-import { useCallback, useState, useRef } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
-import { isEmpty } from 'lodash';
-import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { TimestampedValue } from '@corona-dashboard/common';
+import { ScaleBand, ScaleLinear } from 'd3-scale';
+import { isEmpty } from 'lodash-es';
+import { useCallback, useRef, useState } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
 import { SeriesSingleValue } from '~/components/time-series-chart/logic';
-import { SeriesList, SeriesConfig } from './series';
+import { SeriesConfig, SeriesList } from './series';
 
 interface UseHoverStateArgs<T extends TimestampedValue> {
   values: T[];

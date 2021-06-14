@@ -7,7 +7,7 @@ import {
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
 } from '@corona-dashboard/common';
-import { chain, isEmpty, pick } from 'lodash';
+import { chain, isEmpty, pick } from 'lodash-es';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';

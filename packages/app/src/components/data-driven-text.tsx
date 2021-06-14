@@ -5,7 +5,7 @@ import {
   National,
   Regionaal,
 } from '@corona-dashboard/common';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';

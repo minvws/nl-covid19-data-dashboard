@@ -1,7 +1,7 @@
 import { imageResizeTargets } from '@corona-dashboard/common';
 import download from 'download';
 import fs from 'fs-extra';
-import { chunk } from 'lodash';
+import { chunk } from 'lodash-es';
 import fetch from 'node-fetch';
 import { getConfig } from './logic';
 

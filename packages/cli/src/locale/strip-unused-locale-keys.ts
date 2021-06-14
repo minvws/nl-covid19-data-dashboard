@@ -1,11 +1,13 @@
 import { appendTextMutation } from '@corona-dashboard/cms/src/lokalize/logic/mutations';
 import { flatten, unflatten } from 'flat';
 import fs from 'fs';
-import { difference } from 'lodash';
+import { difference } from 'lodash-es';
 import get from 'lodash/get';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
+import { fileURLToPath } from 'url';
+const __dirname = fileURLToPath(import.meta.url);
 
 // These keys aren't directly referenced in the code base, so we add them manually here
 const whitelist = [

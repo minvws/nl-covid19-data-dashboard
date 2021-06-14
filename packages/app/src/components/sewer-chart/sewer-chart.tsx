@@ -212,7 +212,7 @@ export function SewerChart(props: SewerChartProps) {
   const clearTooltips = useDebouncedCallback(() => lineTooltip.clear(), 300);
 
   const handlePointerLeave = useCallback(() => {
-    clearTooltips.callback();
+    clearTooltips();
   }, [clearTooltips]);
 
   const getScatterY = useCallback(

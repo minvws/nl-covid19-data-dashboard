@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
+  "type": "module",
   "dependencies": {
     "ajv": "^6",
     "chalk": "^4.1.0",
@@ -10,7 +11,7 @@
     "flat": "^5.0.2",
     "json-schema-to-typescript": "^9",
     "lodash": "^4.17.21",
-    "meow": "^9.0.0",
+    "meow": "^10.0.1",
     "p-memoize": "^4.0.1",
     "ts-is-present": "^1.2.1",
     "ts-morph": "^11.0.0",
@@ -25,7 +26,7 @@
     "type-check": "echo 'No type-check configured for @corona-dashboard/cli'",
     "compile": "tsc --noEmit",
     "validate-json": "yarn run validate-json-all",
-    "validate-json-all": "ts-node src/scripts/validate-json-all.ts",
+    "validate-json-all": "node --loader ts-node/esm --experimental-specifier-resolution=node src/scripts/validate-json-all.ts",
     "validate-json-single": "ts-node src/scripts/validate-json-single.ts",
     "validate-last-values": "ts-node src/scripts/validate-last-values.ts",
     "validate-features": "ts-node src/scripts/validate-features.ts",
@@ -34,6 +35,7 @@
     "strip-unused-locale-keys": "yarn workspace @corona-dashboard/cms lokalize:export && ts-node src/locale/strip-unused-locale-keys.ts && yarn workspace @corona-dashboard/cms lokalize:export && yarn workspace @corona-dashboard/app compile"
   },
   "devDependencies": {
-    "@types/meow": "^5.0.0"
+    "@types/lodash-es": "^4.17.4",
+    "@types/meow": "^6.0.0"
   }
 }

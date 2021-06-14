@@ -1,4 +1,4 @@
-import { last } from 'lodash';
+import { last } from 'lodash-es';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { SeriesItem, SeriesSingleValue } from '../logic';

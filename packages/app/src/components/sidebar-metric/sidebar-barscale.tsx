@@ -3,7 +3,7 @@ import {
   Metric,
   MetricKeys,
 } from '@corona-dashboard/common';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
 import { useIntl } from '~/intl';

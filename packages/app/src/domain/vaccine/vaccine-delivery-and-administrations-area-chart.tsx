@@ -1,5 +1,5 @@
 import { assert } from '@corona-dashboard/common';
-import { first } from 'lodash';
+import { first } from 'lodash-es';
 import { useMemo } from 'react';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';

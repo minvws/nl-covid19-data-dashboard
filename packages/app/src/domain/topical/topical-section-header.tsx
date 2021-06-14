@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { ReactNode } from 'react';
 import { ArrowIconLeft, ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';

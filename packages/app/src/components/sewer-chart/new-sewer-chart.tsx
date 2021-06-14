@@ -4,7 +4,7 @@ import {
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
-import { set } from 'lodash';
+import { set } from 'lodash-es';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';

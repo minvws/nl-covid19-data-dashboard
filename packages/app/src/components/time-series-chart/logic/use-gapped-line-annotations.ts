@@ -3,7 +3,7 @@ import {
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { isBoolean, last } from 'lodash';
+import { isBoolean, last } from 'lodash-es';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';

@@ -1,7 +1,7 @@
-import { get } from 'lodash';
+import { get } from 'lodash-es';
+import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 import { gm } from './gm';
 import { nl } from './nl';
-import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 import { vr } from './vr';
 
 /**

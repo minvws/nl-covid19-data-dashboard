@@ -3,7 +3,7 @@ import {
   isDateValue,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { mapValues, omit, pick } from 'lodash';
+import { mapValues, omit, pick } from 'lodash-es';
 
 /**
  * A SeriesValue contains the properties for all trend values in key/value

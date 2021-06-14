@@ -2,7 +2,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
-import { first, last } from 'lodash';
+import { first, last } from 'lodash-es';
 import { useCallback, useEffect, useMemo } from 'react';
 // Time Series Chart components and logic
 import {

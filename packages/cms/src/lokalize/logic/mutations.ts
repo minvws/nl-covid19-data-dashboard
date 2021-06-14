@@ -1,8 +1,10 @@
-import path from 'path';
-import fs from 'fs';
-import { EOL } from 'os';
 import { parse } from '@fast-csv/parse';
-import { sortBy } from 'lodash';
+import fs from 'fs';
+import { sortBy } from 'lodash-es';
+import { EOL } from 'os';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = fileURLToPath(import.meta.url);
 
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 const HEADER = `timestamp,action,key${EOL}`;

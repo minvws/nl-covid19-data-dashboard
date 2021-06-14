@@ -9,8 +9,10 @@ import { unflatten } from 'flat';
 import fs from 'fs';
 import path from 'path';
 import prettier from 'prettier';
-import { getClient } from '../../client';
+import { fileURLToPath } from 'url';
 import { collapseTextMutations, readTextMutations } from '.';
+import { getClient } from '../../client';
+const __dirname = fileURLToPath(import.meta.url);
 
 export const localeDirectory = path.resolve(
   __dirname,

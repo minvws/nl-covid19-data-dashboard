@@ -1,4 +1,4 @@
-import { intersection } from 'lodash';
+import { intersection } from 'lodash-es';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, publishReplay, refCount, startWith, tap } from 'rxjs/operators';
 import { filterField, supportedLanguages } from './config';

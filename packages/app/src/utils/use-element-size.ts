@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { useEffect, useRef, useState } from 'react';
 
 export function useElementSize<T extends HTMLElement>(

@@ -28,7 +28,7 @@
  */
 
 import { assert } from '@corona-dashboard/common';
-import { difference } from 'lodash';
+import { difference } from 'lodash-es';
 import prompts from 'prompts';
 import { getClient } from '../client';
 import { clearMutationsLogFile } from './logic';

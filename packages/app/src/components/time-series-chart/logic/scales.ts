@@ -7,7 +7,7 @@ import {
 } from '@corona-dashboard/common';
 import { scaleLinear } from '@visx/scale';
 import { ScaleLinear } from 'd3-scale';
-import { first, isEmpty, last } from 'lodash';
+import { first, isEmpty, last } from 'lodash-es';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';

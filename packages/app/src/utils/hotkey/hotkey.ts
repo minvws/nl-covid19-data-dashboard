@@ -1,4 +1,4 @@
-import { debounce, defaults, isEqual } from 'lodash';
+import { debounce, defaults, isEqual } from 'lodash-es';
 import { isDefined } from 'ts-is-present';
 import { assert } from '../assert';
 

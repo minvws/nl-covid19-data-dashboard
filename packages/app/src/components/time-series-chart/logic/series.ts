@@ -3,7 +3,7 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { omit } from 'lodash';
+import { omit } from 'lodash-es';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';

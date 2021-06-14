@@ -1,13 +1,13 @@
-import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { isPresent } from 'ts-is-present';
-import { last } from 'lodash';
 import {
   NationalReproduction,
   NationalReproductionValue,
 } from '@corona-dashboard/common';
+import { last } from 'lodash-es';
+import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
 
 interface ReproductionChartTileProps {

@@ -6,7 +6,7 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import GetestIcon from '~/assets/test.svg';

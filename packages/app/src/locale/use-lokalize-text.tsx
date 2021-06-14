@@ -3,7 +3,7 @@ import '@reach/combobox/styles.css';
 import { MutationEvent, SanityDocument } from '@sanity/client';
 import css from '@styled-system/css';
 import { flatten, unflatten } from 'flat';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import set from 'lodash/set';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Subscription } from 'rxjs';

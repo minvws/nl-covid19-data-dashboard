@@ -1,13 +1,13 @@
-import { set } from 'lodash';
-import { useMemo } from 'react';
-import { Regions } from '@corona-dashboard/common';
-import { assert } from '~/utils/assert';
 import {
   Dictionary,
   RegionGeoJSON,
+  Regions,
   RegionsMetricName,
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
+import { set } from 'lodash-es';
+import { useMemo } from 'react';
+import { assert } from '~/utils/assert';
 import { DataValue } from './use-municipality-data';
 
 interface RegionMetricValue extends SafetyRegionProperties {

@@ -7,7 +7,7 @@ import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
-import { isEmpty, throttle } from 'lodash';
+import { isEmpty, throttle } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Padding, TimespanAnnotationConfig } from './common';

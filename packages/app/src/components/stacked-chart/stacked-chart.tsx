@@ -16,7 +16,7 @@ import { SeriesPoint } from '@visx/shape/lib/types';
  * https://github.com/airbnb/visx/issues/904
  */
 import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
-import { isEmpty, set } from 'lodash';
+import { isEmpty, set } from 'lodash-es';
 import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';

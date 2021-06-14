@@ -1,6 +1,6 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { ReactNode } from 'react';
 import { Box } from '~/components/base';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';

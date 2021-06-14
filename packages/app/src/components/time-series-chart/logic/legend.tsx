@@ -1,5 +1,5 @@
 import { TimestampedValue } from '@corona-dashboard/common';
-import { first, last } from 'lodash';
+import { first, last } from 'lodash-es';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components/legend';

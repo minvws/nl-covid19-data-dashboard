@@ -1,4 +1,6 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = fileURLToPath(import.meta.url);
 
 const appBasePath = path.join(
   __dirname,

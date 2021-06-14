@@ -1,4 +1,4 @@
-import { flatten } from 'lodash';
+import { flatten } from 'lodash-es';
 import { isDefined } from 'ts-is-present';
 import { vrData } from '~/data/vr';
 import { EscalationLevel } from '~/domain/restrictions/type';

@@ -1,9 +1,9 @@
-import { PositionScale } from '@visx/shape/lib/types';
 import { Group } from '@visx/group';
 import { Bar } from '@visx/shape';
+import { PositionScale } from '@visx/shape/lib/types';
+import { first, last } from 'lodash-es';
+import { memo, MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { first, last } from 'lodash';
-import { useCallback, MouseEvent, TouchEvent, useMemo, memo } from 'react';
 import {
   SeriesItem,
   SeriesSingleValue,

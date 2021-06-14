@@ -1,5 +1,5 @@
 import { NlVaccineStockValue } from '@corona-dashboard/common';
-import { pick } from 'lodash';
+import { pick } from 'lodash-es';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';

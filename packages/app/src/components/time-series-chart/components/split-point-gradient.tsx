@@ -1,5 +1,5 @@
 import { PositionScale } from '@visx/shape/lib/types';
-import { first, last } from 'lodash';
+import { first, last } from 'lodash-es';
 import { Fragment } from 'react';
 import { SplitPoint } from '../logic';
 

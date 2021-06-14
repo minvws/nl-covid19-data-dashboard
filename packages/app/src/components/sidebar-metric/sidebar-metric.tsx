@@ -4,7 +4,7 @@ import {
   Metric,
   MetricKeys,
 } from '@corona-dashboard/common';
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';

@@ -1,7 +1,7 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
-import { get } from 'lodash';
-import { assert } from '~/utils/assert';
+import { get } from 'lodash-es';
 import { isDefined } from 'ts-is-present';
+import { assert } from '~/utils/assert';
 
 export function getDataThresholds<T>(
   thresholdData: T,

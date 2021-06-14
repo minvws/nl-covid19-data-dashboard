@@ -1,4 +1,4 @@
-import { throttle } from 'lodash';
+import { throttle } from 'lodash-es';
 import { useEffect, useRef, useState } from 'react';
 
 export function useBoundingBox<T extends HTMLElement>() {

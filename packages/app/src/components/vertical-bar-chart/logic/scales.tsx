@@ -1,14 +1,14 @@
-import { TimestampedValue, isDateValue } from '@corona-dashboard/common';
-import { scaleLinear, scaleBand } from '@visx/scale';
-import { ScaleLinear, ScaleBand } from 'd3-scale';
-import { first, isEmpty, last } from 'lodash';
+import { isDateValue, TimestampedValue } from '@corona-dashboard/common';
+import { scaleBand, scaleLinear } from '@visx/scale';
+import { ScaleBand, ScaleLinear } from 'd3-scale';
+import { first, isEmpty, last } from 'lodash-es';
 import { useMemo } from 'react';
 import {
   Bounds,
-  SeriesItem,
-  SeriesSingleValue,
   GetX,
   GetY,
+  SeriesItem,
+  SeriesSingleValue,
 } from '~/components/time-series-chart/logic';
 import { useCurrentDate } from '~/utils/current-date-context';
 

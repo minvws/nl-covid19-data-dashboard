@@ -1,6 +1,6 @@
 import { NlVaccineAdministeredRateMovingAverageValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { shuffle } from 'lodash';
+import { shuffle } from 'lodash-es';
 import { useEffect, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
