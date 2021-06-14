@@ -6,15 +6,15 @@
   "dependencies": {
     "ajv": "^6",
     "chalk": "^4.1.0",
+    "dotenv": "^10.0.0",
     "flat": "^5.0.2",
-    "dotenv": "^8.2.0",
     "json-schema-to-typescript": "^9",
     "lodash": "^4.17.21",
     "meow": "^9.0.0",
     "p-memoize": "^4.0.1",
     "ts-is-present": "^1.2.1",
-    "ts-morph": "^10.0.2",
-    "ts-node": "^9.1.1"
+    "ts-morph": "^11.0.0",
+    "ts-node": "^10.0.0"
   },
   "scripts": {
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",
