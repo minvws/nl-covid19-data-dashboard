@@ -247,7 +247,12 @@ const ChoroplethMap: <T1, T3>(
               fitSize={fitSize}
             />
 
-            <Country fitSize={fitSize} />
+            {/**
+             *  @TODO this renders the NL country on all choropleths, but that
+             * should obviously not happen for EU choropleths.
+             * Or maybe it should..? It does add an extra layer of detail for NL..
+             */}
+            {/* <Country fitSize={fitSize} /> */}
 
             {hovers && (
               <g ref={hoverRef}>

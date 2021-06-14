@@ -7,7 +7,39 @@ import { Choropleth } from './choropleth';
 import { HoverPathLink, Path } from './path';
 import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
 
+/**
+ * Clean up the following lists of country codes and creation of `actuallyEurope`.
+ * Thing is that `europeGeo` includes more than only europe (northern part of
+ * Africa, western part of Asia) in order to display outlines of neigbouring
+ * countries. This can all be cleaned up and is currently hacked together for
+ * demo/mpv purposes.
+ */
+const nonEurope = [
+  'MAR',
+  'DZA',
+  'TUN',
+  'LBY',
+  'EGY',
+  'SAU',
+  'IRN',
+  'IRQ',
+  'JOR',
+  'ISR',
+  'PSE',
+  'LBN',
+];
+
+/**
+ * List of countries to define the boundingbox
+ */
 const focusEuropeCodes = ['ISL', 'NOR', 'AZE', 'ESP'];
+
+const actuallyEurope: EuropeGeoJSON = {
+  ...europeGeo,
+  features: europeGeo.features.filter(
+    (x) => !nonEurope.includes(x.properties.ISO_A3)
+  ),
+};
 const focusEurope: EuropeGeoJSON = {
   ...europeGeo,
   features: europeGeo.features.filter((x) =>
@@ -19,7 +51,7 @@ const focusEurope: EuropeGeoJSON = {
  * @TODO clean up; debug code
  */
 function pickRandomColor() {
-  const colorValues = Object.values(colors.data.multiseries);
+  const colorValues = colors.data.scale.blue;
   const randomColorIndex = Math.floor(Math.random() * colorValues.length);
   return colorValues[randomColorIndex];
 }
@@ -39,12 +71,19 @@ function pickRandomColor() {
 export function EuropeChoropleth() {
   const renderFeature = useCallback(
     (feature: Feature<MultiPolygon, EuropeGeoProperties>, path: string) => {
-      return (
+      return nonEurope.includes(feature.properties.ISO_A3) ? (
+        <Path
+          key={path}
+          pathData={path}
+          stroke={colors.silver}
+          strokeWidth={0.5}
+        />
+      ) : (
         <Path
           key={path}
           pathData={path}
           fill={pickRandomColor()}
-          stroke={colors.silver}
+          stroke={'white'}
           strokeWidth={0.5}
         />
       );
@@ -86,7 +125,7 @@ export function EuropeChoropleth() {
         minHeight={514}
         description={'dataDescription'}
         featureCollection={europeGeo}
-        hovers={europeGeo}
+        hovers={actuallyEurope}
         boundingBox={focusEurope}
         renderFeature={renderFeature}
         getTooltipContent={(id: string) => <InlineText p={2}>{id}</InlineText>}
