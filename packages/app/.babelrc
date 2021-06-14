@@ -1,7 +1,6 @@
 {
   "presets": ["next/babel"],
   "plugins": [
-    "lodash",
     [
       "babel-plugin-styled-components",
       {

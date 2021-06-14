@@ -11,6 +11,7 @@
     "flat": "^5.0.2",
     "json-schema-to-typescript": "^9",
     "lodash": "^4.17.21",
+    "lodash-es": "4.17.15",
     "meow": "^10.0.1",
     "p-memoize": "^4.0.1",
     "ts-is-present": "^1.2.1",

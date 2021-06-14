@@ -1,4 +1,3 @@
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const withPlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -102,12 +101,12 @@ const nextConfig = {
       // 'react-spring/renderprops$': 'react-spring/renderprops.cjs',
     };
 
-    config.plugins.push(
-      new LodashModuleReplacementPlugin({
-        // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
-        paths: true,
-      })
-    );
+    // config.plugins.push(
+    //   new LodashModuleReplacementPlugin({
+    //     // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
+    //     paths: true,
+    //   })
+    // );
 
     return config;
   },
