@@ -63,22 +63,28 @@ const nextConfig = {
 
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
-      use: [
+      test: /\.svg?$/,
+      oneOf: [
         {
-          loader: '@svgr/webpack',
-          options: {
-            typescript: false,
-            dimensions: true,
-            svgo: false,
-            /**
-             * Forward ref to the root SVG tag
-             */
-            ref: true,
+          use: [
+            {
+              loader: '@svgr/webpack',
+              options: {
+                typescript: false,
+                dimensions: true,
+                svgo: false,
+                /**
+                 * Forward ref to the root SVG tag
+                 */
+                ref: true,
+              },
+            },
+          ],
+          issuer: {
+            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
           },
         },
       ],
-      issuer: /\.(js|ts)x?$/,
     });
 
     config.resolve.alias = {
