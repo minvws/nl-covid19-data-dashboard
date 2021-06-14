@@ -109,7 +109,7 @@ const Line = styled.div<{ color: string; lineStyle: LegendLineStyle }>(
       position: 'absolute',
       borderTopColor: color as SystemStyleObject,
       borderTopStyle: lineStyle,
-      borderTopWidth: lineStyle === 'solid' ? '3px' : '0',
+      borderTopWidth: lineStyle === 'solid' ? '3px' : 0,
       top: '10px',
       width: '15px',
       borderRadius: '2px',
