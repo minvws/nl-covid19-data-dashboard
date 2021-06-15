@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import Varianten from '~/assets/varianten.svg';
-import { ArticleStrip, ArticleStripItem } from '~/components/article-strip';
+import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ContentHeader } from '~/components/content-header';
@@ -27,13 +27,14 @@ import { VariantsPageQuery } from '~/types/cms';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Tile } from '~/components/tile';
 import { CompactDecoratedLink } from '~/components/decorated-link';
+import { assert } from '~/utils/assert';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'variantsPagePage',
   createGetStaticProps(
     getLastGeneratedDate,
-    (context) => {
-      const data = selectNlPageMetricData('variants')(context);
+    () => {
+      const data = selectNlPageMetricData('variants')();
       data.selectedNlData.variants =
         data.selectedNlData.variants || mockVariantsData();
 
@@ -72,6 +73,10 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
+  assert(data.variants, 'no situations data found');
+
+  const lastValue = data.variants.last_value;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
@@ -85,10 +90,10 @@ export default function CovidVariantenPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: data.variants.date_start_unix,
-                end: data.variants.date_end_unix,
+                start: lastValue.date_start_unix,
+                end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: data.variants.date_of_insertion_unix,
+              dateOfInsertionUnix: lastValue.date_of_insertion,
               dataSources: [text.bronnen.rivm],
             }}
           />
