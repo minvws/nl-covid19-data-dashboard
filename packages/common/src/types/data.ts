@@ -192,7 +192,7 @@ export interface National {
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
   vaccine_stock: NlVaccineStock;
-  variants?: NationalVariants;
+  variants?: NlVariants;
 }
 export interface NationalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
@@ -218,15 +218,15 @@ export interface NationalDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
-  variants__alpha_percentage: DifferenceDecimal;
-  variants__beta_percentage: DifferenceDecimal;
-  variants__gamma_percentage: DifferenceDecimal;
-  variants__delta_percentage: DifferenceDecimal;
-  variants__eta_percentage: DifferenceDecimal;
-  variants__epsilon_percentage: DifferenceDecimal;
-  variants__theta_percentage: DifferenceDecimal;
-  variants__kappa_percentage: DifferenceDecimal;
-  variants__other_percentage: DifferenceDecimal;
+  variants__alpha_percentage?: DifferenceDecimal;
+  variants__beta_percentage?: DifferenceDecimal;
+  variants__gamma_percentage?: DifferenceDecimal;
+  variants__delta_percentage?: DifferenceDecimal;
+  variants__eta_percentage?: DifferenceDecimal;
+  variants__epsilon_percentage?: DifferenceDecimal;
+  variants__theta_percentage?: DifferenceDecimal;
+  variants__kappa_percentage?: DifferenceDecimal;
+  variants__other_percentage?: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -838,11 +838,11 @@ export interface NlVaccineStockValue {
   date_of_insertion_unix: number;
   date_unix: number;
 }
-export interface NationalVariants {
-  values: NationalVariantsValue[];
-  last_value: NationalVariantsValue;
+export interface NlVariants {
+  values: NlVariantsValue[];
+  last_value: NlVariantsValue;
 }
-export interface NationalVariantsValue {
+export interface NlVariantsValue {
   alpha_percentage: number;
   alpha_occurrence: number;
   alpha_is_variant_of_concern: boolean;
@@ -873,6 +873,7 @@ export interface NationalVariantsValue {
   sample_size: number;
   date_start_unix: number;
   date_end_unix: number;
+  date_of_insertion: number;
 }
 
 export interface Regionaal {
