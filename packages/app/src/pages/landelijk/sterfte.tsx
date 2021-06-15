@@ -202,7 +202,11 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          <DeceasedMonitorSection data={dataCbs} showDataMessage />
+          <DeceasedMonitorSection
+            data={dataCbs}
+            showDataMessage
+            showCauseMessage
+          />
         </TileList>
       </NationalLayout>
     </Layout>

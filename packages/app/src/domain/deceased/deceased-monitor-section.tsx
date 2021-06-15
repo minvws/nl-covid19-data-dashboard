@@ -4,6 +4,7 @@ import {
 } from '@corona-dashboard/common';
 import { AnchorTile } from '~/components/anchor-tile';
 import { ChartTile } from '~/components/chart-tile';
+import { Markdown } from '~/components/markdown';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -11,9 +12,11 @@ import { colors } from '~/style/theme';
 export function DeceasedMonitorSection({
   data,
   showDataMessage,
+  showCauseMessage,
 }: {
   data: NationalDeceasedCbs | RegionalDeceasedCbs;
   showDataMessage?: boolean;
+  showCauseMessage?: boolean;
 }) {
   const { siteText } = useIntl();
   const text = siteText.section_sterftemonitor;
@@ -68,6 +71,17 @@ export function DeceasedMonitorSection({
           ]}
         />
       </ChartTile>
+
+      {showCauseMessage && (
+        <AnchorTile
+          title={text.cause_message.title}
+          label={text.cause_message.link.text}
+          href={text.cause_message.link.href}
+          external
+        >
+          <Markdown content={text.cause_message.message}></Markdown>
+        </AnchorTile>
+      )}
     </>
   );
 }
