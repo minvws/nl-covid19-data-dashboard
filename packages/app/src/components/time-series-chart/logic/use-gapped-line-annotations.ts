@@ -6,7 +6,6 @@ import {
 import { isBoolean, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { useIntl } from '~/intl';
 import { TimespanAnnotationConfig } from './common';
 
 const HALF_DAY_IN_SECONDS = 12 * 60 * 60;
@@ -35,8 +34,6 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
   property: keyof T,
   label: string
 ) {
-  const { formatDateFromSeconds } = useIntl();
-
   return useMemo(() => {
     return values.reduce<TimespanAnnotationConfig[]>(
       (newItems, item, index, array) => {
@@ -78,7 +75,7 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
       },
       []
     );
-  }, [values, property, label, formatDateFromSeconds]);
+  }, [values, property, label]);
 }
 
 function hasValue(value: unknown) {
