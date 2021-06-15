@@ -1,0 +1,153 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_variants_value",
+      "type": "object",
+      "required": [
+        "alpha_percentage",
+        "alpha_occurrence",
+        "alpha_is_variant_of_concern",
+        "beta_percentage",
+        "beta_occurrence",
+        "beta_is_variant_of_concern",
+        "gamma_percentage",
+        "gamma_occurrence",
+        "gamma_is_variant_of_concern",
+        "delta_percentage",
+        "delta_occurrence",
+        "delta_is_variant_of_concern",
+        "eta_percentage",
+        "eta_occurrence",
+        "eta_is_variant_of_concern",
+        "epsilon_percentage",
+        "epsilon_occurrence",
+        "epsilon_is_variant_of_concern",
+        "theta_percentage",
+        "theta_occurrence",
+        "theta_is_variant_of_concern",
+        "kappa_percentage",
+        "kappa_occurrence",
+        "kappa_is_variant_of_concern",
+        "other_percentage",
+        "other_occurrence",
+        "other_is_variant_of_concern",
+        "sample_size",
+        "date_of_insertion",
+        "date_start_unix",
+        "date_end_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "alpha_percentage": {
+          "type": "number"
+        },
+        "alpha_occurrence": {
+          "type": "integer"
+        },
+        "alpha_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "beta_percentage": {
+          "type": "number"
+        },
+        "beta_occurrence": {
+          "type": "integer"
+        },
+        "beta_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "gamma_percentage": {
+          "type": "number"
+        },
+        "gamma_occurrence": {
+          "type": "integer"
+        },
+        "gamma_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "delta_percentage": {
+          "type": "number"
+        },
+        "delta_occurrence": {
+          "type": "integer"
+        },
+        "delta_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "eta_percentage": {
+          "type": "number"
+        },
+        "eta_occurrence": {
+          "type": "integer"
+        },
+        "eta_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "epsilon_percentage": {
+          "type": "number"
+        },
+        "epsilon_occurrence": {
+          "type": "integer"
+        },
+        "epsilon_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "theta_percentage": {
+          "type": "number"
+        },
+        "theta_occurrence": {
+          "type": "integer"
+        },
+        "theta_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "kappa_percentage": {
+          "type": "number"
+        },
+        "kappa_occurrence": {
+          "type": "integer"
+        },
+        "kappa_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "other_percentage": {
+          "type": "number"
+        },
+        "other_occurrence": {
+          "type": "integer"
+        },
+        "other_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "sample_size": {
+          "type": "integer"
+        },
+        "date_start_unix": {
+          "type": "integer"
+        },
+        "date_end_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_variants",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}
