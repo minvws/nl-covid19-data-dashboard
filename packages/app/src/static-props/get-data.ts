@@ -92,14 +92,14 @@ async function replaceReferences(client: SanityClient, input: any) {
 
       assert(typeof refId === 'string', 'node.val._ref is not set');
 
-      const reference = await client.fetch(`*[_id == '${refId}']{...}[0]`);
+      const document = await client.fetch(`*[_id == '${refId}']{...}[0]`);
 
       /**
        * Here we'll mutate the original reference object by clearing the
        * existing keys and adding all keys of the reference itself.
        */
       Object.keys(node.val).forEach((key) => delete node.val[key]);
-      Object.keys(reference).forEach((key) => (node.val[key] = reference[key]));
+      Object.keys(document).forEach((key) => (node.val[key] = document[key]));
     })
     .walk(input);
 }
