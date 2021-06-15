@@ -47,13 +47,17 @@ export function RichContent({
         />
       ),
       collapsible: (props: { node: CollapsibleList }) => {
-        return isPresent(props.node.content) ? (
-          <CollapsibleSection summary={props.node.title}>
-            <Box mt={3}>
-              <RichContent blocks={props.node.content} />
-            </Box>
-          </CollapsibleSection>
-        ) : null;
+        if (!props.node.content) return null;
+
+        return (
+          <ContentWrapper>
+            <CollapsibleSection summary={props.node.title}>
+              <Box mt={3}>
+                <RichContent blocks={props.node.content} />
+              </Box>
+            </CollapsibleSection>
+          </ContentWrapper>
+        );
       },
     },
     marks: {
