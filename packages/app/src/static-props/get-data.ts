@@ -67,6 +67,7 @@ export function createGetContent<T>(
     // const { locale } = context;
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
+    // this function call will mutate `rawContent`
     await replaceReferences(client, rawContent);
 
     const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
