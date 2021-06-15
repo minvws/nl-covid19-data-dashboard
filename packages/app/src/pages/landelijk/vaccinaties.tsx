@@ -1,7 +1,4 @@
-import {
-  NlVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoverageValue,
-} from '@corona-dashboard/common';
+import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -84,11 +81,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
     deliveryAndAdministration,
   } = props;
-
-  /**
-   * @TODO cleanup mock function before merge to develop
-   */
-  data.vaccine_coverage = data.vaccine_coverage || mockVaccineCoverageData();
 
   const stockFeature = useFeature('vaccineStockPerSupplier');
 
@@ -399,50 +391,4 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
       date_unix: 1616544000,
     };
   }
-}
-
-function mockVaccineCoverageData() {
-  const ONE_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
-  const samples = 24;
-  let timestamp = Date.now() / 1000;
-  let partially_vaccinated = 0;
-  let fully_vaccinated = 0;
-
-  const values = Array(samples)
-    .fill(null)
-    .map(() => {
-      partially_vaccinated += Math.floor(Math.random() * 1000000);
-      fully_vaccinated += Math.floor(Math.random() * 1000000);
-
-      return { partially_vaccinated, fully_vaccinated };
-    })
-    .reverse()
-    .map<NlVaccineCoverageValue>(
-      ({ partially_vaccinated, fully_vaccinated }) => {
-        const total = partially_vaccinated + fully_vaccinated;
-        const partiallyPercentage = partially_vaccinated / total;
-        const fullyPercentage = fully_vaccinated / total;
-
-        const date_end_unix = timestamp;
-        const date_start_unix = (timestamp -= ONE_WEEK_IN_SECONDS);
-
-        return {
-          partially_vaccinated,
-          partially_vaccinated_percentage: partiallyPercentage,
-          fully_vaccinated,
-          fully_vaccinated_percentage: fullyPercentage,
-          partially_or_fully_vaccinated: total,
-          date_start_unix,
-          date_end_unix,
-          date_of_report_unix: date_end_unix,
-          date_of_insertion_unix: date_end_unix,
-        };
-      }
-    )
-    .reverse();
-
-  return {
-    values,
-    last_value: values[values.length - 1],
-  };
 }
