@@ -5,7 +5,10 @@ import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ContentHeader } from '~/components/content-header';
+import { CompactDecoratedLink } from '~/components/decorated-link';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -24,9 +27,6 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { VariantsPageQuery } from '~/types/cms';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Tile } from '~/components/tile';
-import { CompactDecoratedLink } from '~/components/decorated-link';
 import { assert } from '~/utils/assert';
 
 export const getStaticProps = withFeatureNotFoundPage(
@@ -122,7 +122,7 @@ export default function CovidVariantenPage(
             {content.page.pageLinks && (
               <Box>
                 <Heading level={3}>
-                  {text.informatie_block.nuttige_links_titel}
+                  {text.informatie_blok.nuttige_links_titel}
                 </Heading>
                 <DecoratedLinksTile>
                   {content.page.pageLinks.map((x, index) => (
