@@ -340,6 +340,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
+
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}

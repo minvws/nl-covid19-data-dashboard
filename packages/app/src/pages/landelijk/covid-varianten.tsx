@@ -1,15 +1,21 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import Varianten from '~/assets/varianten.svg';
 import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
+import { CompactDecoratedLink } from '~/components/decorated-link';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { mockVariantsData } from '~/domain/variants/logic/mock-data';
+import { VariantsOverTime } from '~/domain/variants/variants-over-time';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -24,9 +30,6 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { VariantsPageQuery } from '~/types/cms';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Tile } from '~/components/tile';
-import { CompactDecoratedLink } from '~/components/decorated-link';
 import { assert } from '~/utils/assert';
 
 export const getStaticProps = withFeatureNotFoundPage(
@@ -72,6 +75,8 @@ export default function CovidVariantenPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  console.log(data);
 
   assert(data.variants, 'no situations data found');
 
@@ -137,6 +142,31 @@ export default function CovidVariantenPage(
               </Box>
             )}
           </TwoKpiSection>
+
+          {data.variants.values && (
+            <ChartTile
+              title={text.varianten_over_tijd.titel}
+              description={'asd'}
+              metadata={{
+                source: text.bronnen.rivm,
+              }}
+            >
+              {isDefined(data.variants.values) && (
+                <VariantsOverTime
+                  values={data.variants.values}
+                  // values={data.tested_per_age_group.values}
+                  // timeframe={timeframe}
+                />
+              )}
+              {/* {(timeframe) => (
+                <VariantsOverTime
+                  values={data.variants.values}
+                  // values={data.tested_per_age_group.values}
+                  // timeframe={timeframe}
+                />
+              )} */}
+            </ChartTile>
+          )}
         </TileList>
       </NationalLayout>
     </Layout>
