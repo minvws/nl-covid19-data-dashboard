@@ -188,3 +188,12 @@ export type VaccinationPageQuery = {
   milestones: Milestones[];
   expectedMilestones: ExpectedMilestones[];
 };
+
+export type LinkProps = {
+  href: string;
+  title: string;
+};
+
+export type VariantsPageQuery = {
+  pageLinks: [LinkProps];
+};
