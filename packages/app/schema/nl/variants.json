@@ -128,7 +128,7 @@
         "date_end_unix": {
           "type": "integer"
         },
-        "date_of_insertion": {
+        "date_of_insertion_unix": {
           "type": "integer"
         }
       }
