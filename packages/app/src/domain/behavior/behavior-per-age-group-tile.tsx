@@ -3,19 +3,18 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { assert } from '~/utils/assert';
-import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
-import { BehaviorIcon } from '../components/behavior-icon';
+import { SelectBehavior } from './components/select-behavior';
+import { BehaviorIdentifier } from './logic/behavior-types';
 
 const AGE_KEYS = ['70_plus', '55_69', '40_54', '25_39', '16_24'] as const;
 
-export interface BehaviorPerAgeGroupProps {
+interface BehaviorPerAgeGroupProps {
   title: string;
   description: string;
   complianceExplanation: string;
@@ -24,6 +23,7 @@ export interface BehaviorPerAgeGroupProps {
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
+
 export function BehaviorPerAgeGroup({
   title,
   description,
@@ -34,14 +34,6 @@ export function BehaviorPerAgeGroup({
   setCurrentId,
 }: BehaviorPerAgeGroupProps) {
   const { siteText } = useIntl();
-
-  const behaviorIndentifiersData = behaviorIdentifiers.map((id) => {
-    const label = siteText.gedrag_onderwerpen[id];
-    return {
-      label,
-      value: id,
-    };
-  });
 
   const complianceValue = data[`${currentId}_compliance` as keyof typeof data];
   const supportValue = data[`${currentId}_support` as keyof typeof data];
@@ -61,12 +53,7 @@ export function BehaviorPerAgeGroup({
       <Text>{description}</Text>
 
       <Box mb={4}>
-        <Select
-          value={currentId}
-          onChange={setCurrentId}
-          options={behaviorIndentifiersData}
-          icon={<BehaviorIcon name={currentId} size={20} />}
-        />
+        <SelectBehavior value={currentId} onChange={setCurrentId} />
       </Box>
       <Box overflow="auto">
         {isDefined(complianceValue) || isDefined(supportValue) ? (

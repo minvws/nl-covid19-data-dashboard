@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { InlineText, Text } from '~/components/typography';
-import { BehaviorIdentifier } from '~/domain/behavior/behavior-types';
+import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -30,14 +30,15 @@ export function BehaviorTooltip({
 }: BehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const thresholdKey = `${currentMetric}_${behaviorType}` as const;
 
   const complianceFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior_compliance,
+    regionThresholds.behavior[thresholdKey],
     currentComplianceValue
   );
 
   const supportFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior_support,
+    regionThresholds.behavior[thresholdKey],
     currentSupportValue
   );
 

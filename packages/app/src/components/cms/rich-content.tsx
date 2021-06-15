@@ -12,6 +12,7 @@ import {
 import { assert } from '~/utils/assert';
 import { Box } from '../base';
 import { CollapsibleSection } from '../collapsible';
+import { ErrorBoundary } from '../error-boundary';
 import { ContentImage } from './content-image';
 import { ExternalLink } from '~/components/external-link';
 import { Link } from '~/utils/link';
@@ -63,7 +64,12 @@ export function RichContent({
       link: InlineLinkMark,
     },
   };
-  return <PortableText blocks={blocks} serializers={serializers} />;
+
+  return (
+    <ErrorBoundary>
+      <PortableText blocks={blocks} serializers={serializers} />
+    </ErrorBoundary>
+  );
 }
 
 function InlineAttachmentMark(props: {

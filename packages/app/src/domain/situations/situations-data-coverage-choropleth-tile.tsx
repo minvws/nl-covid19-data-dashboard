@@ -7,6 +7,7 @@ import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
 import { Box } from '~/components/base';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
 import { Heading, Text } from '~/components/typography';
@@ -96,15 +97,17 @@ export function SituationsDataCoverageChoroplethTile({
           height="100%"
         >
           <Box height="100%">
-            <SafetyRegionChoropleth
-              data={data}
-              getLink={reverseRouter.vr.brononderzoek}
-              metricName="situations"
-              metricProperty="has_sufficient_data"
-              tooltipContent={(
-                context: SafetyRegionProperties & VrCollectionSituations
-              ) => <SituationsDataCoverageTooltip context={context} />}
-            />
+            <ErrorBoundary>
+              <SafetyRegionChoropleth
+                data={data}
+                getLink={reverseRouter.vr.brononderzoek}
+                metricName="situations"
+                metricProperty="has_sufficient_data"
+                tooltipContent={(
+                  context: SafetyRegionProperties & VrCollectionSituations
+                ) => <SituationsDataCoverageTooltip context={context} />}
+              />
+            </ErrorBoundary>
           </Box>
         </Box>
       </Box>
