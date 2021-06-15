@@ -3,6 +3,13 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const withTranspileModules = require('next-transpile-modules')([
+  'lodash-es',
+  'd3-scale',
+  'd3-array',
+  'internmap',
+]);
+
 const nextConfig = {
   future: {
     webpack5: true,
@@ -114,4 +121,4 @@ const nextConfig = {
 
 const plugins = [withBundleAnalyzer];
 
-module.exports = withPlugins(plugins, nextConfig);
+module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
