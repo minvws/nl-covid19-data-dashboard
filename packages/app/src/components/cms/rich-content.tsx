@@ -1,6 +1,5 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
-import { isPresent } from 'ts-is-present';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
   CollapsibleList,
