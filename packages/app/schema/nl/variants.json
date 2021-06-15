@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "national_variants_value",
+      "title": "nl_variants_value",
       "type": "object",
       "required": [
         "alpha_percentage",
@@ -32,6 +32,7 @@
         "other_occurrence",
         "other_is_variant_of_concern",
         "sample_size",
+        "date_of_insertion ",
         "date_start_unix",
         "date_end_unix"
       ],
@@ -126,12 +127,15 @@
         },
         "date_end_unix": {
           "type": "integer"
+        },
+        "date_of_insertion": {
+          "type": "integer"
         }
       }
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_variants",
+  "title": "nl_variants",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,
