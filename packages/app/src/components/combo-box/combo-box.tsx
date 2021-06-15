@@ -10,10 +10,10 @@ import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box } from '~/components/base';
+import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useThrottle } from '~/utils/useThrottle';
-import { useIntl } from '~/intl';
+import { useThrottle } from '~/utils/use-throttle';
 
 type TOption = {
   displayName?: string;

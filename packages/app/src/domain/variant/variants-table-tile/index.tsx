@@ -68,7 +68,10 @@ export function VariantsTableTile({
             {variantsTableRows.map((row) => (
               <tr key={row.variant}>
                 <Cell>
-                  <InlineText fontWeight="bold">{row.variant}</InlineText>
+                  <InlineText fontWeight="bold">
+                    {row.variant.charAt(0).toUpperCase()}
+                    {row.variant.slice(1)}
+                  </InlineText>
                 </Cell>
                 <Cell>
                   <InlineText>{row.countryOfOrigin}</InlineText>
