@@ -9,3 +9,12 @@ timestamp,action,key
 2021-06-07T14:22:50.606Z,add,common.foutmelding_is_gekopieerd
 2021-06-07T14:23:11.624Z,add,common.foutmelding_kon_niet_gekopieerd_worden
 2021-06-07T15:50:34.368Z,add,common.foutmelding_email_adres
+2021-06-14T10:57:59.405Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.titel
+2021-06-14T10:58:00.425Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving
+2021-06-14T10:58:01.476Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.waarde_annotatie
+2021-06-14T10:58:02.457Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal
+2021-06-14T10:58:03.523Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.label_gedeeltelijk
+2021-06-14T10:58:04.484Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.label_volledig
+2021-06-14T10:58:05.508Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_totaal
+2021-06-14T10:58:06.519Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_gedeeltelijk
+2021-06-14T10:58:07.619Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig
