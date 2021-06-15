@@ -93,7 +93,7 @@ export default function CovidVariantenPage(
                 start: lastValue.date_start_unix,
                 end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: lastValue.date_of_insertion,
+              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
           />

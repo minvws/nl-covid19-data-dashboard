@@ -33,7 +33,7 @@ function getVariantsDataValue(date_end_unix: number) {
     sample_size: randomNumberFromTo(100, 1000),
     date_start_unix: date_end_unix - ONE_WEEK_IN_SECONDS,
     date_end_unix,
-    date_of_insertion: date_end_unix,
+    date_of_insertion_unix: date_end_unix,
   };
 
   return value;
