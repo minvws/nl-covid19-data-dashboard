@@ -6,11 +6,14 @@ import { useIsMounted } from '~/utils/use-is-mounted';
 import { useViewport } from '~/utils/use-viewport';
 import { TooltipSettings } from '../choropleth';
 
+export type ChoroplethTooltipPlacement = 'bottom-right' | 'top-center';
+
 type TTooltipProps = {
   left: number;
   top: number;
   setTooltip: Dispatch<SetStateAction<TooltipSettings | undefined>>;
   children: React.ReactNode;
+  placement?: ChoroplethTooltipPlacement;
 };
 
 const VIEWPORT_PADDING = 10;
@@ -20,18 +23,28 @@ const padding = {
   right: 0,
 };
 
-export function Tooltip({ left, top, children }: TTooltipProps) {
+export function Tooltip({
+  left,
+  top,
+  children,
+  placement = 'bottom-right',
+}: TTooltipProps) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
   const ref = useRef<HTMLDivElement>(null);
-  const { width = 0 } = useResizeObserver<HTMLDivElement>({ ref });
+  const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
   /**
    * nudge the top to render the tooltip a little bit on top of the chart
    */
-  const targetY = top + 20;
-  const targetX = left + padding.left;
+  let targetY = top + 20;
+  let targetX = left + padding.left;
+
+  if (placement === 'top-center') {
+    targetY = top - height - 15;
+    targetX = left - width / 2;
+  }
 
   const maxWidth = Math.min(400, viewportSize.width - VIEWPORT_PADDING * 2);
 

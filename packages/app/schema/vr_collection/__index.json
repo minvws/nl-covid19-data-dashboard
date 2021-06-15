@@ -15,7 +15,8 @@
     "hospital_nice",
     "elderly_at_home",
     "disability_care",
-    "sewer"
+    "sewer",
+    "situations"
   ],
   "properties": {
     "last_generated": {
@@ -94,6 +95,14 @@
       "maxItems": 25,
       "items": {
         "$ref": "elderly_at_home.json"
+      }
+    },
+    "situations": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "situations.json"
       }
     }
   }

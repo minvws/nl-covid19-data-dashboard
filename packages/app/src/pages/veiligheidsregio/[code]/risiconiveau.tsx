@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import Getest from '~/assets/test.svg';
@@ -14,10 +15,7 @@ import {
   getCategoryLevel,
 } from '~/components/categorical-bar-scale';
 import { ContentHeader } from '~/components/content-header';
-import {
-  EscalationLevelInfoLabel,
-  EscalationLevelString,
-} from '~/components/escalation-level';
+import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -25,10 +23,10 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -80,7 +78,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.vr_risiconiveau;
 
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
-  const currentLevel = escalation_level.level as EscalationLevel;
+  const currentLevel = escalation_level.level;
 
   const {
     hospitalAdmissionsEscalationThresholds,
@@ -156,7 +154,12 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     size="large"
                   />
                 </Box>
-                <Markdown content={text.types[currentLevel].toelichting} />
+                <Markdown
+                  content={
+                    text.types[getEscalationLevelIndexKey(currentLevel)]
+                      .toelichting
+                  }
+                />
                 <Text>
                   {replaceVariablesInText(text.momenteel.description_from_to, {
                     last_determined: formatDateFromSeconds(
@@ -164,7 +167,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                     risk_level: `'${
                       siteText.escalatie_niveau.types[
-                        currentLevel.toString() as EscalationLevelString
+                        getEscalationLevelIndexKey(currentLevel)
                       ].titel
                     }'`,
                     next_determined: formatDateFromSeconds(
@@ -173,61 +176,78 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   })}
                 </Text>
               </Box>
-              <Box width={{ _: '100%', lg: '50%' }} pl={{ _: 0, lg: 3 }} mb={3}>
-                <UnorderedList>
-                  <ListItem
-                    title={text.momenteel.last_determined}
-                    icon={<Calender />}
-                    date={data.escalation_level.last_determined_unix}
-                  />
-                  <ListItem
-                    title={text.momenteel.established_with.title}
-                    icon={<BarChart />}
-                    date={[
-                      data.escalation_level.based_on_statistics_from_unix,
-                      data.escalation_level.based_on_statistics_to_unix,
-                    ]}
-                  >
-                    <UnorderedList>
-                      <ListItem
-                        title={text.momenteel.positive_tests.title}
-                        icon={<Getest />}
-                      >
-                        <DataDescription
-                          description={
-                            text.momenteel.positive_tests.description
-                          }
-                          escalationColor={escalationColor}
-                          amount={formatNumber(
-                            data.escalation_level.positive_tested_per_100k
-                          )}
+
+              {
+                /**
+                 * Only display risk level details when there's a known level and
+                 * data is available
+                 */
+                isPresent(currentLevel) &&
+                  isPresent(data.escalation_level.positive_tested_per_100k) &&
+                  isPresent(
+                    data.escalation_level.hospital_admissions_per_million
+                  ) && (
+                    <Box
+                      width={{ _: '100%', lg: '50%' }}
+                      pl={{ _: 0, lg: 3 }}
+                      mb={3}
+                    >
+                      <UnorderedList>
+                        <ListItem
+                          title={text.momenteel.last_determined}
+                          icon={<Calender />}
+                          date={data.escalation_level.last_determined_unix}
                         />
-                      </ListItem>
-                      <ListItem
-                        title={text.momenteel.hospital_admissions.title}
-                        icon={<Ziekenhuis />}
-                      >
-                        <DataDescription
-                          description={
-                            text.momenteel.hospital_admissions.description
-                          }
-                          escalationColor={escalationColor}
-                          amount={formatNumber(
-                            data.escalation_level
-                              .hospital_admissions_per_million
-                          )}
+                        <ListItem
+                          title={text.momenteel.established_with.title}
+                          icon={<BarChart />}
+                          date={[
+                            data.escalation_level.based_on_statistics_from_unix,
+                            data.escalation_level.based_on_statistics_to_unix,
+                          ]}
+                        >
+                          <UnorderedList>
+                            <ListItem
+                              title={text.momenteel.positive_tests.title}
+                              icon={<Getest />}
+                            >
+                              <DataDescription
+                                description={
+                                  text.momenteel.positive_tests.description
+                                }
+                                escalationColor={escalationColor}
+                                amount={formatNumber(
+                                  data.escalation_level.positive_tested_per_100k
+                                )}
+                              />
+                            </ListItem>
+                            <ListItem
+                              title={text.momenteel.hospital_admissions.title}
+                              icon={<Ziekenhuis />}
+                            >
+                              <DataDescription
+                                description={
+                                  text.momenteel.hospital_admissions.description
+                                }
+                                escalationColor={escalationColor}
+                                amount={formatNumber(
+                                  data.escalation_level
+                                    .hospital_admissions_per_million
+                                )}
+                              />
+                            </ListItem>
+                          </UnorderedList>
+                        </ListItem>
+                        <ListItem
+                          title={text.momenteel.next_determined}
+                          icon={<Calender />}
+                          date={data.escalation_level.next_determined_unix}
+                          isAroundDate
                         />
-                      </ListItem>
-                    </UnorderedList>
-                  </ListItem>
-                  <ListItem
-                    title={text.momenteel.next_determined}
-                    icon={<Calender />}
-                    date={data.escalation_level.next_determined_unix}
-                    isAroundDate
-                  />
-                </UnorderedList>
-              </Box>
+                      </UnorderedList>
+                    </Box>
+                  )
+              }
             </Box>
 
             {!breakpoints.lg && text.momenteel.link_text && (

@@ -27,6 +27,8 @@ import {
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { CollapsibleContent } from '~/components/collapsible';
+import { NewSewerChart } from '~/components/sewer-chart/new-sewer-chart';
+import { useFeature } from '~/lib/features';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -49,6 +51,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
   const { siteText, formatNumber } = useIntl();
+
+  const sewerSplitAreaChart = useFeature('sewerSplitAreaChart');
 
   const text = siteText.gemeente_rioolwater_metingen;
 
@@ -187,30 +191,45 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.linechart_titel}
-            metadata={{ source: text.bronnen.rivm }}
-            timeframeOptions={['all', '5weeks']}
-            description={text.linechart_description}
-          >
-            {(timeframe) => (
-              <SewerChart
-                data={data}
-                timeframe={timeframe}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                text={{
-                  select_station_placeholder:
-                    text.graph_selected_rwzi_placeholder,
-                  average_label_text: text.graph_average_label_text,
-                  secondary_label_text: text.graph_secondary_label_text,
-                  daily_label_text: text.graph_daily_label_text_rwzi,
-                  range_description: text.graph_range_description,
-                  display_outliers: text.display_outliers,
-                  hide_outliers: text.hide_outliers,
-                }}
-              />
-            )}
-          </ChartTile>
+          {sewerSplitAreaChart.isEnabled ? (
+            <NewSewerChart
+              dataAverages={data.sewer}
+              dataPerInstallation={data.sewer_per_installation}
+              text={{
+                title: text.linechart_titel,
+                source: text.bronnen.rivm,
+                description: text.linechart_description,
+                selectPlaceholder: text.graph_selected_rwzi_placeholder,
+                splitLabels: siteText.rioolwater_metingen.split_labels,
+                averagesDataLabel: siteText.common.weekgemiddelde,
+              }}
+            />
+          ) : (
+            <ChartTile
+              title={text.linechart_titel}
+              metadata={{ source: text.bronnen.rivm }}
+              timeframeOptions={['all', '5weeks']}
+              description={text.linechart_description}
+            >
+              {(timeframe) => (
+                <SewerChart
+                  data={data}
+                  timeframe={timeframe}
+                  valueAnnotation={siteText.waarde_annotaties.riool_normalized}
+                  text={{
+                    select_station_placeholder:
+                      text.graph_selected_rwzi_placeholder,
+                    average_label_text: text.graph_average_label_text,
+                    secondary_label_text: text.graph_secondary_label_text,
+                    daily_label_text: text.graph_daily_label_text_rwzi,
+                    range_description: text.graph_range_description,
+                    display_outliers: text.display_outliers,
+                    hide_outliers: text.hide_outliers,
+                  }}
+                />
+              )}
+            </ChartTile>
+          )}
         </TileList>
       </MunicipalityLayout>
     </Layout>

@@ -1,3 +1,4 @@
+import { assert } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
 import Router, { useRouter } from 'next/router';
@@ -10,7 +11,6 @@ import { LanguageKey } from '~/locale';
 import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-import { assert } from '~/utils/assert';
 import { BreakpointContextProvider } from '~/utils/use-breakpoints';
 
 if (typeof window !== 'undefined') {
@@ -33,10 +33,7 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
 
   const { locale = 'nl' } = useRouter();
-
-  const [text, toggleHotReloadButton] = useLokalizeText(locale as LanguageKey, {
-    enableHotReload: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
-  });
+  const [text, toggleHotReloadButton] = useLokalizeText(locale as LanguageKey);
 
   assert(text, `Encountered unknown language: ${locale}`);
 

@@ -78,7 +78,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
     (value) =>
       getIsClipped(value.age_group_percentage, displayMaxPercentage) ||
       getIsClipped(
-        (value[metricProperty] as unknown) as number,
+        value[metricProperty] as unknown as number,
         displayMaxPercentage
       )
   );
@@ -178,7 +178,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
           );
 
           const isClippedInfectedPercentage = getIsClipped(
-            (value[metricProperty] as unknown) as number,
+            value[metricProperty] as unknown as number,
             displayMaxPercentage
           );
 

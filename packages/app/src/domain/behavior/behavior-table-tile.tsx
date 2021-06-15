@@ -1,16 +1,16 @@
+import {
+  NationalBehaviorValue,
+  RegionalBehaviorValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { Tile } from '~/components/tile';
 import { PercentageBar } from '~/components/percentage-bar';
+import { Tile } from '~/components/tile';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
-import {
-  NationalBehaviorValue,
-  RegionalBehaviorValue,
-} from '@corona-dashboard/common';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
@@ -50,7 +50,7 @@ const Cell = styled.td((x) =>
   css({
     color: x.color,
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGrey',
+    borderBottomColor: 'lightGray',
     px: 3,
     py: 2,
   })

@@ -7,13 +7,12 @@ import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { createFlatTexts } from '@corona-dashboard/common';
 import { unflatten } from 'flat';
 import fs from 'fs';
-import meow from 'meow';
 import path from 'path';
 import prettier from 'prettier';
 import { getClient } from '../../client';
 import { collapseTextMutations, readTextMutations } from '.';
 
-const localeDirectory = path.resolve(
+export const localeDirectory = path.resolve(
   __dirname,
   '..', // lokalize
   '..', // src
@@ -53,7 +52,7 @@ export async function exportLokalizeTexts(
     .filter((x) => x.action === 'delete')
     .map((x) => x.key);
 
-  let flatTexts = createFlatTexts(documents, deletedKeys);
+  const flatTexts = createFlatTexts(documents, deletedKeys);
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),

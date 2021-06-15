@@ -1,152 +1,212 @@
-import {
-  createFlatTexts,
-  parseLocaleTextDocument,
-} from '@corona-dashboard/common';
+import { createFlatTexts } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
-import { MutationEvent } from '@sanity/client';
+import { MutationEvent, SanityDocument } from '@sanity/client';
 import css from '@styled-system/css';
 import { flatten, unflatten } from 'flat';
 import { debounce } from 'lodash';
 import set from 'lodash/set';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Subscription } from 'rxjs';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
 import DatabaseIcon from '~/assets/database.svg';
+import { Box } from '~/components/base';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { getClient } from '~/lib/sanity';
-import { LanguageKey, languages } from '~/locale';
+import { LanguageKey, languages, SiteText } from '~/locale';
 import { LokalizeText } from '~/types/cms';
-import { useHotkey } from '~/utils/hotkey/use-hotkey';
-import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
+
+const datasets = ['development', 'production', 'keys'] as const;
+
+const query = `*[_type == 'lokalizeText']`;
+const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
 
 /**
  * This hook will return an object which contains all lokalize translations.
  *
- * Additionally, with `enableHotReload: true` it can also connect with Sanity
- * to receive real-time (hot) updates of draft translations.
+ * Additionally, with a configured environment variable it can also connect with
+ *  Sanity to receive real-time updates of (draft) lokalize keys.
  *
- * If enabled a tiny button will be rendered at the bottom-right which is only
+ * If enabled, a button will be rendered at the bottom-right which is only
  * visible on hover.
- *
- * This button cycles through three states:
- *
- * - undefined (gray): app is rendered with translations from filesystem
- * - live (green): app is listening to real-time sanity updates
- * - paths (blue): app is displaying the path names of every key instead of the value
- *
- * The live/paths state can also be toggled with shortkey shift+t.
  */
-export function useLokalizeText(
-  locale: LanguageKey,
-  { enableHotReload }: { enableHotReload?: boolean }
-) {
-  const isMountedRef = useIsMountedRef();
-  const [displayMode, setDisplayMode] = useState<'path' | 'live'>();
+export function useLokalizeText(initialLocale: LanguageKey) {
+  const [isActive, setIsActive] = useState(false);
+  const [locale, setLocale] = useState(initialLocale);
+  const [text, setText] = useState<SiteText>(languages[locale]);
+  const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
 
-  useHotkey(
-    'shift+t',
-    () => setDisplayMode((x) => (x === 'path' ? 'live' : 'path')),
-    {
-      isDisabled: !(enableHotReload && isDefined(displayMode)),
-      disableTextInputs: true,
-    }
+  const [dataset, setDataset] = useState<typeof datasets[number]>(
+    process.env.NEXT_PUBLIC_SANITY_DATASET as 'development'
   );
 
-  const [text, setText] = useState(languages[locale]);
-  const textRef = useRef(text);
-  useEffect(() => {
-    textRef.current = text;
-  }, [text]);
+  const toggleButton = enableHotReload ? (
+    <ToggleButton isActive={isActive} onClick={() => setIsActive((x) => !x)}>
+      <Toggle values={[...datasets]} onToggle={setDataset} value={dataset} />
+      <Toggle
+        values={Object.keys(languages) as LanguageKey[]}
+        onToggle={setLocale}
+        value={locale}
+      />
+    </ToggleButton>
+  ) : null;
 
   useEffect(() => {
-    if (!enableHotReload || !isDefined(displayMode)) {
-      setText(languages[locale]);
-      return;
-    }
-
-    const setTextDebounced = debounce(setText, 1000, { trailing: true });
-    const query = `*[_type == 'lokalizeText']`;
-
+    let isCancelled = false;
     let subscription: Subscription | undefined;
 
-    getClient()
-      .then(async (client) => {
-        const documents = await client.fetch(query);
-        if (!isMountedRef.current) return;
+    function updateSiteText() {
+      if (isCancelled) return;
+      const flatTexts = createFlatTexts(lokalizeTextsRef.current);
+      setText(() => unflatten(flatTexts[locale], { object: true }));
+    }
 
-        const flatTexts = createFlatTexts(documents)[locale];
+    const updateSiteTextDebounced = debounce(updateSiteText, 1000, {
+      trailing: true,
+    });
 
-        setText(() => unflatten(flatTexts, { object: true }));
+    if (!isActive) {
+      setText(languages[initialLocale]);
+    }
+
+    if (isActive) {
+      if (dataset === 'keys') {
+        return setText(mapSiteTextValuesToKeys(languages[locale]));
+      }
+
+      getClient(dataset).then(async (client) => {
+        const texts: SanityDocument<LokalizeText>[] = await client.fetch(query);
+        lokalizeTextsRef.current = texts;
+
+        updateSiteText();
 
         subscription = client
           .listen(query)
           .subscribe((update: MutationEvent<LokalizeText>) => {
-            if (!isMountedRef.current) return;
+            /**
+             * `appear`-transition is emitted for newly created documents/drafts
+             */
+            if (update.transition === 'appear' && update.result) {
+              lokalizeTextsRef.current.push(update.result);
+              updateSiteTextDebounced();
+            }
 
             /**
-             * we currently only handle "updates" to existing (draft) documents.
-             * This means for example that the "discard changes" action is not
-             * handled.
+             * `update`-transition is emitted for updated documents/drafts
              */
-            if (!update.result) return;
+            if (update.transition === 'update' && update.result) {
+              const index = lokalizeTextsRef.current.findIndex(
+                (x) => x._id === update.documentId
+              );
 
-            const { jsonKey, localeText } = parseLocaleTextDocument(
-              update.result
-            );
+              if (index > -1) {
+                lokalizeTextsRef.current[index] = update.result;
+                updateSiteTextDebounced();
+              }
+            }
 
             /**
-             * We'll mutate text which lives in a reference and update the text
-             * state with a debounced handler. Otherwise the app can become quite
-             * slow when someone is typing in sanity lokalizeText documents.
+             * `disappear`-transition is emitted for deleted documents/drafts
              */
-            set(textRef.current, jsonKey, localeText[locale]);
-            setTextDebounced(() => JSON.parse(JSON.stringify(textRef.current)));
+            if (update.transition === 'disappear') {
+              const index = lokalizeTextsRef.current.findIndex(
+                (x) => x._id === update.documentId
+              );
+              if (index > -1) {
+                lokalizeTextsRef.current.splice(index, 1);
+                updateSiteTextDebounced();
+              }
+            }
           });
-      })
-      .catch((err) => console.error(err));
+      });
 
-    return () => {
-      subscription?.unsubscribe();
-    };
-  }, [enableHotReload, displayMode, locale, isMountedRef]);
-
-  const paths = useMemo(() => {
-    if (displayMode === 'path') {
-      const keys = Object.keys(flatten(text));
-
-      const obj = keys.reduce(
-        (result, key) => set(result, key, key),
-        {} as Record<string, string>
-      );
-
-      return unflatten(obj, { object: true }) as typeof text;
+      return () => {
+        isCancelled = true;
+        subscription?.unsubscribe();
+      };
     }
-  }, [displayMode, text]);
+  }, [initialLocale, dataset, isActive, locale]);
 
-  const toggleButton = enableHotReload ? (
-    <ToggleButton
-      isActive={isDefined(displayMode)}
-      onClick={() =>
-        setDisplayMode((x) => (!x ? 'live' : x === 'live' ? 'path' : undefined))
-      }
-      color={displayMode === 'live' ? 'green' : 'blue'}
-    />
-  ) : null;
+  return [text, toggleButton] as const;
+}
 
-  return [paths || text, toggleButton] as const;
+/**
+ * replace values with their paths, eg:
+ *
+ * input:
+ *     { foo: { bar: 1, baz: 2 }}
+ *
+ * output:
+ *     { foo: { bar: 'foo.bar', baz: 'foo.baz' }}
+ */
+function mapSiteTextValuesToKeys(siteText: SiteText) {
+  const keys = Object.keys(flatten(siteText));
+
+  const obj = keys.reduce(
+    (result, key) => set(result, key, key),
+    {} as Record<string, string>
+  );
+
+  return unflatten(obj, { object: true }) as SiteText;
+}
+
+interface ToggleProps<T extends string> {
+  values: T[];
+  value: T;
+  onToggle: (value: T) => void;
+}
+
+function Toggle<T extends string>({ values, value, onToggle }: ToggleProps<T>) {
+  return (
+    <Box
+      border="1px solid"
+      borderColor="silver"
+      mx={2}
+      borderRadius={1}
+      overflow="hidden"
+    >
+      {values.map((x, i) => (
+        <label
+          key={x}
+          css={css({
+            px: 2,
+            borderRight: values[i + 1] ? '1px solid' : undefined,
+            borderColor: 'silver',
+            display: 'inline-block',
+            bg: x === value ? 'blue' : 'white',
+            color: x === value ? 'white' : 'inherit',
+            cursor: x === value ? 'default' : 'pointer',
+            transition: 'background 100ms linear',
+            '&:hover': { bg: x === value ? 'blue' : 'tileGray' },
+          })}
+        >
+          <VisuallyHidden>
+            <input
+              type="radio"
+              checked={x === value}
+              onChange={() => onToggle(x)}
+            />
+          </VisuallyHidden>
+          {x}
+        </label>
+      ))}
+    </Box>
+  );
 }
 
 function ToggleButton({
   isActive,
   onClick,
   color,
+  children,
 }: {
   isActive: boolean;
   onClick: () => void;
+  children: ReactNode;
   color?: 'green' | 'blue';
 }) {
   return (
     <Container isActive={isActive}>
+      <DisplayOnHover>{isActive && children}</DisplayOnHover>
       <StyledToggleButton isActive={isActive} color={color} onClick={onClick}>
         <DatabaseIcon
           style={{
@@ -160,10 +220,23 @@ function ToggleButton({
   );
 }
 
+const DisplayOnHover = styled.div(
+  css({
+    opacity: 0,
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    transition: 'opacity 100ms linear',
+  })
+);
+
 const Container = styled.div<{ isActive: boolean }>((x) =>
   css({
     opacity: x.isActive ? 1 : 0,
-    '&:hover': { opacity: 1 },
+    '&:hover': {
+      opacity: 1,
+      [DisplayOnHover]: { opacity: 1 },
+    },
     transition: 'opacity 100ms linear',
     position: 'fixed',
     bottom: 0,
@@ -181,7 +254,7 @@ const StyledToggleButton = styled.div<{ isActive: boolean; color?: string }>(
       cursor: 'pointer',
       borderRadius: 1,
       color: x.isActive ? 'white' : 'black',
-      bg: x.isActive ? x.color : 'transparent',
+      bg: x.isActive ? 'blue' : 'transparent',
       transition: 'all 100ms linear',
       p: 1,
       display: 'inline-block',

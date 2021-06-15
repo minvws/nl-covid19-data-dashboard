@@ -29,23 +29,21 @@ export function validateMovingAverages(input: JSONObject) {
     // Perform the validations on those moving averages (make sure the first six items have explicit NULL values and check if there are no non-consecutive values in the rest of the array)
     .map((x) =>
       Object.entries(x).map(([propertyName, values]) => {
-        const propsWithValuesInFirstSixEntries = findPropertiesWithValuesInFirstSixEntries(
-          values
-        );
+        const propsWithValuesInFirstSixEntries =
+          findPropertiesWithValuesInFirstSixEntries(values);
         if (propsWithValuesInFirstSixEntries.length) {
           return `${propertyName} has non NULL values in the first six items of metric ${propsWithValuesInFirstSixEntries.join(
             ' and '
           )}`;
         }
-        const propsWithNonConsecutiveValues = findPropertiesWithNonConsecutiveValues(
-          values
-        );
+        const propsWithNonConsecutiveValues =
+          findPropertiesWithNonConsecutiveValues(values);
         if (propsWithNonConsecutiveValues.length) {
           return `${propertyName} has non consecutive values in metric ${propsWithNonConsecutiveValues.join(
             ' and '
           )}`;
         }
-        return undefined;
+        return;
       })
     )
     .flat()

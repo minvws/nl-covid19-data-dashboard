@@ -58,8 +58,7 @@ export function CategoricalBarScale({
         position="relative"
         width="100%"
         display="flex"
-        pt={14}
-        pb={!hideNumbers || !hideLegend ? 4 : undefined}
+        mb={hideLegend ? undefined : 4}
       >
         {barPieces.map((category, index) => (
           <Box
@@ -90,7 +89,7 @@ export function CategoricalBarScale({
         <Box
           position="absolute"
           left={`${(value / maxValue) * 100}%`}
-          top={0}
+          bottom={0}
           bg="black"
           width={7}
           height={26}

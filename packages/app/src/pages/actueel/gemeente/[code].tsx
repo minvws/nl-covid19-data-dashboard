@@ -35,6 +35,7 @@ import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
@@ -66,6 +67,7 @@ import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-fo
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -108,9 +110,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.gemeente_actueel;
   const gmCode = router.query.code as string;
 
-  const safetyRegionForMunicipality = getSafetyRegionForMunicipalityCode(
-    gmCode
-  );
+  const safetyRegionForMunicipality =
+    getSafetyRegionForMunicipalityCode(gmCode);
 
   assert(
     safetyRegionForMunicipality,
@@ -125,14 +126,15 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
     (item) => item.vrcode === safetyRegionForMunicipality.code
   );
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const unknownLevelColor = useEscalationColor(null);
+
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
 
   const dataSitemap = useDataSitemap('gemeente', gmCode, data);
 
   assert(
-    filteredRegion && filteredRegion.level,
+    filteredRegion,
     `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality.code} to get the the current "level" of it.`
   );
 
@@ -219,7 +221,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 description={text.risoconiveau_maatregelen.description}
                 level={filteredRegion.level}
                 code={filteredRegion.vrcode}
-                escalationTypes={escalationText.types}
+                levelTitle={
+                  escalationText.types[
+                    getEscalationLevelIndexKey(filteredRegion.level)
+                  ].titel
+                }
                 href={reverseRouter.vr.risiconiveau(
                   safetyRegionForMunicipality.code
                 )}
@@ -306,6 +312,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     data={choropleth.vr}
                     metricName="escalation_levels"
                     metricProperty="level"
+                    noDataFillColor={unknownLevelColor}
                     getLink={reverseRouter.vr.risiconiveau}
                     tooltipContent={(
                       context: SafetyRegionProperties & EscalationLevels

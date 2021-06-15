@@ -3,6 +3,7 @@ export * from './cijfer-verantwoording-page';
 export * from './deceased-page';
 export * from './escalation-level-page';
 export * from './hospital-page';
+export * from './situations-page';
 export * from './intensive-care-page';
 export * from './over-dit-dashboard-page';
 export * from './over-risiconiveaus-page';

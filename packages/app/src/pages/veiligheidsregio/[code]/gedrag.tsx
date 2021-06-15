@@ -9,7 +9,7 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, Text } from '~/components/typography';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
-import { BehaviorPageSafetyRegion } from '~/domain/behavior/behavior-page-safety-region';
+import { BehaviorPageSafetyRegion } from '~/domain/behavior/redesign/_behavior-page-safety-region';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { Layout } from '~/domain/layout/layout';

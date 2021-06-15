@@ -76,7 +76,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { showLockdown } = lockdown;
 
   const router = useRouter();
-  const code = (router.query.code as unknown) as VRCode;
+  const code = router.query.code as unknown as VRCode;
 
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
 

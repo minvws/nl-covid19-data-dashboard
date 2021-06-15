@@ -30,7 +30,7 @@ export function AgeDemographicTooltipContent<
         <LegendItem color="data.primary">
           <b>
             {formatPercentage(
-              ((value[metricProperty] as unknown) as number) * 100
+              (value[metricProperty] as unknown as number) * 100
             )}
             %
           </b>{' '}

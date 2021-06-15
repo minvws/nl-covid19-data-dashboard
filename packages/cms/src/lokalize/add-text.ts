@@ -8,8 +8,8 @@ import {
   appendTextMutation,
   exportLokalizeTexts,
   fetchExistingKeys,
+  fetchLocalTextsFlatten,
 } from './logic';
-import { LokalizeText } from './types';
 
 let additionsCounter = 0;
 
@@ -21,9 +21,11 @@ let additionsCounter = 0;
 
       Options
         --key, -k The new text key to add in dot-notation
+        --sync -s Sync locally added texts to nl_export.json to Sanity
 
       Examples
         $ add-text -k some.unique.path
+        $ add-text --sync
     `,
     {
       flags: {
@@ -31,14 +33,62 @@ let additionsCounter = 0;
           type: 'string',
           alias: 'k',
         },
+        sync: {
+          type: 'boolean',
+          alias: 's',
+        },
       },
     }
   );
 
   const existingKeys = await fetchExistingKeys();
 
+  if (cli.flags.sync) {
+    const localTextsFlatten = await fetchLocalTextsFlatten();
+
+    const newKeys = Object.keys(localTextsFlatten).filter(
+      (key) => !existingKeys.includes(key)
+    );
+
+    const response: { keys: string[] } = await prompts({
+      type: 'multiselect',
+      name: 'keys',
+      message: 'Select the local keys to add to Sanity:',
+      choices: newKeys.map((key) => ({
+        title: `${key}: ${localTextsFlatten[key]}`,
+        value: key,
+      })),
+      onState,
+    });
+
+    if (response.keys.length) {
+      const client = getClient();
+
+      const textDocuments = response.keys.map((key) =>
+        createTextDocument(key, localTextsFlatten[key])
+      );
+
+      for (const textDocument of textDocuments) {
+        await client.create(textDocument);
+
+        await appendTextMutation('add', textDocument.key);
+
+        console.log(`Successfully created ${textDocument.key}`);
+
+        existingKeys.push(textDocument.key);
+
+        additionsCounter++;
+      }
+    }
+
+    return;
+  }
+
   while (true) {
-    const textDocument = await createTextDocument(existingKeys, cli.flags.key);
+    const textDocument = await createTextDocumentFromPrompt(
+      existingKeys,
+      cli.flags.key
+    );
 
     console.log({
       key: textDocument.key,
@@ -114,7 +164,10 @@ function onState(state: { aborted: boolean }) {
   }
 }
 
-async function createTextDocument(existingKeys: string[], initialKey?: string) {
+async function createTextDocumentFromPrompt(
+  existingKeys: string[],
+  initialKey?: string
+) {
   const response = await prompts([
     {
       type: 'text',
@@ -154,6 +207,10 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
     },
   ]);
 
+  return createTextDocument(response.key, response.nl, response.en);
+}
+
+function createTextDocument(key: string, nl: string, en = '') {
   /**
    * Here we split the key into a subject and (remaining) path. This is required
    * for the way LokalizeText documents are queried in Sanity. But possibly we
@@ -161,12 +218,12 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
    *
    * @TODO see if key is enough to build the UI in Sanity.
    */
-  const [subject, ...pathElements] = response.key.split('.');
+  const [subject, ...pathElements] = key.split('.');
   const path = pathElements.join('.');
 
-  const text: Omit<LokalizeText, '_id'> = {
+  return {
     _type: 'lokalizeText',
-    key: response.key,
+    key,
     subject,
     path,
     is_newly_added: true,
@@ -174,10 +231,8 @@ async function createTextDocument(existingKeys: string[], initialKey?: string) {
     should_display_empty: false,
     text: {
       _type: 'localeText',
-      nl: response.nl,
-      en: response.en,
+      nl,
+      en,
     },
   };
-
-  return text;
 }

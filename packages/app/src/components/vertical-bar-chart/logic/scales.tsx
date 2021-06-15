@@ -31,14 +31,8 @@ export function useScales<T extends TimestampedValue>(args: {
 }) {
   const today = useCurrentDate().getTime() / 1000;
 
-  const {
-    maximumValue,
-    minimumValue,
-    tickValues,
-    bounds,
-    numTicks,
-    values,
-  } = args;
+  const { maximumValue, minimumValue, tickValues, bounds, numTicks, values } =
+    args;
 
   return useMemo(() => {
     if (isEmpty(values)) {

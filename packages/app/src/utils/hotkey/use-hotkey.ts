@@ -27,9 +27,8 @@ export function useHotkey(
      * We'll parse the serialized arguments to recreate the argument objects.
      */
     const hotkeyParsed: string | string[] = JSON.parse(hotkeySerialized);
-    const { isDisabled, ...options }: OptionsWithDisabled = JSON.parse(
-      optionsSerialized
-    );
+    const { isDisabled, ...options }: OptionsWithDisabled =
+      JSON.parse(optionsSerialized);
 
     hotkeyContextRef.current?.destroy();
     hotkeyContextRef.current = undefined;
