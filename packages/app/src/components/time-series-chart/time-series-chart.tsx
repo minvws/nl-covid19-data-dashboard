@@ -27,6 +27,7 @@ import {
   TooltipFormatter,
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
+import { TimelineAnnotations } from './components/timeline-annotations';
 import {
   calculateSeriesMaximum,
   COLLAPSE_Y_AXIS_THRESHOLD,
@@ -442,6 +443,9 @@ export function TimeSeriesChart<
           )}
         </Box>
       </ResponsiveContainer>
+
+      <TimelineAnnotations xScale={xScale} bounds={bounds} padding={padding} />
+
       {!disableLegend && splitLegendGroups && (
         <>
           {splitLegendGroups.map((x) => (
