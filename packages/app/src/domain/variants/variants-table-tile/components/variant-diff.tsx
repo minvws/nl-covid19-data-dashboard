@@ -32,19 +32,19 @@ export function VariantDiff({ value }: { value: DifferenceDecimal }) {
   }
   return (
     <Diff color={colors.data.neutral}>
-      <Gelijk />
+      <Gelijk color={colors.gray} />
       {diffText.gelijk}
     </Diff>
   );
 }
 
-const Diff = styled.span((a) =>
+const Diff = styled.span<{ color: string }>((x) =>
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
 
     svg: {
-      color: a.color ?? '#0090DB',
+      color: x.color,
       mr: 1,
       width: '12px',
       height: '12px',
