@@ -106,7 +106,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                 {columnNames['vorige_meeting']}:{' '}
                 {row.difference && <VariantDiff value={row.difference} />}
               </Box>
-              <Box mb={5}>
+              <Box>
                 {columnNames['eerst_gevonden']}:{' '}
                 <InlineText>{row.countryOfOrigin}</InlineText>
               </Box>
