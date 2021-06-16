@@ -26,7 +26,7 @@ export function SearchInput() {
         <IconContainer
           as="button"
           align="right"
-          onClick={(evt: MouseEvent<HTMLButtonElement>) => {
+          onClick={(evt: MouseEvent) => {
             evt.stopPropagation();
             inputRef.current?.focus();
             setTerm('');
