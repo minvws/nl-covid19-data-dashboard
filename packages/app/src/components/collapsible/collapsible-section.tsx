@@ -105,7 +105,7 @@ export const CollapsibleSection = ({
   id,
   hideBorder,
 }: CollapsibleSectionProps) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const { wrapperRef } = useSetLinkTabbability(open);
 
   const { ref, height: contentHeight } = useResizeObserver();
@@ -115,8 +115,18 @@ export const CollapsibleSection = ({
    * If so, the collapsible needs to be opened.
    */
   useEffect(() => {
-    const isOpenedByQueryParam = window.location.hash.substr(1) === id;
-    setOpen(isOpenedByQueryParam);
+    const onHashChange = function () {
+      const isOpenedByQueryParam = window.location.hash.substr(1) === id;
+
+      if (isOpenedByQueryParam) {
+        setOpen(true);
+      }
+    };
+
+    window.addEventListener('hashchange', onHashChange);
+    onHashChange();
+
+    return () => window.removeEventListener('hashchange', onHashChange);
   }, [id]);
 
   return (
