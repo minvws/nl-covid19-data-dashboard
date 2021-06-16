@@ -13,9 +13,10 @@ type ArticlePageSchema =
 
 export function createPageArticlesQuery(
   schemaName: ArticlePageSchema,
-  locale: string
+  locale: string,
+  name = 'articles'
 ) {
-  const query = `*[_type == '${schemaName}']{"articles":[...articles[]->{"title":title.${locale},
+  const query = `*[_type == '${schemaName}']{"articles":[...${name}[]->{"title":title.${locale},
   slug,
   "summary":summary.${locale},
   "cover": {
