@@ -13,13 +13,14 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
+  MobileCell,
   PercentageBarWithNumber,
+  Samples,
   StyledTable,
   VariantCell,
+  VariantDiff,
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
-import { Samples } from './samples';
-import { VariantDiff } from './variant-diff';
 
 type ColumnKeys =
   keyof SiteText['covid_varianten']['varianten_tabel']['kolommen'];
@@ -75,7 +76,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             color={row.color}
           />
         </Cell>
-        <Cell>
+        <Cell style={{ width: '30px' }}>
           <Disclosure
             open={open}
             onChange={() => {
@@ -87,7 +88,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
         </Cell>
       </tr>
       <tr>
-        <Cell colSpan={3} border>
+        <MobileCell colSpan={3} padding={open}>
           <Panel
             style={{
               height: open ? contentHeight : 0,
@@ -105,13 +106,13 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                 {columnNames['vorige_meeting']}:{' '}
                 {row.difference && <VariantDiff value={row.difference} />}
               </Box>
-              <Box mb={1}>
+              <Box mb={5}>
                 {columnNames['eerst_gevonden']}:{' '}
                 <InlineText>{row.countryOfOrigin}</InlineText>
               </Box>
             </div>
           </Panel>
-        </Cell>
+        </MobileCell>
       </tr>
     </>
   );
@@ -121,16 +122,14 @@ const Chevron = styled((props) => <DisclosureButton {...props} />)(
   css({
     display: 'flex',
     alignItems: 'flex-start',
-    justifyContent: 'space-between',
     m: 0,
-    p: 3,
+    pr: 4,
+    py: 2,
     overflow: 'visible',
-    width: '100%',
     bg: 'transparent',
     border: 'none',
     color: 'lightGray',
     fontSize: '1.25rem',
-    textAlign: 'left',
     position: 'relative',
     cursor: 'pointer',
 
@@ -140,12 +139,10 @@ const Chevron = styled((props) => <DisclosureButton {...props} />)(
       backgroundRepeat: 'no-repeat',
       backgroundSize: '0.9em 0.55em',
       content: '""',
-      flex: '0 0 1.9em',
+      flex: '0 0 0.9em',
       height: '0.55em',
-      ml: 'auto',
-      mr: -2,
       mt: '0.35em',
-      py: 0,
+      p: 0,
       transition: 'transform 0.4s ease-in-out',
     },
 
@@ -160,8 +157,7 @@ const Panel = styled((props) => <DisclosurePanel {...props} />)(
     display: 'block',
     opacity: 1,
     overflow: 'hidden',
-    px: 3,
-    py: 0,
+    p: 0,
     transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
   })
 );

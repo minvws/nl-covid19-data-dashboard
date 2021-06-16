@@ -26,3 +26,12 @@ export const Cell = styled.td<{ compact?: boolean; border?: boolean }>((x) =>
     borderBottomColor: x.border ? 'lightGray' : undefined,
   })
 );
+
+export const MobileCell = styled.td<{ padding?: boolean }>((x) =>
+  css({
+    p: 0,
+    pb: x.padding ? 3 : 0,
+    borderBottom: '1px solid',
+    borderBottomColor: 'lightGray',
+  })
+);
