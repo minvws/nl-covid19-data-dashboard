@@ -4,4 +4,4 @@ export { NumberOfSamples as Samples } from './number-of-samples';
 export { PercentageBarWithNumber } from './percentage-bar-with-number';
 export { Cell, HeaderCell, StyledTable } from './shared-table-components';
 export { VariantCell } from './variant-cell';
-export { VariantDiff } from './variant-diff';
+export { VariantDifference } from './variant-difference';

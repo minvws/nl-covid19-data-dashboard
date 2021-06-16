@@ -7,7 +7,7 @@ import PijlOmlaag from '~/assets/pijl-omlaag.svg';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
-export function VariantDiff({ value }: { value: DifferenceDecimal }) {
+export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   const { siteText, formatPercentage } = useIntl();
   const diffText = siteText.covid_varianten.varianten_tabel.verschil;
 

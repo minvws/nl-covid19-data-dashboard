@@ -17,7 +17,7 @@ import {
   Samples,
   StyledTable,
   VariantCell,
-  VariantDiff,
+  VariantDifference,
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
 
@@ -96,7 +96,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
               </Box>
               <Box mb={1}>
                 {columnNames['vorige_meeting']}:{' '}
-                {row.difference && <VariantDiff value={row.difference} />}
+                {row.difference && <VariantDifference value={row.difference} />}
               </Box>
               <Box>
                 {columnNames['eerst_gevonden']}:{' '}

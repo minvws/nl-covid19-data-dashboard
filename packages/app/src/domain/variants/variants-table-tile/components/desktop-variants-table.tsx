@@ -5,7 +5,7 @@ import {
   HeaderCell,
   PercentageBarWithNumber,
   StyledTable,
-  VariantDiff,
+  VariantDifference,
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
 import { NumberOfSamples } from './number-of-samples';
@@ -58,7 +58,7 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
               />
             </Cell>
             <Cell>
-              {row.difference && <VariantDiff value={row.difference} />}
+              {row.difference && <VariantDifference value={row.difference} />}
             </Cell>
           </tr>
         ))}
