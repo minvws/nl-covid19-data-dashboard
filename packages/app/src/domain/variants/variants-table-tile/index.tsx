@@ -1,14 +1,21 @@
-import { NationalDifference, NlVariantsValue } from '@corona-dashboard/common';
+import {
+  DifferenceDecimal,
+  NationalDifference,
+  NlVariantsValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import Gelijk from '~/assets/gelijk.svg';
+import PijlOmhoog from '~/assets/pijl-omhoog.svg';
+import PijlOmlaag from '~/assets/pijl-omlaag.svg';
 import { Box } from '~/components/base';
-import { InlineDifference } from '~/components/difference-indicator';
 import { PercentageBar } from '~/components/percentage-bar';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
+import { colors } from '~/style/theme';
 import { useVariantsTableData } from './logic/use-variants-table-data';
 
 type ColumnKeys =
@@ -89,9 +96,7 @@ export function VariantsTableTile({
                   />
                 </Cell>
                 <Cell>
-                  {row.difference && (
-                    <InlineDifference value={row.difference} />
-                  )}
+                  {row.difference && <VariantDiff value={row.difference} />}
                 </Cell>
               </tr>
             ))}
@@ -147,3 +152,49 @@ function PercentageBarWithNumber({
     </Box>
   );
 }
+
+export function VariantDiff({ value }: { value: DifferenceDecimal }) {
+  const { siteText, formatPercentage } = useIntl();
+  const diffText = siteText.covid_varianten.varianten_tabel.verschil;
+
+  if (value === undefined) {
+    return <>-</>;
+  }
+  if (value.difference > 0) {
+    return (
+      <Diff color={colors.body}>
+        <PijlOmhoog />
+        {formatPercentage(value.difference)}% {diffText.meer}
+      </Diff>
+    );
+  }
+  if (value.difference < 0) {
+    return (
+      <Diff color={colors.body}>
+        <PijlOmlaag />
+        {formatPercentage(-value.difference)}% {diffText.minder}
+      </Diff>
+    );
+  }
+  return (
+    <Diff color={colors.data.neutral}>
+      <Gelijk />
+      {diffText.gelijk}
+    </Diff>
+  );
+}
+
+const Diff = styled.span((a) =>
+  css({
+    whiteSpace: 'nowrap',
+    display: 'inline-block',
+
+    svg: {
+      color: a.color ?? '#0090DB',
+      mr: 1,
+      width: '12px',
+      height: '12px',
+      verticalAlign: 'middle',
+    },
+  })
+);
