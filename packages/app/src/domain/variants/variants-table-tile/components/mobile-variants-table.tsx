@@ -13,7 +13,6 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
-  MobileCell,
   PercentageBarWithNumber,
   Samples,
   StyledTable,
@@ -40,10 +39,11 @@ export function MobileVariantsTable(props: MobileVariantsTableProps) {
     <StyledTable>
       <thead>
         <tr>
-          {columnKeys.map((key) => (
-            <HeaderCell key={key}>{columnNames[key]}</HeaderCell>
+          {columnKeys.map((key, index) => (
+            <HeaderCell key={key} colSpan={index === 0 ? 1 : 2}>
+              {columnNames[key]}
+            </HeaderCell>
           ))}
-          <HeaderCell />
         </tr>
       </thead>
       <tbody>
@@ -76,7 +76,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             color={row.color}
           />
         </Cell>
-        <Cell style={{ width: '30px' }}>
+        <Cell style={{ maxWidth: '1.2rem' }}>
           <Disclosure
             open={open}
             onChange={() => {
@@ -159,5 +159,14 @@ const Panel = styled((props) => <DisclosurePanel {...props} />)(
     overflow: 'hidden',
     p: 0,
     transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
+  })
+);
+
+const MobileCell = styled.td<{ padding?: boolean }>((x) =>
+  css({
+    p: 0,
+    pb: x.padding ? 3 : 0,
+    borderBottom: '1px solid',
+    borderBottomColor: 'lightGray',
   })
 );
