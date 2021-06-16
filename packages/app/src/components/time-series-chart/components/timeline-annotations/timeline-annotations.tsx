@@ -9,14 +9,14 @@ interface TimelineAnnotationProps {
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   bounds: Bounds;
   padding: Padding;
+  size?: number;
 }
-
-const SIZE = 9;
 
 export function TimelineAnnotations({
   annotations,
   xScale,
   padding,
+  size = 10,
 }: TimelineAnnotationProps) {
   const [, end] = xScale.domain();
   const width = xScale(end) ?? 0;
@@ -25,10 +25,10 @@ export function TimelineAnnotations({
 
   return (
     <div style={{ position: 'relative', left: padding.left }}>
-      <Timeline width={width} height={SIZE + 2}>
+      <Timeline width={width} height={size + 2}>
         {annotations.map((x) => (
           <Annotation
-            height={SIZE}
+            size={size}
             key={x.date.toString()}
             value={x}
             xScale={xScale}
