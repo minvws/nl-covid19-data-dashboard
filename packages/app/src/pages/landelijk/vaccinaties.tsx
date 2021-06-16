@@ -398,6 +398,7 @@ function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
   return values.map((x) => ({
     ...x,
     date_unix: x.date_end_unix,
+    date_start_unix: undefined,
     date_end_unix: undefined,
   }));
 }
