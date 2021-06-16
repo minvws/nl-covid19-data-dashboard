@@ -12,5 +12,6 @@ export * from './reproduction-page';
 export * from './sewer-page';
 export * from './topical-page';
 export * from './vaccinations-page';
+export * from './variants-page';
 export * from './veelgestelde-vragen-groepen-page';
 export * from './veelgestelde-vragen-page';
