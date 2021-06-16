@@ -105,7 +105,8 @@ export const CollapsibleSection = ({
   id,
   hideBorder,
 }: CollapsibleSectionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  /* Start in an open state so it is open when JS is disabled */
+  const [isOpen, setIsOpen] = useState(true);
   const { wrapperRef } = useSetLinkTabbability(isOpen);
 
   const { ref, height: contentHeight } = useResizeObserver();
@@ -115,16 +116,23 @@ export const CollapsibleSection = ({
    * If so, the collapsible needs to be opened.
    */
   useEffect(() => {
-    function handleHashChange() {
-      const isOpenedByHash = window.location.hash.substr(1) === id;
+    function isOpenedByHash() {
+      return window.location.hash.substr(1) === id;
+    }
 
-      if (isOpenedByHash) {
+    function handleHashChange() {
+      if (isOpenedByHash()) {
         setIsOpen(true);
       }
     }
 
     window.addEventListener('hashchange', handleHashChange);
-    handleHashChange();
+
+    /**
+     * Since we are open by default, we need to close
+     * all sections which are not opened by a hash now
+     */
+    setIsOpen(isOpenedByHash());
 
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [id]);
