@@ -11,16 +11,13 @@ import { VariantRow } from '../logic/use-variants-table-data';
 import { Samples } from './samples';
 import { VariantCell } from './variant-cell';
 
-type ColumnKeys =
-  keyof SiteText['covid_varianten']['varianten_tabel']['kolommen'];
-
-const columnKeys: ColumnKeys[] = [
+const columnKeys = [
   'variant_titel',
   'eerst_gevonden',
   'aantal_monsters',
   'percentage',
   'vorige_meeting',
-];
+] as const;
 
 type DesktopVariantsTableProps = {
   rows: VariantRow[];
