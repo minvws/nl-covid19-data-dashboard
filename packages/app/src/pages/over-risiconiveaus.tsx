@@ -69,7 +69,27 @@ export const getStaticProps = createGetStaticProps(
           ...riskLevelExplanations.${locale}[]
           {
             ...,
-            "asset": asset->
+            "asset": asset->,
+
+            "content": {
+              "_type": "localeCollapsible",
+              "${locale}": [
+                ...content.${locale}[]{
+                  ...,
+                  "asset": asset->,
+
+                  "content": {
+                    "_type": "localeCollapsible",
+                    "${locale}": [
+                      ...content.${locale}[]{
+                        ...,
+                        "asset": asset->
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
            },
         ]
       },
