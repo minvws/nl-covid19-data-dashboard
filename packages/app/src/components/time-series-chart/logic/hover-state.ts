@@ -96,7 +96,8 @@ export function useHoverState<T extends TimestampedValue>({
     );
   }, [values, interactiveMetricProperties]);
 
-  // console.log('values length', values.length, valuesWithInteractiveProperties);
+  // console.log('values length', values.length,
+  // valuesWithInteractiveProperties);
 
   const interactiveValuesDateUnix = useMemo(
     () =>
@@ -140,6 +141,14 @@ export function useHoverState<T extends TimestampedValue>({
    * The points are always rendered in the middle of the date-span, and therefor
    * we use bisectCenter otherwise the calculated index jumps to the next as
    * soon as you cross the marker line to the right.
+   *
+   * Since the introduction of "non-interactive mode" for series, we need to do
+   * a little more work. The values that are interactive can be more sparse than
+   * the values array as a whole. The bisect needs to look only at the relevant
+   * values, but the final index for the hover state needs to be based on the
+   * original values array, otherwise the tooltip will not show up in the right
+   * place. Without this logic, the tooltip would disappear for all the values
+   * that have not filled properties for the interactive trends.
    */
   const bisect = useCallback(
     (xPosition: number) => {
