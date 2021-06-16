@@ -21,11 +21,6 @@ import {
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
 
-type ColumnKeys =
-  keyof SiteText['covid_varianten']['varianten_tabel']['kolommen'];
-
-const columnKeys: ColumnKeys[] = ['variant_titel', 'percentage'];
-
 type MobileVariantsTableProps = {
   rows: VariantRow[];
   text: SiteText['covid_varianten'];
@@ -39,11 +34,8 @@ export function MobileVariantsTable(props: MobileVariantsTableProps) {
     <StyledTable>
       <thead>
         <tr>
-          {columnKeys.map((key, index) => (
-            <HeaderCell key={key} colSpan={index === 0 ? 1 : 2}>
-              {columnNames[key]}
-            </HeaderCell>
-          ))}
+          <HeaderCell>{columnNames.variant_titel}</HeaderCell>
+          <HeaderCell colSpan={2}>{columnNames.percentage}</HeaderCell>
         </tr>
       </thead>
       <tbody>
@@ -68,7 +60,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 
   return (
     <>
-      <tr key={row.variant}>
+      <tr>
         <VariantCell variant={row.variant} text={text} compact />
         <Cell>
           <PercentageBarWithNumber

@@ -1,5 +1,4 @@
 import { InlineText } from '~/components/typography';
-import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import {
   Cell,
@@ -30,7 +29,6 @@ type DesktopVariantsTableProps = {
 
 export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
   const { rows, text } = props;
-  const { formatNumber } = useIntl();
 
   const columnNames = text.varianten_tabel.kolommen;
 

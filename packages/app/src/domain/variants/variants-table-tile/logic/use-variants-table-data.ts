@@ -33,6 +33,15 @@ export type VariantRow = {
   sampleSize: number;
 };
 
+/**
+ * This hook maps a NlVariantsValue instance to a list of VariantRows.
+ *
+ * Each set of variant data (alpha, beta, etc) is mapped to one row and
+ * its country of origin, data color and difference is added.
+ *
+ * Finally the list gets sorted with the highest percentage on top and
+ * the 'other' variant always last in the list.
+ */
 export function useVariantsTableData(
   data: NlVariantsValue,
   countriesOfOrigin: CountriesOfOrigin,
