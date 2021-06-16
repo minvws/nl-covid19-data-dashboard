@@ -1,7 +1,7 @@
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 
-export function Samples({
+export function NumberOfSamples({
   occurrence,
   sampleSize,
 }: {

@@ -8,7 +8,7 @@ import {
   VariantDiff,
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
-import { Samples } from './samples';
+import { NumberOfSamples } from './number-of-samples';
 import { VariantCell } from './variant-cell';
 
 const columnKeys = [
@@ -46,7 +46,7 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
               <InlineText>{row.countryOfOrigin}</InlineText>
             </Cell>
             <Cell>
-              <Samples
+              <NumberOfSamples
                 occurrence={row.occurrence}
                 sampleSize={row.sampleSize}
               />
