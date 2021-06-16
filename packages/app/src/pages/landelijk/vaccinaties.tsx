@@ -56,7 +56,8 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_ggd',
     'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_doctors',
-    'vaccine_administered_ggd_ghor'
+    'vaccine_administered_ggd_ghor',
+    'vaccine_coverage'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
@@ -114,7 +115,64 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <ArticleStrip articles={content.highlight.articles} />
 
-          <VaccineAdministrationsKpiSection data={data} />
+          {data.vaccine_coverage && (
+            <ChartTile
+              title={text.grafiek_gevaccineerd_door_de_tijd_heen.titel}
+              description={
+                text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving
+              }
+              metadata={{
+                date: data.vaccine_coverage.last_value.date_of_insertion_unix,
+                source: text.bronnen.rivm,
+              }}
+            >
+              <TimeSeriesChart
+                values={data.vaccine_coverage.values}
+                formatTickValue={(x) => `${x / 1_000_000}`}
+                dataOptions={{
+                  valueAnnotation:
+                    text.grafiek_gevaccineerd_door_de_tijd_heen
+                      .waarde_annotatie,
+                }}
+                seriesConfig={[
+                  {
+                    label:
+                      text.grafiek_gevaccineerd_door_de_tijd_heen.label_totaal,
+                    shortLabel:
+                      text.grafiek_gevaccineerd_door_de_tijd_heen
+                        .tooltip_label_totaal,
+                    type: 'line',
+                    metricProperty: 'partially_or_fully_vaccinated',
+                    color: 'black',
+                  },
+                  {
+                    label:
+                      text.grafiek_gevaccineerd_door_de_tijd_heen
+                        .label_gedeeltelijk,
+                    shortLabel:
+                      text.grafiek_gevaccineerd_door_de_tijd_heen
+                        .tooltip_label_gedeeltelijk,
+                    type: 'stacked-area',
+                    metricProperty: 'partially_vaccinated',
+                    color: colors.data.primary,
+                    fillOpacity: 1,
+                  },
+                  {
+                    label:
+                      text.grafiek_gevaccineerd_door_de_tijd_heen
+                        .label_volledig,
+                    shortLabel:
+                      text.grafiek_gevaccineerd_door_de_tijd_heen
+                        .tooltip_label_volledig,
+                    type: 'stacked-area',
+                    metricProperty: 'fully_vaccinated',
+                    color: colors.data.secondary,
+                    fillOpacity: 1,
+                  },
+                ]}
+              />
+            </ChartTile>
+          )}
 
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
@@ -126,6 +184,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             milestones={page.milestones}
             expectedMilestones={page.expectedMilestones}
           />
+
+          <VaccineAdministrationsKpiSection data={data} />
 
           {vaccinationPerAgeGroupFeature.isEnabled ? (
             <Tile>
@@ -306,27 +366,27 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   values[2].fully_vaccinated_percentage = 0;
 
   return { values };
-}
 
-function createCoverageRow(
-  ageGroup: string
-): NlVaccineCoveragePerAgeGroupValue {
-  const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
-  const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-  const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+  function createCoverageRow(
+    ageGroup: string
+  ): NlVaccineCoveragePerAgeGroupValue {
+    const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
+    const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+    const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
 
-  return {
-    age_group_range: ageGroup,
-    age_group_percentage: Math.floor(Math.random() * 100) + 1,
-    age_group_total: ageGroupTotal,
-    fully_vaccinated: fullyVaccinated,
-    partially_vaccinated: partiallyVaccinated,
-    fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
-    partially_vaccinated_percentage:
-      (partiallyVaccinated / ageGroupTotal) * 100,
-    partially_or_fully_vaccinated_percentage: 0,
-    date_of_insertion_unix: 1616544000,
-    date_of_report_unix: 1616544000,
-    date_unix: 1616544000,
-  };
+    return {
+      age_group_range: ageGroup,
+      age_group_percentage: Math.floor(Math.random() * 100) + 1,
+      age_group_total: ageGroupTotal,
+      fully_vaccinated: fullyVaccinated,
+      partially_vaccinated: partiallyVaccinated,
+      fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
+      partially_vaccinated_percentage:
+        (partiallyVaccinated / ageGroupTotal) * 100,
+      partially_or_fully_vaccinated_percentage: 0,
+      date_of_insertion_unix: 1616544000,
+      date_of_report_unix: 1616544000,
+      date_unix: 1616544000,
+    };
+  }
 }
