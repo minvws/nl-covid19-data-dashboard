@@ -36,13 +36,23 @@ export function useVariantsTableData(
   differences: NationalDifference
 ): VariantRow[] {
   return useMemo(() => {
-    return variants.map((variant) => ({
-      variant,
-      countryOfOrigin: countriesOfOrigin[variant],
-      occurrence: data[`${variant}_occurrence` as const],
-      percentage: data[`${variant}_percentage` as const],
-      difference: differences[`variants__${variant}_percentage` as const],
-      color: colors.data.variants[variant],
-    }));
+    return variants
+      .map((variant) => ({
+        variant,
+        countryOfOrigin: countriesOfOrigin[variant],
+        occurrence: data[`${variant}_occurrence` as const],
+        percentage: data[`${variant}_percentage` as const],
+        difference: differences[`variants__${variant}_percentage` as const],
+        color: colors.data.variants[variant],
+      }))
+      .sort((rowA, rowB) => {
+        if (rowA.variant === 'other') {
+          return 1;
+        }
+        if (rowB.variant === 'other') {
+          return -1;
+        }
+        return rowB.percentage - rowA.percentage;
+      });
   }, [data, countriesOfOrigin, differences]);
 }

@@ -21,7 +21,7 @@ export function VariantsTableTile({
   data: NlVariantsValue;
   differences: NationalDifference;
 }) {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.covid_varianten;
   const columnNames = text.varianten_tabel.kolommen;
@@ -55,7 +55,7 @@ export function VariantsTableTile({
         />
       )}
 
-      <Box overflow="auto" mb={3}>
+      <Box overflow="auto" mb={3} mt={4}>
         <StyledTable>
           <thead>
             <tr>
@@ -77,9 +77,10 @@ export function VariantsTableTile({
                   <InlineText>{row.countryOfOrigin}</InlineText>
                 </Cell>
                 <Cell>
-                  <InlineText>
-                    {row.occurrence}/{sampleSize}
+                  <InlineText fontWeight="bold">
+                    {formatNumber(row.occurrence)}
                   </InlineText>
+                  <InlineText>/{formatNumber(sampleSize)}</InlineText>
                 </Cell>
                 <Cell>
                   <PercentageBarWithNumber
@@ -88,7 +89,9 @@ export function VariantsTableTile({
                   />
                 </Cell>
                 <Cell>
-                  <InlineDifference value={row.difference} />
+                  {row.difference && (
+                    <InlineDifference value={row.difference} />
+                  )}
                 </Cell>
               </tr>
             ))}
@@ -109,6 +112,7 @@ const StyledTable = styled.table(
 const HeaderCell = styled.th(
   css({
     textAlign: 'left',
+    fontWeight: 'normal',
     borderBottom: '1px solid',
     borderBottomColor: 'lightGray',
   })
