@@ -1,4 +1,7 @@
-import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  NlVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoverageValue,
+} from '@corona-dashboard/common';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -127,7 +130,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <TimeSeriesChart
-                values={data.vaccine_coverage.values}
+                values={transformToDayTimestamps(data.vaccine_coverage.values)}
                 formatTickValue={(x) => `${x / 1_000_000}`}
                 dataOptions={{
                   valueAnnotation:
@@ -389,4 +392,13 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
       date_unix: 1616544000,
     };
   }
+}
+
+function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
+  return values.map((x) => ({
+    ...x,
+    date_unix: x.date_end_unix,
+    date_start_unix: undefined,
+    date_end_unix: undefined,
+  }));
 }
