@@ -1,8 +1,10 @@
+import { NlVariantsValue } from '@corona-dashboard/common';
+
 const NOW_IN_SECONDS = Math.round(Date.now() / 1000);
 const ONE_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 
 function getVariantsDataValue(date_end_unix: number) {
-  const value = {
+  const value: NlVariantsValue = {
     alpha_percentage: randomNumberFromTo(1, 100),
     alpha_occurrence: randomNumberFromTo(100, 1000),
     alpha_is_variant_of_concern: Math.random() > 0.5,

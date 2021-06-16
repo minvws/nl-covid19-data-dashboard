@@ -30,7 +30,7 @@ import { VariantsPageQuery } from '~/types/cms';
 import { assert } from '~/utils/assert';
 
 export const getStaticProps = withFeatureNotFoundPage(
-  'variantsPagePage',
+  'variantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
     () => {
@@ -39,9 +39,6 @@ export const getStaticProps = withFeatureNotFoundPage(
         data.selectedNlData.variants || mockVariantsData();
 
       return data;
-    },
-    () => {
-      return mockVariantsData();
     },
     createGetContent<{
       page: VariantsPageQuery;
@@ -73,7 +70,7 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
-  assert(data.variants, 'no situations data found');
+  assert(data.variants, 'no variants data found');
 
   const lastValue = data.variants.last_value;
 
@@ -119,7 +116,7 @@ export default function CovidVariantenPage(
               </Box>
             )}
 
-            {content.page.pageLinks && (
+            {content.page.pageLinks.length > 0 && (
               <Box>
                 <Heading level={3}>
                   {text.informatie_blok.nuttige_links_titel}

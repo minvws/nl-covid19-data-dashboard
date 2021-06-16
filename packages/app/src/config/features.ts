@@ -42,7 +42,7 @@ export const features: Feature[] = [
     metricName: 'situations',
   },
   {
-    name: 'variantsPagePage',
+    name: 'variantsPage',
     isEnabled: true,
     metricName: 'variants',
   },

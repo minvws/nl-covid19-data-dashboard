@@ -1,15 +1,15 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import ChevronLargeIcon from '~/assets/chevron-large.svg';
 import ChevronIcon from '~/assets/chevron.svg';
 import ExternalLinkIcon from '~/assets/external-link-2.svg';
-import ChevronBigIcon from '~/assets/chevron-2.svg';
 import { getImageProps } from '~/lib/sanity';
 import { DecoratedLink as DecoratedLinkDocument } from '~/types/cms';
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { Box } from './base';
 import { SanityImage } from './cms/sanity-image';
 import { InlineText } from './typography';
-import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 
 type DecoratedLinkProps = {
   link: DecoratedLinkDocument;
@@ -67,7 +67,11 @@ export const CompactDecoratedLink = ({
               marginLeft="auto"
               color="link"
             >
-              {isAbsoluteUrl(href) ? <ExternalLinkIcon /> : <ChevronBigIcon />}
+              {isAbsoluteUrl(href) ? (
+                <ExternalLinkIcon />
+              ) : (
+                <ChevronLargeIcon />
+              )}
             </Box>
           </Box>
         </Box>
