@@ -135,6 +135,7 @@ export function NewSewerChart({
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
                     splitPoints: averageSplitPoints,
+                    isNonInteractive: true,
                   },
                 ]}
               />
