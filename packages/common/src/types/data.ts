@@ -869,7 +869,7 @@ export interface NlVariantsValue {
   sample_size: number;
   date_start_unix: number;
   date_end_unix: number;
-  date_of_insertion: number;
+  date_of_insertion_unix: number;
 }
 
 export interface Regionaal {
