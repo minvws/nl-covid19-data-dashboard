@@ -62,15 +62,15 @@ export function createGetContent<T>(
         ? queryOrQueryGetter(context)
         : queryOrQueryGetter;
 
-    const rawContent = await client.fetch<T>(query);
+    const rawContent = (await client.fetch<T>(query)) ?? {};
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
     // this function call will mutate `rawContent`
-    await replaceReferences(client, rawContent);
+    await replaceReferencesInContent(rawContent, client);
 
-    const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
+    const content = localize(rawContent, [locale, 'nl']) as T;
     return { content };
   };
 }
@@ -84,7 +84,11 @@ export function createGetContent<T>(
  * becomes:
  * { _type: 'document', id: 'abc', title: 'foo', body: 'bar' }
  */
-async function replaceReferences(client: SanityClient, input: any) {
+async function replaceReferencesInContent(
+  input: unknown,
+  client: SanityClient,
+  resolvedIds: string[] = []
+) {
   await new AsyncWalkBuilder()
     .withGlobalFilter((x) => x.val?._type === 'reference')
     .withSimpleCallback(async (node) => {
@@ -92,14 +96,23 @@ async function replaceReferences(client: SanityClient, input: any) {
 
       assert(typeof refId === 'string', 'node.val._ref is not set');
 
-      const document = await client.fetch(`*[_id == '${refId}']{...}[0]`);
+      if (resolvedIds.includes(refId)) {
+        const ids = `[${resolvedIds.concat(refId).join(',')}]`;
+        throw new Error(
+          `Ran into an infinite loop of references, please investigate the following sanity document order: ${ids}`
+        );
+      }
+
+      const doc = await client.fetch(`*[_id == '${refId}']{...}[0]`);
+
+      await replaceReferencesInContent(doc, client, resolvedIds.concat(refId));
 
       /**
        * Here we'll mutate the original reference object by clearing the
        * existing keys and adding all keys of the reference itself.
        */
       Object.keys(node.val).forEach((key) => delete node.val[key]);
-      Object.keys(document).forEach((key) => (node.val[key] = document[key]));
+      Object.keys(doc).forEach((key) => (node.val[key] = doc[key]));
     })
     .walk(input);
 }
