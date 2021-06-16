@@ -9,6 +9,8 @@ import { colors } from '~/style/theme';
 
 type CountriesOfOrigin = SiteText['covid_varianten']['landen_van_herkomst'];
 
+export type Variant = typeof variants[number];
+
 const variants = [
   'alpha',
   'beta',
@@ -21,13 +23,14 @@ const variants = [
   'other',
 ] as const;
 
-type VariantRow = {
-  variant: typeof variants[number];
+export type VariantRow = {
+  variant: Variant;
   countryOfOrigin: string;
   occurrence: number;
   percentage: number;
   difference?: DifferenceDecimal;
   color: string;
+  sampleSize: number;
 };
 
 export function useVariantsTableData(
@@ -44,8 +47,10 @@ export function useVariantsTableData(
         percentage: data[`${variant}_percentage` as const],
         difference: differences[`variants__${variant}_percentage` as const],
         color: colors.data.variants[variant],
+        sampleSize: data.sample_size,
       }))
       .sort((rowA, rowB) => {
+        // Make sure the 'other' variant is always sorted last
         if (rowA.variant === 'other') {
           return 1;
         }
