@@ -1,6 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
+import { size } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -27,7 +28,10 @@ import {
   TooltipFormatter,
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
-import { TimelineAnnotations } from './components/timeline-annotations';
+import {
+  TimelineAnnotation,
+  TimelineAnnotations,
+} from './components/timeline-annotations';
 import {
   calculateSeriesMaximum,
   COLLAPSE_Y_AXIS_THRESHOLD,
@@ -126,6 +130,11 @@ export type TimeSeriesChartProps<
    * This option only makes sense when we display a single trend.
    */
   displayTooltipValueOnly?: boolean;
+
+  /**
+   *
+   */
+  timelineAnnotations?: TimelineAnnotation[];
 };
 
 export function TimeSeriesChart<
@@ -150,6 +159,7 @@ export function TimeSeriesChart<
   onSeriesClick,
   markNearestPointOnly,
   displayTooltipValueOnly,
+  timelineAnnotations,
 }: TimeSeriesChartProps<T, C>) {
   const {
     tooltipData,
@@ -444,7 +454,14 @@ export function TimeSeriesChart<
         </Box>
       </ResponsiveContainer>
 
-      <TimelineAnnotations xScale={xScale} bounds={bounds} padding={padding} />
+      {timelineAnnotations && timelineAnnotations.length > 0 && (
+        <TimelineAnnotations
+          annotations={timelineAnnotations}
+          xScale={xScale}
+          bounds={bounds}
+          padding={padding}
+        />
+      )}
 
       {!disableLegend && splitLegendGroups && (
         <>

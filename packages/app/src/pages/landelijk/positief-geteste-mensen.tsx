@@ -258,6 +258,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 <TimeSeriesChart
                   values={data.tested_overall.values}
                   timeframe={timeframe}
+                  timelineAnnotations={[
+                    {
+                      date: 1586642400, // apr 12
+                    },
+                    {
+                      date: [1596060000, 1600984800], // jul 30 - sep 25
+                    },
+                  ]}
                   seriesConfig={[
                     {
                       type: 'line',
