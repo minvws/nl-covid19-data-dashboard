@@ -92,6 +92,10 @@ const Panel = styled((props) => <DisclosurePanel {...props} />)(
   })
 );
 
+function locationHashEquals(id?: string) {
+  return window.location.hash === `#${id}`;
+}
+
 interface CollapsibleSectionProps extends BoxProps {
   summary: string;
   children: ReactNode;
@@ -116,12 +120,8 @@ export const CollapsibleSection = ({
    * If so, the collapsible needs to be opened.
    */
   useEffect(() => {
-    function isOpenedByHash() {
-      return window.location.hash.substr(1) === id;
-    }
-
     function handleHashChange() {
-      if (isOpenedByHash()) {
+      if (locationHashEquals(id)) {
         setIsOpen(true);
       }
     }
@@ -129,10 +129,10 @@ export const CollapsibleSection = ({
     window.addEventListener('hashchange', handleHashChange);
 
     /**
-     * Since we are open by default, we need to close
-     * all sections which are not opened by a hash now
+     * Since we are open by default, we need to close all sections which are not
+     * opened by a hash now
      */
-    setIsOpen(isOpenedByHash());
+    setIsOpen(locationHashEquals(id));
 
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [id]);
