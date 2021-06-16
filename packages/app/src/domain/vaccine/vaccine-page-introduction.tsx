@@ -8,6 +8,7 @@ import { Metadata } from '~/components/content-header/metadata';
 import { DecoratedLink } from '~/components/decorated-link';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -19,6 +20,7 @@ import {
 } from '~/types/cms';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 interface VaccinePageIntroductionProps {
@@ -27,6 +29,7 @@ interface VaccinePageIntroductionProps {
     | 'vaccine_administered_planned'
     | 'vaccine_administered_total'
     | 'vaccine_administered_rate_moving_average'
+    | 'vaccine_coverage'
   >;
   pageInfo: TitleDescriptionBlock;
   pageLinks: CMSDecoratedLink[];
@@ -39,13 +42,9 @@ export function VaccinePageIntroduction({
   pageLinks,
   pageLinksTitle,
 }: VaccinePageIntroductionProps) {
-  const { siteText, formatPercentage, formatDate } = useIntl();
+  const { siteText, formatPercentage, formatDate, formatDateFromSeconds } =
+    useIntl();
   const text = siteText.vaccinaties;
-
-  const roundedMillion =
-    Math.floor(
-      (data.vaccine_administered_total.last_value.estimated / 1_000_000) * 10
-    ) / 10;
 
   return (
     <Box spacing={4}>
@@ -57,19 +56,48 @@ export function VaccinePageIntroduction({
             headingLevel={1}
           />
           <Box spacing={4} px={{ md: 5 }}>
-            <Text fontSize="1.625rem" m={0}>
-              {replaceComponentsInText(
-                text.current_amount_of_administrations_text,
-                {
-                  amount: (
-                    <InlineText color="data.primary" fontWeight="bold">
-                      {formatPercentage(roundedMillion)}{' '}
-                      {siteText.common.miljoen}
-                    </InlineText>
-                  ),
-                }
+            <Box>
+              <Text fontSize="1.625rem" m={0}>
+                {replaceComponentsInText(
+                  text.current_amount_of_administrations_text,
+                  {
+                    amount: (
+                      <InlineText color="data.primary" fontWeight="bold">
+                        {formatPercentage(
+                          roundMillions(
+                            data.vaccine_administered_total.last_value.estimated
+                          )
+                        )}{' '}
+                        {siteText.common.miljoen}
+                      </InlineText>
+                    ),
+                  }
+                )}
+              </Text>
+
+              {data.vaccine_coverage && (
+                <Text fontSize="1.625rem" m={0}>
+                  {replaceComponentsInText(
+                    text.current_amount_of_fully_vaccinated_text,
+                    {
+                      date: formatDateFromSeconds(
+                        data.vaccine_coverage.last_value.date_end_unix
+                      ),
+                      amount: (
+                        <InlineText color="data.primary" fontWeight="bold">
+                          {formatPercentage(
+                            roundMillions(
+                              data.vaccine_coverage.last_value.fully_vaccinated
+                            )
+                          )}{' '}
+                          {siteText.common.miljoen}
+                        </InlineText>
+                      ),
+                    }
+                  )}
+                </Text>
               )}
-            </Text>
+            </Box>
 
             <TwoKpiSection spacing={4}>
               <Box as="article" spacing={3}>
@@ -132,6 +160,21 @@ export function VaccinePageIntroduction({
                 </Text>
               </Box>
             </TwoKpiSection>
+
+            {data.vaccine_coverage && (
+              <Box color="gray" fontSize={1}>
+                <Markdown
+                  content={replaceVariablesInText(
+                    text.current_amount_of_fully_vaccinated_text_foot_note,
+                    {
+                      date: formatDateFromSeconds(
+                        data.vaccine_coverage.last_value.date_of_insertion_unix
+                      ),
+                    }
+                  )}
+                />
+              </Box>
+            )}
 
             <VaccineTicker
               data={data.vaccine_administered_rate_moving_average.last_value}
@@ -196,3 +239,7 @@ const DecoratedLinksTile = styled.article(
     boxShadow: 'tile',
   })
 );
+
+function roundMillions(value: number) {
+  return Math.floor((value / 1_000_000) * 10) / 10;
+}
