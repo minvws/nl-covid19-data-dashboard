@@ -1,4 +1,4 @@
-export const link = {
+export const decoratedLink = {
   type: 'object',
   title: 'Een link voorzien van een image, categorie en label',
   name: 'decoratedLink',

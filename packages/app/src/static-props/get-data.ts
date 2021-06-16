@@ -91,7 +91,16 @@ export function selectNlData<T extends keyof National = never>(
     const { data } = getNlData();
 
     const selectedNlData = metrics.reduce(
-      (acc, p) => set(acc, p, data[p]),
+      (acc, p) =>
+        set(
+          acc,
+          p,
+          /**
+           * convert `undefined` values to `null` because nextjs cannot pass
+           * undefined values via initial props.
+           */
+          data[p] ?? null
+        ),
       {} as Pick<National, T>
     );
 
