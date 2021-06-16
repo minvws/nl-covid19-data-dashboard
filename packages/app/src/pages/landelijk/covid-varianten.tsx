@@ -15,7 +15,7 @@ import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { mockVariantsData } from '~/domain/variants/logic/mock-data';
-import { VariantsOverTime } from '~/domain/variants/variants-over-time';
+import { VariantsOverTime } from '~/domain/variants/variants-over-time/variants-over-time';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -141,25 +141,14 @@ export default function CovidVariantenPage(
           {data.variants.values && (
             <ChartTile
               title={text.varianten_over_tijd.titel}
-              description={'asd'}
+              description={text.varianten_over_tijd.beschrijving}
               metadata={{
                 source: text.bronnen.rivm,
               }}
             >
               {isDefined(data.variants.values) && (
-                <VariantsOverTime
-                  values={data.variants.values}
-                  // values={data.tested_per_age_group.values}
-                  // timeframe={timeframe}
-                />
+                <VariantsOverTime values={data.variants.values} />
               )}
-              {/* {(timeframe) => (
-                <VariantsOverTime
-                  values={data.variants.values}
-                  // values={data.tested_per_age_group.values}
-                  // timeframe={timeframe}
-                />
-              )} */}
             </ChartTile>
           )}
         </TileList>
