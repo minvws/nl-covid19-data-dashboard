@@ -19,7 +19,7 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | BarSeriesDefinition<T>
   | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
-  | SplitAreaSeriesDefinition<T>
+  | SplitAreaDefinition<T>
   | GappedLineSeriesDefinition<T>
 )[];
 
@@ -32,7 +32,6 @@ export type GappedLineSeriesDefinition<T extends TimestampedValue> = {
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-  hideInTooltip?: boolean;
 };
 
 export type LineSeriesDefinition<T extends TimestampedValue> = {
@@ -44,7 +43,6 @@ export type LineSeriesDefinition<T extends TimestampedValue> = {
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-  hideInTooltip?: boolean;
 };
 
 export type AreaSeriesDefinition<T extends TimestampedValue> = {
@@ -56,7 +54,6 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   fillOpacity?: number;
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-  hideInTooltip?: boolean;
 };
 
 export type BarSeriesDefinition<T extends TimestampedValue> = {
@@ -68,7 +65,6 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
   fillOpacity?: number;
   aboveBenchmarkColor?: string;
   aboveBenchmarkFillOpacity?: number;
-  hideInTooltip?: boolean;
 };
 
 export type SplitBarSeriesDefinition<T extends TimestampedValue> = {
@@ -78,7 +74,6 @@ export type SplitBarSeriesDefinition<T extends TimestampedValue> = {
   shortLabel?: string;
   fillOpacity?: number;
   splitPoints: SplitPoint[];
-  hideInTooltip?: boolean;
 };
 
 export type RangeSeriesDefinition<T extends TimestampedValue> = {
@@ -90,7 +85,6 @@ export type RangeSeriesDefinition<T extends TimestampedValue> = {
   color: string;
   style?: 'solid' | 'dashed';
   fillOpacity?: number;
-  hideInTooltip?: boolean;
 };
 
 export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
@@ -102,7 +96,6 @@ export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
   style?: 'solid' | 'hatched';
   fillOpacity?: number;
   strokeWidth?: number;
-  hideInTooltip?: boolean;
 };
 
 /**
@@ -114,7 +107,7 @@ export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
  * If the amount of changes for the chart are limited we could maybe merge it in
  * completely.
  */
-export type SplitAreaSeriesDefinition<T extends TimestampedValue> = {
+export type SplitAreaDefinition<T extends TimestampedValue> = {
   type: 'split-area';
   metricProperty: keyof T;
   label: string;
@@ -122,7 +115,6 @@ export type SplitAreaSeriesDefinition<T extends TimestampedValue> = {
   splitPoints: SplitPoint[];
   strokeWidth?: number;
   fillOpacity?: number;
-  hideInTooltip?: boolean;
 };
 
 /**
@@ -144,7 +136,6 @@ export type InvisibleSeriesDefinition<T extends TimestampedValue> = {
    * indicate the format.
    */
   isPercentage?: boolean;
-  hideInTooltip?: boolean;
 };
 
 export type CutValuesConfig = {

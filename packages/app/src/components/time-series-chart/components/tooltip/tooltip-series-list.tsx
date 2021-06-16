@@ -77,6 +77,22 @@ export function TooltipSeriesList<T extends TimestampedValue>({
           const key = index + getDateUnixString(value);
 
           switch (x.type) {
+            case 'stacked-area':
+            case 'gapped-line':
+            case 'line':
+            case 'area':
+            case 'bar':
+              return (
+                <TooltipListItem
+                  key={key}
+                  icon={<SeriesIcon config={x} />}
+                  label={x.shortLabel ?? x.label}
+                  displayTooltipValueOnly={displayTooltipValueOnly}
+                >
+                  <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
+                </TooltipListItem>
+              );
+
             case 'range':
               return (
                 <TooltipListItem
@@ -84,7 +100,6 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   icon={<SeriesIcon config={x} />}
                   label={x.shortLabel ?? x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
-                  isHidden={x.hideInTooltip}
                 >
                   <b css={css({ whiteSpace: 'nowrap' })}>
                     {formatSeriesValue(value, x, options.isPercentage)}
@@ -98,7 +113,6 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   key={key}
                   label={x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
-                  isHidden={x.hideInTooltip}
                 >
                   <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
                 </TooltipListItem>
@@ -119,20 +133,6 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   }
                   label={x.shortLabel ?? x.label}
                   displayTooltipValueOnly={displayTooltipValueOnly}
-                  isHidden={x.hideInTooltip}
-                >
-                  <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
-                </TooltipListItem>
-              );
-
-            default:
-              return (
-                <TooltipListItem
-                  key={key}
-                  icon={<SeriesIcon config={x} />}
-                  label={x.shortLabel ?? x.label}
-                  displayTooltipValueOnly={displayTooltipValueOnly}
-                  isHidden={x.hideInTooltip}
                 >
                   <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
                 </TooltipListItem>
@@ -149,7 +149,6 @@ interface TooltipListItemProps {
   label?: string;
   icon?: ReactNode;
   displayTooltipValueOnly?: boolean;
-  isHidden?: boolean;
 }
 
 function TooltipListItem({
@@ -157,13 +156,8 @@ function TooltipListItem({
   icon,
   label,
   displayTooltipValueOnly,
-  isHidden,
 }: TooltipListItemProps) {
-  return isHidden ? (
-    <VisuallyHidden>
-      {label}:{children}
-    </VisuallyHidden>
-  ) : (
+  return (
     <Box
       as="li"
       spacing={2}
