@@ -1,4 +1,5 @@
 import {
+  assert,
   Municipal,
   Municipalities,
   National,
@@ -6,8 +7,10 @@ import {
   Regions,
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
+import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
+import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import {
@@ -53,19 +56,52 @@ export function createGetContent<T>(
   queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
 ) {
   return async (context: GetStaticPropsContext) => {
+    const client = await getClient();
     const query =
       typeof queryOrQueryGetter === 'function'
         ? queryOrQueryGetter(context)
         : queryOrQueryGetter;
-    const rawContent = await (await getClient()).fetch<T>(query);
 
+    const rawContent = await client.fetch<T>(query);
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
 
+    // this function call will mutate `rawContent`
+    await replaceReferences(client, rawContent);
+
+    const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
     return { content };
   };
+}
+
+/**
+ * This function will mutate an object which is a reference to another document.
+ * The reference-object's keys will be deleted and all reference document-keys
+ * will be added.
+ * eg:
+ * { _type: 'reference', _ref: 'abc' }
+ * becomes:
+ * { _type: 'document', id: 'abc', title: 'foo', body: 'bar' }
+ */
+async function replaceReferences(client: SanityClient, input: any) {
+  await new AsyncWalkBuilder()
+    .withGlobalFilter((x) => x.val?._type === 'reference')
+    .withSimpleCallback(async (node) => {
+      const refId = node.val._ref;
+
+      assert(typeof refId === 'string', 'node.val._ref is not set');
+
+      const document = await client.fetch(`*[_id == '${refId}']{...}[0]`);
+
+      /**
+       * Here we'll mutate the original reference object by clearing the
+       * existing keys and adding all keys of the reference itself.
+       */
+      Object.keys(node.val).forEach((key) => delete node.val[key]);
+      Object.keys(document).forEach((key) => (node.val[key] = document[key]));
+    })
+    .walk(input);
 }
 
 /**
