@@ -32,7 +32,7 @@
         "other_occurrence",
         "other_is_variant_of_concern",
         "sample_size",
-        "date_of_insertion",
+        "date_of_insertion_unix",
         "date_start_unix",
         "date_end_unix"
       ],
@@ -128,7 +128,7 @@
         "date_end_unix": {
           "type": "integer"
         },
-        "date_of_insertion": {
+        "date_of_insertion_unix": {
           "type": "integer"
         }
       }
