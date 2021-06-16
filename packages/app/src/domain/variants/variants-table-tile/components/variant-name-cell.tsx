@@ -4,13 +4,13 @@ import { SiteText } from '~/locale';
 import { Cell } from '.';
 import { Variant } from '../logic/use-variants-table-data';
 
-type VariantCellProps = {
+type VariantNameCellProps = {
   variant: Variant;
   text: SiteText['covid_varianten'];
   compact?: boolean;
 };
 
-export function VariantCell(props: VariantCellProps) {
+export function VariantNameCell(props: VariantNameCellProps) {
   const { variant, text, compact } = props;
 
   return (

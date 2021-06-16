@@ -13,11 +13,11 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
+  NumberOfSamples,
   PercentageBarWithNumber,
-  Samples,
   StyledTable,
-  VariantCell,
   VariantDifference,
+  VariantNameCell,
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
 
@@ -61,7 +61,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   return (
     <>
       <tr>
-        <VariantCell variant={row.variant} text={text} compact />
+        <VariantNameCell variant={row.variant} text={text} compact />
         <Cell>
           <PercentageBarWithNumber
             percentage={row.percentage}
@@ -89,7 +89,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             <div ref={ref}>
               <Box mb={1}>
                 {columnNames['aantal_monsters']}:{' '}
-                <Samples
+                <NumberOfSamples
                   occurrence={row.occurrence}
                   sampleSize={row.sampleSize}
                 />

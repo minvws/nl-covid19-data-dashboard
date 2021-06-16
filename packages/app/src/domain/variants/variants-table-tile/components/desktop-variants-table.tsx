@@ -3,13 +3,13 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
+  NumberOfSamples,
   PercentageBarWithNumber,
   StyledTable,
   VariantDifference,
+  VariantNameCell,
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
-import { NumberOfSamples } from './number-of-samples';
-import { VariantCell } from './variant-cell';
 
 const columnKeys = [
   'variant_titel',
@@ -41,7 +41,7 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
       <tbody>
         {rows.map((row) => (
           <tr key={row.variant}>
-            <VariantCell variant={row.variant} text={text} />
+            <VariantNameCell variant={row.variant} text={text} />
             <Cell>
               <InlineText>{row.countryOfOrigin}</InlineText>
             </Cell>
