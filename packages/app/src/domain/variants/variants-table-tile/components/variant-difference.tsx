@@ -16,29 +16,29 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   }
   if (value.difference > 0) {
     return (
-      <Diff color={colors.body}>
+      <Difference color={colors.body}>
         <PijlOmhoog />
         {formatPercentage(value.difference)}% {diffText.meer}
-      </Diff>
+      </Difference>
     );
   }
   if (value.difference < 0) {
     return (
-      <Diff color={colors.body}>
+      <Difference color={colors.body}>
         <PijlOmlaag />
         {formatPercentage(-value.difference)}% {diffText.minder}
-      </Diff>
+      </Difference>
     );
   }
   return (
-    <Diff color={colors.data.neutral}>
+    <Difference color={colors.data.neutral}>
       <Gelijk color={colors.gray} />
       {diffText.gelijk}
-    </Diff>
+    </Difference>
   );
 }
 
-const Diff = styled.span<{ color: string }>((x) =>
+const Difference = styled.span<{ color: string }>((x) =>
   css({
     whiteSpace: 'nowrap',
     display: 'inline-block',
