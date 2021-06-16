@@ -105,8 +105,8 @@ export const CollapsibleSection = ({
   id,
   hideBorder,
 }: CollapsibleSectionProps) => {
-  const [open, setOpen] = useState(false);
-  const { wrapperRef } = useSetLinkTabbability(open);
+  const [isOpen, setIsOpen] = useState(false);
+  const { wrapperRef } = useSetLinkTabbability(isOpen);
 
   const { ref, height: contentHeight } = useResizeObserver();
 
@@ -115,18 +115,18 @@ export const CollapsibleSection = ({
    * If so, the collapsible needs to be opened.
    */
   useEffect(() => {
-    const onHashChange = function () {
-      const isOpenedByQueryParam = window.location.hash.substr(1) === id;
+    function handleHashChange() {
+      const isOpenedByHash = window.location.hash.substr(1) === id;
 
-      if (isOpenedByQueryParam) {
-        setOpen(true);
+      if (isOpenedByHash) {
+        setIsOpen(true);
       }
-    };
+    }
 
-    window.addEventListener('hashchange', onHashChange);
-    onHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
 
-    return () => window.removeEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, [id]);
 
   return (
@@ -136,7 +136,7 @@ export const CollapsibleSection = ({
       borderTopColor={hideBorder ? undefined : 'lightGray'}
       id={id}
     >
-      <Disclosure open={open} onChange={() => setOpen(!open)}>
+      <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <Summary>
           {summary}
           {id && (
@@ -149,7 +149,7 @@ export const CollapsibleSection = ({
         <Panel
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
-            height: open ? contentHeight : 0,
+            height: isOpen ? contentHeight : 0,
           }}
         >
           <div ref={wrapperRef}>
