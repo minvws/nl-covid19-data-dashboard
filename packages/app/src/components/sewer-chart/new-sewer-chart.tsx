@@ -143,7 +143,6 @@ export function NewSewerChart({
               <TimeSeriesChart
                 values={dataAverages.values}
                 timeframe={timeframe}
-                markNearestPointOnly
                 seriesConfig={[
                   {
                     type: 'split-area',
