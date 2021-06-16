@@ -54,7 +54,7 @@ type MobileVariantRowProps = {
 
 function MobileVariantRow(props: MobileVariantRowProps) {
   const { row, text } = props;
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { ref, height: contentHeight } = useResizeObserver();
   const columnNames = text.varianten_tabel.kolommen;
 
@@ -70,9 +70,9 @@ function MobileVariantRow(props: MobileVariantRowProps) {
         </Cell>
         <Cell style={{ maxWidth: '1.2rem' }}>
           <Disclosure
-            open={open}
+            open={isOpen}
             onChange={() => {
-              setOpen((x) => !x);
+              setIsOpen((x) => !x);
             }}
           >
             <Chevron />
@@ -80,10 +80,10 @@ function MobileVariantRow(props: MobileVariantRowProps) {
         </Cell>
       </tr>
       <tr>
-        <MobileCell colSpan={3} padding={open}>
+        <MobileCell colSpan={3} padding={isOpen}>
           <Panel
             style={{
-              height: open ? contentHeight : 0,
+              height: isOpen ? contentHeight : 0,
             }}
           >
             <div ref={ref}>
