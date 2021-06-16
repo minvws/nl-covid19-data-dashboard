@@ -122,10 +122,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving
               }
               metadata={{
-                date: [
-                  data.vaccine_coverage.last_value.date_start_unix,
-                  data.vaccine_coverage.last_value.date_end_unix,
-                ],
+                date: data.vaccine_coverage.last_value.date_of_insertion_unix,
+                source: text.bronnen.rivm,
               }}
             >
               <TimeSeriesChart
