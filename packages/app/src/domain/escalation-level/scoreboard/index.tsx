@@ -81,7 +81,13 @@ export const scoreboardSortOptions = {
       return 1;
     return 0;
   },
-};
+} as const;
+
+const scoreboardSortIdentifiers = Object.keys(
+  scoreboardSortOptions
+) as SortIdentifier[];
+
+type SortIdentifier = keyof typeof scoreboardSortOptions;
 
 export type VrScoreboardData = {
   data: VrEscalationLevel;
@@ -105,12 +111,16 @@ export function Scoreboard({
   maxHospitalAdmissionsPerMillion,
   maxPositiveTestedPer100k,
 }: ScoreboardProps) {
-  const [sortOption, setSortOption] = useState<string>(
-    sortOptionIdentifiers[0]
+  const [sortOption, setSortOption] = useState<SortIdentifier>(
+    Object.keys(scoreboardSortOptions)[0] as SortIdentifier
   );
 
   const { siteText } = useIntl();
-  const sortOptions = Object.keys(scoreboardSortOptions).map((id) => {
+
+  const sortOptions = scoreboardSortIdentifiers.map<{
+    label: string;
+    value: SortIdentifier;
+  }>((id: SortIdentifier) => {
     const label = siteText.over_risiconiveaus.scoreboard.sort_option[id];
     return {
       label,
@@ -134,7 +144,7 @@ export function Scoreboard({
             <Box px={{ _: '1.5rem', sm: 4 }}>
               {row.escalationLevel !== null && (
                 <Box display="flex" justifyContent="row" py={3}>
-                  <SortSelectContainer
+                  <SelectSortContainer
                     display={{ _: 'none', lg: 'block' }}
                     flex="0 0 18rem"
                     pr={5}
@@ -147,12 +157,12 @@ export function Scoreboard({
                       onChange={setSortOption}
                       value={sortOption}
                     />
-                  </SortSelectContainer>
+                  </SelectSortContainer>
                   <Headers />
                 </Box>
               )}
 
-              <SortSelectContainer display={{ _: 'block', lg: 'none' }} mb={3}>
+              <SelectSortContainer display={{ _: 'block', lg: 'none' }} mb={3}>
                 <label>
                   {siteText.over_risiconiveaus.scoreboard.sort_label}
                 </label>
@@ -161,7 +171,7 @@ export function Scoreboard({
                   onChange={setSortOption}
                   value={sortOption}
                 />
-              </SortSelectContainer>
+              </SelectSortContainer>
               {row.vrData
                 .sort(scoreboardSortOptions[sortOption])
                 .map((vr, index) => (
@@ -187,7 +197,7 @@ export function Scoreboard({
   );
 }
 
-const SortSelectContainer = styled(Box)(
+const SelectSortContainer = styled(Box)(
   css({
     label: {
       fontSize: 1,
