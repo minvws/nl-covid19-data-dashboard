@@ -3,9 +3,8 @@ import { useSingleton } from '@tippyjs/react';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
-import { memo, useCallback, useState } from 'react';
+import { memo, ReactNode, useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { Text } from '~/components/typography';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
 import { TimelineAnnotation } from '../types';
@@ -15,10 +14,9 @@ interface AnnotationProps {
   size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   tippyTarget: ReturnType<typeof useSingleton>[number];
-  onNext: () => void;
-  onPrev: () => void;
   onClick: () => void;
   isActive: boolean;
+  tooltipContent: ReactNode;
 }
 
 export const Annotation = memo(function Annotation({
@@ -26,10 +24,9 @@ export const Annotation = memo(function Annotation({
   xScale,
   size,
   tippyTarget,
-  onNext,
-  onPrev,
   onClick,
   isActive,
+  tooltipContent,
 }: AnnotationProps) {
   const [isMouseEntered, setIsMouseEntered] = useState(false);
   const isSelected = isActive || isMouseEntered;
@@ -50,12 +47,7 @@ export const Annotation = memo(function Annotation({
 
   return (
     <StyledAnnotation style={{ width, left }}>
-      <WithTooltip
-        singletonTarget={tippyTarget}
-        content={
-          <AnnotationContent value={value} onPrev={onPrev} onNext={onNext} />
-        }
-      >
+      <WithTooltip singletonTarget={tippyTarget} content={tooltipContent}>
         <HitTarget
           size={size}
           onPointerEnter={handlePointerEnter}
@@ -88,22 +80,6 @@ export const Annotation = memo(function Annotation({
     </StyledAnnotation>
   );
 });
-
-interface AnnotationContentProps {
-  value: TimelineAnnotation;
-  onNext: () => void;
-  onPrev: () => void;
-}
-
-function AnnotationContent(props: AnnotationContentProps) {
-  return (
-    <div>
-      <Text>supoerduerpoer</Text>
-      <button onClick={props.onPrev}>prev</button>{' '}
-      <button onClick={props.onNext}>next</button>
-    </div>
-  );
-}
 
 const StyledAnnotation = styled.div(
   css({

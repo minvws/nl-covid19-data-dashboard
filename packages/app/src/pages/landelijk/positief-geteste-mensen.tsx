@@ -261,9 +261,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   timelineAnnotations={[
                     {
                       date: 1586642400, // apr 12
+                      title: 'Hoogste piek tweede golf',
+                      description:
+                        'Op 12 april werd het grootste aantal van 12.998 nieuwe postitieve testen gemeld',
                     },
                     {
                       date: [1596060000, 1600984800], // jul 30 - sep 25
+                      title: 'Beperkte testcapaciteit',
+                      description:
+                        'In de eerste golf waren er te weinig testen om iedereen te laten testen. Daardoor is de piek in de data lager dan voor de andere golven. In de realiteit zouden deze aantallen veel hoger hebben gelegen. In de realiteit zouden deze aantallen veel hoger hebben gelegen.',
                     },
                   ]}
                   seriesConfig={[

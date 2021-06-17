@@ -8,6 +8,7 @@ import { Bounds, Padding } from '../../logic';
 import { Annotation } from './components/annotation';
 import { Timeline } from './components/timeline';
 import { TimelineAnnotation } from './types';
+import { TooltipContent } from './components/tooltip-content';
 
 interface TimelineAnnotationProps {
   annotations: TimelineAnnotation[];
@@ -54,16 +55,21 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
             xScale={xScale}
             tippyTarget={tippyTarget}
             onClick={() => showTooltipAtIndex(i)}
-            onNext={() => showTooltipAtIndex(i + 1)}
-            onPrev={() => showTooltipAtIndex(i - 1)}
             isActive={tooltipIndex === i}
+            tooltipContent={
+              <TooltipContent
+                value={x}
+                onNext={() => showTooltipAtIndex(i + 1)}
+                onPrev={() => showTooltipAtIndex(i - 1)}
+              />
+            }
           />
         ))}
       </Timeline>
       <WithTooltip
         singletonSource={tippySource}
         placement="bottom"
-        trigger="click"
+        // trigger="click"
         interactive
         moveTransition="transform 0.2s cubic-bezier(0.22, 1, 0.36, 1)"
         onHidden={hideTooltip}
