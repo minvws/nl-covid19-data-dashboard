@@ -117,10 +117,7 @@ export function Scoreboard({
 
   const { siteText } = useIntl();
 
-  const sortOptions = scoreboardSortIdentifiers.map<{
-    label: string;
-    value: SortIdentifier;
-  }>((id: SortIdentifier) => {
+  const sortOptions = scoreboardSortIdentifiers.map((id) => {
     const label = siteText.over_risiconiveaus.scoreboard.sort_option[id];
     return {
       label,
