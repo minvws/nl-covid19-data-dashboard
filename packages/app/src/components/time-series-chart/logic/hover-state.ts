@@ -162,14 +162,16 @@ export function useHoverState<T extends TimestampedValue>({
 
       const timestamp = interactiveValuesDateUnix[index];
 
-      const originalIndex = allValuesDateUnix.findIndex((x) => x === timestamp);
+      const indexInAllValues = allValuesDateUnix.findIndex(
+        (x) => x === timestamp
+      );
 
       assert(
-        isDefined(originalIndex),
+        isDefined(indexInAllValues),
         `Failed to find the original index for interactive timestamp ${timestamp}`
       );
 
-      return originalIndex;
+      return indexInAllValues;
     },
     [xScale, interactiveValuesDateUnix, allValuesDateUnix]
   );
