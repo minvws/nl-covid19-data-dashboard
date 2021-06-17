@@ -167,7 +167,7 @@ export function useHoverState<T extends TimestampedValue>({
       );
 
       assert(
-        isDefined(indexInAllValues),
+        indexInAllValues !== -1,
         `Failed to find the values index for interactive value timestamp ${timestamp}`
       );
 
@@ -483,9 +483,5 @@ function findActiveTimespanAnnotationIndex(
 }
 
 function hasSomeFilledProperties(value: Record<string, unknown>) {
-  const entries = Object.entries(value).filter(([_, value]) =>
-    isPresent(value)
-  );
-
-  return entries.length > 0;
+  return Object.values(value).some(isPresent);
 }
