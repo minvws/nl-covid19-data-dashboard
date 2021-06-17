@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
@@ -11,13 +11,12 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import {
   scoreboardSortOptions,
-  scoreboardSortIdentifiers,
   SortIdentifier,
-  ScoreboardRow,
+  ScoreboardRowData,
 } from './logic';
 
 interface ScoreboardProps {
-  rows: ScoreboardRow[];
+  rows: ScoreboardRowData[];
   maxHospitalAdmissionsPerMillion: number;
   maxPositiveTestedPer100k: number;
 }
@@ -27,19 +26,24 @@ export function Scoreboard({
   maxHospitalAdmissionsPerMillion,
   maxPositiveTestedPer100k,
 }: ScoreboardProps) {
-  const [sortOption, setSortOption] = useState<SortIdentifier>(
-    Object.keys(scoreboardSortOptions)[0] as SortIdentifier
-  );
+  const [sortOption, setSortOption] =
+    useState<SortIdentifier>('location_a_to_z');
 
   const { siteText } = useIntl();
 
-  const sortOptions = scoreboardSortIdentifiers.map((id) => {
-    const label = siteText.over_risiconiveaus.scoreboard.sort_option[id];
-    return {
-      label,
-      value: id,
-    };
-  });
+  const sortOptions = useMemo(() => {
+    const scoreboardSortIdentifiers = Object.keys(
+      scoreboardSortOptions
+    ) as SortIdentifier[];
+
+    return scoreboardSortIdentifiers.map((id) => {
+      const label = siteText.over_risiconiveaus.scoreboard.sort_option[id];
+      return {
+        label,
+        value: id,
+      };
+    });
+  }, [siteText]);
 
   return (
     <Box

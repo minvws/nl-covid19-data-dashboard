@@ -7,7 +7,7 @@ export type VrScoreboardData = {
   vrCode: string;
 };
 
-export type ScoreboardRow = {
+export type ScoreboardRowData = {
   escalationLevel: EscalationLevel;
   vrData: VrScoreboardData[];
 };
