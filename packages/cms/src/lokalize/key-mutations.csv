@@ -37,3 +37,10 @@ timestamp,action,key
 2021-06-14T10:58:07.619Z,add,vaccinaties.grafiek_gevaccineerd_door_de_tijd_heen.tooltip_label_volledig
 2021-06-15T13:36:22.037Z,delete,covid_varianten.informatie_block.nuttige_links_titel
 2021-06-15T13:38:31.351Z,add,covid_varianten.informatie_blok.nuttige_links_titel
+2021-06-16T16:05:59.808Z,add,over_risiconiveaus.scoreboard.sort_label
+2021-06-16T16:07:06.043Z,add,over_risiconiveaus.scoreboard.sort_option.location_a_to_z
+2021-06-16T16:08:03.629Z,add,over_risiconiveaus.scoreboard.sort_option.location_z_to_a
+2021-06-16T16:08:45.590Z,add,over_risiconiveaus.scoreboard.sort_option.positively_tested_high_to_low
+2021-06-16T16:09:11.897Z,add,over_risiconiveaus.scoreboard.sort_option.positively_tested_low_to_high
+2021-06-16T16:10:20.707Z,add,over_risiconiveaus.scoreboard.sort_option.hospital_admissions_high_to_low
+2021-06-16T16:10:44.160Z,add,over_risiconiveaus.scoreboard.sort_option.hospital_admissions_low_to_high
