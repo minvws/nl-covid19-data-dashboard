@@ -54,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('hospitalPage', locale);
   })
@@ -63,8 +63,9 @@ export const getStaticProps = createGetStaticProps(
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
-  const [selectedMap, setSelectedMap] =
-    useState<'municipal' | 'region'>('region');
+  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
+    'region'
+  );
   const dataHospitalNice = data.hospital_nice;
   const dataHospitalLcps = data.hospital_lcps;
   const lastValueNice = data.hospital_nice.last_value;
