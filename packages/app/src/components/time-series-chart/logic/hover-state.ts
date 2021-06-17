@@ -467,7 +467,7 @@ function findActiveTimespanAnnotationIndex(
 
   /**
    * Loop over the annotations and see if the hovered value falls within its
-   * timespan. By assuming these timespans never overlap, we can exist on the
+   * timespan. By assuming these timespans never overlap, we can exit on the
    * first match and return a single index.
    */
   for (const [index, annotation] of [...timespanAnnotations].entries()) {
