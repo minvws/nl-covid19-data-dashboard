@@ -33,7 +33,7 @@ type MaatregelenData = {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
-  createGetContent<MaatregelenData>((_context) => {
+  createGetContent<MaatregelenData>(() => {
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;
     const locale = process.env.NEXT_PUBLIC_LOCALE;

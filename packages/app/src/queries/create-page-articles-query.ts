@@ -10,7 +10,7 @@ type ArticlePageSchema =
   | 'escalationLevelPage'
   | 'situationsPage'
   | 'variantsPage'
-  | 'nursinghomePage'
+  | 'nursingHomePage'
   | 'disabilityCarePage'
   | 'elderlyAtHomePage'
   | 'infectiousPeoplePage';
