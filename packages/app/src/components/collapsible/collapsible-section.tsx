@@ -92,7 +92,7 @@ const Panel = styled((props) => <DisclosurePanel {...props} />)(
   })
 );
 
-function locationHashEquals(id?: string) {
+function locationHashEquals(id: string) {
   return window.location.hash === `#${id}`;
 }
 
@@ -121,7 +121,7 @@ export const CollapsibleSection = ({
    */
   useEffect(() => {
     function handleHashChange() {
-      if (locationHashEquals(id)) {
+      if (id && locationHashEquals(id)) {
         setIsOpen(true);
       }
     }
@@ -132,7 +132,7 @@ export const CollapsibleSection = ({
      * Since we are open by default, we need to close all sections which are not
      * opened by a hash now
      */
-    setIsOpen(locationHashEquals(id));
+    setIsOpen(!!id && locationHashEquals(id));
 
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [id]);
