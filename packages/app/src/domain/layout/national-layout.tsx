@@ -114,6 +114,9 @@ export function NationalLayout(props: NationalLayoutProps) {
             aria-label={siteText.aria_labels.metriek_navigatie}
             role="navigation"
             pt={4}
+            backgroundColor="white"
+            maxWidth={{ _: '38rem', md: undefined }}
+            mx="auto"
           >
             <Menu>
               <MetricMenuButtonLink

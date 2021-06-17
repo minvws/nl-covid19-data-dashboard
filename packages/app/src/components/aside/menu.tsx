@@ -17,7 +17,7 @@ type Url = UrlObject | string;
 
 export function Menu({ children }: { children: ReactNode }) {
   return (
-    <Box as="ul" m={0} p={0} py={0} css={css({ listStyle: 'none' })}>
+    <Box as="ul" m={0} p={0} css={css({ listStyle: 'none' })}>
       {children}
     </Box>
   );

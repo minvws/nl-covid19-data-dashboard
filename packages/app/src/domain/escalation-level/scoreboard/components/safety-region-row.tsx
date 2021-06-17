@@ -11,7 +11,7 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { VrScoreboardData } from '../';
+import { VrScoreboardData } from '../logic';
 import { useEscalationThresholds } from '../../thresholds';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
