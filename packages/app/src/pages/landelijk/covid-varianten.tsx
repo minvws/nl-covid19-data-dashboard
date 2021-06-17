@@ -15,7 +15,7 @@ import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { mockVariantsData } from '~/domain/variants/logic/mock-data';
-import { VariantsOverTime } from '~/domain/variants/variants-over-time/variants-over-time';
+import { VariantsOverTime } from '~/domain/variants/variants-over-time';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';

@@ -4,7 +4,7 @@ import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
-import { BASE_SERIES_CONFIG } from '~/domain/variants/variants-over-time/series.config';
+import { BASE_SERIES_CONFIG } from '~/domain/variants/series.config';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
