@@ -8,7 +8,8 @@ type ArticlePageSchema =
   | 'sewerPage'
   | 'vaccinationsPage'
   | 'escalationLevelPage'
-  | 'situationsPage';
+  | 'situationsPage'
+  | 'variantsPage';
 
 export function createPageArticlesQuery(
   schemaName: ArticlePageSchema,

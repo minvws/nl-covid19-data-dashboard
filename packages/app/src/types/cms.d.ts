@@ -194,3 +194,12 @@ export type InlineLink = {
   _type: 'link';
   href: string;
 };
+
+export type LinkProps = {
+  href: string;
+  title: string;
+};
+
+export type VariantsPageQuery = {
+  pageLinks: [LinkProps];
+};

@@ -32,14 +32,6 @@ const cli = meow(
   }
 );
 
-const localeDirectory = path.resolve(
-  __dirname,
-  '..', // src
-  '..', // cms
-  '..', // packages
-  'app/src/locale'
-);
-
 (async function run() {
   const dataset = cli.flags.dataset;
 

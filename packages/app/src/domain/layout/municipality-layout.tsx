@@ -101,16 +101,28 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
       </Head>
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<MunicipalityComboBox />}
+        searchComponent={
+          <Box
+            backgroundColor="white"
+            maxWidth={{ _: '38rem', md: undefined }}
+            mx="auto"
+          >
+            <MunicipalityComboBox />
+          </Box>
+        }
         sidebarComponent={
           <>
             {showMetricLinks && (
-              <nav
+              <Box
+                as="nav"
                 /** re-mount when route changes in order to blur anchors */
                 key={router.asPath}
-                role="navigation"
                 id="metric-navigation"
                 aria-label={siteText.aria_labels.metriek_navigatie}
+                role="navigation"
+                backgroundColor="white"
+                maxWidth={{ _: '38rem', md: undefined }}
+                mx="auto"
               >
                 <Box>
                   <Category>{municipalityName}</Category>
@@ -213,7 +225,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     </MetricMenuItemLink>
                   </CategoryMenu>
                 </Menu>
-              </nav>
+              </Box>
             )}
           </>
         }
