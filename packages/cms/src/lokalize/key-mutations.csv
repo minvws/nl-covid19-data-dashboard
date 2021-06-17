@@ -44,3 +44,10 @@ timestamp,action,key
 2021-06-16T13:26:36.194Z,add,covid_varianten.varianten_over_tijd.tooltip_labels.totaal_monsters
 2021-06-16T13:27:16.416Z,add,covid_varianten.varianten_over_tijd.legend_niet_compleet_label
 2021-06-16T13:31:09.342Z,add,covid_varianten.varianten_over_tijd.legend_help_tekst
+2021-06-16T16:05:59.808Z,add,over_risiconiveaus.scoreboard.sort_label
+2021-06-16T16:07:06.043Z,add,over_risiconiveaus.scoreboard.sort_option.location_a_to_z
+2021-06-16T16:08:03.629Z,add,over_risiconiveaus.scoreboard.sort_option.location_z_to_a
+2021-06-16T16:08:45.590Z,add,over_risiconiveaus.scoreboard.sort_option.positively_tested_high_to_low
+2021-06-16T16:09:11.897Z,add,over_risiconiveaus.scoreboard.sort_option.positively_tested_low_to_high
+2021-06-16T16:10:20.707Z,add,over_risiconiveaus.scoreboard.sort_option.hospital_admissions_high_to_low
+2021-06-16T16:10:44.160Z,add,over_risiconiveaus.scoreboard.sort_option.hospital_admissions_low_to_high
