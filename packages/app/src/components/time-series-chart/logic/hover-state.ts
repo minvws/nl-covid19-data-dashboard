@@ -96,9 +96,6 @@ export function useHoverState<T extends TimestampedValue>({
     );
   }, [values, interactiveMetricProperties]);
 
-  // console.log('values length', values.length,
-  // valuesWithInteractiveProperties);
-
   const interactiveValuesDateUnix = useMemo(
     () =>
       valuesWithInteractiveProperties.map((x) =>
@@ -483,14 +480,10 @@ function findActiveTimespanAnnotationIndex(
   }
 }
 
-/**
- * Check to see if a value object had some of its metric properties filled, not
- * counting timestamp values. Timestamps all end in _unix.
- */
 function hasSomeFilledProperties(value: Record<string, unknown>) {
-  const entries = Object.entries(value)
-    // .filter(([key]) => !key.endsWith('_unix'))
-    .filter(([_, value]) => isPresent(value));
+  const entries = Object.entries(value).filter(([_, value]) =>
+    isPresent(value)
+  );
 
   return entries.length > 0;
 }
