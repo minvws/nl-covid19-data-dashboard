@@ -160,10 +160,8 @@ function TooltipListItem({
   isVisuallyHidden,
 }: TooltipListItemProps) {
   return isVisuallyHidden ? (
-    <VisuallyHidden>
-      <li>
-        {label}:{children}
-      </li>
+    <VisuallyHidden as="li">
+      {label}:{children}
     </VisuallyHidden>
   ) : (
     <Box
