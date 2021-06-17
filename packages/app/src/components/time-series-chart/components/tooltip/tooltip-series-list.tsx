@@ -13,6 +13,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
+import { AnnotationMarker } from '../timeline-annotations/components/annotation-marker';
 import { TooltipData } from './types';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
@@ -30,6 +31,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     markNearestPointOnly,
     displayTooltipValueOnly,
     timespanAnnotation,
+    timelineAnnotation,
     valueMinWidth,
   } = tooltipData;
 
@@ -66,6 +68,32 @@ export function TooltipSeriesList<T extends TimestampedValue>({
           {timespanAnnotation.shortLabel || timespanAnnotation.label}
         </Text>
       )}
+
+      {timelineAnnotation && (
+        <Box
+          display="flex"
+          fontWeight="bold"
+          alignItems="center"
+          mx={-3}
+          px={3}
+          pb={2}
+          mb={2}
+          borderBottom="1px solid"
+          borderBottomColor="lightGray"
+        >
+          <Box
+            width={'1em'}
+            mr={2}
+            display="flex"
+            alignItems="baseline"
+            justifyContent="center"
+          >
+            <AnnotationMarker isHighlighted size={10} />
+          </Box>
+          <Box>{timelineAnnotation.title}</Box>
+        </Box>
+      )}
+
       <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
         {seriesConfig.map((x, index) => {
           /**
@@ -145,7 +173,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 }
 
 interface TooltipListItemProps {
-  children: ReactNode;
+  children?: ReactNode;
   label?: string;
   icon?: ReactNode;
   displayTooltipValueOnly?: boolean;
@@ -185,7 +213,14 @@ function TooltipListItem({
       ) : (
         <>
           {icon ? (
-            <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
+            <Box
+              width="1em"
+              mt={1}
+              flexShrink={0}
+              display="flex"
+              alignItems="baseline"
+              justifyContent="center"
+            >
               {icon}
             </Box>
           ) : (

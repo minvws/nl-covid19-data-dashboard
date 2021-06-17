@@ -4,14 +4,16 @@ import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { ReactNode, RefObject, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Box } from '~/components/base';
+import { TimelineAnnotationConfig } from '~/components/time-series-chart/logic';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { TimelineAnnotation } from '../types';
+import { AnnotationMarker } from './annotation-marker';
 
 interface AnnotationProps {
-  value: TimelineAnnotation;
+  value: TimelineAnnotationConfig;
   size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   onSelect: () => void;
@@ -21,7 +23,7 @@ interface AnnotationProps {
   isHighlighted?: boolean;
 }
 
-export const Annotation = function Annotation({
+export function Annotation({
   value,
   xScale,
   size,
@@ -35,9 +37,6 @@ export const Annotation = function Annotation({
   const [isMouseEntered, setIsMouseEntered] = useState(false);
   const highlightAnnotation =
     isHighlighted || (isTouch ? isSelected : isMouseEntered);
-
-  const borderWidth = Math.round(size * 0.2);
-  const innerPointSize = size - 2 * borderWidth;
 
   const left = Array.isArray(value.date)
     ? xScale(value.date[0]) ?? 0
@@ -71,7 +70,7 @@ export const Annotation = function Annotation({
         contentRef={contentRef}
       />
       {width && (
-        <Bar
+        <TimeSpanBar
           height={size}
           initial={false}
           animate={{
@@ -82,19 +81,12 @@ export const Annotation = function Annotation({
           }}
         />
       )}
-      <PointMarker
-        size={innerPointSize}
-        color={colors.data.primary}
-        initial={false}
-        animate={{
-          boxShadow: `0 0 0 ${
-            highlightAnnotation ? borderWidth * 1.5 : borderWidth
-          }px ${colors.data.primary}`,
-        }}
-      />
+      <Box transform="translateX(-50%)">
+        <AnnotationMarker size={size} isHighlighted={highlightAnnotation} />
+      </Box>
     </StyledAnnotation>
   );
-};
+}
 
 function TooltipTrigger({
   size,
@@ -152,7 +144,7 @@ const StyledAnnotation = styled.div(
 );
 
 const HitTarget = styled.button<{ size: number }>((x) => {
-  const padding = x.size / 2;
+  const padding = x.size;
 
   return css({
     m: 0,
@@ -169,22 +161,11 @@ const HitTarget = styled.button<{ size: number }>((x) => {
   });
 });
 
-const Bar = styled(motion.div)<{ height: number }>((x) =>
+const TimeSpanBar = styled(motion.div)<{ height: number }>((x) =>
   css({
     position: 'absolute',
     width: '100%',
     height: x.height,
     borderRadius: `0 ${x.height / 2}px ${x.height / 2}px 0`,
-  })
-);
-
-const PointMarker = styled(motion.div)<{ color: string; size: number }>((x) =>
-  css({
-    position: 'absolute',
-    width: `${x.size}px`,
-    height: `${x.size}px`,
-    borderRadius: `${x.size / 2}px`,
-    background: 'white',
-    transform: 'translateX(-50%)',
   })
 );

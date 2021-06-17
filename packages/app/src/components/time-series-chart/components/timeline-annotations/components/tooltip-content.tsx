@@ -1,13 +1,13 @@
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
+import { IconButton } from '~/components/icon-button';
+import { TimelineAnnotationConfig } from '~/components/time-series-chart/logic';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { TimelineAnnotation } from '../types';
-import { IconButton } from '~/components/icon-button';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface TooltipContentProps {
-  value: TimelineAnnotation;
+  value: TimelineAnnotationConfig;
   onNext: () => void;
   onPrev: () => void;
 }
@@ -37,6 +37,12 @@ export function TooltipContent({ value, onNext, onPrev }: TooltipContentProps) {
         </Box>
       )}
       <Box spacing={2}>
+        {!isTouch && (
+          <Text fontSize={1} color="labelGray">
+            {date}
+          </Text>
+        )}
+
         <Text fontSize={1} fontWeight="bold">
           {value.title}
         </Text>

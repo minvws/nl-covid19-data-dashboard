@@ -27,10 +27,7 @@ import {
   TooltipFormatter,
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
-import {
-  TimelineAnnotation,
-  TimelineAnnotations,
-} from './components/timeline-annotations';
+import { TimelineAnnotations } from './components/timeline-annotations';
 import {
   calculateSeriesMaximum,
   COLLAPSE_Y_AXIS_THRESHOLD,
@@ -129,11 +126,6 @@ export type TimeSeriesChartProps<
    * This option only makes sense when we display a single trend.
    */
   displayTooltipValueOnly?: boolean;
-
-  /**
-   *
-   */
-  timelineAnnotations?: TimelineAnnotation[];
 };
 
 export function TimeSeriesChart<
@@ -158,7 +150,6 @@ export function TimeSeriesChart<
   onSeriesClick,
   markNearestPointOnly,
   displayTooltipValueOnly,
-  timelineAnnotations,
 }: TimeSeriesChartProps<T, C>) {
   const {
     tooltipData,
@@ -178,6 +169,7 @@ export function TimeSeriesChart<
     benchmark,
     timespanAnnotations,
     timeAnnotations,
+    timelineAnnotations,
   } = dataOptions || {};
 
   const {
@@ -254,6 +246,7 @@ export function TimeSeriesChart<
     xScale,
     yScale,
     timespanAnnotations,
+    timelineAnnotations,
     markNearestPointOnly,
   });
 
@@ -261,7 +254,12 @@ export function TimeSeriesChart<
 
   useEffect(() => {
     if (hoverState) {
-      const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
+      const {
+        nearestPoint,
+        valuesIndex,
+        timespanAnnotationIndex,
+        timelineAnnotationIndex,
+      } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -295,6 +293,10 @@ export function TimeSeriesChart<
             timespanAnnotations && isDefined(timespanAnnotationIndex)
               ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
+          timelineAnnotation:
+            timelineAnnotations && isDefined(timelineAnnotationIndex)
+              ? timelineAnnotations[timelineAnnotationIndex]
+              : undefined,
 
           valueMinWidth,
         },
@@ -315,6 +317,7 @@ export function TimeSeriesChart<
     markNearestPointOnly,
     displayTooltipValueOnly,
     valueMinWidth,
+    timelineAnnotations,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
@@ -459,6 +462,7 @@ export function TimeSeriesChart<
           xScale={xScale}
           bounds={bounds}
           padding={padding}
+          highlightIndex={hoverState?.timelineAnnotationIndex}
         />
       )}
 

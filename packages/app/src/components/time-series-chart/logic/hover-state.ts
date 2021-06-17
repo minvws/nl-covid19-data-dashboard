@@ -8,10 +8,15 @@ import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
+import { endOfDay, startOfDay } from 'date-fns';
 import { isEmpty, pick, throttle } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Padding, TimespanAnnotationConfig } from './common';
+import {
+  Padding,
+  TimelineAnnotationConfig,
+  TimespanAnnotationConfig,
+} from './common';
 import {
   isVisible,
   SeriesConfig,
@@ -39,6 +44,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
+  timelineAnnotations?: TimelineAnnotationConfig[];
   markNearestPointOnly?: boolean;
 }
 
@@ -49,6 +55,7 @@ interface HoverState<T> {
   rangePoints: HoveredPoint<T>[];
   nearestPoint: HoveredPoint<T>;
   timespanAnnotationIndex?: number;
+  timelineAnnotationIndex?: number;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
@@ -63,6 +70,7 @@ export function useHoverState<T extends TimestampedValue>({
   xScale,
   yScale,
   timespanAnnotations,
+  timelineAnnotations,
   markNearestPointOnly,
 }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
@@ -425,6 +433,13 @@ export function useHoverState<T extends TimestampedValue>({
         )
       : undefined;
 
+    const timelineAnnotationIndex = timelineAnnotations
+      ? findActiveTimelineAnnotationIndex(
+          values[valuesIndex],
+          timelineAnnotations
+        )
+      : undefined;
+
     const hoverState: HoverState<T> = {
       valuesIndex,
       barPoints,
@@ -436,6 +451,7 @@ export function useHoverState<T extends TimestampedValue>({
         : rangePoints,
       nearestPoint,
       timespanAnnotationIndex,
+      timelineAnnotationIndex,
     };
 
     return hoverState;
@@ -444,6 +460,7 @@ export function useHoverState<T extends TimestampedValue>({
     hasFocus,
     seriesConfig,
     timespanAnnotations,
+    timelineAnnotations,
     values,
     valuesIndex,
     markNearestPointOnly,
@@ -472,7 +489,7 @@ function findActiveTimespanAnnotationIndex(
    * timespan. By assuming these timespans never overlap, we can exit on the
    * first match and return a single index.
    */
-  for (const [index, annotation] of [...timespanAnnotations].entries()) {
+  for (const [index, annotation] of timespanAnnotations.entries()) {
     /**
      * Tesing overlap of two ranges x1 <= y2 && y1 <= x2
      */
@@ -480,6 +497,51 @@ function findActiveTimespanAnnotationIndex(
       return index;
     }
   }
+}
+
+function findActiveTimelineAnnotationIndex(
+  hoveredValue: TimestampedValue,
+  timespanAnnotations: TimelineAnnotationConfig[]
+) {
+  const valueSpanStartOfDay =
+    toStartOfDay(
+      isDateValue(hoveredValue)
+        ? hoveredValue.date_unix
+        : hoveredValue.date_start_unix
+    ) + 1;
+
+  const valueSpanEndOfDay =
+    toEndOfDay(
+      isDateValue(hoveredValue)
+        ? hoveredValue.date_unix
+        : hoveredValue.date_end_unix
+    ) - 1;
+
+  /**
+   * Loop over the annotations and see if the hovered value falls within its
+   * timespan. By assuming these timespans never overlap, we can exist on the
+   * first match and return a single index.
+   */
+  for (const [index, annotation] of timespanAnnotations.entries()) {
+    const start = toStartOfDay(
+      Array.isArray(annotation.date) ? annotation.date[0] : annotation.date
+    );
+    const end = toEndOfDay(
+      Array.isArray(annotation.date) ? annotation.date[1] : annotation.date
+    );
+
+    if (valueSpanStartOfDay <= end && start <= valueSpanEndOfDay) {
+      return index;
+    }
+  }
+}
+
+function toStartOfDay(seconds: number) {
+  return Math.round(startOfDay(seconds * 1000).getTime() / 1000);
+}
+
+function toEndOfDay(seconds: number) {
+  return Math.round(endOfDay(seconds * 1000).getTime() / 1000);
 }
 
 function hasSomeFilledProperties(value: Record<string, unknown>) {

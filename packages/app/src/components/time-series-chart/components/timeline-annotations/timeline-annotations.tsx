@@ -1,24 +1,26 @@
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { memo, useCallback, useState } from 'react';
+import { isDefined } from 'ts-is-present';
 import { wrapAroundLength } from '~/utils/number';
-import { Bounds, Padding } from '../../logic';
+import { Bounds, Padding, TimelineAnnotationConfig } from '../../logic';
 import { Annotation } from './components/annotation';
 import { Timeline } from './components/timeline';
 import { TooltipContent } from './components/tooltip-content';
-import { TimelineAnnotation } from './types';
 
 interface TimelineAnnotationProps {
-  annotations: TimelineAnnotation[];
+  annotations: TimelineAnnotationConfig[];
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   bounds: Bounds;
   padding: Padding;
   size?: number;
+  highlightIndex?: number;
 }
 
 export const TimelineAnnotations = memo(function TimelineAnnotations({
   annotations,
   xScale,
   padding,
+  highlightIndex,
   size = 10,
 }: TimelineAnnotationProps) {
   const [index, setIndex] = useState<number | undefined>(undefined);
@@ -43,7 +45,8 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
             xScale={xScale}
             onSelect={() => showTooltipAtIndex(i)}
             onDeselect={() => index === i && setIndex(undefined)}
-            isSelected={index === i}
+            isSelected={i === index}
+            isHighlighted={isDefined(highlightIndex) && i === highlightIndex}
             tooltipContent={
               <TooltipContent
                 value={x}
