@@ -47,26 +47,28 @@ export function useVariantsTableData(
   countriesOfOrigin: CountriesOfOrigin,
   differences: NationalDifference
 ): VariantRow[] {
-  return useMemo(() => {
-    return variants
-      .map((variant) => ({
-        variant,
-        countryOfOrigin: countriesOfOrigin[variant],
-        occurrence: data[`${variant}_occurrence` as const],
-        percentage: data[`${variant}_percentage` as const],
-        difference: differences[`variants__${variant}_percentage` as const],
-        color: colors.data.variants[variant],
-        sampleSize: data.sample_size,
-      }))
-      .sort((rowA, rowB) => {
-        // Make sure the 'other' variant is always sorted last
-        if (rowA.variant === 'other') {
-          return 1;
-        }
-        if (rowB.variant === 'other') {
-          return -1;
-        }
-        return rowB.percentage - rowA.percentage;
-      });
-  }, [data, countriesOfOrigin, differences]);
+  return useMemo(
+    () =>
+      variants
+        .map((variant) => ({
+          variant,
+          countryOfOrigin: countriesOfOrigin[variant],
+          occurrence: data[`${variant}_occurrence` as const],
+          percentage: data[`${variant}_percentage` as const],
+          difference: differences[`variants__${variant}_percentage` as const],
+          color: colors.data.variants[variant],
+          sampleSize: data.sample_size,
+        }))
+        .sort((rowA, rowB) => {
+          // Make sure the 'other' variant is always sorted last
+          if (rowA.variant === 'other') {
+            return 1;
+          }
+          if (rowB.variant === 'other') {
+            return -1;
+          }
+          return rowB.percentage - rowA.percentage;
+        }),
+    [data, countriesOfOrigin, differences]
+  );
 }
