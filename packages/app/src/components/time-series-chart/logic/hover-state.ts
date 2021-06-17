@@ -168,7 +168,7 @@ export function useHoverState<T extends TimestampedValue>({
 
       assert(
         isDefined(indexInAllValues),
-        `Failed to find the original index for interactive timestamp ${timestamp}`
+        `Failed to find the values index for interactive value timestamp ${timestamp}`
       );
 
       return indexInAllValues;
