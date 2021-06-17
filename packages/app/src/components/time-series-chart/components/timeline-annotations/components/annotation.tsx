@@ -1,24 +1,38 @@
 import css from '@styled-system/css';
+import { useSingleton } from '@tippyjs/react';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { memo, useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { Text } from '~/components/typography';
+import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
 import { TimelineAnnotation } from '../types';
 
 interface AnnotationProps {
-  size: number;
   value: TimelineAnnotation;
+  size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
+  tippyTarget: ReturnType<typeof useSingleton>[number];
+  onNext: () => void;
+  onPrev: () => void;
+  onClick: () => void;
+  isActive: boolean;
 }
 
 export const Annotation = memo(function Annotation({
   value,
   xScale,
   size,
+  tippyTarget,
+  onNext,
+  onPrev,
+  onClick,
+  isActive,
 }: AnnotationProps) {
-  const [isEntered, setIsEntered] = useState(false);
+  const [isMouseEntered, setIsMouseEntered] = useState(false);
+  const isSelected = isActive || isMouseEntered;
 
   const borderWidth = Math.round(size * 0.2);
   const innerPointSize = size - 2 * borderWidth;
@@ -31,23 +45,31 @@ export const Annotation = memo(function Annotation({
     ? (xScale(value.date[1]) ?? 0) - (xScale(value.date[0]) ?? 0)
     : undefined;
 
-  const handlePointerEnter = useCallback(() => setIsEntered(true), []);
-  const handlePointerLeave = useCallback(() => setIsEntered(false), []);
+  const handlePointerEnter = useCallback(() => setIsMouseEntered(true), []);
+  const handlePointerLeave = useCallback(() => setIsMouseEntered(false), []);
 
   return (
     <StyledAnnotation style={{ width, left }}>
-      <HitTarget
-        size={size}
-        onPointerEnter={handlePointerEnter}
-        onPointerLeave={handlePointerLeave}
-      />
+      <WithTooltip
+        singletonTarget={tippyTarget}
+        content={
+          <AnnotationContent value={value} onPrev={onPrev} onNext={onNext} />
+        }
+      >
+        <HitTarget
+          size={size}
+          onPointerEnter={handlePointerEnter}
+          onPointerLeave={handlePointerLeave}
+          onClick={onClick}
+        />
+      </WithTooltip>
       {width && (
         <Bar
           height={size}
           initial={false}
           animate={{
             background: transparentize(
-              isEntered ? 0.5 : 0.8,
+              isSelected ? 0.5 : 0.8,
               colors.data.primary
             ),
           }}
@@ -58,7 +80,7 @@ export const Annotation = memo(function Annotation({
         color={colors.data.primary}
         initial={false}
         animate={{
-          boxShadow: `0 0 0 ${isEntered ? borderWidth * 1.5 : borderWidth}px ${
+          boxShadow: `0 0 0 ${isSelected ? borderWidth * 1.5 : borderWidth}px ${
             colors.data.primary
           }`,
         }}
@@ -66,6 +88,22 @@ export const Annotation = memo(function Annotation({
     </StyledAnnotation>
   );
 });
+
+interface AnnotationContentProps {
+  value: TimelineAnnotation;
+  onNext: () => void;
+  onPrev: () => void;
+}
+
+function AnnotationContent(props: AnnotationContentProps) {
+  return (
+    <div>
+      <Text>supoerduerpoer</Text>
+      <button onClick={props.onPrev}>prev</button>{' '}
+      <button onClick={props.onNext}>next</button>
+    </div>
+  );
+}
 
 const StyledAnnotation = styled.div(
   css({
@@ -86,8 +124,7 @@ const HitTarget = styled.button<{ size: number }>((x) => {
     bg: 'transparent',
     display: 'block',
     position: 'absolute',
-    minWidth: x.size + 2 * padding,
-    width: `calc(100% + ${x.size}px + ${padding}px)`,
+    width: x.size + 2 * padding,
     top: `${-padding}px`,
     bottom: `${-padding}px`,
     left: -padding - x.size / 2,
