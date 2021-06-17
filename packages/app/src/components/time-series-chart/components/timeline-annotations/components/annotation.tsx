@@ -1,35 +1,40 @@
 import css from '@styled-system/css';
-import { useSingleton } from '@tippyjs/react';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
-import { memo, ReactNode, useCallback, useState } from 'react';
+import { ReactNode, RefObject, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TimelineAnnotation } from '../types';
 
 interface AnnotationProps {
   value: TimelineAnnotation;
   size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
-  tippyTarget: ReturnType<typeof useSingleton>[number];
-  onClick: () => void;
-  isActive: boolean;
+  onSelect: () => void;
+  onDeselect: () => void;
+  isSelected: boolean;
   tooltipContent: ReactNode;
+  isHighlighted?: boolean;
 }
 
-export const Annotation = memo(function Annotation({
+export const Annotation = function Annotation({
   value,
   xScale,
   size,
-  tippyTarget,
-  onClick,
-  isActive,
+  onSelect,
+  onDeselect,
+  isSelected,
+  isHighlighted,
   tooltipContent,
 }: AnnotationProps) {
+  const isTouch = useIsTouchDevice();
   const [isMouseEntered, setIsMouseEntered] = useState(false);
-  const isSelected = isActive || isMouseEntered;
+  const highlightAnnotation =
+    isHighlighted || (isTouch ? isSelected : isMouseEntered);
 
   const borderWidth = Math.round(size * 0.2);
   const innerPointSize = size - 2 * borderWidth;
@@ -42,26 +47,36 @@ export const Annotation = memo(function Annotation({
     ? (xScale(value.date[1]) ?? 0) - (xScale(value.date[0]) ?? 0)
     : undefined;
 
-  const handlePointerEnter = useCallback(() => setIsMouseEntered(true), []);
-  const handlePointerLeave = useCallback(() => setIsMouseEntered(false), []);
+  const handleTooltipSelect = useCallback(() => {
+    setIsMouseEntered(true);
+    onSelect();
+  }, [onSelect]);
+
+  const handleTooltipDeselect = useCallback(() => {
+    setIsMouseEntered(false);
+  }, []);
+
+  const annotationRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside([annotationRef, contentRef], () => onDeselect());
 
   return (
     <StyledAnnotation style={{ width, left }}>
-      <WithTooltip singletonTarget={tippyTarget} content={tooltipContent}>
-        <HitTarget
-          size={size}
-          onPointerEnter={handlePointerEnter}
-          onPointerLeave={handlePointerLeave}
-          onClick={onClick}
-        />
-      </WithTooltip>
+      <TooltipTrigger
+        content={tooltipContent}
+        isSelected={isSelected}
+        size={size}
+        onSelect={handleTooltipSelect}
+        onDeselect={handleTooltipDeselect}
+        contentRef={contentRef}
+      />
       {width && (
         <Bar
           height={size}
           initial={false}
           animate={{
             background: transparentize(
-              isSelected ? 0.5 : 0.8,
+              highlightAnnotation ? 0.5 : 0.8,
               colors.data.primary
             ),
           }}
@@ -72,14 +87,60 @@ export const Annotation = memo(function Annotation({
         color={colors.data.primary}
         initial={false}
         animate={{
-          boxShadow: `0 0 0 ${isSelected ? borderWidth * 1.5 : borderWidth}px ${
-            colors.data.primary
-          }`,
+          boxShadow: `0 0 0 ${
+            highlightAnnotation ? borderWidth * 1.5 : borderWidth
+          }px ${colors.data.primary}`,
         }}
       />
     </StyledAnnotation>
   );
-});
+};
+
+function TooltipTrigger({
+  size,
+  onSelect,
+  onDeselect,
+  isSelected,
+  content,
+  contentRef,
+}: {
+  size: number;
+  onSelect: () => void;
+  onDeselect: () => void;
+  content: ReactNode;
+  isSelected: boolean;
+  contentRef: RefObject<HTMLDivElement>;
+}) {
+  const isTouch = useIsTouchDevice();
+  const contentWithRef = <div ref={contentRef}>{content}</div>;
+
+  return isTouch ? (
+    <WithTooltip
+      content={contentWithRef}
+      placement="bottom"
+      interactive
+      visible={isSelected}
+    >
+      <HitTarget
+        size={size}
+        onPointerEnter={onSelect}
+        onPointerLeave={onDeselect}
+        onClick={onSelect}
+      />
+    </WithTooltip>
+  ) : (
+    <WithTooltip
+      content={contentWithRef}
+      placement="bottom"
+      interactive
+      onShow={onSelect}
+      onHide={onDeselect}
+      hideOnClick={false}
+    >
+      <HitTarget size={size} />
+    </WithTooltip>
+  );
+}
 
 const StyledAnnotation = styled.div(
   css({

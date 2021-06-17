@@ -1,14 +1,11 @@
-import { useSingleton } from '@tippyjs/react';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
-import { memo, useCallback, useEffect, useState } from 'react';
-import { isDefined } from 'ts-is-present';
-import { WithTooltip } from '~/lib/tooltip';
+import { memo, useCallback, useState } from 'react';
 import { wrapAroundLength } from '~/utils/number';
 import { Bounds, Padding } from '../../logic';
 import { Annotation } from './components/annotation';
 import { Timeline } from './components/timeline';
-import { TimelineAnnotation } from './types';
 import { TooltipContent } from './components/tooltip-content';
+import { TimelineAnnotation } from './types';
 
 interface TimelineAnnotationProps {
   annotations: TimelineAnnotation[];
@@ -24,23 +21,14 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
   padding,
   size = 10,
 }: TimelineAnnotationProps) {
-  const [tooltipIndex, setTooltipIndex] =
-    useState<number | undefined>(undefined);
-  const [tippySource, tippyTarget] = useSingleton();
+  const [index, setIndex] = useState<number | undefined>(undefined);
   const [, end] = xScale.domain();
   const width = xScale(end) ?? 0;
 
-  const hideTooltip = useCallback(() => setTooltipIndex(undefined), []);
   const showTooltipAtIndex = useCallback(
-    (index: number) =>
-      setTooltipIndex(wrapAroundLength(index, annotations.length)),
+    (index: number) => setIndex(wrapAroundLength(index, annotations.length)),
     [annotations.length]
   );
-
-  useEffect(() => {
-    const instance = tippySource.data.instance;
-    if (isDefined(tooltipIndex) && instance) instance.show(tooltipIndex);
-  }, [tooltipIndex, tippySource]);
 
   if (!width) return null;
 
@@ -53,9 +41,9 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
             size={size}
             value={x}
             xScale={xScale}
-            tippyTarget={tippyTarget}
-            onClick={() => showTooltipAtIndex(i)}
-            isActive={tooltipIndex === i}
+            onSelect={() => showTooltipAtIndex(i)}
+            onDeselect={() => index === i && setIndex(undefined)}
+            isSelected={index === i}
             tooltipContent={
               <TooltipContent
                 value={x}
@@ -66,14 +54,6 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
           />
         ))}
       </Timeline>
-      <WithTooltip
-        singletonSource={tippySource}
-        placement="bottom"
-        // trigger="click"
-        interactive
-        moveTransition="transform 0.2s cubic-bezier(0.22, 1, 0.36, 1)"
-        onHidden={hideTooltip}
-      />
     </div>
   );
 });
