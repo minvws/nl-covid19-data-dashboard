@@ -33,11 +33,12 @@ interface UseScalesResult {
 export function useScales<T extends TimestampedValue>(args: {
   values: T[];
   maximumValue: number;
+  minimumValue: number;
   bounds: Bounds;
   numTicks: number;
 }) {
   const today = useCurrentDate();
-  const { maximumValue, bounds, numTicks, values } = args;
+  const { maximumValue, minimumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
     const [start, end] = getTimeDomain({ values, today, withPadding: true });
@@ -72,9 +73,13 @@ export function useScales<T extends TimestampedValue>(args: {
      * In that particular case calling yScale(0) will return the (bounds.height / 2), instead of just bounds.height.
      * A work-around turns out to be setting the max value to Infinity.
      */
-    const maximumDomainValue = maximumValue > 0 ? maximumValue : Infinity;
+    const minimumDomainValue = Math.min(minimumValue, 0);
+    const maximumDomainValue = Math.max(maximumValue, 0);
     const yScale = scaleLinear({
-      domain: [0, maximumValue > 0 ? maximumValue : maximumDomainValue],
+      domain:
+        minimumDomainValue === 0 && maximumDomainValue === 0
+          ? [0, Infinity]
+          : [minimumDomainValue, maximumDomainValue],
       range: [bounds.height, 0],
       nice: numTicks,
       round: true, // round the output values so we render on round pixels
@@ -92,7 +97,7 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, today, bounds, maximumValue, numTicks]);
+  }, [values, today, bounds, maximumValue, minimumValue, numTicks]);
 }
 
 /**

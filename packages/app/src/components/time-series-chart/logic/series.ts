@@ -85,6 +85,7 @@ export interface BarSeriesDefinition<T extends TimestampedValue>
   label: string;
   shortLabel?: string;
   color: string;
+  negativeColor?: string;
   fillOpacity?: number;
   aboveBenchmarkColor?: string;
   aboveBenchmarkFillOpacity?: number;
@@ -242,6 +243,40 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
     overallMaximum < benchmarkValue ? benchmarkValue * 2 : 0;
 
   return Math.max(overallMaximum, artificialMax);
+}
+
+/**
+ * From all the defined values, extract the lowest number so we know how to
+ * scale the y-axis. We need to do this for each of the keys that are used to
+ * render lines, so that the axis scales with whatever key contains the lowest.
+ */
+export function calculateSeriesMinimum<T extends TimestampedValue>(
+  seriesList: SeriesList,
+  seriesConfig: SeriesConfig<T>,
+  benchmarkValue = -Infinity
+) {
+  const values = seriesList
+    .filter((_, index) => isVisible(seriesConfig[index]))
+    .flatMap((series) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      )
+    )
+    .filter(isDefined);
+
+  const overallMinimum = Math.min(...values);
+
+  /**
+   * Value cannot be 0, hence the 1. If the value is below signaalwaarde, make
+   * sure the signaalwaarde floats in the middle
+   */
+
+  const artificialMin =
+    overallMinimum > benchmarkValue
+      ? benchmarkValue - Math.abs(benchmarkValue)
+      : 0;
+
+  return Math.max(overallMinimum, artificialMin);
 }
 
 export type SeriesItem = {

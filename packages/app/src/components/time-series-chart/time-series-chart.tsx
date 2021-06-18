@@ -29,6 +29,7 @@ import {
 import { TimeAnnotation } from './components/time-annotation';
 import {
   calculateSeriesMaximum,
+  calculateSeriesMinimum,
   COLLAPSE_Y_AXIS_THRESHOLD,
   DataOptions,
   extractCutValuesConfig,
@@ -197,14 +198,27 @@ export function TimeSeriesChart<
    * The maximum is calculated over all values, because you don't want the
    * y-axis scaling to change when toggling the timeframe setting.
    */
-  const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
+  const { calculatedSeriesMax, calculatedSeriesMin } = useMemo(
+    () => ({
+      calculatedSeriesMax: calculateSeriesMaximum(
+        seriesList,
+        seriesConfig,
+        benchmark?.value
+      ),
+      calculatedSeriesMin: calculateSeriesMinimum(
+        seriesList,
+        seriesConfig,
+        benchmark?.value
+      ),
+    }),
     [seriesList, seriesConfig, benchmark?.value]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
     ? forcedMaximumValue
     : calculatedSeriesMax;
+
+  // NOTE: should there be a forcedMinimumValue prop?
 
   const {
     xScale,
@@ -218,6 +232,7 @@ export function TimeSeriesChart<
   } = useScales({
     values,
     maximumValue: seriesMax,
+    minimumValue: calculatedSeriesMin,
     bounds,
     numTicks: yTickValues?.length || numGridLines,
   });
@@ -315,6 +330,7 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
+  const highlightZero = yScale.domain()[0] < 0 && yScale.domain()[1] > 0;
   return (
     <>
       {valueAnnotation && (
@@ -369,6 +385,17 @@ export function TimeSeriesChart<
               benchmark={benchmark}
               chartId={chartId}
             />
+
+            {highlightZero && (
+              <rect
+                // Highlights 0 on the y-axis when there are positive and negative values
+                x={0}
+                y={yScale(0) - 1}
+                width={bounds.width}
+                height={2}
+                fill="black"
+              />
+            )}
 
             {benchmark && (
               <Benchmark

@@ -1,7 +1,7 @@
 import { NlGNumber, VrGNumber } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineText } from '~/components/typography';
-import { VerticalBarChart } from '~/components/vertical-bar-chart';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { TimeframeOption } from '~/utils/timeframe';
@@ -32,7 +32,7 @@ export function GNumberBarChartTile({
         source: text.bronnen,
       }}
     >
-      <VerticalBarChart
+      <TimeSeriesChart
         ariaLabelledBy="chart_g_number"
         values={values}
         timeframe={timeframeInitialValue}
@@ -44,8 +44,10 @@ export function GNumberBarChartTile({
           {
             type: 'bar',
             metricProperty: 'g_number',
+            label: 'G number',
             color: colors.red,
-            secondaryColor: colors.data.primary,
+            negativeColor: colors.data.primary,
+            fillOpacity: 1,
           },
         ]}
         formatTooltip={({ value }) => {

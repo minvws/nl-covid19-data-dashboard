@@ -2,6 +2,7 @@ import { scaleBand } from '@visx/scale';
 import { transparentize } from 'polished';
 import { Fragment, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
+import { PositionScale } from '@visx/shape/lib/types';
 import { useUniqueId } from '~/utils/use-unique-id';
 import {
   BenchmarkConfig,
@@ -16,7 +17,9 @@ const DEFAULT_FILL_OPACITY = 0.2;
 type BarTrendProps = {
   series: SeriesSingleValue[];
   color: string;
+  negativeColor?: string;
   fillOpacity?: number;
+  yScale: PositionScale;
   getX: GetX;
   getY: GetY;
   bounds: Bounds;
@@ -31,6 +34,8 @@ export function BarTrend({
   series,
   fillOpacity = DEFAULT_FILL_OPACITY,
   color,
+  negativeColor = color,
+  yScale,
   getX,
   getY,
   bounds,
@@ -69,10 +74,14 @@ export function BarTrend({
       __date_unix: 0, // __date_unix is not used by getY
     });
 
+  const zeroPosition = yScale(0) as number;
   return (
     <>
       {nonNullSeries.map((item, index) => {
-        const barHeight = bounds.height - getY(item);
+        const x = getX(item) - barWidth / 2;
+        const y = Math.min(zeroPosition, getY(item));
+        const barHeight = Math.abs(zeroPosition - getY(item));
+        const barColor = y < zeroPosition ? color : negativeColor;
 
         if (benchmarkY && aboveBenchmarkColor) {
           const benchmarkHeight = Math.max(0, benchmarkY - getY(item));
@@ -80,8 +89,8 @@ export function BarTrend({
           return (
             <Fragment key={index}>
               <rect
-                x={getX(item) - barWidth / 2}
-                y={getY(item)}
+                x={x}
+                y={y}
                 height={benchmarkHeight}
                 width={barWidth}
                 fill={transparentize(
@@ -90,11 +99,11 @@ export function BarTrend({
                 )}
               />
               <rect
-                x={getX(item) - barWidth / 2}
-                y={getY(item) + benchmarkHeight}
+                x={x}
+                y={y + benchmarkHeight}
                 height={barHeight - benchmarkHeight}
                 width={barWidth}
-                fill={transparentize(1 - fillOpacity, color)}
+                fill={transparentize(1 - fillOpacity, barColor)}
               />
             </Fragment>
           );
@@ -108,11 +117,11 @@ export function BarTrend({
            */
           <rect
             key={index}
-            x={getX(item) - barWidth / 2}
-            y={getY(item)}
+            x={x}
+            y={y}
             height={barHeight}
             width={barWidth}
-            fill={transparentize(1 - fillOpacity, color)}
+            fill={transparentize(1 - fillOpacity, barColor)}
             id={id}
           />
         );

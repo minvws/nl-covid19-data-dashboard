@@ -109,6 +109,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
+                  negativeColor={config.negativeColor}
                   aboveBenchmarkColor={config.aboveBenchmarkColor}
                   aboveBenchmarkFillOpacity={config.aboveBenchmarkFillOpacity}
                   benchmark={benchmark}
@@ -117,6 +118,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY={getY}
                   bounds={bounds}
                   id={`${chartId}_${config.metricProperty}`}
+                  yScale={yScale}
                 />
               );
             case 'split-bar':
