@@ -23,6 +23,7 @@ import { Series } from './components/series';
 import {
   BarSeriesDefinition,
   calculateSeriesMaximum,
+  calculateSeriesMinimum,
   DataOptions,
   getTimeDomain,
   useHoverState,
@@ -86,8 +87,23 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
 
   const seriesList = useSeriesList(values, seriesConfig);
 
-  const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
+  /**
+   * The maximum/minimum is calculated over all values, because you don't want the
+   * y-axis scaling to change when toggling the timeframe setting.
+   */
+  const { calculatedSeriesMax, calculatedSeriesMin } = useMemo(
+    () => ({
+      calculatedSeriesMax: calculateSeriesMaximum(
+        seriesList,
+        seriesConfig,
+        benchmark?.value
+      ),
+      calculatedSeriesMin: calculateSeriesMinimum(
+        seriesList,
+        seriesConfig,
+        benchmark?.value
+      ),
+    }),
     [seriesList, seriesConfig, benchmark?.value]
   );
 
@@ -107,6 +123,7 @@ export function TimeSeriesMiniBarChart<T extends TimestampedValue>({
   } = useScales({
     values,
     maximumValue: seriesMax,
+    minimumValue: calculatedSeriesMin,
     bounds,
     numTicks: 0,
   });

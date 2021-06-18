@@ -195,7 +195,7 @@ export function TimeSeriesChart<
   const seriesList = useSeriesList(values, seriesConfig, cutValuesConfig);
 
   /**
-   * The maximum is calculated over all values, because you don't want the
+   * The maximum/minimum is calculated over all values, because you don't want the
    * y-axis scaling to change when toggling the timeframe setting.
    */
   const { calculatedSeriesMax, calculatedSeriesMin } = useMemo(
@@ -217,8 +217,6 @@ export function TimeSeriesChart<
   const seriesMax = isDefined(forcedMaximumValue)
     ? forcedMaximumValue
     : calculatedSeriesMax;
-
-  // NOTE: should there be a forcedMinimumValue prop?
 
   const {
     xScale,
