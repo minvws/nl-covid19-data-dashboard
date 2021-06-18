@@ -8,10 +8,10 @@ import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
-import { endOfDay, startOfDay } from 'date-fns';
 import { isEmpty, pick, throttle } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
+import { endOfDayInSeconds, startOfDayInSeconds } from '~/utils/date';
 import {
   Padding,
   TimelineEventConfig,
@@ -501,14 +501,14 @@ function findActiveTimelineEventIndex(
   timespanAnnotations: TimelineEventConfig[]
 ) {
   const valueSpanStartOfDay =
-    toStartOfDay(
+    startOfDayInSeconds(
       isDateValue(hoveredValue)
         ? hoveredValue.date_unix
         : hoveredValue.date_start_unix
     ) + 1;
 
   const valueSpanEndOfDay =
-    toEndOfDay(
+    endOfDayInSeconds(
       isDateValue(hoveredValue)
         ? hoveredValue.date_unix
         : hoveredValue.date_end_unix
@@ -527,10 +527,10 @@ function findActiveTimelineEventIndex(
      */
     .reverse()
     .entries()) {
-    const start = toStartOfDay(
+    const start = startOfDayInSeconds(
       Array.isArray(annotation.date) ? annotation.date[0] : annotation.date
     );
-    const end = toEndOfDay(
+    const end = endOfDayInSeconds(
       Array.isArray(annotation.date) ? annotation.date[1] : annotation.date
     );
 
@@ -538,14 +538,6 @@ function findActiveTimelineEventIndex(
       return timespanAnnotations.length - 1 - index;
     }
   }
-}
-
-function toStartOfDay(seconds: number) {
-  return Math.round(startOfDay(seconds * 1000).getTime() / 1000);
-}
-
-function toEndOfDay(seconds: number) {
-  return Math.round(endOfDay(seconds * 1000).getTime() / 1000);
 }
 
 function hasSomeFilledProperties(value: Record<string, unknown>) {

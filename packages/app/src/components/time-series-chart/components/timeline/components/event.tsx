@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
-import { ReactNode, RefObject, useCallback, useRef, useState } from 'react';
+import { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { TimelineEventConfig } from '~/components/time-series-chart/logic';
@@ -16,8 +16,9 @@ interface TimelineEventProps {
   value: TimelineEventConfig;
   size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
-  onSelect: () => void;
-  onDeselect: () => void;
+  index: number;
+  onShow: (index: number) => void;
+  onHide: (index: number) => void;
   isSelected: boolean;
   tooltipContent: ReactNode;
   isHighlighted?: boolean;
@@ -27,12 +28,16 @@ export function TimelineEvent({
   value,
   xScale,
   size,
-  onSelect,
-  onDeselect,
+  index,
+  onShow,
+  onHide,
   isSelected,
   isHighlighted,
   tooltipContent,
 }: TimelineEventProps) {
+  const deselectRef = useRef(onHide);
+  deselectRef.current = onHide;
+
   const isTouch = useIsTouchDevice();
   const [isMouseEntered, setIsMouseEntered] = useState(false);
   const isHighlightedEvent =
@@ -46,20 +51,16 @@ export function TimelineEvent({
     ? (xScale(value.date[1]) ?? 0) - (xScale(value.date[0]) ?? 0)
     : undefined;
 
-  const handleTooltipSelect = useCallback(() => {
-    setIsMouseEntered(true);
-    onSelect();
-  }, [onSelect]);
+  useEffect(
+    () => (isMouseEntered ? onShow(index) : onHide(index)),
+    [isMouseEntered, onHide, onShow, index]
+  );
 
-  const handleTooltipDeselect = useCallback(() => {
-    setIsMouseEntered(false);
-  }, []);
-
-  const deselectRef = useRef(onDeselect);
-  deselectRef.current = onDeselect;
   const annotationRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside([annotationRef, contentRef], () => deselectRef.current());
+  useOnClickOutside([annotationRef, contentRef], () =>
+    deselectRef.current(index)
+  );
 
   return (
     <StyledEvent
@@ -69,8 +70,8 @@ export function TimelineEvent({
         content={tooltipContent}
         isSelected={isSelected}
         size={size}
-        onSelect={handleTooltipSelect}
-        onDeselect={handleTooltipDeselect}
+        onSelect={() => setIsMouseEntered(true)}
+        onDeselect={() => setIsMouseEntered(false)}
         contentRef={contentRef}
       />
       {width && (
@@ -114,8 +115,9 @@ function TooltipTrigger({
     <WithTooltip
       content={contentWithRef}
       placement="bottom"
-      interactive
+      interactive={true}
       visible={isSelected}
+      onHide={onDeselect}
     >
       <HitTarget size={size} onClick={onSelect} />
     </WithTooltip>
@@ -123,7 +125,7 @@ function TooltipTrigger({
     <WithTooltip
       content={contentWithRef}
       placement="bottom"
-      interactive
+      interactive={false}
       onShow={onSelect}
       onHide={onDeselect}
       hideOnClick={false}

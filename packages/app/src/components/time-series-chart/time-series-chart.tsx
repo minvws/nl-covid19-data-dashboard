@@ -27,7 +27,7 @@ import {
   TooltipFormatter,
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
-import { Timeline } from './components/timeline';
+import { Timeline, TimelineEventAnnotation } from './components/timeline';
 import {
   calculateSeriesMaximum,
   COLLAPSE_Y_AXIS_THRESHOLD,
@@ -419,7 +419,17 @@ export function TimeSeriesChart<
                 config={x}
               />
             ))}
-            {/* {isDefined(timelineAnnotationIndex) && <TimelineAnnotation />} */}
+
+            <TimelineEventAnnotation
+              domain={xScale.domain() as [number, number]}
+              getX={getX}
+              height={bounds.height}
+              config={
+                timelineEvents?.length && isDefined(timelineEventIndex)
+                  ? timelineEvents[timelineEventIndex]
+                  : undefined
+              }
+            />
           </ChartContainer>
 
           {tooltipOpen && tooltipData && (
