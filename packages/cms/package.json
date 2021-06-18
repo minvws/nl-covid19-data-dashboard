@@ -28,7 +28,7 @@
     "@sanity/default-login": "^2.11.1",
     "@sanity/desk-tool": "^2.11.2",
     "@sanity/production-preview": "^2.2.6",
-    "@sanity/ui": "^0.34.3",
+    "@sanity/ui": "^0.34.4",
     "@sanity/vision": "^2.11.2",
     "braille": "^1.1.0",
     "download": "^8.0.0",
