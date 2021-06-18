@@ -31,6 +31,8 @@ interface BehaviorTableTileProps {
   scrollRef: { current: HTMLDivElement | null };
 }
 
+const trendColumnWidth = 125;
+
 export function BehaviorTableTile({
   title,
   description,
@@ -64,11 +66,11 @@ export function BehaviorTableTile({
       <Box overflow="auto" mb={3}>
         <StyledTable>
           <thead>
-            <tr>
+            <Row>
               <HeaderCell
                 css={css({
                   width: asResponsiveArray({
-                    _: 200,
+                    _: 'auto',
                     sm: 300,
                     xl: 400,
                   }),
@@ -78,9 +80,12 @@ export function BehaviorTableTile({
               </HeaderCell>
               <HeaderCell
                 css={css({
+                  display: asResponsiveArray({
+                    _: 'none',
+                    sm: 'table-cell',
+                  }),
                   width: asResponsiveArray({
                     _: 100,
-                    sm: 100,
                     xl: 150,
                   }),
                 })}
@@ -89,19 +94,19 @@ export function BehaviorTableTile({
               </HeaderCell>
               <HeaderCell
                 css={css({
-                  width: 125,
+                  width: trendColumnWidth,
                 })}
               >
                 {commonText.basisregels.header_trend}
               </HeaderCell>
-            </tr>
+            </Row>
           </thead>
           <tbody>
             {behaviorsTableData.map((behavior) => (
-              <tr key={behavior.id}>
+              <Row key={behavior.id}>
                 <Cell
                   css={css({
-                    minWidth: asResponsiveArray({ _: '60vw', sm: 300 }),
+                    minWidth: asResponsiveArray({ _: '100%', sm: 300 }),
                   })}
                 >
                   <Box display="flex" mr={2}>
@@ -116,7 +121,14 @@ export function BehaviorTableTile({
                     />
                   </Box>
                 </Cell>
-                <Cell css={css({ minWidth: 200 })}>
+                <Cell
+                  css={css({
+                    minWidth: asResponsiveArray({
+                      _: `calc(100% - ${trendColumnWidth}px)`,
+                      sm: 200,
+                    }),
+                  })}
+                >
                   <PercentageBarWithNumber
                     percentage={behavior.compliancePercentage}
                     color={colors.data.cyan}
@@ -126,7 +138,7 @@ export function BehaviorTableTile({
                     color={colors.data.yellow}
                   />
                 </Cell>
-                <Cell css={css({ minWidth: 125 })}>
+                <Cell css={css({ minWidth: trendColumnWidth })}>
                   <Box display="flex" flexDirection="column">
                     <BehaviorTrend
                       trend={behavior.complianceTrend}
@@ -138,7 +150,7 @@ export function BehaviorTableTile({
                     />
                   </Box>
                 </Cell>
-              </tr>
+              </Row>
             ))}
           </tbody>
         </StyledTable>
@@ -241,6 +253,17 @@ const StyledTable = styled.table(
   })
 );
 
+const Row = styled.tr(
+  css({
+    display: asResponsiveArray({
+      _: 'flex',
+      sm: 'table-row',
+    }),
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  })
+);
+
 const HeaderCell = styled.th(
   css({
     textAlign: 'left',
@@ -249,7 +272,7 @@ const HeaderCell = styled.th(
 
 const Cell = styled.td(
   css({
-    borderBottom: '1px solid',
+    borderBottom: asResponsiveArray({ _: 'none', sm: '1px solid' }),
     borderBottomColor: 'lightGray',
     p: 0,
     py: 2,
