@@ -2,7 +2,7 @@ import {
   MunicipalityProperties,
   MunicipalSewerValue,
   RegionalSewerValue,
-  SafetyRegionProperties
+  SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
@@ -33,13 +33,13 @@ import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -167,6 +167,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 description: text.linechart_description,
                 splitLabels: siteText.rioolwater_metingen.split_labels,
                 averagesDataLabel: siteText.common.weekgemiddelde,
+                valueAnnotation: siteText.waarde_annotaties.riool_normalized,
               }}
             />
           ) : (
