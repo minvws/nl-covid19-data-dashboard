@@ -3,8 +3,8 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { useMemo } from 'react';
 import { pick } from 'lodash';
+import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { SeriesSingleValue } from '~/components/time-series-chart/logic/series';
 
@@ -103,7 +103,12 @@ export function calculateSeriesExtremes<T extends TimestampedValue>(
     .flat();
 
   return {
-    max: Math.max(...extremeValues),
+    /**
+     * The max needs to be clipped to a positive number, because otherwise
+     * things get messed up with only negative values. We add a minimum of 10 to
+     * always have a part of the y-axis with positive values.
+     */
+    max: Math.max(...extremeValues, 10),
     min: Math.min(...extremeValues),
   };
 }
