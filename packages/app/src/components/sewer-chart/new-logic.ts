@@ -1,3 +1,9 @@
+/**
+ * Calling this new-logic to keep it separated from ./logic.ts which should be
+ * deleted later. I think we can move some more logic from the new-sewer-chart
+ * here later and rename it to logic.
+ */
+
 import {
   assert,
   MunicipalSewer,
@@ -14,10 +20,11 @@ type MergedValue = {
 type MergedValuesByTimestamp = Record<number, MergedValue>;
 
 export type MergedSewerType = ReturnType<typeof mergeData>[number];
+
 /**
- * Calling this new-logic to keep it separated from ./logic.ts which should be
- * deleted later. I think we can move some more logic from the new-sewer-chart
- * here later and rename it to logic.
+ * Data for averages and per installations are two completely separate sources
+ * with different formats. In order to display them in the chart together we
+ * need to convert them to format with the same type of timestamps.
  */
 export function mergeData(
   dataAverages: RegionalSewer | MunicipalSewer,
@@ -46,8 +53,8 @@ export function mergeData(
   for (const value of dataAverages.values) {
     /**
      * For averages pick the date in the middle of the week, because that's how
-     * the values are displayed when just viewing averages, but for this merged
-     * set we'll need to use day timestamps.
+     * the values are displayed when just viewing averages, and for this merged
+     * set we'll need to use single dates.
      */
     const date_unix =
       value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
