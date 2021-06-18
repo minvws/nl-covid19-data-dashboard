@@ -11,14 +11,6 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
-  /**
-   * Workaround for this issue in NextJs 11
-   * https://github.com/vercel/next.js/issues/26130
-   */
-  // images: {
-  //   disableStaticImages: true,
-  // },
-
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
