@@ -47,7 +47,8 @@ RUN yarn download \
 && yarn workspace @corona-dashboard/app build
 
 RUN addgroup -g 1001 -S nodejs \
-&& adduser -S nextjs -u 1001
+&& adduser -S nextjs -u 1001 \
+&& chown -R nextjs:nodejs /app/packages/app/.next
 
 USER nextjs
 
