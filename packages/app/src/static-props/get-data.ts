@@ -10,7 +10,6 @@ import {
 import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
-import { useRouter } from 'next/router';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
@@ -65,7 +64,7 @@ export function createGetContent<T>(
 
     const rawContent = (await client.fetch<T>(query)) ?? {};
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    const { locale = 'nl' } = useRouter();
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
     // this function call will mutate `rawContent`
     await replaceReferencesInContent(rawContent, client);
