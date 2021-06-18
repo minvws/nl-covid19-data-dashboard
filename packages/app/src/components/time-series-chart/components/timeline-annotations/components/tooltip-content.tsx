@@ -16,7 +16,7 @@ export function TooltipContent({ value, onNext, onPrev }: TooltipContentProps) {
   const intl = useIntl();
   const isTouch = useIsTouchDevice();
   const date = Array.isArray(value.date)
-    ? value.date.map((x) => intl.formatDateFromSeconds(x)).join(' - ')
+    ? value.date.map((x) => intl.formatDateFromSeconds(x, 'medium')).join(' - ')
     : intl.formatDateFromSeconds(value.date);
 
   return (

@@ -4,6 +4,7 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -11,7 +12,11 @@ import { InlineText, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { SeriesConfig, useFormatSeriesValue } from '../../logic';
+import {
+  SeriesConfig,
+  TimelineAnnotationConfig,
+  useFormatSeriesValue,
+} from '../../logic';
 import { SeriesIcon } from '../series-icon';
 import { AnnotationMarker } from '../timeline-annotations/components/annotation-marker';
 import { TooltipData } from './types';
@@ -69,30 +74,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         </Text>
       )}
 
-      {timelineAnnotation && (
-        <Box
-          display="flex"
-          fontWeight="bold"
-          alignItems="center"
-          mx={-3}
-          px={3}
-          pb={2}
-          mb={2}
-          borderBottom="1px solid"
-          borderBottomColor="lightGray"
-        >
-          <Box
-            width={'1em'}
-            mr={2}
-            display="flex"
-            alignItems="baseline"
-            justifyContent="center"
-          >
-            <AnnotationMarker isHighlighted size={10} />
-          </Box>
-          <Box>{timelineAnnotation.title}</Box>
-        </Box>
-      )}
+      <TimelineAnnotation timelineAnnotation={timelineAnnotation} />
 
       <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
         {seriesConfig.map((x, index) => {
@@ -277,4 +259,46 @@ function getDateUnixString(value: TimestampedValue) {
   return 'date_unix' in value
     ? `${value.date_unix}`
     : `${value.date_start_unix}-${value.date_end_unix}`;
+}
+
+function TimelineAnnotation({
+  timelineAnnotation,
+}: {
+  timelineAnnotation?: TimelineAnnotationConfig;
+}) {
+  return (
+    <AnimatePresence>
+      {timelineAnnotation && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          exit={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          style={{ overflow: 'hidden' }}
+        >
+          <Box
+            display="flex"
+            fontWeight="bold"
+            alignItems="center"
+            mx={-3}
+            px={3}
+            pb={2}
+            mb={2}
+            borderBottom="1px solid"
+            borderBottomColor="lightGray"
+          >
+            <Box
+              width={'1em'}
+              mr={2}
+              display="flex"
+              alignItems="baseline"
+              justifyContent="center"
+            >
+              <AnnotationMarker isHighlighted size={10} />
+            </Box>
+            <Box>{timelineAnnotation.title}</Box>
+          </Box>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 }

@@ -20,7 +20,7 @@ export function AnnotationMarker({
         color={colors.data.primary}
         initial={false}
         borderWidth={borderWidth}
-        transition={{ ease: 'linear' }}
+        transition={{ ease: 'easeOut' }}
         animate={{
           boxShadow: `0 0 0 ${
             isHighlighted ? borderWidth * 1.5 : borderWidth

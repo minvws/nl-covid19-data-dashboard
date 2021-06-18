@@ -522,7 +522,14 @@ function findActiveTimelineAnnotationIndex(
    * timespan. By assuming these timespans never overlap, we can exist on the
    * first match and return a single index.
    */
-  for (const [index, annotation] of timespanAnnotations.entries()) {
+  for (const [index, annotation] of [...timespanAnnotations]
+    /**
+     * Annotations could overlap each other, therefore reverse the
+     * lookup to match later annotations first
+     *
+     */
+    .reverse()
+    .entries()) {
     const start = toStartOfDay(
       Array.isArray(annotation.date) ? annotation.date[0] : annotation.date
     );
@@ -531,7 +538,7 @@ function findActiveTimelineAnnotationIndex(
     );
 
     if (valueSpanStartOfDay <= end && start <= valueSpanEndOfDay) {
-      return index;
+      return timespanAnnotations.length - 1 - index;
     }
   }
 }

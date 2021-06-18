@@ -1,6 +1,8 @@
+import css from '@styled-system/css';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { memo, useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
+import { Box } from '~/components/base';
 import { wrapAroundLength } from '~/utils/number';
 import { Bounds, Padding, TimelineAnnotationConfig } from '../../logic';
 import { Annotation } from './components/annotation';
@@ -35,7 +37,11 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
   if (!width) return null;
 
   return (
-    <div style={{ position: 'relative', left: padding.left }}>
+    <Box
+      position="relative"
+      left={padding.left}
+      css={css({ userSelect: 'none' })}
+    >
       <Timeline width={width} height={size + 2}>
         {annotations.map((x, i) => (
           <Annotation
@@ -57,6 +63,6 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
           />
         ))}
       </Timeline>
-    </div>
+    </Box>
   );
 });

@@ -60,7 +60,9 @@ export function Annotation({
   useOnClickOutside([annotationRef, contentRef], () => onDeselect());
 
   return (
-    <StyledAnnotation style={{ width, left }}>
+    <StyledAnnotation
+      style={{ width, left, zIndex: highlightAnnotation ? 1 : undefined }}
+    >
       <TooltipTrigger
         content={tooltipContent}
         isSelected={isSelected}
@@ -70,7 +72,7 @@ export function Annotation({
         contentRef={contentRef}
       />
       {width && (
-        <TimeSpanBar
+        <TimespanBar
           height={size}
           initial={false}
           animate={{
@@ -113,12 +115,7 @@ function TooltipTrigger({
       interactive
       visible={isSelected}
     >
-      <HitTarget
-        size={size}
-        onPointerEnter={onSelect}
-        onPointerLeave={onDeselect}
-        onClick={onSelect}
-      />
+      <HitTarget size={size} onClick={onSelect} />
     </WithTooltip>
   ) : (
     <WithTooltip
@@ -161,7 +158,7 @@ const HitTarget = styled.button<{ size: number }>((x) => {
   });
 });
 
-const TimeSpanBar = styled(motion.div)<{ height: number }>((x) =>
+const TimespanBar = styled(motion.div)<{ height: number }>((x) =>
   css({
     position: 'absolute',
     width: '100%',
