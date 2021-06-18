@@ -5,9 +5,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
-  future: {
-    webpack5: true,
-  },
   /**
    * Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
    */
