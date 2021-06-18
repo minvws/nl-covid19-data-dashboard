@@ -286,7 +286,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       value: 7,
                       label: siteText.common.signaalwaarde,
                     },
-                    timelineAnnotations: [
+                    timelineEvents: [
                       {
                         date: new Date('12 april 2020').getTime() / 1000,
                         title: 'Hoogste piek tweede golf',

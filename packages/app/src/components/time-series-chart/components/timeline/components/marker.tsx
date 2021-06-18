@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
 
-export function AnnotationMarker({
+export function TimelineMarker({
   isHighlighted,
   size = 10,
 }: {

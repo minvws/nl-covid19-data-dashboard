@@ -14,11 +14,11 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import {
   SeriesConfig,
-  TimelineAnnotationConfig,
+  TimelineEventConfig,
   useFormatSeriesValue,
 } from '../../logic';
 import { SeriesIcon } from '../series-icon';
-import { AnnotationMarker } from '../timeline-annotations/components/annotation-marker';
+import { TimelineMarker } from '../timeline';
 import { TooltipData } from './types';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
@@ -36,7 +36,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     markNearestPointOnly,
     displayTooltipValueOnly,
     timespanAnnotation,
-    timelineAnnotation,
+    timelineEvent,
     valueMinWidth,
   } = tooltipData;
 
@@ -74,7 +74,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         </Text>
       )}
 
-      <TimelineAnnotation timelineAnnotation={timelineAnnotation} />
+      <TimelineEvent event={timelineEvent} />
 
       <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
         {seriesConfig.map((x, index) => {
@@ -261,14 +261,10 @@ function getDateUnixString(value: TimestampedValue) {
     : `${value.date_start_unix}-${value.date_end_unix}`;
 }
 
-function TimelineAnnotation({
-  timelineAnnotation,
-}: {
-  timelineAnnotation?: TimelineAnnotationConfig;
-}) {
+function TimelineEvent({ event }: { event?: TimelineEventConfig }) {
   return (
     <AnimatePresence>
-      {timelineAnnotation && (
+      {event && (
         <motion.div
           initial={{ height: 0, opacity: 0 }}
           exit={{ height: 0, opacity: 0 }}
@@ -293,9 +289,9 @@ function TimelineAnnotation({
               alignItems="baseline"
               justifyContent="center"
             >
-              <AnnotationMarker isHighlighted size={10} />
+              <TimelineMarker isHighlighted size={10} />
             </Box>
-            <Box>{timelineAnnotation.title}</Box>
+            <Box>{event.title}</Box>
           </Box>
         </motion.div>
       )}

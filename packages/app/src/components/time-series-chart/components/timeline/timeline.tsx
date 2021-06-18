@@ -1,37 +1,40 @@
 import css from '@styled-system/css';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { wrapAroundLength } from '~/utils/number';
-import { Bounds, Padding, TimelineAnnotationConfig } from '../../logic';
-import { Annotation } from './components/annotation';
-import { Timeline } from './components/timeline';
-import { TooltipContent } from './components/tooltip-content';
+import { Bounds, Padding, TimelineEventConfig } from '../../logic';
+import { TimelineEvent } from './components/event';
+import { TimelineBar } from './components/bar';
+import { TimelineTooltipContent } from './components/tooltip-content';
 
-interface TimelineAnnotationProps {
-  annotations: TimelineAnnotationConfig[];
+interface TimelineProps {
+  annotations: TimelineEventConfig[];
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   bounds: Bounds;
   padding: Padding;
+  index: number | undefined;
+  setIndex: (index: number | undefined) => void;
   size?: number;
   highlightIndex?: number;
 }
 
-export const TimelineAnnotations = memo(function TimelineAnnotations({
+export const Timeline = memo(function Timeline({
   annotations,
   xScale,
   padding,
   highlightIndex,
   size = 10,
-}: TimelineAnnotationProps) {
-  const [index, setIndex] = useState<number | undefined>(undefined);
+  index,
+  setIndex,
+}: TimelineProps) {
   const [, end] = xScale.domain();
   const width = xScale(end) ?? 0;
 
   const showTooltipAtIndex = useCallback(
     (index: number) => setIndex(wrapAroundLength(index, annotations.length)),
-    [annotations.length]
+    [annotations.length, setIndex]
   );
 
   if (!width) return null;
@@ -42,9 +45,9 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
       left={padding.left}
       css={css({ userSelect: 'none' })}
     >
-      <Timeline width={width} height={size + 2}>
+      <TimelineBar width={width} height={size + 2}>
         {annotations.map((x, i) => (
-          <Annotation
+          <TimelineEvent
             key={x.date.toString()}
             size={size}
             value={x}
@@ -54,7 +57,7 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
             isSelected={i === index}
             isHighlighted={isDefined(highlightIndex) && i === highlightIndex}
             tooltipContent={
-              <TooltipContent
+              <TimelineTooltipContent
                 value={x}
                 onNext={() => showTooltipAtIndex(i + 1)}
                 onPrev={() => showTooltipAtIndex(i - 1)}
@@ -63,7 +66,7 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
             }
           />
         ))}
-      </Timeline>
+      </TimelineBar>
     </Box>
   );
 });

@@ -2,19 +2,18 @@ import css from '@styled-system/css';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
-import { useEffect } from 'react';
 import { ReactNode, RefObject, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { TimelineAnnotationConfig } from '~/components/time-series-chart/logic';
+import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { AnnotationMarker } from './annotation-marker';
+import { TimelineMarker } from './marker';
 
-interface AnnotationProps {
-  value: TimelineAnnotationConfig;
+interface TimelineEventProps {
+  value: TimelineEventConfig;
   size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   onSelect: () => void;
@@ -24,7 +23,7 @@ interface AnnotationProps {
   isHighlighted?: boolean;
 }
 
-export function Annotation({
+export function TimelineEvent({
   value,
   xScale,
   size,
@@ -33,10 +32,10 @@ export function Annotation({
   isSelected,
   isHighlighted,
   tooltipContent,
-}: AnnotationProps) {
+}: TimelineEventProps) {
   const isTouch = useIsTouchDevice();
   const [isMouseEntered, setIsMouseEntered] = useState(false);
-  const highlightAnnotation =
+  const isHighlightedEvent =
     isHighlighted || (isTouch ? isSelected : isMouseEntered);
 
   const left = Array.isArray(value.date)
@@ -63,8 +62,8 @@ export function Annotation({
   useOnClickOutside([annotationRef, contentRef], () => deselectRef.current());
 
   return (
-    <StyledAnnotation
-      style={{ width, left, zIndex: highlightAnnotation ? 1 : undefined }}
+    <StyledEvent
+      style={{ width, left, zIndex: isHighlightedEvent ? 1 : undefined }}
     >
       <TooltipTrigger
         content={tooltipContent}
@@ -80,16 +79,16 @@ export function Annotation({
           initial={false}
           animate={{
             background: transparentize(
-              highlightAnnotation ? 0.5 : 0.8,
+              isHighlightedEvent ? 0.5 : 0.8,
               colors.data.primary
             ),
           }}
         />
       )}
       <Box transform="translateX(-50%)">
-        <AnnotationMarker size={size} isHighlighted={highlightAnnotation} />
+        <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
       </Box>
-    </StyledAnnotation>
+    </StyledEvent>
   );
 }
 
@@ -134,7 +133,7 @@ function TooltipTrigger({
   );
 }
 
-const StyledAnnotation = styled.div(
+const StyledEvent = styled.div(
   css({
     position: 'absolute',
     height: '100%',

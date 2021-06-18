@@ -5,7 +5,7 @@ export interface DataOptions {
   benchmark?: BenchmarkConfig;
   timespanAnnotations?: TimespanAnnotationConfig[];
   timeAnnotations?: TimeAnnotationConfig[];
-  timelineAnnotations?: TimelineAnnotationConfig[];
+  timelineEvents?: TimelineEventConfig[];
 }
 
 export interface BenchmarkConfig {
@@ -29,7 +29,7 @@ export type TimeAnnotationConfig = {
   rightLabel: string;
 };
 
-export interface TimelineAnnotationConfig {
+export interface TimelineEventConfig {
   date: number | [number, number];
   title: string;
   description: string;

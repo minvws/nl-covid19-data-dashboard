@@ -136,7 +136,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   valueAnnotation:
                     text.grafiek_gevaccineerd_door_de_tijd_heen
                       .waarde_annotatie,
-                  timelineAnnotations: [
+                  timelineEvents: [
                     {
                       date: new Date('9 januari 2021').getTime() / 1000,
                       title: 'Vandaag is het 9 januari',

@@ -14,7 +14,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import {
   Padding,
-  TimelineAnnotationConfig,
+  TimelineEventConfig,
   TimespanAnnotationConfig,
 } from './common';
 import {
@@ -44,7 +44,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
-  timelineAnnotations?: TimelineAnnotationConfig[];
+  timelineEvents?: TimelineEventConfig[];
   markNearestPointOnly?: boolean;
 }
 
@@ -55,7 +55,7 @@ interface HoverState<T> {
   rangePoints: HoveredPoint<T>[];
   nearestPoint: HoveredPoint<T>;
   timespanAnnotationIndex?: number;
-  timelineAnnotationIndex?: number;
+  timelineEventIndex?: number;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
@@ -70,7 +70,7 @@ export function useHoverState<T extends TimestampedValue>({
   xScale,
   yScale,
   timespanAnnotations,
-  timelineAnnotations,
+  timelineEvents,
   markNearestPointOnly,
 }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
@@ -433,11 +433,8 @@ export function useHoverState<T extends TimestampedValue>({
         )
       : undefined;
 
-    const timelineAnnotationIndex = timelineAnnotations
-      ? findActiveTimelineAnnotationIndex(
-          values[valuesIndex],
-          timelineAnnotations
-        )
+    const timelineEventIndex = timelineEvents
+      ? findActiveTimelineEventIndex(values[valuesIndex], timelineEvents)
       : undefined;
 
     const hoverState: HoverState<T> = {
@@ -451,7 +448,7 @@ export function useHoverState<T extends TimestampedValue>({
         : rangePoints,
       nearestPoint,
       timespanAnnotationIndex,
-      timelineAnnotationIndex,
+      timelineEventIndex,
     };
 
     return hoverState;
@@ -460,7 +457,7 @@ export function useHoverState<T extends TimestampedValue>({
     hasFocus,
     seriesConfig,
     timespanAnnotations,
-    timelineAnnotations,
+    timelineEvents,
     values,
     valuesIndex,
     markNearestPointOnly,
@@ -499,9 +496,9 @@ function findActiveTimespanAnnotationIndex(
   }
 }
 
-function findActiveTimelineAnnotationIndex(
+function findActiveTimelineEventIndex(
   hoveredValue: TimestampedValue,
-  timespanAnnotations: TimelineAnnotationConfig[]
+  timespanAnnotations: TimelineEventConfig[]
 ) {
   const valueSpanStartOfDay =
     toStartOfDay(

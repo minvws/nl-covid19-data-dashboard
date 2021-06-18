@@ -1,7 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
@@ -27,7 +27,7 @@ import {
   TooltipFormatter,
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
-import { TimelineAnnotations } from './components/timeline-annotations';
+import { Timeline } from './components/timeline';
 import {
   calculateSeriesMaximum,
   COLLAPSE_Y_AXIS_THRESHOLD,
@@ -151,6 +151,10 @@ export function TimeSeriesChart<
   markNearestPointOnly,
   displayTooltipValueOnly,
 }: TimeSeriesChartProps<T, C>) {
+  const [timelineEventIndex, setTimelineEventIndex] = useState<
+    number | undefined
+  >(undefined);
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -169,7 +173,7 @@ export function TimeSeriesChart<
     benchmark,
     timespanAnnotations,
     timeAnnotations,
-    timelineAnnotations,
+    timelineEvents,
   } = dataOptions || {};
 
   const {
@@ -246,7 +250,7 @@ export function TimeSeriesChart<
     xScale,
     yScale,
     timespanAnnotations,
-    timelineAnnotations,
+    timelineEvents,
     markNearestPointOnly,
   });
 
@@ -258,7 +262,7 @@ export function TimeSeriesChart<
         nearestPoint,
         valuesIndex,
         timespanAnnotationIndex,
-        timelineAnnotationIndex,
+        timelineEventIndex,
       } = hoverState;
 
       showTooltip({
@@ -293,9 +297,9 @@ export function TimeSeriesChart<
             timespanAnnotations && isDefined(timespanAnnotationIndex)
               ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
-          timelineAnnotation:
-            timelineAnnotations && isDefined(timelineAnnotationIndex)
-              ? timelineAnnotations[timelineAnnotationIndex]
+          timelineEvent:
+            timelineEvents && isDefined(timelineEventIndex)
+              ? timelineEvents[timelineEventIndex]
               : undefined,
 
           valueMinWidth,
@@ -317,7 +321,7 @@ export function TimeSeriesChart<
     markNearestPointOnly,
     displayTooltipValueOnly,
     valueMinWidth,
-    timelineAnnotations,
+    timelineEvents,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
@@ -415,6 +419,7 @@ export function TimeSeriesChart<
                 config={x}
               />
             ))}
+            {/* {isDefined(timelineAnnotationIndex) && <TimelineAnnotation />} */}
           </ChartContainer>
 
           {tooltipOpen && tooltipData && (
@@ -456,13 +461,15 @@ export function TimeSeriesChart<
         </Box>
       </ResponsiveContainer>
 
-      {timelineAnnotations && timelineAnnotations.length > 0 && (
-        <TimelineAnnotations
-          annotations={timelineAnnotations}
+      {timelineEvents && timelineEvents.length > 0 && (
+        <Timeline
+          annotations={timelineEvents}
           xScale={xScale}
           bounds={bounds}
           padding={padding}
-          highlightIndex={hoverState?.timelineAnnotationIndex}
+          highlightIndex={hoverState?.timelineEventIndex}
+          index={timelineEventIndex}
+          setIndex={setTimelineEventIndex}
         />
       )}
 

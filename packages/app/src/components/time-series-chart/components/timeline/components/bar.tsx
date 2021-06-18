@@ -3,13 +3,13 @@ import { ReactNode } from 'react';
 import { Box } from '~/components/base';
 import { colors } from '~/style/theme';
 
-interface TimelineProps {
+interface TimelineBarProps {
   children: ReactNode;
   width: number;
   height: number;
 }
 
-export function Timeline({ children, width, height }: TimelineProps) {
+export function TimelineBar({ children, width, height }: TimelineBarProps) {
   return (
     <Box
       position="relative"

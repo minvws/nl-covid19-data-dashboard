@@ -3,24 +3,24 @@ import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
-import { TimelineAnnotationConfig } from '~/components/time-series-chart/logic';
+import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
-interface TooltipContentProps {
-  value: TimelineAnnotationConfig;
+interface TimelineTooltipContentProps {
+  value: TimelineEventConfig;
   onNext: () => void;
   onPrev: () => void;
   onClose: () => void;
 }
 
-export function TooltipContent({
+export function TimelineTooltipContent({
   value,
   onNext,
   onPrev,
   onClose,
-}: TooltipContentProps) {
+}: TimelineTooltipContentProps) {
   const intl = useIntl();
   const isTouch = useIsTouchDevice();
   const date = Array.isArray(value.date)
