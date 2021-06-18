@@ -43,28 +43,6 @@ export function LocationTooltip({
   );
 }
 
-// const TooltipList = styled.ol`
-//   margin: 0;
-//   padding: 0;
-//   list-style: none;
-// `;
-
-// const TooltipListItem = styled.li<{ mt?: number }>((props: { mt?: number }) =>
-//   css({
-//     display: 'flex',
-//     alignItems: 'center',
-//     justifyContent: 'space-between',
-//     mt: props.mt,
-//   })
-// );
-
-// const TooltipValueContainer = styled.span(
-//   css({
-//     fontWeight: 'bold',
-//     ml: '1em',
-//   })
-// );
-
 const StyledLocationIcon = styled.span(
   css({
     whiteSpace: 'nowrap',
@@ -75,7 +53,6 @@ const StyledLocationIcon = styled.span(
       pt: '3px',
       color: 'black',
       width: '1em',
-      // border: '1px solid hotpink',
     },
   })
 );
