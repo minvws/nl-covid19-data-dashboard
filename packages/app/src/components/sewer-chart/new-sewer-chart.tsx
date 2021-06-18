@@ -1,10 +1,8 @@
 import {
-  assert,
   MunicipalSewer,
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
-import { set } from 'lodash';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Select } from '~/components/select';
@@ -12,7 +10,7 @@ import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/l
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
 import { LocationTooltip } from './components/location-tooltip';
-import { mergeData, MergedSewerType } from './new-logic';
+import { mergeData } from './new-logic';
 
 export function NewSewerChart({
   dataAverages,

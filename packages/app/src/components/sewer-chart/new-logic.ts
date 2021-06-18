@@ -1,7 +1,7 @@
 /**
- * Calling this new-logic to keep it separated from ./logic.ts which should be
- * deleted later. I think we can move some more logic from the new-sewer-chart
- * here later and rename it to logic.
+ * This file is called new-logic to keep it separated from ./logic.ts which
+ * should be deleted later. I think we can move some more logic from the
+ * new-sewer-chart here later and rename it to logic.
  */
 
 import {
