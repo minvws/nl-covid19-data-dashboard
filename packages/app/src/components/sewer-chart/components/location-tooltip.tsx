@@ -33,7 +33,7 @@ export function LocationTooltip({
           <Locatie />
         </StyledLocationIcon>
         <b>{config.label}</b>
-        <Box mx={2}>{'per 100k inwnsajf'}:</Box>
+        <Box mx={2}>{siteText.waarde_annotaties.per_100_000_inwoners}:</Box>
 
         <strong>
           {formatNumber(data.value.selected_installation_rna_normalized)}
