@@ -58,6 +58,7 @@ export const TimelineAnnotations = memo(function TimelineAnnotations({
                 value={x}
                 onNext={() => showTooltipAtIndex(i + 1)}
                 onPrev={() => showTooltipAtIndex(i - 1)}
+                onClose={() => setIndex(undefined)}
               />
             }
           />

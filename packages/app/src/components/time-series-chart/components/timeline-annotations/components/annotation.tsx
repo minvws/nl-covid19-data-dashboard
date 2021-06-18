@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
+import { useEffect } from 'react';
 import { ReactNode, RefObject, useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -55,9 +56,11 @@ export function Annotation({
     setIsMouseEntered(false);
   }, []);
 
+  const deselectRef = useRef(onDeselect);
+  deselectRef.current = onDeselect;
   const annotationRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside([annotationRef, contentRef], () => onDeselect());
+  useOnClickOutside([annotationRef, contentRef], () => deselectRef.current());
 
   return (
     <StyledAnnotation

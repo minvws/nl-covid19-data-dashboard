@@ -1,3 +1,5 @@
+import css from '@styled-system/css';
+import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
@@ -10,9 +12,15 @@ interface TooltipContentProps {
   value: TimelineAnnotationConfig;
   onNext: () => void;
   onPrev: () => void;
+  onClose: () => void;
 }
 
-export function TooltipContent({ value, onNext, onPrev }: TooltipContentProps) {
+export function TooltipContent({
+  value,
+  onNext,
+  onPrev,
+  onClose,
+}: TooltipContentProps) {
   const intl = useIntl();
   const isTouch = useIsTouchDevice();
   const date = Array.isArray(value.date)
@@ -46,11 +54,39 @@ export function TooltipContent({ value, onNext, onPrev }: TooltipContentProps) {
         <Text fontSize={1} fontWeight="bold">
           {value.title}
         </Text>
-        <Text fontSize={1}>{value.description}</Text>
+        <Text mb={0} fontSize={1}>
+          {value.description}
+        </Text>
       </Box>
+
+      {isTouch && (
+        <Box
+          pt={3}
+          mx={-27}
+          borderTop="1px solid"
+          borderTopColor="lightGray"
+          display="flex"
+          justifyContent="center"
+          fontSize={1}
+        >
+          <TextButton onClick={onClose}>Sluiten</TextButton>
+        </Box>
+      )}
     </Box>
   );
 }
+
+const TextButton = styled.button(
+  css({
+    m: 0,
+    p: 0,
+    bg: 'transparent',
+    border: 0,
+    color: 'link',
+    textDecoration: 'underline',
+    fontSize: 'inherit',
+  })
+);
 
 function ChevronButton({
   onClick,
