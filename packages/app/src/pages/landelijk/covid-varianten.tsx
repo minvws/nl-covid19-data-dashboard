@@ -101,7 +101,7 @@ export default function CovidVariantenPage(
           />
 
           <TwoKpiSection>
-            {content.highlight.articles && (
+            {content.highlight?.articles && (
               <Box>
                 <Heading level={3}>
                   {text.informatie_blok.artikelen_titel}
