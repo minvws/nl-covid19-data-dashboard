@@ -1,16 +1,16 @@
 import {
-  assert,
   MunicipalSewer,
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
-import { set } from 'lodash';
+import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
-import { Box } from '../base';
-import { ChartTile } from '../chart-tile';
+import { LocationTooltip } from './components/location-tooltip';
+import { mergeData } from './new-logic';
 
 export function NewSewerChart({
   dataAverages,
@@ -138,6 +138,7 @@ export function NewSewerChart({
                     isNonInteractive: true,
                   },
                 ]}
+                formatTooltip={(data) => <LocationTooltip data={data} />}
               />
             ) : (
               <TimeSeriesChart
@@ -158,77 +159,4 @@ export function NewSewerChart({
       )}
     </ChartTile>
   );
-}
-
-function mergeData(
-  dataAverages: RegionalSewer | MunicipalSewer,
-  dataPerInstallation: SewerPerInstallationData,
-  selectedInstallation: string
-) {
-  const valuesForInstallation = dataPerInstallation.values.find(
-    (x) => x.rwzi_awzi_name === selectedInstallation
-  )?.values;
-
-  assert(
-    valuesForInstallation,
-    `Failed to find data for rwzi_awzi_name ${selectedInstallation}`
-  );
-
-  type MergedValue = {
-    average: number | null;
-    selected_installation_rna_normalized: number | null;
-  };
-
-  type MergedValuesByTimestamp = Record<number, MergedValue>;
-
-  const mergedValuesByTimestamp =
-    valuesForInstallation.reduce<MergedValuesByTimestamp>(
-      (acc, v) =>
-        set(acc, v.date_unix, {
-          selected_installation_rna_normalized: v.rna_normalized,
-          average: null,
-        }),
-      {}
-    );
-
-  for (const value of dataAverages.values) {
-    /**
-     * For averages pick the date in the middle of the week, because that's how
-     * the values are displayed when just viewing averages, but for this merged
-     * set we'll need to use day timestamps.
-     */
-    const date_unix =
-      value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
-
-    const existingValue = mergedValuesByTimestamp[date_unix] as
-      | MergedValue
-      | undefined;
-
-    /**
-     * If we happen to fall exactly on an existing installation timestamp we
-     * want to combine the two property values.
-     */
-    if (existingValue) {
-      mergedValuesByTimestamp[date_unix] = {
-        average: value.average,
-        selected_installation_rna_normalized:
-          existingValue.selected_installation_rna_normalized,
-      };
-    } else {
-      mergedValuesByTimestamp[date_unix] = {
-        average: value.average,
-        selected_installation_rna_normalized: null,
-      };
-    }
-  }
-
-  /**
-   * Convert the map to a series of sorted timestamped values.
-   */
-  return Object.entries(mergedValuesByTimestamp)
-    .map(([date_unix, obj]) => ({
-      date_unix: Number(date_unix),
-      ...obj,
-    }))
-    .sort((a, b) => a.date_unix - b.date_unix);
 }

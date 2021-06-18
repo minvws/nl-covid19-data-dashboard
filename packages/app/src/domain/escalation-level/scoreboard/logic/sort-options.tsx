@@ -6,11 +6,6 @@ export const scoreboardSortOptions = {
     if (b.safetyRegionName < a.safetyRegionName) return 1;
     return 0;
   },
-  location_z_to_a: (a: VrScoreboardData, b: VrScoreboardData) => {
-    if (a.safetyRegionName > b.safetyRegionName) return -1;
-    if (b.safetyRegionName > a.safetyRegionName) return 1;
-    return 0;
-  },
   positively_tested_high_to_low: (a: VrScoreboardData, b: VrScoreboardData) => {
     if (
       (a.data.positive_tested_per_100k ?? -Infinity) >
