@@ -191,6 +191,9 @@
     },
     "vaccine_stock": {
       "$ref": "vaccine_stock.json"
+    },
+    "variants": {
+      "$ref": "variants.json"
     }
   }
 }

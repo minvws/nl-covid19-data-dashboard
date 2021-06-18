@@ -1,4 +1,5 @@
 import {
+  assert,
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
@@ -7,7 +8,7 @@ import { localPoint } from '@visx/event';
 import { Point } from '@visx/point';
 import { bisectCenter } from 'd3-array';
 import { ScaleLinear } from 'd3-scale';
-import { isEmpty, throttle } from 'lodash';
+import { isEmpty, pick, throttle } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Padding, TimespanAnnotationConfig } from './common';
@@ -73,7 +74,44 @@ export function useHoverState<T extends TimestampedValue>({
     hasFocus ? keyboard.enable() : keyboard.disable();
   }, [hasFocus, keyboard]);
 
-  const valuesDateUnix = useMemo(
+  const interactiveMetricProperties = useMemo(
+    () =>
+      seriesConfig
+        .filter((x) => !x.isNonInteractive)
+        .filter(isVisible)
+        .flatMap((x) => {
+          switch (x.type) {
+            case 'range':
+              return [x.metricPropertyLow, x.metricPropertyHigh];
+            default:
+              return x.metricProperty;
+          }
+        }),
+    [seriesConfig]
+  );
+
+  const valuesWithInteractiveProperties = useMemo(() => {
+    return values.filter((x) =>
+      hasSomeFilledProperties(pick(x, interactiveMetricProperties))
+    );
+  }, [values, interactiveMetricProperties]);
+
+  const interactiveValuesDateUnix = useMemo(
+    () =>
+      valuesWithInteractiveProperties.map((x) =>
+        isDateValue(x)
+          ? x.date_unix
+          : isDateSpanValue(x)
+          ? /**
+             * @TODO share logic with trend code
+             */
+            x.date_start_unix + (x.date_end_unix - x.date_start_unix) / 2
+          : 0
+      ),
+    [valuesWithInteractiveProperties]
+  );
+
+  const allValuesDateUnix = useMemo(
     () =>
       values.map((x) =>
         isDateValue(x)
@@ -100,16 +138,42 @@ export function useHoverState<T extends TimestampedValue>({
    * The points are always rendered in the middle of the date-span, and therefor
    * we use bisectCenter otherwise the calculated index jumps to the next as
    * soon as you cross the marker line to the right.
+   *
+   * Since the introduction of "non-interactive mode" for series, we need to do
+   * a little more work. The values that are interactive can be more sparse than
+   * the values array as a whole. The bisect needs to look only at the relevant
+   * values, but the final index for the hover state needs to be based on the
+   * original values array, otherwise the tooltip will not show up in the right
+   * place. Without this logic, the tooltip would disappear for all the values
+   * that have not filled properties for the interactive trends.
    */
   const bisect = useCallback(
-    function (values: TimestampedValue[], xPosition: number): number {
-      if (values.length === 1) return 0;
+    (xPosition: number) => {
+      if (interactiveValuesDateUnix.length === 1) return 0;
 
       const date_unix = xScale.invert(xPosition);
 
-      return bisectCenter(valuesDateUnix, date_unix, 0, values.length);
+      const index = bisectCenter(
+        interactiveValuesDateUnix,
+        date_unix,
+        0,
+        interactiveValuesDateUnix.length
+      );
+
+      const timestamp = interactiveValuesDateUnix[index];
+
+      const indexInAllValues = allValuesDateUnix.findIndex(
+        (x) => x === timestamp
+      );
+
+      assert(
+        indexInAllValues !== -1,
+        `Failed to find the values index for interactive value timestamp ${timestamp}`
+      );
+
+      return indexInAllValues;
     },
-    [xScale, valuesDateUnix]
+    [xScale, interactiveValuesDateUnix, allValuesDateUnix]
   );
 
   const setPointThrottled = useMemo(
@@ -127,9 +191,9 @@ export function useHoverState<T extends TimestampedValue>({
         point.y -= padding.top;
 
         setPoint(point);
-        setValuesIndex(bisect(values, point.x));
+        setValuesIndex(bisect(point.x));
       }, 1000 / 60),
-    [bisect, padding.left, padding.top, values]
+    [bisect, padding.left, padding.top]
   );
 
   const handleFocus = useCallback(() => setHasFocus(true), []);
@@ -183,6 +247,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const barPoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
+      .filter((x) => !x.isNonInteractive)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -227,6 +292,7 @@ export function useHoverState<T extends TimestampedValue>({
 
     const linePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
+      .filter((x) => !x.isNonInteractive)
       .map((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesSingleValue
@@ -280,6 +346,7 @@ export function useHoverState<T extends TimestampedValue>({
      */
     const rangePoints: HoveredPoint<T>[] = seriesConfig
       .filter(isVisible)
+      .filter((x) => !x.isNonInteractive)
       .flatMap((config, index) => {
         const seriesValue = seriesList[index][valuesIndex] as
           | SeriesDoubleValue
@@ -402,7 +469,7 @@ function findActiveTimespanAnnotationIndex(
 
   /**
    * Loop over the annotations and see if the hovered value falls within its
-   * timespan. By assuming these timespans never overlap, we can exist on the
+   * timespan. By assuming these timespans never overlap, we can exit on the
    * first match and return a single index.
    */
   for (const [index, annotation] of [...timespanAnnotations].entries()) {
@@ -413,4 +480,8 @@ function findActiveTimespanAnnotationIndex(
       return index;
     }
   }
+}
+
+function hasSomeFilledProperties(value: Record<string, unknown>) {
+  return Object.values(value).some(isPresent);
 }

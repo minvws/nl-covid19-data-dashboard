@@ -285,7 +285,7 @@ export function SewerChart(props: SewerChartProps) {
             <Group
               left={dimensions.padding.left}
               top={dimensions.padding.top}
-              css={css({ pointerEvents: 'none' })}
+              style={{ pointerEvents: 'none' }}
             >
               <GridRows
                 scale={scales.yScale}

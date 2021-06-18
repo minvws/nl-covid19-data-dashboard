@@ -34,7 +34,7 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('intensiveCarePage', locale);
   })

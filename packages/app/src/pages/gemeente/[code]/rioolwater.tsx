@@ -3,10 +3,12 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
+import { CollapsibleContent } from '~/components/collapsible';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { SewerChart } from '~/components/sewer-chart';
+import { NewSewerChart } from '~/components/sewer-chart/new-sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
@@ -14,6 +16,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -26,9 +29,6 @@ import {
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { CollapsibleContent } from '~/components/collapsible';
-import { NewSewerChart } from '~/components/sewer-chart/new-sewer-chart';
-import { useFeature } from '~/lib/features';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -37,7 +37,7 @@ export const getStaticProps = createGetStaticProps(
   selectGmPageMetricData('sewer_per_installation', 'static_values'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })

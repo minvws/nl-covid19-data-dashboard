@@ -2,7 +2,7 @@ import {
   MunicipalityProperties,
   MunicipalSewerValue,
   RegionalSewerValue,
-  SafetyRegionProperties,
+  SafetyRegionProperties
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
@@ -33,13 +33,13 @@ import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -54,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })

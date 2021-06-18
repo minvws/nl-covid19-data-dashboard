@@ -3,3 +3,4 @@ export * from './decorated-link';
 export * from './line-chart';
 export * from './milestone';
 export * from './title-description-block';
+export * from './link';

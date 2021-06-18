@@ -1,4 +1,5 @@
 import {
+  assert,
   Municipal,
   Municipalities,
   National,
@@ -6,8 +7,10 @@ import {
   Regions,
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
+import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
+import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import {
@@ -53,19 +56,65 @@ export function createGetContent<T>(
   queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
 ) {
   return async (context: GetStaticPropsContext) => {
+    const client = await getClient();
     const query =
       typeof queryOrQueryGetter === 'function'
         ? queryOrQueryGetter(context)
         : queryOrQueryGetter;
-    const rawContent = await (await getClient()).fetch<T>(query);
 
+    const rawContent = (await client.fetch<T>(query)) ?? {};
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    const content = localize(rawContent ?? {}, [locale, 'nl']) as T;
 
+    // this function call will mutate `rawContent`
+    await replaceReferencesInContent(rawContent, client);
+
+    const content = localize(rawContent, [locale, 'nl']) as T;
     return { content };
   };
+}
+
+/**
+ * This function will mutate an object which is a reference to another document.
+ * The reference-object's keys will be deleted and all reference document-keys
+ * will be added.
+ * eg:
+ * { _type: 'reference', _ref: 'abc' }
+ * becomes:
+ * { _type: 'document', id: 'abc', title: 'foo', body: 'bar' }
+ */
+async function replaceReferencesInContent(
+  input: unknown,
+  client: SanityClient,
+  resolvedIds: string[] = []
+) {
+  await new AsyncWalkBuilder()
+    .withGlobalFilter((x) => x.val?._type === 'reference')
+    .withSimpleCallback(async (node) => {
+      const refId = node.val._ref;
+
+      assert(typeof refId === 'string', 'node.val._ref is not set');
+
+      if (resolvedIds.includes(refId)) {
+        const ids = `[${resolvedIds.concat(refId).join(',')}]`;
+        throw new Error(
+          `Ran into an infinite loop of references, please investigate the following sanity document order: ${ids}`
+        );
+      }
+
+      const doc = await client.fetch(`*[_id == '${refId}']{...}[0]`);
+
+      await replaceReferencesInContent(doc, client, resolvedIds.concat(refId));
+
+      /**
+       * Here we'll mutate the original reference object by clearing the
+       * existing keys and adding all keys of the reference itself.
+       */
+      Object.keys(node.val).forEach((key) => delete node.val[key]);
+      Object.keys(doc).forEach((key) => (node.val[key] = doc[key]));
+    })
+    .walk(input);
 }
 
 /**
@@ -91,7 +140,16 @@ export function selectNlData<T extends keyof National = never>(
     const { data } = getNlData();
 
     const selectedNlData = metrics.reduce(
-      (acc, p) => set(acc, p, data[p]),
+      (acc, p) =>
+        set(
+          acc,
+          p,
+          /**
+           * convert `undefined` values to `null` because nextjs cannot pass
+           * undefined values via initial props.
+           */
+          data[p] ?? null
+        ),
       {} as Pick<National, T>
     );
 
