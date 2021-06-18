@@ -265,15 +265,15 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
 
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.covidVarianten()}
-                  icon={<Varianten />}
-                  title={siteText.covid_varianten.titel_sidebar}
-                >
-                  {data.variants && (
+                {data.variants && (
+                  <MetricMenuItemLink
+                    href={reverseRouter.nl.covidVarianten()}
+                    icon={<Varianten />}
+                    title={siteText.covid_varianten.titel_sidebar}
+                  >
                     <VariantsSidebarMetric data={data.variants.last_value} />
-                  )}
-                </MetricMenuItemLink>
+                  </MetricMenuItemLink>
+                )}
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.brononderzoek()}
