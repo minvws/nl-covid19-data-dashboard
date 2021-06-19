@@ -1,18 +1,20 @@
+import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
-import { useCallback } from 'react';
+import { ReactNode, useCallback } from 'react';
+import { isDefined } from 'ts-is-present';
 import { colors } from '~/style/theme';
-import { InlineText } from '../typography';
 import { Choropleth } from './choropleth';
 import { HoverPathLink, Path } from './path';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
 
 /**
  * Clean up the following lists of country codes and creation of `actuallyEurope`.
  * Thing is that `europeGeo` includes more than only europe (northern part of
- * Africa, western part of Asia) in order to display outlines of neigbouring
+ * Africa, western part of Asia) in order to display outlines of neighboring
  * countries. This can all be cleaned up and is currently hacked together for
- * demo/mpv purposes.
+ * demo/mvp purposes.
  */
 const nonEurope = [
   'MAR',
@@ -27,12 +29,19 @@ const nonEurope = [
   'ISR',
   'PSE',
   'LBN',
+  'RUS',
+  'GEO',
+  'AZE',
+  'ARM',
+  'TUR',
+  'SYR',
+  '-99',
 ];
 
 /**
  * List of countries to define the boundingbox
  */
-const focusEuropeCodes = ['ISL', 'NOR', 'AZE', 'ESP'];
+const focusEuropeCodes = ['ISL', 'NOR', 'AZE', 'ESP', 'GRC'];
 
 const actuallyEurope: EuropeGeoJSON = {
   ...europeGeo,
@@ -56,22 +65,36 @@ function pickRandomColor() {
   return colorValues[randomColorIndex];
 }
 
-/**
- * This component renders a map of the Netherlands with the outlines of all the
- * safety regions which receive a fill color based on the specified Region
- * metric data.
- *
- * The metricName plus the metricProperty together specify which value is
- * visualized. The color scale is calculated using the specified metric and the
- * given gradient.
- *
- * When a selected region code is specified, the map will zoom in on the safety
- * region.
- */
-export function EuropeChoropleth() {
+function getFillColor(_item: any) {
+  return pickRandomColor();
+}
+
+type EuropeChoroplethProps<T, K extends keyof T> = {
+  data: T[];
+  metricProperty: K;
+  joinProperty: KeysOfType<T, string, true>;
+  tooltipContent?: (context: T) => ReactNode;
+  tooltipPlacement?: ChoroplethTooltipPlacement;
+  getLink: (code: string) => string;
+};
+
+export function EuropeChoropleth<T, K extends keyof T>(
+  props: EuropeChoroplethProps<T, K>
+) {
+  const { data, joinProperty, metricProperty, tooltipContent } = props;
+
+  const getJoinedItem = useCallback(
+    (value: string) => {
+      return data.find((x) => x[joinProperty] === value);
+    },
+    [data, joinProperty]
+  );
+
   const renderFeature = useCallback(
     (feature: Feature<MultiPolygon, EuropeGeoProperties>, path: string) => {
-      return nonEurope.includes(feature.properties.ISO_A3) ? (
+      const item = getJoinedItem(feature.properties.ISO_A3);
+
+      return !isDefined(item) ? (
         <Path
           key={path}
           pathData={path}
@@ -80,23 +103,24 @@ export function EuropeChoropleth() {
         />
       ) : (
         <Path
-          key={path}
+          key={item[joinProperty]}
           pathData={path}
-          fill={pickRandomColor()}
+          fill={getFillColor(item[metricProperty])}
           stroke={'white'}
           strokeWidth={0.5}
         />
       );
     },
-    []
+    [getJoinedItem, joinProperty, metricProperty]
   );
 
   const renderHover = useCallback(
     (feature: Feature<MultiPolygon, EuropeGeoProperties>, path: string) => {
-      let { ISO_A3 } = feature.properties;
-      ISO_A3 ??= 'N/A';
+      const { ISO_A3 = 'N/A' } = feature.properties;
 
-      return (
+      const item = getJoinedItem(ISO_A3);
+
+      return isDefined(item) ? (
         <HoverPathLink
           isTabInteractive={false}
           key={ISO_A3}
@@ -106,9 +130,20 @@ export function EuropeChoropleth() {
           onFocus={() => undefined}
           onBlur={() => undefined}
         />
-      );
+      ) : null;
     },
-    []
+    [getJoinedItem]
+  );
+
+  const getTooltipContent = useCallback(
+    (id: string) => {
+      if (tooltipContent) {
+        const data = getJoinedItem(id);
+        return data ? tooltipContent(data) : null;
+      }
+      return null;
+    },
+    [tooltipContent, getJoinedItem]
   );
 
   return (
@@ -117,7 +152,7 @@ export function EuropeChoropleth() {
         bg: 'transparent',
         position: 'relative',
         height: '100%',
-        border: '1px solid hotpink',
+        border: '1px solid silver',
       })}
     >
       <Choropleth
@@ -128,8 +163,8 @@ export function EuropeChoropleth() {
         hovers={actuallyEurope}
         boundingBox={focusEurope}
         renderFeature={renderFeature}
-        getTooltipContent={(id: string) => <InlineText p={2}>{id}</InlineText>}
         renderHover={renderHover}
+        getTooltipContent={getTooltipContent}
       />
     </div>
   );

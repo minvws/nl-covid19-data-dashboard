@@ -1,0 +1,1237 @@
+[
+  {
+    "en": "Afghanistan",
+    "nl": "Afghanistan",
+    "iso_a3": "AFG"
+  },
+  {
+    "en": "Albania",
+    "nl": "Albanië",
+    "iso_a3": "ALB"
+  },
+  {
+    "en": "Algeria",
+    "nl": "Algerije",
+    "iso_a3": "DZA"
+  },
+  {
+    "en": "Saint Martin",
+    "nl": "Sint Martin",
+    "iso_a3": "MAF"
+  },
+  {
+    "en": "Sint Maarten",
+    "nl": "Sint Maarten",
+    "iso_a3": "SXM"
+  },
+  {
+    "en": "Curaçao",
+    "nl": "Curaçao",
+    "iso_a3": "CUW"
+  },
+  {
+    "en": "American Samoa",
+    "nl": "Amerikaans-Samoa",
+    "iso_a3": "ASM"
+  },
+  {
+    "en": "Andorra",
+    "nl": "Vorstendom Andorra",
+    "iso_a3": "AND"
+  },
+  {
+    "en": "Angola",
+    "nl": "Angola",
+    "iso_a3": "AGO"
+  },
+  {
+    "en": "Anguilla",
+    "nl": "Anguilla",
+    "iso_a3": "AIA"
+  },
+  {
+    "en": "Antarctica",
+    "nl": "Antarctica",
+    "iso_a3": "ATA"
+  },
+  {
+    "en": "Antigua and Barbuda",
+    "nl": "Antigua en Barbuda",
+    "iso_a3": "ATG"
+  },
+  {
+    "en": "Argentina",
+    "nl": "Argentinië",
+    "iso_a3": "ARG"
+  },
+  {
+    "en": "Armenia",
+    "nl": "Armenië",
+    "iso_a3": "ARM"
+  },
+  {
+    "en": "Aruba",
+    "nl": "Aruba",
+    "iso_a3": "ABW"
+  },
+  {
+    "en": "Australia",
+    "nl": "Australië",
+    "iso_a3": "AUS"
+  },
+  {
+    "en": "Austria",
+    "nl": "Oostenrijk",
+    "iso_a3": "AUT"
+  },
+  {
+    "en": "Azerbaijan",
+    "nl": "Azerbeidzjan",
+    "iso_a3": "AZE"
+  },
+  {
+    "en": "Bahamas",
+    "nl": "Gemenebest van de Bahamas",
+    "iso_a3": "BHS"
+  },
+  {
+    "en": "Bahrain",
+    "nl": "Bahrein",
+    "iso_a3": "BHR"
+  },
+  {
+    "en": "Bangladesh",
+    "nl": "Bangladesh",
+    "iso_a3": "BGD"
+  },
+  {
+    "en": "Barbados",
+    "nl": "Barbados",
+    "iso_a3": "BRB"
+  },
+  {
+    "en": "Belarus",
+    "nl": "Belarus",
+    "iso_a3": "BLR"
+  },
+  {
+    "en": "Belgium",
+    "nl": "België",
+    "iso_a3": "BEL"
+  },
+  {
+    "en": "Belize",
+    "nl": "Belize",
+    "iso_a3": "BLZ"
+  },
+  {
+    "en": "Benin",
+    "nl": "Benin",
+    "iso_a3": "BEN"
+  },
+  {
+    "en": "Bermuda",
+    "nl": "Bermuda",
+    "iso_a3": "BMU"
+  },
+  {
+    "en": "Bhutan",
+    "nl": "Bhutan",
+    "iso_a3": "BTN"
+  },
+  {
+    "en": "Bolivia",
+    "nl": "Bolivië",
+    "iso_a3": "BOL"
+  },
+  {
+    "en": "Bosnia and Herzegovina",
+    "nl": "Bosnië en Herzegovina",
+    "iso_a3": "BIH"
+  },
+  {
+    "en": "Botswana",
+    "nl": "Botswana",
+    "iso_a3": "BWA"
+  },
+  {
+    "en": "Bouvet Island",
+    "nl": "Bouveteiland",
+    "iso_a3": "BVT"
+  },
+  {
+    "en": "Brazil",
+    "nl": "Brazilië",
+    "iso_a3": "BRA"
+  },
+  {
+    "en": "British Indian Ocean Territory",
+    "nl": "Brits Koninkrijk Indische oceaan",
+    "iso_a3": "IOT"
+  },
+  {
+    "en": "Brunei Darussalam",
+    "nl": "Brunei Darussalam",
+    "iso_a3": "BRN"
+  },
+  {
+    "en": "Bulgaria",
+    "nl": "Bulgarije",
+    "iso_a3": "BGR"
+  },
+  {
+    "en": "Burkina Faso",
+    "nl": "Burkina Faso",
+    "iso_a3": "BFA"
+  },
+  {
+    "en": "Burundi",
+    "nl": "Burundi",
+    "iso_a3": "BDI"
+  },
+  {
+    "en": "Cambodia",
+    "nl": "Kampuchea",
+    "iso_a3": "KHM"
+  },
+  {
+    "en": "Cameroon",
+    "nl": "Kameroen",
+    "iso_a3": "CMR"
+  },
+  {
+    "en": "Canada",
+    "nl": "Canada",
+    "iso_a3": "CAN"
+  },
+  {
+    "en": "Cape Verde",
+    "nl": "Kaapverdië",
+    "iso_a3": "CPV"
+  },
+  {
+    "en": "Cayman Islands",
+    "nl": "Caymaneilanden",
+    "iso_a3": "CYM"
+  },
+  {
+    "en": "Central African Republic",
+    "nl": "Centraal-Afrikaanse Republiek",
+    "iso_a3": "CAF"
+  },
+  {
+    "en": "Chad",
+    "nl": "Tsjaad",
+    "iso_a3": "TCD"
+  },
+  {
+    "en": "Chile",
+    "nl": "Chili",
+    "iso_a3": "CHL"
+  },
+  {
+    "en": "China",
+    "nl": "VolksChina",
+    "iso_a3": "CHN"
+  },
+  {
+    "en": "Christmas Island",
+    "nl": "Christmaseiland",
+    "iso_a3": "CXR"
+  },
+  {
+    "en": "Cocos (Keeling) Islands",
+    "nl": "Cocos- (Keeling-) eilanden",
+    "iso_a3": "CCK"
+  },
+  {
+    "en": "Colombia",
+    "nl": "Colombia",
+    "iso_a3": "COL"
+  },
+  {
+    "en": "Comoros",
+    "nl": "Unie der Comoren",
+    "iso_a3": "COM"
+  },
+  {
+    "en": "Congo",
+    "nl": "Congo",
+    "iso_a3": "COG"
+  },
+  {
+    "en": "Congo, the Democratic Republic of the",
+    "nl": "Democratische Republiek Congo",
+    "iso_a3": "COD"
+  },
+  {
+    "en": "Cook Islands",
+    "nl": "Cookeilanden",
+    "iso_a3": "COK"
+  },
+  {
+    "en": "Costa Rica",
+    "nl": "Costa Rica",
+    "iso_a3": "CRI"
+  },
+  {
+    "en": "Côte d'Ivoire",
+    "nl": "Ivoorkust",
+    "iso_a3": "CIV"
+  },
+  {
+    "en": "Croatia",
+    "nl": "Kroatië",
+    "iso_a3": "HRV"
+  },
+  {
+    "en": "Cuba",
+    "nl": "Cuba",
+    "iso_a3": "CUB"
+  },
+  {
+    "en": "Cyprus",
+    "nl": "Cyprus",
+    "iso_a3": "CYP"
+  },
+  {
+    "en": "Czech Republic",
+    "nl": "Tsjechische Republiek",
+    "iso_a3": "CZE"
+  },
+  {
+    "en": "Denmark",
+    "nl": "Denemarken",
+    "iso_a3": "DNK"
+  },
+  {
+    "en": "Djibouti",
+    "nl": "Djibouti",
+    "iso_a3": "DJI"
+  },
+  {
+    "en": "Dominica",
+    "nl": "Gemenebest Dominica",
+    "iso_a3": "DMA"
+  },
+  {
+    "en": "Dominican Republic",
+    "nl": "Dominicaanse Republiek",
+    "iso_a3": "DOM"
+  },
+  {
+    "en": "Ecuador",
+    "nl": "Ecuador",
+    "iso_a3": "ECU"
+  },
+  {
+    "en": "Egypt",
+    "nl": "Egypte",
+    "iso_a3": "EGY"
+  },
+  {
+    "en": "El Salvador",
+    "nl": "El Salvador",
+    "iso_a3": "SLV"
+  },
+  {
+    "en": "Equatorial Guinea",
+    "nl": "Equatoriaal-Guinea",
+    "iso_a3": "GNQ"
+  },
+  {
+    "en": "Eritrea",
+    "nl": "Eritrea",
+    "iso_a3": "ERI"
+  },
+  {
+    "en": "Estonia",
+    "nl": "Estland",
+    "iso_a3": "EST"
+  },
+  {
+    "en": "Ethiopia",
+    "nl": "Ethiopië",
+    "iso_a3": "ETH"
+  },
+  {
+    "en": "Falkland Islands (Malvinas)",
+    "nl": "Falklandeilanden (Malvinas)",
+    "iso_a3": "FLK"
+  },
+  {
+    "en": "Faroe Islands",
+    "nl": "Faeröereilanden",
+    "iso_a3": "FRO"
+  },
+  {
+    "en": "Fiji",
+    "nl": "Fiji",
+    "iso_a3": "FJI"
+  },
+  {
+    "en": "Finland",
+    "nl": "Finland",
+    "iso_a3": "FIN"
+  },
+  {
+    "en": "France",
+    "nl": "Frankrijk",
+    "iso_a3": "FRA"
+  },
+  {
+    "en": "French Guiana",
+    "nl": "Frans-Guyana",
+    "iso_a3": "GUF"
+  },
+  {
+    "en": "French Polynesia",
+    "nl": "Frans-Polynesië",
+    "iso_a3": "PYF"
+  },
+  {
+    "en": "French Southern Territories",
+    "nl": "Franse zuidelijke gebieden",
+    "iso_a3": "ATF"
+  },
+  {
+    "en": "Gabon",
+    "nl": "Gabon",
+    "iso_a3": "GAB"
+  },
+  {
+    "en": "Gambia",
+    "nl": "Gambia",
+    "iso_a3": "GMB"
+  },
+  {
+    "en": "Georgia",
+    "nl": "Georgië",
+    "iso_a3": "GEO"
+  },
+  {
+    "en": "Germany",
+    "nl": "Duitsland",
+    "iso_a3": "DEU"
+  },
+  {
+    "en": "Ghana",
+    "nl": "Ghana",
+    "iso_a3": "GHA"
+  },
+  {
+    "en": "Gibraltar",
+    "nl": "Gibraltar",
+    "iso_a3": "GIB"
+  },
+  {
+    "en": "Greece",
+    "nl": "Griekenland ",
+    "iso_a3": "GRC"
+  },
+  {
+    "en": "Greenland",
+    "nl": "Groenland",
+    "iso_a3": "GRL"
+  },
+  {
+    "en": "Grenada",
+    "nl": "Grenada",
+    "iso_a3": "GRD"
+  },
+  {
+    "en": "Guadeloupe",
+    "nl": "Guadeloupe",
+    "iso_a3": "GLP"
+  },
+  {
+    "en": "Guam",
+    "nl": "Guam",
+    "iso_a3": "GUM"
+  },
+  {
+    "en": "Guatemala",
+    "nl": "Guatemala",
+    "iso_a3": "GTM"
+  },
+  {
+    "en": "Guernsey",
+    "nl": "Guernsey",
+    "iso_a3": "GGY"
+  },
+  {
+    "en": "Guinea",
+    "nl": "Guinea",
+    "iso_a3": "GIN"
+  },
+  {
+    "en": "Guinea-Bissau",
+    "nl": "Guinee-Bissau",
+    "iso_a3": "GNB"
+  },
+  {
+    "en": "Guyana",
+    "nl": "Guyana",
+    "iso_a3": "GUY"
+  },
+  {
+    "en": "Haiti",
+    "nl": "Haïti",
+    "iso_a3": "HTI"
+  },
+  {
+    "en": "Heard Island and McDonald Islands",
+    "nl": "Heard- en McDonaldeilanden",
+    "iso_a3": "HMD"
+  },
+  {
+    "en": "Holy See (Vatican City State)",
+    "nl": "Vaticaanstad",
+    "iso_a3": "VAT"
+  },
+  {
+    "en": "Honduras",
+    "nl": "Honduras",
+    "iso_a3": "HND"
+  },
+  {
+    "en": "Hong Kong",
+    "nl": "Speciale Administratieve Regio Hongkong van de VolksChina",
+    "iso_a3": "HKG"
+  },
+  {
+    "en": "Hungary",
+    "nl": "Hongarije",
+    "iso_a3": "HUN"
+  },
+  {
+    "en": "Iceland",
+    "nl": "Ijsland",
+    "iso_a3": "ISL"
+  },
+  {
+    "en": "India",
+    "nl": "India",
+    "iso_a3": "IND"
+  },
+  {
+    "en": "Indonesia",
+    "nl": "Indonesië",
+    "iso_a3": "IDN"
+  },
+  {
+    "en": "Iran",
+    "nl": "Iran",
+    "iso_a3": "IRN"
+  },
+  {
+    "en": "Iraq",
+    "nl": "Irak",
+    "iso_a3": "IRQ"
+  },
+  {
+    "en": "Ireland",
+    "nl": "Ierland",
+    "iso_a3": "IRL"
+  },
+  {
+    "en": "Isle of Man",
+    "nl": "Eiland Man",
+    "iso_a3": "IMN"
+  },
+  {
+    "en": "Israel",
+    "nl": "Staat Israël",
+    "iso_a3": "ISR"
+  },
+  {
+    "en": "Italy",
+    "nl": "Italië",
+    "iso_a3": "ITA"
+  },
+  {
+    "en": "Jamaica",
+    "nl": "Jamaica",
+    "iso_a3": "JAM"
+  },
+  {
+    "en": "Japan",
+    "nl": "Japan",
+    "iso_a3": "JPN"
+  },
+  {
+    "en": "Jersey",
+    "nl": "Jersey",
+    "iso_a3": "JEY"
+  },
+  {
+    "en": "Jordan",
+    "nl": "Jordanië",
+    "iso_a3": "JOR"
+  },
+  {
+    "en": "Kazakhstan",
+    "nl": "Kazachstan",
+    "iso_a3": "KAZ"
+  },
+  {
+    "en": "Kenya",
+    "nl": "Kenia",
+    "iso_a3": "KEN"
+  },
+  {
+    "en": "Kiribati",
+    "nl": "Kiribati",
+    "iso_a3": "KIR"
+  },
+  {
+    "en": "Korea, Democratic People's Republic of",
+    "nl": "Noord Korea",
+    "iso_a3": "PRK"
+  },
+  {
+    "en": "Korea, Republic of",
+    "nl": "Zuid Korea",
+    "iso_a3": "KOR"
+  },
+  {
+    "en": "Kuwait",
+    "nl": "Koeweit",
+    "iso_a3": "KWT"
+  },
+  {
+    "en": "Kyrgyzstan",
+    "nl": "Kirgizische Republiek",
+    "iso_a3": "KGZ"
+  },
+  {
+    "en": "Lao People's Democratic Republic",
+    "nl": "Laos",
+    "iso_a3": "LAO"
+  },
+  {
+    "en": "Latvia",
+    "nl": "Letland",
+    "iso_a3": "LVA"
+  },
+  {
+    "en": "Lebanon",
+    "nl": "Libanon",
+    "iso_a3": "LBN"
+  },
+  {
+    "en": "Lesotho",
+    "nl": "Lesotho",
+    "iso_a3": "LSO"
+  },
+  {
+    "en": "Liberia",
+    "nl": "Liberia",
+    "iso_a3": "LBR"
+  },
+  {
+    "en": "Libyan Arab Jamahiriya",
+    "nl": "Libië",
+    "iso_a3": "LBY"
+  },
+  {
+    "en": "Liechtenstein",
+    "nl": "Lichtenstein",
+    "iso_a3": "LIE"
+  },
+  {
+    "en": "Lithuania",
+    "nl": "Litouwen",
+    "iso_a3": "LTU"
+  },
+  {
+    "en": "Luxembourg",
+    "nl": "Luxemburg",
+    "iso_a3": "LUX"
+  },
+  {
+    "en": "Macao",
+    "nl": "Macao",
+    "iso_a3": "MAC"
+  },
+  {
+    "en": "Macedonia",
+    "nl": "Macedonië",
+    "iso_a3": "MKD"
+  },
+  {
+    "en": "Madagascar",
+    "nl": "Madagascar",
+    "iso_a3": "MDG"
+  },
+  {
+    "en": "Malawi",
+    "nl": "Malawi",
+    "iso_a3": "MWI"
+  },
+  {
+    "en": "Malaysia",
+    "nl": "Maleisië",
+    "iso_a3": "MYS"
+  },
+  {
+    "en": "Maldives",
+    "nl": "Malediven",
+    "iso_a3": "MDV"
+  },
+  {
+    "en": "Mali",
+    "nl": "Mali",
+    "iso_a3": "MLI"
+  },
+  {
+    "en": "Malta",
+    "nl": "Malta",
+    "iso_a3": "MLT"
+  },
+  {
+    "en": "Marshall Islands",
+    "nl": "Marshalleilanden",
+    "iso_a3": "MHL"
+  },
+  {
+    "en": "Martinique",
+    "nl": "Martinique",
+    "iso_a3": "MTQ"
+  },
+  {
+    "en": "Mauritania",
+    "nl": "Islamitische Mauritanië",
+    "iso_a3": "MRT"
+  },
+  {
+    "en": "Mauritius",
+    "nl": "Mauritius",
+    "iso_a3": "MUS"
+  },
+  {
+    "en": "Mayotte",
+    "nl": "Mayotte",
+    "iso_a3": "MYT"
+  },
+  {
+    "en": "Mexico",
+    "nl": "Mexico",
+    "iso_a3": "MEX"
+  },
+  {
+    "en": "Micronesia, Federated States of",
+    "nl": "Federale Staten Micronesië",
+    "iso_a3": "FSM"
+  },
+  {
+    "en": "Moldova",
+    "nl": "Moldavië",
+    "iso_a3": "MDA"
+  },
+  {
+    "en": "Monaco",
+    "nl": "Monaco",
+    "iso_a3": "MCO"
+  },
+  {
+    "en": "Mongolia",
+    "nl": "Mongolië",
+    "iso_a3": "MNG"
+  },
+  {
+    "en": "Montenegro",
+    "nl": "Montenegro",
+    "iso_a3": "MNE"
+  },
+  {
+    "en": "Montserrat",
+    "nl": "Montserrat",
+    "iso_a3": "MSR"
+  },
+  {
+    "en": "Morocco",
+    "nl": "Marokko",
+    "iso_a3": "MAR"
+  },
+  {
+    "en": "Mozambique",
+    "nl": "Mozambique",
+    "iso_a3": "MOZ"
+  },
+  {
+    "en": "Myanmar",
+    "nl": "Myanmar",
+    "iso_a3": "MMR"
+  },
+  {
+    "en": "Namibia",
+    "nl": "Namibië",
+    "iso_a3": "NAM"
+  },
+  {
+    "en": "Nauru",
+    "nl": "Nauru",
+    "iso_a3": "NRU"
+  },
+  {
+    "en": "Nepal",
+    "nl": "Nepal",
+    "iso_a3": "NPL"
+  },
+  {
+    "en": "Netherlands",
+    "nl": "Nederland",
+    "iso_a3": "NLD"
+  },
+  {
+    "en": "Netherlands Antilles",
+    "nl": "Nederlandse Antillen",
+    "iso_a3": "ANT"
+  },
+  {
+    "en": "New Caledonia",
+    "nl": "Nieuw-Caledonië",
+    "iso_a3": "NCL"
+  },
+  {
+    "en": "New Zealand",
+    "nl": "Nieuw-Zeeland",
+    "iso_a3": "NZL"
+  },
+  {
+    "en": "Nicaragua",
+    "nl": "Nicaragua",
+    "iso_a3": "NIC"
+  },
+  {
+    "en": "Niger",
+    "nl": "Niger",
+    "iso_a3": "NER"
+  },
+  {
+    "en": "Nigeria",
+    "nl": "Federale Nigeria",
+    "iso_a3": "NGA"
+  },
+  {
+    "en": "Niue",
+    "nl": "Niue",
+    "iso_a3": "NIU"
+  },
+  {
+    "en": "Norfolk Island",
+    "nl": "Norfolkeiland",
+    "iso_a3": "NFK"
+  },
+  {
+    "en": "Northern Mariana Islands",
+    "nl": "Gemenebest van de Noordelijke Marianen",
+    "iso_a3": "MNP"
+  },
+  {
+    "en": "Norway",
+    "nl": "Noorwegen",
+    "iso_a3": "NOR"
+  },
+  {
+    "en": "Oman",
+    "nl": "Oman",
+    "iso_a3": "OMN"
+  },
+  {
+    "en": "Pakistan",
+    "nl": "Pakistan",
+    "iso_a3": "PAK"
+  },
+  {
+    "en": "Palau",
+    "nl": "Palau",
+    "iso_a3": "PLW"
+  },
+  {
+    "en": "Palestinian Territory, Occupied",
+    "nl": "Bezette Palestijnse gebieden",
+    "iso_a3": "PSE"
+  },
+  {
+    "en": "Panama",
+    "nl": "Panama",
+    "iso_a3": "PAN"
+  },
+  {
+    "en": "Papua New Guinea",
+    "nl": "Papoea-Nieuw-Guinea",
+    "iso_a3": "PNG"
+  },
+  {
+    "en": "Paraguay",
+    "nl": "Paraguay",
+    "iso_a3": "PRY"
+  },
+  {
+    "en": "Peru",
+    "nl": "Peru",
+    "iso_a3": "PER"
+  },
+  {
+    "en": "Philippines",
+    "nl": "Filipijnen",
+    "iso_a3": "PHL"
+  },
+  {
+    "en": "Pitcairn",
+    "nl": "Pitcairn",
+    "iso_a3": "PCN"
+  },
+  {
+    "en": "Poland",
+    "nl": "Polen",
+    "iso_a3": "POL"
+  },
+  {
+    "en": "Portugal",
+    "nl": "Portugal",
+    "iso_a3": "PRT"
+  },
+  {
+    "en": "Puerto Rico",
+    "nl": "Puerto Rico",
+    "iso_a3": "PRI"
+  },
+  {
+    "en": "Qatar",
+    "nl": "Qatar",
+    "iso_a3": "QAT"
+  },
+  {
+    "en": "Réunion",
+    "nl": "Réunion",
+    "iso_a3": "REU"
+  },
+  {
+    "en": "Romania",
+    "nl": "Roemenië",
+    "iso_a3": "ROU"
+  },
+  {
+    "en": "Russian Federation",
+    "nl": "Rusland",
+    "iso_a3": "RUS"
+  },
+  {
+    "en": "Rwanda",
+    "nl": "Rwanda",
+    "iso_a3": "RWA"
+  },
+  {
+    "en": "Saint Helena, Ascension and Tristan da Cunha",
+    "nl": "Sint Helena, Ascension en Tristan da Cunha",
+    "iso_a3": "SHN"
+  },
+  {
+    "en": "Saint Kitts and Nevis",
+    "nl": "Federatie van Saint Kitts en Nevis",
+    "iso_a3": "KNA"
+  },
+  {
+    "en": "Saint Lucia",
+    "nl": "Sint Lucia",
+    "iso_a3": "LCA"
+  },
+  {
+    "en": "Saint Pierre and Miquelon",
+    "nl": "Saint-Pierre en Miquelon",
+    "iso_a3": "SPM"
+  },
+  {
+    "en": "Saint Vincent and the Grenadines",
+    "nl": "Saint Vincent en de Grenadines",
+    "iso_a3": "VCT"
+  },
+  {
+    "en": "Samoa",
+    "nl": "Samoa",
+    "iso_a3": "WSM"
+  },
+  {
+    "en": "San Marino",
+    "nl": "San Marino",
+    "iso_a3": "SMR"
+  },
+  {
+    "en": "Sao Tome and Principe",
+    "nl": "Democratische São Tomé en Príncipe",
+    "iso_a3": "STP"
+  },
+  {
+    "en": "Saudi Arabia",
+    "nl": "Saoedi-Arabië",
+    "iso_a3": "SAU"
+  },
+  {
+    "en": "Senegal",
+    "nl": "Senegal",
+    "iso_a3": "SEN"
+  },
+  {
+    "en": "Serbia",
+    "nl": "Servië",
+    "iso_a3": "SRB"
+  },
+  {
+    "en": "Seychelles",
+    "nl": "Seychellen",
+    "iso_a3": "SYC"
+  },
+  {
+    "en": "Sierra Leone",
+    "nl": "Sierra Leone",
+    "iso_a3": "SLE"
+  },
+  {
+    "en": "Singapore",
+    "nl": "Singapore",
+    "iso_a3": "SGP"
+  },
+  {
+    "en": "Slovakia",
+    "nl": "Slovakije",
+    "iso_a3": "SVK"
+  },
+  {
+    "en": "Slovenia",
+    "nl": "Slovenië",
+    "iso_a3": "SVN"
+  },
+  {
+    "en": "Solomon Islands",
+    "nl": "Salomonseilanden",
+    "iso_a3": "SLB"
+  },
+  {
+    "en": "Somalia",
+    "nl": "Federale Somalië",
+    "iso_a3": "SOM"
+  },
+  {
+    "en": "South Africa",
+    "nl": "Zuid-Afrika",
+    "iso_a3": "ZAF"
+  },
+  {
+    "en": "South Georgia and the South Sandwich Islands",
+    "nl": "Zuid-Georgië en de Zuid-Sandwicheilanden",
+    "iso_a3": "SGS"
+  },
+  {
+    "en": "South Sudan",
+    "nl": "Zuid-Soedan",
+    "iso_a3": "SSD"
+  },
+  {
+    "en": "Spain",
+    "nl": "Spanje",
+    "iso_a3": "ESP"
+  },
+  {
+    "en": "Sri Lanka",
+    "nl": "Democratische Socialistische Sri Lanka",
+    "iso_a3": "LKA"
+  },
+  {
+    "en": "Sudan",
+    "nl": "Soedan",
+    "iso_a3": "SDN"
+  },
+  {
+    "en": "Suriname",
+    "nl": "Suriname",
+    "iso_a3": "SUR"
+  },
+  {
+    "en": "Svalbard and Jan Mayen",
+    "nl": "Svalbard en Jan Mayen",
+    "iso_a3": "SJM"
+  },
+  {
+    "en": "Swaziland",
+    "nl": "Swaziland",
+    "iso_a3": "SWZ"
+  },
+  {
+    "en": "Sweden",
+    "nl": "Zweden",
+    "iso_a3": "SWE"
+  },
+  {
+    "en": "Switzerland",
+    "nl": "Zwitserland",
+    "iso_a3": "CHE"
+  },
+  {
+    "en": "Syrian Arab Republic",
+    "nl": "Arabische Syrië",
+    "iso_a3": "SYR"
+  },
+  {
+    "en": "Taiwan, Province of China",
+    "nl": "Taiwan, Chinese provincie",
+    "iso_a3": "TWN"
+  },
+  {
+    "en": "Tajikistan",
+    "nl": "Tadzjikistan",
+    "iso_a3": "TJK"
+  },
+  {
+    "en": "Tanzania",
+    "nl": "Tanzania",
+    "iso_a3": "TZA"
+  },
+  {
+    "en": "Thailand",
+    "nl": "Thailand",
+    "iso_a3": "THA"
+  },
+  {
+    "en": "Timor-Leste",
+    "nl": "Timor-Leste",
+    "iso_a3": "TLS"
+  },
+  {
+    "en": "Togo",
+    "nl": "Togo",
+    "iso_a3": "TGO"
+  },
+  {
+    "en": "Tokelau",
+    "nl": "Tokelau",
+    "iso_a3": "TKL"
+  },
+  {
+    "en": "Tonga",
+    "nl": "Tonga",
+    "iso_a3": "TON"
+  },
+  {
+    "en": "Trinidad and Tobago",
+    "nl": "Trinidad en Tobago",
+    "iso_a3": "TTO"
+  },
+  {
+    "en": "Tunisia",
+    "nl": "Tunesië",
+    "iso_a3": "TUN"
+  },
+  {
+    "en": "Turkey",
+    "nl": "Turkije",
+    "iso_a3": "TUR"
+  },
+  {
+    "en": "Turkmenistan",
+    "nl": "Turkmenistan",
+    "iso_a3": "TKM"
+  },
+  {
+    "en": "Turks and Caicos Islands",
+    "nl": "Turks- en Caicoseilanden",
+    "iso_a3": "TCA"
+  },
+  {
+    "en": "Tuvalu",
+    "nl": "Tuvalu",
+    "iso_a3": "TUV"
+  },
+  {
+    "en": "Uganda",
+    "nl": "Oeganda",
+    "iso_a3": "UGA"
+  },
+  {
+    "en": "Ukraine",
+    "nl": "Oekraïne",
+    "iso_a3": "UKR"
+  },
+  {
+    "en": "United Arab Emirates",
+    "nl": "Verenigde Arabische Emiraten",
+    "iso_a3": "ARE"
+  },
+  {
+    "en": "United Kingdom",
+    "nl": "Verenigd Koninkrijk",
+    "iso_a3": "GBR"
+  },
+  {
+    "en": "United States",
+    "nl": "Verenigde Staten van Amerika",
+    "iso_a3": "USA"
+  },
+  {
+    "en": "United States Minor Outlying Islands",
+    "nl": "Kleine afgelegen eilanden van de Verenigde Staten",
+    "iso_a3": "UMI"
+  },
+  {
+    "en": "Uruguay",
+    "nl": "Uruguay",
+    "iso_a3": "URY"
+  },
+  {
+    "en": "Uzbekistan",
+    "nl": "Oezbekistan",
+    "iso_a3": "UZB"
+  },
+  {
+    "en": "Vanuatu",
+    "nl": "Vanuatu",
+    "iso_a3": "VUT"
+  },
+  {
+    "en": "Venezuela",
+    "nl": "Venezuela",
+    "iso_a3": "VEN"
+  },
+  {
+    "en": "Viet Nam",
+    "nl": "Vietnam",
+    "iso_a3": "VNM"
+  },
+  {
+    "en": "Virgin Islands, British",
+    "nl": "Britse Maagdeneilanden",
+    "iso_a3": "VGB"
+  },
+  {
+    "en": "Virgin Islands, U.S.",
+    "nl": "Amerikaanse Maagdeneilanden",
+    "iso_a3": "VIR"
+  },
+  {
+    "en": "Wallis and Futuna",
+    "nl": "Wallis en Futuna",
+    "iso_a3": "WLF"
+  },
+  {
+    "en": "Western Sahara",
+    "nl": "Westelijke Sahara",
+    "iso_a3": "ESH"
+  },
+  {
+    "en": "Yemen",
+    "nl": "Jemen",
+    "iso_a3": "YEM"
+  },
+  {
+    "en": "Zambia",
+    "nl": "Zambia",
+    "iso_a3": "ZMB"
+  },
+  {
+    "en": "Zimbabwe",
+    "nl": "Zimbabwe",
+    "iso_a3": "ZWE"
+  }
+]

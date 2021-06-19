@@ -23,6 +23,7 @@ import {
   VrRegionPageMetricNames,
 } from '~/domain/layout/safety-region-layout';
 import { getClient, localize } from '~/lib/sanity';
+import { International } from '~/pages/internationaal';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -41,6 +42,7 @@ const json = {
   nl: loadJsonFromDataFile<National>('NL.json'),
   vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
   gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
+  intlCollection: loadJsonFromDataFile<International>('INTL_COLLECTION.json'),
 };
 
 export function getLastGeneratedDate() {
@@ -216,18 +218,21 @@ export function getGmData(context: GetStaticPropsContext) {
   return { data, municipalityName };
 }
 
-export function createGetChoroplethData<T1, T2>(settings?: {
+export function createGetChoroplethData<T1, T2, T3>(settings?: {
   vr?: (collection: Regions) => T1;
   gm?: (collection: Municipalities) => T2;
+  intl?: (collection: International) => T3;
 }) {
   return () => {
-    const filterVr = settings?.vr || (() => null);
-    const filterGm = settings?.gm || (() => null);
+    const filterVr = settings?.vr ?? (() => null);
+    const filterGm = settings?.gm ?? (() => null);
+    const filterIntl = settings?.intl ?? (() => null);
 
     return {
       choropleth: {
         vr: filterVr(json.vrCollection) as T1,
         gm: filterGm(json.gmCollection) as T2,
+        intl: filterIntl(json.intlCollection) as T3,
       },
     };
   };

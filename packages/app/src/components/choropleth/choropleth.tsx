@@ -29,12 +29,14 @@ export type TooltipSettings = {
   data: string;
 };
 
-type TProps<T1, T3> = {
+type TProps<T1, T3, T4> = {
   initialWidth?: number;
   minHeight?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;
+  // These are the outline superimposed over the main features.
+  outlines?: FeatureCollection<MultiPolygon, T4>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
   hovers?: FeatureCollection<MultiPolygon, T3>;
@@ -131,6 +133,7 @@ const ChoroplethMap: <T1, T3>(
 ) => JSX.Element | null = memo((props) => {
   const {
     featureCollection,
+    outlines,
     hovers,
     boundingBox,
     renderFeature,
@@ -247,12 +250,22 @@ const ChoroplethMap: <T1, T3>(
               fitSize={fitSize}
             />
 
-            {/**
-             *  @TODO this renders the NL country on all choropleths, but that
-             * should obviously not happen for EU choropleths.
-             * Or maybe it should..? It does add an extra layer of detail for NL..
-             */}
-            {/* <Country fitSize={fitSize} /> */}
+            {outlines && (
+              <g css={css({ pointerEvents: 'none' })}>
+                <MercatorGroup
+                  data={outlines.features}
+                  render={(_, path, index) => (
+                    <Path
+                      key={index}
+                      pathData={path}
+                      stroke={colors.silver}
+                      strokeWidth={0.5}
+                    />
+                  )}
+                  fitSize={fitSize}
+                />
+              </g>
+            )}
 
             {hovers && (
               <g ref={hoverRef}>
