@@ -1,13 +1,16 @@
-const withPlugins = require('next-compose-plugins');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
+// const withPlugins = require('next-compose-plugins');
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// });
 
 const withTranspileModules = require('next-transpile-modules')([
-  // 'lodash-es',
-  // 'd3-scale',
-  // 'd3-array',
-  // 'internmap',
+  'lodash-es',
+  'd3-scale',
+  'd3-array',
+  'd3-interpolate',
+  'd3-format',
+  'd3-time-format',
+  'internmap',
 ]);
 
 const nextConfig = {
@@ -36,28 +39,17 @@ const nextConfig = {
               },
             },
           ],
-          issuer: {
-            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
-          },
+          issuer: /\.(js|ts)x?$/,
         },
       ],
     });
-
-    config.resolve.alias = {
-      ...config.resolve.alias,
-    };
-
-    // config.plugins.push(
-    //   new LodashModuleReplacementPlugin({
-    //     // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
-    //     paths: true,
-    //   })
-    // );
 
     return config;
   },
 };
 
-const plugins = [withBundleAnalyzer];
+// const plugins = [withBundleAnalyzer];
 
-module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
+// module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
+
+module.exports = withTranspileModules(nextConfig);

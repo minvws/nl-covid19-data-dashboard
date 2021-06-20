@@ -6,7 +6,6 @@
     "module": "esnext",
     "allowJs": false,
     "noEmit": true,
-    "downlevelIteration": true,
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
