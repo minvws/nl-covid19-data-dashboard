@@ -4,10 +4,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const withTranspileModules = require('next-transpile-modules')([
-  'lodash-es',
-  'd3-scale',
-  'd3-array',
-  'internmap',
+  // 'lodash-es',
+  // 'd3-scale',
+  // 'd3-array',
+  // 'internmap',
 ]);
 
 const nextConfig = {
