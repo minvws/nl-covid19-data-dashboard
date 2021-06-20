@@ -81,19 +81,24 @@ export function EuropeChoropleth<T extends Record<string, unknown>>(
   const getFillColor = useIntlChoroplethColorScale(metricProperty);
 
   const renderFeature = useCallback(
-    (feature: Feature<MultiPolygon, EuropeGeoProperties>, path: string) => {
-      const item = getJoinedItem(feature.properties.ISO_A3);
+    (
+      feature: Feature<MultiPolygon, EuropeGeoProperties>,
+      path: string,
+      index: number
+    ) => {
+      const { ISO_A3 } = feature.properties;
+      const item = getJoinedItem(ISO_A3);
 
       return !isDefined(item) ? (
         <Path
-          key={path}
+          key={`${ISO_A3}_${index}`}
           pathData={path}
           stroke={colors.silver}
           strokeWidth={0.5}
         />
       ) : (
         <Path
-          key={item[joinProperty]}
+          key={`${ISO_A3}_${index}`}
           pathData={path}
           fill={getFillColor(item[metricProperty])}
           stroke={'white'}
@@ -101,19 +106,23 @@ export function EuropeChoropleth<T extends Record<string, unknown>>(
         />
       );
     },
-    [getJoinedItem, joinProperty, metricProperty, getFillColor]
+    [getJoinedItem, metricProperty, getFillColor]
   );
 
   const renderHover = useCallback(
-    (feature: Feature<MultiPolygon, EuropeGeoProperties>, path: string) => {
-      const { ISO_A3 = 'N/A' } = feature.properties;
+    (
+      feature: Feature<MultiPolygon, EuropeGeoProperties>,
+      path: string,
+      index: number
+    ) => {
+      const { ISO_A3 } = feature.properties;
 
       const item = getJoinedItem(ISO_A3);
 
       return isDefined(item) ? (
         <HoverPathLink
           isTabInteractive={false}
-          key={ISO_A3}
+          key={`${ISO_A3}_${index}`}
           title={ISO_A3}
           id={ISO_A3}
           pathData={path}
@@ -126,9 +135,9 @@ export function EuropeChoropleth<T extends Record<string, unknown>>(
   );
 
   const getTooltipContent = useCallback(
-    (id: string) => {
+    (joinId: string) => {
       if (tooltipContent) {
-        const data = getJoinedItem(id);
+        const data = getJoinedItem(joinId);
         return data ? tooltipContent(data) : null;
       }
       return null;
