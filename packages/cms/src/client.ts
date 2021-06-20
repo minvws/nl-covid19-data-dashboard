@@ -1,9 +1,9 @@
+// @ts-ignore Creates a ts-node compile error at "run-time"
+import getUserConfig from '@sanity/cli/lib/util/getUserConfig';
 import sanityClient, { ClientConfig } from '@sanity/client';
 import dotenv from 'dotenv';
 import path from 'path';
 import sanityJson from '../sanity.json';
-// @ts-ignore Creates a ts-node compile error at "run-time"
-import getUserConfig from '@sanity/cli/lib/util/getUserConfig';
 
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
@@ -28,7 +28,7 @@ export function getClient(dataset = 'development') {
   /**
    * This is an undocumented feature. Taken from the Sanity CLI code.
    */
-  const tokenFromLogIn = getUserConfig().get('authToken');
+  const tokenFromLogIn = getUserConfig.default().get('authToken');
 
   return sanityClient({
     ...clientConfig,

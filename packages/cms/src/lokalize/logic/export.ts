@@ -5,7 +5,7 @@
  */
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { createFlatTexts } from '@corona-dashboard/common';
-import { unflatten } from 'flat';
+import flat from 'flat';
 import fs from 'fs';
 import path from 'path';
 import prettier from 'prettier';
@@ -58,12 +58,12 @@ export async function exportLokalizeTexts(
   const flatTexts = createFlatTexts(documents, deletedKeys);
 
   await writePrettyJson(
-    unflatten(flatTexts.nl, { object: true }),
+    flat.unflatten(flatTexts.nl, { object: true }),
     path.join(localeDirectory, 'nl_export.json')
   );
 
   await writePrettyJson(
-    unflatten(flatTexts.en, { object: true }),
+    flat.unflatten(flatTexts.en, { object: true }),
     path.join(localeDirectory, 'en_export.json')
   );
 }
