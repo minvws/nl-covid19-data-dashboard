@@ -33,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
   selectVrPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('behaviorPage', locale);
   })

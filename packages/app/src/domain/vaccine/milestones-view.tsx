@@ -138,7 +138,7 @@ export function MilestonesView(props: MilestoneViewProps) {
         ))}
       </Box>
 
-      {expectedMilestones && (
+      {expectedMilestones.length > 0 && (
         <Box pl={`calc(1rem + ${CIRCLE_SIZE}px)`}>
           <Text color="gray" m={0} pl={3} mb={2}>
             {siteText.milestones.verwacht}
