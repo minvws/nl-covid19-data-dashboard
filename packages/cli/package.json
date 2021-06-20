@@ -4,20 +4,6 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "type": "module",
-  "dependencies": {
-    "ajv": "^6",
-    "chalk": "^4.1.0",
-    "dotenv": "^10.0.0",
-    "flat": "^5.0.2",
-    "json-schema-to-typescript": "^9",
-    "lodash": "^4.17.21",
-    "lodash-es": "^4.17.21",
-    "meow": "^10.0.1",
-    "p-memoize": "^4.0.1",
-    "ts-is-present": "^1.2.1",
-    "ts-morph": "^11.0.0",
-    "ts-node": "^10.0.0"
-  },
   "scripts": {
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",
     "test": "echo 'No tests available for @corona-dashboard/cli'",
@@ -34,6 +20,21 @@
     "generate-typescript": "ts-node src/scripts/generate-data-types.ts",
     "generate-sitemap": "ts-node src/scripts/generate-sitemap.ts",
     "strip-unused-locale-keys": "yarn workspace @corona-dashboard/cms lokalize:export && ts-node src/locale/strip-unused-locale-keys.ts && yarn workspace @corona-dashboard/cms lokalize:export && yarn workspace @corona-dashboard/app compile"
+  },
+  "dependencies": {
+    "@corona-dashboard/common": "1",
+    "ajv": "^6",
+    "chalk": "^4.1.0",
+    "dotenv": "^10.0.0",
+    "flat": "^5.0.2",
+    "json-schema-to-typescript": "^9",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "meow": "^10.0.1",
+    "p-memoize": "^4.0.1",
+    "ts-is-present": "^1.2.1",
+    "ts-morph": "^11.0.0",
+    "ts-node": "^10.0.0"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.4",
