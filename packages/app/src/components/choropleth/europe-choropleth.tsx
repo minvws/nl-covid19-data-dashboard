@@ -5,6 +5,7 @@ import { ReactNode, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
 import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
+import { useIntlChoroplethColorScale } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
@@ -56,39 +57,28 @@ const focusEurope: EuropeGeoJSON = {
   ),
 };
 
-/**
- * @TODO clean up; debug code
- */
-function pickRandomColor() {
-  const colorValues = colors.data.scale.blue;
-  const randomColorIndex = Math.floor(Math.random() * colorValues.length);
-  return colorValues[randomColorIndex];
-}
-
-function getFillColor(_item: any) {
-  return pickRandomColor();
-}
-
-type EuropeChoroplethProps<T, K extends keyof T> = {
+type EuropeChoroplethProps<T extends Record<string, unknown>> = {
   data: T[];
-  metricProperty: K;
+  metricProperty: KeysOfType<T, number, true>;
   joinProperty: KeysOfType<T, string, true>;
   tooltipContent?: (context: T) => ReactNode;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   getLink: (code: string) => string;
 };
 
-export function EuropeChoropleth<T, K extends keyof T>(
-  props: EuropeChoroplethProps<T, K>
+export function EuropeChoropleth<T extends Record<string, unknown>>(
+  props: EuropeChoroplethProps<T>
 ) {
   const { data, joinProperty, metricProperty, tooltipContent } = props;
 
   const getJoinedItem = useCallback(
-    (value: string) => {
-      return data.find((x) => x[joinProperty] === value);
+    (joinId: string) => {
+      return data.find((x) => x[joinProperty] === joinId);
     },
     [data, joinProperty]
   );
+
+  const getFillColor = useIntlChoroplethColorScale(metricProperty);
 
   const renderFeature = useCallback(
     (feature: Feature<MultiPolygon, EuropeGeoProperties>, path: string) => {
@@ -111,7 +101,7 @@ export function EuropeChoropleth<T, K extends keyof T>(
         />
       );
     },
-    [getJoinedItem, joinProperty, metricProperty]
+    [getJoinedItem, joinProperty, metricProperty, getFillColor]
   );
 
   const renderHover = useCallback(

@@ -1,4 +1,5 @@
 export * from './use-choropleth-color-scale';
+export * from './use-intl-choropleth-color-scale';
 export * from './use-municipality-boundingbox';
 export * from './use-municipality-data';
 export * from './use-region-municipalities';

@@ -25,13 +25,14 @@ export interface International {
   proto_name: 'INTL_COLLECTION';
   name: string;
   code: string;
-  test: TestData[];
+  tested_overall: TestData[];
 }
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    intl: ({ test }) => addCountryNameToChoroplethData(test, 'cncode'),
+    intl: ({ tested_overall }) =>
+      addCountryNameToChoroplethData(tested_overall, 'cncode'),
   })
 );
 
