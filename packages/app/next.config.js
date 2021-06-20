@@ -1,7 +1,7 @@
-// const withPlugins = require('next-compose-plugins');
-// const withBundleAnalyzer = require('@next/bundle-analyzer')({
-//   enabled: process.env.ANALYZE === 'true',
-// });
+const withPlugins = require('next-compose-plugins');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const withTranspileModules = require('next-transpile-modules')([
   'lodash-es',
@@ -48,8 +48,8 @@ const nextConfig = {
   },
 };
 
-// const plugins = [withBundleAnalyzer];
+const plugins = [withBundleAnalyzer];
 
-// module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
+module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
 
-module.exports = withTranspileModules(nextConfig);
+// module.exports = withTranspileModules(nextConfig);
