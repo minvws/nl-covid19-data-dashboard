@@ -87,18 +87,19 @@ export function EuropeChoropleth<T extends Record<string, unknown>>(
       index: number
     ) => {
       const { ISO_A3 } = feature.properties;
+      const key = `${ISO_A3}_${index}`;
       const item = getJoinedItem(ISO_A3);
 
       return !isDefined(item) ? (
         <Path
-          key={`${ISO_A3}_${index}`}
+          key={key}
           pathData={path}
           stroke={colors.silver}
           strokeWidth={0.5}
         />
       ) : (
         <Path
-          key={`${ISO_A3}_${index}`}
+          key={key}
           pathData={path}
           fill={getFillColor(item[metricProperty])}
           stroke={'white'}
