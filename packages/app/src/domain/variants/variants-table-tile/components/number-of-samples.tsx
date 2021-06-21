@@ -12,8 +12,8 @@ export function NumberOfSamples({
 
   return (
     <>
-      <InlineText fontWeight="bold">{formatNumber(occurrence)}</InlineText>
-      <InlineText>/{formatNumber(sampleSize)}</InlineText>
+      <InlineText fontWeight="bold">{formatNumber(occurrence)}</InlineText>/
+      <InlineText>{formatNumber(sampleSize)}</InlineText>
     </>
   );
 }

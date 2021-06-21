@@ -1,3 +1,4 @@
+import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { SiteText } from '~/locale';
 import {
@@ -13,10 +14,10 @@ import { VariantRow } from '../logic/use-variants-table-data';
 
 const columnKeys = [
   'variant_titel',
-  'eerst_gevonden',
-  'aantal_monsters',
   'percentage',
   'vorige_meeting',
+  'aantal_monsters',
+  'eerst_gevonden',
 ] as const;
 
 type DesktopVariantsTableProps = {
@@ -43,7 +44,15 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
           <tr key={row.variant}>
             <VariantNameCell variant={row.variant} text={text} />
             <Cell>
-              <InlineText>{row.countryOfOrigin}</InlineText>
+              <Box maxWidth="20em">
+                <PercentageBarWithNumber
+                  percentage={row.percentage}
+                  color={row.color}
+                />
+              </Box>
+            </Cell>
+            <Cell>
+              {row.difference && <VariantDifference value={row.difference} />}
             </Cell>
             <Cell>
               <NumberOfSamples
@@ -52,13 +61,7 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
               />
             </Cell>
             <Cell>
-              <PercentageBarWithNumber
-                percentage={row.percentage}
-                color={row.color}
-              />
-            </Cell>
-            <Cell>
-              {row.difference && <VariantDifference value={row.difference} />}
+              <InlineText>{row.countryOfOrigin}</InlineText>
             </Cell>
           </tr>
         ))}
