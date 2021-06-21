@@ -24,7 +24,7 @@
     "transpileOnly": true,
     "files": true,
     "compilerOptions": {
-      "module": "esnext"
+      "module": "commonjs"
     }
   }
 }
