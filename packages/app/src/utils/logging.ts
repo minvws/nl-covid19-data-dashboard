@@ -1,3 +1,5 @@
+/* eslint no-console: "off" */
+
 import chalk from 'chalk';
 
 export const logSuccess = (...args: unknown[]) =>

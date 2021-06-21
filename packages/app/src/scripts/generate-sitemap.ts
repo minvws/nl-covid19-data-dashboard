@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
 import dotenv from 'dotenv';
