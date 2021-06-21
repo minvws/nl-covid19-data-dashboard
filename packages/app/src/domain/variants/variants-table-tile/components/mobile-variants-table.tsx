@@ -62,7 +62,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 
   function handleRowClick(event: MouseEvent) {
     if (event.target !== chevronRef.current) {
-      chevronRef.current?.click();
+      setIsOpen((x) => !x);
     }
   }
 
@@ -126,7 +126,7 @@ const Chevron = styled(
     alignItems: 'flex-end',
     m: 0,
     p: 0,
-    py: 2,
+    pb: 3,
     overflow: 'visible',
     bg: 'transparent',
     border: 'none',
