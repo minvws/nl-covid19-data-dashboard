@@ -28,13 +28,13 @@ export function NewSewerChart({
     };
     selectPlaceholder?: string;
     splitLabels: {
-      waarde_0_200: string;
-      waarde_200_400: string;
-      waarde_400_600: string;
-      waarde_600_800: string;
-      waarde_800_plus: string;
+      segment_0: string;
+      segment_1: string;
+      segment_2: string;
+      segment_3: string;
     };
     averagesDataLabel: string;
+    valueAnnotation: string;
   };
 }) {
   const {
@@ -60,29 +60,24 @@ export function NewSewerChart({
 
   const averageSplitPoints = [
     {
-      value: 200,
+      value: 10,
       color: colors.data.scale.blue[0],
-      label: text.splitLabels.waarde_0_200,
+      label: text.splitLabels.segment_0,
     },
     {
-      value: 400,
+      value: 50,
       color: colors.data.scale.blue[1],
-      label: text.splitLabels.waarde_200_400,
+      label: text.splitLabels.segment_1,
     },
     {
-      value: 600,
+      value: 100,
       color: colors.data.scale.blue[2],
-      label: text.splitLabels.waarde_400_600,
-    },
-    {
-      value: 800,
-      color: colors.data.scale.blue[3],
-      label: text.splitLabels.waarde_600_800,
+      label: text.splitLabels.segment_2,
     },
     {
       value: Infinity,
-      color: colors.data.scale.blue[4],
-      label: text.splitLabels.waarde_800_plus,
+      color: colors.data.scale.blue[3],
+      label: text.splitLabels.segment_3,
     },
   ];
 
@@ -139,6 +134,7 @@ export function NewSewerChart({
                   },
                 ]}
                 formatTooltip={(data) => <LocationTooltip data={data} />}
+                dataOptions={{ valueAnnotation: text.valueAnnotation }}
               />
             ) : (
               <TimeSeriesChart
@@ -152,6 +148,7 @@ export function NewSewerChart({
                     splitPoints: averageSplitPoints,
                   },
                 ]}
+                dataOptions={{ valueAnnotation: text.valueAnnotation }}
               />
             )
           }
