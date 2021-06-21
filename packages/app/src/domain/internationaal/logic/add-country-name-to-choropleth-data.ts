@@ -1,16 +1,5 @@
-import { assert, KeysOfType, PickByType } from '@corona-dashboard/common';
-import { International } from '~/pages/internationaal';
+import { assert, KeysOfType } from '@corona-dashboard/common';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
-
-export type UnionToIntersection<U> = (
-  U extends any ? (k: U) => void : never
-) extends (k: infer I) => void
-  ? I
-  : never;
-export type InternationalLists = PickByType<International, unknown[]>;
-export type InternationalListKey = keyof InternationalLists;
-export type InternationalListType =
-  InternationalLists[InternationalListKey][number];
 
 type LocaleCode = 'nl' | 'en';
 

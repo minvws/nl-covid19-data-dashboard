@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
-import { InternationalListType } from '~/domain/internationaal/logic/add-country-name-to-choropleth-data';
+import { InternationalListType } from '~/domain/internationaal/types';
 import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import { useIntlChoroplethColorScale } from './hooks';
@@ -90,9 +90,8 @@ export function EuropeChoropleth<T extends InternationalListType>(
       const { ISO_A3 } = feature.properties;
       const key = `${ISO_A3}_${index}`;
       const item = getJoinedItem(ISO_A3);
-      const itemValue = item?.[metricProperty];
 
-      return !isDefined(itemValue) ? (
+      return !isDefined(item) ? (
         <Path
           key={key}
           pathData={path}
@@ -103,7 +102,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
         <Path
           key={key}
           pathData={path}
-          fill={getFillColor(itemValue)}
+          fill={getFillColor(item[metricProperty])}
           stroke={'white'}
           strokeWidth={0.5}
         />
@@ -154,7 +153,8 @@ export function EuropeChoropleth<T extends InternationalListType>(
         bg: 'transparent',
         position: 'relative',
         height: '100%',
-        border: '1px solid silver',
+        border: '1px solid',
+        borderColor: 'silver',
       })}
     >
       <Choropleth
