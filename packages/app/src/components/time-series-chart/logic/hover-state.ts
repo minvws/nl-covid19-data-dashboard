@@ -1,7 +1,9 @@
 import {
   assert,
+  endOfDayInSeconds,
   isDateSpanValue,
   isDateValue,
+  startOfDayInSeconds,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
@@ -11,7 +13,6 @@ import { ScaleLinear } from 'd3-scale';
 import { isEmpty, pick, throttle } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { endOfDayInSeconds, startOfDayInSeconds } from '~/utils/date';
 import {
   Padding,
   TimelineEventConfig,
@@ -500,19 +501,17 @@ function findActiveTimelineEventIndex(
   hoveredValue: TimestampedValue,
   timespanAnnotations: TimelineEventConfig[]
 ) {
-  const valueSpanStartOfDay =
-    startOfDayInSeconds(
-      isDateValue(hoveredValue)
-        ? hoveredValue.date_unix
-        : hoveredValue.date_start_unix
-    ) + 1;
+  const valueSpanStartOfDay = startOfDayInSeconds(
+    isDateValue(hoveredValue)
+      ? hoveredValue.date_unix
+      : hoveredValue.date_start_unix
+  );
 
-  const valueSpanEndOfDay =
-    endOfDayInSeconds(
-      isDateValue(hoveredValue)
-        ? hoveredValue.date_unix
-        : hoveredValue.date_end_unix
-    ) - 1;
+  const valueSpanEndOfDay = endOfDayInSeconds(
+    isDateValue(hoveredValue)
+      ? hoveredValue.date_unix
+      : hoveredValue.date_end_unix
+  );
 
   /**
    * Loop over the annotations and see if the hovered value falls within its
@@ -534,7 +533,7 @@ function findActiveTimelineEventIndex(
       Array.isArray(annotation.date) ? annotation.date[1] : annotation.date
     );
 
-    if (valueSpanStartOfDay <= end && start <= valueSpanEndOfDay) {
+    if (valueSpanStartOfDay < end && start < valueSpanEndOfDay) {
       return timespanAnnotations.length - 1 - index;
     }
   }

@@ -4,16 +4,16 @@ import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Box } from '~/components/base';
 import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { getTimelineEventRange } from '../logic';
 import { TimelineMarker } from './marker';
 
 interface TimelineEventProps {
-  value: TimelineEventConfig;
+  config: TimelineEventConfig;
   size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   index: number;
@@ -25,7 +25,7 @@ interface TimelineEventProps {
 }
 
 export function TimelineEvent({
-  value,
+  config,
   xScale,
   size,
   index,
@@ -40,16 +40,6 @@ export function TimelineEvent({
 
   const isTouch = useIsTouchDevice();
   const [isMouseEntered, setIsMouseEntered] = useState(false);
-  const isHighlightedEvent =
-    isHighlighted || (isTouch ? isSelected : isMouseEntered);
-
-  const left = Array.isArray(value.date)
-    ? xScale(value.date[0]) ?? 0
-    : xScale(value.date) ?? 0;
-
-  const width = Array.isArray(value.date)
-    ? (xScale(value.date[1]) ?? 0) - (xScale(value.date[0]) ?? 0)
-    : undefined;
 
   useEffect(
     () => (isMouseEntered ? onShow(index) : onHide(index)),
@@ -62,9 +52,23 @@ export function TimelineEvent({
     deselectRef.current(index)
   );
 
+  const isHighlightedEvent =
+    isHighlighted || (isTouch ? isSelected : isMouseEntered);
+
+  const eventRange = getTimelineEventRange(config, xScale.domain());
+
+  const x0 = xScale(eventRange.timeline.start) as number;
+  const x1 = xScale(eventRange.timeline.end) as number;
+
+  const timespanWidth = x1 - x0;
+
   return (
     <StyledEvent
-      style={{ width, left, zIndex: isHighlightedEvent ? 1 : undefined }}
+      style={{
+        width: timespanWidth,
+        left: x0,
+        zIndex: isHighlightedEvent ? 1 : undefined,
+      }}
     >
       <TooltipTrigger
         content={tooltipContent}
@@ -74,7 +78,7 @@ export function TimelineEvent({
         onDeselect={() => setIsMouseEntered(false)}
         contentRef={contentRef}
       />
-      {width && (
+      {timespanWidth > 0 && (
         <TimespanBar
           height={size}
           initial={false}
@@ -86,9 +90,9 @@ export function TimelineEvent({
           }}
         />
       )}
-      <Box transform="translateX(-50%)">
+      <div css={css({ transform: 'translateX(-50%)' })}>
         <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
-      </Box>
+      </div>
     </StyledEvent>
   );
 }

@@ -9,6 +9,7 @@ import { TimelineEvent } from './components/event';
 import { TimelineBar } from './components/bar';
 import { TimelineTooltipContent } from './components/tooltip-content';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { isVisibleEvent } from './logic';
 
 interface TimelineProps {
   annotations: TimelineEventConfig[];
@@ -33,13 +34,17 @@ export const Timeline = memo(function Timeline({
   const isTouch = useIsTouchDevice();
   const [, end] = xScale.domain();
   const width = xScale(end) ?? 0;
+  const visibleAnnotations = annotations.filter((x) =>
+    isVisibleEvent(x, xScale.domain())
+  );
 
   const indexRef = useRef(index);
   indexRef.current = index;
 
   const showTooltip = useCallback(
-    (index: number) => setIndex(wrapAroundLength(index, annotations.length)),
-    [annotations.length, setIndex]
+    (index: number) =>
+      setIndex(wrapAroundLength(index, visibleAnnotations.length)),
+    [visibleAnnotations.length, setIndex]
   );
 
   const hideTooltip = useCallback(
@@ -57,11 +62,11 @@ export const Timeline = memo(function Timeline({
       key={isTouch ? 1 : 0}
     >
       <TimelineBar width={width} height={size + 2}>
-        {annotations.map((x, i) => (
+        {visibleAnnotations.map((x, i) => (
           <TimelineEvent
             key={x.date.toString()}
             size={size}
-            value={x}
+            config={x}
             xScale={xScale}
             index={i}
             onShow={showTooltip}

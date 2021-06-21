@@ -28,6 +28,7 @@ import {
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
 import { Timeline, TimelineEventAnnotation } from './components/timeline';
+import { useTimelineEventIndex } from './components/timeline/logic';
 import {
   calculateSeriesMaximum,
   COLLAPSE_Y_AXIS_THRESHOLD,
@@ -151,10 +152,6 @@ export function TimeSeriesChart<
   markNearestPointOnly,
   displayTooltipValueOnly,
 }: TimeSeriesChartProps<T, C>) {
-  const [timelineEventIndex, setTimelineEventIndex] = useState<
-    number | undefined
-  >(undefined);
-
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -191,6 +188,9 @@ export function TimeSeriesChart<
   });
 
   const values = useValuesInTimeframe(allValues, timeframe);
+
+  const [timelineEventIndex, setTimelineEventIndex] =
+    useTimelineEventIndex(values);
 
   const cutValuesConfig = useMemo(
     () => extractCutValuesConfig(timespanAnnotations),

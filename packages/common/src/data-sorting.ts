@@ -1,3 +1,4 @@
+import { endOfDay, startOfDay } from 'date-fns';
 import { isDefined } from 'ts-is-present';
 import {
   MunicipalSewerPerInstallationValue,
@@ -11,7 +12,13 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
 
   for (const propertyName of timeSeriesPropertyNames) {
     const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
-    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values)
+      /**
+       * We'll map all dates to noon (12:00). This simplifies the rendering of a
+       * marker/annotation on a date.
+       */
+      .map(toNoonDate);
+    timeSeries.last_value = toNoonDate(timeSeries.last_value);
   }
 
   /**
@@ -32,10 +39,10 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
     }
 
     nestedSeries.values = nestedSeries.values.map((x) => {
-      x.values = sortTimeSeriesValues(x.values) as
+      x.values = sortTimeSeriesValues(x.values).map(toNoonDate) as
         | RegionalSewerPerInstallationValue[]
         | MunicipalSewerPerInstallationValue[];
-
+      x.last_value = toNoonDate(x.last_value);
       return x;
     });
   }
@@ -71,6 +78,20 @@ export function sortTimeSeriesValues(values: TimestampedValue[]) {
   throw new Error(
     `Unknown timestamp in value ${JSON.stringify(values[0], null, 2)}`
   );
+}
+
+function toNoonDate<T extends TimestampedValue>(value: T) {
+  if (isDateSpanValue(value)) {
+    // value.date_start_unix = startOfDayInSeconds(value.date_start_unix)
+    // value.date_end_unix = endOfDayInSeconds(value.date_end_unix)
+    value.date_start_unix = midOfDayInSeconds(value.date_start_unix);
+    value.date_end_unix = midOfDayInSeconds(value.date_end_unix);
+  }
+  if (isDateValue(value)) {
+    value.date_unix = midOfDayInSeconds(value.date_unix);
+  }
+
+  return value;
 }
 
 export type TimestampedValue = DateValue | DateSpanValue;
@@ -136,5 +157,19 @@ export function isDateSpanSeries(
   return (
     isDefined(firstValue?.date_end_unix) &&
     isDefined(firstValue?.date_start_unix)
+  );
+}
+
+export function startOfDayInSeconds(seconds: number) {
+  return Math.round(startOfDay(seconds * 1000).getTime() / 1000);
+}
+
+export function endOfDayInSeconds(seconds: number) {
+  return Math.round(endOfDay(seconds * 1000).getTime() / 1000);
+}
+
+export function midOfDayInSeconds(seconds: number) {
+  return Math.round(
+    (startOfDayInSeconds(seconds) + endOfDayInSeconds(seconds)) / 2
   );
 }

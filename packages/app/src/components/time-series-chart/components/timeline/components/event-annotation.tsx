@@ -5,7 +5,7 @@ import {
   TimelineEventConfig,
 } from '~/components/time-series-chart/logic';
 import { colors } from '~/style/theme';
-import { getTimelineEventStartEnd } from '../logic';
+import { getTimelineEventRange } from '../logic';
 
 export function TimelineEventAnnotation({
   domain,
@@ -18,12 +18,10 @@ export function TimelineEventAnnotation({
   getX: GetX;
   config?: TimelineEventConfig;
 }) {
-  const [start, end] = config
-    ? getTimelineEventStartEnd(config, domain)
-    : [0, 0];
+  const eventRange = config && getTimelineEventRange(config, domain);
 
-  const x0 = getX({ __date_unix: start });
-  const x1 = getX({ __date_unix: end });
+  const x0 = getX({ __date_unix: eventRange?.annotation.start ?? 0 });
+  const x1 = getX({ __date_unix: eventRange?.annotation.end ?? 0 });
 
   const width = x1 - x0;
 

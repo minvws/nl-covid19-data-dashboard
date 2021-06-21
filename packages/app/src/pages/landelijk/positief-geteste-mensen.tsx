@@ -302,6 +302,37 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         description:
                           'In de eerste golf waren er te weinig testen om iedereen te laten testen. Daardoor is de piek in de data lager dan voor de andere golven. In de realiteit zouden deze aantallen veel hoger hebben gelegen. In de realiteit zouden deze aantallen veel hoger hebben gelegen.',
                       },
+                      {
+                        date: [
+                          new Date('14 may 2021').getTime() / 1000,
+                          new Date('15 may 2021').getTime() / 1000,
+                        ],
+                        title: 'nope',
+                        description: 'testtets',
+                      },
+                      {
+                        date: [
+                          new Date('16 may 2021').getTime() / 1000,
+                          new Date('18 may 2021').getTime() / 1000,
+                        ],
+                        title: 'test',
+                        description: 'testtets',
+                      },
+
+                      {
+                        date: new Date('23 may 2021').getTime() / 1000,
+                        title: 'test2',
+                        description: 'testtets',
+                      },
+
+                      {
+                        date: [
+                          new Date('30 may 2021').getTime() / 1000,
+                          new Date('4 june 2021').getTime() / 1000,
+                        ],
+                        title: 'test3',
+                        description: 'testtets',
+                      },
                     ],
                   }}
                 />
