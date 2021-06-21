@@ -8,26 +8,26 @@ import {
 
 export type TimeframeOption = 'all' | '5weeks';
 
-export const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
+export function getDaysForTimeframe(timeframe: TimeframeOption) {
   // adds 1 extra day to capture the intended amount of days
   if (timeframe === '5weeks') {
     return 36;
   }
   return Infinity;
-};
+}
 
 const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
 
-export const getMinimumUnixForTimeframe = (
+export function getMinimumUnixForTimeframe(
   timeframe: TimeframeOption,
   today: Date
-): number => {
+) {
   if (timeframe === 'all') {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
   return today.getTime() - days * oneDayInMilliseconds;
-};
+}
 
 type CompareCallbackFunction<T> = (value: T) => number;
 
@@ -38,17 +38,17 @@ type CompareCallbackFunction<T> = (value: T) => number;
  * @param timeframe
  * @param compareCallback
  */
-export const getFilteredValues = <T>(
+export function getFilteredValues<T>(
   values: T[],
   timeframe: TimeframeOption,
   today: Date,
   compareCallback: CompareCallbackFunction<T>
-): T[] => {
+): T[] {
   const minimumUnix = getMinimumUnixForTimeframe(timeframe, today);
-  return values.filter((value: T): boolean => {
-    return compareCallback(value) >= minimumUnix;
-  });
-};
+  return values.filter(
+    (value: T): boolean => compareCallback(value) >= minimumUnix
+  );
+}
 
 /**
  * From a list of values, return the ones that are within the timeframe.

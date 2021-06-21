@@ -1,4 +1,4 @@
-import { getDaysForTimeframe } from '..';
+import { getDaysForTimeframe } from '../index';
 
 describe('Utils: getDaysForTimeframe', () => {
   it('should return 36 for 5weeks', () => {

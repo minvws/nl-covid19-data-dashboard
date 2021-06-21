@@ -1,4 +1,4 @@
-import { getMinimumUnixForTimeframe } from '..';
+import { getMinimumUnixForTimeframe } from '../index';
 
 describe('Utils: getMinimumUnixForTimeframe', () => {
   it('should return zero for all', () => {

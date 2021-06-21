@@ -1,4 +1,4 @@
-import { getFilteredValues } from '..';
+import { getFilteredValues } from '../index';
 
 const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
 
