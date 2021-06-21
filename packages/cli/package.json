@@ -18,8 +18,7 @@
     "validate-json-single": "yarn exec-ts src/scripts/validate-json-single.ts",
     "validate-last-values": "yarn exec-ts src/scripts/validate-last-values.ts",
     "validate-features": "yarn exec-ts src/scripts/validate-features.ts",
-    "generate-data-types": "yarn exec-ts src/scripts/generate-data-types.ts",
-    "generate-sitemap": "yarn exec-ts src/scripts/generate-sitemap.ts"
+    "generate-data-types": "yarn exec-ts src/scripts/generate-data-types.ts"
   },
   "dependencies": {
     "@corona-dashboard/common": "1",

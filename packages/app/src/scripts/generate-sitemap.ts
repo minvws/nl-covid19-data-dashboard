@@ -1,18 +1,20 @@
 import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
+import dotenv from 'dotenv';
 import fs from 'fs';
 import globby from 'globby';
 import path from 'path';
 import prettier from 'prettier';
 import { fileURLToPath } from 'url';
-import { features } from '../../../app/src/config/features';
-import { gmData } from '../../../app/src/data/gm';
-import { vrData } from '../../../app/src/data/vr';
-import { logError } from '../utils';
+import { features } from '~/config/features';
+import { gmData } from '~/data/gm';
+import { vrData } from '~/data/vr';
+import { logError } from '~/utils/logging';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-require('dotenv').config({ path: '../app/.env.local' });
+dotenv.config({ path: '../../.env.local' });
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
@@ -24,9 +26,8 @@ const gmCodes = gmData.map((x) => x.gemcode);
 const publicOutputDirectory = path.resolve(
   __dirname,
   '..', // src
-  '..', // cli
-  '..', // packages
-  'app/public'
+  '..', // app
+  'public'
 );
 
 async function main() {
@@ -64,17 +65,17 @@ async function main() {
 
   // Ignore Next.js specific files and API routes.
   const pages = await globby([
-    '../app/src/pages/**/*{.tsx,.mdx}',
-    '!../app/src/pages/404.tsx',
-    '!../app/src/pages/500.tsx',
-    '!../app/src/pages/_*.tsx',
-    '!../app/src/pages/api',
+    '../pages/**/*{.tsx,.mdx}',
+    '!../pages/404.tsx',
+    '!../pages/500.tsx',
+    '!../pages/_*.tsx',
+    '!../pages/api',
   ]);
 
   const pathsFromPages = pages
     .map((x) =>
       x
-        .replace('../app/src/pages', '')
+        .replace('../pages', '')
         .replace('.tsx', '')
         .replace('/index.tsx', '')
         .replace('/index', '')

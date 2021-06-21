@@ -7,6 +7,7 @@ import path from 'path';
 import { isDefined } from 'ts-is-present';
 import { Node, Project, PropertyAssignment, SyntaxKind } from 'ts-morph';
 import { fileURLToPath } from 'url';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -71,9 +72,9 @@ const obsoleteKeys = difference(
 
 for (const key of obsoleteKeys) {
   const text = texts[key];
-  const isRootvalue = typeof text === 'string' || Array.isArray(text);
+  const isRootValue = typeof text === 'string' || Array.isArray(text);
 
-  appendTextMutation('delete', isRootvalue ? `__root.${key}` : key);
+  appendTextMutation('delete', isRootValue ? `__root.${key}` : key);
 }
 
 console.log(`Marked ${obsoleteKeys.length} documents for deletion`);

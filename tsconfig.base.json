@@ -4,17 +4,16 @@
     "lib": ["esnext", "dom"],
     "target": "es2018",
     "moduleResolution": "node",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "paths": {
-      "@corona-dashboard/*": ["./*/src"]
-    },
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@corona-dashboard/*": ["./*/src"]
+    // },
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "forceConsistentCasingInFileNames": true,
-    "jsx": "preserve"
+    "forceConsistentCasingInFileNames": true
+    // "jsx": "preserve"
   }
 }
