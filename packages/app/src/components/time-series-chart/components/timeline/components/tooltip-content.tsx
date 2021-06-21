@@ -25,7 +25,7 @@ export function TimelineTooltipContent({
   const isTouch = useIsTouchDevice();
   const date = Array.isArray(value.date)
     ? value.date.map((x) => intl.formatDateFromSeconds(x, 'medium')).join(' - ')
-    : intl.formatDateFromSeconds(value.date);
+    : intl.formatDateFromSeconds(value.date, 'medium');
 
   return (
     <Box color="black" px={18} py={15} spacing={3}>

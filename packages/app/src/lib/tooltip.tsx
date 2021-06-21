@@ -5,70 +5,14 @@ import 'tippy.js/themes/light.css';
 
 let handleMount: undefined | ((tippyInstance: Instance) => void);
 
-type TooltipProps =
-  /**
-   * props for regular tooltips without singleton construction
-   */
-  | ({
-      singletonTarget?: undefined;
-      singletonSource?: undefined;
-    } & TippyProps)
-
-  /**
-   * props for the singleton tooltip target component
-   */
-  | {
-      singletonTarget: ReturnType<typeof useSingleton>[number];
-      content?: TippyProps['content'];
-      children?: TippyProps['children'];
-    }
-
-  /**
-   * props for the singleton tooltip source component
-   */
-  | ({
-      singletonSource: ReturnType<typeof useSingleton>[number];
-    } & Omit<TippyProps, 'singleton' | 'children'>);
-
 /**
- * Currently we'll only support the `content` prop of the tippy tooltip, but a
- * lot more should be possible if necessary.
- *
  * Usage:
- *
  *     <WithTooltip content={<p>message</p>}><button>foo</button></WithTooltip>
  */
 
-export function WithTooltip(props: TooltipProps) {
-  if ('singletonTarget' in props && props.singletonTarget) {
-    return (
-      <Tippy singleton={props.singletonTarget} content={props.content}>
-        {props.children}
-      </Tippy>
-    );
-  }
-
-  const { singletonSource, content, ...tippyProps } = props;
-
-  if (singletonSource) {
-    return (
-      <Tippy
-        theme="light"
-        appendTo={getBody}
-        singleton={singletonSource}
-        {...tippyProps}
-      />
-    );
-  }
-
+export function WithTooltip(props: TippyProps) {
   return (
-    <Tippy
-      theme="light"
-      appendTo={getBody}
-      onMount={handleMount}
-      content={content}
-      {...tippyProps}
-    />
+    <Tippy theme="light" appendTo={getBody} onMount={handleMount} {...props} />
   );
 }
 

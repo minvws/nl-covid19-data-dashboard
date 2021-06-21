@@ -21,7 +21,12 @@ export function getTimelineEventRange(
     ? [midOfDayInSeconds(config.date[0]), midOfDayInSeconds(config.date[1])]
     : [midOfDayInSeconds(config.date), midOfDayInSeconds(config.date)];
 
-  const [annotationStart, annotationEnd] = Array.isArray(config.date)
+  /**
+   * The "highlight" is the area drawn over the chart when hovering an event.
+   * The start- and end-date are different to "wrap" bars of a day within the
+   * area.
+   */
+  const [highlightStart, highlightEnd] = Array.isArray(config.date)
     ? [startOfDayInSeconds(config.date[0]), endOfDayInSeconds(config.date[1])]
     : [startOfDayInSeconds(config.date), endOfDayInSeconds(config.date)];
 
@@ -30,10 +35,9 @@ export function getTimelineEventRange(
       start: Math.max(start, min),
       end: Math.min(end, max),
     },
-    // @TODO rename to highlight
-    annotation: {
-      start: Math.max(annotationStart, min),
-      end: Math.min(annotationEnd, max),
+    highlight: {
+      start: Math.max(highlightStart, min),
+      end: Math.min(highlightEnd, max),
     },
   };
 }
@@ -60,8 +64,8 @@ export function useTimelineEventsState(
   );
 
   /**
-   * It is possible the index is not part of the new values range,
-   * therefore reset the index when the values change.
+   * It is possible the index is not part of the new xScale-range,
+   * therefore we'll just reset the index when the xScale changes.
    */
   useEffect(() => _setIndex(undefined), [xScale]);
 

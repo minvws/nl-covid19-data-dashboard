@@ -20,8 +20,8 @@ export function TimelineEventAnnotation({
 }) {
   const eventRange = config && getTimelineEventRange(config, domain);
 
-  const x0 = getX({ __date_unix: eventRange?.annotation.start ?? 0 });
-  const x1 = getX({ __date_unix: eventRange?.annotation.end ?? 0 });
+  const x0 = getX({ __date_unix: eventRange?.highlight.start ?? 0 });
+  const x1 = getX({ __date_unix: eventRange?.highlight.end ?? 0 });
 
   const width = x1 - x0;
 
