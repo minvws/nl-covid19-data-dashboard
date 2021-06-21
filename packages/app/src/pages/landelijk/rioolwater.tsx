@@ -167,6 +167,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 description: text.linechart_description,
                 splitLabels: siteText.rioolwater_metingen.split_labels,
                 averagesDataLabel: siteText.common.weekgemiddelde,
+                valueAnnotation: siteText.waarde_annotaties.riool_normalized,
               }}
             />
           ) : (

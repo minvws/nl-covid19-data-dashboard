@@ -1,16 +1,16 @@
 import {
-  assert,
   MunicipalSewer,
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
-import { set } from 'lodash';
+import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
-import { Box } from '../base';
-import { ChartTile } from '../chart-tile';
+import { LocationTooltip } from './components/location-tooltip';
+import { mergeData } from './new-logic';
 
 export function NewSewerChart({
   dataAverages,
@@ -28,13 +28,13 @@ export function NewSewerChart({
     };
     selectPlaceholder?: string;
     splitLabels: {
-      waarde_0_200: string;
-      waarde_200_400: string;
-      waarde_400_600: string;
-      waarde_600_800: string;
-      waarde_800_plus: string;
+      segment_0: string;
+      segment_1: string;
+      segment_2: string;
+      segment_3: string;
     };
     averagesDataLabel: string;
+    valueAnnotation: string;
   };
 }) {
   const {
@@ -60,29 +60,24 @@ export function NewSewerChart({
 
   const averageSplitPoints = [
     {
-      value: 200,
+      value: 10,
       color: colors.data.scale.blue[0],
-      label: text.splitLabels.waarde_0_200,
+      label: text.splitLabels.segment_0,
     },
     {
-      value: 400,
+      value: 50,
       color: colors.data.scale.blue[1],
-      label: text.splitLabels.waarde_200_400,
+      label: text.splitLabels.segment_1,
     },
     {
-      value: 600,
+      value: 100,
       color: colors.data.scale.blue[2],
-      label: text.splitLabels.waarde_400_600,
-    },
-    {
-      value: 800,
-      color: colors.data.scale.blue[3],
-      label: text.splitLabels.waarde_600_800,
+      label: text.splitLabels.segment_2,
     },
     {
       value: Infinity,
-      color: colors.data.scale.blue[4],
-      label: text.splitLabels.waarde_800_plus,
+      color: colors.data.scale.blue[3],
+      label: text.splitLabels.segment_3,
     },
   ];
 
@@ -135,14 +130,16 @@ export function NewSewerChart({
                     metricProperty: 'average',
                     label: text.averagesDataLabel,
                     splitPoints: averageSplitPoints,
+                    isNonInteractive: true,
                   },
                 ]}
+                formatTooltip={(data) => <LocationTooltip data={data} />}
+                dataOptions={{ valueAnnotation: text.valueAnnotation }}
               />
             ) : (
               <TimeSeriesChart
                 values={dataAverages.values}
                 timeframe={timeframe}
-                markNearestPointOnly
                 seriesConfig={[
                   {
                     type: 'split-area',
@@ -151,6 +148,7 @@ export function NewSewerChart({
                     splitPoints: averageSplitPoints,
                   },
                 ]}
+                dataOptions={{ valueAnnotation: text.valueAnnotation }}
               />
             )
           }
@@ -158,77 +156,4 @@ export function NewSewerChart({
       )}
     </ChartTile>
   );
-}
-
-function mergeData(
-  dataAverages: RegionalSewer | MunicipalSewer,
-  dataPerInstallation: SewerPerInstallationData,
-  selectedInstallation: string
-) {
-  const valuesForInstallation = dataPerInstallation.values.find(
-    (x) => x.rwzi_awzi_name === selectedInstallation
-  )?.values;
-
-  assert(
-    valuesForInstallation,
-    `Failed to find data for rwzi_awzi_name ${selectedInstallation}`
-  );
-
-  type MergedValue = {
-    average: number | null;
-    selected_installation_rna_normalized: number | null;
-  };
-
-  type MergedValuesByTimestamp = Record<number, MergedValue>;
-
-  const mergedValuesByTimestamp =
-    valuesForInstallation.reduce<MergedValuesByTimestamp>(
-      (acc, v) =>
-        set(acc, v.date_unix, {
-          selected_installation_rna_normalized: v.rna_normalized,
-          average: null,
-        }),
-      {}
-    );
-
-  for (const value of dataAverages.values) {
-    /**
-     * For averages pick the date in the middle of the week, because that's how
-     * the values are displayed when just viewing averages, but for this merged
-     * set we'll need to use day timestamps.
-     */
-    const date_unix =
-      value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
-
-    const existingValue = mergedValuesByTimestamp[date_unix] as
-      | MergedValue
-      | undefined;
-
-    /**
-     * If we happen to fall exactly on an existing installation timestamp we
-     * want to combine the two property values.
-     */
-    if (existingValue) {
-      mergedValuesByTimestamp[date_unix] = {
-        average: value.average,
-        selected_installation_rna_normalized:
-          existingValue.selected_installation_rna_normalized,
-      };
-    } else {
-      mergedValuesByTimestamp[date_unix] = {
-        average: value.average,
-        selected_installation_rna_normalized: null,
-      };
-    }
-  }
-
-  /**
-   * Convert the map to a series of sorted timestamped values.
-   */
-  return Object.entries(mergedValuesByTimestamp)
-    .map(([date_unix, obj]) => ({
-      date_unix: Number(date_unix),
-      ...obj,
-    }))
-    .sort((a, b) => a.date_unix - b.date_unix);
 }
