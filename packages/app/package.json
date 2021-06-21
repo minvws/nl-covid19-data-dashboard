@@ -151,7 +151,5 @@
     "generate-sitemap_x": "yarn exec-ts src/scripts/generate-sitemap.ts",
     "generate-sitemap": "ts-node src/scripts/generate-sitemap.ts"
   },
-  "browserslist": [
-    "defaults"
-  ]
+  "browserslist": "last 2 years"
 }
