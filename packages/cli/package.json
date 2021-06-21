@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@corona-dashboard/common": "1",
-    "ajv": "^8.6.0",
+    "ajv": "^6",
     "chalk": "^4.1.0",
     "dotenv": "^10.0.0",
     "flat": "^5.0.2",
