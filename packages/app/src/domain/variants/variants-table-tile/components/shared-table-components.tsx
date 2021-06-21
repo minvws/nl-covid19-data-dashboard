@@ -14,6 +14,7 @@ export const HeaderCell = styled.th(
     fontWeight: 'normal',
     borderBottom: '1px solid',
     borderBottomColor: 'lightGray',
+    verticalAlign: 'top',
   })
 );
 
@@ -29,5 +30,6 @@ export const Cell = styled.td<{
     maxWidth: x.compact ? '2rem' : undefined,
     borderBottom: x.border ? '1px solid' : undefined,
     borderBottomColor: x.border ? 'lightGray' : undefined,
+    verticalAlign: 'top',
   })
 );

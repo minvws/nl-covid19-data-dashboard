@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Gelijk from '~/assets/gelijk.svg';
 import PijlOmhoog from '~/assets/pijl-omhoog.svg';
 import PijlOmlaag from '~/assets/pijl-omlaag.svg';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
@@ -23,7 +24,8 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmhoog />
-        {formatPercentage(value.difference, options)}% {diffText.meer}
+        <InlineText>{formatPercentage(value.difference, options)}% </InlineText>
+        <InlineText>{diffText.meer}</InlineText>
       </Difference>
     );
   }
@@ -31,7 +33,10 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmlaag />
-        {formatPercentage(-value.difference, options)}% {diffText.minder}
+        <InlineText>
+          {formatPercentage(-value.difference, options)}%{' '}
+        </InlineText>
+        <InlineText>{diffText.minder}</InlineText>
       </Difference>
     );
   }
@@ -43,11 +48,8 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   );
 }
 
-const Difference = styled.span<{ color: string }>((x) =>
+const Difference = styled.div<{ color: string }>((x) =>
   css({
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
-
     svg: {
       color: x.color,
       mr: 1,
