@@ -3,16 +3,14 @@ import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { memo, useCallback, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { wrapAroundLength } from '~/utils/number';
-import { Bounds, Padding, TimelineEventConfig } from '../../logic';
-import { TimelineEvent } from './components/event';
-import { TimelineBar } from './components/bar';
-import { TimelineTooltipContent } from './components/tooltip-content';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
-import { isVisibleEvent } from './logic';
+import { Bounds, Padding, TimelineEventConfig } from '../../logic';
+import { TimelineBar } from './components/bar';
+import { TimelineEvent } from './components/event';
+import { TimelineTooltipContent } from './components/tooltip-content';
 
 interface TimelineProps {
-  annotations: TimelineEventConfig[];
+  events: TimelineEventConfig[];
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
   bounds: Bounds;
   padding: Padding;
@@ -23,7 +21,7 @@ interface TimelineProps {
 }
 
 export const Timeline = memo(function Timeline({
-  annotations,
+  events,
   xScale,
   padding,
   highlightIndex,
@@ -34,18 +32,9 @@ export const Timeline = memo(function Timeline({
   const isTouch = useIsTouchDevice();
   const [, end] = xScale.domain();
   const width = xScale(end) ?? 0;
-  const visibleAnnotations = annotations.filter((x) =>
-    isVisibleEvent(x, xScale.domain())
-  );
 
   const indexRef = useRef(index);
   indexRef.current = index;
-
-  const showTooltip = useCallback(
-    (index: number) =>
-      setIndex(wrapAroundLength(index, visibleAnnotations.length)),
-    [visibleAnnotations.length, setIndex]
-  );
 
   const hideTooltip = useCallback(
     (index: number) => indexRef.current === index && setIndex(undefined),
@@ -62,22 +51,22 @@ export const Timeline = memo(function Timeline({
       key={isTouch ? 1 : 0}
     >
       <TimelineBar width={width} height={size + 2}>
-        {visibleAnnotations.map((x, i) => (
+        {events.map((x, i) => (
           <TimelineEvent
             key={x.date.toString()}
             size={size}
             config={x}
             xScale={xScale}
             index={i}
-            onShow={showTooltip}
+            onShow={setIndex}
             onHide={hideTooltip}
             isSelected={i === index}
             isHighlighted={isDefined(highlightIndex) && i === highlightIndex}
             tooltipContent={
               <TimelineTooltipContent
                 value={x}
-                onNext={() => showTooltip(i + 1)}
-                onPrev={() => showTooltip(i - 1)}
+                onNext={() => setIndex(i + 1)}
+                onPrev={() => setIndex(i - 1)}
                 onClose={() => hideTooltip(i)}
               />
             }

@@ -2,11 +2,12 @@ import {
   endOfDayInSeconds,
   midOfDayInSeconds,
   startOfDayInSeconds,
-  TimestampedValue,
 } from '@corona-dashboard/common';
-import { last } from 'lodash';
-import { first } from 'lodash';
-import { useEffect, useState } from 'react';
+import { ScaleLinear } from 'd3-scale';
+import { first, last } from 'lodash';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { isDefined } from 'ts-is-present';
+import { wrapAroundLength } from '~/utils/number';
 import { TimelineEventConfig } from '../../logic';
 
 export function getTimelineEventRange(
@@ -48,16 +49,32 @@ export function isVisibleEvent(config: TimelineEventConfig, domain: number[]) {
   return min <= end && start <= max;
 }
 
-export function useTimelineEventIndex<T extends TimestampedValue>(values: T[]) {
-  const [timelineEventIndex, setTimelineEventIndex] = useState<
-    number | undefined
-  >(undefined);
+export function useTimelineEventsState(
+  allEvents: TimelineEventConfig[] | undefined,
+  xScale: ScaleLinear<number, number>
+) {
+  const [index, _setIndex] = useState<number | undefined>(undefined);
+  const events = useMemo(
+    () => allEvents?.filter((x) => isVisibleEvent(x, xScale.domain())) || [],
+    [allEvents, xScale]
+  );
 
   /**
    * It is possible the index is not part of the new values range,
    * therefore reset the index when the values change.
    */
-  useEffect(() => setTimelineEventIndex(undefined), [values]);
+  useEffect(() => _setIndex(undefined), [xScale]);
 
-  return [timelineEventIndex, setTimelineEventIndex] as const;
+  const setIndex = useCallback(
+    (index: number | undefined) =>
+      _setIndex(
+        isDefined(index) ? wrapAroundLength(index, events.length) : undefined
+      ),
+    [events.length]
+  );
+
+  return useMemo(
+    () => ({ index, setIndex, events }),
+    [index, setIndex, events]
+  );
 }
