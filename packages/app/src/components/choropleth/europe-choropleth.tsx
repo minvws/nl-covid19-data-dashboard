@@ -3,6 +3,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
+import { InternationalListType } from '~/domain/internationaal/logic/add-country-name-to-choropleth-data';
 import { colors } from '~/style/theme';
 import { Choropleth } from './choropleth';
 import { useIntlChoroplethColorScale } from './hooks';
@@ -57,7 +58,7 @@ const focusEurope: EuropeGeoJSON = {
   ),
 };
 
-type EuropeChoroplethProps<T extends Record<string, unknown>> = {
+type EuropeChoroplethProps<T extends InternationalListType> = {
   data: T[];
   metricProperty: KeysOfType<T, number, true>;
   joinProperty: KeysOfType<T, string, true>;
@@ -66,7 +67,7 @@ type EuropeChoroplethProps<T extends Record<string, unknown>> = {
   getLink: (code: string) => string;
 };
 
-export function EuropeChoropleth<T extends Record<string, unknown>>(
+export function EuropeChoropleth<T extends InternationalListType>(
   props: EuropeChoroplethProps<T>
 ) {
   const { data, joinProperty, metricProperty, tooltipContent } = props;
@@ -89,8 +90,9 @@ export function EuropeChoropleth<T extends Record<string, unknown>>(
       const { ISO_A3 } = feature.properties;
       const key = `${ISO_A3}_${index}`;
       const item = getJoinedItem(ISO_A3);
+      const itemValue = item?.[metricProperty];
 
-      return !isDefined(item) ? (
+      return !isDefined(itemValue) ? (
         <Path
           key={key}
           pathData={path}
@@ -101,7 +103,7 @@ export function EuropeChoropleth<T extends Record<string, unknown>>(
         <Path
           key={key}
           pathData={path}
-          fill={getFillColor(item[metricProperty])}
+          fill={getFillColor(itemValue)}
           stroke={'white'}
           strokeWidth={0.5}
         />

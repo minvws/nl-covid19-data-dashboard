@@ -81,11 +81,11 @@ type TProps<T1, T3, T4> = {
  * @param props
  */
 
-export function Choropleth<T1, T3>({
+export function Choropleth<T1, T2, T3>({
   getTooltipContent,
   tooltipPlacement,
   ...props
-}: TProps<T1, T3>) {
+}: TProps<T1, T2, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
 
@@ -119,15 +119,15 @@ export function Choropleth<T1, T3>({
 
 type FitSize = [[number, number], any];
 
-type ChoroplethMapProps<T1, T3> = Omit<
-  TProps<T1, T3>,
+type ChoroplethMapProps<T1, T2, T3> = Omit<
+  TProps<T1, T2, T3>,
   'getTooltipContent' | 'tooltipPlacement'
 > & {
   setTooltip: (tooltip: TooltipSettings | undefined) => void;
 };
 
-const ChoroplethMap: <T1, T3>(
-  props: ChoroplethMapProps<T1, T3> & {
+const ChoroplethMap: <T1, T2, T3>(
+  props: ChoroplethMapProps<T1, T2, T3> & {
     hoverRef: React.RefObject<SVGGElement>;
   }
 ) => JSX.Element | null = memo((props) => {

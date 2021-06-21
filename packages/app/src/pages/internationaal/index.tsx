@@ -20,12 +20,21 @@ type TestData = {
   infected_per_100k: number;
   date_of_insertion_unix: number;
 };
+
+type TestData2 = {
+  date_unix: number;
+  cncode: string;
+  infected_per_200k: number;
+  date_of_insertion_unix: number;
+};
+
 export interface International {
   last_generated: string;
   proto_name: 'INTL_COLLECTION';
   name: string;
   code: string;
   tested_overall: TestData[];
+  tested_overall2: TestData2[];
 }
 
 export const getStaticProps = createGetStaticProps(

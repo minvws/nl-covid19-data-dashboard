@@ -2,9 +2,15 @@ import { assert, KeysOfType, PickByType } from '@corona-dashboard/common';
 import { International } from '~/pages/internationaal';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 
-type InternationalLists = PickByType<International, unknown[]>;
-type Lists = keyof InternationalLists;
-type ListType = InternationalLists[Lists][number];
+export type UnionToIntersection<U> = (
+  U extends any ? (k: U) => void : never
+) extends (k: infer I) => void
+  ? I
+  : never;
+export type InternationalLists = PickByType<International, unknown[]>;
+export type InternationalListKey = keyof InternationalLists;
+export type InternationalListType =
+  InternationalLists[InternationalListKey][number];
 
 type LocaleCode = 'nl' | 'en';
 
@@ -25,10 +31,10 @@ function findCountryName(iso: string, locale: LocaleCode) {
   return item[locale];
 }
 
-export function addCountryNameToChoroplethData(
-  values: ListType[],
-  joinProperty: KeysOfType<ListType, string, true>
-): (ListType & { countryName: string })[] {
+export function addCountryNameToChoroplethData<T extends InternationalListType>(
+  values: T[],
+  joinProperty: KeysOfType<T, string, true>
+): (T & { countryName: string })[] {
   const locale: LocaleCode =
     (process.env.NEXT_PUBLIC_LOCALE as LocaleCode) ?? 'nl';
 

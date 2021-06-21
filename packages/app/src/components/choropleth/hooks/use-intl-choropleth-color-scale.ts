@@ -1,20 +1,15 @@
-import {
-  assert,
-  ChoroplethThresholdsValue,
-  KeysOfType,
-} from '@corona-dashboard/common';
+import { assert, KeysOfType } from '@corona-dashboard/common';
 import { scaleThreshold } from '@visx/scale';
 import { useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
+import { InternationalListType } from '~/domain/internationaal/logic/add-country-name-to-choropleth-data';
 import { internationalThresholds } from '../international-thresholds';
 
-export function useIntlChoroplethColorScale<T extends Record<string, unknown>>(
+export function useIntlChoroplethColorScale<T extends InternationalListType>(
   metricProperty: KeysOfType<T, number, true>,
   defaultColor = 'white'
 ) {
-  const thresholds = (
-    internationalThresholds as Record<string, ChoroplethThresholdsValue[]>
-  )[metricProperty as any];
+  const thresholds = (internationalThresholds as any)[metricProperty];
 
   const colorScale = useMemo(() => {
     assert(
