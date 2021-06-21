@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { css } from '@styled-system/css';
+import styled from 'styled-components';
 
 interface PercentageProps {
   percentage: number;
@@ -17,6 +17,7 @@ const Bar = styled.div<{ height?: number | string }>((x) =>
   css({
     backgroundColor: 'currentcolor',
     height: x.height ?? '0.8em',
+    minWidth: '2px',
   })
 );
 

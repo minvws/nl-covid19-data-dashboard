@@ -17,10 +17,15 @@ export const HeaderCell = styled.th(
   })
 );
 
-export const Cell = styled.td<{ compact?: boolean; border?: boolean }>((x) =>
+export const Cell = styled.td<{
+  compact?: boolean;
+  border?: boolean;
+  alignRight?: boolean;
+}>((x) =>
   css({
     p: 0,
     py: 2,
+    float: x.alignRight ? 'right' : undefined,
     maxWidth: x.compact ? '2rem' : undefined,
     borderBottom: x.border ? '1px solid' : undefined,
     borderBottomColor: x.border ? 'lightGray' : undefined,
