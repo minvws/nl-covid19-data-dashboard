@@ -1,11 +1,11 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
-import { isPresent } from 'ts-is-present';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
   CollapsibleList,
   ImageBlock,
   InlineAttachment,
+  InlineLink,
   RichContentImageBlock,
 } from '~/types/cms';
 import { assert } from '~/utils/assert';
@@ -13,7 +13,9 @@ import { Box } from '../base';
 import { CollapsibleSection } from '../collapsible';
 import { ErrorBoundary } from '../error-boundary';
 import { ContentImage } from './content-image';
-
+import { ExternalLink } from '~/components/external-link';
+import { Link } from '~/utils/link';
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
@@ -47,17 +49,22 @@ export function RichContent({
         />
       ),
       collapsible: (props: { node: CollapsibleList }) => {
-        return isPresent(props.node.content) ? (
-          <CollapsibleSection summary={props.node.title}>
-            <Box mt={3}>
-              <RichContent blocks={props.node.content} />
-            </Box>
-          </CollapsibleSection>
-        ) : null;
+        if (!props.node.content) return null;
+
+        return (
+          <ContentWrapper>
+            <CollapsibleSection summary={props.node.title}>
+              <Box mt={3}>
+                <RichContent blocks={props.node.content} />
+              </Box>
+            </CollapsibleSection>
+          </ContentWrapper>
+        );
       },
     },
     marks: {
       inlineAttachment: InlineAttachmentMark,
+      link: InlineLinkMark,
     },
   };
 
@@ -76,5 +83,19 @@ function InlineAttachmentMark(props: {
     <a download href={getFileSrc(props.mark.asset)}>
       {props.children}
     </a>
+  );
+}
+
+function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
+  const { mark, children } = props;
+
+  if (!mark.href) return null;
+
+  return isAbsoluteUrl(mark.href) ? (
+    <ExternalLink href={mark.href}>{children}</ExternalLink>
+  ) : (
+    <Link href={mark.href} passHref>
+      <a>{children}</a>
+    </Link>
   );
 }

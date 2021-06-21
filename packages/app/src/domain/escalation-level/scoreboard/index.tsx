@@ -1,26 +1,22 @@
-import { VrEscalationLevel } from '@corona-dashboard/common';
+import { useState, useMemo } from 'react';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
 import { SafetyRegionGroup } from './components/safety-region-group';
 import { SafetyRegionRow } from './components/safety-region-row';
-
-export type VrScoreboardData = {
-  data: VrEscalationLevel;
-  safetyRegionName: string;
-  vrCode: string;
-};
-
-export type ScoreboardRow = {
-  escalationLevel: EscalationLevel;
-  vrData: VrScoreboardData[];
-};
+import { Select } from '~/components/select';
+import css from '@styled-system/css';
+import styled from 'styled-components';
+import {
+  scoreboardSortOptions,
+  SortIdentifier,
+  ScoreboardRowData,
+} from './logic';
 
 interface ScoreboardProps {
-  rows: ScoreboardRow[];
+  rows: ScoreboardRowData[];
   maxHospitalAdmissionsPerMillion: number;
   maxPositiveTestedPer100k: number;
 }
@@ -30,6 +26,25 @@ export function Scoreboard({
   maxHospitalAdmissionsPerMillion,
   maxPositiveTestedPer100k,
 }: ScoreboardProps) {
+  const [sortOption, setSortOption] =
+    useState<SortIdentifier>('location_a_to_z');
+
+  const { siteText } = useIntl();
+
+  const sortOptions = useMemo(() => {
+    const scoreboardSortIdentifiers = Object.keys(
+      scoreboardSortOptions
+    ) as SortIdentifier[];
+
+    return scoreboardSortIdentifiers.map((id) => {
+      const label = siteText.over_risiconiveaus.scoreboard.sort_option[id];
+      return {
+        label,
+        value: id,
+      };
+    });
+  }, [siteText]);
+
   return (
     <Box
       borderBottomColor="lightGray"
@@ -44,22 +59,53 @@ export function Scoreboard({
         >
           <Box bg="tileGray">
             <Box px={{ _: '1.5rem', sm: 4 }}>
-              {row.escalationLevel !== null && <Headers />}
-              {row.vrData.map((vr, index) => (
-                <SafetyRegionRow
-                  vrData={vr}
-                  key={vr.vrCode}
-                  maxHospitalAdmissionsPerMillion={
-                    maxHospitalAdmissionsPerMillion
-                  }
-                  maxPositiveTestedPer100k={maxPositiveTestedPer100k}
-                  /**
-                   * The "onbekend" section has no <Header /> which would
-                   * result in a double border
-                   */
-                  hideBorder={row.escalationLevel === null && index === 0}
+              {row.escalationLevel !== null && (
+                <Box display="flex" justifyContent="row" py={3}>
+                  <SelectSortContainer
+                    display={{ _: 'none', lg: 'block' }}
+                    flex="0 0 18rem"
+                    pr={5}
+                  >
+                    <label>
+                      {siteText.over_risiconiveaus.scoreboard.sort_label}
+                    </label>
+                    <Select
+                      options={sortOptions}
+                      onChange={setSortOption}
+                      value={sortOption}
+                    />
+                  </SelectSortContainer>
+                  <Headers />
+                </Box>
+              )}
+
+              <SelectSortContainer display={{ _: 'block', lg: 'none' }} mb={3}>
+                <label>
+                  {siteText.over_risiconiveaus.scoreboard.sort_label}
+                </label>
+                <Select
+                  options={sortOptions}
+                  onChange={setSortOption}
+                  value={sortOption}
                 />
-              ))}
+              </SelectSortContainer>
+              {row.vrData
+                .sort(scoreboardSortOptions[sortOption])
+                .map((vr, index) => (
+                  <SafetyRegionRow
+                    vrData={vr}
+                    key={vr.vrCode}
+                    maxHospitalAdmissionsPerMillion={
+                      maxHospitalAdmissionsPerMillion
+                    }
+                    maxPositiveTestedPer100k={maxPositiveTestedPer100k}
+                    /**
+                     * The "onbekend" section has no <Header /> which would
+                     * result in a double border
+                     */
+                    hideBorder={row.escalationLevel === null && index === 0}
+                  />
+                ))}
             </Box>
           </Box>
         </SafetyRegionGroup>
@@ -68,17 +114,30 @@ export function Scoreboard({
   );
 }
 
+const SelectSortContainer = styled(Box)(
+  css({
+    label: {
+      fontSize: 1,
+    },
+    select: {
+      fontWeight: 'bold',
+      background: `url('/images/chevron-down-magenta.svg')`,
+      backgroundSize: '14px 14px',
+      backgroundRepeat: 'no-repeat, repeat',
+      backgroundPosition: 'right 0.5em top 60%, 0 0',
+    },
+    'select:focus': {
+      outlineColor: 'header',
+      color: 'header',
+    },
+  })
+);
+
 const Headers = () => {
   const { siteText } = useIntl();
 
   return (
-    <Box
-      display={{ sm: 'flex' }}
-      width="100%"
-      alignItems="center"
-      pl={{ lg: '18rem' }}
-      py={3}
-    >
+    <Box display={{ sm: 'flex' }} width="100%" alignItems="center">
       <Box flex="1" display="flex" flexDirection="column" mb={{ _: 2, sm: 0 }}>
         <Box display="flex" alignItems="center">
           <GetestIcon width="32px" height="32px" style={{ minWidth: '24px' }} />

@@ -33,12 +33,17 @@ export const features: Feature[] = [
   },
   {
     name: 'sewerSplitAreaChart',
-    isEnabled: false,
+    isEnabled: true,
   },
   {
     name: 'situationsPage',
     isEnabled: true,
     metricScopes: ['vr', 'vr_collection'],
     metricName: 'situations',
+  },
+  {
+    name: 'variantsPage',
+    isEnabled: true,
+    metricName: 'variants',
   },
 ];

@@ -177,6 +177,18 @@ export const colors = {
 
     multiseries,
 
+    variants: {
+      alpha: multiseries.cyan,
+      beta: multiseries.yellow,
+      gamma: multiseries.turquoise,
+      delta: multiseries.orange,
+      eta: multiseries.cyan_dark,
+      epsilon: multiseries.yellow_dark,
+      theta: multiseries.turquoise_dark,
+      kappa: multiseries.magenta,
+      other: '#808080',
+    },
+
     vaccines: {
       bio_n_tech_pfizer: multiseries.cyan,
       moderna: multiseries.yellow,
