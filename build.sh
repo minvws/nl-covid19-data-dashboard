@@ -26,7 +26,7 @@ yarn workspace @corona-dashboard/cli validate-last-values
 yarn workspace @corona-dashboard/cli validate-features
 
 # Prepare types and assets
-yarn workspace @corona-dashboard/cli generate-typescript
+yarn workspace @corona-dashboard/cli generate-data-types
 yarn workspace @corona-dashboard/cli generate-sitemap
 yarn workspace @corona-dashboard/cms sync-assets
 
