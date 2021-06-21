@@ -1,3 +1,4 @@
+import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { SiteText } from '~/locale';
 import {
@@ -43,10 +44,12 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
           <tr key={row.variant}>
             <VariantNameCell variant={row.variant} text={text} />
             <Cell>
-              <PercentageBarWithNumber
-                percentage={row.percentage}
-                color={row.color}
-              />
+              <Box maxWidth="20em">
+                <PercentageBarWithNumber
+                  percentage={row.percentage}
+                  color={row.color}
+                />
+              </Box>
             </Cell>
             <Cell>
               {row.difference && <VariantDifference value={row.difference} />}
