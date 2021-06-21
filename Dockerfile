@@ -44,9 +44,8 @@ RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
 && yarn workspace @corona-dashboard/cli validate-features --fail-early \
 && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$NEXT_PUBLIC_SANITY_DATASET \
-&& yarn workspace @corona-dashboard/app build
-
-RUN addgroup -g 1001 -S nodejs \
+&& yarn workspace @corona-dashboard/app build \
+&& addgroup -g 1001 -S nodejs \
 && adduser -S nextjs -u 1001 \
 && chown -R nextjs:nodejs /app/packages/app/.next
 
