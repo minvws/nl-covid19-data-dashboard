@@ -6,7 +6,6 @@
     "paths": {
       "~/*": ["src/*"]
     },
-    "moduleResolution": "node",
     "lib": ["dom", "esnext"],
     "types": ["cypress", "node"],
     "sourceMap": true,

@@ -2,15 +2,13 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "target": "es5",
     "allowJs": false,
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
     },
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "composite": true,
+    "outDir": "dist",
+    "rootDir": "src",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true

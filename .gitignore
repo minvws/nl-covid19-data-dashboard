@@ -21,4 +21,6 @@ exports
 /cypress/screenshots
 /cypress/videos
 
-.vercel
+*.tsbuildinfo
+dist
+
