@@ -5,6 +5,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
 import { BASE_SERIES_CONFIG } from '~/domain/variants/series.config';
+import { Variant } from '~/domain/variants/variants-table-tile/logic/use-variants-table-data';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -40,7 +41,10 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
         ...baseAgeGroup,
         type: 'line',
         shape: 'line',
-        label: baseAgeGroup.metricProperty,
+        label:
+          siteText.covid_varianten.varianten[
+            baseAgeGroup.metricProperty.split('_')[0] as Variant
+          ],
       };
     });
 
