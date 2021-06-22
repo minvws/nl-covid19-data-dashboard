@@ -105,14 +105,13 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: positiveTestedPeopleText.bronnen.rivm }}
             title={positiveTestedPeopleText.linechart_titel}
             description={positiveTestedPeopleText.linechart_description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_confirmed_cases_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -222,6 +221,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <SafetyRegionChoropleth
+              accessibility={{
+                key: 'nursing_home_infected_people_choropleth',
+              }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.verpleeghuiszorg}
               metricName="nursing_home"
@@ -237,13 +239,12 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={infectedLocationsText.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             description={infectedLocationsText.linechart_description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_infected_locations_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -297,13 +298,12 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={deceased.linechart_titel}
             timeframeOptions={['all', '5weeks']}
             description={deceased.linechart_description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_deceased_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[

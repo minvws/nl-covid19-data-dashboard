@@ -16,6 +16,11 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '~/utils/use-unique-id';
+import {
+  AccessibilityOptions,
+  useAccessibilityOptions,
+} from '~/utils/use-accessibility-options';
+import { VisuallyHidden } from '../visually-hidden';
 import { Path } from './path';
 import {
   ChoroplethTooltipPlacement,
@@ -30,6 +35,7 @@ export type TooltipSettings = {
 };
 
 type TProps<T1, T3> = {
+  accessibility: AccessibilityOptions;
   initialWidth?: number;
   minHeight?: number;
   // This is the main feature collection that displays the features that will
@@ -130,6 +136,7 @@ const ChoroplethMap: <T1, T3>(
   }
 ) => JSX.Element | null = memo((props) => {
   const {
+    accessibility,
     featureCollection,
     hovers,
     boundingBox,
@@ -137,7 +144,6 @@ const ChoroplethMap: <T1, T3>(
     renderHover,
     setTooltip,
     hoverRef,
-    description,
     renderHighlight,
     initialWidth = 850,
     minHeight = 500,
@@ -150,6 +156,9 @@ const ChoroplethMap: <T1, T3>(
     initialWidth,
     minHeight
   );
+
+  const { label, description, describedById } =
+    useAccessibilityOptions(accessibility);
 
   const width = responsive.width;
   const height = Math.min(responsive.height, width * ratio);
@@ -209,8 +218,12 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
+      <VisuallyHidden id={describedById}>{description}</VisuallyHidden>
       <ResponsiveContainer height={height}>
         <svg
+          role="img"
+          aria-label={label}
+          aria-describedby={describedById}
           width={width}
           viewBox={`0 0 ${width} ${height}`}
           css={css({ display: 'block', bg: 'transparent', width: '100%' })}

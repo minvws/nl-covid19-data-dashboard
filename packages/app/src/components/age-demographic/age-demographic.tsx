@@ -1,5 +1,6 @@
 import { Box } from '~/components/base';
 import { Tooltip, useTooltip } from '~/components/tooltip';
+import { AccessibilityOptions } from '~/utils/use-accessibility-options';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
@@ -13,9 +14,11 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   metricProperty,
   displayMaxPercentage,
   text,
+  accessibility,
 }: {
   data: { values: T[] };
   metricProperty: keyof T;
+  accessibility: AccessibilityOptions;
   displayMaxPercentage?: number;
   text: AgeDemographicChartText;
 }) {
@@ -26,20 +29,17 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
-  const {
-    openTooltip,
-    closeTooltip,
-    keyboardNavigateTooltip,
-    tooltipState,
-  } = useTooltip<T>({
-    values: coordinates.values,
-    getTooltipCoordinates: coordinates.getTooltipCoordinates,
-  });
+  const { openTooltip, closeTooltip, keyboardNavigateTooltip, tooltipState } =
+    useTooltip<T>({
+      values: coordinates.values,
+      getTooltipCoordinates: coordinates.getTooltipCoordinates,
+    });
 
   return (
     <Box position="relative">
       <div ref={ref}>
         <AgeDemographicChart
+          accessibility={accessibility}
           coordinates={coordinates}
           onMouseMoveBar={openTooltip}
           onMouseLeaveBar={closeTooltip}

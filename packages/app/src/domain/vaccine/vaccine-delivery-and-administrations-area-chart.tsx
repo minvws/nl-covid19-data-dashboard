@@ -41,16 +41,15 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
     <ChartTile
       title={siteText.vaccinaties.grafiek.titel}
       description={siteText.vaccinaties.grafiek.omschrijving}
-      accessibility={{
-        description: 'Line chart with keyboard interaction, something',
-        features: ['keyboard_line_chart'],
-      }}
       metadata={{
         date: firstValue?.date_of_report_unix,
         source: siteText.vaccinaties.bronnen.rivm,
       }}
     >
       <TimeSeriesChart
+        accessibility={{
+          key: 'vaccine_delivery_and_administrations_area_chart',
+        }}
         dataOptions={{
           valueAnnotation: siteText.waarde_annotaties.x_miljoen,
           timespanAnnotations: [

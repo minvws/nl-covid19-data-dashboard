@@ -153,10 +153,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             metadata={{ source: text.bronnen.rivm }}
             timeframeOptions={['all', '5weeks']}
             description={text.linechart_description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
           >
             {(timeframe) => (
               <SewerChart

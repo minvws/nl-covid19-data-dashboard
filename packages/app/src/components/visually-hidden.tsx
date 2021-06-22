@@ -8,11 +8,13 @@ import { ReactNode } from 'react';
 
 interface VisuallyHiddenProps {
   children: ReactNode;
+  id?: string;
 }
 
-export function VisuallyHidden({ children }: VisuallyHiddenProps) {
+export function VisuallyHidden({ children, id }: VisuallyHiddenProps) {
   return (
     <div
+      id={id}
       css={css({
         position: 'absolute',
         overflow: 'hidden',

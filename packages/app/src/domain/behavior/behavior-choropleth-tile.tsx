@@ -67,6 +67,9 @@ export function BehaviorChoroplethTile({
       }}
     >
       <SafetyRegionChoropleth
+        accessibility={{
+          key: 'behavior_choropleth',
+        }}
         getLink={reverseRouter.vr.gedrag}
         data={data}
         metricName="behavior"

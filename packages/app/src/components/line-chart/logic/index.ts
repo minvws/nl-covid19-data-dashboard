@@ -6,8 +6,6 @@ import {
 import { isPresent } from 'ts-is-present';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
-export * from './background-rectangle';
-
 // This type limits the allowed property names to those with a number type,
 // so its like keyof T, but filtered down to only the appropriate properties.
 export type NumberProperty<T extends TimestampedValue> = {
@@ -67,7 +65,7 @@ export function getTrendData<T extends TimestampedValue>(
 
   const trendData = metricProperties.map(
     (metricProperty) =>
-      (getSingleTrendData(series, metricProperty) as unknown) as (TrendValue &
+      getSingleTrendData(series, metricProperty) as unknown as (TrendValue &
         TimestampedValue)[]
   );
 

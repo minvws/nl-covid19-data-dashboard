@@ -132,6 +132,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               flex={0}
             >
               <SafetyRegionChoropleth
+                accessibility={{ key: 'escalation_levels_choropleth' }}
                 minHeight={200}
                 data={choropleth.vr}
                 metricName="escalation_levels"

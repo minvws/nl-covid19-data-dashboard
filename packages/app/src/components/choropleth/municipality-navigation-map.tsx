@@ -56,15 +56,12 @@ export function MunicipalityNavigationMap<T>(
     );
   };
 
-  const {
-    isTabInteractive,
-    tabInteractiveButton,
-    anchorEventHandlers,
-  } = useTabInteractiveButton(
-    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-      subject: siteText.choropleth.gm.plural,
-    })
-  );
+  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
+    useTabInteractiveButton(
+      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+        subject: siteText.choropleth.gm.plural,
+      })
+    );
 
   const renderHover = (
     feature: Feature<MultiPolygon, MunicipalityProperties>,
@@ -99,6 +96,7 @@ export function MunicipalityNavigationMap<T>(
     <div css={css({ bg: 'transparent', position: 'relative', width: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
+        accessibility={{ key: 'municipality_navigation_map' }}
         featureCollection={municipalGeo}
         hovers={municipalGeo}
         boundingBox={countryGeo}

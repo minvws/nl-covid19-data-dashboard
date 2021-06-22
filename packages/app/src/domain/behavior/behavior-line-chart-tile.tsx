@@ -61,14 +61,7 @@ export function BehaviorLineChartTile({
     .filter(isPresent);
 
   return (
-    <ChartTile
-      title={title}
-      metadata={{}}
-      accessibility={{
-        key: 'behavior_line_chart',
-        features: ['keyboard_line_chart'],
-      }}
-    >
+    <ChartTile title={title} metadata={{}}>
       <Box display="flex" justifyContent="start" mb={3}>
         <BehaviorTypeControl value={type} onChange={setType} />
       </Box>
@@ -96,6 +89,9 @@ export function BehaviorLineChartTile({
       <Spacer mb={3} />
 
       <TimeSeriesChart
+        accessibility={{
+          key: 'behavior_line_chart',
+        }}
         tooltipTitle={
           type === 'compliance'
             ? siteText.gedrag_common.compliance

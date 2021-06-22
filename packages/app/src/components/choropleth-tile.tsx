@@ -10,14 +10,9 @@ import {
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
-import {
-  AccessibilityDescription,
-  AccessibilityOptions,
-} from '~/components/accessibility-description';
 
 type ChoroplethTileProps = DataProps & {
   title: string;
-  accessibility: AccessibilityOptions;
   description?: string | React.ReactNode;
   children: React.ReactNode;
   legend?: {
@@ -46,7 +41,6 @@ export function ChoroplethTile({
   children,
   metadata,
   valueAnnotation,
-  accessibility,
   ...dataProps
 }: ChoroplethTileProps) {
   const breakpoints = useBreakpoints(true);
@@ -105,11 +99,7 @@ export function ChoroplethTile({
           flexDirection="column"
           height="100%"
         >
-          <Box height="100%">
-            <AccessibilityDescription options={accessibility}>
-              {children}
-            </AccessibilityDescription>
-          </Box>
+          <Box height="100%">{children}</Box>
 
           {legendaComponent && !breakpoints.lg && (
             <Box display="flex" justifyContent="center">

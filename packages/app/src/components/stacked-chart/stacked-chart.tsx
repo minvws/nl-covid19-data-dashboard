@@ -33,6 +33,11 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
+  AccessibilityOptions,
+  useAccessibilityOptions,
+} from '~/utils/use-accessibility-options';
+import { VisuallyHidden } from '../visually-hidden';
+import {
   calculateSeriesMaximum,
   getSeriesData,
   getTotalSumForMetricProperty,
@@ -98,6 +103,7 @@ export type Config<T extends TimestampedValue> = {
 };
 
 export type StackedChartProps<T extends TimestampedValue> = {
+  accessibility: AccessibilityOptions;
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -124,6 +130,7 @@ export function StackedChart<T extends TimestampedValue>(
    * same name.
    */
   const {
+    accessibility,
     values,
     config,
     initialWidth = 840,
@@ -153,6 +160,9 @@ export function StackedChart<T extends TimestampedValue>(
     formatDateSpan,
   } = useIntl();
 
+  const { label, description, describedById } =
+    useAccessibilityOptions(accessibility);
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -181,9 +191,10 @@ export function StackedChart<T extends TimestampedValue>(
     [isExtraSmallScreen, yAxisWidth]
   );
 
-  const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
-    config,
-  ]);
+  const metricProperties = useMemo(
+    () => config.map((x) => x.metricProperty),
+    [config]
+  );
 
   const today = useCurrentDate();
 
@@ -219,7 +230,7 @@ export function StackedChart<T extends TimestampedValue>(
    * like is_estimate to trigger the hatched pattern in all charts.
    */
   const hatchedFromIndex = valuesInTimeframe.findIndex(
-    (v) => ((v as unknown) as { is_estimate?: boolean }).is_estimate === true
+    (v) => (v as unknown as { is_estimate?: boolean }).is_estimate === true
   );
 
   /**
@@ -323,7 +334,7 @@ export function StackedChart<T extends TimestampedValue>(
             acc,
             x.metricProperty,
             getTotalSumForMetricProperty(
-              (series as unknown) as Record<string, number>[],
+              series as unknown as Record<string, number>[],
               x.metricProperty as string
             )
           ),
@@ -485,11 +496,14 @@ export function StackedChart<T extends TimestampedValue>(
       <Box height="100%">
         <ResponsiveContainer>
           <Box position="relative">
+            <VisuallyHidden id={describedById}>{description}</VisuallyHidden>
             <svg
               width={width}
               viewBox={`0 0 ${width} ${height}`}
               css={css({ width: '100%' })}
               role="img"
+              aria-label={label}
+              aria-describedby={describedById}
             >
               <HatchedPattern />
 

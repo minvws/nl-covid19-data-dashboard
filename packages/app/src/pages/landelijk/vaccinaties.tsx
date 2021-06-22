@@ -161,10 +161,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.grafiek_draagvlak.titel}
             description={text.grafiek_draagvlak.omschrijving}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             metadata={{
               datumsText: siteText.vaccinaties.grafiek_draagvlak.metadata_tekst,
               date: [
@@ -184,6 +180,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </section>
 
             <TimeSeriesChart
+              accessibility={{
+                key: 'vaccines_support_over_time_chart',
+              }}
               tooltipTitle={text.grafiek_draagvlak.titel}
               values={data.vaccine_vaccinated_or_support.values}
               numGridLines={20}

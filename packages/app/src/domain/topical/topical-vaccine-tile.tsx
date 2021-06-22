@@ -9,7 +9,7 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { AccessibilityDescription } from '~/components/accessibility-description';
+
 interface TopicalVaccineProps {
   data: NlVaccineAdministeredTotal;
 }
@@ -60,14 +60,11 @@ export function TopicalVaccineTile({ data }: TopicalVaccineProps) {
         {text.sub_title}
       </Text>
 
-      <AccessibilityDescription
-        options={{ key: 'topical_vaccine_administrations_over_time' }}
-      >
-        <VaccineAdministrationsOverTimeChart
-          title={text.title}
-          values={data.values}
-        />
-      </AccessibilityDescription>
+      <VaccineAdministrationsOverTimeChart
+        accessibility={{ key: 'topical_vaccine_administrations_over_time' }}
+        title={text.title}
+        values={data.values}
+      />
     </Box>
   );
 }

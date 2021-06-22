@@ -182,10 +182,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             metadata={{
               source: text.bronnen.rivm,
             }}
@@ -194,6 +190,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             {(timeframe) =>
               featureInfectionsMovingAverage.isEnabled ? (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_infected_over_time_chart',
+                  }}
                   values={data.tested_overall.values}
                   timeframe={timeframe}
                   seriesConfig={[
@@ -228,6 +227,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 />
               ) : (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_infected_over_time_chart',
+                  }}
                   values={data.tested_overall.values}
                   timeframe={timeframe}
                   seriesConfig={[
@@ -272,6 +274,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <MunicipalityChoropleth
+              accessibility={{
+                key: 'confirmed_cases_infected_people_choropleth',
+              }}
               selectedCode={selectedMunicipalCode}
               highlightSelection={false}
               data={choropleth.gm}
@@ -359,10 +364,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
             description={ggdText.linechart_percentage_toelichting}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             metadata={{
               source: ggdText.bronnen.rivm,
             }}
@@ -370,6 +371,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             {(timeframe) =>
               featureInfectionsMovingAverage.isEnabled ? (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_infected_percentage_over_time_chart',
+                  }}
                   timeframe={timeframe}
                   values={dataGgdDailyValues}
                   seriesConfig={[
@@ -394,6 +398,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 />
               ) : (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_infected_percentage_over_time_chart',
+                  }}
                   timeframe={timeframe}
                   values={dataGgdDailyValues}
                   seriesConfig={[
@@ -416,10 +423,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}
             description={ggdText.linechart_totaltests_toelichting}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             metadata={{
               source: ggdText.bronnen.rivm,
             }}
@@ -427,6 +430,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             {(timeframe) =>
               featureInfectionsMovingAverage.isEnabled ? (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_tested_total_over_time_chart',
+                  }}
                   timeframe={timeframe}
                   values={dataGgdDailyValues}
                   seriesConfig={[
@@ -480,6 +486,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 />
               ) : (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'confirmed_cases_tested_total_over_time_chart',
+                  }}
                   timeframe={timeframe}
                   values={dataGgdDailyValues}
                   seriesConfig={[

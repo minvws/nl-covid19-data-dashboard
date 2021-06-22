@@ -26,10 +26,6 @@ export function GNumberBarChartTile({
     <ChartTile
       title={text.title}
       description={text.description}
-      accessibility={{
-        description: 'Line chart with keyboard interaction, something',
-        features: ['keyboard_line_chart'],
-      }}
       timeframeInitialValue={timeframeInitialValue}
       metadata={{
         date: last_value.date_of_insertion_unix,
@@ -37,6 +33,9 @@ export function GNumberBarChartTile({
       }}
     >
       <VerticalBarChart
+        accessibility={{
+          key: 'g_number',
+        }}
         values={values}
         timeframe={timeframeInitialValue}
         numGridLines={3}

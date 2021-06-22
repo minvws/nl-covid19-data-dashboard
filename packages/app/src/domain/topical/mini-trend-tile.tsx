@@ -2,10 +2,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import {
-  AccessibilityDescription,
-  AccessibilityOptions,
-} from '~/components/accessibility-description';
+import { AccessibilityOptions } from '~/utils/use-accessibility-options';
 import { NumberProperty } from '~/components/line-chart/logic';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -73,24 +70,23 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
       <Box>{text}</Box>
 
-      <AccessibilityDescription options={accessibility}>
-        <TimeSeriesChart
-          initialWidth={400}
-          minHeight={sm ? 180 : 140}
-          timeframe="5weeks"
-          values={trendData}
-          displayTooltipValueOnly
-          numGridLines={2}
-          seriesConfig={[
-            {
-              metricProperty,
-              type: 'area',
-              label: title,
-              color: colors.data.primary,
-            },
-          ]}
-        />
-      </AccessibilityDescription>
+      <TimeSeriesChart
+        accessibility={accessibility}
+        initialWidth={400}
+        minHeight={sm ? 180 : 140}
+        timeframe="5weeks"
+        values={trendData}
+        displayTooltipValueOnly
+        numGridLines={2}
+        seriesConfig={[
+          {
+            metricProperty,
+            type: 'area',
+            label: title,
+            color: colors.data.primary,
+          },
+        ]}
+      />
     </Box>
   );
 }

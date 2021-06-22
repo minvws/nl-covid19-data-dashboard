@@ -10,6 +10,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { AccessibilityOptions } from '~/utils/use-accessibility-options';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -27,6 +28,7 @@ import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   data: Pick<Municipalities, K>;
+  accessibility: AccessibilityOptions;
   metricName: K;
   metricProperty: string;
   selectedCode?: string;
@@ -53,6 +55,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
   props: MunicipalityChoroplethProps<T, K>
 ) {
   const {
+    accessibility,
     data,
     selectedCode,
     metricName,
@@ -187,6 +190,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
+        accessibility={accessibility}
         description={dataDescription}
         featureCollection={municipalGeo}
         hovers={hasData ? municipalGeo : undefined}

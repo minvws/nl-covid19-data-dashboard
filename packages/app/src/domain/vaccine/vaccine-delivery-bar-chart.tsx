@@ -46,10 +46,6 @@ export function VaccineDeliveryBarChart({
   return (
     <ChartTile
       title={text.titel}
-      accessibility={{
-        description: 'Line chart with keyboard interaction, something',
-        features: ['keyboard_line_chart'],
-      }}
       metadata={{
         date: data.last_value.date_of_report_unix,
         source: intl.siteText.vaccinaties.bronnen.rivm,
@@ -67,6 +63,9 @@ export function VaccineDeliveryBarChart({
         />
       </Box>
       <StackedChart
+        accessibility={{
+          key: 'vaccine_delivery_bar_chart',
+        }}
         values={
           timeframe === 'all'
             ? data.values

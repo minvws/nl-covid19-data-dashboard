@@ -95,13 +95,12 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             metadata={{ source: text.bronnen.nivel }}
             description={text.linechart_description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'doctor_covid_symptoms_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={data.doctor.values}
                 seriesConfig={[

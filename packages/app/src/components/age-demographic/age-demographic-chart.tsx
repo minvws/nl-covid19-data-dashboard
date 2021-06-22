@@ -14,10 +14,16 @@ import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 import { useIntl } from '~/intl';
+import {
+  AccessibilityOptions,
+  useAccessibilityOptions,
+} from '~/utils/use-accessibility-options';
+import { VisuallyHidden } from '../visually-hidden';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
 interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
+  accessibility: AccessibilityOptions;
   coordinates: AgeDemographicCoordinates<T>;
   text: AgeDemographicChartText;
   onMouseMoveBar: (value: T, event: MouseEvent<SVGElement>) => void;
@@ -46,6 +52,7 @@ export const AgeDemographicChart = memo(
 ) as typeof AgeDemographicChartWithGenerics;
 
 function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
+  accessibility,
   coordinates,
   text,
   onKeyInput,
@@ -74,6 +81,9 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
   const { formatPercentage } = useIntl();
 
+  const { label, description, describedById } =
+    useAccessibilityOptions(accessibility);
+
   const hasClippedValue = !!values.find(
     (value) =>
       getIsClipped(value.age_group_percentage, displayMaxPercentage) ||
@@ -85,11 +95,13 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
   return (
     <Box>
+      <VisuallyHidden id={describedById}>{description}</VisuallyHidden>
       <svg
         width={width}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        id="age-demographic-chart"
+        aria-label={label}
+        aria-describedby={describedById}
         tabIndex={0}
         onKeyUp={(event) => onKeyInput(event)}
         css={css({

@@ -19,6 +19,7 @@ import {
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { AccessibilityOptions } from '~/utils/use-accessibility-options';
 import {
   BarHover,
   BarTrend,
@@ -44,6 +45,7 @@ export type VerticalBarChartProps<
   C extends SeriesConfig<T>
 > = {
   title?: string;
+  accessibility: AccessibilityOptions;
   values: T[];
   seriesConfig: C;
   initialWidth?: number;
@@ -62,6 +64,7 @@ export function VerticalBarChart<
   C extends SeriesConfig<T>
 >({
   values: allValues,
+  accessibility,
   seriesConfig,
   initialWidth = 840,
   minHeight = 250,
@@ -159,6 +162,7 @@ export function VerticalBarChart<
   return (
     <ResponsiveContainer>
       <ChartContainer
+        accessibility={accessibility}
         width={width}
         height={minHeight}
         padding={padding}

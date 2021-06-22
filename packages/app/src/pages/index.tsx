@@ -67,7 +67,6 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import GrafiekIcon from '~/assets/chart.svg';
 import { useEscalationColor } from '~/utils/use-escalation-color';
-import { AccessibilityDescription } from '~/components/accessibility-description';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -241,25 +240,24 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <AccessibilityDescription
-                    options={{ key: 'topical_escalation_levels_choropleth' }}
-                  >
-                    <SafetyRegionChoropleth
-                      data={choropleth.vr}
-                      getLink={reverseRouter.vr.risiconiveau}
-                      metricName="escalation_levels"
-                      metricProperty="level"
-                      noDataFillColor={unknownLevelColor}
-                      tooltipContent={(
-                        context: SafetyRegionProperties & EscalationLevels
-                      ) => (
-                        <EscalationRegionalTooltip
-                          context={context}
-                          getLink={reverseRouter.vr.risiconiveau}
-                        />
-                      )}
-                    />
-                  </AccessibilityDescription>
+                  <SafetyRegionChoropleth
+                    accessibility={{
+                      key: 'topical_escalation_levels_choropleth',
+                    }}
+                    data={choropleth.vr}
+                    getLink={reverseRouter.vr.risiconiveau}
+                    metricName="escalation_levels"
+                    metricProperty="level"
+                    noDataFillColor={unknownLevelColor}
+                    tooltipContent={(
+                      context: SafetyRegionProperties & EscalationLevels
+                    ) => (
+                      <EscalationRegionalTooltip
+                        context={context}
+                        getLink={reverseRouter.vr.risiconiveau}
+                      />
+                    )}
+                  />
                 </Box>
                 <Box>
                   {text.risiconiveaus.belangrijk_bericht &&
@@ -317,47 +315,41 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <>
                   {selectedMap === 'municipal' && (
-                    <AccessibilityDescription
-                      options={{
+                    <MunicipalityChoropleth
+                      accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
                       }}
-                    >
-                      <MunicipalityChoropleth
-                        data={choropleth.gm}
-                        metricName="tested_overall"
-                        metricProperty="infected_per_100k"
-                        getLink={reverseRouter.gm.positiefGetesteMensen}
-                        tooltipContent={(
-                          context: MunicipalityProperties &
-                            MunicipalitiesTestedOverall
-                        ) => (
-                          <PositiveTestedPeopleMunicipalTooltip
-                            context={context}
-                          />
-                        )}
-                      />
-                    </AccessibilityDescription>
+                      data={choropleth.gm}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      getLink={reverseRouter.gm.positiefGetesteMensen}
+                      tooltipContent={(
+                        context: MunicipalityProperties &
+                          MunicipalitiesTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleMunicipalTooltip
+                          context={context}
+                        />
+                      )}
+                    />
                   )}
                   {selectedMap === 'region' && (
-                    <AccessibilityDescription
-                      options={{
+                    <SafetyRegionChoropleth
+                      accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
                       }}
-                    >
-                      <SafetyRegionChoropleth
-                        data={choropleth.vr}
-                        getLink={reverseRouter.vr.positiefGetesteMensen}
-                        metricName="tested_overall"
-                        metricProperty="infected_per_100k"
-                        tooltipContent={(
-                          context: SafetyRegionProperties & RegionsTestedOverall
-                        ) => (
-                          <PositiveTestedPeopleRegionalTooltip
-                            context={context}
-                          />
-                        )}
-                      />
-                    </AccessibilityDescription>
+                      data={choropleth.vr}
+                      getLink={reverseRouter.vr.positiefGetesteMensen}
+                      metricName="tested_overall"
+                      metricProperty="infected_per_100k"
+                      tooltipContent={(
+                        context: SafetyRegionProperties & RegionsTestedOverall
+                      ) => (
+                        <PositiveTestedPeopleRegionalTooltip
+                          context={context}
+                        />
+                      )}
+                    />
                   )}
                 </>
                 <Box>

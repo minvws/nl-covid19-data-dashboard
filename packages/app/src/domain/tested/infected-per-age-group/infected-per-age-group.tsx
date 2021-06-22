@@ -1,4 +1,5 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import { AccessibilityOptions } from '~/utils/use-accessibility-options';
 import {
   InteractiveLegend,
   SelectOption,
@@ -15,6 +16,7 @@ import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
+  accessibility: AccessibilityOptions;
   values: NlTestedPerAgeGroupValue[];
   timeframe: 'all' | '5weeks';
 }
@@ -22,6 +24,7 @@ interface InfectedPerAgeGroup {
 export function InfectedPerAgeGroup({
   values,
   timeframe,
+  accessibility,
 }: InfectedPerAgeGroup) {
   const { siteText } = useIntl();
   const { list, toggle, clear } = useList<string>();
@@ -33,8 +36,8 @@ export function InfectedPerAgeGroup({
   const alwayEnabled = ['infected_overall_per_100k'];
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map(
-    (baseAgeGroup) => {
+  const seriesConfig: LineSeriesDefinition<NlTestedPerAgeGroupValue>[] =
+    BASE_SERIES_CONFIG.map((baseAgeGroup) => {
       return {
         ...baseAgeGroup,
         type: 'line',
@@ -44,8 +47,7 @@ export function InfectedPerAgeGroup({
             ? text.legend[baseAgeGroup.metricProperty]
             : baseAgeGroup.metricProperty,
       };
-    }
-  );
+    });
 
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
@@ -97,6 +99,7 @@ export function InfectedPerAgeGroup({
         onReset={clear}
       />
       <TimeSeriesChart
+        accessibility={accessibility}
         values={values}
         timeframe={timeframe}
         seriesConfig={chartConfig}

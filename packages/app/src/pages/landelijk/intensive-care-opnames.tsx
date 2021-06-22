@@ -44,7 +44,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.ic_opnames_per_dag;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const featureIntensiveCareMovingAverage = useFeature(
     'intensiveCareMovingAverage'
@@ -132,16 +131,15 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             metadata={{ source: text.bronnen.nice }}
             timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) =>
               featureIntensiveCareMovingAverage.isEnabled ? (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'intensive_care_admissions_over_time_chart',
+                  }}
                   values={dataIntake.values}
                   timeframe={timeframe}
                   dataOptions={{
@@ -179,6 +177,9 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 />
               ) : (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'intensive_care_admissions_over_time_chart',
+                  }}
                   values={dataIntake.values}
                   timeframe={timeframe}
                   dataOptions={{
@@ -211,15 +212,14 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={siteText.ic_admissions_per_age_group.chart_title}
             description={siteText.ic_admissions_per_age_group.chart_description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             timeframeOptions={['all', '5weeks']}
             metadata={{ source: text.bronnen.nice }}
           >
             {(timeframe) => (
               <AdmissionsPerAgeGroup
+                accessibility={{
+                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
+                }}
                 values={data.intensive_care_nice_per_age_group.values}
                 timeframe={timeframe}
               />
@@ -229,15 +229,14 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           <ChartTile
             title={text.chart_bedbezetting.title}
             description={text.chart_bedbezetting.description}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
             metadata={{ source: text.bronnen.lnaz }}
             timeframeOptions={['all', '5weeks']}
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'intensive_care_beds_occupied_over_time_chart',
+                }}
                 values={data.intensive_care_lcps.values}
                 timeframe={timeframe}
                 dataOptions={{

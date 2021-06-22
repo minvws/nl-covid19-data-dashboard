@@ -6,7 +6,6 @@ import css from '@styled-system/css';
 import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
 import { Box } from '~/components/base';
-import { AccessibilityDescription } from '~/components/accessibility-description';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
@@ -97,19 +96,18 @@ export function SituationsDataCoverageChoroplethTile({
           height="100%"
         >
           <Box height="100%">
-            <AccessibilityDescription
-              options={{ key: 'situations_has_sufficient_data_choropleth' }}
-            >
-              <SafetyRegionChoropleth
-                data={data}
-                getLink={reverseRouter.vr.brononderzoek}
-                metricName="situations"
-                metricProperty="has_sufficient_data"
-                tooltipContent={(
-                  context: SafetyRegionProperties & VrCollectionSituations
-                ) => <SituationsDataCoverageTooltip context={context} />}
-              />
-            </AccessibilityDescription>
+            <SafetyRegionChoropleth
+              accessibility={{
+                key: 'situations_has_sufficient_data_choropleth',
+              }}
+              data={data}
+              getLink={reverseRouter.vr.brononderzoek}
+              metricName="situations"
+              metricProperty="has_sufficient_data"
+              tooltipContent={(
+                context: SafetyRegionProperties & VrCollectionSituations
+              ) => <SituationsDataCoverageTooltip context={context} />}
+            />
           </Box>
         </Box>
       </Box>

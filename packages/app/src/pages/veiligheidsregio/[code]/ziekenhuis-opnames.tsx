@@ -151,6 +151,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <MunicipalityChoropleth
+              accessibility={{
+                key: 'hospital_admissions_choropleth',
+              }}
               selectedCode={selectedMunicipalCode}
               highlightSelection={false}
               data={choropleth.gm}
@@ -168,14 +171,13 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             title={text.linechart_titel}
             description={text.linechart_description}
             timeframeOptions={['all', '5weeks']}
-            accessibility={{
-              description: 'Line chart with keyboard interaction, something',
-              features: ['keyboard_line_chart'],
-            }}
           >
             {(timeframe) =>
               featureHospitalMovingAverage.isEnabled ? (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'hospital_admissions_over_time_chart',
+                  }}
                   values={data.hospital_nice.values}
                   timeframe={timeframe}
                   seriesConfig={[
@@ -209,6 +211,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 />
               ) : (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'hospital_admissions_over_time_chart',
+                  }}
                   values={data.hospital_nice.values}
                   timeframe={timeframe}
                   seriesConfig={[

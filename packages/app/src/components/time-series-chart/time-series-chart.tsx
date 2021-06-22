@@ -10,6 +10,7 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
+import { AccessibilityOptions } from '~/utils/use-accessibility-options';
 import { ValueAnnotation } from '../value-annotation';
 import {
   Axes,
@@ -73,6 +74,10 @@ export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
+  /**
+   * Accessibility options are not optional
+   */
+  accessibility: AccessibilityOptions;
   tooltipTitle?: string;
   values: T[];
   seriesConfig: C;
@@ -128,6 +133,7 @@ export function TimeSeriesChart<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 >({
+  accessibility,
   values: allValues,
   seriesConfig,
   initialWidth = 840,
@@ -318,6 +324,7 @@ export function TimeSeriesChart<
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
+            accessibility={accessibility}
             width={width}
             height={height}
             padding={padding}
