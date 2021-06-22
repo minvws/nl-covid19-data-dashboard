@@ -13,7 +13,7 @@
   "sideEffects": false,
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
-    "test:ci": "NODE_OPTIONS=--experimental-vm-modules jest cross-env --ci",
+    "test:ci": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --ci",
     "build": "tsc --build && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "del-cli dist tsconfig.tsbuildinfo",
     "compile": "tsc -b .",
