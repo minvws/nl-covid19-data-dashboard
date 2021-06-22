@@ -3,30 +3,33 @@ import { NlVariantsValue } from '@corona-dashboard/common';
 const NOW_IN_SECONDS = Math.round(Date.now() / 1000);
 const ONE_WEEK_IN_SECONDS = 60 * 60 * 24 * 7;
 
+const randomNumberFrom = 1;
+const randomNumberTo = 100;
+
 function getVariantsDataValue(date_end_unix: number) {
   const value: NlVariantsValue = {
-    alpha_percentage: randomNumberFromTo(1, 100),
+    alpha_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     alpha_occurrence: randomNumberFromTo(100, 1000),
     alpha_is_variant_of_concern: Math.random() > 0.5,
-    beta_percentage: randomNumberFromTo(1, 100),
+    beta_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     beta_occurrence: randomNumberFromTo(100, 1000),
     beta_is_variant_of_concern: Math.random() > 0.5,
-    gamma_percentage: randomNumberFromTo(1, 100),
+    gamma_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     gamma_occurrence: randomNumberFromTo(100, 1000),
     gamma_is_variant_of_concern: Math.random() > 0.5,
-    delta_percentage: randomNumberFromTo(1, 100),
+    delta_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     delta_occurrence: randomNumberFromTo(100, 1000),
     delta_is_variant_of_concern: Math.random() > 0.5,
-    eta_percentage: randomNumberFromTo(1, 100),
+    eta_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     eta_occurrence: randomNumberFromTo(100, 1000),
     eta_is_variant_of_concern: Math.random() > 0.5,
-    epsilon_percentage: randomNumberFromTo(1, 100),
+    epsilon_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     epsilon_occurrence: randomNumberFromTo(100, 1000),
     epsilon_is_variant_of_concern: Math.random() > 0.5,
-    theta_percentage: randomNumberFromTo(1, 100),
+    theta_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     theta_occurrence: randomNumberFromTo(100, 1000),
     theta_is_variant_of_concern: Math.random() > 0.5,
-    kappa_percentage: randomNumberFromTo(1, 100),
+    kappa_percentage: randomNumberFromTo(randomNumberFrom, randomNumberTo),
     kappa_occurrence: randomNumberFromTo(100, 1000),
     kappa_is_variant_of_concern: Math.random() > 0.5,
     other_percentage: 0,
