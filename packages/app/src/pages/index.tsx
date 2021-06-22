@@ -8,6 +8,7 @@ import {
 import css from '@styled-system/css';
 import { isEmpty } from 'lodash';
 import { useState } from 'react';
+import GrafiekIcon from '~/assets/chart.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -64,9 +65,8 @@ import {
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import GrafiekIcon from '~/assets/chart.svg';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -284,7 +284,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </ChoroplethTwoColumnLayout>
 
               <Box mt={4}>
-                <EscalationLevelExplanations />
+                <EscalationLevelExplanations
+                  hasUnknown={
+                    choropleth.vr.escalation_levels.filter(
+                      (item) => item.level === null
+                    ).length > 0
+                  }
+                />
               </Box>
             </TopicalTile>
 

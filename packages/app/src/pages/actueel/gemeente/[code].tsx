@@ -359,7 +359,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               </ChoroplethTwoColumnLayout>
 
               <Box mt={4}>
-                <EscalationLevelExplanations />
+                <EscalationLevelExplanations
+                  hasUnknown={
+                    choropleth.vr.escalation_levels.filter(
+                      (item) => item.level === null
+                    ).length > 0
+                  }
+                />
               </Box>
             </TopicalTile>
 
