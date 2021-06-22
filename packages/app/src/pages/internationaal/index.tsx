@@ -1,6 +1,9 @@
 import Head from 'next/head';
+import { ChangeEvent, useState } from 'react';
+import { Box } from '~/components/base';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { addCountryNameToChoroplethData } from '~/domain/internationaal/logic/add-country-name-to-choropleth-data';
+import { getAnimatedDataDocumentInfo } from '~/domain/internationaal/logic/get-animated-data-document-info';
 import { useAnimatedData } from '~/domain/internationaal/logic/use-animated-data';
 import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
@@ -28,8 +31,6 @@ type TestData2 = {
   infected_per_200k: number;
   date_of_insertion_unix: number;
 };
-
-const DAY_IN_SECONDS = 24 * 60 * 60;
 export interface International {
   last_generated: string;
   proto_name: 'INTL_COLLECTION';
@@ -44,21 +45,25 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     intl: ({ tested_overall }) =>
       addCountryNameToChoroplethData(tested_overall, 'cncode'),
-  })
+  }),
+  () => getAnimatedDataDocumentInfo('json/euro')
 );
-
-const startDate = new Date(2020, 2, 22, 0, 0, 0, 0).getTime() / 1000;
 
 const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
-  const { lastGenerated, choropleth } = props;
+  const { lastGenerated, choropleth, documentCount, firstDocument } = props;
   const { intl } = choropleth;
   const reverseRouter = useReverseRouter();
+  const [stepValue, setStepValue] = useState(1);
 
-  const [data, play, stop, reset] = useAnimatedData<typeof intl[number]>(
-    intl,
-    startDate
-  );
+  const [data, play, skip, stop, reset, loadingState] = useAnimatedData<
+    typeof intl[number]
+  >(intl, firstDocument, documentCount);
+
+  function loadDate(event: ChangeEvent<HTMLInputElement>) {
+    setStepValue(+event.target.value);
+    skip(+event.target.value);
+  }
 
   return (
     <Layout
@@ -91,9 +96,22 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
             </div>
           )}
         />
-        <button onClick={play}>start animating</button>
-        <button onClick={stop}>stop animating</button>
-        <button onClick={reset}>reset</button>
+        <Box>
+          <button onClick={play}>start animating</button>
+          <button onClick={stop}>stop animating</button>
+          <button onClick={reset}>reset</button>
+          <input
+            type="range"
+            min={1}
+            max={documentCount}
+            onChange={loadDate}
+            value={stepValue}
+            step={1}
+          />
+        </Box>
+        <Box height={2}>
+          {loadingState === 'loading' && <span>Loading...</span>}
+        </Box>
       </Content>
     </Layout>
   );
