@@ -29,7 +29,7 @@ function getVariantsDataValue(date_end_unix: number) {
     kappa_percentage: randomNumberFromTo(1, 100),
     kappa_occurrence: randomNumberFromTo(100, 1000),
     kappa_is_variant_of_concern: Math.random() > 0.5,
-    other_percentage: randomNumberFromTo(1, 100),
+    other_percentage: 0,
     other_occurrence: randomNumberFromTo(100, 1000),
     other_is_variant_of_concern: Math.random() > 0.5,
     sample_size: randomNumberFromTo(100, 1000),
