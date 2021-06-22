@@ -130,6 +130,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <TimeSeriesChart
+                accessibility={{ key: 'vaccine_coverage_over_time_chart' }}
                 values={transformToDayTimestamps(data.vaccine_coverage.values)}
                 formatTickValue={(x) => `${x / 1_000_000}`}
                 dataOptions={{
