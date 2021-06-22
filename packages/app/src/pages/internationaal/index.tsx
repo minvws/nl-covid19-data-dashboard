@@ -1,7 +1,9 @@
+import { debounce } from 'lodash';
 import Head from 'next/head';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
+import { Text } from '~/components/typography';
 import { addCountryNameToChoroplethData } from '~/domain/internationaal/logic/add-country-name-to-choropleth-data';
 import { getAnimatedDataDocumentInfo } from '~/domain/internationaal/logic/get-animated-data-document-info';
 import { useAnimatedData } from '~/domain/internationaal/logic/use-animated-data';
@@ -50,19 +52,22 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { siteText, formatDateFromSeconds } = useIntl();
   const { lastGenerated, choropleth, documentCount, firstDocument } = props;
   const { intl } = choropleth;
   const reverseRouter = useReverseRouter();
   const [stepValue, setStepValue] = useState(1);
 
-  const [data, play, skip, stop, reset, loadingState] = useAnimatedData<
-    typeof intl[number]
-  >(intl, firstDocument, documentCount);
+  const [data, play, skip, stop, reset, loadingState, currentDate] =
+    useAnimatedData<typeof intl[number]>(intl, firstDocument, documentCount);
+
+  const debouncedSkip = useRef(
+    debounce((value: number) => skip(value), 200)
+  ).current;
 
   function loadDate(event: ChangeEvent<HTMLInputElement>) {
     setStepValue(+event.target.value);
-    skip(+event.target.value);
+    debouncedSkip(+event.target.value);
   }
 
   return (
@@ -85,6 +90,9 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
 
       <Content>
+        <Box>
+          <Text>{formatDateFromSeconds(currentDate, 'axis-with-year')}</Text>
+        </Box>
         <EuropeChoropleth
           data={data}
           metricProperty="infected_per_100k"
@@ -102,8 +110,8 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
           <button onClick={reset}>reset</button>
           <input
             type="range"
-            min={1}
-            max={documentCount}
+            min={0}
+            max={documentCount - 1}
             onChange={loadDate}
             value={stepValue}
             step={1}

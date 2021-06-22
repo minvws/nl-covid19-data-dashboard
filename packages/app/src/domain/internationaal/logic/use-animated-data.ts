@@ -25,6 +25,7 @@ export function useAnimatedData<T>(
   );
   const [data, setData] = useState(initialData);
   const [loadingState, setLoadingState] = useState<FetchLoadingState>('idle');
+  const [currentDate, setCurrentDate] = useState(initialTimestamp);
 
   async function play() {
     if (!playState.current) {
@@ -37,9 +38,7 @@ export function useAnimatedData<T>(
 
   async function skip(index: number) {
     playPosition.current = index;
-    if (!playState.current) {
-      play();
-    }
+    loadNext(index);
   }
 
   async function continuePlay() {
@@ -65,6 +64,7 @@ export function useAnimatedData<T>(
     if (positionValue === isLoading) {
       return;
     } else if (isRecord(positionValue)) {
+      setCurrentDate(timestamp);
       setData(positionValue);
     } else {
       timestampsData.current[timestamp] = isLoading;
@@ -77,6 +77,7 @@ export function useAnimatedData<T>(
           ...x,
           ...remoteData[idx],
         }));
+        setCurrentDate(timestamp);
         setData((timestampsData.current[timestamp] = mergedData));
       } catch (e) {
         playState.current = false;
@@ -94,7 +95,7 @@ export function useAnimatedData<T>(
     setData(timestampsData.current[timestampList.current[0]] as T[]);
   }
 
-  return [data, play, skip, stop, reset, loadingState] as const;
+  return [data, play, skip, stop, reset, loadingState, currentDate] as const;
 }
 
 function isRecord<T>(item: any): item is Record<string, T[]> {
