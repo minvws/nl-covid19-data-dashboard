@@ -272,10 +272,16 @@ const HeaderCell = styled.th(
 
 const Cell = styled.td(
   css({
-    borderBottom: asResponsiveArray({ _: 'none', sm: '1px solid' }),
-    borderBottomColor: 'lightGray',
+    borderBottom: '1px solid lightGray',
     p: 0,
     py: 2,
+
+    '&:first-child': {
+      borderBottom: asResponsiveArray({
+        _: 'none',
+        sm: '1px solid lightGray',
+      }),
+    },
   })
 );
 
