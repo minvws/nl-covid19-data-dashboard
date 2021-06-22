@@ -86,6 +86,6 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
 const EscalationLevelTitle = styled.span(
   css({
     fontWeight: 'bold',
-    textTransform: 'lowercase'
+    textTransform: 'lowercase',
   })
 );

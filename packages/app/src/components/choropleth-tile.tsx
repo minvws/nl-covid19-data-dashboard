@@ -7,6 +7,7 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from './chart-region-controls';
+import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { MetadataProps } from './metadata';
 import { Heading, Text } from './typography';
@@ -99,7 +100,9 @@ export function ChoroplethTile({
           flexDirection="column"
           height="100%"
         >
-          <Box height="100%">{children}</Box>
+          <Box height="100%">
+            <ErrorBoundary>{children}</ErrorBoundary>
+          </Box>
 
           {legendaComponent && !breakpoints.lg && (
             <Box display="flex" justifyContent="center">

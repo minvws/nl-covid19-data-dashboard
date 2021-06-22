@@ -115,7 +115,7 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
    * the full metric.
    */
   const {
-    metricScopes,
+    metricScopes = ['nl'],
     metricName,
     metricProperties,
     name,
@@ -123,11 +123,6 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
   } = feature;
 
   if (metricProperties) {
-    assert(
-      metricScopes,
-      `Missing metricScopes configuration for feature ${name}`
-    );
-
     assert(
       metricName,
       'If a feature defines metricProperties it should also have a metricName'

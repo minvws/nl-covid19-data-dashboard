@@ -20,6 +20,7 @@ import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/se
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { NewSewerChart } from '~/components/sewer-chart/new-sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -28,6 +29,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -52,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })
@@ -68,6 +70,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const sewerAverages = data.sewer;
   const [selectedMap, setSelectedMap] =
     useState<RegionControlOption>('municipal');
+
+  const sewerSplitAreaChart = useFeature('sewerSplitAreaChart');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -154,35 +158,51 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            timeframeOptions={['all', '5weeks']}
-            title={text.linechart_titel}
-            metadata={{
-              source: text.bronnen.rivm,
-            }}
-            description={text.linechart_description}
-          >
-            {(timeframe) => (
-              <TimeSeriesChart
-                accessibility={{
-                  key: 'sewer_particles_over_time',
-                }}
-                values={sewerAverages.values}
-                timeframe={timeframe}
-                seriesConfig={[
-                  {
-                    type: 'area',
-                    metricProperty: 'average',
-                    label: text.linechart_particle_trend_label,
-                    color: colors.data.primary,
-                  },
-                ]}
-                dataOptions={{
-                  valueAnnotation: siteText.waarde_annotaties.riool_normalized,
-                }}
-              />
-            )}
-          </ChartTile>
+          {sewerSplitAreaChart.isEnabled ? (
+            <NewSewerChart
+              accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
+              dataAverages={data.sewer}
+              text={{
+                title: text.linechart_titel,
+                source: text.bronnen.rivm,
+                description: text.linechart_description,
+                splitLabels: siteText.rioolwater_metingen.split_labels,
+                averagesDataLabel: siteText.common.weekgemiddelde,
+                valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+              }}
+            />
+          ) : (
+            <ChartTile
+              timeframeOptions={['all', '5weeks']}
+              title={text.linechart_titel}
+              metadata={{
+                source: text.bronnen.rivm,
+              }}
+              description={text.linechart_description}
+            >
+              {(timeframe) => (
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'sewer_particles_over_time',
+                  }}
+                  values={sewerAverages.values}
+                  timeframe={timeframe}
+                  seriesConfig={[
+                    {
+                      type: 'area',
+                      metricProperty: 'average',
+                      label: text.linechart_particle_trend_label,
+                      color: colors.data.primary,
+                    },
+                  ]}
+                  dataOptions={{
+                    valueAnnotation:
+                      siteText.waarde_annotaties.riool_normalized,
+                  }}
+                />
+              )}
+            </ChartTile>
+          )}
 
           <ChoroplethTile
             title={text.map_titel}

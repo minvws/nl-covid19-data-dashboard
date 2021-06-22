@@ -7,12 +7,12 @@ import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
 import { useIntlHelperContext } from '~/intl/hooks/use-intl';
 import * as piwik from '~/lib/piwik';
-import { TooltipContext } from '~/lib/tooltip';
 import { LanguageKey } from '~/locale';
 import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 import { BreakpointContextProvider } from '~/utils/use-breakpoints';
+import { IsTouchDeviceContextProvider } from '~/utils/use-is-touch-device';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -62,9 +62,9 @@ export default function App(props: AppProps) {
       <IntlContext.Provider value={intlContext}>
         <GlobalStyle />
         <BreakpointContextProvider>
-          <TooltipContext>
+          <IsTouchDeviceContextProvider>
             <Component {...pageProps} />
-          </TooltipContext>
+          </IsTouchDeviceContextProvider>
         </BreakpointContextProvider>
       </IntlContext.Provider>
       {toggleHotReloadButton}

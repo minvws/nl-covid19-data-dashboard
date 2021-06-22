@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
+import { useUniqueId } from '~/utils/use-unique-id';
 
 interface ModalProps {
   children: ReactNode;
@@ -14,8 +15,11 @@ interface ModalProps {
 
 export function Modal({ id, children, onClose, isFullheight }: ModalProps) {
   const clickRef = useRef<HTMLDivElement>(null);
+  const focusId = useUniqueId();
   useHotkey('esc', onClose);
-  const focusRef = useFocusTrap();
+  const focusRef = useFocusTrap(true, {
+    focusSelector: `#${focusId}`,
+  });
 
   return (
     <ModalPortal id={id}>
@@ -25,6 +29,7 @@ export function Modal({ id, children, onClose, isFullheight }: ModalProps) {
           css={css({ p: 5, height: isFullheight ? '100%' : undefined })}
           onClick={(evt) => evt.target === clickRef.current && onClose()}
           ref={clickRef}
+          id={focusId}
         >
           {children}
         </div>

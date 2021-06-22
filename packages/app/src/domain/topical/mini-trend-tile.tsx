@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { NumberProperty } from '~/components/line-chart/logic';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -69,24 +70,25 @@ export function MiniTrendTile<T extends TimestampedValue>(
       </Text>
 
       <Box>{text}</Box>
-
-      <TimeSeriesChart
-        accessibility={accessibility}
-        initialWidth={400}
-        minHeight={sm ? 180 : 140}
-        timeframe="5weeks"
-        values={trendData}
-        displayTooltipValueOnly
-        numGridLines={2}
-        seriesConfig={[
-          {
-            metricProperty,
-            type: 'area',
-            label: title,
-            color: colors.data.primary,
-          },
-        ]}
-      />
+      <ErrorBoundary>
+        <TimeSeriesChart
+          accessibility={accessibility}
+          initialWidth={400}
+          minHeight={sm ? 180 : 140}
+          timeframe="5weeks"
+          values={trendData}
+          displayTooltipValueOnly
+          numGridLines={2}
+          seriesConfig={[
+            {
+              metricProperty,
+              type: 'area',
+              label: title,
+              color: colors.data.primary,
+            },
+          ]}
+        />
+      </ErrorBoundary>
     </Box>
   );
 }

@@ -1,4 +1,8 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from '~/domain/behavior/logic/behavior-types';
 import { SituationKey } from '~/domain/situations/logic/situations';
 import { colors } from '~/style/theme';
 
@@ -138,96 +142,64 @@ const sewerThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const behaviorThresholds: ChoroplethThresholdsValue[] = [
+const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[5],
+    color: colors.data.scale.blue[0],
     threshold: 0,
-  },
-  {
-    color: colors.data.scale.blue[4],
-    threshold: 40,
-  },
-  {
-    color: colors.data.scale.blue[3],
-    threshold: 50,
-  },
-  {
-    color: colors.data.scale.blue[2],
-    threshold: 60,
   },
   {
     color: colors.data.scale.blue[1],
-    threshold: 70,
-  },
-  {
-    color: colors.data.scale.blue[0],
-    threshold: 80,
-  },
-  {
-    // this color is not part of the scale (as discussed with design / AG)
-    color: '#DDEFF8',
-    threshold: 90,
-  },
-];
-
-const behaviorComplianceThresholds: ChoroplethThresholdsValue[] = [
-  {
-    color: colors.data.behavior.scale.cyan[0],
-    threshold: 0,
-  },
-  {
-    color: colors.data.behavior.scale.cyan[1],
     threshold: 40,
   },
   {
-    color: colors.data.behavior.scale.cyan[2],
+    color: colors.data.scale.blue[2],
     threshold: 50,
   },
   {
-    color: colors.data.behavior.scale.cyan[3],
+    color: colors.data.scale.blue[3],
     threshold: 60,
   },
   {
-    color: colors.data.behavior.scale.cyan[4],
+    color: colors.data.scale.blue[4],
     threshold: 70,
   },
   {
-    color: colors.data.behavior.scale.cyan[5],
+    color: colors.data.scale.blue[5],
     threshold: 80,
   },
   {
-    color: colors.data.behavior.scale.cyan[6],
+    color: colors.data.scale.blue[6],
     threshold: 90,
   },
 ];
 
 const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.behavior.scale.yellow[0],
+    color: colors.data.scale.yellow[0],
     threshold: 0,
   },
   {
-    color: colors.data.behavior.scale.yellow[1],
+    color: colors.data.scale.yellow[1],
     threshold: 40,
   },
   {
-    color: colors.data.behavior.scale.yellow[2],
+    color: colors.data.scale.yellow[2],
     threshold: 50,
   },
   {
-    color: colors.data.behavior.scale.yellow[3],
+    color: colors.data.scale.yellow[3],
     threshold: 60,
   },
   {
-    color: colors.data.behavior.scale.yellow[4],
+    color: colors.data.scale.yellow[4],
     threshold: 70,
   },
   {
-    color: colors.data.behavior.scale.yellow[5],
+    color: colors.data.scale.yellow[5],
     threshold: 80,
   },
   {
-    color: colors.data.behavior.scale.yellow[6],
+    color: colors.data.scale.yellow[6],
     threshold: 90,
   },
 ];
@@ -294,39 +266,54 @@ const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
 
 const situationsThreshold: ChoroplethThresholdsValue[] = [
   {
-    color: colors.data.scale.blue[0],
+    color: colors.data.scale.blueDetailed[0],
     threshold: 0,
     label: '0%',
   },
   {
-    color: colors.data.scale.blue[1],
+    color: colors.data.scale.blueDetailed[1],
     threshold: 10,
     label: '10%',
   },
   {
-    color: colors.data.scale.blue[2],
+    color: colors.data.scale.blueDetailed[2],
     threshold: 20,
     label: '20%',
   },
   {
-    color: colors.data.scale.blue[3],
+    color: colors.data.scale.blueDetailed[3],
     threshold: 30,
     label: '30%',
   },
   {
-    color: colors.data.scale.blue[4],
+    color: colors.data.scale.blueDetailed[4],
     threshold: 40,
     label: '40%',
   },
   {
-    color: colors.data.scale.blue[5],
+    color: colors.data.scale.blueDetailed[5],
     threshold: 50,
     label: '50%',
   },
   {
-    color: colors.data.scale.blue[6],
+    color: colors.data.scale.blueDetailed[6],
     threshold: 60,
     label: '60%',
+  },
+  {
+    color: colors.data.scale.blueDetailed[7],
+    threshold: 70,
+    label: '70%',
+  },
+  {
+    color: colors.data.scale.blueDetailed[8],
+    threshold: 80,
+    label: '80%',
+  },
+  {
+    color: colors.data.scale.blueDetailed[9],
+    threshold: 90,
+    label: '90%',
     endLabel: '100%',
   },
 ];
@@ -341,6 +328,21 @@ const hasSufficientDataThresholds = [
     threshold: 1,
   },
 ];
+
+const behaviorThresholds = {
+  ...(Object.fromEntries(
+    behaviorIdentifiers.map((key) => [
+      `${key}_support`,
+      behaviorSupportThresholds,
+    ])
+  ) as Record<`${BehaviorIdentifier}_support`, ChoroplethThresholdsValue[]>),
+  ...(Object.fromEntries(
+    behaviorIdentifiers.map((key) => [
+      `${key}_compliance`,
+      behaviorComplianceThresholds,
+    ])
+  ) as Record<`${BehaviorIdentifier}_compliance`, ChoroplethThresholdsValue[]>),
+};
 
 export const regionThresholds = {
   tested_overall: {
@@ -364,8 +366,6 @@ export const regionThresholds = {
     average: sewerThresholds,
   },
   behavior: behaviorThresholds,
-  behavior_compliance: behaviorComplianceThresholds,
-  behavior_support: behaviorSupportThresholds,
   elderly_at_home: {
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
   },

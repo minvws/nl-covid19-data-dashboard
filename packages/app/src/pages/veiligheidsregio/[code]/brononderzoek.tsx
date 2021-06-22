@@ -1,12 +1,19 @@
-import { assert } from '@corona-dashboard/common';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
+import { KpiTile } from '~/components/kpi-tile';
+import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { TileList } from '~/components/tile-list';
+import { TwoKpiSection } from '~/components/two-kpi-section';
+import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
-import { mockVrSituations } from '~/domain/situations/logic/mock-data';
+import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
+import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
+import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -19,6 +26,7 @@ import {
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
+import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -27,17 +35,10 @@ export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    (context) => {
-      const data = selectVrPageMetricData('situations')(context);
-      data.selectedVrData.situations =
-        data.selectedVrData.situations ||
-        mockVrSituations(context.params?.code as string);
-
-      return data;
-    },
+    selectVrPageMetricData('situations'),
     createGetContent<{
       articles?: ArticleSummary[];
-    }>((_context) => {
+    }>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return createPageArticlesQuery('situationsPage', locale);
     })
@@ -55,6 +56,7 @@ export default function BrononderzoekPage(
   } = props;
 
   const intl = useIntl();
+  const { formatNumber, formatDateSpan } = intl;
 
   const text = intl.siteText.brononderzoek;
 
@@ -64,9 +66,13 @@ export default function BrononderzoekPage(
     description: text.metadata.description,
   };
 
-  assert(data.situations, 'no situations data found');
+  const lastValue = data.situations.last_value;
+  const values = data.situations.values;
 
-  const singleValue = data.situations.last_value;
+  const [date_from, date_to] = formatDateSpan(
+    { seconds: lastValue.date_start_unix },
+    { seconds: lastValue.date_end_unix }
+  );
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -93,15 +99,80 @@ export default function BrononderzoekPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: singleValue.date_start_unix,
-                end: singleValue.date_end_unix,
+                start: lastValue.date_start_unix,
+                end: lastValue.date_end_unix,
               },
-              dateOfInsertionUnix: singleValue.date_of_insertion_unix,
+              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
+            reference={text.reference}
           />
 
           <ArticleStrip articles={content.articles} />
+
+          <TwoKpiSection>
+            <SituationsDataCoverageTile data={lastValue} />
+            {lastValue.has_sufficient_data && (
+              <KpiTile
+                title={text.veiligheidsregio_kpi.titel}
+                metadata={{
+                  date: [lastValue.date_start_unix, lastValue.date_end_unix],
+                  source: text.bronnen.rivm,
+                }}
+              >
+                {lastValue.situations_known_percentage && (
+                  <KpiValue
+                    percentage={lastValue.situations_known_percentage}
+                  />
+                )}
+                <Markdown
+                  content={replaceVariablesInText(
+                    text.veiligheidsregio_kpi.beschrijving,
+                    {
+                      date_to,
+                      date_from,
+                    }
+                  )}
+                />
+
+                <Text fontWeight="bold">
+                  {replaceComponentsInText(
+                    text.veiligheidsregio_kpi.beschrijving_bekend,
+                    {
+                      situations_known_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(lastValue.situations_known_total)}
+                        </InlineText>
+                      ),
+                      investigations_total: (
+                        <InlineText color="data.primary">
+                          {formatNumber(lastValue.investigations_total)}
+                        </InlineText>
+                      ),
+                    }
+                  )}
+                </Text>
+              </KpiTile>
+            )}
+          </TwoKpiSection>
+
+          <SituationsTableTile
+            data={lastValue}
+            metadata={{
+              date: [lastValue.date_start_unix, lastValue.date_end_unix],
+              source: text.bronnen.rivm,
+            }}
+          />
+
+          {values && (
+            <ChartTile
+              title={text.situaties_over_tijd_grafiek.titel}
+              description={text.situaties_over_tijd_grafiek.omschrijving}
+              metadata={{ source: text.bronnen.rivm }}
+            >
+              <SituationsOverTimeChart timeframe={'all'} values={values} />
+            </ChartTile>
+          )}
         </TileList>
       </SafetyRegionLayout>
     </Layout>

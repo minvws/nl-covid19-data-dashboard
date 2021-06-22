@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { InlineText, Text } from '~/components/typography';
-import { BehaviorIdentifier } from '~/domain/behavior/behavior-types';
+import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -18,6 +18,7 @@ interface BehaviorTooltipProps {
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number;
   currentSupportValue: number;
+  behaviorType: 'compliance' | 'support';
 }
 
 export function BehaviorTooltip({
@@ -25,18 +26,36 @@ export function BehaviorTooltip({
   currentMetric,
   currentComplianceValue,
   currentSupportValue,
+  behaviorType,
 }: BehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const thresholdKey = `${currentMetric}_${behaviorType}` as const;
 
   const complianceFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior_compliance,
+    regionThresholds.behavior[thresholdKey],
     currentComplianceValue
   );
 
   const supportFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior_support,
+    regionThresholds.behavior[thresholdKey],
     currentSupportValue
+  );
+
+  const complianceTooltipInfo = (
+    <TooltipInfo
+      title={siteText.nl_gedrag.tooltip_labels.compliance}
+      value={currentComplianceValue}
+      background={complianceFilteredThreshold.color}
+    />
+  );
+
+  const supportTooltipInfo = (
+    <TooltipInfo
+      title={siteText.nl_gedrag.tooltip_labels.support}
+      value={currentSupportValue}
+      background={supportFilteredThreshold.color}
+    />
   );
 
   return (
@@ -48,16 +67,19 @@ export function BehaviorTooltip({
         <Text m={0} mb={2} fontWeight="bold">
           {siteText.gedrag_onderwerpen[currentMetric]}
         </Text>
-        <TooltipInfo
-          title={siteText.nl_gedrag.tooltip_labels.compliance}
-          value={currentComplianceValue}
-          background={complianceFilteredThreshold.color}
-        />
-        <TooltipInfo
-          title={siteText.nl_gedrag.tooltip_labels.support}
-          value={currentSupportValue}
-          background={supportFilteredThreshold.color}
-        />
+
+        {/* Change order of the info based on the metric name */}
+        {behaviorType === 'compliance' ? (
+          <>
+            {complianceTooltipInfo}
+            {supportTooltipInfo}
+          </>
+        ) : (
+          <>
+            {supportTooltipInfo}
+            {complianceTooltipInfo}
+          </>
+        )}
       </Box>
     </TooltipContent>
   );

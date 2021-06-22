@@ -3,8 +3,8 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { useMemo } from 'react';
 import { pick } from 'lodash';
+import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { SeriesSingleValue } from '~/components/time-series-chart/logic/series';
 
@@ -21,10 +21,10 @@ export function useSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig), [
-    values,
-    seriesConfig,
-  ]);
+  return useMemo(
+    () => getSeriesList(values, seriesConfig),
+    [values, seriesConfig]
+  );
 }
 
 export type SeriesList = SeriesSingleValue[][];
@@ -73,10 +73,10 @@ export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {
-  return useMemo(() => calculateSeriesExtremes(values, seriesConfig), [
-    values,
-    seriesConfig,
-  ]);
+  return useMemo(
+    () => calculateSeriesExtremes(values, seriesConfig),
+    [values, seriesConfig]
+  );
 }
 
 /**
@@ -103,7 +103,15 @@ export function calculateSeriesExtremes<T extends TimestampedValue>(
     .flat();
 
   return {
-    max: Math.max(...extremeValues),
-    min: Math.min(...extremeValues),
+    /**
+     * The max needs to be clipped to a positive number, because otherwise
+     * things get messed up with only negative values. We add a minimum of 10 to
+     * always have a part of the y-axis with positive values.
+     *
+     * Adding a similar fix for when only positive numbers are used, but let's
+     * hope we never reach that point.
+     */
+    max: Math.max(...extremeValues, 10),
+    min: Math.min(...extremeValues, -10),
   };
 }

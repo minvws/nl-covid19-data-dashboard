@@ -12,6 +12,14 @@ export function useReverseRouter() {
         gm: (code: string) => `/actueel/gemeente/${code}`,
       },
 
+      algemeen: {
+        over: () => '/over',
+        veelgesteldeVragen: () => '/veelgestelde-vragen',
+        verantwoording: () => '/verantwoording',
+        overRisiconiveaus: () => '/over-risiconiveaus',
+        toegankelijkheid: () => '/toegankelijkheid',
+      },
+
       nl: {
         index: () => reverseRouter.nl.vaccinaties() + openMenuSuffix,
         vaccinaties: () => `/landelijk/vaccinaties`,
@@ -30,6 +38,7 @@ export function useReverseRouter() {
         maatregelen: () => `/landelijk/maatregelen`,
         coronamelder: () => `/landelijk/coronamelder`,
         brononderzoek: () => `/landelijk/brononderzoek`,
+        covidVarianten: () => `/landelijk/covid-varianten`,
       },
 
       vr: {

@@ -33,7 +33,7 @@ type MaatregelenData = {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
-  createGetContent<MaatregelenData>((_context) => {
+  createGetContent<MaatregelenData>(() => {
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;
     const locale = process.env.NEXT_PUBLIC_LOCALE;
@@ -78,7 +78,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { showLockdown } = lockdown;
 
   const router = useRouter();
-  const code = (router.query.code as unknown) as VRCode;
+  const code = router.query.code as unknown as VRCode;
 
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
 

@@ -145,8 +145,8 @@ const ChoroplethMap: <T1, T3>(
     setTooltip,
     hoverRef,
     renderHighlight,
-    initialWidth = 850,
     minHeight = 500,
+    initialWidth = 0.9 * minHeight,
     showTooltipOnFocus,
   } = props;
 

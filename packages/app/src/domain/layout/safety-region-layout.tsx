@@ -16,6 +16,7 @@ import {
   MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
@@ -115,7 +116,15 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
 
       <AppContent
         hideMenuButton={isMainRoute}
-        searchComponent={<SafetyRegionComboBox />}
+        searchComponent={
+          <Box
+            backgroundColor="white"
+            maxWidth={{ _: '38rem', md: undefined }}
+            mx="auto"
+          >
+            <SafetyRegionComboBox />
+          </Box>
+        }
         sidebarComponent={
           <>
             {/**
@@ -131,6 +140,9 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                 aria-label={siteText.aria_labels.metriek_navigatie}
                 role="navigation"
                 spacing={3}
+                backgroundColor="white"
+                maxWidth={{ _: '38rem', md: undefined }}
+                mx="auto"
               >
                 <Text fontSize={3} fontWeight="bold" px={3} m={0}>
                   {safetyRegionName}
@@ -342,7 +354,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
           </>
         }
       >
-        {children}
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );

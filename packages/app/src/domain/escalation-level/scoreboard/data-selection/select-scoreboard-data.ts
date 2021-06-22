@@ -3,12 +3,12 @@ import { isDefined } from 'ts-is-present';
 import { vrData } from '~/data/vr';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { loadAndSortVrData } from '~/static-props/get-data';
-import { ScoreboardRow } from '..';
+import { ScoreboardRowData } from '../logic';
 
 const escalationLevels: EscalationLevel[] = [1, 2, 3, 4, null];
 
 export function selectScoreboardData() {
-  const scoreboardRows = vrData.reduce<ScoreboardRow[]>(
+  const scoreboardRows = vrData.reduce<ScoreboardRowData[]>(
     (sbData, vr) => {
       const vrData = loadAndSortVrData(vr.code);
       const index =
@@ -24,7 +24,7 @@ export function selectScoreboardData() {
 
       return sbData;
     },
-    escalationLevels.map<ScoreboardRow>((x) => ({
+    escalationLevels.map<ScoreboardRowData>((x) => ({
       escalationLevel: x,
       vrData: [],
     }))

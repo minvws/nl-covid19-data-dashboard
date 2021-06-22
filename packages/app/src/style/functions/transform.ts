@@ -1,6 +1,6 @@
-import css from "@styled-system/css";
+import css from '@styled-system/css';
 import { styleFn, ResponsiveValue } from 'styled-system';
-import { isDefined } from "ts-is-present";
+import { isDefined } from 'ts-is-present';
 import { asResponsiveArray } from '../utils';
 
 export interface TransformProps {
@@ -15,7 +15,7 @@ export const transform: styleFn = (x: TransformProps) => {
 
     return css({
       transform: transformValue,
-      transformOrigin:transformOriginValue
-    })
+      transformOrigin: transformOriginValue,
+    });
   }
-}
+};

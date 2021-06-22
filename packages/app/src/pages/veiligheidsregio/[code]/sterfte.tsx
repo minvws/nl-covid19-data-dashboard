@@ -34,7 +34,7 @@ export const getStaticProps = createGetStaticProps(
   selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('deceasedPage', locale);
   })

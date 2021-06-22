@@ -16,12 +16,8 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
 
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const { headers } = siteText.vaccinaties.vaccination_coverage;
-  const {
-    group,
-    oldest,
-    total,
-    total_people,
-  } = siteText.vaccinaties.vaccination_coverage.templates.agegroup;
+  const { group, oldest, total, total_people } =
+    siteText.vaccinaties.vaccination_coverage.templates.agegroup;
   const breakpoints = useBreakpoints(true);
 
   return (

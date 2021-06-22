@@ -240,8 +240,8 @@ export function SewerChart(props: SewerChartProps) {
       {sewerStationSelectProps.options.length > 0 && (
         <Box display="flex" justifyContent="flex-start" mb={3}>
           <Select
-            placeholder={text.select_station_placeholder}
             {...sewerStationSelectProps}
+            placeholder={text.select_station_placeholder}
           />
         </Box>
       )}
@@ -285,7 +285,7 @@ export function SewerChart(props: SewerChartProps) {
             <Group
               left={dimensions.padding.left}
               top={dimensions.padding.top}
-              css={css({ pointerEvents: 'none' })}
+              style={{ pointerEvents: 'none' }}
             >
               <GridRows
                 scale={scales.yScale}

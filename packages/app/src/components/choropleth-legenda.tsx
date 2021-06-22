@@ -17,25 +17,35 @@ export function ChoroplethLegenda({
   thresholds,
   valueAnnotation,
 }: ChoroplethLegendaProps) {
-  const { width = 0, ref } = useResizeObserver<HTMLSpanElement>();
+  const { width: itemWidth = 0, ref: itemRef } =
+    useResizeObserver<HTMLLIElement>();
+  const { width: endLabelWidth = 0, ref: endLabelRef } =
+    useResizeObserver<HTMLSpanElement>();
 
   return (
-    <Box width="100%" pr={`${width / 2}px`}>
+    <Box width="100%" pr={`${endLabelWidth / 2}px`}>
       {title && <Heading level={4}>{title}</Heading>}
       <List hasValueAnnotation={valueAnnotation ? true : false}>
         {thresholds.map(({ color, threshold, label, endLabel }, index) => {
           const isFirst = index === 0;
           const isLast = index === thresholds.length - 1;
+          const displayLabel = itemWidth > 40 || index % 2 === 0;
+
           return (
-            <Item key={color + threshold}>
+            <Item
+              key={color + threshold}
+              ref={index === 0 ? itemRef : undefined}
+            >
               <LegendaColor color={color} first={isFirst} last={isLast} />
               {isFirst ? (
                 <StartLabel>{label ?? threshold}</StartLabel>
               ) : (
-                <Label>{label ?? threshold}</Label>
+                displayLabel && <Label>{label ?? threshold}</Label>
               )}
 
-              {isLast && endLabel && <EndLabel ref={ref}>{endLabel}</EndLabel>}
+              {isLast && endLabel && (
+                <EndLabel ref={endLabelRef}>{endLabel}</EndLabel>
+              )}
             </Item>
           );
         })}
@@ -98,7 +108,7 @@ const EndLabel = styled.span(
   css({
     ...labelStyles,
     position: 'absolute',
-    top: 10,
+    top: [12, null, 10],
     right: 0,
     transform: 'translateX(50%)',
   })

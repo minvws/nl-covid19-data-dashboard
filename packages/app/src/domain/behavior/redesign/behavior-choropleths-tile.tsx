@@ -15,7 +15,10 @@ import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { BehaviorIdentifier, behaviorIdentifiers } from '../behavior-types';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from '../logic/behavior-types';
 import { BehaviorIcon } from '../components/behavior-icon';
 
 interface BehaviorChoroplethsTileProps {
