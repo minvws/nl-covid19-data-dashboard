@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
 import Phone from '~/assets/phone.svg';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
@@ -51,11 +51,10 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
-            category={corona_melder_app.header.category}
+          <InformationBlock
             title={corona_melder_app.header.title}
             icon={<Phone />}
-            subtitle={corona_melder_app.header.description}
+            description={corona_melder_app.header.description}
             metadata={{
               datumsText: corona_melder_app.header.datums,
               dateOrRange: data.corona_melder_app.last_value.date_unix,
@@ -63,7 +62,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                 data.corona_melder_app.last_value.date_of_insertion_unix,
               dataSources: [corona_melder_app.header.bronnen.rivm],
             }}
-            reference={corona_melder_app.header.reference}
+            referenceLink={corona_melder_app.header.reference.href}
           />
 
           <TwoKpiSection>

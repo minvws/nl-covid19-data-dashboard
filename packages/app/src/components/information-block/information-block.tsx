@@ -10,7 +10,7 @@ import { Metadata, MetadataProps } from './metadata';
 import { UsefulLinks } from './useful-links';
 
 interface InformationBlockProps {
-  title: string;
+  title?: string;
   icon?: JSX.Element;
   description: string;
   articles?: ArticleSummary[];
@@ -20,11 +20,7 @@ interface InformationBlockProps {
   }[];
   headingLevel?: HeadingLevel;
   metadata?: MetadataProps;
-  reference?: {
-    href: string;
-    text: string;
-  };
-  skipLinkAnchor?: boolean;
+  referenceLink?: string;
   id?: string;
 }
 
@@ -32,48 +28,52 @@ export function InformationBlock({
   title,
   icon,
   description,
-  headingLevel = 2,
+  headingLevel = 1,
   articles,
   usefulLinks,
   metadata,
-  reference,
-  skipLinkAnchor,
+  referenceLink,
   id,
 }: InformationBlockProps) {
   return (
     <header id={id}>
-      {icon ? (
-        <HeadingWithIcon
-          icon={icon}
-          title={title}
-          headingLevel={headingLevel}
-        />
-      ) : (
-        <Box display="flex" flexWrap="nowrap" alignItems="center">
-          <Heading level={headingLevel} mb={0} lineHeight={1.3}>
-            {title}
-          </Heading>
-        </Box>
+      {title && (
+        <>
+          {icon ? (
+            <HeadingWithIcon
+              icon={icon}
+              title={title}
+              headingLevel={headingLevel}
+            />
+          ) : (
+            <Box display="flex" flexWrap="nowrap" alignItems="center">
+              <Heading level={headingLevel} mb={3} lineHeight={1.3}>
+                {title}
+              </Heading>
+            </Box>
+          )}
+        </>
       )}
+
       <Tile>
         <Box
           display={{ _: 'block', md: 'grid' }}
           gridTemplateColumns="repeat(2, 1fr)"
           width="100%"
           css={css({
-            columnGap: 3,
+            columnGap: 4,
           })}
         >
           {articles && articles.length > 0 ? (
             <>
               <Box spacing={3}>
-                <Text>{description}</Text>
+                <Text mb={0}>{description}</Text>
                 {metadata && (
                   <MetadataBox>
                     <Metadata
                       {...metadata}
                       accessibilitySubject={title}
-                      reference={reference}
+                      referenceLink={referenceLink}
                     />
                   </MetadataBox>
                 )}
@@ -84,13 +84,13 @@ export function InformationBlock({
             </>
           ) : (
             <>
-              <Text>{description}</Text>
+              <Text mb={0}>{description}</Text>
               {metadata && (
                 <MetadataBox>
                   <Metadata
                     {...metadata}
                     accessibilitySubject={title}
-                    reference={reference}
+                    referenceLink={referenceLink}
                   />
                 </MetadataBox>
               )}

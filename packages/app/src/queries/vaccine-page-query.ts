@@ -5,10 +5,6 @@ export function getVaccinePageQuery() {
 
   return `
   *[_type=='vaccinationsPage']{
-    "pageInfo": {
-      "title": pageInfo.title.${locale},
-      "description": pageInfo.description.${locale},
-    },
     "pageLinks": [...pageLinks[]{
       "title": title.${locale},
       "category": category.${locale},
@@ -18,7 +14,6 @@ export function getVaccinePageQuery() {
         "asset": cover.asset->
       }
     }],
-    "linksTitle": linksTitle.${locale},
     "title": title.${locale},
     "description": description.${locale},
     "milestones": [...milestones | order(date)[] {

@@ -1,9 +1,8 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
@@ -53,22 +52,19 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={siteText.besmettelijke_personen.titel_sidebar}
+          <InformationBlock
             title={text.title}
             icon={<Ziektegolf />}
-            subtitle={text.toelichting_pagina}
+            description={text.toelichting_pagina}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastFullValue.date_unix,
               dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile

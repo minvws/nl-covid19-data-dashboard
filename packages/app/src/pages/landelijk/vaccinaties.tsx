@@ -3,11 +3,11 @@ import {
   NlVaccineCoverageValue,
 } from '@corona-dashboard/common';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
@@ -109,14 +109,26 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <VaccinePageIntroduction
-            data={data}
-            pageInfo={page.pageInfo}
-            pageLinks={page.pageLinks}
-            pageLinksTitle={page.linksTitle}
+          <VaccinePageIntroduction data={data} />
+
+          <InformationBlock
+            description={
+              'Vaccineren is de belangrijkste stap naar een samenleving zonder coronaregels. Op 6 januari 2021 is Nederland begonnen met vaccineren. Uiteindelijk komt iedereen van 18 jaar of ouder aan de beurt. De cijfers op deze pagina laten zien hoeveel prikken zijn gezet en hoeveel vaccins er beschikbaar komen.'
+            }
+            metadata={{
+              datumsText: text.datums,
+              dateOrRange: data.vaccine_administered_total.last_value.date_unix,
+              dateOfInsertionUnix:
+                data.vaccine_administered_total.last_value
+                  .date_of_insertion_unix,
+              dataSources: [],
+            }}
+            usefulLinks={page.pageLinks}
+            referenceLink="/"
+            articles={content.highlight.articles}
           />
 
-          <ArticleStrip articles={content.highlight.articles} />
+          {/* <ArticleStrip articles={content.highlight.articles} /> */}
 
           {data.vaccine_coverage && (
             <ChartTile

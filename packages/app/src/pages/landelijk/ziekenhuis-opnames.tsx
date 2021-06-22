@@ -3,11 +3,10 @@ import {
   MunicipalHospitalNiceValue,
   MunicipalityProperties,
   RegionalHospitalNiceValue,
-  SafetyRegionProperties,
+  SafetyRegionProperties
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -17,7 +16,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
@@ -33,13 +32,13 @@ import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -92,24 +91,19 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           description={text.metadata.description}
         />
         <TileList>
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.ziekenhuizen}
-            screenReaderCategory={
-              siteText.ziekenhuisopnames_per_dag.titel_sidebar
-            }
+          <InformationBlock
             title={text.titel}
+            description={text.pagina_toelichting}
             icon={<Ziekenhuis />}
-            subtitle={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValueNice.date_unix,
               dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiTile

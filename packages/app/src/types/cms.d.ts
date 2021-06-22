@@ -180,9 +180,7 @@ export type DecoratedLink = {
 };
 
 export type VaccinationPageQuery = {
-  pageInfo: TitleDescriptionBlock;
   pageLinks: DecoratedLink[];
-  linksTitle: string;
   title: string;
   description: RichContentBlock[];
   milestones: Milestones[];

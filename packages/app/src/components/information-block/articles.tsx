@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
-import { Heading, Text } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -15,15 +15,15 @@ interface ArticlesProps {
 export function Articles({ articles }: ArticlesProps) {
   return (
     <Box>
-      <Heading
-        level={3}
+      <InlineText
         mb={2}
+        fontSize="1.25rem"
         as="span"
         fontWeight="bold"
         css={css({ display: 'block' })}
       >
-        Nuttige links
-      </Heading>
+        Artikelen over dit onderwerp
+      </InlineText>
       {articles.map((article, index) => (
         <ArticleItem
           key={index}

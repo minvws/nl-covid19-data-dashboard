@@ -1,8 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import Gedrag from '~/assets/gedrag.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
@@ -87,11 +86,10 @@ export default function BehaviorPage(
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
-            category={intl.siteText.nationaal_layout.headings.gedrag}
+          <InformationBlock
             title={nl_gedrag.pagina.titel}
             icon={<Gedrag />}
-            subtitle={nl_gedrag.pagina.toelichting}
+            description={nl_gedrag.pagina.toelichting}
             metadata={{
               datumsText: nl_gedrag.datums,
               dateOrRange: {
@@ -101,7 +99,8 @@ export default function BehaviorPage(
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
               dataSources: [nl_gedrag.bronnen.rivm],
             }}
-            reference={nl_gedrag.reference}
+            referenceLink={nl_gedrag.reference.href}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
@@ -152,8 +151,6 @@ export default function BehaviorPage(
               />
             </Tile>
           </TwoKpiSection>
-
-          <ArticleStrip articles={content.articles} />
 
           <BehaviorTableTile
             title={nl_gedrag.basisregels.title}

@@ -1,9 +1,8 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
@@ -70,22 +69,19 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.ziekenhuizen}
-            screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
+          <InformationBlock
             title={text.titel}
             icon={<Arts />}
-            subtitle={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: dataIntake.last_value.date_unix,
               dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
-            reference={text.reference}
+            description={text.pagina_toelichting}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
-
-          <ArticleStrip articles={content?.articles} />
 
           <TwoKpiSection>
             <KpiTile

@@ -3,14 +3,13 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
@@ -80,12 +79,10 @@ const ElderlyAtHomeNationalPage = (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+          <InformationBlock
             title={text.section_positive_tested.title}
             icon={<ElderlyIcon />}
-            subtitle={text.section_positive_tested.description}
+            description={text.section_positive_tested.description}
             metadata={{
               datumsText: text.section_positive_tested.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
@@ -93,10 +90,9 @@ const ElderlyAtHomeNationalPage = (
                 elderlyAtHomeData.last_value.date_of_insertion_unix,
               dataSources: [text.section_positive_tested.bronnen.rivm],
             }}
-            reference={text.section_positive_tested.reference}
+            referenceLink={text.section_positive_tested.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -212,10 +208,10 @@ const ElderlyAtHomeNationalPage = (
             />
           </ChoroplethTile>
 
-          <ContentHeader
+          <InformationBlock
             title={text.section_deceased.title}
             icon={<ElderlyIcon />}
-            subtitle={text.section_deceased.description}
+            description={text.section_deceased.description}
             metadata={{
               datumsText: text.section_deceased.datums,
               dateOrRange: elderlyAtHomeData.last_value.date_unix,
@@ -223,7 +219,7 @@ const ElderlyAtHomeNationalPage = (
                 elderlyAtHomeData.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased.bronnen.rivm],
             }}
-            reference={text.section_deceased.reference}
+            referenceLink={text.section_deceased.reference.href}
           />
 
           <TwoKpiSection>

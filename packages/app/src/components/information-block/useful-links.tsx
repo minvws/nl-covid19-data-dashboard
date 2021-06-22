@@ -4,7 +4,7 @@ import ChevronLargeIcon from '~/assets/chevron-large.svg';
 import ExternalLinkIcon from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
-import { Heading, InlineText } from '~/components/typography';
+import { InlineText } from '~/components/typography';
 import { asResponsiveArray } from '~/style/utils';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
@@ -19,15 +19,15 @@ interface usefulLinksProps {
 export function UsefulLinks({ links }: usefulLinksProps) {
   return (
     <Box>
-      <Heading
-        level={3}
+      <InlineText
         mb={2}
+        fontSize="1.25rem"
         as="span"
         fontWeight="bold"
         css={css({ display: 'block' })}
       >
         Nuttige links
-      </Heading>
+      </InlineText>
       <OrderedList>
         {links.map((link, index) => (
           <ListItem key={index}>

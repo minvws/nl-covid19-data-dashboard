@@ -2,7 +2,7 @@ import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
@@ -79,20 +79,20 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
-            category={siteText.veiligheidsregio_layout.headings.besmettingen}
+          <InformationBlock
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
               safetyRegion: safetyRegionName,
             })}
             icon={<CoronaVirusIcon />}
-            subtitle={text.section_deceased_rivm.description}
-            reference={text.section_deceased_rivm.reference}
+            description={text.section_deceased_rivm.description}
+            referenceLink={text.section_deceased_rivm.reference.href}
             metadata={{
               datumsText: text.section_deceased_rivm.datums,
               dateOrRange: dataRivm.last_value.date_unix,
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
+            articles={content.articles}
           />
 
           <ArticleStrip articles={content.articles} />
@@ -186,11 +186,11 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <InformationBlock
             title={siteText.section_sterftemonitor_vr.title}
             icon={<CoronaVirusIcon />}
-            subtitle={siteText.section_sterftemonitor_vr.description}
-            reference={siteText.section_sterftemonitor_vr.reference}
+            description={siteText.section_sterftemonitor_vr.description}
+            referenceLink={siteText.section_sterftemonitor_vr.reference.href}
             metadata={{
               datumsText: siteText.section_sterftemonitor_vr.datums,
               dateOrRange: {

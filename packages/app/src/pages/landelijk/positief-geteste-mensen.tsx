@@ -9,7 +9,6 @@ import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -20,7 +19,7 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -107,25 +106,20 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={
-              siteText.positief_geteste_personen.titel_sidebar
-            }
+          <InformationBlock
             title={text.titel}
             icon={<Getest />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: dataOverallLastValue.date_unix,
               dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.main.articles}
           />
-          {content.main?.articles && (
-            <ArticleStrip articles={content.main?.articles} />
-          )}
+
           <TwoKpiSection>
             <KpiTile
               title={text.kpi_titel}
@@ -336,23 +330,21 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <ContentHeader
+          <InformationBlock
             title={ggdText.titel}
-            skipLinkAnchor={true}
             id="ggd"
             icon={<Afname />}
-            subtitle={ggdText.toelichting}
+            description={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,
               dateOrRange: dataGgdDailyLastValue.date_unix,
               dateOfInsertionUnix: dataGgdDailyLastValue.date_of_insertion_unix,
               dataSources: [ggdText.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.ggd.articles}
           />
-          {content.ggd?.articles && (
-            <ArticleStrip articles={content.ggd.articles} />
-          )}
+
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}

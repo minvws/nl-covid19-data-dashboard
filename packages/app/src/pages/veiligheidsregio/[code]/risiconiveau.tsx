@@ -14,8 +14,8 @@ import {
   CategoricalBarScale,
   getCategoryLevel,
 } from '~/components/categorical-bar-scale';
-import { ContentHeader } from '~/components/content-header';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -121,13 +121,12 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
-            category={siteText.veiligheidsregio_layout.headings.inschaling}
+          <InformationBlock
             title={replaceVariablesInText(text.titel, {
               safetyRegionName,
             })}
-            subtitle={text.pagina_toelichting}
-            reference={text.reference}
+            description={text.pagina_toelichting}
+            referenceLink={text.reference.href}
             metadata={{
               datumsText: text.datums,
               dateOrRange: hospital_nice_sum.last_value.date_end_unix,

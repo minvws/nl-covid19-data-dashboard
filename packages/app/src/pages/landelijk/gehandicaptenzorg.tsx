@@ -5,14 +5,13 @@ import {
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { DisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/disability-infected-locations-regional-tooltip';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
@@ -74,24 +73,19 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.kwetsbare_groepen}
-            screenReaderCategory={
-              siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
-            }
+          <InformationBlock
             title={positiveTestedPeopleText.titel}
             icon={<Gehandicaptenzorg />}
-            subtitle={positiveTestedPeopleText.pagina_toelichting}
+            description={positiveTestedPeopleText.pagina_toelichting}
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
             }}
-            reference={positiveTestedPeopleText.reference}
+            referenceLink={positiveTestedPeopleText.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -158,19 +152,18 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <InformationBlock
             id="besmette-locaties"
-            skipLinkAnchor={true}
             title={infectedLocationsText.titel}
             icon={<Locatie />}
-            subtitle={infectedLocationsText.pagina_toelichting}
+            description={infectedLocationsText.pagina_toelichting}
             metadata={{
               datumsText: infectedLocationsText.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [infectedLocationsText.bronnen.rivm],
             }}
-            reference={infectedLocationsText.reference}
+            referenceLink={infectedLocationsText.reference.href}
           />
 
           <TwoKpiSection>
@@ -257,19 +250,18 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <InformationBlock
             id="sterfte"
-            skipLinkAnchor={true}
             title={locationDeaths.titel}
             icon={<CoronaVirus />}
-            subtitle={locationDeaths.pagina_toelichting}
+            description={locationDeaths.pagina_toelichting}
             metadata={{
               datumsText: locationDeaths.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [locationDeaths.bronnen.rivm],
             }}
-            reference={locationDeaths.reference}
+            referenceLink={locationDeaths.reference.href}
           />
 
           <TwoKpiSection>
