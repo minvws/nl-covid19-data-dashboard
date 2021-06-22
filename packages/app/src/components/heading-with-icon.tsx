@@ -52,7 +52,7 @@ export function HeadingWithIcon(props: HeadingWithIconProps) {
       flexDirection="row"
       flexWrap="nowrap"
       alignItems="center"
-      mb={-2}
+      // mb={-2}
     >
       <Icon small={headingLevel > 2}>{icon}</Icon>
 

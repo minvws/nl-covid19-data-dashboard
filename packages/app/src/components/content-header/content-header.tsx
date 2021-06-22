@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Metadata, MetadataProps } from '~/components/content-header/metadata';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import {
@@ -9,10 +10,9 @@ import {
   InlineText,
   Text,
 } from '~/components/typography';
-import { Link } from '~/utils/link';
 import { asResponsiveArray } from '~/style/utils';
+import { Link } from '~/utils/link';
 import { Box } from '../base';
-import { isDefined } from 'ts-is-present';
 
 /**
  * The left margin '-100w' and left padding '100w' ensure skip link anchors have
