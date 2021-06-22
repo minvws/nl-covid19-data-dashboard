@@ -264,11 +264,11 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             <Heading level={3} as="h2">
               {text.recente_cijfers}
             </Heading>
-            <TwoKpiSection spacing={6}>
+            <TwoKpiSection spacing={4}>
               <Box>
                 <HeadingWithIcon
                   title={text.positieve_testen.title}
-                  headingLevel={5}
+                  headingLevel={4}
                   as="h3"
                   icon={<Getest />}
                   mb={2}
@@ -287,10 +287,12 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   </InlineText>
                 </Box>
 
-                <CategoricalBarScale
-                  categories={positiveTestedEscalationThresholds}
-                  value={tested_overall_sum.last_value.infected_per_100k}
-                />
+                <Box maxWidth="480px">
+                  <CategoricalBarScale
+                    categories={positiveTestedEscalationThresholds}
+                    value={tested_overall_sum.last_value.infected_per_100k}
+                  />
+                </Box>
 
                 <Markdown content={text.positieve_testen.description} />
 
@@ -300,6 +302,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     tested_overall_sum.last_value.date_end_unix,
                   ]}
                   source={text.bronnen.rivm_positieve_testen_kpi}
+                  mb={{ _: 0, lg: -3 }}
                   isTileFooter
                 />
               </Box>
@@ -326,10 +329,12 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   </InlineText>
                 </Box>
 
-                <CategoricalBarScale
-                  categories={hospitalAdmissionsEscalationThresholds}
-                  value={hospital_nice_sum.last_value.admissions_per_1m}
-                />
+                <Box maxWidth="480px">
+                  <CategoricalBarScale
+                    categories={hospitalAdmissionsEscalationThresholds}
+                    value={hospital_nice_sum.last_value.admissions_per_1m}
+                  />
+                </Box>
 
                 <Markdown content={text.ziekenhuisopnames.description} />
 

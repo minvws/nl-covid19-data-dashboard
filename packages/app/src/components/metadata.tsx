@@ -3,8 +3,9 @@ import { Box } from './base';
 import { Text } from './typography';
 import { useIntl } from '~/intl';
 import { ExternalLink } from '~/components/external-link';
+import { MarginBottomProps } from 'styled-system';
 
-export interface MetadataProps {
+export interface MetadataProps extends MarginBottomProps {
   date?: number | [number, number];
   source?: {
     text: string;
@@ -22,6 +23,7 @@ export function Metadata({
   obtained,
   isTileFooter,
   datumsText,
+  mb,
 }: MetadataProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -49,7 +51,7 @@ export function Metadata({
       )}
 
       {isTileFooter && (
-        <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
+        <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">
           <Text my={0} color="annotation" fontSize={1}>
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {
