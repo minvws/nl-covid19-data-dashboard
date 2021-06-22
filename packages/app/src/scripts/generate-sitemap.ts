@@ -1,4 +1,8 @@
 /* eslint no-console: "off" */
+/**
+ * This file doesn't execute yet. See also
+ * https://github.com/TypeStrong/ts-node/issues/1007#issuecomment-865653305
+ */
 import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
 import dotenv from 'dotenv';

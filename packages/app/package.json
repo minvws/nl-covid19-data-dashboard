@@ -148,8 +148,7 @@
     "download": "node ./infra/download.js",
     "clean": "rimraf .next",
     "exec-ts": "node --loader ts-node/esm --experimental-specifier-resolution=node",
-    "generate-sitemap_x": "yarn exec-ts src/scripts/generate-sitemap.ts",
-    "generate-sitemap": "ts-node src/scripts/generate-sitemap.ts"
+    "generate-sitemap": "yarn exec-ts src/scripts/generate-sitemap.ts"
   },
   "browserslist": "last 2 years"
 }
