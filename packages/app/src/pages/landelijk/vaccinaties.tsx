@@ -68,7 +68,7 @@ export const getStaticProps = createGetStaticProps(
     highlight: {
       articles?: ArticleSummary[];
     };
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
       "page": ${getVaccinePageQuery()},
