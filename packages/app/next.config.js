@@ -51,5 +51,3 @@ const nextConfig = {
 const plugins = [withBundleAnalyzer];
 
 module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
-
-// module.exports = withTranspileModules(nextConfig);

@@ -5,6 +5,7 @@
   "type": "module",
   "license": "ISC",
   "exports": "./dist/index.js",
+  "//": "Main was required to make Jest imports work",
   "main": "./dist/index.js",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"

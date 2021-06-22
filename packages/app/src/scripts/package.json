@@ -1,0 +1,4 @@
+{
+  "//": "Make scripts execute as ESM for ts-node (until Nextjs supports type module in root package",
+  "type": "module"
+}
