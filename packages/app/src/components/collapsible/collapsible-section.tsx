@@ -92,6 +92,10 @@ const Panel = styled((props) => <DisclosurePanel {...props} />)(
   })
 );
 
+function locationHashEquals(id: string) {
+  return window.location.hash === `#${id}`;
+}
+
 interface CollapsibleSectionProps extends BoxProps {
   summary: string;
   children: ReactNode;
@@ -105,8 +109,9 @@ export const CollapsibleSection = ({
   id,
   hideBorder,
 }: CollapsibleSectionProps) => {
-  const [open, setOpen] = useState(true);
-  const { wrapperRef } = useSetLinkTabbability(open);
+  /* Start in an open state so it is open when JS is disabled */
+  const [isOpen, setIsOpen] = useState(true);
+  const { wrapperRef } = useSetLinkTabbability(isOpen);
 
   const { ref, height: contentHeight } = useResizeObserver();
 
@@ -115,8 +120,21 @@ export const CollapsibleSection = ({
    * If so, the collapsible needs to be opened.
    */
   useEffect(() => {
-    const isOpenedByQueryParam = window.location.hash.substr(1) === id;
-    setOpen(isOpenedByQueryParam);
+    function handleHashChange() {
+      if (id && locationHashEquals(id)) {
+        setIsOpen(true);
+      }
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    /**
+     * Since we are open by default, we need to close all sections which are not
+     * opened by a hash now
+     */
+    setIsOpen(!!id && locationHashEquals(id));
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, [id]);
 
   return (
@@ -126,7 +144,7 @@ export const CollapsibleSection = ({
       borderTopColor={hideBorder ? undefined : 'lightGray'}
       id={id}
     >
-      <Disclosure open={open} onChange={() => setOpen(!open)}>
+      <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <Summary>
           {summary}
           {id && (
@@ -139,7 +157,7 @@ export const CollapsibleSection = ({
         <Panel
           style={{
             /* panel max height is only controlled when collapsed, or during animations */
-            height: open ? contentHeight : 0,
+            height: isOpen ? contentHeight : 0,
           }}
         >
           <div ref={wrapperRef}>
