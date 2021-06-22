@@ -115,7 +115,7 @@ const Header = styled.button<{ showChevron: boolean; open: boolean }>((props) =>
           backgroundImage: 'url("/images/chevron-down.svg")',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          transform: props.open ? 'rotate(0deg)' : 'rotate(-90deg)',
+          transform: props.open ? 'rotate(180deg)' : 'rotate(0deg)',
           transition: 'transform 0.4s ease-in-out',
           content: '""',
           flex: '0 0 3rem',
