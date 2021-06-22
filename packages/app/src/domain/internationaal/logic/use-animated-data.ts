@@ -1,7 +1,11 @@
 import { useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
+import { FetchLoadingState, fetchWithRetry } from '~/utils/fetch-with-retry';
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
+const isLoading = Symbol('data_is_loading');
+
+type IsLoading = typeof isLoading;
 
 export function useAnimatedData<T>(
   initialData: T[],
@@ -10,10 +14,11 @@ export function useAnimatedData<T>(
 ) {
   const playPosition = useRef(startPosition);
   const playState = useRef(false);
-  const positions = useRef<Record<number, T[] | Promise<Response>>>({
+  const positions = useRef<Record<number, T[] | IsLoading>>({
     [startPosition]: initialData,
   });
   const [data, setData] = useState(initialData);
+  const [loadingState, setLoadingState] = useState<FetchLoadingState>('idle');
 
   async function play() {
     if (!playState.current) {
@@ -36,21 +41,23 @@ export function useAnimatedData<T>(
 
   async function loadNext(date: number) {
     const positionValue = positions.current[date];
-    if (isPromise(positionValue)) {
+    if (positionValue === isLoading) {
       return;
     } else if (isRecord(positionValue)) {
       setData(positionValue);
     } else {
-      positions.current[date] = fetch(`${baseUrl}/${date}.json`);
-      const response = await (positions.current[date] as Promise<Response>);
-      if (response.ok) {
-        const remoteData = await response.json();
+      positions.current[date] = isLoading;
+      try {
+        const remoteData = await fetchWithRetry<T[]>(
+          `${baseUrl}/${date}.json`,
+          setLoadingState
+        );
         const mergedData = initialData.map((x, idx) => ({
           ...x,
           ...remoteData[idx],
         }));
         setData((positions.current[date] = mergedData));
-      } else {
+      } catch (e) {
         playState.current = false;
       }
     }
@@ -66,11 +73,7 @@ export function useAnimatedData<T>(
     setData(positions.current[startPosition] as T[]);
   }
 
-  return [data, play, stop, reset] as const;
-}
-
-function isPromise(item: any): item is Promise<Response> {
-  return isDefined(item) && 'then' in item;
+  return [data, play, stop, reset, loadingState] as const;
 }
 
 function isRecord<T>(item: any): item is Record<string, T[]> {
