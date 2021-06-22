@@ -12,8 +12,8 @@
   "types": "dist/index",
   "sideEffects": false,
   "scripts": {
-    "test": "jest --watch",
-    "test:ci": "jest --ci",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:ci": "NODE_OPTIONS=--experimental-vm-modules jest cross-env --ci",
     "build": "tsc --build && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "del-cli dist tsconfig.tsbuildinfo",
     "compile": "tsc -b .",
