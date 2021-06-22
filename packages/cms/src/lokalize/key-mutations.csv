@@ -74,6 +74,7 @@ timestamp,action,key
 2021-06-16T14:52:34.060Z,add,covid_varianten.varianten_tabel.verschil.meer
 2021-06-16T14:52:35.078Z,add,covid_varianten.varianten_tabel.verschil.minder
 2021-06-16T14:52:36.093Z,add,covid_varianten.varianten_tabel.verschil.gelijk
+2021-06-18T10:19:43.009Z,add,covid_varianten.sidebar_beschrijving
 2021-06-18T06:09:22.572Z,add,waarde_annotaties.per_100_000_inwoners
 2021-06-18T10:02:49.320Z,delete,over_risiconiveaus.scoreboard.sort_option.location_z_to_a
 2021-06-18T12:48:34.141Z,add,rioolwater_metingen.split_labels.segment_0
