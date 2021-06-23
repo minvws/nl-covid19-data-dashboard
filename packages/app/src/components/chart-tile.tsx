@@ -45,7 +45,7 @@ type ChartTileProps = {
   description?: string;
   timeframeInitialValue?: TimeframeOption;
 } & (
-  | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
+  | // Check if the children are a function to support the timeframe callback, otherwise accept a normal react node
   {
       timeframeOptions?: undefined;
       children: ReactNode;
