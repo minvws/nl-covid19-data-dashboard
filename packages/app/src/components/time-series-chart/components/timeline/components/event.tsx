@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
-import { ReactElement, ReactNode, RefObject, useRef } from 'react';
+import { ReactNode, RefObject, useRef } from 'react';
 import styled from 'styled-components';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
@@ -76,10 +76,9 @@ export function TimelineEvent({
             content={tooltipContent}
             isSelected={isSelected}
             contentRef={contentRef}
+            onFocus={onShow}
           >
-            <div tabIndex={0} onFocus={onShow}>
-              <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
-            </div>
+            <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
           </TooltipTrigger>
         </div>
       </div>
@@ -92,11 +91,13 @@ function TooltipTrigger({
   content,
   contentRef,
   children,
+  onFocus,
 }: {
   content: ReactNode;
   isSelected: boolean;
   contentRef: RefObject<HTMLDivElement>;
-  children: ReactElement;
+  children: ReactNode;
+  onFocus: () => void;
 }) {
   const isTouch = useIsTouchDevice();
   const contentWithRef = <div ref={contentRef}>{content}</div>;
@@ -108,7 +109,9 @@ function TooltipTrigger({
       interactive={true}
       visible={isSelected}
     >
-      {children}
+      <div tabIndex={0} onFocus={onFocus} aria-role="text">
+        {children}
+      </div>
     </WithTooltip>
   ) : (
     <WithTooltip
@@ -117,7 +120,9 @@ function TooltipTrigger({
       interactive={false}
       visible={isSelected}
     >
-      {children}
+      <div tabIndex={0} onFocus={onFocus} aria-role="text">
+        <div aria-hidden>{children}</div>
+      </div>
     </WithTooltip>
   );
 }

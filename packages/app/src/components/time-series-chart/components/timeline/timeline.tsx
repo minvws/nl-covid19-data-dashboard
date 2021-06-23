@@ -97,7 +97,7 @@ export const Timeline = memo(function Timeline({
               isHighlighted={isDefined(highlightIndex) && i === highlightIndex}
               tooltipContent={
                 <TimelineTooltipContent
-                  value={x}
+                  config={x}
                   onNext={() => setIndex(i + 1)}
                   onPrev={() => setIndex(i - 1)}
                   onClose={() => hideTooltip(i)}

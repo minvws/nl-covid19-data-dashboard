@@ -32,7 +32,7 @@ export interface TimelineEventRange {
   };
 }
 
-export function getTimelineEventRange(
+function getTimelineEventRange(
   config: TimelineEventConfig,
   xScale: ScaleLinear<number, number>
 ): TimelineEventRange {

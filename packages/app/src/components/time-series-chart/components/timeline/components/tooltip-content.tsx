@@ -10,23 +10,25 @@ import { useIntl } from '~/intl';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
 interface TimelineTooltipContentProps {
-  value: TimelineEventConfig;
+  config: TimelineEventConfig;
   onNext: () => void;
   onPrev: () => void;
   onClose: () => void;
 }
 
 export function TimelineTooltipContent({
-  value,
+  config,
   onNext,
   onPrev,
   onClose,
 }: TimelineTooltipContentProps) {
   const intl = useIntl();
   const isTouch = useIsTouchDevice();
-  const date = Array.isArray(value.date)
-    ? value.date.map((x) => intl.formatDateFromSeconds(x, 'medium')).join(' - ')
-    : intl.formatDateFromSeconds(value.date, 'medium');
+  const date = Array.isArray(config.date)
+    ? config.date
+        .map((x) => intl.formatDateFromSeconds(x, 'medium'))
+        .join(' - ')
+    : intl.formatDateFromSeconds(config.date, 'medium');
 
   const stopPropagation = useCallback(
     (evt: TouchEvent | MouseEvent) => evt.stopPropagation(),
@@ -67,10 +69,10 @@ export function TimelineTooltipContent({
         )}
 
         <Text fontSize={1} fontWeight="bold">
-          {value.title}
+          {config.title}
         </Text>
         <Text mb={0} fontSize={1}>
-          {value.description}
+          {config.description}
         </Text>
       </Box>
 
@@ -84,7 +86,7 @@ export function TimelineTooltipContent({
           justifyContent="center"
           fontSize={1}
         >
-          <TextButton onClick={onClose}>Sluiten</TextButton>
+          <TextButton onClick={onClose}>@TODO Sluiten</TextButton>
         </Box>
       )}
     </Box>
