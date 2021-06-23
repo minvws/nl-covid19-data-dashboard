@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { FetchLoadingState, fetchWithRetry } from '~/utils/fetch-with-retry';
+import { FetchState, fetchWithRetry } from '~/utils/fetch-with-retry';
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
 const isFetching = Symbol('data_is_fetching');
@@ -31,7 +31,7 @@ export function useAnimatedData<T>(
   // The currently displayed data set
   const [data, setData] = useState(initialData);
   // Indicates whether any data is currently being fetched or if an error occured
-  const [loadingState, setLoadingState] = useState<FetchLoadingState>('idle');
+  const [loadingState, setLoadingState] = useState<FetchState>('idle');
   // The timestamp of the currently displayed data
   const [currentDate, setCurrentDate] = useState(initialTimestamp);
 

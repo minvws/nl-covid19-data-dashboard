@@ -1,16 +1,16 @@
 import { enableFetchMocks, FetchMock } from 'jest-fetch-mock';
 import { Dispatch, SetStateAction } from 'react';
-import { FetchLoadingState, fetchWithRetry } from '../fetch-with-retry';
+import { FetchState, fetchWithRetry } from '../fetch-with-retry';
 
 enableFetchMocks();
 
 describe('Util: fetchWithRetry', () => {
-  const setLoadingState: Dispatch<SetStateAction<FetchLoadingState>> = ((
-    newState: FetchLoadingState
+  const setLoadingState: Dispatch<SetStateAction<FetchState>> = ((
+    newState: FetchState
   ) => loadingStates.push(newState) as unknown) as Dispatch<
-    SetStateAction<FetchLoadingState>
+    SetStateAction<FetchState>
   >;
-  let loadingStates: FetchLoadingState[] = [];
+  let loadingStates: FetchState[] = [];
 
   beforeEach(() => {
     (fetch as FetchMock).resetMocks();

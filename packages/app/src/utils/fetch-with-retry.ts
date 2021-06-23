@@ -8,11 +8,11 @@ const retryCodes = [
   524 /* Cloudflare  Timeout Occurred */,
 ];
 
-export type FetchLoadingState = 'idle' | 'loading' | 'error' | 'retrying';
+export type FetchState = 'idle' | 'loading' | 'error' | 'retrying';
 
 export async function fetchWithRetry<T>(
   input: RequestInfo,
-  setLoadingState: Dispatch<SetStateAction<FetchLoadingState>>,
+  setLoadingState: Dispatch<SetStateAction<FetchState>>,
   init?: RequestInit,
   retries = 3,
   retryDelayMs = 300
