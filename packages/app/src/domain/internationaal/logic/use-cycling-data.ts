@@ -6,6 +6,20 @@ const isFetching = Symbol('data_is_fetching');
 
 type IsFetching = typeof isFetching;
 
+/**
+ * This hook will load data per the given interval from the given url
+ * and return so-called playback controls and a stateful data object.
+ *
+ * Playback controls:
+ * play - starts the cycle
+ * stop - stops the cycle
+ * reset - restarts the cycle from the beginning
+ * skip - set the current play position to the given index
+ *
+ * Two additional stateful objects are returned as well:
+ * loadingState - This indicates whether any data is being fetched or not, and whether an error occurred during fetching
+ * currentTimestamp - The timestamp of the current active data
+ */
 export function useCyclingData<T>(
   initialData: T[],
   firstTimestamp: number,
@@ -34,7 +48,7 @@ export function useCyclingData<T>(
   // Indicates whether any data is currently being fetched or if an error occured
   const [loadingState, setLoadingState] = useState<FetchState>('idle');
   // The timestamp of the currently displayed data
-  const [currentDate, setCurrentDate] = useState(firstTimestamp);
+  const [currentTimestamp, setCurrentTimestamp] = useState(firstTimestamp);
 
   async function play() {
     if (!playState.current) {
@@ -69,7 +83,7 @@ export function useCyclingData<T>(
 
     const timestamp = timestampList.current[index];
     const positionValue = timestampsData.current[timestamp];
-    setCurrentDate(timestamp);
+    setCurrentTimestamp(timestamp);
 
     if (positionValue === isFetching) {
       return;
@@ -88,7 +102,7 @@ export function useCyclingData<T>(
         // We can't check currentDate here since we might be looking at older state
         // so we use this hack to compare the curried timestamp to the actual latest state
         // and update the Data state accordingly:
-        setCurrentDate((d) => {
+        setCurrentTimestamp((d) => {
           if (d === timestamp) {
             setData(fetchedData);
           }
@@ -113,7 +127,15 @@ export function useCyclingData<T>(
     }
   }
 
-  return [data, play, skip, stop, reset, loadingState, currentDate] as const;
+  return [
+    data,
+    play,
+    skip,
+    stop,
+    reset,
+    loadingState,
+    currentTimestamp,
+  ] as const;
 }
 
 function isArray<T>(item: IsFetching | T[]): item is T[] {
