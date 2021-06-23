@@ -28,6 +28,9 @@
         "kappa_percentage",
         "kappa_occurrence",
         "kappa_is_variant_of_concern",
+        "lambda_percentage",
+        "lambda_occurrence",
+        "lambda_is_variant_of_concern",
         "other_percentage",
         "other_occurrence",
         "other_is_variant_of_concern",
@@ -108,6 +111,15 @@
           "type": "integer"
         },
         "kappa_is_variant_of_concern": {
+          "type": "boolean"
+        },
+        "lambda_percentage": {
+          "type": "number"
+        },
+        "lambda_occurrence": {
+          "type": "integer"
+        },
+        "lambda_is_variant_of_concern": {
           "type": "boolean"
         },
         "other_percentage": {
