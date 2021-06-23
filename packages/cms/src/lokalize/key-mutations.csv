@@ -98,3 +98,7 @@ timestamp,action,key
 2021-06-18T12:50:25.165Z,delete,rioolwater_metingen.split_labels.waarde_600_800
 2021-06-18T12:50:25.165Z,delete,rioolwater_metingen.split_labels.waarde_800_plus
 2021-06-18T12:50:25.165Z,delete,rioolwater_metingen.split_labels.waarde_0_200
+2021-06-23T11:06:45.622Z,add,informatie_header.handige_links
+2021-06-23T11:07:04.030Z,add,informatie_header.artikelen
+2021-06-23T11:07:13.166Z,add,informatie_header.bron
+2021-06-23T11:07:27.070Z,add,informatie_header.meer_informatie_link

@@ -5,10 +5,10 @@ import ExternalLinkIcon from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
-
 interface usefulLinksProps {
   links: {
     title: string;
@@ -17,16 +17,24 @@ interface usefulLinksProps {
 }
 
 export function UsefulLinks({ links }: usefulLinksProps) {
+  const { siteText } = useIntl();
+
   return (
-    <Box>
+    <Box
+      borderTop="1px solid"
+      borderTopColor="border"
+      width="100%"
+      pt={3}
+      mt={3}
+    >
       <InlineText
         mb={2}
-        fontSize="1.25rem"
+        fontSize={2}
         as="span"
         fontWeight="bold"
         css={css({ display: 'block' })}
       >
-        Nuttige links
+        {siteText.informatie_header.handige_links}
       </InlineText>
       <OrderedList>
         {links.map((link, index) => (

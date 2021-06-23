@@ -4,6 +4,7 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { InlineText, Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -13,26 +14,29 @@ interface ArticlesProps {
 }
 
 export function Articles({ articles }: ArticlesProps) {
+  const { siteText } = useIntl();
+
   return (
-    <Box>
+    <>
       <InlineText
         mb={2}
-        fontSize="1.25rem"
+        fontSize={2}
         as="span"
         fontWeight="bold"
         css={css({ display: 'block' })}
       >
-        Artikelen over dit onderwerp
+        {siteText.informatie_header.artikelen}
       </InlineText>
       {articles.map((article, index) => (
         <ArticleItem
+          isLast={index === articles.length - 1}
           key={index}
           title={article.title}
           cover={article.cover}
           slug={article.slug.current}
         />
       ))}
-    </Box>
+    </>
   );
 }
 
@@ -40,12 +44,13 @@ interface ArticleItemProps {
   slug: string;
   cover: ImageBlock;
   title: string;
+  isLast: boolean;
 }
 
-export function ArticleItem({ slug, cover, title }: ArticleItemProps) {
+export function ArticleItem({ slug, cover, title, isLast }: ArticleItemProps) {
   return (
     <Link passHref href={`/artikelen/${slug}`}>
-      <StyledLink>
+      <StyledLink isLast={isLast}>
         <Box width={100} minWidth={100} maxHeight={66} overflow="hidden">
           <SanityImage
             {...getImageProps(cover, {
@@ -61,12 +66,12 @@ export function ArticleItem({ slug, cover, title }: ArticleItemProps) {
   );
 }
 
-const StyledLink = styled.a(
+const StyledLink = styled.a<{ isLast: boolean }>((x) =>
   css({
     color: 'blue',
     textDecoration: 'none',
     display: 'flex',
     fontWeight: 'bold',
-    mb: 3,
+    mb: x.isLast ? 0 : 3,
   })
 );

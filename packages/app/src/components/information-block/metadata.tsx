@@ -90,7 +90,7 @@ export function Metadata({
   );
 
   return (
-    <Box spacing={2}>
+    <Box spacing={2} mb={{ _: 3, md: 0 }}>
       <Box display="flex" alignItems="flex-start" color="annotation">
         <Box as="span" minWidth="1.8rem" mt={1}>
           <ClockIcon aria-hidden color={theme.colors.annotation} />
@@ -102,7 +102,7 @@ export function Metadata({
         <MetadataItem
           icon={<DatabaseIcon aria-hidden />}
           items={dataSources}
-          label={referenceLink ? 'Bron' : text.source}
+          label={referenceLink ? siteText.informatie_header.bron : text.source}
           accessibilityText={siteText.accessibility.text_source}
           accessibilitySubject={accessibilitySubject}
           referenceLink={referenceLink}

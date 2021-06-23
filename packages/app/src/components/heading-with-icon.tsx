@@ -51,6 +51,7 @@ export function HeadingWithIcon(props: HeadingWithIconProps) {
     headingLevel = 3,
     mb = -2,
     ml = 0,
+    mt = 0,
     ...headingProps
   } = props;
 
@@ -60,6 +61,7 @@ export function HeadingWithIcon(props: HeadingWithIconProps) {
       flexDirection="row"
       flexWrap="nowrap"
       alignItems="center"
+      mt={mt}
       mb={mb}
       ml={ml}
     >

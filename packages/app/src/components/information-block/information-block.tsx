@@ -50,6 +50,8 @@ export function InformationBlock({
               icon={icon}
               title={title}
               headingLevel={headingLevel}
+              mb={2}
+              mt={1}
             />
           ) : (
             <Box display="flex" flexWrap="nowrap" alignItems="center">
@@ -84,7 +86,7 @@ export function InformationBlock({
                   </MetadataBox>
                 )}
               </Box>
-              <Box mb={{ _: usefulLinks ? 3 : 0, md: 0 }}>
+              <Box>
                 <Articles articles={articles} />
               </Box>
             </>
@@ -105,14 +107,7 @@ export function InformationBlock({
         </Box>
 
         {usefulLinks && usefulLinks.length > 0 && (
-          <Box
-            borderTop="1px solid"
-            borderTopColor="border"
-            width="100%"
-            pt={3}
-          >
-            <UsefulLinks links={usefulLinks} />
-          </Box>
+          <UsefulLinks links={usefulLinks} />
         )}
       </Tile>
     </header>
