@@ -14,10 +14,10 @@ import { VariantRow } from '../logic/use-variants-table-data';
 
 const columnKeys = [
   'variant_titel',
+  'eerst_gevonden',
   'percentage',
   'vorige_meeting',
   'aantal_monsters',
-  'eerst_gevonden',
 ] as const;
 
 type DesktopVariantsTableProps = {
@@ -44,6 +44,9 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
           <tr key={row.variant}>
             <VariantNameCell variant={row.variant} text={text} />
             <Cell>
+              <InlineText>{row.countryOfOrigin}</InlineText>
+            </Cell>
+            <Cell>
               <Box maxWidth="20em">
                 <PercentageBarWithNumber
                   percentage={row.percentage}
@@ -59,9 +62,6 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
                 occurrence={row.occurrence}
                 sampleSize={row.sampleSize}
               />
-            </Cell>
-            <Cell>
-              <InlineText>{row.countryOfOrigin}</InlineText>
             </Cell>
           </tr>
         ))}
