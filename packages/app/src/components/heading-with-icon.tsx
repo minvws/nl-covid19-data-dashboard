@@ -1,24 +1,24 @@
 import css from '@styled-system/css';
 import React from 'react';
 import { Box } from './base';
-import { Heading, HeadingProps } from './typography';
+import { Heading, HeadingProps, HeadingLevel } from './typography';
 
 type HeadingWithIconProps = {
   title: string;
   icon: JSX.Element;
   subtitle?: string;
-  headingLevel?: 1 | 2 | 3 | 4 | 5;
+  headingLevel?: HeadingLevel;
 } & Omit<HeadingProps, 'children' | 'level'>;
 
-function Icon({
-  children,
-  small,
-}: {
-  children: React.ReactNode;
-  small: boolean;
-}) {
-  const size = small ? '2.5rem' : '4rem';
+const iconSizeForHeadingLevel: Record<HeadingLevel, string> = {
+  1: '4rem',
+  2: '4rem',
+  3: '2.5rem',
+  4: '2rem',
+  5: '1.75rem',
+};
 
+function Icon({ children, size }: { children: React.ReactNode; size: string }) {
   return (
     <Box
       flex="0 0 auto"
@@ -44,7 +44,15 @@ function Icon({
 }
 
 export function HeadingWithIcon(props: HeadingWithIconProps) {
-  const { icon, title, subtitle, headingLevel = 3, ...headingProps } = props;
+  const {
+    icon,
+    title,
+    subtitle,
+    headingLevel = 3,
+    mb = -2,
+    ml = 0,
+    ...headingProps
+  } = props;
 
   return (
     <Box
@@ -52,9 +60,10 @@ export function HeadingWithIcon(props: HeadingWithIconProps) {
       flexDirection="row"
       flexWrap="nowrap"
       alignItems="center"
-      mb={-2}
+      mb={mb}
+      ml={ml}
     >
-      <Icon small={headingLevel > 2}>{icon}</Icon>
+      <Icon size={iconSizeForHeadingLevel[headingLevel]}>{icon}</Icon>
 
       <Box>
         <Heading
