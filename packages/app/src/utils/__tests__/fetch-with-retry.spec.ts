@@ -57,7 +57,6 @@ describe('Util: fetchWithRetry', () => {
       await fetchWithRetry(
         'https://mytestdomain.com/test.json',
         setLoadingState,
-        undefined,
         3,
         1
       );
@@ -86,7 +85,7 @@ describe('Util: fetchWithRetry', () => {
       () => Promise.resolve({ body: JSON.stringify({ values: [1, 2, 3] }) })
     );
 
-    const result = await fetchWithRetry<{ values: any[] }>(
+    await fetchWithRetry<{ values: any[] }>(
       'https://mytestdomain.com/test.json',
       setLoadingState
     );
@@ -101,7 +100,6 @@ describe('Util: fetchWithRetry', () => {
       await fetchWithRetry<{ values: any[] }>(
         'https://mytestdomain.com/test.json',
         setLoadingState,
-        undefined,
         0,
         0
       );

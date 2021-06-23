@@ -5,7 +5,7 @@ const retryCodes = [
   408 /* Request Timeout */, 500 /* Internal Server Error */,
   502 /* Bad Gateway */, 503 /* Service Unavailable */,
   504 /* Gateway Timeout */, 522 /* Connection timed out*/,
-  524 /* Cloudflare  Timeout Occurred */,
+  524 /* Cloudflare Timeout Occurred */,
 ];
 
 export type FetchState = 'idle' | 'loading' | 'error' | 'retrying';
@@ -13,9 +13,9 @@ export type FetchState = 'idle' | 'loading' | 'error' | 'retrying';
 export async function fetchWithRetry<T>(
   input: RequestInfo,
   setLoadingState: Dispatch<SetStateAction<FetchState>>,
-  init?: RequestInit,
   retries = 3,
-  retryDelayMs = 300
+  retryDelayMs = 300,
+  init?: RequestInit
 ) {
   setLoadingState('loading');
   const response = await fetch(input, init);
@@ -32,9 +32,9 @@ export async function fetchWithRetry<T>(
           const result = (await fetchWithRetry(
             input,
             setLoadingState,
-            init,
             retries - 1,
-            retryDelayMs * 2
+            retryDelayMs * 2,
+            init
           )) as T;
           resolve(result);
         } catch (e) {
