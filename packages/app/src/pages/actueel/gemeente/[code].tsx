@@ -6,9 +6,10 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { isEmpty } from 'lodash';
+import { isEmpty, some } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -360,11 +361,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
               <Box mt={4}>
                 <EscalationLevelExplanations
-                  hasUnknown={
-                    choropleth.vr.escalation_levels.filter(
-                      (item) => item.level === null
-                    ).length > 0
-                  }
+                  hasUnknownLevel={some(
+                    choropleth.vr.escalation_levels,
+                    (x) => !isPresent(x)
+                  )}
                 />
               </Box>
             </TopicalTile>

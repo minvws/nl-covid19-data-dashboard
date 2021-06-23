@@ -30,11 +30,11 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
   );
 }
 interface escalationLevelExplanationsProps {
-  hasUnknown: boolean;
+  hasUnknownLevel: boolean;
 }
 
 export function EscalationLevelExplanations({
-  hasUnknown,
+  hasUnknownLevel,
 }: escalationLevelExplanationsProps) {
   const { siteText } = useIntl();
 
@@ -59,7 +59,7 @@ export function EscalationLevelExplanations({
             explanation={siteText.escalatie_niveau.types['4'].toelichting}
           />
 
-          {hasUnknown && (
+          {hasUnknownLevel && (
             <EscalationLevelExplanation
               level={null}
               explanation={siteText.escalatie_niveau.types.onbekend.toelichting}
