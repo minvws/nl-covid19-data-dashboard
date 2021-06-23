@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { MouseEvent, TouchEvent, useCallback } from 'react';
 import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
@@ -27,8 +28,22 @@ export function TimelineTooltipContent({
     ? value.date.map((x) => intl.formatDateFromSeconds(x, 'medium')).join(' - ')
     : intl.formatDateFromSeconds(value.date, 'medium');
 
+  const stopPropagation = useCallback(
+    (evt: TouchEvent | MouseEvent) => evt.stopPropagation(),
+    []
+  );
+
   return (
-    <Box color="black" px={18} py={15} spacing={3}>
+    <Box
+      color="black"
+      px={18}
+      py={15}
+      spacing={3}
+      onTouchStart={stopPropagation}
+      onTouchMove={stopPropagation}
+      onMouseMove={stopPropagation}
+      onMouseLeave={stopPropagation}
+    >
       {isTouch && (
         <Box
           display="flex"

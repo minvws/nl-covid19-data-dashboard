@@ -3,12 +3,23 @@ import {
   midOfDayInSeconds,
   startOfDayInSeconds,
 } from '@corona-dashboard/common';
-import { ScaleLinear } from 'd3-scale';
+import { localPoint } from '@visx/event';
+import { voronoi } from '@visx/voronoi';
+import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { first, last } from 'lodash';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  MouseEvent,
+  TouchEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { isDefined } from 'ts-is-present';
 import { wrapAroundLength } from '~/utils/number';
-import { TimelineEventConfig } from '../../logic';
+import { Padding, TimelineEventConfig } from '../../logic';
+
+type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
 export function getTimelineEventRange(
   config: TimelineEventConfig,
@@ -82,5 +93,49 @@ export function useTimelineEventsState(
   return useMemo(
     () => ({ index, setIndex, events }),
     [index, setIndex, events]
+  );
+}
+
+export function useTimelineHoverHandler(
+  onHover: (index: number | undefined) => void,
+  {
+    events,
+    xScale,
+    padding,
+    width,
+  }: {
+    events: TimelineEventConfig[];
+    xScale: ScaleLinear<number, number> | ScaleBand<number>;
+    padding: Padding;
+    width: number;
+  }
+) {
+  const voronoiLayout = useMemo(
+    () =>
+      voronoi<TimelineEventConfig>({
+        x: (x) => xScale(Array.isArray(x.date) ? x.date[0] : x.date) as number,
+        y: () => 25,
+        width,
+        height: 50,
+      })(events),
+    [events, width, xScale]
+  );
+
+  return useCallback(
+    (event: TouchEvent | MouseEvent) => {
+      const mousePoint = localPoint(event.currentTarget, event as Event);
+
+      if (event.type === 'mouseleave' || !mousePoint) {
+        onHover(undefined);
+        return;
+      }
+
+      const closest =
+        voronoiLayout.find(mousePoint.x - padding.left, mousePoint.y, 30) ||
+        undefined;
+
+      onHover(closest?.index);
+    },
+    [padding.left, onHover, voronoiLayout]
   );
 }

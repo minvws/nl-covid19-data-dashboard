@@ -258,7 +258,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 <TimeSeriesChart
                   values={data.tested_overall.values}
                   timeframe={timeframe}
-                  formatTickValue={(x) => `${x}.000.000`}
                   seriesConfig={[
                     {
                       type: 'line',

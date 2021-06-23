@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
-import { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import { ReactElement, ReactNode, RefObject, useRef } from 'react';
 import styled from 'styled-components';
 import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { WithTooltip } from '~/lib/tooltip';
@@ -16,20 +16,20 @@ interface TimelineEventProps {
   config: TimelineEventConfig;
   size: number;
   xScale: ScaleLinear<number, number> | ScaleBand<number>;
-  index: number;
-  onShow: (index: number) => void;
-  onHide: (index: number) => void;
+  onShow: () => void;
+  onHide: () => void;
   isSelected: boolean;
   tooltipContent: ReactNode;
   historyEventOffset: number;
   isHighlighted?: boolean;
+  timelineContainerRef: RefObject<HTMLDivElement>;
 }
 
 export function TimelineEvent({
+  timelineContainerRef,
   config,
   xScale,
   size,
-  index,
   onShow,
   onHide,
   isSelected,
@@ -37,25 +37,11 @@ export function TimelineEvent({
   tooltipContent,
   historyEventOffset,
 }: TimelineEventProps) {
-  const deselectRef = useRef(onHide);
-  deselectRef.current = onHide;
-
-  const isTouch = useIsTouchDevice();
-  const [isMouseEntered, setIsMouseEntered] = useState(false);
-
-  useEffect(
-    () => (isMouseEntered ? onShow(index) : onHide(index)),
-    [isMouseEntered, onHide, onShow, index]
-  );
-
   const annotationRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside([annotationRef, contentRef], () =>
-    deselectRef.current(index)
-  );
+  useOnClickOutside([timelineContainerRef, annotationRef, contentRef], onHide);
 
-  const isHighlightedEvent =
-    isHighlighted || (isTouch ? isSelected : isMouseEntered);
+  const isHighlightedEvent = isHighlighted || isSelected;
 
   const eventRange = getTimelineEventRange(config, xScale.domain());
 
@@ -92,35 +78,31 @@ export function TimelineEvent({
         }}
       >
         <div css={css({ transform: 'translateX(-50%)' })}>
-          <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
+          <TooltipTrigger
+            content={tooltipContent}
+            isSelected={isSelected}
+            contentRef={contentRef}
+          >
+            <div tabIndex={0} onFocus={onShow}>
+              <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
+            </div>
+          </TooltipTrigger>
         </div>
-        <TooltipTrigger
-          content={tooltipContent}
-          isSelected={isSelected}
-          size={size}
-          onSelect={() => setIsMouseEntered(true)}
-          onDeselect={() => setIsMouseEntered(false)}
-          contentRef={contentRef}
-        />
       </div>
     </StyledEvent>
   );
 }
 
 function TooltipTrigger({
-  size,
-  onSelect,
-  onDeselect,
   isSelected,
   content,
   contentRef,
+  children,
 }: {
-  size: number;
-  onSelect: () => void;
-  onDeselect: () => void;
   content: ReactNode;
   isSelected: boolean;
   contentRef: RefObject<HTMLDivElement>;
+  children: ReactElement;
 }) {
   const isTouch = useIsTouchDevice();
   const contentWithRef = <div ref={contentRef}>{content}</div>;
@@ -131,20 +113,17 @@ function TooltipTrigger({
       placement="bottom"
       interactive={true}
       visible={isSelected}
-      onHide={onDeselect}
     >
-      <HitTarget size={size} onClick={onSelect} />
+      {children}
     </WithTooltip>
   ) : (
     <WithTooltip
       content={contentWithRef}
       placement="bottom"
       interactive={false}
-      onShow={onSelect}
-      onHide={onDeselect}
-      hideOnClick={false}
+      visible={isSelected}
     >
-      <HitTarget size={size} />
+      {children}
     </WithTooltip>
   );
 }
@@ -157,24 +136,6 @@ const StyledEvent = styled.div(
     alignItems: 'center',
   })
 );
-
-const HitTarget = styled.button<{ size: number }>((x) => {
-  const padding = x.size;
-
-  return css({
-    m: 0,
-    p: 0,
-    border: 0,
-    bg: 'transparent',
-    display: 'block',
-    position: 'absolute',
-    width: x.size + 2 * padding,
-    top: `${-padding}px`,
-    bottom: `${-padding}px`,
-    left: -padding - x.size / 2,
-    zIndex: 1,
-  });
-});
 
 const TimespanBar = styled(motion.div)<{
   height: number;
