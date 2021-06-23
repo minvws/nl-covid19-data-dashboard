@@ -81,7 +81,7 @@ export function useCyclingData<T>(
   }
 
   async function loadNext(index: number) {
-    if (index > timestampList.current.length - 1) {
+    if (index > timestampList.current.length - 1 || index < 0) {
       playPosition.current = timestampList.current.length - 1;
       playState.current = false;
       return;
