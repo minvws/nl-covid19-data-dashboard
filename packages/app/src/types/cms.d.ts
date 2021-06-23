@@ -189,6 +189,12 @@ export type VaccinationPageQuery = {
   expectedMilestones: ExpectedMilestones[];
 };
 
+export type InlineLink = {
+  _key: string;
+  _type: 'link';
+  href: string;
+};
+
 export type LinkProps = {
   href: string;
   title: string;
