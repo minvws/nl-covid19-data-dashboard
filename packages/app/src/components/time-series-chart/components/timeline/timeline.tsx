@@ -19,6 +19,7 @@ interface TimelineProps {
   size?: number;
   highlightIndex?: number;
   isFullTimeline?: boolean;
+  isYAxisCollapsed?: boolean;
 }
 
 export const Timeline = memo(function Timeline({
@@ -30,6 +31,7 @@ export const Timeline = memo(function Timeline({
   index,
   setIndex,
   isFullTimeline,
+  isYAxisCollapsed,
 }: TimelineProps) {
   const isTouch = useIsTouchDevice();
   const [, end] = xScale.domain();
@@ -45,18 +47,21 @@ export const Timeline = memo(function Timeline({
 
   if (!width) return null;
 
-  const barHeight = size + 4;
+  const barHeight = size;
+  const historyLineWidth = isYAxisCollapsed ? 15 : Math.min(padding.left, 23);
 
   return (
     <Box
       display="flex"
       position="relative"
       left={isFullTimeline ? padding.left : 0}
-      css={css({ userSelect: 'none' })}
+      css={css({ userSelect: 'none', left: padding.left })}
       key={isTouch ? 1 : 0}
     >
       {!isFullTimeline && (
-        <DottedTimelineBar width={padding.left} height={barHeight} />
+        <Box position="absolute" left={-historyLineWidth}>
+          <DottedTimelineBar width={historyLineWidth} height={barHeight} />
+        </Box>
       )}
       <TimelineBar width={width} height={barHeight}>
         {events.map((x, i) => (
@@ -65,6 +70,7 @@ export const Timeline = memo(function Timeline({
             size={size}
             config={x}
             xScale={xScale}
+            historyEventOffset={-historyLineWidth / 2}
             index={i}
             onShow={setIndex}
             onHide={hideTooltip}

@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { getTimelineEventRange } from '../logic';
@@ -22,6 +21,7 @@ interface TimelineEventProps {
   onHide: (index: number) => void;
   isSelected: boolean;
   tooltipContent: ReactNode;
+  historyEventOffset: number;
   isHighlighted?: boolean;
 }
 
@@ -35,8 +35,8 @@ export function TimelineEvent({
   isSelected,
   isHighlighted,
   tooltipContent,
+  historyEventOffset,
 }: TimelineEventProps) {
-  const breakpoints = useBreakpoints();
   const deselectRef = useRef(onHide);
   deselectRef.current = onHide;
 
@@ -88,11 +88,7 @@ export function TimelineEvent({
       <div
         style={{
           position: 'relative',
-          left: eventRange.timeline.startIsOutOfBounds
-            ? breakpoints.xs
-              ? -size / 2 - 5
-              : -size / 2 - 2
-            : 0,
+          left: eventRange.timeline.startIsOutOfBounds ? historyEventOffset : 0,
         }}
       >
         <div css={css({ transform: 'translateX(-50%)' })}>

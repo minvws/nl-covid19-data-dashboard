@@ -336,6 +336,8 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
+  const isYAxisCollapsed = width < COLLAPSE_Y_AXIS_THRESHOLD;
+
   return (
     <>
       {valueAnnotation && (
@@ -363,7 +365,7 @@ export function TimeSeriesChart<
               yScale={yScale}
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
-              isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+              isYAxisCollapsed={isYAxisCollapsed}
               hasAllZeroValues={hasAllZeroValues}
               showWeekNumbers={showWeekNumbers}
             />
@@ -485,6 +487,7 @@ export function TimeSeriesChart<
           index={timelineEventsState.index}
           setIndex={timelineEventsState.setIndex}
           isFullTimeline={timeframe === 'all'}
+          isYAxisCollapsed={isYAxisCollapsed}
         />
       )}
 
