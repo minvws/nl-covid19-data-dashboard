@@ -24,12 +24,12 @@ import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/variants-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { VariantsPageQuery } from '~/types/cms';
 import { assert } from '~/utils/assert';
