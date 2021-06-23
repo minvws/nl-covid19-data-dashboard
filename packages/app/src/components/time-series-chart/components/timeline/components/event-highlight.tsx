@@ -16,17 +16,17 @@ export function TimelineEventHighlight({
   const x0 = timelineState.current?.range.highlight.start ?? 0;
   const x1 = timelineState.current?.range.highlight.end ?? 0;
 
-  const width = x1 - x0;
+  const width = Math.max(1, x1 - x0);
 
   return (
     <AnimatePresence>
-      {width > 0 && (
+      {timelineState.current && (
         <motion.rect
           key={timelineState.current?.event.date.toString()}
           pointerEvents="none"
           height={height}
           x={x0}
-          width={Math.max(1, width)}
+          width={width}
           style={{ mixBlendMode: 'multiply' }}
           initial={{ fill: inactiveColor }}
           exit={{ fill: inactiveColor }}
