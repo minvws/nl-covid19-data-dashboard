@@ -56,6 +56,10 @@ export const Timeline = memo(function Timeline({
       position="relative"
       left={isFullTimeline ? padding.left : 0}
       css={css({ userSelect: 'none', left: padding.left })}
+      /**
+       * remount to bypass buggy tippy.js behavior when switching between touch
+       * vs non-touch mode
+       */
       key={isTouch ? 1 : 0}
     >
       {!isFullTimeline && (
