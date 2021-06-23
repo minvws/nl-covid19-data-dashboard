@@ -12,18 +12,27 @@ export function useAnimatedData<T>(
   timestampCount: number,
   baseUrl = '/json/euro'
 ) {
+  // This represents the index in the timestampList
   const playPosition = useRef(0);
+  // true == playing, false == stopped
   const playState = useRef(false);
+  // A timestamp->data lookup which holds all of the fetched data
   const timestampsData = useRef<Record<number, T[] | IsFetching>>({
     [initialTimestamp]: initialData,
   });
+  // An array of available timestamps, each timestamp represents a data file that
+  // is fetched remotely
   const timestampList = useRef<number[]>(
     new Array(timestampCount)
       .fill(initialTimestamp)
       .map((x, index) => x + index * DAY_IN_SECONDS)
   );
+
+  // The currently displayed data set
   const [data, setData] = useState(initialData);
+  // Indicates whether any data is currently being fetched or if an error occured
   const [loadingState, setLoadingState] = useState<FetchLoadingState>('idle');
+  // The timestamp of the currently displayed data
   const [currentDate, setCurrentDate] = useState(initialTimestamp);
 
   async function play() {
