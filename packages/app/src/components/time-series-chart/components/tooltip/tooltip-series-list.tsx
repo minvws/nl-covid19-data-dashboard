@@ -172,7 +172,7 @@ function TooltipListItem({
   ) : (
     <Box
       as="li"
-      spacing={2}
+      spacing={icon ? 2 : 0}
       spacingHorizontal
       display="flex"
       alignItems="stretch"
@@ -195,7 +195,7 @@ function TooltipListItem({
               {icon}
             </Box>
           ) : (
-            <Box width="1em" mt={1} />
+            <Box width={0} mt={1} />
           )}
           <Box flexGrow={1}>
             <TooltipEntryContainer>
