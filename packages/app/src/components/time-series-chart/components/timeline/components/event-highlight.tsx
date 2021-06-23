@@ -7,7 +7,10 @@ import {
 import { colors } from '~/style/theme';
 import { getTimelineEventRange } from '../logic';
 
-export function TimelineEventAnnotation({
+const activeColor = transparentize(0.7, colors.data.primary);
+const inactiveColor = transparentize(1, colors.data.primary);
+
+export function TimelineEventHighlight({
   domain,
   getX,
   height,
@@ -34,10 +37,10 @@ export function TimelineEventAnnotation({
           height={height}
           x={x0}
           width={Math.max(1, width)}
-          fill={transparentize(0.7, colors.data.primary)}
-          initial={{ fill: transparentize(1, colors.data.primary) }}
-          exit={{ fill: transparentize(1, colors.data.primary) }}
-          animate={{ fill: transparentize(0.7, colors.data.primary) }}
+          style={{ mixBlendMode: 'multiply' }}
+          initial={{ fill: inactiveColor }}
+          exit={{ fill: inactiveColor }}
+          animate={{ fill: activeColor }}
         />
       )}
     </AnimatePresence>

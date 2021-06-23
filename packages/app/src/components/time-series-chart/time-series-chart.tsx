@@ -27,7 +27,7 @@ import {
   TooltipFormatter,
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
-import { Timeline, TimelineEventAnnotation } from './components/timeline';
+import { Timeline, TimelineEventHighlight } from './components/timeline';
 import { useTimelineEventsState } from './components/timeline/logic';
 import {
   calculateSeriesMaximum,
@@ -424,7 +424,7 @@ export function TimeSeriesChart<
               />
             ))}
 
-            <TimelineEventAnnotation
+            <TimelineEventHighlight
               domain={xScale.domain() as [number, number]}
               getX={getX}
               height={bounds.height}
@@ -484,6 +484,7 @@ export function TimeSeriesChart<
           highlightIndex={hoverState?.timelineEventIndex}
           index={timelineEventsState.index}
           setIndex={timelineEventsState.setIndex}
+          isFullTimeline={timeframe === 'all'}
         />
       )}
 

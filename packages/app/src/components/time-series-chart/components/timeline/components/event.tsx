@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { getTimelineEventRange } from '../logic';
@@ -35,6 +36,7 @@ export function TimelineEvent({
   isHighlighted,
   tooltipContent,
 }: TimelineEventProps) {
+  const breakpoints = useBreakpoints();
   const deselectRef = useRef(onHide);
   deselectRef.current = onHide;
 
@@ -70,17 +72,10 @@ export function TimelineEvent({
         zIndex: isHighlightedEvent ? 1 : undefined,
       }}
     >
-      <TooltipTrigger
-        content={tooltipContent}
-        isSelected={isSelected}
-        size={size}
-        onSelect={() => setIsMouseEntered(true)}
-        onDeselect={() => setIsMouseEntered(false)}
-        contentRef={contentRef}
-      />
       {timespanWidth > 0 && (
         <TimespanBar
           height={size}
+          disableBorderRadius={eventRange.timeline.endIsOutOfBounds}
           initial={false}
           animate={{
             background: transparentize(
@@ -90,8 +85,27 @@ export function TimelineEvent({
           }}
         />
       )}
-      <div css={css({ transform: 'translateX(-50%)' })}>
-        <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
+      <div
+        style={{
+          position: 'relative',
+          left: eventRange.timeline.startIsOutOfBounds
+            ? breakpoints.xs
+              ? -size / 2 - 5
+              : -size / 2 - 2
+            : 0,
+        }}
+      >
+        <div css={css({ transform: 'translateX(-50%)' })}>
+          <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
+        </div>
+        <TooltipTrigger
+          content={tooltipContent}
+          isSelected={isSelected}
+          size={size}
+          onSelect={() => setIsMouseEntered(true)}
+          onDeselect={() => setIsMouseEntered(false)}
+          contentRef={contentRef}
+        />
       </div>
     </StyledEvent>
   );
@@ -166,11 +180,16 @@ const HitTarget = styled.button<{ size: number }>((x) => {
   });
 });
 
-const TimespanBar = styled(motion.div)<{ height: number }>((x) =>
+const TimespanBar = styled(motion.div)<{
+  height: number;
+  disableBorderRadius?: boolean;
+}>((x) =>
   css({
     position: 'absolute',
     width: '100%',
     height: x.height,
-    borderRadius: `0 ${x.height / 2}px ${x.height / 2}px 0`,
+    borderRadius: x.disableBorderRadius
+      ? undefined
+      : `0 ${x.height / 2}px ${x.height / 2}px 0`,
   })
 );

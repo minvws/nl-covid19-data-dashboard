@@ -313,7 +313,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       {
                         date: [
                           new Date('16 may 2021').getTime() / 1000,
-                          new Date('18 may 2021').getTime() / 1000,
+                          new Date('20 may 2021').getTime() / 1000,
                         ],
                         title: 'test',
                         description: 'testtets',
@@ -322,6 +322,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       {
                         date: new Date('23 may 2021').getTime() / 1000,
                         title: 'test2',
+                        description: 'testtets',
+                      },
+
+                      {
+                        date: [
+                          new Date('25 may 2021').getTime() / 1000,
+                          new Date('28 may 2021').getTime() / 1000,
+                        ],
+                        title: 'test3',
                         description: 'testtets',
                       },
 

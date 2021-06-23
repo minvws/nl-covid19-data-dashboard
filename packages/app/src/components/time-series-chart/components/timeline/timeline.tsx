@@ -5,7 +5,7 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Bounds, Padding, TimelineEventConfig } from '../../logic';
-import { TimelineBar } from './components/bar';
+import { DottedTimelineBar, TimelineBar } from './components/bar';
 import { TimelineEvent } from './components/event';
 import { TimelineTooltipContent } from './components/tooltip-content';
 
@@ -18,6 +18,7 @@ interface TimelineProps {
   setIndex: (index: number | undefined) => void;
   size?: number;
   highlightIndex?: number;
+  isFullTimeline?: boolean;
 }
 
 export const Timeline = memo(function Timeline({
@@ -28,6 +29,7 @@ export const Timeline = memo(function Timeline({
   size = 10,
   index,
   setIndex,
+  isFullTimeline,
 }: TimelineProps) {
   const isTouch = useIsTouchDevice();
   const [, end] = xScale.domain();
@@ -43,14 +45,20 @@ export const Timeline = memo(function Timeline({
 
   if (!width) return null;
 
+  const barHeight = size + 4;
+
   return (
     <Box
+      display="flex"
       position="relative"
-      left={padding.left}
+      left={isFullTimeline ? padding.left : 0}
       css={css({ userSelect: 'none' })}
       key={isTouch ? 1 : 0}
     >
-      <TimelineBar width={width} height={size + 2}>
+      {!isFullTimeline && (
+        <DottedTimelineBar width={padding.left} height={barHeight} />
+      )}
+      <TimelineBar width={width} height={barHeight}>
         {events.map((x, i) => (
           <TimelineEvent
             key={x.date.toString()}

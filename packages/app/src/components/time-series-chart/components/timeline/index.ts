@@ -1,3 +1,3 @@
 export * from './timeline';
 export * from './components/marker';
-export * from './components/event-annotation';
+export * from './components/event-highlight';

@@ -34,6 +34,8 @@ export function getTimelineEventRange(
     timeline: {
       start: Math.max(start, min),
       end: Math.min(end, max),
+      startIsOutOfBounds: start < min,
+      endIsOutOfBounds: end > max,
     },
     highlight: {
       start: Math.max(highlightStart, min),

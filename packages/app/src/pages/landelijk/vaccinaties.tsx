@@ -153,10 +153,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     },
                     {
                       date: [
-                        new Date('22 march 2021').getTime() / 1000,
-                        new Date('12 april 2021').getTime() / 1000,
+                        new Date('21 march 2021').getTime() / 1000,
+                        new Date('11 april 2021').getTime() / 1000,
                       ],
-                      title: ' 22 maart - 12 april',
+                      title: ' 21 maart - 11 april',
                       description: 'blablabla',
                     },
                     {
