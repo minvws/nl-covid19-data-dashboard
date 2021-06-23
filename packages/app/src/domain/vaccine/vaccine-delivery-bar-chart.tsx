@@ -65,6 +65,7 @@ export function VaccineDeliveryBarChart({
       <StackedChart
         accessibility={{
           key: 'vaccine_delivery_bar_chart',
+          features: ['keyboard_bar_chart'],
         }}
         values={
           timeframe === 'all'

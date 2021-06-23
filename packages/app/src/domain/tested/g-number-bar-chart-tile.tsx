@@ -35,6 +35,7 @@ export function GNumberBarChartTile({
       <VerticalBarChart
         accessibility={{
           key: 'g_number',
+          features: ['keyboard_bar_chart'],
         }}
         values={values}
         timeframe={timeframeInitialValue}

@@ -194,7 +194,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.gm.positiefGetesteMensen(gmCode)}
-                accessibility={{ key: 'gm__topical__tested_overall' }}
+                accessibility={{ key: 'topical_tested_overall' }}
               />
 
               <MiniTrendTile
@@ -215,7 +215,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.gm.ziekenhuisopnames(gmCode)}
-                accessibility={{ key: 'gm__topical__hospital_nice' }}
+                accessibility={{ key: 'topical_hospital_nice' }}
               />
 
               <RiskLevelIndicator

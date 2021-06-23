@@ -1,7 +1,10 @@
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import {
+  AccessibilityOptions,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-options';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
@@ -36,12 +39,16 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
       getTooltipCoordinates: coordinates.getTooltipCoordinates,
     });
 
+  const ageDemographicAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_time_series_chart',
+  ]);
+
   return (
     <Box position="relative">
       <div ref={ref}>
         <ErrorBoundary>
           <AgeDemographicChart
-            accessibility={accessibility}
+            accessibility={ageDemographicAccessibility}
             coordinates={coordinates}
             onMouseMoveBar={openTooltip}
             onMouseLeaveBar={closeTooltip}

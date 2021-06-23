@@ -10,7 +10,10 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import {
+  AccessibilityOptions,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-options';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -188,11 +191,15 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     return null;
   };
 
+  const choroplethAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_choropleth',
+  ]);
+
   return (
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
-        accessibility={accessibility}
+        accessibility={choroplethAccessibility}
         minHeight={minHeight}
         description={dataDescription}
         featureCollection={regionGeo}

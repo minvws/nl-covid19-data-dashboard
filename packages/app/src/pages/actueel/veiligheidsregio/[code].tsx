@@ -171,7 +171,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.vr.positiefGetesteMensen(vrCode)}
-                accessibility={{ key: 'vr__topical__tested_overall' }}
+                accessibility={{ key: 'topical_tested_overall' }}
               />
 
               <MiniTrendTile
@@ -192,7 +192,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.vr.ziekenhuisopnames(vrCode)}
-                accessibility={{ key: 'vr__topical__hospital_nice' }}
+                accessibility={{ key: 'topical_hospital_nice' }}
               />
 
               <RiskLevelIndicator

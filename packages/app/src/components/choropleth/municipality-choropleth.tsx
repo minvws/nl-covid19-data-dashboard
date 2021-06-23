@@ -11,7 +11,10 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import {
+  AccessibilityOptions,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-options';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -187,6 +190,10 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     return null;
   };
 
+  const choroplethAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_choropleth',
+  ]);
+
   return (
     <Box position="relative">
       {tabInteractiveButton}
@@ -194,7 +201,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
         css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
       >
         <Choropleth
-          accessibility={accessibility}
+          accessibility={choroplethAccessibility}
           description={dataDescription}
           featureCollection={municipalGeo}
           hovers={hasData ? municipalGeo : undefined}

@@ -11,7 +11,10 @@ import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import {
+  AccessibilityOptions,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-options';
 import { InlineText } from '../typography';
 import {
   Axes,
@@ -319,6 +322,10 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
+  const timeSeriesAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_time_series_chart',
+  ]);
+
   return (
     <>
       {valueAnnotation && (
@@ -327,7 +334,7 @@ export function TimeSeriesChart<
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
-            accessibility={accessibility}
+            accessibility={timeSeriesAccessibility}
             width={width}
             height={height}
             padding={padding}

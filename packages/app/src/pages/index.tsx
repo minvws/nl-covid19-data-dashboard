@@ -157,7 +157,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.nl.positiefGetesteMensen()}
-                accessibility={{ key: 'nl__topical__tested_overall' }}
+                accessibility={{ key: 'topical_tested_overall' }}
               />
 
               <MiniTrendTile
@@ -178,7 +178,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.nl.ziekenhuisopnames()}
-                accessibility={{ key: 'nl__topical__hospital_nice' }}
+                accessibility={{ key: 'topical_hospital_nice' }}
               />
 
               <TopicalVaccineTile data={data.vaccine_administered_total} />
