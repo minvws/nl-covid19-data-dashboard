@@ -101,6 +101,7 @@ export default function CovidVariantenPage(
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
+            reference={text.reference}
           />
 
           <TwoKpiSection>
@@ -143,6 +144,13 @@ export default function CovidVariantenPage(
             )}
           </TwoKpiSection>
 
+          {data.variants?.last_value && (
+            <VariantsTableTile
+              data={data.variants?.last_value}
+              differences={data.difference}
+            />
+          )}
+
           {data.variants.values && (
             <ChartTile
               title={text.varianten_over_tijd.titel}
@@ -155,13 +163,6 @@ export default function CovidVariantenPage(
                 <VariantsOverTime values={data.variants.values} />
               )}
             </ChartTile>
-          )}
-
-          {data.variants?.last_value && (
-            <VariantsTableTile
-              data={data.variants?.last_value}
-              differences={data.difference}
-            />
           )}
         </TileList>
       </NationalLayout>

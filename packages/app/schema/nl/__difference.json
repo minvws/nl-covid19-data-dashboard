@@ -96,6 +96,9 @@
     "variants__kappa_percentage": {
       "$ref": "#/definitions/diff_decimal"
     },
+    "variants__lambda_percentage": {
+      "$ref": "#/definitions/diff_decimal"
+    },
     "variants__other_percentage": {
       "$ref": "#/definitions/diff_decimal"
     }

@@ -34,6 +34,10 @@ export const BASE_SERIES_CONFIG = [
     color: colors.data.variants.kappa,
   },
   {
+    metricProperty: 'lambda_percentage',
+    color: colors.data.variants.lambda,
+  },
+  {
     metricProperty: 'other_percentage',
     color: colors.data.variants.other,
   },

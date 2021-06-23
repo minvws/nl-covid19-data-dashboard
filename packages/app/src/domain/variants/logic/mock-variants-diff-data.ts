@@ -12,6 +12,7 @@ const variants = [
   'epsilon',
   'theta',
   'kappa',
+  'lambda',
   'other',
 ] as const;
 
