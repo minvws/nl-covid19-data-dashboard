@@ -295,7 +295,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       },
                       {
                         date: [
-                          new Date('30 juli 2020').getTime() / 1000,
+                          new Date('30 july 2020').getTime() / 1000,
                           new Date('25 september 2020').getTime() / 1000,
                         ],
                         title: 'Beperkte testcapaciteit',

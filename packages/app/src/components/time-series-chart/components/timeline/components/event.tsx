@@ -102,26 +102,15 @@ function TooltipTrigger({
   const isTouch = useIsTouchDevice();
   const contentWithRef = <div ref={contentRef}>{content}</div>;
 
-  return isTouch ? (
+  return (
     <WithTooltip
       content={contentWithRef}
       placement="bottom"
-      interactive={true}
+      interactive={isTouch}
       visible={isSelected}
     >
       <div tabIndex={0} onFocus={onFocus} aria-role="text">
         {children}
-      </div>
-    </WithTooltip>
-  ) : (
-    <WithTooltip
-      content={contentWithRef}
-      placement="bottom"
-      interactive={false}
-      visible={isSelected}
-    >
-      <div tabIndex={0} onFocus={onFocus} aria-role="text">
-        <div aria-hidden>{children}</div>
       </div>
     </WithTooltip>
   );

@@ -3,7 +3,6 @@ import { memo, useCallback, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
-import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds, Padding } from '../../logic';
 import { DottedTimelineBar, TimelineBar } from './components/bar';
@@ -33,7 +32,6 @@ export const Timeline = memo(function Timeline({
 }: TimelineProps) {
   const { index, setIndex } = timelineState;
   const { ref, height = 0 } = useResizeObserver<HTMLDivElement>();
-  const isTouch = useIsTouchDevice();
 
   const indexRef = useRef(timelineState.index);
   indexRef.current = timelineState.index;
@@ -57,16 +55,13 @@ export const Timeline = memo(function Timeline({
 
   return (
     <Box
-      /**
-       * remount to bypass buggy tippy.js behavior when switching between touch
-       * vs non-touch mode
-       */
-      key={isTouch ? 1 : 0}
       ref={ref}
       position="relative"
       spacing={2}
       pb={4}
       css={css({ userSelect: 'none', touchAction: 'pan-y' })}
+      width={width}
+      overflowX="hidden"
       onTouchStart={handleHover}
       onTouchMove={handleHover}
       onMouseMove={handleHover}
