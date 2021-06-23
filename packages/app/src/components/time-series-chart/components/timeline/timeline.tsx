@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
 import { memo, useCallback, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds, Padding } from '../../logic';
 import { DottedTimelineBar, TimelineBar } from './components/bar';
 import { TimelineEvent } from './components/event';
@@ -32,9 +32,7 @@ export const Timeline = memo(function Timeline({
   isYAxisCollapsed,
 }: TimelineProps) {
   const { index, setIndex } = timelineState;
-  const timelineContainerRef = useRef<HTMLDivElement>(null);
-  const { height = 0 } = useResizeObserver({ ref: timelineContainerRef });
-  useResizeObserver();
+  const { ref, height = 0 } = useResizeObserver<HTMLDivElement>();
   const isTouch = useIsTouchDevice();
 
   const indexRef = useRef(timelineState.index);
@@ -64,10 +62,10 @@ export const Timeline = memo(function Timeline({
        * vs non-touch mode
        */
       key={isTouch ? 1 : 0}
-      ref={timelineContainerRef}
+      ref={ref}
       position="relative"
       spacing={2}
-      pb={3}
+      pb={4}
       css={css({ userSelect: 'none' })}
       onTouchStart={handleHover}
       onTouchMove={handleHover}
@@ -76,7 +74,7 @@ export const Timeline = memo(function Timeline({
     >
       <Box pl={padding.left}>
         <Text fontSize={1} fontWeight="bold">
-          Bekijk uitgelichte gebeurtenissen
+          @TODO Bekijk uitgelichte gebeurtenissen
         </Text>
       </Box>
       <Box display="flex" pl={padding.left}>
@@ -90,7 +88,7 @@ export const Timeline = memo(function Timeline({
             <TimelineEvent
               key={x.date.toString()}
               range={timelineState.ranges[i]}
-              timelineContainerRef={timelineContainerRef}
+              timelineContainerRef={ref}
               size={size}
               historyEventOffset={-historyLineWidth / 2}
               onShow={() => setIndex(i)}
