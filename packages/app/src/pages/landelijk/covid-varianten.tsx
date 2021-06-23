@@ -1,9 +1,11 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import Varianten from '~/assets/varianten.svg';
 import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { CompactDecoratedLink } from '~/components/decorated-link';
 import { Tile } from '~/components/tile';
@@ -14,6 +16,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { mockVariantsData } from '~/domain/variants/logic/mock-data';
 import { mockVariantsDiffData } from '~/domain/variants/logic/mock-variants-diff-data';
+import { VariantsOverTime } from '~/domain/variants/variants-over-time';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -139,6 +142,20 @@ export default function CovidVariantenPage(
               </Box>
             )}
           </TwoKpiSection>
+
+          {data.variants.values && (
+            <ChartTile
+              title={text.varianten_over_tijd.titel}
+              description={text.varianten_over_tijd.beschrijving}
+              metadata={{
+                source: text.bronnen.rivm,
+              }}
+            >
+              {isDefined(data.variants.values) && (
+                <VariantsOverTime values={data.variants.values} />
+              )}
+            </ChartTile>
+          )}
 
           {data.variants?.last_value && (
             <VariantsTableTile

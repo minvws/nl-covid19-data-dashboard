@@ -4,7 +4,7 @@ import {
   DisclosurePanel,
 } from '@reach/disclosure';
 import css from '@styled-system/css';
-import { useState } from 'react';
+import { forwardRef, MouseEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
@@ -58,9 +58,17 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   const { ref, height: contentHeight } = useResizeObserver();
   const columnNames = text.varianten_tabel.kolommen;
 
+  const chevronRef = useRef<HTMLButtonElement>();
+
+  function handleRowClick(event: MouseEvent) {
+    if (event.target !== chevronRef.current) {
+      setIsOpen((x) => !x);
+    }
+  }
+
   return (
     <>
-      <tr>
+      <tr onClick={handleRowClick}>
         <VariantNameCell variant={row.variant} text={text} compact />
         <Cell>
           <PercentageBarWithNumber
@@ -68,14 +76,14 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             color={row.color}
           />
         </Cell>
-        <Cell style={{ maxWidth: '1.2rem' }}>
+        <Cell alignRight>
           <Disclosure
             open={isOpen}
             onChange={() => {
               setIsOpen((x) => !x);
             }}
           >
-            <Chevron />
+            <Chevron ref={chevronRef as any} />
           </Disclosure>
         </Cell>
       </tr>
@@ -110,19 +118,20 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   );
 }
 
-const Chevron = styled((props) => <DisclosureButton {...props} />)(
+const Chevron = styled(
+  forwardRef((props, ref) => <DisclosureButton {...(props as any)} ref={ref} />)
+)(
   css({
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'flex-end',
     m: 0,
-    pr: 4,
-    py: 2,
+    p: 0,
+    pb: 3,
     overflow: 'visible',
     bg: 'transparent',
     border: 'none',
     color: 'lightGray',
     fontSize: '1.25rem',
-    position: 'relative',
     cursor: 'pointer',
 
     '&::after': {
@@ -131,7 +140,7 @@ const Chevron = styled((props) => <DisclosureButton {...props} />)(
       backgroundRepeat: 'no-repeat',
       backgroundSize: '0.9em 0.55em',
       content: '""',
-      flex: '0 0 0.9em',
+      width: '0.9em',
       height: '0.55em',
       mt: '0.35em',
       p: 0,
