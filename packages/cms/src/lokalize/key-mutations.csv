@@ -9,6 +9,10 @@ timestamp,action,key
 2021-06-07T14:22:50.606Z,add,common.foutmelding_is_gekopieerd
 2021-06-07T14:23:11.624Z,add,common.foutmelding_kon_niet_gekopieerd_worden
 2021-06-07T15:50:34.368Z,add,common.foutmelding_email_adres
+2021-06-15T14:30:23.844Z,add,section_sterftemonitor.cause_message.link.href
+2021-06-15T14:33:12.781Z,add,section_sterftemonitor.cause_message.link.text
+2021-06-15T14:34:00.101Z,add,section_sterftemonitor.cause_message.title
+2021-06-15T14:48:46.016Z,add,section_sterftemonitor.cause_message.message
 2021-06-14T10:25:55.238Z,add,covid_varianten.titel_sidebar
 2021-06-14T10:28:15.315Z,add,covid_varianten.metadata.title
 2021-06-14T10:28:51.445Z,add,covid_varianten.metadata.description
