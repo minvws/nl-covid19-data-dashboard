@@ -4,7 +4,6 @@ import Varianten from '~/assets/varianten.svg';
 import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
-import { ContentHeader } from '~/components/content-header';
 import { CompactDecoratedLink } from '~/components/decorated-link';
 import { InformationBlock } from '~/components/information-block';
 import { Tile } from '~/components/tile';
@@ -87,26 +86,9 @@ export default function CovidVariantenPage(
           <InformationBlock
             title={text.titel}
             icon={<Varianten />}
-            description="Als een virus zich vermenigvuldigt, kan het steeds een heel klein beetje veranderen. Soms zorgt een verandering ervoor dat een virus zich anders gedraagt. Dit heet dan een variant. Een variant kan zich bijvoorbeeld gemakkelijker verspreiden. In Nederland, maar ook in andere landen houden we daarom het virus goed in de gaten. Zo zijn we voorbereid."
+            description={text.pagina_toelichting}
             usefulLinks={content.page.pageLinks}
             articles={content.highlight.articles}
-            metadata={{
-              datumsText: text.datums,
-              dateOrRange: {
-                start: lastValue.date_start_unix,
-                end: lastValue.date_end_unix,
-              },
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
-              dataSources: [text.bronnen.rivm],
-            }}
-          />
-
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.besmettingen}
-            screenReaderCategory={text.titel_sidebar}
-            title={text.titel}
-            icon={<Varianten />}
-            subtitle={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: {

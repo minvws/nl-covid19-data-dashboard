@@ -1,10 +1,9 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
@@ -83,18 +82,12 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
-            category={
-              siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
-            }
-            screenReaderCategory={
-              siteText.verpleeghuis_besmette_locaties.titel_sidebar
-            }
+          <InformationBlock
             title={replaceVariablesInText(positiveTestedPeopleText.titel, {
               safetyRegion: safetyRegionName,
             })}
             icon={<Verpleeghuiszorg />}
-            subtitle={replaceVariablesInText(
+            description={replaceVariablesInText(
               positiveTestedPeopleText.pagina_toelichting,
               {
                 safetyRegion: safetyRegionName,
@@ -106,10 +99,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
             }}
-            reference={positiveTestedPeopleText.reference}
+            referenceLink={positiveTestedPeopleText.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -179,21 +171,20 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <InformationBlock
             id="besmette-locaties"
-            skipLinkAnchor={true}
             title={replaceVariablesInText(infectedLocationsText.titel, {
               safetyRegion: safetyRegionName,
             })}
             icon={<Locatie />}
-            subtitle={infectedLocationsText.pagina_toelichting}
+            description={infectedLocationsText.pagina_toelichting}
             metadata={{
               datumsText: infectedLocationsText.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
               dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
               dataSources: [infectedLocationsText.bronnen.rivm],
             }}
-            reference={infectedLocationsText.reference}
+            referenceLink={infectedLocationsText.reference.href}
           />
 
           <TwoKpiSection>
@@ -253,21 +244,20 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <InformationBlock
             id="sterfte"
-            skipLinkAnchor={true}
             title={replaceVariablesInText(deceased.titel, {
               safetyRegion: safetyRegionName,
             })}
             icon={<CoronaVirus />}
-            subtitle={deceased.pagina_toelichting}
+            description={deceased.pagina_toelichting}
             metadata={{
               datumsText: deceased.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
               dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
               dataSources: [deceased.bronnen.rivm],
             }}
-            reference={deceased.reference}
+            referenceLink={deceased.reference.href}
           />
 
           <TwoKpiSection>

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { ContentHeader } from '~/components/content-header';
 import { KpiSection } from '~/components/kpi-section';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
@@ -110,14 +109,16 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
-            title={replaceVariablesInText(
-              siteText.veiligheidsregio_maatregelen.titel,
-              {
-                safetyRegionName,
-              }
-            )}
-          />
+          <Box display="flex" flexWrap="nowrap" alignItems="center">
+            <Heading level={1} mb={0} lineHeight={1.3}>
+              {replaceVariablesInText(
+                siteText.veiligheidsregio_maatregelen.titel,
+                {
+                  safetyRegionName,
+                }
+              )}
+            </Heading>
+          </Box>
 
           {showLockdown && (
             <KpiSection flexDirection="column">

@@ -1,8 +1,7 @@
 import ElderlyIcon from '~/assets/elderly.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
@@ -81,16 +80,12 @@ const ElderlyAtHomeRegionalPage = (
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
-            category={
-              siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
-            }
-            screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
+          <InformationBlock
             title={replaceVariablesInText(text.section_positive_tested.title, {
               safetyRegion: safetyRegionName,
             })}
             icon={<ElderlyIcon />}
-            subtitle={replaceVariablesInText(
+            description={replaceVariablesInText(
               text.section_positive_tested.description,
               {
                 safetyRegion: safetyRegionName,
@@ -103,10 +98,9 @@ const ElderlyAtHomeRegionalPage = (
                 elderly_at_home.last_value.date_of_insertion_unix,
               dataSources: [text.section_positive_tested.bronnen.rivm],
             }}
-            reference={text.section_positive_tested.reference}
+            referenceLink={text.section_positive_tested.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -194,12 +188,13 @@ const ElderlyAtHomeRegionalPage = (
             )}
           </ChartTile>
 
-          <ContentHeader
+          <InformationBlock
+            id={'sterfte'}
             title={replaceVariablesInText(text.section_deceased.title, {
               safetyRegion: safetyRegionName,
             })}
             icon={<ElderlyIcon />}
-            subtitle={replaceVariablesInText(
+            description={replaceVariablesInText(
               text.section_deceased.description,
               {
                 safetyRegion: safetyRegionName,
@@ -212,7 +207,7 @@ const ElderlyAtHomeRegionalPage = (
                 elderly_at_home.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased.bronnen.rivm],
             }}
-            reference={text.section_deceased.reference}
+            referenceLink={text.section_deceased.reference.href}
           />
 
           <TwoKpiSection>

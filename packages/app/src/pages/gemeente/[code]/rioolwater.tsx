@@ -4,7 +4,7 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { CollapsibleContent } from '~/components/collapsible';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { SewerChart } from '~/components/sewer-chart';
@@ -86,13 +86,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
-            category={siteText.gemeente_layout.headings.vroege_signalen}
+          <InformationBlock
             title={replaceVariablesInText(text.titel, {
               municipality: municipalityName,
             })}
             icon={<RioolwaterMonitoring />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
@@ -103,7 +102,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 sewerAverages.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
           />
 
           <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />

@@ -209,6 +209,7 @@ const ElderlyAtHomeNationalPage = (
           </ChoroplethTile>
 
           <InformationBlock
+            id="sterfte"
             title={text.section_deceased.title}
             icon={<ElderlyIcon />}
             description={text.section_deceased.description}

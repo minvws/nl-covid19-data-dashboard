@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ContentHeader } from '~/components/content-header';
+import { InformationBlock } from '~/components/information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -73,11 +73,10 @@ export default function BehaviorPageSafetyRegion(
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
-            category={siteText.nationaal_layout.headings.gedrag}
+          <InformationBlock
             title={regionaal_gedrag.pagina.titel}
             icon={<Gedrag />}
-            subtitle={regionaal_gedrag.pagina.toelichting}
+            description={regionaal_gedrag.pagina.toelichting}
             metadata={{
               datumsText: regionaal_gedrag.datums,
               dateOrRange: {
@@ -87,7 +86,7 @@ export default function BehaviorPageSafetyRegion(
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
               dataSources: [regionaal_gedrag.bronnen.rivm],
             }}
-            reference={regionaal_gedrag.reference}
+            referenceLink={regionaal_gedrag.reference.href}
           />
 
           <TwoKpiSection>

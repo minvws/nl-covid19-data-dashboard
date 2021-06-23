@@ -187,6 +187,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
           </ChartTile>
 
           <InformationBlock
+            id="sterftemonitor"
             title={siteText.section_sterftemonitor_vr.title}
             icon={<CoronaVirusIcon />}
             description={siteText.section_sterftemonitor_vr.description}

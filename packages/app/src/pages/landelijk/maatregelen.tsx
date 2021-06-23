@@ -1,7 +1,6 @@
 import css from '@styled-system/css';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { ContentHeader } from '~/components/content-header';
 import { KpiSection } from '~/components/kpi-section';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
@@ -80,7 +79,11 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader title={siteText.nationaal_maatregelen.titel} />
+          <Box display="flex" flexWrap="nowrap" alignItems="center">
+            <Heading level={1} mb={0} lineHeight={1.3}>
+              {siteText.nationaal_maatregelen.titel}
+            </Heading>
+          </Box>
 
           {showLockdown && (
             <KpiSection flexDirection="column">
