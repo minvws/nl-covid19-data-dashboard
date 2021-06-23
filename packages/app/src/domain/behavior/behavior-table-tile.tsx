@@ -72,6 +72,8 @@ export function BehaviorTableTile({
                   width: asResponsiveArray({
                     _: 'auto',
                     sm: 300,
+                    md: 'auto',
+                    lg: 300,
                     xl: 400,
                   }),
                 })}
@@ -83,6 +85,8 @@ export function BehaviorTableTile({
                   display: asResponsiveArray({
                     _: 'none',
                     sm: 'table-cell',
+                    md: 'none',
+                    lg: 'table-cell',
                   }),
                   width: asResponsiveArray({
                     _: 100,
@@ -106,7 +110,12 @@ export function BehaviorTableTile({
               <Row key={behavior.id}>
                 <Cell
                   css={css({
-                    minWidth: asResponsiveArray({ _: '100%', sm: 300 }),
+                    minWidth: asResponsiveArray({
+                      _: '100%',
+                      sm: 300,
+                      md: '100%',
+                      lg: 300,
+                    }),
                   })}
                 >
                   <Box display="flex" mr={2}>
@@ -126,6 +135,8 @@ export function BehaviorTableTile({
                     minWidth: asResponsiveArray({
                       _: `calc(100% - ${trendColumnWidth}px)`,
                       sm: 200,
+                      md: `calc(100% - ${trendColumnWidth}px)`,
+                      lg: 200,
                     }),
                   })}
                 >
@@ -258,6 +269,8 @@ const Row = styled.tr(
     display: asResponsiveArray({
       _: 'flex',
       sm: 'table-row',
+      md: 'flex',
+      lg: 'table-row',
     }),
     flexWrap: 'wrap',
     justifyContent: 'space-between',
@@ -280,6 +293,8 @@ const Cell = styled.td(
       borderBottom: asResponsiveArray({
         _: 'none',
         sm: '1px solid lightGray',
+        md: 'none',
+        lg: '1px solid lightGray',
       }),
     },
   })
