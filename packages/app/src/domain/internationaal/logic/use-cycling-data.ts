@@ -6,11 +6,12 @@ const isFetching = Symbol('data_is_fetching');
 
 type IsFetching = typeof isFetching;
 
-export function useAnimatedData<T>(
+export function useCyclingData<T>(
   initialData: T[],
-  initialTimestamp: number,
+  firstTimestamp: number,
   timestampCount: number,
-  baseUrl = '/json/euro'
+  baseUrl = '/json/euro',
+  interval = 1000
 ) {
   // This represents the index in the timestampList
   const playPosition = useRef(0);
@@ -18,13 +19,13 @@ export function useAnimatedData<T>(
   const playState = useRef(false);
   // A timestamp->data lookup which holds all of the fetched data
   const timestampsData = useRef<Record<number, T[] | IsFetching>>({
-    [initialTimestamp]: initialData,
+    [firstTimestamp]: initialData,
   });
   // An array of available timestamps, each timestamp represents a data file that
   // is fetched remotely
   const timestampList = useRef<number[]>(
     new Array(timestampCount)
-      .fill(initialTimestamp)
+      .fill(firstTimestamp)
       .map((x, index) => x + index * DAY_IN_SECONDS)
   );
 
@@ -33,7 +34,7 @@ export function useAnimatedData<T>(
   // Indicates whether any data is currently being fetched or if an error occured
   const [loadingState, setLoadingState] = useState<FetchState>('idle');
   // The timestamp of the currently displayed data
-  const [currentDate, setCurrentDate] = useState(initialTimestamp);
+  const [currentDate, setCurrentDate] = useState(firstTimestamp);
 
   async function play() {
     if (!playState.current) {
@@ -56,7 +57,7 @@ export function useAnimatedData<T>(
         playPosition.current = playPosition.current + 1;
         continuePlay();
       }
-    }, 1000);
+    }, interval);
   }
 
   async function loadNext(index: number) {

@@ -3,9 +3,9 @@ import { ChangeEvent, useState } from 'react';
 import { Box } from '~/components/base';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { Text } from '~/components/typography';
-import { getAnimatedDataDocumentInfo } from '~/domain/internationaal/logic/get-animated-data-document-info';
 import { getCountryNames } from '~/domain/internationaal/logic/get-country-names';
-import { useAnimatedData } from '~/domain/internationaal/logic/use-animated-data';
+import { getCyclingDataDocumentInfo } from '~/domain/internationaal/logic/get-cycling-data-document-info';
+import { useCyclingData } from '~/domain/internationaal/logic/use-cycling-data';
 import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -49,18 +49,23 @@ export const getStaticProps = createGetStaticProps(
       countryNames: getCountryNames(tested_overall, 'cncode'),
     }),
   }),
-  () => getAnimatedDataDocumentInfo('json/euro')
+  () => getCyclingDataDocumentInfo('json/euro')
 );
 
 const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatDateFromSeconds } = useIntl();
-  const { lastGenerated, choropleth, documentCount, firstDocument } = props;
+  const {
+    lastGenerated,
+    choropleth,
+    documentCount,
+    firstTimestamp: firstDocument,
+  } = props;
   const { intl } = choropleth;
   const reverseRouter = useReverseRouter();
   const [stepValue, setStepValue] = useState(1);
 
   const [data, play, skip, stop, reset, loadingState, currentDate] =
-    useAnimatedData<typeof intl.data[number]>(
+    useCyclingData<typeof intl.data[number]>(
       intl.data,
       firstDocument,
       documentCount
