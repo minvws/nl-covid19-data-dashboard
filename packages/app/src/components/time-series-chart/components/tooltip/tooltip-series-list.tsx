@@ -190,12 +190,10 @@ function TooltipListItem({
         </Box>
       ) : (
         <>
-          {icon ? (
+          {icon && (
             <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
               {icon}
             </Box>
-          ) : (
-            <Box width={0} mt={1} />
           )}
           <Box flexGrow={1}>
             <TooltipEntryContainer>
