@@ -75,6 +75,9 @@ export function useAnimatedData<T>(
 
         timestampsData.current[timestamp] = fetchedData;
 
+        // We can't check currentDate here since we might be looking at older state
+        // so we use this hack to compare the curried timestamp to the actual latest state
+        // and update the Data state accordingly:
         setCurrentDate((d) => {
           if (d === timestamp) {
             setData(fetchedData);
