@@ -19,6 +19,12 @@ type IsFetching = typeof isFetching;
  * Two additional stateful objects are returned as well:
  * loadingState - This indicates whether any data is being fetched or not, and whether an error occurred during fetching
  * currentTimestamp - The timestamp of the current active data
+ *
+ * The firstTimestamp and timestampCount parameters are being used to construct
+ * a list of available data files. This hook assumes that each file has a url
+ * like this: <baseUrl>/<timestamp>.json.
+ * With each timestamp being exactly one day apart. So for each timestamp count
+ * one day is added starting from the firstTimestamp.
  */
 export function useCyclingData<T>(
   initialData: T[],
