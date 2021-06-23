@@ -15,10 +15,11 @@ import {
   getCategoryLevel,
 } from '~/components/categorical-bar-scale';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { InformationBlock } from '~/components/information-block';
-import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { Metadata } from '~/components/metadata';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -258,69 +259,95 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </Tile>
 
-          <TwoKpiSection>
-            <KpiTile
-              title={text.positieve_testen.title}
-              metadata={{
-                date: [
-                  tested_overall_sum.last_value.date_start_unix,
-                  tested_overall_sum.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm_positieve_testen_kpi,
-              }}
-            >
-              <Box spacing={2} spacingHorizontal>
-                <Box display="inline-block">
-                  <KpiValue
-                    data-cy="infected"
-                    absolute={tested_overall_sum.last_value.infected_per_100k}
-                    color={positiveTestedColor}
+          <Tile>
+            <Heading level={3} as="h2">
+              {text.recente_cijfers}
+            </Heading>
+            <TwoKpiSection spacing={4}>
+              <Box>
+                <HeadingWithIcon
+                  title={text.positieve_testen.title}
+                  headingLevel={4}
+                  as="h3"
+                  icon={<Getest />}
+                  mb={2}
+                  ml={-1} // Align icon with text below
+                />
+                <Box spacing={2} spacingHorizontal>
+                  <Box display="inline-block">
+                    <KpiValue
+                      data-cy="infected"
+                      absolute={tested_overall_sum.last_value.infected_per_100k}
+                      color={positiveTestedColor}
+                    />
+                  </Box>
+                  <InlineText>
+                    {text.positieve_testen.value_annotation}
+                  </InlineText>
+                </Box>
+
+                <Box maxWidth="480px">
+                  <CategoricalBarScale
+                    categories={positiveTestedEscalationThresholds}
+                    value={tested_overall_sum.last_value.infected_per_100k}
                   />
                 </Box>
-                <InlineText>
-                  {text.positieve_testen.value_annotation}
-                </InlineText>
+
+                <Markdown content={text.positieve_testen.description} />
+
+                <Metadata
+                  date={[
+                    tested_overall_sum.last_value.date_start_unix,
+                    tested_overall_sum.last_value.date_end_unix,
+                  ]}
+                  source={text.bronnen.rivm_positieve_testen_kpi}
+                  mb={{ _: 0, lg: -3 }}
+                  isTileFooter
+                />
               </Box>
 
-              <CategoricalBarScale
-                categories={positiveTestedEscalationThresholds}
-                value={tested_overall_sum.last_value.infected_per_100k}
-              />
+              <Box>
+                <HeadingWithIcon
+                  title={text.ziekenhuisopnames.title}
+                  headingLevel={4}
+                  as="h3"
+                  icon={<Ziekenhuis />}
+                  mb={2}
+                  ml={-2} // Align icon with text below
+                />
+                <Box spacing={2} spacingHorizontal>
+                  <Box display="inline-block">
+                    <KpiValue
+                      data-cy="infected"
+                      absolute={hospital_nice_sum.last_value.admissions_per_1m}
+                      color={hospitalAdmissionsColor}
+                    />
+                  </Box>
+                  <InlineText>
+                    {text.ziekenhuisopnames.value_annotation}
+                  </InlineText>
+                </Box>
 
-              <Markdown content={text.positieve_testen.description} />
-            </KpiTile>
-
-            <KpiTile
-              title={text.ziekenhuisopnames.title}
-              metadata={{
-                date: [
-                  hospital_nice_sum.last_value.date_start_unix,
-                  hospital_nice_sum.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm_ziekenhuisopnames_kpi,
-              }}
-            >
-              <Box spacing={2} spacingHorizontal>
-                <Box display="inline-block">
-                  <KpiValue
-                    data-cy="infected"
-                    absolute={hospital_nice_sum.last_value.admissions_per_1m}
-                    color={hospitalAdmissionsColor}
+                <Box maxWidth="480px">
+                  <CategoricalBarScale
+                    categories={hospitalAdmissionsEscalationThresholds}
+                    value={hospital_nice_sum.last_value.admissions_per_1m}
                   />
                 </Box>
-                <InlineText>
-                  {text.ziekenhuisopnames.value_annotation}
-                </InlineText>
+
+                <Markdown content={text.ziekenhuisopnames.description} />
+
+                <Metadata
+                  date={[
+                    hospital_nice_sum.last_value.date_start_unix,
+                    hospital_nice_sum.last_value.date_end_unix,
+                  ]}
+                  source={text.bronnen.rivm_ziekenhuisopnames_kpi}
+                  isTileFooter
+                />
               </Box>
-
-              <CategoricalBarScale
-                categories={hospitalAdmissionsEscalationThresholds}
-                value={hospital_nice_sum.last_value.admissions_per_1m}
-              />
-
-              <Markdown content={text.ziekenhuisopnames.description} />
-            </KpiTile>
-          </TwoKpiSection>
+            </TwoKpiSection>
+          </Tile>
 
           <ArticleStrip articles={content.articles} />
         </TileList>

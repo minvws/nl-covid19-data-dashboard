@@ -30,10 +30,18 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData('deceased_cbs', 'deceased_rivm_per_age_group'),
   createGetContent<{
-    articles?: ArticleSummary[];
+    main: { articles: ArticleSummary[] };
+    monitor: { articles: ArticleSummary[] };
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('deceasedPage', locale);
+    return `{
+      "main": ${createPageArticlesQuery('deceasedPage', locale)},
+      "monitor": ${createPageArticlesQuery(
+        'deceasedPage',
+        locale,
+        'monitor_articles'
+      )},
+    }`;
   })
 );
 
@@ -75,7 +83,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
-            articles={content.articles}
+            articles={content.main.articles}
           />
 
           <TwoKpiSection>
@@ -200,7 +208,12 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          <DeceasedMonitorSection data={dataCbs} showDataMessage />
+          <DeceasedMonitorSection
+            data={dataCbs}
+            showDataMessage
+            showCauseMessage
+            articles={content.monitor.articles}
+          />
         </TileList>
       </NationalLayout>
     </Layout>

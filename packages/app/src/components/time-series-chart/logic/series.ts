@@ -220,7 +220,8 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
 export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
-  benchmarkValue = -Infinity
+  benchmarkValue = -Infinity,
+  isPercentage?: boolean
 ) {
   const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
@@ -241,7 +242,18 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   const artificialMax =
     overallMaximum < benchmarkValue ? benchmarkValue * 2 : 0;
 
-  return Math.max(overallMaximum, artificialMax);
+  const maximumValue = Math.max(overallMaximum, artificialMax);
+
+  /**
+   * When the maximum value is 80% or more for percentages it shows a 0 - 100 scale
+   * same goes when a percentage is below 10% it has a 0 - 10 scale.
+   */
+  if (isPercentage) {
+    if (maximumValue >= 80) return 100;
+    if (maximumValue <= 10) return 10;
+  }
+
+  return maximumValue;
 }
 
 export type SeriesItem = {
