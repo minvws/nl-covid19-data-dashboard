@@ -82,8 +82,6 @@ export function sortTimeSeriesValues(values: TimestampedValue[]) {
 
 function toNoonDate<T extends TimestampedValue>(value: T) {
   if (isDateSpanValue(value)) {
-    // value.date_start_unix = startOfDayInSeconds(value.date_start_unix)
-    // value.date_end_unix = endOfDayInSeconds(value.date_end_unix)
     value.date_start_unix = midOfDayInSeconds(value.date_start_unix);
     value.date_end_unix = midOfDayInSeconds(value.date_end_unix);
   }
@@ -161,15 +159,19 @@ export function isDateSpanSeries(
 }
 
 export function startOfDayInSeconds(seconds: number) {
-  return Math.round(startOfDay(seconds * 1000).getTime() / 1000);
+  const date = new Date(seconds * 1000);
+  date.setHours(0, 0, 0, 0);
+  return Math.floor(date.getTime() / 1000);
 }
 
 export function endOfDayInSeconds(seconds: number) {
-  return Math.round(endOfDay(seconds * 1000).getTime() / 1000);
+  const date = new Date(seconds * 1000);
+  date.setHours(23, 59, 59, 999);
+  return Math.floor(date.getTime() / 1000);
 }
 
 export function midOfDayInSeconds(seconds: number) {
-  return Math.round(
-    (startOfDayInSeconds(seconds) + endOfDayInSeconds(seconds)) / 2
-  );
+  const date = new Date(seconds * 1000);
+  date.setHours(12, 0, 0, 0);
+  return Math.floor(date.getTime() / 1000);
 }
