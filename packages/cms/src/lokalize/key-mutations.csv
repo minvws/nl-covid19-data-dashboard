@@ -100,3 +100,5 @@ timestamp,action,key
 2021-06-18T12:50:25.165Z,delete,rioolwater_metingen.split_labels.waarde_0_200
 2021-06-23T06:42:12.662Z,add,covid_varianten.landen_van_herkomst.lambda
 2021-06-23T06:42:53.315Z,add,covid_varianten.varianten.lambda
+2021-06-23T11:40:55.166Z,add,covid_varianten.reference.href
+2021-06-23T11:42:05.142Z,add,covid_varianten.reference.text
