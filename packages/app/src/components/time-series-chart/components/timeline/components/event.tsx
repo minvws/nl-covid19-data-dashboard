@@ -1,21 +1,18 @@
 import css from '@styled-system/css';
-import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { motion } from 'framer-motion';
 import { transparentize } from 'polished';
 import { ReactElement, ReactNode, RefObject, useRef } from 'react';
 import styled from 'styled-components';
-import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { getTimelineEventRange } from '../logic';
+import { TimelineEventRange } from '../logic';
 import { TimelineMarker } from './marker';
 
 interface TimelineEventProps {
-  config: TimelineEventConfig;
+  range: TimelineEventRange;
   size: number;
-  xScale: ScaleLinear<number, number> | ScaleBand<number>;
   onShow: () => void;
   onHide: () => void;
   isSelected: boolean;
@@ -27,8 +24,7 @@ interface TimelineEventProps {
 
 export function TimelineEvent({
   timelineContainerRef,
-  config,
-  xScale,
+  range,
   size,
   onShow,
   onHide,
@@ -43,10 +39,8 @@ export function TimelineEvent({
 
   const isHighlightedEvent = isHighlighted || isSelected;
 
-  const eventRange = getTimelineEventRange(config, xScale.domain());
-
-  const x0 = xScale(eventRange.timeline.start) as number;
-  const x1 = xScale(eventRange.timeline.end) as number;
+  const x0 = range.timeline.start;
+  const x1 = range.timeline.end;
 
   const timespanWidth = x1 - x0;
 
@@ -61,7 +55,7 @@ export function TimelineEvent({
       {timespanWidth > 0 && (
         <TimespanBar
           height={size}
-          disableBorderRadius={eventRange.timeline.endIsOutOfBounds}
+          disableBorderRadius={range.timeline.endIsOutOfBounds}
           initial={false}
           animate={{
             background: transparentize(
@@ -74,7 +68,7 @@ export function TimelineEvent({
       <div
         style={{
           position: 'relative',
-          left: eventRange.timeline.startIsOutOfBounds ? historyEventOffset : 0,
+          left: range.timeline.startIsOutOfBounds ? historyEventOffset : 0,
         }}
       >
         <div css={css({ transform: 'translateX(-50%)' })}>

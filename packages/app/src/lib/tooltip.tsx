@@ -1,4 +1,4 @@
-import Tippy, { TippyProps, useSingleton } from '@tippyjs/react';
+import Tippy, { TippyProps } from '@tippyjs/react';
 import { Instance } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';

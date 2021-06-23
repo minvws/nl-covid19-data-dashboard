@@ -245,7 +245,7 @@ export function TimeSeriesChart<
     [values, today]
   );
 
-  const timelineEventsState = useTimelineEventsState(timelineEvents, xScale);
+  const timelineState = useTimelineEventsState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({
     values,
     padding,
@@ -254,7 +254,7 @@ export function TimeSeriesChart<
     xScale,
     yScale,
     timespanAnnotations,
-    timelineEvents: timelineEventsState.events,
+    timelineEvents: timelineState.events,
     markNearestPointOnly,
   });
 
@@ -302,7 +302,7 @@ export function TimeSeriesChart<
               ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
           timelineEvent: isDefined(timelineEventIndex)
-            ? timelineEventsState.events[timelineEventIndex]
+            ? timelineState.events[timelineEventIndex]
             : undefined,
 
           valueMinWidth,
@@ -325,7 +325,7 @@ export function TimeSeriesChart<
     displayTooltipValueOnly,
     valueMinWidth,
     timelineEvents,
-    timelineEventsState.events,
+    timelineState.events,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
@@ -427,14 +427,8 @@ export function TimeSeriesChart<
             ))}
 
             <TimelineEventHighlight
-              domain={xScale.domain() as [number, number]}
-              getX={getX}
               height={bounds.height}
-              config={
-                isDefined(timelineEventsState.index)
-                  ? timelineEventsState.events[timelineEventsState.index]
-                  : undefined
-              }
+              timelineState={timelineState}
             />
           </ChartContainer>
 
@@ -477,15 +471,13 @@ export function TimeSeriesChart<
         </Box>
       </ResponsiveContainer>
 
-      {timelineEventsState.events.length > 0 && (
+      {timelineState.events.length > 0 && (
         <Timeline
-          events={timelineEventsState.events}
-          xScale={xScale}
-          bounds={bounds}
           padding={padding}
+          bounds={bounds}
+          width={width}
+          timelineState={timelineState}
           highlightIndex={hoverState?.timelineEventIndex}
-          index={timelineEventsState.index}
-          setIndex={timelineEventsState.setIndex}
           isFullTimeline={timeframe === 'all'}
           isYAxisCollapsed={isYAxisCollapsed}
         />

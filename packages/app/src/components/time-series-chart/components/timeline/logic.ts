@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { voronoi } from '@visx/voronoi';
-import { ScaleBand, ScaleLinear } from 'd3-scale';
+import { ScaleLinear } from 'd3-scale';
 import { first, last } from 'lodash';
 import {
   MouseEvent,
@@ -19,12 +19,24 @@ import { isDefined } from 'ts-is-present';
 import { wrapAroundLength } from '~/utils/number';
 import { Padding, TimelineEventConfig } from '../../logic';
 
-type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
+export interface TimelineEventRange {
+  timeline: {
+    start: number;
+    end: number;
+    startIsOutOfBounds: boolean;
+    endIsOutOfBounds: boolean;
+  };
+  highlight: {
+    start: number;
+    end: number;
+  };
+}
 
 export function getTimelineEventRange(
   config: TimelineEventConfig,
-  domain: number[]
-) {
+  xScale: ScaleLinear<number, number>
+): TimelineEventRange {
+  const domain = xScale.domain();
   const min = first(domain) as number;
   const max = last(domain) as number;
 
@@ -43,14 +55,14 @@ export function getTimelineEventRange(
 
   return {
     timeline: {
-      start: Math.max(start, min),
-      end: Math.min(end, max),
+      start: xScale(Math.max(start, min)),
+      end: xScale(Math.min(end, max)),
       startIsOutOfBounds: start < min,
       endIsOutOfBounds: end > max,
     },
     highlight: {
-      start: Math.max(highlightStart, min),
-      end: Math.min(highlightEnd, max),
+      start: xScale(Math.max(highlightStart, min)),
+      end: xScale(Math.min(highlightEnd, max)),
     },
   };
 }
@@ -66,14 +78,30 @@ export function isVisibleEvent(config: TimelineEventConfig, domain: number[]) {
   return min <= end && start <= max;
 }
 
+export interface TimelineState {
+  index: number | undefined;
+  setIndex: (index: number | undefined) => void;
+  events: TimelineEventConfig[];
+  ranges: TimelineEventRange[];
+  current?: {
+    event: TimelineEventConfig;
+    range: TimelineEventRange;
+  };
+}
+
 export function useTimelineEventsState(
   allEvents: TimelineEventConfig[] | undefined,
   xScale: ScaleLinear<number, number>
-) {
+): TimelineState {
   const [index, _setIndex] = useState<number | undefined>(undefined);
   const events = useMemo(
     () => allEvents?.filter((x) => isVisibleEvent(x, xScale.domain())) || [],
     [allEvents, xScale]
+  );
+
+  const ranges = useMemo(
+    () => events.map((x) => getTimelineEventRange(x, xScale)),
+    [events, xScale]
   );
 
   /**
@@ -90,49 +118,62 @@ export function useTimelineEventsState(
     [events.length]
   );
 
+  const current = useMemo(
+    () =>
+      isDefined(index)
+        ? { event: events[index], range: ranges[index] }
+        : undefined,
+    [events, index, ranges]
+  );
+
   return useMemo(
-    () => ({ index, setIndex, events }),
-    [index, setIndex, events]
+    () => ({ index, setIndex, events, ranges, current }),
+    [index, setIndex, events, ranges, current]
   );
 }
 
 export function useTimelineHoverHandler(
   onHover: (index: number | undefined) => void,
   {
-    events,
-    xScale,
+    timelineState,
     padding,
     width,
+    height,
   }: {
-    events: TimelineEventConfig[];
-    xScale: ScaleLinear<number, number> | ScaleBand<number>;
+    timelineState: TimelineState;
     padding: Padding;
     width: number;
+    height: number;
   }
 ) {
+  const { ranges } = timelineState;
+
   const voronoiLayout = useMemo(
     () =>
-      voronoi<TimelineEventConfig>({
-        x: (x) => xScale(Array.isArray(x.date) ? x.date[0] : x.date) as number,
-        y: () => 25,
+      voronoi<TimelineEventRange>({
+        x: (x) => x.timeline.start,
+        y: () => height,
         width,
-        height: 50,
-      })(events),
-    [events, width, xScale]
+        height,
+      })(ranges),
+    [ranges, width, height]
   );
 
   return useCallback(
     (event: TouchEvent | MouseEvent) => {
-      const mousePoint = localPoint(event.currentTarget, event as Event);
+      const distance = 45;
+      const mousePoint = localPoint(event.currentTarget, event);
 
       if (event.type === 'mouseleave' || !mousePoint) {
         onHover(undefined);
         return;
       }
 
-      const closest =
-        voronoiLayout.find(mousePoint.x - padding.left, mousePoint.y, 30) ||
-        undefined;
+      const closest = voronoiLayout.find(
+        mousePoint.x - padding.left,
+        mousePoint.y,
+        distance
+      );
 
       onHover(closest?.index);
     },
