@@ -203,7 +203,8 @@ export function TimeSeriesChart<
       calculatedSeriesMax: calculateSeriesMaximum(
         seriesList,
         seriesConfig,
-        benchmark?.value
+        benchmark?.value,
+        isPercentage
       ),
       calculatedSeriesMin: calculateSeriesMinimum(
         seriesList,
@@ -211,7 +212,7 @@ export function TimeSeriesChart<
         benchmark?.value
       ),
     }),
-    [seriesList, seriesConfig, benchmark?.value]
+    [seriesList, seriesConfig, benchmark?.value, isPercentage]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)

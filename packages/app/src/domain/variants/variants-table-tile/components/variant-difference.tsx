@@ -43,11 +43,8 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   );
 }
 
-const Difference = styled.span<{ color: string }>((x) =>
+const Difference = styled.div<{ color: string }>((x) =>
   css({
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
-
     svg: {
       color: x.color,
       mr: 1,

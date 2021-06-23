@@ -100,7 +100,13 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                   isVisuallyHidden={x.isNonInteractive}
                 >
-                  <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
+                  <b>
+                    {formatSeriesValue(
+                      value,
+                      x,
+                      x.isPercentage ?? options.isPercentage
+                    )}
+                  </b>
                 </TooltipListItem>
               );
 
