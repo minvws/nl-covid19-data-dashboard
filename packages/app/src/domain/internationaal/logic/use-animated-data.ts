@@ -60,11 +60,11 @@ export function useAnimatedData<T>(
 
     const timestamp = timestampList.current[index];
     const positionValue = timestampsData.current[timestamp];
+    setCurrentDate(timestamp);
 
     if (positionValue === isLoading) {
       return;
     } else if (isRecord(positionValue)) {
-      setCurrentDate(timestamp);
       setData(positionValue);
     } else {
       timestampsData.current[timestamp] = isLoading;
@@ -73,12 +73,17 @@ export function useAnimatedData<T>(
           `${baseUrl}/${timestamp}.json`,
           setLoadingState
         );
+
         const mergedData = initialData.map((x, idx) => ({
           ...x,
           ...remoteData[idx],
         }));
-        setCurrentDate(timestamp);
-        setData((timestampsData.current[timestamp] = mergedData));
+
+        timestampsData.current[timestamp] = mergedData;
+
+        if (currentDate === timestamp) {
+          setData(mergedData);
+        }
       } catch (e) {
         playState.current = false;
       }
