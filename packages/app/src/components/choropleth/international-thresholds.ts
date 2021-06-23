@@ -5,7 +5,7 @@ import {
 import {
   InternationalListType,
   UnionToIntersection,
-} from '~/domain/internationaal/logic/add-country-name-to-choropleth-data';
+} from '~/domain/internationaal/types';
 import { colors } from '~/style/theme';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [

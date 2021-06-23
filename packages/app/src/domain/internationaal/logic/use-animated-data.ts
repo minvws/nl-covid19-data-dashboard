@@ -1,11 +1,10 @@
 import { useRef, useState } from 'react';
-import { isDefined } from 'ts-is-present';
 import { FetchLoadingState, fetchWithRetry } from '~/utils/fetch-with-retry';
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
-const isLoading = Symbol('data_is_loading');
+const isFetching = Symbol('data_is_fetching');
 
-type IsLoading = typeof isLoading;
+type IsFetching = typeof isFetching;
 
 export function useAnimatedData<T>(
   initialData: T[],
@@ -15,7 +14,7 @@ export function useAnimatedData<T>(
 ) {
   const playPosition = useRef(0);
   const playState = useRef(false);
-  const timestampsData = useRef<Record<number, T[] | IsLoading>>({
+  const timestampsData = useRef<Record<number, T[] | IsFetching>>({
     [initialTimestamp]: initialData,
   });
   const timestampList = useRef<number[]>(
@@ -62,28 +61,26 @@ export function useAnimatedData<T>(
     const positionValue = timestampsData.current[timestamp];
     setCurrentDate(timestamp);
 
-    if (positionValue === isLoading) {
+    if (positionValue === isFetching) {
       return;
-    } else if (isRecord(positionValue)) {
+    } else if (isArray(positionValue)) {
       setData(positionValue);
     } else {
-      timestampsData.current[timestamp] = isLoading;
+      timestampsData.current[timestamp] = isFetching;
       try {
-        const remoteData = await fetchWithRetry<T[]>(
+        const fetchedData = await fetchWithRetry<T[]>(
           `${baseUrl}/${timestamp}.json`,
           setLoadingState
         );
 
-        const mergedData = initialData.map((x, idx) => ({
-          ...x,
-          ...remoteData[idx],
-        }));
+        timestampsData.current[timestamp] = fetchedData;
 
-        timestampsData.current[timestamp] = mergedData;
-
-        if (currentDate === timestamp) {
-          setData(mergedData);
-        }
+        setCurrentDate((d) => {
+          if (d === timestamp) {
+            setData(fetchedData);
+          }
+          return d;
+        });
       } catch (e) {
         playState.current = false;
       }
@@ -97,12 +94,15 @@ export function useAnimatedData<T>(
   function reset() {
     stop();
     playPosition.current = 0;
-    setData(timestampsData.current[timestampList.current[0]] as T[]);
+    const firstValue = timestampsData.current[timestampList.current[0]];
+    if (isArray(firstValue)) {
+      setData(firstValue);
+    }
   }
 
   return [data, play, skip, stop, reset, loadingState, currentDate] as const;
 }
 
-function isRecord<T>(item: any): item is Record<string, T[]> {
-  return isDefined(item);
+function isArray<T>(item: IsFetching | T[]): item is T[] {
+  return Array.isArray(item);
 }

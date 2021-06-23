@@ -1,5 +1,6 @@
 import { assert, KeysOfType } from '@corona-dashboard/common';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
+import { InternationalListType } from '../types';
 
 type LocaleCode = 'nl' | 'en';
 
@@ -20,15 +21,17 @@ function findCountryName(iso: string, locale: LocaleCode) {
   return item[locale];
 }
 
-export function addCountryNameToChoroplethData<T extends InternationalListType>(
+export function getCountryNames<T extends InternationalListType>(
   values: T[],
   joinProperty: KeysOfType<T, string, true>
-): (T & { countryName: string })[] {
+): Record<string, string> {
   const locale: LocaleCode =
     (process.env.NEXT_PUBLIC_LOCALE as LocaleCode) ?? 'nl';
 
-  return values.map((x) => ({
-    ...x,
-    countryName: findCountryName(x[joinProperty], locale),
-  }));
+  return Object.fromEntries(
+    values.map((x) => [
+      x[joinProperty],
+      findCountryName(x[joinProperty], locale),
+    ])
+  );
 }

@@ -1,11 +1,10 @@
-import { debounce } from 'lodash';
 import Head from 'next/head';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Box } from '~/components/base';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { Text } from '~/components/typography';
-import { addCountryNameToChoroplethData } from '~/domain/internationaal/logic/add-country-name-to-choropleth-data';
 import { getAnimatedDataDocumentInfo } from '~/domain/internationaal/logic/get-animated-data-document-info';
+import { getCountryNames } from '~/domain/internationaal/logic/get-country-names';
 import { useAnimatedData } from '~/domain/internationaal/logic/use-animated-data';
 import { Content } from '~/domain/layout/content';
 import { Layout } from '~/domain/layout/layout';
@@ -45,8 +44,10 @@ export interface International {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    intl: ({ tested_overall }) =>
-      addCountryNameToChoroplethData(tested_overall, 'cncode'),
+    intl: ({ tested_overall }) => ({
+      data: tested_overall,
+      countryNames: getCountryNames(tested_overall, 'cncode'),
+    }),
   }),
   () => getAnimatedDataDocumentInfo('json/euro')
 );
@@ -59,15 +60,16 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
   const [stepValue, setStepValue] = useState(1);
 
   const [data, play, skip, stop, reset, loadingState, currentDate] =
-    useAnimatedData<typeof intl[number]>(intl, firstDocument, documentCount);
-
-  const debouncedSkip = useRef(
-    debounce((value: number) => skip(value), 200)
-  ).current;
+    useAnimatedData<typeof intl.data[number]>(
+      intl.data,
+      firstDocument,
+      documentCount
+    );
 
   function loadDate(event: ChangeEvent<HTMLInputElement>) {
-    setStepValue(+event.target.value);
-    debouncedSkip(+event.target.value);
+    const value = +event.target.value;
+    setStepValue(value);
+    skip(value);
   }
 
   return (
@@ -100,7 +102,7 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
           getLink={reverseRouter.vr.positiefGetesteMensen}
           tooltipContent={(context) => (
             <div>
-              {context.countryName}: {context.infected_per_100k}
+              {intl.countryNames[context.cncode]}: {context.infected_per_100k}
             </div>
           )}
         />
