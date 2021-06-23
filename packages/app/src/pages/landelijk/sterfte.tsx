@@ -33,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     main: { articles: ArticleSummary[] };
     monitor: { articles: ArticleSummary[] };
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
       "main": ${createPageArticlesQuery('deceasedPage', locale)},

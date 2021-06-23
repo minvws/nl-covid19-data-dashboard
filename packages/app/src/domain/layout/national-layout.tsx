@@ -10,6 +10,7 @@ import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import Varianten from '~/assets/varianten.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
@@ -29,6 +30,7 @@ import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationIcon } from '../situations/components/situation-icon';
+import { VariantsSidebarMetric } from '../variants/variants-sidebar-metric';
 
 export const nlPageMetricNames = [
   'vaccine_administered_total',
@@ -49,6 +51,7 @@ export const nlPageMetricNames = [
   'difference',
   'corona_melder_app',
   'behavior_per_age_group',
+  'variants',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
@@ -114,6 +117,9 @@ export function NationalLayout(props: NationalLayoutProps) {
             aria-label={siteText.aria_labels.metriek_navigatie}
             role="navigation"
             pt={4}
+            backgroundColor="white"
+            maxWidth={{ _: '38rem', md: undefined }}
+            mx="auto"
           >
             <Menu>
               <MetricMenuButtonLink
@@ -258,6 +264,16 @@ export function NationalLayout(props: NationalLayoutProps) {
                     differenceKey="deceased_rivm__covid_daily"
                   />
                 </MetricMenuItemLink>
+
+                {data.variants && (
+                  <MetricMenuItemLink
+                    href={reverseRouter.nl.covidVarianten()}
+                    icon={<Varianten />}
+                    title={siteText.covid_varianten.titel_sidebar}
+                  >
+                    <VariantsSidebarMetric data={data.variants.last_value} />
+                  </MetricMenuItemLink>
+                )}
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.brononderzoek()}

@@ -1,9 +1,11 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import Varianten from '~/assets/varianten.svg';
 import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { CompactDecoratedLink } from '~/components/decorated-link';
 import { Tile } from '~/components/tile';
@@ -13,6 +15,9 @@ import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { mockVariantsData } from '~/domain/variants/logic/mock-data';
+import { mockVariantsDiffData } from '~/domain/variants/logic/mock-variants-diff-data';
+import { VariantsOverTime } from '~/domain/variants/variants-over-time';
+import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -37,6 +42,9 @@ export const getStaticProps = withFeatureNotFoundPage(
       const data = selectNlPageMetricData('variants')();
       data.selectedNlData.variants =
         data.selectedNlData.variants || mockVariantsData();
+      data.selectedNlData.difference = mockVariantsDiffData(
+        data.selectedNlData.difference
+      );
 
       return data;
     },
@@ -45,7 +53,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       highlight: {
         articles?: ArticleSummary[];
       };
-    }>((_context) => {
+    }>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return `{
         "page": ${getVaccinePageQuery()},
@@ -134,6 +142,27 @@ export default function CovidVariantenPage(
               </Box>
             )}
           </TwoKpiSection>
+
+          {data.variants.values && (
+            <ChartTile
+              title={text.varianten_over_tijd.titel}
+              description={text.varianten_over_tijd.beschrijving}
+              metadata={{
+                source: text.bronnen.rivm,
+              }}
+            >
+              {isDefined(data.variants.values) && (
+                <VariantsOverTime values={data.variants.values} />
+              )}
+            </ChartTile>
+          )}
+
+          {data.variants?.last_value && (
+            <VariantsTableTile
+              data={data.variants?.last_value}
+              differences={data.difference}
+            />
+          )}
         </TileList>
       </NationalLayout>
     </Layout>

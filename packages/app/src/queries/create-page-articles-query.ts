@@ -9,7 +9,11 @@ type ArticlePageSchema =
   | 'vaccinationsPage'
   | 'escalationLevelPage'
   | 'situationsPage'
-  | 'variantsPage';
+  | 'variantsPage'
+  | 'nursingHomePage'
+  | 'disabilityCarePage'
+  | 'elderlyAtHomePage'
+  | 'infectiousPeoplePage';
 
 export function createPageArticlesQuery(
   schemaName: ArticlePageSchema,

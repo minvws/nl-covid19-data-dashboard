@@ -36,7 +36,7 @@ export const getStaticProps = createGetStaticProps(
   selectVrPageMetricData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })
@@ -162,6 +162,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 selectPlaceholder: text.graph_selected_rwzi_placeholder,
                 splitLabels: siteText.rioolwater_metingen.split_labels,
                 averagesDataLabel: siteText.common.weekgemiddelde,
+                valueAnnotation: siteText.waarde_annotaties.riool_normalized,
               }}
             />
           ) : (

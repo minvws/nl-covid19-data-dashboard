@@ -3,6 +3,8 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -18,12 +20,14 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
@@ -36,13 +40,19 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(),
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(() => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('elderlyAtHomePage', locale);
   })
 );
 
 const ElderlyAtHomeNationalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const { selectedNlData: data, choropleth, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, lastGenerated, content } = props;
   const elderlyAtHomeData = data.elderly_at_home;
 
   const elderlyAtHomeInfectedUnderReportedRange = getBoundaryDateStartUnix(
@@ -85,6 +95,8 @@ const ElderlyAtHomeNationalPage = (
             }}
             reference={text.section_positive_tested.reference}
           />
+
+          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
