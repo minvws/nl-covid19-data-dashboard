@@ -101,7 +101,7 @@ export default function CovidVariantenPage(
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
           />
 
           <TwoKpiSection>

@@ -166,4 +166,54 @@ p {
   font-size: 1rem;
   font-weight: normal;
 }
+
+h1, h2, h3, h4 {
+  position: relative;
+}
+
+h1:after {
+  position: absolute;
+  background-color: black;
+  padding: 0px 3px;
+  color: white;
+  content: 'h1';
+  margin-left: 10px;
+  font-weight: bold;
+  /* right: -50px; */
+}
+
+h2:after {
+  position: absolute;
+  background-color: black;
+  padding: 0px 3px;
+  color: white;
+  content: 'h2';
+  margin-left: 10px;
+  font-weight: bold;
+  /* right: -50px; */
+}
+
+
+h3:after {
+  position: absolute;
+  background-color: black;
+  padding: 0px 3px;
+  color: white;
+  content: 'h3';
+  margin-left: 10px;
+  font-weight: bold;
+  /* right: -50px; */
+}
+
+
+h4:after {
+  position: absolute;
+  background-color: black;
+  padding: 0px 3px;
+  color: white;
+  content: 'h4';
+  margin-left: 10px;
+  font-weight: bold;
+  /* right: -50px; */
+}
 `;

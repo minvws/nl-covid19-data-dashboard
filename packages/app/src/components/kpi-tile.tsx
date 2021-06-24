@@ -1,8 +1,8 @@
+import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { Box, Spacer } from './base';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
-import { Markdown } from '~/components/markdown';
 interface KpiTileProps {
   title: string;
   description?: string;
@@ -22,7 +22,9 @@ export function KpiTile({
 }: KpiTileProps) {
   return (
     <Tile height="100%">
-      <Heading level={3}>{title}</Heading>
+      <Heading level={3} as="h2">
+        {title}
+      </Heading>
       <Box>{children}</Box>
       {description && (
         <Box maxWidth="400px" fontSize={2} lineHeight={2} mb={3}>

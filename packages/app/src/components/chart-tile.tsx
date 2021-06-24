@@ -7,22 +7,26 @@ import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
-import { Heading } from './typography';
+import { asHeadingLevel, Heading } from './typography';
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
   children?: ReactNode;
   descriptionIsMarkdown?: boolean;
+  asHeadingLevel?: asHeadingLevel;
 }
 
 function ChartTileHeader({
   title,
   description,
   children,
+  asHeadingLevel = 'h2',
 }: ChartTileHeaderProps) {
   return (
     <Box>
-      <Heading level={3}>{title}</Heading>
+      <Heading level={3} as={asHeadingLevel}>
+        {title}
+      </Heading>
       <Box>
         {description && (
           <Box maxWidth={560}>
@@ -43,6 +47,7 @@ type ChartTileProps = {
   title: string;
   metadata: MetadataProps;
   description?: string;
+  asHeadingLevel?: asHeadingLevel;
   timeframeInitialValue?: TimeframeOption;
 } & (
   | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
@@ -63,6 +68,7 @@ export function ChartTile({
   metadata,
   timeframeOptions,
   timeframeInitialValue = 'all',
+  asHeadingLevel,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
@@ -70,7 +76,11 @@ export function ChartTile({
 
   return (
     <FullscreenChartTile metadata={metadata}>
-      <ChartTileHeader title={title} description={description}>
+      <ChartTileHeader
+        title={title}
+        description={description}
+        asHeadingLevel={asHeadingLevel}
+      >
         {timeframeOptions && timeframe && (
           <ChartTimeControls
             timeframeOptions={timeframeOptions}

@@ -58,7 +58,7 @@ export function VaccinePageIntroduction({
 
             <TwoKpiSection spacing={4}>
               <Box as="article" spacing={3}>
-                <Heading level={3}>
+                <Heading level={3} as="h2">
                   {text.grafiek_gezette_prikken.titel}
                 </Heading>
                 <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
@@ -71,7 +71,7 @@ export function VaccinePageIntroduction({
               </Box>
 
               <Box as="article" spacing={3}>
-                <Heading level={3}>
+                <Heading level={3} as="h2">
                   {text.kpi_geplande_prikken_deze_week.titel}
                 </Heading>
                 <KpiValue

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
-import { Heading, HeadingLevel, Text } from '~/components/typography';
+import { asHeadingLevel, Heading, Text } from '~/components/typography';
 import { asResponsiveArray } from '~/style/utils';
 import { Articles } from './articles';
 import { Metadata, MetadataProps } from './metadata';
@@ -18,7 +18,7 @@ interface InformationBlockProps {
     title: string;
     href: string;
   }[];
-  headingLevel?: HeadingLevel;
+  asHeadingLevel?: asHeadingLevel;
   metadata?: MetadataProps;
   referenceLink?: string;
   id?: string;
@@ -28,7 +28,7 @@ export function InformationBlock({
   title,
   icon,
   description,
-  headingLevel = 1,
+  asHeadingLevel,
   articles,
   usefulLinks,
   metadata,
@@ -40,7 +40,7 @@ export function InformationBlock({
       id={id}
       css={css({
         mt: id ? asResponsiveArray({ _: 4, md: 5 }) : 0,
-        border: id ? '4px solid red' : '4px solid blue',
+        // border: id ? '4px solid red' : '4px solid blue',
       })}
     >
       {title && (
@@ -49,13 +49,14 @@ export function InformationBlock({
             <HeadingWithIcon
               icon={icon}
               title={title}
-              headingLevel={headingLevel}
+              headingLevel={1}
+              as={asHeadingLevel}
               mb={2}
               mt={1}
             />
           ) : (
             <Box display="flex" flexWrap="nowrap" alignItems="center">
-              <Heading level={headingLevel} mb={3} lineHeight={1.3}>
+              <Heading level={1} mb={3} lineHeight={1.3} as={asHeadingLevel}>
                 {title}
               </Heading>
             </Box>

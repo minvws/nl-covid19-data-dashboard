@@ -127,8 +127,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.highlight.articles}
           />
 
-          {/* <ArticleStrip articles={content.highlight.articles} /> */}
-
           {data.vaccine_coverage && (
             <ChartTile
               title={text.grafiek_gevaccineerd_door_de_tijd_heen.titel}
@@ -216,6 +214,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           ) : null}
 
           <InformationBlock
+            asHeadingLevel={'h2'}
             id={'vaccinatiebereidheid'}
             title={text.bereidheid_section.title}
             description={text.bereidheid_section.description}
@@ -235,6 +234,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChartTile
             title={text.grafiek_draagvlak.titel}
+            asHeadingLevel={'h3'}
             description={text.grafiek_draagvlak.omschrijving}
             metadata={{
               datumsText: siteText.vaccinaties.grafiek_draagvlak.metadata_tekst,
@@ -322,6 +322,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <InformationBlock
             id={'leveringen'}
+            asHeadingLevel="h2"
             title={text.stock_and_delivery_section.title}
             icon={scaledVaccineIcon}
             description={text.stock_and_delivery_section.description}

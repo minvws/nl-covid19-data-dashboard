@@ -85,7 +85,7 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
       </div>
 
       <Box my={2} pl={{ xs: 3, md: 4 }}>
-        <Text fontSize="1.625rem" m={0}>
+        <Text fontSize="1.625rem" m={0} as="h2" fontWeight="normal">
           <Shapes index={shapeIndex} />
           {replaceComponentsInText(
             siteText.vaccinaties.clock.title_doses_per_minute,
