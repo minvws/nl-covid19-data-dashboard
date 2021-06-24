@@ -286,63 +286,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       value: 7,
                       label: siteText.common.signaalwaarde,
                     },
-                    timelineEvents: [
-                      {
-                        date: new Date('12 april 2020').getTime() / 1000,
-                        title: 'Hoogste piek tweede golf',
-                        description:
-                          'Op 12 april werd het grootste aantal van 12.998 nieuwe postitieve testen gemeld',
-                      },
-                      {
-                        date: [
-                          new Date('30 july 2020').getTime() / 1000,
-                          new Date('25 september 2020').getTime() / 1000,
-                        ],
-                        title: 'Beperkte testcapaciteit',
-                        description:
-                          'In de eerste golf waren er te weinig testen om iedereen te laten testen. Daardoor is de piek in de data lager dan voor de andere golven. In de realiteit zouden deze aantallen veel hoger hebben gelegen. In de realiteit zouden deze aantallen veel hoger hebben gelegen.',
-                      },
-                      {
-                        date: [
-                          new Date('14 may 2021').getTime() / 1000,
-                          new Date('15 may 2021').getTime() / 1000,
-                        ],
-                        title: 'nope',
-                        description: 'testtets',
-                      },
-                      {
-                        date: [
-                          new Date('16 may 2021').getTime() / 1000,
-                          new Date('20 may 2021').getTime() / 1000,
-                        ],
-                        title: 'test',
-                        description: 'testtets',
-                      },
-
-                      {
-                        date: new Date('23 may 2021').getTime() / 1000,
-                        title: 'test2',
-                        description: 'testtets',
-                      },
-
-                      {
-                        date: [
-                          new Date('25 may 2021').getTime() / 1000,
-                          new Date('28 may 2021').getTime() / 1000,
-                        ],
-                        title: 'test3',
-                        description: 'testtets',
-                      },
-
-                      {
-                        date: [
-                          new Date('30 may 2021').getTime() / 1000,
-                          new Date('4 june 2021').getTime() / 1000,
-                        ],
-                        title: 'test3',
-                        description: 'testtets',
-                      },
-                    ],
                   }}
                 />
               ) : (

@@ -15,7 +15,7 @@ export const TimelineBar = forwardRef<HTMLDivElement, TimelineBarProps>(
       <Box
         ref={ref}
         position="relative"
-        bg={transparentize(0.9, colors.data.primary)}
+        bg={transparentize(0.8, colors.data.primary)}
         style={{ width, height }}
         display="flex"
         alignItems="center"

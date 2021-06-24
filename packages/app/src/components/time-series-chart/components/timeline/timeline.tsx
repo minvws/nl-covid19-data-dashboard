@@ -61,7 +61,6 @@ export const Timeline = memo(function Timeline({
       pb={4}
       css={css({ userSelect: 'none', touchAction: 'pan-y' })}
       width={width}
-      overflowX="hidden"
       onTouchStart={handleHover}
       onTouchMove={handleHover}
       onMouseMove={handleHover}

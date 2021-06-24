@@ -8,6 +8,7 @@ import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
@@ -46,6 +47,7 @@ import {
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
+import { createTimelineEventsMockData } from './mock-timeline-events';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -139,7 +141,7 @@ export function TimeSeriesChart<
   minHeight = 250,
   timeframe = 'all',
   formatTooltip,
-  dataOptions,
+  dataOptions: _dataOptions,
   showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
@@ -163,6 +165,28 @@ export function TimeSeriesChart<
 
   const today = useCurrentDate();
   const chartId = useUniqueId();
+
+  /**
+   * @TODO clean up mock data
+   * vvvvvvvv
+   */
+  const isMounted = useIsMounted();
+  const timelineEventsMock = useMemo(
+    () =>
+      isMounted
+        ? createTimelineEventsMockData(allValues, timeframe, today)
+        : undefined,
+    [allValues, timeframe, today, isMounted]
+  );
+  const dataOptions = useMemo<DataOptions>(() => {
+    return {
+      ..._dataOptions,
+      timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
+    };
+  }, [_dataOptions, timelineEventsMock]);
+  /**
+   * ^^^^^^^^
+   */
 
   const {
     valueAnnotation,
