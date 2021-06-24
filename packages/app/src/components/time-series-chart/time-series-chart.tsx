@@ -161,6 +161,7 @@ export function TimeSeriesChart<
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
+  const today = useCurrentDate();
   const chartId = useUniqueId();
 
   const {
@@ -239,7 +240,6 @@ export function TimeSeriesChart<
 
   const splitLegendGroups = useSplitLegendGroups(seriesConfig);
 
-  const today = useCurrentDate();
   const xTickValues = useMemo(
     () => getTimeDomain({ values, today, withPadding: false }),
     [values, today]
@@ -478,7 +478,6 @@ export function TimeSeriesChart<
           width={width}
           timelineState={timelineState}
           highlightIndex={hoverState?.timelineEventIndex}
-          isFullTimeline={timeframe === 'all'}
           isYAxisCollapsed={isYAxisCollapsed}
         />
       )}

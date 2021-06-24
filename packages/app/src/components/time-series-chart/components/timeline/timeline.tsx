@@ -17,7 +17,6 @@ interface TimelineProps {
   timelineState: TimelineState;
   size?: number;
   highlightIndex?: number;
-  isFullTimeline?: boolean;
   isYAxisCollapsed?: boolean;
 }
 
@@ -27,7 +26,6 @@ export const Timeline = memo(function Timeline({
   highlightIndex,
   size = 10,
   timelineState,
-  isFullTimeline,
   isYAxisCollapsed,
 }: TimelineProps) {
   const { index, setIndex } = timelineState;
@@ -51,6 +49,8 @@ export const Timeline = memo(function Timeline({
   const barHeight = size;
   const historyLineWidth = isYAxisCollapsed ? 15 : Math.min(padding.left, 23);
 
+  const showHistoryLine = timelineState.ranges[0].timeline.startIsOutOfBounds;
+
   if (!width) return null;
 
   return (
@@ -73,7 +73,7 @@ export const Timeline = memo(function Timeline({
         </Text>
       </Box>
       <Box display="flex" pl={padding.left}>
-        {!isFullTimeline && (
+        {showHistoryLine && (
           <Box position="absolute" left={padding.left - historyLineWidth}>
             <DottedTimelineBar width={historyLineWidth} height={barHeight} />
           </Box>
