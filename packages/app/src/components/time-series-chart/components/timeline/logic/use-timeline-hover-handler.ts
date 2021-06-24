@@ -23,7 +23,7 @@ export function useTimelineHoverHandler(
   const voronoiLayout = useMemo(
     () =>
       voronoi<TimelineEventRange>({
-        x: (x) => x.timeline.start,
+        x: (x) => x.timeline.x0,
         y: () => height,
         width,
         height,

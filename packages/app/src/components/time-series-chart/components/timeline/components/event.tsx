@@ -39,8 +39,7 @@ export function TimelineEvent({
 
   const isHighlightedEvent = isHighlighted || isSelected;
 
-  const x0 = range.timeline.start;
-  const x1 = range.timeline.end;
+  const { x0, x1, x0IsOutOfBounds, x1IsOutOfBounds } = range.timeline;
 
   const timespanWidth = x1 - x0;
 
@@ -55,7 +54,7 @@ export function TimelineEvent({
       {timespanWidth > 0 && (
         <TimespanBar
           height={size}
-          disableBorderRadius={range.timeline.endIsOutOfBounds}
+          disableBorderRadius={x1IsOutOfBounds}
           initial={false}
           animate={{
             background: transparentize(
@@ -68,7 +67,7 @@ export function TimelineEvent({
       <div
         style={{
           position: 'relative',
-          left: range.timeline.startIsOutOfBounds ? historyEventOffset : 0,
+          left: x0IsOutOfBounds ? historyEventOffset : 0,
         }}
       >
         <div css={css({ transform: 'translateX(-50%)' })}>

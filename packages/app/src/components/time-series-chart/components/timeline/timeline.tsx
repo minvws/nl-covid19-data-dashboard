@@ -52,7 +52,7 @@ export const Timeline = memo(function Timeline({
   const barHeight = size;
   const historyLineWidth = isYAxisCollapsed ? 15 : Math.min(padding.left, 23);
 
-  const showHistoryLine = timelineState.ranges[0].timeline.startIsOutOfBounds;
+  const showHistoryLine = timelineState.ranges[0].timeline.x0IsOutOfBounds;
 
   if (!width) return null;
 

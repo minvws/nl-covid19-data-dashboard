@@ -17,13 +17,13 @@ export interface TimelineState {
 
 export interface TimelineEventRange {
   timeline: {
-    start: number;
-    end: number;
-    startIsOutOfBounds: boolean;
-    endIsOutOfBounds: boolean;
+    x0: number;
+    x1: number;
+    x0IsOutOfBounds: boolean;
+    x1IsOutOfBounds: boolean;
   };
   highlight: {
-    start: number;
-    end: number;
+    x0: number;
+    x1: number;
   };
 }

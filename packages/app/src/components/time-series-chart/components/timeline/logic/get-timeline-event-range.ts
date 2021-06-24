@@ -30,14 +30,14 @@ export function getTimelineEventRange(
 
   return {
     timeline: {
-      start: xScale(Math.max(start, min)),
-      end: xScale(Math.min(end, max)),
-      startIsOutOfBounds: start < min,
-      endIsOutOfBounds: end > max,
+      x0: xScale(Math.max(start, min)),
+      x1: xScale(Math.min(end, max)),
+      x0IsOutOfBounds: start < min,
+      x1IsOutOfBounds: end > max,
     },
     highlight: {
-      start: xScale(Math.max(highlightStart, min)),
-      end: xScale(Math.min(highlightEnd, max)),
+      x0: xScale(Math.max(highlightStart, min)),
+      x1: xScale(Math.min(highlightEnd, max)),
     },
   };
 }
