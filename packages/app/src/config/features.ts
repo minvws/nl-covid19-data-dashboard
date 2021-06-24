@@ -2,11 +2,6 @@ import { Feature } from '@corona-dashboard/common';
 
 export const features: Feature[] = [
   {
-    name: 'downscaling',
-    isEnabled: false,
-    route: '/afschaling',
-  },
-  {
     name: 'vaccinationPerAgegroup',
     isEnabled: false,
     metricScopes: ['nl'],
