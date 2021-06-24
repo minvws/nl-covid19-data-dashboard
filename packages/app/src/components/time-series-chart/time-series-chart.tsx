@@ -6,6 +6,7 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
+import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
 import { useIsMounted } from '~/utils/use-is-mounted';
@@ -170,6 +171,7 @@ export function TimeSeriesChart<
    * @TODO clean up mock data
    * vvvvvvvv
    */
+  const hasTimelineMockDataFeature = useFeature('timelineMockData');
   const isMounted = useIsMounted();
   const timelineEventsMock = useMemo(
     () =>
@@ -178,12 +180,14 @@ export function TimeSeriesChart<
         : undefined,
     [allValues, timeframe, today, isMounted]
   );
-  const dataOptions = useMemo<DataOptions>(() => {
-    return {
-      ..._dataOptions,
-      timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
-    };
-  }, [_dataOptions, timelineEventsMock]);
+  const dataOptions = useMemo<DataOptions | undefined>(() => {
+    return hasTimelineMockDataFeature
+      ? {
+          ..._dataOptions,
+          timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
+        }
+      : _dataOptions;
+  }, [_dataOptions, hasTimelineMockDataFeature, timelineEventsMock]);
   /**
    * ^^^^^^^^
    */
