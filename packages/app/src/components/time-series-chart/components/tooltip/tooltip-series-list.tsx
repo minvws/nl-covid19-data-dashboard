@@ -290,7 +290,13 @@ export const TooltipList = styled.ol<{
 
 function IconRow({ icon, children }: any) {
   return (
-    <Box display="flex" alignItems="stretch" spacing={2} spacingHorizontal>
+    <Box
+      display="flex"
+      alignItems="stretch"
+      spacing={2}
+      spacingHorizontal
+      width="100%"
+    >
       {icon && (
         <Box
           width="1em"
@@ -303,7 +309,7 @@ function IconRow({ icon, children }: any) {
           {icon}
         </Box>
       )}
-      <Box>{children}</Box>
+      <Box width="100%">{children}</Box>
     </Box>
   );
 }
