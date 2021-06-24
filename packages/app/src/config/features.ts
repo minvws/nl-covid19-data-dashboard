@@ -48,6 +48,6 @@ export const features: Feature[] = [
   },
   {
     name: 'timelineMockData',
-    isEnabled: false,
+    isEnabled: true,
   },
 ];

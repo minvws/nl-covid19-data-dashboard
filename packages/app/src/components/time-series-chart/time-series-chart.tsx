@@ -182,7 +182,7 @@ export function TimeSeriesChart<
   );
   const dataOptions = useMemo(
     () =>
-      hasTimelineMockDataFeature
+      hasTimelineMockDataFeature.isEnabled
         ? ({
             ..._dataOptions,
             timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,

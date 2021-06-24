@@ -17,7 +17,10 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
        * marker/annotation on a date.
        */
       .map(toNoonDate);
-    timeSeries.last_value = toNoonDate(timeSeries.last_value);
+
+    if (timeSeries.last_value) {
+      timeSeries.last_value = toNoonDate(timeSeries.last_value);
+    }
   }
 
   /**
@@ -41,7 +44,10 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
       x.values = sortTimeSeriesValues(x.values).map(toNoonDate) as
         | RegionalSewerPerInstallationValue[]
         | MunicipalSewerPerInstallationValue[];
-      x.last_value = toNoonDate(x.last_value);
+
+      if (x.last_value) {
+        x.last_value = toNoonDate(x.last_value);
+      }
       return x;
     });
   }
