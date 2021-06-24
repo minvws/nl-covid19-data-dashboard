@@ -4,13 +4,18 @@ import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { AccessibilityOptions } from '~/utils/use-accessibility-options';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { NumberProperty } from '~/components/line-chart/logic';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+
+// This type limits the allowed property names to those with a number type,
+// so its like keyof T, but filtered down to only the appropriate properties.
+type NumberProperty<T extends TimestampedValue> = {
+  [K in keyof T]: T[K] extends number | null ? K : never;
+}[keyof T];
 
 type MiniTrendTileProps<T extends TimestampedValue> = {
   icon: JSX.Element;

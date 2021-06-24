@@ -6,6 +6,7 @@ import {
 } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { SeriesIcon } from '~/components/time-series-chart/components/series-icon';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
@@ -49,14 +50,6 @@ export function InfectedPerAgeGroup({
       };
     });
 
-  const underReportedLegendItem: LegendItem = {
-    shape: 'square',
-    color: colors.data.underReported,
-    label: text.line_chart_legend_inaccurate_label,
-  };
-
-  /* Filter for each config group */
-
   /**
    * Chart:
    * - when nothing selected: all items
@@ -74,17 +67,21 @@ export function InfectedPerAgeGroup({
   );
 
   /* Static legend contains always enabled items and the under reported item */
-  const staticLegendItems: LegendItem[] = seriesConfig
+  /* Static legend contains always enabled items and the under reported item */
+  const staticLegendItems = seriesConfig
     .filter((item) => alwayEnabled.includes(item.metricProperty))
-    .map(
-      (item): LegendItem => ({
-        label: item.label,
-        shape: item.type,
-        color: item.color,
-        style: item.style,
-      })
-    )
-    .concat([underReportedLegendItem]);
+    .map<LegendItem>((item) => ({
+      label: item.label,
+      shape: 'custom' as const,
+      shapeComponent: <SeriesIcon config={item} />,
+    }))
+    .concat([
+      {
+        shape: 'square' as const,
+        color: colors.data.underReported,
+        label: text.line_chart_legend_inaccurate_label,
+      },
+    ]);
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;

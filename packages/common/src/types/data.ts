@@ -224,6 +224,7 @@ export interface NationalDifference {
   variants__epsilon_percentage?: DifferenceDecimal;
   variants__theta_percentage?: DifferenceDecimal;
   variants__kappa_percentage?: DifferenceDecimal;
+  variants__lambda_percentage?: DifferenceDecimal;
   variants__other_percentage?: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
@@ -863,6 +864,9 @@ export interface NlVariantsValue {
   kappa_percentage: number;
   kappa_occurrence: number;
   kappa_is_variant_of_concern: boolean;
+  lambda_percentage: number;
+  lambda_occurrence: number;
+  lambda_is_variant_of_concern: boolean;
   other_percentage: number;
   other_occurrence: number;
   other_is_variant_of_concern: boolean;
