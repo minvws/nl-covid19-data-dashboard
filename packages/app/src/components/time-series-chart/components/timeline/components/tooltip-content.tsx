@@ -1,6 +1,7 @@
 import css from '@styled-system/css';
 import { MouseEvent, TouchEvent, useCallback } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
@@ -24,11 +25,12 @@ export function TimelineTooltipContent({
 }: TimelineTooltipContentProps) {
   const intl = useIntl();
   const isTouch = useIsTouchDevice();
-  const date = Array.isArray(config.date)
-    ? config.date
-        .map((x) => intl.formatDateFromSeconds(x, 'medium'))
-        .join(' - ')
-    : intl.formatDateFromSeconds(config.date, 'medium');
+  const dateStr = [
+    intl.formatDateFromSeconds(config.start, 'medium'),
+    config.end && intl.formatDateFromSeconds(config.end, 'medium'),
+  ]
+    .filter(isDefined)
+    .join(' – ');
 
   const stopPropagation = useCallback(
     (evt: TouchEvent | MouseEvent) => evt.stopPropagation(),
@@ -60,7 +62,7 @@ export function TimelineTooltipContent({
             title={intl.siteText.charts.timeline.prev}
           />
           <InlineText fontSize={1} color="labelGray">
-            {date}
+            {dateStr}
           </InlineText>
           <ChevronButton
             onClick={onNext}
@@ -71,7 +73,7 @@ export function TimelineTooltipContent({
       <Box spacing={2}>
         {!isTouch && (
           <Text fontSize={1} color="labelGray">
-            {date}
+            {dateStr}
           </Text>
         )}
 

@@ -7,6 +7,7 @@ import { first, last } from 'lodash';
 // @ts-ignore
 import starwars from 'starwars';
 import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
+import { TimelineEventConfig } from './components/timeline';
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
@@ -32,25 +33,23 @@ export function createTimelineEventsMockData<T extends TimestampedValue>(
 
   let hasHistoryDate = false;
 
-  return Array.from(Array(eventAmount)).map(() => {
+  return Array.from(Array(eventAmount)).map<TimelineEventConfig>(() => {
     const isDatespan = Math.random() > 0.75;
     const isHistoryDate = hasHistoryDate ? false : Math.random() > 0.75;
     hasHistoryDate = hasHistoryDate || isHistoryDate;
 
-    const dateStart = isHistoryDate
+    const start = isHistoryDate
       ? valuesDateStart - getDays(3)
       : Math.floor(Math.random() * (valuesDateEnd - valuesDateStart)) +
         valuesDateStart;
 
-    const date: number | [number, number] = isDatespan
-      ? [
-          dateStart,
-          dateStart + getDays(between(1, timeframe === 'all' ? 35 : 5)),
-        ]
-      : dateStart;
+    const end = isDatespan
+      ? start + getDays(between(1, timeframe === 'all' ? 35 : 5))
+      : undefined;
 
     return {
-      date,
+      start,
+      end,
       title: starwars() as string,
       description: starwars() as string,
     };

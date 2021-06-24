@@ -169,7 +169,7 @@ export function TimeSeriesChart<
 
   /**
    * @TODO clean up mock data
-   * vvvvvvvv
+   * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
    */
   const hasTimelineMockDataFeature = useFeature('timelineMockData');
   const isMounted = useIsMounted();
@@ -180,17 +180,17 @@ export function TimeSeriesChart<
         : undefined,
     [allValues, timeframe, today, isMounted]
   );
-  const dataOptions = useMemo<DataOptions | undefined>(() => {
-    return hasTimelineMockDataFeature
-      ? {
-          ..._dataOptions,
-          timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
-        }
-      : _dataOptions;
-  }, [_dataOptions, hasTimelineMockDataFeature, timelineEventsMock]);
-  /**
-   * ^^^^^^^^
-   */
+  const dataOptions = useMemo(
+    () =>
+      hasTimelineMockDataFeature
+        ? ({
+            ..._dataOptions,
+            timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
+          } as DataOptions)
+        : _dataOptions,
+    [_dataOptions, hasTimelineMockDataFeature, timelineEventsMock]
+  );
+  /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 
   const {
     valueAnnotation,

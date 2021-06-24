@@ -136,35 +136,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   valueAnnotation:
                     text.grafiek_gevaccineerd_door_de_tijd_heen
                       .waarde_annotatie,
-                  timelineEvents: [
-                    {
-                      date: new Date('9 januari 2021').getTime() / 1000,
-                      title: 'Vandaag is het 9 januari',
-                      description:
-                        'Het is zaterdagmorgen uitkijken voor rijm en ijsplekken. Het wegdek ligt er nat bij, de temperaturen dalen tot het vriespunt. Aan de grond komt het tot een graadje vorst.',
-                    },
-                    {
-                      date: [
-                        new Date('22 februari 2021').getTime() / 1000,
-                        new Date('28 februari 2021').getTime() / 1000,
-                      ],
-                      title: ' 22 - 28 februari',
-                      description: 'blablabla',
-                    },
-                    {
-                      date: [
-                        new Date('21 march 2021').getTime() / 1000,
-                        new Date('11 april 2021').getTime() / 1000,
-                      ],
-                      title: ' 21 maart - 11 april',
-                      description: 'blablabla',
-                    },
-                    {
-                      date: new Date('4 april 2021').getTime() / 1000,
-                      title: 'Vandaag is het 44444',
-                      description: '🤨',
-                    },
-                  ],
                 }}
                 seriesConfig={[
                   {

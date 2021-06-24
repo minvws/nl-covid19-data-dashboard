@@ -1,5 +1,6 @@
 export interface TimelineEventConfig {
-  date: number | [number, number];
+  start: number;
+  end: number | undefined;
   title: string;
   description: string;
 }

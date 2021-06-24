@@ -6,11 +6,12 @@ export function isVisibleEvent(config: TimelineEventConfig, domain: number[]) {
   const min = first(domain) as number;
   const max = last(domain) as number;
 
-  const [start, end] = Array.isArray(config.date)
-    ? [midOfDayInSeconds(config.date[0]), midOfDayInSeconds(config.date[1])]
-    : [midOfDayInSeconds(config.date), midOfDayInSeconds(config.date)];
+  const [x0, x1] = [
+    midOfDayInSeconds(config.start),
+    midOfDayInSeconds(config.end || config.start),
+  ];
 
-  if (end < start) {
+  if (x1 < x0) {
     console.warn(
       'cannot display timeline event with end date before start date:',
       JSON.stringify(config, null, 2)
@@ -18,5 +19,5 @@ export function isVisibleEvent(config: TimelineEventConfig, domain: number[]) {
     return false;
   }
 
-  return min <= end && start <= max;
+  return min <= x1 && x0 <= max;
 }

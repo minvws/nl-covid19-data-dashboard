@@ -13,7 +13,8 @@ export function TimelineEventHighlight({
   height: number;
   timelineState: TimelineState;
 }) {
-  const { x0 = 0, x1 = 0 } = timelineState.current?.range.highlight || {};
+  const { range, event } = timelineState.current || {};
+  const { x0 = 0, x1 = 0 } = range?.highlight || {};
 
   const width = Math.max(1, x1 - x0);
 
@@ -21,7 +22,7 @@ export function TimelineEventHighlight({
     <AnimatePresence>
       {timelineState.current && (
         <motion.rect
-          key={timelineState.current?.event.date.toString()}
+          key={`${event?.start}-${event?.end}`}
           pointerEvents="none"
           height={height}
           x={x0}

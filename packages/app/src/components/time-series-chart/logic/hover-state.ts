@@ -496,7 +496,7 @@ function findActiveTimespanAnnotationIndex(
 
 function findActiveTimelineEventIndex(
   hoveredValue: TimestampedValue,
-  timespanAnnotations: TimelineEventConfig[]
+  timelineEvents: TimelineEventConfig[]
 ) {
   const valueSpanStartOfDay = startOfDayInSeconds(
     isDateValue(hoveredValue)
@@ -515,7 +515,7 @@ function findActiveTimelineEventIndex(
    * timespan. By assuming these timespans never overlap, we can exist on the
    * first match and return a single index.
    */
-  for (const [index, annotation] of [...timespanAnnotations]
+  for (const [index, event] of [...timelineEvents]
     /**
      * Annotations could overlap each other, therefore reverse the
      * lookup to match later annotations first
@@ -523,15 +523,11 @@ function findActiveTimelineEventIndex(
      */
     .reverse()
     .entries()) {
-    const start = startOfDayInSeconds(
-      Array.isArray(annotation.date) ? annotation.date[0] : annotation.date
-    );
-    const end = endOfDayInSeconds(
-      Array.isArray(annotation.date) ? annotation.date[1] : annotation.date
-    );
+    const start = startOfDayInSeconds(event.start);
+    const end = endOfDayInSeconds(event.end || event.start);
 
     if (valueSpanStartOfDay < end && start < valueSpanEndOfDay) {
-      return timespanAnnotations.length - 1 - index;
+      return timelineEvents.length - 1 - index;
     }
   }
 }
