@@ -59,6 +59,7 @@ const SkipButton = styled.button<{ isActive: boolean }>((x) =>
     py: 2,
     cursor: 'pointer',
     textDecoration: 'none',
+    zIndex: 9,
     /**
      * we'll toggle the opacity because for some reason firefox will not keep
      * the toggle button in the viewport, instead it will scroll entirely to the

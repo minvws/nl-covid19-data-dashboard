@@ -47,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('hospitalPage', locale);
   })

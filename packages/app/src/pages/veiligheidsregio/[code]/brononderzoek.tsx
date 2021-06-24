@@ -38,7 +38,7 @@ export const getStaticProps = withFeatureNotFoundPage(
     selectVrPageMetricData('situations'),
     createGetContent<{
       articles?: ArticleSummary[];
-    }>((_context) => {
+    }>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return createPageArticlesQuery('situationsPage', locale);
     })
@@ -105,6 +105,7 @@ export default function BrononderzoekPage(
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
+            reference={text.reference}
           />
 
           <ArticleStrip articles={content.articles} />

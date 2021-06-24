@@ -52,10 +52,18 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
-  }>((_context) => {
+    main: { articles?: ArticleSummary[] };
+    ggd: { articles?: ArticleSummary[] };
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('positiveTestsPage', locale);
+    return `{
+      "main": ${createPageArticlesQuery('positiveTestsPage', locale)},
+      "ggd": ${createPageArticlesQuery(
+        'positiveTestsPage',
+        locale,
+        'ggdArticles'
+      )},
+    }`;
   })
 );
 
@@ -123,7 +131,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.reference}
           />
 
-          <ArticleStrip articles={content.articles} />
+          {content.main?.articles && (
+            <ArticleStrip articles={content.main.articles} />
+          )}
 
           <TwoKpiSection>
             <KpiTile
@@ -298,6 +308,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
+
+          {content.ggd?.articles && (
+            <ArticleStrip articles={content.ggd.articles} />
+          )}
 
           <TwoKpiSection>
             <KpiTile

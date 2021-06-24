@@ -1,5 +1,4 @@
 import {
-  formatStyle,
   isDateSpanValue,
   isDateValue,
   TimestampedValue,
@@ -7,7 +6,6 @@ import {
 import { isBoolean, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { useIntl } from '~/intl';
 import { TimespanAnnotationConfig } from './common';
 
 const HALF_DAY_IN_SECONDS = 12 * 60 * 60;
@@ -36,8 +34,6 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
   property: keyof T,
   label: string
 ) {
-  const { formatDateFromSeconds } = useIntl();
-
   return useMemo(() => {
     return values.reduce<TimespanAnnotationConfig[]>(
       (newItems, item, index, array) => {
@@ -73,26 +69,13 @@ export function useGappedLineAnnotations<T extends TimestampedValue>(
             hasValue(array[index + 1]?.[property])
           ) {
             currentAnnotation.end = endDate;
-            currentAnnotation.label = formatLabel(
-              currentAnnotation,
-              formatDateFromSeconds
-            );
           }
         }
         return newItems;
       },
       []
     );
-  }, [values, property, label, formatDateFromSeconds]);
-}
-
-function formatLabel(
-  annotation: TimespanAnnotationConfig,
-  formatDateFromSeconds: (seconds: number, style?: formatStyle) => string
-) {
-  const start = formatDateFromSeconds(annotation.start, 'axis');
-  const end = formatDateFromSeconds(annotation.end, 'axis');
-  return `${start} - ${end}: ${annotation.label}`;
+  }, [values, property, label]);
 }
 
 function hasValue(value: unknown) {

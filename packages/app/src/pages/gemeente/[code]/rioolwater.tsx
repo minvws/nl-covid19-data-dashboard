@@ -37,7 +37,7 @@ export const getStaticProps = createGetStaticProps(
   selectGmPageMetricData('sewer_per_installation', 'static_values'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })

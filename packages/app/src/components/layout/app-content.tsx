@@ -5,6 +5,7 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
 import { LinkWithIcon } from '../link-with-icon';
 
 interface AppContentProps {
@@ -118,7 +119,7 @@ const StyledAppContent = styled.main(
 
 const StyledSidebar = styled.aside(
   css({
-    bg: 'white',
+    bg: asResponsiveArray({ _: 'page', md: 'white' }),
     zIndex: 3,
     minHeight: [null, null, null, null, '35em'],
     width: [null, null, null, '25em'],

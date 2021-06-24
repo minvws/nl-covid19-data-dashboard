@@ -2,120 +2,73 @@ import {
   NationalBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
-import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
+import css from '@styled-system/css';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Select } from '~/components/select';
+import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import {
-  BehaviorIdentifier,
-  behaviorIdentifiers,
-  BehaviorType,
-} from './behavior-types';
-import { BehaviorTypeControl } from './components/behavior-type-control';
+import { SelectBehavior } from './components/select-behavior';
+import { BehaviorIdentifier } from './logic/behavior-types';
 
 interface BehaviorLineChartTileProps {
   values: NationalBehaviorValue[] | RegionalBehaviorValue[];
-  title: string;
-  introduction: Record<BehaviorType, string>;
+  metadata: MetadataProps;
+  currentId: BehaviorIdentifier;
+  setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
 
 export function BehaviorLineChartTile({
-  title,
-  introduction,
   values,
+  metadata,
+  currentId,
+  setCurrentId,
 }: BehaviorLineChartTileProps) {
   const { siteText } = useIntl();
+  const chartText = siteText.gedrag_common.line_chart;
 
-  const [type, setType] = useState<BehaviorType>('compliance');
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
-  const selectedValueKey =
-    `${currentId}_${type}` as keyof NationalBehaviorValue;
-
-  const behaviorIdentifierWithData = behaviorIdentifiers
-    .map((id) => {
-      const label = siteText.gedrag_onderwerpen[id];
-      const valueKey = `${id}_${type}` as keyof NationalBehaviorValue;
-
-      /**
-       * We'll only render behaviors with 2 or more values, otherwise it cannot
-       * result in a "line" in our line-chart.
-       */
-      const hasEnoughData =
-        (values as NationalBehaviorValue[])
-          .map((x) => x[valueKey])
-          .filter(isPresent).length > 1;
-
-      return hasEnoughData
-        ? {
-            id,
-            label,
-            valueKey,
-            isEnabled: hasEnoughData,
-          }
-        : undefined;
-    })
-    .filter(isPresent);
+  const selectedComplianceValueKey =
+    `${currentId}_compliance` as keyof NationalBehaviorValue;
+  const selectedSupportValueKey =
+    `${currentId}_support` as keyof NationalBehaviorValue;
 
   return (
-    <ChartTile title={title} metadata={{}}>
-      <Box display="flex" justifyContent="start" mb={3}>
-        <BehaviorTypeControl value={type} onChange={setType} />
+    <ChartTile title={chartText.title} metadata={metadata}>
+      <Text css={css({ maxWidth: '30em' })}>{chartText.description}</Text>
+      <Box>
+        <SelectBehavior value={currentId} onChange={setCurrentId} />
       </Box>
 
-      <Box
-        display={{ lg: 'flex' }}
-        alignItems="baseline"
-        flexDirection={{ lg: 'row' }}
-      >
-        <Box flex="1" mr={{ lg: 2 }}>
-          <p>{introduction[type]}</p>
-        </Box>
-        <Box flex="1" display="flex" justifyContent="flex-end" ml={{ lg: 2 }}>
-          <Select
-            value={currentId}
-            onChange={setCurrentId}
-            options={behaviorIdentifierWithData.map(({ id, label }) => ({
-              value: id,
-              label,
-            }))}
-          />
-        </Box>
-      </Box>
-
-      <Spacer mb={3} />
+      <Spacer mb={4} />
 
       <TimeSeriesChart
-        tooltipTitle={
-          type === 'compliance'
-            ? siteText.gedrag_common.compliance
-            : siteText.gedrag_common.support
-        }
         values={values}
         ariaLabelledBy=""
-        seriesConfig={[...behaviorIdentifierWithData]
-          .sort((x) => (x.valueKey === selectedValueKey ? 1 : -1))
-          .map((x) => ({
-            type: 'line' as const,
-            metricProperty: x.valueKey,
-            label: x.label,
-            strokeWidth: x.valueKey === selectedValueKey ? 3 : 2,
-            color:
-              x.valueKey === selectedValueKey ? colors.data.primary : '#E7E7E7',
-          }))}
-        disableLegend
+        seriesConfig={[
+          {
+            type: 'line',
+            metricProperty: selectedComplianceValueKey,
+            label: chartText.compliance_label,
+            shortLabel: chartText.compliance_short_label,
+            strokeWidth: 3,
+            color: colors.data.cyan,
+          },
+          {
+            type: 'line',
+            metricProperty: selectedSupportValueKey,
+            label: chartText.support_label,
+            shortLabel: chartText.support_short_label,
+            strokeWidth: 3,
+            color: colors.data.yellow,
+          },
+        ]}
         dataOptions={{
           isPercentage: true,
         }}
+        numGridLines={2}
         tickValues={[0, 25, 50, 75, 100]}
-        onSeriesClick={(config) => {
-          const id = config.metricProperty.replace(`_${type}`, '');
-          setCurrentId(id as BehaviorIdentifier);
-        }}
-        markNearestPointOnly
       />
     </ChartTile>
   );

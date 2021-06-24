@@ -65,7 +65,7 @@ export function SituationsOverTimeChart({
       <TimeSeriesChart
         values={values}
         timeframe={timeframe}
-        dataOptions={{ timespanAnnotations }}
+        dataOptions={{ timespanAnnotations, isPercentage: true }}
         seriesConfig={chartConfig}
         disableLegend
       />

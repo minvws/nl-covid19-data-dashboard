@@ -100,7 +100,13 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                   displayTooltipValueOnly={displayTooltipValueOnly}
                   isVisuallyHidden={x.isNonInteractive}
                 >
-                  <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
+                  <b>
+                    {formatSeriesValue(
+                      value,
+                      x,
+                      x.isPercentage ?? options.isPercentage
+                    )}
+                  </b>
                 </TooltipListItem>
               );
 
@@ -166,7 +172,7 @@ function TooltipListItem({
   ) : (
     <Box
       as="li"
-      spacing={2}
+      spacing={icon ? 2 : 0}
       spacingHorizontal
       display="flex"
       alignItems="stretch"
@@ -184,12 +190,10 @@ function TooltipListItem({
         </Box>
       ) : (
         <>
-          {icon ? (
+          {icon && (
             <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
               {icon}
             </Box>
-          ) : (
-            <Box width="1em" mt={1} />
           )}
           <Box flexGrow={1}>
             <TooltipEntryContainer>

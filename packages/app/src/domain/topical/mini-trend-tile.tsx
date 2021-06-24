@@ -2,13 +2,19 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { NumberProperty } from '~/components/line-chart/logic';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+
+// This type limits the allowed property names to those with a number type,
+// so its like keyof T, but filtered down to only the appropriate properties.
+type NumberProperty<T extends TimestampedValue> = {
+  [K in keyof T]: T[K] extends number | null ? K : never;
+}[keyof T];
 
 type MiniTrendTileProps<T extends TimestampedValue> = {
   icon: JSX.Element;
@@ -66,23 +72,24 @@ export function MiniTrendTile<T extends TimestampedValue>(
       </Text>
 
       <Box>{text}</Box>
-
-      <TimeSeriesChart
-        initialWidth={400}
-        minHeight={sm ? 180 : 140}
-        timeframe="5weeks"
-        values={trendData}
-        displayTooltipValueOnly
-        numGridLines={2}
-        seriesConfig={[
-          {
-            metricProperty,
-            type: 'area',
-            label: title,
-            color: colors.data.primary,
-          },
-        ]}
-      />
+      <ErrorBoundary>
+        <TimeSeriesChart
+          initialWidth={400}
+          minHeight={sm ? 180 : 140}
+          timeframe="5weeks"
+          values={trendData}
+          displayTooltipValueOnly
+          numGridLines={2}
+          seriesConfig={[
+            {
+              metricProperty,
+              type: 'area',
+              label: title,
+              color: colors.data.primary,
+            },
+          ]}
+        />
+      </ErrorBoundary>
     </Box>
   );
 }

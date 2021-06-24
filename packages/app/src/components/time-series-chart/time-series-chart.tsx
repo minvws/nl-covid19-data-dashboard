@@ -198,8 +198,14 @@ export function TimeSeriesChart<
    * y-axis scaling to change when toggling the timeframe setting.
    */
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
-    [seriesList, seriesConfig, benchmark?.value]
+    () =>
+      calculateSeriesMaximum(
+        seriesList,
+        seriesConfig,
+        benchmark?.value,
+        isPercentage
+      ),
+    [seriesList, seriesConfig, benchmark?.value, isPercentage]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
