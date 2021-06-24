@@ -74,7 +74,9 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         </Text>
       )}
 
-      <TimelineEvent event={timelineEvent} />
+      <AnimatePresence>
+        {timelineEvent && <TimelineEvent event={timelineEvent} />}
+      </AnimatePresence>
 
       <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
         {seriesConfig.map((x, index) => {
@@ -267,40 +269,38 @@ function getDateUnixString(value: TimestampedValue) {
     : `${value.date_start_unix}-${value.date_end_unix}`;
 }
 
-function TimelineEvent({ event }: { event?: TimelineEventConfig }) {
+function TimelineEvent({ event }: { event: TimelineEventConfig }) {
   return (
-    <AnimatePresence>
-      {event && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          exit={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          style={{ overflow: 'hidden' }}
+    <MotionBox
+      initial={{ height: 0, opacity: 0 }}
+      exit={{ height: 0, opacity: 0 }}
+      animate={{ height: 'auto', opacity: 1 }}
+      mx={-3}
+      overflow="hidden"
+    >
+      <Box
+        display="flex"
+        fontWeight="bold"
+        alignItems="baseline"
+        px={3}
+        pb={2}
+        mb={2}
+        borderBottom="1px solid"
+        borderBottomColor="lightGray"
+      >
+        <Box
+          width="1em"
+          mr={2}
+          display="flex"
+          alignItems="baseline"
+          justifyContent="center"
         >
-          <Box
-            display="flex"
-            fontWeight="bold"
-            alignItems="center"
-            mx={-3}
-            px={3}
-            pb={2}
-            mb={2}
-            borderBottom="1px solid"
-            borderBottomColor="lightGray"
-          >
-            <Box
-              width={'1em'}
-              mr={2}
-              display="flex"
-              alignItems="baseline"
-              justifyContent="center"
-            >
-              <TimelineMarker isHighlighted size={10} />
-            </Box>
-            <Box>{event.title}</Box>
-          </Box>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          <TimelineMarker isHighlighted size={10} />
+        </Box>
+        <Box>{event.title}</Box>
+      </Box>
+    </MotionBox>
   );
 }
+
+const MotionBox = motion(Box);
