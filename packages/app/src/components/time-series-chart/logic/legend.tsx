@@ -8,6 +8,8 @@ import {
   SeriesIcon,
   SolidTimespanAnnotationIcon,
 } from '../components';
+import { TimelineMarker } from '../components/timeline';
+import { isVisibleEvent } from '../components/timeline/logic';
 import { DataOptions } from './common';
 import { isVisible, SeriesConfig } from './series';
 
@@ -16,6 +18,8 @@ export function useLegendItems<T extends TimestampedValue>(
   config: SeriesConfig<T>,
   dataOptions?: DataOptions
 ) {
+  const { timelineEvents, timespanAnnotations } = dataOptions || {};
+
   return useMemo(() => {
     const items = config
       .filter(isVisible)
@@ -43,8 +47,8 @@ export function useLegendItems<T extends TimestampedValue>(
     /**
      * Add annotations to the legend
      */
-    if (dataOptions?.timespanAnnotations) {
-      for (const annotation of dataOptions.timespanAnnotations) {
+    if (timespanAnnotations) {
+      for (const annotation of timespanAnnotations) {
         const isAnnotationVisible =
           (first(domain) as number) <= annotation.end &&
           annotation.start <= (last(domain) as number);
@@ -65,17 +69,32 @@ export function useLegendItems<T extends TimestampedValue>(
     }
 
     /**
+     * Add timeline events to the legend
+     */
+    if (timelineEvents) {
+      const hasVisibleEvents = timelineEvents.some((x) =>
+        isVisibleEvent(x, domain)
+      );
+
+      if (hasVisibleEvents) {
+        items.push({
+          label: '@TODO uitgelichte gebeurtenis',
+          shape: 'custom',
+          shapeComponent: <TimelineMarker size={10} />,
+        } as LegendItem);
+      }
+    }
+
+    /**
      * Define how many legend "items" there will be (counting split series as
      * one) to determine if a legend is required. We only have to render a
      * legend when there's at least two items.
      */
     const isLegendRequired =
-      config.filter(isVisible).length +
-        (dataOptions?.timespanAnnotations?.length ?? 0) >
-      1;
+      config.filter(isVisible).length + (timespanAnnotations?.length ?? 0) > 1;
 
     return isLegendRequired ? items : undefined;
-  }, [config, dataOptions, domain]);
+  }, [config, domain, timelineEvents, timespanAnnotations]);
 }
 
 type SplitLegendGroup = { label: string; items: LegendItem[] };

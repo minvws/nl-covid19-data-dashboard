@@ -7,14 +7,14 @@ export function TimelineMarker({
   isHighlighted,
   size = 10,
 }: {
-  isHighlighted: boolean;
+  isHighlighted?: boolean;
   size?: number;
 }) {
   const borderWidth = Math.round(size * 0.2);
   const innerPointSize = size - 2 * borderWidth;
 
   return (
-    <div style={{ width: size, height: size }}>
+    <div style={{ width: size, height: size }} role="img">
       <StyledPointMarker
         size={innerPointSize}
         color={colors.data.primary}
