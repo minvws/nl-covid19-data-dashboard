@@ -4,7 +4,6 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
-  NumberOfSamples,
   PercentageBarWithNumber,
   StyledTable,
   VariantDifference,
@@ -17,7 +16,6 @@ const columnKeys = [
   'eerst_gevonden',
   'percentage',
   'vorige_meeting',
-  'aantal_monsters',
 ] as const;
 
 type DesktopVariantsTableProps = {
@@ -56,12 +54,6 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
             </Cell>
             <Cell>
               {row.difference && <VariantDifference value={row.difference} />}
-            </Cell>
-            <Cell>
-              <NumberOfSamples
-                occurrence={row.occurrence}
-                sampleSize={row.sampleSize}
-              />
             </Cell>
           </tr>
         ))}
