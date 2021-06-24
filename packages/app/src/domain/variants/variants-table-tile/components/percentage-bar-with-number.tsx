@@ -4,7 +4,7 @@ import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 
-export function PercentagePointBarWithNumber({
+export function PercentageBarWithNumber({
   percentage,
   color,
 }: {
@@ -26,10 +26,10 @@ export function PercentagePointBarWithNumber({
         css={css({ minWidth: 40 })}
         mr={2}
       >
-        {formatPercentage(percentage, {
+        {`${formatPercentage(percentage, {
           minimumFractionDigits: 1,
           maximumFractionDigits: 1,
-        })}
+        })}%`}
       </InlineText>
       <PercentageBar percentage={percentage} height="8px" />
     </Box>
