@@ -17,6 +17,6 @@
       "path": "../common"
     }
   ],
-  "include": ["next-env.d.ts", "src"],
+  "include": ["next-env.d.ts", "src", "../common/src/utils/timeframe"],
   "exclude": ["node_modules"]
 }

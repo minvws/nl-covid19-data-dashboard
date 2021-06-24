@@ -2,7 +2,7 @@
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 import createSchema from 'part:@sanity/base/schema-creator';
-import * as dataviz from '../dataviz/schemas';
+import * as elements from '../elements/schemas';
 /**
  * Import the ones using named exports
  */
@@ -22,6 +22,6 @@ export default createSchema({
     ...Object.values(restrictions),
     ...Object.values(objects),
     ...Object.values(locale),
-    ...Object.values(dataviz)
+    ...Object.values(elements)
   ),
 });

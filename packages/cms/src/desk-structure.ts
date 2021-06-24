@@ -4,7 +4,8 @@ import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
-import { lokalizeListItem } from './lokalize/structure-list-item';
+import { elementsListItem } from './elements/elements-list-item';
+import { lokalizeListItem } from './lokalize/lokalize-list-item';
 
 /**
  * This is a list of doc types we handle in the custom menu structure. All
@@ -40,6 +41,8 @@ const hiddenDocTypes = [
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
+  'timeSeries',
+  'timelineEvent',
 ];
 
 export default () =>
@@ -47,6 +50,7 @@ export default () =>
     .title('Content')
     .items([
       lokalizeListItem(),
+      elementsListItem(),
       S.listItem()
         .title('Lockdown en Routekaart')
         .icon(BsTable)

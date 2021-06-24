@@ -4,7 +4,7 @@ import {
   isDateSeries,
   isDateSpanSeries,
   TimestampedValue,
-} from '@corona-dashboard/common';
+} from '../../';
 
 export type TimeframeOption = 'all' | '5weeks';
 
