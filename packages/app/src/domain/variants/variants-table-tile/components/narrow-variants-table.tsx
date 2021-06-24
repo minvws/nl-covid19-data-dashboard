@@ -20,12 +20,12 @@ import {
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
 
-type MobileVariantsTableProps = {
+type NarrowVariantsTableProps = {
   rows: VariantRow[];
   text: SiteText['covid_varianten'];
 };
 
-export function MobileVariantsTable(props: MobileVariantsTableProps) {
+export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
   const { rows, text } = props;
   const columnNames = text.varianten_tabel.kolommen;
 

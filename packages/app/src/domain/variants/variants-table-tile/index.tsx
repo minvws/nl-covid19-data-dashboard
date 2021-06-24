@@ -8,7 +8,7 @@ import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { DesktopVariantsTable, MobileVariantsTable } from './components';
+import { NarrowVariantsTable, WideVariantsTable } from './components';
 import { useVariantsTableData } from './logic/use-variants-table-data';
 
 export function VariantsTableTile({
@@ -55,9 +55,9 @@ export function VariantsTableTile({
       <Box overflow="auto" mb={3} mt={4}>
         <ErrorBoundary>
           {breakpoints.sm ? (
-            <DesktopVariantsTable rows={variantsTableRows} text={text} />
+            <WideVariantsTable rows={variantsTableRows} text={text} />
           ) : (
-            <MobileVariantsTable rows={variantsTableRows} text={text} />
+            <NarrowVariantsTable rows={variantsTableRows} text={text} />
           )}
         </ErrorBoundary>
       </Box>

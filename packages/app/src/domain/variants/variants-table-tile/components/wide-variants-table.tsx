@@ -18,12 +18,12 @@ const columnKeys = [
   'vorige_meeting',
 ] as const;
 
-type DesktopVariantsTableProps = {
+type WideVariantsTableProps = {
   rows: VariantRow[];
   text: SiteText['covid_varianten'];
 };
 
-export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
+export function WideVariantsTable(props: WideVariantsTableProps) {
   const { rows, text } = props;
 
   const columnNames = text.varianten_tabel.kolommen;
