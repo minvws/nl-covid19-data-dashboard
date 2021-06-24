@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
@@ -68,14 +68,19 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     <section>
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
-      {timespanAnnotation && (
-        <Text fontSize={0} color={colors.annotation} textAlign={'center'}>
-          {timespanAnnotation.shortLabel || timespanAnnotation.label}
-        </Text>
-      )}
-
       <AnimatePresence>
-        {timelineEvent && <TimelineEvent event={timelineEvent} />}
+        {timespanAnnotation && (
+          <Appear key="1">
+            <Text fontSize={0} color={colors.annotation} textAlign={'center'}>
+              {timespanAnnotation.shortLabel || timespanAnnotation.label}
+            </Text>
+          </Appear>
+        )}
+        {timelineEvent && (
+          <Appear mx={-3} key="2">
+            <TimelineEvent event={timelineEvent} />
+          </Appear>
+        )}
       </AnimatePresence>
 
       <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
@@ -271,36 +276,40 @@ function getDateUnixString(value: TimestampedValue) {
 
 function TimelineEvent({ event }: { event: TimelineEventConfig }) {
   return (
-    <MotionBox
-      initial={{ height: 0, opacity: 0 }}
-      exit={{ height: 0, opacity: 0 }}
-      animate={{ height: 'auto', opacity: 1 }}
-      mx={-3}
-      overflow="hidden"
+    <Box
+      display="flex"
+      fontWeight="bold"
+      alignItems="baseline"
+      px={3}
+      pb={2}
+      mb={2}
+      borderBottom="1px solid"
+      borderBottomColor="lightGray"
     >
       <Box
+        width="1em"
+        mr={2}
         display="flex"
-        fontWeight="bold"
         alignItems="baseline"
-        px={3}
-        pb={2}
-        mb={2}
-        borderBottom="1px solid"
-        borderBottomColor="lightGray"
+        justifyContent="center"
       >
-        <Box
-          width="1em"
-          mr={2}
-          display="flex"
-          alignItems="baseline"
-          justifyContent="center"
-        >
-          <TimelineMarker isHighlighted size={10} />
-        </Box>
-        <Box>{event.title}</Box>
+        <TimelineMarker isHighlighted size={10} />
       </Box>
-    </MotionBox>
+      <Box>{event.title}</Box>
+    </Box>
   );
 }
 
 const MotionBox = motion(Box);
+
+function Appear(props: ComponentProps<typeof MotionBox>) {
+  return (
+    <MotionBox
+      {...props}
+      initial={{ height: 0, opacity: 0 }}
+      exit={{ height: 0, opacity: 0 }}
+      animate={{ height: 'auto', opacity: 1 }}
+      overflow="hidden"
+    />
+  );
+}
