@@ -93,3 +93,8 @@ timestamp,action,key
 2021-06-18T12:50:25.165Z,delete,rioolwater_metingen.split_labels.waarde_600_800
 2021-06-18T12:50:25.165Z,delete,rioolwater_metingen.split_labels.waarde_800_plus
 2021-06-18T12:50:25.165Z,delete,rioolwater_metingen.split_labels.waarde_0_200
+2021-06-24T14:14:32.563Z,add,charts.timeline.title
+2021-06-24T14:14:33.983Z,add,charts.timeline.legend_label
+2021-06-24T14:14:34.892Z,add,charts.timeline.next
+2021-06-24T14:14:35.933Z,add,charts.timeline.prev
+2021-06-24T14:14:36.921Z,add,common.sluiten

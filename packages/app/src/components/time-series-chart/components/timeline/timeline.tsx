@@ -3,6 +3,7 @@ import { memo, useCallback, useRef } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds, Padding } from '../../logic';
 import { DottedTimelineBar, TimelineBar } from './components/bar';
@@ -28,6 +29,7 @@ export const Timeline = memo(function Timeline({
   timelineState,
   isYAxisCollapsed,
 }: TimelineProps) {
+  const intl = useIntl();
   const { index, setIndex } = timelineState;
   const { ref, height = 0 } = useResizeObserver<HTMLDivElement>();
 
@@ -68,7 +70,7 @@ export const Timeline = memo(function Timeline({
     >
       <Box pl={padding.left}>
         <Text fontSize={1} fontWeight="bold">
-          @TODO Bekijk uitgelichte gebeurtenissen
+          {intl.siteText.charts.timeline.title}
         </Text>
       </Box>
       <Box display="flex" pl={padding.left}>

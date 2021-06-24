@@ -3,6 +3,7 @@ import { first, last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { LegendItem } from '~/components/legend';
+import { useIntl } from '~/intl';
 import {
   HatchedTimespanAnnotationIcon,
   SeriesIcon,
@@ -19,6 +20,7 @@ export function useLegendItems<T extends TimestampedValue>(
   dataOptions?: DataOptions
 ) {
   const { timelineEvents, timespanAnnotations } = dataOptions || {};
+  const intl = useIntl();
 
   return useMemo(() => {
     const items = config
@@ -78,7 +80,7 @@ export function useLegendItems<T extends TimestampedValue>(
 
       if (hasVisibleEvents) {
         items.push({
-          label: '@TODO uitgelichte gebeurtenis',
+          label: intl.siteText.charts.timeline.legend_label,
           shape: 'custom',
           shapeComponent: <TimelineMarker size={10} />,
         } as LegendItem);
@@ -94,7 +96,7 @@ export function useLegendItems<T extends TimestampedValue>(
       config.filter(isVisible).length + (timespanAnnotations?.length ?? 0) > 1;
 
     return isLegendRequired ? items : undefined;
-  }, [config, domain, timelineEvents, timespanAnnotations]);
+  }, [config, domain, intl, timelineEvents, timespanAnnotations]);
 }
 
 type SplitLegendGroup = { label: string; items: LegendItem[] };

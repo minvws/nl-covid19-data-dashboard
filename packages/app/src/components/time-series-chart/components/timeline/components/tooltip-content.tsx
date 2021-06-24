@@ -54,11 +54,18 @@ export function TimelineTooltipContent({
           ml={-2}
           mr={-2}
         >
-          <ChevronButton onClick={onPrev} title="@TODO prev" rotate />
+          <ChevronButton
+            onClick={onPrev}
+            rotate
+            title={intl.siteText.charts.timeline.prev}
+          />
           <InlineText fontSize={1} color="labelGray">
             {date}
           </InlineText>
-          <ChevronButton onClick={onNext} title="@TODO next" />
+          <ChevronButton
+            onClick={onNext}
+            title={intl.siteText.charts.timeline.next}
+          />
         </Box>
       )}
       <Box spacing={2}>
@@ -86,7 +93,9 @@ export function TimelineTooltipContent({
           justifyContent="center"
           fontSize={1}
         >
-          <TextButton onClick={onClose}>@TODO Sluiten</TextButton>
+          <TextButton onClick={onClose}>
+            {intl.siteText.common.sluiten}
+          </TextButton>
         </Box>
       )}
     </Box>
@@ -120,7 +129,7 @@ function ChevronButton({
       style={{ transform: rotate ? 'rotate(180deg)' : undefined }}
     >
       <IconButton title={title} onClick={onClick} size={13} padding={2}>
-        <ChevronIcon />
+        <ChevronIcon aria-hidden />
       </IconButton>
     </Box>
   );
