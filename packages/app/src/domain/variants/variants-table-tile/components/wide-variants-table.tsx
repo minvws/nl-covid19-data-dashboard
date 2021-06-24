@@ -4,7 +4,6 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
-  NumberOfSamples,
   PercentageBarWithNumber,
   StyledTable,
   VariantDifference,
@@ -17,15 +16,14 @@ const columnKeys = [
   'eerst_gevonden',
   'percentage',
   'vorige_meeting',
-  'aantal_monsters',
 ] as const;
 
-type DesktopVariantsTableProps = {
+type WideVariantsTableProps = {
   rows: VariantRow[];
   text: SiteText['covid_varianten'];
 };
 
-export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
+export function WideVariantsTable(props: WideVariantsTableProps) {
   const { rows, text } = props;
 
   const columnNames = text.varianten_tabel.kolommen;
@@ -56,12 +54,6 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
             </Cell>
             <Cell>
               {row.difference && <VariantDifference value={row.difference} />}
-            </Cell>
-            <Cell>
-              <NumberOfSamples
-                occurrence={row.occurrence}
-                sampleSize={row.sampleSize}
-              />
             </Cell>
           </tr>
         ))}

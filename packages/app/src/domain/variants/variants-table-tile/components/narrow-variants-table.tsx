@@ -13,7 +13,6 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
-  NumberOfSamples,
   PercentageBarWithNumber,
   StyledTable,
   VariantDifference,
@@ -21,12 +20,12 @@ import {
 } from '.';
 import { VariantRow } from '../logic/use-variants-table-data';
 
-type MobileVariantsTableProps = {
+type NarrowVariantsTableProps = {
   rows: VariantRow[];
   text: SiteText['covid_varianten'];
 };
 
-export function MobileVariantsTable(props: MobileVariantsTableProps) {
+export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
   const { rows, text } = props;
   const columnNames = text.varianten_tabel.kolommen;
 
@@ -69,14 +68,14 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   return (
     <>
       <tr onClick={handleRowClick}>
-        <VariantNameCell variant={row.variant} text={text} compact />
-        <Cell>
+        <VariantNameCell variant={row.variant} text={text} mobile narrow />
+        <Cell mobile>
           <PercentageBarWithNumber
             percentage={row.percentage}
             color={row.color}
           />
         </Cell>
-        <Cell alignRight>
+        <Cell mobile alignRight>
           <Disclosure
             open={isOpen}
             onChange={() => {
@@ -88,22 +87,15 @@ function MobileVariantRow(props: MobileVariantRowProps) {
         </Cell>
       </tr>
       <tr>
-        <MobileCell colSpan={3} padding={isOpen}>
+        <MobileCell colSpan={3}>
           <Panel
             style={{
               height: isOpen ? contentHeight : 0,
             }}
           >
             <div ref={ref}>
-              <Box mb={1}>
-                {columnNames['aantal_monsters']}:{' '}
-                <NumberOfSamples
-                  occurrence={row.occurrence}
-                  sampleSize={row.sampleSize}
-                />
-              </Box>
-              <Box mb={1}>
-                {columnNames['vorige_meeting']}:{' '}
+              <Box mb={1} display="flex" flexDirection="row">
+                <InlineText mr={1}>{columnNames['vorige_meeting']}:</InlineText>
                 {row.difference && <VariantDifference value={row.difference} />}
               </Box>
               <Box>
@@ -126,7 +118,7 @@ const Chevron = styled(
     alignItems: 'flex-end',
     m: 0,
     p: 0,
-    pb: 3,
+    pb: 0,
     overflow: 'visible',
     bg: 'transparent',
     border: 'none',
@@ -163,10 +155,9 @@ const Panel = styled((props) => <DisclosurePanel {...props} />)(
   })
 );
 
-const MobileCell = styled.td<{ padding?: boolean }>((x) =>
+const MobileCell = styled.td(
   css({
     p: 0,
-    pb: x.padding ? 3 : 0,
     borderBottom: '1px solid',
     borderBottomColor: 'lightGray',
   })
