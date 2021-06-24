@@ -17,6 +17,7 @@ const hiddenDocTypes = [
   'veelgesteldeVragenGroups',
   'faqQuestion',
   'cijferVerantwoording',
+  'figureExplanationItem',
   'overDitDashboard',
   'overRisicoNiveaus',
   'roadmap',
