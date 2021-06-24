@@ -9,7 +9,8 @@ import { Bounds, Padding } from '../../logic';
 import { DottedTimelineBar, TimelineBar } from './components/bar';
 import { TimelineEvent } from './components/event';
 import { TimelineTooltipContent } from './components/tooltip-content';
-import { TimelineState, useTimelineHoverHandler } from './logic';
+import { TimelineState } from './logic/common';
+import { useTimelineHoverHandler } from './logic/use-timeline-hover-handler';
 
 interface TimelineProps {
   width: number;

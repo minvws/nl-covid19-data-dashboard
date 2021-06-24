@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
-import { TimelineEventConfig } from '~/components/time-series-chart/logic';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { TimelineEventConfig } from '../logic';
 
 interface TimelineTooltipContentProps {
   config: TimelineEventConfig;

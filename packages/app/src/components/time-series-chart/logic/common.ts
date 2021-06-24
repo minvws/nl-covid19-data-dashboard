@@ -1,3 +1,5 @@
+import { TimelineEventConfig } from '../components/timeline';
+
 export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number;
@@ -28,12 +30,6 @@ export type TimeAnnotationConfig = {
   leftLabel: string;
   rightLabel: string;
 };
-
-export interface TimelineEventConfig {
-  date: number | [number, number];
-  title: string;
-  description: string;
-}
 
 /**
  * @TODO find a more common place for this.

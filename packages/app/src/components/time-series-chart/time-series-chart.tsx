@@ -30,7 +30,7 @@ import {
 } from './components';
 import { TimeAnnotation } from './components/time-annotation';
 import { Timeline, TimelineEventHighlight } from './components/timeline';
-import { useTimelineEventsState } from './components/timeline/logic';
+import { useTimelineState } from './components/timeline/logic';
 import {
   calculateSeriesMaximum,
   COLLAPSE_Y_AXIS_THRESHOLD,
@@ -273,7 +273,7 @@ export function TimeSeriesChart<
     [values, today]
   );
 
-  const timelineState = useTimelineEventsState(timelineEvents, xScale);
+  const timelineState = useTimelineState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({
     values,
     padding,

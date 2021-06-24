@@ -13,11 +13,8 @@ import { ScaleLinear } from 'd3-scale';
 import { isEmpty, pick, throttle } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import {
-  Padding,
-  TimelineEventConfig,
-  TimespanAnnotationConfig,
-} from './common';
+import { TimelineEventConfig } from '../components/timeline';
+import { Padding, TimespanAnnotationConfig } from './common';
 import {
   isVisible,
   SeriesConfig,
