@@ -4,7 +4,6 @@ import { SiteText } from '~/locale';
 import {
   Cell,
   HeaderCell,
-  NumberOfSamples,
   PercentageBarWithNumber,
   StyledTable,
   VariantDifference,
@@ -14,18 +13,17 @@ import { VariantRow } from '../logic/use-variants-table-data';
 
 const columnKeys = [
   'variant_titel',
+  'eerst_gevonden',
   'percentage',
   'vorige_meeting',
-  'aantal_monsters',
-  'eerst_gevonden',
 ] as const;
 
-type DesktopVariantsTableProps = {
+type WideVariantsTableProps = {
   rows: VariantRow[];
   text: SiteText['covid_varianten'];
 };
 
-export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
+export function WideVariantsTable(props: WideVariantsTableProps) {
   const { rows, text } = props;
 
   const columnNames = text.varianten_tabel.kolommen;
@@ -44,6 +42,9 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
           <tr key={row.variant}>
             <VariantNameCell variant={row.variant} text={text} />
             <Cell>
+              <InlineText>{row.countryOfOrigin}</InlineText>
+            </Cell>
+            <Cell>
               <Box maxWidth="20em">
                 <PercentageBarWithNumber
                   percentage={row.percentage}
@@ -53,15 +54,6 @@ export function DesktopVariantsTable(props: DesktopVariantsTableProps) {
             </Cell>
             <Cell>
               {row.difference && <VariantDifference value={row.difference} />}
-            </Cell>
-            <Cell>
-              <NumberOfSamples
-                occurrence={row.occurrence}
-                sampleSize={row.sampleSize}
-              />
-            </Cell>
-            <Cell>
-              <InlineText>{row.countryOfOrigin}</InlineText>
             </Cell>
           </tr>
         ))}

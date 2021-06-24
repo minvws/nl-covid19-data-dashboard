@@ -20,6 +20,7 @@ const variants = [
   'epsilon',
   'theta',
   'kappa',
+  'lambda',
   'other',
 ] as const;
 
@@ -30,7 +31,6 @@ export type VariantRow = {
   percentage: number;
   difference?: DifferenceDecimal;
   color: string;
-  sampleSize: number;
 };
 
 /**
@@ -57,7 +57,6 @@ export function useVariantsTableData(
           percentage: data[`${variant}_percentage` as const],
           difference: differences[`variants__${variant}_percentage` as const],
           color: colors.data.variants[variant],
-          sampleSize: data.sample_size,
         }))
         .sort((rowA, rowB) => {
           // Make sure the 'other' variant is always sorted last

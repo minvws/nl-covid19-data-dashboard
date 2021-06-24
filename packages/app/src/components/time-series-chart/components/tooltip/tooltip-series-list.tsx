@@ -291,16 +291,18 @@ export const TooltipList = styled.ol<{
 function IconRow({ icon, children }: any) {
   return (
     <Box display="flex" alignItems="stretch" spacing={2} spacingHorizontal>
-      <Box
-        width="1em"
-        mt="2px"
-        flexShrink={0}
-        display="flex"
-        alignItems="baseline"
-        justifyContent="center"
-      >
-        {icon}
-      </Box>
+      {icon && (
+        <Box
+          width="1em"
+          mt="2px"
+          flexShrink={0}
+          display="flex"
+          alignItems="baseline"
+          justifyContent="center"
+        >
+          {icon}
+        </Box>
+      )}
       <Box>{children}</Box>
     </Box>
   );
