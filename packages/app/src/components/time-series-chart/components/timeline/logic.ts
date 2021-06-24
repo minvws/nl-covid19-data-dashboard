@@ -103,7 +103,14 @@ export function useTimelineEventsState(
 ): TimelineState {
   const [index, _setIndex] = useState<number | undefined>(undefined);
   const events = useMemo(
-    () => allEvents?.filter((x) => isVisibleEvent(x, xScale.domain())) || [],
+    () =>
+      allEvents
+        ?.filter((x) => isVisibleEvent(x, xScale.domain()))
+        .sort(
+          (a, b) =>
+            (Array.isArray(a.date) ? a.date[0] : a.date) -
+            (Array.isArray(b.date) ? b.date[0] : b.date)
+        ) || [],
     [allEvents, xScale]
   );
 
