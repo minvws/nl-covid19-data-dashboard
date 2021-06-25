@@ -86,9 +86,6 @@ export function MiniTrendTile<T extends TimestampedValue>(
               values={trendData}
               displayTooltipValueOnly
               numGridLines={2}
-              dataOptions={{
-                timelineEvents: [],
-              }}
               seriesConfig={[
                 {
                   metricProperty,
