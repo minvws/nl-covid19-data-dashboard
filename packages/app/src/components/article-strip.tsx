@@ -58,7 +58,7 @@ type ArticleStripItemProps = {
   title: string;
 };
 
-function ArticleStripItem(props: ArticleStripItemProps) {
+export function ArticleStripItem(props: ArticleStripItemProps) {
   const { slug, cover, title } = props;
 
   const { siteText } = useIntl();

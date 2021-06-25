@@ -154,6 +154,10 @@ export function useDataSitemap(
           text: siteText.sterfte.titel_sidebar,
           href: reverseRouter.nl.sterfte(),
         },
+        {
+          text: siteText.covid_varianten.titel_sidebar,
+          href: reverseRouter.nl.covidVarianten(),
+        },
       ],
     },
     {

@@ -1,9 +1,11 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import ChevronLargeIcon from '~/assets/chevron-large.svg';
 import ChevronIcon from '~/assets/chevron.svg';
 import ExternalLinkIcon from '~/assets/external-link-2.svg';
 import { getImageProps } from '~/lib/sanity';
 import { DecoratedLink as DecoratedLinkDocument } from '~/types/cms';
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { Box } from './base';
 import { SanityImage } from './cms/sanity-image';
@@ -30,14 +32,20 @@ export const DecoratedLink = (props: DecoratedLinkProps) => {
 export const CompactDecoratedLink = ({
   title,
   href,
+  isFirst,
 }: {
   title: string;
   href: string;
+  isFirst?: boolean;
 }) => {
   return (
     <Link href={href} passHref>
       <StyledCompactDecoratedLink>
-        <Box borderTop="1px solid" borderTopColor="border" height="5rem">
+        <Box
+          borderTop={isFirst ? null : '1px solid'}
+          borderTopColor="border"
+          height="5rem"
+        >
           <Box display="flex" height="5rem">
             <Box
               pl={3}
@@ -59,7 +67,11 @@ export const CompactDecoratedLink = ({
               marginLeft="auto"
               color="link"
             >
-              <ExternalLinkIcon />
+              {isAbsoluteUrl(href) ? (
+                <ExternalLinkIcon />
+              ) : (
+                <ChevronLargeIcon />
+              )}
             </Box>
           </Box>
         </Box>
@@ -123,6 +135,7 @@ const StyledExpandedDecoratedLink = styled.a(
   css({
     textDecoration: 'none',
     color: 'body',
+
     '&:hover, &:focus': {
       color: 'link',
     },

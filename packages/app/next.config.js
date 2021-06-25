@@ -5,6 +5,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const nextConfig = {
+  future: {
+    webpack5: true,
+  },
   /**
    * Enables react strict mode https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
    */
@@ -61,23 +64,27 @@ const nextConfig = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: [
+      oneOf: [
         {
-          loader: '@svgr/webpack',
-          options: {
-            typescript: false,
-            dimensions: true,
-            svgo: false,
-            /**
-             * Forward ref to the root SVG tag
-             */
-            ref: true,
+          use: [
+            {
+              loader: '@svgr/webpack',
+              options: {
+                typescript: false,
+                dimensions: true,
+                svgo: false,
+                /**
+                 * Forward ref to the root SVG tag
+                 */
+                ref: true,
+              },
+            },
+          ],
+          issuer: {
+            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
           },
         },
       ],
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
     });
 
     config.resolve.alias = {

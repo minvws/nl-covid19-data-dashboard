@@ -5,6 +5,8 @@ import {
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
@@ -20,12 +22,14 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
@@ -38,11 +42,17 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(),
   createGetChoroplethData({
     vr: ({ disability_care }) => ({ disability_care }),
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(() => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('disabilityCarePage', locale);
   })
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, lastGenerated, content } = props;
   const lastValue = data.disability_care.last_value;
   const values = data.disability_care.values;
   const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
@@ -80,6 +90,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={positiveTestedPeopleText.reference}
           />
+
+          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
