@@ -1,5 +1,4 @@
 import { ArrowIconLeft } from '~/components/arrow-icon';
-
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
 import { Heading, InlineText } from '~/components/typography';
@@ -9,6 +8,7 @@ import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
+
 interface ArticleDetailProps {
   article: Article;
 }
@@ -48,13 +48,14 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       </ContentBlock>
 
       {!!article.content?.length && (
-        <Box fontSize="1.125rem">
-          <RichContent
-            blocks={article.content}
-            contentWrapper={ContentBlock}
-            imageSizes={imageSizes}
-          />
-        </Box>
+        <ContentBlock>
+          <Box fontSize="1.125rem">
+            <RichContent
+              blocks={article.content}
+              contentWrapper={ContentBlock}
+            />
+          </Box>
+        </ContentBlock>
       )}
     </Box>
   );
