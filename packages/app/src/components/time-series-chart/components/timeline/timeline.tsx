@@ -6,8 +6,8 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds, Padding } from '../../logic';
-import { DottedTimelineBar, TimelineBar } from './components/bar';
-import { TimelineEvent } from './components/event';
+import { DottedTimelineBar, TimelineBar } from './components/timeline-bar';
+import { TimelineEvent } from './components/timeline-event';
 import { TimelineTooltipContent } from './components/tooltip-content';
 import { TimelineState } from './logic/common';
 import { useTimelineHoverHandler } from './logic/use-timeline-hover-handler';
@@ -34,8 +34,8 @@ export const Timeline = memo(function Timeline({
   const { index, setIndex } = timelineState;
   const { ref, height = 0 } = useResizeObserver<HTMLDivElement>();
 
-  const indexRef = useRef(timelineState.index);
-  indexRef.current = timelineState.index;
+  const indexRef = useRef(index);
+  indexRef.current = index;
 
   const handleHover = useTimelineHoverHandler(setIndex, {
     timelineState,
@@ -52,7 +52,7 @@ export const Timeline = memo(function Timeline({
   const barHeight = size;
   const historyLineWidth = isYAxisCollapsed ? 15 : Math.min(padding.left, 23);
 
-  const showHistoryLine = timelineState.ranges[0].timeline.x0IsOutOfBounds;
+  const showHistoryLine = timelineState.xOffset[0].timeline.x0IsOutOfBounds;
 
   if (!width) return null;
 
@@ -84,7 +84,7 @@ export const Timeline = memo(function Timeline({
           {timelineState.events.map((x, i) => (
             <TimelineEvent
               key={`${x.start}-${x.end}`}
-              range={timelineState.ranges[i]}
+              range={timelineState.xOffset[i]}
               timelineContainerRef={ref}
               size={size}
               historyEventOffset={-historyLineWidth / 2}

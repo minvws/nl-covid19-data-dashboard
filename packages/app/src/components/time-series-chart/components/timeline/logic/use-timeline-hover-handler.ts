@@ -2,7 +2,7 @@ import { localPoint } from '@visx/event';
 import { voronoi } from '@visx/voronoi';
 import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
 import { Padding } from '~/components/time-series-chart/logic';
-import { TimelineEventRange, TimelineState } from './common';
+import { TimelineEventXOffset, TimelineState } from './common';
 
 export function useTimelineHoverHandler(
   onHover: (index: number | undefined) => void,
@@ -18,17 +18,17 @@ export function useTimelineHoverHandler(
     height: number;
   }
 ) {
-  const { ranges } = timelineState;
+  const { xOffset } = timelineState;
 
   const voronoiLayout = useMemo(
     () =>
-      voronoi<TimelineEventRange>({
+      voronoi<TimelineEventXOffset>({
         x: (x) => x.timeline.x0,
         y: () => height,
         width,
         height,
-      })(ranges),
-    [ranges, width, height]
+      })(xOffset),
+    [xOffset, width, height]
   );
 
   return useCallback(

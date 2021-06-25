@@ -32,21 +32,16 @@ export function TimelineTooltipContent({
     .filter(isDefined)
     .join(' – ');
 
-  const stopPropagation = useCallback(
-    (evt: TouchEvent | MouseEvent) => evt.stopPropagation(),
-    []
-  );
-
   return (
     <Box
       color="black"
       px={18}
       py={15}
       spacing={3}
-      onTouchStart={stopPropagation}
-      onTouchMove={stopPropagation}
-      onMouseMove={stopPropagation}
-      onMouseLeave={stopPropagation}
+      onTouchStart={stopEventPropagation}
+      onTouchMove={stopEventPropagation}
+      onMouseMove={stopEventPropagation}
+      onMouseLeave={stopEventPropagation}
     >
       {isTouch && (
         <Box
@@ -135,4 +130,8 @@ function ChevronButton({
       </IconButton>
     </Box>
   );
+}
+
+function stopEventPropagation(evt: TouchEvent | MouseEvent) {
+  evt.stopPropagation();
 }

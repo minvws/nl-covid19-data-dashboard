@@ -5,12 +5,12 @@ import {
 } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
 import { first, last } from 'lodash';
-import { TimelineEventConfig, TimelineEventRange } from './common';
+import { TimelineEventConfig, TimelineEventXOffset } from './common';
 
-export function getTimelineEventRange(
+export function getTimelineEventXOffset(
   config: TimelineEventConfig,
   xScale: ScaleLinear<number, number>
-): TimelineEventRange {
+): TimelineEventXOffset {
   const domain = xScale.domain();
   const min = first(domain) as number;
   const max = last(domain) as number;

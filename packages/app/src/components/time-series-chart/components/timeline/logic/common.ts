@@ -9,14 +9,14 @@ export interface TimelineState {
   index: number | undefined;
   setIndex: (index: number | undefined) => void;
   events: TimelineEventConfig[];
-  ranges: TimelineEventRange[];
+  xOffset: TimelineEventXOffset[];
   current?: {
     event: TimelineEventConfig;
-    range: TimelineEventRange;
+    range: TimelineEventXOffset;
   };
 }
 
-export interface TimelineEventRange {
+export interface TimelineEventXOffset {
   timeline: {
     x0: number;
     x1: number;

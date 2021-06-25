@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { wrapAroundLength } from '~/utils/number';
 import { TimelineEventConfig, TimelineState } from './common';
-import { getTimelineEventRange } from './get-timeline-event-range';
+import { getTimelineEventXOffset } from './get-timeline-event-x-offset';
 import { isVisibleEvent } from './is-visible-event';
 
 export function useTimelineState(
@@ -19,8 +19,8 @@ export function useTimelineState(
     [allEvents, xScale]
   );
 
-  const ranges = useMemo(
-    () => events.map((x) => getTimelineEventRange(x, xScale)),
+  const xOffset = useMemo(
+    () => events.map((x) => getTimelineEventXOffset(x, xScale)),
     [events, xScale]
   );
 
@@ -41,13 +41,13 @@ export function useTimelineState(
   const current = useMemo(
     () =>
       isDefined(index)
-        ? { event: events[index], range: ranges[index] }
+        ? { event: events[index], range: xOffset[index] }
         : undefined,
-    [events, index, ranges]
+    [events, index, xOffset]
   );
 
   return useMemo(
-    () => ({ index, setIndex, events, ranges, current }),
-    [index, setIndex, events, ranges, current]
+    () => ({ index, setIndex, events, xOffset, current }),
+    [index, setIndex, events, xOffset, current]
   );
 }

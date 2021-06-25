@@ -7,11 +7,11 @@ import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { TimelineEventRange } from '../logic';
-import { TimelineMarker } from './marker';
+import { TimelineEventXOffset } from '../logic';
+import { TimelineMarker } from './timeline-marker';
 
 interface TimelineEventProps {
-  range: TimelineEventRange;
+  range: TimelineEventXOffset;
   size: number;
   onShow: () => void;
   onHide: () => void;
@@ -76,6 +76,7 @@ export function TimelineEvent({
             isSelected={isSelected}
             contentRef={contentRef}
             onFocus={onShow}
+            onBlur={onHide}
           >
             <TimelineMarker size={size} isHighlighted={isHighlightedEvent} />
           </TooltipTrigger>
@@ -91,12 +92,14 @@ function TooltipTrigger({
   contentRef,
   children,
   onFocus,
+  onBlur,
 }: {
   content: ReactNode;
   isSelected: boolean;
   contentRef: RefObject<HTMLDivElement>;
   children: ReactNode;
   onFocus: () => void;
+  onBlur: () => void;
 }) {
   const isTouch = useIsTouchDevice();
   const contentWithRef = <div ref={contentRef}>{content}</div>;
@@ -108,7 +111,16 @@ function TooltipTrigger({
       interactive={isTouch}
       visible={isSelected}
     >
-      <div tabIndex={0} onFocus={onFocus} aria-role="text">
+      <div
+        tabIndex={0}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        /**
+         * Somehow without the aria-role='text' the screenreader won't read the
+         * tooltip content..?
+         */
+        aria-role="text"
+      >
         {children}
       </div>
     </WithTooltip>
