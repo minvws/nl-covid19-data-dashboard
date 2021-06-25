@@ -186,6 +186,7 @@ export const colors = {
       epsilon: multiseries.yellow_dark,
       theta: multiseries.turquoise_dark,
       kappa: multiseries.magenta,
+      lambda: multiseries.magenta_dark,
       other: '#808080',
     },
 

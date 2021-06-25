@@ -23,7 +23,7 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmhoog />
-        {formatPercentage(value.difference, options)}% {diffText.meer}
+        {formatPercentage(value.difference, options)} {diffText.meer}
       </Difference>
     );
   }
@@ -31,7 +31,7 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmlaag />
-        {formatPercentage(-value.difference, options)}% {diffText.minder}
+        {formatPercentage(-value.difference, options)} {diffText.minder}
       </Difference>
     );
   }
