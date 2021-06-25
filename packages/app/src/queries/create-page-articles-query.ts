@@ -8,13 +8,19 @@ type ArticlePageSchema =
   | 'sewerPage'
   | 'vaccinationsPage'
   | 'escalationLevelPage'
-  | 'situationsPage';
+  | 'situationsPage'
+  | 'variantsPage'
+  | 'nursingHomePage'
+  | 'disabilityCarePage'
+  | 'elderlyAtHomePage'
+  | 'infectiousPeoplePage';
 
 export function createPageArticlesQuery(
   schemaName: ArticlePageSchema,
-  locale: string
+  locale: string,
+  fieldName = 'articles'
 ) {
-  const query = `*[_type == '${schemaName}']{"articles":[...articles[]->{"title":title.${locale},
+  const query = `*[_type == '${schemaName}']{"articles":[...${fieldName}[]->{"title":title.${locale},
   slug,
   "summary":summary.${locale},
   "cover": {

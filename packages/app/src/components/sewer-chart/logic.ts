@@ -1,3 +1,7 @@
+/**
+ * All of this file can go once we release the new split sewer chart
+ */
+
 import { SewerPerInstallationData } from '@corona-dashboard/common';
 import { Point } from '@visx/point';
 import { scaleLinear, scaleTime } from '@visx/scale';
@@ -9,7 +13,6 @@ import { SelectProps } from '~/components/select';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { getFilteredValues, TimeframeOption } from '~/utils/timeframe';
 import { SewerChartData } from './sewer-chart';
-
 export interface Dimensions {
   bounds: Record<'width' | 'height', number>;
   padding: Record<'top' | 'right' | 'bottom' | 'left', number>;

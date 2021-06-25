@@ -63,10 +63,18 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
+    main: { articles?: ArticleSummary[] };
+    ggd: { articles?: ArticleSummary[] };
   }>((context) => {
     const { locale = 'nl' } = context;
-    return createPageArticlesQuery('positiveTestsPage', locale);
+    return `{
+      "main": ${createPageArticlesQuery('positiveTestsPage', locale)},
+      "ggd": ${createPageArticlesQuery(
+        'positiveTestsPage',
+        locale,
+        'ggdArticles'
+      )},
+    }`;
   })
 );
 
@@ -115,7 +123,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-          <ArticleStrip articles={content.articles} />
+          {content.main?.articles && (
+            <ArticleStrip articles={content.main?.articles} />
+          )}
           <TwoKpiSection>
             <KpiTile
               title={text.kpi_titel}
@@ -340,6 +350,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
+          {content.ggd?.articles && (
+            <ArticleStrip articles={content.ggd.articles} />
+          )}
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}

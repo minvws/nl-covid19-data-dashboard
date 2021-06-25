@@ -205,6 +205,7 @@ const Container = styled(Box).attrs({ as: 'section' })<{
       overflow: 'hidden',
       display: 'block',
       transition: 'clip-path 0.4s',
+      pointerEvents: x.isOpen ? 'auto' : 'none',
       willChange: 'clip-path',
       clipPath: x.isOpen
         ? 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)'

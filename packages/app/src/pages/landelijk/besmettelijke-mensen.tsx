@@ -1,5 +1,7 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Ziektegolf from '~/assets/ziektegolf.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
@@ -10,11 +12,13 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
+  createGetContent,
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
@@ -22,11 +26,17 @@ import { colors } from '~/style/theme';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData()
+  selectNlPageMetricData(),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(() => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('infectiousPeoplePage', locale);
+  })
 );
 
 const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, lastGenerated } = props;
+  const { selectedNlData: data, lastGenerated, content } = props;
   const { siteText } = useIntl();
 
   const lastFullValue = getLastFilledValue(data.infectious_people);
@@ -57,6 +67,8 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
+
+          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile

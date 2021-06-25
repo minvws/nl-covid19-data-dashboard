@@ -12,6 +12,7 @@ import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
 import { BreakpointContextProvider } from '~/utils/use-breakpoints';
+import { IsTouchDeviceContextProvider } from '~/utils/use-is-touch-device';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -59,7 +60,9 @@ export default function App(props: AppProps) {
       <IntlContext.Provider value={intlContext}>
         <GlobalStyle />
         <BreakpointContextProvider>
-          <Component {...pageProps} />
+          <IsTouchDeviceContextProvider>
+            <Component {...pageProps} />
+          </IsTouchDeviceContextProvider>
         </BreakpointContextProvider>
       </IntlContext.Provider>
       {toggleHotReloadButton}
