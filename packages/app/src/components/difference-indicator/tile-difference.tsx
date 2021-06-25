@@ -42,7 +42,7 @@ export function TileDifference({
         <InlineText fontWeight="bold">
           {differenceFormattedString} {splitText[0]}
         </InlineText>{' '}
-        <InlineText color="annotation">
+        <InlineText color="data.neutral">
           {splitText[1]} {timespanTextNode}
         </InlineText>
       </Container>
@@ -69,7 +69,7 @@ export function TileDifference({
 
   return (
     <Container>
-      <IconContainer color="lightGray" mr={1}>
+      <IconContainer color="data.neutral" mr={1}>
         <IconGelijk />
       </IconContainer>
       <InlineText>
