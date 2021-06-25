@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { MouseEvent, TouchEvent, useCallback } from 'react';
+import { MouseEvent, TouchEvent } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import ChevronIcon from '~/assets/chevron.svg';
