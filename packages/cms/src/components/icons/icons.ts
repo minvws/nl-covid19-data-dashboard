@@ -1,3 +1,5 @@
+import afstand_sporten from './assets/restrictions/afstand-sporten.svg';
+import alcohol_verkoop from './assets/restrictions/alcohol-verkoop.svg';
 import avondklok from './assets/restrictions/avondklok.svg';
 import BasisregelsAfstand from './assets/restrictions/basisregels_afstand.svg';
 import BasisregelsThuisBlijven from './assets/restrictions/basisregels_blijf-thuis.svg';
@@ -21,10 +23,13 @@ import HorecaEvenementen from './assets/restrictions/horeca-en-evenementen_evene
 import horeca_evenementen from './assets/restrictions/horeca_evenementen.svg';
 import kunstcultuur_musea from './assets/restrictions/kunstcultuur_musea.svg';
 import lopend from './assets/restrictions/lopend.svg';
+import max_aantal_bezoekers from './assets/restrictions/max-aantal-bezoekers.svg';
+import meerdaagse_evenementen from './assets/restrictions/meerdaagse-evenementen.svg';
 import OnderwijsKinderopvang from './assets/restrictions/onderwijs-en-kinderopvang_kinderopvang.svg';
 import OnderwijsNoodopvang from './assets/restrictions/onderwijs-en-kinderopvang_noodopvang.svg';
 import OnderwijsOpAfstand from './assets/restrictions/onderwijs-en-kinderopvang_op-afstand.svg';
 import ontmoetingen_bezoek from './assets/restrictions/ontmoetingen_bezoek.svg';
+import openingstijden from './assets/restrictions/openingstijden.svg';
 import PubliekeLocaties from './assets/restrictions/publiek-toegankelijke-locaties.svg';
 import recreatie from './assets/restrictions/recreatie.svg';
 import reizen from './assets/restrictions/reizen.svg';
@@ -50,6 +55,7 @@ import Stap1WinkelsMax from './assets/restrictions/stap_1-winkels_max.svg';
 import Stap1WikelsOpen from './assets/restrictions/stap_1-winkels_open.svg';
 import testbewijs from './assets/restrictions/testbewijs.svg';
 import Thuis from './assets/restrictions/thuis.svg';
+import toegangsbewijzen from './assets/restrictions/toegangsbewijzen.svg';
 import VervoerReizenBlijfThuis from './assets/restrictions/vervoer-en-reizen_blijfthuis.svg';
 import VervoerReizenBuitenland from './assets/restrictions/vervoer-en-reizen_buitenland.svg';
 import VervoerReizenOV from './assets/restrictions/vervoer-en-reizen_ov.svg';
@@ -135,4 +141,10 @@ export const restrictionIcons = {
   horeca_evenementen,
   kunstcultuur_musea,
   ontmoetingen_bezoek,
+  afstand_sporten,
+  alcohol_verkoop,
+  max_aantal_bezoekers,
+  meerdaagse_evenementen,
+  openingstijden,
+  toegangsbewijzen,
 } as const;
