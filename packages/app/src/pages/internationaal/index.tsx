@@ -52,7 +52,7 @@ export const getStaticProps = createGetStaticProps(
   () => getCyclingDataDocumentInfo('json/euro')
 );
 
-const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
+const InternationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatDateFromSeconds } = useIntl();
   const {
     lastGenerated,
@@ -132,4 +132,4 @@ const AccessibilityPage = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default AccessibilityPage;
+export default InternationalPage;
