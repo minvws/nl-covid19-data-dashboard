@@ -18,8 +18,6 @@ export function useTimelineHoverHandler(
     height: number;
   }
 ) {
-  const { xOffset } = timelineState;
-
   const voronoiLayout = useMemo(
     () =>
       voronoi<TimelineEventXOffset>({
@@ -27,8 +25,8 @@ export function useTimelineHoverHandler(
         y: () => height,
         width,
         height,
-      })(xOffset),
-    [xOffset, width, height]
+      })(timelineState.xOffsets),
+    [timelineState.xOffsets, width, height]
   );
 
   return useCallback(

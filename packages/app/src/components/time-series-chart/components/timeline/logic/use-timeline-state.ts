@@ -19,7 +19,7 @@ export function useTimelineState(
     [allEvents, xScale]
   );
 
-  const xOffset = useMemo(
+  const xOffsets = useMemo(
     () => events.map((x) => getTimelineEventXOffset(x, xScale)),
     [events, xScale]
   );
@@ -41,13 +41,13 @@ export function useTimelineState(
   const current = useMemo(
     () =>
       isDefined(index)
-        ? { event: events[index], range: xOffset[index] }
+        ? { event: events[index], range: xOffsets[index] }
         : undefined,
-    [events, index, xOffset]
+    [events, index, xOffsets]
   );
 
   return useMemo(
-    () => ({ index, setIndex, events, xOffset, current }),
-    [index, setIndex, events, xOffset, current]
+    () => ({ index, setIndex, events, xOffsets, current }),
+    [index, setIndex, events, xOffsets, current]
   );
 }

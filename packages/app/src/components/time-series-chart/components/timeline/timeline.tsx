@@ -52,7 +52,7 @@ export const Timeline = memo(function Timeline({
   const barHeight = size;
   const historyLineWidth = isYAxisCollapsed ? 15 : Math.min(padding.left, 23);
 
-  const showHistoryLine = timelineState.xOffset[0].timeline.x0IsOutOfBounds;
+  const showHistoryLine = timelineState.xOffsets[0].timeline.x0IsOutOfBounds;
 
   if (!width) return null;
 
@@ -84,7 +84,7 @@ export const Timeline = memo(function Timeline({
           {timelineState.events.map((x, i) => (
             <TimelineEvent
               key={`${x.start}-${x.end}`}
-              range={timelineState.xOffset[i]}
+              range={timelineState.xOffsets[i]}
               timelineContainerRef={ref}
               size={size}
               historyEventOffset={-historyLineWidth / 2}
