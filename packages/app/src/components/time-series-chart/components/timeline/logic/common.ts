@@ -1,8 +1,8 @@
 export interface TimelineEventConfig {
-  start: number;
-  end: number | undefined;
   title: string;
   description: string;
+  start: number;
+  end?: number;
 }
 
 export interface TimelineState {
@@ -12,7 +12,7 @@ export interface TimelineState {
   xOffsets: TimelineEventXOffset[];
   current?: {
     event: TimelineEventConfig;
-    range: TimelineEventXOffset;
+    xOffset: TimelineEventXOffset;
   };
 }
 

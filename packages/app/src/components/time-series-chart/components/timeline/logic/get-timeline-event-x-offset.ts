@@ -1,6 +1,6 @@
 import {
   endOfDayInSeconds,
-  midOfDayInSeconds,
+  middleOfDayInSeconds,
   startOfDayInSeconds,
 } from '@corona-dashboard/common';
 import { ScaleLinear } from 'd3-scale';
@@ -16,8 +16,8 @@ export function getTimelineEventXOffset(
   const max = last(domain) as number;
 
   const [start, end] = [
-    midOfDayInSeconds(config.start),
-    midOfDayInSeconds(config.end || config.start),
+    middleOfDayInSeconds(config.start),
+    middleOfDayInSeconds(config.end || config.start),
   ];
 
   /**

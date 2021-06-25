@@ -13,8 +13,8 @@ export function TimelineEventHighlight({
   height: number;
   timelineState: TimelineState;
 }) {
-  const { range, event } = timelineState.current || {};
-  const { x0 = 0, x1 = 0 } = range?.highlight || {};
+  const { xOffset, event } = timelineState.current || {};
+  const { x0 = 0, x1 = 0 } = xOffset?.highlight || {};
 
   const width = Math.max(1, x1 - x0);
 

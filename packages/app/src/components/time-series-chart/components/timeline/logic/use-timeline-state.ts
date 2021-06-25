@@ -41,7 +41,7 @@ export function useTimelineState(
   const current = useMemo(
     () =>
       isDefined(index)
-        ? { event: events[index], range: xOffsets[index] }
+        ? { event: events[index], xOffset: xOffsets[index] }
         : undefined,
     [events, index, xOffsets]
   );

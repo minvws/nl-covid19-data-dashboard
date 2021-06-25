@@ -13,13 +13,13 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
     const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
     timeSeries.values = sortTimeSeriesValues(timeSeries.values)
       /**
-       * We'll map all dates to noon (12:00). This simplifies the rendering of a
+       * We'll map all dates to midday (12:00). This simplifies the rendering of a
        * marker/annotation on a date.
        */
-      .map(toNoonDate);
+      .map(setValueDatesToMiddleOfDay);
 
     if (timeSeries.last_value) {
-      timeSeries.last_value = toNoonDate(timeSeries.last_value);
+      timeSeries.last_value = setValueDatesToMiddleOfDay(timeSeries.last_value);
     }
   }
 
@@ -41,12 +41,14 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
     }
 
     nestedSeries.values = nestedSeries.values.map((x) => {
-      x.values = sortTimeSeriesValues(x.values).map(toNoonDate) as
+      x.values = sortTimeSeriesValues(x.values).map(
+        setValueDatesToMiddleOfDay
+      ) as
         | RegionalSewerPerInstallationValue[]
         | MunicipalSewerPerInstallationValue[];
 
       if (x.last_value) {
-        x.last_value = toNoonDate(x.last_value);
+        x.last_value = setValueDatesToMiddleOfDay(x.last_value);
       }
       return x;
     });
@@ -85,13 +87,13 @@ export function sortTimeSeriesValues(values: TimestampedValue[]) {
   );
 }
 
-function toNoonDate<T extends TimestampedValue>(value: T) {
+function setValueDatesToMiddleOfDay<T extends TimestampedValue>(value: T) {
   if (isDateSpanValue(value)) {
-    value.date_start_unix = midOfDayInSeconds(value.date_start_unix);
-    value.date_end_unix = midOfDayInSeconds(value.date_end_unix);
+    value.date_start_unix = middleOfDayInSeconds(value.date_start_unix);
+    value.date_end_unix = middleOfDayInSeconds(value.date_end_unix);
   }
   if (isDateValue(value)) {
-    value.date_unix = midOfDayInSeconds(value.date_unix);
+    value.date_unix = middleOfDayInSeconds(value.date_unix);
   }
 
   return value;
@@ -175,7 +177,7 @@ export function endOfDayInSeconds(seconds: number) {
   return Math.floor(date.getTime() / 1000);
 }
 
-export function midOfDayInSeconds(seconds: number) {
+export function middleOfDayInSeconds(seconds: number) {
   const date = new Date(seconds * 1000);
   date.setHours(12, 0, 0, 0);
   return Math.floor(date.getTime() / 1000);

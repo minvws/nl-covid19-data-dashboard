@@ -1,4 +1,4 @@
-import { midOfDayInSeconds } from '@corona-dashboard/common';
+import { middleOfDayInSeconds } from '@corona-dashboard/common';
 import { first, last } from 'lodash';
 import { TimelineEventConfig } from './common';
 
@@ -7,8 +7,8 @@ export function isVisibleEvent(config: TimelineEventConfig, domain: number[]) {
   const max = last(domain) as number;
 
   const [x0, x1] = [
-    midOfDayInSeconds(config.start),
-    midOfDayInSeconds(config.end || config.start),
+    middleOfDayInSeconds(config.start),
+    middleOfDayInSeconds(config.end || config.start),
   ];
 
   if (x1 < x0) {

@@ -1,4 +1,4 @@
-import { assert, midOfDayInSeconds } from '@corona-dashboard/common';
+import { assert, middleOfDayInSeconds } from '@corona-dashboard/common';
 import {
   createContext,
   ReactNode,
@@ -33,10 +33,10 @@ export function CurrentDateProvider({
   children: ReactNode;
 }) {
   const [date, setDate] = useState(
-    new Date(midOfDayInSeconds(dateInSeconds) * 1000)
+    new Date(middleOfDayInSeconds(dateInSeconds) * 1000)
   );
   useEffect(
-    () => setDate(new Date(midOfDayInSeconds(Date.now() / 1000) * 1000)),
+    () => setDate(new Date(middleOfDayInSeconds(Date.now() / 1000) * 1000)),
     []
   );
 

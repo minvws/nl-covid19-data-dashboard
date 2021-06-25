@@ -4,7 +4,7 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import {
   ComponentProps,
   ReactNode,
@@ -13,7 +13,7 @@ import {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import { Box } from '~/components/base';
+import { Box, MotionBox } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
@@ -87,14 +87,14 @@ export function TooltipSeriesList<T extends TimestampedValue>({
         <Box width={listWidth} maxWidth="100%">
           <AnimatePresence>
             {timespanAnnotation && (
-              <Appear key="1">
+              <AppearTransition key="1">
                 <Text fontSize={0} color={colors.annotation} textAlign="center">
                   {timespanAnnotation.shortLabel || timespanAnnotation.label}
                 </Text>
-              </Appear>
+              </AppearTransition>
             )}
             {timelineEvent && (
-              <Appear mx={-3} key="2">
+              <AppearTransition mx={-3} key="2">
                 <Box
                   fontWeight="bold"
                   px={3}
@@ -107,7 +107,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
                     {timelineEvent.title}
                   </IconRow>
                 </Box>
-              </Appear>
+              </AppearTransition>
             )}
           </AnimatePresence>
         </Box>
@@ -288,7 +288,7 @@ export const TooltipList = styled.ol<{
   })
 );
 
-function IconRow({ icon, children }: any) {
+function IconRow({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
     <Box
       display="flex"
@@ -314,9 +314,7 @@ function IconRow({ icon, children }: any) {
   );
 }
 
-const MotionBox = motion(Box);
-
-function Appear(props: ComponentProps<typeof MotionBox>) {
+function AppearTransition(props: ComponentProps<typeof MotionBox>) {
   return (
     <MotionBox
       {...props}

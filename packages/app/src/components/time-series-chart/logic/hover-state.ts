@@ -511,18 +511,14 @@ function findActiveTimelineEventIndex(
   );
 
   /**
-   * Loop over the annotations and see if the hovered value falls within its
+   * Loop over the timeline events and see if the hovered value falls within its
    * timespan. By assuming these timespans never overlap, we can exist on the
    * first match and return a single index.
+   *
+   * Timeline events could overlap each other, therefore reverse the lookup to
+   * match later events first.
    */
-  for (const [index, event] of [...timelineEvents]
-    /**
-     * Annotations could overlap each other, therefore reverse the
-     * lookup to match later annotations first
-     *
-     */
-    .reverse()
-    .entries()) {
+  for (const [index, event] of [...timelineEvents].reverse().entries()) {
     const start = startOfDayInSeconds(event.start);
     const end = endOfDayInSeconds(event.end || event.start);
 

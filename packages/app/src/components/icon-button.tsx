@@ -1,4 +1,4 @@
-import css, { StandardCSSProperties } from '@styled-system/css';
+import css from '@styled-system/css';
 import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import { VisuallyHidden } from './visually-hidden';
@@ -9,7 +9,7 @@ interface IconButtonProps {
   title: string;
   color?: string;
   onClick?: (evt: React.MouseEvent) => void;
-  padding?: StandardCSSProperties['padding'];
+  padding?: number | string;
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -37,7 +37,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 const StyledIconButton = styled.button<{
   color: string;
   size: number;
-  padding?: StandardCSSProperties['padding'];
+  padding?: number | string;
 }>((x) =>
   css({
     p: x.padding ?? 0,
