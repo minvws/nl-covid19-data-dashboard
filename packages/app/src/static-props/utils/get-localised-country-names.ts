@@ -25,6 +25,15 @@ function findCountryName(iso: string, locale: LocaleCode) {
 
 type JoinFunction<T> = (value: T) => string;
 
+/**
+ * This function takes a list of arbitrary values that are expected to contain an ISO A3 country code and
+ * returns a dictionary of <countrycode -> localised country name>.
+ *
+ * How to extract the iso property is determined by the joinStrategy.
+ * This can simply be property name, but for more complex cases a function can be passed in as well,
+ * in that case the calling context is responsible for doing the lookup.
+ *
+ */
 export function getLocalisedCountryNames<T extends Record<string, any>>(
   values: T[],
   joinStrategy: KeysOfType<T, string, true> | JoinFunction<T>
