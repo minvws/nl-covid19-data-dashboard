@@ -195,7 +195,7 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
     display: 'block',
     whiteSpace: 'nowrap',
     textDecoration: 'none',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     color: 'white',
 
     // The span is a narrower element to position the underline to
