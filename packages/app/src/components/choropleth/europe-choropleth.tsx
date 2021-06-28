@@ -158,6 +158,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
       })}
     >
       <Choropleth
+        accessibility={{ key: 'behavior_choropleths' }}
         minHeight={600}
         description={'dataDescription'}
         featureCollection={europeGeo}

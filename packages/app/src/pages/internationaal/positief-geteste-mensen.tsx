@@ -3,6 +3,7 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { internationalThresholds } from '~/components/choropleth/international-thresholds';
+import { InternationalTooltip } from '~/components/choropleth/tooltips/international/international-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
@@ -19,6 +20,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
+import { getCountryNames } from '~/static-props/utils/get-country-names';
 
 export type TestData = {
   date_unix: number;
@@ -53,13 +55,14 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetChoroplethData({
     in: ({ tested_overall }) => tested_overall,
-  })
+  }),
+  getCountryNames
 );
 
 export default function PositiefGetesteMensenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { lastGenerated, content, choropleth } = props;
+  const { lastGenerated, content, choropleth, countryNames } = props;
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_positief_geteste_personen;
@@ -106,7 +109,9 @@ export default function PositiefGetesteMensenPage(
               joinProperty="cncode"
               metricProperty="infected_per_100k"
               tooltipContent={(context) => (
-                <div>{context.infected_per_100k}</div>
+                <InternationalTooltip
+                  countryName={countryNames[context.cncode.toLowerCase()]}
+                />
               )}
             />
           </EuropeChoroplethTile>
