@@ -29,12 +29,14 @@ export type TooltipSettings = {
   data: string;
 };
 
-type TProps<T1, T3> = {
+type TProps<T1, T3, T4> = {
   initialWidth?: number;
   minHeight?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, T1>;
+  // These are the outline superimposed over the main features.
+  outlines?: FeatureCollection<MultiPolygon, T4>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
   hovers?: FeatureCollection<MultiPolygon, T3>;
@@ -79,11 +81,11 @@ type TProps<T1, T3> = {
  * @param props
  */
 
-export function Choropleth<T1, T3>({
+export function Choropleth<T1, T2, T3>({
   getTooltipContent,
   tooltipPlacement,
   ...props
-}: TProps<T1, T3>) {
+}: TProps<T1, T2, T3>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
 
@@ -117,20 +119,21 @@ export function Choropleth<T1, T3>({
 
 type FitSize = [[number, number], any];
 
-type ChoroplethMapProps<T1, T3> = Omit<
-  TProps<T1, T3>,
+type ChoroplethMapProps<T1, T2, T3> = Omit<
+  TProps<T1, T2, T3>,
   'getTooltipContent' | 'tooltipPlacement'
 > & {
   setTooltip: (tooltip: TooltipSettings | undefined) => void;
 };
 
-const ChoroplethMap: <T1, T3>(
-  props: ChoroplethMapProps<T1, T3> & {
+const ChoroplethMap: <T1, T2, T3>(
+  props: ChoroplethMapProps<T1, T2, T3> & {
     hoverRef: React.RefObject<SVGGElement>;
   }
 ) => JSX.Element | null = memo((props) => {
   const {
     featureCollection,
+    outlines,
     hovers,
     boundingBox,
     renderFeature,
@@ -247,7 +250,22 @@ const ChoroplethMap: <T1, T3>(
               fitSize={fitSize}
             />
 
-            <Country fitSize={fitSize} />
+            {outlines && (
+              <g css={css({ pointerEvents: 'none' })}>
+                <MercatorGroup
+                  data={outlines.features}
+                  render={(_, path, index) => (
+                    <Path
+                      key={index}
+                      pathData={path}
+                      stroke={colors.silver}
+                      strokeWidth={0.5}
+                    />
+                  )}
+                  fitSize={fitSize}
+                />
+              </g>
+            )}
 
             {hovers && (
               <g ref={hoverRef}>
