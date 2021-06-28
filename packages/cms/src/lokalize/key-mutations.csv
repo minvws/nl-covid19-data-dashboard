@@ -120,3 +120,7 @@ timestamp,action,key
 2021-06-28T11:11:59.280Z,add,nationaal_actueel.quick_links.links.internationaal
 2021-06-28T11:12:00.307Z,add,nav.links.internationaal
 2021-06-28T11:12:01.209Z,add,veiligheidsregio_actueel.quick_links.links.internationaal
+2021-06-23T11:06:45.622Z,add,informatie_header.handige_links
+2021-06-23T11:07:04.030Z,add,informatie_header.artikelen
+2021-06-23T11:07:13.166Z,add,informatie_header.bron
+2021-06-23T11:07:27.070Z,add,informatie_header.meer_informatie_link
