@@ -8,13 +8,12 @@ import {
 
 export type TimeframeOption = 'all' | '5weeks';
 
-export const getDaysForTimeframe = (timeframe: TimeframeOption): number => {
-  // adds 1 extra day to capture the intended amount of days
+export function getDaysForTimeframe(timeframe: TimeframeOption) {
   if (timeframe === '5weeks') {
-    return 36;
+    return 5 * 7;
   }
   return Infinity;
-};
+}
 
 const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
 
@@ -84,5 +83,5 @@ function getTimeframeBoundaryUnix(timeframe: TimeframeOption, today: Date) {
     return 0;
   }
   const days = getDaysForTimeframe(timeframe);
-  return today.getTime() / 1000 - days * oneDayInSeconds;
+  return Math.floor(today.getTime() / 1000) - days * oneDayInSeconds;
 }

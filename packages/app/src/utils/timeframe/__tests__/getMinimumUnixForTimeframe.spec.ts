@@ -15,6 +15,6 @@ describe('Utils: getMinimumUnixForTimeframe', () => {
     const secondsDelta = Math.abs(today - result) / 1000;
     const daysDelta = Math.floor(secondsDelta / 86400);
 
-    expect(daysDelta).toEqual(36);
+    expect(daysDelta).toEqual(35);
   });
 });

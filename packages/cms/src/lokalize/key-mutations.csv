@@ -225,6 +225,11 @@ timestamp,action,key
 2021-06-23T06:42:53.315Z,add,covid_varianten.varianten.lambda
 2021-06-23T11:40:55.166Z,add,covid_varianten.reference.href
 2021-06-23T11:42:05.142Z,add,covid_varianten.reference.text
+2021-06-24T14:14:32.563Z,add,charts.timeline.title
+2021-06-24T14:14:33.983Z,add,charts.timeline.legend_label
+2021-06-24T14:14:34.892Z,add,charts.timeline.next
+2021-06-24T14:14:35.933Z,add,charts.timeline.prev
+2021-06-24T14:14:36.921Z,add,common.sluiten
 2021-06-24T08:29:19.849Z,add,accessibility.charts.variants_over_time_chart.description
 2021-06-24T08:29:20.835Z,add,accessibility.charts.variants_over_time_chart.label
 2021-06-28T11:11:42.529Z,add,internationaal_metadata.description
