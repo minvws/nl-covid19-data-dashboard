@@ -49,6 +49,9 @@ export function AppFooter() {
                 <Item href={reverseRouter.gm.index()}>
                   {text.nav.links.gemeente}
                 </Item>
+                <Item href={reverseRouter.in.index()}>
+                  {text.nav.links.internationaal}
+                </Item>
               </FooterList>
             </nav>
           </Box>

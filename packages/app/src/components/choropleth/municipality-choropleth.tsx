@@ -11,6 +11,10 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -28,6 +32,11 @@ import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   data: Pick<Municipalities, K>;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   metricName: K;
   metricProperty: string;
   selectedCode?: string;
@@ -54,6 +63,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
   props: MunicipalityChoroplethProps<T, K>
 ) {
   const {
+    accessibility,
     data,
     selectedCode,
     metricName,
@@ -184,6 +194,10 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     return null;
   };
 
+  const choroplethAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_choropleth',
+  ]);
+
   return (
     <Box position="relative">
       {tabInteractiveButton}
@@ -191,6 +205,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
         css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
       >
         <Choropleth
+          accessibility={choroplethAccessibility}
           description={dataDescription}
           featureCollection={municipalGeo}
           hovers={hasData ? municipalGeo : undefined}

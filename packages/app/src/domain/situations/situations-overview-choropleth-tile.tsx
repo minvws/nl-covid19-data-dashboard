@@ -87,6 +87,7 @@ export function SituationsOverviewChoroplethTile({
               key={situation.id}
             >
               <SafetyRegionChoropleth
+                accessibility={{ key: 'situations_choropleths' }}
                 data={{ situations: data }}
                 metricName={'situations'}
                 metricProperty={situation.id}

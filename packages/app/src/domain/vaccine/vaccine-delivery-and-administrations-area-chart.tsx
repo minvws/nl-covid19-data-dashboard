@@ -47,6 +47,9 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
       }}
     >
       <TimeSeriesChart
+        accessibility={{
+          key: 'vaccine_delivery_and_administrations_area_chart',
+        }}
         dataOptions={{
           valueAnnotation: siteText.waarde_annotaties.x_miljoen,
           timespanAnnotations: [

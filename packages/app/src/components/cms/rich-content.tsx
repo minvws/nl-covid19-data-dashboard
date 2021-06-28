@@ -79,6 +79,8 @@ function InlineAttachmentMark(props: {
   children: ReactNode;
   mark: InlineAttachment;
 }) {
+  if (!props.mark.asset) return <>{props.children}</>;
+
   return (
     <a download href={getFileSrc(props.mark.asset)}>
       {props.children}
@@ -89,7 +91,7 @@ function InlineAttachmentMark(props: {
 function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   const { mark, children } = props;
 
-  if (!mark.href) return null;
+  if (!mark.href) return <>{children}</>;
 
   return isAbsoluteUrl(mark.href) ? (
     <ExternalLink href={mark.href}>{children}</ExternalLink>
