@@ -1,6 +1,5 @@
-import { assert } from '@corona-dashboard/common';
+import { assert, TimeframeOption } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
-import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
