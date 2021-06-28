@@ -21,7 +21,7 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
 
   const { list, toggle, clear } = useList<string>();
 
-  const underReportedDateStart = getBoundaryDateStartUnix(values, 7);
+  const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
 
   /* Filter all the metric properties based if they are not a concern */
   const baseConfigFiltered = BASE_SERIES_CONFIG.filter((item) => {

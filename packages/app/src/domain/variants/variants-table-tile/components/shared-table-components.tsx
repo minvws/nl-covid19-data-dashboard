@@ -19,17 +19,18 @@ export const HeaderCell = styled.th(
 );
 
 export const Cell = styled.td<{
-  compact?: boolean;
+  mobile?: boolean;
+  narrow?: boolean;
   border?: boolean;
   alignRight?: boolean;
 }>((x) =>
   css({
     p: 0,
-    py: 2,
+    py: 3,
     float: x.alignRight ? 'right' : undefined,
-    maxWidth: x.compact ? '2rem' : undefined,
-    borderBottom: x.border ? '1px solid' : undefined,
-    borderBottomColor: x.border ? 'lightGray' : undefined,
+    maxWidth: x.narrow ? '2rem' : undefined,
+    borderBottom: x.border || !x.mobile ? '1px solid' : undefined,
+    borderBottomColor: x.border || !x.mobile ? 'lightGray' : undefined,
     verticalAlign: 'top',
   })
 );

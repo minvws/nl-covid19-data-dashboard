@@ -1,12 +1,14 @@
 import { NationalDifference, NlVariantsValue } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { DesktopVariantsTable, MobileVariantsTable } from './components';
+import { NarrowVariantsTable, WideVariantsTable } from './components';
 import { useVariantsTableData } from './logic/use-variants-table-data';
 
 export function VariantsTableTile({
@@ -42,17 +44,22 @@ export function VariantsTableTile({
 
       {text.varianten_tabel.belangrijk_bericht && (
         <WarningTile
-          message={text.varianten_tabel.belangrijk_bericht}
+          message={replaceVariablesInText(
+            text.varianten_tabel.belangrijk_bericht,
+            { sample_size: data.sample_size }
+          )}
           variant="emphasis"
         />
       )}
 
       <Box overflow="auto" mb={3} mt={4}>
-        {breakpoints.sm ? (
-          <DesktopVariantsTable rows={variantsTableRows} text={text} />
-        ) : (
-          <MobileVariantsTable rows={variantsTableRows} text={text} />
-        )}
+        <ErrorBoundary>
+          {breakpoints.sm ? (
+            <WideVariantsTable rows={variantsTableRows} text={text} />
+          ) : (
+            <NarrowVariantsTable rows={variantsTableRows} text={text} />
+          )}
+        </ErrorBoundary>
       </Box>
       <Metadata {...metadata} isTileFooter />
     </Tile>
