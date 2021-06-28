@@ -1,6 +1,8 @@
+import { useTimelineHoverHandler } from '@corona-dashboard/app/src/components/time-series-chart/components/timeline/logic';
 import { createTimelineEventsMockData } from '@corona-dashboard/app/src/components/time-series-chart/mock-timeline-events';
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';
+import { inspect } from 'util';
 import { getClient } from '../../client';
 
 const testDocuments = [
@@ -38,8 +40,6 @@ const testDocuments = [
           `@corona-dashboard/app/public/json/${getJsonFilenameForScope(scope)}`
         );
 
-        console.log('data?', !!allData);
-
         const metricData = allData[metricName];
 
         const timelineEvents = createTimelineEventsMockData(
@@ -51,7 +51,7 @@ const testDocuments = [
            * Map the mock data timestamps to Date objects for CMS
            */
           _type: 'timelineEvent',
-          _key: `index-${index}`,
+          _key: `index-${index}`, // You have to provide a unique key for Sanity
           title: {
             _type: 'localeString',
             nl: x.title,
@@ -62,11 +62,11 @@ const testDocuments = [
             nl: x.description,
             en: x.description,
           },
-          date: new Date(x.start * 1000).toDateString(),
-          dateEnd: x.end ? new Date(x.end * 1000).toDateString() : undefined,
+          date: formatDate(new Date(x.start * 1000)),
+          dateEnd: x.end ? formatDate(new Date(x.end * 1000)) : undefined,
         }));
 
-        console.log('timelineEvents', timelineEvents);
+        inspect(timelineEvents);
 
         const document = {
           _id,
@@ -74,7 +74,7 @@ const testDocuments = [
           scope,
           metricName,
           metricProperty,
-          timelineEvents: [],
+          timelineEvents,
         };
         await client.createOrReplace(document);
         break;
@@ -98,7 +98,7 @@ function getJsonFilenameForScope(scope: string) {
     case 'nl':
       return 'NL.json';
     case 'vr':
-      return 'getM09.json';
+      return 'VR09.json';
     case 'gm':
       return 'GM0344.json';
     default:
@@ -107,4 +107,10 @@ function getJsonFilenameForScope(scope: string) {
 }
 
 function formatDate(date: Date) {
-  return [date.getFullYear(), date.getMonth(), date.getDate()]
+  return [
+    date.getFullYear(),
+    ...[date.getMonth(), date.getDate()].map((x) =>
+      x.toString().padStart(2, '0')
+    ),
+  ].join('-');
+}

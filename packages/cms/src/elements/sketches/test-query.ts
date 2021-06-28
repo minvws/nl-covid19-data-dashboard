@@ -1,7 +1,7 @@
 import { snakeCase } from 'change-case';
 import { omitBy } from 'lodash';
 import { isDefined } from 'ts-is-present';
-import util from 'util';
+import { inspect } from 'util';
 import { getClient } from '../../client';
 
 const testQueries = [
@@ -35,6 +35,6 @@ const testQueries = [
 
     const doc = await client.fetch(query, params);
 
-    util.inspect(doc);
+    inspect(doc);
   }
 })();
