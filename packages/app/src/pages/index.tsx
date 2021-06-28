@@ -202,6 +202,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: text.quick_links.links.gemeente,
                   },
+                  {
+                    href: reverseRouter.in.index(),
+                    text: text.quick_links.links.internationaal,
+                  },
                 ]}
                 dataSitemapHeader={text.data_sitemap_titel}
                 dataSitemap={dataSitemap}
