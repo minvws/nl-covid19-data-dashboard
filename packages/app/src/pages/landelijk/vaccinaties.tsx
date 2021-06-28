@@ -85,8 +85,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     deliveryAndAdministration,
   } = props;
 
-  const stockFeature = useFeature('vaccineStockPerSupplier');
-
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
 
   const { siteText } = useIntl();
@@ -324,9 +322,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-          {stockFeature.isEnabled && (
-            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
-          )}
+          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
         </TileList>
       </NationalLayout>
     </Layout>
