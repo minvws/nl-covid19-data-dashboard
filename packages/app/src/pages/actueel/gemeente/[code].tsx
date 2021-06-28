@@ -269,6 +269,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       { municipalityName: municipalityName }
                     ),
                   },
+                  {
+                    href: reverseRouter.in.index(),
+                    text: text.quick_links.links.internationaal,
+                  },
                 ]}
                 dataSitemapHeader={replaceVariablesInText(
                   text.data_sitemap_title,
