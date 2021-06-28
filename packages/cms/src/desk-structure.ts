@@ -32,6 +32,7 @@ const hiddenDocTypes = [
   'disabilityCarePage',
   'intensiveCarePage',
   'positiveTestsPage',
+  'in_positiveTestsPage',
   'reproductionPage',
   'sewerPage',
   'vaccinationsPage',
@@ -121,6 +122,11 @@ export default () =>
       addListItem(RiPagesFill, 'Besmettelijke mensen', 'infectiousPeoplePage'),
       addListItem(RiPagesFill, 'IC opnames', 'intensiveCarePage'),
       addListItem(RiPagesFill, 'Positieve testen', 'positiveTestsPage'),
+      addListItem(
+        RiPagesFill,
+        'Positieve testen internationaal',
+        'in_positiveTestsPage'
+      ),
       addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
       addListItem(RiPagesFill, 'Covid varianten', 'variantsPage'),
       addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),

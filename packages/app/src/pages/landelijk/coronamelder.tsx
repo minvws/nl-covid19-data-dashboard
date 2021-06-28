@@ -130,15 +130,14 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'coronamelder_warned_daily_over_time_chart',
+                }}
                 tooltipTitle={
                   corona_melder_app.waarschuwingen_over_tijd_grafiek.title
                 }
                 timeframe={timeframe}
                 values={data.corona_melder_app.values}
-                ariaLabelledBy={
-                  corona_melder_app.waarschuwingen_over_tijd_grafiek
-                    .ariaDescription
-                }
                 seriesConfig={[
                   {
                     type: 'area',

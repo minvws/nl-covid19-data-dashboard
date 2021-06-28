@@ -33,7 +33,10 @@ export function GNumberBarChartTile({
       }}
     >
       <VerticalBarChart
-        ariaLabelledBy="chart_g_number"
+        accessibility={{
+          key: 'g_number',
+          features: ['keyboard_bar_chart'],
+        }}
         values={values}
         timeframe={timeframeInitialValue}
         numGridLines={3}

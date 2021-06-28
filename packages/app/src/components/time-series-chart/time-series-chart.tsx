@@ -9,6 +9,10 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { TimeframeOption } from '~/utils/timeframe';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
@@ -80,6 +84,11 @@ export type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   tooltipTitle?: string;
   values: T[];
   seriesConfig: C;
@@ -87,7 +96,6 @@ export type TimeSeriesChartProps<
    * @TODO making it optional for now until we figure out how we want to enforce
    * aria labels and descriptions
    */
-  ariaLabelledBy?: string;
   /**
    * The initial width of the chart is used for server-side rendering. it will
    * use the available width when the chart mounts.
@@ -136,6 +144,7 @@ export function TimeSeriesChart<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 >({
+  accessibility,
   values: allValues,
   seriesConfig,
   initialWidth = 840,
@@ -148,7 +157,6 @@ export function TimeSeriesChart<
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
   paddingLeft,
-  ariaLabelledBy,
   tooltipTitle,
   disableLegend,
   onSeriesClick,
@@ -365,6 +373,9 @@ export function TimeSeriesChart<
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
   const isYAxisCollapsed = width < COLLAPSE_Y_AXIS_THRESHOLD;
+  const timeSeriesAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_time_series_chart',
+  ]);
 
   return (
     <>
@@ -374,10 +385,10 @@ export function TimeSeriesChart<
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
+            accessibility={timeSeriesAccessibility}
             width={width}
             height={height}
             padding={padding}
-            ariaLabelledBy={ariaLabelledBy || ''}
             onClick={handleClick}
             onHover={chartEventHandlers.handleHover}
             onFocus={chartEventHandlers.handleFocus}

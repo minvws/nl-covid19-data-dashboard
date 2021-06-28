@@ -85,8 +85,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     deliveryAndAdministration,
   } = props;
 
-  const stockFeature = useFeature('vaccineStockPerSupplier');
-
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
 
   const { siteText } = useIntl();
@@ -130,6 +128,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }}
             >
               <TimeSeriesChart
+                accessibility={{ key: 'vaccine_coverage_over_time_chart' }}
                 values={transformToDayTimestamps(data.vaccine_coverage.values)}
                 formatTickValue={(x) => `${x / 1_000_000}`}
                 dataOptions={{
@@ -243,8 +242,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </section>
 
             <TimeSeriesChart
+              accessibility={{
+                key: 'vaccines_support_over_time_chart',
+              }}
               tooltipTitle={text.grafiek_draagvlak.titel}
-              ariaLabelledBy="chart_vaccine_vaccinated_or_support"
               values={data.vaccine_vaccinated_or_support.values}
               numGridLines={20}
               tickValues={[0, 25, 50, 75, 100]}
@@ -324,9 +325,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
 
-          {stockFeature.isEnabled && (
-            <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
-          )}
+          <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
         </TileList>
       </NationalLayout>
     </Layout>

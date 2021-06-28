@@ -144,6 +144,9 @@ const ElderlyAtHomeNationalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderlyAtHomeData.values}
                 seriesConfig={[
@@ -202,6 +205,9 @@ const ElderlyAtHomeNationalPage = (
             }}
           >
             <SafetyRegionChoropleth
+              accessibility={{
+                key: 'elderly_at_home_infected_people_choropleth',
+              }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.thuiswonendeOuderen}
               metricName="elderly_at_home"
@@ -250,6 +256,9 @@ const ElderlyAtHomeNationalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderlyAtHomeData.values}
                 seriesConfig={[

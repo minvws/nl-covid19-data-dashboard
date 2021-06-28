@@ -152,6 +152,9 @@ const ElderlyAtHomeRegionalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderly_at_home.values}
                 seriesConfig={[
@@ -239,6 +242,9 @@ const ElderlyAtHomeRegionalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_deceased_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderly_at_home.values}
                 seriesConfig={[

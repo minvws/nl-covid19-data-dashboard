@@ -68,7 +68,7 @@ export interface MunicipalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
-  infected_per_100k_moving_average?: number | null;
+  infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
 export interface MunicipalSewer {
@@ -149,7 +149,6 @@ export interface National {
   code: string;
   difference: NationalDifference;
   doctor: NationalDoctor;
-  downscaling?: NlDownscaling;
   g_number: NlGNumber;
   infectious_people: NationalInfectiousPeople;
   intensive_care_nice: NationalIntensiveCareNice;
@@ -248,20 +247,6 @@ export interface NationalDoctorValue {
   covid_symptoms: number;
   date_of_insertion_unix: number;
 }
-export interface NlDownscaling {
-  is_downscaling_possible: boolean;
-  current_level_of_measures: number;
-  reproduction_is_below_threshold: boolean;
-  reproduction_threshold_value: number;
-  reproduction_threshold_day_span: number;
-  intensive_care_nice_is_below_threshold: boolean;
-  intensive_care_nice_threshold_value: number;
-  intensive_care_nice_threshold_day_span: number;
-  hospital_nice_is_below_threshold: boolean;
-  hospital_nice_threshold_value: number;
-  hospital_nice_threshold_day_span: number;
-  date_of_insertion_unix: number;
-}
 export interface NlGNumber {
   values: NlGNumberValue[];
   last_value: NlGNumberValue;
@@ -320,7 +305,7 @@ export interface NationalTestedOverall {
 export interface NationalTestedOverallValue {
   infected: number;
   infected_per_100k: number;
-  infected_per_100k_moving_average?: number | null;
+  infected_per_100k_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -423,11 +408,11 @@ export interface NationalTestedGgdDaily {
 }
 export interface NationalTestedGgdDailyValue {
   infected: number;
-  infected_moving_average?: number | null;
+  infected_moving_average: number | null;
   infected_percentage: number;
-  infected_percentage_moving_average?: number | null;
+  infected_percentage_moving_average: number | null;
   tested_total: number;
-  tested_total_moving_average?: number | null;
+  tested_total_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -976,7 +961,7 @@ export interface RegionalTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
-  infected_per_100k_moving_average?: number | null;
+  infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
 export interface RegionalHospitalNice {
@@ -996,11 +981,11 @@ export interface RegionalTestedGgdDaily {
 }
 export interface RegionalTestedGgdDailyValue {
   infected: number;
-  infected_moving_average?: number | null;
+  infected_moving_average: number | null;
   infected_percentage: number;
-  infected_percentage_moving_average?: number | null;
+  infected_percentage_moving_average: number | null;
   tested_total: number;
-  tested_total_moving_average?: number | null;
+  tested_total_moving_average: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;

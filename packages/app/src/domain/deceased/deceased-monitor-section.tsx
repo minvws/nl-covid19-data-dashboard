@@ -46,9 +46,11 @@ export function DeceasedMonitorSection({
         description={text.deceased_monitor_chart_description}
       >
         <TimeSeriesChart
+          accessibility={{
+            key: 'deceased_monitor',
+          }}
           tooltipTitle={text.deceased_monitor_chart_title}
           values={data.values}
-          ariaLabelledBy=""
           seriesConfig={[
             {
               type: 'line',
