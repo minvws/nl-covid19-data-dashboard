@@ -4,15 +4,15 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "devDependencies": {
-    "@types/node": "^15.12.2",
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
-    "cypress": "^7.5.0",
-    "eslint": "^7.28.0",
+    "@types/node": "^15.12.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "cypress": "^7.6.0",
+    "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.24.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.2"
   },
   "scripts": {
     "lint": "echo 'No linter configured for @corona-dashboard/e2e'",
