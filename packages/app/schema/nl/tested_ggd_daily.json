@@ -47,7 +47,10 @@
       },
       "required": [
         "infected",
+        "infected_moving_average",
         "infected_percentage",
+        "tested_total_moving_average",
+        "infected_percentage_moving_average",
         "tested_total",
         "date_unix",
         "date_of_insertion_unix"

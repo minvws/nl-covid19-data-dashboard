@@ -29,7 +29,6 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -75,8 +74,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     dataHospitalNice.values,
     4
   );
-
-  const featureHospitalMovingAverage = useFeature('hospitalMovingAverage');
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
 
@@ -202,75 +199,45 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
             timeframeOptions={['all', '5weeks']}
           >
-            {(timeframe) =>
-              featureHospitalMovingAverage.isEnabled ? (
-                <TimeSeriesChart
-                  values={dataHospitalNice.values}
-                  timeframe={timeframe}
-                  ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
-                  seriesConfig={[
+            {(timeframe) => (
+              <TimeSeriesChart
+                values={dataHospitalNice.values}
+                timeframe={timeframe}
+                ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label: text.linechart_legend_titel_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label: text.linechart_legend_titel,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  benchmark: {
+                    value: 40,
+                    label: siteText.common.signaalwaarde,
+                  },
+                  timespanAnnotations: [
                     {
-                      type: 'line',
-                      metricProperty:
+                      start: underReportedRange,
+                      end: Infinity,
+                      label: text.linechart_legend_underreported_titel,
+                      shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
-                      label: text.linechart_legend_titel_moving_average,
-                      color: colors.data.primary,
+                      ],
                     },
-                    {
-                      type: 'bar',
-                      metricProperty: 'admissions_on_date_of_admission',
-                      label: text.linechart_legend_titel,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                  dataOptions={{
-                    benchmark: {
-                      value: 40,
-                      label: siteText.common.signaalwaarde,
-                    },
-                    timespanAnnotations: [
-                      {
-                        start: underReportedRange,
-                        end: Infinity,
-                        label: text.linechart_legend_underreported_titel,
-                        shortLabel: siteText.common.incomplete,
-                        cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average',
-                        ],
-                      },
-                    ],
-                  }}
-                />
-              ) : (
-                <TimeSeriesChart
-                  values={dataHospitalNice.values}
-                  timeframe={timeframe}
-                  ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
-                  seriesConfig={[
-                    {
-                      type: 'area',
-                      metricProperty: 'admissions_on_date_of_admission',
-                      label: text.linechart_legend_titel,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                  dataOptions={{
-                    benchmark: {
-                      value: 40,
-                      label: siteText.common.signaalwaarde,
-                    },
-                    timespanAnnotations: [
-                      {
-                        start: underReportedRange,
-                        end: Infinity,
-                        label: text.linechart_legend_underreported_titel,
-                        shortLabel: siteText.common.incomplete,
-                      },
-                    ],
-                  }}
-                />
-              )
-            }
+                  ],
+                }}
+              />
+            )}
           </ChartTile>
 
           <ChartTile
