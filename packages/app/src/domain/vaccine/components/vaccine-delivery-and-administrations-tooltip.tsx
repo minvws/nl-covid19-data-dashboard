@@ -27,7 +27,11 @@ export function VaccineDeliveryAndAdministrationsTooltip<
   }
 
   return (
-    <TooltipSeriesListContainer {...data}>
+    <TooltipSeriesListContainer
+      {...data}
+      // do not display the timespan annotation label in the tooltip
+      timespanAnnotation={undefined}
+    >
       <TooltipSeriesListItems
         value={value}
         config={[
