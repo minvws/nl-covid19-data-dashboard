@@ -1,4 +1,4 @@
-import { getLocalisedCountryNames } from '../get-localised-country-names';
+import { getLocalizedCountryNames } from '../get-localized-country-names';
 
 describe('StaticProps::Util: getLocalisedCountryNames', () => {
   let currentLocale = 'nl';
@@ -26,7 +26,7 @@ describe('StaticProps::Util: getLocalisedCountryNames', () => {
         value: 3,
       },
     ];
-    const result = getLocalisedCountryNames(values, 'iso_code');
+    const result = getLocalizedCountryNames(values, 'iso_code');
 
     expect(result).toEqual({
       nld: 'Nederland',
@@ -51,7 +51,7 @@ describe('StaticProps::Util: getLocalisedCountryNames', () => {
         value: 3,
       },
     ];
-    const result = getLocalisedCountryNames(values, 'iso_code');
+    const result = getLocalizedCountryNames(values, 'iso_code');
 
     expect(result).toEqual({
       nld: 'Netherlands',
@@ -75,7 +75,7 @@ describe('StaticProps::Util: getLocalisedCountryNames', () => {
         value: 3,
       },
     ];
-    const result = getLocalisedCountryNames(
+    const result = getLocalizedCountryNames(
       values,
       (value) => value.isoObj.iso_code
     );
@@ -94,7 +94,7 @@ describe('StaticProps::Util: getLocalisedCountryNames', () => {
         value: 1,
       },
     ];
-    expect(() => getLocalisedCountryNames(values, 'iso_code')).toThrowError(
+    expect(() => getLocalizedCountryNames(values, 'iso_code')).toThrowError(
       /Unable to find country data for ISO code nlr/
     );
   });

@@ -15,7 +15,7 @@ const countryData = loadJsonFromDataFile<CountryData[]>(
   'static-json'
 );
 
-function findCountryName(iso: string, locale: LocaleCode) {
+function getCountryName(iso: string, locale: LocaleCode) {
   const item = countryData.find(
     (x) => x.iso_a3.toLocaleLowerCase() === iso.toLocaleLowerCase()
   );
@@ -34,7 +34,7 @@ type JoinFunction<T> = (value: T) => string;
  * in that case the calling context is responsible for doing the lookup.
  *
  */
-export function getLocalisedCountryNames<T extends Record<string, any>>(
+export function getLocalizedCountryNames<T extends Record<string, any>>(
   values: T[],
   joinStrategy: KeysOfType<T, string, true> | JoinFunction<T>
 ) {
@@ -46,7 +46,7 @@ export function getLocalisedCountryNames<T extends Record<string, any>>(
       const isoCode = isFunctionParam(joinStrategy)
         ? joinStrategy(x)
         : x[joinStrategy];
-      return [isoCode, findCountryName(isoCode, locale)];
+      return [isoCode, getCountryName(isoCode, locale)];
     })
   ) as Record<string, string>;
 }
