@@ -28,13 +28,13 @@ export function CategoryMenu({
   children,
   isFirstItem,
 }: {
-  title: string;
   children: ReactNode;
   isFirstItem?: boolean;
+  title?: string;
 }) {
   return (
     <Box as="li" spacing={3} pt={isFirstItem ? 4 : '3rem'}>
-      <Category>{title}</Category>
+      {title && <Category>{title}</Category>}
       <Menu>{children}</Menu>
     </Box>
   );

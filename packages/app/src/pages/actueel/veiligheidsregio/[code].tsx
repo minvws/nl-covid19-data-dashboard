@@ -233,6 +233,10 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: text.quick_links.links.gemeente,
                   },
+                  {
+                    href: reverseRouter.in.index(),
+                    text: text.quick_links.links.internationaal,
+                  },
                 ]}
                 dataSitemapHeader={replaceVariablesInText(
                   text.data_sitemap_title,
