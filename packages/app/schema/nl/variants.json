@@ -41,11 +41,12 @@
       ],
       "additionalProperties": false,
       "properties": {
-        "alpha": {
-          "percentage": "number",
-          "occurence": "integer"
+        "alpha_percentage": {
+          "type": "number"
         },
-
+        "alpha_occurrence": {
+          "type": "integer"
+        },
         "alpha_is_variant_of_concern": {
           "type": "boolean"
         },
