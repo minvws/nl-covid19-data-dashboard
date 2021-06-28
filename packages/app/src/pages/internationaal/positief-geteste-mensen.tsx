@@ -1,3 +1,4 @@
+import { assert } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -73,6 +74,17 @@ export default function PositiefGetesteMensenPage(
     description: text.metadata.description,
   };
 
+  const comparedName = countryNames['nld'];
+  const comparedValue = choropleth.in.find(
+    (x) => x.cncode === 'NLD'
+  )?.infected_per_100k;
+
+  assert(comparedName, 'comparedName could not be found for country code nld');
+  assert(
+    comparedValue,
+    'comparedValue could not be found for country code NLD'
+  );
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -110,8 +122,13 @@ export default function PositiefGetesteMensenPage(
               metricProperty="infected_per_100k"
               tooltipContent={(context) => (
                 <InternationalTooltip
+                  title={
+                    'Positief geteste mensen per 100.000 inwoners, gemiddelde over de afgelopen 14 dagen'
+                  }
                   countryName={countryNames[context.cncode.toLowerCase()]}
                   value={context.infected_per_100k}
+                  comparedName={comparedName}
+                  comparedValue={comparedValue}
                 />
               )}
             />

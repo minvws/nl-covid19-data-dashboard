@@ -1,33 +1,69 @@
+import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { internationalThresholds } from '../../international-thresholds';
-import { TooltipContent } from '../tooltip-content';
 import { TooltipSubject } from '../tooltip-subject';
+import { TooltipContent } from './tooltip-content';
 
 type InternationalTooltipProps = {
+  title: string;
   countryName: string;
   value: number;
+  comparedName: string;
+  comparedValue: number;
 };
 
 export function InternationalTooltip(props: InternationalTooltipProps) {
-  const { countryName, value } = props;
-  const { siteText, formatPercentage, formatNumber } = useIntl();
+  const { countryName, value, comparedName, comparedValue, title } = props;
+  const { formatPercentage } = useIntl();
 
-  const subject = siteText.choropleth_tooltip.positive_tested_people;
   const thresholdValues = internationalThresholds.infected_per_100k;
 
+  const showComparison = countryName !== comparedName;
+
   return (
-    <TooltipContent title={countryName}>
-      <TooltipSubject
-        subject={subject}
-        thresholdValues={thresholdValues}
-        filterBelow={value}
-      >
-        <InlineText fontWeight="bold">
-          {formatPercentage(value)} per {formatNumber(100_000)}{' '}
-        </InlineText>
-        {siteText.common.inwoners}
-      </TooltipSubject>
+    <TooltipContent title={title}>
+      <>
+        <TooltipSubject thresholdValues={thresholdValues} filterBelow={value}>
+          <SubjectText
+            name={countryName}
+            value={formatPercentage(value)}
+            bold
+          />
+        </TooltipSubject>
+        {showComparison && (
+          <TooltipSubject
+            thresholdValues={thresholdValues}
+            filterBelow={comparedValue}
+          >
+            <SubjectText
+              name={comparedName}
+              value={formatPercentage(comparedValue)}
+            />
+          </TooltipSubject>
+        )}
+      </>
     </TooltipContent>
+  );
+}
+
+function SubjectText({
+  name,
+  value,
+  bold,
+}: {
+  name: string;
+  value: string;
+  bold?: boolean;
+}) {
+  return (
+    <Box display="flex" width="100%">
+      <Box fontWeight={bold ? 'bold' : undefined}>
+        <InlineText>{name}</InlineText>
+      </Box>
+      <Box ml="auto">
+        <InlineText fontWeight={bold ? 'bold' : undefined}>{value}</InlineText>
+      </Box>
+    </Box>
   );
 }
