@@ -59,7 +59,11 @@ export default function PositiefGetesteMensenPage(
               datumsText: text.datums,
               dateOrRange: 0, // @TODO date
               dateOfInsertionUnix: 0, // @TODO date
-              dataSources: [text.bronnen.rivm],
+              dataSources: [
+                text.bronnen.rivm,
+                text.bronnen.our_world_in_data,
+                text.bronnen.ecdc,
+              ],
             }}
             referenceLink={text.reference.href}
             articles={content.highlight.articles}

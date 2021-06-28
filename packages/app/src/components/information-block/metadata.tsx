@@ -147,6 +147,8 @@ function MetadataItem({
   accessibilityText,
   accessibilitySubject,
 }: MetadataItemProps) {
+  const { siteText } = useIntl();
+
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
       <Box as="span" minWidth="1.8rem" mt="3px">
@@ -156,7 +158,7 @@ function MetadataItem({
       <Text margin={0}>
         {referenceLink && !items && (
           <Link href={referenceLink} passHref>
-            <Anchor>Meer informatie en databestanden</Anchor>
+            <Anchor>{siteText.informatie_header.meer_informatie_link}</Anchor>
           </Link>
         )}
 
@@ -166,7 +168,7 @@ function MetadataItem({
             {items.map((item, index) => (
               <Fragment key={index + item.href}>
                 <InlineText>
-                  {index > 0 && ' & '}
+                  {index > 0 && (index !== items.length - 1 ? ' , ' : ' & ')}
                   {item.text}
                 </InlineText>
               </Fragment>
@@ -211,6 +213,8 @@ interface metadataReferenceProps {
 }
 
 function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
+  const { siteText } = useIntl();
+
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
       <Box as="span" minWidth="1.8rem" mt="3px">
@@ -218,7 +222,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
       </Box>
 
       <Link href={referenceLink} passHref>
-        <Anchor>Meer informatie en databestanden</Anchor>
+        <Anchor>{siteText.informatie_header.meer_informatie_link}</Anchor>
       </Link>
     </Box>
   );
