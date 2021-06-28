@@ -19,7 +19,7 @@ import {
 import { TimeframeOption } from '~/utils/timeframe';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import {
   BarHover,
   BarTrend,
@@ -44,8 +44,12 @@ export type VerticalBarChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   title?: string;
-  accessibility: AccessibilityOptions;
   values: T[];
   seriesConfig: C;
   initialWidth?: number;

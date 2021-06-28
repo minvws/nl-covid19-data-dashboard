@@ -11,9 +11,8 @@
 import css from '@styled-system/css';
 import { Group } from '@visx/group';
 import React from 'react';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
-import { VisuallyHidden } from '~/components/visually-hidden';
-import { useAccessibilityOptions } from '~/utils/use-accessibility-options';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { Padding } from '../logic';
 
@@ -22,7 +21,11 @@ interface ChartContainerProps {
   width: number;
   height: number;
   padding: Padding;
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   valueAnnotation?: string;
   onHover?: (event: Event) => void;
   onClick?: (event: Event) => void;
@@ -45,13 +48,13 @@ export function ChartContainer({
 }: ChartContainerProps) {
   const isTouch = useIsTouchDevice();
 
-  const { label, description, describedById } =
-    useAccessibilityOptions(accessibility);
+  const annotations = useAccessibilityAnnotations(accessibility);
 
   return (
     <>
-      <VisuallyHidden id={describedById}>{description}</VisuallyHidden>
+      {annotations.descriptionElement}
       <svg
+        {...annotations.props}
         width={width}
         /**
          * When, for example, a horizontal line with a 1px size is drawn on a Y-
@@ -67,8 +70,6 @@ export function ChartContainer({
          */
         viewBox={`-0.5 -0.5 ${width} ${height}`}
         role="img"
-        aria-label={label}
-        aria-describedby={describedById}
         css={css({
           touchAction: 'pan-y',
           userSelect: 'none',

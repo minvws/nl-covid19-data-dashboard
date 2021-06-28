@@ -2,7 +2,7 @@ import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import {
   InteractiveLegend,
   SelectOption,
@@ -25,7 +25,11 @@ type NLHospitalAdmissionPerAgeGroupValue =
 interface AdmissionsPerAgeGroup {
   values: NLHospitalAdmissionPerAgeGroupValue[];
   timeframe: 'all' | '5weeks';
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
 }
 
 export function AdmissionsPerAgeGroup({

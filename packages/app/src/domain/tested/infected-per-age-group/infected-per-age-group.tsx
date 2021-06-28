@@ -1,5 +1,5 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import {
   InteractiveLegend,
   SelectOption,
@@ -17,7 +17,11 @@ import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   values: NlTestedPerAgeGroupValue[];
   timeframe: 'all' | '5weeks';
 }

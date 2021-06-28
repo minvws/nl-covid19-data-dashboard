@@ -12,9 +12,9 @@ import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
-  AccessibilityOptions,
+  AccessibilityDefinition,
   addAccessibilityFeatures,
-} from '~/utils/use-accessibility-options';
+} from '~/utils/use-accessibility-annotations';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -32,7 +32,11 @@ import { countryGeo, municipalGeo, regionGeo } from './topology';
 
 type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
   data: Pick<Municipalities, K>;
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   metricName: K;
   metricProperty: string;
   selectedCode?: string;

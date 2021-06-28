@@ -1,8 +1,9 @@
 import { assert } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 
-export interface AccessibilityOptions {
+export interface AccessibilityDefinition {
   key: string;
   features?: AccesssibilityFeature[];
 }
@@ -18,12 +19,14 @@ type AccesssibilityFeature =
  * more generic descriptions of interactive features are added to them.
  */
 
-export function useAccessibilityOptions(options: AccessibilityOptions) {
+export function useAccessibilityAnnotations(
+  definition: AccessibilityDefinition
+) {
   const { siteText } = useIntl();
 
   const { label, description: chartDescription } =
     siteText.accessibility.charts[
-      options.key as keyof typeof siteText.accessibility.charts
+      definition.key as keyof typeof siteText.accessibility.charts
     ];
 
   /**
@@ -40,15 +43,15 @@ export function useAccessibilityOptions(options: AccessibilityOptions) {
    * or by providing interactive features
    */
   assert(
-    chartDescription.length > 10 || options.features?.length,
-    `An accessibility description or interaction features need to be provided for ${options.key}`
+    isDefined(chartDescription) || definition.features?.length,
+    `An accessibility description or interaction features need to be provided for ${definition.key}`
   );
 
   const description = [chartDescription];
 
-  if (isDefined(options.features)) {
+  if (isDefined(definition.features)) {
     description.push(
-      ...options.features.map(
+      ...definition.features.map(
         (feature) =>
           siteText.accessibility.features[
             feature as keyof typeof siteText.accessibility.features
@@ -57,17 +60,27 @@ export function useAccessibilityOptions(options: AccessibilityOptions) {
     );
   }
 
+  const describedById = `${definition.key}_id`;
+
   return {
-    label,
-    description: description.filter(isDefined).join(' '),
-    describedById: `${options.key}_id`,
+    descriptionElement: (
+      <VisuallyHidden id={describedById}>
+        {description.filter(isDefined).join(' ')}
+      </VisuallyHidden>
+    ),
+    props: {
+      ariaDescribedby: describedById,
+      ariaLabel: label,
+      'aria-label': label,
+      'aria-describedby': describedById,
+    },
   };
 }
 
 export function addAccessibilityFeatures(
-  options: AccessibilityOptions,
+  options: AccessibilityDefinition,
   additionalFeatures: AccesssibilityFeature[]
-): AccessibilityOptions {
+): AccessibilityDefinition {
   return {
     ...options,
     features: [...(options.features ?? []), ...additionalFeatures],

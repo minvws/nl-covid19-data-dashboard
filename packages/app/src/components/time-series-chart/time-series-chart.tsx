@@ -12,9 +12,9 @@ import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
 import {
-  AccessibilityOptions,
+  AccessibilityDefinition,
   addAccessibilityFeatures,
-} from '~/utils/use-accessibility-options';
+} from '~/utils/use-accessibility-annotations';
 import { InlineText } from '../typography';
 import {
   Axes,
@@ -82,7 +82,7 @@ export type TimeSeriesChartProps<
   /**
    * Accessibility options are not optional
    */
-  accessibility: AccessibilityOptions;
+  accessibility: AccessibilityDefinition;
   tooltipTitle?: string;
   values: T[];
   seriesConfig: C;

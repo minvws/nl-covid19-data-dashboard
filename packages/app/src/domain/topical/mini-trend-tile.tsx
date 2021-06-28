@@ -2,7 +2,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -24,7 +24,11 @@ type MiniTrendTileProps<T extends TimestampedValue> = {
   trendData: T[];
   metricProperty: NumberProperty<T>;
   href: string;
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
 };
 
 export function MiniTrendTile<T extends TimestampedValue>(

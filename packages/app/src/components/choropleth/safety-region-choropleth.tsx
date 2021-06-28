@@ -11,9 +11,9 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
-  AccessibilityOptions,
+  AccessibilityDefinition,
   addAccessibilityFeatures,
-} from '~/utils/use-accessibility-options';
+} from '~/utils/use-accessibility-annotations';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -31,7 +31,11 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   data: Pick<Regions, K>;
   metricName: K;
   metricProperty: string;
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   selectedCode?: string;
   highlightSelection?: boolean;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;

@@ -2,9 +2,9 @@ import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
 import {
-  AccessibilityOptions,
+  AccessibilityDefinition,
   addAccessibilityFeatures,
-} from '~/utils/use-accessibility-options';
+} from '~/utils/use-accessibility-annotations';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
@@ -22,7 +22,11 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
 }: {
   data: { values: T[] };
   metricProperty: keyof T;
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   displayMaxPercentage?: number;
   text: AgeDemographicChartText;
 }) {

@@ -17,9 +17,9 @@ import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '~/utils/use-unique-id';
 import {
-  AccessibilityOptions,
-  useAccessibilityOptions,
-} from '~/utils/use-accessibility-options';
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 import { VisuallyHidden } from '../visually-hidden';
 import { Path } from './path';
 import {
@@ -35,7 +35,11 @@ export type TooltipSettings = {
 };
 
 type TProps<T1, T3> = {
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   initialWidth?: number;
   minHeight?: number;
   // This is the main feature collection that displays the features that will
@@ -157,8 +161,7 @@ const ChoroplethMap: <T1, T3>(
     minHeight
   );
 
-  const { label, description, describedById } =
-    useAccessibilityOptions(accessibility);
+  const annotations = useAccessibilityAnnotations(accessibility);
 
   const width = responsive.width;
   const height = Math.min(responsive.height, width * ratio);
@@ -218,12 +221,11 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
-      <VisuallyHidden id={describedById}>{description}</VisuallyHidden>
+      {annotations.descriptionElement}
       <ResponsiveContainer height={height}>
         <svg
+          {...annotations.props}
           role="img"
-          aria-label={label}
-          aria-describedby={describedById}
           width={width}
           viewBox={`0 0 ${width} ${height}`}
           css={css({ display: 'block', bg: 'transparent', width: '100%' })}

@@ -15,15 +15,18 @@ import { AgeDemographicCoordinates } from './age-demographic-coordinates';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 import {
-  AccessibilityOptions,
-  useAccessibilityOptions,
-} from '~/utils/use-accessibility-options';
-import { VisuallyHidden } from '../visually-hidden';
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 
 export const AGE_GROUP_TOOLTIP_WIDTH = 340;
 
 interface AgeDemographicChartProps<T extends AgeDemographicDefaultValue> {
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   coordinates: AgeDemographicCoordinates<T>;
   text: AgeDemographicChartText;
   onMouseMoveBar: (value: T, event: MouseEvent<SVGElement>) => void;
@@ -81,8 +84,7 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
   const { formatPercentage } = useIntl();
 
-  const { label, description, describedById } =
-    useAccessibilityOptions(accessibility);
+  const annotations = useAccessibilityAnnotations(accessibility);
 
   const hasClippedValue = !!values.find(
     (value) =>
@@ -95,13 +97,12 @@ function AgeDemographicChartWithGenerics<T extends AgeDemographicDefaultValue>({
 
   return (
     <Box>
-      <VisuallyHidden id={describedById}>{description}</VisuallyHidden>
+      {annotations.descriptionElement}
       <svg
+        {...annotations.props}
         width={width}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label={label}
-        aria-describedby={describedById}
         tabIndex={0}
         onKeyUp={(event) => onKeyInput(event)}
         css={css({

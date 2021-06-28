@@ -9,7 +9,7 @@ import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
-import { AccessibilityOptions } from '~/utils/use-accessibility-options';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
 import { mergeData } from './new-logic';
 
@@ -19,7 +19,11 @@ export function NewSewerChart({
   dataPerInstallation,
   text,
 }: {
-  accessibility: AccessibilityOptions;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   dataAverages: RegionalSewer | MunicipalSewer;
   dataPerInstallation?: SewerPerInstallationData;
   text: {

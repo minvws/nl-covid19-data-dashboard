@@ -33,10 +33,9 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
-  AccessibilityOptions,
-  useAccessibilityOptions,
-} from '~/utils/use-accessibility-options';
-import { VisuallyHidden } from '../visually-hidden';
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 import {
   calculateSeriesMaximum,
   getSeriesData,
@@ -103,7 +102,7 @@ export type Config<T extends TimestampedValue> = {
 };
 
 export type StackedChartProps<T extends TimestampedValue> = {
-  accessibility: AccessibilityOptions;
+  accessibility: AccessibilityDefinition;
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -160,8 +159,7 @@ export function StackedChart<T extends TimestampedValue>(
     formatDateSpan,
   } = useIntl();
 
-  const { label, description, describedById } =
-    useAccessibilityOptions(accessibility);
+  const annotations = useAccessibilityAnnotations(accessibility);
 
   const {
     tooltipData,
@@ -496,14 +494,13 @@ export function StackedChart<T extends TimestampedValue>(
       <Box height="100%">
         <ResponsiveContainer>
           <Box position="relative">
-            <VisuallyHidden id={describedById}>{description}</VisuallyHidden>
+            {annotations.descriptionElement}
             <svg
+              {...annotations.props}
               width={width}
               viewBox={`0 0 ${width} ${height}`}
               css={css({ width: '100%' })}
               role="img"
-              aria-label={label}
-              aria-describedby={describedById}
             >
               <HatchedPattern />
 
