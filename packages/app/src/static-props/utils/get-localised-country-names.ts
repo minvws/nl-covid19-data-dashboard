@@ -42,13 +42,12 @@ export function getLocalisedCountryNames<T extends Record<string, any>>(
     (process.env.NEXT_PUBLIC_LOCALE as LocaleCode) ?? 'nl';
 
   return Object.fromEntries(
-    values.map((x) => [
-      isFunctionParam(joinStrategy) ? joinStrategy(x) : x[joinStrategy],
-      findCountryName(
-        isFunctionParam(joinStrategy) ? joinStrategy(x) : x[joinStrategy],
-        locale
-      ),
-    ])
+    values.map((x) => {
+      const isoCode = isFunctionParam(joinStrategy)
+        ? joinStrategy(x)
+        : x[joinStrategy];
+      return [isoCode, findCountryName(isoCode, locale)];
+    })
   ) as Record<string, string>;
 }
 
