@@ -1,11 +1,4 @@
-import {
-  ChoroplethThresholdsValue,
-  KeysOfType,
-} from '@corona-dashboard/common';
-import {
-  InternationalListType,
-  UnionToIntersection,
-} from '~/domain/internationaal/types';
+import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
@@ -39,14 +32,6 @@ const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-type InternationalListKeys = KeysOfType<
-  UnionToIntersection<InternationalListType>,
-  number,
-  true
->;
-
-export const internationalThresholds: Partial<
-  { [P in InternationalListKeys]: ChoroplethThresholdsValue[] }
-> = {
+export const internationalThresholds = {
   infected_per_100k: positiveTestedThresholds,
-};
+} as const;

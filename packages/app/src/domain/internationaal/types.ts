@@ -1,5 +1,5 @@
 import { PickByType } from '@corona-dashboard/common';
-import { International } from '~/pages/internationaal';
+import { International } from '~/pages/internationaal/positief-geteste-mensen';
 
 export type UnionToIntersection<U> = (
   U extends any ? (k: U) => void : never

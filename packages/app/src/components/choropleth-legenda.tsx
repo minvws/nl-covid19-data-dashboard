@@ -10,12 +10,14 @@ interface ChoroplethLegendaProps {
   title: string;
   thresholds: ChoroplethThresholdsValue[];
   valueAnnotation?: string;
+  horizontal?: boolean;
 }
 
 export function ChoroplethLegenda({
   title,
   thresholds,
   valueAnnotation,
+  horizontal,
 }: ChoroplethLegendaProps) {
   const { width: itemWidth = 0, ref: itemRef } =
     useResizeObserver<HTMLLIElement>();
@@ -23,8 +25,17 @@ export function ChoroplethLegenda({
     useResizeObserver<HTMLSpanElement>();
 
   return (
-    <Box width="100%" pr={`${endLabelWidth / 2}px`}>
-      {title && <Heading level={4}>{title}</Heading>}
+    <Box
+      width="100%"
+      pr={`${endLabelWidth / 2}px`}
+      display="flex"
+      flexDirection={horizontal ? 'row' : 'column'}
+    >
+      {title && (
+        <Heading level={4} css={css({ flexShrink: 0 })} mr={horizontal ? 2 : 0}>
+          {title}
+        </Heading>
+      )}
       <List
         aria-label="legend"
         hasValueAnnotation={valueAnnotation ? true : false}

@@ -37,7 +37,6 @@ const nonEurope = [
   'ARM',
   'TUR',
   'SYR',
-  '-99',
 ];
 
 /**
@@ -51,6 +50,7 @@ const actuallyEurope: EuropeGeoJSON = {
     (x) => !nonEurope.includes(x.properties.ISO_A3)
   ),
 };
+
 const focusEurope: EuropeGeoJSON = {
   ...europeGeo,
   features: europeGeo.features.filter((x) =>
@@ -64,7 +64,7 @@ type EuropeChoroplethProps<T extends InternationalListType> = {
   joinProperty: KeysOfType<T, string, true>;
   tooltipContent?: (context: T) => ReactNode;
   tooltipPlacement?: ChoroplethTooltipPlacement;
-  getLink: (code: string) => string;
+  getLink?: (code: string) => string;
 };
 
 export function EuropeChoropleth<T extends InternationalListType>(
@@ -72,7 +72,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
 ) {
   const { data, joinProperty, metricProperty, tooltipContent } = props;
 
-  const getJoinedItem = useCallback(
+  const getJoinedDataItem = useCallback(
     (joinId: string) => {
       return data.find((x) => x[joinProperty] === joinId);
     },
@@ -89,7 +89,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
     ) => {
       const { ISO_A3 } = feature.properties;
       const key = `${ISO_A3}_${index}`;
-      const item = getJoinedItem(ISO_A3);
+      const item = getJoinedDataItem(ISO_A3);
 
       return !isDefined(item) ? (
         <Path
@@ -108,7 +108,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
         />
       );
     },
-    [getJoinedItem, metricProperty, getFillColor]
+    [getJoinedDataItem, metricProperty, getFillColor]
   );
 
   const renderHover = useCallback(
@@ -119,7 +119,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
     ) => {
       const { ISO_A3 } = feature.properties;
 
-      const item = getJoinedItem(ISO_A3);
+      const item = getJoinedDataItem(ISO_A3);
 
       return isDefined(item) ? (
         <HoverPathLink
@@ -133,18 +133,18 @@ export function EuropeChoropleth<T extends InternationalListType>(
         />
       ) : null;
     },
-    [getJoinedItem]
+    [getJoinedDataItem]
   );
 
   const getTooltipContent = useCallback(
     (joinId: string) => {
       if (tooltipContent) {
-        const data = getJoinedItem(joinId);
+        const data = getJoinedDataItem(joinId);
         return data ? tooltipContent(data) : null;
       }
       return null;
     },
-    [tooltipContent, getJoinedItem]
+    [tooltipContent, getJoinedDataItem]
   );
 
   return (
@@ -158,8 +158,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
       })}
     >
       <Choropleth
-        initialWidth={862}
-        minHeight={514}
+        minHeight={600}
         description={'dataDescription'}
         featureCollection={europeGeo}
         hovers={actuallyEurope}
