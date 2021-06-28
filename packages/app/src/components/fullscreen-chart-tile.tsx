@@ -57,6 +57,12 @@ export function FullscreenChartTile({
             right: '10px',
             color: 'gray',
 
+            '&:focus-within': {
+              outlineWidth: '1px',
+              outlineStyle: 'dashed',
+              outlineColor: 'blue',
+            },
+
             '&:hover': { color: 'silver' },
           })}
         >

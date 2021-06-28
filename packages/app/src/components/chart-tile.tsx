@@ -8,6 +8,7 @@ import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
 import { Heading } from './typography';
+
 interface ChartTileHeaderProps {
   title: string;
   description?: string;
