@@ -17,14 +17,6 @@ const testDocuments = [
   const client = getClient();
 
   for (const [scope, metricName, _type, metricProperty] of testDocuments) {
-    /**
-     * By using the various id elements in dot notation we can organize the
-     * documents in sanity and make sure to never have more then one document for
-     * each chart / data component.
-     *
-     * Snake-casing the type makes the path identical to the key we could use in
-     * lokalize to store texts for that object.
-     */
     const _id = [scope, metricName, snakeCase(_type), metricProperty]
       .filter(isDefined)
       .join('.');

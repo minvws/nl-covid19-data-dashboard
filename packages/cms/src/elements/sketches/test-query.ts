@@ -5,10 +5,10 @@ import { getClient } from '../../client';
 
 const testQueries = [
   ['nl', 'tested_overall', 'timeSeries'],
-  // ['nl', 'sewer', 'timeSeries'],
-  // ['nl', 'tested_overall', 'kpi', 'infected'],
-  // ['nl', 'tested_overall', 'choropleth', 'infected_per_100k'],
-  // ['vr', 'tested_overall', 'timeSeries'],
+  ['nl', 'sewer', 'timeSeries'],
+  ['nl', 'tested_overall', 'kpi', 'infected'],
+  ['nl', 'tested_overall', 'choropleth', 'infected_per_100k'],
+  ['vr', 'tested_overall', 'timeSeries'],
 ];
 
 /**
