@@ -77,7 +77,9 @@ export function TopNavigation() {
               {siteText.nav.links.gemeente}
             </NavItem>
 
-            <NavItem href="/over">{siteText.nav.links.over}</NavItem>
+            <NavItem href={reverseRouter.in.index()}>
+              {siteText.nav.links.internationaal}
+            </NavItem>
           </NavList>
         </MaxWidth>
       </NavWrapper>
@@ -193,7 +195,7 @@ const NavLink = styled.a<{ isActive: boolean }>((x) =>
     display: 'block',
     whiteSpace: 'nowrap',
     textDecoration: 'none',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     color: 'white',
 
     // The span is a narrower element to position the underline to

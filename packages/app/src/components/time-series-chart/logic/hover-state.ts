@@ -1,7 +1,9 @@
 import {
   assert,
+  endOfDayInSeconds,
   isDateSpanValue,
   isDateValue,
+  startOfDayInSeconds,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
@@ -11,6 +13,7 @@ import { ScaleLinear } from 'd3-scale';
 import { isEmpty, pick, throttle } from 'lodash';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
+import { TimelineEventConfig } from '../components/timeline';
 import { Padding, TimespanAnnotationConfig } from './common';
 import {
   isVisible,
@@ -39,6 +42,7 @@ interface UseHoverStateArgs<T extends TimestampedValue> {
   xScale: ScaleLinear<number, number>;
   yScale: ScaleLinear<number, number>;
   timespanAnnotations?: TimespanAnnotationConfig[];
+  timelineEvents?: TimelineEventConfig[];
   markNearestPointOnly?: boolean;
 }
 
@@ -49,6 +53,7 @@ interface HoverState<T> {
   rangePoints: HoveredPoint<T>[];
   nearestPoint: HoveredPoint<T>;
   timespanAnnotationIndex?: number;
+  timelineEventIndex?: number;
 }
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
@@ -63,6 +68,7 @@ export function useHoverState<T extends TimestampedValue>({
   xScale,
   yScale,
   timespanAnnotations,
+  timelineEvents,
   markNearestPointOnly,
 }: UseHoverStateArgs<T>) {
   const [point, setPoint] = useState<Point>();
@@ -425,6 +431,10 @@ export function useHoverState<T extends TimestampedValue>({
         )
       : undefined;
 
+    const timelineEventIndex = timelineEvents
+      ? findActiveTimelineEventIndex(values[valuesIndex], timelineEvents)
+      : undefined;
+
     const hoverState: HoverState<T> = {
       valuesIndex,
       barPoints,
@@ -436,6 +446,7 @@ export function useHoverState<T extends TimestampedValue>({
         : rangePoints,
       nearestPoint,
       timespanAnnotationIndex,
+      timelineEventIndex,
     };
 
     return hoverState;
@@ -444,6 +455,7 @@ export function useHoverState<T extends TimestampedValue>({
     hasFocus,
     seriesConfig,
     timespanAnnotations,
+    timelineEvents,
     values,
     valuesIndex,
     markNearestPointOnly,
@@ -472,12 +484,46 @@ function findActiveTimespanAnnotationIndex(
    * timespan. By assuming these timespans never overlap, we can exit on the
    * first match and return a single index.
    */
-  for (const [index, annotation] of [...timespanAnnotations].entries()) {
+  for (const [index, annotation] of timespanAnnotations.entries()) {
     /**
      * Tesing overlap of two ranges x1 <= y2 && y1 <= x2
      */
     if (valueSpanStart <= annotation.end && annotation.start <= valueSpanEnd) {
       return index;
+    }
+  }
+}
+
+function findActiveTimelineEventIndex(
+  hoveredValue: TimestampedValue,
+  timelineEvents: TimelineEventConfig[]
+) {
+  const valueSpanStartOfDay = startOfDayInSeconds(
+    isDateValue(hoveredValue)
+      ? hoveredValue.date_unix
+      : hoveredValue.date_start_unix
+  );
+
+  const valueSpanEndOfDay = endOfDayInSeconds(
+    isDateValue(hoveredValue)
+      ? hoveredValue.date_unix
+      : hoveredValue.date_end_unix
+  );
+
+  /**
+   * Loop over the timeline events and see if the hovered value falls within its
+   * timespan. By assuming these timespans never overlap, we can exist on the
+   * first match and return a single index.
+   *
+   * Timeline events could overlap each other, therefore reverse the lookup to
+   * match later events first.
+   */
+  for (const [index, event] of [...timelineEvents].reverse().entries()) {
+    const start = startOfDayInSeconds(event.start);
+    const end = endOfDayInSeconds(event.end || event.start);
+
+    if (valueSpanStartOfDay < end && start < valueSpanEndOfDay) {
+      return timelineEvents.length - 1 - index;
     }
   }
 }

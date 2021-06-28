@@ -23,7 +23,7 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmhoog />
-        {formatPercentage(value.difference, options)}% {diffText.meer}
+        {formatPercentage(value.difference, options)} {diffText.meer}
       </Difference>
     );
   }
@@ -31,7 +31,7 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmlaag />
-        {formatPercentage(-value.difference, options)}% {diffText.minder}
+        {formatPercentage(-value.difference, options)} {diffText.minder}
       </Difference>
     );
   }
@@ -43,11 +43,8 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   );
 }
 
-const Difference = styled.span<{ color: string }>((x) =>
+const Difference = styled.div<{ color: string }>((x) =>
   css({
-    whiteSpace: 'nowrap',
-    display: 'inline-block',
-
     svg: {
       color: x.color,
       mr: 1,

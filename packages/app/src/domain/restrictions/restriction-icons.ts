@@ -58,4 +58,10 @@ export const restrictionIcons: Record<string, string | null> = {
   horeca_evenementen: 'horeca_evenementen.svg',
   kunstcultuur_musea: 'kunstcultuur_musea.svg',
   ontmoetingen_bezoek: 'ontmoetingen_bezoek.svg',
+  afstand_sporten: 'afstand-sporten.svg',
+  alcohol_verkoop: 'alcohol-verkoop.svg',
+  max_aantal_bezoekers: 'max-aantal-bezoekers.svg',
+  meerdaagse_evenementen: 'meerdaagse-evenementen.svg',
+  openingstijden: 'openingstijden.svg',
+  toegangsbewijzen: 'toegangsbewijzen.svg',
 };

@@ -1,3 +1,5 @@
+import { TimelineEventConfig } from '../components/timeline';
+
 export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number;
@@ -5,6 +7,7 @@ export interface DataOptions {
   benchmark?: BenchmarkConfig;
   timespanAnnotations?: TimespanAnnotationConfig[];
   timeAnnotations?: TimeAnnotationConfig[];
+  timelineEvents?: TimelineEventConfig[];
 }
 
 export interface BenchmarkConfig {

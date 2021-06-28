@@ -4,6 +4,7 @@ type ArticlePageSchema =
   | 'hospitalPage'
   | 'intensiveCarePage'
   | 'positiveTestsPage'
+  | 'in_positiveTestsPage'
   | 'reproductionPage'
   | 'sewerPage'
   | 'vaccinationsPage'

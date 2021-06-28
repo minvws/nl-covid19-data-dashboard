@@ -109,6 +109,7 @@ export const colors = {
   silver: '#c4c4c4',
   lightGray: '#dfdfdf',
   tileGray: '#f8f8f8',
+  labelGray: '#666666',
   annotation: '#595959',
   header: '#cd005a',
   notification: '#cd005a',
@@ -186,6 +187,7 @@ export const colors = {
       epsilon: multiseries.yellow_dark,
       theta: multiseries.turquoise_dark,
       kappa: multiseries.magenta,
+      lambda: multiseries.magenta_dark,
       other: '#808080',
     },
 

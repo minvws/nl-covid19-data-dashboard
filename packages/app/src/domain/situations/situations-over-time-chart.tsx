@@ -63,6 +63,7 @@ export function SituationsOverTimeChart({
         onReset={clear}
       />
       <TimeSeriesChart
+        accessibility={{ key: 'situations_over_time_chart' }}
         values={values}
         timeframe={timeframe}
         dataOptions={{ timespanAnnotations, isPercentage: true }}

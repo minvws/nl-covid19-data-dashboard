@@ -103,7 +103,7 @@ export function CategoricalBarScale({
       {!hideLegend && (
         <Box mb={3}>
           {barPieces.map((category) => (
-            <Fragment key={category.name}>
+            <Box as="span" style={{ whiteSpace: 'nowrap' }} key={category.name}>
               {/* 0.25px offset is used for sharper rendering of the circle */}
               <Box
                 display="inline-block"
@@ -121,7 +121,7 @@ export function CategoricalBarScale({
               >
                 {category.name}
               </InlineText>
-            </Fragment>
+            </Box>
           ))}
         </Box>
       )}

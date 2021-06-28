@@ -1,10 +1,12 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import {
   InteractiveLegend,
   SelectOption,
 } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { SeriesIcon } from '~/components/time-series-chart/components/series-icon';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
@@ -15,6 +17,11 @@ import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
 
 interface InfectedPerAgeGroup {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   values: NlTestedPerAgeGroupValue[];
   timeframe: 'all' | '5weeks';
 }
@@ -22,6 +29,7 @@ interface InfectedPerAgeGroup {
 export function InfectedPerAgeGroup({
   values,
   timeframe,
+  accessibility,
 }: InfectedPerAgeGroup) {
   const { siteText } = useIntl();
   const { list, toggle, clear } = useList<string>();
@@ -46,14 +54,6 @@ export function InfectedPerAgeGroup({
       };
     });
 
-  const underReportedLegendItem: LegendItem = {
-    shape: 'square',
-    color: colors.data.underReported,
-    label: text.line_chart_legend_inaccurate_label,
-  };
-
-  /* Filter for each config group */
-
   /**
    * Chart:
    * - when nothing selected: all items
@@ -71,17 +71,21 @@ export function InfectedPerAgeGroup({
   );
 
   /* Static legend contains always enabled items and the under reported item */
-  const staticLegendItems: LegendItem[] = seriesConfig
+  /* Static legend contains always enabled items and the under reported item */
+  const staticLegendItems = seriesConfig
     .filter((item) => alwayEnabled.includes(item.metricProperty))
-    .map(
-      (item): LegendItem => ({
-        label: item.label,
-        shape: item.type,
-        color: item.color,
-        style: item.style,
-      })
-    )
-    .concat([underReportedLegendItem]);
+    .map<LegendItem>((item) => ({
+      label: item.label,
+      shape: 'custom' as const,
+      shapeComponent: <SeriesIcon config={item} />,
+    }))
+    .concat([
+      {
+        shape: 'square' as const,
+        color: colors.data.underReported,
+        label: text.line_chart_legend_inaccurate_label,
+      },
+    ]);
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;
@@ -96,6 +100,7 @@ export function InfectedPerAgeGroup({
         onReset={clear}
       />
       <TimeSeriesChart
+        accessibility={accessibility}
         values={values}
         timeframe={timeframe}
         seriesConfig={chartConfig}

@@ -16,6 +16,10 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '~/utils/use-unique-id';
+import {
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 import { Path } from './path';
 import {
   ChoroplethTooltipPlacement,
@@ -30,6 +34,11 @@ export type TooltipSettings = {
 };
 
 type TProps<T1, T3> = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   initialWidth?: number;
   minHeight?: number;
   // This is the main feature collection that displays the features that will
@@ -130,6 +139,7 @@ const ChoroplethMap: <T1, T3>(
   }
 ) => JSX.Element | null = memo((props) => {
   const {
+    accessibility,
     featureCollection,
     hovers,
     boundingBox,
@@ -137,7 +147,6 @@ const ChoroplethMap: <T1, T3>(
     renderHover,
     setTooltip,
     hoverRef,
-    description,
     renderHighlight,
     minHeight = 500,
     initialWidth = 0.9 * minHeight,
@@ -151,11 +160,12 @@ const ChoroplethMap: <T1, T3>(
     minHeight
   );
 
+  const annotations = useAccessibilityAnnotations(accessibility);
+
   const width = responsive.width;
   const height = Math.min(responsive.height, width * ratio);
 
   const clipPathId = useUniqueId();
-  const dataDescriptionId = useUniqueId();
 
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
@@ -210,11 +220,11 @@ const ChoroplethMap: <T1, T3>(
 
   return (
     <>
-      <span id={dataDescriptionId} style={{ display: 'none' }}>
-        {description}
-      </span>
+      {annotations.descriptionElement}
       <ResponsiveContainer height={height}>
         <svg
+          {...annotations.props}
+          role="img"
           width={width}
           viewBox={`0 0 ${width} ${height}`}
           css={css({ display: 'block', bg: 'transparent', width: '100%' })}
@@ -227,7 +237,6 @@ const ChoroplethMap: <T1, T3>(
             isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
           }
           data-cy="choropleth-map"
-          aria-labelledby={dataDescriptionId}
         >
           <clipPath id={clipPathId}>
             <rect x={0} y={0} height={height} width={width} />

@@ -99,6 +99,9 @@ export function SituationsDataCoverageChoroplethTile({
           <Box height="100%">
             <ErrorBoundary>
               <SafetyRegionChoropleth
+                accessibility={{
+                  key: 'situations_has_sufficient_data_choropleth',
+                }}
                 data={data}
                 getLink={reverseRouter.vr.brononderzoek}
                 metricName="situations"

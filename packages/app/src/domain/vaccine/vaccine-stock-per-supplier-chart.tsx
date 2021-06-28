@@ -113,6 +113,9 @@ export function VaccineStockPerSupplierChart({
             onToggleItem={setSelected}
           />
           <TimeSeriesChart
+            accessibility={{
+              key: 'vaccine_stock_per_supplier_chart',
+            }}
             tooltipTitle={text.tooltip_title}
             values={values}
             seriesConfig={seriesConfig}

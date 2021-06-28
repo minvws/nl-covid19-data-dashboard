@@ -6,8 +6,10 @@ import {
   SafetyRegionProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { isEmpty } from 'lodash';
+import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
+import { isPresent } from 'ts-is-present';
+import GrafiekIcon from '~/assets/chart.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -64,9 +66,8 @@ import {
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import GrafiekIcon from '~/assets/chart.svg';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -157,6 +158,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.nl.positiefGetesteMensen()}
+                accessibility={{ key: 'topical_tested_overall' }}
               />
 
               <MiniTrendTile
@@ -177,6 +179,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.nl.ziekenhuisopnames()}
+                accessibility={{ key: 'topical_hospital_nice' }}
               />
 
               <TopicalVaccineTile data={data.vaccine_administered_total} />
@@ -200,6 +203,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     href: reverseRouter.gm.index(),
                     text: text.quick_links.links.gemeente,
+                  },
+                  {
+                    href: reverseRouter.in.index(),
+                    text: text.quick_links.links.internationaal,
                   },
                 ]}
                 dataSitemapHeader={text.data_sitemap_titel}
@@ -239,6 +246,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <Box>
                   <SafetyRegionChoropleth
+                    accessibility={{
+                      key: 'topical_escalation_levels_choropleth',
+                    }}
                     data={choropleth.vr}
                     getLink={reverseRouter.vr.risiconiveau}
                     metricName="escalation_levels"
@@ -284,7 +294,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </ChoroplethTwoColumnLayout>
 
               <Box mt={4}>
-                <EscalationLevelExplanations />
+                <EscalationLevelExplanations
+                  hasUnknownLevel={some(
+                    choropleth.vr.escalation_levels,
+                    (x) => !isPresent(x)
+                  )}
+                />
               </Box>
             </TopicalTile>
 
@@ -311,6 +326,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 <>
                   {selectedMap === 'municipal' && (
                     <MunicipalityChoropleth
+                      accessibility={{
+                        key: 'topical_municipal_tested_overall_choropleth',
+                      }}
                       data={choropleth.gm}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
@@ -327,6 +345,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   )}
                   {selectedMap === 'region' && (
                     <SafetyRegionChoropleth
+                      accessibility={{
+                        key: 'topical_region_tested_overall_choropleth',
+                      }}
                       data={choropleth.vr}
                       getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"

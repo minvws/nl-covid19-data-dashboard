@@ -1,12 +1,12 @@
 import css from '@styled-system/css';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
+import { CollapsibleButton } from '~/components/collapsible';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { EscalationLevel } from '../restrictions/type';
-import { CollapsibleButton } from '~/components/collapsible';
 
 type EscalationLevelExplanationProps = {
   level: EscalationLevel;
@@ -29,8 +29,13 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
     </Box>
   );
 }
+interface escalationLevelExplanationsProps {
+  hasUnknownLevel: boolean;
+}
 
-export function EscalationLevelExplanations() {
+export function EscalationLevelExplanations({
+  hasUnknownLevel,
+}: escalationLevelExplanationsProps) {
   const { siteText } = useIntl();
 
   return (
@@ -53,10 +58,14 @@ export function EscalationLevelExplanations() {
             level={4}
             explanation={siteText.escalatie_niveau.types['4'].toelichting}
           />
-          <EscalationLevelExplanation
-            level={null}
-            explanation={siteText.escalatie_niveau.types.onbekend.toelichting}
-          />
+
+          {hasUnknownLevel && (
+            <EscalationLevelExplanation
+              level={null}
+              explanation={siteText.escalatie_niveau.types.onbekend.toelichting}
+            />
+          )}
+
           <Box my={4}>
             <LinkWithIcon
               href="/over-risiconiveaus"
