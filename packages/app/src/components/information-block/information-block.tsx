@@ -40,7 +40,6 @@ export function InformationBlock({
       id={id}
       css={css({
         mt: id ? asResponsiveArray({ _: 4, md: 5 }) : 0,
-        // border: id ? '4px solid red' : '4px solid blue',
       })}
     >
       {title && (
