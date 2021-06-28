@@ -1,8 +1,6 @@
 import {
   getValuesInTimeframe,
   isDateSeries,
-  isDateSeries,
-  isDateSpanSeries,
   isDateSpanSeries,
   TimeframeOption,
   TimestampedValue,
