@@ -86,6 +86,7 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
         {text.percentage_gevonden_varianten}
       </InlineText>
       <TimeSeriesChart
+        accessibility={{ key: 'variants_over_time_chart' }}
         values={values}
         timeframe={'all'}
         seriesConfig={[

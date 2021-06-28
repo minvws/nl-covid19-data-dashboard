@@ -10,6 +10,10 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -27,6 +31,11 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
   data: Pick<Regions, K>;
   metricName: K;
   metricProperty: string;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   selectedCode?: string;
   highlightSelection?: boolean;
   tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
@@ -53,6 +62,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   props: SafetyRegionChoroplethProps<T, K>
 ) {
   const {
+    accessibility,
     data,
     selectedCode,
     metricName,
@@ -185,10 +195,15 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     return null;
   };
 
+  const choroplethAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_choropleth',
+  ]);
+
   return (
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
+        accessibility={choroplethAccessibility}
         minHeight={minHeight}
         description={dataDescription}
         featureCollection={regionGeo}

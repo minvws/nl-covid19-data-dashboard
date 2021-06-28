@@ -2,6 +2,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -18,6 +19,11 @@ type NumberProperty<T extends TimestampedValue> = {
 
 export type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> =
   {
+    /**
+     * The mandatory AccessibilityDefinition provides a reference to annotate the
+     * graph with a label and description.
+     */
+    accessibility: AccessibilityDefinition;
     icon: JSX.Element;
     title: string;
     text: ReactNode;
@@ -32,7 +38,16 @@ export function MiniTrendTile<T extends TimestampedValue>(
 ) {
   const { formatNumber } = useIntl();
 
-  const { icon, title, text, trendData, metricProperty, href, areas } = props;
+  const {
+    icon,
+    title,
+    text,
+    trendData,
+    metricProperty,
+    href,
+    areas,
+    accessibility,
+  } = props;
 
   const value = trendData[trendData.length - 1][metricProperty];
 
@@ -80,6 +95,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
         <div>
           <ErrorBoundary>
             <TimeSeriesChart
+              accessibility={accessibility}
               initialWidth={400}
               minHeight={sm ? 180 : 140}
               timeframe="5weeks"

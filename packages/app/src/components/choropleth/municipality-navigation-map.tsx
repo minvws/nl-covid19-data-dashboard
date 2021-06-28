@@ -96,6 +96,10 @@ export function MunicipalityNavigationMap<T>(
     <div css={css({ bg: 'transparent', position: 'relative', width: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
+        accessibility={{
+          key: 'municipality_navigation_map',
+          features: ['keyboard_choropleth'],
+        }}
         featureCollection={municipalGeo}
         hovers={municipalGeo}
         boundingBox={countryGeo}

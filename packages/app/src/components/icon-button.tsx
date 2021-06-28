@@ -9,10 +9,14 @@ interface IconButtonProps {
   title: string;
   color?: string;
   onClick?: (evt: React.MouseEvent) => void;
+  padding?: number | string;
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ children, size, title, color = 'currentColor', onClick }, ref) => {
+  (
+    { children, size, title, color = 'currentColor', onClick, padding },
+    ref
+  ) => {
     return (
       <StyledIconButton
         ref={ref}
@@ -21,6 +25,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         onClick={onClick}
         size={size}
         color={color}
+        padding={padding}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
         {children}
@@ -29,9 +34,13 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   }
 );
 
-const StyledIconButton = styled.button<{ color: string; size: number }>((x) =>
+const StyledIconButton = styled.button<{
+  color: string;
+  size: number;
+  padding?: number | string;
+}>((x) =>
   css({
-    p: 0,
+    p: x.padding ?? 0,
     m: 0,
     bg: 'transparent',
     border: 'none',

@@ -9,11 +9,16 @@ import styled from 'styled-components';
 
 interface VisuallyHiddenProps {
   children: ReactNode;
+  id?: string;
   as?: ComponentProps<typeof StyledVisuallyHidden>['as'];
 }
 
-export function VisuallyHidden({ children, as }: VisuallyHiddenProps) {
-  return <StyledVisuallyHidden as={as}>{children}</StyledVisuallyHidden>;
+export function VisuallyHidden({ children, as, id }: VisuallyHiddenProps) {
+  return (
+    <StyledVisuallyHidden as={as} id={id}>
+      {children}
+    </StyledVisuallyHidden>
+  );
 }
 
 const StyledVisuallyHidden = styled.div(

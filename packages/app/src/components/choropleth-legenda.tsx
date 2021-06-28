@@ -36,10 +36,7 @@ export function ChoroplethLegenda({
           {title}
         </Heading>
       )}
-      <List
-        aria-label="legend"
-        hasValueAnnotation={valueAnnotation ? true : false}
-      >
+      <List hasValueAnnotation={valueAnnotation ? true : false}>
         {thresholds.map(({ color, threshold, label, endLabel }, index) => {
           const isFirst = index === 0;
           const isLast = index === thresholds.length - 1;
