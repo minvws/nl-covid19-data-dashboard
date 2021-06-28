@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
 import Varianten from '~/assets/varianten.svg';
 import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -145,9 +144,7 @@ export default function CovidVariantenPage(
               source: text.bronnen.rivm,
             }}
           >
-            {isDefined(data.variants.values) && (
-              <VariantsOverTime values={data.variants.values} />
-            )}
+            <VariantsOverTime values={data.variants.values} />
           </ChartTile>
         </TileList>
       </NationalLayout>
