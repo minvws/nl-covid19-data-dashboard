@@ -46,7 +46,25 @@ const testDocuments = [
           metricData.values,
           'all',
           new Date()
-        );
+        ).map((x, index) => ({
+          /**
+           * Map the mock data timestamps to Date objects for CMS
+           */
+          _type: 'timelineEvent',
+          _key: `index-${index}`,
+          title: {
+            _type: 'localeString',
+            nl: x.title,
+            en: x.title,
+          },
+          description: {
+            _type: 'localeString',
+            nl: x.description,
+            en: x.description,
+          },
+          date: new Date(x.start * 1000).toDateString(),
+          dateEnd: x.end ? new Date(x.end * 1000).toDateString() : undefined,
+        }));
 
         console.log('timelineEvents', timelineEvents);
 
@@ -80,10 +98,13 @@ function getJsonFilenameForScope(scope: string) {
     case 'nl':
       return 'NL.json';
     case 'vr':
-      return 'VR09.json';
+      return 'getM09.json';
     case 'gm':
       return 'GM0344.json';
     default:
       throw new Error(`Unknown scope ${scope}`);
   }
 }
+
+function formatDate(date: Date) {
+  return [date.getFullYear(), date.getMonth(), date.getDate()]
