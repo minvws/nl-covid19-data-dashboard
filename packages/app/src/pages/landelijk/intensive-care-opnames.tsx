@@ -43,7 +43,6 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
 
   const text = siteText.ic_opnames_per_dag;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   const { selectedNlData: data, content, lastGenerated } = props;
   const dataIntake = data.intensive_care_nice;
@@ -132,9 +131,11 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'intensive_care_admissions_over_time_chart',
+                }}
                 values={dataIntake.values}
                 timeframe={timeframe}
-                ariaLabelledBy={graphDescriptions.intensive_care_opnames}
                 dataOptions={{
                   benchmark: {
                     value: 10,
@@ -179,6 +180,9 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <AdmissionsPerAgeGroup
+                accessibility={{
+                  key: 'intensive_care_admissions_per_age_group_over_time_chart',
+                }}
                 values={data.intensive_care_nice_per_age_group.values}
                 timeframe={timeframe}
               />
@@ -193,6 +197,9 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'intensive_care_beds_occupied_over_time_chart',
+                }}
                 values={data.intensive_care_lcps.values}
                 timeframe={timeframe}
                 dataOptions={{

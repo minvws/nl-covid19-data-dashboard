@@ -66,6 +66,9 @@ export function TopicalVaccineTile({ data, areas }: TopicalVaccineProps) {
         <div>
           <ErrorBoundary>
             <VaccineAdministrationsOverTimeChart
+              accessibility={{
+                key: 'topical_vaccine_administrations_over_time',
+              }}
               title={text.title}
               values={data.values}
             />

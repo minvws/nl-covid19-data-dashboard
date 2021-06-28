@@ -33,6 +33,10 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
+import {
   calculateSeriesMaximum,
   getSeriesData,
   getTotalSumForMetricProperty,
@@ -98,6 +102,7 @@ export type Config<T extends TimestampedValue> = {
 };
 
 export type StackedChartProps<T extends TimestampedValue> = {
+  accessibility: AccessibilityDefinition;
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -124,6 +129,7 @@ export function StackedChart<T extends TimestampedValue>(
    * same name.
    */
   const {
+    accessibility,
     values,
     config,
     initialWidth = 840,
@@ -152,6 +158,8 @@ export function StackedChart<T extends TimestampedValue>(
     formatPercentage,
     formatDateSpan,
   } = useIntl();
+
+  const annotations = useAccessibilityAnnotations(accessibility);
 
   const {
     tooltipData,
@@ -486,7 +494,9 @@ export function StackedChart<T extends TimestampedValue>(
       <Box height="100%">
         <ResponsiveContainer>
           <Box position="relative">
+            {annotations.descriptionElement}
             <svg
+              {...annotations.props}
               width={width}
               viewBox={`0 0 ${width} ${height}`}
               css={css({ width: '100%' })}
