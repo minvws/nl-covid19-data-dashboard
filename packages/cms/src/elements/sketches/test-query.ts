@@ -1,4 +1,3 @@
-import { snakeCase } from 'change-case';
 import { omitBy } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { inspect } from 'util';

@@ -31,16 +31,6 @@ export function elementsListItem() {
                       .title(scope)
                       .id(scope)
                       .child(
-                        //  S.documentList()
-                        //   .id(`${scope}-metric`)
-                        //   .title('Metric')
-                        //   .defaultOrdering([
-                        //     { field: 'metricName', direction: 'asc' },
-                        //   ])
-                        //   .filter('scope == $scope')
-                        //   .params({ scope })
-                        //   .child((id) =>
-
                         S.documentList()
                           .id(`${scope}-element`)
                           .title('Element')

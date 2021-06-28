@@ -1,4 +1,3 @@
-import { useTimelineHoverHandler } from '@corona-dashboard/app/src/components/time-series-chart/components/timeline/logic';
 import { createTimelineEventsMockData } from '@corona-dashboard/app/src/components/time-series-chart/mock-timeline-events';
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';

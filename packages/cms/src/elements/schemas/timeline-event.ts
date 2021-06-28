@@ -1,3 +1,5 @@
+import { isDefined } from 'ts-is-present';
+
 const REQUIRED = (x: any) => x.required();
 const DATE_FORMAT = 'YYYY-MM-DD';
 
@@ -42,4 +44,17 @@ export const timelineEvent = {
       },
     },
   ],
+  preview: {
+    select: {
+      title: 'title.nl',
+      date: 'date',
+      dateEnd: 'dateEnd',
+    },
+    prepare(x: { title: string; date: string; dateEnd?: string }) {
+      return {
+        title: x.title,
+        subtitle: [x.date, x.dateEnd].filter(isDefined).join(' tot '),
+      };
+    },
+  },
 };
