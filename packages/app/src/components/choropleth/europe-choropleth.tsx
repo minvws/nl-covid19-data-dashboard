@@ -4,9 +4,12 @@ import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
 import { InternationalListType } from '~/domain/internationaal/types';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { Box } from '../base';
 import { Choropleth } from './choropleth';
-import { useIntlChoroplethColorScale } from './hooks';
+import { useIntlChoroplethColorScale, useTabInteractiveButton } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
@@ -71,6 +74,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
   props: EuropeChoroplethProps<T>
 ) {
   const { data, joinProperty, metricProperty, tooltipContent } = props;
+  const { siteText } = useIntl();
 
   const getJoinedDataItem = useCallback(
     (joinId: string) => {
@@ -80,6 +84,13 @@ export function EuropeChoropleth<T extends InternationalListType>(
   );
 
   const getFillColor = useIntlChoroplethColorScale(metricProperty);
+
+  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
+    useTabInteractiveButton(
+      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+        subject: '    landen',
+      })
+    );
 
   const renderFeature = useCallback(
     (
@@ -123,17 +134,16 @@ export function EuropeChoropleth<T extends InternationalListType>(
 
       return isDefined(item) ? (
         <HoverPathLink
-          isTabInteractive={false}
+          isTabInteractive={isTabInteractive}
           key={`${ISO_A3}_${index}`}
           title={ISO_A3}
           id={ISO_A3}
           pathData={path}
-          onFocus={() => undefined}
-          onBlur={() => undefined}
+          {...anchorEventHandlers}
         />
       ) : null;
     },
-    [getJoinedDataItem]
+    [getJoinedDataItem, isTabInteractive, anchorEventHandlers]
   );
 
   const getTooltipContent = useCallback(
@@ -148,26 +158,29 @@ export function EuropeChoropleth<T extends InternationalListType>(
   );
 
   return (
-    <div
-      css={css({
-        bg: 'transparent',
-        position: 'relative',
-        height: '100%',
-        border: '1px solid',
-        borderColor: 'silver',
-      })}
-    >
-      <Choropleth
-        accessibility={{ key: 'behavior_choropleths' }}
-        minHeight={600}
-        description={'dataDescription'}
-        featureCollection={europeGeo}
-        hovers={actuallyEurope}
-        boundingBox={focusEurope}
-        renderFeature={renderFeature}
-        renderHover={renderHover}
-        getTooltipContent={getTooltipContent}
-      />
-    </div>
+    <Box position="relative">
+      {tabInteractiveButton}
+      <div
+        css={css({
+          bg: 'transparent',
+          position: 'relative',
+          height: '100%',
+          border: '1px solid',
+          borderColor: 'silver',
+        })}
+      >
+        <Choropleth
+          accessibility={{ key: 'behavior_choropleths' }}
+          minHeight={600}
+          description={'dataDescription'}
+          featureCollection={europeGeo}
+          hovers={actuallyEurope}
+          boundingBox={focusEurope}
+          renderFeature={renderFeature}
+          renderHover={renderHover}
+          getTooltipContent={getTooltipContent}
+        />
+      </div>
+    </Box>
   );
 }
