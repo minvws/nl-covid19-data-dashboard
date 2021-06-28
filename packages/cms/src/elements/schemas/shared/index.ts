@@ -16,10 +16,6 @@ export const commonFields = [
     type: 'string',
     readOnly: true,
     hidden: true,
-    options: {
-      list: scopes, // <-- predefined values
-      // layout: 'radio', // <-- defaults to 'dropdown'
-    },
   },
   {
     title: 'Metric Name',
@@ -61,14 +57,16 @@ export const commonPreview = {
   },
 };
 
+/**
+ * By maping the metric name to a title we can make the UI a little more
+ * user-friendly. We could take this further by also mapping type names like
+ * choropleth and maybe even introducing a specific icon for each element type.
+ */
 const titleForMetricName: Record<string, string | undefined> = {
   tested_overall: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
 };
 
-/**
- * By maping the metric name to a title, we can make the UI a little more comm-friendly
- */
 function getTitleForMetricName(metricName: string) {
   return titleForMetricName[metricName] || metricName;
 }
