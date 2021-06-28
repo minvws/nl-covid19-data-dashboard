@@ -29,7 +29,7 @@ export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
   );
 
   const dateText = replaceVariablesInText(commonText.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(data.date_of_insertion_unix, 'medium'),
+    dateOfReport: formatDateFromSeconds(data.date_start_unix, 'medium'),
   });
 
   return (
