@@ -1,4 +1,4 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -8,7 +8,6 @@ import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { TimeframeOption } from '~/utils/timeframe';
 import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
