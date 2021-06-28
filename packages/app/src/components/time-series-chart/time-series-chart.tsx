@@ -80,7 +80,8 @@ export type TimeSeriesChartProps<
   C extends SeriesConfig<T>
 > = {
   /**
-   * Accessibility options are not optional
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
   tooltipTitle?: string;

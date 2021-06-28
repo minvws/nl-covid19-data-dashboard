@@ -20,7 +20,6 @@ import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
-import { VisuallyHidden } from '../visually-hidden';
 import { Path } from './path';
 import {
   ChoroplethTooltipPlacement,

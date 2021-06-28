@@ -2,9 +2,10 @@ import { assert } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 
 export interface AccessibilityDefinition {
-  key: string;
+  key: keyof SiteText['accessibility']['charts'];
   features?: AccesssibilityFeature[];
 }
 
