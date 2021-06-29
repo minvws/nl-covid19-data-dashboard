@@ -4,20 +4,20 @@
       "title": "in_tested_overall_value",
       "additionalProperties": false,
       "required": [
-        "date_unix",
-        "infected",
-        "infected_per_100k",
+        "infected_per_100k_average",
+        "date_start_unix",
+        "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "date_unix": {
+        "infected_per_100k_average": {
+          "type": "number"
+        },
+        "date_start_unix": {
           "type": "integer"
         },
-        "infected": {
-          "type": "number"
-        },
-        "infected_per_100k": {
-          "type": "number"
+        "date_end_unix": {
+          "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"

@@ -32,7 +32,7 @@ export function getSchemaInfo(
       customValidations: [
         createChoroplethValidation(
           path.join(defaultJsonDirectory, 'IN_COLLECTION.json'),
-          'vrcode'
+          'country_code'
         ),
         validateMovingAverages,
       ],
