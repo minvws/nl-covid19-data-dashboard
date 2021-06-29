@@ -114,13 +114,13 @@
           "type": "boolean"
         },
         "lambda_percentage": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "lambda_occurrence": {
-          "type": "integer"
+          "type": ["integer", "null"]
         },
         "lambda_is_variant_of_concern": {
-          "type": "boolean"
+          "type": ["boolean", "null"]
         },
         "other_percentage": {
           "type": "number"

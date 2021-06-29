@@ -20,7 +20,6 @@ const variants = [
   'epsilon',
   'theta',
   'kappa',
-  'lambda',
   'other',
 ] as const;
 
@@ -29,7 +28,7 @@ export type VariantRow = {
   countryOfOrigin: string;
   occurrence: number;
   percentage: number;
-  difference?: DifferenceDecimal;
+  difference: DifferenceDecimal;
   color: string;
 };
 
