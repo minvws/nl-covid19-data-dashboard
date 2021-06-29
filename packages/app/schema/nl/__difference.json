@@ -60,9 +60,6 @@
     "corona_melder_app_warning__count": {
       "$ref": "#/definitions/diff_integer"
     },
-    "corona_melder_app_download__count": {
-      "$ref": "#/definitions/diff_integer"
-    },
     "disability_care__newly_infected_people": {
       "$ref": "#/definitions/diff_integer"
     },
@@ -125,7 +122,6 @@
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
-    "corona_melder_app_download__count",
     "corona_melder_app_warning__count",
     "disability_care__newly_infected_people",
     "disability_care__infected_locations_total",
