@@ -160,6 +160,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
           {sewerSplitAreaChart.isEnabled ? (
             <NewSewerChart
+              accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
               dataAverages={data.sewer}
               text={{
                 title: text.linechart_titel,
@@ -181,6 +182,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             >
               {(timeframe) => (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'sewer_particles_over_time',
+                  }}
                   values={sewerAverages.values}
                   timeframe={timeframe}
                   seriesConfig={[
@@ -220,6 +224,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           >
             {selectedMap === 'municipal' ? (
               <MunicipalityChoropleth
+                accessibility={{
+                  key: 'sewer_municipal_choropleth',
+                }}
                 data={choropleth.gm}
                 getLink={reverseRouter.gm.rioolwater}
                 metricName="sewer"
@@ -230,6 +237,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               />
             ) : (
               <SafetyRegionChoropleth
+                accessibility={{
+                  key: 'sewer_region_choropleth',
+                }}
                 data={choropleth.vr}
                 getLink={reverseRouter.vr.rioolwater}
                 metricName="sewer"

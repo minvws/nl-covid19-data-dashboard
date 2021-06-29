@@ -109,6 +109,7 @@ export const colors = {
   silver: '#c4c4c4',
   lightGray: '#dfdfdf',
   tileGray: '#f8f8f8',
+  labelGray: '#666666',
   annotation: '#595959',
   header: '#cd005a',
   notification: '#cd005a',

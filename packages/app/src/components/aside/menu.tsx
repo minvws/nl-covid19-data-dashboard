@@ -7,11 +7,11 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
+import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { Category } from './category';
 import { Title } from './title';
-import { asResponsiveArray } from '~/style/utils';
 
 type Url = UrlObject | string;
 
@@ -126,7 +126,7 @@ export function MetricMenuButtonLink({
 
 function isActivePath(router: NextRouter, href: Url) {
   const currentPath = (router.asPath || '/').split('?')[0];
-  const hrefPath = resolveHref(currentPath, href).split('?')[0];
+  const hrefPath = resolveHref(router, href).split('?')[0];
 
   return currentPath === hrefPath;
 }

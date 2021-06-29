@@ -181,6 +181,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_over_time_chart',
+                }}
                 values={data.tested_overall.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -232,6 +235,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <MunicipalityChoropleth
+              accessibility={{
+                key: 'confirmed_cases_choropleth',
+              }}
               selectedCode={data.code}
               data={choropleth.gm}
               getLink={reverseRouter.gm.positiefGetesteMensen}

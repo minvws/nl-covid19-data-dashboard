@@ -98,6 +98,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
             }
           >
             <SafetyRegionChoropleth
+              accessibility={{ key: 'escalation_levels_choropleth' }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.index}
               metricName="escalation_levels"

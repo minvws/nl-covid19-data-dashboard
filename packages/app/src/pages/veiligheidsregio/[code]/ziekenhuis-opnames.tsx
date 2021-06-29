@@ -149,6 +149,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <MunicipalityChoropleth
+              accessibility={{
+                key: 'hospital_admissions_choropleth',
+              }}
               selectedCode={selectedMunicipalCode}
               highlightSelection={false}
               data={choropleth.gm}
@@ -169,6 +172,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_admissions_over_time_chart',
+                }}
                 values={data.hospital_nice.values}
                 timeframe={timeframe}
                 seriesConfig={[

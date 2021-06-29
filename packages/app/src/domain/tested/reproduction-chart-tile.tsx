@@ -48,6 +48,9 @@ export function ReproductionChartTile({
     >
       {(timeframe) => (
         <TimeSeriesChart
+          accessibility={{
+            key: 'reproduction_line_chart',
+          }}
           values={values}
           timeframe={timeframe}
           seriesConfig={[

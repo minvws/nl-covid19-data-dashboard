@@ -4,15 +4,24 @@ import {
   TimestampedValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ReactNode } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import {
+  ComponentProps,
+  ReactNode,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
-import { Box } from '~/components/base';
+import { Box, MotionBox } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
+import { TimelineMarker } from '../timeline';
 import { TooltipData } from './types';
 
 export function TooltipSeriesList<T extends TimestampedValue>({
@@ -30,12 +39,21 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     markNearestPointOnly,
     displayTooltipValueOnly,
     timespanAnnotation,
+    timelineEvent,
     valueMinWidth,
   } = tooltipData;
 
   const { formatDateFromSeconds } = useIntl();
 
   const formatSeriesValue = useFormatSeriesValue();
+
+  /**
+   * The listRef/listWidth is used to apply the width of the list to the tooltip
+   * annotation components. This prevent a jittery tooltip when
+   * moving between samples with/without annotations.
+   */
+  const [listRef, listWidth] = useInitialWidth<HTMLOListElement>();
+  const isMounted = useIsMounted();
 
   const getDateStringFromValue = (value: TimestampedValue) => {
     if (isDateValue(value)) {
@@ -61,12 +79,45 @@ export function TooltipSeriesList<T extends TimestampedValue>({
     <section>
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
-      {timespanAnnotation && (
-        <Text fontSize={0} color={colors.annotation} textAlign={'center'}>
-          {timespanAnnotation.shortLabel || timespanAnnotation.label}
-        </Text>
+      {!displayTooltipValueOnly && isMounted && (
+        /**
+         * The width of the list is potentially influenced by long annotations,
+         * therefore mount these elements after the list-width has been measured.
+         */
+        <Box width={listWidth} maxWidth="100%">
+          <AnimatePresence>
+            {timespanAnnotation && (
+              <AppearTransition key="1">
+                <Text fontSize={0} color={colors.annotation} textAlign="center">
+                  {timespanAnnotation.shortLabel || timespanAnnotation.label}
+                </Text>
+              </AppearTransition>
+            )}
+            {timelineEvent && (
+              <AppearTransition mx={-3} key="2">
+                <Box
+                  fontWeight="bold"
+                  px={3}
+                  pb={2}
+                  mb={2}
+                  borderBottom="1px solid"
+                  borderBottomColor="lightGray"
+                >
+                  <IconRow icon={<TimelineMarker isHighlighted size={10} />}>
+                    {timelineEvent.title}
+                  </IconRow>
+                </Box>
+              </AppearTransition>
+            )}
+          </AnimatePresence>
+        </Box>
       )}
-      <TooltipList hasTwoColumns={hasTwoColumns} valueMinWidth={valueMinWidth}>
+
+      <TooltipList
+        hasTwoColumns={hasTwoColumns}
+        valueMinWidth={valueMinWidth}
+        ref={listRef}
+      >
         {seriesConfig.map((x, index) => {
           /**
            * The key is unique for every date to make sure a screenreader
@@ -151,7 +202,7 @@ export function TooltipSeriesList<T extends TimestampedValue>({
 }
 
 interface TooltipListItemProps {
-  children: ReactNode;
+  children?: ReactNode;
   label?: string;
   icon?: ReactNode;
   displayTooltipValueOnly?: boolean;
@@ -172,7 +223,7 @@ function TooltipListItem({
   ) : (
     <Box
       as="li"
-      spacing={icon ? 2 : 0}
+      spacing={2}
       spacingHorizontal
       display="flex"
       alignItems="stretch"
@@ -189,12 +240,7 @@ function TooltipListItem({
           </TooltipEntryContainer>
         </Box>
       ) : (
-        <>
-          {icon && (
-            <Box flexShrink={0} display="flex" alignItems="baseline" mt={1}>
-              {icon}
-            </Box>
-          )}
+        <IconRow icon={icon}>
           <Box flexGrow={1}>
             <TooltipEntryContainer>
               <InlineText mr={2}>{label}:</InlineText>
@@ -203,7 +249,7 @@ function TooltipListItem({
               </TooltipEntryValue>
             </TooltipEntryContainer>
           </Box>
-        </>
+        </IconRow>
       )}
     </Box>
   );
@@ -242,8 +288,54 @@ export const TooltipList = styled.ol<{
   })
 );
 
+function IconRow({ icon, children }: { icon: ReactNode; children: ReactNode }) {
+  return (
+    <Box
+      display="flex"
+      alignItems="stretch"
+      spacing={2}
+      spacingHorizontal
+      width="100%"
+    >
+      {icon && (
+        <Box
+          width="1em"
+          mt="2px"
+          flexShrink={0}
+          display="flex"
+          alignItems="baseline"
+          justifyContent="center"
+        >
+          {icon}
+        </Box>
+      )}
+      <Box width="100%">{children}</Box>
+    </Box>
+  );
+}
+
+function AppearTransition(props: ComponentProps<typeof MotionBox>) {
+  return (
+    <MotionBox
+      {...props}
+      initial={{ height: 0, opacity: 0 }}
+      exit={{ height: 0, opacity: 0 }}
+      animate={{ height: 'auto', opacity: 1 }}
+      overflow="hidden"
+    />
+  );
+}
+
 function getDateUnixString(value: TimestampedValue) {
   return 'date_unix' in value
     ? `${value.date_unix}`
     : `${value.date_start_unix}-${value.date_end_unix}`;
+}
+
+function useInitialWidth<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [width, setWidth] = useState<number>();
+  useLayoutEffect(() => setWidth(ref.current?.offsetWidth), []);
+
+  return [ref, width] as const;
 }
