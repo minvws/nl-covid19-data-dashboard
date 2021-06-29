@@ -172,10 +172,10 @@ export function EuropeChoropleth<T extends InternationalListType>(
         <Choropleth
           accessibility={{ key: 'behavior_choropleths' }}
           minHeight={600}
-          description={'dataDescription'}
           featureCollection={europeGeo}
           hovers={actuallyEurope}
           boundingBox={focusEurope}
+          boudingBoxPadding={{ top: 20, bottom: 20 }}
           renderFeature={renderFeature}
           renderHover={renderHover}
           getTooltipContent={getTooltipContent}

@@ -12,20 +12,19 @@ import {
   useState,
 } from 'react';
 import { colors } from '~/style/theme';
-import { useIsTouchDevice } from '~/utils/use-is-touch-device';
-import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { useUniqueId } from '~/utils/use-unique-id';
 import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { Path } from './path';
 import {
   ChoroplethTooltipPlacement,
   Tooltip,
 } from './tooltips/tooltip-container';
-import { countryGeo } from './topology';
 
 export type TooltipSettings = {
   left: number;
@@ -52,6 +51,12 @@ type TProps<T1, T3, T4> = {
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
+  boudingBoxPadding?: {
+    left?: number;
+    right?: number;
+    top?: number;
+    bottom?: number;
+  };
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   renderFeature: (
@@ -126,7 +131,7 @@ export function Choropleth<T1, T2, T3>({
   );
 }
 
-type FitSize = [[number, number], any];
+type FitExtent = [[[number, number], [number, number]], any];
 
 type ChoroplethMapProps<T1, T2, T3> = Omit<
   TProps<T1, T2, T3>,
@@ -154,6 +159,7 @@ const ChoroplethMap: <T1, T2, T3>(
     minHeight = 500,
     initialWidth = 0.9 * minHeight,
     showTooltipOnFocus,
+    boudingBoxPadding = {},
   } = props;
 
   const ratio = 1.2;
@@ -173,7 +179,16 @@ const ChoroplethMap: <T1, T2, T3>(
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
-  const fitSize: FitSize = [[width, height], boundingBox];
+  const fitExtent: FitExtent = [
+    [
+      [0 + (boudingBoxPadding.left ?? 0), 0 + (boudingBoxPadding.top ?? 0)],
+      [
+        width - (boudingBoxPadding.right ?? 0),
+        height - (boudingBoxPadding.bottom ?? 0),
+      ],
+    ],
+    boundingBox,
+  ];
 
   useEffect(() => {
     if (!showTooltipOnFocus) {
@@ -256,7 +271,7 @@ const ChoroplethMap: <T1, T2, T3>(
             <MercatorGroup
               data={featureCollection.features}
               render={renderFeature}
-              fitSize={fitSize}
+              fitExtent={fitExtent}
             />
 
             {outlines && (
@@ -271,7 +286,7 @@ const ChoroplethMap: <T1, T2, T3>(
                       strokeWidth={0.5}
                     />
                   )}
-                  fitSize={fitSize}
+                  fitExtent={fitExtent}
                 />
               </g>
             )}
@@ -281,7 +296,7 @@ const ChoroplethMap: <T1, T2, T3>(
                 <MercatorGroup
                   data={hovers.features}
                   render={renderHover}
-                  fitSize={fitSize}
+                  fitExtent={fitExtent}
                 />
               </g>
             )}
@@ -290,7 +305,7 @@ const ChoroplethMap: <T1, T2, T3>(
               <MercatorGroup
                 data={featureCollection.features}
                 render={renderHighlight}
-                fitSize={fitSize}
+                fitExtent={fitExtent}
               />
             )}
           </g>
@@ -300,25 +315,6 @@ const ChoroplethMap: <T1, T2, T3>(
   );
 });
 
-function Country({ fitSize }: { fitSize: FitSize }) {
-  return (
-    <g css={css({ pointerEvents: 'none' })}>
-      <MercatorGroup
-        data={countryGeo.features}
-        render={(_, path, index) => (
-          <Path
-            key={index}
-            pathData={path}
-            stroke={colors.silver}
-            strokeWidth={0.5}
-          />
-        )}
-        fitSize={fitSize}
-      />
-    </g>
-  );
-}
-
 interface MercatorGroupProps<G extends Geometry, P> {
   data: Feature<G, P>[];
   render: (
@@ -326,14 +322,14 @@ interface MercatorGroupProps<G extends Geometry, P> {
     path: string,
     index: number
   ) => React.ReactNode;
-  fitSize: FitSize;
+  fitExtent: FitExtent;
 }
 
 function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
-  const { data, fitSize, render } = props;
+  const { data, fitExtent, render } = props;
 
   return (
-    <Mercator data={data} fitSize={fitSize}>
+    <Mercator data={data} fitExtent={fitExtent}>
       {({ features }) => (
         <g>
           {features.map(
