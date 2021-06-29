@@ -2,7 +2,12 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "in",
-  "required": ["last_generated", "proto_name", "code", "tested_overall"],
+  "required": [
+    "last_generated",
+    "proto_name",
+    "country_code",
+    "tested_overall"
+  ],
   "additionalProperties": false,
   "properties": {
     "last_generated": {
