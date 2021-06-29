@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "regions_tested_overall",
+  "additionalProperties": false,
+  "required": [
+    "date_unix",
+    "country_code",
+    "infected",
+    "infected_per_100k",
+    "date_of_insertion_unix"
+  ],
+  "properties": {
+    "date_unix": {
+      "type": "integer"
+    },
+    "country_code": {
+      "type": "string",
+      "pattern": "^[A-Z]+$"
+    },
+    "infected_per_100k": {
+      "type": "number"
+    },
+    "infected": {
+      "type": "integer"
+    },
+    "date_of_insertion_unix": {
+      "type": "integer"
+    }
+  }
+}

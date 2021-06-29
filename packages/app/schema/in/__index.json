@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "in",
+  "required": ["last_generated", "proto_name", "code", "tested_overall"],
+  "additionalProperties": false,
+  "properties": {
+    "last_generated": {
+      "type": "string"
+    },
+    "proto_name": {
+      "type": "string",
+      "//": "We might want to use an enum here with country codes. We need the IN_ prefix for validation because all files end up in the same folder",
+      "pattern": "^IN_[A-Z]+$"
+    },
+    "country_code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "tested_overall": {
+      "$ref": "tested_overall.json"
+    }
+  }
+}
