@@ -212,7 +212,6 @@ export interface NationalDifference {
   nursing_home__deceased_daily: DifferenceInteger;
   reproduction__index_average: DifferenceDecimal;
   corona_melder_app_warning__count: DifferenceInteger;
-  corona_melder_app_download__count: DifferenceInteger;
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
