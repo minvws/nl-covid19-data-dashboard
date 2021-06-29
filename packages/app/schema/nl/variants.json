@@ -117,7 +117,7 @@
           "type": ["number", "null"]
         },
         "lambda_occurrence": {
-          "type": ["number", "null"]
+          "type": ["integer", "null"]
         },
         "lambda_is_variant_of_concern": {
           "type": ["boolean", "null"]
