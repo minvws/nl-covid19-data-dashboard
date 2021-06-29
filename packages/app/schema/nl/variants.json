@@ -120,7 +120,7 @@
           "type": ["number", "null"]
         },
         "lambda_is_variant_of_concern": {
-          "type": ["number", "null"]
+          "type": ["boolean", "null"]
         },
         "other_percentage": {
           "type": "number"
