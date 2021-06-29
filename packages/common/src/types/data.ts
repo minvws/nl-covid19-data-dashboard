@@ -850,7 +850,7 @@ export interface NlVariantsValue {
   kappa_is_variant_of_concern: boolean;
   lambda_percentage: number | null;
   lambda_occurrence: number | null;
-  lambda_is_variant_of_concern: number | null;
+  lambda_is_variant_of_concern: boolean | null;
   other_percentage: number;
   other_occurrence: number;
   other_is_variant_of_concern: boolean;
