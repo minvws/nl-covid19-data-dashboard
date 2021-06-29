@@ -88,7 +88,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
       replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-        subject: '    landen',
+        subject: 'landen',
       })
     );
 
@@ -134,6 +134,8 @@ export function EuropeChoropleth<T extends InternationalListType>(
 
       return isDefined(item) ? (
         <HoverPathLink
+          href="#"
+          isSelected={true}
           isTabInteractive={isTabInteractive}
           key={`${ISO_A3}_${index}`}
           title={ISO_A3}
@@ -179,6 +181,7 @@ export function EuropeChoropleth<T extends InternationalListType>(
           renderFeature={renderFeature}
           renderHover={renderHover}
           getTooltipContent={getTooltipContent}
+          showTooltipOnFocus={isTabInteractive}
         />
       </div>
     </Box>
