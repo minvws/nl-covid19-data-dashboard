@@ -24,7 +24,7 @@ interface InformationBlockProps {
   id?: string;
 }
 
-export function InformationBlock({
+export function PageInformationBlock({
   title,
   icon,
   description,

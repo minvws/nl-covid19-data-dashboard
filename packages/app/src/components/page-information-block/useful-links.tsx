@@ -9,6 +9,7 @@ import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
+
 interface usefulLinksProps {
   links: {
     title: string;
@@ -30,7 +31,6 @@ export function UsefulLinks({ links }: usefulLinksProps) {
       <InlineText
         mb={2}
         fontSize={2}
-        as="span"
         fontWeight="bold"
         css={css({ display: 'block' })}
       >
@@ -41,16 +41,13 @@ export function UsefulLinks({ links }: usefulLinksProps) {
           <ListItem key={index}>
             {isAbsoluteUrl(link.href) ? (
               <ExternalLink href={link.href}>
-                <TitleWidthIcon
-                  title={link.title}
-                  icon={<ExternalLinkIcon />}
-                />
+                <TitleWithIcon title={link.title} icon={<ExternalLinkIcon />} />
               </ExternalLink>
             ) : (
               <>
                 <Link href={link.href} passHref>
                   <a>
-                    <TitleWidthIcon
+                    <TitleWithIcon
                       title={link.title}
                       icon={<ChevronLargeIcon />}
                     />
@@ -65,13 +62,7 @@ export function UsefulLinks({ links }: usefulLinksProps) {
   );
 }
 
-function TitleWidthIcon({
-  title,
-  icon,
-}: {
-  title: string;
-  icon?: JSX.Element;
-}) {
+function TitleWithIcon({ title, icon }: { title: string; icon?: JSX.Element }) {
   const splittedWords = title.split(' ');
 
   return (

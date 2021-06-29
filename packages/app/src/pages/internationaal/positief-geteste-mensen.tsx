@@ -1,6 +1,6 @@
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
-import { InformationBlock } from '~/components/information-block';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
@@ -51,7 +51,7 @@ export default function PositiefGetesteMensenPage(
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
         <TileList>
-          <InformationBlock
+          <PageInformationBlock
             title={text.titel}
             icon={<Getest />}
             description={text.pagina_toelichting}

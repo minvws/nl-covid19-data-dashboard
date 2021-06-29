@@ -217,7 +217,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
-      <Box as="span" minWidth="1.8rem" mt="3px">
+      <Box minWidth="1.8rem" mt="3px">
         {icon}
       </Box>
 

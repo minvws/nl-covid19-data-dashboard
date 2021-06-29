@@ -21,7 +21,6 @@ export function Articles({ articles }: ArticlesProps) {
       <InlineText
         mb={2}
         fontSize={2}
-        as="span"
         fontWeight="bold"
         css={css({ display: 'block' })}
       >
