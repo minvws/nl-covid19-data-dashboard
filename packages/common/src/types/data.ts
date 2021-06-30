@@ -215,16 +215,15 @@ export interface NationalDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
-  variants__alpha_percentage?: DifferenceDecimal;
-  variants__beta_percentage?: DifferenceDecimal;
-  variants__gamma_percentage?: DifferenceDecimal;
-  variants__delta_percentage?: DifferenceDecimal;
-  variants__eta_percentage?: DifferenceDecimal;
-  variants__epsilon_percentage?: DifferenceDecimal;
-  variants__theta_percentage?: DifferenceDecimal;
-  variants__kappa_percentage?: DifferenceDecimal;
-  variants__lambda_percentage?: DifferenceDecimal;
-  variants__other_percentage?: DifferenceDecimal;
+  variants__alpha_percentage: DifferenceDecimal;
+  variants__beta_percentage: DifferenceDecimal;
+  variants__gamma_percentage: DifferenceDecimal;
+  variants__delta_percentage: DifferenceDecimal;
+  variants__eta_percentage: DifferenceDecimal;
+  variants__epsilon_percentage: DifferenceDecimal;
+  variants__theta_percentage: DifferenceDecimal;
+  variants__kappa_percentage: DifferenceDecimal;
+  variants__other_percentage: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -849,9 +848,9 @@ export interface NlVariantsValue {
   kappa_percentage: number;
   kappa_occurrence: number;
   kappa_is_variant_of_concern: boolean;
-  lambda_percentage: number;
-  lambda_occurrence: number;
-  lambda_is_variant_of_concern: boolean;
+  lambda_percentage: number | null;
+  lambda_occurrence: number | null;
+  lambda_is_variant_of_concern: boolean | null;
   other_percentage: number;
   other_occurrence: number;
   other_is_variant_of_concern: boolean;
