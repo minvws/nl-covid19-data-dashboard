@@ -1,7 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import { scaleThreshold } from '@visx/scale';
 import { useCallback, useMemo } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { internationalThresholds } from '../international-thresholds';
 
 export function useIntlChoroplethColorScale(
@@ -10,12 +10,12 @@ export function useIntlChoroplethColorScale(
 ) {
   const thresholds = internationalThresholds[metricProperty];
 
-  const colorScale = useMemo(() => {
-    assert(
-      Array.isArray(thresholds),
-      `thresholds is not of type Array: ${JSON.stringify(thresholds)}`
-    );
+  assert(
+    isDefined(thresholds),
+    `Could not find threshold data for metric property ${metricProperty}`
+  );
 
+  const colorScale = useMemo(() => {
     const domain = thresholds.map((t) => t.threshold);
     domain.shift();
     return scaleThreshold<number, string>()
