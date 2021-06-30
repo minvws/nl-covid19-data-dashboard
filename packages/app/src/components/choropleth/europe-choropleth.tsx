@@ -1,7 +1,7 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -14,44 +14,9 @@ import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
 
 /**
- * Clean up the following lists of country codes and creation of `actuallyEurope`.
- * Thing is that `europeGeo` includes more than only europe (northern part of
- * Africa, western part of Asia) in order to display outlines of neighboring
- * countries. This can all be cleaned up and is currently hacked together for
- * demo/mvp purposes.
- */
-const nonEurope = [
-  'MAR',
-  'DZA',
-  'TUN',
-  'LBY',
-  'EGY',
-  'SAU',
-  'IRN',
-  'IRQ',
-  'JOR',
-  'ISR',
-  'PSE',
-  'LBN',
-  'RUS',
-  'GEO',
-  'AZE',
-  'ARM',
-  'TUR',
-  'SYR',
-];
-
-/**
  * List of countries to define the boundingbox
  */
 const focusEuropeCodes = ['ISL', 'NOR', 'AZE', 'ESP', 'GRC'];
-
-const actuallyEurope: EuropeGeoJSON = {
-  ...europeGeo,
-  features: europeGeo.features.filter(
-    (x) => !nonEurope.includes(x.properties.ISO_A3)
-  ),
-};
 
 const focusEurope: EuropeGeoJSON = {
   ...europeGeo,
@@ -72,6 +37,16 @@ type EuropeChoroplethProps<T> = {
 export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
   const { data, joinProperty, metricProperty, tooltipContent } = props;
   const { siteText } = useIntl();
+
+  const codes = data.map<string>((x) => x[joinProperty]);
+  const countriesWithData: EuropeGeoJSON = useMemo(() => {
+    return {
+      ...europeGeo,
+      features: europeGeo.features.filter((x) =>
+        codes.includes(x.properties.ISO_A3)
+      ),
+    };
+  }, [codes]);
 
   const getJoinedDataItem = useCallback(
     (joinId: string) => {
@@ -172,7 +147,7 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
           accessibility={{ key: 'behavior_choropleths' }}
           minHeight={600}
           featureCollection={europeGeo}
-          hovers={actuallyEurope}
+          hovers={countriesWithData}
           boundingBox={focusEurope}
           boudingBoxPadding={{ top: 20, bottom: 20 }}
           renderFeature={renderFeature}
