@@ -6,6 +6,7 @@ import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from '../base';
 import { Choropleth } from './choropleth';
 import { useIntlChoroplethColorScale, useTabInteractiveButton } from './hooks';
@@ -64,6 +65,10 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
       })
     );
 
+  const { ref, width } = useResizeObserver<HTMLDivElement>();
+
+  const { mapHeight, padding } = useHeightAndPadding(width);
+
   const renderFeature = useCallback(
     (
       feature: Feature<MultiPolygon, EuropeGeoProperties>,
@@ -106,7 +111,6 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
 
       return isDefined(item) ? (
         <HoverPathLink
-          href="#"
           isSelected={true}
           isTabInteractive={isTabInteractive}
           key={`${ISO_A3}_${index}`}
@@ -135,6 +139,7 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
     <Box position="relative">
       {tabInteractiveButton}
       <div
+        ref={ref}
         css={css({
           bg: 'transparent',
           position: 'relative',
@@ -145,11 +150,12 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
       >
         <Choropleth
           accessibility={{ key: 'behavior_choropleths' }}
-          minHeight={600}
+          initialWidth={1.1 * mapHeight}
+          minHeight={mapHeight}
           featureCollection={europeGeo}
           hovers={countriesWithData}
           boundingBox={boundingBoxEurope}
-          boudingBoxPadding={{ top: 20, bottom: 20 }}
+          boudingBoxPadding={{ top: padding, bottom: padding }}
           renderFeature={renderFeature}
           renderHover={renderHover}
           getTooltipContent={getTooltipContent}
@@ -158,4 +164,19 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
       </div>
     </Box>
   );
+}
+
+function useHeightAndPadding(containerWidth: number | undefined) {
+  return useMemo(() => {
+    if (!isDefined(containerWidth) || containerWidth >= 600) {
+      return { mapHeight: 500, padding: 20 };
+    }
+    if (containerWidth >= 400) {
+      return { mapHeight: 400, padding: 15 };
+    }
+    if (containerWidth >= 300) {
+      return { mapHeight: 300, padding: 5 };
+    }
+    return { mapHeight: 250, padding: 0 };
+  }, [containerWidth]);
 }
