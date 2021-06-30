@@ -7,6 +7,26 @@ import {
   Regions,
 } from './data';
 
+/**
+ * This type was taken from this Stack Overflow post: https://stackoverflow.com/questions/46583883/typescript-pick-properties-with-a-defined-type
+ *
+ * Returns an interface stripped of all keys that don't resolve to U, defaulting
+ * to a non-strict comparison of T[key] extends U. Setting B to true performs
+ * a strict type comparison of T[key] extends U & U extends T[key]
+ *
+ * Example, if one needs just the keys of type string:
+ *
+ * type SomeType = {
+ *   key1: string;
+ *   key2: string;
+ *   key3: number;
+ * }
+ *
+ * const stringKeys = KeysOfType<SomeType, string>
+ *
+ * (stringKeys = key1 | key2)
+ *
+ */
 export type KeysOfType<T, U, B = false> = {
   [P in keyof T]: B extends true
     ? T[P] extends U
@@ -19,6 +39,23 @@ export type KeysOfType<T, U, B = false> = {
     : never;
 }[keyof T];
 
+/**
+ * This returns a filtered type that only contains the keys of the specified type.
+ *
+ * type SomeType = {
+ *   key1: string;
+ *   key2: string;
+ *   key3: number;
+ * }
+ *
+ * const TypeWithJustStringKeys = PickByType<SomeType, string>
+ *
+ * (TypeWithJustStringKeys = {
+ *   key1: string;
+ *   key2: string;
+ * })
+ *
+ */
 export type PickByType<T, U, B = false> = Pick<T, KeysOfType<T, U, B>>;
 
 export type Metric<T> = {

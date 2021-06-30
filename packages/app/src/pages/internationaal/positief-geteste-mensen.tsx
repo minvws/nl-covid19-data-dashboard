@@ -84,7 +84,9 @@ export default function PositiefGetesteMensenPage(
             }}
             reference={text.reference}
           />
+
           {content.articles && <ArticleStrip articles={content.articles} />}
+
           <EuropeChoroplethTile
             title={text.choropleth.titel}
             description={text.choropleth.toelichting}
