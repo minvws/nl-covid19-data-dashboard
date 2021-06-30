@@ -182,7 +182,7 @@ const ChoroplethMap: <T1, T2, T3>(
 
   const fitExtent: FitExtent = [
     [
-      [0 + (boudingBoxPadding.left ?? 0), 0 + (boudingBoxPadding.top ?? 0)],
+      [boudingBoxPadding.left ?? 0, boudingBoxPadding.top ?? 0],
       [
         width - (boudingBoxPadding.right ?? 0),
         height - (boudingBoxPadding.bottom ?? 0),
