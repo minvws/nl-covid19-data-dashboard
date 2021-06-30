@@ -9,6 +9,7 @@ import { MaxWidth } from '~/components/max-width';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useMediaQuery } from '~/utils/use-media-query';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -17,7 +18,7 @@ const wideNavBreakpoint = 'screen and (min-width: 1024px)';
 export function TopNavigation() {
   const isWideNav = useMediaQuery(wideNavBreakpoint);
   const router = useRouter();
-
+  const isMounted = useIsMounted();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
@@ -30,6 +31,7 @@ export function TopNavigation() {
         css={css({
           display: 'block',
           [`@media ${wideNavBreakpoint}`]: { display: 'none' },
+          '.has-no-js &': { display: 'none' },
         })}
       >
         <NavToggle
@@ -51,11 +53,16 @@ export function TopNavigation() {
         id="main-navigation"
         role="navigation"
         aria-label={siteText.aria_labels.pagina_keuze}
-        initial={false}
-        animate={{
-          height: isMenuOpen || isWideNav ? 'auto' : 0,
-          opacity: isMenuOpen || isWideNav ? 1 : 0,
+        initial={{
+          height: 0,
+          opacity: 1,
         }}
+        animate={
+          isMounted && {
+            height: isMenuOpen || isWideNav ? 'auto' : 0,
+            opacity: isMenuOpen || isWideNav ? 1 : 0,
+          }
+        }
       >
         <MaxWidth>
           <NavList>
@@ -143,6 +150,9 @@ const NavWrapper = styled(motion.nav)(
     overflow: 'hidden',
 
     '.has-no-js &': {
+      height: 'auto !important',
+      maxHeight: 0,
+      opacity: 0,
       animation: `show-menu 1s forwards`,
       animationDelay: '1s',
     },
@@ -158,6 +168,7 @@ const NavWrapper = styled(motion.nav)(
     },
 
     [`@media ${wideNavBreakpoint}`]: {
+      height: 'auto !important',
       display: 'inline',
       width: 'auto',
       borderTopWidth: 0,
