@@ -104,6 +104,7 @@ const AppContentContainer = styled.div(
     marginBottom: '2rem',
     margin: '0 auto',
     pb: 4,
+    minHeight: '50vh',
   })
 );
 
