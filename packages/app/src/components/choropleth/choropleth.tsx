@@ -319,7 +319,20 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
       {({ features }) => (
         <g>
           {features.map(
-            ({ feature, path, index }) => path && render(feature, path, index)
+            ({ feature, path, index }) =>
+              path &&
+              render(
+                feature,
+                /**
+                 * Cut off an unnecessary level of detail of the paths strings.
+                 * A path value of `M177.08821511867188` becomes `M177`.
+                 */
+                path.replace(
+                  /\d+\.\d+/g,
+                  (x) => Math.round(parseFloat(x)) + ''
+                ),
+                index
+              )
           )}
         </g>
       )}
