@@ -3,7 +3,7 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
-import { PositiveTestedTableTile } from '~/domain/international/positive-tested-table-tile';
+import { InfectedTableTile } from '~/domain/international/infected-table-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -59,7 +59,7 @@ export default function PositiefGetesteMensenPage(
           />
           {content.articles && <ArticleStrip articles={content.articles} />}
 
-          <PositiveTestedTableTile />
+          <InfectedTableTile />
         </TileList>
       </InternationalLayout>
     </Layout>
