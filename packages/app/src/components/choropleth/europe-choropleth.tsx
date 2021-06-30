@@ -1,5 +1,6 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { geoConicConformal } from 'd3-geo';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
@@ -17,7 +18,7 @@ import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
 /**
  * List of countries to define the boundingbox
  */
-const boundingBoxCodes = ['ISL', 'NOR', 'AZE', 'ESP', 'GRC'];
+const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC'];
 
 const boundingBoxEurope: EuropeGeoJSON = {
   ...europeGeo,
@@ -149,13 +150,14 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
         })}
       >
         <Choropleth
+          projection={geoConicConformal}
           accessibility={{ key: 'behavior_choropleths' }}
           initialWidth={1.1 * mapHeight}
           minHeight={mapHeight}
           featureCollection={europeGeo}
           hovers={countriesWithData}
           boundingBox={boundingBoxEurope}
-          boudingBoxPadding={{ top: padding, bottom: padding }}
+          boudingBoxPadding={padding}
           renderFeature={renderFeature}
           renderHover={renderHover}
           getTooltipContent={getTooltipContent}
@@ -169,14 +171,14 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
 function useHeightAndPadding(containerWidth: number | undefined) {
   return useMemo(() => {
     if (!isDefined(containerWidth) || containerWidth >= 600) {
-      return { mapHeight: 500, padding: 20 };
+      return { mapHeight: 650, padding: { top: 20, bottom: 20 } };
     }
     if (containerWidth >= 400) {
-      return { mapHeight: 400, padding: 15 };
+      return { mapHeight: 400, padding: { top: 15, bottom: 15 } };
     }
     if (containerWidth >= 300) {
-      return { mapHeight: 300, padding: 5 };
+      return { mapHeight: 300, padding: { top: 5, bottom: 5 } };
     }
-    return { mapHeight: 250, padding: 0 };
+    return { mapHeight: 250, padding: { left: 20, top: 0, bottom: 0 } };
   }, [containerWidth]);
 }

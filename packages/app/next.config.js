@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const withTranspileModules = require('next-transpile-modules')(['d3-geo']);
 
 const nextConfig = {
   /**
@@ -54,4 +55,4 @@ const nextConfig = {
 
 const plugins = [withBundleAnalyzer];
 
-module.exports = withPlugins(plugins, nextConfig);
+module.exports = withPlugins(plugins, withTranspileModules(nextConfig));

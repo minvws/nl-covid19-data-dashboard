@@ -1,6 +1,8 @@
 import css from '@styled-system/css';
 import { localPoint } from '@visx/event';
-import { Mercator } from '@visx/geo';
+import Projection from '@visx/geo/lib/projections/Projection';
+import { ProjectionPreset } from '@visx/geo/lib/types';
+import { GeoProjection } from 'd3-geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import {
   memo,
@@ -33,6 +35,7 @@ export type TooltipSettings = {
 };
 
 type TProps<T1, T3, T4> = {
+  projection?: ProjectionPreset | (() => GeoProjection);
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -147,6 +150,7 @@ const ChoroplethMap: <T1, T2, T3>(
   }
 ) => JSX.Element | null = memo((props) => {
   const {
+    projection,
     accessibility,
     featureCollection,
     outlines,
@@ -270,6 +274,7 @@ const ChoroplethMap: <T1, T2, T3>(
           />
           <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
             <MercatorGroup
+              projection={projection}
               data={featureCollection.features}
               render={renderFeature}
               fitExtent={fitExtent}
@@ -278,6 +283,7 @@ const ChoroplethMap: <T1, T2, T3>(
             {outlines && (
               <g css={css({ pointerEvents: 'none' })}>
                 <MercatorGroup
+                  projection={projection}
                   data={outlines.features}
                   render={(_, path, index) => (
                     <Path
@@ -295,6 +301,7 @@ const ChoroplethMap: <T1, T2, T3>(
             {hovers && (
               <g ref={hoverRef}>
                 <MercatorGroup
+                  projection={projection}
                   data={hovers.features}
                   render={renderHover}
                   fitExtent={fitExtent}
@@ -304,6 +311,7 @@ const ChoroplethMap: <T1, T2, T3>(
 
             {renderHighlight && (
               <MercatorGroup
+                projection={projection}
                 data={featureCollection.features}
                 render={renderHighlight}
                 fitExtent={fitExtent}
@@ -317,6 +325,7 @@ const ChoroplethMap: <T1, T2, T3>(
 });
 
 interface MercatorGroupProps<G extends Geometry, P> {
+  projection?: ProjectionPreset | (() => GeoProjection);
   data: Feature<G, P>[];
   render: (
     feature: Feature<G, P>,
@@ -327,10 +336,10 @@ interface MercatorGroupProps<G extends Geometry, P> {
 }
 
 function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
-  const { data, fitExtent, render } = props;
+  const { projection = 'mercator', data, fitExtent, render } = props;
 
   return (
-    <Mercator data={data} fitExtent={fitExtent}>
+    <Projection projection={projection} data={data} fitExtent={fitExtent}>
       {({ features }) => (
         <g>
           {features.map(
@@ -338,7 +347,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
           )}
         </g>
       )}
-    </Mercator>
+    </Projection>
   );
 }
 
