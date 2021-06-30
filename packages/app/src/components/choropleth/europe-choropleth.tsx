@@ -16,12 +16,12 @@ import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
 /**
  * List of countries to define the boundingbox
  */
-const focusEuropeCodes = ['ISL', 'NOR', 'AZE', 'ESP', 'GRC'];
+const boundingBoxCodes = ['ISL', 'NOR', 'AZE', 'ESP', 'GRC'];
 
-const focusEurope: EuropeGeoJSON = {
+const boundingBoxEurope: EuropeGeoJSON = {
   ...europeGeo,
   features: europeGeo.features.filter((x) =>
-    focusEuropeCodes.includes(x.properties.ISO_A3)
+    boundingBoxCodes.includes(x.properties.ISO_A3)
   ),
 };
 
@@ -148,7 +148,7 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
           minHeight={600}
           featureCollection={europeGeo}
           hovers={countriesWithData}
-          boundingBox={focusEurope}
+          boundingBox={boundingBoxEurope}
           boudingBoxPadding={{ top: 20, bottom: 20 }}
           renderFeature={renderFeature}
           renderHover={renderHover}
