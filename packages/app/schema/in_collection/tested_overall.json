@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "required": [
     "country_code",
-    "infected_average",
+    "infected",
     "infected_per_100k_average",
     "date_start_unix",
     "date_end_unix",
@@ -16,7 +16,7 @@
       "type": "string",
       "pattern": "^[A-Z]+$"
     },
-    "infected_average": {
+    "infected": {
       "type": "integer"
     },
     "infected_per_100k_average": {

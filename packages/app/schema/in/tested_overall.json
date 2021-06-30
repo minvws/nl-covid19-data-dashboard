@@ -4,14 +4,14 @@
       "title": "in_tested_overall_value",
       "additionalProperties": false,
       "required": [
-        "infected_average",
+        "infected",
         "infected_per_100k_average",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
       ],
       "properties": {
-        "infected_average": {
+        "infected": {
           "type": "integer"
         },
         "infected_per_100k_average": {
