@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
-import { InternationalListType } from '~/domain/internationaal/types';
+import { InCollectionArrayType } from '~/domain/internationaal/types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -61,7 +61,7 @@ const focusEurope: EuropeGeoJSON = {
   ),
 };
 
-type EuropeChoroplethProps<T extends InternationalListType> = {
+type EuropeChoroplethProps<T extends InCollectionArrayType> = {
   data: T[];
   metricProperty: KeysOfType<T, number, true>;
   joinProperty: KeysOfType<T, string, true>;
@@ -70,7 +70,7 @@ type EuropeChoroplethProps<T extends InternationalListType> = {
   getLink?: (code: string) => string;
 };
 
-export function EuropeChoropleth<T extends InternationalListType>(
+export function EuropeChoropleth<T extends InCollectionArrayType>(
   props: EuropeChoroplethProps<T>
 ) {
   const { data, joinProperty, metricProperty, tooltipContent } = props;

@@ -23,29 +23,6 @@ import {
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
 
-export type TestData = {
-  date_unix: number;
-  cncode: string;
-  infected_per_100k: number;
-  date_of_insertion_unix: number;
-};
-
-export type TestData2 = {
-  date_unix: number;
-  cncode: string;
-  infected_per_200k: number;
-  date_of_insertion_unix: number;
-};
-
-export interface International {
-  last_generated: string;
-  proto_name: 'IN_COLLECTION';
-  name: string;
-  code: string;
-  tested_overall: TestData[];
-  tested_overall2: TestData2[];
-}
-
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<{
@@ -76,8 +53,8 @@ export default function PositiefGetesteMensenPage(
 
   const comparedName = countryNames['nld'];
   const comparedValue = choropleth.in.find(
-    (x) => x.cncode === 'NLD'
-  )?.infected_per_100k;
+    (x) => x.country_code === 'NLD'
+  )?.infected_per_100k_average;
 
   assert(comparedName, 'comparedName could not be found for country code nld');
   assert(
@@ -103,30 +80,25 @@ export default function PositiefGetesteMensenPage(
           />
           {content.articles && <ArticleStrip articles={content.articles} />}
           <EuropeChoroplethTile
-            title="Verdeling van positief geteste mensen"
-            description="Deze kaart laat zien..."
+            title={text.choropleth.titel}
+            description={text.choropleth.toelichting}
             legend={{
               thresholds: internationalThresholds.infected_per_100k,
-              title: 'Aantal per 100.000 inwoners',
+              title: text.choropleth.legenda_titel,
             }}
             metadata={{
-              source: {
-                href: '',
-                text: 'RIVM',
-              },
+              source: text.bronnen.rivm,
             }}
           >
             <EuropeChoropleth
               data={choropleth.in}
-              joinProperty="cncode"
-              metricProperty="infected_per_100k"
+              joinProperty="country_code"
+              metricProperty="infected_per_100k_average"
               tooltipContent={(context) => (
                 <InternationalTooltip
-                  title={
-                    'Positief geteste mensen per 100.000 inwoners, gemiddelde over de afgelopen 14 dagen'
-                  }
-                  countryName={countryNames[context.cncode.toLowerCase()]}
-                  value={context.infected_per_100k}
+                  title={text.choropleth.tooltip_titel}
+                  countryName={countryNames[context.country_code.toLowerCase()]}
+                  value={context.infected_per_100k_average}
                   comparedName={comparedName}
                   comparedValue={comparedValue}
                 />

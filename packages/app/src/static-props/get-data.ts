@@ -1,5 +1,6 @@
 import {
   assert,
+  InCollection,
   Municipal,
   Municipalities,
   National,
@@ -26,7 +27,6 @@ import {
   VrRegionPageMetricNames,
 } from '~/domain/layout/safety-region-layout';
 import { getClient, localize } from '~/lib/sanity';
-import { International } from '~/pages/internationaal/positief-geteste-mensen';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
@@ -45,7 +45,7 @@ const json = {
   nl: loadJsonFromDataFile<National>('NL.json'),
   vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
   gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
-  inCollection: loadJsonFromDataFile<International>('IN_COLLECTION.json'),
+  inCollection: loadJsonFromDataFile<InCollection>('IN_COLLECTION.json'),
 };
 
 export function getLastGeneratedDate() {
@@ -279,7 +279,7 @@ export function getGmData(context: GetStaticPropsContext) {
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
   vr?: (collection: Regions) => T1;
   gm?: (collection: Municipalities) => T2;
-  in?: (collection: International) => T3;
+  in?: (collection: InCollection) => T3;
 }) {
   return () => {
     const filterVr = settings?.vr ?? (() => null);

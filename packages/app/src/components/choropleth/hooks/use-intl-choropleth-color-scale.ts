@@ -6,10 +6,10 @@ import {
 import { scaleThreshold } from '@visx/scale';
 import { useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { InternationalListType } from '~/domain/internationaal/types';
+import { InCollectionArrayType } from '~/domain/internationaal/types';
 import { internationalThresholds } from '../international-thresholds';
 
-export function useIntlChoroplethColorScale<T extends InternationalListType>(
+export function useIntlChoroplethColorScale<T extends InCollectionArrayType>(
   metricProperty: KeysOfType<T, number, true>,
   defaultColor = 'white'
 ) {
