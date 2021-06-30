@@ -1,4 +1,4 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
@@ -16,10 +16,9 @@ import {
   useDimensions,
   useValuesInTimeframe,
 } from '~/components/time-series-chart/logic';
-import { TimeframeOption } from '~/utils/timeframe';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import {
   BarHover,
   BarTrend,

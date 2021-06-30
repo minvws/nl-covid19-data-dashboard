@@ -1,6 +1,5 @@
-import { assert } from '@corona-dashboard/common';
+import { assert, TimeframeOption } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
-import { TimeframeOption } from '~/utils/timeframe';
 import { Box } from './base';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
@@ -45,7 +44,7 @@ type ChartTileProps = {
   description?: string;
   timeframeInitialValue?: TimeframeOption;
 } & (
-  | // Check if the children are a function to support the timeline callback, otherwise accept a normal react node
+  | // Check if the children are a function to support the timeframe callback, otherwise accept a normal react node
   {
       timeframeOptions?: undefined;
       children: ReactNode;
