@@ -119,7 +119,7 @@ The nice thing about these ids is that we could start using the same path logic
 for lokalize texts. Lokalize text documents are stored with opaque ids so they
 do not clash with the element ids.
 
-If we manage to clean up lokalize structure is becomes possible to join the
+If we manage to clean up the lokalize structure it becomes possible to join the
 element configurations with their text properties. Either in app logic, or by
 migrating the text strings to actually live with the element objects in the CMS.
 
