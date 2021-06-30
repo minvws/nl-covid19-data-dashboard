@@ -3,7 +3,6 @@ import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
 import { isDefined } from 'ts-is-present';
-import { InCollectionArrayType } from '~/domain/internationaal/types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -61,7 +60,7 @@ const focusEurope: EuropeGeoJSON = {
   ),
 };
 
-type EuropeChoroplethProps<T extends InCollectionArrayType> = {
+type EuropeChoroplethProps<T> = {
   data: T[];
   metricProperty: KeysOfType<T, number, true>;
   joinProperty: KeysOfType<T, string, true>;
@@ -70,9 +69,7 @@ type EuropeChoroplethProps<T extends InCollectionArrayType> = {
   getLink?: (code: string) => string;
 };
 
-export function EuropeChoropleth<T extends InCollectionArrayType>(
-  props: EuropeChoroplethProps<T>
-) {
+export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
   const { data, joinProperty, metricProperty, tooltipContent } = props;
   const { siteText } = useIntl();
 
@@ -83,7 +80,7 @@ export function EuropeChoropleth<T extends InCollectionArrayType>(
     [data, joinProperty]
   );
 
-  const getFillColor = useIntlChoroplethColorScale(metricProperty);
+  const getFillColor = useIntlChoroplethColorScale(metricProperty as string);
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
