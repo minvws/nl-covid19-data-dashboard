@@ -6,8 +6,10 @@ export const scopes = [
   { title: 'Landelijk', value: 'nl' },
   { title: 'Veiligheidsregio', value: 'vr' },
   { title: 'Gemeente', value: 'gm' },
-  { title: 'Europe', value: 'eu' },
+  { title: 'Internationaal', value: 'in' },
 ] as const;
+
+const REQUIRED = (x: any) => x.required();
 
 export const commonFields = [
   {
@@ -16,6 +18,7 @@ export const commonFields = [
     type: 'string',
     readOnly: true,
     hidden: true,
+    validation: REQUIRED,
   },
   {
     title: 'Metric Name',
@@ -23,9 +26,10 @@ export const commonFields = [
     type: 'string',
     readOnly: true,
     hidden: true,
+    validation: REQUIRED,
   },
   {
-    title: 'Metric Property', // should be optional
+    title: 'Metric Property',
     name: 'metricProperty',
     type: 'string',
     readOnly: true,
@@ -58,7 +62,7 @@ export const commonPreview = {
 };
 
 /**
- * By maping the metric name to a title we can make the UI a little more
+ * By mapping the metric name to a title we can make the UI a little more
  * user-friendly. We could take this further by also mapping type names like
  * choropleth and maybe even introducing a specific icon for each element type.
  */

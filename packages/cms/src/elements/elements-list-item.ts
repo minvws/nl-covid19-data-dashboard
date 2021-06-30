@@ -17,9 +17,8 @@ export function elementsListItem() {
           { types }
         )
         .pipe(
-          map((doc: { scope: string }[], index) => {
+          map((doc: { scope: string }[]) => {
             const scopes = uniq(doc.map((x) => x.scope));
-            console.log('scopes', scopes);
 
             return S.list()
               .title('Scope')
