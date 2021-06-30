@@ -153,7 +153,7 @@ export interface InTestedOverall {
   last_value: InTestedOverallValue;
 }
 export interface InTestedOverallValue {
-  infected_average: number;
+  infected: number;
   infected_per_100k_average: number;
   date_start_unix: number;
   date_end_unix: number;
@@ -167,7 +167,7 @@ export interface InCollection {
 }
 export interface InTestedOverall {
   country_code: string;
-  infected_average: number;
+  infected: number;
   infected_per_100k_average: number;
   date_start_unix: number;
   date_end_unix: number;
