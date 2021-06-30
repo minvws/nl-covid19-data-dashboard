@@ -123,7 +123,11 @@ export function InfectedTableTile() {
           matchedItems={matchedItems}
         />
       ) : (
-        <NarrowInfectedTable data={data} />
+        <NarrowInfectedTable
+          data={data}
+          isExpanded={isExpanded}
+          matchedItems={matchedItems}
+        />
       )}
 
       {/* Hide the expand button when the user is searching */}
