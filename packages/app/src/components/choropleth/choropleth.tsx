@@ -51,6 +51,7 @@ type TProps<T1, T3, T4> = {
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
+  // Add optional padding to the bounding box
   boudingBoxPadding?: {
     left?: number;
     right?: number;
