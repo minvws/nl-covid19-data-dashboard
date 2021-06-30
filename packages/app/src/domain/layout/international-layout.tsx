@@ -55,6 +55,7 @@ export function InternationalLayout(props: InternationalLayoutProps) {
             <Menu>
               <CategoryMenu>
                 <MetricMenuItemLink
+                  showArrow
                   href={reverseRouter.in.positiefGetesteMensen()}
                   title={
                     siteText.internationaal_positief_geteste_personen
