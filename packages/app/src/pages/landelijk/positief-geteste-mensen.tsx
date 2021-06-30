@@ -145,12 +145,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         %
                       </span>
                     ),
-                    dateFrom: formatDateFromSeconds(
-                      dataGgdLastValue.date_start_unix,
-                      'weekday-medium'
-                    ),
                     dateTo: formatDateFromSeconds(
-                      dataGgdLastValue.date_end_unix,
+                      dataGgdLastValue.date_unix,
                       'weekday-medium'
                     ),
                   })}
