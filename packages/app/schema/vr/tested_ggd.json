@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_tested_ggd_average",
+  "title": "vr_tested_ggd",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_tested_ggd_average_value",
+      "title": "vr_tested_ggd_value",
       "type": "object",
       "properties": {
         "infected": {
@@ -38,26 +38,27 @@
         "tested_total_moving_average": {
           "type": ["number", "null"]
         },
-        "date_start_unix": {
-          "type": "integer"
-        },
-        "date_end_unix": {
+        "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
           "type": "integer"
+        },
+        "vrcode": {
+          "type": "string",
+          "equalsRootProperty": "code"
         }
       },
       "required": [
-        "tested_total",
-        "tested_total_moving_average",
-        "infected_percentage",
-        "infected_percentage_moving_average",
         "infected",
         "infected_moving_average",
-        "date_start_unix",
-        "date_end_unix",
-        "date_of_insertion_unix"
+        "infected_percentage",
+        "tested_total",
+        "tested_total_moving_average",
+        "infected_percentage_moving_average",
+        "date_unix",
+        "date_of_insertion_unix",
+        "vrcode"
       ],
       "additionalProperties": false
     }
