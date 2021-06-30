@@ -4,7 +4,7 @@ import {
   isDateSeries,
   isDateSpanSeries,
   TimestampedValue,
-} from '~/data-sorting';
+} from '../../data-sorting';
 
 export type TimeframeOption = 'all' | '5weeks';
 
