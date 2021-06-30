@@ -17,7 +17,7 @@ export function InternationalTooltip(props: InternationalTooltipProps) {
   const { countryName, value, comparedName, comparedValue, title } = props;
   const { formatPercentage } = useIntl();
 
-  const thresholdValues = internationalThresholds.infected_per_100k;
+  const thresholdValues = internationalThresholds.infected_per_100k_average;
 
   const showComparison = countryName !== comparedName;
 

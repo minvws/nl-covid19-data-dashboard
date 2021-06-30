@@ -1,4 +1,5 @@
 import { assert } from '@corona-dashboard/common';
+import { isDefined } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -8,6 +9,7 @@ import { InternationalTooltip } from '~/components/choropleth/tooltips/internati
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
+import { choroplethMockData } from '~/domain/internationaal/logic/choropleth-mock-data';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -32,7 +34,7 @@ export const getStaticProps = createGetStaticProps(
     return createPageArticlesQuery('in_positiveTestsPage', locale);
   }),
   createGetChoroplethData({
-    in: ({ tested_overall }) => tested_overall,
+    in: ({ tested_overall }) => tested_overall || choroplethMockData(),
   }),
   getCountryNames
 );
@@ -41,6 +43,7 @@ export default function PositiefGetesteMensenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
   const { lastGenerated, content, choropleth, countryNames } = props;
+  const { in: choroplethData } = choropleth;
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_positief_geteste_personen;
@@ -53,12 +56,15 @@ export default function PositiefGetesteMensenPage(
 
   const comparedName = countryNames['nld'];
   const comparedValue = choropleth.in.find(
-    (x) => x.country_code === 'NLD'
+    (x) => x.country_code.toLocaleLowerCase() === 'nld'
   )?.infected_per_100k_average;
 
-  assert(comparedName, 'comparedName could not be found for country code nld');
   assert(
-    comparedValue,
+    isDefined(comparedName),
+    'comparedName could not be found for country code nld'
+  );
+  assert(
+    isDefined(comparedValue),
     'comparedValue could not be found for country code NLD'
   );
 
@@ -83,7 +89,7 @@ export default function PositiefGetesteMensenPage(
             title={text.choropleth.titel}
             description={text.choropleth.toelichting}
             legend={{
-              thresholds: internationalThresholds.infected_per_100k,
+              thresholds: internationalThresholds.infected_per_100k_average,
               title: text.choropleth.legenda_titel,
             }}
             metadata={{
@@ -91,13 +97,16 @@ export default function PositiefGetesteMensenPage(
             }}
           >
             <EuropeChoropleth
-              data={choropleth.in}
+              data={choroplethData}
               joinProperty="country_code"
               metricProperty="infected_per_100k_average"
               tooltipContent={(context) => (
                 <InternationalTooltip
                   title={text.choropleth.tooltip_titel}
-                  countryName={countryNames[context.country_code.toLowerCase()]}
+                  countryName={
+                    countryNames[context.country_code.toLowerCase()] ||
+                    context.country_code
+                  }
                   value={context.infected_per_100k_average}
                   comparedName={comparedName}
                   comparedValue={comparedValue}

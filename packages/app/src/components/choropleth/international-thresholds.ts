@@ -33,5 +33,5 @@ const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
 ];
 
 export const internationalThresholds = {
-  infected_per_100k: positiveTestedThresholds,
+  infected_per_100k_average: positiveTestedThresholds,
 } as const;

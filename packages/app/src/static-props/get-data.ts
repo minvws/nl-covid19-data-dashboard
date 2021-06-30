@@ -45,7 +45,11 @@ const json = {
   nl: loadJsonFromDataFile<National>('NL.json'),
   vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
   gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
-  inCollection: loadJsonFromDataFile<InCollection>('IN_COLLECTION.json'),
+  inCollection: loadJsonFromDataFile<InCollection>(
+    'IN_COLLECTION.json',
+    undefined,
+    true
+  ),
 };
 
 export function getLastGeneratedDate() {

@@ -22,12 +22,8 @@ export function EuropeChoroplethTile(props: EuropeChoroplethTileProps) {
   const { children, title, description, metadata, legend } = props;
 
   const legendaComponent = legend && (
-    <Box maxWidth={500} width="100%" pt={3}>
-      <ChoroplethLegenda
-        thresholds={legend.thresholds}
-        title={legend.title}
-        horizontal
-      />
+    <Box width="50%" pt={3}>
+      <ChoroplethLegenda thresholds={legend.thresholds} title={legend.title} />
     </Box>
   );
 
@@ -41,7 +37,7 @@ export function EuropeChoroplethTile(props: EuropeChoroplethTileProps) {
         <ErrorBoundary>{children}</ErrorBoundary>
       </Box>
       {legendaComponent && (
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="flex-start">
           {legendaComponent}
         </Box>
       )}
