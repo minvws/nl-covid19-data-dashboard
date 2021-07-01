@@ -100,7 +100,6 @@ export default function PositiefGetesteMensenPage(
           >
             <EuropeChoropleth
               data={choroplethData}
-              joinProperty="country_code"
               metricProperty="infected_per_100k_average"
               tooltipContent={(context) => (
                 <InternationalTooltip

@@ -27,13 +27,13 @@ const boundingBoxEurope: EuropeGeoJSON = {
   ),
 };
 
-type EuropeChoroplethProps<T> = {
+type CountryDataItem = { country_code: string };
+
+type EuropeChoroplethProps<T extends CountryDataItem> = {
   // A list of data items that contain country specific data
   data: T[];
   // A number property on the data item that will determine the color of the country in the map
   metricProperty: KeysOfType<T, number, true>;
-  // A string property on the data item that will be used to link the data item with a choropleth feature id
-  joinProperty: KeysOfType<T, string, true>;
   // Optional tooltip formatting
   tooltipContent?: (context: T) => ReactNode;
   // Optional tool tip placement
@@ -42,11 +42,13 @@ type EuropeChoroplethProps<T> = {
   getLink?: (code: string) => string;
 };
 
-export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
-  const { data, joinProperty, metricProperty, tooltipContent } = props;
+export function EuropeChoropleth<T extends CountryDataItem>(
+  props: EuropeChoroplethProps<T>
+) {
+  const { data, metricProperty, tooltipContent } = props;
   const { siteText } = useIntl();
 
-  const codes = data.map<string>((x) => x[joinProperty]);
+  const codes = data.map<string>((x) => x.country_code);
   const countriesWithData: EuropeGeoJSON = useMemo(() => {
     return {
       ...europeGeo,
@@ -58,9 +60,9 @@ export function EuropeChoropleth<T>(props: EuropeChoroplethProps<T>) {
 
   const getJoinedDataItem = useCallback(
     (joinId: string) => {
-      return data.find((x) => x[joinProperty] === joinId);
+      return data.find((x) => x.country_code === joinId);
     },
-    [data, joinProperty]
+    [data]
   );
 
   const getFillColor = useIntlChoroplethColorScale(metricProperty as string);
