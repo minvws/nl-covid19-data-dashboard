@@ -65,7 +65,6 @@ interface ChartTileHeaderProps {
   title: string;
   description?: string;
   children?: ReactNode;
-  descriptionIsMarkdown?: boolean;
 }
 
 function ChartTileHeader({
