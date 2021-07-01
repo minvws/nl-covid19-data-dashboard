@@ -47,6 +47,7 @@ interface MetricMenuItemLinkProps {
   href?: Url;
   subtitle?: string;
   children?: ReactNode;
+  showArrow?: boolean;
 }
 
 export function MetricMenuItemLink({
@@ -54,13 +55,20 @@ export function MetricMenuItemLink({
   icon,
   title,
   subtitle,
-  children: children,
+  children,
+  showArrow,
 }: MetricMenuItemLinkProps) {
   const router = useRouter();
 
   const content = (
     <>
-      <Title icon={icon} title={title} subtitle={subtitle} m={0} />
+      <Title
+        icon={icon}
+        title={title}
+        subtitle={subtitle}
+        m={0}
+        showArrow={showArrow}
+      />
       {children && (
         <Box mx={icon ? '2.5em' : 0}>
           <ChildrenWrapper>{children}</ChildrenWrapper>

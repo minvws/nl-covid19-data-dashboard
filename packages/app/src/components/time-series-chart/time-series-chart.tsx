@@ -1,4 +1,4 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
 import { useCallback, useEffect, useMemo } from 'react';
@@ -8,15 +8,14 @@ import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { TimeframeOption } from '~/utils/timeframe';
-import { useIsMounted } from '~/utils/use-is-mounted';
-import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { useUniqueId } from '../../utils/use-unique-id';
 import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
+import { useIsMounted } from '~/utils/use-is-mounted';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useUniqueId } from '../../utils/use-unique-id';
 import { InlineText } from '../typography';
 import {
   Axes,

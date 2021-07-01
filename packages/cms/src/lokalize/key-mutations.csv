@@ -272,3 +272,8 @@ timestamp,action,key
 2021-07-01T09:05:31.034Z,add,internationaal_positief_geteste_personen.land_tabel.header_totale
 2021-07-01T09:15:39.786Z,delete,internationaal_positief_geteste_personen.land_tabel.header.per_inwoners
 2021-07-01T09:16:04.260Z,add,internationaal_positief_geteste_personen.land_tabel.header_per_inwoners
+2021-06-30T11:20:15.486Z,add,nav.terug_naar_alle_cijfers_internationaal
+2021-06-30T11:14:28.839Z,add,internationaal_positief_geteste_personen.choropleth.titel
+2021-06-30T11:14:30.710Z,add,internationaal_positief_geteste_personen.choropleth.toelichting
+2021-06-30T11:14:31.939Z,add,internationaal_positief_geteste_personen.choropleth.tooltip_titel
+2021-06-30T11:14:32.964Z,add,internationaal_positief_geteste_personen.choropleth.legenda_titel

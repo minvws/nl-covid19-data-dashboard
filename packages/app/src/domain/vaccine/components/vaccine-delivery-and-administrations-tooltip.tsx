@@ -1,72 +1,50 @@
-import css from '@styled-system/css';
-import styled from 'styled-components';
 import { TooltipData } from '~/components/time-series-chart/components';
-import {
-  LineSeriesDefinition,
-  SeriesConfig,
-  StackedAreaSeriesDefinition,
-} from '~/components/time-series-chart/logic/series';
+import { TooltipSeriesListContainer } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-container';
+import { TooltipSeriesListItems } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-items';
+import { LineSeriesDefinition } from '~/components/time-series-chart/logic/series';
 import { Heading } from '~/components/typography';
-import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/select-delivery-and-administration-data';
 
-function isLineConfig(
-  input: SeriesConfig<VaccineDeliveryAndAdministrationsValue>[number]
-): input is LineSeriesDefinition<VaccineDeliveryAndAdministrationsValue> {
-  return input.type === 'line';
-}
-
-function isStackedConfig(
-  input: SeriesConfig<VaccineDeliveryAndAdministrationsValue>[number]
-): input is StackedAreaSeriesDefinition<VaccineDeliveryAndAdministrationsValue> {
-  return input.type === 'stacked-area';
-}
-
-export function VaccineDeliveryAndAdministrationsTooltip({
-  data,
-}: {
-  data: TooltipData<VaccineDeliveryAndAdministrationsValue>;
-}) {
-  const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
+export function VaccineDeliveryAndAdministrationsTooltip<
+  T extends VaccineDeliveryAndAdministrationsValue
+>({ data }: { data: TooltipData<T> }) {
+  const { siteText } = useIntl();
+  const { value, configIndex, config, options } = data;
 
   const isEstimate =
     data.timespanAnnotation?.fill === 'hatched' &&
     data.timespanAnnotation.start !== data.value.date_unix;
 
-  const firstValue = data.value.total_delivered;
-  const firstConfig = data.config
-    .filter(isLineConfig)
+  const firstConfig = config
+    .filter((x): x is LineSeriesDefinition<T> => x.type === 'line')
     .find((x) => x.metricProperty === 'total_delivered');
 
-  const otherConfigs = data.config.filter(isStackedConfig);
+  const otherConfigs = config.filter((x) => x !== firstConfig);
 
   if (!firstConfig || !otherConfigs.length) {
     return null;
   }
 
-  const dateEndString = formatDateFromSeconds(
-    data.value.date_unix,
-    'day-month'
-  );
-
   return (
-    <>
-      <VisuallyHidden>{dateEndString}</VisuallyHidden>
-      <TooltipList>
-        <TooltipListItem>
-          <span>
-            <ColorIndicator color={firstConfig.color} />
-            {isEstimate
+    <TooltipSeriesListContainer
+      {...data}
+      // do not display the timespan annotation label in the tooltip
+      timespanAnnotation={undefined}
+    >
+      <TooltipSeriesListItems
+        value={value}
+        config={[
+          {
+            ...firstConfig,
+            label: isEstimate
               ? siteText.vaccinaties.data.vaccination_chart.estimated
-              : siteText.vaccinaties.data.vaccination_chart.delivered}
-            :
-          </span>
-          <TooltipValueContainer>
-            {formatNumber(firstValue)}
-          </TooltipValueContainer>
-        </TooltipListItem>
-      </TooltipList>
+              : siteText.vaccinaties.data.vaccination_chart.delivered,
+          },
+        ]}
+        configIndex={configIndex}
+        options={options}
+      />
 
       <Heading level={5} my={1}>
         {!isEstimate
@@ -75,72 +53,12 @@ export function VaccineDeliveryAndAdministrationsTooltip({
               .doses_administered_estimated}
       </Heading>
 
-      <TooltipList>
-        {otherConfigs.map((config) => (
-          <TooltipListItem key={config.label}>
-            <span>
-              <ColorIndicator color={config.color} />
-              {config.shortLabel ?? config.label}:
-            </span>
-            <TooltipValueContainer>
-              <strong>
-                {formatNumber(data.value[config.metricProperty] || 0)}
-              </strong>
-            </TooltipValueContainer>
-          </TooltipListItem>
-        ))}
-
-        <TooltipListItem mt={1}>
-          <span>
-            <ColorIndicator color="transparent" />
-            {
-              siteText.vaccinaties.data.vaccination_chart
-                .doses_administered_total
-            }
-            :
-          </span>
-          <TooltipValueContainer>
-            <strong>{formatNumber(data.value.total)}</strong>
-          </TooltipValueContainer>
-        </TooltipListItem>
-      </TooltipList>
-    </>
+      <TooltipSeriesListItems
+        value={value}
+        config={otherConfigs}
+        configIndex={configIndex}
+        options={options}
+      />
+    </TooltipSeriesListContainer>
   );
 }
-
-const TooltipList = styled.ol`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`;
-
-const ColorIndicator = styled.span<{
-  color?: string;
-}>`
-  &::before {
-    content: '';
-    display: ${(x) => (x.color ? 'inline-block' : 'none')};
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    background: ${(x) => x.color || 'black'};
-    margin-right: 0.5em;
-    flex-shrink: 0;
-  }
-`;
-
-const TooltipListItem = styled.li<{ mt?: number }>((props: { mt?: number }) =>
-  css({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    mt: props.mt,
-  })
-);
-
-const TooltipValueContainer = styled.span(
-  css({
-    fontWeight: 'bold',
-    ml: '1em',
-  })
-);
