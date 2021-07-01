@@ -13,7 +13,9 @@ type InternationalTooltipProps = {
   comparedValue: number;
 };
 
-export function InternationalTooltip(props: InternationalTooltipProps) {
+export function PositiveTestedPeopleInternationalTooltip(
+  props: InternationalTooltipProps
+) {
   const { countryName, value, comparedName, comparedValue, title } = props;
   const { formatPercentage } = useIntl();
 
@@ -23,26 +25,20 @@ export function InternationalTooltip(props: InternationalTooltipProps) {
 
   return (
     <TooltipContent title={title}>
-      <>
-        <TooltipSubject thresholdValues={thresholdValues} filterBelow={value}>
+      <TooltipSubject thresholdValues={thresholdValues} filterBelow={value}>
+        <SubjectText name={countryName} value={formatPercentage(value)} bold />
+      </TooltipSubject>
+      {showComparison && (
+        <TooltipSubject
+          thresholdValues={thresholdValues}
+          filterBelow={comparedValue}
+        >
           <SubjectText
-            name={countryName}
-            value={formatPercentage(value)}
-            bold
+            name={comparedName}
+            value={formatPercentage(comparedValue)}
           />
         </TooltipSubject>
-        {showComparison && (
-          <TooltipSubject
-            thresholdValues={thresholdValues}
-            filterBelow={comparedValue}
-          >
-            <SubjectText
-              name={comparedName}
-              value={formatPercentage(comparedValue)}
-            />
-          </TooltipSubject>
-        )}
-      </>
+      )}
     </TooltipContent>
   );
 }

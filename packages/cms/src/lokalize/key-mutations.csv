@@ -255,3 +255,6 @@ timestamp,action,key
 2021-06-30T11:14:30.710Z,add,internationaal_positief_geteste_personen.choropleth.toelichting
 2021-06-30T11:14:31.939Z,add,internationaal_positief_geteste_personen.choropleth.tooltip_titel
 2021-06-30T11:14:32.964Z,add,internationaal_positief_geteste_personen.choropleth.legenda_titel
+2021-07-01T15:55:23.419Z,add,choropleth.a11y.landen
+2021-07-01T15:57:35.609Z,add,accessibility.charts.international_tested_overall_choropleth.description
+2021-07-01T15:57:37.177Z,add,accessibility.charts.international_tested_overall_choropleth.label
