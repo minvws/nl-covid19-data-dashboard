@@ -147,7 +147,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
   );
 
   return (
-    <Box position="relative">
+    <Box position="relative" height="100%">
       {tabInteractiveButton}
       <div
         ref={ref}
