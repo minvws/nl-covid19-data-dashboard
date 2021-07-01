@@ -37,7 +37,7 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   }
   return (
     <Difference color={colors.data.neutral}>
-      <Gelijk color={colors.gray} />
+      <Gelijk color={colors.data.neutral} />
       {diffText.gelijk}
     </Difference>
   );
