@@ -1,8 +1,12 @@
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { Box } from '~/components/base';
+// NEED TO CHANGE
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { InlineText, Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 
 type singleItem = {
   country_code: string;
@@ -18,7 +22,7 @@ interface narrowInfectedTableProps {
   matchedItems: any[];
 }
 
-const MAX_COUNTRIES = 5;
+const MAX_COUNTRIES = 10;
 
 export function NarrowInfectedTable({
   data,
@@ -62,6 +66,14 @@ interface itemRowProps {
 }
 
 function ItemRow({ item, highestAverage }: itemRowProps) {
+  const { siteText } = useIntl();
+  const text = siteText.internationaal_positief_geteste_personen.land_tabel;
+
+  const filterBelow = getFilteredThresholdValues(
+    regionThresholds.situations.gathering,
+    item.infected_per_100k_average
+  );
+
   return (
     <Box
       borderBottom="1px solid silver"
@@ -71,7 +83,9 @@ function ItemRow({ item, highestAverage }: itemRowProps) {
         item.country_code === 'NLD' ? colors.tileGray : undefined
       }
     >
-      <InlineText fontWeight="bold">Land: {item.country_code}</InlineText>
+      <InlineText fontWeight="bold">
+        {text.header_land} {item.country_code}
+      </InlineText>
       <Box display="flex">
         <Text
           mb={0}
@@ -81,7 +95,7 @@ function ItemRow({ item, highestAverage }: itemRowProps) {
             justifyContent: 'space-between',
           })}
         >
-          Per 100.000 inwoners:
+          {`${text.header_per_inwoners}:`}
           <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
             {item.infected_per_100k_average}
           </InlineText>
@@ -93,8 +107,9 @@ function ItemRow({ item, highestAverage }: itemRowProps) {
               width={`${
                 (item.infected_per_100k_average / highestAverage) * 100
               }%`}
+              minWidth="3px"
               height="12px"
-              backgroundColor="red"
+              backgroundColor={filterBelow.color}
               mt="6px"
             />
           </Box>
@@ -111,7 +126,7 @@ function ItemRow({ item, highestAverage }: itemRowProps) {
             justifyContent: 'space-between',
           })}
         >
-          Totaal afgelopen 7 dagen:
+          {`${text.header_totale}:`}
           <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
             {item.infected}
           </InlineText>

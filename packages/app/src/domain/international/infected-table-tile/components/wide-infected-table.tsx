@@ -3,9 +3,13 @@ import { maxBy } from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+// NEED TO CHANGE
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
+import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { BarWithNumber } from './bar-with-number';
 
 type singleItem = {
@@ -23,13 +27,15 @@ interface wideInfectedTableProps {
   matchedItems: any[]; // CHANGE
 }
 
-const MAX_COUNTRIES = 5;
+const MAX_COUNTRIES = 10;
 
 export function WideInfectedTable({
   data,
   isExpanded,
   matchedItems,
 }: wideInfectedTableProps) {
+  const { siteText } = useIntl();
+  const text = siteText.internationaal_positief_geteste_personen.land_tabel;
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   return (
@@ -46,7 +52,7 @@ export function WideInfectedTable({
                 pl: 3,
               })}
             >
-              Land
+              {text.header_land}
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -56,7 +62,7 @@ export function WideInfectedTable({
                 }),
               })}
             >
-              Per 100.000 inwoners
+              {text.header_per_inwoners}
             </HeaderCell>
             <HeaderCell
               css={css({
@@ -68,7 +74,7 @@ export function WideInfectedTable({
                 }),
               })}
             >
-              Totaal afgelopen 7 dagen:
+              {text.header_totale}
             </HeaderCell>
           </tr>
         </thead>
@@ -108,6 +114,11 @@ interface tableRowProps {
 }
 
 function TableRow({ item, highestAverage }: tableRowProps) {
+  const filterBelow = getFilteredThresholdValues(
+    regionThresholds.situations.gathering,
+    item.infected_per_100k_average
+  );
+
   return (
     <tr
       css={css({
@@ -131,7 +142,7 @@ function TableRow({ item, highestAverage }: tableRowProps) {
           <BarWithNumber
             amount={item.infected_per_100k_average}
             percentage={(item.infected_per_100k_average / highestAverage) * 100}
-            color="red"
+            color={filterBelow.color}
           />
         )}
       </Cell>
@@ -139,6 +150,7 @@ function TableRow({ item, highestAverage }: tableRowProps) {
         css={css({
           textAlign: 'right',
           pr: 3,
+          fontWeight: ' bold',
         })}
       >
         {item.infected}
@@ -170,3 +182,22 @@ const Cell = styled.td(
     py: 2,
   })
 );
+
+// internationaal_positief_geteste_personen.land_tabel.title _'Aantal positief geteste mensen per land'
+// internationaal_positief_geteste_personen.land_tabel.description 'Deze tabel laat per land en voor Europa zien van hoeveel mensen gemeld is dat ze positief getest zijn op het coronavirus. Dit wordt berekend per 100.000 inwoners en gemiddeld over de afgelopen zeven dagen. Via de zoekfunctie kunt u een land selecteren.'
+
+// internationaal_positief_geteste_personen.land_tabel.search.placeholder 'Zoek een land'
+// internationaal_positief_geteste_personen.land_tabel.search.clear 'Zoekopdracht wissen'
+
+// internationaal_positief_geteste_personen.land_tabel.sorteer_op 'Sorteer op:'
+// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_per_100k_average_high_to_low 'Per 100.000 inwoners, hoog naar laag'
+// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_per_100k_average_low_to_high 'Per 100.000 inwoners, laag naar hoog'
+// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_high_to_low 'Totale afgelopen 7 dagen, hoog naar laag'
+// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_low_to_high 'Totale afgelopen 7 dagen, laag naar hoog'
+
+// internationaal_positief_geteste_personen.land_tabel.header_land 'Land'
+// internationaal_positief_geteste_personen.land_tabel.header_per_inwoners 'Per 100.000 inwoners'
+// internationaal_positief_geteste_personen.land_tabel.header_totale 'Totale afgelopen 7 dagen'
+
+// internationaal_positief_geteste_personen.land_tabel.toon_meer 'Toon meer landen'
+// internationaal_positief_geteste_personen.land_tabel.toon_minder 'Toon minder landen'

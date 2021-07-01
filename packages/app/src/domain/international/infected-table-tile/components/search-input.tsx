@@ -84,7 +84,7 @@ const StyledSearchInput = styled.input(
     pl: '36px',
 
     fontFamily: 'body',
-    fontSize: 2,
+    fontSize: 1,
 
     appearance: 'none',
 

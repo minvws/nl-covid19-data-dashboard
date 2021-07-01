@@ -6,6 +6,7 @@ import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { NarrowInfectedTable } from './components/narrow-infected-table';
 import { SearchInput } from './components/search-input';
@@ -19,14 +20,14 @@ function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const data = Array(10)
+const data = Array(20)
   .fill(null)
   .map((item, index) => {
     return {
       country_code:
         index === 3 ? 'NLD' : Math.random().toString(36).substr(2, 3),
       infected: randomIntFromInterval(10, 100),
-      infected_per_100k_average: randomIntFromInterval(10, 500),
+      infected_per_100k_average: randomIntFromInterval(0, 100),
       date_start_unix: new Date(2021, 6, 19).getTime() / 1000,
       date_end_unix: new Date(2021, 6, 26).getTime() / 1000,
       date_of_insertion_unix: new Date(2021, 6, 26).getTime() / 1000,
@@ -34,6 +35,9 @@ const data = Array(10)
   });
 
 export function InfectedTableTile() {
+  const { siteText } = useIntl();
+  const text = siteText.internationaal_positief_geteste_personen.land_tabel;
+
   const [value, setValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [matchedItems, setMatchedItems] = useState(['']);
@@ -42,7 +46,7 @@ export function InfectedTableTile() {
   // setIsExpanded(false);
 
   const [sortOption, setSortOption] = useState<SortIdentifier>(
-    'infected_per_100k_high_to_low'
+    'infected_per_100k_average_high_to_low'
   );
 
   const breakpoints = useBreakpoints();
@@ -53,13 +57,13 @@ export function InfectedTableTile() {
     ) as SortIdentifier[];
 
     return sortIdentifiers.map((id) => {
-      // const label = siteText.over_risiconiveaus.scoreboard.sort_option[id];
+      const label = text.sort_option[id];
       return {
-        label: id,
+        label: label,
         value: id,
       };
     });
-  }, []); // sitetext
+  }, [text]);
 
   useEffect(() => {
     setMatchedItems([
@@ -73,14 +77,9 @@ export function InfectedTableTile() {
 
   return (
     <Tile>
-      <Heading level={3}>Aantal positief geteste mensen per land</Heading>
+      <Heading level={3}>{text.title}</Heading>
       <Box maxWidth="maxWidthText">
-        <Text>
-          Deze tabel laat per land en voor Europa zien van hoeveel mensen gemeld
-          is dat ze positief getest zijn op het coronavirus. Dit wordt berekend
-          per 100.000 inwoners en gemiddeld over de afgelopen zeven dagen. Via
-          de zoekfunctie kunt u een land selecteren.
-        </Text>
+        <Text>{text.description}</Text>
       </Box>
       <Box
         display="flex"
@@ -92,7 +91,7 @@ export function InfectedTableTile() {
           <SearchInput
             value={value}
             setValue={setValue}
-            placeholderText="Zoek een land"
+            placeholderText={text.search.placeholder}
           />
         </Box>
 
@@ -107,7 +106,7 @@ export function InfectedTableTile() {
               fontSize: 1,
             })}
           >
-            Sorteer op
+            {text.sorteer_op}
           </label>
           <Select
             options={sortOptions}
@@ -124,17 +123,16 @@ export function InfectedTableTile() {
         />
       ) : (
         <NarrowInfectedTable
-          data={data}
+          data={data.sort(positiveTestedSortOptions[sortOption])}
           isExpanded={isExpanded}
           matchedItems={matchedItems}
         />
       )}
 
-      {/* Hide the expand button when the user is searching */}
       {matchedItems.length > data.length && (
-        <Box display="flex" pl={3}>
+        <Box display="flex" pl={{ _: 2, sm: 3 }} my={3}>
           <ExpandButton onClick={() => setIsExpanded(!isExpanded)}>
-            {isExpanded ? 'Toon minder landen' : 'Toon meer landen'}
+            {isExpanded ? text.toon_minder : text.toon_meer}
           </ExpandButton>
         </Box>
       )}
