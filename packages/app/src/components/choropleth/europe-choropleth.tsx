@@ -1,4 +1,8 @@
-import { KeysOfType } from '@corona-dashboard/common';
+import {
+  EuropeGeoJSON,
+  EuropeGeoProperties,
+  KeysOfType,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { geoConicConformal } from 'd3-geo';
 import { Feature, MultiPolygon } from 'geojson';
@@ -17,7 +21,7 @@ import { Choropleth } from './choropleth';
 import { useInChoroplethColorScale, useTabInteractiveButton } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
-import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
+import { europeGeo } from './topology';
 
 /**
  * List of countries to define the boundingbox. These are countries on the outer edges
