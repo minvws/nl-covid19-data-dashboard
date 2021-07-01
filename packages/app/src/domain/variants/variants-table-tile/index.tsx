@@ -31,8 +31,9 @@ export function VariantsTableTile({
   );
 
   const metadata: MetadataProps = {
-    date: data.date_of_insertion_unix,
+    date: [data.date_start_unix, data.date_end_unix],
     source: text.bronnen.rivm,
+    obtained: data.date_of_insertion_unix,
   };
 
   return (

@@ -40,8 +40,10 @@ export interface Feature {
 }
 
 export type MetricScope =
+  | 'in'
+  | 'in_collection'
   | 'nl'
   | 'vr'
-  | 'gm'
   | 'vr_collection'
+  | 'gm'
   | 'gm_collection';

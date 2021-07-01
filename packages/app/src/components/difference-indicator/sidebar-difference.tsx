@@ -33,7 +33,7 @@ export function SidebarDifference({
 
   return (
     <Container>
-      <IconContainer color="gray">
+      <IconContainer color="data.neutral">
         <IconGelijk />
       </IconContainer>
     </Container>

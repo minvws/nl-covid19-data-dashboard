@@ -36,13 +36,16 @@ export function AppContent({
   const isMenuOpen =
     router.pathname == '/landelijk' || router.query.menu === '1';
 
-  const menuOpenText = router.pathname.startsWith('/landelijk')
+  const menuOpenText = router.pathname.startsWith('/internationaal')
+    ? siteText.nav.terug_naar_alle_cijfers_internationaal
+    : router.pathname.startsWith('/landelijk')
     ? siteText.nav.terug_naar_alle_cijfers_homepage
     : router.pathname.startsWith('/veiligheidsregio')
     ? siteText.nav.terug_naar_alle_cijfers_veiligheidsregio
     : router.pathname.startsWith('/gemeente')
     ? siteText.nav.terug_naar_alle_cijfers_gemeente
     : siteText.nav.terug_naar_alle_cijfers;
+
   return (
     <MaxWidth px={[0, 0, 0, 0, 3]}>
       <AppContentContainer>
@@ -73,16 +76,14 @@ export function AppContent({
           /** id is for hash navigation */
           id="content"
         >
-          <Box spacing={4}>
-            <ResponsiveVisible isVisible={!isMenuOpen}>
-              {children}
-            </ResponsiveVisible>
-            <MenuLinkContainer isVisible={!isMenuOpen && !hideMenuButton}>
-              <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
-                {menuOpenText}
-              </LinkWithIcon>
-            </MenuLinkContainer>
-          </Box>
+          <ResponsiveVisible isVisible={!isMenuOpen}>
+            {children}
+          </ResponsiveVisible>
+          <MenuLinkContainer isVisible={!isMenuOpen && !hideMenuButton} mt={4}>
+            <LinkWithIcon icon={<ArrowIconLeft />} href={menuOpenUrl}>
+              {menuOpenText}
+            </LinkWithIcon>
+          </MenuLinkContainer>
         </StyledAppContent>
       </AppContentContainer>
     </MaxWidth>
@@ -103,6 +104,7 @@ const AppContentContainer = styled.div(
     marginBottom: '2rem',
     margin: '0 auto',
     pb: 4,
+    minHeight: '50vh',
   })
 );
 
