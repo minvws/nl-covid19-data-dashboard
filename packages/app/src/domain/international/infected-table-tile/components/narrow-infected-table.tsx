@@ -32,7 +32,7 @@ export function NarrowInfectedTable({
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   return (
-    <Box borderTop="1px solid silver">
+    <Box borderTop="1px solid silver" mb={3}>
       {data.map((item, index) => (
         <>
           {matchedItems.length > data.length ? (
@@ -66,7 +66,7 @@ interface itemRowProps {
 }
 
 function ItemRow({ item, highestAverage }: itemRowProps) {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
   const filterBelow = getFilteredThresholdValues(
@@ -97,7 +97,7 @@ function ItemRow({ item, highestAverage }: itemRowProps) {
         >
           {`${text.header_per_inwoners}:`}
           <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
-            {item.infected_per_100k_average}
+            {formatNumber(item.infected_per_100k_average)}
           </InlineText>
         </Text>
 

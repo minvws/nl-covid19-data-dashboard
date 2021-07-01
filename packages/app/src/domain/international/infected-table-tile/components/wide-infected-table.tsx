@@ -182,22 +182,3 @@ const Cell = styled.td(
     py: 2,
   })
 );
-
-// internationaal_positief_geteste_personen.land_tabel.title _'Aantal positief geteste mensen per land'
-// internationaal_positief_geteste_personen.land_tabel.description 'Deze tabel laat per land en voor Europa zien van hoeveel mensen gemeld is dat ze positief getest zijn op het coronavirus. Dit wordt berekend per 100.000 inwoners en gemiddeld over de afgelopen zeven dagen. Via de zoekfunctie kunt u een land selecteren.'
-
-// internationaal_positief_geteste_personen.land_tabel.search.placeholder 'Zoek een land'
-// internationaal_positief_geteste_personen.land_tabel.search.clear 'Zoekopdracht wissen'
-
-// internationaal_positief_geteste_personen.land_tabel.sorteer_op 'Sorteer op:'
-// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_per_100k_average_high_to_low 'Per 100.000 inwoners, hoog naar laag'
-// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_per_100k_average_low_to_high 'Per 100.000 inwoners, laag naar hoog'
-// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_high_to_low 'Totale afgelopen 7 dagen, hoog naar laag'
-// internationaal_positief_geteste_personen.land_tabel.sort_option.infected_low_to_high 'Totale afgelopen 7 dagen, laag naar hoog'
-
-// internationaal_positief_geteste_personen.land_tabel.header_land 'Land'
-// internationaal_positief_geteste_personen.land_tabel.header_per_inwoners 'Per 100.000 inwoners'
-// internationaal_positief_geteste_personen.land_tabel.header_totale 'Totale afgelopen 7 dagen'
-
-// internationaal_positief_geteste_personen.land_tabel.toon_meer 'Toon meer landen'
-// internationaal_positief_geteste_personen.land_tabel.toon_minder 'Toon minder landen'

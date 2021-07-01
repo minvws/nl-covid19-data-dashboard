@@ -130,7 +130,7 @@ export function InfectedTableTile() {
       )}
 
       {matchedItems.length > data.length && (
-        <Box display="flex" pl={{ _: 2, sm: 3 }} my={3}>
+        <Box display="flex" pl={{ _: 2, sm: 3 }} mb={3}>
           <ExpandButton onClick={() => setIsExpanded(!isExpanded)}>
             {isExpanded ? text.toon_minder : text.toon_meer}
           </ExpandButton>
