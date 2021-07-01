@@ -65,7 +65,7 @@ export default function PositiefGetesteMensenPage(
   );
   assert(
     isDefined(comparedValue),
-    'comparedValue could not be found for country code NLD'
+    'comparedValue could not be found for country code nld'
   );
 
   return (
