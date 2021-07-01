@@ -28,11 +28,17 @@ const boundingBoxEurope: EuropeGeoJSON = {
 };
 
 type EuropeChoroplethProps<T> = {
+  // A list of data items that contain country specific data
   data: T[];
+  // A number property on the data item that will determine the color of the country in the map
   metricProperty: KeysOfType<T, number, true>;
+  // A string property on the data item that will be used to link the data item with a choropleth feature id
   joinProperty: KeysOfType<T, string, true>;
+  // Optional tooltip formatting
   tooltipContent?: (context: T) => ReactNode;
+  // Optional tool tip placement
   tooltipPlacement?: ChoroplethTooltipPlacement;
+  // Optional link that will be added to each choropleth feature for which an associated data item exists
   getLink?: (code: string) => string;
 };
 
