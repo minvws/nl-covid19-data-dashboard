@@ -161,7 +161,7 @@ export function getNlData() {
   // clone data to prevent mutation of the original
   const data = JSON.parse(JSON.stringify(json.nl)) as National;
 
-  sortTimeSeriesInDataInPlace(data);
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
   return { data };
 }
@@ -222,7 +222,7 @@ export function getVrName(code: string) {
 export function loadAndSortVrData(vrcode: string) {
   const data = loadJsonFromDataFile<Regionaal>(`${vrcode}.json`);
 
-  sortTimeSeriesInDataInPlace(data);
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
   return data;
 }
@@ -269,7 +269,7 @@ export function getGmData(context: GetStaticPropsContext) {
 
   const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
 
-  sortTimeSeriesInDataInPlace(data);
+  sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
   return { data, municipalityName };
 }
