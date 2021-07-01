@@ -35,6 +35,9 @@ export type TooltipSettings = {
 };
 
 type TProps<T1, T3, T4> = {
+  /**
+   * An optional projection for the map rendering, defaults to 'mercator'
+   */
   projection?: ProjectionPreset | (() => GeoProjection);
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
