@@ -42,11 +42,13 @@ export interface MunicipalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface MunicipalHospitalNice {
@@ -263,11 +265,13 @@ export interface NationalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface NationalDoctor {
@@ -944,11 +948,13 @@ export interface RegionalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface VrGNumber {
