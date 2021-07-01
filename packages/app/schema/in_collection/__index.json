@@ -3,7 +3,13 @@
   "type": "object",
   "title": "in_collection",
   "additionalProperties": false,
-  "required": ["last_generated", "proto_name", "tested_overall"],
+  "required": [
+    "last_generated",
+    "proto_name",
+    "name",
+    "code",
+    "tested_overall"
+  ],
   "properties": {
     "last_generated": {
       "type": "string"
@@ -11,6 +17,14 @@
     "proto_name": {
       "type": "string",
       "enum": ["IN_COLLECTION"]
+    },
+    "name": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "const": { "$data": "1/proto_name" }
     },
     "tested_overall": {
       "type": "array",

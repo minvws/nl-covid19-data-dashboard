@@ -1,4 +1,8 @@
-import { NlVaccineStockValue } from '@corona-dashboard/common';
+import {
+  getValuesInTimeframe,
+  NlVaccineStockValue,
+  TimeframeOption,
+} from '@corona-dashboard/common';
 import { pick } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
@@ -12,7 +16,6 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 
 interface VaccineStockPerSupplierChartProps {
   values: NlVaccineStockValue[];

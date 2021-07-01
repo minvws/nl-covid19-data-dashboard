@@ -1,13 +1,14 @@
 import {
+  getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
+  TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
 

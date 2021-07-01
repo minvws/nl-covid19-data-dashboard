@@ -1,12 +1,13 @@
 import {
+  getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
+  TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { first, last } from 'lodash';
 // @ts-ignore
 import starwars from 'starwars';
-import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { TimelineEventConfig } from './components/timeline';
 
 const ONE_DAY_IN_SECONDS = 60 * 60 * 24;

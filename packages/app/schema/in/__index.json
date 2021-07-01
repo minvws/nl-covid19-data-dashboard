@@ -5,7 +5,8 @@
   "required": [
     "last_generated",
     "proto_name",
-    "country_code",
+    "name",
+    "code",
     "tested_overall"
   ],
   "additionalProperties": false,
@@ -18,9 +19,14 @@
       "//": "We might want to use an enum here with country codes. We need the IN_ prefix for validation because all files end up in the same folder",
       "pattern": "^IN_[A-Z]+$"
     },
-    "country_code": {
+    "name": {
       "type": "string",
       "const": { "$data": "1/proto_name" }
+    },
+    "code": {
+      "type": "string",
+      "//": "We might want to use an enum here with country codes. This would be the filename without the IN_ prefix, so the country ISO code",
+      "pattern": "^[A-Z]+$"
     },
     "tested_overall": {
       "$ref": "tested_overall.json"
