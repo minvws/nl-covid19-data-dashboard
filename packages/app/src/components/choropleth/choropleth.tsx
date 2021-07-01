@@ -147,7 +147,7 @@ export function Choropleth<
  * The extent is specified as an array [[x₀, y₀], [x₁, y₁]], where x₀ is the left side of the bounding box,
  * y₀ is the top, x₁ is the right and y₁ is the bottom.
  *
- * (Description taken from ProjectionProps.fitExtent in Projection.d.ts)
+ * (Description taken from ProjectionProps.fitExtent in @visx/Projection.d.ts)
  */
 type FitExtent = [[[number, number], [number, number]], any];
 
