@@ -145,7 +145,8 @@ export interface MunicipalitiesSewer {
 export interface In {
   last_generated: string;
   proto_name: string;
-  country_code: string;
+  name: string;
+  code: string;
   tested_overall: InTestedOverall;
 }
 export interface InTestedOverall {
@@ -163,6 +164,8 @@ export interface InTestedOverallValue {
 export interface InCollection {
   last_generated: string;
   proto_name: "IN_COLLECTION";
+  name: string;
+  code: string;
   tested_overall: InTestedOverall[];
 }
 export interface InTestedOverall {
