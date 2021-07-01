@@ -142,6 +142,38 @@ export interface MunicipalitiesSewer {
   date_of_insertion_unix: number;
 }
 
+export interface In {
+  last_generated: string;
+  proto_name: string;
+  country_code: string;
+  tested_overall: InTestedOverall;
+}
+export interface InTestedOverall {
+  values: InTestedOverallValue[];
+  last_value: InTestedOverallValue;
+}
+export interface InTestedOverallValue {
+  infected: number;
+  infected_per_100k_average: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
+export interface InCollection {
+  last_generated: string;
+  proto_name: "IN_COLLECTION";
+  tested_overall: InTestedOverall[];
+}
+export interface InTestedOverall {
+  country_code: string;
+  infected: number;
+  infected_per_100k_average: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
 export interface National {
   last_generated: string;
   proto_name: "NL";

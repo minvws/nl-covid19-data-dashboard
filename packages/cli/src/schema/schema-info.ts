@@ -26,6 +26,18 @@ export function getSchemaInfo(
   const fileList = fs.readdirSync(jsonDirectory);
 
   return {
+    in: {
+      files: getFileNames(fileList, /^IN_[A-Z]+.json$/),
+      basePath: jsonDirectory,
+      customValidations: [
+        createChoroplethValidation(
+          path.join(defaultJsonDirectory, 'IN_COLLECTION.json'),
+          'country_code'
+        ),
+        validateMovingAverages,
+      ],
+    },
+    in_collection: { files: ['IN_COLLECTION.json'], basePath: jsonDirectory },
     nl: { files: ['NL.json'], basePath: jsonDirectory },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
@@ -38,6 +50,7 @@ export function getSchemaInfo(
         validateMovingAverages,
       ],
     },
+    vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
     gm: {
       files: getFileNames(fileList, /^GM[0-9]+.json$/),
       basePath: jsonDirectory,
@@ -50,6 +63,5 @@ export function getSchemaInfo(
       ],
     },
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
-    vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
   };
 }
