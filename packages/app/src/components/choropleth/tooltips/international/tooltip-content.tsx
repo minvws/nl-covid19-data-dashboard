@@ -61,7 +61,6 @@ const StyledTooltipHeader = styled.div(
 
 const TooltipInfo = styled.div(
   css({
-    cursor: 'pointer',
     borderTop: '1px solid',
     borderTopColor: 'border',
     py: 2,
