@@ -1,5 +1,6 @@
 import {
   assert,
+  InCollection,
   Municipal,
   Municipalities,
   National,
@@ -44,6 +45,11 @@ const json = {
   nl: loadJsonFromDataFile<National>('NL.json'),
   vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
   gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
+  inCollection: loadJsonFromDataFile<InCollection>(
+    'IN_COLLECTION.json',
+    undefined,
+    true
+  ),
 };
 
 export function getLastGeneratedDate() {
@@ -274,18 +280,23 @@ export function getGmData(context: GetStaticPropsContext) {
   return { data, municipalityName };
 }
 
-export function createGetChoroplethData<T1, T2>(settings?: {
+const NOOP = () => null;
+
+export function createGetChoroplethData<T1, T2, T3>(settings?: {
   vr?: (collection: Regions) => T1;
   gm?: (collection: Municipalities) => T2;
+  in?: (collection: InCollection) => T3;
 }) {
   return () => {
-    const filterVr = settings?.vr || (() => null);
-    const filterGm = settings?.gm || (() => null);
+    const filterVr = settings?.vr ?? NOOP;
+    const filterGm = settings?.gm ?? NOOP;
+    const filterIn = settings?.in ?? NOOP;
 
     return {
       choropleth: {
         vr: filterVr(json.vrCollection) as T1,
         gm: filterGm(json.gmCollection) as T2,
+        in: filterIn(json.inCollection) as T3,
       },
     };
   };

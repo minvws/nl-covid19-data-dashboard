@@ -208,6 +208,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
           accessibility={choroplethAccessibility}
           description={dataDescription}
           featureCollection={municipalGeo}
+          outlines={countryGeo}
           hovers={hasData ? municipalGeo : undefined}
           boundingBox={boundingbox || countryGeo}
           renderFeature={renderFeature}

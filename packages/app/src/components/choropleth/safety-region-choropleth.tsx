@@ -207,6 +207,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
         minHeight={minHeight}
         description={dataDescription}
         featureCollection={regionGeo}
+        outlines={countryGeo}
         hovers={hasData ? regionGeo : undefined}
         boundingBox={boundingBox || countryGeo}
         renderFeature={renderFeature}
