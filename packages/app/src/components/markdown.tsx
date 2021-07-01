@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { ExternalLink } from '~/components/external-link';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
-import { DisplayForQueryCode } from './display-for-query-code';
+import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 
 interface MarkdownProps {
@@ -33,9 +33,9 @@ const renderers = {
    *     ````
    */
   code: ({ language = '', value }: { language: string; value: string }) => (
-    <DisplayForQueryCode code={language}>
+    <DisplayOnMatchingQueryCode code={language}>
       <Markdown content={value} />
-    </DisplayForQueryCode>
+    </DisplayOnMatchingQueryCode>
   ),
 
   /**

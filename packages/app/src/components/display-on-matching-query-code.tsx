@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
  * It can be used for conditionally rendering components for a safety region or
  * municipality.
  */
-export function DisplayForQueryCode({
+export function DisplayOnMatchingQueryCode({
   children,
   code,
 }: {
