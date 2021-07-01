@@ -90,8 +90,6 @@ function validateCommonPropertyEquality(
 ) {
   const commonProperties = getCommonProperties(collectionValue, lastValue);
 
-  console.dir(lastValue);
-
   const result = commonProperties
     .map((key) => {
       return lastValue[key] !== collectionValue[key]
