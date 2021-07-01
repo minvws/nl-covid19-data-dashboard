@@ -2,7 +2,9 @@ import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
+import { SelectCountries } from '~/domain/international/select-countries/select-countries';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -57,6 +59,12 @@ export default function PositiefGetesteMensenPage(
             reference={text.reference}
           />
           {content.articles && <ArticleStrip articles={content.articles} />}
+
+          <Tile>
+            <SelectCountries />
+          </Tile>
+
+          <div style={{ minHeight: '60em' }}></div>
         </TileList>
       </InternationalLayout>
     </Layout>
