@@ -53,11 +53,11 @@
       "title": "nl_behavior_per_age_group_value",
       "type": "object",
       "properties": {
-        "16_24": { "type": "integer" },
-        "25_39": { "type": "integer" },
-        "40_54": { "type": "integer" },
-        "55_69": { "type": "integer" },
-        "70_plus": { "type": "integer" }
+        "16_24": { "type": ["integer", "null"] },
+        "25_39": { "type": ["integer", "null"] },
+        "40_54": { "type": ["integer", "null"] },
+        "55_69": { "type": ["integer", "null"] },
+        "70_plus": { "type": ["integer", "null"] }
       },
       "required": ["16_24", "25_39", "40_54", "55_69", "70_plus"],
       "additionalProperties": false
