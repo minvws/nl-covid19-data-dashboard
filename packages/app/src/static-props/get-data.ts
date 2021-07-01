@@ -280,15 +280,17 @@ export function getGmData(context: GetStaticPropsContext) {
   return { data, municipalityName };
 }
 
+const NOOP = () => null;
+
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
   vr?: (collection: Regions) => T1;
   gm?: (collection: Municipalities) => T2;
   in?: (collection: InCollection) => T3;
 }) {
   return () => {
-    const filterVr = settings?.vr ?? (() => null);
-    const filterGm = settings?.gm ?? (() => null);
-    const filterIn = settings?.in ?? (() => null);
+    const filterVr = settings?.vr ?? NOOP;
+    const filterGm = settings?.gm ?? NOOP;
+    const filterIn = settings?.in ?? NOOP;
 
     return {
       choropleth: {

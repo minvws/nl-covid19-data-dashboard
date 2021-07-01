@@ -16,7 +16,8 @@ import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
 
 /**
- * List of countries to define the boundingbox
+ * List of countries to define the boundingbox. These are countries on the outer edges
+ * of the group of countries that are shown.
  */
 const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC'];
 
@@ -30,15 +31,16 @@ const boundingBoxEurope: EuropeGeoJSON = {
 type CountryDataItem = { country_code: string };
 
 type EuropeChoroplethProps<T extends CountryDataItem> = {
-  // A list of data items that contain country specific data
   data: T[];
-  // A number property on the data item that will determine the color of the country in the map
+  /**
+   * A number property on the data item that will determine the color of the country in the map
+   */
   metricProperty: KeysOfType<T, number, true>;
-  // Optional tooltip formatting
   tooltipContent?: (context: T) => ReactNode;
-  // Optional tool tip placement
   tooltipPlacement?: ChoroplethTooltipPlacement;
-  // Optional link that will be added to each choropleth feature for which an associated data item exists
+  /**
+   * Optional link that will be added to each choropleth feature for which an associated data item exists
+   */
   getLink?: (code: string) => string;
 };
 

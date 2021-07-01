@@ -34,7 +34,7 @@ export type TooltipSettings = {
   data: string;
 };
 
-type TProps<T1, T3, T4> = {
+type ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties> = {
   /**
    * An optional projection for the map rendering, defaults to 'mercator'
    */
@@ -48,12 +48,12 @@ type TProps<T1, T3, T4> = {
   minHeight?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
-  featureCollection: FeatureCollection<MultiPolygon, T1>;
+  featureCollection: FeatureCollection<MultiPolygon, FeatureProperties>;
   // These are the outline superimposed over the main features.
-  outlines?: FeatureCollection<MultiPolygon, T4>;
+  outlines?: FeatureCollection<MultiPolygon, OutlineProperties>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
-  hovers?: FeatureCollection<MultiPolygon, T3>;
+  hovers?: FeatureCollection<MultiPolygon, HoverProperties>;
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
@@ -67,20 +67,20 @@ type TProps<T1, T3, T4> = {
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   renderFeature: (
-    feature: Feature<MultiPolygon, T1>,
+    feature: Feature<MultiPolygon, FeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
 
   renderHighlight?: (
-    feature: Feature<MultiPolygon, T1>,
+    feature: Feature<MultiPolygon, FeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
   renderHover: (
-    feature: Feature<MultiPolygon, T3>,
+    feature: Feature<MultiPolygon, HoverProperties>,
     path: string,
     index: number
   ) => ReactNode;
@@ -102,11 +102,15 @@ type TProps<T1, T3, T4> = {
  * @param props
  */
 
-export function Choropleth<T1, T2, T3>({
+export function Choropleth<
+  FeatureProperties,
+  HoverProperties,
+  OutlineProperties
+>({
   getTooltipContent,
   tooltipPlacement,
   ...props
-}: TProps<T1, T2, T3>) {
+}: ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
 
@@ -138,17 +142,29 @@ export function Choropleth<T1, T2, T3>({
   );
 }
 
+/**
+ * Sets the projection’s scale and translate to fit the specified GeoJSON object in the center of the given extent.
+ * The extent is specified as an array [[x₀, y₀], [x₁, y₁]], where x₀ is the left side of the bounding box,
+ * y₀ is the top, x₁ is the right and y₁ is the bottom.
+ *
+ * (Description taken from ProjectionProps.fitExtent in Projection.d.ts)
+ */
 type FitExtent = [[[number, number], [number, number]], any];
 
-type ChoroplethMapProps<T1, T2, T3> = Omit<
-  TProps<T1, T2, T3>,
-  'getTooltipContent' | 'tooltipPlacement'
-> & {
-  setTooltip: (tooltip: TooltipSettings | undefined) => void;
-};
+type ChoroplethMapProps<FeatureProperties, HoverProperties, OutlineProperties> =
+  Omit<
+    ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties>,
+    'getTooltipContent' | 'tooltipPlacement'
+  > & {
+    setTooltip: (tooltip: TooltipSettings | undefined) => void;
+  };
 
-const ChoroplethMap: <T1, T2, T3>(
-  props: ChoroplethMapProps<T1, T2, T3> & {
+const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
+  props: ChoroplethMapProps<
+    FeatureProperties,
+    HoverProperties,
+    OutlineProperties
+  > & {
     hoverRef: React.RefObject<SVGGElement>;
   }
 ) => JSX.Element | null = memo((props) => {
