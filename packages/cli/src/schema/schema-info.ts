@@ -37,7 +37,13 @@ export function getSchemaInfo(
         validateMovingAverages,
       ],
     },
-    in_collection: { files: ['IN_COLLECTION.json'], basePath: jsonDirectory },
+    in_collection: {
+      files: [
+        // @TODO enable once the file is available
+        /* 'IN_COLLECTION.json' */
+      ],
+      basePath: jsonDirectory,
+    },
     nl: { files: ['NL.json'], basePath: jsonDirectory },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
