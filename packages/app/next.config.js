@@ -12,6 +12,12 @@ const nextConfig = {
    */
   reactStrictMode: true,
 
+  /**
+   * Enable source maps in production, because we want people to report readable
+   * stack traces from the error boundaries feature.
+   */
+  productionBrowserSourceMaps: true,
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
