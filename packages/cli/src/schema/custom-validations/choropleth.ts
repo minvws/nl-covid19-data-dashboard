@@ -2,7 +2,7 @@ import { UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { CustomValidationFunction, JSONObject, JSONValue } from './types';
+import { JSONObject, JSONValue } from './types';
 
 export function createChoroplethValidation(
   choroplethCollectionPath: string,
@@ -21,12 +21,14 @@ export function createChoroplethValidation(
   const collectionJson = JSON.parse(
     fs.readFileSync(choroplethCollectionPath, { encoding: 'utf8' })
   );
-  return validateChoroplethValues.bind(
-    undefined,
-    path.basename(choroplethCollectionPath),
-    collectionJson,
-    codeProperty
-  ) as CustomValidationFunction;
+
+  return (input: JSONObject) =>
+    validateChoroplethValues(
+      path.basename(choroplethCollectionPath),
+      collectionJson,
+      codeProperty,
+      input
+    );
 }
 
 /**
