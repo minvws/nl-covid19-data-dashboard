@@ -15,6 +15,7 @@ import {
   SeriesSingleValue,
 } from '../logic';
 import { GappedLinedTrend } from './gapped-line-trend';
+import { GappedStackedAreaTrend } from './gapped-stacked-area-trend';
 import { SplitAreaTrend } from './split-area-trend';
 import { SplitBarTrend } from './split-bar-trend';
 import { StackedAreaTrend } from './stacked-area-trend';
@@ -144,6 +145,21 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY1={getY1}
                   bounds={bounds}
                   id={`${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}`}
+                />
+              );
+            case 'gapped-stacked-area':
+              return (
+                <GappedStackedAreaTrend
+                  key={index}
+                  series={series as SeriesDoubleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  strokeWidth={config.strokeWidth}
+                  getX={getX}
+                  getY0={getY0}
+                  getY1={getY1}
+                  bounds={bounds}
+                  id={`${chartId}_${config.metricProperty}`}
                 />
               );
             case 'stacked-area':
