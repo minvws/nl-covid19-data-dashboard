@@ -88,7 +88,7 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   }, [getFillColor, hasData, unknownLevelColor]);
 
   return (
-    <Box aria-label="legend" width="100%">
+    <Box width="100%">
       <Heading level={3} fontSize="1rem" mb={0}>
         {siteText.escalatie_niveau.legenda.titel}
       </Heading>

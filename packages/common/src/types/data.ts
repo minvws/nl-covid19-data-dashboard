@@ -142,6 +142,38 @@ export interface MunicipalitiesSewer {
   date_of_insertion_unix: number;
 }
 
+export interface In {
+  last_generated: string;
+  proto_name: string;
+  country_code: string;
+  tested_overall: InTestedOverall;
+}
+export interface InTestedOverall {
+  values: InTestedOverallValue[];
+  last_value: InTestedOverallValue;
+}
+export interface InTestedOverallValue {
+  infected: number;
+  infected_per_100k_average: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
+export interface InCollection {
+  last_generated: string;
+  proto_name: "IN_COLLECTION";
+  tested_overall: InTestedOverall[];
+}
+export interface InTestedOverall {
+  country_code: string;
+  infected: number;
+  infected_per_100k_average: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
 export interface National {
   last_generated: string;
   proto_name: "NL";
@@ -215,16 +247,15 @@ export interface NationalDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
-  variants__alpha_percentage?: DifferenceDecimal;
-  variants__beta_percentage?: DifferenceDecimal;
-  variants__gamma_percentage?: DifferenceDecimal;
-  variants__delta_percentage?: DifferenceDecimal;
-  variants__eta_percentage?: DifferenceDecimal;
-  variants__epsilon_percentage?: DifferenceDecimal;
-  variants__theta_percentage?: DifferenceDecimal;
-  variants__kappa_percentage?: DifferenceDecimal;
-  variants__lambda_percentage?: DifferenceDecimal;
-  variants__other_percentage?: DifferenceDecimal;
+  variants__alpha_percentage: DifferenceDecimal;
+  variants__beta_percentage: DifferenceDecimal;
+  variants__gamma_percentage: DifferenceDecimal;
+  variants__delta_percentage: DifferenceDecimal;
+  variants__eta_percentage: DifferenceDecimal;
+  variants__epsilon_percentage: DifferenceDecimal;
+  variants__theta_percentage: DifferenceDecimal;
+  variants__kappa_percentage: DifferenceDecimal;
+  variants__other_percentage: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -849,9 +880,9 @@ export interface NlVariantsValue {
   kappa_percentage: number;
   kappa_occurrence: number;
   kappa_is_variant_of_concern: boolean;
-  lambda_percentage: number;
-  lambda_occurrence: number;
-  lambda_is_variant_of_concern: boolean;
+  lambda_percentage: number | null;
+  lambda_occurrence: number | null;
+  lambda_is_variant_of_concern: boolean | null;
   other_percentage: number;
   other_occurrence: number;
   other_is_variant_of_concern: boolean;

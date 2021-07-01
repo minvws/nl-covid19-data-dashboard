@@ -1,14 +1,14 @@
-import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { isPresent } from 'ts-is-present';
-import { last } from 'lodash';
 import {
   NationalReproduction,
   NationalReproductionValue,
+  TimeframeOption,
 } from '@corona-dashboard/common';
+import { last } from 'lodash';
+import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TimeframeOption } from '~/utils/timeframe';
+import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 
 interface ReproductionChartTileProps {
   data: NationalReproduction;
@@ -48,6 +48,9 @@ export function ReproductionChartTile({
     >
       {(timeframe) => (
         <TimeSeriesChart
+          accessibility={{
+            key: 'reproduction_line_chart',
+          }}
           values={values}
           timeframe={timeframe}
           seriesConfig={[

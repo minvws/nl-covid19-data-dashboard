@@ -22,4 +22,8 @@ export const features: Feature[] = [
     isEnabled: true,
     metricName: 'variants',
   },
+  {
+    name: 'timelineMockData',
+    isEnabled: true,
+  },
 ];

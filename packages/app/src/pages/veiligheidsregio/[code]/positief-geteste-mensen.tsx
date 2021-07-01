@@ -196,6 +196,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_over_time_chart',
+                }}
                 values={data.tested_overall.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -247,6 +250,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <MunicipalityChoropleth
+              accessibility={{
+                key: 'confirmed_cases_infected_people_choropleth',
+              }}
               selectedCode={selectedMunicipalCode}
               highlightSelection={false}
               data={choropleth.gm}
@@ -344,6 +350,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_percentage_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={dataGgdDailyValues}
                 seriesConfig={[
@@ -379,6 +388,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_tested_total_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={dataGgdDailyValues}
                 seriesConfig={[

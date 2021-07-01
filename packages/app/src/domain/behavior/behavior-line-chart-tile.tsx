@@ -44,8 +44,10 @@ export function BehaviorLineChartTile({
       <Spacer mb={4} />
 
       <TimeSeriesChart
+        accessibility={{
+          key: 'behavior_line_chart',
+        }}
         values={values}
-        ariaLabelledBy=""
         seriesConfig={[
           {
             type: 'line',

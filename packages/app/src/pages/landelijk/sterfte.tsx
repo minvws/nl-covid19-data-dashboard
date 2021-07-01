@@ -133,6 +133,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'deceased_over_time_chart',
+                }}
                 values={dataRivm.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -187,6 +190,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <AgeDemographic
+              accessibility={{
+                key: 'deceased_per_age_group_over_time_chart',
+              }}
               data={dataDeceasedPerAgeGroup}
               metricProperty="covid_percentage"
               displayMaxPercentage={45}

@@ -220,6 +220,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              */}
             {selectedMap === 'municipal' && (
               <MunicipalityChoropleth
+                accessibility={{
+                  key: 'confirmed_cases_municipal_choropleth',
+                }}
                 data={choropleth.gm}
                 getLink={reverseRouter.gm.positiefGetesteMensen}
                 metricName="tested_overall"
@@ -231,6 +234,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
             {selectedMap === 'region' && (
               <SafetyRegionChoropleth
+                accessibility={{
+                  key: 'confirmed_cases_region_choropleth',
+                }}
                 data={choropleth.vr}
                 getLink={reverseRouter.vr.positiefGetesteMensen}
                 metricName="tested_overall"
@@ -252,6 +258,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_over_time_chart',
+                }}
                 values={data.tested_overall.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -297,6 +306,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <InfectedPerAgeGroup
+                accessibility={{
+                  key: 'confirmed_cases_infected_per_age_group_over_time_chart',
+                }}
                 values={data.tested_per_age_group.values}
                 timeframe={timeframe}
               />
@@ -387,6 +399,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_percentage_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={dataGgdDailyValues}
                 seriesConfig={[
@@ -422,6 +437,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_tested_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={dataGgdDailyValues}
                 seriesConfig={[

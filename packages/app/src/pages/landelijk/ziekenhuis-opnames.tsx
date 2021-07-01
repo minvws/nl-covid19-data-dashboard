@@ -79,7 +79,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.ziekenhuisopnames_per_dag;
-  const graphDescriptions = siteText.accessibility.grafieken;
 
   return (
     <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
@@ -169,6 +168,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           >
             {selectedMap === 'municipal' && (
               <MunicipalityChoropleth
+                accessibility={{
+                  key: 'hospital_admissions_municipal_choropleth',
+                }}
                 data={choropleth.gm}
                 getLink={reverseRouter.gm.ziekenhuisopnames}
                 metricName="hospital_nice"
@@ -180,6 +182,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             )}
             {selectedMap === 'region' && (
               <SafetyRegionChoropleth
+                accessibility={{
+                  key: 'hospital_admissions_region_choropleth',
+                }}
                 data={choropleth.vr}
                 getLink={reverseRouter.vr.ziekenhuisopnames}
                 metricName="hospital_nice"
@@ -201,9 +206,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_admissions_over_time_chart',
+                }}
                 values={dataHospitalNice.values}
                 timeframe={timeframe}
-                ariaLabelledBy={graphDescriptions.ziekenhuisopnames}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -250,6 +257,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <AdmissionsPerAgeGroup
+                accessibility={{
+                  key: 'hospital_admissions_per_age_group_over_time_chart',
+                }}
                 values={data.hospital_nice_per_age_group.values}
                 timeframe={timeframe}
               />
@@ -266,6 +276,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_beds_occupied_over_time_chart',
+                }}
                 values={dataHospitalLcps.values}
                 timeframe={timeframe}
                 seriesConfig={[

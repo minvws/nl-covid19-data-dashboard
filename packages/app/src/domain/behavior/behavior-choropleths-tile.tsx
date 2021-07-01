@@ -135,6 +135,7 @@ function ChoroplethBlock({
         )}
         <ErrorBoundary>
           <SafetyRegionChoropleth
+            accessibility={{ key: 'behavior_choropleths' }}
             data={data}
             getLink={reverseRouter.vr.gedrag}
             metricName="behavior"

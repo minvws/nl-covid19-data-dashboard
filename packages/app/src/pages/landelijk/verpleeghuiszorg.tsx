@@ -121,6 +121,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_confirmed_cases_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -230,6 +233,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <SafetyRegionChoropleth
+              accessibility={{
+                key: 'nursing_home_infected_people_choropleth',
+              }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.verpleeghuiszorg}
               metricName="nursing_home"
@@ -248,6 +254,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_infected_locations_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -304,6 +313,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_deceased_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
