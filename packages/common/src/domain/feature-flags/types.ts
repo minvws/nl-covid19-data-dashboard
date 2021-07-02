@@ -39,11 +39,4 @@ export interface Feature {
   route?: string;
 }
 
-export type MetricScope =
-  | 'in'
-  | 'in_collection'
-  | 'nl'
-  | 'vr'
-  | 'vr_collection'
-  | 'gm'
-  | 'gm_collection';
+export type MetricScope = 'in' | 'nl' | 'vr' | 'gm';

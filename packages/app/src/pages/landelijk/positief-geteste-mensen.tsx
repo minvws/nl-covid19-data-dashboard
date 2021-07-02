@@ -10,7 +10,6 @@ import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
@@ -34,7 +33,14 @@ import { NationalLayout } from '~/domain/layout/national-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+} from '~/queries/create-page-elements-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -62,18 +68,27 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    main: { articles?: ArticleSummary[] };
-    ggd: { articles?: ArticleSummary[] };
+    main: ArticlesQueryResult;
+    ggd: ArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return `{
+
+    const query = `{
       "main": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "ggd": ${createPageArticlesQuery(
         'positiveTestsPage',
         locale,
         'ggdArticles'
       )},
+     "elements": ${createElementsQuery(
+       'nl',
+       ['tested_overall', 'tested_ggd'],
+       locale
+     )}
     }`;
+
+    return query;
   })
 );
 
@@ -100,6 +115,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  console.log('content.elements', content.elements);
+  console.log('content.timeSeries', content.timeSeries);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
@@ -120,7 +138,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-          {content.main?.articles && (
+          {content.main.articles && (
             <ArticleStrip articles={content.main?.articles} />
           )}
           <TwoKpiSection>
