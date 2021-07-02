@@ -21,15 +21,8 @@ export function UsefulLinks({ links }: usefulLinksProps) {
   const { siteText } = useIntl();
 
   return (
-    <Box
-      borderTop="1px solid"
-      borderTopColor="border"
-      width="100%"
-      pt={3}
-      mt={3}
-    >
+    <Box spacing={2}>
       <InlineText
-        mb={2}
         fontSize={2}
         fontWeight="bold"
         css={css({ display: 'block' })}
@@ -44,16 +37,14 @@ export function UsefulLinks({ links }: usefulLinksProps) {
                 <TitleWithIcon title={link.title} icon={<ExternalLinkIcon />} />
               </ExternalLink>
             ) : (
-              <>
-                <Link href={link.href} passHref>
-                  <a>
-                    <TitleWithIcon
-                      title={link.title}
-                      icon={<ChevronLargeIcon />}
-                    />
-                  </a>
-                </Link>
-              </>
+              <Link href={link.href} passHref>
+                <a>
+                  <TitleWithIcon
+                    title={link.title}
+                    icon={<ChevronLargeIcon />}
+                  />
+                </a>
+              </Link>
             )}
           </ListItem>
         ))}
@@ -62,37 +53,52 @@ export function UsefulLinks({ links }: usefulLinksProps) {
   );
 }
 
+// function TitleWithIcon({ title, icon }: { title: string; icon?: JSX.Element }) {
+//   const splittedWords = title.split(' ');
+
+//   return (
+//     <>
+//       {splittedWords.map((word, index) => (
+//         <InlineText
+//           key={index}
+//           css={css({
+//             whiteSpace: 'pre-wrap',
+//             fontFamily: 'body',
+//             fontSize: '1rem',
+//           })}
+//         >
+//           {splittedWords.length - 1 === index ? (
+//             <InlineText
+//               css={css({
+//                 display: 'flex',
+//                 position: 'relative',
+//                 flexWrap: 'wrap',
+//               })}
+//             >
+//               {word}
+//               <IconContainer>{icon}</IconContainer>
+//             </InlineText>
+//           ) : (
+//             `${word} `
+//           )}
+//         </InlineText>
+//       ))}
+//     </>
+//   );
+// }
+
 function TitleWithIcon({ title, icon }: { title: string; icon?: JSX.Element }) {
-  const splittedWords = title.split(' ');
+  const [lastWord, ...splittedWords] = title.split(' ').reverse();
+  const titleWithoutLastWord = splittedWords.reverse().join(' ');
 
   return (
-    <>
-      {splittedWords.map((word, index) => (
-        <InlineText
-          key={index}
-          css={css({
-            whiteSpace: 'pre-wrap',
-            fontFamily: 'body',
-            fontSize: '1rem',
-          })}
-        >
-          {splittedWords.length - 1 === index ? (
-            <InlineText
-              css={css({
-                display: 'flex',
-                position: 'relative',
-                flexWrap: 'wrap',
-              })}
-            >
-              {word}
-              <IconContainer>{icon}</IconContainer>
-            </InlineText>
-          ) : (
-            `${word} `
-          )}
-        </InlineText>
-      ))}
-    </>
+    <InlineText fontFamily="body" fontSize="1rem">
+      {titleWithoutLastWord}{' '}
+      <InlineText display="inline-flex" position="relative">
+        {lastWord}
+        <IconContainer>{icon}</IconContainer>
+      </InlineText>
+    </InlineText>
   );
 }
 
@@ -134,7 +140,7 @@ const ListItem = styled.li(
   })
 );
 
-const IconContainer = styled.div(
+const IconContainer = styled.span(
   css({
     position: 'absolute',
     right: -25,

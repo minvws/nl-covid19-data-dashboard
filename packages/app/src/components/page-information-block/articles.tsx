@@ -26,15 +26,16 @@ export function Articles({ articles }: ArticlesProps) {
       >
         {siteText.informatie_header.artikelen}
       </InlineText>
-      {articles.map((article, index) => (
-        <ArticleItem
-          isLast={index === articles.length - 1}
-          key={index}
-          title={article.title}
-          cover={article.cover}
-          slug={article.slug.current}
-        />
-      ))}
+      <Box spacing={3}>
+        {articles.map((article, index) => (
+          <ArticleItem
+            key={index}
+            title={article.title}
+            cover={article.cover}
+            slug={article.slug.current}
+          />
+        ))}
+      </Box>
     </>
   );
 }
@@ -43,13 +44,12 @@ interface ArticleItemProps {
   slug: string;
   cover: ImageBlock;
   title: string;
-  isLast: boolean;
 }
 
-export function ArticleItem({ slug, cover, title, isLast }: ArticleItemProps) {
+export function ArticleItem({ slug, cover, title }: ArticleItemProps) {
   return (
     <Link passHref href={`/artikelen/${slug}`}>
-      <StyledLink isLast={isLast}>
+      <StyledLink>
         <Box width={100} minWidth={100} maxHeight={66} overflow="hidden">
           <SanityImage
             {...getImageProps(cover, {
@@ -65,12 +65,11 @@ export function ArticleItem({ slug, cover, title, isLast }: ArticleItemProps) {
   );
 }
 
-const StyledLink = styled.a<{ isLast: boolean }>((x) =>
+const StyledLink = styled.a(
   css({
     color: 'blue',
     textDecoration: 'none',
     display: 'flex',
     fontWeight: 'bold',
-    mb: x.isLast ? 0 : 3,
   })
 );

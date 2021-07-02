@@ -35,41 +35,6 @@ export interface MetadataProps {
   referenceLink?: string;
 }
 
-function useFormateDateText(
-  dateOrRange: number | DateRange,
-  dateOfInsertionUnix: number,
-  datumsText: string
-) {
-  const { formatDateFromSeconds } = useIntl();
-
-  if (typeof dateOrRange === 'number') {
-    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
-    return replaceVariablesInText(datumsText, {
-      dateOfReport,
-      dateOfInsertion,
-    });
-  } else {
-    const weekStart = formatDateFromSeconds(
-      dateOrRange.start,
-      'weekday-medium'
-    );
-    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
-    const dateOfInsertion = formatDateFromSeconds(
-      dateOfInsertionUnix,
-      'weekday-medium'
-    );
-    return replaceVariablesInText(datumsText, {
-      weekStart,
-      weekEnd,
-      dateOfInsertion,
-    });
-  }
-}
-
 export function Metadata({
   dataSources = [],
   datumsText,
@@ -90,7 +55,7 @@ export function Metadata({
   );
 
   return (
-    <Box spacing={2} mb={{ _: 3, md: 0 }}>
+    <Box spacing={2}>
       <Box display="flex" alignItems="flex-start" color="annotation">
         <Box as="span" minWidth="1.8rem" mt={1}>
           <ClockIcon aria-hidden color={theme.colors.annotation} />
@@ -127,6 +92,41 @@ export function Metadata({
   );
 }
 
+function useFormateDateText(
+  dateOrRange: number | DateRange,
+  dateOfInsertionUnix: number,
+  datumsText: string
+) {
+  const { formatDateFromSeconds } = useIntl();
+
+  if (typeof dateOrRange === 'number') {
+    const dateOfReport = formatDateFromSeconds(dateOrRange, 'weekday-medium');
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      dateOfReport,
+      dateOfInsertion,
+    });
+  } else {
+    const weekStart = formatDateFromSeconds(
+      dateOrRange.start,
+      'weekday-medium'
+    );
+    const weekEnd = formatDateFromSeconds(dateOrRange.end, 'weekday-medium');
+    const dateOfInsertion = formatDateFromSeconds(
+      dateOfInsertionUnix,
+      'weekday-medium'
+    );
+    return replaceVariablesInText(datumsText, {
+      weekStart,
+      weekEnd,
+      dateOfInsertion,
+    });
+  }
+}
+
 interface MetadataItemProps {
   icon: JSX.Element;
   label?: string;
@@ -151,7 +151,7 @@ function MetadataItem({
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
-      <Box as="span" minWidth="1.8rem" mt="3px">
+      <Box as="span" minWidth="1.8rem" transform="translateY(2px)">
         {icon}
       </Box>
 
@@ -217,7 +217,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
-      <Box minWidth="1.8rem" mt="3px">
+      <Box minWidth="1.8rem" transform="translateY(2px)">
         {icon}
       </Box>
 

@@ -106,7 +106,15 @@ export function PageInformationBlock({
         </Box>
 
         {usefulLinks && usefulLinks.length > 0 && (
-          <UsefulLinks links={usefulLinks} />
+          <Box
+            borderTop="1px solid"
+            borderTopColor="border"
+            width="100%"
+            pt={3}
+            mt={3}
+          >
+            <UsefulLinks links={usefulLinks} />
+          </Box>
         )}
       </Tile>
     </header>
@@ -127,5 +135,6 @@ const Tile = styled.div(
 const MetadataBox = styled(Box)(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
+    mb: asResponsiveArray({ _: 3, md: 0 }),
   })
 );
