@@ -31,7 +31,7 @@ export function GappedStackedAreaTrend(props: GappedStackedAreaTrendProps) {
 
   /**
    * Here we loop through the series and each time a null value is encountered a
-   * new SeriesSingleValue array is created. Effectively creating separate lines
+   * new SeriesDoubleValue array is created. Effectively creating separate stacks
    * for each consecutive list of defined values.
    */
   const gappedSeries = useMemo(
