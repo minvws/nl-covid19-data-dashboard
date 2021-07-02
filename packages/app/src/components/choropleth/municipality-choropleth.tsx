@@ -199,7 +199,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
   ]);
 
   return (
-    <Box position="relative">
+    <Box position="relative" height="100%">
       {tabInteractiveButton}
       <div
         css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
@@ -208,6 +208,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
           accessibility={choroplethAccessibility}
           description={dataDescription}
           featureCollection={municipalGeo}
+          outlines={countryGeo}
           hovers={hasData ? municipalGeo : undefined}
           boundingBox={boundingbox || countryGeo}
           renderFeature={renderFeature}

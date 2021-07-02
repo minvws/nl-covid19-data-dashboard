@@ -14,8 +14,6 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import { mockVariantsData } from '~/domain/variants/logic/mock-data';
-import { mockVariantsDiffData } from '~/domain/variants/logic/mock-variants-diff-data';
 import { VariantsOverTime } from '~/domain/variants/variants-over-time';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
@@ -38,16 +36,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'variantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    () => {
-      const data = selectNlPageMetricData('variants')();
-      data.selectedNlData.variants =
-        data.selectedNlData.variants || mockVariantsData();
-      data.selectedNlData.difference = mockVariantsDiffData(
-        data.selectedNlData.difference
-      );
-
-      return data;
-    },
+    selectNlPageMetricData('variants'),
     createGetContent<{
       page: VariantsPageQuery;
       highlight: {

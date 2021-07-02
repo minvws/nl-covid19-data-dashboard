@@ -2,7 +2,11 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
-import { TimestampedValue } from '@corona-dashboard/common';
+import {
+  getValuesInTimeframe,
+  TimeframeOption,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -28,14 +32,13 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
-import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
   calculateSeriesMaximum,
   getSeriesData,
