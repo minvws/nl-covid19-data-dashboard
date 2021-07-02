@@ -88,7 +88,10 @@ export function TopNavigation() {
               {siteText.nav.links.gemeente}
             </NavItem>
 
-            <NavItem href={reverseRouter.in.index()}>
+            <NavItem
+              href={reverseRouter.in.index()}
+              isActive={router.pathname.startsWith('/internationaal')}
+            >
               {siteText.nav.links.internationaal}
             </NavItem>
 
