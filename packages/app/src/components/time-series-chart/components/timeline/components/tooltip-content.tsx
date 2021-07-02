@@ -42,6 +42,8 @@ export function TimelineTooltipContent({
       onTouchMove={stopEventPropagation}
       onMouseMove={stopEventPropagation}
       onMouseLeave={stopEventPropagation}
+      width={{ _: '100vw', sm: '100%' }}
+      maxWidth="100%"
     >
       {isTouch && (
         <Box
