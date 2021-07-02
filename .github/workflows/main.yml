@@ -10,16 +10,16 @@ jobs:
         uses: styfle/cancel-workflow-action@0.4.0
         with:
           access_token: ${{ github.token }}
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Lookup cached node_modules
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install packages
-        run: yarn install
+      # - name: Check out repository
+      #   uses: actions/checkout@v2
+      # - name: Lookup cached node_modules
+      #   uses: actions/cache@v2
+      #   id: cache
+      #   with:
+      #     path: '**/node_modules'
+      #     key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      # - name: Install packages
+      #   run: yarn install
 
   lint:
     runs-on: ubuntu-latest
