@@ -1,25 +1,25 @@
 import { last } from 'lodash';
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isPresent } from 'ts-is-present';
 import {
   isSeriesSingleValue,
   SeriesDoubleValue,
   SeriesSingleValue,
 } from './series';
 
+/**
+ * This hook takes an array of SeriesSingleValues or SeriesDoubleValues and splits
+ * it up into multiple arrays whenever an item is encountered with null values.
+ * So a new array is created for each consecutive list of valid items.
+ */
 export function useGappedSeries<
   T extends SeriesSingleValue | SeriesDoubleValue
 >(series: T[]) {
   return useMemo(
     () =>
-      /**
-       * Here we loop through the series and each time a null value is encountered a
-       * new SeriesSingleValue array is created. Effectively creating separate lines
-       * for each consecutive list of defined values.
-       */
       series.reduce<T[][]>(
         (lists, item) => {
-          const hasItemValue = isDefined(
+          const hasItemValue = isPresent(
             isSeriesSingleValue(item) ? item.__value : item.__value_a
           );
 
