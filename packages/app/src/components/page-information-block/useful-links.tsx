@@ -53,40 +53,6 @@ export function UsefulLinks({ links }: usefulLinksProps) {
   );
 }
 
-// function TitleWithIcon({ title, icon }: { title: string; icon?: JSX.Element }) {
-//   const splittedWords = title.split(' ');
-
-//   return (
-//     <>
-//       {splittedWords.map((word, index) => (
-//         <InlineText
-//           key={index}
-//           css={css({
-//             whiteSpace: 'pre-wrap',
-//             fontFamily: 'body',
-//             fontSize: '1rem',
-//           })}
-//         >
-//           {splittedWords.length - 1 === index ? (
-//             <InlineText
-//               css={css({
-//                 display: 'flex',
-//                 position: 'relative',
-//                 flexWrap: 'wrap',
-//               })}
-//             >
-//               {word}
-//               <IconContainer>{icon}</IconContainer>
-//             </InlineText>
-//           ) : (
-//             `${word} `
-//           )}
-//         </InlineText>
-//       ))}
-//     </>
-//   );
-// }
-
 function TitleWithIcon({ title, icon }: { title: string; icon?: JSX.Element }) {
   const [lastWord, ...splittedWords] = title.split(' ').reverse();
   const titleWithoutLastWord = splittedWords.reverse().join(' ');
