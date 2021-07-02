@@ -23,7 +23,7 @@ export function useGappedSeries<
             isSeriesSingleValue(item) ? item.__value : item.__value_a
           );
 
-          let currentList = last(lists) || [];
+          let currentList = last(lists) ?? [];
           if (currentList.length && !hasItemValue) {
             const newList: T[] = [];
             lists.push(newList);
