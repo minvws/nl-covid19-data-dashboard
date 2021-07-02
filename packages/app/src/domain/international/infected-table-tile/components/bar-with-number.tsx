@@ -20,7 +20,7 @@ export function BarWithNumber({
         fontWeight="bold"
         color="black"
         pr={2}
-        minWidth="2rem"
+        minWidth="3.2rem"
         textAlign="left"
       >
         {formatNumber(amount)}

@@ -1,33 +1,27 @@
+import { InTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { Box } from '~/components/base';
-// NEED TO CHANGE
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { internationalThresholds } from '~/components/choropleth/international-thresholds';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { filterArrayType, MAX_COUNTRIES_START } from '../infected-table-tile';
 
-type singleItem = {
-  country_code: string;
-  infected: number;
-  infected_per_100k_average: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-};
 interface narrowInfectedTableProps {
-  data: singleItem[];
+  data: InTestedOverall[];
   isExpanded: boolean;
-  matchedItems: any[];
+  matchingCountries: filterArrayType[];
+  countryNames: Record<string, string>;
+  inputValue: string;
 }
-
-const MAX_COUNTRIES = 10;
-
 export function NarrowInfectedTable({
   data,
   isExpanded,
-  matchedItems,
+  matchingCountries,
+  countryNames,
+  inputValue,
 }: narrowInfectedTableProps) {
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
@@ -35,21 +29,25 @@ export function NarrowInfectedTable({
     <Box borderTop="1px solid silver" mb={3}>
       {data.map((item, index) => (
         <>
-          {matchedItems.length > data.length ? (
+          {inputValue.length === 0 ? (
             <>
-              {isExpanded || index < MAX_COUNTRIES ? (
+              {isExpanded || index < MAX_COUNTRIES_START ? (
                 <ItemRow
                   item={item}
                   highestAverage={highestAverage?.infected_per_100k_average}
+                  countryNames={countryNames}
                 />
               ) : null}
             </>
           ) : (
             <>
-              {matchedItems.includes(item.country_code) && (
+              {matchingCountries.some(
+                (i) => i.country_code === item.country_code
+              ) && (
                 <ItemRow
                   item={item}
                   highestAverage={highestAverage?.infected_per_100k_average}
+                  countryNames={countryNames}
                 />
               )}
             </>
@@ -61,16 +59,17 @@ export function NarrowInfectedTable({
 }
 
 interface itemRowProps {
-  item: singleItem;
+  item: InTestedOverall;
   highestAverage: number | undefined;
+  countryNames: Record<string, string>;
 }
 
-function ItemRow({ item, highestAverage }: itemRowProps) {
+function ItemRow({ item, highestAverage, countryNames }: itemRowProps) {
   const { siteText, formatNumber } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
   const filterBelow = getFilteredThresholdValues(
-    regionThresholds.situations.gathering,
+    internationalThresholds.infected_per_100k_average,
     item.infected_per_100k_average
   );
 
@@ -84,7 +83,7 @@ function ItemRow({ item, highestAverage }: itemRowProps) {
       }
     >
       <InlineText fontWeight="bold">
-        {text.header_land} {item.country_code}
+        {countryNames[item.country_code.toLocaleLowerCase()]}
       </InlineText>
       <Box display="flex">
         <Text
@@ -128,7 +127,7 @@ function ItemRow({ item, highestAverage }: itemRowProps) {
         >
           {`${text.header_totale}:`}
           <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
-            {item.infected}
+            {formatNumber(item.infected)}
           </InlineText>
         </Text>
       </Box>

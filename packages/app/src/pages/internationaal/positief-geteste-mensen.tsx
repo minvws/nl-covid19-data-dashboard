@@ -117,7 +117,10 @@ export default function PositiefGetesteMensenPage(
             />
           </EuropeChoroplethTile>
 
-          <InfectedTableTile />
+          <InfectedTableTile
+            data={choroplethData}
+            countryNames={countryNames}
+          />
         </TileList>
       </InternationalLayout>
     </Layout>

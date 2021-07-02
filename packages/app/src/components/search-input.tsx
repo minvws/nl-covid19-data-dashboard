@@ -78,7 +78,6 @@ const StyledSearchInput = styled.input(
     display: 'block',
 
     width: '100%',
-
     border: `1px solid silver`,
     py: 2,
     pl: '36px',

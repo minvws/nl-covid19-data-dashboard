@@ -1,38 +1,30 @@
+import { InTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
-import React from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-// NEED TO CHANGE
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { internationalThresholds } from '~/components/choropleth/international-thresholds';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { filterArrayType, MAX_COUNTRIES_START } from '../infected-table-tile';
 import { BarWithNumber } from './bar-with-number';
-
-type singleItem = {
-  country_code: string;
-  infected: number;
-  infected_per_100k_average: number;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-};
-
 interface wideInfectedTableProps {
-  data: singleItem[];
+  data: InTestedOverall[];
   isExpanded: boolean;
-  matchedItems: any[]; // CHANGE
+  matchingCountries: filterArrayType[];
+  countryNames: Record<string, string>;
+  inputValue: string;
 }
-
-const MAX_COUNTRIES = 10;
 
 export function WideInfectedTable({
   data,
   isExpanded,
-  matchedItems,
+  matchingCountries,
+  countryNames,
+  inputValue,
 }: wideInfectedTableProps) {
   const { siteText } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
@@ -78,24 +70,29 @@ export function WideInfectedTable({
             </HeaderCell>
           </tr>
         </thead>
+
         <tbody>
           {data.map((item, index) => (
             <>
-              {matchedItems.length > data.length ? (
+              {inputValue.length === 0 ? (
                 <>
-                  {isExpanded || index < MAX_COUNTRIES ? (
+                  {isExpanded || index < MAX_COUNTRIES_START ? (
                     <TableRow
                       item={item}
                       highestAverage={highestAverage?.infected_per_100k_average}
+                      countryNames={countryNames}
                     />
                   ) : null}
                 </>
               ) : (
                 <>
-                  {matchedItems.includes(item.country_code) && (
+                  {matchingCountries.some(
+                    (i) => i.country_code === item.country_code
+                  ) && (
                     <TableRow
                       item={item}
                       highestAverage={highestAverage?.infected_per_100k_average}
+                      countryNames={countryNames}
                     />
                   )}
                 </>
@@ -109,13 +106,16 @@ export function WideInfectedTable({
 }
 
 interface tableRowProps {
-  item: singleItem;
+  item: InTestedOverall;
   highestAverage: number | undefined;
+  countryNames: Record<string, string>;
 }
 
-function TableRow({ item, highestAverage }: tableRowProps) {
+function TableRow({ item, highestAverage, countryNames }: tableRowProps) {
+  const { formatNumber } = useIntl();
+
   const filterBelow = getFilteredThresholdValues(
-    regionThresholds.situations.gathering,
+    internationalThresholds.infected_per_100k_average,
     item.infected_per_100k_average
   );
 
@@ -134,7 +134,7 @@ function TableRow({ item, highestAverage }: tableRowProps) {
         <InlineText
           fontWeight={item.country_code === 'NLD' ? 'bold' : undefined}
         >
-          Land: {item.country_code}
+          {countryNames[item.country_code.toLocaleLowerCase()]}
         </InlineText>
       </Cell>
       <Cell>
@@ -153,7 +153,7 @@ function TableRow({ item, highestAverage }: tableRowProps) {
           fontWeight: ' bold',
         })}
       >
-        {item.infected}
+        {formatNumber(item.infected)}
       </Cell>
     </tr>
   );
