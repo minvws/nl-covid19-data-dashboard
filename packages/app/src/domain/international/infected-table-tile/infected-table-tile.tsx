@@ -85,8 +85,8 @@ export function InfectedTableTile({
        * Always show the Netherlands
        */
       {
-        country_code: 'nld',
-        label: countryNames['nld'],
+        country_code: 'NLD',
+        label: countryNames['NLD'],
       },
     ]);
   }, [filterArray, inputValue, countryNames]);
