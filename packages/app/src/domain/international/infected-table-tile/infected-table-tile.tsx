@@ -86,7 +86,7 @@ export function InfectedTableTile({
        */
       {
         country_code: 'NLD',
-        label: countryNames['NLD'],
+        label: countryNames['nld'],
       },
     ]);
   }, [filterArray, inputValue, countryNames]);
