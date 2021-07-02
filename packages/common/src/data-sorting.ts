@@ -6,20 +6,28 @@ import {
 
 export type UnknownObject = Record<string, unknown>;
 
-export function sortTimeSeriesInDataInPlace<T>(data: T) {
+export function sortTimeSeriesInDataInPlace<T>(
+  data: T,
+  { setDatesToMiddleOfDay = false } = {}
+) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
     const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
-    timeSeries.values = sortTimeSeriesValues(timeSeries.values)
+    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
+
+    if (setDatesToMiddleOfDay) {
       /**
        * We'll map all dates to midday (12:00). This simplifies the rendering of a
        * marker/annotation on a date.
        */
-      .map(setValueDatesToMiddleOfDay);
+      timeSeries.values = timeSeries.values.map(setValueDatesToMiddleOfDay);
 
-    if (timeSeries.last_value) {
-      timeSeries.last_value = setValueDatesToMiddleOfDay(timeSeries.last_value);
+      if (timeSeries.last_value) {
+        timeSeries.last_value = setValueDatesToMiddleOfDay(
+          timeSeries.last_value
+        );
+      }
     }
   }
 
@@ -41,14 +49,16 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
     }
 
     nestedSeries.values = nestedSeries.values.map((x) => {
-      x.values = sortTimeSeriesValues(x.values).map(
-        setValueDatesToMiddleOfDay
-      ) as
+      x.values = sortTimeSeriesValues(x.values) as
         | RegionalSewerPerInstallationValue[]
         | MunicipalSewerPerInstallationValue[];
 
-      if (x.last_value) {
-        x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+      if (setDatesToMiddleOfDay) {
+        x.values = x.values.map(setValueDatesToMiddleOfDay);
+
+        if (x.last_value) {
+          x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+        }
       }
       return x;
     });

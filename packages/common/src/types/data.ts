@@ -145,7 +145,8 @@ export interface MunicipalitiesSewer {
 export interface In {
   last_generated: string;
   proto_name: string;
-  country_code: string;
+  name: string;
+  code: string;
   tested_overall: InTestedOverall;
 }
 export interface InTestedOverall {
@@ -163,6 +164,8 @@ export interface InTestedOverallValue {
 export interface InCollection {
   last_generated: string;
   proto_name: "IN_COLLECTION";
+  name: string;
+  code: string;
   tested_overall: InTestedOverall[];
 }
 export interface InTestedOverall {
@@ -566,11 +569,11 @@ export interface NlBehaviorPerAgeGroup {
   date_end_unix: number;
 }
 export interface NlBehaviorPerAgeGroupValue {
-  "16_24": number;
-  "25_39": number;
-  "40_54": number;
-  "55_69": number;
-  "70_plus": number;
+  "16_24": number | null;
+  "25_39": number | null;
+  "40_54": number | null;
+  "55_69": number | null;
+  "70_plus": number | null;
 }
 export interface NlBehaviorGetTestedSupportPerAgeGroup {
   values: NlBehaviorGetTestedSupportPerAgeGroupValue[];
