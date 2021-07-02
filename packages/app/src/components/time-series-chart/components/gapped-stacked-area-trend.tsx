@@ -1,7 +1,5 @@
-import { last } from 'lodash';
-import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
 import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
+import { useGappedSeries } from '../logic/use-gapped-series';
 import { StackedAreaTrend } from './stacked-area-trend';
 
 type GappedStackedAreaTrendProps = {
@@ -34,25 +32,7 @@ export function GappedStackedAreaTrend(props: GappedStackedAreaTrendProps) {
    * new SeriesDoubleValue array is created. Effectively creating separate stacks
    * for each consecutive list of defined values.
    */
-  const gappedSeries = useMemo(
-    () =>
-      series.reduce<SeriesDoubleValue[][]>(
-        (lists, item) => {
-          let currentList = last(lists) || [];
-          if (currentList.length && !isDefined(item.__value_a)) {
-            const newList: SeriesDoubleValue[] = [];
-            lists.push(newList);
-            currentList = newList;
-          }
-          if (isDefined(item.__value_a)) {
-            currentList.push(item);
-          }
-          return lists;
-        },
-        [[]]
-      ),
-    [series]
-  );
+  const gappedSeries = useGappedSeries(series);
 
   return (
     <>
