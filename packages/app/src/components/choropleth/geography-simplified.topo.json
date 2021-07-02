@@ -17783,7 +17783,7 @@
           "type": "Polygon",
           "properties": {
             "vrcode": "VR16",
-            "vrname": "Hollands-Midden"
+            "vrname": "Hollands Midden"
           }
         },
         {
@@ -17832,7 +17832,7 @@
           "type": "Polygon",
           "properties": {
             "vrcode": "VR24",
-            "vrname": "Limburg-Zuid"
+            "vrname": "Zuid-Limburg"
           }
         },
         {
@@ -17882,7 +17882,7 @@
           "type": "MultiPolygon",
           "properties": {
             "vrcode": "VR10",
-            "vrname": "Noord-Holland-Noord"
+            "vrname": "Noord-Holland Noord"
           }
         },
         {
@@ -17962,7 +17962,7 @@
           "type": "MultiPolygon",
           "properties": {
             "vrcode": "VR18",
-            "vrname": "Zuid-Holland-Zuid"
+            "vrname": "Zuid-Holland Zuid"
           }
         }
       ]
