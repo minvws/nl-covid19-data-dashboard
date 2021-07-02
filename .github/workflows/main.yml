@@ -33,7 +33,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install packages
-        if: jobs.init.steps.cache.outputs.cache-hit != 'true'
+        if: needs.jobs.init.steps.cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Lint code
@@ -51,7 +51,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install packages
-        if: jobs.init.steps.cache.outputs.cache-hit != 'true'
+        if: needs.jobs.init.steps.cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Build common module
@@ -73,7 +73,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install packages
-        if: jobs.init.steps.cache.outputs.cache-hit != 'true'
+        if: needs.jobs.init.steps.cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Build common module
