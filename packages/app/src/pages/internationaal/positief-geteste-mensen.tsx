@@ -5,7 +5,7 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { internationalThresholds } from '~/components/choropleth/international-thresholds';
-import { InternationalTooltip } from '~/components/choropleth/tooltips/international/positive-tested-people-international-tooltip';
+import { PositiveTestedPeopleInternationalTooltip } from '~/components/choropleth/tooltips/international/positive-tested-people-international-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
 import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
@@ -99,10 +99,13 @@ export default function PositiefGetesteMensenPage(
             }}
           >
             <EuropeChoropleth
+              accessibility={{
+                key: 'international_tested_overall_choropleth',
+              }}
               data={choroplethData}
               metricProperty="infected_per_100k_average"
               tooltipContent={(context) => (
-                <InternationalTooltip
+                <PositiveTestedPeopleInternationalTooltip
                   title={text.choropleth.tooltip_titel}
                   countryName={
                     countryNames[context.country_code.toLowerCase()] ||

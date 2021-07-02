@@ -36,9 +36,7 @@ export function TooltipContent(props: IProps) {
 const StyledTooltipContent = styled.div<{ isInteractive: boolean }>((x) =>
   css({
     color: 'body',
-    width: '100%',
-    minWidth: 250,
-    maxWidth: 250,
+    width: 250,
     borderRadius: 1,
     cursor: x.onClick ? 'pointer' : 'default',
     pointerEvents: x.isInteractive ? undefined : 'none',

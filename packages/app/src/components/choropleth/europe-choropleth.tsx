@@ -1,4 +1,8 @@
-import { KeysOfType } from '@corona-dashboard/common';
+import {
+  EuropeGeoJSON,
+  EuropeGeoProperties,
+  KeysOfType,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { geoConicConformal } from 'd3-geo';
 import { Feature, MultiPolygon } from 'geojson';
@@ -7,13 +11,17 @@ import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from '../base';
 import { Choropleth } from './choropleth';
-import { useIntlChoroplethColorScale, useTabInteractiveButton } from './hooks';
+import { useInChoroplethColorScale, useTabInteractiveButton } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
-import { europeGeo, EuropeGeoJSON, EuropeGeoProperties } from './topology';
+import { europeGeo } from './topology';
 
 /**
  * List of countries to define the boundingbox. These are countries on the outer edges
@@ -42,16 +50,17 @@ type EuropeChoroplethProps<T extends CountryDataItem> = {
    * Optional link that will be added to each choropleth feature for which an associated data item exists
    */
   getLink?: (code: string) => string;
+  accessibility: AccessibilityDefinition;
 };
 
 export function EuropeChoropleth<T extends CountryDataItem>(
   props: EuropeChoroplethProps<T>
 ) {
-  const { data, metricProperty, tooltipContent } = props;
+  const { data, metricProperty, tooltipContent, accessibility } = props;
   const { siteText } = useIntl();
 
-  const codes = data.map<string>((x) => x.country_code);
-  const countriesWithData: EuropeGeoJSON = useMemo(() => {
+  const codes = data.map((x) => x.country_code);
+  const countriesGeoWithData: EuropeGeoJSON = useMemo(() => {
     return {
       ...europeGeo,
       features: europeGeo.features.filter((x) =>
@@ -60,25 +69,29 @@ export function EuropeChoropleth<T extends CountryDataItem>(
     };
   }, [codes]);
 
-  const getJoinedDataItem = useCallback(
-    (joinId: string) => {
-      return data.find((x) => x.country_code === joinId);
+  const getCountryDataByCode = useCallback(
+    (countryCode: string) => {
+      return data.find((x) => x.country_code === countryCode);
     },
     [data]
   );
 
-  const getFillColor = useIntlChoroplethColorScale(metricProperty as string);
+  const getFillColor = useInChoroplethColorScale(metricProperty as string);
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
       replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-        subject: 'landen',
+        subject: siteText.choropleth.a11y.landen,
       })
     );
 
   const { ref, width } = useResizeObserver<HTMLDivElement>();
 
   const { mapHeight, padding } = useHeightAndPadding(width);
+
+  const choroplethAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_choropleth',
+  ]);
 
   const renderFeature = useCallback(
     (
@@ -88,16 +101,9 @@ export function EuropeChoropleth<T extends CountryDataItem>(
     ) => {
       const { ISO_A3 } = feature.properties;
       const key = `${ISO_A3}_${index}`;
-      const item = getJoinedDataItem(ISO_A3);
+      const item = getCountryDataByCode(ISO_A3);
 
-      return !isDefined(item) ? (
-        <Path
-          key={key}
-          pathData={path}
-          stroke={colors.silver}
-          strokeWidth={0.5}
-        />
-      ) : (
+      return isDefined(item) ? (
         <Path
           key={key}
           pathData={path}
@@ -105,9 +111,16 @@ export function EuropeChoropleth<T extends CountryDataItem>(
           stroke={'white'}
           strokeWidth={0.5}
         />
+      ) : (
+        <Path
+          key={key}
+          pathData={path}
+          stroke={colors.silver}
+          strokeWidth={0.5}
+        />
       );
     },
-    [getJoinedDataItem, metricProperty, getFillColor]
+    [getCountryDataByCode, metricProperty, getFillColor]
   );
 
   const renderHover = useCallback(
@@ -118,7 +131,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
     ) => {
       const { ISO_A3 } = feature.properties;
 
-      const item = getJoinedDataItem(ISO_A3);
+      const item = getCountryDataByCode(ISO_A3);
 
       return isDefined(item) ? (
         <HoverPathLink
@@ -132,18 +145,18 @@ export function EuropeChoropleth<T extends CountryDataItem>(
         />
       ) : null;
     },
-    [getJoinedDataItem, isTabInteractive, anchorEventHandlers]
+    [getCountryDataByCode, isTabInteractive, anchorEventHandlers]
   );
 
   const getTooltipContent = useCallback(
     (joinId: string) => {
       if (tooltipContent) {
-        const data = getJoinedDataItem(joinId);
+        const data = getCountryDataByCode(joinId);
         return data ? tooltipContent(data) : null;
       }
       return null;
     },
-    [tooltipContent, getJoinedDataItem]
+    [tooltipContent, getCountryDataByCode]
   );
 
   return (
@@ -161,11 +174,11 @@ export function EuropeChoropleth<T extends CountryDataItem>(
       >
         <Choropleth
           projection={geoConicConformal}
-          accessibility={{ key: 'behavior_choropleths' }}
+          accessibility={choroplethAccessibility}
           initialWidth={1.1 * mapHeight}
           minHeight={mapHeight}
           featureCollection={europeGeo}
-          hovers={countriesWithData}
+          hovers={countriesGeoWithData}
           boundingBox={boundingBoxEurope}
           boudingBoxPadding={padding}
           renderFeature={renderFeature}
