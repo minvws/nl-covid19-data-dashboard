@@ -27,7 +27,7 @@ export function getSchemaInfo(
 
   return {
     in: {
-      files: getFileNames(fileList, /^IN_[A-Z]+.json$/),
+      files: getFileNames(fileList, /^IN_[A-Z]{3}.json$/),
       basePath: jsonDirectory,
       customValidations: [
         createChoroplethValidation(
