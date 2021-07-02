@@ -21,7 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - uses: actions/cache@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Lookup cached node_modules
+        uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
@@ -35,7 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - uses: actions/cache@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Lookup cached node_modules
+        uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
@@ -53,7 +59,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - uses: actions/cache@v2
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Lookup cached node_modules
+        uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
