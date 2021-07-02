@@ -36,35 +36,26 @@ export function PageInformationBlock({
   id,
 }: InformationBlockProps) {
   return (
-    <header
-      id={id}
-      css={css({
-        mt: id ? asResponsiveArray({ _: 4, md: 5 }) : 0,
-      })}
-    >
-      {title && (
-        <>
-          {icon ? (
-            <HeadingWithIcon
-              icon={icon}
-              title={title}
-              headingLevel={headingLevel}
-              mb={2}
-              mt={1}
-            />
-          ) : (
-            <Box display="flex" flexWrap="nowrap" alignItems="center">
-              <Heading mb={3} lineHeight={1.3} level={headingLevel}>
-                {title}
-              </Heading>
-            </Box>
-          )}
-        </>
+    <header id={id}>
+      {title && icon ? (
+        <HeadingWithIcon
+          icon={icon}
+          title={title}
+          headingLevel={headingLevel}
+          mb={2}
+          mt={1}
+        />
+      ) : (
+        <Box display="flex" flexWrap="nowrap" alignItems="center">
+          <Heading mb={3} lineHeight={1.3} level={headingLevel}>
+            {title}
+          </Heading>
+        </Box>
       )}
 
       <Tile>
         <Box
-          display={{ _: 'block', md: 'grid' }}
+          display={{ md: 'grid' }}
           gridTemplateColumns="repeat(2, 1fr)"
           width="100%"
           css={css({
