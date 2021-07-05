@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_tested_ggd_daily",
+  "title": "nl_tested_ggd",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_tested_ggd_daily_value",
+      "title": "nl_tested_ggd_value",
       "type": "object",
       "properties": {
         "infected": {

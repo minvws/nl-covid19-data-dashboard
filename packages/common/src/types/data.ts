@@ -198,8 +198,7 @@ export interface National {
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NationalHospitalLcps;
   intensive_care_lcps: NationalIntensiveCareLcps;
-  tested_ggd_daily: NationalTestedGgdDaily;
-  tested_ggd_average: NationalTestedGgdAverage;
+  tested_ggd: NlTestedGgd;
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
   behavior: NationalBehavior;
@@ -232,10 +231,8 @@ export interface National {
 export interface NationalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
-  tested_ggd_daily__tested_total: DifferenceInteger;
-  tested_ggd_daily__infected_percentage: DifferenceDecimal;
-  tested_ggd_average__tested_total_moving_average: DifferenceDecimal;
-  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
+  tested_ggd__tested_total_moving_average: DifferenceDecimal;
+  tested_ggd__infected_percentage_moving_average: DifferenceDecimal;
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
@@ -441,11 +438,11 @@ export interface NationalIntensiveCareLcpsValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalTestedGgdDaily {
-  values: NationalTestedGgdDailyValue[];
-  last_value: NationalTestedGgdDailyValue;
+export interface NlTestedGgd {
+  values: NlTestedGgdValue[];
+  last_value: NlTestedGgdValue;
 }
-export interface NationalTestedGgdDailyValue {
+export interface NlTestedGgdValue {
   infected: number;
   infected_moving_average: number | null;
   infected_percentage: number;
@@ -453,21 +450,6 @@ export interface NationalTestedGgdDailyValue {
   tested_total: number;
   tested_total_moving_average: number | null;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NationalTestedGgdAverage {
-  values: NationalTestedGgdAverageValue[];
-  last_value: NationalTestedGgdAverageValue;
-}
-export interface NationalTestedGgdAverageValue {
-  infected: number;
-  infected_moving_average: number | null;
-  infected_percentage: number;
-  infected_percentage_moving_average: number | null;
-  tested_total: number;
-  tested_total_moving_average: number | null;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalNursingHome {
@@ -920,8 +902,7 @@ export interface Regionaal {
   sewer_per_installation: RegionalSewerPerInstallation;
   tested_overall: RegionalTestedOverall;
   hospital_nice: RegionalHospitalNice;
-  tested_ggd_daily: RegionalTestedGgdDaily;
-  tested_ggd_average: RegionalTestedGgdAverage;
+  tested_ggd: VrTestedGgd;
   nursing_home: RegionalNursingHome;
   disability_care: RegionalDisabilityCare;
   behavior: RegionalBehavior;
@@ -940,10 +921,8 @@ export interface VrStaticValues {
 export interface RegionalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
-  tested_ggd_average__tested_total_moving_average: DifferenceDecimal;
-  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
-  tested_ggd_daily__tested_total: DifferenceInteger;
-  tested_ggd_daily__infected_percentage: DifferenceDecimal;
+  tested_ggd__tested_total_moving_average: DifferenceDecimal;
+  tested_ggd__infected_percentage_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people: DifferenceInteger;
@@ -1024,11 +1003,11 @@ export interface RegionalHospitalNiceValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RegionalTestedGgdDaily {
-  values: RegionalTestedGgdDailyValue[];
-  last_value: RegionalTestedGgdDailyValue;
+export interface VrTestedGgd {
+  values: VrTestedGgdValue[];
+  last_value: VrTestedGgdValue;
 }
-export interface RegionalTestedGgdDailyValue {
+export interface VrTestedGgdValue {
   infected: number;
   infected_moving_average: number | null;
   infected_percentage: number;
@@ -1036,22 +1015,6 @@ export interface RegionalTestedGgdDailyValue {
   tested_total: number;
   tested_total_moving_average: number | null;
   date_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface RegionalTestedGgdAverage {
-  values: RegionalTestedGgdAverageValue[];
-  last_value: RegionalTestedGgdAverageValue;
-}
-export interface RegionalTestedGgdAverageValue {
-  infected: number;
-  infected_moving_average: number | null;
-  infected_percentage: number;
-  infected_percentage_moving_average: number | null;
-  tested_total: number;
-  tested_total_moving_average: number | null;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
   vrcode: string;
 }

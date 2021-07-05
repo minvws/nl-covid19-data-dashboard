@@ -9,16 +9,10 @@
     "tested_overall__infected_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_ggd_daily__tested_total": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "tested_ggd_daily__infected_percentage": {
+    "tested_ggd__tested_total_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_ggd_average__tested_total_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_ggd_average__infected_percentage_moving_average": {
+    "tested_ggd__infected_percentage_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "infectious_people__estimate": {
@@ -105,10 +99,8 @@
     "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "hospital_lcps__beds_occupied_covid",
-    "tested_ggd_daily__tested_total",
-    "tested_ggd_daily__infected_percentage",
-    "tested_ggd_average__tested_total_moving_average",
-    "tested_ggd_average__infected_percentage_moving_average",
+    "tested_ggd__tested_total_moving_average",
+    "tested_ggd__infected_percentage_moving_average",
     "reproduction__index_average",
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
