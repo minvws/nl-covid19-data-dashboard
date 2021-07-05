@@ -7,6 +7,7 @@ import {
   Regionaal,
   Regions,
   sortTimeSeriesInDataInPlace,
+  In,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
@@ -299,5 +300,23 @@ export function createGetChoroplethData<T1, T2, T3>(settings?: {
         in: filterIn(json.inCollection) as T3,
       },
     };
+  };
+}
+
+export function getInData(countryCodes: string[]) {
+  if (!countryCodes) {
+    throw Error('No valid countryCodes found in context');
+  }
+
+  return function () {
+    const internationalData: Record<string, In> = {};
+
+    countryCodes.forEach((countryCode) => {
+      internationalData[countryCode] = loadJsonFromDataFile<In>(
+        `IN_${countryCode.toUpperCase()}.json`
+      );
+    });
+
+    return { internationalData };
   };
 }

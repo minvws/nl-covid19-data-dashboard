@@ -11,13 +11,13 @@ import { assert } from '~/utils/assert';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useHitSelection } from './use-hit-selection';
-import { Hit, Option, useSearchResults } from './use-select-country-results';
+import { Hit, useSearchResults } from './use-select-country-results';
 import { CountryCode } from './country-code';
 
 export interface Country {
   code: CountryCode;
   name: string;
-  isSelected: boolean;
+  isSelected?: boolean;
   lastValue?: number;
   searchTerms?: string[];
 }

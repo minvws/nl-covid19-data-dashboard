@@ -7,7 +7,6 @@ import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { internationalThresholds } from '~/components/choropleth/international-thresholds';
 import { InternationalTooltip } from '~/components/choropleth/tooltips/international/positive-tested-people-international-tooltip';
 import { ContentHeader } from '~/components/content-header';
-import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { SelectCountries } from '~/domain/international/select-countries/select-countries';
 import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
@@ -24,8 +23,24 @@ import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
+  getInData,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
+import { ChartTile } from '~/components/chart-tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
+import {
+  CountryCode,
+  countryCodes,
+} from '~/domain/international/select-countries/country-code';
+import { last } from 'lodash';
+import { Country } from '~/domain/international/select-countries/context';
+import { useMemo } from 'react';
+
+type CompiledCountriesValue = {
+  date_start_unix: number;
+  date_end_unix: number;
+} & Record<CountryCode, number>;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -38,13 +53,20 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     in: ({ tested_overall }) => tested_overall || choroplethMockData(),
   }),
+  getInData(countryCodes),
   getCountryNames
 );
 
 export default function PositiefGetesteMensenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { lastGenerated, content, choropleth, countryNames } = props;
+  const {
+    lastGenerated,
+    content,
+    choropleth,
+    countryNames,
+    internationalData,
+  } = props;
   const { in: choroplethData } = choropleth;
 
   const intl = useIntl();
@@ -70,6 +92,26 @@ export default function PositiefGetesteMensenPage(
     'comparedValue could not be found for country code nld'
   );
 
+  const compiledInternationalData = useMemo(
+    () =>
+      compileInternationalData(
+        internationalData,
+        'tested_overall',
+        'infected_per_100k_average'
+      ),
+    [internationalData]
+  );
+
+  const countriesAndLastValues = useMemo(
+    () =>
+      compileCountrySelectionData(
+        countryCodes,
+        countryNames,
+        compiledInternationalData
+      ),
+    [countryNames, compiledInternationalData]
+  );
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -89,9 +131,32 @@ export default function PositiefGetesteMensenPage(
 
           {content.articles && <ArticleStrip articles={content.articles} />}
 
-          <Tile>
-            <SelectCountries />
-          </Tile>
+          <ChartTile
+            title={'NLD vs DEU'}
+            metadata={{
+              source: text.source,
+            }}
+            description={'Who wins?'}
+          >
+            <>
+              <SelectCountries
+                countriesAndLastValues={countriesAndLastValues}
+                limit={10}
+              >
+                {(selectedCountries) => {
+                  const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
+                    selectedCountriesToSeriesConfig(selectedCountries);
+                  return (
+                    <TimeSeriesChart
+                      accessibility={{ key: 'behavior_choropleths' }}
+                      values={compiledInternationalData}
+                      seriesConfig={seriesConfig}
+                    />
+                  );
+                }}
+              </SelectCountries>
+            </>
+          </ChartTile>
 
           <EuropeChoroplethTile
             title={text.choropleth.titel}
@@ -125,4 +190,74 @@ export default function PositiefGetesteMensenPage(
       </InternationalLayout>
     </Layout>
   );
+}
+
+function compileInternationalData(
+  data: Record<string, In>,
+  metricName: keyof In,
+  metricProperty: string
+) {
+  const flattenedData: CompiledCountriesValue[] = [];
+
+  Object.entries(data).forEach(([countryCode, countryData]) => {
+    countryData[metricName].values.forEach(
+      (value: { date_start_unix: number; date_end_unix: number }) => {
+        let objectMatch = flattenedData.find(
+          (o) =>
+            o.date_start_unix === value.date_start_unix &&
+            o.date_end_unix === value.date_end_unix
+        );
+
+        if (!objectMatch) {
+          objectMatch = {
+            date_start_unix: value.date_start_unix,
+            date_end_unix: value.date_end_unix,
+          };
+
+          flattenedData.push(objectMatch);
+        }
+
+        objectMatch[countryCode] = value[metricProperty];
+      }
+    );
+  });
+
+  const sortedData = flattenedData.sort((a, b) => {
+    return a.date_start_unix - b.date_start_unix;
+  });
+
+  return sortedData;
+}
+
+function selectedCountriesToSeriesConfig(
+  selectedCountries: CountryCode[]
+): LineSeriesDefinition<CompiledCountriesValue>[] {
+  return [
+    {
+      type: 'line' as const,
+      metricProperty: 'nld' as CountryCode,
+      label: 'NLD',
+      color: 'black',
+    },
+  ].concat(
+    selectedCountries.map((countryCode) => ({
+      type: 'line' as const,
+      metricProperty: countryCode,
+      label: countryCode.toUpperCase(),
+      color: 'black',
+    }))
+  );
+}
+
+function compileCountrySelectionData(
+  countryCodes: CountryCode[],
+  countryNames: Record<CountryCode, string>,
+  data: CompiledCountriesValue[]
+): Country[] {
+  const lastValues = last(data);
+  return countryCodes.map((countryCode) => ({
+    code: countryCode,
+    name: countryNames[countryCode],
+    lastValue: lastValues?.[countryCode] ?? 0,
+  }));
 }
