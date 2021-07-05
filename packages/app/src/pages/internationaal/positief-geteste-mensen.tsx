@@ -61,9 +61,10 @@ export default function PositiefGetesteMensenPage(
     description: text.metadata.description,
   };
 
-  const comparedName = countryNames['nld'];
+  const comparedCode = 'nld';
+  const comparedName = countryNames[comparedCode];
   const comparedValue = choropleth.in.find(
-    (x) => x.country_code.toLocaleLowerCase() === 'nld'
+    (x) => x.country_code.toLocaleLowerCase() === comparedCode
   )?.infected_per_100k_average;
 
   assert(
@@ -122,8 +123,10 @@ export default function PositiefGetesteMensenPage(
                     countryNames[context.country_code.toLowerCase()] ||
                     context.country_code
                   }
+                  countryCode={context.country_code}
                   value={context.infected_per_100k_average}
                   comparedName={comparedName}
+                  comparedCode={comparedCode}
                   comparedValue={comparedValue}
                 />
               )}

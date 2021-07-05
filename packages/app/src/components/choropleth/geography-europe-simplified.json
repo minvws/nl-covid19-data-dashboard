@@ -6095,17 +6095,17 @@
           "type": "Polygon",
           "properties": { "ISO_A3": "CHE" }
         },
-        { "type": null, "properties": { "ISO_A3": "-99" } },
+        { "type": null, "properties": { "ISO_A3": "CYP" } },
         {
           "arcs": [[[59, 60, 61, 62]], [[63, 64, 65, 66]], [[67, 68, 69, 70]]],
           "type": "MultiPolygon",
-          "properties": { "ISO_A3": "-99" }
+          "properties": { "ISO_A3": "CYP" }
         },
         { "type": null, "properties": { "ISO_A3": "CUW" } },
         {
           "arcs": [[-63, 72, -71, 73]],
           "type": "Polygon",
-          "properties": { "ISO_A3": "-99" }
+          "properties": { "ISO_A3": "CYP" }
         },
         {
           "arcs": [[75, -67, 76, -69]],
@@ -6138,7 +6138,7 @@
           "type": "Polygon",
           "properties": { "ISO_A3": "EGY" }
         },
-        { "type": null, "properties": { "ISO_A3": "-99" } },
+        { "type": null, "properties": { "ISO_A3": "CYP" } },
         {
           "arcs": [[[104]], [[105]], [[106]], [[107, 108, 109, 110, 111, 112]]],
           "type": "MultiPolygon",
@@ -6264,7 +6264,7 @@
         {
           "arcs": [[185, -13, 186, 187]],
           "type": "Polygon",
-          "properties": { "ISO_A3": "-99" }
+          "properties": { "ISO_A3": "CYP" }
         },
         {
           "arcs": [[188]],
@@ -6421,7 +6421,7 @@
         },
         { "type": null, "properties": { "ISO_A3": "VAT" } },
         { "type": null, "properties": { "ISO_A3": "VCT" } },
-        { "type": null, "properties": { "ISO_A3": "-99" } }
+        { "type": null, "properties": { "ISO_A3": "CYP" } }
       ]
     }
   }
