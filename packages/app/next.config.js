@@ -67,7 +67,7 @@ const nextConfig = {
       ['d3-color', '../../node_modules/d3-interpolate/node_modules/d3-color'],
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
-      ['@babel/runtime', 'node_modules/@babel/runtime'],
+      ['balanced-match', '../../node_modules/balanced-match'],
       ['date-fns', 'node_modules/date-fns'],
     ];
 
@@ -80,7 +80,10 @@ const nextConfig = {
         // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
         paths: true,
       }),
-      new DuplicatePackageCheckerPlugin()
+      new DuplicatePackageCheckerPlugin({
+        verbose: true,
+        showHelp: true,
+      })
     );
 
     return config;
