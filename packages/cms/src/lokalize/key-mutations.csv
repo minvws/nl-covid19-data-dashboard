@@ -250,6 +250,16 @@ timestamp,action,key
 2021-06-28T11:11:59.280Z,add,nationaal_actueel.quick_links.links.internationaal
 2021-06-28T11:12:00.307Z,add,nav.links.internationaal
 2021-06-28T11:12:01.209Z,add,veiligheidsregio_actueel.quick_links.links.internationaal
+2021-06-23T11:06:45.622Z,add,informatie_header.handige_links
+2021-06-23T11:07:04.030Z,add,informatie_header.artikelen
+2021-06-23T11:07:13.166Z,add,informatie_header.bron
+2021-06-23T11:07:27.070Z,add,informatie_header.meer_informatie_link
+2021-06-28T14:03:40.234Z,add,internationaal_positief_geteste_personen.bronnen.our_world_in_data.download
+2021-06-28T14:03:55.118Z,add,internationaal_positief_geteste_personen.bronnen.our_world_in_data.href
+2021-06-28T14:04:09.418Z,add,internationaal_positief_geteste_personen.bronnen.our_world_in_data.text
+2021-06-28T14:05:26.423Z,add,internationaal_positief_geteste_personen.bronnen.ecdc.download
+2021-06-28T14:05:44.345Z,add,internationaal_positief_geteste_personen.bronnen.ecdc.href
+2021-06-28T14:06:05.315Z,add,internationaal_positief_geteste_personen.bronnen.ecdc.text
 2021-06-30T11:20:15.486Z,add,nav.terug_naar_alle_cijfers_internationaal
 2021-06-30T11:14:28.839Z,add,internationaal_positief_geteste_personen.choropleth.titel
 2021-06-30T11:14:30.710Z,add,internationaal_positief_geteste_personen.choropleth.toelichting
