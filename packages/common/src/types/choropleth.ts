@@ -86,6 +86,13 @@ export interface MunicipalityProperties {
   gmcode: string;
 }
 
+export type EuropeGeoProperties = { ISO_A3: string };
+
+export type EuropeGeoJSON = FeatureCollection<
+  MultiPolygon,
+  EuropeGeoProperties
+>;
+
 export type MunicipalGeoJSON = FeatureCollection<
   MultiPolygon,
   MunicipalityProperties

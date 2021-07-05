@@ -7,36 +7,6 @@ import { FullscreenChartTile } from './fullscreen-chart-tile';
 import { Markdown } from './markdown';
 import { MetadataProps } from './metadata';
 import { Heading } from './typography';
-interface ChartTileHeaderProps {
-  title: string;
-  description?: string;
-  children?: ReactNode;
-  descriptionIsMarkdown?: boolean;
-}
-
-function ChartTileHeader({
-  title,
-  description,
-  children,
-}: ChartTileHeaderProps) {
-  return (
-    <Box>
-      <Heading level={3}>{title}</Heading>
-      <Box>
-        {description && (
-          <Box maxWidth={560}>
-            <Markdown content={description} />
-          </Box>
-        )}
-        {children && (
-          <Box display="inline-table" alignSelf="flex-start" mb={3}>
-            {children}
-          </Box>
-        )}
-      </Box>
-    </Box>
-  );
-}
 
 type ChartTileProps = {
   title: string;
@@ -88,5 +58,40 @@ export function ChartTile({
           : children}
       </ErrorBoundary>
     </FullscreenChartTile>
+  );
+}
+
+interface ChartTileHeaderProps {
+  title: string;
+  description?: string;
+  children?: ReactNode;
+}
+
+function ChartTileHeader({
+  title,
+  description,
+  children,
+}: ChartTileHeaderProps) {
+  return (
+    <Box
+      /**
+       * Outside margin is possible here, this header is only used in this module
+       */
+      mb={3}
+    >
+      <Heading level={3}>{title}</Heading>
+      <Box spacing={2}>
+        {description && (
+          <Box maxWidth={560}>
+            <Markdown content={description} />
+          </Box>
+        )}
+        {children && (
+          <Box display="inline-table" alignSelf="flex-start">
+            {children}
+          </Box>
+        )}
+      </Box>
+    </Box>
   );
 }
