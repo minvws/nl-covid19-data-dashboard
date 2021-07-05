@@ -1,6 +1,6 @@
 import {
   NationalBehaviorValue,
-  RegionalBehaviorValue,
+  VrBehaviorValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React, { useMemo } from 'react';
@@ -25,7 +25,7 @@ interface BehaviorTableTileProps {
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  value: NationalBehaviorValue | RegionalBehaviorValue;
+  value: NationalBehaviorValue | VrBehaviorValue;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };

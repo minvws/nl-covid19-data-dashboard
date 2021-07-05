@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_behavior",
+  "title": "vr_behavior",
   "type": "object",
   "properties": {
     "values": {
@@ -28,7 +28,7 @@
       ]
     },
     "value": {
-      "title": "regional_behavior_value",
+      "title": "vr_behavior_value",
       "type": "object",
       "properties": {
         "number_of_participants": {

@@ -1,7 +1,6 @@
-import { Regions, RegionsMetricName } from '@corona-dashboard/common';
+import { VrCollection, VrCollectionMetricName } from '@corona-dashboard/common';
 import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
-import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import {
   useChoroplethColorScale,
   useSafetyRegionData,
@@ -9,23 +8,24 @@ import {
 import { getDataThresholds } from '~/components/choropleth/legenda/utils';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { Heading, InlineText, Text } from './typography';
-import { useIntl } from '~/intl';
-import { EscalationLevel } from '~/domain/restrictions/type';
-import { useEscalationColor } from '~/utils/use-escalation-color';
+import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
+import { EscalationLevel } from '~/domain/restrictions/type';
+import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useEscalationColor } from '~/utils/use-escalation-color';
+import { Heading, InlineText, Text } from './typography';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
-interface EscalationMapLegendaProps<K extends RegionsMetricName> {
+interface EscalationMapLegendaProps<K extends VrCollectionMetricName> {
   metricName: K;
   metricProperty: string;
-  data: Pick<Regions, K>;
+  data: Pick<VrCollection, K>;
   lastDetermined: number;
 }
 
-export function EscalationMapLegenda<K extends RegionsMetricName>(
+export function EscalationMapLegenda<K extends VrCollectionMetricName>(
   props: EscalationMapLegendaProps<K>
 ) {
   const { metricName, metricProperty, data, lastDetermined } = props;

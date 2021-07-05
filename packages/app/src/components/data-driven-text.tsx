@@ -3,7 +3,7 @@ import {
   DifferenceInteger,
   Municipal,
   National,
-  Regionaal,
+  Vr,
 } from '@corona-dashboard/common';
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
@@ -14,7 +14,7 @@ import { InlineDifference } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
-type DataKeys = keyof National | keyof Regionaal | keyof Municipal;
+type DataKeys = keyof National | keyof Vr | keyof Municipal;
 
 /**
  * This type ensures that if a metricName of type keyof National is assigned,
@@ -31,8 +31,8 @@ type DataKeys = keyof National | keyof Regionaal | keyof Municipal;
  */
 type DataFile<T> = T extends keyof National
   ? Pick<National, 'difference' | T>
-  : T extends keyof Regionaal
-  ? Pick<Regionaal, 'difference' | T>
+  : T extends keyof Vr
+  ? Pick<Vr, 'difference' | T>
   : T extends keyof Municipal
   ? Pick<Municipal, 'difference' | T>
   : never;
