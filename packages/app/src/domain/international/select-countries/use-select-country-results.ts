@@ -65,35 +65,3 @@ function search(countries: Country[], term: string) {
 
   return hits;
 }
-
-// const ALL_HITS: Omit<Option, 'link'>[] = [
-//   ...gmData.map((x) => ({
-//     type: 'gm' as const,
-//     code: x.gemcode,
-//     name: x.displayName || x.name,
-//     searchTerms: [x.name, x.displayName].filter(isPresent),
-//   })),
-//   ...vrData.map((x) => ({
-//     type: 'vr' as const,
-//     code: x.code,
-//     name: x.name,
-//     searchTerms: [x.name, ...(x.searchTerms || [])].filter(isPresent),
-//   })),
-// ].sort((a, b) => a.name.localeCompare(b.name));
-
-// const RAW_ALL_HITS: any[] = [
-//   {
-//     code: 'bel',
-//     name: 'Belgium',
-//   },
-//   {
-//     code: 'deu',
-//     name: 'Germany',
-//   },
-// ];
-
-// const ALL_HITS = RAW_ALL_HITS.map((x) => ({
-//   code: x.code,
-//   name: x.name,
-//   searchTerms: [x.name, x.code, ...(x.searchTerms || [])].filter(isPresent),
-// })).sort((a, b) => a.name.localeCompare(b.name));

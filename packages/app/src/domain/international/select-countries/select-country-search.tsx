@@ -81,13 +81,14 @@ const SearchForm = forwardRef<HTMLFormElement, SearchContainerProps>(
   }
 );
 
-const StyledSearchContainer = styled.div<{ isFloating: boolean }>((x) =>
+const StyledSearchContainer = styled.li<{ isFloating: boolean }>((x) =>
   css({
     position: x.isFloating ? 'absolute' : 'relative',
     width: '100%',
     borderRadius: 1,
     zIndex: 10,
     background: 'white',
+    minWidth: 300,
     maxWidth: 300,
   })
 );

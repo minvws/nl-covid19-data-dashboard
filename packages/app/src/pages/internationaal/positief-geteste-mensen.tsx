@@ -36,6 +36,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
+import { colors } from '~/style/theme';
 
 type CompiledCountriesValue = {
   date_start_unix: number;
@@ -142,6 +143,7 @@ export default function PositiefGetesteMensenPage(
               <SelectCountries
                 countriesAndLastValues={countriesAndLastValues}
                 limit={10}
+                alwaysSelected={['nld']}
               >
                 {(selectedCountries, colors) => {
                   const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
@@ -155,6 +157,7 @@ export default function PositiefGetesteMensenPage(
                       accessibility={{ key: 'behavior_choropleths' }}
                       values={compiledInternationalData}
                       seriesConfig={seriesConfig}
+                      disableLegend
                     />
                   );
                 }}
@@ -239,21 +242,21 @@ function compileInternationalData(
 function selectedCountriesToSeriesConfig(
   selectedCountries: CountryCode[],
   countryNames: Record<CountryCode, string>,
-  colors: string[]
+  selectionColors: string[]
 ): LineSeriesDefinition<CompiledCountriesValue>[] {
   return [
     {
       type: 'line' as const,
       metricProperty: 'nld' as CountryCode,
       label: countryNames['nld'],
-      color: 'black',
+      color: colors.data.neutral,
     },
   ].concat(
     selectedCountries.map((countryCode, index) => ({
       type: 'line' as const,
       metricProperty: countryCode,
       label: countryNames[countryCode],
-      color: colors[index],
+      color: selectionColors[index],
     }))
   );
 }
