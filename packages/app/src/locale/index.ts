@@ -3,8 +3,10 @@ import enRaw from './en_export.json';
 import nlRaw from './nl_export.json';
 import { SiteText } from './site-text';
 
-const nl = removeIdsFromKeysIfDevelop(nlRaw);
-const en = removeIdsFromKeysIfDevelop(enRaw);
+const hasIdsInKeys = Object.keys(nlRaw).some((x) => x.includes('__@'));
+
+const nl = removeIdsFromKeys(nlRaw);
+const en = removeIdsFromKeys(enRaw);
 
 export const languages = { nl, en };
 
@@ -12,8 +14,6 @@ export type { SiteText } from './site-text';
 export type Languages = typeof languages;
 export type LanguageKey = keyof Languages;
 
-function removeIdsFromKeysIfDevelop<T>(obj: T) {
-  return (process.env.NODE_ENV === 'production'
-    ? obj
-    : removeIdFromKeys(obj)) as unknown as SiteText;
+function removeIdsFromKeys<T>(obj: T) {
+  return (hasIdsInKeys ? removeIdFromKeys(obj) : obj) as unknown as SiteText;
 }
