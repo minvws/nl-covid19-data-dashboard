@@ -28,8 +28,7 @@
     "proto_name",
     "reproduction",
     "sewer",
-    "tested_ggd_daily",
-    "tested_ggd_average",
+    "tested_ggd",
     "tested_overall",
     "tested_per_age_group",
     "vaccine_vaccinated_or_support",
@@ -106,11 +105,8 @@
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
     },
-    "tested_ggd_daily": {
-      "$ref": "tested_ggd_daily.json"
-    },
-    "tested_ggd_average": {
-      "$ref": "tested_ggd_average.json"
+    "tested_ggd": {
+      "$ref": "tested_ggd.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"

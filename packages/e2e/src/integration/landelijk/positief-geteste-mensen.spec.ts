@@ -10,9 +10,7 @@ context('Landelijk - Positief geteste mensen', () => {
     const infectedTotalLastValue = getLastFilledValue(
       this.nationalData.tested_overall
     );
-    const ggdLastValue = getLastFilledValue(
-      this.nationalData.tested_ggd_average
-    );
+    const ggdLastValue = getLastFilledValue(this.nationalData.tested_ggd);
 
     const kpiTestInfo = {
       infected: cy.formatters.formatNumber(infectedTotalLastValue.infected),
