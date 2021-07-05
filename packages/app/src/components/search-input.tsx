@@ -30,30 +30,27 @@ export function SearchInput({
       </IconContainer>
 
       {value.length > 0 && (
-        <div
-          onClick={(evt) => {
+        <IconContainer
+          onClick={(evt: React.MouseEvent<HTMLElement>) => {
             evt.stopPropagation();
             inputRef.current?.blur();
             setValue('');
           }}
-        >
-          <IconContainer
-            as="button"
-            align="right"
-            css={css({
-              borderWidth: 0,
-              cursor: 'pointer',
+          as="button"
+          align="right"
+          css={css({
+            borderWidth: 0,
+            cursor: 'pointer',
 
-              svg: {
-                width: 20,
-                height: 20,
-              },
-            })}
-          >
-            <VisuallyHidden>{siteText.search.clear}</VisuallyHidden>
-            <CloseIcon />
-          </IconContainer>
-        </div>
+            svg: {
+              width: 20,
+              height: 20,
+            },
+          })}
+        >
+          <VisuallyHidden>{siteText.search.clear}</VisuallyHidden>
+          <CloseIcon />
+        </IconContainer>
       )}
 
       <VisuallyHidden>

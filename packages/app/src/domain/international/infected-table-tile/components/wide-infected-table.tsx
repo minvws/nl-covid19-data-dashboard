@@ -9,7 +9,8 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
-import { filterArrayType, MAX_COUNTRIES_START } from '../infected-table-tile';
+import { filterArrayType } from '../infected-table-tile';
+import { MAX_COUNTRIES_START } from '../logic/common';
 import { BarWithNumber } from './bar-with-number';
 interface wideInfectedTableProps {
   data: InTestedOverall[];
@@ -31,11 +32,12 @@ export function WideInfectedTable({
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   return (
-    <Box overflow="auto" mb={3}>
+    <Box overflow="auto">
       <StyledTable>
         <thead
           css={css({
-            borderBottom: '1px solid lightGray',
+            borderBottom: '1px solid',
+            borderBottomColor: 'silver',
           })}
         >
           <tr>
@@ -72,33 +74,27 @@ export function WideInfectedTable({
         </thead>
 
         <tbody>
-          {data.map((item, index) => (
-            <>
-              {inputValue.length === 0 ? (
-                <>
-                  {isExpanded || index < MAX_COUNTRIES_START ? (
-                    <TableRow
-                      item={item}
-                      highestAverage={highestAverage?.infected_per_100k_average}
-                      countryNames={countryNames}
-                    />
-                  ) : null}
-                </>
-              ) : (
-                <>
-                  {matchingCountries.some(
-                    (i) => i.country_code === item.country_code
-                  ) && (
-                    <TableRow
-                      item={item}
-                      highestAverage={highestAverage?.infected_per_100k_average}
-                      countryNames={countryNames}
-                    />
-                  )}
-                </>
-              )}
-            </>
-          ))}
+          {data.map((item, index) =>
+            inputValue.length === 0 ? (
+              isExpanded || index < MAX_COUNTRIES_START ? (
+                <TableRow
+                  item={item}
+                  highestAverage={highestAverage?.infected_per_100k_average}
+                  countryNames={countryNames}
+                />
+              ) : null
+            ) : (
+              matchingCountries.some(
+                (i) => i.country_code === item.country_code
+              ) && (
+                <TableRow
+                  item={item}
+                  highestAverage={highestAverage?.infected_per_100k_average}
+                  countryNames={countryNames}
+                />
+              )
+            )
+          )}
         </tbody>
       </StyledTable>
     </Box>
@@ -138,7 +134,7 @@ function TableRow({ item, highestAverage, countryNames }: tableRowProps) {
         </InlineText>
       </Cell>
       <Cell>
-        {highestAverage && (
+        {highestAverage && highestAverage > 0 && (
           <BarWithNumber
             amount={item.infected_per_100k_average}
             percentage={(item.infected_per_100k_average / highestAverage) * 100}
@@ -177,7 +173,7 @@ const HeaderCell = styled.th(
 const Cell = styled.td(
   css({
     borderBottom: '1px solid',
-    borderBottomColor: 'lightGray',
+    borderBottomColor: 'silver',
     p: 0,
     py: 2,
   })

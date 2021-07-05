@@ -17,8 +17,6 @@ import {
   SortIdentifier,
 } from './logic/sort-options';
 
-export const MAX_COUNTRIES_START = 10;
-
 interface infectedTableTileProps {
   data: InTestedOverall[];
   countryNames: Record<string, string>;
@@ -132,23 +130,25 @@ export function InfectedTableTile({
         </Box>
       </Box>
 
-      {breakpoints.sm ? (
-        <WideInfectedTable
-          data={data.sort(positiveTestedSortOptions[sortOption])}
-          isExpanded={isExpanded}
-          matchingCountries={matchingCountries}
-          countryNames={countryNames}
-          inputValue={inputValue}
-        />
-      ) : (
-        <NarrowInfectedTable
-          data={data.sort(positiveTestedSortOptions[sortOption])}
-          isExpanded={isExpanded}
-          matchingCountries={matchingCountries}
-          countryNames={countryNames}
-          inputValue={inputValue}
-        />
-      )}
+      <Box mb={{ _: 2, sm: 3 }}>
+        {breakpoints.sm ? (
+          <WideInfectedTable
+            data={data.sort(positiveTestedSortOptions[sortOption])}
+            isExpanded={isExpanded}
+            matchingCountries={matchingCountries}
+            countryNames={countryNames}
+            inputValue={inputValue}
+          />
+        ) : (
+          <NarrowInfectedTable
+            data={data.sort(positiveTestedSortOptions[sortOption])}
+            isExpanded={isExpanded}
+            matchingCountries={matchingCountries}
+            countryNames={countryNames}
+            inputValue={inputValue}
+          />
+        )}
+      </Box>
 
       {matchingCountries.length > data.length && (
         <Box display="flex" pl={{ _: 2, sm: 3 }} mb={3}>

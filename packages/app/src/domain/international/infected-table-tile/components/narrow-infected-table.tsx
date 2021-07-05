@@ -7,7 +7,8 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
-import { filterArrayType, MAX_COUNTRIES_START } from '../infected-table-tile';
+import { filterArrayType } from '../infected-table-tile';
+import { MAX_COUNTRIES_START } from '../logic/common';
 
 interface narrowInfectedTableProps {
   data: InTestedOverall[];
@@ -26,34 +27,28 @@ export function NarrowInfectedTable({
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   return (
-    <Box borderTop="1px solid silver" mb={3}>
-      {data.map((item, index) => (
-        <>
-          {inputValue.length === 0 ? (
-            <>
-              {isExpanded || index < MAX_COUNTRIES_START ? (
-                <ItemRow
-                  item={item}
-                  highestAverage={highestAverage?.infected_per_100k_average}
-                  countryNames={countryNames}
-                />
-              ) : null}
-            </>
-          ) : (
-            <>
-              {matchingCountries.some(
-                (i) => i.country_code === item.country_code
-              ) && (
-                <ItemRow
-                  item={item}
-                  highestAverage={highestAverage?.infected_per_100k_average}
-                  countryNames={countryNames}
-                />
-              )}
-            </>
-          )}
-        </>
-      ))}
+    <Box borderBottom="1px solid" borderBottomColor="silver" mb={3}>
+      {data.map((item, index) =>
+        inputValue.length === 0 ? (
+          isExpanded || index < MAX_COUNTRIES_START ? (
+            <ItemRow
+              item={item}
+              highestAverage={highestAverage?.infected_per_100k_average}
+              countryNames={countryNames}
+            />
+          ) : null
+        ) : (
+          matchingCountries.some(
+            (i) => i.country_code === item.country_code
+          ) && (
+            <ItemRow
+              item={item}
+              highestAverage={highestAverage?.infected_per_100k_average}
+              countryNames={countryNames}
+            />
+          )
+        )
+      )}
     </Box>
   );
 }
@@ -75,8 +70,8 @@ function ItemRow({ item, highestAverage, countryNames }: itemRowProps) {
 
   return (
     <Box
-      borderBottom="1px solid silver"
-      py={3}
+      borderBottom="1px solid"
+      borderBottomColor="silver"
       px={2}
       backgroundColor={
         item.country_code === 'NLD' ? colors.tileGray : undefined
@@ -94,13 +89,13 @@ function ItemRow({ item, highestAverage, countryNames }: itemRowProps) {
             justifyContent: 'space-between',
           })}
         >
-          {`${text.header_per_inwoners}:`}
+          {text.header_per_inwoners}:
           <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
             {formatNumber(item.infected_per_100k_average)}
           </InlineText>
         </Text>
 
-        {highestAverage && (
+        {highestAverage && highestAverage > 0 && (
           <Box maxWidth={{ _: '5rem', xs: '6rem' }} width="100%">
             <Box
               width={`${
@@ -125,7 +120,7 @@ function ItemRow({ item, highestAverage, countryNames }: itemRowProps) {
             justifyContent: 'space-between',
           })}
         >
-          {`${text.header_totale}:`}
+          {text.header_totale}:
           <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
             {formatNumber(item.infected)}
           </InlineText>
