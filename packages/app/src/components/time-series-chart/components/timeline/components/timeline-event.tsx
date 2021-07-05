@@ -5,6 +5,7 @@ import { ReactNode, RefObject, useRef } from 'react';
 import styled from 'styled-components';
 import { WithTooltip } from '~/lib/tooltip';
 import { colors } from '~/style/theme';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { TimelineEventXOffset } from '../logic';
@@ -33,9 +34,8 @@ export function TimelineEvent({
   tooltipContent,
   historyEventOffset,
 }: TimelineEventProps) {
-  const annotationRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside([timelineContainerRef, annotationRef, contentRef], onHide);
+  useOnClickOutside([timelineContainerRef, contentRef], onHide);
 
   const isHighlightedEvent = isHighlighted || isSelected;
 
@@ -101,6 +101,7 @@ function TooltipTrigger({
   onFocus: () => void;
   onBlur: () => void;
 }) {
+  const breakpoints = useBreakpoints();
   const isTouch = useIsTouchDevice();
   const contentWithRef = <div ref={contentRef}>{content}</div>;
 
@@ -110,11 +111,19 @@ function TooltipTrigger({
       placement="bottom"
       interactive={isTouch}
       visible={isSelected}
+      maxWidth={breakpoints.sm ? '360px' : '100%'}
+      popperOptions={{
+        modifiers: [{ name: 'flip', enabled: false }],
+      }}
     >
       <div
         tabIndex={0}
         onFocus={onFocus}
-        onBlur={onBlur}
+        /**
+         * disable blur events for touch devices, we don't want to hide the
+         * tooltip when a user navigates through the tooltips using prev/next
+         */
+        onBlur={isTouch ? undefined : onBlur}
         /**
          * Somehow without the aria-role='text' the screenreader won't read the
          * tooltip content..?

@@ -19,7 +19,6 @@ export function FullscreenChartTile({
   children: React.ReactNode;
   metadata?: MetadataProps;
 }) {
-  const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wasFullscreen = usePrevious(isFullscreen);
   const breakpoints = useBreakpoints();
@@ -56,8 +55,15 @@ export function FullscreenChartTile({
             position: 'absolute',
             top: '10px',
             right: '10px',
-            color: isFullscreen || isButtonVisible ? 'silver' : 'white',
-            '&:focus-within, &:hover': { color: 'gray' },
+            color: 'silver',
+
+            '&:focus-within': {
+              outlineWidth: '1px',
+              outlineStyle: 'dashed',
+              outlineColor: 'blue',
+            },
+
+            '&:hover': { color: 'gray' },
           })}
         >
           <IconButton
@@ -75,12 +81,7 @@ export function FullscreenChartTile({
 
   return (
     <>
-      <div
-        onPointerEnter={() => setIsButtonVisible(true)}
-        onPointerLeave={() => setIsButtonVisible(false)}
-      >
-        {tile}
-      </div>
+      <div>{tile}</div>
 
       {breakpoints.md && isFullscreen && (
         <Modal

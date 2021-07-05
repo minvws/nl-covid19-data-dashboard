@@ -42,11 +42,13 @@ export interface MunicipalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface MunicipalHospitalNice {
@@ -142,6 +144,41 @@ export interface MunicipalitiesSewer {
   date_of_insertion_unix: number;
 }
 
+export interface In {
+  last_generated: string;
+  proto_name: string;
+  name: string;
+  code: string;
+  tested_overall: InTestedOverall;
+}
+export interface InTestedOverall {
+  values: InTestedOverallValue[];
+  last_value: InTestedOverallValue;
+}
+export interface InTestedOverallValue {
+  infected: number;
+  infected_per_100k_average: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
+export interface InCollection {
+  last_generated: string;
+  proto_name: "IN_COLLECTION";
+  name: string;
+  code: string;
+  tested_overall: InTestedOverall[];
+}
+export interface InTestedOverall {
+  country_code: string;
+  infected: number;
+  infected_per_100k_average: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+
 export interface National {
   last_generated: string;
   proto_name: "NL";
@@ -172,7 +209,8 @@ export interface National {
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
   vaccine_vaccinated_or_support: NlVaccineVaccinatedOrSupport;
-  corona_melder_app: NlCoronaMelderApp;
+  corona_melder_app_download: NlCoronaMelderAppDownload;
+  corona_melder_app_warning: NlCoronaMelderAppWarning;
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
@@ -207,7 +245,7 @@ export interface NationalDifference {
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
   reproduction__index_average: DifferenceDecimal;
-  corona_melder_app__warned_daily: DifferenceInteger;
+  corona_melder_app_warning__count: DifferenceInteger;
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
@@ -225,11 +263,13 @@ export interface NationalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface NationalDoctor {
@@ -516,11 +556,11 @@ export interface NlBehaviorPerAgeGroup {
   date_end_unix: number;
 }
 export interface NlBehaviorPerAgeGroupValue {
-  "16_24": number;
-  "25_39": number;
-  "40_54": number;
-  "55_69": number;
-  "70_plus": number;
+  "16_24": number | null;
+  "25_39": number | null;
+  "40_54": number | null;
+  "55_69": number | null;
+  "70_plus": number | null;
 }
 export interface NlBehaviorGetTestedSupportPerAgeGroup {
   values: NlBehaviorGetTestedSupportPerAgeGroupValue[];
@@ -600,13 +640,21 @@ export interface NlVaccineVaccinatedOrSupportValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlCoronaMelderApp {
-  values: NlCoronaMelderAppValue[];
-  last_value: NlCoronaMelderAppValue;
+export interface NlCoronaMelderAppDownload {
+  values: NlCoronaMelderAppDownloadValue[];
+  last_value: NlCoronaMelderAppDownloadValue;
 }
-export interface NlCoronaMelderAppValue {
-  downloaded_total: number;
-  warned_daily: number;
+export interface NlCoronaMelderAppDownloadValue {
+  count: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlCoronaMelderAppWarning {
+  values: NlCoronaMelderAppWarningValue[];
+  last_value: NlCoronaMelderAppWarningValue;
+}
+export interface NlCoronaMelderAppWarningValue {
+  count: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -888,11 +936,13 @@ export interface RegionalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface VrGNumber {

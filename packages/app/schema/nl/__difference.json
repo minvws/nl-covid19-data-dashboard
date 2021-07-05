@@ -51,7 +51,7 @@
     "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "corona_melder_app__warned_daily": {
+    "corona_melder_app_warning__count": {
       "$ref": "#/definitions/diff_integer"
     },
     "disability_care__newly_infected_people": {
@@ -111,7 +111,7 @@
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
-    "corona_melder_app__warned_daily",
+    "corona_melder_app_warning__count",
     "disability_care__newly_infected_people",
     "disability_care__infected_locations_total",
     "elderly_at_home__positive_tested_daily",
@@ -138,11 +138,14 @@
         "difference": {
           "type": "integer"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": ["old_value", "difference", "new_date_unix"],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -155,11 +158,14 @@
         "difference": {
           "type": "number"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": ["old_value", "difference", "new_date_unix"],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

@@ -1,6 +1,8 @@
 import css from '@styled-system/css';
 import { localPoint } from '@visx/event';
-import { Mercator } from '@visx/geo';
+import Projection from '@visx/geo/lib/projections/Projection';
+import { ProjectionPreset } from '@visx/geo/lib/types';
+import { GeoProjection } from 'd3-geo';
 import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
 import {
   memo,
@@ -12,20 +14,19 @@ import {
   useState,
 } from 'react';
 import { colors } from '~/style/theme';
-import { useIsTouchDevice } from '~/utils/use-is-touch-device';
-import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { useUniqueId } from '~/utils/use-unique-id';
 import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResponsiveContainer } from '~/utils/use-responsive-container';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { Path } from './path';
 import {
   ChoroplethTooltipPlacement,
   Tooltip,
 } from './tooltips/tooltip-container';
-import { countryGeo } from './topology';
 
 export type TooltipSettings = {
   left: number;
@@ -33,7 +34,11 @@ export type TooltipSettings = {
   data: string;
 };
 
-type TProps<T1, T3> = {
+type ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties> = {
+  /**
+   * An optional projection for the map rendering, defaults to 'mercator'
+   */
+  projection?: ProjectionPreset | (() => GeoProjection);
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.
@@ -43,30 +48,39 @@ type TProps<T1, T3> = {
   minHeight?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
-  featureCollection: FeatureCollection<MultiPolygon, T1>;
+  featureCollection: FeatureCollection<MultiPolygon, FeatureProperties>;
+  // These are the outline superimposed over the main features.
+  outlines?: FeatureCollection<MultiPolygon, OutlineProperties>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
-  hovers?: FeatureCollection<MultiPolygon, T3>;
+  hovers?: FeatureCollection<MultiPolygon, HoverProperties>;
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
   boundingBox: FeatureCollection<MultiPolygon>;
+  // Add optional padding to the bounding box
+  boudingBoxPadding?: {
+    left?: number;
+    right?: number;
+    top?: number;
+    bottom?: number;
+  };
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   renderFeature: (
-    feature: Feature<MultiPolygon, T1>,
+    feature: Feature<MultiPolygon, FeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
 
   renderHighlight?: (
-    feature: Feature<MultiPolygon, T1>,
+    feature: Feature<MultiPolygon, FeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
   renderHover: (
-    feature: Feature<MultiPolygon, T3>,
+    feature: Feature<MultiPolygon, HoverProperties>,
     path: string,
     index: number
   ) => ReactNode;
@@ -88,11 +102,15 @@ type TProps<T1, T3> = {
  * @param props
  */
 
-export function Choropleth<T1, T3>({
+export function Choropleth<
+  FeatureProperties,
+  HoverProperties,
+  OutlineProperties
+>({
   getTooltipContent,
   tooltipPlacement,
   ...props
-}: TProps<T1, T3>) {
+}: ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties>) {
   const [tooltip, setTooltip] = useState<TooltipSettings>();
   const isTouch = useIsTouchDevice();
 
@@ -124,23 +142,37 @@ export function Choropleth<T1, T3>({
   );
 }
 
-type FitSize = [[number, number], any];
+/**
+ * Sets the projection’s scale and translate to fit the specified GeoJSON object in the center of the given extent.
+ * The extent is specified as an array [[x₀, y₀], [x₁, y₁]], where x₀ is the left side of the bounding box,
+ * y₀ is the top, x₁ is the right and y₁ is the bottom.
+ *
+ * (Description taken from ProjectionProps.fitExtent in @visx/Projection.d.ts)
+ */
+type FitExtent = [[[number, number], [number, number]], any];
 
-type ChoroplethMapProps<T1, T3> = Omit<
-  TProps<T1, T3>,
-  'getTooltipContent' | 'tooltipPlacement'
-> & {
-  setTooltip: (tooltip: TooltipSettings | undefined) => void;
-};
+type ChoroplethMapProps<FeatureProperties, HoverProperties, OutlineProperties> =
+  Omit<
+    ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties>,
+    'getTooltipContent' | 'tooltipPlacement'
+  > & {
+    setTooltip: (tooltip: TooltipSettings | undefined) => void;
+  };
 
-const ChoroplethMap: <T1, T3>(
-  props: ChoroplethMapProps<T1, T3> & {
+const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
+  props: ChoroplethMapProps<
+    FeatureProperties,
+    HoverProperties,
+    OutlineProperties
+  > & {
     hoverRef: React.RefObject<SVGGElement>;
   }
 ) => JSX.Element | null = memo((props) => {
   const {
+    projection,
     accessibility,
     featureCollection,
+    outlines,
     hovers,
     boundingBox,
     renderFeature,
@@ -151,6 +183,7 @@ const ChoroplethMap: <T1, T3>(
     minHeight = 500,
     initialWidth = 0.9 * minHeight,
     showTooltipOnFocus,
+    boudingBoxPadding = {},
   } = props;
 
   const ratio = 1.2;
@@ -170,7 +203,16 @@ const ChoroplethMap: <T1, T3>(
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
 
-  const fitSize: FitSize = [[width, height], boundingBox];
+  const fitExtent: FitExtent = [
+    [
+      [boudingBoxPadding.left ?? 0, boudingBoxPadding.top ?? 0],
+      [
+        width - (boudingBoxPadding.right ?? 0),
+        height - (boudingBoxPadding.bottom ?? 0),
+      ],
+    ],
+    boundingBox,
+  ];
 
   useEffect(() => {
     if (!showTooltipOnFocus) {
@@ -251,28 +293,47 @@ const ChoroplethMap: <T1, T3>(
           />
           <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
             <MercatorGroup
+              projection={projection}
               data={featureCollection.features}
               render={renderFeature}
-              fitSize={fitSize}
+              fitExtent={fitExtent}
             />
 
-            <Country fitSize={fitSize} />
+            {outlines && (
+              <g css={css({ pointerEvents: 'none' })}>
+                <MercatorGroup
+                  projection={projection}
+                  data={outlines.features}
+                  render={(_, path, index) => (
+                    <Path
+                      key={index}
+                      pathData={path}
+                      stroke={colors.silver}
+                      strokeWidth={0.5}
+                    />
+                  )}
+                  fitExtent={fitExtent}
+                />
+              </g>
+            )}
 
             {hovers && (
               <g ref={hoverRef}>
                 <MercatorGroup
+                  projection={projection}
                   data={hovers.features}
                   render={renderHover}
-                  fitSize={fitSize}
+                  fitExtent={fitExtent}
                 />
               </g>
             )}
 
             {renderHighlight && (
               <MercatorGroup
+                projection={projection}
                 data={featureCollection.features}
                 render={renderHighlight}
-                fitSize={fitSize}
+                fitExtent={fitExtent}
               />
             )}
           </g>
@@ -282,40 +343,22 @@ const ChoroplethMap: <T1, T3>(
   );
 });
 
-function Country({ fitSize }: { fitSize: FitSize }) {
-  return (
-    <g css={css({ pointerEvents: 'none' })}>
-      <MercatorGroup
-        data={countryGeo.features}
-        render={(_, path, index) => (
-          <Path
-            key={index}
-            pathData={path}
-            stroke={colors.silver}
-            strokeWidth={0.5}
-          />
-        )}
-        fitSize={fitSize}
-      />
-    </g>
-  );
-}
-
 interface MercatorGroupProps<G extends Geometry, P> {
+  projection?: ProjectionPreset | (() => GeoProjection);
   data: Feature<G, P>[];
   render: (
     feature: Feature<G, P>,
     path: string,
     index: number
   ) => React.ReactNode;
-  fitSize: FitSize;
+  fitExtent: FitExtent;
 }
 
 function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
-  const { data, fitSize, render } = props;
+  const { projection = 'mercator', data, fitExtent, render } = props;
 
   return (
-    <Mercator data={data} fitSize={fitSize}>
+    <Projection projection={projection} data={data} fitExtent={fitExtent}>
       {({ features }) => (
         <g>
           {features.map(
@@ -336,7 +379,7 @@ function MercatorGroup<G extends Geometry, P>(props: MercatorGroupProps<G, P>) {
           )}
         </g>
       )}
-    </Mercator>
+    </Projection>
   );
 }
 

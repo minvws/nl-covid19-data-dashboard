@@ -37,15 +37,14 @@
         "difference": {
           "type": "integer"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -58,15 +57,14 @@
         "difference": {
           "type": "number"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const withTranspileModules = require('next-transpile-modules')(['d3-geo']);
 
 const nextConfig = {
   /**
@@ -10,6 +11,12 @@ const nextConfig = {
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
    */
   reactStrictMode: true,
+
+  /**
+   * Enable source maps in production, because we want people to report readable
+   * stack traces from the error boundaries feature.
+   */
+  productionBrowserSourceMaps: true,
 
   webpack(config) {
     config.module.rules.push({
@@ -54,4 +61,4 @@ const nextConfig = {
 
 const plugins = [withBundleAnalyzer];
 
-module.exports = withPlugins(plugins, nextConfig);
+module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
