@@ -5,7 +5,8 @@
   "required": [
     "behavior",
     "code",
-    "corona_melder_app",
+    "corona_melder_app_download",
+    "corona_melder_app_warning",
     "deceased_cbs",
     "deceased_rivm",
     "deceased_rivm_per_age_group",
@@ -141,8 +142,11 @@
     "vaccine_vaccinated_or_support": {
       "$ref": "vaccine_vaccinated_or_support.json"
     },
-    "corona_melder_app": {
-      "$ref": "corona_melder_app.json"
+    "corona_melder_app_download": {
+      "$ref": "corona_melder_app_download.json"
+    },
+    "corona_melder_app_warning": {
+      "$ref": "corona_melder_app_warning.json"
     },
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"
