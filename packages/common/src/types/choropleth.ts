@@ -2,7 +2,7 @@ import { FeatureCollection, MultiPolygon } from 'geojson';
 import {
   MunicipalDifference,
   Municipalities,
-  NationalDifference,
+  NlDifference,
   RegionalDifference,
   Regions,
 } from './data';
@@ -72,7 +72,7 @@ export type MunicipalitiesMetricName = MetricKeys<Municipalities>;
 export type RegionsMetricName = MetricKeys<Regions>;
 
 export type DifferenceKey =
-  | keyof NationalDifference
+  | keyof NlDifference
   | keyof RegionalDifference
   | keyof MunicipalDifference;
 

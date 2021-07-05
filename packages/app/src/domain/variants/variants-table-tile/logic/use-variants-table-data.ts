@@ -1,6 +1,6 @@
 import {
   DifferenceDecimal,
-  NationalDifference,
+  NlDifference,
   NlVariantsValue,
 } from '@corona-dashboard/common';
 import { useMemo } from 'react';
@@ -44,7 +44,7 @@ export type VariantRow = {
 export function useVariantsTableData(
   data: NlVariantsValue,
   countriesOfOrigin: CountriesOfOrigin,
-  differences: NationalDifference
+  differences: NlDifference
 ): VariantRow[] {
   return useMemo(
     () =>

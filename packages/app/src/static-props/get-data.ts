@@ -3,7 +3,7 @@ import {
   InCollection,
   Municipal,
   Municipalities,
-  National,
+  Nl,
   Regionaal,
   Regions,
   sortTimeSeriesInDataInPlace,
@@ -42,7 +42,7 @@ import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
  */
 
 const json = {
-  nl: loadJsonFromDataFile<National>('NL.json'),
+  nl: loadJsonFromDataFile<Nl>('NL.json'),
   vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
   gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
   inCollection: loadJsonFromDataFile<InCollection>(
@@ -129,9 +129,9 @@ async function replaceReferencesInContent(
  * be added to the output
  *
  */
-export function selectNlPageMetricData<
-  T extends keyof National = NlPageMetricNames
->(...additionalMetrics: T[]) {
+export function selectNlPageMetricData<T extends keyof Nl = NlPageMetricNames>(
+  ...additionalMetrics: T[]
+) {
   return selectNlData(...[...nlPageMetricNames, ...additionalMetrics]);
 }
 
@@ -139,9 +139,7 @@ export function selectNlPageMetricData<
  * This method selects only the specified metric properties from the national data
  *
  */
-export function selectNlData<T extends keyof National = never>(
-  ...metrics: T[]
-) {
+export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
   return () => {
     const { data } = getNlData();
 
@@ -156,7 +154,7 @@ export function selectNlData<T extends keyof National = never>(
            */
           data[p] ?? null
         ),
-      {} as Pick<National, T>
+      {} as Pick<Nl, T>
     );
 
     return { selectedNlData };
@@ -165,7 +163,7 @@ export function selectNlData<T extends keyof National = never>(
 
 export function getNlData() {
   // clone data to prevent mutation of the original
-  const data = JSON.parse(JSON.stringify(json.nl)) as National;
+  const data = JSON.parse(JSON.stringify(json.nl)) as Nl;
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 

@@ -1,5 +1,5 @@
 import {
-  NationalBehaviorValue,
+  NlBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -25,7 +25,7 @@ interface BehaviorTableTileProps {
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  value: NationalBehaviorValue | RegionalBehaviorValue;
+  value: NlBehaviorValue | RegionalBehaviorValue;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
@@ -289,7 +289,7 @@ const Button = styled.button(
   })
 );
 
-function useBehaviorTableData(value: NationalBehaviorValue) {
+function useBehaviorTableData(value: NlBehaviorValue) {
   const behaviorLookupKeys = useBehaviorLookupKeys();
 
   return useMemo(() => {

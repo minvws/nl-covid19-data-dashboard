@@ -1,5 +1,5 @@
 import {
-  National,
+  Nl,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryValue,
 } from '@corona-dashboard/common';
@@ -18,7 +18,7 @@ export type DeliveryAndAdministrationData = {
   estimatedRange: [number, number];
 };
 
-export function selectDeliveryAndAdministrationData(nlData: National) {
+export function selectDeliveryAndAdministrationData(nlData: Nl) {
   const {
     vaccine_administered,
     vaccine_administered_estimate,

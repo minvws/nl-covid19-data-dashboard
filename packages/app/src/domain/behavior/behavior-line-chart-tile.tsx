@@ -1,5 +1,5 @@
 import {
-  NationalBehaviorValue,
+  NlBehaviorValue,
   RegionalBehaviorValue,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -14,7 +14,7 @@ import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
 
 interface BehaviorLineChartTileProps {
-  values: NationalBehaviorValue[] | RegionalBehaviorValue[];
+  values: NlBehaviorValue[] | RegionalBehaviorValue[];
   metadata: MetadataProps;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
@@ -30,9 +30,9 @@ export function BehaviorLineChartTile({
   const chartText = siteText.gedrag_common.line_chart;
 
   const selectedComplianceValueKey =
-    `${currentId}_compliance` as keyof NationalBehaviorValue;
+    `${currentId}_compliance` as keyof NlBehaviorValue;
   const selectedSupportValueKey =
-    `${currentId}_support` as keyof NationalBehaviorValue;
+    `${currentId}_support` as keyof NlBehaviorValue;
 
   return (
     <ChartTile title={chartText.title} metadata={metadata}>

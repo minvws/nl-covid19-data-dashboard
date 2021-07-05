@@ -1,6 +1,6 @@
 import {
   Municipal,
-  National,
+  Nl,
   Regionaal,
   sortTimeSeriesInDataInPlace,
 } from '@corona-dashboard/common';
@@ -39,7 +39,7 @@ declare global {
        *
        * @param pageName
        */
-      beforeNationalTests(pageName: string): void;
+      beforeNlTests(pageName: string): void;
       /**
        * Fixture loading and page navigation for regional page tests
        *
@@ -102,10 +102,10 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add('beforeNationalTests', (pageName: string) => {
+Cypress.Commands.add('beforeNlTests', (pageName: string) => {
   cy.swallowResizeObserverError();
 
-  cy.fixture<National>('NL.json')
+  cy.fixture<Nl>('NL.json')
     .then((nationalData) => {
       sortTimeSeriesInDataInPlace(nationalData);
     })
