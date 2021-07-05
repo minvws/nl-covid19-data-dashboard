@@ -8,15 +8,25 @@ import { TooltipContent } from './tooltip-content';
 type InternationalTooltipProps = {
   title: string;
   countryName: string;
+  countryCode: string;
   value: number;
   comparedName: string;
+  comparedCode: string;
   comparedValue: number;
 };
 
 export function PositiveTestedPeopleInternationalTooltip(
   props: InternationalTooltipProps
 ) {
-  const { countryName, value, comparedName, comparedValue, title } = props;
+  const {
+    countryName,
+    value,
+    comparedName,
+    comparedValue,
+    comparedCode,
+    title,
+    countryCode,
+  } = props;
   const { formatPercentage } = useIntl();
 
   const thresholdValues = internationalThresholds.infected_per_100k_average;
@@ -26,7 +36,12 @@ export function PositiveTestedPeopleInternationalTooltip(
   return (
     <TooltipContent title={title}>
       <TooltipSubject thresholdValues={thresholdValues} filterBelow={value}>
-        <SubjectText name={countryName} value={formatPercentage(value)} bold />
+        <SubjectText
+          code={countryCode}
+          name={countryName}
+          value={formatPercentage(value)}
+          bold
+        />
       </TooltipSubject>
       {showComparison && (
         <TooltipSubject
@@ -34,6 +49,7 @@ export function PositiveTestedPeopleInternationalTooltip(
           filterBelow={comparedValue}
         >
           <SubjectText
+            code={comparedCode}
             name={comparedName}
             value={formatPercentage(comparedValue)}
           />
@@ -44,10 +60,12 @@ export function PositiveTestedPeopleInternationalTooltip(
 }
 
 function SubjectText({
+  code,
   name,
   value,
   bold,
 }: {
+  code: string;
   name: string;
   value: string;
   bold?: boolean;
@@ -55,7 +73,13 @@ function SubjectText({
   return (
     <Box display="flex" width="100%">
       <Box fontWeight={bold ? 'bold' : undefined}>
-        <InlineText>{name}</InlineText>
+        <img
+          aria-hidden
+          src={`/icons/flags/${code.toLowerCase()}.svg`}
+          width="17"
+          height="13"
+        />
+        <InlineText pl={1}>{name}</InlineText>
       </Box>
       <Box ml="auto">
         <InlineText fontWeight={bold ? 'bold' : undefined}>{value}</InlineText>
