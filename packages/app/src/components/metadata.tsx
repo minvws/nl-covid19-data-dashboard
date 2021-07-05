@@ -1,9 +1,9 @@
+import { MarginBottomProps } from 'styled-system';
+import { ExternalLink } from '~/components/external-link';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
 import { Text } from './typography';
-import { useIntl } from '~/intl';
-import { ExternalLink } from '~/components/external-link';
-import { MarginBottomProps } from 'styled-system';
 
 export interface MetadataProps extends MarginBottomProps {
   date?: number | [number, number];

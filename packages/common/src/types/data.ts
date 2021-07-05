@@ -42,11 +42,13 @@ export interface MunicipalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface MunicipalHospitalNice {
@@ -196,8 +198,7 @@ export interface National {
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
   hospital_lcps: NationalHospitalLcps;
   intensive_care_lcps: NationalIntensiveCareLcps;
-  tested_ggd_daily: NationalTestedGgdDaily;
-  tested_ggd_average: NationalTestedGgdAverage;
+  tested_ggd: NlTestedGgd;
   nursing_home: NationalNursingHome;
   disability_care: NationalDisabilityCare;
   behavior: NationalBehavior;
@@ -208,7 +209,8 @@ export interface National {
   deceased_cbs: NationalDeceasedCbs;
   elderly_at_home: NationalElderlyAtHome;
   vaccine_vaccinated_or_support: NlVaccineVaccinatedOrSupport;
-  corona_melder_app: NlCoronaMelderApp;
+  corona_melder_app_download: NlCoronaMelderAppDownload;
+  corona_melder_app_warning: NlCoronaMelderAppWarning;
   vaccine_coverage?: NlVaccineCoverage;
   vaccine_delivery: NlVaccineDelivery;
   vaccine_delivery_estimate: NlVaccineDeliveryEstimate;
@@ -229,10 +231,8 @@ export interface National {
 export interface NationalDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
-  tested_ggd_daily__tested_total: DifferenceInteger;
-  tested_ggd_daily__infected_percentage: DifferenceDecimal;
-  tested_ggd_average__tested_total_moving_average: DifferenceDecimal;
-  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
+  tested_ggd__tested_total_moving_average: DifferenceDecimal;
+  tested_ggd__infected_percentage_moving_average: DifferenceDecimal;
   infectious_people__estimate: DifferenceInteger;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   hospital_lcps__beds_occupied_covid: DifferenceInteger;
@@ -245,7 +245,7 @@ export interface NationalDifference {
   nursing_home__infected_locations_total: DifferenceInteger;
   nursing_home__deceased_daily: DifferenceInteger;
   reproduction__index_average: DifferenceDecimal;
-  corona_melder_app__warned_daily: DifferenceInteger;
+  corona_melder_app_warning__count: DifferenceInteger;
   disability_care__newly_infected_people: DifferenceInteger;
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
@@ -263,11 +263,13 @@ export interface NationalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface NationalDoctor {
@@ -436,11 +438,11 @@ export interface NationalIntensiveCareLcpsValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalTestedGgdDaily {
-  values: NationalTestedGgdDailyValue[];
-  last_value: NationalTestedGgdDailyValue;
+export interface NlTestedGgd {
+  values: NlTestedGgdValue[];
+  last_value: NlTestedGgdValue;
 }
-export interface NationalTestedGgdDailyValue {
+export interface NlTestedGgdValue {
   infected: number;
   infected_moving_average: number | null;
   infected_percentage: number;
@@ -448,21 +450,6 @@ export interface NationalTestedGgdDailyValue {
   tested_total: number;
   tested_total_moving_average: number | null;
   date_unix: number;
-  date_of_insertion_unix: number;
-}
-export interface NationalTestedGgdAverage {
-  values: NationalTestedGgdAverageValue[];
-  last_value: NationalTestedGgdAverageValue;
-}
-export interface NationalTestedGgdAverageValue {
-  infected: number;
-  infected_moving_average: number | null;
-  infected_percentage: number;
-  infected_percentage_moving_average: number | null;
-  tested_total: number;
-  tested_total_moving_average: number | null;
-  date_start_unix: number;
-  date_end_unix: number;
   date_of_insertion_unix: number;
 }
 export interface NationalNursingHome {
@@ -653,13 +640,21 @@ export interface NlVaccineVaccinatedOrSupportValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NlCoronaMelderApp {
-  values: NlCoronaMelderAppValue[];
-  last_value: NlCoronaMelderAppValue;
+export interface NlCoronaMelderAppDownload {
+  values: NlCoronaMelderAppDownloadValue[];
+  last_value: NlCoronaMelderAppDownloadValue;
 }
-export interface NlCoronaMelderAppValue {
-  downloaded_total: number;
-  warned_daily: number;
+export interface NlCoronaMelderAppDownloadValue {
+  count: number;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface NlCoronaMelderAppWarning {
+  values: NlCoronaMelderAppWarningValue[];
+  last_value: NlCoronaMelderAppWarningValue;
+}
+export interface NlCoronaMelderAppWarningValue {
+  count: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
@@ -895,26 +890,25 @@ export interface NlVariantsValue {
   date_of_insertion_unix: number;
 }
 
-export interface Regionaal {
+export interface Vr {
   last_generated: string;
   proto_name: string;
   name: string;
   code: string;
   static_values?: VrStaticValues;
-  difference: RegionalDifference;
+  difference: VrDifference;
   g_number: VrGNumber;
-  sewer: RegionalSewer;
-  sewer_per_installation: RegionalSewerPerInstallation;
-  tested_overall: RegionalTestedOverall;
-  hospital_nice: RegionalHospitalNice;
-  tested_ggd_daily: RegionalTestedGgdDaily;
-  tested_ggd_average: RegionalTestedGgdAverage;
-  nursing_home: RegionalNursingHome;
-  disability_care: RegionalDisabilityCare;
-  behavior: RegionalBehavior;
-  deceased_rivm: RegionalDeceasedRivm;
-  deceased_cbs: RegionalDeceasedCbs;
-  elderly_at_home: RegionalElderlyAtHome;
+  sewer: VrSewer;
+  sewer_per_installation: VrSewerPerInstallation;
+  tested_overall: VrTestedOverall;
+  hospital_nice: VrHospitalNice;
+  tested_ggd: VrTestedGgd;
+  nursing_home: VrNursingHome;
+  disability_care: VrDisabilityCare;
+  behavior: VrBehavior;
+  deceased_rivm: VrDeceasedRivm;
+  deceased_cbs: VrDeceasedCbs;
+  elderly_at_home: VrElderlyAtHome;
   escalation_level: VrEscalationLevel;
   tested_overall_sum: VrTestedOverallSum;
   hospital_nice_sum: VrHospitalNiceSum;
@@ -924,13 +918,11 @@ export interface Regionaal {
 export interface VrStaticValues {
   population_count: number;
 }
-export interface RegionalDifference {
+export interface VrDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
-  tested_ggd_average__tested_total_moving_average: DifferenceDecimal;
-  tested_ggd_average__infected_percentage_moving_average: DifferenceDecimal;
-  tested_ggd_daily__tested_total: DifferenceInteger;
-  tested_ggd_daily__infected_percentage: DifferenceDecimal;
+  tested_ggd__tested_total_moving_average: DifferenceDecimal;
+  tested_ggd__infected_percentage_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average: DifferenceDecimal;
   nursing_home__newly_infected_people: DifferenceInteger;
@@ -944,11 +936,13 @@ export interface RegionalDifference {
 export interface DifferenceDecimal {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface DifferenceInteger {
   old_value: number;
   difference: number;
+  old_date_unix: number;
   new_date_unix: number;
 }
 export interface VrGNumber {
@@ -961,11 +955,11 @@ export interface VrGNumberValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RegionalSewer {
-  values: RegionalSewerValue[];
-  last_value: RegionalSewerValue;
+export interface VrSewer {
+  values: VrSewerValue[];
+  last_value: VrSewerValue;
 }
-export interface RegionalSewerValue {
+export interface VrSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
@@ -974,46 +968,46 @@ export interface RegionalSewerValue {
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
-export interface RegionalSewerPerInstallation {
-  values: RegionalSewerPerInstallationInstallation[];
+export interface VrSewerPerInstallation {
+  values: VrSewerPerInstallationInstallation[];
 }
-export interface RegionalSewerPerInstallationInstallation {
+export interface VrSewerPerInstallationInstallation {
   rwzi_awzi_name: string;
-  values: RegionalSewerPerInstallationValue[];
-  last_value: RegionalSewerPerInstallationValue;
+  values: VrSewerPerInstallationValue[];
+  last_value: VrSewerPerInstallationValue;
 }
-export interface RegionalSewerPerInstallationValue {
+export interface VrSewerPerInstallationValue {
   date_unix: number;
   rna_normalized: number;
   date_of_insertion_unix: number;
 }
-export interface RegionalTestedOverall {
-  values: RegionalTestedOverallValue[];
-  last_value: RegionalTestedOverallValue;
+export interface VrTestedOverall {
+  values: VrTestedOverallValue[];
+  last_value: VrTestedOverallValue;
 }
-export interface RegionalTestedOverallValue {
+export interface VrTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
-export interface RegionalHospitalNice {
-  values: RegionalHospitalNiceValue[];
-  last_value: RegionalHospitalNiceValue;
+export interface VrHospitalNice {
+  values: VrHospitalNiceValue[];
+  last_value: VrHospitalNiceValue;
 }
-export interface RegionalHospitalNiceValue {
+export interface VrHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RegionalTestedGgdDaily {
-  values: RegionalTestedGgdDailyValue[];
-  last_value: RegionalTestedGgdDailyValue;
+export interface VrTestedGgd {
+  values: VrTestedGgdValue[];
+  last_value: VrTestedGgdValue;
 }
-export interface RegionalTestedGgdDailyValue {
+export interface VrTestedGgdValue {
   infected: number;
   infected_moving_average: number | null;
   infected_percentage: number;
@@ -1024,27 +1018,11 @@ export interface RegionalTestedGgdDailyValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionalTestedGgdAverage {
-  values: RegionalTestedGgdAverageValue[];
-  last_value: RegionalTestedGgdAverageValue;
+export interface VrNursingHome {
+  values: VrNursingHomeValue[];
+  last_value: VrNursingHomeValue;
 }
-export interface RegionalTestedGgdAverageValue {
-  infected: number;
-  infected_moving_average: number | null;
-  infected_percentage: number;
-  infected_percentage_moving_average: number | null;
-  tested_total: number;
-  tested_total_moving_average: number | null;
-  date_start_unix: number;
-  date_end_unix: number;
-  date_of_insertion_unix: number;
-  vrcode: string;
-}
-export interface RegionalNursingHome {
-  values: RegionalNursingHomeValue[];
-  last_value: RegionalNursingHomeValue;
-}
-export interface RegionalNursingHomeValue {
+export interface VrNursingHomeValue {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   newly_infected_locations: number;
@@ -1056,11 +1034,11 @@ export interface RegionalNursingHomeValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionalDisabilityCare {
-  values: RegionalDisabilityCareValue[];
-  last_value: RegionalDisabilityCareValue;
+export interface VrDisabilityCare {
+  values: VrDisabilityCareValue[];
+  last_value: VrDisabilityCareValue;
 }
-export interface RegionalDisabilityCareValue {
+export interface VrDisabilityCareValue {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   newly_infected_locations: number;
@@ -1072,11 +1050,11 @@ export interface RegionalDisabilityCareValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionalBehavior {
-  values: RegionalBehaviorValue[];
-  last_value: RegionalBehaviorValue;
+export interface VrBehavior {
+  values: VrBehaviorValue[];
+  last_value: VrBehaviorValue;
 }
-export interface RegionalBehaviorValue {
+export interface VrBehaviorValue {
   number_of_participants: number;
   curfew_compliance: number | null;
   curfew_compliance_trend: ("up" | "down" | "equal") | null;
@@ -1115,11 +1093,11 @@ export interface RegionalBehaviorValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionalDeceasedRivm {
-  values: RegionalDeceasedRivmValue[];
-  last_value: RegionalDeceasedRivmValue;
+export interface VrDeceasedRivm {
+  values: VrDeceasedRivmValue[];
+  last_value: VrDeceasedRivmValue;
 }
-export interface RegionalDeceasedRivmValue {
+export interface VrDeceasedRivmValue {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;
@@ -1127,11 +1105,11 @@ export interface RegionalDeceasedRivmValue {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionalDeceasedCbs {
-  values: RegionalDeceasedCbsValue[];
-  last_value: RegionalDeceasedCbsValue;
+export interface VrDeceasedCbs {
+  values: VrDeceasedCbsValue[];
+  last_value: VrDeceasedCbsValue;
 }
-export interface RegionalDeceasedCbsValue {
+export interface VrDeceasedCbsValue {
   registered: number;
   expected: number;
   expected_min: number;
@@ -1140,11 +1118,11 @@ export interface RegionalDeceasedCbsValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RegionalElderlyAtHome {
-  values: RegionalElderlyAtHomeValue[];
-  last_value: RegionalElderlyAtHomeValue;
+export interface VrElderlyAtHome {
+  values: VrElderlyAtHomeValue[];
+  last_value: VrElderlyAtHomeValue;
 }
-export interface RegionalElderlyAtHomeValue {
+export interface VrElderlyAtHomeValue {
   positive_tested_daily: number;
   positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;
@@ -1220,29 +1198,29 @@ export interface VrSituationsValue {
   other: number | null;
 }
 
-export interface Regions {
+export interface VrCollection {
   last_generated: string;
   proto_name: "VR_COLLECTION";
   name: string;
   code: string;
-  hospital_nice: RegionsHospitalNice[];
-  tested_overall: RegionsTestedOverall[];
+  hospital_nice: VrCollectionHospitalNice[];
+  tested_overall: VrCollectionTestedOverall[];
   escalation_levels: EscalationLevels[];
-  nursing_home: RegionsNursingHome[];
-  sewer: RegionsSewer[];
-  behavior: RegionsBehavior[];
-  disability_care: RegionsDisabilityCare[];
-  elderly_at_home: RegionsElderlyAtHome[];
+  nursing_home: VrCollectionNursingHome[];
+  sewer: VrCollectionSewer[];
+  behavior: VrCollectionBehavior[];
+  disability_care: VrCollectionDisabilityCare[];
+  elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
 }
-export interface RegionsHospitalNice {
+export interface VrCollectionHospitalNice {
   date_unix: number;
   vrcode: string;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface RegionsTestedOverall {
+export interface VrCollectionTestedOverall {
   date_unix: number;
   vrcode: string;
   infected_per_100k: number;
@@ -1261,7 +1239,7 @@ export interface EscalationLevels {
   valid_from_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RegionsNursingHome {
+export interface VrCollectionNursingHome {
   newly_infected_people: number;
   newly_infected_locations: number;
   infected_locations_total: number;
@@ -1271,7 +1249,7 @@ export interface RegionsNursingHome {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionsSewer {
+export interface VrCollectionSewer {
   date_start_unix: number;
   date_end_unix: number;
   vrcode: string;
@@ -1279,7 +1257,7 @@ export interface RegionsSewer {
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
-export interface RegionsBehavior {
+export interface VrCollectionBehavior {
   vrcode: string;
   number_of_participants: number;
   curfew_compliance: number | null;
@@ -1318,7 +1296,7 @@ export interface RegionsBehavior {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface RegionsDisabilityCare {
+export interface VrCollectionDisabilityCare {
   newly_infected_people: number;
   newly_infected_locations: number;
   infected_locations_total: number;
@@ -1328,7 +1306,7 @@ export interface RegionsDisabilityCare {
   date_of_insertion_unix: number;
   vrcode: string;
 }
-export interface RegionsElderlyAtHome {
+export interface VrCollectionElderlyAtHome {
   positive_tested_daily: number;
   positive_tested_daily_per_100k: number;
   deceased_daily: number;

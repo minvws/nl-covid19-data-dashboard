@@ -1,10 +1,7 @@
-import {
-  NationalDeceasedCbs,
-  RegionalDeceasedCbs,
-} from '@corona-dashboard/common';
+import { NationalDeceasedCbs, VrDeceasedCbs } from '@corona-dashboard/common';
 import { AnchorTile } from '~/components/anchor-tile';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { Markdown } from '~/components/markdown';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -17,7 +14,7 @@ export function DeceasedMonitorSection({
   showCauseMessage,
   articles,
 }: {
-  data: NationalDeceasedCbs | RegionalDeceasedCbs;
+  data: NationalDeceasedCbs | VrDeceasedCbs;
   showDataMessage?: boolean;
   showCauseMessage?: boolean;
   articles?: ArticleSummary[];

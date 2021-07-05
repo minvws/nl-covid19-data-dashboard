@@ -3,8 +3,8 @@ import {
   MunicipalDifference,
   Municipalities,
   NationalDifference,
-  RegionalDifference,
-  Regions,
+  VrCollection,
+  VrDifference,
 } from './data';
 
 /**
@@ -69,14 +69,14 @@ export type MetricKeys<T> = keyof Omit<
 >;
 
 export type MunicipalitiesMetricName = MetricKeys<Municipalities>;
-export type RegionsMetricName = MetricKeys<Regions>;
+export type VrCollectionMetricName = MetricKeys<VrCollection>;
 
 export type DifferenceKey =
   | keyof NationalDifference
-  | keyof RegionalDifference
+  | keyof VrDifference
   | keyof MunicipalDifference;
 
-export interface SafetyRegionProperties {
+export interface VrProperties {
   vrcode: string;
   vrname: string;
 }
@@ -86,15 +86,19 @@ export interface MunicipalityProperties {
   gmcode: string;
 }
 
+export type EuropeGeoProperties = { ISO_A3: string };
+
+export type EuropeGeoJSON = FeatureCollection<
+  MultiPolygon,
+  EuropeGeoProperties
+>;
+
 export type MunicipalGeoJSON = FeatureCollection<
   MultiPolygon,
   MunicipalityProperties
 >;
 
-export type RegionGeoJSON = FeatureCollection<
-  MultiPolygon,
-  SafetyRegionProperties
->;
+export type VrGeoJSON = FeatureCollection<MultiPolygon, VrProperties>;
 
 export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;

@@ -1,7 +1,7 @@
 import {
   ChoroplethThresholdsValue,
-  SafetyRegionProperties,
   VrCollectionSituations,
+  VrProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
@@ -95,7 +95,7 @@ export function SituationsOverviewChoroplethTile({
                 tooltipPlacement="top-center"
                 noDataFillColor={colors.data.underReported}
                 tooltipContent={(
-                  context: SafetyRegionProperties & VrCollectionSituations
+                  context: VrProperties & VrCollectionSituations
                 ) => (
                   <ChoroplethTooltip
                     isPercentage

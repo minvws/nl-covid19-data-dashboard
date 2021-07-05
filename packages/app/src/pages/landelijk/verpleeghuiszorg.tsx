@@ -1,6 +1,6 @@
 import {
-  RegionsNursingHome,
-  SafetyRegionProperties,
+  VrCollectionNursingHome,
+  VrProperties,
 } from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
@@ -241,7 +241,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               metricName="nursing_home"
               metricProperty="infected_locations_percentage"
               tooltipContent={(
-                context: SafetyRegionProperties & RegionsNursingHome
+                context: VrProperties & VrCollectionNursingHome
               ) => <InfectedLocationsRegionalTooltip context={context} />}
             />
           </ChoroplethTile>

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "regional_difference",
+  "title": "vr_difference",
   "type": "object",
   "properties": {
     "tested_overall__infected_per_100k_moving_average": {
@@ -9,16 +9,10 @@
     "tested_overall__infected_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_ggd_average__tested_total_moving_average": {
+    "tested_ggd__tested_total_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_ggd_average__infected_percentage_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_ggd_daily__tested_total": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "tested_ggd_daily__infected_percentage": {
+    "tested_ggd__infected_percentage_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "hospital_nice__admissions_on_date_of_reporting_moving_average": {
@@ -53,10 +47,8 @@
     "tested_overall__infected_per_100k_moving_average",
     "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
-    "tested_ggd_daily__tested_total",
-    "tested_ggd_daily__infected_percentage",
-    "tested_ggd_average__tested_total_moving_average",
-    "tested_ggd_average__infected_percentage_moving_average",
+    "tested_ggd__tested_total_moving_average",
+    "tested_ggd__infected_percentage_moving_average",
     "sewer__average",
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
@@ -78,15 +70,14 @@
         "difference": {
           "type": "integer"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -99,15 +90,14 @@
         "difference": {
           "type": "number"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

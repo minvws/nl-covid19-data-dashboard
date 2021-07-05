@@ -4,9 +4,9 @@ import {
   Municipal,
   Municipalities,
   National,
-  Regionaal,
-  Regions,
   sortTimeSeriesInDataInPlace,
+  Vr,
+  VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
@@ -43,7 +43,7 @@ import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 const json = {
   nl: loadJsonFromDataFile<National>('NL.json'),
-  vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
+  vrCollection: loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'),
   gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
   inCollection: loadJsonFromDataFile<InCollection>(
     'IN_COLLECTION.json',
@@ -179,7 +179,7 @@ export function getNlData() {
  *
  */
 export function selectVrPageMetricData<
-  T extends keyof Regionaal = VrRegionPageMetricNames
+  T extends keyof Vr = VrRegionPageMetricNames
 >(...additionalMetrics: T[]) {
   return selectVrData(...[...vrPageMetricNames, ...additionalMetrics]);
 }
@@ -188,15 +188,13 @@ export function selectVrPageMetricData<
  * This method selects only the specified metric properties from the region data
  *
  */
-export function selectVrData<T extends keyof Regionaal = never>(
-  ...metrics: T[]
-) {
+export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const vrData = getVrData(context);
 
     const selectedVrData = metrics.reduce(
       (acc, p) => set(acc, p, vrData.data[p]),
-      {} as Pick<Regionaal, T>
+      {} as Pick<Vr, T>
     );
 
     return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
@@ -226,7 +224,7 @@ export function getVrName(code: string) {
 }
 
 export function loadAndSortVrData(vrcode: string) {
-  const data = loadJsonFromDataFile<Regionaal>(`${vrcode}.json`);
+  const data = loadJsonFromDataFile<Vr>(`${vrcode}.json`);
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
@@ -283,7 +281,7 @@ export function getGmData(context: GetStaticPropsContext) {
 const NOOP = () => null;
 
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
-  vr?: (collection: Regions) => T1;
+  vr?: (collection: VrCollection) => T1;
   gm?: (collection: Municipalities) => T2;
   in?: (collection: InCollection) => T3;
 }) {

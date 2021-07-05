@@ -15,7 +15,12 @@ export function DisplayOnMatchingQueryCode({
   children: ReactNode;
   code: string;
 }) {
-  const codes = code.toLowerCase().split(',');
+  const codes = code
+    .toLowerCase()
+    .split(',')
+    .map((x) => x.trim())
+    .filter((x) => x !== '');
+
   const codeFromQuery = (
     (useRouter().query.code as string) || ''
   ).toLowerCase();

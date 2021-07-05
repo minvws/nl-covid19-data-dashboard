@@ -203,3 +203,7 @@ export type LinkProps = {
 export type VariantsPageQuery = {
   pageLinks: [LinkProps];
 };
+
+export type InPositiveTestsQuery = {
+  usefulLinks?: LinkProps[];
+};

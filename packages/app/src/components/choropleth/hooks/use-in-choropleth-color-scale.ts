@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { internationalThresholds } from '../international-thresholds';
 
-export function useIntlChoroplethColorScale(
+export function useInChoroplethColorScale(
   metricProperty: string,
   defaultColor = 'white'
 ) {

@@ -1,8 +1,8 @@
 import {
   Municipal,
   National,
-  Regionaal,
   sortTimeSeriesInDataInPlace,
+  Vr,
 } from '@corona-dashboard/common';
 import { Formatters } from './formatters';
 
@@ -120,7 +120,7 @@ Cypress.Commands.add(
   (pageName: string, vrcode = 'VR13', prefix = '') => {
     cy.swallowResizeObserverError();
 
-    cy.fixture<Regionaal>(`${vrcode}.json`)
+    cy.fixture<Vr>(`${vrcode}.json`)
       .as('regionData')
       .visit(`${prefix}/veiligheidsregio/${vrcode}/${pageName}`);
 
