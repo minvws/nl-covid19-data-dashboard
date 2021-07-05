@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { GetMunicipalityDataFunctionType } from './use-municipality-data';
-import { GetRegionDataFunctionType } from './use-safety-region-data';
+import { GetVrDataFunctionType } from './use-safety-region-data';
 
 /**
  * This hook return a color scale for the given domain and gradient.
@@ -21,9 +21,7 @@ import { GetRegionDataFunctionType } from './use-safety-region-data';
  * @param defaultColor
  */
 export function useChoroplethColorScale(
-  getChoroplethValue:
-    | GetRegionDataFunctionType
-    | GetMunicipalityDataFunctionType,
+  getChoroplethValue: GetVrDataFunctionType | GetMunicipalityDataFunctionType,
   thresholds: ChoroplethThresholdsValue[],
   defaultColor = 'white'
 ) {

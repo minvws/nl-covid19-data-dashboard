@@ -1,7 +1,7 @@
 {
   "definitions": {
     "installation": {
-      "title": "regional_sewer_per_installation_installation",
+      "title": "vr_sewer_per_installation_installation",
       "additionalProperties": false,
       "required": ["rwzi_awzi_name", "values", "last_value"],
       "properties": {
@@ -20,7 +20,7 @@
       }
     },
     "value": {
-      "title": "regional_sewer_per_installation_value",
+      "title": "vr_sewer_per_installation_value",
       "additionalProperties": false,
       "required": ["date_unix", "rna_normalized", "date_of_insertion_unix"],
       "properties": {
@@ -38,7 +38,7 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "regional_sewer_per_installation",
+  "title": "vr_sewer_per_installation",
   "required": ["values"],
   "additionalProperties": false,
   "properties": {
