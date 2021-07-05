@@ -46,9 +46,6 @@ export function createElementsQuery(
   return query;
 }
 
-/**
- * @TODO move these CMS type definitions to a more generic location
- */
 export type CmsTimelineEventConfig = {
   title: string;
   description: string;
@@ -83,7 +80,7 @@ export type ElementsQueryResult = {
 export function getTimelineEvents(
   elements: CmsTimeSeriesElement[],
   metricName: string
-): TimelineEventConfig[] | undefined {
+) {
   const timelineEvents = elements.find(
     (x) => x.metricName === metricName
   )?.timelineEvents;
