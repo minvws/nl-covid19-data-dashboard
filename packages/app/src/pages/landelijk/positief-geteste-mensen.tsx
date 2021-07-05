@@ -40,6 +40,7 @@ import {
 import {
   createElementsQuery,
   ElementsQueryResult,
+  getTimelineEvents,
 } from '~/queries/create-page-elements-query';
 import {
   createGetStaticProps,
@@ -105,7 +106,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
-  const dataGgdDailyValues = data.tested_ggd_daily.values;
+
   const dataGgdDailyLastValue = data.tested_ggd_daily.last_value;
   const difference = data.difference;
 
@@ -114,9 +115,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  console.log('content.elements', content.elements);
-  console.log('content.timeSeries', content.timeSeries);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -309,6 +307,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     value: 7,
                     label: siteText.common.signaalwaarde,
                   },
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_overall'
+                  ),
                 }}
               />
             )}
@@ -421,7 +423,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'confirmed_cases_infected_percentage_over_time_chart',
                 }}
                 timeframe={timeframe}
-                values={dataGgdDailyValues}
+                values={data.tested_ggd_daily.values}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -440,7 +442,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         .infected_percentage,
                   },
                 ]}
-                dataOptions={{ isPercentage: true }}
+                dataOptions={{
+                  isPercentage: true,
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_ggd'
+                  ),
+                }}
               />
             )}
           </ChartTile>
@@ -459,7 +467,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'confirmed_cases_tested_over_time_chart',
                 }}
                 timeframe={timeframe}
-                values={dataGgdDailyValues}
+                values={data.tested_ggd_daily.values}
                 seriesConfig={[
                   {
                     type: 'line',

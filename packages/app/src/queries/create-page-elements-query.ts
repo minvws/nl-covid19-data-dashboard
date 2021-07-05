@@ -1,4 +1,5 @@
 import { MetricScope } from '@corona-dashboard/common';
+import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
 const NO_DRAFTS = `!(_id in path('drafts.**'))`;
 
@@ -45,29 +46,57 @@ export function createElementsQuery(
   return query;
 }
 
-type CmsTimelineEventConfig = {
+/**
+ * @TODO move these CMS type definitions to a more generic location
+ */
+export type CmsTimelineEventConfig = {
   title: string;
   description: string;
   date: string;
   dateEnd: string;
 };
 
-type CmsTimeSeriesElement = {
+export type CmsTimeSeriesElement = {
   _id: string;
   scope: MetricScope;
   metricName: string;
-  metricProperty?: string;
+  metricProperty: string | null;
   timelineEvents: CmsTimelineEventConfig[];
 };
 
-type CmsKpiElement = {
+export type CmsKpiElement = {
   _id: string;
   scope: MetricScope;
   metricName: string;
-  metricProperty?: string;
+  metricProperty: string | null;
 };
 
 export type ElementsQueryResult = {
-  timeSeries?: CmsTimeSeriesElement[];
-  kpi?: CmsKpiElement[];
+  timeSeries: CmsTimeSeriesElement[];
+  kpi: CmsKpiElement[];
 };
+
+/**
+ * Get the timeline configuration from the correct element and convert it to the
+ * right format.
+ */
+export function getTimelineEvents(
+  elements: CmsTimeSeriesElement[],
+  metricName: string
+): TimelineEventConfig[] | undefined {
+  const timelineEvents = elements.find(
+    (x) => x.metricName === metricName
+  )?.timelineEvents;
+
+  return timelineEvents
+    ? timelineEvents.map(
+        (x) =>
+          ({
+            title: x.title,
+            description: x.description,
+            start: new Date(x.date).getTime() / 1000,
+            end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
+          } as TimelineEventConfig)
+      )
+    : undefined;
+}
