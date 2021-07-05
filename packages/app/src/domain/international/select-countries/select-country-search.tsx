@@ -13,10 +13,12 @@ export function SelectCountrySearch({
   initialValue,
   countries,
   onSelectCountry,
+  limit,
 }: {
   onSelectCountry: (data: any) => void;
   initialValue?: string;
   countries: Country[];
+  limit?: number;
 }) {
   const { height, ref: heightRef } = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
@@ -30,6 +32,7 @@ export function SelectCountrySearch({
       initialValue={initialValue}
       onSelectCountry={onSelectCountry}
       countries={countries}
+      limit={limit}
     >
       {(context) => (
         <SearchForm
@@ -85,5 +88,6 @@ const StyledSearchContainer = styled.div<{ isFloating: boolean }>((x) =>
     borderRadius: 1,
     zIndex: 10,
     background: 'white',
+    maxWidth: 300,
   })
 );

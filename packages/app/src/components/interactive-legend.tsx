@@ -5,6 +5,7 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
+import ResetIcon from '~/assets/reset.svg';
 
 export interface SelectOption {
   metricProperty: string;
@@ -14,11 +15,12 @@ export interface SelectOption {
 }
 
 interface InteractiveLegendProps {
-  helpText: string;
   selectOptions: SelectOption[];
   selection: string[];
-  onToggleItem: (item: string) => void;
+  onToggleItem?: (metricProperty: string) => void;
   onReset?: () => void;
+  helpText?: string;
+  onRemoveItem?: (metricProperty: string) => void;
 }
 
 export function InteractiveLegend({
@@ -26,17 +28,28 @@ export function InteractiveLegend({
   selectOptions,
   selection,
   onToggleItem,
+  onRemoveItem,
   onReset,
 }: InteractiveLegendProps) {
   const { siteText } = useIntl();
 
   const hasSelection = selection.length !== 0;
 
+  function onClickItem(metricProperty: string) {
+    if (isDefined(onToggleItem)) {
+      onToggleItem(metricProperty);
+    } else if (isDefined(onRemoveItem)) {
+      onRemoveItem(metricProperty);
+    }
+  }
+
   return (
     <Box mb={2}>
-      <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
-        {helpText}
-      </Text>
+      {helpText && (
+        <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
+          {helpText}
+        </Text>
+      )}
       <Legend>
         <List>
           {selectOptions.map((item) => {
@@ -44,14 +57,20 @@ export function InteractiveLegend({
             return (
               <Item key={item.label}>
                 <ItemButton
-                  onClick={() => onToggleItem(item.metricProperty)}
+                  onClick={() => onClickItem(item.metricProperty)}
                   isActive={hasSelection && isSelected}
                   color={item.color}
                   data-text={item.label}
+                  hasRemoveIcon={isDefined(onRemoveItem)}
                 >
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
                   {item.shape === 'circle' && <Circle color={item.color} />}
+                  {isDefined(onRemoveItem) && (
+                    <RemoveIconWrapper>
+                      <ResetIcon />
+                    </RemoveIconWrapper>
+                  )}
                 </ItemButton>
               </Item>
             );
@@ -68,6 +87,14 @@ export function InteractiveLegend({
     </Box>
   );
 }
+
+const RemoveIconWrapper = styled.div(
+  css({
+    width: '0.6rem',
+    position: 'absolute',
+    right: 1,
+  })
+);
 
 const Legend = styled.div(
   css({
@@ -103,16 +130,17 @@ const ItemButton = styled.button<{
   isActive: boolean;
   color: string;
   text?: string;
-}>(({ isActive, color }) =>
+  hasRemoveIcon?: boolean;
+}>(({ isActive, color, hasRemoveIcon }) =>
   css({
     appearance: 'none',
     backgroundColor: 'tileGray',
     cursor: 'pointer',
-    pr: asResponsiveArray({ _: '5px', md: 10 }),
+    pr: hasRemoveIcon ? 24 : asResponsiveArray({ _: '5px', md: 10 }),
     pl: asResponsiveArray({ _: 25, md: 30 }),
     py: '3px',
     border: '3px solid',
-    borderColor: isActive ? color : 'transparent',
+    borderColor: isActive && !hasRemoveIcon ? color : 'transparent',
     fontWeight: isActive ? 'bold' : 'normal',
     fontFamily: 'inherit',
     position: 'relative',
@@ -137,7 +165,7 @@ const ItemButton = styled.button<{
       background: 'lightGray',
     },
     '&:after': {
-      content: 'attr(data-text)',
+      content: hasRemoveIcon ? 'attr(data-text)' : undefined,
       height: 0,
       visibility: 'hidden',
       overflow: 'hidden',

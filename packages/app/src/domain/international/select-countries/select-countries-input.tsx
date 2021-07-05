@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
 import CloseIcon from '~/assets/close.svg';
-import SearchIcon from '~/assets/search-icon.svg';
+import SearchIcon from '~/assets/search-icon-bold.svg';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
@@ -58,57 +58,103 @@ export const paddedStyle = css({
   px: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
 });
 
+// const StyledSearchInput = styled.input(
+//   paddedStyle,
+//   css({
+//     fontFamily: 'body',
+//     display: 'block',
+//     width: '100%',
+//     borderRadius: 1,
+//     border: `solid`,
+//     borderWidth: '1px',
+//     borderColor: 'lightGray',
+//     fontSize: ['1rem', null, null, '1.125rem'],
+//     appearance: 'none',
+//     m: 0,
+//     '&::-webkit-search-cancel-button': {
+//       display: 'none',
+//     },
+//     '&::-ms-clear': {
+//       display: 'none',
+//     },
+//     '&:placeholder-shown': {
+//       pr: 2,
+//       boxShadow: 'tile',
+//     },
+//   })
+// );
+
+// const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
+//   css({
+//     zIndex: 1,
+//     color: 'black',
+//     position: 'absolute',
+//     height: '100%',
+//     display: 'flex',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     width: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
+//     pointerEvents: x.onClick ? 'all' : 'none',
+
+//     top: 0,
+//     left: x.align === 'left' ? 0 : undefined,
+//     right: x.align === 'right' ? 0 : undefined,
+
+//     background: 'none',
+//     border: 0,
+//     p: 0,
+//     m: 0,
+//     cursor: 'pointer',
+
+//     svg: {
+//       width: 24,
+//       height: 24,
+//     },
+//   })
+// );
+
 const StyledSearchInput = styled.input(
-  paddedStyle,
   css({
-    fontFamily: 'body',
-    display: 'block',
+    display: 'inline-block',
+
     width: '100%',
-    borderRadius: 1,
-    border: `solid`,
-    borderWidth: '1px',
-    borderColor: 'lightGray',
-    fontSize: ['1rem', null, null, '1.125rem'],
+    border: `1px solid silver`,
+    py: 2,
+    pl: '36px',
+
+    fontFamily: 'body',
+    fontSize: 1,
+
     appearance: 'none',
-    m: 0,
+
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
+
     '&::-ms-clear': {
       display: 'none',
-    },
-    '&:placeholder-shown': {
-      pr: 2,
-      boxShadow: 'tile',
     },
   })
 );
 
 const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
   css({
-    zIndex: 1,
-    color: 'black',
     position: 'absolute',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: [ICON_SPACE, null, null, ICON_SPACE_LARGE],
-    pointerEvents: x.onClick ? 'all' : 'none',
-
+    zIndex: 1,
     top: 0,
-    left: x.align === 'left' ? 0 : undefined,
-    right: x.align === 'right' ? 0 : undefined,
+    right: x.align === 'right' ? '12px' : undefined,
+    bottom: 0,
+    left: x.align === 'left' ? '10px' : undefined,
+
+    display: 'flex',
+    alignItems: 'center',
+
+    m: 0,
+    p: 0,
+    height: '100%',
 
     background: 'none',
-    border: 0,
-    p: 0,
-    m: 0,
-    cursor: 'pointer',
 
-    svg: {
-      width: 24,
-      height: 24,
-    },
+    color: x.align === 'left' ? 'labelGray' : 'icon',
   })
 );

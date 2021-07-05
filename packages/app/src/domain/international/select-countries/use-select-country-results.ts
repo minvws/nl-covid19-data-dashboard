@@ -38,6 +38,7 @@ function search(countries: Country[], term: string) {
     .map((x) => ({
       code: x.code,
       name: x.name,
+      lastValue: x.lastValue,
       isSelected: x.isSelected,
       searchTerms: [x.name, x.code, ...(x.searchTerms || [])].filter(isPresent),
     }))

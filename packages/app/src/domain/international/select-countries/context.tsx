@@ -30,6 +30,7 @@ interface SearchContextProviderProps<T extends Element> {
   initialValue?: string;
   onSelectCountry: (data: any) => void;
   countries: Country[];
+  limit?: number;
 }
 
 const searchContext = createContext<SearchContext | undefined>(undefined);
@@ -40,12 +41,14 @@ export function SearchContextProvider<T extends Element>({
   initialValue = '',
   onSelectCountry,
   countries,
+  limit,
 }: SearchContextProviderProps<T>) {
   const value = useSearchContextValue(
     initialValue,
     containerRef,
     onSelectCountry,
-    countries
+    countries,
+    limit
   );
 
   return (
@@ -67,7 +70,8 @@ function useSearchContextValue<T extends Element>(
   initialValue: string,
   containerRef: RefObject<T>,
   onSelectCountry: (data: any) => void,
-  countries: Country[]
+  countries: Country[],
+  limit?: number
 ) {
   const breakpoints = useBreakpoints();
 
@@ -150,6 +154,7 @@ function useSearchContextValue<T extends Element>(
     setTerm,
     showResults,
     term,
+    limit: limit ?? Infinity,
 
     onSelectCountry,
 
@@ -189,6 +194,7 @@ function useSearchContextValue<T extends Element>(
           setFocusIndex(option.index);
           setHasHitFocus(true);
         },
+        isSelected: option.data.isSelected ?? false,
       } as const),
   } as const;
 }

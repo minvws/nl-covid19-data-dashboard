@@ -2,20 +2,27 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Text } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
-import { paddedStyle } from './select-countries-input';
+import CheckedIcon from '~/assets/checked.svg';
+import UncheckedIcon from '~/assets/unchecked.svg';
 
 export function SelectCountriesResults() {
-  const { id, hits, setHasHitFocus, onSelectCountry, getOptionProps } =
+  const { id, hits, setHasHitFocus, onSelectCountry, getOptionProps, limit } =
     useSearchContext();
 
   useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
 
   const selectedCount = hits.filter((c) => c.data.isSelected).length;
 
-  const noHitsMessage = 'Nope :-(';
+  const noHitsMessage = 'No countries found.';
+  const noHitsMessageHint = 'Check the spelling';
+
+  const { formatNumber } = useIntl();
+
+  const hasLimitBeenReached = selectedCount >= limit;
 
   return (
     <StyledSelectCountriesResults
@@ -31,22 +38,38 @@ export function SelectCountriesResults() {
                 <Hit
                   {...getOptionProps(x)}
                   onClick={() => onSelectCountry(x.data)}
+                  hasLimitBeenReached={hasLimitBeenReached}
                 >
-                  {x.data.isSelected ? 'V ' : ''}
-                  {x.data.name}
+                  <span css={css({ flex: '0 0 24px' })}>
+                    {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
+                  </span>
+                  <span
+                    css={css({
+                      flexGrow: 1,
+                      fontWeight: x.data.isSelected ? 'bold' : 'normal',
+                    })}
+                  >
+                    {x.data.name}
+                  </span>
+                  <span css={css({ flex: '0 0 1rem' })}>
+                    {formatNumber(x.data.lastValue)}
+                  </span>
                 </Hit>
               </li>
             ))}
           </StyledHitList>
         ) : (
-          <Text color="gray">{noHitsMessage}</Text>
+          <StyledNoHits>
+            <Text>{noHitsMessage}</Text>
+            <Text>{noHitsMessageHint}</Text>
+          </StyledNoHits>
         )}
       </StyledCountriesList>
       <StyledSelectionSummary>
-        {replaceVariablesInText(
-          '{{selectedCount}} of {{maxSelectable}} selected',
-          { selectedCount, maxSelectable: 10 }
-        )}
+        {replaceVariablesInText('{{selectedCount}} of {{limit}} selected', {
+          selectedCount,
+          limit,
+        })}
       </StyledSelectionSummary>
     </StyledSelectCountriesResults>
   );
@@ -55,7 +78,6 @@ export function SelectCountriesResults() {
 const StyledSelectCountriesResults = styled.div(css({}));
 
 const StyledCountriesList = styled.div(
-  paddedStyle,
   css({
     maxHeight: '20em',
     overflow: 'auto',
@@ -63,9 +85,19 @@ const StyledCountriesList = styled.div(
 );
 
 const StyledSelectionSummary = styled.div(
-  paddedStyle,
   css({
-    backgroundColor: 'gray',
+    p: 3,
+    textAlign: 'center',
+    borderTop: '1px solid',
+    borderTopColor: 'lightGray',
+  })
+);
+
+const StyledNoHits = styled.div(
+  css({
+    color: 'gray',
+    textAlign: 'center',
+    p: 3,
   })
 );
 
@@ -76,28 +108,46 @@ interface HitProps {
   onFocus: () => void;
   id: string;
   onClick: () => void;
+  isSelected: boolean;
+  hasLimitBeenReached: boolean;
 }
 
-function Hit({ children, hasFocus, onHover, onFocus, onClick, id }: HitProps) {
+function Hit({
+  children,
+  hasFocus,
+  onHover,
+  onFocus,
+  onClick,
+  id,
+  isSelected,
+  hasLimitBeenReached,
+}: HitProps) {
   return (
     <StyledHit
       hasFocus={hasFocus}
+      isSelected={isSelected}
       onFocus={onFocus}
       onMouseMove={onHover}
       onClick={onClick}
       role="option"
       id={id}
-      aria-selected={hasFocus ? 'true' : 'false'}
+      aria-selected={isSelected ? 'true' : 'false'}
+      hasLimitBeenReached={hasLimitBeenReached}
     >
       {children}
     </StyledHit>
   );
 }
 
-const StyledHit = styled.button<{ hasFocus: boolean }>((x) =>
+const StyledHit = styled.button<{
+  hasFocus: boolean;
+  isSelected: boolean;
+  hasLimitBeenReached: boolean;
+}>((x) =>
   css({
-    p: 2,
-    display: 'block',
+    px: 3,
+    py: 2,
+    display: 'flex',
     textDecoration: 'none',
     color: 'black',
     width: '100%',
@@ -106,14 +156,15 @@ const StyledHit = styled.button<{ hasFocus: boolean }>((x) =>
     transitionDuration: x.hasFocus ? '0ms' : '120ms',
     background: 'none',
     border: 'none',
+    textAlign: 'left',
+    opacity: x.hasLimitBeenReached && !x.isSelected ? 0.6 : 1,
   })
 );
 
 const StyledHitList = styled.ol(
   css({
     listStyle: 'none',
-    p: 0,
     m: 0,
-    width: ['100%', null, null, 320],
+    p: 0,
   })
 );

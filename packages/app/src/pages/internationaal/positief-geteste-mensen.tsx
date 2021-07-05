@@ -1,16 +1,26 @@
-import { assert } from '@corona-dashboard/common';
+import { assert, In } from '@corona-dashboard/common';
+import { last } from 'lodash';
+import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
+import { ChartTile } from '~/components/chart-tile';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { internationalThresholds } from '~/components/choropleth/international-thresholds';
 import { PositiveTestedPeopleInternationalTooltip } from '~/components/choropleth/tooltips/international/positive-tested-people-international-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { TileList } from '~/components/tile-list';
-import { SelectCountries } from '~/domain/international/select-countries/select-countries';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
 import { choroplethMockData } from '~/domain/internationaal/logic/choropleth-mock-data';
+import { Country } from '~/domain/international/select-countries/context';
+import {
+  CountryCode,
+  countryCodes,
+} from '~/domain/international/select-countries/country-code';
+import { SelectCountries } from '~/domain/international/select-countries/select-countries';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -22,20 +32,10 @@ import {
 import {
   createGetChoroplethData,
   createGetContent,
-  getLastGeneratedDate,
   getInData,
+  getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { getCountryNames } from '~/static-props/utils/get-country-names';
-import { ChartTile } from '~/components/chart-tile';
-import { TimeSeriesChart } from '~/components/time-series-chart';
-import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
-import {
-  CountryCode,
-  countryCodes,
-} from '~/domain/international/select-countries/country-code';
-import { last } from 'lodash';
-import { Country } from '~/domain/international/select-countries/context';
-import { useMemo } from 'react';
 
 type CompiledCountriesValue = {
   date_start_unix: number;
@@ -143,9 +143,13 @@ export default function PositiefGetesteMensenPage(
                 countriesAndLastValues={countriesAndLastValues}
                 limit={10}
               >
-                {(selectedCountries) => {
+                {(selectedCountries, colors) => {
                   const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
-                    selectedCountriesToSeriesConfig(selectedCountries);
+                    selectedCountriesToSeriesConfig(
+                      selectedCountries,
+                      countryNames,
+                      colors
+                    );
                   return (
                     <TimeSeriesChart
                       accessibility={{ key: 'behavior_choropleths' }}
@@ -197,7 +201,7 @@ export default function PositiefGetesteMensenPage(
 
 function compileInternationalData(
   data: Record<string, In>,
-  metricName: keyof In,
+  metricName: keyof Omit<In, 'last_generated' | 'proto_name' | 'name' | 'code'>,
   metricProperty: string
 ) {
   const flattenedData: CompiledCountriesValue[] = [];
@@ -211,16 +215,16 @@ function compileInternationalData(
             o.date_end_unix === value.date_end_unix
         );
 
-        if (!objectMatch) {
+        if (!isDefined(objectMatch)) {
           objectMatch = {
             date_start_unix: value.date_start_unix,
             date_end_unix: value.date_end_unix,
-          };
+          } as CompiledCountriesValue;
 
           flattenedData.push(objectMatch);
         }
 
-        objectMatch[countryCode] = value[metricProperty];
+        objectMatch[countryCode as CountryCode] = value[metricProperty];
       }
     );
   });
@@ -233,21 +237,23 @@ function compileInternationalData(
 }
 
 function selectedCountriesToSeriesConfig(
-  selectedCountries: CountryCode[]
+  selectedCountries: CountryCode[],
+  countryNames: Record<CountryCode, string>,
+  colors: string[]
 ): LineSeriesDefinition<CompiledCountriesValue>[] {
   return [
     {
       type: 'line' as const,
       metricProperty: 'nld' as CountryCode,
-      label: 'NLD',
+      label: countryNames['nld'],
       color: 'black',
     },
   ].concat(
-    selectedCountries.map((countryCode) => ({
+    selectedCountries.map((countryCode, index) => ({
       type: 'line' as const,
       metricProperty: countryCode,
-      label: countryCode.toUpperCase(),
-      color: 'black',
+      label: countryNames[countryCode],
+      color: colors[index],
     }))
   );
 }
