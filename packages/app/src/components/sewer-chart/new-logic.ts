@@ -6,7 +6,7 @@
 
 import {
   assert,
-  MunicipalSewer,
+  GmSewer,
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
@@ -27,7 +27,7 @@ export type MergedSewerType = ReturnType<typeof mergeData>[number];
  * need to convert them to format with the same type of timestamps.
  */
 export function mergeData(
-  dataAverages: RegionalSewer | MunicipalSewer,
+  dataAverages: RegionalSewer | GmSewer,
   dataPerInstallation: SewerPerInstallationData,
   selectedInstallation: string
 ) {

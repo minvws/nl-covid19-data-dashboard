@@ -1,7 +1,7 @@
 import {
   DifferenceDecimal,
   DifferenceInteger,
-  Municipal,
+  Gm,
   National,
   Regionaal,
 } from '@corona-dashboard/common';
@@ -14,7 +14,7 @@ import { InlineDifference } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
-type DataKeys = keyof National | keyof Regionaal | keyof Municipal;
+type DataKeys = keyof National | keyof Regionaal | keyof Gm;
 
 /**
  * This type ensures that if a metricName of type keyof National is assigned,
@@ -33,8 +33,8 @@ type DataFile<T> = T extends keyof National
   ? Pick<National, 'difference' | T>
   : T extends keyof Regionaal
   ? Pick<Regionaal, 'difference' | T>
-  : T extends keyof Municipal
-  ? Pick<Municipal, 'difference' | T>
+  : T extends keyof Gm
+  ? Pick<Gm, 'difference' | T>
   : never;
 interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   data: K;

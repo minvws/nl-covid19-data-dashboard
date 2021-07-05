@@ -4,18 +4,18 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
-export interface Municipal {
+export interface Gm {
   last_generated: string;
   proto_name: string;
   name: string;
   code: string;
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
-  difference: MunicipalDifference;
-  hospital_nice: MunicipalHospitalNice;
-  tested_overall: MunicipalTestedOverall;
-  sewer: MunicipalSewer;
-  sewer_per_installation?: MunicipalSewerPerInstallation;
+  difference: GmDifference;
+  hospital_nice: GmHospitalNice;
+  tested_overall: GmTestedOverall;
+  sewer: GmSewer;
+  sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
 }
 export interface GmStaticValues {
@@ -32,7 +32,7 @@ export interface GmDeceasedRivmValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalDifference {
+export interface GmDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
@@ -51,33 +51,33 @@ export interface DifferenceInteger {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface MunicipalHospitalNice {
-  values: MunicipalHospitalNiceValue[];
-  last_value: MunicipalHospitalNiceValue;
+export interface GmHospitalNice {
+  values: GmHospitalNiceValue[];
+  last_value: GmHospitalNiceValue;
 }
-export interface MunicipalHospitalNiceValue {
+export interface GmHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalTestedOverall {
-  values: MunicipalTestedOverallValue[];
-  last_value: MunicipalTestedOverallValue;
+export interface GmTestedOverall {
+  values: GmTestedOverallValue[];
+  last_value: GmTestedOverallValue;
 }
-export interface MunicipalTestedOverallValue {
+export interface GmTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
-export interface MunicipalSewer {
-  values: MunicipalSewerValue[];
-  last_value: MunicipalSewerValue;
+export interface GmSewer {
+  values: GmSewerValue[];
+  last_value: GmSewerValue;
 }
-export interface MunicipalSewerValue {
+export interface GmSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
@@ -86,15 +86,15 @@ export interface MunicipalSewerValue {
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalSewerPerInstallation {
+export interface GmSewerPerInstallation {
   values: MunicipalSewerPerInstallationInstallation[];
 }
 export interface MunicipalSewerPerInstallationInstallation {
   rwzi_awzi_name: string;
-  values: MunicipalSewerPerInstallationValue[];
-  last_value: MunicipalSewerPerInstallationValue;
+  values: GmSewerPerInstallationValue[];
+  last_value: GmSewerPerInstallationValue;
 }
-export interface MunicipalSewerPerInstallationValue {
+export interface GmSewerPerInstallationValue {
   date_unix: number;
   rna_normalized: number;
   date_of_insertion_unix: number;
@@ -112,30 +112,30 @@ export interface GmVaccineCoverageValue {
   date_of_insertion_unix: number;
 }
 
-export interface Municipalities {
+export interface GmCollection {
   last_generated: string;
   proto_name: "GM_COLLECTION";
   name: string;
   code: string;
-  hospital_nice: MunicipalitiesHospitalNice[];
-  tested_overall: MunicipalitiesTestedOverall[];
-  sewer: MunicipalitiesSewer[];
+  hospital_nice: GmCollectionHospitalNice[];
+  tested_overall: GmCollectionTestedOverall[];
+  sewer: GmCollectionSewer[];
 }
-export interface MunicipalitiesHospitalNice {
+export interface GmCollectionHospitalNice {
   date_unix: number;
   gmcode: string;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalitiesTestedOverall {
+export interface GmCollectionTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
   infected: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalitiesSewer {
+export interface GmCollectionSewer {
   date_start_unix: number;
   date_end_unix: number;
   gmcode: string;

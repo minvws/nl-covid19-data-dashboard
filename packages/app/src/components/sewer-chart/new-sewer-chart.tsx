@@ -1,5 +1,5 @@
 import {
-  MunicipalSewer,
+  GmSewer,
   RegionalSewer,
   SewerPerInstallationData,
 } from '@corona-dashboard/common';
@@ -24,7 +24,7 @@ export function NewSewerChart({
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  dataAverages: RegionalSewer | MunicipalSewer;
+  dataAverages: RegionalSewer | GmSewer;
   dataPerInstallation?: SewerPerInstallationData;
   text: {
     title: string;

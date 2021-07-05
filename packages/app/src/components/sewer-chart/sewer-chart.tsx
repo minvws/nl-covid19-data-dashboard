@@ -1,8 +1,4 @@
-import {
-  Municipal,
-  Regionaal,
-  TimeframeOption,
-} from '@corona-dashboard/common';
+import { Gm, Regionaal, TimeframeOption } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -37,10 +33,10 @@ import {
 } from './logic';
 
 export interface SewerChartData {
-  sewer: Regionaal['sewer'] | Municipal['sewer'];
+  sewer: Regionaal['sewer'] | Gm['sewer'];
   sewer_per_installation?:
     | Regionaal['sewer_per_installation']
-    | Municipal['sewer_per_installation'];
+    | Gm['sewer_per_installation'];
 }
 
 interface SewerChartProps {

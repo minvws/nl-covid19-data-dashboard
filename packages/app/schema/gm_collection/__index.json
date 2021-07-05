@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities",
+  "title": "gm_collection",
   "additionalProperties": false,
   "required": [
     "last_generated",
