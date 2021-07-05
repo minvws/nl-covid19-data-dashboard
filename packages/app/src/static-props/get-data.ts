@@ -3,10 +3,10 @@ import {
   Gm,
   GmCollection,
   InCollection,
-  National,
-  Regionaal,
-  Regions,
+  Nl,
   sortTimeSeriesInDataInPlace,
+  Vr,
+  VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
@@ -42,8 +42,8 @@ import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
  */
 
 const json = {
-  nl: loadJsonFromDataFile<National>('NL.json'),
-  vrCollection: loadJsonFromDataFile<Regions>('VR_COLLECTION.json'),
+  nl: loadJsonFromDataFile<Nl>('NL.json'),
+  vrCollection: loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'),
   gmCollection: loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
   inCollection: loadJsonFromDataFile<InCollection>(
     'IN_COLLECTION.json',
@@ -129,9 +129,9 @@ async function replaceReferencesInContent(
  * be added to the output
  *
  */
-export function selectNlPageMetricData<
-  T extends keyof National = NlPageMetricNames
->(...additionalMetrics: T[]) {
+export function selectNlPageMetricData<T extends keyof Nl = NlPageMetricNames>(
+  ...additionalMetrics: T[]
+) {
   return selectNlData(...[...nlPageMetricNames, ...additionalMetrics]);
 }
 
@@ -139,9 +139,7 @@ export function selectNlPageMetricData<
  * This method selects only the specified metric properties from the national data
  *
  */
-export function selectNlData<T extends keyof National = never>(
-  ...metrics: T[]
-) {
+export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
   return () => {
     const { data } = getNlData();
 
@@ -156,7 +154,7 @@ export function selectNlData<T extends keyof National = never>(
            */
           data[p] ?? null
         ),
-      {} as Pick<National, T>
+      {} as Pick<Nl, T>
     );
 
     return { selectedNlData };
@@ -165,7 +163,7 @@ export function selectNlData<T extends keyof National = never>(
 
 export function getNlData() {
   // clone data to prevent mutation of the original
-  const data = JSON.parse(JSON.stringify(json.nl)) as National;
+  const data = JSON.parse(JSON.stringify(json.nl)) as Nl;
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
@@ -179,7 +177,7 @@ export function getNlData() {
  *
  */
 export function selectVrPageMetricData<
-  T extends keyof Regionaal = VrRegionPageMetricNames
+  T extends keyof Vr = VrRegionPageMetricNames
 >(...additionalMetrics: T[]) {
   return selectVrData(...[...vrPageMetricNames, ...additionalMetrics]);
 }
@@ -188,15 +186,13 @@ export function selectVrPageMetricData<
  * This method selects only the specified metric properties from the region data
  *
  */
-export function selectVrData<T extends keyof Regionaal = never>(
-  ...metrics: T[]
-) {
+export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const vrData = getVrData(context);
 
     const selectedVrData = metrics.reduce(
       (acc, p) => set(acc, p, vrData.data[p]),
-      {} as Pick<Regionaal, T>
+      {} as Pick<Vr, T>
     );
 
     return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
@@ -226,7 +222,7 @@ export function getVrName(code: string) {
 }
 
 export function loadAndSortVrData(vrcode: string) {
-  const data = loadJsonFromDataFile<Regionaal>(`${vrcode}.json`);
+  const data = loadJsonFromDataFile<Vr>(`${vrcode}.json`);
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
@@ -281,7 +277,7 @@ export function getGmData(context: GetStaticPropsContext) {
 const NOOP = () => null;
 
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
-  vr?: (collection: Regions) => T1;
+  vr?: (collection: VrCollection) => T1;
   gm?: (collection: GmCollection) => T2;
   in?: (collection: InCollection) => T3;
 }) {

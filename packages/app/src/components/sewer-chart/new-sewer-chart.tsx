@@ -1,7 +1,7 @@
 import {
   GmSewer,
-  RegionalSewer,
   SewerPerInstallationData,
+  VrSewer,
 } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -24,7 +24,7 @@ export function NewSewerChart({
    * graph with a label and description.
    */
   accessibility: AccessibilityDefinition;
-  dataAverages: RegionalSewer | GmSewer;
+  dataAverages: VrSewer | GmSewer;
   dataPerInstallation?: SewerPerInstallationData;
   text: {
     title: string;

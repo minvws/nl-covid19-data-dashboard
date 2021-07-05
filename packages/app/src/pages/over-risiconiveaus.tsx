@@ -1,7 +1,4 @@
-import {
-  EscalationLevels,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
+import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
@@ -161,7 +158,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                   noDataFillColor={unknownLevelColor}
                   metricProperty="level"
                   tooltipContent={(
-                    context: SafetyRegionProperties & EscalationLevels
+                    context: VrProperties & EscalationLevels
                   ) => (
                     <EscalationRegionalTooltip
                       context={context}

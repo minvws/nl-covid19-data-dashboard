@@ -1,6 +1,6 @@
 import {
-  RegionsElderlyAtHome,
-  SafetyRegionProperties,
+  VrCollectionElderlyAtHome,
+  VrProperties,
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
 import { ArticleStrip } from '~/components/article-strip';
@@ -213,7 +213,7 @@ const ElderlyAtHomeNationalPage = (
               metricName="elderly_at_home"
               metricProperty="positive_tested_daily_per_100k"
               tooltipContent={(
-                context: SafetyRegionProperties & RegionsElderlyAtHome
+                context: VrProperties & VrCollectionElderlyAtHome
               ) => <ElderlyAtHomeRegionalTooltip context={context} />}
             />
           </ChoroplethTile>

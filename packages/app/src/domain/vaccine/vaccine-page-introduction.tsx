@@ -1,4 +1,4 @@
-import { National } from '@corona-dashboard/common';
+import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
@@ -24,7 +24,7 @@ import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-o
 
 interface VaccinePageIntroductionProps {
   data: Pick<
-    National,
+    Nl,
     | 'vaccine_administered_planned'
     | 'vaccine_administered_total'
     | 'vaccine_administered_rate_moving_average'

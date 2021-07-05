@@ -1,8 +1,8 @@
 import {
   Gm,
-  National,
-  Regionaal,
+  Nl,
   sortTimeSeriesInDataInPlace,
+  Vr,
 } from '@corona-dashboard/common';
 import { Formatters } from './formatters';
 
@@ -35,7 +35,7 @@ declare global {
        *
        * @param pageName
        */
-      beforeNationalTests(pageName: string): void;
+      beforeNlTests(pageName: string): void;
       /**
        * Fixture loading and page navigation for regional page tests
        *
@@ -98,10 +98,10 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add('beforeNationalTests', (pageName: string) => {
+Cypress.Commands.add('beforeNlTests', (pageName: string) => {
   cy.swallowResizeObserverError();
 
-  cy.fixture<National>('NL.json')
+  cy.fixture<Nl>('NL.json')
     .then((nationalData) => {
       sortTimeSeriesInDataInPlace(nationalData);
     })
@@ -116,7 +116,7 @@ Cypress.Commands.add(
   (pageName: string, vrcode = 'VR13', prefix = '') => {
     cy.swallowResizeObserverError();
 
-    cy.fixture<Regionaal>(`${vrcode}.json`)
+    cy.fixture<Vr>(`${vrcode}.json`)
       .as('regionData')
       .visit(`${prefix}/veiligheidsregio/${vrcode}/${pageName}`);
 

@@ -2,9 +2,9 @@ import { FeatureCollection, MultiPolygon } from 'geojson';
 import {
   GmCollection,
   GmDifference,
-  NationalDifference,
-  RegionalDifference,
-  Regions,
+  NlDifference,
+  VrCollection,
+  VrDifference,
 } from './data';
 
 /**
@@ -69,14 +69,14 @@ export type MetricKeys<T> = keyof Omit<
 >;
 
 export type GmCollectionMetricName = MetricKeys<GmCollection>;
-export type RegionsMetricName = MetricKeys<Regions>;
+export type VrCollectionMetricName = MetricKeys<VrCollection>;
 
 export type DifferenceKey =
-  | keyof NationalDifference
-  | keyof RegionalDifference
+  | keyof NlDifference
+  | keyof VrDifference
   | keyof GmDifference;
 
-export interface SafetyRegionProperties {
+export interface VrProperties {
   vrcode: string;
   vrname: string;
 }
@@ -95,10 +95,7 @@ export type EuropeGeoJSON = FeatureCollection<
 
 export type MunicipalGeoJSON = FeatureCollection<MultiPolygon, GmProperties>;
 
-export type RegionGeoJSON = FeatureCollection<
-  MultiPolygon,
-  SafetyRegionProperties
->;
+export type VrGeoJSON = FeatureCollection<MultiPolygon, VrProperties>;
 
 export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;

@@ -1,12 +1,12 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import { NationalContext } from '~/integration/types';
+import { NlContext } from '~/integration/types';
 
 context('Landelijk - Positief geteste mensen', () => {
   before(() => {
-    cy.beforeNationalTests('positief-geteste-mensen');
+    cy.beforeNlTests('positief-geteste-mensen');
   });
 
-  it('Should show the correct KPI values', function (this: NationalContext) {
+  it('Should show the correct KPI values', function (this: NlContext) {
     const infectedTotalLastValue = getLastFilledValue(
       this.nationalData.tested_overall
     );
@@ -23,8 +23,8 @@ context('Landelijk - Positief geteste mensen', () => {
     cy.checkKpiValues(kpiTestInfo);
   });
 
-  it('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: NationalContext) {
-    cy.beforeNationalTests('positief-geteste-mensen');
+  it('Should navigate to the appropriate municipality page after clicking on the choropleth', function (this: NlContext) {
+    cy.beforeNlTests('positief-geteste-mensen');
 
     const testMunicipalCode = 'GM1970';
 
@@ -41,8 +41,8 @@ context('Landelijk - Positief geteste mensen', () => {
     });
   });
 
-  it('Should select the correct choropleth navigate to the appropriate region page after clicking on the choropleth', function (this: NationalContext) {
-    cy.beforeNationalTests('positief-geteste-mensen');
+  it('Should select the correct choropleth navigate to the appropriate region page after clicking on the choropleth', function (this: NlContext) {
+    cy.beforeNlTests('positief-geteste-mensen');
 
     const testVRCode = 'VR02';
 
