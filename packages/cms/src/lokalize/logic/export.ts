@@ -4,9 +4,10 @@
  * result of text changes via the CLI.
  */
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { createFlatTexts } from '@corona-dashboard/common';
-import { unflatten } from 'flat';
+import { createFlatTexts, removeIdFromKeys } from '@corona-dashboard/common';
+import flatten, { unflatten } from 'flat';
 import fs from 'fs';
+import mapValues from 'lodash/mapValues';
 import path from 'path';
 import prettier from 'prettier';
 import { collapseTextMutations, readTextMutations } from '.';
@@ -21,18 +22,18 @@ export const localeDirectory = path.resolve(
   'app/src/locale'
 );
 
-async function writePrettyJson(data: Record<string, unknown>, path: string) {
-  const json = prettier.format(JSON.stringify(data), { parser: 'json' });
-  return new Promise<void>((resolve, reject) =>
-    fs.writeFile(path, json, { encoding: 'utf8' }, (err) =>
-      err ? reject(err) : resolve()
-    )
-  );
-}
+export const localeCacheDirectory = path.resolve(
+  __dirname,
+  '..', // lokalize
+  '..', // src
+  '..', // cms
+  '.sanity-lokalize-cache'
+);
 
 export async function exportLokalizeTexts(
   dataset?: string,
-  includeDrafts?: boolean
+  includeDrafts?: boolean,
+  appendDocumentIdToKey = process.env.NODE_ENV !== 'production'
 ) {
   const client = getClient(dataset);
   /**
@@ -52,7 +53,11 @@ export async function exportLokalizeTexts(
     .filter((x) => x.action === 'delete')
     .map((x) => x.key);
 
-  const flatTexts = createFlatTexts(documents, deletedKeys);
+  const flatTexts = createFlatTexts({
+    documents,
+    deletedKeys,
+    appendDocumentIdToKey,
+  });
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
@@ -62,5 +67,53 @@ export async function exportLokalizeTexts(
   await writePrettyJson(
     unflatten(flatTexts.en, { object: true }),
     path.join(localeDirectory, 'en_export.json')
+  );
+
+  await writePrettyJson(
+    unflatten(flatTexts.nl, { object: true }),
+    path.join(localeCacheDirectory, 'nl_export.json')
+  );
+
+  await writePrettyJson(
+    unflatten(flatTexts.en, { object: true }),
+    path.join(localeCacheDirectory, 'en_export.json')
+  );
+
+  await generateTypes();
+}
+
+async function writePrettyJson(data: Record<string, unknown>, path: string) {
+  const json = prettier.format(JSON.stringify(data), { parser: 'json' });
+  return new Promise<void>((resolve, reject) =>
+    fs.writeFile(path, json, { encoding: 'utf8' }, (err) =>
+      err ? reject(err) : resolve()
+    )
+  );
+}
+
+export async function generateTypes() {
+  const data = flatten(
+    JSON.parse(
+      fs.readFileSync(path.join(localeDirectory, 'nl_export.json'), {
+        encoding: 'utf-8',
+      })
+    )
+  ) as Record<string, string>;
+
+  const siteTextObj = removeIdFromKeys(mapValues(data, () => '@string'));
+  const siteTextString = JSON.stringify(siteTextObj, null, 2).replace(
+    /\"\@string\"/g,
+    'string'
+  );
+
+  const body = `export interface SiteText ${siteTextString}`;
+
+  return new Promise<void>((resolve, reject) =>
+    fs.writeFile(
+      path.join(localeDirectory, 'site-text.d.ts'),
+      body,
+      { encoding: 'utf8' },
+      (err) => (err ? reject(err) : resolve())
+    )
   );
 }

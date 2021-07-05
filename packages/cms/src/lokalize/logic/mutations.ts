@@ -7,7 +7,8 @@ import { sortBy } from 'lodash';
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 const HEADER = `timestamp,action,key${EOL}`;
 
-type Action = 'add' | 'delete' | 'noop';
+type Action = 'add' | 'delete' | 'noop' | 'add_via_move';
+
 export interface TextMutation {
   timestamp: string;
   action: Action;
@@ -24,7 +25,10 @@ export function clearMutationsLogFile() {
   }
 }
 
-export function appendTextMutation(action: 'add' | 'delete', key: string) {
+export function appendTextMutation(
+  action: Exclude<Action, 'noop'>,
+  key: string
+) {
   const timestamp = new Date().toISOString();
 
   try {
@@ -70,6 +74,7 @@ export function collapseTextMutations(mutations: TextMutation[]) {
 
   const collapsedKeys = sortedMutations.reduce((acc, mutation) => {
     const prev = acc[mutation.key] || { weight: 0, timestamp: 0 };
+    const action = mutation.action === 'add_via_move' ? 'add' : mutation.action;
 
     acc[mutation.key] = {
       /**
@@ -80,7 +85,7 @@ export function collapseTextMutations(mutations: TextMutation[]) {
        * collapse work properly, we need to limit the "amount of deletes" to
        * one when summing. This is done by cliping the weight to -1.
        */
-      weight: Math.max(weightByAction[mutation.action] + prev.weight, -1),
+      weight: Math.max(weightByAction[action] + prev.weight, -1),
       timestamp: mutation.timestamp,
     };
     return acc;

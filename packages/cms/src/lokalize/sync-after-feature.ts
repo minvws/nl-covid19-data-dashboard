@@ -25,18 +25,24 @@ import { LokalizeText } from './types';
   const collapsedMutations = collapseTextMutations(mutations);
 
   const additions = collapsedMutations.filter((x) => x.action === 'add');
+  const addedKeysViaMove = mutations
+    .filter((x) => x.action === 'add_via_move')
+    .map((x) => x.key);
 
   const deletions = collapsedMutations.filter((x) => x.action === 'delete');
 
   await applyDeletionsToDevelopment(deletions);
 
-  await syncAdditionsToProduction(additions);
+  await syncAdditionsToProduction(additions, addedKeysViaMove);
 })().catch((err) => {
   console.error('An error occurred:', err.message);
   process.exit(1);
 });
 
-async function syncAdditionsToProduction(additions: TextMutation[]) {
+async function syncAdditionsToProduction(
+  additions: TextMutation[],
+  addedKeysViaMove: string[]
+) {
   if (additions.length === 0) {
     console.log('There are no mutations that result in keys to add');
     return;
@@ -68,7 +74,7 @@ async function syncAdditionsToProduction(additions: TextMutation[]) {
          * text that are injected into production get this flag set here to be
          * sure they show up as "new" there.
          */
-        is_newly_added: true,
+        is_newly_added: !addedKeysViaMove.includes(addition.key),
         /**
          * To know how often communication changes these texts we need to clear
          * the counter from any publish actions we did ourselves in development.
@@ -96,7 +102,8 @@ async function syncAdditionsToProduction(additions: TextMutation[]) {
     }
   }
 
-  await prdTransaction.commit();
+  console.log('PRD_TRANSACTION', prdTransaction.serialize());
+  // await prdTransaction.commit(); @TODO enable
 
   if (failureCount === 0) {
     console.log(
@@ -134,7 +141,8 @@ async function applyDeletionsToDevelopment(deletions: TextMutation[]) {
 
   documentIdsToDelete.forEach((x) => devTransaction.delete(x));
 
-  await devTransaction.commit();
+  console.log('DEV_TRANSACTION', devTransaction.serialize());
+  // await devTransaction.commit(); @TODO enable
 
   console.log(
     `Deleted ${documentIdsToDelete.length} text documents (including draft versions)`

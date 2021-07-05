@@ -4,7 +4,7 @@ import mapKeys from 'lodash/mapKeys';
 import path from 'path';
 import { getClient } from '../../client';
 import { LokalizeText } from '../types';
-import { localeDirectory } from './export';
+import { localeDirectory, localeCacheDirectory } from './export';
 
 export async function fetchExistingKeys() {
   const client = getClient();
@@ -21,6 +21,21 @@ export async function fetchExistingKeys() {
 export async function fetchLocalTextsFlatten() {
   const texts = JSON.parse(
     fs.readFileSync(path.join(localeDirectory, 'nl_export.json'), {
+      encoding: 'utf-8',
+    })
+  );
+
+  const flattenTexts = mapKeys(
+    flatten<unknown, Record<string, string>>(texts),
+    (_value, key) => (key.includes('.') ? key : `__root.${key}`)
+  );
+
+  return flattenTexts as Record<string, string>;
+}
+
+export async function fetchLocalTextsFromCacheFlatten() {
+  const texts = JSON.parse(
+    fs.readFileSync(path.join(localeCacheDirectory, 'nl_export.json'), {
       encoding: 'utf-8',
     })
   );

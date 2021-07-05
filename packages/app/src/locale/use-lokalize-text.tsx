@@ -56,7 +56,9 @@ export function useLokalizeText(initialLocale: LanguageKey) {
 
     function updateSiteText() {
       if (isCancelled) return;
-      const flatTexts = createFlatTexts(lokalizeTextsRef.current);
+      const flatTexts = createFlatTexts({
+        documents: lokalizeTextsRef.current,
+      });
       setText(() => unflatten(flatTexts[locale], { object: true }));
     }
 
