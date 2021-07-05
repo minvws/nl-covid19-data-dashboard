@@ -1,4 +1,4 @@
-import { NlDeceasedCbs, RegionalDeceasedCbs } from '@corona-dashboard/common';
+import { NlDeceasedCbs, VrDeceasedCbs } from '@corona-dashboard/common';
 import { AnchorTile } from '~/components/anchor-tile';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -14,7 +14,7 @@ export function DeceasedMonitorSection({
   showCauseMessage,
   articles,
 }: {
-  data: NlDeceasedCbs | RegionalDeceasedCbs;
+  data: NlDeceasedCbs | VrDeceasedCbs;
   showDataMessage?: boolean;
   showCauseMessage?: boolean;
   articles?: ArticleSummary[];

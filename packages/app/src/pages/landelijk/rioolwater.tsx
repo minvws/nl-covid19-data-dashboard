@@ -1,8 +1,8 @@
 import {
   MunicipalityProperties,
   MunicipalSewerValue,
-  RegionalSewerValue,
-  SafetyRegionProperties,
+  VrProperties,
+  VrSewerValue,
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
@@ -244,9 +244,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.vr.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={(
-                  context: SafetyRegionProperties & RegionalSewerValue
-                ) => <SewerRegionalTooltip context={context} />}
+                tooltipContent={(context: VrProperties & VrSewerValue) => (
+                  <SewerRegionalTooltip context={context} />
+                )}
               />
             )}
           </ChoroplethTile>

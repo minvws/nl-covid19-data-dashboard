@@ -1,4 +1,4 @@
-import { Municipal, Nl, Regionaal } from '@corona-dashboard/common';
+import { Municipal, Nl, Vr } from '@corona-dashboard/common';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkGroupProps } from './link-group';
@@ -6,7 +6,7 @@ import { LinkGroupProps } from './link-group';
 export function useDataSitemap(
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
   code?: string,
-  data?: Pick<Nl, 'sewer'> | Pick<Regionaal, 'sewer'> | Pick<Municipal, 'sewer'>
+  data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Municipal, 'sewer'>
 ): LinkGroupProps[] {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();

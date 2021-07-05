@@ -1,7 +1,4 @@
-import {
-  NlBehaviorValue,
-  RegionalBehaviorValue,
-} from '@corona-dashboard/common';
+import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -14,7 +11,7 @@ import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
 
 interface BehaviorLineChartTileProps {
-  values: NlBehaviorValue[] | RegionalBehaviorValue[];
+  values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
