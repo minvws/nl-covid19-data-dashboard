@@ -51,12 +51,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(
-    'tested_ggd_average',
-    'tested_ggd_daily',
-    'tested_per_age_group',
-    'g_number'
-  ),
+  selectNlPageMetricData('tested_ggd', 'tested_per_age_group', 'g_number'),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
     vr: ({ tested_overall }) => ({ tested_overall }),
@@ -89,9 +84,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     useState<RegionControlOption>('municipal');
 
   const dataOverallLastValue = data.tested_overall.last_value;
-  const dataGgdAverageLastValue = data.tested_ggd_average.last_value;
-  const dataGgdDailyValues = data.tested_ggd_daily.values;
-  const dataGgdDailyLastValue = data.tested_ggd_daily.last_value;
+  const dataGgdLastValue = data.tested_ggd.last_value;
+  const dataGgdValues = data.tested_ggd.values;
   const difference = data.difference;
 
   const metadata = {
@@ -147,18 +141,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {replaceComponentsInText(ggdText.summary_text, {
                     percentage: (
                       <span css={css({ color: 'data.primary' })}>
-                        {formatPercentage(
-                          dataGgdAverageLastValue.infected_percentage
-                        )}
+                        {formatPercentage(dataGgdLastValue.infected_percentage)}
                         %
                       </span>
                     ),
-                    dateFrom: formatDateFromSeconds(
-                      dataGgdAverageLastValue.date_start_unix,
-                      'weekday-medium'
-                    ),
                     dateTo: formatDateFromSeconds(
-                      dataGgdAverageLastValue.date_end_unix,
+                      dataGgdLastValue.date_unix,
                       'weekday-medium'
                     ),
                   })}
@@ -325,8 +313,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             subtitle={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,
-              dateOrRange: dataGgdDailyLastValue.date_unix,
-              dateOfInsertionUnix: dataGgdDailyLastValue.date_of_insertion_unix,
+              dateOrRange: dataGgdLastValue.date_unix,
+              dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
               dataSources: [ggdText.bronnen.rivm],
             }}
             reference={text.reference}
@@ -338,16 +326,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={ggdText.totaal_getest_week_titel}
               metadata={{
-                date: dataGgdDailyLastValue.date_unix,
+                date: dataGgdLastValue.date_unix,
                 source: ggdText.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="ggd_tested_total"
-                absolute={dataGgdDailyLastValue.tested_total}
-                difference={
-                  difference.tested_ggd_average__tested_total_moving_average
-                }
+                absolute={dataGgdLastValue.tested_total}
+                difference={difference.tested_ggd__tested_total_moving_average}
                 isMovingAverageDifference
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
@@ -355,15 +341,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={ggdText.positief_getest_week_titel}
               metadata={{
-                date: dataGgdDailyLastValue.date_unix,
+                date: dataGgdLastValue.date_unix,
                 source: ggdText.bronnen.rivm,
               }}
             >
               <KpiValue
                 data-cy="ggd_infected"
-                percentage={dataGgdDailyLastValue.infected_percentage}
+                percentage={dataGgdLastValue.infected_percentage}
                 difference={
-                  difference.tested_ggd_average__infected_percentage_moving_average
+                  difference.tested_ggd__infected_percentage_moving_average
                 }
                 isMovingAverageDifference
               />
@@ -375,12 +361,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   {
                     numerator: (
                       <InlineText color="data.primary">
-                        {formatNumber(dataGgdDailyLastValue.infected)}
+                        {formatNumber(dataGgdLastValue.infected)}
                       </InlineText>
                     ),
                     denominator: (
                       <InlineText color="data.primary">
-                        {formatNumber(dataGgdDailyLastValue.tested_total)}
+                        {formatNumber(dataGgdLastValue.tested_total)}
                       </InlineText>
                     ),
                   }
@@ -403,7 +389,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'confirmed_cases_infected_percentage_over_time_chart',
                 }}
                 timeframe={timeframe}
-                values={dataGgdDailyValues}
+                values={dataGgdValues}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -441,7 +427,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'confirmed_cases_tested_over_time_chart',
                 }}
                 timeframe={timeframe}
-                values={dataGgdDailyValues}
+                values={dataGgdValues}
                 seriesConfig={[
                   {
                     type: 'line',
