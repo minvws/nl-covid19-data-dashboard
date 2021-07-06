@@ -3,9 +3,9 @@ import {
   HighlightTeaser,
   HighlightTeaserProps,
 } from '~/components/highlight-teaser';
+import { Block, ImageBlock } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ArticleBox } from './article-list';
-import { Block, ImageBlock } from '~/types/cms';
 
 export interface WeeklyHighlightProps {
   title: string;
@@ -21,10 +21,11 @@ export interface WeeklyHighlightProps {
 interface HighlightsTileProps {
   weeklyHighlight: WeeklyHighlightProps;
   highlights: HighlightTeaserProps[];
+  showWeeklyHighlight: boolean;
 }
 
 export function HighlightsTile(props: HighlightsTileProps) {
-  const { weeklyHighlight, highlights } = props;
+  const { weeklyHighlight, highlights, showWeeklyHighlight } = props;
   const breakpoints = useBreakpoints();
 
   return (
@@ -35,17 +36,19 @@ export function HighlightsTile(props: HighlightsTileProps) {
       flexWrap="wrap"
       mr={0}
     >
-      <ArticleBox>
-        <HighlightTeaser
-          cover={weeklyHighlight.cover}
-          href={`/weekberichten/${weeklyHighlight.slug.current}`}
-          title={weeklyHighlight.title}
-          category={weeklyHighlight.category}
-          publicationDate={weeklyHighlight.publicationDate}
-          isWeekly
-          variant="blue"
-        />
-      </ArticleBox>
+      {showWeeklyHighlight && (
+        <ArticleBox>
+          <HighlightTeaser
+            cover={weeklyHighlight.cover}
+            href={`/weekberichten/${weeklyHighlight.slug.current}`}
+            title={weeklyHighlight.title}
+            category={weeklyHighlight.category}
+            publicationDate={weeklyHighlight.publicationDate}
+            isWeekly
+            variant="blue"
+          />
+        </ArticleBox>
+      )}
       {highlights.map((item, index) => (
         <ArticleBox key={index}>
           <HighlightTeaser

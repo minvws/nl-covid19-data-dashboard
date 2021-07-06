@@ -2,12 +2,14 @@ export const topicalPage = {
   title: 'Actueel pagina',
   name: 'topicalPage',
   type: 'document',
+  initialValue: {
+    showWeeklyHighlight: false,
+  },
   fields: [
     {
       title: 'Laat weekbericht zien',
-      name: 'flag',
+      name: 'showWeeklyHighlight',
       type: 'boolean',
-      initialValue: false,
     },
     {
       title: 'Uitgelichte items',
@@ -77,7 +79,18 @@ export const topicalPage = {
           ],
         },
       ],
-      validation: (Rule: any) => Rule.required().unique().min(2).max(3),
+      validation: (Rule: any) =>
+        Rule.custom((value: any, context: any) => {
+          if (context.document.showWeeklyHighlight) {
+            return value.length === 2
+              ? true
+              : 'Als er een weekbericht geselecteerd is moeten er 2 uitgelichte items toegevoegd zijn.';
+          } else {
+            return value.length === 3
+              ? true
+              : 'Als er geen weekbericht geselecteerd is moeten er 3 uitgelichte items toegevoegd zijn.';
+          }
+        }),
     },
   ],
 };

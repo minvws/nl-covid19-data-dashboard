@@ -7,9 +7,9 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
 
   return /* groq */ `{
     // Retrieve the latest 3 articles with the highlighted article filtered out:
-    "test": *[_type=='sewerPage']{
-      flag,
-    }[0],
+    "showWeeklyHighlight": *[_type=='topicalPage']{
+      showWeeklyHighlight,
+    }[0].showWeeklyHighlight,
     'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate desc) {
       "title":title.${locale},
       slug,
@@ -18,7 +18,7 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
         ...cover,
         "asset": cover.asset->
       }
-    }[0..2],
+    }[0..3],
     'weeklyHighlight': *[_type == 'editorial'] | order(publicationDate desc) {
       "title":title.${locale},
       slug,
