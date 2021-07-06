@@ -14,7 +14,7 @@ import { useHitSelection } from './use-hit-selection';
 import { Hit, useSearchResults } from './use-select-country-results';
 import { CountryCode } from './country-code';
 
-export interface Country {
+export interface CountryOption {
   code: CountryCode;
   name: string;
   isSelected?: boolean;
@@ -28,8 +28,8 @@ interface SearchContextProviderProps<T extends Element> {
   containerRef: RefObject<T>;
   children: (context: SearchContext) => ReactNode;
   initialValue?: string;
-  onSelectCountry: (data: any) => void;
-  countries: Country[];
+  onToggleCountry: (data: CountryOption) => void;
+  countries: CountryOption[];
   limit?: number;
 }
 
@@ -39,14 +39,14 @@ export function SearchContextProvider<T extends Element>({
   children,
   containerRef,
   initialValue = '',
-  onSelectCountry,
+  onToggleCountry,
   countries,
   limit,
 }: SearchContextProviderProps<T>) {
   const value = useSearchContextValue(
     initialValue,
     containerRef,
-    onSelectCountry,
+    onToggleCountry,
     countries,
     limit
   );
@@ -69,13 +69,13 @@ export function useSearchContext() {
 function useSearchContextValue<T extends Element>(
   initialValue: string,
   containerRef: RefObject<T>,
-  onSelectCountry: (data: any) => void,
-  countries: Country[],
+  onToggleCountry: (data: CountryOption) => void,
+  countries: CountryOption[],
   limit?: number
 ) {
   const breakpoints = useBreakpoints();
 
-  const id = '__search';
+  const id = '__search_countries';
 
   /**
    * current search term
@@ -120,7 +120,7 @@ function useSearchContextValue<T extends Element>(
       const option = hits[index];
       setTermSubmitted(option.data.name);
 
-      onSelectCountry(option.data);
+      onToggleCountry(option.data);
     },
     /**
      * Only enable keyboard navigation when we show results
@@ -154,7 +154,7 @@ function useSearchContextValue<T extends Element>(
     term,
     limit: limit ?? Infinity,
 
-    onSelectCountry,
+    onToggleCountry,
 
     inputProps: {
       value: termSubmitted || term,
@@ -182,7 +182,7 @@ function useSearchContextValue<T extends Element>(
       'aria-owns': id,
     },
 
-    getOptionProps: (option: Hit<Country>) =>
+    getOptionProps: (option: Hit<CountryOption>) =>
       ({
         id: getOptionId(option.index),
         ref: option.index === focusIndex ? focusRef : undefined,

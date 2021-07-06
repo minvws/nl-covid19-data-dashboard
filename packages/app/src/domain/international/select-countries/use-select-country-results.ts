@@ -1,7 +1,7 @@
 import { matchSorter } from 'match-sorter';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { Country } from './context';
+import { CountryOption } from './context';
 
 export interface Hit<T> {
   /**
@@ -21,11 +21,11 @@ export interface Hit<T> {
   data: T;
 }
 
-export function useSearchResults(countries: Country[], term: string) {
+export function useSearchResults(countries: CountryOption[], term: string) {
   const termTrimmed = term.trim();
 
   const { hits } = useMemo(() => {
-    const hits: Hit<Country>[] = search(countries, termTrimmed);
+    const hits: Hit<CountryOption>[] = search(countries, termTrimmed);
 
     return { hits };
   }, [countries, termTrimmed]);
@@ -33,7 +33,7 @@ export function useSearchResults(countries: Country[], term: string) {
   return { hits };
 }
 
-function search(countries: Country[], term: string) {
+function search(countries: CountryOption[], term: string) {
   let options = countries
     .map((x) => ({
       code: x.code,
@@ -60,7 +60,7 @@ function search(countries: Country[], term: string) {
          * Set score based on the order of the initial hits
          */
         score: 1 - options.indexOf(data) / options.length,
-      } as Hit<Country>)
+      } as Hit<CountryOption>)
   );
 
   return hits;

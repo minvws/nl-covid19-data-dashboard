@@ -5,19 +5,19 @@ import useResizeObserver from 'use-resize-observer/polyfilled';
 import { Box } from '~/components/base';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { Country, SearchContextProvider } from './context';
+import { CountryOption, SearchContextProvider } from './context';
 import { SelectCountriesInput } from './select-countries-input';
 import { SelectCountriesResults } from './select-country-results';
 
 export function SelectCountrySearch({
   initialValue,
   countries,
-  onSelectCountry,
+  onToggleCountry,
   limit,
 }: {
-  onSelectCountry: (data: any) => void;
+  onToggleCountry: (data: CountryOption) => void;
   initialValue?: string;
-  countries: Country[];
+  countries: CountryOption[];
   limit?: number;
 }) {
   const { height, ref: heightRef } = useResizeObserver<HTMLDivElement>();
@@ -30,7 +30,7 @@ export function SelectCountrySearch({
     <SearchContextProvider
       containerRef={containerRef}
       initialValue={initialValue}
-      onSelectCountry={onSelectCountry}
+      onToggleCountry={onToggleCountry}
       countries={countries}
       limit={limit}
     >

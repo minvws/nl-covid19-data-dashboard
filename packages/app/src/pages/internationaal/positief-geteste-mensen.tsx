@@ -14,7 +14,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
 import { choroplethMockData } from '~/domain/internationaal/logic/choropleth-mock-data';
-import { Country } from '~/domain/international/select-countries/context';
+import { CountryOption } from '~/domain/international/select-countries/context';
 import {
   CountryCode,
   countryCodes,
@@ -106,9 +106,9 @@ export default function PositiefGetesteMensenPage(
     [internationalData]
   );
 
-  const countriesAndLastValues = useMemo(
+  const countryOptions = useMemo(
     () =>
-      compileCountrySelectionData(
+      compileCountryOptions(
         [...countryCodes],
         countryNames,
         compiledInternationalData
@@ -148,7 +148,7 @@ export default function PositiefGetesteMensenPage(
           >
             <>
               <SelectCountries
-                countriesAndLastValues={countriesAndLastValues}
+                countryOptions={countryOptions}
                 limit={10}
                 alwaysSelected={['nld']}
               >
@@ -260,7 +260,7 @@ function selectedCountriesToSeriesConfig(
   return [
     {
       type: 'line' as const,
-      metricProperty: 'nld' as CountryCode,
+      metricProperty: 'nld',
       label: countryNames['nld'],
       color: colors.data.neutral,
     } as LineSeriesDefinition<CompiledCountriesValue>,
@@ -274,15 +274,25 @@ function selectedCountriesToSeriesConfig(
   );
 }
 
-function compileCountrySelectionData(
+function compileCountryOptions(
   countryCodes: CountryCode[],
   countryNames: Record<CountryCode, string>,
   data: CompiledCountriesValue[]
-): Country[] {
+): CountryOption[] {
   const lastValues = last(data);
-  return countryCodes.map((countryCode) => ({
-    code: countryCode,
-    name: countryNames[countryCode],
-    lastValue: lastValues?.[countryCode] ?? 0,
-  }));
+
+  assert(lastValues, 'No last values available to build the country select.');
+
+  return countryCodes.map((countryCode) => {
+    assert(
+      lastValues[countryCode],
+      `Country ${countryCode} has no supplied last value`
+    );
+
+    return {
+      code: countryCode,
+      name: countryNames[countryCode],
+      lastValue: lastValues[countryCode],
+    };
+  });
 }

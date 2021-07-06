@@ -3,42 +3,53 @@ import { ReactNode, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
-import { Country } from './context';
+import { CountryOption } from './context';
 import { CountryCode } from './country-code';
 import { SelectCountrySearch } from './select-country-search';
 import { SelectedCountries } from './selected-countries';
 
-const unorderedColors = colors.data.multiseries;
+const {
+  cyan,
+  turquoise,
+  yellow,
+  orange,
+  magenta,
+  cyan_dark,
+  turquoise_dark,
+  yellow_dark,
+  orange_dark,
+  magenta_dark,
+} = colors.data.multiseries;
 
 const ORDERED_COLORS = [
-  unorderedColors.cyan,
-  unorderedColors.turquoise,
-  unorderedColors.yellow,
-  unorderedColors.orange,
-  unorderedColors.magenta,
-  unorderedColors.cyan_dark,
-  unorderedColors.turquoise_dark,
-  unorderedColors.yellow_dark,
-  unorderedColors.orange_dark,
-  unorderedColors.magenta_dark,
+  cyan,
+  turquoise,
+  yellow,
+  orange,
+  magenta,
+  cyan_dark,
+  turquoise_dark,
+  yellow_dark,
+  orange_dark,
+  magenta_dark,
 ];
 
 interface SelectCountriesProps {
-  countriesAndLastValues: Country[];
+  countryOptions: CountryOption[];
   children: (selectedCountries: CountryCode[], colors: string[]) => ReactNode;
   limit?: number;
   alwaysSelected: CountryCode[];
 }
 
 export function SelectCountries({
-  countriesAndLastValues,
+  countryOptions,
   children,
   limit,
   alwaysSelected,
 }: SelectCountriesProps) {
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>([]);
 
-  function toggleCountry(countryData: any) {
+  function handleToggleCountry(countryData: CountryOption) {
     if (selectedCountries.includes(countryData.code)) {
       setSelectedCountries(
         selectedCountries.filter(
@@ -53,21 +64,20 @@ export function SelectCountries({
     }
   }
 
-  const countries: Country[] = useMemo(() => {
-    return countriesAndLastValues
-      .filter((c) => !alwaysSelected.includes(c.code))
-      .map((countryAndLastValue) => ({
-        ...countryAndLastValue,
-        isSelected: selectedCountries.includes(countryAndLastValue.code),
+  const countries: CountryOption[] = useMemo(() => {
+    return countryOptions
+      .filter((x) => !alwaysSelected.includes(x.code))
+      .map((countryOption) => ({
+        ...countryOption,
+        isSelected: selectedCountries.includes(countryOption.code),
       }));
-  }, [countriesAndLastValues, selectedCountries, alwaysSelected]);
+  }, [countryOptions, selectedCountries, alwaysSelected]);
 
   const selectOptions = selectedCountries.map((countryCode, index) => ({
     metricProperty: countryCode,
     color: ORDERED_COLORS[index],
     label:
-      countriesAndLastValues.find((c) => c.code === countryCode)?.name ??
-      countryCode,
+      countryOptions.find((x) => x.code === countryCode)?.name ?? countryCode,
     shape: 'line' as const,
   }));
 
@@ -76,21 +86,23 @@ export function SelectCountries({
       <List>
         <InputItem>
           <SelectCountrySearch
-            onSelectCountry={toggleCountry}
+            onToggleCountry={handleToggleCountry}
             countries={countries}
             limit={limit}
           />
         </InputItem>
         {alwaysSelected.map((countryCode) => (
           <AlwaysSelectedItem key={countryCode}>
-            {countriesAndLastValues.find((c) => c.code === countryCode)?.name}
+            {countryOptions.find((x) => x.code === countryCode)?.name}
             <Line color={colors.data.neutral} />
           </AlwaysSelectedItem>
         ))}
         <SelectedCountries
           selectOptions={selectOptions}
           selection={selectedCountries}
-          onRemoveItem={(countryCode) => toggleCountry({ code: countryCode })}
+          onRemoveItem={(countryCode) =>
+            handleToggleCountry({ code: countryCode } as CountryOption)
+          }
         />
       </List>
       {children(selectedCountries, ORDERED_COLORS)}

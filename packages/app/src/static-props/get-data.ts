@@ -303,19 +303,15 @@ export function createGetChoroplethData<T1, T2, T3>(settings?: {
 }
 
 export function getInData(countryCodes: CountryCode[]) {
-  if (!countryCodes) {
-    throw Error('No valid countryCodes found in context');
-  }
-
   return function () {
-    const internationalData: PartialRecord<CountryCode, In> = {};
-
+    const internationalData: Record<string, In> = {};
     countryCodes.forEach((countryCode) => {
       internationalData[countryCode] = loadJsonFromDataFile<In>(
         `IN_${countryCode.toUpperCase()}.json`
       );
     });
-
-    return { internationalData };
+    return { internationalData } as {
+      internationalData: Record<CountryCode, In>;
+    };
   };
 }

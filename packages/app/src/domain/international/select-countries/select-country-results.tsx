@@ -10,15 +10,15 @@ import CheckedIcon from '~/assets/checked.svg';
 import UncheckedIcon from '~/assets/unchecked.svg';
 
 export function SelectCountriesResults() {
-  const { id, hits, setHasHitFocus, onSelectCountry, getOptionProps, limit } =
+  const { id, hits, setHasHitFocus, onToggleCountry, getOptionProps, limit } =
     useSearchContext();
 
   const { formatNumber, siteText } = useIntl();
 
   useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
 
-  const selectedCount = hits.filter((c) => c.data.isSelected).length;
-  const hasLimitBeenReached = selectedCount >= limit;
+  const selectedCount = hits.filter((x) => x.data.isSelected).length;
+  const isLimitReached = selectedCount >= limit;
 
   return (
     <StyledSelectCountriesResults
@@ -34,8 +34,8 @@ export function SelectCountriesResults() {
               <li key={x.id}>
                 <Hit
                   {...getOptionProps(x)}
-                  onClick={() => onSelectCountry(x.data)}
-                  hasLimitBeenReached={hasLimitBeenReached}
+                  onClick={() => onToggleCountry(x.data)}
+                  isLimitReached={isLimitReached}
                 >
                   <span css={css({ flex: '0 0 24px' })}>
                     {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
@@ -107,7 +107,7 @@ interface HitProps {
   id: string;
   onClick: () => void;
   isSelected: boolean;
-  hasLimitBeenReached: boolean;
+  isLimitReached: boolean;
 }
 
 function Hit({
@@ -118,7 +118,7 @@ function Hit({
   onClick,
   id,
   isSelected,
-  hasLimitBeenReached,
+  isLimitReached,
 }: HitProps) {
   return (
     <StyledHit
@@ -130,7 +130,7 @@ function Hit({
       role="option"
       id={id}
       aria-selected={isSelected ? 'true' : 'false'}
-      hasLimitBeenReached={hasLimitBeenReached}
+      isLimitReached={isLimitReached}
     >
       {children}
     </StyledHit>
@@ -140,7 +140,7 @@ function Hit({
 const StyledHit = styled.button<{
   hasFocus: boolean;
   isSelected: boolean;
-  hasLimitBeenReached: boolean;
+  isLimitReached: boolean;
 }>((x) =>
   css({
     px: 3,
@@ -155,7 +155,7 @@ const StyledHit = styled.button<{
     background: 'none',
     border: 'none',
     textAlign: 'left',
-    opacity: x.hasLimitBeenReached && !x.isSelected ? 0.5 : 1,
+    opacity: x.isLimitReached && !x.isSelected ? 0.5 : 1,
     fontFamily: 'inherit',
     fontSize: '1em',
   })
