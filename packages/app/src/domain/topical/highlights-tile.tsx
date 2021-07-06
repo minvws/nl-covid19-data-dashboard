@@ -28,8 +28,6 @@ export function HighlightsTile(props: HighlightsTileProps) {
   const { weeklyHighlight, highlights, showWeeklyHighlight } = props;
   const breakpoints = useBreakpoints();
 
-  console.log(showWeeklyHighlight);
-
   return (
     <Box
       display="flex"
