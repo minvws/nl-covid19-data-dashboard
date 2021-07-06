@@ -2,6 +2,7 @@
   "presets": ["next/babel"],
   "plugins": [
     "lodash",
+    "date-fns",
     [
       "babel-plugin-styled-components",
       {

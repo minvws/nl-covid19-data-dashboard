@@ -1,9 +1,9 @@
 import {
   EscalationLevels,
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
-  RegionsTestedOverall,
-  SafetyRegionProperties,
+  GmCollectionTestedOverall,
+  GmProperties,
+  VrCollectionTestedOverall,
+  VrProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
@@ -255,7 +255,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty="level"
                     noDataFillColor={unknownLevelColor}
                     tooltipContent={(
-                      context: SafetyRegionProperties & EscalationLevels
+                      context: VrProperties & EscalationLevels
                     ) => (
                       <EscalationRegionalTooltip
                         context={context}
@@ -334,8 +334,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty="infected_per_100k"
                       getLink={reverseRouter.gm.positiefGetesteMensen}
                       tooltipContent={(
-                        context: MunicipalityProperties &
-                          MunicipalitiesTestedOverall
+                        context: GmProperties & GmCollectionTestedOverall
                       ) => (
                         <PositiveTestedPeopleMunicipalTooltip
                           context={context}
@@ -353,7 +352,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={(
-                        context: SafetyRegionProperties & RegionsTestedOverall
+                        context: VrProperties & VrCollectionTestedOverall
                       ) => (
                         <PositiveTestedPeopleRegionalTooltip
                           context={context}

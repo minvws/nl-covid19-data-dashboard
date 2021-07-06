@@ -1,9 +1,9 @@
 import {
   getLastFilledValue,
-  MunicipalHospitalNiceValue,
-  MunicipalityProperties,
-  RegionalHospitalNiceValue,
-  SafetyRegionProperties,
+  GmHospitalNiceValue,
+  GmProperties,
+  VrHospitalNiceValue,
+  VrProperties,
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
@@ -176,7 +176,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
-                  context: MunicipalityProperties & MunicipalHospitalNiceValue
+                  context: GmProperties & GmHospitalNiceValue
                 ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
               />
             )}
@@ -190,7 +190,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
-                  context: SafetyRegionProperties & RegionalHospitalNiceValue
+                  context: VrProperties & VrHospitalNiceValue
                 ) => <HospitalAdmissionsRegionalTooltip context={context} />}
               />
             )}

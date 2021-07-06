@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_difference",
+  "title": "nl_difference",
   "type": "object",
   "properties": {
     "tested_overall__infected_per_100k_moving_average": {
@@ -9,16 +9,10 @@
     "tested_overall__infected_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_ggd_daily__tested_total": {
-      "$ref": "#/definitions/diff_integer"
-    },
-    "tested_ggd_daily__infected_percentage": {
+    "tested_ggd__tested_total_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "tested_ggd_average__tested_total_moving_average": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "tested_ggd_average__infected_percentage_moving_average": {
+    "tested_ggd__infected_percentage_moving_average": {
       "$ref": "#/definitions/diff_decimal"
     },
     "infectious_people__estimate": {
@@ -57,7 +51,7 @@
     "reproduction__index_average": {
       "$ref": "#/definitions/diff_decimal"
     },
-    "corona_melder_app__warned_daily": {
+    "corona_melder_app_warning__count": {
       "$ref": "#/definitions/diff_integer"
     },
     "disability_care__newly_infected_people": {
@@ -105,10 +99,8 @@
     "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "hospital_lcps__beds_occupied_covid",
-    "tested_ggd_daily__tested_total",
-    "tested_ggd_daily__infected_percentage",
-    "tested_ggd_average__tested_total_moving_average",
-    "tested_ggd_average__infected_percentage_moving_average",
+    "tested_ggd__tested_total_moving_average",
+    "tested_ggd__infected_percentage_moving_average",
     "reproduction__index_average",
     "infectious_people__estimate",
     "intensive_care_nice__admissions_on_date_of_reporting_moving_average",
@@ -119,7 +111,7 @@
     "nursing_home__newly_infected_people",
     "nursing_home__infected_locations_total",
     "nursing_home__deceased_daily",
-    "corona_melder_app__warned_daily",
+    "corona_melder_app_warning__count",
     "disability_care__newly_infected_people",
     "disability_care__infected_locations_total",
     "elderly_at_home__positive_tested_daily",
@@ -146,11 +138,14 @@
         "difference": {
           "type": "integer"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": ["old_value", "difference", "new_date_unix"],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -163,11 +158,14 @@
         "difference": {
           "type": "number"
         },
+        "old_date_unix": {
+          "type": "integer"
+        },
         "new_date_unix": {
           "type": "integer"
         }
       },
-      "required": ["old_value", "difference", "new_date_unix"],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }

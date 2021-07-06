@@ -1,7 +1,4 @@
-import {
-  SafetyRegionProperties,
-  VrCollectionSituations,
-} from '@corona-dashboard/common';
+import { VrCollectionSituations, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
@@ -15,7 +12,7 @@ import { LegendIcon } from './legend-icon';
 export function SituationsDataCoverageTooltip({
   context,
 }: {
-  context: SafetyRegionProperties & VrCollectionSituations;
+  context: VrProperties & VrCollectionSituations;
 }) {
   const { siteText } = useIntl();
   const text = siteText.brononderzoek;

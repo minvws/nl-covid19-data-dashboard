@@ -1,7 +1,4 @@
-import {
-  RegionsBehavior,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
+import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -14,7 +11,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 import { regionThresholds } from '../../region-thresholds';
 
 interface BehaviorTooltipProps {
-  context: RegionsBehavior & SafetyRegionProperties;
+  context: VrCollectionBehavior & VrProperties;
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number;
   currentSupportValue: number;
