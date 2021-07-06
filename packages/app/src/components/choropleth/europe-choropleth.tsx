@@ -113,7 +113,6 @@ export function EuropeChoropleth<T extends CountryDataItem>(
         />
       ) : (
         <Path
-          id={key}
           key={key}
           pathData={path}
           stroke={colors.silver}
