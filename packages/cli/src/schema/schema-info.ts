@@ -1,4 +1,4 @@
-import { assert, JsonMetricScope } from '@corona-dashboard/common';
+import { assert, JsonDataScope } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { defaultJsonDirectory } from '../config';
@@ -9,7 +9,7 @@ import {
   validateMovingAverages,
 } from './custom-validations';
 
-export type SchemaInfo = Record<JsonMetricScope, SchemaInfoItem>;
+export type SchemaInfo = Record<JsonDataScope, SchemaInfoItem>;
 
 export type SchemaInfoItem = {
   files: string[];

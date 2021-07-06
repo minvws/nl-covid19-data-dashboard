@@ -12,7 +12,7 @@ export interface Feature {
    * Metric scope defines the files in which we enforce the (non-)existence of
    * metricNames.
    */
-  metricScopes?: JsonMetricScope[];
+  dataScopes?: JsonDataScope[];
 
   /**
    * A metricName is the root-level schema property used to hold the data in the
@@ -40,7 +40,7 @@ export interface Feature {
 }
 
 export type MetricScope = 'in' | 'nl' | 'vr' | 'gm';
-export type JsonMetricScope =
+export type JsonDataScope =
   | MetricScope
   | 'in_collection'
   | 'vr_collection'
