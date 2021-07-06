@@ -36,6 +36,21 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
   server.use(helmet());
   server.disable('x-powered-by');
 
+  /**
+   * Explicitly reject all POST, PUT and DELETE requests
+   */
+  server.post('*', function (_, res) {
+    res.status(403).end();
+  });
+
+  server.put('*', function (_, res) {
+    res.status(403).end();
+  });
+
+  server.delete('*', function (_, res) {
+    res.status(403).end();
+  });
+
   server.use(
     '/cms-:type(images|files)',
     createProxyMiddleware({
