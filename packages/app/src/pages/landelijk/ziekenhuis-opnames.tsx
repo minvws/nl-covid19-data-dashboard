@@ -1,7 +1,7 @@
 import {
   getLastFilledValue,
-  MunicipalHospitalNiceValue,
-  MunicipalityProperties,
+  GmHospitalNiceValue,
+  GmProperties,
   VrHospitalNiceValue,
   VrProperties,
 } from '@corona-dashboard/common';
@@ -176,7 +176,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
-                  context: MunicipalityProperties & MunicipalHospitalNiceValue
+                  context: GmProperties & GmHospitalNiceValue
                 ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
               />
             )}

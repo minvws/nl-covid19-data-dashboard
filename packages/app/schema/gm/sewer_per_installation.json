@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "municipal_sewer_per_installation_value",
+      "title": "gm_sewer_per_installation_value",
       "type": "object",
       "additionalProperties": false,
       "required": ["date_unix", "rna_normalized", "date_of_insertion_unix"],
@@ -39,7 +39,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "municipal_sewer_per_installation",
+  "title": "gm_sewer_per_installation",
   "type": "object",
   "required": ["values"],
   "additionalProperties": false,

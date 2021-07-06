@@ -1,8 +1,8 @@
 import {
   assert,
+  Gm,
+  GmCollection,
   InCollection,
-  Municipal,
-  Municipalities,
   Nl,
   sortTimeSeriesInDataInPlace,
   Vr,
@@ -44,7 +44,7 @@ import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 const json = {
   nl: loadJsonFromDataFile<Nl>('NL.json'),
   vrCollection: loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'),
-  gmCollection: loadJsonFromDataFile<Municipalities>('GM_COLLECTION.json'),
+  gmCollection: loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
   inCollection: loadJsonFromDataFile<InCollection>(
     'IN_COLLECTION.json',
     undefined,
@@ -235,9 +235,9 @@ export function loadAndSortVrData(vrcode: string) {
  * be added to the output
  *
  */
-export function selectGmPageMetricData<
-  T extends keyof Municipal = GmPageMetricNames
->(...additionalMetrics: T[]) {
+export function selectGmPageMetricData<T extends keyof Gm = GmPageMetricNames>(
+  ...additionalMetrics: T[]
+) {
   return selectGmData(...[...gmPageMetricNames, ...additionalMetrics]);
 }
 
@@ -245,15 +245,13 @@ export function selectGmPageMetricData<
  * This method selects only the specified metric properties from the municipal data
  *
  */
-export function selectGmData<T extends keyof Municipal = never>(
-  ...metrics: T[]
-) {
+export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, gmData.data[p]),
-      {} as Pick<Municipal, T>
+      {} as Pick<Gm, T>
     );
 
     return { selectedGmData, municipalityName: gmData.municipalityName };
@@ -267,7 +265,7 @@ export function getGmData(context: GetStaticPropsContext) {
     throw Error('No valid gmcode found in context');
   }
 
-  const data = loadJsonFromDataFile<Municipal>(`${code}.json`);
+  const data = loadJsonFromDataFile<Gm>(`${code}.json`);
 
   const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
 
@@ -280,7 +278,7 @@ const NOOP = () => null;
 
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
   vr?: (collection: VrCollection) => T1;
-  gm?: (collection: Municipalities) => T2;
+  gm?: (collection: GmCollection) => T2;
   in?: (collection: InCollection) => T3;
 }) {
   return () => {

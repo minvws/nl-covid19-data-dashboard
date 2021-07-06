@@ -1,5 +1,5 @@
 import {
-  Municipal,
+  Gm,
   Nl,
   sortTimeSeriesInDataInPlace,
   Vr,
@@ -29,11 +29,7 @@ declare global {
        * @param pageName
        * @param gmcode
        */
-      beforeMunicipalTests(
-        pageName: string,
-        gmcode?: string,
-        prefix?: string
-      ): void;
+      beforeGmTests(pageName: string, gmcode?: string, prefix?: string): void;
       /**
        * Fixture loading and page navigation for national page tests
        *
@@ -90,11 +86,11 @@ Cypress.Commands.add('beforeGeneralTests', (pageName: string) => {
 });
 
 Cypress.Commands.add(
-  'beforeMunicipalTests',
+  'beforeGmTests',
   (pageName: string, gmcode = 'GM0363', prefix = '') => {
     cy.swallowResizeObserverError();
 
-    cy.fixture<Municipal>(`${gmcode}.json`)
+    cy.fixture<Gm>(`${gmcode}.json`)
       .as('municipalData')
       .visit(`${prefix}/gemeente/${gmcode}/${pageName}`);
 
