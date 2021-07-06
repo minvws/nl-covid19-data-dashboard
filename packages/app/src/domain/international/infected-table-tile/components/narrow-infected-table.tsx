@@ -72,12 +72,29 @@ function ItemRow({ item, highestAverage, countryNames }: itemRowProps) {
     <Box
       borderBottom="1px solid"
       borderBottomColor="silver"
+      py={3}
       px={2}
+      spacing={1}
       backgroundColor={
         item.country_code === 'NLD' ? colors.tileGray : undefined
       }
     >
-      <InlineText fontWeight="bold">
+      <InlineText
+        fontWeight="bold"
+        css={css({
+          display: 'flex',
+          alignItems: 'center',
+        })}
+      >
+        <img
+          aria-hidden
+          src={`/icons/flags/${item.country_code.toLowerCase()}.svg`}
+          width="17"
+          height="13"
+          css={css({
+            mr: 2,
+          })}
+        />
         {countryNames[item.country_code.toLocaleLowerCase()]}
       </InlineText>
       <Box display="flex">

@@ -129,7 +129,20 @@ function TableRow({ item, highestAverage, countryNames }: tableRowProps) {
       >
         <InlineText
           fontWeight={item.country_code === 'NLD' ? 'bold' : undefined}
+          css={css({
+            display: 'flex',
+            alignItems: 'center',
+          })}
         >
+          <img
+            aria-hidden
+            src={`/icons/flags/${item.country_code.toLowerCase()}.svg`}
+            width="17"
+            height="13"
+            css={css({
+              mr: 2,
+            })}
+          />
           {countryNames[item.country_code.toLocaleLowerCase()]}
         </InlineText>
       </Cell>
