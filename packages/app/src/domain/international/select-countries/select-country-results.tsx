@@ -24,6 +24,7 @@ export function SelectCountriesResults() {
     <StyledSelectCountriesResults
       id={id}
       role="listbox"
+      aria-multiselectable="true"
       onPointerDown={() => setHasHitFocus(true)}
     >
       <StyledCountriesList>
