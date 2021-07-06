@@ -28,6 +28,8 @@ export function HighlightsTile(props: HighlightsTileProps) {
   const { weeklyHighlight, highlights, showWeeklyHighlight } = props;
   const breakpoints = useBreakpoints();
 
+  console.log(showWeeklyHighlight);
+
   return (
     <Box
       display="flex"
@@ -49,17 +51,19 @@ export function HighlightsTile(props: HighlightsTileProps) {
           />
         </ArticleBox>
       )}
-      {highlights.map((item, index) => (
-        <ArticleBox key={index}>
-          <HighlightTeaser
-            cover={item.cover}
-            href={item.href}
-            label={item.label}
-            title={item.title}
-            category={item.category}
-          />
-        </ArticleBox>
-      ))}
+      {highlights
+        .map((item, index) => (
+          <ArticleBox key={index}>
+            <HighlightTeaser
+              cover={item.cover}
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              category={item.category}
+            />
+          </ArticleBox>
+        ))
+        .slice(0, showWeeklyHighlight ? 2 : 3)}
     </Box>
   );
 }
