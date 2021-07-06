@@ -38,14 +38,14 @@ interface SelectCountriesProps {
   countryOptions: CountryOption[];
   children: (selectedCountries: CountryCode[], colors: string[]) => ReactNode;
   limit?: number;
-  alwaysSelected: CountryCode[];
+  alwaysSelectedCodes: CountryCode[];
 }
 
 export function SelectCountries({
   countryOptions,
   children,
   limit,
-  alwaysSelected,
+  alwaysSelectedCodes,
 }: SelectCountriesProps) {
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>([]);
 
@@ -66,12 +66,12 @@ export function SelectCountries({
 
   const countries: CountryOption[] = useMemo(() => {
     return countryOptions
-      .filter((x) => !alwaysSelected.includes(x.code))
+      .filter((x) => !alwaysSelectedCodes.includes(x.code))
       .map((countryOption) => ({
         ...countryOption,
         isSelected: selectedCountries.includes(countryOption.code),
       }));
-  }, [countryOptions, selectedCountries, alwaysSelected]);
+  }, [countryOptions, selectedCountries, alwaysSelectedCodes]);
 
   const selectOptions = selectedCountries.map((countryCode, index) => ({
     metricProperty: countryCode,
@@ -91,7 +91,7 @@ export function SelectCountries({
             limit={limit}
           />
         </InputItem>
-        {alwaysSelected.map((countryCode) => (
+        {alwaysSelectedCodes.map((countryCode) => (
           <AlwaysSelectedItem key={countryCode}>
             {countryOptions.find((x) => x.code === countryCode)?.name}
             <Line color={colors.data.neutral} />
