@@ -4,7 +4,8 @@
  * result of text changes via the CLI.
  */
 import meow from 'meow';
-import path from 'path';
+import prompts from 'prompts';
+import { getLocalMutations } from './logic';
 import { exportLokalizeTexts } from './logic/export';
 
 const cli = meow(
@@ -15,9 +16,11 @@ const cli = meow(
     Options
       --drafts Include draft documents
       --dataset Define dataset to export, default is "development"
+      --production Export keys without document-ids in the keys
 
     Examples
       $ lokalize:export --drafts --dataset=development
+      $ lokalize:export --dataset=development --production
 `,
   {
     flags: {
@@ -28,6 +31,9 @@ const cli = meow(
         type: 'string',
         default: 'development',
       },
+      production: {
+        type: 'boolean',
+      },
     },
   }
 );
@@ -35,7 +41,30 @@ const cli = meow(
 (async function run() {
   const dataset = cli.flags.dataset;
 
-  await exportLokalizeTexts(dataset, cli.flags.drafts);
+  const { mutations } = await getLocalMutations();
+  const hasMutations =
+    Object.keys({ ...mutations.add, ...mutations.delete, ...mutations.move })
+      .length > 0;
+
+  if (hasMutations && !cli.flags.production) {
+    const response = await prompts([
+      {
+        type: 'confirm',
+        name: 'isConfirmed',
+        message: `
+There are local changes. Are you sure you want to overwrite these with an export?
+${JSON.stringify(mutations, null, 2)}
+`.trim(),
+        initial: false,
+      },
+    ]);
+
+    if (!response.isConfirmed) {
+      process.exit(0);
+    }
+  }
+
+  await exportLokalizeTexts(dataset, cli.flags.drafts, !cli.flags.production);
 
   console.log(`Export dataset "${dataset}" completed`);
 })().catch((err) => {

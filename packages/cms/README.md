@@ -66,6 +66,26 @@ part of the repository. Therefore you will regularly need to run `yarn lokalize:
 Sanity dataset. For Typescript these JSONs are a static data source, so it will
 complain when they do not contain all the keys that are used in the code.
 
+#### Exports have keys with document ids
+
+By default the export command will write document ids to every key in the json.
+This id is necessary to detect local additions/deletions/moves in the
+json file. The `--production` flag will make sure the id's are not part of the
+keys.
+
+With document ids a key in the json will look like `some_key__@__{document_id}`,
+but that wouldn't work with our codebase because that would read the key
+`some_key`. To bypass this, runtime errors are preventend by stripping all
+document ids from the keys on load. For the typescript compiler a SiteText
+interface is created on every export. Also any local update to `nl_export.json`
+will result in an updated SiteText interface.
+
+### Sync local changes
+
+The easiest way of adding/deleting/moving keys is by mutating the
+`nl_export.json` file. Note that this json must include document ids as part of
+the leaf keys. This is enabled by default.
+
 ### Adding Texts
 
 You can run `yarn lokalize:add` from the repository root to add a text to the

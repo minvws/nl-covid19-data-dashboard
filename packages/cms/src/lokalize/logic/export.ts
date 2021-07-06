@@ -4,7 +4,7 @@
  * result of text changes via the CLI.
  */
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { createFlatTexts, removeIdFromKeys } from '@corona-dashboard/common';
+import { createFlatTexts, removeIdsFromKeys } from '@corona-dashboard/common';
 import flatten, { unflatten } from 'flat';
 import fs from 'fs';
 import mapValues from 'lodash/mapValues';
@@ -32,8 +32,13 @@ export const localeCacheDirectory = path.resolve(
 
 export async function exportLokalizeTexts(
   dataset?: string,
-  includeDrafts?: boolean,
-  appendDocumentIdToKey = process.env.NODE_ENV !== 'production'
+  includeDrafts = false,
+  /**
+   * The production mode will ensure two things:
+   * - do not validate there are no local changes before overwriting the exports
+   * - do not include document id's as part of the lokalize keys
+   */
+  appendDocumentIdToKey = false
 ) {
   const client = getClient(dataset);
   /**
@@ -100,7 +105,7 @@ export async function generateTypes() {
     )
   ) as Record<string, string>;
 
-  const siteTextObj = removeIdFromKeys(mapValues(data, () => '@string'));
+  const siteTextObj = removeIdsFromKeys(mapValues(data, () => '@string'));
   const siteTextString = JSON.stringify(siteTextObj, null, 2).replace(
     /\"\@string\"/g,
     'string'

@@ -1,12 +1,12 @@
-import { removeIdFromKeys } from '@corona-dashboard/common';
+import { ID_PREFIX, removeIdsFromKeys } from '@corona-dashboard/common';
 import enRaw from './en_export.json';
 import nlRaw from './nl_export.json';
 import { SiteText } from './site-text';
 
-const hasIdsInKeys = Object.keys(nlRaw).some((x) => x.includes('__@'));
+const hasIdsInKeys = JSON.stringify(nlRaw).includes(ID_PREFIX);
 
-const nl = removeIdsFromKeys(nlRaw);
-const en = removeIdsFromKeys(enRaw);
+const nl = cleanRaw<SiteText>(nlRaw);
+const en = cleanRaw<SiteText>(enRaw);
 
 export const languages = { nl, en };
 
@@ -14,6 +14,6 @@ export type { SiteText } from './site-text';
 export type Languages = typeof languages;
 export type LanguageKey = keyof Languages;
 
-function removeIdsFromKeys<T>(obj: T) {
-  return (hasIdsInKeys ? removeIdFromKeys(obj) : obj) as unknown as SiteText;
+function cleanRaw<T>(obj: unknown) {
+  return (hasIdsInKeys ? removeIdsFromKeys(obj) : obj) as T;
 }

@@ -3,6 +3,11 @@ import fs from 'fs';
 import { EOL } from 'os';
 import { parse } from '@fast-csv/parse';
 import { sortBy } from 'lodash';
+import {
+  fetchLocalTextsFlatten,
+  fetchLocalTextsFromCacheFlatten,
+} from './fetch';
+import { ID_PREFIX } from '@corona-dashboard/common';
 
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 const HEADER = `timestamp,action,key${EOL}`;
@@ -131,4 +136,43 @@ export function collapseTextMutations(mutations: TextMutation[]) {
         timestamp,
       } as TextMutation)
   );
+}
+
+export async function getLocalMutations() {
+  const oldKeys = Object.keys(await fetchLocalTextsFromCacheFlatten());
+  const newKeys = Object.keys(await fetchLocalTextsFlatten());
+
+  const removedKeyIdPairs = oldKeys
+    .filter((key) => !newKeys.includes(key))
+    .map(parseKeyWithId);
+
+  const addedKeyIdPairs = newKeys
+    .filter((key) => !oldKeys.includes(key))
+    .map(parseKeyWithId);
+
+  const mutations: Record<'add' | 'move' | 'delete', Record<string, string>> = {
+    add: {},
+    move: {},
+    delete: {},
+  };
+
+  removedKeyIdPairs.forEach(([key, id]) => {
+    mutations.delete[id] = key;
+  });
+
+  addedKeyIdPairs.forEach(([key, id]) => {
+    if (mutations.delete[id]) {
+      delete mutations.delete[id];
+      mutations.move[id] = key;
+    } else {
+      mutations.add[key] = key;
+    }
+  });
+
+  return { mutations, removedKeyIdPairs, addedKeyIdPairs };
+}
+
+function parseKeyWithId(keyWithId: string) {
+  const [key, id] = keyWithId.split(ID_PREFIX);
+  return [key, id] as [key: string, id: string];
 }
