@@ -1,8 +1,8 @@
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import {
-  MunicipalDifference,
-  Municipalities,
-  NationalDifference,
+  GmCollection,
+  GmDifference,
+  NlDifference,
   VrCollection,
   VrDifference,
 } from './data';
@@ -68,19 +68,19 @@ export type MetricKeys<T> = keyof Omit<
   'last_generated' | 'proto_name' | 'name' | 'code'
 >;
 
-export type MunicipalitiesMetricName = MetricKeys<Municipalities>;
+export type GmCollectionMetricName = MetricKeys<GmCollection>;
 export type VrCollectionMetricName = MetricKeys<VrCollection>;
 
 export type DifferenceKey =
-  | keyof NationalDifference
+  | keyof NlDifference
   | keyof VrDifference
-  | keyof MunicipalDifference;
+  | keyof GmDifference;
 
 export interface VrProperties {
   vrcode: string;
   vrname: string;
 }
-export interface MunicipalityProperties {
+export interface GmProperties {
   gemnaam: string;
   gemcode: string;
   gmcode: string;
@@ -93,10 +93,7 @@ export type EuropeGeoJSON = FeatureCollection<
   EuropeGeoProperties
 >;
 
-export type MunicipalGeoJSON = FeatureCollection<
-  MultiPolygon,
-  MunicipalityProperties
->;
+export type MunicipalGeoJSON = FeatureCollection<MultiPolygon, GmProperties>;
 
 export type VrGeoJSON = FeatureCollection<MultiPolygon, VrProperties>;
 

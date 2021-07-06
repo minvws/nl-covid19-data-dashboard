@@ -1,8 +1,8 @@
 import {
   DifferenceDecimal,
   DifferenceInteger,
-  Municipal,
-  National,
+  Gm,
+  Nl,
   Vr,
 } from '@corona-dashboard/common';
 import { get } from 'lodash';
@@ -14,27 +14,27 @@ import { InlineDifference } from './difference-indicator';
 import { RelativeDate } from './relative-date';
 import { Text } from './typography';
 
-type DataKeys = keyof National | keyof Vr | keyof Municipal;
+type DataKeys = keyof Nl | keyof Vr | keyof Gm;
 
 /**
- * This type ensures that if a metricName of type keyof National is assigned,
- * the data property HAS to be of type a Pick of National that includes the
+ * This type ensures that if a metricName of type keyof Nl is assigned,
+ * the data property HAS to be of type a Pick of Nl that includes the
  * 'difference' key plus the key that was assigned to metricName.
  *
  * So, if metricName is 'vaccine_stock' then data needs to be assigned with
- * Pick<National, 'difference'|'vaccine_stock'>
+ * Pick<Nl, 'difference'|'vaccine_stock'>
  *
  * @TODO These types don't seem to work, as we need to use Lodash get plus
  * casting to get to them. Normal accessors give type errors. Lodash get is very
  * forgiving because it will work on any data structure.
  *
  */
-type DataFile<T> = T extends keyof National
-  ? Pick<National, 'difference' | T>
+type DataFile<T> = T extends keyof Nl
+  ? Pick<Nl, 'difference' | T>
   : T extends keyof Vr
   ? Pick<Vr, 'difference' | T>
-  : T extends keyof Municipal
-  ? Pick<Municipal, 'difference' | T>
+  : T extends keyof Gm
+  ? Pick<Gm, 'difference' | T>
   : never;
 interface DataDrivenTextProps<T extends DataKeys, K = DataFile<T>> {
   data: K;

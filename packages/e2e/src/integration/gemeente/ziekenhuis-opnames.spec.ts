@@ -1,11 +1,11 @@
-import { MunicipalContext } from '~/integration/types';
+import { GmContext } from '~/integration/types';
 
 context('Gemeente - Ziekenhuis opnames', () => {
   before(() => {
-    cy.beforeMunicipalTests('ziekenhuis-opnames');
+    cy.beforeGmTests('ziekenhuis-opnames');
   });
 
-  it('Should show the correct KPI values', function (this: MunicipalContext) {
+  it('Should show the correct KPI values', function (this: GmContext) {
     const lastValue = this.municipalData.hospital_nice.last_value;
 
     const kpiTestInfo = {

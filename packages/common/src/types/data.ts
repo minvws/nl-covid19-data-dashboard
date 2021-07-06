@@ -4,18 +4,18 @@
 * and run 'yarn generate-typescript' to regenerate this file.
 */
 
-export interface Municipal {
+export interface Gm {
   last_generated: string;
   proto_name: string;
   name: string;
   code: string;
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
-  difference: MunicipalDifference;
-  hospital_nice: MunicipalHospitalNice;
-  tested_overall: MunicipalTestedOverall;
-  sewer: MunicipalSewer;
-  sewer_per_installation?: MunicipalSewerPerInstallation;
+  difference: GmDifference;
+  hospital_nice: GmHospitalNice;
+  tested_overall: GmTestedOverall;
+  sewer: GmSewer;
+  sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
 }
 export interface GmStaticValues {
@@ -32,7 +32,7 @@ export interface GmDeceasedRivmValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalDifference {
+export interface GmDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
@@ -51,33 +51,33 @@ export interface DifferenceInteger {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface MunicipalHospitalNice {
-  values: MunicipalHospitalNiceValue[];
-  last_value: MunicipalHospitalNiceValue;
+export interface GmHospitalNice {
+  values: GmHospitalNiceValue[];
+  last_value: GmHospitalNiceValue;
 }
-export interface MunicipalHospitalNiceValue {
+export interface GmHospitalNiceValue {
   date_unix: number;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalTestedOverall {
-  values: MunicipalTestedOverallValue[];
-  last_value: MunicipalTestedOverallValue;
+export interface GmTestedOverall {
+  values: GmTestedOverallValue[];
+  last_value: GmTestedOverallValue;
 }
-export interface MunicipalTestedOverallValue {
+export interface GmTestedOverallValue {
   date_unix: number;
   infected: number;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
   date_of_insertion_unix: number;
 }
-export interface MunicipalSewer {
-  values: MunicipalSewerValue[];
-  last_value: MunicipalSewerValue;
+export interface GmSewer {
+  values: GmSewerValue[];
+  last_value: GmSewerValue;
 }
-export interface MunicipalSewerValue {
+export interface GmSewerValue {
   date_start_unix: number;
   date_end_unix: number;
   average: number;
@@ -86,15 +86,15 @@ export interface MunicipalSewerValue {
   total_installation_count: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalSewerPerInstallation {
+export interface GmSewerPerInstallation {
   values: MunicipalSewerPerInstallationInstallation[];
 }
 export interface MunicipalSewerPerInstallationInstallation {
   rwzi_awzi_name: string;
-  values: MunicipalSewerPerInstallationValue[];
-  last_value: MunicipalSewerPerInstallationValue;
+  values: GmSewerPerInstallationValue[];
+  last_value: GmSewerPerInstallationValue;
 }
-export interface MunicipalSewerPerInstallationValue {
+export interface GmSewerPerInstallationValue {
   date_unix: number;
   rna_normalized: number;
   date_of_insertion_unix: number;
@@ -112,30 +112,30 @@ export interface GmVaccineCoverageValue {
   date_of_insertion_unix: number;
 }
 
-export interface Municipalities {
+export interface GmCollection {
   last_generated: string;
   proto_name: "GM_COLLECTION";
   name: string;
   code: string;
-  hospital_nice: MunicipalitiesHospitalNice[];
-  tested_overall: MunicipalitiesTestedOverall[];
-  sewer: MunicipalitiesSewer[];
+  hospital_nice: GmCollectionHospitalNice[];
+  tested_overall: GmCollectionTestedOverall[];
+  sewer: GmCollectionSewer[];
 }
-export interface MunicipalitiesHospitalNice {
+export interface GmCollectionHospitalNice {
   date_unix: number;
   gmcode: string;
   admissions_on_date_of_admission: number;
   admissions_on_date_of_reporting: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalitiesTestedOverall {
+export interface GmCollectionTestedOverall {
   date_unix: number;
   gmcode: string;
   infected_per_100k: number;
   infected: number;
   date_of_insertion_unix: number;
 }
-export interface MunicipalitiesSewer {
+export interface GmCollectionSewer {
   date_start_unix: number;
   date_end_unix: number;
   gmcode: string;
@@ -179,35 +179,35 @@ export interface InTestedOverall {
   date_of_insertion_unix: number;
 }
 
-export interface National {
+export interface Nl {
   last_generated: string;
   proto_name: "NL";
   name: string;
   code: string;
-  difference: NationalDifference;
-  doctor: NationalDoctor;
+  difference: NlDifference;
+  doctor: NlDoctor;
   g_number: NlGNumber;
-  infectious_people: NationalInfectiousPeople;
-  intensive_care_nice: NationalIntensiveCareNice;
+  infectious_people: NlInfectiousPeople;
+  intensive_care_nice: NlIntensiveCareNice;
   intensive_care_nice_per_age_group: NlIntensiveCareNicePerAgeGroup;
-  tested_overall: NationalTestedOverall;
+  tested_overall: NlTestedOverall;
   tested_per_age_group: NlTestedPerAgeGroup;
-  reproduction: NationalReproduction;
-  sewer: NationalSewer;
-  hospital_nice: NationalHospitalNice;
+  reproduction: NlReproduction;
+  sewer: NlSewer;
+  hospital_nice: NlHospitalNice;
   hospital_nice_per_age_group: NlHospitalNicePerAgeGroup;
-  hospital_lcps: NationalHospitalLcps;
-  intensive_care_lcps: NationalIntensiveCareLcps;
+  hospital_lcps: NlHospitalLcps;
+  intensive_care_lcps: NlIntensiveCareLcps;
   tested_ggd: NlTestedGgd;
-  nursing_home: NationalNursingHome;
-  disability_care: NationalDisabilityCare;
-  behavior: NationalBehavior;
+  nursing_home: NlNursingHome;
+  disability_care: NlDisabilityCare;
+  behavior: NlBehavior;
   behavior_per_age_group?: NlBehaviorPerAgeGroup;
   behavior_get_tested_support_per_age_group?: NlBehaviorGetTestedSupportPerAgeGroup;
-  deceased_rivm: NationalDeceasedRivm;
+  deceased_rivm: NlDeceasedRivm;
   deceased_rivm_per_age_group: NlDeceasedRivmPerAgeGroup;
-  deceased_cbs: NationalDeceasedCbs;
-  elderly_at_home: NationalElderlyAtHome;
+  deceased_cbs: NlDeceasedCbs;
+  elderly_at_home: NlElderlyAtHome;
   vaccine_vaccinated_or_support: NlVaccineVaccinatedOrSupport;
   corona_melder_app_download: NlCoronaMelderAppDownload;
   corona_melder_app_warning: NlCoronaMelderAppWarning;
@@ -228,7 +228,7 @@ export interface National {
   vaccine_stock: NlVaccineStock;
   variants?: NlVariants;
 }
-export interface NationalDifference {
+export interface NlDifference {
   tested_overall__infected_per_100k_moving_average: DifferenceDecimal;
   tested_overall__infected_moving_average: DifferenceDecimal;
   tested_ggd__tested_total_moving_average: DifferenceDecimal;
@@ -272,11 +272,11 @@ export interface DifferenceInteger {
   old_date_unix: number;
   new_date_unix: number;
 }
-export interface NationalDoctor {
-  values: NationalDoctorValue[];
-  last_value: NationalDoctorValue;
+export interface NlDoctor {
+  values: NlDoctorValue[];
+  last_value: NlDoctorValue;
 }
-export interface NationalDoctorValue {
+export interface NlDoctorValue {
   date_start_unix: number;
   date_end_unix: number;
   covid_symptoms_per_100k: number;
@@ -293,22 +293,22 @@ export interface NlGNumberValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalInfectiousPeople {
-  values: NationalInfectiousPeopleValue[];
-  last_value: NationalInfectiousPeopleValue;
+export interface NlInfectiousPeople {
+  values: NlInfectiousPeopleValue[];
+  last_value: NlInfectiousPeopleValue;
 }
-export interface NationalInfectiousPeopleValue {
+export interface NlInfectiousPeopleValue {
   margin_low: number;
   estimate: number | null;
   margin_high: number;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalIntensiveCareNice {
-  values: NationalIntensiveCareNiceValue[];
-  last_value: NationalIntensiveCareNiceValue;
+export interface NlIntensiveCareNice {
+  values: NlIntensiveCareNiceValue[];
+  last_value: NlIntensiveCareNiceValue;
 }
-export interface NationalIntensiveCareNiceValue {
+export interface NlIntensiveCareNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
@@ -334,11 +334,11 @@ export interface NlIntensiveCareNicePerAgeGroupValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalTestedOverall {
-  values: NationalTestedOverallValue[];
-  last_value: NationalTestedOverallValue;
+export interface NlTestedOverall {
+  values: NlTestedOverallValue[];
+  last_value: NlTestedOverallValue;
 }
-export interface NationalTestedOverallValue {
+export interface NlTestedOverallValue {
   infected: number;
   infected_per_100k: number;
   infected_per_100k_moving_average: number | null;
@@ -364,22 +364,22 @@ export interface NlTestedPerAgeGroupValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalReproduction {
-  values: NationalReproductionValue[];
-  last_value: NationalReproductionValue;
+export interface NlReproduction {
+  values: NlReproductionValue[];
+  last_value: NlReproductionValue;
 }
-export interface NationalReproductionValue {
+export interface NlReproductionValue {
   index_low: number | null;
   index_average: number | null;
   index_high: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalSewer {
-  values: NationalSewerValue[];
-  last_value: NationalSewerValue;
+export interface NlSewer {
+  values: NlSewerValue[];
+  last_value: NlSewerValue;
 }
-export interface NationalSewerValue {
+export interface NlSewerValue {
   average: number;
   total_number_of_samples: number;
   sampled_installation_count: number;
@@ -388,11 +388,11 @@ export interface NationalSewerValue {
   date_start_unix: number;
   date_end_unix: number;
 }
-export interface NationalHospitalNice {
-  values: NationalHospitalNiceValue[];
-  last_value: NationalHospitalNiceValue;
+export interface NlHospitalNice {
+  values: NlHospitalNiceValue[];
+  last_value: NlHospitalNiceValue;
 }
-export interface NationalHospitalNiceValue {
+export interface NlHospitalNiceValue {
   admissions_on_date_of_admission: number;
   admissions_on_date_of_admission_moving_average: number | null;
   admissions_on_date_of_reporting: number;
@@ -418,20 +418,20 @@ export interface NlHospitalNicePerAgeGroupValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalHospitalLcps {
-  values: NationalHospitalLcpsValue[];
-  last_value: NationalHospitalLcpsValue;
+export interface NlHospitalLcps {
+  values: NlHospitalLcpsValue[];
+  last_value: NlHospitalLcpsValue;
 }
-export interface NationalHospitalLcpsValue {
+export interface NlHospitalLcpsValue {
   beds_occupied_covid: number | null;
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalIntensiveCareLcps {
-  values: NationalIntensiveCareLcpsValue[];
-  last_value: NationalIntensiveCareLcpsValue;
+export interface NlIntensiveCareLcps {
+  values: NlIntensiveCareLcpsValue[];
+  last_value: NlIntensiveCareLcpsValue;
 }
-export interface NationalIntensiveCareLcpsValue {
+export interface NlIntensiveCareLcpsValue {
   beds_occupied_covid: number | null;
   beds_occupied_non_covid: number | null;
   beds_occupied_covid_percentage: number | null;
@@ -452,11 +452,11 @@ export interface NlTestedGgdValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalNursingHome {
-  values: NationalNursingHomeValue[];
-  last_value: NationalNursingHomeValue;
+export interface NlNursingHome {
+  values: NlNursingHomeValue[];
+  last_value: NlNursingHomeValue;
 }
-export interface NationalNursingHomeValue {
+export interface NlNursingHomeValue {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
@@ -467,11 +467,11 @@ export interface NationalNursingHomeValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalDisabilityCare {
-  values: NationalDisabilityCareValue[];
-  last_value: NationalDisabilityCareValue;
+export interface NlDisabilityCare {
+  values: NlDisabilityCareValue[];
+  last_value: NlDisabilityCareValue;
 }
-export interface NationalDisabilityCareValue {
+export interface NlDisabilityCareValue {
   newly_infected_people: number;
   newly_infected_people_moving_average: number | null;
   deceased_daily: number;
@@ -482,11 +482,11 @@ export interface NationalDisabilityCareValue {
   date_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalBehavior {
-  values: NationalBehaviorValue[];
-  last_value: NationalBehaviorValue;
+export interface NlBehavior {
+  values: NlBehaviorValue[];
+  last_value: NlBehaviorValue;
 }
-export interface NationalBehaviorValue {
+export interface NlBehaviorValue {
   number_of_participants: number;
   curfew_compliance: number | null;
   curfew_compliance_trend: ("up" | "down" | "equal") | null;
@@ -577,11 +577,11 @@ export interface NlBehaviorGetTestedSupportPerAgeGroupValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalDeceasedRivm {
-  values: NationalDeceasedRivmValue[];
-  last_value: NationalDeceasedRivmValue;
+export interface NlDeceasedRivm {
+  values: NlDeceasedRivmValue[];
+  last_value: NlDeceasedRivmValue;
 }
-export interface NationalDeceasedRivmValue {
+export interface NlDeceasedRivmValue {
   covid_daily: number;
   covid_daily_moving_average: number | null;
   covid_total: number;
@@ -599,11 +599,11 @@ export interface NlDeceasedRivmPerAgeGroupValue {
   date_of_insertion_unix: number;
   [k: string]: unknown;
 }
-export interface NationalDeceasedCbs {
-  values: NationalDeceasedCbsValue[];
-  last_value: NationalDeceasedCbsValue;
+export interface NlDeceasedCbs {
+  values: NlDeceasedCbsValue[];
+  last_value: NlDeceasedCbsValue;
 }
-export interface NationalDeceasedCbsValue {
+export interface NlDeceasedCbsValue {
   registered: number;
   expected: number;
   expected_min: number;
@@ -612,11 +612,11 @@ export interface NationalDeceasedCbsValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
-export interface NationalElderlyAtHome {
-  values: NationalElderlyAtHomeValue[];
-  last_value: NationalElderlyAtHomeValue;
+export interface NlElderlyAtHome {
+  values: NlElderlyAtHomeValue[];
+  last_value: NlElderlyAtHomeValue;
 }
-export interface NationalElderlyAtHomeValue {
+export interface NlElderlyAtHomeValue {
   positive_tested_daily: number;
   positive_tested_daily_moving_average: number | null;
   positive_tested_daily_per_100k: number;

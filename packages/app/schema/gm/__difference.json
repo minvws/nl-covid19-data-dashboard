@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "municipal_difference",
+  "title": "gm_difference",
   "type": "object",
   "properties": {
     "tested_overall__infected_per_100k_moving_average": {

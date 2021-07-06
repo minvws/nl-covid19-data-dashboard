@@ -1,6 +1,6 @@
 import {
-  MunicipalityProperties,
-  MunicipalSewerValue,
+  GmProperties,
+  GmSewerValue,
   VrProperties,
   VrSewerValue,
 } from '@corona-dashboard/common';
@@ -231,9 +231,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.gm.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={(
-                  context: MunicipalityProperties & MunicipalSewerValue
-                ) => <SewerMunicipalTooltip context={context} />}
+                tooltipContent={(context: GmProperties & GmSewerValue) => (
+                  <SewerMunicipalTooltip context={context} />
+                )}
               />
             ) : (
               <SafetyRegionChoropleth
