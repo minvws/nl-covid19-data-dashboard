@@ -1,6 +1,6 @@
 import {
-  RegionsDisabilityCare,
-  SafetyRegionProperties,
+  VrCollectionDisabilityCare,
+  VrProperties,
 } from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
@@ -232,7 +232,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               metricName="disability_care"
               metricProperty="infected_locations_percentage"
               tooltipContent={(
-                context: SafetyRegionProperties & RegionsDisabilityCare
+                context: VrProperties & VrCollectionDisabilityCare
               ) => (
                 <DisablityInfectedLocationsRegionalTooltip context={context} />
               )}

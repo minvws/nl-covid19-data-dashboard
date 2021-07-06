@@ -1,10 +1,10 @@
 import {
-  RegionsNursingHome,
-  SafetyRegionProperties,
+  VrCollectionNursingHome,
+  VrProperties,
 } from '@corona-dashboard/common';
-import { InlineText } from '~/components/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { regionThresholds } from '../../region-thresholds';
@@ -12,7 +12,7 @@ import { regionThresholds } from '../../region-thresholds';
 export function InfectedLocationsRegionalTooltip({
   context,
 }: {
-  context: SafetyRegionProperties & RegionsNursingHome;
+  context: VrProperties & VrCollectionNursingHome;
 }) {
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();

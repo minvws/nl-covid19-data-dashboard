@@ -1,4 +1,7 @@
-import { isSameDay, isToday, isYesterday, subDays } from 'date-fns';
+import isSameDay from 'date-fns/isSameDay';
+import isToday from 'date-fns/isToday';
+import isYesterday from 'date-fns/isYesterday';
+import subDays from 'date-fns/subDays';
 import { isDefined } from 'ts-is-present';
 import { assert } from '~/utils';
 // TypeScript is missing some types for `Intl.DateTimeFormat`.

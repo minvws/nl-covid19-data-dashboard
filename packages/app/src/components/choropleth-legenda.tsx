@@ -29,7 +29,7 @@ export function ChoroplethLegenda({
         {thresholds.map(({ color, threshold, label, endLabel }, index) => {
           const isFirst = index === 0;
           const isLast = index === thresholds.length - 1;
-          const displayLabel = itemWidth > 40 || index % 2 === 0;
+          const displayLabel = itemWidth > 35 || index % 2 === 0;
 
           return (
             <Item

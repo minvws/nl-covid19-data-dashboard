@@ -1,27 +1,27 @@
-import { set } from 'lodash';
-import { useMemo } from 'react';
-import { Regions } from '@corona-dashboard/common';
-import { assert } from '~/utils/assert';
 import {
   Dictionary,
-  RegionGeoJSON,
-  RegionsMetricName,
-  SafetyRegionProperties,
+  VrCollection,
+  VrCollectionMetricName,
+  VrGeoJSON,
+  VrProperties,
 } from '@corona-dashboard/common';
+import { set } from 'lodash';
+import { useMemo } from 'react';
+import { assert } from '~/utils/assert';
 import { DataValue } from './use-municipality-data';
 
-interface RegionMetricValue extends SafetyRegionProperties {
+interface VrMetricValue extends VrProperties {
   [key: string]: unknown;
 }
 
-interface RegionChoroplethValue extends RegionMetricValue {
+interface VrChoroplethValue extends VrMetricValue {
   __color_value: number | null;
 }
 
-export type GetRegionDataFunctionType = (id: string) => RegionChoroplethValue;
+export type GetVrDataFunctionType = (id: string) => VrChoroplethValue;
 
-type UseRegionDataReturnValue = {
-  getChoroplethValue: GetRegionDataFunctionType;
+type UseVrDataReturnValue = {
+  getChoroplethValue: GetVrDataFunctionType;
   hasData: boolean;
   values: DataValue[];
 };
@@ -42,12 +42,12 @@ type UseRegionDataReturnValue = {
  * @param metricProperty
  */
 
-export function useSafetyRegionData<K extends RegionsMetricName>(
-  featureCollection: RegionGeoJSON,
+export function useSafetyRegionData<K extends VrCollectionMetricName>(
+  featureCollection: VrGeoJSON,
   metricName: K,
   metricProperty: string,
-  data: Pick<Regions, K>
-): UseRegionDataReturnValue {
+  data: Pick<VrCollection, K>
+): UseVrDataReturnValue {
   return useMemo(() => {
     if (!data) {
       return {
@@ -64,17 +64,17 @@ export function useSafetyRegionData<K extends RegionsMetricName>(
       })) ?? [];
 
     const metricForAllRegions = data[metricName] as unknown as
-      | RegionMetricValue[]
+      | VrMetricValue[]
       | undefined;
 
     assert(
       metricForAllRegions,
-      `Missing regions metric data for ${metricName}`
+      `Missing vr_collection metric data for ${metricName}`
     );
 
     const propertyData = featureCollection.features.reduce(
       (acc, feature) => set(acc, feature.properties.vrcode, feature.properties),
-      {} as Record<string, SafetyRegionProperties>
+      {} as Record<string, VrProperties>
     );
 
     const mergedData = metricForAllRegions.reduce((acc, value) => {
@@ -84,7 +84,7 @@ export function useSafetyRegionData<K extends RegionsMetricName>(
 
       if (!feature) return acc;
 
-      const choroplethValue: RegionChoroplethValue = {
+      const choroplethValue: VrChoroplethValue = {
         ...feature?.properties,
         /**
          * To access things like timestamps in the tooltip we simply merge all
@@ -99,7 +99,7 @@ export function useSafetyRegionData<K extends RegionsMetricName>(
       };
 
       return set(acc, value.vrcode, choroplethValue);
-    }, {} as Dictionary<RegionChoroplethValue>);
+    }, {} as Dictionary<VrChoroplethValue>);
 
     const hasData = Object.keys(mergedData).length > 0;
 

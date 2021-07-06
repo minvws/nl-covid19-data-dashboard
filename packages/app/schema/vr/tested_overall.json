@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "regional_tested_overall_value",
+      "title": "vr_tested_overall_value",
       "additionalProperties": false,
       "required": [
         "date_unix",
@@ -31,7 +31,7 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "regional_tested_overall",
+  "title": "vr_tested_overall",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {

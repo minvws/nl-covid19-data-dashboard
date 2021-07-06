@@ -1,7 +1,4 @@
-import {
-  RegionsBehavior,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
+import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
@@ -24,7 +21,7 @@ import {
 interface BehaviorChoroplethsTileProps {
   title: string;
   description: string;
-  data: { behavior: RegionsBehavior[] };
+  data: { behavior: VrCollectionBehavior[] };
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
 }
@@ -51,7 +48,9 @@ export function BehaviorChoroplethsTile({
    * Lastly we remove all the duplicates in the array and add it to all the keys without data
    */
   const idsThatContainNull = Object.keys(firstRegionData)
-    .filter((key) => firstRegionData[key as keyof RegionsBehavior] === null)
+    .filter(
+      (key) => firstRegionData[key as keyof VrCollectionBehavior] === null
+    )
     .map((item) => item.slice(0, item.indexOf('_')))
     .filter((item, pos) => item.indexOf(item) == pos);
 
@@ -90,7 +89,7 @@ export function BehaviorChoroplethsTile({
 }
 
 interface ChoroplethBlockProps {
-  data: { behavior: RegionsBehavior[] };
+  data: { behavior: VrCollectionBehavior[] };
   keysWithoutData: BehaviorIdentifier[];
   behaviorType: 'compliance' | 'support';
   currentId: BehaviorIdentifier;
@@ -142,13 +141,11 @@ function ChoroplethBlock({
             metricProperty={metricProperty}
             minHeight={!isSmallScreen ? 350 : 400}
             noDataFillColor={colors.page}
-            tooltipContent={(
-              context: RegionsBehavior & SafetyRegionProperties
-            ) => {
+            tooltipContent={(context: VrCollectionBehavior & VrProperties) => {
               const currentComplianceValue =
-                `${currentId}_compliance` as keyof RegionsBehavior;
+                `${currentId}_compliance` as keyof VrCollectionBehavior;
               const currentSupportValue =
-                `${currentId}_support` as keyof RegionsBehavior;
+                `${currentId}_support` as keyof VrCollectionBehavior;
 
               // Return null when there is no data available to prevent breaking the application when using tab
               if (keysWithoutData.includes(currentId)) return null;

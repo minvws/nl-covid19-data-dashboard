@@ -1,6 +1,6 @@
 import {
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
+  GmCollectionTestedOverall,
+  GmProperties,
 } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
@@ -244,7 +244,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={(
-                context: MunicipalityProperties & MunicipalitiesTestedOverall
+                context: GmProperties & GmCollectionTestedOverall
               ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>

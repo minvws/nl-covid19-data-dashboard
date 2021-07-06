@@ -122,22 +122,26 @@ const sewerThresholds: ChoroplethThresholdsValue[] = [
   },
   {
     color: colors.data.scale.blue[1],
-    threshold: 50,
+    threshold: 10,
   },
   {
     color: colors.data.scale.blue[2],
-    threshold: 250,
+    threshold: 50,
   },
   {
     color: colors.data.scale.blue[3],
-    threshold: 500,
+    threshold: 100,
   },
   {
     color: colors.data.scale.blue[4],
-    threshold: 750,
+    threshold: 250,
   },
   {
     color: colors.data.scale.blue[5],
+    threshold: 500,
+  },
+  {
+    color: colors.data.scale.blue[6],
     threshold: 1000,
   },
 ];
