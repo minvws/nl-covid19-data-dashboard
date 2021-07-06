@@ -27,7 +27,7 @@ export function NarrowInfectedTable({
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   return (
-    <Box borderBottom="1px solid" borderBottomColor="silver" mb={3}>
+    <Box borderBottom="1px solid" borderBottomColor="silver">
       {data.map((item, index) =>
         inputValue.length === 0 ? (
           isExpanded || index < MAX_COUNTRIES_START ? (
