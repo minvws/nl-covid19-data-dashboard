@@ -7,29 +7,64 @@ import {
   useRef,
 } from 'react';
 import { isDefined } from 'ts-is-present';
+import { EuropeChoroplethProps } from '../choropleth/europe-choropleth';
+import { GmChoroplethProps } from '../choropleth/municipality-choropleth';
+import { VrChoroplethProps } from '../choropleth/safety-region-choropleth';
+import { StackedChartProps } from '../stacked-chart';
+import { TimeSeriesChartProps } from '../time-series-chart';
+import { VerticalBarChartProps } from '../vertical-bar-chart';
 
 type RenderPropsFunction = (renderProps: unknown) => ReactNode;
 
-const chartPropsMap = new Map<string, string[]>();
-chartPropsMap.set('TimeSeriesChart', ['values', 'dataOptions', 'seriesConfig']);
-chartPropsMap.set('SafetyRegionChoropleth', [
-  'data',
-  'metricName',
-  'metricProperty',
-]);
-chartPropsMap.set('MunicipalityChoropleth', [
-  'data',
-  'metricName',
-  'metricProperty',
-]);
-chartPropsMap.set('EuropeChoropleth', ['data', 'metricProperty']);
-chartPropsMap.set('StackedChart', ['values', 'config']);
-chartPropsMap.set('VerticalBarChart', [
-  'values',
-  'seriesConfig',
-  'timeframe',
-  'dataOptions',
-]);
+// I couldn't think of a neater way to typecheck the prop names in the chartPropsMap,
+// any suggestions for a cleaner way are welcome...
+function keyCheck<T>(keys: (keyof T)[]) {
+  return keys;
+}
+
+const chartPropsMap = new Map<string, any[]>();
+chartPropsMap.set(
+  'TimeSeriesChart',
+  keyCheck<TimeSeriesChartProps<any, any>>([
+    'values',
+    'dataOptions',
+    'seriesConfig',
+    'timeframe',
+  ])
+);
+chartPropsMap.set(
+  'SafetyRegionChoropleth',
+  keyCheck<VrChoroplethProps<any, any>>([
+    'data',
+    'metricName',
+    'metricProperty',
+  ])
+);
+chartPropsMap.set(
+  'MunicipalityChoropleth',
+  keyCheck<GmChoroplethProps<any, any>>([
+    'data',
+    'metricName',
+    'metricProperty',
+  ])
+);
+chartPropsMap.set(
+  'EuropeChoropleth',
+  keyCheck<EuropeChoroplethProps<any>>(['data', 'metricProperty'])
+);
+chartPropsMap.set(
+  'StackedChart',
+  keyCheck<StackedChartProps<any>>(['values', 'config', 'timeframe'])
+);
+chartPropsMap.set(
+  'VerticalBarChart',
+  keyCheck<VerticalBarChartProps<any, any>>([
+    'values',
+    'seriesConfig',
+    'timeframe',
+    'dataOptions',
+  ])
+);
 
 /**
  * This hook will return two methods. The first one accepts a components children

@@ -2,7 +2,7 @@ import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { ErrorBoundary } from '~/components/error-boundary';
 import {
   InteractiveLegend,
   SelectOption,
@@ -14,6 +14,7 @@ import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
@@ -99,36 +100,38 @@ export function AdmissionsPerAgeGroup({
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
-    <>
-      <InteractiveLegend
-        helpText={text.legend_help_text}
-        selectOptions={interactiveLegendOptions}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
-      />
-      <TimeSeriesChart
-        accessibility={accessibility}
-        values={values}
-        timeframe={timeframe}
-        seriesConfig={chartConfig}
-        minHeight={breakpoints.md ? 300 : 250}
-        disableLegend
-        formatTooltip={(data) => (
-          <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
-        )}
-        dataOptions={{
-          timespanAnnotations: [
-            {
-              start: underReportedDateStart,
-              end: Infinity,
-              label: text.line_chart_legend_inaccurate_label,
-              shortLabel: text.tooltip_labels.inaccurate,
-            },
-          ],
-        }}
-      />
-      <Legend items={staticLegendItems} />
-    </>
+    <ErrorBoundary>
+      <>
+        <InteractiveLegend
+          helpText={text.legend_help_text}
+          selectOptions={interactiveLegendOptions}
+          selection={list}
+          onToggleItem={toggle}
+          onReset={clear}
+        />
+        <TimeSeriesChart
+          accessibility={accessibility}
+          values={values}
+          timeframe={timeframe}
+          seriesConfig={chartConfig}
+          minHeight={breakpoints.md ? 300 : 250}
+          disableLegend
+          formatTooltip={(data) => (
+            <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
+          )}
+          dataOptions={{
+            timespanAnnotations: [
+              {
+                start: underReportedDateStart,
+                end: Infinity,
+                label: text.line_chart_legend_inaccurate_label,
+                shortLabel: text.tooltip_labels.inaccurate,
+              },
+            ],
+          }}
+        />
+        <Legend items={staticLegendItems} />
+      </>
+    </ErrorBoundary>
   );
 }

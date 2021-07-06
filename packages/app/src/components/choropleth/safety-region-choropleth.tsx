@@ -27,7 +27,7 @@ import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, regionGeo } from './topology';
 
-type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
+export type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
   data: Pick<VrCollection, K>;
   metricName: K;
   metricProperty: string;

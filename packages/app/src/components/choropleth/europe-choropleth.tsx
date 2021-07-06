@@ -38,7 +38,7 @@ const boundingBoxEurope: EuropeGeoJSON = {
 
 type CountryDataItem = { country_code: string };
 
-type EuropeChoroplethProps<T extends CountryDataItem> = {
+export type EuropeChoroplethProps<T extends CountryDataItem> = {
   data: T[];
   /**
    * A number property on the data item that will determine the color of the country in the map

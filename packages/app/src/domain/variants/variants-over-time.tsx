@@ -1,4 +1,5 @@
 import { NlVariantsValue } from '@corona-dashboard/common';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -74,44 +75,46 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
   const staticLegendItems: LegendItem[] = [underReportedLegendItem];
 
   return (
-    <>
-      <InteractiveLegend
-        helpText={text.legend_help_tekst}
-        selectOptions={seriesConfig}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
-      />
-      <InlineText fontSize="12px" fontWeight="bold" color="data.axisLabels">
-        {text.percentage_gevonden_varianten}
-      </InlineText>
-      <TimeSeriesChart
-        accessibility={{ key: 'variants_over_time_chart' }}
-        values={values}
-        timeframe={'all'}
-        seriesConfig={[
-          ...chartConfig,
-          {
-            type: 'invisible',
-            metricProperty: 'sample_size',
-            label: text.tooltip_labels.totaal_monsters,
-            isPercentage: false,
-          },
-        ]}
-        disableLegend
-        dataOptions={{
-          isPercentage: true,
-          timespanAnnotations: [
+    <ErrorBoundary>
+      <>
+        <InteractiveLegend
+          helpText={text.legend_help_tekst}
+          selectOptions={seriesConfig}
+          selection={list}
+          onToggleItem={toggle}
+          onReset={clear}
+        />
+        <InlineText fontSize="12px" fontWeight="bold" color="data.axisLabels">
+          {text.percentage_gevonden_varianten}
+        </InlineText>
+        <TimeSeriesChart
+          accessibility={{ key: 'variants_over_time_chart' }}
+          values={values}
+          timeframe={'all'}
+          seriesConfig={[
+            ...chartConfig,
             {
-              start: underReportedDateStart,
-              end: Infinity,
-              label: text.legend_niet_compleet_label,
-              shortLabel: text.tooltip_labels.niet_compleet,
+              type: 'invisible',
+              metricProperty: 'sample_size',
+              label: text.tooltip_labels.totaal_monsters,
+              isPercentage: false,
             },
-          ],
-        }}
-      />
-      <Legend items={staticLegendItems} />
-    </>
+          ]}
+          disableLegend
+          dataOptions={{
+            isPercentage: true,
+            timespanAnnotations: [
+              {
+                start: underReportedDateStart,
+                end: Infinity,
+                label: text.legend_niet_compleet_label,
+                shortLabel: text.tooltip_labels.niet_compleet,
+              },
+            ],
+          }}
+        />
+        <Legend items={staticLegendItems} />
+      </>
+    </ErrorBoundary>
   );
 }

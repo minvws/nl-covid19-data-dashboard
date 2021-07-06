@@ -16,15 +16,17 @@ const PropsReportContext = createContext<
   () => Record<string, unknown> | undefined
 >(() => undefined);
 
-export function ErrorBoundary({
-  children = null,
-  extraPropsReport,
-}: {
+type ErrorBoundaryProps = {
   children: ReactNode;
   extraPropsReport?:
     | Record<string, unknown>
     | (() => Record<string, unknown> | undefined);
-}) {
+};
+
+export function ErrorBoundary({
+  children = null,
+  extraPropsReport,
+}: ErrorBoundaryProps) {
   const additionalProps = isFunction(extraPropsReport)
     ? extraPropsReport()
     : extraPropsReport;
