@@ -1,4 +1,4 @@
-import { assert, Feature, MetricScope } from '@corona-dashboard/common';
+import { assert, Feature, JsonMetricScope } from '@corona-dashboard/common';
 import { get, isEmpty } from 'lodash';
 import meow from 'meow';
 import path from 'path';
@@ -173,7 +173,7 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
 
 async function validateMetricNameForScope(
   metricName: string,
-  scope: MetricScope,
+  scope: JsonMetricScope,
   isEnabled: boolean,
   schemaInfo: SchemaInfo
 ) {
@@ -201,7 +201,7 @@ async function validateMetricNameForScope(
 async function validateMetricPropertiesForScope(
   metricName: string,
   metricProperties: string[],
-  scope: MetricScope,
+  scope: JsonMetricScope,
   isEnabled: boolean,
   schemaInfo: SchemaInfo
 ) {
