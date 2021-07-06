@@ -31,10 +31,6 @@ import {
 import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
-type PartialRecord<K extends keyof any, T> = {
-  [P in K]?: T;
-};
-
 /**
  * Usage:
  *
