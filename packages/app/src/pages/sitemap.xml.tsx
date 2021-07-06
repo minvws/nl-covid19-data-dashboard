@@ -2,7 +2,7 @@ import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
 import globby from 'globby';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { features } from '~/config/features';
+import { features } from '~/config';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 
