@@ -7,7 +7,7 @@ import {
 } from '@corona-dashboard/common';
 import { omit } from 'lodash';
 import { useMemo } from 'react';
-import { hasValueAtKey, isDefined } from 'ts-is-present';
+import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
 import { TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
@@ -22,6 +22,7 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | InvisibleSeriesDefinition<T>
   | SplitAreaSeriesDefinition<T>
   | GappedLineSeriesDefinition<T>
+  | GappedStackedAreaSeriesDefinition<T>
 )[];
 
 interface SeriesCommonDefinition {
@@ -119,6 +120,19 @@ export interface RangeSeriesDefinition<T extends TimestampedValue>
 export interface StackedAreaSeriesDefinition<T extends TimestampedValue>
   extends SeriesCommonDefinition {
   type: 'stacked-area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'hatched';
+  fillOpacity?: number;
+  strokeWidth?: number;
+  isNonInteractive?: boolean;
+}
+
+export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'gapped-stacked-area';
   metricProperty: keyof T;
   label: string;
   shortLabel?: string;
@@ -291,6 +305,12 @@ export function getSeriesList<T extends TimestampedValue>(
   return seriesConfig.filter(isVisible).map((config) =>
     config.type === 'stacked-area'
       ? getStackedAreaSeriesData(values, config.metricProperty, seriesConfig)
+      : config.type === 'gapped-stacked-area'
+      ? getGappedStackedAreaSeriesData(
+          values,
+          config.metricProperty,
+          seriesConfig
+        )
       : config.type === 'range'
       ? getRangeSeriesData(
           values,
@@ -301,6 +321,72 @@ export function getSeriesList<T extends TimestampedValue>(
          * Cutting values based on annotation is only supported for single line series
          */
         getSeriesData(values, config.metricProperty, cutValuesConfig)
+  );
+}
+
+function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
+  values: T[],
+  metricProperty: keyof T,
+  seriesConfig: SeriesConfig<T>
+) {
+  /**
+   * Stacked area series are rendered from top to bottom. The sum of a Y-value
+   * of all series below the current series equals the low value of a current
+   * series's Y-value.
+   */
+  const stackedAreaDefinitions = seriesConfig.filter(
+    hasValueAtKey('type', 'gapped-stacked-area' as const)
+  );
+
+  const seriesBelowCurrentSeries = getSeriesBelowCurrentSeries(
+    stackedAreaDefinitions,
+    metricProperty
+  );
+
+  const seriesHigh = getSeriesData(values, metricProperty);
+  const seriesLow = getSeriesData(values, metricProperty);
+
+  seriesLow.forEach((seriesSingleValue, index) => {
+    if (!isPresent(seriesSingleValue.__value)) {
+      return;
+    }
+    /**
+     * The series are rendered from top to bottom. To get the low value of the
+     * current series, we will sum up all values of the
+     * `seriesBelowCurrentSeries`.
+     */
+    seriesSingleValue.__value = sumSeriesValues(
+      seriesBelowCurrentSeries,
+      values,
+      index
+    );
+  });
+
+  return seriesLow.map((low, index) => {
+    const valueLow = low.__value;
+    const valueHigh = isDefined(valueLow)
+      ? valueLow + (seriesHigh[index].__value ?? 0)
+      : undefined;
+
+    return {
+      __date_unix: low.__date_unix,
+      __value_a: valueLow,
+      __value_b: valueHigh,
+    };
+  });
+}
+
+function sumSeriesValues<T extends TimestampedValue>(
+  seriesBelowCurrentSeries: { metricProperty: keyof T }[],
+  values: T[],
+  index: number
+): number | undefined {
+  return (
+    seriesBelowCurrentSeries
+      // for each serie we'll get the value of the current index
+      .map((x) => getSeriesData(values, x.metricProperty)[index])
+      // and then sum it up
+      .reduce((sum, x) => sum + (x.__value ?? 0), 0)
   );
 }
 
@@ -318,10 +404,9 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
     hasValueAtKey('type', 'stacked-area' as const)
   );
 
-  const seriesBelowCurrentSeries = stackedAreaDefinitions.slice(
-    stackedAreaDefinitions.findIndex(
-      (x) => x.metricProperty === metricProperty
-    ) + 1
+  const seriesBelowCurrentSeries = getSeriesBelowCurrentSeries(
+    stackedAreaDefinitions,
+    metricProperty
   );
 
   const seriesHigh = getSeriesData(values, metricProperty);
@@ -333,12 +418,11 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
      * current series, we will sum up all values of the
      * `seriesBelowCurrentSeries`.
      */
-
-    seriesSingleValue.__value = seriesBelowCurrentSeries
-      // for each serie we'll get the value of the current index
-      .map((x) => getSeriesData(values, x.metricProperty)[index])
-      // and then sum it up
-      .reduce((sum, x) => sum + (x.__value ?? 0), 0);
+    seriesSingleValue.__value = sumSeriesValues(
+      seriesBelowCurrentSeries,
+      values,
+      index
+    );
   });
 
   return seriesLow.map((low, index) => {
@@ -351,6 +435,15 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
       __value_b: valueHigh,
     };
   });
+}
+
+function getSeriesBelowCurrentSeries<T extends TimestampedValue>(
+  definitions: { metricProperty: keyof T }[],
+  metricProperty: keyof T
+) {
+  return definitions.slice(
+    definitions.findIndex((x) => x.metricProperty === metricProperty) + 1
+  );
 }
 
 function getRangeSeriesData<T extends TimestampedValue>(

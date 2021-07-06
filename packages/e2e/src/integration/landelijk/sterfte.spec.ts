@@ -1,11 +1,11 @@
-import { NationalContext } from '~/integration/types';
+import { NlContext } from '~/integration/types';
 
 context('Landelijk - Sterfte', () => {
   before(() => {
-    cy.beforeNationalTests('sterfte');
+    cy.beforeNlTests('sterfte');
   });
 
-  it('Should show the correct KPI values', function (this: NationalContext) {
+  it('Should show the correct KPI values', function (this: NlContext) {
     const rivmLastValue = this.nationalData.deceased_rivm.last_value;
 
     const kpiTestInfo = {

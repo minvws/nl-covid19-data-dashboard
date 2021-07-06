@@ -1,7 +1,7 @@
 import {
   EscalationLevels,
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
+  GmCollectionTestedOverall,
+  GmProperties,
   VrCollectionTestedOverall,
   VrProperties,
 } from '@corona-dashboard/common';
@@ -334,8 +334,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty="infected_per_100k"
                       getLink={reverseRouter.gm.positiefGetesteMensen}
                       tooltipContent={(
-                        context: MunicipalityProperties &
-                          MunicipalitiesTestedOverall
+                        context: GmProperties & GmCollectionTestedOverall
                       ) => (
                         <PositiveTestedPeopleMunicipalTooltip
                           context={context}

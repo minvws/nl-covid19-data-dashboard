@@ -1,6 +1,6 @@
 import { isDefined } from 'ts-is-present';
 import {
-  MunicipalSewerPerInstallationValue,
+  GmSewerPerInstallationValue,
   VrSewerPerInstallationValue,
 } from './types';
 
@@ -51,7 +51,7 @@ export function sortTimeSeriesInDataInPlace<T>(
     nestedSeries.values = nestedSeries.values.map((x) => {
       x.values = sortTimeSeriesValues(x.values) as
         | VrSewerPerInstallationValue[]
-        | MunicipalSewerPerInstallationValue[];
+        | GmSewerPerInstallationValue[];
 
       if (setDatesToMiddleOfDay) {
         x.values = x.values.map(setValueDatesToMiddleOfDay);
@@ -127,7 +127,7 @@ export interface TimeSeriesMetric<T = TimestampedValue> {
 
 export interface SewerPerInstallationData {
   values: (TimeSeriesMetric<
-    VrSewerPerInstallationValue | MunicipalSewerPerInstallationValue
+    VrSewerPerInstallationValue | GmSewerPerInstallationValue
   > & {
     rwzi_awzi_name: string;
   })[];

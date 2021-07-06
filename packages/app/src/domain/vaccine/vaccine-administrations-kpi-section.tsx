@@ -1,4 +1,4 @@
-import { National } from '@corona-dashboard/common';
+import { Nl } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { useState } from 'react';
 import { Box } from '~/components/base';
@@ -15,7 +15,7 @@ export function VaccineAdministrationsKpiSection({
   data,
 }: {
   data: Pick<
-    National,
+    Nl,
     | 'vaccine_administered_total'
     | 'vaccine_administered_ggd'
     | 'vaccine_administered_hospitals_and_care_institutions'

@@ -1,4 +1,4 @@
-import { Municipal } from '@corona-dashboard/common';
+import { Gm } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -33,7 +33,7 @@ export const gmPageMetricNames = [
 
 export type GmPageMetricNames = typeof gmPageMetricNames[number];
 
-export type MunicipalPageMetricData = Pick<Municipal, GmPageMetricNames>;
+export type MunicipalPageMetricData = Pick<Gm, GmPageMetricNames>;
 
 type MunicipalityLayoutProps = {
   lastGenerated: string;

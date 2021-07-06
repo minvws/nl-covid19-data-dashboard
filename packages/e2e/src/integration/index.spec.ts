@@ -1,14 +1,11 @@
-import {
-  National,
-  sortTimeSeriesInDataInPlace,
-} from '@corona-dashboard/common';
-import { NationalContext } from './types';
+import { Nl, sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
+import { NlContext } from './types';
 
 context('Index (Actueel)', () => {
   before(() => {
     cy.swallowResizeObserverError();
 
-    cy.fixture<National>('NL.json')
+    cy.fixture<Nl>('NL.json')
       .then((nationalData) => {
         sortTimeSeriesInDataInPlace(nationalData);
       })
@@ -18,7 +15,7 @@ context('Index (Actueel)', () => {
     cy.checkHeadings();
   });
 
-  it('Should show the correct mini trend tile values', function (this: NationalContext) {
+  it('Should show the correct mini trend tile values', function (this: NlContext) {
     const testedOverallLastValue = this.nationalData.tested_overall.last_value;
     const hospitalNiceLastValue = this.nationalData.hospital_nice.last_value;
 
