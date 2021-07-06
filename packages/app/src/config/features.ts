@@ -24,6 +24,6 @@ export const features: Feature[] = [
   },
   {
     name: 'timelineMockData',
-    isEnabled: true,
+    isEnabled: false,
   },
 ];
