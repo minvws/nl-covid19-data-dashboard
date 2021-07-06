@@ -61,7 +61,7 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     in: ({ tested_overall }) => tested_overall || choroplethMockData(),
   }),
-  getInData(countryCodes),
+  getInData([...countryCodes]),
   getCountryNames
 );
 
@@ -109,7 +109,7 @@ export default function PositiefGetesteMensenPage(
   const countriesAndLastValues = useMemo(
     () =>
       compileCountrySelectionData(
-        countryCodes,
+        [...countryCodes],
         countryNames,
         compiledInternationalData
       ),

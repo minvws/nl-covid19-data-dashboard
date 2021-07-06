@@ -15,6 +15,7 @@ import { GetStaticPropsContext } from 'next';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
+import { CountryCode } from '~/domain/international/select-countries/country-code';
 import {
   gmPageMetricNames,
   GmPageMetricNames,
@@ -29,6 +30,10 @@ import {
 } from '~/domain/layout/safety-region-layout';
 import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
+
+type PartialRecord<K extends keyof any, T> = {
+  [P in K]?: T;
+};
 
 /**
  * Usage:
@@ -297,13 +302,13 @@ export function createGetChoroplethData<T1, T2, T3>(settings?: {
   };
 }
 
-export function getInData(countryCodes: string[]) {
+export function getInData(countryCodes: CountryCode[]) {
   if (!countryCodes) {
     throw Error('No valid countryCodes found in context');
   }
 
   return function () {
-    const internationalData: Record<string, In> = {};
+    const internationalData: PartialRecord<CountryCode, In> = {};
 
     countryCodes.forEach((countryCode) => {
       internationalData[countryCode] = loadJsonFromDataFile<In>(
