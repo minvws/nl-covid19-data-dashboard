@@ -36,7 +36,7 @@ export const timelineEvent = {
       validation: REQUIRED,
     },
     {
-      title: 'Einddatum',
+      title: 'Einddatum (optioneel)',
       name: 'dateEnd',
       type: 'date',
       options: {
