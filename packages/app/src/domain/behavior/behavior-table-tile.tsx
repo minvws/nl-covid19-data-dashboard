@@ -1,7 +1,4 @@
-import {
-  NationalBehaviorValue,
-  VrBehaviorValue,
-} from '@corona-dashboard/common';
+import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React, { useMemo } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
@@ -25,7 +22,7 @@ interface BehaviorTableTileProps {
   description: string;
   complianceExplanation: string;
   supportExplanation: string;
-  value: NationalBehaviorValue | VrBehaviorValue;
+  value: NlBehaviorValue | VrBehaviorValue;
   annotation: string;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
   scrollRef: { current: HTMLDivElement | null };
@@ -289,7 +286,7 @@ const Button = styled.button(
   })
 );
 
-function useBehaviorTableData(value: NationalBehaviorValue) {
+function useBehaviorTableData(value: NlBehaviorValue) {
   const behaviorLookupKeys = useBehaviorLookupKeys();
 
   return useMemo(() => {

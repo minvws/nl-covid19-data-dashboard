@@ -1,6 +1,6 @@
 import {
-  NationalReproduction,
-  NationalReproductionValue,
+  NlReproduction,
+  NlReproductionValue,
   TimeframeOption,
 } from '@corona-dashboard/common';
 import { last } from 'lodash';
@@ -11,7 +11,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
 interface ReproductionChartTileProps {
-  data: NationalReproduction;
+  data: NlReproduction;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
 }
@@ -33,7 +33,7 @@ export function ReproductionChartTile({
     0,
     data.values.findIndex((x) => !isPresent(x.index_average))
   );
-  const last_value = last(values) as NationalReproductionValue;
+  const last_value = last(values) as NlReproductionValue;
 
   return (
     <ChartTile

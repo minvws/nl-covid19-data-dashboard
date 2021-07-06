@@ -1,4 +1,4 @@
-import { National } from '@corona-dashboard/common';
+import { Nl } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arts from '~/assets/arts.svg';
@@ -56,7 +56,7 @@ export const nlPageMetricNames = [
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-export type NationalPageMetricData = Pick<National, NlPageMetricNames>;
+export type NationalPageMetricData = Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;

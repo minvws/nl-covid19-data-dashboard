@@ -1,7 +1,7 @@
 import {
   EscalationLevels,
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
+  GmCollectionTestedOverall,
+  GmProperties,
   VrCollectionTestedOverall,
   VrProperties,
 } from '@corona-dashboard/common';
@@ -409,8 +409,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={(
-                        context: MunicipalityProperties &
-                          MunicipalitiesTestedOverall
+                        context: GmProperties & GmCollectionTestedOverall
                       ) => (
                         <PositiveTestedPeopleMunicipalTooltip
                           context={context}

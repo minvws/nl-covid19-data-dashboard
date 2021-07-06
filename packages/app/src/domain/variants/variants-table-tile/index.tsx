@@ -1,4 +1,4 @@
-import { NationalDifference, NlVariantsValue } from '@corona-dashboard/common';
+import { NlDifference, NlVariantsValue } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Metadata, MetadataProps } from '~/components/metadata';
@@ -16,7 +16,7 @@ export function VariantsTableTile({
   differences,
 }: {
   data: NlVariantsValue;
-  differences: NationalDifference;
+  differences: NlDifference;
 }) {
   const { siteText } = useIntl();
 
