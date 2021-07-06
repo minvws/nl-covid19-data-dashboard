@@ -86,26 +86,28 @@ export function SituationsOverviewChoroplethTile({
               description={situation.description}
               key={situation.id}
             >
-              <SafetyRegionChoropleth
-                accessibility={{ key: 'situations_choropleths' }}
-                data={{ situations: data }}
-                metricName={'situations'}
-                metricProperty={situation.id}
-                minHeight={280}
-                tooltipPlacement="top-center"
-                noDataFillColor={colors.data.underReported}
-                tooltipContent={(
-                  context: VrProperties & VrCollectionSituations
-                ) => (
-                  <ChoroplethTooltip
-                    isPercentage
-                    value={context[situation.id]}
-                    regionName={context.vrname}
-                    thresholds={regionThresholds.situations[situation.id]}
-                    noDataFillColor={colors.data.underReported}
-                  />
-                )}
-              />
+              <ErrorBoundary>
+                <SafetyRegionChoropleth
+                  accessibility={{ key: 'situations_choropleths' }}
+                  data={{ situations: data }}
+                  metricName={'situations'}
+                  metricProperty={situation.id}
+                  minHeight={280}
+                  tooltipPlacement="top-center"
+                  noDataFillColor={colors.data.underReported}
+                  tooltipContent={(
+                    context: VrProperties & VrCollectionSituations
+                  ) => (
+                    <ChoroplethTooltip
+                      isPercentage
+                      value={context[situation.id]}
+                      regionName={context.vrname}
+                      thresholds={regionThresholds.situations[situation.id]}
+                      noDataFillColor={colors.data.underReported}
+                    />
+                  )}
+                />
+              </ErrorBoundary>
             </ChoroplethGridItem>
           ))}
         </ChoroplethGrid>

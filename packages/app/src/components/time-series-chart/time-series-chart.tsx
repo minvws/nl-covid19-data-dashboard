@@ -304,8 +304,6 @@ export function TimeSeriesChart<
         timelineEventIndex,
       } = hoverState;
 
-      throw new Error('error');
-
       showTooltip({
         tooltipData: {
           /**

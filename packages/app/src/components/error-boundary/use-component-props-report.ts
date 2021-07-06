@@ -12,9 +12,38 @@ type RenderPropsFunction = (renderProps: unknown) => ReactNode;
 
 const chartPropsMap = new Map<string, string[]>();
 chartPropsMap.set('TimeSeriesChart', ['values', 'dataOptions', 'seriesConfig']);
-chartPropsMap.set('SafetyRegionChoropleth', ['data', 'metricProperty']);
+chartPropsMap.set('SafetyRegionChoropleth', [
+  'data',
+  'metricName',
+  'metricProperty',
+]);
+chartPropsMap.set('MunicipalityChoropleth', [
+  'data',
+  'metricName',
+  'metricProperty',
+]);
+chartPropsMap.set('EuropeChoropleth', ['data', 'metricProperty']);
+chartPropsMap.set('StackedChart', ['values', 'config']);
+chartPropsMap.set('VerticalBarChart', [
+  'values',
+  'seriesConfig',
+  'timeframe',
+  'dataOptions',
+]);
 
-export function usePropsReport(
+/**
+ * This hook will return two methods. The first one accepts a components children
+ * reference and will search through this children tree for components whose props
+ * will be extracted and exposed using the second propsReportCallback method.
+ *
+ * The components that will be returned are defined by the chartPropsMap.
+ *
+ * This hook is used by the ErrorBoundary component in order to generate a richer
+ * error report. This way the data and other interesting props that were configured
+ * at the time of the crash will be reported as well.
+ *
+ */
+export function useComponentPropsReport(
   additionalProps?: Record<string, unknown> | string | number | boolean
 ) {
   const propsReportRef = useRef<Record<string, unknown> | undefined>();
@@ -34,7 +63,7 @@ export function usePropsReport(
     return extractPropsAndFillReport(children, propsReportRef);
   };
 
-  return [propsReportCallback, extractPropsFromChildren] as const;
+  return [extractPropsFromChildren, propsReportCallback] as const;
 }
 
 function isReactElement(value: ReactNode): value is ReactElement {
@@ -58,7 +87,14 @@ function extractChartProps(
   if (element && type) {
     const propNames = chartPropsMap.get(type);
     return propNames
-      ? Object.fromEntries(propNames.map((name) => [name, element.props[name]]))
+      ? Object.assign(
+          Object.fromEntries(
+            propNames
+              .filter((x) => isDefined(element.props[x]))
+              .map((x) => [x, element.props[x]])
+          ),
+          { componentName: type }
+        )
       : undefined;
   }
 }

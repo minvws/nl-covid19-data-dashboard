@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { isFunction } from 'lodash';
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
@@ -10,7 +10,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { InlineText } from '../typography';
-import { usePropsReport } from './usePropsReport';
+import { useComponentPropsReport } from './use-component-props-report';
 
 const PropsReportContext = createContext<
   () => Record<string, unknown> | undefined
@@ -25,14 +25,16 @@ export function ErrorBoundary({
     | Record<string, unknown>
     | (() => Record<string, unknown> | undefined);
 }) {
-  const addiotionalProps = isFunction(extraPropsReport)
+  const additionalProps = isFunction(extraPropsReport)
     ? extraPropsReport()
     : extraPropsReport;
 
-  const [propsReportCallback, extractPropsFromChildren] =
-    usePropsReport(addiotionalProps);
+  const [extractPropsFromChildren, propsReportCallback] =
+    useComponentPropsReport(additionalProps);
 
-  extractPropsFromChildren(children);
+  useMemo(() => {
+    extractPropsFromChildren(children);
+  }, [extractPropsFromChildren, children]);
 
   return (
     <PropsReportContext.Provider value={propsReportCallback}>
