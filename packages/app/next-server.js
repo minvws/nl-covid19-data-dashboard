@@ -11,7 +11,7 @@ const path = require('path');
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
 const { imageResizeTargets, assert } = require('@corona-dashboard/common');
-const { last } = require('lodash');
+const { last, omit } = require('lodash');
 const querystring = require('querystring');
 
 const MAX_IMAGE_WIDTH = last(imageResizeTargets);
@@ -64,9 +64,24 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
           `/$1/${SANITY_PATH}`
         );
 
-        if (req.query.w > MAX_IMAGE_WIDTH) {
-          const newQuery = { ...req.query, w: MAX_IMAGE_WIDTH };
-          return `${newPath.split('?')[0]}?${querystring.stringify(newQuery)}`;
+        /**
+         * Do not allow the use of "h" and limit the requested width to our
+         * own defined maximum.
+         */
+        const shouldLimitWidth = req.query.w > MAX_IMAGE_WIDTH;
+
+        if (req.query.h || shouldLimitWidth) {
+          const limitedQuery = omit(
+            {
+              ...req.query,
+              w: shouldLimitWidth ? MAX_IMAGE_WIDTH : req.query.w,
+            },
+            ['h']
+          );
+
+          return `${newPath.split('?')[0]}?${querystring.stringify(
+            limitedQuery
+          )}`;
         } else {
           return newPath;
         }
