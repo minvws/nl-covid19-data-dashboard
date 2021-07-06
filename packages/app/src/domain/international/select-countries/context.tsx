@@ -130,9 +130,7 @@ function useSearchContextValue<T extends Element>(
 
   useEffect(() => {
     /**
-     * On input-change we'll reset the focus index to 0. It's possible that
-     * there is a stronger hit among the VR hits (2nd column). If so, we won't
-     * reset the index to 0, instead it will be set to the index of that hit.
+     * On input-change we'll reset the focus index to 0.
      */
     const index = 0;
 
