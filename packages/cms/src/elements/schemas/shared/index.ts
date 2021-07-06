@@ -1,14 +1,6 @@
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';
 
-export const scopes = [
-  { title: 'Actueel', value: 'ac' },
-  { title: 'Landelijk', value: 'nl' },
-  { title: 'Veiligheidsregio', value: 'vr' },
-  { title: 'Gemeente', value: 'gm' },
-  { title: 'Internationaal', value: 'in' },
-] as const;
-
 const REQUIRED = (x: any) => x.required();
 
 export const commonFields = [
@@ -51,7 +43,11 @@ export const commonPreview = {
     metricProperty?: string;
   }) {
     return {
-      title: [getTitleForMetricName(x.metricName), x.type, x.metricProperty]
+      title: [
+        getTitleForMetricName(x.metricName),
+        getTitleForElementType(x.type),
+        x.metricProperty,
+      ]
         .filter(isDefined)
         .join(' - '),
       subtitle: [x.scope, x.metricName, snakeCase(x.type), x.metricProperty]
@@ -66,11 +62,23 @@ export const commonPreview = {
  * user-friendly. We could take this further by also mapping type names like
  * choropleth and maybe even introducing a specific icon for each element type.
  */
-const titleForMetricName: Record<string, string | undefined> = {
+const titleByMetricName: Record<string, string | undefined> = {
   tested_overall: 'Positief geteste mensen',
   sewer: 'Rioolwater metingen',
+  hospital_nice: 'Ziekenhuisopnames',
+  intensive_care_nice: 'Intensive care-opnames',
 };
 
 function getTitleForMetricName(metricName: string) {
-  return titleForMetricName[metricName] || metricName;
+  return titleByMetricName[metricName] || metricName;
+}
+
+const titleByElementType: Record<string, string | undefined> = {
+  timeSeries: 'Grafiek',
+  choropleth: 'Kaart',
+  kpi: 'KPI',
+};
+
+function getTitleForElementType(elementType: string) {
+  return titleByElementType[elementType] || elementType;
 }
