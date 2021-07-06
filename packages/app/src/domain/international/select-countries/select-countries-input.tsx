@@ -29,20 +29,22 @@ export function SelectCountriesInput() {
             setTerm('');
           }}
         >
-          <VisuallyHidden>{siteText.search.clear}</VisuallyHidden>
+          <VisuallyHidden>{siteText.select_countries.clear}</VisuallyHidden>
           <CloseIcon />
         </IconContainer>
       )}
 
       <VisuallyHidden>
-        <label htmlFor={`${id}-input`}>{siteText.search.placeholder}</label>
+        <label htmlFor={`${id}-input`}>
+          {siteText.select_countries.placeholder}
+        </label>
       </VisuallyHidden>
 
       <StyledSearchInput
         ref={inputRef}
         type="search"
         id={`${id}-input`}
-        placeholder={siteText.search.placeholder}
+        placeholder={siteText.select_countries.placeholder}
         autoComplete="off"
         {...inputProps}
       />
@@ -93,5 +95,7 @@ const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
     background: 'none',
 
     color: x.align === 'left' ? 'labelGray' : 'icon',
+
+    border: 'none',
   })
 );

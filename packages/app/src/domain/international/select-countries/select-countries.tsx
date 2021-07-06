@@ -104,6 +104,7 @@ const List = styled.ul(
     px: 0,
     m: 0,
     mt: 2,
+    lineHeight: '2.25rem',
   })
 );
 
@@ -135,7 +136,7 @@ const Line = styled.div<{ color: string }>(({ color }) =>
     position: 'absolute',
     borderTop: '3px solid',
     borderTopColor: color as SystemStyleObject,
-    top: '10px',
+    top: '15px',
     width: '15px',
     height: 0,
     borderRadius: '2px',

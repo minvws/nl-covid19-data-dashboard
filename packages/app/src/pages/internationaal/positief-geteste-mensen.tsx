@@ -133,11 +133,11 @@ export default function PositiefGetesteMensenPage(
           {content.articles && <ArticleStrip articles={content.articles} />}
 
           <ChartTile
-            title={'NLD vs DEU'}
+            title={text.time_graph.title}
             metadata={{
-              source: text.source,
+              source: text.bronnen.rivm,
             }}
-            description={'Who wins?'}
+            description={text.time_graph.description}
           >
             <>
               <SelectCountries

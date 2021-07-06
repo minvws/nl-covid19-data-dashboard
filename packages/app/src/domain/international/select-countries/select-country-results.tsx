@@ -13,15 +13,11 @@ export function SelectCountriesResults() {
   const { id, hits, setHasHitFocus, onSelectCountry, getOptionProps, limit } =
     useSearchContext();
 
+  const { formatNumber, siteText } = useIntl();
+
   useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
 
   const selectedCount = hits.filter((c) => c.data.isSelected).length;
-
-  const noHitsMessage = 'No countries found.';
-  const noHitsMessageHint = 'Check the spelling';
-
-  const { formatNumber } = useIntl();
-
   const hasLimitBeenReached = selectedCount >= limit;
 
   return (
@@ -60,13 +56,13 @@ export function SelectCountriesResults() {
           </StyledHitList>
         ) : (
           <StyledNoHits>
-            <Text>{noHitsMessage}</Text>
-            <Text>{noHitsMessageHint}</Text>
+            <Text>{siteText.select_countries.no_countries_found}</Text>
+            <Text>{siteText.select_countries.no_countries_found_hint}</Text>
           </StyledNoHits>
         )}
       </StyledCountriesList>
       <StyledSelectionSummary>
-        {replaceVariablesInText('{{selectedCount}} of {{limit}} selected', {
+        {replaceVariablesInText(siteText.select_countries.selection_summary, {
           selectedCount,
           limit,
         })}
@@ -86,10 +82,11 @@ const StyledCountriesList = styled.div(
 
 const StyledSelectionSummary = styled.div(
   css({
-    p: 3,
+    p: 1,
     textAlign: 'center',
     borderTop: '1px solid',
     borderTopColor: 'lightGray',
+    fontSize: 1,
   })
 );
 
@@ -157,7 +154,9 @@ const StyledHit = styled.button<{
     background: 'none',
     border: 'none',
     textAlign: 'left',
-    opacity: x.hasLimitBeenReached && !x.isSelected ? 0.6 : 1,
+    opacity: x.hasLimitBeenReached && !x.isSelected ? 0.5 : 1,
+    fontFamily: 'inherit',
+    fontSize: '1em',
   })
 );
 
