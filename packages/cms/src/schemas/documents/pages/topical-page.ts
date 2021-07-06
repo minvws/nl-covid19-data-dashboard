@@ -4,6 +4,12 @@ export const topicalPage = {
   type: 'document',
   fields: [
     {
+      title: 'Laat weekbericht zien',
+      name: 'flag',
+      type: 'boolean',
+      initialValue: false,
+    },
+    {
       title: 'Uitgelichte items',
       name: 'highlights',
       type: 'array',
@@ -71,13 +77,7 @@ export const topicalPage = {
           ],
         },
       ],
-      validation: (Rule: any) => Rule.required().unique().length(2),
-    },
-    {
-      title: 'empty-for-toggle',
-      name: 'empty',
-      type: 'localeString',
-      hidden: true,
+      validation: (Rule: any) => Rule.required().unique().min(2).max(3),
     },
   ],
 };

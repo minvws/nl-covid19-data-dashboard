@@ -5,8 +5,11 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
   // const { locale } = context;
   const locale = process.env.NEXT_PUBLIC_LOCALE;
 
-  return `{
+  return /* groq */ `{
     // Retrieve the latest 3 articles with the highlighted article filtered out:
+    "test": *[_type=='sewerPage']{
+      flag,
+    }[0],
     'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate desc) {
       "title":title.${locale},
       slug,
@@ -27,6 +30,7 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
       }
     }[0],
     "highlights": *[_type=='topicalPage']{
+      showWeeklyMessage,
       highlights[]{
         "title":title.${locale},
         "category": category.${locale},
