@@ -24,7 +24,7 @@ export function SearchInput({
   const searchId = useUniqueId();
 
   return (
-    <Box position="relative" maxWidth="18rem">
+    <Box position="relative" width="15rem">
       <IconContainer align="left">
         <SearchIcon />
       </IconContainer>
