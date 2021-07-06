@@ -48,7 +48,7 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
-      <ErrorBoundary>
+      <ErrorBoundary extraPropsReport={{ timeframe }}>
         {timeframeOptions
           ? (assert(
               typeof children === 'function',

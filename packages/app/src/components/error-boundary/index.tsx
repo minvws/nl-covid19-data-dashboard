@@ -1,26 +1,55 @@
 import css from '@styled-system/css';
-import { ReactNode, useState } from 'react';
+import { isFunction } from 'lodash';
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
+import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { InlineText } from '../typography';
+import { usePropsReport } from './usePropsReport';
 
-export function ErrorBoundary({ children = null }: { children: ReactNode }) {
+const PropsReportContext = createContext<
+  () => Record<string, unknown> | undefined
+>(() => undefined);
+
+export function ErrorBoundary({
+  children = null,
+  extraPropsReport,
+}: {
+  children: ReactNode;
+  extraPropsReport?:
+    | Record<string, unknown>
+    | (() => Record<string, unknown> | undefined);
+}) {
+  const addiotionalProps = isFunction(extraPropsReport)
+    ? extraPropsReport()
+    : extraPropsReport;
+
+  const [propsReportCallback, extractPropsFromChildren] =
+    usePropsReport(addiotionalProps);
+
+  extractPropsFromChildren(children);
+
   return (
-    <ReactErrorBoundary FallbackComponent={ErrorFallback}>
-      {children}
-    </ReactErrorBoundary>
+    <PropsReportContext.Provider value={propsReportCallback}>
+      <ReactErrorBoundary FallbackComponent={ErrorFallback}>
+        {children}
+      </ReactErrorBoundary>
+    </PropsReportContext.Provider>
   );
 }
 
 function ErrorFallback({ error }: { error: Error }) {
   const { siteText } = useIntl();
-  const [clipboardState, setClipboardState] =
-    useState<'init' | 'copied' | 'error'>('init');
-  const errorReport = formatErrorReport(error);
+  const [clipboardState, setClipboardState] = useState<
+    'init' | 'copied' | 'error'
+  >('init');
+  const propsReport = useContext(PropsReportContext);
+  const errorReport = formatErrorReport(error, propsReport());
 
   async function copyErrorReport() {
     setClipboardState('init');
@@ -65,8 +94,8 @@ function ErrorFallback({ error }: { error: Error }) {
   );
 }
 
-function formatErrorReport(error: Error) {
-  return [
+function formatErrorReport(error: Error, props?: Record<string, unknown>) {
+  const report = [
     `url: ${window.location.href}`,
     `platform: ${navigator.platform}`,
     `user agent: ${navigator.userAgent}`,
@@ -77,7 +106,16 @@ function formatErrorReport(error: Error) {
     `message: ${error.message}`,
     `stacktrace:`,
     error.stack ?? 'No stack trace available',
-  ].join('\n');
+  ];
+
+  if (isDefined(props)) {
+    report.push('component props:');
+    for (const prop in props) {
+      report.push(`${prop}: ${JSON.stringify(props[prop], null, '\t')}`);
+    }
+  }
+
+  return report.join('\n');
 }
 
 const ErrorBox = styled.div.attrs({
@@ -89,6 +127,8 @@ const ErrorBox = styled.div.attrs({
     borderColor: 'red',
     padding: 2,
     borderRadius: '8px',
+    maxHeight: asResponsiveArray({ _: '200px', md: '600px' }),
+    overflow: 'auto',
   })
 );
 
