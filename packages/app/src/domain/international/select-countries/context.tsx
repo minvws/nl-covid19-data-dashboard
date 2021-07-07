@@ -75,6 +75,8 @@ function useSearchContextValue<T extends Element>(
 ) {
   const breakpoints = useBreakpoints();
 
+  useOnClickOutside([containerRef], () => setHasInputFocus(false));
+
   const id = '__search_countries';
 
   /**
@@ -86,7 +88,7 @@ function useSearchContextValue<T extends Element>(
    * when a hit is selected (e.g. hitting return-key) the input's value will be
    * replaced with the value of the selected hit.
    */
-  const [termSubmitted, setTermSubmitted] = useState('');
+  const [termSubmitted] = useState('');
 
   /**
    * Used for showing/hiding search results
@@ -118,7 +120,6 @@ function useSearchContextValue<T extends Element>(
     numberOfHits: hits.length,
     onSelectHit: (index) => {
       const option = hits[index];
-      setTermSubmitted(option.data.name);
 
       onToggleCountry(option.data);
     },
