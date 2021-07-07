@@ -299,3 +299,6 @@ timestamp,action,key
 2021-07-06T08:07:15.039Z,add,internationaal_positief_geteste_personen.time_graph.description
 2021-07-06T09:00:56.980Z,add,accessibility.charts.international_infected_people_over_time_chart.description
 2021-07-06T09:00:57.932Z,add,accessibility.charts.international_infected_people_over_time_chart.label
+2021-07-07T08:07:57.677Z,delete,internationaal_positief_geteste_personen.bronnen.our_world_in_data.download
+2021-07-07T08:07:57.678Z,delete,internationaal_positief_geteste_personen.bronnen.our_world_in_data.href
+2021-07-07T08:07:57.683Z,delete,internationaal_positief_geteste_personen.bronnen.our_world_in_data.text
