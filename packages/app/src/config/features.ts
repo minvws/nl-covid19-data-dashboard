@@ -4,7 +4,7 @@ export const features: Feature[] = [
   {
     name: 'vaccinationPerAgegroup',
     isEnabled: false,
-    metricScopes: ['nl'],
+    dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
   },
   {
@@ -14,7 +14,7 @@ export const features: Feature[] = [
   {
     name: 'situationsPage',
     isEnabled: true,
-    metricScopes: ['vr', 'vr_collection'],
+    dataScopes: ['vr', 'vr_collection'],
     metricName: 'situations',
   },
   {
@@ -24,6 +24,6 @@ export const features: Feature[] = [
   },
   {
     name: 'timelineMockData',
-    isEnabled: true,
+    isEnabled: false,
   },
 ];
