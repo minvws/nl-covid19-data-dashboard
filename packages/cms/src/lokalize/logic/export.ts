@@ -30,6 +30,11 @@ export const localeCacheDirectory = path.resolve(
   '.sanity-lokalize-cache'
 );
 
+/**
+ * @TODO:
+ * - remove add / delete cli
+ */
+
 export async function exportLokalizeTexts(
   dataset?: string,
   includeDrafts = false,
