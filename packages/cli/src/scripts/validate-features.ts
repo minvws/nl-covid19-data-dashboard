@@ -1,4 +1,4 @@
-import { assert, Feature, MetricScope } from '@corona-dashboard/common';
+import { assert, Feature, JsonDataScope } from '@corona-dashboard/common';
 import { get, isEmpty } from 'lodash';
 import meow from 'meow';
 import path from 'path';
@@ -115,7 +115,7 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
    * the full metric.
    */
   const {
-    metricScopes = ['nl'],
+    dataScopes = ['nl'],
     metricName,
     metricProperties,
     name,
@@ -128,7 +128,7 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
       'If a feature defines metricProperties it should also have a metricName'
     );
 
-    const promisedResults = metricScopes.map((scope) =>
+    const promisedResults = dataScopes.map((scope) =>
       validateMetricPropertiesForScope(
         metricName,
         metricProperties,
@@ -149,11 +149,9 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
       return messages;
     }
   } else if (metricName) {
-    assert(
-      metricScopes,
-      `Missing metricScopes configuration for feature ${name}`
-    );
-    const promisedResults = metricScopes.map((scope) =>
+    assert(dataScopes, `Missing dataScopes configuration for feature ${name}`);
+
+    const promisedResults = dataScopes.map((scope) =>
       validateMetricNameForScope(metricName, scope, isEnabled, schemaInfo)
     );
 
@@ -173,7 +171,7 @@ async function validateFeatureData(feature: Feature, schemaInfo: SchemaInfo) {
 
 async function validateMetricNameForScope(
   metricName: string,
-  scope: MetricScope,
+  scope: JsonDataScope,
   isEnabled: boolean,
   schemaInfo: SchemaInfo
 ) {
@@ -201,7 +199,7 @@ async function validateMetricNameForScope(
 async function validateMetricPropertiesForScope(
   metricName: string,
   metricProperties: string[],
-  scope: MetricScope,
+  scope: JsonDataScope,
   isEnabled: boolean,
   schemaInfo: SchemaInfo
 ) {

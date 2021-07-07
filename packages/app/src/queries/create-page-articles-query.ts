@@ -1,3 +1,5 @@
+import { ArticleSummary } from '~/components/article-teaser';
+
 type ArticlePageSchema =
   | 'deceasedPage'
   | 'behaviorPage'
@@ -31,3 +33,5 @@ export function createPageArticlesQuery(
 
   return query;
 }
+
+export type ArticlesQueryResult = { articles?: ArticleSummary[] };

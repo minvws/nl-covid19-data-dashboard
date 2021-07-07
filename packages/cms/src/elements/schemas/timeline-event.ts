@@ -12,7 +12,11 @@ export const timelineEvent = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: REQUIRED,
+      validation: (x: any) =>
+        x
+          .required()
+          .max(60)
+          .error('Titels zijn gelimiteerd tot maximaal 60 tekens'),
       options: {
         ignoreLanguageSwitcher: true,
       },
@@ -36,7 +40,7 @@ export const timelineEvent = {
       validation: REQUIRED,
     },
     {
-      title: 'Einddatum',
+      title: 'Einddatum (optioneel)',
       name: 'dateEnd',
       type: 'date',
       options: {
