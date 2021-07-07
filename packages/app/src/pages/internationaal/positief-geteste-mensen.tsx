@@ -24,6 +24,7 @@ import { SelectCountries } from '~/domain/international/select-countries/select-
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
+import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getInPositiveTestsQuery } from '~/queries/in-positive-tests-query';
 import {
@@ -45,38 +46,42 @@ type CompiledCountriesValue = {
   date_end_unix: number;
 } & Record<CountryCode, number>;
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  createGetContent<{
-    page: InPositiveTestsQuery;
-    highlight: {
-      articles?: ArticleSummary[];
-    };
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return `{
+export const getStaticProps = withFeatureNotFoundPage(
+  'internationalPage',
+  createGetStaticProps(
+    getLastGeneratedDate,
+    createGetContent<{
+      page: InPositiveTestsQuery;
+      highlight: {
+        articles?: ArticleSummary[];
+      };
+    }>(() => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      return `{
       "page": ${getInPositiveTestsQuery()},
       "highlight": ${createPageArticlesQuery('in_positiveTestsPage', locale)}
     }`;
-  }),
-  createGetChoroplethData({
-    in: ({ tested_overall }) => tested_overall || choroplethMockData(),
-  }),
-  () => {
-    const { internationalData } = getInData([...countryCodes])();
-    const nldTestedLastValue = internationalData.nld.tested_overall.last_value;
-    return {
-      compiledInternationalData: compileInternationalData(internationalData),
-      internationalMetadataDatums: {
-        dateOrRange: {
-          start: nldTestedLastValue.date_start_unix,
-          end: nldTestedLastValue.date_end_unix,
+    }),
+    createGetChoroplethData({
+      in: ({ tested_overall }) => tested_overall || choroplethMockData(),
+    }),
+    () => {
+      const { internationalData } = getInData([...countryCodes])();
+      const nldTestedLastValue =
+        internationalData.nld.tested_overall.last_value;
+      return {
+        compiledInternationalData: compileInternationalData(internationalData),
+        internationalMetadataDatums: {
+          dateOrRange: {
+            start: nldTestedLastValue.date_start_unix,
+            end: nldTestedLastValue.date_end_unix,
+          },
+          dateOfInsertionUnix: nldTestedLastValue.date_of_insertion_unix,
         },
-        dateOfInsertionUnix: nldTestedLastValue.date_of_insertion_unix,
-      },
-    };
-  },
-  getCountryNames
+      };
+    },
+    getCountryNames
+  )
 );
 
 export default function PositiefGetesteMensenPage(
