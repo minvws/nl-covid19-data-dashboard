@@ -129,7 +129,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={text.reference}
           />
-          {content.main.articles && (
+          {content.main?.articles && (
             <ArticleStrip articles={content.main?.articles} />
           )}
           <TwoKpiSection>
