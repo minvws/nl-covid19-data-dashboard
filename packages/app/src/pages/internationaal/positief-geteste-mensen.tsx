@@ -64,8 +64,16 @@ export const getStaticProps = createGetStaticProps(
   }),
   () => {
     const { internationalData } = getInData([...countryCodes])();
+    const nldTestedLastValue = internationalData.nld.tested_overall.last_value;
     return {
       compiledInternationalData: compileInternationalData(internationalData),
+      internationalMetadataDatums: {
+        dateOrRange: {
+          start: nldTestedLastValue.date_start_unix,
+          end: nldTestedLastValue.date_end_unix,
+        },
+        dateOfInsertionUnix: nldTestedLastValue.date_of_insertion_unix,
+      },
     };
   },
   getCountryNames
@@ -80,6 +88,7 @@ export default function PositiefGetesteMensenPage(
     choropleth,
     countryNames,
     compiledInternationalData,
+    internationalMetadataDatums,
   } = props;
   const { in: choroplethData } = choropleth;
 
@@ -117,8 +126,6 @@ export default function PositiefGetesteMensenPage(
     [countryNames, compiledInternationalData]
   );
 
-  const nldTestedLastValue = internationalData.nld.tested_overall.last_value;
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -128,12 +135,8 @@ export default function PositiefGetesteMensenPage(
             icon={<Getest />}
             description={text.pagina_toelichting}
             metadata={{
+              ...internationalMetadataDatums,
               datumsText: text.datums,
-              dateOrRange: {
-                start: nldTestedLastValue.date_start_unix,
-                end: nldTestedLastValue.date_end_unix,
-              },
-              dateOfInsertionUnix: nldTestedLastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
             }}
             referenceLink={text.reference.href}
