@@ -6034,9 +6034,6 @@
           "type": "Polygon",
           "properties": { "ISO_A3": "RUS" }
         },
-        { "type": null, "properties": { "ISO_A3": "RUS" } },
-        { "type": null, "properties": { "ISO_A3": "RUS" } },
-        { "type": null, "properties": { "ISO_A3": "ABW" } },
         {
           "arcs": [[12, 13, 14, 15]],
           "type": "Polygon",
@@ -6057,7 +6054,6 @@
           "type": "Polygon",
           "properties": { "ISO_A3": "ARM" }
         },
-        { "type": null, "properties": { "ISO_A3": "ATG" } },
         {
           "arcs": [[23, 24, 25, 26, 27, 28, 29, 30, 31]],
           "type": "Polygon",
@@ -6264,7 +6260,7 @@
         {
           "arcs": [[185, -13, 186, 187]],
           "type": "Polygon",
-          "properties": { "ISO_A3": "CYP" }
+          "properties": { "ISO_A3": "XKX" }
         },
         {
           "arcs": [[188]],
@@ -6320,7 +6316,6 @@
           "type": "Polygon",
           "properties": { "ISO_A3": "MNE" }
         },
-        { "type": null, "properties": { "ISO_A3": "MSR" } },
         {
           "arcs": [[[-42, 200]], [[-86, -44, 201]]],
           "type": "MultiPolygon",
@@ -6413,15 +6408,11 @@
           "type": "MultiPolygon",
           "properties": { "ISO_A3": "TUR" }
         },
-        { "type": null, "properties": { "ISO_A3": "TUV" } },
         {
           "arcs": [[240, -197, 241, -6]],
           "type": "Polygon",
           "properties": { "ISO_A3": "UKR" }
-        },
-        { "type": null, "properties": { "ISO_A3": "VAT" } },
-        { "type": null, "properties": { "ISO_A3": "VCT" } },
-        { "type": null, "properties": { "ISO_A3": "CYP" } }
+        }
       ]
     }
   }
