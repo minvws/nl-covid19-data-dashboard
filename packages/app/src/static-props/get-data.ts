@@ -303,20 +303,20 @@ export function getGmData(context: GetStaticPropsContext) {
 const NOOP = () => null;
 
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
-  vr?: (collection: VrCollection) => T1;
-  gm?: (collection: GmCollection) => T2;
-  in?: (collection: InCollection) => T3;
+  vr?: (collection: VrCollection, context: GetStaticPropsContext) => T1;
+  gm?: (collection: GmCollection, context: GetStaticPropsContext) => T2;
+  in?: (collection: InCollection, context: GetStaticPropsContext) => T3;
 }) {
-  return () => {
+  return (context: GetStaticPropsContext) => {
     const filterVr = settings?.vr ?? NOOP;
     const filterGm = settings?.gm ?? NOOP;
     const filterIn = settings?.in ?? NOOP;
 
     return {
       choropleth: {
-        vr: filterVr(json.vrCollection) as T1,
-        gm: filterGm(json.gmCollection) as T2,
-        in: filterIn(json.inCollection) as T3,
+        vr: filterVr(json.vrCollection, context) as T1,
+        gm: filterGm(json.gmCollection, context) as T2,
+        in: filterIn(json.inCollection, context) as T3,
       },
     };
   };
