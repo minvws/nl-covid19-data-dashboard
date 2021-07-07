@@ -60,42 +60,54 @@ when resolving conflicts, so that none of the lines are ever deleted.
 ### Export
 
 The application reads its locale strings from
-`packages/app/public/nl-export.json` and `packages/app/public/en-export.json`.
+`packages/app/public/nl_export.json` and `packages/app/public/en_export.json`.
 These JSONs are exported from the Sanity lokalize documents but they are not
-part of the repository. Therefore you will regularly need to run `yarn lokalize:export` in order to keep your local JSON file up-to-date with the
-Sanity dataset. For Typescript these JSONs are a static data source, so it will
-complain when they do not contain all the keys that are used in the code.
+part of the repository. Therefore you will regularly need to run
+`yarn lokalize:export` in order to keep your local JSON file up-to-date with the
+Sanity dataset.
 
-#### Exports have keys with document ids
+The JSONs will include Sanity document ids in every leaf-key which are used to
+detect add-/delete-/move-actions of texts (`some_key__@__{document_id}`). These
+ids would result in compile- and run-time errors, but there's a workaround:
 
-By default the export command will write document ids to every key in the json.
-This id is necessary to detect local additions/deletions/moves in the
-json file. The `--production` flag will make sure the id's are not part of the
-keys.
+- compile-time: every export will also emit a `site-text.d.ts` with a `SiteText`
+  interface. This interface is used to type the imported JSONs.
+- run-time: on load of the app all ids will be removed from the keys.
 
-With document ids a key in the json will look like `some_key__@__{document_id}`,
-but that wouldn't work with our codebase because that would read the key
-`some_key`. To bypass this, runtime errors are preventend by stripping all
-document ids from the keys on load. For the typescript compiler a SiteText
-interface is created on every export. Also any local update to `nl_export.json`
-will result in an updated SiteText interface.
+The runtime workaround would be a waste of resources on production, but luckily
+we can run `yarn lokalize:export --production` to ignore document ids.
 
-### Sync local changes
+### Adding, Deleting and Moving Texts: Sync Mutations
 
-The easiest way of adding/deleting/moving keys is by mutating the
-`nl_export.json` file. Note that this json must include document ids as part of
-the leaf keys. This is enabled by default.
+First make sure the JSONs include document ids (`some_key__@__{document_id}`).
+Run `yarn lokalize:export` if these are not yet present in your JSONs.
 
-### Adding Texts
+You can add, delete and move keys by mutating the `nl_export.json` file. The
+sync script will automagically detect additions, deletions or moved lokalize
+texts.
 
-You can run `yarn lokalize:add` from the repository root to add a text to the
-Sanity lokalize section in the development dataset. There are a few different
-flavors for convenience.
+After you're done with the changes run `yarn lokalize:sync-mutations` and all
+mutations will be written to the mutations log file.
 
-New texts only need an NL string when they are added. EN is optional and will
+New texts will only have an NL string when they are added and will
 use NL as a fallback.
 
-After adding a text, the export script is called to update your local JSON file.
+After syncing texts, the export script is called to update your local JSON file.
+
+#### Deletings Texts
+
+Because feature branches plus the development deployment all use the same Sanity
+dataset, we can not simply remove a lokalize text document from the dataset
+without potentially breaking other branches.
+
+For this reason, when you delete a lokalize text, it will append the delete
+action to the mutations file but not actually delete the document. The export
+filters out any deletions that were logged to the mutations file. So in effect
+you end up with a local JSON file that has the deleted key removed, and the TS
+compiler sees the correct dataset.
+
+The actual deletions from Sanity only happen in the `sync-after-feature` phase,
+describe below.
 
 #### Flags
 
@@ -121,33 +133,6 @@ and flag them as being new.
 
 The communication team is then able to see a list of newly added texts and
 prepare them for an upcoming release.
-
-### Deletings Texts
-
-Texts can be deleted via `yarn lokalize:delete`
-
-Because feature branches plus the development deployment all use the same Sanity
-dataset, we can not simply remove a lokalize text document from the dataset
-without potentially breaking other branches.
-
-For this reason, when you delete a lokalize text, it will append the delete
-action to the mutations file but not actually delete the document. This script
-also triggers an export which then filters out any deletions that were logged to
-the mutations file. So in effect you end up with a local JSON file that has the
-deleted key removed, and the TS compiler sees the correct dataset.
-
-The actual deletions from Sanity only happen in the `sync-after-feature` phase,
-describe below.
-
-#### Undo Delete
-
-Although you should never manually edit the mutations file, there are probably
-some edge cases still.
-
-When you delete a key but later change your mind, the CLI will probably not let
-you re-add the key because it already exists (as the actual deletion is
-postponed until after release). In such case you can simply remove the delete
-mutation from the log file and run export again.
 
 ### Sync After Feature
 

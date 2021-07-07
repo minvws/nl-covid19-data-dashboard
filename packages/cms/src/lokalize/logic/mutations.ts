@@ -7,7 +7,8 @@ import {
   fetchLocalTextsFlatten,
   fetchLocalTextsFromCacheFlatten,
 } from './fetch';
-import { ID_PREFIX } from '@corona-dashboard/common';
+import { ID_PREFIX, removeIdsFromKeys } from '@corona-dashboard/common';
+import { flatten } from 'flat';
 
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 const HEADER = `timestamp,action,key${EOL}`;
@@ -139,8 +140,13 @@ export function collapseTextMutations(mutations: TextMutation[]) {
 }
 
 export async function getLocalMutations() {
-  const oldKeys = Object.keys(await fetchLocalTextsFromCacheFlatten());
-  const newKeys = Object.keys(await fetchLocalTextsFlatten());
+  const oldFlattenTexts = await fetchLocalTextsFromCacheFlatten();
+  const newFlattenTexts = await fetchLocalTextsFlatten();
+  const newFlattenTextsWithoutIds = flatten(
+    removeIdsFromKeys(newFlattenTexts)
+  ) as any;
+  const oldKeys = Object.keys(oldFlattenTexts);
+  const newKeys = Object.keys(newFlattenTexts);
 
   const removedKeyIdPairs = oldKeys
     .filter((key) => !newKeys.includes(key))
@@ -150,26 +156,32 @@ export async function getLocalMutations() {
     .filter((key) => !oldKeys.includes(key))
     .map(parseKeyWithId);
 
-  const mutations: Record<'add' | 'move' | 'delete', Record<string, string>> = {
-    add: {},
-    move: {},
-    delete: {},
+  const mutations = {
+    add: [] as { key: string; text: string }[],
+    move: [] as { key: string; oldKey: string; text: string; id: string }[],
+    delete: [] as { key: string; id: string }[],
   };
 
   removedKeyIdPairs.forEach(([key, id]) => {
-    mutations.delete[id] = key;
+    mutations.delete.push({ key, id });
   });
 
   addedKeyIdPairs.forEach(([key, id]) => {
-    if (mutations.delete[id]) {
-      delete mutations.delete[id];
-      mutations.move[id] = key;
+    const deleted = mutations.delete.find((x) => x.id === id);
+    if (deleted) {
+      mutations.delete = mutations.delete.filter((x) => x !== deleted);
+      mutations.move.push({
+        key,
+        oldKey: deleted.key,
+        id,
+        text: newFlattenTextsWithoutIds[key],
+      });
     } else {
-      mutations.add[key] = key;
+      mutations.add.push({ key, text: newFlattenTextsWithoutIds[key] });
     }
   });
 
-  return { mutations, removedKeyIdPairs, addedKeyIdPairs };
+  return mutations;
 }
 
 function parseKeyWithId(keyWithId: string) {

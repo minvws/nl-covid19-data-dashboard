@@ -5,7 +5,7 @@
  */
 import meow from 'meow';
 import prompts from 'prompts';
-import { getLocalMutations } from './logic';
+import { fetchLocalTextsFromCacheFlatten, getLocalMutations } from './logic';
 import { exportLokalizeTexts } from './logic/export';
 
 const cli = meow(
@@ -41,10 +41,7 @@ const cli = meow(
 (async function run() {
   const dataset = cli.flags.dataset;
 
-  const { mutations } = await getLocalMutations();
-  const hasMutations =
-    Object.keys({ ...mutations.add, ...mutations.delete, ...mutations.move })
-      .length > 0;
+  const { hasMutations, mutations } = await checkMutations();
 
   if (hasMutations && !cli.flags.production) {
     const response = await prompts([
@@ -71,3 +68,18 @@ ${JSON.stringify(mutations, null, 2)}
   console.error(`Export failed: ${err.message}`);
   process.exit(1);
 });
+
+async function checkMutations() {
+  const hasCachedTexts = await fetchLocalTextsFromCacheFlatten()
+    .then(() => true)
+    .catch(() => false);
+
+  const mutations = hasCachedTexts ? await getLocalMutations() : undefined;
+
+  return {
+    hasMutations: mutations
+      ? [...mutations.add, ...mutations.delete, ...mutations.move].length > 0
+      : false,
+    mutations,
+  };
+}

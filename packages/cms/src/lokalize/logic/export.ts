@@ -6,7 +6,7 @@
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { createFlatTexts, removeIdsFromKeys } from '@corona-dashboard/common';
 import flatten, { unflatten } from 'flat';
-import fs from 'fs';
+import fs from 'fs-extra';
 import mapValues from 'lodash/mapValues';
 import path from 'path';
 import prettier from 'prettier';
@@ -31,6 +31,11 @@ export const localeCacheDirectory = path.resolve(
 );
 
 /**
+ * Make sure the cache directory exists
+ */
+fs.ensureDirSync(localeCacheDirectory);
+
+/**
  * @TODO:
  * - remove add / delete cli
  */
@@ -38,11 +43,6 @@ export const localeCacheDirectory = path.resolve(
 export async function exportLokalizeTexts(
   dataset?: string,
   includeDrafts = false,
-  /**
-   * The production mode will ensure two things:
-   * - do not validate there are no local changes before overwriting the exports
-   * - do not include document id's as part of the lokalize keys
-   */
   appendDocumentIdToKey = false
 ) {
   const client = getClient(dataset);
