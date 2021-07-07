@@ -17,6 +17,11 @@ import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-page-elements-query';
+import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
@@ -33,9 +38,14 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
     articles?: ArticleSummary[];
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('intensiveCarePage', locale);
+
+    return `{
+      ${createPageArticlesQuery('intensiveCarePage', locale)},
+      "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
+    }`;
   })
 );
 
@@ -152,6 +162,10 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
                 }}
                 seriesConfig={[
                   {
