@@ -42,7 +42,12 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
   const [listRef, listWidth] = useInitialWidth<HTMLDivElement>();
 
   return (
-    <section style={{ width: listWidth ? listWidth + 20 : undefined }}>
+    <section
+      style={{
+        maxWidth: '100%',
+        width: listWidth ? listWidth + 20 : undefined,
+      }}
+    >
       <VisuallyHidden>{dateString}</VisuallyHidden>
 
       {!displayTooltipValueOnly && isMounted && (
