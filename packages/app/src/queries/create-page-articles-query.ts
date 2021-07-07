@@ -1,6 +1,6 @@
 import { ArticleSummary } from '~/components/article-teaser';
 
-type ArticlePageSchema =
+type ArticlePageType =
   | 'deceasedPage'
   | 'behaviorPage'
   | 'hospitalPage'
@@ -19,7 +19,7 @@ type ArticlePageSchema =
   | 'infectiousPeoplePage';
 
 export function createPageArticlesQuery(
-  schemaName: ArticlePageSchema,
+  schemaName: ArticlePageType,
   locale: string,
   fieldName = 'articles'
 ) {

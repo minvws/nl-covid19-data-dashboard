@@ -1,7 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
@@ -15,7 +14,10 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -37,13 +39,13 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
-    articles?: ArticleSummary[];
+    fix_this: ArticlesQueryResult;
     elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
     return `{
-      ${createPageArticlesQuery('intensiveCarePage', locale)},
+      "fix_this": ${createPageArticlesQuery('intensiveCarePage', locale)},
       "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
     }`;
   })
@@ -89,7 +91,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.reference}
           />
 
-          <ArticleStrip articles={content.articles} />
+          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile
