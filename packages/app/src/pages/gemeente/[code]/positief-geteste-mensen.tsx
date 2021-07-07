@@ -4,7 +4,6 @@ import {
 } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
@@ -22,7 +21,10 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -51,12 +53,12 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
+    fix_this: ArticlesQueryResult;
     elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
-      ${createPageArticlesQuery('positiveTestsPage', locale)},
+      "fix_this": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "elements": ${createElementsQuery(
         'gm',
         ['tested_overall', 'tested_ggd'],
@@ -115,7 +117,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.reference}
           />
 
-          <ArticleStrip articles={content.articles} />
+          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile
