@@ -14,6 +14,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
 import { choroplethMockData } from '~/domain/internationaal/logic/choropleth-mock-data';
+import { InfectedTableTile } from '~/domain/international/infected-table-tile';
 import { CountryOption } from '~/domain/international/select-countries/context';
 import {
   CountryCode,
@@ -207,6 +208,11 @@ export default function PositiefGetesteMensenPage(
               )}
             />
           </EuropeChoroplethTile>
+
+          <InfectedTableTile
+            data={choroplethData}
+            countryNames={countryNames}
+          />
         </TileList>
       </InternationalLayout>
     </Layout>
