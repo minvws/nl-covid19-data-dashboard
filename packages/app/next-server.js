@@ -14,9 +14,9 @@ const { imageResizeTargets, assert } = require('@corona-dashboard/common');
 const { last, omit } = require('lodash');
 const querystring = require('querystring');
 
-const MAX_IMAGE_WIDTH = last(imageResizeTargets);
+const MAX_IMAGE_SIZE = last(imageResizeTargets);
 assert(
-  MAX_IMAGE_WIDTH > 0,
+  MAX_IMAGE_SIZE > 0,
   'Failed to get maximum image width from imageResizeTargets'
 );
 
@@ -48,7 +48,7 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
 
   server.use(
     '/cms-:type(images|files)',
-    createProxyMiddleware({
+    createProxyMiddleware(filterImageRequests, {
       target: 'https://cdn.sanity.io',
       changeOrigin: true,
       selfHandleResponse: true,
@@ -64,27 +64,7 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
           `/$1/${SANITY_PATH}`
         );
 
-        /**
-         * Do not allow the use of "h" and limit the requested width to our
-         * own defined maximum.
-         */
-        const shouldLimitWidth = req.query.w > MAX_IMAGE_WIDTH;
-
-        if (req.query.h || shouldLimitWidth) {
-          const limitedQuery = omit(
-            {
-              ...req.query,
-              w: shouldLimitWidth ? MAX_IMAGE_WIDTH : req.query.w,
-            },
-            ['h']
-          );
-
-          return `${newPath.split('?')[0]}?${querystring.stringify(
-            limitedQuery
-          )}`;
-        } else {
-          return newPath;
-        }
+        return newPath;
       },
       onProxyRes: responseInterceptor(async function (
         responseBuffer,
@@ -159,3 +139,12 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
     res.removeHeader('X-Powered-By');
   }
 })();
+
+function filterImageRequests(pathname, req) {
+  /**
+   * Only allow images using our maximum used dimensions.
+   * Disallow `h` parameter.
+   */
+  const allowRequest = req.query.w <= MAX_IMAGE_SIZE && !req.query.h;
+  return allowRequest;
+}
