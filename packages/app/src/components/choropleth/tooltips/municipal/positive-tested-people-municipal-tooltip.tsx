@@ -1,10 +1,10 @@
 import {
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
+  GmCollectionTestedOverall,
+  GmProperties,
 } from '@corona-dashboard/common';
-import { InlineText, Text } from '~/components/typography';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -13,7 +13,7 @@ import { municipalThresholds } from '../../municipal-thresholds';
 export function PositiveTestedPeopleMunicipalTooltip({
   context,
 }: {
-  context: MunicipalityProperties & MunicipalitiesTestedOverall;
+  context: GmProperties & GmCollectionTestedOverall;
 }) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const reverseRouter = useReverseRouter();

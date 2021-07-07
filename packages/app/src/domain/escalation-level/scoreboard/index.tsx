@@ -1,18 +1,18 @@
-import { useState, useMemo } from 'react';
+import css from '@styled-system/css';
+import { useMemo, useState } from 'react';
+import styled from 'styled-components';
 import GetestIcon from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
+import { Select } from '~/components/select';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { SafetyRegionGroup } from './components/safety-region-group';
 import { SafetyRegionRow } from './components/safety-region-row';
-import { Select } from '~/components/select';
-import css from '@styled-system/css';
-import styled from 'styled-components';
 import {
+  ScoreboardRowData,
   scoreboardSortOptions,
   SortIdentifier,
-  ScoreboardRowData,
 } from './logic';
 
 interface ScoreboardProps {

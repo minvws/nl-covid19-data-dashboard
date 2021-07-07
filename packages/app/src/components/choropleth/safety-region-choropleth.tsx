@@ -1,7 +1,7 @@
 import {
-  Regions,
-  RegionsMetricName,
-  SafetyRegionProperties,
+  VrCollection,
+  VrCollectionMetricName,
+  VrProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
@@ -10,6 +10,10 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -23,13 +27,18 @@ import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, regionGeo } from './topology';
 
-type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
-  data: Pick<Regions, K>;
+type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
+  data: Pick<VrCollection, K>;
   metricName: K;
   metricProperty: string;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   selectedCode?: string;
   highlightSelection?: boolean;
-  tooltipContent?: (context: SafetyRegionProperties & T) => ReactNode;
+  tooltipContent?: (context: VrProperties & T) => ReactNode;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   highlightCode?: string;
   getLink?: (code: string) => string;
@@ -49,10 +58,11 @@ type SafetyRegionChoroplethProps<T, K extends RegionsMetricName> = {
  * When a selected region code is specified, the map will zoom in on the safety
  * region.
  */
-export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
-  props: SafetyRegionChoroplethProps<T, K>
+export function SafetyRegionChoropleth<T, K extends VrCollectionMetricName>(
+  props: VrChoroplethProps<T, K>
 ) {
   const {
+    accessibility,
     data,
     selectedCode,
     metricName,
@@ -100,7 +110,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   );
 
   const renderFeature = useCallback(
-    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
+    (feature: Feature<MultiPolygon, VrProperties>, path: string) => {
       const { vrcode } = feature.properties;
       const fill =
         ((hasData && getFillColor(vrcode)) || noDataFillColor) ?? 'white';
@@ -124,7 +134,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
   );
 
   const renderHighlight = useCallback(
-    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
+    (feature: Feature<MultiPolygon, VrProperties>, path: string) => {
       const { vrcode } = feature.properties;
 
       if (highlightCode !== vrcode) return;
@@ -147,7 +157,7 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     );
 
   const renderHover = useCallback(
-    (feature: Feature<MultiPolygon, SafetyRegionProperties>, path: string) => {
+    (feature: Feature<MultiPolygon, VrProperties>, path: string) => {
       const { vrcode, vrname } = feature.properties;
 
       const isSelected = vrcode === selectedCode && highlightSelection;
@@ -185,13 +195,19 @@ export function SafetyRegionChoropleth<T, K extends RegionsMetricName>(
     return null;
   };
 
+  const choroplethAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_choropleth',
+  ]);
+
   return (
     <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
+        accessibility={choroplethAccessibility}
         minHeight={minHeight}
         description={dataDescription}
         featureCollection={regionGeo}
+        outlines={countryGeo}
         hovers={hasData ? regionGeo : undefined}
         boundingBox={boundingBox || countryGeo}
         renderFeature={renderFeature}

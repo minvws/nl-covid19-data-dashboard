@@ -1,7 +1,5 @@
-import { last } from 'lodash';
-import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
 import { SeriesItem, SeriesSingleValue } from '../logic';
+import { useGappedSeries } from '../logic/use-gapped-series';
 import { LineTrend } from './line-trend';
 
 type GappedLinedTrendProps = {
@@ -23,25 +21,7 @@ export function GappedLinedTrend(props: GappedLinedTrendProps) {
    * new SeriesSingleValue array is created. Effectively creating separate lines
    * for each consecutive list of defined values.
    */
-  const gappedSeries = useMemo(
-    () =>
-      series.reduce<SeriesSingleValue[][]>(
-        (lists, item) => {
-          let currentList = last(lists) || [];
-          if (currentList.length && !isDefined(item.__value)) {
-            const newList: SeriesSingleValue[] = [];
-            lists.push(newList);
-            currentList = newList;
-          }
-          if (isDefined(item.__value)) {
-            currentList.push(item);
-          }
-          return lists;
-        },
-        [[]]
-      ),
-    [series]
-  );
+  const gappedSeries = useGappedSeries(series);
 
   return (
     <>

@@ -4,16 +4,18 @@ import styled from 'styled-components';
 import ExternalIcon from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
+import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
+import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { Markdown } from '~/components/markdown';
-import { asResponsiveArray } from '~/style/utils';
 
 export function AppFooter() {
   const reverseRouter = useReverseRouter();
   const { siteText: text } = useIntl();
+  const internationalFeature = useFeature('internationalPage');
 
   return (
     <footer>
@@ -49,6 +51,11 @@ export function AppFooter() {
                 <Item href={reverseRouter.gm.index()}>
                   {text.nav.links.gemeente}
                 </Item>
+                {internationalFeature.isEnabled ? (
+                  <Item href={reverseRouter.in.index()}>
+                    {text.nav.links.internationaal}
+                  </Item>
+                ) : null}
               </FooterList>
             </nav>
           </Box>

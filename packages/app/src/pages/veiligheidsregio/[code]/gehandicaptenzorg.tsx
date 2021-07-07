@@ -133,6 +133,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'disability_care_confirmed_cases_over_time_chart',
+                }}
                 values={values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -231,6 +234,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             >
               {(timeframe) => (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'disability_care_infected_locations_over_time_chart',
+                  }}
                   values={values}
                   timeframe={timeframe}
                   seriesConfig={[
@@ -287,6 +293,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'disability_care_deceased_over_time_chart',
+                }}
                 values={values}
                 timeframe={timeframe}
                 seriesConfig={[

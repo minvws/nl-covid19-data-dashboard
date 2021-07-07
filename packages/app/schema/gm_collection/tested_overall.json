@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "municipalities_tested_overall",
+  "title": "gm_collection_tested_overall",
   "additionalProperties": false,
   "required": [
     "date_unix",

@@ -3,9 +3,9 @@ import {
   HighlightTeaser,
   HighlightTeaserProps,
 } from '~/components/highlight-teaser';
+import { Block, ImageBlock } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ArticleBox } from './article-list';
-import { Block, ImageBlock } from '~/types/cms';
 
 export interface WeeklyHighlightProps {
   title: string;

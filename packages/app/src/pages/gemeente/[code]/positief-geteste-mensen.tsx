@@ -1,10 +1,9 @@
 import {
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
+  GmCollectionTestedOverall,
+  GmProperties,
 } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
@@ -22,8 +21,15 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-page-elements-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -47,10 +53,14 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
+    fix_this: ArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('positiveTestsPage', locale);
+    return `{
+      "fix_this": ${createPageArticlesQuery('positiveTestsPage', locale)},
+      "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
+    }`;
   })
 );
 
@@ -79,8 +89,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
-  const featureInfectionsMovingAverage = useFeature('infectionsMovingAverage');
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
@@ -105,7 +113,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.reference}
           />
 
-          <ArticleStrip articles={content.articles} />
+          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -182,69 +190,48 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
             timeframeOptions={['all', '5weeks']}
           >
-            {(timeframe) =>
-              featureInfectionsMovingAverage.isEnabled ? (
-                <TimeSeriesChart
-                  values={data.tested_overall.values}
-                  timeframe={timeframe}
-                  seriesConfig={[
-                    {
-                      type: 'line',
-                      metricProperty: 'infected_per_100k_moving_average',
-                      label:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .infected_per_100k_moving_average,
-                      color: colors.data.primary,
-                    },
-                    {
-                      type: 'bar',
-                      metricProperty: 'infected_per_100k',
-                      label:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .infected_per_100k,
-                      color: colors.data.primary,
-                    },
-                    {
-                      type: 'invisible',
-                      metricProperty: 'infected',
-                      label: siteText.common.totaal,
-                    },
-                  ]}
-                  dataOptions={{
-                    benchmark: {
-                      value: 7,
-                      label: siteText.common.signaalwaarde,
-                    },
-                  }}
-                />
-              ) : (
-                <TimeSeriesChart
-                  values={data.tested_overall.values}
-                  timeframe={timeframe}
-                  seriesConfig={[
-                    {
-                      type: 'area',
-                      metricProperty: 'infected_per_100k',
-                      label:
-                        siteText.positief_geteste_personen.tooltip_labels
-                          .infected_per_100k,
-                      color: colors.data.primary,
-                    },
-                    {
-                      type: 'invisible',
-                      metricProperty: 'infected',
-                      label: siteText.common.totaal,
-                    },
-                  ]}
-                  dataOptions={{
-                    benchmark: {
-                      value: 7,
-                      label: siteText.common.signaalwaarde,
-                    },
-                  }}
-                />
-              )
-            }
+            {(timeframe) => (
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'confirmed_cases_infected_over_time_chart',
+                }}
+                values={data.tested_overall.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'infected_per_100k_moving_average',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_per_100k_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'infected_per_100k',
+                    label:
+                      siteText.positief_geteste_personen.tooltip_labels
+                        .infected_per_100k,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'invisible',
+                    metricProperty: 'infected',
+                    label: siteText.common.totaal,
+                  },
+                ]}
+                dataOptions={{
+                  benchmark: {
+                    value: 7,
+                    label: siteText.common.signaalwaarde,
+                  },
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_overall'
+                  ),
+                }}
+              />
+            )}
           </ChartTile>
 
           <ChoroplethTile
@@ -263,13 +250,16 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <MunicipalityChoropleth
+              accessibility={{
+                key: 'confirmed_cases_choropleth',
+              }}
               selectedCode={data.code}
               data={choropleth.gm}
               getLink={reverseRouter.gm.positiefGetesteMensen}
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={(
-                context: MunicipalityProperties & MunicipalitiesTestedOverall
+                context: GmProperties & GmCollectionTestedOverall
               ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
             />
           </ChoroplethTile>

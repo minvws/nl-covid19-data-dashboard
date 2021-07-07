@@ -11,8 +11,14 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+      - name: Lookup cached node_modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install packages
+        run: yarn install
+
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
       - name: Synchronize texts

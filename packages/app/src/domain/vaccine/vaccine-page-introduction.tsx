@@ -1,4 +1,4 @@
-import { National } from '@corona-dashboard/common';
+import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
@@ -21,9 +21,10 @@ import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
+
 interface VaccinePageIntroductionProps {
   data: Pick<
-    National,
+    Nl,
     | 'vaccine_administered_planned'
     | 'vaccine_administered_total'
     | 'vaccine_administered_rate_moving_average'
@@ -79,6 +80,9 @@ export function VaccinePageIntroduction({
                 <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
                 <div css={css({ position: 'relative' })}>
                   <VaccineAdministrationsOverTimeChart
+                    accessibility={{
+                      key: 'vaccine_introduction_administrations_over_time',
+                    }}
                     title={text.grafiek_gezette_prikken.titel}
                     values={data.vaccine_administered_total.values}
                   />

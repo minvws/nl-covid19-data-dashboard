@@ -1,17 +1,34 @@
 import { isDefined } from 'ts-is-present';
 import {
-  MunicipalSewerPerInstallationValue,
-  RegionalSewerPerInstallationValue,
+  GmSewerPerInstallationValue,
+  VrSewerPerInstallationValue,
 } from './types';
 
 export type UnknownObject = Record<string, unknown>;
 
-export function sortTimeSeriesInDataInPlace<T>(data: T) {
+export function sortTimeSeriesInDataInPlace<T>(
+  data: T,
+  { setDatesToMiddleOfDay = false } = {}
+) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
     const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
     timeSeries.values = sortTimeSeriesValues(timeSeries.values);
+
+    if (setDatesToMiddleOfDay) {
+      /**
+       * We'll map all dates to midday (12:00). This simplifies the rendering of a
+       * marker/annotation on a date.
+       */
+      timeSeries.values = timeSeries.values.map(setValueDatesToMiddleOfDay);
+
+      if (timeSeries.last_value) {
+        timeSeries.last_value = setValueDatesToMiddleOfDay(
+          timeSeries.last_value
+        );
+      }
+    }
   }
 
   /**
@@ -33,9 +50,16 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
 
     nestedSeries.values = nestedSeries.values.map((x) => {
       x.values = sortTimeSeriesValues(x.values) as
-        | RegionalSewerPerInstallationValue[]
-        | MunicipalSewerPerInstallationValue[];
+        | VrSewerPerInstallationValue[]
+        | GmSewerPerInstallationValue[];
 
+      if (setDatesToMiddleOfDay) {
+        x.values = x.values.map(setValueDatesToMiddleOfDay);
+
+        if (x.last_value) {
+          x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+        }
+      }
       return x;
     });
   }
@@ -73,6 +97,18 @@ export function sortTimeSeriesValues(values: TimestampedValue[]) {
   );
 }
 
+function setValueDatesToMiddleOfDay<T extends TimestampedValue>(value: T) {
+  if (isDateSpanValue(value)) {
+    value.date_start_unix = middleOfDayInSeconds(value.date_start_unix);
+    value.date_end_unix = middleOfDayInSeconds(value.date_end_unix);
+  }
+  if (isDateValue(value)) {
+    value.date_unix = middleOfDayInSeconds(value.date_unix);
+  }
+
+  return value;
+}
+
 export type TimestampedValue = DateValue | DateSpanValue;
 
 export interface DateValue {
@@ -91,7 +127,7 @@ export interface TimeSeriesMetric<T = TimestampedValue> {
 
 export interface SewerPerInstallationData {
   values: (TimeSeriesMetric<
-    RegionalSewerPerInstallationValue | MunicipalSewerPerInstallationValue
+    VrSewerPerInstallationValue | GmSewerPerInstallationValue
   > & {
     rwzi_awzi_name: string;
   })[];
@@ -137,4 +173,22 @@ export function isDateSpanSeries(
     isDefined(firstValue?.date_end_unix) &&
     isDefined(firstValue?.date_start_unix)
   );
+}
+
+export function startOfDayInSeconds(seconds: number) {
+  const date = new Date(seconds * 1000);
+  date.setHours(0, 0, 0, 0);
+  return Math.floor(date.getTime() / 1000);
+}
+
+export function endOfDayInSeconds(seconds: number) {
+  const date = new Date(seconds * 1000);
+  date.setHours(23, 59, 59, 999);
+  return Math.floor(date.getTime() / 1000);
+}
+
+export function middleOfDayInSeconds(seconds: number) {
+  const date = new Date(seconds * 1000);
+  date.setHours(12, 0, 0, 0);
+  return Math.floor(date.getTime() / 1000);
 }

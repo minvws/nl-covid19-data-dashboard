@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_hospital_lcps",
+  "title": "nl_hospital_lcps",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_hospital_lcps_value",
+      "title": "nl_hospital_lcps_value",
       "type": "object",
       "properties": {
         "beds_occupied_covid": {

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import {
   borders,
@@ -57,3 +58,9 @@ export const Box = styled.div.withConfig({
   grid,
   transform
 );
+
+/**
+ * The MotionBox component is enriched with framer-motion to support animated
+ * properties.
+ */
+export const MotionBox = motion(Box);

@@ -20,6 +20,11 @@ export function useReverseRouter() {
         toegankelijkheid: () => '/toegankelijkheid',
       },
 
+      in: {
+        index: () => reverseRouter.in.positiefGetesteMensen() + openMenuSuffix,
+        positiefGetesteMensen: () => `/internationaal/positief-geteste-mensen`,
+      },
+
       nl: {
         index: () => reverseRouter.nl.vaccinaties() + openMenuSuffix,
         vaccinaties: () => `/landelijk/vaccinaties`,
