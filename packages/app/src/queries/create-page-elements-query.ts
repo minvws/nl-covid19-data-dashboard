@@ -1,8 +1,6 @@
 import { MetricScope } from '@corona-dashboard/common';
 import { TimelineEventConfig } from '~/components/time-series-chart/components/timeline';
 
-const NO_DRAFTS = `!(_id in path('drafts.**'))`;
-
 function formatStringArray(array: string[]) {
   return `[${array.map((x) => `'${x}'`).join(',')}]`;
 }
@@ -15,7 +13,6 @@ export function createElementsQuery(
   const query = `// groq
     {
       'timeSeries': *[
-        ${NO_DRAFTS}
         && _type == 'timeSeries'
         && scope == '${scope}'
         && metricName in ${formatStringArray(metricNames)}
@@ -31,7 +28,6 @@ export function createElementsQuery(
         }
       },
       'kpi': *[
-        ${NO_DRAFTS}
         && _type == 'kpi'
         && scope == '${scope}'
         && metricName in ${formatStringArray(metricNames)}
