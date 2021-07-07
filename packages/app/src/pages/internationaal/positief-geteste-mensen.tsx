@@ -117,6 +117,8 @@ export default function PositiefGetesteMensenPage(
     [countryNames, compiledInternationalData]
   );
 
+  const nldTestedLastValue = internationalData.nld.tested_overall.last_value;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -128,10 +130,10 @@ export default function PositiefGetesteMensenPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: choroplethData[0].date_start_unix,
-                end: choroplethData[0].date_end_unix,
+                start: nldTestedLastValue.date_start_unix,
+                end: nldTestedLastValue.date_end_unix,
               },
-              dateOfInsertionUnix: choroplethData[0].date_of_insertion_unix,
+              dateOfInsertionUnix: nldTestedLastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
             }}
             referenceLink={text.reference.href}
