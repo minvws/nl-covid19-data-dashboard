@@ -30,7 +30,7 @@ const renderers = {
    *
    *     ```VR09,VR16
    *     This will only be displayed on routes with a code equal to VR09 or VR16.
-   *     ````
+   *     ```
    */
   code: ({ language, value }: { language: string | null; value: string }) => (
     <DisplayOnMatchingQueryCode code={language || ''}>
