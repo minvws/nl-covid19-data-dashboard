@@ -1,4 +1,4 @@
-import { Gm } from '@corona-dashboard/common';
+import { Gm, GmDifference } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
@@ -33,14 +33,21 @@ export const gmPageMetricNames = [
 
 export type GmPageMetricNames = typeof gmPageMetricNames[number];
 
-export type MunicipalPageMetricData = Pick<Gm, GmPageMetricNames>;
+export type MunicipalSideBarData = {
+  code: string;
+  tested_overall: Pick<Gm['tested_overall'], 'last_value'>;
+  deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
+  hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
+  sewer: Pick<Gm['sewer'], 'last_value'>;
+  difference: GmDifference;
+};
 
 type MunicipalityLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
-      data: MunicipalPageMetricData;
+      data: MunicipalSideBarData;
       municipalityName: string;
     }
   | {

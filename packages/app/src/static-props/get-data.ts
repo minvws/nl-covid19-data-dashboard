@@ -2,14 +2,15 @@ import {
   assert,
   Gm,
   GmCollection,
+  In,
   InCollection,
   Nl,
   sortTimeSeriesInDataInPlace,
-  In,
   Vr,
   VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
+import { isObject } from 'lodash';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
 import { AsyncWalkBuilder } from 'walkjs';
@@ -19,6 +20,7 @@ import { CountryCode } from '~/domain/international/select-countries/country-cod
 import {
   gmPageMetricNames,
   GmPageMetricNames,
+  MunicipalSideBarData,
 } from '~/domain/layout/municipality-layout';
 import {
   NlPageMetricNames,
@@ -240,7 +242,11 @@ export function loadAndSortVrData(vrcode: string) {
 export function selectGmPageMetricData<T extends keyof Gm = GmPageMetricNames>(
   ...additionalMetrics: T[]
 ) {
-  return selectGmData(...[...gmPageMetricNames, ...additionalMetrics]);
+  return selectGmData(...additionalMetrics);
+}
+
+function hasLastValue(item: unknown): item is { last_value: unknown } {
+  return isObject(item) && 'last_value' in item;
 }
 
 /**
@@ -251,12 +257,30 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
+    const data = gmData.data as unknown as Record<
+      string,
+      { last_value: unknown } | string | number
+    >;
+    const sideBarData = gmPageMetricNames.reduce((aggr, name) => {
+      const item = data[name];
+      if (hasLastValue(item)) {
+        aggr[name] = { last_value: item.last_value };
+      } else {
+        aggr[name] = item;
+      }
+      return aggr;
+    }, {} as any) as MunicipalSideBarData;
+
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, gmData.data[p]),
       {} as Pick<Gm, T>
     );
 
-    return { selectedGmData, municipalityName: gmData.municipalityName };
+    return {
+      selectedGmData,
+      sideBarData,
+      municipalityName: gmData.municipalityName,
+    };
   };
 }
 

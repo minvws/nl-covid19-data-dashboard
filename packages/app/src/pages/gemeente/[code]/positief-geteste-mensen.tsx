@@ -48,7 +48,12 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('static_values'),
+  selectGmPageMetricData(
+    'static_values',
+    'tested_overall',
+    'difference',
+    'code'
+  ),
   createGetChoroplethData({
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
@@ -67,6 +72,7 @@ export const getStaticProps = createGetStaticProps(
 const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
+    sideBarData,
     choropleth,
     municipalityName,
     content,
@@ -92,7 +98,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >

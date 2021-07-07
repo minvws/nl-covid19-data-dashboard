@@ -21,7 +21,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedGmData: data, lastGenerated, municipalityName } = props;
+  const { lastGenerated, municipalityName, sideBarData } = props;
   const router = useRouter();
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -34,7 +34,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       />
