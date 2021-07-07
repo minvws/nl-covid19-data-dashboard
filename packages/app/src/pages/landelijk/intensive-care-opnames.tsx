@@ -89,7 +89,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.reference}
           />
 
-          <ArticleStrip articles={content?.articles} />
+          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiTile
