@@ -62,7 +62,20 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     in: ({ tested_overall }) => tested_overall || choroplethMockData(),
   }),
-  getInData([...countryCodes]),
+  () => {
+    const { internationalData } = getInData([...countryCodes])();
+    const nldTestedLastValue = internationalData.nld.tested_overall.last_value;
+    return {
+      compiledInternationalData: compileInternationalData(internationalData),
+      internationalMetadataDatums: {
+        dateOrRange: {
+          start: nldTestedLastValue.date_start_unix,
+          end: nldTestedLastValue.date_end_unix,
+        },
+        dateOfInsertionUnix: nldTestedLastValue.date_of_insertion_unix,
+      },
+    };
+  },
   getCountryNames
 );
 
@@ -74,7 +87,8 @@ export default function PositiefGetesteMensenPage(
     content,
     choropleth,
     countryNames,
-    internationalData,
+    compiledInternationalData,
+    internationalMetadataDatums,
   } = props;
   const { in: choroplethData } = choropleth;
 
@@ -102,11 +116,6 @@ export default function PositiefGetesteMensenPage(
     'comparedValue could not be found for country code nld'
   );
 
-  const compiledInternationalData = useMemo(
-    () => compileInternationalData(internationalData),
-    [internationalData]
-  );
-
   const countryOptions = useMemo(
     () =>
       compileCountryOptions(
@@ -126,12 +135,8 @@ export default function PositiefGetesteMensenPage(
             icon={<Getest />}
             description={text.pagina_toelichting}
             metadata={{
+              ...internationalMetadataDatums,
               datumsText: text.datums,
-              dateOrRange: {
-                start: choroplethData[0].date_start_unix,
-                end: choroplethData[0].date_end_unix,
-              },
-              dateOfInsertionUnix: choroplethData[0].date_of_insertion_unix,
               dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
             }}
             referenceLink={text.reference.href}
