@@ -24,6 +24,11 @@ import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-page-elements-query';
+import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
@@ -47,9 +52,17 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('positiveTestsPage', locale);
+    return `{
+      ${createPageArticlesQuery('positiveTestsPage', locale)},
+      "elements": ${createElementsQuery(
+        'gm',
+        ['tested_overall', 'tested_ggd'],
+        locale
+      )}
+    }`;
   })
 );
 
@@ -214,6 +227,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     value: 7,
                     label: siteText.common.signaalwaarde,
                   },
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_overall'
+                  ),
                 }}
               />
             )}
