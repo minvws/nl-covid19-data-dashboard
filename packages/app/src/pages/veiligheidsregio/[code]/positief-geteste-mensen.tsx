@@ -6,7 +6,6 @@ import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -27,7 +26,15 @@ import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-page-elements-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -51,8 +58,9 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    main: { articles?: ArticleSummary[] };
-    ggd: { articles?: ArticleSummary[] };
+    main: ArticlesQueryResult;
+    ggd: ArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
@@ -62,6 +70,11 @@ export const getStaticProps = createGetStaticProps(
         locale,
         'ggdArticles'
       )},
+      "elements": ${createElementsQuery(
+        'vr',
+        ['tested_overall', 'tested_ggd'],
+        locale
+      )}
     }`;
   })
 );
@@ -228,6 +241,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     value: 7,
                     label: siteText.common.signaalwaarde,
                   },
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_overall'
+                  ),
                 }}
               />
             )}
@@ -370,7 +387,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         .infected_percentage,
                   },
                 ]}
-                dataOptions={{ isPercentage: true }}
+                dataOptions={{
+                  isPercentage: true,
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_ggd'
+                  ),
+                }}
               />
             )}
           </ChartTile>
