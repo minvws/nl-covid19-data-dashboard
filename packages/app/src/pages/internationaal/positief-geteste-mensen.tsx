@@ -62,7 +62,12 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     in: ({ tested_overall }) => tested_overall || choroplethMockData(),
   }),
-  getInData([...countryCodes]),
+  () => {
+    const { internationalData } = getInData([...countryCodes])();
+    return {
+      compiledInternationalData: compileInternationalData(internationalData),
+    };
+  },
   getCountryNames
 );
 
@@ -74,7 +79,7 @@ export default function PositiefGetesteMensenPage(
     content,
     choropleth,
     countryNames,
-    internationalData,
+    compiledInternationalData,
   } = props;
   const { in: choroplethData } = choropleth;
 
@@ -100,11 +105,6 @@ export default function PositiefGetesteMensenPage(
   assert(
     isDefined(comparedValue),
     'comparedValue could not be found for country code nld'
-  );
-
-  const compiledInternationalData = useMemo(
-    () => compileInternationalData(internationalData),
-    [internationalData]
   );
 
   const countryOptions = useMemo(
