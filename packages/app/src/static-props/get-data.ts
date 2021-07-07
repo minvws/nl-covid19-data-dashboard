@@ -5,6 +5,7 @@ import {
   InCollection,
   Nl,
   sortTimeSeriesInDataInPlace,
+  In,
   Vr,
   VrCollection,
 } from '@corona-dashboard/common';
@@ -14,6 +15,7 @@ import { GetStaticPropsContext } from 'next';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
+import { CountryCode } from '~/domain/international/select-countries/country-code';
 import {
   gmPageMetricNames,
   GmPageMetricNames,
@@ -292,6 +294,20 @@ export function createGetChoroplethData<T1, T2, T3>(settings?: {
         gm: filterGm(json.gmCollection) as T2,
         in: filterIn(json.inCollection) as T3,
       },
+    };
+  };
+}
+
+export function getInData(countryCodes: CountryCode[]) {
+  return function () {
+    const internationalData: Record<string, In> = {};
+    countryCodes.forEach((countryCode) => {
+      internationalData[countryCode] = loadJsonFromDataFile<In>(
+        `IN_${countryCode.toUpperCase()}.json`
+      );
+    });
+    return { internationalData } as {
+      internationalData: Record<CountryCode, In>;
     };
   };
 }
