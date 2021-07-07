@@ -147,7 +147,7 @@ const StyledHit = styled.button<{
     py: 2,
     display: 'flex',
     textDecoration: 'none',
-    color: 'black',
+    color: x.hasFocus ? 'red' : 'annotation',
     width: '100%',
     bg: x.hasFocus ? 'contextualContent' : 'transparant',
     transitionProperty: 'background',

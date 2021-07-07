@@ -49,6 +49,7 @@ export function useHitSelection({
   useHotkey(
     'enter',
     () => {
+      console.log(focusRef);
       focusRef.current && onSelectHit(focusIndex, false);
     },
     { allowRepeat: true, isDisabled: !isEnabled }

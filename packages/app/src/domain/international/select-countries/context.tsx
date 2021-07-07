@@ -132,10 +132,8 @@ function useSearchContextValue<T extends Element>(
     /**
      * On input-change we'll reset the focus index to 0.
      */
-    const index = 0;
-
-    setFocusIndex(index);
-  }, [setFocusIndex, term]);
+    setFocusIndex(0);
+  }, [setFocusIndex]);
 
   /**
    * An option id is necessary for screen readers to link the search input

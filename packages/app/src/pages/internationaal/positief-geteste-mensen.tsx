@@ -152,6 +152,7 @@ export default function PositiefGetesteMensenPage(
                 countryOptions={countryOptions}
                 limit={10}
                 alwaysSelectedCodes={['nld']}
+                defaultSelectedCodes={['bel', 'deu']}
               >
                 {(selectedCountries, colors) => {
                   const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
