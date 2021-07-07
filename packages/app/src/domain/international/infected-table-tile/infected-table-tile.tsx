@@ -1,4 +1,4 @@
-import { InTestedOverall } from '@corona-dashboard/common';
+import { InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { matchSorter } from 'match-sorter';
 import { useEffect, useMemo, useState } from 'react';
@@ -17,12 +17,12 @@ import {
   SortIdentifier,
 } from './logic/sort-options';
 
-interface infectedTableTileProps {
-  data: InTestedOverall[];
+interface InfectedTableTileProps {
+  data: InCollectionTestedOverall[];
   countryNames: Record<string, string>;
 }
 
-export type filterArrayType = {
+export type FilterArrayType = {
   country_code: string;
   label: string;
 };
@@ -30,14 +30,14 @@ export type filterArrayType = {
 export function InfectedTableTile({
   data,
   countryNames,
-}: infectedTableTileProps) {
+}: InfectedTableTileProps) {
   const { siteText } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
   const [inputValue, setInputValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [matchingCountries, setMatchingCountries] = useState(
-    [] as filterArrayType[]
+    [] as FilterArrayType[]
   );
   const [sortOption, setSortOption] = useState<SortIdentifier>(
     'infected_per_100k_average_high_to_low'

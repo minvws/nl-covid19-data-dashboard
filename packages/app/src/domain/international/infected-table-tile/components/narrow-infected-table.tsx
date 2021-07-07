@@ -1,4 +1,4 @@
-import { InTestedOverall } from '@corona-dashboard/common';
+import { InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { Box } from '~/components/base';
@@ -7,13 +7,13 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
-import { filterArrayType } from '../infected-table-tile';
+import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
 
-interface narrowInfectedTableProps {
-  data: InTestedOverall[];
+interface NarrowInfectedTableProps {
+  data: InCollectionTestedOverall[];
   isExpanded: boolean;
-  matchingCountries: filterArrayType[];
+  matchingCountries: FilterArrayType[];
   countryNames: Record<string, string>;
   inputValue: string;
 }
@@ -23,7 +23,7 @@ export function NarrowInfectedTable({
   matchingCountries,
   countryNames,
   inputValue,
-}: narrowInfectedTableProps) {
+}: NarrowInfectedTableProps) {
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
 
   return (
@@ -53,13 +53,13 @@ export function NarrowInfectedTable({
   );
 }
 
-interface itemRowProps {
-  item: InTestedOverall;
+interface ItemRowProps {
+  item: InCollectionTestedOverall;
   highestAverage: number | undefined;
   countryNames: Record<string, string>;
 }
 
-function ItemRow({ item, highestAverage, countryNames }: itemRowProps) {
+function ItemRow({ item, highestAverage, countryNames }: ItemRowProps) {
   const { siteText, formatNumber } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
