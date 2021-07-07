@@ -1,11 +1,11 @@
-import { NationalContext } from '~/integration/types';
+import { NlContext } from '~/integration/types';
 
 context('Landelijk - IC Opnames', () => {
   before(() => {
-    cy.beforeNationalTests('intensive-care-opnames');
+    cy.beforeNlTests('intensive-care-opnames');
   });
 
-  it('Should show the correct KPI values', function (this: NationalContext) {
+  it('Should show the correct KPI values', function (this: NlContext) {
     const lastValue = this.nationalData.intensive_care_lcps.last_value;
 
     const kpiTestInfo = {

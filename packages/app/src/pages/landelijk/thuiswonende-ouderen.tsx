@@ -1,6 +1,6 @@
 import {
-  RegionsElderlyAtHome,
-  SafetyRegionProperties,
+  VrCollectionElderlyAtHome,
+  VrProperties,
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
 import { ArticleStrip } from '~/components/article-strip';
@@ -144,6 +144,9 @@ const ElderlyAtHomeNationalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderlyAtHomeData.values}
                 seriesConfig={[
@@ -202,12 +205,15 @@ const ElderlyAtHomeNationalPage = (
             }}
           >
             <SafetyRegionChoropleth
+              accessibility={{
+                key: 'elderly_at_home_infected_people_choropleth',
+              }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.thuiswonendeOuderen}
               metricName="elderly_at_home"
               metricProperty="positive_tested_daily_per_100k"
               tooltipContent={(
-                context: SafetyRegionProperties & RegionsElderlyAtHome
+                context: VrProperties & VrCollectionElderlyAtHome
               ) => <ElderlyAtHomeRegionalTooltip context={context} />}
             />
           </ChoroplethTile>
@@ -250,6 +256,9 @@ const ElderlyAtHomeNationalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderlyAtHomeData.values}
                 seriesConfig={[

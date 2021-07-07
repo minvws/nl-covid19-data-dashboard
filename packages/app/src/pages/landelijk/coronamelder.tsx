@@ -19,7 +19,6 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
-  createGetChoroplethData,
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
@@ -29,10 +28,10 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData('corona_melder_app'),
-  createGetChoroplethData({
-    vr: ({ behavior }) => ({ behavior }),
-  })
+  selectNlPageMetricData(
+    'corona_melder_app_warning',
+    'corona_melder_app_download'
+  )
 );
 
 const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
@@ -40,6 +39,8 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { selectedNlData: data, lastGenerated } = props;
   const { nl_gedrag, corona_melder_app } = siteText;
+
+  const warningLastValue = data.corona_melder_app_warning.last_value;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -58,9 +59,8 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             subtitle={corona_melder_app.header.description}
             metadata={{
               datumsText: corona_melder_app.header.datums,
-              dateOrRange: data.corona_melder_app.last_value.date_unix,
-              dateOfInsertionUnix:
-                data.corona_melder_app.last_value.date_of_insertion_unix,
+              dateOrRange: warningLastValue.date_unix,
+              dateOfInsertionUnix: warningLastValue.date_of_insertion_unix,
               dataSources: [corona_melder_app.header.bronnen.rivm],
             }}
             reference={corona_melder_app.header.reference}
@@ -70,14 +70,13 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
             <KpiTile
               title={corona_melder_app.waarschuwingen.title}
               metadata={{
-                date: data.corona_melder_app.last_value.date_unix,
+                date: warningLastValue.date_unix,
                 source: corona_melder_app.header.bronnen.rivm,
               }}
             >
               <KpiValue
-                data-cy="infected"
-                absolute={data.corona_melder_app.last_value.warned_daily}
-                difference={data.difference.corona_melder_app__warned_daily}
+                absolute={warningLastValue.count}
+                difference={data.difference.corona_melder_app_warning__count}
               />
 
               <Text>{corona_melder_app.waarschuwingen.description}</Text>
@@ -90,7 +89,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                         css={css({ color: 'data.primary', fontWeight: 'bold' })}
                       >
                         {formatNumber(
-                          data.corona_melder_app?.last_value.downloaded_total
+                          data.corona_melder_app_download.last_value.count
                         )}
                       </span>
                     ),
@@ -130,19 +129,18 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'coronamelder_warned_daily_over_time_chart',
+                }}
                 tooltipTitle={
                   corona_melder_app.waarschuwingen_over_tijd_grafiek.title
                 }
                 timeframe={timeframe}
-                values={data.corona_melder_app.values}
-                ariaLabelledBy={
-                  corona_melder_app.waarschuwingen_over_tijd_grafiek
-                    .ariaDescription
-                }
+                values={data.corona_melder_app_warning.values}
                 seriesConfig={[
                   {
                     type: 'area',
-                    metricProperty: 'warned_daily',
+                    metricProperty: 'count',
                     label:
                       corona_melder_app.waarschuwingen_over_tijd_grafiek.labels
                         .warnings,

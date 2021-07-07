@@ -1,13 +1,13 @@
-import { set } from 'lodash';
-import { useMemo } from 'react';
-import { Municipalities } from '@corona-dashboard/common';
-import { assert } from '~/utils/assert';
 import {
   Dictionary,
+  GmCollection,
+  GmCollectionMetricName,
+  GmProperties,
   MunicipalGeoJSON,
-  MunicipalitiesMetricName,
-  MunicipalityProperties,
 } from '@corona-dashboard/common';
+import { set } from 'lodash';
+import { useMemo } from 'react';
+import { assert } from '~/utils/assert';
 
 /**
  * This hook takes a metric name, extracts the associated data from the json/municipalities.json
@@ -24,11 +24,11 @@ import {
  * @param featureCollection
  */
 
-interface MunicipalityMetricValue extends MunicipalityProperties {
+interface GmMetricValue extends GmProperties {
   [key: string]: unknown;
 }
 
-interface MunicipalityChoroplethValue extends MunicipalityMetricValue {
+interface MunicipalityChoroplethValue extends GmMetricValue {
   __color_value: number;
 }
 
@@ -52,7 +52,7 @@ export function useMunicipalityNavigationData(
 ): UseMunicipalityDataReturnValue {
   const propertyData = featureCollection.features.reduce(
     (acc, feature) => set(acc, feature.properties.gemcode, feature.properties),
-    {} as Record<string, MunicipalityProperties>
+    {} as Record<string, GmProperties>
   );
 
   return {
@@ -66,17 +66,17 @@ export function useMunicipalityNavigationData(
   };
 }
 
-export function useMunicipalityData<K extends MunicipalitiesMetricName>(
+export function useMunicipalityData<K extends GmCollectionMetricName>(
   featureCollection: MunicipalGeoJSON,
   metricName: K,
   metricProperty: string,
-  data: Pick<Municipalities, K>
+  data: Pick<GmCollection, K>
 ): UseMunicipalityDataReturnValue {
   return useMemo(() => {
     const propertyData = featureCollection.features.reduce(
       (acc, feature) =>
         set(acc, feature.properties.gemcode, feature.properties),
-      {} as Record<string, MunicipalityProperties>
+      {} as Record<string, GmProperties>
     );
 
     if (!data) {
@@ -97,7 +97,7 @@ export function useMunicipalityData<K extends MunicipalitiesMetricName>(
       })) ?? [];
 
     const metricsForAllMunicipalities = data[metricName] as unknown as
-      | MunicipalityMetricValue[]
+      | GmMetricValue[]
       | undefined;
 
     assert(

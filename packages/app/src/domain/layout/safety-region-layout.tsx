@@ -1,4 +1,4 @@
-import { Regionaal } from '@corona-dashboard/common';
+import { Vr } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import ElderlyIcon from '~/assets/elderly.svg';
@@ -44,10 +44,7 @@ export const vrPageMetricNames = [
 
 export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
 
-export type SafetyRegionPageMetricData = Pick<
-  Regionaal,
-  VrRegionPageMetricNames
->;
+export type SafetyRegionPageMetricData = Pick<Vr, VrRegionPageMetricNames>;
 
 type SafetyRegionLayoutProps = {
   lastGenerated: string;

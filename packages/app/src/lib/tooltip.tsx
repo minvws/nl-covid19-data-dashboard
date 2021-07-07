@@ -6,21 +6,18 @@ import 'tippy.js/themes/light.css';
 let handleMount: undefined | ((tippyInstance: Instance) => void);
 
 /**
- * Currently we'll only support the `content` prop of the tippy tooltip, but a
- * lot more should be possible if necessary.
- *
  * Usage:
- *
  *     <WithTooltip content={<p>message</p>}><button>foo</button></WithTooltip>
  */
-type TooltipProps = Pick<TippyProps, 'children' | 'content'>;
 
-export function WithTooltip({ children, content }: TooltipProps) {
+export function WithTooltip(props: TippyProps) {
   return (
-    <Tippy theme="light" content={content} onMount={handleMount}>
-      {children}
-    </Tippy>
+    <Tippy theme="light" appendTo={getBody} onMount={handleMount} {...props} />
   );
+}
+
+function getBody() {
+  return document.body;
 }
 
 if (process.env.NODE_ENV !== 'production') {

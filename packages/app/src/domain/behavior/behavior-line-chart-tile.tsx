@@ -1,7 +1,4 @@
-import {
-  NationalBehaviorValue,
-  RegionalBehaviorValue,
-} from '@corona-dashboard/common';
+import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -14,7 +11,7 @@ import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
 
 interface BehaviorLineChartTileProps {
-  values: NationalBehaviorValue[] | RegionalBehaviorValue[];
+  values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
@@ -30,9 +27,9 @@ export function BehaviorLineChartTile({
   const chartText = siteText.gedrag_common.line_chart;
 
   const selectedComplianceValueKey =
-    `${currentId}_compliance` as keyof NationalBehaviorValue;
+    `${currentId}_compliance` as keyof NlBehaviorValue;
   const selectedSupportValueKey =
-    `${currentId}_support` as keyof NationalBehaviorValue;
+    `${currentId}_support` as keyof NlBehaviorValue;
 
   return (
     <ChartTile title={chartText.title} metadata={metadata}>
@@ -44,8 +41,10 @@ export function BehaviorLineChartTile({
       <Spacer mb={4} />
 
       <TimeSeriesChart
+        accessibility={{
+          key: 'behavior_line_chart',
+        }}
         values={values}
-        ariaLabelledBy=""
         seriesConfig={[
           {
             type: 'line',

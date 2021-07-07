@@ -1,10 +1,13 @@
-import { NlGNumber, VrGNumber } from '@corona-dashboard/common';
+import {
+  NlGNumber,
+  TimeframeOption,
+  VrGNumber,
+} from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineText } from '~/components/typography';
 import { VerticalBarChart } from '~/components/vertical-bar-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { TimeframeOption } from '~/utils/timeframe';
 
 interface GNumberBarChartTileProps {
   data: NlGNumber | VrGNumber;
@@ -33,7 +36,10 @@ export function GNumberBarChartTile({
       }}
     >
       <VerticalBarChart
-        ariaLabelledBy="chart_g_number"
+        accessibility={{
+          key: 'g_number',
+          features: ['keyboard_bar_chart'],
+        }}
         values={values}
         timeframe={timeframeInitialValue}
         numGridLines={3}

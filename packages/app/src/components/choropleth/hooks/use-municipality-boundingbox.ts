@@ -1,6 +1,6 @@
+import { VrGeoJSON } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
-import { RegionGeoJSON } from '@corona-dashboard/common';
 
 /**
  * This hook returns the feature of the safety region to which the given municipality code belongs.
@@ -10,9 +10,9 @@ import { RegionGeoJSON } from '@corona-dashboard/common';
  * @param selectedMunicipality
  */
 export function useMunicipalityBoundingbox(
-  regionGeo: RegionGeoJSON,
+  regionGeo: VrGeoJSON,
   selectedMunicipality?: string
-): [RegionGeoJSON, string] | [undefined, undefined] {
+): [VrGeoJSON, string] | [undefined, undefined] {
   return useMemo(() => {
     if (!selectedMunicipality) {
       return [undefined, undefined];

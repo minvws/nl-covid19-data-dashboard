@@ -98,6 +98,9 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'doctor_covid_symptoms_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={data.doctor.values}
                 seriesConfig={[

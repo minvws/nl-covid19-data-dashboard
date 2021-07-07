@@ -1,4 +1,4 @@
-import { Municipal, Regionaal } from '@corona-dashboard/common';
+import { Gm, TimeframeOption, Vr } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -16,7 +16,6 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { TimeframeOption } from '~/utils/timeframe';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { Path } from './components/path';
@@ -34,10 +33,10 @@ import {
 } from './logic';
 
 export interface SewerChartData {
-  sewer: Regionaal['sewer'] | Municipal['sewer'];
+  sewer: Vr['sewer'] | Gm['sewer'];
   sewer_per_installation?:
-    | Regionaal['sewer_per_installation']
-    | Municipal['sewer_per_installation'];
+    | Vr['sewer_per_installation']
+    | Gm['sewer_per_installation'];
 }
 
 interface SewerChartProps {

@@ -53,6 +53,8 @@ const List = styled.ul(
     listStyle: 'none',
     px: 0,
     m: 0,
+    fontSize: 1,
+    color: 'annotation',
   })
 );
 
@@ -69,10 +71,14 @@ const Item = styled.li(
 const CustomShape = styled.div(
   css({
     content: '',
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     position: 'absolute',
     left: 0,
     top: '3px',
+    width: '15px',
+    height: '15px',
   })
 );
 

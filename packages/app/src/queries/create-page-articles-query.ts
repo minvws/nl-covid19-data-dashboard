@@ -1,9 +1,12 @@
-type ArticlePageSchema =
+import { ArticleSummary } from '~/components/article-teaser';
+
+type ArticlePageType =
   | 'deceasedPage'
   | 'behaviorPage'
   | 'hospitalPage'
   | 'intensiveCarePage'
   | 'positiveTestsPage'
+  | 'in_positiveTestsPage'
   | 'reproductionPage'
   | 'sewerPage'
   | 'vaccinationsPage'
@@ -16,7 +19,7 @@ type ArticlePageSchema =
   | 'infectiousPeoplePage';
 
 export function createPageArticlesQuery(
-  schemaName: ArticlePageSchema,
+  schemaName: ArticlePageType,
   locale: string,
   fieldName = 'articles'
 ) {
@@ -30,3 +33,5 @@ export function createPageArticlesQuery(
 
   return query;
 }
+
+export type ArticlesQueryResult = { articles?: ArticleSummary[] };

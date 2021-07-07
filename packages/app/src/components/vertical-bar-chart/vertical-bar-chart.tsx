@@ -1,4 +1,4 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Bar } from '@visx/shape';
 import { useTooltip } from '@visx/tooltip';
@@ -16,7 +16,7 @@ import {
   useDimensions,
   useValuesInTimeframe,
 } from '~/components/time-series-chart/logic';
-import { TimeframeOption } from '~/utils/timeframe';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
@@ -43,11 +43,15 @@ export type VerticalBarChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   title?: string;
   values: T[];
   seriesConfig: C;
   initialWidth?: number;
-  ariaLabelledBy: string;
   minHeight?: number;
   timeframe?: TimeframeOption;
   formatTooltip: TooltipFormatter<T>;
@@ -63,6 +67,7 @@ export function VerticalBarChart<
   C extends SeriesConfig<T>
 >({
   values: allValues,
+  accessibility,
   seriesConfig,
   initialWidth = 840,
   minHeight = 250,
@@ -72,7 +77,6 @@ export function VerticalBarChart<
   numGridLines = 3,
   tickValues,
   paddingLeft,
-  ariaLabelledBy,
   onSeriesClick,
   title,
 }: VerticalBarChartProps<T, C>) {
@@ -161,10 +165,10 @@ export function VerticalBarChart<
   return (
     <ResponsiveContainer>
       <ChartContainer
+        accessibility={accessibility}
         width={width}
         height={minHeight}
         padding={padding}
-        ariaLabelledBy={ariaLabelledBy}
         onClick={handleClick}
       >
         <Axes
