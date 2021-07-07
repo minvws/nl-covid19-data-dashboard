@@ -1,4 +1,5 @@
 import { isDefined } from 'ts-is-present';
+import { localeStringValidation } from '../../schemas/locale/locale-string';
 
 const REQUIRED = (x: any) => x.required();
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -12,11 +13,12 @@ export const timelineEvent = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (x: any) =>
-        x
+      validation: localeStringValidation((rule) =>
+        rule
           .required()
           .max(60)
-          .error('Titels zijn gelimiteerd tot maximaal 60 tekens'),
+          .error('Titels zijn gelimiteerd tot maximaal 60 tekens')
+      ),
       options: {
         ignoreLanguageSwitcher: true,
       },
