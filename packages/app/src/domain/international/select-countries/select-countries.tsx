@@ -39,6 +39,7 @@ interface SelectCountriesProps {
   children: (selectedCountries: CountryCode[], colors: string[]) => ReactNode;
   limit?: number;
   alwaysSelectedCodes: CountryCode[];
+  defaultSelectedCodes: CountryCode[];
 }
 
 export function SelectCountries({
@@ -46,8 +47,11 @@ export function SelectCountries({
   children,
   limit,
   alwaysSelectedCodes,
+  defaultSelectedCodes,
 }: SelectCountriesProps) {
-  const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>([]);
+  const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>(
+    defaultSelectedCodes ?? []
+  );
 
   function handleToggleCountry(countryData: CountryOption) {
     if (selectedCountries.includes(countryData.code)) {
