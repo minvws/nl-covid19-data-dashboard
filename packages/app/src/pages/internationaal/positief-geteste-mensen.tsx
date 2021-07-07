@@ -117,6 +117,8 @@ export default function PositiefGetesteMensenPage(
     [countryNames, compiledInternationalData]
   );
 
+  console.log(choroplethData);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -127,18 +129,51 @@ export default function PositiefGetesteMensenPage(
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
-              dateOrRange: 0, // @TODO date
-              dateOfInsertionUnix: 0, // @TODO date
-              dataSources: [
-                text.bronnen.rivm,
-                text.bronnen.our_world_in_data,
-                text.bronnen.ecdc,
-              ],
+              dateOrRange: {
+                start: choroplethData[0].date_start_unix,
+                end: choroplethData[0].date_end_unix,
+              },
+              dateOfInsertionUnix: choroplethData[0].date_of_insertion_unix,
+              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
             }}
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
             usefulLinks={content.page.usefulLinks}
           />
+
+          <EuropeChoroplethTile
+            title={text.choropleth.titel}
+            description={text.choropleth.toelichting}
+            legend={{
+              thresholds: internationalThresholds.infected_per_100k_average,
+              title: text.choropleth.legenda_titel,
+            }}
+            metadata={{
+              source: text.bronnen.rivm,
+            }}
+          >
+            <EuropeChoropleth
+              accessibility={{
+                key: 'international_tested_overall_choropleth',
+              }}
+              data={choroplethData}
+              metricProperty="infected_per_100k_average"
+              tooltipContent={(context) => (
+                <PositiveTestedPeopleInternationalTooltip
+                  title={text.choropleth.tooltip_titel}
+                  countryName={
+                    countryNames[context.country_code.toLowerCase()] ||
+                    context.country_code
+                  }
+                  countryCode={context.country_code}
+                  value={context.infected_per_100k_average}
+                  comparedName={comparedName}
+                  comparedCode={comparedCode}
+                  comparedValue={comparedValue}
+                />
+              )}
+            />
+          </EuropeChoroplethTile>
 
           <ChartTile
             title={text.time_graph.title}
@@ -174,40 +209,6 @@ export default function PositiefGetesteMensenPage(
               </SelectCountries>
             </>
           </ChartTile>
-
-          <EuropeChoroplethTile
-            title={text.choropleth.titel}
-            description={text.choropleth.toelichting}
-            legend={{
-              thresholds: internationalThresholds.infected_per_100k_average,
-              title: text.choropleth.legenda_titel,
-            }}
-            metadata={{
-              source: text.bronnen.rivm,
-            }}
-          >
-            <EuropeChoropleth
-              accessibility={{
-                key: 'international_tested_overall_choropleth',
-              }}
-              data={choroplethData}
-              metricProperty="infected_per_100k_average"
-              tooltipContent={(context) => (
-                <PositiveTestedPeopleInternationalTooltip
-                  title={text.choropleth.tooltip_titel}
-                  countryName={
-                    countryNames[context.country_code.toLowerCase()] ||
-                    context.country_code
-                  }
-                  countryCode={context.country_code}
-                  value={context.infected_per_100k_average}
-                  comparedName={comparedName}
-                  comparedCode={comparedCode}
-                  comparedValue={comparedValue}
-                />
-              )}
-            />
-          </EuropeChoroplethTile>
 
           <InfectedTableTile
             data={choroplethData}
