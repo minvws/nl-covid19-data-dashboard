@@ -42,6 +42,7 @@ export function SelectCountriesResults() {
                   </span>
                   <span
                     css={css({
+                      color: 'black',
                       flexGrow: 1,
                       fontWeight: x.data.isSelected ? 'bold' : 'normal',
                     })}
