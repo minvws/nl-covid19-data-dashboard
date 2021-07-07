@@ -26,4 +26,10 @@ export const features: Feature[] = [
     name: 'timelineMockData',
     isEnabled: false,
   },
+  {
+    name: 'internationalPage',
+    isEnabled: false,
+    dataScopes: ['in', 'in_collection'],
+    metricName: 'tested_overall',
+  },
 ];
