@@ -96,7 +96,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             <div ref={ref}>
               <Box mb={1} display="flex" flexDirection="row">
                 <InlineText mr={1}>{columnNames['vorige_meeting']}:</InlineText>
-                {row.difference && <VariantDifference value={row.difference} />}
+                <VariantDifference value={row.difference} />
               </Box>
               <Box>
                 {columnNames['eerst_gevonden']}:{' '}
