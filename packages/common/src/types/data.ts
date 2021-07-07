@@ -168,9 +168,9 @@ export interface InCollection {
   proto_name: "IN_COLLECTION";
   name: string;
   code: string;
-  tested_overall: InTestedOverall[];
+  tested_overall: InCollectionTestedOverall[];
 }
-export interface InTestedOverall {
+export interface InCollectionTestedOverall {
   country_code: string;
   infected: number;
   infected_per_100k_average: number;
