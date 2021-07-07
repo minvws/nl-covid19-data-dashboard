@@ -117,8 +117,6 @@ export default function PositiefGetesteMensenPage(
     [countryNames, compiledInternationalData]
   );
 
-  console.log(choroplethData);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
