@@ -1,4 +1,5 @@
 import { isDefined } from 'ts-is-present';
+import { Rule } from '~/sanity';
 
 /**
  * A text coming from the original Lokalize JSON structure is split into a
@@ -41,16 +42,15 @@ export const lokalizeText = {
       options: {
         ignoreLanguageSwitcher: true,
       },
-      validation: (Rule: any) =>
+      validation: (rule: Rule) =>
         /**
          * Only NL is required. For EN we use NL as a fallback when exporting.
          */
-        Rule.fields({
-          nl: (fieldRule: any) =>
-            fieldRule.required().custom(validateTextPlaceholders),
-          en: (fieldRule: any) => [
-            fieldRule.required().warning(),
-            fieldRule.custom(validateTextPlaceholders),
+        rule.fields({
+          nl: (rule) => rule.required().custom(validateTextPlaceholders),
+          en: (rule) => [
+            rule.required().warning(),
+            rule.custom(validateTextPlaceholders),
           ],
         }),
     },

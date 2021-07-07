@@ -1,3 +1,5 @@
+import { localeStringValidation } from '../../language/locale-validation';
+
 export const collapsible = {
   title: 'Inklapbare titel en inhoud',
   name: 'collapsible',
@@ -7,21 +9,13 @@ export const collapsible = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.reset().required()),
     },
     {
       name: 'content',
       type: 'localeBlock',
       title: 'Inhoud',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.reset().required()),
     },
   ],
   preview: {
