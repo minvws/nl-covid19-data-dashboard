@@ -86,14 +86,11 @@ export function getTimelineEvents(
   )?.timelineEvents;
 
   return timelineEvents
-    ? timelineEvents.map(
-        (x) =>
-          ({
-            title: x.title,
-            description: x.description,
-            start: new Date(x.date).getTime() / 1000,
-            end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
-          } as TimelineEventConfig)
-      )
+    ? timelineEvents.map<TimelineEventConfig>((x) => ({
+        title: x.title,
+        description: x.description,
+        start: new Date(x.date).getTime() / 1000,
+        end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
+      }))
     : undefined;
 }
