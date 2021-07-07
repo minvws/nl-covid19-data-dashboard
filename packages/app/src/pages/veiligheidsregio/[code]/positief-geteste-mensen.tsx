@@ -387,7 +387,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         .infected_percentage,
                   },
                 ]}
-                dataOptions={{ isPercentage: true }}
+                dataOptions={{
+                  isPercentage: true,
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_ggd'
+                  ),
+                }}
               />
             )}
           </ChartTile>

@@ -59,11 +59,7 @@ export const getStaticProps = createGetStaticProps(
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
       "fix_this": ${createPageArticlesQuery('positiveTestsPage', locale)},
-      "elements": ${createElementsQuery(
-        'gm',
-        ['tested_overall', 'tested_ggd'],
-        locale
-      )}
+      "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
     }`;
   })
 );
