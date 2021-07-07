@@ -13,7 +13,7 @@ export function createElementsQuery(
   const query = `// groq
     {
       'timeSeries': *[
-        && _type == 'timeSeries'
+        _type == 'timeSeries'
         && scope == '${scope}'
         && metricName in ${formatStringArray(metricNames)}
       ]{
@@ -28,7 +28,7 @@ export function createElementsQuery(
         }
       },
       'kpi': *[
-        && _type == 'kpi'
+        _type == 'kpi'
         && scope == '${scope}'
         && metricName in ${formatStringArray(metricNames)}
       ]{
