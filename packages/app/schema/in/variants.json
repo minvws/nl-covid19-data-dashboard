@@ -5,7 +5,7 @@
   "required": ["values", "date_of_insertion_unix"],
   "additionalProperties": false,
   "properties": {
-    "values": {
+    "variants": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/variant"

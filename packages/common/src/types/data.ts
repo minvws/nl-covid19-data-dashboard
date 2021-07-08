@@ -164,7 +164,7 @@ export interface InTestedOverallValue {
   date_of_insertion_unix: number;
 }
 export interface InVariants {
-  values: InVariantsVariant[];
+  variants?: InVariantsVariant[];
   date_of_insertion?: number;
 }
 export interface InVariantsVariant {
@@ -868,7 +868,7 @@ export interface NlVaccineStockValue {
   date_unix: number;
 }
 export interface NlVariants {
-  values: NlVariantsVariant[];
+  variants?: NlVariantsVariant[];
   date_of_insertion?: number;
 }
 export interface NlVariantsVariant {
