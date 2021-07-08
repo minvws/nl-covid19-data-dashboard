@@ -119,7 +119,8 @@ async function main() {
     }
 
     /**
-     * The variants schema is similar to sewer_per_installation
+     * The variants schema differs in structure from time series data so we
+     * validate it separately. @TODO merge logic with sewer_per_installation
      */
     if (isDefined(data.variants)) {
       const perVariantData = data.variants as VariantsData;
