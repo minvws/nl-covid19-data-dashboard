@@ -97,6 +97,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
         data={sideBarData}
+        code={data.code}
+        difference={data.difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >

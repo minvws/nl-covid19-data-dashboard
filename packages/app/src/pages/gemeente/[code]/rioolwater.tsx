@@ -38,7 +38,8 @@ export const getStaticProps = createGetStaticProps(
     'sewer_per_installation',
     'static_values',
     'sewer',
-    'difference'
+    'difference',
+    'code'
   ),
   createGetContent<{
     articles?: ArticleSummary[];
@@ -88,6 +89,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
         data={sideBarData}
+        code={data.code}
+        difference={data.difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >

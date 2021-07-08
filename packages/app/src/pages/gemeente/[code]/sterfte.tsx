@@ -30,7 +30,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('deceased_rivm', 'difference'),
+  selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
   createGetContent<{
     articles?: ArticleSummary[];
   }>(() => {
@@ -43,7 +43,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     sideBarData,
     municipalityName,
-    selectedGmData: { deceased_rivm: dataRivm, difference },
+    selectedGmData: { deceased_rivm: dataRivm, difference, code },
     content,
     lastGenerated,
   } = props;
@@ -69,6 +69,8 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
         data={sideBarData}
+        code={code}
+        difference={difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >

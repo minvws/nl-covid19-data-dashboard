@@ -22,24 +22,11 @@ import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-export const gmPageMetricNames = [
-  'code',
-  'tested_overall',
-  'deceased_rivm',
-  'hospital_nice',
-  'sewer',
-  'difference',
-] as const;
-
-export type GmPageMetricNames = typeof gmPageMetricNames[number];
-
 export type MunicipalSideBarData = {
-  code: string;
   tested_overall: Pick<Gm['tested_overall'], 'last_value'>;
   deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
   hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
   sewer: Pick<Gm['sewer'], 'last_value'>;
-  difference: GmDifference;
 };
 
 type MunicipalityLayoutProps = {
@@ -47,6 +34,8 @@ type MunicipalityLayoutProps = {
   children?: React.ReactNode;
 } & (
   | {
+      code: string;
+      difference: GmDifference;
       data: MunicipalSideBarData;
       municipalityName: string;
     }
@@ -55,7 +44,9 @@ type MunicipalityLayoutProps = {
        * the route `/gemeente` can render without sidebar and thus without `data`
        */
       isLandingPage: true;
+      code: string;
       data?: undefined;
+      difference?: undefined;
       municipalityName?: undefined;
     }
 );
@@ -77,12 +68,12 @@ type MunicipalityLayoutProps = {
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function MunicipalityLayout(props: MunicipalityLayoutProps) {
-  const { children, data, municipalityName } = props;
+  const { children, data, municipalityName, code, difference } = props;
+  const sidebarData = { ...data, difference };
 
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const code = router.query.code as string;
 
   const showMetricLinks = router.route !== '/gemeente';
 
@@ -157,7 +148,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           }
                         >
                           <SidebarMetric
-                            data={data}
+                            data={sidebarData}
                             scope="gm"
                             metricName="hospital_nice"
                             metricProperty="admissions_on_date_of_reporting"
@@ -178,7 +169,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           }
                         >
                           <SidebarMetric
-                            data={data}
+                            data={sidebarData}
                             scope="gm"
                             metricName="tested_overall"
                             metricProperty="infected"
@@ -195,7 +186,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           }
                         >
                           <SidebarMetric
-                            data={data}
+                            data={sidebarData}
                             scope="gm"
                             metricName="deceased_rivm"
                             metricProperty="covid_daily"
@@ -218,7 +209,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     >
                       {data?.sewer ? (
                         <SidebarMetric
-                          data={data}
+                          data={sidebarData}
                           scope="gm"
                           metricName="sewer"
                           metricProperty="average"
