@@ -16,6 +16,7 @@ import { LanguageKey, languages, SiteText } from '~/locale';
 import { LokalizeText } from '~/types/cms';
 
 const datasets = ['development', 'production', 'keys'] as const;
+export type Dataset = typeof datasets[number];
 
 const query = `*[_type == 'lokalizeText']`;
 const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
@@ -126,7 +127,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
     }
   }, [initialLocale, dataset, isActive, locale]);
 
-  return [text, toggleButton] as const;
+  return [text, toggleButton, dataset] as const;
 }
 
 /**
