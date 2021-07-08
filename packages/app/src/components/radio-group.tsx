@@ -35,6 +35,7 @@ const StyledLabel = styled.label(
     borderWidth: '1px 0 1px 1px',
     whiteSpace: 'nowrap',
     cursor: 'pointer',
+    userSelect: 'none',
 
     '&:last-child': {
       borderRightWidth: '1px',

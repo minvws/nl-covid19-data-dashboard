@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "national_intensive_care_nice_value",
+      "title": "nl_intensive_care_nice_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -31,7 +31,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_intensive_care_nice",
+  "title": "nl_intensive_care_nice",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

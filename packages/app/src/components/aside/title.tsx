@@ -1,3 +1,4 @@
+import ChevronIcon from '~/assets/chevron.svg';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import { Box } from '../base';
@@ -8,6 +9,7 @@ type TitleProps = {
   icon?: ReactNode;
   subtitle?: string;
   level?: HeadingLevel;
+  showArrow?: boolean;
 } & Omit<HeadingProps, 'children' | 'level'>;
 
 /**
@@ -17,10 +19,18 @@ type TitleProps = {
  * @param props
  */
 export function Title(props: TitleProps) {
-  const { icon, title, subtitle, level = 4, ...headingProps } = props;
+  const {
+    icon,
+    title,
+    subtitle,
+    level = 4,
+    showArrow,
+    ...headingProps
+  } = props;
 
   return (
     <Box
+      width="100%"
       display="flex"
       flexDirection="row"
       flexWrap="nowrap"
@@ -29,7 +39,7 @@ export function Title(props: TitleProps) {
     >
       {icon && <Icon>{icon}</Icon>}
 
-      <Box>
+      <Box width="100%">
         <Heading
           as="div"
           level={level}
@@ -38,7 +48,17 @@ export function Title(props: TitleProps) {
           fontWeight="bold"
           {...headingProps}
         >
-          {title}
+          <span
+            css={css({
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+            })}
+          >
+            {title}
+            {showArrow && <ChevronIcon />}
+          </span>
         </Heading>
         {subtitle}
       </Box>

@@ -1,11 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "national",
+  "title": "nl",
   "required": [
     "behavior",
     "code",
-    "corona_melder_app",
+    "corona_melder_app_download",
+    "corona_melder_app_warning",
     "deceased_cbs",
     "deceased_rivm",
     "deceased_rivm_per_age_group",
@@ -27,8 +28,7 @@
     "proto_name",
     "reproduction",
     "sewer",
-    "tested_ggd_daily",
-    "tested_ggd_average",
+    "tested_ggd",
     "tested_overall",
     "tested_per_age_group",
     "vaccine_vaccinated_or_support",
@@ -69,9 +69,6 @@
     "doctor": {
       "$ref": "doctor.json"
     },
-    "downscaling": {
-      "$ref": "downscaling.json"
-    },
     "g_number": {
       "$ref": "g_number.json"
     },
@@ -108,11 +105,8 @@
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
     },
-    "tested_ggd_daily": {
-      "$ref": "tested_ggd_daily.json"
-    },
-    "tested_ggd_average": {
-      "$ref": "tested_ggd_average.json"
+    "tested_ggd": {
+      "$ref": "tested_ggd.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
@@ -144,8 +138,11 @@
     "vaccine_vaccinated_or_support": {
       "$ref": "vaccine_vaccinated_or_support.json"
     },
-    "corona_melder_app": {
-      "$ref": "corona_melder_app.json"
+    "corona_melder_app_download": {
+      "$ref": "corona_melder_app_download.json"
+    },
+    "corona_melder_app_warning": {
+      "$ref": "corona_melder_app_warning.json"
     },
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"

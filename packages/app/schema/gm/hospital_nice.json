@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "municipal_hospital_nice_value",
+      "title": "gm_hospital_nice_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -31,7 +31,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "municipal_hospital_nice",
+  "title": "gm_hospital_nice",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

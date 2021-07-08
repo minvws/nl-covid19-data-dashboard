@@ -25,14 +25,11 @@ export function ChoroplethLegenda({
   return (
     <Box width="100%" pr={`${endLabelWidth / 2}px`}>
       {title && <Heading level={4}>{title}</Heading>}
-      <List
-        aria-label="legend"
-        hasValueAnnotation={valueAnnotation ? true : false}
-      >
+      <List hasValueAnnotation={valueAnnotation ? true : false}>
         {thresholds.map(({ color, threshold, label, endLabel }, index) => {
           const isFirst = index === 0;
           const isLast = index === thresholds.length - 1;
-          const displayLabel = itemWidth > 40 || index % 2 === 0;
+          const displayLabel = itemWidth > 35 || index % 2 === 0;
 
           return (
             <Item

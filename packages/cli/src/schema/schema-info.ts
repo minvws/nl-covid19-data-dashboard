@@ -1,4 +1,4 @@
-import { assert, MetricScope } from '@corona-dashboard/common';
+import { assert, JsonDataScope } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { defaultJsonDirectory } from '../config';
@@ -9,7 +9,7 @@ import {
   validateMovingAverages,
 } from './custom-validations';
 
-export type SchemaInfo = Record<MetricScope, SchemaInfoItem>;
+export type SchemaInfo = Record<JsonDataScope, SchemaInfoItem>;
 
 export type SchemaInfoItem = {
   files: string[];
@@ -26,6 +26,24 @@ export function getSchemaInfo(
   const fileList = fs.readdirSync(jsonDirectory);
 
   return {
+    in: {
+      files: getFileNames(fileList, /^IN_[A-Z]{3}.json$/),
+      basePath: jsonDirectory,
+      customValidations: [
+        createChoroplethValidation(
+          path.join(defaultJsonDirectory, 'IN_COLLECTION.json'),
+          'country_code'
+        ),
+        validateMovingAverages,
+      ],
+    },
+    in_collection: {
+      files: [
+        // @TODO enable once the file is available
+        /* 'IN_COLLECTION.json' */
+      ],
+      basePath: jsonDirectory,
+    },
     nl: { files: ['NL.json'], basePath: jsonDirectory },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
@@ -38,6 +56,7 @@ export function getSchemaInfo(
         validateMovingAverages,
       ],
     },
+    vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
     gm: {
       files: getFileNames(fileList, /^GM[0-9]+.json$/),
       basePath: jsonDirectory,
@@ -50,6 +69,5 @@ export function getSchemaInfo(
       ],
     },
     gm_collection: { files: ['GM_COLLECTION.json'], basePath: jsonDirectory },
-    vr_collection: { files: ['VR_COLLECTION.json'], basePath: jsonDirectory },
   };
 }

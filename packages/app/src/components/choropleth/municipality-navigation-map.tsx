@@ -1,9 +1,11 @@
-import { MunicipalityProperties } from '@corona-dashboard/common';
+import { GmProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode } from 'react';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 import { Choropleth } from './choropleth';
 import {
   useMunicipalityNavigationData,
@@ -11,14 +13,10 @@ import {
 } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { countryGeo, municipalGeo } from './topology';
-import { useReverseRouter } from '~/utils/use-reverse-router';
-import { useIntl } from '~/intl';
 
 type MunicipalityNavigationMapProps<T> = {
   onSelect?: (gmcode: string) => void;
-  tooltipContent?: (
-    context: MunicipalityProperties & { value: T }
-  ) => ReactNode;
+  tooltipContent?: (context: GmProperties & { value: T }) => ReactNode;
 };
 
 /**
@@ -38,7 +36,7 @@ export function MunicipalityNavigationMap<T>(
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
   const renderFeature = (
-    feature: Feature<MultiPolygon, MunicipalityProperties>,
+    feature: Feature<MultiPolygon, GmProperties>,
     path: string,
     _index: number
   ) => {
@@ -64,7 +62,7 @@ export function MunicipalityNavigationMap<T>(
     );
 
   const renderHover = (
-    feature: Feature<MultiPolygon, MunicipalityProperties>,
+    feature: Feature<MultiPolygon, GmProperties>,
     path: string
   ) => {
     const { gemcode, gemnaam } = feature.properties;
@@ -96,6 +94,10 @@ export function MunicipalityNavigationMap<T>(
     <div css={css({ bg: 'transparent', position: 'relative', width: '100%' })}>
       {tabInteractiveButton}
       <Choropleth
+        accessibility={{
+          key: 'municipality_navigation_map',
+          features: ['keyboard_choropleth'],
+        }}
         featureCollection={municipalGeo}
         hovers={municipalGeo}
         boundingBox={countryGeo}

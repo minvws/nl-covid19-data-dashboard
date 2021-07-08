@@ -30,7 +30,7 @@ export interface SanityImageProps {
 
 export interface InlineAttachment {
   _type: 'inlineAttachment';
-  asset: SanityFileProps;
+  asset?: SanityFileProps;
 }
 
 export type Editorial = Record<string, never> & Article;
@@ -202,4 +202,8 @@ export type LinkProps = {
 
 export type VariantsPageQuery = {
   pageLinks: [LinkProps];
+};
+
+export type InPositiveTestsQuery = {
+  usefulLinks?: LinkProps[];
 };

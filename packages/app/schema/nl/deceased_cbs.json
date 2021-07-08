@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_deceased_cbs",
+  "title": "nl_deceased_cbs",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_deceased_cbs_value",
+      "title": "nl_deceased_cbs_value",
       "type": "object",
       "properties": {
         "registered": {

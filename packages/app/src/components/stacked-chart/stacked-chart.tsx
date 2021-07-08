@@ -2,7 +2,11 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
-import { TimestampedValue } from '@corona-dashboard/common';
+import {
+  getValuesInTimeframe,
+  TimeframeOption,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
@@ -28,7 +32,10 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
+import {
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
@@ -98,6 +105,7 @@ export type Config<T extends TimestampedValue> = {
 };
 
 export type StackedChartProps<T extends TimestampedValue> = {
+  accessibility: AccessibilityDefinition;
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -124,6 +132,7 @@ export function StackedChart<T extends TimestampedValue>(
    * same name.
    */
   const {
+    accessibility,
     values,
     config,
     initialWidth = 840,
@@ -152,6 +161,8 @@ export function StackedChart<T extends TimestampedValue>(
     formatPercentage,
     formatDateSpan,
   } = useIntl();
+
+  const annotations = useAccessibilityAnnotations(accessibility);
 
   const {
     tooltipData,
@@ -486,7 +497,9 @@ export function StackedChart<T extends TimestampedValue>(
       <Box height="100%">
         <ResponsiveContainer>
           <Box position="relative">
+            {annotations.descriptionElement}
             <svg
+              {...annotations.props}
               width={width}
               viewBox={`0 0 ${width} ${height}`}
               css={css({ width: '100%' })}

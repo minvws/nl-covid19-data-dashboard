@@ -28,8 +28,9 @@ export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
     (x) => x.value
   );
 
-  const dateText = replaceVariablesInText(commonText.dateOfReport, {
-    dateOfReport: formatDateFromSeconds(data.date_end_unix, 'medium'),
+  const dateText = replaceVariablesInText(commonText.dateRangeOfReport, {
+    startDate: formatDateFromSeconds(data.date_start_unix, 'axis'),
+    endDate: formatDateFromSeconds(data.date_end_unix, 'axis'),
   });
 
   return (

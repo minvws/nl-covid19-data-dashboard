@@ -99,10 +99,12 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'infectious_people_over_time_chart',
+                }}
                 timeframe={timeframe}
                 tooltipTitle={text.linechart_titel}
                 values={data.infectious_people.values}
-                ariaLabelledBy=""
                 seriesConfig={[
                   {
                     type: 'line',

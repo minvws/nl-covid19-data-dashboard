@@ -1,10 +1,6 @@
-import {
-  MunicipalHospitalNiceValue,
-  MunicipalityProperties,
-} from '@corona-dashboard/common';
+import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
@@ -20,8 +16,15 @@ import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-page-elements-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -46,10 +49,15 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
+    fix_this: ArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('hospitalPage', locale);
+
+    return `{
+      "fix_this": ${createPageArticlesQuery('hospitalPage', locale)},
+      "elements": ${createElementsQuery('vr', ['hospital_nice'], locale)}
+    }`;
   })
 );
 
@@ -74,7 +82,6 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     data.hospital_nice.values,
     4
   );
-  const featureHospitalMovingAverage = useFeature('hospitalMovingAverage');
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -110,7 +117,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.reference}
           />
 
-          <ArticleStrip articles={content.articles} />
+          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -151,15 +158,18 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <MunicipalityChoropleth
+              accessibility={{
+                key: 'hospital_admissions_choropleth',
+              }}
               selectedCode={selectedMunicipalCode}
               highlightSelection={false}
               data={choropleth.gm}
               getLink={reverseRouter.gm.ziekenhuisopnames}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={(
-                context: MunicipalityProperties & MunicipalHospitalNiceValue
-              ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
+              tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
+                <HospitalAdmissionsMunicipalTooltip context={context} />
+              )}
             />
           </ChoroplethTile>
 
@@ -169,65 +179,47 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             description={text.linechart_description}
             timeframeOptions={['all', '5weeks']}
           >
-            {(timeframe) =>
-              featureHospitalMovingAverage.isEnabled ? (
-                <TimeSeriesChart
-                  values={data.hospital_nice.values}
-                  timeframe={timeframe}
-                  seriesConfig={[
+            {(timeframe) => (
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'hospital_admissions_over_time_chart',
+                }}
+                values={data.hospital_nice.values}
+                timeframe={timeframe}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty:
+                      'admissions_on_date_of_admission_moving_average',
+                    label: text.linechart_legend_titel_moving_average,
+                    color: colors.data.primary,
+                  },
+                  {
+                    type: 'bar',
+                    metricProperty: 'admissions_on_date_of_admission',
+                    label: text.linechart_legend_titel,
+                    color: colors.data.primary,
+                  },
+                ]}
+                dataOptions={{
+                  timespanAnnotations: [
                     {
-                      type: 'line',
-                      metricProperty:
+                      start: underReportedRange,
+                      end: Infinity,
+                      label: text.linechart_legend_underreported_titel,
+                      shortLabel: siteText.common.incomplete,
+                      cutValuesForMetricProperties: [
                         'admissions_on_date_of_admission_moving_average',
-                      label: text.linechart_legend_titel_moving_average,
-                      color: colors.data.primary,
+                      ],
                     },
-                    {
-                      type: 'bar',
-                      metricProperty: 'admissions_on_date_of_admission',
-                      label: text.linechart_legend_titel,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                  dataOptions={{
-                    timespanAnnotations: [
-                      {
-                        start: underReportedRange,
-                        end: Infinity,
-                        label: text.linechart_legend_underreported_titel,
-                        shortLabel: siteText.common.incomplete,
-                        cutValuesForMetricProperties: [
-                          'admissions_on_date_of_admission_moving_average',
-                        ],
-                      },
-                    ],
-                  }}
-                />
-              ) : (
-                <TimeSeriesChart
-                  values={data.hospital_nice.values}
-                  timeframe={timeframe}
-                  seriesConfig={[
-                    {
-                      type: 'area',
-                      metricProperty: 'admissions_on_date_of_admission',
-                      label: text.linechart_legend_titel,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                  dataOptions={{
-                    timespanAnnotations: [
-                      {
-                        start: underReportedRange,
-                        end: Infinity,
-                        label: text.linechart_legend_underreported_titel,
-                        shortLabel: siteText.common.incomplete,
-                      },
-                    ],
-                  }}
-                />
-              )
-            }
+                  ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
+                }}
+              />
+            )}
           </ChartTile>
         </TileList>
       </SafetyRegionLayout>
