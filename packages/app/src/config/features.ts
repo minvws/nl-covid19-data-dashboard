@@ -28,7 +28,7 @@ export const features: Feature[] = [
   },
   {
     name: 'internationalPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in', 'in_collection'],
     metricName: 'tested_overall',
   },
