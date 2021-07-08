@@ -166,7 +166,6 @@ export interface InTestedOverallValue {
 export interface InVariants {
   values: InVariantsVariant[];
   date_of_insertion?: number;
-  sample_size: number;
 }
 export interface InVariantsVariant {
   name: string;
@@ -177,6 +176,7 @@ export interface InVariantsVariantValue {
   percentage: number;
   occurrence: number;
   is_variant_of_concern: boolean;
+  sample_size: number;
   date_start_unix: number;
   date_end_unix: number;
 }
@@ -870,7 +870,6 @@ export interface NlVaccineStockValue {
 export interface NlVariants {
   values: NlVariantsVariant[];
   date_of_insertion?: number;
-  sample_size: number;
 }
 export interface NlVariantsVariant {
   name: string;
@@ -881,6 +880,7 @@ export interface NlVariantsVariantValue {
   percentage: number;
   occurrence: number;
   is_variant_of_concern: boolean;
+  sample_size: number;
   date_start_unix: number;
   date_end_unix: number;
 }
