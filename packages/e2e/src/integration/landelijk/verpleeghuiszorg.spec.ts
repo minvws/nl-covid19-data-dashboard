@@ -1,11 +1,11 @@
-import { NationalContext } from '~/integration/types';
+import { NlContext } from '~/integration/types';
 
 context('Landelijk - Verpleeghuiszorg', () => {
   before(() => {
-    cy.beforeNationalTests('verpleeghuiszorg');
+    cy.beforeNlTests('verpleeghuiszorg');
   });
 
-  it('Should show the correct KPI values', function (this: NationalContext) {
+  it('Should show the correct KPI values', function (this: NlContext) {
     const lastValue = this.nationalData.nursing_home.last_value;
 
     const kpiTestInfo = {

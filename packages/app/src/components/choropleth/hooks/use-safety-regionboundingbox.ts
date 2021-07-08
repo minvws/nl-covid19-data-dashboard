@@ -1,4 +1,4 @@
-import { SafetyRegionProperties } from '@corona-dashboard/common';
+import { VrProperties } from '@corona-dashboard/common';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import { useMemo } from 'react';
 
@@ -9,7 +9,7 @@ import { useMemo } from 'react';
  * @param selectedRegion
  */
 export function useSafetyRegionBoundingbox(
-  regionGeo: FeatureCollection<MultiPolygon, SafetyRegionProperties>,
+  regionGeo: FeatureCollection<MultiPolygon, VrProperties>,
   selectedRegion?: string
 ) {
   return useMemo(() => {

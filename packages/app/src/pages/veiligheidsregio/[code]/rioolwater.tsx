@@ -153,6 +153,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
           {sewerSplitAreaChart.isEnabled ? (
             <NewSewerChart
+              accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
               dataAverages={data.sewer}
               dataPerInstallation={data.sewer_per_installation}
               text={{

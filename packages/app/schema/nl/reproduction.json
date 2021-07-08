@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "national_reproduction_value",
+      "title": "nl_reproduction_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -35,7 +35,7 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "reproduction.json",
-  "title": "national_reproduction",
+  "title": "nl_reproduction",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

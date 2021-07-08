@@ -1,7 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
@@ -32,6 +32,7 @@ if (typeof window !== 'undefined') {
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+  const router = useRouter();
 
   const { locale = 'nl' } = useRouter();
   const [text, toggleHotReloadButton] = useLokalizeText(locale as LanguageKey);
@@ -49,11 +50,11 @@ export default function App(props: AppProps) {
       }
     };
 
-    Router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
-      Router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, []);
+  }, [router]);
 
   return (
     <ThemeProvider theme={theme}>

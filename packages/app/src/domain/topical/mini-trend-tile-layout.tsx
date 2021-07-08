@@ -1,8 +1,9 @@
-import { Children, ReactNode } from 'react';
+import { Children, cloneElement, ReactElement } from 'react';
 import { Box } from '~/components/base';
+import theme from '~/style/theme';
 
 type MiniTrendTileLayoutProps = {
-  children: ReactNode;
+  children: ReactElement<{ areas: { header: string; chart: string } }>[];
   id?: string;
 };
 
@@ -10,18 +11,38 @@ export function MiniTrendTileLayout({
   children,
   id,
 }: MiniTrendTileLayoutProps) {
-  const tiles = Children.toArray(children);
-
-  const columnWidth = `${Math.floor(100 / tiles.length)}%`;
-  const gutterSize = 4;
-
   return (
-    <Box display={{ _: 'block', md: 'flex' }} mx={-gutterSize} id={id}>
-      {tiles.map((tile: ReactNode, index: number) => (
-        <Box flex={`1 1 ${columnWidth}`} key={index} mx={gutterSize}>
-          {tile}
-        </Box>
-      ))}
+    <Box
+      id={id}
+      display="grid"
+      gridColumnGap={theme.space[5]}
+      gridTemplateAreas={{
+        _: gridTemplateAreasNarrow,
+        md: gridTemplateAreasWide,
+      }}
+    >
+      {Children.map(children, (child, index) =>
+        cloneElement(child, {
+          areas: {
+            header: `col${index + 1}-header`,
+            chart: `col${index + 1}-chart`,
+          },
+        })
+      )}
     </Box>
   );
 }
+
+const gridTemplateAreasNarrow = `
+"col1-header"
+"col1-chart"
+"col2-header"
+"col2-chart"
+"col3-header"
+"col3-chart"
+`.trim();
+
+const gridTemplateAreasWide = `
+"col1-header col2-header col3-header"
+"col1-chart  col2-chart  col3-chart"
+`.trim();

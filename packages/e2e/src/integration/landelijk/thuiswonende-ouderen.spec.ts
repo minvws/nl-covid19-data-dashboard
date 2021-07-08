@@ -1,11 +1,11 @@
-import { NationalContext } from '~/integration/types';
+import { NlContext } from '~/integration/types';
 
 context('Landelijk - Thuiswonende ouderen', () => {
   before(() => {
-    cy.beforeNationalTests('thuiswonende-ouderen');
+    cy.beforeNlTests('thuiswonende-ouderen');
   });
 
-  it('Should show the correct KPI values', function (this: NationalContext) {
+  it('Should show the correct KPI values', function (this: NlContext) {
     const lastValue = this.nationalData.elderly_at_home.last_value;
 
     const kpiTestInfo = {

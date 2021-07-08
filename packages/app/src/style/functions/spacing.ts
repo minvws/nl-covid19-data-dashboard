@@ -11,13 +11,20 @@ export interface SpacingProps {
 
 export const spacing: styleFn = (x: SpacingProps) => {
   if (isDefined(x.spacing)) {
-    const value = asResponsiveArray(x.spacing);
-
-    return css({
-      '& > *:not(:last-child)': {
-        marginRight: x.spacingHorizontal ? value : null,
-        marginBottom: !x.spacingHorizontal ? value : null,
-      },
-    });
+    return css(spacingStyle(x.spacing, x.spacingHorizontal));
   }
 };
+
+export function spacingStyle(
+  spacing: ResponsiveValue<SpaceValue>,
+  spacingHorizontal?: boolean
+) {
+  const value = asResponsiveArray(spacing);
+
+  return {
+    '& > *:not(:last-child)': {
+      marginRight: spacingHorizontal ? value : null,
+      marginBottom: !spacingHorizontal ? value : null,
+    },
+  };
+}

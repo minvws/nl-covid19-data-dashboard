@@ -4,6 +4,7 @@ import {
   SeriesConfig,
   TimespanAnnotationConfig,
 } from '../../logic';
+import { TimelineEventConfig } from '../timeline';
 
 export type TooltipData<T extends TimestampedValue> = {
   value: T;
@@ -27,11 +28,13 @@ export type TooltipData<T extends TimestampedValue> = {
   options: DataOptions;
 
   /**
-   * When hovering a date span annotation, the tooltip needs to know about it so
-   * that it can render the label accordingly. I am assuming here that we won't
-   * ever define overlapping annotations for now.
+   * When hovering a date-span/timeline annotation, the tooltip needs to know
+   * about it so that it can render the label accordingly. I am assuming here
+   * that we won't ever define overlapping annotations for now. Timeline-events
+   * can possibly overlap but we'll always display one.
    */
   timespanAnnotation?: TimespanAnnotationConfig;
+  timelineEvent?: TimelineEventConfig;
 
   /**
    * Configuration to display the nearest point only in the tooltip

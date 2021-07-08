@@ -1,12 +1,13 @@
 {
   "definitions": {
     "value": {
-      "title": "regional_tested_overall_value",
+      "title": "vr_tested_overall_value",
       "additionalProperties": false,
       "required": [
         "date_unix",
         "infected",
         "infected_per_100k",
+        "infected_per_100k_moving_average",
         "date_of_insertion_unix"
       ],
       "properties": {
@@ -30,7 +31,7 @@
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "regional_tested_overall",
+  "title": "vr_tested_overall",
   "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {

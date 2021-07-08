@@ -1,11 +1,11 @@
-import { MunicipalContext } from '~/integration/types';
+import { GmContext } from '~/integration/types';
 
 context('Gemeente - Actueel', () => {
   before(() => {
-    cy.beforeMunicipalTests('', 'GM0363', '/actueel');
+    cy.beforeGmTests('', 'GM0363', '/actueel');
   });
 
-  it('Should show the correct mini trend tile values', function (this: MunicipalContext) {
+  it('Should show the correct mini trend tile values', function (this: GmContext) {
     const testedOverallLastValue = this.municipalData.tested_overall.last_value;
     const hospitalNiceLastValue = this.municipalData.hospital_nice.last_value;
 

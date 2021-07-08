@@ -47,6 +47,9 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
       }}
     >
       <TimeSeriesChart
+        accessibility={{
+          key: 'vaccine_delivery_and_administrations_area_chart',
+        }}
         dataOptions={{
           valueAnnotation: siteText.waarde_annotaties.x_miljoen,
           timespanAnnotations: [
@@ -73,7 +76,6 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
         minHeight={breakpoints.md ? 400 : 250}
         timeframe="all"
         values={data.values}
-        displayTooltipValueOnly
         numGridLines={6}
         formatTickValue={(x) => formatNumber(x / 1000000)}
         formatTooltip={(x) => (
@@ -103,6 +105,13 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
             fillOpacity: 1,
             strokeWidth: 0,
           })),
+          {
+            metricProperty: 'total',
+            type: 'invisible',
+            label:
+              siteText.vaccinaties.data.vaccination_chart
+                .doses_administered_total,
+          },
         ]}
       />
     </ChartTile>

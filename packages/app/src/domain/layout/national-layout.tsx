@@ -1,4 +1,4 @@
-import { National } from '@corona-dashboard/common';
+import { Nl } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arts from '~/assets/arts.svg';
@@ -49,14 +49,14 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
-  'corona_melder_app',
+  'corona_melder_app_warning',
   'behavior_per_age_group',
   'variants',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-export type NationalPageMetricData = Pick<National, NlPageMetricNames>;
+export type NationalPageMetricData = Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;
@@ -393,10 +393,10 @@ export function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="corona_melder_app"
-                    metricProperty="warned_daily"
+                    metricName="corona_melder_app_warning"
+                    metricProperty="count"
                     localeTextKey="corona_melder_app"
-                    differenceKey="corona_melder_app__warned_daily"
+                    differenceKey="corona_melder_app_warning__count"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>

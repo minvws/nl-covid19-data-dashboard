@@ -7,11 +7,11 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
+import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { Category } from './category';
 import { Title } from './title';
-import { asResponsiveArray } from '~/style/utils';
 
 type Url = UrlObject | string;
 
@@ -28,13 +28,13 @@ export function CategoryMenu({
   children,
   isFirstItem,
 }: {
-  title: string;
   children: ReactNode;
   isFirstItem?: boolean;
+  title?: string;
 }) {
   return (
     <Box as="li" spacing={3} pt={isFirstItem ? 4 : '3rem'}>
-      <Category>{title}</Category>
+      {title && <Category>{title}</Category>}
       <Menu>{children}</Menu>
     </Box>
   );
@@ -47,6 +47,7 @@ interface MetricMenuItemLinkProps {
   href?: Url;
   subtitle?: string;
   children?: ReactNode;
+  showArrow?: boolean;
 }
 
 export function MetricMenuItemLink({
@@ -54,13 +55,20 @@ export function MetricMenuItemLink({
   icon,
   title,
   subtitle,
-  children: children,
+  children,
+  showArrow,
 }: MetricMenuItemLinkProps) {
   const router = useRouter();
 
   const content = (
     <>
-      <Title icon={icon} title={title} subtitle={subtitle} m={0} />
+      <Title
+        icon={icon}
+        title={title}
+        subtitle={subtitle}
+        m={0}
+        showArrow={showArrow}
+      />
       {children && (
         <Box mx={icon ? '2.5em' : 0}>
           <ChildrenWrapper>{children}</ChildrenWrapper>
@@ -126,7 +134,7 @@ export function MetricMenuButtonLink({
 
 function isActivePath(router: NextRouter, href: Url) {
   const currentPath = (router.asPath || '/').split('?')[0];
-  const hrefPath = resolveHref(currentPath, href).split('?')[0];
+  const hrefPath = resolveHref(router, href).split('?')[0];
 
   return currentPath === hrefPath;
 }

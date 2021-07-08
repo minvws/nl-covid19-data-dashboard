@@ -1,7 +1,4 @@
-import {
-  SafetyRegionProperties,
-  VrCollectionSituations,
-} from '@corona-dashboard/common';
+import { VrCollectionSituations, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
@@ -99,12 +96,15 @@ export function SituationsDataCoverageChoroplethTile({
           <Box height="100%">
             <ErrorBoundary>
               <SafetyRegionChoropleth
+                accessibility={{
+                  key: 'situations_has_sufficient_data_choropleth',
+                }}
                 data={data}
                 getLink={reverseRouter.vr.brononderzoek}
                 metricName="situations"
                 metricProperty="has_sufficient_data"
                 tooltipContent={(
-                  context: SafetyRegionProperties & VrCollectionSituations
+                  context: VrProperties & VrCollectionSituations
                 ) => <SituationsDataCoverageTooltip context={context} />}
               />
             </ErrorBoundary>
