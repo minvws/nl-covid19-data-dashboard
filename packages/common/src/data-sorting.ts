@@ -1,6 +1,8 @@
 import { isDefined } from 'ts-is-present';
 import {
   GmSewerPerInstallationValue,
+  InVariantsVariantValue,
+  NlVariantsVariantValue,
   VrSewerPerInstallationValue,
 } from './types';
 
@@ -18,8 +20,8 @@ export function sortTimeSeriesInDataInPlace<T>(
 
     if (setDatesToMiddleOfDay) {
       /**
-       * We'll map all dates to midday (12:00). This simplifies the rendering of a
-       * marker/annotation on a date.
+       * We'll map all dates to midday (12:00). This simplifies the rendering of
+       * a marker/annotation on a date.
        */
       timeSeries.values = timeSeries.values.map(setValueDatesToMiddleOfDay);
 
@@ -32,8 +34,8 @@ export function sortTimeSeriesInDataInPlace<T>(
   }
 
   /**
-   * There is one property in the dataset that contains timeseries nested
-   * inside values, so we need to process that separately.
+   * Sewer per installation contains timeseries nested inside values, so we need
+   * to process that separately.
    */
   if (isDefined((data as UnknownObject).sewer_per_installation)) {
     const nestedSeries = (data as UnknownObject)
@@ -60,6 +62,31 @@ export function sortTimeSeriesInDataInPlace<T>(
           x.last_value = setValueDatesToMiddleOfDay(x.last_value);
         }
       }
+      return x;
+    });
+  }
+
+  /**
+   * The variants data is structured similarly to sewer_per_installation as
+   * shown above. @TODO unify/clean up validation of both.
+   */
+  if (isDefined((data as UnknownObject).variants)) {
+    const nestedSeries = (data as UnknownObject).variants as VariantsData;
+
+    if (!nestedSeries.values) {
+      /**
+       * It can happen that we get incomplete json data and assuming that values
+       * exists here might crash the app
+       */
+      console.error('variants.values does not exist');
+      return;
+    }
+
+    nestedSeries.values = nestedSeries.values.map((x) => {
+      x.values = sortTimeSeriesValues(x.values) as
+        | NlVariantsVariantValue[]
+        | InVariantsVariantValue[];
+
       return x;
     });
   }
@@ -130,6 +157,12 @@ export interface SewerPerInstallationData {
     VrSewerPerInstallationValue | GmSewerPerInstallationValue
   > & {
     rwzi_awzi_name: string;
+  })[];
+}
+
+export interface VariantsData {
+  values: (TimeSeriesMetric<NlVariantsVariantValue | InVariantsVariantValue> & {
+    name: string;
   })[];
 }
 
