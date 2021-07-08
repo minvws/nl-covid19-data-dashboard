@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "title": "nl_variants",
-  "required": ["values", "sample_size", "date_of_insertion_unix"],
+  "required": ["values", "date_of_insertion_unix"],
   "additionalProperties": false,
   "properties": {
     "values": {
@@ -12,9 +12,6 @@
       }
     },
     "date_of_insertion": {
-      "type": "integer"
-    },
-    "sample_size": {
       "type": "integer"
     }
   },
@@ -45,6 +42,7 @@
         "percentage",
         "occurrence",
         "is_variant_of_concern",
+        "sample_size",
         "date_start_unix",
         "date_end_unix"
       ],
@@ -57,6 +55,9 @@
         },
         "is_variant_of_concern": {
           "type": "boolean"
+        },
+        "sample_size": {
+          "type": "integer"
         },
         "date_start_unix": {
           "type": "integer"
