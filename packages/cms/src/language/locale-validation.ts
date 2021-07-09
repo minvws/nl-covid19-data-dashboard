@@ -6,6 +6,11 @@ type GetRule = (fieldRule: Rule, language: SupportedLanguageId) => Rule;
 export function localeValidation(getRules: GetRule) {
   return (rule: Rule) =>
     rule.fields({
+      /**
+       * FieldRules need to be reset to prevent a sanity error which would
+       * validate all fields of the same type in a document.
+       * https://github.com/sanity-io/sanity/issues/1661#issuecomment-761813272
+       */
       nl: (fieldRule: Rule) => getRules(fieldRule.reset(), 'nl'),
       en: (fieldRule: Rule) => getRules(fieldRule.reset(), 'en'),
     });
