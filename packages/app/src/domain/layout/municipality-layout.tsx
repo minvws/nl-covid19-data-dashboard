@@ -1,6 +1,7 @@
 import { Gm, GmDifference } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import VirusIcon from '~/assets/virus.svg';
@@ -69,7 +70,10 @@ type MunicipalityLayoutProps = {
  */
 export function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const { children, data, municipalityName, code, difference } = props;
-  const sidebarData = { ...data, difference };
+  const sidebarData = useMemo(
+    () => ({ ...data, difference }),
+    [data, difference]
+  );
 
   const { siteText } = useIntl();
   const router = useRouter();
@@ -134,7 +138,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   )}
                 </Box>
                 <Menu>
-                  {data && (
+                  {sidebarData && (
                     <>
                       <CategoryMenu
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
@@ -201,13 +205,15 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     title={siteText.gemeente_layout.headings.vroege_signalen}
                   >
                     <MetricMenuItemLink
-                      href={data?.sewer && reverseRouter.gm.rioolwater(code)}
+                      href={
+                        sidebarData?.sewer && reverseRouter.gm.rioolwater(code)
+                      }
                       icon={<RioolwaterMonitoring />}
                       title={
                         siteText.gemeente_rioolwater_metingen.titel_sidebar
                       }
                     >
-                      {data?.sewer ? (
+                      {sidebarData?.sewer ? (
                         <SidebarMetric
                           data={sidebarData}
                           scope="gm"
