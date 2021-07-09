@@ -1,9 +1,6 @@
 import { isDefined } from 'ts-is-present';
 import { Rule } from '~/sanity';
-import {
-  localeStringValidation,
-  localeValidation,
-} from '../../language/locale-validation';
+import { localeStringValidation } from '../../language/locale-validation';
 
 const REQUIRED = (x: Rule) => x.required();
 const DATE_FORMAT = 'YYYY-MM-DD';
