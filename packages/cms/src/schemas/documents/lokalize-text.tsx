@@ -180,7 +180,13 @@ function LokalizeTextDescription() {
           <p>
             Met onze Markdown-implementatie is het mogelijk om een gele melding
             te tonen, hiervoor hebben we de "blockquote" syntax gekaapt.
-            <pre>
+            <pre
+              style={{
+                padding: 10,
+                background: '#EEE',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
               {`
 > Dit bericht zal verschijnen in een [geel meldingsblok](#).
 `.trim()}
@@ -193,20 +199,33 @@ function LokalizeTextDescription() {
           <p>
             Met onze Markdown-implementatie is het mogelijk om tekst voor een
             enkele veiligheidsregio of gemeente weer te geven. Hiervoor hebben
-            we de "codeblock" syntax gekaapt.
-            <pre>
+            we de "codeblock" syntax gekaapt. Deze syntax werkt met drie tildes
+            (~~~) of drie backticks/accent grave (```).
+            <pre
+              style={{
+                padding: 10,
+                background: '#EEE',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
               {`
-\`\`\`VR09
+~~~VR09
 Deze tekst zal enkel weergegeven worden als de code VR09 in de url voorkomt.
-\`\`\`
+~~~
 
-\`\`\`VR10,GM0200
+~~~VR10,GM0200
 Deze tekst zal enkel weergegeven worden als de code VR09 of GM0200 in de url voorkomt.
 
 Overigens kan je binnen zo'n blok weer gewoon markdown opmaak toepassen.
 [zoals links](#).
 
 > Of een melding weergeven met de "blockquote" syntax.
+~~~
+
+Tussen deze blokken kunnen we weer gewone tekst weergeven.
+
+\`\`\`VR09
+Een "accent grave", ook wel bekend als "backtick", is ook mogelijk.
 \`\`\`
 `.trim()}
             </pre>
