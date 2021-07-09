@@ -77,7 +77,7 @@ export function Metadata({
                   `${siteText.common.metadata.source}: ${source.text}`
                 ) : dataSources ? (
                   <>
-                    {`. ${siteText.common.metadata.source}: `}
+                    {` • ${siteText.common.metadata.source}: `}
                     {dataSources.map((item, index) => (
                       <InlineText key={index}>
                         {index > 0 &&
