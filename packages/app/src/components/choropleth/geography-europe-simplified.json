@@ -5953,7 +5953,7 @@
     "translate": [-24.196013966248923, 16.478700822486765]
   },
   "objects": {
-    "europe_russia_cuttoff": {
+    "europe": {
       "type": "GeometryCollection",
       "geometries": [
         {
