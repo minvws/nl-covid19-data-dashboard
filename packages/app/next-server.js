@@ -11,12 +11,11 @@ const path = require('path');
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
 const { imageResizeTargets, assert } = require('@corona-dashboard/common');
-const { last, omit } = require('lodash');
-const querystring = require('querystring');
+const { last } = require('lodash');
 
-const MAX_IMAGE_SIZE = last(imageResizeTargets);
+const MAX_IMAGE_WIDTH = last(imageResizeTargets);
 assert(
-  MAX_IMAGE_SIZE > 0,
+  MAX_IMAGE_WIDTH > 0,
   'Failed to get maximum image width from imageResizeTargets'
 );
 
@@ -157,9 +156,18 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
 
 function filterImageRequests(pathname, req) {
   /**
-   * Only allow images using our maximum used dimensions.
    * Disallow `h` parameter.
    */
-  const allowRequest = req.query.w <= MAX_IMAGE_SIZE && !req.query.h;
-  return allowRequest;
+  if (req.query.h) {
+    return false;
+  }
+
+  /**
+   * Only allow images using our maximum used dimensions.
+   */
+  if (req.query.w && parseInt(req.query.w, 10) > MAX_IMAGE_WIDTH) {
+    return false;
+  }
+
+  return true;
 }
