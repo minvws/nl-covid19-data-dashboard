@@ -1,10 +1,7 @@
-import {
-  MunicipalHospitalNiceValue,
-  MunicipalityProperties,
-} from '@corona-dashboard/common';
-import { InlineText } from '~/components/typography';
+import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { municipalThresholds } from '../../municipal-thresholds';
@@ -12,7 +9,7 @@ import { municipalThresholds } from '../../municipal-thresholds';
 export function HospitalAdmissionsMunicipalTooltip({
   context,
 }: {
-  context: MunicipalityProperties & MunicipalHospitalNiceValue;
+  context: GmProperties & GmHospitalNiceValue;
 }) {
   const intl = useIntl();
   const reverseRouter = useReverseRouter();

@@ -1,4 +1,4 @@
-import { VrSituationsValue } from '@corona-dashboard/common';
+import { TimeframeOption, VrSituationsValue } from '@corona-dashboard/common';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -6,7 +6,6 @@ import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { TimeframeOption } from '~/utils/timeframe';
 import { useList } from '~/utils/use-list';
 import { SituationKey, useSituations } from './logic/situations';
 
@@ -63,6 +62,7 @@ export function SituationsOverTimeChart({
         onReset={clear}
       />
       <TimeSeriesChart
+        accessibility={{ key: 'situations_over_time_chart' }}
         values={values}
         timeframe={timeframe}
         dataOptions={{ timespanAnnotations, isPercentage: true }}

@@ -1,14 +1,14 @@
+import { Gm, Nl, Vr } from '@corona-dashboard/common';
 import { Context } from 'mocha';
-import { Municipal, National, Regionaal } from '@corona-dashboard/common';
 
 export type RegionalContext = Context & {
-  regionData: Regionaal;
+  regionData: Vr;
 };
 
-export type NationalContext = Context & {
-  nationalData: National;
+export type NlContext = Context & {
+  nationalData: Nl;
 };
 
-export type MunicipalContext = Context & {
-  municipalData: Municipal;
+export type GmContext = Context & {
+  municipalData: Gm;
 };

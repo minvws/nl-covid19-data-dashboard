@@ -1,7 +1,7 @@
 import {
-  MunicipalSewer,
-  RegionalSewer,
+  GmSewer,
   SewerPerInstallationData,
+  VrSewer,
 } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -9,15 +9,22 @@ import { Select } from '~/components/select';
 import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
 import { mergeData } from './new-logic';
 
 export function NewSewerChart({
+  accessibility,
   dataAverages,
   dataPerInstallation,
   text,
 }: {
-  dataAverages: RegionalSewer | MunicipalSewer;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
+  dataAverages: VrSewer | GmSewer;
   dataPerInstallation?: SewerPerInstallationData;
   text: {
     title: string;
@@ -111,6 +118,7 @@ export function NewSewerChart({
              */
             dataPerInstallation && selectedInstallation ? (
               <TimeSeriesChart
+                accessibility={accessibility}
                 values={mergeData(
                   dataAverages,
                   dataPerInstallation,
@@ -138,6 +146,7 @@ export function NewSewerChart({
               />
             ) : (
               <TimeSeriesChart
+                accessibility={accessibility}
                 values={dataAverages.values}
                 timeframe={timeframe}
                 seriesConfig={[

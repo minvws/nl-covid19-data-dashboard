@@ -1,8 +1,8 @@
 import {
-  MunicipalityProperties,
-  MunicipalSewerValue,
-  RegionalSewerValue,
-  SafetyRegionProperties,
+  GmProperties,
+  GmSewerValue,
+  VrProperties,
+  VrSewerValue,
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
@@ -160,6 +160,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
           {sewerSplitAreaChart.isEnabled ? (
             <NewSewerChart
+              accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
               dataAverages={data.sewer}
               text={{
                 title: text.linechart_titel,
@@ -181,6 +182,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             >
               {(timeframe) => (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'sewer_particles_over_time',
+                  }}
                   values={sewerAverages.values}
                   timeframe={timeframe}
                   seriesConfig={[
@@ -220,23 +224,29 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           >
             {selectedMap === 'municipal' ? (
               <MunicipalityChoropleth
+                accessibility={{
+                  key: 'sewer_municipal_choropleth',
+                }}
                 data={choropleth.gm}
                 getLink={reverseRouter.gm.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={(
-                  context: MunicipalityProperties & MunicipalSewerValue
-                ) => <SewerMunicipalTooltip context={context} />}
+                tooltipContent={(context: GmProperties & GmSewerValue) => (
+                  <SewerMunicipalTooltip context={context} />
+                )}
               />
             ) : (
               <SafetyRegionChoropleth
+                accessibility={{
+                  key: 'sewer_region_choropleth',
+                }}
                 data={choropleth.vr}
                 getLink={reverseRouter.vr.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={(
-                  context: SafetyRegionProperties & RegionalSewerValue
-                ) => <SewerRegionalTooltip context={context} />}
+                tooltipContent={(context: VrProperties & VrSewerValue) => (
+                  <SewerRegionalTooltip context={context} />
+                )}
               />
             )}
           </ChoroplethTile>

@@ -1,7 +1,7 @@
 import { NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Tile } from '~/components/tile';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -122,11 +122,15 @@ export function BehaviorPerAgeGroup({
 }
 
 interface PercentageBarProps {
-  amount: number;
+  amount: number | null;
   color: string;
 }
 
 function PercentageBar({ amount, color }: PercentageBarProps) {
+  if (!isPresent(amount)) {
+    return null;
+  }
+
   return (
     <Box display="flex" alignItems="center">
       <InlineText

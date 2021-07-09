@@ -1,7 +1,7 @@
 {
   "definitions": {
     "value": {
-      "title": "national_infectious_people_value",
+      "title": "nl_infectious_people_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -32,7 +32,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_infectious_people",
+  "title": "nl_infectious_people",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

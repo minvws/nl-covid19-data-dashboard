@@ -1,4 +1,4 @@
-import { MetricKeys, National } from '@corona-dashboard/common';
+import { MetricKeys, Nl } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
 import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 
@@ -6,7 +6,7 @@ const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;
 const RED = colors.data.gradient.red;
 
-type NlMetricKey = MetricKeys<National>;
+type NlMetricKey = MetricKeys<Nl>;
 export type NlConfig = Partial<
   Record<NlMetricKey, Record<string, MetricConfig>>
 >;

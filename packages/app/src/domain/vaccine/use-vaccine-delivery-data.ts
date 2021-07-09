@@ -1,5 +1,5 @@
 import {
-  National,
+  Nl,
   NlVaccineAdministeredEstimateValue,
   NlVaccineAdministeredValue,
   NlVaccineDeliveryEstimateValue,
@@ -9,7 +9,7 @@ import { useMemo } from 'react';
 
 export function useVaccineDeliveryData(
   data: Pick<
-    National,
+    Nl,
     | 'vaccine_delivery'
     | 'vaccine_administered'
     | 'vaccine_delivery_estimate'

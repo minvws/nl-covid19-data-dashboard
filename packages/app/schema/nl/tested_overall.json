@@ -1,12 +1,13 @@
 {
   "definitions": {
     "value": {
-      "title": "national_tested_overall_value",
+      "title": "nl_tested_overall_value",
       "type": "object",
       "additionalProperties": false,
       "required": [
         "infected",
         "infected_per_100k",
+        "infected_per_100k_moving_average",
         "date_unix",
         "date_of_insertion_unix"
       ],
@@ -30,7 +31,7 @@
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_tested_overall",
+  "title": "nl_tested_overall",
   "type": "object",
   "required": ["values", "last_value"],
   "additionalProperties": false,

@@ -1,15 +1,12 @@
-import {
-  EscalationLevels,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
+import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ChoroplethTile } from '~/components/choropleth-tile';
+import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { Markdown } from '~/components/markdown';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
-import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
 import { Layout } from '~/domain/layout/layout';
 import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
@@ -24,9 +21,9 @@ import {
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/create-date';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -98,14 +95,13 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
             }
           >
             <SafetyRegionChoropleth
+              accessibility={{ key: 'escalation_levels_choropleth' }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.index}
               metricName="escalation_levels"
               metricProperty="level"
               noDataFillColor={unknownLevelColor}
-              tooltipContent={(
-                context: SafetyRegionProperties & EscalationLevels
-              ) => (
+              tooltipContent={(context: VrProperties & EscalationLevels) => (
                 <EscalationRegionalTooltip
                   context={context}
                   getLink={reverseRouter.vr.index}

@@ -2,7 +2,7 @@ import { UnknownObject } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { CustomValidationFunction, JSONObject, JSONValue } from './types';
+import { JSONObject, JSONValue } from './types';
 
 export function createChoroplethValidation(
   choroplethCollectionPath: string,
@@ -21,19 +21,21 @@ export function createChoroplethValidation(
   const collectionJson = JSON.parse(
     fs.readFileSync(choroplethCollectionPath, { encoding: 'utf8' })
   );
-  return validateChoroplethValues.bind(
-    undefined,
-    path.basename(choroplethCollectionPath),
-    collectionJson,
-    codeProperty
-  ) as CustomValidationFunction;
+
+  return (input: JSONObject) =>
+    validateChoroplethValues(
+      path.basename(choroplethCollectionPath),
+      collectionJson,
+      codeProperty,
+      input
+    );
 }
 
 /**
- * This validation function receives a data file (either VR of GM) and a choropleth data file (GM_COLLECTION or VR_COLLECTION).
+ * This validation function receives a data file (either VR, GM or IN) and a choropleth data file (GM_COLLECTION, VR_COLLECTION or IN_COLLECTION).
  * It extracts all of the data points that both files have in common, then it
- * compares the last_value property from each of these data points
- * in the datafile with the corresponding value in the choropleth file using the codeProperty to find the correct value.
+ * compares the last_value property from each of these data point
+ * in the data file with the corresponding value in the choropleth file using the codeProperty to find the correct value.
  *
  * For example, GM0014.json has three data points that are also present in the GM_COLLECTION.json: tested_overall, hospital_nice and sewer.
  * The validator loops over these three properties in the collection file and for each finds the value where the 'gmcode' property
@@ -43,12 +45,13 @@ export function createChoroplethValidation(
  *
  */
 export const validateChoroplethValues = (
-  collectionJsonFilename: string,
-  collectionJson: JSONObject, // The GM_COLLECTION.sjon or VR_COLLECTION.json
-  codeProperty: string, //the gmcode or vrcode property name
-  input: JSONObject //GM***.json or VR***.json
+  collectionJsonFilename: string, // GM_COLLECTION.json|VR_COLLECTION.json|IN_COLLECTION.json
+  collectionJson: JSONObject, // The contents of the aforementioned json file
+  codeProperty: string, //the gmcode, vrcode, country_code property name
+  input: JSONObject // contents of a GM***.json or VR***.json or IN_***.json file
 ): string[] | undefined => {
   const commonDataProperties = getCommonDataProperties(input, collectionJson);
+  const filePrefix = collectionJsonFilename.startsWith('IN_') ? 'IN_' : '';
 
   const code = input.code;
 
@@ -74,7 +77,7 @@ export const validateChoroplethValues = (
 
   return results.length
     ? [
-        `Data in the last_value properties of ${code}.json was not equal to its counterpart in ${collectionJsonFilename}:`,
+        `Data in the last_value properties of ${filePrefix}${code}.json was not equal to its counterpart in ${collectionJsonFilename}:`,
         ...results,
       ]
     : undefined;
@@ -86,6 +89,7 @@ function validateCommonPropertyEquality(
   propertyName: string
 ) {
   const commonProperties = getCommonProperties(collectionValue, lastValue);
+
   const result = commonProperties
     .map((key) => {
       return lastValue[key] !== collectionValue[key]

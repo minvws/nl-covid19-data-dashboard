@@ -1,7 +1,4 @@
-import {
-  EscalationLevels,
-  SafetyRegionProperties,
-} from '@corona-dashboard/common';
+import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
@@ -154,13 +151,14 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
             >
               <ErrorBoundary>
                 <SafetyRegionChoropleth
+                  accessibility={{ key: 'escalation_levels_choropleth' }}
                   minHeight={200}
                   data={choropleth.vr}
                   metricName="escalation_levels"
                   noDataFillColor={unknownLevelColor}
                   metricProperty="level"
                   tooltipContent={(
-                    context: SafetyRegionProperties & EscalationLevels
+                    context: VrProperties & EscalationLevels
                   ) => (
                     <EscalationRegionalTooltip
                       context={context}
