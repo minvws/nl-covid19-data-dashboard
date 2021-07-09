@@ -13,8 +13,9 @@ import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
-import { BarStack } from '@visx/shape';
+import { BarStack, Line } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
+import { Text } from '@visx/text';
 /**
  * useTooltipInPortal will not work for IE11 at the moment. See this issue
  * https://github.com/airbnb/visx/issues/904
@@ -311,9 +312,10 @@ export function StackedChart<T extends TimestampedValue>(
           : undefined;
       }
 
-      const isAlternate = index % 2 === 0 && index !== all.length - 2;
+      const modulo = Math.ceil(all.length / numOfFittingLabels);
+      const showTick = index % modulo === 0 && index < all.length - modulo;
 
-      if (isFirst || isLast || isAlternate) {
+      if (isFirst || isLast || showTick) {
         return rangeText;
       }
     },
@@ -526,6 +528,22 @@ export function StackedChart<T extends TimestampedValue>(
                       fontSize: 12,
                     };
                   }}
+                  tickComponent={({ x, y, formattedValue, ...props }) =>
+                    formattedValue && (
+                      <>
+                        <Line
+                          from={{ x, y: y - 20 }}
+                          to={{ x, y: y - 13 }}
+                          stroke={colors.data.axis}
+                          strokeWidth={1}
+                          strokeLinecap="square"
+                        />
+                        <Text x={x} y={y} {...props}>
+                          {formattedValue}
+                        </Text>
+                      </>
+                    )
+                  }
                   hideTicks
                 />
                 <g ref={yAxisRef}>
