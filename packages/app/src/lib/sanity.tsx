@@ -18,8 +18,8 @@ assert(
 const config: ClientConfig = {
   /**
    * Find your project ID and dataset in `sanity.json` in your studio project.
-   * These are considered “public”, but you can use environment variables
-   * if you want differ between local dev and production.
+   * These are considered “public”, but you can use environment variables if you
+   * want differ between local dev and production.
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
@@ -50,10 +50,11 @@ export async function getClient(
 
 // const builder = imageUrlBuilder(client);
 /**
- * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
- * Read more: https://www.sanity.io/docs/image-url
- * CAUTION: This is commented out because we should be talking to our images on our own filesystem!
- * Chances are high this helper will be removed completely!
+ * Set up a helper function for generating Image URLs with only the asset
+ * reference data in your documents. Read more:
+ * https://www.sanity.io/docs/image-url CAUTION: This is commented out because
+ * we should be talking to our images on our own filesystem! Chances are high
+ * this helper will be removed completely!
  **/
 // export const urlFor = (source: SanityImageSource) => builder.image(source);
 
@@ -83,18 +84,18 @@ export function localize<T>(value: T | T[], languages: string[]): T {
 }
 
 /**
- * Utility to get an object which can be spread on an `<img />`-element.
- * It will return the `src`, `srcSet` and `alt`-attributes together with the
- * width and height.
- * It's probably wise to set `height: auto` with css on the image-element itself
- * for a correctly resizing responsive image.
+ * Utility to get an object which can be spread on an `<img />`-element. It will
+ * return the `src`, `srcSet` and `alt`-attributes together with the width and
+ * height. It's probably wise to set `height: auto` with css on the
+ * image-element itself for a correctly resizing responsive image.
  *
- * By default the `src` will resolve the to a size close to the original size.
- * Optionally you can provide a configuration objext to override this size.
+ * By default the `src` will resolve to a size close to the original size.
+ * Optionally you can provide a configuration object to override this size.
  *
- * The configuration object accepts a an array called sizes where you map viewport widths to an image width in pixels.
- * This allows you to override the 1-on-1 matching behavior of srcSet to a tailored one for your image.
- * E.g. Normally a 1024vw viewport will load a 1024px image.
+ * The configuration object accepts an array called sizes where you map viewport
+ * widths to an image width in pixels. This allows you to override the 1-on-1
+ * matching behavior of srcSet to a tailored one for your image. E.g. Normally a
+ * 1024vw viewport will load a 1024px image.
  *
  *
  * Usage:
@@ -116,10 +117,8 @@ export function getImageProps<T extends ImageBlock>(
   const { asset, alt = '' } = node;
   const { metadata } = asset;
 
-  const {
-    defaultWidth = metadata.dimensions.width,
-    sizes: sizesOption,
-  } = options;
+  const { defaultWidth = metadata.dimensions.width, sizes: sizesOption } =
+    options;
 
   const width = findClosestSize(defaultWidth, imageResizeTargets);
   const height = width / metadata.dimensions.aspectRatio;

@@ -10,6 +10,15 @@ const path = require('path');
 
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
+const { imageResizeTargets, assert } = require('@corona-dashboard/common');
+const { last } = require('lodash');
+
+const MAX_IMAGE_WIDTH = last(imageResizeTargets);
+assert(
+  MAX_IMAGE_WIDTH > 0,
+  'Failed to get maximum image width from imageResizeTargets'
+);
+
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
 });
@@ -53,7 +62,7 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
 
   server.use(
     '/cms-:type(images|files)',
-    createProxyMiddleware({
+    createProxyMiddleware(filterImageRequests, {
       target: 'https://cdn.sanity.io',
       changeOrigin: true,
       selfHandleResponse: true,
@@ -64,7 +73,12 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
          * to
          * /images/NEXT_PUBLIC_SANITY_PROJECT_ID/NEXT_PUBLIC_SANITY_DATASET/filename.ext
          */
-        return path.replace(/^\/cms-(images|files)/, `/$1/${SANITY_PATH}`);
+        const newPath = path.replace(
+          /^\/cms-(images|files)/,
+          `/$1/${SANITY_PATH}`
+        );
+
+        return newPath;
       },
       onProxyRes: responseInterceptor(async function (
         responseBuffer,
@@ -139,3 +153,21 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
     res.removeHeader('X-Powered-By');
   }
 })();
+
+function filterImageRequests(pathname, req) {
+  /**
+   * Disallow `h` parameter.
+   */
+  if (req.query.h) {
+    return false;
+  }
+
+  /**
+   * Only allow images using our maximum used dimensions.
+   */
+  if (req.query.w && parseInt(req.query.w, 10) > MAX_IMAGE_WIDTH) {
+    return false;
+  }
+
+  return true;
+}

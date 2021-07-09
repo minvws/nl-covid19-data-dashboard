@@ -1,5 +1,7 @@
+import { useRouter } from 'next/router';
 import { ArticleDetail } from '~/components/article-detail';
 import { Box } from '~/components/base';
+import { Layout } from '~/domain/layout/layout';
 import { getClient, getImageSrc } from '~/lib/sanity';
 import {
   createGetStaticProps,
@@ -11,8 +13,6 @@ import {
 } from '~/static-props/get-data';
 import { Article, Block, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { Layout } from '~/domain/layout/layout';
-import { useRouter } from 'next/router';
 
 const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 
