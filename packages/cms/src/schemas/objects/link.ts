@@ -15,7 +15,7 @@ export const link = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: localeStringValidation((rule) => rule.reset().required()),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'href',

@@ -9,7 +9,7 @@ export const ARTICLE_FIELDS = [
     title: 'Titel',
     name: 'title',
     type: 'localeString',
-    validation: localeStringValidation((rule) => rule.reset().required()),
+    validation: localeStringValidation((rule) => rule.required()),
   },
   {
     title: 'Slug',
@@ -25,7 +25,7 @@ export const ARTICLE_FIELDS = [
     name: 'metaDescription',
     type: 'localeString',
     fieldset: 'metadata',
-    validation: localeStringValidation((rule) => rule.reset().required()),
+    validation: localeStringValidation((rule) => rule.required()),
   },
   {
     title: 'Publicatie datum',
@@ -46,15 +46,13 @@ export const ARTICLE_FIELDS = [
       'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.',
     name: 'summary',
     type: 'localeText',
-    validation: localeStringValidation((rule) =>
-      rule.reset().required().max(120)
-    ),
+    validation: localeStringValidation((rule) => rule.required().max(120)),
   },
   {
     title: 'Intro',
     name: 'intro',
     type: 'localeBlock',
-    validation: localeValidation((rule) => rule.reset().required()),
+    validation: localeValidation((rule) => rule.required()),
   },
   {
     title: 'Afbeelding',
@@ -76,6 +74,6 @@ export const ARTICLE_FIELDS = [
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',
-    validation: localeValidation((rule) => rule.reset().required()),
+    validation: localeValidation((rule) => rule.required()),
   },
 ];

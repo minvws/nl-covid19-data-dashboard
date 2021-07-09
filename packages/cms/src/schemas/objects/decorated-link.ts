@@ -15,13 +15,13 @@ export const decoratedLink = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: localeStringValidation((rule) => rule.reset().required()),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       title: 'Categorie',
       name: 'category',
       type: 'localeString',
-      validation: localeStringValidation((rule) => rule.reset().required()),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'href',

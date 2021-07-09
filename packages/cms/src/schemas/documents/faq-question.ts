@@ -1,5 +1,8 @@
 import { Rule } from '~/sanity';
-import { localeValidation } from '../../language/locale-validation';
+import {
+  localeStringValidation,
+  localeValidation,
+} from '../../language/locale-validation';
 import { selectedLanguages$ } from '../../plugins/translate/datastore';
 import { prepareLocalized } from '../../plugins/translate/prepare-localized';
 
@@ -17,7 +20,7 @@ export const faqQuestion = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: localeValidation((rule) => rule.required()),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'content',

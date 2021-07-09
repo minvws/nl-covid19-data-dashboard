@@ -9,8 +9,8 @@ type GetRules = (
 export function localeValidation(getRules: GetRules) {
   return (rule: Rule) =>
     rule.fields({
-      nl: (fieldRule: Rule) => getRules(fieldRule, 'nl'),
-      en: (fieldRule: Rule) => getRules(fieldRule, 'en'),
+      nl: (fieldRule: Rule) => getRules(fieldRule.reset(), 'nl'),
+      en: (fieldRule: Rule) => getRules(fieldRule.reset(), 'en'),
     });
 }
 

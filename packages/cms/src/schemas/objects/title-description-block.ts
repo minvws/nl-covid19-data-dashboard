@@ -12,13 +12,13 @@ export const titleDescriptionBlock = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: localeStringValidation((rule) => rule.reset().required()),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'description',
       type: 'localeBlock',
       title: 'Toelichting',
-      validation: localeValidation((rule) => rule.reset().required()),
+      validation: localeValidation((rule) => rule.required()),
     },
   ],
   preview: {

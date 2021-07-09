@@ -22,25 +22,19 @@ export const topicalPage = {
               title: 'Titel',
               name: 'title',
               type: 'localeString',
-              validation: localeStringValidation((rule) =>
-                rule.reset().required()
-              ),
+              validation: localeStringValidation((rule) => rule.required()),
             },
             {
               title: 'Categorie',
               name: 'category',
               type: 'localeString',
-              validation: localeStringValidation((rule) =>
-                rule.reset().required()
-              ),
+              validation: localeStringValidation((rule) => rule.required()),
             },
             {
               name: 'label',
               type: 'localeString',
               title: 'Tekst in de link',
-              validation: localeStringValidation((rule) =>
-                rule.reset().required()
-              ),
+              validation: localeStringValidation((rule) => rule.required()),
             },
             {
               name: 'href',

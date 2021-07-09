@@ -12,13 +12,13 @@ export const collapsible = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: localeStringValidation((rule) => rule.reset().required()),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'content',
       type: 'localeBlock',
       title: 'Inhoud',
-      validation: localeValidation((rule) => rule.reset().required()),
+      validation: localeValidation((rule) => rule.required()),
     },
   ],
   preview: {
