@@ -51,8 +51,9 @@ export function WideInfectedTable({
             <HeaderCell
               css={css({
                 width: asResponsiveArray({
-                  sm: 150,
-                  lg: 150,
+                  sm: 180,
+                  lg: 200,
+                  xl: 210,
                 }),
               })}
             >
@@ -63,8 +64,9 @@ export function WideInfectedTable({
                 textAlign: 'right',
                 pr: 3,
                 width: asResponsiveArray({
-                  sm: 150,
+                  sm: 200,
                   lg: 220,
+                  xl: 260,
                 }),
               })}
             >
