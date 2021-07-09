@@ -1,4 +1,7 @@
-import { localeStringValidation } from '../../language/locale-validation';
+import {
+  localeStringValidation,
+  localeValidation,
+} from '../../language/locale-validation';
 
 export const collapsible = {
   title: 'Inklapbare titel en inhoud',
@@ -15,7 +18,7 @@ export const collapsible = {
       name: 'content',
       type: 'localeBlock',
       title: 'Inhoud',
-      validation: localeStringValidation((rule) => rule.reset().required()),
+      validation: localeValidation((rule) => rule.reset().required()),
     },
   ],
   preview: {
