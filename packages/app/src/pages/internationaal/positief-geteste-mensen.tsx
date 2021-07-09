@@ -158,6 +158,11 @@ export default function PositiefGetesteMensenPage(
             }}
             metadata={{
               source: text.bronnen.rivm,
+              date: [
+                internationalMetadataDatums.dateOrRange.start,
+                internationalMetadataDatums.dateOrRange.end,
+              ],
+              obtained: internationalMetadataDatums.dateOfInsertionUnix,
             }}
           >
             <EuropeChoropleth
@@ -222,6 +227,13 @@ export default function PositiefGetesteMensenPage(
           <InfectedTableTile
             data={choroplethData}
             countryNames={countryNames}
+            metadata={{
+              date: [
+                internationalMetadataDatums.dateOrRange.start,
+                internationalMetadataDatums.dateOrRange.end,
+              ],
+              obtained: internationalMetadataDatums.dateOfInsertionUnix,
+            }}
           />
         </TileList>
       </InternationalLayout>
