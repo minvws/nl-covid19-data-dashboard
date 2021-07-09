@@ -3,11 +3,11 @@ import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
 import { getSafetyRegionMunicipalsForMunicipalCode } from '~/utils/get-safety-region-municipals-for-Mmunicipal-code';
 
-export function filterByRegionMunicipals<T extends { gmcode: string }>(
+export function filterByRegionMunicipalities<T extends { gmcode: string }>(
   choroplethData: T[],
   context: GetStaticPropsContext
 ) {
-  const municipalCode = context.params?.code as string;
+  const municipalCode = context.params?.code as string | undefined;
 
   assert(isDefined(municipalCode), 'No municipalCode in context params');
 

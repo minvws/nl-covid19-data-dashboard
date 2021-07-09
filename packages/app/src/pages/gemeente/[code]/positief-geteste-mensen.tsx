@@ -40,7 +40,7 @@ import {
   getLastGeneratedDate,
   selectGmPageMetricData,
 } from '~/static-props/get-data';
-import { filterByRegionMunicipals } from '~/static-props/utils/filter-by-region-municipals';
+import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -57,7 +57,7 @@ export const getStaticProps = createGetStaticProps(
   ),
   createGetChoroplethData({
     gm: ({ tested_overall }, context) => ({
-      tested_overall: filterByRegionMunicipals(tested_overall, context),
+      tested_overall: filterByRegionMunicipalities(tested_overall, context),
     }),
   }),
   createGetContent<{
