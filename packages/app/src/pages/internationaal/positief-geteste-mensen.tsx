@@ -157,12 +157,11 @@ export default function PositiefGetesteMensenPage(
               title: text.choropleth.legenda_titel,
             }}
             metadata={{
-              source: text.bronnen.rivm,
+              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,
               ],
-              obtained: internationalMetadataDatums.dateOfInsertionUnix,
             }}
           >
             <EuropeChoropleth
@@ -228,11 +227,11 @@ export default function PositiefGetesteMensenPage(
             data={choroplethData}
             countryNames={countryNames}
             metadata={{
+              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
               date: [
                 internationalMetadataDatums.dateOrRange.start,
                 internationalMetadataDatums.dateOrRange.end,
               ],
-              obtained: internationalMetadataDatums.dateOfInsertionUnix,
             }}
           />
         </TileList>
