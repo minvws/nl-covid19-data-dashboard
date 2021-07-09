@@ -1,3 +1,8 @@
+import {
+  localeStringValidation,
+  localeValidation,
+} from '../../../language/locale-validation';
+
 export const overRisiconiveaus = {
   name: 'overRisicoNiveaus',
   type: 'document',
@@ -7,51 +12,31 @@ export const overRisiconiveaus = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'description',
       type: 'localeBlock',
       title: 'Beschrijving',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeValidation((rule) => rule.required()),
     },
     {
       name: 'scoreBoardTitle',
       type: 'localeString',
       title: 'Scoreboard titel',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'scoreBoardDescription',
       type: 'localeText',
       title: 'Scoreboard beschrijving',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeValidation((rule) => rule.required()),
     },
     {
       name: 'riskLevelExplanations',
       type: 'localeRichContentBlock',
       title: 'Verdere uitleg',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeValidation((rule) => rule.required()),
     },
     {
       name: 'collapsibleList',
