@@ -34,7 +34,13 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('sewer_per_installation', 'static_values'),
+  selectGmPageMetricData(
+    'sewer_per_installation',
+    'static_values',
+    'sewer',
+    'difference',
+    'code'
+  ),
   createGetContent<{
     articles?: ArticleSummary[];
   }>(() => {
@@ -46,6 +52,7 @@ export const getStaticProps = createGetStaticProps(
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
+    sideBarData,
     municipalityName,
     content,
     lastGenerated,
@@ -81,7 +88,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
+        code={data.code}
+        difference={data.difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >

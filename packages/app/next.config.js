@@ -79,12 +79,16 @@ const nextConfig = {
       new LodashModuleReplacementPlugin({
         // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
         paths: true,
-      }),
-      new DuplicatePackageCheckerPlugin({
-        verbose: true,
-        showHelp: true,
       })
     );
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new DuplicatePackageCheckerPlugin({
+          verbose: true,
+          showHelp: true,
+        })
+      );
+    }
 
     return config;
   },

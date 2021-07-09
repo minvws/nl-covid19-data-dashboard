@@ -2,10 +2,10 @@ import {
   assert,
   Gm,
   GmCollection,
+  In,
   InCollection,
   Nl,
   sortTimeSeriesInDataInPlace,
-  In,
   Vr,
   VrCollection,
 } from '@corona-dashboard/common';
@@ -16,10 +16,7 @@ import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import { CountryCode } from '~/domain/international/select-countries/country-code';
-import {
-  gmPageMetricNames,
-  GmPageMetricNames,
-} from '~/domain/layout/municipality-layout';
+import { MunicipalSideBarData } from '~/domain/layout/municipality-layout';
 import {
   NlPageMetricNames,
   nlPageMetricNames,
@@ -237,10 +234,10 @@ export function loadAndSortVrData(vrcode: string) {
  * be added to the output
  *
  */
-export function selectGmPageMetricData<T extends keyof Gm = GmPageMetricNames>(
+export function selectGmPageMetricData<T extends keyof Gm>(
   ...additionalMetrics: T[]
 ) {
-  return selectGmData(...[...gmPageMetricNames, ...additionalMetrics]);
+  return selectGmData(...additionalMetrics);
 }
 
 /**
@@ -251,12 +248,23 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
+    const sideBarData: MunicipalSideBarData = {
+      deceased_rivm: { last_value: gmData.data.deceased_rivm.last_value },
+      hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
+      tested_overall: { last_value: gmData.data.tested_overall.last_value },
+      sewer: { last_value: gmData.data.sewer.last_value },
+    };
+
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, gmData.data[p]),
       {} as Pick<Gm, T>
     );
 
-    return { selectedGmData, municipalityName: gmData.municipalityName };
+    return {
+      selectedGmData,
+      sideBarData,
+      municipalityName: gmData.municipalityName,
+    };
   };
 }
 
@@ -279,20 +287,20 @@ export function getGmData(context: GetStaticPropsContext) {
 const NOOP = () => null;
 
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
-  vr?: (collection: VrCollection) => T1;
-  gm?: (collection: GmCollection) => T2;
-  in?: (collection: InCollection) => T3;
+  vr?: (collection: VrCollection, context: GetStaticPropsContext) => T1;
+  gm?: (collection: GmCollection, context: GetStaticPropsContext) => T2;
+  in?: (collection: InCollection, context: GetStaticPropsContext) => T3;
 }) {
-  return () => {
+  return (context: GetStaticPropsContext) => {
     const filterVr = settings?.vr ?? NOOP;
     const filterGm = settings?.gm ?? NOOP;
     const filterIn = settings?.in ?? NOOP;
 
     return {
       choropleth: {
-        vr: filterVr(json.vrCollection) as T1,
-        gm: filterGm(json.gmCollection) as T2,
-        in: filterIn(json.inCollection) as T3,
+        vr: filterVr(json.vrCollection, context) as T1,
+        gm: filterGm(json.gmCollection, context) as T2,
+        in: filterIn(json.inCollection, context) as T3,
       },
     };
   };
