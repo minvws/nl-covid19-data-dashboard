@@ -12,6 +12,7 @@ interface WarningMessageProps {
   message: ReactNode;
   variant?: WarningMessageVariant;
   icon?: ComponentType;
+  isFullWidth?: boolean;
 }
 
 // WarningMessage
@@ -19,6 +20,7 @@ export function WarningTile({
   message,
   variant = 'default',
   icon = WarningIcon,
+  isFullWidth,
 }: WarningMessageProps) {
   const Icon = icon;
 
@@ -27,7 +29,7 @@ export function WarningTile({
   const isSmallScreen = !breakpoints.md;
 
   return (
-    <StyledArticle>
+    <StyledArticle isFullWidth={isFullWidth}>
       <WarningBox variant={variant}>
         {isSmallScreen ? (
           <Box width="6px" />
@@ -52,13 +54,13 @@ export function WarningTile({
   );
 }
 
-const StyledArticle = styled.article(
+const StyledArticle = styled.article<{ isFullWidth?: boolean }>((x) =>
   css({
     backgroundColor: 'white',
     flexDirection: 'row',
     padding: 0,
     boxShadow: 'none',
-    display: 'inline-flex',
+    display: x.isFullWidth ? 'flex' : 'inline-flex',
     borderRadius: 1,
   })
 );
