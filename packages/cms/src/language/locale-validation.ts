@@ -1,12 +1,9 @@
 import { Rule } from '~/sanity';
 import { SupportedLanguageId } from './supported-languages';
 
-type GetRules = (
-  fieldRule: Rule,
-  language: SupportedLanguageId
-) => Rule | Rule[];
+type GetRule = (fieldRule: Rule, language: SupportedLanguageId) => Rule;
 
-export function localeValidation(getRules: GetRules) {
+export function localeValidation(getRules: GetRule) {
   return (rule: Rule) =>
     rule.fields({
       nl: (fieldRule: Rule) => getRules(fieldRule.reset(), 'nl'),
@@ -14,6 +11,6 @@ export function localeValidation(getRules: GetRules) {
     });
 }
 
-export function localeStringValidation(getRules: GetRules) {
+export function localeStringValidation(getRules: GetRule) {
   return localeValidation((rule, lang) => getRules(rule.type('String'), lang));
 }
