@@ -66,7 +66,7 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
       target: 'https://cdn.sanity.io',
       changeOrigin: true,
       selfHandleResponse: true,
-      pathRewrite: function (path, req) {
+      pathRewrite: function (path) {
         /**
          * Rewrite
          * /cms-images/filename.ext
