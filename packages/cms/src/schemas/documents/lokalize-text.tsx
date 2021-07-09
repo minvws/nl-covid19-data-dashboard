@@ -42,17 +42,13 @@ export const lokalizeText = {
       options: {
         ignoreLanguageSwitcher: true,
       },
-      validation: (rule: Rule) =>
-        /**
-         * Only NL is required. For EN we use NL as a fallback when exporting.
-         */
+      validation: (rule: Rule) => [
         rule.fields({
-          nl: (rule) => rule.required().custom(validateTextPlaceholders),
-          en: (rule) => [
-            rule.required().warning(),
-            rule.custom(validateTextPlaceholders),
-          ],
+          nl: (rule: Rule) => rule.required(),
+          en: (rule: Rule) => rule.required().warning(),
         }),
+        rule.custom(validateLocaleTextPlaceholders),
+      ],
     },
     {
       title: 'Toon als lege tekst',
@@ -85,25 +81,54 @@ export const lokalizeText = {
   },
 };
 
+function validateLocaleTextPlaceholders({
+  en,
+  nl,
+}: {
+  en?: string;
+  nl?: string;
+}) {
+  const enErrors = getFaultyPlaceholders(en);
+  const nlErrors = getFaultyPlaceholders(nl);
+
+  if (enErrors.length) {
+    const vars = enErrors.map((x) => `"${x}"`).join(', ');
+    return {
+      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
+      paths: ['en'],
+    };
+  }
+
+  if (nlErrors.length) {
+    const vars = nlErrors.map((x) => `"${x}"`).join(', ');
+    return {
+      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
+      paths: ['nl'],
+    };
+  }
+
+  return true;
+}
+
 /**
  * A valid placeholder is considered to look like ``{{placeholderName}}``.
  * This validator looks for mistakes such as ``{placeHolderName}}`` or
  * ``{{placeHolderName}}}``.
  */
-function validateTextPlaceholders(text = '') {
+function getFaultyPlaceholders(text = '') {
   const faultyVariables = [...(text.matchAll(/{+[^}]+}+/g) as any)]
     .map((matchInfo: string[]) => {
       const match = matchInfo[0].match(/{{2}[^{}]+}{2}/);
       if (!match || match[0] !== matchInfo[0]) {
         return matchInfo[0];
       }
+      const whitespaceMatch = matchInfo[0].match(/\s/);
+      if (whitespaceMatch) {
+        return matchInfo[0];
+      }
       return;
     })
     .filter(isDefined);
 
-  return faultyVariables.length > 0
-    ? `De volgende variabelen zijn niet juist geformatteerd: ${faultyVariables
-        .map((x) => `"${x}"`)
-        .join(', ')}`
-    : true;
+  return faultyVariables;
 }
