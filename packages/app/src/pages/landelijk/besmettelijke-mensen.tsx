@@ -73,7 +73,11 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
           {content.articles && <ArticleStrip articles={content.articles} />}
 
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
-            <WarningTile message={text.belangrijk_bericht} variant="emphasis" />
+            <WarningTile
+              isFullWidth
+              message={text.belangrijk_bericht}
+              variant="emphasis"
+            />
           )}
 
           <TwoKpiSection>
