@@ -18,7 +18,7 @@ export function selectScoreboardData() {
 
       sbData[index].vrData.push({
         data: vrData.escalation_level,
-        safetyRegionName: vr.name,
+        vrName: vr.name,
         vrCode: vr.code,
       });
 
@@ -45,9 +45,7 @@ export function selectScoreboardData() {
   }
 
   scoreboardRows.forEach((x) =>
-    x.vrData.sort((a, b) =>
-      a.safetyRegionName.localeCompare(b.safetyRegionName)
-    )
+    x.vrData.sort((a, b) => a.vrName.localeCompare(b.vrName))
   );
 
   const allScoreboardRows = flatten(

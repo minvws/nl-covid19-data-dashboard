@@ -4,7 +4,7 @@ import { vrData } from '~/data/vr';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-export function SafetyRegionComboBox() {
+export function VrComboBox() {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();
