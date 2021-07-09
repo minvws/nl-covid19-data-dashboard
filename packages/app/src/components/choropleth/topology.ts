@@ -26,5 +26,5 @@ export const municipalGeo = topojson.feature(
 
 export const europeGeo = topojson.feature(
   europeTopology,
-  europeTopology.objects.europe_russia_cuttoff
+  europeTopology.objects.europe
 ) as EuropeGeoJSON;

@@ -34,6 +34,7 @@ import {
   getLastGeneratedDate,
   selectGmPageMetricData,
 } from '~/static-props/get-data';
+import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -42,9 +43,11 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('hospital_nice', 'difference', 'code'),
   createGetChoroplethData({
-    gm: ({ hospital_nice }) => ({ hospital_nice }),
+    gm: ({ hospital_nice }, context) => ({
+      hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
+    }),
   }),
   createGetContent<{
     fix_this: ArticlesQueryResult;
@@ -62,6 +65,7 @@ export const getStaticProps = createGetStaticProps(
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
+    sideBarData,
     choropleth,
     municipalityName,
     content,
@@ -92,7 +96,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
+        code={data.code}
+        difference={data.difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >

@@ -1,6 +1,7 @@
-import { Gm } from '@corona-dashboard/common';
+import { Gm, GmDifference } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import VirusIcon from '~/assets/virus.svg';
@@ -22,25 +23,21 @@ import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
 
-export const gmPageMetricNames = [
-  'code',
-  'tested_overall',
-  'deceased_rivm',
-  'hospital_nice',
-  'sewer',
-  'difference',
-] as const;
-
-export type GmPageMetricNames = typeof gmPageMetricNames[number];
-
-export type MunicipalPageMetricData = Pick<Gm, GmPageMetricNames>;
+export type MunicipalSideBarData = {
+  tested_overall: Pick<Gm['tested_overall'], 'last_value'>;
+  deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
+  hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
+  sewer: Pick<Gm['sewer'], 'last_value'>;
+};
 
 type MunicipalityLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
-      data: MunicipalPageMetricData;
+      code: string;
+      difference: GmDifference;
+      data: MunicipalSideBarData;
       municipalityName: string;
     }
   | {
@@ -48,7 +45,9 @@ type MunicipalityLayoutProps = {
        * the route `/gemeente` can render without sidebar and thus without `data`
        */
       isLandingPage: true;
+      code: string;
       data?: undefined;
+      difference?: undefined;
       municipalityName?: undefined;
     }
 );
@@ -70,12 +69,15 @@ type MunicipalityLayoutProps = {
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
 export function MunicipalityLayout(props: MunicipalityLayoutProps) {
-  const { children, data, municipalityName } = props;
+  const { children, data, municipalityName, code, difference } = props;
+  const sidebarData = useMemo(
+    () => ({ ...data, difference }),
+    [data, difference]
+  );
 
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const code = router.query.code as string;
 
   const showMetricLinks = router.route !== '/gemeente';
 
@@ -136,7 +138,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                   )}
                 </Box>
                 <Menu>
-                  {data && (
+                  {sidebarData && (
                     <>
                       <CategoryMenu
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
@@ -150,7 +152,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           }
                         >
                           <SidebarMetric
-                            data={data}
+                            data={sidebarData}
                             scope="gm"
                             metricName="hospital_nice"
                             metricProperty="admissions_on_date_of_reporting"
@@ -171,7 +173,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           }
                         >
                           <SidebarMetric
-                            data={data}
+                            data={sidebarData}
                             scope="gm"
                             metricName="tested_overall"
                             metricProperty="infected"
@@ -188,7 +190,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                           }
                         >
                           <SidebarMetric
-                            data={data}
+                            data={sidebarData}
                             scope="gm"
                             metricName="deceased_rivm"
                             metricProperty="covid_daily"
@@ -203,15 +205,17 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     title={siteText.gemeente_layout.headings.vroege_signalen}
                   >
                     <MetricMenuItemLink
-                      href={data?.sewer && reverseRouter.gm.rioolwater(code)}
+                      href={
+                        sidebarData?.sewer && reverseRouter.gm.rioolwater(code)
+                      }
                       icon={<RioolwaterMonitoring />}
                       title={
                         siteText.gemeente_rioolwater_metingen.titel_sidebar
                       }
                     >
-                      {data?.sewer ? (
+                      {sidebarData?.sewer ? (
                         <SidebarMetric
-                          data={data}
+                          data={sidebarData}
                           scope="gm"
                           metricName="sewer"
                           metricProperty="average"
