@@ -10,7 +10,7 @@ import { SeriesSingleValue } from '~/components/time-series-chart/logic/series';
 
 export type SeriesConfig<T extends TimestampedValue> = BarSeriesDefinition<T>[];
 
-export type BarSeriesDefinition<T extends TimestampedValue> = {
+type BarSeriesDefinition<T extends TimestampedValue> = {
   type: 'bar';
   metricProperty: keyof T;
   color: string;
@@ -29,7 +29,7 @@ export function useSeriesList<T extends TimestampedValue>(
 
 export type SeriesList = SeriesSingleValue[][];
 
-export function getSeriesList<T extends TimestampedValue>(
+function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ): SeriesList {
@@ -42,7 +42,7 @@ export function getSeriesList<T extends TimestampedValue>(
  * This function is almost exactly like getSeriesData from TimeSeriesChart
  * except it uses the date_end_unix as the date __date_unix in a date span
  */
-export function getSeriesData<T extends TimestampedValue>(
+function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T
 ): SeriesSingleValue[] {
@@ -85,7 +85,7 @@ export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
  * render lines, so that the axis scales with whatever key contains the highest
  * and lowest values.
  */
-export function calculateSeriesExtremes<T extends TimestampedValue>(
+function calculateSeriesExtremes<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {

@@ -6,14 +6,13 @@ import {
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Select } from '~/components/select';
-import { useSewerStationSelectPropsSimplified } from '~/components/sewer-chart/logic';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { LocationTooltip } from './components/location-tooltip';
-import { mergeData } from './new-logic';
+import { mergeData, useSewerStationSelectPropsSimplified } from './logic';
 
-export function NewSewerChart({
+export function SewerChart({
   accessibility,
   dataAverages,
   dataPerInstallation,

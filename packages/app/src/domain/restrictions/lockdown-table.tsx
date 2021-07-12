@@ -7,7 +7,7 @@ import { restrictionIcons } from './restriction-icons';
 import { LockdownData } from '~/types/cms';
 import { css } from '@styled-system/css';
 
-export type LockdownTableProps = {
+type LockdownTableProps = {
   data: LockdownData;
 };
 

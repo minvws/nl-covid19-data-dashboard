@@ -44,7 +44,7 @@ export const vrPageMetricNames = [
 
 export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
 
-export type SafetyRegionPageMetricData = Pick<Vr, VrRegionPageMetricNames>;
+type SafetyRegionPageMetricData = Pick<Vr, VrRegionPageMetricNames>;
 
 type SafetyRegionLayoutProps = {
   lastGenerated: string;

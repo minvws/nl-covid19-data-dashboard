@@ -15,7 +15,7 @@ import { GetStaticPropsContext } from 'next';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
-import { CountryCode } from '~/domain/international/select-countries/country-code';
+import { CountryCode } from '~/domain/international/select-countries';
 import { MunicipalSideBarData } from '~/domain/layout/municipality-layout';
 import {
   NlPageMetricNames,
@@ -198,7 +198,7 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
   };
 }
 
-export function getVrData(context: GetStaticPropsContext) {
+function getVrData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
   if (!code) {
@@ -215,7 +215,7 @@ export function getVrData(context: GetStaticPropsContext) {
   };
 }
 
-export function getVrName(code: string) {
+function getVrName(code: string) {
   const safetyRegion = vrData.find((x) => x.code === code);
   return safetyRegion?.name || '';
 }
@@ -268,7 +268,7 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   };
 }
 
-export function getGmData(context: GetStaticPropsContext) {
+function getGmData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
   if (!code) {

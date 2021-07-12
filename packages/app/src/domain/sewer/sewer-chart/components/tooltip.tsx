@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
-import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 
 type Bounds = {
@@ -67,39 +66,5 @@ export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
     >
       <TooltipContent title={title}>{children}</TooltipContent>
     </TooltipContainer>
-  );
-}
-
-type DateTooltipProps = {
-  children: ReactNode;
-  x: number;
-  y: number;
-  bounds: Bounds;
-};
-
-export function DateTooltip({ children, x, y, bounds }: DateTooltipProps) {
-  const { width = 0, ref } = useResizeObserver<HTMLDivElement>();
-  const left = Math.min(bounds.right - width, Math.max(0, x - width / 2));
-  const top = y;
-
-  return (
-    <Box
-      ref={ref}
-      bg="white"
-      transform={`translate(${left}px,${top}px)`}
-      style={{
-        pointerEvents: 'none',
-        position: 'absolute',
-        left: 0,
-        top: 0,
-      }}
-      color="data.benchmark"
-      fontSize={1}
-      fontWeight="bold"
-    >
-      <Box px={2} py={1}>
-        {children}
-      </Box>
-    </Box>
   );
 }

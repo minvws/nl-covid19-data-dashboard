@@ -23,7 +23,7 @@ type Milestones = {
 type ExpectedMilestones = {
   item: string;
 };
-export interface MilestoneViewProps {
+interface MilestoneViewProps {
   title: string;
   description: RichContentBlock[];
   milestones: Milestones[];

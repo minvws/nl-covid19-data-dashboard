@@ -23,7 +23,7 @@ export function findSplitPointForValue(
   return splitPoints[index];
 }
 
-export function findSplitIndexForValue(
+function findSplitIndexForValue(
   splitPoints: SplitPoint[],
   value?: number | null
 ) {

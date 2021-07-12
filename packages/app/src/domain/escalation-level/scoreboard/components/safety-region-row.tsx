@@ -163,7 +163,7 @@ const BarScaleCell = ({
   );
 };
 
-export const VrLinkCell = styled.div<{ color?: string }>((x) =>
+const VrLinkCell = styled.div<{ color?: string }>((x) =>
   css({
     flex: '0 0 18rem',
     display: 'flex',
