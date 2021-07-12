@@ -267,7 +267,7 @@ export function NationalLayout(props: NationalLayoutProps) {
 
                 {data.variants && (
                   <MetricMenuItemLink
-                    href={reverseRouter.nl.covidVarianten()}
+                    href={reverseRouter.nl.varianten()}
                     icon={<Varianten />}
                     title={siteText.covid_varianten.titel_sidebar}
                   >

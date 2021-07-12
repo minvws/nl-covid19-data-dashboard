@@ -62,37 +62,22 @@ export function PageInformationBlock({
             columnGap: 4,
           })}
         >
-          {articles && articles.length > 0 ? (
-            <>
-              <Box spacing={3}>
-                <Text mb={0}>{description}</Text>
-                {metadata && (
-                  <MetadataBox>
-                    <Metadata
-                      {...metadata}
-                      accessibilitySubject={title}
-                      referenceLink={referenceLink}
-                    />
-                  </MetadataBox>
-                )}
-              </Box>
-              <Box>
-                <Articles articles={articles} />
-              </Box>
-            </>
-          ) : (
-            <>
-              <Text mb={0}>{description}</Text>
-              {metadata && (
-                <MetadataBox>
-                  <Metadata
-                    {...metadata}
-                    accessibilitySubject={title}
-                    referenceLink={referenceLink}
-                  />
-                </MetadataBox>
-              )}
-            </>
+          <Box spacing={3}>
+            <Text mb={0}>{description}</Text>
+            {metadata && (
+              <MetadataBox>
+                <Metadata
+                  {...metadata}
+                  accessibilitySubject={title}
+                  referenceLink={referenceLink}
+                />
+              </MetadataBox>
+            )}
+          </Box>
+          {articles && articles.length > 0 && (
+            <Box>
+              <Articles articles={articles} />
+            </Box>
           )}
         </Box>
 

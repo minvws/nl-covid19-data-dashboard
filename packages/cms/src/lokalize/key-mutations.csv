@@ -1,2 +1,13 @@
 timestamp,action,key
 2021-07-09T10:17:16.462Z,add,besmettelijke_personen.belangrijk_bericht
+2021-07-12T13:21:44.292Z,add,internationaal_varianten.bronnen.rivm.download
+2021-07-12T13:21:45.313Z,add,internationaal_varianten.bronnen.rivm.href
+2021-07-12T13:21:46.335Z,add,internationaal_varianten.bronnen.rivm.text
+2021-07-12T13:21:47.363Z,add,internationaal_varianten.datums
+2021-07-12T13:21:48.408Z,add,internationaal_varianten.metadata.description
+2021-07-12T13:21:49.416Z,add,internationaal_varianten.metadata.title
+2021-07-12T13:21:50.456Z,add,internationaal_varianten.pagina_toelichting
+2021-07-12T13:21:51.670Z,add,internationaal_varianten.reference.href
+2021-07-12T13:21:52.500Z,add,internationaal_varianten.reference.text
+2021-07-12T13:21:53.437Z,add,internationaal_varianten.titel
+2021-07-12T13:21:54.554Z,add,internationaal_varianten.titel_sidebar
