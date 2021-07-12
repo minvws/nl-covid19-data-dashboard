@@ -7,7 +7,7 @@
   ],
   "settings": {
     "react": {
-      "version": "16.13.1"
+      "version": "detect"
     }
   },
   "env": {
