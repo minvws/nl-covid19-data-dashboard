@@ -13,7 +13,7 @@ export type VariantRow = {
 
 export function getVariantTableData(nlVariants: NlVariants | undefined) {
   if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
-    return;
+    return [];
   }
 
   return nlVariants.variants

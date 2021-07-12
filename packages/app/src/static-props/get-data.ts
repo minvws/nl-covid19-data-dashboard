@@ -27,6 +27,10 @@ import {
 } from '~/domain/layout/vr-layout';
 import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
+import {
+  getVariantSidebarValue,
+  VariantSidebarValue,
+} from './variants/get-variant-sidebar-value';
 
 /**
  * Usage:
@@ -153,7 +157,9 @@ export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
            */
           data[p] ?? null
         ),
-      {} as Pick<Nl, T>
+      { variantSidebarValue: getVariantSidebarValue(data.variants) } as {
+        variantSidebarValue: VariantSidebarValue;
+      } & Pick<Nl, T>
     );
 
     return { selectedNlData };

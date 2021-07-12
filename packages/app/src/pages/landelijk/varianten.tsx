@@ -30,7 +30,6 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { getVariantChartData } from '~/static-props/variants/get-variant-chart-data';
-import { getVariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { VariantsPageQuery } from '~/types/cms';
 
@@ -41,14 +40,9 @@ export const getStaticProps = withFeatureNotFoundPage(
     () => {
       const data = selectNlPageMetricData('variants')();
       return {
-        selectedNlData: {
-          ...data.selectedNlData,
-          variantTable: getVariantTableData(data.selectedNlData.variants),
-          variantChart: getVariantChartData(data.selectedNlData.variants),
-          variantSidebarValue: getVariantSidebarValue(
-            data.selectedNlData.variants
-          ),
-        },
+        selectedNlData: data.selectedNlData,
+        variantTable: getVariantTableData(data.selectedNlData.variants),
+        variantChart: getVariantChartData(data.selectedNlData.variants),
       };
     },
     createGetContent<{
@@ -69,7 +63,13 @@ export const getStaticProps = withFeatureNotFoundPage(
 export default function CovidVariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { selectedNlData: data, lastGenerated, content } = props;
+  const {
+    selectedNlData: data,
+    lastGenerated,
+    content,
+    variantTable,
+    variantChart,
+  } = props;
 
   const { siteText } = useIntl();
 
@@ -81,7 +81,7 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
-  const lastValue = data.variantChart[0];
+  const lastValue = variantChart[0];
   assert(lastValue, 'No lastValue found');
 
   return (
@@ -146,28 +146,24 @@ export default function CovidVariantenPage(
             )}
           </TwoKpiSection>
 
-          {data.variantTable && (
-            <VariantsTableTile
-              data={data.variantTable}
-              dates={{
-                date_end_unix: 0,
-                date_of_insertion_unix: 0,
-                date_start_unix: 0,
-              }}
-            />
-          )}
+          <VariantsTableTile
+            data={variantTable}
+            dates={{
+              date_end_unix: 0,
+              date_of_insertion_unix: 0,
+              date_start_unix: 0,
+            }}
+          />
 
-          {data.variantChart && (
-            <ChartTile
-              title={text.varianten_over_tijd.titel}
-              description={text.varianten_over_tijd.beschrijving}
-              metadata={{
-                source: text.bronnen.rivm,
-              }}
-            >
-              <VariantsOverTime values={data.variantChart} />
-            </ChartTile>
-          )}
+          <ChartTile
+            title={text.varianten_over_tijd.titel}
+            description={text.varianten_over_tijd.beschrijving}
+            metadata={{
+              source: text.bronnen.rivm,
+            }}
+          >
+            <VariantsOverTime values={variantChart} />
+          </ChartTile>
         </TileList>
       </NationalLayout>
     </Layout>

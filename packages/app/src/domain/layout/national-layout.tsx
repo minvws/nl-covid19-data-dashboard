@@ -56,9 +56,9 @@ export const nlPageMetricNames = [
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-type NationalPageMetricData = Pick<Nl, NlPageMetricNames> & {
+type NationalPageMetricData = {
   variantSidebarValue: VariantSidebarValue;
-};
+} & Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;
