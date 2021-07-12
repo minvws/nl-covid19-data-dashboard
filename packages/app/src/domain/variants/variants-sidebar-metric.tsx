@@ -1,37 +1,30 @@
-import { NlVariantsValue } from '@corona-dashboard/common';
-import { maxBy } from 'lodash';
+import { assert } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { Heading, InlineText } from '~/components/typography';
-import { Variant } from '~/domain/variants/variants-table-tile/logic/use-variants-table-data';
 import { useIntl } from '~/intl';
+import { VariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 interface VariantsSidebarMetricProps {
-  data: NlVariantsValue;
+  data: VariantSidebarValue;
 }
 
 export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDateFromSeconds, formatPercentage } = useIntl();
   const commonText = siteText.common.metricKPI;
 
   /**
    * Filter all the keys that end with a _percentage and find the highest value.
    */
-  const highestPercentage = maxBy(
-    Object.entries(data)
-      .filter((x): x is [`${Variant}_percentage`, number] =>
-        x[0].endsWith('_percentage')
-      )
-      .map(([key, value]) => ({
-        variant: key.split('_')[0] as Variant,
-        value,
-      })),
-    (x) => x.value
-  );
-
   const dateText = replaceVariablesInText(commonText.dateRangeOfReport, {
     startDate: formatDateFromSeconds(data.date_start_unix, 'axis'),
     endDate: formatDateFromSeconds(data.date_end_unix, 'axis'),
   });
+
+  const variantName = (
+    siteText.covid_varianten.varianten as Record<string, string>
+  )[data.name];
+
+  assert(variantName, `No translation found for variant called ${data.name}`);
 
   return (
     <Box display="flex" flexDirection="column">
@@ -39,10 +32,7 @@ export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
         {siteText.covid_varianten.sidebar_beschrijving}
       </Heading>
       <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={3}>
-        {highestPercentage &&
-          `${highestPercentage.value}% ${
-            siteText.covid_varianten.varianten[highestPercentage.variant]
-          }`}
+        {`${formatPercentage(data.percentage)}% ${variantName}`}
       </InlineText>
       <InlineText
         display="inline-block"

@@ -1,9 +1,6 @@
 import { DifferenceDecimal, NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
-
-type CountriesOfOrigin = SiteText['covid_varianten']['landen_van_herkomst'];
 
 export type VariantRow = {
   variant: string;

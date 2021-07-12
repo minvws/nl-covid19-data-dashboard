@@ -5,9 +5,9 @@ import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
+import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { NarrowVariantsTable, WideVariantsTable } from './components';
-import { VariantRow } from './logic/use-variants-table-data';
 
 export function VariantsTableTile({
   data,

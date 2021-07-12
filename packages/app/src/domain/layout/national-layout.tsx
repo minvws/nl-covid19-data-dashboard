@@ -27,6 +27,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { useIntl } from '~/intl';
+import { VariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationIcon } from '../situations/components/situation-icon';
@@ -51,12 +52,13 @@ export const nlPageMetricNames = [
   'difference',
   'corona_melder_app_warning',
   'behavior_per_age_group',
-  'variants',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-type NationalPageMetricData = Pick<Nl, NlPageMetricNames>;
+type NationalPageMetricData = Pick<Nl, NlPageMetricNames> & {
+  variantSidebarValue: VariantSidebarValue;
+};
 
 interface NationalLayoutProps {
   lastGenerated: string;
@@ -265,13 +267,13 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
 
-                {data.variants && (
+                {data.variantSidebarValue && (
                   <MetricMenuItemLink
                     href={reverseRouter.nl.covidVarianten()}
                     icon={<Varianten />}
                     title={siteText.covid_varianten.titel_sidebar}
                   >
-                    <VariantsSidebarMetric data={data.variants.last_value} />
+                    <VariantsSidebarMetric data={data.variantSidebarValue} />
                   </MetricMenuItemLink>
                 )}
 

@@ -30,6 +30,7 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { getVariantChartData } from '~/static-props/variants/get-variant-chart-data';
+import { getVariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { VariantsPageQuery } from '~/types/cms';
 
@@ -44,6 +45,9 @@ export const getStaticProps = withFeatureNotFoundPage(
           ...data.selectedNlData,
           variantTable: getVariantTableData(data.selectedNlData.variants),
           variantChart: getVariantChartData(data.selectedNlData.variants),
+          variantSidebarValue: getVariantSidebarValue(
+            data.selectedNlData.variants
+          ),
         },
       };
     },
