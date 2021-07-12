@@ -10,7 +10,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -41,12 +41,7 @@ export const getStaticProps = createGetStaticProps(
 const ElderlyAtHomeRegionalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const {
-    safetyRegionName,
-    selectedVrData: data,
-    lastGenerated,
-    content,
-  } = props;
+  const { vrName, selectedVrData: data, lastGenerated, content } = props;
   const { elderly_at_home, difference } = data;
 
   const { siteText } = useIntl();
@@ -66,20 +61,16 @@ const ElderlyAtHomeRegionalPage = (
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={
@@ -87,13 +78,13 @@ const ElderlyAtHomeRegionalPage = (
             }
             screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
             title={replaceVariablesInText(text.section_positive_tested.title, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<ElderlyIcon />}
             subtitle={replaceVariablesInText(
               text.section_positive_tested.description,
               {
-                safetyRegion: safetyRegionName,
+                safetyRegion: vrName,
               }
             )}
             metadata={{
@@ -199,13 +190,13 @@ const ElderlyAtHomeRegionalPage = (
 
           <ContentHeader
             title={replaceVariablesInText(text.section_deceased.title, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<ElderlyIcon />}
             subtitle={replaceVariablesInText(
               text.section_deceased.description,
               {
-                safetyRegion: safetyRegionName,
+                safetyRegion: vrName,
               }
             )}
             metadata={{
@@ -285,7 +276,7 @@ const ElderlyAtHomeRegionalPage = (
             )}
           </ChartTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

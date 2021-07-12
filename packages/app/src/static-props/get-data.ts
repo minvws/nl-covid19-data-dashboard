@@ -24,7 +24,7 @@ import {
 import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
-} from '~/domain/layout/safety-region-layout';
+} from '~/domain/layout/vr-layout';
 import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -194,7 +194,7 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
       {} as Pick<Vr, T>
     );
 
-    return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
+    return { selectedVrData, vrName: vrData.vrName };
   };
 }
 
@@ -207,17 +207,17 @@ function getVrData(context: GetStaticPropsContext) {
 
   const data = loadAndSortVrData(code);
 
-  const safetyRegionName = getVrName(code);
+  const vrName = getVrName(code);
 
   return {
     data,
-    safetyRegionName,
+    vrName,
   };
 }
 
-function getVrName(code: string) {
-  const safetyRegion = vrData.find((x) => x.code === code);
-  return safetyRegion?.name || '';
+export function getVrName(code: string) {
+  const vr = vrData.find((x) => x.code === code);
+  return vr?.name || '';
 }
 
 export function loadAndSortVrData(vrcode: string) {

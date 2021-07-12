@@ -26,7 +26,7 @@ import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/type';
 import { SituationIcon } from '../situations/components/situation-icon';
-import { SafetyRegionComboBox } from './components/safety-region-combo-box';
+import { VrComboBox } from './components/vr-combo-box';
 
 export const vrPageMetricNames = [
   'code',
@@ -44,15 +44,15 @@ export const vrPageMetricNames = [
 
 export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
 
-type SafetyRegionPageMetricData = Pick<Vr, VrRegionPageMetricNames>;
+export type VrPageMetricData = Pick<Vr, VrRegionPageMetricNames>;
 
-type SafetyRegionLayoutProps = {
+type VrLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
-      data: SafetyRegionPageMetricData;
-      safetyRegionName: string;
+      data: VrPageMetricData;
+      vrName: string;
     }
   | {
       /**
@@ -60,12 +60,12 @@ type SafetyRegionLayoutProps = {
        */
       isLandingPage: true;
       data?: undefined;
-      safetyRegionName?: undefined;
+      vrName?: undefined;
     }
 );
 
 /**
- * SafetyRegionLayout is a composition of persistent layouts.
+ * VrLayout is a composition of persistent layouts.
  *
  * ## States
  *
@@ -80,8 +80,8 @@ type SafetyRegionLayoutProps = {
  * More info on persistent layouts:
  * https:adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
-  const { children, data, safetyRegionName } = props;
+export function VrLayout(props: VrLayoutProps) {
+  const { children, data, vrName } = props;
 
   const router = useRouter();
   const reverseRouter = useReverseRouter();
@@ -119,7 +119,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
           >
-            <SafetyRegionComboBox />
+            <VrComboBox />
           </Box>
         }
         sidebarComponent={
@@ -142,7 +142,7 @@ export function SafetyRegionLayout(props: SafetyRegionLayoutProps) {
                 mx="auto"
               >
                 <Text fontSize={3} fontWeight="bold" px={3} m={0}>
-                  {safetyRegionName}
+                  {vrName}
                 </Text>
 
                 <Menu>

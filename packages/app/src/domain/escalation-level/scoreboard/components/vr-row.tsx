@@ -1,5 +1,9 @@
 import css from '@styled-system/css';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
+import GetestIcon from '~/assets/test.svg';
+import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
@@ -11,26 +15,22 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { VrScoreboardData } from '../logic';
 import { useEscalationThresholds } from '../../thresholds';
-import GetestIcon from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ReactNode } from 'react';
-import { isPresent } from 'ts-is-present';
+import { VrScoreboardData } from '../logic';
 
-interface SafetyRegionRowProps {
+interface VrRowProps {
   vrData: VrScoreboardData;
   maxHospitalAdmissionsPerMillion: number;
   maxPositiveTestedPer100k: number;
   hideBorder?: boolean;
 }
 
-export function SafetyRegionRow({
+export function VrRow({
   vrData,
   maxHospitalAdmissionsPerMillion,
   maxPositiveTestedPer100k,
   hideBorder,
-}: SafetyRegionRowProps) {
+}: VrRowProps) {
   const {
     hospitalAdmissionsEscalationThresholds,
     positiveTestedEscalationThresholds,
@@ -70,7 +70,7 @@ export function SafetyRegionRow({
             escalationLevelData.level === null ? undefined : escalationColor
           }
         >
-          <InlineText>{vrData.safetyRegionName}</InlineText>
+          <InlineText>{vrData.vrName}</InlineText>
         </VrLinkCell>
 
         {(isPresent(escalationLevelData.positive_tested_per_100k) ||

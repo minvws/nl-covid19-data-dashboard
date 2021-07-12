@@ -17651,7 +17651,7 @@
         }
       ]
     },
-    "safetyregions": {
+    "vr_collection": {
       "type": "GeometryCollection",
       "geometries": [
         {

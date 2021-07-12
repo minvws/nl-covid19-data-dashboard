@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import { Box } from '~/components/base';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -150,7 +150,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               flex={0}
             >
               <ErrorBoundary>
-                <SafetyRegionChoropleth
+                <VrChoropleth
                   accessibility={{ key: 'escalation_levels_choropleth' }}
                   minHeight={200}
                   data={choropleth.vr}

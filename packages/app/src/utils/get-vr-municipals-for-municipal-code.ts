@@ -1,5 +1,5 @@
-import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 
 /**
  * This method looks up all the municipal codes that belong to the same safety region
@@ -7,7 +7,7 @@ import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
  *
  * @param code
  */
-export function getSafetyRegionMunicipalsForMunicipalCode(
+export function getVrMunicipalsForMunicipalCode(
   code: string
 ): string[] | undefined {
   const vrcode = vrCodeByGmCode[code];

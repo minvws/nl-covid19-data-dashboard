@@ -11,7 +11,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -40,12 +40,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    selectedVrData: data,
-    safetyRegionName,
-    content,
-    lastGenerated,
-  } = props;
+  const { selectedVrData: data, vrName, content, lastGenerated } = props;
 
   const { siteText } = useIntl();
 
@@ -56,25 +51,21 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
             title={replaceVariablesInText(text.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<RioolwaterMonitoring />}
             subtitle={text.pagina_toelichting}
@@ -162,7 +153,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

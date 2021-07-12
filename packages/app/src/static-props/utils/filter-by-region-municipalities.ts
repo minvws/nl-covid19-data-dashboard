@@ -1,7 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
-import { getSafetyRegionMunicipalsForMunicipalCode } from '~/utils/get-safety-region-municipals-for-Mmunicipal-code';
+import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
 
 export function filterByRegionMunicipalities<T extends { gmcode: string }>(
   choroplethData: T[],
@@ -11,7 +11,7 @@ export function filterByRegionMunicipalities<T extends { gmcode: string }>(
 
   assert(isDefined(municipalCode), 'No municipalCode in context params');
 
-  const regionCodes = getSafetyRegionMunicipalsForMunicipalCode(municipalCode);
+  const regionCodes = getVrMunicipalsForMunicipalCode(municipalCode);
 
   assert(isDefined(regionCodes), `No regionCodes found for ${municipalCode}`);
 
