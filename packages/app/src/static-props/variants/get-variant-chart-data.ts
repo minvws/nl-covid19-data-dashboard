@@ -13,7 +13,11 @@ export type VariantChartValue = Record<string, number> & {
 const EMPTY_VALUES = {
   variantChart: null,
   seriesConfig: null,
-  date_of_insertion_unix: 0,
+  dates: {
+    date_of_insertion_unix: 0,
+    date_start_unix: 0,
+    date_end_unix: 0,
+  },
 } as const;
 
 export function getVariantChartData(
@@ -73,6 +77,10 @@ export function getVariantChartData(
   return {
     variantChart: values,
     seriesConfig,
-    date_of_insertion_unix: nlVariants.date_of_insertion ?? 0,
+    dates: {
+      date_of_insertion_unix: nlVariants.date_of_insertion ?? 0,
+      date_start_unix: firstVariant.last_value.date_start_unix,
+      date_end_unix: firstVariant.last_value.date_end_unix,
+    },
   } as const;
 }

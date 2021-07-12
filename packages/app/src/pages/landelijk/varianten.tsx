@@ -1,4 +1,3 @@
-import { assert } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import Varianten from '~/assets/varianten.svg';
@@ -80,7 +79,7 @@ export default function CovidVariantenPage(
     variantTable,
     variantChart,
     seriesConfig,
-    date_of_insertion_unix,
+    dates,
   } = props;
 
   const { siteText } = useIntl();
@@ -92,9 +91,6 @@ export default function CovidVariantenPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  const chartValue = variantChart?.[0];
-  assert(chartValue, 'No lastValue found on the variant chart');
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -109,10 +105,10 @@ export default function CovidVariantenPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: chartValue.date_start_unix,
-                end: chartValue.date_end_unix,
+                start: dates.date_start_unix,
+                end: dates.date_end_unix,
               },
-              dateOfInsertionUnix: chartValue.date_of_insertion_unix,
+              dateOfInsertionUnix: dates.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
             reference={text.reference}
@@ -161,9 +157,9 @@ export default function CovidVariantenPage(
           <VariantsTableTile
             data={variantTable}
             dates={{
-              date_end_unix: chartValue.date_end_unix,
-              date_of_insertion_unix: date_of_insertion_unix,
-              date_start_unix: chartValue.date_start_unix,
+              date_end_unix: dates.date_end_unix,
+              date_of_insertion_unix: dates.date_of_insertion_unix,
+              date_start_unix: dates.date_start_unix,
             }}
           />
 
