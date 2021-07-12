@@ -18,7 +18,7 @@ export function VariantsTableTile({
   data: NlVariantsValue;
   differences: NlDifference;
 }) {
-  const { siteText } = useIntl();
+  const { siteText, formatDateFromSeconds } = useIntl();
 
   const text = siteText.covid_varianten;
 
@@ -36,6 +36,11 @@ export function VariantsTableTile({
     obtained: data.date_of_insertion_unix,
   };
 
+  const dateRange = [
+    formatDateFromSeconds(data.date_start_unix, 'weekday-medium'),
+    formatDateFromSeconds(data.date_end_unix, 'weekday-medium'),
+  ].join(' - ');
+
   return (
     <Tile>
       <Heading level={3}>{text.varianten_tabel.titel}</Heading>
@@ -43,6 +48,7 @@ export function VariantsTableTile({
         <Markdown
           content={replaceVariablesInText(text.varianten_tabel.omschrijving, {
             sample_size: data.sample_size,
+            dateRange,
           })}
         />
       </Box>
