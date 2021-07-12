@@ -30,6 +30,9 @@
     },
     "tested_overall": {
       "$ref": "tested_overall.json"
+    },
+    "variants": {
+      "$ref": "variants.json"
     }
   }
 }
