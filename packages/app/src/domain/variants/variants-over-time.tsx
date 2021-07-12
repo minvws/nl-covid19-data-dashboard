@@ -1,18 +1,17 @@
-import { NlVariantsValue } from '@corona-dashboard/common';
+import { assert } from '@corona-dashboard/common';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
-import { BASE_SERIES_CONFIG } from '~/domain/variants/series.config';
-import { Variant } from '~/domain/variants/variants-table-tile/logic/use-variants-table-data';
 import { useIntl } from '~/intl';
+import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useList } from '~/utils/use-list';
 
 interface VariantsOverTimeProps {
-  values: NlVariantsValue[];
+  values: VariantChartValue[];
 }
 
 export function VariantsOverTime({ values }: VariantsOverTimeProps) {
@@ -22,31 +21,32 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
   const { list, toggle, clear } = useList<string>();
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
+  if (!values.length) {
+    return null;
+  }
 
-  /* Filter all the metric properties based if they are not a concern */
-  const baseConfigFiltered = BASE_SERIES_CONFIG.filter((item) => {
-    const metricName = item.metricProperty.slice(
-      0,
-      item.metricProperty.indexOf('_')
-    );
-    return values[0][
-      `${metricName}_is_variant_of_concern` as keyof typeof values[0]
-    ];
+  const variantNames = Object.keys(values[0])
+    .filter((x) => x.endsWith('_percentage'))
+    .map((x) => x.slice(0, x.indexOf('_')));
+
+  const seriesConfig = variantNames.map<
+    LineSeriesDefinition<VariantChartValue>
+  >((x) => {
+    const color = (colors.data.variants as Record<string, string>)[x];
+    const label = (
+      siteText.covid_varianten.varianten as Record<string, string>
+    )[x];
+    assert(color, `No color specified for variant called "${x}"`);
+    assert(label, `No label specified for variant called "${x}"`);
+
+    return {
+      metricProperty: `${x}_percentage`,
+      type: 'line',
+      shape: 'line',
+      color,
+      label,
+    };
   });
-
-  /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NlVariantsValue>[] =
-    baseConfigFiltered.map((baseAgeGroup) => {
-      return {
-        ...baseAgeGroup,
-        type: 'line',
-        shape: 'line',
-        label:
-          siteText.covid_varianten.varianten[
-            baseAgeGroup.metricProperty.split('_')[0] as Variant
-          ],
-      };
-    });
 
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
@@ -54,7 +54,7 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
     label: text.legend_niet_compleet_label,
   };
 
-  const alwayEnabled: keyof NlVariantsValue | [] = [];
+  const alwayEnabled: keyof VariantChartValue | [] = [];
 
   /* Filter for each config group */
 

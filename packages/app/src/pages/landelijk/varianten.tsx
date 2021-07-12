@@ -1,6 +1,6 @@
+import { assert } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
 import Varianten from '~/assets/varianten.svg';
 import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -29,14 +29,24 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
+import { getVariantChartData } from '~/static-props/variants/get-variant-chart-data';
+import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { VariantsPageQuery } from '~/types/cms';
-import { assert } from '~/utils/assert';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'variantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectNlPageMetricData('variants'),
+    () => {
+      const data = selectNlPageMetricData('variants')();
+      return {
+        selectedNlData: {
+          ...data.selectedNlData,
+          variantTable: getVariantTableData(data.selectedNlData.variants),
+          variantChart: getVariantChartData(data.selectedNlData.variants),
+        },
+      };
+    },
     createGetContent<{
       page: VariantsPageQuery;
       highlight: {
@@ -67,9 +77,8 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
-  assert(data.variants, 'no variants data found');
-
-  const lastValue = data.variants.last_value;
+  const lastValue = data.variantChart[0];
+  assert(lastValue, 'No lastValue found');
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -133,14 +142,18 @@ export default function CovidVariantenPage(
             )}
           </TwoKpiSection>
 
-          {data.variants?.last_value && (
+          {data.variantTable && (
             <VariantsTableTile
-              data={data.variants?.last_value}
-              differences={data.difference}
+              data={data.variantTable}
+              dates={{
+                date_end_unix: 0,
+                date_of_insertion_unix: 0,
+                date_start_unix: 0,
+              }}
             />
           )}
 
-          {data.variants.values && (
+          {data.variantChart && (
             <ChartTile
               title={text.varianten_over_tijd.titel}
               description={text.varianten_over_tijd.beschrijving}
@@ -148,9 +161,7 @@ export default function CovidVariantenPage(
                 source: text.bronnen.rivm,
               }}
             >
-              {isDefined(data.variants.values) && (
-                <VariantsOverTime values={data.variants.values} />
-              )}
+              <VariantsOverTime values={data.variantChart} />
             </ChartTile>
           )}
         </TileList>
