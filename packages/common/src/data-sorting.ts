@@ -104,7 +104,7 @@ export function sortTimeSeriesInDataInPlace<T>(
          * exists here might crash the app
          */
         console.error(
-          `nestedSeries ${index} does not have a values collection`
+          `variants.nestedSeries.values[${index}].values does not exist`
         );
         return x;
       }
