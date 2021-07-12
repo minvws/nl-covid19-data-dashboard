@@ -1,5 +1,6 @@
 timestamp,action,key
 2021-07-09T10:17:16.462Z,add,besmettelijke_personen.belangrijk_bericht
+2021-07-12T12:50:48.459Z,delete,covid_varianten.varianten_tabel.belangrijk_bericht
 2021-07-12T13:21:44.292Z,add,internationaal_varianten.bronnen.rivm.download
 2021-07-12T13:21:45.313Z,add,internationaal_varianten.bronnen.rivm.href
 2021-07-12T13:21:46.335Z,add,internationaal_varianten.bronnen.rivm.text
