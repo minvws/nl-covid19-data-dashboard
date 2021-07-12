@@ -1,8 +1,11 @@
-import { assert } from '@corona-dashboard/common';
+import { useMemo } from 'react';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
+import {
+  LineSeriesDefinition,
+  SeriesConfig,
+} from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
@@ -12,41 +15,19 @@ import { useList } from '~/utils/use-list';
 
 interface VariantsOverTimeProps {
   values: VariantChartValue[];
+  seriesConfig: LineSeriesDefinition<VariantChartValue>[];
 }
 
-export function VariantsOverTime({ values }: VariantsOverTimeProps) {
+export function VariantsOverTime({
+  values,
+  seriesConfig,
+}: VariantsOverTimeProps) {
   const { siteText } = useIntl();
   const text = siteText.covid_varianten.varianten_over_tijd;
 
   const { list, toggle, clear } = useList<string>();
 
   const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
-  if (!values.length) {
-    return null;
-  }
-
-  const variantNames = Object.keys(values[0])
-    .filter((x) => x.endsWith('_percentage'))
-    .map((x) => x.slice(0, x.indexOf('_')));
-
-  const seriesConfig = variantNames.map<
-    LineSeriesDefinition<VariantChartValue>
-  >((x) => {
-    const color = (colors.data.variants as Record<string, string>)[x];
-    const label = (
-      siteText.covid_varianten.varianten as Record<string, string>
-    )[x];
-    assert(color, `No color specified for variant called "${x}"`);
-    assert(label, `No label specified for variant called "${x}"`);
-
-    return {
-      metricProperty: `${x}_percentage`,
-      type: 'line',
-      shape: 'line',
-      color,
-      label,
-    };
-  });
 
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
@@ -54,7 +35,7 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
     label: text.legend_niet_compleet_label,
   };
 
-  const alwayEnabled: keyof VariantChartValue | [] = [];
+  const alwayEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
 
   /* Filter for each config group */
 
@@ -64,14 +45,35 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
    * - otherwise: selected items
    */
   const compareList = list.concat(alwayEnabled);
-  const chartConfig = seriesConfig.filter(
-    (item) =>
-      compareList.includes(item.metricProperty) ||
-      compareList.length === alwayEnabled.length
+  const chartConfig = useMemo(
+    () =>
+      [
+        ...seriesConfig.filter(
+          (item) =>
+            compareList.includes(item.metricProperty) ||
+            compareList.length === alwayEnabled.length
+        ),
+        {
+          type: 'invisible',
+          metricProperty: 'sample_size',
+          label: text.tooltip_labels.totaal_monsters,
+          isPercentage: false,
+        },
+      ] as SeriesConfig<VariantChartValue>,
+    [
+      seriesConfig,
+      alwayEnabled,
+      compareList,
+      text.tooltip_labels.totaal_monsters,
+    ]
   );
 
   /* Static legend contains only the inaccurate item */
   const staticLegendItems: LegendItem[] = [underReportedLegendItem];
+
+  if (!values.length) {
+    return null;
+  }
 
   return (
     <>
@@ -89,15 +91,7 @@ export function VariantsOverTime({ values }: VariantsOverTimeProps) {
         accessibility={{ key: 'variants_over_time_chart' }}
         values={values}
         timeframe={'all'}
-        seriesConfig={[
-          ...chartConfig,
-          {
-            type: 'invisible',
-            metricProperty: 'sample_size',
-            label: text.tooltip_labels.totaal_monsters,
-            isPercentage: false,
-          },
-        ]}
+        seriesConfig={chartConfig}
         disableLegend
         dataOptions={{
           isPercentage: true,

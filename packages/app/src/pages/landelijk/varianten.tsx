@@ -49,7 +49,10 @@ export const getStaticProps = withFeatureNotFoundPage(
           data.selectedNlData.named_difference,
           siteText.covid_varianten.landen_van_herkomst
         ),
-        ...getVariantChartData(data.selectedNlData.variants),
+        ...getVariantChartData(
+          data.selectedNlData.variants,
+          siteText.covid_varianten.varianten
+        ),
       };
     },
     createGetContent<{
