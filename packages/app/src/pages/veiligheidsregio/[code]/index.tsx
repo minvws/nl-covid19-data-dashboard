@@ -20,7 +20,7 @@ export const getStaticProps = createGetStaticProps(
   selectVrPageMetricData()
 );
 
-const Vr = (props: StaticProps<typeof getStaticProps>) => {
+const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedVrData: data, lastGenerated, vrName } = props;
   const { siteText } = useIntl();
   const router = useRouter();
@@ -41,4 +41,4 @@ const Vr = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default Vr;
+export default VrIndexPage;

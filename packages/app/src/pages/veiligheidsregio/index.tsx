@@ -32,7 +32,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const Vr = (props: StaticProps<typeof getStaticProps>) => {
+const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
 
   const { siteText, formatDate } = useIntl();
@@ -115,4 +115,4 @@ const Vr = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default Vr;
+export default VrIndexPage;
