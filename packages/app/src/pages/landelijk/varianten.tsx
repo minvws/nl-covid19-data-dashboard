@@ -43,7 +43,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       const data = selectNlPageMetricData('variants')();
       return {
         selectedNlData: data.selectedNlData,
-        variantTable: getVariantTableData(
+        ...getVariantTableData(
           data.selectedNlData.variants,
           data.selectedNlData.named_difference,
           siteText.covid_varianten.landen_van_herkomst

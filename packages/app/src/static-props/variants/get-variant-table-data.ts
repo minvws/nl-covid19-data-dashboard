@@ -23,7 +23,7 @@ export function getVariantTableData(
   countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
 ) {
   if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
-    return [];
+    return { variantTable: [] } as const;
   }
 
   function findDifference(name: string) {
@@ -40,7 +40,7 @@ export function getVariantTableData(
     return countryOfOrigin;
   }
 
-  return nlVariants.variants
+  const variantTable = nlVariants.variants
     .map<VariantRow>((variant) => ({
       variant: variant.name,
       countryOfOrigin: findCountryOfOrigin(variant.name),
@@ -59,4 +59,6 @@ export function getVariantTableData(
       }
       return rowB.percentage - rowA.percentage;
     });
+
+  return { variantTable };
 }
