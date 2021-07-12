@@ -74,7 +74,7 @@ export default function CovidVariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
   const {
-    selectedNlData: data,
+    selectedNlData,
     lastGenerated,
     content,
     variantTable,
@@ -98,7 +98,7 @@ export default function CovidVariantenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NationalLayout data={selectedNlData} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.besmettingen}
