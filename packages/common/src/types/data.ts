@@ -149,7 +149,18 @@ export interface In {
   proto_name: string;
   name: string;
   code: string;
+  named_difference: InNamedDifference;
   tested_overall: InTestedOverall;
+}
+export interface InNamedDifference {
+  variants__percentage: NamedDifferenceDecimal[];
+}
+export interface NamedDifferenceDecimal {
+  name: string;
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
 }
 export interface InTestedOverall {
   values: InTestedOverallValue[];
@@ -251,15 +262,6 @@ export interface NlDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
-  variants__alpha_percentage: DifferenceDecimal;
-  variants__beta_percentage: DifferenceDecimal;
-  variants__gamma_percentage: DifferenceDecimal;
-  variants__delta_percentage: DifferenceDecimal;
-  variants__eta_percentage: DifferenceDecimal;
-  variants__epsilon_percentage: DifferenceDecimal;
-  variants__theta_percentage: DifferenceDecimal;
-  variants__kappa_percentage: DifferenceDecimal;
-  variants__other_percentage: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
