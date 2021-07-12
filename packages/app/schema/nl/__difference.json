@@ -65,33 +65,6 @@
     },
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"
-    },
-    "variants__alpha_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__beta_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__gamma_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__delta_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__eta_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__epsilon_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__theta_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__kappa_percentage": {
-      "$ref": "#/definitions/diff_decimal"
-    },
-    "variants__other_percentage": {
-      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
@@ -115,16 +88,7 @@
     "disability_care__newly_infected_people",
     "disability_care__infected_locations_total",
     "elderly_at_home__positive_tested_daily",
-    "deceased_rivm__covid_daily",
-    "variants__alpha_percentage",
-    "variants__beta_percentage",
-    "variants__gamma_percentage",
-    "variants__delta_percentage",
-    "variants__eta_percentage",
-    "variants__epsilon_percentage",
-    "variants__theta_percentage",
-    "variants__kappa_percentage",
-    "variants__other_percentage"
+    "deceased_rivm__covid_daily"
   ],
   "additionalProperties": false,
   "definitions": {
