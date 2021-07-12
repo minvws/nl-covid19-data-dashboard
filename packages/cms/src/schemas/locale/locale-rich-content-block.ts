@@ -1,4 +1,5 @@
 import { MdAttachFile } from 'react-icons/md';
+import { Rule } from '~/sanity';
 import { supportedLanguages } from '../../language/supported-languages';
 
 export const localeRichContentBlock = {
@@ -55,7 +56,7 @@ export const localeRichContentBlock = {
             name: 'alt',
             title: 'Alternatieve tekst (toegankelijkheid)',
             type: 'string',
-            validation: (Rule: any) => Rule.required(),
+            validation: (rule: Rule) => rule.required(),
             options: {
               isHighlighted: true,
             },

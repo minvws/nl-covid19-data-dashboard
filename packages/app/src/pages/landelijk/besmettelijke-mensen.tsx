@@ -1,4 +1,5 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
+import { isEmpty } from 'lodash';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -9,6 +10,7 @@ import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
@@ -69,6 +71,14 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           {content.articles && <ArticleStrip articles={content.articles} />}
+
+          {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
+            <WarningTile
+              isFullWidth
+              message={text.belangrijk_bericht}
+              variant="emphasis"
+            />
+          )}
 
           <TwoKpiSection>
             <KpiTile

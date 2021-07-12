@@ -1,3 +1,4 @@
+import { Rule } from '~/sanity';
 import { supportedLanguages } from '../../language/supported-languages';
 
 export const localeBlock = {
@@ -19,7 +20,7 @@ export const localeBlock = {
             name: 'alt',
             title: 'Alternatieve tekst (toegankelijkheid)',
             type: 'string',
-            validation: (Rule: any) => Rule.required(),
+            validation: (rule: Rule) => rule.required(),
             options: {
               isHighlighted: true,
             },

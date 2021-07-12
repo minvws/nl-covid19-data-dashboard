@@ -1,3 +1,8 @@
+import {
+  localeStringValidation,
+  localeValidation,
+} from '../../language/locale-validation';
+
 export const titleDescriptionBlock = {
   title: 'Titel en toelichting blok',
   name: 'titleDescriptionBlock',
@@ -7,21 +12,13 @@ export const titleDescriptionBlock = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'description',
       type: 'localeBlock',
       title: 'Toelichting',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeValidation((rule) => rule.required()),
     },
   ],
   preview: {
