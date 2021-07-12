@@ -6,39 +6,20 @@
     "variants__percentage": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/diff_group_decimal"
+        "$ref": "#/definitions/named_diff_decimal"
       }
     }
   },
   "required": ["variants__percentage"],
   "additionalProperties": false,
   "definitions": {
-    "diff_group_decimal": {
-      "title": "difference_group_decimal",
-      "additionalProperties": false,
-      "required": ["name", "difference"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "difference": { "$ref": "#/definitions/diff_decimal" }
-      }
-    },
-    "diff_group_integer": {
-      "title": "difference_group_integer",
-      "additionalProperties": false,
-      "required": ["name", "difference"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "difference": { "$ref": "#/definitions/diff_integer" }
-      }
-    },
-    "diff_integer": {
+    "named_diff_integer": {
       "title": "difference_integer",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "old_value": {
           "type": "integer"
         },
@@ -52,13 +33,22 @@
           "type": "integer"
         }
       },
-      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
+      "required": [
+        "name",
+        "old_value",
+        "difference",
+        "old_date_unix",
+        "new_date_unix"
+      ],
       "additionalProperties": false
     },
-    "diff_decimal": {
+    "named_diff_decimal": {
       "title": "difference_decimal",
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "old_value": {
           "type": "number"
         },
@@ -72,7 +62,13 @@
           "type": "integer"
         }
       },
-      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
+      "required": [
+        "name",
+        "old_value",
+        "difference",
+        "old_date_unix",
+        "new_date_unix"
+      ],
       "additionalProperties": false
     }
   }
