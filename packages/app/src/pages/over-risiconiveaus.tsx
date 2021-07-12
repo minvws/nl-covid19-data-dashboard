@@ -226,7 +226,7 @@ interface ContentProps {
   children: ReactNode;
 }
 
-export function Content({ children }: ContentProps) {
+function Content({ children }: ContentProps) {
   return (
     <Box bg="white" fontSize={{ md: '1.125rem' }}>
       <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth="infoWidth" mx="auto">

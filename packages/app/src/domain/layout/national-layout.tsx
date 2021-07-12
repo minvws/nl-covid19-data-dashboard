@@ -56,7 +56,7 @@ export const nlPageMetricNames = [
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-export type NationalPageMetricData = Pick<Nl, NlPageMetricNames>;
+type NationalPageMetricData = Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;

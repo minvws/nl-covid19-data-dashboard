@@ -2,7 +2,7 @@ import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-export type LegendShape = 'line' | 'square' | 'circle';
+type LegendShape = 'line' | 'square' | 'circle';
 type LegendLineStyle = 'solid' | 'dashed';
 
 export type LegendItem = {

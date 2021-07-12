@@ -11,6 +11,8 @@ import {
   VrSewer,
 } from '@corona-dashboard/common';
 import { set } from 'lodash';
+import { useCallback, useMemo, useState } from 'react';
+import { SelectProps } from '~/components/select';
 
 type MergedValue = {
   average: number | null;
@@ -90,4 +92,33 @@ export function mergeData(
       ...obj,
     }))
     .sort((a, b) => a.date_unix - b.date_unix);
+}
+
+/**
+ * Using the original data as input instead of the specific scatter plot
+ * processed format. This is used the by the new sewer water chart based on
+ * TimeSeriesChart
+ */
+export function useSewerStationSelectPropsSimplified(
+  data: SewerPerInstallationData
+) {
+  const [value, setValue] = useState<string>();
+  const options = useMemo(
+    () =>
+      data.values
+        .map((x) => ({ label: x.rwzi_awzi_name, value: x.rwzi_awzi_name }))
+        .sort((a, b) => a.label.localeCompare(b.label)),
+    [data.values]
+  );
+
+  const onClear = useCallback(() => setValue(undefined), []);
+
+  const props: SelectProps<string> = {
+    options,
+    value,
+    onChange: setValue,
+    onClear,
+  };
+
+  return props;
 }

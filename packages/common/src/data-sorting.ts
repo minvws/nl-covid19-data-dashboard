@@ -69,7 +69,7 @@ export function sortTimeSeriesInDataInPlace<T>(
  * From the data structure, retrieve all properties that hold a "values" field
  * in their content. All time series data is kept in this values field.
  */
-export function getTimeSeriesPropertyNames<T>(data: T) {
+function getTimeSeriesPropertyNames<T>(data: T) {
   return Object.entries(data).reduce(
     (acc, [propertyKey, propertyValue]) =>
       isTimeSeries(propertyValue) ? [...acc, propertyKey as keyof T] : acc,
@@ -77,7 +77,7 @@ export function getTimeSeriesPropertyNames<T>(data: T) {
   );
 }
 
-export function sortTimeSeriesValues(values: TimestampedValue[]) {
+function sortTimeSeriesValues(values: TimestampedValue[]) {
   /**
    * There are 3 ways in which time series data can be timestamped. We need to
    * detect and handle each of them.
