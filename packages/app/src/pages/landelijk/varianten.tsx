@@ -79,6 +79,8 @@ export default function CovidVariantenPage(
     content,
     variantTable,
     variantChart,
+    seriesConfig,
+    date_of_insertion_unix,
   } = props;
 
   const { siteText } = useIntl();
@@ -91,8 +93,8 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
-  const lastValue = variantChart?.[0];
-  assert(lastValue, 'No lastValue found');
+  const chartValue = variantChart?.[0];
+  assert(chartValue, 'No lastValue found on the variant chart');
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -107,10 +109,10 @@ export default function CovidVariantenPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: lastValue.date_start_unix,
-                end: lastValue.date_end_unix,
+                start: chartValue.date_start_unix,
+                end: chartValue.date_end_unix,
               },
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: chartValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
             reference={text.reference}
@@ -159,13 +161,13 @@ export default function CovidVariantenPage(
           <VariantsTableTile
             data={variantTable}
             dates={{
-              date_end_unix: lastValue.date_end_unix,
-              date_of_insertion_unix: 0,
-              date_start_unix: lastValue.date_start_unix,
+              date_end_unix: chartValue.date_end_unix,
+              date_of_insertion_unix: date_of_insertion_unix,
+              date_start_unix: chartValue.date_start_unix,
             }}
           />
 
-          {variantChart && (
+          {variantChart && seriesConfig && (
             <ChartTile
               title={text.varianten_over_tijd.titel}
               description={text.varianten_over_tijd.beschrijving}
@@ -173,7 +175,10 @@ export default function CovidVariantenPage(
                 source: text.bronnen.rivm,
               }}
             >
-              <VariantsOverTime values={variantChart} />
+              <VariantsOverTime
+                values={variantChart}
+                seriesConfig={seriesConfig}
+              />
             </ChartTile>
           )}
         </TileList>

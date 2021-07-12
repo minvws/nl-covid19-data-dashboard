@@ -10,12 +10,18 @@ export type VariantChartValue = Record<string, number> & {
   date_end_unix: number;
 };
 
+const EMPTY_VALUES = {
+  variantChart: null,
+  seriesConfig: null,
+  date_of_insertion_unix: 0,
+} as const;
+
 export function getVariantChartData(
   nlVariants: NlVariants | undefined,
   variantTranslations: SiteText['covid_varianten']['varianten']
 ) {
   if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
-    return { variantChart: null, seriesConfig: null } as const;
+    return EMPTY_VALUES;
   }
 
   const vocVariants = nlVariants.variants.filter(
@@ -25,7 +31,7 @@ export function getVariantChartData(
   const firstVariant = vocVariants.shift();
 
   if (!isDefined(firstVariant)) {
-    return { variantChart: null, seriesConfig: null } as const;
+    return EMPTY_VALUES;
   }
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
@@ -64,5 +70,9 @@ export function getVariantChartData(
     };
   });
 
-  return { variantChart: values, seriesConfig } as const;
+  return {
+    variantChart: values,
+    seriesConfig,
+    date_of_insertion_unix: nlVariants.date_of_insertion ?? 0,
+  } as const;
 }
