@@ -7,9 +7,7 @@ import { MetricConfig } from './common';
 // const RED = colors.data.gradient.red;
 
 type GmMetricKey = MetricKeys<Gm>;
-export type GmConfig = Partial<
-  Record<GmMetricKey, Record<string, MetricConfig>>
->;
+type GmConfig = Partial<Record<GmMetricKey, Record<string, MetricConfig>>>;
 
 export const gm: GmConfig = {
   sewer: {

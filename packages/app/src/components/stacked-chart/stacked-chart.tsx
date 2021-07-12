@@ -99,13 +99,13 @@ type TooltipFormatter = (
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-export type Config<T extends TimestampedValue> = {
+type Config<T extends TimestampedValue> = {
   metricProperty: keyof T;
   label: string;
   color: string;
 };
 
-export type StackedChartProps<T extends TimestampedValue> = {
+type StackedChartProps<T extends TimestampedValue> = {
   accessibility: AccessibilityDefinition;
   values: T[];
   config: Config<T>[];
@@ -696,7 +696,7 @@ function getDate(x: SeriesValue) {
  * TooltipContainer from LineChart did not seem to be very compatible with the
  * design for this chart, so this is something to look at later.
  */
-export const TooltipContainer = styled.div(
+const TooltipContainer = styled.div(
   css({
     pointerEvents: 'none',
     whiteSpace: 'nowrap',

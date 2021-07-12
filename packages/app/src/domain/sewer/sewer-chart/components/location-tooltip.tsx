@@ -6,7 +6,7 @@ import { Box } from '~/components/base';
 import { TooltipData } from '~/components/time-series-chart/components';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
-import { MergedSewerType } from '../new-logic';
+import { MergedSewerType } from '../logic';
 
 /**
  * A specific tooltip for when you've selected a location. It contains an icon

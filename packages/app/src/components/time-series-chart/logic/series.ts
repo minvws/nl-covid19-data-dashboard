@@ -187,7 +187,7 @@ export interface InvisibleSeriesDefinition<T extends TimestampedValue>
   isNonInteractive?: boolean;
 }
 
-export type CutValuesConfig = {
+type CutValuesConfig = {
   start: number;
   end: number;
   metricProperties: string[];
@@ -297,7 +297,7 @@ export function isSeriesSingleValue(
 export type SingleSeries = SeriesSingleValue[] | SeriesDoubleValue[];
 export type SeriesList = SingleSeries[];
 
-export function getSeriesList<T extends TimestampedValue>(
+function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
   cutValuesConfig?: CutValuesConfig[]
