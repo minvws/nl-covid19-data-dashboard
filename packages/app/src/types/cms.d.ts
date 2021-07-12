@@ -184,7 +184,7 @@ export type InlineLink = {
   href: string;
 };
 
-type LinkProps = {
+export type LinkProps = {
   href: string;
   title: string;
 };

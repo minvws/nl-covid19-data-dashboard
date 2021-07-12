@@ -153,7 +153,7 @@ export function useDataSitemap(
         },
         {
           text: siteText.covid_varianten.titel_sidebar,
-          href: reverseRouter.nl.covidVarianten(),
+          href: reverseRouter.nl.varianten(),
         },
       ],
     },
