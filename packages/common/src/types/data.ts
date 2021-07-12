@@ -185,6 +185,7 @@ export interface Nl {
   name: string;
   code: string;
   difference: NlDifference;
+  named_difference: NlNamedDifference;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -267,6 +268,16 @@ export interface DifferenceDecimal {
   new_date_unix: number;
 }
 export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
+}
+export interface NlNamedDifference {
+  variants__percentage: NamedDifferenceDecimal[];
+}
+export interface NamedDifferenceDecimal {
+  name: string;
   old_value: number;
   difference: number;
   old_date_unix: number;
