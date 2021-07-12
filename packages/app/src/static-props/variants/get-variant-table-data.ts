@@ -1,5 +1,11 @@
-import { DifferenceDecimal, NlVariants } from '@corona-dashboard/common';
+import {
+  assert,
+  DifferenceDecimal,
+  NlNamedDifference,
+  NlVariants,
+} from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
+import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
 
 export type VariantRow = {
@@ -11,23 +17,36 @@ export type VariantRow = {
   color: string;
 };
 
-export function getVariantTableData(nlVariants: NlVariants | undefined) {
+export function getVariantTableData(
+  nlVariants: NlVariants | undefined,
+  namedDifference: NlNamedDifference,
+  countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
+) {
   if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
     return [];
+  }
+
+  function findDifference(name: string) {
+    const difference = namedDifference.variants__percentage.find(
+      (x) => x.name === name
+    );
+    assert(difference, `No variants__percentage found for variant ${name}`);
+    return difference;
+  }
+
+  function findCountryOfOrigin(name: string) {
+    const countryOfOrigin = (countriesOfOrigin as Record<string, string>)[name];
+    assert(countryOfOrigin, `No country of origin found for variant ${name}`);
+    return countryOfOrigin;
   }
 
   return nlVariants.variants
     .map<VariantRow>((variant) => ({
       variant: variant.name,
-      countryOfOrigin: '',
+      countryOfOrigin: findCountryOfOrigin(variant.name),
       occurrence: variant.last_value.occurrence,
       percentage: variant.last_value.percentage,
-      difference: {
-        difference: 0,
-        new_date_unix: 0,
-        old_date_unix: 0,
-        old_value: 0,
-      },
+      difference: findDifference(variant.name),
       color: (colors.data.variants as Record<string, string>)[variant.name],
     }))
     .sort((rowA, rowB) => {

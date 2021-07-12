@@ -27,6 +27,7 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLocaleFile,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { getVariantChartData } from '~/static-props/variants/get-variant-chart-data';
@@ -38,11 +39,17 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     () => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      const siteText = getLocaleFile(locale);
       const data = selectNlPageMetricData('variants')();
       return {
         selectedNlData: data.selectedNlData,
-        variantTable: getVariantTableData(data.selectedNlData.variants),
-        variantChart: getVariantChartData(data.selectedNlData.variants),
+        variantTable: getVariantTableData(
+          data.selectedNlData.variants,
+          data.selectedNlData.named_difference,
+          siteText.covid_varianten.landen_van_herkomst
+        ),
+        ...getVariantChartData(data.selectedNlData.variants),
       };
     },
     createGetContent<{
@@ -81,7 +88,7 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
-  const lastValue = variantChart[0];
+  const lastValue = variantChart?.[0];
   assert(lastValue, 'No lastValue found');
 
   return (
@@ -149,21 +156,23 @@ export default function CovidVariantenPage(
           <VariantsTableTile
             data={variantTable}
             dates={{
-              date_end_unix: 0,
+              date_end_unix: lastValue.date_end_unix,
               date_of_insertion_unix: 0,
-              date_start_unix: 0,
+              date_start_unix: lastValue.date_start_unix,
             }}
           />
 
-          <ChartTile
-            title={text.varianten_over_tijd.titel}
-            description={text.varianten_over_tijd.beschrijving}
-            metadata={{
-              source: text.bronnen.rivm,
-            }}
-          >
-            <VariantsOverTime values={variantChart} />
-          </ChartTile>
+          {variantChart && (
+            <ChartTile
+              title={text.varianten_over_tijd.titel}
+              description={text.varianten_over_tijd.beschrijving}
+              metadata={{
+                source: text.bronnen.rivm,
+              }}
+            >
+              <VariantsOverTime values={variantChart} />
+            </ChartTile>
+          )}
         </TileList>
       </NationalLayout>
     </Layout>

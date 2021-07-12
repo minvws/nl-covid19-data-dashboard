@@ -9,7 +9,7 @@ export type VariantChartValue = Record<string, number> & {
 
 export function getVariantChartData(nlVariants: NlVariants | undefined) {
   if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
-    return [];
+    return { variantChart: null } as const;
   }
 
   const vocVariants = nlVariants.variants.filter(
@@ -17,7 +17,7 @@ export function getVariantChartData(nlVariants: NlVariants | undefined) {
   );
   const firstVariant = vocVariants.shift();
   if (!isDefined(firstVariant)) {
-    return [];
+    return { variantChart: null } as const;
   }
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
@@ -35,5 +35,5 @@ export function getVariantChartData(nlVariants: NlVariants | undefined) {
     return item;
   });
 
-  return values;
+  return { variantChart: values } as const;
 }

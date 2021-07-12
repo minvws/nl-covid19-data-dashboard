@@ -50,6 +50,7 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
+  'named_difference',
   'corona_melder_app_warning',
   'behavior_per_age_group',
 ] as const;

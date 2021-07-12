@@ -15,21 +15,26 @@ export function sortTimeSeriesInDataInPlace<T>(
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
-    const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
-    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
+    try {
+      const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
+      timeSeries.values = sortTimeSeriesValues(timeSeries.values);
 
-    if (setDatesToMiddleOfDay) {
-      /**
-       * We'll map all dates to midday (12:00). This simplifies the rendering of
-       * a marker/annotation on a date.
-       */
-      timeSeries.values = timeSeries.values.map(setValueDatesToMiddleOfDay);
+      if (setDatesToMiddleOfDay) {
+        /**
+         * We'll map all dates to midday (12:00). This simplifies the rendering of
+         * a marker/annotation on a date.
+         */
+        timeSeries.values = timeSeries.values.map(setValueDatesToMiddleOfDay);
 
-      if (timeSeries.last_value) {
-        timeSeries.last_value = setValueDatesToMiddleOfDay(
-          timeSeries.last_value
-        );
+        if (timeSeries.last_value) {
+          timeSeries.last_value = setValueDatesToMiddleOfDay(
+            timeSeries.last_value
+          );
+        }
       }
+    } catch (e) {
+      console.error(`Error during processing ${propertyName}`);
+      throw e;
     }
   }
 
@@ -50,7 +55,17 @@ export function sortTimeSeriesInDataInPlace<T>(
       return;
     }
 
-    nestedSeries.values = nestedSeries.values.map((x) => {
+    nestedSeries.values = nestedSeries.values.map((x, index) => {
+      if (!x.values) {
+        /**
+         * It can happen that we get incomplete json data and assuming that values
+         * exists here might crash the app
+         */
+        console.error(
+          `nestedSeries ${index} does not have a values collection`
+        );
+        return x;
+      }
       x.values = sortTimeSeriesValues(x.values) as
         | VrSewerPerInstallationValue[]
         | GmSewerPerInstallationValue[];
@@ -82,7 +97,18 @@ export function sortTimeSeriesInDataInPlace<T>(
       return;
     }
 
-    nestedSeries.values = nestedSeries.values.map((x) => {
+    nestedSeries.values = nestedSeries.values.map((x, index) => {
+      if (!x.values) {
+        /**
+         * It can happen that we get incomplete json data and assuming that values
+         * exists here might crash the app
+         */
+        console.error(
+          `nestedSeries ${index} does not have a values collection`
+        );
+        return x;
+      }
+
       x.values = sortTimeSeriesValues(x.values) as
         | NlVariantsVariantValue[]
         | InVariantsVariantValue[];
@@ -194,6 +220,7 @@ export function isTimeSeries(
 export function isDateSeries(
   timeSeries: TimestampedValue[]
 ): timeSeries is DateValue[] {
+  if (!timeSeries.length) return false;
   const firstValue = (timeSeries as DateValue[])[0];
   return isDefined(firstValue?.date_unix);
 }
@@ -201,6 +228,7 @@ export function isDateSeries(
 export function isDateSpanSeries(
   timeSeries: TimestampedValue[]
 ): timeSeries is DateSpanValue[] {
+  if (!timeSeries.length) return false;
   const firstValue = (timeSeries as DateSpanValue[])[0];
   return (
     isDefined(firstValue?.date_end_unix) &&
