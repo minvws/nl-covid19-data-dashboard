@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import Document, {
   DocumentContext,
   Head,
@@ -71,7 +72,8 @@ function Fonts() {
   return (
     <style
       dangerouslySetInnerHTML={{
-        __html: `
+        __html: DOMPurify.sanitize(
+          `
 @font-face {
   font-family: 'RO Sans';
   font-weight: normal;
@@ -98,7 +100,8 @@ function Fonts() {
     url('/webfonts/RO-SansWebText-Bold.woff') format('woff');
   font-display: swap;
 }
-      `.trim(),
+      `.trim()
+        ),
       }}
     />
   );
