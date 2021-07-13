@@ -185,7 +185,6 @@ export interface InVariantsVariant {
 export interface InVariantsVariantValue {
   percentage: number;
   occurrence: number;
-  is_variant_of_concern: boolean;
   sample_size: number;
   date_start_unix: number;
   date_end_unix: number;
