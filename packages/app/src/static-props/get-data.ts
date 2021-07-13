@@ -15,7 +15,7 @@ import { GetStaticPropsContext } from 'next';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
-import { CountryCode } from '~/domain/international/select-countries/country-code';
+import { CountryCode } from '~/domain/international/select-countries';
 import { MunicipalSideBarData } from '~/domain/layout/municipality-layout';
 import {
   NlPageMetricNames,
@@ -24,7 +24,7 @@ import {
 import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
-} from '~/domain/layout/safety-region-layout';
+} from '~/domain/layout/vr-layout';
 import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -194,11 +194,11 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
       {} as Pick<Vr, T>
     );
 
-    return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
+    return { selectedVrData, vrName: vrData.vrName };
   };
 }
 
-export function getVrData(context: GetStaticPropsContext) {
+function getVrData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
   if (!code) {
@@ -207,17 +207,17 @@ export function getVrData(context: GetStaticPropsContext) {
 
   const data = loadAndSortVrData(code);
 
-  const safetyRegionName = getVrName(code);
+  const vrName = getVrName(code);
 
   return {
     data,
-    safetyRegionName,
+    vrName,
   };
 }
 
 export function getVrName(code: string) {
-  const safetyRegion = vrData.find((x) => x.code === code);
-  return safetyRegion?.name || '';
+  const vr = vrData.find((x) => x.code === code);
+  return vr?.name || '';
 }
 
 export function loadAndSortVrData(vrcode: string) {
@@ -268,7 +268,7 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   };
 }
 
-export function getGmData(context: GetStaticPropsContext) {
+function getGmData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
   if (!code) {

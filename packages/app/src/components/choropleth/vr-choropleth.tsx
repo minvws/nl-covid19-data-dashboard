@@ -17,9 +17,9 @@ import {
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
-  useSafetyRegionBoundingbox,
-  useSafetyRegionData,
   useTabInteractiveButton,
+  useVrBoundingbox,
+  useVrData,
 } from './hooks';
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
@@ -58,7 +58,7 @@ type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
  * When a selected region code is specified, the map will zoom in on the safety
  * region.
  */
-export function SafetyRegionChoropleth<T, K extends VrCollectionMetricName>(
+export function VrChoropleth<T, K extends VrCollectionMetricName>(
   props: VrChoroplethProps<T, K>
 ) {
   const {
@@ -78,11 +78,11 @@ export function SafetyRegionChoropleth<T, K extends VrCollectionMetricName>(
 
   const { siteText } = useIntl();
 
-  const boundingBox = useSafetyRegionBoundingbox(regionGeo, selectedCode);
+  const boundingBox = useVrBoundingbox(regionGeo, selectedCode);
 
   const isEscalationLevelTheme = metricName === 'escalation_levels';
 
-  const { getChoroplethValue, hasData, values } = useSafetyRegionData(
+  const { getChoroplethValue, hasData, values } = useVrData(
     regionGeo,
     metricName,
     metricProperty,

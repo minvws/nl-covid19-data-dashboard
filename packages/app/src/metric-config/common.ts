@@ -10,7 +10,7 @@ export type MetricConfig = {
   barScale?: BarScaleConfig;
 };
 
-export type BarScaleConfig = {
+type BarScaleConfig = {
   min: number;
   max: number;
   signaalwaarde: number;

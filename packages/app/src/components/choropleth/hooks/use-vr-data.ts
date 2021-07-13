@@ -42,7 +42,7 @@ type UseVrDataReturnValue = {
  * @param metricProperty
  */
 
-export function useSafetyRegionData<K extends VrCollectionMetricName>(
+export function useVrData<K extends VrCollectionMetricName>(
   featureCollection: VrGeoJSON,
   metricName: K,
   metricProperty: string,

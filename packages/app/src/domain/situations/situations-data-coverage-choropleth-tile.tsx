@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
 import { Box } from '~/components/base';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
@@ -95,7 +95,7 @@ export function SituationsDataCoverageChoroplethTile({
         >
           <Box height="100%">
             <ErrorBoundary>
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{
                   key: 'situations_has_sufficient_data_choropleth',
                 }}

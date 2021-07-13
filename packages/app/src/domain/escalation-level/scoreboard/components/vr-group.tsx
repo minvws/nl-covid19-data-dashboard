@@ -14,13 +14,13 @@ import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { RegionCubes } from './region-cubes';
 
-type SafetyRegionGroupProps = {
+type VrGroupProps = {
   level: EscalationLevel;
   rowCount: number;
   children: ReactNode;
 };
 
-export function SafetyRegionGroup(props: SafetyRegionGroupProps) {
+export function VrGroup(props: VrGroupProps) {
   const { level, rowCount, children } = props;
 
   const [isOpen, setIsOpen] = useState(false);

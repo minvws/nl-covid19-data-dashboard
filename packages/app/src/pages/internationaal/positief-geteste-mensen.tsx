@@ -14,12 +14,12 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { EuropeChoroplethTile } from '~/domain/international/europe-choropleth-tile';
 import { InfectedTableTile } from '~/domain/international/infected-table-tile';
-import { CountryOption } from '~/domain/international/select-countries/context';
 import {
   CountryCode,
   countryCodes,
-} from '~/domain/international/select-countries/country-code';
-import { SelectCountries } from '~/domain/international/select-countries/select-countries';
+  CountryOption,
+  SelectCountries,
+} from '~/domain/international/select-countries';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';

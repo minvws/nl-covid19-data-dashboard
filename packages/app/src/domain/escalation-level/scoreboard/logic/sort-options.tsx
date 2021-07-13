@@ -2,8 +2,8 @@ import { VrScoreboardData } from './scoreboard-types';
 
 export const scoreboardSortOptions = {
   location_a_to_z: (a: VrScoreboardData, b: VrScoreboardData) => {
-    if (a.safetyRegionName < b.safetyRegionName) return -1;
-    if (b.safetyRegionName < a.safetyRegionName) return 1;
+    if (a.vrName < b.vrName) return -1;
+    if (b.vrName < a.vrName) return 1;
     return 0;
   },
   positively_tested_high_to_low: (a: VrScoreboardData, b: VrScoreboardData) => {
