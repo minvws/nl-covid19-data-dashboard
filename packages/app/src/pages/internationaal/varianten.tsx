@@ -2,6 +2,7 @@ import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
+import { countryCodes } from '~/domain/international/select-countries';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -12,12 +13,31 @@ import {
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
+  getInData,
   getLastGeneratedDate,
+  getLocaleFile,
 } from '~/static-props/get-data';
+import { getInternationalVariantChartData } from '~/static-props/variants/get-international-variant-chart-data';
+import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
 import { LinkProps } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  () => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    const siteText = getLocaleFile(locale);
+    const { internationalData } = getInData([...countryCodes])();
+    return {
+      ...getInternationalVariantTableData(
+        internationalData,
+        siteText.covid_varianten.landen_van_herkomst
+      ),
+      ...getInternationalVariantChartData(
+        internationalData,
+        siteText.covid_varianten.landen_van_herkomst
+      ),
+    };
+  },
   createGetContent<{
     page: {
       usefulLinks?: LinkProps[];
@@ -42,7 +62,7 @@ export const getStaticProps = createGetStaticProps(
 export default function VariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { lastGenerated, content } = props;
+  const { lastGenerated, content, variantChartData, variantTableData } = props;
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_varianten;

@@ -1,4 +1,9 @@
-import { assert, Dictionary, NlVariants } from '@corona-dashboard/common';
+import {
+  assert,
+  Dictionary,
+  InVariants,
+  NlVariants,
+} from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { SiteText } from '~/locale';
@@ -21,7 +26,7 @@ const EMPTY_VALUES = {
 } as const;
 
 export function getVariantChartData(
-  nlVariants: NlVariants | undefined,
+  nlVariants: NlVariants | InVariants | undefined,
   variantTranslations: SiteText['covid_varianten']['varianten']
 ) {
   if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {

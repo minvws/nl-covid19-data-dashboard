@@ -2,6 +2,7 @@ import {
   assert,
   Dictionary,
   DifferenceDecimal,
+  InVariants,
   NlNamedDifference,
   NlVariants,
 } from '@corona-dashboard/common';
@@ -19,7 +20,7 @@ export type VariantRow = {
 };
 
 export function getVariantTableData(
-  nlVariants: NlVariants | undefined,
+  nlVariants: NlVariants | InVariants | undefined,
   namedDifference: NlNamedDifference,
   countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
 ) {
