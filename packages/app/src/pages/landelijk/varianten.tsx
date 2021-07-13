@@ -84,6 +84,7 @@ export default function CovidVariantenPage(
   const { siteText } = useIntl();
 
   const text = siteText.covid_varianten;
+  const tableText = text.varianten_tabel;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -156,6 +157,8 @@ export default function CovidVariantenPage(
           <VariantsTableTile
             data={variantTable}
             sampleSize={selectedNlData.variantSidebarValue.sample_size}
+            text={tableText}
+            source={text.bronnen.rivm}
             dates={{
               date_end_unix: dates.date_end_unix,
               date_of_insertion_unix: dates.date_of_insertion_unix,

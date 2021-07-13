@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { SiteText } from '~/locale';
+import { TableText } from '~/domain/variants/variants-table-tile';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import {
   Cell,
@@ -22,12 +22,12 @@ import {
 
 type NarrowVariantsTableProps = {
   rows: VariantRow[];
-  text: SiteText['covid_varianten'];
+  text: TableText;
 };
 
 export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
   const { rows, text } = props;
-  const columnNames = text.varianten_tabel.kolommen;
+  const columnNames = text.kolommen;
 
   return (
     <StyledTable>
@@ -48,14 +48,14 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
 
 type MobileVariantRowProps = {
   row: VariantRow;
-  text: SiteText['covid_varianten'];
+  text: TableText;
 };
 
 function MobileVariantRow(props: MobileVariantRowProps) {
   const { row, text } = props;
   const [isOpen, setIsOpen] = useState(false);
   const { ref, height: contentHeight } = useResizeObserver();
-  const columnNames = text.varianten_tabel.kolommen;
+  const columnNames = text.kolommen;
 
   const chevronRef = useRef<HTMLButtonElement>();
 
@@ -95,11 +95,11 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           >
             <div ref={ref}>
               <Box mb={1} display="flex" flexDirection="row">
-                <InlineText mr={1}>{columnNames['vorige_meeting']}:</InlineText>
+                <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
                 <VariantDifference value={row.difference} />
               </Box>
               <Box>
-                {columnNames['eerst_gevonden']}:{' '}
+                {columnNames.eerst_gevonden}:{' '}
                 <InlineText>{row.countryOfOrigin}</InlineText>
               </Box>
             </div>

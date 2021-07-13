@@ -1,6 +1,6 @@
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { SiteText } from '~/locale';
+import { TableText } from '~/domain/variants/variants-table-tile';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import {
   Cell,
@@ -20,13 +20,13 @@ const columnKeys = [
 
 type WideVariantsTableProps = {
   rows: VariantRow[];
-  text: SiteText['covid_varianten'];
+  text: TableText;
 };
 
 export function WideVariantsTable(props: WideVariantsTableProps) {
   const { rows, text } = props;
 
-  const columnNames = text.varianten_tabel.kolommen;
+  const columnNames = text.kolommen;
 
   return (
     <StyledTable>
