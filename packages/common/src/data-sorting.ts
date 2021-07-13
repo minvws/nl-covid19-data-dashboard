@@ -113,6 +113,14 @@ export function sortTimeSeriesInDataInPlace<T>(
         | NlVariantsVariantValue[]
         | InVariantsVariantValue[];
 
+      if (setDatesToMiddleOfDay) {
+        x.values = x.values.map(setValueDatesToMiddleOfDay);
+
+        if (x.last_value) {
+          x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+        }
+      }
+
       return x;
     });
   }

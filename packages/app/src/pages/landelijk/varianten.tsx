@@ -41,17 +41,15 @@ export const getStaticProps = withFeatureNotFoundPage(
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       const siteText = getLocaleFile(locale);
       const data = selectNlPageMetricData('variants')();
+      const variants = data.selectedNlData.variants;
       return {
         selectedNlData: data.selectedNlData,
         ...getVariantTableData(
-          data.selectedNlData.variants,
+          variants,
           data.selectedNlData.named_difference,
           siteText.covid_varianten.landen_van_herkomst
         ),
-        ...getVariantChartData(
-          data.selectedNlData.variants,
-          siteText.covid_varianten.varianten
-        ),
+        ...getVariantChartData(variants, siteText.covid_varianten.varianten),
       };
     },
     createGetContent<{

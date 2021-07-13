@@ -223,21 +223,6 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href={reverseRouter.nl.besmettelijkeMensen()}
-                  icon={<Ziektegolf />}
-                  title={siteText.besmettelijke_personen.titel_sidebar}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="infectious_people"
-                    metricProperty="estimate"
-                    localeTextKey="besmettelijke_personen"
-                    differenceKey="infectious_people__estimate"
-                  />
-                </MetricMenuItemLink>
-
-                <MetricMenuItemLink
                   href={reverseRouter.nl.reproductiegetal()}
                   icon={<ReproIcon />}
                   title={siteText.reproductiegetal.titel_sidebar}
@@ -270,7 +255,7 @@ export function NationalLayout(props: NationalLayoutProps) {
 
                 {data.variantSidebarValue && (
                   <MetricMenuItemLink
-                    href={reverseRouter.nl.covidVarianten()}
+                    href={reverseRouter.nl.varianten()}
                     icon={<Varianten />}
                     title={siteText.covid_varianten.titel_sidebar}
                   >
@@ -284,6 +269,16 @@ export function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.brononderzoek.titel_sidebar}
                 >
                   <SidebarKpiValue title={siteText.brononderzoek.kpi_titel} />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.besmettelijkeMensen()}
+                  icon={<Ziektegolf />}
+                  title={siteText.besmettelijke_personen.titel_sidebar}
+                >
+                  <SidebarKpiValue
+                    title={siteText.besmettelijke_personen.kpi_titel}
+                  />
                 </MetricMenuItemLink>
               </CategoryMenu>
 

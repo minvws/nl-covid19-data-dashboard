@@ -7,6 +7,7 @@ import {
   createChoroplethValidation,
   CustomValidationFunction,
   validateMovingAverages,
+  validateVariantNames,
 } from './custom-validations';
 
 export type SchemaInfo = Record<JsonDataScope, SchemaInfoItem>;
@@ -44,7 +45,11 @@ export function getSchemaInfo(
       ],
       basePath: jsonDirectory,
     },
-    nl: { files: ['NL.json'], basePath: jsonDirectory },
+    nl: {
+      files: ['NL.json'],
+      basePath: jsonDirectory,
+      customValidations: [validateVariantNames],
+    },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
       basePath: jsonDirectory,

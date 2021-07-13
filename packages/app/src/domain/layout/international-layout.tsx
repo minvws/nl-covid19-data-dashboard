@@ -1,3 +1,4 @@
+import Varianten from '~/assets/varianten.svg';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
@@ -62,6 +63,12 @@ export function InternationalLayout(props: InternationalLayoutProps) {
                       .titel_sidebar
                   }
                   icon={<Getest />}
+                />
+                <MetricMenuItemLink
+                  showArrow
+                  href={reverseRouter.in.varianten()}
+                  title={siteText.internationaal_varianten.titel_sidebar}
+                  icon={<Varianten />}
                 />
               </CategoryMenu>
             </Menu>

@@ -140,10 +140,6 @@ export function useDataSitemap(
           href: reverseRouter.nl.positiefGetesteMensen(),
         },
         {
-          text: siteText.besmettelijke_personen.titel_sidebar,
-          href: reverseRouter.nl.besmettelijkeMensen(),
-        },
-        {
           text: siteText.reproductiegetal.titel_sidebar,
           href: reverseRouter.nl.reproductiegetal(),
         },
@@ -153,7 +149,11 @@ export function useDataSitemap(
         },
         {
           text: siteText.covid_varianten.titel_sidebar,
-          href: reverseRouter.nl.covidVarianten(),
+          href: reverseRouter.nl.varianten(),
+        },
+        {
+          text: siteText.besmettelijke_personen.titel_sidebar,
+          href: reverseRouter.nl.besmettelijkeMensen(),
         },
       ],
     },
