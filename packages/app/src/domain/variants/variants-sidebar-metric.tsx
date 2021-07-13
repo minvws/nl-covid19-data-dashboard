@@ -10,7 +10,7 @@ interface VariantsSidebarMetricProps {
 }
 
 export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
   const commonText = siteText.common.metricKPI;
 
   /**
@@ -40,7 +40,7 @@ export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
       </Heading>
       <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={3}>
         {highestPercentage &&
-          `${highestPercentage.value}% ${
+          `${formatNumber(highestPercentage.value)}% ${
             siteText.covid_varianten.varianten[highestPercentage.variant]
           }`}
       </InlineText>
