@@ -2,6 +2,8 @@ import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
+import { mockVariantsData } from '~/domain/international/logic/mock-variants-data';
+import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -18,6 +20,16 @@ import { LinkProps } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
+  () => {
+    // const data = selectInPageMetricData('variants')();
+
+    // data.selectedNlData.variants =
+    // data.selectedNlData.variants || mockVariantsData();
+
+    return {
+      data: mockVariantsData(),
+    };
+  },
   createGetContent<{
     page: {
       usefulLinks?: LinkProps[];
@@ -42,7 +54,7 @@ export const getStaticProps = createGetStaticProps(
 export default function VariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { lastGenerated, content } = props;
+  const { lastGenerated, content, data } = props;
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_varianten;
@@ -72,6 +84,13 @@ export default function VariantenPage(
             referenceLink={text.reference.href}
             articles={content.highlight?.articles}
             usefulLinks={content.page?.usefulLinks}
+          />
+
+          <VariantsStackedAreaTile
+            values={data.values}
+            metadata={{
+              dataSources: [text.bronnen.rivm],
+            }}
           />
         </TileList>
       </InternationalLayout>
