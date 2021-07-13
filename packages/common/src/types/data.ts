@@ -541,16 +541,10 @@ export interface NlBehaviorPerAgeGroup {
   avoid_crowds_support: NlBehaviorPerAgeGroupValue;
   keep_distance_compliance: NlBehaviorPerAgeGroupValue;
   keep_distance_support: NlBehaviorPerAgeGroupValue;
-  max_visitors_compliance: NlBehaviorPerAgeGroupValue;
-  max_visitors_support: NlBehaviorPerAgeGroupValue;
   sneeze_cough_elbow_compliance: NlBehaviorPerAgeGroupValue;
   sneeze_cough_elbow_support: NlBehaviorPerAgeGroupValue;
   wash_hands_compliance: NlBehaviorPerAgeGroupValue;
   wash_hands_support: NlBehaviorPerAgeGroupValue;
-  wear_mask_public_indoors_compliance: NlBehaviorPerAgeGroupValue;
-  wear_mask_public_indoors_support: NlBehaviorPerAgeGroupValue;
-  work_from_home_compliance: NlBehaviorPerAgeGroupValue;
-  work_from_home_support: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;
