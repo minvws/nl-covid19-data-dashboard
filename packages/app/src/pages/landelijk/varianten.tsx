@@ -155,6 +155,7 @@ export default function CovidVariantenPage(
 
           <VariantsTableTile
             data={variantTable}
+            sampleSize={selectedNlData.variantSidebarValue.sample_size}
             dates={{
               date_end_unix: dates.date_end_unix,
               date_of_insertion_unix: dates.date_of_insertion_unix,

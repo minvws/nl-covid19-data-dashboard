@@ -12,9 +12,11 @@ import { NarrowVariantsTable, WideVariantsTable } from './components';
 
 export function VariantsTableTile({
   data,
+  sampleSize,
   dates,
 }: {
   data: VariantRow[];
+  sampleSize: number;
   dates: {
     date_start_unix: number;
     date_end_unix: number;
@@ -44,7 +46,7 @@ export function VariantsTableTile({
       <Box maxWidth="maxWidthText">
         <Markdown
           content={replaceVariablesInText(text.varianten_tabel.omschrijving, {
-            sample_size: '',
+            sample_size: sampleSize,
             date_start,
             date_end,
           })}
