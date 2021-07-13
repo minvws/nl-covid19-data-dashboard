@@ -4,7 +4,6 @@ import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
 import { Heading } from '~/components/typography';
-import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -51,13 +50,6 @@ export function VariantsTableTile({
           })}
         />
       </Box>
-
-      {text.varianten_tabel.belangrijk_bericht && (
-        <WarningTile
-          message={text.varianten_tabel.belangrijk_bericht}
-          variant="emphasis"
-        />
-      )}
 
       <Box overflow="auto" mb={3} mt={4}>
         <ErrorBoundary>
