@@ -1,10 +1,10 @@
 import { NlDifference, NlVariantsValue } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
+import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
-import { Heading, Text } from '~/components/typography';
-import { WarningTile } from '~/components/warning-tile';
+import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -18,7 +18,7 @@ export function VariantsTableTile({
   data: NlVariantsValue;
   differences: NlDifference;
 }) {
-  const { siteText } = useIntl();
+  const { siteText, formatDateSpan } = useIntl();
 
   const text = siteText.covid_varianten;
 
@@ -36,22 +36,23 @@ export function VariantsTableTile({
     obtained: data.date_of_insertion_unix,
   };
 
+  const [date_start, date_end] = formatDateSpan(
+    { seconds: data.date_start_unix },
+    { seconds: data.date_end_unix }
+  );
+
   return (
     <Tile>
       <Heading level={3}>{text.varianten_tabel.titel}</Heading>
       <Box maxWidth="maxWidthText">
-        <Text>{text.varianten_tabel.omschrijving}</Text>
-      </Box>
-
-      {text.varianten_tabel.belangrijk_bericht && (
-        <WarningTile
-          message={replaceVariablesInText(
-            text.varianten_tabel.belangrijk_bericht,
-            { sample_size: data.sample_size }
-          )}
-          variant="emphasis"
+        <Markdown
+          content={replaceVariablesInText(text.varianten_tabel.omschrijving, {
+            sample_size: data.sample_size,
+            date_start,
+            date_end,
+          })}
         />
-      )}
+      </Box>
 
       <Box overflow="auto" mb={3} mt={4}>
         <ErrorBoundary>
