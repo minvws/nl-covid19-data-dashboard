@@ -38,6 +38,7 @@
       "required": [
         "percentage",
         "occurrence",
+        "is_variant_of_concern",
         "sample_size",
         "date_start_unix",
         "date_end_unix",
@@ -49,6 +50,9 @@
         },
         "occurrence": {
           "type": "integer"
+        },
+        "is_variant_of_concern": {
+          "type": "boolean"
         },
         "sample_size": {
           "type": "integer"
