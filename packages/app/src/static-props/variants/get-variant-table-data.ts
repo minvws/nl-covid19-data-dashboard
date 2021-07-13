@@ -1,5 +1,6 @@
 import {
   assert,
+  Dictionary,
   DifferenceDecimal,
   NlNamedDifference,
   NlVariants,
@@ -35,9 +36,15 @@ export function getVariantTableData(
   }
 
   function findCountryOfOrigin(name: string) {
-    const countryOfOrigin = (countriesOfOrigin as Record<string, string>)[name];
+    const countryOfOrigin = (countriesOfOrigin as Dictionary<string>)[name];
     assert(countryOfOrigin, `No country of origin found for variant ${name}`);
     return countryOfOrigin;
+  }
+
+  function findColor(name: string) {
+    const color = (colors.data.variants as Dictionary<string>)[name];
+    assert(color, `No color found for variant ${name}`);
+    return color;
   }
 
   const variantTable = nlVariants.values
@@ -47,7 +54,7 @@ export function getVariantTableData(
       occurrence: variant.last_value.occurrence,
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
-      color: (colors.data.variants as Record<string, string>)[variant.name],
+      color: findColor(variant.name),
     }))
     .sort((rowA, rowB) => {
       // Make sure the 'other' variant is always sorted last
