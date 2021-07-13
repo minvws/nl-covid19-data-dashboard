@@ -42,6 +42,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       const siteText = getLocaleFile(locale);
       const data = selectNlPageMetricData('variants')();
       const variants = data.selectedNlData.variants;
+      delete data.selectedNlData.variants;
       return {
         selectedNlData: data.selectedNlData,
         ...getVariantTableData(
