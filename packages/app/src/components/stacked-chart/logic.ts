@@ -37,7 +37,9 @@ export type SeriesValue = {
   __date: Date;
 } & { [key: string]: number };
 
-export const timestampToDate = (d: number) => new Date(d * 1000);
+function timestampToDate(d: number) {
+  return new Date(d * 1000);
+}
 
 /**
  * This function converts the passed in data to the generic SeriesValue
@@ -120,11 +122,4 @@ export function getWeekInfo(d: Date) {
     weekStartDate,
     weekEndDate,
   } as const;
-}
-
-export function formatDayMonth(date: Date) {
-  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-  const mo = new Intl.DateTimeFormat(locale, { month: 'short' }).format(date);
-  const da = new Intl.DateTimeFormat(locale, { day: '2-digit' }).format(date);
-  return `${da} ${mo}`;
 }

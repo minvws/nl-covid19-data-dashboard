@@ -1,3 +1,6 @@
+import { Rule } from '~/sanity';
+import { localeStringValidation } from '../../language/locale-validation';
+
 export const decoratedLink = {
   type: 'object',
   title: 'Een link voorzien van een image, categorie en label',
@@ -12,27 +15,19 @@ export const decoratedLink = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       title: 'Categorie',
       name: 'category',
       type: 'localeString',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'href',
       type: 'string',
       title: 'Link naar pagina',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     {
       title: 'Afbeelding',
@@ -48,7 +43,7 @@ export const decoratedLink = {
           type: 'localeString',
         },
       ],
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
   ],
 };

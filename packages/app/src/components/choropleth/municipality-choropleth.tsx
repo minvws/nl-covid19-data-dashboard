@@ -85,7 +85,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     data
   );
 
-  const safetyRegionMunicipalCodes = useRegionMunicipalities(selectedCode);
+  const vrMunicipalCodes = useRegionMunicipalities(selectedCode);
 
   const thresholdValues = getDataThresholds(
     municipalThresholds,
@@ -99,7 +99,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     metricName,
     metricProperty,
     'gm',
-    safetyRegionMunicipalCodes
+    vrMunicipalCodes
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -114,8 +114,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
       _index: number
     ) => {
       const { gemcode } = feature.properties;
-      const isInSameRegion =
-        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
+      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
       const fill = isInSameRegion ? getFillColor(gemcode) : 'white';
 
       return (
@@ -139,7 +138,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
         />
       );
     },
-    [getFillColor, hasData, safetyRegionMunicipalCodes, selectedCode]
+    [getFillColor, hasData, vrMunicipalCodes, selectedCode]
   );
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
@@ -153,8 +152,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     (feature: Feature<MultiPolygon, GmProperties>, path: string) => {
       const { gemcode, gemnaam } = feature.properties;
       const isSelected = gemcode === selectedCode && highlightSelection;
-      const isInSameRegion =
-        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
+      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
 
       if (hasData && selectedCode && !isInSameRegion) {
         return null;
@@ -178,7 +176,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     [
       selectedCode,
       highlightSelection,
-      safetyRegionMunicipalCodes,
+      vrMunicipalCodes,
       hasData,
       getLink,
       isTabInteractive,

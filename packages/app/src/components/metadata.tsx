@@ -3,15 +3,17 @@ import { ExternalLink } from '~/components/external-link';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
-import { Text } from './typography';
+import { InlineText, Text } from './typography';
 
+type source = {
+  text: string;
+  href: string;
+  aria_text?: string;
+};
 export interface MetadataProps extends MarginBottomProps {
   date?: number | [number, number];
-  source?: {
-    text: string;
-    href: string;
-    aria_text?: string;
-  };
+  source?: source;
+  dataSources?: source[];
   obtained?: number;
   isTileFooter?: boolean;
   datumsText?: string;
@@ -24,6 +26,7 @@ export function Metadata({
   isTileFooter,
   datumsText,
   mb,
+  dataSources,
 }: MetadataProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -69,9 +72,21 @@ export function Metadata({
                     }
                   )}`}
                 {dateString && source ? ' · ' : null}
-                {source
-                  ? `${siteText.common.metadata.source}: ${source.text}`
-                  : null}
+
+                {source ? (
+                  `${siteText.common.metadata.source}: ${source.text}`
+                ) : dataSources ? (
+                  <>
+                    {` • ${siteText.common.metadata.source}: `}
+                    {dataSources.map((item, index) => (
+                      <InlineText key={index}>
+                        {index > 0 &&
+                          (index !== dataSources.length - 1 ? ' , ' : ' & ')}
+                        {item.text}
+                      </InlineText>
+                    ))}
+                  </>
+                ) : null}
               </>
             )}
           </Text>

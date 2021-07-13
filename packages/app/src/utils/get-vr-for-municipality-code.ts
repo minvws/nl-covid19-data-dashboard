@@ -1,5 +1,5 @@
-import { vrData } from '~/data/vr';
 import { gmData } from '~/data/gm';
+import { vrData } from '~/data/vr';
 
 /**
  * This function returns the safety region information for the given
@@ -7,14 +7,14 @@ import { gmData } from '~/data/gm';
  *
  * @param code
  */
-export function getSafetyRegionForMunicipalityCode(
+export function getVrForMunicipalityCode(
   code: string
 ): { name: string; code: string; id: number } | undefined {
   const municipality = gmData.find((x) => x.gemcode === code);
 
   if (!municipality) return;
 
-  const regio = vrData.find((x) => x.code === municipality.safetyRegion);
+  const regio = vrData.find((x) => x.code === municipality.vrCode);
 
   return regio;
 }

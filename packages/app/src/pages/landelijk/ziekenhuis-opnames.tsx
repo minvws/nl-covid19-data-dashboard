@@ -13,9 +13,9 @@ import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -193,7 +193,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'region' && (
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{
                   key: 'hospital_admissions_region_choropleth',
                 }}

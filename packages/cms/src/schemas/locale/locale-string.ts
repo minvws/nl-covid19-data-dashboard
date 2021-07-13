@@ -10,11 +10,3 @@ export const localeString = {
     type: 'string',
   })),
 };
-
-export function localeStringValidation(getRules: (fieldRule: any) => any) {
-  return (Rule: any) =>
-    Rule.fields({
-      nl: (FieldRule: any) => getRules(FieldRule).type('string'),
-      en: (FieldRule: any) => getRules(FieldRule).type('string'),
-    });
-}

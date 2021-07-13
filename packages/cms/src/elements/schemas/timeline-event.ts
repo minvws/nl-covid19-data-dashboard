@@ -1,7 +1,8 @@
 import { isDefined } from 'ts-is-present';
-import { localeStringValidation } from '../../schemas/locale/locale-string';
+import { Rule } from '~/sanity';
+import { localeStringValidation } from '../../language/locale-validation';
 
-const REQUIRED = (x: any) => x.required();
+const REQUIRED = (x: Rule) => x.required();
 const DATE_FORMAT = 'YYYY-MM-DD';
 
 export const timelineEvent = {

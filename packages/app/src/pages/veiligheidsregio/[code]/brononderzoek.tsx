@@ -9,7 +9,7 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
 import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
@@ -48,12 +48,7 @@ export const getStaticProps = withFeatureNotFoundPage(
 export default function BrononderzoekPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const {
-    selectedVrData: data,
-    lastGenerated,
-    content,
-    safetyRegionName,
-  } = props;
+  const { selectedVrData: data, lastGenerated, content, vrName } = props;
 
   const intl = useIntl();
   const { formatNumber, formatDateSpan } = intl;
@@ -76,11 +71,7 @@ export default function BrononderzoekPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={intl.siteText.nationaal_layout.headings.besmettingen}
@@ -91,7 +82,7 @@ export default function BrononderzoekPage(
               intl.siteText.common.subject_in_location,
               {
                 subject: text.titel,
-                location: safetyRegionName,
+                location: vrName,
               }
             )}
             icon={<SituationIcon id="gathering" />}
@@ -174,7 +165,7 @@ export default function BrononderzoekPage(
             </ChartTile>
           )}
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 }

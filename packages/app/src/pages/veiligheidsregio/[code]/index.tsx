@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -20,8 +20,8 @@ export const getStaticProps = createGetStaticProps(
   selectVrPageMetricData()
 );
 
-const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedVrData: data, lastGenerated, safetyRegionName } = props;
+const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
+  const { selectedVrData: data, lastGenerated, vrName } = props;
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
@@ -36,13 +36,9 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
       {...siteText.veiligheidsregio_index.metadata}
       lastGenerated={lastGenerated}
     >
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      />
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated} />
     </Layout>
   );
 };
 
-export default SafetyRegion;
+export default VrIndexPage;

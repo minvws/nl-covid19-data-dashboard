@@ -2,10 +2,10 @@ import {
   assert,
   Gm,
   GmCollection,
+  In,
   InCollection,
   Nl,
   sortTimeSeriesInDataInPlace,
-  In,
   Vr,
   VrCollection,
 } from '@corona-dashboard/common';
@@ -15,11 +15,8 @@ import { GetStaticPropsContext } from 'next';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
-import { CountryCode } from '~/domain/international/select-countries/country-code';
-import {
-  gmPageMetricNames,
-  GmPageMetricNames,
-} from '~/domain/layout/municipality-layout';
+import { CountryCode } from '~/domain/international/select-countries';
+import { MunicipalSideBarData } from '~/domain/layout/municipality-layout';
 import {
   NlPageMetricNames,
   nlPageMetricNames,
@@ -27,7 +24,7 @@ import {
 import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
-} from '~/domain/layout/safety-region-layout';
+} from '~/domain/layout/vr-layout';
 import { getClient, localize } from '~/lib/sanity';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
@@ -197,11 +194,11 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
       {} as Pick<Vr, T>
     );
 
-    return { selectedVrData, safetyRegionName: vrData.safetyRegionName };
+    return { selectedVrData, vrName: vrData.vrName };
   };
 }
 
-export function getVrData(context: GetStaticPropsContext) {
+function getVrData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
   if (!code) {
@@ -210,17 +207,17 @@ export function getVrData(context: GetStaticPropsContext) {
 
   const data = loadAndSortVrData(code);
 
-  const safetyRegionName = getVrName(code);
+  const vrName = getVrName(code);
 
   return {
     data,
-    safetyRegionName,
+    vrName,
   };
 }
 
 export function getVrName(code: string) {
-  const safetyRegion = vrData.find((x) => x.code === code);
-  return safetyRegion?.name || '';
+  const vr = vrData.find((x) => x.code === code);
+  return vr?.name || '';
 }
 
 export function loadAndSortVrData(vrcode: string) {
@@ -237,10 +234,10 @@ export function loadAndSortVrData(vrcode: string) {
  * be added to the output
  *
  */
-export function selectGmPageMetricData<T extends keyof Gm = GmPageMetricNames>(
+export function selectGmPageMetricData<T extends keyof Gm>(
   ...additionalMetrics: T[]
 ) {
-  return selectGmData(...[...gmPageMetricNames, ...additionalMetrics]);
+  return selectGmData(...additionalMetrics);
 }
 
 /**
@@ -251,16 +248,27 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
+    const sideBarData: MunicipalSideBarData = {
+      deceased_rivm: { last_value: gmData.data.deceased_rivm.last_value },
+      hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
+      tested_overall: { last_value: gmData.data.tested_overall.last_value },
+      sewer: { last_value: gmData.data.sewer.last_value },
+    };
+
     const selectedGmData = metrics.reduce(
       (acc, p) => set(acc, p, gmData.data[p]),
       {} as Pick<Gm, T>
     );
 
-    return { selectedGmData, municipalityName: gmData.municipalityName };
+    return {
+      selectedGmData,
+      sideBarData,
+      municipalityName: gmData.municipalityName,
+    };
   };
 }
 
-export function getGmData(context: GetStaticPropsContext) {
+function getGmData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
   if (!code) {
@@ -279,20 +287,20 @@ export function getGmData(context: GetStaticPropsContext) {
 const NOOP = () => null;
 
 export function createGetChoroplethData<T1, T2, T3>(settings?: {
-  vr?: (collection: VrCollection) => T1;
-  gm?: (collection: GmCollection) => T2;
-  in?: (collection: InCollection) => T3;
+  vr?: (collection: VrCollection, context: GetStaticPropsContext) => T1;
+  gm?: (collection: GmCollection, context: GetStaticPropsContext) => T2;
+  in?: (collection: InCollection, context: GetStaticPropsContext) => T3;
 }) {
-  return () => {
+  return (context: GetStaticPropsContext) => {
     const filterVr = settings?.vr ?? NOOP;
     const filterGm = settings?.gm ?? NOOP;
     const filterIn = settings?.in ?? NOOP;
 
     return {
       choropleth: {
-        vr: filterVr(json.vrCollection) as T1,
-        gm: filterGm(json.gmCollection) as T2,
-        in: filterIn(json.inCollection) as T3,
+        vr: filterVr(json.vrCollection, context) as T1,
+        gm: filterGm(json.gmCollection, context) as T2,
+        in: filterIn(json.inCollection, context) as T3,
       },
     };
   };
