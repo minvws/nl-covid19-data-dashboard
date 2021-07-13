@@ -149,7 +149,19 @@ export interface In {
   proto_name: string;
   name: string;
   code: string;
+  named_difference: InNamedDifference;
   tested_overall: InTestedOverall;
+  variants?: InVariants;
+}
+export interface InNamedDifference {
+  variants__percentage: NamedDifferenceDecimal[];
+}
+export interface NamedDifferenceDecimal {
+  name: string;
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
 }
 export interface InTestedOverall {
   values: InTestedOverallValue[];
@@ -158,6 +170,23 @@ export interface InTestedOverall {
 export interface InTestedOverallValue {
   infected: number;
   infected_per_100k_average: number;
+  date_start_unix: number;
+  date_end_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface InVariants {
+  values: InVariantsVariant[];
+}
+export interface InVariantsVariant {
+  name: string;
+  values: InVariantsVariantValue[];
+  last_value: InVariantsVariantValue;
+}
+export interface InVariantsVariantValue {
+  percentage: number;
+  occurrence: number;
+  is_variant_of_concern: boolean;
+  sample_size: number;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -185,6 +214,7 @@ export interface Nl {
   name: string;
   code: string;
   difference: NlDifference;
+  named_difference: NlNamedDifference;
   doctor: NlDoctor;
   g_number: NlGNumber;
   infectious_people: NlInfectiousPeople;
@@ -250,15 +280,6 @@ export interface NlDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
-  variants__alpha_percentage: DifferenceDecimal;
-  variants__beta_percentage: DifferenceDecimal;
-  variants__gamma_percentage: DifferenceDecimal;
-  variants__delta_percentage: DifferenceDecimal;
-  variants__eta_percentage: DifferenceDecimal;
-  variants__epsilon_percentage: DifferenceDecimal;
-  variants__theta_percentage: DifferenceDecimal;
-  variants__kappa_percentage: DifferenceDecimal;
-  variants__other_percentage: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -267,6 +288,16 @@ export interface DifferenceDecimal {
   new_date_unix: number;
 }
 export interface DifferenceInteger {
+  old_value: number;
+  difference: number;
+  old_date_unix: number;
+  new_date_unix: number;
+}
+export interface NlNamedDifference {
+  variants__percentage: NamedDifferenceDecimal[];
+}
+export interface NamedDifferenceDecimal {
+  name: string;
   old_value: number;
   difference: number;
   old_date_unix: number;
@@ -844,40 +875,17 @@ export interface NlVaccineStockValue {
   date_unix: number;
 }
 export interface NlVariants {
-  values: NlVariantsValue[];
-  last_value: NlVariantsValue;
+  values: NlVariantsVariant[];
 }
-export interface NlVariantsValue {
-  alpha_percentage: number;
-  alpha_occurrence: number;
-  alpha_is_variant_of_concern: boolean;
-  beta_percentage: number;
-  beta_occurrence: number;
-  beta_is_variant_of_concern: boolean;
-  gamma_percentage: number;
-  gamma_occurrence: number;
-  gamma_is_variant_of_concern: boolean;
-  delta_percentage: number;
-  delta_occurrence: number;
-  delta_is_variant_of_concern: boolean;
-  eta_percentage: number;
-  eta_occurrence: number;
-  eta_is_variant_of_concern: boolean;
-  epsilon_percentage: number;
-  epsilon_occurrence: number;
-  epsilon_is_variant_of_concern: boolean;
-  theta_percentage: number;
-  theta_occurrence: number;
-  theta_is_variant_of_concern: boolean;
-  kappa_percentage: number;
-  kappa_occurrence: number;
-  kappa_is_variant_of_concern: boolean;
-  lambda_percentage: number | null;
-  lambda_occurrence: number | null;
-  lambda_is_variant_of_concern: boolean | null;
-  other_percentage: number;
-  other_occurrence: number;
-  other_is_variant_of_concern: boolean;
+export interface NlVariantsVariant {
+  name: string;
+  values: NlVariantsVariantValue[];
+  last_value: NlVariantsVariantValue;
+}
+export interface NlVariantsVariantValue {
+  percentage: number;
+  occurrence: number;
+  is_variant_of_concern: boolean;
   sample_size: number;
   date_start_unix: number;
   date_end_unix: number;

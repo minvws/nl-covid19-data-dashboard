@@ -10,6 +10,7 @@ import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { SiteText } from '~/locale';
+import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import {
   Cell,
   HeaderCell,
@@ -18,7 +19,6 @@ import {
   VariantDifference,
   VariantNameCell,
 } from '.';
-import { VariantRow } from '../logic/use-variants-table-data';
 
 type NarrowVariantsTableProps = {
   rows: VariantRow[];
