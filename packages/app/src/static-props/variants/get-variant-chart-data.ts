@@ -24,11 +24,11 @@ export function getVariantChartData(
   nlVariants: NlVariants | undefined,
   variantTranslations: SiteText['covid_varianten']['varianten']
 ) {
-  if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
+  if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {
     return EMPTY_VALUES;
   }
 
-  const vocVariants = nlVariants.variants.filter(
+  const vocVariants = nlVariants.values.filter(
     (x) => x.last_value.is_variant_of_concern
   );
 
@@ -78,7 +78,7 @@ export function getVariantChartData(
     variantChart: values,
     seriesConfig,
     dates: {
-      date_of_insertion_unix: nlVariants.date_of_insertion ?? 0,
+      date_of_insertion_unix: firstVariant.last_value.date_of_insertion_unix,
       date_start_unix: firstVariant.last_value.date_start_unix,
       date_end_unix: firstVariant.last_value.date_end_unix,
     },

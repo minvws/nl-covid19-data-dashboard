@@ -4,8 +4,10 @@ import { Markdown } from '~/components/markdown';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { Tile } from '~/components/tile';
 import { Heading } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { NarrowVariantsTable, WideVariantsTable } from './components';
 
@@ -33,8 +35,8 @@ export function VariantsTableTile({
   };
 
   const [date_start, date_end] = formatDateSpan(
-    { seconds: data.date_start_unix },
-    { seconds: data.date_end_unix }
+    { seconds: dates.date_start_unix },
+    { seconds: dates.date_end_unix }
   );
 
   return (
@@ -43,7 +45,7 @@ export function VariantsTableTile({
       <Box maxWidth="maxWidthText">
         <Markdown
           content={replaceVariablesInText(text.varianten_tabel.omschrijving, {
-            sample_size: data.sample_size,
+            sample_size: '',
             date_start,
             date_end,
           })}

@@ -22,8 +22,8 @@ export function getVariantTableData(
   namedDifference: NlNamedDifference,
   countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
 ) {
-  if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
-    return { variantTable: [] } as const;
+  if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {
+    return { variantTable: [] as VariantRow[] };
   }
 
   function findDifference(name: string) {
@@ -40,7 +40,7 @@ export function getVariantTableData(
     return countryOfOrigin;
   }
 
-  const variantTable = nlVariants.variants
+  const variantTable = nlVariants.values
     .map<VariantRow>((variant) => ({
       variant: variant.name,
       countryOfOrigin: findCountryOfOrigin(variant.name),

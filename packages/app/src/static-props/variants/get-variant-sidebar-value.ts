@@ -7,12 +7,12 @@ export type VariantSidebarValue = {
 } & NlVariantsVariantValue;
 
 export function getVariantSidebarValue(nlVariants: NlVariants | undefined) {
-  if (!isDefined(nlVariants) || !isDefined(nlVariants.variants)) {
+  if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {
     return null;
   }
 
   return maxBy(
-    nlVariants.variants.map<VariantSidebarValue>((x) => ({
+    nlVariants.values.map<VariantSidebarValue>((x) => ({
       name: x.name,
       ...x.last_value,
     })),
