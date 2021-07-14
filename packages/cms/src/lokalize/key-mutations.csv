@@ -12,6 +12,7 @@ timestamp,action,key
 2021-07-12T13:21:52.500Z,add,internationaal_varianten.reference.text
 2021-07-12T13:21:53.437Z,add,internationaal_varianten.titel
 2021-07-12T13:21:54.554Z,add,internationaal_varianten.titel_sidebar
+2021-07-14T08:12:06.004Z,add,vaccinaties.belangrijk_bericht
 2021-07-14T10:19:18.884Z,add,covid_varianten.landen_van_herkomst.iota
 2021-07-14T10:19:20.059Z,add,covid_varianten.landen_van_herkomst.zeta
 2021-07-14T10:19:21.080Z,add,covid_varianten.varianten.iota
