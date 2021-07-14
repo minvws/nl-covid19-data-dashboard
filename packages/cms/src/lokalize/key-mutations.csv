@@ -30,3 +30,14 @@ timestamp,action,key
 2021-07-14T10:19:36.974Z,add,internationaal_varianten.varianten_tabel.verschil.gelijk
 2021-07-14T10:19:39.678Z,add,internationaal_varianten.varianten_tabel.verschil.meer
 2021-07-14T10:19:40.601Z,add,internationaal_varianten.varianten_tabel.verschil.minder
+2021-07-14T12:02:48.918Z,add,covid_varianten.varianten_omschrijving.alpha
+2021-07-14T12:02:49.922Z,add,covid_varianten.varianten_omschrijving.beta
+2021-07-14T12:02:50.939Z,add,covid_varianten.varianten_omschrijving.delta
+2021-07-14T12:02:51.960Z,add,covid_varianten.varianten_omschrijving.epsilon
+2021-07-14T12:02:52.978Z,add,covid_varianten.varianten_omschrijving.eta
+2021-07-14T12:02:53.999Z,add,covid_varianten.varianten_omschrijving.gamma
+2021-07-14T12:02:55.016Z,add,covid_varianten.varianten_omschrijving.iota
+2021-07-14T12:02:56.025Z,add,covid_varianten.varianten_omschrijving.kappa
+2021-07-14T12:02:57.049Z,add,covid_varianten.varianten_omschrijving.lambda
+2021-07-14T12:02:58.069Z,add,covid_varianten.varianten_omschrijving.theta
+2021-07-14T12:02:59.081Z,add,covid_varianten.varianten_omschrijving.zeta
