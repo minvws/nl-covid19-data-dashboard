@@ -63,6 +63,7 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor',
     'vaccine_coverage'
+    // 'vaccine_coverage_per_age_group'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
@@ -362,12 +363,14 @@ export default VaccinationPage;
 // TODO: remove this when data is available
 function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   const values = [
-    'total',
+    '12+',
+    '18+',
+    '12-17',
     '18-29',
     '30-39',
     '40-49',
     '50-59',
-    '60-69',
+    '65-69',
     '70-79',
     '80+',
   ]
