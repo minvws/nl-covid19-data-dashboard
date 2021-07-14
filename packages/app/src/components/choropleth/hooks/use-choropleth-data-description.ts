@@ -13,7 +13,7 @@ export function useChoroplethDataDescription<T>(
   metricName: keyof T,
   metricProperty: string,
   area: 'vr' | 'gm',
-  gemcodes?: string[]
+  gmCodes?: string[]
 ) {
   const { siteText } = useIntl();
   const dynamicTexts = useDynamicTextTemplates(metricName, metricProperty);
@@ -26,9 +26,9 @@ export function useChoroplethDataDescription<T>(
     const areas = siteText.choropleth[area];
     const verbs = siteText.choropleth.verb;
 
-    const filteredGmValues = gemcodes
+    const filteredGmValues = gmCodes
       ? gmValues.filter((gm) => {
-          return gemcodes.indexOf(gm.code) > -1;
+          return gmCodes.indexOf(gm.code) > -1;
         })
       : gmValues;
 
@@ -73,7 +73,7 @@ export function useChoroplethDataDescription<T>(
       : replaceVariablesInText(dynamicTexts.full_sentence_single, {
           first: texts[0],
         });
-  }, [dynamicTexts, siteText.choropleth, area, gemcodes, gmValues, thresholds]);
+  }, [dynamicTexts, siteText.choropleth, area, gmCodes, gmValues, thresholds]);
 }
 
 /**

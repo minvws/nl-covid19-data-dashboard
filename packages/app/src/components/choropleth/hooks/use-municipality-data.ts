@@ -51,14 +51,14 @@ export function useMunicipalityNavigationData(
   featureCollection: MunicipalGeoJSON
 ): UseMunicipalityDataReturnValue {
   const propertyData = featureCollection.features.reduce(
-    (acc, feature) => set(acc, feature.properties.gemcode, feature.properties),
+    (acc, feature) => set(acc, feature.properties.gmCode, feature.properties),
     {} as Record<string, GmProperties>
   );
 
   return {
     getChoroplethValue: (id: string) => ({
       ...propertyData[id],
-      gmcode: propertyData[id].gmcode || propertyData[id].gemcode,
+      gmcode: propertyData[id].gmcode || propertyData[id].gmCode,
       __color_value: 0,
     }),
     hasData: true,
@@ -74,8 +74,7 @@ export function useMunicipalityData<K extends GmCollectionMetricName>(
 ): UseMunicipalityDataReturnValue {
   return useMemo(() => {
     const propertyData = featureCollection.features.reduce(
-      (acc, feature) =>
-        set(acc, feature.properties.gemcode, feature.properties),
+      (acc, feature) => set(acc, feature.properties.gmCode, feature.properties),
       {} as Record<string, GmProperties>
     );
 
@@ -107,7 +106,7 @@ export function useMunicipalityData<K extends GmCollectionMetricName>(
 
     const mergedData = metricsForAllMunicipalities.reduce((acc, value) => {
       const feature = featureCollection.features.find(
-        (feat) => feat.properties.gemcode === value.gmcode
+        (feat) => feat.properties.gmCode === value.gmcode
       );
 
       if (!feature) return acc;

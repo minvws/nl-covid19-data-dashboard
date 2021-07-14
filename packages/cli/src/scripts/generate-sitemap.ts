@@ -15,7 +15,7 @@ const disabledRoutes = features
   .map((x) => x.route);
 
 const vrCodes = vrData.map((x) => x.code);
-const gmCodes = gmData.map((x) => x.gemcode);
+const gmCodes = gmData.map((x) => x.gmCode);
 
 const publicOutputDirectory = path.resolve(
   __dirname,

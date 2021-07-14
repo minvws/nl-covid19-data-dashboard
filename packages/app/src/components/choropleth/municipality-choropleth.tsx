@@ -113,13 +113,13 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
       path: string,
       _index: number
     ) => {
-      const { gemcode } = feature.properties;
-      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
-      const fill = isInSameRegion ? getFillColor(gemcode) : 'white';
+      const { gmCode } = feature.properties;
+      const isInSameRegion = vrMunicipalCodes?.includes(gmCode) ?? true;
+      const fill = isInSameRegion ? getFillColor(gmCode) : 'white';
 
       return (
         <Path
-          key={gemcode}
+          key={gmCode}
           pathData={path}
           fill={hasData && fill ? fill : '#fff'}
           stroke={
@@ -150,9 +150,9 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
 
   const renderHover = useCallback(
     (feature: Feature<MultiPolygon, GmProperties>, path: string) => {
-      const { gemcode, gemnaam } = feature.properties;
-      const isSelected = gemcode === selectedCode && highlightSelection;
-      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
+      const { gmCode, gemnaam } = feature.properties;
+      const isSelected = gmCode === selectedCode && highlightSelection;
+      const isInSameRegion = vrMunicipalCodes?.includes(gmCode) ?? true;
 
       if (hasData && selectedCode && !isInSameRegion) {
         return null;
@@ -160,11 +160,11 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
 
       return (
         <HoverPathLink
-          key={gemcode}
-          href={getLink(gemcode)}
+          key={gmCode}
+          href={getLink(gmCode)}
           title={gemnaam}
           isTabInteractive={isTabInteractive}
-          id={gemcode}
+          id={gmCode}
           pathData={path}
           stroke={isSelected ? '#000' : undefined}
           strokeWidth={isSelected ? 3 : undefined}

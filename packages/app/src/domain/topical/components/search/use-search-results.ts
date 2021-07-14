@@ -1,8 +1,8 @@
 import { matchSorter } from 'match-sorter';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { vrData } from '~/data/vr';
 import { gmData } from '~/data/gm';
+import { vrData } from '~/data/vr';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export interface Option {
@@ -91,7 +91,7 @@ function search(term: string, limit = 10) {
 const ALL_HITS: Omit<Option, 'link'>[] = [
   ...gmData.map((x) => ({
     type: 'gm' as const,
-    code: x.gemcode,
+    code: x.gmCode,
     name: x.displayName || x.name,
     searchTerms: [x.name, x.displayName].filter(isPresent),
   })),

@@ -82,7 +82,7 @@ export interface VrProperties {
 }
 export interface GmProperties {
   gemnaam: string;
-  gemcode: string;
+  gmCode: string;
   gmcode: string;
 }
 

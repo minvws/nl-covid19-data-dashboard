@@ -10,7 +10,7 @@ import { vrData } from '~/data/vr';
 export function getVrForMunicipalityCode(
   code: string
 ): { name: string; code: string; id: number } | undefined {
-  const municipality = gmData.find((x) => x.gemcode === code);
+  const municipality = gmData.find((x) => x.gmCode === code);
 
   if (!municipality) return;
 

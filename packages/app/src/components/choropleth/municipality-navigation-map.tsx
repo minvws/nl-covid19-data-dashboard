@@ -40,12 +40,12 @@ export function MunicipalityNavigationMap<T>(
     path: string,
     _index: number
   ) => {
-    const { gemcode } = feature.properties;
+    const { gmCode } = feature.properties;
 
     return (
       <Path
-        key={gemcode}
-        id={gemcode}
+        key={gmCode}
+        id={gmCode}
         pathData={path}
         fill={'#fff'}
         stroke={colors.blue}
@@ -65,15 +65,15 @@ export function MunicipalityNavigationMap<T>(
     feature: Feature<MultiPolygon, GmProperties>,
     path: string
   ) => {
-    const { gemcode, gemnaam } = feature.properties;
+    const { gmCode, gemnaam } = feature.properties;
 
     return (
       <HoverPathLink
-        key={gemcode}
-        href={reverseRouter.gm.index(gemcode)}
+        key={gmCode}
+        href={reverseRouter.gm.index(gmCode)}
         title={gemnaam}
         isTabInteractive={isTabInteractive}
-        id={gemcode}
+        id={gmCode}
         pathData={path}
         stroke={colors.blue}
         fill={colors.blue}

@@ -288,7 +288,7 @@ function getGmData(context: GetStaticPropsContext) {
 
   const data = loadJsonFromDataFile<Gm>(`${code}.json`);
 
-  const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
+  const municipalityName = gmData.find((x) => x.gmCode === code)?.name || '';
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
