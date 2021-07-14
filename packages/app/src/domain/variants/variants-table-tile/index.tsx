@@ -1,3 +1,7 @@
+import css from '@styled-system/css';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
@@ -7,62 +11,102 @@ import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { NarrowVariantsTable, WideVariantsTable } from './components';
+import { VariantsTable } from './components/variants-table';
+
+export type TableText = {
+  anderen_tooltip: string;
+  omschrijving: string;
+  omschrijving_zonder_placeholders: string;
+  titel: string;
+  kolommen: {
+    aantal_monsters: string;
+    eerst_gevonden: string;
+    percentage: string;
+    variant_titel: string;
+    vorige_meeting: string;
+  };
+  verschil: { gelijk: string; meer: string; minder: string };
+};
 
 export function VariantsTableTile({
+  text,
+  noDataMessage = '',
+  source,
   data,
   sampleSize,
   dates,
+  children = null,
 }: {
-  data: VariantRow[];
+  text: TableText;
+  noDataMessage?: ReactNode;
+  data: VariantRow[] | undefined;
+  source: {
+    download: string;
+    href: string;
+    text: string;
+  };
   sampleSize: number;
-  dates: {
+  dates?: {
     date_start_unix: number;
     date_end_unix: number;
     date_of_insertion_unix: number;
-  };
+  } | null;
+  children?: ReactNode | null;
 }) {
-  const { siteText, formatDateSpan } = useIntl();
+  const { formatDateSpan } = useIntl();
 
-  const text = siteText.covid_varianten;
+  const metadata: MetadataProps | undefined = dates
+    ? {
+        date: [dates.date_start_unix, dates.date_end_unix],
+        source,
+        obtained: dates.date_of_insertion_unix,
+      }
+    : undefined;
 
-  const breakpoints = useBreakpoints();
+  const [date_start, date_end] = dates
+    ? formatDateSpan(
+        { seconds: dates?.date_start_unix },
+        { seconds: dates?.date_end_unix }
+      )
+    : [0, 0];
 
-  const metadata: MetadataProps = {
-    date: [dates.date_start_unix, dates.date_end_unix],
-    source: text.bronnen.rivm,
-    obtained: dates.date_of_insertion_unix,
-  };
-
-  const [date_start, date_end] = formatDateSpan(
-    { seconds: dates.date_start_unix },
-    { seconds: dates.date_end_unix }
-  );
+  const descriptionText = isDefined(data)
+    ? replaceVariablesInText(text.omschrijving, {
+        sample_size: sampleSize,
+        date_start,
+        date_end,
+      })
+    : text.omschrijving_zonder_placeholders;
 
   return (
     <Tile>
-      <Heading level={3}>{text.varianten_tabel.titel}</Heading>
+      <Heading level={3}>{text.titel}</Heading>
       <Box maxWidth="maxWidthText">
-        <Markdown
-          content={replaceVariablesInText(text.varianten_tabel.omschrijving, {
-            sample_size: sampleSize,
-            date_start,
-            date_end,
-          })}
-        />
+        <Markdown content={descriptionText} />
       </Box>
 
+      {children}
+
       <Box overflow="auto" mb={3} mt={4}>
-        <ErrorBoundary>
-          {breakpoints.sm ? (
-            <WideVariantsTable rows={data} text={text} />
-          ) : (
-            <NarrowVariantsTable rows={data} text={text} />
-          )}
-        </ErrorBoundary>
+        {isDefined(data) && (
+          <ErrorBoundary>
+            <VariantsTable rows={data} text={text} />
+          </ErrorBoundary>
+        )}
+        {!isDefined(data) && <NoDataBox>{noDataMessage}</NoDataBox>}
       </Box>
-      <Metadata {...metadata} isTileFooter />
+      {isDefined(metadata) && <Metadata {...metadata} isTileFooter />}
     </Tile>
   );
 }
+
+const NoDataBox = styled.div(
+  css({
+    width: '100%',
+    display: 'flex',
+    height: '8em',
+    color: 'gray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  })
+);

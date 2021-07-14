@@ -29,8 +29,12 @@ import {
   getLocaleFile,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-import { getVariantChartData } from '~/static-props/variants/get-variant-chart-data';
+import {
+  getSeriesConfig,
+  getVariantChartData,
+} from '~/static-props/variants/get-variant-chart-data';
 import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
+import { colors } from '~/style/theme';
 import { VariantsPageQuery } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
@@ -43,6 +47,9 @@ export const getStaticProps = withFeatureNotFoundPage(
       const data = selectNlPageMetricData('variants')();
       const variants = data.selectedNlData.variants;
       delete data.selectedNlData.variants;
+
+      const chartData = getVariantChartData(variants);
+
       return {
         selectedNlData: data.selectedNlData,
         ...getVariantTableData(
@@ -50,7 +57,12 @@ export const getStaticProps = withFeatureNotFoundPage(
           data.selectedNlData.named_difference,
           siteText.covid_varianten.landen_van_herkomst
         ),
-        ...getVariantChartData(variants, siteText.covid_varianten.varianten),
+        ...chartData,
+        ...getSeriesConfig(
+          chartData?.variantChart?.[0],
+          siteText.covid_varianten.varianten,
+          colors.data.variants
+        ),
       };
     },
     createGetContent<{
@@ -84,6 +96,7 @@ export default function CovidVariantenPage(
   const { siteText } = useIntl();
 
   const text = siteText.covid_varianten;
+  const tableText = text.varianten_tabel;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -156,6 +169,8 @@ export default function CovidVariantenPage(
           <VariantsTableTile
             data={variantTable}
             sampleSize={selectedNlData.variantSidebarValue.sample_size}
+            text={tableText}
+            source={text.bronnen.rivm}
             dates={{
               date_end_unix: dates.date_end_unix,
               date_of_insertion_unix: dates.date_of_insertion_unix,
