@@ -20,7 +20,7 @@ import {
   useChoroplethColorScale,
   useMunicipalityBoundingbox,
   useMunicipalityData,
-  useRegionMunicipalities,
+  useRegionGmCollection,
   useTabInteractiveButton,
 } from './hooks';
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
@@ -85,7 +85,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     data
   );
 
-  const vrMunicipalCodes = useRegionMunicipalities(selectedCode);
+  const vrMunicipalCodes = useRegionGmCollection(selectedCode);
 
   const thresholdValues = getDataThresholds(
     municipalThresholds,

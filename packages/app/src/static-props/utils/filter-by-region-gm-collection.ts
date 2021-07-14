@@ -3,7 +3,7 @@ import { GetStaticPropsContext } from 'next';
 import { isDefined } from 'ts-is-present';
 import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
 
-export function filterByRegionMunicipalities<T extends { gmcode: string }>(
+export function filterByRegionGmCollection<T extends { gmcode: string }>(
   choroplethData: T[],
   context: GetStaticPropsContext
 ) {

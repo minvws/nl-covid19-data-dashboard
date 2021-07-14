@@ -14607,7 +14607,7 @@
     "translate": [3.358378253017111, 50.75133518751412]
   },
   "objects": {
-    "municipalities": {
+    "gm_collection": {
       "type": "GeometryCollection",
       "geometries": [
         {

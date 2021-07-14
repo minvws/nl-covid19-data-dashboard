@@ -7,7 +7,7 @@ import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-m
  *
  * @param municipalCode
  */
-export function useRegionMunicipalities(
+export function useRegionGmCollection(
   municipalCode?: string
 ): string[] | undefined {
   return useMemo(() => {

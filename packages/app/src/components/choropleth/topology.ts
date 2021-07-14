@@ -21,7 +21,7 @@ export const regionGeo = topojson.feature(
 
 export const municipalGeo = topojson.feature(
   topology,
-  topology.objects.municipalities
+  topology.objects.gm_collection
 ) as MunicipalGeoJSON;
 
 export const europeGeo = topojson.feature(

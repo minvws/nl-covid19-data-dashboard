@@ -95,16 +95,16 @@ export function useMunicipalityData<K extends GmCollectionMetricName>(
         value: x[metricProperty],
       })) ?? [];
 
-    const metricsForAllMunicipalities = data[metricName] as unknown as
+    const metricsForAllGmCollection = data[metricName] as unknown as
       | GmMetricValue[]
       | undefined;
 
     assert(
-      metricsForAllMunicipalities,
+      metricsForAllGmCollection,
       `Missing municipality metric data for ${metricName}`
     );
 
-    const mergedData = metricsForAllMunicipalities.reduce((acc, value) => {
+    const mergedData = metricsForAllGmCollection.reduce((acc, value) => {
       const feature = featureCollection.features.find(
         (feat) => feat.properties.gmCode === value.gmcode
       );

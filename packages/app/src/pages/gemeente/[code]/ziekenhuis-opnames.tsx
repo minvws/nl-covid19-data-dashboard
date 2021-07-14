@@ -34,7 +34,7 @@ import {
   getLastGeneratedDate,
   selectGmPageMetricData,
 } from '~/static-props/get-data';
-import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
+import { filterByRegionGmCollection } from '~/static-props/utils/filter-by-region-gm-collection';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -46,7 +46,7 @@ export const getStaticProps = createGetStaticProps(
   selectGmPageMetricData('hospital_nice', 'difference', 'code'),
   createGetChoroplethData({
     gm: ({ hospital_nice }, context) => ({
-      hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
+      hospital_nice: filterByRegionGmCollection(hospital_nice, context),
     }),
   }),
   createGetContent<{
