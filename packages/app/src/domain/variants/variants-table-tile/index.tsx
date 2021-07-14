@@ -30,7 +30,7 @@ export type TableText = {
 
 export function VariantsTableTile({
   text,
-  noDataMessage,
+  noDataMessage = '',
   source,
   data,
   sampleSize,
@@ -38,7 +38,7 @@ export function VariantsTableTile({
   children = null,
 }: {
   text: TableText;
-  noDataMessage: string;
+  noDataMessage?: string;
   data: VariantRow[] | undefined;
   source: {
     download: string;
