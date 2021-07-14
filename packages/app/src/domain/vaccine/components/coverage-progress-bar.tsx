@@ -13,7 +13,6 @@ export function CoverageProgressBar(props: {
   fullyPercentage: number;
   partiallyPercentage: number;
   total: number;
-  showTotals: boolean;
 }) {
   const {
     partiallyVaccinated,
@@ -21,7 +20,6 @@ export function CoverageProgressBar(props: {
     fullyPercentage,
     partiallyPercentage,
     total,
-    showTotals,
   } = props;
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const { partially: partialLabel, fully: fullyLabel } =
@@ -29,7 +27,7 @@ export function CoverageProgressBar(props: {
   const maxValue = Math.max(partiallyVaccinated, fullyVaccinated);
   const scale = useDynamicScale(maxValue, 0, total);
   const breakpoints = useBreakpoints(true);
-  const barHeight = breakpoints.md ? (showTotals ? 26 : 16) : 11;
+  const barHeight = breakpoints.md ? 16 : 11;
 
   // sort shortest bar on top
   const barData = useMemo(() => {

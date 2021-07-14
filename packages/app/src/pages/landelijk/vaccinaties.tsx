@@ -363,8 +363,8 @@ export default VaccinationPage;
 // TODO: remove this when data is available
 function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   const values = [
-    '12+',
-    '18+',
+    'Totaal (12+ jaar)',
+    'Totaal (18+ jaar)',
     '12-17',
     '18-29',
     '30-39',

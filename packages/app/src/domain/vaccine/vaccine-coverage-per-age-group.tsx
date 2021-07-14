@@ -28,36 +28,43 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
         {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : null}
       </CoverageRow>
       {values.map((value, index, arr) => (
-        <CoverageRow
-          borderColor={index === arr.length - 1 ? 'black' : undefined}
-          key={value.age_group_range}
-        >
-          <AgeGroup
-            range={formatAgeGroup(value.age_group_range, {
-              group,
-              oldest,
-              total,
-              total_people,
-            })}
-            total={replaceVariablesInText(total_people, {
-              total: formatNumber(value.age_group_total),
-            })}
-          />
-          <VaccinationCoveragePercentage
-            value={`${formatPercentage(value.fully_vaccinated_percentage, {
-              maximumFractionDigits: 1,
-              minimumFractionDigits: 1,
-            })}%`}
-          />
-          <CoverageProgressBar
-            showTotals={index === arr.length - 1}
-            partiallyVaccinated={value.partially_vaccinated}
-            fullyVaccinated={value.fully_vaccinated}
-            fullyPercentage={value.fully_vaccinated_percentage}
-            partiallyPercentage={value.partially_vaccinated_percentage}
-            total={value.age_group_total}
-          />
-        </CoverageRow>
+        <>
+          {
+            /**
+             * Push the two summing rows down
+             */
+            index === values.length - 2 ? <Box pt={4} /> : null
+          }
+          <CoverageRow
+            borderColor={index === arr.length - 1 ? 'black' : undefined}
+            key={value.age_group_range}
+          >
+            <AgeGroup
+              range={formatAgeGroup(value.age_group_range, {
+                group,
+                oldest,
+                total,
+                total_people,
+              })}
+              total={replaceVariablesInText(total_people, {
+                total: formatNumber(value.age_group_total),
+              })}
+            />
+            <VaccinationCoveragePercentage
+              value={`${formatPercentage(value.fully_vaccinated_percentage, {
+                maximumFractionDigits: 1,
+                minimumFractionDigits: 1,
+              })}%`}
+            />
+            <CoverageProgressBar
+              partiallyVaccinated={value.partially_vaccinated}
+              fullyVaccinated={value.fully_vaccinated}
+              fullyPercentage={value.fully_vaccinated_percentage}
+              partiallyPercentage={value.partially_vaccinated_percentage}
+              total={value.age_group_total}
+            />
+          </CoverageRow>
+        </>
       ))}
     </Box>
   );
@@ -110,11 +117,9 @@ function formatAgeGroup(
 
 function VaccinationCoveragePercentage({ value }: { value: string }) {
   return (
-    <Box display="flex" width="50%" justifyContent="flex-end">
-      <InlineText color="blue" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
-        {value}
-      </InlineText>
-    </Box>
+    <InlineText color="blue" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
+      {value}
+    </InlineText>
   );
 }
 

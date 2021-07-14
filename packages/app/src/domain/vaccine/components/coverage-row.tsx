@@ -1,12 +1,13 @@
+import { assert } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 type CoverageRowProps = {
-  children: [ReactNode, ReactNode, ReactNode];
+  children: ReactNode;
   borderColor?: string;
   isHeaderRow?: boolean;
 };
@@ -22,22 +23,22 @@ export function CoverageRow(props: CoverageRowProps) {
 }
 
 function MobileCoverageRow(props: CoverageRowProps) {
-  const { children, borderColor, isHeaderRow = false } = props;
   const [isOpen, setIsOpen] = useState(false);
+
+  const children = React.Children.toArray(props.children);
+  assert(
+    children.length === 3,
+    `Expecting 3 children but got ${children.length}`
+  );
+
   return (
-    <Row
-      hideBorder={isHeaderRow}
-      borderColor={borderColor}
-      width="100%"
-      display="flex"
-      flexDirection="column"
-    >
+    <Row width="100%" display="flex" flexDirection="column">
       <Box display="flex">
-        <Box flex="1">{children[0]}</Box>
-        <Box flex="1" display="flex" justifyContent="center">
+        <Box flex={1}>{children[0]}</Box>
+        <Box flex={1} display="flex" justifyContent="center">
           {children[1]}
         </Box>
-        <Box flex="0.2">
+        <Box flex={0.2}>
           {isPresent(children[2]) ? (
             <Button>
               <Chevron isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
@@ -53,38 +54,41 @@ function MobileCoverageRow(props: CoverageRowProps) {
 }
 
 function DesktopCoverageRow(props: CoverageRowProps) {
-  const { children, borderColor, isHeaderRow = false } = props;
+  const children = React.Children.toArray(props.children);
+  assert(
+    children.length === 3,
+    `Expecting 3 children but got ${children.length}`
+  );
+
   return (
-    <Row hideBorder={isHeaderRow} borderColor={borderColor}>
+    <Row>
       <Box flex={0.4}>{children[0]}</Box>
-      <Box flex={0.4}>{children[1]}</Box>
       <Box
-        flex={1}
+        flex={0.4}
         display="flex"
-        alignItems="flex-end"
-        pt={isHeaderRow ? 0 : 2}
+        justifyContent="flex-end"
+        style={{ border: '1px solid hotpink' }}
+        mr={{ _: 3, lg: 4, xl: 5 }}
       >
+        {children[1]}
+      </Box>
+      <Box flex={1} display="flex" alignItems="flex-end">
         {children[2]}
       </Box>
     </Row>
   );
 }
 
-const Row = styled(Box)<{ hideBorder: boolean; borderColor?: string }>(
-  ({ hideBorder, borderColor = 'border' }) => {
-    const cssProps = hideBorder
-      ? { display: 'flex', alignContent: 'center' }
-      : {
-          display: 'flex',
-          justifyContent: 'stretch',
-          borderTopColor: borderColor,
-          borderTopStyle: 'solid',
-          borderTopWidth: '1px',
-          pt: 3,
-          my: 2,
-        };
-    return css(cssProps as any);
-  }
+const Row = styled(Box)(
+  css({
+    display: 'flex',
+    justifyContent: 'stretch',
+    borderBottomColor: 'border',
+    borderBottomStyle: 'solid',
+    borderBottomWidth: '1px',
+    // pt: 3,
+    py: 3,
+  })
 );
 
 const Button = styled.button(
