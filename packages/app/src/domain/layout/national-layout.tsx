@@ -27,6 +27,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { useIntl } from '~/intl';
+import { VariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationIcon } from '../situations/components/situation-icon';
@@ -49,14 +50,16 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
+  'named_difference',
   'corona_melder_app_warning',
   'behavior_per_age_group',
-  'variants',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-type NationalPageMetricData = Pick<Nl, NlPageMetricNames>;
+type NationalPageMetricData = {
+  variantSidebarValue: VariantSidebarValue;
+} & Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;
@@ -220,21 +223,6 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href={reverseRouter.nl.besmettelijkeMensen()}
-                  icon={<Ziektegolf />}
-                  title={siteText.besmettelijke_personen.titel_sidebar}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="infectious_people"
-                    metricProperty="estimate"
-                    localeTextKey="besmettelijke_personen"
-                    differenceKey="infectious_people__estimate"
-                  />
-                </MetricMenuItemLink>
-
-                <MetricMenuItemLink
                   href={reverseRouter.nl.reproductiegetal()}
                   icon={<ReproIcon />}
                   title={siteText.reproductiegetal.titel_sidebar}
@@ -265,13 +253,13 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
 
-                {data.variants && (
+                {data.variantSidebarValue && (
                   <MetricMenuItemLink
                     href={reverseRouter.nl.varianten()}
                     icon={<Varianten />}
                     title={siteText.covid_varianten.titel_sidebar}
                   >
-                    <VariantsSidebarMetric data={data.variants.last_value} />
+                    <VariantsSidebarMetric data={data.variantSidebarValue} />
                   </MetricMenuItemLink>
                 )}
 
@@ -281,6 +269,16 @@ export function NationalLayout(props: NationalLayoutProps) {
                   title={siteText.brononderzoek.titel_sidebar}
                 >
                   <SidebarKpiValue title={siteText.brononderzoek.kpi_titel} />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.besmettelijkeMensen()}
+                  icon={<Ziektegolf />}
+                  title={siteText.besmettelijke_personen.titel_sidebar}
+                >
+                  <SidebarKpiValue
+                    title={siteText.besmettelijke_personen.kpi_titel}
+                  />
                 </MetricMenuItemLink>
               </CategoryMenu>
 
