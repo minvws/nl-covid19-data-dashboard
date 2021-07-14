@@ -47,10 +47,7 @@ export const getStaticProps = createGetStaticProps(
         internationalData,
         siteText.covid_varianten.landen_van_herkomst
       ),
-      ...getInternationalVariantChartData(
-        internationalData,
-        siteText.covid_varianten.landen_van_herkomst
-      ),
+      ...getInternationalVariantChartData(internationalData),
     };
   },
   createGetContent<{
@@ -120,6 +117,7 @@ export default function VariantenPage(
             usefulLinks={content.page?.usefulLinks}
           />
           <VariantsTableTile
+            noDataMessage={text.selecteer_een_land_omschrijving}
             source={text.bronnen.rivm}
             text={tableText}
             data={tableData}
@@ -138,9 +136,12 @@ export default function VariantenPage(
                   setSelectedCountryCode(x);
                   setTableData(variantTableData[x]);
                 }}
-                onClear={() => setSelectedCountryCode(undefined)}
+                onClear={() => {
+                  setSelectedCountryCode(undefined);
+                  setTableData(undefined);
+                }}
                 value={selectedCountryCode}
-                placeholder={'yea'}
+                placeholder={text.selecteer_een_land}
               />
             </Box>
           </VariantsTableTile>

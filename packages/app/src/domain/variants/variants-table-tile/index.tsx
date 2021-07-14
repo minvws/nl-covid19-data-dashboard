@@ -1,4 +1,7 @@
+import css from '@styled-system/css';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
@@ -27,6 +30,7 @@ export type TableText = {
 
 export function VariantsTableTile({
   text,
+  noDataMessage,
   source,
   data,
   sampleSize,
@@ -34,6 +38,7 @@ export function VariantsTableTile({
   children = null,
 }: {
   text: TableText;
+  noDataMessage: string;
   data: VariantRow[] | undefined;
   source: {
     download: string;
@@ -79,15 +84,29 @@ export function VariantsTableTile({
       {children}
 
       <Box overflow="auto" mb={3} mt={4}>
-        <ErrorBoundary>
-          {breakpoints.sm ? (
-            <WideVariantsTable rows={data} text={text} />
-          ) : (
-            <NarrowVariantsTable rows={data} text={text} />
-          )}
-        </ErrorBoundary>
+        {isDefined(data) && (
+          <ErrorBoundary>
+            {breakpoints.sm ? (
+              <WideVariantsTable rows={data} text={text} />
+            ) : (
+              <NarrowVariantsTable rows={data} text={text} />
+            )}
+          </ErrorBoundary>
+        )}
+        {!isDefined(data) && <NoDataBox>{noDataMessage}</NoDataBox>}
       </Box>
       <Metadata {...metadata} isTileFooter />
     </Tile>
   );
 }
+
+const NoDataBox = styled.div(
+  css({
+    width: '100%',
+    display: 'flex',
+    height: '8em',
+    color: 'gray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  })
+);

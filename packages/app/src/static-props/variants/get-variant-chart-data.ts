@@ -1,13 +1,6 @@
-import {
-  assert,
-  Dictionary,
-  InVariants,
-  NlVariants,
-} from '@corona-dashboard/common';
+import { assert, Dictionary, NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
-import { SiteText } from '~/locale';
-import { colors } from '~/style/theme';
 
 export type VariantChartValue = Record<string, number> & {
   sample_size: number;
@@ -17,7 +10,6 @@ export type VariantChartValue = Record<string, number> & {
 
 const EMPTY_VALUES = {
   variantChart: null,
-  seriesConfig: null,
   dates: {
     date_of_insertion_unix: 0,
     date_start_unix: 0,
@@ -25,10 +17,7 @@ const EMPTY_VALUES = {
   },
 } as const;
 
-export function getVariantChartData(
-  nlVariants: NlVariants | InVariants | undefined,
-  variantTranslations: SiteText['covid_varianten']['varianten']
-) {
+export function getVariantChartData(nlVariants: NlVariants | undefined) {
   if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {
     return EMPTY_VALUES;
   }
@@ -58,15 +47,34 @@ export function getVariantChartData(
     return item;
   });
 
-  const variantNames = Object.keys(values[0])
+  return {
+    variantChart: values,
+    dates: {
+      date_of_insertion_unix: firstVariant.last_value.date_of_insertion_unix,
+      date_start_unix: firstVariant.last_value.date_start_unix,
+      date_end_unix: firstVariant.last_value.date_end_unix,
+    },
+  } as const;
+}
+
+export function getSeriesConfig(
+  value: Record<string, string | number> | undefined,
+  variantTranslations: Dictionary<string>,
+  colors: Dictionary<string>
+) {
+  if (!isDefined(value)) {
+    return { seriesConfig: null } as const;
+  }
+
+  const variantNames = Object.keys(value)
     .filter((x) => x.endsWith('_percentage'))
     .map((x) => x.slice(0, x.indexOf('_')));
 
   const seriesConfig = variantNames.map<
     LineSeriesDefinition<VariantChartValue>
   >((x) => {
-    const color = (colors.data.variants as Dictionary<string>)[x];
-    const label = (variantTranslations as Dictionary<string>)[x];
+    const color = colors[x];
+    const label = variantTranslations[x];
     assert(color, `No color specified for variant called "${x}"`);
     assert(label, `No label specified for variant called "${x}"`);
 
@@ -79,13 +87,5 @@ export function getVariantChartData(
     };
   });
 
-  return {
-    variantChart: values,
-    seriesConfig,
-    dates: {
-      date_of_insertion_unix: firstVariant.last_value.date_of_insertion_unix,
-      date_start_unix: firstVariant.last_value.date_start_unix,
-      date_end_unix: firstVariant.last_value.date_end_unix,
-    },
-  } as const;
+  return { seriesConfig };
 }
