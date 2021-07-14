@@ -66,8 +66,8 @@ export function getVariantChartData(inVariants: InVariants | undefined) {
       0
     );
 
-    item[`other_percentage`] = otherPercentage;
-    item[`other_occurrence`] = otherOccurrence;
+    item.other_percentage = otherPercentage;
+    item.other_occurrence = otherOccurrence;
 
     return item;
   });
