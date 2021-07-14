@@ -2,9 +2,9 @@ import { In, InVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { VariantChartValue } from './get-variant-chart-data';
 
-export function getInternationalVariantChartData(inData: Record<string, In>) {
+export function getInternationalVariantChartData(data: Record<string, In>) {
   const variantChartData = Object.fromEntries(
-    Object.entries(inData).map(([key, value]) => [
+    Object.entries(data).map(([key, value]) => [
       key,
       getVariantChartData(value.variants),
     ])
@@ -22,15 +22,15 @@ const EMPTY_VALUES = {
   },
 } as const;
 
-export function getVariantChartData(inVariants: InVariants | undefined) {
-  if (!isDefined(inVariants) || !isDefined(inVariants.values)) {
+export function getVariantChartData(variants: InVariants | undefined) {
+  if (!isDefined(variants) || !isDefined(variants.values)) {
     return EMPTY_VALUES;
   }
 
-  const variantsOfConcern = inVariants.values.filter(
+  const variantsOfConcern = variants.values.filter(
     (x) => x.last_value.is_variant_of_concern
   );
-  const variantsOfInterest = inVariants.values.filter(
+  const variantsOfInterest = variants.values.filter(
     (x) => !x.last_value.is_variant_of_concern
   );
 

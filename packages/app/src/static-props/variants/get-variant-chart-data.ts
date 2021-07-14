@@ -17,12 +17,12 @@ const EMPTY_VALUES = {
   },
 } as const;
 
-export function getVariantChartData(nlVariants: NlVariants | undefined) {
-  if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {
+export function getVariantChartData(variants: NlVariants | undefined) {
+  if (!isDefined(variants) || !isDefined(variants.values)) {
     return EMPTY_VALUES;
   }
 
-  const variantsOfConcern = nlVariants.values.filter(
+  const variantsOfConcern = variants.values.filter(
     (x) => x.last_value.is_variant_of_concern
   );
 

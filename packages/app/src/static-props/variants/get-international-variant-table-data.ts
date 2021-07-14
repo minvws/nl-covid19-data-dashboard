@@ -3,11 +3,11 @@ import { SiteText } from '~/locale';
 import { getVariantTableData } from './get-variant-table-data';
 
 export function getInternationalVariantTableData(
-  inData: Record<string, In>,
+  data: Record<string, In>,
   variantTranslations: SiteText['covid_varianten']['varianten']
 ) {
   const variantTableData = Object.fromEntries(
-    Object.entries(inData).map(([key, value]) => [
+    Object.entries(data).map(([key, value]) => [
       key,
       getVariantTableData(
         value.variants,

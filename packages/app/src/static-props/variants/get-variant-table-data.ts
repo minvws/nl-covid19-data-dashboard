@@ -23,11 +23,11 @@ export type VariantRow = {
 export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
 export function getVariantTableData(
-  nlVariants: NlVariants | InVariants | undefined,
+  variants: NlVariants | InVariants | undefined,
   namedDifference: NlNamedDifference,
   countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
 ) {
-  if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {
+  if (!isDefined(variants) || !isDefined(variants.values)) {
     return {
       variantTable: [] as VariantRow[],
       dates: null,
@@ -55,7 +55,7 @@ export function getVariantTableData(
     return color;
   }
 
-  const firstLastValue = first(nlVariants.values);
+  const firstLastValue = first(variants.values);
   const dates = {
     date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
     date_start_unix: firstLastValue?.last_value.date_start_unix ?? 0,
@@ -64,7 +64,7 @@ export function getVariantTableData(
   };
   const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
 
-  const variantTable = nlVariants.values
+  const variantTable = variants.values
     .map<VariantRow>((variant) => ({
       variant: variant.name,
       countryOfOrigin: findCountryOfOrigin(variant.name),
