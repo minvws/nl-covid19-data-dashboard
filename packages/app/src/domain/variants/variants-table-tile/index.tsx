@@ -46,26 +46,28 @@ export function VariantsTableTile({
     text: string;
   };
   sampleSize: number;
-  dates: {
+  dates?: {
     date_start_unix: number;
     date_end_unix: number;
     date_of_insertion_unix: number;
-  };
+  } | null;
   children?: ReactNode | null;
 }) {
   const { formatDateSpan } = useIntl();
 
   const breakpoints = useBreakpoints();
 
-  const metadata: MetadataProps = {
-    date: [dates.date_start_unix, dates.date_end_unix],
-    source,
-    obtained: dates.date_of_insertion_unix,
-  };
+  const metadata: MetadataProps | undefined = dates
+    ? {
+        date: [dates.date_start_unix, dates.date_end_unix],
+        source,
+        obtained: dates.date_of_insertion_unix,
+      }
+    : undefined;
 
   const [date_start, date_end] = formatDateSpan(
-    { seconds: dates.date_start_unix },
-    { seconds: dates.date_end_unix }
+    { seconds: dates?.date_start_unix ?? 0 },
+    { seconds: dates?.date_end_unix ?? 0 }
   );
 
   return (
@@ -95,7 +97,7 @@ export function VariantsTableTile({
         )}
         {!isDefined(data) && <NoDataBox>{noDataMessage}</NoDataBox>}
       </Box>
-      <Metadata {...metadata} isTileFooter />
+      {isDefined(metadata) && <Metadata {...metadata} isTileFooter />}
     </Tile>
   );
 }

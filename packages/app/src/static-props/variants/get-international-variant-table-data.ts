@@ -13,7 +13,7 @@ export function getInternationalVariantTableData(
         value.variants,
         value.named_difference,
         variantTranslations
-      ).variantTable,
+      ),
     ])
   );
 

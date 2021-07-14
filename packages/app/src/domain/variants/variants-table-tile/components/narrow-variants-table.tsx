@@ -19,6 +19,7 @@ import {
   VariantDifference,
   VariantNameCell,
 } from '.';
+import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
 
 type NarrowVariantsTableProps = {
   rows: VariantRow[];
@@ -55,6 +56,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
   const { row, text } = props;
   const [isOpen, setIsOpen] = useState(false);
   const { ref, height: contentHeight } = useResizeObserver();
+
   const columnNames = text.kolommen;
 
   const chevronRef = useRef<HTMLButtonElement>();
@@ -65,10 +67,22 @@ function MobileVariantRow(props: MobileVariantRowProps) {
     }
   }
 
+  const [, variantDescription] = useVariantNameAndDescription(
+    row.variant,
+    text.anderen_tooltip,
+    row.countryOfOrigin
+  );
+
   return (
     <>
       <tr onClick={handleRowClick}>
-        <VariantNameCell variant={row.variant} text={text} mobile narrow />
+        <VariantNameCell
+          variant={row.variant}
+          text={text}
+          mobile
+          narrow
+          countryOfOrigin={row.countryOfOrigin}
+        />
         <Cell mobile>
           <PercentageBarWithNumber
             percentage={row.percentage}
@@ -91,6 +105,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           <Panel
             style={{
               height: isOpen ? contentHeight : 0,
+              marginBottom: isOpen ? '1rem' : 0,
             }}
           >
             <div ref={ref}>
@@ -98,9 +113,8 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                 <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
                 <VariantDifference value={row.difference} />
               </Box>
-              <Box>
-                {columnNames.eerst_gevonden}:{' '}
-                <InlineText>{row.countryOfOrigin}</InlineText>
+              <Box css={css({ color: 'silver', fontSize: 1, mt: 2 })}>
+                {variantDescription}
               </Box>
             </div>
           </Panel>

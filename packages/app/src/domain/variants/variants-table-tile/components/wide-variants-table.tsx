@@ -1,5 +1,4 @@
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
 import { TableText } from '~/domain/variants/variants-table-tile';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import {
@@ -11,12 +10,7 @@ import {
   VariantNameCell,
 } from '.';
 
-const columnKeys = [
-  'variant_titel',
-  'eerst_gevonden',
-  'percentage',
-  'vorige_meeting',
-] as const;
+const columnKeys = ['variant_titel', 'percentage', 'vorige_meeting'] as const;
 
 type WideVariantsTableProps = {
   rows: VariantRow[];
@@ -40,10 +34,11 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
       <tbody>
         {rows.map((row) => (
           <tr key={row.variant}>
-            <VariantNameCell variant={row.variant} text={text} />
-            <Cell>
-              <InlineText>{row.countryOfOrigin}</InlineText>
-            </Cell>
+            <VariantNameCell
+              variant={row.variant}
+              text={text}
+              countryOfOrigin={row.countryOfOrigin}
+            />
             <Cell>
               <Box maxWidth="20em">
                 <PercentageBarWithNumber

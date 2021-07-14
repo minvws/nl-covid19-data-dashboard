@@ -24,7 +24,7 @@ import {
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 import { getInternationalVariantChartData } from '~/static-props/variants/get-international-variant-chart-data';
 import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
-import { VariantRow } from '~/static-props/variants/get-variant-table-data';
+import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
@@ -74,14 +74,8 @@ export const getStaticProps = createGetStaticProps(
 export default function VariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const {
-    lastGenerated,
-    content,
-    variantChartData,
-    variantTableData,
-    countryOptions,
-  } = props;
-  const [tableData, setTableData] = useState<VariantRow[] | undefined>();
+  const { lastGenerated, content, variantTableData, countryOptions } = props;
+  const [tableData, setTableData] = useState<VariantTableData | undefined>();
   const [selectedCountryCode, setSelectedCountryCode] = useState<
     string | undefined
   >();
@@ -120,14 +114,9 @@ export default function VariantenPage(
             noDataMessage={text.selecteer_een_land_omschrijving}
             source={text.bronnen.rivm}
             text={tableText}
-            data={tableData}
-            sampleSize={100}
-            dates={{
-              // @TODO use correct dates
-              date_end_unix: 0,
-              date_of_insertion_unix: 0,
-              date_start_unix: 0,
-            }}
+            data={tableData?.variantTable}
+            sampleSize={tableData?.sampleSize ?? 0}
+            dates={tableData?.dates}
           >
             <Box alignSelf="flex-start" my={3}>
               <Select
