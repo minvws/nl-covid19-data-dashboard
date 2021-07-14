@@ -2,6 +2,7 @@ import {
   NlVaccineCoveragePerAgeGroupValue,
   NlVaccineCoverageValue,
 } from '@corona-dashboard/common';
+import { isEmpty } from 'lodash';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -13,6 +14,7 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
@@ -107,6 +109,14 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
+          {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
+            <WarningTile
+              isFullWidth
+              message={text.belangrijk_bericht}
+              variant="emphasis"
+            />
+          )}
+
           <VaccinePageIntroduction
             data={data}
             pageInfo={page.pageInfo}
