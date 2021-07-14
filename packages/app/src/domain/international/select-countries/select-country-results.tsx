@@ -45,6 +45,7 @@ export function SelectCountriesResults() {
                     src={`/icons/flags/${x.id.toLowerCase()}.svg`}
                     width="17"
                     height="13"
+                    alt=""
                     css={css({
                       mr: 2,
                     })}
