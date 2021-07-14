@@ -54,6 +54,7 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(
     'vaccine_stock',
     'vaccine_delivery_per_supplier',
+    'vaccine_coverage_per_age_group',
     'vaccine_vaccinated_or_support',
     'vaccine_administered_total',
     'vaccine_administered_planned',
@@ -88,17 +89,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     deliveryAndAdministration,
   } = props;
 
-  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgegroup');
+  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
 
   const { siteText } = useIntl();
 
   const text = siteText.vaccinaties;
 
   const { page } = content;
-
-  // TODO: put this back this when data is available
-  //const {vaccine_coverage_per_age_group} = data;
-  const vaccine_coverage_per_age_group = mockCoverageData();
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -209,7 +206,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 {siteText.vaccinaties.vaccination_coverage.toelichting}
               </Text>
               <VaccineCoveragePerAgeGroup
-                values={vaccine_coverage_per_age_group.values}
+                values={
+                  data.vaccine_coverage_per_age_group
+                    ? data.vaccine_coverage_per_age_group.values
+                    : mockCoverageData().values
+                }
               />
             </Tile>
           ) : null}

@@ -1,60 +1,34 @@
 import css from '@styled-system/css';
-import { useMemo } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { useDynamicScale } from '~/utils/use-dynamic-scale';
+
+export const partialColor = '#239BE6';
+export const fullColor = '#005083';
 
 export function CoverageProgressBar(props: {
-  partiallyVaccinated: number;
-  fullyVaccinated: number;
-  fullyPercentage: number;
-  partiallyPercentage: number;
+  partialCount: number;
+  partialPercentage: number;
+  fullCount: number;
+  fullPercentage: number;
   total: number;
+  isLarge: boolean;
 }) {
   const {
-    partiallyVaccinated,
-    fullyVaccinated,
-    fullyPercentage,
-    partiallyPercentage,
-    total,
+    partialCount,
+    fullCount,
+    fullPercentage,
+    partialPercentage,
+    isLarge,
   } = props;
-  const { siteText, formatPercentage, formatNumber } = useIntl();
-  const { partially: partialLabel, fully: fullyLabel } =
+  const { siteText } = useIntl();
+  const { partially: partialLabel, fully: fullLabel } =
     siteText.vaccinaties.vaccination_coverage;
-  const maxValue = Math.max(partiallyVaccinated, fullyVaccinated);
-  const scale = useDynamicScale(maxValue, 0, total);
   const breakpoints = useBreakpoints(true);
-  const barHeight = breakpoints.md ? 16 : 11;
 
-  // sort shortest bar on top
-  const barData = useMemo(() => {
-    return [
-      {
-        percentage: fullyPercentage,
-        value: fullyVaccinated,
-        label: fullyLabel,
-        color: '#005083',
-      },
-      {
-        percentage: partiallyPercentage,
-        value: partiallyVaccinated,
-        label: partialLabel,
-        color: '#239BE6',
-      },
-    ]
-      .sort((a, b) => b.value - a.value)
-      .filter((x) => x.value > 0);
-  }, [
-    fullyPercentage,
-    fullyVaccinated,
-    fullyLabel,
-    partiallyPercentage,
-    partiallyVaccinated,
-    partialLabel,
-  ]);
+  const barHeight = breakpoints.md ? (isLarge ? 26 : 16) : 11;
 
   return (
     <Box width="100%" mt={{ _: 4, md: 0 }}>
@@ -76,59 +50,53 @@ export function CoverageProgressBar(props: {
               height="3"
               fill="#C1C1C1"
             />
-            {barData.map((data) => (
-              <rect
-                key={data.color}
-                x={0}
-                y={0}
-                width={`${data.percentage}%`}
-                height={barHeight}
-                fill={data.color}
-              />
-            ))}
-            {barData.length > 1 && (
-              <rect
-                x={`${barData[barData.length - 1].percentage}%`}
-                y={0}
-                width={3}
-                height={barHeight}
-                fill="white"
-              />
-            )}
-          </g>
-          <g>
+
             <rect
-              x={`${scale(maxValue)}%`}
-              y={barHeight - (barHeight + 7)}
-              width={7}
-              height={barHeight + 7}
-              fill="black"
+              x={0}
+              y={0}
+              width={`${fullPercentage}%`}
+              height={barHeight}
+              fill={fullColor}
+            />
+            <rect
+              x={`${fullPercentage}%`}
+              y={0}
+              width={`${partialPercentage}%`}
+              height={barHeight}
+              fill={partialColor}
+            />
+
+            <rect
+              /**
+               * Render a white divider of 2px which covers 1px off each bar.
+               * Calc can not be used on the x property because it will not be
+               * re-evaluated when container is resized, so we use CSS transform
+               * instead.
+               */
+              style={{
+                transform: `translate(calc(${fullPercentage}% - 1px), 0)`,
+              }}
+              y={0}
+              width={2}
+              height={barHeight}
+              fill="white"
             />
           </g>
         </svg>
       </Box>
-      <Box display="flex">
-        {[...barData].reverse().map((data, index) => (
-          <Box
-            display="flex"
-            alignItems="stretch"
-            ml={index === 0 ? 0 : 2}
-            key={data.color}
-          >
-            <Box>
-              <ColorIndicator color={data.color} />
-            </Box>
-            <Box>
-              <InlineText fontSize={{ _: 1, md: 2 }}>
-                {formatPercentage(data.percentage, {
-                  maximumFractionDigits: 1,
-                })}
-                {'% '}
-                {data.label} ({formatNumber(data.value)})
-              </InlineText>
-            </Box>
-          </Box>
-        ))}
+      <Box display="flex" spacing={2} spacingHorizontal>
+        <LegendItem
+          color={fullColor}
+          percentage={fullPercentage}
+          label={fullLabel}
+          count={fullCount}
+        />
+        <LegendItem
+          color={partialColor}
+          percentage={partialPercentage}
+          label={partialLabel}
+          count={partialCount}
+        />
       </Box>
     </Box>
   );
@@ -146,3 +114,29 @@ const ColorIndicator = styled.span<{
   margin-right: 0.2em;
   flex-shrink: 0;
 `;
+
+function LegendItem({
+  color,
+  percentage,
+  count,
+  label,
+}: {
+  color: string;
+  percentage: number;
+  count: number;
+  label: string;
+}) {
+  const { formatPercentage, formatNumber } = useIntl();
+  return (
+    <Box display="flex">
+      <Box>
+        <ColorIndicator color={color} />
+      </Box>
+      <InlineText fontSize={{ _: 1, md: 2 }}>
+        {`${formatPercentage(percentage, {
+          maximumFractionDigits: 1,
+        })}% ${label} (${formatNumber(count)})`}
+      </InlineText>
+    </Box>
+  );
+}

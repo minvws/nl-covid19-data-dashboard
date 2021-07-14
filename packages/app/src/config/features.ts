@@ -2,7 +2,7 @@ import { Feature } from '@corona-dashboard/common';
 
 export const features: Feature[] = [
   {
-    name: 'vaccinationPerAgegroup',
+    name: 'vaccinationPerAgeGroup',
     isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
