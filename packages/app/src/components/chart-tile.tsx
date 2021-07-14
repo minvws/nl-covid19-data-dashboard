@@ -67,7 +67,7 @@ interface ChartTileHeaderProps {
   children?: ReactNode;
 }
 
-function ChartTileHeader({
+export function ChartTileHeader({
   title,
   description,
   children,
