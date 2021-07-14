@@ -14,10 +14,11 @@ type CoverageRowProps = {
 export function CoverageRow(props: CoverageRowProps) {
   const breakpoints = useBreakpoints(true);
 
-  if (!breakpoints.md) {
-    return <MobileCoverageRow {...props} />;
-  }
-  return <DesktopCoverageRow {...props} />;
+  return breakpoints.md ? (
+    <DesktopCoverageRow {...props} />
+  ) : (
+    <MobileCoverageRow {...props} />
+  );
 }
 
 function MobileCoverageRow(props: CoverageRowProps) {
