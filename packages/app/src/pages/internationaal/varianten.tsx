@@ -154,6 +154,7 @@ export default function VariantenPage(
           </VariantsTableTile>
 
           <VariantsStackedAreaTile
+            noDataMessage={text.selecteer_een_land_omschrijving}
             values={chartData?.variantChart}
             metadata={{
               dataSources: [text.bronnen.rivm],

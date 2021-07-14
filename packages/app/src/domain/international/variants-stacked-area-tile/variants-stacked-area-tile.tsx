@@ -1,5 +1,7 @@
 import { Dictionary } from '@corona-dashboard/common';
-import { ReactNode } from 'react';
+import css from '@styled-system/css';
+import { ReactNode, useMemo } from 'react';
+import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend } from '~/components/interactive-legend';
@@ -9,87 +11,82 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
 
-interface VariantsStackedAreaTile {
+type VariantsStackedAreaTileProps = {
   values?: VariantChartValue[] | null;
   metadata: MetadataProps;
   children?: ReactNode;
-}
+  noDataMessage?: ReactNode;
+};
+
+const alwayEnabled: string[] = [];
 
 export function VariantsStackedAreaTile({
   values,
   metadata,
   children = null,
-}: VariantsStackedAreaTile) {
+  noDataMessage = '',
+}: VariantsStackedAreaTileProps) {
   const { siteText } = useIntl();
-  const { list, toggle, clear } = useList<string>();
-
-  if (!isPresent(values)) {
-    return null;
-  }
-
   const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
 
-  const baseVariantsFiltered = Object.keys(values[0]).filter(
-    (x) => x.endsWith('_percentage') && x !== 'other_percentage'
+  if (!isPresent(values)) {
+    return (
+      <ChartTile
+        title={text.titel}
+        description={text.toelichting}
+        metadata={metadata}
+      >
+        {children}
+        <NoDataBox>{noDataMessage}</NoDataBox>
+      </ChartTile>
+    );
+  }
+  return (
+    <VariantStackedAreaTileWithData values={values} metadata={metadata}>
+      {children}
+    </VariantStackedAreaTileWithData>
   );
+}
 
-  /* Enrich config with dynamic data / locale */
-  const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
-    baseVariantsFiltered.map((variantKey) => {
-      const color = (colors.data.variants as Dictionary<string>)[
-        variantKey.split('_')[0]
-      ];
+type VariantStackedAreaTileWithDataProps = {
+  values: VariantChartValue[];
+  metadata: MetadataProps;
+  children?: ReactNode;
+};
 
-      assert(color, `No color found found for variant: ${variantKey}`);
+function VariantStackedAreaTileWithData({
+  values,
+  metadata,
+  children = null,
+}: VariantStackedAreaTileWithDataProps) {
+  const { siteText } = useIntl();
+  const { list, toggle, clear } = useList<string>(alwayEnabled);
 
-      return {
-        type: 'gapped-stacked-area',
-        metricProperty: variantKey as keyof VariantChartValue,
-        color,
-        label: variantKey,
-        shape: 'square',
-        fillOpacity: 1,
-      };
-    });
-
-  const otherConfig = {
-    type: 'gapped-stacked-area',
-    metricProperty: 'other_percentage',
-    label: text.tooltip_labels.other_percentage,
-    fillOpacity: 1,
-    shape: 'square',
-    color: colors.lightGray,
-  } as GappedStackedAreaSeriesDefinition<VariantChartValue>;
-
-  /* Filter for each config group */
-
-  /**
-   * Chart:
-   * - when nothing selected: all items
-   * - otherwise: selected items
-   */
-  const alwayEnabled: keyof VariantChartValue | [] = [];
-  const compareList = list.concat(alwayEnabled);
-
-  const chartConfig = [otherConfig, ...seriesConfig].filter(
-    (item) =>
-      compareList.includes(item.metricProperty) ||
-      compareList.length === alwayEnabled.length
+  const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
+  const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
+    text,
+    values
   );
-
-  const underReportedLegendItem: LegendItem = {
-    shape: 'square',
-    color: colors.data.underReported,
-    label: text.legend_niet_compleet_label,
-  };
+  const filteredConfig = useFilteredSeriesConfig(
+    seriesConfig,
+    otherConfig,
+    list
+  );
 
   /* Static legend contains only the inaccurate item */
-  const staticLegendItems: LegendItem[] = [underReportedLegendItem];
+  const staticLegendItems: LegendItem[] = [
+    {
+      shape: 'square',
+      color: colors.data.underReported,
+      label: text.legend_niet_compleet_label,
+    },
+  ];
 
   return (
     <ChartTile
@@ -103,7 +100,7 @@ export function VariantsStackedAreaTile({
           {children}
           <InteractiveLegend
             helpText={text.legend_help_tekst}
-            selectOptions={[...seriesConfig, otherConfig]}
+            selectOptions={selectOptions}
             selection={list}
             onToggleItem={toggle}
             onReset={clear}
@@ -114,7 +111,7 @@ export function VariantsStackedAreaTile({
             }}
             values={values}
             timeframe={timeframe}
-            seriesConfig={chartConfig}
+            seriesConfig={filteredConfig}
             disableLegend
             dataOptions={{
               isPercentage: true,
@@ -141,3 +138,71 @@ export function VariantsStackedAreaTile({
     </ChartTile>
   );
 }
+
+function useFilteredSeriesConfig(
+  seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[],
+  otherConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>,
+  compareList: (keyof VariantChartValue)[]
+) {
+  return useMemo(() => {
+    return [otherConfig, ...seriesConfig].filter(
+      (item) =>
+        compareList.includes(item.metricProperty) ||
+        compareList.length === alwayEnabled.length
+    );
+  }, [seriesConfig, otherConfig, compareList]);
+}
+
+function useSeriesConfig(
+  text: SiteText['internationaal_varianten']['varianten_over_tijd_grafiek'],
+  values: VariantChartValue[]
+) {
+  return useMemo(() => {
+    const baseVariantsFiltered = Object.keys(values[0]).filter(
+      (x) => x.endsWith('_percentage') && x !== 'other_percentage'
+    );
+
+    /* Enrich config with dynamic data / locale */
+    const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
+      baseVariantsFiltered.map((variantKey) => {
+        const color = (colors.data.variants as Dictionary<string>)[
+          variantKey.split('_')[0]
+        ];
+
+        assert(color, `No color found found for variant: ${variantKey}`);
+
+        return {
+          type: 'gapped-stacked-area',
+          metricProperty: variantKey as keyof VariantChartValue,
+          color,
+          label: variantKey,
+          shape: 'square',
+          fillOpacity: 1,
+        };
+      });
+
+    const otherConfig = {
+      type: 'gapped-stacked-area',
+      metricProperty: 'other_percentage',
+      label: text.tooltip_labels.other_percentage,
+      fillOpacity: 1,
+      shape: 'square',
+      color: colors.lightGray,
+    } as GappedStackedAreaSeriesDefinition<VariantChartValue>;
+
+    const selectOptions = [...seriesConfig, otherConfig];
+
+    return [seriesConfig, otherConfig, selectOptions] as const;
+  }, [values, text]);
+}
+
+const NoDataBox = styled.div(
+  css({
+    width: '100%',
+    display: 'flex',
+    height: '8em',
+    color: 'gray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  })
+);
