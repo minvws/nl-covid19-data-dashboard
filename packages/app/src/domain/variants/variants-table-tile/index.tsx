@@ -38,7 +38,7 @@ export function VariantsTableTile({
   children = null,
 }: {
   text: TableText;
-  noDataMessage?: string;
+  noDataMessage?: ReactNode;
   data: VariantRow[] | undefined;
   source: {
     download: string;
