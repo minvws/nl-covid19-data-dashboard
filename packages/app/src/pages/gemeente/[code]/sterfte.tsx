@@ -30,10 +30,10 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('deceasedPage', locale);
   })
@@ -41,9 +41,9 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    selectedGmData: data,
+    sideBarData,
     municipalityName,
-    selectedGmData: { deceased_rivm: dataRivm, difference },
+    selectedGmData: { deceased_rivm: dataRivm, difference, code },
     content,
     lastGenerated,
   } = props;
@@ -68,7 +68,9 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
+        code={code}
+        difference={difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >
@@ -135,6 +137,9 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'deceased_over_time_chart',
+                }}
                 values={dataRivm.values}
                 timeframe={timeframe}
                 seriesConfig={[

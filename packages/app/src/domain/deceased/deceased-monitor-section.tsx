@@ -1,9 +1,9 @@
-import {
-  NationalDeceasedCbs,
-  RegionalDeceasedCbs,
-} from '@corona-dashboard/common';
+import { NlDeceasedCbs, VrDeceasedCbs } from '@corona-dashboard/common';
 import { AnchorTile } from '~/components/anchor-tile';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
+import { Markdown } from '~/components/markdown';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -11,15 +11,21 @@ import { colors } from '~/style/theme';
 export function DeceasedMonitorSection({
   data,
   showDataMessage,
+  showCauseMessage,
+  articles,
 }: {
-  data: NationalDeceasedCbs | RegionalDeceasedCbs;
+  data: NlDeceasedCbs | VrDeceasedCbs;
   showDataMessage?: boolean;
+  showCauseMessage?: boolean;
+  articles?: ArticleSummary[];
 }) {
   const { siteText } = useIntl();
   const text = siteText.section_sterftemonitor;
 
   return (
     <>
+      {articles && <ArticleStrip articles={articles} />}
+
       {showDataMessage && (
         <AnchorTile
           title={text.cbs_message.title}
@@ -37,9 +43,11 @@ export function DeceasedMonitorSection({
         description={text.deceased_monitor_chart_description}
       >
         <TimeSeriesChart
+          accessibility={{
+            key: 'deceased_monitor',
+          }}
           tooltipTitle={text.deceased_monitor_chart_title}
           values={data.values}
-          ariaLabelledBy=""
           seriesConfig={[
             {
               type: 'line',
@@ -68,6 +76,17 @@ export function DeceasedMonitorSection({
           ]}
         />
       </ChartTile>
+
+      {showCauseMessage && (
+        <AnchorTile
+          title={text.cause_message.title}
+          label={text.cause_message.link.text}
+          href={text.cause_message.link.href}
+          external
+        >
+          <Markdown content={text.cause_message.message}></Markdown>
+        </AnchorTile>
+      )}
     </>
   );
 }

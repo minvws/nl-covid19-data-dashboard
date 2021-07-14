@@ -7,7 +7,7 @@ import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
 import { useIntl } from '~/intl';
-import { AllLanguages } from '~/locale';
+import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import {
   DataScope,
@@ -19,7 +19,7 @@ import { Box } from '../base';
 interface SidebarBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof AllLanguages;
+  localeTextKey: keyof SiteText;
   metricName: MetricKeys<T>;
   metricProperty: string;
 }
@@ -40,7 +40,7 @@ export function SidebarBarScale<T>({
    * a certain metric but here we don't have that type as input.
    */
   const lastValue = metricContainsPartialData(metricName as string)
-    ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
+    ? getLastFilledValue(data[metricName] as unknown as Metric<unknown>)
     : get(data, [metricName as string, 'last_value']);
   const propertyValue = lastValue && lastValue[metricProperty];
 
@@ -68,7 +68,7 @@ export function SidebarBarScale<T>({
 
   const config = getMetricConfig(
     scope,
-    (metricName as unknown) as string,
+    metricName as unknown as string,
     metricProperty
   );
 

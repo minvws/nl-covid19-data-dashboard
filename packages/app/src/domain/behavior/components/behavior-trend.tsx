@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import Gelijk from '~/assets/gelijk.svg';
 import PijlOmhoog from '~/assets/pijl-omhoog.svg';
 import PijlOmlaag from '~/assets/pijl-omlaag.svg';
-import { BehaviorTrendType } from '../behavior-types';
+import { BehaviorTrendType } from '../logic/behavior-types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
 interface BehaviorTrendProps {
   trend: BehaviorTrendType | undefined;
+  color?: string;
 }
 
 const Trend = styled.span((a) =>
@@ -26,7 +27,7 @@ const Trend = styled.span((a) =>
   })
 );
 
-export function BehaviorTrend({ trend }: BehaviorTrendProps) {
+export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
 
@@ -35,7 +36,7 @@ export function BehaviorTrend({ trend }: BehaviorTrendProps) {
   }
   if (trend === 'up') {
     return (
-      <Trend>
+      <Trend color={color}>
         <PijlOmhoog />
         {commonText.basisregels.trend_hoger}
       </Trend>
@@ -43,7 +44,7 @@ export function BehaviorTrend({ trend }: BehaviorTrendProps) {
   }
   if (trend === 'down') {
     return (
-      <Trend>
+      <Trend color={color}>
         <PijlOmlaag />
         {commonText.basisregels.trend_lager}
       </Trend>

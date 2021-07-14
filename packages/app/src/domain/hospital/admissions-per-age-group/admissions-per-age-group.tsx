@@ -2,6 +2,7 @@ import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import {
   InteractiveLegend,
   SelectOption,
@@ -24,11 +25,17 @@ type NLHospitalAdmissionPerAgeGroupValue =
 interface AdmissionsPerAgeGroup {
   values: NLHospitalAdmissionPerAgeGroupValue[];
   timeframe: 'all' | '5weeks';
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
 }
 
 export function AdmissionsPerAgeGroup({
   values,
   timeframe,
+  accessibility,
 }: AdmissionsPerAgeGroup) {
   const { siteText } = useIntl();
   const { list, toggle, clear } = useList<string>();
@@ -40,8 +47,8 @@ export function AdmissionsPerAgeGroup({
   const alwayEnabled = ['admissions_overall_per_million'];
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] = BASE_SERIES_CONFIG.map(
-    (baseAgeGroup) => {
+  const seriesConfig: LineSeriesDefinition<NLHospitalAdmissionPerAgeGroupValue>[] =
+    BASE_SERIES_CONFIG.map((baseAgeGroup) => {
       return {
         ...baseAgeGroup,
         type: 'line',
@@ -51,8 +58,7 @@ export function AdmissionsPerAgeGroup({
             ? text.legend[baseAgeGroup.metricProperty]
             : baseAgeGroup.metricProperty,
       };
-    }
-  );
+    });
 
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
@@ -102,6 +108,7 @@ export function AdmissionsPerAgeGroup({
         onReset={clear}
       />
       <TimeSeriesChart
+        accessibility={accessibility}
         values={values}
         timeframe={timeframe}
         seriesConfig={chartConfig}

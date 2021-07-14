@@ -1,16 +1,19 @@
+import { MarginBottomProps } from 'styled-system';
+import { ExternalLink } from '~/components/external-link';
+import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
-import { Text } from './typography';
-import { useIntl } from '~/intl';
-import { ExternalLink } from '~/components/external-link';
+import { InlineText, Text } from './typography';
 
-export interface MetadataProps {
+type source = {
+  text: string;
+  href: string;
+  aria_text?: string;
+};
+export interface MetadataProps extends MarginBottomProps {
   date?: number | [number, number];
-  source?: {
-    text: string;
-    href: string;
-    aria_text?: string;
-  };
+  source?: source;
+  dataSources?: source[];
   obtained?: number;
   isTileFooter?: boolean;
   datumsText?: string;
@@ -22,6 +25,8 @@ export function Metadata({
   obtained,
   isTileFooter,
   datumsText,
+  mb,
+  dataSources,
 }: MetadataProps) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -49,7 +54,7 @@ export function Metadata({
       )}
 
       {isTileFooter && (
-        <Box as="footer" mt={3} mb={{ _: 0, sm: -3 }} gridArea="metadata">
+        <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">
           <Text my={0} color="annotation" fontSize={1}>
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {
@@ -67,9 +72,21 @@ export function Metadata({
                     }
                   )}`}
                 {dateString && source ? ' · ' : null}
-                {source
-                  ? `${siteText.common.metadata.source}: ${source.text}`
-                  : null}
+
+                {source ? (
+                  `${siteText.common.metadata.source}: ${source.text}`
+                ) : dataSources ? (
+                  <>
+                    {` • ${siteText.common.metadata.source}: `}
+                    {dataSources.map((item, index) => (
+                      <InlineText key={index}>
+                        {index > 0 &&
+                          (index !== dataSources.length - 1 ? ' , ' : ' & ')}
+                        {item.text}
+                      </InlineText>
+                    ))}
+                  </>
+                ) : null}
               </>
             )}
           </Text>

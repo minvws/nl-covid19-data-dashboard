@@ -1,15 +1,17 @@
 import {
-  RegionsNursingHome,
-  SafetyRegionProperties,
+  VrCollectionNursingHome,
+  VrProperties
 } from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -20,14 +22,16 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -38,11 +42,17 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(),
   createGetChoroplethData({
     vr: ({ nursing_home }) => ({ nursing_home }),
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(() => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('nursingHomePage', locale);
   })
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedNlData: data, choropleth, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, lastGenerated, content } = props;
   const nursinghomeDataLastValue = data.nursing_home.last_value;
   const underReportedDateStart = getBoundaryDateStartUnix(
     data.nursing_home.values,
@@ -84,6 +94,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             reference={positiveTestedPeopleText.reference}
           />
 
+          {content.articles && <ArticleStrip articles={content.articles} />}
+
           <TwoKpiSection>
             <KpiTile
               title={positiveTestedPeopleText.barscale_titel}
@@ -109,6 +121,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_confirmed_cases_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -217,13 +232,16 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
-            <SafetyRegionChoropleth
+            <VrChoropleth
+              accessibility={{
+                key: 'nursing_home_infected_people_choropleth',
+              }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.verpleeghuiszorg}
               metricName="nursing_home"
               metricProperty="infected_locations_percentage"
               tooltipContent={(
-                context: SafetyRegionProperties & RegionsNursingHome
+                context: VrProperties & VrCollectionNursingHome
               ) => <InfectedLocationsRegionalTooltip context={context} />}
             />
           </ChoroplethTile>
@@ -236,6 +254,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_infected_locations_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -292,6 +313,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_deceased_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[

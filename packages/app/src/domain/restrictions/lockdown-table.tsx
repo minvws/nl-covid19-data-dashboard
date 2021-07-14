@@ -7,7 +7,7 @@ import { restrictionIcons } from './restriction-icons';
 import { LockdownData } from '~/types/cms';
 import { css } from '@styled-system/css';
 
-export type LockdownTableProps = {
+type LockdownTableProps = {
   data: LockdownData;
 };
 
@@ -29,7 +29,6 @@ export function LockdownTable(props: LockdownTableProps) {
 }
 
 /**
- *
  * This function returns a css filter to change an image from black to the desired escalation level color
  * We can't use fill or currentColor because we're loading the SVG's as images to save on bundle size
  * The colors are pre-calculated though this URL: https://codepen.io/sosuke/pen/Pjoqqp
@@ -49,7 +48,7 @@ function getEscalationFilter(escalationLevel: 1 | 2 | 3 | 4) {
     case 4:
       return 'invert(9%) sepia(48%) saturate(6614%) hue-rotate(322deg) brightness(85%) contrast(103%)';
     default:
-      return undefined;
+      return;
   }
 }
 

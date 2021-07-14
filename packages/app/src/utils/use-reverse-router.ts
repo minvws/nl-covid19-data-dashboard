@@ -12,6 +12,20 @@ export function useReverseRouter() {
         gm: (code: string) => `/actueel/gemeente/${code}`,
       },
 
+      algemeen: {
+        over: () => '/over',
+        veelgesteldeVragen: () => '/veelgestelde-vragen',
+        verantwoording: () => '/verantwoording',
+        overRisiconiveaus: () => '/over-risiconiveaus',
+        toegankelijkheid: () => '/toegankelijkheid',
+      },
+
+      in: {
+        index: () => reverseRouter.in.positiefGetesteMensen() + openMenuSuffix,
+        positiefGetesteMensen: () => `/internationaal/positief-geteste-mensen`,
+        varianten: () => `/internationaal/varianten`,
+      },
+
       nl: {
         index: () => reverseRouter.nl.vaccinaties() + openMenuSuffix,
         vaccinaties: () => `/landelijk/vaccinaties`,
@@ -29,19 +43,8 @@ export function useReverseRouter() {
         gedrag: () => `/landelijk/gedrag`,
         maatregelen: () => `/landelijk/maatregelen`,
         coronamelder: () => `/landelijk/coronamelder`,
-      },
-
-      gm: {
-        index: (code?: string) =>
-          code
-            ? reverseRouter.gm.positiefGetesteMensen(code) + openMenuSuffix
-            : `/gemeente`,
-        positiefGetesteMensen: (code: string) =>
-          `/gemeente/${code}/positief-geteste-mensen`,
-        sterfte: (code: string) => `/gemeente/${code}/sterfte`,
-        ziekenhuisopnames: (code: string) =>
-          `/gemeente/${code}/ziekenhuis-opnames`,
-        rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
+        brononderzoek: () => `/landelijk/brononderzoek`,
+        varianten: () => `/landelijk/varianten`,
       },
 
       vr: {
@@ -65,6 +68,21 @@ export function useReverseRouter() {
           `/veiligheidsregio/${code}/thuiswonende-ouderen`,
         rioolwater: (code: string) => `/veiligheidsregio/${code}/rioolwater`,
         gedrag: (code: string) => `/veiligheidsregio/${code}/gedrag`,
+        brononderzoek: (code: string) =>
+          `/veiligheidsregio/${code}/brononderzoek`,
+      },
+
+      gm: {
+        index: (code?: string) =>
+          code
+            ? reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
+            : `/gemeente`,
+        positiefGetesteMensen: (code: string) =>
+          `/gemeente/${code}/positief-geteste-mensen`,
+        sterfte: (code: string) => `/gemeente/${code}/sterfte`,
+        ziekenhuisopnames: (code: string) =>
+          `/gemeente/${code}/ziekenhuis-opnames`,
+        rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
       },
     } as const;
 

@@ -1,4 +1,4 @@
-import { Municipal, National, Regionaal } from '@corona-dashboard/common';
+import { Gm, Nl, Vr } from '@corona-dashboard/common';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkGroupProps } from './link-group';
@@ -6,10 +6,7 @@ import { LinkGroupProps } from './link-group';
 export function useDataSitemap(
   base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
   code?: string,
-  data?:
-    | Pick<National, 'sewer'>
-    | Pick<Regionaal, 'sewer'>
-    | Pick<Municipal, 'sewer'>
+  data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Gm, 'sewer'>
 ): LinkGroupProps[] {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -123,27 +120,6 @@ export function useDataSitemap(
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.besmettingen,
-      links: [
-        {
-          text: siteText.positief_geteste_personen.titel_sidebar,
-          href: reverseRouter.nl.positiefGetesteMensen(),
-        },
-        {
-          text: siteText.besmettelijke_personen.titel_sidebar,
-          href: reverseRouter.nl.besmettelijkeMensen(),
-        },
-        {
-          text: siteText.reproductiegetal.titel_sidebar,
-          href: reverseRouter.nl.reproductiegetal(),
-        },
-        {
-          text: siteText.sterfte.titel_sidebar,
-          href: reverseRouter.nl.sterfte(),
-        },
-      ],
-    },
-    {
       header: siteText.nationaal_layout.headings.ziekenhuizen,
       links: [
         {
@@ -153,6 +129,40 @@ export function useDataSitemap(
         {
           text: siteText.ic_opnames_per_dag.titel_sidebar,
           href: reverseRouter.nl.intensiveCareOpnames(),
+        },
+      ],
+    },
+    {
+      header: siteText.nationaal_layout.headings.besmettingen,
+      links: [
+        {
+          text: siteText.positief_geteste_personen.titel_sidebar,
+          href: reverseRouter.nl.positiefGetesteMensen(),
+        },
+        {
+          text: siteText.reproductiegetal.titel_sidebar,
+          href: reverseRouter.nl.reproductiegetal(),
+        },
+        {
+          text: siteText.sterfte.titel_sidebar,
+          href: reverseRouter.nl.sterfte(),
+        },
+        {
+          text: siteText.covid_varianten.titel_sidebar,
+          href: reverseRouter.nl.varianten(),
+        },
+        {
+          text: siteText.besmettelijke_personen.titel_sidebar,
+          href: reverseRouter.nl.besmettelijkeMensen(),
+        },
+      ],
+    },
+    {
+      header: siteText.nationaal_layout.headings.gedrag,
+      links: [
+        {
+          text: siteText.nl_gedrag.sidebar.titel,
+          href: reverseRouter.nl.gedrag(),
         },
       ],
     },
@@ -187,12 +197,8 @@ export function useDataSitemap(
       ],
     },
     {
-      header: siteText.nationaal_layout.headings.gedrag,
+      header: siteText.nationaal_layout.headings.overig,
       links: [
-        {
-          text: siteText.nl_gedrag.sidebar.titel,
-          href: reverseRouter.nl.gedrag(),
-        },
         {
           text: siteText.corona_melder_app.sidebar.titel,
           href: reverseRouter.nl.coronamelder(),

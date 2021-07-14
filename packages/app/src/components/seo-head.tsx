@@ -1,6 +1,14 @@
 import Head from 'next/head';
 
 import { useIntl } from '~/intl';
+import { assert } from '~/utils/assert';
+
+const version = process.env.NEXT_PUBLIC_COMMIT_ID;
+
+assert(
+  version,
+  'Missing environment variable process.env.NEXT_PUBLIC_COMMIT_ID'
+);
 
 type SEOHeadProps = {
   title?: string;
@@ -24,7 +32,7 @@ export function SEOHead(props: SEOHeadProps) {
   return (
     <Head>
       <title key="title">{title}</title>
-      <meta name="version" key="version" content={process.env.COMMIT_ID} />
+      <meta name="version" key="version" content={version} />
 
       <meta
         key="dc-title"
@@ -124,6 +132,8 @@ export function SEOHead(props: SEOHeadProps) {
         as="font"
         type="font/woff"
       />
+
+      <link rel="apple-touch-icon" href="/images/touch-icon.png" />
 
       <meta key="description" name="description" content={description} />
       <meta

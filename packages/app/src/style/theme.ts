@@ -109,6 +109,7 @@ export const colors = {
   silver: '#c4c4c4',
   lightGray: '#dfdfdf',
   tileGray: '#f8f8f8',
+  labelGray: '#666666',
   annotation: '#595959',
   header: '#cd005a',
   notification: '#cd005a',
@@ -134,9 +135,40 @@ export const colors = {
     margin: '#D0EDFF',
     positive: '#5BADDB',
     negative: '#F35065',
+    cyan: '#219BE6',
+    yellow: '#FFC000',
     scale: {
-      blue: ['#8FCAE7', '#5BADDB', '#248FCF', '#0070BB', '#00529D', '#003580'],
+      blue: [
+        '#8FCAE7',
+        '#5BADDB',
+        '#248FCF',
+        '#0070BB',
+        '#00529D',
+        '#003580',
+        '#001D45',
+      ],
+      blueDetailed: [
+        '#aeddf3',
+        '#8bc7e8',
+        '#67b1dc',
+        '#449ad1',
+        '#1f83c5',
+        '#006cb5',
+        '#005797',
+        '#00437b',
+        '#002f5f',
+        '#001d45',
+      ],
       magenta: ['#F291BC', '#D95790', '#A11050', '#68032F', '#000000'],
+      yellow: [
+        '#FFF2CC',
+        '#FFE699',
+        '#FFD34D',
+        '#FABC00',
+        '#E5A400',
+        '#C98600',
+        '#9E6900',
+      ],
     },
     gradient: {
       green: '#69c253',
@@ -145,6 +177,21 @@ export const colors = {
     },
 
     multiseries,
+
+    variants: {
+      alpha: multiseries.cyan,
+      beta: multiseries.yellow,
+      gamma: multiseries.turquoise,
+      delta: multiseries.orange,
+      eta: multiseries.cyan_dark,
+      epsilon: multiseries.yellow_dark,
+      theta: multiseries.turquoise_dark,
+      kappa: multiseries.magenta,
+      lambda: multiseries.magenta_dark,
+      iota: multiseries.magenta_dark,
+      zeta: multiseries.magenta_dark,
+      other: '#808080',
+    },
 
     vaccines: {
       bio_n_tech_pfizer: multiseries.cyan,
@@ -169,6 +216,7 @@ const shadows = {
 
 const sizes = {
   maxWidth: 1400,
+  infoWidth: 1000,
   contentWidth: 700,
   maxWidthText: 600,
 };

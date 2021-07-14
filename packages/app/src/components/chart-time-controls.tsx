@@ -1,6 +1,6 @@
+import { TimeframeOption } from '@corona-dashboard/common';
 import { RadioGroup } from '~/components/radio-group';
 import { useIntl } from '~/intl';
-import { TimeframeOption } from '~/utils/timeframe';
 
 interface ChartTimeControlsProps {
   timeframe: TimeframeOption;

@@ -31,10 +31,18 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData('deceased_cbs', 'deceased_rivm_per_age_group'),
   createGetContent<{
-    articles?: ArticleSummary[];
-  }>((_context) => {
+    main: { articles: ArticleSummary[] };
+    monitor: { articles: ArticleSummary[] };
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('deceasedPage', locale);
+    return `{
+      "main": ${createPageArticlesQuery('deceasedPage', locale)},
+      "monitor": ${createPageArticlesQuery(
+        'deceasedPage',
+        locale,
+        'monitor_articles'
+      )},
+    }`;
   })
 );
 
@@ -79,7 +87,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          <ArticleStrip articles={content.articles} />
+          <ArticleStrip articles={content.main.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -93,7 +101,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="covid_daily"
                 absolute={dataRivm.last_value.covid_daily}
                 difference={data.difference.deceased_rivm__covid_daily}
-                isMovingAverageDifference
               />
               <Text>
                 {text.section_deceased_rivm.kpi_covid_daily_description}
@@ -126,6 +133,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'deceased_over_time_chart',
+                }}
                 values={dataRivm.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -180,6 +190,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <AgeDemographic
+              accessibility={{
+                key: 'deceased_per_age_group_over_time_chart',
+              }}
               data={dataDeceasedPerAgeGroup}
               metricProperty="covid_percentage"
               displayMaxPercentage={45}
@@ -203,7 +216,12 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
 
-          <DeceasedMonitorSection data={dataCbs} showDataMessage />
+          <DeceasedMonitorSection
+            data={dataCbs}
+            showDataMessage
+            showCauseMessage
+            articles={content.monitor.articles}
+          />
         </TileList>
       </NationalLayout>
     </Layout>

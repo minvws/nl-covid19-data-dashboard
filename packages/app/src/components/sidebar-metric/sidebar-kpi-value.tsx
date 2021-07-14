@@ -1,10 +1,10 @@
+import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { ValueAnnotation } from '~/components/value-annotation';
-import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Box } from '../base';
-import { DifferenceIndicator } from '../difference-indicator';
-import { Heading, InlineText } from '../typography';
 import { useIntl } from '~/intl';
+import { Box } from '../base';
+import { SidebarDifference } from '../difference-indicator';
+import { Heading, InlineText } from '../typography';
 
 type SidebarKpiValueProps = {
   title: string;
@@ -13,7 +13,7 @@ type SidebarKpiValueProps = {
    * Currently only `Behavior` is doing that.
    */
   value?: number;
-  description: string;
+  description?: string;
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
   isPercentage?: boolean;
@@ -36,7 +36,12 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
       <Heading level={4} fontSize={2} fontWeight="normal" m={0} as="div">
         {title}
       </Heading>
-      <Box display="flex" alignItems="center" justifyContent="flex-start">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="flex-start"
+        flexWrap="wrap"
+      >
         {isDefined(value) && (
           <InlineText
             fontSize={3}
@@ -50,7 +55,7 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
 
         {isDefined(difference) && (
           <Box fontSize={3} display="flex" alignItems="center" marginRight={1}>
-            <DifferenceIndicator value={difference} context="sidebar" />
+            <SidebarDifference value={difference} />
           </Box>
         )}
 

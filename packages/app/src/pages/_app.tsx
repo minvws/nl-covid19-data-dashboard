@@ -1,6 +1,7 @@
+import { assert } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { IntlContext } from '~/intl';
@@ -10,7 +11,8 @@ import { LanguageKey } from '~/locale';
 import { useLokalizeText } from '~/locale/use-lokalize-text';
 import { GlobalStyle } from '~/style/global-style';
 import theme from '~/style/theme';
-import { assert } from '~/utils/assert';
+import { BreakpointContextProvider } from '~/utils/use-breakpoints';
+import { IsTouchDeviceContextProvider } from '~/utils/use-is-touch-device';
 
 if (typeof window !== 'undefined') {
   require('proxy-polyfill/proxy.min.js');
@@ -30,17 +32,16 @@ if (typeof window !== 'undefined') {
 
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
+  const router = useRouter();
 
   // const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
   const locale = (process.env.NEXT_PUBLIC_LOCALE || 'nl') as LanguageKey;
 
-  const [text, toggleHotReloadButton] = useLokalizeText(locale, {
-    enableHotReload: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
-  });
+  const [text, toggleHotReloadButton, dataset] = useLokalizeText(locale);
 
   assert(text, `Encountered unknown language: ${locale}`);
 
-  const intlContext = useIntlHelperContext(locale, text);
+  const intlContext = useIntlHelperContext(locale, text, dataset);
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {
@@ -51,17 +52,21 @@ export default function App(props: AppProps) {
       }
     };
 
-    Router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
-      Router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, []);
+  }, [router]);
 
   return (
     <ThemeProvider theme={theme}>
       <IntlContext.Provider value={intlContext}>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <BreakpointContextProvider>
+          <IsTouchDeviceContextProvider>
+            <Component {...pageProps} />
+          </IsTouchDeviceContextProvider>
+        </BreakpointContextProvider>
       </IntlContext.Provider>
       {toggleHotReloadButton}
     </ThemeProvider>

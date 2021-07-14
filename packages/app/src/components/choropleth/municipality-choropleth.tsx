@@ -1,15 +1,20 @@
 import {
-  Municipalities,
-  MunicipalitiesMetricName,
-  MunicipalityProperties,
+  GmCollection,
+  GmCollectionMetricName,
+  GmProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
+import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
 import { Choropleth } from './choropleth';
 import {
   useChoroplethColorScale,
@@ -22,15 +27,22 @@ import { useChoroplethDataDescription } from './hooks/use-choropleth-data-descri
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { HoverPathLink, Path } from './path';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
-type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
-  data: Pick<Municipalities, K>;
+type MunicipalityChoroplethProps<T, K extends GmCollectionMetricName> = {
+  data: Pick<GmCollection, K>;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   metricName: K;
   metricProperty: string;
   selectedCode?: string;
   highlightSelection?: boolean;
-  tooltipContent?: (context: MunicipalityProperties & T) => ReactNode;
+  tooltipContent?: (context: GmProperties & T) => ReactNode;
+  tooltipPlacement?: ChoroplethTooltipPlacement;
   getLink: (code: string) => string;
 } & DataProps;
 
@@ -47,15 +59,17 @@ type MunicipalityChoroplethProps<T, K extends MunicipalitiesMetricName> = {
  *
  * @param props
  */
-export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
+export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
   props: MunicipalityChoroplethProps<T, K>
 ) {
   const {
+    accessibility,
     data,
     selectedCode,
     metricName,
     metricProperty,
     tooltipContent,
+    tooltipPlacement,
     highlightSelection = true,
     getLink,
   } = props;
@@ -71,7 +85,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     data
   );
 
-  const safetyRegionMunicipalCodes = useRegionMunicipalities(selectedCode);
+  const vrMunicipalCodes = useRegionMunicipalities(selectedCode);
 
   const thresholdValues = getDataThresholds(
     municipalThresholds,
@@ -85,7 +99,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     metricName,
     metricProperty,
     'gm',
-    safetyRegionMunicipalCodes
+    vrMunicipalCodes
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -95,13 +109,12 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
 
   const renderFeature = useCallback(
     (
-      feature: Feature<MultiPolygon, MunicipalityProperties>,
+      feature: Feature<MultiPolygon, GmProperties>,
       path: string,
       _index: number
     ) => {
       const { gemcode } = feature.properties;
-      const isInSameRegion =
-        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
+      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
       const fill = isInSameRegion ? getFillColor(gemcode) : 'white';
 
       return (
@@ -125,25 +138,21 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
         />
       );
     },
-    [getFillColor, hasData, safetyRegionMunicipalCodes, selectedCode]
+    [getFillColor, hasData, vrMunicipalCodes, selectedCode]
   );
 
-  const {
-    isTabInteractive,
-    tabInteractiveButton,
-    anchorEventHandlers,
-  } = useTabInteractiveButton(
-    replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-      subject: siteText.choropleth.gm.plural,
-    })
-  );
+  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
+    useTabInteractiveButton(
+      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+        subject: siteText.choropleth.gm.plural,
+      })
+    );
 
   const renderHover = useCallback(
-    (feature: Feature<MultiPolygon, MunicipalityProperties>, path: string) => {
+    (feature: Feature<MultiPolygon, GmProperties>, path: string) => {
       const { gemcode, gemnaam } = feature.properties;
       const isSelected = gemcode === selectedCode && highlightSelection;
-      const isInSameRegion =
-        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
+      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
 
       if (hasData && selectedCode && !isInSameRegion) {
         return null;
@@ -167,7 +176,7 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     [
       selectedCode,
       highlightSelection,
-      safetyRegionMunicipalCodes,
+      vrMunicipalCodes,
       hasData,
       getLink,
       isTabInteractive,
@@ -183,19 +192,30 @@ export function MunicipalityChoropleth<T, K extends MunicipalitiesMetricName>(
     return null;
   };
 
+  const choroplethAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_choropleth',
+  ]);
+
   return (
-    <div css={css({ bg: 'transparent', position: 'relative', height: '100%' })}>
+    <Box position="relative" height="100%">
       {tabInteractiveButton}
-      <Choropleth
-        description={dataDescription}
-        featureCollection={municipalGeo}
-        hovers={hasData ? municipalGeo : undefined}
-        boundingBox={boundingbox || countryGeo}
-        renderFeature={renderFeature}
-        renderHover={renderHover}
-        getTooltipContent={getTooltipContent}
-        showTooltipOnFocus={isTabInteractive}
-      />
-    </div>
+      <div
+        css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
+      >
+        <Choropleth
+          accessibility={choroplethAccessibility}
+          description={dataDescription}
+          featureCollection={municipalGeo}
+          outlines={countryGeo}
+          hovers={hasData ? municipalGeo : undefined}
+          boundingBox={boundingbox || countryGeo}
+          renderFeature={renderFeature}
+          renderHover={renderHover}
+          getTooltipContent={getTooltipContent}
+          tooltipPlacement={tooltipPlacement}
+          showTooltipOnFocus={isTabInteractive}
+        />
+      </div>
+    </Box>
   );
 }

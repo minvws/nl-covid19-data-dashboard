@@ -2,17 +2,17 @@ import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ChartTile } from '~/components/chart-tile';
+import { CollapsibleContent } from '~/components/collapsible';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { SewerChart } from '~/components/sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
+import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -31,10 +31,16 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData('sewer_per_installation', 'sewer'),
+  selectGmPageMetricData(
+    'sewer_per_installation',
+    'static_values',
+    'sewer',
+    'difference',
+    'code'
+  ),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })
@@ -43,15 +49,17 @@ export const getStaticProps = createGetStaticProps(
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
+    sideBarData,
     municipalityName,
     content,
     lastGenerated,
   } = props;
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
 
   const text = siteText.gemeente_rioolwater_metingen;
 
   const sewerAverages = data.sewer;
+  const populationCount = data.static_values.population_count;
 
   if (!sewerAverages) {
     /**
@@ -75,7 +83,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
+        code={data.code}
+        difference={data.difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >
@@ -107,7 +117,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
           <TwoKpiSection>
             <KpiTile
               title={text.barscale_titel}
-              description={text.extra_uitleg}
               metadata={{
                 date: [
                   sewerAverages.last_value.date_start_unix,
@@ -122,6 +131,36 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
               />
+              <Text>
+                {replaceComponentsInText(
+                  siteText.gemeente_index.population_count,
+                  {
+                    municipalityName: municipalityName,
+                    populationCount: (
+                      <strong>{formatNumber(populationCount)}</strong>
+                    ),
+                  }
+                )}
+              </Text>
+
+              <Text>{text.extra_uitleg}</Text>
+
+              <CollapsibleContent
+                label={
+                  siteText.gemeente_index.population_count_explanation_title
+                }
+              >
+                <Text>
+                  {replaceComponentsInText(text.population_count_explanation, {
+                    municipalityName: <strong>{municipalityName}</strong>,
+                    value: (
+                      <strong>
+                        {formatNumber(sewerAverages.last_value.average)}
+                      </strong>
+                    ),
+                  })}
+                </Text>
+              </CollapsibleContent>
             </KpiTile>
 
             <KpiTile
@@ -156,30 +195,20 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.linechart_titel}
-            metadata={{ source: text.bronnen.rivm }}
-            timeframeOptions={['all', '5weeks']}
-            description={text.linechart_description}
-          >
-            {(timeframe) => (
-              <SewerChart
-                data={data}
-                timeframe={timeframe}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                text={{
-                  select_station_placeholder:
-                    text.graph_selected_rwzi_placeholder,
-                  average_label_text: text.graph_average_label_text,
-                  secondary_label_text: text.graph_secondary_label_text,
-                  daily_label_text: text.graph_daily_label_text_rwzi,
-                  range_description: text.graph_range_description,
-                  display_outliers: text.display_outliers,
-                  hide_outliers: text.hide_outliers,
-                }}
-              />
-            )}
-          </ChartTile>
+          <SewerChart
+            accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
+            dataAverages={data.sewer}
+            dataPerInstallation={data.sewer_per_installation}
+            text={{
+              title: text.linechart_titel,
+              source: text.bronnen.rivm,
+              description: text.linechart_description,
+              selectPlaceholder: text.graph_selected_rwzi_placeholder,
+              splitLabels: siteText.rioolwater_metingen.split_labels,
+              averagesDataLabel: siteText.common.weekgemiddelde,
+              valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+            }}
+          />
         </TileList>
       </MunicipalityLayout>
     </Layout>

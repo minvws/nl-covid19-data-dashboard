@@ -4,7 +4,8 @@ import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
-import { lokalizeListItem } from './lokalize/structure-list-item';
+import { elementsListItem } from './elements/elements-list-item';
+import { lokalizeListItem } from './lokalize/lokalize-list-item';
 
 /**
  * This is a list of doc types we handle in the custom menu structure. All
@@ -23,17 +24,27 @@ const hiddenDocTypes = [
   'lockdown',
   'behaviorPage',
   'deceasedPage',
+  'situationsPage',
   'hospitalPage',
+  'nursingHomePage',
+  'elderlyAtHomePage',
+  'infectiousPeoplePage',
+  'disabilityCarePage',
   'intensiveCarePage',
   'positiveTestsPage',
+  'in_positiveTestsPage',
+  'in_variantsPage',
   'reproductionPage',
   'sewerPage',
   'vaccinationsPage',
+  'variantsPage',
   'toegankelijkheid',
   'escalationLevelPage',
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
+  'timeSeries',
+  'timelineEvent',
 ];
 
 export default () =>
@@ -41,6 +52,7 @@ export default () =>
     .title('Content')
     .items([
       lokalizeListItem(),
+      elementsListItem(),
       S.listItem()
         .title('Lockdown en Routekaart')
         .icon(BsTable)
@@ -102,11 +114,23 @@ export default () =>
         'escalationLevelPage'
       ),
       addListItem(RiPagesFill, 'Sterfte', 'deceasedPage'),
+      addListItem(RiPagesFill, 'Brononderzoek GGD', 'situationsPage'),
       addListItem(RiPagesFill, 'Gedrag en naleving', 'behaviorPage'),
       addListItem(RiPagesFill, 'Ziekenhuis opnames', 'hospitalPage'),
+      addListItem(RiPagesFill, 'Verpleeghuiszorg', 'nursingHomePage'),
+      addListItem(RiPagesFill, 'Gehandicaptenzorg', 'disabilityCarePage'),
+      addListItem(RiPagesFill, 'Thuiswonend 70-plus', 'elderlyAtHomePage'),
+      addListItem(RiPagesFill, 'Besmettelijke mensen', 'infectiousPeoplePage'),
       addListItem(RiPagesFill, 'IC opnames', 'intensiveCarePage'),
       addListItem(RiPagesFill, 'Positieve testen', 'positiveTestsPage'),
+      addListItem(
+        RiPagesFill,
+        'Positieve testen internationaal',
+        'in_positiveTestsPage'
+      ),
+      addListItem(RiPagesFill, 'Varianten internationaal', 'in_variantsPage'),
       addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
+      addListItem(RiPagesFill, 'Covid varianten', 'variantsPage'),
       addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),

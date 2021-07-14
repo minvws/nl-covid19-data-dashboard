@@ -28,7 +28,7 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('reproductionPage', locale);
   })

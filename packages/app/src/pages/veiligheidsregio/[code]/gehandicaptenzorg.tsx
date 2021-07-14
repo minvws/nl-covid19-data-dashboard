@@ -1,6 +1,8 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
@@ -10,29 +12,36 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
+  createGetContent,
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData()
+  selectVrPageMetricData(),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(() => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('disabilityCarePage', locale);
+  })
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedVrData: data, safetyRegionName, lastGenerated } = props;
+  const { selectedVrData: data, vrName, lastGenerated, content } = props;
 
   const { siteText } = useIntl();
 
@@ -49,20 +58,16 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(locationsText.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(locationsText.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={
@@ -72,13 +77,13 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verpleeghuis_besmette_locaties.titel_sidebar
             }
             title={replaceVariablesInText(positiveTestPeopleText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Gehandicaptenzorg />}
             subtitle={replaceVariablesInText(
               positiveTestPeopleText.pagina_toelichting,
               {
-                safetyRegion: safetyRegionName,
+                safetyRegion: vrName,
               }
             )}
             metadata={{
@@ -89,6 +94,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={positiveTestPeopleText.reference}
           />
+
+          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -117,6 +124,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'disability_care_confirmed_cases_over_time_chart',
+                }}
                 values={values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -158,7 +168,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             id="besmette-locaties"
             skipLinkAnchor={true}
             title={replaceVariablesInText(locationsText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Locatie />}
             subtitle={locationsText.pagina_toelichting}
@@ -215,6 +225,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             >
               {(timeframe) => (
                 <TimeSeriesChart
+                  accessibility={{
+                    key: 'disability_care_infected_locations_over_time_chart',
+                  }}
                   values={values}
                   timeframe={timeframe}
                   seriesConfig={[
@@ -234,7 +247,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             id="sterfte"
             skipLinkAnchor={true}
             title={replaceVariablesInText(mortalityText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<CoronaVirus />}
             subtitle={mortalityText.pagina_toelichting}
@@ -271,6 +284,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'disability_care_deceased_over_time_chart',
+                }}
                 values={values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -307,7 +323,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

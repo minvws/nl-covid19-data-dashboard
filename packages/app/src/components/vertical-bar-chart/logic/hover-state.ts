@@ -31,7 +31,7 @@ interface HoverState<T> {
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
-export type HoverHandler = (event: Event, valuesIndex: number) => void;
+type HoverHandler = (event: Event, valuesIndex: number) => void;
 
 type UseHoverStateResponse<T extends TimestampedValue> = [
   HoverHandler,
@@ -74,9 +74,13 @@ export function useHoverState<T extends TimestampedValue>({
 
       const barPoints: HoveredPoint<T>[] = seriesConfig
         .map((config, index) => {
-          const seriesValue = seriesList[index][
-            valuesIndex
-          ] as SeriesSingleValue;
+          const seriesValue = seriesList[index][valuesIndex] as
+            | SeriesSingleValue
+            | undefined;
+
+          if (!isPresent(seriesValue)) {
+            return;
+          }
 
           const xValue = seriesValue.__date_unix;
           const yValue = seriesValue.__value;
@@ -85,7 +89,7 @@ export function useHoverState<T extends TimestampedValue>({
            * Filter series without Y value on the current valuesIndex
            */
           if (!isPresent(yValue)) {
-            return undefined;
+            return;
           }
 
           return {

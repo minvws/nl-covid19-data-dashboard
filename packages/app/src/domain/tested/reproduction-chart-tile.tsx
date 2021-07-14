@@ -1,17 +1,17 @@
-import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
-import { isPresent } from 'ts-is-present';
-import { last } from 'lodash';
 import {
-  NationalReproduction,
-  NationalReproductionValue,
+  NlReproduction,
+  NlReproductionValue,
+  TimeframeOption,
 } from '@corona-dashboard/common';
+import { last } from 'lodash';
+import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { TimeframeOption } from '~/utils/timeframe';
+import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 
 interface ReproductionChartTileProps {
-  data: NationalReproduction;
+  data: NlReproduction;
   timeframeOptions?: TimeframeOption[];
   timeframeInitialValue?: TimeframeOption;
 }
@@ -33,7 +33,7 @@ export function ReproductionChartTile({
     0,
     data.values.findIndex((x) => !isPresent(x.index_average))
   );
-  const last_value = last(values) as NationalReproductionValue;
+  const last_value = last(values) as NlReproductionValue;
 
   return (
     <ChartTile
@@ -48,6 +48,9 @@ export function ReproductionChartTile({
     >
       {(timeframe) => (
         <TimeSeriesChart
+          accessibility={{
+            key: 'reproduction_line_chart',
+          }}
           values={values}
           timeframe={timeframe}
           seriesConfig={[

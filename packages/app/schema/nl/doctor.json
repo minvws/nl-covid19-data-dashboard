@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "national_doctor",
+  "title": "nl_doctor",
   "type": "object",
   "properties": {
     "values": {
@@ -17,7 +17,7 @@
   "additionalProperties": false,
   "definitions": {
     "value": {
-      "title": "national_doctor_value",
+      "title": "nl_doctor_value",
       "type": "object",
       "properties": {
         "date_start_unix": {

@@ -14,6 +14,10 @@ import {
   SeriesList,
   SeriesSingleValue,
 } from '../logic';
+import { GappedLinedTrend } from './gapped-line-trend';
+import { GappedStackedAreaTrend } from './gapped-stacked-area-trend';
+import { SplitAreaTrend } from './split-area-trend';
+import { SplitBarTrend } from './split-bar-trend';
 import { StackedAreaTrend } from './stacked-area-trend';
 
 interface SeriesProps<T extends TimestampedValue> {
@@ -33,6 +37,7 @@ interface SeriesProps<T extends TimestampedValue> {
   yScale: ScaleLinear<number, number>;
   bounds: Bounds;
   benchmark?: BenchmarkConfig;
+  chartId: string;
 }
 
 export const Series = memo(SeriesUnmemoized) as typeof SeriesUnmemoized;
@@ -47,6 +52,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
   yScale,
   bounds,
   benchmark,
+  chartId,
 }: SeriesProps<T>) {
   return (
     <>
@@ -55,6 +61,20 @@ function SeriesUnmemoized<T extends TimestampedValue>({
           const config = seriesConfig[index];
 
           switch (config.type) {
+            case 'gapped-line':
+              return (
+                <GappedLinedTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  color={config.color}
+                  style={config.style}
+                  strokeWidth={config.strokeWidth}
+                  curve={config.curve}
+                  getX={getX}
+                  getY={getY}
+                  id={`${chartId}_${config.metricProperty}`}
+                />
+              );
             case 'line':
               return (
                 <LineTrend
@@ -66,6 +86,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   curve={config.curve}
                   getX={getX}
                   getY={getY}
+                  id={`${chartId}_${config.metricProperty}`}
                 />
               );
             case 'area':
@@ -80,6 +101,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getX={getX}
                   getY={getY}
                   yScale={yScale}
+                  id={`${chartId}_${config.metricProperty}`}
                 />
               );
             case 'bar':
@@ -91,6 +113,20 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   aboveBenchmarkColor={config.aboveBenchmarkColor}
                   aboveBenchmarkFillOpacity={config.aboveBenchmarkFillOpacity}
                   benchmark={benchmark}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  bounds={bounds}
+                  id={`${chartId}_${config.metricProperty}`}
+                />
+              );
+            case 'split-bar':
+              return (
+                <SplitBarTrend
+                  key={index}
+                  yScale={yScale}
+                  series={series as SeriesSingleValue[]}
+                  splitPoints={config.splitPoints}
                   fillOpacity={config.fillOpacity}
                   getX={getX}
                   getY={getY}
@@ -108,6 +144,22 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY0={getY0}
                   getY1={getY1}
                   bounds={bounds}
+                  id={`${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}`}
+                />
+              );
+            case 'gapped-stacked-area':
+              return (
+                <GappedStackedAreaTrend
+                  key={index}
+                  series={series as SeriesDoubleValue[]}
+                  color={config.color}
+                  fillOpacity={config.fillOpacity}
+                  strokeWidth={config.strokeWidth}
+                  getX={getX}
+                  getY0={getY0}
+                  getY1={getY1}
+                  bounds={bounds}
+                  id={`${chartId}_${config.metricProperty}`}
                 />
               );
             case 'stacked-area':
@@ -117,10 +169,25 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   series={series as SeriesDoubleValue[]}
                   color={config.color}
                   fillOpacity={config.fillOpacity}
+                  strokeWidth={config.strokeWidth}
                   getX={getX}
                   getY0={getY0}
                   getY1={getY1}
                   bounds={bounds}
+                  id={`${chartId}_${config.metricProperty}`}
+                />
+              );
+            case 'split-area':
+              return (
+                <SplitAreaTrend
+                  key={index}
+                  series={series as SeriesSingleValue[]}
+                  splitPoints={config.splitPoints}
+                  strokeWidth={config.strokeWidth}
+                  fillOpacity={config.fillOpacity}
+                  getX={getX}
+                  getY={getY}
+                  yScale={yScale}
                 />
               );
           }

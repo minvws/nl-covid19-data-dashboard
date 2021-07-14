@@ -2,17 +2,16 @@ import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { SewerChart } from '~/components/sewer-chart';
+import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -34,19 +33,14 @@ export const getStaticProps = createGetStaticProps(
   selectVrPageMetricData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    selectedVrData: data,
-    safetyRegionName,
-    content,
-    lastGenerated,
-  } = props;
+  const { selectedVrData: data, vrName, content, lastGenerated } = props;
 
   const { siteText } = useIntl();
 
@@ -57,25 +51,21 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.vroege_signalen}
             title={replaceVariablesInText(text.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<RioolwaterMonitoring />}
             subtitle={text.pagina_toelichting}
@@ -148,32 +138,22 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          <ChartTile
-            title={text.linechart_titel}
-            metadata={{ source: text.bronnen.rivm }}
-            timeframeOptions={['all', '5weeks']}
-            description={text.linechart_description}
-          >
-            {(timeframe) => (
-              <SewerChart
-                data={data}
-                timeframe={timeframe}
-                valueAnnotation={siteText.waarde_annotaties.riool_normalized}
-                text={{
-                  select_station_placeholder:
-                    text.graph_selected_rwzi_placeholder,
-                  average_label_text: text.graph_average_label_text,
-                  secondary_label_text: text.graph_secondary_label_text,
-                  daily_label_text: text.graph_daily_label_text_rwzi,
-                  range_description: text.graph_range_description,
-                  display_outliers: text.display_outliers,
-                  hide_outliers: text.hide_outliers,
-                }}
-              />
-            )}
-          </ChartTile>
+          <SewerChart
+            accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
+            dataAverages={data.sewer}
+            dataPerInstallation={data.sewer_per_installation}
+            text={{
+              title: text.linechart_titel,
+              source: text.bronnen.rivm,
+              description: text.linechart_description,
+              selectPlaceholder: text.graph_selected_rwzi_placeholder,
+              splitLabels: siteText.rioolwater_metingen.split_labels,
+              averagesDataLabel: siteText.common.weekgemiddelde,
+              valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+            }}
+          />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

@@ -6,6 +6,8 @@ import {
 import { get } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { BarScale } from '~/components/bar-scale';
+import { useIntl } from '~/intl';
+import { SiteText } from '~/locale';
 import { assert } from '~/utils/assert';
 import {
   DataScope,
@@ -13,12 +15,7 @@ import {
   metricContainsPartialData,
 } from '../metric-config';
 import { Box } from './base';
-import {
-  DifferenceIndicator,
-  MovingAverageDifferenceIndicator,
-} from './difference-indicator';
-import { useIntl } from '~/intl';
-import { NlLocale } from '~/locale';
+import { TileAverageDifference, TileDifference } from './difference-indicator';
 
 /**
  * This component originated from SidebarBarScale, but is used on pages and
@@ -29,7 +26,7 @@ import { NlLocale } from '~/locale';
 interface PageBarScaleProps<T> {
   scope: DataScope;
   data: T;
-  localeTextKey: keyof NlLocale;
+  localeTextKey: keyof SiteText;
   metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
@@ -60,7 +57,7 @@ export function PageBarScale<T>({
    * a certain metric but here we don't have that type as input.
    */
   const lastValue = metricContainsPartialData(metricName as string)
-    ? getLastFilledValue((data[metricName] as unknown) as Metric<unknown>)
+    ? getLastFilledValue(data[metricName] as unknown as Metric<unknown>)
     : get(data, [metricName as string, 'last_value']);
 
   const propertyValue = lastValue && lastValue[metricProperty];
@@ -86,7 +83,7 @@ export function PageBarScale<T>({
 
   const config = getMetricConfig(
     scope,
-    (metricName as unknown) as string,
+    metricName as unknown as string,
     metricProperty
   );
 
@@ -110,7 +107,7 @@ export function PageBarScale<T>({
   );
 
   const differenceValue = differenceKey
-    ? get(data, ['difference', (differenceKey as unknown) as string])
+    ? get(data, ['difference', differenceKey as unknown as string])
     : undefined;
 
   if (differenceKey) {
@@ -139,9 +136,9 @@ export function PageBarScale<T>({
 
       {isDefined(differenceKey) &&
         (isMovingAverageDifference ? (
-          <MovingAverageDifferenceIndicator differenceValue={differenceValue} />
+          <TileAverageDifference value={differenceValue} />
         ) : (
-          <DifferenceIndicator
+          <TileDifference
             value={differenceValue}
             isDecimal={config.isDecimal}
             staticTimespan={differenceStaticTimespan}

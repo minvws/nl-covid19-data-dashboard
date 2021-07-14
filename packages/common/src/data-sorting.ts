@@ -1,18 +1,46 @@
 import { isDefined } from 'ts-is-present';
+import {
+  GmSewerPerInstallationValue,
+  InVariantsVariantValue,
+  NlVariantsVariantValue,
+  VrSewerPerInstallationValue,
+} from './types';
 
 export type UnknownObject = Record<string, unknown>;
 
-export function sortTimeSeriesInDataInPlace<T>(data: T) {
+export function sortTimeSeriesInDataInPlace<T>(
+  data: T,
+  { setDatesToMiddleOfDay = false } = {}
+) {
   const timeSeriesPropertyNames = getTimeSeriesPropertyNames(data);
 
   for (const propertyName of timeSeriesPropertyNames) {
-    const timeSeries = (data[propertyName] as unknown) as TimeSeriesMetric;
-    timeSeries.values = sortTimeSeriesValues(timeSeries.values);
+    try {
+      const timeSeries = data[propertyName] as unknown as TimeSeriesMetric;
+      timeSeries.values = sortTimeSeriesValues(timeSeries.values);
+
+      if (setDatesToMiddleOfDay) {
+        /**
+         * We'll map all dates to midday (12:00). This simplifies the rendering of
+         * a marker/annotation on a date.
+         */
+        timeSeries.values = timeSeries.values.map(setValueDatesToMiddleOfDay);
+
+        if (timeSeries.last_value) {
+          timeSeries.last_value = setValueDatesToMiddleOfDay(
+            timeSeries.last_value
+          );
+        }
+      }
+    } catch (e) {
+      console.error(`Error during processing ${propertyName}`);
+      throw e;
+    }
   }
 
   /**
-   * There is one property in the dataset that contains timeseries nested
-   * inside values, so we need to process that separately.
+   * Sewer per installation contains timeseries nested inside values, so we need
+   * to process that separately.
    */
   if (isDefined((data as UnknownObject).sewer_per_installation)) {
     const nestedSeries = (data as UnknownObject)
@@ -27,8 +55,72 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
       return;
     }
 
-    nestedSeries.values = nestedSeries.values.map((x) => {
-      x.values = sortTimeSeriesValues(x.values);
+    nestedSeries.values = nestedSeries.values.map((x, index) => {
+      if (!x.values) {
+        /**
+         * It can happen that we get incomplete json data and assuming that values
+         * exists here might crash the app
+         */
+        console.error(
+          `nestedSeries ${index} does not have a values collection`
+        );
+        return x;
+      }
+      x.values = sortTimeSeriesValues(x.values) as
+        | VrSewerPerInstallationValue[]
+        | GmSewerPerInstallationValue[];
+
+      if (setDatesToMiddleOfDay) {
+        x.values = x.values.map(setValueDatesToMiddleOfDay);
+
+        if (x.last_value) {
+          x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+        }
+      }
+      return x;
+    });
+  }
+
+  /**
+   * The variants data is structured similarly to sewer_per_installation as
+   * shown above. @TODO unify/clean up validation of both.
+   */
+  if (isDefined((data as UnknownObject).variants)) {
+    const nestedSeries = (data as UnknownObject).variants as VariantsData;
+
+    if (!nestedSeries.values) {
+      /**
+       * It can happen that we get incomplete json data and assuming that values
+       * exists here might crash the app
+       */
+      console.error('variants.values does not exist');
+      return;
+    }
+
+    nestedSeries.values = nestedSeries.values.map((x, index) => {
+      if (!x.values) {
+        /**
+         * It can happen that we get incomplete json data and assuming that values
+         * exists here might crash the app
+         */
+        console.error(
+          `variants.nestedSeries.values[${index}].values does not exist`
+        );
+        return x;
+      }
+
+      x.values = sortTimeSeriesValues(x.values) as
+        | NlVariantsVariantValue[]
+        | InVariantsVariantValue[];
+
+      if (setDatesToMiddleOfDay) {
+        x.values = x.values.map(setValueDatesToMiddleOfDay);
+
+        if (x.last_value) {
+          x.last_value = setValueDatesToMiddleOfDay(x.last_value);
+        }
+      }
+
       return x;
     });
   }
@@ -38,7 +130,7 @@ export function sortTimeSeriesInDataInPlace<T>(data: T) {
  * From the data structure, retrieve all properties that hold a "values" field
  * in their content. All time series data is kept in this values field.
  */
-export function getTimeSeriesPropertyNames<T>(data: T) {
+function getTimeSeriesPropertyNames<T>(data: T) {
   return Object.entries(data).reduce(
     (acc, [propertyKey, propertyValue]) =>
       isTimeSeries(propertyValue) ? [...acc, propertyKey as keyof T] : acc,
@@ -46,7 +138,7 @@ export function getTimeSeriesPropertyNames<T>(data: T) {
   );
 }
 
-export function sortTimeSeriesValues(values: TimestampedValue[]) {
+function sortTimeSeriesValues(values: TimestampedValue[]) {
   /**
    * There are 3 ways in which time series data can be timestamped. We need to
    * detect and handle each of them.
@@ -66,6 +158,18 @@ export function sortTimeSeriesValues(values: TimestampedValue[]) {
   );
 }
 
+function setValueDatesToMiddleOfDay<T extends TimestampedValue>(value: T) {
+  if (isDateSpanValue(value)) {
+    value.date_start_unix = middleOfDayInSeconds(value.date_start_unix);
+    value.date_end_unix = middleOfDayInSeconds(value.date_end_unix);
+  }
+  if (isDateValue(value)) {
+    value.date_unix = middleOfDayInSeconds(value.date_unix);
+  }
+
+  return value;
+}
+
 export type TimestampedValue = DateValue | DateSpanValue;
 
 export interface DateValue {
@@ -83,8 +187,16 @@ export interface TimeSeriesMetric<T = TimestampedValue> {
 }
 
 export interface SewerPerInstallationData {
-  values: (TimeSeriesMetric & {
+  values: (TimeSeriesMetric<
+    VrSewerPerInstallationValue | GmSewerPerInstallationValue
+  > & {
     rwzi_awzi_name: string;
+  })[];
+}
+
+export interface VariantsData {
+  values: (TimeSeriesMetric<NlVariantsVariantValue | InVariantsVariantValue> & {
+    name: string;
   })[];
 }
 
@@ -116,6 +228,7 @@ export function isTimeSeries(
 export function isDateSeries(
   timeSeries: TimestampedValue[]
 ): timeSeries is DateValue[] {
+  if (!timeSeries.length) return false;
   const firstValue = (timeSeries as DateValue[])[0];
   return isDefined(firstValue?.date_unix);
 }
@@ -123,9 +236,28 @@ export function isDateSeries(
 export function isDateSpanSeries(
   timeSeries: TimestampedValue[]
 ): timeSeries is DateSpanValue[] {
+  if (!timeSeries.length) return false;
   const firstValue = (timeSeries as DateSpanValue[])[0];
   return (
     isDefined(firstValue?.date_end_unix) &&
     isDefined(firstValue?.date_start_unix)
   );
+}
+
+export function startOfDayInSeconds(seconds: number) {
+  const date = new Date(seconds * 1000);
+  date.setHours(0, 0, 0, 0);
+  return Math.floor(date.getTime() / 1000);
+}
+
+export function endOfDayInSeconds(seconds: number) {
+  const date = new Date(seconds * 1000);
+  date.setHours(23, 59, 59, 999);
+  return Math.floor(date.getTime() / 1000);
+}
+
+export function middleOfDayInSeconds(seconds: number) {
+  const date = new Date(seconds * 1000);
+  date.setHours(12, 0, 0, 0);
+  return Math.floor(date.getTime() / 1000);
 }

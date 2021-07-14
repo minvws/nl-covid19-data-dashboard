@@ -1,15 +1,17 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "national",
+  "title": "nl",
   "required": [
     "behavior",
     "code",
-    "corona_melder_app",
+    "corona_melder_app_download",
+    "corona_melder_app_warning",
     "deceased_cbs",
     "deceased_rivm",
     "deceased_rivm_per_age_group",
     "difference",
+    "named_difference",
     "disability_care",
     "doctor",
     "elderly_at_home",
@@ -27,11 +29,10 @@
     "proto_name",
     "reproduction",
     "sewer",
-    "tested_ggd_daily",
-    "tested_ggd_average",
+    "tested_ggd",
     "tested_overall",
     "tested_per_age_group",
-    "vaccine_support",
+    "vaccine_vaccinated_or_support",
     "vaccine_delivery",
     "vaccine_delivery_estimate",
     "vaccine_administered",
@@ -66,11 +67,11 @@
     "difference": {
       "$ref": "__difference.json"
     },
+    "named_difference": {
+      "$ref": "__named_difference.json"
+    },
     "doctor": {
       "$ref": "doctor.json"
-    },
-    "downscaling": {
-      "$ref": "downscaling.json"
     },
     "g_number": {
       "$ref": "g_number.json"
@@ -108,11 +109,8 @@
     "intensive_care_lcps": {
       "$ref": "intensive_care_lcps.json"
     },
-    "tested_ggd_daily": {
-      "$ref": "tested_ggd_daily.json"
-    },
-    "tested_ggd_average": {
-      "$ref": "tested_ggd_average.json"
+    "tested_ggd": {
+      "$ref": "tested_ggd.json"
     },
     "nursing_home": {
       "$ref": "nursing_home.json"
@@ -126,6 +124,9 @@
     "behavior_per_age_group": {
       "$ref": "behavior_per_age_group.json"
     },
+    "behavior_get_tested_support_per_age_group": {
+      "$ref": "behavior_get_tested_support_per_age_group.json"
+    },
     "deceased_rivm": {
       "$ref": "deceased_rivm.json"
     },
@@ -138,11 +139,14 @@
     "elderly_at_home": {
       "$ref": "elderly_at_home.json"
     },
-    "vaccine_support": {
-      "$ref": "vaccine_support.json"
+    "vaccine_vaccinated_or_support": {
+      "$ref": "vaccine_vaccinated_or_support.json"
     },
-    "corona_melder_app": {
-      "$ref": "corona_melder_app.json"
+    "corona_melder_app_download": {
+      "$ref": "corona_melder_app_download.json"
+    },
+    "corona_melder_app_warning": {
+      "$ref": "corona_melder_app_warning.json"
     },
     "vaccine_coverage": {
       "$ref": "vaccine_coverage.json"
@@ -188,6 +192,9 @@
     },
     "vaccine_stock": {
       "$ref": "vaccine_stock.json"
+    },
+    "variants": {
+      "$ref": "variants.json"
     }
   }
 }

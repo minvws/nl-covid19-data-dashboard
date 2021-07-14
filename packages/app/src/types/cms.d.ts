@@ -30,7 +30,7 @@ export interface SanityImageProps {
 
 export interface InlineAttachment {
   _type: 'inlineAttachment';
-  asset: SanityFileProps;
+  asset?: SanityFileProps;
 }
 
 export type Editorial = Record<string, never> & Article;
@@ -72,10 +72,7 @@ export interface ImageBlock {
   };
 }
 
-type RichContentBlock =
-  | Block
-  | RichContentImageBlock
-  | RichContentLineChartBlock;
+type RichContentBlock = Block | RichContentImageBlock;
 
 // @TODO more properties are needed
 interface Block {
@@ -90,14 +87,6 @@ interface RichContentImageBlock extends ImageBlock {
   caption?: string;
 }
 
-// @TODO more properties are needed
-interface RichContentLineChartBlock {
-  _key: string;
-  _type: 'lineChart';
-  metricName: string;
-  metricProperty: string;
-}
-
 export type RoadmapData = {
   _createdAt: string;
   _id: string;
@@ -108,14 +97,14 @@ export type RoadmapData = {
   title: string;
 };
 
-export type Restriction = {
+type Restriction = {
   icon?: string;
   _key: string;
   _type: 'restriction';
   text: string;
 };
 
-export type LockdownDataGroup = {
+type LockdownDataGroup = {
   icon?: string;
   title: string;
   restrictions: Restriction[];
@@ -187,4 +176,23 @@ export type VaccinationPageQuery = {
   description: RichContentBlock[];
   milestones: Milestones[];
   expectedMilestones: ExpectedMilestones[];
+};
+
+export type InlineLink = {
+  _key: string;
+  _type: 'link';
+  href: string;
+};
+
+export type LinkProps = {
+  href: string;
+  title: string;
+};
+
+export type VariantsPageQuery = {
+  pageLinks: [LinkProps];
+};
+
+export type InPositiveTestsQuery = {
+  usefulLinks?: LinkProps[];
 };

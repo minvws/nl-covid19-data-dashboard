@@ -1,10 +1,7 @@
-import {
-  MunicipalityProperties,
-  MunicipalSewerValue,
-} from '@corona-dashboard/common';
-import { InlineText, Text } from '~/components/typography';
+import { GmProperties, GmSewerValue } from '@corona-dashboard/common';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -13,7 +10,7 @@ import { regionThresholds } from '../../region-thresholds';
 export function SewerMunicipalTooltip({
   context,
 }: {
-  context: MunicipalityProperties & MunicipalSewerValue;
+  context: GmProperties & GmSewerValue;
 }) {
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();

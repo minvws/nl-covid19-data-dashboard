@@ -1,5 +1,10 @@
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Tooltip, useTooltip } from '~/components/tooltip';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
 import {
   AgeDemographicChart,
   AGE_GROUP_TOOLTIP_WIDTH,
@@ -13,9 +18,15 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   metricProperty,
   displayMaxPercentage,
   text,
+  accessibility,
 }: {
   data: { values: T[] };
   metricProperty: keyof T;
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   displayMaxPercentage?: number;
   text: AgeDemographicChartText;
 }) {
@@ -26,28 +37,31 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
   );
 
   // Generate tooltip event handlers and state based on values and tooltip coordinates callback
-  const {
-    openTooltip,
-    closeTooltip,
-    keyboardNavigateTooltip,
-    tooltipState,
-  } = useTooltip<T>({
-    values: coordinates.values,
-    getTooltipCoordinates: coordinates.getTooltipCoordinates,
-  });
+  const { openTooltip, closeTooltip, keyboardNavigateTooltip, tooltipState } =
+    useTooltip<T>({
+      values: coordinates.values,
+      getTooltipCoordinates: coordinates.getTooltipCoordinates,
+    });
+
+  const ageDemographicAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_time_series_chart',
+  ]);
 
   return (
     <Box position="relative">
       <div ref={ref}>
-        <AgeDemographicChart
-          coordinates={coordinates}
-          onMouseMoveBar={openTooltip}
-          onMouseLeaveBar={closeTooltip}
-          onKeyInput={keyboardNavigateTooltip}
-          displayMaxPercentage={displayMaxPercentage}
-          metricProperty={metricProperty}
-          text={text}
-        />
+        <ErrorBoundary>
+          <AgeDemographicChart
+            accessibility={ageDemographicAccessibility}
+            coordinates={coordinates}
+            onMouseMoveBar={openTooltip}
+            onMouseLeaveBar={closeTooltip}
+            onKeyInput={keyboardNavigateTooltip}
+            displayMaxPercentage={displayMaxPercentage}
+            metricProperty={metricProperty}
+            text={text}
+          />
+        </ErrorBoundary>
       </div>
 
       <Tooltip

@@ -1,3 +1,4 @@
+import { sortTimeSeriesInDataInPlace } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import fs from 'fs';
 import meow from 'meow';
@@ -10,6 +11,7 @@ import {
   SchemaInfo,
   SchemaInfoItem,
 } from '../schema';
+import { JSONObject } from '../schema/custom-validations';
 
 const cli = meow(
   `
@@ -114,26 +116,27 @@ async function validate(schemaName: string, schemaInfo: SchemaInfoItem) {
       encoding: 'utf8',
     });
 
-    let data: any = null;
     try {
-      data = JSON.parse(contentAsString);
+      const data: JSONObject = JSON.parse(contentAsString);
+      sortTimeSeriesInDataInPlace(data);
+
+      const { isValid, schemaErrors } = executeValidations(
+        validateFunction,
+        data,
+        schemaInfo
+      );
+
+      if (!isValid) {
+        console.group();
+        console.error(schemaErrors);
+        console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
+        console.groupEnd();
+        return false;
+      }
     } catch (e) {
       console.group();
+      console.error(e);
       console.error(chalk.bgRed.bold(`  ${fileName} cannot be parsed  \n`));
-      console.groupEnd();
-      return false;
-    }
-
-    const { isValid, schemaErrors } = executeValidations(
-      validateFunction,
-      data,
-      schemaInfo
-    );
-
-    if (!isValid) {
-      console.group();
-      console.error(schemaErrors);
-      console.error(chalk.bgRed.bold(`  ${fileName} is invalid  \n`));
       console.groupEnd();
       return false;
     }

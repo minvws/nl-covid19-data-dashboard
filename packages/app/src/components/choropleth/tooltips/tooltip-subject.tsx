@@ -6,27 +6,36 @@ import { Text } from '~/components/typography';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 
 interface TooltipSubjectProps {
-  subject: string;
+  subject?: string;
   thresholdValues: ChoroplethThresholdsValue[];
-  filterBelow: number;
+  filterBelow: number | null;
   children: ReactNode;
+  noDataFillColor?: string;
 }
 
-export function TooltipSubject(props: TooltipSubjectProps) {
-  const { subject, thresholdValues, filterBelow, children } = props;
-
-  const filteredThreshold = getFilteredThresholdValues(
-    thresholdValues,
-    filterBelow
-  );
+export function TooltipSubject({
+  subject,
+  thresholdValues,
+  filterBelow,
+  children,
+  noDataFillColor,
+}: TooltipSubjectProps) {
+  const color =
+    filterBelow === null
+      ? noDataFillColor || getFilteredThresholdValues(thresholdValues, 0).color
+      : getFilteredThresholdValues(thresholdValues, filterBelow).color;
 
   return (
     <>
-      <Text m={0} mb={1} fontWeight="bold">
-        {subject}
-      </Text>
-      <Text
+      {subject && (
+        <Text m={0} mb={1} fontWeight="bold">
+          {subject}
+        </Text>
+      )}
+      <Box
         m={0}
+        spacing={2}
+        spacingHorizontal
         css={css({
           display: 'flex',
           alignItems: 'center',
@@ -40,9 +49,9 @@ export function TooltipSubject(props: TooltipSubjectProps) {
           width={13}
           borderRadius={'2px'}
           ml={'auto'}
-          backgroundColor={filteredThreshold.color}
+          backgroundColor={color}
         />
-      </Text>
+      </Box>
     </>
   );
 }

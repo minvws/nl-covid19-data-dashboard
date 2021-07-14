@@ -1,7 +1,7 @@
 /**
  * Clear the key mutation history
  */
-import { clearLogFile } from './logic';
+import { clearMutationsLogFile } from './logic';
 import prompts from 'prompts';
 
 (async function run() {
@@ -19,7 +19,7 @@ import prompts from 'prompts';
     process.exit(0);
   }
 
-  clearLogFile();
+  clearMutationsLogFile();
 })().catch((err) => {
   console.error(`Clear failed: ${err.message}`);
   process.exit(1);

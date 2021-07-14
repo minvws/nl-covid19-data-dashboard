@@ -1,34 +1,37 @@
-import { Regions, RegionsMetricName } from '@corona-dashboard/common';
+import { VrCollection, VrCollectionMetricName } from '@corona-dashboard/common';
 import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
-import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import {
   useChoroplethColorScale,
-  useSafetyRegionData,
+  useVrData,
 } from '~/components/choropleth/hooks';
 import { getDataThresholds } from '~/components/choropleth/legenda/utils';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
-import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { Heading, InlineText, Text } from './typography';
+import { EscalationLevelIcon } from '~/components/escalation-level-icon';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
+import { EscalationLevel } from '~/domain/restrictions/type';
 import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useEscalationColor } from '~/utils/use-escalation-color';
+import { Heading, InlineText, Text } from './typography';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 
-interface EscalationMapLegendaProps<K extends RegionsMetricName> {
+interface EscalationMapLegendaProps<K extends VrCollectionMetricName> {
   metricName: K;
   metricProperty: string;
-  data: Pick<Regions, K>;
+  data: Pick<VrCollection, K>;
   lastDetermined: number;
 }
 
-export function EscalationMapLegenda<K extends RegionsMetricName>(
+export function EscalationMapLegenda<K extends VrCollectionMetricName>(
   props: EscalationMapLegendaProps<K>
 ) {
   const { metricName, metricProperty, data, lastDetermined } = props;
   const { siteText, formatDateFromSeconds } = useIntl();
 
-  const { getChoroplethValue, hasData } = useSafetyRegionData(
+  const { getChoroplethValue, hasData } = useVrData(
     regionGeo,
     metricName,
     metricProperty,
@@ -41,6 +44,8 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
     metricProperty
   );
 
+  const unknownLevelColor = useEscalationColor(null);
+
   const getFillColor = useChoroplethColorScale(
     getChoroplethValue,
     selectedThreshold
@@ -51,19 +56,39 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
   const sortedEscalationArray = useMemo(() => {
     if (!hasData) return [];
 
+    const sortedEscalationArray = [] as {
+      color: string;
+      threshold: EscalationLevel;
+      amount: number;
+    }[];
+
     // Add an amount key to the escalation object to count the amount of items
-    const sortedEscalationArray = escalationThresholds.map((item) => ({
-      ...item,
-      amount: regionGeo.features.filter(
-        (x) => item.color === getFillColor(x.properties.vrcode)
-      ).length,
-    }));
+    for (const item of escalationThresholds) {
+      sortedEscalationArray.push({
+        ...item,
+        amount: regionGeo.features.filter(
+          (x) => item.color === getFillColor(x.properties.vrcode)
+        ).length,
+      });
+    }
+
+    const unknownCount = regionGeo.features.filter(
+      (x) => unknownLevelColor === getFillColor(x.properties.vrcode)
+    ).length;
+
+    if (unknownCount) {
+      sortedEscalationArray.push({
+        color: unknownLevelColor,
+        threshold: null,
+        amount: unknownCount,
+      });
+    }
 
     return sortedEscalationArray;
-  }, [getFillColor, hasData]);
+  }, [getFillColor, hasData, unknownLevelColor]);
 
   return (
-    <Box aria-label="legend" width="100%">
+    <Box width="100%">
       <Heading level={3} fontSize="1rem" mb={0}>
         {siteText.escalatie_niveau.legenda.titel}
       </Heading>
@@ -83,9 +108,17 @@ export function EscalationMapLegenda<K extends RegionsMetricName>(
               spacingHorizontal
               width={{ _: '8rem', sm: '10rem' }}
             >
-              <EscalationLevelIcon level={info.threshold} />
-              <InlineText pl={2}>
-                {siteText.escalatie_niveau.types[info.threshold].titel}
+              {info.threshold !== null && (
+                <Box pr={2}>
+                  <EscalationLevelIcon level={info.threshold} />
+                </Box>
+              )}
+              <InlineText>
+                {
+                  siteText.escalatie_niveau.types[
+                    getEscalationLevelIndexKey(info.threshold)
+                  ].titel
+                }
               </InlineText>
             </Box>
             <EscalationBarLegenda

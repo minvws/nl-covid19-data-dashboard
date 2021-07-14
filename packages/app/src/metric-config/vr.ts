@@ -1,16 +1,13 @@
-import { MetricKeys } from '@corona-dashboard/common';
+import { MetricKeys, Vr } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
-import { Regionaal } from '@corona-dashboard/common';
 import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 
 const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;
 const RED = colors.data.gradient.red;
 
-type VrMetricKey = MetricKeys<Regionaal>;
-export type VrConfig = Partial<
-  Record<VrMetricKey, Record<string, MetricConfig>>
->;
+type VrMetricKey = MetricKeys<Vr>;
+type VrConfig = Partial<Record<VrMetricKey, Record<string, MetricConfig>>>;
 
 export const vr: VrConfig = {
   behavior: {

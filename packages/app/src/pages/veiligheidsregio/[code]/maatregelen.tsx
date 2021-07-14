@@ -8,7 +8,7 @@ import { KpiSection } from '~/components/kpi-section';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
 import {
@@ -33,7 +33,7 @@ type MaatregelenData = {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
-  createGetContent<MaatregelenData>((_context) => {
+  createGetContent<MaatregelenData>(() => {
     //@TODO We need to switch this from process.env to context as soon as we use i18n routing
     // const { locale } = context;
     const locale = process.env.NEXT_PUBLIC_LOCALE;
@@ -63,12 +63,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    selectedVrData: data,
-    content,
-    safetyRegionName,
-    lastGenerated,
-  } = props;
+  const { selectedVrData: data, content, vrName, lastGenerated } = props;
 
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_maatregelen;
@@ -78,7 +73,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const { showLockdown } = lockdown;
 
   const router = useRouter();
-  const code = (router.query.code as unknown) as VRCode;
+  const code = router.query.code as unknown as VRCode;
 
   const regioUrl = siteText.veiligheidsregio_maatregelen_urls[code];
 
@@ -95,26 +90,22 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             title={replaceVariablesInText(
               siteText.veiligheidsregio_maatregelen.titel,
               {
-                safetyRegionName,
+                safetyRegionName: vrName,
               }
             )}
           />
@@ -149,13 +140,13 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             title={text.titel_aanvullendemaatregelen}
             href={regioUrl}
             label={replaceVariablesInText(text.linktext_regionpage, {
-              safetyRegionName,
+              safetyRegionName: vrName,
             })}
           >
             {text.toelichting_aanvullendemaatregelen}
           </AnchorTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

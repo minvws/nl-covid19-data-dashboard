@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import Getest from '~/assets/test.svg';
@@ -14,21 +15,19 @@ import {
   getCategoryLevel,
 } from '~/components/categorical-bar-scale';
 import { ContentHeader } from '~/components/content-header';
-import {
-  EscalationLevelInfoLabel,
-  EscalationLevelString,
-} from '~/components/escalation-level';
-import { KpiTile } from '~/components/kpi-tile';
+import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { Metadata } from '~/components/metadata';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -58,21 +57,16 @@ export const getStaticProps = createGetStaticProps(
   ),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>((_context) => {
+  }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('escalationLevelPage', locale);
   })
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    safetyRegionName,
-    content,
-    selectedVrData: data,
-    lastGenerated,
-  } = props;
+  const { vrName, content, selectedVrData: data, lastGenerated } = props;
 
-  const { siteText, formatDateFromSeconds } = useIntl();
+  const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
   const breakpoints = useBreakpoints();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
@@ -80,7 +74,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.vr_risiconiveau;
 
   const { escalation_level, hospital_nice_sum, tested_overall_sum } = data;
-  const currentLevel = escalation_level.level as EscalationLevel;
+  const currentLevel = escalation_level.level;
 
   const {
     hospitalAdmissionsEscalationThresholds,
@@ -104,10 +98,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
@@ -117,16 +111,12 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.inschaling}
             title={replaceVariablesInText(text.titel, {
-              safetyRegionName,
+              safetyRegionName: vrName,
             })}
             subtitle={text.pagina_toelichting}
             reference={text.reference}
@@ -156,7 +146,12 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     size="large"
                   />
                 </Box>
-                <Markdown content={text.types[currentLevel].toelichting} />
+                <Markdown
+                  content={
+                    text.types[getEscalationLevelIndexKey(currentLevel)]
+                      .toelichting
+                  }
+                />
                 <Text>
                   {replaceVariablesInText(text.momenteel.description_from_to, {
                     last_determined: formatDateFromSeconds(
@@ -164,7 +159,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                     risk_level: `'${
                       siteText.escalatie_niveau.types[
-                        currentLevel.toString() as EscalationLevelString
+                        getEscalationLevelIndexKey(currentLevel)
                       ].titel
                     }'`,
                     next_determined: formatDateFromSeconds(
@@ -173,61 +168,78 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   })}
                 </Text>
               </Box>
-              <Box width={{ _: '100%', lg: '50%' }} pl={{ _: 0, lg: 3 }} mb={3}>
-                <UnorderedList>
-                  <ListItem
-                    title={text.momenteel.last_determined}
-                    icon={<Calender />}
-                    date={data.escalation_level.last_determined_unix}
-                  />
-                  <ListItem
-                    title={text.momenteel.established_with.title}
-                    icon={<BarChart />}
-                    date={[
-                      data.escalation_level.based_on_statistics_from_unix,
-                      data.escalation_level.based_on_statistics_to_unix,
-                    ]}
-                  >
-                    <UnorderedList>
-                      <ListItem
-                        title={text.momenteel.positive_tests.title}
-                        icon={<Getest />}
-                      >
-                        <DataDescription
-                          description={
-                            text.momenteel.positive_tests.description
-                          }
-                          escalationColor={escalationColor}
-                          amount={
-                            data.escalation_level.positive_tested_per_100k
-                          }
+
+              {
+                /**
+                 * Only display risk level details when there's a known level and
+                 * data is available
+                 */
+                isPresent(currentLevel) &&
+                  isPresent(data.escalation_level.positive_tested_per_100k) &&
+                  isPresent(
+                    data.escalation_level.hospital_admissions_per_million
+                  ) && (
+                    <Box
+                      width={{ _: '100%', lg: '50%' }}
+                      pl={{ _: 0, lg: 3 }}
+                      mb={3}
+                    >
+                      <UnorderedList>
+                        <ListItem
+                          title={text.momenteel.last_determined}
+                          icon={<Calender />}
+                          date={data.escalation_level.last_determined_unix}
                         />
-                      </ListItem>
-                      <ListItem
-                        title={text.momenteel.hospital_admissions.title}
-                        icon={<Ziekenhuis />}
-                      >
-                        <DataDescription
-                          description={
-                            text.momenteel.hospital_admissions.description
-                          }
-                          escalationColor={escalationColor}
-                          amount={
-                            data.escalation_level
-                              .hospital_admissions_per_million
-                          }
+                        <ListItem
+                          title={text.momenteel.established_with.title}
+                          icon={<BarChart />}
+                          date={[
+                            data.escalation_level.based_on_statistics_from_unix,
+                            data.escalation_level.based_on_statistics_to_unix,
+                          ]}
+                        >
+                          <UnorderedList>
+                            <ListItem
+                              title={text.momenteel.positive_tests.title}
+                              icon={<Getest />}
+                            >
+                              <DataDescription
+                                description={
+                                  text.momenteel.positive_tests.description
+                                }
+                                escalationColor={escalationColor}
+                                amount={formatNumber(
+                                  data.escalation_level.positive_tested_per_100k
+                                )}
+                              />
+                            </ListItem>
+                            <ListItem
+                              title={text.momenteel.hospital_admissions.title}
+                              icon={<Ziekenhuis />}
+                            >
+                              <DataDescription
+                                description={
+                                  text.momenteel.hospital_admissions.description
+                                }
+                                escalationColor={escalationColor}
+                                amount={formatNumber(
+                                  data.escalation_level
+                                    .hospital_admissions_per_million
+                                )}
+                              />
+                            </ListItem>
+                          </UnorderedList>
+                        </ListItem>
+                        <ListItem
+                          title={text.momenteel.next_determined}
+                          icon={<Calender />}
+                          date={data.escalation_level.next_determined_unix}
+                          isAroundDate
                         />
-                      </ListItem>
-                    </UnorderedList>
-                  </ListItem>
-                  <ListItem
-                    title={text.momenteel.next_determined}
-                    icon={<Calender />}
-                    date={data.escalation_level.next_determined_unix}
-                    isAroundDate
-                  />
-                </UnorderedList>
-              </Box>
+                      </UnorderedList>
+                    </Box>
+                  )
+              }
             </Box>
 
             {!breakpoints.lg && text.momenteel.link_text && (
@@ -239,73 +251,99 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </Tile>
 
-          <TwoKpiSection>
-            <KpiTile
-              title={text.positieve_testen.title}
-              metadata={{
-                date: [
-                  tested_overall_sum.last_value.date_start_unix,
-                  tested_overall_sum.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm_positieve_testen_kpi,
-              }}
-            >
-              <Box spacing={2} spacingHorizontal>
-                <Box display="inline-block">
-                  <KpiValue
-                    data-cy="infected"
-                    absolute={tested_overall_sum.last_value.infected_per_100k}
-                    color={positiveTestedColor}
+          <Tile>
+            <Heading level={3} as="h2">
+              {text.recente_cijfers}
+            </Heading>
+            <TwoKpiSection spacing={4}>
+              <Box>
+                <HeadingWithIcon
+                  title={text.positieve_testen.title}
+                  headingLevel={4}
+                  as="h3"
+                  icon={<Getest />}
+                  mb={2}
+                  ml={-1} // Align icon with text below
+                />
+                <Box spacing={2} spacingHorizontal>
+                  <Box display="inline-block">
+                    <KpiValue
+                      data-cy="infected"
+                      absolute={tested_overall_sum.last_value.infected_per_100k}
+                      color={positiveTestedColor}
+                    />
+                  </Box>
+                  <InlineText>
+                    {text.positieve_testen.value_annotation}
+                  </InlineText>
+                </Box>
+
+                <Box maxWidth="480px">
+                  <CategoricalBarScale
+                    categories={positiveTestedEscalationThresholds}
+                    value={tested_overall_sum.last_value.infected_per_100k}
                   />
                 </Box>
-                <InlineText>
-                  {text.positieve_testen.value_annotation}
-                </InlineText>
+
+                <Markdown content={text.positieve_testen.description} />
+
+                <Metadata
+                  date={[
+                    tested_overall_sum.last_value.date_start_unix,
+                    tested_overall_sum.last_value.date_end_unix,
+                  ]}
+                  source={text.bronnen.rivm_positieve_testen_kpi}
+                  mb={{ _: 0, lg: -3 }}
+                  isTileFooter
+                />
               </Box>
 
-              <CategoricalBarScale
-                categories={positiveTestedEscalationThresholds}
-                value={tested_overall_sum.last_value.infected_per_100k}
-              />
+              <Box>
+                <HeadingWithIcon
+                  title={text.ziekenhuisopnames.title}
+                  headingLevel={4}
+                  as="h3"
+                  icon={<Ziekenhuis />}
+                  mb={2}
+                  ml={-2} // Align icon with text below
+                />
+                <Box spacing={2} spacingHorizontal>
+                  <Box display="inline-block">
+                    <KpiValue
+                      data-cy="infected"
+                      absolute={hospital_nice_sum.last_value.admissions_per_1m}
+                      color={hospitalAdmissionsColor}
+                    />
+                  </Box>
+                  <InlineText>
+                    {text.ziekenhuisopnames.value_annotation}
+                  </InlineText>
+                </Box>
 
-              <Markdown content={text.positieve_testen.description} />
-            </KpiTile>
-
-            <KpiTile
-              title={text.ziekenhuisopnames.title}
-              metadata={{
-                date: [
-                  hospital_nice_sum.last_value.date_start_unix,
-                  hospital_nice_sum.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm_ziekenhuisopnames_kpi,
-              }}
-            >
-              <Box spacing={2} spacingHorizontal>
-                <Box display="inline-block">
-                  <KpiValue
-                    data-cy="infected"
-                    absolute={hospital_nice_sum.last_value.admissions_per_1m}
-                    color={hospitalAdmissionsColor}
+                <Box maxWidth="480px">
+                  <CategoricalBarScale
+                    categories={hospitalAdmissionsEscalationThresholds}
+                    value={hospital_nice_sum.last_value.admissions_per_1m}
                   />
                 </Box>
-                <InlineText>
-                  {text.ziekenhuisopnames.value_annotation}
-                </InlineText>
+
+                <Markdown content={text.ziekenhuisopnames.description} />
+
+                <Metadata
+                  date={[
+                    hospital_nice_sum.last_value.date_start_unix,
+                    hospital_nice_sum.last_value.date_end_unix,
+                  ]}
+                  source={text.bronnen.rivm_ziekenhuisopnames_kpi}
+                  isTileFooter
+                />
               </Box>
-
-              <CategoricalBarScale
-                categories={hospitalAdmissionsEscalationThresholds}
-                value={hospital_nice_sum.last_value.admissions_per_1m}
-              />
-
-              <Markdown content={text.ziekenhuisopnames.description} />
-            </KpiTile>
-          </TwoKpiSection>
+            </TwoKpiSection>
+          </Tile>
 
           <ArticleStrip articles={content.articles} />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };
@@ -383,7 +421,7 @@ function ListItem({
 interface DataDescriptionProps {
   escalationColor: string;
   description: string;
-  amount: number;
+  amount: string;
 }
 
 function DataDescription({

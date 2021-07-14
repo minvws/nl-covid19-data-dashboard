@@ -57,7 +57,7 @@ export function Layout(
         <div>{children}</div>
       </CurrentDateProvider>
 
-      <AppFooter lastGenerated={Number(lastGenerated)} />
+      <AppFooter />
     </div>
   );
 }

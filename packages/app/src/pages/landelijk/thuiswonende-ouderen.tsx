@@ -1,13 +1,15 @@
 import {
-  RegionsElderlyAtHome,
-  SafetyRegionProperties,
+  VrCollectionElderlyAtHome,
+  VrProperties,
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -18,12 +20,14 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
+  createGetContent,
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
@@ -36,13 +40,19 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(),
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
+  }),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(() => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('elderlyAtHomePage', locale);
   })
 );
 
 const ElderlyAtHomeNationalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const { selectedNlData: data, choropleth, lastGenerated } = props;
+  const { selectedNlData: data, choropleth, lastGenerated, content } = props;
   const elderlyAtHomeData = data.elderly_at_home;
 
   const elderlyAtHomeInfectedUnderReportedRange = getBoundaryDateStartUnix(
@@ -85,6 +95,8 @@ const ElderlyAtHomeNationalPage = (
             }}
             reference={text.section_positive_tested.reference}
           />
+
+          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -132,6 +144,9 @@ const ElderlyAtHomeNationalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderlyAtHomeData.values}
                 seriesConfig={[
@@ -189,13 +204,16 @@ const ElderlyAtHomeNationalPage = (
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >
-            <SafetyRegionChoropleth
+            <VrChoropleth
+              accessibility={{
+                key: 'elderly_at_home_infected_people_choropleth',
+              }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.thuiswonendeOuderen}
               metricName="elderly_at_home"
               metricProperty="positive_tested_daily_per_100k"
               tooltipContent={(
-                context: SafetyRegionProperties & RegionsElderlyAtHome
+                context: VrProperties & VrCollectionElderlyAtHome
               ) => <ElderlyAtHomeRegionalTooltip context={context} />}
             />
           </ChoroplethTile>
@@ -238,6 +256,9 @@ const ElderlyAtHomeNationalPage = (
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'elderly_at_home_confirmed_cases_over_time_chart',
+                }}
                 timeframe={timeframe}
                 values={elderlyAtHomeData.values}
                 seriesConfig={[

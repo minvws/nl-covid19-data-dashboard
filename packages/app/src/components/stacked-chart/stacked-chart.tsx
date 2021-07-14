@@ -2,15 +2,20 @@
  * Code loosely based on
  * https://codesandbox.io/s/github/airbnb/visx/tree/master/packages/visx-demo/src/sandboxes/visx-barstack
  */
-import { TimestampedValue } from '@corona-dashboard/common';
+import {
+  getValuesInTimeframe,
+  TimeframeOption,
+  TimestampedValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
 import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
-import { BarStack } from '@visx/shape';
+import { BarStack, Line } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
+import { Text } from '@visx/text';
 /**
  * useTooltipInPortal will not work for IE11 at the moment. See this issue
  * https://github.com/airbnb/visx/issues/904
@@ -28,7 +33,10 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
+import {
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
@@ -91,13 +99,14 @@ type TooltipFormatter = (
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-export type Config<T extends TimestampedValue> = {
+type Config<T extends TimestampedValue> = {
   metricProperty: keyof T;
   label: string;
   color: string;
 };
 
-export type StackedChartProps<T extends TimestampedValue> = {
+type StackedChartProps<T extends TimestampedValue> = {
+  accessibility: AccessibilityDefinition;
   values: T[];
   config: Config<T>[];
   valueAnnotation?: string;
@@ -124,6 +133,7 @@ export function StackedChart<T extends TimestampedValue>(
    * same name.
    */
   const {
+    accessibility,
     values,
     config,
     initialWidth = 840,
@@ -153,6 +163,8 @@ export function StackedChart<T extends TimestampedValue>(
     formatDateSpan,
   } = useIntl();
 
+  const annotations = useAccessibilityAnnotations(accessibility);
+
   const {
     tooltipData,
     tooltipLeft = 0,
@@ -181,9 +193,10 @@ export function StackedChart<T extends TimestampedValue>(
     [isExtraSmallScreen, yAxisWidth]
   );
 
-  const metricProperties = useMemo(() => config.map((x) => x.metricProperty), [
-    config,
-  ]);
+  const metricProperties = useMemo(
+    () => config.map((x) => x.metricProperty),
+    [config]
+  );
 
   const today = useCurrentDate();
 
@@ -219,7 +232,7 @@ export function StackedChart<T extends TimestampedValue>(
    * like is_estimate to trigger the hatched pattern in all charts.
    */
   const hatchedFromIndex = valuesInTimeframe.findIndex(
-    (v) => ((v as unknown) as { is_estimate?: boolean }).is_estimate === true
+    (v) => (v as unknown as { is_estimate?: boolean }).is_estimate === true
   );
 
   /**
@@ -299,9 +312,10 @@ export function StackedChart<T extends TimestampedValue>(
           : undefined;
       }
 
-      const isAlternate = index % 2 === 0 && index !== all.length - 2;
+      const modulo = Math.ceil(all.length / numOfFittingLabels);
+      const showTick = index % modulo === 0 && index < all.length - modulo;
 
-      if (isFirst || isLast || isAlternate) {
+      if (isFirst || isLast || showTick) {
         return rangeText;
       }
     },
@@ -323,7 +337,7 @@ export function StackedChart<T extends TimestampedValue>(
             acc,
             x.metricProperty,
             getTotalSumForMetricProperty(
-              (series as unknown) as Record<string, number>[],
+              series as unknown as Record<string, number>[],
               x.metricProperty as string
             )
           ),
@@ -485,7 +499,9 @@ export function StackedChart<T extends TimestampedValue>(
       <Box height="100%">
         <ResponsiveContainer>
           <Box position="relative">
+            {annotations.descriptionElement}
             <svg
+              {...annotations.props}
               width={width}
               viewBox={`0 0 ${width} ${height}`}
               css={css({ width: '100%' })}
@@ -512,6 +528,22 @@ export function StackedChart<T extends TimestampedValue>(
                       fontSize: 12,
                     };
                   }}
+                  tickComponent={({ x, y, formattedValue, ...props }) =>
+                    formattedValue && (
+                      <>
+                        <Line
+                          from={{ x, y: y - 20 }}
+                          to={{ x, y: y - 13 }}
+                          stroke={colors.data.axis}
+                          strokeWidth={1}
+                          strokeLinecap="square"
+                        />
+                        <Text x={x} y={y} {...props}>
+                          {formattedValue}
+                        </Text>
+                      </>
+                    )
+                  }
                   hideTicks
                 />
                 <g ref={yAxisRef}>
@@ -664,7 +696,7 @@ function getDate(x: SeriesValue) {
  * TooltipContainer from LineChart did not seem to be very compatible with the
  * design for this chart, so this is something to look at later.
  */
-export const TooltipContainer = styled.div(
+const TooltipContainer = styled.div(
   css({
     pointerEvents: 'none',
     whiteSpace: 'nowrap',

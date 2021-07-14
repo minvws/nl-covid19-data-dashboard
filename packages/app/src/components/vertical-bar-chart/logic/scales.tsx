@@ -12,7 +12,7 @@ import {
 } from '~/components/time-series-chart/logic';
 import { useCurrentDate } from '~/utils/current-date-context';
 
-export const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
 interface UseScalesResult {
   xScale: ScaleBand<number>;
@@ -31,14 +31,8 @@ export function useScales<T extends TimestampedValue>(args: {
 }) {
   const today = useCurrentDate().getTime() / 1000;
 
-  const {
-    maximumValue,
-    minimumValue,
-    tickValues,
-    bounds,
-    numTicks,
-    values,
-  } = args;
+  const { maximumValue, minimumValue, tickValues, bounds, numTicks, values } =
+    args;
 
   return useMemo(() => {
     if (isEmpty(values)) {

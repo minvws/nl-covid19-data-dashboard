@@ -1,7 +1,6 @@
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
-import ResizeObserver from 'resize-observer-polyfill';
-import { useCallbackRef } from 'use-callback-ref';
+import { ReactNode, useCallback } from 'react';
 import { Box } from '~/components/base';
+import { useResizeObserver } from './use-resize-observer';
 
 /**
  * Hook returning a component which will fill to available width and height of
@@ -24,6 +23,10 @@ export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
   const width = Math.floor(measuredWidth);
   const height = Math.floor(Math.max(measuredHeight, minHeight));
 
+  /**
+   * Do NOT change the `style={{ height }}` to `height={height}` since
+   * this will lead to countless runtime classes being generated.
+   */
   const ResponsiveContainer = useCallback(
     ({
       children,
@@ -33,7 +36,7 @@ export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
       height?: string | number;
     }) => (
       <Box ref={ref} height="100%" minHeight={minHeight} position="relative">
-        <Box position="absolute" width="100%" height={height}>
+        <Box position="absolute" width="100%" style={{ height }}>
           {children}
         </Box>
       </Box>
@@ -42,44 +45,4 @@ export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
   );
 
   return { width, height, ResponsiveContainer, ref };
-}
-
-type Size = {
-  width: number;
-  height: number;
-};
-
-function useResizeObserver<T extends HTMLElement | SVGSVGElement>() {
-  const [size, setSize] = useState<Size>();
-
-  const [node, setNode] = useState<T | null>(null);
-  const ref = useCallbackRef<T>(null, (node) => setNode(node));
-
-  const observer = useRef<ResizeObserver>();
-
-  const disconnect = useCallback(() => observer.current?.disconnect(), []);
-  const connect = useCallback(
-    () =>
-      (observer.current = new ResizeObserver(
-        ([entry]: ResizeObserverEntry[]) => {
-          setSize({
-            width: Math.round(entry.contentRect.width),
-            height: Math.round(entry.contentRect.height),
-          });
-        }
-      )),
-    []
-  );
-
-  const observe = useCallback(() => {
-    connect();
-    if (node) observer.current?.observe(node);
-  }, [connect, node]);
-
-  useEffect(() => {
-    observe();
-    return () => disconnect();
-  }, [disconnect, observe]);
-
-  return { ...size, ref };
 }

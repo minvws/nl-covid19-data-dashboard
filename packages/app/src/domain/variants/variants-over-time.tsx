@@ -1,0 +1,111 @@
+import { useMemo } from 'react';
+import { InteractiveLegend } from '~/components/interactive-legend';
+import { Legend, LegendItem } from '~/components/legend';
+import { TimeSeriesChart } from '~/components/time-series-chart';
+import {
+  LineSeriesDefinition,
+  SeriesConfig,
+} from '~/components/time-series-chart/logic';
+import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
+import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
+import { colors } from '~/style/theme';
+import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { useList } from '~/utils/use-list';
+
+interface VariantsOverTimeProps {
+  values: VariantChartValue[];
+  seriesConfig: LineSeriesDefinition<VariantChartValue>[];
+}
+
+export function VariantsOverTime({
+  values,
+  seriesConfig,
+}: VariantsOverTimeProps) {
+  const { siteText } = useIntl();
+  const text = siteText.covid_varianten.varianten_over_tijd;
+
+  const { list, toggle, clear } = useList<string>();
+
+  const underReportedDateStart = getBoundaryDateStartUnix(values, 1);
+
+  const underReportedLegendItem: LegendItem = {
+    shape: 'square',
+    color: colors.data.underReported,
+    label: text.legend_niet_compleet_label,
+  };
+
+  const alwayEnabled: keyof VariantChartValue | [] = useMemo(() => [], []);
+
+  /* Filter for each config group */
+
+  /**
+   * Chart:
+   * - when nothing selected: all items
+   * - otherwise: selected items
+   */
+  const compareList = list.concat(alwayEnabled);
+  const chartConfig = useMemo(
+    () =>
+      [
+        ...seriesConfig.filter(
+          (item) =>
+            compareList.includes(item.metricProperty) ||
+            compareList.length === alwayEnabled.length
+        ),
+        {
+          type: 'invisible',
+          metricProperty: 'sample_size',
+          label: text.tooltip_labels.totaal_monsters,
+          isPercentage: false,
+        },
+      ] as SeriesConfig<VariantChartValue>,
+    [
+      seriesConfig,
+      alwayEnabled,
+      compareList,
+      text.tooltip_labels.totaal_monsters,
+    ]
+  );
+
+  /* Static legend contains only the inaccurate item */
+  const staticLegendItems: LegendItem[] = [underReportedLegendItem];
+
+  if (!values.length) {
+    return null;
+  }
+
+  return (
+    <>
+      <InteractiveLegend
+        helpText={text.legend_help_tekst}
+        selectOptions={seriesConfig}
+        selection={list}
+        onToggleItem={toggle}
+        onReset={clear}
+      />
+      <InlineText fontSize="12px" fontWeight="bold" color="data.axisLabels">
+        {text.percentage_gevonden_varianten}
+      </InlineText>
+      <TimeSeriesChart
+        accessibility={{ key: 'variants_over_time_chart' }}
+        values={values}
+        timeframe={'all'}
+        seriesConfig={chartConfig}
+        disableLegend
+        dataOptions={{
+          isPercentage: true,
+          timespanAnnotations: [
+            {
+              start: underReportedDateStart,
+              end: Infinity,
+              label: text.legend_niet_compleet_label,
+              shortLabel: text.tooltip_labels.niet_compleet,
+            },
+          ],
+        }}
+      />
+      <Legend items={staticLegendItems} />
+    </>
+  );
+}

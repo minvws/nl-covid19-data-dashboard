@@ -1,14 +1,16 @@
 import {
+  getValuesInTimeframe,
   isDateSeries,
   isDateSpanSeries,
+  TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
 import { omit } from 'lodash';
 import { useMemo } from 'react';
-import { hasValueAtKey, isDefined } from 'ts-is-present';
+import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { getValuesInTimeframe, TimeframeOption } from '~/utils/timeframe';
 import { TimespanAnnotationConfig } from './common';
+import { SplitPoint } from './split';
 
 export type SeriesConfig<T extends TimestampedValue> = (
   | LineSeriesDefinition<T>
@@ -16,10 +18,44 @@ export type SeriesConfig<T extends TimestampedValue> = (
   | AreaSeriesDefinition<T>
   | StackedAreaSeriesDefinition<T>
   | BarSeriesDefinition<T>
+  | SplitBarSeriesDefinition<T>
   | InvisibleSeriesDefinition<T>
+  | SplitAreaSeriesDefinition<T>
+  | GappedLineSeriesDefinition<T>
+  | GappedStackedAreaSeriesDefinition<T>
 )[];
 
-export type LineSeriesDefinition<T extends TimestampedValue> = {
+interface SeriesCommonDefinition {
+  label: string;
+  /**
+   * By default label is used in both the legend and the tooltip. Short label
+   * will overrule the label in the tooltip.
+   */
+  shortLabel?: string;
+  /**
+   * Non-interactive means the series will not have hover state and does not
+   * show up visually as part of the tooltip (only hidden). Sometimes we want to
+   * render a series as a backdrop to give context to another interactive
+   * series, like in the sewer chart when a location is selected.
+   */
+  isNonInteractive?: boolean;
+}
+
+export interface GappedLineSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'gapped-line';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'dashed';
+  strokeWidth?: number;
+  curve?: 'linear' | 'step';
+  isNonInteractive?: boolean;
+}
+
+export interface LineSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
   type: 'line';
   metricProperty: keyof T;
   label: string;
@@ -28,9 +64,11 @@ export type LineSeriesDefinition<T extends TimestampedValue> = {
   style?: 'solid' | 'dashed';
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-};
+  isNonInteractive?: boolean;
+}
 
-export type AreaSeriesDefinition<T extends TimestampedValue> = {
+export interface AreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
   type: 'area';
   metricProperty: keyof T;
   label: string;
@@ -39,9 +77,11 @@ export type AreaSeriesDefinition<T extends TimestampedValue> = {
   fillOpacity?: number;
   strokeWidth?: number;
   curve?: 'linear' | 'step';
-};
+  isNonInteractive?: boolean;
+}
 
-export type BarSeriesDefinition<T extends TimestampedValue> = {
+export interface BarSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
   type: 'bar';
   metricProperty: keyof T;
   label: string;
@@ -50,9 +90,22 @@ export type BarSeriesDefinition<T extends TimestampedValue> = {
   fillOpacity?: number;
   aboveBenchmarkColor?: string;
   aboveBenchmarkFillOpacity?: number;
-};
+  isNonInteractive?: boolean;
+}
 
-export type RangeSeriesDefinition<T extends TimestampedValue> = {
+export interface SplitBarSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'split-bar';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  fillOpacity?: number;
+  splitPoints: SplitPoint[];
+  isNonInteractive?: boolean;
+}
+
+export interface RangeSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
   type: 'range';
   metricPropertyLow: keyof T;
   metricPropertyHigh: keyof T;
@@ -61,9 +114,11 @@ export type RangeSeriesDefinition<T extends TimestampedValue> = {
   color: string;
   style?: 'solid' | 'dashed';
   fillOpacity?: number;
-};
+  isNonInteractive?: boolean;
+}
 
-export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
+export interface StackedAreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
   type: 'stacked-area';
   metricProperty: keyof T;
   label: string;
@@ -72,7 +127,42 @@ export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
   style?: 'solid' | 'hatched';
   fillOpacity?: number;
   strokeWidth?: number;
-};
+  isNonInteractive?: boolean;
+}
+
+export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'gapped-stacked-area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  color: string;
+  style?: 'solid' | 'hatched';
+  fillOpacity?: number;
+  strokeWidth?: number;
+  isNonInteractive?: boolean;
+}
+
+/**
+ * Adding the split series definition here even though it might not end up as
+ * part of this chart. For starters this makes it easier because then we can
+ * reuse the whole hoverstate and tooltip logic from TimeSeriesChart directly in
+ * SplitAreaChart.
+ *
+ * If the amount of changes for the chart are limited we could maybe merge it in
+ * completely.
+ */
+export interface SplitAreaSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
+  type: 'split-area';
+  metricProperty: keyof T;
+  label: string;
+  shortLabel?: string;
+  splitPoints: SplitPoint[];
+  strokeWidth?: number;
+  fillOpacity?: number;
+  isNonInteractive?: boolean;
+}
 
 /**
  * An invisible series config does not render any trend but the value shows up
@@ -83,7 +173,8 @@ export type StackedAreaSeriesDefinition<T extends TimestampedValue> = {
  * This can be used for example to show a total count at the bottom, or the
  * percentage counterpart of an absolute value.
  */
-export type InvisibleSeriesDefinition<T extends TimestampedValue> = {
+export interface InvisibleSeriesDefinition<T extends TimestampedValue>
+  extends SeriesCommonDefinition {
   type: 'invisible';
   metricProperty: keyof T;
   label: string;
@@ -93,9 +184,10 @@ export type InvisibleSeriesDefinition<T extends TimestampedValue> = {
    * indicate the format.
    */
   isPercentage?: boolean;
-};
+  isNonInteractive?: boolean;
+}
 
-export type CutValuesConfig = {
+type CutValuesConfig = {
   start: number;
   end: number;
   metricProperties: string[];
@@ -117,11 +209,10 @@ export function useSeriesList<T extends TimestampedValue>(
   seriesConfig: SeriesConfig<T>,
   cutValuesConfig?: CutValuesConfig[]
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig, cutValuesConfig), [
-    values,
-    seriesConfig,
-    cutValuesConfig,
-  ]);
+  return useMemo(
+    () => getSeriesList(values, seriesConfig, cutValuesConfig),
+    [values, seriesConfig, cutValuesConfig]
+  );
 }
 
 export function useValuesInTimeframe<T extends TimestampedValue>(
@@ -129,11 +220,10 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
   timeframe: TimeframeOption
 ) {
   const today = useCurrentDate();
-  return useMemo(() => getValuesInTimeframe(values, timeframe, today), [
-    values,
-    timeframe,
-    today,
-  ]);
+  return useMemo(
+    () => getValuesInTimeframe(values, timeframe, today),
+    [values, timeframe, today]
+  );
 }
 
 /**
@@ -145,7 +235,8 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
 export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
-  benchmarkValue = -Infinity
+  benchmarkValue = -Infinity,
+  isPercentage?: boolean
 ) {
   const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
@@ -166,7 +257,18 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
   const artificialMax =
     overallMaximum < benchmarkValue ? benchmarkValue * 2 : 0;
 
-  return Math.max(overallMaximum, artificialMax);
+  const maximumValue = Math.max(overallMaximum, artificialMax);
+
+  /**
+   * When the maximum value is 80% or more for percentages it shows a 0 - 100 scale
+   * same goes when a percentage is below 10% it has a 0 - 10 scale.
+   */
+  if (isPercentage) {
+    if (maximumValue >= 80) return 100;
+    if (maximumValue <= 10) return 10;
+  }
+
+  return maximumValue;
 }
 
 export type SeriesItem = {
@@ -195,7 +297,7 @@ export function isSeriesSingleValue(
 export type SingleSeries = SeriesSingleValue[] | SeriesDoubleValue[];
 export type SeriesList = SingleSeries[];
 
-export function getSeriesList<T extends TimestampedValue>(
+function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
   cutValuesConfig?: CutValuesConfig[]
@@ -203,6 +305,12 @@ export function getSeriesList<T extends TimestampedValue>(
   return seriesConfig.filter(isVisible).map((config) =>
     config.type === 'stacked-area'
       ? getStackedAreaSeriesData(values, config.metricProperty, seriesConfig)
+      : config.type === 'gapped-stacked-area'
+      ? getGappedStackedAreaSeriesData(
+          values,
+          config.metricProperty,
+          seriesConfig
+        )
       : config.type === 'range'
       ? getRangeSeriesData(
           values,
@@ -213,6 +321,72 @@ export function getSeriesList<T extends TimestampedValue>(
          * Cutting values based on annotation is only supported for single line series
          */
         getSeriesData(values, config.metricProperty, cutValuesConfig)
+  );
+}
+
+function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
+  values: T[],
+  metricProperty: keyof T,
+  seriesConfig: SeriesConfig<T>
+) {
+  /**
+   * Stacked area series are rendered from top to bottom. The sum of a Y-value
+   * of all series below the current series equals the low value of a current
+   * series's Y-value.
+   */
+  const stackedAreaDefinitions = seriesConfig.filter(
+    hasValueAtKey('type', 'gapped-stacked-area' as const)
+  );
+
+  const seriesBelowCurrentSeries = getSeriesBelowCurrentSeries(
+    stackedAreaDefinitions,
+    metricProperty
+  );
+
+  const seriesHigh = getSeriesData(values, metricProperty);
+  const seriesLow = getSeriesData(values, metricProperty);
+
+  seriesLow.forEach((seriesSingleValue, index) => {
+    if (!isPresent(seriesSingleValue.__value)) {
+      return;
+    }
+    /**
+     * The series are rendered from top to bottom. To get the low value of the
+     * current series, we will sum up all values of the
+     * `seriesBelowCurrentSeries`.
+     */
+    seriesSingleValue.__value = sumSeriesValues(
+      seriesBelowCurrentSeries,
+      values,
+      index
+    );
+  });
+
+  return seriesLow.map((low, index) => {
+    const valueLow = low.__value;
+    const valueHigh = isDefined(valueLow)
+      ? valueLow + (seriesHigh[index].__value ?? 0)
+      : undefined;
+
+    return {
+      __date_unix: low.__date_unix,
+      __value_a: valueLow,
+      __value_b: valueHigh,
+    };
+  });
+}
+
+function sumSeriesValues<T extends TimestampedValue>(
+  seriesBelowCurrentSeries: { metricProperty: keyof T }[],
+  values: T[],
+  index: number
+): number | undefined {
+  return (
+    seriesBelowCurrentSeries
+      // for each serie we'll get the value of the current index
+      .map((x) => getSeriesData(values, x.metricProperty)[index])
+      // and then sum it up
+      .reduce((sum, x) => sum + (x.__value ?? 0), 0)
   );
 }
 
@@ -230,10 +404,9 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
     hasValueAtKey('type', 'stacked-area' as const)
   );
 
-  const seriesBelowCurrentSeries = stackedAreaDefinitions.slice(
-    stackedAreaDefinitions.findIndex(
-      (x) => x.metricProperty === metricProperty
-    ) + 1
+  const seriesBelowCurrentSeries = getSeriesBelowCurrentSeries(
+    stackedAreaDefinitions,
+    metricProperty
   );
 
   const seriesHigh = getSeriesData(values, metricProperty);
@@ -245,12 +418,11 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
      * current series, we will sum up all values of the
      * `seriesBelowCurrentSeries`.
      */
-
-    seriesSingleValue.__value = seriesBelowCurrentSeries
-      // for each serie we'll get the value of the current index
-      .map((x) => getSeriesData(values, x.metricProperty)[index])
-      // and then sum it up
-      .reduce((sum, x) => sum + (x.__value ?? 0), 0);
+    seriesSingleValue.__value = sumSeriesValues(
+      seriesBelowCurrentSeries,
+      values,
+      index
+    );
   });
 
   return seriesLow.map((low, index) => {
@@ -263,6 +435,15 @@ function getStackedAreaSeriesData<T extends TimestampedValue>(
       __value_b: valueHigh,
     };
   });
+}
+
+function getSeriesBelowCurrentSeries<T extends TimestampedValue>(
+  definitions: { metricProperty: keyof T }[],
+  metricProperty: keyof T
+) {
+  return definitions.slice(
+    definitions.findIndex((x) => x.metricProperty === metricProperty) + 1
+  );
 }
 
 function getRangeSeriesData<T extends TimestampedValue>(

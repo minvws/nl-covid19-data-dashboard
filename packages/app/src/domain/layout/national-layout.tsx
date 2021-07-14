@@ -1,4 +1,4 @@
-import { National } from '@corona-dashboard/common';
+import { Nl } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Arts from '~/assets/arts.svg';
@@ -10,6 +10,7 @@ import ReproIcon from '~/assets/reproductiegetal.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import Varianten from '~/assets/varianten.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
@@ -21,11 +22,16 @@ import {
   MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
+import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { useIntl } from '~/intl';
+import { VariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { SituationIcon } from '../situations/components/situation-icon';
+import { VariantsSidebarMetric } from '../variants/variants-sidebar-metric';
 
 export const nlPageMetricNames = [
   'vaccine_administered_total',
@@ -44,12 +50,16 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
-  'corona_melder_app',
+  'named_difference',
+  'corona_melder_app_warning',
+  'behavior_per_age_group',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-export type NationalPageMetricData = Pick<National, NlPageMetricNames>;
+type NationalPageMetricData = {
+  variantSidebarValue: VariantSidebarValue;
+} & Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;
@@ -110,6 +120,9 @@ export function NationalLayout(props: NationalLayoutProps) {
             aria-label={siteText.aria_labels.metriek_navigatie}
             role="navigation"
             pt={4}
+            backgroundColor="white"
+            maxWidth={{ _: '38rem', md: undefined }}
+            mx="auto"
           >
             <Menu>
               <MetricMenuButtonLink
@@ -143,75 +156,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
-              <CategoryMenu
-                title={siteText.nationaal_layout.headings.besmettingen}
-              >
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.positiefGetesteMensen()}
-                  icon={<GetestIcon />}
-                  title={siteText.positief_geteste_personen.titel_sidebar}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="tested_overall"
-                    metricProperty="infected"
-                    altBarScaleMetric={{
-                      metricName: 'tested_overall',
-                      metricProperty: 'infected_per_100k',
-                    }}
-                    localeTextKey="positief_geteste_personen"
-                    differenceKey="tested_overall__infected_moving_average"
-                    showBarScale={true}
-                  />
-                </MetricMenuItemLink>
 
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.besmettelijkeMensen()}
-                  icon={<Ziektegolf />}
-                  title={siteText.besmettelijke_personen.titel_sidebar}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="infectious_people"
-                    metricProperty="estimate"
-                    localeTextKey="besmettelijke_personen"
-                    differenceKey="infectious_people__estimate"
-                  />
-                </MetricMenuItemLink>
-
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.reproductiegetal()}
-                  icon={<ReproIcon />}
-                  title={siteText.reproductiegetal.titel_sidebar}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="reproduction"
-                    metricProperty="index_average"
-                    localeTextKey="reproductiegetal"
-                    showBarScale={true}
-                    differenceKey="reproduction__index_average"
-                  />
-                </MetricMenuItemLink>
-
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.sterfte()}
-                  icon={<VirusIcon />}
-                  title={siteText.sterfte.titel_sidebar}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="deceased_rivm"
-                    metricProperty="covid_daily"
-                    localeTextKey="sterfte"
-                    differenceKey="deceased_rivm__covid_daily"
-                  />
-                </MetricMenuItemLink>
-              </CategoryMenu>
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.ziekenhuizen}
               >
@@ -254,6 +199,104 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
+              <CategoryMenu
+                title={siteText.nationaal_layout.headings.besmettingen}
+              >
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.positiefGetesteMensen()}
+                  icon={<GetestIcon />}
+                  title={siteText.positief_geteste_personen.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="tested_overall"
+                    metricProperty="infected"
+                    altBarScaleMetric={{
+                      metricName: 'tested_overall',
+                      metricProperty: 'infected_per_100k',
+                    }}
+                    localeTextKey="positief_geteste_personen"
+                    differenceKey="tested_overall__infected_moving_average"
+                    showBarScale={true}
+                  />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.reproductiegetal()}
+                  icon={<ReproIcon />}
+                  title={siteText.reproductiegetal.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="reproduction"
+                    metricProperty="index_average"
+                    localeTextKey="reproductiegetal"
+                    showBarScale={true}
+                    differenceKey="reproduction__index_average"
+                  />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.sterfte()}
+                  icon={<VirusIcon />}
+                  title={siteText.sterfte.titel_sidebar}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="deceased_rivm"
+                    metricProperty="covid_daily"
+                    localeTextKey="sterfte"
+                    differenceKey="deceased_rivm__covid_daily"
+                  />
+                </MetricMenuItemLink>
+
+                {data.variantSidebarValue && (
+                  <MetricMenuItemLink
+                    href={reverseRouter.nl.varianten()}
+                    icon={<Varianten />}
+                    title={siteText.covid_varianten.titel_sidebar}
+                  >
+                    <VariantsSidebarMetric data={data.variantSidebarValue} />
+                  </MetricMenuItemLink>
+                )}
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.brononderzoek()}
+                  icon={<SituationIcon id="gathering" />}
+                  title={siteText.brononderzoek.titel_sidebar}
+                >
+                  <SidebarKpiValue title={siteText.brononderzoek.kpi_titel} />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.besmettelijkeMensen()}
+                  icon={<Ziektegolf />}
+                  title={siteText.besmettelijke_personen.titel_sidebar}
+                >
+                  <SidebarKpiValue
+                    title={siteText.besmettelijke_personen.kpi_titel}
+                  />
+                </MetricMenuItemLink>
+              </CategoryMenu>
+
+              <CategoryMenu title={siteText.nationaal_layout.headings.gedrag}>
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.gedrag()}
+                  icon={<Gedrag />}
+                  title={siteText.nl_gedrag.sidebar.titel}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="behavior"
+                    localeTextKey="gedrag_common"
+                  />
+                </MetricMenuItemLink>
+              </CategoryMenu>
+
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.kwetsbare_groepen}
               >
@@ -339,19 +382,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
               </CategoryMenu>
 
-              <CategoryMenu title={siteText.nationaal_layout.headings.gedrag}>
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.gedrag()}
-                  icon={<Gedrag />}
-                  title={siteText.nl_gedrag.sidebar.titel}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="behavior"
-                    localeTextKey="gedrag_common"
-                  />
-                </MetricMenuItemLink>
+              <CategoryMenu title={siteText.nationaal_layout.headings.overig}>
                 <MetricMenuItemLink
                   href={reverseRouter.nl.coronamelder()}
                   icon={<Phone />}
@@ -360,8 +391,10 @@ export function NationalLayout(props: NationalLayoutProps) {
                   <SidebarMetric
                     data={data}
                     scope="nl"
-                    metricName="corona_melder_app"
+                    metricName="corona_melder_app_warning"
+                    metricProperty="count"
                     localeTextKey="corona_melder_app"
+                    differenceKey="corona_melder_app_warning__count"
                   />
                 </MetricMenuItemLink>
               </CategoryMenu>
@@ -369,7 +402,7 @@ export function NationalLayout(props: NationalLayoutProps) {
           </Box>
         }
       >
-        {children}
+        <ErrorBoundary>{children}</ErrorBoundary>
       </AppContent>
     </>
   );

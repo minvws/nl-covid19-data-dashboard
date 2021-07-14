@@ -8,6 +8,7 @@
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
+import { scaleLinear } from '@visx/scale';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
@@ -16,6 +17,7 @@ import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
+import { WeekNumbers } from './week-numbers';
 
 type AxesProps = {
   bounds: Bounds;
@@ -30,6 +32,7 @@ type AxesProps = {
    * label.
    */
   numGridLines: number;
+  showWeekNumbers?: boolean;
   /**
    * This ref can be used for measuring the width of the Y-axis to automagically
    * calculate a left-padding.
@@ -51,12 +54,19 @@ type AxesProps = {
    * it will move the Y-axis to the left.
    */
   xRangePadding?: number;
+
+  /**
+   * Indicates if the chart contains a series that only has values of zero.
+   * (In case this needs special rendering)
+   */
+  hasAllZeroValues?: boolean;
 };
 
-type AnyTickFormatter = (value: any) => string;
+export type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
   numGridLines,
+  showWeekNumbers,
   bounds,
   isPercentage,
   xScale,
@@ -67,6 +77,7 @@ export const Axes = memo(function Axes({
   yAxisRef,
   isYAxisCollapsed,
   xRangePadding,
+  hasAllZeroValues: allZeroValues,
 }: AxesProps) {
   const [startUnix, endUnix] = xTickValues;
   const isMounted = useIsMounted();
@@ -124,6 +135,20 @@ export const Axes = memo(function Axes({
   const isLongStartLabel = formatXAxis(startUnix).length > 6;
   const isLongEndLabel = formatXAxis(endUnix).length > 6;
 
+  /**
+   * We make an exception for the situation where all the values in the chart are zero.
+   * In that case the top range has been set to zero, but we want to draw exactly
+   * two gridlines in this case (at the top and bottom of the chart). So therefore we
+   * check for this case here and create a scale and gridline count accordingly.
+   */
+  const darkGridRowScale = allZeroValues
+    ? scaleLinear({
+        domain: [0, 1],
+        range: yScale.range(),
+      })
+    : yScale;
+  const numDarkGridLines = allZeroValues ? 1 : numGridLines;
+
   return (
     <g css={css({ pointerEvents: 'none' })}>
       <GridRows
@@ -141,12 +166,22 @@ export const Axes = memo(function Axes({
          * Darker gray grid lines are used for the lines that also have a label
          * on the y-axis.
          */
-        scale={yScale}
+        scale={darkGridRowScale}
         width={bounds.width}
-        numTicks={yTickValues?.length || numGridLines}
+        numTicks={yTickValues?.length || numDarkGridLines}
         tickValues={yTickValues}
         stroke={colors.silver}
       />
+
+      {showWeekNumbers && (
+        <WeekNumbers
+          startUnix={startUnix}
+          endUnix={endUnix}
+          bounds={bounds}
+          xScale={xScale}
+        />
+      )}
+
       <AxisBottom
         scale={xScale}
         tickValues={xTickValues}

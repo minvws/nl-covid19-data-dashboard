@@ -1,7 +1,7 @@
 import { LinePath } from '@visx/shape';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
-import { SeriesItem, SeriesSingleValue, curves } from '../logic';
+import { curves, SeriesItem, SeriesSingleValue } from '../logic';
 
 export type LineStyle = 'solid' | 'dashed';
 
@@ -16,7 +16,10 @@ type LineTrendProps = {
   getX: (v: SeriesItem) => number;
   getY: (v: SeriesSingleValue) => number;
   curve?: 'linear' | 'step';
+  id: string;
 };
+
+const ONE_DAY_IN_SECONDS = 24 * 60 * 60;
 
 export function LineTrend({
   series,
@@ -26,11 +29,28 @@ export function LineTrend({
   getX,
   getY,
   curve = 'linear',
+  id,
 }: LineTrendProps) {
-  const nonNullSeries = useMemo(
-    () => series.filter((x) => isPresent(x.__value)),
-    [series]
-  );
+  const nonNullSeries = useMemo(() => {
+    let nonNull = series.filter((x) => isPresent(x.__value));
+    if (nonNull.length === 1) {
+      nonNull = [
+        {
+          __date_unix: nonNull[0].__date_unix - ONE_DAY_IN_SECONDS,
+          __value: nonNull[0].__value,
+        },
+        {
+          __date_unix: nonNull[0].__date_unix + ONE_DAY_IN_SECONDS,
+          __value: nonNull[0].__value,
+        },
+      ];
+    }
+    return nonNull;
+  }, [series]);
+
+  if (!nonNullSeries.length) {
+    return null;
+  }
 
   return (
     <LinePath
@@ -41,8 +61,9 @@ export function LineTrend({
       strokeWidth={strokeWidth}
       curve={curves[curve]}
       strokeDasharray={style === 'dashed' ? 4 : undefined}
-      strokeLinecap="butt"
+      strokeLinecap="round"
       strokeLinejoin="round"
+      id={id}
     />
   );
 }

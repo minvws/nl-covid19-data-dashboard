@@ -1,44 +1,57 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
+import { ValueAnnotation } from '~/components/value-annotation';
+import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { TimeframeOption } from '~/utils/timeframe';
+import {
+  AccessibilityDefinition,
+  addAccessibilityFeatures,
+} from '~/utils/use-accessibility-annotations';
+import { useIsMounted } from '~/utils/use-is-mounted';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { ValueAnnotation } from '../value-annotation';
+import { useUniqueId } from '../../utils/use-unique-id';
+import { InlineText } from '../typography';
 import {
   Axes,
+  Benchmark,
   ChartContainer,
   DateLineMarker,
   DateSpanMarker,
   Overlay,
   PointMarkers,
+  Series,
   TimespanAnnotation,
   Tooltip,
   TooltipData,
   TooltipFormatter,
 } from './components';
-import { Benchmark } from './components/benchmark';
-import { Series } from './components/series';
+import { TimeAnnotation } from './components/time-annotation';
+import { Timeline, TimelineEventHighlight } from './components/timeline';
+import { useTimelineState } from './components/timeline/logic';
 import {
   calculateSeriesMaximum,
-  omitValuePropertiesForAnnotation,
+  COLLAPSE_Y_AXIS_THRESHOLD,
   DataOptions,
   extractCutValuesConfig,
   getTimeDomain,
+  omitValuePropertiesForAnnotation,
   SeriesConfig,
+  useDimensions,
   useHoverState,
   useLegendItems,
   useScales,
   useSeriesList,
+  useSplitLegendGroups,
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
-import { COLLAPSE_Y_AXIS_THRESHOLD, useDimensions } from './logic/dimensions';
+import { createTimelineEventsMockData } from './mock-timeline-events';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -66,10 +79,15 @@ export type { SeriesConfig } from './logic';
  * to see if we can use the date_unix timestamps from the data directly
  * everywhere without unnecessary conversion to and from Date objects.
  */
-export type TimeSeriesChartProps<
+type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
   tooltipTitle?: string;
   values: T[];
   seriesConfig: C;
@@ -77,7 +95,6 @@ export type TimeSeriesChartProps<
    * @TODO making it optional for now until we figure out how we want to enforce
    * aria labels and descriptions
    */
-  ariaLabelledBy?: string;
   /**
    * The initial width of the chart is used for server-side rendering. it will
    * use the available width when the chart mounts.
@@ -95,6 +112,7 @@ export type TimeSeriesChartProps<
    * the vaccine support chart.
    */
   numGridLines?: number;
+  showWeekNumbers?: boolean;
   tickValues?: number[];
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
@@ -125,18 +143,19 @@ export function TimeSeriesChart<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 >({
+  accessibility,
   values: allValues,
   seriesConfig,
   initialWidth = 840,
   minHeight = 250,
   timeframe = 'all',
   formatTooltip,
-  dataOptions,
+  dataOptions: _dataOptions,
+  showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
   formatTickValue: formatYTickValue,
   paddingLeft,
-  ariaLabelledBy,
   tooltipTitle,
   disableLegend,
   onSeriesClick,
@@ -152,12 +171,42 @@ export function TimeSeriesChart<
     tooltipOpen,
   } = useTooltip<TooltipData<T>>();
 
+  const today = useCurrentDate();
+  const chartId = useUniqueId();
+
+  /**
+   * @TODO clean up mock data
+   * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+   */
+  const hasTimelineMockDataFeature = useFeature('timelineMockData');
+  const isMounted = useIsMounted();
+  const timelineEventsMock = useMemo(
+    () =>
+      isMounted
+        ? createTimelineEventsMockData(allValues, timeframe, today)
+        : undefined,
+    [allValues, timeframe, today, isMounted]
+  );
+  const dataOptions = useMemo(
+    () =>
+      hasTimelineMockDataFeature.isEnabled
+        ? ({
+            ..._dataOptions,
+            timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
+          } as DataOptions)
+        : _dataOptions,
+    [_dataOptions, hasTimelineMockDataFeature, timelineEventsMock]
+  );
+  /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+
   const {
     valueAnnotation,
     isPercentage,
     forcedMaximumValue,
     benchmark,
     timespanAnnotations,
+    timeAnnotations,
+    timelineEvents,
   } = dataOptions || {};
 
   const {
@@ -171,9 +220,8 @@ export function TimeSeriesChart<
     width,
     height,
     paddingLeft,
+    paddingTop: showWeekNumbers ? 20 : undefined,
   });
-
-  const legendItems = useLegendItems(seriesConfig, dataOptions);
 
   const values = useValuesInTimeframe(allValues, timeframe);
 
@@ -189,29 +237,50 @@ export function TimeSeriesChart<
    * y-axis scaling to change when toggling the timeframe setting.
    */
   const calculatedSeriesMax = useMemo(
-    () => calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
-    [seriesList, seriesConfig, benchmark?.value]
+    () =>
+      calculateSeriesMaximum(
+        seriesList,
+        seriesConfig,
+        benchmark?.value,
+        isPercentage
+      ),
+    [seriesList, seriesConfig, benchmark?.value, isPercentage]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
     ? forcedMaximumValue
     : calculatedSeriesMax;
 
-  const { xScale, yScale, getX, getY, getY0, getY1, dateSpanWidth } = useScales(
-    {
-      values,
-      maximumValue: seriesMax,
-      bounds,
-      numTicks: yTickValues?.length || numGridLines,
-    }
+  const {
+    xScale,
+    yScale,
+    getX,
+    getY,
+    getY0,
+    getY1,
+    dateSpanWidth,
+    hasAllZeroValues,
+  } = useScales({
+    values,
+    maximumValue: seriesMax,
+    bounds,
+    numTicks: yTickValues?.length || numGridLines,
+  });
+
+  const legendItems = useLegendItems(
+    xScale.domain(),
+    seriesConfig,
+    dataOptions
   );
 
-  const today = useCurrentDate();
+  const splitLegendGroups = useSplitLegendGroups(seriesConfig);
+
   const xTickValues = useMemo(
     () => getTimeDomain({ values, today, withPadding: false }),
     [values, today]
   );
 
+  const timelineState = useTimelineState(timelineEvents, xScale);
   const [hoverState, chartEventHandlers] = useHoverState({
     values,
     padding,
@@ -220,6 +289,7 @@ export function TimeSeriesChart<
     xScale,
     yScale,
     timespanAnnotations,
+    timelineEvents: timelineState.events,
     markNearestPointOnly,
   });
 
@@ -227,7 +297,12 @@ export function TimeSeriesChart<
 
   useEffect(() => {
     if (hoverState) {
-      const { nearestPoint, valuesIndex, timespanAnnotationIndex } = hoverState;
+      const {
+        nearestPoint,
+        valuesIndex,
+        timespanAnnotationIndex,
+        timelineEventIndex,
+      } = hoverState;
 
       showTooltip({
         tooltipData: {
@@ -261,6 +336,9 @@ export function TimeSeriesChart<
             timespanAnnotations && isDefined(timespanAnnotationIndex)
               ? timespanAnnotations[timespanAnnotationIndex]
               : undefined,
+          timelineEvent: isDefined(timelineEventIndex)
+            ? timelineState.events[timelineEventIndex]
+            : undefined,
 
           valueMinWidth,
         },
@@ -281,6 +359,8 @@ export function TimeSeriesChart<
     markNearestPointOnly,
     displayTooltipValueOnly,
     valueMinWidth,
+    timelineEvents,
+    timelineState.events,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
@@ -291,6 +371,11 @@ export function TimeSeriesChart<
     }
   }, [onSeriesClick, seriesConfig, tooltipData]);
 
+  const isYAxisCollapsed = width < COLLAPSE_Y_AXIS_THRESHOLD;
+  const timeSeriesAccessibility = addAccessibilityFeatures(accessibility, [
+    'keyboard_time_series_chart',
+  ]);
+
   return (
     <>
       {valueAnnotation && (
@@ -299,10 +384,10 @@ export function TimeSeriesChart<
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
+            accessibility={timeSeriesAccessibility}
             width={width}
             height={height}
             padding={padding}
-            ariaLabelledBy={ariaLabelledBy || ''}
             onClick={handleClick}
             onHover={chartEventHandlers.handleHover}
             onFocus={chartEventHandlers.handleFocus}
@@ -318,7 +403,9 @@ export function TimeSeriesChart<
               yScale={yScale}
               isPercentage={isPercentage}
               yAxisRef={leftPaddingRef}
-              isYAxisCollapsed={width < COLLAPSE_Y_AXIS_THRESHOLD}
+              isYAxisCollapsed={isYAxisCollapsed}
+              hasAllZeroValues={hasAllZeroValues}
+              showWeekNumbers={showWeekNumbers}
             />
 
             {/**
@@ -341,6 +428,7 @@ export function TimeSeriesChart<
               bounds={bounds}
               yScale={yScale}
               benchmark={benchmark}
+              chartId={chartId}
             />
 
             {benchmark && (
@@ -358,14 +446,28 @@ export function TimeSeriesChart<
              */}
             {timespanAnnotations?.map((x, index) => (
               <TimespanAnnotation
+                chartId={chartId}
                 key={index}
-                start={x.start}
-                end={x.end}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
                 height={bounds.height}
+                config={x}
               />
             ))}
+            {timeAnnotations?.map((x, index) => (
+              <TimeAnnotation
+                key={index}
+                domain={xScale.domain() as [number, number]}
+                getX={getX}
+                height={bounds.height}
+                config={x}
+              />
+            ))}
+
+            <TimelineEventHighlight
+              height={bounds.height}
+              timelineState={timelineState}
+            />
           </ChartContainer>
 
           {tooltipOpen && tooltipData && (
@@ -406,7 +508,35 @@ export function TimeSeriesChart<
           )}
         </Box>
       </ResponsiveContainer>
-      {!disableLegend && legendItems.length > 0 && (
+
+      {timelineState.events.length > 0 && (
+        <Timeline
+          padding={padding}
+          bounds={bounds}
+          width={width}
+          timelineState={timelineState}
+          highlightIndex={hoverState?.timelineEventIndex}
+          isYAxisCollapsed={isYAxisCollapsed}
+        />
+      )}
+
+      {!disableLegend && splitLegendGroups && (
+        <>
+          {splitLegendGroups.map((x) => (
+            <Box
+              key={x.label}
+              pl={paddingLeft}
+              display="flex"
+              flexDirection={['column', 'row']}
+              alignItems="baseline"
+            >
+              <InlineText pr={3}>{x.label}:</InlineText>
+              <Legend items={x.items} />
+            </Box>
+          ))}
+        </>
+      )}
+      {!disableLegend && legendItems && (
         <Box pl={paddingLeft}>
           <Legend items={legendItems} />
         </Box>

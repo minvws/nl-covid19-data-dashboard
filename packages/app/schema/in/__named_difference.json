@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "in_named_difference",
+  "type": "object",
+  "properties": {
+    "variants__percentage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/named_diff_decimal"
+      }
+    }
+  },
+  "required": ["variants__percentage"],
+  "additionalProperties": false,
+  "definitions": {
+    "named_diff_integer": {
+      "title": "named_difference_integer",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "old_value": {
+          "type": "integer"
+        },
+        "difference": {
+          "type": "integer"
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "old_value",
+        "difference",
+        "old_date_unix",
+        "new_date_unix"
+      ],
+      "additionalProperties": false
+    },
+    "named_diff_decimal": {
+      "title": "named_difference_decimal",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "old_value": {
+          "type": "number"
+        },
+        "difference": {
+          "type": "number"
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "old_value",
+        "difference",
+        "old_date_unix",
+        "new_date_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

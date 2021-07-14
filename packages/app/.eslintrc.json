@@ -7,7 +7,7 @@
   ],
   "settings": {
     "react": {
-      "version": "16.13.1"
+      "version": "detect"
     }
   },
   "env": {
@@ -37,17 +37,22 @@
   "overrides": [
     {
       "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint"],
+      "plugins": ["@typescript-eslint", "risxss"],
       "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier",
-        "prettier/@typescript-eslint"
+        "prettier"
       ],
       "files": ["*.ts", "*.tsx"],
       "rules": {
+        "risxss/catch-potential-xss-react": [
+          "error",
+          {
+            "trustedLibraries": ["xss"]
+          }
+        ],
         "react/react-in-jsx-scope": 0,
         "react/display-name": 0,
         "react/prop-types": 0,

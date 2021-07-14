@@ -23,7 +23,7 @@ interface VaccineTickerProps {
 export function VaccineTicker({ data }: VaccineTickerProps) {
   const { siteText, formatNumber } = useIntl();
 
-  const dosesPerMinute = data.doses_per_second * 60;
+  const dosesPerMinute = Math.round(data.doses_per_minute);
 
   const isMountedRef = useIsMountedRef();
   const [animationProgress, setAnimationProgress] = useState(0);

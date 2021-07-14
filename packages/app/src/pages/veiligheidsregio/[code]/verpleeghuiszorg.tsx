@@ -1,6 +1,8 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import { ArticleStrip } from '~/components/article-strip';
+import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
@@ -10,29 +12,36 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
+import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
+  createGetContent,
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData()
+  selectVrPageMetricData(),
+  createGetContent<{
+    articles?: ArticleSummary[];
+  }>(() => {
+    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    return createPageArticlesQuery('nursingHomePage', locale);
+  })
 );
 
 const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedVrData: data, safetyRegionName, lastGenerated } = props;
+  const { selectedVrData: data, vrName, lastGenerated, content } = props;
 
   const { siteText } = useIntl();
 
@@ -51,23 +60,19 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(infectedLocationsText.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(
       infectedLocationsText.metadata.description,
       {
-        safetyRegionName,
+        safetyRegionName: vrName,
       }
     ),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={
@@ -77,13 +82,13 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verpleeghuis_besmette_locaties.titel_sidebar
             }
             title={replaceVariablesInText(positiveTestedPeopleText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Verpleeghuiszorg />}
             subtitle={replaceVariablesInText(
               positiveTestedPeopleText.pagina_toelichting,
               {
-                safetyRegion: safetyRegionName,
+                safetyRegion: vrName,
               }
             )}
             metadata={{
@@ -94,6 +99,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             reference={positiveTestedPeopleText.reference}
           />
+
+          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -120,6 +127,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_confirmed_cases_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -167,7 +177,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             id="besmette-locaties"
             skipLinkAnchor={true}
             title={replaceVariablesInText(infectedLocationsText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Locatie />}
             subtitle={infectedLocationsText.pagina_toelichting}
@@ -221,6 +231,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_infected_locations_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -241,7 +254,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             id="sterfte"
             skipLinkAnchor={true}
             title={replaceVariablesInText(deceased.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<CoronaVirus />}
             subtitle={deceased.pagina_toelichting}
@@ -279,6 +292,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           >
             {(timeframe) => (
               <TimeSeriesChart
+                accessibility={{
+                  key: 'nursing_home_deceased_over_time_chart',
+                }}
                 values={data.nursing_home.values}
                 timeframe={timeframe}
                 seriesConfig={[
@@ -316,7 +332,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

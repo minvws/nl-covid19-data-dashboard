@@ -3,14 +3,14 @@ import {
   isDateSpanSeries,
   TimestampedValue,
 } from '@corona-dashboard/common';
-import { useMemo } from 'react';
 import { pick } from 'lodash';
+import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { SeriesSingleValue } from '~/components/time-series-chart/logic/series';
 
 export type SeriesConfig<T extends TimestampedValue> = BarSeriesDefinition<T>[];
 
-export type BarSeriesDefinition<T extends TimestampedValue> = {
+type BarSeriesDefinition<T extends TimestampedValue> = {
   type: 'bar';
   metricProperty: keyof T;
   color: string;
@@ -21,15 +21,15 @@ export function useSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {
-  return useMemo(() => getSeriesList(values, seriesConfig), [
-    values,
-    seriesConfig,
-  ]);
+  return useMemo(
+    () => getSeriesList(values, seriesConfig),
+    [values, seriesConfig]
+  );
 }
 
 export type SeriesList = SeriesSingleValue[][];
 
-export function getSeriesList<T extends TimestampedValue>(
+function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ): SeriesList {
@@ -42,7 +42,7 @@ export function getSeriesList<T extends TimestampedValue>(
  * This function is almost exactly like getSeriesData from TimeSeriesChart
  * except it uses the date_end_unix as the date __date_unix in a date span
  */
-export function getSeriesData<T extends TimestampedValue>(
+function getSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T
 ): SeriesSingleValue[] {
@@ -73,10 +73,10 @@ export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {
-  return useMemo(() => calculateSeriesExtremes(values, seriesConfig), [
-    values,
-    seriesConfig,
-  ]);
+  return useMemo(
+    () => calculateSeriesExtremes(values, seriesConfig),
+    [values, seriesConfig]
+  );
 }
 
 /**
@@ -85,7 +85,7 @@ export function useCalculatedSeriesExtremes<T extends TimestampedValue>(
  * render lines, so that the axis scales with whatever key contains the highest
  * and lowest values.
  */
-export function calculateSeriesExtremes<T extends TimestampedValue>(
+function calculateSeriesExtremes<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>
 ) {
@@ -103,7 +103,15 @@ export function calculateSeriesExtremes<T extends TimestampedValue>(
     .flat();
 
   return {
-    max: Math.max(...extremeValues),
-    min: Math.min(...extremeValues),
+    /**
+     * The max needs to be clipped to a positive number, because otherwise
+     * things get messed up with only negative values. We add a minimum of 10 to
+     * always have a part of the y-axis with positive values.
+     *
+     * Adding a similar fix for when only positive numbers are used, but let's
+     * hope we never reach that point.
+     */
+    max: Math.max(...extremeValues, 10),
+    min: Math.min(...extremeValues, -10),
   };
 }

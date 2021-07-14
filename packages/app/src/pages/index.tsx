@@ -1,13 +1,15 @@
 import {
   EscalationLevels,
-  MunicipalitiesTestedOverall,
-  MunicipalityProperties,
-  RegionsTestedOverall,
-  SafetyRegionProperties,
+  GmCollectionTestedOverall,
+  GmProperties,
+  VrCollectionTestedOverall,
+  VrProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { isEmpty } from 'lodash';
+import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
+import GrafiekIcon from '~/assets/chart.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -19,10 +21,10 @@ import {
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -50,6 +52,7 @@ import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -64,6 +67,7 @@ import {
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -99,9 +103,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
-  const [selectedMap, setSelectedMap] = useState<RegionControlOption>(
-    'municipal'
-  );
+  const [selectedMap, setSelectedMap] =
+    useState<RegionControlOption>('municipal');
+
+  const unknownLevelColor = useEscalationColor(null);
+  const internationalFeature = useFeature('internationalPage');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -145,7 +151,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     valueTexts={
                       text.data_driven_texts.infected_people_total.value
                     }
-                    differenceTexts={
+                    differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
@@ -154,6 +160,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.nl.positiefGetesteMensen()}
+                accessibility={{ key: 'topical_tested_overall' }}
               />
 
               <MiniTrendTile
@@ -165,7 +172,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty="admissions_on_date_of_reporting"
                     differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                     valueTexts={text.data_driven_texts.intake_hospital_ma.value}
-                    differenceTexts={
+                    differenceText={
                       siteText.common_actueel.secties.kpi.zeven_daags_gemiddelde
                     }
                   />
@@ -174,6 +181,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.nl.ziekenhuisopnames()}
+                accessibility={{ key: 'topical_hospital_nice' }}
               />
 
               <TopicalVaccineTile data={data.vaccine_administered_total} />
@@ -181,6 +189,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
+              icon={<GrafiekIcon />}
             >
               <Sitemap
                 quickLinksHeader={text.quick_links.header}
@@ -197,7 +206,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: text.quick_links.links.gemeente,
                   },
-                ]}
+                  internationalFeature.isEnabled
+                    ? {
+                        href: reverseRouter.in.index(),
+                        text: text.quick_links.links.internationaal,
+                      }
+                    : undefined,
+                ].filter(isDefined)}
                 dataSitemapHeader={text.data_sitemap_titel}
                 dataSitemap={dataSitemap}
               />
@@ -234,13 +249,17 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <SafetyRegionChoropleth
+                  <VrChoropleth
+                    accessibility={{
+                      key: 'topical_escalation_levels_choropleth',
+                    }}
                     data={choropleth.vr}
                     getLink={reverseRouter.vr.risiconiveau}
                     metricName="escalation_levels"
                     metricProperty="level"
+                    noDataFillColor={unknownLevelColor}
                     tooltipContent={(
-                      context: SafetyRegionProperties & EscalationLevels
+                      context: VrProperties & EscalationLevels
                     ) => (
                       <EscalationRegionalTooltip
                         context={context}
@@ -279,7 +298,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </ChoroplethTwoColumnLayout>
 
               <Box mt={4}>
-                <EscalationLevelExplanations />
+                <EscalationLevelExplanations
+                  hasUnknownLevel={some(
+                    choropleth.vr.escalation_levels,
+                    (x) => !isPresent(x)
+                  )}
+                />
               </Box>
             </TopicalTile>
 
@@ -306,13 +330,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 <>
                   {selectedMap === 'municipal' && (
                     <MunicipalityChoropleth
+                      accessibility={{
+                        key: 'topical_municipal_tested_overall_choropleth',
+                      }}
                       data={choropleth.gm}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       getLink={reverseRouter.gm.positiefGetesteMensen}
                       tooltipContent={(
-                        context: MunicipalityProperties &
-                          MunicipalitiesTestedOverall
+                        context: GmProperties & GmCollectionTestedOverall
                       ) => (
                         <PositiveTestedPeopleMunicipalTooltip
                           context={context}
@@ -321,13 +347,16 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'region' && (
-                    <SafetyRegionChoropleth
+                    <VrChoropleth
+                      accessibility={{
+                        key: 'topical_region_tested_overall_choropleth',
+                      }}
                       data={choropleth.vr}
                       getLink={reverseRouter.vr.positiefGetesteMensen}
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={(
-                        context: SafetyRegionProperties & RegionsTestedOverall
+                        context: VrProperties & VrCollectionTestedOverall
                       ) => (
                         <PositiveTestedPeopleRegionalTooltip
                           context={context}
