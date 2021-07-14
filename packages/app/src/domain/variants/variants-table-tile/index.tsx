@@ -11,12 +11,12 @@ import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { NarrowVariantsTable, WideVariantsTable } from './components';
+import { VariantsTable } from './components/variants-table';
 
 export type TableText = {
   anderen_tooltip: string;
   omschrijving: string;
+  omschrijving_zonder_placeholders: string;
   titel: string;
   kolommen: {
     aantal_monsters: string;
@@ -55,8 +55,6 @@ export function VariantsTableTile({
 }) {
   const { formatDateSpan } = useIntl();
 
-  const breakpoints = useBreakpoints();
-
   const metadata: MetadataProps | undefined = dates
     ? {
         date: [dates.date_start_unix, dates.date_end_unix],
@@ -65,22 +63,26 @@ export function VariantsTableTile({
       }
     : undefined;
 
-  const [date_start, date_end] = formatDateSpan(
-    { seconds: dates?.date_start_unix ?? 0 },
-    { seconds: dates?.date_end_unix ?? 0 }
-  );
+  const [date_start, date_end] = dates
+    ? formatDateSpan(
+        { seconds: dates?.date_start_unix },
+        { seconds: dates?.date_end_unix }
+      )
+    : [0, 0];
+
+  const descriptionText = isDefined(data)
+    ? replaceVariablesInText(text.omschrijving, {
+        sample_size: sampleSize,
+        date_start,
+        date_end,
+      })
+    : text.omschrijving_zonder_placeholders;
 
   return (
     <Tile>
       <Heading level={3}>{text.titel}</Heading>
       <Box maxWidth="maxWidthText">
-        <Markdown
-          content={replaceVariablesInText(text.omschrijving, {
-            sample_size: sampleSize,
-            date_start,
-            date_end,
-          })}
-        />
+        <Markdown content={descriptionText} />
       </Box>
 
       {children}
@@ -88,11 +90,7 @@ export function VariantsTableTile({
       <Box overflow="auto" mb={3} mt={4}>
         {isDefined(data) && (
           <ErrorBoundary>
-            {breakpoints.sm ? (
-              <WideVariantsTable rows={data} text={text} />
-            ) : (
-              <NarrowVariantsTable rows={data} text={text} />
-            )}
+            <VariantsTable rows={data} text={text} />
           </ErrorBoundary>
         )}
         {!isDefined(data) && <NoDataBox>{noDataMessage}</NoDataBox>}
