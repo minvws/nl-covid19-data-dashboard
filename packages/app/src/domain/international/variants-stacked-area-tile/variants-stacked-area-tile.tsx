@@ -4,7 +4,8 @@ import { Legend, LegendItem } from '~/components/legend';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { StackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
+import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
+import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
@@ -29,14 +30,17 @@ export function VariantsStackedAreaTile({
   values,
   metadata,
 }: VariantsStackedAreaTile) {
+  const { siteText } = useIntl();
   const { list, toggle, clear } = useList<string>();
+
+  const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
 
   const baseVariantsFiltered = Object.keys(values[0]).filter(
     (x) => x.endsWith('_percentage') && x !== 'other_percentage'
   );
 
   /* Enrich config with dynamic data / locale */
-  const seriesConfig: StackedAreaSeriesDefinition<VariantsType>[] =
+  const seriesConfig: GappedStackedAreaSeriesDefinition<VariantsType>[] =
     baseVariantsFiltered.map((variantKey) => {
       const color = (colors.data.variants as Record<string, string>)[
         variantKey.split('_')[0]
@@ -45,27 +49,24 @@ export function VariantsStackedAreaTile({
       assert(color, `No color found found for variant: ${variantKey}`);
 
       return {
-        type: 'stacked-area',
+        type: 'gapped-stacked-area',
         metricProperty: variantKey as keyof VariantsType,
         color,
         label: variantKey,
         shape: 'square',
         fillOpacity: 1,
         // 'siteText.covid_varianten.varianten[variant]',
-        strokeWidth: 0,
       };
     });
 
   const otherConfig = {
-    type: 'stacked-area',
+    type: 'gapped-stacked-area',
     metricProperty: 'other_percentage',
-    label: 'Overig',
+    label: text.tooltip_labels.other_percentage,
     fillOpacity: 1,
-    // 'siteText.varianten_over_tijd.tooltip_labels.other_percentage',
     shape: 'square',
     color: colors.lightGray,
-    strokeWidth: 0,
-  } as StackedAreaSeriesDefinition<VariantsType>;
+  } as GappedStackedAreaSeriesDefinition<VariantsType>;
 
   /* Filter for each config group */
 
@@ -86,7 +87,7 @@ export function VariantsStackedAreaTile({
   const underReportedLegendItem: LegendItem = {
     shape: 'square',
     color: colors.data.underReported,
-    label: 'text.legend_niet_compleet_label',
+    label: text.legend_niet_compleet_label,
   };
 
   /* Static legend contains only the inaccurate item */
@@ -94,15 +95,15 @@ export function VariantsStackedAreaTile({
 
   return (
     <ChartTile
-      title={'text.linechart_titel'}
-      description={'text.linechart_toelichting'}
+      title={text.titel}
+      description={text.toelichting}
       metadata={metadata}
       timeframeOptions={['all', '5weeks']}
     >
       {(timeframe) => (
         <>
           <InteractiveLegend
-            helpText={'text.legend_help_tekst'}
+            helpText={text.legend_help_tekst}
             selectOptions={[...seriesConfig, otherConfig]}
             selection={list}
             onToggleItem={toggle}
@@ -110,11 +111,11 @@ export function VariantsStackedAreaTile({
           />
           <TimeSeriesChart
             accessibility={{
-              key: 'confirmed_cases_infected_over_time_chart',
+              key: 'variants_stacked_area_over_time_chart',
             }}
             values={values}
             timeframe={timeframe}
-            seriesConfig={chartConfig}
+            seriesConfig={[...chartConfig]}
             disableLegend
             dataOptions={{
               isPercentage: true,
