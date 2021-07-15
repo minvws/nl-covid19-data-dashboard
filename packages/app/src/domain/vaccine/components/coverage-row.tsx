@@ -1,18 +1,14 @@
-import { assert } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
-import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-type CoverageRowProps = {
+type RowProps = {
   children: ReactNode;
-  borderColor?: string;
-  isHeaderRow?: boolean;
 };
 
-export function CoverageRow(props: CoverageRowProps) {
+export function CoverageRow(props: RowProps) {
   const breakpoints = useBreakpoints(true);
 
   return breakpoints.md ? (
@@ -22,14 +18,19 @@ export function CoverageRow(props: CoverageRowProps) {
   );
 }
 
-function MobileCoverageRow(props: CoverageRowProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export function HeaderRow(props: RowProps) {
+  const breakpoints = useBreakpoints(true);
 
-  const children = React.Children.toArray(props.children);
-  assert(
-    children.length === 3,
-    `Expecting 3 children but got ${children.length}`
+  return breakpoints.md ? (
+    <DesktopHeaderRow {...props} />
+  ) : (
+    <MobileHeaderRow {...props} />
   );
+}
+
+function MobileCoverageRow(props: RowProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const children = React.Children.toArray(props.children);
 
   return (
     <Row width="100%" display="flex" flexDirection="column">
@@ -55,12 +56,49 @@ function MobileCoverageRow(props: CoverageRowProps) {
   );
 }
 
-function DesktopCoverageRow(props: CoverageRowProps) {
+function MobileHeaderRow(props: RowProps) {
   const children = React.Children.toArray(props.children);
-  assert(
-    children.length === 3,
-    `Expecting 3 children but got ${children.length}`
+
+  return (
+    <Row width="100%" display="flex" flexDirection="column">
+      <Box display="flex">
+        <Box flex={1}>{children[0]}</Box>
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="flex-end"
+          pr={{ _: 2, xs: 4 }}
+        >
+          {children[1]}
+        </Box>
+      </Box>
+    </Row>
   );
+}
+
+function DesktopCoverageRow(props: RowProps) {
+  const children = React.Children.toArray(props.children);
+
+  return (
+    <Row>
+      <Box flex={0.4}>{children[0]}</Box>
+      <Box
+        flex={0.4}
+        display="flex"
+        justifyContent="flex-end"
+        mr={{ _: 3, lg: 4, xl: 5 }}
+      >
+        {children[1]}
+      </Box>
+      <Box flex={1} display="flex" alignItems="flex-end">
+        {children[2]}
+      </Box>
+    </Row>
+  );
+}
+
+function DesktopHeaderRow(props: RowProps) {
+  const children = React.Children.toArray(props.children);
 
   return (
     <Row>

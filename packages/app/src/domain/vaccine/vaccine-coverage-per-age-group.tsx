@@ -6,9 +6,8 @@ import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
-import { CoverageRow } from './components/coverage-row';
+import { CoverageRow, HeaderRow } from './components/coverage-row';
 
 type Props = {
   values: NlVaccineCoveragePerAgeGroupValue[];
@@ -41,15 +40,14 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const { headers } = siteText.vaccinaties.vaccination_coverage;
   const { templates } = siteText.vaccinaties.vaccination_coverage;
-  const breakpoints = useBreakpoints(true);
 
   return (
     <Box display="flex" flexDirection="column">
-      <CoverageRow isHeaderRow>
+      <HeaderRow>
         <InlineText>{headers.agegroup}</InlineText>
         <InlineText>{headers.coverage}</InlineText>
-        {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : <div />}
-      </CoverageRow>
+        <InlineText>{headers.progress}</InlineText>
+      </HeaderRow>
       {values
         .sort(
           (a, b) =>
