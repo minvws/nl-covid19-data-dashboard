@@ -40,6 +40,7 @@
         "occurrence",
         "is_variant_of_concern",
         "sample_size",
+        "is_reliable",
         "date_start_unix",
         "date_end_unix",
         "date_of_insertion_unix"
@@ -56,6 +57,9 @@
         },
         "sample_size": {
           "type": "integer"
+        },
+        "is_reliable": {
+          "type": "boolean"
         },
         "date_start_unix": {
           "type": "integer"
