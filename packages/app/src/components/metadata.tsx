@@ -14,7 +14,7 @@ export interface MetadataProps extends MarginBottomProps {
   date?: number | [number, number];
   source?: source;
   dataSources?: source[];
-  obtained_at?: number;
+  obtainedAt?: number;
   isTileFooter?: boolean;
   datumsText?: string;
 }
@@ -22,7 +22,7 @@ export interface MetadataProps extends MarginBottomProps {
 export function Metadata({
   date,
   source,
-  obtained_at,
+  obtainedAt,
   isTileFooter,
   datumsText,
   mb,
@@ -64,14 +64,11 @@ export function Metadata({
             ) : (
               <>
                 {dateString}
-                {obtained_at &&
+                {obtainedAt &&
                   ` ${replaceVariablesInText(
                     siteText.common.metadata.obtained,
                     {
-                      date: formatDateFromSeconds(
-                        obtained_at,
-                        'weekday-medium'
-                      ),
+                      date: formatDateFromSeconds(obtainedAt, 'weekday-medium'),
                     }
                   )}`}
                 {dateString && source ? ' · ' : null}

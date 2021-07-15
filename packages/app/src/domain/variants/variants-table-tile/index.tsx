@@ -111,7 +111,7 @@ function VariantsTableTileWithData({
   const metadata: MetadataProps = {
     date: [dates.date_start_unix, dates.date_end_unix],
     source,
-    obtained_at: dates.date_of_insertion_unix,
+    obtainedAt: dates.date_of_insertion_unix,
   };
 
   const [date_start, date_end] = formatDateSpan(
