@@ -119,8 +119,9 @@ function VariantStackedAreaTileWithData({
             }}
             formatTooltip={(context) => {
               /**
-               * With the current context the other_percentage is the first in to be displayed.
-               * we put the other_percentage as last item in the array to display it correctly in the tooltip.
+               * In the chart the 'other_percentage' stack is rendered on top,
+               * but in the tooltip it needs to be displayed as the last item.
+               * (These are both design decisions)
                */
               const reorderContext = {
                 ...context,
