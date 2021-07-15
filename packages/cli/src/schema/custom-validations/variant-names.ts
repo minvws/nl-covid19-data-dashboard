@@ -1,3 +1,4 @@
+import { isDefined } from 'ts-is-present';
 import { JSONObject } from './types';
 
 const requiredVariantNames = [
@@ -18,11 +19,13 @@ export function validateVariantNames(input: JSONObject) {
     Record<string, Record<string, string>[]>
   >;
 
-  if (!variants) {
+  if (!isDefined(variants)) {
     return ['No variants key found in NL.json'];
   }
 
-  const variantNames = variants.values.map((x) => x.name.toLocaleLowerCase());
+  const variantNames = variants.values
+    .map((x) => x.name?.toLocaleLowerCase())
+    .filter(isDefined);
 
   const errors = requiredVariantNames
     .filter((x) => !variantNames.includes(x))
