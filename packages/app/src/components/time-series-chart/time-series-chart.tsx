@@ -1,13 +1,16 @@
 import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
+import { isNumber } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
+import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
+import { getConsistentNumberFormatter } from '~/utils/get-consistent-number-formatter';
 import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
@@ -50,6 +53,7 @@ import {
   useSplitLegendGroups,
   useValuesInTimeframe,
   useValueWidth,
+  useMetricPropertyFormatters,
 } from './logic';
 import { createTimelineEventsMockData } from './mock-timeline-events';
 export type { SeriesConfig } from './logic';
@@ -293,7 +297,14 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   });
 
-  const valueMinWidth = useValueWidth(values, seriesConfig, isPercentage);
+  const formatters = useMetricPropertyFormatters(seriesConfig, values);
+
+  const valueMinWidth = useValueWidth(
+    values,
+    seriesConfig,
+    isPercentage,
+    formatters
+  );
 
   useEffect(() => {
     if (hoverState) {
@@ -341,6 +352,7 @@ export function TimeSeriesChart<
             : undefined,
 
           valueMinWidth,
+          formatters,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -361,6 +373,7 @@ export function TimeSeriesChart<
     valueMinWidth,
     timelineEvents,
     timelineState.events,
+    formatters,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());

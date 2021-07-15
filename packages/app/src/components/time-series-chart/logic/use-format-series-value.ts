@@ -4,48 +4,51 @@ import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { SeriesConfig } from './series';
 
-export function useFormatSeriesValue() {
+export function useFormatSeriesValue<T extends TimestampedValue>(
+  formatters: Record<keyof T, (value: number) => string>
+) {
   const intl = useIntl();
 
   return useMemo(() => {
-    const getValueString = (value: unknown, isPercentage?: boolean) => {
-      const numberValue = value as number | null;
-
-      return isPresent(numberValue)
-        ? isPercentage
-          ? `${intl.formatPercentage(numberValue)}%`
-          : intl.formatNumber(numberValue)
-        : '-';
-    };
-
-    const getRangeValueString = (
-      valueA: unknown,
-      valueB: unknown,
+    function getValueString(
+      value: T,
+      metricProperty: keyof T,
       isPercentage?: boolean
-    ) => {
-      return `${getValueString(valueA, isPercentage)} - ${getValueString(
-        valueB,
-        isPercentage
-      )}`;
-    };
+    ) {
+      const formatter = formatters[metricProperty] || intl.formatNumber;
+      const numberValue = value[metricProperty] as unknown as number | null;
+      const formattedValue = isPresent(numberValue)
+        ? formatter(numberValue)
+        : numberValue;
 
-    function formatSeriesValue<T extends TimestampedValue>(
+      return isPresent(formattedValue)
+        ? isPercentage
+          ? `${formattedValue}%`
+          : formattedValue
+        : '-';
+    }
+
+    function formatSeriesValue(
       value: T,
       config: SeriesConfig<T>[number],
       isPercentage?: boolean
     ) {
       switch (config.type) {
         case 'range':
-          return getRangeValueString(
-            value[config.metricPropertyLow],
-            value[config.metricPropertyHigh],
+          return `${getValueString(
+            value,
+            config.metricPropertyLow,
             isPercentage
-          );
+          )} - ${getValueString(
+            value,
+            config.metricPropertyHigh,
+            isPercentage
+          )}`;
         default:
-          return getValueString(value[config.metricProperty], isPercentage);
+          return getValueString(value, config.metricProperty, isPercentage);
       }
     }
 
     return formatSeriesValue;
-  }, [intl]);
+  }, [formatters, intl.formatNumber]);
 }

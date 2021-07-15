@@ -10,7 +10,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
   T extends VaccineDeliveryAndAdministrationsValue
 >({ data }: { data: TooltipData<T> }) {
   const { siteText } = useIntl();
-  const { value, configIndex, config, options } = data;
+  const { value, configIndex, config, options, formatters } = data;
 
   const isEstimate =
     data.timespanAnnotation?.fill === 'hatched' &&
@@ -44,6 +44,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
         ]}
         configIndex={configIndex}
         options={options}
+        formatters={formatters}
       />
 
       <Heading level={5} my={1}>
@@ -58,6 +59,7 @@ export function VaccineDeliveryAndAdministrationsTooltip<
         config={otherConfigs}
         configIndex={configIndex}
         options={options}
+        formatters={formatters}
       />
     </TooltipSeriesListContainer>
   );

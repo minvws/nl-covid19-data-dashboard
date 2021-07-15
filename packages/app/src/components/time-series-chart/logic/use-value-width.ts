@@ -6,9 +6,10 @@ import { TimestampedValue } from '@corona-dashboard/common';
 export function useValueWidth<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  isPercentage: boolean | undefined
+  isPercentage: boolean | undefined,
+  formatters: Record<keyof T, (value: number) => string>
 ) {
-  const formatSeriesValue = useFormatSeriesValue();
+  const formatSeriesValue = useFormatSeriesValue(formatters);
   const valueMaxWidth = useMemo(() => {
     const valueLengths: number[] = [];
     seriesConfig.forEach((config) => {
