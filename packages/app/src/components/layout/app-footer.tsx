@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import ExternalIcon from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
-import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -72,12 +71,6 @@ export function AppFooter() {
                 <Item href={reverseRouter.algemeen.verantwoording()}>
                   {text.nav.links.verantwoording}
                 </Item>
-                <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
-                  {text.nav.links.over_risiconiveaus}
-                </Item>
-                <Item href={reverseRouter.algemeen.toegankelijkheid()}>
-                  {text.nav.links.toegankelijkheid}
-                </Item>
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
                 </Item>
@@ -85,11 +78,18 @@ export function AppFooter() {
             </nav>
           </Box>
 
-          <Box>
-            <Title>{text.nav.contact}</Title>
-            <StyledMarkdown>
-              <Markdown content={text.nav.contact_beschrijving} />
-            </StyledMarkdown>
+          <Box mt={{ md: '3.125rem' }}>
+            <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
+              <Item href={reverseRouter.algemeen.contact()}>
+                {text.nav.links.contact}
+              </Item>
+              <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
+                {text.nav.links.over_risiconiveaus}
+              </Item>
+              <Item href={reverseRouter.algemeen.toegankelijkheid()}>
+                {text.nav.links.toegankelijkheid}
+              </Item>
+            </nav>
           </Box>
         </MaxWidth>
       </Box>
@@ -172,20 +172,6 @@ const IconContainer = styled.div(
     svg: {
       width: 24,
       height: 24,
-    },
-  })
-);
-
-const StyledMarkdown = styled.div(
-  css({
-    maxWidth: asResponsiveArray({ sm: '90%', md: 280 }),
-
-    p: {
-      fontSize: 2,
-    },
-
-    a: {
-      color: 'white',
     },
   })
 );
