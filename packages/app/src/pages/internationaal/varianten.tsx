@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -111,17 +111,26 @@ export default function VariantenPage(
     description: text.metadata.description,
   };
 
-  function onChange(value: string) {
-    setSelectedCountryCode(value);
-    setTableData(variantTableData[value]);
-    setChartData(variantChartData[value]);
-  }
+  const onChange = useCallback(
+    (value: string) => {
+      setSelectedCountryCode(value);
+      setTableData(variantTableData[value]);
+      setChartData(variantChartData[value]);
+    },
+    [
+      setSelectedCountryCode,
+      setTableData,
+      setChartData,
+      variantTableData,
+      variantChartData,
+    ]
+  );
 
-  function onClear() {
+  const onClear = useCallback(() => {
     setSelectedCountryCode(undefined);
     setTableData(undefined);
     setChartData(undefined);
-  }
+  }, [setSelectedCountryCode, setTableData, setChartData]);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
