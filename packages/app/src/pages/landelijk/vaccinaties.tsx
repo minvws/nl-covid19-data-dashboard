@@ -64,7 +64,6 @@ export const getStaticProps = createGetStaticProps(
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor',
     'vaccine_coverage'
-    // 'vaccine_coverage_per_age_group'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
@@ -346,21 +345,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
 export default VaccinationPage;
 
-// @TODO re-enable when data is available
-//
-// const ColorIndicator = styled.span<{
-//   color?: string;
-// }>`
-//   content: '';
-//   display: ${(x) => (x.color ? 'inline-block' : 'none')};
-//   height: 8px;
-//   width: 8px;
-//   border-radius: 50%;
-//   background: ${(x) => x.color || 'black'};
-//   margin-right: 0.5em;
-//   flex-shrink: 0;
-// `;
-
 // TODO: remove this when data is available
 function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   const values = [
@@ -386,9 +370,14 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   function createCoverageRow(
     ageGroup: string
   ): NlVaccineCoveragePerAgeGroupValue {
-    const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
+    const ageGroupTotal = Math.floor(Math.random() * 1700000) + 100000;
+
     const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-    const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+    let partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+
+    if (partiallyVaccinated + fullyVaccinated > ageGroupTotal) {
+      partiallyVaccinated = ageGroupTotal - fullyVaccinated;
+    }
 
     return {
       age_group_range: ageGroup,
