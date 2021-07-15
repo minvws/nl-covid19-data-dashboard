@@ -56,7 +56,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
             getSortingOrder(b.age_group_range) -
             getSortingOrder(a.age_group_range)
         )
-        .map((value, index, array) => {
+        .map((value) => {
           return (
             <CoverageRow key={value.age_group_range}>
               <AgeGroup

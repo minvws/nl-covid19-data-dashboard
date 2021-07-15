@@ -24,7 +24,7 @@ export function CoverageProgressBar(props: {
   const barHeight = breakpoints.md ? 16 : 11;
 
   return (
-    <Box width="100%" mt={{ _: 4, md: 0 }}>
+    <Box width="100%">
       <Box height={barHeight + 8} width={{ md: '90%' }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

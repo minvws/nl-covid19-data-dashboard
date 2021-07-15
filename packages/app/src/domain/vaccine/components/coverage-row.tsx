@@ -39,21 +39,18 @@ function MobileCoverageRow(props: CoverageRowProps) {
           flex={1}
           display="flex"
           justifyContent="flex-end"
+          // alignItems="center"
           pr={{ _: 2, xs: 4 }}
         >
           {children[1]}
         </Box>
         <Box flex={0.2}>
-          {isPresent(children[2]) ? (
-            <Button>
-              <Chevron isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-            </Button>
-          ) : null}
+          <Button>
+            <Chevron isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+          </Button>
         </Box>
       </Box>
-      {isPresent(children[2]) && (
-        <CollapsiblePanel isOpen={isOpen}>{children[2]}</CollapsiblePanel>
-      )}
+      <CollapsiblePanel isOpen={isOpen}>{children[2]}</CollapsiblePanel>
     </Row>
   );
 }
@@ -123,11 +120,12 @@ const Chevron = styled.div<{
 
 const CollapsiblePanel = styled.div<{ isOpen: boolean }>((x) =>
   css({
-    transitionProperty: 'opacity, height',
+    transitionProperty: 'opacity, height, margin',
     transitionDuration: '0.5s',
     width: '100%',
     overflow: 'hidden',
-    height: x.isOpen ? 'calc(22px + 5rem)' : 0,
+    height: x.isOpen ? 'auto' : 0,
     opacity: x.isOpen ? 1 : 0,
+    mt: x.isOpen ? 3 : 0,
   })
 );
