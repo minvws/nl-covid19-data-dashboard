@@ -14,21 +14,14 @@ export function CoverageProgressBar(props: {
   fullCount: number;
   fullPercentage: number;
   total: number;
-  isLarge: boolean;
 }) {
-  const {
-    partialCount,
-    fullCount,
-    fullPercentage,
-    partialPercentage,
-    isLarge,
-  } = props;
+  const { partialCount, fullCount, fullPercentage, partialPercentage } = props;
   const { siteText } = useIntl();
   const { partially: partialLabel, fully: fullLabel } =
     siteText.vaccinaties.vaccination_coverage;
   const breakpoints = useBreakpoints(true);
 
-  const barHeight = breakpoints.md ? (isLarge ? 26 : 16) : 11;
+  const barHeight = breakpoints.md ? 16 : 11;
 
   return (
     <Box width="100%" mt={{ _: 4, md: 0 }}>

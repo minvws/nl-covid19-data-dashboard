@@ -57,12 +57,8 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
             getSortingOrder(a.age_group_range)
         )
         .map((value, index, array) => {
-          const isLastItem = index === array.length - 1;
           return (
-            <CoverageRow
-              borderColor={isLastItem ? 'black' : undefined}
-              key={value.age_group_range}
-            >
+            <CoverageRow key={value.age_group_range}>
               <AgeGroup
                 range={formatAgeGroupString(
                   value.age_group_range,
@@ -84,7 +80,6 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
                 fullCount={value.fully_vaccinated}
                 fullPercentage={value.fully_vaccinated_percentage}
                 total={value.age_group_total}
-                isLarge={isLastItem}
               />
             </CoverageRow>
           );
