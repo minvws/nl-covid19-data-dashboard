@@ -1,7 +1,7 @@
-import Varianten from '~/assets/varianten.svg';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
+import Varianten from '~/assets/varianten.svg';
 import {
   CategoryMenu,
   Menu,
@@ -54,7 +54,7 @@ export function InternationalLayout(props: InternationalLayoutProps) {
             mx="auto"
           >
             <Menu>
-              <CategoryMenu>
+              <CategoryMenu title={siteText.internationaal.titel_sidebar}>
                 <MetricMenuItemLink
                   showArrow
                   href={reverseRouter.in.positiefGetesteMensen()}
