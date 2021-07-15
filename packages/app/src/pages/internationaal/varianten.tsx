@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -28,11 +28,7 @@ import {
   VariantChartData,
 } from '~/static-props/variants/get-international-variant-chart-data';
 import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
-import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
-import {
-  VariantRow,
-  VariantTableData,
-} from '~/static-props/variants/get-variant-table-data';
+import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
 
 export const getStaticProps = createGetStaticProps(
@@ -99,17 +95,25 @@ export default function VariantenPage(
   const text = intl.siteText.internationaal_varianten;
   const tableText = text.varianten_tabel;
 
-  const [noDataMessageTable, noDataMessageChart] = useNoDataMessages(
-    tableData?.variantTable,
-    chartData?.variantChart,
-    text
-  );
-
   const metadata = {
     ...intl.siteText.internationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const noDataMessageTable =
+    tableData?.variantTable === undefined
+      ? text.selecteer_een_land_omschrijving
+      : tableData?.variantTable === null
+      ? text.geen_data_omschrijving
+      : '';
+
+  const noDataMessageChart =
+    chartData?.variantChart === undefined
+      ? text.selecteer_een_land_omschrijving
+      : chartData?.variantChart === null
+      ? text.geen_data_omschrijving
+      : '';
 
   const onChange = useCallback(
     (value: string) => {
@@ -193,28 +197,4 @@ export default function VariantenPage(
       </InternationalLayout>
     </Layout>
   );
-}
-
-function useNoDataMessages(
-  variantTable: VariantRow[] | undefined | null,
-  variantChart: VariantChartValue[] | undefined | null,
-  text: any
-) {
-  return useMemo(() => {
-    const noDataMessageTable =
-      variantTable === undefined
-        ? text.selecteer_een_land_omschrijving
-        : variantTable === null
-        ? text.geen_data_omschrijving
-        : '';
-
-    const noDataMessageChart =
-      variantChart === undefined
-        ? text.selecteer_een_land_omschrijving
-        : variantChart === null
-        ? text.geen_data_omschrijving
-        : '';
-
-    return [noDataMessageTable, noDataMessageChart] as const;
-  }, [variantTable, variantChart, text]);
 }
