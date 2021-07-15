@@ -1,20 +1,18 @@
 import { useMemo } from 'react';
-import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
+import { getVrGmCollectionForGmCode } from '~/utils/get-vr-gm-collection-for-gm-code';
 
 /**
  * This hook returns all the municipal codes that belong to the same safety region
  * as the given municipal code.
  *
- * @param municipalCode
+ * @param gmCodes
  */
-export function useRegionGmCollection(
-  municipalCode?: string
-): string[] | undefined {
+export function useRegionGmCollection(gmCode?: string): string[] | undefined {
   return useMemo(() => {
-    if (!municipalCode) {
+    if (!gmCode) {
       return;
     }
 
-    return getVrMunicipalsForMunicipalCode(municipalCode);
-  }, [municipalCode]);
+    return getVrGmCollectionForGmCode(gmCode);
+  }, [gmCode]);
 }

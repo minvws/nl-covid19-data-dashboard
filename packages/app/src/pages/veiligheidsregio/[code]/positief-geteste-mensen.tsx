@@ -9,9 +9,9 @@ import { ArticleStrip } from '~/components/article-strip';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleGmTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-gm-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -100,8 +100,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdValues = data.tested_ggd.values;
   const difference = data.difference;
 
-  const municipalCodes = gmCodesByVrCode[data.code];
-  const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
+  const gmCodes = gmCodesByVrCode[data.code];
+  const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -261,11 +261,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               thresholds: regionThresholds.tested_overall.infected_per_100k,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',
               }}
-              selectedCode={selectedMunicipalCode}
+              selectedCode={selectedGmCode}
               highlightSelection={false}
               data={choropleth.gm}
               getLink={reverseRouter.gm.positiefGetesteMensen}
@@ -273,7 +273,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricProperty="infected_per_100k"
               tooltipContent={(
                 context: GmProperties & GmCollectionTestedOverall
-              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+              ) => <PositiveTestedPeopleGmTooltip context={context} />}
             />
           </ChoroplethTile>
 

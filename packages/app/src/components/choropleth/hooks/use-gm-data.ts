@@ -2,8 +2,8 @@ import {
   Dictionary,
   GmCollection,
   GmCollectionMetricName,
+  GmGeoJSON,
   GmProperties,
-  MunicipalGeoJSON,
 } from '@corona-dashboard/common';
 import { set } from 'lodash';
 import { useMemo } from 'react';
@@ -28,28 +28,26 @@ interface GmMetricValue extends GmProperties {
   [key: string]: unknown;
 }
 
-interface MunicipalityChoroplethValue extends GmMetricValue {
+interface GmChoroplethValue extends GmMetricValue {
   __color_value: number;
 }
 
-export type GetMunicipalityDataFunctionType = (
-  id: string
-) => MunicipalityChoroplethValue;
+export type GetGmDataFunctionType = (id: string) => GmChoroplethValue;
 
 export type DataValue = {
   value: number;
   code: string;
 };
 
-type UseMunicipalityDataReturnValue = {
-  getChoroplethValue: GetMunicipalityDataFunctionType;
+type UseGmDataReturnValue = {
+  getChoroplethValue: GetGmDataFunctionType;
   hasData: boolean;
   values: DataValue[];
 };
 
-export function useMunicipalityNavigationData(
-  featureCollection: MunicipalGeoJSON
-): UseMunicipalityDataReturnValue {
+export function useGmNavigationData(
+  featureCollection: GmGeoJSON
+): UseGmDataReturnValue {
   const propertyData = featureCollection.features.reduce(
     (acc, feature) => set(acc, feature.properties.gmCode, feature.properties),
     {} as Record<string, GmProperties>
@@ -58,7 +56,7 @@ export function useMunicipalityNavigationData(
   return {
     getChoroplethValue: (id: string) => ({
       ...propertyData[id],
-      gmcode: propertyData[id].gmcode || propertyData[id].gmCode,
+      gmCode: propertyData[id].gmCode || propertyData[id].gmCode,
       __color_value: 0,
     }),
     hasData: true,
@@ -66,12 +64,12 @@ export function useMunicipalityNavigationData(
   };
 }
 
-export function useMunicipalityData<K extends GmCollectionMetricName>(
-  featureCollection: MunicipalGeoJSON,
+export function useGmData<K extends GmCollectionMetricName>(
+  featureCollection: GmGeoJSON,
   metricName: K,
   metricProperty: string,
   data: Pick<GmCollection, K>
-): UseMunicipalityDataReturnValue {
+): UseGmDataReturnValue {
   return useMemo(() => {
     const propertyData = featureCollection.features.reduce(
       (acc, feature) => set(acc, feature.properties.gmCode, feature.properties),
@@ -91,7 +89,7 @@ export function useMunicipalityData<K extends GmCollectionMetricName>(
 
     const values =
       (data?.[metricName] as any[])?.map((x) => ({
-        code: x.gmcode,
+        code: x.gmCode,
         value: x[metricProperty],
       })) ?? [];
 
@@ -106,12 +104,12 @@ export function useMunicipalityData<K extends GmCollectionMetricName>(
 
     const mergedData = metricsForAllGmCollection.reduce((acc, value) => {
       const feature = featureCollection.features.find(
-        (feat) => feat.properties.gmCode === value.gmcode
+        (feat) => feat.properties.gmCode === value.gmCode
       );
 
       if (!feature) return acc;
 
-      return set(acc, value.gmcode, {
+      return set(acc, value.gmCode, {
         ...feature.properties,
         /**
          * To access things like timestamps in the tooltip we simply merge all
@@ -124,7 +122,7 @@ export function useMunicipalityData<K extends GmCollectionMetricName>(
          */
         __color_value: Number(value[metricProperty]),
       });
-    }, {} as Dictionary<MunicipalityChoroplethValue>);
+    }, {} as Dictionary<GmChoroplethValue>);
 
     const hasData = Object.keys(mergedData).length > 0;
 

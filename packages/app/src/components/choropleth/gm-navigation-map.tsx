@@ -7,14 +7,11 @@ import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { Choropleth } from './choropleth';
-import {
-  useMunicipalityNavigationData,
-  useTabInteractiveButton,
-} from './hooks';
+import { useGmNavigationData, useTabInteractiveButton } from './hooks';
 import { HoverPathLink, Path } from './path';
-import { countryGeo, municipalGeo } from './topology';
+import { countryGeo, gmGeo } from './topology';
 
-type MunicipalityNavigationMapProps<T> = {
+type GmNavigationMapProps<T> = {
   onSelect?: (gmcode: string) => void;
   tooltipContent?: (context: GmProperties & { value: T }) => ReactNode;
 };
@@ -25,15 +22,13 @@ type MunicipalityNavigationMapProps<T> = {
  * index page.
  */
 
-export function MunicipalityNavigationMap<T>(
-  props: MunicipalityNavigationMapProps<T>
-) {
+export function GmNavigationMap<T>(props: GmNavigationMapProps<T>) {
   const { tooltipContent } = props;
 
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
+  const { getChoroplethValue } = useGmNavigationData(gmGeo);
 
   const renderFeature = (
     feature: Feature<MultiPolygon, GmProperties>,
@@ -98,8 +93,8 @@ export function MunicipalityNavigationMap<T>(
           key: 'municipality_navigation_map',
           features: ['keyboard_choropleth'],
         }}
-        featureCollection={municipalGeo}
-        hovers={municipalGeo}
+        featureCollection={gmGeo}
+        hovers={gmGeo}
         boundingBox={countryGeo}
         renderFeature={renderFeature}
         renderHover={renderHover}

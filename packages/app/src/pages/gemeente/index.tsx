@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { Box } from '~/components/base';
-import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
+import { GmNavigationMap } from '~/components/choropleth/gm-navigation-map';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { Heading, Text } from '~/components/typography';
-import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
+import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -17,7 +17,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
-const Municipality = (props: StaticProps<typeof getStaticProps>) => {
+const GmIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -32,14 +32,10 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
-        isLandingPage
-        lastGenerated={lastGenerated}
-        code={code}
-      >
+      <GmLayout isLandingPage lastGenerated={lastGenerated} code={code}>
         {!breakpoints.md && (
           <Box bg="white">
-            <MunicipalityComboBox />
+            <GmComboBox />
           </Box>
         )}
 
@@ -58,19 +54,19 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             maxHeight={960}
             margin="0 auto"
           >
-            <MunicipalityNavigationMap
+            <GmNavigationMap
               tooltipContent={(context) => (
                 <TooltipContent
                   title={context.gemnaam}
-                  link={reverseRouter.gm.index(context.gmcode)}
+                  link={reverseRouter.gm.index(context.gmCode)}
                 />
               )}
             />
           </Box>
         </Box>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };
 
-export default Municipality;
+export default GmIndexPage;

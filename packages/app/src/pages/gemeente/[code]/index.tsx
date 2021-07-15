@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -20,9 +20,8 @@ export const getStaticProps = createGetStaticProps(
   selectGmPageMetricData('code', 'difference')
 );
 
-const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { lastGenerated, municipalityName, sideBarData, selectedGmData } =
-    props;
+const GmIndexPage = (props: StaticProps<typeof getStaticProps>) => {
+  const { lastGenerated, gmName, sideBarData, selectedGmData } = props;
   const router = useRouter();
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -34,15 +33,15 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         code={selectedGmData.code}
         difference={selectedGmData.difference}
         data={sideBarData}
-        municipalityName={municipalityName}
+        gmName={gmName}
         lastGenerated={lastGenerated}
       />
     </Layout>
   );
 };
 
-export default Municipality;
+export default GmIndexPage;

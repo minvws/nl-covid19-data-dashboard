@@ -7,7 +7,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { regionThresholds } from '../../region-thresholds';
 
-export function SewerMunicipalTooltip({
+export function SewerGmTooltip({
   context,
 }: {
   context: GmProperties & GmSewerValue;
@@ -22,7 +22,7 @@ export function SewerMunicipalTooltip({
   return (
     <TooltipContent
       title={context.gemnaam}
-      link={reverseRouter.gm.rioolwater(context.gmcode)}
+      link={reverseRouter.gm.rioolwater(context.gmCode)}
     >
       <TooltipSubject
         subject={subject}

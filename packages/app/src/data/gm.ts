@@ -1,4 +1,4 @@
-type MunicipalityInfo = {
+type GmInfo = {
   name: string;
   vrCode: string;
   gmCode: string;
@@ -6,7 +6,7 @@ type MunicipalityInfo = {
   searchTerms?: string[];
 };
 
-export const gmData: MunicipalityInfo[] = [
+export const gmData: GmInfo[] = [
   {
     name: 'Aa en Hunze',
     vrCode: 'VR03',

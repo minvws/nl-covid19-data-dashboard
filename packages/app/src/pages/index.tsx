@@ -19,9 +19,9 @@ import {
   RegionControlOption,
 } from '~/components/chart-region-controls';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleGmTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-gm-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
@@ -329,7 +329,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <>
                   {selectedMap === 'municipal' && (
-                    <MunicipalityChoropleth
+                    <GmChoropleth
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
                       }}
@@ -339,11 +339,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       getLink={reverseRouter.gm.positiefGetesteMensen}
                       tooltipContent={(
                         context: GmProperties & GmCollectionTestedOverall
-                      ) => (
-                        <PositiveTestedPeopleMunicipalTooltip
-                          context={context}
-                        />
-                      )}
+                      ) => <PositiveTestedPeopleGmTooltip context={context} />}
                     />
                   )}
                   {selectedMap === 'region' && (

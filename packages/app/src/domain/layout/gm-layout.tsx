@@ -18,27 +18,27 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
+import { getVrForGmCode } from '~/utils/get-vr-for-gm-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { MunicipalityComboBox } from './components/municipality-combo-box';
+import { GmComboBox } from './components/gm-combo-box';
 
-export type MunicipalSideBarData = {
+export type GmSideBarData = {
   tested_overall: Pick<Gm['tested_overall'], 'last_value'>;
   deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
   hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
   sewer: Pick<Gm['sewer'], 'last_value'>;
 };
 
-type MunicipalityLayoutProps = {
+type GmLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
       code: string;
       difference: GmDifference;
-      data: MunicipalSideBarData;
-      municipalityName: string;
+      data: GmSideBarData;
+      gmName: string;
     }
   | {
       /**
@@ -48,7 +48,7 @@ type MunicipalityLayoutProps = {
       code: string;
       data?: undefined;
       difference?: undefined;
-      municipalityName?: undefined;
+      gmName?: undefined;
     }
 );
 
@@ -68,8 +68,8 @@ type MunicipalityLayoutProps = {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-export function MunicipalityLayout(props: MunicipalityLayoutProps) {
-  const { children, data, municipalityName, code, difference } = props;
+export function GmLayout(props: GmLayoutProps) {
+  const { children, data, gmName, code, difference } = props;
   const sidebarData = useMemo(
     () => ({ ...data, difference }),
     [data, difference]
@@ -84,7 +84,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const vr = getVrForMunicipalityCode(code);
+  const vr = getVrForGmCode(code);
 
   return (
     <>
@@ -109,7 +109,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
           >
-            <MunicipalityComboBox />
+            <GmComboBox />
           </Box>
         }
         sidebarComponent={
@@ -127,7 +127,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 mx="auto"
               >
                 <Box>
-                  <Category>{municipalityName}</Category>
+                  <Category>{gmName}</Category>
                   {vr && (
                     <Text pl={3}>
                       {siteText.common.veiligheidsregio_label}{' '}

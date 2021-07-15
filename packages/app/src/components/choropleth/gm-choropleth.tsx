@@ -16,21 +16,21 @@ import {
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
 import { Choropleth } from './choropleth';
+import { gmThresholds } from './gm-thresholds';
 import {
   useChoroplethColorScale,
-  useMunicipalityBoundingbox,
-  useMunicipalityData,
+  useGmBoundingbox,
+  useGmData,
   useRegionGmCollection,
   useTabInteractiveButton,
 } from './hooks';
 import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
 import { getDataThresholds } from './legenda/utils';
-import { municipalThresholds } from './municipal-thresholds';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
-import { countryGeo, municipalGeo, regionGeo } from './topology';
+import { countryGeo, gmGeo, regionGeo } from './topology';
 
-type MunicipalityChoroplethProps<T, K extends GmCollectionMetricName> = {
+type GmChoroplethProps<T, K extends GmCollectionMetricName> = {
   data: Pick<GmCollection, K>;
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
@@ -59,8 +59,8 @@ type MunicipalityChoroplethProps<T, K extends GmCollectionMetricName> = {
  *
  * @param props
  */
-export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
-  props: MunicipalityChoroplethProps<T, K>
+export function GmChoropleth<T, K extends GmCollectionMetricName>(
+  props: GmChoroplethProps<T, K>
 ) {
   const {
     accessibility,
@@ -76,19 +76,19 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
 
   const { siteText } = useIntl();
 
-  const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selectedCode);
+  const [boundingbox] = useGmBoundingbox(regionGeo, selectedCode);
 
-  const { getChoroplethValue, hasData, values } = useMunicipalityData(
-    municipalGeo,
+  const { getChoroplethValue, hasData, values } = useGmData(
+    gmGeo,
     metricName,
     metricProperty,
     data
   );
 
-  const vrMunicipalCodes = useRegionGmCollection(selectedCode);
+  const vrGmCodes = useRegionGmCollection(selectedCode);
 
   const thresholdValues = getDataThresholds(
-    municipalThresholds,
+    gmThresholds,
     metricName,
     metricProperty
   );
@@ -99,7 +99,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     metricName,
     metricProperty,
     'gm',
-    vrMunicipalCodes
+    vrGmCodes
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -114,7 +114,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
       _index: number
     ) => {
       const { gmCode } = feature.properties;
-      const isInSameRegion = vrMunicipalCodes?.includes(gmCode) ?? true;
+      const isInSameRegion = vrGmCodes?.includes(gmCode) ?? true;
       const fill = isInSameRegion ? getFillColor(gmCode) : 'white';
 
       return (
@@ -138,7 +138,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
         />
       );
     },
-    [getFillColor, hasData, vrMunicipalCodes, selectedCode]
+    [getFillColor, hasData, vrGmCodes, selectedCode]
   );
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
@@ -152,7 +152,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     (feature: Feature<MultiPolygon, GmProperties>, path: string) => {
       const { gmCode, gemnaam } = feature.properties;
       const isSelected = gmCode === selectedCode && highlightSelection;
-      const isInSameRegion = vrMunicipalCodes?.includes(gmCode) ?? true;
+      const isInSameRegion = vrGmCodes?.includes(gmCode) ?? true;
 
       if (hasData && selectedCode && !isInSameRegion) {
         return null;
@@ -176,7 +176,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     [
       selectedCode,
       highlightSelection,
-      vrMunicipalCodes,
+      vrGmCodes,
       hasData,
       getLink,
       isTabInteractive,
@@ -205,9 +205,9 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
         <Choropleth
           accessibility={choroplethAccessibility}
           description={dataDescription}
-          featureCollection={municipalGeo}
+          featureCollection={gmGeo}
           outlines={countryGeo}
-          hovers={hasData ? municipalGeo : undefined}
+          hovers={hasData ? gmGeo : undefined}
           boundingBox={boundingbox || countryGeo}
           renderFeature={renderFeature}
           renderHover={renderHover}

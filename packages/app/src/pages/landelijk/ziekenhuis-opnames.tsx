@@ -10,10 +10,10 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
+import { gmThresholds } from '~/components/choropleth/gm-thresholds';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { HospitalAdmissionsGmTooltip } from '~/components/choropleth/tooltips/municipal/hospital-admissions-gm-tooltip';
 import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
@@ -167,8 +167,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'municipal'
-                  ? municipalThresholds.hospital_nice
-                      .admissions_on_date_of_reporting
+                  ? gmThresholds.hospital_nice.admissions_on_date_of_reporting
                   : regionThresholds.hospital_nice
                       .admissions_on_date_of_reporting,
               title: text.chloropleth_legenda.titel,
@@ -179,7 +178,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'municipal' && (
-              <MunicipalityChoropleth
+              <GmChoropleth
                 accessibility={{
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
@@ -189,7 +188,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
                   context: GmProperties & GmHospitalNiceValue
-                ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
+                ) => <HospitalAdmissionsGmTooltip context={context} />}
               />
             )}
             {selectedMap === 'region' && (

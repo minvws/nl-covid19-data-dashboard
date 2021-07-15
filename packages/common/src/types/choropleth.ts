@@ -83,7 +83,6 @@ export interface VrProperties {
 export interface GmProperties {
   gemnaam: string;
   gmCode: string;
-  gmcode: string;
 }
 
 export type EuropeGeoProperties = { ISO_A3: string };
@@ -93,7 +92,7 @@ export type EuropeGeoJSON = FeatureCollection<
   EuropeGeoProperties
 >;
 
-export type MunicipalGeoJSON = FeatureCollection<MultiPolygon, GmProperties>;
+export type GmGeoJSON = FeatureCollection<MultiPolygon, GmProperties>;
 
 export type VrGeoJSON = FeatureCollection<MultiPolygon, VrProperties>;
 

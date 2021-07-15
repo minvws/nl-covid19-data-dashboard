@@ -4,7 +4,7 @@ import { gmData } from '~/data/gm';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-export function MunicipalityComboBox() {
+export function GmComboBox() {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
   const router = useRouter();

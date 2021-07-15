@@ -11,21 +11,21 @@ import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
+import { SewerGmTooltip } from '~/components/choropleth/tooltips/municipal/sewer-gm-tooltip';
 import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -184,7 +184,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'municipal' ? (
-              <MunicipalityChoropleth
+              <GmChoropleth
                 accessibility={{
                   key: 'sewer_municipal_choropleth',
                 }}
@@ -193,7 +193,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="sewer"
                 metricProperty="average"
                 tooltipContent={(context: GmProperties & GmSewerValue) => (
-                  <SewerMunicipalTooltip context={context} />
+                  <SewerGmTooltip context={context} />
                 )}
               />
             ) : (

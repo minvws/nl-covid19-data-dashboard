@@ -14,9 +14,9 @@ import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { PositiveTestedPeopleGmTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-gm-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
@@ -222,7 +222,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              * now that is a bridge too far. Let's take it one step at a time.
              */}
             {selectedMap === 'municipal' && (
-              <MunicipalityChoropleth
+              <GmChoropleth
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
                 }}
@@ -232,7 +232,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected_per_100k"
                 tooltipContent={(
                   context: GmProperties & GmCollectionTestedOverall
-                ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+                ) => <PositiveTestedPeopleGmTooltip context={context} />}
               />
             )}
             {selectedMap === 'region' && (

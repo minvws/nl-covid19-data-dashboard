@@ -7,18 +7,18 @@ import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
  * If the given code is undefined, it returns undefined.
  *
  * @param regionGeo
- * @param selectedMunicipality
+ * @param selectedGm
  */
-export function useMunicipalityBoundingbox(
+export function useGmBoundingbox(
   regionGeo: VrGeoJSON,
-  selectedMunicipality?: string
+  selectedGm?: string
 ): [VrGeoJSON, string] | [undefined, undefined] {
   return useMemo(() => {
-    if (!selectedMunicipality) {
+    if (!selectedGm) {
       return [undefined, undefined];
     }
 
-    const vrcode = vrCodeByGmCode[selectedMunicipality];
+    const vrcode = vrCodeByGmCode[selectedGm];
 
     if (vrcode) {
       const vrFeature = regionGeo.features.find(
@@ -39,5 +39,5 @@ export function useMunicipalityBoundingbox(
     }
 
     return [undefined, undefined];
-  }, [selectedMunicipality, regionGeo]);
+  }, [selectedGm, regionGeo]);
 }

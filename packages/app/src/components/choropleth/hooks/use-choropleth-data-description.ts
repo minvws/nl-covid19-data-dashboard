@@ -2,7 +2,7 @@ import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { DataValue } from './use-municipality-data';
+import { DataValue } from './use-gm-data';
 
 /**
  * This hook generates a text that describes the distribution of the choropleth data for accessibility purposes.

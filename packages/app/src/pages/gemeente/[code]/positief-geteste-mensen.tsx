@@ -6,9 +6,9 @@ import Getest from '~/assets/test.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
+import { gmThresholds } from '~/components/choropleth/gm-thresholds';
+import { PositiveTestedPeopleGmTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-gm-tooltip';
 import { CollapsibleContent } from '~/components/collapsible';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
@@ -18,8 +18,8 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   ArticlesQueryResult,
@@ -77,7 +77,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     selectedGmData: data,
     sideBarData,
     choropleth,
-    municipalityName,
+    gmName,
     content,
     lastGenerated,
   } = props;
@@ -91,27 +91,27 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      municipalityName,
+      municipalityName: gmName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      municipalityName,
+      municipalityName: gmName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
-        municipalityName={municipalityName}
+        gmName={gmName}
         lastGenerated={lastGenerated}
       >
         <TileList>
           <ContentHeader
             category={siteText.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(text.titel, {
-              municipality: municipalityName,
+              municipality: gmName,
             })}
             icon={<Getest />}
             subtitle={text.pagina_toelichting}
@@ -146,7 +146,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 {replaceComponentsInText(
                   siteText.gemeente_index.population_count,
                   {
-                    municipalityName,
+                    municipalityName: gmName,
                     populationCount: (
                       <strong>{formatNumber(populationCount)}</strong>
                     ),
@@ -181,7 +181,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <Text>
                   {replaceComponentsInText(text.population_count_explanation, {
-                    municipalityName: <strong>{municipalityName}</strong>,
+                    municipalityName: <strong>{gmName}</strong>,
                     value: (
                       <strong>
                         {formatNumber(lastValue.infected_per_100k)}
@@ -247,11 +247,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
-              municipality: municipalityName,
+              municipality: gmName,
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds: municipalThresholds.tested_overall.infected_per_100k,
+              thresholds: gmThresholds.tested_overall.infected_per_100k,
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
             }}
@@ -260,7 +260,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'confirmed_cases_choropleth',
               }}
@@ -271,11 +271,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricProperty="infected_per_100k"
               tooltipContent={(
                 context: GmProperties & GmCollectionTestedOverall
-              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+              ) => <PositiveTestedPeopleGmTooltip context={context} />}
             />
           </ChoroplethTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

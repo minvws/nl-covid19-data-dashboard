@@ -19,7 +19,7 @@ import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 import { CountryCode } from '~/domain/international/select-countries';
-import { MunicipalSideBarData } from '~/domain/layout/municipality-layout';
+import { GmSideBarData } from '~/domain/layout/gm-layout';
 import {
   NlPageMetricNames,
   nlPageMetricNames,
@@ -259,7 +259,7 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const sideBarData: MunicipalSideBarData = {
+    const sideBarData: GmSideBarData = {
       deceased_rivm: { last_value: gmData.data.deceased_rivm.last_value },
       hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
       tested_overall: { last_value: gmData.data.tested_overall.last_value },
@@ -274,7 +274,7 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
     return {
       selectedGmData,
       sideBarData,
-      municipalityName: gmData.municipalityName,
+      gmName: gmData.gmName,
     };
   };
 }
@@ -283,16 +283,16 @@ function getGmData(context: GetStaticPropsContext) {
   const code = context.params?.code as string | undefined;
 
   if (!code) {
-    throw Error('No valid gmcode found in context');
+    throw Error('No valid gmCode found in context');
   }
 
   const data = loadJsonFromDataFile<Gm>(`${code}.json`);
 
-  const municipalityName = gmData.find((x) => x.gmCode === code)?.name || '';
+  const gmName = gmData.find((x) => x.gmCode === code)?.name || '';
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
-  return { data, municipalityName };
+  return { data, gmName };
 }
 
 const NOOP = () => null;

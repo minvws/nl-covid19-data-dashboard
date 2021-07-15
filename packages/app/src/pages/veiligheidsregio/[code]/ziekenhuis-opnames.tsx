@@ -3,9 +3,9 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
+import { gmThresholds } from '~/components/choropleth/gm-thresholds';
+import { HospitalAdmissionsGmTooltip } from '~/components/choropleth/tooltips/municipal/hospital-admissions-gm-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -75,8 +75,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.veiligheidsregio_ziekenhuisopnames_per_dag;
   const lastValue = data.hospital_nice.last_value;
 
-  const municipalCodes = gmCodesByVrCode[data.code];
-  const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
+  const gmCodes = gmCodesByVrCode[data.code];
+  const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
@@ -144,8 +144,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             description={text.map_toelichting}
             legend={{
               thresholds:
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
+                gmThresholds.hospital_nice.admissions_on_date_of_reporting,
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             }}
@@ -154,18 +153,18 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              selectedCode={selectedMunicipalCode}
+              selectedCode={selectedGmCode}
               highlightSelection={false}
               data={choropleth.gm}
               getLink={reverseRouter.gm.ziekenhuisopnames}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
               tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <HospitalAdmissionsMunicipalTooltip context={context} />
+                <HospitalAdmissionsGmTooltip context={context} />
               )}
             />
           </ChoroplethTile>

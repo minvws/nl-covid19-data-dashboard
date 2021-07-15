@@ -10,8 +10,8 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
@@ -50,7 +50,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
     sideBarData,
-    municipalityName,
+    gmName,
     content,
     lastGenerated,
   } = props;
@@ -73,27 +73,27 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      municipalityName,
+      municipalityName: gmName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      municipalityName,
+      municipalityName: gmName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
-        municipalityName={municipalityName}
+        gmName={gmName}
         lastGenerated={lastGenerated}
       >
         <TileList>
           <ContentHeader
             category={siteText.gemeente_layout.headings.vroege_signalen}
             title={replaceVariablesInText(text.titel, {
-              municipality: municipalityName,
+              municipality: gmName,
             })}
             icon={<RioolwaterMonitoring />}
             subtitle={text.pagina_toelichting}
@@ -135,7 +135,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 {replaceComponentsInText(
                   siteText.gemeente_index.population_count,
                   {
-                    municipalityName: municipalityName,
+                    municipalityName: gmName,
                     populationCount: (
                       <strong>{formatNumber(populationCount)}</strong>
                     ),
@@ -152,7 +152,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <Text>
                   {replaceComponentsInText(text.population_count_explanation, {
-                    municipalityName: <strong>{municipalityName}</strong>,
+                    municipalityName: <strong>{gmName}</strong>,
                     value: (
                       <strong>
                         {formatNumber(sewerAverages.last_value.average)}
@@ -210,7 +210,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

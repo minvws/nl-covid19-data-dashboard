@@ -8,9 +8,9 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { municipalThresholds } from '../../municipal-thresholds';
+import { gmThresholds } from '../../gm-thresholds';
 
-export function PositiveTestedPeopleMunicipalTooltip({
+export function PositiveTestedPeopleGmTooltip({
   context,
 }: {
   context: GmProperties & GmCollectionTestedOverall;
@@ -20,7 +20,7 @@ export function PositiveTestedPeopleMunicipalTooltip({
   const text = siteText.common.tooltip;
 
   const subject = siteText.choropleth_tooltip.positive_tested_people;
-  const thresholdValues = municipalThresholds.tested_overall.infected_per_100k;
+  const thresholdValues = gmThresholds.tested_overall.infected_per_100k;
 
   const { gemnaam, infected_per_100k, infected } = context;
 

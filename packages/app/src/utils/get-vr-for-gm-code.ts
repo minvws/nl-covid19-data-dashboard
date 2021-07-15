@@ -7,14 +7,14 @@ import { vrData } from '~/data/vr';
  *
  * @param code
  */
-export function getVrForMunicipalityCode(
+export function getVrForGmCode(
   code: string
 ): { name: string; code: string; id: number } | undefined {
-  const municipality = gmData.find((x) => x.gmCode === code);
+  const gm = gmData.find((x) => x.gmCode === code);
 
-  if (!municipality) return;
+  if (!gm) return;
 
-  const regio = vrData.find((x) => x.code === municipality.vrCode);
+  const regio = vrData.find((x) => x.code === gm.vrCode);
 
   return regio;
 }

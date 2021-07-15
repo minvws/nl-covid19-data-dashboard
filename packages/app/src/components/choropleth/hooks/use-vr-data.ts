@@ -8,7 +8,7 @@ import {
 import { set } from 'lodash';
 import { useMemo } from 'react';
 import { assert } from '~/utils/assert';
-import { DataValue } from './use-municipality-data';
+import { DataValue } from './use-gm-data';
 
 interface VrMetricValue extends VrProperties {
   [key: string]: unknown;

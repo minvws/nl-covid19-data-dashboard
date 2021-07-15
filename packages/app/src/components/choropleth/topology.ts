@@ -1,8 +1,4 @@
-import {
-  EuropeGeoJSON,
-  MunicipalGeoJSON,
-  VrGeoJSON,
-} from '@corona-dashboard/common';
+import { EuropeGeoJSON, GmGeoJSON, VrGeoJSON } from '@corona-dashboard/common';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import * as topojson from 'topojson-client';
 import europeTopology from './geography-europe-simplified.json';
@@ -19,10 +15,10 @@ export const regionGeo = topojson.feature(
   topology.objects.vr_collection
 ) as VrGeoJSON;
 
-export const municipalGeo = topojson.feature(
+export const gmGeo = topojson.feature(
   topology,
   topology.objects.gm_collection
-) as MunicipalGeoJSON;
+) as GmGeoJSON;
 
 export const europeGeo = topojson.feature(
   europeTopology,

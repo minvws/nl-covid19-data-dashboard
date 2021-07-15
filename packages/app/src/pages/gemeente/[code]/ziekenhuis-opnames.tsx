@@ -3,17 +3,17 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
+import { gmThresholds } from '~/components/choropleth/gm-thresholds';
+import { HospitalAdmissionsGmTooltip } from '~/components/choropleth/tooltips/municipal/hospital-admissions-gm-tooltip';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   ArticlesQueryResult,
@@ -67,10 +67,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
     selectedGmData: data,
     sideBarData,
     choropleth,
-    municipalityName,
+    gmName,
     content,
     lastGenerated,
   } = props;
+
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
 
@@ -86,27 +87,27 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      municipalityName,
+      municipalityName: gmName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      municipalityName,
+      municipalityName: gmName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
-        municipalityName={municipalityName}
+        gmName={gmName}
         lastGenerated={lastGenerated}
       >
         <TileList>
           <ContentHeader
             category={siteText.gemeente_layout.headings.ziekenhuizen}
             title={replaceVariablesInText(text.titel, {
-              municipality: municipalityName,
+              municipality: gmName,
             })}
             icon={<Ziekenhuis />}
             subtitle={text.pagina_toelichting}
@@ -144,7 +145,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
-              municipality: municipalityName,
+              municipality: gmName,
             })}
             metadata={{
               date: lastValue.date_unix,
@@ -155,11 +156,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
               thresholds:
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
+                gmThresholds.hospital_nice.admissions_on_date_of_reporting,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
@@ -169,7 +169,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
               tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <HospitalAdmissionsMunicipalTooltip context={context} />
+                <HospitalAdmissionsGmTooltip context={context} />
               )}
             />
           </ChoroplethTile>
@@ -223,7 +223,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

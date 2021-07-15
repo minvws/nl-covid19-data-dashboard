@@ -9,8 +9,8 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -42,7 +42,7 @@ export const getStaticProps = createGetStaticProps(
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     sideBarData,
-    municipalityName,
+    gmName,
     selectedGmData: { deceased_rivm: dataRivm, difference, code },
     content,
     lastGenerated,
@@ -58,27 +58,27 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.gemeente_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      municipalityName,
+      municipalityName: gmName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      municipalityName,
+      municipalityName: gmName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={code}
         difference={difference}
-        municipalityName={municipalityName}
+        gmName={gmName}
         lastGenerated={lastGenerated}
       >
         <TileList>
           <ContentHeader
             category={siteText.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
-              municipalityName,
+              municipalityName: gmName,
             })}
             icon={<CoronaVirusIcon />}
             subtitle={text.section_deceased_rivm.description}
@@ -185,7 +185,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };
