@@ -128,6 +128,7 @@ function LegendItem({
       <InlineText fontSize={{ _: 1, md: 2 }}>
         {`${formatPercentage(percentage, {
           maximumFractionDigits: 1,
+          minimumFractionDigits: 1,
         })}% ${label} (${formatNumber(count)})`}
       </InlineText>
     </Box>
