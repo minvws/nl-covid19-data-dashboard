@@ -35,7 +35,12 @@ function MobileCoverageRow(props: CoverageRowProps) {
     <Row width="100%" display="flex" flexDirection="column">
       <Box display="flex">
         <Box flex={1}>{children[0]}</Box>
-        <Box flex={1} display="flex" justifyContent="center">
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="flex-end"
+          pr={{ _: 2, xs: 4 }}
+        >
           {children[1]}
         </Box>
         <Box flex={0.2}>
@@ -67,7 +72,6 @@ function DesktopCoverageRow(props: CoverageRowProps) {
         flex={0.4}
         display="flex"
         justifyContent="flex-end"
-        style={{ border: '1px solid hotpink' }}
         mr={{ _: 3, lg: 4, xl: 5 }}
       >
         {children[1]}

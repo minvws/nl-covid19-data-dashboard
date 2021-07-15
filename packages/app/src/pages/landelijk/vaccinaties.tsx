@@ -359,7 +359,7 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
     '70-79',
     '80+',
   ]
-    .map(createCoverageRow)
+    .map(createDataForRow)
     .reverse();
 
   values[2].fully_vaccinated = 0;
@@ -367,7 +367,7 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
 
   return { values };
 
-  function createCoverageRow(
+  function createDataForRow(
     ageGroup: string
   ): NlVaccineCoveragePerAgeGroupValue {
     const ageGroupTotal = Math.floor(Math.random() * 1700000) + 100000;

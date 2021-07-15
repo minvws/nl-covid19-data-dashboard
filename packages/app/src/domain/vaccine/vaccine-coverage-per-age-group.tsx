@@ -24,7 +24,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
       <CoverageRow isHeaderRow>
         <InlineText>{headers.agegroup}</InlineText>
         <InlineText>{headers.coverage}</InlineText>
-        {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : null}
+        {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : <div />}
       </CoverageRow>
       {values
         /**
@@ -46,7 +46,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
               key={value.age_group_range}
             >
               <AgeGroup
-                range={formatAgeGroup(
+                range={formatAgeGroupString(
                   value.age_group_range,
                   templates.agegroup
                 )}
@@ -57,6 +57,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
               <VaccinationCoveragePercentage
                 value={`${formatPercentage(value.fully_vaccinated_percentage, {
                   maximumFractionDigits: 1,
+                  minimumFractionDigits: 1,
                 })}%`}
               />
               <CoverageProgressBar
@@ -91,7 +92,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
  * @param templates
  * @returns
  */
-function formatAgeGroup(
+function formatAgeGroupString(
   ageGroup: string,
   templates: {
     oldest: string;
@@ -129,11 +130,9 @@ function VaccinationCoveragePercentage({ value }: { value: string }) {
 function AgeGroup({ range, total }: { range: string; total: string }) {
   return (
     <Box display="flex" flexDirection="column">
-      <Box>
-        <InlineText fontWeight="bold" fontSize={{ _: 2, md: 3 }}>
-          {range}
-        </InlineText>
-      </Box>
+      <InlineText fontWeight="bold" fontSize={{ _: 2, md: 3 }}>
+        {range}
+      </InlineText>
       <Box as="span" fontSize={{ _: 1, md: 2 }}>
         <InlineText>{total}</InlineText>
       </Box>
