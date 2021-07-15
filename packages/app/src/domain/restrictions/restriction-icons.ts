@@ -64,4 +64,6 @@ export const restrictionIcons: Record<string, string | null> = {
   meerdaagse_evenementen: 'meerdaagse-evenementen.svg',
   openingstijden: 'openingstijden.svg',
   toegangsbewijzen: 'toegangsbewijzen.svg',
+  klok_2100: 'klok-2100.svg',
+  geen_entertainment: 'geen-entertainment.svg',
 };
