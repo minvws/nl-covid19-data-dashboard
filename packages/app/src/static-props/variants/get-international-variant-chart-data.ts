@@ -15,7 +15,7 @@ export function getInternationalVariantChartData(data: Record<string, In>) {
 
 const EMPTY_VALUES = {
   variantChart: null,
-  dates: undefined,
+  dates: null,
 } as const;
 
 export type VariantChartData = ReturnType<typeof getVariantChartData>;
