@@ -24,8 +24,6 @@ type VariantsStackedAreaTileProps = {
   noDataMessage?: ReactNode;
 };
 
-const alwayEnabled: string[] = [];
-
 export function VariantsStackedAreaTile({
   values,
   metadata,
@@ -53,6 +51,8 @@ export function VariantsStackedAreaTile({
     </VariantStackedAreaTileWithData>
   );
 }
+
+const alwayEnabled: string[] = [];
 
 type VariantStackedAreaTileWithDataProps = {
   values: VariantChartValue[];
