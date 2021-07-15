@@ -40,7 +40,6 @@ function MobileCoverageRow(props: RowProps) {
           flex={1}
           display="flex"
           justifyContent="flex-end"
-          // alignItems="center"
           pr={{ _: 2, xs: 4 }}
         >
           {children[1]}

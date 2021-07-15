@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -22,6 +23,7 @@ export function CoverageProgressBar(props: {
   const breakpoints = useBreakpoints(true);
 
   const barHeight = breakpoints.md ? 16 : 11;
+  const showCount = breakpoints.md;
 
   return (
     <Box width="100%">
@@ -82,13 +84,13 @@ export function CoverageProgressBar(props: {
           color={fullColor}
           percentage={fullPercentage}
           label={fullLabel}
-          count={fullCount}
+          count={showCount ? fullCount : undefined}
         />
         <LegendItem
           color={partialColor}
           percentage={partialPercentage}
           label={partialLabel}
-          count={partialCount}
+          count={showCount ? partialCount : undefined}
         />
       </Box>
     </Box>
@@ -116,21 +118,28 @@ function LegendItem({
 }: {
   color: string;
   percentage: number;
-  count: number;
+  count?: number;
   label: string;
 }) {
   const { formatPercentage, formatNumber } = useIntl();
   return (
-    <Box display="flex">
-      <Box>
-        <ColorIndicator color={color} />
-      </Box>
-      <InlineText fontSize={{ _: 1, md: 2 }}>
-        {`${formatPercentage(percentage, {
-          maximumFractionDigits: 1,
-          minimumFractionDigits: 1,
-        })}% ${label} (${formatNumber(count)})`}
-      </InlineText>
+    <Box display="flex" alignItems="center">
+      <ColorIndicator color={color} />
+      {isDefined(count) ? (
+        <InlineText fontSize={{ _: 1, md: 2 }}>
+          {`${formatPercentage(percentage, {
+            maximumFractionDigits: 1,
+            minimumFractionDigits: 1,
+          })}% ${label} (${formatNumber(count)})`}
+        </InlineText>
+      ) : (
+        <InlineText fontSize={{ _: 1, md: 2 }}>
+          {`${formatPercentage(percentage, {
+            maximumFractionDigits: 1,
+            minimumFractionDigits: 1,
+          })}% ${label}`}
+        </InlineText>
+      )}
     </Box>
   );
 }
