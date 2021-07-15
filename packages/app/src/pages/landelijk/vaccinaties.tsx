@@ -96,6 +96,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { page } = content;
 
+  // TODO: put this back this when data is available
+  //const {vaccine_coverage_per_age_group} = data;
+  const vaccine_coverage_per_age_group = mockCoverageData();
+
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
@@ -205,11 +209,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 {siteText.vaccinaties.vaccination_coverage.toelichting}
               </Text>
               <VaccineCoveragePerAgeGroup
-                values={
-                  data.vaccine_coverage_per_age_group
-                    ? data.vaccine_coverage_per_age_group.values
-                    : mockCoverageData().values
-                }
+                values={vaccine_coverage_per_age_group.values}
               />
             </Tile>
           ) : null}

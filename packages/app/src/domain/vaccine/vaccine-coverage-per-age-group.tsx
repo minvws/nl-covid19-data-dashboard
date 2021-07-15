@@ -110,7 +110,6 @@ function formatAgeGroupString(
   templates: {
     oldest: string;
     group: string;
-    total: string;
     total_people: string;
   }
 ) {
@@ -127,7 +126,7 @@ function formatAgeGroupString(
       return replaceVariablesInText(templates.oldest, { age });
     }
     default: {
-      return templates.total;
+      throw new Error(`Invalid age group ${ageGroup}`);
     }
   }
 }
