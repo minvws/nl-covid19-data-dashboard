@@ -90,7 +90,6 @@ const Row = styled(Box)(
     borderBottomColor: 'border',
     borderBottomStyle: 'solid',
     borderBottomWidth: '1px',
-    // pt: 3,
     py: 3,
   })
 );

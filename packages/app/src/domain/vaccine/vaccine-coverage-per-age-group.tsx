@@ -1,4 +1,7 @@
-import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  assert,
+  NlVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -10,6 +13,27 @@ import { CoverageRow } from './components/coverage-row';
 type Props = {
   values: NlVaccineCoveragePerAgeGroupValue[];
 };
+
+const SORTING_ORDER = [
+  '12+',
+  '18+',
+  '12-17',
+  '18-29',
+  '30-39',
+  '40-49',
+  '50-59',
+  '65-69',
+  '70-79',
+  '80+',
+];
+
+function getSortingOrder(ageGroup: string) {
+  const index = SORTING_ORDER.findIndex((x) => x === ageGroup);
+
+  assert(index >= 0, `No sorting order defined for age group ${ageGroup}`);
+
+  return index;
+}
 
 export function VaccineCoveragePerAgeGroup(props: Props) {
   const { values } = props;
@@ -27,16 +51,10 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
         {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : <div />}
       </CoverageRow>
       {values
-        /**
-         * Each age group has it's own value but they need to be in a specific
-         * order, and the total age group should be last.
-         *
-         * @TODO change this to an object structure in the schema
-         */
-        .sort((a, b) =>
-          a.age_group_range === 'total' || b.age_group_range === 'total'
-            ? Infinity
-            : b.age_group_range.localeCompare(a.age_group_range)
+        .sort(
+          (a, b) =>
+            getSortingOrder(b.age_group_range) -
+            getSortingOrder(a.age_group_range)
         )
         .map((value, index, array) => {
           const isLastItem = index === array.length - 1;
