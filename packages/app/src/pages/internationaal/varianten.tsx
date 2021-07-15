@@ -95,6 +95,20 @@ export default function VariantenPage(
   const text = intl.siteText.internationaal_varianten;
   const tableText = text.varianten_tabel;
 
+  const noDataMessageTable =
+    tableData?.variantTable === undefined
+      ? text.selecteer_een_land_omschrijving
+      : tableData?.variantTable === null
+      ? text.geen_data_omschrijving
+      : '';
+
+  const noDataMessageChart =
+    chartData?.variantTable === undefined
+      ? text.selecteer_een_land_omschrijving
+      : chartData?.variantTable === null
+      ? text.geen_data_omschrijving
+      : '';
+
   const metadata = {
     ...intl.siteText.internationaal_metadata,
     title: text.metadata.title,
@@ -135,7 +149,7 @@ export default function VariantenPage(
           />
 
           <VariantsTableTile
-            noDataMessage={text.selecteer_een_land_omschrijving}
+            noDataMessage={noDataMessageTable}
             source={text.bronnen.rivm}
             text={tableText}
             data={tableData?.variantTable}
@@ -154,7 +168,7 @@ export default function VariantenPage(
           </VariantsTableTile>
 
           <VariantsStackedAreaTile
-            noDataMessage={text.selecteer_een_land_omschrijving}
+            noDataMessage={noDataMessageChart}
             values={chartData?.variantChart}
             metadata={{
               dataSources: [text.bronnen.rivm],
