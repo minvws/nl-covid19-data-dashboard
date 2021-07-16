@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 type RowProps = {
@@ -46,7 +47,11 @@ function MobileCoverageRow(props: RowProps) {
         </Box>
         <Box flex={0.2}>
           <Button>
-            <Chevron isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+            <Chevron
+              isOpen={isOpen}
+              onClick={() => setIsOpen(!isOpen)}
+              color={colors.blue}
+            />
           </Button>
         </Box>
       </Box>
@@ -142,7 +147,7 @@ const Chevron = styled.div<{
   isOpen: boolean;
 }>((x) =>
   css({
-    backgroundImage: 'url("/images/chevron-down-grey.svg")',
+    backgroundImage: 'url("/images/chevron-down-blue.svg")',
     backgroundSize: '1.4em 0.9em',
     backgroundPosition: '0 50%',
     backgroundRepeat: 'no-repeat',

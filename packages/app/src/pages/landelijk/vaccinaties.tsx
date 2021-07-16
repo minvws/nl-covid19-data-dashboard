@@ -1,6 +1,6 @@
 import {
   NlVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoverageValue,
+  NlVaccineCoverageValue
 } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
@@ -31,13 +31,13 @@ import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlPageMetricData,
+  selectNlPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
@@ -197,17 +197,24 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {vaccinationPerAgeGroupFeature.isEnabled &&
           vaccine_coverage_per_age_group ? (
-            <Tile>
-              <Heading level={2}>
-                {siteText.vaccinaties.vaccination_coverage.title}
-              </Heading>
-              <Text>
-                {siteText.vaccinaties.vaccination_coverage.toelichting}
-              </Text>
+            <ChartTile
+              title={siteText.vaccinaties.vaccination_coverage.title}
+              description={
+                siteText.vaccinaties.vaccination_coverage.toelichting
+              }
+              metadata={{
+                datumsText: text.datums,
+                date: vaccine_coverage_per_age_group.last_value?
+                  .date_of_report_unix,
+                sources: [
+                  siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+                ],
+              }}
+            >
               <VaccineCoveragePerAgeGroup
                 values={vaccine_coverage_per_age_group.values}
               />
-            </Tile>
+            </ChartTile>
           ) : null}
 
           <ContentHeader

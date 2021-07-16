@@ -5,6 +5,7 @@ import {
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
 import { CoverageRow, HeaderRow } from './components/coverage-row';
@@ -54,32 +55,41 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
             getSortingOrder(a.age_group_range) -
             getSortingOrder(b.age_group_range)
         )
-        .map((value) => {
+        .map((value, index) => {
           return (
-            <CoverageRow key={value.age_group_range}>
-              <AgeGroup
-                range={formatAgeGroupString(
-                  value.age_group_range,
-                  templates.agegroup
-                )}
-                total={replaceVariablesInText(templates.agegroup.total_people, {
-                  total: formatNumber(value.age_group_total),
-                })}
-              />
-              <VaccinationCoveragePercentage
-                value={`${formatPercentage(value.fully_vaccinated_percentage, {
-                  maximumFractionDigits: 1,
-                  minimumFractionDigits: 1,
-                })}%`}
-              />
-              <CoverageProgressBar
-                partialCount={value.partially_vaccinated}
-                partialPercentage={value.partially_vaccinated_percentage}
-                fullCount={value.fully_vaccinated}
-                fullPercentage={value.fully_vaccinated_percentage}
-                total={value.age_group_total}
-              />
-            </CoverageRow>
+            <>
+              {index === values.length - 2 ? <Box pt={4} /> : null}
+              <CoverageRow key={value.age_group_range}>
+                <AgeGroup
+                  range={formatAgeGroupString(
+                    value.age_group_range,
+                    templates.agegroup
+                  )}
+                  total={replaceVariablesInText(
+                    templates.agegroup.total_people,
+                    {
+                      total: formatNumber(value.age_group_total),
+                    }
+                  )}
+                />
+                <VaccinationCoveragePercentage
+                  value={`${formatPercentage(
+                    value.fully_vaccinated_percentage,
+                    {
+                      maximumFractionDigits: 1,
+                      minimumFractionDigits: 1,
+                    }
+                  )}%`}
+                />
+                <CoverageProgressBar
+                  partialCount={value.partially_vaccinated}
+                  partialPercentage={value.partially_vaccinated_percentage}
+                  fullCount={value.fully_vaccinated}
+                  fullPercentage={value.fully_vaccinated_percentage}
+                  total={value.age_group_total}
+                />
+              </CoverageRow>
+            </>
           );
         })}
     </Box>
@@ -108,6 +118,7 @@ function formatAgeGroupString(
   templates: {
     oldest: string;
     group: string;
+    total: string;
     total_people: string;
   }
 ) {
@@ -118,6 +129,11 @@ function formatAgeGroupString(
         age_low,
         age_high,
       });
+    }
+    case ageGroup === '18+':
+    case ageGroup === '12+': {
+      const age = ageGroup.replace('+', '');
+      return replaceVariablesInText(templates.total, { age });
     }
     case ageGroup.includes('+'): {
       const age = ageGroup.replace('+', '');
@@ -131,7 +147,11 @@ function formatAgeGroupString(
 
 function VaccinationCoveragePercentage({ value }: { value: string }) {
   return (
-    <InlineText color="blue" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
+    <InlineText
+      color={colors.data.multiseries.cyan_dark}
+      fontSize={3}
+      fontWeight="bold"
+    >
       {value}
     </InlineText>
   );
@@ -140,10 +160,10 @@ function VaccinationCoveragePercentage({ value }: { value: string }) {
 function AgeGroup({ range, total }: { range: string; total: string }) {
   return (
     <Box display="flex" flexDirection="column">
-      <InlineText fontWeight="bold" fontSize={{ _: 2, md: 3 }}>
+      <InlineText fontWeight="bold" fontSize={2}>
         {range}
       </InlineText>
-      <Box as="span" fontSize={{ _: 1, md: 2 }}>
+      <Box as="span" fontSize={1}>
         <InlineText>{total}</InlineText>
       </Box>
     </Box>

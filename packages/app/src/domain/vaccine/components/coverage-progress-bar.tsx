@@ -4,10 +4,11 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-export const partialColor = '#239BE6';
-export const fullColor = '#005083';
+export const partialColor = colors.data.multiseries.cyan;
+export const fullColor = colors.data.multiseries.cyan_dark;
 
 const MARKER_WIDTH = 7;
 const BASE_LINE_HEIGHT = 3;
@@ -25,7 +26,7 @@ export function CoverageProgressBar(props: {
     siteText.vaccinaties.vaccination_coverage;
   const breakpoints = useBreakpoints(true);
 
-  const barHeight = breakpoints.md ? 16 : 11;
+  const barHeight = 11;
   const showCount = breakpoints.md;
 
   const markerHeight = barHeight + MARKER_WIDTH;
@@ -139,14 +140,14 @@ function LegendItem({
     <Box display="flex" alignItems="center">
       <ColorIndicator color={color} />
       {isDefined(count) ? (
-        <InlineText fontSize={{ _: 1, md: 2 }}>
+        <InlineText fontSize={1}>
           {`${formatPercentage(percentage, {
             maximumFractionDigits: 1,
             minimumFractionDigits: 1,
           })}% ${label} (${formatNumber(count)})`}
         </InlineText>
       ) : (
-        <InlineText fontSize={{ _: 1, md: 2 }}>
+        <InlineText fontSize={1}>
           {`${formatPercentage(percentage, {
             maximumFractionDigits: 1,
             minimumFractionDigits: 1,
