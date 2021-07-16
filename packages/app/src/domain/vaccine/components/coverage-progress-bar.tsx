@@ -10,6 +10,7 @@ export const partialColor = '#239BE6';
 export const fullColor = '#005083';
 
 const MARKER_WIDTH = 7;
+const BASE_LINE_HEIGHT = 3;
 
 export function CoverageProgressBar(props: {
   partialCount: number;
@@ -27,9 +28,12 @@ export function CoverageProgressBar(props: {
   const barHeight = breakpoints.md ? 16 : 11;
   const showCount = breakpoints.md;
 
+  const markerHeight = barHeight + MARKER_WIDTH;
+  const containerHeight = markerHeight;
+
   return (
-    <Box width="100%">
-      <Box height={barHeight + 8} width={{ md: '90%' }}>
+    <Box width="100%" spacing={1}>
+      <Box height={containerHeight} width={`calc(100% - ${MARKER_WIDTH}px)`}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           css={css({
@@ -41,23 +45,23 @@ export function CoverageProgressBar(props: {
         >
           <g>
             <rect
-              x="0"
-              y={barHeight - 3}
+              x={0}
+              y={containerHeight - BASE_LINE_HEIGHT}
               width="100%"
-              height="3"
+              height={BASE_LINE_HEIGHT}
               fill="#C1C1C1"
             />
 
             <rect
               x={0}
-              y={0}
+              y={containerHeight - barHeight}
               width={`${fullPercentage}%`}
               height={barHeight}
               fill={fullColor}
             />
             <rect
               x={`${fullPercentage}%`}
-              y={0}
+              y={containerHeight - barHeight}
               width={`${partialPercentage}%`}
               height={barHeight}
               fill={partialColor}
@@ -73,7 +77,7 @@ export function CoverageProgressBar(props: {
               style={{
                 transform: `translate(calc(${fullPercentage}% - 1px), 0)`,
               }}
-              y={0}
+              y={containerHeight - barHeight}
               width={2}
               height={barHeight}
               fill="white"
@@ -81,10 +85,12 @@ export function CoverageProgressBar(props: {
           </g>
           <rect
             x={`${fullPercentage + partialPercentage}%`}
-            y={barHeight - (barHeight + MARKER_WIDTH)}
+            y={0}
             width={MARKER_WIDTH}
-            height={barHeight + MARKER_WIDTH}
+            height={markerHeight}
             fill="black"
+            // strokeWidth={1}
+            // stroke="red"
           />
         </svg>
       </Box>

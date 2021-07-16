@@ -157,12 +157,12 @@ const Chevron = styled.div<{
 
 const CollapsiblePanel = styled.div<{ isOpen: boolean }>((x) =>
   css({
-    transitionProperty: 'opacity, height, margin',
+    transitionProperty: 'opacity, height, padding',
     transitionDuration: '0.5s',
     width: '100%',
     overflow: 'hidden',
     height: x.isOpen ? 'auto' : 0,
     opacity: x.isOpen ? 1 : 0,
-    mt: x.isOpen ? 3 : 0,
+    pt: x.isOpen ? 2 : 0,
   })
 );
