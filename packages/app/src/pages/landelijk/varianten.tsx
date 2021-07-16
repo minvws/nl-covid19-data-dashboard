@@ -126,7 +126,7 @@ export default function CovidVariantenPage(
             reference={text.reference}
           />
 
-          <TwoKpiSection>
+          <TwoKpiSection spacing={4}>
             {content.highlight?.articles && (
               <Box>
                 <Heading level={3}>

@@ -24,20 +24,12 @@ export function WarningTile({
 }: WarningMessageProps) {
   const Icon = icon;
 
-  const breakpoints = useBreakpoints();
-
-  const isSmallScreen = !breakpoints.md;
-
   return (
     <StyledArticle isFullWidth={isFullWidth}>
       <WarningBox variant={variant}>
-        {isSmallScreen ? (
-          <Box width="6px" />
-        ) : (
-          <IconWrapper>
-            <Icon />
-          </IconWrapper>
-        )}
+        <IconWrapper>
+          <Icon />
+        </IconWrapper>
       </WarningBox>
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
