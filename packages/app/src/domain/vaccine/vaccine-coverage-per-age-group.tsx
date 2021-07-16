@@ -14,16 +14,16 @@ type Props = {
 };
 
 const SORTING_ORDER = [
-  '12+',
-  '18+',
-  '12-17',
-  '18-29',
-  '30-39',
-  '40-49',
-  '50-59',
-  '65-69',
-  '70-79',
   '80+',
+  '70-79',
+  '65-69',
+  '50-59',
+  '40-49',
+  '30-39',
+  '18-29',
+  '12-17',
+  '18+',
+  '12+',
 ];
 
 function getSortingOrder(ageGroup: string) {
@@ -51,8 +51,8 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
       {values
         .sort(
           (a, b) =>
-            getSortingOrder(b.age_group_range) -
-            getSortingOrder(a.age_group_range)
+            getSortingOrder(a.age_group_range) -
+            getSortingOrder(b.age_group_range)
         )
         .map((value) => {
           return (

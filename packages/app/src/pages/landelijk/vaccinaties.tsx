@@ -91,14 +91,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
 
   const { siteText } = useIntl();
-
   const text = siteText.vaccinaties;
-
   const { page } = content;
-
-  // TODO: put this back this when data is available
-  //const {vaccine_coverage_per_age_group} = data;
-  const vaccine_coverage_per_age_group = mockCoverageData();
+  const { vaccine_coverage_per_age_group } = data;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -344,57 +339,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 };
 
 export default VaccinationPage;
-
-// TODO: remove this when data is available
-function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
-  const values = [
-    '12+',
-    '18+',
-    '12-17',
-    '18-29',
-    '30-39',
-    '40-49',
-    '50-59',
-    '65-69',
-    '70-79',
-    '80+',
-  ]
-    .map(createDataForRow)
-    .reverse();
-
-  values[2].fully_vaccinated = 0;
-  values[2].fully_vaccinated_percentage = 0;
-
-  return { values };
-
-  function createDataForRow(
-    ageGroup: string
-  ): NlVaccineCoveragePerAgeGroupValue {
-    const ageGroupTotal = Math.floor(Math.random() * 1700000) + 100000;
-
-    const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-    let partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-
-    if (partiallyVaccinated + fullyVaccinated > ageGroupTotal) {
-      partiallyVaccinated = ageGroupTotal - fullyVaccinated;
-    }
-
-    return {
-      age_group_range: ageGroup,
-      age_group_percentage: Math.floor(Math.random() * 100) + 1,
-      age_group_total: ageGroupTotal,
-      fully_vaccinated: fullyVaccinated,
-      partially_vaccinated: partiallyVaccinated,
-      fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
-      partially_vaccinated_percentage:
-        (partiallyVaccinated / ageGroupTotal) * 100,
-      partially_or_fully_vaccinated_percentage: 0,
-      date_of_insertion_unix: 1616544000,
-      date_of_report_unix: 1616544000,
-      date_unix: 1616544000,
-    };
-  }
-}
 
 function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
   return values.map((x) => ({
