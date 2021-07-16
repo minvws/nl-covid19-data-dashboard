@@ -2,7 +2,7 @@ import { Dictionary } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
@@ -125,7 +125,18 @@ function VariantStackedAreaTileWithData({
                */
               const reorderContext = {
                 ...context,
-                config: [...context.config, context.config[0]].slice(1),
+                config: [
+                  ...context.config.filter(
+                    (x) =>
+                      !hasMetricProperty(x) ||
+                      x.metricProperty !== 'other_percentage'
+                  ),
+                  context.config.find(
+                    (x) =>
+                      hasMetricProperty(x) &&
+                      x.metricProperty === 'other_percentage'
+                  ),
+                ].filter(isDefined),
               };
 
               return <TooltipSeriesList data={reorderContext} />;
@@ -138,6 +149,10 @@ function VariantStackedAreaTileWithData({
       )}
     </ChartTile>
   );
+}
+
+function hasMetricProperty(config: any): config is { metricProperty: string } {
+  return 'metricProperty' in config;
 }
 
 function useFilteredSeriesConfig(
