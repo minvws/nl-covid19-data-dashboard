@@ -10,7 +10,7 @@ export interface SelectOption {
   metricProperty: string;
   label: string;
   color: string;
-  shape?: 'line' | 'circle';
+  shape?: 'line' | 'circle' | 'square';
 }
 
 interface InteractiveLegendProps {
@@ -52,6 +52,7 @@ export function InteractiveLegend({
                   {item.label}
                   {item.shape === 'line' && <Line color={item.color} />}
                   {item.shape === 'circle' && <Circle color={item.color} />}
+                  {item.shape === 'square' && <Square color={item.color} />}
                 </ItemButton>
               </Item>
             );
@@ -188,5 +189,17 @@ const Circle = styled.div<{ color: string }>(({ color }) =>
     width: '10px',
     height: '10px',
     borderRadius: '50%',
+  })
+);
+
+const Square = styled.div<{ color: string }>(({ color }) =>
+  css({
+    display: 'block',
+    position: 'absolute',
+    left: asResponsiveArray({ _: '5px', md: 10 }),
+    backgroundColor: color,
+    top: '7px',
+    width: '11px',
+    height: '11px',
   })
 );
