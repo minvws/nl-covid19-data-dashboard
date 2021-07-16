@@ -1,3 +1,4 @@
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { TableText } from '~/domain/variants/variants-table-tile';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
@@ -48,7 +49,11 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
               </Box>
             </Cell>
             <Cell>
-              <VariantDifference value={row.difference} />
+              {isDefined(row.difference) ? (
+                <VariantDifference value={row.difference} />
+              ) : (
+                '-'
+              )}
             </Cell>
           </tr>
         ))}
