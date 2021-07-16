@@ -195,7 +195,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineAdministrationsKpiSection data={data} />
 
-          {vaccinationPerAgeGroupFeature.isEnabled ? (
+          {vaccinationPerAgeGroupFeature.isEnabled &&
+          vaccine_coverage_per_age_group ? (
             <Tile>
               <Heading level={2}>
                 {siteText.vaccinaties.vaccination_coverage.title}
