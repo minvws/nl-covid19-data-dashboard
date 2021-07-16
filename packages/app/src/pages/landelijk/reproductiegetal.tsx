@@ -5,6 +5,7 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { PageBarScale } from '~/components/page-barscale';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';

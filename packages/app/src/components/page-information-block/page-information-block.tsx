@@ -4,6 +4,7 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { Heading, HeadingLevel, Text } from '~/components/typography';
+import { VisuallyHidden } from '~/components/visually-hidden';
 import { asResponsiveArray } from '~/style/utils';
 import { Articles } from './articles';
 import { Metadata, MetadataProps } from './metadata';
@@ -22,32 +23,57 @@ interface InformationBlockProps {
   metadata?: MetadataProps;
   referenceLink?: string;
   id?: string;
+  category?: string;
+  screenReaderCategory?: string;
 }
 
 export function PageInformationBlock({
   title,
   icon,
   description,
-  headingLevel = 1,
   articles,
   usefulLinks,
   metadata,
   referenceLink,
   id,
+  category,
+  screenReaderCategory,
 }: InformationBlockProps) {
+  const MetaDataBlock = (
+    <>
+      {metadata && (
+        <MetadataBox>
+          <Metadata
+            {...metadata}
+            accessibilitySubject={title}
+            referenceLink={referenceLink}
+          />
+        </MetadataBox>
+      )}
+    </>
+  );
+
   return (
-    <header id={id}>
+    <Box as="header" id={id} spacing={2}>
       {title && icon ? (
         <HeadingWithIcon
           icon={icon}
           title={title}
-          headingLevel={headingLevel}
-          mb={2}
-          mt={1}
+          category={category}
+          screenReaderCategory={screenReaderCategory}
+          headingLevel={2}
         />
       ) : (
         <Box display="flex" flexWrap="nowrap" alignItems="center">
-          <Heading mb={3} lineHeight={1.3} level={headingLevel}>
+          {category && (
+            <Heading level={1} m={0} fontSize="1.25rem">
+              {category}
+              {screenReaderCategory && (
+                <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
+              )}
+            </Heading>
+          )}
+          <Heading mb={3} lineHeight={1.3} level={2}>
             {title}
           </Heading>
         </Box>
@@ -62,22 +88,21 @@ export function PageInformationBlock({
             columnGap: 4,
           })}
         >
-          <Box spacing={3}>
-            <Text mb={0}>{description}</Text>
-            {metadata && (
-              <MetadataBox>
-                <Metadata
-                  {...metadata}
-                  accessibilitySubject={title}
-                  referenceLink={referenceLink}
-                />
-              </MetadataBox>
-            )}
-          </Box>
-          {articles && articles.length > 0 && (
-            <Box>
-              <Articles articles={articles} />
-            </Box>
+          {articles && articles.length > 0 ? (
+            <>
+              <Box spacing={3}>
+                <Text mb={0}>{description}</Text>
+                {MetaDataBlock}
+              </Box>
+              <Box>
+                <Articles articles={articles} />
+              </Box>
+            </>
+          ) : (
+            <>
+              <Text mb={0}>{description}</Text>
+              {MetaDataBlock}
+            </>
           )}
         </Box>
 
@@ -93,7 +118,7 @@ export function PageInformationBlock({
           </Box>
         )}
       </Tile>
-    </header>
+    </Box>
   );
 }
 

@@ -20,6 +20,7 @@ import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { Metadata } from '~/components/metadata';
+// import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';

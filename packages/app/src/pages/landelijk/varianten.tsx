@@ -7,6 +7,7 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { CompactDecoratedLink } from '~/components/decorated-link';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';

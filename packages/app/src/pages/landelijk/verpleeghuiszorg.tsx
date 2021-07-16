@@ -1,6 +1,6 @@
 import {
   VrCollectionNursingHome,
-  VrProperties
+  VrProperties,
 } from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
@@ -15,6 +15,7 @@ import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -25,13 +26,13 @@ import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';

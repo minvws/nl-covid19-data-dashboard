@@ -1,6 +1,10 @@
 import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ContentHeader } from '~/components/content-header';
+import {
+  PageInformationBlock,
+  PageInformationBlock,
+} from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
