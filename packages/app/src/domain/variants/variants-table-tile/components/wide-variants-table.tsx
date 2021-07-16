@@ -48,7 +48,11 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
               </Box>
             </Cell>
             <Cell>
-              <VariantDifference value={row.difference} />
+              {row.difference ? (
+                <VariantDifference value={row.difference} />
+              ) : (
+                '-'
+              )}
             </Cell>
           </tr>
         ))}

@@ -154,7 +154,7 @@ export interface In {
   variants?: InVariants;
 }
 export interface InNamedDifference {
-  variants__percentage: NamedDifferenceDecimal[];
+  variants__percentage?: NamedDifferenceDecimal[];
 }
 export interface NamedDifferenceDecimal {
   name: string;
@@ -175,7 +175,7 @@ export interface InTestedOverallValue {
   date_of_insertion_unix: number;
 }
 export interface InVariants {
-  values: InVariantsVariant[];
+  values?: InVariantsVariant[];
 }
 export interface InVariantsVariant {
   name: string;

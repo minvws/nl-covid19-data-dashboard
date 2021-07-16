@@ -111,7 +111,11 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             <div ref={ref}>
               <Box mb={1} display="flex" flexDirection="row">
                 <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
-                <VariantDifference value={row.difference} />
+                {row.difference ? (
+                  <VariantDifference value={row.difference} />
+                ) : (
+                  '-'
+                )}
               </Box>
               <Box css={css({ color: 'silver', fontSize: 1, mt: 2 })}>
                 {variantDescription}
