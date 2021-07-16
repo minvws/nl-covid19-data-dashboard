@@ -5,7 +5,7 @@
  */
 import meow from 'meow';
 import prompts from 'prompts';
-import { fetchLocalTextsFromCacheFlatten, getLocalMutations } from './logic';
+import { getLocalMutations, readReferenceTexts } from './logic';
 import { exportLokalizeTexts } from './logic/export';
 
 const cli = meow(
@@ -16,11 +16,11 @@ const cli = meow(
     Options
       --drafts Include draft documents
       --dataset Define dataset to export, default is "development"
-      --production Export keys without document-ids in the keys
+      --clean-json Export without document-ids in the keys
 
     Examples
       $ lokalize:export --drafts --dataset=development
-      $ lokalize:export --dataset=development --production
+      $ lokalize:export --dataset=development --clean-json
 `,
   {
     flags: {
@@ -31,7 +31,7 @@ const cli = meow(
         type: 'string',
         default: 'development',
       },
-      production: {
+      cleanJson: {
         type: 'boolean',
       },
     },
@@ -41,9 +41,9 @@ const cli = meow(
 (async function run() {
   const dataset = cli.flags.dataset;
 
-  const { hasMutations, mutations } = await checkMutations();
+  const mutations = await getLocalMutations();
 
-  if (hasMutations && !cli.flags.production) {
+  if (mutations && !cli.flags.cleanJson) {
     const response = await prompts([
       {
         type: 'confirm',
@@ -61,25 +61,10 @@ ${JSON.stringify(mutations, null, 2)}
     }
   }
 
-  await exportLokalizeTexts(dataset, cli.flags.drafts, !cli.flags.production);
+  await exportLokalizeTexts(dataset, cli.flags.drafts, !cli.flags.cleanJson);
 
   console.log(`Export dataset "${dataset}" completed`);
 })().catch((err) => {
   console.error(`Export failed: ${err.message}`);
   process.exit(1);
 });
-
-async function checkMutations() {
-  const hasCachedTexts = await fetchLocalTextsFromCacheFlatten()
-    .then(() => true)
-    .catch(() => false);
-
-  const mutations = hasCachedTexts ? await getLocalMutations() : undefined;
-
-  return {
-    hasMutations: mutations
-      ? [...mutations.add, ...mutations.delete, ...mutations.move].length > 0
-      : false,
-    mutations,
-  };
-}

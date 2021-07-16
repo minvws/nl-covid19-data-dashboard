@@ -1,29 +1,61 @@
-import path from 'path';
-import fs from 'fs';
-import { EOL } from 'os';
+import { assert, ID_PREFIX, removeIdsFromKeys } from '@corona-dashboard/common';
 import { parse } from '@fast-csv/parse';
+import fs from 'fs';
 import { sortBy } from 'lodash';
-import {
-  fetchLocalTextsFlatten,
-  fetchLocalTextsFromCacheFlatten,
-} from './fetch';
-import { ID_PREFIX, removeIdsFromKeys } from '@corona-dashboard/common';
-import { flatten } from 'flat';
+import { EOL } from 'os';
+import path from 'path';
+import { hasValueAtKey, isDefined } from 'ts-is-present';
+import { getClient } from '~/client';
+import { readLocalTexts, readReferenceTexts } from './files';
 
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
-const HEADER = `timestamp,action,key${EOL}`;
 
-type Action = 'add' | 'delete' | 'noop' | 'add_via_move';
+/**
+ * CSV header names should correspond with TextMutation object properties,
+ * because the read code interprets it without mapping.
+ */
+const CSV_HEADER = `timestamp,action,key,document_id,move_to${EOL}`;
+export const MOVE_PLACEHOLDER_ID_PREFIX = '__move_placeholder_';
 
-export interface TextMutation {
+type Action = 'add' | 'delete' | 'move';
+
+/**
+ * To keep the number of CSV columns constant we use a placeholder for empty
+ * values. This is possibly not needed.
+ */
+const NO_VALUE = '__';
+
+export type AddMutation = {
+  action: 'add';
   timestamp: string;
-  action: Action;
   key: string;
-}
+  document_id: string;
+};
+
+export type DeleteMutation = {
+  action: 'delete';
+  timestamp: string;
+  key: string;
+  /**
+   * Deletes are executed based on key and not document id. This is to prevent
+   * edge-cases where move and deletes were performed on the same key. We
+   * execute move first, so it always prevails over delete.
+   */
+};
+
+export type MoveMutation = {
+  action: 'move';
+  timestamp: string;
+  key: string;
+  document_id: string;
+  move_to: string;
+};
+
+export type TextMutation = AddMutation | DeleteMutation | MoveMutation;
 
 export function clearMutationsLogFile() {
   try {
-    fs.writeFileSync(MUTATIONS_LOG_FILE, HEADER);
+    fs.writeFileSync(MUTATIONS_LOG_FILE, CSV_HEADER);
   } catch (err) {
     console.error(
       `Failed to clear mutations log file ${MUTATIONS_LOG_FILE}: ${err.message}`
@@ -31,14 +63,20 @@ export function clearMutationsLogFile() {
   }
 }
 
-export function appendTextMutation(
-  action: Exclude<Action, 'noop'>,
-  key: string
-) {
+export function appendTextMutation(args: {
+  action: Action;
+  key: string;
+  documentId: string;
+  moveTo?: string;
+}) {
+  const { action, key, documentId, moveTo } = args;
   const timestamp = new Date().toISOString();
 
   try {
-    const line = `${timestamp},${action},${key}${EOL}`;
+    const line = `${timestamp},${action},${key},${documentId},${
+      moveTo ?? NO_VALUE
+    }${EOL}`;
+
     fs.appendFileSync(MUTATIONS_LOG_FILE, line);
   } catch (err) {
     console.error(
@@ -65,22 +103,43 @@ export function readTextMutations() {
  * This function collapses the mutations so that an add + delete (or vice-versa)
  * doesn't result in any sync action. It will return the action together with
  * the last mutation timestamp for that key. Deletions are filtered out so that
- * we can run sync-additions half-way the sprint to pass keys to the
- * communication team to prepare for release. Deletions are handled differently
- * via the sync-deletions script.
+ * we can run sync-after-feature half-way during the sprint to pass keys to the
+ * production / communication team to prepare for release. Deletions are handled
+ * differently via the sync-after-release script.
+ *
+ * Move actions excluded from this logic for now. In theory you can move
+ * something from x.a => x.b => x.c => x.a, which should then be a noop, but
+ * that doesn't seem trivial to detect.
+ *
+ * It's hard to wrap your head around all the edge cases that could happen from
+ * moving keys together with add/delete mutations. So I think one simplified
+ * approach could be:
+ *
+ * - First apply all add and move mutations in chronological order, so
+ *   effectively x.a => x.b => x.c => x.a will still result in a no-op.
+ * - Then apply any delete mutations and see if the targeted key still exist.
+ *
+ * This prioritizes moves over deletes, but if a delete fails as part of an
+ * edge-case we can easily re-delete this key. However if a move fails it is
+ * much more harmful since valuable text documents and their history might get
+ * lost.
  */
-export function collapseTextMutations(mutations: TextMutation[]) {
+export function getCollapsedAddDeleteMutations(
+  mutations: TextMutation[]
+): (AddMutation | DeleteMutation)[] {
   const weightByAction = {
     add: 1,
     delete: -1,
-    noop: 0,
   } as const;
 
   const sortedMutations = sortBy(mutations, (x) => x.timestamp);
 
   const collapsedKeys = sortedMutations.reduce((acc, mutation) => {
-    const prev = acc[mutation.key] || { weight: 0, timestamp: 0 };
-    const action = mutation.action === 'add_via_move' ? 'add' : mutation.action;
+    if (mutation.action === 'move') {
+      return acc;
+    }
+
+    const previousWeight = acc[mutation.key]?.weight || 0;
 
     acc[mutation.key] = {
       /**
@@ -91,25 +150,26 @@ export function collapseTextMutations(mutations: TextMutation[]) {
        * collapse work properly, we need to limit the "amount of deletes" to
        * one when summing. This is done by cliping the weight to -1.
        */
-      weight: Math.max(weightByAction[action] + prev.weight, -1),
+      weight: Math.max(weightByAction[mutation.action] + previousWeight, -1),
       timestamp: mutation.timestamp,
+      document_id: mutation.action === 'add' ? mutation.document_id : undefined,
     };
     return acc;
-  }, {} as Record<string, { weight: number; timestamp: string }>);
+  }, {} as Record<string, { weight: number; timestamp: string; document_id?: string }>);
 
   /**
    * Because new keys are added immediately, but deletions are only scheduled
-   * for later. We still need to mark the keys that were first newly created, but
-   * later deleted as action "delete" otherwise they will not be removed from the
-   * dataset.
+   * for later. We still need to mark the keys that were first newly created,
+   * but later deleted as action "delete" otherwise they will not be removed
+   * from the dataset.
    *
-   * On the other hand, if a key existed at first and in this branch was deleted
-   * and re-added again, we do NOT want to delete the key. That is an edge case
-   * but an important one.
+   * On the other hand, if a key existed already and as part of this branch was
+   * deleted and re-added again, we do NOT want to delete the key. That is an
+   * edge case but an important one.
    *
    * By keeping a list of keys that got added first (and then whatever) we can
-   * figure out that if the final weight/action was 0/noop, the key still needs
-   * to be deleted.
+   * determine once the final weight/action was 0/noop whether the key still
+   * needs to be deleted.
    */
   const firstActionByKey = sortedMutations.reduce((acc, mutation) => {
     if (!acc[mutation.key]) {
@@ -122,62 +182,135 @@ export function collapseTextMutations(mutations: TextMutation[]) {
     .filter(([_key, action]) => action === 'add')
     .map(([key]) => key);
 
-  return Object.entries(collapsedKeys).map(
-    ([key, { weight, timestamp }]) =>
-      ({
-        key,
-        action:
-          weight > 0
-            ? 'add'
-            : weight < 0
-            ? 'delete'
-            : keysThatWereAddedAtFirst.includes(key)
-            ? 'delete'
-            : 'noop',
-        timestamp,
-      } as TextMutation)
-  );
+  return Object.entries(collapsedKeys)
+    .map(([key, { weight, timestamp, document_id }]) => {
+      switch (true) {
+        case weight > 0:
+          assert(
+            document_id,
+            `Trying to collapse to an add mutation without document_id, for key: ${key}`
+          );
+          return {
+            key,
+            action: 'add',
+            timestamp,
+            document_id,
+          } as AddMutation;
+
+        case weight < 0:
+        case keysThatWereAddedAtFirst.includes(key):
+          return {
+            key,
+            action: 'delete',
+            timestamp,
+          } as DeleteMutation;
+
+        default:
+          return undefined;
+      }
+    })
+    .filter(isDefined);
 }
 
-export async function getLocalMutations() {
-  const oldFlattenTexts = await fetchLocalTextsFromCacheFlatten();
-  const newFlattenTexts = await fetchLocalTextsFlatten();
-  const newFlattenTextsWithoutIds = flatten(
-    removeIdsFromKeys(newFlattenTexts)
-  ) as any;
-  const oldKeys = Object.keys(oldFlattenTexts);
-  const newKeys = Object.keys(newFlattenTexts);
+export function getCollapsedMoveMutations(mutations: TextMutation[]) {
+  const sortedMoveMutations = sortBy(mutations, (x) => x.timestamp).filter(
+    hasValueAtKey('action', 'move' as const)
+  );
 
-  const removedKeyIdPairs = oldKeys
+  const finalDestinationPerId = sortedMoveMutations.reduce(
+    (acc, { document_id, move_to }) => {
+      acc[document_id] = move_to;
+      return acc;
+    },
+    {} as Record<string, string>
+  );
+
+  const result = sortedMoveMutations.reduce(
+    (acc, { timestamp, key, action, document_id }) => {
+      /**
+       * Only store a move mutation for the first time it occurred for a certain
+       * key/document_id, and then use final destination calculated earlier.
+       */
+      if (acc[key]) {
+        return acc;
+      }
+
+      acc[key] = {
+        timestamp,
+        action,
+        key,
+        document_id,
+        move_to: finalDestinationPerId[document_id],
+      };
+      return acc;
+    },
+    {} as Record<string, MoveMutation>
+  );
+
+  return Object.values(result);
+}
+
+/**
+ * Grab the local exports JSON file and compare it to the reference document
+ * that was last exported from Sanity to figure out what mutations have been
+ * made.
+ */
+export async function getLocalMutations() {
+  const oldTexts = await readReferenceTexts();
+  const newTexts = await readLocalTexts();
+  const newTextsWithPlainKeys = removeIdsFromKeys(newTexts);
+  const oldKeys = Object.keys(oldTexts);
+  const newKeys = Object.keys(newTexts);
+
+  const removals = oldKeys
     .filter((key) => !newKeys.includes(key))
     .map(parseKeyWithId);
 
-  const addedKeyIdPairs = newKeys
+  const additions = newKeys
     .filter((key) => !oldKeys.includes(key))
     .map(parseKeyWithId);
 
   const mutations = {
     add: [] as { key: string; text: string }[],
-    move: [] as { key: string; oldKey: string; text: string; id: string }[],
-    delete: [] as { key: string; id: string }[],
+    move: [] as {
+      key: string;
+      documentId: string;
+      moveTo: string;
+    }[],
+    delete: [] as { key: string; documentId: string }[],
   };
 
-  removedKeyIdPairs.forEach(([key, id]) => {
-    mutations.delete.push({ key, id });
+  /**
+   * First we consider all removals to be delete mutations
+   */
+  removals.forEach(([key, id]) => {
+    mutations.delete.push({ key, documentId: id });
   });
 
-  addedKeyIdPairs.forEach(([key, id]) => {
-    const deleted = mutations.delete.find((x) => x.id === id);
+  /**
+   * Then for every new key that appeared, see if there was a key with the same
+   * document id that got deleted. In those cases the mutation was actually a
+   * move instead of a separate add/delete
+   */
+  additions.forEach(([key, id]) => {
+    const deleted = mutations.delete.find((x) => x.documentId === id);
+
     if (deleted) {
+      /**
+       * If so, we remove this one from the delete mutations and store it as a
+       * move mutation.
+       */
       mutations.delete = mutations.delete.filter((x) => x !== deleted);
       mutations.move.push({
-        key,
-        oldKey: deleted.key,
-        id,
-        text: newFlattenTextsWithoutIds[key],
+        key: deleted.key,
+        moveTo: key,
+        documentId: id,
       });
     } else {
-      mutations.add.push({ key, text: newFlattenTextsWithoutIds[key] });
+      /**
+       * If not, we can store it as an add mutation
+       */
+      mutations.add.push({ key, text: newTextsWithPlainKeys[key] });
     }
   });
 
@@ -187,4 +320,54 @@ export async function getLocalMutations() {
 function parseKeyWithId(keyWithId: string) {
   const [key, id] = keyWithId.split(ID_PREFIX);
   return [key, id] as [key: string, id: string];
+}
+
+/**
+ * Apply the moves by deleting the placeholder document and mutating the key of
+ * the original document to set it to the new moveTo key.
+ */
+export async function finalizeMoveMutations(
+  dataset: 'development' | 'production',
+  moves: MoveMutation[]
+) {
+  const client = getClient(dataset);
+  const transaction = client.transaction();
+
+  for (const { document_id, move_to } of moves) {
+    try {
+      const originalDocument = await client.getDocument(document_id);
+
+      assert(
+        originalDocument,
+        `Failed to locate move original document in dataset ${dataset}`
+      );
+
+      if (originalDocument.key === move_to) {
+        console.log(`Document ${document_id} was already moved`);
+      }
+
+      const placeholderDocument = await client.getDocument(
+        MOVE_PLACEHOLDER_ID_PREFIX + document_id
+      );
+
+      assert(
+        placeholderDocument,
+        `Failed to locate move placeholder document in dataset ${dataset}`
+      );
+
+      transaction.patch(document_id, {
+        set: {
+          key: move_to,
+          subject: move_to.split('.')[0],
+        },
+      });
+
+      transaction.delete(placeholderDocument._id);
+    } catch (err) {
+      console.error(`Move failed for document ${document_id}: ${err.message}`);
+    }
+  }
+
+  console.log(`${dataset} TRANSACTION`, transaction.serialize());
+  // await transaction.commit(); @TODO enable
 }

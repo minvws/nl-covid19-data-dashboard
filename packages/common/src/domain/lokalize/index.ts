@@ -1,5 +1,4 @@
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { flatten, unflatten } from 'flat';
 import mapKeys from 'lodash/mapKeys';
 
 /**
@@ -17,11 +16,11 @@ export const ID_PREFIX = '__@__';
  */
 export function createFlatTexts({
   documents,
-  deletedKeys = [],
+  excludedKeys = [],
   appendDocumentIdToKey = false,
 }: {
   documents: LokalizeText[];
-  deletedKeys?: string[];
+  excludedKeys?: string[];
   appendDocumentIdToKey?: boolean;
 }) {
   const nl: Record<string, string> = {};
@@ -34,7 +33,7 @@ export function createFlatTexts({
    * First write all published document texts
    */
   for (const document of published) {
-    if (deletedKeys.includes(document.key)) continue;
+    if (excludedKeys.includes(document.key)) continue;
 
     const { jsonKey, localeText } = parseLocaleTextDocument(
       document,
@@ -50,7 +49,7 @@ export function createFlatTexts({
    * draft version.
    */
   for (const document of drafts) {
-    if (deletedKeys.includes(document.key)) continue;
+    if (excludedKeys.includes(document.key)) continue;
 
     const { jsonKey, localeText } = parseLocaleTextDocument(
       document,
@@ -69,8 +68,8 @@ export function parseLocaleTextDocument(
   appendDocumentIdToKey = false
 ) {
   /**
-   * Paths inside the `__root` subject should be placed under the path in the
-   * root of the exported json
+   * Paths inside the `__root` subject should be placed in the
+   * root of the exported json.
    */
   const jsonKey =
     document.key.replace('__root.', '') +
@@ -79,22 +78,17 @@ export function parseLocaleTextDocument(
   const nl = document.should_display_empty
     ? ''
     : document.text.nl?.trim() || '';
+
+  /**
+   * Fall back to Dutch texts if English is missing.
+   */
   const en = document.should_display_empty
     ? ''
-    : /**
-       * Here make an automatic fallback to Dutch texts if English is missing.
-       */
-      document.text.en?.trim() || nl;
+    : document.text.en?.trim() || nl;
 
   return { jsonKey, localeText: { nl, en } };
 }
 
-export function removeIdsFromKeys<T>(data: T) {
-  return unflatten(
-    mapKeys(
-      flatten(data) as Record<string, string>,
-      (_value, key) => key.split(ID_PREFIX)[0]
-    ),
-    { object: true }
-  ) as T;
+export function removeIdsFromKeys(data: Record<string, string>) {
+  return mapKeys(data, (_value, key) => key.split(ID_PREFIX)[0]);
 }

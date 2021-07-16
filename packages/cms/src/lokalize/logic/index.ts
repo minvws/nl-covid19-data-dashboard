@@ -1,3 +1,3 @@
 export * from './export';
+export * from './files';
 export * from './mutations';
-export * from './fetch';

@@ -12,10 +12,18 @@ export function lokalizeListItem() {
       const type = 'lokalizeText';
 
       return documentStore
-        .listenQuery(`*[_type == $type]{ subject }`, { type })
+        .listenQuery(
+          /**
+           * Only list text documents that are not temporary placeholders. We do
+           * not want to allow editing those documents, since they are being
+           * deleted once the move is synced/completed.
+           */
+          `*[_type == $type && is_move_placeholder != true]{ subject }`,
+          { type }
+        )
         .pipe(
-          map((_subjects: { subject: string }[], index) => {
-            const subjects = uniq(_subjects.map((x) => x.subject));
+          map((doc: { subject: string }[], _index) => {
+            const subjects = uniq(doc.map((x) => x.subject));
 
             return S.list()
               .title('Onderwerp')
@@ -31,9 +39,7 @@ export function lokalizeListItem() {
                           .id(`${subject}-child`)
                           .title(subject)
                           .schemaType(type)
-                          .defaultOrdering([
-                            { field: 'path', direction: 'asc' },
-                          ])
+                          .defaultOrdering([{ field: 'key', direction: 'asc' }])
                           .filter('subject == $subject')
                           .params({ subject })
                           .child((id) =>

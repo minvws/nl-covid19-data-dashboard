@@ -10,8 +10,10 @@ import fs from 'fs-extra';
 import mapValues from 'lodash/mapValues';
 import path from 'path';
 import prettier from 'prettier';
-import { collapseTextMutations, readTextMutations } from '.';
+import { hasValueAtKey } from 'ts-is-present';
+import { getCollapsedAddDeleteMutations, readTextMutations } from '.';
 import { getClient } from '../../client';
+import { getCollapsedMoveMutations } from './mutations';
 
 export const localeDirectory = path.resolve(
   __dirname,
@@ -22,18 +24,18 @@ export const localeDirectory = path.resolve(
   'app/src/locale'
 );
 
-export const localeCacheDirectory = path.resolve(
+export const localeReferenceDirectory = path.resolve(
   __dirname,
   '..', // lokalize
   '..', // src
   '..', // cms
-  '.sanity-lokalize-cache'
+  '.lokalize-reference'
 );
 
 /**
  * Make sure the cache directory exists
  */
-fs.ensureDirSync(localeCacheDirectory);
+fs.ensureDirSync(localeReferenceDirectory);
 
 /**
  * @TODO:
@@ -48,8 +50,8 @@ export async function exportLokalizeTexts(
   const client = getClient(dataset);
   /**
    * The client will load drafts by default because it is authenticated with a
-   * token. If the `drafts` flag is not set to true, we will manually
-   * exclude draft-documents on query-level.
+   * token. If the `drafts` flag is not set to true, we will manually exclude
+   * draft-documents on query-level.
    */
   const draftsQueryPart = includeDrafts ? '' : '&& !(_id in path("drafts.**"))';
 
@@ -59,13 +61,27 @@ export async function exportLokalizeTexts(
 
   const mutations = await readTextMutations();
 
-  const deletedKeys = collapseTextMutations(mutations)
-    .filter((x) => x.action === 'delete')
+  const deletedKeys = getCollapsedAddDeleteMutations(mutations)
+    .filter(hasValueAtKey('action', 'delete' as const))
     .map((x) => x.key);
+
+  /**
+   * When a text has been moved as part of a feature branch, the document is not
+   * actually changed in Sanity, but a temporary new document is created instead
+   * which contains the new (move_to) key. This way we do not break other
+   * branches depending on the targeted document. For the user who moved the
+   * document, we filter out these keys during export so that according their
+   * JSON the moved keys do not exist anymore.
+   *
+   * Once the feature branch gets merged we then actually mutate the key
+   * property of the original document, and remove the temporarily document
+   * which was holding that key.
+   */
+  const movedKeys = getCollapsedMoveMutations(mutations).map((x) => x.key);
 
   const flatTexts = createFlatTexts({
     documents,
-    deletedKeys,
+    excludedKeys: [...deletedKeys, ...movedKeys],
     appendDocumentIdToKey,
   });
 
@@ -81,12 +97,12 @@ export async function exportLokalizeTexts(
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
-    path.join(localeCacheDirectory, 'nl_export.json')
+    path.join(localeReferenceDirectory, 'nl_export.json')
   );
 
   await writePrettyJson(
     unflatten(flatTexts.en, { object: true }),
-    path.join(localeCacheDirectory, 'en_export.json')
+    path.join(localeReferenceDirectory, 'en_export.json')
   );
 
   await generateTypes();
