@@ -1,6 +1,5 @@
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
-import { SiteText } from '~/locale';
+import { TableText } from '~/domain/variants/variants-table-tile';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import {
   Cell,
@@ -11,22 +10,17 @@ import {
   VariantNameCell,
 } from '.';
 
-const columnKeys = [
-  'variant_titel',
-  'eerst_gevonden',
-  'percentage',
-  'vorige_meeting',
-] as const;
+const columnKeys = ['variant_titel', 'percentage', 'vorige_meeting'] as const;
 
 type WideVariantsTableProps = {
   rows: VariantRow[];
-  text: SiteText['covid_varianten'];
+  text: TableText;
 };
 
 export function WideVariantsTable(props: WideVariantsTableProps) {
   const { rows, text } = props;
 
-  const columnNames = text.varianten_tabel.kolommen;
+  const columnNames = text.kolommen;
 
   return (
     <StyledTable>
@@ -40,10 +34,11 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
       <tbody>
         {rows.map((row) => (
           <tr key={row.variant}>
-            <VariantNameCell variant={row.variant} text={text} />
-            <Cell>
-              <InlineText>{row.countryOfOrigin}</InlineText>
-            </Cell>
+            <VariantNameCell
+              variant={row.variant}
+              text={text}
+              countryOfOrigin={row.countryOfOrigin}
+            />
             <Cell>
               <Box maxWidth="20em">
                 <PercentageBarWithNumber

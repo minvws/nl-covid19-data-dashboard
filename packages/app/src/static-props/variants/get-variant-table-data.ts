@@ -2,9 +2,11 @@ import {
   assert,
   Dictionary,
   DifferenceDecimal,
+  InVariants,
   NlNamedDifference,
   NlVariants,
 } from '@corona-dashboard/common';
+import { first } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
@@ -18,13 +20,19 @@ export type VariantRow = {
   color: string;
 };
 
+export type VariantTableData = ReturnType<typeof getVariantTableData>;
+
 export function getVariantTableData(
-  nlVariants: NlVariants | undefined,
+  variants: NlVariants | InVariants | undefined,
   namedDifference: NlNamedDifference,
   countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
 ) {
-  if (!isDefined(nlVariants) || !isDefined(nlVariants.values)) {
-    return { variantTable: [] as VariantRow[] };
+  if (!isDefined(variants) || !isDefined(variants.values)) {
+    return {
+      variantTable: null,
+      dates: null,
+      sampleSize: 0,
+    } as const;
   }
 
   function findDifference(name: string) {
@@ -47,7 +55,16 @@ export function getVariantTableData(
     return color;
   }
 
-  const variantTable = nlVariants.values
+  const firstLastValue = first(variants.values);
+  const dates = {
+    date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
+    date_start_unix: firstLastValue?.last_value.date_start_unix ?? 0,
+    date_of_insertion_unix:
+      firstLastValue?.last_value.date_of_insertion_unix ?? 0,
+  };
+  const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
+
+  const variantTable = variants.values
     .map<VariantRow>((variant) => ({
       variant: variant.name,
       countryOfOrigin: findCountryOfOrigin(variant.name),
@@ -67,5 +84,5 @@ export function getVariantTableData(
       return rowB.percentage - rowA.percentage;
     });
 
-  return { variantTable };
+  return { variantTable, dates, sampleSize };
 }
