@@ -89,8 +89,6 @@ export function CoverageProgressBar(props: {
             width={MARKER_WIDTH}
             height={markerHeight}
             fill="black"
-            // strokeWidth={1}
-            // stroke="red"
           />
         </svg>
       </Box>
