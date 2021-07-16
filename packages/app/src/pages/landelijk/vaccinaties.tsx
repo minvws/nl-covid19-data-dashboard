@@ -1,7 +1,4 @@
-import {
-  NlVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoverageValue,
-} from '@corona-dashboard/common';
+import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
 import { ArticleStrip } from '~/components/article-strip';
@@ -10,10 +7,9 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ContentHeader } from '~/components/content-header';
 import { KpiValue } from '~/components/kpi-value';
-import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { Heading, Text } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
