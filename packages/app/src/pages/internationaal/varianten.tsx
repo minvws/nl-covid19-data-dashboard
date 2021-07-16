@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
+import { WarningTile } from '~/components/warning-tile';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
@@ -165,7 +167,12 @@ export default function VariantenPage(
             sampleSize={tableData?.sampleSize ?? 0}
             dates={tableData?.dates}
           >
-            <Box alignSelf="flex-start" my={3}>
+            <Box
+              alignSelf="flex-start"
+              my={3}
+              display="flex"
+              alignItems="center"
+            >
               <Select
                 options={countryOptions}
                 onChange={onChange}
@@ -173,6 +180,15 @@ export default function VariantenPage(
                 value={selectedCountryCode}
                 placeholder={text.selecteer_een_land}
               />
+              {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
+                <Box ml={3}>
+                  <WarningTile
+                    message={text.lagere_betrouwbaarheid}
+                    variant="emphasis"
+                    tooltipText={text.lagere_betrouwbaarheid_uitleg}
+                  />
+                </Box>
+              )}
             </Box>
           </VariantsTableTile>
 
