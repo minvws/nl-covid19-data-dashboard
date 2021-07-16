@@ -15,12 +15,10 @@ export function getInternationalVariantChartData(data: Record<string, In>) {
 
 const EMPTY_VALUES = {
   variantChart: null,
-  dates: {
-    date_of_insertion_unix: 0,
-    date_start_unix: 0,
-    date_end_unix: 0,
-  },
+  dates: null,
 } as const;
+
+export type VariantChartData = ReturnType<typeof getVariantChartData>;
 
 export function getVariantChartData(variants: InVariants | undefined) {
   if (!isDefined(variants) || !isDefined(variants.values)) {

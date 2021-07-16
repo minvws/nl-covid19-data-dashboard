@@ -187,6 +187,7 @@ export interface InVariantsVariantValue {
   occurrence: number;
   is_variant_of_concern: boolean;
   sample_size: number;
+  is_reliable: boolean;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
