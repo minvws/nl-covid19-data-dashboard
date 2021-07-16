@@ -43,3 +43,15 @@ timestamp,action,key
 2021-07-14T12:02:59.081Z,add,covid_varianten.varianten_omschrijving.zeta
 2021-07-14T13:04:16.474Z,add,covid_varianten.varianten_tabel.omschrijving_zonder_placeholders
 2021-07-14T13:04:17.234Z,add,internationaal_varianten.varianten_tabel.omschrijving_zonder_placeholders
+2021-07-13T13:52:43.496Z,add,internationaal_varianten.varianten_over_tijd_grafiek.titel
+2021-07-13T13:52:58.529Z,add,internationaal_varianten.varianten_over_tijd_grafiek.toelichting
+2021-07-13T13:53:13.341Z,add,internationaal_varianten.varianten_over_tijd_grafiek.legend_help_tekst
+2021-07-13T13:53:27.526Z,add,internationaal_varianten.varianten_over_tijd_grafiek.tooltip_labels.other_percentage
+2021-07-13T13:53:38.395Z,add,accessibility.variants_stacked_area_over_time_chart.label
+2021-07-13T13:53:51.570Z,add,accessibility.variants_stacked_area_over_time_chart.description
+2021-07-13T13:56:34.704Z,add,internationaal_varianten.varianten_over_tijd_grafiek.legend_niet_compleet_label
+2021-07-13T14:36:31.071Z,delete,accessibility.variants_stacked_area_over_time_chart.label
+2021-07-13T14:36:31.073Z,delete,accessibility.variants_stacked_area_over_time_chart.description
+2021-07-14T07:55:07.654Z,add,accessibility.charts.variants_stacked_area_over_time_chart.label
+2021-07-14T07:55:22.691Z,add,accessibility.charts.variants_stacked_area_over_time_chart.description
+2021-07-15T08:12:02.896Z,add,internationaal_varianten.geen_data_omschrijving

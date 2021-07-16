@@ -29,7 +29,7 @@ export function getVariantTableData(
 ) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return {
-      variantTable: [] as VariantRow[],
+      variantTable: null,
       dates: null,
       sampleSize: 0,
     } as const;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -6,6 +6,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { countryCodes } from '~/domain/international/select-countries';
+import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
@@ -22,7 +23,10 @@ import {
   getLocaleFile,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
-import { getInternationalVariantChartData } from '~/static-props/variants/get-international-variant-chart-data';
+import {
+  getInternationalVariantChartData,
+  VariantChartData,
+} from '~/static-props/variants/get-international-variant-chart-data';
 import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
 import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
@@ -74,8 +78,15 @@ export const getStaticProps = createGetStaticProps(
 export default function VariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { lastGenerated, content, variantTableData, countryOptions } = props;
+  const {
+    lastGenerated,
+    content,
+    variantTableData,
+    variantChartData,
+    countryOptions,
+  } = props;
   const [tableData, setTableData] = useState<VariantTableData | undefined>();
+  const [chartData, setChartData] = useState<VariantChartData | undefined>();
   const [selectedCountryCode, setSelectedCountryCode] = useState<
     string | undefined
   >();
@@ -89,6 +100,41 @@ export default function VariantenPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const noDataMessageTable =
+    tableData?.variantTable === undefined
+      ? text.selecteer_een_land_omschrijving
+      : tableData?.variantTable === null
+      ? text.geen_data_omschrijving
+      : '';
+
+  const noDataMessageChart =
+    chartData?.variantChart === undefined
+      ? text.selecteer_een_land_omschrijving
+      : chartData?.variantChart === null
+      ? text.geen_data_omschrijving
+      : '';
+
+  const onChange = useCallback(
+    (value: string) => {
+      setSelectedCountryCode(value);
+      setTableData(variantTableData[value]);
+      setChartData(variantChartData[value]);
+    },
+    [
+      setSelectedCountryCode,
+      setTableData,
+      setChartData,
+      variantTableData,
+      variantChartData,
+    ]
+  );
+
+  const onClear = useCallback(() => {
+    setSelectedCountryCode(undefined);
+    setTableData(undefined);
+    setChartData(undefined);
+  }, [setSelectedCountryCode, setTableData, setChartData]);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -110,8 +156,9 @@ export default function VariantenPage(
             articles={content.highlight?.articles}
             usefulLinks={content.page?.usefulLinks}
           />
+
           <VariantsTableTile
-            noDataMessage={text.selecteer_een_land_omschrijving}
+            noDataMessage={noDataMessageTable}
             source={text.bronnen.rivm}
             text={tableText}
             data={tableData?.variantTable}
@@ -121,19 +168,31 @@ export default function VariantenPage(
             <Box alignSelf="flex-start" my={3}>
               <Select
                 options={countryOptions}
-                onChange={(x) => {
-                  setSelectedCountryCode(x);
-                  setTableData(variantTableData[x]);
-                }}
-                onClear={() => {
-                  setSelectedCountryCode(undefined);
-                  setTableData(undefined);
-                }}
+                onChange={onChange}
+                onClear={onClear}
                 value={selectedCountryCode}
                 placeholder={text.selecteer_een_land}
               />
             </Box>
           </VariantsTableTile>
+
+          <VariantsStackedAreaTile
+            noDataMessage={noDataMessageChart}
+            values={chartData?.variantChart}
+            metadata={{
+              dataSources: [text.bronnen.rivm],
+            }}
+          >
+            <Box alignSelf="flex-start" my={3}>
+              <Select
+                options={countryOptions}
+                onChange={onChange}
+                onClear={onClear}
+                value={selectedCountryCode}
+                placeholder={text.selecteer_een_land}
+              />
+            </Box>
+          </VariantsStackedAreaTile>
         </TileList>
       </InternationalLayout>
     </Layout>
