@@ -10,6 +10,9 @@
       "items": {
         "$ref": "#/definitions/value"
       }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
     }
   },
   "definitions": {
