@@ -1,15 +1,15 @@
 import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { Markdown } from '~/components/markdown';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
-import { SafetyRegionComboBox } from '~/domain/layout/components/safety-region-combo-box';
+import { VrComboBox } from '~/domain/layout/components/vr-combo-box';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -32,7 +32,7 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
+const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
 
   const { siteText, formatDate } = useIntl();
@@ -48,10 +48,10 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout isLandingPage lastGenerated={lastGenerated}>
+      <VrLayout isLandingPage lastGenerated={lastGenerated}>
         {!breakpoints.md && (
           <Box bg="white">
-            <SafetyRegionComboBox />
+            <VrComboBox />
           </Box>
         )}
 
@@ -94,7 +94,7 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
               </>
             }
           >
-            <SafetyRegionChoropleth
+            <VrChoropleth
               accessibility={{ key: 'escalation_levels_choropleth' }}
               data={choropleth.vr}
               getLink={reverseRouter.vr.index}
@@ -110,9 +110,9 @@ const SafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChoroplethTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };
 
-export default SafetyRegion;
+export default VrIndexPage;

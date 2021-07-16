@@ -44,7 +44,10 @@ export function getSchemaInfo(
       ],
       basePath: jsonDirectory,
     },
-    nl: { files: ['NL.json'], basePath: jsonDirectory },
+    nl: {
+      files: ['NL.json'],
+      basePath: jsonDirectory,
+    },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
       basePath: jsonDirectory,

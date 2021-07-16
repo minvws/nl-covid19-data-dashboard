@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components';
 import { useIsMounted } from './use-is-mounted';
 import { useMediaQuery } from './use-media-query';
 
-export type Breakpoints = {
+type Breakpoints = {
   /**
    * ~420px
    */

@@ -42,6 +42,7 @@ export function SelectCountriesResults() {
                   </span>
                   <span
                     css={css({
+                      color: 'black',
                       flexGrow: 1,
                       fontWeight: x.data.isSelected ? 'bold' : 'normal',
                     })}
@@ -147,12 +148,11 @@ const StyledHit = styled.button<{
     py: 2,
     display: 'flex',
     textDecoration: 'none',
-    color: 'black',
+    color: 'annotation',
     width: '100%',
-    bg: x.hasFocus ? 'contextualContent' : 'transparant',
+    bg: x.hasFocus ? 'contextualContent' : 'white',
     transitionProperty: 'background',
     transitionDuration: x.hasFocus ? '0ms' : '120ms',
-    background: 'none',
     border: 'none',
     textAlign: 'left',
     opacity: x.isLimitReached && !x.isSelected ? 0.5 : 1,

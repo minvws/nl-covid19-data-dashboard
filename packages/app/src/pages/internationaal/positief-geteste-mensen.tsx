@@ -12,18 +12,18 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
-import { EuropeChoroplethTile } from '~/domain/internationaal/europe-choropleth-tile';
-import { choroplethMockData } from '~/domain/internationaal/logic/choropleth-mock-data';
+import { EuropeChoroplethTile } from '~/domain/international/europe-choropleth-tile';
 import { InfectedTableTile } from '~/domain/international/infected-table-tile';
-import { CountryOption } from '~/domain/international/select-countries/context';
 import {
   CountryCode,
   countryCodes,
-} from '~/domain/international/select-countries/country-code';
-import { SelectCountries } from '~/domain/international/select-countries/select-countries';
+  CountryOption,
+  SelectCountries,
+} from '~/domain/international/select-countries';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
+import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getInPositiveTestsQuery } from '~/queries/in-positive-tests-query';
 import {
@@ -45,25 +45,42 @@ type CompiledCountriesValue = {
   date_end_unix: number;
 } & Record<CountryCode, number>;
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  createGetContent<{
-    page: InPositiveTestsQuery;
-    highlight: {
-      articles?: ArticleSummary[];
-    };
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return `{
+export const getStaticProps = withFeatureNotFoundPage(
+  'internationalPage',
+  createGetStaticProps(
+    getLastGeneratedDate,
+    createGetContent<{
+      page: InPositiveTestsQuery;
+      highlight: {
+        articles?: ArticleSummary[];
+      };
+    }>(() => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      return `{
       "page": ${getInPositiveTestsQuery()},
       "highlight": ${createPageArticlesQuery('in_positiveTestsPage', locale)}
     }`;
-  }),
-  createGetChoroplethData({
-    in: ({ tested_overall }) => tested_overall || choroplethMockData(),
-  }),
-  getInData([...countryCodes]),
-  getCountryNames
+    }),
+    createGetChoroplethData({
+      in: ({ tested_overall }) => tested_overall,
+    }),
+    () => {
+      const { internationalData } = getInData([...countryCodes])();
+      const nldTestedLastValue =
+        internationalData.nld.tested_overall.last_value;
+      return {
+        compiledInternationalData: compileInternationalData(internationalData),
+        internationalMetadataDatums: {
+          dateOrRange: {
+            start: nldTestedLastValue.date_start_unix,
+            end: nldTestedLastValue.date_end_unix,
+          },
+          dateOfInsertionUnix: nldTestedLastValue.date_of_insertion_unix,
+        },
+      };
+    },
+    getCountryNames
+  )
 );
 
 export default function PositiefGetesteMensenPage(
@@ -74,7 +91,8 @@ export default function PositiefGetesteMensenPage(
     content,
     choropleth,
     countryNames,
-    internationalData,
+    compiledInternationalData,
+    internationalMetadataDatums,
   } = props;
   const { in: choroplethData } = choropleth;
 
@@ -102,11 +120,6 @@ export default function PositiefGetesteMensenPage(
     'comparedValue could not be found for country code nld'
   );
 
-  const compiledInternationalData = useMemo(
-    () => compileInternationalData(internationalData),
-    [internationalData]
-  );
-
   const countryOptions = useMemo(
     () =>
       compileCountryOptions(
@@ -126,12 +139,8 @@ export default function PositiefGetesteMensenPage(
             icon={<Getest />}
             description={text.pagina_toelichting}
             metadata={{
+              ...internationalMetadataDatums,
               datumsText: text.datums,
-              dateOrRange: {
-                start: choroplethData[0].date_start_unix,
-                end: choroplethData[0].date_end_unix,
-              },
-              dateOfInsertionUnix: choroplethData[0].date_of_insertion_unix,
               dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
             }}
             referenceLink={text.reference.href}
@@ -147,7 +156,11 @@ export default function PositiefGetesteMensenPage(
               title: text.choropleth.legenda_titel,
             }}
             metadata={{
-              source: text.bronnen.rivm,
+              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              date: [
+                internationalMetadataDatums.dateOrRange.start,
+                internationalMetadataDatums.dateOrRange.end,
+              ],
             }}
           >
             <EuropeChoropleth
@@ -185,6 +198,7 @@ export default function PositiefGetesteMensenPage(
                 countryOptions={countryOptions}
                 limit={10}
                 alwaysSelectedCodes={['nld']}
+                defaultSelectedCodes={['bel', 'deu']}
               >
                 {(selectedCountries, colors) => {
                   const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
@@ -211,6 +225,13 @@ export default function PositiefGetesteMensenPage(
           <InfectedTableTile
             data={choroplethData}
             countryNames={countryNames}
+            metadata={{
+              dataSources: [text.bronnen.rivm, text.bronnen.ecdc],
+              date: [
+                internationalMetadataDatums.dateOrRange.start,
+                internationalMetadataDatums.dateOrRange.end,
+              ],
+            }}
           />
         </TileList>
       </InternationalLayout>

@@ -4,7 +4,7 @@ import { isDefined } from 'ts-is-present';
 import { asResponsiveArray } from '~/style/utils';
 import ResetIcon from '~/assets/reset.svg';
 
-export interface SelectOption {
+interface SelectOption {
   metricProperty: string;
   label: string;
   color: string;

@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { useIntl } from '~/intl';
 import { isDefined } from 'ts-is-present';
+import { useIntl } from '~/intl';
 import { VisuallyHidden } from './visually-hidden';
 
 interface Option<T extends string> {

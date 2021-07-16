@@ -13,7 +13,7 @@ export function createElementsQuery(
   const query = `// groq
     {
       'timeSeries': *[
-        && _type == 'timeSeries'
+        _type == 'timeSeries'
         && scope == '${scope}'
         && metricName in ${formatStringArray(metricNames)}
       ]{
@@ -28,7 +28,7 @@ export function createElementsQuery(
         }
       },
       'kpi': *[
-        && _type == 'kpi'
+        _type == 'kpi'
         && scope == '${scope}'
         && metricName in ${formatStringArray(metricNames)}
       ]{
@@ -42,14 +42,14 @@ export function createElementsQuery(
   return query;
 }
 
-export type CmsTimelineEventConfig = {
+type CmsTimelineEventConfig = {
   title: string;
   description: string;
   date: string;
   dateEnd: string;
 };
 
-export type CmsTimeSeriesElement = {
+type CmsTimeSeriesElement = {
   _id: string;
   scope: MetricScope;
   metricName: string;
@@ -57,7 +57,7 @@ export type CmsTimeSeriesElement = {
   timelineEvents: CmsTimelineEventConfig[];
 };
 
-export type CmsKpiElement = {
+type CmsKpiElement = {
   _id: string;
   scope: MetricScope;
   metricName: string;

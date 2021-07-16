@@ -1,9 +1,10 @@
-import { InTestedOverall } from '@corona-dashboard/common';
+import { InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { matchSorter } from 'match-sorter';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { Metadata, MetadataProps } from '~/components/metadata';
 import { SearchInput } from '~/components/search-input';
 import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
@@ -16,13 +17,13 @@ import {
   positiveTestedSortOptions,
   SortIdentifier,
 } from './logic/sort-options';
-
-interface infectedTableTileProps {
-  data: InTestedOverall[];
+interface InfectedTableTileProps {
+  data: InCollectionTestedOverall[];
   countryNames: Record<string, string>;
+  metadata: MetadataProps;
 }
 
-export type filterArrayType = {
+export type FilterArrayType = {
   country_code: string;
   label: string;
 };
@@ -30,14 +31,15 @@ export type filterArrayType = {
 export function InfectedTableTile({
   data,
   countryNames,
-}: infectedTableTileProps) {
+  metadata,
+}: InfectedTableTileProps) {
   const { siteText } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
   const [inputValue, setInputValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [matchingCountries, setMatchingCountries] = useState(
-    [] as filterArrayType[]
+    [] as FilterArrayType[]
   );
   const [sortOption, setSortOption] = useState<SortIdentifier>(
     'infected_per_100k_average_high_to_low'
@@ -157,6 +159,8 @@ export function InfectedTableTile({
           </ExpandButton>
         </Box>
       )}
+
+      <Metadata {...metadata} isTileFooter />
     </Tile>
   );
 }

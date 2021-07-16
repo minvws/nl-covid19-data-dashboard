@@ -8,7 +8,7 @@ import {
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import GrafiekIcon from '~/assets/chart.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -21,10 +21,10 @@ import {
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -52,6 +52,7 @@ import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -106,6 +107,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     useState<RegionControlOption>('municipal');
 
   const unknownLevelColor = useEscalationColor(null);
+  const internationalFeature = useFeature('internationalPage');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -204,11 +206,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.gm.index(),
                     text: text.quick_links.links.gemeente,
                   },
-                  {
-                    href: reverseRouter.in.index(),
-                    text: text.quick_links.links.internationaal,
-                  },
-                ]}
+                  internationalFeature.isEnabled
+                    ? {
+                        href: reverseRouter.in.index(),
+                        text: text.quick_links.links.internationaal,
+                      }
+                    : undefined,
+                ].filter(isDefined)}
                 dataSitemapHeader={text.data_sitemap_titel}
                 dataSitemap={dataSitemap}
               />
@@ -245,7 +249,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <SafetyRegionChoropleth
+                  <VrChoropleth
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}
@@ -343,7 +347,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'region' && (
-                    <SafetyRegionChoropleth
+                    <VrChoropleth
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
                       }}

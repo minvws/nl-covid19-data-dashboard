@@ -1,6 +1,8 @@
 import { isDefined } from 'ts-is-present';
+import { Rule } from '~/sanity';
+import { localeStringValidation } from '../../language/locale-validation';
 
-const REQUIRED = (x: any) => x.required();
+const REQUIRED = (x: Rule) => x.required();
 const DATE_FORMAT = 'YYYY-MM-DD';
 
 export const timelineEvent = {
@@ -12,11 +14,12 @@ export const timelineEvent = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (x: any) =>
-        x
+      validation: localeStringValidation((rule) =>
+        rule
           .required()
           .max(60)
-          .error('Titels zijn gelimiteerd tot maximaal 60 tekens'),
+          .error('Titels zijn gelimiteerd tot maximaal 60 tekens')
+      ),
       options: {
         ignoreLanguageSwitcher: true,
       },

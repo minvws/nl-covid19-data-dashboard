@@ -1,3 +1,5 @@
+import { Rule } from '~/sanity';
+
 export const milestone = {
   title: 'Single milestone',
   name: 'milestone',
@@ -10,7 +12,7 @@ export const milestone = {
       options: {
         dateFormat: 'YYYY-MM-DD',
       },
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
     { name: 'title', type: 'localeString', title: 'Titel' },
   ],

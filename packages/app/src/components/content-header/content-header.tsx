@@ -57,7 +57,7 @@ const Header = (props: HeaderProps) => {
   );
 };
 
-export const CategoryHeading = styled(Heading)<{
+const CategoryHeading = styled(Heading)<{
   hide: boolean;
   hasIcon: boolean;
 }>(

@@ -4,13 +4,13 @@ import { SiteText } from '~/locale';
 
 export type SituationKey = keyof SiteText['brononderzoek']['situaties'];
 
-export interface Situation {
+interface Situation {
   id: SituationKey;
   title: string;
   description: string;
 }
 
-export const situations: SituationKey[] = [
+const situations: SituationKey[] = [
   'home_and_visits',
   'work',
   'school_and_day_care',

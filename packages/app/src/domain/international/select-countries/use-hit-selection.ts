@@ -23,7 +23,7 @@ export function useHitSelection({
   isEnabled: boolean;
 }) {
   const [focusIndex, setFocusIndex] = useState(0);
-  const focusRef = useRef<HTMLAnchorElement>(null);
+  const focusRef = useRef<HTMLElement>(null);
 
   useHotkey(
     'up',
@@ -49,23 +49,15 @@ export function useHitSelection({
   useHotkey(
     'enter',
     () => {
-      focusRef.current && onSelectHit(focusIndex, false);
+      onSelectHit(focusIndex, false);
     },
     { allowRepeat: true, isDisabled: !isEnabled }
   );
 
   useHotkey(
-    'command+enter',
+    'space',
     () => {
-      focusRef.current && onSelectHit(focusIndex, true);
-    },
-    { allowRepeat: true, isDisabled: !isEnabled }
-  );
-
-  useHotkey(
-    'control+enter',
-    () => {
-      focusRef.current && onSelectHit(focusIndex, true);
+      onSelectHit(focusIndex, false);
     },
     { allowRepeat: true, isDisabled: !isEnabled }
   );

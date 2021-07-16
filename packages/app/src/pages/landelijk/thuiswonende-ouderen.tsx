@@ -8,8 +8,8 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -204,7 +204,7 @@ const ElderlyAtHomeNationalPage = (
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >
-            <SafetyRegionChoropleth
+            <VrChoropleth
               accessibility={{
                 key: 'elderly_at_home_infected_people_choropleth',
               }}

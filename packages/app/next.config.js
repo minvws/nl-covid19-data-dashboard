@@ -11,6 +11,9 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const path = require('path');
 
 const nextConfig = {
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname,
+  },
   /**
    * Enables react strict mode
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
@@ -79,12 +82,16 @@ const nextConfig = {
       new LodashModuleReplacementPlugin({
         // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
         paths: true,
-      }),
-      new DuplicatePackageCheckerPlugin({
-        verbose: true,
-        showHelp: true,
       })
     );
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new DuplicatePackageCheckerPlugin({
+          verbose: true,
+          showHelp: true,
+        })
+      );
+    }
 
     return config;
   },

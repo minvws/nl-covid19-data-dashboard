@@ -1,9 +1,9 @@
-import { InTestedOverall } from '@corona-dashboard/common';
+import { InCollectionTestedOverall } from '@corona-dashboard/common';
 
 export const positiveTestedSortOptions = {
   infected_per_100k_average_high_to_low: (
-    a: InTestedOverall,
-    b: InTestedOverall
+    a: InCollectionTestedOverall,
+    b: InCollectionTestedOverall
   ) => {
     if (
       (a.infected_per_100k_average ?? -Infinity) >
@@ -19,8 +19,8 @@ export const positiveTestedSortOptions = {
   },
 
   infected_per_100k_average_low_to_high: (
-    a: InTestedOverall,
-    b: InTestedOverall
+    a: InCollectionTestedOverall,
+    b: InCollectionTestedOverall
   ) => {
     if (
       (a.infected_per_100k_average ?? -Infinity) <
@@ -35,13 +35,19 @@ export const positiveTestedSortOptions = {
     return 0;
   },
 
-  infected_high_to_low: (a: InTestedOverall, b: InTestedOverall) => {
+  infected_high_to_low: (
+    a: InCollectionTestedOverall,
+    b: InCollectionTestedOverall
+  ) => {
     if ((a.infected ?? -Infinity) > (b.infected ?? -Infinity)) return -1;
     if ((b.infected ?? -Infinity) > (a.infected ?? -Infinity)) return 1;
     return 0;
   },
 
-  infected_low_to_high: (a: InTestedOverall, b: InTestedOverall) => {
+  infected_low_to_high: (
+    a: InCollectionTestedOverall,
+    b: InCollectionTestedOverall
+  ) => {
     if ((a.infected ?? -Infinity) < (b.infected ?? -Infinity)) return -1;
     if ((b.infected ?? -Infinity) < (a.infected ?? -Infinity)) return 1;
     return 0;

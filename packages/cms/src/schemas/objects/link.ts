@@ -1,3 +1,6 @@
+import { Rule } from '~/sanity';
+import { localeStringValidation } from '../../language/locale-validation';
+
 export const link = {
   type: 'object',
   title: 'Een link voorzien van een label',
@@ -12,17 +15,19 @@ export const link = {
       title: 'Titel',
       name: 'title',
       type: 'localeString',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
+      options: {
+        /**
+         * This option can be set to true when all locale fields should be displayed
+         */
+        ignoreLanguageSwitcher: true,
+      },
     },
     {
       name: 'href',
       type: 'string',
       title: 'Link naar pagina',
-      validation: (Rule: any) => Rule.required(),
+      validation: (rule: Rule) => rule.required(),
     },
   ],
 };

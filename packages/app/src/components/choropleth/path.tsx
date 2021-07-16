@@ -88,7 +88,7 @@ export function HoverPathLink({
   );
 }
 
-export function HoverPath({
+function HoverPath({
   id,
   pathData,
   fill,
