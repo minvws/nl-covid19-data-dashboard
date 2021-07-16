@@ -9,6 +9,8 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 export const partialColor = '#239BE6';
 export const fullColor = '#005083';
 
+const MARKER_WIDTH = 7;
+
 export function CoverageProgressBar(props: {
   partialCount: number;
   partialPercentage: number;
@@ -77,6 +79,13 @@ export function CoverageProgressBar(props: {
               fill="white"
             />
           </g>
+          <rect
+            x={`${fullPercentage + partialPercentage}%`}
+            y={barHeight - (barHeight + MARKER_WIDTH)}
+            width={MARKER_WIDTH}
+            height={barHeight + MARKER_WIDTH}
+            fill="black"
+          />
         </svg>
       </Box>
       <Box display="flex" spacing={2} spacingHorizontal>
