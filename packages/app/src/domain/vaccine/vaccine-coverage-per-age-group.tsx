@@ -1,63 +1,97 @@
-import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  assert,
+  NlVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
+import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { Box } from '../../components/base';
 import { CoverageProgressBar } from './components/coverage-progress-bar';
-import { CoverageRow } from './components/coverage-row';
+import { CoverageRow, HeaderRow } from './components/coverage-row';
 
 type Props = {
   values: NlVaccineCoveragePerAgeGroupValue[];
 };
+
+const SORTING_ORDER = [
+  '80+',
+  '70-79',
+  '65-69',
+  '50-59',
+  '40-49',
+  '30-39',
+  '18-29',
+  '12-17',
+  '18+',
+  '12+',
+];
+
+function getSortingOrder(ageGroup: string) {
+  const index = SORTING_ORDER.findIndex((x) => x === ageGroup);
+
+  assert(index >= 0, `No sorting order defined for age group ${ageGroup}`);
+
+  return index;
+}
 
 export function VaccineCoveragePerAgeGroup(props: Props) {
   const { values } = props;
 
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const { headers } = siteText.vaccinaties.vaccination_coverage;
-  const { group, oldest, total, total_people } =
-    siteText.vaccinaties.vaccination_coverage.templates.agegroup;
-  const breakpoints = useBreakpoints(true);
+  const { templates } = siteText.vaccinaties.vaccination_coverage;
 
   return (
     <Box display="flex" flexDirection="column">
-      <CoverageRow isHeaderRow>
+      <HeaderRow>
         <InlineText>{headers.agegroup}</InlineText>
         <InlineText>{headers.coverage}</InlineText>
-        {breakpoints.md ? <InlineText>{headers.progress}</InlineText> : null}
-      </CoverageRow>
-      {values.map((value, index, arr) => (
-        <CoverageRow
-          borderColor={index === arr.length - 1 ? 'black' : undefined}
-          key={value.age_group_range}
-        >
-          <AgeGroup
-            range={formatAgeGroup(value.age_group_range, {
-              group,
-              oldest,
-              total,
-              total_people,
-            })}
-            total={replaceVariablesInText(total_people, {
-              total: formatNumber(value.age_group_total),
-            })}
-          />
-          <VaccinationCoveragePercentage
-            value={`${formatPercentage(value.fully_vaccinated_percentage, {
-              maximumFractionDigits: 1,
-            })}%`}
-          />
-          <CoverageProgressBar
-            showTotals={index === arr.length - 1}
-            partiallyVaccinated={value.partially_vaccinated}
-            fullyVaccinated={value.fully_vaccinated}
-            fullyPercentage={value.fully_vaccinated_percentage}
-            partiallyPercentage={value.partially_vaccinated_percentage}
-            total={value.age_group_total}
-          />
-        </CoverageRow>
-      ))}
+        <InlineText>{headers.progress}</InlineText>
+      </HeaderRow>
+      {values
+        .sort(
+          (a, b) =>
+            getSortingOrder(a.age_group_range) -
+            getSortingOrder(b.age_group_range)
+        )
+        .map((value, index) => {
+          return (
+            <>
+              {index === values.length - 2 ? <Box pt={4} /> : null}
+              <CoverageRow key={value.age_group_range}>
+                <AgeGroup
+                  range={formatAgeGroupString(
+                    value.age_group_range,
+                    templates.agegroup
+                  )}
+                  total={replaceVariablesInText(
+                    templates.agegroup.total_people,
+                    {
+                      total: formatNumber(value.age_group_total),
+                    }
+                  )}
+                />
+                <VaccinationCoveragePercentage
+                  value={`${formatPercentage(
+                    value.fully_vaccinated_percentage,
+                    {
+                      maximumFractionDigits: 1,
+                      minimumFractionDigits: 1,
+                    }
+                  )}%`}
+                />
+                <CoverageProgressBar
+                  partialCount={value.partially_vaccinated}
+                  partialPercentage={value.partially_vaccinated_percentage}
+                  fullCount={value.fully_vaccinated}
+                  fullPercentage={value.fully_vaccinated_percentage}
+                  total={value.age_group_total}
+                />
+              </CoverageRow>
+            </>
+          );
+        })}
     </Box>
   );
 }
@@ -65,22 +99,21 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
 /**
  * Format the given age group string according to these rules:
  *
- * If the group includes a hyphen (-) it is considered to be a range
- * and therefore formatted using the group template which looks roughly like this:
+ * If the group includes a hyphen (-) it is considered to be a range and
+ * therefore formatted using the group template which looks roughly like this:
  * {{age_low}} tot {{age_high}} jaar
  *
- * If the group contains a plus sign (+) it is considered to be a 'this value and higher' value
- * and is foratted like this:
- * {{age}} en ouder
+ * If the group contains a plus sign (+) it is considered to be a 'this value
+ * and higher' value and is formatted like this: {{age}} en ouder
  *
- * If none of these checks return true the value is considered to display the totals
- * and simply returns the locale string for this.
+ * If none of these checks return true the value is considered to display the
+ * totals and simply returns the locale string for this.
  *
  * @param ageGroup
  * @param templates
  * @returns
  */
-function formatAgeGroup(
+function formatAgeGroupString(
   ageGroup: string,
   templates: {
     oldest: string;
@@ -97,35 +130,40 @@ function formatAgeGroup(
         age_high,
       });
     }
+    case ageGroup === '18+':
+    case ageGroup === '12+': {
+      const age = ageGroup.replace('+', '');
+      return replaceVariablesInText(templates.total, { age });
+    }
     case ageGroup.includes('+'): {
       const age = ageGroup.replace('+', '');
       return replaceVariablesInText(templates.oldest, { age });
     }
     default: {
-      return templates.total;
+      throw new Error(`Invalid age group ${ageGroup}`);
     }
   }
 }
 
 function VaccinationCoveragePercentage({ value }: { value: string }) {
   return (
-    <Box display="flex" width="50%" justifyContent="flex-end">
-      <InlineText color="blue" fontSize={{ _: 3, lg: 4 }} fontWeight="bold">
-        {value}
-      </InlineText>
-    </Box>
+    <InlineText
+      color={colors.data.multiseries.cyan_dark}
+      fontSize={3}
+      fontWeight="bold"
+    >
+      {value}
+    </InlineText>
   );
 }
 
 function AgeGroup({ range, total }: { range: string; total: string }) {
   return (
     <Box display="flex" flexDirection="column">
-      <Box>
-        <InlineText fontWeight="bold" fontSize={{ _: 2, md: 3 }}>
-          {range}
-        </InlineText>
-      </Box>
-      <Box as="span" fontSize={{ _: 1, md: 2 }}>
+      <InlineText fontWeight="bold" fontSize={2}>
+        {range}
+      </InlineText>
+      <Box as="span" fontSize={1}>
         <InlineText>{total}</InlineText>
       </Box>
     </Box>
