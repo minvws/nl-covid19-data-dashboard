@@ -2,7 +2,6 @@ import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import WarningIcon from '~/assets/warning.svg';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import { Markdown } from './markdown';
 
