@@ -24,9 +24,9 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
   markNearestPointOnly,
   displayTooltipValueOnly,
   valueMinWidth,
-  formatters,
+  metricPropertyFormatters,
 }: TooltipListOfSeriesProps<T>) {
-  const formatSeriesValue = useFormatSeriesValue(formatters);
+  const formatSeriesValue = useFormatSeriesValue(metricPropertyFormatters);
 
   const seriesConfig: SeriesConfig<T> = markNearestPointOnly
     ? [config[configIndex]]

@@ -1,6 +1,7 @@
 import { TimestampedValue } from '@corona-dashboard/common';
 import {
   DataOptions,
+  MetricPropertyFormatters,
   SeriesConfig,
   TimespanAnnotationConfig,
 } from '../../logic';
@@ -54,14 +55,14 @@ export type TooltipData<T extends TimestampedValue> = {
   valueMinWidth?: string;
 
   /**
-   * Metric property formatters ensure a consistent usage of decimals for every
+   * Metric property formatters ensure a consistent amount of decimals for every
    * value, based on all values of the same property in the series.
    *
    * This means that the following values: [0.22, 1.1, 2]
-   * will be renderes as: [0.22, 1.10, 2.00]
+   * will be rendered as: [0.22, 1.10, 2.00]
    *
    */
-  formatters: Record<keyof T, (value: number) => string>;
+  metricPropertyFormatters: MetricPropertyFormatters<T>;
 };
 
 export type TooltipFormatter<T extends TimestampedValue> = (

@@ -4,13 +4,15 @@ import {
   DisclosurePanel,
 } from '@reach/disclosure';
 import css from '@styled-system/css';
-import { forwardRef, MouseEvent, useRef, useState } from 'react';
+import { forwardRef, MouseEvent, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { TableText } from '~/domain/variants/variants-table-tile';
+import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
+import { getMaxNumOfDecimals } from '~/utils/get-consistent-number-formatter';
 import {
   Cell,
   HeaderCell,
@@ -27,8 +29,18 @@ type NarrowVariantsTableProps = {
 };
 
 export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
+  const intl = useIntl();
   const { rows, text } = props;
   const columnNames = text.kolommen;
+
+  const formatValue = useMemo(() => {
+    const numOfDecimals = getMaxNumOfDecimals(rows.map((x) => x.percentage));
+    return (value: number) =>
+      intl.formatPercentage(value, {
+        minimumFractionDigits: numOfDecimals,
+        maximumFractionDigits: numOfDecimals,
+      });
+  }, [intl, rows]);
 
   return (
     <StyledTable>
@@ -40,7 +52,12 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <MobileVariantRow row={row} text={text} key={row.variant} />
+          <MobileVariantRow
+            row={row}
+            formatValue={formatValue}
+            text={text}
+            key={row.variant}
+          />
         ))}
       </tbody>
     </StyledTable>
@@ -50,10 +67,11 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
 type MobileVariantRowProps = {
   row: VariantRow;
   text: TableText;
+  formatValue: (value: number) => string;
 };
 
 function MobileVariantRow(props: MobileVariantRowProps) {
-  const { row, text } = props;
+  const { row, text, formatValue } = props;
   const [isOpen, setIsOpen] = useState(false);
   const { ref, height: contentHeight } = useResizeObserver();
 
@@ -87,6 +105,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           <PercentageBarWithNumber
             percentage={row.percentage}
             color={row.color}
+            formatValue={formatValue}
           />
         </Cell>
         <Cell mobile alignRight>

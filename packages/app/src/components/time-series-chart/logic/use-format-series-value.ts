@@ -3,9 +3,10 @@ import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { SeriesConfig } from './series';
+import { MetricPropertyFormatters } from './use-metric-property-formatters';
 
 export function useFormatSeriesValue<T extends TimestampedValue>(
-  formatters: Record<keyof T, (value: number) => string>
+  metricPropertyFormatters: MetricPropertyFormatters<T>
 ) {
   const intl = useIntl();
 
@@ -15,7 +16,8 @@ export function useFormatSeriesValue<T extends TimestampedValue>(
       metricProperty: keyof T,
       isPercentage?: boolean
     ) {
-      const formatter = formatters[metricProperty] || intl.formatNumber;
+      const formatter =
+        metricPropertyFormatters[metricProperty] || intl.formatNumber;
       const numberValue = value[metricProperty] as unknown as number | null;
       const formattedValue = isPresent(numberValue)
         ? formatter(numberValue)
@@ -50,5 +52,5 @@ export function useFormatSeriesValue<T extends TimestampedValue>(
     }
 
     return formatSeriesValue;
-  }, [formatters, intl.formatNumber]);
+  }, [metricPropertyFormatters, intl.formatNumber]);
 }
