@@ -4,8 +4,8 @@ import {
   VrGNumber,
 } from '@corona-dashboard/common';
 import { ChartTile } from '~/components/chart-tile';
+import { TimeSeriesChart } from '~/components/time-series-chart';
 import { InlineText } from '~/components/typography';
-import { VerticalBarChart } from '~/components/vertical-bar-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 
@@ -35,37 +35,47 @@ export function GNumberBarChartTile({
         source: text.bronnen,
       }}
     >
-      <VerticalBarChart
+      <TimeSeriesChart
         accessibility={{
           key: 'g_number',
           features: ['keyboard_bar_chart'],
         }}
         values={values}
         timeframe={timeframeInitialValue}
-        numGridLines={3}
         dataOptions={{
           isPercentage: true,
         }}
+        disableLegend
         seriesConfig={[
           {
-            type: 'bar',
+            type: 'split-bar',
             metricProperty: 'g_number',
-            color: colors.red,
-            secondaryColor: colors.data.primary,
+            label: 'G number',
+            fillOpacity: 1,
+            splitPoints: [
+              {
+                color: colors.data.primary,
+                value: 0,
+                label: 'Krimpend G-getal',
+              },
+              {
+                color: colors.red,
+                label: 'Groeiend G-getal',
+                value: Infinity,
+              },
+            ],
           },
         ]}
-        formatTooltip={({ value }) => {
-          return (
-            <>
-              <InlineText fontWeight="bold">
-                {`${formatPercentage(Math.abs(value.g_number))}% `}
-              </InlineText>
-              {value.g_number > 0
-                ? text.positive_descriptor
-                : text.negative_descriptor}
-            </>
-          );
-        }}
+        formatTooltip={({ value }) => (
+          <>
+            <InlineText fontWeight="bold">
+              {`${formatPercentage(Math.abs(value.g_number))}% `}
+            </InlineText>
+            {value.g_number > 0
+              ? text.positive_descriptor
+              : text.negative_descriptor}
+          </>
+        )}
       />
     </ChartTile>
   );
