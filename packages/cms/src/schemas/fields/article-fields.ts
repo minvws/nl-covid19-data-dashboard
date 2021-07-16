@@ -46,7 +46,8 @@ export const ARTICLE_FIELDS = [
       'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.',
     name: 'summary',
     type: 'localeText',
-    validation: localeStringValidation((rule) => rule.required().max(120)),
+    // @Todo Align with content team about migrating content, and then enforce max length of 120.
+    validation: localeValidation((rule) => rule.required()),
   },
   {
     title: 'Intro',

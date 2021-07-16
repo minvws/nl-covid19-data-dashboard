@@ -7,8 +7,8 @@ import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { SafetyRegionGroup } from './components/safety-region-group';
-import { SafetyRegionRow } from './components/safety-region-row';
+import { VrGroup } from './components/vr-group';
+import { VrRow } from './components/vr-row';
 import {
   ScoreboardRowData,
   scoreboardSortOptions,
@@ -52,7 +52,7 @@ export function Scoreboard({
       borderBottomWidth="1px"
     >
       {rows.map((row) => (
-        <SafetyRegionGroup
+        <VrGroup
           level={row.escalationLevel}
           rowCount={row.vrData.length}
           key={row.escalationLevel}
@@ -92,7 +92,7 @@ export function Scoreboard({
               {row.vrData
                 .sort(scoreboardSortOptions[sortOption])
                 .map((vr, index) => (
-                  <SafetyRegionRow
+                  <VrRow
                     vrData={vr}
                     key={vr.vrCode}
                     maxHospitalAdmissionsPerMillion={
@@ -108,7 +108,7 @@ export function Scoreboard({
                 ))}
             </Box>
           </Box>
-        </SafetyRegionGroup>
+        </VrGroup>
       ))}
     </Box>
   );

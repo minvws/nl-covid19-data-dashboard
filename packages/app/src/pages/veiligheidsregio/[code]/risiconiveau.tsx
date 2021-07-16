@@ -16,6 +16,7 @@ import {
 } from '~/components/categorical-bar-scale';
 import { ContentHeader } from '~/components/content-header';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { Metadata } from '~/components/metadata';
@@ -23,11 +24,10 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -64,12 +64,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    safetyRegionName,
-    content,
-    selectedVrData: data,
-    lastGenerated,
-  } = props;
+  const { vrName, content, selectedVrData: data, lastGenerated } = props;
 
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
   const breakpoints = useBreakpoints();
@@ -103,10 +98,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
@@ -116,16 +111,12 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.inschaling}
             title={replaceVariablesInText(text.titel, {
-              safetyRegionName,
+              safetyRegionName: vrName,
             })}
             subtitle={text.pagina_toelichting}
             reference={text.reference}
@@ -352,7 +343,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
           <ArticleStrip articles={content.articles} />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

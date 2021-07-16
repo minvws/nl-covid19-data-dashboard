@@ -16,7 +16,7 @@ export const countryGeo = topojson.feature(
 
 export const regionGeo = topojson.feature(
   topology,
-  topology.objects.safetyregions
+  topology.objects.vr_collection
 ) as VrGeoJSON;
 
 export const municipalGeo = topojson.feature(

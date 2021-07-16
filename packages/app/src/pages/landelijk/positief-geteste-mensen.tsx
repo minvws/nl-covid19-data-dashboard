@@ -16,9 +16,9 @@ import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -217,7 +217,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              *
              * Ideally the ChoroplethTile would receive some props with the data
              * it needs to render either Choropleth without it caring about
-             * MunicipalityChloropleth or SafetyRegionChloropleth, that data would
+             * MunicipalityChloropleth or VrChloropleth, that data would
              * make the chart and define the tooltip layout for each, but maybe for
              * now that is a bridge too far. Let's take it one step at a time.
              */}
@@ -236,7 +236,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'region' && (
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',
                 }}

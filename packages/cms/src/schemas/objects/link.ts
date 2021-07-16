@@ -16,6 +16,12 @@ export const link = {
       name: 'title',
       type: 'localeString',
       validation: localeStringValidation((rule) => rule.required()),
+      options: {
+        /**
+         * This option can be set to true when all locale fields should be displayed
+         */
+        ignoreLanguageSwitcher: true,
+      },
     },
     {
       name: 'href',

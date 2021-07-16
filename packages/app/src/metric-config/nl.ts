@@ -7,9 +7,7 @@ const YELLOW = colors.data.gradient.yellow;
 const RED = colors.data.gradient.red;
 
 type NlMetricKey = MetricKeys<Nl>;
-export type NlConfig = Partial<
-  Record<NlMetricKey, Record<string, MetricConfig>>
->;
+type NlConfig = Partial<Record<NlMetricKey, Record<string, MetricConfig>>>;
 
 export const nl: NlConfig = {
   behavior: {

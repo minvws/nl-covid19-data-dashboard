@@ -188,6 +188,8 @@ export const colors = {
       theta: multiseries.turquoise_dark,
       kappa: multiseries.magenta,
       lambda: multiseries.magenta_dark,
+      iota: multiseries.magenta_dark,
+      zeta: multiseries.magenta_dark,
       other: '#808080',
     },
 

@@ -7,6 +7,7 @@
     "proto_name",
     "name",
     "code",
+    "named_difference",
     "tested_overall"
   ],
   "additionalProperties": false,
@@ -28,8 +29,14 @@
       "//": "We might want to use an enum here with country codes. This would be the filename without the IN_ prefix, so the country ISO code",
       "pattern": "^[A-Z]+$"
     },
+    "named_difference": {
+      "$ref": "__named_difference.json"
+    },
     "tested_overall": {
       "$ref": "tested_overall.json"
+    },
+    "variants": {
+      "$ref": "variants.json"
     }
   }
 }

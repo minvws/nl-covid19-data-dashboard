@@ -7,6 +7,7 @@ type ArticlePageType =
   | 'intensiveCarePage'
   | 'positiveTestsPage'
   | 'in_positiveTestsPage'
+  | 'in_variantsPage'
   | 'reproductionPage'
   | 'sewerPage'
   | 'vaccinationsPage'

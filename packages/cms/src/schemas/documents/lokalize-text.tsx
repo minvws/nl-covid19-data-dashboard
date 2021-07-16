@@ -149,17 +149,10 @@ function LokalizeTextDescription() {
             worden met Markdown.
           </p>
           <p>
-            Als op de{' '}
-            <a
-              href="https://cdb-dev.kpmg.nl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              test-omgeving
-            </a>{' '}
-            de "keys"-modus wordt aangezet (om de lokalize-keys te kunnen
-            lezen), wordt bij elk veld wat Markdown ondersteunt een emoji ( ✅ )
-            weergegeven. Deze velden zijn dus met markdown op te maken.
+            Als op de cdb-dev-omgeving de "keys"-modus wordt aangezet (om de
+            lokalize-keys te kunnen lezen), wordt bij elk veld wat Markdown
+            ondersteunt een emoji ( ✅ ) weergegeven. Deze velden zijn dus met
+            markdown op te maken.
           </p>
 
           <p style={{ marginTop: 30, fontWeight: 'bold' }}>Markdown syntax</p>

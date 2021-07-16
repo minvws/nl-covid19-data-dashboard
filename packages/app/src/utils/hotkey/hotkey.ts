@@ -172,7 +172,7 @@ function getMappedKey(key: string) {
   return KEY_MAP[key] || key;
 }
 
-export function matchHotkey(buffer: Hotkey[], hotkey: Hotkey[]) {
+function matchHotkey(buffer: Hotkey[], hotkey: Hotkey[]) {
   if (buffer.length < hotkey.length) {
     return false;
   }
@@ -192,7 +192,7 @@ function createHotkey(keys: string[]): Hotkey {
   return keys.reduce((obj, key) => ({ ...obj, [key]: true }), {});
 }
 
-export function normalizeHotkey(hotkey: string) {
+function normalizeHotkey(hotkey: string) {
   return hotkey.split(/ +/g).map((part) => {
     const keys = part.split('+').filter(isDefined).map(getMappedKey);
     const result = createHotkey(keys);

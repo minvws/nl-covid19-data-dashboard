@@ -180,6 +180,7 @@ const TooltipEntryValue = styled.span<{
 }>((x) =>
   css({
     textAlign: x.isCentered ? 'center' : 'right',
+    width: x.isCentered ? '100%' : undefined,
   })
 );
 

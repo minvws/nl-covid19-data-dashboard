@@ -18,7 +18,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
+import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { MunicipalityComboBox } from './components/municipality-combo-box';
@@ -84,7 +84,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
   const isMainRoute =
     router.route === '/gemeente' || router.route === `/gemeente/[code]`;
 
-  const safetyRegion = getSafetyRegionForMunicipalityCode(code);
+  const vr = getVrForMunicipalityCode(code);
 
   return (
     <>
@@ -128,11 +128,11 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
               >
                 <Box>
                   <Category>{municipalityName}</Category>
-                  {safetyRegion && (
+                  {vr && (
                     <Text pl={3}>
                       {siteText.common.veiligheidsregio_label}{' '}
-                      <Link href={reverseRouter.vr.index(safetyRegion.code)}>
-                        <a>{safetyRegion.name}</a>
+                      <Link href={reverseRouter.vr.index(vr.code)}>
+                        <a>{vr.name}</a>
                       </Link>
                     </Text>
                   )}

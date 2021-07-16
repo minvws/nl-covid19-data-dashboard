@@ -73,7 +73,7 @@ export function parseLocaleTextDocument(
    * root of the exported json
    */
   const jsonKey =
-    (document.subject === '__root' ? document.path : document.key) +
+    document.key.replace('__root.', '') +
     (appendDocumentIdToKey ? ID_PREFIX + document._id : '');
 
   const nl = document.should_display_empty
