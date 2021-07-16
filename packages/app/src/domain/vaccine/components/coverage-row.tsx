@@ -159,6 +159,7 @@ const CollapsiblePanel = styled.div<{ isOpen: boolean }>((x) =>
   css({
     transitionProperty: 'opacity, height, padding',
     transitionDuration: '0.5s',
+    transitionTimingFunction: 'ease-out',
     width: '100%',
     overflow: 'hidden',
     height: x.isOpen ? 'auto' : 0,
