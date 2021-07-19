@@ -62,7 +62,7 @@ export function KpiValue({
     <Box mb={3}>
       {isDefined(percentage) && isDefined(absolute) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
+          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}as
         </StyledValue>
       ) : isDefined(percentage) ? (
         <StyledValue color={color} {...otherProps}>
@@ -88,6 +88,7 @@ export function KpiValue({
           <TileDifference
             value={difference}
             staticTimespan={differenceStaticTimespan}
+            isPercentage={percentage ? true : false}
           />
         ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
