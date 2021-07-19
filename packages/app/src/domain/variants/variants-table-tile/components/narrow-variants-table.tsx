@@ -12,7 +12,7 @@ import { InlineText } from '~/components/typography';
 import { TableText } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
-import { getMaxNumOfDecimals } from '~/utils/get-consistent-number-formatter';
+import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import {
   Cell,
   HeaderCell,
@@ -34,11 +34,13 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
   const columnNames = text.kolommen;
 
   const formatValue = useMemo(() => {
-    const numOfDecimals = getMaxNumOfDecimals(rows.map((x) => x.percentage));
+    const numberOfDecimals = getMaximumNumberOfDecimals(
+      rows.map((x) => x.percentage)
+    );
     return (value: number) =>
       intl.formatPercentage(value, {
-        minimumFractionDigits: numOfDecimals,
-        maximumFractionDigits: numOfDecimals,
+        minimumFractionDigits: numberOfDecimals,
+        maximumFractionDigits: numberOfDecimals,
       });
   }, [intl, rows]);
 

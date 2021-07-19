@@ -2,7 +2,7 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { isNumber } from 'lodash';
 import { useMemo } from 'react';
 import { useIntl } from '~/intl';
-import { getMaxNumOfDecimals } from '~/utils/get-consistent-number-formatter';
+import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { SeriesConfig } from './series';
 
 export type MetricPropertyFormatters<T extends TimestampedValue> = Record<
@@ -18,11 +18,11 @@ export function useMetricPropertyFormatters<T extends TimestampedValue>(
 
   return useMemo(() => {
     function createFormatter(values: number[]) {
-      const numOfDecimals = getMaxNumOfDecimals(values);
+      const numberOfDecimals = getMaximumNumberOfDecimals(values);
       return (value: number) =>
         intl.formatPercentage(value, {
-          minimumFractionDigits: numOfDecimals,
-          maximumFractionDigits: numOfDecimals,
+          minimumFractionDigits: numberOfDecimals,
+          maximumFractionDigits: numberOfDecimals,
         });
     }
 
