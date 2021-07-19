@@ -2,12 +2,13 @@ import {
   assert,
   Dictionary,
   DifferenceDecimal,
+  InNamedDifference,
   InVariants,
   NlNamedDifference,
   NlVariants,
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
 
@@ -16,7 +17,7 @@ export type VariantRow = {
   countryOfOrigin: string;
   occurrence: number;
   percentage: number;
-  difference: DifferenceDecimal;
+  difference?: DifferenceDecimal;
   color: string;
 };
 
@@ -24,7 +25,7 @@ export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
 export function getVariantTableData(
   variants: NlVariants | InVariants | undefined,
-  namedDifference: NlNamedDifference,
+  namedDifference: NlNamedDifference | InNamedDifference,
   countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
 ) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
@@ -36,11 +37,13 @@ export function getVariantTableData(
   }
 
   function findDifference(name: string) {
-    const difference = namedDifference.variants__percentage.find(
-      (x) => x.name === name
-    );
-    assert(difference, `No variants__percentage found for variant ${name}`);
-    return difference;
+    if (isPresent(namedDifference.variants__percentage)) {
+      const difference = namedDifference.variants__percentage.find(
+        (x) => x.name === name
+      );
+      assert(difference, `No variants__percentage found for variant ${name}`);
+      return difference;
+    }
   }
 
   function findCountryOfOrigin(name: string) {
