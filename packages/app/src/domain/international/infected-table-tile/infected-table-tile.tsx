@@ -4,6 +4,7 @@ import { matchSorter } from 'match-sorter';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { Metadata, MetadataProps } from '~/components/metadata';
 import { SearchInput } from '~/components/search-input';
 import { Select } from '~/components/select';
 import { Tile } from '~/components/tile';
@@ -16,10 +17,10 @@ import {
   positiveTestedSortOptions,
   SortIdentifier,
 } from './logic/sort-options';
-
 interface InfectedTableTileProps {
   data: InCollectionTestedOverall[];
   countryNames: Record<string, string>;
+  metadata: MetadataProps;
 }
 
 export type FilterArrayType = {
@@ -30,6 +31,7 @@ export type FilterArrayType = {
 export function InfectedTableTile({
   data,
   countryNames,
+  metadata,
 }: InfectedTableTileProps) {
   const { siteText } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
@@ -157,6 +159,8 @@ export function InfectedTableTile({
           </ExpandButton>
         </Box>
       )}
+
+      <Metadata {...metadata} isTileFooter />
     </Tile>
   );
 }

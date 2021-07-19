@@ -12,7 +12,7 @@ import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -39,15 +39,10 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-export default function BehaviorPageSafetyRegion(
+export default function BehaviorPageVr(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const {
-    lastGenerated,
-    content,
-    selectedVrData: data,
-    safetyRegionName,
-  } = props;
+  const { lastGenerated, content, selectedVrData: data, vrName } = props;
 
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -67,11 +62,7 @@ export default function BehaviorPageSafetyRegion(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.gedrag}
@@ -159,7 +150,7 @@ export default function BehaviorPageSafetyRegion(
 
           <MoreInformation />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 }

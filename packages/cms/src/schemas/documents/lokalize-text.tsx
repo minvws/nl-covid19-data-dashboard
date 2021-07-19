@@ -1,6 +1,7 @@
 import { Card, Container, Text } from '@sanity/ui';
 import React, { useState } from 'react';
 import { isDefined } from 'ts-is-present';
+import { Rule } from '~/sanity';
 
 /**
  * A text coming from the original Lokalize JSON structure is split into a
@@ -44,18 +45,13 @@ export const lokalizeText = {
       options: {
         ignoreLanguageSwitcher: true,
       },
-      validation: (Rule: any) =>
-        /**
-         * Only NL is required. For EN we use NL as a fallback when exporting.
-         */
-        Rule.fields({
-          nl: (fieldRule: any) =>
-            fieldRule.required().custom(validateTextPlaceholders),
-          en: (fieldRule: any) => [
-            fieldRule.required().warning(),
-            fieldRule.custom(validateTextPlaceholders),
-          ],
+      validation: (rule: Rule) => [
+        rule.fields({
+          nl: (rule: Rule) => rule.required(),
+          en: (rule: Rule) => rule.required().warning(),
         }),
+        rule.custom(validateLocaleTextPlaceholders),
+      ],
     },
     {
       title: 'Toon als lege tekst',
@@ -88,27 +84,153 @@ export const lokalizeText = {
   },
 };
 
+function validateLocaleTextPlaceholders({
+  en,
+  nl,
+}: {
+  en?: string;
+  nl?: string;
+}) {
+  const enErrors = getFaultyPlaceholders(en);
+  const nlErrors = getFaultyPlaceholders(nl);
+
+  if (enErrors.length) {
+    const vars = enErrors.map((x) => `"${x}"`).join(', ');
+    return {
+      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
+      paths: ['en'],
+    };
+  }
+
+  if (nlErrors.length) {
+    const vars = nlErrors.map((x) => `"${x}"`).join(', ');
+    return {
+      message: `De volgende variabelen zijn niet juist geformatteerd: ${vars}`,
+      paths: ['nl'],
+    };
+  }
+
+  return true;
+}
+
 /**
  * A valid placeholder is considered to look like ``{{placeholderName}}``.
  * This validator looks for mistakes such as ``{placeHolderName}}`` or
  * ``{{placeHolderName}}}``.
  */
-function validateTextPlaceholders(text = '') {
+function getFaultyPlaceholders(text = '') {
   const faultyVariables = [...(text.matchAll(/{+[^}]+}+/g) as any)]
     .map((matchInfo: string[]) => {
       const match = matchInfo[0].match(/{{2}[^{}]+}{2}/);
       if (!match || match[0] !== matchInfo[0]) {
         return matchInfo[0];
       }
+      const whitespaceMatch = matchInfo[0].match(/\s/);
+      if (whitespaceMatch) {
+        return matchInfo[0];
+      }
       return;
     })
     .filter(isDefined);
 
-  return faultyVariables.length > 0
-    ? `De volgende variabelen zijn niet juist geformatteerd: ${faultyVariables
-        .map((x) => `"${x}"`)
-        .join(', ')}`
-    : true;
+  return faultyVariables;
+}
+
+function LokalizeTextDescription() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div>
+      {isOpen && (
+        <>
+          <p style={{ fontWeight: 'bold' }}>Lokalize teksten en Markdown</p>
+          <p>
+            Lokalize teksten zijn over het algemeen "domme" teksten zonder
+            opmaak. Echter zijn er ook "slimme" teksten die opgemaakt kunnen
+            worden met Markdown.
+          </p>
+          <p>
+            Als op de cdb-dev-omgeving de "keys"-modus wordt aangezet (om de
+            lokalize-keys te kunnen lezen), wordt bij elk veld wat Markdown
+            ondersteunt een emoji ( ✅ ) weergegeven. Deze velden zijn dus met
+            markdown op te maken.
+          </p>
+
+          <p style={{ marginTop: 30, fontWeight: 'bold' }}>Markdown syntax</p>
+
+          <p>
+            <a
+              href="https://commonmark.org/help/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              → Lees meer over de markdown syntax
+            </a>
+          </p>
+
+          <p style={{ marginTop: 30, fontWeight: 'bold' }}>
+            Geel meldingsblok in Markdown
+          </p>
+          <p>
+            Met onze Markdown-implementatie is het mogelijk om een gele melding
+            te tonen, hiervoor hebben we de "blockquote" syntax gekaapt.
+            <pre
+              style={{
+                padding: 10,
+                background: '#EEE',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
+              {`
+> Dit bericht zal verschijnen in een [geel meldingsblok](#).
+`.trim()}
+            </pre>
+          </p>
+
+          <p style={{ marginTop: 30, fontWeight: 'bold' }}>
+            Context-afhankelijke tekst in Markdown
+          </p>
+          <p>
+            Met onze Markdown-implementatie is het mogelijk om tekst voor een
+            enkele veiligheidsregio of gemeente weer te geven. Hiervoor hebben
+            we de "codeblock" syntax gekaapt. Deze syntax werkt met drie tildes
+            (~~~) of drie backticks/accent grave (```).
+            <pre
+              style={{
+                padding: 10,
+                background: '#EEE',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
+              {`
+~~~VR09
+Deze tekst zal enkel weergegeven worden als de code VR09 in de url voorkomt.
+~~~
+
+~~~VR10,GM0200
+Deze tekst zal enkel weergegeven worden als de code VR09 of GM0200 in de url voorkomt.
+
+Overigens kan je binnen zo'n blok weer gewoon markdown opmaak toepassen.
+[zoals links](#).
+
+> Of een melding weergeven met de "blockquote" syntax.
+~~~
+
+Tussen deze blokken kunnen we weer gewone tekst weergeven.
+
+\`\`\`VR09
+Een "accent grave", ook wel bekend als "backtick", is ook mogelijk.
+\`\`\`
+`.trim()}
+            </pre>
+          </p>
+        </>
+      )}
+
+      <button onClick={() => setIsOpen((x) => !x)}>
+        {isOpen ? 'Verberg' : 'Toon'} informatie over lokalize en Markdown
+      </button>
+    </div>
+  );
 }
 
 function LokalizeTextDescription() {

@@ -2,25 +2,27 @@ import afstand_sporten from './assets/restrictions/afstand-sporten.svg';
 import alcohol_verkoop from './assets/restrictions/alcohol-verkoop.svg';
 import avondklok from './assets/restrictions/avondklok.svg';
 import BasisregelsAfstand from './assets/restrictions/basisregels_afstand.svg';
-import BasisregelsThuisBlijven from './assets/restrictions/basisregels_blijf-thuis.svg';
 import BasisregelsDrukte from './assets/restrictions/basisregels_drukte.svg';
 import BasisregelsElleboog from './assets/restrictions/basisregels_elleboog.svg';
 import BasisregelsGeenBezoek from './assets/restrictions/basisregels_geen-bezoek.svg';
 import BasisregelsHandenWassen from './assets/restrictions/basisregels_handenwassen.svg';
 import BasisregelsMondkapje from './assets/restrictions/basisregels_mondkapje.svg';
 import BasisregelsTesten from './assets/restrictions/basisregels_testen.svg';
+import BasisregelsThuisBlijven from './assets/restrictions/basisregels_blijf-thuis.svg';
 import bezoek from './assets/restrictions/bezoek.svg';
 import bibliotheken from './assets/restrictions/bibliotheken.svg';
 import binnensporten from './assets/restrictions/binnensporten.svg';
 import ContactBeroepen from './assets/restrictions/contactberoepen.svg';
 import eenPersoonDoorgestreept from './assets/restrictions/een-persoon-doorgestreept.svg';
 import gedeeltelijkOpenRugzak from './assets/restrictions/gedeeltelijk-open-rugzak.svg';
+import geen_entertainment from './assets/restrictions/geen-entertainment.svg';
 import geenWedstrijden from './assets/restrictions/geen-wedstrijden.svg';
 import Groepen from './assets/restrictions/groepen.svg';
+import horeca_evenementen from './assets/restrictions/horeca_evenementen.svg';
 import HorecaBestellen from './assets/restrictions/horeca-en-evenementen_bestellen.svg';
 import HorecaEtenEnDrinken from './assets/restrictions/horeca-en-evenementen_etendrinken.svg';
 import HorecaEvenementen from './assets/restrictions/horeca-en-evenementen_evenementen.svg';
-import horeca_evenementen from './assets/restrictions/horeca_evenementen.svg';
+import klok_2100 from './assets/restrictions/klok-2100.svg';
 import kunstcultuur_musea from './assets/restrictions/kunstcultuur_musea.svg';
 import lopend from './assets/restrictions/lopend.svg';
 import max_aantal_bezoekers from './assets/restrictions/max-aantal-bezoekers.svg';
@@ -33,9 +35,9 @@ import openingstijden from './assets/restrictions/openingstijden.svg';
 import PubliekeLocaties from './assets/restrictions/publiek-toegankelijke-locaties.svg';
 import recreatie from './assets/restrictions/recreatie.svg';
 import reizen from './assets/restrictions/reizen.svg';
-import sporterMetZweetband from './assets/restrictions/sporter-met-zweetband.svg';
 import SportBinnen from './assets/restrictions/sport_binnensportlocaties.svg';
 import SportBuiten from './assets/restrictions/sport_buiten.svg';
+import sporterMetZweetband from './assets/restrictions/sporter-met-zweetband.svg';
 import SportWedstrijden from './assets/restrictions/sport_wedstrijden.svg';
 import Stap1Avondklok from './assets/restrictions/stap-1_avondklok.svg';
 import Stap1HorecaMax from './assets/restrictions/stap_1-horeca_max.svg';
@@ -49,10 +51,10 @@ import Stap1OnderwijsOpen from './assets/restrictions/stap_1-onderwijs_open.svg'
 import Stap1Theorie from './assets/restrictions/stap_1-theorie.svg';
 import Stap1Thuisbezoek from './assets/restrictions/stap_1-thuisbezoek.svg';
 import Stap1Uitvaarten from './assets/restrictions/stap_1-uitvaarten.svg';
+import Stap1WikelsOpen from './assets/restrictions/stap_1-winkels_open.svg';
 import Stap1WinkelsAlleen from './assets/restrictions/stap_1-winkels_alleen.svg';
 import Stap1WinkelsMarkten from './assets/restrictions/stap_1-winkels_markten.svg';
 import Stap1WinkelsMax from './assets/restrictions/stap_1-winkels_max.svg';
-import Stap1WikelsOpen from './assets/restrictions/stap_1-winkels_open.svg';
 import testbewijs from './assets/restrictions/testbewijs.svg';
 import Thuis from './assets/restrictions/thuis.svg';
 import toegangsbewijzen from './assets/restrictions/toegangsbewijzen.svg';
@@ -147,4 +149,6 @@ export const restrictionIcons = {
   meerdaagse_evenementen,
   openingstijden,
   toegangsbewijzen,
+  klok_2100,
+  geen_entertainment,
 } as const;

@@ -8,6 +8,6 @@ export function useUniqueId() {
   return uniqueId;
 }
 
-export function createUniqueId() {
+function createUniqueId() {
   return Math.random().toString(36).substring(2, 15);
 }

@@ -3,7 +3,6 @@
 import schemaTypes from 'all:part:@sanity/base/schema-type';
 import createSchema from 'part:@sanity/base/schema-creator';
 import * as elements from '../elements/schemas';
-import isPlainObject from 'lodash/isPlainObject';
 /**
  * Import the ones using named exports
  */
@@ -18,17 +17,11 @@ export default createSchema({
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes
-    .concat(
-      ...Object.values(documents),
-      ...Object.values(restrictions),
-      ...Object.values(objects),
-      ...Object.values(locale),
-      ...Object.values(elements)
-    )
-    /**
-     * schema files can export validation functions, therefore filter only
-     * plain objects.
-     */
-    .filter((x) => isPlainObject(x)),
+  types: schemaTypes.concat(
+    ...Object.values(documents),
+    ...Object.values(restrictions),
+    ...Object.values(objects),
+    ...Object.values(locale),
+    ...Object.values(elements)
+  ),
 });

@@ -11,7 +11,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -43,7 +43,7 @@ export const getStaticProps = createGetStaticProps(
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedVrData: data,
-    safetyRegionName,
+    vrName,
     selectedVrData: {
       deceased_cbs: dataCbs,
       deceased_rivm: dataRivm,
@@ -64,25 +64,21 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<CoronaVirusIcon />}
             subtitle={text.section_deceased_rivm.description}
@@ -207,7 +203,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <DeceasedMonitorSection data={dataCbs} />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

@@ -1,3 +1,4 @@
+import { Rule } from '~/sanity';
 import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
 
 export const vaccinationsPage = {
@@ -24,7 +25,7 @@ export const vaccinationsPage = {
       name: 'pageLinks',
       type: 'array',
       of: [{ type: 'decoratedLink' }],
-      validation: (Rule: any) => Rule.required().min(1).max(4),
+      validation: (rule: Rule) => rule.required().min(1).max(4),
     },
     {
       fieldset: 'milestones',
@@ -57,7 +58,7 @@ export const vaccinationsPage = {
       title: 'Verwacht',
       description: 'Verwachte mijlpalen',
       of: [{ type: 'localeString' }],
-      validation: (Rule: any) => Rule.max(3),
+      validation: (rule: Rule) => rule.max(3),
     },
     HIGHLIGHTED_ARTICLES,
   ],

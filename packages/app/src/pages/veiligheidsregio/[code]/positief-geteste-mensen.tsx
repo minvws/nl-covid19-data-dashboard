@@ -23,7 +23,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
 import {
@@ -83,7 +83,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedVrData: data,
     choropleth,
-    safetyRegionName,
+    vrName,
     content,
     lastGenerated,
   } = props;
@@ -106,20 +106,16 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
@@ -127,7 +123,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               siteText.positief_geteste_personen.titel_sidebar
             }
             title={replaceVariablesInText(text.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Getest />}
             subtitle={text.pagina_toelichting}
@@ -252,7 +248,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             metadata={{
               date: dataOverallLastValue.date_unix,
@@ -286,7 +282,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <ContentHeader
             id="ggd"
             title={replaceVariablesInText(ggdText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             skipLinkAnchor={true}
             icon={<Afname />}
@@ -465,7 +461,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

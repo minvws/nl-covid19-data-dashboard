@@ -10,8 +10,8 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
@@ -86,7 +86,7 @@ export function SituationsOverviewChoroplethTile({
               description={situation.description}
               key={situation.id}
             >
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{ key: 'situations_choropleths' }}
                 data={{ situations: data }}
                 metricName={'situations'}

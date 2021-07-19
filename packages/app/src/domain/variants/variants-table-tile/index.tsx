@@ -1,69 +1,156 @@
-import { NlDifference, NlVariantsValue } from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
+import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
-import { Metadata, MetadataProps } from '~/components/metadata';
-import { Tile } from '~/components/tile';
+import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { useBreakpoints } from '~/utils/use-breakpoints';
-import { NarrowVariantsTable, WideVariantsTable } from './components';
-import { useVariantsTableData } from './logic/use-variants-table-data';
+import { VariantsTable } from './components/variants-table';
+
+export type TableText = {
+  anderen_tooltip: string;
+  omschrijving: string;
+  omschrijving_zonder_placeholders: string;
+  titel: string;
+  kolommen: {
+    aantal_monsters: string;
+    eerst_gevonden: string;
+    percentage: string;
+    variant_titel: string;
+    vorige_meeting: string;
+  };
+  verschil: { gelijk: string; meer: string; minder: string };
+};
 
 export function VariantsTableTile({
+  text,
+  noDataMessage = '',
+  source,
   data,
-  differences,
+  sampleSize,
+  dates,
+  children = null,
 }: {
-  data: NlVariantsValue;
-  differences: NlDifference;
+  text: TableText;
+  noDataMessage?: ReactNode;
+  data?: VariantRow[] | null;
+  source: {
+    download: string;
+    href: string;
+    text: string;
+  };
+  sampleSize: number;
+  dates?: {
+    date_start_unix: number;
+    date_end_unix: number;
+    date_of_insertion_unix: number;
+  } | null;
+  children?: ReactNode;
 }) {
   const { siteText, formatDateSpan } = useIntl();
+  if (!isPresent(data) || !isPresent(dates)) {
+    return (
+      <FullscreenChartTile>
+        <Heading level={3}>{text.titel}</Heading>
+        <Box maxWidth="maxWidthText">
+          <Markdown content={text.omschrijving_zonder_placeholders} />
+        </Box>
 
-  const text = siteText.covid_varianten;
+        {children}
 
-  const breakpoints = useBreakpoints();
+        <Box overflow="auto" mb={3} mt={4}>
+          <NoDataBox>{noDataMessage}</NoDataBox>
+        </Box>
+      </FullscreenChartTile>
+    );
+  }
 
-  const variantsTableRows = useVariantsTableData(
-    data,
-    text.landen_van_herkomst,
-    differences
+  return (
+    <VariantsTableTileWithData
+      text={text}
+      source={source}
+      data={data}
+      sampleSize={sampleSize}
+      dates={dates}
+    >
+      {children}
+    </VariantsTableTileWithData>
   );
+}
+
+function VariantsTableTileWithData({
+  text,
+  source,
+  data,
+  sampleSize,
+  dates,
+  children = null,
+}: {
+  text: TableText;
+  data: VariantRow[];
+  source: {
+    download: string;
+    href: string;
+    text: string;
+  };
+  sampleSize: number;
+  dates: {
+    date_start_unix: number;
+    date_end_unix: number;
+    date_of_insertion_unix: number;
+  };
+  children?: ReactNode;
+}) {
+  const { formatDateSpan } = useIntl();
 
   const metadata: MetadataProps = {
-    date: [data.date_start_unix, data.date_end_unix],
-    source: text.bronnen.rivm,
-    obtained: data.date_of_insertion_unix,
+    date: [dates.date_start_unix, dates.date_end_unix],
+    source,
+    obtainedAt: dates.date_of_insertion_unix,
   };
 
   const [date_start, date_end] = formatDateSpan(
-    { seconds: data.date_start_unix },
-    { seconds: data.date_end_unix }
+    { seconds: dates?.date_start_unix },
+    { seconds: dates?.date_end_unix }
   );
 
+  const descriptionText = replaceVariablesInText(text.omschrijving, {
+    sample_size: sampleSize,
+    date_start,
+    date_end,
+  });
+
   return (
-    <Tile>
-      <Heading level={3}>{text.varianten_tabel.titel}</Heading>
+    <FullscreenChartTile metadata={metadata}>
+      <Heading level={3}>{text.titel}</Heading>
       <Box maxWidth="maxWidthText">
-        <Markdown
-          content={replaceVariablesInText(text.varianten_tabel.omschrijving, {
-            sample_size: data.sample_size,
-            date_start,
-            date_end,
-          })}
-        />
+        <Markdown content={descriptionText} />
       </Box>
+
+      {children}
 
       <Box overflow="auto" mb={3} mt={4}>
         <ErrorBoundary>
-          {breakpoints.sm ? (
-            <WideVariantsTable rows={variantsTableRows} text={text} />
-          ) : (
-            <NarrowVariantsTable rows={variantsTableRows} text={text} />
-          )}
+          <VariantsTable rows={data} text={text} />
         </ErrorBoundary>
       </Box>
-      <Metadata {...metadata} isTileFooter />
-    </Tile>
+    </FullscreenChartTile>
   );
 }
+
+const NoDataBox = styled.div(
+  css({
+    width: '100%',
+    display: 'flex',
+    height: '8em',
+    color: 'gray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  })
+);

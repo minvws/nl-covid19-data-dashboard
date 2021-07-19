@@ -2,14 +2,10 @@ import { Feature } from '@corona-dashboard/common';
 
 export const features: Feature[] = [
   {
-    name: 'vaccinationPerAgegroup',
-    isEnabled: false,
+    name: 'vaccinationPerAgeGroup',
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
-  },
-  {
-    name: 'sewerSplitAreaChart',
-    isEnabled: true,
   },
   {
     name: 'situationsPage',
@@ -28,7 +24,7 @@ export const features: Feature[] = [
   },
   {
     name: 'internationalPage',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['in', 'in_collection'],
     metricName: 'tested_overall',
   },
