@@ -1,5 +1,5 @@
 import { In, InVariants, InVariantsVariant } from '@corona-dashboard/common';
-import { first, last } from 'lodash';
+import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { VariantChartValue } from './get-variant-chart-data';
 
@@ -16,7 +16,6 @@ export function getInternationalVariantChartData(data: Record<string, In>) {
 
 const EMPTY_VALUES = {
   variantChart: null,
-  dates: null,
 } as const;
 
 export type VariantChartData = ReturnType<typeof getVariantChartData>;
@@ -58,15 +57,8 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return item;
   });
 
-  const lastValue = last(first(variantsOfConcern)?.values);
-
   return {
     variantChart: values,
-    dates: {
-      date_of_insertion_unix: lastValue?.date_of_insertion_unix ?? 0,
-      date_start_unix: lastValue?.date_start_unix ?? 0,
-      date_end_unix: lastValue?.date_end_unix ?? 0,
-    },
   } as const;
 }
 
