@@ -1,11 +1,11 @@
+import { css } from '@styled-system/css';
 import { Fragment } from 'react';
 import { Box } from '~/components/base';
 import { Cell, Row, Table, TableBody } from '~/components/table';
 import { InlineText } from '~/components/typography';
+import { LockdownData } from '~/types/cms';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { restrictionIcons } from './restriction-icons';
-import { LockdownData } from '~/types/cms';
-import { css } from '@styled-system/css';
 
 type LockdownTableProps = {
   data: LockdownData;

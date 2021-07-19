@@ -43,6 +43,7 @@ timestamp,action,key
 2021-07-14T12:02:59.081Z,add,covid_varianten.varianten_omschrijving.zeta
 2021-07-14T13:04:16.474Z,add,covid_varianten.varianten_tabel.omschrijving_zonder_placeholders
 2021-07-14T13:04:17.234Z,add,internationaal_varianten.varianten_tabel.omschrijving_zonder_placeholders
+2021-07-15T13:12:08.679Z,add,internationaal.titel_sidebar
 2021-07-16T14:11:29.530Z,add,vaccinaties.vaccination_coverage.bronnen.rivm.download
 2021-07-16T14:11:30.625Z,add,vaccinaties.vaccination_coverage.bronnen.rivm.href
 2021-07-16T14:11:31.564Z,add,vaccinaties.vaccination_coverage.bronnen.rivm.text
@@ -62,3 +63,5 @@ timestamp,action,key
 2021-07-19T07:10:42.907Z,add,vaccinaties.vaccination_coverage.age_group_tooltips.65-69
 2021-07-19T15:08:52.701Z,add,vaccinaties.vaccination_coverage.age_group_tooltips.18+
 2021-07-19T15:08:53.812Z,add,vaccinaties.vaccination_coverage.age_group_tooltips.12+
+2021-07-19T08:39:35.072Z,add,internationaal_positief_geteste_personen.informatie_tegel
+2021-07-19T08:39:36.091Z,add,internationaal_varianten.informatie_tegel
