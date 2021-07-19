@@ -96,7 +96,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 
   return (
     <>
-      <tr onClick={handleRowClick}>
+      <tr onClick={handleRowClick} style={{ cursor: 'pointer' }}>
         <VariantNameCell
           variant={row.variant}
           text={text}
@@ -139,7 +139,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                   '-'
                 )}
               </Box>
-              <Box css={css({ color: 'silver', fontSize: 1, mt: 2 })}>
+              <Box css={css({ color: 'annotation', fontSize: 2, mt: 2 })}>
                 {variantDescription}
               </Box>
             </div>
