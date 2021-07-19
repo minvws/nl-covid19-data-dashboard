@@ -26,6 +26,8 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
+  // The different historical value lists are of different lengths,
+  // so here we create a start to end range based on all of them:
   const completeDateRange = createCompleteDateRange(variants.values);
 
   const variantsOfConcern = variants.values.filter(
