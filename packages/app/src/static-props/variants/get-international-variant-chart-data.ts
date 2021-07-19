@@ -78,8 +78,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
 
 function createCompleteDateRange(lists: InVariantsVariant[]) {
   return lists
-    .map((x) => x.values)
-    .flat()
+    .flatMap((x) => x.values)
     .map((x) => ({
       date_start_unix: x.date_start_unix,
       date_end_unix: x.date_end_unix,
