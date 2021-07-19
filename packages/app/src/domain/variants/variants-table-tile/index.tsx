@@ -53,7 +53,6 @@ export function VariantsTableTile({
   } | null;
   children?: ReactNode;
 }) {
-  const { siteText, formatDateSpan } = useIntl();
   if (!isPresent(data) || !isPresent(dates)) {
     return (
       <FullscreenChartTile>

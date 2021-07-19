@@ -155,10 +155,6 @@ export function useDataSitemap(
           text: siteText.besmettelijke_personen.titel_sidebar,
           href: reverseRouter.nl.besmettelijkeMensen(),
         },
-        {
-          text: siteText.besmettelijke_personen.titel_sidebar,
-          href: reverseRouter.nl.besmettelijkeMensen(),
-        },
       ],
     },
     {
