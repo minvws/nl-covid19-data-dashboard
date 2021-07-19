@@ -59,3 +59,4 @@ timestamp,action,key
 2021-07-14T07:55:07.654Z,add,accessibility.charts.variants_stacked_area_over_time_chart.label
 2021-07-14T07:55:22.691Z,add,accessibility.charts.variants_stacked_area_over_time_chart.description
 2021-07-15T08:12:02.896Z,add,internationaal_varianten.geen_data_omschrijving
+2021-07-19T07:10:42.907Z,add,vaccinaties.vaccination_coverage.age_group_tooltips.65-69
