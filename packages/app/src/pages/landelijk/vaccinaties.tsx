@@ -119,7 +119,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           <VaccinePageIntroduction data={data} />
 
           <PageInformationBlock
-            description={content.page.pageInfo}
+            description={content.page.pageDescription}
             metadata={{
               datumsText: text.datums,
               dateOrRange: data.vaccine_administered_total.last_value.date_unix,
@@ -128,7 +128,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
-            usefulLinks={page.pageLinks}
+            usefulLinks={content.page.usefulLinks}
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
           />
