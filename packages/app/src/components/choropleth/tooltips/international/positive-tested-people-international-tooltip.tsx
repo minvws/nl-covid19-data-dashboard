@@ -78,6 +78,7 @@ function SubjectText({
           src={`/icons/flags/${code.toLowerCase()}.svg`}
           width="17"
           height="13"
+          alt=""
         />
         <InlineText pl={1}>{name}</InlineText>
       </Box>
