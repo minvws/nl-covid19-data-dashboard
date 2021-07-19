@@ -38,17 +38,11 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const values = completeDateRange.map<VariantChartValue>((value) => {
-    const partialItem: VariantChartValue = {
-      date_start_unix: value.date_start_unix,
-      date_end_unix: value.date_end_unix,
-      sample_size: value.sample_size,
-    };
-
+  const values = completeDateRange.map<VariantChartValue>((partialItem) => {
     const { item, total } = variantsOfConcern.reduce(
       ({ item, total }, variantOfConcern) => {
         const otherItem = variantOfConcern.values.find(
-          (x) => x.date_end_unix === value.date_end_unix
+          (x) => x.date_end_unix === partialItem.date_end_unix
         );
         if (otherItem) {
           total += otherItem.percentage;
@@ -79,7 +73,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
 function createCompleteDateRange(lists: InVariantsVariant[]) {
   return lists
     .flatMap((x) => x.values)
-    .map((x) => ({
+    .map<VariantChartValue>((x) => ({
       date_start_unix: x.date_start_unix,
       date_end_unix: x.date_end_unix,
       sample_size: x.sample_size,
