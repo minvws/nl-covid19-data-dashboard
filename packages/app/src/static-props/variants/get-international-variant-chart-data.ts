@@ -1,4 +1,4 @@
-import { In, InVariants } from '@corona-dashboard/common';
+import { In, InVariants, InVariantsVariant } from '@corona-dashboard/common';
 import { first, last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { VariantChartValue } from './get-variant-chart-data';
@@ -26,23 +26,17 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  // The historic data has variable lengths, so here we grab the longest
-  // value list and use that to generate the chart values from.
-  const listLengths = variants.values.map((x) => x.values.length);
-  const longestListLength = Math.max(...listLengths);
-  const longestList = first(
-    variants.values.filter((x) => x.values.length === longestListLength)
-  );
+  const completeDateRange = createCompleteDateRange(variants.values);
 
   const variantsOfConcern = variants.values.filter(
     (x) => last(x.values)?.is_variant_of_concern
   );
 
-  if (!isDefined(longestList)) {
+  if (!isDefined(completeDateRange)) {
     return EMPTY_VALUES;
   }
 
-  const values = longestList.values.map<VariantChartValue>((value) => {
+  const values = completeDateRange.map<VariantChartValue>((value) => {
     const item: VariantChartValue = {
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
@@ -78,4 +72,20 @@ export function getVariantChartData(variants: InVariants | undefined) {
       date_end_unix: lastValue?.date_end_unix ?? 0,
     },
   } as const;
+}
+
+function createCompleteDateRange(lists: InVariantsVariant[]) {
+  return lists
+    .map((x) => x.values)
+    .flat()
+    .map((x) => ({
+      date_start_unix: x.date_start_unix,
+      date_end_unix: x.date_end_unix,
+      sample_size: x.sample_size,
+    }))
+    .filter(
+      (x, i, arr) =>
+        arr.findIndex((y) => y.date_end_unix === x.date_end_unix) === i
+    )
+    .sort((a, b) => a.date_end_unix - b.date_end_unix);
 }
