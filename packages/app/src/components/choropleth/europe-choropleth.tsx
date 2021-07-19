@@ -17,7 +17,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from '../base';
-import { Choropleth } from './choropleth';
+import { Choropleth, CHOROPLETH_ASPECT_RATIO } from './choropleth';
 import { useInChoroplethColorScale, useTabInteractiveButton } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
@@ -173,6 +173,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
         })}
       >
         <Choropleth
+          aspectRatio={CHOROPLETH_ASPECT_RATIO.in}
           projection={geoConicConformal}
           accessibility={choroplethAccessibility}
           initialWidth={1.1 * mapHeight}
