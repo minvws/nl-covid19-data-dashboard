@@ -74,7 +74,11 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
                       total: formatNumber(value.age_group_total),
                     }
                   )}
-                  tooltipText={age_group_tooltips[value.age_group_range]}
+                  tooltipText={
+                    (age_group_tooltips as Record<string, string>)[
+                      value.age_group_range
+                    ]
+                  }
                 />
                 <VaccinationCoveragePercentage
                   value={`${formatPercentage(
