@@ -66,4 +66,5 @@ export const restrictionIcons: Record<string, string | null> = {
   toegangsbewijzen: 'toegangsbewijzen.svg',
   klok_2100: 'klok-2100.svg',
   geen_entertainment: 'geen-entertainment.svg',
+  frisse_lucht: 'frisse_lucht.svg',
 };
