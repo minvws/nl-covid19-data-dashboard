@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { AnchorTile } from '~/components/anchor-tile';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { ContentHeader } from '~/components/content-header';
 import { KpiSection } from '~/components/kpi-section';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -102,7 +101,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             title={replaceVariablesInText(
               siteText.veiligheidsregio_maatregelen.titel,
               {

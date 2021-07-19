@@ -5,14 +5,12 @@ import {
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -77,14 +75,14 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={
               siteText.verpleeghuis_besmette_locaties.titel_sidebar
             }
             title={positiveTestedPeopleText.titel}
             icon={<Verpleeghuiszorg />}
-            subtitle={positiveTestedPeopleText.pagina_toelichting}
+            description={positiveTestedPeopleText.pagina_toelichting}
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
               dateOrRange: nursinghomeDataLastValue.date_unix,
@@ -92,10 +90,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 nursinghomeDataLastValue.date_of_insertion_unix,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
             }}
-            reference={positiveTestedPeopleText.reference}
+            referenceLink={positiveTestedPeopleText.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -168,12 +165,11 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <PageInformationBlock
             id="besmette-locaties"
-            skipLinkAnchor={true}
             title={infectedLocationsText.titel}
             icon={<Locatie />}
-            subtitle={infectedLocationsText.pagina_toelichting}
+            description={infectedLocationsText.pagina_toelichting}
             metadata={{
               datumsText: infectedLocationsText.datums,
               dateOrRange: nursinghomeDataLastValue.date_unix,
@@ -181,7 +177,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 nursinghomeDataLastValue.date_of_insertion_unix,
               dataSources: [infectedLocationsText.bronnen.rivm],
             }}
-            reference={infectedLocationsText.reference}
+            referenceLink={infectedLocationsText.reference.href}
+            hasExtraMarginTop
           />
 
           <TwoKpiSection>
@@ -274,12 +271,11 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <PageInformationBlock
             id="sterfte"
-            skipLinkAnchor={true}
             title={deceased.titel}
             icon={<CoronaVirus />}
-            subtitle={deceased.pagina_toelichting}
+            description={deceased.pagina_toelichting}
             metadata={{
               datumsText: deceased.datums,
               dateOrRange: nursinghomeDataLastValue.date_unix,
@@ -287,7 +283,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 nursinghomeDataLastValue.date_of_insertion_unix,
               dataSources: [deceased.bronnen.rivm],
             }}
-            reference={deceased.reference}
+            referenceLink={deceased.reference.href}
+            hasExtraMarginTop
           />
 
           <TwoKpiSection>

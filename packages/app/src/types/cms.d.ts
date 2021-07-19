@@ -169,9 +169,8 @@ export type DecoratedLink = {
 };
 
 export type VaccinationPageQuery = {
-  pageInfo: TitleDescriptionBlock;
-  pageLinks: DecoratedLink[];
-  linksTitle: string;
+  pageInfo: RichContentBlock[];
+  pageLinks: LinkProps[];
   title: string;
   description: RichContentBlock[];
   milestones: Milestones[];

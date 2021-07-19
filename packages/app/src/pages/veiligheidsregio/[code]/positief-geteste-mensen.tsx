@@ -5,14 +5,12 @@ import {
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
-import { ArticleStrip } from '~/components/article-strip';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -118,7 +116,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
             screenReaderCategory={
               siteText.positief_geteste_personen.titel_sidebar
@@ -127,19 +125,16 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               safetyRegion: vrName,
             })}
             icon={<Getest />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: dataOverallLastValue.date_unix,
               dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.main.articles}
           />
-
-          {content.main?.articles && (
-            <ArticleStrip articles={content.main.articles} />
-          )}
 
           <TwoKpiSection>
             <KpiTile
@@ -280,26 +275,23 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <ContentHeader
+          <PageInformationBlock
             id="ggd"
             title={replaceVariablesInText(ggdText.titel, {
               safetyRegion: vrName,
             })}
-            skipLinkAnchor={true}
             icon={<Afname />}
-            subtitle={ggdText.toelichting}
+            description={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,
               dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
               dateOrRange: dataGgdLastValue.date_unix,
               dataSources: [ggdText.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.ggd.articles}
+            hasExtraMarginTop
           />
-
-          {content.ggd?.articles && (
-            <ArticleStrip articles={content.ggd.articles} />
-          )}
 
           <TwoKpiSection>
             <KpiTile

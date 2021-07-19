@@ -9,7 +9,6 @@ import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
-import { ArticleStrip } from '~/components/article-strip';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
@@ -127,7 +126,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            referenceLink={text.reference.text}
+            referenceLink={text.reference.href}
             articles={content.main.articles}
           />
 
@@ -335,10 +334,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [ggdText.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
+            articles={content.ggd.articles}
+            hasExtraMarginTop
           />
-          {content.ggd?.articles && (
-            <ArticleStrip articles={content.ggd.articles} />
-          )}
+
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}

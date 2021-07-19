@@ -4,11 +4,9 @@ import {
 } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
@@ -118,14 +116,22 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
-          <VaccinePageIntroduction
-            data={data}
-            pageInfo={page.pageInfo}
-            pageLinks={page.pageLinks}
-            pageLinksTitle={page.linksTitle}
-          />
+          <VaccinePageIntroduction data={data} />
 
-          <ArticleStrip articles={content.highlight.articles} />
+          <PageInformationBlock
+            description={content.page.pageInfo}
+            metadata={{
+              datumsText: text.datums,
+              dateOrRange: data.vaccine_administered_total.last_value.date_unix,
+              dateOfInsertionUnix:
+                data.vaccine_administered_total.last_value
+                  .date_of_insertion_unix,
+              dataSources: [],
+            }}
+            usefulLinks={page.pageLinks}
+            referenceLink={text.reference.href}
+            articles={content.highlight.articles}
+          />
 
           {data.vaccine_coverage && (
             <ChartTile
@@ -214,10 +220,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </Tile>
           ) : null}
 
-          <ContentHeader
+          <PageInformationBlock
             title={text.bereidheid_section.title}
-            subtitle={text.bereidheid_section.description}
-            reference={text.bereidheid_section.reference}
+            description={text.bereidheid_section.description}
+            referenceLink={text.bereidheid_section.reference.href}
             icon={scaledVaccineIcon}
             metadata={{
               datumsText: text.bereidheid_datums,
@@ -229,6 +235,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
+            hasExtraMarginTop
           />
 
           <ChartTile
@@ -320,11 +327,11 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <ContentHeader
+          <PageInformationBlock
             title={text.stock_and_delivery_section.title}
             icon={scaledVaccineIcon}
-            subtitle={text.stock_and_delivery_section.description}
-            reference={text.stock_and_delivery_section.reference}
+            description={text.stock_and_delivery_section.description}
+            referenceLink={text.stock_and_delivery_section.reference.href}
             metadata={{
               datumsText: text.datums,
               dateOrRange: data.vaccine_stock.last_value.date_unix,
@@ -332,6 +339,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 data.vaccine_stock.last_value.date_of_insertion_unix,
               dataSources: [],
             }}
+            hasExtraMarginTop
           />
 
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />

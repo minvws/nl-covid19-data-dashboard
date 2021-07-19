@@ -2,10 +2,12 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
+import { RichContent } from '~/components/cms/rich-content';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { Heading, HeadingLevel, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { asResponsiveArray } from '~/style/utils';
+import { RichContentBlock } from '~/types/cms';
 import { Articles } from './articles';
 import { Metadata, MetadataProps } from './metadata';
 import { UsefulLinks } from './useful-links';
@@ -13,7 +15,7 @@ import { UsefulLinks } from './useful-links';
 interface InformationBlockProps {
   title?: string;
   icon?: JSX.Element;
-  description: string;
+  description?: string | RichContentBlock[];
   articles?: ArticleSummary[];
   usefulLinks?: {
     title: string;
@@ -25,6 +27,7 @@ interface InformationBlockProps {
   id?: string;
   category?: string;
   screenReaderCategory?: string;
+  hasExtraMarginTop?: boolean;
 }
 
 export function PageInformationBlock({
@@ -38,6 +41,7 @@ export function PageInformationBlock({
   id,
   category,
   screenReaderCategory,
+  hasExtraMarginTop,
 }: InformationBlockProps) {
   const MetaDataBlock = (
     <>
@@ -53,8 +57,22 @@ export function PageInformationBlock({
     </>
   );
 
+  const DescriptionBlock = (
+    <>
+      {description && (
+        <>
+          {typeof description === 'string' ? (
+            <Text mb={0}>{description}</Text>
+          ) : (
+            <RichContent blocks={description} />
+          )}
+        </>
+      )}
+    </>
+  );
+
   return (
-    <Box as="header" id={id} spacing={2}>
+    <Box as="header" id={id} spacing={2} mt={hasExtraMarginTop ? 5 : null}>
       {title && icon ? (
         <HeadingWithIcon
           icon={icon}
@@ -64,60 +82,65 @@ export function PageInformationBlock({
           headingLevel={2}
         />
       ) : (
-        <Box display="flex" flexWrap="nowrap" alignItems="center">
-          {category && (
-            <Heading level={1} m={0} fontSize="1.25rem">
-              {category}
-              {screenReaderCategory && (
-                <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
+        <>
+          {title ? (
+            <Box display="flex" flexWrap="nowrap" flexDirection="column">
+              {category && (
+                <Heading level={1} m={0} fontSize="1.25rem" color="category">
+                  {category}
+                  {screenReaderCategory && (
+                    <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
+                  )}
+                </Heading>
               )}
-            </Heading>
-          )}
-          <Heading mb={3} lineHeight={1.3} level={2}>
-            {title}
-          </Heading>
-        </Box>
+              <Heading mb={description ? 3 : 0} lineHeight={1.3} level={2}>
+                {title}
+              </Heading>
+            </Box>
+          ) : null}
+        </>
       )}
 
-      <Tile>
-        <Box
-          display={{ md: 'grid' }}
-          gridTemplateColumns="repeat(2, 1fr)"
-          width="100%"
-          css={css({
-            columnGap: 4,
-          })}
-        >
-          {articles && articles.length > 0 ? (
-            <>
-              <Box spacing={3}>
-                <Text mb={0}>{description}</Text>
-                {MetaDataBlock}
-              </Box>
-              <Box>
-                <Articles articles={articles} />
-              </Box>
-            </>
-          ) : (
-            <>
-              <Text mb={0}>{description}</Text>
-              {MetaDataBlock}
-            </>
-          )}
-        </Box>
-
-        {usefulLinks && usefulLinks.length > 0 && (
+      {description && (
+        <Tile>
           <Box
-            borderTop="1px solid"
-            borderTopColor="border"
+            display={{ md: 'grid' }}
+            gridTemplateColumns="repeat(2, 1fr)"
             width="100%"
-            pt={3}
-            mt={3}
+            css={css({
+              columnGap: 4,
+            })}
           >
-            <UsefulLinks links={usefulLinks} />
+            {articles && articles.length > 0 ? (
+              <>
+                <Box spacing={3}>
+                  {DescriptionBlock}
+                  {MetaDataBlock}
+                </Box>
+
+                <Articles articles={articles} />
+              </>
+            ) : (
+              <>
+                {DescriptionBlock}
+                {MetaDataBlock}
+              </>
+            )}
           </Box>
-        )}
-      </Tile>
+
+          {usefulLinks && usefulLinks.length > 0 && (
+            <Box
+              borderTop="1px solid"
+              borderTopColor="border"
+              width="100%"
+              pt={3}
+              mt={3}
+            >
+              <UsefulLinks links={usefulLinks} />
+            </Box>
+          )}
+        </Tile>
+      )}
     </Box>
   );
 }
@@ -133,7 +156,7 @@ const Tile = styled.div(
   })
 );
 
-const MetadataBox = styled(Box)(
+const MetadataBox = styled.div(
   css({
     flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
     mb: asResponsiveArray({ _: 3, md: 0 }),

@@ -17,7 +17,7 @@ export function Articles({ articles }: ArticlesProps) {
   const { siteText } = useIntl();
 
   return (
-    <>
+    <Box>
       <InlineText
         mb={2}
         fontSize={2}
@@ -36,7 +36,7 @@ export function Articles({ articles }: ArticlesProps) {
           />
         ))}
       </Box>
-    </>
+    </Box>
   );
 }
 
