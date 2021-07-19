@@ -8,6 +8,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
 import { internationalThresholds } from '~/components/choropleth/international-thresholds';
 import { PositiveTestedPeopleInternationalTooltip } from '~/components/choropleth/tooltips/international/positive-tested-people-international-tooltip';
+import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -147,6 +148,8 @@ export default function PositiefGetesteMensenPage(
             articles={content.highlight.articles}
             usefulLinks={content.page.usefulLinks}
           />
+
+          <InformationTile message={text.informatie_tegel} />
 
           <EuropeChoroplethTile
             title={text.choropleth.titel}

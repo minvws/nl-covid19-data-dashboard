@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
+import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
@@ -156,6 +157,8 @@ export default function VariantenPage(
             articles={content.highlight?.articles}
             usefulLinks={content.page?.usefulLinks}
           />
+
+          <InformationTile message={text.informatie_tegel} />
 
           <VariantsTableTile
             noDataMessage={noDataMessageTable}
