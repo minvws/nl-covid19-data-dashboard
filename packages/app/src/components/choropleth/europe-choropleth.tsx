@@ -27,7 +27,7 @@ import { europeGeo } from './topology';
  * List of countries to define the boundingbox. These are countries on the outer edges
  * of the group of countries that are shown.
  */
-const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC'];
+const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
 
 const boundingBoxEurope: EuropeGeoJSON = {
   ...europeGeo,
