@@ -2,16 +2,16 @@ import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
-import { useIntl } from '~/intl';
 
 export function PercentageBarWithNumber({
   percentage,
   color,
+  formatValue,
 }: {
   percentage: number;
   color: string;
+  formatValue: (value: number) => string;
 }) {
-  const { formatPercentage } = useIntl();
   return (
     <Box
       color={color}
@@ -26,10 +26,7 @@ export function PercentageBarWithNumber({
         css={css({ minWidth: 40 })}
         mr={2}
       >
-        {`${formatPercentage(percentage, {
-          minimumFractionDigits: 1,
-          maximumFractionDigits: 1,
-        })}%`}
+        {formatValue(percentage)}%
       </InlineText>
       <PercentageBar percentage={percentage} height="8px" />
     </Box>

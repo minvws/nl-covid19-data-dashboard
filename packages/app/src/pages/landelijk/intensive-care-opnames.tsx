@@ -165,7 +165,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                   ],
                   timelineEvents: getTimelineEvents(
                     content.elements.timeSeries,
-                    'hospital_nice'
+                    'intensive_care_nice'
                   ),
                 }}
                 seriesConfig={[
