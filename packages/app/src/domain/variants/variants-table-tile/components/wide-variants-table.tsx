@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { TableText } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
@@ -62,7 +63,11 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
               </Box>
             </Cell>
             <Cell>
-              <VariantDifference value={row.difference} />
+              {isDefined(row.difference) ? (
+                <VariantDifference value={row.difference} />
+              ) : (
+                '-'
+              )}
             </Cell>
           </tr>
         ))}

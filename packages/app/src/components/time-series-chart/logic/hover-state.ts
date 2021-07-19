@@ -367,17 +367,21 @@ export function useHoverState<T extends TimestampedValue>({
         /**
          * Filter series without Y value on the current valuesIndex
          */
-        if (!isPresent(yValueA) || !isPresent(yValueB)) {
+        if (
+          (!isPresent(yValueA) || !isPresent(yValueB)) &&
+          config.type !== 'gapped-stacked-area'
+        ) {
           return;
         }
 
         switch (config.type) {
           case 'stacked-area':
+          case 'gapped-stacked-area':
             return [
               {
                 seriesValue,
                 x: xScale(xValue),
-                y: yScale(yValueB),
+                y: yValueB ? yScale(yValueB) : 0,
                 color: config.color,
                 metricProperty: config.metricProperty,
                 seriesConfigIndex: index,
@@ -388,7 +392,7 @@ export function useHoverState<T extends TimestampedValue>({
               {
                 seriesValue,
                 x: xScale(xValue),
-                y: yScale(yValueA),
+                y: yValueA ? yScale(yValueA) : 0,
                 color: config.color,
                 metricProperty: config.metricPropertyLow,
                 seriesConfigIndex: index,
@@ -396,7 +400,7 @@ export function useHoverState<T extends TimestampedValue>({
               {
                 seriesValue,
                 x: xScale(xValue),
-                y: yScale(yValueB),
+                y: yValueB ? yScale(yValueB) : 0,
                 color: config.color,
                 metricProperty: config.metricPropertyHigh,
                 seriesConfigIndex: index,
