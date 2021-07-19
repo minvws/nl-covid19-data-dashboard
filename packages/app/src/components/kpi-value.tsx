@@ -80,7 +80,10 @@ export function KpiValue({
 
       {isDefined(difference) &&
         (isMovingAverageDifference ? (
-          <TileAverageDifference value={difference} />
+          <TileAverageDifference
+            value={difference}
+            isPercentage={percentage ? true : false}
+          />
         ) : (
           <TileDifference
             value={difference}
