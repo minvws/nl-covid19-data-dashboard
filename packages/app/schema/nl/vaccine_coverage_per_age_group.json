@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "nl_vaccine_coverage_per_age_group",
   "type": "object",
-  "required": ["values", "last_value"],
+  "required": ["values"],
   "additionalProperties": false,
   "properties": {
     "values": {
@@ -10,9 +10,6 @@
       "items": {
         "$ref": "#/definitions/value"
       }
-    },
-    "last_value": {
-      "$ref": "#/definitions/value"
     }
   },
   "definitions": {
