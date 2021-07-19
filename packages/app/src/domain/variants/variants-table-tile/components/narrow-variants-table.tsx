@@ -6,6 +6,7 @@ import {
 import css from '@styled-system/css';
 import { forwardRef, MouseEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
@@ -111,7 +112,11 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             <div ref={ref}>
               <Box mb={1} display="flex" flexDirection="row">
                 <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
-                <VariantDifference value={row.difference} />
+                {isDefined(row.difference) ? (
+                  <VariantDifference value={row.difference} />
+                ) : (
+                  '-'
+                )}
               </Box>
               <Box css={css({ color: 'silver', fontSize: 1, mt: 2 })}>
                 {variantDescription}

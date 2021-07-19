@@ -10,7 +10,7 @@
       }
     }
   },
-  "required": ["variants__percentage"],
+  "required": [],
   "additionalProperties": false,
   "definitions": {
     "named_diff_integer": {
