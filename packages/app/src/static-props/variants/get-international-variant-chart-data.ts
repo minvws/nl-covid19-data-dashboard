@@ -1,4 +1,5 @@
 import { In, InVariants } from '@corona-dashboard/common';
+import { first, last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { VariantChartValue } from './get-variant-chart-data';
 
@@ -25,57 +26,56 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
+  // The historic data has variable lengths, so here we grab the longest
+  // value list and use that to generate the chart values from.
+  const listLengths = variants.values.map((x) => x.values.length);
+  const longestListLength = Math.max(...listLengths);
+  const longestList = first(
+    variants.values.filter((x) => x.values.length === longestListLength)
+  );
+
   const variantsOfConcern = variants.values.filter(
-    (x) => x.last_value.is_variant_of_concern
-  );
-  const variantsOfInterest = variants.values.filter(
-    (x) => !x.last_value.is_variant_of_concern
+    (x) => last(x.values)?.is_variant_of_concern
   );
 
-  const firstVariant = variantsOfConcern.shift();
-
-  if (!isDefined(firstVariant)) {
+  if (!isDefined(longestList)) {
     return EMPTY_VALUES;
   }
 
-  const values = firstVariant.values.map<VariantChartValue>((value, index) => {
-    const item = {
-      [`${firstVariant.name}_percentage`]: value.percentage,
-      [`${firstVariant.name}_occurrence`]: value.percentage,
+  const values = longestList.values.map<VariantChartValue>((value) => {
+    const item: VariantChartValue = {
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
       sample_size: value.sample_size,
     };
 
-    variantsOfConcern.forEach((variant) => {
-      item[`${variant.name}_percentage`] =
-        variant.values[index]?.percentage ?? 0;
-      item[`${variant.name}_occurrence`] =
-        variant.values[index]?.occurrence ?? 0;
-    });
-
-    const otherPercentage = variantsOfInterest.reduce(
-      (aggr, variant) => (aggr += variant.values[index]?.percentage ?? 0),
+    const totalPercentage = variantsOfConcern.reduce(
+      (total, variantOfConcern) => {
+        const otherItem = variantOfConcern.values.find(
+          (x) => x.date_end_unix === value.date_end_unix
+        );
+        if (otherItem) {
+          total += otherItem.percentage;
+          item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
+        }
+        return total;
+      },
       0
     );
 
-    const otherOccurrence = variantsOfInterest.reduce(
-      (aggr, variant) => (aggr += variant.values[index]?.occurrence ?? 0),
-      0
-    );
-
-    item.other_percentage = otherPercentage;
-    item.other_occurrence = otherOccurrence;
+    item.other_percentage = Math.round((100 - totalPercentage) * 100) / 100; //Round to maximum of 2 decimals
 
     return item;
   });
 
+  const lastValue = last(first(variantsOfConcern)?.values);
+
   return {
     variantChart: values,
     dates: {
-      date_of_insertion_unix: firstVariant.last_value.date_of_insertion_unix,
-      date_start_unix: firstVariant.last_value.date_start_unix,
-      date_end_unix: firstVariant.last_value.date_end_unix,
+      date_of_insertion_unix: lastValue?.date_of_insertion_unix ?? 0,
+      date_start_unix: lastValue?.date_start_unix ?? 0,
+      date_end_unix: lastValue?.date_end_unix ?? 0,
     },
   } as const;
 }
