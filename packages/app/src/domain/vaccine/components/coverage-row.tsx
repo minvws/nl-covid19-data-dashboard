@@ -51,12 +51,8 @@ function MobileCoverageRow(props: RowProps) {
           {children[1]}
         </Box>
         <Box flex={0.2}>
-          <Button>
-            <Chevron
-              isOpen={isOpen}
-              onClick={() => setIsOpen(!isOpen)}
-              color={colors.blue}
-            />
+          <Button onClick={() => setIsOpen(!isOpen)}>
+            <Chevron isOpen={isOpen} color={colors.blue} />
           </Button>
         </Box>
       </Box>
