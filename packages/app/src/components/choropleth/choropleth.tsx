@@ -266,7 +266,6 @@ const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
       <div
         ref={containerRef}
         style={{
-          aspectRatio: `1/${1 / aspectRatio}`,
           minHeight,
           maxHeight: '75vh',
           maxWidth: '100%',
