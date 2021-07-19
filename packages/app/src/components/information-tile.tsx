@@ -10,7 +10,6 @@ interface InformationTileProps {
   isFullWidth?: boolean;
 }
 
-// WarningMessage
 export function InformationTile({
   message,
   icon = InformationIcon,
