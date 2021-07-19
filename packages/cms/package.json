@@ -11,7 +11,6 @@
     "test:ci": "yarn run test",
     "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
-    "sync-assets": "echo 'Sync assets is deprecated' && exit 1",
     "lokalize:export": "ts-node src/lokalize/export.ts",
     "lokalize:add": "ts-node src/lokalize/add-text.ts",
     "lokalize:delete": "ts-node src/lokalize/delete-text.ts",

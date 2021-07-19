@@ -140,7 +140,10 @@ export function createGetStaticProps(
 
     return {
       props,
-      revalidate: 1,
+      /**
+       * @TODO revalidation should be disabled for now.
+       * revalidate: 1,
+       */
     };
   };
 }

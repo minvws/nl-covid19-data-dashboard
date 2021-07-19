@@ -12,7 +12,7 @@ module.exports = [
     defaultLocale: 'nl',
   },
   {
-    domain: 'coronadashboard.government.com',
+    domain: 'coronadashboard.government.nl',
     defaultLocale: 'en',
   },
   // For convenience, the deploy previews are configured as well

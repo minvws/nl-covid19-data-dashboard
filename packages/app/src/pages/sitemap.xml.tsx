@@ -6,15 +6,17 @@ import { features } from '~/config';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 
-const SitemapIndex = () => null;
+export default function SitemapIndex() {
+  return null;
+}
 
-const Sitemap = ({
+function Sitemap({
   pages,
   origin,
 }: {
   pages: { path: string; priority: number }[];
   origin: string;
-}) => {
+}) {
   return (
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       {pages?.map((page, index) => {
@@ -27,15 +29,15 @@ const Sitemap = ({
       })}
     </urlset>
   );
-};
+}
 
-export const getServerSideProps = async ({
+export async function getServerSideProps({
   res,
   locale,
 }: {
   res: any;
   locale: string;
-}) => {
+}) {
   const domain = locale === 'en' ? 'government.nl' : 'rijksoverheid.nl';
   const origin = `https://coronadashboard.${domain}`;
 
@@ -48,7 +50,7 @@ export const getServerSideProps = async ({
   return {
     props: {},
   };
-};
+}
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
@@ -169,5 +171,3 @@ async function getAllPathsWithPriorities() {
 function isParameterizedPath(path: string) {
   return ['code', 'slug'].some((fragment) => path.includes(fragment));
 }
-
-export default SitemapIndex;

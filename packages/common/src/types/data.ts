@@ -839,7 +839,7 @@ export interface NlVaccineAdministeredPlannedValue {
 }
 export interface NlVaccineCoveragePerAgeGroup {
   values: NlVaccineCoveragePerAgeGroupValue[];
-  last_value?: NlVaccineCoveragePerAgeGroupValue;
+  last_value: NlVaccineCoveragePerAgeGroupValue;
 }
 export interface NlVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "18+" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "65-69" | "70-79" | "80+";
