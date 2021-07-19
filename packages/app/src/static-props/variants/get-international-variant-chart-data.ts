@@ -72,7 +72,11 @@ function createCompleteDateRange(lists: InVariantsVariant[]) {
     }))
     .filter(
       (x, i, arr) =>
-        arr.findIndex((y) => y.date_end_unix === x.date_end_unix) === i
+        arr.findIndex(
+          (y) =>
+            y.date_end_unix === x.date_end_unix &&
+            y.date_start_unix === x.date_start_unix
+        ) === i
     )
     .sort((a, b) => a.date_end_unix - b.date_end_unix);
 }
