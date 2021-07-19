@@ -15,7 +15,7 @@ type HeadingWithIconProps = {
 
 const iconSizeForHeadingLevel: Record<HeadingLevel, string> = {
   1: '4rem',
-  2: '4rem',
+  2: '3.5rem',
   3: '2.5rem',
   4: '2rem',
   5: '1.75rem',
@@ -41,7 +41,7 @@ export function HeadingWithIcon({
 
       <Box>
         {category && (
-          <Heading level={1} m={0} fontSize="1.25rem" color="category">
+          <Heading level={1} m={0} fontSize={2} color="category">
             {category}
             {screenReaderCategory && (
               <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
@@ -52,6 +52,8 @@ export function HeadingWithIcon({
           {...headingProps}
           level={headingLevel}
           lineHeight={1.3}
+          fontSize={{ _: 3, md: 4 }}
+          // pb={category ? 3 : 0}
           m={0}
           css={css({
             hyphens: 'auto',
@@ -74,6 +76,7 @@ function Icon({ children, size }: { children: React.ReactNode; size: string }) {
       flexWrap="nowrap"
       justifyContent="center"
       alignItems="center"
+      transform="translateY(7px)"
       padding={0}
       marginRight={0}
       css={css({

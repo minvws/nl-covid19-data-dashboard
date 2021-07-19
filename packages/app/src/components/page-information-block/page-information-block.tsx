@@ -72,7 +72,7 @@ export function PageInformationBlock({
   );
 
   return (
-    <Box as="header" id={id} spacing={2} mt={hasExtraMarginTop ? 5 : null}>
+    <Box as="header" id={id} spacing={4} mt={hasExtraMarginTop ? 5 : null}>
       {title && icon ? (
         <HeadingWithIcon
           icon={icon}
