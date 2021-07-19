@@ -40,7 +40,23 @@ export function GNumberBarChartTile({
           key: 'g_number',
           features: ['keyboard_bar_chart'],
         }}
-        values={values}
+        values={
+          /**
+           * @TODO the two `g_number`-schema's needs to be updated from
+           * date-span-value to date-value:
+           *
+           *     - "date_start_unix": { "type": "integer" },
+           *     - "date_end_unix": { "type": "integer" },
+           *     + "date_unix": { "type": "integer" },
+           *
+           * After this schema change we can also get rid of the following map:
+           */
+          values.map((x) => ({
+            date_of_insertion_unix: x.date_of_insertion_unix,
+            g_number: x.g_number,
+            date_unix: x.date_end_unix,
+          }))
+        }
         timeframe={timeframeInitialValue}
         dataOptions={{
           isPercentage: true,
@@ -56,12 +72,12 @@ export function GNumberBarChartTile({
               {
                 color: colors.data.primary,
                 value: 0,
-                label: 'Krimpend G-getal',
+                label: '', // legend is hidden, we can leave this empty
               },
               {
                 color: colors.red,
-                label: 'Groeiend G-getal',
                 value: Infinity,
+                label: '', // legend is hidden, we can leave this empty
               },
             ],
           },
