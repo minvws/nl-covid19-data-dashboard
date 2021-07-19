@@ -1,6 +1,6 @@
 import {
   VrCollectionNursingHome,
-  VrProperties
+  VrProperties,
 } from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
@@ -25,13 +25,13 @@ import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -45,8 +45,8 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('nursingHomePage', locale);
   })
 );

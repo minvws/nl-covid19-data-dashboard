@@ -54,10 +54,10 @@ export const getStaticProps = withFeatureNotFoundPage(
       highlight: {
         articles?: ArticleSummary[];
       };
-    }>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    }>((context) => {
+      const { locale = 'nl' } = context;
       return `{
-      "page": ${getInPositiveTestsQuery()},
+      "page": ${getInPositiveTestsQuery(context)},
       "highlight": ${createPageArticlesQuery('in_positiveTestsPage', locale)}
     }`;
     }),

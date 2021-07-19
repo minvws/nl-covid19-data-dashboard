@@ -28,8 +28,8 @@ export const getStaticProps = createGetStaticProps(
   selectNlPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('infectiousPeoplePage', locale);
   })
 );
