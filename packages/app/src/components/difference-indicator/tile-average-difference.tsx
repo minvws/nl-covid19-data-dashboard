@@ -16,7 +16,7 @@ export function TileAverageDifference({
   const { difference, old_value } = value;
   const { siteText, formatNumber } = useIntl();
 
-  const valueText = (
+  const oldValue = (
     <InlineText fontWeight="bold">{` (${formatNumber(old_value)}${
       isPercentage ? '%' : ''
     })`}</InlineText>
@@ -33,7 +33,7 @@ export function TileAverageDifference({
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {valueText}
+          {oldValue}
         </InlineText>
       </Container>
     );
@@ -49,7 +49,7 @@ export function TileAverageDifference({
         </InlineText>
         <InlineText>
           {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {valueText}
+          {oldValue}
         </InlineText>
       </Container>
     );
@@ -64,7 +64,7 @@ export function TileAverageDifference({
       </InlineText>
       <InlineText>
         {siteText.toe_en_afname.zeven_daags_gemiddelde}
-        {valueText}
+        {oldValue}
       </InlineText>
     </Container>
   );
