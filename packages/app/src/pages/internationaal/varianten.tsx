@@ -150,8 +150,12 @@ export default function VariantenPage(
             description={text.pagina_toelichting}
             metadata={{
               // @TODO use correct dates
-              dateOrRange: { start: -999999999999, end: -99999999999 },
-              dateOfInsertionUnix: -999999999999,
+              dateOrRange: {
+                start: tableData?.dates?.date_start_unix ?? 0,
+                end: tableData?.dates?.date_end_unix ?? 0,
+              },
+              dateOfInsertionUnix:
+                tableData?.dates?.date_of_insertion_unix ?? 0,
 
               datumsText: text.datums,
               dataSources: [text.bronnen.rivm],
@@ -173,7 +177,7 @@ export default function VariantenPage(
           >
             <Box
               alignSelf="flex-start"
-              my={3}
+              mt={3}
               display="flex"
               alignItems="center"
             >
