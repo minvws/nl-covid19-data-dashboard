@@ -152,7 +152,6 @@ export interface LokalizeText {
   subject: string;
   should_display_empty: boolean;
   is_newly_added: boolean;
-  is_move_placeholder?: boolean;
   publish_count: number;
   text: {
     _type: 'localeText';

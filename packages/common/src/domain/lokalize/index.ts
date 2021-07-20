@@ -8,15 +8,7 @@ import mapKeys from 'lodash/mapKeys';
 export const ID_PREFIX = '__@__';
 
 /**
- * Create a flat structure from which the JSON is rebuilt. Here we filter out
- * any deleted keys from the mutations file, so that any  deletions that
- * happened locally in your branch (but are not committed to the dataset yet)
- * are stripped from the output and your feature code sees the correct dataset
- * as it will be after merging the branch.
- *
- * The same goes for move mutations. These mutations are not directly applied to
- * the dataset in Sanity, so we need to mimic the move to make the JSON reflect
- * what it will be in the future once the document key fields have been mutated.
+ * Creates a flat structure from which both language JSON files are built.
  */
 export function createFlatTexts(
   documents: LokalizeText[],

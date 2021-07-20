@@ -9,10 +9,9 @@
  *    development dataset. Deletions can not happen immediately because it would
  *    break other development branches, so keys are marked and only deleted by
  *    this script when the feature gets merged.
- * 3. Placeholder that were injected as part of a move mutation, are being
- *    deleted from the development set and their original documents will be
- *    mutated to have the new key. This is comparable with a delete mutation as
- *    the original document will no longer be available at the original key.
+ * 3. Move mutations are made final by mutating the key of the original document.
+ *    This is comparable with a delete mutation as the original document will no
+ *    longer be available at the original key.
  */
 
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
@@ -25,9 +24,7 @@ import {
   getCollapsedAddDeleteMutations,
   getCollapsedMoveMutations,
   readTextMutations,
-  TextMutation,
 } from './logic';
-import { createMovePlaceholderFromDocument } from './logic/placeholders';
 
 (async function run() {
   const mutations = await readTextMutations();
@@ -59,13 +56,6 @@ import { createMovePlaceholderFromDocument } from './logic/placeholders';
   );
 
   await syncAdditionsToProduction(additions);
-
-  /**
-   * We inject move mutations as placeholder documents in production. We need to
-   * keep the original documents in-tact until we run the "sync-after-release"
-   * script.
-   */
-  await syncMovePlaceholdersToProduction(moveMutations);
 })().catch((err) => {
   console.error('An error occurred:', err.message);
   process.exit(1);
@@ -132,65 +122,6 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
        */
       console.warn(
         `An addition for key ${mutation.key} was requested, but the document can not be found in the development dataset`
-      );
-
-      failureCount++;
-    }
-  }
-
-  console.log('PRD_TRANSACTION', prdTransaction.serialize());
-  // await prdTransaction.commit(); @TODO enable
-
-  if (failureCount === 0) {
-    console.log(
-      `Successfully injected all ${successCount} text keys (if they didn't exist already)`
-    );
-  } else {
-    console.log(
-      `Injected ${successCount} text keys. Failed to add ${failureCount}`
-    );
-  }
-}
-
-async function syncMovePlaceholdersToProduction(
-  mutations: (TextMutation & { action: 'move' })[]
-) {
-  if (mutations.length === 0) {
-    console.log('There are no move mutations that result in placeholders');
-    return;
-  }
-  const prdClient = await getClient('production');
-  const prdTransaction = prdClient.transaction();
-
-  let successCount = 0;
-  let failureCount = 0;
-
-  for (const mutation of mutations) {
-    /**
-     * Production uses the same document ids as development, so in order to
-     * inject the placeholder, we look up the equivalent document on production
-     * (using the development document id recorded in the mutation log) and
-     * inject the placeholder with the text from the production document.
-     */
-    const sourceDocument = (await prdClient.getDocument(
-      mutation.document_id
-    )) as LokalizeText | undefined;
-
-    if (sourceDocument) {
-      const placeholderDocument = createMovePlaceholderFromDocument(
-        sourceDocument,
-        mutation.move_to
-      );
-
-      prdTransaction.createIfNotExists(placeholderDocument);
-      successCount++;
-    } else {
-      /**
-       * This should never happen, but it is also not severe enough to
-       * completely halt the script
-       */
-      console.warn(
-        `A move for key ${mutations.keys} was requested, but document ${mutation.document_id} can not be found in the production dataset`
       );
 
       failureCount++;

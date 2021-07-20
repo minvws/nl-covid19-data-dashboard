@@ -12,15 +12,7 @@ export function lokalizeListItem() {
       const type = 'lokalizeText';
 
       return documentStore
-        .listenQuery(
-          /**
-           * Only list text documents that are not temporary placeholders. We do
-           * not want to allow editing those documents, since they are being
-           * deleted once the move is synced/completed.
-           */
-          `*[_type == $type && is_move_placeholder != true]{ subject }`,
-          { type }
-        )
+        .listenQuery(`*[_type == $type]{ subject }`, { type })
         .pipe(
           map((doc: { subject: string }[], _index) => {
             const subjects = uniq(doc.map((x) => x.subject));

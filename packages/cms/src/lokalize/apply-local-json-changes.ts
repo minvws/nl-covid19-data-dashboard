@@ -1,5 +1,3 @@
-import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { assert } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import prompts from 'prompts';
 import { getClient } from '../client';
@@ -8,7 +6,6 @@ import {
   exportLokalizeTexts,
   getLocalMutations,
 } from './logic';
-import { createMovePlaceholderFromDocument } from './logic/placeholders';
 
 /**
  * Read the contents of the (edited) local export JSON file and compared it to
@@ -84,25 +81,6 @@ import { createMovePlaceholderFromDocument } from './logic/placeholders';
 
     if (choice.type === 'move') {
       const { key, documentId, moveTo } = choice.mutation;
-
-      /**
-       * A move is executed by injecting a temporary copy of the original
-       * document as a placeholder for keeping the new key. This document is
-       * deleted later when the key of the original document gets updated.
-       */
-
-      const originalDocument = (await devClient.getDocument(documentId)) as
-        | LokalizeText
-        | undefined;
-
-      assert(
-        originalDocument,
-        `Unable to locate original document for move: ${documentId}`
-      );
-
-      await devClient.create(
-        createMovePlaceholderFromDocument(originalDocument, moveTo)
-      );
 
       await appendTextMutation({ action: 'move', key, documentId, moveTo });
     }

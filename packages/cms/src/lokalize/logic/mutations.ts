@@ -347,23 +347,12 @@ export async function finalizeMoveMutations(
         console.log(`Document ${document_id} was already moved`);
       }
 
-      const placeholderDocument = await client.getDocument(
-        MOVE_PLACEHOLDER_ID_PREFIX + document_id
-      );
-
-      assert(
-        placeholderDocument,
-        `Failed to locate move placeholder document in dataset ${dataset}`
-      );
-
       transaction.patch(document_id, {
         set: {
           key: move_to,
           subject: move_to.split('.')[0],
         },
       });
-
-      transaction.delete(placeholderDocument._id);
     } catch (err) {
       console.error(`Move failed for document ${document_id}: ${err.message}`);
     }
