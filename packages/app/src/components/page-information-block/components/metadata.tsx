@@ -12,7 +12,6 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
 interface Datasource {
   href: string;
   text: string;
@@ -220,8 +219,7 @@ interface metadataReferenceProps {
 function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
   const { siteText } = useIntl();
 
-  const splittedWords =
-    siteText.informatie_header.meer_informatie_link.split(' ');
+  const words = siteText.informatie_header.meer_informatie_link.split(' ');
 
   return (
     <Box display="flex" alignItems="flex-start" color="annotation">
@@ -229,14 +227,9 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
 
       <Link href={referenceLink} passHref>
         <Anchor css={css({ fontSize: 1 })}>
-          {splittedWords.map((word, index) => (
-            <InlineText
-              key={index}
-              css={css({
-                whiteSpace: 'pre-wrap',
-              })}
-            >
-              {splittedWords.length - 1 === index ? (
+          {words.map((word, index) => (
+            <Fragment key="index">
+              {words.length - 1 === index ? (
                 <InlineText
                   css={css({
                     position: 'relative',
@@ -250,7 +243,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
               ) : (
                 `${word} `
               )}
-            </InlineText>
+            </Fragment>
           ))}
         </Anchor>
       </Link>
@@ -262,6 +255,7 @@ const Anchor = styled.a({
   textDecoration: 'none',
   display: 'flex',
   flexWrap: 'wrap',
+  whiteSpace: 'pre-wrap',
 
   '&:hover': {
     textDecoration: 'underline',

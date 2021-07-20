@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -48,7 +49,7 @@ interface ArticleItemProps {
 }
 
 function ArticleItem({ slug, cover, title }: ArticleItemProps) {
-  const splittedWords = title.split(' ');
+  const words = title.split(' ');
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
@@ -62,14 +63,9 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
         </Box>
         <Box pl={3} display="flex" alignItems="center">
           <StyledText>
-            {splittedWords.map((word, index) => (
-              <InlineText
-                key={index}
-                css={css({
-                  whiteSpace: 'pre-wrap',
-                })}
-              >
-                {splittedWords.length - 1 === index ? (
+            {words.map((word, index) => (
+              <Fragment key="index">
+                {words.length - 1 === index ? (
                   <InlineText
                     css={css({
                       position: 'relative',
@@ -83,7 +79,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
                 ) : (
                   `${word} `
                 )}
-              </InlineText>
+              </Fragment>
             ))}
           </StyledText>
         </Box>
@@ -106,6 +102,7 @@ const StyledText = styled.p(
     display: 'flex',
     flexWrap: 'wrap',
     margin: 0,
+    whiteSpace: 'pre-wrap',
 
     '&:hover': {
       textDecoration: 'underline',
