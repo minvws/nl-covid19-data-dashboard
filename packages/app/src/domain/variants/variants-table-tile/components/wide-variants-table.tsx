@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { TableText } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
@@ -27,7 +27,7 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
 
   const formatValue = useMemo(() => {
     const numberOfDecimals = getMaximumNumberOfDecimals(
-      rows.map((x) => x.percentage)
+      rows.map((x) => x.percentage ?? 0)
     );
     return (value: number) =>
       intl.formatPercentage(value, {
@@ -55,15 +55,19 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
             />
             <Cell>
               <Box maxWidth="20em">
-                <PercentageBarWithNumber
-                  percentage={row.percentage}
-                  color={row.color}
-                  formatValue={formatValue}
-                />
+                {isPresent(row.percentage) ? (
+                  <PercentageBarWithNumber
+                    percentage={row.percentage}
+                    color={row.color}
+                    formatValue={formatValue}
+                  />
+                ) : (
+                  '-'
+                )}
               </Box>
             </Cell>
             <Cell>
-              {isDefined(row.difference) ? (
+              {isDefined(row.difference) && isPresent(row.percentage) ? (
                 <VariantDifference value={row.difference} />
               ) : (
                 '-'

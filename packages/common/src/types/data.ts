@@ -183,8 +183,8 @@ export interface InVariantsVariant {
   last_value: InVariantsVariantValue;
 }
 export interface InVariantsVariantValue {
-  percentage: number;
-  occurrence: number;
+  percentage: number | null;
+  occurrence: number | null;
   is_variant_of_concern: boolean;
   sample_size: number;
   is_reliable: boolean;

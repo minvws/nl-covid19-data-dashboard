@@ -6,7 +6,7 @@ import {
 import css from '@styled-system/css';
 import { forwardRef, MouseEvent, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
@@ -36,7 +36,7 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
 
   const formatValue = useMemo(() => {
     const numberOfDecimals = getMaximumNumberOfDecimals(
-      rows.map((x) => x.percentage)
+      rows.map((x) => x.percentage ?? 0)
     );
     return (value: number) =>
       intl.formatPercentage(value, {
@@ -105,11 +105,15 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           countryOfOrigin={row.countryOfOrigin}
         />
         <Cell mobile>
-          <PercentageBarWithNumber
-            percentage={row.percentage}
-            color={row.color}
-            formatValue={formatValue}
-          />
+          {isPresent(row.percentage) ? (
+            <PercentageBarWithNumber
+              percentage={row.percentage}
+              color={row.color}
+              formatValue={formatValue}
+            />
+          ) : (
+            '-'
+          )}
         </Cell>
         <Cell mobile alignRight>
           <Disclosure
@@ -133,7 +137,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
             <div ref={ref}>
               <Box mb={1} display="flex" flexDirection="row">
                 <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
-                {isDefined(row.difference) ? (
+                {isDefined(row.difference) && isPresent(row.percentage) ? (
                   <VariantDifference value={row.difference} />
                 ) : (
                   '-'

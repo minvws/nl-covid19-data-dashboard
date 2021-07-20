@@ -1,6 +1,6 @@
 import { In, InVariants, InVariantsVariant } from '@corona-dashboard/common';
 import { last } from 'lodash';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { VariantChartValue } from './get-variant-chart-data';
 
 export function getInternationalVariantChartData(data: Record<string, In>) {
@@ -59,7 +59,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
             x.date_start_unix === partialChartValue.date_start_unix
         );
 
-        if (otherItem) {
+        if (isDefined(otherItem) && isPresent(otherItem.percentage)) {
           total += otherItem.percentage;
           item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
         }
