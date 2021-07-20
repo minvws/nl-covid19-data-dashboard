@@ -60,13 +60,13 @@ export function PageInformationBlock({
   const DescriptionBlock = (
     <>
       {description && (
-        <>
+        <Box maxWidth="maxWidthText">
           {typeof description === 'string' ? (
             <Text mb={0}>{description}</Text>
           ) : (
             <RichContent blocks={description} />
           )}
-        </>
+        </Box>
       )}
     </>
   );
