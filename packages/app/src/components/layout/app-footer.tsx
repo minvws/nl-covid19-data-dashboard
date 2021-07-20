@@ -66,6 +66,9 @@ export function AppFooter() {
                 <Item href={reverseRouter.algemeen.over()}>
                   {text.nav.links.over}
                 </Item>
+                <Item href={reverseRouter.algemeen.toegankelijkheid()}>
+                  {text.nav.links.toegankelijkheid}
+                </Item>
                 <Item href={reverseRouter.algemeen.veelgesteldeVragen()}>
                   {text.nav.links.veelgestelde_vragen}
                 </Item>
@@ -74,9 +77,6 @@ export function AppFooter() {
                 </Item>
                 <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
                   {text.nav.links.over_risiconiveaus}
-                </Item>
-                <Item href={reverseRouter.algemeen.toegankelijkheid()}>
-                  {text.nav.links.toegankelijkheid}
                 </Item>
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
