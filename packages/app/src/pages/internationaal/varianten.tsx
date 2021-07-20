@@ -86,11 +86,15 @@ export default function VariantenPage(
     variantChartData,
     countryOptions,
   } = props;
-  const [tableData, setTableData] = useState<VariantTableData | undefined>();
-  const [chartData, setChartData] = useState<VariantChartData | undefined>();
-  const [selectedCountryCode, setSelectedCountryCode] = useState<
-    string | undefined
-  >();
+  const defaultCountryCode = countryOptions[0].value;
+  const [tableData, setTableData] = useState<VariantTableData>(
+    variantTableData[defaultCountryCode]
+  );
+  const [chartData, setChartData] = useState<VariantChartData>(
+    variantChartData[defaultCountryCode]
+  );
+  const [selectedCountryCode, setSelectedCountryCode] =
+    useState<string>(defaultCountryCode);
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_varianten;
