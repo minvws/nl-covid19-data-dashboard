@@ -149,7 +149,6 @@ export default function VariantenPage(
             icon={<Getest />}
             description={text.pagina_toelichting}
             metadata={{
-              // @TODO use correct dates
               dateOrRange: {
                 start: tableData?.dates?.date_start_unix ?? 0,
                 end: tableData?.dates?.date_end_unix ?? 0,
