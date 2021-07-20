@@ -1,4 +1,5 @@
-import { In, InVariants } from '@corona-dashboard/common';
+import { In, InVariants, InVariantsVariant } from '@corona-dashboard/common';
+import { last } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { VariantChartValue } from './get-variant-chart-data';
 
@@ -15,7 +16,6 @@ export function getInternationalVariantChartData(data: Record<string, In>) {
 
 const EMPTY_VALUES = {
   variantChart: null,
-  dates: null,
 } as const;
 
 export type VariantChartData = ReturnType<typeof getVariantChartData>;
@@ -25,57 +25,82 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const variantsOfConcern = variants.values.filter(
-    (x) => x.last_value.is_variant_of_concern
-  );
-  const variantsOfInterest = variants.values.filter(
-    (x) => !x.last_value.is_variant_of_concern
-  );
+  const completeDateRange = getCompleteDateRange(variants.values);
 
-  const firstVariant = variantsOfConcern.shift();
-
-  if (!isDefined(firstVariant)) {
+  if (!completeDateRange.length) {
     return EMPTY_VALUES;
   }
 
-  const values = firstVariant.values.map<VariantChartValue>((value, index) => {
-    const item = {
-      [`${firstVariant.name}_percentage`]: value.percentage,
-      [`${firstVariant.name}_occurrence`]: value.percentage,
-      date_start_unix: value.date_start_unix,
-      date_end_unix: value.date_end_unix,
-      sample_size: value.sample_size,
-    };
+  const variantsOfConcern = variants.values.filter(
+    (x) => last(x.values)?.is_variant_of_concern
+  );
 
-    variantsOfConcern.forEach((variant) => {
-      item[`${variant.name}_percentage`] =
-        variant.values[index]?.percentage ?? 0;
-      item[`${variant.name}_occurrence`] =
-        variant.values[index]?.occurrence ?? 0;
-    });
+  if (!variantsOfConcern.length) {
+    return EMPTY_VALUES;
+  }
 
-    const otherPercentage = variantsOfInterest.reduce(
-      (aggr, variant) => (aggr += variant.values[index]?.percentage ?? 0),
-      0
+  /**
+   * Here it loops through the entire date range list (a VariantChartValue array) and per start/end date
+   * it looks up a variant of concern item that matches the given dates.
+   *
+   * If it exists, it adds a property called `<variant-name>_percentage` to
+   * the given VariantChartValue.
+   *
+   * While doing this it accumulates the total percentage so that after finding the variants of concern
+   * numbers it can add an `other_percentage` property that represents all of the other variants.
+   *
+   */
+  const values = completeDateRange.map((partialChartValue) => {
+    const { item, total } = variantsOfConcern.reduce(
+      ({ item, total }, variantOfConcern) => {
+        const otherItem = variantOfConcern.values.find(
+          (x) =>
+            x.date_end_unix === partialChartValue.date_end_unix &&
+            x.date_start_unix === partialChartValue.date_start_unix
+        );
+
+        if (otherItem) {
+          total += otherItem.percentage;
+          item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
+        }
+
+        return { item, total };
+      },
+      { item: partialChartValue, total: 0 }
     );
 
-    const otherOccurrence = variantsOfInterest.reduce(
-      (aggr, variant) => (aggr += variant.values[index]?.occurrence ?? 0),
-      0
-    );
-
-    item.other_percentage = otherPercentage;
-    item.other_occurrence = otherOccurrence;
+    item.other_percentage = Math.round((100 - total) * 100) / 100; //Round to maximum of 2 decimals
 
     return item;
   });
 
   return {
     variantChart: values,
-    dates: {
-      date_of_insertion_unix: firstVariant.last_value.date_of_insertion_unix,
-      date_start_unix: firstVariant.last_value.date_start_unix,
-      date_end_unix: firstVariant.last_value.date_end_unix,
-    },
   } as const;
+}
+
+/**
+ * The different historical value lists are of different lengths,
+ * so here we create a start to end range based on all of them.
+ *
+ * First it creates a flatmap of all the start and end dates,
+ * which is then de-duped and finally re-sorted by end date.
+ *
+ */
+function getCompleteDateRange(lists: InVariantsVariant[]) {
+  return lists
+    .flatMap((x) => x.values)
+    .map<VariantChartValue>((x) => ({
+      date_start_unix: x.date_start_unix,
+      date_end_unix: x.date_end_unix,
+    }))
+    .filter(
+      ({ date_start_unix, date_end_unix }, index, array) =>
+        array.findIndex(
+          (y) =>
+            y.date_end_unix === date_end_unix &&
+            y.date_start_unix === date_start_unix
+        ) === index
+    )
+    .sort((a, b) => a.date_end_unix - b.date_end_unix);
 }

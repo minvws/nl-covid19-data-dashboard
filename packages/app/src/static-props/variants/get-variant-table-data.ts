@@ -4,8 +4,12 @@ import {
   DifferenceDecimal,
   InNamedDifference,
   InVariants,
+  InVariantsVariant,
+  InVariantsVariantValue,
   NlNamedDifference,
   NlVariants,
+  NlVariantsVariant,
+  NlVariantsVariantValue,
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -58,7 +62,9 @@ export function getVariantTableData(
     return color;
   }
 
-  const firstLastValue = first(variants.values);
+  const firstLastValue = first<NlVariantsVariant | InVariantsVariant>(
+    variants.values
+  );
   const dates = {
     date_end_unix: firstLastValue?.last_value.date_end_unix ?? 0,
     date_start_unix: firstLastValue?.last_value.date_start_unix ?? 0,
@@ -66,6 +72,17 @@ export function getVariantTableData(
       firstLastValue?.last_value.date_of_insertion_unix ?? 0,
   };
   const sampleSize = firstLastValue?.last_value.sample_size ?? 0;
+
+  const inVariants = variants.values
+    .map((x) => x.last_value)
+    .filter(isInVariant);
+  /**
+   * Only international data has the is_reliable key,
+   * so for national data we assume it is reliable by default.
+   */
+  const isReliable = inVariants.length
+    ? inVariants.some((x) => x.is_reliable)
+    : true;
 
   const variantTable = variants.values
     .map<VariantRow>((variant) => ({
@@ -87,5 +104,11 @@ export function getVariantTableData(
       return rowB.percentage - rowA.percentage;
     });
 
-  return { variantTable, dates, sampleSize };
+  return { variantTable, dates, sampleSize, isReliable };
+}
+
+function isInVariant(
+  value: NlVariantsVariantValue | InVariantsVariantValue
+): value is InVariantsVariantValue {
+  return 'is_reliable' in value;
 }

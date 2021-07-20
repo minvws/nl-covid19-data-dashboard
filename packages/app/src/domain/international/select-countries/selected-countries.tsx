@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import { asResponsiveArray } from '~/style/utils';
 import ResetIcon from '~/assets/reset.svg';
+import { asResponsiveArray } from '~/style/utils';
 
 interface SelectOption {
   metricProperty: string;
@@ -98,6 +98,7 @@ const ItemButton = styled.button<{
     alignItems: 'center',
     fontSize: 1,
     justifyContent: 'space-between',
+
     '&:hover,&:focus': {
       '&:before': {
         content: '""',
@@ -109,9 +110,11 @@ const ItemButton = styled.button<{
         bottom: '-3px',
       },
     },
+
     '&:focus': {
       background: 'lightGray',
     },
+
     '&:after': {
       content: hasRemoveIcon ? 'attr(data-text)' : undefined,
       height: 0,

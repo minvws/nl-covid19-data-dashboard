@@ -67,17 +67,8 @@ export function CoverageProgressBar(props: {
               height={barHeight}
               fill={partialColor}
             />
-
             <rect
-              /**
-               * Render a white divider of 2px which covers 1px off each bar.
-               * Calc can not be used on the x property because it will not be
-               * re-evaluated when container is resized, so we use CSS transform
-               * instead.
-               */
-              style={{
-                transform: `translate(calc(${fullPercentage}% - 1px), 0)`,
-              }}
+              x={`${fullPercentage}%`}
               y={containerHeight - barHeight}
               width={2}
               height={barHeight}
@@ -137,7 +128,7 @@ function LegendItem({
 }) {
   const { formatPercentage, formatNumber } = useIntl();
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="baseline">
       <ColorIndicator color={color} />
       {isDefined(count) ? (
         <InlineText fontSize={1}>
