@@ -45,6 +45,7 @@ const hiddenDocTypes = [
   'lokalizeText',
   'timeSeries',
   'timelineEvent',
+  'contact',
 ];
 
 export default () =>
@@ -134,6 +135,7 @@ export default () =>
       addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
+      addListItem(RiPagesFill, 'Contact', 'contact'),
 
       S.divider(),
 

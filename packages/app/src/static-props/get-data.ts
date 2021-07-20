@@ -321,9 +321,13 @@ export function getInData(countryCodes: CountryCode[]) {
   return function () {
     const internationalData: Record<string, In> = {};
     countryCodes.forEach((countryCode) => {
-      internationalData[countryCode] = loadJsonFromDataFile<In>(
+      const data = loadJsonFromDataFile<In>(
         `IN_${countryCode.toUpperCase()}.json`
       );
+
+      sortTimeSeriesInDataInPlace(data);
+
+      internationalData[countryCode] = data;
     });
     return { internationalData } as {
       internationalData: Record<CountryCode, In>;

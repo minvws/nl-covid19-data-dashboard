@@ -1,13 +1,13 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import CheckedIcon from '~/assets/checked.svg';
+import UncheckedIcon from '~/assets/unchecked.svg';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
-import CheckedIcon from '~/assets/checked.svg';
-import UncheckedIcon from '~/assets/unchecked.svg';
 
 export function SelectCountriesResults() {
   const { id, hits, setHasHitFocus, onToggleCountry, getOptionProps, limit } =
@@ -40,6 +40,16 @@ export function SelectCountriesResults() {
                   <span css={css({ flex: '0 0 24px' })}>
                     {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
                   </span>
+                  <img
+                    aria-hidden
+                    src={`/icons/flags/${x.id.toLowerCase()}.svg`}
+                    width="17"
+                    height="13"
+                    alt=""
+                    css={css({
+                      mr: 2,
+                    })}
+                  />
                   <span
                     css={css({
                       color: 'black',
@@ -147,6 +157,7 @@ const StyledHit = styled.button<{
     px: 3,
     py: 2,
     display: 'flex',
+    alignItems: 'center',
     textDecoration: 'none',
     color: 'annotation',
     width: '100%',
