@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { getSafetyRegionMunicipalsForMunicipalCode } from '~/utils/get-safety-region-municipals-for-Mmunicipal-code';
+import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
 
 /**
  * This hook returns all the municipal codes that belong to the same safety region
@@ -15,6 +15,6 @@ export function useRegionMunicipalities(
       return;
     }
 
-    return getSafetyRegionMunicipalsForMunicipalCode(municipalCode);
+    return getVrMunicipalsForMunicipalCode(municipalCode);
   }, [municipalCode]);
 }

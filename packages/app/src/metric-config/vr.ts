@@ -7,9 +7,7 @@ const YELLOW = colors.data.gradient.yellow;
 const RED = colors.data.gradient.red;
 
 type VrMetricKey = MetricKeys<Vr>;
-export type VrConfig = Partial<
-  Record<VrMetricKey, Record<string, MetricConfig>>
->;
+type VrConfig = Partial<Record<VrMetricKey, Record<string, MetricConfig>>>;
 
 export const vr: VrConfig = {
   behavior: {

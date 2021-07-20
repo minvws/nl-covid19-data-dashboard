@@ -1,3 +1,5 @@
+import { Rule } from '~/sanity';
+import { localeStringValidation } from '../../../language/locale-validation';
 export const topicalPage = {
   title: 'Actueel pagina',
   name: 'topicalPage',
@@ -25,37 +27,25 @@ export const topicalPage = {
               title: 'Titel',
               name: 'title',
               type: 'localeString',
-              validation: (Rule: any) =>
-                Rule.fields({
-                  nl: (fieldRule: any) => fieldRule.reset().required(),
-                  en: (fieldRule: any) => fieldRule.reset().required(),
-                }),
+              validation: localeStringValidation((rule) => rule.required()),
             },
             {
               title: 'Categorie',
               name: 'category',
               type: 'localeString',
-              validation: (Rule: any) =>
-                Rule.fields({
-                  nl: (fieldRule: any) => fieldRule.reset().required(),
-                  en: (fieldRule: any) => fieldRule.reset().required(),
-                }),
+              validation: localeStringValidation((rule) => rule.required()),
             },
             {
               name: 'label',
               type: 'localeString',
               title: 'Tekst in de link',
-              validation: (Rule: any) =>
-                Rule.fields({
-                  nl: (fieldRule: any) => fieldRule.reset().required(),
-                  en: (fieldRule: any) => fieldRule.reset().required(),
-                }),
+              validation: localeStringValidation((rule) => rule.required()),
             },
             {
               name: 'href',
               type: 'string',
               title: 'Link naar pagina',
-              validation: (Rule: any) => Rule.required(),
+              validation: (rule: Rule) => rule.required(),
             },
             {
               title: 'Afbeelding',
@@ -71,7 +61,7 @@ export const topicalPage = {
                   type: 'localeString',
                 },
               ],
-              validation: (Rule: any) => Rule.required(),
+              validation: (rule: Rule) => rule.required(),
             },
           ],
         },
@@ -90,6 +80,12 @@ export const topicalPage = {
         }).warning(),
         Rule.required().unique().min(2).max(3),
       ],
+    },
+    {
+      title: 'empty-for-toggle',
+      name: 'empty',
+      type: 'localeString',
+      hidden: true,
     },
   ],
 };

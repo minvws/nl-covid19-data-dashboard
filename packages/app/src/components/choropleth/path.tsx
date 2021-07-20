@@ -78,14 +78,17 @@ export function HoverPathLink({
       onClick={handleClick}
       onFocus={onFocus}
       onBlur={onBlur}
-      css={css({ outline: isDefined(href) ? undefined : 'none !important' })}
+      css={css({
+        outline: isDefined(href) ? undefined : 'none !important',
+        '&:focus': { outline: 'none' },
+      })}
     >
       <HoverPath isClickable={isDefined(href)} {...pathProps} />
     </a>
   );
 }
 
-export function HoverPath({
+function HoverPath({
   id,
   pathData,
   fill,

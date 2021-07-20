@@ -8,6 +8,7 @@ import Menu from '~/assets/menu.svg';
 import { MaxWidth } from '~/components/max-width';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { Link } from '~/utils/link';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useMediaQuery } from '~/utils/use-media-query';
@@ -22,6 +23,8 @@ export function TopNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+
+  const internationalFeature = useFeature('internationalPage');
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -88,12 +91,14 @@ export function TopNavigation() {
               {siteText.nav.links.gemeente}
             </NavItem>
 
-            <NavItem
-              href={reverseRouter.in.index()}
-              isActive={router.pathname.startsWith('/internationaal')}
-            >
-              {siteText.nav.links.internationaal}
-            </NavItem>
+            {internationalFeature.isEnabled ? (
+              <NavItem
+                href={reverseRouter.in.index()}
+                isActive={router.pathname.startsWith('/internationaal')}
+              >
+                {siteText.nav.links.internationaal}
+              </NavItem>
+            ) : null}
 
             <NavItem href={reverseRouter.algemeen.over()}>
               {siteText.nav.links.over}

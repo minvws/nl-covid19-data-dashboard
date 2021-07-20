@@ -1,7 +1,6 @@
 import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
@@ -16,7 +15,15 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-page-elements-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,6 +34,7 @@ import {
   getLastGeneratedDate,
   selectGmPageMetricData,
 } from '~/static-props/get-data';
+import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -35,21 +43,29 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('hospital_nice', 'difference', 'code'),
   createGetChoroplethData({
-    gm: ({ hospital_nice }) => ({ hospital_nice }),
+    gm: ({ hospital_nice }, context) => ({
+      hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
+    }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
+    fix_this: ArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('hospitalPage', locale);
+
+    return `{
+      "fix_this": ${createPageArticlesQuery('hospitalPage', locale)},
+      "elements": ${createElementsQuery('gm', ['hospital_nice'], locale)}
+    }`;
   })
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
+    sideBarData,
     choropleth,
     municipalityName,
     content,
@@ -80,7 +96,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
+        code={data.code}
+        difference={data.difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >
@@ -101,7 +119,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             reference={text.reference}
           />
 
-          <ArticleStrip articles={content.articles} />
+          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -196,6 +214,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
                 }}
               />
             )}

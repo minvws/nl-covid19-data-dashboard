@@ -31,7 +31,7 @@ interface HoverState<T> {
 
 type Event = React.TouchEvent<SVGElement> | React.MouseEvent<SVGElement>;
 
-export type HoverHandler = (event: Event, valuesIndex: number) => void;
+type HoverHandler = (event: Event, valuesIndex: number) => void;
 
 type UseHoverStateResponse<T extends TimestampedValue> = [
   HoverHandler,

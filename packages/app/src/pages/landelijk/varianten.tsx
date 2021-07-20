@@ -1,6 +1,5 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
 import Varianten from '~/assets/varianten.svg';
 import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -27,16 +26,45 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
+  getLocaleFile,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
+import {
+  getSeriesConfig,
+  getVariantChartData,
+} from '~/static-props/variants/get-variant-chart-data';
+import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
+import { colors } from '~/style/theme';
 import { VariantsPageQuery } from '~/types/cms';
-import { assert } from '~/utils/assert';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'variantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectNlPageMetricData('variants'),
+    () => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      const siteText = getLocaleFile(locale);
+      const data = selectNlPageMetricData('variants')();
+      const variants = data.selectedNlData.variants;
+      delete data.selectedNlData.variants;
+
+      const chartData = getVariantChartData(variants);
+
+      return {
+        selectedNlData: data.selectedNlData,
+        ...getVariantTableData(
+          variants,
+          data.selectedNlData.named_difference,
+          siteText.covid_varianten.landen_van_herkomst
+        ),
+        ...chartData,
+        ...getSeriesConfig(
+          chartData?.variantChart?.[0],
+          siteText.covid_varianten.varianten,
+          colors.data.variants
+        ),
+      };
+    },
     createGetContent<{
       page: VariantsPageQuery;
       highlight: {
@@ -55,11 +83,20 @@ export const getStaticProps = withFeatureNotFoundPage(
 export default function CovidVariantenPage(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { selectedNlData: data, lastGenerated, content } = props;
+  const {
+    selectedNlData,
+    lastGenerated,
+    content,
+    variantTable,
+    variantChart,
+    seriesConfig,
+    dates,
+  } = props;
 
   const { siteText } = useIntl();
 
   const text = siteText.covid_varianten;
+  const tableText = text.varianten_tabel;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -67,13 +104,9 @@ export default function CovidVariantenPage(
     description: text.metadata.description,
   };
 
-  assert(data.variants, 'no variants data found');
-
-  const lastValue = data.variants.last_value;
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NationalLayout data={selectedNlData} lastGenerated={lastGenerated}>
         <TileList>
           <ContentHeader
             category={siteText.nationaal_layout.headings.besmettingen}
@@ -84,10 +117,10 @@ export default function CovidVariantenPage(
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
-                start: lastValue.date_start_unix,
-                end: lastValue.date_end_unix,
+                start: dates.date_start_unix,
+                end: dates.date_end_unix,
               },
-              dateOfInsertionUnix: lastValue.date_of_insertion_unix,
+              dateOfInsertionUnix: dates.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
             reference={text.reference}
@@ -133,23 +166,33 @@ export default function CovidVariantenPage(
             )}
           </TwoKpiSection>
 
-          {data.variants?.last_value && (
-            <VariantsTableTile
-              data={data.variants?.last_value}
-              differences={data.difference}
-            />
-          )}
+          <VariantsTableTile
+            data={variantTable}
+            sampleSize={selectedNlData.variantSidebarValue.sample_size}
+            text={tableText}
+            source={text.bronnen.rivm}
+            dates={{
+              date_end_unix: dates.date_end_unix,
+              date_of_insertion_unix: dates.date_of_insertion_unix,
+              date_start_unix: dates.date_start_unix,
+            }}
+          />
 
-          {data.variants.values && (
+          {variantChart && seriesConfig && (
             <ChartTile
               title={text.varianten_over_tijd.titel}
               description={text.varianten_over_tijd.beschrijving}
+              timeframeOptions={['all', '5weeks']}
               metadata={{
                 source: text.bronnen.rivm,
               }}
             >
-              {isDefined(data.variants.values) && (
-                <VariantsOverTime values={data.variants.values} />
+              {(timeframe) => (
+                <VariantsOverTime
+                  values={variantChart}
+                  seriesConfig={seriesConfig}
+                  timeframe={timeframe}
+                />
               )}
             </ChartTile>
           )}

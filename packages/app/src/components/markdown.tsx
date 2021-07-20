@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ExternalLink } from '~/components/external-link';
+import { useIntl } from '~/intl';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
@@ -30,7 +31,13 @@ const renderers = {
    *
    *     ```VR09,VR16
    *     This will only be displayed on routes with a code equal to VR09 or VR16.
-   *     ````
+   *     ```
+   *
+   * Tildes are also accepted:
+   *
+   *     ~~~VR09,VR16
+   *     This will only be displayed on routes with a code equal to VR09 or VR16.
+   *     ~~~
    */
   code: ({ language, value }: { language: string | null; value: string }) => (
     <DisplayOnMatchingQueryCode code={language || ''}>
@@ -47,5 +54,7 @@ const renderers = {
 };
 
 export function Markdown({ content }: MarkdownProps) {
-  return <ReactMarkdown source={content} renderers={renderers} />;
+  const { dataset } = useIntl();
+  const source = dataset === 'keys' ? `✅${content}` : content;
+  return <ReactMarkdown source={source} renderers={renderers} />;
 }

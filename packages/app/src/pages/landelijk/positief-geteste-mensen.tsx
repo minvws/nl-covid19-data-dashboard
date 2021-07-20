@@ -10,16 +10,15 @@ import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
 import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -34,7 +33,15 @@ import { NationalLayout } from '~/domain/layout/national-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  ArticlesQueryResult,
+  createPageArticlesQuery,
+} from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-page-elements-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -57,18 +64,27 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    main: { articles?: ArticleSummary[] };
-    ggd: { articles?: ArticleSummary[] };
+    main: ArticlesQueryResult;
+    ggd: ArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return `{
+
+    const query = `{
       "main": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "ggd": ${createPageArticlesQuery(
         'positiveTestsPage',
         locale,
         'ggdArticles'
       )},
+     "elements": ${createElementsQuery(
+       'nl',
+       ['tested_overall', 'tested_ggd'],
+       locale
+     )}
     }`;
+
+    return query;
   })
 );
 
@@ -85,7 +101,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
-  const dataGgdValues = data.tested_ggd.values;
   const difference = data.difference;
 
   const metadata = {
@@ -202,7 +217,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              *
              * Ideally the ChoroplethTile would receive some props with the data
              * it needs to render either Choropleth without it caring about
-             * MunicipalityChloropleth or SafetyRegionChloropleth, that data would
+             * MunicipalityChloropleth or VrChloropleth, that data would
              * make the chart and define the tooltip layout for each, but maybe for
              * now that is a bridge too far. Let's take it one step at a time.
              */}
@@ -221,7 +236,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'region' && (
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',
                 }}
@@ -279,6 +294,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     value: 7,
                     label: siteText.common.signaalwaarde,
                   },
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_overall'
+                  ),
                 }}
               />
             )}
@@ -389,7 +408,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'confirmed_cases_infected_percentage_over_time_chart',
                 }}
                 timeframe={timeframe}
-                values={dataGgdValues}
+                values={data.tested_ggd.values}
                 seriesConfig={[
                   {
                     type: 'line',
@@ -408,7 +427,13 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         .infected_percentage,
                   },
                 ]}
-                dataOptions={{ isPercentage: true }}
+                dataOptions={{
+                  isPercentage: true,
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'tested_ggd'
+                  ),
+                }}
               />
             )}
           </ChartTile>
@@ -427,7 +452,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   key: 'confirmed_cases_tested_over_time_chart',
                 }}
                 timeframe={timeframe}
-                values={dataGgdValues}
+                values={data.tested_ggd.values}
                 seriesConfig={[
                   {
                     type: 'line',

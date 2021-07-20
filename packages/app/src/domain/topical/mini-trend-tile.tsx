@@ -17,21 +17,20 @@ type NumberProperty<T extends TimestampedValue> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
 
-export type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> =
-  {
-    /**
-     * The mandatory AccessibilityDefinition provides a reference to annotate the
-     * graph with a label and description.
-     */
-    accessibility: AccessibilityDefinition;
-    icon: JSX.Element;
-    title: string;
-    text: ReactNode;
-    trendData: T[];
-    metricProperty: NumberProperty<T>;
-    href: string;
-    areas?: { header: string; chart: string };
-  };
+type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
+  icon: JSX.Element;
+  title: string;
+  text: ReactNode;
+  trendData: T[];
+  metricProperty: NumberProperty<T>;
+  href: string;
+  areas?: { header: string; chart: string };
+};
 
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>

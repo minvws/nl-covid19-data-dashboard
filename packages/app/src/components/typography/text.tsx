@@ -19,7 +19,7 @@ import {
 } from '~/style/functions/text-transform';
 import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
-export type TextProps = SpaceProps &
+type TextProps = SpaceProps &
   LayoutProps &
   ColorProps &
   PositionProps &

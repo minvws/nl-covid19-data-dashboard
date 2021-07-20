@@ -4,12 +4,16 @@ import {
   DisclosurePanel,
 } from '@reach/disclosure';
 import css from '@styled-system/css';
-import { forwardRef, MouseEvent, useRef, useState } from 'react';
+import { forwardRef, MouseEvent, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { SiteText } from '~/locale';
+import { TableText } from '~/domain/variants/variants-table-tile';
+import { useIntl } from '~/intl';
+import { VariantRow } from '~/static-props/variants/get-variant-table-data';
+import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import {
   Cell,
   HeaderCell,
@@ -18,16 +22,28 @@ import {
   VariantDifference,
   VariantNameCell,
 } from '.';
-import { VariantRow } from '../logic/use-variants-table-data';
+import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
 
 type NarrowVariantsTableProps = {
   rows: VariantRow[];
-  text: SiteText['covid_varianten'];
+  text: TableText;
 };
 
 export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
+  const intl = useIntl();
   const { rows, text } = props;
-  const columnNames = text.varianten_tabel.kolommen;
+  const columnNames = text.kolommen;
+
+  const formatValue = useMemo(() => {
+    const numberOfDecimals = getMaximumNumberOfDecimals(
+      rows.map((x) => x.percentage)
+    );
+    return (value: number) =>
+      intl.formatPercentage(value, {
+        minimumFractionDigits: numberOfDecimals,
+        maximumFractionDigits: numberOfDecimals,
+      });
+  }, [intl, rows]);
 
   return (
     <StyledTable>
@@ -39,7 +55,12 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <MobileVariantRow row={row} text={text} key={row.variant} />
+          <MobileVariantRow
+            row={row}
+            formatValue={formatValue}
+            text={text}
+            key={row.variant}
+          />
         ))}
       </tbody>
     </StyledTable>
@@ -48,14 +69,16 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
 
 type MobileVariantRowProps = {
   row: VariantRow;
-  text: SiteText['covid_varianten'];
+  text: TableText;
+  formatValue: (value: number) => string;
 };
 
 function MobileVariantRow(props: MobileVariantRowProps) {
-  const { row, text } = props;
+  const { row, text, formatValue } = props;
   const [isOpen, setIsOpen] = useState(false);
   const { ref, height: contentHeight } = useResizeObserver();
-  const columnNames = text.varianten_tabel.kolommen;
+
+  const columnNames = text.kolommen;
 
   const chevronRef = useRef<HTMLButtonElement>();
 
@@ -65,14 +88,27 @@ function MobileVariantRow(props: MobileVariantRowProps) {
     }
   }
 
+  const [, variantDescription] = useVariantNameAndDescription(
+    row.variant,
+    text.anderen_tooltip,
+    row.countryOfOrigin
+  );
+
   return (
     <>
-      <tr onClick={handleRowClick}>
-        <VariantNameCell variant={row.variant} text={text} mobile narrow />
+      <tr onClick={handleRowClick} style={{ cursor: 'pointer' }}>
+        <VariantNameCell
+          variant={row.variant}
+          text={text}
+          mobile
+          narrow
+          countryOfOrigin={row.countryOfOrigin}
+        />
         <Cell mobile>
           <PercentageBarWithNumber
             percentage={row.percentage}
             color={row.color}
+            formatValue={formatValue}
           />
         </Cell>
         <Cell mobile alignRight>
@@ -91,16 +127,20 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           <Panel
             style={{
               height: isOpen ? contentHeight : 0,
+              marginBottom: isOpen ? '1rem' : 0,
             }}
           >
             <div ref={ref}>
               <Box mb={1} display="flex" flexDirection="row">
-                <InlineText mr={1}>{columnNames['vorige_meeting']}:</InlineText>
-                <VariantDifference value={row.difference} />
+                <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
+                {isDefined(row.difference) ? (
+                  <VariantDifference value={row.difference} />
+                ) : (
+                  '-'
+                )}
               </Box>
-              <Box>
-                {columnNames['eerst_gevonden']}:{' '}
-                <InlineText>{row.countryOfOrigin}</InlineText>
+              <Box css={css({ color: 'annotation', fontSize: 2, mt: 2 })}>
+                {variantDescription}
               </Box>
             </div>
           </Panel>

@@ -1,13 +1,17 @@
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
+import { withFeatureNotFoundPage } from '~/lib/features';
 import {
   createGetStaticProps,
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
 
-export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
+export const getStaticProps = withFeatureNotFoundPage(
+  'internationalPage',
+  createGetStaticProps(getLastGeneratedDate)
+);
 
 export default function InternationalPage(
   props: StaticProps<typeof getStaticProps>

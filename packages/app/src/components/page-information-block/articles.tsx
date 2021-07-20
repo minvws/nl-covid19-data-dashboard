@@ -46,7 +46,7 @@ interface ArticleItemProps {
   title: string;
 }
 
-export function ArticleItem({ slug, cover, title }: ArticleItemProps) {
+function ArticleItem({ slug, cover, title }: ArticleItemProps) {
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledLink>

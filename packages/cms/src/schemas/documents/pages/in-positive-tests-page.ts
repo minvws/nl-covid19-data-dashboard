@@ -1,3 +1,4 @@
+import { Rule } from '~/sanity';
 import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
 
 export const in_positiveTestsPage = {
@@ -12,7 +13,7 @@ export const in_positiveTestsPage = {
       name: 'pageLinks',
       type: 'array',
       of: [{ type: 'link' }],
-      validation: (Rule: any) => Rule.required().min(1).max(4),
+      validation: (rule: Rule) => rule.required().min(1).max(4),
     },
   ],
 };

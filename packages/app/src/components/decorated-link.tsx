@@ -87,11 +87,7 @@ const StyledCompactDecoratedLink = styled.a(
   })
 );
 
-export const ExpandedDecoratedLink = ({
-  link,
-}: {
-  link: DecoratedLinkDocument;
-}) => {
+function ExpandedDecoratedLink({ link }: { link: DecoratedLinkDocument }) {
   return (
     <Link href={link.href} passHref>
       <StyledExpandedDecoratedLink>
@@ -129,7 +125,7 @@ export const ExpandedDecoratedLink = ({
       </StyledExpandedDecoratedLink>
     </Link>
   );
-};
+}
 
 const StyledExpandedDecoratedLink = styled.a(
   css({
