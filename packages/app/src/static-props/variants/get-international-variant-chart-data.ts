@@ -47,7 +47,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
    * the given VariantChartValue.
    *
    * While doing this it accumulates the total percentage so that after finding the variants of concern
-   * numbers it can add a `other_percentage` property that represents all of the other variants.
+   * numbers it can add an `other_percentage` property that represents all of the other variants.
    *
    */
   const values = completeDateRange.map((partialChartValue) => {
