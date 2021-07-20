@@ -71,7 +71,6 @@ const nextConfig = {
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
       ['balanced-match', '../../node_modules/balanced-match'],
-      ['date-fns', 'node_modules/date-fns'],
     ];
 
     duplicatePackageResolves.forEach(([packageName, resolvedPath]) => {
