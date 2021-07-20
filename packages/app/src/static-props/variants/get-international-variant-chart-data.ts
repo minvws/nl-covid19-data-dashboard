@@ -58,10 +58,12 @@ export function getVariantChartData(variants: InVariants | undefined) {
             x.date_end_unix === partialChartValue.date_end_unix &&
             x.date_start_unix === partialChartValue.date_start_unix
         );
+
         if (otherItem) {
           total += otherItem.percentage;
           item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
         }
+
         return { item, total };
       },
       { item: partialChartValue, total: 0 }
