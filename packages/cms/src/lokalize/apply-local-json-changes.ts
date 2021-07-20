@@ -1,3 +1,4 @@
+import { assert } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import prompts from 'prompts';
 import { getClient } from '../client';
@@ -5,6 +6,7 @@ import {
   appendTextMutation,
   exportLokalizeTexts,
   getLocalMutations,
+  readReferenceTexts,
 } from './logic';
 
 /**
@@ -13,7 +15,14 @@ import {
  * these changes before applying them to the actual Sanity Lokalize documents.
  */
 (async function run() {
-  const mutations = await getLocalMutations();
+  const referenceTexts = await readReferenceTexts();
+
+  assert(
+    referenceTexts,
+    `Failed to read reference texts. Please run lokalize:export first.`
+  );
+
+  const mutations = await getLocalMutations(referenceTexts);
 
   const choices = [
     ...mutations.add.map(

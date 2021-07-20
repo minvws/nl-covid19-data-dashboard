@@ -6,7 +6,7 @@ import { sortBy } from 'lodash';
 import { EOL } from 'os';
 import path from 'path';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
-import { getClient } from '~/client';
+import { getClient } from '../../client';
 import { readLocalTexts, readReferenceTexts } from './files';
 
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
@@ -30,7 +30,11 @@ export type AddMutation = {
   action: 'add';
   timestamp: string;
   key: string;
-  document_id: string;
+  /**
+   * @TODO once the mutation log is cleared and this branch is merged, we can
+   * make document_id required.
+   */
+  document_id?: string;
 };
 
 export type DeleteMutation = {
@@ -187,10 +191,13 @@ export function getCollapsedAddDeleteMutations(
     .map(([key, { weight, timestamp, document_id }]) => {
       switch (true) {
         case weight > 0:
-          assert(
-            document_id,
-            `Trying to collapse to an add mutation without document_id, for key: ${key}`
-          );
+          /**
+           * @TODO enable assertion once the log is cleared and this branch is merged.
+           */
+          // assert(
+          //   document_id,
+          //   `Trying to collapse to an add mutation without document_id, for key: ${key}`
+          // );
           return {
             key,
             action: 'add',
@@ -256,11 +263,12 @@ export function getCollapsedMoveMutations(mutations: TextMutation[]) {
  * that was last exported from Sanity to figure out what mutations have been
  * made.
  */
-export async function getLocalMutations() {
-  const oldTexts = await readReferenceTexts();
+export async function getLocalMutations(
+  referenceTexts: Record<string, string>
+) {
   const newTexts = await readLocalTexts();
   const newTextsWithPlainKeys = removeIdsFromKeys(newTexts);
-  const oldKeys = Object.keys(oldTexts);
+  const oldKeys = Object.keys(referenceTexts);
   const newKeys = Object.keys(newTexts);
 
   const removals = oldKeys

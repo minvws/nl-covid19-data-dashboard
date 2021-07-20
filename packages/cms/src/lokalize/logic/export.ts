@@ -10,14 +10,9 @@ import fs from 'fs-extra';
 import mapValues from 'lodash/mapValues';
 import path from 'path';
 import prettier from 'prettier';
-import { hasValueAtKey } from 'ts-is-present';
-import { getCollapsedAddDeleteMutations, readTextMutations } from '.';
+import { readTextMutations } from '.';
 import { getClient } from '../../client';
-import {
-  getCollapsedMoveMutations,
-  simulateDeleteMutations,
-  simulateMoveMutations,
-} from './mutations';
+import { simulateDeleteMutations, simulateMoveMutations } from './mutations';
 
 export const localeDirectory = path.resolve(
   __dirname,

@@ -3,6 +3,7 @@
  * and strips any keys that have been marked by the key-mutations.csv file as a
  * result of text changes via the CLI.
  */
+import { isEmpty } from 'lodash';
 import meow from 'meow';
 import prompts from 'prompts';
 import { getLocalMutations, readReferenceTexts } from './logic';
@@ -41,23 +42,31 @@ const cli = meow(
 (async function run() {
   const dataset = cli.flags.dataset;
 
-  const mutations = await getLocalMutations();
+  const referenceTexts = await readReferenceTexts();
 
-  if (mutations && !cli.flags.cleanJson) {
-    const response = await prompts([
-      {
-        type: 'confirm',
-        name: 'isConfirmed',
-        message: `
-There are local changes. Are you sure you want to overwrite these with an export?
-${JSON.stringify(mutations, null, 2)}
-`.trim(),
-        initial: false,
-      },
-    ]);
+  if (referenceTexts) {
+    const mutations = await getLocalMutations(referenceTexts);
 
-    if (!response.isConfirmed) {
-      process.exit(0);
+    if (
+      (mutations && !isEmpty(mutations.add)) ||
+      !isEmpty(mutations.delete) ||
+      !isEmpty(mutations.move)
+    ) {
+      const response = await prompts([
+        {
+          type: 'confirm',
+          name: 'isConfirmed',
+          message: `
+  There are local changes. Are you sure you want to overwrite these with an export?
+  ${JSON.stringify(mutations, null, 2)}
+  `.trim(),
+          initial: false,
+        },
+      ]);
+
+      if (!response.isConfirmed) {
+        process.exit(0);
+      }
     }
   }
 

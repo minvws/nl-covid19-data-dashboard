@@ -40,8 +40,6 @@ export async function readReferenceTexts() {
     );
     return flatTexts as Record<string, string>;
   } catch (err) {
-    throw new Error(
-      `Failed to read reference texts from ${referencePath}: ${err.message}. Please run lokalize:export first.`
-    );
+    return;
   }
 }
