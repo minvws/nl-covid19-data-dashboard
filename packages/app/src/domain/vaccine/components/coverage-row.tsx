@@ -42,6 +42,7 @@ function MobileCoverageRow(props: RowProps) {
           display="flex"
           justifyContent="flex-end"
           pr={{ _: 2, xs: 4 }}
+          onClick={() => setIsOpen(!isOpen)}
         >
           {children[1]}
         </Box>
