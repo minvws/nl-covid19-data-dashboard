@@ -7,17 +7,15 @@ const {
 } = require('http-proxy-middleware');
 const dotenv = require('dotenv');
 const path = require('path');
+const { imageResizeTargets } = require('@corona-dashboard/common');
 
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
-const { imageResizeTargets, assert } = require('@corona-dashboard/common');
-const { last } = require('lodash');
-
-const MAX_IMAGE_WIDTH = last(imageResizeTargets);
-assert(
-  MAX_IMAGE_WIDTH > 0,
-  'Failed to get maximum image width from imageResizeTargets'
-);
+const ALLOWED_SENTRY_IMAGE_PARAMS = {
+  w: imageResizeTargets.map((x) => x.toString()),
+  q: ['65'],
+  auto: ['format'],
+};
 
 dotenv.config({
   path: path.resolve(process.cwd(), '.env.local'),
@@ -154,20 +152,21 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
   }
 })();
 
+/**
+ * Filters requests to Sanity image API to prevent unwanted params to be sent along.
+ */
 function filterImageRequests(pathname, req) {
-  /**
-   * Disallow `h` parameter.
-   */
-  if (req.query.h) {
-    return false;
-  }
+  return Object.entries(req.query).every(([key, value]) => {
+    const allowedValues = ALLOWED_SENTRY_IMAGE_PARAMS[key];
 
-  /**
-   * Only allow images using our maximum used dimensions.
-   */
-  if (req.query.w && parseInt(req.query.w, 10) > MAX_IMAGE_WIDTH) {
-    return false;
-  }
+    if (!allowedValues) {
+      return false;
+    }
 
-  return true;
+    if (!allowedValues.includes(value)) {
+      return false;
+    }
+
+    return true;
+  });
 }
