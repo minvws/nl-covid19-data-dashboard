@@ -89,6 +89,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
+    showWeeklyHighlight: boolean;
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
@@ -284,6 +285,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 <HighlightsTile
                   weeklyHighlight={content.weeklyHighlight}
                   highlights={content.highlights}
+                  showWeeklyHighlight={content.showWeeklyHighlight}
                 />
               </Box>
             )}

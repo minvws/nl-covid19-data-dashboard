@@ -1,14 +1,16 @@
+import { TimestampedValue } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { SeriesConfig } from './series';
 import { useFormatSeriesValue } from './use-format-series-value';
-import { TimestampedValue } from '@corona-dashboard/common';
+import { MetricPropertyFormatters } from './use-metric-property-formatters';
 
 export function useValueWidth<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  isPercentage: boolean | undefined
+  isPercentage: boolean | undefined,
+  metricPropertyFormatters: MetricPropertyFormatters<T>
 ) {
-  const formatSeriesValue = useFormatSeriesValue();
+  const formatSeriesValue = useFormatSeriesValue(metricPropertyFormatters);
   const valueMaxWidth = useMemo(() => {
     const valueLengths: number[] = [];
     seriesConfig.forEach((config) => {

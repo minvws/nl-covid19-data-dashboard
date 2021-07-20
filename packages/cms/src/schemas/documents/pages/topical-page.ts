@@ -6,6 +6,11 @@ export const topicalPage = {
   type: 'document',
   fields: [
     {
+      title: 'Laat weekbericht zien',
+      name: 'showWeeklyHighlight',
+      type: 'boolean',
+    },
+    {
       title: 'Uitgelichte items',
       name: 'highlights',
       type: 'array',
@@ -61,7 +66,20 @@ export const topicalPage = {
           ],
         },
       ],
-      validation: (rule: Rule) => rule.required().unique().length(2),
+      validation: (Rule: any) => [
+        Rule.custom((value: any, context: any) => {
+          if (context.document.showWeeklyHighlight) {
+            return value.length === 2
+              ? true
+              : 'Als er een weekbericht geselecteerd is moeten er 2 uitgelichte items toegevoegd zijn.';
+          } else {
+            return value.length === 3
+              ? true
+              : 'Als er geen weekbericht geselecteerd is moeten er 3 uitgelichte items toegevoegd zijn.';
+          }
+        }).warning(),
+        Rule.required().unique().min(2).max(3),
+      ],
     },
     {
       title: 'empty-for-toggle',

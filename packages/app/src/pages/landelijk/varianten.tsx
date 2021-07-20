@@ -182,14 +182,18 @@ export default function CovidVariantenPage(
             <ChartTile
               title={text.varianten_over_tijd.titel}
               description={text.varianten_over_tijd.beschrijving}
+              timeframeOptions={['all', '5weeks']}
               metadata={{
                 source: text.bronnen.rivm,
               }}
             >
-              <VariantsOverTime
-                values={variantChart}
-                seriesConfig={seriesConfig}
-              />
+              {(timeframe) => (
+                <VariantsOverTime
+                  values={variantChart}
+                  seriesConfig={seriesConfig}
+                  timeframe={timeframe}
+                />
+              )}
             </ChartTile>
           )}
         </TileList>

@@ -141,6 +141,7 @@ function TableRow({ item, highestAverage, countryNames }: tableRowProps) {
             src={`/icons/flags/${item.country_code.toLowerCase()}.svg`}
             width="17"
             height="13"
+            alt=""
             css={css({
               mr: 2,
             })}

@@ -75,7 +75,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
               metadata={{
                 date: lastFilledValue.date_unix,
                 source: text.bronnen.rivm,
-                obtained: lastFilledValue.date_of_insertion_unix,
+                obtainedAt: lastFilledValue.date_of_insertion_unix,
               }}
               illustration={{
                 image: '/images/reproductie-explainer.svg',
