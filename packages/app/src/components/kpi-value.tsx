@@ -62,7 +62,7 @@ export function KpiValue({
     <Box mb={3}>
       {isDefined(percentage) && isDefined(absolute) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}as
+          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
         </StyledValue>
       ) : isDefined(percentage) ? (
         <StyledValue color={color} {...otherProps}>
