@@ -47,5 +47,3 @@ timestamp,action,key
 2021-07-15T11:33:00.636Z,add,contact_metadata.title
 2021-07-15T11:33:53.558Z,add,contact_metadata.url
 2021-07-15T11:47:23.771Z,add,nav.links.contact
-2021-07-15T11:51:52.422Z,delete,nav.contact
-2021-07-15T11:51:52.426Z,delete,nav.contact_beschrijving
