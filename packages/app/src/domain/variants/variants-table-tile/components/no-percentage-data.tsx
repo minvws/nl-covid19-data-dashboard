@@ -1,5 +1,4 @@
 import { InlineTooltip } from '~/components/inline-tooltip';
-import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 
 export function NoPercentageData() {
@@ -7,10 +6,12 @@ export function NoPercentageData() {
   const text = siteText.internationaal_varianten;
 
   return (
-    <InlineTooltip content={text.geen_percentage_cijfer_tooltip}>
-      <InlineText color="bodyLight" fontSize={1}>
-        {text.geen_percentage_cijfer}
-      </InlineText>
+    <InlineTooltip
+      content={text.geen_percentage_cijfer_tooltip}
+      color="bodyLight"
+      fontSize={1}
+    >
+      {text.geen_percentage_cijfer}
     </InlineTooltip>
   );
 }
