@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import WarningIcon from '~/assets/warning.svg';
 import { WithTooltip } from '~/lib/tooltip';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { Box } from './base';
 import { Markdown } from './markdown';
 
@@ -28,20 +27,12 @@ export function WarningTile({
 }: WarningMessageProps) {
   const Icon = icon;
 
-  const breakpoints = useBreakpoints();
-
-  const isSmallScreen = !breakpoints.md;
-
   return (
     <StyledArticle isFullWidth={isFullWidth}>
       <WarningBox variant={variant}>
-        {isSmallScreen ? (
-          <Box width="6px" />
-        ) : (
-          <IconWrapper>
-            <Icon />
-          </IconWrapper>
-        )}
+        <IconWrapper>
+          <Icon />
+        </IconWrapper>
       </WarningBox>
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
