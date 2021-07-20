@@ -44,9 +44,12 @@ export const getStaticProps = createGetStaticProps(
       'static-json'
     );
     const { internationalData } = getInData([...countryCodes])();
-    const countryOptions = countryCodes.map<{ value: string; label: string }>(
-      (x) => ({ value: x, label: countryNames[x] })
-    );
+    const countryOptions = countryCodes
+      .map<{ value: string; label: string }>((x) => ({
+        value: x,
+        label: countryNames[x],
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
 
     return {
       countryOptions,
