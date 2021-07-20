@@ -73,3 +73,5 @@ timestamp,action,key,document_id,move_to
 2021-07-16T19:48:11.631Z,add,internationaal_varianten.lagere_betrouwbaarheid_uitleg
 2021-07-20T19:02:52.275Z,move,__root.article_strip_title,jF33EuwumlGuwav2FD4Ffo,article_strip.title
 2021-07-20T19:16:17.583Z,move,article_strip.title,jF33EuwumlGuwav2FD4Ffo,article_strip_wut.title
+2021-07-20T19:30:00.772Z,move,article_strip_wut.title,jF33EuwumlGuwav2FD4Ffo,article_strip.title
+2021-07-20T19:31:18.089Z,add,article_strip.new_test_property,kt2ppSPvrPFKtGfS5bNmTZ,__
