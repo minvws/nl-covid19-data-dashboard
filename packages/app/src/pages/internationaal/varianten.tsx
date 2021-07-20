@@ -185,7 +185,6 @@ export default function VariantenPage(
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
-                placeholder={text.selecteer_een_land}
               />
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
                 <Box ml={{ _: 0, md: 3 }} mt={{ _: 3, md: 0 }}>
@@ -211,7 +210,6 @@ export default function VariantenPage(
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
-                placeholder={text.selecteer_een_land}
               />
             </Box>
           </VariantsStackedAreaTile>

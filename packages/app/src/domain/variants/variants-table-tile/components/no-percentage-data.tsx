@@ -8,7 +8,9 @@ export function NoPercentageData() {
 
   return (
     <InlineTooltip content={text.geen_percentage_cijfer_tooltip}>
-      <InlineText color="bodyLight">{text.geen_percentage_cijfer}</InlineText>
+      <InlineText color="bodyLight" fontSize={1}>
+        {text.geen_percentage_cijfer}
+      </InlineText>
     </InlineTooltip>
   );
 }
