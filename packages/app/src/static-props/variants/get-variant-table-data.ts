@@ -1,8 +1,8 @@
 import {
   assert,
   Dictionary,
-  DifferenceDecimal,
   InNamedDifference,
+  InNamedDifferenceDecimal,
   InVariants,
   InVariantsVariant,
   InVariantsVariantValue,
@@ -20,7 +20,7 @@ export type VariantRow = {
   variant: string;
   countryOfOrigin: string;
   percentage: number | null;
-  difference?: DifferenceDecimal;
+  difference?: InNamedDifferenceDecimal;
   color: string;
 };
 

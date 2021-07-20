@@ -154,12 +154,12 @@ export interface In {
   variants?: InVariants;
 }
 export interface InNamedDifference {
-  variants__percentage?: NamedDifferenceDecimal[];
+  variants__percentage?: InNamedDifferenceDecimal[];
 }
-export interface NamedDifferenceDecimal {
+export interface InNamedDifferenceDecimal {
   name: string;
-  old_value: number;
-  difference: number;
+  old_value: number | null;
+  difference: number | null;
   old_date_unix: number;
   new_date_unix: number;
 }

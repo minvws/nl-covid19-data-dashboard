@@ -128,8 +128,9 @@ const Content = styled.div<{
       },
     },
     '& *': {
-      borderBottom: hasTooltip ? '1px dashed' : undefined,
-      borderBottomColor: 'tooltipIndicator',
+      textUnderlineOffset: hasTooltip ? '0.3em' : undefined,
+      textDecorationLine: hasTooltip ? 'underline' : undefined,
+      textDecorationStyle: hasTooltip ? 'dotted' : undefined,
     },
   });
 });
