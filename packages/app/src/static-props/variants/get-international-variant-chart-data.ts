@@ -25,23 +25,38 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  // The different historical value lists are of different lengths,
-  // so here we create a start to end range based on all of them:
-  const completeDateRange = createCompleteDateRange(variants.values);
+  const completeDateRange = getCompleteDateRange(variants.values);
+
+  if (!completeDateRange.length) {
+    return EMPTY_VALUES;
+  }
 
   const variantsOfConcern = variants.values.filter(
     (x) => last(x.values)?.is_variant_of_concern
   );
 
-  if (!isDefined(completeDateRange)) {
+  if (!variantsOfConcern.length) {
     return EMPTY_VALUES;
   }
 
-  const values = completeDateRange.map<VariantChartValue>((partialItem) => {
+  /**
+   * Here it loops through the entire date range list (a VariantChartValue array) and per start/end date
+   * it looks up a variant of concern item that matches the given dates.
+   *
+   * If it exists, it adds a property called `<variant-name>_percentage` to
+   * the given VariantChartValue.
+   *
+   * While doing this it accumulates the total percentage so that after finding the variants of concern
+   * numbers it can add a `other_percentage` property that represents all of the other variants.
+   *
+   */
+  const values = completeDateRange.map((partialChartValue) => {
     const { item, total } = variantsOfConcern.reduce(
       ({ item, total }, variantOfConcern) => {
         const otherItem = variantOfConcern.values.find(
-          (x) => x.date_end_unix === partialItem.date_end_unix
+          (x) =>
+            x.date_end_unix === partialChartValue.date_end_unix &&
+            x.date_start_unix === partialChartValue.date_start_unix
         );
         if (otherItem) {
           total += otherItem.percentage;
@@ -49,7 +64,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
         }
         return { item, total };
       },
-      { item: partialItem, total: 0 }
+      { item: partialChartValue, total: 0 }
     );
 
     item.other_percentage = Math.round((100 - total) * 100) / 100; //Round to maximum of 2 decimals
@@ -62,21 +77,28 @@ export function getVariantChartData(variants: InVariants | undefined) {
   } as const;
 }
 
-function createCompleteDateRange(lists: InVariantsVariant[]) {
+/**
+ * The different historical value lists are of different lengths,
+ * so here we create a start to end range based on all of them.
+ *
+ * First it creates a flatmap of all the start and end dates,
+ * which is then de-duped and finally re-sorted by end date.
+ *
+ */
+function getCompleteDateRange(lists: InVariantsVariant[]) {
   return lists
     .flatMap((x) => x.values)
     .map<VariantChartValue>((x) => ({
       date_start_unix: x.date_start_unix,
       date_end_unix: x.date_end_unix,
-      sample_size: x.sample_size,
     }))
     .filter(
-      (x, i, arr) =>
-        arr.findIndex(
+      ({ date_start_unix, date_end_unix }, index, array) =>
+        array.findIndex(
           (y) =>
-            y.date_end_unix === x.date_end_unix &&
-            y.date_start_unix === x.date_start_unix
-        ) === i
+            y.date_end_unix === date_end_unix &&
+            y.date_start_unix === date_start_unix
+        ) === index
     )
     .sort((a, b) => a.date_end_unix - b.date_end_unix);
 }
