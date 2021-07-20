@@ -96,7 +96,11 @@ import {
   }
 
   console.log('Updating text export...');
-  await exportLokalizeTexts();
+
+  await exportLokalizeTexts({
+    dataset: 'development',
+    appendDocumentIdToKey: true,
+  });
 
   console.log(
     'Successfully applied the following mutations:\n',

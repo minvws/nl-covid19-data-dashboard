@@ -7,7 +7,7 @@ import { EOL } from 'os';
 import path from 'path';
 import { hasValueAtKey, isDefined } from 'ts-is-present';
 import { getClient } from '../../client';
-import { readLocalTexts, readReferenceTexts } from './files';
+import { readLocalTexts } from './files';
 
 const MUTATIONS_LOG_FILE = path.join(__dirname, '../key-mutations.csv');
 

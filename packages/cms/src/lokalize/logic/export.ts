@@ -31,21 +31,20 @@ export const localeReferenceDirectory = path.resolve(
   '.lokalize-reference'
 );
 
-/**
- * Make sure the cache directory exists
- */
-fs.ensureDirSync(localeReferenceDirectory);
-
-/**
- * @TODO:
- * - remove add / delete cli
- */
-
-export async function exportLokalizeTexts(
-  dataset?: string,
+export async function exportLokalizeTexts({
+  dataset,
   includeDrafts = false,
-  appendDocumentIdToKey = false
-) {
+  appendDocumentIdToKey = false,
+}: {
+  dataset?: string;
+  includeDrafts?: boolean;
+  appendDocumentIdToKey?: boolean;
+}) {
+  /**
+   * Make sure the reference directory exists
+   */
+  fs.ensureDirSync(localeReferenceDirectory);
+
   const client = getClient(dataset);
   /**
    * The client will load drafts by default because it is authenticated with a

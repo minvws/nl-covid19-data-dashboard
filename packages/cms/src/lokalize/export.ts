@@ -70,7 +70,11 @@ const cli = meow(
     }
   }
 
-  await exportLokalizeTexts(dataset, cli.flags.drafts, !cli.flags.cleanJson);
+  await exportLokalizeTexts({
+    dataset,
+    includeDrafts: cli.flags.drafts,
+    appendDocumentIdToKey: !cli.flags.cleanJson,
+  });
 
   console.log(`Export dataset "${dataset}" completed`);
 })().catch((err) => {
