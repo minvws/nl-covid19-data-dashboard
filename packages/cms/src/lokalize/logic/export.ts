@@ -119,9 +119,11 @@ export async function generateTypes() {
 
   const textsObject = unflatten(textsFlat, { object: true });
 
-  const textsTypeString = JSON.stringify(textsObject, null, 2)
-    .replace(/\"\@string\"/g, 'string')
-    .replace(/\"/g, '');
+  const textsTypeString = JSON.stringify(textsObject, null, 2).replace(
+    /\"\@string\"/g,
+    'string'
+  );
+  // .replace(/\"/g, '');
 
   const body = `export interface SiteText ${textsTypeString}`;
 

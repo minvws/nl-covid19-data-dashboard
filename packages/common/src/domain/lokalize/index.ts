@@ -76,6 +76,6 @@ export function parseLocaleTextDocument(
   return { jsonKey, localeText: { nl, en } };
 }
 
-export function removeIdsFromKeys(data: Record<string, string>) {
+export function removeIdsFromKeys(data: Record<string, unknown>) {
   return mapKeys(data, (_value, key) => key.split(ID_PREFIX)[0]);
 }

@@ -14,6 +14,6 @@ export type { SiteText } from './site-text';
 export type Languages = typeof languages;
 export type LanguageKey = keyof Languages;
 
-function cleanRaw<T>(obj: unknown) {
-  return (hasIdsInKeys ? removeIdsFromKeys(obj) : obj) as T;
+function cleanRaw<T>(obj: Record<string, unknown>) {
+  return (hasIdsInKeys ? removeIdsFromKeys(obj) : obj) as unknown as T;
 }
