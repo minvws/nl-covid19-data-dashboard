@@ -26,7 +26,7 @@ export function Header({
   const isMediumScreen = breakpoints.md;
 
   return (
-    <Box>
+    <Box pl={{ _: 3, sm: 4, md: 0 }}>
       {!isMediumScreen && <Icon size={ICON_SIZE}>{icon}</Icon>}
       {category && (
         <Heading

@@ -43,33 +43,25 @@ export function PageInformationBlock({
   screenReaderCategory,
   hasExtraMarginTop,
 }: InformationBlockProps) {
-  const MetaDataBlock = (
-    <>
-      {metadata && (
-        <MetadataBox>
-          <Metadata
-            {...metadata}
-            accessibilitySubject={title}
-            referenceLink={referenceLink}
-          />
-        </MetadataBox>
-      )}
-    </>
-  );
+  const MetaDataBlock = metadata ? (
+    <MetadataBox>
+      <Metadata
+        {...metadata}
+        accessibilitySubject={title}
+        referenceLink={referenceLink}
+      />
+    </MetadataBox>
+  ) : null;
 
-  const DescriptionBlock = (
-    <>
-      {description && (
-        <Box maxWidth="maxWidthText">
-          {typeof description === 'string' ? (
-            <Text mb={0}>{description}</Text>
-          ) : (
-            <RichContent blocks={description} />
-          )}
-        </Box>
+  const DescriptionBlock = description ? (
+    <Box maxWidth="maxWidthText">
+      {typeof description === 'string' ? (
+        <Text mb={0}>{description}</Text>
+      ) : (
+        <RichContent blocks={description} />
       )}
-    </>
-  );
+    </Box>
+  ) : null;
 
   return (
     <Box
