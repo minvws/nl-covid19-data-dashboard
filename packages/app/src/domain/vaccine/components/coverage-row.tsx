@@ -34,12 +34,7 @@ function MobileCoverageRow(props: RowProps) {
   const children = React.Children.toArray(props.children);
 
   return (
-    <Row
-      width="100%"
-      display="flex"
-      flexDirection="column"
-      onClick={() => setIsOpen(!isOpen)}
-    >
+    <Row width="100%" display="flex" flexDirection="column">
       <Box display="flex">
         <Box flex={1}>{children[0]}</Box>
         <Box
@@ -47,6 +42,7 @@ function MobileCoverageRow(props: RowProps) {
           display="flex"
           justifyContent="flex-end"
           pr={{ _: 2, xs: 4 }}
+          onClick={() => setIsOpen(!isOpen)}
         >
           {children[1]}
         </Box>
