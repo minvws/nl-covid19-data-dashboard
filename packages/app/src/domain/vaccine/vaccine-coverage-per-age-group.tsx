@@ -2,7 +2,9 @@ import {
   assert,
   NlVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { Fragment } from 'react';
 import { Box } from '~/components/base';
+import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -40,7 +42,8 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
 
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const { headers } = siteText.vaccinaties.vaccination_coverage;
-  const { templates } = siteText.vaccinaties.vaccination_coverage;
+  const { templates, age_group_tooltips } =
+    siteText.vaccinaties.vaccination_coverage;
 
   return (
     <Box display="flex" flexDirection="column">
@@ -57,7 +60,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
         )
         .map((value, index) => {
           return (
-            <>
+            <Fragment key={index}>
               {index === values.length - 2 ? <Box pt={4} /> : null}
               <CoverageRow key={value.age_group_range}>
                 <AgeGroup
@@ -71,6 +74,11 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
                       total: formatNumber(value.age_group_total),
                     }
                   )}
+                  tooltipText={
+                    (age_group_tooltips as Record<string, string>)[
+                      value.age_group_range
+                    ]
+                  }
                 />
                 <VaccinationCoveragePercentage
                   value={`${formatPercentage(
@@ -89,7 +97,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
                   total={value.age_group_total}
                 />
               </CoverageRow>
-            </>
+            </Fragment>
           );
         })}
     </Box>
@@ -157,12 +165,28 @@ function VaccinationCoveragePercentage({ value }: { value: string }) {
   );
 }
 
-function AgeGroup({ range, total }: { range: string; total: string }) {
+function AgeGroup({
+  range,
+  total,
+  tooltipText,
+}: {
+  range: string;
+  total: string;
+  tooltipText?: string;
+}) {
   return (
     <Box display="flex" flexDirection="column">
-      <InlineText fontWeight="bold" fontSize={2}>
-        {range}
-      </InlineText>
+      {tooltipText ? (
+        <InlineTooltip content={tooltipText}>
+          <InlineText fontWeight="bold" fontSize={2}>
+            {range}
+          </InlineText>
+        </InlineTooltip>
+      ) : (
+        <InlineText fontWeight="bold" fontSize={2}>
+          {range}
+        </InlineText>
+      )}
       <Box as="span" fontSize={1}>
         <InlineText>{total}</InlineText>
       </Box>

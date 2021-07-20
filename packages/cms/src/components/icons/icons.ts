@@ -14,6 +14,7 @@ import bibliotheken from './assets/restrictions/bibliotheken.svg';
 import binnensporten from './assets/restrictions/binnensporten.svg';
 import ContactBeroepen from './assets/restrictions/contactberoepen.svg';
 import eenPersoonDoorgestreept from './assets/restrictions/een-persoon-doorgestreept.svg';
+import frisse_lucht from './assets/restrictions/frisse_lucht.svg';
 import gedeeltelijkOpenRugzak from './assets/restrictions/gedeeltelijk-open-rugzak.svg';
 import geen_entertainment from './assets/restrictions/geen-entertainment.svg';
 import geenWedstrijden from './assets/restrictions/geen-wedstrijden.svg';
@@ -151,4 +152,5 @@ export const restrictionIcons = {
   toegangsbewijzen,
   klok_2100,
   geen_entertainment,
+  frisse_lucht,
 } as const;

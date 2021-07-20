@@ -178,6 +178,25 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
+          {vaccinationPerAgeGroupFeature.isEnabled &&
+          vaccine_coverage_per_age_group ? (
+            <ChartTile
+              title={siteText.vaccinaties.vaccination_coverage.title}
+              description={
+                siteText.vaccinaties.vaccination_coverage.toelichting
+              }
+              metadata={{
+                datumsText: text.datums,
+                date: vaccine_coverage_per_age_group.values[0].date_unix,
+                source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+              }}
+            >
+              <VaccineCoveragePerAgeGroup
+                values={vaccine_coverage_per_age_group.values}
+              />
+            </ChartTile>
+          ) : null}
+
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
           />
@@ -190,26 +209,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           <VaccineAdministrationsKpiSection data={data} />
-
-          {vaccinationPerAgeGroupFeature.isEnabled &&
-          vaccine_coverage_per_age_group ? (
-            <ChartTile
-              title={siteText.vaccinaties.vaccination_coverage.title}
-              description={
-                siteText.vaccinaties.vaccination_coverage.toelichting
-              }
-              metadata={{
-                datumsText: text.datums,
-                date: vaccine_coverage_per_age_group.last_value
-                  ?.date_of_report_unix,
-                source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
-              }}
-            >
-              <VaccineCoveragePerAgeGroup
-                values={vaccine_coverage_per_age_group.values}
-              />
-            </ChartTile>
-          ) : null}
 
           <ContentHeader
             title={text.bereidheid_section.title}

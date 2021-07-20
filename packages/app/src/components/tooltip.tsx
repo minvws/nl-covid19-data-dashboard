@@ -38,8 +38,10 @@ interface UseTooltipStateArguments<T> {
   getTooltipCoordinates: GetTooltipCoordinates<T>;
 }
 
-// getTooltipCoordinates is provided by the spcific graph to retrieve the coordinates based on
-// the mouse event and/or the value
+/**
+ * getTooltipCoordinates is provided by the specific graph to retrieve the
+ * coordinates based on the mouse event and/or the value.
+ */
 export function useTooltip<T>({
   values,
   getTooltipCoordinates,
