@@ -3,6 +3,7 @@ import Arts from '~/assets/arts.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -33,6 +34,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -51,7 +53,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage } = useIntl();
 
   const text = siteText.ic_opnames_per_dag;
 
@@ -120,16 +122,27 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             >
               {bedsLastValue.beds_occupied_covid !== null &&
                 bedsLastValue.beds_occupied_covid_percentage !== null && (
-                  <KpiValue
-                    data-cy="beds_occupied_covid"
-                    absolute={bedsLastValue.beds_occupied_covid}
-                    percentage={bedsLastValue.beds_occupied_covid_percentage}
-                    difference={
-                      data.difference.intensive_care_lcps__beds_occupied_covid
-                    }
-                  />
+                  <>
+                    <KpiValue
+                      data-cy="beds_occupied_covid"
+                      absolute={bedsLastValue.beds_occupied_covid}
+                      difference={
+                        data.difference.intensive_care_lcps__beds_occupied_covid
+                      }
+                    />
+
+                    <Markdown
+                      content={replaceVariablesInText(
+                        text.kpi_bedbezetting.description,
+                        {
+                          percentage: formatPercentage(
+                            bedsLastValue.beds_occupied_covid_percentage
+                          ),
+                        }
+                      )}
+                    />
+                  </>
                 )}
-              <Text>{text.kpi_bedbezetting.description}</Text>
             </KpiTile>
           </TwoKpiSection>
 
