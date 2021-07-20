@@ -366,8 +366,7 @@ export async function finalizeMoveMutations(
     }
   }
 
-  console.log(`${dataset} TRANSACTION`, transaction.serialize());
-  // await transaction.commit(); @TODO enable
+  await transaction.commit();
 }
 
 export function simulateDeleteMutations(

@@ -128,8 +128,7 @@ async function syncAdditionsToProduction(mutations: AddMutation[]) {
     }
   }
 
-  console.log('PRD_TRANSACTION', prdTransaction.serialize());
-  // await prdTransaction.commit(); @TODO enable
+  await prdTransaction.commit();
 
   if (failureCount === 0) {
     console.log(
@@ -176,8 +175,7 @@ async function applyDeletionsToDevelopment(deletions: DeleteMutation[]) {
 
   documentIdsToDelete.forEach((x) => devTransaction.delete(x));
 
-  console.log('DEV_TRANSACTION', devTransaction.serialize());
-  // await devTransaction.commit(); @TODO enable
+  await devTransaction.commit();
 
   console.log(
     `Deleted ${documentIdsToDelete.length} text documents (including draft versions)`
