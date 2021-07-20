@@ -76,8 +76,10 @@ export function getVariantTableData(
   const inVariants = variants.values
     .map((x) => x.last_value)
     .filter(isInVariant);
-  // Only international data has the is_reliable key,
-  // so for national data we assume it is reliable by default.
+  /**
+   * Only international data has the is_reliable key,
+   * so for national data we assume it is reliable by default.
+   */
   const isReliable = inVariants.length
     ? inVariants.some((x) => x.is_reliable)
     : true;

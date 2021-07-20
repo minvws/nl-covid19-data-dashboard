@@ -46,13 +46,13 @@ export function WarningTile({
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
           <WithTooltip content={tooltipText}>
-            <Children
+            <Content
               variant={variant}
               tabIndex={0}
               hasTooltip={isDefined(tooltipText)}
             >
               <Markdown content={message} />
-            </Children>
+            </Content>
           </WithTooltip>
         ) : (
           <Box spacing={3} fontSize="1.25rem" fontWeight="bold">
@@ -119,7 +119,7 @@ const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
   }
 );
 
-const Children = styled.div<{
+const Content = styled.div<{
   variant: WarningMessageVariant;
   hasTooltip: boolean;
 }>(({ variant, hasTooltip }) => {
@@ -137,7 +137,8 @@ const Children = styled.div<{
       },
     },
     '& *': {
-      borderBottom: hasTooltip ? '1px dashed black' : undefined,
+      borderBottom: hasTooltip ? '1px dashed' : undefined,
+      borderBottomColor: 'tooltipIndicator',
     },
   });
 });
