@@ -65,3 +65,5 @@ timestamp,action,key
 2021-07-19T15:08:53.812Z,add,vaccinaties.vaccination_coverage.age_group_tooltips.12+
 2021-07-19T08:39:35.072Z,add,internationaal_positief_geteste_personen.informatie_tegel
 2021-07-19T08:39:36.091Z,add,internationaal_varianten.informatie_tegel
+2021-07-16T19:48:10.617Z,add,internationaal_varianten.lagere_betrouwbaarheid
+2021-07-16T19:48:11.631Z,add,internationaal_varianten.lagere_betrouwbaarheid_uitleg
