@@ -178,19 +178,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <VaccineDeliveryAndAdministrationsAreaChart
-            data={deliveryAndAdministration}
-          />
-
-          <MilestonesView
-            title={page.title}
-            description={page.description}
-            milestones={page.milestones}
-            expectedMilestones={page.expectedMilestones}
-          />
-
-          <VaccineAdministrationsKpiSection data={data} />
-
           {vaccinationPerAgeGroupFeature.isEnabled &&
           vaccine_coverage_per_age_group ? (
             <ChartTile
@@ -209,6 +196,19 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           ) : null}
+
+          <VaccineDeliveryAndAdministrationsAreaChart
+            data={deliveryAndAdministration}
+          />
+
+          <MilestonesView
+            title={page.title}
+            description={page.description}
+            milestones={page.milestones}
+            expectedMilestones={page.expectedMilestones}
+          />
+
+          <VaccineAdministrationsKpiSection data={data} />
 
           <ContentHeader
             title={text.bereidheid_section.title}

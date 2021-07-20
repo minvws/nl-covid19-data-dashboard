@@ -121,6 +121,7 @@ export const colors = {
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',
   cerulean: '#0390D6',
+  tooltipIndicator: '#000000',
 
   data: {
     primary: '#007BC7',
