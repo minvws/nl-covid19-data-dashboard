@@ -144,7 +144,7 @@ export function VaccinePageIntroduction({
         </Box>
       </Tile>
 
-      <TwoKpiSection>
+      <TwoKpiSection spacing={4}>
         <Box>
           <Heading level={3}>{pageInfo.title}</Heading>
           <Tile>
