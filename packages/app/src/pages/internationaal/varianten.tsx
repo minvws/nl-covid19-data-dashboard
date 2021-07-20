@@ -140,12 +140,6 @@ export default function VariantenPage(
     ]
   );
 
-  const onClear = useCallback(() => {
-    setSelectedCountryCode(undefined);
-    setTableData(undefined);
-    setChartData(undefined);
-  }, [setSelectedCountryCode, setTableData, setChartData]);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -186,7 +180,6 @@ export default function VariantenPage(
               <Select
                 options={countryOptions}
                 onChange={onChange}
-                onClear={onClear}
                 value={selectedCountryCode}
                 placeholder={text.selecteer_een_land}
               />
@@ -209,11 +202,10 @@ export default function VariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
           >
-            <Box alignSelf="flex-start" my={3}>
+            <Box alignSelf="flex-start" mt={1} mb={2}>
               <Select
                 options={countryOptions}
                 onChange={onChange}
-                onClear={onClear}
                 value={selectedCountryCode}
                 placeholder={text.selecteer_een_land}
               />

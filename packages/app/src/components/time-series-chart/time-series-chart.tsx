@@ -488,7 +488,6 @@ export function TimeSeriesChart<
               title={tooltipTitle}
               data={tooltipData}
               left={tooltipLeft}
-              top={tooltipTop}
               formatTooltip={formatTooltip}
               bounds={bounds}
               padding={padding}
