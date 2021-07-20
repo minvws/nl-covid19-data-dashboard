@@ -115,13 +115,15 @@ export async function generateTypes() {
     )
   ) as Record<string, string>;
 
-  const siteTextObj = removeIdsFromKeys(mapValues(data, () => '@string'));
-  const siteTextString = JSON.stringify(siteTextObj, null, 2).replace(
-    /\"\@string\"/g,
-    'string'
-  );
+  const textsFlat = removeIdsFromKeys(mapValues(data, () => '@string'));
 
-  const body = `export interface SiteText ${siteTextString}`;
+  const textsObject = unflatten(textsFlat, { object: true });
+
+  const textsTypeString = JSON.stringify(textsObject, null, 2)
+    .replace(/\"\@string\"/g, 'string')
+    .replace(/\"/g, '');
+
+  const body = `export interface SiteText ${textsTypeString}`;
 
   return new Promise<void>((resolve, reject) =>
     fs.writeFile(
