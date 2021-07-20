@@ -91,11 +91,15 @@ export default function VariantenPage(
     variantChartData,
     countryOptions,
   } = props;
-  const [tableData, setTableData] = useState<VariantTableData | undefined>();
-  const [chartData, setChartData] = useState<VariantChartData | undefined>();
-  const [selectedCountryCode, setSelectedCountryCode] = useState<
-    string | undefined
-  >();
+  const defaultCountryCode = countryOptions[0].value;
+  const [tableData, setTableData] = useState<VariantTableData>(
+    variantTableData[defaultCountryCode]
+  );
+  const [chartData, setChartData] = useState<VariantChartData>(
+    variantChartData[defaultCountryCode]
+  );
+  const [selectedCountryCode, setSelectedCountryCode] =
+    useState<string>(defaultCountryCode);
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_varianten;
@@ -136,12 +140,6 @@ export default function VariantenPage(
     ]
   );
 
-  const onClear = useCallback(() => {
-    setSelectedCountryCode(undefined);
-    setTableData(undefined);
-    setChartData(undefined);
-  }, [setSelectedCountryCode, setTableData, setChartData]);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -151,9 +149,12 @@ export default function VariantenPage(
             icon={<Getest />}
             description={text.pagina_toelichting}
             metadata={{
-              // @TODO use correct dates
-              dateOrRange: { start: -999999999999, end: -99999999999 },
-              dateOfInsertionUnix: -999999999999,
+              dateOrRange: {
+                start: tableData?.dates?.date_start_unix ?? 0,
+                end: tableData?.dates?.date_end_unix ?? 0,
+              },
+              dateOfInsertionUnix:
+                tableData?.dates?.date_of_insertion_unix ?? 0,
 
               datumsText: text.datums,
               dataSources: [text.bronnen.rivm],
@@ -175,14 +176,13 @@ export default function VariantenPage(
           >
             <Box
               alignSelf="flex-start"
-              my={3}
+              mt={3}
               display="flex"
               alignItems="center"
             >
               <Select
                 options={countryOptions}
                 onChange={onChange}
-                onClear={onClear}
                 value={selectedCountryCode}
                 placeholder={text.selecteer_een_land}
               />
@@ -205,11 +205,10 @@ export default function VariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
           >
-            <Box alignSelf="flex-start" my={3}>
+            <Box alignSelf="flex-start" mt={1} mb={2}>
               <Select
                 options={countryOptions}
                 onChange={onChange}
-                onClear={onClear}
                 value={selectedCountryCode}
                 placeholder={text.selecteer_een_land}
               />

@@ -41,10 +41,7 @@ export function TooltipWrapper({
   const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
-  /**
-   * nudge the top to render the tooltip a little bit on top of the chart
-   */
-  const targetY = -height + 8;
+  const targetY = -height;
   const targetX = left + padding.left;
 
   const maxWidth = Math.min(
