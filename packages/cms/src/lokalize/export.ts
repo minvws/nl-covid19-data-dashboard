@@ -5,6 +5,7 @@
  */
 import { isEmpty } from 'lodash';
 import meow from 'meow';
+import { outdent } from 'outdent';
 import prompts from 'prompts';
 import { getLocalMutations, readReferenceTexts } from './logic';
 import { exportLokalizeTexts } from './logic/export';
@@ -56,10 +57,11 @@ const cli = meow(
         {
           type: 'confirm',
           name: 'isConfirmed',
-          message: `
-  There are local changes. Are you sure you want to overwrite these with an export?
-  ${JSON.stringify(mutations, null, 2)}
-  `.trim(),
+          message: outdent`
+            There are local changes. Are you sure you want to overwrite these with an export?
+
+            ${JSON.stringify(mutations, null, 2)}
+          `,
           initial: false,
         },
       ]);

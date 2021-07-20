@@ -7,6 +7,7 @@ import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { createFlatTexts, removeIdsFromKeys } from '@corona-dashboard/common';
 import flatten, { unflatten } from 'flat';
 import fs from 'fs-extra';
+import JsonToTS from 'json-to-ts';
 import mapValues from 'lodash/mapValues';
 import path from 'path';
 import prettier from 'prettier';
@@ -123,9 +124,20 @@ export async function generateTypes() {
     /\"\@string\"/g,
     'string'
   );
-  // .replace(/\"/g, '');
 
   const body = `export interface SiteText ${textsTypeString}`;
+
+  /**
+   * The above seems to work but doesn't output real Typscript syntax. Maybe we
+   * can use something that generates actual TS interfaces. Attempt below...
+   */
+  // let string = '';
+
+  // JsonToTS(textsObject).forEach((typeInterface) => {
+  //   string += typeInterface;
+  // });
+
+  // const body = `export interface SiteText ${string}`;
 
   return new Promise<void>((resolve, reject) =>
     fs.writeFile(

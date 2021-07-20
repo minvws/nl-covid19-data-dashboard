@@ -15,5 +15,9 @@ export type Languages = typeof languages;
 export type LanguageKey = keyof Languages;
 
 function cleanRaw<T>(obj: Record<string, unknown>) {
+  /**
+   * @TODO make this recursive?
+   */
+  // @ts-expect-error
   return (hasIdsInKeys ? removeIdsFromKeys(obj) : obj) as unknown as T;
 }
