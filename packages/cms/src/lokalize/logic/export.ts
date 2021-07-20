@@ -9,6 +9,7 @@ import flatten, { unflatten } from 'flat';
 import fs from 'fs-extra';
 import JsonToTS from 'json-to-ts';
 import mapValues from 'lodash/mapValues';
+import { outdent } from 'outdent';
 import path from 'path';
 import prettier from 'prettier';
 import { readTextMutations } from '.';
@@ -66,7 +67,8 @@ export async function exportLokalizeTexts({
    * the documents in Sanity are left untouched to not break other feature
    * branches in the meantime.
    *
-   * Moves are applied before deletions, to prevent losing documents in edge cases.
+   * Moves are applied before deletions, to prevent losing documents in edge
+   * cases.
    */
   const mutatedDocuments = simulateDeleteMutations(
     simulateMoveMutations(documents, mutations),
@@ -125,7 +127,15 @@ export async function generateTypes() {
     'string'
   );
 
-  const body = `export interface SiteText ${textsTypeString}`;
+  const body = outdent`
+    /**
+     * This file was auto-generated from the lokalize export script. It doesn't
+     * output fully valid TS interfaces but the compiler doesn't seem
+     * to care.
+     */
+
+     export interface SiteText ${textsTypeString}
+  `;
 
   /**
    * The above seems to work but doesn't output real Typscript syntax. Maybe we
@@ -133,8 +143,7 @@ export async function generateTypes() {
    */
   // let string = '';
 
-  // JsonToTS(textsObject).forEach((typeInterface) => {
-  //   string += typeInterface;
+  // JsonToTS(textsObject).forEach((typeInterface) => {string += typeInterface;
   // });
 
   // const body = `export interface SiteText ${string}`;
