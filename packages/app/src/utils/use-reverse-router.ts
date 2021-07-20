@@ -18,6 +18,7 @@ export function useReverseRouter() {
         verantwoording: () => '/verantwoording',
         overRisiconiveaus: () => '/over-risiconiveaus',
         toegankelijkheid: () => '/toegankelijkheid',
+        contact: () => '/contact',
       },
 
       in: {
