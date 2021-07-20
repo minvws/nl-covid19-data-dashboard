@@ -2,6 +2,7 @@ import Tippy, { TippyProps } from '@tippyjs/react';
 import { Instance } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
+import { isDefined } from 'ts-is-present';
 
 let handleMount: undefined | ((tippyInstance: Instance) => void);
 
@@ -11,6 +12,10 @@ let handleMount: undefined | ((tippyInstance: Instance) => void);
  */
 
 export function WithTooltip(props: TippyProps) {
+  if (!isDefined(props.content)) {
+    return <>{props.children}</>;
+  }
+
   return (
     <Tippy theme="light" appendTo={getBody} onMount={handleMount} {...props} />
   );

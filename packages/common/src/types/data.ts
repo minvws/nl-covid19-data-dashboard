@@ -154,7 +154,7 @@ export interface In {
   variants?: InVariants;
 }
 export interface InNamedDifference {
-  variants__percentage: NamedDifferenceDecimal[];
+  variants__percentage?: NamedDifferenceDecimal[];
 }
 export interface NamedDifferenceDecimal {
   name: string;
@@ -175,7 +175,7 @@ export interface InTestedOverallValue {
   date_of_insertion_unix: number;
 }
 export interface InVariants {
-  values: InVariantsVariant[];
+  values?: InVariantsVariant[];
 }
 export interface InVariantsVariant {
   name: string;
@@ -187,6 +187,7 @@ export interface InVariantsVariantValue {
   occurrence: number;
   is_variant_of_concern: boolean;
   sample_size: number;
+  is_reliable: boolean;
   date_start_unix: number;
   date_end_unix: number;
   date_of_insertion_unix: number;
@@ -840,7 +841,7 @@ export interface NlVaccineCoveragePerAgeGroup {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 export interface NlVaccineCoveragePerAgeGroupValue {
-  age_group_range: string;
+  age_group_range: "12+" | "18+" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "65-69" | "70-79" | "80+";
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;

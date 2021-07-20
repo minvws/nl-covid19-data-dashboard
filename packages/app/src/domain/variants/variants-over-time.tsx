@@ -1,3 +1,4 @@
+import { TimeframeOption } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
@@ -16,11 +17,13 @@ import { useList } from '~/utils/use-list';
 interface VariantsOverTimeProps {
   values: VariantChartValue[];
   seriesConfig: LineSeriesDefinition<VariantChartValue>[];
+  timeframe: TimeframeOption;
 }
 
 export function VariantsOverTime({
   values,
   seriesConfig,
+  timeframe,
 }: VariantsOverTimeProps) {
   const { siteText } = useIntl();
   const text = siteText.covid_varianten.varianten_over_tijd;
@@ -90,7 +93,7 @@ export function VariantsOverTime({
       <TimeSeriesChart
         accessibility={{ key: 'variants_over_time_chart' }}
         values={values}
-        timeframe={'all'}
+        timeframe={timeframe}
         seriesConfig={chartConfig}
         disableLegend
         dataOptions={{

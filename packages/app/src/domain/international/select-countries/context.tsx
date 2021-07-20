@@ -9,10 +9,9 @@ import {
 } from 'react';
 import { assert } from '~/utils/assert';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { useBreakpoints } from '~/utils/use-breakpoints';
+import { CountryCode } from './country-code';
 import { useHitSelection } from './use-hit-selection';
 import { Hit, useSearchResults } from './use-select-country-results';
-import { CountryCode } from './country-code';
 
 export interface CountryOption {
   code: CountryCode;
@@ -73,8 +72,6 @@ function useSearchContextValue<T extends Element>(
   countries: CountryOption[],
   limit?: number
 ) {
-  const breakpoints = useBreakpoints();
-
   useOnClickOutside([containerRef], () => setHasInputFocus(false));
 
   const id = '__search_countries';
@@ -113,15 +110,14 @@ function useSearchContextValue<T extends Element>(
    */
   const { hits } = useSearchResults(countries, term);
 
-  const showResults =
-    hasHadInputFocus && (hasInputFocus || hasHitFocus || !breakpoints.md);
+  const showResults = hasHadInputFocus && (hasInputFocus || hasHitFocus);
 
   const { focusRef, focusIndex, setFocusIndex } = useHitSelection({
     numberOfHits: hits.length,
     onSelectHit: (index) => {
       const option = hits[index];
 
-      onToggleCountry(option.data);
+      if (option) onToggleCountry(option.data);
     },
     /**
      * Only enable keyboard navigation when we show results
