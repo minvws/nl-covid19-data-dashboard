@@ -1,7 +1,7 @@
-import { Box } from '~/components/base';
-import { ReactNode } from 'react';
 import css from '@styled-system/css';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { Box } from '~/components/base';
 
 interface ContentProps {
   children: ReactNode;

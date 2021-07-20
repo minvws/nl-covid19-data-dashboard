@@ -19,7 +19,7 @@ export function Articles({ articles }: ArticlesProps) {
   return (
     <Box>
       <InlineText
-        mb={2}
+        mb={3}
         fontSize={2}
         fontWeight="bold"
         css={css({ display: 'block' })}

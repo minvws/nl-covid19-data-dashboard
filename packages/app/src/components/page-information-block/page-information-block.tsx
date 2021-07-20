@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
-import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { Heading, HeadingLevel, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { asResponsiveArray } from '~/style/utils';
 import { RichContentBlock } from '~/types/cms';
-import { Articles } from './articles';
-import { Metadata, MetadataProps } from './metadata';
-import { UsefulLinks } from './useful-links';
+import { Articles } from './components/articles';
+import { Header } from './components/header';
+import { Metadata, MetadataProps } from './components/metadata';
+import { UsefulLinks } from './components/useful-links';
 
 interface InformationBlockProps {
   title?: string;
@@ -72,14 +72,18 @@ export function PageInformationBlock({
   );
 
   return (
-    <Box as="header" id={id} spacing={4} mt={hasExtraMarginTop ? 5 : null}>
+    <Box
+      as="header"
+      id={id}
+      spacing={{ _: 3, md: 4 }}
+      mt={hasExtraMarginTop ? 5 : null}
+    >
       {title && icon ? (
-        <HeadingWithIcon
+        <Header
           icon={icon}
           title={title}
           category={category}
           screenReaderCategory={screenReaderCategory}
-          headingLevel={2}
         />
       ) : (
         <>
