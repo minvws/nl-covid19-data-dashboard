@@ -1,9 +1,10 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import ChevronIcon from '~/assets/chevron.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
@@ -47,6 +48,8 @@ interface ArticleItemProps {
 }
 
 function ArticleItem({ slug, cover, title }: ArticleItemProps) {
+  const splittedWords = title.split(' ');
+
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledLink>
@@ -58,7 +61,31 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
           />
         </Box>
         <Box pl={3} display="flex" alignItems="center">
-          <Text m={0}>{title}</Text>
+          <StyledText>
+            {splittedWords.map((word, index) => (
+              <InlineText
+                key={index}
+                css={css({
+                  whiteSpace: 'pre-wrap',
+                })}
+              >
+                {splittedWords.length - 1 === index ? (
+                  <InlineText
+                    css={css({
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                    })}
+                  >
+                    {word}
+                    <ChevronIcon />
+                  </InlineText>
+                ) : (
+                  `${word} `
+                )}
+              </InlineText>
+            ))}
+          </StyledText>
         </Box>
       </StyledLink>
     </Link>
@@ -71,5 +98,23 @@ const StyledLink = styled.a(
     textDecoration: 'none',
     display: 'flex',
     fontWeight: 'bold',
+  })
+);
+
+const StyledText = styled.p(
+  css({
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: 0,
+
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+
+    svg: {
+      marginLeft: '2px',
+      width: 12,
+      height: 12,
+    },
   })
 );

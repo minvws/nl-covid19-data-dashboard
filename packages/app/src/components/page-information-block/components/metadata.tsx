@@ -23,7 +23,6 @@ interface DateRange {
   start: number;
   end: number;
 }
-
 export interface MetadataProps {
   dataSources: Datasource[];
   datumsText: string;
