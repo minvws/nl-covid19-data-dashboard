@@ -13,16 +13,15 @@ export const ID_PREFIX = '__@__';
  * happened locally in your branch (but are not committed to the dataset yet)
  * are stripped from the output and your feature code sees the correct dataset
  * as it will be after merging the branch.
+ *
+ * The same goes for move mutations. These mutations are not directly applied to
+ * the dataset in Sanity, so we need to mimic the move to make the JSON reflect
+ * what it will be in the future once the document key fields have been mutated.
  */
-export function createFlatTexts({
-  documents,
-  excludedKeys = [],
-  appendDocumentIdToKey = false,
-}: {
-  documents: LokalizeText[];
-  excludedKeys?: string[];
-  appendDocumentIdToKey?: boolean;
-}) {
+export function createFlatTexts(
+  documents: LokalizeText[],
+  appendDocumentIdToKey = false
+) {
   const nl: Record<string, string> = {};
   const en: Record<string, string> = {};
 
@@ -33,8 +32,6 @@ export function createFlatTexts({
    * First write all published document texts
    */
   for (const document of published) {
-    if (excludedKeys.includes(document.key)) continue;
-
     const { jsonKey, localeText } = parseLocaleTextDocument(
       document,
       appendDocumentIdToKey
@@ -49,8 +46,6 @@ export function createFlatTexts({
    * draft version.
    */
   for (const document of drafts) {
-    if (excludedKeys.includes(document.key)) continue;
-
     const { jsonKey, localeText } = parseLocaleTextDocument(
       document,
       appendDocumentIdToKey

@@ -1,3 +1,4 @@
+import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { assert, ID_PREFIX, removeIdsFromKeys } from '@corona-dashboard/common';
 import { parse } from '@fast-csv/parse';
 import fs from 'fs';
@@ -370,4 +371,35 @@ export async function finalizeMoveMutations(
 
   console.log(`${dataset} TRANSACTION`, transaction.serialize());
   // await transaction.commit(); @TODO enable
+}
+
+export function simulateDeleteMutations(
+  documents: LokalizeText[],
+  mutations: TextMutation[]
+) {
+  const deletedKeys = getCollapsedAddDeleteMutations(mutations)
+    .filter(hasValueAtKey('action', 'delete' as const))
+    .map((x) => x.key);
+
+  return documents.filter((x) => !deletedKeys.includes(x.key));
+}
+
+export function simulateMoveMutations(
+  documents: LokalizeText[],
+  mutations: TextMutation[]
+) {
+  const moveMutations = getCollapsedMoveMutations(mutations);
+
+  return [...documents].map((doc) => {
+    const mutation = moveMutations.find((x) => x.key === doc.key);
+
+    if (!mutation) {
+      return doc;
+    }
+
+    return {
+      ...doc,
+      key: mutation.move_to,
+    };
+  });
 }

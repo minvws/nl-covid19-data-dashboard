@@ -13,7 +13,11 @@ import prettier from 'prettier';
 import { hasValueAtKey } from 'ts-is-present';
 import { getCollapsedAddDeleteMutations, readTextMutations } from '.';
 import { getClient } from '../../client';
-import { getCollapsedMoveMutations } from './mutations';
+import {
+  getCollapsedMoveMutations,
+  simulateDeleteMutations,
+  simulateMoveMutations,
+} from './mutations';
 
 export const localeDirectory = path.resolve(
   __dirname,
@@ -61,29 +65,20 @@ export async function exportLokalizeTexts(
 
   const mutations = await readTextMutations();
 
-  const deletedKeys = getCollapsedAddDeleteMutations(mutations)
-    .filter(hasValueAtKey('action', 'delete' as const))
-    .map((x) => x.key);
-
   /**
-   * When a text has been moved as part of a feature branch, the document is not
-   * actually changed in Sanity, but a temporary new document is created instead
-   * which contains the new (move_to) key. This way we do not break other
-   * branches depending on the targeted document. For the user who moved the
-   * document, we filter out these keys during export so that according their
-   * JSON the moved keys do not exist anymore.
+   * We simulate local mutations as if they already happened to the documents in
+   * Sanity. This way the user gets an up-to-date version of JSON output, but
+   * the documents in Sanity are left untouched to not break other feature
+   * branches in the meantime.
    *
-   * Once the feature branch gets merged we then actually mutate the key
-   * property of the original document, and remove the temporarily document
-   * which was holding that key.
+   * Moves are applied before deletions, to prevent losing documents in edge cases.
    */
-  const movedKeys = getCollapsedMoveMutations(mutations).map((x) => x.key);
+  const mutatedDocuments = simulateDeleteMutations(
+    simulateMoveMutations(documents, mutations),
+    mutations
+  );
 
-  const flatTexts = createFlatTexts({
-    documents,
-    excludedKeys: [...deletedKeys, ...movedKeys],
-    appendDocumentIdToKey,
-  });
+  const flatTexts = createFlatTexts(mutatedDocuments, appendDocumentIdToKey);
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
