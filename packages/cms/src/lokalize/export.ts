@@ -49,7 +49,7 @@ const cli = meow(
     const mutations = await getLocalMutations(referenceTexts);
 
     if (
-      (mutations && !isEmpty(mutations.add)) ||
+      !isEmpty(mutations.add) ||
       !isEmpty(mutations.delete) ||
       !isEmpty(mutations.move)
     ) {
