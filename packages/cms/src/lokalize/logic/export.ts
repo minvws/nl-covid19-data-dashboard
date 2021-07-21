@@ -126,27 +126,16 @@ export async function generateTypes() {
     'string'
   );
 
-  const body = outdent`
-    /**
-     * This file was auto-generated from the lokalize export script. It doesn't
-     * output fully valid TS syntax (using , where ; is expected) but the
-     * compiler doesn't seem to care.
-     */
-     export interface SiteText ${textsTypeString}
-  `;
+  const body = prettier.format(
+    `
+      /**
+       * This file was auto-generated from the lokalize export script.
+       */
+      export interface SiteText ${textsTypeString}
+    `,
+    { parser: 'typescript' }
+  );
 
-  /**
-   * @TODO The above seems to work but doesn't output official Typscript syntax
-   * in the d.ts. file, so it feels a little dodgy. Alternatively we could use
-   * something that generates actual TS interfaces.
-   *
-   * For example json-to-ts could be an option, but it doesn't generate types
-   * very cleanly and creates a lot of sub-types seemingly without a good way to
-   * control naming.
-   *
-   * As long as the compiler is happy the current approach is probably the most
-   * simple and readable solution.
-   */
 
   return new Promise<void>((resolve, reject) =>
     fs.writeFile(
