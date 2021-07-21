@@ -18,15 +18,20 @@ import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
+import { useElementSize } from '~/utils/use-element-size';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Path } from './path';
 import {
   ChoroplethTooltipPlacement,
   Tooltip,
 } from './tooltips/tooltip-container';
+
+export enum CHOROPLETH_ASPECT_RATIO {
+  nl = 1 / 1.2,
+  in = 1 / 0.775,
+}
 
 export type TooltipSettings = {
   left: number;
@@ -46,6 +51,7 @@ type ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties> = {
   accessibility: AccessibilityDefinition;
   initialWidth?: number;
   minHeight?: number;
+  aspectRatio?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
   featureCollection: FeatureCollection<MultiPolygon, FeatureProperties>;
@@ -181,23 +187,17 @@ const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
     hoverRef,
     renderHighlight,
     minHeight = 500,
-    initialWidth = 0.9 * minHeight,
     showTooltipOnFocus,
     boudingBoxPadding = {},
+    aspectRatio = CHOROPLETH_ASPECT_RATIO.nl,
   } = props;
 
-  const ratio = 1.2;
-
-  const { ResponsiveContainer, ...responsive } = useResponsiveContainer(
-    initialWidth,
+  const [containerRef, { width, height }] = useElementSize<HTMLDivElement>(
+    minHeight * (1 / aspectRatio),
     minHeight
   );
 
   const annotations = useAccessibilityAnnotations(accessibility);
-
-  const width = responsive.width;
-  const height = Math.min(responsive.height, width * ratio);
-
   const clipPathId = useUniqueId();
 
   const timeout = useRef(-1);
@@ -220,7 +220,7 @@ const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
       return;
     }
 
-    const container = responsive.ref.current;
+    const container = containerRef.current;
 
     function handleBubbledFocusIn(event: FocusEvent) {
       const link = event.target as HTMLAnchorElement;
@@ -258,12 +258,19 @@ const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
       container?.removeEventListener('focusin', handleBubbledFocusIn);
       container?.removeEventListener('focusout', handleBubbledFocusOut);
     };
-  }, [responsive.ref, setTooltip, showTooltipOnFocus, isTouch]);
+  }, [containerRef, setTooltip, showTooltipOnFocus, isTouch]);
 
   return (
     <>
       {annotations.descriptionElement}
-      <ResponsiveContainer height={height}>
+      <div
+        ref={containerRef}
+        style={{
+          minHeight,
+          maxHeight: '75vh',
+          maxWidth: '100%',
+        }}
+      >
         <svg
           {...annotations.props}
           role="img"
@@ -273,7 +280,7 @@ const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
           onMouseMove={createSvgMouseOverHandler(
             timeout,
             setTooltip,
-            responsive.ref
+            containerRef
           )}
           onMouseOut={
             isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip)
@@ -338,7 +345,7 @@ const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
             )}
           </g>
         </svg>
-      </ResponsiveContainer>
+      </div>
     </>
   );
 });
