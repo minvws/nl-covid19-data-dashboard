@@ -1,10 +1,25 @@
 import Tippy, { TippyProps } from '@tippyjs/react';
 import { Instance } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light.css';
+import styled from 'styled-components';
+import css from '@styled-system/css';
+import { useBreakpoints } from '~/utils/use-breakpoints';
+
 import { isDefined } from 'ts-is-present';
 
 let handleMount: undefined | ((tippyInstance: Instance) => void);
+
+const StyledTippy = styled(Tippy)(
+  css({
+    backgroundColor: 'white',
+    color: 'black',
+    boxShadow:
+      '0 0 20px 4px rgb(154 161 177 / 15%), 0 4px 80px -8px rgb(36 40 47 / 25%), 0 4px 4px -2px rgb(91 94 105 / 15%)',
+    '.tippy-arrow': {
+      color: 'white',
+    },
+  })
+) as any;
 
 /**
  * Usage:
@@ -12,12 +27,19 @@ let handleMount: undefined | ((tippyInstance: Instance) => void);
  */
 
 export function WithTooltip(props: TippyProps) {
+  const breakpoints = useBreakpoints(true);
+
   if (!isDefined(props.content)) {
     return <>{props.children}</>;
   }
 
   return (
-    <Tippy theme="light" appendTo={getBody} onMount={handleMount} {...props} />
+    <StyledTippy
+      appendTo={getBody}
+      onMount={handleMount}
+      maxWidth={breakpoints.sm ? '285px' : '350px'}
+      {...props}
+    />
   );
 }
 
