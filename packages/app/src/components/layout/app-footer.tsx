@@ -15,7 +15,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function AppFooter() {
   const reverseRouter = useReverseRouter();
   const { siteText: text } = useIntl();
-  const internationalFeature = useFeature('internationalPage');
+  const internationalFeature = useFeature('inHomePage');
 
   return (
     <footer>

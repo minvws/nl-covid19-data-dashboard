@@ -9,7 +9,7 @@ import {
 import { getLastGeneratedDate } from '~/static-props/get-data';
 
 export const getStaticProps = withFeatureNotFoundPage(
-  'internationalPage',
+  'inHomePage',
   createGetStaticProps(getLastGeneratedDate)
 );
 
