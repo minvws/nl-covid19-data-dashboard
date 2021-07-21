@@ -24,7 +24,7 @@ export function TopNavigation() {
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
-  const internationalFeature = useFeature('internationalPage');
+  const internationalFeature = useFeature('inHomePage');
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 

@@ -47,7 +47,7 @@ type CompiledCountriesValue = {
 } & Record<CountryCode, number>;
 
 export const getStaticProps = withFeatureNotFoundPage(
-  'internationalPage',
+  'inPositiveTestsPage',
   createGetStaticProps(
     getLastGeneratedDate,
     createGetContent<{
