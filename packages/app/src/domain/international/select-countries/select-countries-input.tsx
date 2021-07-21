@@ -28,6 +28,12 @@ export function SelectCountriesInput() {
             inputRef.current?.focus();
             setTerm('');
           }}
+          css={css({
+            svg: {
+              width: 20,
+              height: 20,
+            },
+          })}
         >
           <VisuallyHidden>{siteText.select_countries.clear}</VisuallyHidden>
           <CloseIcon />
