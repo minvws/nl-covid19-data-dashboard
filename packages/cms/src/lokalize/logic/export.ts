@@ -34,11 +34,9 @@ export const localeReferenceDirectory = path.resolve(
 
 export async function exportLokalizeTexts({
   dataset,
-  includeDrafts = false,
   appendDocumentIdToKey = false,
 }: {
   dataset?: string;
-  includeDrafts?: boolean;
   appendDocumentIdToKey?: boolean;
 }) {
   /**
@@ -47,15 +45,9 @@ export async function exportLokalizeTexts({
   fs.ensureDirSync(localeReferenceDirectory);
 
   const client = getClient(dataset);
-  /**
-   * The client will load drafts by default because it is authenticated with a
-   * token. If the `drafts` flag is not set to true, we will manually exclude
-   * draft-documents on query-level.
-   */
-  const draftsQueryPart = includeDrafts ? '' : '&& !(_id in path("drafts.**"))';
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(key asc)`
+    `*[_type == 'lokalizeText'] | order(key asc)`
   );
 
   const mutations = await readTextMutations();

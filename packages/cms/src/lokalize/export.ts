@@ -21,14 +21,11 @@ const cli = meow(
       --clean-json Export without document-ids in the keys
 
     Examples
-      $ lokalize:export --drafts --dataset=development
+      $ lokalize:export --dataset=development
       $ lokalize:export --dataset=development --clean-json
 `,
   {
     flags: {
-      drafts: {
-        type: 'boolean',
-      },
       dataset: {
         type: 'string',
         default: 'development',
@@ -74,7 +71,6 @@ const cli = meow(
 
   await exportLokalizeTexts({
     dataset,
-    includeDrafts: cli.flags.drafts,
     appendDocumentIdToKey: !cli.flags.cleanJson,
   });
 
