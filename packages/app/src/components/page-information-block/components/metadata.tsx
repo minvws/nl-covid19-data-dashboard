@@ -228,7 +228,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
       <Link href={referenceLink} passHref>
         <Anchor css={css({ fontSize: 1 })}>
           {words.map((word, index) => (
-            <Fragment key="index">
+            <Fragment key={index}>
               {words.length - 1 === index ? (
                 <InlineText
                   css={css({
