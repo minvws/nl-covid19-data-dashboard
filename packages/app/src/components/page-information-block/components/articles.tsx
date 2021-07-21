@@ -64,7 +64,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
         <Box pl={3} display="flex" alignItems="center">
           <StyledText>
             {words.map((word, index) => (
-              <Fragment key="index">
+              <Fragment key={index}>
                 {words.length - 1 === index ? (
                   <InlineText
                     css={css({
