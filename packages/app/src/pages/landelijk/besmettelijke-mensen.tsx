@@ -1,10 +1,9 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import Ziektegolf from '~/assets/ziektegolf.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { WarningTile } from '~/components/warning-tile';
@@ -52,22 +51,21 @@ const InfectiousPeople = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={siteText.besmettelijke_personen.titel_sidebar}
             title={text.title}
             icon={<Ziektegolf />}
-            subtitle={text.toelichting_pagina}
+            description={text.toelichting_pagina}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastFullValue.date_unix,
               dateOfInsertionUnix: lastFullValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
             <WarningTile

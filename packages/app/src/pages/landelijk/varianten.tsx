@@ -1,16 +1,8 @@
-import css from '@styled-system/css';
-import styled from 'styled-components';
 import Varianten from '~/assets/varianten.svg';
-import { ArticleStripItem } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
-import { CompactDecoratedLink } from '~/components/decorated-link';
-import { Tile } from '~/components/tile';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
-import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { VariantsOverTime } from '~/domain/variants/variants-over-time';
@@ -108,12 +100,12 @@ export default function CovidVariantenPage(
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={selectedNlData} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={text.titel_sidebar}
             title={text.titel}
             icon={<Varianten />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
@@ -123,48 +115,10 @@ export default function CovidVariantenPage(
               dateOfInsertionUnix: dates.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            usefulLinks={content.page.pageLinks}
+            articles={content.highlight.articles}
           />
-
-          <TwoKpiSection spacing={4}>
-            {content.highlight?.articles && (
-              <Box>
-                <Heading level={3}>
-                  {text.informatie_blok.artikelen_titel}
-                </Heading>
-                <Tile>
-                  <Box spacing={3}>
-                    {content.highlight.articles.map((article, index) => (
-                      <ArticleStripItem
-                        key={index}
-                        title={article.title}
-                        cover={article.cover}
-                        slug={article.slug.current}
-                      />
-                    ))}
-                  </Box>
-                </Tile>
-              </Box>
-            )}
-
-            {content.page?.pageLinks.length > 0 && (
-              <Box>
-                <Heading level={3}>
-                  {text.informatie_blok.nuttige_links_titel}
-                </Heading>
-                <DecoratedLinksTile>
-                  {content.page.pageLinks.map((x, index) => (
-                    <CompactDecoratedLink
-                      key={index}
-                      title={x.title}
-                      href={x.href}
-                      isFirst={index === 0}
-                    />
-                  ))}
-                </DecoratedLinksTile>
-              </Box>
-            )}
-          </TwoKpiSection>
 
           <VariantsTableTile
             data={variantTable}
@@ -201,14 +155,3 @@ export default function CovidVariantenPage(
     </Layout>
   );
 }
-
-const DecoratedLinksTile = styled.article(
-  css({
-    display: 'flex',
-    flexDirection: 'column',
-    bg: 'white',
-    p: 0,
-    borderRadius: 1,
-    boxShadow: 'tile',
-  })
-);

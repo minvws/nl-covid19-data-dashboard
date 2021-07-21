@@ -1,12 +1,12 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
@@ -109,14 +109,22 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
 
-          <VaccinePageIntroduction
-            data={data}
-            pageInfo={page.pageInfo}
-            pageLinks={page.pageLinks}
-            pageLinksTitle={page.linksTitle}
-          />
+          <VaccinePageIntroduction data={data} />
 
-          <ArticleStrip articles={content.highlight.articles} />
+          <PageInformationBlock
+            description={content.page.pageDescription}
+            metadata={{
+              datumsText: text.datums,
+              dateOrRange: data.vaccine_administered_total.last_value.date_unix,
+              dateOfInsertionUnix:
+                data.vaccine_administered_total.last_value
+                  .date_of_insertion_unix,
+              dataSources: [],
+            }}
+            usefulLinks={content.page.usefulLinks}
+            referenceLink={text.reference.href}
+            articles={content.highlight.articles}
+          />
 
           {data.vaccine_coverage && (
             <ChartTile
@@ -210,10 +218,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineAdministrationsKpiSection data={data} />
 
-          <ContentHeader
+          <Spacer amount={3} />
+
+          <PageInformationBlock
             title={text.bereidheid_section.title}
-            subtitle={text.bereidheid_section.description}
-            reference={text.bereidheid_section.reference}
+            description={text.bereidheid_section.description}
+            referenceLink={text.bereidheid_section.reference.href}
             icon={scaledVaccineIcon}
             metadata={{
               datumsText: text.bereidheid_datums,
@@ -316,11 +326,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <ContentHeader
+          <Spacer amount={3} />
+
+          <PageInformationBlock
             title={text.stock_and_delivery_section.title}
             icon={scaledVaccineIcon}
-            subtitle={text.stock_and_delivery_section.description}
-            reference={text.stock_and_delivery_section.reference}
+            description={text.stock_and_delivery_section.description}
+            referenceLink={text.stock_and_delivery_section.reference.href}
             metadata={{
               datumsText: text.datums,
               dateOrRange: data.vaccine_stock.last_value.date_unix,

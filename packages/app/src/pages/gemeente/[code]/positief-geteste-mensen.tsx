@@ -3,17 +3,16 @@ import {
   GmProperties,
 } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { CollapsibleContent } from '~/components/collapsible';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -108,23 +107,22 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(text.titel, {
               municipality: municipalityName,
             })}
             icon={<Getest />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.fix_this.articles}
           />
-
-          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile

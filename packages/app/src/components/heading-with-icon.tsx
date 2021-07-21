@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import React from 'react';
 import { Box } from './base';
-import { Heading, HeadingProps, HeadingLevel } from './typography';
+import { Heading, HeadingLevel, HeadingProps } from './typography';
 
 type HeadingWithIconProps = {
   title: string;

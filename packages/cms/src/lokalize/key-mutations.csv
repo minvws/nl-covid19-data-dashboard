@@ -43,6 +43,7 @@ timestamp,action,key
 2021-07-14T12:02:59.081Z,add,covid_varianten.varianten_omschrijving.zeta
 2021-07-14T13:04:16.474Z,add,covid_varianten.varianten_tabel.omschrijving_zonder_placeholders
 2021-07-14T13:04:17.234Z,add,internationaal_varianten.varianten_tabel.omschrijving_zonder_placeholders
+2021-07-19T08:32:25.803Z,add,vaccinaties.reference.href
 2021-07-15T11:32:43.714Z,add,contact_metadata.description
 2021-07-15T11:33:00.636Z,add,contact_metadata.title
 2021-07-15T11:33:53.558Z,add,contact_metadata.url
