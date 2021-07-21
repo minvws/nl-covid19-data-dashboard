@@ -1,3 +1,8 @@
+import { Rule } from '~/sanity';
+import {
+  localeStringValidation,
+  localeValidation,
+} from '../../language/locale-validation';
 import { selectedLanguages$ } from '../../plugins/translate/datastore';
 import { prepareLocalized } from '../../plugins/translate/prepare-localized';
 
@@ -15,28 +20,20 @@ export const faqQuestion = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'content',
       type: 'localeBlock',
       title: 'Inhoud',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeValidation((rule) => rule.required()),
     },
     {
       name: 'group',
       type: 'reference',
       to: [{ type: 'veelgesteldeVragenGroups' }],
       title: 'Groep',
-      validation: (Rule: any) => Rule.reset().required(),
+      validation: (Rule: Rule) => Rule.reset().required(),
     },
   ],
   preview: {

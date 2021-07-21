@@ -3,7 +3,7 @@ import { EscalationLevel } from '~/domain/restrictions/type';
 
 export type VrScoreboardData = {
   data: VrEscalationLevel;
-  safetyRegionName: string;
+  vrName: string;
   vrCode: string;
 };
 

@@ -1,26 +1,26 @@
 import ElderlyIcon from '~/assets/elderly.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -41,12 +41,7 @@ export const getStaticProps = createGetStaticProps(
 const ElderlyAtHomeRegionalPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
-  const {
-    safetyRegionName,
-    selectedVrData: data,
-    lastGenerated,
-    content,
-  } = props;
+  const { vrName, selectedVrData: data, lastGenerated, content } = props;
   const { elderly_at_home, difference } = data;
 
   const { siteText } = useIntl();
@@ -66,34 +61,30 @@ const ElderlyAtHomeRegionalPage = (
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={
               siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
             screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
             title={replaceVariablesInText(text.section_positive_tested.title, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<ElderlyIcon />}
-            subtitle={replaceVariablesInText(
+            description={replaceVariablesInText(
               text.section_positive_tested.description,
               {
-                safetyRegion: safetyRegionName,
+                safetyRegion: vrName,
               }
             )}
             metadata={{
@@ -103,10 +94,9 @@ const ElderlyAtHomeRegionalPage = (
                 elderly_at_home.last_value.date_of_insertion_unix,
               dataSources: [text.section_positive_tested.bronnen.rivm],
             }}
-            reference={text.section_positive_tested.reference}
+            referenceLink={text.section_positive_tested.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -197,15 +187,17 @@ const ElderlyAtHomeRegionalPage = (
             )}
           </ChartTile>
 
-          <ContentHeader
+          <Spacer amount={3} />
+
+          <PageInformationBlock
             title={replaceVariablesInText(text.section_deceased.title, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<ElderlyIcon />}
-            subtitle={replaceVariablesInText(
+            description={replaceVariablesInText(
               text.section_deceased.description,
               {
-                safetyRegion: safetyRegionName,
+                safetyRegion: vrName,
               }
             )}
             metadata={{
@@ -215,7 +207,7 @@ const ElderlyAtHomeRegionalPage = (
                 elderly_at_home.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased.bronnen.rivm],
             }}
-            reference={text.section_deceased.reference}
+            referenceLink={text.section_deceased.reference.href}
           />
 
           <TwoKpiSection>
@@ -285,7 +277,7 @@ const ElderlyAtHomeRegionalPage = (
             )}
           </ChartTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

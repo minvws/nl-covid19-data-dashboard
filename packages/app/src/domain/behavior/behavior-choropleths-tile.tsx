@@ -3,8 +3,8 @@ import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
@@ -133,7 +133,7 @@ function ChoroplethBlock({
           </Box>
         )}
         <ErrorBoundary>
-          <SafetyRegionChoropleth
+          <VrChoropleth
             accessibility={{ key: 'behavior_choropleths' }}
             data={data}
             getLink={reverseRouter.vr.gedrag}

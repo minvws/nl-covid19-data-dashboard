@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
-import { ContentHeader } from '~/components/content-header';
 import { KpiSection } from '~/components/kpi-section';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
@@ -80,7 +80,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader title={siteText.nationaal_maatregelen.titel} />
+          <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
 
           {showLockdown && (
             <KpiSection flexDirection="column">

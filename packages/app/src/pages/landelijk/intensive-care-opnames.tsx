@@ -1,11 +1,11 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Arts from '~/assets/arts.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -34,6 +34,7 @@ import {
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -52,7 +53,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage } = useIntl();
 
   const text = siteText.ic_opnames_per_dag;
 
@@ -76,22 +77,21 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
             screenReaderCategory={siteText.ic_opnames_per_dag.titel_sidebar}
             title={text.titel}
             icon={<Arts />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: dataIntake.last_value.date_unix,
               dateOfInsertionUnix: dataIntake.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.fix_this.articles}
           />
-
-          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -122,16 +122,27 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             >
               {bedsLastValue.beds_occupied_covid !== null &&
                 bedsLastValue.beds_occupied_covid_percentage !== null && (
-                  <KpiValue
-                    data-cy="beds_occupied_covid"
-                    absolute={bedsLastValue.beds_occupied_covid}
-                    percentage={bedsLastValue.beds_occupied_covid_percentage}
-                    difference={
-                      data.difference.intensive_care_lcps__beds_occupied_covid
-                    }
-                  />
+                  <>
+                    <KpiValue
+                      data-cy="beds_occupied_covid"
+                      absolute={bedsLastValue.beds_occupied_covid}
+                      difference={
+                        data.difference.intensive_care_lcps__beds_occupied_covid
+                      }
+                    />
+
+                    <Markdown
+                      content={replaceVariablesInText(
+                        text.kpi_bedbezetting.description,
+                        {
+                          percentage: formatPercentage(
+                            bedsLastValue.beds_occupied_covid_percentage
+                          ),
+                        }
+                      )}
+                    />
+                  </>
                 )}
-              <Text>{text.kpi_bedbezetting.description}</Text>
             </KpiTile>
           </TwoKpiSection>
 

@@ -1,13 +1,15 @@
+import { Rule } from '~/sanity';
+import {
+  localeStringValidation,
+  localeValidation,
+} from '../../language/locale-validation';
+
 export const ARTICLE_FIELDS = [
   {
     title: 'Titel',
     name: 'title',
     type: 'localeString',
-    validation: (Rule: any) =>
-      Rule.fields({
-        nl: (fieldRule: any) => fieldRule.reset().required(),
-        en: (fieldRule: any) => fieldRule.reset().required(),
-      }),
+    validation: localeStringValidation((rule) => rule.required()),
   },
   {
     title: 'Slug',
@@ -23,11 +25,7 @@ export const ARTICLE_FIELDS = [
     name: 'metaDescription',
     type: 'localeString',
     fieldset: 'metadata',
-    validation: (Rule: any) =>
-      Rule.fields({
-        nl: (fieldRule: any) => fieldRule.reset().required(),
-        en: (fieldRule: any) => fieldRule.reset().required(),
-      }),
+    validation: localeStringValidation((rule) => rule.required()),
   },
   {
     title: 'Publicatie datum',
@@ -40,7 +38,7 @@ export const ARTICLE_FIELDS = [
       calendarTodayLabel: 'Today',
     },
     fieldset: 'metadata',
-    validation: (Rule: any) => Rule.required(),
+    validation: (rule: Rule) => rule.required(),
   },
   {
     title: 'Samenvatting',
@@ -48,21 +46,14 @@ export const ARTICLE_FIELDS = [
       'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.',
     name: 'summary',
     type: 'localeText',
-    validation: (Rule: any) =>
-      Rule.fields({
-        nl: (fieldRule: any) => fieldRule.reset().required().max(120),
-        en: (fieldRule: any) => fieldRule.reset().required().max(120),
-      }),
+    // @Todo Align with content team about migrating content, and then enforce max length of 120.
+    validation: localeValidation((rule) => rule.required()),
   },
   {
     title: 'Intro',
     name: 'intro',
     type: 'localeBlock',
-    validation: (Rule: any) =>
-      Rule.fields({
-        nl: (fieldRule: any) => fieldRule.reset().required(),
-        en: (fieldRule: any) => fieldRule.reset().required(),
-      }),
+    validation: localeValidation((rule) => rule.required()),
   },
   {
     title: 'Afbeelding',
@@ -78,16 +69,12 @@ export const ARTICLE_FIELDS = [
         type: 'localeString',
       },
     ],
-    validation: (Rule: any) => Rule.required(),
+    validation: (rule: Rule) => rule.required(),
   },
   {
     title: 'Content',
     name: 'content',
     type: 'localeRichContentBlock',
-    validation: (Rule: any) =>
-      Rule.fields({
-        nl: (fieldRule: any) => fieldRule.reset().required(),
-        en: (fieldRule: any) => fieldRule.reset().required(),
-      }),
+    validation: localeValidation((rule) => rule.required()),
   },
 ];
