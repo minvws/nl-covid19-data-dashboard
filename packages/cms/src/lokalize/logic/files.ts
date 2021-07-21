@@ -1,9 +1,7 @@
-import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import flatten from 'flat';
 import fs from 'fs';
 import mapKeys from 'lodash/mapKeys';
 import path from 'path';
-import { getClient } from '../../client';
 import { localeDirectory, localeReferenceDirectory } from './export';
 
 export async function readLocalTexts() {
