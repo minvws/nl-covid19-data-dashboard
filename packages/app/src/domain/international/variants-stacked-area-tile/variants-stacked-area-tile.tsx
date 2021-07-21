@@ -73,6 +73,9 @@ function VariantStackedAreaTileWithData({
     text,
     values
   );
+
+  console.dir(seriesConfig);
+
   const filteredConfig = useFilteredSeriesConfig(
     seriesConfig,
     otherConfig,
@@ -174,9 +177,16 @@ function useSeriesConfig(
   values: VariantChartValue[]
 ) {
   return useMemo(() => {
-    const baseVariantsFiltered = Object.keys(values[0]).filter(
+    const baseVariantsFiltered = values
+      .flatMap((x) => Object.keys(x))
+      .filter((x, index, array) => array.indexOf(x) === index)
+      .filter((x) => x.endsWith('_percentage') && x !== 'other_percentage');
+
+    /*Object.keys(values[0]).filter(
       (x) => x.endsWith('_percentage') && x !== 'other_percentage'
-    );
+    );*/
+
+    console.dir(values[0]);
 
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
@@ -193,6 +203,7 @@ function useSeriesConfig(
           color,
           label: variantKey,
           shape: 'square',
+          strokeWidth: 0,
           fillOpacity: 1,
         };
       });
@@ -204,6 +215,7 @@ function useSeriesConfig(
       fillOpacity: 1,
       shape: 'square',
       color: colors.lightGray,
+      strokeWidth: 0,
     } as GappedStackedAreaSeriesDefinition<VariantChartValue>;
 
     const selectOptions = [...seriesConfig, otherConfig];
