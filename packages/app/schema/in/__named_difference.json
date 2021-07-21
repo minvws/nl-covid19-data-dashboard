@@ -6,15 +6,15 @@
     "variants__percentage": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/in_named_diff_decimal"
+        "$ref": "#/definitions/optional_named_diff_decimal"
       }
     }
   },
   "required": [],
   "additionalProperties": false,
   "definitions": {
-    "in_named_diff_integer": {
-      "title": "in_named_difference_integer",
+    "optional_named_diff_integer": {
+      "title": "optional_named_difference_integer",
       "type": "object",
       "properties": {
         "name": {
@@ -42,8 +42,8 @@
       ],
       "additionalProperties": false
     },
-    "in_named_diff_decimal": {
-      "title": "in_named_difference_decimal",
+    "optional_named_diff_decimal": {
+      "title": "optional_named_difference_decimal",
       "type": "object",
       "properties": {
         "name": {

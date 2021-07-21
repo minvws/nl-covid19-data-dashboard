@@ -2,7 +2,6 @@ import {
   assert,
   Dictionary,
   InNamedDifference,
-  InNamedDifferenceDecimal,
   InVariants,
   InVariantsVariant,
   InVariantsVariantValue,
@@ -10,6 +9,7 @@ import {
   NlVariants,
   NlVariantsVariant,
   NlVariantsVariantValue,
+  OptionalNamedDifferenceDecimal,
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -20,7 +20,7 @@ export type VariantRow = {
   variant: string;
   countryOfOrigin: string;
   percentage: number | null;
-  difference?: InNamedDifferenceDecimal;
+  difference?: OptionalNamedDifferenceDecimal;
   color: string;
 };
 

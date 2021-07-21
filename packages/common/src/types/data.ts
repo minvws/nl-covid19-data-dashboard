@@ -154,9 +154,9 @@ export interface In {
   variants?: InVariants;
 }
 export interface InNamedDifference {
-  variants__percentage?: InNamedDifferenceDecimal[];
+  variants__percentage?: OptionalNamedDifferenceDecimal[];
 }
-export interface InNamedDifferenceDecimal {
+export interface OptionalNamedDifferenceDecimal {
   name: string;
   old_value: number | null;
   difference: number | null;
