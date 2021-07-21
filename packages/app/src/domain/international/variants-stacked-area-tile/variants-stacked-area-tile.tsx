@@ -177,7 +177,7 @@ function useSeriesConfig(
   return useMemo(() => {
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
-      .filter((x, index, array) => array.indexOf(x) === index)
+      .filter((x, index, array) => array.indexOf(x) === index) // de-dupe
       .filter((x) => x.endsWith('_percentage') && x !== 'other_percentage');
 
     /* Enrich config with dynamic data / locale */
