@@ -10,7 +10,7 @@ import {
 } from './logic';
 
 /**
- * Read the contents of the (edited) local export JSON file and compared it to
+ * Read the contents of the (edited) local export JSON file and compare it to
  * the most recent export to see if there are any changes. Prompt the user with
  * these changes before applying them to the actual Sanity Lokalize documents.
  */
