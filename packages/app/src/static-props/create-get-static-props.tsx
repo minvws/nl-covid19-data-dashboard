@@ -140,7 +140,6 @@ export function createGetStaticProps(
 
     return {
       props,
-      revalidate: 1,
     };
   };
 }
