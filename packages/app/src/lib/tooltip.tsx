@@ -13,8 +13,7 @@ const StyledTippy = styled(Tippy)(
   css({
     backgroundColor: 'white',
     color: 'black',
-    boxShadow:
-      '0 0 20px 4px rgb(154 161 177 / 15%), 0 4px 80px -8px rgb(36 40 47 / 25%), 0 4px 4px -2px rgb(91 94 105 / 15%)',
+    boxShadow: 'tile',
     '.tippy-arrow': {
       color: 'white',
     },
@@ -37,7 +36,7 @@ export function WithTooltip(props: Omit<TippyProps, 'theme'>) {
     <StyledTippy
       appendTo={getBody}
       onMount={handleMount}
-      maxWidth={breakpoints.sm ? '285px' : '350px'}
+      maxWidth={breakpoints.sm ? '260px' : '285px'}
       {...props}
     />
   );
