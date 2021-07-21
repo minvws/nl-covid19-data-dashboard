@@ -14,6 +14,7 @@ import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -159,6 +160,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
+          <Spacer amount={3} />
+
           <PageInformationBlock
             id="besmette-locaties"
             title={infectedLocationsText.titel}
@@ -171,7 +174,6 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [infectedLocationsText.bronnen.rivm],
             }}
             referenceLink={infectedLocationsText.reference.href}
-            hasExtraMarginTop
           />
 
           <TwoKpiSection>

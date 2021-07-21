@@ -6,6 +6,7 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
@@ -217,6 +218,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineAdministrationsKpiSection data={data} />
 
+          <Spacer amount={3} />
+
           <PageInformationBlock
             title={text.bereidheid_section.title}
             description={text.bereidheid_section.description}
@@ -232,7 +235,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
-            hasExtraMarginTop
           />
 
           <ChartTile
@@ -324,6 +326,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
+          <Spacer amount={3} />
+
           <PageInformationBlock
             title={text.stock_and_delivery_section.title}
             icon={scaledVaccineIcon}
@@ -336,7 +340,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 data.vaccine_stock.last_value.date_of_insertion_unix,
               dataSources: [],
             }}
-            hasExtraMarginTop
           />
 
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />

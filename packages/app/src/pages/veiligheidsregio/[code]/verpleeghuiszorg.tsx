@@ -6,6 +6,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -171,6 +172,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
+          <Spacer amount={3} />
+
           <PageInformationBlock
             id="besmette-locaties"
             title={replaceVariablesInText(infectedLocationsText.titel, {
@@ -185,7 +188,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [infectedLocationsText.bronnen.rivm],
             }}
             referenceLink={infectedLocationsText.reference.href}
-            hasExtraMarginTop
           />
 
           <TwoKpiSection>
@@ -248,6 +250,8 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
+          <Spacer amount={3} />
+
           <PageInformationBlock
             id="sterfte"
             title={replaceVariablesInText(deceased.titel, {
@@ -262,7 +266,6 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [deceased.bronnen.rivm],
             }}
             referenceLink={deceased.reference.href}
-            hasExtraMarginTop
           />
 
           <TwoKpiSection>

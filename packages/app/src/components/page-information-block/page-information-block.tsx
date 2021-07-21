@@ -27,7 +27,6 @@ interface InformationBlockProps {
   id?: string;
   category?: string;
   screenReaderCategory?: string;
-  hasExtraMarginTop?: boolean;
 }
 
 export function PageInformationBlock({
@@ -41,7 +40,6 @@ export function PageInformationBlock({
   id,
   category,
   screenReaderCategory,
-  hasExtraMarginTop,
 }: InformationBlockProps) {
   const MetaDataBlock = metadata ? (
     <MetadataBox>
@@ -64,12 +62,7 @@ export function PageInformationBlock({
   ) : null;
 
   return (
-    <Box
-      as="header"
-      id={id}
-      spacing={{ _: 3, md: 4 }}
-      mt={hasExtraMarginTop ? 5 : null}
-    >
+    <Box as="header" id={id} spacing={{ _: 3, md: 4 }}>
       {title && icon ? (
         <Header
           icon={icon}

@@ -12,6 +12,7 @@ import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -216,6 +217,8 @@ const ElderlyAtHomeNationalPage = (
             />
           </ChoroplethTile>
 
+          <Spacer amount={3} />
+
           <PageInformationBlock
             title={text.section_deceased.title}
             icon={<ElderlyIcon />}
@@ -228,7 +231,6 @@ const ElderlyAtHomeNationalPage = (
               dataSources: [text.section_deceased.bronnen.rivm],
             }}
             referenceLink={text.section_deceased.reference.href}
-            hasExtraMarginTop
           />
 
           <TwoKpiSection>

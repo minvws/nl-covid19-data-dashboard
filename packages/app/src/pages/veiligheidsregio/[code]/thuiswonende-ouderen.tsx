@@ -4,6 +4,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -14,12 +15,12 @@ import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
@@ -186,6 +187,8 @@ const ElderlyAtHomeRegionalPage = (
             )}
           </ChartTile>
 
+          <Spacer amount={3} />
+
           <PageInformationBlock
             title={replaceVariablesInText(text.section_deceased.title, {
               safetyRegion: vrName,
@@ -205,7 +208,6 @@ const ElderlyAtHomeRegionalPage = (
               dataSources: [text.section_deceased.bronnen.rivm],
             }}
             referenceLink={text.section_deceased.reference.href}
-            hasExtraMarginTop
           />
 
           <TwoKpiSection>
