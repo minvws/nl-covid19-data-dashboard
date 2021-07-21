@@ -74,8 +74,6 @@ function VariantStackedAreaTileWithData({
     values
   );
 
-  console.dir(seriesConfig);
-
   const filteredConfig = useFilteredSeriesConfig(
     seriesConfig,
     otherConfig,
@@ -181,12 +179,6 @@ function useSeriesConfig(
       .flatMap((x) => Object.keys(x))
       .filter((x, index, array) => array.indexOf(x) === index)
       .filter((x) => x.endsWith('_percentage') && x !== 'other_percentage');
-
-    /*Object.keys(values[0]).filter(
-      (x) => x.endsWith('_percentage') && x !== 'other_percentage'
-    );*/
-
-    console.dir(values[0]);
 
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
