@@ -30,7 +30,7 @@ export const features: Feature[] = [
   {
     name: 'inPositiveTestsPage',
     isEnabled: false,
-    dataScopes: ['in'],
+    dataScopes: ['in', 'in_collection'],
     metricName: 'tested_overall',
   },
   {
