@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 import Gedrag from '~/assets/gedrag.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ContentHeader } from '~/components/content-header';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -12,7 +11,7 @@ import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -39,15 +38,10 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-export default function BehaviorPageSafetyRegion(
+export default function BehaviorPageVr(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const {
-    lastGenerated,
-    content,
-    selectedVrData: data,
-    safetyRegionName,
-  } = props;
+  const { lastGenerated, content, selectedVrData: data, vrName } = props;
 
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -67,17 +61,13 @@ export default function BehaviorPageSafetyRegion(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.gedrag}
             title={regionaal_gedrag.pagina.titel}
             icon={<Gedrag />}
-            subtitle={regionaal_gedrag.pagina.toelichting}
+            description={regionaal_gedrag.pagina.toelichting}
             metadata={{
               datumsText: regionaal_gedrag.datums,
               dateOrRange: {
@@ -87,7 +77,8 @@ export default function BehaviorPageSafetyRegion(
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
               dataSources: [regionaal_gedrag.bronnen.rivm],
             }}
-            reference={regionaal_gedrag.reference}
+            referenceLink={regionaal_gedrag.reference.href}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
@@ -126,8 +117,6 @@ export default function BehaviorPageSafetyRegion(
             </Tile>
           </TwoKpiSection>
 
-          <ArticleStrip articles={content.articles} />
-
           <BehaviorTableTile
             title={regionaal_gedrag.basisregels.title}
             description={regionaal_gedrag.basisregels.description}
@@ -159,7 +148,7 @@ export default function BehaviorPageSafetyRegion(
 
           <MoreInformation />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 }

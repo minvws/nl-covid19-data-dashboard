@@ -17,11 +17,12 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData()
+  selectGmPageMetricData('code', 'difference')
 );
 
 const Municipality = (props: StaticProps<typeof getStaticProps>) => {
-  const { selectedGmData: data, lastGenerated, municipalityName } = props;
+  const { lastGenerated, municipalityName, sideBarData, selectedGmData } =
+    props;
   const router = useRouter();
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
@@ -34,7 +35,9 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        code={selectedGmData.code}
+        difference={selectedGmData.difference}
+        data={sideBarData}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       />

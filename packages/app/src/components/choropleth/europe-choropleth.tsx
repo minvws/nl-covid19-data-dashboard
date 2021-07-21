@@ -17,7 +17,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from '../base';
-import { Choropleth } from './choropleth';
+import { Choropleth, CHOROPLETH_ASPECT_RATIO } from './choropleth';
 import { useInChoroplethColorScale, useTabInteractiveButton } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
@@ -27,7 +27,7 @@ import { europeGeo } from './topology';
  * List of countries to define the boundingbox. These are countries on the outer edges
  * of the group of countries that are shown.
  */
-const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC'];
+const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
 
 const boundingBoxEurope: EuropeGeoJSON = {
   ...europeGeo,
@@ -173,6 +173,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
         })}
       >
         <Choropleth
+          aspectRatio={CHOROPLETH_ASPECT_RATIO.in}
           projection={geoConicConformal}
           accessibility={choroplethAccessibility}
           initialWidth={1.1 * mapHeight}

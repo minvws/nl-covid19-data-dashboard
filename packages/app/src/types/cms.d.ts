@@ -72,10 +72,7 @@ export interface ImageBlock {
   };
 }
 
-type RichContentBlock =
-  | Block
-  | RichContentImageBlock
-  | RichContentLineChartBlock;
+type RichContentBlock = Block | RichContentImageBlock;
 
 // @TODO more properties are needed
 interface Block {
@@ -90,14 +87,6 @@ interface RichContentImageBlock extends ImageBlock {
   caption?: string;
 }
 
-// @TODO more properties are needed
-interface RichContentLineChartBlock {
-  _key: string;
-  _type: 'lineChart';
-  metricName: string;
-  metricProperty: string;
-}
-
 export type RoadmapData = {
   _createdAt: string;
   _id: string;
@@ -108,14 +97,14 @@ export type RoadmapData = {
   title: string;
 };
 
-export type Restriction = {
+type Restriction = {
   icon?: string;
   _key: string;
   _type: 'restriction';
   text: string;
 };
 
-export type LockdownDataGroup = {
+type LockdownDataGroup = {
   icon?: string;
   title: string;
   restrictions: Restriction[];
@@ -172,17 +161,9 @@ export interface LokalizeText {
   is_newly_added: boolean;
 }
 
-export type DecoratedLink = {
-  title: string;
-  category: string;
-  href: string;
-  cover: ImageBlock;
-};
-
 export type VaccinationPageQuery = {
-  pageInfo: TitleDescriptionBlock;
-  pageLinks: DecoratedLink[];
-  linksTitle: string;
+  pageDescription: RichContentBlock[];
+  usefulLinks: LinkProps[];
   title: string;
   description: RichContentBlock[];
   milestones: Milestones[];

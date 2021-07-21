@@ -5,8 +5,11 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
   // const { locale } = context;
   const locale = process.env.NEXT_PUBLIC_LOCALE;
 
-  return `{
+  return /* groq */ `{
     // Retrieve the latest 3 articles with the highlighted article filtered out:
+    "showWeeklyHighlight": *[_type=='topicalPage']{
+      showWeeklyHighlight,
+    }[0].showWeeklyHighlight,
     'articles': *[_type == 'article' && !(_id == *[_type == 'topicalPage']{"i":highlightedArticle->{_id}}[0].i._id)] | order(publicationDate desc) {
       "title":title.${locale},
       slug,
@@ -15,7 +18,7 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
         ...cover,
         "asset": cover.asset->
       }
-    }[0..2],
+    }[0..3],
     'weeklyHighlight': *[_type == 'editorial'] | order(publicationDate desc) {
       "title":title.${locale},
       slug,
@@ -27,6 +30,7 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
       }
     }[0],
     "highlights": *[_type=='topicalPage']{
+      showWeeklyMessage,
       highlights[]{
         "title":title.${locale},
         "category": category.${locale},

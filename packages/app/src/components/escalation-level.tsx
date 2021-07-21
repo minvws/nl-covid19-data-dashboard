@@ -10,7 +10,7 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 
-export type EscalationLevelProps = {
+type EscalationLevelProps = {
   level: EscalationLevel;
   fontSize?: number;
   useLevelColor?: boolean;
@@ -63,25 +63,5 @@ export function EscalationLevelLabel({
     <Text as="span" fontWeight="bold" fontSize={fontSize} color={color}>
       {siteText.escalatie_niveau.types[getEscalationLevelIndexKey(level)].titel}
     </Text>
-  );
-}
-
-export function EscalationLevelInfo(props: EscalationLevelProps) {
-  const { level } = props;
-  const { siteText } = useIntl();
-
-  return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      justifyContent="flex-start"
-      alignItems="center"
-      mt={1}
-    >
-      <Text as="span" marginLeft="0 !important" marginRight=".5em !important">
-        {siteText.escalatie_niveau.sidebar_label}
-      </Text>
-      <EscalationLevelInfoLabel level={level} />
-    </Box>
   );
 }

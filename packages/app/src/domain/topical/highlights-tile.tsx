@@ -21,10 +21,11 @@ export interface WeeklyHighlightProps {
 interface HighlightsTileProps {
   weeklyHighlight: WeeklyHighlightProps;
   highlights: HighlightTeaserProps[];
+  showWeeklyHighlight: boolean;
 }
 
 export function HighlightsTile(props: HighlightsTileProps) {
-  const { weeklyHighlight, highlights } = props;
+  const { weeklyHighlight, highlights, showWeeklyHighlight } = props;
   const breakpoints = useBreakpoints();
 
   return (
@@ -35,28 +36,32 @@ export function HighlightsTile(props: HighlightsTileProps) {
       flexWrap="wrap"
       mr={0}
     >
-      <ArticleBox>
-        <HighlightTeaser
-          cover={weeklyHighlight.cover}
-          href={`/weekberichten/${weeklyHighlight.slug.current}`}
-          title={weeklyHighlight.title}
-          category={weeklyHighlight.category}
-          publicationDate={weeklyHighlight.publicationDate}
-          isWeekly
-          variant="blue"
-        />
-      </ArticleBox>
-      {highlights.map((item, index) => (
-        <ArticleBox key={index}>
+      {showWeeklyHighlight && (
+        <ArticleBox>
           <HighlightTeaser
-            cover={item.cover}
-            href={item.href}
-            label={item.label}
-            title={item.title}
-            category={item.category}
+            cover={weeklyHighlight.cover}
+            href={`/weekberichten/${weeklyHighlight.slug.current}`}
+            title={weeklyHighlight.title}
+            category={weeklyHighlight.category}
+            publicationDate={weeklyHighlight.publicationDate}
+            isWeekly
+            variant="blue"
           />
         </ArticleBox>
-      ))}
+      )}
+      {highlights
+        .map((item, index) => (
+          <ArticleBox key={index}>
+            <HighlightTeaser
+              cover={item.cover}
+              href={item.href}
+              label={item.label}
+              title={item.title}
+              category={item.category}
+            />
+          </ArticleBox>
+        ))
+        .slice(0, showWeeklyHighlight ? 2 : 3)}
     </Box>
   );
 }

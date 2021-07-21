@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Getest from '~/assets/test.svg';
+import Varianten from '~/assets/varianten.svg';
 import {
   CategoryMenu,
   Menu,
@@ -53,15 +54,19 @@ export function InternationalLayout(props: InternationalLayoutProps) {
             mx="auto"
           >
             <Menu>
-              <CategoryMenu>
+              <CategoryMenu title={siteText.internationaal.titel_sidebar}>
                 <MetricMenuItemLink
-                  showArrow
                   href={reverseRouter.in.positiefGetesteMensen()}
                   title={
                     siteText.internationaal_positief_geteste_personen
                       .titel_sidebar
                   }
                   icon={<Getest />}
+                />
+                <MetricMenuItemLink
+                  href={reverseRouter.in.varianten()}
+                  title={siteText.internationaal_varianten.titel_sidebar}
+                  icon={<Varianten />}
                 />
               </CategoryMenu>
             </Menu>

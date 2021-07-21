@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { assert } from '~/utils/assert';
 import { GetMunicipalityDataFunctionType } from './use-municipality-data';
-import { GetVrDataFunctionType } from './use-safety-region-data';
+import { GetVrDataFunctionType } from './use-vr-data';
 
 /**
  * This hook return a color scale for the given domain and gradient.

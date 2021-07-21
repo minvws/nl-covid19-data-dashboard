@@ -1,6 +1,5 @@
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ContentHeader } from '~/components/content-header';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -61,14 +60,14 @@ export default function BrononderzoekPage(
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
               intl.siteText.positief_geteste_personen.titel_sidebar
             }
             title={text.titel}
             icon={<SituationIcon id="gathering" />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
@@ -78,10 +77,9 @@ export default function BrononderzoekPage(
               dateOfInsertionUnix: singleValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <SituationsDataCoverageChoroplethTile data={choropleth.vr} />
 
