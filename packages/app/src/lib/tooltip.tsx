@@ -19,14 +19,14 @@ const StyledTippy = styled(Tippy)(
       color: 'white',
     },
   })
-) as any;
+);
 
 /**
  * Usage:
  *     <WithTooltip content={<p>message</p>}><button>foo</button></WithTooltip>
  */
 
-export function WithTooltip(props: TippyProps) {
+export function WithTooltip(props: Omit<TippyProps, 'theme'>) {
   const breakpoints = useBreakpoints(true);
 
   if (!isDefined(props.content)) {
