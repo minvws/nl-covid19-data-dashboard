@@ -30,7 +30,7 @@ import { colors } from '~/style/theme';
 import { VariantsPageQuery } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
-  'variantsPage',
+  'nlVariantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
     (context) => {
