@@ -14,6 +14,7 @@ import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
+import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -34,42 +35,44 @@ import { getInternationalVariantTableData } from '~/static-props/variants/get-in
 import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  () => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    const siteText = getLocaleFile(locale);
-    const countryNames = loadJsonFromDataFile<Record<string, string>>(
-      `${locale}-country-names.json`,
-      'static-json'
-    );
-    const { internationalData } = getInData([...countryCodes])();
-    const countryOptions = countryCodes
-      .map<{ value: string; label: string }>((x) => ({
-        value: x,
-        label: countryNames[x],
-      }))
-      .sort((a, b) => a.label.localeCompare(b.label));
+export const getStaticProps = withFeatureNotFoundPage(
+  'inVariantsPage',
+  createGetStaticProps(
+    getLastGeneratedDate,
+    () => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      const siteText = getLocaleFile(locale);
+      const countryNames = loadJsonFromDataFile<Record<string, string>>(
+        `${locale}-country-names.json`,
+        'static-json'
+      );
+      const { internationalData } = getInData([...countryCodes])();
+      const countryOptions = countryCodes
+        .map<{ value: string; label: string }>((x) => ({
+          value: x,
+          label: countryNames[x],
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label));
 
-    return {
-      countryOptions,
-      ...getInternationalVariantTableData(
-        internationalData,
-        siteText.covid_varianten.landen_van_herkomst
-      ),
-      ...getInternationalVariantChartData(internationalData),
-    };
-  },
-  createGetContent<{
-    page: {
-      usefulLinks?: LinkProps[];
-    };
-    highlight: {
-      articles?: ArticleSummary[];
-    };
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return `{
+      return {
+        countryOptions,
+        ...getInternationalVariantTableData(
+          internationalData,
+          siteText.covid_varianten.landen_van_herkomst
+        ),
+        ...getInternationalVariantChartData(internationalData),
+      };
+    },
+    createGetContent<{
+      page: {
+        usefulLinks?: LinkProps[];
+      };
+      highlight: {
+        articles?: ArticleSummary[];
+      };
+    }>(() => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      return `{
         "page": *[_type=='in_variantsPage']{
           "usefulLinks": [...pageLinks[]{
             "title": title.${locale},
@@ -78,7 +81,8 @@ export const getStaticProps = createGetStaticProps(
         }[0],
         "highlight": ${createPageArticlesQuery('in_variantsPage', locale)}
     }`;
-  })
+    })
+  )
 );
 
 export default function VariantenPage(

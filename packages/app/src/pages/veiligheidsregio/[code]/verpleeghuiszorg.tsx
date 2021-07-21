@@ -1,12 +1,12 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -74,7 +74,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={
               siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
@@ -85,7 +85,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               safetyRegion: vrName,
             })}
             icon={<Verpleeghuiszorg />}
-            subtitle={replaceVariablesInText(
+            description={replaceVariablesInText(
               positiveTestedPeopleText.pagina_toelichting,
               {
                 safetyRegion: vrName,
@@ -97,10 +97,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
               dataSources: [positiveTestedPeopleText.bronnen.rivm],
             }}
-            reference={positiveTestedPeopleText.reference}
+            referenceLink={positiveTestedPeopleText.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -173,21 +172,22 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <Spacer amount={3} />
+
+          <PageInformationBlock
             id="besmette-locaties"
-            skipLinkAnchor={true}
             title={replaceVariablesInText(infectedLocationsText.titel, {
               safetyRegion: vrName,
             })}
             icon={<Locatie />}
-            subtitle={infectedLocationsText.pagina_toelichting}
+            description={infectedLocationsText.pagina_toelichting}
             metadata={{
               datumsText: infectedLocationsText.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
               dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
               dataSources: [infectedLocationsText.bronnen.rivm],
             }}
-            reference={infectedLocationsText.reference}
+            referenceLink={infectedLocationsText.reference.href}
           />
 
           <TwoKpiSection>
@@ -250,21 +250,22 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <Spacer amount={3} />
+
+          <PageInformationBlock
             id="sterfte"
-            skipLinkAnchor={true}
             title={replaceVariablesInText(deceased.titel, {
               safetyRegion: vrName,
             })}
             icon={<CoronaVirus />}
-            subtitle={deceased.pagina_toelichting}
+            description={deceased.pagina_toelichting}
             metadata={{
               datumsText: deceased.datums,
               dateOrRange: nursinghomeLastValue.date_unix,
               dateOfInsertionUnix: nursinghomeLastValue.date_of_insertion_unix,
               dataSources: [deceased.bronnen.rivm],
             }}
-            reference={deceased.reference}
+            referenceLink={deceased.reference.href}
           />
 
           <TwoKpiSection>

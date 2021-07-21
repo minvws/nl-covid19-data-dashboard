@@ -1,8 +1,8 @@
 import Arts from '~/assets/arts.svg';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -42,21 +42,21 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.vroege_signalen}
             screenReaderCategory={
               siteText.verdenkingen_huisartsen.titel_sidebar
             }
             title={text.titel}
             icon={<Arts />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValue.date_end_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.nivel],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
           />
 
           <TwoKpiSection>

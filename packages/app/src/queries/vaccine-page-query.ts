@@ -5,11 +5,8 @@ export function getVaccinePageQuery() {
 
   return `
   *[_type=='vaccinationsPage']{
-    "pageInfo": {
-      "title": pageInfo.title.${locale},
-      "description": pageInfo.description.${locale},
-    },
-    "pageLinks": [...pageLinks[]{
+    "pageDescription": pageDescription.${locale},
+    "usefulLinks": [...usefulLinks[]{
       "title": title.${locale},
       "category": category.${locale},
       "href": href,

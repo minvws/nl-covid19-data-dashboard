@@ -9,22 +9,15 @@ export const vaccinationsPage = {
   fields: [
     {
       title: 'Pagina informatie',
-      name: 'pageInfo',
-      type: 'titleDescriptionBlock',
-    },
-    {
-      title: 'Linkblok titel',
-      name: 'linksTitle',
-      type: 'localeString',
-      description: "De titel boven het blok met 'Ook interessant' links",
+      name: 'pageDescription',
+      type: 'localeBlock',
     },
     {
       title: "'Ook interessant' links",
-      description:
-        'Maximaal 4 links naar interessante onderwerpen. Alleen de bovenste link wordt volledig getoond (inclusief plaatje en categorie), van de rest alleen de titel.',
-      name: 'pageLinks',
+      description: 'Maximaal 4 links naar interessante onderwerpen.',
+      name: 'usefulLinks',
       type: 'array',
-      of: [{ type: 'decoratedLink' }],
+      of: [{ type: 'link' }],
       validation: (rule: Rule) => rule.required().min(1).max(4),
     },
     {
