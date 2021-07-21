@@ -7,7 +7,6 @@ import {
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
@@ -16,10 +15,10 @@ import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -100,24 +99,23 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           description={text.metadata.description}
         />
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
             screenReaderCategory={
               siteText.ziekenhuisopnames_per_dag.titel_sidebar
             }
             title={text.titel}
             icon={<Ziekenhuis />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValueNice.date_unix,
               dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.fix_this.articles}
           />
-
-          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile

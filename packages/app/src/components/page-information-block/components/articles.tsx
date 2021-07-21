@@ -1,9 +1,11 @@
 import css from '@styled-system/css';
+import { Fragment } from 'react';
 import styled from 'styled-components';
+import ChevronIcon from '~/assets/chevron.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
@@ -17,9 +19,9 @@ export function Articles({ articles }: ArticlesProps) {
   const { siteText } = useIntl();
 
   return (
-    <>
+    <Box>
       <InlineText
-        mb={2}
+        mb={3}
         fontSize={2}
         fontWeight="bold"
         css={css({ display: 'block' })}
@@ -36,7 +38,7 @@ export function Articles({ articles }: ArticlesProps) {
           />
         ))}
       </Box>
-    </>
+    </Box>
   );
 }
 
@@ -47,6 +49,8 @@ interface ArticleItemProps {
 }
 
 function ArticleItem({ slug, cover, title }: ArticleItemProps) {
+  const words = title.split(' ');
+
   return (
     <Link passHref href={`/artikelen/${slug}`}>
       <StyledLink>
@@ -58,7 +62,26 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
           />
         </Box>
         <Box pl={3} display="flex" alignItems="center">
-          <Text m={0}>{title}</Text>
+          <StyledText>
+            {words.map((word, index) => (
+              <Fragment key="index">
+                {words.length - 1 === index ? (
+                  <InlineText
+                    css={css({
+                      position: 'relative',
+                      display: 'flex',
+                      alignItems: 'center',
+                    })}
+                  >
+                    {word}
+                    <ChevronIcon />
+                  </InlineText>
+                ) : (
+                  `${word} `
+                )}
+              </Fragment>
+            ))}
+          </StyledText>
         </Box>
       </StyledLink>
     </Link>
@@ -71,5 +94,24 @@ const StyledLink = styled.a(
     textDecoration: 'none',
     display: 'flex',
     fontWeight: 'bold',
+  })
+);
+
+const StyledText = styled.p(
+  css({
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: 0,
+    whiteSpace: 'pre-wrap',
+
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+
+    svg: {
+      marginLeft: '2px',
+      width: 12,
+      height: 12,
+    },
   })
 );
