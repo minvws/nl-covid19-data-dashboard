@@ -38,10 +38,7 @@ export function getSchemaInfo(
       ],
     },
     in_collection: {
-      files: [
-        // @TODO enable once the file is available
-        /* 'IN_COLLECTION.json' */
-      ],
+      files: ['IN_COLLECTION.json'],
       basePath: jsonDirectory,
     },
     nl: {
