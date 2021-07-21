@@ -178,16 +178,16 @@ export default function VariantenPage(
               alignSelf="flex-start"
               mt={3}
               display="flex"
-              alignItems="center"
+              alignItems={{ _: 'flex-start', md: 'center' }}
+              flexDirection={{ _: 'column', md: 'row' }}
             >
               <Select
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
-                placeholder={text.selecteer_een_land}
               />
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
-                <Box ml={3}>
+                <Box ml={{ _: 0, md: 3 }} mt={{ _: 3, md: 0 }}>
                   <WarningTile
                     message={text.lagere_betrouwbaarheid}
                     variant="emphasis"
@@ -210,7 +210,6 @@ export default function VariantenPage(
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
-                placeholder={text.selecteer_een_land}
               />
             </Box>
           </VariantsStackedAreaTile>

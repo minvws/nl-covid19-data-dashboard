@@ -1,5 +1,6 @@
+import { DifferenceDecimal } from '@corona-dashboard/common';
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { TableText } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
@@ -13,6 +14,7 @@ import {
   VariantDifference,
   VariantNameCell,
 } from '.';
+import { NoPercentageData } from './no-percentage-data';
 
 const columnKeys = ['variant_titel', 'percentage', 'vorige_meeting'] as const;
 
@@ -27,7 +29,7 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
 
   const formatValue = useMemo(() => {
     const numberOfDecimals = getMaximumNumberOfDecimals(
-      rows.map((x) => x.percentage)
+      rows.map((x) => x.percentage ?? 0)
     );
     return (value: number) =>
       intl.formatPercentage(value, {
@@ -54,17 +56,25 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
               countryOfOrigin={row.countryOfOrigin}
             />
             <Cell>
-              <Box maxWidth="20em">
-                <PercentageBarWithNumber
-                  percentage={row.percentage}
-                  color={row.color}
-                  formatValue={formatValue}
-                />
-              </Box>
+              {isPresent(row.percentage) ? (
+                <Box maxWidth="20em">
+                  <PercentageBarWithNumber
+                    percentage={row.percentage}
+                    color={row.color}
+                    formatValue={formatValue}
+                  />
+                </Box>
+              ) : (
+                <NoPercentageData />
+              )}
             </Cell>
             <Cell>
-              {isDefined(row.difference) ? (
-                <VariantDifference value={row.difference} />
+              {isPresent(row.difference) &&
+              isPresent(row.difference.difference) &&
+              isPresent(row.difference.old_value) ? (
+                <VariantDifference
+                  value={row.difference as DifferenceDecimal}
+                />
               ) : (
                 '-'
               )}
