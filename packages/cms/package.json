@@ -36,7 +36,6 @@
     "download": "^8.0.0",
     "flat": "^5.0.2",
     "fs-extra": "^10.0.0",
-    "json-to-ts": "^1.7.0",
     "outdent": "^0.8.0",
     "p-queue": "^6",
     "prompts": "^2.4.0",

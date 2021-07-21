@@ -7,7 +7,6 @@ import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { createFlatTexts, removeIdsFromKeys } from '@corona-dashboard/common';
 import flatten, { unflatten } from 'flat';
 import fs from 'fs-extra';
-import JsonToTS from 'json-to-ts';
 import mapValues from 'lodash/mapValues';
 import { outdent } from 'outdent';
 import path from 'path';
@@ -130,23 +129,24 @@ export async function generateTypes() {
   const body = outdent`
     /**
      * This file was auto-generated from the lokalize export script. It doesn't
-     * output fully valid TS interfaces but the compiler doesn't seem
-     * to care.
+     * output fully valid TS interfaces but the compiler doesn't seem to care.
      */
 
      export interface SiteText ${textsTypeString}
   `;
 
   /**
-   * The above seems to work but doesn't output real Typscript syntax. Maybe we
-   * can use something that generates actual TS interfaces. Attempt below...
+   * @TODO The above seems to work but doesn't output real Typscript syntax in
+   * the d.ts. file, so it's a little dodgy. Alternatively we could use something that
+   * generates actual TS interfaces.
+   *
+   * For example json-to-ts could be an option, but it doesn't generate types
+   * very cleanly and creates a lot of sub-types seemingly without a good way to
+   * control naming.
+   *
+   * As long as the compiler is happy the current approach is the most simple
+   * and readable solution.
    */
-  // let string = '';
-
-  // JsonToTS(textsObject).forEach((typeInterface) => {string += typeInterface;
-  // });
-
-  // const body = `export interface SiteText ${string}`;
 
   return new Promise<void>((resolve, reject) =>
     fs.writeFile(
