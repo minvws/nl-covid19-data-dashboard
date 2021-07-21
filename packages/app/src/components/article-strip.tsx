@@ -1,16 +1,16 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { BlueTile } from '~/components/tile';
 import { SanityImage } from '~/components/cms/sanity-image';
+import { BlueTile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
-import { getImageProps } from '~/lib/sanity';
 import { useIntl } from '~/intl';
+import { getImageProps } from '~/lib/sanity';
+import { colors } from '~/style/theme';
 import { ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { ArticleSummary } from './article-teaser';
-import { ArrowIconRight } from '~/components/arrow-icon';
-import { colors } from '~/style/theme';
 
 type ArticleStripProps = {
   articles?: ArticleSummary[];
@@ -28,7 +28,7 @@ export function ArticleStrip(props: ArticleStripProps) {
   return (
     <BlueTile>
       <Heading level={4} as="h3">
-        {siteText.article_strip_title}
+        {siteText.article_strip.title}
       </Heading>
 
       <Box display="flex" flexWrap="wrap">

@@ -31,4 +31,4 @@ yarn-error.log*
 .sanity-asset-cache
 
 # cache dir for sanity lokalize exports
-.sanity-lokalize-cache
+.lokalize-reference

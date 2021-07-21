@@ -75,7 +75,7 @@ ids would result in compile- and run-time errors, but there's a workaround:
 - run-time: on load of the app all ids will be removed from the keys.
 
 The runtime workaround would be a waste of resources on production, but luckily
-we can run `yarn lokalize:export --production` to ignore document ids.
+we can run `yarn lokalize:export --clean-json` to ignore document ids.
 
 ### Adding, Deleting and Moving Texts: Sync Mutations
 

@@ -1,5 +1,4 @@
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { flatten, unflatten } from 'flat';
 import mapKeys from 'lodash/mapKeys';
 
 /**
@@ -9,21 +8,12 @@ import mapKeys from 'lodash/mapKeys';
 export const ID_PREFIX = '__@__';
 
 /**
- * Create a flat structure from which the JSON is rebuilt. Here we filter out
- * any deleted keys from the mutations file, so that any  deletions that
- * happened locally in your branch (but are not committed to the dataset yet)
- * are stripped from the output and your feature code sees the correct dataset
- * as it will be after merging the branch.
+ * Creates a flat structure from which both language JSON files are built.
  */
-export function createFlatTexts({
-  documents,
-  deletedKeys = [],
-  appendDocumentIdToKey = false,
-}: {
-  documents: LokalizeText[];
-  deletedKeys?: string[];
-  appendDocumentIdToKey?: boolean;
-}) {
+export function createFlatTexts(
+  documents: LokalizeText[],
+  appendDocumentIdToKey = false
+) {
   const nl: Record<string, string> = {};
   const en: Record<string, string> = {};
 
@@ -34,8 +24,6 @@ export function createFlatTexts({
    * First write all published document texts
    */
   for (const document of published) {
-    if (deletedKeys.includes(document.key)) continue;
-
     const { jsonKey, localeText } = parseLocaleTextDocument(
       document,
       appendDocumentIdToKey
@@ -50,8 +38,6 @@ export function createFlatTexts({
    * draft version.
    */
   for (const document of drafts) {
-    if (deletedKeys.includes(document.key)) continue;
-
     const { jsonKey, localeText } = parseLocaleTextDocument(
       document,
       appendDocumentIdToKey
@@ -69,8 +55,8 @@ export function parseLocaleTextDocument(
   appendDocumentIdToKey = false
 ) {
   /**
-   * Paths inside the `__root` subject should be placed under the path in the
-   * root of the exported json
+   * Paths inside the `__root` subject should be placed in the
+   * root of the exported json.
    */
   const jsonKey =
     document.key.replace('__root.', '') +
@@ -79,22 +65,17 @@ export function parseLocaleTextDocument(
   const nl = document.should_display_empty
     ? ''
     : document.text.nl?.trim() || '';
+
+  /**
+   * Fall back to Dutch texts if English is missing.
+   */
   const en = document.should_display_empty
     ? ''
-    : /**
-       * Here make an automatic fallback to Dutch texts if English is missing.
-       */
-      document.text.en?.trim() || nl;
+    : document.text.en?.trim() || nl;
 
   return { jsonKey, localeText: { nl, en } };
 }
 
-export function removeIdsFromKeys<T>(data: T) {
-  return unflatten(
-    mapKeys(
-      flatten(data) as Record<string, string>,
-      (_value, key) => key.split(ID_PREFIX)[0]
-    ),
-    { object: true }
-  ) as T;
+export function removeIdsFromKeys(data: Record<string, string>) {
+  return mapKeys(data, (_value, key) => key.split(ID_PREFIX)[0]);
 }

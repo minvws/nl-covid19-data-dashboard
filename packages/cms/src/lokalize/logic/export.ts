@@ -8,10 +8,12 @@ import { createFlatTexts, removeIdsFromKeys } from '@corona-dashboard/common';
 import flatten, { unflatten } from 'flat';
 import fs from 'fs-extra';
 import mapValues from 'lodash/mapValues';
+import { outdent } from 'outdent';
 import path from 'path';
 import prettier from 'prettier';
-import { collapseTextMutations, readTextMutations } from '.';
+import { readTextMutations } from '.';
 import { getClient } from '../../client';
+import { simulateDeleteMutations, simulateMoveMutations } from './mutations';
 
 export const localeDirectory = path.resolve(
   __dirname,
@@ -22,52 +24,49 @@ export const localeDirectory = path.resolve(
   'app/src/locale'
 );
 
-export const localeCacheDirectory = path.resolve(
+export const localeReferenceDirectory = path.resolve(
   __dirname,
   '..', // lokalize
   '..', // src
   '..', // cms
-  '.sanity-lokalize-cache'
+  '.lokalize-reference'
 );
 
-/**
- * Make sure the cache directory exists
- */
-fs.ensureDirSync(localeCacheDirectory);
-
-/**
- * @TODO:
- * - remove add / delete cli
- */
-
-export async function exportLokalizeTexts(
-  dataset?: string,
-  includeDrafts = false,
-  appendDocumentIdToKey = false
-) {
-  const client = getClient(dataset);
+export async function exportLokalizeTexts({
+  dataset,
+  appendDocumentIdToKey = false,
+}: {
+  dataset?: string;
+  appendDocumentIdToKey?: boolean;
+}) {
   /**
-   * The client will load drafts by default because it is authenticated with a
-   * token. If the `drafts` flag is not set to true, we will manually
-   * exclude draft-documents on query-level.
+   * Make sure the reference directory exists
    */
-  const draftsQueryPart = includeDrafts ? '' : '&& !(_id in path("drafts.**"))';
+  fs.ensureDirSync(localeReferenceDirectory);
+
+  const client = getClient(dataset);
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(key asc)`
+    `*[_type == 'lokalizeText'] | order(key asc)`
   );
 
   const mutations = await readTextMutations();
 
-  const deletedKeys = collapseTextMutations(mutations)
-    .filter((x) => x.action === 'delete')
-    .map((x) => x.key);
+  /**
+   * We simulate local mutations as if they already happened to the documents in
+   * Sanity. This way the user gets an up-to-date version of JSON output, but
+   * the documents in Sanity are left untouched to not break other feature
+   * branches in the meantime.
+   *
+   * Moves are applied before deletions, to prevent losing documents in edge
+   * cases.
+   */
+  const mutatedDocuments = simulateDeleteMutations(
+    simulateMoveMutations(documents, mutations),
+    mutations
+  );
 
-  const flatTexts = createFlatTexts({
-    documents,
-    deletedKeys,
-    appendDocumentIdToKey,
-  });
+  const flatTexts = createFlatTexts(mutatedDocuments, appendDocumentIdToKey);
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
@@ -81,12 +80,12 @@ export async function exportLokalizeTexts(
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
-    path.join(localeCacheDirectory, 'nl_export.json')
+    path.join(localeReferenceDirectory, 'nl_export.json')
   );
 
   await writePrettyJson(
     unflatten(flatTexts.en, { object: true }),
-    path.join(localeCacheDirectory, 'en_export.json')
+    path.join(localeReferenceDirectory, 'en_export.json')
   );
 
   await generateTypes();
@@ -110,13 +109,25 @@ export async function generateTypes() {
     )
   ) as Record<string, string>;
 
-  const siteTextObj = removeIdsFromKeys(mapValues(data, () => '@string'));
-  const siteTextString = JSON.stringify(siteTextObj, null, 2).replace(
+  const textsFlat = removeIdsFromKeys(mapValues(data, () => '@string'));
+
+  const textsObject = unflatten(textsFlat, { object: true });
+
+  const textsTypeString = JSON.stringify(textsObject, null, 2).replace(
     /\"\@string\"/g,
     'string'
   );
 
-  const body = `export interface SiteText ${siteTextString}`;
+  const body = prettier.format(
+    `
+      /**
+       * This file was auto-generated from the lokalize export script.
+       */
+      export interface SiteText ${textsTypeString}
+    `,
+    { parser: 'typescript' }
+  );
+
 
   return new Promise<void>((resolve, reject) =>
     fs.writeFile(

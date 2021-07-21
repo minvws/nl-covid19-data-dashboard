@@ -1,3 +1,4 @@
+import { assert } from '@corona-dashboard/common';
 import chalk from 'chalk';
 import prompts from 'prompts';
 import { getClient } from '../client';
@@ -5,30 +6,43 @@ import {
   appendTextMutation,
   exportLokalizeTexts,
   getLocalMutations,
+  readReferenceTexts,
 } from './logic';
 
+/**
+ * Read the contents of the (edited) local export JSON file and compare it to
+ * the most recent export to see if there are any changes. Prompt the user with
+ * these changes before applying them to the actual Sanity Lokalize documents.
+ */
 (async function run() {
-  const mutations = await getLocalMutations();
+  const referenceTexts = await readReferenceTexts();
+
+  assert(
+    referenceTexts,
+    `Failed to read reference texts. Please run lokalize:export first.`
+  );
+
+  const mutations = await getLocalMutations(referenceTexts);
 
   const choices = [
     ...mutations.add.map(
       (mutation) =>
         ({
-          title: chalk.green(`add:    ${mutation.key}`),
+          title: chalk.green(`add:\t\t${mutation.key}`),
           value: { type: 'add', mutation },
         } as const)
     ),
     ...mutations.delete.map(
       (mutation) =>
         ({
-          title: chalk.red(`delete: ${mutation.key}`),
+          title: chalk.red(`delete:\t${mutation.key}`),
           value: { type: 'delete', mutation },
         } as const)
     ),
     ...mutations.move.map(
       (mutation) =>
         ({
-          title: `move:   ${mutation.oldKey} → ${mutation.key}`,
+          title: `move:\t\t${mutation.key} → ${mutation.moveTo}`,
           value: { type: 'move', mutation },
         } as const)
     ),
@@ -46,28 +60,47 @@ import {
 
   if (!response.keys.length) return console.log('\nNo mutations selected\n');
 
+  const devClient = getClient('development');
+
   for (const choice of response.keys) {
     if (choice.type === 'delete') {
-      const { key } = choice.mutation;
-      await appendTextMutation('delete', key);
+      const { key, documentId } = choice.mutation;
+      await appendTextMutation({ action: 'delete', key, documentId });
+      /**
+       * The actual deletion of documents from Sanity is postponed to
+       * sync-after-feature to not break other branches.
+       */
     }
 
     if (choice.type === 'add') {
       const { key, text } = choice.mutation;
-      await appendTextMutation('add', key);
-      await getClient().create(createTextDocument(key, text));
+      /**
+       * First create the document in Sanity, so that we can store the document
+       * id in the mutations log. We need this id later to sync to production,
+       * because both datasets share their document ids for lokalize texts.
+       */
+      const document = await devClient.create(createTextDocument(key, text));
+
+      await appendTextMutation({
+        action: 'add',
+        key,
+        documentId: document._id,
+      });
     }
 
     if (choice.type === 'move') {
-      const { key, text, oldKey } = choice.mutation;
-      await appendTextMutation('delete', oldKey);
-      await appendTextMutation('add_via_move', key);
-      await getClient().create(createTextDocument(key, text));
+      const { key, documentId, moveTo } = choice.mutation;
+
+      await appendTextMutation({ action: 'move', key, documentId, moveTo });
     }
   }
 
   console.log('Updating text export...');
-  await exportLokalizeTexts();
+
+  await exportLokalizeTexts({
+    dataset: 'development',
+    appendDocumentIdToKey: true,
+  });
 
   console.log(
     'Successfully applied the following mutations:\n',
@@ -80,18 +113,15 @@ import {
 
 function createTextDocument(key: string, nl: string, en = '') {
   /**
-   * Here we split the key into a subject and (remaining) path. This is required
-   * for the way LokalizeText documents are queried in Sanity. But possibly we
-   * can work with just the key and omit subject+path from the object.
+   * Subject is extracted from the key, because we use that to query/group texts
+   * in the Sanity UI.
    */
-  const [subject, ...pathElements] = key.split('.');
-  const path = pathElements.join('.');
+  const [subject] = key.split('.');
 
   return {
     _type: 'lokalizeText',
     key,
     subject,
-    path,
     is_newly_added: true,
     publish_count: 0,
     should_display_empty: false,
