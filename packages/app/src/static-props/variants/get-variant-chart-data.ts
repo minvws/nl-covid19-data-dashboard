@@ -33,7 +33,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   }
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
-    const item: VariantChartValue = {
+    const item = {
       [`${firstVariant.name}_percentage`]: value.percentage,
       [`${firstVariant.name}_occurrence`]: value.percentage,
       date_start_unix: value.date_start_unix,
