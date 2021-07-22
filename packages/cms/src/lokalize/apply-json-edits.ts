@@ -11,8 +11,9 @@ import {
 
 /**
  * Read the contents of the (edited) local export JSON file and compare it to
- * the most recent export to see if there are any changes. Prompt the user with
- * these changes before applying them to the actual Sanity Lokalize documents.
+ * the most recent export in `.lokalize-reference` to see if there are any
+ * changes. Prompt the user with these changes before writing to the mutations
+ * log file and possibly adding new documents to Sanity.
  */
 (async function run() {
   const referenceTexts = await readReferenceTexts();
