@@ -100,7 +100,7 @@ function VariantStackedAreaTileWithData({
   const timespanAnnotations = useMemo(
     () =>
       values
-        .filter((x) => isDefined(x.is_reliable) && x.is_reliable === false)
+        .filter((x) => !x.is_reliable)
         .map<TimespanAnnotationConfig>((x) => ({
           start: x.date_start_unix,
           end: x.date_end_unix,

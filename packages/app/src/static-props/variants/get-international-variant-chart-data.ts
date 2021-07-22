@@ -65,10 +65,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
         if (isDefined(otherItem) && isPresent(otherItem.percentage)) {
           total += otherItem.percentage;
           item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
-          if (
-            isDefined(otherItem.is_reliable) &&
-            otherItem.is_reliable === false
-          ) {
+          if (!otherItem.is_reliable) {
             partialChartValue.is_reliable = false;
           }
         }
