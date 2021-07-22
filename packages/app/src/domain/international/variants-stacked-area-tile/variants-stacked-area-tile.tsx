@@ -16,6 +16,7 @@ import { VariantChartValue } from '~/static-props/variants/get-variant-chart-dat
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
+import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileProps = {
   values?: VariantChartValue[] | null;
@@ -89,6 +90,11 @@ function VariantStackedAreaTileWithData({
     },
   ];
 
+  const timespanAnnotations = useUnreliableDataAnnotations(
+    values,
+    text.lagere_betrouwbaarheid
+  );
+
   return (
     <ChartTile
       title={text.titel}
@@ -117,6 +123,7 @@ function VariantStackedAreaTileWithData({
             dataOptions={{
               isPercentage: true,
               forcedMaximumValue: 100,
+              timespanAnnotations,
             }}
             formatTooltip={(context) => {
               /**

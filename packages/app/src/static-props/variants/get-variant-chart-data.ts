@@ -2,10 +2,11 @@ import { assert, Dictionary, NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 
-export type VariantChartValue = Record<string, number> & {
+export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
-};
+  is_reliable?: boolean;
+} & Record<string, number>;
 
 const EMPTY_VALUES = {
   variantChart: null,
@@ -32,7 +33,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   }
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
-    const item = {
+    const item: VariantChartValue = {
       [`${firstVariant.name}_percentage`]: value.percentage,
       [`${firstVariant.name}_occurrence`]: value.percentage,
       date_start_unix: value.date_start_unix,
