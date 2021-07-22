@@ -5,6 +5,7 @@ import {
   TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { Property } from 'csstype';
 import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
@@ -128,6 +129,7 @@ export interface StackedAreaSeriesDefinition<T extends TimestampedValue>
   fillOpacity?: number;
   strokeWidth?: number;
   isNonInteractive?: boolean;
+  mixBlendMode?: Property.MixBlendMode;
 }
 
 export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
@@ -141,6 +143,7 @@ export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
   fillOpacity?: number;
   strokeWidth?: number;
   isNonInteractive?: boolean;
+  mixBlendMode?: Property.MixBlendMode;
 }
 
 /**

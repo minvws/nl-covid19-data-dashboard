@@ -155,6 +155,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   color={config.color}
                   fillOpacity={config.fillOpacity}
                   strokeWidth={config.strokeWidth}
+                  mixBlendMode={config.mixBlendMode}
                   getX={getX}
                   getY0={getY0}
                   getY1={getY1}
@@ -170,6 +171,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   color={config.color}
                   fillOpacity={config.fillOpacity}
                   strokeWidth={config.strokeWidth}
+                  mixBlendMode={config.mixBlendMode}
                   getX={getX}
                   getY0={getY0}
                   getY1={getY1}

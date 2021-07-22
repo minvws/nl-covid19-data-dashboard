@@ -197,6 +197,7 @@ function useSeriesConfig(
           shape: 'square',
           strokeWidth: 0,
           fillOpacity: 1,
+          mixBlendMode: 'multiply',
         };
       });
 
@@ -208,6 +209,7 @@ function useSeriesConfig(
       shape: 'square',
       color: colors.lightGray,
       strokeWidth: 0,
+      mixBlendMode: 'multiply',
     } as GappedStackedAreaSeriesDefinition<VariantChartValue>;
 
     const selectOptions = [...seriesConfig, otherConfig];
