@@ -18,7 +18,7 @@ export function getTopicalPageQuery(_context: GetStaticPropsContext) {
         ...cover,
         "asset": cover.asset->
       }
-    }[0..3],
+    }[0..2],
     'weeklyHighlight': *[_type == 'editorial'] | order(publicationDate desc) {
       "title":title.${locale},
       slug,
