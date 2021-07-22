@@ -76,7 +76,7 @@ export function useScales<T extends TimestampedValue>(args: {
     const yScale = scaleLinear({
       domain: [0, maximumValue > 0 ? maximumValue : maximumDomainValue],
       range: [bounds.height, 0],
-      nice: numTicks,
+      nice: numTicks < 3 ? numTicks * 2 : numTicks,
       round: true, // round the output values so we render on round pixels
     });
 
