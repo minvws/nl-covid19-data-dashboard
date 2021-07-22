@@ -459,7 +459,6 @@ export function TimeSeriesChart<
              */}
             {timespanAnnotations?.map((x, index) => (
               <TimespanAnnotation
-                chartId={chartId}
                 key={index}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}

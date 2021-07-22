@@ -1,3 +1,4 @@
+import { Property } from 'csstype';
 import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
 import { useGappedSeries } from '../logic/use-gapped-series';
 import { StackedAreaTrend } from './stacked-area-trend';
@@ -7,6 +8,7 @@ type GappedStackedAreaTrendProps = {
   color: string;
   fillOpacity?: number;
   strokeWidth?: number;
+  mixBlendMode?: Property.MixBlendMode;
   bounds: Bounds;
   getX: (v: SeriesItem) => number;
   getY0: (v: SeriesDoubleValue) => number;
@@ -24,6 +26,7 @@ export function GappedStackedAreaTrend(props: GappedStackedAreaTrendProps) {
     color,
     fillOpacity,
     strokeWidth = 2,
+    mixBlendMode,
     id,
   } = props;
 
@@ -47,6 +50,7 @@ export function GappedStackedAreaTrend(props: GappedStackedAreaTrendProps) {
           getY1={getY1}
           bounds={bounds}
           fillOpacity={fillOpacity}
+          mixBlendMode={mixBlendMode}
           id={`${id}_${index}`}
         />
       ))}

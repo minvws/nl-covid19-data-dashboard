@@ -49,8 +49,11 @@ export function getVariantChartData(variants: InVariants | undefined) {
    * While doing this it accumulates the total percentage so that after finding the variants of concern
    * numbers it can add an `other_percentage` property that represents all of the other variants.
    *
+   * If one of the percentage values is marked as unreliable, the entire VariantChartValue is marked as such.
+   *
    */
   const values = completeDateRange.map((partialChartValue) => {
+    partialChartValue.is_reliable = true;
     const { item, total } = variantsOfConcern.reduce(
       ({ item, total }, variantOfConcern) => {
         const otherItem = variantOfConcern.values.find(
@@ -62,6 +65,9 @@ export function getVariantChartData(variants: InVariants | undefined) {
         if (isDefined(otherItem) && isPresent(otherItem.percentage)) {
           total += otherItem.percentage;
           item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
+          if (!otherItem.is_reliable) {
+            partialChartValue.is_reliable = false;
+          }
         }
 
         return { item, total };
