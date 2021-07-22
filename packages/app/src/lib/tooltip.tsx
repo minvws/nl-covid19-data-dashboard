@@ -26,7 +26,7 @@ const StyledTippy = styled(Tippy)(
  */
 
 export function WithTooltip(props: Omit<TippyProps, 'theme'>) {
-  const breakpoints = useBreakpoints(true);
+  const breakpoints = useBreakpoints();
 
   if (!isDefined(props.content)) {
     return <>{props.children}</>;
