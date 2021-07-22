@@ -39,8 +39,8 @@ export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    () => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    (context) => {
+      const { locale = 'nl' } = context;
       const siteText = getLocaleFile(locale);
       const countryNames = loadJsonFromDataFile<Record<string, string>>(
         `${locale}-country-names.json`,
@@ -70,8 +70,8 @@ export const getStaticProps = withFeatureNotFoundPage(
       highlight: {
         articles?: ArticleSummary[];
       };
-    }>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    }>((context) => {
+      const { locale = 'nl' } = context;
       return `{
         "page": *[_type=='in_variantsPage']{
           "usefulLinks": [...pageLinks[]{
