@@ -140,6 +140,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
           title={ISO_A3}
           id={ISO_A3}
           stroke={colors.body}
+          strokeWidth={2}
           pathData={path}
           {...anchorEventHandlers}
         />
