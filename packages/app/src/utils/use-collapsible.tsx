@@ -16,6 +16,30 @@ import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { useUniqueId } from '~/utils/use-unique-id';
 
+/**
+ * Generic hook for collapsing content. Core features:
+ * - SSR will always display content
+ * - a11y aria props are taken care of
+ * - will animate out of the box
+ *
+ * Usage:
+ *
+ * The hook exposes the following:
+ * - `content(children: ReactNode)`
+ *   - wrap the collapsible content with this functions
+ *
+ * - `button(children?: ReactNode)`
+ *   - wrap an element (probably a button) with this function which will set
+ *     aria props and a click handler
+ *   - the child is optional, when it's empty it will render a button with a
+ *     chevron
+ *
+ * - `chevron`
+ *   - a chevron-svg which will animate based on internal open/close state
+ *
+ * - `isOpen`
+ *   - current open/close state
+ */
 export function useCollapsible(
   options: { isOpen?: boolean; isOpenInitial?: boolean } = {
     isOpen: false,
