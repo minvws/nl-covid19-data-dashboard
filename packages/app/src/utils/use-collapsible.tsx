@@ -18,6 +18,7 @@ import { useUniqueId } from '~/utils/use-unique-id';
 
 /**
  * Generic hook for collapsing content. Core features:
+ *
  * - SSR will always display content
  * - a11y aria props are taken care of
  * - will animate out of the box
@@ -25,8 +26,9 @@ import { useUniqueId } from '~/utils/use-unique-id';
  * Usage:
  *
  * The hook exposes the following:
+ *
  * - `content(children: ReactNode)`
- *   - wrap the collapsible content with this functions
+ *   - wrap the collapsible content with this function
  *
  * - `button(children?: ReactNode)`
  *   - wrap an element (probably a button) with this function which will set
