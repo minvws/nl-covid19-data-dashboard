@@ -56,7 +56,7 @@ export function TimespanAnnotation({
             x2="0"
             y2="8"
             style={{ stroke: 'white', strokeWidth: 4 }}
-          ></line>
+          />
         </pattern>
       )}
       {fill === 'dotted' && (
@@ -72,7 +72,7 @@ export function TimespanAnnotation({
             x2="0"
             y2="0"
             style={{ stroke: 'white', strokeWidth: 2, strokeDasharray: 2 }}
-          ></line>
+          />
         </pattern>
       )}
 

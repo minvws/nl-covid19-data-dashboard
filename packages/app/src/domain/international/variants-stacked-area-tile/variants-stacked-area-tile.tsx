@@ -9,14 +9,16 @@ import { Legend, LegendItem } from '~/components/legend';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
+import {
+  GappedStackedAreaSeriesDefinition,
+  TimespanAnnotationConfig,
+} from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
-import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileProps = {
   values?: VariantChartValue[] | null;
@@ -95,9 +97,17 @@ function VariantStackedAreaTileWithData({
     },
   ];
 
-  const timespanAnnotations = useUnreliableDataAnnotations(
-    values,
-    text.lagere_betrouwbaarheid
+  const timespanAnnotations = useMemo(
+    () =>
+      values
+        .filter((x) => isDefined(x.is_reliable) && x.is_reliable === false)
+        .map<TimespanAnnotationConfig>((x) => ({
+          start: x.date_start_unix,
+          end: x.date_end_unix,
+          label: text.lagere_betrouwbaarheid,
+          fill: 'dotted',
+        })),
+    [values, text]
   );
 
   return (
