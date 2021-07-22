@@ -50,8 +50,8 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     articles?: ArticleSummary[];
   }>((context) => {
-    const { locale } = context;
-    return createPageArticlesQuery('sewerPage', locale ?? 'nl');
+    const { locale = 'nl' } = context;
+    return createPageArticlesQuery('sewerPage', locale);
   })
 );
 
