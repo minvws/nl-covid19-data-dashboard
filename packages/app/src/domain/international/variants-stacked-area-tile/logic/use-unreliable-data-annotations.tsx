@@ -17,6 +17,6 @@ export function useUnreliableDataAnnotations(
           label,
           fill: 'dotted',
         })),
-    [values]
+    [values, label]
   );
 }
