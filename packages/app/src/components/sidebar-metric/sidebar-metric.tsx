@@ -105,20 +105,21 @@ export function SidebarMetric<T extends { difference: unknown }>({
   const config = getMetricConfig(
     scope,
     metricName as unknown as string,
-    metricProperty
+    metricProperty ?? ''
   );
 
   let description = '';
 
   try {
-    description = config.isWeeklyData
-      ? replaceVariablesInText(commonText.dateRangeOfReport, {
-          startDate: formatDateFromSeconds(lastValue.date_start_unix, 'axis'),
-          endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
-        })
-      : replaceVariablesInText(commonText.dateOfReport, {
-          dateOfReport: formatDateFromSeconds(lastValue.date_unix, 'medium'),
-        });
+    description =
+      'date_unix' in lastValue
+        ? replaceVariablesInText(commonText.dateOfReport, {
+            dateOfReport: formatDateFromSeconds(lastValue.date_unix, 'medium'),
+          })
+        : replaceVariablesInText(commonText.dateRangeOfReport, {
+            startDate: formatDateFromSeconds(lastValue.date_start_unix, 'axis'),
+            endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
+          });
   } catch (err) {
     throw new Error(
       `Failed to format description for ${metricName}:${metricProperty}, likely due to a timestamp week/day configuration mismatch. Error: ${err.message}`

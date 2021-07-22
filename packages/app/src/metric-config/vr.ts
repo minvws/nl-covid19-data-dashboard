@@ -1,6 +1,6 @@
 import { MetricKeys, Vr } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
-import { MetricConfig, NO_METRIC_PROPERTY } from './common';
+import { MetricConfig } from './common';
 
 const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;
@@ -10,16 +10,6 @@ type VrMetricKey = MetricKeys<Vr>;
 type VrConfig = Partial<Record<VrMetricKey, Record<string, MetricConfig>>>;
 
 export const vr: VrConfig = {
-  behavior: {
-    [NO_METRIC_PROPERTY]: {
-      isWeeklyData: true,
-    },
-  },
-  sewer: {
-    average: {
-      isWeeklyData: true,
-    },
-  },
   tested_overall: {
     infected_per_100k: {
       barScale: {
