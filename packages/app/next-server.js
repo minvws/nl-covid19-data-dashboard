@@ -8,7 +8,9 @@ const {
 const dotenv = require('dotenv');
 const path = require('path');
 const { imageResizeTargets } = require('@corona-dashboard/common');
+const nextDomainsConfig = require('./next.domains.config');
 
+const ALLOWED_DOMAINS = nextDomainsConfig.map((x) => x.domain);
 const SIX_MONTHS_IN_SECONDS = 15768000;
 
 const ALLOWED_SENTRY_IMAGE_PARAMS = {
@@ -56,6 +58,18 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
 
   server.delete('*', function (_, res) {
     res.status(403).end();
+  });
+
+  /**
+   * Ensure the correct language by resetting the original hostname
+   * Next.js will use the hostname to detect the language it should serve.
+   */
+  server.use(function (req, res, next) {
+    const originalHost = req.headers['x-original-host'];
+    if (originalHost && ALLOWED_DOMAINS.includes(originalHost)) {
+      req.headers.host = originalHost;
+    }
+    next();
   });
 
   server.use(
