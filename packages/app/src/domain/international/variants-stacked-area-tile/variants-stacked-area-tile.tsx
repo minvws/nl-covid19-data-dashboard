@@ -88,6 +88,11 @@ function VariantStackedAreaTileWithData({
       color: colors.data.underReported,
       label: text.legend_niet_compleet_label,
     },
+    {
+      shape: 'dotted-square',
+      color: 'white',
+      label: text.lagere_betrouwbaarheid,
+    },
   ];
 
   const timespanAnnotations = useUnreliableDataAnnotations(
