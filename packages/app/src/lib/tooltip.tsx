@@ -18,14 +18,14 @@ const StyledTippy = styled(Tippy)(
       color: 'white',
     },
   })
-);
+) as typeof Tippy;
 
 /**
  * Usage:
  *     <WithTooltip content={<p>message</p>}><button>foo</button></WithTooltip>
  */
 
-export function WithTooltip(props: Omit<TippyProps, 'theme'>) {
+export function WithTooltip(props: TippyProps) {
   const breakpoints = useBreakpoints();
 
   if (!isDefined(props.content)) {
@@ -35,8 +35,8 @@ export function WithTooltip(props: Omit<TippyProps, 'theme'>) {
   return (
     <StyledTippy
       appendTo={getBody}
-      onMount={handleMount}
       maxWidth={breakpoints.sm ? '260px' : '285px'}
+      {...(handleMount ? { onMount: handleMount } : {})}
       {...props}
     />
   );
