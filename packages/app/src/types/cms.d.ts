@@ -160,17 +160,9 @@ export interface LokalizeText {
   };
 }
 
-export type DecoratedLink = {
-  title: string;
-  category: string;
-  href: string;
-  cover: ImageBlock;
-};
-
 export type VaccinationPageQuery = {
-  pageInfo: TitleDescriptionBlock;
-  pageLinks: DecoratedLink[];
-  linksTitle: string;
+  pageDescription: RichContentBlock[];
+  usefulLinks: LinkProps[];
   title: string;
   description: RichContentBlock[];
   milestones: Milestones[];

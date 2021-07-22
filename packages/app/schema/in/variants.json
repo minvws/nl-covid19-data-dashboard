@@ -47,10 +47,10 @@
       ],
       "properties": {
         "percentage": {
-          "type": "number"
+          "type": ["number", "null"]
         },
         "occurrence": {
-          "type": "integer"
+          "type": ["number", "null"]
         },
         "is_variant_of_concern": {
           "type": "boolean"

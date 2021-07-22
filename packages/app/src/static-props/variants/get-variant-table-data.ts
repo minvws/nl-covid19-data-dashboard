@@ -1,7 +1,6 @@
 import {
   assert,
   Dictionary,
-  DifferenceDecimal,
   InNamedDifference,
   InVariants,
   InVariantsVariant,
@@ -10,6 +9,7 @@ import {
   NlVariants,
   NlVariantsVariant,
   NlVariantsVariantValue,
+  OptionalNamedDifferenceDecimal,
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -19,9 +19,8 @@ import { colors } from '~/style/theme';
 export type VariantRow = {
   variant: string;
   countryOfOrigin: string;
-  occurrence: number;
-  percentage: number;
-  difference?: DifferenceDecimal;
+  percentage: number | null;
+  difference?: OptionalNamedDifferenceDecimal;
   color: string;
 };
 
@@ -88,7 +87,6 @@ export function getVariantTableData(
     .map<VariantRow>((variant) => ({
       variant: variant.name,
       countryOfOrigin: findCountryOfOrigin(variant.name),
-      occurrence: variant.last_value.occurrence,
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
       color: findColor(variant.name),
@@ -101,7 +99,7 @@ export function getVariantTableData(
       if (rowB.variant === 'other') {
         return -1;
       }
-      return rowB.percentage - rowA.percentage;
+      return (rowB.percentage ?? -1) - (rowA.percentage ?? -1);
     });
 
   return { variantTable, dates, sampleSize, isReliable };

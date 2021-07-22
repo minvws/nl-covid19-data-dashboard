@@ -102,7 +102,7 @@ export type ChoroplethThresholdsValue<T extends number = number> = {
   threshold: T;
   label?: string;
   /**
-   * Optiobally define the label which explains the "end" of a threshold
+   * Optionally define the label which explains the "end" of a threshold
    */
   endLabel?: string;
 };

@@ -154,12 +154,12 @@ export interface In {
   variants?: InVariants;
 }
 export interface InNamedDifference {
-  variants__percentage?: NamedDifferenceDecimal[];
+  variants__percentage?: OptionalNamedDifferenceDecimal[];
 }
-export interface NamedDifferenceDecimal {
+export interface OptionalNamedDifferenceDecimal {
   name: string;
-  old_value: number;
-  difference: number;
+  old_value: number | null;
+  difference: number | null;
   old_date_unix: number;
   new_date_unix: number;
 }
@@ -183,8 +183,8 @@ export interface InVariantsVariant {
   last_value: InVariantsVariantValue;
 }
 export interface InVariantsVariantValue {
-  percentage: number;
-  occurrence: number;
+  percentage: number | null;
+  occurrence: number | null;
   is_variant_of_concern: boolean;
   sample_size: number;
   is_reliable: boolean;

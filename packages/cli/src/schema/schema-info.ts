@@ -39,7 +39,7 @@ export function getSchemaInfo(
     },
     in_collection: {
       files: [
-        // @TODO enable once the file is available
+        // @TODO enable when file is available
         /* 'IN_COLLECTION.json' */
       ],
       basePath: jsonDirectory,

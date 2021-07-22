@@ -45,7 +45,7 @@ export function MilestonesView(props: MilestoneViewProps) {
 
   return (
     <Tile>
-      <Heading level={2} m={0}>
+      <Heading level={3} m={0}>
         {title}
       </Heading>
       <Box maxWidth="maxWidthText" mb={2}>

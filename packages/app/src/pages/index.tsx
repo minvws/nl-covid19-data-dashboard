@@ -108,7 +108,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     useState<RegionControlOption>('municipal');
 
   const unknownLevelColor = useEscalationColor(null);
-  const internationalFeature = useFeature('internationalPage');
+  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const metadata = {
     ...siteText.nationaal_metadata,
