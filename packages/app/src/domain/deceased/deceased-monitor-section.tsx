@@ -1,7 +1,5 @@
 import { NlDeceasedCbs, VrDeceasedCbs } from '@corona-dashboard/common';
 import { AnchorTile } from '~/components/anchor-tile';
-import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { Markdown } from '~/components/markdown';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -12,20 +10,16 @@ export function DeceasedMonitorSection({
   data,
   showDataMessage,
   showCauseMessage,
-  articles,
 }: {
   data: NlDeceasedCbs | VrDeceasedCbs;
   showDataMessage?: boolean;
   showCauseMessage?: boolean;
-  articles?: ArticleSummary[];
 }) {
   const { siteText } = useIntl();
   const text = siteText.section_sterftemonitor;
 
   return (
     <>
-      {articles && <ArticleStrip articles={articles} />}
-
       {showDataMessage && (
         <AnchorTile
           title={text.cbs_message.title}

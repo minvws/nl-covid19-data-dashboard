@@ -6,6 +6,7 @@ import {
   SewerPerInstallationData,
   sortTimeSeriesInDataInPlace,
   TimeSeriesMetric,
+  VariantsData,
 } from '@corona-dashboard/common';
 import { chain, isEmpty, pick } from 'lodash';
 import meow from 'meow';
@@ -91,20 +92,46 @@ async function main() {
     }
 
     /**
-     * The sewer_per_installation schema differs in structure from all
-     * other time series data so we validate it separately.
+     * The sewer_per_installation schema differs in structure from time series
+     * data so we validate it separately.
      */
     if (isDefined(data.sewer_per_installation)) {
       const perInstallationData =
         data.sewer_per_installation as SewerPerInstallationData;
 
-      const results = perInstallationData.values.map((metricData) => {
-        const installationName = metricData.rwzi_awzi_name;
+      const results = perInstallationData.values.map((x) => {
+        const installationName = x.rwzi_awzi_name;
 
-        const success = validateLastValue(metricData);
+        const success = validateLastValue(x);
         return {
           success,
           metricName: `sewer_per_installation.${installationName}`,
+        };
+      });
+
+      const failedMetrics = results
+        .filter((x) => x.success === false)
+        .map((x) => x.metricName);
+
+      allFailures.push(
+        ...failedMetrics.map((x) => ({ metricName: x, fileName: file }))
+      );
+    }
+
+    /**
+     * The variants schema differs in structure from time series data so we
+     * validate it separately. @TODO merge logic with sewer_per_installation
+     */
+    if (isDefined(data.variants)) {
+      const perVariantData = data.variants as VariantsData;
+
+      const results = perVariantData.values.map((x) => {
+        const variantName = x.name;
+
+        const success = validateLastValue(x);
+        return {
+          success,
+          metricName: `variants.${variantName}`,
         };
       });
 

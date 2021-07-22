@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "in_named_difference",
+  "type": "object",
+  "properties": {
+    "variants__percentage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/optional_named_diff_decimal"
+      }
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "definitions": {
+    "optional_named_diff_integer": {
+      "title": "optional_named_difference_integer",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "old_value": {
+          "type": ["integer", "null"]
+        },
+        "difference": {
+          "type": ["integer", "null"]
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "old_value",
+        "difference",
+        "old_date_unix",
+        "new_date_unix"
+      ],
+      "additionalProperties": false
+    },
+    "optional_named_diff_decimal": {
+      "title": "optional_named_difference_decimal",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "old_value": {
+          "type": ["number", "null"]
+        },
+        "difference": {
+          "type": ["number", "null"]
+        },
+        "old_date_unix": {
+          "type": "integer"
+        },
+        "new_date_unix": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "old_value",
+        "difference",
+        "old_date_unix",
+        "new_date_unix"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

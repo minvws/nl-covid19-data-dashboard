@@ -80,11 +80,15 @@ export function KpiValue({
 
       {isDefined(difference) &&
         (isMovingAverageDifference ? (
-          <TileAverageDifference value={difference} />
+          <TileAverageDifference
+            value={difference}
+            isPercentage={isDefined(percentage)}
+          />
         ) : (
           <TileDifference
             value={difference}
             staticTimespan={differenceStaticTimespan}
+            isPercentage={isDefined(percentage)}
           />
         ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

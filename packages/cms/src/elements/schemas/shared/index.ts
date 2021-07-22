@@ -1,7 +1,8 @@
 import { snakeCase } from 'change-case';
 import { isDefined } from 'ts-is-present';
+import { Rule } from '~/sanity';
 
-const REQUIRED = (x: any) => x.required();
+const REQUIRED = (x: Rule) => x.required();
 
 export const commonFields = [
   {

@@ -39,7 +39,7 @@ import {
 /**
  * Reference TimeSeriesChart for additional information on props
  */
-export type VerticalBarChartProps<
+type VerticalBarChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {

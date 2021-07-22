@@ -1,18 +1,17 @@
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -41,12 +40,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    selectedVrData: data,
-    safetyRegionName,
-    lastGenerated,
-    content,
-  } = props;
+  const { selectedVrData: data, vrName, lastGenerated, content } = props;
 
   const { siteText } = useIntl();
 
@@ -63,22 +57,18 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(locationsText.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(locationsText.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={
               siteText.veiligheidsregio_layout.headings.kwetsbare_groepen
             }
@@ -86,13 +76,13 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verpleeghuis_besmette_locaties.titel_sidebar
             }
             title={replaceVariablesInText(positiveTestPeopleText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Gehandicaptenzorg />}
-            subtitle={replaceVariablesInText(
+            description={replaceVariablesInText(
               positiveTestPeopleText.pagina_toelichting,
               {
-                safetyRegion: safetyRegionName,
+                safetyRegion: vrName,
               }
             )}
             metadata={{
@@ -101,10 +91,9 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [positiveTestPeopleText.bronnen.rivm],
             }}
-            reference={positiveTestPeopleText.reference}
+            referenceLink={positiveTestPeopleText.reference.href}
+            articles={content.articles}
           />
-
-          {content.articles && <ArticleStrip articles={content.articles} />}
 
           <TwoKpiSection>
             <KpiTile
@@ -173,21 +162,20 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <ContentHeader
+          <PageInformationBlock
             id="besmette-locaties"
-            skipLinkAnchor={true}
             title={replaceVariablesInText(locationsText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Locatie />}
-            subtitle={locationsText.pagina_toelichting}
+            description={locationsText.pagina_toelichting}
             metadata={{
               datumsText: locationsText.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [locationsText.bronnen.rivm],
             }}
-            reference={locationsText.reference}
+            referenceLink={locationsText.reference.href}
           />
 
           <TwoKpiSection>
@@ -252,21 +240,20 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <ContentHeader
+          <PageInformationBlock
             id="sterfte"
-            skipLinkAnchor={true}
             title={replaceVariablesInText(mortalityText.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<CoronaVirus />}
-            subtitle={mortalityText.pagina_toelichting}
+            description={mortalityText.pagina_toelichting}
             metadata={{
               datumsText: mortalityText.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [mortalityText.bronnen.rivm],
             }}
-            reference={mortalityText.reference}
+            referenceLink={mortalityText.reference.href}
           />
 
           <TwoKpiSection>
@@ -332,7 +319,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

@@ -7,29 +7,25 @@ import {
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
 import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
-import { ContentHeader } from '~/components/content-header';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
-import { NewSewerChart } from '~/components/sewer-chart/new-sewer-chart';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
-import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { useFeature } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -41,7 +37,6 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -71,8 +66,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const [selectedMap, setSelectedMap] =
     useState<RegionControlOption>('municipal');
 
-  const sewerSplitAreaChart = useFeature('sewerSplitAreaChart');
-
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
@@ -83,12 +76,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.vroege_signalen}
             screenReaderCategory={siteText.rioolwater_metingen.titel_sidebar}
             title={text.titel}
             icon={<RioolwaterMonitoring />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
@@ -99,12 +92,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 sewerAverages.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
 
           <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
-
-          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -158,51 +150,18 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
           </TwoKpiSection>
 
-          {sewerSplitAreaChart.isEnabled ? (
-            <NewSewerChart
-              accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
-              dataAverages={data.sewer}
-              text={{
-                title: text.linechart_titel,
-                source: text.bronnen.rivm,
-                description: text.linechart_description,
-                splitLabels: siteText.rioolwater_metingen.split_labels,
-                averagesDataLabel: siteText.common.weekgemiddelde,
-                valueAnnotation: siteText.waarde_annotaties.riool_normalized,
-              }}
-            />
-          ) : (
-            <ChartTile
-              timeframeOptions={['all', '5weeks']}
-              title={text.linechart_titel}
-              metadata={{
-                source: text.bronnen.rivm,
-              }}
-              description={text.linechart_description}
-            >
-              {(timeframe) => (
-                <TimeSeriesChart
-                  accessibility={{
-                    key: 'sewer_particles_over_time',
-                  }}
-                  values={sewerAverages.values}
-                  timeframe={timeframe}
-                  seriesConfig={[
-                    {
-                      type: 'area',
-                      metricProperty: 'average',
-                      label: text.linechart_particle_trend_label,
-                      color: colors.data.primary,
-                    },
-                  ]}
-                  dataOptions={{
-                    valueAnnotation:
-                      siteText.waarde_annotaties.riool_normalized,
-                  }}
-                />
-              )}
-            </ChartTile>
-          )}
+          <SewerChart
+            accessibility={{ key: 'sewer_per_installation_over_time_chart' }}
+            dataAverages={data.sewer}
+            text={{
+              title: text.linechart_titel,
+              source: text.bronnen.rivm,
+              description: text.linechart_description,
+              splitLabels: siteText.rioolwater_metingen.split_labels,
+              averagesDataLabel: siteText.common.weekgemiddelde,
+              valueAnnotation: siteText.waarde_annotaties.riool_normalized,
+            }}
+          />
 
           <ChoroplethTile
             title={text.map_titel}
@@ -236,7 +195,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 )}
               />
             ) : (
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{
                   key: 'sewer_region_choropleth',
                 }}

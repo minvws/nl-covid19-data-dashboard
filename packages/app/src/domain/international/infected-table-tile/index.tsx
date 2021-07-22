@@ -1,1 +1,1 @@
-export * from './infected-table-tile';
+export { InfectedTableTile } from './infected-table-tile';
