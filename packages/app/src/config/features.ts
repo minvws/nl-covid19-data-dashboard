@@ -20,10 +20,6 @@ export const features: Feature[] = [
     metricName: 'variants',
   },
   {
-    name: 'timelineMockData',
-    isEnabled: false,
-  },
-  {
     name: 'inHomePage',
     isEnabled: false,
   },

@@ -6,13 +6,11 @@ import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
-import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
 import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
-import { useIsMounted } from '~/utils/use-is-mounted';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
@@ -52,7 +50,6 @@ import {
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
-import { createTimelineEventsMockData } from './mock-timeline-events';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -175,30 +172,7 @@ export function TimeSeriesChart<
   const today = useCurrentDate();
   const chartId = useUniqueId();
 
-  /**
-   * @TODO clean up mock data
-   * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-   */
-  const hasTimelineMockDataFeature = useFeature('timelineMockData');
-  const isMounted = useIsMounted();
-  const timelineEventsMock = useMemo(
-    () =>
-      isMounted
-        ? createTimelineEventsMockData(allValues, timeframe, today)
-        : undefined,
-    [allValues, timeframe, today, isMounted]
-  );
-  const dataOptions = useMemo(
-    () =>
-      hasTimelineMockDataFeature.isEnabled
-        ? ({
-            ..._dataOptions,
-            timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
-          } as DataOptions)
-        : _dataOptions,
-    [_dataOptions, hasTimelineMockDataFeature, timelineEventsMock]
-  );
-  /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+  const dataOptions = useMemo(() => _dataOptions, [_dataOptions]);
 
   const {
     valueAnnotation,
