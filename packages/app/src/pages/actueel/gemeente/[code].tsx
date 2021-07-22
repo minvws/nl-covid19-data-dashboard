@@ -9,7 +9,7 @@ import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -52,6 +52,7 @@ import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -128,6 +129,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const unknownLevelColor = useEscalationColor(null);
+  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const [selectedMap, setSelectedMap] =
     useState<RegionControlOption>('municipal');
@@ -263,11 +265,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       { municipalityName: municipalityName }
                     ),
                   },
-                  {
-                    href: reverseRouter.in.index(),
-                    text: text.quick_links.links.internationaal,
-                  },
-                ]}
+                  internationalFeature.isEnabled
+                    ? {
+                        href: reverseRouter.in.index(),
+                        text: text.quick_links.links.internationaal,
+                      }
+                    : undefined,
+                ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
                   text.data_sitemap_title,
                   { municipalityName: municipalityName }
