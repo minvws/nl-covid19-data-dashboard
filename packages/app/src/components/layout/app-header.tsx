@@ -3,11 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
+import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
 import { LanguageSwitcher } from './components/language-switcher';
 import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
-import { useIntl } from '~/intl';
 
 export function AppHeader() {
   const { siteText } = useIntl();
@@ -47,6 +47,6 @@ const TextLogoLink = styled.a(
     color: 'white',
     fontSize: 3,
     textDecoration: 'none',
-    lineHeight: 2,
+    lineHeight: 1,
   })
 );

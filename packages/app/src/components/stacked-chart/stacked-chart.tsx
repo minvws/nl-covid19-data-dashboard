@@ -703,7 +703,7 @@ const TooltipContainer = styled.div(
     minWidth: 72,
     color: 'body',
     backgroundColor: 'white',
-    lineHeight: 2,
+    lineHeight: 1,
     borderColor: 'border',
     borderWidth: '1px',
     borderStyle: 'solid',

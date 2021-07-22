@@ -49,7 +49,7 @@ export const Heading = styled.h1
     as: x.as || `h${x.level}`,
   }))<HeadingProps>(
   (x) => levelStyles[x.level],
-  css({ fontFamily: 'body', lineHeight: 2, mt: 0 }),
+  css({ fontFamily: 'body', lineHeight: 1, mt: 0 }),
   margin,
   padding,
   typography,

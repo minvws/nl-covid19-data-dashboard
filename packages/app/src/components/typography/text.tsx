@@ -51,5 +51,5 @@ export const InlineText = styled.span.withConfig({
 Text.defaultProps = {
   fontFamily: 'body',
   fontSize: 2,
-  lineHeight: 2,
+  lineHeight: 1,
 };

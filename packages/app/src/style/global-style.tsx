@@ -43,7 +43,7 @@ html {
   font-style: normal;
   font-weight: normal;
   font-size: ${(x) => x.theme.fontSizes[2]} ;
-  line-height: ${(x) => x.theme.lineHeights[2]};
+  line-height: ${(x) => x.theme.lineHeights[1]};
 
   margin: 0;
   background: #f3f3f3;

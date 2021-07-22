@@ -42,7 +42,7 @@ const fontWeights = {
   heavy: 700,
 } as const;
 
-const lineHeights = [1.2, 1.4, 1.5] as const;
+export const lineHeights = [1.2, 1.4, 1.5] as const;
 
 /**
  * Breakpoints used in original code and their em equivalent
