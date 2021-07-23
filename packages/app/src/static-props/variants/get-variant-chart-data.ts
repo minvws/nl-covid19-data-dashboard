@@ -6,6 +6,7 @@ export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
   is_reliable?: boolean;
+  sample_size: number;
 } & Record<string, number>;
 
 const EMPTY_VALUES = {
@@ -38,6 +39,7 @@ export function getVariantChartData(variants: NlVariants | undefined) {
       [`${firstVariant.name}_occurrence`]: value.percentage,
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
+      sample_size: value.sample_size,
     };
     variantsOfConcern.forEach((variant) => {
       item[`${variant.name}_percentage`] = variant.values[index].percentage;
