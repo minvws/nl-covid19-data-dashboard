@@ -33,14 +33,17 @@ interface UseScalesResult {
 export function useScales<T extends TimestampedValue>(args: {
   values: T[];
   maximumValue: number;
+  minimumValue: number;
   bounds: Bounds;
   numTicks: number;
 }) {
   const today = useCurrentDate();
-  const { maximumValue, bounds, numTicks, values } = args;
+  const { maximumValue, minimumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
     const [start, end] = getTimeDomain({ values, today, withPadding: true });
+    const yMin = Math.min(minimumValue, 0);
+    const yMax = Math.max(maximumValue, 0);
 
     if (isEmpty(values)) {
       return {
@@ -49,7 +52,7 @@ export function useScales<T extends TimestampedValue>(args: {
           range: [0, bounds.width],
         }),
         yScale: scaleLinear({
-          domain: [0, maximumValue],
+          domain: [yMin, yMax],
           range: [bounds.height, 0],
         }),
         getX: (_x: SeriesItem) => 0,
@@ -74,7 +77,7 @@ export function useScales<T extends TimestampedValue>(args: {
      */
     const maximumDomainValue = maximumValue > 0 ? maximumValue : Infinity;
     const yScale = scaleLinear({
-      domain: [0, maximumValue > 0 ? maximumValue : maximumDomainValue],
+      domain: [yMin, maximumValue > 0 ? maximumValue : maximumDomainValue],
       range: [bounds.height, 0],
       /**
        * Mini trend tiles only use 2 ticks, but that would result in max values
@@ -99,7 +102,15 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, today, bounds, maximumValue, numTicks]);
+  }, [
+    values,
+    today,
+    minimumValue,
+    maximumValue,
+    bounds.width,
+    bounds.height,
+    numTicks,
+  ]);
 }
 
 /**

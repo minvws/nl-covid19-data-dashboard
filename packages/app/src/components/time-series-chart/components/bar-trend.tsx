@@ -1,15 +1,9 @@
 import { scaleBand } from '@visx/scale';
 import { transparentize } from 'polished';
-import { Fragment, useMemo } from 'react';
+import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { useUniqueId } from '~/utils/use-unique-id';
-import {
-  BenchmarkConfig,
-  Bounds,
-  GetX,
-  GetY,
-  SeriesSingleValue,
-} from '../logic';
+import { Bounds, GetX, GetY, SeriesSingleValue } from '../logic';
 
 const DEFAULT_FILL_OPACITY = 0.2;
 
@@ -21,9 +15,6 @@ type BarTrendProps = {
   getY: GetY;
   bounds: Bounds;
   bandPadding?: number;
-  benchmark?: BenchmarkConfig;
-  aboveBenchmarkColor?: string;
-  aboveBenchmarkFillOpacity?: number;
   id: string;
 };
 
@@ -35,9 +26,6 @@ export function BarTrend({
   getY,
   bounds,
   bandPadding = 0.2,
-  benchmark,
-  aboveBenchmarkColor,
-  aboveBenchmarkFillOpacity = DEFAULT_FILL_OPACITY,
   id,
 }: BarTrendProps) {
   const nonNullSeries = useMemo(
@@ -61,55 +49,20 @@ export function BarTrend({
    * mobile screens.
    */
   const barWidth = Math.max(xScale.bandwidth(), 1);
-
-  const benchmarkY =
-    benchmark &&
-    getY({
-      __value: benchmark.value,
-      __date_unix: 0, // __date_unix is not used by getY
-    });
+  const zeroPosition = getY({ __value: 0, __date_unix: 0 });
 
   return (
     <>
       {nonNullSeries.map((item, index) => {
-        const barHeight = bounds.height - getY(item);
-
-        if (benchmarkY && aboveBenchmarkColor) {
-          const benchmarkHeight = Math.max(0, benchmarkY - getY(item));
-
-          return (
-            <Fragment key={index}>
-              <rect
-                x={getX(item) - barWidth / 2}
-                y={getY(item)}
-                height={benchmarkHeight}
-                width={barWidth}
-                fill={transparentize(
-                  1 - aboveBenchmarkFillOpacity,
-                  aboveBenchmarkColor
-                )}
-              />
-              <rect
-                x={getX(item) - barWidth / 2}
-                y={getY(item) + benchmarkHeight}
-                height={barHeight - benchmarkHeight}
-                width={barWidth}
-                fill={transparentize(1 - fillOpacity, color)}
-              />
-            </Fragment>
-          );
-        }
+        const x = getX(item) - barWidth / 2;
+        const y = Math.min(zeroPosition, getY(item));
+        const barHeight = Math.abs(zeroPosition - getY(item));
 
         return (
-          /**
-           * We could use Visx shape Bar here, but it is almost the same as rect
-           * and rect gives a bit more flexibility for example with regards to
-           * hover state if we choose to implement that.
-           */
           <rect
             key={index}
-            x={getX(item) - barWidth / 2}
-            y={getY(item)}
+            x={x}
+            y={y}
             height={barHeight}
             width={barWidth}
             fill={transparentize(1 - fillOpacity, color)}
@@ -120,6 +73,7 @@ export function BarTrend({
     </>
   );
 }
+
 interface BarTrendIconProps {
   color: string;
   fillOpacity?: number;

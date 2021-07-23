@@ -25,7 +25,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const completeDateRange = getCompleteDateRange(variants.values);
+  const completeDateRange = getBaseObjectsCompleteDateRange(variants.values);
 
   if (!completeDateRange.length) {
     return EMPTY_VALUES;
@@ -89,16 +89,17 @@ export function getVariantChartData(variants: InVariants | undefined) {
  * The different historical value lists are of different lengths,
  * so here we create a start to end range based on all of them.
  *
- * First it creates a flatmap of all the start and end dates,
+ * First it creates a flatmap of all the start and end dates (plus the sample_size),
  * which is then de-duped and finally re-sorted by end date.
  *
  */
-function getCompleteDateRange(lists: InVariantsVariant[]) {
+function getBaseObjectsCompleteDateRange(lists: InVariantsVariant[]) {
   return lists
     .flatMap((x) => x.values)
     .map<VariantChartValue>((x) => ({
       date_start_unix: x.date_start_unix,
       date_end_unix: x.date_end_unix,
+      sample_size: x.sample_size,
     }))
     .filter(
       ({ date_start_unix, date_end_unix }, index, array) =>

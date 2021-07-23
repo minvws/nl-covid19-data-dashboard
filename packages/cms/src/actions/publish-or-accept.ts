@@ -2,11 +2,11 @@
  * This code was inspired by
  * https://www.sanity.io/schemas/set-slug-on-publish-with-referenced-field-value-ZMcsmDfWFDUo5_BrLtVpY
  */
-import { useState, useEffect } from 'react';
-import { useDocumentOperation } from '@sanity/react-hooks';
-import { DocumentActionProps } from './types';
-import { LokalizeText } from '../lokalize/types';
+import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { assert } from '@corona-dashboard/common';
+import { useDocumentOperation } from '@sanity/react-hooks';
+import { useEffect, useState } from 'react';
+import { DocumentActionProps } from './types';
 
 export interface Operation {
   disabled: (args: unknown) => false | string;

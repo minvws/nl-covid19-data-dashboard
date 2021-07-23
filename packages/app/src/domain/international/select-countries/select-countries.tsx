@@ -143,6 +143,7 @@ const AlwaysSelectedItem = styled.li(
     position: 'relative',
     display: 'inline-block',
     pl: '25px', // alignment with shape
+    fontSize: 1,
   })
 );
 

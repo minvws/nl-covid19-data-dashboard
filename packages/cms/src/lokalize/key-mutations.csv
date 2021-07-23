@@ -1,4 +1,4 @@
-timestamp,action,key
+timestamp,action,key,document_id,move_to
 2021-07-09T10:17:16.462Z,add,besmettelijke_personen.belangrijk_bericht
 2021-07-12T12:50:48.459Z,delete,covid_varianten.varianten_tabel.belangrijk_bericht
 2021-07-12T13:21:44.292Z,add,internationaal_varianten.bronnen.rivm.download
@@ -72,6 +72,10 @@ timestamp,action,key
 2021-07-19T08:39:36.091Z,add,internationaal_varianten.informatie_tegel
 2021-07-16T19:48:10.617Z,add,internationaal_varianten.lagere_betrouwbaarheid
 2021-07-16T19:48:11.631Z,add,internationaal_varianten.lagere_betrouwbaarheid_uitleg
+2021-07-20T19:02:52.275Z,move,__root.article_strip_title,jF33EuwumlGuwav2FD4Ffo,article_strip.title
+2021-07-20T19:16:17.583Z,move,article_strip.title,jF33EuwumlGuwav2FD4Ffo,article_strip_wut.title
+2021-07-20T19:30:00.772Z,move,article_strip_wut.title,jF33EuwumlGuwav2FD4Ffo,article_strip.title
+2021-07-20T19:31:18.089Z,add,article_strip.new_test_property,kt2ppSPvrPFKtGfS5bNmTZ,__
 2021-07-20T14:24:45.582Z,add,internationaal_varianten.geen_percentage_cijfer_tooltip
 2021-07-20T14:24:46.600Z,add,internationaal_varianten.geen_percentage_cijfer
 2021-07-22T10:22:03.426Z,add,internationaal_varianten.varianten_over_tijd_grafiek.lagere_betrouwbaarheid
