@@ -1,20 +1,15 @@
 import { DifferenceDecimal } from '@corona-dashboard/common';
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@reach/disclosure';
 import css from '@styled-system/css';
-import { forwardRef, MouseEvent, useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { TableText } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
+import { useCollapsible } from '~/utils/use-collapsible';
 import {
   Cell,
   HeaderCell,
@@ -77,18 +72,9 @@ type MobileVariantRowProps = {
 
 function MobileVariantRow(props: MobileVariantRowProps) {
   const { row, text, formatValue } = props;
-  const [isOpen, setIsOpen] = useState(false);
-  const { ref, height: contentHeight } = useResizeObserver();
+  const collapsible = useCollapsible();
 
   const columnNames = text.kolommen;
-
-  const chevronRef = useRef<HTMLButtonElement>();
-
-  function handleRowClick(event: MouseEvent) {
-    if (event.target !== chevronRef.current) {
-      setIsOpen((x) => !x);
-    }
-  }
 
   const [, variantDescription] = useVariantNameAndDescription(
     row.variant,
@@ -98,7 +84,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 
   return (
     <>
-      <tr onClick={handleRowClick} style={{ cursor: 'pointer' }}>
+      <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
         <VariantNameCell
           variant={row.variant}
           text={text}
@@ -118,26 +104,14 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           )}
         </Cell>
         <Cell mobile alignRight>
-          <Disclosure
-            open={isOpen}
-            onChange={() => {
-              setIsOpen((x) => !x);
-            }}
-          >
-            <Chevron ref={chevronRef as any} />
-          </Disclosure>
+          {collapsible.button()}
         </Cell>
       </tr>
       <tr>
         <MobileCell colSpan={3}>
-          <Panel
-            style={{
-              height: isOpen ? contentHeight : 0,
-              marginBottom: isOpen ? '1rem' : 0,
-            }}
-          >
-            <div ref={ref}>
-              <Box mb={1} display="flex" flexDirection="row">
+          {collapsible.content(
+            <Box spacing={2} css={css({ pb: 3 })}>
+              <Box display="flex" flexDirection="row">
                 <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
                 {isPresent(row.difference) &&
                 isPresent(row.difference.difference) &&
@@ -149,65 +123,19 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                   '-'
                 )}
               </Box>
-              <Box css={css({ color: 'annotation', fontSize: 2, mt: 2 })}>
+              <Box css={css({ color: 'annotation', fontSize: 2 })}>
                 {variantDescription}
               </Box>
-            </div>
-          </Panel>
+            </Box>
+          )}
         </MobileCell>
       </tr>
     </>
   );
 }
 
-const Chevron = styled(
-  forwardRef((props, ref) => <DisclosureButton {...(props as any)} ref={ref} />)
-)(
-  css({
-    display: 'flex',
-    alignItems: 'flex-end',
-    m: 0,
-    p: 0,
-    pb: 0,
-    overflow: 'visible',
-    bg: 'transparent',
-    border: 'none',
-    color: 'lightGray',
-    fontSize: '1.25rem',
-    cursor: 'pointer',
-
-    '&::after': {
-      backgroundImage: 'url("/images/chevron-down.svg")',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: '0.9em 0.55em',
-      content: '""',
-      width: '0.9em',
-      height: '0.55em',
-      mt: '0.35em',
-      p: 0,
-      transition: 'transform 0.4s ease-in-out',
-    },
-
-    '&[data-state="open"]:after': {
-      transform: 'rotate(180deg)',
-    },
-  })
-);
-
-const Panel = styled((props) => <DisclosurePanel {...props} />)(
-  css({
-    display: 'block',
-    opacity: 1,
-    overflow: 'hidden',
-    p: 0,
-    transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-  })
-);
-
 const MobileCell = styled.td(
   css({
-    p: 0,
     borderBottom: '1px solid',
     borderBottomColor: 'lightGray',
   })

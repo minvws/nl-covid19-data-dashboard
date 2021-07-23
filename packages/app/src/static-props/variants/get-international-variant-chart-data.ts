@@ -25,7 +25,7 @@ export function getVariantChartData(variants: InVariants | undefined) {
     return EMPTY_VALUES;
   }
 
-  const completeDateRange = getCompleteDateRange(variants.values);
+  const completeDateRange = getBaseObjectsCompleteDateRange(variants.values);
 
   if (!completeDateRange.length) {
     return EMPTY_VALUES;
@@ -49,8 +49,11 @@ export function getVariantChartData(variants: InVariants | undefined) {
    * While doing this it accumulates the total percentage so that after finding the variants of concern
    * numbers it can add an `other_percentage` property that represents all of the other variants.
    *
+   * If one of the percentage values is marked as unreliable, the entire VariantChartValue is marked as such.
+   *
    */
   const values = completeDateRange.map((partialChartValue) => {
+    partialChartValue.is_reliable = true;
     const { item, total } = variantsOfConcern.reduce(
       ({ item, total }, variantOfConcern) => {
         const otherItem = variantOfConcern.values.find(
@@ -62,6 +65,9 @@ export function getVariantChartData(variants: InVariants | undefined) {
         if (isDefined(otherItem) && isPresent(otherItem.percentage)) {
           total += otherItem.percentage;
           item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
+          if (!otherItem.is_reliable) {
+            partialChartValue.is_reliable = false;
+          }
         }
 
         return { item, total };
@@ -83,16 +89,17 @@ export function getVariantChartData(variants: InVariants | undefined) {
  * The different historical value lists are of different lengths,
  * so here we create a start to end range based on all of them.
  *
- * First it creates a flatmap of all the start and end dates,
+ * First it creates a flatmap of all the start and end dates (plus the sample_size),
  * which is then de-duped and finally re-sorted by end date.
  *
  */
-function getCompleteDateRange(lists: InVariantsVariant[]) {
+function getBaseObjectsCompleteDateRange(lists: InVariantsVariant[]) {
   return lists
     .flatMap((x) => x.values)
     .map<VariantChartValue>((x) => ({
       date_start_unix: x.date_start_unix,
       date_end_unix: x.date_end_unix,
+      sample_size: x.sample_size,
     }))
     .filter(
       ({ date_start_unix, date_end_unix }, index, array) =>

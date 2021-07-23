@@ -1,17 +1,16 @@
 import css from '@styled-system/css';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
-import { useSetLinkTabbability } from '~/components/collapsible/use-set-link-tabbability';
 import {
   EscalationLevelInfoLabel,
-  EscalationLevelLabel,
+  EscalationLevelLabel
 } from '~/components/escalation-level';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useCollapsible } from '~/utils/use-collapsible';
 import { RegionCubes } from './region-cubes';
 
 type VrGroupProps = {
@@ -22,76 +21,45 @@ type VrGroupProps = {
 
 export function VrGroup(props: VrGroupProps) {
   const { level, rowCount, children } = props;
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const { ref, height: contentHeight } = useResizeObserver();
-
   const breakpoints = useBreakpoints(true);
-  const { wrapperRef } = useSetLinkTabbability(isOpen);
+  const collapsible = useCollapsible();
+
+  const headerContent = (
+    <>
+      <Box color="black" minWidth={{ _: '2rem', sm: '13.5rem', lg: '15.5rem' }}>
+        {breakpoints.sm ? (
+          <EscalationLevelInfoLabel level={level} fontSize={3} size="medium" />
+        ) : (
+          level !== null && <EscalationLevelIcon level={level} size="medium" />
+        )}
+      </Box>
+      <Box ml={2} color="black">
+        {!breakpoints.sm && <EscalationLevelLabel level={level} fontSize={2} />}
+        <RegionCubes count={rowCount} level={level} />
+      </Box>
+    </>
+  );
 
   return (
     <Box borderTopColor="lightGray" borderTopStyle="solid" borderTopWidth="1px">
-      <Header
-        open={isOpen}
-        onClick={rowCount > 0 ? () => setIsOpen((x) => !x) : undefined}
-        showChevron={rowCount > 0}
-      >
-        <Box
-          color="black"
-          minWidth={{ _: '2rem', sm: '13.5rem', lg: '15.5rem' }}
-        >
-          {breakpoints.sm ? (
-            <EscalationLevelInfoLabel
-              level={level}
-              fontSize={3}
-              size="medium"
-            />
-          ) : (
-            level !== null && (
-              <EscalationLevelIcon level={level} size="medium" />
-            )
+      {rowCount > 0 ? (
+        <>
+          {collapsible.button(
+            <Header open={collapsible.isOpen}>
+              {headerContent}
+              <Box ml="auto">{collapsible.chevron}</Box>
+            </Header>
           )}
-        </Box>
-        <Box ml={2} color="black">
-          {!breakpoints.sm && (
-            <EscalationLevelLabel level={level} fontSize={2} />
-          )}
-          <RegionCubes count={rowCount} level={level} />
-        </Box>
-      </Header>
-      {rowCount > 0 && (
-        <Panel
-          open={isOpen}
-          style={{
-            /* panel max height is only controlled when collapsed, or during animations */
-            height: isOpen ? contentHeight : 0,
-          }}
-        >
-          <div
-            ref={ref}
-            css={css({
-              overflow: 'hidden',
-            })}
-          >
-            <div ref={wrapperRef}>{children}</div>
-          </div>
-        </Panel>
+          {collapsible.content(children)}
+        </>
+      ) : (
+        <Header as="div">{headerContent}</Header>
       )}
     </Box>
   );
 }
 
-const Panel = styled.div<{ open: boolean }>((props) =>
-  css({
-    display: 'block',
-    overflow: 'hidden',
-    transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-    opacity: props.open ? 1 : 0,
-  })
-);
-
-const Header = styled.button<{ showChevron: boolean; open: boolean }>((props) =>
+const Header = styled.button<{ open?: boolean }>((props) =>
   css({
     display: 'flex',
     alignItems: 'center',
@@ -106,27 +74,8 @@ const Header = styled.button<{ showChevron: boolean; open: boolean }>((props) =>
     fontFamily: 'body',
     fontSize: '1.25rem',
     textAlign: 'left',
-    cursor: props.showChevron ? 'pointer' : 'default',
+    cursor: props.onClick ? 'pointer' : 'default',
     borderBottom: '1px solid',
     borderBottomColor: props.open ? 'lightGray' : 'transparent',
-
-    '&::after': props.showChevron
-      ? {
-          backgroundImage: 'url("/images/chevron-down.svg")',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          transform: props.open ? 'rotate(180deg)' : 'rotate(0deg)',
-          transition: 'transform 0.4s ease-in-out',
-          content: '""',
-          flex: '0 0 3rem',
-          height: '1.25rem',
-          marginLeft: 'auto',
-          py: 0,
-        }
-      : {
-          content: '""',
-          height: '1.25rem',
-          flex: '0 0 3rem',
-        },
   })
 );
