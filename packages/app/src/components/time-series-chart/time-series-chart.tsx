@@ -1,6 +1,8 @@
 import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
+import { first } from 'lodash';
+import { last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -36,6 +38,7 @@ import { Timeline, TimelineEventHighlight } from './components/timeline';
 import { useTimelineState } from './components/timeline/logic';
 import {
   calculateSeriesMaximum,
+  calculateSeriesMinimum,
   COLLAPSE_Y_AXIS_THRESHOLD,
   DataOptions,
   extractCutValuesConfig,
@@ -237,15 +240,12 @@ export function TimeSeriesChart<
    * The maximum is calculated over all values, because you don't want the
    * y-axis scaling to change when toggling the timeframe setting.
    */
-  const calculatedSeriesMax = useMemo(
-    () =>
-      calculateSeriesMaximum(
-        seriesList,
-        seriesConfig,
-        benchmark?.value,
-        isPercentage
-      ),
-    [seriesList, seriesConfig, benchmark?.value, isPercentage]
+  const [calculatedSeriesMin, calculatedSeriesMax] = useMemo(
+    () => [
+      calculateSeriesMinimum(seriesList, seriesConfig, benchmark?.value),
+      calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
+    ],
+    [seriesList, seriesConfig, benchmark?.value]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
@@ -264,6 +264,7 @@ export function TimeSeriesChart<
   } = useScales({
     values,
     maximumValue: seriesMax,
+    minimumValue: calculatedSeriesMin,
     bounds,
     numTicks: yTickValues?.length || numGridLines,
   });
@@ -389,6 +390,10 @@ export function TimeSeriesChart<
     'keyboard_time_series_chart',
   ]);
 
+  const highlightZero =
+    (first(yScale.domain()) as number) < 0 &&
+    (last(yScale.domain()) as number) > 0;
+
   return (
     <>
       {valueAnnotation && (
@@ -440,9 +445,22 @@ export function TimeSeriesChart<
               getY1={getY1}
               bounds={bounds}
               yScale={yScale}
-              benchmark={benchmark}
               chartId={chartId}
             />
+
+            {/**
+             * Highlight 0 on the y-axis when there are positive and
+             * negative values
+             */}
+            {highlightZero && (
+              <rect
+                x={0}
+                y={yScale(0) - 1}
+                width={bounds.width}
+                height={2}
+                fill="black"
+              />
+            )}
 
             {benchmark && (
               <Benchmark

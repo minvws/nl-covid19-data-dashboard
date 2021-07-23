@@ -17,6 +17,7 @@ type SplitAreaTrendProps = {
   yScale: PositionScale;
   strokeWidth?: number;
   fillOpacity?: number;
+  id: string;
 };
 
 export function SplitAreaTrend({
@@ -25,6 +26,7 @@ export function SplitAreaTrend({
   getX,
   getY,
   yScale,
+  id,
   strokeWidth = DEFAULT_STROKE_WIDTH,
   fillOpacity = DEFAULT_FILL_OPACITY,
 }: SplitAreaTrendProps) {
@@ -55,6 +57,7 @@ export function SplitAreaTrend({
       />
 
       <AreaClosed
+        id={id}
         data={nonNullSeries}
         x={getX}
         y={getY}

@@ -4,8 +4,10 @@ import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import {
+  calculateSeriesMaximum,
   LineSeriesDefinition,
   SeriesConfig,
+  useSeriesList,
 } from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -74,6 +76,11 @@ export function VariantsOverTime({
   /* Static legend contains only the inaccurate item */
   const staticLegendItems: LegendItem[] = [underReportedLegendItem];
 
+  const seriesList = useSeriesList(values, chartConfig);
+  const maximum = calculateSeriesMaximum(seriesList, chartConfig);
+  const forcedMaximumValue =
+    maximum <= 10 ? 10 : maximum >= 80 ? 100 : undefined;
+
   if (!values.length) {
     return null;
   }
@@ -98,6 +105,7 @@ export function VariantsOverTime({
         disableLegend
         dataOptions={{
           isPercentage: true,
+          forcedMaximumValue,
           timespanAnnotations: [
             {
               start: underReportedDateStart,
