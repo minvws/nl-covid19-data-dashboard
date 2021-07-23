@@ -21,6 +21,14 @@ module.exports = [
     defaultLocale: 'en',
   },
   {
+    domain: 'localhost',
+    defaultLocale: 'nl',
+  },
+  {
+    domain: 'localhost-en',
+    defaultLocale: 'en',
+  },
+  {
     domain: 'master-en-covid19-data-dashboard.vercel.app',
     defaultLocale: 'en',
   },
