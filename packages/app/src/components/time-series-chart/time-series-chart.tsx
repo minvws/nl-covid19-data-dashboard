@@ -148,7 +148,7 @@ export function TimeSeriesChart<
   minHeight = 250,
   timeframe = 'all',
   formatTooltip,
-  dataOptions: _dataOptions,
+  dataOptions,
   showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
@@ -171,8 +171,6 @@ export function TimeSeriesChart<
 
   const today = useCurrentDate();
   const chartId = useUniqueId();
-
-  const dataOptions = useMemo(() => _dataOptions, [_dataOptions]);
 
   const {
     valueAnnotation,
