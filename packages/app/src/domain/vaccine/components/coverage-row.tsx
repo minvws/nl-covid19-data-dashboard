@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useCollapsible } from '~/utils/use-collapsible';
 
 type RowProps = {
   children: ReactNode;
@@ -30,29 +30,29 @@ export function HeaderRow(props: RowProps) {
 }
 
 function MobileCoverageRow(props: RowProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const collapsible = useCollapsible();
   const children = React.Children.toArray(props.children);
 
   return (
-    <Row width="100%" display="flex" flexDirection="column">
-      <Box display="flex">
+    <Row
+      width="100%"
+      display="flex"
+      flexDirection="column"
+      onClick={collapsible.toggle}
+    >
+      <Box display="flex" alignItems="center">
         <Box flex={1}>{children[0]}</Box>
         <Box
           flex={1}
           display="flex"
           justifyContent="flex-end"
           pr={{ _: 2, xs: 4 }}
-          onClick={() => setIsOpen(!isOpen)}
         >
           {children[1]}
         </Box>
-        <Box flex={0.2}>
-          <Button onClick={() => setIsOpen(!isOpen)}>
-            <Chevron isOpen={isOpen} color={colors.blue} />
-          </Button>
-        </Box>
+        <Box flex={0.2}>{collapsible.button()}</Box>
       </Box>
-      <CollapsiblePanel isOpen={isOpen}>{children[2]}</CollapsiblePanel>
+      {collapsible.content(<Box pt={2}>{children[2]}</Box>)}
     </Row>
   );
 }
@@ -122,45 +122,5 @@ const Row = styled(Box)(
     borderBottomStyle: 'solid',
     borderBottomWidth: '1px',
     py: 3,
-  })
-);
-
-const Button = styled.button(
-  css({
-    border: 'none',
-    bg: 'transparent',
-    height: '100%',
-    width: '100%',
-    '&:focus': { outline: 0 },
-  })
-);
-
-const Chevron = styled.div<{
-  isOpen: boolean;
-}>((x) =>
-  css({
-    backgroundImage: 'url("/images/chevron-down-blue.svg")',
-    backgroundSize: '1.4em 0.9em',
-    backgroundPosition: '0 50%',
-    backgroundRepeat: 'no-repeat',
-    height: '0.9em',
-    width: '1.5em',
-    display: 'inline-block',
-    transitionProperty: 'transform',
-    transitionDuration: '0.5s',
-    transform: x.isOpen ? 'rotate(-180deg)' : '',
-  })
-);
-
-const CollapsiblePanel = styled.div<{ isOpen: boolean }>((x) =>
-  css({
-    transitionProperty: 'opacity, height, padding',
-    transitionDuration: '0.5s',
-    transitionTimingFunction: 'ease-out',
-    width: '100%',
-    overflow: 'hidden',
-    height: x.isOpen ? 'auto' : 0,
-    opacity: x.isOpen ? 1 : 0,
-    pt: x.isOpen ? 2 : 0,
   })
 );
