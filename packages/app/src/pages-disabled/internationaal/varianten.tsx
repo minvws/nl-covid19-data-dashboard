@@ -1,16 +1,20 @@
 import { useCallback, useState } from 'react';
+import { isPresent } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
+import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
+import { WarningTile } from '~/components/warning-tile';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
+import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -31,39 +35,44 @@ import { getInternationalVariantTableData } from '~/static-props/variants/get-in
 import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
 
-export const getStaticProps = createGetStaticProps(
-  getLastGeneratedDate,
-  () => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    const siteText = getLocaleFile(locale);
-    const countryNames = loadJsonFromDataFile<Record<string, string>>(
-      `${locale}-country-names.json`,
-      'static-json'
-    );
-    const { internationalData } = getInData([...countryCodes])();
-    const countryOptions = countryCodes.map<{ value: string; label: string }>(
-      (x) => ({ value: x, label: countryNames[x] })
-    );
+export const getStaticProps = withFeatureNotFoundPage(
+  'inVariantsPage',
+  createGetStaticProps(
+    getLastGeneratedDate,
+    () => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      const siteText = getLocaleFile(locale);
+      const countryNames = loadJsonFromDataFile<Record<string, string>>(
+        `${locale}-country-names.json`,
+        'static-json'
+      );
+      const { internationalData } = getInData([...countryCodes])();
+      const countryOptions = countryCodes
+        .map<{ value: string; label: string }>((x) => ({
+          value: x,
+          label: countryNames[x],
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label));
 
-    return {
-      countryOptions,
-      ...getInternationalVariantTableData(
-        internationalData,
-        siteText.covid_varianten.landen_van_herkomst
-      ),
-      ...getInternationalVariantChartData(internationalData),
-    };
-  },
-  createGetContent<{
-    page: {
-      usefulLinks?: LinkProps[];
-    };
-    highlight: {
-      articles?: ArticleSummary[];
-    };
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return `{
+      return {
+        countryOptions,
+        ...getInternationalVariantTableData(
+          internationalData,
+          siteText.covid_varianten.landen_van_herkomst
+        ),
+        ...getInternationalVariantChartData(internationalData),
+      };
+    },
+    createGetContent<{
+      page: {
+        usefulLinks?: LinkProps[];
+      };
+      highlight: {
+        articles?: ArticleSummary[];
+      };
+    }>(() => {
+      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+      return `{
         "page": *[_type=='in_variantsPage']{
           "usefulLinks": [...pageLinks[]{
             "title": title.${locale},
@@ -72,7 +81,8 @@ export const getStaticProps = createGetStaticProps(
         }[0],
         "highlight": ${createPageArticlesQuery('in_variantsPage', locale)}
     }`;
-  })
+    })
+  )
 );
 
 export default function VariantenPage(
@@ -85,11 +95,15 @@ export default function VariantenPage(
     variantChartData,
     countryOptions,
   } = props;
-  const [tableData, setTableData] = useState<VariantTableData | undefined>();
-  const [chartData, setChartData] = useState<VariantChartData | undefined>();
-  const [selectedCountryCode, setSelectedCountryCode] = useState<
-    string | undefined
-  >();
+  const defaultCountryCode = countryOptions[0].value;
+  const [tableData, setTableData] = useState<VariantTableData>(
+    variantTableData[defaultCountryCode]
+  );
+  const [chartData, setChartData] = useState<VariantChartData>(
+    variantChartData[defaultCountryCode]
+  );
+  const [selectedCountryCode, setSelectedCountryCode] =
+    useState<string>(defaultCountryCode);
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_varianten;
@@ -130,12 +144,6 @@ export default function VariantenPage(
     ]
   );
 
-  const onClear = useCallback(() => {
-    setSelectedCountryCode(undefined);
-    setTableData(undefined);
-    setChartData(undefined);
-  }, [setSelectedCountryCode, setTableData, setChartData]);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <InternationalLayout lastGenerated={lastGenerated}>
@@ -145,9 +153,12 @@ export default function VariantenPage(
             icon={<Getest />}
             description={text.pagina_toelichting}
             metadata={{
-              // @TODO use correct dates
-              dateOrRange: { start: -999999999999, end: -99999999999 },
-              dateOfInsertionUnix: -999999999999,
+              dateOrRange: {
+                start: tableData?.dates?.date_start_unix ?? 0,
+                end: tableData?.dates?.date_end_unix ?? 0,
+              },
+              dateOfInsertionUnix:
+                tableData?.dates?.date_of_insertion_unix ?? 0,
 
               datumsText: text.datums,
               dataSources: [text.bronnen.rivm],
@@ -157,6 +168,8 @@ export default function VariantenPage(
             usefulLinks={content.page?.usefulLinks}
           />
 
+          <InformationTile message={text.informatie_tegel} />
+
           <VariantsTableTile
             noDataMessage={noDataMessageTable}
             source={text.bronnen.rivm}
@@ -165,14 +178,27 @@ export default function VariantenPage(
             sampleSize={tableData?.sampleSize ?? 0}
             dates={tableData?.dates}
           >
-            <Box alignSelf="flex-start" my={3}>
+            <Box
+              alignSelf="flex-start"
+              mt={3}
+              display="flex"
+              alignItems={{ _: 'flex-start', md: 'center' }}
+              flexDirection={{ _: 'column', md: 'row' }}
+            >
               <Select
                 options={countryOptions}
                 onChange={onChange}
-                onClear={onClear}
                 value={selectedCountryCode}
-                placeholder={text.selecteer_een_land}
               />
+              {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
+                <Box ml={{ _: 0, md: 3 }} mt={{ _: 3, md: 0 }}>
+                  <WarningTile
+                    message={text.lagere_betrouwbaarheid}
+                    variant="emphasis"
+                    tooltipText={text.lagere_betrouwbaarheid_uitleg}
+                  />
+                </Box>
+              )}
             </Box>
           </VariantsTableTile>
 
@@ -183,13 +209,11 @@ export default function VariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
           >
-            <Box alignSelf="flex-start" my={3}>
+            <Box alignSelf="flex-start" mt={1} mb={2}>
               <Select
                 options={countryOptions}
                 onChange={onChange}
-                onClear={onClear}
                 value={selectedCountryCode}
-                placeholder={text.selecteer_een_land}
               />
             </Box>
           </VariantsStackedAreaTile>

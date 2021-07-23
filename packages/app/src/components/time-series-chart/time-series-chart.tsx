@@ -48,6 +48,7 @@ import {
   useDimensions,
   useHoverState,
   useLegendItems,
+  useMetricPropertyFormatters,
   useScales,
   useSeriesList,
   useSplitLegendGroups,
@@ -294,7 +295,17 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   });
 
-  const valueMinWidth = useValueWidth(values, seriesConfig, isPercentage);
+  const metricPropertyFormatters = useMetricPropertyFormatters(
+    seriesConfig,
+    values
+  );
+
+  const valueMinWidth = useValueWidth(
+    values,
+    seriesConfig,
+    isPercentage,
+    metricPropertyFormatters
+  );
 
   useEffect(() => {
     if (hoverState) {
@@ -342,6 +353,7 @@ export function TimeSeriesChart<
             : undefined,
 
           valueMinWidth,
+          metricPropertyFormatters,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -362,6 +374,7 @@ export function TimeSeriesChart<
     valueMinWidth,
     timelineEvents,
     timelineState.events,
+    metricPropertyFormatters,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());
@@ -464,7 +477,6 @@ export function TimeSeriesChart<
              */}
             {timespanAnnotations?.map((x, index) => (
               <TimespanAnnotation
-                chartId={chartId}
                 key={index}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}

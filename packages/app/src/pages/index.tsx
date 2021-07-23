@@ -80,6 +80,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
+    showWeeklyHighlight: boolean;
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
@@ -107,7 +108,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     useState<RegionControlOption>('municipal');
 
   const unknownLevelColor = useEscalationColor(null);
-  const internationalFeature = useFeature('internationalPage');
+  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -227,6 +228,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 <HighlightsTile
                   weeklyHighlight={content.weeklyHighlight}
                   highlights={content.highlights}
+                  showWeeklyHighlight={content.showWeeklyHighlight}
                 />
               </Box>
             )}
