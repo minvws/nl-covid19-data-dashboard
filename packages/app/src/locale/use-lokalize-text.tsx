@@ -14,12 +14,17 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { getClient } from '~/lib/sanity';
 import { LanguageKey, languages, SiteText } from '~/locale';
 import { LokalizeText } from '~/types/cms';
+import {
+  TAG_CLOSE,
+  TAG_OPEN,
+  useCopyLokalizeKey,
+} from './use-copy-lokalize-key';
 
 const datasets = ['development', 'production', 'keys'] as const;
 export type Dataset = typeof datasets[number];
 
 const query = `*[_type == 'lokalizeText']`;
-const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'develop';
+const enableHotReload = process.env.NEXT_PUBLIC_PHASE === 'development';
 
 /**
  * This hook will return an object which contains all lokalize translations.
@@ -39,6 +44,8 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [dataset, setDataset] = useState<typeof datasets[number]>(
     process.env.NEXT_PUBLIC_SANITY_DATASET as 'development'
   );
+
+  useCopyLokalizeKey({ isEnabled: enableHotReload && dataset === 'keys' });
 
   const toggleButton = enableHotReload ? (
     <ToggleButton isActive={isActive} onClick={() => setIsActive((x) => !x)}>
@@ -143,7 +150,7 @@ function mapSiteTextValuesToKeys(siteText: SiteText) {
   const keys = Object.keys(flatten(siteText));
 
   const obj = keys.reduce(
-    (result, key) => set(result, key, key),
+    (result, key) => set(result, key, `${TAG_OPEN}${key}${TAG_CLOSE}`),
     {} as Record<string, string>
   );
 
