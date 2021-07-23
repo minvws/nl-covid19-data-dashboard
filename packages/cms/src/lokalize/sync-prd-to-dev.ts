@@ -5,7 +5,7 @@ import { getClient } from '../client';
 const NO_DRAFTS = '!(_id in path("drafts.**"))';
 /**
  * This script takes all the existing published texts from production and
- * injects those in to the corresponding documents in the development set.
+ * injects those into the corresponding documents in the development set.
  *
  * This way we can work on develop with up-to-date Lokalize content.
  *
@@ -28,7 +28,8 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
   const transaction = devClient.transaction();
 
   /**
-   * Only sync the documents that are still existing in the development set
+   * Only sync the documents that are still existing in the development set,
+   * because some might have been deleted in the meantime.
    */
   const documentsToSync = prdDocuments.filter((x) =>
     devDocumentIds.includes(x._id)
@@ -48,7 +49,7 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
           'text.en': doc.text.en,
           should_display_empty: doc.should_display_empty,
           /**
-           * Never copy over the key and subject properties, because these
+           * Never copy over the key and subject properties! Because these
            * could have been mutated by move operations in development.
            */
         },
