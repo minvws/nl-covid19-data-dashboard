@@ -13,10 +13,11 @@
     "lint": "echo '@TODO add eslint'",
     "sync-assets": "ts-node -r dotenv-flow/config scripts/sync-assets.ts",
     "lokalize:export": "ts-node src/lokalize/export.ts",
-    "lokalize:add": "ts-node src/lokalize/add-text.ts",
-    "lokalize:delete": "ts-node src/lokalize/delete-text.ts",
+    "lokalize:apply-json-edits": "ts-node src/lokalize/apply-json-edits.ts",
+    "lokalize:generate-types": "ts-node src/lokalize/generate-types.ts",
     "lokalize:sync-after-release": "ts-node src/lokalize/sync-after-release.ts",
     "lokalize:sync-after-feature": "ts-node src/lokalize/sync-after-feature.ts",
+    "lokalize:strip-unused-keys": "yarn lokalize:export --clean-json && ts-node src/lokalize/strip-unused-keys.ts && yarn lokalize:export --clean-json && yarn workspace @corona-dashboard/app compile",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
@@ -35,6 +36,7 @@
     "download": "^8.0.0",
     "flat": "^5.0.2",
     "fs-extra": "^10.0.0",
+    "outdent": "^0.8.0",
     "p-queue": "^6",
     "prompts": "^2.4.0",
     "prop-types": "^15.6",

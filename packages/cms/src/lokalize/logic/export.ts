@@ -4,13 +4,16 @@
  * result of text changes via the CLI.
  */
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
-import { createFlatTexts } from '@corona-dashboard/common';
-import { unflatten } from 'flat';
-import fs from 'fs';
+import { createFlatTexts, removeIdsFromKeys } from '@corona-dashboard/common';
+import flatten, { unflatten } from 'flat';
+import fs from 'fs-extra';
+import mapValues from 'lodash/mapValues';
+import { outdent } from 'outdent';
 import path from 'path';
 import prettier from 'prettier';
-import { collapseTextMutations, readTextMutations } from '.';
+import { readTextMutations } from '.';
 import { getClient } from '../../client';
+import { simulateDeleteMutations, simulateMoveMutations } from './mutations';
 
 export const localeDirectory = path.resolve(
   __dirname,
@@ -21,38 +24,49 @@ export const localeDirectory = path.resolve(
   'app/src/locale'
 );
 
-async function writePrettyJson(data: Record<string, unknown>, path: string) {
-  const json = prettier.format(JSON.stringify(data), { parser: 'json' });
-  return new Promise<void>((resolve, reject) =>
-    fs.writeFile(path, json, { encoding: 'utf8' }, (err) =>
-      err ? reject(err) : resolve()
-    )
-  );
-}
+export const localeReferenceDirectory = path.resolve(
+  __dirname,
+  '..', // lokalize
+  '..', // src
+  '..', // cms
+  '.lokalize-reference'
+);
 
-export async function exportLokalizeTexts(
-  dataset?: string,
-  includeDrafts?: boolean
-) {
-  const client = getClient(dataset);
+export async function exportLokalizeTexts({
+  dataset,
+  appendDocumentIdToKey = false,
+}: {
+  dataset?: string;
+  appendDocumentIdToKey?: boolean;
+}) {
   /**
-   * The client will load drafts by default because it is authenticated with a
-   * token. If the `drafts` flag is not set to true, we will manually
-   * exclude draft-documents on query-level.
+   * Make sure the reference directory exists
    */
-  const draftsQueryPart = includeDrafts ? '' : '&& !(_id in path("drafts.**"))';
+  fs.ensureDirSync(localeReferenceDirectory);
+
+  const client = getClient(dataset);
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText' ${draftsQueryPart}] | order(key asc)`
+    `*[_type == 'lokalizeText'] | order(key asc)`
   );
 
   const mutations = await readTextMutations();
 
-  const deletedKeys = collapseTextMutations(mutations)
-    .filter((x) => x.action === 'delete')
-    .map((x) => x.key);
+  /**
+   * We simulate local mutations as if they already happened to the documents in
+   * Sanity. This way the user gets an up-to-date version of JSON output, but
+   * the documents in Sanity are left untouched to not break other feature
+   * branches in the meantime.
+   *
+   * Moves are applied before deletions, to prevent losing documents in edge
+   * cases.
+   */
+  const mutatedDocuments = simulateDeleteMutations(
+    simulateMoveMutations(documents, mutations),
+    mutations
+  );
 
-  const flatTexts = createFlatTexts(documents, deletedKeys);
+  const flatTexts = createFlatTexts(mutatedDocuments, appendDocumentIdToKey);
 
   await writePrettyJson(
     unflatten(flatTexts.nl, { object: true }),
@@ -62,5 +76,65 @@ export async function exportLokalizeTexts(
   await writePrettyJson(
     unflatten(flatTexts.en, { object: true }),
     path.join(localeDirectory, 'en_export.json')
+  );
+
+  await writePrettyJson(
+    unflatten(flatTexts.nl, { object: true }),
+    path.join(localeReferenceDirectory, 'nl_export.json')
+  );
+
+  await writePrettyJson(
+    unflatten(flatTexts.en, { object: true }),
+    path.join(localeReferenceDirectory, 'en_export.json')
+  );
+
+  await generateTypes();
+}
+
+async function writePrettyJson(data: Record<string, unknown>, path: string) {
+  const json = prettier.format(JSON.stringify(data), { parser: 'json' });
+  return new Promise<void>((resolve, reject) =>
+    fs.writeFile(path, json, { encoding: 'utf8' }, (err) =>
+      err ? reject(err) : resolve()
+    )
+  );
+}
+
+export async function generateTypes() {
+  const data = flatten(
+    JSON.parse(
+      fs.readFileSync(path.join(localeDirectory, 'nl_export.json'), {
+        encoding: 'utf-8',
+      })
+    )
+  ) as Record<string, string>;
+
+  const textsFlat = removeIdsFromKeys(mapValues(data, () => '@string'));
+
+  const textsObject = unflatten(textsFlat, { object: true });
+
+  const textsTypeString = JSON.stringify(textsObject, null, 2).replace(
+    /\"\@string\"/g,
+    'string'
+  );
+
+  const body = prettier.format(
+    `
+      /**
+       * This file was auto-generated from the lokalize export script.
+       */
+      export interface SiteText ${textsTypeString}
+    `,
+    { parser: 'typescript' }
+  );
+
+
+  return new Promise<void>((resolve, reject) =>
+    fs.writeFile(
+      path.join(localeDirectory, 'site-text.d.ts'),
+      body,
+      { encoding: 'utf8' },
+      (err) => (err ? reject(err) : resolve())
+    )
   );
 }
