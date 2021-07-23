@@ -241,7 +241,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
                   <ChevronIcon />
                 </InlineText>
               ) : (
-                `${word} `
+                <InlineText>{`${word} `}</InlineText>
               )}
             </Fragment>
           ))}

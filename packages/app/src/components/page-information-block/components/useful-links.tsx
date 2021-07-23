@@ -109,7 +109,7 @@ const ListItem = styled.li(
 const IconContainer = styled.span(
   css({
     position: 'absolute',
-    right: -25,
+    right: -20,
     top: 0,
 
     svg: {

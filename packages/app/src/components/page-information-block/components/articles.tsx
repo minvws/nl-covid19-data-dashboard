@@ -77,7 +77,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
                     <ChevronIcon />
                   </InlineText>
                 ) : (
-                  `${word} `
+                  <InlineText>{`${word} `}</InlineText>
                 )}
               </Fragment>
             ))}
