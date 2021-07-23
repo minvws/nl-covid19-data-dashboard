@@ -34,6 +34,8 @@ import {
 import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
 import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
+import styled from 'styled-components/';
+import css from '@styled-system/css';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
@@ -189,6 +191,15 @@ export default function VariantenPage(
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
+                icon={
+                  <FlagImage
+                    aria-hidden
+                    src={`/icons/flags/${selectedCountryCode.toLowerCase()}.svg`}
+                    width="16"
+                    height="12"
+                    alt=""
+                  />
+                }
               />
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
                 <Box ml={{ _: 0, md: 3 }} mt={{ _: 3, md: 0 }}>
@@ -222,3 +233,10 @@ export default function VariantenPage(
     </Layout>
   );
 }
+
+export const FlagImage = styled.img(
+  css({
+    display: 'block',
+    ml: 1,
+  })
+);
