@@ -15870,11 +15870,6 @@ start-server-and-test@^1.12.5:
     ps-tree "1.2.0"
     wait-on "5.3.0"
 
-starwars@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/starwars/-/starwars-1.0.1.tgz#f8e216b78294b3fcbfcad25b44f271179e3753d5"
-  integrity sha512-d23qkhEuFNlHas4/w2J6ZF6qS7jqy8OK4N3gfQbtTk/5Lt1wKe+xv0cIweuNxwtwBGVXvmsLV2mdUOBKfj12cA==
-
 static-extend@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/static-extend/-/static-extend-0.1.2.tgz#60809c39cbff55337226fd5e0b520f341f1fb5c6"
