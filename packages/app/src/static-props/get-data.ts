@@ -212,7 +212,13 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
 
     const selectedVrData = metrics.reduce(
       (acc, p) => set(acc, p, vrData.data[p]),
-      {} as Pick<Vr, T>
+      {
+        situationsSidebarValue: getSituationsSidebarValue(
+          json.vrCollection.situations
+        ),
+      } as {
+        situationsSidebarValue: SituationsSidebarValue;
+      } & Pick<Vr, T>
     );
 
     return { selectedVrData, vrName: vrData.vrName };
