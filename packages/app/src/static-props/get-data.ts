@@ -29,7 +29,7 @@ import {
   VrRegionPageMetricNames,
 } from '~/domain/layout/vr-layout';
 import { getClient, localize } from '~/lib/sanity';
-import { cleanText, SiteText } from '~/locale';
+import { cleanText } from '~/locale';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import {
   getVariantSidebarValue,
@@ -345,5 +345,5 @@ export function getLocaleFile(locale: string) {
   );
 
   const rawLocaleFile = JSON.parse(content) as Record<string, unknown>;
-  return cleanText(rawLocaleFile) as SiteText;
+  return cleanText(rawLocaleFile);
 }
