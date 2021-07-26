@@ -1,4 +1,6 @@
+import css from '@styled-system/css';
 import { useCallback, useState } from 'react';
+import styled from 'styled-components/';
 import { isPresent } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -34,8 +36,6 @@ import {
 import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
 import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
-import styled from 'styled-components/';
-import css from '@styled-system/css';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
