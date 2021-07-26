@@ -25,7 +25,7 @@ const metricConfig = {
 export function getMetricConfig(
   scope: DataScope,
   metricName: string,
-  metricProperty: string
+  metricProperty?: string
 ) {
   /**
    * Fall back to an empty object so we don't have to specify empty objects in
@@ -33,7 +33,11 @@ export function getMetricConfig(
    * root-level properties in the MetricConfig are optional, an empty object is
    * still a valid configuration.
    */
-  const config = get(metricConfig, [scope, metricName, metricProperty], {});
+  const config = get(
+    metricConfig,
+    [scope, metricName, metricProperty ?? ''],
+    {}
+  );
 
   return config as MetricConfig;
 }
