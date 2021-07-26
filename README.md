@@ -27,14 +27,13 @@ be able to use it).
 ## Packages
 
 The project is set up as a monorepo and therefore the code is organized in
-multiple packages. If you want to run the dashboard locally, read the
-instructions in `packages/app`.
+multiple packages.
 
 - `app`: The main application that contains front-end part of the dashboard.
   [README](/packages/app/README.md)
 - `cli`: Command-line tools for things like data validation.
 - `cms`: Configurations for the Sanity content management system.
-  [README](/packages/cli/README.md)
+  [README](/packages/cms/README.md)
 - `common`: Commonly shared code that multiple packages are using, like types
   and utils.
 - `e2e`: End-to-end tests using Cypress
@@ -45,5 +44,5 @@ In this project we use Yarn instead of NPM, so the documentation assumes you
 have the `yarn` executable installed on your system.
 
 If you would like to run the code on your local machine check out the readme
-documentation of the [app](/packages/app/README.md) and
-[cms](/packages/cli/README.md) packages.
+documentation of the [app](/packages/app/README.md) and (optionally the)
+[cms](/packages/cms/README.md) packages.
