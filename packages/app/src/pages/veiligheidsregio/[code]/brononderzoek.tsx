@@ -34,7 +34,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectVrPageMetricData('situations'),
+    selectVrPageMetricData(),
     createGetContent<{
       articles?: ArticleSummary[];
     }>(() => {
