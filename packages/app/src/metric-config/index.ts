@@ -35,7 +35,7 @@ export function getMetricConfig(
    */
   const config = get(
     metricConfig,
-    [scope, metricName, metricProperty ?? ''],
+    metricProperty ? [scope, metricName, metricProperty] : [scope, metricName],
     {}
   );
 
