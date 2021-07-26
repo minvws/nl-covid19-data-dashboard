@@ -15,7 +15,7 @@ export type { SiteText } from './site-text';
 export type Languages = typeof languages;
 export type LanguageKey = keyof Languages;
 
-function cleanText(rawText: Record<string, unknown>) {
+export function cleanText(rawText: Record<string, unknown>) {
   if (!hasIdsInKeys) {
     return rawText as unknown as SiteText;
   }
