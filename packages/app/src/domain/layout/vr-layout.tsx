@@ -20,12 +20,12 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
-import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/type';
 import { SituationIcon } from '../situations/components/situation-icon';
+import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VrComboBox } from './components/vr-combo-box';
 
 export const vrPageMetricNames = [
@@ -40,6 +40,7 @@ export const vrPageMetricNames = [
   'sewer',
   'behavior',
   'difference',
+  'situations',
 ] as const;
 
 export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
@@ -238,8 +239,11 @@ export function VrLayout(props: VrLayoutProps) {
                       icon={<SituationIcon id="gathering" />}
                       title={siteText.brononderzoek.titel_sidebar}
                     >
-                      <SidebarKpiValue
-                        title={siteText.brononderzoek.kpi_titel}
+                      <SituationsSidebarMetric
+                        date_start_unix={
+                          data.situations.last_value.date_start_unix
+                        }
+                        date_end_unix={data.situations.last_value.date_end_unix}
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
