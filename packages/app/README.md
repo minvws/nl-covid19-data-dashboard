@@ -7,9 +7,16 @@ React application uses Next.js as its framework.
 
 First run `yarn install` or simply `yarn` at the root of the repository if you
 haven't already. This installs all the dependencies for all of the packages.
-Then follow the steps below.
 
-### Data
+Then from `packages/app` you can run:
+
+1. `yarn download`
+2. `yarn workspace corona-dashboard/cms lokalize:export`
+3. `yarn dev`
+
+These steps are described in more detail below.
+
+### JSON Data
 
 Run `yarn download` to download & install the JSON data files from production in
 `packages/app/public/json`
@@ -17,42 +24,55 @@ Run `yarn download` to download & install the JSON data files from production in
 The calculations for the data can be found in
 [nl-covid19-data-backend-processing](https://github.com/minvws/nl-covid19-data-backend-processing).
 
-### Locale
-
-By default the site builds the Dutch version. If you would like the English
-version instead, you can create a `.env.local` file in `packages/app` with the
-following content:
-
-```
-NEXT_PUBLIC_LOCALE=en
-```
-
 ### CMS Dataset
 
 By default the site builds using the development dataset. If you would like the
 production content instead you can create a `.env.local` file in `packages/app`
 with the following content:
 
-```
+```sh
 NEXT_PUBLIC_SANITY_DATASET=production
 ```
 
-## Run
+The "Lokalize" part of Sanity is exported and used bay the app as JSON. You will
+need to run this script regularly as an outdated JSON file will result in
+compile or build-time errors.
 
-Run `yarn dev` to start the Next.js development server. If you would like to
-build a production version you can run `yarn build` and then `yarn start` to
+`yarn workspace corona-dashboard/cms lokalize:export`
+
+Alternatively you can run this from `packages/cms` as `yarn lokalize:export`
+
+### Locale
+
+By default the site builds the Dutch version. If you would like the English
+version instead, you can create a `.env.local` file in `packages/app` with the
+following content:
+
+```sh
+NEXT_PUBLIC_LOCALE=en
+```
+
+## Running a Production Build
+
+In order to build and serve the site as if it were a production environment, you
+need to have a `.env.local` file in `packages/app` with the following content:
+
+```sh
+NEXT_PUBLIC_COMMIT_ID=__commit_id_placeholder
+```
+
+The value doesn't actually matter, so it can be anything.
+
+To build a production version you can run `yarn build`, and after that `yarn start` to
 serve the built files.
 
 ## Available Scripts
 
-In the project directory, you can run:
+There are several scripts available via `yarn [scriptName]`.
 
-- `yarn dev` Runs the app in the development mode. Open http://localhost:3000 to
-  view it in the browser.
-- `yarn build` Builds the app for production to the out folder. It correctly
-  bundles React in production mode and optimizes the build for the best
-  performance. All pages are output as static HTML files through next export,
-  ready to be served on any static file server.
-- `yarn download` This downloads the latest data files from the production
-  server and places the data in the `public/json` folder.
-- `yarn test` Runs the unit test suite.
+- `dev` Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view
+  it in the browser.
+- `build` Builds the app for production to the `out` folder.
+- `download` This downloads the latest data files from the production server and
+  places the data in the `public/json` folder.
+- `test` Runs the unit tests.
