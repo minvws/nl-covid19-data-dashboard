@@ -112,7 +112,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           {collapsible.content(
             <Box spacing={2} css={css({ pb: 3 })}>
               <Box display="flex" flexDirection="row">
-                <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
+                <InlineText mr={1}>{columnNames.vorige_meting}:</InlineText>
                 {isPresent(row.difference) &&
                 isPresent(row.difference.difference) &&
                 isPresent(row.difference.old_value) ? (
