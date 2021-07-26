@@ -12,7 +12,6 @@ import {
 import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
-import getConfig from 'next/config';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
@@ -32,7 +31,6 @@ import {
   getVariantSidebarValue,
   VariantSidebarValue,
 } from './variants/get-variant-sidebar-value';
-const { serverRuntimeConfig } = getConfig();
 
 /**
  * Usage:
