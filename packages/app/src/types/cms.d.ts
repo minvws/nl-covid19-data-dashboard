@@ -143,22 +143,21 @@ export type TitleDescriptionBlock = {
   description: RichContentBlock[];
   title: string;
 };
-
 export interface LokalizeText {
   _type: 'lokalizeText';
   _id: string;
   _createdAt: string;
   _updatedAt: string;
-
   key: string;
   subject: string;
-  path: string;
-  text: {
-    nl: string | undefined;
-    en: string | undefined;
-  };
   should_display_empty: boolean;
   is_newly_added: boolean;
+  publish_count: number;
+  text: {
+    _type: 'localeText';
+    nl?: string;
+    en?: string;
+  };
 }
 
 export type VaccinationPageQuery = {

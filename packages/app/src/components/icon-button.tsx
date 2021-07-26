@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
-import { forwardRef, ReactNode } from 'react';
+import { cloneElement, forwardRef, ReactElement } from 'react';
 import styled from 'styled-components';
 import { VisuallyHidden } from './visually-hidden';
 
 interface IconButtonProps {
-  children: ReactNode;
+  children: ReactElement;
   size: number;
   title: string;
   color?: string;
@@ -14,7 +14,15 @@ interface IconButtonProps {
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
-    { children, size, title, color = 'currentColor', onClick, padding },
+    {
+      children,
+      size,
+      title,
+      color = 'currentColor',
+      onClick,
+      padding,
+      ...ariaProps
+    },
     ref
   ) => {
     return (
@@ -26,9 +34,10 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         size={size}
         color={color}
         padding={padding}
+        {...ariaProps}
       >
         <VisuallyHidden>{title}</VisuallyHidden>
-        {children}
+        {cloneElement(children, { 'aria-hidden': 'true' })}
       </StyledIconButton>
     );
   }
@@ -47,7 +56,7 @@ const StyledIconButton = styled.button<{
     display: 'block',
     cursor: 'pointer',
     color: x.color,
-    '& > svg': {
+    '& svg': {
       display: 'block',
       width: x.size,
       height: x.size,

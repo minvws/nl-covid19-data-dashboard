@@ -45,7 +45,7 @@ jobs:
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
       - name: Export texts
-        run: yarn workspace @corona-dashboard/cms lokalize:export
+        run: yarn workspace @corona-dashboard/cms lokalize:export --clean-json
       - name: Compile all code
         run: yarn compile
 
@@ -66,5 +66,5 @@ jobs:
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
       - name: Export texts
-        run: yarn workspace @corona-dashboard/cms lokalize:export
+        run: yarn workspace @corona-dashboard/cms lokalize:export --clean-json
       - run: yarn test:ci

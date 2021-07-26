@@ -14,8 +14,8 @@ export function lokalizeListItem() {
       return documentStore
         .listenQuery(`*[_type == $type]{ subject }`, { type })
         .pipe(
-          map((_subjects: { subject: string }[], index) => {
-            const subjects = uniq(_subjects.map((x) => x.subject));
+          map((doc: { subject: string }[], _index) => {
+            const subjects = uniq(doc.map((x) => x.subject));
 
             return S.list()
               .title('Onderwerp')
@@ -31,9 +31,7 @@ export function lokalizeListItem() {
                           .id(`${subject}-child`)
                           .title(subject)
                           .schemaType(type)
-                          .defaultOrdering([
-                            { field: 'path', direction: 'asc' },
-                          ])
+                          .defaultOrdering([{ field: 'key', direction: 'asc' }])
                           .filter('subject == $subject')
                           .params({ subject })
                           .child((id) =>

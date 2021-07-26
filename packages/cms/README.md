@@ -16,12 +16,12 @@ In summary these are the most important things you should be aware of:
 - The `export` command brings your local JSON files up-to-date with the Sanity
   dataset. The Typescript compiler will error when your JSON files do not
   contain all the texts which are referenced in the code.
-- Use the `add` and `delete` commands to add/remove short-copy texts to/from the
-  Sanity development dataset. Every mutation is logged to `key-mutations.csv`.
-  This file is used to synchronize the changes to the production dataset when
-  needed. If you need to add multiple keys you can do this by editing the JSON
-  file (read more below). You should **never** have to manually edit the
-  mutations file.
+- The JSON export contains document ids as part of the keys. You can make
+  changes locally to the `app/src/locale/nl_export.json` file. Add new keys,
+  delete them or rename and move existing ones. After you make changes run the
+  `lokalize:apply-json-edits` script. This will give you a list of changes and
+  you can decide which ones to apply. Changes are written in a mutation log
+  file, and at the end the JSON is re-exported to reflect all changes.
 - Merge conflicts in the mutations file are common, but **always** choose to
   **accept both changes**, so that you never remove any mutations. You do not
   have to worry about the order of the timestamps, as these mutations are sorted
@@ -39,19 +39,16 @@ In summary these are the most important things you should be aware of:
 
 All mutation to the development dataset that are done via the CLI interface are
 logged in the mutations file. This file contains the timestamp, key and action
-for each mutation.
+for each mutation. It also contains the document id and in the case of a move
+mutation the move_to key.
 
 The mutation file is used to synchronize texts at different times in the
 development/release flow.
 
-You should not have to edit this file manually. The mutations log can be cleared
-after a release, but if this doesn't happen it also won't hurt to keep appending
-mutations over multiple sprints. The sync logic should be clever enough to
-figure out what mutations are still relevant.
-
 Whenever the mutations file is read, the different mutations are "collapsed" so
-that additions and deletions cancel each other out where needed. The timestamps
-in this file do not have to be in order, as all rows get sorted by the sync
+that additions and deletions cancel each other out where needed. Also move
+mutations like a => b => c => d will be treated as a => d. The timestamps in
+this file do not have to be in order, as all rows get sorted by the sync
 scripts.
 
 Merge conflicts in this file are common. You should always "accept both changes"
@@ -60,38 +57,61 @@ when resolving conflicts, so that none of the lines are ever deleted.
 ### Export
 
 The application reads its locale strings from
-`packages/app/public/nl-export.json` and `packages/app/public/en-export.json`.
+`packages/app/public/nl_export.json` and `packages/app/public/en_export.json`.
 These JSONs are exported from the Sanity lokalize documents but they are not
 part of the repository. Therefore you will regularly need to run `yarn lokalize:export` in order to keep your local JSON file up-to-date with the
-Sanity dataset. For Typescript these JSONs are a static data source, so it will
-complain when they do not contain all the keys that are used in the code.
+Sanity dataset.
 
-### Adding Texts
+The JSONs will include Sanity document ids in every leaf-key which are used to
+detect add-/delete-/move-actions of texts (`some_key__@__{document_id}`). These
+ids would result in compile- and run-time errors, but there's a workaround:
 
-You can run `yarn lokalize:add` from the repository root to add a text to the
-Sanity lokalize section in the development dataset. There are a few different
-flavors for convenience.
+- compile-time: every export will also emit a `site-text.d.ts` with a `SiteText`
+  interface. This interface is used to type the imported JSONs.
+- run-time: on load of the app all ids will be removed from the keys.
 
-New texts only need an NL string when they are added. EN is optional and will
-use NL as a fallback.
+The runtime workaround would be a waste of resources on production, so for this
+reason we use the `--clean-json` flag to ignore document ids.
 
-After adding a text, the export script is called to update your local JSON file.
+### How to Add, Delete or Move Texts
 
-#### Flags
+First make sure the JSONs include document ids (`some_key__@__{document_id}`).
+Run `yarn lokalize:export` if these are not yet present in your JSONs.
 
-Without any flags the user is presented with an interactive prompt to specify
-what key you want to add. This is using auto-completion on existing keys to
-easily find a nested location.
+You can add, delete and move keys by mutating the `nl_export.json` file. The
+sync script will automagically detect additions, deletions or moved lokalize
+texts.
 
-Using the `-k` or `--key` flag you can pre-specify the key/path in dot notation
-that the new text should get.
+After you're done with the changes run `yarn lokalize:apply-json-edits` and
+after confirmation all selected mutations will be written to the mutations log
+file.
 
-Using the `-s` or `--sync` flag allows you to add multiple texts at once by
-making your edits directly in the JSON file at
-`packages/app/public/nl-export.json`. The script will then compare all the keys
-in your local JSON file with the Sanity dataset and present you with a list of
-all keys that would become additions. You can then select which ones to actually
-add, and it injects the existing texts for each.
+New texts will only have an NL string when they are added and will use NL as a
+fallback.
+
+After syncing texts, the export script is called to update your local JSON file
+and re-generate the SiteText type interface.
+
+#### Delete/Move Mutations
+
+Because feature branches plus the development deployment all use the same Sanity
+dataset, we can not simply remove a lokalize text document from the dataset
+without potentially breaking other branches.
+
+For this reason, when you delete a lokalize text, it will append the delete
+action to the mutations file but not actually delete the document. The export
+filters out any deletions that were logged to the mutations file. So in effect
+you end up with a local JSON file that has the deleted key removed, and the TS
+compiler sees the correct dataset.
+
+The actual deletions from Sanity only happen in the `sync-after-feature` phase,
+describe below.
+
+The same goes for move mutations. When you apply the move in your feature branch
+it will be simulated in the JSON export, but not yet applied to the CMS
+documents. During sync-after-feature the move is finalized by changing the key
+and subject properties of the targeted document. This preserves the document
+history and drafts.
 
 #### Flow to Production
 
@@ -102,42 +122,15 @@ and flag them as being new.
 The communication team is then able to see a list of newly added texts and
 prepare them for an upcoming release.
 
-### Deletings Texts
-
-Texts can be deleted via `yarn lokalize:delete`
-
-Because feature branches plus the development deployment all use the same Sanity
-dataset, we can not simply remove a lokalize text document from the dataset
-without potentially breaking other branches.
-
-For this reason, when you delete a lokalize text, it will append the delete
-action to the mutations file but not actually delete the document. This script
-also triggers an export which then filters out any deletions that were logged to
-the mutations file. So in effect you end up with a local JSON file that has the
-deleted key removed, and the TS compiler sees the correct dataset.
-
-The actual deletions from Sanity only happen in the `sync-after-feature` phase,
-describe below.
-
-#### Undo Delete
-
-Although you should never manually edit the mutations file, there are probably
-some edge cases still.
-
-When you delete a key but later change your mind, the CLI will probably not let
-you re-add the key because it already exists (as the actual deletion is
-postponed until after release). In such case you can simply remove the delete
-mutation from the log file and run export again.
-
 ### Sync After Feature
 
 The `sync-after-feature` command is triggered automatically by a Github Action
 whenever a feature branch is merged to the develop branch. It contains the
 following logic:
 
-1. Apply deletions to the development set. This will likely break other feature
-   branches, but at this point those branches can be updated with the develop
-   new commits.
+1. Apply moves and deletions to the development set. This will break other
+   feature branches, but at this point those branches can be updated with the
+   develop new commits.
 2. Sync additions to the production set. Any text that was added as part of this
    feature branch is added to the production set so that the communication team
    can prepare the texts for the upcoming release. These text get a special flag
@@ -151,25 +144,27 @@ merged, those deletions will propagate to production after the release using the
 
 The `sync-after-release` command should be triggered manually shortly after a
 release has been deployed to production. It can not really hurt to forget to run
-it, but it can break the production build when it is triggered at the wrong
+it, but it _can break the production build_ when it is triggered at the wrong
 time, so make sure you understand the logic behind it.
 
-1. Prune the production set by applying deletions. Any key that has been deleted
+1. Apply move mutations on production. This mutates the original documents and
+   can not be reverted easily.
+2. Prune the production set by applying deletions. Any key that has been deleted
    from the development set as part of a feature branch (or a key that was added
    in a feature branch but later got deleted anyway), is removed from
    production.
-2. Find any keys that are in development but not yet in production and add
+3. Find any keys that are in development but not yet in production and add
    those. This is a safe-guard to solve any edge-cases that might have appeared
    through wrong use of the mutations file or something.
 
-After these two steps the production dataset should be considered a mirror of
-the development dataset.
+After these steps the production dataset should be considered a mirror of the
+development dataset.
 
 It is possible that right after a release there are already new texts in the
 development set which are part of the next sprint. Those will get added to
 production as well but this won't be much of a problem.
 
-**NOTE:** One thing we need to keep in mind is to not delete texts from
-development between deploying the release and running the `sync-after-release`.
-Because then those keys will get removed from the production set and block the
-deployment.
+**DANGER:** One thing we need to keep in mind is to not delete or move texts
+from development between deploying the release and running the
+`sync-after-release`. Because then those keys will get removed from the
+production set and block the deployment.
