@@ -1,6 +1,7 @@
 # NL Corona Dashboard - CMS
 
-The Corona Dashboard CMS uses Sanity. This document is aimed at developers with access to the Sanity CMS.
+The Corona Dashboard CMS uses Sanity. This document is aimed at developers with
+access to the Sanity CMS.
 
 ## Usage
 
@@ -9,11 +10,10 @@ which is then used to talk to the Sanity API.
 
 ## Lokalize Texts
 
-This section describes
-some of the ins and outs around locale texts that we use to translate
-short-copy. These text strings used to be in a tool called Lokalize and even
-though they now live as documents in Sanity, we still tend to refer to them as
-"lokalize texts".
+This section describes some of the ins and outs around locale texts that we use
+to translate short-copy. These text strings used to be in a tool called Lokalize
+and even though they now live as documents in Sanity, we still tend to refer to
+them as "lokalize texts".
 
 ### Key Takeaways
 
