@@ -1,5 +1,7 @@
 import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { chunk } from 'lodash';
+import { outdent } from 'outdent';
+import prompts from 'prompts';
 import { getClient } from '../client';
 
 const NO_DRAFTS = '!(_id in path("drafts.**"))';
@@ -12,6 +14,24 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
  * Both datasets should use the same document ids.
  */
 (async function run() {
+  const response = await prompts([
+    {
+      type: 'confirm',
+      name: 'isConfirmed',
+      message: outdent`
+          This script takes all texts from production and overwrites the corresponding texts in development. If previously released texts in development have been altered to use a different amount of interpolating variables, these changes will be lost.
+
+          Are you sure you want to continue?
+      `,
+
+      initial: false,
+    },
+  ]);
+
+  if (!response.isConfirmed) {
+    process.exit(0);
+  }
+
   const prdClient = getClient('production');
   const devClient = getClient('development');
 
@@ -49,8 +69,8 @@ const NO_DRAFTS = '!(_id in path("drafts.**"))';
           'text.en': doc.text.en,
           should_display_empty: doc.should_display_empty,
           /**
-           * Never copy over the key and subject properties! Because these
-           * could have been mutated by move operations in development.
+           * Never copy over the key and subject properties! Because these could
+           * have been mutated by move operations in development.
            */
         },
       });
