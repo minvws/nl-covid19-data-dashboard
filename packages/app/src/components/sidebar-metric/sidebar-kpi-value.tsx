@@ -59,14 +59,16 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
           </Box>
         )}
 
-        <InlineText
-          display="inline-block"
-          margin="0"
-          color="annotation"
-          fontSize={1}
-        >
-          {description}
-        </InlineText>
+        {isDefined(description) && (
+          <InlineText
+            display="inline-block"
+            margin="0"
+            color="annotation"
+            fontSize={1}
+          >
+            {description}
+          </InlineText>
+        )}
       </Box>
 
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
