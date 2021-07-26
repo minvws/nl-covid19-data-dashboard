@@ -243,9 +243,11 @@ export function VrLayout(props: VrLayoutProps) {
                     >
                       <SituationsSidebarMetric
                         date_start_unix={
-                          data.situations.last_value.date_start_unix
+                          data.situationsSidebarValue.date_start_unix
                         }
-                        date_end_unix={data.situations.last_value.date_end_unix}
+                        date_end_unix={
+                          data.situationsSidebarValue.date_end_unix
+                        }
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
