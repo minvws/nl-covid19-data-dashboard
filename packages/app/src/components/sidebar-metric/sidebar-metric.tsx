@@ -105,7 +105,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   const config = getMetricConfig(
     scope,
     metricName as unknown as string,
-    metricProperty ?? ''
+    metricProperty
   );
 
   let description = '';
