@@ -7,7 +7,7 @@ import { ReactNode, Fragment } from 'react';
  */
 const shouldValidate =
   typeof window === 'undefined' ||
-  process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE !== '1';
+  process.env.NEXT_PUBLIC_PHASE !== 'development';
 
 /**
  * Provided text can be filled with placeholders such as
