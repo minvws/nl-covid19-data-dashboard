@@ -135,11 +135,12 @@ export function EuropeChoropleth<T extends CountryDataItem>(
 
       return isDefined(item) ? (
         <HoverPathLink
-          isSelected={true}
           isTabInteractive={isTabInteractive}
           key={`${ISO_A3}_${index}`}
           title={ISO_A3}
           id={ISO_A3}
+          stroke={colors.body}
+          strokeWidth={2}
           pathData={path}
           {...anchorEventHandlers}
         />

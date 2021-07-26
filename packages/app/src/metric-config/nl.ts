@@ -1,6 +1,6 @@
 import { MetricKeys, Nl } from '@corona-dashboard/common';
 import { colors } from '~/style/theme';
-import { MetricConfig, NO_METRIC_PROPERTY } from './common';
+import { MetricConfig } from './common';
 
 const GREEN = colors.data.gradient.green;
 const YELLOW = colors.data.gradient.yellow;
@@ -10,21 +10,6 @@ type NlMetricKey = MetricKeys<Nl>;
 type NlConfig = Partial<Record<NlMetricKey, Record<string, MetricConfig>>>;
 
 export const nl: NlConfig = {
-  behavior: {
-    [NO_METRIC_PROPERTY]: {
-      isWeeklyData: true,
-    },
-  },
-  doctor: {
-    covid_symptoms: {
-      isWeeklyData: true,
-    },
-  },
-  sewer: {
-    average: {
-      isWeeklyData: true,
-    },
-  },
   reproduction: {
     index_average: {
       isDecimal: true,
