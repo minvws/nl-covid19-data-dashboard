@@ -18,9 +18,9 @@ import {
   AccessibilityDefinition,
   useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
-import { useElementSize } from '~/utils/use-element-size';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Path } from './path';
 import {
@@ -192,10 +192,10 @@ const ChoroplethMap: <FeatureProperties, HoverProperties, OutlineProperties>(
     aspectRatio = CHOROPLETH_ASPECT_RATIO.nl,
   } = props;
 
-  const [containerRef, { width, height }] = useElementSize<HTMLDivElement>(
-    minHeight * (1 / aspectRatio),
-    minHeight
-  );
+  const [
+    containerRef,
+    { width = minHeight * (1 / aspectRatio), height = minHeight },
+  ] = useResizeObserver<HTMLDivElement>();
 
   const annotations = useAccessibilityAnnotations(accessibility);
   const clipPathId = useUniqueId();

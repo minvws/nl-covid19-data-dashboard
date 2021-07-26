@@ -85,7 +85,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
       })
     );
 
-  const { ref, width } = useResizeObserver<HTMLDivElement>();
+  const [ref, { width }] = useResizeObserver<HTMLDivElement>();
 
   const { mapHeight, padding } = useHeightAndPadding(width);
 

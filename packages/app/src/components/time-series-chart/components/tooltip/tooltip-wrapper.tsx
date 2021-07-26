@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
-import { ReactNode, useRef } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import useResizeObserver from 'use-resize-observer';
 import { Heading } from '~/components/typography';
 import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useViewport } from '~/utils/use-viewport';
 import { Bounds, Padding } from '../../logic';
 
@@ -37,8 +37,7 @@ export function TooltipWrapper({
 }: TooltipWrapperProps) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
-  const ref = useRef<HTMLDivElement>(null);
-  const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
+  const [ref, { width = 0, height = 0 }] = useResizeObserver<HTMLDivElement>();
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
   const targetY = -height;
