@@ -1,3 +1,4 @@
+import { Rule } from '~/sanity';
 import {
   localeStringValidation,
   localeValidation,
@@ -19,6 +20,13 @@ export const figureExplanationItem = {
       type: 'localeBlock',
       title: 'Inhoud',
       validation: localeValidation((rule) => rule.required()),
+    },
+    {
+      name: 'group',
+      type: 'reference',
+      to: [{ type: 'cijferVerantwoordingGroups' }],
+      title: 'Groep',
+      validation: (Rule: Rule) => Rule.reset().required(),
     },
   ],
   preview: {
