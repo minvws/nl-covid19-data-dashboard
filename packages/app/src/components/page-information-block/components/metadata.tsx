@@ -262,8 +262,8 @@ const Anchor = styled.a({
   },
 
   svg: {
+    marginLeft: 1,
     height: 10,
     width: 10,
-    marginLeft: '2px',
   },
 });

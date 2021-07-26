@@ -71,6 +71,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
                       position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
+                      pr: 1,
                     })}
                   >
                     {word}
@@ -109,7 +110,7 @@ const StyledText = styled.p(
     },
 
     svg: {
-      marginLeft: '2px',
+      marginLeft: 1,
       width: 12,
       height: 12,
     },
