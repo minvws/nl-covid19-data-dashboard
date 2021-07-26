@@ -44,3 +44,4 @@ timestamp,action,key,document_id,move_to
 2021-07-26T08:27:22.375Z,delete,verpleeghuis_oversterfte.reference.text,jF33EuwumlGuwav2FD3dk4,__
 2021-07-26T08:27:22.377Z,delete,verpleeghuis_positief_geteste_personen.reference.text,jF33EuwumlGuwav2FD3d0m,__
 2021-07-26T08:27:22.378Z,delete,ziekenhuisopnames_per_dag.reference.text,jF33EuwumlGuwav2FD3YMG,__
+2021-07-26T13:37:30.394Z,add,infected_per_age_group.value_annotation,rUb4wDOun6GAE8KHrwRmRN,__
