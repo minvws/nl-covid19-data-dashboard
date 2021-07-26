@@ -37,7 +37,7 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
 
   const [dataset, setDataset] = useState<typeof datasets[number]>(
-    process.env.NEXT_PUBLIC_SANITY_DATASET as 'development'
+    process.env.NEXT_PUBLIC_SANITY_DATASET as 'development' | 'production'
   );
 
   const toggleButton = enableHotReload ? (
