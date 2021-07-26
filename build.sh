@@ -15,9 +15,9 @@ yarn install --frozen-lockfile
 yarn workspace @corona-dashboard/common build
 
 if [ $NEXT_PUBLIC_PHASE == "develop" ]; then
-yarn workspace @corona-dashboard/cms lokalize:export --dataset=development
+yarn workspace @corona-dashboard/cms lokalize:export --dataset=development --clean-json
 else
-yarn workspace @corona-dashboard/cms lokalize:export --dataset=production
+yarn workspace @corona-dashboard/cms lokalize:export --dataset=production --clean-json
 fi
 
 # Validate data

@@ -22,7 +22,7 @@ export function SelectBehavior({ value, onChange }: SelectBehaviorProps) {
     <Select
       value={value}
       onChange={onChange}
-      icon={<BehaviorIcon name={value} size={20} />}
+      icon={<BehaviorIcon name={value} size={25} />}
       options={options}
     />
   );

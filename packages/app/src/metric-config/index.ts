@@ -1,7 +1,6 @@
 import { get } from 'lodash';
-import { gm } from './gm';
+import { MetricConfig } from './common';
 import { nl } from './nl';
-import { MetricConfig, NO_METRIC_PROPERTY } from './common';
 import { vr } from './vr';
 
 /**
@@ -21,13 +20,12 @@ export type DataScope = 'nl' | 'vr' | 'gm';
 const metricConfig = {
   nl,
   vr,
-  gm,
 } as const;
 
 export function getMetricConfig(
   scope: DataScope,
   metricName: string,
-  metricProperty = NO_METRIC_PROPERTY
+  metricProperty?: string
 ) {
   /**
    * Fall back to an empty object so we don't have to specify empty objects in
@@ -35,7 +33,11 @@ export function getMetricConfig(
    * root-level properties in the MetricConfig are optional, an empty object is
    * still a valid configuration.
    */
-  const config = get(metricConfig, [scope, metricName, metricProperty], {});
+  const config = get(
+    metricConfig,
+    metricProperty ? [scope, metricName, metricProperty] : [scope, metricName],
+    {}
+  );
 
   return config as MetricConfig;
 }

@@ -133,9 +133,10 @@ const StyledHoverPath = styled.path<{
     transitionDuration: '120ms, 90ms',
     transitionTimingFunction: 'ease-out',
     cursor: x.isClickable ? 'pointer' : 'default',
-    stroke: x.stroke ? '#000' : 'transparent',
+    stroke: x.stroke ? (x.isSelected ? '#000' : 'transparent') : 'transparent',
     strokeWidth: x.isSelected ? 3 : 0,
     pointerEvents: 'all',
+
     '&:hover, a:focus &': {
       transitionDuration: '0ms',
       fill: x.fill ?? 'none',

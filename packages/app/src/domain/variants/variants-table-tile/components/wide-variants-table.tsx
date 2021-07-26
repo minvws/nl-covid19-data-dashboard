@@ -16,7 +16,7 @@ import {
 } from '.';
 import { NoPercentageData } from './no-percentage-data';
 
-const columnKeys = ['variant_titel', 'percentage', 'vorige_meeting'] as const;
+const columnKeys = ['variant_titel', 'percentage', 'vorige_meting'] as const;
 
 type WideVariantsTableProps = {
   rows: VariantRow[];
