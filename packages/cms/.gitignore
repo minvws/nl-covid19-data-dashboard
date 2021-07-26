@@ -29,3 +29,6 @@ yarn-error.log*
 
 # cache dir for sanity assets sync script
 .sanity-asset-cache
+
+# cache dir for sanity lokalize exports
+.lokalize-reference

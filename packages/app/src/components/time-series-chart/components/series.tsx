@@ -3,7 +3,6 @@ import { ScaleLinear } from 'd3-scale';
 import { memo } from 'react';
 import { AreaTrend, BarTrend, LineTrend, RangeTrend } from '.';
 import {
-  BenchmarkConfig,
   Bounds,
   GetX,
   GetY,
@@ -36,7 +35,6 @@ interface SeriesProps<T extends TimestampedValue> {
   getY1: GetY1;
   yScale: ScaleLinear<number, number>;
   bounds: Bounds;
-  benchmark?: BenchmarkConfig;
   chartId: string;
 }
 
@@ -51,7 +49,6 @@ function SeriesUnmemoized<T extends TimestampedValue>({
   getY1,
   yScale,
   bounds,
-  benchmark,
   chartId,
 }: SeriesProps<T>) {
   return (
@@ -59,6 +56,10 @@ function SeriesUnmemoized<T extends TimestampedValue>({
       {seriesList
         .map((series, index) => {
           const config = seriesConfig[index];
+          const id =
+            config.type === 'range'
+              ? `${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}`
+              : `${chartId}_${config.metricProperty}`;
 
           switch (config.type) {
             case 'gapped-line':
@@ -72,7 +73,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   curve={config.curve}
                   getX={getX}
                   getY={getY}
-                  id={`${chartId}_${config.metricProperty}`}
+                  id={id}
                 />
               );
             case 'line':
@@ -86,7 +87,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   curve={config.curve}
                   getX={getX}
                   getY={getY}
-                  id={`${chartId}_${config.metricProperty}`}
+                  id={id}
                 />
               );
             case 'area':
@@ -101,7 +102,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getX={getX}
                   getY={getY}
                   yScale={yScale}
-                  id={`${chartId}_${config.metricProperty}`}
+                  id={id}
                 />
               );
             case 'bar':
@@ -110,14 +111,11 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   key={index}
                   series={series as SeriesSingleValue[]}
                   color={config.color}
-                  aboveBenchmarkColor={config.aboveBenchmarkColor}
-                  aboveBenchmarkFillOpacity={config.aboveBenchmarkFillOpacity}
-                  benchmark={benchmark}
                   fillOpacity={config.fillOpacity}
                   getX={getX}
                   getY={getY}
                   bounds={bounds}
-                  id={`${chartId}_${config.metricProperty}`}
+                  id={id}
                 />
               );
             case 'split-bar':
@@ -131,6 +129,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getX={getX}
                   getY={getY}
                   bounds={bounds}
+                  id={id}
                 />
               );
             case 'range':
@@ -144,7 +143,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY0={getY0}
                   getY1={getY1}
                   bounds={bounds}
-                  id={`${chartId}_${config.metricPropertyLow}_${config.metricPropertyHigh}`}
+                  id={id}
                 />
               );
             case 'gapped-stacked-area':
@@ -160,7 +159,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY0={getY0}
                   getY1={getY1}
                   bounds={bounds}
-                  id={`${chartId}_${config.metricProperty}`}
+                  id={id}
                 />
               );
             case 'stacked-area':
@@ -176,7 +175,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getY0={getY0}
                   getY1={getY1}
                   bounds={bounds}
-                  id={`${chartId}_${config.metricProperty}`}
+                  id={id}
                 />
               );
             case 'split-area':
@@ -190,6 +189,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getX={getX}
                   getY={getY}
                   yScale={yScale}
+                  id={id}
                 />
               );
           }

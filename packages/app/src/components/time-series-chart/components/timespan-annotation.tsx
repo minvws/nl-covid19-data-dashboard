@@ -1,5 +1,6 @@
 import { Bar } from '@visx/shape';
 import { colors } from '~/style/theme';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { GetX, TimespanAnnotationConfig } from '../logic';
 
 const DEFAULT_COLOR = colors.data.underReported;
@@ -8,19 +9,18 @@ export function TimespanAnnotation({
   domain,
   getX,
   height,
-  chartId,
   config,
 }: {
   domain: [number, number];
   height: number;
   getX: GetX;
-  chartId: string;
   config: TimespanAnnotationConfig;
 }) {
   const [min, max] = domain;
   const { start, end } = config;
   const fill = config.fill ?? 'solid';
-  const patternId = `${chartId}_hatched_pattern`;
+  const id = useUniqueId();
+  const patternId = `${id}_annotation_pattern`;
 
   /**
    * Clip the start / end dates to the domain of the x-axis, so that we can
@@ -56,7 +56,23 @@ export function TimespanAnnotation({
             x2="0"
             y2="8"
             style={{ stroke: 'white', strokeWidth: 4 }}
-          ></line>
+          />
+        </pattern>
+      )}
+      {fill === 'dotted' && (
+        <pattern
+          id={patternId}
+          width="4"
+          height="4"
+          patternUnits="userSpaceOnUse"
+        >
+          <line
+            x1="0"
+            y1="4"
+            x2="0"
+            y2="0"
+            style={{ stroke: 'white', strokeWidth: 2, strokeDasharray: 2 }}
+          />
         </pattern>
       )}
 

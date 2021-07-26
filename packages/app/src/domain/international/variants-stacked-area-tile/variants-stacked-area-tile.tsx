@@ -9,7 +9,10 @@ import { Legend, LegendItem } from '~/components/legend';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
+import {
+  GappedStackedAreaSeriesDefinition,
+  TimespanAnnotationConfig,
+} from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
@@ -87,7 +90,25 @@ function VariantStackedAreaTileWithData({
       color: colors.data.underReported,
       label: text.legend_niet_compleet_label,
     },
+    {
+      shape: 'dotted-square',
+      color: 'white',
+      label: text.lagere_betrouwbaarheid,
+    },
   ];
+
+  const timespanAnnotations = useMemo(
+    () =>
+      values
+        .filter((x) => !x.is_reliable)
+        .map<TimespanAnnotationConfig>((x) => ({
+          start: x.date_start_unix,
+          end: x.date_end_unix,
+          label: text.lagere_betrouwbaarheid,
+          fill: 'dotted',
+        })),
+    [values, text]
+  );
 
   return (
     <ChartTile
@@ -117,6 +138,7 @@ function VariantStackedAreaTileWithData({
             dataOptions={{
               isPercentage: true,
               forcedMaximumValue: 100,
+              timespanAnnotations,
             }}
             formatTooltip={(context) => {
               /**
