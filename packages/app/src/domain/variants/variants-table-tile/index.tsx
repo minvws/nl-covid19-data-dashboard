@@ -23,7 +23,7 @@ export type TableText = {
     eerst_gevonden: string;
     percentage: string;
     variant_titel: string;
-    vorige_meeting: string;
+    vorige_meting: string;
   };
   verschil: { gelijk: string; meer: string; minder: string };
 };

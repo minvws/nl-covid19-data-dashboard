@@ -1,4 +1,6 @@
 timestamp,action,key,document_id,move_to
+2021-07-26T09:12:05.447Z,move,covid_varianten.varianten_tabel.kolommen.vorige_meeting,0Fi2ZNty1p5jcXUiTknjvR,covid_varianten.varianten_tabel.kolommen.vorige_meting
+2021-07-26T09:12:05.462Z,move,internationaal_varianten.varianten_tabel.kolommen.vorige_meeting,nVS0jBgQO2RxeLdgIEgG1X,internationaal_varianten.varianten_tabel.kolommen.vorige_meting
 2021-07-26T08:27:22.283Z,delete,besmettelijke_personen.reference.text,jF33EuwumlGuwav2FD3aJ2,__
 2021-07-26T08:27:22.284Z,delete,brononderzoek.reference.text,zrTRdM3o3E3fhzuaPw6kYj,__
 2021-07-26T08:27:22.286Z,delete,corona_melder_app.header.reference.text,jF33EuwumlGuwav2FD4Hau,__
