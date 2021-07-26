@@ -102,18 +102,20 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
                     {group}
                   </Heading>
                 )}
-                {collapsibleItems.map((item) => {
-                  const id = getSkipLinkId(item.title);
-                  return item.content ? (
-                    <CollapsibleSection key={id} id={id} summary={item.title}>
-                      {item.content && (
-                        <Box mt={3}>
-                          <RichContent blocks={item.content} />
-                        </Box>
-                      )}
-                    </CollapsibleSection>
-                  ) : null;
-                })}
+                {collapsibleItems
+                  .sort((a, b) => a.title.localeCompare(b.title))
+                  .map((item) => {
+                    const id = getSkipLinkId(item.title);
+                    return item.content ? (
+                      <CollapsibleSection key={id} id={id} summary={item.title}>
+                        {item.content && (
+                          <Box mt={3}>
+                            <RichContent blocks={item.content} />
+                          </Box>
+                        )}
+                      </CollapsibleSection>
+                    ) : null;
+                  })}
               </Box>
             );
           })}
