@@ -42,6 +42,8 @@ compile or build-time errors.
 
 Alternatively you can run this from `packages/cms` as `yarn lokalize:export`
 
+To learn more about the rationale behind Lokalize and how it works [read the documentation](/packages/cms/README.md#lokalize-texts).
+
 ### Locale
 
 By default the site builds the Dutch version. If you would like the English
