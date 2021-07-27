@@ -1,4 +1,4 @@
-# NL Corona Dashboard
+# NL Coronavirus Dashboard
 
 The dashboard provides information on the outbreak and prevalence of COVID-19 in
 The Netherlands. It combines measured and modelled data from various sources to
