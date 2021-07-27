@@ -1,12 +1,12 @@
 import { css } from '@styled-system/css';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
-import { Heading, Text } from '~/components/typography';
+import { Heading, InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
@@ -44,35 +44,36 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
+const allCategories = [categoryAll, ...categories] as unknown as (
+  | CategoriesTypes
+  | typeof categoryAll
+)[];
+
 const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { siteText } = useIntl();
   const { query, push } = useRouter();
 
-  function handleParams(item: CategoriesTypes | typeof categoryAll) {
-    push(
-      {
-        pathname: '/artikelen',
-        query: { categorieen: item },
-      },
-      undefined,
-      { shallow: true }
-    );
-  }
+  const handleFilter = useCallback(
+    function setNewParam(item: CategoriesTypes | typeof categoryAll) {
+      push(
+        {
+          pathname: '/artikelen',
+          query: { filter: item },
+        },
+        undefined,
+        { shallow: true }
+      );
+    },
+    [push]
+  );
 
   // When page first loads and there are no params, select all the articles
   useEffect(() => {
-    if (isDefined(query.categorieen)) return;
+    if (isDefined(query.filter)) return;
 
-    push(
-      {
-        pathname: '/artikelen',
-        query: { categorieen: categoryAll },
-      },
-      undefined,
-      { shallow: true }
-    );
-  }, [query, push]);
+    handleFilter(categoryAll);
+  }, [query, push, handleFilter]);
 
   return (
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
@@ -81,22 +82,20 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
           <Heading level={2} as="h1" mb={2} lineHeight={0}>
             {siteText.common_actueel.secties.artikelen.titel}
           </Heading>
+
           <Text mb={3}>
             {siteText.common_actueel.secties.artikelen.beschrijving}
           </Text>
 
           <OrderedList>
-            <ListItem isActive={query.categorieen === categoryAll}>
-              <StyledButton onClick={() => handleParams(categoryAll)}>
-                {categoryAll}
-                <BoldText aria-hidden="true">{categoryAll}</BoldText>
-              </StyledButton>
-            </ListItem>
-
-            {categories.map((item, index) => (
-              <ListItem key={index} isActive={query.categorieen === item}>
-                <StyledButton onClick={() => handleParams(item)}>
-                  {item}
+            {allCategories.map((item, index) => (
+              <ListItem
+                key={index}
+                isActive={query.categorieen === item}
+                onClick={() => handleFilter(item)}
+              >
+                <StyledButton>
+                  <InlineText>{item}</InlineText>
                   <BoldText aria-hidden="true">{item}</BoldText>
                 </StyledButton>
               </ListItem>
@@ -107,7 +106,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             articleSummaries={content}
             hideLink={true}
             currentCategory={
-              query.categorieen as CategoriesTypes | typeof categoryAll
+              query.filter as CategoriesTypes | typeof categoryAll
             }
           />
         </MaxWidth>
@@ -125,8 +124,9 @@ const OrderedList = styled.ol(
     p: 0,
     mb: 5,
     listStyleType: 'none',
-    borderTop: '1px solid gray',
-    borderBottom: '1px solid gray',
+    borderTop: '1px solid',
+    borderBottom: '1px solid',
+    borderColor: 'silver',
     display: 'flex',
     justifyContent: 'space-around',
     overflow: 'hidden',
@@ -137,41 +137,38 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
   css({
     position: 'relative',
     height: '100%',
-    py: 2,
+    py: 3,
     transition: 'transform 0.2s',
+    cursor: 'pointer',
 
     '&:after': {
       content: '""',
       position: 'absolute',
-      left: -2,
+      left: '-1.5rem',
       bottom: 0,
-      height: '3px',
-      width: `calc(100% + 1rem)`,
+      height: '6px',
+      width: `calc(100% + 3rem)`,
       backgroundColor: 'blue',
       display: 'block',
-      transform: `translateY(${x.isActive ? 0 : '3px'})`,
+      transform: `translateY(${x.isActive ? 0 : '6px'})`,
       transition: 'transform 0.2s',
     },
 
-    button: {
-      visibility: x.isActive ? 'hidden' : 'visible',
-    },
-
     span: {
-      visibility: x.isActive ? 'visible' : 'hidden',
+      // Regular text
+      ':nth-of-type(1)': {
+        opacity: x.isActive ? 0 : 1,
+      },
+
+      // Bold text
+      ':nth-of-type(2)': {
+        opacity: x.isActive ? 1 : 0,
+      },
     },
 
     ':hover': {
       '&:after': {
         transform: `translateY(0)`,
-      },
-
-      button: {
-        visibility: 'hidden',
-      },
-
-      span: {
-        visibility: 'visible',
       },
     },
   })
@@ -180,7 +177,7 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
 const BoldText = styled.span(
   css({
     fontWeight: 'bold',
-    visibility: 'hidden',
+    opacity: 0,
     position: 'absolute',
     top: 0,
     left: '50%',
@@ -192,6 +189,11 @@ const StyledButton = styled.button(
   css({
     all: 'unset',
     position: 'relative',
-    cursor: 'pointer',
+
+    '&:focus': {
+      outlineWidth: '1px',
+      outlineStyle: 'dashed',
+      outlineColor: 'blue',
+    },
   })
 );
