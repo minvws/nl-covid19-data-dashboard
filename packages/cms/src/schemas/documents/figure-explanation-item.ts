@@ -5,7 +5,7 @@ import {
 } from '../../language/locale-validation';
 
 export const figureExplanationItem = {
-  title: 'Inklapbare titel en inhoud voor cijferverantwoording',
+  title: 'Cijferverantwoordingen',
   name: 'figureExplanationItem',
   type: 'document',
   fields: [
