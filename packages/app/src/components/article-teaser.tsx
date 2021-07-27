@@ -11,7 +11,7 @@ import { Heading, InlineText, Text } from './typography';
 
 export type ArticleSummary = Pick<
   Article,
-  'title' | 'slug' | 'summary' | 'cover' | 'category'
+  'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories'
 >;
 
 type ArticleTeaserProps = {

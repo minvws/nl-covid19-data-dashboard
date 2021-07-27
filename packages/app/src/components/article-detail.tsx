@@ -1,14 +1,16 @@
+import { css } from '@styled-system/css';
+import styled from 'styled-components';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
 import { Heading, InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Article } from '~/types/cms';
+import { Link } from '~/utils/link';
 import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
-
 interface ArticleDetailProps {
   article: Article;
 }
@@ -46,7 +48,6 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           sizes={imageSizes}
         />
       </ContentBlock>
-
       {!!article.content?.length && (
         <ContentBlock>
           <Box fontSize="1.125rem">
@@ -57,6 +58,69 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           </Box>
         </ContentBlock>
       )}
+
+      {article.categories && (
+        <ContentBlock>
+          <InlineText
+            color="annotation"
+            mb={3}
+            mt={5}
+            fontFamily="body"
+            display="block"
+          >
+            Tags
+          </InlineText>
+          <Box
+            as="ul"
+            spacing={3}
+            spacingHorizontal
+            display="flex"
+            flexWrap="wrap"
+            m={0}
+            p={0}
+            css={css({
+              listStyleType: 'none',
+            })}
+          >
+            {article.categories.map((item, index) => (
+              <li key={index}>
+                <Link
+                  href={{
+                    pathname: '/artikelen',
+                    query: { categorieen: item },
+                  }}
+                  passHref={true}
+                >
+                  <TagAnchor>{item}</TagAnchor>
+                </Link>
+              </li>
+            ))}
+          </Box>
+        </ContentBlock>
+      )}
     </Box>
   );
 }
+
+const TagAnchor = styled.a(
+  css({
+    display: 'block',
+    border: '2px solid transparent',
+    mb: 2,
+    px: 3,
+    py: 2,
+    backgroundColor: 'buttonLightBlue',
+    color: 'blue',
+    textDecoration: 'none',
+    transition: '0.1s border-color',
+
+    '&:hover': {
+      borderColor: 'blue',
+    },
+
+    '&:focus': {
+      outline: '2px dotted',
+      outlineColor: 'blue',
+    },
+  })
+);

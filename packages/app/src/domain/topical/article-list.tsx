@@ -1,15 +1,24 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
 import { Box } from '~/components/base';
+import {
+  CategoriesTypes,
+  categoryAll,
+} from '~/domain/topical/common/categories';
 import { asResponsiveArray } from '~/style/utils';
 
 type ArticleListProps = {
   articleSummaries?: ArticleSummary[];
   hideLink?: boolean;
+  currentCategory?: CategoriesTypes | typeof categoryAll;
 };
 
-export function ArticleList({ articleSummaries }: ArticleListProps) {
+export function ArticleList({
+  articleSummaries,
+  currentCategory,
+}: ArticleListProps) {
   if (!articleSummaries || articleSummaries.length === 0) {
     return null;
   }
@@ -23,20 +32,30 @@ export function ArticleList({ articleSummaries }: ArticleListProps) {
       flexWrap="wrap"
       mt={3}
     >
-      {articleSummaries.map((summary) => (
-        <ArticleBox key={summary.slug.current}>
-          <ArticleTeaser
-            title={summary.title}
-            slug={summary.slug.current}
-            summary={summary.summary}
-            cover={summary.cover}
-            coverSizes={[
-              // viewport min-width 768px display images at max. 445px wide
-              [768, 445],
-            ]}
-          />
-        </ArticleBox>
-      ))}
+      {articleSummaries
+        .filter((item) => {
+          if (!isDefined(currentCategory)) return true;
+
+          return (
+            currentCategory === categoryAll ||
+            (isDefined(currentCategory) &&
+              item.categories?.includes(currentCategory))
+          );
+        })
+        .map((summary) => (
+          <ArticleBox key={summary.slug.current}>
+            <ArticleTeaser
+              title={summary.title}
+              slug={summary.slug.current}
+              summary={summary.summary}
+              cover={summary.cover}
+              coverSizes={[
+                // viewport min-width 768px display images at max. 445px wide
+                [768, 445],
+              ]}
+            />
+          </ArticleBox>
+        ))}
     </Box>
   );
 }
