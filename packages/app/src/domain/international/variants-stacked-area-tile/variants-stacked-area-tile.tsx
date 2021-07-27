@@ -55,7 +55,7 @@ export function VariantsStackedAreaTile({
   );
 }
 
-const alwayEnabled: string[] = [];
+const alwayEnabled: (keyof VariantChartValue)[] = [];
 
 type VariantStackedAreaTileWithDataProps = {
   values: VariantChartValue[];
@@ -69,7 +69,8 @@ function VariantStackedAreaTileWithData({
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
   const { siteText } = useIntl();
-  const { list, toggle, clear } = useList<string>(alwayEnabled);
+  const { list, toggle, clear } =
+    useList<keyof VariantChartValue>(alwayEnabled);
 
   const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
   const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(

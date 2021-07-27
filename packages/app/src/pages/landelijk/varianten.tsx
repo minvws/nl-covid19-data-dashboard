@@ -1,11 +1,10 @@
 import Varianten from '~/assets/varianten.svg';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
+import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
-import { VariantsOverTime } from '~/domain/variants/variants-over-time';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -20,12 +19,8 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-import {
-  getSeriesConfig,
-  getVariantChartData,
-} from '~/static-props/variants/get-variant-chart-data';
+import { getVariantChartData } from '~/static-props/variants/get-variant-chart-data';
 import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
-import { colors } from '~/style/theme';
 import { VariantsPageQuery } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
@@ -37,13 +32,10 @@ export const getStaticProps = withFeatureNotFoundPage(
       const variants = data.selectedNlData.variants;
       delete data.selectedNlData.variants;
 
-      const chartData = getVariantChartData(variants);
-
       return {
         selectedNlData: data.selectedNlData,
         ...getVariantTableData(variants, data.selectedNlData.named_difference),
-        ...chartData,
-        ...getSeriesConfig(chartData?.variantChart?.[0], colors.data.variants),
+        ...getVariantChartData(variants),
       };
     },
     createGetContent<{
@@ -70,7 +62,6 @@ export default function CovidVariantenPage(
     content,
     variantTable,
     variantChart,
-    seriesConfig,
     dates,
   } = props;
 
@@ -84,13 +75,6 @@ export default function CovidVariantenPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  seriesConfig?.forEach((x) => {
-    const label = (text.varianten as Record<string, string>)[x.label];
-    if (label) {
-      x.label = label;
-    }
-  });
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -128,24 +112,12 @@ export default function CovidVariantenPage(
             }}
           />
 
-          {variantChart && seriesConfig && (
-            <ChartTile
-              title={text.varianten_over_tijd.titel}
-              description={text.varianten_over_tijd.beschrijving}
-              timeframeOptions={['all', '5weeks']}
-              metadata={{
-                source: text.bronnen.rivm,
-              }}
-            >
-              {(timeframe) => (
-                <VariantsOverTime
-                  values={variantChart}
-                  seriesConfig={seriesConfig}
-                  timeframe={timeframe}
-                />
-              )}
-            </ChartTile>
-          )}
+          <VariantsStackedAreaTile
+            values={variantChart}
+            metadata={{
+              dataSources: [text.bronnen.rivm],
+            }}
+          />
         </TileList>
       </NationalLayout>
     </Layout>
