@@ -1,4 +1,4 @@
-# NL Corona Dashboard - App
+# NL Coronavirus Dashboard - App
 
 The main application that contains the front-end part of the dashboard. This
 React application uses Next.js as its framework.

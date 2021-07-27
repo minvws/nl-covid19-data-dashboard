@@ -1,7 +1,7 @@
-# NL Corona Dashboard - CMS
+# NL Coronavirus Dashboard - CMS
 
-The Corona Dashboard CMS uses Sanity. This document is aimed at developers with
-access to the Sanity CMS.
+The Coronavirus Dashboard uses Sanity for its CMS. This document is aimed at
+developers that have access to the CMS.
 
 ## Usage
 
