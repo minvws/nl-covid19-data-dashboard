@@ -60,6 +60,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
     );
   }
 
+  // When page first loads and there are no params, select all the articles
   useEffect(() => {
     if (isDefined(query.categorieen)) return;
 
@@ -128,6 +129,7 @@ const OrderedList = styled.ol(
     borderBottom: '1px solid gray',
     display: 'flex',
     justifyContent: 'space-around',
+    overflow: 'hidden',
   })
 );
 
@@ -143,12 +145,34 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
       position: 'absolute',
       left: -2,
       bottom: 0,
-      height: '5px',
+      height: '3px',
       width: `calc(100% + 1rem)`,
       backgroundColor: 'blue',
       display: 'block',
-      transform: `translateY(${x.isActive ? 0 : '5px'})`,
+      transform: `translateY(${x.isActive ? 0 : '3px'})`,
       transition: 'transform 0.2s',
+    },
+
+    button: {
+      visibility: x.isActive ? 'hidden' : 'visible',
+    },
+
+    span: {
+      visibility: x.isActive ? 'visible' : 'hidden',
+    },
+
+    ':hover': {
+      '&:after': {
+        transform: `translateY(0)`,
+      },
+
+      button: {
+        visibility: 'hidden',
+      },
+
+      span: {
+        visibility: 'visible',
+      },
     },
   })
 );
@@ -169,26 +193,5 @@ const StyledButton = styled.button(
     all: 'unset',
     position: 'relative',
     cursor: 'pointer',
-
-    // '&:after': {
-    //   // content: x.isFirst ? '""' : 'none',
-    //   content: '""',
-    //   position: 'absolute',
-    //   right: '-50%',
-    //   top: 0,
-    //   height: '100%',
-    //   width: '1px',
-    //   backgroundColor: 'red',
-    //   display: 'block',
-    // },
-
-    ':hover': {
-      visibility: 'hidden',
-
-      span: {
-        visibility: 'visible',
-        color: '#000',
-      },
-    },
   })
 );
