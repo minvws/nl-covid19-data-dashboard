@@ -60,7 +60,6 @@ export function getVariantChartData(variants: NlVariants | undefined) {
 
 export function getSeriesConfig(
   value: Record<string, string | number> | undefined,
-  variantTranslations: Dictionary<string>,
   colors: Dictionary<string>
 ) {
   if (!isDefined(value)) {
@@ -75,9 +74,8 @@ export function getSeriesConfig(
     LineSeriesDefinition<VariantChartValue>
   >((x) => {
     const color = colors[x];
-    const label = variantTranslations[x];
+    const label = x;
     assert(color, `No color specified for variant called "${x}"`);
-    assert(label, `No label specified for variant called "${x}"`);
 
     return {
       metricProperty: `${x}_percentage`,

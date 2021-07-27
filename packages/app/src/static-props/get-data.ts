@@ -10,11 +10,8 @@ import {
   VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
-import fs from 'fs';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
-import getConfig from 'next/config';
-import path from 'path';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
@@ -29,13 +26,11 @@ import {
   VrRegionPageMetricNames,
 } from '~/domain/layout/vr-layout';
 import { getClient, localize } from '~/lib/sanity';
-import { cleanText } from '~/locale';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import {
   getVariantSidebarValue,
   VariantSidebarValue,
 } from './variants/get-variant-sidebar-value';
-const { serverRuntimeConfig } = getConfig();
 
 /**
  * Usage:
@@ -333,17 +328,4 @@ export function getInData(countryCodes: CountryCode[]) {
       internationalData: Record<CountryCode, In>;
     };
   };
-}
-
-export function getLocaleFile(locale: string) {
-  const content = fs.readFileSync(
-    path.join(
-      serverRuntimeConfig.PROJECT_ROOT,
-      `src/locale/${locale}_export.json`
-    ),
-    { encoding: 'utf-8' }
-  );
-
-  const rawLocaleFile = JSON.parse(content) as Record<string, unknown>;
-  return cleanText(rawLocaleFile);
 }
