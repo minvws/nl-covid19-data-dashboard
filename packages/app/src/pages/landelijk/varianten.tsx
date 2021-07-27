@@ -18,7 +18,6 @@ import {
 import {
   createGetContent,
   getLastGeneratedDate,
-  getLocaleFile,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import {
@@ -33,9 +32,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'nlVariantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    (context) => {
-      const { locale = 'nl' } = context;
-      const siteText = getLocaleFile(locale);
+    () => {
       const data = selectNlPageMetricData('variants')();
       const variants = data.selectedNlData.variants;
       delete data.selectedNlData.variants;
@@ -44,17 +41,9 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         selectedNlData: data.selectedNlData,
-        ...getVariantTableData(
-          variants,
-          data.selectedNlData.named_difference,
-          siteText.covid_varianten.landen_van_herkomst
-        ),
+        ...getVariantTableData(variants, data.selectedNlData.named_difference),
         ...chartData,
-        ...getSeriesConfig(
-          chartData?.variantChart?.[0],
-          siteText.covid_varianten.varianten,
-          colors.data.variants
-        ),
+        ...getSeriesConfig(chartData?.variantChart?.[0], colors.data.variants),
       };
     },
     createGetContent<{
@@ -95,6 +84,13 @@ export default function CovidVariantenPage(
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  seriesConfig?.forEach((x) => {
+    const label = (text.varianten as Record<string, string>)[x.label];
+    if (label) {
+      x.label = label;
+    }
+  });
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>

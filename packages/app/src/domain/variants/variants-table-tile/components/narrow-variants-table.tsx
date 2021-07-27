@@ -78,20 +78,13 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 
   const [, variantDescription] = useVariantNameAndDescription(
     row.variant,
-    text.anderen_tooltip,
-    row.countryOfOrigin
+    text.anderen_tooltip
   );
 
   return (
     <>
       <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
-        <VariantNameCell
-          variant={row.variant}
-          text={text}
-          mobile
-          narrow
-          countryOfOrigin={row.countryOfOrigin}
-        />
+        <VariantNameCell variant={row.variant} text={text} mobile narrow />
         <Cell mobile>
           {isPresent(row.percentage) ? (
             <PercentageBarWithNumber

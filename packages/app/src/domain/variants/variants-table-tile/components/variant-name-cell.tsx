@@ -6,19 +6,17 @@ import { useVariantNameAndDescription } from '../logic/use-variant-name-and-desc
 
 type VariantNameCellProps = {
   variant: string;
-  countryOfOrigin: string;
   text: TableText;
   mobile?: boolean;
   narrow?: boolean;
 };
 
 export function VariantNameCell(props: VariantNameCellProps) {
-  const { variant, text, mobile, narrow, countryOfOrigin } = props;
+  const { variant, text, mobile, narrow } = props;
 
   const [variantName, variantDescription] = useVariantNameAndDescription(
     variant,
-    text.anderen_tooltip,
-    countryOfOrigin
+    text.anderen_tooltip
   );
 
   return (
