@@ -88,37 +88,28 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
         {content.title && <Heading level={1}>{content.title}</Heading>}
         {content.description && <RichContent blocks={content.description} />}
         {Object.entries(groups)
-          .sort((a, b) => {
-            if (a[0] === 'null') return 1;
-            if (b[0] === 'null') return -1;
-            return a[0].localeCompare(b[0]);
-          })
-          .map(([group, collapsibleItems]) => {
-            const hasHeading = group !== 'null';
-            return (
-              <Box as="article" mt={hasHeading ? 4 : 5} key={group}>
-                {hasHeading && (
-                  <Heading level={2} fontSize={3}>
-                    {group}
-                  </Heading>
-                )}
-                {collapsibleItems
-                  .sort((a, b) => a.title.localeCompare(b.title))
-                  .map((item) => {
-                    const id = getSkipLinkId(item.title);
-                    return item.content ? (
-                      <CollapsibleSection key={id} id={id} summary={item.title}>
-                        {item.content && (
-                          <Box mt={3}>
-                            <RichContent blocks={item.content} />
-                          </Box>
-                        )}
-                      </CollapsibleSection>
-                    ) : null;
-                  })}
-              </Box>
-            );
-          })}
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .map(([group, collapsibleItems]) => (
+            <Box as="article" mt={4} key={group}>
+              <Heading level={2} fontSize={3}>
+                {group}
+              </Heading>
+              {collapsibleItems
+                .sort((a, b) => a.title.localeCompare(b.title))
+                .map((item) => {
+                  const id = getSkipLinkId(item.title);
+                  return item.content ? (
+                    <CollapsibleSection key={id} id={id} summary={item.title}>
+                      {item.content && (
+                        <Box mt={3}>
+                          <RichContent blocks={item.content} />
+                        </Box>
+                      )}
+                    </CollapsibleSection>
+                  ) : null;
+                })}
+            </Box>
+          ))}
       </Content>
     </Layout>
   );
