@@ -26,7 +26,6 @@ import {
   createGetContent,
   getInData,
   getLastGeneratedDate,
-  getLocaleFile,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 import {
@@ -43,7 +42,6 @@ export const getStaticProps = withFeatureNotFoundPage(
     getLastGeneratedDate,
     () => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-      const siteText = getLocaleFile(locale);
       const countryNames = loadJsonFromDataFile<Record<string, string>>(
         `${locale}-country-names.json`,
         'static-json'
@@ -58,10 +56,7 @@ export const getStaticProps = withFeatureNotFoundPage(
 
       return {
         countryOptions,
-        ...getInternationalVariantTableData(
-          internationalData,
-          siteText.covid_varianten.landen_van_herkomst
-        ),
+        ...getInternationalVariantTableData(internationalData),
         ...getInternationalVariantChartData(internationalData),
       };
     },
