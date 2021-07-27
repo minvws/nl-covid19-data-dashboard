@@ -11,7 +11,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import {
   GappedStackedAreaSeriesDefinition,
-  TimespanAnnotationConfig,
+  TimespanAnnotationConfig
 } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
@@ -121,7 +121,7 @@ function VariantStackedAreaTileWithData({
       {(timeframe) => (
         <>
           {children}
-          <InteractiveLegend
+          <InteractiveLegend<keyof VariantChartValue>
             helpText={text.legend_help_tekst}
             selectOptions={selectOptions}
             selection={list}
