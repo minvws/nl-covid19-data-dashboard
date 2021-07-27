@@ -5,7 +5,6 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-const nextDomainsConfig = require('./next.domains.config');
 const withTranspileModules = require('next-transpile-modules')([
   'd3-geo',
   'd3-array',
@@ -34,10 +33,13 @@ const nextConfig = {
     // redirect based on the user's preferred locale and will only provide locale information
     // detected from either the locale based domain or locale path as described above.
     localeDetection: false,
-    // This is a list of locale domains and the default locale they
-    // should handle (these are only required when setting up domain routing)
-    // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
-    domains: nextDomainsConfig,
+
+    /**
+     * Configure english domain when it's available on the environment variables
+     */
+    ...(process.env.DOMAIN_EN
+      ? { domains: [{ domain: process.env.DOMAIN_EN, defaultLocale: 'en' }] }
+      : {}),
   },
 
   /**
