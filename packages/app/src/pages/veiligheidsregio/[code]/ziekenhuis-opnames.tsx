@@ -1,20 +1,19 @@
 import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
   ArticlesQueryResult,
@@ -64,7 +63,7 @@ export const getStaticProps = createGetStaticProps(
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedVrData: data,
-    safetyRegionName,
+    vrName,
     choropleth,
     content,
     lastGenerated,
@@ -86,38 +85,34 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
+      vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.ziekenhuizen}
             title={replaceVariablesInText(text.titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<Ziekenhuis />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.fix_this.articles}
           />
-
-          <ArticleStrip articles={content.fix_this.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -142,7 +137,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             description={text.map_toelichting}
             legend={{
@@ -222,7 +217,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

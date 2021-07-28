@@ -7,27 +7,27 @@ import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import Getest from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
   getCategoryLevel,
 } from '~/components/categorical-bar-scale';
-import { ContentHeader } from '~/components/content-header';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
+import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { Metadata } from '~/components/metadata';
+import { PageInformationBlock } from '~/components/page-information-block';
+// import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -64,12 +64,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
-  const {
-    safetyRegionName,
-    content,
-    selectedVrData: data,
-    lastGenerated,
-  } = props;
+  const { vrName, content, selectedVrData: data, lastGenerated } = props;
 
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
   const breakpoints = useBreakpoints();
@@ -103,10 +98,10 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
@@ -116,19 +111,15 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.inschaling}
             title={replaceVariablesInText(text.titel, {
-              safetyRegionName,
+              safetyRegionName: vrName,
             })}
-            subtitle={text.pagina_toelichting}
-            reference={text.reference}
+            description={text.pagina_toelichting}
+            referenceLink={text.reference.href}
             metadata={{
               datumsText: text.datums,
               dateOrRange: hospital_nice_sum.last_value.date_end_unix,
@@ -139,12 +130,11 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 text.bronnen.rivm_ziekenhuisopnames,
               ],
             }}
+            articles={content.articles}
           />
 
           <Tile>
-            <Heading level={3} as="h2">
-              {text.current_escalation_level}
-            </Heading>
+            <Heading level={3}>{text.current_escalation_level}</Heading>
             <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
               <Box width={{ _: '100%', lg: '50%' }} pr={{ _: 0, lg: 3 }}>
                 <Box mb={3}>
@@ -261,19 +251,19 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           </Tile>
 
           <Tile>
-            <Heading level={3} as="h2">
-              {text.recente_cijfers}
-            </Heading>
+            <Heading level={3}>{text.recente_cijfers}</Heading>
             <TwoKpiSection spacing={4}>
               <Box>
-                <HeadingWithIcon
-                  title={text.positieve_testen.title}
-                  headingLevel={4}
-                  as="h3"
-                  icon={<Getest />}
+                <Box
                   mb={2}
                   ml={-1} // Align icon with text below
-                />
+                >
+                  <HeadingWithIcon
+                    title={text.positieve_testen.title}
+                    headingLevel={4}
+                    icon={<Getest />}
+                  />
+                </Box>
                 <Box spacing={2} spacingHorizontal>
                   <Box display="inline-block">
                     <KpiValue
@@ -308,14 +298,16 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
 
               <Box>
-                <HeadingWithIcon
-                  title={text.ziekenhuisopnames.title}
-                  headingLevel={4}
-                  as="h3"
-                  icon={<Ziekenhuis />}
+                <Box
                   mb={2}
                   ml={-2} // Align icon with text below
-                />
+                >
+                  <HeadingWithIcon
+                    title={text.ziekenhuisopnames.title}
+                    headingLevel={4}
+                    icon={<Ziekenhuis />}
+                  />
+                </Box>
                 <Box spacing={2} spacingHorizontal>
                   <Box display="inline-block">
                     <KpiValue
@@ -349,10 +341,8 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
               </Box>
             </TwoKpiSection>
           </Tile>
-
-          <ArticleStrip articles={content.articles} />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

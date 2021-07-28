@@ -9,7 +9,7 @@ import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -21,10 +21,10 @@ import {
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -52,6 +52,7 @@ import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -64,7 +65,7 @@ import {
   selectGmData,
 } from '~/static-props/get-data';
 import { assert } from '~/utils/assert';
-import { getSafetyRegionForMunicipalityCode } from '~/utils/get-safety-region-for-municipality-code';
+import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -89,6 +90,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
+    showWeeklyHighlight: boolean;
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
@@ -111,11 +113,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.gemeente_actueel;
   const gmCode = router.query.code as string;
 
-  const safetyRegionForMunicipality =
-    getSafetyRegionForMunicipalityCode(gmCode);
+  const vrForMunicipality = getVrForMunicipalityCode(gmCode);
 
   assert(
-    safetyRegionForMunicipality,
+    vrForMunicipality,
     `Unable to get safety region for gm code "${gmCode}"`
   );
 
@@ -124,10 +125,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const escalationText = siteText.escalatie_niveau;
 
   const filteredRegion = props.choropleth.vr.escalation_levels.find(
-    (item) => item.vrcode === safetyRegionForMunicipality.code
+    (item) => item.vrcode === vrForMunicipality.code
   );
 
   const unknownLevelColor = useEscalationColor(null);
+  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const [selectedMap, setSelectedMap] =
     useState<RegionControlOption>('municipal');
@@ -136,7 +138,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   assert(
     filteredRegion,
-    `Could not find a "vrcode" to match with the region: ${safetyRegionForMunicipality.code} to get the the current "level" of it.`
+    `Could not find a "vrcode" to match with the region: ${vrForMunicipality.code} to get the the current "level" of it.`
   );
 
   const metadata = {
@@ -229,18 +231,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     getEscalationLevelIndexKey(filteredRegion.level)
                   ].titel
                 }
-                href={reverseRouter.vr.risiconiveau(
-                  safetyRegionForMunicipality.code
-                )}
+                href={reverseRouter.vr.risiconiveau(vrForMunicipality.code)}
               >
                 {siteText.common.vr_singular}:
                 <br />
-                <Link
-                  href={reverseRouter.actueel.vr(
-                    safetyRegionForMunicipality.code
-                  )}
-                >
-                  <a>{safetyRegionForMunicipality.name}</a>
+                <Link href={reverseRouter.actueel.vr(vrForMunicipality.code)}>
+                  <a>{vrForMunicipality.name}</a>
                 </Link>
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
@@ -256,12 +252,10 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     text: text.quick_links.links.nationaal,
                   },
                   {
-                    href: reverseRouter.vr.index(
-                      safetyRegionForMunicipality.code
-                    ),
+                    href: reverseRouter.vr.index(vrForMunicipality.code),
                     text: replaceVariablesInText(
                       text.quick_links.links.veiligheidsregio,
-                      { safetyRegionName: safetyRegionForMunicipality.name }
+                      { safetyRegionName: vrForMunicipality.name }
                     ),
                   },
                   {
@@ -271,11 +265,13 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       { municipalityName: municipalityName }
                     ),
                   },
-                  {
-                    href: reverseRouter.in.index(),
-                    text: text.quick_links.links.internationaal,
-                  },
-                ]}
+                  internationalFeature.isEnabled
+                    ? {
+                        href: reverseRouter.in.index(),
+                        text: text.quick_links.links.internationaal,
+                      }
+                    : undefined,
+                ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
                   text.data_sitemap_title,
                   { municipalityName: municipalityName }
@@ -293,6 +289,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 <HighlightsTile
                   weeklyHighlight={content.weeklyHighlight}
                   highlights={content.highlights}
+                  showWeeklyHighlight={content.showWeeklyHighlight}
                 />
               </Box>
             )}
@@ -315,7 +312,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <SafetyRegionChoropleth
+                  <VrChoropleth
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}
@@ -418,7 +415,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'region' && (
-                    <SafetyRegionChoropleth
+                    <VrChoropleth
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
                       }}

@@ -9,21 +9,21 @@ import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
-import { ArticleStrip } from '~/components/article-strip';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
-import { ContentHeader } from '~/components/content-header';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -113,25 +113,24 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
               siteText.positief_geteste_personen.titel_sidebar
             }
             title={text.titel}
             icon={<Getest />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: dataOverallLastValue.date_unix,
               dateOfInsertionUnix: dataOverallLastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.main.articles}
           />
-          {content.main?.articles && (
-            <ArticleStrip articles={content.main?.articles} />
-          )}
+
           <TwoKpiSection>
             <KpiTile
               title={text.kpi_titel}
@@ -217,7 +216,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              *
              * Ideally the ChoroplethTile would receive some props with the data
              * it needs to render either Choropleth without it caring about
-             * MunicipalityChloropleth or SafetyRegionChloropleth, that data would
+             * MunicipalityChloropleth or VrChloropleth, that data would
              * make the chart and define the tooltip layout for each, but maybe for
              * now that is a bridge too far. Let's take it one step at a time.
              */}
@@ -236,7 +235,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'region' && (
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',
                 }}
@@ -324,23 +323,23 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <ContentHeader
+          <Spacer amount={3} />
+
+          <PageInformationBlock
             title={ggdText.titel}
-            skipLinkAnchor={true}
             id="ggd"
             icon={<Afname />}
-            subtitle={ggdText.toelichting}
+            description={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,
               dateOrRange: dataGgdLastValue.date_unix,
               dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
               dataSources: [ggdText.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.ggd.articles}
           />
-          {content.ggd?.articles && (
-            <ArticleStrip articles={content.ggd.articles} />
-          )}
+
           <TwoKpiSection>
             <KpiTile
               title={ggdText.totaal_getest_week_titel}

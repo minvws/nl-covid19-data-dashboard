@@ -1,8 +1,9 @@
 import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import WarningIcon from '~/assets/warning.svg';
-import { useBreakpoints } from '~/utils/use-breakpoints';
+import { WithTooltip } from '~/lib/tooltip';
 import { Box } from './base';
 import { Markdown } from './markdown';
 
@@ -13,6 +14,7 @@ interface WarningMessageProps {
   variant?: WarningMessageVariant;
   icon?: ComponentType;
   isFullWidth?: boolean;
+  tooltipText?: string;
 }
 
 // WarningMessage
@@ -21,32 +23,33 @@ export function WarningTile({
   variant = 'default',
   icon = WarningIcon,
   isFullWidth,
+  tooltipText,
 }: WarningMessageProps) {
   const Icon = icon;
-
-  const breakpoints = useBreakpoints();
-
-  const isSmallScreen = !breakpoints.md;
 
   return (
     <StyledArticle isFullWidth={isFullWidth}>
       <WarningBox variant={variant}>
-        {isSmallScreen ? (
-          <Box width="6px" />
-        ) : (
-          <IconWrapper>
-            <Icon />
-          </IconWrapper>
-        )}
+        <IconWrapper>
+          <Icon />
+        </IconWrapper>
       </WarningBox>
       <WarningMessageBox variant={variant}>
         {typeof message === 'string' ? (
-          <Children variant={variant}>
-            <Markdown content={message} />
-          </Children>
+          <WithTooltip content={tooltipText}>
+            <Content
+              variant={variant}
+              tabIndex={0}
+              hasTooltip={isDefined(tooltipText)}
+            >
+              <Markdown content={message} />
+            </Content>
+          </WithTooltip>
         ) : (
           <Box spacing={3} fontSize="1.25rem" fontWeight="bold">
-            {message}
+            <WithTooltip content={tooltipText}>
+              <>{message}</>
+            </WithTooltip>
           </Box>
         )}
       </WarningMessageBox>
@@ -107,21 +110,27 @@ const WarningMessageBox = styled(Box)<{ variant: WarningMessageVariant }>(
   }
 );
 
-const Children = styled.div<{ variant: WarningMessageVariant }>(
-  ({ variant }) => {
-    return css({
-      fontSize: variant === 'emphasis' ? '1rem' : 2,
-      fontWeight: variant === 'emphasis' ? 'bold' : 'normal',
-      borderBottomRightRadius: 1,
-      borderTopRightRadius: 1,
-      pr: 4,
-      '> *': {
-        mt: 0,
-        mb: 3,
-        ':last-child': {
-          mb: 0,
-        },
+const Content = styled.div<{
+  variant: WarningMessageVariant;
+  hasTooltip: boolean;
+}>(({ variant, hasTooltip }) => {
+  return css({
+    fontSize: variant === 'emphasis' ? '1rem' : 2,
+    fontWeight: variant === 'emphasis' ? 'bold' : 'normal',
+    borderBottomRightRadius: 1,
+    borderTopRightRadius: 1,
+    pr: 4,
+    '> *': {
+      mt: 0,
+      mb: 3,
+      ':last-child': {
+        mb: 0,
       },
-    });
-  }
-);
+    },
+    '& *': {
+      textUnderlineOffset: hasTooltip ? '0.3em' : undefined,
+      textDecorationLine: hasTooltip ? 'underline' : undefined,
+      textDecorationStyle: hasTooltip ? 'dotted' : undefined,
+    },
+  });
+});

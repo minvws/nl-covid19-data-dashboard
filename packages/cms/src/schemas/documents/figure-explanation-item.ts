@@ -1,3 +1,8 @@
+import {
+  localeStringValidation,
+  localeValidation,
+} from '../../language/locale-validation';
+
 export const figureExplanationItem = {
   title: 'Inklapbare titel en inhoud voor cijferverantwoording',
   name: 'figureExplanationItem',
@@ -7,21 +12,13 @@ export const figureExplanationItem = {
       name: 'title',
       type: 'localeString',
       title: 'Titel',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeStringValidation((rule) => rule.required()),
     },
     {
       name: 'content',
       type: 'localeBlock',
       title: 'Inhoud',
-      validation: (Rule: any) =>
-        Rule.fields({
-          nl: (fieldRule: any) => fieldRule.reset().required(),
-          en: (fieldRule: any) => fieldRule.reset().required(),
-        }),
+      validation: localeValidation((rule) => rule.required()),
     },
   ],
   preview: {

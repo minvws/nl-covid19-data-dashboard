@@ -9,7 +9,7 @@ import { useIsMounted } from '~/utils/use-is-mounted';
 import { useViewport } from '~/utils/use-viewport';
 import { Bounds, Padding } from '../../logic';
 
-export interface TooltipWrapperProps {
+interface TooltipWrapperProps {
   title?: string;
   children: React.ReactNode;
   left: number;
@@ -41,10 +41,7 @@ export function TooltipWrapper({
   const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
-  /**
-   * nudge the top to render the tooltip a little bit on top of the chart
-   */
-  const targetY = -height + 8;
+  const targetY = -height;
   const targetX = left + padding.left;
 
   const maxWidth = Math.min(
@@ -156,7 +153,7 @@ interface TooltipContentProps {
   children?: ReactNode;
 }
 
-export function TooltipContent(props: TooltipContentProps) {
+function TooltipContent(props: TooltipContentProps) {
   const { title, onSelect, children } = props;
 
   return (
@@ -196,14 +193,13 @@ function TooltipHeading({ title }: { title: string }) {
   );
 }
 
-export const TooltipChildren = styled.div<{ hasTitle?: boolean }>(
-  ({ hasTitle }) =>
-    css({
-      borderTop: hasTitle ? '1px solid' : '',
-      borderTopColor: hasTitle ? 'border' : '',
-      py: 2,
-      px: 3,
-    })
+const TooltipChildren = styled.div<{ hasTitle?: boolean }>(({ hasTitle }) =>
+  css({
+    borderTop: hasTitle ? '1px solid' : '',
+    borderTopColor: hasTitle ? 'border' : '',
+    py: 2,
+    px: 3,
+  })
 );
 
 const StyledTooltipContent = styled.div((x) =>

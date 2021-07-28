@@ -24,8 +24,9 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
   markNearestPointOnly,
   displayTooltipValueOnly,
   valueMinWidth,
+  metricPropertyFormatters,
 }: TooltipListOfSeriesProps<T>) {
-  const formatSeriesValue = useFormatSeriesValue();
+  const formatSeriesValue = useFormatSeriesValue(metricPropertyFormatters);
 
   const seriesConfig: SeriesConfig<T> = markNearestPointOnly
     ? [config[configIndex]]
@@ -155,7 +156,6 @@ function TooltipListItem({
         <IconRow icon={icon}>
           <Box flexGrow={1}>
             <TooltipEntryContainer>
-              {/* <InlineText mr={2} style={{ whiteSpace: 'nowrap' }}> */}
               <InlineText mr={2}>{label}:</InlineText>
               <TooltipEntryValue isCentered={displayTooltipValueOnly}>
                 {children}
@@ -180,6 +180,7 @@ const TooltipEntryValue = styled.span<{
 }>((x) =>
   css({
     textAlign: x.isCentered ? 'center' : 'right',
+    width: x.isCentered ? '100%' : undefined,
   })
 );
 

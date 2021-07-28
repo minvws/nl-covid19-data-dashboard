@@ -9,7 +9,7 @@ import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -21,10 +21,10 @@ import {
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
 import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
 import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -52,6 +52,7 @@ import { useDataSitemap } from '~/domain/topical/sitemap/utils';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -87,14 +88,21 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
+    showWeeklyHighlight: boolean;
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
   }>(getTopicalPageQuery)
 );
 
-const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
-  const { choropleth, selectedVrData: data, content, lastGenerated } = props;
+const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
+  const {
+    choropleth,
+    selectedVrData: data,
+    content,
+    lastGenerated,
+    vrName,
+  } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText, formatDate } = useIntl();
@@ -107,6 +115,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   const dataHospitalIntake = data.hospital_nice;
 
   const unknownLevelColor = useEscalationColor(null);
+  const internationalFeature = useFeature('inPositiveTestsPage');
 
   const [selectedMap, setSelectedMap] =
     useState<RegionControlOption>('municipal');
@@ -115,10 +124,10 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
 
   const metadata = {
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegionName: props.safetyRegionName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegionName: props.safetyRegionName,
+      safetyRegionName: vrName,
     }),
   };
 
@@ -133,7 +142,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
               title={replaceComponentsInText(
                 text.secties.actuele_situatie.titel,
                 {
-                  safetyRegionName: props.safetyRegionName,
+                  safetyRegionName: vrName,
                 }
               )}
               headingLevel={1}
@@ -141,7 +150,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 text: replaceVariablesInText(
                   text.secties.actuele_situatie.link.text,
                   {
-                    safetyRegionName: props.safetyRegionName,
+                    safetyRegionName: vrName,
                   }
                 ),
                 href: replaceVariablesInText(
@@ -228,21 +237,23 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                     href: reverseRouter.vr.index(router.query.code as string),
                     text: replaceVariablesInText(
                       text.quick_links.links.veiligheidsregio,
-                      { safetyRegionName: props.safetyRegionName }
+                      { safetyRegionName: vrName }
                     ),
                   },
                   {
                     href: reverseRouter.gm.index(),
                     text: text.quick_links.links.gemeente,
                   },
-                  {
-                    href: reverseRouter.in.index(),
-                    text: text.quick_links.links.internationaal,
-                  },
-                ]}
+                  internationalFeature.isEnabled
+                    ? {
+                        href: reverseRouter.in.index(),
+                        text: text.quick_links.links.internationaal,
+                      }
+                    : undefined,
+                ].filter(isDefined)}
                 dataSitemapHeader={replaceVariablesInText(
                   text.data_sitemap_title,
-                  { safetyRegionName: props.safetyRegionName }
+                  { safetyRegionName: vrName }
                 )}
                 dataSitemap={dataSitemap}
               />
@@ -257,6 +268,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 <HighlightsTile
                   weeklyHighlight={content.weeklyHighlight}
                   highlights={content.highlights}
+                  showWeeklyHighlight={content.showWeeklyHighlight}
                 />
               </Box>
             )}
@@ -279,7 +291,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <SafetyRegionChoropleth
+                  <VrChoropleth
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}
@@ -382,7 +394,7 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'region' && (
-                    <SafetyRegionChoropleth
+                    <VrChoropleth
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
                       }}
@@ -441,4 +453,4 @@ const TopicalSafetyRegion = (props: StaticProps<typeof getStaticProps>) => {
   );
 };
 
-export default TopicalSafetyRegion;
+export default TopicalVr;

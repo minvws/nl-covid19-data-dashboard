@@ -121,6 +121,7 @@ export const colors = {
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',
   cerulean: '#0390D6',
+  tooltipIndicator: '#000000',
 
   data: {
     primary: '#007BC7',
@@ -188,6 +189,8 @@ export const colors = {
       theta: multiseries.turquoise_dark,
       kappa: multiseries.magenta,
       lambda: multiseries.magenta_dark,
+      iota: multiseries.magenta_dark,
+      zeta: multiseries.magenta_dark,
       other: '#808080',
     },
 

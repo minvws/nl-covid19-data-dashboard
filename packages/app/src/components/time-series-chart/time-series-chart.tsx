@@ -45,6 +45,7 @@ import {
   useDimensions,
   useHoverState,
   useLegendItems,
+  useMetricPropertyFormatters,
   useScales,
   useSeriesList,
   useSplitLegendGroups,
@@ -79,7 +80,7 @@ export type { SeriesConfig } from './logic';
  * to see if we can use the date_unix timestamps from the data directly
  * everywhere without unnecessary conversion to and from Date objects.
  */
-export type TimeSeriesChartProps<
+type TimeSeriesChartProps<
   T extends TimestampedValue,
   C extends SeriesConfig<T>
 > = {
@@ -293,7 +294,17 @@ export function TimeSeriesChart<
     markNearestPointOnly,
   });
 
-  const valueMinWidth = useValueWidth(values, seriesConfig, isPercentage);
+  const metricPropertyFormatters = useMetricPropertyFormatters(
+    seriesConfig,
+    values
+  );
+
+  const valueMinWidth = useValueWidth(
+    values,
+    seriesConfig,
+    isPercentage,
+    metricPropertyFormatters
+  );
 
   useEffect(() => {
     if (hoverState) {
@@ -341,6 +352,7 @@ export function TimeSeriesChart<
             : undefined,
 
           valueMinWidth,
+          metricPropertyFormatters,
         },
         tooltipLeft: nearestPoint.x,
         tooltipTop: nearestPoint.y,
@@ -361,6 +373,7 @@ export function TimeSeriesChart<
     valueMinWidth,
     timelineEvents,
     timelineState.events,
+    metricPropertyFormatters,
   ]);
 
   useOnClickOutside([containerRef], () => tooltipData && hideTooltip());

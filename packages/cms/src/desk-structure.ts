@@ -33,6 +33,7 @@ const hiddenDocTypes = [
   'intensiveCarePage',
   'positiveTestsPage',
   'in_positiveTestsPage',
+  'in_variantsPage',
   'reproductionPage',
   'sewerPage',
   'vaccinationsPage',
@@ -44,6 +45,7 @@ const hiddenDocTypes = [
   'lokalizeText',
   'timeSeries',
   'timelineEvent',
+  'contact',
 ];
 
 export default () =>
@@ -127,11 +129,13 @@ export default () =>
         'Positieve testen internationaal',
         'in_positiveTestsPage'
       ),
+      addListItem(RiPagesFill, 'Varianten internationaal', 'in_variantsPage'),
       addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
       addListItem(RiPagesFill, 'Covid varianten', 'variantsPage'),
       addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
       addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
       addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
+      addListItem(RiPagesFill, 'Contact', 'contact'),
 
       S.divider(),
 

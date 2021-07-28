@@ -1,7 +1,8 @@
+import { useRouter } from 'next/router';
 import { Box } from '~/components/base';
-import { Heading, Text } from '~/components/typography';
 import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { Heading, Text } from '~/components/typography';
 import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
@@ -11,8 +12,8 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
-import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -20,6 +21,8 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const { lastGenerated } = props;
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
+  const router = useRouter();
+  const code = router.query.code as string;
 
   const breakpoints = useBreakpoints();
 
@@ -29,7 +32,11 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout isLandingPage lastGenerated={lastGenerated}>
+      <MunicipalityLayout
+        isLandingPage
+        lastGenerated={lastGenerated}
+        code={code}
+      >
         {!breakpoints.md && (
           <Box bg="white">
             <MunicipalityComboBox />

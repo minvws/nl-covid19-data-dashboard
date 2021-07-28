@@ -35,11 +35,17 @@ export default function App(props: AppProps) {
   const router = useRouter();
 
   const { locale = 'nl' } = useRouter();
-  const [text, toggleHotReloadButton] = useLokalizeText(locale as LanguageKey);
+  const [text, toggleHotReloadButton, dataset] = useLokalizeText(
+    locale as LanguageKey
+  );
 
   assert(text, `Encountered unknown language: ${locale}`);
 
-  const intlContext = useIntlHelperContext(locale as LanguageKey, text);
+  const intlContext = useIntlHelperContext(
+    locale as LanguageKey,
+    text,
+    dataset
+  );
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {

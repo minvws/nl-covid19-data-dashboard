@@ -18,11 +18,13 @@ export function useReverseRouter() {
         verantwoording: () => '/verantwoording',
         overRisiconiveaus: () => '/over-risiconiveaus',
         toegankelijkheid: () => '/toegankelijkheid',
+        contact: () => '/contact',
       },
 
       in: {
         index: () => reverseRouter.in.positiefGetesteMensen() + openMenuSuffix,
         positiefGetesteMensen: () => `/internationaal/positief-geteste-mensen`,
+        varianten: () => `/internationaal/varianten`,
       },
 
       nl: {
@@ -43,7 +45,7 @@ export function useReverseRouter() {
         maatregelen: () => `/landelijk/maatregelen`,
         coronamelder: () => `/landelijk/coronamelder`,
         brononderzoek: () => `/landelijk/brononderzoek`,
-        covidVarianten: () => `/landelijk/varianten`,
+        varianten: () => `/landelijk/varianten`,
       },
 
       vr: {

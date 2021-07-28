@@ -1,10 +1,9 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import Repro from '~/assets/reproductiegetal.svg';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
-import { ContentHeader } from '~/components/content-header';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { PageBarScale } from '~/components/page-barscale';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
@@ -52,22 +51,21 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={siteText.reproductiegetal.titel_sidebar}
             title={text.titel}
             icon={<Repro />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastFilledValue.date_unix,
               dateOfInsertionUnix: lastFilledValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiWithIllustrationTile
@@ -75,7 +73,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
               metadata={{
                 date: lastFilledValue.date_unix,
                 source: text.bronnen.rivm,
-                obtained: lastFilledValue.date_of_insertion_unix,
+                obtainedAt: lastFilledValue.date_of_insertion_unix,
               }}
               illustration={{
                 image: '/images/reproductie-explainer.svg',
