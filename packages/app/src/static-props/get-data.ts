@@ -77,8 +77,7 @@ export function createGetContent<T>(
         : queryOrQueryGetter;
 
     const rawContent = (await client.fetch<T>(query)) ?? {};
-    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    const { locale = 'nl' } = context;
 
     // this function call will mutate `rawContent`
     await replaceReferencesInContent(rawContent, client);
