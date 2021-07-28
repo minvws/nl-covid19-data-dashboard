@@ -1,9 +1,10 @@
 # Feature Flags
 
-Feature flags are used to easily turn newly developed features on or off.
-Decisions about whether or not we should release a feature can change rapidly,
-so we tend to develop new features under a flag in order to quickly switch it
-off should there be a need.
+Feature flags are used to quickly turn newly developed features on or off,
+because decisions about whether or not to release a feature can change rapidly.
+Using a flag enables us to change the inclusion of a feature with a minimum
+change in code. Once the feature has been released and is considered stable we
+will remove the flag related logic for it.
 
 ## Definition
 
@@ -59,7 +60,8 @@ if (someFeature.isEnabled) {
 ```
 
 If the feature contains a new page, the route should return a 404 when the
-feature is disabled. For this purpose we can use a wrapper function for getStaticProps:
+feature is disabled. For this purpose we can use a wrapper function for
+getStaticProps:
 
 ```ts
 export const getStaticProps = withFeatureNotFoundPage(
