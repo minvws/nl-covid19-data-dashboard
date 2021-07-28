@@ -4,15 +4,14 @@ import { isDefined } from 'ts-is-present';
 import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {
-  CategoriesTypes,
+  AllCategoriesTypes,
   categoryAll,
 } from '~/domain/topical/common/categories';
 import { asResponsiveArray } from '~/style/utils';
-
 type ArticleListProps = {
   articleSummaries?: ArticleSummary[];
   hideLink?: boolean;
-  currentCategory?: CategoriesTypes | typeof categoryAll;
+  currentCategory?: AllCategoriesTypes;
 };
 
 export function ArticleList({
@@ -34,13 +33,10 @@ export function ArticleList({
     >
       {articleSummaries
         .filter((item) => {
-          if (!isDefined(currentCategory)) return true;
+          if (!isDefined(currentCategory) || currentCategory === categoryAll)
+            return true;
 
-          return (
-            currentCategory === categoryAll ||
-            (isDefined(currentCategory) &&
-              item.categories?.includes(currentCategory))
-          );
+          return currentCategory && item.categories?.includes(currentCategory);
         })
         .map((summary) => (
           <ArticleBox key={summary.slug.current}>

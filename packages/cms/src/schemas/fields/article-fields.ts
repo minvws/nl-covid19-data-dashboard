@@ -46,6 +46,7 @@ export const ARTICLE_FIELDS = [
     type: 'array',
     of: [{ type: 'string' }],
     options: {
+      layout: 'grid',
       list: [
         { title: 'Vaccinaties', value: 'vaccinaties' },
         { title: 'Infecties', value: 'infecties' },

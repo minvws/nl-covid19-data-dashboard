@@ -10,8 +10,8 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
-  categories,
-  CategoriesTypes,
+  allCategories,
+  AllCategoriesTypes,
   categoryAll,
 } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
@@ -45,11 +45,6 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const allCategories = [categoryAll, ...categories] as unknown as (
-  | CategoriesTypes
-  | typeof categoryAll
-)[];
-
 const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { siteText } = useIntl();
@@ -69,7 +64,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   }, [siteText]);
 
   const handleCategoryFilter = useCallback(
-    function setNewParam(item: CategoriesTypes | typeof categoryAll) {
+    function setNewParam(item: AllCategoriesTypes) {
       replace(
         {
           pathname: '/artikelen',
@@ -82,11 +77,11 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
     [replace]
   );
 
-  const currentCategory = [...categories, categoryAll].includes(
-    query.categorie as CategoriesTypes | typeof categoryAll
-  )
-    ? query.categorie
-    : categoryAll || categoryAll;
+  const currentCategory = (
+    allCategories.includes(query.categorie as AllCategoriesTypes)
+      ? query.categorie
+      : categoryAll
+  ) as AllCategoriesTypes;
 
   return (
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
@@ -120,7 +115,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
               <Select
                 options={sortOptions}
                 onChange={handleCategoryFilter}
-                value={currentCategory as CategoriesTypes | typeof categoryAll}
+                value={currentCategory}
               />
             </Box>
           )}
@@ -128,9 +123,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
           <ArticleList
             articleSummaries={content}
             hideLink={true}
-            currentCategory={
-              currentCategory as CategoriesTypes | typeof categoryAll
-            }
+            currentCategory={currentCategory}
           />
         </MaxWidth>
       </Box>
