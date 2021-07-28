@@ -74,8 +74,8 @@ function createPatch(document: any) {
             return {
               ...blockItem,
               _type: 'inlineCollapsible',
-              content: blockItem.content?.en.slice(),
-              title: blockItem.title?.en,
+              content: blockItem.content?.en.slice() ?? '',
+              title: blockItem.title?.en ?? '',
             };
           }
           return blockItem;
@@ -90,8 +90,8 @@ function createPatch(document: any) {
             return {
               ...blockItem,
               _type: 'inlineCollapsible',
-              content: blockItem.content?.nl.slice(),
-              title: blockItem.title?.nl,
+              content: blockItem.content?.nl.slice() ?? '',
+              title: blockItem.title?.nl ?? '',
             };
           }
           return blockItem;
