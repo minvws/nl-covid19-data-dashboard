@@ -82,7 +82,7 @@ export function createGetContent<T>(
     // this function call will mutate `rawContent`
     await replaceReferencesInContent(rawContent, client);
 
-    const content = localize(rawContent, [locale, 'nl']) as T;
+    const content = localize(rawContent, [locale]) as T;
     return { content };
   };
 }

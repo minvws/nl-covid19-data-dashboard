@@ -37,9 +37,12 @@ const nextConfig = {
     /**
      * Configure english domain when it's available on the environment variables
      */
-    ...(process.env.DOMAIN_EN
-      ? { domains: [{ domain: process.env.DOMAIN_EN, defaultLocale: 'en' }] }
-      : {}),
+    domains: [
+      {
+        domain: process.env.DOMAIN_EN ?? 'coronadashboard.government.nl',
+        defaultLocale: 'en',
+      },
+    ],
   },
 
   /**

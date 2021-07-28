@@ -19,9 +19,19 @@ const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 export async function getStaticPaths() {
   const editorialData = await (await getClient()).fetch(editorialsQuery);
 
-  const paths = editorialData.map((editorial: { slug: string }) => ({
-    params: { slug: editorial.slug },
-  }));
+  /**
+   * getStaticPaths needs explicit locale routes to function properly...
+   */
+  const paths = editorialData.flatMap((editorial: { slug: string }) => [
+    {
+      params: { slug: editorial.slug },
+      locale: 'en',
+    },
+    {
+      params: { slug: editorial.slug },
+      locale: 'nl',
+    },
+  ]);
 
   // { fallback: false } means other routes should 404.
   return { paths, fallback: false };
