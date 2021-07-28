@@ -70,3 +70,8 @@ noting:
 - All Unix timestamps are defined in seconds, so not milliseconds like you would
   expect in Javascript. This was done because our data sources are using
   seconds.
+
+## Developer Documentation
+
+For developers actively working on the platform are we recommend reading [the
+documentation here](/docs/index.md).
