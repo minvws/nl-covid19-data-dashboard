@@ -29,7 +29,7 @@ be able to use it).
 The project is set up as a monorepo and therefore the code is organized in
 multiple packages.
 
-- `app`: The main application that contains front-end part of the dashboard.
+- `app`: The main application that contains the front-end part of the dashboard.
   [README](/packages/app/README.md)
 - `cli`: Command-line tools for things like data validation.
 - `cms`: Configurations for the Sanity content management system.
