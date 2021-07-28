@@ -174,3 +174,21 @@ production as well but this won't be much of a problem.
 from development between deploying the release and running the
 `sync-after-release`. Because then those keys will get removed from the
 production set and block the deployment.
+
+## Sync Texts From Production
+
+Because in the development dataset we typically inject a lot of placeholder
+texts, running the app locally doesn't always give a good impression of what it
+would look like on production. For this reason we have a script that copies over
+all Lokalize text content from the production set to the development set.
+
+You can run the script with `yarn lokalize:sync-prd-to-dev`
+
+In most circumstances this script can be triggered without creating problems,
+but there is one exception.
+
+When we change the amount of interpolated variables in a text that was already
+in use in production, then copying the text from production will overwrite these
+changes. This should be a rare case and if it happens the development build will
+break. It shouldn't be much work to then re-apply the variable changes to the text,
+but this is something to be aware of.
