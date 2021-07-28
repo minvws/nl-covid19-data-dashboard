@@ -5,6 +5,7 @@ import {
   VrCollectionTestedOverall,
   VrProperties,
 } from '@corona-dashboard/common';
+
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
