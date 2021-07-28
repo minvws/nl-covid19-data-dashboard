@@ -39,7 +39,6 @@ import {
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
-import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -385,13 +384,10 @@ function ListItem({
         >
           {icon}
         </Box>
-        <Text
-          m={0}
-          css={css({
-            display: asResponsiveArray({ _: 'block', xs: 'flex' }),
-            flexWrap: 'wrap',
-            whiteSpace: 'pre-wrap',
-          })}
+        <Box
+          display={{ _: 'block', xs: 'flex' }}
+          flexWrap="wrap"
+          css={css({ whiteSpace: 'pre-wrap' })}
         >
           <InlineText fontWeight="bold">{`${title} `}</InlineText>
           {date && (
@@ -410,7 +406,7 @@ function ListItem({
                   }${formatDateFromSeconds(date)}`}
             </span>
           )}
-        </Text>
+        </Box>
       </Box>
       {children}
     </li>
@@ -440,7 +436,7 @@ function DataDescription({
         mr={1}
         mt="7px"
       />
-      <Text m={0}>
+      <Text>
         {replaceComponentsInText(description, {
           amount: <InlineText fontWeight="bold">{amount}</InlineText>,
         })}

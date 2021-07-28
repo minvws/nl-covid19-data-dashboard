@@ -17,6 +17,7 @@ import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
+import { Spacer } from '~/components/base';
 
 type NLHospitalAdmissionPerAgeGroupValue =
   | NlIntensiveCareNicePerAgeGroupValue
@@ -107,6 +108,7 @@ export function AdmissionsPerAgeGroup({
         onToggleItem={toggle}
         onReset={clear}
       />
+      <Spacer mb={2} />
       <TimeSeriesChart
         accessibility={accessibility}
         values={values}

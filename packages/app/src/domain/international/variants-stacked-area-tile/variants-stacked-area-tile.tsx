@@ -7,6 +7,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { MetadataProps } from '~/components/metadata';
+import { Spacer } from '~/components/base';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import {
@@ -127,6 +128,7 @@ function VariantStackedAreaTileWithData({
             onToggleItem={toggle}
             onReset={clear}
           />
+          <Spacer mb={2} />
           <TimeSeriesChart
             accessibility={{
               key: 'variants_stacked_area_over_time_chart',

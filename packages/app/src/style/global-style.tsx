@@ -56,10 +56,11 @@ svg {
 
 a {
   color: ${(x) => x.theme.colors.link};
+  text-decoration: none;
 }
 
 a:focus {
-  outline: 2px dotted ${(x) => x.theme.colors.link};
+  outline: 2px dotted currentColor;
   outline-offset: 0;
 }
 

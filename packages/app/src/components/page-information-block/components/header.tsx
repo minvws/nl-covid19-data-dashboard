@@ -15,7 +15,7 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 
 type HeaderProps = {
   title: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
   category?: string;
   screenReaderCategory?: string;
 };
@@ -32,33 +32,23 @@ export function Header({
 
   const isMediumScreen = breakpoints.md;
 
+  const padding = icon ? ICON_SIZE : undefined;
+
   return (
     <Box pl={{ _: 3, sm: 4, md: 0 }}>
-      {!isMediumScreen && <Icon size={ICON_SIZE}>{icon}</Icon>}
+      {icon && !isMediumScreen && <Icon size={ICON_SIZE}>{icon}</Icon>}
       {category && (
-        <Heading
-          level={1}
-          m={0}
-          fontSize={2}
-          color="category"
-          pl={{ md: ICON_SIZE }}
-        >
-          {category}
-          {screenReaderCategory && (
-            <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
-          )}
-        </Heading>
+        <Box pl={{ md: padding }}>
+          <Heading level={1} variant="subtitle1" color="category">
+            {category}
+            {screenReaderCategory && (
+              <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
+            )}
+          </Heading>
+        </Box>
       )}
-      <Box pl={{ md: ICON_SIZE }} position="relative">
-        <Heading
-          level={2}
-          lineHeight={1.3}
-          fontSize={{ _: 3, md: 4 }}
-          m={0}
-          css={css({
-            hyphens: 'auto',
-          })}
-        >
+      <Box pl={{ md: padding }} position="relative">
+        <Heading level={1} as="h2">
           {title}
         </Heading>
         {isMediumScreen && (

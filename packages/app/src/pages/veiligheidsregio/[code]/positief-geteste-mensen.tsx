@@ -4,8 +4,7 @@ import {
 } from '@corona-dashboard/common';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { Anchor } from '~/components/anchor';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -16,11 +15,10 @@ import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -145,29 +143,32 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="infected"
-                absolute={Math.round(dataOverallLastValue.infected)}
-                difference={
-                  data.difference.tested_overall__infected_moving_average
-                }
-                isMovingAverageDifference
-              />
-              <Markdown content={text.kpi_toelichting} />
+              <Box spacing={3}>
+                <KpiValue
+                  data-cy="infected"
+                  absolute={Math.round(dataOverallLastValue.infected)}
+                  difference={
+                    data.difference.tested_overall__infected_moving_average
+                  }
+                  isMovingAverageDifference
+                />
 
-              <Box>
-                <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
-                  {replaceComponentsInText(ggdText.summary_title, {
-                    percentage: (
-                      <InlineText color="data.primary">{`${formatPercentage(
-                        dataGgdLastValue.infected_percentage
-                      )}%`}</InlineText>
-                    ),
-                  })}
-                </Heading>
-                <Text mt={0} lineHeight={1}>
-                  <Anchor name="ggd" text={ggdText.summary_link_cta} />
-                </Text>
+                <Markdown content={text.kpi_toelichting} />
+
+                <Box>
+                  <Text variant="body2" fontWeight="bold">
+                    {replaceComponentsInText(ggdText.summary_title, {
+                      percentage: (
+                        <InlineText color="data.primary">{`${formatPercentage(
+                          dataGgdLastValue.infected_percentage
+                        )}%`}</InlineText>
+                      ),
+                    })}
+                  </Text>
+                  <Anchor underline="hover" href="#ggd">
+                    {ggdText.summary_link_cta}
+                  </Anchor>
+                </Box>
               </Box>
             </KpiTile>
 
@@ -276,7 +277,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             id="ggd"

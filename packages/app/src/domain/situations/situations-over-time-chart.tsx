@@ -1,6 +1,7 @@
 import { TimeframeOption, VrSituationsValue } from '@corona-dashboard/common';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
+import { Spacer } from '~/components/base';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
@@ -61,6 +62,7 @@ export function SituationsOverTimeChart({
         onToggleItem={toggle}
         onReset={clear}
       />
+      <Spacer mb={2} />
       <TimeSeriesChart
         accessibility={{ key: 'situations_over_time_chart' }}
         values={values}

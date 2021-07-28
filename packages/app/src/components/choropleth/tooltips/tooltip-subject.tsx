@@ -26,12 +26,8 @@ export function TooltipSubject({
       : getFilteredThresholdValues(thresholdValues, filterBelow).color;
 
   return (
-    <>
-      {subject && (
-        <Text m={0} mb={1} fontWeight="bold">
-          {subject}
-        </Text>
-      )}
+    <Box spacing={1}>
+      {subject && <Text fontWeight="bold">{subject}</Text>}
       <Box
         m={0}
         spacing={2}
@@ -52,6 +48,6 @@ export function TooltipSubject({
           backgroundColor={color}
         />
       </Box>
-    </>
+    </Box>
   );
 }

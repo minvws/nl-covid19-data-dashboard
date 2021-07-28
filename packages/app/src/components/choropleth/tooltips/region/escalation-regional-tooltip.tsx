@@ -38,10 +38,8 @@ export function EscalationRegionalTooltip({
       <Box display="flex" alignItems="flex-start" spacing={2} spacingHorizontal>
         {level !== null && <EscalationLevelIcon level={level} />}
         <div>
-          <Text m={0} fontWeight="bold">
-            {escalationText.titel}
-          </Text>
-          {!hideValidFrom && <Text m={0}>{validFromText}</Text>}
+          <Text fontWeight="bold">{escalationText.titel}</Text>
+          {!hideValidFrom && <Text>{validFromText}</Text>}
         </div>
       </Box>
     </TooltipContent>

@@ -21,16 +21,21 @@ export function KpiTile({
   metadata,
 }: KpiTileProps) {
   return (
-    <Tile height="100%">
-      <Heading level={3}>{title}</Heading>
-      <Box>{children}</Box>
-      {description && (
-        <Box maxWidth="400px" fontSize={2} lineHeight={2} mb={3}>
-          <Markdown content={description} />
-        </Box>
-      )}
+    <Tile>
+      <Box spacing={3}>
+        <Heading level={3}>{title}</Heading>
+        <Box>{children}</Box>
+
+        {description && (
+          <Box maxWidth="400px" fontSize={2} lineHeight={2}>
+            <Markdown content={description} />
+          </Box>
+        )}
+      </Box>
+
       {/* Using a spacer to push the footer down */}
       <Spacer m="auto" />
+
       {metadata && <Metadata {...metadata} isTileFooter />}
     </Tile>
   );

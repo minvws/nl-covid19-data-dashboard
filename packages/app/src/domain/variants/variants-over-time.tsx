@@ -1,5 +1,6 @@
 import { TimeframeOption } from '@corona-dashboard/common';
 import { useMemo } from 'react';
+import { Spacer } from '~/components/base';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -94,7 +95,8 @@ export function VariantsOverTime({
         onToggleItem={toggle}
         onReset={clear}
       />
-      <InlineText fontSize="12px" fontWeight="bold" color="data.axisLabels">
+      <Spacer mb={2} />
+      <InlineText variant="label2" fontWeight="bold" color="data.axisLabels">
         {text.percentage_gevonden_varianten}
       </InlineText>
       <TimeSeriesChart

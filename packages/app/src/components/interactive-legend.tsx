@@ -33,10 +33,8 @@ export function InteractiveLegend({
   const hasSelection = selection.length !== 0;
 
   return (
-    <Box mb={2}>
-      <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
-        {helpText}
-      </Text>
+    <Box>
+      <Text fontWeight="bold">{helpText}</Text>
       <Legend>
         <List>
           {selectOptions.map((item) => {
