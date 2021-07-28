@@ -58,6 +58,16 @@ if (someFeature.isEnabled) {
 }
 ```
 
+If the feature contains a new page, the route should return a 404 when the
+feature is disabled. For this purpose we can use a wrapper function for getStaticProps:
+
+```ts
+export const getStaticProps = withFeatureNotFoundPage(
+  'someFeatureName',
+  createGetStaticProps()
+);
+```
+
 ## Validation
 
 It is only possible to toggle features when the data is defined as optional in
