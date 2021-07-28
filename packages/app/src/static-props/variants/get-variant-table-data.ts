@@ -13,12 +13,10 @@ import {
 } from '@corona-dashboard/common';
 import { first } from 'lodash';
 import { isDefined, isPresent } from 'ts-is-present';
-import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
 
 export type VariantRow = {
   variant: string;
-  countryOfOrigin: string;
   percentage: number | null;
   difference?: OptionalNamedDifferenceDecimal;
   color: string;
@@ -28,8 +26,7 @@ export type VariantTableData = ReturnType<typeof getVariantTableData>;
 
 export function getVariantTableData(
   variants: NlVariants | InVariants | undefined,
-  namedDifference: NlNamedDifference | InNamedDifference,
-  countriesOfOrigin: SiteText['covid_varianten']['landen_van_herkomst']
+  namedDifference: NlNamedDifference | InNamedDifference
 ) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return {
@@ -47,12 +44,6 @@ export function getVariantTableData(
       assert(difference, `No variants__percentage found for variant ${name}`);
       return difference;
     }
-  }
-
-  function findCountryOfOrigin(name: string) {
-    const countryOfOrigin = (countriesOfOrigin as Dictionary<string>)[name];
-    assert(countryOfOrigin, `No country of origin found for variant ${name}`);
-    return countryOfOrigin;
   }
 
   function findColor(name: string) {
@@ -86,7 +77,6 @@ export function getVariantTableData(
   const variantTable = variants.values
     .map<VariantRow>((variant) => ({
       variant: variant.name,
-      countryOfOrigin: findCountryOfOrigin(variant.name),
       percentage: variant.last_value.percentage,
       difference: findDifference(variant.name),
       color: findColor(variant.name),
