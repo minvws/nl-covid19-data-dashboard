@@ -26,14 +26,9 @@ const publicOutputDirectory = path.resolve(
 );
 
 async function main() {
-  assert(
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
-  );
-
   const config = {
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
+    projectId: '5mog5ask',
     useCdn: process.env.NODE_ENV === 'production',
     apiVersion: '2021-03-25',
   };
