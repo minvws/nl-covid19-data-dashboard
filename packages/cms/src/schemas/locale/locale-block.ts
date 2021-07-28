@@ -15,6 +15,9 @@ export const localeBlock = {
       },
       {
         type: 'image',
+        initialValue: {
+          isFullWidth: true,
+        },
         fields: [
           {
             name: 'alt',
@@ -24,6 +27,11 @@ export const localeBlock = {
             options: {
               isHighlighted: true,
             },
+          },
+          {
+            name: 'isFullWidth',
+            title: 'Afbeelding breed weergeven?',
+            type: 'boolean',
           },
           {
             name: 'caption',
