@@ -11,7 +11,7 @@ import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
   articleCategory,
-  ArticleCategoryTypes,
+  ArticleCategoryType,
 } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import {
@@ -63,7 +63,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   }, [siteText]);
 
   const handleCategoryFilter = useCallback(
-    function setNewParam(item: ArticleCategoryTypes) {
+    function setNewParam(item: ArticleCategoryType) {
       replace(
         {
           pathname: '/artikelen',
@@ -77,10 +77,10 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const currentCategory = (
-    articleCategory.includes(query.categorie as ArticleCategoryTypes)
+    articleCategory.includes(query.categorie as ArticleCategoryType)
       ? query.categorie
       : undefined
-  ) as ArticleCategoryTypes;
+  ) as ArticleCategoryType;
 
   return (
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>

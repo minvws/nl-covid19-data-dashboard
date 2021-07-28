@@ -9,4 +9,4 @@ export const articleCategory = [
   'gedrag',
 ] as const;
 
-export type ArticleCategoryTypes = typeof articleCategory[number];
+export type ArticleCategoryType = typeof articleCategory[number];

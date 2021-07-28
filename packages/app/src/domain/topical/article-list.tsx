@@ -5,13 +5,13 @@ import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {
   articleCategory,
-  ArticleCategoryTypes,
+  ArticleCategoryType,
 } from '~/domain/topical/common/categories';
 import { asResponsiveArray } from '~/style/utils';
 type ArticleListProps = {
   articleSummaries?: ArticleSummary[];
   hideLink?: boolean;
-  currentCategory?: ArticleCategoryTypes;
+  currentCategory?: ArticleCategoryType;
 };
 
 export function ArticleList({
