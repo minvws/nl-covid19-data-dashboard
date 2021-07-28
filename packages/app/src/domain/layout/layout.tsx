@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React from 'react';
 import { AppFooter } from '~/components/layout/app-footer';
 import { AppHeader } from '~/components/layout/app-header';
@@ -28,11 +27,10 @@ export function Layout(
     lastGenerated,
   } = props;
 
-  const router = useRouter();
   const { siteText } = useIntl();
 
   return (
-    <div key={router.asPath}>
+    <div>
       <SEOHead
         title={title}
         description={description}
