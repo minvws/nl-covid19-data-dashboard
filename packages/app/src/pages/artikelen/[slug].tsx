@@ -19,9 +19,23 @@ const articlesQuery = `*[_type == 'article'] {"slug":slug.current}`;
 export async function getStaticPaths() {
   const articlesData = await (await getClient()).fetch(articlesQuery);
 
-  const paths = articlesData.map((article: { slug: string }) => ({
-    params: { slug: article.slug },
-  }));
+  /**
+   * getStaticPaths needs explicit locale routes to function properly...
+   */
+  const paths = articlesData.reduce(
+    (paths: { params: any; locale: string }[], article: { slug: string }) => {
+      return paths.concat([
+        {
+          params: { slug: article.slug },
+          locale: 'en',
+        },
+        {
+          params: { slug: article.slug },
+          locale: 'nl',
+        },
+      ]);
+    }
+  );
 
   // { fallback: false } means other routes should 404.
   return { paths, fallback: false };

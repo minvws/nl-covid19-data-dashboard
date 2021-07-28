@@ -16,6 +16,7 @@ import { ContentImage } from './content-image';
 import { ExternalLink } from '~/components/external-link';
 import { Link } from '~/utils/link';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
