@@ -5,7 +5,7 @@ import ChevronIcon from '~/assets/chevron.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
-import { InlineText } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
@@ -19,15 +19,8 @@ export function Articles({ articles }: ArticlesProps) {
   const { siteText } = useIntl();
 
   return (
-    <Box>
-      <InlineText
-        mb={3}
-        fontSize={2}
-        fontWeight="bold"
-        css={css({ display: 'block' })}
-      >
-        {siteText.informatie_header.artikelen}
-      </InlineText>
+    <Box spacing={3}>
+      <Text variant="subtitle1">{siteText.informatie_header.artikelen}</Text>
       <Box spacing={3}>
         {articles.map((article, index) => (
           <ArticleItem

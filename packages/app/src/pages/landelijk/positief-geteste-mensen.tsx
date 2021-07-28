@@ -137,39 +137,33 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.rivm,
               }}
             >
-              <Box spacing={3}>
-                <KpiValue
-                  data-cy="infected"
-                  absolute={dataOverallLastValue.infected}
-                  difference={
-                    difference.tested_overall__infected_moving_average
-                  }
-                  isMovingAverageDifference
-                />
+              <KpiValue
+                data-cy="infected"
+                absolute={dataOverallLastValue.infected}
+                difference={difference.tested_overall__infected_moving_average}
+                isMovingAverageDifference
+              />
 
-                <Markdown content={text.kpi_toelichting} />
+              <Markdown content={text.kpi_toelichting} />
 
-                <Box>
-                  <Text variant="body2" fontWeight="bold">
-                    {replaceComponentsInText(ggdText.summary_text, {
-                      percentage: (
-                        <span css={css({ color: 'data.primary' })}>
-                          {formatPercentage(
-                            dataGgdLastValue.infected_percentage
-                          )}
-                          %
-                        </span>
-                      ),
-                      dateTo: formatDateFromSeconds(
-                        dataGgdLastValue.date_unix,
-                        'weekday-medium'
-                      ),
-                    })}
-                  </Text>
-                  <Anchor underline="hover" href="#ggd">
-                    {ggdText.summary_link_cta}
-                  </Anchor>
-                </Box>
+              <Box>
+                <Text variant="body2" fontWeight="bold">
+                  {replaceComponentsInText(ggdText.summary_text, {
+                    percentage: (
+                      <span css={css({ color: 'data.primary' })}>
+                        {formatPercentage(dataGgdLastValue.infected_percentage)}
+                        %
+                      </span>
+                    ),
+                    dateTo: formatDateFromSeconds(
+                      dataGgdLastValue.date_unix,
+                      'weekday-medium'
+                    ),
+                  })}
+                </Text>
+                <Anchor underline="hover" href="#ggd">
+                  {ggdText.summary_link_cta}
+                </Anchor>
               </Box>
             </KpiTile>
 
@@ -357,6 +351,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
+
             <KpiTile
               title={ggdText.positief_getest_week_titel}
               metadata={{
@@ -372,6 +367,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 isMovingAverageDifference
               />
+
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
 
               <Text fontWeight="bold">

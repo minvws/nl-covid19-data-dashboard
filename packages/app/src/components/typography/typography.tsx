@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled, { DefaultTheme } from 'styled-components';
 import { Preset, preset } from '~/style/preset';
 
-interface TextProps {
+export interface TextProps {
   variant?: keyof Preset['typography'];
   fontWeight?: keyof DefaultTheme['fontWeights'];
   color?:
@@ -10,7 +10,7 @@ interface TextProps {
     | `data.${keyof DefaultTheme['colors']['data']}`;
 }
 
-interface AnchorProps extends TextProps {
+export interface AnchorProps extends TextProps {
   underline?: boolean | 'hover';
 }
 

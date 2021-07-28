@@ -16,6 +16,10 @@ import { ContentImage } from './content-image';
 import { ExternalLink } from '~/components/external-link';
 import { Link } from '~/utils/link';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import styled from 'styled-components';
+import { preset } from '~/style/preset';
+import css from '@styled-system/css';
+import { spacingStyle } from '~/style/functions/spacing';
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
@@ -54,7 +58,7 @@ export function RichContent({
         return (
           <ContentWrapper>
             <CollapsibleSection summary={props.node.title}>
-              <Box mt={3}>
+              <Box py={3}>
                 <RichContent blocks={props.node.content} />
               </Box>
             </CollapsibleSection>
@@ -70,7 +74,7 @@ export function RichContent({
 
   return (
     <ErrorBoundary>
-      <PortableText blocks={blocks} serializers={serializers} />
+      <StyledPortableText blocks={blocks} serializers={serializers} />
     </ErrorBoundary>
   );
 }
@@ -101,3 +105,20 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
     </Link>
   );
 }
+
+const StyledPortableText = styled(PortableText)(
+  css({
+    ...spacingStyle(3),
+    p: preset.typography.body1,
+    h1: preset.typography.h1,
+    h2: preset.typography.h2,
+    h3: preset.typography.h3,
+    h4: preset.typography.h4,
+    h5: preset.typography.h5,
+    strong: { fontWeight: 'bold' },
+    em: { fontStyle: 'italic' },
+    ul: { ml: 4 },
+    ol: { ml: 4 },
+    a: { textDecoration: 'underline' },
+  })
+);

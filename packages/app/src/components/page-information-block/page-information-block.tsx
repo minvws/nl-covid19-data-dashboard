@@ -73,41 +73,39 @@ export function PageInformationBlock({
 
       {description && (
         <Tile>
-          <Box
-            display={{ md: 'grid' }}
-            gridTemplateColumns="repeat(2, 1fr)"
-            width="100%"
-            css={css({
-              columnGap: 4,
-            })}
-          >
-            {articles && articles.length > 0 ? (
-              <>
-                <Box spacing={3}>
+          <Box spacing={3}>
+            <Box
+              display={{ md: 'grid' }}
+              gridTemplateColumns="repeat(2, 1fr)"
+              width="100%"
+              css={css({
+                columnGap: 4,
+              })}
+            >
+              {articles && articles.length > 0 ? (
+                <>
+                  <Box spacing={3}>
+                    {DescriptionBlock}
+                    {MetaDataBlock}
+                  </Box>
+
+                  <Articles articles={articles} />
+                </>
+              ) : (
+                <>
                   {DescriptionBlock}
                   {MetaDataBlock}
-                </Box>
+                </>
+              )}
+            </Box>
 
-                <Articles articles={articles} />
-              </>
-            ) : (
+            {usefulLinks && usefulLinks.length > 0 && (
               <>
-                {DescriptionBlock}
-                {MetaDataBlock}
+                <Box height="1px" bg="border" />
+                <UsefulLinks links={usefulLinks} />
               </>
             )}
           </Box>
-
-          {usefulLinks && usefulLinks.length > 0 && (
-            <Box
-              borderTop="1px solid"
-              borderTopColor="border"
-              width="100%"
-              pt={3}
-            >
-              <UsefulLinks links={usefulLinks} />
-            </Box>
-          )}
         </Tile>
       )}
     </Box>

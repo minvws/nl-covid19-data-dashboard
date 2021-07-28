@@ -78,24 +78,27 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
 
       <Content>
-        {content.title && <Heading level={1}>{content.title}</Heading>}
-        {content.description && <RichContent blocks={content.description} />}
-        {content.collapsibleList && (
-          <article>
-            {content.collapsibleList.map((item) => {
-              const id = getSkipLinkId(item.title);
-              return item.content ? (
-                <CollapsibleSection key={id} id={id} summary={item.title}>
-                  {item.content && (
-                    <Box mt={3}>
-                      <RichContent blocks={item.content} />
-                    </Box>
-                  )}
-                </CollapsibleSection>
-              ) : null;
-            })}
-          </article>
-        )}
+        <Box spacing={4}>
+          {content.title && <Heading level={1}>{content.title}</Heading>}
+          {content.description && <RichContent blocks={content.description} />}
+
+          {content.collapsibleList?.length > 0 && (
+            <article>
+              {content.collapsibleList.map((item) => {
+                const id = getSkipLinkId(item.title);
+                return item.content ? (
+                  <CollapsibleSection key={id} id={id} summary={item.title}>
+                    {item.content && (
+                      <Box py={3}>
+                        <RichContent blocks={item.content} />
+                      </Box>
+                    )}
+                  </CollapsibleSection>
+                ) : null;
+              })}
+            </article>
+          )}
+        </Box>
       </Content>
     </Layout>
   );

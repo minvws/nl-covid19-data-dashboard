@@ -254,7 +254,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     .percentage_average
                 }
               />
-              <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
+              <Text>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
             </section>
 
             <TimeSeriesChart

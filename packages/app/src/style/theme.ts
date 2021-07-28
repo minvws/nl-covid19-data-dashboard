@@ -101,6 +101,7 @@ const multiseries = {
 };
 
 export const colors = {
+  white: '#fff',
   body: '#000000',
   bodyLight: '#555555',
   page: '#f3f3f3',

@@ -1,6 +1,6 @@
 import { assert, TimeframeOption } from '@corona-dashboard/common';
 import { ReactNode, useState } from 'react';
-import { Box } from './base';
+import { Box, Spacer } from './base';
 import { ChartTimeControls } from './chart-time-controls';
 import { ErrorBoundary } from './error-boundary';
 import { FullscreenChartTile } from './fullscreen-chart-tile';
@@ -48,6 +48,9 @@ export function ChartTile({
           />
         )}
       </ChartTileHeader>
+
+      <Spacer mb={3} />
+
       <ErrorBoundary>
         {timeframeOptions
           ? (assert(
@@ -73,14 +76,9 @@ function ChartTileHeader({
   children,
 }: ChartTileHeaderProps) {
   return (
-    <Box
-      /**
-       * Outside margin is possible here, this header is only used in this module
-       */
-      mb={3}
-    >
+    <Box spacing={3}>
       <Heading level={3}>{title}</Heading>
-      <Box spacing={2}>
+      <Box spacing={3}>
         {description && (
           <Box maxWidth={560}>
             <Markdown content={description} />

@@ -6,6 +6,7 @@ import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
+import { Anchor } from './typography';
 
 interface MarkdownProps {
   content: string;
@@ -21,7 +22,7 @@ const renderers = {
       <ExternalLink href={props.href}>{props.children}</ExternalLink>
     ) : (
       <Link href={props.href} passHref>
-        <a>{props.children}</a>
+        <Anchor underline>{props.children}</Anchor>
       </Link>
     ),
 
@@ -48,7 +49,7 @@ const renderers = {
   /**
    * The blockquote element is hijacked for displaying "warning" messages.
    */
-  blockquote: (props: any) => {
+  blockquote: (props: { children: ReactNode }) => {
     return <Message variant="warning">{props.children}</Message>;
   },
 };
