@@ -59,17 +59,18 @@ noting:
 - Data schema properties and Lokalize keys are all snake_cased. These could be
   viewed as external data sources / APIs.
 - Event props and handlers follow a pattern of `onEventName` vs
-  `handleEventName` where the `on` part is the name on the prop API and `handle`
-  is the name of the actual function definition.
-- We choose to use named function declarations over function expressions, except
-  for inline lambda function. This means `function doSomething(){}` instead of
-  `const doSomething = () => {}`
+  `handleEventName` where the `on` part is used for the component props API and
+  `handle` is for the actual function definition. This makes it easy to follow
+  then you want to internally handle and event and at the same time pass it on
+  to a handler on the props.
+- We prefer to use named function declarations over function expressions, except
+  for inline lambda functions of course. This means `function doSomething(){}`
+  instead of `const doSomething = () => {}`
 - We avoid unnecessary short-hand variable names like `arr` for array or `i` for
   index. Where are a few exceptions we use regularly; `x` for use in `map` and
   `filter` functions, and `acc` for a `reduce` accumulator.
-- All Unix timestamps are defined in seconds, so not milliseconds like you would
-  expect in Javascript. This was done because our data sources are using
-  seconds.
+- All Unix timestamps are defined in seconds, not milliseconds like you would
+  expect in Javascript. This is because our data sources are using seconds.
 
 ## Developer Documentation
 
