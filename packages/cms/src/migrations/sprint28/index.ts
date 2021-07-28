@@ -4,7 +4,7 @@ import { getClient } from '../../client';
  * This migration first checks if any 'cijferVerantwoordingGroups' documents exist, if not, it creates one called 'Algemeen/General'.
  * The first of the 'cijferVerantwoordingGroups' documents is then retrieved.
  *
- * Then it changes the '_type' field for all 'cijferVerantwoording.collapsibleList' documents from 'reference' to 'figureExplanationItem' and
+ * Then it changes the '_type' field for all 'cijferVerantwoording.collapsibleList' documents from 'reference' to 'cijferVerantwoordingItem' and
  * assigns the cijferVerantwoordingGroups document to the 'group' field.
  *
  * This migration can be run by executing the following command from the packages/cms directory:
@@ -19,7 +19,7 @@ import { getClient } from '../../client';
 const client = getClient('development');
 
 const fetchFigureExplanations = () =>
-  client.fetch(`*[_type == 'figureExplanationItem' && group == null]`);
+  client.fetch(`*[_type == 'cijferVerantwoordingItem' && group == null]`);
 const fetchDefaultGroup = () =>
   client.fetch(`*[_type == 'cijferVerantwoordingGroups'][0]`);
 
@@ -30,7 +30,7 @@ const buildPatches = (docs: any[], group: any) =>
       patch: {
         set: {
           ...doc,
-          _type: 'figureExplanationItem',
+          _type: 'cijferVerantwoordingItem',
           group: {
             _type: 'reference',
             _ref: group._id,

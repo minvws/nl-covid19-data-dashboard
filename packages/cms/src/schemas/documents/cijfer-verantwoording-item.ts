@@ -4,9 +4,9 @@ import {
   localeValidation,
 } from '../../language/locale-validation';
 
-export const figureExplanationItem = {
+export const cijferVerantwoordingItem = {
   title: 'Cijferverantwoordingen',
-  name: 'figureExplanationItem',
+  name: 'cijferVerantwoordingItem',
   type: 'document',
   fields: [
     {

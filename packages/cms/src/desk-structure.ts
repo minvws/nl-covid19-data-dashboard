@@ -109,7 +109,7 @@ export default () =>
                 (item) => item.getId() === 'cijferVerantwoordingGroups'
               ),
               ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'figureExplanationItem'
+                (item) => item.getId() === 'cijferVerantwoordingItem'
               ),
             ])
         ),
