@@ -46,7 +46,7 @@ To learn more about the rationale behind Lokalize and how it works [read the doc
 
 ### Locale
 
-By default the site builds the Dutch version. If you would like the English
+By default, the site builds the Dutch version. If you would like to build the English
 version instead, you can create a `.env.local` file in `packages/app` with the
 following content:
 
