@@ -43,7 +43,7 @@ export function SelectCountriesResults() {
                   onClick={() => onToggleCountry(x.data)}
                   isLimitReached={isLimitReached}
                 >
-                  <span css={css({ flex: '0 0 24px' })}>
+                  <span css={css({ flex: '0 0 24px', mt: 1 })}>
                     {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
                   </span>
                   <img
