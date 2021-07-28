@@ -3,12 +3,6 @@ export interface Feature {
   isEnabled: boolean;
 
   /**
-   * If it is not clear what this feature does from the name, you can leave some
-   * text here.
-   */
-  description?: string;
-
-  /**
    * Metric scope defines the files in which we enforce the (non-)existence of
    * metricNames.
    */
@@ -29,14 +23,6 @@ export interface Feature {
    * feature is disabled.
    */
   metricProperties?: string[];
-
-  /**
-   * The route to filter from the sitemap when this feature is disabled. I don't
-   * think we'll need to have more than one route per feature as this is quite
-   * rare. And you can always choose to define multiple features if you need to
-   * cover multiple routes.
-   */
-  route?: string;
 }
 
 export type MetricScope = 'in' | 'nl' | 'vr' | 'gm';

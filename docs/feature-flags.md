@@ -1,1 +1,83 @@
 # Feature Flags
+
+Feature flags are used to easily turn newly developed features on or off.
+Decisions about whether or not we should release a feature can change rapidly,
+so we tend to develop new features under a flag in order to quickly switch it
+off should there be a need.
+
+## Definition
+
+All feature flags are defined in `package/app/src/config/features.ts`. Below is
+the type definition for a feature flag:
+
+```ts
+export interface Feature {
+  name: string;
+  isEnabled: boolean;
+
+  /**
+   * Metric scope defines the files in which we enforce the (non-)existence of
+   * metricNames.
+   */
+  dataScopes?: JsonDataScope[];
+
+  /**
+   * A metricName is the root-level schema property used to hold the data in the
+   * NL/VR/GM files. By limiting a feature to only 1 metric name, we can keep
+   * the code and API simple. If your feature is using more than one metric
+   * name, simply split it into multiple named features.
+   */
+  metricName?: string;
+
+  /**
+   * If the feature was built on new metric properties of an existing metric
+   * name then you can use this field to enforce the (non)existence of only
+   * those properties. The metric name will still be allowed to exist when this
+   * feature is disabled.
+   */
+  metricProperties?: string[];
+}
+
+export type MetricScope = 'in' | 'nl' | 'vr' | 'gm';
+export type JsonDataScope =
+  | MetricScope
+  | 'in_collection'
+  | 'vr_collection'
+  | 'gm_collection';
+```
+
+## Usage
+
+A feature flag when defined in the configuration can be used like this:
+
+```ts
+const someFeature = useFeature('someFeatureName');
+
+if (someFeature.isEnabled) {
+  ...
+}
+```
+
+## Validation
+
+It is only possible to toggle features when the data is defined as optional in
+our schema's. We use a build-time validation step to ensure that:
+
+- Data for features that are enabled should be present in the dataset
+- Data for features that are disabled should _not_ be present in the dataset
+
+For this reason it is important to define what data belongs to the feature. We
+do this by configuring the `dataScopes`, `metricName` and optionally
+`metricProperty` for each feature.
+
+You can only define one metricName per feature, so if a feature spans multiple
+types of metric data, you need to work around it by defining multiple feature
+flags.
+
+If the feature is just about specific properties that were added to an already
+existing metric name, then specifying those properties will make sure that only
+the checks are performed on those. Of the whole schema is new, then specifying
+only the `metricName` is sufficient.
+
+The script that validates the features (which is run at build-time) can be
+triggered with `yarn workspace@corona-dashboard/cli validate-features`
