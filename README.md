@@ -73,5 +73,5 @@ noting:
 
 ## Developer Documentation
 
-For developers actively working on the platform are we recommend reading [the
+For developers actively working on the platform we recommend reading [the
 documentation here](/docs/index.md).
