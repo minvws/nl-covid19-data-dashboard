@@ -35,7 +35,6 @@ export function AppFooter() {
             columnGap: asResponsiveArray({ sm: '32px', md: '48px' }),
             rowGap: asResponsiveArray({ _: 4, md: null }),
           })}
-          spacingHorizontal
           px={{ _: 3, sm: 4, md: 3, lg: 4 }}
         >
           <Box spacing={3}>

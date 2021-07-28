@@ -30,8 +30,7 @@ export function TooltipSubject({
       {subject && <Text fontWeight="bold">{subject}</Text>}
       <Box
         m={0}
-        spacing={2}
-        spacingHorizontal
+        spacingHorizontal={2}
         css={css({
           display: 'flex',
           alignItems: 'center',

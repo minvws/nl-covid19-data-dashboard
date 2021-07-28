@@ -1,10 +1,11 @@
-import css from '@styled-system/css';
+import css, { CSSProperties } from '@styled-system/css';
 import styled, { DefaultTheme } from 'styled-components';
 import { Preset, preset } from '~/style/preset';
 
 export interface TextProps {
   variant?: keyof Preset['typography'];
   fontWeight?: keyof DefaultTheme['fontWeights'];
+  textTransform?: CSSProperties['textTransform'];
   color?:
     | keyof DefaultTheme['colors']
     | `data.${keyof DefaultTheme['colors']['data']}`;
@@ -26,6 +27,7 @@ function textStyle(defaultVariant: keyof Preset['typography']) {
       ...preset.typography[x.variant ?? defaultVariant],
       ...(x.fontWeight ? { fontWeight: x.fontWeight } : {}),
       ...(x.color ? { color: x.color } : {}),
+      ...(x.textTransform ? { textTransform: x.textTransform } : {}),
     });
 }
 

@@ -24,45 +24,35 @@ export function TopicalVaccineTile({ data, areas }: TopicalVaccineProps) {
 
   return (
     <>
-      <Box gridArea={areas?.header} position="relative">
-        <Box width="3.5rem" height="3.5rem" position="absolute" left={0} mr={1}>
+      <Box gridArea={areas?.header} position="relative" spacing={2} pb={3}>
+        <Box width="3.5rem" height="3.5rem" position="absolute" left={0}>
           <Vaccinaties />
         </Box>
-        <Heading
-          level={3}
-          as="h2"
-          py={2}
-          pl="3.5rem"
-          mb={2}
-          lineHeight={{ md: 0, lg: 1 }}
-          fontSize="1.25rem"
-        >
-          <LinkWithIcon
-            href={reverseRouter.nl.vaccinaties()}
-            icon={<ArrowIconRight />}
-            iconPlacement="right"
-            fontWeight="bold"
-            headingLink
-          >
-            {text.title}
-          </LinkWithIcon>
+        <Heading level={3} as="h2">
+          <Box as="span" display="block" py={2} pl="3.5rem">
+            <LinkWithIcon
+              href={reverseRouter.nl.vaccinaties()}
+              icon={<ArrowIconRight />}
+              iconPlacement="right"
+              fontWeight="bold"
+              headingLink
+            >
+              {text.title}
+            </LinkWithIcon>
+          </Box>
         </Heading>
 
-        <Text fontSize="2.25rem" fontWeight="bold" my={0} lineHeight={0} mb={2}>
-          {formatNumber(estimated)}
-        </Text>
+        <Text variant="h1">{formatNumber(estimated)}</Text>
 
-        <Text mt={0}>
+        <Text>
           {replaceComponentsInText(text.administered_tests, {
             administeredVaccines: <strong>{formatNumber(estimated)}</strong>,
           })}
         </Text>
 
-        <Text fontWeight="bold" mb={0}>
-          {text.sub_title}
-        </Text>
+        <Text fontWeight="bold">{text.sub_title}</Text>
       </Box>
-      <Box gridArea={areas?.chart}>
+      <Box gridArea={areas?.chart} pb={{ _: '1.5rem', md: 0 }}>
         <div>
           <ErrorBoundary>
             <VaccineAdministrationsOverTimeChart

@@ -22,6 +22,7 @@ export function ArticleList({ articleSummaries }: ArticleListProps) {
       maxWidth="100%"
       flexWrap="wrap"
       mt={3}
+      spacing={4}
     >
       {articleSummaries.map((summary) => (
         <ArticleBox key={summary.slug.current}>
@@ -43,7 +44,6 @@ export function ArticleList({ articleSummaries }: ArticleListProps) {
 
 export const ArticleBox = styled.div(
   css({
-    marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',
       sm: 'calc(50% - 16px)',

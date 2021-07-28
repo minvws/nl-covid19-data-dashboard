@@ -88,16 +88,19 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
   }, [getFillColor, hasData, unknownLevelColor]);
 
   return (
-    <Box width="100%">
-      <Heading level={3} fontSize="1rem" mb={0}>
-        {siteText.escalatie_niveau.legenda.titel}
-      </Heading>
-      <Text>
-        {replaceVariablesInText(
-          siteText.escalatie_niveau.legenda.determined_on,
-          { date: formatDateFromSeconds(lastDetermined, 'weekday-medium') }
-        )}
-      </Text>
+    <Box width="100%" spacing={3}>
+      <Box>
+        <Heading level={3} variant="subtitle1">
+          {siteText.escalatie_niveau.legenda.titel}
+        </Heading>
+
+        <Text>
+          {replaceVariablesInText(
+            siteText.escalatie_niveau.legenda.determined_on,
+            { date: formatDateFromSeconds(lastDetermined, 'weekday-medium') }
+          )}
+        </Text>
+      </Box>
 
       <Box spacing={1}>
         {sortedEscalationArray.map((info) => (
@@ -105,7 +108,6 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
             <Box
               display="flex"
               alignItems="center"
-              spacingHorizontal
               width={{ _: '8rem', sm: '10rem' }}
             >
               {info.threshold !== null && (

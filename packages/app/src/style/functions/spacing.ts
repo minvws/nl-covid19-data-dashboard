@@ -6,7 +6,7 @@ import { asResponsiveArray } from '../utils';
 
 export interface SpacingProps {
   spacing?: ResponsiveValue<SpaceValue>;
-  spacingHorizontal?: boolean;
+  spacingHorizontal?: ResponsiveValue<SpaceValue>;
 }
 
 export const spacing: styleFn = (x: SpacingProps) => {
@@ -16,15 +16,17 @@ export const spacing: styleFn = (x: SpacingProps) => {
 };
 
 export function spacingStyle(
-  spacing: ResponsiveValue<SpaceValue>,
-  spacingHorizontal?: boolean
+  spacing?: ResponsiveValue<SpaceValue>,
+  spacingHorizontal?: ResponsiveValue<SpaceValue>
 ) {
-  const value = asResponsiveArray(spacing);
-
   return {
     '& > *:not(:last-child)': {
-      marginRight: spacingHorizontal ? value : null,
-      marginBottom: !spacingHorizontal ? value : null,
+      ...(isDefined(spacingHorizontal) && {
+        marginRight: asResponsiveArray(spacingHorizontal),
+      }),
+      ...(isDefined(spacing) && {
+        marginBottom: asResponsiveArray(spacing),
+      }),
     },
   };
 }

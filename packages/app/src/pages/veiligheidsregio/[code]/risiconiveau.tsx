@@ -263,7 +263,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     icon={<Getest />}
                   />
                 </Box>
-                <Box spacing={2} spacingHorizontal>
+                <Box spacingHorizontal={2}>
                   <Box display="inline-block">
                     <KpiValue
                       data-cy="infected"
@@ -307,7 +307,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     icon={<Ziekenhuis />}
                   />
                 </Box>
-                <Box spacing={2} spacingHorizontal>
+                <Box spacingHorizontal={2}>
                   <Box display="inline-block">
                     <KpiValue
                       data-cy="infected"

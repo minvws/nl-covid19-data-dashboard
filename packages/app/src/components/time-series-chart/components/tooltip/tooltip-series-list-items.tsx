@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
+import { spacingStyle } from '~/style/functions/spacing';
 import { colors } from '~/style/theme';
 import { SeriesConfig, useFormatSeriesValue } from '../../logic';
 import { SeriesIcon } from '../series-icon';
@@ -134,18 +135,12 @@ function TooltipListItem({
       {label}: {children}
     </VisuallyHidden>
   ) : (
-    <Box
-      as="li"
-      spacing={2}
-      spacingHorizontal
-      display="flex"
-      alignItems="stretch"
-    >
+    <Box as="li" spacingHorizontal={2} display="flex" alignItems="stretch">
       {displayTooltipValueOnly ? (
         <Box flexGrow={1}>
           <TooltipEntryContainer>
             <VisuallyHidden>
-              <InlineText mr={2}>{label}:</InlineText>
+              <InlineText>{label}:</InlineText>
             </VisuallyHidden>
             <TooltipEntryValue isCentered={displayTooltipValueOnly}>
               {children}
@@ -156,7 +151,7 @@ function TooltipListItem({
         <IconRow icon={icon}>
           <Box flexGrow={1}>
             <TooltipEntryContainer>
-              <InlineText mr={2}>{label}:</InlineText>
+              <InlineText>{label}:</InlineText>
               <TooltipEntryValue isCentered={displayTooltipValueOnly}>
                 {children}
               </TooltipEntryValue>
@@ -168,12 +163,15 @@ function TooltipListItem({
   );
 }
 
-const TooltipEntryContainer = styled.span`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: flex-end;
-`;
+const TooltipEntryContainer = styled.span(
+  css({
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    ...spacingStyle(undefined, 2),
+  })
+);
 
 const TooltipEntryValue = styled.span<{
   isCentered?: boolean;

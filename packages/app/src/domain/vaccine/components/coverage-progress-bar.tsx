@@ -84,7 +84,7 @@ export function CoverageProgressBar(props: {
           />
         </svg>
       </Box>
-      <Box display="flex" spacing={2} spacingHorizontal>
+      <Box display="flex" spacingHorizontal={2}>
         <LegendItem
           color={fullColor}
           percentage={fullPercentage}
