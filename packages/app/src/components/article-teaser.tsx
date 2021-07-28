@@ -73,7 +73,6 @@ function ZoomContainerUnstyled({
 
 const StyledArticleTeaser = styled.a(
   css({
-    display: 'block',
     minHeight: '26rem',
     overflow: 'hidden',
     textDecoration: 'none',

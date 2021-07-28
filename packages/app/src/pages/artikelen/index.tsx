@@ -2,7 +2,6 @@ import { css } from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-// import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
@@ -113,11 +112,13 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
               ))}
             </OrderedList>
           ) : (
-            <Select
-              options={sortOptions}
-              onChange={handleCategoryFilter}
-              value={currentCategory as CategoriesTypes | typeof categoryAll}
-            />
+            <Box mt={3} mb={4}>
+              <Select
+                options={sortOptions}
+                onChange={handleCategoryFilter}
+                value={currentCategory as CategoriesTypes | typeof categoryAll}
+              />
+            </Box>
           )}
 
           <ArticleList
