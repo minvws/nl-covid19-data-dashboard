@@ -10,14 +10,20 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
 
 export function SelectCountriesResults() {
-  const { id, hits, setHasHitFocus, onToggleCountry, getOptionProps, limit } =
-    useSearchContext();
+  const {
+    id,
+    hits,
+    setHasHitFocus,
+    onToggleCountry,
+    getOptionProps,
+    limit,
+    selectedCount,
+  } = useSearchContext();
 
   const { formatNumber, siteText } = useIntl();
 
   useHotkey('esc', () => setHasHitFocus(false), { preventDefault: false });
 
-  const selectedCount = hits.filter((x) => x.data.isSelected).length;
   const isLimitReached = selectedCount >= limit;
 
   return (
@@ -60,7 +66,10 @@ export function SelectCountriesResults() {
                     {x.data.name}
                   </span>
                   <span css={css({ flex: '0 0 1rem' })}>
-                    {formatNumber(x.data.lastValue)}
+                    {formatNumber(x.data.lastValue, {
+                      maximumFractionDigits: 1,
+                      minimumFractionDigits: 1,
+                    })}
                   </span>
                 </Hit>
               </li>

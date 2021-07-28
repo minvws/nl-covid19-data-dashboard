@@ -63,13 +63,16 @@ export function createFormatting(
     date_day_before_yesterday: string;
   }
 ) {
-  // Number formatting
-  const NumberFormat = new Intl.NumberFormat(languageTag);
-
-  function formatNumber(value: number | string | undefined | null): string {
+  function formatNumber(
+    value: number | string | undefined | null,
+    options?: {
+      maximumFractionDigits?: number;
+      minimumFractionDigits?: number;
+    }
+  ): string {
     if (typeof value === 'undefined' || value === null) return '-';
 
-    return NumberFormat.format(Number(value));
+    return Intl.NumberFormat(languageTag, options).format(Number(value));
   }
 
   function formatPercentage(
