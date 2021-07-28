@@ -1,12 +1,19 @@
-# CMS
+# NL Coronavirus Dashboard - CMS
+
+The Coronavirus Dashboard uses Sanity for its CMS. This document is aimed at
+developers that have access to the CMS.
+
+## Usage
+
+Run `yarn sanity login` and choose the Google option. This retrieves a token
+which is then used to talk to the Sanity API.
 
 ## Lokalize Texts
 
-This document is aimed at developers with access to the Sanity CMS. It describes
-some of the ins and outs around locale texts that we use to translate
-short-copy. These text strings used to be in a tool called Lokalize and even
-though they now live as documents in Sanity, we still tend to refer to them as
-"lokalize texts".
+This section describes some of the ins and outs around locale texts that we use
+to translate short-copy. These text strings used to be in a tool called Lokalize
+and even though they now live as documents in Sanity, we still tend to refer to
+them as "lokalize texts".
 
 ### Key Takeaways
 
