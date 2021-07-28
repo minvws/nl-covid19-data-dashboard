@@ -42,7 +42,7 @@ import { useUniqueId } from '~/utils/use-unique-id';
  * - `isOpen`
  *   - current open/close state
  */
-export function useCollapsible(options: { isOpen?: boolean }) {
+export function useCollapsible(options: { isOpen?: boolean } = {}) {
   const id = useUniqueId();
   const [isOpen, setIsOpen] = useState(!!options.isOpen);
 
