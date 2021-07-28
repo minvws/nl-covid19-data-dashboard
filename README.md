@@ -11,7 +11,7 @@ COVID-19 Notification App. They are separate projects. If you want to get in
 touch with that team, please join the CODE for NL Slack and join the channel
 `#coronadashboard`.
 
-Tamas Erkelens from the Municipality of Amsterdam is contact person for the
+Tamas Erkelens from the Municipality of Amsterdam is the contact person for the
 project team that made the dashboard.
 
 [CODE For NL Slack](https://doemee.codefor.nl)
