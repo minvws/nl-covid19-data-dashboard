@@ -34,7 +34,7 @@ with the following content:
 NEXT_PUBLIC_SANITY_DATASET=production
 ```
 
-The "Lokalize" part of Sanity is exported and used by the app as JSON. You will
+The "Lokalize" part of Sanity is exported and consumed by the app as JSON. You will
 need to run this script regularly as an outdated JSON file will result in
 compile or build-time errors.
 
