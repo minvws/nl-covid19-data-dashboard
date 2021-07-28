@@ -4,7 +4,7 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
 import { Heading, InlineText } from '~/components/typography';
-import { CategoriesTypes } from '~/domain/topical/common/categories';
+import { ArticleCategoryTypes } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -96,7 +96,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
                   <TagAnchor>
                     {
                       siteText.common_actueel.secties.artikelen
-                        .categorie_filters[item as CategoriesTypes]
+                        .categorie_filters[item as ArticleCategoryTypes]
                     }
                   </TagAnchor>
                 </Link>

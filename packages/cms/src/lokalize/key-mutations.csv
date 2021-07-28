@@ -55,3 +55,5 @@ timestamp,action,key,document_id,move_to
 2021-07-28T08:47:36.886Z,add,common_actueel.secties.artikelen.categorie_filters.gedrag,fyGrrdTc3SJhuVUgB8ZCI1,__
 2021-07-28T08:53:27.006Z,add,common_actueel.secties.artikelen.categorie_filters.vaccinaties,juBPqC1mFG4lc4Pjul5ZZT,__
 2021-07-28T09:10:15.396Z,add,common_actueel.secties.artikelen.tags,juBPqC1mFG4lc4Pjul9F4n,__
+2021-07-28T12:41:01.073Z,move,common_actueel.secties.artikelen.categorie_filters.alles,kZYjqFJyrN0fPPHPQq27cU,common_actueel.secties.artikelen.categorie_filters.__all
+2021-07-28T12:57:31.652Z,move,common_actueel.secties.artikelen.categorie_filters.__all,kZYjqFJyrN0fPPHPQq27cU,common_actueel.secties.artikelen.categorie_filters.__alles

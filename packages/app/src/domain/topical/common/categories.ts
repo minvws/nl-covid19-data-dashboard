@@ -1,4 +1,5 @@
-export const categories = [
+export const articleCategory = [
+  '__alles',
   'vaccinaties',
   'infecties',
   'sterfte',
@@ -7,13 +8,5 @@ export const categories = [
   'vroege_indicatoren',
   'gedrag',
 ] as const;
-export type CategoriesTypes = typeof categories[number];
 
-export const categoryAll = 'alles';
-
-export const allCategories = [categoryAll, ...categories] as unknown as (
-  | CategoriesTypes
-  | typeof categoryAll
-)[];
-
-export type AllCategoriesTypes = typeof allCategories[number];
+export type ArticleCategoryTypes = typeof articleCategory[number];

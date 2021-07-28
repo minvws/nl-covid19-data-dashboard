@@ -10,9 +10,8 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import {
-  allCategories,
-  AllCategoriesTypes,
-  categoryAll,
+  articleCategory,
+  ArticleCategoryTypes,
 } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import {
@@ -52,7 +51,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
 
   const sortOptions = useMemo(() => {
-    return allCategories.map((id) => {
+    return articleCategory.map((id) => {
       const label =
         siteText.common_actueel.secties.artikelen.categorie_filters[id];
 
@@ -64,7 +63,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   }, [siteText]);
 
   const handleCategoryFilter = useCallback(
-    function setNewParam(item: AllCategoriesTypes) {
+    function setNewParam(item: ArticleCategoryTypes) {
       replace(
         {
           pathname: '/artikelen',
@@ -78,10 +77,10 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   );
 
   const currentCategory = (
-    allCategories.includes(query.categorie as AllCategoriesTypes)
+    articleCategory.includes(query.categorie as ArticleCategoryTypes)
       ? query.categorie
-      : categoryAll
-  ) as AllCategoriesTypes;
+      : undefined
+  ) as ArticleCategoryTypes;
 
   return (
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
