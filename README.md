@@ -19,7 +19,7 @@ project team that made the dashboard.
 ## Development & Contribution process
 
 The core team works directly from this open-source repository. If you plan to
-propose changes, we recommend to open an issue beforehand where we can discuss
+propose changes, we recommend opening an issue beforehand where we can discuss
 your planned changes. This increases the chance that we might be able to use
 your contribution (or it avoids doing work if there are reasons why we wouldn't
 be able to use it).
