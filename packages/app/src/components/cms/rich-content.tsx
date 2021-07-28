@@ -16,6 +16,7 @@ import { ContentImage } from './content-image';
 import { ExternalLink } from '~/components/external-link';
 import { Link } from '~/utils/link';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import { useIntl } from '~/intl';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
@@ -92,12 +93,14 @@ function InlineAttachmentMark(props: {
 function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   const { mark, children } = props;
 
+  const { locale = 'nl' } = useIntl();
+
   if (!mark.href) return <>{children}</>;
 
   return isAbsoluteUrl(mark.href) ? (
     <ExternalLink href={mark.href}>{children}</ExternalLink>
   ) : (
-    <Link href={mark.href} passHref>
+    <Link href={mark.href} passHref locale={locale}>
       <a>{children}</a>
     </Link>
   );
