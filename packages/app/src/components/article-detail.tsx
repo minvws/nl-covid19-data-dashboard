@@ -4,6 +4,7 @@ import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
 import { Heading, InlineText } from '~/components/typography';
+import { CategoriesTypes } from '~/domain/topical/common/categories';
 import { useIntl } from '~/intl';
 import { Article } from '~/types/cms';
 import { Link } from '~/utils/link';
@@ -22,6 +23,7 @@ const imageSizes = [
 
 export function ArticleDetail({ article }: ArticleDetailProps) {
   const { siteText } = useIntl();
+
   return (
     <Box bg="white" py={{ _: 4, md: 5 }}>
       <ContentBlock spacing={3}>
@@ -68,7 +70,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
             fontFamily="body"
             display="block"
           >
-            Tags
+            {siteText.common_actueel.secties.artikelen.tags}
           </InlineText>
           <Box
             as="ul"
@@ -87,11 +89,16 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
                 <Link
                   href={{
                     pathname: '/artikelen',
-                    query: { categorieen: item },
+                    query: { categorie: item },
                   }}
                   passHref={true}
                 >
-                  <TagAnchor>{item}</TagAnchor>
+                  <TagAnchor>
+                    {
+                      siteText.common_actueel.secties.artikelen
+                        .categorie_filters[item as CategoriesTypes]
+                    }
+                  </TagAnchor>
                 </Link>
               </li>
             ))}

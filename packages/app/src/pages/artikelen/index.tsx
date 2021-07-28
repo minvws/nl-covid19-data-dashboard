@@ -1,11 +1,12 @@
 import { css } from '@styled-system/css';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
-import { isDefined } from 'ts-is-present';
+// import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
+import { Select } from '~/components/select';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
@@ -23,6 +24,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -52,28 +54,36 @@ const allCategories = [categoryAll, ...categories] as unknown as (
 const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { siteText } = useIntl();
-  const { query, push } = useRouter();
+  const { query, replace } = useRouter();
+  const breakpoints = useBreakpoints();
 
-  const handleFilter = useCallback(
+  const sortOptions = useMemo(() => {
+    return allCategories.map((id) => {
+      const label =
+        siteText.common_actueel.secties.artikelen.categorie_filters[id];
+
+      return {
+        label,
+        value: id,
+      };
+    });
+  }, [siteText]);
+
+  const handleCategoryFilter = useCallback(
     function setNewParam(item: CategoriesTypes | typeof categoryAll) {
-      push(
+      replace(
         {
           pathname: '/artikelen',
-          query: { filter: item },
+          query: { categorie: item },
         },
         undefined,
         { shallow: true }
       );
     },
-    [push]
+    [replace]
   );
 
-  // When page first loads and there are no params, select all the articles
-  useEffect(() => {
-    if (isDefined(query.filter)) return;
-
-    handleFilter(categoryAll);
-  }, [query, push, handleFilter]);
+  const currentCategory = query.categorie || categoryAll;
 
   return (
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
@@ -83,30 +93,38 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
             {siteText.common_actueel.secties.artikelen.titel}
           </Heading>
 
-          <Text mb={3}>
+          <Text m={0}>
             {siteText.common_actueel.secties.artikelen.beschrijving}
           </Text>
 
-          <OrderedList>
-            {allCategories.map((item, index) => (
-              <ListItem
-                key={index}
-                isActive={query.categorieen === item}
-                onClick={() => handleFilter(item)}
-              >
-                <StyledButton>
-                  <InlineText>{item}</InlineText>
-                  <BoldText aria-hidden="true">{item}</BoldText>
-                </StyledButton>
-              </ListItem>
-            ))}
-          </OrderedList>
+          {breakpoints.lg ? (
+            <OrderedList>
+              {sortOptions.map((item, index) => (
+                <ListItem
+                  key={index}
+                  isActive={currentCategory === item.value}
+                  onClick={() => handleCategoryFilter(item.value)}
+                >
+                  <StyledButton>
+                    <InlineText>{item.label}</InlineText>
+                    <BoldText aria-hidden="true">{item.label}</BoldText>
+                  </StyledButton>
+                </ListItem>
+              ))}
+            </OrderedList>
+          ) : (
+            <Select
+              options={sortOptions}
+              onChange={handleCategoryFilter}
+              value={currentCategory as CategoriesTypes | typeof categoryAll}
+            />
+          )}
 
           <ArticleList
             articleSummaries={content}
             hideLink={true}
             currentCategory={
-              query.filter as CategoriesTypes | typeof categoryAll
+              currentCategory as CategoriesTypes | typeof categoryAll
             }
           />
         </MaxWidth>
@@ -119,37 +137,37 @@ export default ArticlesOverview;
 
 const OrderedList = styled.ol(
   css({
+    overflow: 'hidden',
     position: 'relative',
-    m: 0,
-    p: 0,
-    mb: 5,
-    listStyleType: 'none',
+    display: 'flex',
+    justifyContent: 'space-around',
     borderTop: '1px solid',
     borderBottom: '1px solid',
     borderColor: 'silver',
-    display: 'flex',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
+    m: 0,
+    my: 4,
+    p: 0,
+    listStyleType: 'none',
   })
 );
 
 const ListItem = styled.li<{ isActive: boolean }>((x) =>
   css({
     position: 'relative',
-    height: '100%',
     py: 3,
+    height: '100%',
     transition: 'transform 0.2s',
     cursor: 'pointer',
 
     '&:after': {
       content: '""',
+      display: 'block',
       position: 'absolute',
-      left: '-1.5rem',
+      left: 0,
       bottom: 0,
       height: '6px',
-      width: `calc(100% + 3rem)`,
+      width: `calc(100%)`,
       backgroundColor: 'blue',
-      display: 'block',
       transform: `translateY(${x.isActive ? 0 : '6px'})`,
       transition: 'transform 0.2s',
     },
@@ -174,13 +192,20 @@ const ListItem = styled.li<{ isActive: boolean }>((x) =>
   })
 );
 
+/*
+ * Since we are using a justify-content: space around for positioning the elements,
+ * transforming them on hover to a bold text would cause a small layout shift.
+ * Here we draw a indentical text on top and switch them once the item is active.
+ * It has a aria hidden label and is pure cosmetic for this use case.
+ */
 const BoldText = styled.span(
   css({
-    fontWeight: 'bold',
-    opacity: 0,
     position: 'absolute',
     top: 0,
     left: '50%',
+    fontWeight: 'bold',
+    opacity: 0,
+    whiteSpace: 'nowrap',
     transform: 'translateX(-50%)',
   })
 );
@@ -189,6 +214,7 @@ const StyledButton = styled.button(
   css({
     all: 'unset',
     position: 'relative',
+    px: 3,
 
     '&:focus': {
       outlineWidth: '1px',
