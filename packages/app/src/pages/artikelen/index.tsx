@@ -82,7 +82,11 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
     [replace]
   );
 
-  const currentCategory = query.categorie || categoryAll;
+  const currentCategory = [...categories, categoryAll].includes(
+    query.categorie as CategoriesTypes | typeof categoryAll
+  )
+    ? query.categorie
+    : categoryAll || categoryAll;
 
   return (
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
