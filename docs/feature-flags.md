@@ -49,7 +49,7 @@ export type JsonDataScope =
 
 ## Usage
 
-A feature flag when defined in the configuration can be used like this:
+After a flag has been configured it can be used like this:
 
 ```ts
 const someFeature = useFeature('someFeatureName');
@@ -60,7 +60,7 @@ if (someFeature.isEnabled) {
 ```
 
 If the feature contains a new page, the route should return a 404 when the
-feature is disabled. For this purpose we can use a wrapper function for
+feature is disabled. To achieve this we use a wrapper function for
 getStaticProps:
 
 ```ts
@@ -73,7 +73,10 @@ export const getStaticProps = withFeatureNotFoundPage(
 ## Validation
 
 It is only possible to toggle features when the data is defined as optional in
-our schema's. We use a build-time validation step to ensure that:
+our schema's, but as a result our standard validation doesn't warn us when data
+is missing.
+
+To solve this we run an extra build-time feature validation to ensure that:
 
 - Data for features that are enabled should be present in the dataset
 - Data for features that are disabled should _not_ be present in the dataset
