@@ -81,18 +81,17 @@ To solve this we run an extra build-time feature validation to ensure that:
 - Data for features that are enabled should be present in the dataset
 - Data for features that are disabled should _not_ be present in the dataset
 
-For this reason it is important to define what data belongs to the feature. We
-do this by configuring the `dataScopes`, `metricName` and optionally
-`metricProperty` for each feature.
+For this reason it is important to declare what data belongs to the feature, via
+the options `dataScopes`, `metricName` and optionally `metricProperty`.
 
 You can only define one metricName per feature, so if a feature spans multiple
-types of metric data, you need to work around it by defining multiple feature
-flags.
+types of metric data, you will have to work around it by defining multiple
+feature flags.
 
-If the feature is just about specific properties that were added to an already
-existing metric name, then specifying those properties will make sure that only
-the checks are performed on those. Of the whole schema is new, then specifying
-only the `metricName` is sufficient.
+If the feature is only covering specific properties that were added to an
+already existing metric, then declaring those properties will mean that only the
+checks are performed on those. If the whole schema / metric is new, as it often
+is, then specifying only the `metricName` is sufficient.
 
-The script that validates the features (which is run at build-time) can be
-triggered with `yarn workspace@corona-dashboard/cli validate-features`
+The script that validates the features (and runs at build-time) can be
+triggered locally with `yarn workspace@corona-dashboard/cli validate-features`.
