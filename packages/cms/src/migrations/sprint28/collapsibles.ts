@@ -1,28 +1,35 @@
 import { getClient } from '../../client';
 
-const schemas = [
-  ['toegankelijkheid', 'description'],
-  ['overRisicoNiveaus', 'riskLevelExplanations', 'description'],
-  ['editorial', 'content', 'intro'],
-  ['article', 'content', 'intro'],
-  ['faqQuestion', 'content'],
-  ['figureExplanationItem', 'content'],
-  ['cijferVerantwoording', 'description'],
-  ['contact', 'description'],
-  ['overDitDashboard', 'description'],
-  ['vaccinationsPage', 'pageDescription', 'description'],
-  ['veelgesteldeVragen', 'localeBlock'],
+const schemaInfo = [
+  { schemaName: 'toegankelijkheid', fields: ['description'] },
+  {
+    schemaName: 'overRisicoNiveaus',
+    fields: ['riskLevelExplanations', 'description'],
+  },
+  { schemaName: 'editorial', fields: ['content', 'intro'] },
+  { schemaName: 'article', fields: ['content', 'intro'] },
+  { schemaName: 'faqQuestion', fields: ['content'] },
+  { schemaName: 'figureExplanationItem', fields: ['content'] },
+  { schemaName: 'cijferVerantwoording', fields: ['description'] },
+  { schemaName: 'contact', fields: ['description'] },
+  { schemaName: 'overDitDashboard', fields: ['description'] },
+  {
+    schemaName: 'vaccinationsPage',
+    fields: ['pageDescription', 'description'],
+  },
+  { schemaName: 'veelgesteldeVragen', fields: ['localeBlock'] },
 ];
 
-function createQuery(values: string[][]) {
-  return `*[${values
-    .map((x) => `(_type == '${x[0]}' && ${whereClause(x)})`)
-    .join(' || \n')}]{\n${values.map(selectField).join(',\n')}}`;
+type SchemaInfo = typeof schemaInfo[number];
+
+function createQuery(schemaInfos: SchemaInfo[]) {
+  return `*[${schemaInfos
+    .map((x) => `(_type == '${x.schemaName}' && ${whereClause(x.fields)})`)
+    .join(' || \n')}]{\n${schemaInfos.map(selectField).join(',\n')}}`;
 }
 
-function whereClause(values: string[]) {
-  return values
-    .filter((x, i) => i > 0)
+function whereClause(fields: string[]) {
+  return fields
     .map(
       (x) =>
         `${x}.en[]._type match 'collapsible' || ${x}.nl[]._type match 'collapsible'`
@@ -30,23 +37,23 @@ function whereClause(values: string[]) {
     .join(' || ');
 }
 
-function selectField(schema: string[]) {
-  const schemaName = schema.shift();
-  return `_type == "${schemaName}" => {_type,_id,${schema.join(',')}}`;
+function selectField(info: SchemaInfo) {
+  return `_type == "${info.schemaName}" => {_type,_id,${info.fields.join(
+    ','
+  )}}`;
 }
 
 (async function run() {
   const client = getClient('development');
 
-  const query = createQuery(schemas);
+  const query = createQuery(schemaInfo);
 
   const documents = (await client.fetch(query)) as any[];
 
   const transaction = client.transaction();
 
-  documents
-    .map(createPatch)
-    .forEach((patchInfo) => transaction.patch(patchInfo.id, patchInfo.patch));
+  documents.map(createPatch).forEach((x) => console.dir(x));
+  //.forEach((patchInfo) => transaction.patch(patchInfo.id, patchInfo.patch));
 
   await transaction.commit();
 })().catch((err) => {
