@@ -227,6 +227,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                   icon={<ReproIcon />}
                   title={siteText.reproductiegetal.titel_sidebar}
                 >
+                  {/* <ReproductionSidebarMetric /> */}
                   <SidebarMetric
                     data={data}
                     scope="nl"
@@ -235,6 +236,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                     localeTextKey="reproductiegetal"
                     showBarScale={true}
                     differenceKey="reproduction__index_average"
+                    showDateOfInsertion
                   />
                 </MetricMenuItemLink>
 
