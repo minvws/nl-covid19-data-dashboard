@@ -29,10 +29,6 @@ const prodClient = getClient('production');
   console.log('Have a nice day...');
 })();
 
-async function saveElement(element: Element) {
-  return Promise.all([devClient.create(element), prodClient.create(element)]);
-}
-
 async function promptForElement(): Promise<Element | undefined> {
   const element: Element = {
     scope: 'nl',
@@ -121,7 +117,7 @@ async function promptForElement(): Promise<Element | undefined> {
       {
         type: 'confirm',
         name: 'isConfirmed',
-        message: `The element ${serializeElement(
+        message: `The element ${elementToString(
           element
         )} already exists, do you want to start over?\nChoosing no will exit this prompt.`,
         initial: false,
@@ -140,7 +136,7 @@ async function promptForElement(): Promise<Element | undefined> {
     {
       type: 'confirm',
       name: 'isConfirmed',
-      message: `Is this correct?\n${serializeElement(
+      message: `Is this correct?\n${elementToString(
         element
       )}\nWhen choosing 'yes' this element will be saved to both development and production.`,
       initial: false,
@@ -164,11 +160,15 @@ async function isNewElement(element: Element) {
   return devDocument === null && prodDocument === null;
 }
 
-function serializeElement(element: Element) {
+function elementToString(element: Element) {
   if (!isDefined(element.metricProperty)) {
     return `${element.scope}.${element.metricName}.${element._type}`;
   }
   return `${element.scope}.${element.metricName}.${element.metricProperty}.${element._type}`;
+}
+
+async function saveElement(element: Element) {
+  return Promise.all([devClient.create(element), prodClient.create(element)]);
 }
 
 function onState(state: { aborted: boolean }) {
