@@ -1,5 +1,6 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
+import { ExternalLink } from '~/components/external-link';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
   CollapsibleList,
@@ -9,13 +10,12 @@ import {
   RichContentImageBlock,
 } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { CollapsibleSection } from '../collapsible';
 import { ErrorBoundary } from '../error-boundary';
 import { ContentImage } from './content-image';
-import { ExternalLink } from '~/components/external-link';
-import { Link } from '~/utils/link';
-import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
@@ -35,6 +35,7 @@ export function RichContent({
           PortableText.defaultSerializers.types?.block,
           'PortableText needs to provide a serializer for block content'
         );
+        console.log(props.node.style);
         return (
           <ContentWrapper>
             {PortableText.defaultSerializers.types.block(props)}
