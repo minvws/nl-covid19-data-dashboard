@@ -64,7 +64,7 @@ async function generateTypeScriptFromSchema(schemaName: string) {
 }
 
 function writeDefinitionsToFile(typeDefinitions: string[]) {
-  const outputFile = path.join(outputDirectory, 'data.ts');
+  const outputFile = path.join(outputDirectory, 'data.d.ts');
 
   fs.writeFileSync(
     outputFile,
