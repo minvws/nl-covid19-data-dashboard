@@ -2,16 +2,17 @@ import prompts from 'prompts';
 import { isDefined } from 'ts-is-present';
 import { getClient } from '../client';
 import {
-  loadSchemaMetricProperties,
-  loadSchemaMetrics,
+  getSchemaMetricProperties,
+  getSchemaMetrics,
   Scope,
-} from './logic/load-schema';
+} from './logic/get-schema';
 
 type Element = {
   scope: Scope;
   metricName: string;
   metricProperty: string | undefined;
   _type: ElementType;
+  _id: string;
 };
 
 type ElementType = 'choropleth' | 'timeSeries' | 'kpi';
@@ -35,6 +36,7 @@ async function promptForElement(): Promise<Element | undefined> {
     metricName: '',
     metricProperty: undefined,
     _type: 'choropleth',
+    _id: '',
   };
 
   const choices = [
@@ -58,7 +60,7 @@ async function promptForElement(): Promise<Element | undefined> {
     type: 'select',
     name: 'metricName',
     message: 'Select the metric name for this element:',
-    choices: loadSchemaMetrics(scopeResponse.scope).map((x) => ({
+    choices: getSchemaMetrics(scopeResponse.scope).map((x) => ({
       title: x,
       value: x,
     })),
@@ -66,6 +68,22 @@ async function promptForElement(): Promise<Element | undefined> {
   })) as { metricName: string };
 
   element.metricName = metricNameResponse.metricName;
+
+  const elementTypeChoices = [
+    { title: 'Time series', value: 'timeSeries' },
+    { title: 'Choropleth', value: 'choropleth' },
+    { title: 'KPI', value: 'kpi' },
+  ];
+
+  const typeResponse = (await prompts({
+    type: 'select',
+    name: '_type',
+    message: 'Select the element type:',
+    choices: elementTypeChoices,
+    onState,
+  })) as { _type: ElementType };
+
+  element._type = typeResponse._type;
 
   const metricPropertyConfirmationresponse = await prompts([
     {
@@ -81,7 +99,7 @@ async function promptForElement(): Promise<Element | undefined> {
       type: 'select',
       name: 'metricProperty',
       message: 'Select a metric property for this element:',
-      choices: loadSchemaMetricProperties(
+      choices: getSchemaMetricProperties(
         scopeResponse.scope,
         metricNameResponse.metricName
       ).map((x) => ({
@@ -94,21 +112,7 @@ async function promptForElement(): Promise<Element | undefined> {
     element.metricProperty = metricPropertyResponse.metricProperty;
   }
 
-  const elemenTypeChoices = [
-    { title: 'Time series', value: 'timeSeries' },
-    { title: 'Choropleth', value: 'choropleth' },
-    { title: 'KPI', value: 'kpi' },
-  ];
-
-  const typeResponse = (await prompts({
-    type: 'select',
-    name: '_type',
-    message: 'Select the element type:',
-    choices: elemenTypeChoices,
-    onState,
-  })) as { _type: ElementType };
-
-  element._type = typeResponse._type;
+  element._id = elementToId(element);
 
   const isNew = await isNewElement(element);
 
@@ -117,7 +121,7 @@ async function promptForElement(): Promise<Element | undefined> {
       {
         type: 'confirm',
         name: 'isConfirmed',
-        message: `The element ${elementToString(
+        message: `The element ${elementToId(
           element
         )} already exists, do you want to start over?\nChoosing no will exit this prompt.`,
         initial: false,
@@ -136,7 +140,7 @@ async function promptForElement(): Promise<Element | undefined> {
     {
       type: 'confirm',
       name: 'isConfirmed',
-      message: `Is this correct?\n${elementToString(
+      message: `Is this correct?\n${elementToId(
         element
       )}\nWhen choosing 'yes' this element will be saved to both development and production.`,
       initial: false,
@@ -149,10 +153,8 @@ async function promptForElement(): Promise<Element | undefined> {
 }
 
 async function isNewElement(element: Element) {
-  const { _type, scope, metricName, metricProperty } = element;
-  const query = !isDefined(metricProperty)
-    ? `*[_type == '${_type}' && scope == '${scope}' && metricName == '${metricName}'][0]`
-    : `*[_type == '${_type}' && scope == '${scope}' && metricName == '${metricName}' && metricProperty == '${metricProperty}'][0]`;
+  const { _type, _id } = element;
+  const query = `*[_type == '${_type}' && _id == '${_id}'][0]`;
 
   const devDocument = await devClient.fetch(query);
   const prodDocument = await prodClient.fetch(query);
@@ -160,11 +162,22 @@ async function isNewElement(element: Element) {
   return devDocument === null && prodDocument === null;
 }
 
-function elementToString(element: Element) {
+function camelToSnakeCase(camelCased: string) {
+  return camelCased.replace(
+    /[A-Z]/g,
+    (letter: string) => `_${letter.toLowerCase()}`
+  );
+}
+
+function elementToId(element: Element) {
   if (!isDefined(element.metricProperty)) {
-    return `${element.scope}.${element.metricName}.${element._type}`;
+    return `${element.scope}__${element.metricName}__${camelToSnakeCase(
+      element._type
+    )}`;
   }
-  return `${element.scope}.${element.metricName}.${element.metricProperty}.${element._type}`;
+  return `${element.scope}__${element.metricName}__${camelToSnakeCase(
+    element._type
+  )}__${element.metricProperty}`;
 }
 
 async function saveElement(element: Element) {

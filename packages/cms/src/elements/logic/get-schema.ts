@@ -5,16 +5,16 @@ export type Scope = 'nl' | 'gm' | 'vr' | 'in';
 
 const schemaPath = path.join(__dirname, '..\\..\\..\\..\\app\\schema');
 
-export function loadSchemaMetrics(scope: Scope) {
-  const schema = loadJSONFromFile(path.join(schemaPath, scope, '__index.json'));
+export function getSchemaMetrics(scope: Scope) {
+  const schema = loadJsonFromFile(path.join(schemaPath, scope, '__index.json'));
 
   return Object.entries<{ type: string } | { $ref: string }>(schema.properties)
     .filter(pickMetricNames)
     .map(([key]) => key);
 }
 
-export function loadSchemaMetricProperties(scope: Scope, metricName: string) {
-  const schema = loadJSONFromFile(
+export function getSchemaMetricProperties(scope: Scope, metricName: string) {
+  const schema = loadJsonFromFile(
     path.join(schemaPath, scope, `${metricName}.json`)
   );
 
@@ -38,7 +38,7 @@ function pickMetricNames([, value]: [
   }
 }
 
-function loadJSONFromFile(filePath: string) {
+function loadJsonFromFile(filePath: string) {
   const content = fs.readFileSync(filePath, { encoding: 'utf-8' });
   return JSON.parse(content);
 }
