@@ -42,16 +42,11 @@ import { useUniqueId } from '~/utils/use-unique-id';
  * - `isOpen`
  *   - current open/close state
  */
-export function useCollapsible(
-  options: { isOpen?: boolean; isOpenInitial?: boolean } = {
-    isOpen: false,
-    isOpenInitial: false,
-  }
-) {
+export function useCollapsible(options: { isOpen?: boolean } = {}) {
   const id = useUniqueId();
-  const [isOpen, setIsOpen] = useState(options.isOpen);
+  const [isOpen, setIsOpen] = useState(!!options.isOpen);
 
-  useEffect(() => setIsOpen(options.isOpen), [options.isOpen]);
+  useEffect(() => setIsOpen(!!options.isOpen), [options.isOpen]);
 
   const toggle = useCallback(
     (isOpen?: true | false | unknown) =>
@@ -101,7 +96,7 @@ export function useCollapsible(
       width="100%"
       overflow="hidden"
       animate={isOpen ? 'open' : 'rest'}
-      initial={options.isOpenInitial ? 'open' : undefined}
+      initial={options.isOpen ? 'open' : undefined}
       css={css({
         height: 0,
         opacity: 0,

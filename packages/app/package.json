@@ -148,13 +148,9 @@
     "test:ci": "jest --ci",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
-    "type-check": "yarn compile",
     "compile": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
-    "clean": "rimraf .next",
-    "vercel-install": "yarn install --frozen-lockfile && yarn download && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$SANITY_DATASET --clean-json && yarn workspace @corona-dashboard/cli validate-json-all && yarn workspace @corona-dashboard/cms sync-assets",
-    "vercel-build:nl": "yarn build:nl && next export",
-    "vercel-build:en": "yarn build:en && next export"
+    "clean": "rimraf .next"
   },
   "browserslist": [
     "defaults",

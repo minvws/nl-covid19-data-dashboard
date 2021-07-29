@@ -36,8 +36,6 @@ export function VaccineAdministrationsKpiSection({
       <KpiTile
         title={text.gezette_prikken.title}
         metadata={{
-          date: data.vaccine_administered_total.last_value
-            .date_of_insertion_unix,
           source: text.bronnen.all_left,
         }}
       >

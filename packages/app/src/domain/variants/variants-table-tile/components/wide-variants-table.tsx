@@ -50,11 +50,7 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
       <tbody>
         {rows.map((row) => (
           <tr key={row.variant}>
-            <VariantNameCell
-              variant={row.variant}
-              text={text}
-              countryOfOrigin={row.countryOfOrigin}
-            />
+            <VariantNameCell variant={row.variant} text={text} />
             <Cell>
               {isPresent(row.percentage) ? (
                 <Box maxWidth="20em">

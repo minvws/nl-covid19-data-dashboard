@@ -109,6 +109,7 @@ export function InfectedPerAgeGroup({
           <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
         )}
         dataOptions={{
+          valueAnnotation: text.value_annotation,
           timespanAnnotations: [
             {
               start: underReportedDateStart,

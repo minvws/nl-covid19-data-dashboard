@@ -1,14 +1,15 @@
 import Head from 'next/head';
-
 import { useIntl } from '~/intl';
 import { assert } from '~/utils/assert';
 
 const version = process.env.NEXT_PUBLIC_COMMIT_ID;
 
-assert(
-  version,
-  'Missing environment variable process.env.NEXT_PUBLIC_COMMIT_ID'
-);
+if (process.env.NODE_ENV === 'production') {
+  assert(
+    version,
+    'Missing environment variable process.env.NEXT_PUBLIC_COMMIT_ID'
+  );
+}
 
 type SEOHeadProps = {
   title?: string;

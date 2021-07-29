@@ -47,7 +47,6 @@ export function VaccineDeliveryBarChart({
     <ChartTile
       title={text.titel}
       metadata={{
-        date: data.last_value.date_of_report_unix,
         source: intl.siteText.vaccinaties.bronnen.rivm,
       }}
     >
