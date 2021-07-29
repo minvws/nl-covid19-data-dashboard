@@ -67,7 +67,7 @@ noting:
   for inline lambda functions of course. This means `function doSomething(){}`
   instead of `const doSomething = () => {}`
 - We avoid unnecessary short-hand variable names like `arr` for array or `i` for
-  index. Where are a few exceptions we use regularly; `x` for use in `map` and
+  index. There are a few exceptions we use regularly; `x` for use in `map` and
   `filter` functions, and `acc` for a `reduce` accumulator.
 - All Unix timestamps are defined in seconds, not milliseconds like you would
   expect in Javascript. This is because our data sources are using seconds.

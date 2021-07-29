@@ -2,13 +2,13 @@
 
 This section describes some of the ins and outs around locale texts that we use
 to translate short-copy. These strings used to be managed by a tool called
-Lokalize. After a while we concluded that their application did not meet your
-demands, and we migrated the texts to our newly acquired CMS. By mimicking the
+Lokalize. After a while we concluded that their application did not meet our
+demands, and we migrated the texts to our newly acquired CMS (https://www.sanity.io). By mimicking the
 old structure and behavior we made sure that the migration had little impact on
 our codebase. Even though these texts now live as documents in Sanity, we still
 refer to them as "lokalize texts".
 
-Each texts string lives as a document in the CMS, which each a unique "key"
+Each text string lives as a document in the CMS, of which each has a unique "key"
 corresponding to a path. These documents are then exported as JSON files (one
 for each language) and consumed by the application as static data.
 
@@ -34,7 +34,7 @@ In summary these are the most important things you should be aware of:
   before they are applied.
 - When a feature branch gets merged into develop, the `sync-after-feature`
   command runs which adds new texts to production so that the communication team
-  can prepare them for upcoming release.
+  can prepare them for upcoming releases.
 - After a release, we manually run the `sync-after-release`, which then strips
   all keys from production that are not in use in development anymore. This also
   clears the mutations log file which should then be committed. **Do not delete
@@ -43,7 +43,7 @@ In summary these are the most important things you should be aware of:
 
 ## Mutations File
 
-All mutation to the development dataset that are done via the CLI interface are
+All mutations to the development dataset that are done via the CLI interface are
 logged in the mutations file. This file contains the timestamp, key and action
 for each mutation. It also contains the document id and in the case of a move
 mutation the move_to key.
@@ -92,7 +92,7 @@ After you're done with the changes run `yarn lokalize:apply-json-edits` and
 after confirmation all selected mutations will be written to the mutations log
 file.
 
-New texts will only have an NL string when they are added and will use NL as a
+New texts will only have an NL (Dutch) string when they are added and will use NL as a
 fallback.
 
 After syncing texts, the export script is called to update your local JSON file
@@ -136,10 +136,10 @@ following logic:
 
 1. Apply moves and deletions to the development set. This will break other
    feature branches, but at this point those branches can be updated with the
-   develop new commits.
+   new develop commits.
 2. Sync additions to the production set. Any text that was added as part of this
    feature branch is added to the production set so that the communication team
-   can prepare the texts for the upcoming release. These text get a special flag
+   can prepare the texts for the upcoming release. These texts get a special flag
    so they appear in their own list on the Sanity dashboard.
 
 If the text additions of a feature branch get deleted after the branch was
@@ -170,7 +170,7 @@ It is possible that right after a release there are already new texts in the
 development set which are part of the next sprint. Those will get added to
 production as well but this won't be much of a problem.
 
-**DANGER:** One thing we need to keep in mind is to not delete or move texts
+**DANGER:** One thing we need to keep in mind is not to delete or move texts
 from development between deploying the release and running the
 `sync-after-release`. Because then those keys will get removed from the
 production set and block the deployment.

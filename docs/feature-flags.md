@@ -2,7 +2,7 @@
 
 Feature flags are used to quickly turn newly developed features on or off,
 because decisions about whether or not to release a feature can change rapidly.
-Using a flag enables us to change the inclusion of a feature with a minimum
+Using a flag enables us to change the inclusion of a feature with a minimal
 change in code. Once the feature has been released and is considered stable we
 will remove the flag related logic for it.
 
