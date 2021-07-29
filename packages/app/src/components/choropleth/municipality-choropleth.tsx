@@ -6,6 +6,7 @@ import {
 import css from '@styled-system/css';
 import { Feature, MultiPolygon } from 'geojson';
 import { ReactNode, useCallback } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -27,6 +28,7 @@ import { useChoroplethDataDescription } from './hooks/use-choropleth-data-descri
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { HoverPathLink, Path } from './path';
+import { regionViewBox } from './region-viewbox';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
@@ -76,7 +78,10 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
 
   const { siteText } = useIntl();
 
-  const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selectedCode);
+  const [boundingbox, vrcode] = useMunicipalityBoundingbox(
+    regionGeo,
+    selectedCode
+  );
 
   const { getChoroplethValue, hasData, values } = useMunicipalityData(
     municipalGeo,
@@ -86,6 +91,19 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
   );
 
   const vrMunicipalCodes = useRegionMunicipalities(selectedCode);
+
+  const viewBoxMunicipalCodes = isDefined(vrcode)
+    ? (regionViewBox as any)[vrcode]
+    : undefined;
+
+  const filteredMunicpalGeo = isDefined(viewBoxMunicipalCodes)
+    ? {
+        ...municipalGeo,
+        features: municipalGeo.features.filter((x) =>
+          viewBoxMunicipalCodes.includes(x.properties.gemcode)
+        ),
+      }
+    : municipalGeo;
 
   const thresholdValues = getDataThresholds(
     municipalThresholds,
@@ -205,9 +223,9 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
         <Choropleth
           accessibility={choroplethAccessibility}
           description={dataDescription}
-          featureCollection={municipalGeo}
+          featureCollection={filteredMunicpalGeo}
           outlines={countryGeo}
-          hovers={hasData ? municipalGeo : undefined}
+          hovers={hasData ? filteredMunicpalGeo : undefined}
           boundingBox={boundingbox || countryGeo}
           renderFeature={renderFeature}
           renderHover={renderHover}
