@@ -1,3 +1,4 @@
+import { css } from '@styled-system/css';
 import { ArrowIconLeft } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ContentBlock } from '~/components/cms/content-block';
@@ -8,7 +9,6 @@ import { ContentImage } from './cms/content-image';
 import { RichContent } from './cms/rich-content';
 import { LinkWithIcon } from './link-with-icon';
 import { PublicationDate } from './publication-date';
-
 interface ArticleDetailProps {
   article: Article;
 }
@@ -48,7 +48,18 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       </ContentBlock>
 
       {!!article.content?.length && (
-        <Box fontSize="1.125rem">
+        <Box
+          fontSize="1.125rem"
+          // Since you can't serializer unordered lists we have to position them here in the container
+          css={css({
+            ul: {
+              mx: 'auto',
+              maxWidth: 'contentWidth',
+              pr: 4,
+              pl: 5,
+            },
+          })}
+        >
           <RichContent blocks={article.content} contentWrapper={ContentBlock} />
         </Box>
       )}

@@ -35,7 +35,6 @@ export function RichContent({
           PortableText.defaultSerializers.types?.block,
           'PortableText needs to provide a serializer for block content'
         );
-        console.log(props.node.style);
         return (
           <ContentWrapper>
             {PortableText.defaultSerializers.types.block(props)}
