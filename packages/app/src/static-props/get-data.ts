@@ -33,7 +33,7 @@ import { cleanText } from '~/locale';
 import {
   getSituationsSidebarValue,
   SituationsSidebarValue,
-} from './situations/get-situations.sidebar-value';
+} from './situations/get-situations-sidebar-value';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import {
   getVariantSidebarValue,

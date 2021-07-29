@@ -22,7 +22,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { SituationsSidebarValue } from '~/static-props/situations/get-situations.sidebar-value';
+import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/type';
 import { SituationIcon } from '../situations/components/situation-icon';

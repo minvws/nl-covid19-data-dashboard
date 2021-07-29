@@ -27,7 +27,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { useIntl } from '~/intl';
-import { SituationsSidebarValue } from '~/static-props/situations/get-situations.sidebar-value';
+import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { VariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
