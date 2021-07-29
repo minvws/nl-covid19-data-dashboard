@@ -109,7 +109,7 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
 const StyledPortableText = styled(PortableText)(
   css({
     ...spacingStyle(3),
-    p: preset.typography.body1,
+    p: preset.typography.body2,
     h1: preset.typography.h1,
     h2: preset.typography.h2,
     h3: preset.typography.h3,

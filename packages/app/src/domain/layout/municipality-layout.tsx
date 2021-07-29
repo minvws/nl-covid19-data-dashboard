@@ -6,7 +6,6 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import VirusIcon from '~/assets/virus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { Category } from '~/components/aside/category';
 import {
   CategoryMenu,
   Menu,
@@ -125,11 +124,12 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                 backgroundColor="white"
                 maxWidth={{ _: '38rem', md: undefined }}
                 mx="auto"
+                spacing={4}
               >
-                <Box>
-                  <Category>{municipalityName}</Category>
+                <Box px={3} spacing={3}>
+                  <Text variant="h3">{municipalityName}</Text>
                   {vr && (
-                    <Text pl={3}>
+                    <Text>
                       {siteText.common.veiligheidsregio_label}{' '}
                       <Link href={reverseRouter.vr.index(vr.code)}>
                         <a>{vr.name}</a>
@@ -137,7 +137,8 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
                     </Text>
                   )}
                 </Box>
-                <Menu>
+
+                <Menu spacing={4}>
                   {sidebarData && (
                     <>
                       <CategoryMenu

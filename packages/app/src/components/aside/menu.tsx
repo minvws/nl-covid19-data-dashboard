@@ -7,17 +7,24 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
+import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { Box } from '../base';
-import { Category } from './category';
-import { Title } from './title';
+import { Text } from '../typography';
+import { AsideTitle } from './title';
 
 type Url = UrlObject | string;
 
-export function Menu({ children }: { children: ReactNode }) {
+export function Menu({
+  children,
+  spacing,
+}: {
+  children: ReactNode;
+  spacing?: SpaceValue;
+}) {
   return (
-    <Box as="ul" m={0} p={0} css={css({ listStyle: 'none' })}>
+    <Box as="ul" css={css({ listStyle: 'none' })} spacing={spacing}>
       {children}
     </Box>
   );
@@ -26,15 +33,17 @@ export function Menu({ children }: { children: ReactNode }) {
 export function CategoryMenu({
   title,
   children,
-  isFirstItem,
 }: {
   children: ReactNode;
-  isFirstItem?: boolean;
   title?: string;
 }) {
   return (
-    <Box as="li" spacing={3} pt={isFirstItem ? 4 : '3rem'}>
-      {title && <Category>{title}</Category>}
+    <Box as="li" spacing={3}>
+      {title && (
+        <Box px={3} pt={3}>
+          <Text variant="h3">{title}</Text>
+        </Box>
+      )}
       <Menu>{children}</Menu>
     </Box>
   );
@@ -62,11 +71,10 @@ export function MetricMenuItemLink({
 
   const content = (
     <>
-      <Title
+      <AsideTitle
         icon={icon}
         title={title}
         subtitle={subtitle}
-        m={0}
         showArrow={showArrow}
       />
       {children && (
@@ -114,18 +122,12 @@ export function MetricMenuButtonLink({
   const router = useRouter();
   const isActive = isActivePath(router, href);
 
-  const content = (
-    <>
-      <Title title={title} subtitle={subtitle} />
-      {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
-    </>
-  );
-
   return (
     <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
       <Link href={href} passHref>
         <StyledLink isButton={true} isActive={isActive}>
-          {content}
+          <AsideTitle title={title} subtitle={subtitle} />
+          {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
         </StyledLink>
       </Link>
     </MetricMenuButton>
@@ -205,7 +207,6 @@ const StyledLink = styled.a<{ isActive: boolean; isButton?: boolean }>((x) =>
     display: 'block',
     borderRight: '5px solid transparent',
     color: 'black',
-    textDecoration: 'none',
     position: 'relative',
 
     bg:

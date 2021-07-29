@@ -5,7 +5,7 @@ import { first } from 'lodash';
 import { last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useCurrentDate } from '~/utils/current-date-context';
@@ -369,8 +369,12 @@ export function TimeSeriesChart<
   return (
     <>
       {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+        <>
+          <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
+          <Spacer mb={2} />
+        </>
       )}
+
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
