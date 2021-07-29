@@ -25,7 +25,6 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -53,11 +52,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataRivm = data.deceased_rivm;
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
   const content = props.content;
-
-  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
-    dataRivm.values,
-    4
-  );
 
   const { siteText } = useIntl();
 
@@ -161,21 +155,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataRivmUnderReportedDateStart,
-                      end: Infinity,
-                      label:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'covid_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>

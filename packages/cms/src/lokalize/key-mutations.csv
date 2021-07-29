@@ -45,3 +45,6 @@ timestamp,action,key,document_id,move_to
 2021-07-26T08:27:22.377Z,delete,verpleeghuis_positief_geteste_personen.reference.text,jF33EuwumlGuwav2FD3d0m,__
 2021-07-26T08:27:22.378Z,delete,ziekenhuisopnames_per_dag.reference.text,jF33EuwumlGuwav2FD3YMG,__
 2021-07-26T13:37:30.394Z,add,infected_per_age_group.value_annotation,rUb4wDOun6GAE8KHrwRmRN,__
+2021-07-28T11:31:33.867Z,delete,gemeente_sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD4HNU,__
+2021-07-28T11:31:33.868Z,delete,sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD41Fk,__
+2021-07-28T11:31:33.869Z,delete,veiligheidsregio_sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD41u0,__

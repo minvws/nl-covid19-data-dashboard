@@ -1,18 +1,12 @@
-import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
 import fs from 'fs';
 import globby from 'globby';
 import path from 'path';
 import prettier from 'prettier';
-import { features } from '../../../app/src/config/features';
 import { gmData } from '../../../app/src/data/gm';
 import { vrData } from '../../../app/src/data/vr';
 import { logError } from '../utils';
 require('dotenv').config({ path: '../app/.env.local' });
-
-const disabledRoutes = features
-  .filter((x) => x.isEnabled === false)
-  .map((x) => x.route);
 
 const vrCodes = vrData.map((x) => x.code);
 const gmCodes = gmData.map((x) => x.gemcode);
@@ -26,14 +20,9 @@ const publicOutputDirectory = path.resolve(
 );
 
 async function main() {
-  assert(
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
-  );
-
   const config = {
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
+    projectId: '5mog5ask',
     useCdn: process.env.NODE_ENV === 'production',
     apiVersion: '2021-03-25',
   };
@@ -67,15 +56,13 @@ async function main() {
     '!../app/src/pages/api',
   ]);
 
-  const pathsFromPages = pages
-    .map((x) =>
-      x
-        .replace('../app/src/pages', '')
-        .replace('.tsx', '')
-        .replace('/index.tsx', '')
-        .replace('/index', '')
-    )
-    .filter((x) => !disabledRoutes.includes(x));
+  const pathsFromPages = pages.map((x) =>
+    x
+      .replace('../app/src/pages', '')
+      .replace('.tsx', '')
+      .replace('/index.tsx', '')
+      .replace('/index', '')
+  );
 
   const priorities = [
     { path: 'landelijk', value: 0.8 },
