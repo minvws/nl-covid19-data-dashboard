@@ -133,7 +133,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" pb={4}>
+      <Box bg="white" py={4}>
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -407,7 +407,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                 </>
-                <Box>
+                <Box spacing={3}>
                   <Metadata
                     date={
                       choropleth.vr.escalation_levels[0].date_of_insertion_unix
@@ -418,10 +418,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
-                  <Box
-                    mb={4}
-                    css={css({ '> div': { justifyContent: 'flex-start' } })}
-                  >
+
+                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
                     <ChartRegionControls
                       value={selectedMap}
                       onChange={setSelectedMap}
@@ -431,7 +429,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               </ChoroplethTwoColumnLayout>
             </TopicalTile>
 
-            <Box pb={4}>
+            <TopicalTile>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
                 description={
@@ -440,7 +438,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
               <ArticleList articleSummaries={content.articles} />
-            </Box>
+            </TopicalTile>
           </TileList>
         </MaxWidth>
       </Box>

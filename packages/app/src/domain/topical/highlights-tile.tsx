@@ -31,7 +31,7 @@ export function HighlightsTile(props: HighlightsTileProps) {
       display="flex"
       flexDirection={{ _: 'column', xs: 'row' }}
       flexWrap="wrap"
-      spacing={{ _: 4, xs: 0 }}
+      spacing={4}
     >
       {showWeeklyHighlight && (
         <ArticleBox>

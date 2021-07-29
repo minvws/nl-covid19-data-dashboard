@@ -44,7 +44,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
             flex={{ _: '0.95 1 0%', lg: '1 1 0%' }}
             pl={{ _: 4, lg: 5 }}
             maxWidth={500}
-            spacing={3}
+            spacing={4}
           >
             <ErrorBoundary>
               {childrenArray[1]}

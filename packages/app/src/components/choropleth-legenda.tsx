@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { Box } from './base';
-import { Heading } from './typography';
+import { Text } from './typography';
 
 interface ChoroplethLegendaProps {
   title: string;
@@ -23,8 +23,8 @@ export function ChoroplethLegenda({
     useResizeObserver<HTMLSpanElement>();
 
   return (
-    <Box width="100%" pr={`${endLabelWidth / 2}px`}>
-      {title && <Heading level={4}>{title}</Heading>}
+    <Box width="100%" pr={`${endLabelWidth / 2}px`} spacing={2}>
+      {title && <Text variant="subtitle1">{title}</Text>}
       <List hasValueAnnotation={valueAnnotation ? true : false}>
         {thresholds.map(({ color, threshold, label, endLabel }, index) => {
           const isFirst = index === 0;

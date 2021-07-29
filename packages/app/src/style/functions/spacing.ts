@@ -10,7 +10,7 @@ export interface SpacingProps {
 }
 
 export const spacing: styleFn = (x: SpacingProps) => {
-  if (isDefined(x.spacing)) {
+  if (isDefined(x.spacing) || isDefined(x.spacingHorizontal)) {
     return css(spacingStyle(x.spacing, x.spacingHorizontal));
   }
 };
