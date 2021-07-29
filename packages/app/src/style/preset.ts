@@ -1,3 +1,4 @@
+import { spacingStyle } from './functions/spacing';
 import { asResponsiveArray } from './utils';
 
 export type Preset = typeof preset;
@@ -68,6 +69,21 @@ export const preset = {
     },
   },
 } as const;
+
+export const nestedHtml = {
+  ...spacingStyle(3),
+  p: preset.typography.body2,
+  h1: preset.typography.h1,
+  h2: preset.typography.h2,
+  h3: preset.typography.h3,
+  h4: preset.typography.h4,
+  h5: preset.typography.h5,
+  strong: { fontWeight: 'bold' },
+  em: { fontStyle: 'italic' },
+  ul: { ml: 4 },
+  ol: { ml: 4 },
+  a: { textDecoration: 'underline' },
+};
 
 if (process.env.NODE_ENV !== 'production') {
   /**

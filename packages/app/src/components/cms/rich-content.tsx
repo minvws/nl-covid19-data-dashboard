@@ -1,6 +1,10 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
+import styled from 'styled-components';
+import { ExternalLink } from '~/components/external-link';
 import { getFileSrc, PortableText } from '~/lib/sanity';
+import { nestedHtml } from '~/style/preset';
 import {
   CollapsibleList,
   ImageBlock,
@@ -9,17 +13,12 @@ import {
   RichContentImageBlock,
 } from '~/types/cms';
 import { assert } from '~/utils/assert';
+import { isAbsoluteUrl } from '~/utils/is-absolute-url';
+import { Link } from '~/utils/link';
 import { Box } from '../base';
 import { CollapsibleSection } from '../collapsible';
 import { ErrorBoundary } from '../error-boundary';
 import { ContentImage } from './content-image';
-import { ExternalLink } from '~/components/external-link';
-import { Link } from '~/utils/link';
-import { isAbsoluteUrl } from '~/utils/is-absolute-url';
-import styled from 'styled-components';
-import { preset } from '~/style/preset';
-import css from '@styled-system/css';
-import { spacingStyle } from '~/style/functions/spacing';
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
@@ -106,19 +105,4 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   );
 }
 
-const StyledPortableText = styled(PortableText)(
-  css({
-    ...spacingStyle(3),
-    p: preset.typography.body2,
-    h1: preset.typography.h1,
-    h2: preset.typography.h2,
-    h3: preset.typography.h3,
-    h4: preset.typography.h4,
-    h5: preset.typography.h5,
-    strong: { fontWeight: 'bold' },
-    em: { fontStyle: 'italic' },
-    ul: { ml: 4 },
-    ol: { ml: 4 },
-    a: { textDecoration: 'underline' },
-  })
-);
+const StyledPortableText = styled(PortableText)(css(nestedHtml));

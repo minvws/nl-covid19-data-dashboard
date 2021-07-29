@@ -54,9 +54,9 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.isNonInteractive}
               >
-                <b css={css({ whiteSpace: 'nowrap' })}>
+                <span css={css({ whiteSpace: 'nowrap' })}>
                   {formatSeriesValue(value, x, options.isPercentage)}
-                </b>
+                </span>
               </TooltipListItem>
             );
 
@@ -68,13 +68,11 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.isNonInteractive}
               >
-                <b>
-                  {formatSeriesValue(
-                    value,
-                    x,
-                    x.isPercentage ?? options.isPercentage
-                  )}
-                </b>
+                {formatSeriesValue(
+                  value,
+                  x,
+                  x.isPercentage ?? options.isPercentage
+                )}
               </TooltipListItem>
             );
 
@@ -93,7 +91,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.isNonInteractive}
               >
-                <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
+                {formatSeriesValue(value, x, options.isPercentage)}
               </TooltipListItem>
             );
 
@@ -106,7 +104,7 @@ export function TooltipSeriesListItems<T extends TimestampedValue>({
                 displayTooltipValueOnly={displayTooltipValueOnly}
                 isVisuallyHidden={x.isNonInteractive}
               >
-                <b>{formatSeriesValue(value, x, options.isPercentage)}</b>
+                {formatSeriesValue(value, x, options.isPercentage)}
               </TooltipListItem>
             );
         }
@@ -179,6 +177,7 @@ const TooltipEntryValue = styled.span<{
   css({
     textAlign: x.isCentered ? 'center' : 'right',
     width: x.isCentered ? '100%' : undefined,
+    fontWeight: 'bold',
   })
 );
 

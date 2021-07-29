@@ -3,7 +3,7 @@ import { ReactNode, useRef } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import useResizeObserver from 'use-resize-observer';
-import { Heading } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useViewport } from '~/utils/use-viewport';
@@ -179,16 +179,13 @@ function TooltipHeading({ title }: { title: string }) {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
       })}
     >
-      <Heading
-        level={3}
-        m={0}
-        fontSize={1}
-        css={css({ overflow: 'hidden', textOverflow: 'ellipsis' })}
-      >
+      <Text variant="label1" fontWeight="bold">
         {title}
-      </Heading>
+      </Text>
     </div>
   );
 }

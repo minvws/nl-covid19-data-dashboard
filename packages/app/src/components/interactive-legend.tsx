@@ -34,7 +34,9 @@ export function InteractiveLegend({
 
   return (
     <Box>
-      <Text fontWeight="bold">{helpText}</Text>
+      <Text variant="label1" fontWeight="bold">
+        {helpText}
+      </Text>
       <Legend>
         <List>
           {selectOptions.map((item) => {

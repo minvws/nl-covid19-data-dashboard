@@ -217,7 +217,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineAdministrationsKpiSection data={data} />
 
-          <Spacer mb={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={text.bereidheid_section.title}
@@ -325,7 +325,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <Spacer mb={3} />
+          <Spacer pb={4} />
 
           <PageInformationBlock
             title={text.stock_and_delivery_section.title}
