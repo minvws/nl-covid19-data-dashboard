@@ -61,7 +61,7 @@ noting:
 - Event props and handlers follow a pattern of `onEventName` vs
   `handleEventName` where the `on` part is used for the component props API and
   `handle` is for the actual function definition. This makes it easy to follow
-  then you want to internally handle and event and at the same time pass it on
+  when you want to internally handle an event and at the same time pass it on
   to a handler on the props.
 - We prefer to use named function declarations over function expressions, except
   for inline lambda functions of course. This means `function doSomething(){}`
