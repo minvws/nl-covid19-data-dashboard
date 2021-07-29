@@ -69,7 +69,7 @@ export const Timeline = memo(function Timeline({
       onMouseLeave={handleHover}
     >
       <Box pl={padding.left}>
-        <Text fontSize={1} fontWeight="bold">
+        <Text variant="label1" fontWeight="bold">
           {intl.siteText.charts.timeline.title}
         </Text>
       </Box>

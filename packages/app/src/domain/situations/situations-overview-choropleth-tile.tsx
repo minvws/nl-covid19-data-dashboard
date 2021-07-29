@@ -138,18 +138,19 @@ function ChoroplethTooltip({
         noDataFillColor={noDataFillColor}
       >
         {regionName + ': '}
-        <InlineText
-          ml={3}
+        <Box
+          as="span"
           display="inline-block"
+          fontWeight="bold"
           textAlign="right"
-          fontWeight="heavy"
+          px={1}
         >
           {typeof value === 'number'
             ? isPercentage
               ? intl.formatPercentage(value) + '%'
               : value
             : '–'}
-        </InlineText>
+        </Box>
       </TooltipSubject>
     </Box>
   );

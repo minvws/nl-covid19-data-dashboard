@@ -10,7 +10,7 @@ import { Heading } from './typography';
 
 type ChartTileProps = {
   title: string;
-  metadata: MetadataProps;
+  metadata?: MetadataProps;
   description?: string;
   timeframeInitialValue?: TimeframeOption;
 } & (
@@ -49,7 +49,7 @@ export function ChartTile({
         )}
       </ChartTileHeader>
 
-      <Spacer mb={3} />
+      <Spacer mb={4} />
 
       <ErrorBoundary>
         {timeframeOptions

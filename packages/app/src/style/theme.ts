@@ -100,6 +100,8 @@ const multiseries = {
   magenta_dark: '#9515AA',
 };
 
+export type Color = keyof typeof colors | `data.${keyof typeof colors['data']}`;
+
 export const colors = {
   white: '#fff',
   body: '#000000',

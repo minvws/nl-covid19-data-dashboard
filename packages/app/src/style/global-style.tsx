@@ -71,7 +71,7 @@ a {
   text-decoration: none;
 }
 
-a:focus {
+*:focus {
   outline: 2px dotted currentColor;
   outline-offset: 0;
 }

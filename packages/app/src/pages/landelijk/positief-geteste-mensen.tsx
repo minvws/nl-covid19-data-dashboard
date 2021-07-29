@@ -318,7 +318,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <Spacer mb={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={ggdText.titel}

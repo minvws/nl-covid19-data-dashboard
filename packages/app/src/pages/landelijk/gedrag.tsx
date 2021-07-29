@@ -109,6 +109,7 @@ export default function BehaviorPage(
               <Heading level={3}>{nl_gedrag.onderzoek_uitleg.titel}</Heading>
               <Text>{nl_gedrag.onderzoek_uitleg.toelichting}</Text>
             </Tile>
+
             <Tile>
               <Heading level={3}>
                 {nl_gedrag.kpi_recente_inzichten.titel}
@@ -165,6 +166,7 @@ export default function BehaviorPage(
           />
 
           <span ref={scrollToRef} />
+
           <BehaviorLineChartTile
             values={data.behavior.values}
             metadata={{
