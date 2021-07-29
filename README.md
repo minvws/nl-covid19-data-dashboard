@@ -64,6 +64,9 @@ noting:
   internally by the component. In the case of logic it can also be a file
   `logic.ts` if there is not a lot of business logic. The components folder
   typically uses a barrel file.
+- When a component uses its own folder it typically has a barrel file exporting only
+  the public interface. The main component should preferably not live in an
+  index.tsx file but its own named file that is exported by `index.ts`
 - Booleans are prefixed with is/has/should etc. However booleans that are part
   of component props interfaces are usually not prefixed, to keep them aligned
   with standard html element syntax.
