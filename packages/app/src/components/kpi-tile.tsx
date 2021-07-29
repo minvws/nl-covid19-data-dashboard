@@ -1,8 +1,8 @@
+import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
 import { Box, Spacer } from './base';
 import { Metadata, MetadataProps } from './metadata';
 import { Heading } from './typography';
-import { Markdown } from '~/components/markdown';
 interface KpiTileProps {
   title: string;
   description?: string;

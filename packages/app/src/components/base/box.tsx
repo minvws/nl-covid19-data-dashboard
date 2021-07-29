@@ -1,4 +1,4 @@
-// import css from '@styled-system/css';
+import css from '@styled-system/css';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import {
@@ -23,7 +23,7 @@ import {
 } from 'styled-system';
 import { spacing, SpacingProps } from '~/style/functions/spacing';
 import { transform, TransformProps } from '~/style/functions/transform';
-// import { Preset, preset } from '~/style/preset';
+import { Preset, preset } from '~/style/preset';
 import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
 export type BoxProps = SpaceProps &
@@ -36,8 +36,7 @@ export type BoxProps = SpaceProps &
   BordersProps &
   ShadowProps &
   GridProps &
-  TransformProps;
-// & { textVariant?: keyof Preset['typography'] };
+  TransformProps & { textVariant?: keyof Preset['typography'] };
 
 /**
  * A fully generic styling component used for layouts throughout the app. For
@@ -49,7 +48,7 @@ export const Box = styled.div.withConfig({
   shouldForwardProp: styledShouldForwardProp,
 })<BoxProps>(
   { boxSizing: 'border-box', minWidth: 0 },
-  // (x) => css(preset.typography[x.textVariant ?? 'body1']),
+  (x) => css(preset.typography[x.textVariant ?? 'body2']),
   space,
   spacing,
   layout,

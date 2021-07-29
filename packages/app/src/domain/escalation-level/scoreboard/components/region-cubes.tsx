@@ -39,7 +39,7 @@ export function RegionCubes({
           ))}
         </Container>
       )}
-      <InlineText color="black" fontSize={2}>
+      <InlineText>
         {count > 0 ? count : undefined} {regionLabel}
       </InlineText>
     </Box>

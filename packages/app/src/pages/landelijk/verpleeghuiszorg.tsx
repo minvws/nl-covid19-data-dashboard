@@ -166,7 +166,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer mb={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             id="besmette-locaties"
@@ -273,7 +273,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer mb={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             id="sterfte"

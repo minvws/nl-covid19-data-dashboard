@@ -1,6 +1,5 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { spacingStyle } from '~/style/functions/spacing';
 import { asResponsiveArray } from '~/style/utils';
 
 interface TileProps {
@@ -33,6 +32,5 @@ const StyledTile = styled.article<{
     borderRadius: 1,
     boxShadow: 'tile',
     height: x.height,
-    ...spacingStyle(3),
   })
 );

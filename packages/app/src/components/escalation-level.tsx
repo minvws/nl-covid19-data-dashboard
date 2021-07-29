@@ -60,8 +60,13 @@ export function EscalationLevelLabel({
     : 'inherit';
 
   return (
-    <Text as="span" fontWeight="bold" fontSize={fontSize} color={color}>
-      {siteText.escalatie_niveau.types[getEscalationLevelIndexKey(level)].titel}
-    </Text>
+    <Box color={color} fontSize={fontSize}>
+      <Text as="span" fontWeight="bold">
+        {
+          siteText.escalatie_niveau.types[getEscalationLevelIndexKey(level)]
+            .titel
+        }
+      </Text>
+    </Box>
   );
 }
