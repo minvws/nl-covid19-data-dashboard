@@ -48,14 +48,11 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       </ContentBlock>
 
       {!!article.content?.length && (
-        <ContentBlock>
-          <Box fontSize="1.125rem">
-            <RichContent
-              blocks={article.content}
-              contentWrapper={ContentBlock}
-            />
-          </Box>
-        </ContentBlock>
+        // <ContentBlock>
+        <Box fontSize="1.125rem">
+          <RichContent blocks={article.content} contentWrapper={ContentBlock} />
+        </Box>
+        // </ContentBlock>
       )}
     </Box>
   );
