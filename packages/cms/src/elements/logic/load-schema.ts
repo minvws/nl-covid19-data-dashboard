@@ -32,7 +32,7 @@ function pickMetricNames([, value]: [
   { type: string } | { $ref: string }
 ]) {
   if ('type' in value) {
-    return value.type !== 'string';
+    return false;
   } else {
     return !value.$ref.startsWith('__');
   }
