@@ -227,7 +227,6 @@ export function NationalLayout(props: NationalLayoutProps) {
                   icon={<ReproIcon />}
                   title={siteText.reproductiegetal.titel_sidebar}
                 >
-                  {/* <ReproductionSidebarMetric /> */}
                   <SidebarMetric
                     data={data}
                     scope="nl"
