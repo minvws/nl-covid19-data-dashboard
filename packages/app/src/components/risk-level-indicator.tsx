@@ -5,7 +5,7 @@ import { Box } from '~/components/base';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { assert } from '~/utils/assert';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
