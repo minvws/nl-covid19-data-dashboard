@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import {
   EscalationLevelInfoLabel,
-  EscalationLevelLabel
+  EscalationLevelLabel,
 } from '~/components/escalation-level';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';

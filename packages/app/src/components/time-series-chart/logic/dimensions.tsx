@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import useResizeObserver from 'use-resize-observer';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds, Padding } from './common';
 
 /**
@@ -44,11 +44,8 @@ export function useDimensions({
 }: DimensionProps) {
   const isMounted = useIsMounted();
 
-  const {
-    width: measuredLeftPadding = 0,
-    ref: leftPaddingRef,
-    // @ts-expect-error useResizeObserver expects element extending HTMLElement
-  } = useResizeObserver<SVGElement>();
+  const [leftPaddingRef, { width: measuredLeftPadding = 0 }] =
+    useResizeObserver<SVGGElement>();
 
   return useMemo(() => {
     const calculatedPaddingLeft =

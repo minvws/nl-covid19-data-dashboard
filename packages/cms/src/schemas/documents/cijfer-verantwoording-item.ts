@@ -1,11 +1,12 @@
+import { Rule } from '~/sanity';
 import {
   localeStringValidation,
   localeValidation,
 } from '../../language/locale-validation';
 
-export const figureExplanationItem = {
-  title: 'Inklapbare titel en inhoud voor cijferverantwoording',
-  name: 'figureExplanationItem',
+export const cijferVerantwoordingItem = {
+  title: 'Cijferverantwoordingen',
+  name: 'cijferVerantwoordingItem',
   type: 'document',
   fields: [
     {
@@ -19,6 +20,13 @@ export const figureExplanationItem = {
       type: 'localeBlock',
       title: 'Inhoud',
       validation: localeValidation((rule) => rule.required()),
+    },
+    {
+      name: 'group',
+      type: 'reference',
+      to: [{ type: 'cijferVerantwoordingGroups' }],
+      title: 'Groep',
+      validation: (Rule: Rule) => Rule.reset().required(),
     },
   ],
   preview: {

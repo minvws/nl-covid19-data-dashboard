@@ -4,9 +4,9 @@ import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { Box } from '../base';
-import { Markdown } from '../markdown';
-import { InlineText } from '../typography';
+import { Box } from './base';
+import { Markdown } from './markdown';
+import { InlineText } from './typography';
 
 export function ErrorBoundary({ children = null }: { children: ReactNode }) {
   return (
@@ -18,8 +18,9 @@ export function ErrorBoundary({ children = null }: { children: ReactNode }) {
 
 function ErrorFallback({ error }: { error: Error }) {
   const { siteText } = useIntl();
-  const [clipboardState, setClipboardState] =
-    useState<'init' | 'copied' | 'error'>('init');
+  const [clipboardState, setClipboardState] = useState<
+    'init' | 'copied' | 'error'
+  >('init');
   const errorReport = formatErrorReport(error);
 
   async function copyErrorReport() {
