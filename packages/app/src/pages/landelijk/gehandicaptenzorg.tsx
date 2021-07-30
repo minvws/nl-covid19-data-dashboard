@@ -43,9 +43,7 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ disability_care }) => ({ disability_care }),
   }),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>(() => {
+  createGetContent<ArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('disabilityCarePage', locale);
   })

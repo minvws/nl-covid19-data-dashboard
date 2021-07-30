@@ -7,7 +7,6 @@ import {
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
@@ -47,10 +46,9 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ sewer }) => ({ sewer }),
     gm: ({ sewer }) => ({ sewer }),
   }),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>(() => {
+  createGetContent<ArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    console.log('query', createPageArticlesQuery('sewerPage', locale));
     return createPageArticlesQuery('sewerPage', locale);
   })
 );
@@ -71,6 +69,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  console.log(content.articles);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
