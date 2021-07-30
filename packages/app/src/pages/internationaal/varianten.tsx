@@ -10,7 +10,8 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
-import { countryCodes } from '~/domain/international/select-countries';
+import { countryCodes } from '~/domain/international/multi-select-countries';
+import { SelectCountry } from '~/domain/international/select-country';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
@@ -217,6 +218,12 @@ export default function VariantenPage(
           >
             <Box alignSelf="flex-start" mt={1} mb={2}>
               <Select
+                options={countryOptions}
+                onChange={onChange}
+                value={selectedCountryCode}
+              />
+
+              <SelectCountry
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}

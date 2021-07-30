@@ -42,7 +42,7 @@ interface SelectCountriesProps {
   defaultSelectedCodes: CountryCode[];
 }
 
-export function SelectCountries({
+export function MultiSelectCountries({
   countryOptions,
   children,
   limit,

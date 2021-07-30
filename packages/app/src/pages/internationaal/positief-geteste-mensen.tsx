@@ -19,8 +19,8 @@ import {
   CountryCode,
   countryCodes,
   CountryOption,
-  SelectCountries,
-} from '~/domain/international/select-countries';
+  MultiSelectCountries,
+} from '~/domain/international/multi-select-countries';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -197,7 +197,7 @@ export default function PositiefGetesteMensenPage(
             description={text.time_graph.description}
           >
             <>
-              <SelectCountries
+              <MultiSelectCountries
                 countryOptions={countryOptions}
                 limit={10}
                 alwaysSelectedCodes={['nld']}
@@ -221,7 +221,7 @@ export default function PositiefGetesteMensenPage(
                     />
                   );
                 }}
-              </SelectCountries>
+              </MultiSelectCountries>
             </>
           </ChartTile>
 
