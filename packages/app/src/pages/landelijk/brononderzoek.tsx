@@ -1,4 +1,3 @@
-import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';

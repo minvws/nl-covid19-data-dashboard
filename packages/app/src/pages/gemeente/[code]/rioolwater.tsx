@@ -36,7 +36,7 @@ export const getStaticProps = createGetStaticProps(
     'difference',
     'code'
   ),
-  createGetContent<ArticlesQueryResult>(() => {
+  createGetContent<PageArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })

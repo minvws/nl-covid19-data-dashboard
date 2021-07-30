@@ -25,7 +25,10 @@ import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -46,7 +49,7 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ sewer }) => ({ sewer }),
     gm: ({ sewer }) => ({ sewer }),
   }),
-  createGetContent<ArticlesQueryResult>(() => {
+  createGetContent<PageArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('sewerPage', locale);
   })
