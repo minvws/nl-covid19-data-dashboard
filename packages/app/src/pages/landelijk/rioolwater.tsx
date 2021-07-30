@@ -48,7 +48,6 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetContent<ArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    console.log('query', createPageArticlesQuery('sewerPage', locale));
     return createPageArticlesQuery('sewerPage', locale);
   })
 );
@@ -69,8 +68,6 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  console.log(content.articles);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
