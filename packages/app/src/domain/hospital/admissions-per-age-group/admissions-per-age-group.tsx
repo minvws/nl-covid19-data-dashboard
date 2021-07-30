@@ -61,12 +61,6 @@ export function AdmissionsPerAgeGroup({
       };
     });
 
-  const underReportedLegendItem: LegendItem = {
-    shape: 'square',
-    color: colors.data.underReported,
-    label: text.line_chart_legend_inaccurate_label,
-  };
-
   /**
    * Chart:
    * - when nothing selected: all items
