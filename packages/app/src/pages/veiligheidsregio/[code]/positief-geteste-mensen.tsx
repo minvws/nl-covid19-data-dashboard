@@ -27,14 +27,14 @@ import { VrLayout } from '~/domain/layout/vr-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
 import {
-  ArticlesQueryResult,
-  createPageArticlesQuery,
-} from '~/queries/create-page-articles-query';
-import {
   createElementsQuery,
   ElementsQueryResult,
   getTimelineEvents,
-} from '~/queries/create-page-elements-query';
+} from '~/queries/create-elements-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -58,8 +58,8 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    main: ArticlesQueryResult;
-    ggd: ArticlesQueryResult;
+    main: PageArticlesQueryResult;
+    ggd: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
