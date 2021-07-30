@@ -6,6 +6,19 @@ import prettier from 'prettier';
 import * as topojson from 'topojson-client';
 import { isDefined } from 'ts-is-present';
 
+/**
+ * This script loads all of the safety region and municipal geojson.
+ * It then loops through all of the safety regions and calculates a
+ * bounding box polygon for those.
+ *
+ * Then for each bounding box all the municipals that fall within
+ * that box are associated with the specified safety region code
+ * in a lookup object. (vrcode->gmcodes[])
+ *
+ * The result of which is serialized as Typescript and saved to
+ * the application source base under src/components/choropleth/region-bounding-box-municipalities.ts.
+ */
+
 const topology = JSON.parse(
   fs.readFileSync(
     path.join(
@@ -36,6 +49,11 @@ const vrCodes = vrGeo.features.map((x) => x.properties.vrcode).sort();
     }
 
     let bbox = turf.bbox(region.geometry);
+    /**
+     * Enlarge the bounding slightly because the map is rendered in a larger boundingbox
+     * than just the safetyregion. (some surrounding municipals are also visible).
+     * (The 0.15 value was determined by trying out different values and comparing the results)
+     */
     bbox[0] = bbox[0] - 0.15;
     bbox[1] = bbox[1] - 0.15;
     bbox[2] = bbox[2] + 0.15;

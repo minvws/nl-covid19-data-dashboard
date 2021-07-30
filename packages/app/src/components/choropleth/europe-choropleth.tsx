@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { geoConicConformal } from 'd3-geo';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
@@ -95,7 +95,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
 
   const renderFeature = useCallback(
     (
-      feature: Feature<MultiPolygon, EuropeGeoProperties>,
+      feature: Feature<MultiPolygon | Polygon, EuropeGeoProperties>,
       path: string,
       index: number
     ) => {
@@ -125,7 +125,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
 
   const renderHover = useCallback(
     (
-      feature: Feature<MultiPolygon, EuropeGeoProperties>,
+      feature: Feature<MultiPolygon | Polygon, EuropeGeoProperties>,
       path: string,
       index: number
     ) => {

@@ -4,7 +4,7 @@ import {
   GmProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -116,7 +116,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
 
   const renderFeature = useCallback(
     (
-      feature: Feature<MultiPolygon, GmProperties>,
+      feature: Feature<MultiPolygon | Polygon, GmProperties>,
       path: string,
       _index: number
     ) => {
@@ -156,7 +156,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     );
 
   const renderHover = useCallback(
-    (feature: Feature<MultiPolygon, GmProperties>, path: string) => {
+    (feature: Feature<MultiPolygon | Polygon, GmProperties>, path: string) => {
       const { gemcode, gemnaam } = feature.properties;
       const isSelected = gemcode === selectedCode && highlightSelection;
       const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
