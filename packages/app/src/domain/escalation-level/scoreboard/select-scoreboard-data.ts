@@ -3,7 +3,7 @@ import { isDefined } from 'ts-is-present';
 import { vrData } from '~/data/vr';
 import { EscalationLevel } from '~/domain/restrictions/type';
 import { loadAndSortVrData } from '~/static-props/get-data';
-import { ScoreboardRowData } from '../logic';
+import { ScoreboardRowData } from './types';
 
 const escalationLevels: EscalationLevel[] = [1, 2, 3, 4, null];
 

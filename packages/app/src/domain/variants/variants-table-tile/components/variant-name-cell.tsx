@@ -1,8 +1,8 @@
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { Cell } from '.';
-import { TableText } from '..';
-import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
+import { useVariantNameAndDescription } from '../logic';
+import { TableText } from '../types';
 
 type VariantNameCellProps = {
   variant: string;
