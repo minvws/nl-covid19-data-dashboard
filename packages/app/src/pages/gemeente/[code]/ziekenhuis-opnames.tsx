@@ -20,8 +20,8 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -50,13 +50,13 @@ export const getStaticProps = createGetStaticProps(
     }),
   }),
   createGetContent<{
-    fix_this: ArticlesQueryResult;
+    page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
     return `{
-      "fix_this": ${createPageArticlesQuery('hospitalPage', locale)},
+      "page": ${createPageArticlesQuery('hospitalPage', locale)},
       "elements": ${createElementsQuery('gm', ['hospital_nice'], locale)}
     }`;
   })
@@ -117,7 +117,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.fix_this.articles}
+            articles={content.page.articles}
           />
 
           <TwoKpiSection>

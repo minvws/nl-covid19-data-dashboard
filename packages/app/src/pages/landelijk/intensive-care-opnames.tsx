@@ -20,8 +20,8 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -40,13 +40,13 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
-    fix_this: ArticlesQueryResult;
+    page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
 
     return `{
-      "fix_this": ${createPageArticlesQuery('intensiveCarePage', locale)},
+      "page": ${createPageArticlesQuery('intensiveCarePage', locale)},
       "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
     }`;
   })
@@ -90,7 +90,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            articles={content.fix_this.articles}
+            articles={content.page.articles}
           />
 
           <TwoKpiSection>

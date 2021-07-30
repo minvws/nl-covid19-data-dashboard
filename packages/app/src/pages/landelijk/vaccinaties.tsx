@@ -23,8 +23,8 @@ import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
@@ -66,7 +66,7 @@ export const getStaticProps = createGetStaticProps(
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
     page: VaccinationPageQuery;
-    highlight: ArticlesQueryResult;
+    highlight: PageArticlesQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{

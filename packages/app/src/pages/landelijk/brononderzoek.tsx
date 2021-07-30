@@ -9,8 +9,8 @@ import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -32,7 +32,7 @@ export const getStaticProps = withFeatureNotFoundPage(
         situations,
       }),
     }),
-    createGetContent<ArticlesQueryResult>(() => {
+    createGetContent<PageArticlesQueryResult>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return createPageArticlesQuery('situationsPage', locale);
     })

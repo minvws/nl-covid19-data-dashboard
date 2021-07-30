@@ -11,8 +11,8 @@ import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -31,7 +31,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
-  createGetContent<ArticlesQueryResult>(() => {
+  createGetContent<PageArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('deceasedPage', locale);
   })

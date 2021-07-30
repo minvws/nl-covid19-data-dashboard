@@ -17,8 +17,8 @@ import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -65,7 +65,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       page: {
         usefulLinks?: LinkProps[];
       };
-      highlight: ArticlesQueryResult;
+      highlight: PageArticlesQueryResult;
     }>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return `{

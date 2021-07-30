@@ -39,8 +39,8 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -64,8 +64,8 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
-    main: ArticlesQueryResult;
-    ggd: ArticlesQueryResult;
+    main: PageArticlesQueryResult;
+    ggd: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';

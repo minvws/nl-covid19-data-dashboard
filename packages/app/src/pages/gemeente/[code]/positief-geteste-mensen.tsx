@@ -26,8 +26,8 @@ import {
   getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
-  ArticlesQueryResult,
   createPageArticlesQuery,
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
@@ -60,12 +60,12 @@ export const getStaticProps = createGetStaticProps(
     }),
   }),
   createGetContent<{
-    fix_this: ArticlesQueryResult;
+    page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return `{
-      "fix_this": ${createPageArticlesQuery('positiveTestsPage', locale)},
+      "page": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
     }`;
   })
@@ -121,7 +121,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.fix_this.articles}
+            articles={content.page.articles}
           />
 
           <TwoKpiSection>
