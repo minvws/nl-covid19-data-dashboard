@@ -7,7 +7,9 @@ type Size = {
   height: number;
 };
 
-export function useResizeObserver<T extends HTMLElement | SVGSVGElement>() {
+export function useResizeObserver<
+  T extends HTMLElement | SVGElement | SVGSVGElement
+>() {
   const [size, setSize] = useState<Size>();
 
   const [node, setNode] = useState<T | null>(null);
