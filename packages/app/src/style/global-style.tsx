@@ -52,6 +52,7 @@ html {
 }
 
 button {
+  font-size: inherit;
   font-family: ${(x) => x.theme.fonts.body};
 }
 
