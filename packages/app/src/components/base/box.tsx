@@ -48,7 +48,7 @@ export const Box = styled.div.withConfig({
   shouldForwardProp: styledShouldForwardProp,
 })<BoxProps>(
   { boxSizing: 'border-box', minWidth: 0 },
-  (x) => css(preset.typography[x.textVariant ?? 'body2']),
+  (x) => (x.textVariant ? css(preset.typography[x.textVariant]) : undefined),
   space,
   spacing,
   layout,

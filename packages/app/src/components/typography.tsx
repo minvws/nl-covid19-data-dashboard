@@ -35,21 +35,22 @@ function textStyle(x: TextProps & { as?: string }) {
           cursor: 'pointer',
         }
       : undefined),
-    ...preset.typography[x.variant ?? 'body2'],
-    ...(x.fontWeight ? { fontWeight: x.fontWeight } : {}),
-    ...(x.color ? { color: x.color } : {}),
-    ...(x.textTransform ? { textTransform: x.textTransform } : {}),
-    ...(x.textAlign ? { textAlign: x.textAlign } : {}),
-    ...(x.hyphens ? { hyphens: x.hyphens } : {}),
+
+    ...(x.variant ? preset.typography[x.variant] : undefined),
+
+    ...(x.fontWeight ? { fontWeight: x.fontWeight } : undefined),
+    ...(x.color ? { color: x.color } : undefined),
+    ...(x.textTransform ? { textTransform: x.textTransform } : undefined),
+    ...(x.textAlign ? { textAlign: x.textAlign } : undefined),
+    ...(x.hyphens ? { hyphens: x.hyphens } : undefined),
   });
 }
 
-export const Text = styled.p.attrs(getTextAttributes)<TextProps>(textStyle);
+export const Text = styled.p<TextProps>(textStyle);
 
-export const InlineText =
-  styled.span.attrs(getTextAttributes)<TextProps>(textStyle);
+export const InlineText = styled.span<TextProps>(textStyle);
 
-export const Anchor = styled.a.attrs(getTextAttributes)<AnchorProps>(
+export const Anchor = styled.a<AnchorProps>(
   textStyle,
   (x) =>
     x.underline &&
@@ -64,18 +65,7 @@ export const Anchor = styled.a.attrs(getTextAttributes)<AnchorProps>(
     })
 );
 
-export const Heading =
-  styled.h1.attrs(getHeadingAttributes)<HeadingProps>(textStyle);
-
-function getTextAttributes(x: HeadingProps & { as?: string }) {
-  return {
-    variant: x.variant || (`body2` as const),
-  };
-}
-
-function getHeadingAttributes(x: HeadingProps & { as?: string }) {
-  return {
-    as: x.as ?? (`h${x.level}` as const),
-    variant: x.variant ?? (`h${x.level}` as const),
-  };
-}
+export const Heading = styled.h1.attrs((x: HeadingProps & { as?: string }) => ({
+  as: x.as ?? (`h${x.level}` as const),
+  variant: x.variant ?? (`h${x.level}` as const),
+}))<HeadingProps>(textStyle);

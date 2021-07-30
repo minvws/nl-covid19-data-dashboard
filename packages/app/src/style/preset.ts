@@ -39,8 +39,9 @@ export const preset = {
       fontSize: 3,
     },
     body2: {
-      /** inherit */
-      /** for some reason design decided to make `body2` the default */
+      /** body2 is the default body styling */
+      fontSize: 2,
+      lineHeight: 2,
     },
     button1: {
       fontSize: 3,
@@ -72,19 +73,24 @@ export const preset = {
 
 export const nestedHtml = {
   ...spacingStyle(3),
-  p: preset.typography.body2,
+  /** p: inherit p-styles from the container */
+
   h1: preset.typography.h1,
   h2: preset.typography.h2,
   h3: preset.typography.h3,
   h4: preset.typography.h4,
   h5: preset.typography.h5,
+
   strong: { fontWeight: 'bold' },
   em: { fontStyle: 'italic' },
   ul: { ml: 4 },
   ol: { ml: 4 },
   a: { textDecoration: 'underline' },
 
-  'h1, h2, h3, h4, h5': {
+  /**
+   * Apply some special margin styles to "stick" headings to their content.
+   */
+  'h1, h2, h3, h4, h5, h6': {
     mt: 4,
     mb: -2,
   },
