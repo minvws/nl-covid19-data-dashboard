@@ -1,7 +1,7 @@
 import { flatten } from 'lodash';
 import { isDefined } from 'ts-is-present';
 import { vrData } from '~/data/vr';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { loadAndSortVrData } from '~/static-props/get-data';
 import { ScoreboardRowData } from './types';
 
