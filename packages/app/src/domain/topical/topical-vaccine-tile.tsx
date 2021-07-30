@@ -3,7 +3,7 @@ import Vaccinaties from '~/assets/vaccinaties.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { LinkWithIcon } from '~/components/link-with-icon';
+import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { Heading, Text } from '~/components/typography';
 import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
@@ -29,16 +29,14 @@ export function TopicalVaccineTile({ data, areas }: TopicalVaccineProps) {
           <Vaccinaties />
         </Box>
         <Heading level={3} as="h2">
-          <Box as="span" display="block" py={2} pl="3.5rem">
-            <LinkWithIcon
+          <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+            <HeadingLinkWithIcon
               href={reverseRouter.nl.vaccinaties()}
               icon={<ArrowIconRight />}
               iconPlacement="right"
-              fontWeight="bold"
-              headingLink
             >
               {text.title}
-            </LinkWithIcon>
+            </HeadingLinkWithIcon>
           </Box>
         </Heading>
 

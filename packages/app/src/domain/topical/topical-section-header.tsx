@@ -38,8 +38,8 @@ export function TopicalSectionHeader({
   return (
     <Box spacing={3}>
       {showBackLink && (
-        <Box fontSize="1.125rem">
-          <LinkWithIcon href="/" fontWeight="bold" icon={<ArrowIconLeft />}>
+        <Box fontSize="1.125rem" fontWeight="bold">
+          <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
             {text.common_actueel.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
@@ -65,12 +65,11 @@ export function TopicalSectionHeader({
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) ? (
-              <Box ml={{ _: 0, lg: 4 }} mb={'2px'}>
+              <Box ml={{ _: 0, lg: 4 }} mb={'2px'} fontWeight="bold">
                 <LinkWithIcon
                   href={link.href}
                   icon={<ArrowIconRight />}
                   iconPlacement="right"
-                  fontWeight="bold"
                 >
                   {link.text}
                 </LinkWithIcon>

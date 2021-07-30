@@ -8,11 +8,13 @@ export interface TextProps {
   fontWeight?: keyof DefaultTheme['fontWeights'];
   textTransform?: CSSProperties['textTransform'];
   textAlign?: CSSProperties['textAlign'];
+  hyphens?: CSSProperties['hyphens'];
   color?: Color | string;
 }
 
 export interface AnchorProps extends TextProps {
   underline?: boolean | 'hover';
+  hoverColor?: TextProps['color'];
 }
 
 export interface HeadingProps extends TextProps {
@@ -38,6 +40,7 @@ function textStyle(x: TextProps & { as?: string }) {
     ...(x.color ? { color: x.color } : {}),
     ...(x.textTransform ? { textTransform: x.textTransform } : {}),
     ...(x.textAlign ? { textAlign: x.textAlign } : {}),
+    ...(x.hyphens ? { hyphens: x.hyphens } : {}),
   });
 }
 
@@ -52,14 +55,17 @@ export const Anchor = styled.a.attrs(getTextAttributes)<AnchorProps>(
     x.underline &&
     css({
       textDecoration: x.underline === 'hover' ? 'none' : 'underline',
-      '&:hover': { textDecoration: 'underline' },
+      '&:hover, &:focus': { textDecoration: 'underline' },
+    }),
+  (x) =>
+    x.hoverColor &&
+    css({
+      '&:hover,&:focus': { color: 'blue' },
     })
 );
 
-export const Heading = styled.h1.attrs(getHeadingAttributes)<HeadingProps>(
-  textStyle,
-  css({ hyphens: 'auto' })
-);
+export const Heading =
+  styled.h1.attrs(getHeadingAttributes)<HeadingProps>(textStyle);
 
 function getTextAttributes(x: HeadingProps & { as?: string }) {
   return {

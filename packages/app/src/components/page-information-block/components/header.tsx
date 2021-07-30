@@ -35,32 +35,39 @@ export function Header({
   const padding = icon ? ICON_SIZE : undefined;
 
   return (
-    <Box pl={{ _: 3, sm: 4, md: 0 }}>
+    <Box
+      display="flex"
+      flexDirection="row"
+      flexWrap="nowrap"
+      alignItems="center"
+    >
       {icon && !isMediumScreen && <Icon size={ICON_SIZE}>{icon}</Icon>}
-      {category && (
-        <Box pl={{ md: padding }}>
-          <Heading level={1} variant="subtitle1" color="category">
-            {category}
-            {screenReaderCategory && (
-              <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
-            )}
-          </Heading>
-        </Box>
-      )}
-      <Box pl={{ md: padding }} position="relative">
-        <Heading level={1} as="h2">
-          {title}
-        </Heading>
-        {isMediumScreen && (
-          <Icon
-            size={asResponsiveArray({
-              _: `calc(${ICON_SIZE} - 0.5rem)`,
-              md: ICON_SIZE,
-            })}
-          >
-            {icon}
-          </Icon>
+      <Box>
+        {category && (
+          <Box pl={{ md: padding }}>
+            <Heading level={1} variant="subtitle1" color="category">
+              {category}
+              {screenReaderCategory && (
+                <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
+              )}
+            </Heading>
+          </Box>
         )}
+        <Box pl={{ md: padding }} position="relative">
+          <Heading level={1} as="h2" hyphens="auto">
+            {title}
+          </Heading>
+          {isMediumScreen && (
+            <Icon
+              size={asResponsiveArray({
+                _: `calc(${ICON_SIZE} - 0.5rem)`,
+                md: ICON_SIZE,
+              })}
+            >
+              {icon}
+            </Icon>
+          )}
+        </Box>
       </Box>
     </Box>
   );

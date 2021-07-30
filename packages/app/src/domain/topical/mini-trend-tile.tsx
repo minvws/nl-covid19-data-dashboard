@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { LinkWithIcon } from '~/components/link-with-icon';
+import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -59,16 +59,14 @@ export function MiniTrendTile<T extends TimestampedValue>(
           {icon}
         </Box>
         <Heading level={3} as="h2">
-          <Box as="span" display="block" py={2} pl="3.5rem">
-            <LinkWithIcon
+          <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+            <HeadingLinkWithIcon
               href={href}
               icon={<ArrowIconRight />}
               iconPlacement="right"
-              fontWeight="bold"
-              headingLink
             >
               {title}
-            </LinkWithIcon>
+            </HeadingLinkWithIcon>
           </Box>
         </Heading>
         <Text variant="h1" data-cy={metricProperty}>

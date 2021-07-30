@@ -1,3 +1,4 @@
+// @ts-nocheck
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';

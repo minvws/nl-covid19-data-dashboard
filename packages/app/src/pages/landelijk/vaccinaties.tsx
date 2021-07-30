@@ -325,7 +325,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <Spacer pb={4} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={text.stock_and_delivery_section.title}

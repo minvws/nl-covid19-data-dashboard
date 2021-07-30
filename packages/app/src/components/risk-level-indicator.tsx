@@ -3,7 +3,7 @@ import Stopwatch from '~/assets/stopwatch.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { LinkWithIcon } from '~/components/link-with-icon';
+import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/types';
 import { assert } from '~/utils/assert';
@@ -36,16 +36,14 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
       </Box>
 
       <Heading level={3} as="h2">
-        <Box as="span" display="block" py={2} pl="3.5rem">
-          <LinkWithIcon
+        <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+          <HeadingLinkWithIcon
             href={href}
             icon={<ArrowIconRight />}
             iconPlacement="right"
-            fontWeight="bold"
-            headingLink
           >
             {title}
-          </LinkWithIcon>
+          </HeadingLinkWithIcon>
         </Box>
       </Heading>
 

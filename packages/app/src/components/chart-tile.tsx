@@ -13,6 +13,7 @@ type ChartTileProps = {
   metadata?: MetadataProps;
   description?: string;
   timeframeInitialValue?: TimeframeOption;
+  disableFullscreen?: boolean;
 } & (
   | // Check if the children are a function to support the timeframe callback, otherwise accept a normal react node
   {
@@ -32,13 +33,14 @@ export function ChartTile({
   metadata,
   timeframeOptions,
   timeframeInitialValue = 'all',
+  disableFullscreen,
 }: ChartTileProps) {
   const [timeframe, setTimeframe] = useState<TimeframeOption>(
     timeframeInitialValue
   );
 
   return (
-    <FullscreenChartTile metadata={metadata}>
+    <FullscreenChartTile metadata={metadata} disabled={disableFullscreen}>
       <ChartTileHeader title={title} description={description}>
         {timeframeOptions && timeframe && (
           <ChartTimeControls

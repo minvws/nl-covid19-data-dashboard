@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import { useIntl } from '~/intl';
+import { spacingStyle } from '~/style/functions/spacing';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from './base';
 import { Markdown } from './markdown';
@@ -50,17 +51,17 @@ function ErrorFallback({ error }: { error: Error }) {
         <Button onClick={() => copyErrorReport()}>
           {siteText.common.kopieer_foutmelding}
         </Button>
+
         {clipboardState === 'copied' && (
-          <InlineText m={0}>
-            {siteText.common.foutmelding_is_gekopieerd}
+          <InlineText>{siteText.common.foutmelding_is_gekopieerd}</InlineText>
+        )}
+        {clipboardState === 'error' && (
+          <InlineText color="red">
+            {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
           </InlineText>
         )}
       </Box>
-      {clipboardState === 'error' && (
-        <InlineText color="red" fontStyle="italic">
-          {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
-        </InlineText>
-      )}
+
       <ErrorReport>{errorReport}</ErrorReport>
     </ErrorBox>
   );
@@ -90,6 +91,7 @@ const ErrorBox = styled.div.attrs({
     borderColor: 'red',
     padding: 2,
     borderRadius: '8px',
+    ...spacingStyle(3),
   })
 );
 

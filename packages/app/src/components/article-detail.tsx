@@ -28,9 +28,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         </LinkWithIcon>
 
         <Box spacing={2}>
-          <Heading level={1} mb={0}>
-            {article.title}
-          </Heading>
+          <Heading level={1}>{article.title}</Heading>
           <InlineText color="annotation">
             <PublicationDate date={article.publicationDate} />
           </InlineText>

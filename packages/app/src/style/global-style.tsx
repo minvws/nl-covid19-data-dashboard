@@ -90,4 +90,11 @@ button::-moz-focus-inner {
     transition: none !important;
   }
 }
+
+/**
+ * overrule tippy's default font size
+ */
+.tippy-box.tippy-box {
+  font-size: inherit;
+}
 `;
