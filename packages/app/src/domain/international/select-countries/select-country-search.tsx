@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
 import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer/polyfilled';
 import { Box } from '~/components/base';
-import { useIsMounted } from '~/utils/use-is-mounted';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIsMounted } from '~/utils/use-is-mounted';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { CountryOption, SearchContextProvider } from './context';
 import { SelectCountriesInput } from './select-countries-input';
 import { SelectCountriesResults } from './select-country-results';
@@ -20,7 +20,7 @@ export function SelectCountrySearch({
   countries: CountryOption[];
   limit?: number;
 }) {
-  const { height, ref: heightRef } = useResizeObserver<HTMLDivElement>();
+  const [heightRef, { height }] = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
 
   const isMounted = useIsMounted();
