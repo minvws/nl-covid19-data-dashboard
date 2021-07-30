@@ -97,6 +97,7 @@ export function InfectedTableTile({
           display="flex"
           flexDirection={{ _: 'column', lg: 'row' }}
           justifyContent="space-between"
+          spacing={{ _: 3, md: 0 }}
         >
           <SearchInput
             value={inputValue}

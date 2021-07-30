@@ -1,11 +1,9 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { ErrorBoundary } from '~/components/error-boundary';
-import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { MetadataProps } from '~/components/metadata';
-import { Heading, Text } from '~/components/typography';
 
 type EuropeChoroplethTileProps = {
   children: ReactNode;
@@ -28,19 +26,13 @@ export function EuropeChoroplethTile(props: EuropeChoroplethTileProps) {
   );
 
   return (
-    <FullscreenChartTile metadata={metadata}>
-      <Box mb={3} flex={{ lg: 1 }} as="figcaption">
-        <Heading level={3}>{title}</Heading>
-        <Text>{description}</Text>
-      </Box>
-      <Box height="100%">
-        <ErrorBoundary>{children}</ErrorBoundary>
-      </Box>
+    <ChartTile metadata={metadata} title={title} description={description}>
+      {children}
       {legendaComponent && (
         <Box display="flex" justifyContent="flex-start">
           {legendaComponent}
         </Box>
       )}
-    </FullscreenChartTile>
+    </ChartTile>
   );
 }

@@ -121,6 +121,7 @@ function VariantStackedAreaTileWithData({
       {(timeframe) => (
         <>
           {children}
+          {children && <Spacer mb={3} />}
           <InteractiveLegend
             helpText={text.legend_help_tekst}
             selectOptions={selectOptions}
