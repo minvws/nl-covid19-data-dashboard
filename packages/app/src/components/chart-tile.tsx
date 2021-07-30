@@ -49,7 +49,7 @@ export function ChartTile({
         )}
       </ChartTileHeader>
 
-      <Spacer mb={4} />
+      <Spacer mb={description || (timeframeOptions && timeframe) ? 4 : 3} />
 
       <ErrorBoundary>
         {timeframeOptions
@@ -78,18 +78,17 @@ function ChartTileHeader({
   return (
     <Box spacing={3}>
       <Heading level={3}>{title}</Heading>
-      <Box spacing={3}>
-        {description && (
-          <Box maxWidth={560}>
-            <Markdown content={description} />
-          </Box>
-        )}
-        {children && (
-          <Box display="inline-table" alignSelf="flex-start">
-            {children}
-          </Box>
-        )}
-      </Box>
+
+      {description && (
+        <Box maxWidth="maxWidthText">
+          <Markdown content={description} />
+        </Box>
+      )}
+      {children && (
+        <Box display="inline-table" alignSelf="flex-start">
+          {children}
+        </Box>
+      )}
     </Box>
   );
 }

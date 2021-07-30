@@ -8,7 +8,7 @@ export interface TextProps {
   fontWeight?: keyof DefaultTheme['fontWeights'];
   textTransform?: CSSProperties['textTransform'];
   textAlign?: CSSProperties['textAlign'];
-  color?: Color;
+  color?: Color | string;
 }
 
 export interface AnchorProps extends TextProps {
