@@ -108,7 +108,7 @@ Simplifying (this needs to be separate step; when doing this in the step above t
 2. Do for each layer:
    - Select the layer and open the console; simplify using the following command: $ -simplify 27.5%
 3. When all the layers are simplified export to TopoJSON > "geography-simplified.topo.json"
-4. Add the new data file to the project and update topology.ts.
+4. Add the new data file to the project and update `topology.ts`.
 
 ### Example of the topology.ts file
 
