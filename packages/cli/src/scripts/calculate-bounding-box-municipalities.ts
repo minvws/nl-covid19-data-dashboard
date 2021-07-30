@@ -18,30 +18,29 @@ import { isDefined } from 'ts-is-present';
  * The result of which is serialized as Typescript and saved to
  * the application source base under src/components/choropleth/region-bounding-box-municipalities.ts.
  */
-
-const topology = JSON.parse(
-  fs.readFileSync(
-    path.join(
-      __dirname,
-      '../../../app/src/components/choropleth/geography-simplified.topo.json'
-    ),
-    { encoding: 'utf-8' }
-  )
-);
-
-const gmGeo = topojson.feature(
-  topology,
-  topology.objects.municipalities
-) as unknown as MunicipalGeoJSON;
-
-const vrGeo = topojson.feature(
-  topology,
-  topology.objects.vr_collection
-) as unknown as VrGeoJSON;
-
-const vrCodes = vrGeo.features.map((x) => x.properties.vrcode).sort();
-
 (function run() {
+  const topology = JSON.parse(
+    fs.readFileSync(
+      path.join(
+        __dirname,
+        '../../../app/src/components/choropleth/geography-simplified.topo.json'
+      ),
+      { encoding: 'utf-8' }
+    )
+  );
+
+  const gmGeo = topojson.feature(
+    topology,
+    topology.objects.municipalities
+  ) as unknown as MunicipalGeoJSON;
+
+  const vrGeo = topojson.feature(
+    topology,
+    topology.objects.vr_collection
+  ) as unknown as VrGeoJSON;
+
+  const vrCodes = vrGeo.features.map((x) => x.properties.vrcode).sort();
+
   const lookup = vrCodes.reduce((acc, vrCode) => {
     const region = vrGeo.features.find((x) => x.properties.vrcode === vrCode);
     if (!isDefined(region)) {
