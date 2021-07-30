@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { useEscalationColor } from '~/utils/use-escalation-color';
