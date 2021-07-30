@@ -1,3 +1,4 @@
+import { snakeCase } from 'change-case';
 import prompts from 'prompts';
 import { isDefined } from 'ts-is-present';
 import { getClient } from '../client';
@@ -162,20 +163,13 @@ async function isNewElement(element: Element) {
   return devDocument === null && prodDocument === null;
 }
 
-function camelToSnakeCase(camelCased: string) {
-  return camelCased.replace(
-    /[A-Z]/g,
-    (letter: string) => `_${letter.toLowerCase()}`
-  );
-}
-
 function elementToId(element: Element) {
   if (!isDefined(element.metricProperty)) {
-    return `${element.scope}__${element.metricName}__${camelToSnakeCase(
+    return `${element.scope}__${element.metricName}__${snakeCase(
       element._type
     )}`;
   }
-  return `${element.scope}__${element.metricName}__${camelToSnakeCase(
+  return `${element.scope}__${element.metricName}__${snakeCase(
     element._type
   )}__${element.metricProperty}`;
 }
