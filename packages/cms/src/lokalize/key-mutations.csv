@@ -1,4 +1,6 @@
 timestamp,action,key,document_id,move_to
+2021-07-26T09:12:05.447Z,move,covid_varianten.varianten_tabel.kolommen.vorige_meeting,0Fi2ZNty1p5jcXUiTknjvR,covid_varianten.varianten_tabel.kolommen.vorige_meting
+2021-07-26T09:12:05.462Z,move,internationaal_varianten.varianten_tabel.kolommen.vorige_meeting,nVS0jBgQO2RxeLdgIEgG1X,internationaal_varianten.varianten_tabel.kolommen.vorige_meting
 2021-07-26T08:27:22.283Z,delete,besmettelijke_personen.reference.text,jF33EuwumlGuwav2FD3aJ2,__
 2021-07-26T08:27:22.284Z,delete,brononderzoek.reference.text,zrTRdM3o3E3fhzuaPw6kYj,__
 2021-07-26T08:27:22.286Z,delete,corona_melder_app.header.reference.text,jF33EuwumlGuwav2FD4Hau,__
@@ -42,3 +44,7 @@ timestamp,action,key,document_id,move_to
 2021-07-26T08:27:22.375Z,delete,verpleeghuis_oversterfte.reference.text,jF33EuwumlGuwav2FD3dk4,__
 2021-07-26T08:27:22.377Z,delete,verpleeghuis_positief_geteste_personen.reference.text,jF33EuwumlGuwav2FD3d0m,__
 2021-07-26T08:27:22.378Z,delete,ziekenhuisopnames_per_dag.reference.text,jF33EuwumlGuwav2FD3YMG,__
+2021-07-26T13:37:30.394Z,add,infected_per_age_group.value_annotation,rUb4wDOun6GAE8KHrwRmRN,__
+2021-07-28T11:31:33.867Z,delete,gemeente_sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD4HNU,__
+2021-07-28T11:31:33.868Z,delete,sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD41Fk,__
+2021-07-28T11:31:33.869Z,delete,veiligheidsregio_sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD41u0,__

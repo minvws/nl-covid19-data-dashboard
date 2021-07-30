@@ -1,4 +1,4 @@
-import { VrScoreboardData } from './scoreboard-types';
+import { VrScoreboardData } from '../types';
 
 export const scoreboardSortOptions = {
   location_a_to_z: (a: VrScoreboardData, b: VrScoreboardData) => {

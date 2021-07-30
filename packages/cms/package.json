@@ -17,6 +17,7 @@
     "lokalize:generate-types": "ts-node src/lokalize/generate-types.ts",
     "lokalize:sync-after-release": "ts-node src/lokalize/sync-after-release.ts",
     "lokalize:sync-after-feature": "ts-node src/lokalize/sync-after-feature.ts",
+    "lokalize:sync-prd-to-dev": "ts-node src/lokalize/sync-prd-to-dev.ts",
     "lokalize:strip-unused-keys": "yarn lokalize:export --clean-json && ts-node src/lokalize/strip-unused-keys.ts && yarn lokalize:export --clean-json && yarn workspace @corona-dashboard/app compile",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },

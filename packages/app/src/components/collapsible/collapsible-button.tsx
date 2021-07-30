@@ -10,7 +10,8 @@ import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
-import { useSetLinkTabbability } from './use-set-link-tabbability';
+import { useSetLinkTabbability } from './logic';
+
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;

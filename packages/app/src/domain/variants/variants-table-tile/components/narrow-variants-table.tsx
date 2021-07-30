@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { TableText } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
@@ -19,6 +18,7 @@ import {
   VariantNameCell,
 } from '.';
 import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
+import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
 
 type NarrowVariantsTableProps = {
@@ -78,20 +78,13 @@ function MobileVariantRow(props: MobileVariantRowProps) {
 
   const [, variantDescription] = useVariantNameAndDescription(
     row.variant,
-    text.anderen_tooltip,
-    row.countryOfOrigin
+    text.anderen_tooltip
   );
 
   return (
     <>
       <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
-        <VariantNameCell
-          variant={row.variant}
-          text={text}
-          mobile
-          narrow
-          countryOfOrigin={row.countryOfOrigin}
-        />
+        <VariantNameCell variant={row.variant} text={text} mobile narrow />
         <Cell mobile>
           {isPresent(row.percentage) ? (
             <PercentageBarWithNumber
@@ -112,7 +105,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
           {collapsible.content(
             <Box spacing={2} css={css({ pb: 3 })}>
               <Box display="flex" flexDirection="row">
-                <InlineText mr={1}>{columnNames.vorige_meeting}:</InlineText>
+                <InlineText mr={1}>{columnNames.vorige_meting}:</InlineText>
                 {isPresent(row.difference) &&
                 isPresent(row.difference.difference) &&
                 isPresent(row.difference.old_value) ? (

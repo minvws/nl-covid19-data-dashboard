@@ -7,7 +7,7 @@ import { assert } from './assert';
  */
 const shouldValidate =
   typeof window === 'undefined' ||
-  process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE !== '1';
+  process.env.NEXT_PUBLIC_PHASE !== 'development';
 
 const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 

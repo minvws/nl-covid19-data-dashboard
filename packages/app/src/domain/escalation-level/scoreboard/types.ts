@@ -1,5 +1,5 @@
 import { VrEscalationLevel } from '@corona-dashboard/common';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 
 export type VrScoreboardData = {
   data: VrEscalationLevel;
