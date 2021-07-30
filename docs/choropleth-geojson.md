@@ -114,7 +114,7 @@ Simplifying (this needs to be separate step; when doing this in the step above t
 
 ```typescript
 import { FeatureCollection, MultiPolygon } from 'geojson';
-import \* as topojson from 'topojson-client';
+import * as topojson from 'topojson-client';
 
 // Load all the geographical data including the data entries (regions and municipalities)
 import topology from './geography-simplified.topo.json';
@@ -122,17 +122,17 @@ import topology from './geography-simplified.topo.json';
 import { MunicipalGeoJSON, RegionGeoJSON } from './shared';
 
 export const countryGeo = topojson.feature(
-topology,
-topology.objects.netherlands
-) as FeatureCollection<MultiPolygon|Polygon>;
+  topology,
+  topology.objects.netherlands
+) as FeatureCollection<MultiPolygon | Polygon>;
 
 export const regionGeo = topojson.feature(
-topology,
-topology.objects.vr_collection
+  topology,
+  topology.objects.vr_collection
 ) as RegionGeoJSON;
 
 export const municipalGeo = topojson.feature(
-topology,
-topology.objects.municipalities
+  topology,
+  topology.objects.municipalities
 ) as MunicipalGeoJSON;
 ```
