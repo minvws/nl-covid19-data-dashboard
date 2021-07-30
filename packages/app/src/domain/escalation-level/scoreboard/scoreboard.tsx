@@ -9,11 +9,8 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VrGroup } from './components/vr-group';
 import { VrRow } from './components/vr-row';
-import {
-  ScoreboardRowData,
-  scoreboardSortOptions,
-  SortIdentifier,
-} from './logic';
+import { scoreboardSortOptions, SortIdentifier } from './logic';
+import { ScoreboardRowData } from './types';
 
 interface ScoreboardProps {
   rows: ScoreboardRowData[];

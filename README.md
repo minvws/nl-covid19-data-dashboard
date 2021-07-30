@@ -53,16 +53,32 @@ Without describing in detail all the rules we tend to follow here are some worth
 noting:
 
 - All filenames are written in kebab-case.
+- We use named exports where possible. They improve typing, help refactoring and
+  allow us to work with so called barrel files (using an index file in a folder
+  to bundle exports for the consuming code). Barrel files should be used
+  sparsely because as long as ES Modules and/or Webpack tree shaking is not
+  fully supported they could increase bundle sizes. We typically only bundle
+  code that would be used together anyway.
+- When writing complex components, we like them to have their own folder with
+  sub-folders for `logic` and `components` that contain code which is only used
+  internally by the component. In the case of logic it can also be a file
+  `logic.ts` if there is not a lot of business logic. The components folder
+  typically uses a barrel file. When a component and sub-components share some
+  local types they are often put in a separate `types.d.ts` file to avoid
+  circular dependencies.
+- When a component uses its own folder it typically has a barrel file exporting
+  only the public interface. The main component should preferably not live in an
+  index.tsx file but its own named file that is exported by `index.ts`
 - Booleans are prefixed with is/has/should etc. However booleans that are part
   of component props interfaces are usually not prefixed, to keep them aligned
   with standard html element syntax.
-- Data schema properties and Lokalize keys are all snake_cased. These could be
+- Data schema properties and locale keys are all snake_cased. These could be
   viewed as external data sources / APIs.
 - Event props and handlers follow a pattern of `onEventName` vs
   `handleEventName` where the `on` part is used for the component props API and
   `handle` is for the actual function definition. This makes it easy to follow
-  when you want to internally handle an event and at the same time pass it on
-  to a handler on the props.
+  when you want to internally handle an event and at the same time pass it on to
+  a handler on the props.
 - We prefer to use named function declarations over function expressions, except
   for inline lambda functions of course. This means `function doSomething(){}`
   instead of `const doSomething = () => {}`

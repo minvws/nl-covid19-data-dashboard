@@ -2,6 +2,9 @@ import { PortableTextEntry } from '@sanity/block-content-to-react';
 import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
 import styled from 'styled-components';
+import { Box } from '~/components/base';
+import { CollapsibleSection } from '~/components/collapsible';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { ExternalLink } from '~/components/external-link';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import { nestedHtml } from '~/style/preset';
@@ -15,9 +18,6 @@ import {
 import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
-import { Box } from '../base';
-import { CollapsibleSection } from '../collapsible';
-import { ErrorBoundary } from '../error-boundary';
 import { ContentImage } from './content-image';
 interface RichContentProps {
   blocks: PortableTextEntry[];
