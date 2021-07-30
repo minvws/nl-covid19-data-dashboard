@@ -19,6 +19,7 @@ import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { ContentImage } from './content-image';
+
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;

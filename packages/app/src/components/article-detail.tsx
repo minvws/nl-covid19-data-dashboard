@@ -34,7 +34,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
           </InlineText>
         </Box>
 
-        <Box fontWeight="bold" fontSize="1.25rem">
+        <Box textVariant="h4">
           <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
@@ -47,7 +47,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
 
       {!!article.content?.length && (
         <ContentBlock>
-          <Box fontSize="1.125rem">
+          <Box textVariant="body1">
             <RichContent
               blocks={article.content}
               contentWrapper={ContentBlock}

@@ -106,10 +106,9 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
                           id={id}
                           summary={item.title}
                         >
-                          <Box py={3}>
+                          <Box pt={2} pb={4}>
                             <RichContent blocks={item.content} />
                           </Box>
-                          )
                         </CollapsibleSection>
                       ) : null;
                     })}

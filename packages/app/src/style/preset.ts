@@ -83,6 +83,11 @@ export const nestedHtml = {
   ul: { ml: 4 },
   ol: { ml: 4 },
   a: { textDecoration: 'underline' },
+
+  'h1, h2, h3, h4, h5': {
+    mt: 4,
+    mb: -2,
+  },
 };
 
 if (process.env.NODE_ENV !== 'production') {
