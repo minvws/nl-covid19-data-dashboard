@@ -56,18 +56,18 @@ function getVariantChartData(variants: InVariants | undefined) {
     partialChartValue.is_reliable = true;
     const { item, total } = variantsOfConcern.reduce(
       ({ item, total }, variantOfConcern) => {
-        const otherItem = variantOfConcern.values.find(
+        const variantItem = variantOfConcern.values.find(
           (x) =>
             x.date_end_unix === partialChartValue.date_end_unix &&
             x.date_start_unix === partialChartValue.date_start_unix
         );
 
-        if (isDefined(otherItem) && isPresent(otherItem.percentage)) {
-          total += otherItem.percentage;
+        if (isDefined(variantItem) && isPresent(variantItem.percentage)) {
+          total += variantItem.percentage;
           (item as unknown as Record<string, number>)[
             `${variantOfConcern.name}_percentage`
-          ] = otherItem.percentage;
-          if (!otherItem.is_reliable) {
+          ] = variantItem.percentage;
+          if (!variantItem.is_reliable) {
             partialChartValue.is_reliable = false;
           }
         }
