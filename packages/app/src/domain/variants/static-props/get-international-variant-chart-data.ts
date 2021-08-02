@@ -56,16 +56,18 @@ function getVariantChartData(variants: InVariants | undefined) {
     partialChartValue.is_reliable = true;
     const { item, total } = variantsOfConcern.reduce(
       ({ item, total }, variantOfConcern) => {
-        const otherItem = variantOfConcern.values.find(
+        const variantItem = variantOfConcern.values.find(
           (x) =>
             x.date_end_unix === partialChartValue.date_end_unix &&
             x.date_start_unix === partialChartValue.date_start_unix
         );
 
-        if (isDefined(otherItem) && isPresent(otherItem.percentage)) {
-          total += otherItem.percentage;
-          item[`${variantOfConcern.name}_percentage`] = otherItem.percentage;
-          if (!otherItem.is_reliable) {
+        if (isDefined(variantItem) && isPresent(variantItem.percentage)) {
+          total += variantItem.percentage;
+          (item as unknown as Record<string, number>)[
+            `${variantOfConcern.name}_percentage`
+          ] = variantItem.percentage;
+          if (!variantItem.is_reliable) {
             partialChartValue.is_reliable = false;
           }
         }
@@ -75,7 +77,8 @@ function getVariantChartData(variants: InVariants | undefined) {
       { item: partialChartValue, total: 0 }
     );
 
-    item.other_percentage = Math.round((100 - total) * 100) / 100; //Round to maximum of 2 decimals
+    (item as unknown as Record<string, number>)['other_percentage'] =
+      parseFloat((100 - total).toFixed(2));
 
     return item;
   });
@@ -100,6 +103,7 @@ function getBaseObjectsCompleteDateRange(lists: InVariantsVariant[]) {
       date_start_unix: x.date_start_unix,
       date_end_unix: x.date_end_unix,
       sample_size: x.sample_size,
+      is_reliable: true,
     }))
     .filter(
       ({ date_start_unix, date_end_unix }, index, array) =>
