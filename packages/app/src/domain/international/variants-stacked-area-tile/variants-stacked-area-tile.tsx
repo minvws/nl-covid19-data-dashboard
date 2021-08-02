@@ -13,9 +13,9 @@ import {
   GappedStackedAreaSeriesDefinition,
   TimespanAnnotationConfig,
 } from '~/components/time-series-chart/logic';
+import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';

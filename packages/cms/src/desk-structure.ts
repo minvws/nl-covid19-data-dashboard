@@ -18,6 +18,7 @@ const hiddenDocTypes = [
   'veelgesteldeVragenGroups',
   'faqQuestion',
   'cijferVerantwoording',
+  'cijferVerantwoordingGroups',
   'overDitDashboard',
   'overRisicoNiveaus',
   'roadmap',
@@ -105,7 +106,10 @@ export default () =>
                 'cijferVerantwoording'
               ),
               ...S.documentTypeListItems().filter(
-                (item) => item.getId() === 'figureExplanationItem'
+                (item) => item.getId() === 'cijferVerantwoordingGroups'
+              ),
+              ...S.documentTypeListItems().filter(
+                (item) => item.getId() === 'cijferVerantwoordingItem'
               ),
             ])
         ),

@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
 import { isDefined } from 'ts-is-present';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { Box } from './base';
 import { InlineText } from './typography';
 

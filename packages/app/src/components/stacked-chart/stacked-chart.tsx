@@ -25,7 +25,6 @@ import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { InlineText } from '~/components/typography';
@@ -39,6 +38,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
   calculateSeriesMaximum,
@@ -176,11 +176,7 @@ export function StackedChart<T extends TimestampedValue>(
 
   const isMountedRef = useIsMountedRef();
 
-  const {
-    width: yAxisWidth = 0,
-    ref: yAxisRef,
-    // @ts-expect-error useResizeObserver expects element extending HTMLElement
-  } = useResizeObserver<SVGElement>();
+  const [yAxisRef, yAxisSize] = useResizeObserver<SVGGElement>();
 
   const padding = useMemo(
     () =>
@@ -188,9 +184,9 @@ export function StackedChart<T extends TimestampedValue>(
         top: 10,
         right: isExtraSmallScreen ? 0 : 30,
         bottom: 30,
-        left: yAxisWidth + 10, // 10px seems to be enough padding,
+        left: (yAxisSize.width ?? 0) + 10, // 10px seems to be enough padding,
       } as const),
-    [isExtraSmallScreen, yAxisWidth]
+    [isExtraSmallScreen, yAxisSize.width]
   );
 
   const metricProperties = useMemo(

@@ -2,13 +2,13 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import Stopwatch from '~/assets/stopwatch.svg';
-import { Box } from '~/components/base';
-import { Heading, Text } from '~/components/typography';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { EscalationLevel } from '~/domain/restrictions/type';
-import { assert } from '~/utils/assert';
-import { LinkWithIcon } from '~/components/link-with-icon';
 import { ArrowIconRight } from '~/components/arrow-icon';
+import { Box } from '~/components/base';
+import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { LinkWithIcon } from '~/components/link-with-icon';
+import { Heading, Text } from '~/components/typography';
+import { EscalationLevel } from '~/domain/restrictions/types';
+import { assert } from '~/utils/assert';
 
 const escalationThresholds = regionThresholds.escalation_levels.level;
 

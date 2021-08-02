@@ -20,7 +20,7 @@ const EMPTY_VALUES = {
 
 export type VariantChartData = ReturnType<typeof getVariantChartData>;
 
-export function getVariantChartData(variants: InVariants | undefined) {
+function getVariantChartData(variants: InVariants | undefined) {
   if (!isDefined(variants) || !isDefined(variants.values)) {
     return EMPTY_VALUES;
   }

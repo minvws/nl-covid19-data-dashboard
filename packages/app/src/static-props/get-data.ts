@@ -25,16 +25,16 @@ import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
 } from '~/domain/layout/vr-layout';
+import {
+  getVariantSidebarValue,
+  VariantSidebarValue,
+} from '~/domain/variants/static-props';
 import { getClient, localize } from '~/lib/sanity';
 import {
   getSituationsSidebarValue,
   SituationsSidebarValue,
 } from './situations/get-situations-sidebar-value';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
-import {
-  getVariantSidebarValue,
-  VariantSidebarValue,
-} from './variants/get-variant-sidebar-value';
 
 /**
  * Usage:
