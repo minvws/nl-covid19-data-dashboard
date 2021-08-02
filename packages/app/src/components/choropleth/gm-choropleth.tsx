@@ -16,8 +16,7 @@ import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
-import { Choropleth } from './components';
-import { HoverPathLink, Path } from './components/path';
+import { Choropleth, HoverPathLink, Path } from './components';
 import {
   countryGeo,
   getDataThresholds,
