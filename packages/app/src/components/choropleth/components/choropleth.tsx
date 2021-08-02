@@ -105,13 +105,13 @@ type ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties> = {
 };
 
 /**
- * Generic choropleth component that takes featurecollection that is considered the data layer
+ * Generic choropleth component that takes a feature collection that is considered the data layer
  * and another that is considered the interactive hover layer.
+ *
  * It implements a click and mouseover/mouseout system where the value that is assigned to the
  * data-id attribute of a path is propagated to the injected onPatchClick and getTooltipContent
  * callbacks.
  *
- * @param props
  */
 
 export function Choropleth<
