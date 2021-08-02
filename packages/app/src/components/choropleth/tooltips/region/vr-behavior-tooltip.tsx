@@ -2,15 +2,15 @@ import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { regionThresholds } from '~/components/choropleth/logic';
+import { TooltipContent } from '~/components/choropleth/tooltips';
 import { InlineText, Text } from '~/components/typography';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { regionThresholds } from '../../region-thresholds';
 
-interface BehaviorTooltipProps {
+interface VrBehaviorTooltipProps {
   context: VrCollectionBehavior & VrProperties;
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number;
@@ -18,13 +18,13 @@ interface BehaviorTooltipProps {
   behaviorType: 'compliance' | 'support';
 }
 
-export function BehaviorTooltip({
+export function VrBehaviorTooltip({
   context,
   currentMetric,
   currentComplianceValue,
   currentSupportValue,
   behaviorType,
-}: BehaviorTooltipProps) {
+}: VrBehaviorTooltipProps) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
   const complianceThresholdKey = `${currentMetric}_compliance` as const;

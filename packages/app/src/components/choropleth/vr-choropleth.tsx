@@ -6,7 +6,7 @@ import {
 import css from '@styled-system/css';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { Fragment, ReactNode, useCallback } from 'react';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { regionThresholds } from '~/components/choropleth/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -14,18 +14,19 @@ import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
-import { Choropleth } from './choropleth';
+import { Choropleth } from './components/choropleth';
+import { HoverPathLink, Path } from './components/path';
 import {
+  countryGeo,
+  getDataThresholds,
+  regionGeo,
   useChoroplethColorScale,
+  useChoroplethDataDescription,
   useTabInteractiveButton,
   useVrBoundingbox,
   useVrData,
-} from './hooks';
-import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
-import { getDataThresholds } from './legenda/utils';
-import { HoverPathLink, Path } from './path';
-import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
-import { countryGeo, regionGeo } from './topology';
+} from './logic';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip';
 
 type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
   data: Pick<VrCollection, K>;

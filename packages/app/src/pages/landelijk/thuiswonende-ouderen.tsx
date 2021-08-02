@@ -4,10 +4,10 @@ import {
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { regionThresholds } from '~/components/choropleth/logic';
+import { VrElderlyAtHomeTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -213,7 +213,7 @@ const ElderlyAtHomeNationalPage = (
               metricProperty="positive_tested_daily_per_100k"
               tooltipContent={(
                 context: VrProperties & VrCollectionElderlyAtHome
-              ) => <ElderlyAtHomeRegionalTooltip context={context} />}
+              ) => <VrElderlyAtHomeTooltip context={context} />}
             />
           </ChoroplethTile>
 

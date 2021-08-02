@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { regionThresholds } from '~/components/choropleth/logic';
 import { EscalationLevel } from '~/domain/restrictions/types';
 import { colors } from '~/style/theme';
 import { assert } from './assert';

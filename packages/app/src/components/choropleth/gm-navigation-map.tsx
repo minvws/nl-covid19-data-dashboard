@@ -6,13 +6,13 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { Choropleth } from './choropleth';
+import { Choropleth, HoverPathLink, Path } from './components';
 import {
+  countryGeo,
+  municipalGeo,
   useMunicipalityNavigationData,
   useTabInteractiveButton,
-} from './hooks';
-import { HoverPathLink, Path } from './path';
-import { countryGeo, municipalGeo } from './topology';
+} from './logic';
 
 type MunicipalityNavigationMapProps<T> = {
   onSelect?: (gmcode: string) => void;
@@ -25,9 +25,7 @@ type MunicipalityNavigationMapProps<T> = {
  * index page.
  */
 
-export function MunicipalityNavigationMap<T>(
-  props: MunicipalityNavigationMapProps<T>
-) {
+export function GmNavigationMap<T>(props: MunicipalityNavigationMapProps<T>) {
   const { tooltipContent } = props;
 
   const { siteText } = useIntl();

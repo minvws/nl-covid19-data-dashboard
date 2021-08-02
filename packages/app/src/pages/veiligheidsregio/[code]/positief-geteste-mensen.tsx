@@ -7,10 +7,10 @@ import Getest from '~/assets/test.svg';
 import { Anchor } from '~/components/anchor';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { regionThresholds } from '~/components/choropleth/logic';
+import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -258,7 +258,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               thresholds: regionThresholds.tested_overall.infected_per_100k,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',
               }}
@@ -270,7 +270,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricProperty="infected_per_100k"
               tooltipContent={(
                 context: GmProperties & GmCollectionTestedOverall
-              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+              ) => <GmPositiveTestedPeopleTooltip context={context} />}
             />
           </ChoroplethTile>
 

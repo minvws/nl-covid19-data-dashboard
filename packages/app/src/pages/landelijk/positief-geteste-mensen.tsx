@@ -12,12 +12,13 @@ import { Anchor } from '~/components/anchor';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { regionThresholds } from '~/components/choropleth/logic';
+import {
+  GmPositiveTestedPeopleTooltip,
+  VrPositiveTestedPeopleTooltip,
+} from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -221,7 +222,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              * now that is a bridge too far. Let's take it one step at a time.
              */}
             {selectedMap === 'municipal' && (
-              <MunicipalityChoropleth
+              <GmChoropleth
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
                 }}
@@ -231,7 +232,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected_per_100k"
                 tooltipContent={(
                   context: GmProperties & GmCollectionTestedOverall
-                ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+                ) => <GmPositiveTestedPeopleTooltip context={context} />}
               />
             )}
             {selectedMap === 'region' && (
@@ -245,7 +246,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected_per_100k"
                 tooltipContent={(
                   context: VrProperties & VrCollectionTestedOverall
-                ) => <PositiveTestedPeopleRegionalTooltip context={context} />}
+                ) => <VrPositiveTestedPeopleTooltip context={context} />}
               />
             )}
           </ChoroplethTile>

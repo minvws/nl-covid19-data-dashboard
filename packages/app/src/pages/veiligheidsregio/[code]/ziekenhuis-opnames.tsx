@@ -1,10 +1,10 @@
 import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { municipalThresholds } from '~/components/choropleth/logic';
+import { GmHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -152,7 +152,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
@@ -163,7 +163,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
               tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <HospitalAdmissionsMunicipalTooltip context={context} />
+                <GmHospitalAdmissionsTooltip context={context} />
               )}
             />
           </ChoroplethTile>

@@ -8,12 +8,13 @@ import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
+import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
-import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { regionThresholds } from '~/components/choropleth/logic';
+import {
+  GmSewerTooltip,
+  VrSewerTooltip,
+} from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -182,7 +183,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'municipal' ? (
-              <MunicipalityChoropleth
+              <GmChoropleth
                 accessibility={{
                   key: 'sewer_municipal_choropleth',
                 }}
@@ -191,7 +192,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="sewer"
                 metricProperty="average"
                 tooltipContent={(context: GmProperties & GmSewerValue) => (
-                  <SewerMunicipalTooltip context={context} />
+                  <GmSewerTooltip context={context} />
                 )}
               />
             ) : (
@@ -204,7 +205,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="sewer"
                 metricProperty="average"
                 tooltipContent={(context: VrProperties & VrSewerValue) => (
-                  <SewerRegionalTooltip context={context} />
+                  <VrSewerTooltip context={context} />
                 )}
               />
             )}

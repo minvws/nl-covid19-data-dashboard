@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Stopwatch from '~/assets/stopwatch.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { regionThresholds } from '~/components/choropleth/logic';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Heading, Text } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/types';

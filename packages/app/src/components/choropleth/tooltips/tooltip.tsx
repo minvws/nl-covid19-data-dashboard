@@ -4,7 +4,7 @@ import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useViewport } from '~/utils/use-viewport';
-import { TooltipSettings } from '../choropleth';
+import { TooltipSettings } from '../components/choropleth';
 
 export type ChoroplethTooltipPlacement = 'bottom-right' | 'top-center';
 

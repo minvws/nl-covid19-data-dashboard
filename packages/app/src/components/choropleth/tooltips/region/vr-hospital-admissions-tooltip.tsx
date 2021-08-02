@@ -1,12 +1,14 @@
 import { VrHospitalNiceValue, VrProperties } from '@corona-dashboard/common';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { regionThresholds } from '~/components/choropleth/logic';
+import {
+  TooltipContent,
+  TooltipSubject,
+} from '~/components/choropleth/tooltips';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { regionThresholds } from '../../region-thresholds';
 
-export function HospitalAdmissionsRegionalTooltip({
+export function VrHospitalAdmissionsTooltip({
   context,
 }: {
   context: VrProperties & VrHospitalNiceValue;

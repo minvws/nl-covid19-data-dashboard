@@ -2,7 +2,7 @@ import { assert } from '@corona-dashboard/common';
 import { scaleThreshold } from '@visx/scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { internationalThresholds } from '../international-thresholds';
+import { internationalThresholds } from './international-thresholds';
 
 export function useInChoroplethColorScale(
   metricProperty: string,

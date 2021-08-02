@@ -17,11 +17,14 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from '../base';
-import { Choropleth, CHOROPLETH_ASPECT_RATIO } from './choropleth';
-import { useInChoroplethColorScale, useTabInteractiveButton } from './hooks';
-import { HoverPathLink, Path } from './path';
-import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
-import { europeGeo } from './topology';
+import { Choropleth, CHOROPLETH_ASPECT_RATIO } from './components';
+import { HoverPathLink, Path } from './components/path';
+import {
+  europeGeo,
+  useInChoroplethColorScale,
+  useTabInteractiveButton,
+} from './logic';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip';
 
 /**
  * List of countries to define the boundingbox. These are countries on the outer edges
@@ -38,7 +41,7 @@ const boundingBoxEurope: EuropeGeoJSON = {
 
 type CountryDataItem = { country_code: string };
 
-type EuropeChoroplethProps<T extends CountryDataItem> = {
+type InChoroplethProps<T extends CountryDataItem> = {
   data: T[];
   /**
    * A number property on the data item that will determine the color of the country in the map
@@ -53,8 +56,8 @@ type EuropeChoroplethProps<T extends CountryDataItem> = {
   accessibility: AccessibilityDefinition;
 };
 
-export function EuropeChoropleth<T extends CountryDataItem>(
-  props: EuropeChoroplethProps<T>
+export function InChoropleth<T extends CountryDataItem>(
+  props: InChoroplethProps<T>
 ) {
   const { data, metricProperty, tooltipContent, accessibility } = props;
   const { siteText } = useIntl();

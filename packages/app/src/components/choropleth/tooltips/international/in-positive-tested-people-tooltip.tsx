@@ -1,11 +1,11 @@
 import { Box } from '~/components/base';
+import { internationalThresholds } from '~/components/choropleth/logic';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { internationalThresholds } from '../../international-thresholds';
 import { TooltipSubject } from '../tooltip-subject';
 import { TooltipContent } from './tooltip-content';
 
-type InternationalTooltipProps = {
+type InPositiveTestedPeopleTooltipProps = {
   title: string;
   countryName: string;
   countryCode: string;
@@ -15,8 +15,8 @@ type InternationalTooltipProps = {
   comparedValue: number;
 };
 
-export function PositiveTestedPeopleInternationalTooltip(
-  props: InternationalTooltipProps
+export function InPositiveTestedPeopleTooltip(
+  props: InPositiveTestedPeopleTooltipProps
 ) {
   const {
     countryName,

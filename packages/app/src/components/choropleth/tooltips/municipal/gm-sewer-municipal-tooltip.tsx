@@ -1,27 +1,30 @@
-import { VrProperties, VrSewerValue } from '@corona-dashboard/common';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { GmProperties, GmSewerValue } from '@corona-dashboard/common';
+import { regionThresholds } from '~/components/choropleth/logic';
+import {
+  TooltipContent,
+  TooltipSubject,
+} from '~/components/choropleth/tooltips';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { regionThresholds } from '../../region-thresholds';
 
-export function SewerRegionalTooltip({
+export function GmSewerTooltip({
   context,
 }: {
-  context: VrProperties & VrSewerValue;
+  context: GmProperties & GmSewerValue;
 }) {
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
+  const text = siteText.rioolwater_metingen;
+
   const subject = siteText.choropleth_tooltip.sewer_regional;
   const thresholdValues = regionThresholds.sewer.average;
-  const text = siteText.rioolwater_metingen;
 
   return (
     <TooltipContent
-      title={context.vrname}
-      link={reverseRouter.vr.rioolwater(context.vrcode)}
+      title={context.gemnaam}
+      link={reverseRouter.gm.rioolwater(context.gmcode)}
     >
       <TooltipSubject
         subject={subject}

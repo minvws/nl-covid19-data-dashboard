@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Box } from '~/components/base';
-import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
+import { GmNavigationMap } from '~/components/choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { Heading, Text } from '~/components/typography';
 import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
@@ -58,7 +58,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             maxHeight={960}
             margin="0 auto"
           >
-            <MunicipalityNavigationMap
+            <GmNavigationMap
               tooltipContent={(context) => (
                 <TooltipContent
                   title={context.gemnaam}

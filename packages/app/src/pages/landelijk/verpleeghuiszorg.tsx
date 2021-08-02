@@ -6,10 +6,10 @@ import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { InfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/infected-locations-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { regionThresholds } from '~/components/choropleth/logic';
+import { VrInfectedLocationsTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -242,7 +242,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               metricProperty="infected_locations_percentage"
               tooltipContent={(
                 context: VrProperties & VrCollectionNursingHome
-              ) => <InfectedLocationsRegionalTooltip context={context} />}
+              ) => <VrInfectedLocationsTooltip context={context} />}
             />
           </ChoroplethTile>
 

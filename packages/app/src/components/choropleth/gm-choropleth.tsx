@@ -16,23 +16,25 @@ import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
-import { Choropleth } from './choropleth';
+import { Choropleth } from './components';
+import { HoverPathLink, Path } from './components/path';
 import {
+  countryGeo,
+  getDataThresholds,
+  municipalGeo,
+  municipalThresholds,
+  regionBoundingBoxMunicipalities,
+  regionGeo,
   useChoroplethColorScale,
+  useChoroplethDataDescription,
   useMunicipalityBoundingbox,
   useMunicipalityData,
   useRegionMunicipalities,
   useTabInteractiveButton,
-} from './hooks';
-import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
-import { getDataThresholds } from './legenda/utils';
-import { municipalThresholds } from './municipal-thresholds';
-import { HoverPathLink, Path } from './path';
-import { regionBoundingBoxMunicipalities } from './region-bounding-box-municipalities';
-import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
-import { countryGeo, municipalGeo, regionGeo } from './topology';
+} from './logic';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip';
 
-type MunicipalityChoroplethProps<T, K extends GmCollectionMetricName> = {
+type GmChoroplethProps<T, K extends GmCollectionMetricName> = {
   data: Pick<GmCollection, K>;
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
@@ -61,8 +63,8 @@ type MunicipalityChoroplethProps<T, K extends GmCollectionMetricName> = {
  *
  * @param props
  */
-export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
-  props: MunicipalityChoroplethProps<T, K>
+export function GmChoropleth<T, K extends GmCollectionMetricName>(
+  props: GmChoroplethProps<T, K>
 ) {
   const {
     accessibility,

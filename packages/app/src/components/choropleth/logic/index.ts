@@ -1,4 +1,10 @@
+export * from './international-thresholds';
+export * from './municipal-thresholds';
+export * from './region-bounding-box-municipalities';
+export * from './region-thresholds';
+export * from './topology';
 export * from './use-choropleth-color-scale';
+export * from './use-choropleth-data-description';
 export * from './use-in-choropleth-color-scale';
 export * from './use-municipality-boundingbox';
 export * from './use-municipality-data';
@@ -6,3 +12,4 @@ export * from './use-region-municipalities';
 export * from './use-tab-interactive-button';
 export * from './use-vr-boundingbox';
 export * from './use-vr-data';
+export * from './utils';

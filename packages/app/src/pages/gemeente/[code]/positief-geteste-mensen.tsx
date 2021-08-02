@@ -4,10 +4,10 @@ import {
 } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { municipalThresholds } from '~/components/choropleth/logic';
+import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -258,7 +258,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'confirmed_cases_choropleth',
               }}
@@ -269,7 +269,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricProperty="infected_per_100k"
               tooltipContent={(
                 context: GmProperties & GmCollectionTestedOverall
-              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+              ) => <GmPositiveTestedPeopleTooltip context={context} />}
             />
           </ChoroplethTile>
         </TileList>

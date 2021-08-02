@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
 import { Box } from '~/components/base';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { VrChoropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';

@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { internationalThresholds } from '~/components/choropleth/international-thresholds';
+import { internationalThresholds } from '~/components/choropleth/logic';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';

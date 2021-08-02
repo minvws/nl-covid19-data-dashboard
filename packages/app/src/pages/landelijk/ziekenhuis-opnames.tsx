@@ -8,13 +8,16 @@ import {
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
-import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import {
+  municipalThresholds,
+  regionThresholds,
+} from '~/components/choropleth/logic';
+import {
+  GmHospitalAdmissionsTooltip,
+  VrHospitalAdmissionsTooltip,
+} from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
@@ -177,7 +180,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'municipal' && (
-              <MunicipalityChoropleth
+              <GmChoropleth
                 accessibility={{
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
@@ -187,7 +190,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
                   context: GmProperties & GmHospitalNiceValue
-                ) => <HospitalAdmissionsMunicipalTooltip context={context} />}
+                ) => <GmHospitalAdmissionsTooltip context={context} />}
               />
             )}
             {selectedMap === 'region' && (
@@ -201,7 +204,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
                   context: VrProperties & VrHospitalNiceValue
-                ) => <HospitalAdmissionsRegionalTooltip context={context} />}
+                ) => <VrHospitalAdmissionsTooltip context={context} />}
               />
             )}
           </ChoroplethTile>

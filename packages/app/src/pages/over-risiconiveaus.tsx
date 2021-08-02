@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import { Box } from '~/components/base';
-import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { VrChoropleth } from '~/components/choropleth';
+import { VrEscalationTooltip } from '~/components/choropleth/tooltips';
 import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -159,12 +159,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                   metricProperty="level"
                   tooltipContent={(
                     context: VrProperties & EscalationLevels
-                  ) => (
-                    <EscalationRegionalTooltip
-                      context={context}
-                      hideValidFrom
-                    />
-                  )}
+                  ) => <VrEscalationTooltip context={context} hideValidFrom />}
                 />
               </ErrorBoundary>
             </Box>

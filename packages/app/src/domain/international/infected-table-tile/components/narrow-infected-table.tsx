@@ -2,7 +2,7 @@ import { InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { Box } from '~/components/base';
-import { internationalThresholds } from '~/components/choropleth/international-thresholds';
+import { internationalThresholds } from '~/components/choropleth/logic';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';

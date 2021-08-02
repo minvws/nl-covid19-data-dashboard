@@ -2,12 +2,12 @@ import { VrCollection, VrCollectionMetricName } from '@corona-dashboard/common';
 import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
 import {
+  getDataThresholds,
+  regionGeo,
+  regionThresholds,
   useChoroplethColorScale,
   useVrData,
-} from '~/components/choropleth/hooks';
-import { getDataThresholds } from '~/components/choropleth/legenda/utils';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { regionGeo } from '~/components/choropleth/topology';
+} from '~/components/choropleth/logic';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { EscalationLevel } from '~/domain/restrictions/types';

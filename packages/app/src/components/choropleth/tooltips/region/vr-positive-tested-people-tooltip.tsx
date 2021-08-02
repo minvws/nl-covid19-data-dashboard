@@ -2,15 +2,17 @@ import {
   VrCollectionTestedOverall,
   VrProperties,
 } from '@corona-dashboard/common';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
+import { regionThresholds } from '~/components/choropleth/logic';
+import {
+  TooltipContent,
+  TooltipSubject,
+} from '~/components/choropleth/tooltips';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { regionThresholds } from '../../region-thresholds';
 
-export function PositiveTestedPeopleRegionalTooltip({
+export function VrPositiveTestedPeopleTooltip({
   context,
 }: {
   context: VrProperties & VrCollectionTestedOverall;

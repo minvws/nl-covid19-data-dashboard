@@ -7,8 +7,8 @@ import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { DisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/disability-infected-locations-regional-tooltip';
+import { regionThresholds } from '~/components/choropleth/logic';
+import { VrDisablityInfectedLocationsTooltip } from '~/components/choropleth/tooltips/region/vr-disability-infected-locations-tooltip';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -233,9 +233,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               metricProperty="infected_locations_percentage"
               tooltipContent={(
                 context: VrProperties & VrCollectionDisabilityCare
-              ) => (
-                <DisablityInfectedLocationsRegionalTooltip context={context} />
-              )}
+              ) => <VrDisablityInfectedLocationsTooltip context={context} />}
             />
           </ChoroplethTile>
 

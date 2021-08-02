@@ -7,7 +7,7 @@ import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escala
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
-export function EscalationRegionalTooltip({
+export function VrEscalationTooltip({
   context,
   getLink,
   hideValidFrom = false,
