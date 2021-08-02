@@ -8,6 +8,7 @@ import { geoConicConformal } from 'd3-geo';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
+import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -16,9 +17,12 @@ import {
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
-import { Box } from '../base';
-import { Choropleth, CHOROPLETH_ASPECT_RATIO } from './components';
-import { HoverPathLink, Path } from './components/path';
+import {
+  Choropleth,
+  CHOROPLETH_ASPECT_RATIO,
+  HoverPathLink,
+  Path,
+} from './components';
 import {
   europeGeo,
   useInChoroplethColorScale,
