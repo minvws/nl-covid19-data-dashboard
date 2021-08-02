@@ -67,7 +67,7 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: VaccinationPageQuery;
     highlight: PageArticlesQueryResult;
-  }>(((context) => {
+  }>((context) => {
     const { locale = 'nl' } = context;
     return `{
       "page": ${getVaccinePageQuery(locale)},

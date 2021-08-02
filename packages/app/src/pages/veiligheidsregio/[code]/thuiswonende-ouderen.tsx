@@ -32,7 +32,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
-  createGetContent<PageArticlesQueryResult>(context) => {
+  createGetContent<PageArticlesQueryResult>((context) => {
     const { locale = 'nl' } = context;
     return createPageArticlesQuery('elderlyAtHomePage', locale);
   })
