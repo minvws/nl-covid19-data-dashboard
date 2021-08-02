@@ -3,7 +3,13 @@ import { localPoint } from '@visx/event';
 import Projection from '@visx/geo/lib/projections/Projection';
 import { ProjectionPreset } from '@visx/geo/lib/types';
 import { GeoProjection } from 'd3-geo';
-import { Feature, FeatureCollection, Geometry, MultiPolygon } from 'geojson';
+import {
+  Feature,
+  FeatureCollection,
+  Geometry,
+  MultiPolygon,
+  Polygon,
+} from 'geojson';
 import {
   memo,
   MutableRefObject,
@@ -54,15 +60,18 @@ type ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties> = {
   aspectRatio?: number;
   // This is the main feature collection that displays the features that will
   // be colored in as part of the choropleth
-  featureCollection: FeatureCollection<MultiPolygon, FeatureProperties>;
+  featureCollection: FeatureCollection<
+    MultiPolygon | Polygon,
+    FeatureProperties
+  >;
   // These are the outline superimposed over the main features.
-  outlines?: FeatureCollection<MultiPolygon, OutlineProperties>;
+  outlines?: FeatureCollection<MultiPolygon | Polygon, OutlineProperties>;
   // These are features that are used as as the hover features, these are
   // typically activated when the user mouse overs them.
-  hovers?: FeatureCollection<MultiPolygon, HoverProperties>;
+  hovers?: FeatureCollection<MultiPolygon | Polygon, HoverProperties>;
   // The bounding box is calculated based on these features, this can be used to
   // zoom in on a specific part of the map upon initialization.
-  boundingBox: FeatureCollection<MultiPolygon>;
+  boundingBox: FeatureCollection<MultiPolygon | Polygon>;
   // Add optional padding to the bounding box
   boudingBoxPadding?: {
     left?: number;
@@ -73,20 +82,20 @@ type ChoroplethProps<FeatureProperties, HoverProperties, OutlineProperties> = {
   // This callback is invoked for each of the features in the featureCollection property.
   // This will usually return a <path/> element.
   renderFeature: (
-    feature: Feature<MultiPolygon, FeatureProperties>,
+    feature: Feature<MultiPolygon | Polygon, FeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
 
   renderHighlight?: (
-    feature: Feature<MultiPolygon, FeatureProperties>,
+    feature: Feature<MultiPolygon | Polygon, FeatureProperties>,
     path: string,
     index: number
   ) => ReactNode;
   // This callback is invoked for each of the features in the hovers property.
   // This will usually return a <path/> element.
   renderHover: (
-    feature: Feature<MultiPolygon, HoverProperties>,
+    feature: Feature<MultiPolygon | Polygon, HoverProperties>,
     path: string,
     index: number
   ) => ReactNode;

@@ -26,11 +26,13 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
+import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
+import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationIcon } from '../situations/components/situation-icon';
+import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VariantsSidebarMetric } from '../variants/variants-sidebar-metric';
 
 export const nlPageMetricNames = [
@@ -59,6 +61,7 @@ export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
 type NationalPageMetricData = {
   variantSidebarValue: VariantSidebarValue;
+  situationsSidebarValue: SituationsSidebarValue;
 } & Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
@@ -268,7 +271,12 @@ export function NationalLayout(props: NationalLayoutProps) {
                   icon={<SituationIcon id="gathering" />}
                   title={siteText.brononderzoek.titel_sidebar}
                 >
-                  <SidebarKpiValue title={siteText.brononderzoek.kpi_titel} />
+                  <SituationsSidebarMetric
+                    date_start_unix={
+                      data.situationsSidebarValue.date_start_unix
+                    }
+                    date_end_unix={data.situationsSidebarValue.date_end_unix}
+                  />
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink

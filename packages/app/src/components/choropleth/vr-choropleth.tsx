@@ -4,7 +4,7 @@ import {
   VrProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { Fragment, ReactNode, useCallback } from 'react';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { useIntl } from '~/intl';
@@ -110,7 +110,7 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
   );
 
   const renderFeature = useCallback(
-    (feature: Feature<MultiPolygon, VrProperties>, path: string) => {
+    (feature: Feature<MultiPolygon | Polygon, VrProperties>, path: string) => {
       const { vrcode } = feature.properties;
       const fill =
         ((hasData && getFillColor(vrcode)) || noDataFillColor) ?? 'white';
@@ -134,7 +134,7 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
   );
 
   const renderHighlight = useCallback(
-    (feature: Feature<MultiPolygon, VrProperties>, path: string) => {
+    (feature: Feature<MultiPolygon | Polygon, VrProperties>, path: string) => {
       const { vrcode } = feature.properties;
 
       if (highlightCode !== vrcode) return;
@@ -157,7 +157,7 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
     );
 
   const renderHover = useCallback(
-    (feature: Feature<MultiPolygon, VrProperties>, path: string) => {
+    (feature: Feature<MultiPolygon | Polygon, VrProperties>, path: string) => {
       const { vrcode, vrname } = feature.properties;
 
       const isSelected = vrcode === selectedCode && highlightSelection;

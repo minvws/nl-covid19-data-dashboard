@@ -5,6 +5,10 @@ import { TileList } from '~/components/tile-list';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import {
+  getVariantChartData,
+  getVariantTableData,
+} from '~/domain/variants/static-props';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -19,8 +23,6 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-import { getVariantChartData } from '~/static-props/variants/get-variant-chart-data';
-import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { VariantsPageQuery } from '~/types/cms';
 
 export const getStaticProps = withFeatureNotFoundPage(
