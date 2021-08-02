@@ -19,6 +19,10 @@ import {
   useRef,
   useState,
 } from 'react';
+import {
+  ChoroplethTooltipPlacement,
+  Tooltip,
+} from '~/components/choropleth/tooltips';
 import { colors } from '~/style/theme';
 import {
   AccessibilityDefinition,
@@ -28,7 +32,6 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { ChoroplethTooltipPlacement, Tooltip } from '../tooltips/tooltip';
 import { Path } from './path';
 
 export enum CHOROPLETH_ASPECT_RATIO {
