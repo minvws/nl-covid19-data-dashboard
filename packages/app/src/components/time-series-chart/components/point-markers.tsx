@@ -22,12 +22,12 @@ export function PointMarkers<T extends TimestampedValue>(
 
   if (!points.length) return null;
 
-  const x = points[0].x - Math.floor(size / 2);
+  const offsetX = points[0].x - Math.floor(size / 2);
 
   return (
     <Container
       style={{
-        transform: `translateX(${x}px)`,
+        transform: `translateX(${offsetX}px)`,
         width: size,
       }}
     >
