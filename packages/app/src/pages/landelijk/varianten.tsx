@@ -5,6 +5,11 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
+import {
+  getSeriesConfig,
+  getVariantChartData,
+  getVariantTableData,
+} from '~/domain/variants/static-props';
 import { VariantsOverTime } from '~/domain/variants/variants-over-time';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
@@ -20,11 +25,6 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-import {
-  getSeriesConfig,
-  getVariantChartData,
-} from '~/static-props/variants/get-variant-chart-data';
-import { getVariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { colors } from '~/style/theme';
 import { VariantsPageQuery } from '~/types/cms';
 
