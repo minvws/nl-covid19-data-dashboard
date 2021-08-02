@@ -1,22 +1,22 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
+import { Box } from '~/components/base';
+import { CollapsibleSection } from '~/components/collapsible';
+import { ErrorBoundary } from '~/components/error-boundary';
+import { ExternalLink } from '~/components/external-link';
+import { useIntl } from '~/intl';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import {
   CollapsibleList,
   ImageBlock,
   InlineAttachment,
   InlineLink,
-  RichContentImageBlock,
+  RichContentImageBlock
 } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { Box } from '../base';
-import { CollapsibleSection } from '../collapsible';
-import { ErrorBoundary } from '../error-boundary';
-import { ContentImage } from './content-image';
-import { ExternalLink } from '~/components/external-link';
-import { Link } from '~/utils/link';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
-import { useIntl } from '~/intl';
+import { Link } from '~/utils/link';
+import { ContentImage } from './content-image';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];

@@ -2,7 +2,6 @@ import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
 import globby from 'globby';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { features } from '~/config';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
 
@@ -52,10 +51,6 @@ export async function getServerSideProps({
   };
 }
 
-const disabledRoutes = features
-  .filter((x) => x.isEnabled === false)
-  .map((x) => x.route);
-
 const vrCodes = vrData.map((x) => x.code);
 const gmCodes = gmData.map((x) => x.gemcode);
 
@@ -66,8 +61,8 @@ async function getAllPathsWithPriorities() {
   );
 
   const config = {
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
+    projectId: '5mog5ask',
     useCdn: process.env.NODE_ENV === 'production',
     apiVersion: '2021-03-25',
   };
@@ -94,15 +89,13 @@ async function getAllPathsWithPriorities() {
     '!../app/src/pages/api',
   ]);
 
-  const pathsFromPages = pages
-    .map((x) =>
-      x
-        .replace('../app/src/pages', '')
-        .replace('.tsx', '')
-        .replace('/index.tsx', '')
-        .replace('/index', '')
-    )
-    .filter((x) => !disabledRoutes.includes(x));
+  const pathsFromPages = pages.map((x) =>
+    x
+      .replace('../app/src/pages', '')
+      .replace('.tsx', '')
+      .replace('/index.tsx', '')
+      .replace('/index', '')
+  );
 
   const priorities = [
     { path: 'landelijk', value: 0.8 },

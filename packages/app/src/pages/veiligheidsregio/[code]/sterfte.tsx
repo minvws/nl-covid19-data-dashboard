@@ -1,5 +1,4 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -12,7 +11,10 @@ import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-secti
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -23,7 +25,6 @@ import {
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -31,11 +32,9 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
+  createGetContent<PageArticlesQueryResult>((context) => {
     const { locale = 'nl' } = context;
-    return createPageArticlesQuery('deceasedPage', locale ?? 'nl');
+    return createPageArticlesQuery('deceasedPage', locale);
   })
 );
 
@@ -54,11 +53,6 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_sterfte;
-
-  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
-    dataRivm.values,
-    4
-  );
 
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
@@ -164,21 +158,6 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataRivmUnderReportedDateStart,
-                      end: Infinity,
-                      label:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'covid_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>

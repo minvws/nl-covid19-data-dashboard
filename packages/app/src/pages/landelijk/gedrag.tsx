@@ -1,6 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
 import Gedrag from '~/assets/gedrag.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
@@ -17,7 +16,10 @@ import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-look
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -36,9 +38,7 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
+  createGetContent<PageArticlesQueryResult>((context) => {
     const { locale = 'nl' } = context;
     return createPageArticlesQuery('behaviorPage', locale);
   })

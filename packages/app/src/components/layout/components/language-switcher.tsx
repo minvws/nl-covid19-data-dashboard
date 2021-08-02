@@ -21,7 +21,7 @@ export function LanguageSwitcher() {
         NL
       </LanguageLink>
 
-      <Separator />
+      <Separator aria-hidden="true" />
 
       <LanguageLink
         href={`https://coronadashboard.government.nl${currentPath}`}
@@ -35,10 +35,14 @@ export function LanguageSwitcher() {
     </Box>
   );
 }
-const Separator = styled.span.attrs({ 'aria-hidden': 'true', children: '|' })(
+const Separator = styled.span(
   css({
     mx: 2,
     display: 'inline-block',
+
+    '&:after': {
+      content: '"|"',
+    },
   })
 );
 

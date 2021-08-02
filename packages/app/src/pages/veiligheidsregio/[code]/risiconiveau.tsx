@@ -7,7 +7,6 @@ import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import Getest from '~/assets/test.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
@@ -29,7 +28,10 @@ import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -55,9 +57,7 @@ export const getStaticProps = createGetStaticProps(
     'hospital_nice_sum',
     'tested_overall_sum'
   ),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
+  createGetContent<PageArticlesQueryResult>((context) => {
     const { locale = 'nl' } = context;
     return createPageArticlesQuery('escalationLevelPage', locale);
   })

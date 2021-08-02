@@ -12,7 +12,7 @@ import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { Scoreboard } from '~/domain/escalation-level/scoreboard';
-import { selectScoreboardData } from '~/domain/escalation-level/scoreboard/data-selection/select-scoreboard-data';
+import { selectScoreboardData } from '~/domain/escalation-level/scoreboard/select-scoreboard-data';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {

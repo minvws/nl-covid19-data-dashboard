@@ -22,7 +22,6 @@
     "test:ci": "echo 'No tests available for @corona-dashboard/cli'",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\"",
     "lint": "echo 'No linter configured for @corona-dashboard/cli'",
-    "type-check": "echo 'No type-check configured for @corona-dashboard/cli'",
     "compile": "tsc --noEmit",
     "validate-json": "yarn workspace @corona-dashboard/common build && yarn run validate-json-all",
     "validate-json-all": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-all.ts",

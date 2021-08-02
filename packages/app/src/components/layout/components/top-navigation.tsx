@@ -20,10 +20,7 @@ export function TopNavigation() {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
-  const collapsible = useCollapsible({
-    isOpen: isWideNav,
-    isOpenInitial: true,
-  });
+  const collapsible = useCollapsible({ isOpen: isWideNav });
 
   const internationalFeature = useFeature('inHomePage');
 

@@ -1,7 +1,6 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -23,7 +22,10 @@ import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduct
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
@@ -64,10 +66,8 @@ export const getStaticProps = createGetStaticProps(
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
     page: VaccinationPageQuery;
-    highlight: {
-      articles?: ArticleSummary[];
-    };
-  }>((context) => {
+    highlight: PageArticlesQueryResult;
+  }>(((context) => {
     const { locale = 'nl' } = context;
     return `{
       "page": ${getVaccinePageQuery(locale)},

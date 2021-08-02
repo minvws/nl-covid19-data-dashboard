@@ -5,7 +5,7 @@ import {
 } from '~/components/escalation-level-icon';
 import { Text } from '~/components/typography';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useEscalationColor } from '~/utils/use-escalation-color';

@@ -1,4 +1,3 @@
-import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
@@ -8,7 +7,10 @@ import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situat
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -19,7 +21,6 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-
 export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
@@ -30,9 +31,7 @@ export const getStaticProps = withFeatureNotFoundPage(
         situations,
       }),
     }),
-    createGetContent<{
-      articles?: ArticleSummary[];
-    }>((context) => {
+    createGetContent<PageArticlesQueryResult>((context) => {
       const { locale = 'nl' } = context;
       return createPageArticlesQuery('situationsPage', locale);
     })

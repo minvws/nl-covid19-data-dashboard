@@ -1,5 +1,5 @@
 package.json
 public
 out
-data.d.ts
+types/data.ts
 src/locale/*.json
