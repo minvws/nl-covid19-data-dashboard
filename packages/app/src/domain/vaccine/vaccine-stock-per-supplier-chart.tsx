@@ -126,7 +126,6 @@ export function VaccineStockPerSupplierChart({
             dataOptions={{
               forcedMaximumValue: maximumValuesPerTimeframeOption[timeframe],
             }}
-            showWeekNumbers
           />
         </>
       )}

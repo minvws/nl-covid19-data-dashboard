@@ -1,6 +1,6 @@
 import { GmProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { ReactNode } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -36,7 +36,7 @@ export function MunicipalityNavigationMap<T>(
   const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
 
   const renderFeature = (
-    feature: Feature<MultiPolygon, GmProperties>,
+    feature: Feature<MultiPolygon | Polygon, GmProperties>,
     path: string,
     _index: number
   ) => {
@@ -62,7 +62,7 @@ export function MunicipalityNavigationMap<T>(
     );
 
   const renderHover = (
-    feature: Feature<MultiPolygon, GmProperties>,
+    feature: Feature<MultiPolygon | Polygon, GmProperties>,
     path: string
   ) => {
     const { gemcode, gemnaam } = feature.properties;

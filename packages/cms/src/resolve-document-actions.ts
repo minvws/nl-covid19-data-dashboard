@@ -51,7 +51,7 @@ const actionsByDocumentType = {
     DuplicateAction,
     DeleteAction,
   ],
-  figureExplanationItem: [
+  cijferVerantwoordingItem: [
     PublishAction,
     DiscardChangesAction,
     UnpublishAction,

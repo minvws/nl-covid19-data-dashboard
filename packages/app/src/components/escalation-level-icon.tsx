@@ -1,10 +1,10 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { EscalationLevel } from '~/domain/restrictions/type';
-import { asResponsiveArray } from '~/style/utils';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { useIntl } from '~/intl';
-import { VisuallyHidden } from './visually-hidden';
+import { asResponsiveArray } from '~/style/utils';
 import { useEscalationColor } from '~/utils/use-escalation-color';
+import { VisuallyHidden } from './visually-hidden';
 
 export type SizeVariants = 'small' | 'medium' | 'large';
 
