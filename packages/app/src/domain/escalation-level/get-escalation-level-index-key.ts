@@ -1,4 +1,4 @@
-import { EscalationLevel } from '../restrictions/type';
+import { EscalationLevel } from '../restrictions/types';
 
 export function getEscalationLevelIndexKey(level: EscalationLevel) {
   switch (level) {

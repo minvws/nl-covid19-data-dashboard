@@ -1,5 +1,4 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -11,7 +10,10 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -29,9 +31,7 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>(() => {
+  createGetContent<PageArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('deceasedPage', locale);
   })

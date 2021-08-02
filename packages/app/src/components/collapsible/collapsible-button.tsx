@@ -6,11 +6,12 @@ import {
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { asResponsiveArray } from '~/style/utils';
 import { useIsMounted } from '~/utils/use-is-mounted';
-import { useSetLinkTabbability } from './use-set-link-tabbability';
+import { useResizeObserver } from '~/utils/use-resize-observer';
+import { useSetLinkTabbability } from './logic';
+
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;
@@ -22,8 +23,8 @@ export const CollapsibleButton = ({
   children,
   icon,
 }: CollapsibleButtonProps) => {
-  const contentObserver = useResizeObserver();
-  const buttonObserver = useResizeObserver();
+  const [contentRef, contentSize] = useResizeObserver<HTMLDivElement>();
+  const [buttonRef, buttonSize] = useResizeObserver<HTMLDivElement>();
 
   const [isOpen, setIsOpen] = useState(false);
   const { wrapperRef } = useSetLinkTabbability(isOpen);
@@ -35,12 +36,13 @@ export const CollapsibleButton = ({
    */
   const clipPathCalculation = useMemo(() => {
     if (
-      !buttonObserver.width ||
-      !buttonObserver.height ||
-      !contentObserver.width ||
-      !contentObserver.height
-    )
+      !buttonSize.width ||
+      !buttonSize.height ||
+      !contentSize.width ||
+      !contentSize.height
+    ) {
       return '0 0, 100% 0, 100% 0, 0 0';
+    }
 
     /**
      * First find the percentage of how much is the button is the width of the size of the container.
@@ -48,9 +50,8 @@ export const CollapsibleButton = ({
      * it fully expand to the left edge of the container.
      * In the return the value it's becoming a positive one so it can animate the mask to the right edge of the container.
      */
-    const width =
-      ((buttonObserver.width / contentObserver.width) * 100 - 100) / 2;
-    const height = (buttonObserver.height / contentObserver.height) * 100 * -1;
+    const width = ((buttonSize.width / contentSize.width) * 100 - 100) / 2;
+    const height = (buttonSize.height / contentSize.height) * 100 * -1;
 
     return `
       ${width * -1}% ${height}%,
@@ -59,10 +60,10 @@ export const CollapsibleButton = ({
       ${width * -1}% 0%
   `;
   }, [
-    buttonObserver.width,
-    buttonObserver.height,
-    contentObserver.width,
-    contentObserver.height,
+    buttonSize.width,
+    buttonSize.height,
+    contentSize.width,
+    contentSize.height,
   ]);
 
   /**
@@ -70,23 +71,23 @@ export const CollapsibleButton = ({
    * measured height
    */
   const height =
-    (buttonObserver.height ?? 0) + (isOpen ? contentObserver.height ?? 0 : 0) ||
+    (buttonSize.height ?? 0) + (isOpen ? contentSize.height ?? 0 : 0) ||
     undefined;
 
   return (
     <Container
       style={{ height }}
       isOpen={isOpen}
-      buttonWidth={buttonObserver.width ?? 0}
-      buttonHeight={buttonObserver.height ?? 0}
-      contentWidth={contentObserver.width ?? 0}
-      contentHeight={contentObserver.height ?? 0}
+      buttonWidth={buttonSize.width ?? 0}
+      buttonHeight={buttonSize.height ?? 0}
+      contentWidth={contentSize.width ?? 0}
+      contentHeight={contentSize.height ?? 0}
       clipPathCalculation={clipPathCalculation ?? 0}
       isMounted={isMounted}
     >
       <Disclosure open={isOpen} onChange={() => setIsOpen(!isOpen)}>
         <ButtonContainer>
-          <Box ref={buttonObserver.ref} display="flex">
+          <Box ref={buttonRef} display="flex">
             <DisclosureButton>
               {icon && <IconContainer>{icon}</IconContainer>}
               {label}
@@ -96,7 +97,7 @@ export const CollapsibleButton = ({
         </ButtonContainer>
 
         <DisclosurePanel>
-          <div ref={contentObserver.ref}>
+          <div ref={contentRef}>
             <div ref={wrapperRef}>{children}</div>
           </div>
         </DisclosurePanel>

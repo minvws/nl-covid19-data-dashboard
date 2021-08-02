@@ -16,7 +16,7 @@ import { Link } from '~/utils/link';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useEscalationThresholds } from '../../thresholds';
-import { VrScoreboardData } from '../logic';
+import { VrScoreboardData } from '../types';
 
 interface VrRowProps {
   vrData: VrScoreboardData;

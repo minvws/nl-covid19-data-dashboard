@@ -2,7 +2,6 @@ import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import {
   InteractiveLegend,
   SelectOption,
@@ -14,6 +13,7 @@ import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';

@@ -1,6 +1,6 @@
 import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { useBreakpoints } from '~/utils/use-breakpoints';
-import { TableText } from '..';
+import { TableText } from '../types';
 import { NarrowVariantsTable } from './narrow-variants-table';
 import { WideVariantsTable } from './wide-variants-table';
 

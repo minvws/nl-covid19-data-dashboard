@@ -24,7 +24,7 @@ import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { EscalationLevel } from '../restrictions/type';
+import { EscalationLevel } from '../restrictions/types';
 import { SituationIcon } from '../situations/components/situation-icon';
 import { VrComboBox } from './components/vr-combo-box';
 
