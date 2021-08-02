@@ -6,7 +6,6 @@ import {
 import css from '@styled-system/css';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { Fragment, ReactNode, useCallback } from 'react';
-import { regionThresholds } from '~/components/choropleth/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -14,12 +13,12 @@ import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
-import { HoverPathLink, Path } from './components';
-import { Choropleth } from './components/choropleth';
+import { Choropleth, HoverPathLink, Path } from './components';
 import {
   countryGeo,
   getDataThresholds,
   regionGeo,
+  regionThresholds,
   useChoroplethColorScale,
   useChoroplethDataDescription,
   useTabInteractiveButton,
