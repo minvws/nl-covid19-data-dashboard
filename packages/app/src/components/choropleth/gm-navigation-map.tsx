@@ -14,7 +14,7 @@ import {
   useTabInteractiveButton,
 } from './logic';
 
-type MunicipalityNavigationMapProps<T> = {
+type GmNavigationMapProps<T> = {
   onSelect?: (gmcode: string) => void;
   tooltipContent?: (context: GmProperties & { value: T }) => ReactNode;
 };
@@ -25,7 +25,7 @@ type MunicipalityNavigationMapProps<T> = {
  * index page.
  */
 
-export function GmNavigationMap<T>(props: MunicipalityNavigationMapProps<T>) {
+export function GmNavigationMap<T>(props: GmNavigationMapProps<T>) {
   const { tooltipContent } = props;
 
   const { siteText } = useIntl();
