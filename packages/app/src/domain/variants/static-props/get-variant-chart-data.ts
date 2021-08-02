@@ -55,7 +55,8 @@ export function getVariantChartData(variants: NlVariants | undefined) {
       ] = variant.values[index].percentage;
       total += variant.values[index].percentage;
     });
-    item.other_percentage = Math.round((100 - total) * 100) / 100;
+    item.other_percentage = parseFloat((100 - total).toFixed(2));
+    console.log(item.other_percentage);
     return item;
   });
 

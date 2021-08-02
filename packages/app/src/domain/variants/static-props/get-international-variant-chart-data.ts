@@ -78,7 +78,7 @@ function getVariantChartData(variants: InVariants | undefined) {
     );
 
     (item as unknown as Record<string, number>)['other_percentage'] =
-      Math.round((100 - total) * 100) / 100; //Round to maximum of 2 decimals
+      parseFloat((100 - total).toFixed(2));
 
     return item;
   });
