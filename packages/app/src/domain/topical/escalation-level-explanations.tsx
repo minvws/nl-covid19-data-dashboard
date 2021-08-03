@@ -6,7 +6,7 @@ import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { EscalationLevel } from '../restrictions/type';
+import { EscalationLevel } from '../restrictions/types';
 
 type EscalationLevelExplanationProps = {
   level: EscalationLevel;

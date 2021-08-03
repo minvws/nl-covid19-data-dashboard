@@ -1,8 +1,8 @@
 import { assert } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { Heading, InlineText } from '~/components/typography';
+import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantSidebarValue } from '~/static-props/variants/get-variant-sidebar-value';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 interface VariantsSidebarMetricProps {
   data: VariantSidebarValue;

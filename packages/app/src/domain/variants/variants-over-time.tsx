@@ -10,8 +10,8 @@ import {
   useSeriesList,
 } from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
+import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useList } from '~/utils/use-list';

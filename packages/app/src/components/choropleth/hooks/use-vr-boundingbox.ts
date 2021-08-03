@@ -1,5 +1,5 @@
 import { VrProperties } from '@corona-dashboard/common';
-import { FeatureCollection, MultiPolygon } from 'geojson';
+import { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 import { useMemo } from 'react';
 
 /**
@@ -9,7 +9,7 @@ import { useMemo } from 'react';
  * @param selectedRegion
  */
 export function useVrBoundingbox(
-  regionGeo: FeatureCollection<MultiPolygon, VrProperties>,
+  regionGeo: FeatureCollection<MultiPolygon | Polygon, VrProperties>,
   selectedRegion?: string
 ) {
   return useMemo(() => {
