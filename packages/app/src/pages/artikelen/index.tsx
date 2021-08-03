@@ -87,13 +87,13 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
       <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
         <MaxWidth px={{ _: 3, lg: 4 }}>
-          <Heading level={2} as="h1" mb={2} lineHeight={0}>
-            {siteText.common_actueel.secties.artikelen.titel}
-          </Heading>
+          <Box pb={2}>
+            <Heading level={2} as="h1">
+              {siteText.common_actueel.secties.artikelen.titel}
+            </Heading>
+          </Box>
 
-          <Text m={0}>
-            {siteText.common_actueel.secties.artikelen.beschrijving}
-          </Text>
+          <Text>{siteText.common_actueel.secties.artikelen.beschrijving}</Text>
 
           {breakpoints.lg ? (
             <OrderedList>

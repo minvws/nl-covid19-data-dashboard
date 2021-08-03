@@ -61,19 +61,14 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
 
       {article.categories && (
         <ContentBlock>
-          <InlineText
-            color="annotation"
-            mb={3}
-            mt={5}
-            fontFamily="body"
-            display="block"
-          >
-            {siteText.common_actueel.secties.artikelen.tags}
-          </InlineText>
+          <Box pb={3} pt={3}>
+            <InlineText color="annotation">
+              {siteText.common_actueel.secties.artikelen.tags}
+            </InlineText>
+          </Box>
           <Box
             as="ul"
-            spacing={3}
-            spacingHorizontal
+            spacingHorizontal={3}
             display="flex"
             flexWrap="wrap"
             m={0}
