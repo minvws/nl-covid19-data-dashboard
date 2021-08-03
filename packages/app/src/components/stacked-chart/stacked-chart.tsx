@@ -13,8 +13,9 @@ import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
-import { BarStack } from '@visx/shape';
+import { BarStack, Line } from '@visx/shape';
 import { SeriesPoint } from '@visx/shape/lib/types';
+import { Text } from '@visx/text';
 /**
  * useTooltipInPortal will not work for IE11 at the moment. See this issue
  * https://github.com/airbnb/visx/issues/904
@@ -24,7 +25,6 @@ import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
 import { Box } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { InlineText } from '~/components/typography';
@@ -38,6 +38,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
   calculateSeriesMaximum,
@@ -98,13 +99,13 @@ type TooltipFormatter = (
 
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-export type Config<T extends TimestampedValue> = {
+type Config<T extends TimestampedValue> = {
   metricProperty: keyof T;
   label: string;
   color: string;
 };
 
-export type StackedChartProps<T extends TimestampedValue> = {
+type StackedChartProps<T extends TimestampedValue> = {
   accessibility: AccessibilityDefinition;
   values: T[];
   config: Config<T>[];
@@ -175,11 +176,7 @@ export function StackedChart<T extends TimestampedValue>(
 
   const isMountedRef = useIsMountedRef();
 
-  const {
-    width: yAxisWidth = 0,
-    ref: yAxisRef,
-    // @ts-expect-error useResizeObserver expects element extending HTMLElement
-  } = useResizeObserver<SVGElement>();
+  const [yAxisRef, yAxisSize] = useResizeObserver<SVGGElement>();
 
   const padding = useMemo(
     () =>
@@ -187,9 +184,9 @@ export function StackedChart<T extends TimestampedValue>(
         top: 10,
         right: isExtraSmallScreen ? 0 : 30,
         bottom: 30,
-        left: yAxisWidth + 10, // 10px seems to be enough padding,
+        left: (yAxisSize.width ?? 0) + 10, // 10px seems to be enough padding,
       } as const),
-    [isExtraSmallScreen, yAxisWidth]
+    [isExtraSmallScreen, yAxisSize.width]
   );
 
   const metricProperties = useMemo(
@@ -311,9 +308,10 @@ export function StackedChart<T extends TimestampedValue>(
           : undefined;
       }
 
-      const isAlternate = index % 2 === 0 && index !== all.length - 2;
+      const modulo = Math.ceil(all.length / numOfFittingLabels);
+      const showTick = index % modulo === 0 && index < all.length - modulo;
 
-      if (isFirst || isLast || isAlternate) {
+      if (isFirst || isLast || showTick) {
         return rangeText;
       }
     },
@@ -526,6 +524,22 @@ export function StackedChart<T extends TimestampedValue>(
                       fontSize: 12,
                     };
                   }}
+                  tickComponent={({ x, y, formattedValue, ...props }) =>
+                    formattedValue && (
+                      <>
+                        <Line
+                          from={{ x, y: y - 20 }}
+                          to={{ x, y: y - 13 }}
+                          stroke={colors.data.axis}
+                          strokeWidth={1}
+                          strokeLinecap="square"
+                        />
+                        <Text x={x} y={y} {...props}>
+                          {formattedValue}
+                        </Text>
+                      </>
+                    )
+                  }
                   hideTicks
                 />
                 <g ref={yAxisRef}>
@@ -678,7 +692,7 @@ function getDate(x: SeriesValue) {
  * TooltipContainer from LineChart did not seem to be very compatible with the
  * design for this chart, so this is something to look at later.
  */
-export const TooltipContainer = styled.div(
+const TooltipContainer = styled.div(
   css({
     pointerEvents: 'none',
     whiteSpace: 'nowrap',

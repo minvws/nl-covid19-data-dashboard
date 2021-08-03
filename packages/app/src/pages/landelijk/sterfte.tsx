@@ -1,11 +1,11 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
 import { AgeDemographic } from '~/components/age-demographic';
-import { ArticleStrip } from '~/components/article-strip';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
+import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -25,7 +25,6 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -54,11 +53,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
   const content = props.content;
 
-  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
-    dataRivm.values,
-    4
-  );
-
   const { siteText } = useIntl();
 
   const text = siteText.sterfte;
@@ -73,21 +67,20 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             title={text.section_deceased_rivm.title}
             icon={<CoronaVirusIcon />}
-            subtitle={text.section_deceased_rivm.description}
-            reference={text.section_deceased_rivm.reference}
+            description={text.section_deceased_rivm.description}
+            referenceLink={text.section_deceased_rivm.reference.href}
             metadata={{
               datumsText: text.section_deceased_rivm.datums,
               dateOrRange: dataRivm.last_value.date_unix,
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
+            articles={content.main.articles}
           />
-
-          <ArticleStrip articles={content.main.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -162,21 +155,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataRivmUnderReportedDateStart,
-                      end: Infinity,
-                      label:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'covid_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>
@@ -200,11 +178,13 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <ContentHeader
+          <Spacer amount={3} />
+
+          <PageInformationBlock
             title={siteText.section_sterftemonitor.title}
             icon={<CoronaVirusIcon />}
-            subtitle={siteText.section_sterftemonitor.description}
-            reference={siteText.section_sterftemonitor.reference}
+            description={siteText.section_sterftemonitor.description}
+            referenceLink={siteText.section_sterftemonitor.reference.href}
             metadata={{
               datumsText: siteText.section_sterftemonitor.datums,
               dateOrRange: {
@@ -214,13 +194,13 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataCbs.last_value.date_of_insertion_unix,
               dataSources: [siteText.section_sterftemonitor.bronnen.cbs],
             }}
+            articles={content.monitor.articles}
           />
 
           <DeceasedMonitorSection
             data={dataCbs}
             showDataMessage
             showCauseMessage
-            articles={content.monitor.articles}
           />
         </TileList>
       </NationalLayout>

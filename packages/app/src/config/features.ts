@@ -2,28 +2,37 @@ import { Feature } from '@corona-dashboard/common';
 
 export const features: Feature[] = [
   {
-    name: 'vaccinationPerAgegroup',
+    name: 'vaccinationPerAgeGroup',
     isEnabled: false,
-    metricScopes: ['nl'],
+    dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
-  },
-  {
-    name: 'sewerSplitAreaChart',
-    isEnabled: true,
   },
   {
     name: 'situationsPage',
     isEnabled: true,
-    metricScopes: ['vr', 'vr_collection'],
+    dataScopes: ['vr', 'vr_collection'],
     metricName: 'situations',
   },
   {
-    name: 'variantsPage',
+    name: 'nlVariantsPage',
     isEnabled: true,
+    dataScopes: ['nl'],
     metricName: 'variants',
   },
   {
-    name: 'timelineMockData',
+    name: 'inHomePage',
     isEnabled: true,
+  },
+  {
+    name: 'inPositiveTestsPage',
+    isEnabled: true,
+    dataScopes: ['in', 'in_collection'],
+    metricName: 'tested_overall',
+  },
+  {
+    name: 'inVariantsPage',
+    isEnabled: true,
+    dataScopes: ['in'],
+    metricName: 'variants',
   },
 ];

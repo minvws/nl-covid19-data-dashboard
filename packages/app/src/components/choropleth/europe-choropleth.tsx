@@ -5,7 +5,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { geoConicConformal } from 'd3-geo';
-import { Feature, MultiPolygon } from 'geojson';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
@@ -17,7 +17,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from '../base';
-import { Choropleth } from './choropleth';
+import { Choropleth, CHOROPLETH_ASPECT_RATIO } from './choropleth';
 import { useInChoroplethColorScale, useTabInteractiveButton } from './hooks';
 import { HoverPathLink, Path } from './path';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
@@ -27,7 +27,7 @@ import { europeGeo } from './topology';
  * List of countries to define the boundingbox. These are countries on the outer edges
  * of the group of countries that are shown.
  */
-const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC'];
+const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
 
 const boundingBoxEurope: EuropeGeoJSON = {
   ...europeGeo,
@@ -85,7 +85,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
       })
     );
 
-  const { ref, width } = useResizeObserver<HTMLDivElement>();
+  const [ref, { width }] = useResizeObserver<HTMLDivElement>();
 
   const { mapHeight, padding } = useHeightAndPadding(width);
 
@@ -95,7 +95,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
 
   const renderFeature = useCallback(
     (
-      feature: Feature<MultiPolygon, EuropeGeoProperties>,
+      feature: Feature<MultiPolygon | Polygon, EuropeGeoProperties>,
       path: string,
       index: number
     ) => {
@@ -125,7 +125,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
 
   const renderHover = useCallback(
     (
-      feature: Feature<MultiPolygon, EuropeGeoProperties>,
+      feature: Feature<MultiPolygon | Polygon, EuropeGeoProperties>,
       path: string,
       index: number
     ) => {
@@ -135,11 +135,12 @@ export function EuropeChoropleth<T extends CountryDataItem>(
 
       return isDefined(item) ? (
         <HoverPathLink
-          isSelected={true}
           isTabInteractive={isTabInteractive}
           key={`${ISO_A3}_${index}`}
           title={ISO_A3}
           id={ISO_A3}
+          stroke={colors.body}
+          strokeWidth={2}
           pathData={path}
           {...anchorEventHandlers}
         />
@@ -173,6 +174,7 @@ export function EuropeChoropleth<T extends CountryDataItem>(
         })}
       >
         <Choropleth
+          aspectRatio={CHOROPLETH_ASPECT_RATIO.in}
           projection={geoConicConformal}
           accessibility={choroplethAccessibility}
           initialWidth={1.1 * mapHeight}

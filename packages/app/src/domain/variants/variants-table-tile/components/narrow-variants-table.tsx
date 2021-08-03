@@ -1,15 +1,14 @@
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@reach/disclosure';
+import { DifferenceDecimal } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { forwardRef, MouseEvent, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { SiteText } from '~/locale';
+import { VariantRow } from '~/domain/variants/static-props';
+import { useIntl } from '~/intl';
+import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
+import { useCollapsible } from '~/utils/use-collapsible';
 import {
   Cell,
   HeaderCell,
@@ -18,16 +17,30 @@ import {
   VariantDifference,
   VariantNameCell,
 } from '.';
-import { VariantRow } from '../logic/use-variants-table-data';
+import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
+import { TableText } from '../types';
+import { NoPercentageData } from './no-percentage-data';
 
 type NarrowVariantsTableProps = {
   rows: VariantRow[];
-  text: SiteText['covid_varianten'];
+  text: TableText;
 };
 
 export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
+  const intl = useIntl();
   const { rows, text } = props;
-  const columnNames = text.varianten_tabel.kolommen;
+  const columnNames = text.kolommen;
+
+  const formatValue = useMemo(() => {
+    const numberOfDecimals = getMaximumNumberOfDecimals(
+      rows.map((x) => x.percentage ?? 0)
+    );
+    return (value: number) =>
+      intl.formatPercentage(value, {
+        minimumFractionDigits: numberOfDecimals,
+        maximumFractionDigits: numberOfDecimals,
+      });
+  }, [intl, rows]);
 
   return (
     <StyledTable>
@@ -39,7 +52,12 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <MobileVariantRow row={row} text={text} key={row.variant} />
+          <MobileVariantRow
+            row={row}
+            formatValue={formatValue}
+            text={text}
+            key={row.variant}
+          />
         ))}
       </tbody>
     </StyledTable>
@@ -48,116 +66,69 @@ export function NarrowVariantsTable(props: NarrowVariantsTableProps) {
 
 type MobileVariantRowProps = {
   row: VariantRow;
-  text: SiteText['covid_varianten'];
+  text: TableText;
+  formatValue: (value: number) => string;
 };
 
 function MobileVariantRow(props: MobileVariantRowProps) {
-  const { row, text } = props;
-  const [isOpen, setIsOpen] = useState(false);
-  const { ref, height: contentHeight } = useResizeObserver();
-  const columnNames = text.varianten_tabel.kolommen;
+  const { row, text, formatValue } = props;
+  const collapsible = useCollapsible();
 
-  const chevronRef = useRef<HTMLButtonElement>();
+  const columnNames = text.kolommen;
 
-  function handleRowClick(event: MouseEvent) {
-    if (event.target !== chevronRef.current) {
-      setIsOpen((x) => !x);
-    }
-  }
+  const [, variantDescription] = useVariantNameAndDescription(
+    row.variant,
+    text.anderen_tooltip
+  );
 
   return (
     <>
-      <tr onClick={handleRowClick}>
+      <tr style={{ cursor: 'pointer' }} onClick={collapsible.toggle}>
         <VariantNameCell variant={row.variant} text={text} mobile narrow />
         <Cell mobile>
-          <PercentageBarWithNumber
-            percentage={row.percentage}
-            color={row.color}
-          />
+          {isPresent(row.percentage) ? (
+            <PercentageBarWithNumber
+              percentage={row.percentage}
+              color={row.color}
+              formatValue={formatValue}
+            />
+          ) : (
+            <NoPercentageData />
+          )}
         </Cell>
         <Cell mobile alignRight>
-          <Disclosure
-            open={isOpen}
-            onChange={() => {
-              setIsOpen((x) => !x);
-            }}
-          >
-            <Chevron ref={chevronRef as any} />
-          </Disclosure>
+          {collapsible.button()}
         </Cell>
       </tr>
       <tr>
         <MobileCell colSpan={3}>
-          <Panel
-            style={{
-              height: isOpen ? contentHeight : 0,
-            }}
-          >
-            <div ref={ref}>
-              <Box mb={1} display="flex" flexDirection="row">
-                <InlineText mr={1}>{columnNames['vorige_meeting']}:</InlineText>
-                <VariantDifference value={row.difference} />
+          {collapsible.content(
+            <Box spacing={2} css={css({ pb: 3 })}>
+              <Box display="flex" flexDirection="row">
+                <InlineText mr={1}>{columnNames.vorige_meting}:</InlineText>
+                {isPresent(row.difference) &&
+                isPresent(row.difference.difference) &&
+                isPresent(row.difference.old_value) ? (
+                  <VariantDifference
+                    value={row.difference as DifferenceDecimal}
+                  />
+                ) : (
+                  '-'
+                )}
               </Box>
-              <Box>
-                {columnNames['eerst_gevonden']}:{' '}
-                <InlineText>{row.countryOfOrigin}</InlineText>
+              <Box css={css({ color: 'annotation', fontSize: 2 })}>
+                {variantDescription}
               </Box>
-            </div>
-          </Panel>
+            </Box>
+          )}
         </MobileCell>
       </tr>
     </>
   );
 }
 
-const Chevron = styled(
-  forwardRef((props, ref) => <DisclosureButton {...(props as any)} ref={ref} />)
-)(
-  css({
-    display: 'flex',
-    alignItems: 'flex-end',
-    m: 0,
-    p: 0,
-    pb: 0,
-    overflow: 'visible',
-    bg: 'transparent',
-    border: 'none',
-    color: 'lightGray',
-    fontSize: '1.25rem',
-    cursor: 'pointer',
-
-    '&::after': {
-      backgroundImage: 'url("/images/chevron-down.svg")',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: '0.9em 0.55em',
-      content: '""',
-      width: '0.9em',
-      height: '0.55em',
-      mt: '0.35em',
-      p: 0,
-      transition: 'transform 0.4s ease-in-out',
-    },
-
-    '&[data-state="open"]:after': {
-      transform: 'rotate(180deg)',
-    },
-  })
-);
-
-const Panel = styled((props) => <DisclosurePanel {...props} />)(
-  css({
-    display: 'block',
-    opacity: 1,
-    overflow: 'hidden',
-    p: 0,
-    transition: 'height 0.4s ease-in-out, opacity 0.4s ease-in-out',
-  })
-);
-
 const MobileCell = styled.td(
   css({
-    p: 0,
     borderBottom: '1px solid',
     borderBottomColor: 'lightGray',
   })

@@ -54,7 +54,7 @@ export function SituationsOverTimeChart({
   );
 
   return (
-    <ErrorBoundary extraPropsReport={{ timeframe }}>
+    <ErrorBoundary extraComponentInfoReport={{ timeframe }}>
       <>
         <InteractiveLegend
           helpText={text.legenda.help_text}

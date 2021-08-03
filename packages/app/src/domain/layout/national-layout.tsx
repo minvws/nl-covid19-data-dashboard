@@ -26,10 +26,13 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
+import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
+import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationIcon } from '../situations/components/situation-icon';
+import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VariantsSidebarMetric } from '../variants/variants-sidebar-metric';
 
 export const nlPageMetricNames = [
@@ -49,14 +52,17 @@ export const nlPageMetricNames = [
   'doctor',
   'behavior',
   'difference',
+  'named_difference',
   'corona_melder_app_warning',
   'behavior_per_age_group',
-  'variants',
 ] as const;
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-export type NationalPageMetricData = Pick<Nl, NlPageMetricNames>;
+type NationalPageMetricData = {
+  variantSidebarValue: VariantSidebarValue;
+  situationsSidebarValue: SituationsSidebarValue;
+} & Pick<Nl, NlPageMetricNames>;
 
 interface NationalLayoutProps {
   lastGenerated: string;
@@ -220,21 +226,6 @@ export function NationalLayout(props: NationalLayoutProps) {
                 </MetricMenuItemLink>
 
                 <MetricMenuItemLink
-                  href={reverseRouter.nl.besmettelijkeMensen()}
-                  icon={<Ziektegolf />}
-                  title={siteText.besmettelijke_personen.titel_sidebar}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="infectious_people"
-                    metricProperty="estimate"
-                    localeTextKey="besmettelijke_personen"
-                    differenceKey="infectious_people__estimate"
-                  />
-                </MetricMenuItemLink>
-
-                <MetricMenuItemLink
                   href={reverseRouter.nl.reproductiegetal()}
                   icon={<ReproIcon />}
                   title={siteText.reproductiegetal.titel_sidebar}
@@ -265,13 +256,13 @@ export function NationalLayout(props: NationalLayoutProps) {
                   />
                 </MetricMenuItemLink>
 
-                {data.variants && (
+                {data.variantSidebarValue && (
                   <MetricMenuItemLink
-                    href={reverseRouter.nl.covidVarianten()}
+                    href={reverseRouter.nl.varianten()}
                     icon={<Varianten />}
                     title={siteText.covid_varianten.titel_sidebar}
                   >
-                    <VariantsSidebarMetric data={data.variants.last_value} />
+                    <VariantsSidebarMetric data={data.variantSidebarValue} />
                   </MetricMenuItemLink>
                 )}
 
@@ -280,7 +271,22 @@ export function NationalLayout(props: NationalLayoutProps) {
                   icon={<SituationIcon id="gathering" />}
                   title={siteText.brononderzoek.titel_sidebar}
                 >
-                  <SidebarKpiValue title={siteText.brononderzoek.kpi_titel} />
+                  <SituationsSidebarMetric
+                    date_start_unix={
+                      data.situationsSidebarValue.date_start_unix
+                    }
+                    date_end_unix={data.situationsSidebarValue.date_end_unix}
+                  />
+                </MetricMenuItemLink>
+
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.besmettelijkeMensen()}
+                  icon={<Ziektegolf />}
+                  title={siteText.besmettelijke_personen.titel_sidebar}
+                >
+                  <SidebarKpiValue
+                    title={siteText.besmettelijke_personen.kpi_titel}
+                  />
                 </MetricMenuItemLink>
               </CategoryMenu>
 

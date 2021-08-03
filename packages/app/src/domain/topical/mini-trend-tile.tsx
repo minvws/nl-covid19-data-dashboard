@@ -2,13 +2,13 @@ import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 // This type limits the allowed property names to those with a number type,
@@ -17,21 +17,20 @@ type NumberProperty<T extends TimestampedValue> = {
   [K in keyof T]: T[K] extends number | null ? K : never;
 }[keyof T];
 
-export type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> =
-  {
-    /**
-     * The mandatory AccessibilityDefinition provides a reference to annotate the
-     * graph with a label and description.
-     */
-    accessibility: AccessibilityDefinition;
-    icon: JSX.Element;
-    title: string;
-    text: ReactNode;
-    trendData: T[];
-    metricProperty: NumberProperty<T>;
-    href: string;
-    areas?: { header: string; chart: string };
-  };
+type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
+  /**
+   * The mandatory AccessibilityDefinition provides a reference to annotate the
+   * graph with a label and description.
+   */
+  accessibility: AccessibilityDefinition;
+  icon: JSX.Element;
+  title: string;
+  text: ReactNode;
+  trendData: T[];
+  metricProperty: NumberProperty<T>;
+  href: string;
+  areas?: { header: string; chart: string };
+};
 
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>

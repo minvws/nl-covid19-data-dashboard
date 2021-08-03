@@ -6,6 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withTranspileModules = require('next-transpile-modules')([
   'd3-geo',
   'd3-array',
+  'internmap',
 ]);
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const path = require('path');
@@ -68,7 +69,6 @@ const nextConfig = {
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
       ['balanced-match', '../../node_modules/balanced-match'],
-      ['date-fns', 'node_modules/date-fns'],
     ];
 
     duplicatePackageResolves.forEach(([packageName, resolvedPath]) => {
@@ -79,12 +79,16 @@ const nextConfig = {
       new LodashModuleReplacementPlugin({
         // See https://github.com/lodash/lodash-webpack-plugin#feature-sets
         paths: true,
-      }),
-      new DuplicatePackageCheckerPlugin({
-        verbose: true,
-        showHelp: true,
       })
     );
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new DuplicatePackageCheckerPlugin({
+          verbose: true,
+          showHelp: true,
+        })
+      );
+    }
 
     return config;
   },

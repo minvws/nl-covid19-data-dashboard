@@ -1,22 +1,13 @@
 import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import styled from 'styled-components';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import { Box } from '~/components/base';
-import { RichContent } from '~/components/cms/rich-content';
-import { Metadata } from '~/components/content-header/metadata';
-import { DecoratedLink } from '~/components/decorated-link';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { asResponsiveArray } from '~/style/utils';
-import {
-  DecoratedLink as CMSDecoratedLink,
-  TitleDescriptionBlock,
-} from '~/types/cms';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineTicker } from './components/vaccine-ticker';
@@ -29,16 +20,10 @@ interface VaccinePageIntroductionProps {
     | 'vaccine_administered_total'
     | 'vaccine_administered_rate_moving_average'
   >;
-  pageInfo: TitleDescriptionBlock;
-  pageLinks: CMSDecoratedLink[];
-  pageLinksTitle: string;
 }
 
 export function VaccinePageIntroduction({
   data,
-  pageInfo,
-  pageLinks,
-  pageLinksTitle,
 }: VaccinePageIntroductionProps) {
   const { siteText, formatPercentage, formatDate } = useIntl();
   const text = siteText.vaccinaties;
@@ -143,60 +128,6 @@ export function VaccinePageIntroduction({
           </Box>
         </Box>
       </Tile>
-
-      <TwoKpiSection>
-        <Box>
-          <Heading level={3}>{pageInfo.title}</Heading>
-          <Tile>
-            <RichContent blocks={pageInfo.description} />
-            <Box display="flex">
-              <MetadataBox>
-                <Metadata
-                  datumsText={text.datums}
-                  dateOrRange={
-                    data.vaccine_administered_total.last_value.date_unix
-                  }
-                  dateOfInsertionUnix={
-                    data.vaccine_administered_total.last_value
-                      .date_of_insertion_unix
-                  }
-                  dataSources={[]}
-                  moreInformationLabel={text.more_information.label}
-                  moreInformationLink={text.more_information.link}
-                  accessibilitySubject={''}
-                />
-              </MetadataBox>
-            </Box>
-          </Tile>
-        </Box>
-        <Box>
-          <Heading level={3}>{pageLinksTitle}</Heading>
-          <DecoratedLinksTile>
-            <Box>
-              {pageLinks.map((x, index) => (
-                <DecoratedLink link={x} compact={index > 0} key={index} />
-              ))}
-            </Box>
-          </DecoratedLinksTile>
-        </Box>
-      </TwoKpiSection>
     </Box>
   );
 }
-
-const MetadataBox = styled.div(
-  css({
-    flex: asResponsiveArray({ md: '1 1 auto', lg: '1 1 40%' }),
-  })
-);
-
-const DecoratedLinksTile = styled.article(
-  css({
-    display: 'flex',
-    flexDirection: 'column',
-    bg: 'white',
-    p: 0,
-    borderRadius: 1,
-    boxShadow: 'tile',
-  })
-);

@@ -1,19 +1,9 @@
 // lib/sanity.ts
-import { assert, imageResizeTargets } from '@corona-dashboard/common';
+import { imageResizeTargets } from '@corona-dashboard/common';
 import BlockContent from '@sanity/block-content-to-react';
 import { ClientConfig } from '@sanity/client';
 import { ImageBlock, SanityFileProps, SanityImageProps } from '~/types/cms';
 import { findClosestSize } from '~/utils/find-closest-size';
-
-assert(
-  process.env.NEXT_PUBLIC_SANITY_DATASET,
-  'NEXT_PUBLIC_SANITY_DATASET is undefined'
-);
-
-assert(
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  'NEXT_PUBLIC_SANITY_PROJECT_ID is undefined'
-);
 
 const config: ClientConfig = {
   /**
@@ -23,8 +13,8 @@ const config: ClientConfig = {
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'development',
+  projectId: '5mog5ask',
   useCdn: process.env.NODE_ENV === 'production',
   apiVersion: '2021-03-25',
   withCredentials: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
@@ -169,12 +159,4 @@ export function getImageSrc(
   }
   const size = findClosestSize(defaultWidth, imageResizeTargets);
   return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
-}
-
-export function maybeCreateWebpUrl(url: string) {
-  const extensionRegex = /(.(png|gif|jpe?g))$/;
-
-  return url.startsWith('/cms/images') && extensionRegex.test(url)
-    ? url.replace(extensionRegex, '.webp')
-    : undefined;
 }

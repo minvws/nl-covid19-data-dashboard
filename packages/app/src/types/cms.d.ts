@@ -9,6 +9,7 @@ export type FAQuestionAndAnswer = {
 export type CollapsibleList = {
   content: RichContentBlock[] | null;
   title: string;
+  group: string;
 };
 
 export interface SanityFileProps {
@@ -72,10 +73,7 @@ export interface ImageBlock {
   };
 }
 
-type RichContentBlock =
-  | Block
-  | RichContentImageBlock
-  | RichContentLineChartBlock;
+type RichContentBlock = Block | RichContentImageBlock;
 
 // @TODO more properties are needed
 interface Block {
@@ -90,14 +88,6 @@ interface RichContentImageBlock extends ImageBlock {
   caption?: string;
 }
 
-// @TODO more properties are needed
-interface RichContentLineChartBlock {
-  _key: string;
-  _type: 'lineChart';
-  metricName: string;
-  metricProperty: string;
-}
-
 export type RoadmapData = {
   _createdAt: string;
   _id: string;
@@ -108,14 +98,14 @@ export type RoadmapData = {
   title: string;
 };
 
-export type Restriction = {
+type Restriction = {
   icon?: string;
   _key: string;
   _type: 'restriction';
   text: string;
 };
 
-export type LockdownDataGroup = {
+type LockdownDataGroup = {
   icon?: string;
   title: string;
   restrictions: Restriction[];
@@ -154,35 +144,26 @@ export type TitleDescriptionBlock = {
   description: RichContentBlock[];
   title: string;
 };
-
 export interface LokalizeText {
   _type: 'lokalizeText';
   _id: string;
   _createdAt: string;
   _updatedAt: string;
-
   key: string;
   subject: string;
-  path: string;
-  text: {
-    nl: string | undefined;
-    en: string | undefined;
-  };
   should_display_empty: boolean;
   is_newly_added: boolean;
+  publish_count: number;
+  text: {
+    _type: 'localeText';
+    nl?: string;
+    en?: string;
+  };
 }
 
-export type DecoratedLink = {
-  title: string;
-  category: string;
-  href: string;
-  cover: ImageBlock;
-};
-
 export type VaccinationPageQuery = {
-  pageInfo: TitleDescriptionBlock;
-  pageLinks: DecoratedLink[];
-  linksTitle: string;
+  pageDescription: RichContentBlock[];
+  usefulLinks: LinkProps[];
   title: string;
   description: RichContentBlock[];
   milestones: Milestones[];

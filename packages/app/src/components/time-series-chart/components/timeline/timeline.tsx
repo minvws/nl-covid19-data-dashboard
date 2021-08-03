@@ -9,8 +9,7 @@ import { Bounds, Padding } from '../../logic';
 import { DottedTimelineBar, TimelineBar } from './components/timeline-bar';
 import { TimelineEvent } from './components/timeline-event';
 import { TimelineTooltipContent } from './components/tooltip-content';
-import { TimelineState } from './logic/common';
-import { useTimelineHoverHandler } from './logic/use-timeline-hover-handler';
+import { TimelineState, useTimelineHoverHandler } from './logic';
 
 interface TimelineProps {
   width: number;
@@ -32,7 +31,7 @@ export const Timeline = memo(function Timeline({
 }: TimelineProps) {
   const intl = useIntl();
   const { index, setIndex } = timelineState;
-  const { ref, height = 0 } = useResizeObserver<HTMLDivElement>();
+  const [ref, { height = 0 }] = useResizeObserver<HTMLDivElement>();
 
   const indexRef = useRef(index);
   indexRef.current = index;

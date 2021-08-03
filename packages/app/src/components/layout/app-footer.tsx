@@ -4,16 +4,18 @@ import styled from 'styled-components';
 import ExternalIcon from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
+import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
+import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { Markdown } from '~/components/markdown';
-import { asResponsiveArray } from '~/style/utils';
 
 export function AppFooter() {
   const reverseRouter = useReverseRouter();
   const { siteText: text } = useIntl();
+  const internationalFeature = useFeature('inHomePage');
 
   return (
     <footer>
@@ -49,9 +51,11 @@ export function AppFooter() {
                 <Item href={reverseRouter.gm.index()}>
                   {text.nav.links.gemeente}
                 </Item>
-                <Item href={reverseRouter.in.index()}>
-                  {text.nav.links.internationaal}
-                </Item>
+                {internationalFeature.isEnabled ? (
+                  <Item href={reverseRouter.in.index()}>
+                    {text.nav.links.internationaal}
+                  </Item>
+                ) : null}
               </FooterList>
             </nav>
           </Box>
@@ -62,6 +66,9 @@ export function AppFooter() {
                 <Item href={reverseRouter.algemeen.over()}>
                   {text.nav.links.over}
                 </Item>
+                <Item href={reverseRouter.algemeen.toegankelijkheid()}>
+                  {text.nav.links.toegankelijkheid}
+                </Item>
                 <Item href={reverseRouter.algemeen.veelgesteldeVragen()}>
                   {text.nav.links.veelgestelde_vragen}
                 </Item>
@@ -70,9 +77,6 @@ export function AppFooter() {
                 </Item>
                 <Item href={reverseRouter.algemeen.overRisiconiveaus()}>
                   {text.nav.links.over_risiconiveaus}
-                </Item>
-                <Item href={reverseRouter.algemeen.toegankelijkheid()}>
-                  {text.nav.links.toegankelijkheid}
                 </Item>
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}

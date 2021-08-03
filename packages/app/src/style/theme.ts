@@ -88,8 +88,8 @@ const multiseries = {
   cyan_dark: '#005082',
   yellow: '#FFC000',
   yellow_dark: '#CF9C00',
-  turquoise: '#00BBB5',
-  turquoise_dark: '#089792',
+  turquoise: '#00BB95',
+  turquoise_dark: '#008372',
   orange: '#E37321',
   orange_dark: '#A14E00',
   magenta: '#D360E5',
@@ -121,6 +121,7 @@ export const colors = {
   restrictions: '#CD0059',
   contextualContent: '#e5eff8',
   cerulean: '#0390D6',
+  tooltipIndicator: '#000000',
 
   data: {
     primary: '#007BC7',
@@ -188,6 +189,8 @@ export const colors = {
       theta: multiseries.turquoise_dark,
       kappa: multiseries.magenta,
       lambda: multiseries.magenta_dark,
+      iota: multiseries.magenta_dark,
+      zeta: multiseries.magenta_dark,
       other: '#808080',
     },
 

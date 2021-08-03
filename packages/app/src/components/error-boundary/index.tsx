@@ -10,7 +10,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { InlineText } from '../typography';
-import { useComponentPropsReport } from './use-component-props-report';
+import { useComponentPropsReport } from './logic/use-component-props-report';
 
 const PropsReportContext = createContext<
   () => Record<string, unknown> | undefined
@@ -18,18 +18,18 @@ const PropsReportContext = createContext<
 
 type ErrorBoundaryProps = {
   children: ReactNode;
-  extraPropsReport?:
+  extraComponentInfoReport?:
     | Record<string, unknown>
     | (() => Record<string, unknown> | undefined);
 };
 
 export function ErrorBoundary({
   children = null,
-  extraPropsReport,
+  extraComponentInfoReport,
 }: ErrorBoundaryProps) {
-  const additionalProps = isFunction(extraPropsReport)
-    ? extraPropsReport()
-    : extraPropsReport;
+  const additionalProps = isFunction(extraComponentInfoReport)
+    ? extraComponentInfoReport()
+    : extraComponentInfoReport;
 
   const [extractPropsFromChildren, propsReportCallback] =
     useComponentPropsReport(additionalProps);
@@ -68,8 +68,7 @@ function ErrorFallback({ error }: { error: Error }) {
   const mail = siteText.common.foutmelding_email_adres;
 
   const subject = encodeURIComponent('Foutmelding op corona dashboard');
-  const body = encodeURIComponent(errorReport);
-  const markdownEmail = `[${mail}](mailto:${mail}?subject=${subject}&body=${body})`;
+  const markdownEmail = `[${mail}](mailto:${mail}?subject=${subject})`;
 
   return (
     <ErrorBox>
@@ -98,7 +97,10 @@ function ErrorFallback({ error }: { error: Error }) {
   );
 }
 
-function formatErrorReport(error: Error, props?: Record<string, unknown>) {
+function formatErrorReport(
+  error: Error,
+  componentProps?: Record<string, unknown>
+) {
   const report = [
     `url: ${window.location.href}`,
     `platform: ${navigator.platform}`,
@@ -112,10 +114,12 @@ function formatErrorReport(error: Error, props?: Record<string, unknown>) {
     error.stack ?? 'No stack trace available',
   ];
 
-  if (isDefined(props)) {
+  if (isDefined(componentProps)) {
     report.push('component props:');
-    for (const prop in props) {
-      report.push(`${prop}: ${JSON.stringify(props[prop], null, '\t')}`);
+    for (const prop in componentProps) {
+      report.push(
+        `${prop}: ${JSON.stringify(componentProps[prop], null, '\t')}`
+      );
     }
   }
 

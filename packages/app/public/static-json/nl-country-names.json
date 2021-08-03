@@ -1,6 +1,7 @@
 {
   "afg": "Afghanistan",
   "alb": "Albanië",
+  "ala": "Ålandseilanden",
   "dza": "Algerije",
   "asm": "Amerikaans-Samoa",
   "and": "Andorra",
@@ -55,7 +56,7 @@
   "hrv": "Kroatië",
   "cub": "Cuba",
   "cyp": "Cyprus",
-  "cze": "Tsjechische Republiek",
+  "cze": "Tsjechië",
   "dnk": "Denemarken",
   "dji": "Djibouti",
   "dma": "Gemenebest Dominica",
@@ -97,7 +98,7 @@
   "hnd": "Honduras",
   "hkg": "Hongkong",
   "hun": "Hongarije",
-  "isl": "Ijsland",
+  "isl": "IJsland",
   "ind": "India",
   "idn": "Indonesië",
   "irn": "Iran",
@@ -123,7 +124,7 @@
   "lso": "Lesotho",
   "lbr": "Liberia",
   "lby": "Libië",
-  "lie": "Lichtenstein",
+  "lie": "Liechtenstein",
   "ltu": "Litouwen",
   "lux": "Luxemburg",
   "mac": "Macao",
@@ -209,7 +210,7 @@
   "sjm": "Svalbard en Jan Mayen",
   "swz": "Swaziland",
   "swe": "Zweden",
-  "che": "Zwitserse Bondsstaat",
+  "che": "Zwitserland",
   "syr": "Syrië",
   "twn": "Taiwan",
   "tjk": "Tadzjikistan",
@@ -242,5 +243,6 @@
   "esh": "Westelijke Sahara",
   "yem": "Jemen",
   "zmb": "Zambia",
-  "zwe": "Zimbabwe"
+  "zwe": "Zimbabwe",
+  "xkx": "Kosovo"
 }

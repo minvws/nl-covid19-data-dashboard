@@ -1,12 +1,12 @@
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
-import { SiteText } from '~/locale';
 import { Cell } from '.';
-import { Variant } from '../logic/use-variants-table-data';
+import { useVariantNameAndDescription } from '../logic';
+import { TableText } from '../types';
 
 type VariantNameCellProps = {
-  variant: Variant;
-  text: SiteText['covid_varianten'];
+  variant: string;
+  text: TableText;
   mobile?: boolean;
   narrow?: boolean;
 };
@@ -14,15 +14,19 @@ type VariantNameCellProps = {
 export function VariantNameCell(props: VariantNameCellProps) {
   const { variant, text, mobile, narrow } = props;
 
+  const [variantName, variantDescription] = useVariantNameAndDescription(
+    variant,
+    text.anderen_tooltip
+  );
+
   return (
     <Cell mobile={mobile} narrow={narrow}>
-      {variant === 'other' ? (
-        <InlineTooltip content={text.varianten_tabel.anderen_tooltip}>
-          <InlineText fontWeight="bold">{text.varianten[variant]}</InlineText>
+      {!mobile && (
+        <InlineTooltip content={variantDescription}>
+          <InlineText fontWeight="bold">{variantName}</InlineText>
         </InlineTooltip>
-      ) : (
-        <InlineText fontWeight="bold">{text.varianten[variant]}</InlineText>
       )}
+      {mobile && <InlineText fontWeight="bold">{variantName}</InlineText>}
     </Cell>
   );
 }

@@ -33,14 +33,17 @@ interface UseScalesResult {
 export function useScales<T extends TimestampedValue>(args: {
   values: T[];
   maximumValue: number;
+  minimumValue: number;
   bounds: Bounds;
   numTicks: number;
 }) {
   const today = useCurrentDate();
-  const { maximumValue, bounds, numTicks, values } = args;
+  const { maximumValue, minimumValue, bounds, numTicks, values } = args;
 
   return useMemo(() => {
     const [start, end] = getTimeDomain({ values, today, withPadding: true });
+    const yMin = Math.min(minimumValue, 0);
+    const yMax = Math.max(maximumValue, 0);
 
     if (isEmpty(values)) {
       return {
@@ -49,7 +52,7 @@ export function useScales<T extends TimestampedValue>(args: {
           range: [0, bounds.width],
         }),
         yScale: scaleLinear({
-          domain: [0, maximumValue],
+          domain: [yMin, yMax],
           range: [bounds.height, 0],
         }),
         getX: (_x: SeriesItem) => 0,
@@ -74,9 +77,16 @@ export function useScales<T extends TimestampedValue>(args: {
      */
     const maximumDomainValue = maximumValue > 0 ? maximumValue : Infinity;
     const yScale = scaleLinear({
-      domain: [0, maximumValue > 0 ? maximumValue : maximumDomainValue],
+      domain: [yMin, maximumValue > 0 ? maximumValue : maximumDomainValue],
       range: [bounds.height, 0],
-      nice: numTicks,
+      /**
+       * Mini trend tiles only use 2 ticks, but that would result in max values
+       * stetching by 100% every time, which is too much in most cases. So here
+       * we increase the nice resolution only for those charts. The number 5 is
+       * chosen so that the max value will still be fairly close to the top grid
+       * line.
+       */
+      nice: numTicks < 3 ? numTicks * 5 : numTicks,
       round: true, // round the output values so we render on round pixels
     });
 
@@ -92,7 +102,15 @@ export function useScales<T extends TimestampedValue>(args: {
     };
 
     return result;
-  }, [values, today, bounds, maximumValue, numTicks]);
+  }, [
+    values,
+    today,
+    minimumValue,
+    maximumValue,
+    bounds.width,
+    bounds.height,
+    numTicks,
+  ]);
 }
 
 /**

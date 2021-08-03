@@ -1,22 +1,28 @@
 import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-elements-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -27,29 +33,39 @@ import {
   getLastGeneratedDate,
   selectGmPageMetricData,
 } from '~/static-props/get-data';
+import { filterByRegionMunicipalities } from '~/static-props/utils/filter-by-region-municipalities';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
+  selectGmPageMetricData('hospital_nice', 'difference', 'code'),
   createGetChoroplethData({
-    gm: ({ hospital_nice }) => ({ hospital_nice }),
+    gm: ({ hospital_nice }, context) => ({
+      hospital_nice: filterByRegionMunicipalities(hospital_nice, context),
+    }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
+    page: PageArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('hospitalPage', locale);
+
+    return `{
+      "page": ${createPageArticlesQuery('hospitalPage', locale)},
+      "elements": ${createElementsQuery('gm', ['hospital_nice'], locale)}
+    }`;
   })
 );
 
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedGmData: data,
+    sideBarData,
     choropleth,
     municipalityName,
     content,
@@ -80,28 +96,29 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
+        code={data.code}
+        difference={data.difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.gemeente_layout.headings.ziekenhuizen}
             title={replaceVariablesInText(text.titel, {
               municipality: municipalityName,
             })}
             icon={<Ziekenhuis />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValue.date_unix,
               dateOfInsertionUnix: lastValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.page.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -196,6 +213,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
                 }}
               />
             )}

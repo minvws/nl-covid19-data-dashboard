@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { useIntl } from '~/intl';
 import { isDefined } from 'ts-is-present';
+import { useIntl } from '~/intl';
 import { VisuallyHidden } from './visually-hidden';
 
 interface Option<T extends string> {
@@ -69,15 +69,14 @@ const Container = styled.div(css({ position: 'relative', maxWidth: '100%' }));
 const Icon = styled.span(
   css({
     pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
     position: 'absolute',
     left: 0,
     top: 0,
-    svg: {
-      width: 25,
-      height: 25,
-      my: 1,
-      ml: 2,
-    },
+    minHeight: '100%',
+    py: 1,
+    pl: 2,
   })
 );
 

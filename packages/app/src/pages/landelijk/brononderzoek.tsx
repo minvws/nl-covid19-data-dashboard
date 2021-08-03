@@ -1,6 +1,4 @@
-import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
-import { ContentHeader } from '~/components/content-header';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
@@ -9,7 +7,10 @@ import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situat
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -20,7 +21,6 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-
 export const getStaticProps = withFeatureNotFoundPage(
   'situationsPage',
   createGetStaticProps(
@@ -31,9 +31,7 @@ export const getStaticProps = withFeatureNotFoundPage(
         situations,
       }),
     }),
-    createGetContent<{
-      articles?: ArticleSummary[];
-    }>(() => {
+    createGetContent<PageArticlesQueryResult>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return createPageArticlesQuery('situationsPage', locale);
     })
@@ -61,14 +59,14 @@ export default function BrononderzoekPage(
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={
               intl.siteText.positief_geteste_personen.titel_sidebar
             }
             title={text.titel}
             icon={<SituationIcon id="gathering" />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: {
@@ -78,10 +76,9 @@ export default function BrononderzoekPage(
               dateOfInsertionUnix: singleValue.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <SituationsDataCoverageChoroplethTile data={choropleth.vr} />
 

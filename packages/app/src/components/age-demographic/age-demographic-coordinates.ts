@@ -6,8 +6,8 @@ import {
   GetTooltipCoordinates,
   TooltipCoordinates,
 } from '~/components/tooltip';
-import { useElementSize } from '~/utils/use-element-size';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { AGE_GROUP_TOOLTIP_WIDTH } from './age-demographic-chart';
 import { AgeDemographicDefaultValue } from './types';
 
@@ -45,7 +45,8 @@ export function useAgeDemographicCoordinates<
   metricProperty: keyof T,
   displayMaxPercentage?: number
 ) {
-  const [ref, { width }] = useElementSize<HTMLDivElement>(840);
+  const [ref, { width = 840 }] = useResizeObserver<HTMLDivElement>();
+
   const { xs, xl } = useBreakpoints();
   const isSmallScreen = !xl;
   const isExtraSmallScreen = xs;

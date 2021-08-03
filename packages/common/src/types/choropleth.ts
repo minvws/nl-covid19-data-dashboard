@@ -1,4 +1,4 @@
-import { FeatureCollection, MultiPolygon } from 'geojson';
+import { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 import {
   GmCollection,
   GmDifference,
@@ -93,16 +93,19 @@ export type EuropeGeoJSON = FeatureCollection<
   EuropeGeoProperties
 >;
 
-export type MunicipalGeoJSON = FeatureCollection<MultiPolygon, GmProperties>;
+export type MunicipalGeoJSON = FeatureCollection<
+  MultiPolygon | Polygon,
+  GmProperties
+>;
 
-export type VrGeoJSON = FeatureCollection<MultiPolygon, VrProperties>;
+export type VrGeoJSON = FeatureCollection<MultiPolygon | Polygon, VrProperties>;
 
 export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;
   threshold: T;
   label?: string;
   /**
-   * Optiobally define the label which explains the "end" of a threshold
+   * Optionally define the label which explains the "end" of a threshold
    */
   endLabel?: string;
 };

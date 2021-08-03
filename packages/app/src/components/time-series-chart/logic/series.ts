@@ -5,6 +5,7 @@ import {
   TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { Property } from 'csstype';
 import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
@@ -88,8 +89,6 @@ export interface BarSeriesDefinition<T extends TimestampedValue>
   shortLabel?: string;
   color: string;
   fillOpacity?: number;
-  aboveBenchmarkColor?: string;
-  aboveBenchmarkFillOpacity?: number;
   isNonInteractive?: boolean;
 }
 
@@ -128,6 +127,7 @@ export interface StackedAreaSeriesDefinition<T extends TimestampedValue>
   fillOpacity?: number;
   strokeWidth?: number;
   isNonInteractive?: boolean;
+  mixBlendMode?: Property.MixBlendMode;
 }
 
 export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
@@ -141,6 +141,7 @@ export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
   fillOpacity?: number;
   strokeWidth?: number;
   isNonInteractive?: boolean;
+  mixBlendMode?: Property.MixBlendMode;
 }
 
 /**
@@ -187,7 +188,7 @@ export interface InvisibleSeriesDefinition<T extends TimestampedValue>
   isNonInteractive?: boolean;
 }
 
-export type CutValuesConfig = {
+type CutValuesConfig = {
   start: number;
   end: number;
   metricProperties: string[];
@@ -235,8 +236,7 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
 export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
-  benchmarkValue = -Infinity,
-  isPercentage?: boolean
+  benchmarkValue = -Infinity
 ) {
   const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
@@ -259,16 +259,38 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
 
   const maximumValue = Math.max(overallMaximum, artificialMax);
 
-  /**
-   * When the maximum value is 80% or more for percentages it shows a 0 - 100 scale
-   * same goes when a percentage is below 10% it has a 0 - 10 scale.
-   */
-  if (isPercentage) {
-    if (maximumValue >= 80) return 100;
-    if (maximumValue <= 10) return 10;
-  }
-
   return maximumValue;
+}
+
+/**
+ * From all the defined values, extract the lowest number so we know how to
+ * scale the y-axis. We need to do this for each of the keys that are used to
+ * render lines, so that the axis scales with whatever key contains the lowest.
+ */
+export function calculateSeriesMinimum<T extends TimestampedValue>(
+  seriesList: SeriesList,
+  seriesConfig: SeriesConfig<T>,
+  benchmarkValue = -Infinity
+) {
+  const values = seriesList
+    .filter((_, index) => isVisible(seriesConfig[index]))
+    .flatMap((series) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      )
+    )
+    .filter(isDefined);
+
+  const overallMinimum = Math.min(...values);
+
+  const artificialMin =
+    overallMinimum > benchmarkValue
+      ? benchmarkValue - Math.abs(benchmarkValue)
+      : 0;
+
+  const minimumValue = Math.max(overallMinimum, artificialMin);
+
+  return minimumValue;
 }
 
 export type SeriesItem = {
@@ -297,7 +319,7 @@ export function isSeriesSingleValue(
 export type SingleSeries = SeriesSingleValue[] | SeriesDoubleValue[];
 export type SeriesList = SingleSeries[];
 
-export function getSeriesList<T extends TimestampedValue>(
+function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
   cutValuesConfig?: CutValuesConfig[]

@@ -3,14 +3,14 @@ import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
 import {
   useChoroplethColorScale,
-  useSafetyRegionData,
+  useVrData,
 } from '~/components/choropleth/hooks';
 import { getDataThresholds } from '~/components/choropleth/legenda/utils';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { regionGeo } from '~/components/choropleth/topology';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
@@ -31,7 +31,7 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
   const { metricName, metricProperty, data, lastDetermined } = props;
   const { siteText, formatDateFromSeconds } = useIntl();
 
-  const { getChoroplethValue, hasData } = useSafetyRegionData(
+  const { getChoroplethValue, hasData } = useVrData(
     regionGeo,
     metricName,
     metricProperty,

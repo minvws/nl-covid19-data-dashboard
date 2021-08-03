@@ -4,8 +4,9 @@ import {
   GmProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Feature, MultiPolygon } from 'geojson';
-import { ReactNode, useCallback } from 'react';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
+import { ReactNode, useCallback, useMemo } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -27,6 +28,7 @@ import { useChoroplethDataDescription } from './hooks/use-choropleth-data-descri
 import { getDataThresholds } from './legenda/utils';
 import { municipalThresholds } from './municipal-thresholds';
 import { HoverPathLink, Path } from './path';
+import { regionBoundingBoxMunicipalities } from './region-bounding-box-municipalities';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
@@ -76,7 +78,10 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
 
   const { siteText } = useIntl();
 
-  const [boundingbox] = useMunicipalityBoundingbox(regionGeo, selectedCode);
+  const [boundingbox, vrcode] = useMunicipalityBoundingbox(
+    regionGeo,
+    selectedCode
+  );
 
   const { getChoroplethValue, hasData, values } = useMunicipalityData(
     municipalGeo,
@@ -85,7 +90,9 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     data
   );
 
-  const safetyRegionMunicipalCodes = useRegionMunicipalities(selectedCode);
+  const vrMunicipalCodes = useRegionMunicipalities(selectedCode);
+
+  const filteredMunicipalGeo = useBoundingBoxMunicipalities(vrcode);
 
   const thresholdValues = getDataThresholds(
     municipalThresholds,
@@ -99,7 +106,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     metricName,
     metricProperty,
     'gm',
-    safetyRegionMunicipalCodes
+    vrMunicipalCodes
   );
 
   const getFillColor = useChoroplethColorScale(
@@ -109,13 +116,12 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
 
   const renderFeature = useCallback(
     (
-      feature: Feature<MultiPolygon, GmProperties>,
+      feature: Feature<MultiPolygon | Polygon, GmProperties>,
       path: string,
       _index: number
     ) => {
       const { gemcode } = feature.properties;
-      const isInSameRegion =
-        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
+      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
       const fill = isInSameRegion ? getFillColor(gemcode) : 'white';
 
       return (
@@ -139,7 +145,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
         />
       );
     },
-    [getFillColor, hasData, safetyRegionMunicipalCodes, selectedCode]
+    [getFillColor, hasData, vrMunicipalCodes, selectedCode]
   );
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
@@ -150,11 +156,10 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     );
 
   const renderHover = useCallback(
-    (feature: Feature<MultiPolygon, GmProperties>, path: string) => {
+    (feature: Feature<MultiPolygon | Polygon, GmProperties>, path: string) => {
       const { gemcode, gemnaam } = feature.properties;
       const isSelected = gemcode === selectedCode && highlightSelection;
-      const isInSameRegion =
-        safetyRegionMunicipalCodes?.includes(gemcode) ?? true;
+      const isInSameRegion = vrMunicipalCodes?.includes(gemcode) ?? true;
 
       if (hasData && selectedCode && !isInSameRegion) {
         return null;
@@ -178,7 +183,7 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
     [
       selectedCode,
       highlightSelection,
-      safetyRegionMunicipalCodes,
+      vrMunicipalCodes,
       hasData,
       getLink,
       isTabInteractive,
@@ -207,9 +212,9 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
         <Choropleth
           accessibility={choroplethAccessibility}
           description={dataDescription}
-          featureCollection={municipalGeo}
+          featureCollection={filteredMunicipalGeo}
           outlines={countryGeo}
-          hovers={hasData ? municipalGeo : undefined}
+          hovers={hasData ? filteredMunicipalGeo : undefined}
           boundingBox={boundingbox || countryGeo}
           renderFeature={renderFeature}
           renderHover={renderHover}
@@ -220,4 +225,25 @@ export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
       </div>
     </Box>
   );
+}
+
+/**
+ * This hooks picks only the municipalities that are visible within the
+ * bounding box of the choropleth map. Resulting in a lot less markup.
+ */
+function useBoundingBoxMunicipalities(vrcode: string | undefined) {
+  return useMemo(() => {
+    const viewBoxMunicipalCodes = isDefined(vrcode)
+      ? regionBoundingBoxMunicipalities[vrcode]
+      : undefined;
+
+    return isDefined(viewBoxMunicipalCodes)
+      ? {
+          ...municipalGeo,
+          features: municipalGeo.features.filter((x) =>
+            viewBoxMunicipalCodes.includes(x.properties.gemcode)
+          ),
+        }
+      : municipalGeo;
+  }, [vrcode]);
 }

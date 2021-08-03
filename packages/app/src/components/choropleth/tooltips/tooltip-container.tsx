@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useRef } from 'react';
-import useResizeObserver from 'use-resize-observer';
+import { Dispatch, SetStateAction } from 'react';
 import { Box } from '~/components/base';
 import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useViewport } from '~/utils/use-viewport';
 import { TooltipSettings } from '../choropleth';
 
@@ -31,8 +31,7 @@ export function Tooltip({
 }: TTooltipProps) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
-  const ref = useRef<HTMLDivElement>(null);
-  const { width = 0, height = 0 } = useResizeObserver<HTMLDivElement>({ ref });
+  const [ref, { width = 0, height = 0 }] = useResizeObserver<HTMLDivElement>();
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
 
   /**

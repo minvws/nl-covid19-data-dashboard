@@ -72,7 +72,6 @@ export function InfectedPerAgeGroup({
   );
 
   /* Static legend contains always enabled items and the under reported item */
-  /* Static legend contains always enabled items and the under reported item */
   const staticLegendItems = seriesConfig
     .filter((item) => alwayEnabled.includes(item.metricProperty))
     .map<LegendItem>((item) => ({
@@ -93,37 +92,36 @@ export function InfectedPerAgeGroup({
 
   return (
     <ErrorBoundary>
-      <>
-        <InteractiveLegend
-          helpText={text.legend_help_text}
-          selectOptions={interactiveLegendOptions}
-          selection={list}
-          onToggleItem={toggle}
-          onReset={clear}
-        />
-        <TimeSeriesChart
-          accessibility={accessibility}
-          values={values}
-          timeframe={timeframe}
-          seriesConfig={chartConfig}
-          minHeight={breakpoints.md ? 300 : 250}
-          disableLegend
-          formatTooltip={(data) => (
-            <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
-          )}
-          dataOptions={{
-            timespanAnnotations: [
-              {
-                start: underReportedDateStart,
-                end: Infinity,
-                label: text.line_chart_legend_inaccurate_label,
-                shortLabel: text.tooltip_labels.inaccurate,
-              },
-            ],
-          }}
-        />
-        <Legend items={staticLegendItems} />
-      </>
+      <InteractiveLegend
+        helpText={text.legend_help_text}
+        selectOptions={interactiveLegendOptions}
+        selection={list}
+        onToggleItem={toggle}
+        onReset={clear}
+      />
+      <TimeSeriesChart
+        accessibility={accessibility}
+        values={values}
+        timeframe={timeframe}
+        seriesConfig={chartConfig}
+        minHeight={breakpoints.md ? 300 : 250}
+        disableLegend
+        formatTooltip={(data) => (
+          <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
+        )}
+        dataOptions={{
+          valueAnnotation: text.value_annotation,
+          timespanAnnotations: [
+            {
+              start: underReportedDateStart,
+              end: Infinity,
+              label: text.line_chart_legend_inaccurate_label,
+              shortLabel: text.tooltip_labels.inaccurate,
+            },
+          ],
+        }}
+      />
+      <Legend items={staticLegendItems} />
     </ErrorBoundary>
   );
 }

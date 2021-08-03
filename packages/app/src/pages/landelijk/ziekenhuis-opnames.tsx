@@ -7,20 +7,18 @@ import {
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
-import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
 import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
 import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SafetyRegionChoropleth } from '~/components/choropleth/safety-region-choropleth';
 import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
 import { HospitalAdmissionsRegionalTooltip } from '~/components/choropleth/tooltips/region/hospital-admissions-regional-tooltip';
-import { ContentHeader } from '~/components/content-header';
+import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { SEOHead } from '~/components/seo-head';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -29,7 +27,15 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createElementsQuery,
+  ElementsQueryResult,
+  getTimelineEvents,
+} from '~/queries/create-elements-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -52,10 +58,15 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
   createGetContent<{
-    articles?: ArticleSummary[];
+    page: PageArticlesQueryResult;
+    elements: ElementsQueryResult;
   }>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-    return createPageArticlesQuery('hospitalPage', locale);
+
+    return `{
+      "page": ${createPageArticlesQuery('hospitalPage', locale)},
+      "elements": ${createElementsQuery('nl', ['hospital_nice'], locale)}
+    }`;
   })
 );
 
@@ -88,24 +99,23 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
           description={text.metadata.description}
         />
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
             screenReaderCategory={
               siteText.ziekenhuisopnames_per_dag.titel_sidebar
             }
             title={text.titel}
             icon={<Ziekenhuis />}
-            subtitle={text.pagina_toelichting}
+            description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
               dateOrRange: lastValueNice.date_unix,
               dateOfInsertionUnix: lastValueNice.date_of_insertion_unix,
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
-            reference={text.reference}
+            referenceLink={text.reference.href}
+            articles={content.page.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -181,7 +191,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'region' && (
-              <SafetyRegionChoropleth
+              <VrChoropleth
                 accessibility={{
                   key: 'hospital_admissions_region_choropleth',
                 }}
@@ -242,6 +252,10 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                       ],
                     },
                   ],
+                  timelineEvents: getTimelineEvents(
+                    content.elements.timeSeries,
+                    'hospital_nice'
+                  ),
                 }}
               />
             )}

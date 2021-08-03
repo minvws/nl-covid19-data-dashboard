@@ -1,19 +1,20 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { Layout } from '~/domain/layout/layout';
-import { SafetyRegionLayout } from '~/domain/layout/safety-region-layout';
+import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -24,7 +25,6 @@ import {
   selectVrPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/vr';
@@ -32,9 +32,7 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>(() => {
+  createGetContent<PageArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('deceasedPage', locale);
   })
@@ -43,7 +41,7 @@ export const getStaticProps = createGetStaticProps(
 const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     selectedVrData: data,
-    safetyRegionName,
+    vrName,
     selectedVrData: {
       deceased_cbs: dataCbs,
       deceased_rivm: dataRivm,
@@ -56,46 +54,36 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const text = siteText.veiligheidsregio_sterfte;
 
-  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
-    dataRivm.values,
-    4
-  );
-
   const metadata = {
     ...siteText.veiligheidsregio_index.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      safetyRegion: safetyRegionName,
+      safetyRegion: vrName,
     }),
   };
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <SafetyRegionLayout
-        data={data}
-        safetyRegionName={safetyRegionName}
-        lastGenerated={lastGenerated}
-      >
+      <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.veiligheidsregio_layout.headings.besmettingen}
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
-              safetyRegion: safetyRegionName,
+              safetyRegion: vrName,
             })}
             icon={<CoronaVirusIcon />}
-            subtitle={text.section_deceased_rivm.description}
-            reference={text.section_deceased_rivm.reference}
+            description={text.section_deceased_rivm.description}
+            referenceLink={text.section_deceased_rivm.reference.href}
             metadata={{
               datumsText: text.section_deceased_rivm.datums,
               dateOrRange: dataRivm.last_value.date_unix,
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
+            articles={content.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -170,30 +158,15 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataRivmUnderReportedDateStart,
-                      end: Infinity,
-                      label:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'covid_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>
 
-          <ContentHeader
+          <PageInformationBlock
             title={siteText.section_sterftemonitor_vr.title}
             icon={<CoronaVirusIcon />}
-            subtitle={siteText.section_sterftemonitor_vr.description}
-            reference={siteText.section_sterftemonitor_vr.reference}
+            description={siteText.section_sterftemonitor_vr.description}
+            referenceLink={siteText.section_sterftemonitor_vr.reference.href}
             metadata={{
               datumsText: siteText.section_sterftemonitor_vr.datums,
               dateOrRange: {
@@ -207,7 +180,7 @@ const DeceasedRegionalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <DeceasedMonitorSection data={dataCbs} />
         </TileList>
-      </SafetyRegionLayout>
+      </VrLayout>
     </Layout>
   );
 };

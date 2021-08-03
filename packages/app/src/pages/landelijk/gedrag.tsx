@@ -1,9 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import Gedrag from '~/assets/gedrag.svg';
-import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
-import { ContentHeader } from '~/components/content-header';
 import { Markdown } from '~/components/markdown';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -18,7 +16,10 @@ import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-look
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -37,9 +38,7 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ behavior }) => ({ behavior }),
   }),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>(() => {
+  createGetContent<PageArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('behaviorPage', locale);
   })
@@ -87,11 +86,11 @@ export default function BehaviorPage(
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NationalLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.gedrag}
             title={nl_gedrag.pagina.titel}
             icon={<Gedrag />}
-            subtitle={nl_gedrag.pagina.toelichting}
+            description={nl_gedrag.pagina.toelichting}
             metadata={{
               datumsText: nl_gedrag.datums,
               dateOrRange: {
@@ -101,7 +100,8 @@ export default function BehaviorPage(
               dateOfInsertionUnix: behaviorLastValue.date_of_insertion_unix,
               dataSources: [nl_gedrag.bronnen.rivm],
             }}
-            reference={nl_gedrag.reference}
+            referenceLink={nl_gedrag.reference.href}
+            articles={content.articles}
           />
 
           <TwoKpiSection>
@@ -152,8 +152,6 @@ export default function BehaviorPage(
               />
             </Tile>
           </TwoKpiSection>
-
-          <ArticleStrip articles={content.articles} />
 
           <BehaviorTableTile
             title={nl_gedrag.basisregels.title}

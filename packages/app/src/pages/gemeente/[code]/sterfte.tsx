@@ -1,10 +1,8 @@
 import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleStrip } from '~/components/article-strip';
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { ContentHeader } from '~/components/content-header';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -12,7 +10,10 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -23,17 +24,14 @@ import {
   selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>(() => {
+  selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
+  createGetContent<PageArticlesQueryResult>(() => {
     const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
     return createPageArticlesQuery('deceasedPage', locale);
   })
@@ -41,19 +39,15 @@ export const getStaticProps = createGetStaticProps(
 
 const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
-    selectedGmData: data,
+    sideBarData,
     municipalityName,
-    selectedGmData: { deceased_rivm: dataRivm, difference },
+    selectedGmData: { deceased_rivm: dataRivm, difference, code },
     content,
     lastGenerated,
   } = props;
 
   const { siteText } = useIntl();
   const text = siteText.gemeente_sterfte;
-  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
-    dataRivm.values,
-    4
-  );
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -68,28 +62,29 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <MunicipalityLayout
-        data={data}
+        data={sideBarData}
+        code={code}
+        difference={difference}
         municipalityName={municipalityName}
         lastGenerated={lastGenerated}
       >
         <TileList>
-          <ContentHeader
+          <PageInformationBlock
             category={siteText.gemeente_layout.headings.besmettingen}
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
               municipalityName,
             })}
             icon={<CoronaVirusIcon />}
-            subtitle={text.section_deceased_rivm.description}
-            reference={text.section_deceased_rivm.reference}
+            description={text.section_deceased_rivm.description}
+            referenceLink={text.section_deceased_rivm.reference.href}
             metadata={{
               datumsText: text.section_deceased_rivm.datums,
               dateOrRange: dataRivm.last_value.date_unix,
               dateOfInsertionUnix: dataRivm.last_value.date_of_insertion_unix,
               dataSources: [text.section_deceased_rivm.bronnen.rivm],
             }}
+            articles={content.articles}
           />
-
-          <ArticleStrip articles={content.articles} />
 
           <TwoKpiSection>
             <KpiTile
@@ -164,21 +159,6 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataRivmUnderReportedDateStart,
-                      end: Infinity,
-                      label:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'covid_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>

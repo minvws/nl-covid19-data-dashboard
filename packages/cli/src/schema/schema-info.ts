@@ -1,4 +1,4 @@
-import { assert, MetricScope } from '@corona-dashboard/common';
+import { assert, JsonDataScope } from '@corona-dashboard/common';
 import fs from 'fs';
 import path from 'path';
 import { defaultJsonDirectory } from '../config';
@@ -9,7 +9,7 @@ import {
   validateMovingAverages,
 } from './custom-validations';
 
-export type SchemaInfo = Record<MetricScope, SchemaInfoItem>;
+export type SchemaInfo = Record<JsonDataScope, SchemaInfoItem>;
 
 export type SchemaInfoItem = {
   files: string[];
@@ -39,12 +39,15 @@ export function getSchemaInfo(
     },
     in_collection: {
       files: [
-        // @TODO enable once the file is available
+        // @TODO enable when file is available
         /* 'IN_COLLECTION.json' */
       ],
       basePath: jsonDirectory,
     },
-    nl: { files: ['NL.json'], basePath: jsonDirectory },
+    nl: {
+      files: ['NL.json'],
+      basePath: jsonDirectory,
+    },
     vr: {
       files: getFileNames(fileList, /^VR[0-9]+.json$/),
       basePath: jsonDirectory,
