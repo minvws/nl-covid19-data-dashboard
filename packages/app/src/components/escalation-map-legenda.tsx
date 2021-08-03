@@ -3,10 +3,8 @@ import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
 import {
   getDataThresholds,
-  regionGeo,
-  regionThresholds,
-  useChoroplethColorScale,
-  useVrData,
+  regionGeo, useChoroplethColorScale,
+  useVrData, vrThresholds
 } from '~/components/choropleth/logic';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
@@ -16,7 +14,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { Heading, InlineText, Text } from './typography';
 
-const escalationThresholds = regionThresholds.escalation_levels.level;
+const escalationThresholds = vrThresholds.escalation_levels.level;
 
 interface EscalationMapLegendaProps<K extends VrCollectionMetricName> {
   metricName: K;
@@ -39,7 +37,7 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
   );
 
   const selectedThreshold = getDataThresholds(
-    regionThresholds,
+    vrThresholds,
     metricName,
     metricProperty
   );

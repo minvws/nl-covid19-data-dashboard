@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import Stopwatch from '~/assets/stopwatch.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Heading, Text } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/types';
 import { assert } from '~/utils/assert';
 
-const escalationThresholds = regionThresholds.escalation_levels.level;
+const escalationThresholds = vrThresholds.escalation_levels.level;
 
 interface RiskLevelIndicatorProps {
   title: string;

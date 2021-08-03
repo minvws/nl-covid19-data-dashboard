@@ -1,13 +1,19 @@
-import { assert, Dictionary, NlVariants } from '@corona-dashboard/common';
+import { NlVariants } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
-import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
+import { SiteText } from '~/locale';
+
+type VariantName = keyof SiteText['covid_varianten']['varianten'];
 
 export type VariantChartValue = {
   date_start_unix: number;
   date_end_unix: number;
-  is_reliable?: boolean;
+  is_reliable: boolean;
   sample_size: number;
-} & Record<string, number>;
+} & Partial<
+  {
+    [key in `${VariantName}_percentage`]: number;
+  }
+>;
 
 const EMPTY_VALUES = {
   variantChart: null,
@@ -34,17 +40,22 @@ export function getVariantChartData(variants: NlVariants | undefined) {
   }
 
   const values = firstVariant.values.map<VariantChartValue>((value, index) => {
-    const item = {
-      [`${firstVariant.name}_percentage`]: value.percentage,
-      [`${firstVariant.name}_occurrence`]: value.percentage,
+    let total = value.percentage;
+    const item: VariantChartValue = {
+      is_reliable: true,
       date_start_unix: value.date_start_unix,
       date_end_unix: value.date_end_unix,
       sample_size: value.sample_size,
+      other_percentage: 0,
+      [`${firstVariant.name}_percentage`]: value.percentage,
     };
     variantsOfConcern.forEach((variant) => {
-      item[`${variant.name}_percentage`] = variant.values[index].percentage;
-      item[`${variant.name}_occurrence`] = variant.values[index].occurrence;
+      (item as unknown as Record<string, number>)[
+        `${variant.name}_percentage`
+      ] = variant.values[index].percentage;
+      total += variant.values[index].percentage;
     });
+    item.other_percentage = parseFloat((100 - total).toFixed(2));
     return item;
   });
 
@@ -56,35 +67,4 @@ export function getVariantChartData(variants: NlVariants | undefined) {
       date_end_unix: firstVariant.last_value.date_end_unix,
     },
   } as const;
-}
-
-export function getSeriesConfig(
-  value: Record<string, string | number> | undefined,
-  colors: Dictionary<string>
-) {
-  if (!isDefined(value)) {
-    return { seriesConfig: null } as const;
-  }
-
-  const variantNames = Object.keys(value)
-    .filter((x) => x.endsWith('_percentage'))
-    .map((x) => x.slice(0, x.indexOf('_')));
-
-  const seriesConfig = variantNames.map<
-    LineSeriesDefinition<VariantChartValue>
-  >((x) => {
-    const color = colors[x];
-    const label = x;
-    assert(color, `No color specified for variant called "${x}"`);
-
-    return {
-      metricProperty: `${x}_percentage`,
-      type: 'line',
-      shape: 'line',
-      color,
-      label,
-    };
-  });
-
-  return { seriesConfig };
 }

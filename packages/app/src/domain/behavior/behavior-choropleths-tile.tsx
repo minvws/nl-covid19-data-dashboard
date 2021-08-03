@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import { VrBehaviorTooltip } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Tile } from '~/components/tile';
@@ -171,7 +171,7 @@ function ChoroplethBlock({
         maxWidth={300}
       >
         <ChoroplethLegenda
-          thresholds={regionThresholds.behavior[metricProperty]}
+          thresholds={vrThresholds.behavior[metricProperty]}
           title={siteText.gedrag_common.basisregels.header_percentage}
         />
       </Box>

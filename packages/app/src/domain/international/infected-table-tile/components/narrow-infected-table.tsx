@@ -2,7 +2,7 @@ import { InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { Box } from '~/components/base';
-import { internationalThresholds } from '~/components/choropleth/logic';
+import { inThresholds } from '~/components/choropleth/logic';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -66,7 +66,7 @@ function ItemRow({ item, highestAverage, countryNames }: ItemRowProps) {
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
   const filterBelow = getFilteredThresholdValues(
-    internationalThresholds.infected_per_100k_average,
+    inThresholds.infected_per_100k_average,
     item.infected_per_100k_average
   );
 

@@ -18,16 +18,16 @@ import {
   countryGeo,
   getDataThresholds,
   regionGeo,
-  regionThresholds,
   useChoroplethColorScale,
   useChoroplethDataDescription,
   useTabInteractiveButton,
-  useVrBoundingbox,
+  useVrBoundingBoxByVrCode,
   useVrData,
+  vrThresholds,
 } from './logic';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip';
 
-type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
+export type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
   data: Pick<VrCollection, K>;
   metricName: K;
   metricProperty: string;
@@ -78,7 +78,7 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
 
   const { siteText } = useIntl();
 
-  const boundingBox = useVrBoundingbox(regionGeo, selectedCode);
+  const boundingBox = useVrBoundingBoxByVrCode(regionGeo, selectedCode);
 
   const isEscalationLevelTheme = metricName === 'escalation_levels';
 
@@ -90,7 +90,7 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
   );
 
   const selectedThreshold = getDataThresholds(
-    regionThresholds,
+    vrThresholds,
     metricName,
     metricProperty
   );
