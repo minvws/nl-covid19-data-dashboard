@@ -101,6 +101,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
             ),
             shortLabel: productNames[x],
             color: colors.data.vaccines[x],
+            mixBlendMode: 'multiply',
             fillOpacity: 1,
             strokeWidth: 0,
           })),

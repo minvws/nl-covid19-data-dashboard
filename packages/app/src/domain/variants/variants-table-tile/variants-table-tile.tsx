@@ -8,25 +8,11 @@ import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
 import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
+import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VariantsTable } from './components/variants-table';
-
-export type TableText = {
-  anderen_tooltip: string;
-  omschrijving: string;
-  omschrijving_zonder_placeholders: string;
-  titel: string;
-  kolommen: {
-    aantal_monsters: string;
-    eerst_gevonden: string;
-    percentage: string;
-    variant_titel: string;
-    vorige_meting: string;
-  };
-  verschil: { gelijk: string; meer: string; minder: string };
-};
+import { TableText } from './types';
 
 export function VariantsTableTile({
   text,

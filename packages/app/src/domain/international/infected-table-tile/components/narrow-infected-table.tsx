@@ -35,6 +35,7 @@ export function NarrowInfectedTable({
               item={item}
               highestAverage={highestAverage?.infected_per_100k_average}
               countryNames={countryNames}
+              key={index}
             />
           ) : null
         ) : (
@@ -45,6 +46,7 @@ export function NarrowInfectedTable({
               item={item}
               highestAverage={highestAverage?.infected_per_100k_average}
               countryNames={countryNames}
+              key={index}
             />
           )
         )

@@ -3,7 +3,6 @@ import { useCallback, useState } from 'react';
 import styled from 'styled-components/';
 import { isPresent } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -14,10 +13,19 @@ import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
+import {
+  getInternationalVariantChartData,
+  getInternationalVariantTableData,
+  VariantChartData,
+  VariantTableData,
+} from '~/domain/variants/static-props';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -28,14 +36,7 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
-import {
-  getInternationalVariantChartData,
-  VariantChartData,
-} from '~/static-props/variants/get-international-variant-chart-data';
-import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
-import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
-
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
   createGetStaticProps(
@@ -64,9 +65,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       page: {
         usefulLinks?: LinkProps[];
       };
-      highlight: {
-        articles?: ArticleSummary[];
-      };
+      highlight: PageArticlesQueryResult;
     }>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return `{

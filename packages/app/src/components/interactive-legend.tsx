@@ -6,28 +6,28 @@ import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 
-export interface SelectOption {
-  metricProperty: string;
+export interface SelectOption<T = string> {
+  metricProperty: T;
   label: string;
   color: string;
   shape?: 'line' | 'circle' | 'square';
 }
 
-interface InteractiveLegendProps {
+interface InteractiveLegendProps<T = string> {
   helpText: string;
-  selectOptions: SelectOption[];
-  selection: string[];
-  onToggleItem: (item: string) => void;
+  selectOptions: SelectOption<T>[];
+  selection: T[];
+  onToggleItem: (item: T) => void;
   onReset?: () => void;
 }
 
-export function InteractiveLegend({
+export function InteractiveLegend<T = string>({
   helpText,
   selectOptions,
   selection,
   onToggleItem,
   onReset,
-}: InteractiveLegendProps) {
+}: InteractiveLegendProps<T>) {
   const { siteText } = useIntl();
 
   const hasSelection = selection.length !== 0;

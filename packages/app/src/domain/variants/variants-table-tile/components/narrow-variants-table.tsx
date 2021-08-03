@@ -5,9 +5,8 @@ import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { TableText } from '~/domain/variants/variants-table-tile';
+import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { useCollapsible } from '~/utils/use-collapsible';
 import {
@@ -19,6 +18,7 @@ import {
   VariantNameCell,
 } from '.';
 import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
+import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
 
 type NarrowVariantsTableProps = {
