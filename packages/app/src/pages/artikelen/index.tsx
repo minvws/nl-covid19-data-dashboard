@@ -22,6 +22,7 @@ import {
   createGetContent,
   getLastGeneratedDate,
 } from '~/static-props/get-data';
+import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export const getStaticProps = createGetStaticProps(
@@ -47,7 +48,7 @@ export const getStaticProps = createGetStaticProps(
 const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { siteText } = useIntl();
-  const { query, replace } = useRouter();
+  const router = useRouter();
   const breakpoints = useBreakpoints();
 
   const sortOptions = useMemo(() => {
@@ -64,7 +65,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
 
   const handleCategoryFilter = useCallback(
     function setNewParam(item: ArticleCategoryType) {
-      replace(
+      router.replace(
         {
           pathname: '/artikelen',
           query: { categorie: item },
@@ -73,13 +74,13 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
         { shallow: true }
       );
     },
-    [replace]
+    [router]
   );
 
   const currentCategory = (
-    articleCategory.includes(query.categorie as ArticleCategoryType)
-      ? query.categorie
-      : undefined
+    articleCategory.includes(router.query.categorie as ArticleCategoryType)
+      ? router.query.categorie
+      : articleCategory[0]
   ) as ArticleCategoryType;
 
   return (
@@ -110,7 +111,17 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
               ))}
             </OrderedList>
           ) : (
-            <Box mt={3} mb={4}>
+            <Box
+              mt={3}
+              mb={4}
+              width="100%"
+              css={css({
+                select: {
+                  width: '100%',
+                  maxWidth: asResponsiveArray({ _: '25rem', xs: '23rem' }),
+                },
+              })}
+            >
               <Select
                 options={sortOptions}
                 onChange={handleCategoryFilter}
