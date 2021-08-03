@@ -11,7 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
-import { InternationalLayout } from '~/domain/layout/international-layout';
+import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import {
   getInternationalVariantChartData,
@@ -142,7 +142,7 @@ export default function VariantenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <InternationalLayout lastGenerated={lastGenerated}>
+      <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             title={text.titel}
@@ -223,7 +223,7 @@ export default function VariantenPage(
             </Box>
           </VariantsStackedAreaTile>
         </TileList>
-      </InternationalLayout>
+      </InLayout>
     </Layout>
   );
 }

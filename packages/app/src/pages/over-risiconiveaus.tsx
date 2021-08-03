@@ -1,4 +1,4 @@
-import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
+import { EscalationLevels, VrGeoProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import BarChart from '~/assets/bar-chart.svg';
 import Calender from '~/assets/calender.svg';
 import { Box } from '~/components/base';
-import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { VrChoropleth } from '~/components/choropleth';
+import { VrEscalationTooltip } from '~/components/choropleth/tooltips';
 import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -161,13 +161,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                   noDataFillColor={unknownLevelColor}
                   metricProperty="level"
                   tooltipContent={(
-                    context: VrProperties & EscalationLevels
-                  ) => (
-                    <EscalationRegionalTooltip
-                      context={context}
-                      hideValidFrom
-                    />
-                  )}
+                    context: VrGeoProperties & EscalationLevels
+                  ) => <VrEscalationTooltip context={context} hideValidFrom />}
                 />
               </ErrorBoundary>
             </Box>

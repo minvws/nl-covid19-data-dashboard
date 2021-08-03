@@ -25,7 +25,7 @@ type ChoroplethTileProps = DataProps & {
 } & (
     | {
         onChartRegionChange: (v: RegionControlOption) => void;
-        chartRegion: 'municipal' | 'region';
+        chartRegion: 'gm' | 'vr';
       }
     | {
         onChartRegionChange?: undefined;

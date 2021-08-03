@@ -1,14 +1,14 @@
 import {
   VrCollectionDisabilityCare,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { DisablityInfectedLocationsRegionalTooltip } from '~/components/choropleth/tooltips/region/disability-infected-locations-regional-tooltip';
+import { vrThresholds } from '~/components/choropleth/logic';
+import { VrDisablityInfectedLocationsTooltip } from '~/components/choropleth/tooltips';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -19,7 +19,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createPageArticlesQuery,
@@ -72,7 +72,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
@@ -219,7 +219,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             legend={{
               thresholds:
-                regionThresholds.nursing_home.infected_locations_percentage,
+                vrThresholds.nursing_home.infected_locations_percentage,
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
@@ -232,10 +232,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               metricName="disability_care"
               metricProperty="infected_locations_percentage"
               tooltipContent={(
-                context: VrProperties & VrCollectionDisabilityCare
-              ) => (
-                <DisablityInfectedLocationsRegionalTooltip context={context} />
-              )}
+                context: VrGeoProperties & VrCollectionDisabilityCare
+              ) => <VrDisablityInfectedLocationsTooltip context={context} />}
             />
           </ChoroplethTile>
 
@@ -345,7 +343,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

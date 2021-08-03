@@ -1,10 +1,13 @@
-import { VrCollectionSituations, VrProperties } from '@corona-dashboard/common';
+import {
+  VrCollectionSituations,
+  VrGeoProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { VrChoropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';
@@ -100,7 +103,7 @@ export function SituationsDataCoverageChoroplethTile({
                 metricName="situations"
                 metricProperty="has_sufficient_data"
                 tooltipContent={(
-                  context: VrProperties & VrCollectionSituations
+                  context: VrGeoProperties & VrCollectionSituations
                 ) => <SituationsDataCoverageTooltip context={context} />}
               />
             </ErrorBoundary>

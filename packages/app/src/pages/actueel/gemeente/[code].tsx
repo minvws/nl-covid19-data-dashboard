@@ -1,9 +1,9 @@
 import {
   EscalationLevels,
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
   VrCollectionTestedOverall,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
@@ -18,13 +18,14 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from '~/components/chart-region-controls';
+import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
-import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { vrThresholds } from '~/components/choropleth/logic';
+import {
+  GmPositiveTestedPeopleTooltip,
+  VrEscalationTooltip,
+  VrPositiveTestedPeopleTooltip,
+} from '~/components/choropleth/tooltips';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -130,10 +131,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
   const unknownLevelColor = useEscalationColor(null);
   const internationalFeature = useFeature('inPositiveTestsPage');
 
-  const [selectedMap, setSelectedMap] =
-    useState<RegionControlOption>('municipal');
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
-  const dataSitemap = useDataSitemap('gemeente', gmCode, data);
+  const dataSitemap = useDataSitemap('gm', gmCode, data);
 
   assert(
     filteredRegion,
@@ -324,9 +324,9 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     noDataFillColor={unknownLevelColor}
                     getLink={reverseRouter.vr.risiconiveau}
                     tooltipContent={(
-                      context: VrProperties & EscalationLevels
+                      context: VrGeoProperties & EscalationLevels
                     ) => (
-                      <EscalationRegionalTooltip
+                      <VrEscalationTooltip
                         context={context}
                         getLink={reverseRouter.vr.risiconiveau}
                       />
@@ -386,9 +386,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <ChoroplethLegenda
-                    thresholds={
-                      regionThresholds.tested_overall.infected_per_100k
-                    }
+                    thresholds={vrThresholds.tested_overall.infected_per_100k}
                     title={
                       siteText.positief_geteste_personen.chloropleth_legenda
                         .titel
@@ -397,8 +395,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <>
-                  {selectedMap === 'municipal' && (
-                    <MunicipalityChoropleth
+                  {selectedMap === 'gm' && (
+                    <GmChoropleth
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
                       }}
@@ -407,15 +405,11 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={(
-                        context: GmProperties & GmCollectionTestedOverall
-                      ) => (
-                        <PositiveTestedPeopleMunicipalTooltip
-                          context={context}
-                        />
-                      )}
+                        context: GmGeoProperties & GmCollectionTestedOverall
+                      ) => <GmPositiveTestedPeopleTooltip context={context} />}
                     />
                   )}
-                  {selectedMap === 'region' && (
+                  {selectedMap === 'vr' && (
                     <VrChoropleth
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
@@ -425,12 +419,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={(
-                        context: VrProperties & VrCollectionTestedOverall
-                      ) => (
-                        <PositiveTestedPeopleRegionalTooltip
-                          context={context}
-                        />
-                      )}
+                        context: VrGeoProperties & VrCollectionTestedOverall
+                      ) => <VrPositiveTestedPeopleTooltip context={context} />}
                     />
                   )}
                 </>

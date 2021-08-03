@@ -2,12 +2,12 @@ import { VrCollection, VrCollectionMetricName } from '@corona-dashboard/common';
 import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
 import {
+  getDataThresholds,
   useChoroplethColorScale,
   useVrData,
-} from '~/components/choropleth/hooks';
-import { getDataThresholds } from '~/components/choropleth/legenda/utils';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { regionGeo } from '~/components/choropleth/topology';
+  vrGeo,
+  vrThresholds,
+} from '~/components/choropleth/logic';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { EscalationLevel } from '~/domain/restrictions/types';
@@ -16,7 +16,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { Heading, InlineText, Text } from './typography';
 
-const escalationThresholds = regionThresholds.escalation_levels.level;
+const escalationThresholds = vrThresholds.escalation_levels.level;
 
 interface EscalationMapLegendaProps<K extends VrCollectionMetricName> {
   metricName: K;
@@ -32,14 +32,14 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
   const { siteText, formatDateFromSeconds } = useIntl();
 
   const { getChoroplethValue, hasData } = useVrData(
-    regionGeo,
+    vrGeo,
     metricName,
     metricProperty,
     data
   );
 
   const selectedThreshold = getDataThresholds(
-    regionThresholds,
+    vrThresholds,
     metricName,
     metricProperty
   );
@@ -51,7 +51,7 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
     selectedThreshold
   );
 
-  const totalItems = regionGeo.features.length;
+  const totalItems = vrGeo.features.length;
 
   const sortedEscalationArray = useMemo(() => {
     if (!hasData) return [];
@@ -66,13 +66,13 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
     for (const item of escalationThresholds) {
       sortedEscalationArray.push({
         ...item,
-        amount: regionGeo.features.filter(
+        amount: vrGeo.features.filter(
           (x) => item.color === getFillColor(x.properties.vrcode)
         ).length,
       });
     }
 
-    const unknownCount = regionGeo.features.filter(
+    const unknownCount = vrGeo.features.filter(
       (x) => unknownLevelColor === getFillColor(x.properties.vrcode)
     ).length;
 

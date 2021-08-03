@@ -1,8 +1,8 @@
 import {
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
   VrCollectionTestedOverall,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
@@ -11,12 +11,13 @@ import Getest from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { vrThresholds } from '~/components/choropleth/logic';
+import {
+  GmPositiveTestedPeopleTooltip,
+  VrPositiveTestedPeopleTooltip,
+} from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -27,7 +28,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Anchor, InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 import { useIntl } from '~/intl';
@@ -94,8 +95,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
-  const [selectedMap, setSelectedMap] =
-    useState<RegionControlOption>('municipal');
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
@@ -109,7 +109,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
@@ -201,7 +201,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             chartRegion={selectedMap}
             legend={{
               title: text.chloropleth_legenda.titel,
-              thresholds: regionThresholds.tested_overall.infected_per_100k,
+              thresholds: vrThresholds.tested_overall.infected_per_100k,
             }}
           >
             {/**
@@ -215,8 +215,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              * make the chart and define the tooltip layout for each, but maybe for
              * now that is a bridge too far. Let's take it one step at a time.
              */}
-            {selectedMap === 'municipal' && (
-              <MunicipalityChoropleth
+            {selectedMap === 'gm' && (
+              <GmChoropleth
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
                 }}
@@ -225,11 +225,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
                 tooltipContent={(
-                  context: GmProperties & GmCollectionTestedOverall
-                ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+                  context: GmGeoProperties & GmCollectionTestedOverall
+                ) => <GmPositiveTestedPeopleTooltip context={context} />}
               />
             )}
-            {selectedMap === 'region' && (
+            {selectedMap === 'vr' && (
               <VrChoropleth
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',
@@ -239,8 +239,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
                 tooltipContent={(
-                  context: VrProperties & VrCollectionTestedOverall
-                ) => <PositiveTestedPeopleRegionalTooltip context={context} />}
+                  context: VrGeoProperties & VrCollectionTestedOverall
+                ) => <VrPositiveTestedPeopleTooltip context={context} />}
               />
             )}
           </ChoroplethTile>
@@ -501,7 +501,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

@@ -1,12 +1,11 @@
 import {
   VrCollection,
   VrCollectionMetricName,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { Fragment, ReactNode, useCallback } from 'react';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -14,18 +13,19 @@ import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
-import { Choropleth } from './choropleth';
+import { Choropleth, HoverPathLink, Path } from './components';
 import {
+  getDataThresholds,
+  nlGeo,
   useChoroplethColorScale,
+  useChoroplethDataDescription,
   useTabInteractiveButton,
-  useVrBoundingbox,
+  useVrBoundingBoxByVrCode,
   useVrData,
-} from './hooks';
-import { useChoroplethDataDescription } from './hooks/use-choropleth-data-description';
-import { getDataThresholds } from './legenda/utils';
-import { HoverPathLink, Path } from './path';
-import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
-import { countryGeo, regionGeo } from './topology';
+  vrGeo,
+  vrThresholds,
+} from './logic';
+import { ChoroplethTooltipPlacement } from './tooltips/tooltip';
 
 export type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
   data: Pick<VrCollection, K>;
@@ -38,7 +38,7 @@ export type VrChoroplethProps<T, K extends VrCollectionMetricName> = {
   accessibility: AccessibilityDefinition;
   selectedCode?: string;
   highlightSelection?: boolean;
-  tooltipContent?: (context: VrProperties & T) => ReactNode;
+  tooltipContent?: (context: VrGeoProperties & T) => ReactNode;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   highlightCode?: string;
   getLink?: (code: string) => string;
@@ -78,19 +78,19 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
 
   const { siteText } = useIntl();
 
-  const boundingBox = useVrBoundingbox(regionGeo, selectedCode);
+  const boundingBox = useVrBoundingBoxByVrCode(vrGeo, selectedCode);
 
   const isEscalationLevelTheme = metricName === 'escalation_levels';
 
   const { getChoroplethValue, hasData, values } = useVrData(
-    regionGeo,
+    vrGeo,
     metricName,
     metricProperty,
     data
   );
 
   const selectedThreshold = getDataThresholds(
-    regionThresholds,
+    vrThresholds,
     metricName,
     metricProperty
   );
@@ -110,7 +110,10 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
   );
 
   const renderFeature = useCallback(
-    (feature: Feature<MultiPolygon | Polygon, VrProperties>, path: string) => {
+    (
+      feature: Feature<MultiPolygon | Polygon, VrGeoProperties>,
+      path: string
+    ) => {
       const { vrcode } = feature.properties;
       const fill =
         ((hasData && getFillColor(vrcode)) || noDataFillColor) ?? 'white';
@@ -134,7 +137,10 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
   );
 
   const renderHighlight = useCallback(
-    (feature: Feature<MultiPolygon | Polygon, VrProperties>, path: string) => {
+    (
+      feature: Feature<MultiPolygon | Polygon, VrGeoProperties>,
+      path: string
+    ) => {
       const { vrcode } = feature.properties;
 
       if (highlightCode !== vrcode) return;
@@ -157,7 +163,10 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
     );
 
   const renderHover = useCallback(
-    (feature: Feature<MultiPolygon | Polygon, VrProperties>, path: string) => {
+    (
+      feature: Feature<MultiPolygon | Polygon, VrGeoProperties>,
+      path: string
+    ) => {
       const { vrcode, vrname } = feature.properties;
 
       const isSelected = vrcode === selectedCode && highlightSelection;
@@ -206,10 +215,10 @@ export function VrChoropleth<T, K extends VrCollectionMetricName>(
         accessibility={choroplethAccessibility}
         minHeight={minHeight}
         description={dataDescription}
-        featureCollection={regionGeo}
-        outlines={countryGeo}
-        hovers={hasData ? regionGeo : undefined}
-        boundingBox={boundingBox || countryGeo}
+        featureCollection={vrGeo}
+        outlines={nlGeo}
+        hovers={hasData ? vrGeo : undefined}
+        boundingBox={boundingBox || nlGeo}
         renderFeature={renderFeature}
         renderHover={renderHover}
         getTooltipContent={getTooltipContent}

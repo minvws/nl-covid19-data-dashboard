@@ -1,11 +1,14 @@
-import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
+import {
+  VrCollectionBehavior,
+  VrGeoProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { vrThresholds } from '~/components/choropleth/logic';
+import { VrBehaviorTooltip } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -136,7 +139,9 @@ function ChoroplethBlock({
             metricProperty={metricProperty}
             minHeight={!isSmallScreen ? 350 : 400}
             noDataFillColor={colors.page}
-            tooltipContent={(context: VrCollectionBehavior & VrProperties) => {
+            tooltipContent={(
+              context: VrCollectionBehavior & VrGeoProperties
+            ) => {
               const currentComplianceValue =
                 `${currentId}_compliance` as keyof VrCollectionBehavior;
               const currentSupportValue =
@@ -146,7 +151,7 @@ function ChoroplethBlock({
               if (keysWithoutData.includes(currentId)) return null;
 
               return (
-                <BehaviorTooltip
+                <VrBehaviorTooltip
                   behaviorType={behaviorType}
                   context={context}
                   currentMetric={currentId}
@@ -166,7 +171,7 @@ function ChoroplethBlock({
         maxWidth={300}
       >
         <ChoroplethLegenda
-          thresholds={regionThresholds.behavior[metricProperty]}
+          thresholds={vrThresholds.behavior[metricProperty]}
           title={siteText.gedrag_common.basisregels.header_percentage}
         />
       </Box>
