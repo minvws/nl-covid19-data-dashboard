@@ -122,6 +122,7 @@ export const colors = {
   contextualContent: '#e5eff8',
   cerulean: '#0390D6',
   tooltipIndicator: '#000000',
+  buttonLightBlue: '#C2E4F4',
 
   data: {
     primary: '#007BC7',

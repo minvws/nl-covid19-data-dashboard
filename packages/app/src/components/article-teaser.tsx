@@ -11,7 +11,7 @@ import { Heading, InlineText, Text } from './typography';
 
 export type ArticleSummary = Pick<
   Article,
-  'title' | 'slug' | 'summary' | 'cover' | 'category'
+  'title' | 'slug' | 'summary' | 'cover' | 'category' | 'categories'
 >;
 
 type ArticleTeaserProps = {
@@ -73,7 +73,6 @@ function ZoomContainerUnstyled({
 
 const StyledArticleTeaser = styled.a(
   css({
-    display: 'block',
     minHeight: '26rem',
     overflow: 'hidden',
     textDecoration: 'none',
