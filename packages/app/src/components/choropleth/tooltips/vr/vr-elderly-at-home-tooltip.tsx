@@ -2,7 +2,7 @@ import {
   VrCollectionElderlyAtHome,
   VrProperties,
 } from '@corona-dashboard/common';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -20,7 +20,7 @@ export function VrElderlyAtHomeTooltip({
   const reverseRouter = useReverseRouter();
   const subject = siteText.choropleth_tooltip.elderly_at_home;
   const thresholdValues =
-    regionThresholds.elderly_at_home.positive_tested_daily_per_100k;
+    vrThresholds.elderly_at_home.positive_tested_daily_per_100k;
 
   return (
     <TooltipContent

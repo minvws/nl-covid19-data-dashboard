@@ -348,7 +348,7 @@ const behaviorThresholds = {
   ) as Record<`${BehaviorIdentifier}_compliance`, ChoroplethThresholdsValue[]>),
 };
 
-export const regionThresholds = {
+export const vrThresholds = {
   tested_overall: {
     infected_per_100k: positiveTestedThresholds,
   },

@@ -1,8 +1,8 @@
 import {
-  GmCollectionTestedOverall,
-  GmProperties,
+  VrCollectionTestedOverall,
+  VrProperties,
 } from '@corona-dashboard/common';
-import { municipalThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -12,24 +12,24 @@ import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-export function GmPositiveTestedPeopleTooltip({
+export function VrPositiveTestedPeopleTooltip({
   context,
 }: {
-  context: GmProperties & GmCollectionTestedOverall;
+  context: VrProperties & VrCollectionTestedOverall;
 }) {
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { vrname, infected_per_100k, infected } = context;
+
   const reverseRouter = useReverseRouter();
+  const { siteText, formatPercentage, formatNumber } = useIntl();
   const text = siteText.common.tooltip;
 
   const subject = siteText.choropleth_tooltip.positive_tested_people;
-  const thresholdValues = municipalThresholds.tested_overall.infected_per_100k;
-
-  const { gemnaam, infected_per_100k, infected } = context;
+  const thresholdValues = vrThresholds.tested_overall.infected_per_100k;
 
   return (
     <TooltipContent
-      title={gemnaam}
-      link={reverseRouter.gm.positiefGetesteMensen(context.gmcode)}
+      title={vrname}
+      link={reverseRouter.vr.positiefGetesteMensen(context.vrcode)}
     >
       <TooltipSubject
         subject={subject}
@@ -41,7 +41,8 @@ export function GmPositiveTestedPeopleTooltip({
         </InlineText>
         {siteText.common.inwoners}
       </TooltipSubject>
-      <Text m={0} mt={-1}>
+
+      <Text m={0} lineHeight={0}>
         {replaceComponentsInText(text.positive_tested_people, {
           totalPositiveTestedPeople: (
             <InlineText fontWeight="bold">{infected}</InlineText>

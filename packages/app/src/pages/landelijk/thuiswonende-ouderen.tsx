@@ -6,7 +6,7 @@ import ElderlyIcon from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import { VrElderlyAtHomeTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -199,7 +199,7 @@ const ElderlyAtHomeNationalPage = (
             }}
             legend={{
               thresholds:
-                regionThresholds.elderly_at_home.positive_tested_daily_per_100k,
+                vrThresholds.elderly_at_home.positive_tested_daily_per_100k,
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >

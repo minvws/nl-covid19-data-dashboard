@@ -10,7 +10,7 @@ import { Choropleth, HoverPathLink, Path } from './components';
 import {
   countryGeo,
   municipalGeo,
-  useMunicipalityNavigationData,
+  useGmNavigationData,
   useTabInteractiveButton,
 } from './logic';
 
@@ -31,7 +31,7 @@ export function GmNavigationMap<T>(props: GmNavigationMapProps<T>) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const { getChoroplethValue } = useMunicipalityNavigationData(municipalGeo);
+  const { getChoroplethValue } = useGmNavigationData(municipalGeo);
 
   const renderFeature = (
     feature: Feature<MultiPolygon | Polygon, GmProperties>,

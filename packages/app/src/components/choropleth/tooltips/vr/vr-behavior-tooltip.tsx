@@ -2,7 +2,7 @@ import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { InlineText, Text } from '~/components/typography';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
@@ -31,12 +31,12 @@ export function VrBehaviorTooltip({
   const supportThresholdKey = `${currentMetric}_support` as const;
 
   const complianceFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior[complianceThresholdKey],
+    vrThresholds.behavior[complianceThresholdKey],
     currentComplianceValue
   );
 
   const supportFilteredThreshold = getFilteredThresholdValues(
-    regionThresholds.behavior[supportThresholdKey],
+    vrThresholds.behavior[supportThresholdKey],
     currentSupportValue
   );
 

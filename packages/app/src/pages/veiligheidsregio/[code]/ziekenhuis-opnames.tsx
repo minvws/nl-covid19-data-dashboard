@@ -3,7 +3,7 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/logic';
+import { gmThresholds } from '~/components/choropleth/logic';
 import { GmHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -142,8 +142,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             description={text.map_toelichting}
             legend={{
               thresholds:
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
+                gmThresholds.hospital_nice.admissions_on_date_of_reporting,
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             }}

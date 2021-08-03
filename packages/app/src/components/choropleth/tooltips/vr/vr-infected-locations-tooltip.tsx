@@ -1,8 +1,8 @@
 import {
-  VrCollectionDisabilityCare,
+  VrCollectionNursingHome,
   VrProperties,
 } from '@corona-dashboard/common';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -11,26 +11,26 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-export function VrDisablityInfectedLocationsTooltip({
+export function VrInfectedLocationsTooltip({
   context,
 }: {
-  context: VrProperties & VrCollectionDisabilityCare;
+  context: VrProperties & VrCollectionNursingHome;
 }) {
-  const { formatPercentage, formatNumber, siteText } = useIntl();
+  const { siteText, formatPercentage, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const subject = siteText.choropleth_tooltip.infected_locations;
   const thresholdValues =
-    regionThresholds.nursing_home.infected_locations_percentage;
+    vrThresholds.nursing_home.infected_locations_percentage;
 
   return (
     <TooltipContent
       title={context.vrname}
-      link={reverseRouter.vr.gehandicaptenzorg(context.vrcode)}
+      link={reverseRouter.vr.verpleeghuiszorg(context.vrcode)}
     >
       <TooltipSubject
         subject={subject}
         thresholdValues={thresholdValues}
-        filterBelow={context.infected_locations_total}
+        filterBelow={context.infected_locations_percentage}
       >
         <InlineText fontWeight="bold">
           {`${formatPercentage(

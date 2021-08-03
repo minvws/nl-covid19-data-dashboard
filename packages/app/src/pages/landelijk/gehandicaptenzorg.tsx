@@ -7,8 +7,8 @@ import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/logic';
-import { VrDisablityInfectedLocationsTooltip } from '~/components/choropleth/tooltips/region/vr-disability-infected-locations-tooltip';
+import { vrThresholds } from '~/components/choropleth/logic';
+import { VrDisablityInfectedLocationsTooltip } from '~/components/choropleth/tooltips';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -219,7 +219,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             legend={{
               thresholds:
-                regionThresholds.nursing_home.infected_locations_percentage,
+                vrThresholds.nursing_home.infected_locations_percentage,
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >

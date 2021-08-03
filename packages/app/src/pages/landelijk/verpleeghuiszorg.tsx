@@ -8,7 +8,7 @@ import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import { VrInfectedLocationsTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -228,7 +228,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             }}
             legend={{
               thresholds:
-                regionThresholds.nursing_home.infected_locations_percentage,
+                vrThresholds.nursing_home.infected_locations_percentage,
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >

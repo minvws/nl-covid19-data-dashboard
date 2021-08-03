@@ -6,7 +6,7 @@ import Getest from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/logic';
+import { gmThresholds } from '~/components/choropleth/logic';
 import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
@@ -249,7 +249,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds: municipalThresholds.tested_overall.infected_per_100k,
+              thresholds: gmThresholds.tested_overall.infected_per_100k,
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
             }}

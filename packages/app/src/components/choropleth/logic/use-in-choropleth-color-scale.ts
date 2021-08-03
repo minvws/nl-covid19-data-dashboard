@@ -2,13 +2,13 @@ import { assert } from '@corona-dashboard/common';
 import { scaleThreshold } from '@visx/scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { internationalThresholds } from './international-thresholds';
+import { inThresholds } from './in-thresholds';
 
 export function useInChoroplethColorScale(
   metricProperty: string,
   defaultColor = 'white'
 ) {
-  const thresholds = internationalThresholds[metricProperty];
+  const thresholds = inThresholds[metricProperty];
 
   assert(
     isDefined(thresholds),

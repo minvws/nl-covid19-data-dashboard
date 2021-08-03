@@ -20,7 +20,7 @@ import {
 } from '~/components/chart-region-controls';
 import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   GmPositiveTestedPeopleTooltip,
   VrEscalationTooltip,
@@ -385,9 +385,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <ChoroplethLegenda
-                    thresholds={
-                      regionThresholds.tested_overall.infected_per_100k
-                    }
+                    thresholds={vrThresholds.tested_overall.infected_per_100k}
                     title={
                       siteText.positief_geteste_personen.chloropleth_legenda
                         .titel

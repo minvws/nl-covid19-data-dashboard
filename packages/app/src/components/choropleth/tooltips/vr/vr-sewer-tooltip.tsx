@@ -1,5 +1,5 @@
 import { VrProperties, VrSewerValue } from '@corona-dashboard/common';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -17,7 +17,7 @@ export function VrSewerTooltip({
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const subject = siteText.choropleth_tooltip.sewer_regional;
-  const thresholdValues = regionThresholds.sewer.average;
+  const thresholdValues = vrThresholds.sewer.average;
   const text = siteText.rioolwater_metingen;
 
   return (

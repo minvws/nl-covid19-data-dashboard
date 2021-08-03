@@ -11,20 +11,20 @@ import topology from './geography-simplified.topo.json';
 
 export const countryGeo = topojson.feature(
   topology,
-  topology.objects.netherlands
+  topology.objects.nl_features
 ) as FeatureCollection<MultiPolygon>;
 
 export const regionGeo = topojson.feature(
   topology,
-  topology.objects.vr_collection
+  topology.objects.vr_features
 ) as VrGeoJSON;
 
 export const municipalGeo = topojson.feature(
   topology,
-  topology.objects.municipalities
+  topology.objects.gm_features
 ) as MunicipalGeoJSON;
 
 export const europeGeo = topojson.feature(
   europeTopology,
-  europeTopology.objects.europe
+  europeTopology.objects.in_features
 ) as EuropeGeoJSON;

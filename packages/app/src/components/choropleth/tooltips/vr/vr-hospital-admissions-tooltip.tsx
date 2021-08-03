@@ -1,5 +1,5 @@
 import { VrHospitalNiceValue, VrProperties } from '@corona-dashboard/common';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -17,7 +17,7 @@ export function VrHospitalAdmissionsTooltip({
   const reverseRouter = useReverseRouter();
   const subject = siteText.choropleth_tooltip.hospital_admissions;
   const thresholdValues =
-    regionThresholds.hospital_nice.admissions_on_date_of_reporting;
+    vrThresholds.hospital_nice.admissions_on_date_of_reporting;
 
   return (
     context && (

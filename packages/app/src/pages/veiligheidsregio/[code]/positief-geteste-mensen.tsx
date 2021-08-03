@@ -9,7 +9,7 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -255,7 +255,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
-              thresholds: regionThresholds.tested_overall.infected_per_100k,
+              thresholds: vrThresholds.tested_overall.infected_per_100k,
             }}
           >
             <GmChoropleth

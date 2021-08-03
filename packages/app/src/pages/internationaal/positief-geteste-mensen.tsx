@@ -6,7 +6,7 @@ import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { InChoropleth } from '~/components/choropleth';
-import { internationalThresholds } from '~/components/choropleth/logic';
+import { inThresholds } from '~/components/choropleth/logic';
 import { InPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -155,7 +155,7 @@ export default function PositiefGetesteMensenPage(
             title={text.choropleth.titel}
             description={text.choropleth.toelichting}
             legend={{
-              thresholds: internationalThresholds.infected_per_100k_average,
+              thresholds: inThresholds.infected_per_100k_average,
               title: text.choropleth.legenda_titel,
             }}
             metadata={{

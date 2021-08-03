@@ -14,7 +14,7 @@ import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   GmPositiveTestedPeopleTooltip,
   VrPositiveTestedPeopleTooltip,
@@ -207,7 +207,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             chartRegion={selectedMap}
             legend={{
               title: text.chloropleth_legenda.titel,
-              thresholds: regionThresholds.tested_overall.infected_per_100k,
+              thresholds: vrThresholds.tested_overall.infected_per_100k,
             }}
           >
             {/**

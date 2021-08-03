@@ -10,10 +10,7 @@ import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import {
-  municipalThresholds,
-  regionThresholds,
-} from '~/components/choropleth/logic';
+import { gmThresholds, vrThresholds } from '~/components/choropleth/logic';
 import {
   GmHospitalAdmissionsTooltip,
   VrHospitalAdmissionsTooltip,
@@ -168,10 +165,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'municipal'
-                  ? municipalThresholds.hospital_nice
-                      .admissions_on_date_of_reporting
-                  : regionThresholds.hospital_nice
-                      .admissions_on_date_of_reporting,
+                  ? gmThresholds.hospital_nice.admissions_on_date_of_reporting
+                  : vrThresholds.hospital_nice.admissions_on_date_of_reporting,
               title: text.chloropleth_legenda.titel,
             }}
             metadata={{

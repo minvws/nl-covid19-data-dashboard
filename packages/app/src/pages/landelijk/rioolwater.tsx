@@ -10,7 +10,7 @@ import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   GmSewerTooltip,
   VrSewerTooltip,
@@ -179,7 +179,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
               title: text.legenda_titel,
-              thresholds: regionThresholds.sewer.average,
+              thresholds: vrThresholds.sewer.average,
             }}
           >
             {selectedMap === 'municipal' ? (

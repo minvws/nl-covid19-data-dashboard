@@ -47,7 +47,7 @@ type UseMunicipalityDataReturnValue = {
   values: DataValue[];
 };
 
-export function useMunicipalityNavigationData(
+export function useGmNavigationData(
   featureCollection: MunicipalGeoJSON
 ): UseMunicipalityDataReturnValue {
   const propertyData = featureCollection.features.reduce(
@@ -66,7 +66,7 @@ export function useMunicipalityNavigationData(
   };
 }
 
-export function useMunicipalityData<K extends GmCollectionMetricName>(
+export function useGmData<K extends GmCollectionMetricName>(
   featureCollection: MunicipalGeoJSON,
   metricName: K,
   metricProperty: string,

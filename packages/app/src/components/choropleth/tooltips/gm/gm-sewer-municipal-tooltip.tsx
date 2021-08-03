@@ -1,5 +1,5 @@
 import { GmProperties, GmSewerValue } from '@corona-dashboard/common';
-import { regionThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -19,7 +19,7 @@ export function GmSewerTooltip({
   const text = siteText.rioolwater_metingen;
 
   const subject = siteText.choropleth_tooltip.sewer_regional;
-  const thresholdValues = regionThresholds.sewer.average;
+  const thresholdValues = vrThresholds.sewer.average;
 
   return (
     <TooltipContent

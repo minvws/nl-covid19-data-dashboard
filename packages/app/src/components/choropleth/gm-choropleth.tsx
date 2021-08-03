@@ -20,16 +20,16 @@ import { Choropleth, HoverPathLink, Path } from './components';
 import {
   countryGeo,
   getDataThresholds,
+  gmThresholds,
   municipalGeo,
-  municipalThresholds,
-  regionBoundingBoxMunicipalities,
   regionGeo,
   useChoroplethColorScale,
   useChoroplethDataDescription,
-  useMunicipalityBoundingbox,
-  useMunicipalityData,
-  useRegionMunicipalities,
+  useGmCodesByVr,
+  useGmData,
   useTabInteractiveButton,
+  useVrBoundingBoxByGmCode,
+  vrBoundingBoxGmCodes,
 } from './logic';
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip';
 
@@ -79,24 +79,24 @@ export function GmChoropleth<T, K extends GmCollectionMetricName>(
 
   const { siteText } = useIntl();
 
-  const [boundingbox, vrcode] = useMunicipalityBoundingbox(
+  const [boundingbox, vrcode] = useVrBoundingBoxByGmCode(
     regionGeo,
     selectedCode
   );
 
-  const { getChoroplethValue, hasData, values } = useMunicipalityData(
+  const { getChoroplethValue, hasData, values } = useGmData(
     municipalGeo,
     metricName,
     metricProperty,
     data
   );
 
-  const vrMunicipalCodes = useRegionMunicipalities(selectedCode);
+  const vrMunicipalCodes = useGmCodesByVr(selectedCode);
 
   const filteredMunicipalGeo = useBoundingBoxMunicipalities(vrcode);
 
   const thresholdValues = getDataThresholds(
-    municipalThresholds,
+    gmThresholds,
     metricName,
     metricProperty
   );
@@ -235,7 +235,7 @@ export function GmChoropleth<T, K extends GmCollectionMetricName>(
 function useBoundingBoxMunicipalities(vrcode: string | undefined) {
   return useMemo(() => {
     const viewBoxMunicipalCodes = isDefined(vrcode)
-      ? regionBoundingBoxMunicipalities[vrcode]
+      ? vrBoundingBoxGmCodes[vrcode]
       : undefined;
 
     return isDefined(viewBoxMunicipalCodes)

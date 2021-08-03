@@ -1,5 +1,5 @@
 import { Box } from '~/components/base';
-import { internationalThresholds } from '~/components/choropleth/logic';
+import { inThresholds } from '~/components/choropleth/logic';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { TooltipSubject } from '../tooltip-subject';
@@ -29,7 +29,7 @@ export function InPositiveTestedPeopleTooltip(
   } = props;
   const { formatPercentage } = useIntl();
 
-  const thresholdValues = internationalThresholds.infected_per_100k_average;
+  const thresholdValues = inThresholds.infected_per_100k_average;
 
   const showComparison = countryName !== comparedName;
 
