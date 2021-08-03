@@ -25,12 +25,16 @@ import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
 } from '~/domain/layout/vr-layout';
-import { getClient, localize } from '~/lib/sanity';
-import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import {
   getVariantSidebarValue,
   VariantSidebarValue,
-} from './variants/get-variant-sidebar-value';
+} from '~/domain/variants/static-props';
+import { getClient, localize } from '~/lib/sanity';
+import {
+  getSituationsSidebarValue,
+  SituationsSidebarValue,
+} from './situations/get-situations-sidebar-value';
+import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
  * Usage:
@@ -156,8 +160,14 @@ export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
            */
           data[p] ?? null
         ),
-      { variantSidebarValue: getVariantSidebarValue(data.variants) } as {
+      {
+        variantSidebarValue: getVariantSidebarValue(data.variants),
+        situationsSidebarValue: getSituationsSidebarValue(
+          json.vrCollection.situations
+        ),
+      } as {
         variantSidebarValue: VariantSidebarValue;
+        situationsSidebarValue: SituationsSidebarValue;
       } & Pick<Nl, T>
     );
 
@@ -196,7 +206,13 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
 
     const selectedVrData = metrics.reduce(
       (acc, p) => set(acc, p, vrData.data[p]),
-      {} as Pick<Vr, T>
+      {
+        situationsSidebarValue: getSituationsSidebarValue(
+          json.vrCollection.situations
+        ),
+      } as {
+        situationsSidebarValue: SituationsSidebarValue;
+      } & Pick<Vr, T>
     );
 
     return { selectedVrData, vrName: vrData.vrName };

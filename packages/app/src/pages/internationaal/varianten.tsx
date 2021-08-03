@@ -13,6 +13,12 @@ import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InternationalLayout } from '~/domain/layout/international-layout';
 import { Layout } from '~/domain/layout/layout';
+import {
+  getInternationalVariantChartData,
+  getInternationalVariantTableData,
+  VariantChartData,
+  VariantTableData,
+} from '~/domain/variants/static-props';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -30,12 +36,6 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
-import {
-  getInternationalVariantChartData,
-  VariantChartData,
-} from '~/static-props/variants/get-international-variant-chart-data';
-import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
-import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',

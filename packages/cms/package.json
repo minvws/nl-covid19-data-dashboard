@@ -18,6 +18,7 @@
     "lokalize:sync-after-feature": "ts-node src/lokalize/sync-after-feature.ts",
     "lokalize:sync-prd-to-dev": "ts-node src/lokalize/sync-prd-to-dev.ts",
     "lokalize:strip-unused-keys": "yarn lokalize:export --clean-json && ts-node src/lokalize/strip-unused-keys.ts && yarn lokalize:export --clean-json && yarn workspace @corona-dashboard/app compile",
+    "elements:add": "ts-node src/elements/add.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
