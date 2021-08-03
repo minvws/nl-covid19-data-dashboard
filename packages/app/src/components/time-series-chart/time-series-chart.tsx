@@ -367,9 +367,7 @@ export function TimeSeriesChart<
 
   return (
     <>
-      {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
-      )}
+      {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
