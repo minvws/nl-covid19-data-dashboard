@@ -93,7 +93,7 @@ function VariantStackedAreaTileWithData({
     },
     {
       shape: 'dotted-square',
-      color: 'white',
+      color: 'black',
       label: text.lagere_betrouwbaarheid,
     },
   ];

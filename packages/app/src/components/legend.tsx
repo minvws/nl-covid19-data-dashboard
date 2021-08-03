@@ -94,7 +94,7 @@ const Shape = styled.div<{ color: string }>((x) =>
   })
 );
 
-function DottedSquare() {
+function DottedSquare({ color }: { color: string }) {
   return (
     <Shape color="white" css={css({ top: '3px' })}>
       <svg width={16} height={16} viewBox={`0 0 ${16} ${16}`}>
@@ -110,7 +110,7 @@ function DottedSquare() {
               y1="4"
               x2="0"
               y2="0"
-              style={{ stroke: 'black', strokeWidth: 4, strokeDasharray: 2 }}
+              style={{ stroke: color, strokeWidth: 4, strokeDasharray: 2 }}
             />
           </pattern>
         </defs>
