@@ -14,14 +14,10 @@ import { useResizeObserver } from './use-resize-observer';
  * more height.
  */
 export function useResponsiveContainer(initialWidth: number, minHeight = 0) {
-  const {
-    height: measuredHeight = minHeight,
-    width: measuredWidth = initialWidth,
-    ref,
-  } = useResizeObserver<HTMLDivElement>();
+  const [ref, size] = useResizeObserver<HTMLDivElement>();
 
-  const width = Math.floor(measuredWidth);
-  const height = Math.floor(Math.max(measuredHeight, minHeight));
+  const width = Math.floor(size.width ?? initialWidth);
+  const height = Math.floor(Math.max(size.height ?? minHeight, minHeight));
 
   /**
    * Do NOT change the `style={{ height }}` to `height={height}` since

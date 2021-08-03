@@ -115,6 +115,7 @@ function SeriesUnmemoized<T extends TimestampedValue>({
                   getX={getX}
                   getY={getY}
                   bounds={bounds}
+                  yScale={yScale}
                   id={id}
                 />
               );

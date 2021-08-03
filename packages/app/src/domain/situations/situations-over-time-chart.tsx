@@ -1,4 +1,5 @@
 import { TimeframeOption, VrSituationsValue } from '@corona-dashboard/common';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -53,24 +54,27 @@ export function SituationsOverTimeChart({
   );
 
   return (
-    <>
-      <InteractiveLegend
-        helpText={text.legenda.help_text}
-        selectOptions={seriesConfig}
-        selection={list}
-        onToggleItem={toggle}
-        onReset={clear}
-      />
-      <TimeSeriesChart
-        accessibility={{ key: 'situations_over_time_chart' }}
-        values={values}
-        timeframe={timeframe}
-        dataOptions={{ timespanAnnotations, isPercentage: true }}
-        seriesConfig={chartConfig}
-        disableLegend
-      />
-      {<Legend items={staticLegendItems} />}
-    </>
+    <ErrorBoundary extraComponentInfoReport={{ timeframe }}>
+      <>
+        <InteractiveLegend
+          helpText={text.legenda.help_text}
+          selectOptions={seriesConfig}
+          selection={list}
+          onToggleItem={toggle}
+          onReset={clear}
+        />
+
+        <TimeSeriesChart
+          accessibility={{ key: 'situations_over_time_chart' }}
+          values={values}
+          timeframe={timeframe}
+          dataOptions={{ timespanAnnotations, isPercentage: true }}
+          seriesConfig={chartConfig}
+          disableLegend
+        />
+        {<Legend items={staticLegendItems} />}
+      </>
+    </ErrorBoundary>
   );
 }
 

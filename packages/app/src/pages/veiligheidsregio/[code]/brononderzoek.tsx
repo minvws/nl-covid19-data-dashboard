@@ -1,4 +1,3 @@
-import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -15,7 +14,10 @@ import { SituationsOverTimeChart } from '~/domain/situations/situations-over-tim
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -35,9 +37,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     selectVrPageMetricData('situations'),
-    createGetContent<{
-      articles?: ArticleSummary[];
-    }>(() => {
+    createGetContent<PageArticlesQueryResult>(() => {
       const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
       return createPageArticlesQuery('situationsPage', locale);
     })

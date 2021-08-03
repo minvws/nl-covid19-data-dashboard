@@ -10,6 +10,7 @@ export type FAQuestionAndAnswer = {
 export type CollapsibleList = {
   content: RichContentBlock[] | null;
   title: string;
+  group: string;
 };
 
 export interface SanityFileProps {
