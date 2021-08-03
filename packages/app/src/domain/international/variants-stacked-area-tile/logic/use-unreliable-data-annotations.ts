@@ -34,12 +34,3 @@ export function useUnreliableDataAnnotations(
     [values, label]
   );
 }
-
-/*
-            {
-              start: x.date_start_unix,
-              end: x.date_end_unix,
-              label: label,
-              fill: 'dotted',
-            }
-*/
