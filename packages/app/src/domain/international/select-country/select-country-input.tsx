@@ -6,7 +6,7 @@ import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon-bold.svg';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { useIntl } from '~/intl';
+// import { useIntl } from '~/intl';
 import { Option } from './select-country';
 
 interface SelectCountryInputType {
@@ -96,6 +96,14 @@ export function SelectCountryInput({
       </IconContainer>
 
       <Input
+        /**
+         * Usually search-results will disappear when the input loses focus,
+         * but this doesn't allow the user to set focus on a search-result using
+         * the "tab"-key.
+         * The following timeout will handle the blur-event after a small delay.
+         * This allows the browser to fire a focusEvent for one of the results,
+         * which in turn will keep the search-results alive.
+         */
         placeholder={'select a country'}
         value={isOpen ? inputValue : currentOption.label}
         onChange={handleOnChange}
@@ -138,6 +146,7 @@ const Input = styled.input(
     border: `1px solid silver`,
     py: 2,
     pl: '36px',
+    m: 0,
 
     fontFamily: 'body',
     fontSize: 1,
@@ -150,6 +159,12 @@ const Input = styled.input(
 
     '&::-ms-clear': {
       display: 'none',
+    },
+
+    '&:focus': {
+      borderColor: 'lightGray',
+      outline: '2px dotted',
+      outlineColor: 'blue',
     },
   })
 );

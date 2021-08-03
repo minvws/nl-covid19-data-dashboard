@@ -28,7 +28,7 @@ export function SelectCountry({
   useOnClickOutside([containerRef], () => setIsOpen(false));
 
   const [inputValue, setInputValue] = useState(value);
-  const [matchingCountries, setMatchingCountries] = useState<Option[]>([]);
+  const [matchingCountries, setMatchingCountries] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const currentOption = options.filter((item) => item.value === value)[0];
@@ -61,7 +61,7 @@ export function SelectCountry({
           {matchingCountries.length > 0 ? (
             <>
               {options
-                .filter(({ value }) => matchingCountries.includes(value))
+                .filter((item) => matchingCountries.includes(item.value))
                 .map((item, index) => (
                   <ListItem key={index}>
                     <Button onClick={() => handleOnClick(item)}>
@@ -95,7 +95,11 @@ export function SelectCountry({
 
 const OrderedList = styled.ol(
   css({
-    border: '1px solid grey',
+    backgroundColor: 'white',
+    borderBottomLeftRadius: 2,
+    borderBottomRightRadius: 2,
+    border: `1px solid silver`,
+    borderTopColor: 'transparent',
     position: 'absolute',
     width: '100%',
     top: '100%',
@@ -106,7 +110,13 @@ const OrderedList = styled.ol(
     overflow: 'auto',
   })
 );
-const ListItem = styled.li(css({}));
+
+const ListItem = styled.li(
+  css({
+    display: 'flex',
+  })
+);
+
 const Button = styled.button<{
   hasFocus?: boolean;
 }>((x) =>
