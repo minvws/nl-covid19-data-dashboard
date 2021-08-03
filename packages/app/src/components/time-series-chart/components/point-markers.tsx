@@ -3,7 +3,7 @@ import { transparentize } from 'polished';
 import styled from 'styled-components';
 import { HoveredPoint } from '../logic';
 
-const MARKER_POINT_SIZE = 8;
+const MARKER_POINT_SIZE = 9;
 
 type MarkerProps = {
   color: string;
@@ -22,10 +22,12 @@ export function PointMarkers<T extends TimestampedValue>(
 
   if (!points.length) return null;
 
+  const offsetX = points[0].x - Math.floor(size / 2);
+
   return (
     <Container
       style={{
-        transform: `translateX(${points[0].x - size / 2}px)`,
+        transform: `translateX(${offsetX}px)`,
         width: size,
       }}
     >
@@ -38,7 +40,9 @@ export function PointMarkers<T extends TimestampedValue>(
              * Dynamic properties like y position are set via inline style because
              * SC would dynamically generate and inject a new class for every position
              */
-            style={{ transform: `translateY(${point.y - size / 2}px)` }}
+            style={{
+              transform: `translateY(${point.y - Math.floor(size / 2)}px)`,
+            }}
             key={index}
           />
         ))
