@@ -238,6 +238,7 @@ export function NationalLayout(props: NationalLayoutProps) {
                     localeTextKey="reproductiegetal"
                     showBarScale={true}
                     differenceKey="reproduction__index_average"
+                    showDateOfInsertion
                   />
                 </MetricMenuItemLink>
 

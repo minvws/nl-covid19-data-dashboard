@@ -60,4 +60,5 @@ timestamp,action,key,document_id,move_to
 2021-07-28T11:31:33.867Z,delete,gemeente_sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD4HNU,__
 2021-07-28T11:31:33.868Z,delete,sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD41Fk,__
 2021-07-28T11:31:33.869Z,delete,veiligheidsregio_sterfte.section_deceased_rivm.line_chart_covid_daily_legend_inaccurate_label,jF33EuwumlGuwav2FD41u0,__
+2021-07-29T14:08:55.121Z,add,common.metricKPI.dateOfInsertion,fyGrrdTc3SJhuVUgBKhcI9,__
 2021-08-02T14:33:23.020Z,add,positief_geteste_personen_ggd.reference_href,Y60MOvOjyyJvm24WFVSrwy,__
