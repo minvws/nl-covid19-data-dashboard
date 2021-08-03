@@ -201,5 +201,6 @@ const Square = styled.div<{ color: string }>(({ color }) =>
     top: '7px',
     width: '11px',
     height: '11px',
+    borderRadius: '2px',
   })
 );
