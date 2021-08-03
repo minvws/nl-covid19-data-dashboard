@@ -216,12 +216,6 @@ export default function VariantenPage(
             }}
           >
             <Box alignSelf="flex-start" mt={1} mb={2}>
-              <Select
-                options={countryOptions}
-                onChange={onChange}
-                value={selectedCountryCode}
-              />
-
               <SelectCountry
                 options={countryOptions}
                 onChange={onChange}

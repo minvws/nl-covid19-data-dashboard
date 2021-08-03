@@ -1,56 +1,107 @@
 import css from '@styled-system/css';
-import { useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 import styled from 'styled-components';
+import ChevronIcon from '~/assets/chevron.svg';
 import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon-bold.svg';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
+import { Option } from './select-country';
 
 interface SelectCountryInputType {
-  value?: string;
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
+  currentOption: Option;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export function SelectCountryInput({ value }: SelectCountryInputType) {
+export function SelectCountryInput({
+  inputValue,
+  setInputValue,
+  currentOption,
+  isOpen,
+  setIsOpen,
+}: SelectCountryInputType) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [inputValue, setInputValue] = useState(value ?? 'Select a country');
 
-  const handleOnChange = (event) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
+  const handleOnFocus = () => {
+    setIsOpen(true);
+    setInputValue('');
+  };
+
   return (
-    <Box position="relative">
+    <Box position="relative" minWidth="14rem">
       <IconContainer align="left">
-        <SearchIcon />
+        {isOpen ? (
+          <SearchIcon />
+        ) : (
+          <img
+            aria-hidden
+            src={`/icons/flags/${currentOption.value.toLowerCase()}.svg`}
+            width="17"
+            height="13"
+            alt=""
+            css={css({
+              mr: 2,
+            })}
+          />
+        )}
       </IconContainer>
 
-      {inputValue && (
-        <IconContainer
-          as="button"
-          align="right"
-          onClick={(evt: MouseEvent) => {
-            evt.stopPropagation();
-            inputRef.current?.focus();
-            setInputValue('');
-          }}
-          css={css({
-            svg: {
-              width: 20,
-              height: 20,
-            },
-          })}
-        >
-          <VisuallyHidden>{'siteText.select_countries.clear'}</VisuallyHidden>
-          <CloseIcon />
-        </IconContainer>
-      )}
+      <IconContainer
+        as="button"
+        align="right"
+        onClick={(evt: any) => {
+          evt.stopPropagation();
+          inputRef.current?.focus();
+          setInputValue('');
+        }}
+      >
+        {isOpen ? (
+          inputValue.length > 0 && (
+            <Box
+              css={css({
+                svg: {
+                  width: 20,
+                  height: 20,
+                },
+              })}
+            >
+              <VisuallyHidden>
+                {'siteText.select_countries.clear'}
+              </VisuallyHidden>
+              <CloseIcon />
+            </Box>
+          )
+        ) : (
+          <Box
+            as="span"
+            transform="rotate(90deg)"
+            css={css({
+              svg: {
+                width: 15,
+                height: 15,
+              },
+            })}
+          >
+            <ChevronIcon />
+          </Box>
+        )}
+      </IconContainer>
 
       <Input
         placeholder={'select a country'}
-        value={inputValue}
+        value={isOpen ? inputValue : currentOption.label}
         onChange={handleOnChange}
         ref={inputRef}
+        onFocus={handleOnFocus}
+        autoComplete="off"
       />
     </Box>
   );

@@ -1,8 +1,13 @@
 import css from '@styled-system/css';
+import { matchSorter } from 'match-sorter';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Box } from '~/components/base';
+import { InlineText } from '~/components/typography';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { SelectCountryInput } from './select-country-input';
 
-type Option = {
+export type Option = {
   value: string;
   label: string;
 };
@@ -10,7 +15,7 @@ type Option = {
 interface SelectCountryProps {
   options: Option[];
   onChange: (value: string) => void;
-  values: string;
+  value: string;
 }
 
 export function SelectCountry({
@@ -18,20 +23,112 @@ export function SelectCountry({
   onChange,
   value,
 }: SelectCountryProps) {
-  return (
-    <List>
-      <SelectCountryInput value={value} />
+  const containerRef = useRef(null);
 
-      {options.map((item, index) => (
-        <Button key={index} onClick={() => onChange(item.value)}>
-          {item.label}
-        </Button>
-      ))}
-      <ListItem />
-    </List>
+  useOnClickOutside([containerRef], () => setIsOpen(false));
+
+  const [inputValue, setInputValue] = useState(value);
+  const [matchingCountries, setMatchingCountries] = useState<Option[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const currentOption = options.filter((item) => item.value === value)[0];
+
+  useEffect(() => {
+    setMatchingCountries(
+      matchSorter(options, inputValue, {
+        keys: ['label', 'value'],
+      }).map((item: Option) => item.value) as []
+    );
+  }, [options, inputValue]);
+
+  const handleOnClick = (item: Option) => {
+    onChange(item.value);
+    setIsOpen(false);
+  };
+
+  return (
+    <Box position="relative" ref={containerRef}>
+      <SelectCountryInput
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        currentOption={currentOption}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+
+      {isOpen && (
+        <OrderedList>
+          {matchingCountries.length > 0 ? (
+            <>
+              {options
+                .filter(({ value }) => matchingCountries.includes(value))
+                .map((item, index) => (
+                  <ListItem key={index}>
+                    <Button onClick={() => handleOnClick(item)}>
+                      <img
+                        aria-hidden
+                        src={`/icons/flags/${item.value.toLowerCase()}.svg`}
+                        width="17"
+                        height="13"
+                        alt=""
+                        css={css({
+                          mr: 2,
+                        })}
+                      />
+                      <InlineText
+                        fontWeight={value === item.value ? 'bold' : undefined}
+                      >
+                        {item.label}
+                      </InlineText>
+                    </Button>
+                  </ListItem>
+                ))}
+            </>
+          ) : (
+            <ListItem css={css({ px: 3, py: 2 })}>Geen match</ListItem>
+          )}
+        </OrderedList>
+      )}
+    </Box>
   );
 }
 
-const List = styled.ul(css({}));
-const ListItem = styled.ul(css({}));
-const Button = styled.ul(css({}));
+const OrderedList = styled.ol(
+  css({
+    border: '1px solid grey',
+    position: 'absolute',
+    width: '100%',
+    top: '100%',
+    zIndex: 10,
+    m: 0,
+    p: 0,
+    maxHeight: '20em',
+    overflow: 'auto',
+  })
+);
+const ListItem = styled.li(css({}));
+const Button = styled.button<{
+  hasFocus?: boolean;
+}>((x) =>
+  css({
+    px: 3,
+    py: 2,
+    display: 'flex',
+    alignItems: 'center',
+    textDecoration: 'none',
+    color: 'black',
+    width: '100%',
+    bg: x.hasFocus ? 'contextualContent' : 'white',
+    transitionProperty: 'background',
+    transitionDuration: x.hasFocus ? '0ms' : '120ms',
+    border: 'none',
+    textAlign: 'left',
+    fontFamily: 'inherit',
+    fontSize: '1em',
+
+    '&:hover': {
+      backgroundColor: 'contextualContent',
+      cursor: 'pointer',
+    },
+  })
+);
