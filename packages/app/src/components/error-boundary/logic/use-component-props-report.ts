@@ -97,7 +97,6 @@ export function useComponentPropsReport(
     try {
       return extractPropsAndFillReport(children, propsReportRef);
     } catch (e) {
-      console.error(e);
       return children;
     }
   };
@@ -174,7 +173,6 @@ function findComponentNode(
         (x) =>
           isObject(x.type) && 'name' in x.type && isKnownComponentType(x.type)
       );
-    console.dir(element);
     if (isDefined(element)) {
       return findComponentNode(element);
     }
