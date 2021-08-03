@@ -1,6 +1,6 @@
 import {
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
 } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
@@ -17,8 +17,8 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createElementsQuery,
@@ -99,7 +99,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
@@ -268,12 +268,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={(
-                context: GmProperties & GmCollectionTestedOverall
+                context: GmGeoProperties & GmCollectionTestedOverall
               ) => <GmPositiveTestedPeopleTooltip context={context} />}
             />
           </ChoroplethTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

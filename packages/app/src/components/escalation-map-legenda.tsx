@@ -3,8 +3,10 @@ import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
 import {
   getDataThresholds,
-  regionGeo, useChoroplethColorScale,
-  useVrData, vrThresholds
+  useChoroplethColorScale,
+  useVrData,
+  vrGeo,
+  vrThresholds,
 } from '~/components/choropleth/logic';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
@@ -30,7 +32,7 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
   const { siteText, formatDateFromSeconds } = useIntl();
 
   const { getChoroplethValue, hasData } = useVrData(
-    regionGeo,
+    vrGeo,
     metricName,
     metricProperty,
     data
@@ -49,7 +51,7 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
     selectedThreshold
   );
 
-  const totalItems = regionGeo.features.length;
+  const totalItems = vrGeo.features.length;
 
   const sortedEscalationArray = useMemo(() => {
     if (!hasData) return [];
@@ -64,13 +66,13 @@ export function EscalationMapLegenda<K extends VrCollectionMetricName>(
     for (const item of escalationThresholds) {
       sortedEscalationArray.push({
         ...item,
-        amount: regionGeo.features.filter(
+        amount: vrGeo.features.filter(
           (x) => item.color === getFillColor(x.properties.vrcode)
         ).length,
       });
     }
 
-    const unknownCount = regionGeo.features.filter(
+    const unknownCount = vrGeo.features.filter(
       (x) => unknownLevelColor === getFillColor(x.properties.vrcode)
     ).length;
 

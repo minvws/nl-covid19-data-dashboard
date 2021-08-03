@@ -1,30 +1,26 @@
-import {
-  EuropeGeoJSON,
-  MunicipalGeoJSON,
-  VrGeoJSON,
-} from '@corona-dashboard/common';
+import { GmGeoJSON, InGeoJSON, VrGeoJSON } from '@corona-dashboard/common';
 import { FeatureCollection, MultiPolygon } from 'geojson';
 import * as topojson from 'topojson-client';
-import europeTopology from './geography-europe-simplified.json';
+import inTopology from './geography-europe-simplified.json';
 // Load all the geographical data including the data entries (regions and municipalities)
-import topology from './geography-simplified.topo.json';
+import nlTopology from './geography-simplified.topo.json';
 
-export const countryGeo = topojson.feature(
-  topology,
-  topology.objects.nl_features
+export const nlGeo = topojson.feature(
+  nlTopology,
+  nlTopology.objects.nl_features
 ) as FeatureCollection<MultiPolygon>;
 
-export const regionGeo = topojson.feature(
-  topology,
-  topology.objects.vr_features
+export const vrGeo = topojson.feature(
+  nlTopology,
+  nlTopology.objects.vr_features
 ) as VrGeoJSON;
 
-export const municipalGeo = topojson.feature(
-  topology,
-  topology.objects.gm_features
-) as MunicipalGeoJSON;
+export const gmGeo = topojson.feature(
+  nlTopology,
+  nlTopology.objects.gm_features
+) as GmGeoJSON;
 
-export const europeGeo = topojson.feature(
-  europeTopology,
-  europeTopology.objects.in_features
-) as EuropeGeoJSON;
+export const inGeo = topojson.feature(
+  inTopology,
+  inTopology.objects.in_features
+) as InGeoJSON;

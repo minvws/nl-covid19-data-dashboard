@@ -14,7 +14,7 @@ import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useBehaviorLookupKeys } from '~/domain/behavior/logic/use-behavior-lookup-keys';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createPageArticlesQuery,
@@ -84,7 +84,7 @@ export default function BehaviorPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.gedrag}
@@ -204,7 +204,7 @@ export default function BehaviorPage(
 
           <MoreInformation />
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 }

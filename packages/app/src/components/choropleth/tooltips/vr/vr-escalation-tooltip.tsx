@@ -1,4 +1,4 @@
-import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
+import { EscalationLevels, VrGeoProperties } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
@@ -12,7 +12,7 @@ export function VrEscalationTooltip({
   getLink,
   hideValidFrom = false,
 }: {
-  context: VrProperties & EscalationLevels;
+  context: VrGeoProperties & EscalationLevels;
   getLink?: (code: string) => string;
   hideValidFrom?: boolean;
 }) {

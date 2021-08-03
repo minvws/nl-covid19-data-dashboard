@@ -3,7 +3,7 @@ import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { assert } from '~/utils/assert';
-import { GetMunicipalityDataFunctionType } from './use-gm-data';
+import { GetGmDataFunctionType } from './use-gm-data';
 import { GetVrDataFunctionType } from './use-vr-data';
 
 /**
@@ -21,7 +21,7 @@ import { GetVrDataFunctionType } from './use-vr-data';
  * @param defaultColor
  */
 export function useChoroplethColorScale(
-  getChoroplethValue: GetVrDataFunctionType | GetMunicipalityDataFunctionType,
+  getChoroplethValue: GetVrDataFunctionType | GetGmDataFunctionType,
   thresholds: ChoroplethThresholdsValue[],
   defaultColor = 'white'
 ) {

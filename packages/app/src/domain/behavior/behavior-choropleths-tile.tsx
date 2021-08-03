@@ -1,4 +1,7 @@
-import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
+import {
+  VrCollectionBehavior,
+  VrGeoProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { VrChoropleth } from '~/components/choropleth';
@@ -141,7 +144,9 @@ function ChoroplethBlock({
             metricProperty={metricProperty}
             minHeight={!isSmallScreen ? 350 : 400}
             noDataFillColor={colors.page}
-            tooltipContent={(context: VrCollectionBehavior & VrProperties) => {
+            tooltipContent={(
+              context: VrCollectionBehavior & VrGeoProperties
+            ) => {
               const currentComplianceValue =
                 `${currentId}_compliance` as keyof VrCollectionBehavior;
               const currentSupportValue =

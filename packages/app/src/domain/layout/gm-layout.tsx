@@ -21,23 +21,23 @@ import { useIntl } from '~/intl';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { MunicipalityComboBox } from './components/municipality-combo-box';
+import { GmComboBox } from './components/gm-combo-box';
 
-export type MunicipalSideBarData = {
+export type GmSideBarData = {
   tested_overall: Pick<Gm['tested_overall'], 'last_value'>;
   deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
   hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
   sewer: Pick<Gm['sewer'], 'last_value'>;
 };
 
-type MunicipalityLayoutProps = {
+type GmLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 } & (
   | {
       code: string;
       difference: GmDifference;
-      data: MunicipalSideBarData;
+      data: GmSideBarData;
       municipalityName: string;
     }
   | {
@@ -53,7 +53,7 @@ type MunicipalityLayoutProps = {
 );
 
 /**
- * MunicipalityLayout is a composition of persistent layouts.
+ * GmLayout is a composition of persistent layouts.
  *
  * ## States
  *
@@ -68,7 +68,7 @@ type MunicipalityLayoutProps = {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-export function MunicipalityLayout(props: MunicipalityLayoutProps) {
+export function GmLayout(props: GmLayoutProps) {
   const { children, data, municipalityName, code, difference } = props;
   const sidebarData = useMemo(
     () => ({ ...data, difference }),
@@ -109,7 +109,7 @@ export function MunicipalityLayout(props: MunicipalityLayoutProps) {
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
           >
-            <MunicipalityComboBox />
+            <GmComboBox />
           </Box>
         }
         sidebarComponent={

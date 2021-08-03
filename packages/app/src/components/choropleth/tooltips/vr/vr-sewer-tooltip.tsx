@@ -1,4 +1,4 @@
-import { VrProperties, VrSewerValue } from '@corona-dashboard/common';
+import { VrGeoProperties, VrSewerValue } from '@corona-dashboard/common';
 import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
@@ -12,7 +12,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function VrSewerTooltip({
   context,
 }: {
-  context: VrProperties & VrSewerValue;
+  context: VrGeoProperties & VrSewerValue;
 }) {
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();

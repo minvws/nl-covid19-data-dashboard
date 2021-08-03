@@ -13,12 +13,12 @@ import { AppContent } from '~/components/layout/app-content';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
-type InternationalLayoutProps = {
+type InLayoutProps = {
   lastGenerated: string;
   children?: React.ReactNode;
 };
 
-export function InternationalLayout(props: InternationalLayoutProps) {
+export function InLayout(props: InLayoutProps) {
   const { children } = props;
 
   const { siteText } = useIntl();

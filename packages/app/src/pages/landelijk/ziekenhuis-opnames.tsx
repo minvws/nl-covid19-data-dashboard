@@ -1,12 +1,13 @@
 import {
   getLastFilledValue,
+  GmGeoProperties,
   GmHospitalNiceValue,
-  GmProperties,
+  VrGeoProperties,
   VrHospitalNiceValue,
-  VrProperties,
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -25,7 +26,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createElementsQuery,
@@ -73,9 +74,7 @@ export const getStaticProps = createGetStaticProps(
 const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
   const reverseRouter = useReverseRouter();
-  const [selectedMap, setSelectedMap] = useState<'municipal' | 'region'>(
-    'region'
-  );
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('vr');
   const dataHospitalNice = data.hospital_nice;
   const dataHospitalLcps = data.hospital_lcps;
   const lastValueNice = data.hospital_nice.last_value;
@@ -93,7 +92,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <SEOHead
           title={text.metadata.title}
           description={text.metadata.description}
@@ -164,7 +163,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             chartRegion={selectedMap}
             legend={{
               thresholds:
-                selectedMap === 'municipal'
+                selectedMap === 'gm'
                   ? gmThresholds.hospital_nice.admissions_on_date_of_reporting
                   : vrThresholds.hospital_nice.admissions_on_date_of_reporting,
               title: text.chloropleth_legenda.titel,
@@ -174,7 +173,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.nice,
             }}
           >
-            {selectedMap === 'municipal' && (
+            {selectedMap === 'gm' && (
               <GmChoropleth
                 accessibility={{
                   key: 'hospital_admissions_municipal_choropleth',
@@ -184,11 +183,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
-                  context: GmProperties & GmHospitalNiceValue
+                  context: GmGeoProperties & GmHospitalNiceValue
                 ) => <GmHospitalAdmissionsTooltip context={context} />}
               />
             )}
-            {selectedMap === 'region' && (
+            {selectedMap === 'vr' && (
               <VrChoropleth
                 accessibility={{
                   key: 'hospital_admissions_region_choropleth',
@@ -198,7 +197,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="hospital_nice"
                 metricProperty="admissions_on_date_of_reporting"
                 tooltipContent={(
-                  context: VrProperties & VrHospitalNiceValue
+                  context: VrGeoProperties & VrHospitalNiceValue
                 ) => <VrHospitalAdmissionsTooltip context={context} />}
               />
             )}
@@ -315,7 +314,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

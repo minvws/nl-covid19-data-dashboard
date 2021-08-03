@@ -1,4 +1,4 @@
-import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
+import { GmGeoProperties, GmHospitalNiceValue } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -11,8 +11,8 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createElementsQuery,
@@ -95,7 +95,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
@@ -166,9 +166,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.gm.ziekenhuisopnames}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <GmHospitalAdmissionsTooltip context={context} />
-              )}
+              tooltipContent={(
+                context: GmGeoProperties & GmHospitalNiceValue
+              ) => <GmHospitalAdmissionsTooltip context={context} />}
             />
           </ChoroplethTile>
 
@@ -221,7 +221,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

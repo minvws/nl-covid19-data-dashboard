@@ -5,14 +5,13 @@ import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-m
  * This hook returns all the municipal codes that belong to the same safety region
  * as the given municipal code.
  *
- * @param municipalCode
  */
-export function useGmCodesByVr(municipalCode?: string): string[] | undefined {
+export function useGmCodesByVr(gmCode?: string): string[] | undefined {
   return useMemo(() => {
-    if (!municipalCode) {
+    if (!gmCode) {
       return;
     }
 
-    return getVrMunicipalsForMunicipalCode(municipalCode);
-  }, [municipalCode]);
+    return getVrMunicipalsForMunicipalCode(gmCode);
+  }, [gmCode]);
 }

@@ -2,8 +2,8 @@ import {
   Dictionary,
   GmCollection,
   GmCollectionMetricName,
-  GmProperties,
-  MunicipalGeoJSON,
+  GmGeoJSON,
+  GmGeoProperties,
 } from '@corona-dashboard/common';
 import { set } from 'lodash';
 import { useMemo } from 'react';
@@ -24,35 +24,33 @@ import { assert } from '~/utils/assert';
  * @param featureCollection
  */
 
-interface GmMetricValue extends GmProperties {
+interface GmMetricValue extends GmGeoProperties {
   [key: string]: unknown;
 }
 
-interface MunicipalityChoroplethValue extends GmMetricValue {
+interface GmChoroplethValue extends GmMetricValue {
   __color_value: number;
 }
 
-export type GetMunicipalityDataFunctionType = (
-  id: string
-) => MunicipalityChoroplethValue;
+export type GetGmDataFunctionType = (id: string) => GmChoroplethValue;
 
 export type DataValue = {
   value: number;
   code: string;
 };
 
-type UseMunicipalityDataReturnValue = {
-  getChoroplethValue: GetMunicipalityDataFunctionType;
+type UseGmDataReturnValue = {
+  getChoroplethValue: GetGmDataFunctionType;
   hasData: boolean;
   values: DataValue[];
 };
 
 export function useGmNavigationData(
-  featureCollection: MunicipalGeoJSON
-): UseMunicipalityDataReturnValue {
+  featureCollection: GmGeoJSON
+): UseGmDataReturnValue {
   const propertyData = featureCollection.features.reduce(
     (acc, feature) => set(acc, feature.properties.gemcode, feature.properties),
-    {} as Record<string, GmProperties>
+    {} as Record<string, GmGeoProperties>
   );
 
   return {
@@ -67,16 +65,16 @@ export function useGmNavigationData(
 }
 
 export function useGmData<K extends GmCollectionMetricName>(
-  featureCollection: MunicipalGeoJSON,
+  featureCollection: GmGeoJSON,
   metricName: K,
   metricProperty: string,
   data: Pick<GmCollection, K>
-): UseMunicipalityDataReturnValue {
+): UseGmDataReturnValue {
   return useMemo(() => {
     const propertyData = featureCollection.features.reduce(
       (acc, feature) =>
         set(acc, feature.properties.gemcode, feature.properties),
-      {} as Record<string, GmProperties>
+      {} as Record<string, GmGeoProperties>
     );
 
     if (!data) {
@@ -125,7 +123,7 @@ export function useGmData<K extends GmCollectionMetricName>(
          */
         __color_value: Number(value[metricProperty]),
       });
-    }, {} as Dictionary<MunicipalityChoroplethValue>);
+    }, {} as Dictionary<GmChoroplethValue>);
 
     const hasData = Object.keys(mergedData).length > 0;
 

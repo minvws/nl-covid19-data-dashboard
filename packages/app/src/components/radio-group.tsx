@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Box } from './base';
-interface RadioGroupItem<T extends string> {
+export interface RadioGroupItem<T extends string> {
   label: string;
   value: T;
 }

@@ -1,4 +1,4 @@
-import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
+import { GmGeoProperties, GmHospitalNiceValue } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth } from '~/components/choropleth';
@@ -161,9 +161,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.gm.ziekenhuisopnames}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <GmHospitalAdmissionsTooltip context={context} />
-              )}
+              tooltipContent={(
+                context: GmGeoProperties & GmHospitalNiceValue
+              ) => <GmHospitalAdmissionsTooltip context={context} />}
             />
           </ChoroplethTile>
 

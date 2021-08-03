@@ -1,6 +1,6 @@
 import {
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
 } from '@corona-dashboard/common';
 import { gmThresholds } from '~/components/choropleth/logic';
 import {
@@ -15,7 +15,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function GmPositiveTestedPeopleTooltip({
   context,
 }: {
-  context: GmProperties & GmCollectionTestedOverall;
+  context: GmGeoProperties & GmCollectionTestedOverall;
 }) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const reverseRouter = useReverseRouter();

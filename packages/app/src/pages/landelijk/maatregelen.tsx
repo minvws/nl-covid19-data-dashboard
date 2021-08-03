@@ -6,7 +6,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
@@ -78,7 +78,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
 
@@ -106,7 +106,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             </KpiSection>
           )}
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

@@ -1,4 +1,4 @@
-import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
+import { GmGeoProperties, GmHospitalNiceValue } from '@corona-dashboard/common';
 import { gmThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
@@ -11,7 +11,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function GmHospitalAdmissionsTooltip({
   context,
 }: {
-  context: GmProperties & GmHospitalNiceValue;
+  context: GmGeoProperties & GmHospitalNiceValue;
 }) {
   const intl = useIntl();
   const reverseRouter = useReverseRouter();

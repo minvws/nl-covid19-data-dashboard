@@ -1,6 +1,6 @@
 import {
   VrCollectionElderlyAtHome,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import { vrThresholds } from '~/components/choropleth/logic';
 import {
@@ -14,7 +14,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function VrElderlyAtHomeTooltip({
   context,
 }: {
-  context: VrProperties & VrCollectionElderlyAtHome;
+  context: VrGeoProperties & VrCollectionElderlyAtHome;
 }) {
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();

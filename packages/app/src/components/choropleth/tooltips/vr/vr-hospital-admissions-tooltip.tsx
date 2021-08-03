@@ -1,4 +1,4 @@
-import { VrHospitalNiceValue, VrProperties } from '@corona-dashboard/common';
+import { VrGeoProperties, VrHospitalNiceValue } from '@corona-dashboard/common';
 import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
@@ -11,7 +11,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function VrHospitalAdmissionsTooltip({
   context,
 }: {
-  context: VrProperties & VrHospitalNiceValue;
+  context: VrGeoProperties & VrHospitalNiceValue;
 }) {
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();

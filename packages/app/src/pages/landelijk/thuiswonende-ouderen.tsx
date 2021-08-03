@@ -1,6 +1,6 @@
 import {
   VrCollectionElderlyAtHome,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
@@ -17,7 +17,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createPageArticlesQuery,
@@ -78,7 +78,7 @@ const ElderlyAtHomeNationalPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
@@ -212,7 +212,7 @@ const ElderlyAtHomeNationalPage = (
               metricName="elderly_at_home"
               metricProperty="positive_tested_daily_per_100k"
               tooltipContent={(
-                context: VrProperties & VrCollectionElderlyAtHome
+                context: VrGeoProperties & VrCollectionElderlyAtHome
               ) => <VrElderlyAtHomeTooltip context={context} />}
             />
           </ChoroplethTile>
@@ -300,7 +300,7 @@ const ElderlyAtHomeNationalPage = (
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

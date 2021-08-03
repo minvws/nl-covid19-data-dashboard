@@ -1,6 +1,6 @@
 import {
   VrCollectionNursingHome,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
@@ -19,7 +19,7 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createPageArticlesQuery,
@@ -74,7 +74,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
@@ -241,7 +241,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               metricName="nursing_home"
               metricProperty="infected_locations_percentage"
               tooltipContent={(
-                context: VrProperties & VrCollectionNursingHome
+                context: VrGeoProperties & VrCollectionNursingHome
               ) => <VrInfectedLocationsTooltip context={context} />}
             />
           </ChoroplethTile>
@@ -354,7 +354,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

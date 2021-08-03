@@ -1,6 +1,6 @@
 import {
   VrCollectionDisabilityCare,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import { vrThresholds } from '~/components/choropleth/logic';
 import {
@@ -14,7 +14,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function VrDisablityInfectedLocationsTooltip({
   context,
 }: {
-  context: VrProperties & VrCollectionDisabilityCare;
+  context: VrGeoProperties & VrCollectionDisabilityCare;
 }) {
   const { formatPercentage, formatNumber, siteText } = useIntl();
   const reverseRouter = useReverseRouter();

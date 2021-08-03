@@ -3,14 +3,14 @@ import {
   VrCollection,
   VrCollectionMetricName,
   VrGeoJSON,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import { set } from 'lodash';
 import { useMemo } from 'react';
 import { assert } from '~/utils/assert';
 import { DataValue } from './use-gm-data';
 
-interface VrMetricValue extends VrProperties {
+interface VrMetricValue extends VrGeoProperties {
   [key: string]: unknown;
 }
 
@@ -74,7 +74,7 @@ export function useVrData<K extends VrCollectionMetricName>(
 
     const propertyData = featureCollection.features.reduce(
       (acc, feature) => set(acc, feature.properties.vrcode, feature.properties),
-      {} as Record<string, VrProperties>
+      {} as Record<string, VrGeoProperties>
     );
 
     const mergedData = metricForAllRegions.reduce((acc, value) => {

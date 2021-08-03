@@ -1,4 +1,4 @@
-import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
+import { EscalationLevels, VrGeoProperties } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
 import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -101,7 +101,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
               metricName="escalation_levels"
               metricProperty="level"
               noDataFillColor={unknownLevelColor}
-              tooltipContent={(context: VrProperties & EscalationLevels) => (
+              tooltipContent={(context: VrGeoProperties & EscalationLevels) => (
                 <VrEscalationTooltip
                   context={context}
                   getLink={reverseRouter.vr.index}

@@ -8,7 +8,7 @@ import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
  *
  */
 export function useVrBoundingBoxByGmCode(
-  regionGeo: VrGeoJSON,
+  vrGeo: VrGeoJSON,
   gmcode?: string
 ): [VrGeoJSON, string] | [undefined, undefined] {
   return useMemo(() => {
@@ -19,7 +19,7 @@ export function useVrBoundingBoxByGmCode(
     const vrcode = vrCodeByGmCode[gmcode];
 
     if (vrcode) {
-      const vrFeature = regionGeo.features.find(
+      const vrFeature = vrGeo.features.find(
         (feat) => feat.properties.vrcode === vrcode
       );
 
@@ -29,7 +29,7 @@ export function useVrBoundingBoxByGmCode(
 
       return [
         {
-          ...regionGeo,
+          ...vrGeo,
           features: [vrFeature],
         },
         vrcode,
@@ -37,5 +37,5 @@ export function useVrBoundingBoxByGmCode(
     }
 
     return [undefined, undefined];
-  }, [gmcode, regionGeo]);
+  }, [gmcode, vrGeo]);
 }

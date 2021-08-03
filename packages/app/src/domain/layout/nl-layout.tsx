@@ -19,7 +19,7 @@ import {
   CategoryMenu,
   Menu,
   MetricMenuButtonLink,
-  MetricMenuItemLink,
+  MetricMenuItemLink
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
@@ -59,19 +59,19 @@ export const nlPageMetricNames = [
 
 export type NlPageMetricNames = typeof nlPageMetricNames[number];
 
-type NationalPageMetricData = {
+type NlPageMetricData = {
   variantSidebarValue: VariantSidebarValue;
   situationsSidebarValue: SituationsSidebarValue;
 } & Pick<Nl, NlPageMetricNames>;
 
-interface NationalLayoutProps {
+interface NlLayoutProps {
   lastGenerated: string;
-  data: NationalPageMetricData;
+  data: NlPageMetricData;
   children?: React.ReactNode;
 }
 
 /**
- * NationalLayout is a composition of persistent layouts.
+ * NlLayout is a composition of persistent layouts.
  *
  * ## States
  *
@@ -86,7 +86,7 @@ interface NationalLayoutProps {
  * More info on persistent layouts:
  * https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
  */
-export function NationalLayout(props: NationalLayoutProps) {
+export function NlLayout(props: NlLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();

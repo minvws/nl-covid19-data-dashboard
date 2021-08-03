@@ -1,4 +1,7 @@
-import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
+import {
+  VrCollectionBehavior,
+  VrGeoProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
@@ -11,7 +14,7 @@ import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-value
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 interface VrBehaviorTooltipProps {
-  context: VrCollectionBehavior & VrProperties;
+  context: VrCollectionBehavior & VrGeoProperties;
   currentMetric: BehaviorIdentifier;
   currentComplianceValue: number;
   currentSupportValue: number;

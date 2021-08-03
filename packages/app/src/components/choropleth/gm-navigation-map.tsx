@@ -1,4 +1,4 @@
-import { GmProperties } from '@corona-dashboard/common';
+import { GmGeoProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { ReactNode } from 'react';
@@ -8,15 +8,15 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { Choropleth, HoverPathLink, Path } from './components';
 import {
-  countryGeo,
-  municipalGeo,
+  gmGeo,
+  nlGeo,
   useGmNavigationData,
   useTabInteractiveButton,
 } from './logic';
 
 type GmNavigationMapProps<T> = {
   onSelect?: (gmcode: string) => void;
-  tooltipContent?: (context: GmProperties & { value: T }) => ReactNode;
+  tooltipContent?: (context: GmGeoProperties & { value: T }) => ReactNode;
 };
 
 /**
@@ -31,10 +31,10 @@ export function GmNavigationMap<T>(props: GmNavigationMapProps<T>) {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  const { getChoroplethValue } = useGmNavigationData(municipalGeo);
+  const { getChoroplethValue } = useGmNavigationData(gmGeo);
 
   const renderFeature = (
-    feature: Feature<MultiPolygon | Polygon, GmProperties>,
+    feature: Feature<MultiPolygon | Polygon, GmGeoProperties>,
     path: string,
     _index: number
   ) => {
@@ -60,7 +60,7 @@ export function GmNavigationMap<T>(props: GmNavigationMapProps<T>) {
     );
 
   const renderHover = (
-    feature: Feature<MultiPolygon | Polygon, GmProperties>,
+    feature: Feature<MultiPolygon | Polygon, GmGeoProperties>,
     path: string
   ) => {
     const { gemcode, gemnaam } = feature.properties;
@@ -96,9 +96,9 @@ export function GmNavigationMap<T>(props: GmNavigationMapProps<T>) {
           key: 'municipality_navigation_map',
           features: ['keyboard_choropleth'],
         }}
-        featureCollection={municipalGeo}
-        hovers={municipalGeo}
-        boundingBox={countryGeo}
+        featureCollection={gmGeo}
+        hovers={gmGeo}
+        boundingBox={nlGeo}
         renderFeature={renderFeature}
         renderHover={renderHover}
         getTooltipContent={getTooltipContent}

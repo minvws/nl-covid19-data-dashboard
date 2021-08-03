@@ -1,4 +1,4 @@
-import { GmProperties, GmSewerValue } from '@corona-dashboard/common';
+import { GmGeoProperties, GmSewerValue } from '@corona-dashboard/common';
 import { vrThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
@@ -12,7 +12,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function GmSewerTooltip({
   context,
 }: {
-  context: GmProperties & GmSewerValue;
+  context: GmGeoProperties & GmSewerValue;
 }) {
   const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();

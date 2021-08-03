@@ -1,9 +1,9 @@
 import {
   EscalationLevels,
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
   VrCollectionTestedOverall,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
@@ -98,14 +98,13 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
-  const dataSitemap = useDataSitemap('landelijk');
+  const dataSitemap = useDataSitemap('nl');
 
   const { siteText, formatDate } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
-  const [selectedMap, setSelectedMap] =
-    useState<RegionControlOption>('municipal');
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const unknownLevelColor = useEscalationColor(null);
   const internationalFeature = useFeature('inPositiveTestsPage');
@@ -261,7 +260,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     metricProperty="level"
                     noDataFillColor={unknownLevelColor}
                     tooltipContent={(
-                      context: VrProperties & EscalationLevels
+                      context: VrGeoProperties & EscalationLevels
                     ) => (
                       <VrEscalationTooltip
                         context={context}
@@ -328,7 +327,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <>
-                  {selectedMap === 'municipal' && (
+                  {selectedMap === 'gm' && (
                     <GmChoropleth
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
@@ -338,11 +337,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricProperty="infected_per_100k"
                       getLink={reverseRouter.gm.positiefGetesteMensen}
                       tooltipContent={(
-                        context: GmProperties & GmCollectionTestedOverall
+                        context: GmGeoProperties & GmCollectionTestedOverall
                       ) => <GmPositiveTestedPeopleTooltip context={context} />}
                     />
                   )}
-                  {selectedMap === 'region' && (
+                  {selectedMap === 'vr' && (
                     <VrChoropleth
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
@@ -352,7 +351,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                       metricName="tested_overall"
                       metricProperty="infected_per_100k"
                       tooltipContent={(
-                        context: VrProperties & VrCollectionTestedOverall
+                        context: VrGeoProperties & VrCollectionTestedOverall
                       ) => <VrPositiveTestedPeopleTooltip context={context} />}
                     />
                   )}

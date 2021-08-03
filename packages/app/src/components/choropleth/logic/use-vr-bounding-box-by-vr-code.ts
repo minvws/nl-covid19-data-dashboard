@@ -1,5 +1,4 @@
-import { VrProperties } from '@corona-dashboard/common';
-import { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
+import { VrGeoJSON } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 
 /**
@@ -7,16 +6,13 @@ import { useMemo } from 'react';
  * If the given code is undefined, it returns undefined.
  *
  */
-export function useVrBoundingBoxByVrCode(
-  regionGeo: FeatureCollection<MultiPolygon | Polygon, VrProperties>,
-  vrcode?: string
-) {
+export function useVrBoundingBoxByVrCode(vrGeo: VrGeoJSON, vrcode?: string) {
   return useMemo(() => {
     if (!vrcode) {
       return;
     }
 
-    const feature = regionGeo.features.find(
+    const feature = vrGeo.features.find(
       (feat) => feat.properties.vrcode === vrcode
     );
 
@@ -25,8 +21,8 @@ export function useVrBoundingBoxByVrCode(
     }
 
     return {
-      ...regionGeo,
+      ...vrGeo,
       features: [feature],
     };
-  }, [vrcode, regionGeo]);
+  }, [vrcode, vrGeo]);
 }

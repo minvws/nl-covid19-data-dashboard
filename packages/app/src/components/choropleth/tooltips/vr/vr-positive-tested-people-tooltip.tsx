@@ -1,6 +1,6 @@
 import {
   VrCollectionTestedOverall,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import { vrThresholds } from '~/components/choropleth/logic';
 import {
@@ -15,7 +15,7 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export function VrPositiveTestedPeopleTooltip({
   context,
 }: {
-  context: VrProperties & VrCollectionTestedOverall;
+  context: VrGeoProperties & VrCollectionTestedOverall;
 }) {
   const { vrname, infected_per_100k, infected } = context;
 

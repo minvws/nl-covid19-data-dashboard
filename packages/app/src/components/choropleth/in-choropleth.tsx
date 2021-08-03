@@ -1,6 +1,6 @@
 import {
-  EuropeGeoJSON,
-  EuropeGeoProperties,
+  InGeoJSON,
+  InGeoProperties,
   KeysOfType,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -24,7 +24,7 @@ import {
   Path,
 } from './components';
 import {
-  europeGeo,
+  inGeo,
   useInChoroplethColorScale,
   useTabInteractiveButton,
 } from './logic';
@@ -36,9 +36,9 @@ import { ChoroplethTooltipPlacement } from './tooltips/tooltip';
  */
 const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
 
-const boundingBoxEurope: EuropeGeoJSON = {
-  ...europeGeo,
-  features: europeGeo.features.filter((x) =>
+const boundingBoxEurope: InGeoJSON = {
+  ...inGeo,
+  features: inGeo.features.filter((x) =>
     boundingBoxCodes.includes(x.properties.ISO_A3)
   ),
 };
@@ -67,10 +67,10 @@ export function InChoropleth<T extends CountryDataItem>(
   const { siteText } = useIntl();
 
   const codes = data.map((x) => x.country_code);
-  const countriesGeoWithData: EuropeGeoJSON = useMemo(() => {
+  const countriesGeoWithData: InGeoJSON = useMemo(() => {
     return {
-      ...europeGeo,
-      features: europeGeo.features.filter((x) =>
+      ...inGeo,
+      features: inGeo.features.filter((x) =>
         codes.includes(x.properties.ISO_A3)
       ),
     };
@@ -102,7 +102,7 @@ export function InChoropleth<T extends CountryDataItem>(
 
   const renderFeature = useCallback(
     (
-      feature: Feature<MultiPolygon | Polygon, EuropeGeoProperties>,
+      feature: Feature<MultiPolygon | Polygon, InGeoProperties>,
       path: string,
       index: number
     ) => {
@@ -132,7 +132,7 @@ export function InChoropleth<T extends CountryDataItem>(
 
   const renderHover = useCallback(
     (
-      feature: Feature<MultiPolygon | Polygon, EuropeGeoProperties>,
+      feature: Feature<MultiPolygon | Polygon, InGeoProperties>,
       path: string,
       index: number
     ) => {
@@ -186,7 +186,7 @@ export function InChoropleth<T extends CountryDataItem>(
           accessibility={choroplethAccessibility}
           initialWidth={1.1 * mapHeight}
           minHeight={mapHeight}
-          featureCollection={europeGeo}
+          featureCollection={inGeo}
           hovers={countriesGeoWithData}
           boundingBox={boundingBoxEurope}
           boudingBoxPadding={padding}
