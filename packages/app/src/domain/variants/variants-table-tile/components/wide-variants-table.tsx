@@ -2,8 +2,8 @@ import { DifferenceDecimal } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
+import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import {
   Cell,

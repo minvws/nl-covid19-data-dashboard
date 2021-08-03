@@ -14,9 +14,9 @@ import {
   GappedStackedAreaSeriesDefinition,
   TimespanAnnotationConfig,
 } from '~/components/time-series-chart/logic';
+import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
@@ -56,7 +56,7 @@ export function VariantsStackedAreaTile({
   );
 }
 
-const alwayEnabled: string[] = [];
+const alwayEnabled: (keyof VariantChartValue)[] = [];
 
 type VariantStackedAreaTileWithDataProps = {
   values: VariantChartValue[];
@@ -70,7 +70,8 @@ function VariantStackedAreaTileWithData({
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
   const { siteText } = useIntl();
-  const { list, toggle, clear } = useList<string>(alwayEnabled);
+  const { list, toggle, clear } =
+    useList<keyof VariantChartValue>(alwayEnabled);
 
   const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
   const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
