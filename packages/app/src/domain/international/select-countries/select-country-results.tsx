@@ -66,10 +66,7 @@ export function SelectCountriesResults() {
                     {x.data.name}
                   </span>
                   <span css={css({ flex: '0 0 1rem' })}>
-                    {formatNumber(x.data.lastValue, {
-                      maximumFractionDigits: 1,
-                      minimumFractionDigits: 1,
-                    })}
+                    {formatNumber(x.data.lastValue, 1)}
                   </span>
                 </Hit>
               </li>

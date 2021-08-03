@@ -65,12 +65,15 @@ export function createFormatting(
 ) {
   function formatNumber(
     value: number | string | undefined | null,
-    options?: {
-      maximumFractionDigits?: number;
-      minimumFractionDigits?: number;
-    }
+    numFractionDigits?: number
   ): string {
     if (typeof value === 'undefined' || value === null) return '-';
+    const options = numFractionDigits
+      ? {
+          maximumFractionDigits: numFractionDigits,
+          minimumFractionDigits: numFractionDigits,
+        }
+      : undefined;
 
     return Intl.NumberFormat(languageTag, options).format(Number(value));
   }
