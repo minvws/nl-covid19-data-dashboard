@@ -72,7 +72,7 @@ export function SituationsOverviewChoroplethTile({
                 position="relative"
                 top={'3px'}
               />
-              <InlineText m={0} fontSize={[0, null, 1]}>
+              <InlineText variant="label1">
                 {text.situaties_kaarten_overzicht.legenda.onvoldoende_data}
               </InlineText>
             </Box>
@@ -138,18 +138,19 @@ function ChoroplethTooltip({
         noDataFillColor={noDataFillColor}
       >
         {regionName + ': '}
-        <InlineText
-          ml={3}
+        <Box
+          as="span"
           display="inline-block"
+          fontWeight="bold"
           textAlign="right"
-          fontWeight="heavy"
+          px={1}
         >
           {typeof value === 'number'
             ? isPercentage
               ? intl.formatPercentage(value) + '%'
               : value
             : '–'}
-        </InlineText>
+        </Box>
       </TooltipSubject>
     </Box>
   );
@@ -183,8 +184,7 @@ function ChoroplethGridItem({
         display="flex"
         justifyContent="center"
         alignItems="center"
-        spacing={2}
-        spacingHorizontal
+        spacingHorizontal={2}
         mb={3}
       >
         {icon}

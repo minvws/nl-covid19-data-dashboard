@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { Anchor } from '~/components/typography';
 
 export function LanguageSwitcher() {
   const router = useRouter();
@@ -44,7 +45,7 @@ const Separator = styled.span(
   })
 );
 
-const LanguageLink = styled.a<{ isActive: boolean }>((x) =>
+const LanguageLink = styled(Anchor)<{ isActive: boolean }>((x) =>
   css({
     borderBottom: '2px solid',
     borderBottomColor: x.isActive ? 'button' : 'transparent',

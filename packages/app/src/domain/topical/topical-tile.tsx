@@ -1,14 +1,14 @@
 import { css } from '@styled-system/css';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { spacingStyle } from '~/style/functions/spacing';
 import { asResponsiveArray } from '~/style/utils';
-import { space, SpaceProps } from 'styled-system';
-import { styledShouldForwardProp } from '~/utils/styled-should-forward-prop';
 
-type TopicalTileProps = SpaceProps;
+export function TopicalTile({ children }: { children: ReactNode }) {
+  return <StyledTopicalTile>{children}</StyledTopicalTile>;
+}
 
-export const TopicalTile = styled.article.withConfig({
-  shouldForwardProp: styledShouldForwardProp,
-})<TopicalTileProps>(
+const StyledTopicalTile = styled.article(
   css({
     display: 'flex',
     flexDirection: 'column',
@@ -17,6 +17,6 @@ export const TopicalTile = styled.article.withConfig({
     mx: asResponsiveArray({ _: -3, md: 0 }),
     mb: 0,
     borderRadius: 1,
-  }),
-  space
+    ...spacingStyle({ _: 3, md: 4 }),
+  })
 );

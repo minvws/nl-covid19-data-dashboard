@@ -25,7 +25,7 @@ import { isEmpty, set } from 'lodash';
 import { transparentize } from 'polished';
 import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { InlineText } from '~/components/typography';
 import { ValueAnnotation } from '~/components/value-annotation';
@@ -375,18 +375,16 @@ export function StackedChart<T extends TimestampedValue>(
       );
 
       return (
-        <Box p={2} as="section" position="relative">
-          <Box display="flex" alignItems="center" mb={2}>
+        <Box p={2} as="section" position="relative" spacing={2}>
+          <Box display="flex" alignItems="center" mb={2} spacingHorizontal={2}>
             <Square color={color} />
-            <InlineText ml={2} fontWeight="bold">
-              {labelByKey[key]}
-            </InlineText>
+            <InlineText fontWeight="bold">{labelByKey[key]}</InlineText>
           </Box>
-          <Box mb={2}>
+          <Box>
             <InlineText fontWeight="bold">{`${startSingle} - ${endSingle}: `}</InlineText>
             {formatNumber(data[key])}
           </Box>
-          <Box mb={2}>
+          <Box>
             <InlineText fontWeight="bold">{`${startAll} - ${endAll}: `}</InlineText>
             {formatNumber(seriesSumByKey[key])}
             {!isTinyScreen && ' ' + siteText.waarde_annotaties.totaal}
@@ -490,7 +488,10 @@ export function StackedChart<T extends TimestampedValue>(
   return (
     <>
       {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+        <>
+          <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
+          <Spacer mb={2} />
+        </>
       )}
       <Box height="100%">
         <ResponsiveContainer>

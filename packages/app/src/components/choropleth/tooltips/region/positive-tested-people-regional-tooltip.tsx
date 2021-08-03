@@ -40,7 +40,7 @@ export function PositiveTestedPeopleRegionalTooltip({
         {siteText.common.inwoners}
       </TooltipSubject>
 
-      <Text m={0} lineHeight={0}>
+      <Text>
         {replaceComponentsInText(text.positive_tested_people, {
           totalPositiveTestedPeople: (
             <InlineText fontWeight="bold">{infected}</InlineText>

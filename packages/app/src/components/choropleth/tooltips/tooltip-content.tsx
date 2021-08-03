@@ -24,15 +24,14 @@ export function TooltipContent(props: IProps) {
     >
       <TooltipHeader href={link}>
         <Heading
-          level={3}
-          m={0}
+          as="h3"
+          level={4}
           /**
            * If there's no link do not read the tooltip title because a
            * screenreader will also read the choropleth link which contains the
            * name of a region.
            */
           aria-hidden={link ? 'true' : 'false'}
-          fontSize="1.125rem"
           css={css({
             overflow: 'hidden',
             textOverflow: 'ellipsis',

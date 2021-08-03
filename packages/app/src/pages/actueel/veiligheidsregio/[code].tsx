@@ -6,7 +6,7 @@ import {
   VrProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { isEmpty, some } from 'lodash';
+import { some } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -35,7 +35,7 @@ import { Metadata } from '~/components/metadata';
 import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { Text } from '~/components/typography';
+import { Anchor, Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { Layout } from '~/domain/layout/layout';
@@ -132,7 +132,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" pb={4}>
+      <Box bg="white" py={4}>
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -216,8 +216,10 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 href={reverseRouter.vr.risiconiveau(vrCode)}
               >
-                <Link href={reverseRouter.vr.maatregelen(vrCode)}>
-                  <a>{text.risoconiveau_maatregelen.bekijk_href}</a>
+                <Link href={reverseRouter.vr.maatregelen(vrCode)} passHref>
+                  <Anchor underline>
+                    {text.risoconiveau_maatregelen.bekijk_href}
+                  </Anchor>
                 </Link>
               </RiskLevelIndicator>
             </MiniTrendTileLayout>
@@ -259,7 +261,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
             </CollapsibleButton>
 
             {content.weeklyHighlight && content.highlights && (
-              <Box pt={3}>
+              <TopicalTile>
                 <TopicalSectionHeader
                   title={siteText.common_actueel.secties.artikelen.titel}
                 />
@@ -269,7 +271,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   highlights={content.highlights}
                   showWeeklyHighlight={content.showWeeklyHighlight}
                 />
-              </Box>
+              </TopicalTile>
             )}
 
             <TopicalTile>
@@ -277,6 +279,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 title={siteText.common_actueel.secties.risicokaart.titel}
                 link={siteText.common_actueel.secties.risicokaart.link}
               />
+
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <EscalationMapLegenda
@@ -309,48 +312,40 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     )}
                   />
                 </Box>
-                <Box>
+
+                <Box spacing={3}>
                   {siteText.nationaal_actueel.risiconiveaus
-                    .belangrijk_bericht &&
-                    !isEmpty(
-                      siteText.nationaal_actueel.risiconiveaus
-                        .belangrijk_bericht
-                    ) && (
-                      <Box mb={3}>
-                        <WarningTile
-                          message={
-                            siteText.nationaal_actueel.risiconiveaus
-                              .belangrijk_bericht
-                          }
-                          variant="emphasis"
-                        />
-                      </Box>
-                    )}
-                  <Box mb={3}>
-                    <Markdown
-                      content={replaceVariablesInText(
-                        text.risiconiveaus.selecteer_toelichting,
-                        {
-                          last_update: formatDate(
-                            choropleth.vr.escalation_levels[0]
-                              .date_of_insertion_unix,
-                            'day-month'
-                          ),
-                        }
-                      )}
+                    .belangrijk_bericht && (
+                    <WarningTile
+                      message={
+                        siteText.nationaal_actueel.risiconiveaus
+                          .belangrijk_bericht
+                      }
+                      variant="emphasis"
                     />
-                  </Box>
+                  )}
+
+                  <Markdown
+                    content={replaceVariablesInText(
+                      text.risiconiveaus.selecteer_toelichting,
+                      {
+                        last_update: formatDate(
+                          choropleth.vr.escalation_levels[0]
+                            .date_of_insertion_unix,
+                          'day-month'
+                        ),
+                      }
+                    )}
+                  />
                 </Box>
               </ChoroplethTwoColumnLayout>
 
-              <Box mt={4}>
-                <EscalationLevelExplanations
-                  hasUnknownLevel={some(
-                    choropleth.vr.escalation_levels,
-                    (x) => !isPresent(x)
-                  )}
-                />
-              </Box>
+              <EscalationLevelExplanations
+                hasUnknownLevel={some(
+                  choropleth.vr.escalation_levels,
+                  (x) => !isPresent(x)
+                )}
+              />
             </TopicalTile>
 
             <TopicalTile>
@@ -411,7 +406,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                 </>
-                <Box>
+                <Box spacing={3}>
                   <Metadata
                     date={
                       choropleth.vr.escalation_levels[0].date_of_insertion_unix
@@ -422,10 +417,8 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                   <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
-                  <Box
-                    mb={4}
-                    css={css({ '> div': { justifyContent: 'flex-start' } })}
-                  >
+
+                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
                     <ChartRegionControls
                       value={selectedMap}
                       onChange={setSelectedMap}
@@ -435,7 +428,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               </ChoroplethTwoColumnLayout>
             </TopicalTile>
 
-            <Box pb={4}>
+            <TopicalTile>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
                 description={
@@ -444,7 +437,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
               <ArticleList articleSummaries={content.articles} />
-            </Box>
+            </TopicalTile>
           </TileList>
         </MaxWidth>
       </Box>

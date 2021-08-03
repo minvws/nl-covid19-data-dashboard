@@ -59,7 +59,11 @@ export function TooltipSeriesListContainer<T extends TimestampedValue>({
           <AnimatePresence>
             {timespanAnnotation && (
               <AppearTransition key="1">
-                <Text fontSize={0} color={colors.annotation} textAlign="center">
+                <Text
+                  variant="label2"
+                  color={colors.annotation}
+                  textAlign="center"
+                >
                   {timespanAnnotation.shortLabel || timespanAnnotation.label}
                 </Text>
               </AppearTransition>

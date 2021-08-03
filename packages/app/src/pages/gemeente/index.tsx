@@ -44,7 +44,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
         )}
 
         <Box as="article" p={4}>
-          <Heading level={3} as="h1">
+          <Heading level={2} as="h1">
             {siteText.gemeente_index.selecteer_titel}
           </Heading>
           <Text>{siteText.gemeente_index.selecteer_toelichting}</Text>

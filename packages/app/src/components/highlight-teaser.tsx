@@ -50,13 +50,8 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
             ]}
           />
         </ZoomContainer>
-        <Box padding={isDefault ? 0 : 3} pt={3}>
-          <InlineText
-            textTransform="uppercase"
-            fontSize="0.75rem"
-            fontWeight="bold"
-            color={isDefault ? 'annotation' : 'white'}
-          >
+        <Box padding={isDefault ? 0 : 3} pt={3} spacing={3}>
+          <InlineText variant="overline2">
             {isDefault
               ? category
               : siteText.common_actueel.secties.meer_lezen.weekly_category}
@@ -67,12 +62,7 @@ export function HighlightTeaser(props: HighlightTeaserProps) {
               </>
             )}
           </InlineText>
-          <Heading
-            level={3}
-            mb={{ _: 1, sm: 3 }}
-            lineHeight={{ _: 0, sm: 1 }}
-            fontSize="1.25rem"
-          >
+          <Heading level={3} variant="h4">
             {title}
           </Heading>
 
@@ -133,6 +123,7 @@ const StyledHightlightTeaser = styled.a<{
 
     '&:hover, &:focus': {
       [ZoomContainer]: {
+        transitionDuration: '200ms, 250ms',
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },

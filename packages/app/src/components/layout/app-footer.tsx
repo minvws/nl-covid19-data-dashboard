@@ -11,6 +11,7 @@ import { useFeature } from '~/lib/features';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { Anchor, Heading } from '../typography';
 
 export function AppFooter() {
   const reverseRouter = useReverseRouter();
@@ -34,13 +35,14 @@ export function AppFooter() {
             columnGap: asResponsiveArray({ sm: '32px', md: '48px' }),
             rowGap: asResponsiveArray({ _: 4, md: null }),
           })}
-          spacingHorizontal
           px={{ _: 3, sm: 4, md: 3, lg: 4 }}
         >
-          <Box>
-            <Title>{text.nav.title}</Title>
+          <Box spacing={3}>
+            <Heading as="div" level={3}>
+              {text.nav.title}
+            </Heading>
             <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
-              <FooterList>
+              <Box as="ul" spacing={2}>
                 <Item href="/">{text.nav.links.actueel}</Item>
                 <Item href={reverseRouter.nl.index()}>
                   {text.nav.links.index}
@@ -56,13 +58,15 @@ export function AppFooter() {
                     {text.nav.links.internationaal}
                   </Item>
                 ) : null}
-              </FooterList>
+              </Box>
             </nav>
           </Box>
-          <Box>
-            <Title>{text.nav.meer_informatie}</Title>
+          <Box spacing={3}>
+            <Heading as="div" level={3}>
+              {text.nav.meer_informatie}
+            </Heading>
             <nav aria-label={text.aria_labels.footer_keuze} role="navigation">
-              <FooterList>
+              <Box as="ul" spacing={2}>
                 <Item href={reverseRouter.algemeen.over()}>
                   {text.nav.links.over}
                 </Item>
@@ -81,15 +85,20 @@ export function AppFooter() {
                 <Item href={text.nav.links.meer_href} isExternal>
                   {text.nav.links.meer}
                 </Item>
-              </FooterList>
+              </Box>
             </nav>
           </Box>
 
-          <Box>
-            <Title>{text.nav.contact}</Title>
-            <StyledMarkdown>
+          <Box spacing={3}>
+            <Heading as="div" level={3}>
+              {text.nav.contact}
+            </Heading>
+            <Box
+              maxWidth={{ sm: '90%', md: 280 }}
+              css={css({ a: { color: 'white' } })}
+            >
               <Markdown content={text.nav.contact_beschrijving} />
-            </StyledMarkdown>
+            </Box>
           </Box>
         </MaxWidth>
       </Box>
@@ -113,33 +122,20 @@ function Item({
           <IconContainer>
             <ExternalIcon />
           </IconContainer>
-          <StyledExternalLink href={href}>{children}</StyledExternalLink>
+          <ExternalLink color="white" href={href} underline="hover">
+            {children}
+          </ExternalLink>
         </>
       ) : (
         <Link href={href} passHref>
-          <FooterLink>{children}</FooterLink>
+          <Anchor underline="hover" color="white">
+            {children}
+          </Anchor>
         </Link>
       )}
     </ListItem>
   );
 }
-
-const Title = styled.div(
-  css({
-    mb: 3,
-    fontSize: 3,
-    fontWeight: 'bold',
-  })
-);
-
-const FooterList = styled.ol(
-  css({
-    p: 0,
-    m: 0,
-    fontSize: 2,
-    listStyle: 'none',
-  })
-);
 
 const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
   css({
@@ -148,17 +144,12 @@ const ListItem = styled.li<{ isExternal?: boolean }>((x) =>
     justifyContent: 'flex-start',
     alignItems: 'baseline',
     pl: 3,
-    mb: 2,
 
     '&:before': {
       position: 'absolute',
       top: 0,
       left: 0,
       content: x.isExternal ? null : '"›"',
-    },
-
-    '&:last-of-type': {
-      mb: 0,
     },
   })
 );
@@ -175,33 +166,3 @@ const IconContainer = styled.div(
     },
   })
 );
-
-const StyledMarkdown = styled.div(
-  css({
-    maxWidth: asResponsiveArray({ sm: '90%', md: 280 }),
-
-    p: {
-      fontSize: 2,
-    },
-
-    a: {
-      color: 'white',
-    },
-  })
-);
-
-const linkStyle = css({
-  color: 'inherit',
-  textDecoration: 'none',
-
-  '&:hover': {
-    textDecoration: 'underline',
-  },
-
-  '&:focus': {
-    outline: '2px dotted white',
-  },
-});
-
-const FooterLink = styled.a(linkStyle);
-const StyledExternalLink = styled(ExternalLink)(linkStyle);

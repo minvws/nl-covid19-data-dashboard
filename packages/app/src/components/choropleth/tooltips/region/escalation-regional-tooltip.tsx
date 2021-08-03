@@ -35,13 +35,11 @@ export function EscalationRegionalTooltip({
       title={context.vrname}
       link={getLink ? getLink(context.vrcode) : undefined}
     >
-      <Box display="flex" alignItems="flex-start" spacing={2} spacingHorizontal>
+      <Box display="flex" alignItems="flex-start" spacingHorizontal={2}>
         {level !== null && <EscalationLevelIcon level={level} />}
         <div>
-          <Text m={0} fontWeight="bold">
-            {escalationText.titel}
-          </Text>
-          {!hideValidFrom && <Text m={0}>{validFromText}</Text>}
+          <Text fontWeight="bold">{escalationText.titel}</Text>
+          {!hideValidFrom && <Text>{validFromText}</Text>}
         </div>
       </Box>
     </TooltipContent>

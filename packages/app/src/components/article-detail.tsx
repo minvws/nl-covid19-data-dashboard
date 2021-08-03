@@ -32,15 +32,13 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         </LinkWithIcon>
 
         <Box spacing={2}>
-          <Heading level={1} mb={0}>
-            {article.title}
-          </Heading>
+          <Heading level={1}>{article.title}</Heading>
           <InlineText color="annotation">
             <PublicationDate date={article.publicationDate} />
           </InlineText>
         </Box>
 
-        <Box fontWeight="bold" fontSize="1.25rem">
+        <Box textVariant="h4">
           <RichContent blocks={article.intro} contentWrapper={ContentBlock} />
         </Box>
 
@@ -52,7 +50,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       </ContentBlock>
       {!!article.content?.length && (
         <ContentBlock>
-          <Box fontSize="1.125rem">
+          <Box textVariant="body1">
             <RichContent
               blocks={article.content}
               contentWrapper={ContentBlock}
@@ -63,19 +61,14 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
 
       {article.categories && (
         <ContentBlock>
-          <InlineText
-            color="annotation"
-            mb={3}
-            mt={5}
-            fontFamily="body"
-            display="block"
-          >
-            {siteText.common_actueel.secties.artikelen.tags}
-          </InlineText>
+          <Box pb={3} pt={3}>
+            <InlineText color="annotation">
+              {siteText.common_actueel.secties.artikelen.tags}
+            </InlineText>
+          </Box>
           <Box
             as="ul"
-            spacing={3}
-            spacingHorizontal
+            spacingHorizontal={3}
             display="flex"
             flexWrap="wrap"
             m={0}

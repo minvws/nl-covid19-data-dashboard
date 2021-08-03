@@ -18,11 +18,11 @@ export function TooltipContent(props: IProps) {
       <StyledTooltipHeader>
         <Heading
           level={3}
-          m={0}
-          fontSize={2}
+          variant="h5"
           css={css({
             wordWrap: 'break-word',
             textOverflow: 'ellipsis',
+            hyphens: 'initial',
           })}
         >
           {title}

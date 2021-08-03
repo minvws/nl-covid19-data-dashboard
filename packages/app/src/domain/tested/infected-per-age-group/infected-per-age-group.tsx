@@ -5,6 +5,7 @@ import {
   SelectOption,
 } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
+import { Spacer } from '~/components/base';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { SeriesIcon } from '~/components/time-series-chart/components/series-icon';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
@@ -99,6 +100,7 @@ export function InfectedPerAgeGroup({
         onToggleItem={toggle}
         onReset={clear}
       />
+      <Spacer mb={2} />
       <TimeSeriesChart
         accessibility={accessibility}
         values={values}

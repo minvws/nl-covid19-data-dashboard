@@ -13,7 +13,7 @@ import GrafiekIcon from '~/assets/chart.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import {
   ChartRegionControls,
   RegionControlOption,
@@ -117,7 +117,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <Box bg="white" pb={4}>
+      <Box bg="white" py={4}>
         <MaxWidth id="content">
           <TileList>
             <TopicalSectionHeader
@@ -269,7 +269,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     )}
                   />
                 </Box>
-                <Box>
+                <Box spacing={3}>
                   {text.risiconiveaus.belangrijk_bericht &&
                     !isEmpty(text.risiconiveaus.belangrijk_bericht) && (
                       <Box mb={3}>
@@ -279,33 +279,32 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         />
                       </Box>
                     )}
-                  <Box mb={3}>
-                    <Markdown
-                      content={replaceVariablesInText(
-                        text.risiconiveaus.selecteer_toelichting,
-                        {
-                          last_update: formatDate(
-                            createDate(
-                              choropleth.vr.escalation_levels[0]
-                                .last_determined_unix
-                            ),
-                            'day-month'
+
+                  <Markdown
+                    content={replaceVariablesInText(
+                      text.risiconiveaus.selecteer_toelichting,
+                      {
+                        last_update: formatDate(
+                          createDate(
+                            choropleth.vr.escalation_levels[0]
+                              .last_determined_unix
                           ),
-                        }
-                      )}
-                    />
-                  </Box>
+                          'day-month'
+                        ),
+                      }
+                    )}
+                  />
                 </Box>
               </ChoroplethTwoColumnLayout>
 
-              <Box mt={4}>
-                <EscalationLevelExplanations
-                  hasUnknownLevel={some(
-                    choropleth.vr.escalation_levels,
-                    (x) => !isPresent(x)
-                  )}
-                />
-              </Box>
+              <Spacer mb={4} />
+
+              <EscalationLevelExplanations
+                hasUnknownLevel={some(
+                  choropleth.vr.escalation_levels,
+                  (x) => !isPresent(x)
+                )}
+              />
             </TopicalTile>
 
             <TopicalTile>
@@ -366,7 +365,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                 </>
-                <Box>
+                <Box spacing={3}>
                   <Metadata
                     date={
                       choropleth.vr.escalation_levels[0].date_of_insertion_unix
@@ -376,10 +375,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
-                  <Box
-                    mb={4}
-                    css={css({ '> div': { justifyContent: 'flex-start' } })}
-                  >
+                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
                     <ChartRegionControls
                       value={selectedMap}
                       onChange={setSelectedMap}
@@ -389,7 +385,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               </ChoroplethTwoColumnLayout>
             </TopicalTile>
 
-            <Box pb={4}>
+            <TopicalTile>
               <TopicalSectionHeader
                 title={siteText.common_actueel.secties.meer_lezen.titel}
                 description={
@@ -398,7 +394,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 link={siteText.common_actueel.secties.meer_lezen.link}
               />
               <ArticleList articleSummaries={content.articles} />
-            </Box>
+            </TopicalTile>
           </TileList>
         </MaxWidth>
       </Box>

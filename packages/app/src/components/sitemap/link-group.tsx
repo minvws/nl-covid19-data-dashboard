@@ -52,14 +52,15 @@ function LinkItem(props: LinkItemProps) {
 
   return (
     <Item>
-      <LinkWithIcon
-        href={href}
-        icon={<ArrowIconRight />}
-        iconPlacement="right"
-        fontWeight="bold"
-      >
-        {text}
-      </LinkWithIcon>
+      <InlineText fontWeight="bold">
+        <LinkWithIcon
+          href={href}
+          icon={<ArrowIconRight />}
+          iconPlacement="right"
+        >
+          {text}
+        </LinkWithIcon>
+      </InlineText>
     </Item>
   );
 }

@@ -22,11 +22,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
   const childrenArray = Children.toArray(children);
 
   return (
-    <Box
-      display="flex"
-      flexDirection={{ _: 'column', md: 'row' }}
-      pt={{ _: 3, md: 4 }}
-    >
+    <Box display="flex" flexDirection={{ _: 'column', md: 'row' }}>
       {!breakpoints.md ? (
         <>
           <Box pb={4}>{childrenArray[1]}</Box>
@@ -48,6 +44,7 @@ export function ChoroplethTwoColumnLayout(props: TopicalChoroplethTileProps) {
             flex={{ _: '0.95 1 0%', lg: '1 1 0%' }}
             pl={{ _: 4, lg: 5 }}
             maxWidth={500}
+            spacing={4}
           >
             <ErrorBoundary>
               {childrenArray[1]}

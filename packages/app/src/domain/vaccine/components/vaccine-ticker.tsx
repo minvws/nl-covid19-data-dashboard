@@ -85,23 +85,23 @@ export function VaccineTicker({ data }: VaccineTickerProps) {
       </div>
 
       <Box my={2} pl={{ xs: 3, md: 4 }}>
-        <Text fontSize="1.625rem" m={0}>
+        <Text variant="h2" fontWeight="normal">
           <Shapes index={shapeIndex} />
           {replaceComponentsInText(
             siteText.vaccinaties.clock.title_doses_per_minute,
             {
               dosesPerMinute: (
-                <InlineText color={colors.data.primary} fontWeight="bold">
+                <InlineText color="data.primary" fontWeight="bold">
                   {formatNumber(dosesPerMinute)}
                 </InlineText>
               ),
             }
           )}
         </Text>
-        <Text m={0}>
+        <Text>
           {replaceComponentsInText(siteText.vaccinaties.clock.description, {
             amount: (
-              <InlineText color={colors.data.primary} fontWeight="bold">
+              <InlineText color="data.primary" fontWeight="bold">
                 {formatNumber(data.doses_per_day)}
               </InlineText>
             ),
@@ -197,7 +197,7 @@ function Counter({ progress, dosesPerMinute }: CounterProps) {
       left="50%"
       transform="translate(-50%, -50%)"
     >
-      <Text fontSize={4} fontWeight="bold" color="data.primary" m={0}>
+      <Text variant="h2" fontWeight="bold" color="data.primary">
         {currentCount}
       </Text>
     </Box>
