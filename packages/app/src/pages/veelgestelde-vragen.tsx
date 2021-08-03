@@ -58,7 +58,7 @@ export const getStaticProps = createGetStaticProps(
             ]
           }
       }]
-      
+
     }[0]
     `;
   })
@@ -93,27 +93,32 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
 
       <Content>
-        {content.title && <Heading level={1}>{content.title}</Heading>}
-        {content.description && <RichContent blocks={content.description} />}
-        {Object.entries(groups).map(([group, questions]) => (
-          <Box as="article" mt={4} key={group}>
-            <Heading level={2} fontSize={3}>
-              {group}
-            </Heading>
-            {questions.map((item) => {
-              const id = getSkipLinkId(item.title);
-              return (
-                <CollapsibleSection key={id} id={id} summary={item.title}>
-                  {item.content && (
-                    <Box mt={3}>
-                      <RichContent blocks={item.content} />
-                    </Box>
-                  )}
-                </CollapsibleSection>
-              );
-            })}
-          </Box>
-        ))}
+        <Box spacing={4}>
+          {content.title && <Heading level={1}>{content.title}</Heading>}
+          {content.description && <RichContent blocks={content.description} />}
+
+          {Object.entries(groups).map(([group, questions]) => (
+            <Box as="article" key={group} spacing={3}>
+              <Heading level={3} as="h2">
+                {group}
+              </Heading>
+              <div>
+                {questions.map((item) => {
+                  const id = getSkipLinkId(item.title);
+                  return (
+                    <CollapsibleSection key={id} id={id} summary={item.title}>
+                      {item.content && (
+                        <Box py={3}>
+                          <RichContent blocks={item.content} />
+                        </Box>
+                      )}
+                    </CollapsibleSection>
+                  );
+                })}
+              </div>
+            </Box>
+          ))}
+        </Box>
       </Content>
     </Layout>
   );

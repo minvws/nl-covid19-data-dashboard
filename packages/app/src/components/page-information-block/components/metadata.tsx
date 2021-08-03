@@ -1,17 +1,17 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
-import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import ClockIcon from '~/assets/clock.svg';
 import DatabaseIcon from '~/assets/database.svg';
 import MeerInformatieIcon from '~/assets/meer-informatie.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
-import { InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+
 interface Datasource {
   href: string;
   text: string;
@@ -62,9 +62,7 @@ export function Metadata({
         <Box as="span" minWidth="1.8rem">
           <ClockIcon aria-hidden color={colors.annotation} />
         </Box>
-        <Text margin={0} fontSize={1}>
-          {dateText}
-        </Text>
+        <Text variant="label1">{dateText}</Text>
       </Box>
 
       {dataSources.length > 0 && (
@@ -159,13 +157,12 @@ function MetadataItem({
         {icon}
       </Box>
 
-      <Text margin={0} fontSize={1}>
+      <Text variant="label1">
         {referenceLink && !items && (
           <Link href={referenceLink} passHref>
-            <Anchor>{siteText.informatie_header.meer_informatie_link}</Anchor>
+            <a>{siteText.informatie_header.meer_informatie_link}</a>
           </Link>
         )}
-
         {items && referenceLink && (
           <>
             {`${label}: `}
@@ -179,7 +176,6 @@ function MetadataItem({
             ))}
           </>
         )}
-
         {items && !referenceLink && (
           <>
             {`${label}: `}
@@ -226,22 +222,21 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
       <Box minWidth="1.8rem">{icon}</Box>
 
       <Link href={referenceLink} passHref>
-        <Anchor css={css({ fontSize: 1 })}>
+        <Anchor underline="hover" variant="label1">
           {words.map((word, index) => (
             <Fragment key={index}>
               {words.length - 1 === index ? (
-                <InlineText
+                <span
                   css={css({
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: 'inline-block',
+                    textDecoration: 'inherit',
                   })}
                 >
-                  {word}
-                  <ChevronIcon />
-                </InlineText>
+                  {word}&nbsp;
+                  <ChevronIcon width={10} height={10} />
+                </span>
               ) : (
-                <InlineText>{`${word} `}</InlineText>
+                <span>{`${word} `}</span>
               )}
             </Fragment>
           ))}
@@ -250,20 +245,3 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
     </Box>
   );
 }
-
-const Anchor = styled.a({
-  textDecoration: 'none',
-  display: 'flex',
-  flexWrap: 'wrap',
-  whiteSpace: 'pre-wrap',
-
-  '&:hover': {
-    textDecoration: 'underline',
-  },
-
-  svg: {
-    marginLeft: 1,
-    height: 10,
-    width: 10,
-  },
-});

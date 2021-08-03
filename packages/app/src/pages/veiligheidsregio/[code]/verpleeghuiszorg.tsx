@@ -5,7 +5,7 @@ import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
+import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -172,7 +172,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             id="besmette-locaties"
@@ -250,7 +250,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             id="sterfte"

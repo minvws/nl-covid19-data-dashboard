@@ -196,33 +196,27 @@ export default function PositiefGetesteMensenPage(
             }}
             description={text.time_graph.description}
           >
-            <>
-              <SelectCountries
-                countryOptions={countryOptions}
-                limit={10}
-                alwaysSelectedCodes={['nld']}
-                defaultSelectedCodes={['bel', 'deu']}
-              >
-                {(selectedCountries, colors) => {
-                  const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
-                    selectedCountriesToSeriesConfig(
-                      selectedCountries,
-                      countryNames,
-                      colors
-                    );
-                  return (
-                    <TimeSeriesChart
-                      accessibility={{
-                        key: 'international_infected_people_over_time_chart',
-                      }}
-                      values={compiledInternationalData}
-                      seriesConfig={seriesConfig}
-                      disableLegend
-                    />
-                  );
-                }}
-              </SelectCountries>
-            </>
+            <SelectCountries
+              countryOptions={countryOptions}
+              limit={10}
+              alwaysSelectedCodes={['nld']}
+              defaultSelectedCodes={['bel', 'deu']}
+            >
+              {(selectedCountries, colors) => (
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'international_infected_people_over_time_chart',
+                  }}
+                  values={compiledInternationalData}
+                  seriesConfig={selectedCountriesToSeriesConfig(
+                    selectedCountries,
+                    countryNames,
+                    colors
+                  )}
+                  disableLegend
+                />
+              )}
+            </SelectCountries>
           </ChartTile>
 
           <InfectedTableTile

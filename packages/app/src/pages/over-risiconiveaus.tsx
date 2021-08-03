@@ -129,25 +129,28 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
       <Content>
-        <Box pb={3} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
+        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto" spacing={4}>
           <Heading level={1}>{content.title}</Heading>
-          <RichContent blocks={content.description} />
+          <Box textVariant="body1">
+            <RichContent blocks={content.description} />
+          </Box>
         </Box>
+
         <Box
           display="flex"
-          py={{ _: 2, sm: 4 }}
+          pt={4}
           px={{ _: 3, sm: 0 }}
           borderTopStyle="solid"
           borderTopWidth="1px"
           borderTopColor="lightGray"
           flexDirection={{ _: 'column', sm: 'row' }}
+          spacing={{ _: 4, md: 0 }}
         >
-          <Box display="flex" justifyContent="center" py={{ _: 2, sm: 0 }}>
+          <Box display="flex" justifyContent="center">
             <Box
               p={1}
               minWidth={{ _: '30rem', sm: '17.25rem', lg: '20rem' }}
               minHeight={{ _: '20rem', sm: 0 }}
-              flex={0}
             >
               <ErrorBoundary>
                 <VrChoropleth
@@ -164,8 +167,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               </ErrorBoundary>
             </Box>
           </Box>
-          <Box pr={{ md: 4 }} flex={1} maxWidth="maxWidthText">
-            <Heading level={3} as={'h2'}>
+          <Box flex={1} maxWidth="maxWidthText" spacing={3}>
+            <Heading level={3} as="h2">
               {content.scoreBoardTitle}
             </Heading>
             <Text>{content.scoreBoardDescription}</Text>
@@ -207,7 +210,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           maxHospitalAdmissionsPerMillion={maxHospitalAdmissionsPerMillion}
           maxPositiveTestedPer100k={maxPositiveTestedPer100k}
         />
-        <Box mt={5} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
+        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
           <RichContent blocks={content.riskLevelExplanations} />
         </Box>
       </Content>
@@ -223,8 +226,15 @@ interface ContentProps {
 
 function Content({ children }: ContentProps) {
   return (
-    <Box bg="white" fontSize={{ md: '1.125rem' }}>
-      <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth="infoWidth" mx="auto">
+    <Box bg="white">
+      <Box
+        pt={5}
+        pb={5}
+        px={{ _: 3, sm: 0 }}
+        maxWidth="infoWidth"
+        mx="auto"
+        spacing={4}
+      >
         {children}
       </Box>
     </Box>
@@ -281,7 +291,6 @@ function ListItem({
           {icon}
         </Box>
         <Text
-          m={0}
           css={css({
             display: asResponsiveArray({ _: 'block', xs: 'flex' }),
             flexWrap: 'wrap',

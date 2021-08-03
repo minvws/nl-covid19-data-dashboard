@@ -7,17 +7,24 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
+import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { Box } from '../base';
-import { Category } from './category';
-import { Title } from './title';
+import { Anchor, Text } from '../typography';
+import { AsideTitle } from './title';
 
 type Url = UrlObject | string;
 
-export function Menu({ children }: { children: ReactNode }) {
+export function Menu({
+  children,
+  spacing,
+}: {
+  children: ReactNode;
+  spacing?: SpaceValue;
+}) {
   return (
-    <Box as="ul" m={0} p={0} css={css({ listStyle: 'none' })}>
+    <Box as="ul" css={css({ listStyle: 'none' })} spacing={spacing}>
       {children}
     </Box>
   );
@@ -26,15 +33,17 @@ export function Menu({ children }: { children: ReactNode }) {
 export function CategoryMenu({
   title,
   children,
-  isFirstItem,
 }: {
   children: ReactNode;
-  isFirstItem?: boolean;
   title?: string;
 }) {
   return (
-    <Box as="li" spacing={3} pt={isFirstItem ? 4 : '3rem'}>
-      {title && <Category>{title}</Category>}
+    <Box as="li" spacing={3}>
+      {title && (
+        <Box px={3} pt={3}>
+          <Text variant="h3">{title}</Text>
+        </Box>
+      )}
       <Menu>{children}</Menu>
     </Box>
   );
@@ -62,11 +71,10 @@ export function MetricMenuItemLink({
 
   const content = (
     <>
-      <Title
+      <AsideTitle
         icon={icon}
         title={title}
         subtitle={subtitle}
-        m={0}
         showArrow={showArrow}
       />
       {children && (
@@ -90,7 +98,7 @@ export function MetricMenuItemLink({
   return (
     <MetricMenuItem>
       <Link href={href} passHref>
-        <StyledLink isActive={isActive}>{content}</StyledLink>
+        <StyledAnchor isActive={isActive}>{content}</StyledAnchor>
       </Link>
     </MetricMenuItem>
   );
@@ -114,19 +122,13 @@ export function MetricMenuButtonLink({
   const router = useRouter();
   const isActive = isActivePath(router, href);
 
-  const content = (
-    <>
-      <Title title={title} subtitle={subtitle} />
-      {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
-    </>
-  );
-
   return (
     <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
       <Link href={href} passHref>
-        <StyledLink isButton={true} isActive={isActive}>
-          {content}
-        </StyledLink>
+        <StyledAnchor isButton={true} isActive={isActive}>
+          <AsideTitle title={title} subtitle={subtitle} />
+          {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
+        </StyledAnchor>
       </Link>
     </MetricMenuButton>
   );
@@ -197,46 +199,46 @@ const Unavailable = styled.span(
   })
 );
 
-const StyledLink = styled.a<{ isActive: boolean; isButton?: boolean }>((x) =>
-  css({
-    p: 3,
-    py: x.isButton ? 3 : undefined,
-    pr: x.isButton ? 0 : undefined,
-    display: 'block',
-    borderRight: '5px solid transparent',
-    color: 'black',
-    textDecoration: 'none',
-    position: 'relative',
-
-    bg:
-      x.isActive && !x.isButton
-        ? asResponsiveArray({ _: undefined, md: '#ebebeb' })
-        : 'transparent',
-    borderRightColor: x.isActive
-      ? asResponsiveArray({ _: undefined, md: 'sidebarLinkBorder' })
-      : 'transparent',
-
-    '&:hover': {
-      bg: 'page',
-    },
-
-    '&:focus': {
-      bg: '#ebebeb',
-    },
-
-    '&::after': {
-      content: x.isActive
-        ? 'none'
-        : asResponsiveArray({ _: 'none', xs: undefined }),
-      backgroundImage: `url('/images/chevron.svg')`,
-      // match aspect ratio of chevron.svg
-      backgroundSize: '0.6em 1.2em',
-      height: '1.2em',
-      width: '0.6em',
+const StyledAnchor = styled(Anchor)<{ isActive: boolean; isButton?: boolean }>(
+  (x) =>
+    css({
+      p: 3,
+      py: x.isButton ? 3 : undefined,
+      pr: x.isButton ? 0 : undefined,
       display: 'block',
-      position: 'absolute',
-      right: 3,
-      top: '1.35em',
-    },
-  })
+      borderRight: '5px solid transparent',
+      color: 'black',
+      position: 'relative',
+
+      bg:
+        x.isActive && !x.isButton
+          ? asResponsiveArray({ _: undefined, md: '#ebebeb' })
+          : 'transparent',
+      borderRightColor: x.isActive
+        ? asResponsiveArray({ _: undefined, md: 'sidebarLinkBorder' })
+        : 'transparent',
+
+      '&:hover': {
+        bg: 'page',
+      },
+
+      '&:focus': {
+        bg: '#ebebeb',
+      },
+
+      '&::after': {
+        content: x.isActive
+          ? 'none'
+          : asResponsiveArray({ _: 'none', xs: undefined }),
+        backgroundImage: `url('/images/chevron.svg')`,
+        // match aspect ratio of chevron.svg
+        backgroundSize: '0.6em 1.2em',
+        height: '1.2em',
+        width: '0.6em',
+        display: 'block',
+        position: 'absolute',
+        right: 3,
+        top: '1.35em',
+      },
+    })
 );

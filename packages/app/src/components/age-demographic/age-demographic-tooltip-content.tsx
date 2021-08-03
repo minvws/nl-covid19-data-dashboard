@@ -1,10 +1,11 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { Text } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AgeDemographicChartText, AgeDemographicDefaultValue } from './types';
 import { formatAgeGroupRange } from './utils';
 import { useIntl } from '~/intl';
+import { Box } from '../base';
 
 interface AgeDemographicTooltipContentProps<
   T extends AgeDemographicDefaultValue
@@ -21,25 +22,29 @@ export function AgeDemographicTooltipContent<
 
   return (
     <>
-      <Text fontSize={3} fontWeight="bold" px={3} py={2} m="0">
-        {replaceVariablesInText(text.age_group_range_tooltip, {
-          ageGroupRange: formatAgeGroupRange(value.age_group_range),
-        })}
-      </Text>
+      <Box px={3} py={2}>
+        <Text variant="h3" fontWeight="bold">
+          {replaceVariablesInText(text.age_group_range_tooltip, {
+            ageGroupRange: formatAgeGroupRange(value.age_group_range),
+          })}
+        </Text>
+      </Box>
       <Legend>
         <LegendItem color="data.primary">
-          <b>
+          <InlineText fontWeight="bold">
             {formatPercentage(
               (value[metricProperty] as unknown as number) * 100
             )}
             %
-          </b>{' '}
+          </InlineText>{' '}
           {replaceVariablesInText(text.value_percentage_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}
         </LegendItem>
         <LegendItem color="data.neutral">
-          <b>{formatPercentage(value.age_group_percentage * 100)}%</b>{' '}
+          <InlineText fontWeight="bold">
+            {formatPercentage(value.age_group_percentage * 100)}%
+          </InlineText>{' '}
           {replaceVariablesInText(text.age_group_percentage_tooltip, {
             ageGroupRange: formatAgeGroupRange(value.age_group_range),
           })}

@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import ExternalLinkIcon from '~/assets/external-link.svg';
-import { Heading } from '~/components/typography';
+import { Anchor, Heading } from '~/components/typography';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
 import { colors } from '~/style/theme';
@@ -33,9 +33,9 @@ export function AnchorTile({
       <LinkContainer>
         {!external && (
           <Link href={href} passHref>
-            <Anchor>
+            <StyledAnchor>
               <span>{label}</span>
-            </Anchor>
+            </StyledAnchor>
           </Link>
         )}
         {external && (
@@ -69,7 +69,7 @@ const Content = styled.div(
   })
 );
 
-const Anchor = styled.a(
+const StyledAnchor = styled(Anchor)(
   css({
     display: 'flex',
   })

@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { LinkWithIcon } from '~/components/link-with-icon';
+import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -54,42 +54,28 @@ export function MiniTrendTile<T extends TimestampedValue>(
 
   return (
     <>
-      <Box gridArea={areas?.header} position="relative">
-        <Box width="4rem" height="4rem" position="absolute" left={0} mr={1}>
+      <Box gridArea={areas?.header} position="relative" spacing={2} pb={3}>
+        <Box width="4rem" height="4rem" position="absolute" left={0}>
           {icon}
         </Box>
-        <Heading
-          level={3}
-          as="h2"
-          py={2}
-          pl="3.5rem"
-          mb={2}
-          lineHeight={{ md: 0, lg: 1 }}
-          fontSize="1.25rem"
-        >
-          <LinkWithIcon
-            href={href}
-            icon={<ArrowIconRight />}
-            iconPlacement="right"
-            fontWeight="bold"
-            headingLink
-          >
-            {title}
-          </LinkWithIcon>
+        <Heading level={3} as="h2">
+          <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+            <HeadingLinkWithIcon
+              href={href}
+              icon={<ArrowIconRight />}
+              iconPlacement="right"
+            >
+              {title}
+            </HeadingLinkWithIcon>
+          </Box>
         </Heading>
-        <Text
-          fontSize="2.25rem"
-          fontWeight="bold"
-          my={0}
-          lineHeight={0}
-          mb={2}
-          data-cy={metricProperty}
-        >
+        <Text variant="h1" data-cy={metricProperty}>
           {formatNumber(value as unknown as number)}
         </Text>
 
         <Box>{text}</Box>
       </Box>
+
       <Box gridArea={areas?.chart} pb={{ _: '1.5rem', md: 0 }}>
         <div>
           <ErrorBoundary>

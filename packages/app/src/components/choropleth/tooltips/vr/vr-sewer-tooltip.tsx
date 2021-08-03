@@ -36,9 +36,7 @@ export function VrSewerTooltip({
           })}
         </InlineText>
       </TooltipSubject>
-      <Text m={0} lineHeight={0}>
-        {text.map_tooltip}
-      </Text>
+      <Text>{text.map_tooltip}</Text>
     </TooltipContent>
   );
 }

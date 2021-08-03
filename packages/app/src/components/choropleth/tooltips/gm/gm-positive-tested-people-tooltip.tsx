@@ -41,7 +41,7 @@ export function GmPositiveTestedPeopleTooltip({
         </InlineText>
         {siteText.common.inwoners}
       </TooltipSubject>
-      <Text m={0} mt={-1}>
+      <Text>
         {replaceComponentsInText(text.positive_tested_people, {
           totalPositiveTestedPeople: (
             <InlineText fontWeight="bold">{infected}</InlineText>

@@ -33,8 +33,8 @@ export function InteractiveLegend<T = string>({
   const hasSelection = selection.length !== 0;
 
   return (
-    <Box mb={2}>
-      <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
+    <Box>
+      <Text variant="label1" fontWeight="bold">
         {helpText}
       </Text>
       <Legend>
