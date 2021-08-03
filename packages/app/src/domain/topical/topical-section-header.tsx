@@ -36,32 +36,26 @@ export function TopicalSectionHeader({
   const { siteText: text, formatDateFromSeconds } = useIntl();
 
   return (
-    <Box spacing={3} mt={{ _: 2, md: 4 }}>
+    <Box spacing={3}>
       {showBackLink && (
-        <Box fontSize="1.125rem">
-          <LinkWithIcon href="/" fontWeight="bold" icon={<ArrowIconLeft />}>
+        <Box fontSize="1.125rem" fontWeight="bold">
+          <LinkWithIcon href="/" icon={<ArrowIconLeft />}>
             {text.common_actueel.terug_naar_landelijk}
           </LinkWithIcon>
         </Box>
       )}
 
-      <Box>
+      <Box spacing={{ _: 2, lg: 3 }}>
         <Box
           borderBottom="1px solid"
           borderBottomColor="border"
           pb={{ _: 2, lg: 3 }}
-          mb={{ _: 2, lg: 3 }}
           display="flex"
           flexDirection={{ _: 'column', lg: 'row' }}
           alignItems="baseline"
+          spacing={2}
         >
-          <Heading
-            level={headingLevel}
-            fontWeight="bold"
-            m={0}
-            mb={{ _: 2, lg: 0 }}
-            lineHeight={0}
-          >
+          <Heading level={headingLevel} variant="h1">
             {title}
           </Heading>
 
@@ -71,12 +65,11 @@ export function TopicalSectionHeader({
              * actually removes the link altogether
              */
             link && !isEmpty(link.text) ? (
-              <Box ml={{ _: 0, lg: 4 }} mb={'2px'}>
+              <Box ml={{ _: 0, lg: 4 }} mb={'2px'} fontWeight="bold">
                 <LinkWithIcon
                   href={link.href}
                   icon={<ArrowIconRight />}
                   iconPlacement="right"
-                  fontWeight="bold"
                 >
                   {link.text}
                 </LinkWithIcon>
@@ -84,8 +77,9 @@ export function TopicalSectionHeader({
             ) : null
           }
         </Box>
+
         {lastGenerated && (
-          <InlineText color="bodyLight" fontSize={2}>
+          <InlineText color="bodyLight">
             {replaceComponentsInText(text.common_actueel.laatst_bijgewerkt, {
               date: <RelativeDate dateInSeconds={lastGenerated} />,
               time: formatDateFromSeconds(lastGenerated, 'time'),
@@ -94,7 +88,7 @@ export function TopicalSectionHeader({
         )}
 
         {description && (
-          <Box mb={4} maxWidth={'30em'}>
+          <Box maxWidth={'30em'}>
             <Text>{description}</Text>
           </Box>
         )}

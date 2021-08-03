@@ -33,8 +33,7 @@ export function SituationsDataCoverageTooltip({
     >
       <Box
         m={0}
-        spacing={2}
-        spacingHorizontal
+        spacingHorizontal={2}
         css={css({
           display: 'flex',
           alignItems: 'center',

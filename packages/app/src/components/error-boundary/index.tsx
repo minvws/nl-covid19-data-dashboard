@@ -5,6 +5,7 @@ import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
+import { spacingStyle } from '~/style/functions/spacing';
 import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
@@ -81,17 +82,17 @@ function ErrorFallback({ error }: { error: Error }) {
         <Button onClick={() => copyErrorReport()}>
           {siteText.common.kopieer_foutmelding}
         </Button>
+
         {clipboardState === 'copied' && (
-          <InlineText m={0}>
-            {siteText.common.foutmelding_is_gekopieerd}
+          <InlineText>{siteText.common.foutmelding_is_gekopieerd}</InlineText>
+        )}
+        {clipboardState === 'error' && (
+          <InlineText color="red">
+            {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
           </InlineText>
         )}
       </Box>
-      {clipboardState === 'error' && (
-        <InlineText color="red" fontStyle="italic">
-          {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
-        </InlineText>
-      )}
+
       <ErrorReport>{errorReport}</ErrorReport>
     </ErrorBox>
   );
@@ -137,6 +138,7 @@ const ErrorBox = styled.div.attrs({
     borderRadius: '8px',
     maxHeight: asResponsiveArray({ _: '200px', md: '600px' }),
     overflow: 'auto',
+    ...spacingStyle(3),
   })
 );
 

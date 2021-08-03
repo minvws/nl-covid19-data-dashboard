@@ -8,8 +8,7 @@ import css from '@styled-system/css';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { Anchor } from '~/components/anchor';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -23,11 +22,10 @@ import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NationalLayout } from '~/domain/layout/national-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
@@ -146,12 +144,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isMovingAverageDifference
               />
 
-              <Box mb={4}>
-                <Markdown content={text.kpi_toelichting} />
-              </Box>
+              <Markdown content={text.kpi_toelichting} />
 
               <Box>
-                <Heading level={4} fontSize={'1.2em'} mb={0}>
+                <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(ggdText.summary_text, {
                     percentage: (
                       <span css={css({ color: 'data.primary' })}>
@@ -164,11 +160,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       'weekday-medium'
                     ),
                   })}
-                </Heading>
-
-                <Text mt={0} lineHeight={1}>
-                  <Anchor name="ggd" text={ggdText.summary_link_cta} />
                 </Text>
+                <Anchor underline="hover" href="#ggd">
+                  {ggdText.summary_link_cta}
+                </Anchor>
               </Box>
             </KpiTile>
 
@@ -323,7 +318,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <Spacer amount={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={ggdText.titel}
@@ -356,6 +351,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
+
             <KpiTile
               title={ggdText.positief_getest_week_titel}
               metadata={{
@@ -371,6 +367,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 isMovingAverageDifference
               />
+
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
 
               <Text fontWeight="bold">

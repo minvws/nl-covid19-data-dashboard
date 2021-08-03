@@ -3,11 +3,12 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { useIntl } from '~/intl';
+import { spacingStyle } from '~/style/functions/spacing';
 import { Article, Block, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
-import { Heading, InlineText, Text } from './typography';
+import { Anchor, Heading, InlineText, Text } from './typography';
 
 export type ArticleSummary = Pick<
   Article,
@@ -32,22 +33,16 @@ export function ArticleTeaser(props: ArticleTeaserProps) {
         <ZoomContainer height={200}>
           <BackgroundImage image={cover} height={200} sizes={coverSizes} />
         </ZoomContainer>
-        <Box pt={3}>
-          <Heading
-            level={3}
-            mb={{ _: 1, sm: 3 }}
-            lineHeight={{ _: 0, sm: 1 }}
-            fontSize="1.25rem"
-          >
-            {title}
-          </Heading>
-          <Text>{summary}</Text>
 
-          <InlineText aria-hidden="true" fontWeight="bold" color="link">
-            {siteText.common.read_more}
-            <Arrow />
-          </InlineText>
-        </Box>
+        <Heading level={4} as="h2">
+          {title}
+        </Heading>
+        <Text>{summary}</Text>
+
+        <InlineText aria-hidden="true" fontWeight="bold" color="link">
+          {siteText.common.read_more}
+          <Arrow />
+        </InlineText>
       </StyledArticleTeaser>
     </Link>
   );
@@ -71,12 +66,13 @@ function ZoomContainerUnstyled({
   );
 }
 
-const StyledArticleTeaser = styled.a(
+const StyledArticleTeaser = styled(Anchor)(
   css({
     minHeight: '26rem',
     overflow: 'hidden',
     textDecoration: 'none',
     color: 'body',
+    ...spacingStyle(3),
 
     [`${ZoomContainer}, ${Heading}`]: {
       transitionProperty: 'transform, color',
@@ -87,6 +83,7 @@ const StyledArticleTeaser = styled.a(
 
     '&:hover, &:focus': {
       [ZoomContainer]: {
+        transitionDuration: '200ms, 250ms',
         transitionTimingFunction: 'ease-in-out',
         transform: 'scale(1.04)',
       },

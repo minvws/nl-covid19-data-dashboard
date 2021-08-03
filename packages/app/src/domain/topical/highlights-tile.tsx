@@ -4,7 +4,6 @@ import {
   HighlightTeaserProps,
 } from '~/components/highlight-teaser';
 import { Block, ImageBlock } from '~/types/cms';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { ArticleBox } from './article-list';
 
 export interface WeeklyHighlightProps {
@@ -26,15 +25,13 @@ interface HighlightsTileProps {
 
 export function HighlightsTile(props: HighlightsTileProps) {
   const { weeklyHighlight, highlights, showWeeklyHighlight } = props;
-  const breakpoints = useBreakpoints();
 
   return (
     <Box
       display="flex"
-      spacingHorizontal={breakpoints.lg}
       flexDirection={{ _: 'column', xs: 'row' }}
       flexWrap="wrap"
-      mr={0}
+      spacing={4}
     >
       {showWeeklyHighlight && (
         <ArticleBox>

@@ -1,6 +1,6 @@
 import { assert } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
-import { Heading, InlineText } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -27,21 +27,23 @@ export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
   assert(variantName, `No translation found for variant called ${data.name}`);
 
   return (
-    <Box display="flex" flexDirection="column">
-      <Heading level={4} fontSize={2} fontWeight="normal" m={0} as="div">
-        {siteText.covid_varianten.sidebar_beschrijving}
-      </Heading>
-      <InlineText fontSize={3} fontWeight="bold" margin="0" marginRight={3}>
-        {`${formatPercentage(data.percentage)}% ${variantName}`}
-      </InlineText>
-      <InlineText
-        display="inline-block"
-        margin="0"
-        color="annotation"
-        fontSize={1}
+    <Box width="100%" minHeight="4rem" spacing={2}>
+      <Text>{siteText.covid_varianten.sidebar_beschrijving}</Text>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="flex-start"
+        flexWrap="wrap"
+        spacingHorizontal={2}
       >
-        {dateText}
-      </InlineText>
+        <InlineText variant="h3">
+          {`${formatPercentage(data.percentage)}% ${variantName}`}
+        </InlineText>
+
+        <InlineText variant="label1" color="annotation" fontWeight="bold">
+          {dateText}
+        </InlineText>
+      </Box>
     </Box>
   );
 }

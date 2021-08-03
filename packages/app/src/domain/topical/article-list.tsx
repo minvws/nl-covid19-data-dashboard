@@ -58,7 +58,6 @@ export function ArticleList({
 
 export const ArticleBox = styled.div(
   css({
-    marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',
       sm: 'calc(50% - 16px)',

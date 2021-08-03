@@ -72,7 +72,7 @@ function SubjectText({
 }) {
   return (
     <Box display="flex" width="100%">
-      <Box fontWeight={bold ? 'bold' : undefined}>
+      <Box fontWeight={bold ? 'bold' : undefined} spacingHorizontal={2}>
         <img
           aria-hidden
           src={`/icons/flags/${code.toLowerCase()}.svg`}
@@ -80,7 +80,7 @@ function SubjectText({
           height="13"
           alt=""
         />
-        <InlineText pl={1}>{name}</InlineText>
+        <InlineText>{name}</InlineText>
       </Box>
       <Box ml="auto">
         <InlineText fontWeight={bold ? 'bold' : undefined}>{value}</InlineText>

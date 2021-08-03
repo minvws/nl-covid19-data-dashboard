@@ -61,22 +61,22 @@ export function BehaviorTooltip({
       title={context.vrname}
       link={reverseRouter.vr.gedrag(context.vrcode)}
     >
-      <Box maxWidth="15rem">
-        <Text m={0} mb={2} fontWeight="bold">
+      <Box maxWidth="15rem" spacing={2}>
+        <Text fontWeight="bold">
           {siteText.gedrag_onderwerpen[currentMetric]}
         </Text>
 
         {/* Change order of the info based on the metric name */}
         {behaviorType === 'compliance' ? (
-          <>
+          <div>
             {complianceTooltipInfo}
             {supportTooltipInfo}
-          </>
+          </div>
         ) : (
-          <>
+          <div>
             {supportTooltipInfo}
             {complianceTooltipInfo}
-          </>
+          </div>
         )}
       </Box>
     </TooltipContent>

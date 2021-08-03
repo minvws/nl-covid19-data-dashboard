@@ -45,7 +45,7 @@ export function Metadata({
   return (
     <>
       {!isTileFooter && source && (
-        <Text mb={3} color="annotation" fontSize={1}>
+        <Text color="annotation" variant="label2">
           {`${dateString} - ${siteText.common.metadata.source}: `}
           <ExternalLink ariaLabel={source.aria_text} href={source.href}>
             {source.text}
@@ -54,8 +54,14 @@ export function Metadata({
       )}
 
       {isTileFooter && (
+        /**
+         * @TODO Clean up the negative margin by passing the Metadata instance
+         * to the Tile via props and position it there properly.
+         * @TODO split up the `isTileFooter` vs non `isTileFooter` implementataions,
+         * should be separate components.
+         */
         <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">
-          <Text my={0} color="annotation" fontSize={1}>
+          <Text color="annotation" variant="label2">
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {
                 weekStart: formatDateFromSeconds(date[0], 'weekday-medium'),

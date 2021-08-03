@@ -70,7 +70,7 @@ export function VrRow({
             escalationLevelData.level === null ? undefined : escalationColor
           }
         >
-          <InlineText>{vrData.vrName}</InlineText>
+          <InlineText variant="body1">{vrData.vrName}</InlineText>
         </VrLinkCell>
 
         {(isPresent(escalationLevelData.positive_tested_per_100k) ||

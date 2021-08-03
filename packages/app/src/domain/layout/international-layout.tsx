@@ -52,8 +52,9 @@ export function InternationalLayout(props: InternationalLayoutProps) {
             backgroundColor="white"
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
+            pt={4}
           >
-            <Menu>
+            <Menu spacing={4}>
               <CategoryMenu title={siteText.internationaal.titel_sidebar}>
                 <MetricMenuItemLink
                   href={reverseRouter.in.positiefGetesteMensen()}

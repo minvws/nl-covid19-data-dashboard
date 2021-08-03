@@ -29,7 +29,6 @@ import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationIcon } from '../situations/components/situation-icon';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
@@ -90,12 +89,7 @@ export function NationalLayout(props: NationalLayoutProps) {
   const { children, data } = props;
   const router = useRouter();
   const reverseRouter = useReverseRouter();
-  const breakpoints = useBreakpoints();
   const { siteText } = useIntl();
-
-  const isMenuOpen =
-    (router.pathname === '/landelijk' && !('menu' in router.query)) ||
-    router.query.menu === '1';
 
   return (
     <>
@@ -127,23 +121,15 @@ export function NationalLayout(props: NationalLayoutProps) {
             maxWidth={{ _: '38rem', md: undefined }}
             mx="auto"
           >
-            <Menu>
+            <Menu spacing={4}>
               <MetricMenuButtonLink
                 title={siteText.nationaal_maatregelen.titel_sidebar}
                 subtitle={siteText.nationaal_maatregelen.subtitel_sidebar}
-                href={{
-                  pathname: reverseRouter.nl.maatregelen(),
-                  query: breakpoints.md
-                    ? {} // only add menu flags on narrow devices
-                    : isMenuOpen
-                    ? { menu: '0' }
-                    : { menu: '1' },
-                }}
+                href={reverseRouter.nl.maatregelen()}
               />
 
               <CategoryMenu
                 title={siteText.nationaal_layout.headings.vaccinaties}
-                isFirstItem
               >
                 <MetricMenuItemLink
                   href={reverseRouter.nl.vaccinaties()}

@@ -4,7 +4,7 @@ import { useTooltip } from '@visx/tooltip';
 import { first, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useCurrentDate } from '~/utils/current-date-context';
@@ -368,6 +368,7 @@ export function TimeSeriesChart<
   return (
     <>
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
+
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
@@ -528,8 +529,9 @@ export function TimeSeriesChart<
               display="flex"
               flexDirection={['column', 'row']}
               alignItems="baseline"
+              spacingHorizontal={3}
             >
-              <InlineText pr={3}>{x.label}:</InlineText>
+              <InlineText>{x.label}:</InlineText>
               <Legend items={x.items} />
             </Box>
           ))}

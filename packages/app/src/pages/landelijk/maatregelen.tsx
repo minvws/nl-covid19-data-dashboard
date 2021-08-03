@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { KpiSection } from '~/components/kpi-section';
@@ -84,13 +83,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
           {showLockdown && (
             <KpiSection flexDirection="column">
-              <Box
-                css={css({
-                  'p:last-child': {
-                    margin: '0',
-                  },
-                })}
-              >
+              <Box spacing={3}>
                 <Heading level={3}>{lockdown.message.title}</Heading>
                 {lockdown.message.description ? (
                   <RichContent blocks={lockdown.message.description} />
@@ -100,7 +93,7 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           )}
 
           {showLockdown && (
-            <KpiSection display="flex" flexDirection="column">
+            <KpiSection display="flex" flexDirection="column" spacing={3}>
               <Heading level={3}>{lockdown.title}</Heading>
               <LockdownTable data={lockdown} />
             </KpiSection>

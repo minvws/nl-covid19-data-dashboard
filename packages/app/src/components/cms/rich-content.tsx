@@ -1,10 +1,13 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { CollapsibleSection } from '~/components/collapsible';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { ExternalLink } from '~/components/external-link';
 import { getFileSrc, PortableText } from '~/lib/sanity';
+import { nestedHtml } from '~/style/preset';
 import {
   CollapsibleList,
   ImageBlock,
@@ -16,6 +19,7 @@ import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 import { ContentImage } from './content-image';
+
 interface RichContentProps {
   blocks: PortableTextEntry[];
   contentWrapper?: FunctionComponent;
@@ -54,7 +58,7 @@ export function RichContent({
         return (
           <ContentWrapper>
             <CollapsibleSection summary={props.node.title}>
-              <Box mt={3}>
+              <Box py={3}>
                 <RichContent blocks={props.node.content} />
               </Box>
             </CollapsibleSection>
@@ -70,7 +74,7 @@ export function RichContent({
 
   return (
     <ErrorBoundary>
-      <PortableText blocks={blocks} serializers={serializers} />
+      <StyledPortableText blocks={blocks} serializers={serializers} />
     </ErrorBoundary>
   );
 }
@@ -101,3 +105,5 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
     </Link>
   );
 }
+
+const StyledPortableText = styled(PortableText)(css(nestedHtml));
