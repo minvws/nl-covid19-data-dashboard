@@ -1,7 +1,8 @@
 import { TimeframeOption, VrSituationsValue } from '@corona-dashboard/common';
+import { Spacer } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
-import { Spacer } from '~/components/base';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { GappedLineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useGappedLineAnnotations } from '~/components/time-series-chart/logic/use-gapped-line-annotations';
@@ -54,7 +55,7 @@ export function SituationsOverTimeChart({
   );
 
   return (
-    <>
+    <ErrorBoundary extraComponentInfoReport={{ timeframe }}>
       <InteractiveLegend
         helpText={text.legenda.help_text}
         selectOptions={seriesConfig}
@@ -71,8 +72,8 @@ export function SituationsOverTimeChart({
         seriesConfig={chartConfig}
         disableLegend
       />
-      {<Legend items={staticLegendItems} />}
-    </>
+      <Legend items={staticLegendItems} />
+    </ErrorBoundary>
   );
 }
 

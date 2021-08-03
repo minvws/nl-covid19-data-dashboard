@@ -1,7 +1,8 @@
 import { NlVaccineAdministeredTotalValue } from '@corona-dashboard/common';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { colors } from '~/style/theme';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 export function VaccineAdministrationsOverTimeChart({
@@ -20,22 +21,24 @@ export function VaccineAdministrationsOverTimeChart({
   const { sm } = useBreakpoints(true);
 
   return (
-    <TimeSeriesChart
-      accessibility={accessibility}
-      initialWidth={400}
-      minHeight={sm ? 180 : 140}
-      timeframe="all"
-      values={values}
-      displayTooltipValueOnly
-      numGridLines={2}
-      seriesConfig={[
-        {
-          metricProperty: 'estimated',
-          type: 'area',
-          label: title,
-          color: colors.data.primary,
-        },
-      ]}
-    />
+    <ErrorBoundary>
+      <TimeSeriesChart
+        accessibility={accessibility}
+        initialWidth={400}
+        minHeight={sm ? 180 : 140}
+        timeframe="all"
+        values={values}
+        displayTooltipValueOnly
+        numGridLines={2}
+        seriesConfig={[
+          {
+            metricProperty: 'estimated',
+            type: 'area',
+            label: title,
+            color: colors.data.primary,
+          },
+        ]}
+      />
+    </ErrorBoundary>
   );
 }

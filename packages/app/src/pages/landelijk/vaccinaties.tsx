@@ -166,6 +166,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'stacked-area',
                     metricProperty: 'partially_vaccinated',
                     color: colors.data.primary,
+                    mixBlendMode: 'multiply',
                     fillOpacity: 1,
                   },
                   {
@@ -178,6 +179,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'stacked-area',
                     metricProperty: 'fully_vaccinated',
                     color: colors.data.secondary,
+                    mixBlendMode: 'multiply',
                     fillOpacity: 1,
                   },
                 ]}

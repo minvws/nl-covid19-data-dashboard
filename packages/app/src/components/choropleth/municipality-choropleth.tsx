@@ -32,7 +32,7 @@ import { regionBoundingBoxMunicipalities } from './region-bounding-box-municipal
 import { ChoroplethTooltipPlacement } from './tooltips/tooltip-container';
 import { countryGeo, municipalGeo, regionGeo } from './topology';
 
-type MunicipalityChoroplethProps<T, K extends GmCollectionMetricName> = {
+export type GmChoroplethProps<T, K extends GmCollectionMetricName> = {
   data: Pick<GmCollection, K>;
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
@@ -62,7 +62,7 @@ type MunicipalityChoroplethProps<T, K extends GmCollectionMetricName> = {
  * @param props
  */
 export function MunicipalityChoropleth<T, K extends GmCollectionMetricName>(
-  props: MunicipalityChoroplethProps<T, K>
+  props: GmChoroplethProps<T, K>
 ) {
   const {
     accessibility,

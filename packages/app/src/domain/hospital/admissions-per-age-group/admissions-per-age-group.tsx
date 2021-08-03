@@ -2,6 +2,7 @@ import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { ErrorBoundary } from '~/components/error-boundary';
 import {
   InteractiveLegend,
   SelectOption,
@@ -100,7 +101,7 @@ export function AdmissionsPerAgeGroup({
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
-    <>
+    <ErrorBoundary>
       <InteractiveLegend
         helpText={text.legend_help_text}
         selectOptions={interactiveLegendOptions}
@@ -131,6 +132,6 @@ export function AdmissionsPerAgeGroup({
         }}
       />
       <Legend items={staticLegendItems} />
-    </>
+    </ErrorBoundary>
   );
 }
