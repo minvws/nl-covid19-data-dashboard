@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { forwardRef, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { Text } from '~/components/typography';
+import { Anchor, Text } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
@@ -83,7 +83,7 @@ const HitLink = forwardRef<HTMLAnchorElement, HitLinkProps>(
   }
 );
 
-const StyledHitLink = styled.a<{ hasFocus: boolean }>((x) =>
+const StyledHitLink = styled(Anchor)<{ hasFocus: boolean }>((x) =>
   css({
     p: 2,
     display: 'block',

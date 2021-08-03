@@ -5,7 +5,7 @@ import ChevronIcon from '~/assets/chevron.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
-import { InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
@@ -46,7 +46,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
-      <StyledLink>
+      <StyledAnchor>
         <Box width={100} minWidth={100} maxHeight={66} overflow="hidden">
           <SanityImage
             {...getImageProps(cover, {
@@ -77,12 +77,12 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
             ))}
           </StyledText>
         </Box>
-      </StyledLink>
+      </StyledAnchor>
     </Link>
   );
 }
 
-const StyledLink = styled.a(
+const StyledAnchor = styled(Anchor)(
   css({
     color: 'blue',
     textDecoration: 'none',

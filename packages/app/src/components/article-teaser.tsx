@@ -8,7 +8,7 @@ import { Article, Block, ImageBlock } from '~/types/cms';
 import { Link } from '~/utils/link';
 import { BackgroundImage } from './background-image';
 import { Box } from './base';
-import { Heading, InlineText, Text } from './typography';
+import { Anchor, Heading, InlineText, Text } from './typography';
 
 export type ArticleSummary = Pick<
   Article,
@@ -66,7 +66,7 @@ function ZoomContainerUnstyled({
   );
 }
 
-const StyledArticleTeaser = styled.a(
+const StyledArticleTeaser = styled(Anchor)(
   css({
     display: 'block',
     minHeight: '26rem',
