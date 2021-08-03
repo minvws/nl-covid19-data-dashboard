@@ -17,7 +17,7 @@ const config: ClientConfig = {
   projectId: '5mog5ask',
   useCdn: process.env.NODE_ENV === 'production',
   apiVersion: '2021-03-25',
-  withCredentials: process.env.NEXT_PUBLIC_PHASE === 'development',
+  withCredentials: process.env.NEXT_PUBLIC_PHASE === 'develop',
   /**
    * Set useCdn to `false` if your application require the freshest possible
    * data always (potentially slightly slower and a bit more expensive).
