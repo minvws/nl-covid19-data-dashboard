@@ -336,7 +336,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
               dataSources: [ggdText.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={ggdText.reference_href}
             articles={content.ggd.articles}
           />
 
