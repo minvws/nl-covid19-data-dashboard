@@ -32,6 +32,10 @@ export function SelectCountryInput({
 }: SelectCountryInputType) {
   const { siteText } = useIntl();
 
+  /**
+   * A small timeout due the fact that otherwise the onClick event fires later than the onBlur.
+   * Resulting that the click won't work without the timeout.
+   */
   const handleOnBlur = () => setTimeout(() => handleOnClose(), 100);
 
   return (

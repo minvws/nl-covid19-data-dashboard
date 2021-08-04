@@ -6,7 +6,6 @@ import Getest from '~/assets/test.svg';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
 import { countryCodes } from '~/domain/international/multi-select-countries';

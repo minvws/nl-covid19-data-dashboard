@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { SelectCountryInput } from './select-country-input';
@@ -25,6 +26,7 @@ export function SelectCountry({
   onChange,
   value,
 }: SelectCountryProps) {
+  const { siteText } = useIntl();
   const uniqueId = useUniqueId();
 
   const containerRef = useRef(null);
@@ -34,8 +36,14 @@ export function SelectCountry({
   const [matchingCountries, setMatchingCountries] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
+  /**
+   * The currently selected item, we need to save this so we can always fall back to this country.
+   */
   const currentOption = options.filter((item) => item.value === value)[0];
 
+  /**
+   * Find all the results that match the label aswell as the value
+   */
   useEffect(() => {
     setMatchingCountries(
       matchSorter(options, inputValue, {
@@ -66,12 +74,16 @@ export function SelectCountry({
     onSelectHit: (index) => {
       setIsOpen(false);
       onChange(matchingCountries[index]);
+      // When the user presses "enter" we toggle off the focus state for the element.
       if (inputRef.current) inputRef.current.blur();
     },
     maxPossibleItems: matchingCountries.length,
     handleOnClose,
   });
 
+  /**
+   * Everytime the user inputs a new value reset the focus index to the beginning of the results.
+   */
   useEffect(() => {
     if (inputValue.length > 0 && isOpen) {
       setFocusIndex(0);
@@ -99,6 +111,9 @@ export function SelectCountry({
         role="listbox"
         aria-labelledby={prefixId}
         isOpen={isOpen}
+        /**
+         * Set the currently selected country when opened, otherwise fall back to the currently selected country.
+         */
         aria-activedescendant={
           isOpen
             ? `${prefixId}_${matchingCountries[focusIndex]}`
@@ -142,7 +157,7 @@ export function SelectCountry({
               })}
           </>
         ) : (
-          <ListItem>Geen match</ListItem>
+          <ListItem>{siteText.select_countries.no_countries_found}</ListItem>
         )}
       </OrderedList>
     </Box>
