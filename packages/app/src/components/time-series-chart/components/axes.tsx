@@ -192,6 +192,7 @@ export const Axes = memo(function Axes({
         tickLabelProps={(x) => ({
           fill: colors.data.axisLabels,
           fontSize: 12,
+          dy: '-0.5px',
           /**
            * Using anchor middle the line marker label will fall nicely on top
            * of the axis label.

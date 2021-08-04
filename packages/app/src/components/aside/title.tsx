@@ -1,16 +1,15 @@
-import ChevronIcon from '~/assets/chevron.svg';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
+import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '../base';
-import { Heading, HeadingLevel, HeadingProps } from '../typography';
+import { Text } from '../typography';
 
 type TitleProps = {
   title: string;
   icon?: ReactNode;
   subtitle?: string;
-  level?: HeadingLevel;
   showArrow?: boolean;
-} & Omit<HeadingProps, 'children' | 'level'>;
+};
 
 /**
  * This is a title (with or without an icon) that looks like a heading, but isn't rendered using an H* element.
@@ -18,15 +17,8 @@ type TitleProps = {
  *
  * @param props
  */
-export function Title(props: TitleProps) {
-  const {
-    icon,
-    title,
-    subtitle,
-    level = 4,
-    showArrow,
-    ...headingProps
-  } = props;
+export function AsideTitle(props: TitleProps) {
+  const { icon, title, subtitle, showArrow } = props;
 
   return (
     <Box
@@ -40,14 +32,7 @@ export function Title(props: TitleProps) {
       {icon && <Icon>{icon}</Icon>}
 
       <Box width="100%">
-        <Heading
-          as="div"
-          level={level}
-          mb={0}
-          mr={3}
-          fontWeight="bold"
-          {...headingProps}
-        >
+        <Text variant="h5">
           <span
             css={css({
               display: 'flex',
@@ -59,8 +44,8 @@ export function Title(props: TitleProps) {
             {title}
             {showArrow && <ChevronIcon />}
           </span>
-        </Heading>
-        {subtitle}
+        </Text>
+        <Text>{subtitle}</Text>
       </Box>
     </Box>
   );

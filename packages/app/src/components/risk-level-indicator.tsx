@@ -1,16 +1,14 @@
-import css from '@styled-system/css';
 import { ReactNode } from 'react';
-import styled from 'styled-components';
 import Stopwatch from '~/assets/stopwatch.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { LinkWithIcon } from '~/components/link-with-icon';
-import { Heading, Text } from '~/components/typography';
+import { vrThresholds } from '~/components/choropleth/logic';
+import { HeadingLinkWithIcon } from '~/components/link-with-icon';
+import { Heading, InlineText, Text } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/types';
 import { assert } from '~/utils/assert';
 
-const escalationThresholds = regionThresholds.escalation_levels.level;
+const escalationThresholds = vrThresholds.escalation_levels.level;
 
 interface RiskLevelIndicatorProps {
   title: string;
@@ -32,60 +30,47 @@ export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
   assert(filteredEscalationLevel, 'Could not find an escalation level');
 
   return (
-    <Box position="relative" pb={3}>
-      <Box
-        width="4rem"
-        height="4rem"
-        position="absolute"
-        left={0}
-        mr={1}
-        mb={2}
-      >
+    <Box position="relative" spacing={2} pb={3}>
+      <Box width="4rem" height="4rem" position="absolute" left={0}>
         <Stopwatch />
       </Box>
-      <Heading level={3} as="h2" py={2} pl={{ _: '3.5rem' }}>
-        <LinkWithIcon
-          href={href}
-          icon={<ArrowIconRight />}
-          iconPlacement="right"
-          fontWeight="bold"
-          headingLink
-        >
-          {title}
-        </LinkWithIcon>
-      </Heading>
-      <Box>
-        <Box
-          backgroundColor={filteredEscalationLevel.color}
-          py={1}
-          px={3}
-          borderRadius="1rem"
-          textAlign="center"
-          display="inline-block"
-          color="#fff"
-          fontWeight="bold"
-          fontSize={19}
-          spacing={3}
-          spacingHorizontal
-        >
-          <span>{level}</span>
-          <span>{levelTitle}</span>
+
+      <Heading level={3} as="h2">
+        <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+          <HeadingLinkWithIcon
+            href={href}
+            icon={<ArrowIconRight />}
+            iconPlacement="right"
+          >
+            {title}
+          </HeadingLinkWithIcon>
         </Box>
+      </Heading>
+
+      <Box
+        backgroundColor={filteredEscalationLevel.color}
+        py={1}
+        px={3}
+        borderRadius="1rem"
+        textAlign="center"
+        display="inline-block"
+        color="#fff"
+        fontWeight="bold"
+        fontSize={19}
+        spacingHorizontal={3}
+      >
+        <span>{level}</span>
+        <span>{levelTitle}</span>
       </Box>
 
       <Text>
         {description} {level}:{' '}
-        <EscalationLevelTitle>{levelTitle}</EscalationLevelTitle>
+        <InlineText textTransform="lowercase" fontWeight="bold">
+          {levelTitle}
+        </InlineText>
       </Text>
 
       {children}
     </Box>
   );
 }
-
-const EscalationLevelTitle = styled.span(
-  css({
-    fontWeight: 'bold',
-    textTransform: 'lowercase',
-  })
-);

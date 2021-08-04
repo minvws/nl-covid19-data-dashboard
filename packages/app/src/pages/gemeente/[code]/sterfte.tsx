@@ -7,8 +7,8 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createPageArticlesQuery,
@@ -61,7 +61,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={code}
         difference={difference}
@@ -163,7 +163,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

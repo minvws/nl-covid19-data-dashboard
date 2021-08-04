@@ -1,5 +1,5 @@
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -20,7 +20,7 @@ const National = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, lastGenerated } = props;
   return (
     <Layout {...siteText.nationaal_metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated} />
+      <NlLayout data={data} lastGenerated={lastGenerated} />
     </Layout>
   );
 };

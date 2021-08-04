@@ -7,8 +7,8 @@ import {
   useRef,
 } from 'react';
 import { isDefined } from 'ts-is-present';
-import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
+import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
+import { InChoropleth } from '~/components/choropleth/in-choropleth';
 import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
 import { StackedChart } from '~/components/stacked-chart';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -42,16 +42,16 @@ relevantComponentProps.set(
   ])
 );
 relevantComponentProps.set(
-  MunicipalityChoropleth,
-  keyCheck<FunctionComponentProps<typeof MunicipalityChoropleth>>([
+  GmChoropleth,
+  keyCheck<FunctionComponentProps<typeof GmChoropleth>>([
     'data',
     'metricName',
     'metricProperty',
   ])
 );
 relevantComponentProps.set(
-  EuropeChoropleth,
-  keyCheck<FunctionComponentProps<typeof EuropeChoropleth>>([
+  InChoropleth,
+  keyCheck<FunctionComponentProps<typeof InChoropleth>>([
     'data',
     'metricProperty',
   ])
@@ -97,7 +97,6 @@ export function useComponentPropsReport(
     try {
       return extractPropsAndFillReport(children, propsReportRef);
     } catch (e) {
-      console.error(e);
       return children;
     }
   };
@@ -109,18 +108,24 @@ function isReactElement(value: ReactNode): value is ReactElement {
   return isObject(value) && 'type' in value;
 }
 
+function isReactElementArray(value: ReactNode): value is ReactNode[] {
+  return Array.isArray(value);
+}
+
 function extractPropsAndFillReport(
   children: ReactNode | RenderPropsFunction,
   propsReportRef: MutableRefObject<Record<string, unknown> | undefined>
 ) {
   if (isReactElement(children)) {
     propsReportRef.current = extractComponentProps(children);
+  } else if (isReactElementArray(children)) {
+    propsReportRef.current = extractComponentProps(children);
   }
   return children;
 }
 
 function extractComponentProps(
-  reactNode: ReactElement
+  reactNode: ReactElement | ReactNode[]
 ): Record<string, unknown> | undefined {
   const [element, type] = findComponentNode(reactNode);
   if (element && type) {
@@ -142,7 +147,9 @@ function isKnownComponentType(type: any) {
   return relevantComponentProps.has(type);
 }
 
-function findComponentNode(node: ReactNode): [ReactElement | undefined, any] {
+function findComponentNode(
+  node: ReactNode | ReactNode[]
+): [ReactElement | undefined, any] {
   if (isReactElement(node)) {
     if (
       isObject(node.type) &&
@@ -157,6 +164,17 @@ function findComponentNode(node: ReactNode): [ReactElement | undefined, any] {
           return result;
         }
       }
+    }
+  } else if (isReactElementArray(node)) {
+    const elementArray = node as ReactNode[];
+    const element = elementArray
+      .filter(isReactElement)
+      .find(
+        (x) =>
+          isObject(x.type) && 'name' in x.type && isKnownComponentType(x.type)
+      );
+    if (isDefined(element)) {
+      return findComponentNode(element);
     }
   }
   return [undefined, undefined];

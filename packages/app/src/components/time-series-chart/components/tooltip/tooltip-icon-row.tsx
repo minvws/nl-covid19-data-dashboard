@@ -9,13 +9,7 @@ export function IconRow({
   children: ReactNode;
 }) {
   return (
-    <Box
-      display="flex"
-      alignItems="stretch"
-      spacing={2}
-      spacingHorizontal
-      width="100%"
-    >
+    <Box display="flex" alignItems="stretch" spacingHorizontal={2} width="100%">
       {icon && (
         <Box
           width="1em"

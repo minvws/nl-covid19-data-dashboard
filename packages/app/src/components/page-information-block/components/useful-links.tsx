@@ -4,8 +4,9 @@ import ChevronLargeIcon from '~/assets/chevron-large.svg';
 import ExternalLinkIcon from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
-import { InlineText } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { spacingStyle } from '~/style/functions/spacing';
 import { asResponsiveArray } from '~/style/utils';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
@@ -22,28 +23,22 @@ export function UsefulLinks({ links }: usefulLinksProps) {
 
   return (
     <Box spacing={2}>
-      <InlineText
-        fontSize={2}
-        fontWeight="bold"
-        css={css({ display: 'block' })}
-      >
-        {siteText.informatie_header.handige_links}
-      </InlineText>
+      <Text fontWeight="bold">{siteText.informatie_header.handige_links}</Text>
       <OrderedList>
         {links.map((link, index) => (
           <ListItem key={index}>
             {isAbsoluteUrl(link.href) ? (
-              <ExternalLink href={link.href}>
+              <ExternalLink href={link.href} underline="hover">
                 <TitleWithIcon title={link.title} icon={<ExternalLinkIcon />} />
               </ExternalLink>
             ) : (
               <Link href={link.href} passHref>
-                <a>
+                <Anchor underline="hover">
                   <TitleWithIcon
                     title={link.title}
                     icon={<ChevronLargeIcon />}
                   />
-                </a>
+                </Anchor>
               </Link>
             )}
           </ListItem>
@@ -58,51 +53,31 @@ function TitleWithIcon({ title, icon }: { title: string; icon?: JSX.Element }) {
   const titleWithoutLastWord = splittedWords.reverse().join(' ');
 
   return (
-    <InlineText fontFamily="body" fontSize="1rem">
+    <InlineText>
       {titleWithoutLastWord}{' '}
-      <InlineText display="inline-flex" position="relative">
-        {lastWord}
-        <IconContainer>{icon}</IconContainer>
-      </InlineText>
+      <Box display="inline-flex" position="relative">
+        <InlineText>
+          {lastWord}
+          <IconContainer>{icon}</IconContainer>
+        </InlineText>
+      </Box>
     </InlineText>
   );
 }
 
 const OrderedList = styled.ol(
   css({
+    listStyle: 'none',
     display: 'flex',
     flexWrap: 'wrap',
-    p: 0,
-    m: 0,
-    listStyle: 'none',
+    ...spacingStyle(2),
   })
 );
 
 const ListItem = styled.li(
   css({
-    mb: 2,
-    pr: 4,
-    flexGrow: 1,
     width: asResponsiveArray({ _: '100%', md: '50%' }),
-
-    // Remove the margin of the last 2 elements
-    '&:nth-last-of-type(-n+2)': {
-      mb: asResponsiveArray({ md: 0 }),
-    },
-
-    '&:last-of-type': {
-      mb: 0,
-    },
-
-    a: {
-      display: 'inline-flex',
-      flexWrap: 'wrap',
-      textDecoration: 'none',
-
-      '&:hover': {
-        textDecoration: 'underline',
-      },
-    },
+    pr: 4,
   })
 );
 

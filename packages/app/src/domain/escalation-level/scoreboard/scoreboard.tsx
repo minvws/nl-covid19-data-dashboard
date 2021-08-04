@@ -86,6 +86,7 @@ export function Scoreboard({
                   value={sortOption}
                 />
               </SelectSortContainer>
+
               {row.vrData
                 .sort(scoreboardSortOptions[sortOption])
                 .map((vr, index) => (
@@ -130,7 +131,7 @@ const SelectSortContainer = styled(Box)(
   })
 );
 
-const Headers = () => {
+function Headers() {
   const { siteText } = useIntl();
 
   return (
@@ -138,7 +139,7 @@ const Headers = () => {
       <Box flex="1" display="flex" flexDirection="column" mb={{ _: 2, sm: 0 }}>
         <Box display="flex" alignItems="center">
           <GetestIcon width="32px" height="32px" style={{ minWidth: '24px' }} />
-          <InlineText fontWeight="bold" fontSize={{ _: 2, sm: '18px' }}>
+          <InlineText fontWeight="bold" variant="body1">
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_positive_tests.title
@@ -146,7 +147,7 @@ const Headers = () => {
           </InlineText>
         </Box>
         <Box>
-          <InlineText fontSize={2}>
+          <InlineText>
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_positive_tests.subtitle
@@ -157,7 +158,7 @@ const Headers = () => {
       <Box flex="1" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center">
           <Ziekenhuis width="32px" height="32px" style={{ minWidth: '24px' }} />
-          <InlineText fontWeight="bold" fontSize={{ _: 2, sm: '18px' }}>
+          <InlineText fontWeight="bold" variant="body1">
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_hospital_admissions.title
@@ -165,7 +166,7 @@ const Headers = () => {
           </InlineText>
         </Box>
         <Box>
-          <InlineText fontSize={2}>
+          <InlineText>
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_hospital_admissions.subtitle
@@ -175,4 +176,4 @@ const Headers = () => {
       </Box>
     </Box>
   );
-};
+}

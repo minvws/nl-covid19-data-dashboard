@@ -5,9 +5,9 @@ import { isDefined } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
-import { internationalThresholds } from '~/components/choropleth/international-thresholds';
-import { PositiveTestedPeopleInternationalTooltip } from '~/components/choropleth/tooltips/international/positive-tested-people-international-tooltip';
+import { InChoropleth } from '~/components/choropleth';
+import { inThresholds } from '~/components/choropleth/logic';
+import { InPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -21,7 +21,7 @@ import {
   CountryOption,
   SelectCountries,
 } from '~/domain/international/select-countries';
-import { InternationalLayout } from '~/domain/layout/international-layout';
+import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -133,7 +133,7 @@ export default function PositiefGetesteMensenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <InternationalLayout lastGenerated={lastGenerated}>
+      <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             title={text.titel}
@@ -155,7 +155,7 @@ export default function PositiefGetesteMensenPage(
             title={text.choropleth.titel}
             description={text.choropleth.toelichting}
             legend={{
-              thresholds: internationalThresholds.infected_per_100k_average,
+              thresholds: inThresholds.infected_per_100k_average,
               title: text.choropleth.legenda_titel,
             }}
             metadata={{
@@ -166,14 +166,14 @@ export default function PositiefGetesteMensenPage(
               ],
             }}
           >
-            <EuropeChoropleth
+            <InChoropleth
               accessibility={{
                 key: 'international_tested_overall_choropleth',
               }}
               data={choroplethData}
               metricProperty="infected_per_100k_average"
               tooltipContent={(context) => (
-                <PositiveTestedPeopleInternationalTooltip
+                <InPositiveTestedPeopleTooltip
                   title={text.choropleth.tooltip_titel}
                   countryName={
                     countryNames[context.country_code.toLowerCase()] ||
@@ -196,33 +196,27 @@ export default function PositiefGetesteMensenPage(
             }}
             description={text.time_graph.description}
           >
-            <>
-              <SelectCountries
-                countryOptions={countryOptions}
-                limit={10}
-                alwaysSelectedCodes={['nld']}
-                defaultSelectedCodes={['bel', 'deu']}
-              >
-                {(selectedCountries, colors) => {
-                  const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
-                    selectedCountriesToSeriesConfig(
-                      selectedCountries,
-                      countryNames,
-                      colors
-                    );
-                  return (
-                    <TimeSeriesChart
-                      accessibility={{
-                        key: 'international_infected_people_over_time_chart',
-                      }}
-                      values={compiledInternationalData}
-                      seriesConfig={seriesConfig}
-                      disableLegend
-                    />
-                  );
-                }}
-              </SelectCountries>
-            </>
+            <SelectCountries
+              countryOptions={countryOptions}
+              limit={10}
+              alwaysSelectedCodes={['nld']}
+              defaultSelectedCodes={['bel', 'deu']}
+            >
+              {(selectedCountries, colors) => (
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'international_infected_people_over_time_chart',
+                  }}
+                  values={compiledInternationalData}
+                  seriesConfig={selectedCountriesToSeriesConfig(
+                    selectedCountries,
+                    countryNames,
+                    colors
+                  )}
+                  disableLegend
+                />
+              )}
+            </SelectCountries>
           </ChartTile>
 
           <InfectedTableTile
@@ -237,7 +231,7 @@ export default function PositiefGetesteMensenPage(
             }}
           />
         </TileList>
-      </InternationalLayout>
+      </InLayout>
     </Layout>
   );
 }

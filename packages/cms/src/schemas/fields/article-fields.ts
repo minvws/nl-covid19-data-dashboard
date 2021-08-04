@@ -41,6 +41,25 @@ export const ARTICLE_FIELDS = [
     validation: (rule: Rule) => rule.required(),
   },
   {
+    title: 'Categorieën instellen',
+    name: 'categories',
+    type: 'array',
+    of: [{ type: 'string' }],
+    options: {
+      layout: 'grid',
+      list: [
+        { title: 'Vaccinaties', value: 'vaccinaties' },
+        { title: 'Infecties', value: 'infecties' },
+        { title: 'Sterfte', value: 'sterfte' },
+        { title: 'Ziekenhuizen', value: 'ziekenhuizen' },
+        { title: 'Kwetsbare groepen', value: 'kwetsbare_groepen' },
+        { title: 'Vroege indicatoren', value: 'vroege_indicatoren' },
+        { title: 'Gedrag', value: 'gedrag' },
+      ],
+    },
+    // validation: (rule: Rule) => rule.required().min(1),
+  },
+  {
     title: 'Samenvatting',
     description:
       'Dit is een korte samenvatting van het artikel die getoond wordt in de artikelblokken op de overzichtspagina.',

@@ -32,11 +32,17 @@ export function KpiWithIllustrationTile({
   return (
     <Tile>
       <Box display="flex" flexWrap="wrap">
-        <Box mb={4} flex={{ _: '0 0 100%', lg: '1' }} pr={{ lg: 4 }}>
+        <Box
+          mb={4}
+          flex={{ _: '0 0 100%', lg: '1' }}
+          pr={{ lg: 4 }}
+          spacing={3}
+        >
           <Heading level={3}>{title}</Heading>
           {children}
           {description && <Markdown content={description} />}
         </Box>
+
         <Box flex={{ _: '0 0 100%', lg: '1' }} pl={{ lg: 4 }}>
           <img
             width={315}

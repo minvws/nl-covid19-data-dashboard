@@ -4,7 +4,7 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { Box } from '../base';
 import { SidebarDifference } from '../difference-indicator';
-import { Heading, InlineText } from '../typography';
+import { InlineText, Text } from '../typography';
 
 type SidebarKpiValueProps = {
   title: string;
@@ -32,23 +32,17 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
 
   return (
-    <Box width="100%" minHeight="4rem">
-      <Heading level={4} fontSize={2} fontWeight="normal" m={0} as="div">
-        {title}
-      </Heading>
+    <Box width="100%" minHeight="4rem" spacing={2}>
+      <Text>{title}</Text>
       <Box
         display="flex"
         alignItems="center"
         justifyContent="flex-start"
         flexWrap="wrap"
+        spacingHorizontal={2}
       >
         {isDefined(value) && (
-          <InlineText
-            fontSize={3}
-            fontWeight="bold"
-            margin="0"
-            marginRight={isDefined(difference) ? 1 : 3}
-          >
+          <InlineText variant="h3">
             {isPercentage ? `${formatPercentage(value)}%` : formatNumber(value)}
           </InlineText>
         )}
@@ -60,12 +54,7 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
         )}
 
         {isDefined(description) && (
-          <InlineText
-            display="inline-block"
-            margin="0"
-            color="annotation"
-            fontSize={1}
-          >
+          <InlineText variant="label1" color="annotation" fontWeight="bold">
             {description}
           </InlineText>
         )}

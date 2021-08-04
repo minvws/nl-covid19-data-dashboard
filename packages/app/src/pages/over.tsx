@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Heading } from '~/components/typography';
 import { Content } from '~/domain/layout/content';
@@ -63,8 +64,10 @@ const Over = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
 
       <Content>
-        {content.title && <Heading level={1}>{content.title}</Heading>}
-        {content.description && <RichContent blocks={content.description} />}
+        <Box spacing={4}>
+          {content.title && <Heading level={1}>{content.title}</Heading>}
+          {content.description && <RichContent blocks={content.description} />}
+        </Box>
       </Content>
     </Layout>
   );

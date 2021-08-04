@@ -25,7 +25,7 @@ type ChoroplethTileProps = DataProps & {
 } & (
     | {
         onChartRegionChange: (v: RegionControlOption) => void;
-        chartRegion: 'municipal' | 'region';
+        chartRegion: 'gm' | 'vr';
       }
     | {
         onChartRegionChange?: undefined;
@@ -64,27 +64,28 @@ export function ChoroplethTile({
         as="figure"
         {...dataProps}
         height="100%"
+        spacing={3}
       >
-        <Box mb={3} flex={{ lg: 1 }} as="figcaption">
-          <Box mb={[0, 2]}>
-            <Heading level={3}>{title}</Heading>
-            {typeof description === 'string' ? (
-              <Text>{description}</Text>
-            ) : (
-              description
-            )}
-            {onChartRegionChange && chartRegion && (
-              <Box
-                display="flex"
-                justifyContent={{ _: 'center', lg: 'flex-start' }}
-              >
-                <ChartRegionControls
-                  value={chartRegion}
-                  onChange={onChartRegionChange}
-                />
-              </Box>
-            )}
-          </Box>
+        <Box flex={{ lg: 1 }} as="figcaption" spacing={3}>
+          <Heading level={3}>{title}</Heading>
+
+          {typeof description === 'string' ? (
+            <Text>{description}</Text>
+          ) : (
+            description
+          )}
+
+          {onChartRegionChange && chartRegion && (
+            <Box
+              display="flex"
+              justifyContent={{ _: 'center', lg: 'flex-start' }}
+            >
+              <ChartRegionControls
+                value={chartRegion}
+                onChange={onChartRegionChange}
+              />
+            </Box>
+          )}
 
           {legendaComponent && breakpoints.lg && (
             <Box display="flex" flexDirection="row" alignItems="flex-center">
@@ -95,10 +96,10 @@ export function ChoroplethTile({
 
         <Box
           flex={{ lg: 1 }}
-          ml={[0, 0, 3]}
           display="flex"
           flexDirection="column"
           height="100%"
+          spacing={3}
         >
           <Box height="100%">
             <ErrorBoundary>{children}</ErrorBoundary>

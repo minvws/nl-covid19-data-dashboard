@@ -77,11 +77,11 @@ export function CategoricalBarScale({
                 position="absolute"
                 top="100%"
                 left="0"
-                fontSize={1}
-                color="annotation"
                 transform="translateX(-50%)"
               >
-                {category.threshold}
+                <InlineText variant="label1" color="annotation">
+                  {category.threshold}
+                </InlineText>
               </Box>
             )}
           </Box>
@@ -101,9 +101,14 @@ export function CategoricalBarScale({
       </Box>
 
       {!hideLegend && (
-        <Box mb={3}>
+        <Box mb={3} spacingHorizontal={3}>
           {barPieces.map((category) => (
-            <Box as="span" style={{ whiteSpace: 'nowrap' }} key={category.name}>
+            <Box
+              as="span"
+              style={{ whiteSpace: 'nowrap' }}
+              key={category.name}
+              spacingHorizontal={1}
+            >
               {/* 0.25px offset is used for sharper rendering of the circle */}
               <Box
                 display="inline-block"
@@ -114,10 +119,8 @@ export function CategoricalBarScale({
                 transform="translateY(.25px)"
               />
               <InlineText
-                ml={1}
-                mr={3}
                 fontWeight={category.isActive ? 'bold' : 'normal'}
-                fontSize={1}
+                variant="label1"
               >
                 {category.name}
               </InlineText>

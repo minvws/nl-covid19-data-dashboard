@@ -137,11 +137,10 @@ function PercentageBar({ amount, color }: PercentageBarProps) {
   const { formatPercentage } = useIntl();
 
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="center" spacingHorizontal={2}>
       <InlineText
         textAlign="right"
         css={css({ minWidth: 40 })}
-        mr={2}
       >{`${formatPercentage(amount, {
         minimumFractionDigits: 1,
       })}%`}</InlineText>

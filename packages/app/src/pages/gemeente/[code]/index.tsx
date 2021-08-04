@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -34,7 +34,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...siteText.gemeente_index.metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         code={selectedGmData.code}
         difference={selectedGmData.difference}
         data={sideBarData}

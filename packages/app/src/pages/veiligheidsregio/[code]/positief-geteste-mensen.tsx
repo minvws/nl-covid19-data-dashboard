@@ -1,26 +1,24 @@
 import {
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
 } from '@corona-dashboard/common';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { Anchor } from '~/components/anchor';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { vrThresholds } from '~/components/choropleth/logic';
+import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -145,29 +143,32 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 source: text.bronnen.rivm,
               }}
             >
-              <KpiValue
-                data-cy="infected"
-                absolute={Math.round(dataOverallLastValue.infected)}
-                difference={
-                  data.difference.tested_overall__infected_moving_average
-                }
-                isMovingAverageDifference
-              />
-              <Markdown content={text.kpi_toelichting} />
+              <Box spacing={3}>
+                <KpiValue
+                  data-cy="infected"
+                  absolute={Math.round(dataOverallLastValue.infected)}
+                  difference={
+                    data.difference.tested_overall__infected_moving_average
+                  }
+                  isMovingAverageDifference
+                />
 
-              <Box>
-                <Heading level={4} fontSize={'1.2em'} mt={'1.5em'} mb={0}>
-                  {replaceComponentsInText(ggdText.summary_title, {
-                    percentage: (
-                      <InlineText color="data.primary">{`${formatPercentage(
-                        dataGgdLastValue.infected_percentage
-                      )}%`}</InlineText>
-                    ),
-                  })}
-                </Heading>
-                <Text mt={0} lineHeight={1}>
-                  <Anchor name="ggd" text={ggdText.summary_link_cta} />
-                </Text>
+                <Markdown content={text.kpi_toelichting} />
+
+                <Box>
+                  <Text variant="body2" fontWeight="bold">
+                    {replaceComponentsInText(ggdText.summary_title, {
+                      percentage: (
+                        <InlineText color="data.primary">{`${formatPercentage(
+                          dataGgdLastValue.infected_percentage
+                        )}%`}</InlineText>
+                      ),
+                    })}
+                  </Text>
+                  <Anchor underline="hover" href="#ggd">
+                    {ggdText.summary_link_cta}
+                  </Anchor>
+                </Box>
               </Box>
             </KpiTile>
 
@@ -255,10 +256,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
-              thresholds: regionThresholds.tested_overall.infected_per_100k,
+              thresholds: vrThresholds.tested_overall.infected_per_100k,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',
               }}
@@ -269,14 +270,14 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={(
-                context: GmProperties & GmCollectionTestedOverall
-              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+                context: GmGeoProperties & GmCollectionTestedOverall
+              ) => <GmPositiveTestedPeopleTooltip context={context} />}
             />
           </ChoroplethTile>
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             id="ggd"
