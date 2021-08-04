@@ -25,8 +25,9 @@ export function SelectCountry({
   onChange,
   value,
 }: SelectCountryProps) {
-  const containerRef = useRef(null);
   const uniqueId = useUniqueId();
+
+  const containerRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [inputValue, setInputValue] = useState(value);
@@ -34,6 +35,14 @@ export function SelectCountry({
   const [isOpen, setIsOpen] = useState(false);
 
   const currentOption = options.filter((item) => item.value === value)[0];
+
+  useEffect(() => {
+    setMatchingCountries(
+      matchSorter(options, inputValue, {
+        keys: ['label', 'value'],
+      }).map((item: Option) => item.value) as []
+    );
+  }, [options, inputValue]);
 
   const handleOnFocus = () => {
     setIsOpen(true);
@@ -46,8 +55,8 @@ export function SelectCountry({
   };
 
   const handleOnClick = (item: Option) => {
-    onChange(item.value);
     setIsOpen(false);
+    onChange(item.value);
   };
 
   useOnClickOutside([containerRef], () => handleOnClose());
@@ -55,21 +64,13 @@ export function SelectCountry({
   const { focusIndex, focusRef, setFocusIndex } = useHitSelection({
     isEnabled: isOpen,
     onSelectHit: (index) => {
-      if (inputRef.current) inputRef.current.blur();
       setIsOpen(false);
       onChange(matchingCountries[index]);
+      if (inputRef.current) inputRef.current.blur();
     },
     maxPossibleItems: matchingCountries.length,
     handleOnClose,
   });
-
-  useEffect(() => {
-    setMatchingCountries(
-      matchSorter(options, inputValue, {
-        keys: ['label', 'value'],
-      }).map((item: Option) => item.value) as []
-    );
-  }, [options, inputValue]);
 
   useEffect(() => {
     if (inputValue.length > 0 && isOpen) {
@@ -110,33 +111,37 @@ export function SelectCountry({
           <>
             {options
               .filter((item) => matchingCountries.includes(item.value))
-              .map((item, index) => (
-                <ListItem
-                  key={index}
-                  onClick={() => handleOnClick(item)}
-                  id={`${prefixId}_${item.value}`}
-                  role="option"
-                  aria-selected={index === focusIndex ? true : false}
-                  hasFocus={index === focusIndex}
-                  ref={index === focusIndex ? focusRef : null}
-                >
-                  <img
-                    aria-hidden
-                    src={`/icons/flags/${item.value.toLowerCase()}.svg`}
-                    width="17"
-                    height="13"
-                    alt=""
-                    css={css({
-                      mr: 2,
-                    })}
-                  />
-                  <InlineText
-                    fontWeight={value === item.value ? 'bold' : undefined}
+              .map((item, index) => {
+                const hasFocus = index === focusIndex;
+
+                return (
+                  <ListItem
+                    key={index}
+                    role="option"
+                    id={`${prefixId}_${item.value}`}
+                    aria-selected={hasFocus}
+                    ref={hasFocus ? focusRef : null}
+                    hasFocus={hasFocus}
+                    onClick={() => handleOnClick(item)}
                   >
-                    {item.label}
-                  </InlineText>
-                </ListItem>
-              ))}
+                    <img
+                      aria-hidden
+                      src={`/icons/flags/${item.value.toLowerCase()}.svg`}
+                      width="17"
+                      height="13"
+                      alt=""
+                      css={css({
+                        mr: 2,
+                      })}
+                    />
+                    <InlineText
+                      fontWeight={value === item.value ? 'bold' : undefined}
+                    >
+                      {item.label}
+                    </InlineText>
+                  </ListItem>
+                );
+              })}
           </>
         ) : (
           <ListItem>Geen match</ListItem>
@@ -149,14 +154,17 @@ export function SelectCountry({
 const OrderedList = styled.ol<{ isOpen: boolean }>((x) =>
   css({
     display: x.isOpen ? 'block' : 'none',
-    backgroundColor: 'white',
-    borderBottomLeftRadius: 1,
-    borderBottomRightRadius: 1,
+    position: 'absolute',
+    top: '100%',
+
+    width: '100%',
+
     border: `1px solid silver`,
     borderTopColor: 'transparent',
-    position: 'absolute',
-    width: '100%',
-    top: '100%',
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
+
+    backgroundColor: 'white',
     zIndex: 10,
     m: 0,
     p: 0,

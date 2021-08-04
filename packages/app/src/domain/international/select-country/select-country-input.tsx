@@ -6,7 +6,7 @@ import CloseIcon from '~/assets/close.svg';
 import SearchIcon from '~/assets/search-icon-bold.svg';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
-// import { useIntl } from '~/intl';
+import { useIntl } from '~/intl';
 import { Option } from './select-country';
 
 interface SelectCountryInputType {
@@ -31,6 +31,8 @@ export function SelectCountryInput({
   handleOnFocus,
   inputRef,
 }: SelectCountryInputType) {
+  const { siteText } = useIntl();
+
   const handleOnBlur = () => setTimeout(() => handleOnClose(), 100);
 
   return (
@@ -45,34 +47,25 @@ export function SelectCountryInput({
             width="17"
             height="13"
             alt=""
-            css={css({
-              mr: 2,
-            })}
           />
         )}
       </IconContainer>
 
-      <IconContainer
-        align="right"
-        onClick={(evt: any) => {
-          evt.stopPropagation();
-          if (inputRef.current) inputRef.current.focus();
-          setInputValue('');
-        }}
-      >
+      <IconContainer align="right">
         {isOpen ? (
           inputValue.length > 0 && (
             <Box
+              onClick={handleOnClose}
               css={css({
+                display: 'flex',
+
                 svg: {
                   width: 20,
                   height: 20,
                 },
               })}
             >
-              <VisuallyHidden>
-                {'siteText.select_countries.clear'}
-              </VisuallyHidden>
+              <VisuallyHidden>{siteText.select_countries.clear}</VisuallyHidden>
               <CloseIcon />
             </Box>
           )
@@ -80,7 +73,15 @@ export function SelectCountryInput({
           <Box
             as="span"
             transform="rotate(90deg)"
+            transformOrigin="center"
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              event.stopPropagation();
+              if (inputRef.current) inputRef.current.focus();
+              setInputValue('');
+            }}
             css={css({
+              display: 'flex',
+
               svg: {
                 width: 15,
                 height: 15,
@@ -110,24 +111,26 @@ export function SelectCountryInput({
 const IconContainer = styled.span<{ align: 'left' | 'right' }>((x) =>
   css({
     position: 'absolute',
-    zIndex: 1,
     top: 0,
-    right: x.align === 'right' ? '12px' : undefined,
+    right: x.align === 'right' ? '10px' : undefined,
     bottom: 0,
     left: x.align === 'left' ? '10px' : undefined,
 
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
 
     m: 0,
     p: 0,
     height: '100%',
+    border: 'none',
 
     background: 'none',
 
     color: x.align === 'left' ? 'labelGray' : 'icon',
 
-    border: 'none',
+    cursor: x.align === 'right' ? 'pointer' : undefined,
+    zIndex: 9,
   })
 );
 
