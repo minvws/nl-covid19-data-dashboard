@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
-import VirusIcon from '~/assets/virus.svg';
+import CoronavirusIcon from '~/assets/coronavirus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
@@ -185,7 +185,7 @@ export function GmLayout(props: GmLayoutProps) {
 
                         <MetricMenuItemLink
                           href={reverseRouter.gm.sterfte(code)}
-                          icon={<VirusIcon />}
+                          icon={<CoronavirusIcon />}
                           title={
                             siteText.veiligheidsregio_sterfte.titel_sidebar
                           }

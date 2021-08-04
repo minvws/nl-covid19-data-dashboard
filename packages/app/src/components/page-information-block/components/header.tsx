@@ -1,4 +1,5 @@
 import css from '@styled-system/css';
+import styled from 'styled-components';
 import { sampleSize } from 'lodash';
 import React from 'react';
 import { ResponsiveValue } from 'styled-system';
@@ -20,8 +21,6 @@ type HeaderProps = {
   screenReaderCategory?: string;
 };
 
-const ICON_SIZE = '3.5rem';
-
 export function Header({
   icon,
   title,
@@ -29,73 +28,51 @@ export function Header({
   screenReaderCategory,
 }: HeaderProps) {
   const breakpoints = useBreakpoints();
-
   const isMediumScreen = breakpoints.md;
 
-  const padding = icon ? ICON_SIZE : undefined;
-
   return (
-    <Box
-      display="flex"
-      flexDirection="row"
-      flexWrap="nowrap"
-      alignItems="center"
-    >
-      {icon && !isMediumScreen && <Icon size={ICON_SIZE}>{icon}</Icon>}
-      <Box>
-        {category && (
-          <Box pl={{ md: padding }}>
-            <Heading level={1} variant="subtitle1" color="category">
-              {category}
-              {screenReaderCategory && (
-                <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
-              )}
-            </Heading>
-          </Box>
-        )}
-        <Box pl={{ md: padding }} position="relative">
-          <Heading level={1} as="h2" hyphens="auto">
-            {title}
+    <GridLayout>
+      {icon && !isMediumScreen && <Icon gridArea="topIcon">{icon}</Icon>}
+      {category && (
+        <Box gridArea="category">
+          <Heading level={1} variant="subtitle1" color="category">
+            {category}
+            {screenReaderCategory && (
+              <VisuallyHidden>{`- ${screenReaderCategory}`}</VisuallyHidden>
+            )}
           </Heading>
-          {isMediumScreen && (
-            <Icon
-              size={asResponsiveArray({
-                _: `calc(${ICON_SIZE} - 0.5rem)`,
-                md: ICON_SIZE,
-              })}
-            >
-              {icon}
-            </Icon>
-          )}
         </Box>
-      </Box>
-    </Box>
+      )}
+      {isMediumScreen && <Icon gridArea="sideIcon">{icon}</Icon>}
+      <Heading
+        level={1}
+        as="h2"
+        hyphens="auto"
+        css={css({ gridArea: 'title' })}
+      >
+        {title}
+      </Heading>
+    </GridLayout>
   );
 }
 
-function Icon({
-  children,
-  size,
-}: {
-  children: React.ReactNode;
-  size: ResponsiveValue<string>;
-}) {
-  return (
-    <Box
-      position={{ md: 'absolute' }}
-      left={0}
-      top="-11px"
-      css={css({
-        width: size,
-        height: size,
+const GridLayout = styled(Box)`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    '. topIcon'
+    '. category'
+    'sideIcon title';
+`;
 
-        '& svg': {
-          width: size,
-          height: sampleSize,
-        },
-      })}
-    >
-      {children}
-    </Box>
-  );
-}
+const Icon = styled.span<{ gridArea: 'topIcon' | 'sideIcon' }>((x) =>
+  css({
+    mr: 3,
+    gridArea: x.gridArea,
+    height: 45,
+
+    svg: {
+      height: 45,
+    },
+  })
+);

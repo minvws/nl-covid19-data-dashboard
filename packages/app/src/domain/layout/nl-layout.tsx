@@ -12,14 +12,14 @@ import GetestIcon from '~/assets/test.svg';
 import VaccinatieIcon from '~/assets/vaccinaties.svg';
 import Varianten from '~/assets/varianten.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import VirusIcon from '~/assets/virus.svg';
+import CoronavirusIcon from '~/assets/coronavirus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import Ziektegolf from '~/assets/ziektegolf.svg';
 import {
   CategoryMenu,
   Menu,
   MetricMenuButtonLink,
-  MetricMenuItemLink
+  MetricMenuItemLink,
 } from '~/components/aside/menu';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
@@ -30,7 +30,6 @@ import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { SituationIcon } from '../situations/components/situation-icon';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VariantsSidebarMetric } from '../variants/variants-sidebar-metric';
 
@@ -230,7 +229,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.sterfte()}
-                  icon={<VirusIcon />}
+                  icon={<CoronavirusIcon />}
                   title={siteText.sterfte.titel_sidebar}
                 >
                   <SidebarMetric
@@ -255,7 +254,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.brononderzoek()}
-                  icon={<SituationIcon id="gathering" />}
+                  icon={<Gedrag />}
                   title={siteText.brononderzoek.titel_sidebar}
                 >
                   <SituationsSidebarMetric

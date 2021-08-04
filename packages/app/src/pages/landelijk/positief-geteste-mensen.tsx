@@ -6,7 +6,7 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
-import Afname from '~/assets/afname.svg';
+import Experimenteel from '~/assets/experimenteel.svg';
 import Getest from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -323,7 +323,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={ggdText.titel}
             id="ggd"
-            icon={<Afname />}
+            icon={<Experimenteel />}
             description={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,

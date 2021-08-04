@@ -67,9 +67,8 @@ function Icon({ children }: { children: ReactNode }) {
       css={css({
         width: '2.5rem',
         height: '2.5rem',
-        '& svg': {
-          width: '2.5rem',
-          height: '2.5rem',
+        svg: {
+          height: 35,
         },
       })}
     >

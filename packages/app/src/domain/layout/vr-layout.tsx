@@ -7,7 +7,7 @@ import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import GetestIcon from '~/assets/test.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import VirusIcon from '~/assets/virus.svg';
+import CoronavirusIcon from '~/assets/coronavirus.svg';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
@@ -233,7 +233,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.sterfte(code)}
-                      icon={<VirusIcon />}
+                      icon={<CoronavirusIcon />}
                       title={siteText.veiligheidsregio_sterfte.titel_sidebar}
                     >
                       <SidebarMetric
