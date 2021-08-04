@@ -1,17 +1,17 @@
 import {
   ChoroplethThresholdsValue,
   VrCollectionSituations,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { TooltipSubject } from '~/components/choropleth/tooltips/tooltip-subject';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { vrThresholds } from '~/components/choropleth/logic';
+import { TooltipSubject } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
@@ -60,7 +60,7 @@ export function SituationsOverviewChoroplethTile({
           <Box>
             <ChoroplethLegenda
               title={text.situaties_kaarten_overzicht.legenda.titel}
-              thresholds={regionThresholds.situations.gathering}
+              thresholds={vrThresholds.situations.gathering}
             />
           </Box>
           <Box display="flex" alignItems="flex-end">
@@ -72,7 +72,7 @@ export function SituationsOverviewChoroplethTile({
                 position="relative"
                 top={'3px'}
               />
-              <InlineText m={0} fontSize={[0, null, 1]}>
+              <InlineText variant="label1">
                 {text.situaties_kaarten_overzicht.legenda.onvoldoende_data}
               </InlineText>
             </Box>
@@ -95,13 +95,13 @@ export function SituationsOverviewChoroplethTile({
                 tooltipPlacement="top-center"
                 noDataFillColor={colors.data.underReported}
                 tooltipContent={(
-                  context: VrProperties & VrCollectionSituations
+                  context: VrGeoProperties & VrCollectionSituations
                 ) => (
                   <ChoroplethTooltip
                     isPercentage
                     value={context[situation.id]}
                     regionName={context.vrname}
-                    thresholds={regionThresholds.situations[situation.id]}
+                    thresholds={vrThresholds.situations[situation.id]}
                     noDataFillColor={colors.data.underReported}
                   />
                 )}
@@ -138,18 +138,19 @@ function ChoroplethTooltip({
         noDataFillColor={noDataFillColor}
       >
         {regionName + ': '}
-        <InlineText
-          ml={3}
+        <Box
+          as="span"
           display="inline-block"
+          fontWeight="bold"
           textAlign="right"
-          fontWeight="heavy"
+          px={1}
         >
           {typeof value === 'number'
             ? isPercentage
               ? intl.formatPercentage(value) + '%'
               : value
             : '–'}
-        </InlineText>
+        </Box>
       </TooltipSubject>
     </Box>
   );
@@ -183,8 +184,7 @@ function ChoroplethGridItem({
         display="flex"
         justifyContent="center"
         alignItems="center"
-        spacing={2}
-        spacingHorizontal
+        spacingHorizontal={2}
         mb={3}
       >
         {icon}

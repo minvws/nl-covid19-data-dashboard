@@ -5,13 +5,13 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
+import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
@@ -99,7 +99,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
             <WarningTile
@@ -166,6 +166,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'stacked-area',
                     metricProperty: 'partially_vaccinated',
                     color: colors.data.primary,
+                    mixBlendMode: 'multiply',
                     fillOpacity: 1,
                   },
                   {
@@ -178,6 +179,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'stacked-area',
                     metricProperty: 'fully_vaccinated',
                     color: colors.data.secondary,
+                    mixBlendMode: 'multiply',
                     fillOpacity: 1,
                   },
                 ]}
@@ -217,7 +219,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineAdministrationsKpiSection data={data} />
 
-          <Spacer amount={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={text.bereidheid_section.title}
@@ -254,7 +256,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     .percentage_average
                 }
               />
-              <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
+              <Text>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
             </section>
 
             <TimeSeriesChart
@@ -325,7 +327,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <Spacer amount={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={text.stock_and_delivery_section.title}
@@ -345,7 +347,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

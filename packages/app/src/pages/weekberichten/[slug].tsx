@@ -79,7 +79,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const EditorialDetailPage = (props: StaticProps<typeof getStaticProps>) => {
+export default function EditorialDetailPage(
+  props: StaticProps<typeof getStaticProps>
+) {
   const { content, lastGenerated } = props;
   const { cover } = props.content;
   const { asset } = cover;
@@ -101,9 +103,7 @@ const EditorialDetailPage = (props: StaticProps<typeof getStaticProps>) => {
       </Box>
     </Layout>
   );
-};
-
-export default EditorialDetailPage;
+}
 
 function getTitle(title: string, locale: string) {
   const suffix =

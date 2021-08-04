@@ -50,6 +50,7 @@ export const getStaticProps = createGetStaticProps(
         ...cover,
         "asset": cover.asset->
       },
+      categories,
       "intro": {
         ...intro,
         "${locale}": [

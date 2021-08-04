@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
+import { vrThresholds } from '~/components/choropleth/logic';
 import { EscalationLevel } from '~/domain/restrictions/types';
 import { colors } from '~/style/theme';
 import { assert } from './assert';
@@ -13,7 +13,7 @@ export function useEscalationColor(level: EscalationLevel) {
       return colors.data.neutral;
     }
 
-    const escalationThresholds = regionThresholds.escalation_levels.level;
+    const escalationThresholds = vrThresholds.escalation_levels.level;
 
     const escalationColor = escalationThresholds.find(
       (threshold) => threshold.threshold === level

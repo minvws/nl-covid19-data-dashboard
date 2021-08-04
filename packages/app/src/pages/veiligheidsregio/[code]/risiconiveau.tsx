@@ -12,17 +12,16 @@ import {
   CategoricalBarScale,
   getCategoryLevel,
 } from '~/components/categorical-bar-scale';
+import { ChartTile } from '~/components/chart-tile';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { Metadata } from '~/components/metadata';
 import { PageInformationBlock } from '~/components/page-information-block';
-// import { PageInformationBlock } from '~/components/page-information-block';
-import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { useEscalationThresholds } from '~/domain/escalation-level/thresholds';
 import { Layout } from '~/domain/layout/layout';
@@ -41,7 +40,6 @@ import {
   getLastGeneratedDate,
   selectVrPageMetricData,
 } from '~/static-props/get-data';
-import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -133,8 +131,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <Tile>
-            <Heading level={3}>{text.current_escalation_level}</Heading>
+          <ChartTile title={text.current_escalation_level} disableFullscreen>
             <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
               <Box width={{ _: '100%', lg: '50%' }} pr={{ _: 0, lg: 3 }}>
                 <Box mb={3}>
@@ -248,10 +245,9 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 </Link>
               </Box>
             )}
-          </Tile>
+          </ChartTile>
 
-          <Tile>
-            <Heading level={3}>{text.recente_cijfers}</Heading>
+          <ChartTile title={text.recente_cijfers} disableFullscreen>
             <TwoKpiSection spacing={4}>
               <Box>
                 <Box
@@ -264,7 +260,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     icon={<Getest />}
                   />
                 </Box>
-                <Box spacing={2} spacingHorizontal>
+                <Box spacingHorizontal={2}>
                   <Box display="inline-block">
                     <KpiValue
                       data-cy="infected"
@@ -277,7 +273,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   </InlineText>
                 </Box>
 
-                <Box maxWidth="480px">
+                <Box maxWidth="maxWidthText">
                   <CategoricalBarScale
                     categories={positiveTestedEscalationThresholds}
                     value={tested_overall_sum.last_value.infected_per_100k}
@@ -308,7 +304,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                     icon={<Ziekenhuis />}
                   />
                 </Box>
-                <Box spacing={2} spacingHorizontal>
+                <Box spacingHorizontal={2}>
                   <Box display="inline-block">
                     <KpiValue
                       data-cy="infected"
@@ -321,7 +317,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   </InlineText>
                 </Box>
 
-                <Box maxWidth="480px">
+                <Box maxWidth="maxWidthText">
                   <CategoricalBarScale
                     categories={hospitalAdmissionsEscalationThresholds}
                     value={hospital_nice_sum.last_value.admissions_per_1m}
@@ -340,7 +336,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                 />
               </Box>
             </TwoKpiSection>
-          </Tile>
+          </ChartTile>
         </TileList>
       </VrLayout>
     </Layout>
@@ -385,13 +381,10 @@ function ListItem({
         >
           {icon}
         </Box>
-        <Text
-          m={0}
-          css={css({
-            display: asResponsiveArray({ _: 'block', xs: 'flex' }),
-            flexWrap: 'wrap',
-            whiteSpace: 'pre-wrap',
-          })}
+        <Box
+          display={{ _: 'block', xs: 'flex' }}
+          flexWrap="wrap"
+          css={css({ whiteSpace: 'pre-wrap' })}
         >
           <InlineText fontWeight="bold">{`${title} `}</InlineText>
           {date && (
@@ -410,7 +403,7 @@ function ListItem({
                   }${formatDateFromSeconds(date)}`}
             </span>
           )}
-        </Text>
+        </Box>
       </Box>
       {children}
     </li>
@@ -440,7 +433,7 @@ function DataDescription({
         mr={1}
         mt="7px"
       />
-      <Text m={0}>
+      <Text>
         {replaceComponentsInText(description, {
           amount: <InlineText fontWeight="bold">{amount}</InlineText>,
         })}

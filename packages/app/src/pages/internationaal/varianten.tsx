@@ -11,7 +11,7 @@ import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
-import { InternationalLayout } from '~/domain/layout/international-layout';
+import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import {
   getInternationalVariantChartData,
@@ -142,7 +142,7 @@ export default function VariantenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <InternationalLayout lastGenerated={lastGenerated}>
+      <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             title={text.titel}
@@ -176,10 +176,11 @@ export default function VariantenPage(
           >
             <Box
               alignSelf="flex-start"
-              mt={3}
               display="flex"
               alignItems={{ _: 'flex-start', md: 'center' }}
               flexDirection={{ _: 'column', md: 'row' }}
+              spacing={{ _: 4, md: 0 }}
+              spacingHorizontal={{ md: 3 }}
             >
               <Select
                 options={countryOptions}
@@ -195,14 +196,13 @@ export default function VariantenPage(
                   />
                 }
               />
+
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
-                <Box ml={{ _: 0, md: 3 }} mt={{ _: 3, md: 0 }}>
-                  <WarningTile
-                    message={text.lagere_betrouwbaarheid}
-                    variant="emphasis"
-                    tooltipText={text.lagere_betrouwbaarheid_uitleg}
-                  />
-                </Box>
+                <WarningTile
+                  message={text.lagere_betrouwbaarheid}
+                  variant="emphasis"
+                  tooltipText={text.lagere_betrouwbaarheid_uitleg}
+                />
               )}
             </Box>
           </VariantsTableTile>
@@ -214,7 +214,7 @@ export default function VariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
           >
-            <Box alignSelf="flex-start" mt={1} mb={2}>
+            <Box alignSelf="flex-start">
               <Select
                 options={countryOptions}
                 onChange={onChange}
@@ -223,7 +223,7 @@ export default function VariantenPage(
             </Box>
           </VariantsStackedAreaTile>
         </TileList>
-      </InternationalLayout>
+      </InLayout>
     </Layout>
   );
 }

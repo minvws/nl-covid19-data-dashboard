@@ -6,6 +6,7 @@ import {
 import { pick } from 'lodash';
 import { useMemo, useState } from 'react';
 import { isPresent } from 'ts-is-present';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import {
   InteractiveLegend,
@@ -115,6 +116,7 @@ export function VaccineStockPerSupplierChart({
             selection={[selected]}
             onToggleItem={setSelected}
           />
+          <Spacer mb={2} />
           <TimeSeriesChart
             accessibility={{
               key: 'vaccine_stock_per_supplier_chart',

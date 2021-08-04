@@ -1,14 +1,18 @@
-import { VrCollectionSituations, VrProperties } from '@corona-dashboard/common';
+import {
+  VrCollectionSituations,
+  VrGeoProperties,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
-import { Box } from '~/components/base';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { Box, Spacer } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
+import { VrChoropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
-import { Heading, Text } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { Color } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './components/legend-icon';
@@ -35,33 +39,28 @@ export function SituationsDataCoverageChoroplethTile({
   );
 
   return (
-    <FullscreenChartTile
+    <ChartTile
+      title={text.situaties_kaarten_uitkomsten.titel}
       metadata={{
         date: [date_start_unix, date_end_unix],
         source: text.bronnen.rivm,
       }}
     >
-      <Heading level={3}>{text.situaties_kaarten_uitkomsten.titel}</Heading>
       <Box
         display="flex"
         flexDirection={{ _: 'column', lg: 'row' }}
-        m={0}
         as="figure"
         height="100%"
       >
-        <Box mb={3} flex={{ lg: 1 }} as="figcaption">
-          <Box mb={[0, 4]}>
-            <Markdown
-              content={replaceVariablesInText(
-                text.situaties_kaarten_uitkomsten.beschrijving,
-                {
-                  date_from,
-                  date_to,
-                }
-              )}
-            />
-          </Box>
-          <Box>
+        <Box flex={{ lg: 1 }} as="figcaption">
+          <Markdown
+            content={replaceVariablesInText(
+              text.situaties_kaarten_uitkomsten.beschrijving,
+              { date_from, date_to }
+            )}
+          />
+          <Spacer mb={4} />
+          <Box spacing={3}>
             <LegendItem
               color="data.primary"
               icon={<Check />}
@@ -104,14 +103,14 @@ export function SituationsDataCoverageChoroplethTile({
                 metricName="situations"
                 metricProperty="has_sufficient_data"
                 tooltipContent={(
-                  context: VrProperties & VrCollectionSituations
+                  context: VrGeoProperties & VrCollectionSituations
                 ) => <SituationsDataCoverageTooltip context={context} />}
               />
             </ErrorBoundary>
           </Box>
         </Box>
       </Box>
-    </FullscreenChartTile>
+    </ChartTile>
   );
 }
 
@@ -121,7 +120,7 @@ function LegendItem({
   title,
   description,
 }: {
-  color: string;
+  color: Color;
   icon: JSX.Element;
   title: string;
   description: string;
@@ -129,8 +128,8 @@ function LegendItem({
   return (
     <Box display="flex" css={css({ gap: '.5rem' })}>
       <LegendIcon color={color}>{icon}</LegendIcon>
-      <Box>
-        <Text color={color} fontWeight="bold" mb={1}>
+      <Box spacing={1}>
+        <Text color={color} fontWeight="bold">
           {title}
         </Text>
         <Text>{description}</Text>

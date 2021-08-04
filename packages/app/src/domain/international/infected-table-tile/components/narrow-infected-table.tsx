@@ -1,12 +1,15 @@
 import { InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
+import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
-import { internationalThresholds } from '~/components/choropleth/international-thresholds';
-import { InlineText, Text } from '~/components/typography';
+import { inThresholds } from '~/components/choropleth/logic';
+import { PercentageBar } from '~/components/percentage-bar';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
 
@@ -24,7 +27,19 @@ export function NarrowInfectedTable({
   countryNames,
   inputValue,
 }: NarrowInfectedTableProps) {
+  const intl = useIntl();
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
+
+  const formatValue = useMemo(() => {
+    const numberOfDecimals = getMaximumNumberOfDecimals(
+      data.map((x) => x.infected_per_100k_average ?? 0)
+    );
+    return (value: number) =>
+      intl.formatPercentage(value, {
+        minimumFractionDigits: numberOfDecimals,
+        maximumFractionDigits: numberOfDecimals,
+      });
+  }, [intl, data]);
 
   return (
     <Box borderBottom="1px solid" borderBottomColor="silver">
@@ -35,6 +50,7 @@ export function NarrowInfectedTable({
               item={item}
               highestAverage={highestAverage?.infected_per_100k_average}
               countryNames={countryNames}
+              formatValue={formatValue}
               key={index}
             />
           ) : null
@@ -46,6 +62,7 @@ export function NarrowInfectedTable({
               item={item}
               highestAverage={highestAverage?.infected_per_100k_average}
               countryNames={countryNames}
+              formatValue={formatValue}
               key={index}
             />
           )
@@ -59,14 +76,20 @@ interface ItemRowProps {
   item: InCollectionTestedOverall;
   highestAverage: number | undefined;
   countryNames: Record<string, string>;
+  formatValue: (value: number) => string;
 }
 
-function ItemRow({ item, highestAverage, countryNames }: ItemRowProps) {
-  const { siteText, formatNumber } = useIntl();
+function ItemRow({
+  item,
+  highestAverage,
+  countryNames,
+  formatValue,
+}: ItemRowProps) {
+  const { siteText } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
   const filterBelow = getFilteredThresholdValues(
-    internationalThresholds.infected_per_100k_average,
+    inThresholds.infected_per_100k_average,
     item.infected_per_100k_average
   );
 
@@ -100,51 +123,56 @@ function ItemRow({ item, highestAverage, countryNames }: ItemRowProps) {
         />
         {countryNames[item.country_code.toLocaleLowerCase()]}
       </InlineText>
-      <Box display="flex">
-        <Text
-          mb={0}
-          css={css({
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'space-between',
-          })}
-        >
-          {text.header_per_inwoners}:
-          <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
-            {formatNumber(item.infected_per_100k_average)}
-          </InlineText>
-        </Text>
+      <Row
+        formatValue={formatValue}
+        label={text.header_per_inwoners}
+        value={item.infected_per_100k_average}
+        bar={
+          highestAverage && highestAverage > 0 ? (
+            <Box color={filterBelow.color}>
+              <PercentageBar
+                percentage={
+                  (item.infected_per_100k_average / highestAverage) * 100
+                }
+                height="12px"
+              />
+            </Box>
+          ) : undefined
+        }
+      />
+      <Row
+        formatValue={formatValue}
+        label={text.header_totale}
+        value={item.infected}
+      />
+    </Box>
+  );
+}
 
-        {highestAverage && highestAverage > 0 && (
-          <Box maxWidth={{ _: '5rem', xs: '6rem' }} width="100%">
-            <Box
-              width={`${
-                (item.infected_per_100k_average / highestAverage) * 100
-              }%`}
-              minWidth="3px"
-              height="12px"
-              backgroundColor={filterBelow.color}
-              mt="6px"
-            />
-          </Box>
-        )}
+function Row({
+  formatValue,
+  label,
+  value,
+  bar,
+}: {
+  formatValue: (value: number) => string;
+  label: string;
+  value: number;
+  bar?: ReactNode;
+}) {
+  return (
+    <Box display="flex" justifyContent="space-between" alignItems="flex-start">
+      <Box flexShrink={1}>
+        <InlineText>{label}:</InlineText>
       </Box>
 
-      <Box display="flex">
-        <Text
-          mb={0}
-          pr={{ _: '5rem', xs: '6rem' }}
-          css={css({
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'space-between',
-          })}
-        >
-          {text.header_totale}:
-          <InlineText fontWeight="bold" px={{ _: 2, xs: 3 }} textAlign="right">
-            {formatNumber(item.infected)}
-          </InlineText>
-        </Text>
+      <Box minWidth={100}>
+        <Box display="flex" alignItems="center" spacingHorizontal={2}>
+          <Box textAlign="right">
+            <InlineText fontWeight="bold">{formatValue(value)}</InlineText>
+          </Box>
+          {bar}
+        </Box>
       </Box>
     </Box>
   );

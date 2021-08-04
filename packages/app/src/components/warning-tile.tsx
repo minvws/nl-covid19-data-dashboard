@@ -39,7 +39,7 @@ export function WarningTile({
           <WithTooltip content={tooltipText}>
             <Content
               variant={variant}
-              tabIndex={0}
+              tabIndex={isDefined(tooltipText) ? 1 : undefined}
               hasTooltip={isDefined(tooltipText)}
             >
               <Markdown content={message} />

@@ -4,7 +4,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
   getVariantTableData,
@@ -80,7 +80,7 @@ export default function CovidVariantenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={selectedNlData} lastGenerated={lastGenerated}>
+      <NlLayout data={selectedNlData} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
@@ -121,7 +121,7 @@ export default function CovidVariantenPage(
             }}
           />
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 }

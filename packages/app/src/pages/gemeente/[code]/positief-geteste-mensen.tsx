@@ -1,13 +1,13 @@
 import {
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
 } from '@corona-dashboard/common';
 import Getest from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { gmThresholds } from '~/components/choropleth/logic';
+import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -17,8 +17,8 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createElementsQuery,
@@ -99,7 +99,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
@@ -249,7 +249,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds: municipalThresholds.tested_overall.infected_per_100k,
+              thresholds: gmThresholds.tested_overall.infected_per_100k,
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
             }}
@@ -258,7 +258,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'confirmed_cases_choropleth',
               }}
@@ -268,12 +268,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               metricName="tested_overall"
               metricProperty="infected_per_100k"
               tooltipContent={(
-                context: GmProperties & GmCollectionTestedOverall
-              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+                context: GmGeoProperties & GmCollectionTestedOverall
+              ) => <GmPositiveTestedPeopleTooltip context={context} />}
             />
           </ChoroplethTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

@@ -1,23 +1,23 @@
 import {
   VrCollectionElderlyAtHome,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import ElderlyIcon from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { vrThresholds } from '~/components/choropleth/logic';
+import { VrElderlyAtHomeTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
+import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createPageArticlesQuery,
@@ -78,7 +78,7 @@ const ElderlyAtHomeNationalPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
@@ -199,7 +199,7 @@ const ElderlyAtHomeNationalPage = (
             }}
             legend={{
               thresholds:
-                regionThresholds.elderly_at_home.positive_tested_daily_per_100k,
+                vrThresholds.elderly_at_home.positive_tested_daily_per_100k,
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >
@@ -212,12 +212,12 @@ const ElderlyAtHomeNationalPage = (
               metricName="elderly_at_home"
               metricProperty="positive_tested_daily_per_100k"
               tooltipContent={(
-                context: VrProperties & VrCollectionElderlyAtHome
-              ) => <ElderlyAtHomeRegionalTooltip context={context} />}
+                context: VrGeoProperties & VrCollectionElderlyAtHome
+              ) => <VrElderlyAtHomeTooltip context={context} />}
             />
           </ChoroplethTile>
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             title={text.section_deceased.title}
@@ -300,7 +300,7 @@ const ElderlyAtHomeNationalPage = (
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

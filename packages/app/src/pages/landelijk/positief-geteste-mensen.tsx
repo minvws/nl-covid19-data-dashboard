@@ -1,35 +1,34 @@
 import {
   GmCollectionTestedOverall,
-  GmProperties,
+  GmGeoProperties,
   VrCollectionTestedOverall,
-  VrProperties,
+  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
-import { Anchor } from '~/components/anchor';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
-import { PositiveTestedPeopleRegionalTooltip } from '~/components/choropleth/tooltips/region/positive-tested-people-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { vrThresholds } from '~/components/choropleth/logic';
+import {
+  GmPositiveTestedPeopleTooltip,
+  VrPositiveTestedPeopleTooltip,
+} from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 import { useIntl } from '~/intl';
@@ -96,8 +95,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
-  const [selectedMap, setSelectedMap] =
-    useState<RegionControlOption>('municipal');
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
@@ -111,7 +109,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
@@ -146,12 +144,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 isMovingAverageDifference
               />
 
-              <Box mb={4}>
-                <Markdown content={text.kpi_toelichting} />
-              </Box>
+              <Markdown content={text.kpi_toelichting} />
 
               <Box>
-                <Heading level={4} fontSize={'1.2em'} mb={0}>
+                <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(ggdText.summary_text, {
                     percentage: (
                       <span css={css({ color: 'data.primary' })}>
@@ -164,11 +160,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                       'weekday-medium'
                     ),
                   })}
-                </Heading>
-
-                <Text mt={0} lineHeight={1}>
-                  <Anchor name="ggd" text={ggdText.summary_link_cta} />
                 </Text>
+                <Anchor underline="hover" href="#ggd">
+                  {ggdText.summary_link_cta}
+                </Anchor>
               </Box>
             </KpiTile>
 
@@ -206,7 +201,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             chartRegion={selectedMap}
             legend={{
               title: text.chloropleth_legenda.titel,
-              thresholds: regionThresholds.tested_overall.infected_per_100k,
+              thresholds: vrThresholds.tested_overall.infected_per_100k,
             }}
           >
             {/**
@@ -220,8 +215,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              * make the chart and define the tooltip layout for each, but maybe for
              * now that is a bridge too far. Let's take it one step at a time.
              */}
-            {selectedMap === 'municipal' && (
-              <MunicipalityChoropleth
+            {selectedMap === 'gm' && (
+              <GmChoropleth
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
                 }}
@@ -230,11 +225,11 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
                 tooltipContent={(
-                  context: GmProperties & GmCollectionTestedOverall
-                ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+                  context: GmGeoProperties & GmCollectionTestedOverall
+                ) => <GmPositiveTestedPeopleTooltip context={context} />}
               />
             )}
-            {selectedMap === 'region' && (
+            {selectedMap === 'vr' && (
               <VrChoropleth
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',
@@ -244,8 +239,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 metricName="tested_overall"
                 metricProperty="infected_per_100k"
                 tooltipContent={(
-                  context: VrProperties & VrCollectionTestedOverall
-                ) => <PositiveTestedPeopleRegionalTooltip context={context} />}
+                  context: VrGeoProperties & VrCollectionTestedOverall
+                ) => <VrPositiveTestedPeopleTooltip context={context} />}
               />
             )}
           </ChoroplethTile>
@@ -323,7 +318,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
           <GNumberBarChartTile data={data.g_number} />
 
-          <Spacer amount={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={ggdText.titel}
@@ -336,7 +331,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dateOfInsertionUnix: dataGgdLastValue.date_of_insertion_unix,
               dataSources: [ggdText.bronnen.rivm],
             }}
-            referenceLink={text.reference.href}
+            referenceLink={ggdText.reference_href}
             articles={content.ggd.articles}
           />
 
@@ -356,6 +351,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
+
             <KpiTile
               title={ggdText.positief_getest_week_titel}
               metadata={{
@@ -371,6 +367,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 }
                 isMovingAverageDifference
               />
+
               <Text>{ggdText.positief_getest_week_uitleg}</Text>
 
               <Text fontWeight="bold">
@@ -504,7 +501,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };
