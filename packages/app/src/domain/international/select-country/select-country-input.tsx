@@ -15,6 +15,11 @@ interface SelectCountryInputType {
   currentOption: Option;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  prefixId: string;
+  hasFocusState: boolean;
+  setHasFocusState: Dispatch<SetStateAction<boolean>>;
+  setFocusIndex: Dispatch<SetStateAction<number>>;
+  handleOnClose: () => void;
 }
 
 export function SelectCountryInput({
@@ -23,17 +28,29 @@ export function SelectCountryInput({
   currentOption,
   isOpen,
   setIsOpen,
+  handleOnClose,
+  setHasFocusState,
+  prefixId,
+  setFocusIndex,
 }: SelectCountryInputType) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
+
+    if (event.target.value.length > 0) {
+      setIsOpen(true);
+      setFocusIndex(0);
+    }
   };
 
   const handleOnFocus = () => {
+    setHasFocusState(true);
     setIsOpen(true);
     setInputValue('');
   };
+
+  const handleOnBlur = () => handleOnClose();
 
   return (
     <Box position="relative" minWidth="14rem">
@@ -55,7 +72,6 @@ export function SelectCountryInput({
       </IconContainer>
 
       <IconContainer
-        as="button"
         align="right"
         onClick={(evt: any) => {
           evt.stopPropagation();
@@ -96,25 +112,21 @@ export function SelectCountryInput({
       </IconContainer>
 
       <Input
-        /**
-         * Usually search-results will disappear when the input loses focus,
-         * but this doesn't allow the user to set focus on a search-result using
-         * the "tab"-key.
-         * The following timeout will handle the blur-event after a small delay.
-         * This allows the browser to fire a focusEvent for one of the results,
-         * which in turn will keep the search-results alive.
-         */
-        placeholder={'select a country'}
+        placeholder={currentOption.label}
         value={isOpen ? inputValue : currentOption.label}
         onChange={handleOnChange}
         ref={inputRef}
         onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
         autoComplete="off"
+        aria-haspopup="listbox"
+        aria-labelledby={`${prefixId} ${prefixId}_button`}
+        id={prefixId + '_button'}
       />
     </Box>
   );
 }
-const IconContainer = styled.div<{ align: 'left' | 'right' }>((x) =>
+const IconContainer = styled.span<{ align: 'left' | 'right' }>((x) =>
   css({
     position: 'absolute',
     zIndex: 1,

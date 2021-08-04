@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { SelectCountryInput } from './select-country-input';
+import { useHitSelection } from './use-hit-selection';
 
 export type Option = {
   value: string;
@@ -24,14 +26,37 @@ export function SelectCountry({
   value,
 }: SelectCountryProps) {
   const containerRef = useRef(null);
+  const uniqueId = useUniqueId();
 
   useOnClickOutside([containerRef], () => setIsOpen(false));
 
   const [inputValue, setInputValue] = useState(value);
   const [matchingCountries, setMatchingCountries] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [hasFocusState, setHasFocusState] = useState(false);
 
   const currentOption = options.filter((item) => item.value === value)[0];
+
+  const handleOnClose = () => {
+    setHasFocusState(false);
+    setIsOpen(false);
+    setInputValue(currentOption.label);
+  };
+
+  const handleOnClick = (item: Option) => {
+    onChange(item.value);
+    setIsOpen(false);
+  };
+
+  const { focusIndex, focusRef, setFocusIndex } = useHitSelection({
+    isEnabled: isOpen,
+    onSelectHit: (index) => {
+      setIsOpen(false);
+      onChange(matchingCountries[index]);
+    },
+    maxItems: matchingCountries.length,
+    handleOnClose,
+  });
 
   useEffect(() => {
     setMatchingCountries(
@@ -41,60 +66,78 @@ export function SelectCountry({
     );
   }, [options, inputValue]);
 
-  const handleOnClick = (item: Option) => {
-    onChange(item.value);
-    setIsOpen(false);
-  };
+  const prefixId = `select_country_${uniqueId}`;
 
   return (
-    <Box position="relative" ref={containerRef}>
+    <Box position="relative" ref={containerRef} zIndex={99}>
       <SelectCountryInput
         inputValue={inputValue}
         setInputValue={setInputValue}
         currentOption={currentOption}
+        hasFocusState={hasFocusState}
+        handleOnClose={handleOnClose}
+        setHasFocusState={setHasFocusState}
+        setFocusIndex={setFocusIndex}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        prefixId={prefixId}
       />
 
-      {isOpen && (
-        <OrderedList>
-          {matchingCountries.length > 0 ? (
-            <>
-              {options
-                .filter((item) => matchingCountries.includes(item.value))
-                .map((item, index) => (
-                  <ListItem key={index}>
-                    <Button onClick={() => handleOnClick(item)}>
-                      <img
-                        aria-hidden
-                        src={`/icons/flags/${item.value.toLowerCase()}.svg`}
-                        width="17"
-                        height="13"
-                        alt=""
-                        css={css({
-                          mr: 2,
-                        })}
-                      />
-                      <InlineText
-                        fontWeight={value === item.value ? 'bold' : undefined}
-                      >
-                        {item.label}
-                      </InlineText>
-                    </Button>
-                  </ListItem>
-                ))}
-            </>
-          ) : (
-            <ListItem css={css({ px: 3, py: 2 })}>Geen match</ListItem>
-          )}
-        </OrderedList>
-      )}
+      <OrderedList
+        id={`${prefixId}_list`}
+        tabIndex={-1}
+        role="listbox"
+        aria-labelledby={prefixId}
+        isOpen={isOpen}
+        aria-activedescendant={
+          isOpen
+            ? `${prefixId}_${matchingCountries[focusIndex]}`
+            : `${prefixId}_${currentOption.value}`
+        }
+      >
+        {matchingCountries.length > 0 ? (
+          <>
+            {options
+              .filter((item) => matchingCountries.includes(item.value))
+              .map((item, index) => (
+                <ListItem
+                  key={index}
+                  onClick={() => handleOnClick(item)}
+                  id={`${prefixId}_${item.value}`}
+                  role="option"
+                  aria-selected={index === focusIndex ? true : false}
+                  hasFocus={index === focusIndex}
+                  ref={index === focusIndex ? focusRef : null}
+                >
+                  <img
+                    aria-hidden
+                    src={`/icons/flags/${item.value.toLowerCase()}.svg`}
+                    width="17"
+                    height="13"
+                    alt=""
+                    css={css({
+                      mr: 2,
+                    })}
+                  />
+                  <InlineText
+                    fontWeight={value === item.value ? 'bold' : undefined}
+                  >
+                    {item.label}
+                  </InlineText>
+                </ListItem>
+              ))}
+          </>
+        ) : (
+          <ListItem>Geen match</ListItem>
+        )}
+      </OrderedList>
     </Box>
   );
 }
 
-const OrderedList = styled.ol(
+const OrderedList = styled.ol<{ isOpen: boolean }>((x) =>
   css({
+    display: x.isOpen ? 'block' : 'none',
     backgroundColor: 'white',
     borderBottomLeftRadius: 2,
     borderBottomRightRadius: 2,
@@ -111,15 +154,7 @@ const OrderedList = styled.ol(
   })
 );
 
-const ListItem = styled.li(
-  css({
-    display: 'flex',
-  })
-);
-
-const Button = styled.button<{
-  hasFocus?: boolean;
-}>((x) =>
+const ListItem = styled.li<{ hasFocus?: boolean }>((x) =>
   css({
     px: 3,
     py: 2,
