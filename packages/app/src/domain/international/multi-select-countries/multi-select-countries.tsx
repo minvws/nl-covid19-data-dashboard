@@ -5,7 +5,7 @@ import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { CountryOption } from './context';
 import { CountryCode } from './country-code';
-import { SelectCountrySearch } from './select-country-search';
+import { MultiSelectCountrySearch } from './multi-select-country-search';
 import { SelectedCountries } from './selected-countries';
 
 const {
@@ -34,7 +34,7 @@ const ORDERED_COLORS = [
   magenta_dark,
 ];
 
-interface SelectCountriesProps {
+interface MultiSelectCountriesProps {
   countryOptions: CountryOption[];
   children: (selectedCountries: CountryCode[], colors: string[]) => ReactNode;
   limit?: number;
@@ -48,7 +48,7 @@ export function MultiSelectCountries({
   limit,
   alwaysSelectedCodes,
   defaultSelectedCodes,
-}: SelectCountriesProps) {
+}: MultiSelectCountriesProps) {
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>(
     defaultSelectedCodes ?? []
   );
@@ -89,7 +89,7 @@ export function MultiSelectCountries({
     <>
       <List>
         <InputItem>
-          <SelectCountrySearch
+          <MultiSelectCountrySearch
             onToggleCountry={handleToggleCountry}
             countries={countries}
             limit={limit}

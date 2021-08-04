@@ -8,7 +8,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useSearchContext } from './context';
 
-export function SelectCountriesInput() {
+export function MultiSelectCountriesInput() {
   const { siteText } = useIntl();
   const { id, inputProps, setTerm } = useSearchContext();
   const inputRef = useRef<HTMLInputElement>(null);

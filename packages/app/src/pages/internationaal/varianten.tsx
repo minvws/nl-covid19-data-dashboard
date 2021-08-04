@@ -183,19 +183,10 @@ export default function VariantenPage(
               spacing={{ _: 4, md: 0 }}
               spacingHorizontal={{ md: 3 }}
             >
-              <Select
+              <SelectCountry
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
-                icon={
-                  <FlagImage
-                    aria-hidden
-                    src={`/icons/flags/${selectedCountryCode.toLowerCase()}.svg`}
-                    width="16"
-                    height="12"
-                    alt=""
-                  />
-                }
               />
 
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (

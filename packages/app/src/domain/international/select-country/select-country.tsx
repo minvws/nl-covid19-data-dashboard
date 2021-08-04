@@ -74,7 +74,6 @@ export function SelectCountry({
 
   useEffect(() => {
     if (inputValue.length > 0 && isOpen) {
-      setIsOpen(true);
       setFocusIndex(0);
     }
   }, [inputValue, setFocusIndex, isOpen]);
@@ -82,17 +81,16 @@ export function SelectCountry({
   const prefixId = `select_country_${uniqueId}`;
 
   return (
-    <Box position="relative" ref={containerRef} zIndex={99}>
+    <Box position="relative" ref={containerRef}>
       <SelectCountryInput
         prefixId={prefixId}
         currentOption={currentOption}
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
         inputValue={inputValue}
+        inputRef={inputRef}
         setInputValue={setInputValue}
         handleOnClose={handleOnClose}
         handleOnFocus={handleOnFocus}
-        inputRef={inputRef}
       />
 
       <OrderedList

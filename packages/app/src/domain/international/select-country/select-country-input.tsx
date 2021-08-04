@@ -14,7 +14,6 @@ interface SelectCountryInputType {
   setInputValue: Dispatch<SetStateAction<string>>;
   currentOption: Option;
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
   prefixId: string;
   inputRef: RefObject<HTMLInputElement>;
   handleOnClose: () => void;
@@ -126,7 +125,6 @@ const IconContainer = styled.span<{ align: 'left' | 'right' }>((x) =>
     border: 'none',
 
     background: 'none',
-
     color: x.align === 'left' ? 'labelGray' : 'icon',
 
     cursor: x.align === 'right' ? 'pointer' : undefined,
@@ -146,8 +144,6 @@ const Input = styled.input(
 
     fontFamily: 'body',
     fontSize: 1,
-
-    appearance: 'none',
 
     '&::-webkit-search-cancel-button': {
       display: 'none',
