@@ -116,7 +116,7 @@ const StyledNoHits = styled.div(
   css({
     color: 'gray',
     textAlign: 'center',
-    p: 3,
+    p: 4,
   })
 );
 
