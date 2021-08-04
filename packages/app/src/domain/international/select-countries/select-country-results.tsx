@@ -113,6 +113,7 @@ const StyledNoHits = styled.div(
     color: 'gray',
     textAlign: 'center',
     p: 3,
+    fontSize: 1,
   })
 );
 
