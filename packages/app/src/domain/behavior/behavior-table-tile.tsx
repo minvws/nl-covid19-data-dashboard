@@ -6,9 +6,9 @@ import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { PercentageBar } from '~/components/percentage-bar';
-import { Tile } from '~/components/tile';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -45,13 +45,9 @@ export function BehaviorTableTile({
   const behaviorsTableData = useBehaviorTableData(value);
 
   return (
-    <Tile>
-      <Heading level={3}>{title}</Heading>
-      <Box maxWidth="maxWidthText">
-        <Text mb={4}>{description}</Text>
-      </Box>
-      <Box display="flex" flexWrap="wrap" mb={{ _: 2, xs: 4 }}>
-        <Box mr={3} mb={1}>
+    <ChartTile title={title} description={description}>
+      <Box display="flex" flexWrap="wrap" spacing={2} spacingHorizontal={3}>
+        <Box>
           <ExplanationBox background={colors.data.cyan} />
           {complianceExplanation}
         </Box>
@@ -60,7 +56,7 @@ export function BehaviorTableTile({
           {supportExplanation}
         </Box>
       </Box>
-      <Box overflow="auto" mb={3}>
+      <Box overflow="auto">
         <StyledTable>
           <thead>
             <Row>
@@ -166,7 +162,7 @@ export function BehaviorTableTile({
       <Box maxWidth="maxWidthText">
         <Text color="annotation">{annotation}</Text>
       </Box>
-    </Tile>
+    </ChartTile>
   );
 }
 
@@ -193,29 +189,44 @@ function DescriptionWithIcon({
   };
 
   return (
-    <Button onClick={buttonClickHandler}>
-      {splittedWords.map((word, index) => (
-        <InlineText
-          key={index}
-          css={css({
-            whiteSpace: 'pre-wrap',
-            fontFamily: 'body',
-            fontSize: '1rem',
-          })}
-        >
-          {splittedWords.length - 1 === index ? (
-            <InlineText css={css({ display: 'flex', position: 'relative' })}>
-              {word}
-              <Box position="absolute" right={-14} top={0}>
-                <ChevronIcon width="7px" />
-              </Box>
-            </InlineText>
-          ) : (
-            `${word} `
-          )}
-        </InlineText>
-      ))}
-    </Button>
+    <Anchor
+      as="button"
+      underline="hover"
+      color="body"
+      onClick={buttonClickHandler}
+      css={css({ '&:hover': { color: 'blue' } })}
+    >
+      <span
+        css={css({
+          display: 'flex',
+          alignItems: 'center',
+          textAlign: 'left',
+          flexWrap: 'wrap',
+        })}
+      >
+        {splittedWords.map((word, index) => (
+          <InlineText
+            key={index}
+            css={css({
+              whiteSpace: 'pre-wrap',
+              fontFamily: 'body',
+              fontSize: '1rem',
+            })}
+          >
+            {splittedWords.length - 1 === index ? (
+              <InlineText css={css({ display: 'flex', position: 'relative' })}>
+                {word}
+                <Box position="absolute" right={-14} top={0}>
+                  <ChevronIcon width="7px" />
+                </Box>
+              </InlineText>
+            ) : (
+              `${word} `
+            )}
+          </InlineText>
+        ))}
+      </span>
+    </Anchor>
   );
 }
 
@@ -229,15 +240,19 @@ function PercentageBarWithNumber({
   const { formatPercentage } = useIntl();
   return (
     <Box
-      color={color}
       display="flex"
       alignItems="center"
+      spacingHorizontal={2}
       pr={{ _: 2, sm: 2, lg: 4, xl: 5 }}
     >
-      <InlineText fontWeight="bold" color="black" pr={2}>
-        {`${formatPercentage(percentage)}%`}
-      </InlineText>
-      <PercentageBar percentage={percentage} height="8px" />
+      <Box as="span" minWidth={40} textAlign="right">
+        <InlineText fontWeight="bold">
+          {`${formatPercentage(percentage)}%`}
+        </InlineText>
+      </Box>
+      <Box color={color} flexGrow={1}>
+        <PercentageBar percentage={percentage} height="8px" />
+      </Box>
     </Box>
   );
 }
@@ -277,6 +292,8 @@ const Row = styled.tr(
 const HeaderCell = styled.th(
   css({
     textAlign: 'left',
+    fontWeight: 'bold',
+    verticalAlign: 'middle',
   })
 );
 
@@ -285,6 +302,7 @@ const Cell = styled.td(
     borderBottom: '1px solid lightGray',
     p: 0,
     py: 2,
+    verticalAlign: 'middle',
 
     '&:first-child': {
       borderBottom: asResponsiveArray({
@@ -293,39 +311,6 @@ const Cell = styled.td(
         md: 'none',
         lg: '1px solid lightGray',
       }),
-    },
-  })
-);
-
-const Button = styled.button(
-  css({
-    appearance: 'none',
-    background: 'unset',
-    border: 0,
-    display: 'flex',
-    alignItems: 'center',
-    textAlign: 'left',
-    cursor: 'pointer',
-    p: 0,
-    m: 0,
-    pr: 3,
-    flexWrap: 'wrap',
-
-    '&:focus': {
-      borderColor: 'lightGray',
-      outline: '2px dotted',
-      outlineColor: 'blue',
-    },
-
-    '&:hover': {
-      span: {
-        color: 'data.primary',
-        textDecoration: 'underline',
-      },
-
-      svg: {
-        color: 'data.primary',
-      },
     },
   })
 );

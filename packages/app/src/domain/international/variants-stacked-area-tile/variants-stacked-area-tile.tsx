@@ -3,22 +3,21 @@ import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import {
-  GappedStackedAreaSeriesDefinition,
-  TimespanAnnotationConfig,
-} from '~/components/time-series-chart/logic';
+import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
 import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
+import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileProps = {
   values?: VariantChartValue[] | null;
@@ -91,25 +90,20 @@ function VariantStackedAreaTileWithData({
       color: colors.data.underReported,
       label: text.legend_niet_compleet_label,
     },
-    {
+  ];
+
+  const timespanAnnotations = useUnreliableDataAnnotations(
+    values,
+    text.lagere_betrouwbaarheid
+  );
+
+  if (timespanAnnotations.length) {
+    staticLegendItems.push({
       shape: 'dotted-square',
       color: 'white',
       label: text.lagere_betrouwbaarheid,
-    },
-  ];
-
-  const timespanAnnotations = useMemo(
-    () =>
-      values
-        .filter((x) => !x.is_reliable)
-        .map<TimespanAnnotationConfig>((x) => ({
-          start: x.date_start_unix,
-          end: x.date_end_unix,
-          label: text.lagere_betrouwbaarheid,
-          fill: 'dotted',
-        })),
-    [values, text]
-  );
+    });
+  }
 
   return (
     <ChartTile
@@ -121,6 +115,7 @@ function VariantStackedAreaTileWithData({
       {(timeframe) => (
         <>
           {children}
+          {children && <Spacer mb={3} />}
           <InteractiveLegend
             helpText={text.legend_help_tekst}
             selectOptions={selectOptions}
@@ -128,6 +123,7 @@ function VariantStackedAreaTileWithData({
             onToggleItem={toggle}
             onReset={clear}
           />
+          <Spacer mb={2} />
           <TimeSeriesChart
             accessibility={{
               key: 'variants_stacked_area_over_time_chart',

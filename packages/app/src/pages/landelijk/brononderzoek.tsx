@@ -1,7 +1,7 @@
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { SituationIcon } from '~/domain/situations/components/situation-icon';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
@@ -57,7 +57,7 @@ export default function BrononderzoekPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={intl.siteText.nationaal_layout.headings.besmettingen}
@@ -84,7 +84,7 @@ export default function BrononderzoekPage(
 
           <SituationsOverviewChoroplethTile data={choropleth.vr.situations} />
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 }

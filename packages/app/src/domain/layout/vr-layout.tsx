@@ -144,32 +144,41 @@ export function VrLayout(props: VrLayoutProps) {
                 maxWidth={{ _: '38rem', md: undefined }}
                 mx="auto"
               >
-                <Text fontSize={3} fontWeight="bold" px={3} m={0}>
-                  {vrName}
-                </Text>
+                <Box px={3}>
+                  <Text variant={'h3'} fontWeight="bold">
+                    {vrName}
+                  </Text>
+                </Box>
 
-                <Menu>
-                  <MetricMenuButtonLink
-                    href={reverseRouter.vr.maatregelen(code)}
-                    title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
-                    buttonVariant="top"
-                    subtitle={
-                      siteText.veiligheidsregio_maatregelen.subtitel_sidebar
-                    }
-                  />
-                  <MetricMenuButtonLink
-                    href={reverseRouter.vr.risiconiveau(code)}
-                    title={siteText.veiligheidsregio_layout.headings.inschaling}
-                    buttonVariant="bottom"
-                  >
-                    <Box mt={2}>
-                      <EscalationLevelInfoLabel
-                        level={data.escalation_level.level as EscalationLevel}
-                        size="small"
-                        useLevelColor
-                      />
-                    </Box>
-                  </MetricMenuButtonLink>
+                <Menu spacing={4}>
+                  <Box>
+                    <MetricMenuButtonLink
+                      href={reverseRouter.vr.maatregelen(code)}
+                      title={
+                        siteText.veiligheidsregio_maatregelen.titel_sidebar
+                      }
+                      buttonVariant="top"
+                      subtitle={
+                        siteText.veiligheidsregio_maatregelen.subtitel_sidebar
+                      }
+                    />
+                    <MetricMenuButtonLink
+                      href={reverseRouter.vr.risiconiveau(code)}
+                      title={
+                        siteText.veiligheidsregio_layout.headings.inschaling
+                      }
+                      buttonVariant="bottom"
+                    >
+                      <Box mt={2}>
+                        <EscalationLevelInfoLabel
+                          level={data.escalation_level.level as EscalationLevel}
+                          size="small"
+                          useLevelColor
+                        />
+                      </Box>
+                    </MetricMenuButtonLink>
+                  </Box>
+
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings.ziekenhuizen
@@ -193,6 +202,7 @@ export function VrLayout(props: VrLayoutProps) {
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
+
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings.besmettingen

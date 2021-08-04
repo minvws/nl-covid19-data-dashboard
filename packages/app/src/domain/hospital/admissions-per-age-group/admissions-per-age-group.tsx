@@ -2,6 +2,7 @@ import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { ErrorBoundary } from '~/components/error-boundary';
 import {
   InteractiveLegend,
   SelectOption,
@@ -17,6 +18,7 @@ import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
+import { Spacer } from '~/components/base';
 
 type NLHospitalAdmissionPerAgeGroupValue =
   | NlIntensiveCareNicePerAgeGroupValue
@@ -99,7 +101,7 @@ export function AdmissionsPerAgeGroup({
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
-    <>
+    <ErrorBoundary>
       <InteractiveLegend
         helpText={text.legend_help_text}
         selectOptions={interactiveLegendOptions}
@@ -107,6 +109,7 @@ export function AdmissionsPerAgeGroup({
         onToggleItem={toggle}
         onReset={clear}
       />
+      <Spacer mb={2} />
       <TimeSeriesChart
         accessibility={accessibility}
         values={values}
@@ -129,6 +132,6 @@ export function AdmissionsPerAgeGroup({
         }}
       />
       <Legend items={staticLegendItems} />
-    </>
+    </ErrorBoundary>
   );
 }

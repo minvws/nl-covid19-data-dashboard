@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Close from '~/assets/close.svg';
 import Menu from '~/assets/menu.svg';
 import { MaxWidth } from '~/components/max-width';
+import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -186,7 +187,7 @@ const StyledListItem = styled.li(
   })
 );
 
-const NavLink = styled.a<{ isActive: boolean }>((x) =>
+const NavLink = styled(Anchor)<{ isActive: boolean }>((x) =>
   css({
     display: 'block',
     whiteSpace: 'nowrap',

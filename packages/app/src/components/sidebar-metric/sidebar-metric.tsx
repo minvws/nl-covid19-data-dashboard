@@ -32,6 +32,7 @@ interface SidebarMetricProps<T extends { difference: unknown }> {
   differenceKey?: DifferenceKey;
   showBarScale?: boolean;
   annotationKey?: string;
+  showDateOfInsertion?: boolean;
 
   /**
    * Sometimes the barscale is not showing the same metric. Also since data
@@ -54,6 +55,7 @@ export function SidebarMetric<T extends { difference: unknown }>({
   showBarScale,
   annotationKey,
   altBarScaleMetric,
+  showDateOfInsertion,
 }: SidebarMetricProps<T>) {
   const { siteText, formatDateFromSeconds } = useIntl();
 
@@ -111,15 +113,30 @@ export function SidebarMetric<T extends { difference: unknown }>({
   let description = '';
 
   try {
-    description =
-      'date_unix' in lastValue
-        ? replaceVariablesInText(commonText.dateOfReport, {
-            dateOfReport: formatDateFromSeconds(lastValue.date_unix, 'medium'),
-          })
-        : replaceVariablesInText(commonText.dateRangeOfReport, {
-            startDate: formatDateFromSeconds(lastValue.date_start_unix, 'axis'),
-            endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
-          });
+    if (showDateOfInsertion) {
+      description = replaceVariablesInText(commonText.dateOfInsertion, {
+        dateOfInsertion: formatDateFromSeconds(
+          lastValue.date_of_insertion_unix,
+          'medium'
+        ),
+      });
+    } else {
+      description =
+        'date_unix' in lastValue
+          ? replaceVariablesInText(commonText.dateOfReport, {
+              dateOfReport: formatDateFromSeconds(
+                lastValue.date_unix,
+                'medium'
+              ),
+            })
+          : replaceVariablesInText(commonText.dateRangeOfReport, {
+              startDate: formatDateFromSeconds(
+                lastValue.date_start_unix,
+                'axis'
+              ),
+              endDate: formatDateFromSeconds(lastValue.date_end_unix, 'axis'),
+            });
+    }
   } catch (err) {
     throw new Error(
       `Failed to format description for ${metricName}:${metricProperty}, likely due to a timestamp week/day configuration mismatch. Error: ${err.message}`

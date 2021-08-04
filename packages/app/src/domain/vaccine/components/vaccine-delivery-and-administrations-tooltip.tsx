@@ -1,8 +1,9 @@
+import { Box } from '~/components/base';
 import { TooltipData } from '~/components/time-series-chart/components';
 import { TooltipSeriesListContainer } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-container';
 import { TooltipSeriesListItems } from '~/components/time-series-chart/components/tooltip/tooltip-series-list-items';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic/series';
-import { Heading } from '~/components/typography';
+import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { VaccineDeliveryAndAdministrationsValue } from '../data-selection/select-delivery-and-administration-data';
 
@@ -33,35 +34,37 @@ export function VaccineDeliveryAndAdministrationsTooltip<
       // do not display the timespan annotation label in the tooltip
       timespanAnnotation={undefined}
     >
-      <TooltipSeriesListItems
-        value={value}
-        config={[
-          {
-            ...firstConfig,
-            label: isEstimate
-              ? siteText.vaccinaties.data.vaccination_chart.estimated
-              : siteText.vaccinaties.data.vaccination_chart.delivered,
-          },
-        ]}
-        configIndex={configIndex}
-        options={options}
-        metricPropertyFormatters={metricPropertyFormatters}
-      />
+      <Box spacing={1}>
+        <TooltipSeriesListItems
+          value={value}
+          config={[
+            {
+              ...firstConfig,
+              label: isEstimate
+                ? siteText.vaccinaties.data.vaccination_chart.estimated
+                : siteText.vaccinaties.data.vaccination_chart.delivered,
+            },
+          ]}
+          configIndex={configIndex}
+          options={options}
+          metricPropertyFormatters={metricPropertyFormatters}
+        />
 
-      <Heading level={5} my={1}>
-        {!isEstimate
-          ? siteText.vaccinaties.data.vaccination_chart.doses_administered
-          : siteText.vaccinaties.data.vaccination_chart
-              .doses_administered_estimated}
-      </Heading>
+        <Text variant="label1" fontWeight="bold">
+          {!isEstimate
+            ? siteText.vaccinaties.data.vaccination_chart.doses_administered
+            : siteText.vaccinaties.data.vaccination_chart
+                .doses_administered_estimated}
+        </Text>
 
-      <TooltipSeriesListItems
-        value={value}
-        config={otherConfigs}
-        configIndex={configIndex}
-        options={options}
-        metricPropertyFormatters={metricPropertyFormatters}
-      />
+        <TooltipSeriesListItems
+          value={value}
+          config={otherConfigs}
+          configIndex={configIndex}
+          options={options}
+          metricPropertyFormatters={metricPropertyFormatters}
+        />
+      </Box>
     </TooltipSeriesListContainer>
   );
 }

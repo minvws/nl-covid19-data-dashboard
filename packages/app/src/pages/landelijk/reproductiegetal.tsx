@@ -7,7 +7,7 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
 import { useIntl } from '~/intl';
 import {
@@ -49,7 +49,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
@@ -96,7 +96,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
 
           <ReproductionChartTile data={data.reproduction} />
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

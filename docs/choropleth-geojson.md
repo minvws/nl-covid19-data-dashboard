@@ -97,9 +97,9 @@ To make sure the coordinating system is correct we have to convert the exported 
 
 1. Upload the three different (WGS84) files to: [mapshaper.org](https://mapshaper.org)
 2. Rename the layers:
-   - Change: `cbs_gemeente_2020_gegeneraliseerd` to `municipalities`
-   - Change: `cbs_landsdeel_2020_gegeneraliseerd` to `netherlands`
-   - Change: `cbs_veiligheidsregio_2020_gegeneraliseerd` to `vr_collection`
+   - Change: `cbs_gemeente_2020_gegeneraliseerd` to `gm_features`
+   - Change: `cbs_landsdeel_2020_gegeneraliseerd` to `nl_features`
+   - Change: `cbs_veiligheidsregio_2020_gegeneraliseerd` to `vr_features`
 3. Export to TopoJSON > `geography-high-detail.topo.json`;
 
 Simplifying (this needs to be separate step; when doing this in the step above the output will not be correct):

@@ -3,8 +3,8 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { Tile } from '~/components/tile';
-import { Heading, InlineText, Text } from '~/components/typography';
+import { ChartTile } from '~/components/chart-tile';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -40,84 +40,86 @@ export function BehaviorPerAgeGroup({
 
   assert(
     typeof complianceValue !== 'number',
-    'There is a problem by filtering the numbers out'
+    'There is a problem by filtering the numbers out (complianceValue)'
   );
   assert(
     typeof supportValue !== 'number',
-    'There is a problem by filtering the numbers out'
+    'There is a problem by filtering the numbers out (supportValue)'
   );
 
   return (
-    <Tile>
-      <Heading level={3}>{title}</Heading>
-      <Text>{description}</Text>
-
-      <Box mb={4}>
+    <ChartTile title={title} description={description}>
+      <Box spacing={4}>
         <SelectBehavior value={currentId} onChange={setCurrentId} />
-      </Box>
-      <Box overflow="auto">
-        {isDefined(complianceValue) || isDefined(supportValue) ? (
-          <Box overflow="auto">
-            <StyledTable>
-              <thead>
-                <tr>
-                  <HeaderCell
-                    css={css({
-                      width: asResponsiveArray({ _: 150, md: 200 }),
-                    })}
-                  >
-                    {siteText.gedrag_leeftijden.tabel.age_group}
-                  </HeaderCell>
-                  <HeaderCell>
-                    {siteText.gedrag_leeftijden.tabel.recent_research}
-                  </HeaderCell>
-                </tr>
-              </thead>
-              <tbody>
-                {AGE_KEYS.map((age, index) => (
-                  <tr key={index}>
-                    <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
-                    <Cell>
-                      <PercentageBar
-                        color={colors.data.cyan}
-                        amount={complianceValue[age]}
-                      />
-                      <PercentageBar
-                        color={colors.data.yellow}
-                        amount={supportValue[age]}
-                      />
-                    </Cell>
+        <Box overflow="auto">
+          {isDefined(complianceValue) || isDefined(supportValue) ? (
+            <Box overflow="auto">
+              <StyledTable>
+                <thead>
+                  <tr>
+                    <HeaderCell
+                      css={css({
+                        width: asResponsiveArray({ _: 150, md: 200 }),
+                      })}
+                    >
+                      {siteText.gedrag_leeftijden.tabel.age_group}
+                    </HeaderCell>
+                    <HeaderCell>
+                      {siteText.gedrag_leeftijden.tabel.recent_research}
+                    </HeaderCell>
                   </tr>
-                ))}
-              </tbody>
-            </StyledTable>
-            <Box display="flex" flexWrap="wrap" mb={{ _: 2, xs: 4 }}>
-              <Box mr={3} mb={1}>
-                <ExplanationBox background={colors.data.cyan} />
-                {complianceExplanation}
-              </Box>
-              <Box>
-                <ExplanationBox background={colors.data.yellow} />
-                {supportExplanation}
+                </thead>
+                <tbody>
+                  {AGE_KEYS.map((age, index) => (
+                    <tr key={index}>
+                      <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
+                      <Cell>
+                        <PercentageBar
+                          color={colors.data.cyan}
+                          amount={complianceValue[age]}
+                        />
+                        <PercentageBar
+                          color={colors.data.yellow}
+                          amount={supportValue[age]}
+                        />
+                      </Cell>
+                    </tr>
+                  ))}
+                </tbody>
+              </StyledTable>
+              <Box
+                display="flex"
+                flexWrap="wrap"
+                spacing={2}
+                spacingHorizontal={3}
+              >
+                <Box>
+                  <ExplanationBox background={colors.data.cyan} />
+                  {complianceExplanation}
+                </Box>
+                <Box>
+                  <ExplanationBox background={colors.data.yellow} />
+                  {supportExplanation}
+                </Box>
               </Box>
             </Box>
-          </Box>
-        ) : (
-          <Box
-            display="flex"
-            alignItems="center"
-            minHeight={325}
-            maxWidth={300}
-            width="100%"
-            mx="auto"
-          >
-            <Text textAlign="center" mb={0}>
-              {siteText.gedrag_leeftijden.tabel.error}
-            </Text>
-          </Box>
-        )}
+          ) : (
+            <Box
+              display="flex"
+              alignItems="center"
+              minHeight={325}
+              maxWidth={300}
+              width="100%"
+              mx="auto"
+            >
+              <Text textAlign="center">
+                {siteText.gedrag_leeftijden.tabel.error}
+              </Text>
+            </Box>
+          )}
+        </Box>
       </Box>
-    </Tile>
+    </ChartTile>
   );
 }
 
@@ -160,6 +162,8 @@ const StyledTable = styled.table(
 const HeaderCell = styled.th(
   css({
     textAlign: 'left',
+    fontWeight: 'bold',
+    verticalAlign: 'middle',
   })
 );
 
@@ -171,6 +175,7 @@ const Cell = styled.td((x) =>
     p: 0,
     py: 2,
     minHeight: 100,
+    verticalAlign: 'middle',
   })
 );
 

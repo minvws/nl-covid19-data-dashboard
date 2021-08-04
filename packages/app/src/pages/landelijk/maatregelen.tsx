@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { Box } from '~/components/base/box';
 import { RichContent } from '~/components/cms/rich-content';
 import { KpiSection } from '~/components/kpi-section';
@@ -6,7 +5,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Heading } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { LockdownTable } from '~/domain/restrictions/lockdown-table';
 import { useIntl } from '~/intl';
 // import { useEscalationLevel } from '~/utils/use-escalation-level';
@@ -78,19 +77,13 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock title={siteText.nationaal_maatregelen.titel} />
 
           {showLockdown && (
             <KpiSection flexDirection="column">
-              <Box
-                css={css({
-                  'p:last-child': {
-                    margin: '0',
-                  },
-                })}
-              >
+              <Box spacing={3}>
                 <Heading level={3}>{lockdown.message.title}</Heading>
                 {lockdown.message.description ? (
                   <RichContent blocks={lockdown.message.description} />
@@ -100,13 +93,13 @@ const NationalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           )}
 
           {showLockdown && (
-            <KpiSection display="flex" flexDirection="column">
+            <KpiSection display="flex" flexDirection="column" spacing={3}>
               <Heading level={3}>{lockdown.title}</Heading>
               <LockdownTable data={lockdown} />
             </KpiSection>
           )}
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

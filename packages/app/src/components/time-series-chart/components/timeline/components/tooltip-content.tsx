@@ -1,11 +1,9 @@
-import css from '@styled-system/css';
 import { MouseEvent, TouchEvent } from 'react';
-import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
-import { InlineText, Text } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { TimelineEventConfig } from '../logic';
@@ -58,7 +56,7 @@ export function TimelineTooltipContent({
             rotate
             title={intl.siteText.charts.timeline.prev}
           />
-          <InlineText fontSize={1} color="labelGray">
+          <InlineText variant="label1" color="labelGray">
             {dateStr}
           </InlineText>
           <ChevronButton
@@ -69,17 +67,15 @@ export function TimelineTooltipContent({
       )}
       <Box spacing={2}>
         {!isTouch && (
-          <Text fontSize={1} color="labelGray">
+          <Text variant="label1" color="labelGray">
             {dateStr}
           </Text>
         )}
 
-        <Text fontSize={1} fontWeight="bold">
+        <Text variant="label1" fontWeight="bold">
           {config.title}
         </Text>
-        <Text mb={0} fontSize={1}>
-          {config.description}
-        </Text>
+        <Text variant="label1">{config.description}</Text>
       </Box>
 
       {isTouch && (
@@ -90,28 +86,16 @@ export function TimelineTooltipContent({
           borderTopColor="lightGray"
           display="flex"
           justifyContent="center"
-          fontSize={1}
+          textVariant="label1"
         >
-          <TextButton onClick={onClose}>
+          <Anchor as="button" onClick={onClose} color="blue" underline>
             {intl.siteText.common.sluiten}
-          </TextButton>
+          </Anchor>
         </Box>
       )}
     </Box>
   );
 }
-
-const TextButton = styled.button(
-  css({
-    m: 0,
-    p: 0,
-    bg: 'transparent',
-    border: 0,
-    color: 'link',
-    textDecoration: 'underline',
-    fontSize: 'inherit',
-  })
-);
 
 function ChevronButton({
   onClick,

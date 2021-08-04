@@ -66,7 +66,7 @@ export function VaccineAdministrationsKpiSection({
                   content={text.gezette_prikken.tab_first.description}
                 />
               </Box>
-              <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }}>
+              <Box flex={{ lg: '1 1 50%' }} ml={{ lg: 4 }} spacing={3}>
                 <VaccineAdministeredItem
                   value={data.vaccine_administered_ggd.last_value.estimated}
                   description={text.gezette_prikken.estimated.ggd}
@@ -137,13 +137,13 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
 
   return (
-    <Text fontWeight="bold">
-      <InlineText css={css({ color: 'data.primary' })}>
-        {formatNumber(value)}
-      </InlineText>{' '}
-      {description}
-      <br />
-      <InlineText fontWeight="normal" fontSize={1} color="annotation">
+    <Box spacing={1}>
+      <Text fontWeight="bold">
+        <InlineText color="data.primary">{formatNumber(value)}</InlineText>
+        {' ' + description}
+      </Text>
+
+      <Text variant="label1" color="annotation">
         {replaceVariablesInText(
           isReported
             ? siteText.vaccinaties.gezette_prikken.reported_until
@@ -152,7 +152,7 @@ function VaccineAdministeredItem(props: VaccineAdministeredProps) {
             reportedDate: formatDateFromSeconds(date, 'weekday-medium'),
           }
         )}
-      </InlineText>
-    </Text>
+      </Text>
+    </Box>
   );
 }
