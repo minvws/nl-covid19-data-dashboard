@@ -15,12 +15,12 @@ import { modulo } from '~/utils/modulo';
  */
 export function useHitSelection({
   isEnabled = false,
-  maxItems = 0,
+  maxPossibleItems = 0,
   onSelectHit,
   handleOnClose,
 }: {
   isEnabled: boolean;
-  maxItems: number;
+  maxPossibleItems: number;
   onSelectHit: (index: number, openInNewWindow?: boolean) => void;
   handleOnClose: () => void;
 }) {
@@ -31,7 +31,7 @@ export function useHitSelection({
     'up',
     () => {
       const nextIndex = focusIndex - 1;
-      setFocusIndex(modulo(nextIndex, maxItems));
+      setFocusIndex(modulo(nextIndex, maxPossibleItems));
       maybeScrollIntoView(focusRef.current);
     },
     {
@@ -44,7 +44,7 @@ export function useHitSelection({
     'down',
     () => {
       const nextIndex = focusIndex + 1;
-      setFocusIndex(modulo(nextIndex, maxItems));
+      setFocusIndex(modulo(nextIndex, maxPossibleItems));
       maybeScrollIntoView(focusRef.current);
     },
     {
@@ -56,6 +56,8 @@ export function useHitSelection({
   useHotkey(
     'enter',
     () => {
+      if (maxPossibleItems === 0) return;
+
       onSelectHit(focusIndex);
     },
     { allowRepeat: true, isDisabled: !isEnabled }
@@ -73,7 +75,7 @@ export function useHitSelection({
   useHotkey(
     'end',
     () => {
-      setFocusIndex(maxItems - 1);
+      setFocusIndex(maxPossibleItems - 1);
       maybeScrollIntoView(focusRef.current);
     },
     { allowRepeat: true, isDisabled: !isEnabled }

@@ -27,18 +27,20 @@ export function SelectCountry({
 }: SelectCountryProps) {
   const containerRef = useRef(null);
   const uniqueId = useUniqueId();
-
-  useOnClickOutside([containerRef], () => setIsOpen(false));
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [inputValue, setInputValue] = useState(value);
   const [matchingCountries, setMatchingCountries] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [hasFocusState, setHasFocusState] = useState(false);
 
   const currentOption = options.filter((item) => item.value === value)[0];
 
+  const handleOnFocus = () => {
+    setIsOpen(true);
+    setInputValue('');
+  };
+
   const handleOnClose = () => {
-    setHasFocusState(false);
     setIsOpen(false);
     setInputValue(currentOption.label);
   };
@@ -48,13 +50,16 @@ export function SelectCountry({
     setIsOpen(false);
   };
 
+  useOnClickOutside([containerRef], () => handleOnClose());
+
   const { focusIndex, focusRef, setFocusIndex } = useHitSelection({
     isEnabled: isOpen,
     onSelectHit: (index) => {
+      if (inputRef.current) inputRef.current.blur();
       setIsOpen(false);
       onChange(matchingCountries[index]);
     },
-    maxItems: matchingCountries.length,
+    maxPossibleItems: matchingCountries.length,
     handleOnClose,
   });
 
@@ -66,21 +71,27 @@ export function SelectCountry({
     );
   }, [options, inputValue]);
 
+  useEffect(() => {
+    if (inputValue.length > 0 && isOpen) {
+      setIsOpen(true);
+      setFocusIndex(0);
+    }
+  }, [inputValue, setFocusIndex, isOpen]);
+
   const prefixId = `select_country_${uniqueId}`;
 
   return (
     <Box position="relative" ref={containerRef} zIndex={99}>
       <SelectCountryInput
-        inputValue={inputValue}
-        setInputValue={setInputValue}
+        prefixId={prefixId}
         currentOption={currentOption}
-        hasFocusState={hasFocusState}
-        handleOnClose={handleOnClose}
-        setHasFocusState={setHasFocusState}
-        setFocusIndex={setFocusIndex}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        prefixId={prefixId}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        handleOnClose={handleOnClose}
+        handleOnFocus={handleOnFocus}
+        inputRef={inputRef}
       />
 
       <OrderedList
@@ -139,8 +150,8 @@ const OrderedList = styled.ol<{ isOpen: boolean }>((x) =>
   css({
     display: x.isOpen ? 'block' : 'none',
     backgroundColor: 'white',
-    borderBottomLeftRadius: 2,
-    borderBottomRightRadius: 2,
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
     border: `1px solid silver`,
     borderTopColor: 'transparent',
     position: 'absolute',

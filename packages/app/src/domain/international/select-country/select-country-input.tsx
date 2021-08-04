@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { Dispatch, SetStateAction, useRef } from 'react';
+import { Dispatch, RefObject, SetStateAction } from 'react';
 import styled from 'styled-components';
 import ChevronIcon from '~/assets/chevron.svg';
 import CloseIcon from '~/assets/close.svg';
@@ -16,10 +16,9 @@ interface SelectCountryInputType {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   prefixId: string;
-  hasFocusState: boolean;
-  setHasFocusState: Dispatch<SetStateAction<boolean>>;
-  setFocusIndex: Dispatch<SetStateAction<number>>;
+  inputRef: RefObject<HTMLInputElement>;
   handleOnClose: () => void;
+  handleOnFocus: () => void;
 }
 
 export function SelectCountryInput({
@@ -27,30 +26,12 @@ export function SelectCountryInput({
   setInputValue,
   currentOption,
   isOpen,
-  setIsOpen,
   handleOnClose,
-  setHasFocusState,
   prefixId,
-  setFocusIndex,
+  handleOnFocus,
+  inputRef,
 }: SelectCountryInputType) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-
-    if (event.target.value.length > 0) {
-      setIsOpen(true);
-      setFocusIndex(0);
-    }
-  };
-
-  const handleOnFocus = () => {
-    setHasFocusState(true);
-    setIsOpen(true);
-    setInputValue('');
-  };
-
-  const handleOnBlur = () => handleOnClose();
+  const handleOnBlur = () => setTimeout(() => handleOnClose(), 100);
 
   return (
     <Box position="relative" minWidth="14rem">
@@ -75,7 +56,7 @@ export function SelectCountryInput({
         align="right"
         onClick={(evt: any) => {
           evt.stopPropagation();
-          inputRef.current?.focus();
+          if (inputRef.current) inputRef.current.focus();
           setInputValue('');
         }}
       >
@@ -114,7 +95,7 @@ export function SelectCountryInput({
       <Input
         placeholder={currentOption.label}
         value={isOpen ? inputValue : currentOption.label}
-        onChange={handleOnChange}
+        onChange={(event) => setInputValue(event.target.value)}
         ref={inputRef}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
