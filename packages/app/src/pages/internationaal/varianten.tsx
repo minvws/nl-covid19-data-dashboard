@@ -1,6 +1,4 @@
-import css from '@styled-system/css';
-import { useCallback, useState } from 'react';
-import styled from 'styled-components/';
+import { useCallback, useCallback, useState, useState } from 'react';
 import { isPresent } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { Box } from '~/components/base';
@@ -38,6 +36,7 @@ import {
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 import { LinkProps } from '~/types/cms';
+
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
   createGetStaticProps(
@@ -228,10 +227,3 @@ export default function VariantenPage(
     </Layout>
   );
 }
-
-export const FlagImage = styled.img(
-  css({
-    display: 'block',
-    ml: 1,
-  })
-);
