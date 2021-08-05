@@ -4,7 +4,7 @@ import {
   VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -40,10 +40,6 @@ export function SituationsOverviewChoroplethTile({
     { seconds: singleValue.date_start_unix },
     { seconds: singleValue.date_end_unix }
   );
-
-  useEffect(() => {
-    console.log(breakpoints.sm ? 280 : 260);
-  }, [breakpoints]);
 
   return (
     <ChartTile
