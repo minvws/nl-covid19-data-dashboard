@@ -60,6 +60,7 @@ export function VaccineDeliveryAndAdministrationsAreaChart({
                 siteText.vaccinaties.data.vaccination_chart.legend.expected,
             },
           ],
+          forcedMaximumValue: (seriesMax) => seriesMax * 1.1,
           timeAnnotations: [
             {
               type: 'divider',
