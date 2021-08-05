@@ -9,6 +9,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
+import { InternationalFlag } from '~/domain/international/international-flag';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InLayout } from '~/domain/layout/in-layout';
@@ -187,13 +188,13 @@ export default function VariantenPage(
                 onChange={onChange}
                 value={selectedCountryCode}
                 icon={
-                  <FlagImage
-                    aria-hidden
-                    src={`/icons/flags/${selectedCountryCode.toLowerCase()}.svg`}
-                    width="16"
-                    height="12"
-                    alt=""
-                  />
+                  <Box ml={1}>
+                    <InternationalFlag
+                      country_code={selectedCountryCode}
+                      width={16}
+                      height={12}
+                    />
+                  </Box>
                 }
               />
 
