@@ -35,7 +35,7 @@ export function Path({
   );
 }
 
-interface HoverPathLinkProps extends PathProps {
+export interface HoverPathLinkProps extends PathProps {
   href?: string;
   title: string;
   isTabInteractive: boolean;

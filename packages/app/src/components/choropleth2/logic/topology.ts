@@ -3,40 +3,31 @@ import * as topojson from 'topojson-client';
 import inTopology from './in.topo.json';
 import nlTopology from './nl-vr-gm.topo.json';
 
-export type BasicGeoProperties = {
+export type CodedGeoProperties = {
   code: string;
 };
 
-export type NamedBasicGeoProperties = {
-  name: string;
-} & BasicGeoProperties;
-
-export type NlGeoJSON = FeatureCollection<
+export type CodedGeoJSON = FeatureCollection<
   MultiPolygon | Polygon,
-  NamedBasicGeoProperties
->;
-
-export type InGeoJSON = FeatureCollection<
-  MultiPolygon | Polygon,
-  BasicGeoProperties
+  CodedGeoProperties
 >;
 
 export const nlGeo = topojson.feature(
   nlTopology,
   nlTopology.objects.nl_features
-) as FeatureCollection<MultiPolygon>;
+) as CodedGeoJSON;
 
 export const vrGeo = topojson.feature(
   nlTopology,
   nlTopology.objects.vr_features
-) as NlGeoJSON;
+) as CodedGeoJSON;
 
 export const gmGeo = topojson.feature(
   nlTopology,
   nlTopology.objects.gm_features
-) as NlGeoJSON;
+) as CodedGeoJSON;
 
 export const inGeo = topojson.feature(
   inTopology,
   inTopology.objects.in_features
-) as InGeoJSON;
+) as CodedGeoJSON;

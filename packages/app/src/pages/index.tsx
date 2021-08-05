@@ -2,6 +2,7 @@ import {
   EscalationLevels,
   GmCollectionTestedOverall,
   GmGeoProperties,
+  GmHospitalNiceValue,
   VrCollectionTestedOverall,
   VrGeoProperties,
 } from '@corona-dashboard/common';
@@ -26,6 +27,7 @@ import {
   VrEscalationTooltip,
   VrPositiveTestedPeopleTooltip,
 } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth2';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -134,6 +136,20 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 href: reverseRouter.nl.index(),
               }}
             />
+
+            <Box>
+              <Choropleth
+                map="gm"
+                data={[] as GmHospitalNiceValue[]}
+                dataConfig={{
+                  metricProperty: 'admissions_on_date_of_admission',
+                }}
+                dataOptions={{
+                  getLink: () => 'link',
+                }}
+                tooltipContent={() => 'tooltip'}
+              />
+            </Box>
 
             <Box width={{ lg: '65%' }}>
               <Search />

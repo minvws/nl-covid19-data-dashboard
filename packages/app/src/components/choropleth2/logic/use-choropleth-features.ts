@@ -1,26 +1,12 @@
-import { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 import { MapType } from '~/components/choropleth2';
-import {
-  BasicGeoProperties,
-  gmGeo,
-  inGeo,
-  NamedBasicGeoProperties,
-  nlGeo,
-  vrGeo,
-} from './topology';
+import { CodedGeoJSON, gmGeo, inGeo, nlGeo, vrGeo } from './topology';
 
 export type FeatureType = keyof ChoroplethFeatures;
 
 export type ChoroplethFeatures = {
-  outline?: FeatureCollection<MultiPolygon>;
-  hover: FeatureCollection<
-    MultiPolygon | Polygon,
-    BasicGeoProperties | NamedBasicGeoProperties
-  >;
-  area: FeatureCollection<
-    MultiPolygon | Polygon,
-    BasicGeoProperties | NamedBasicGeoProperties
-  >;
+  outline?: CodedGeoJSON;
+  hover: CodedGeoJSON;
+  area: CodedGeoJSON;
 };
 
 export function useChoroplethFeatures(map: MapType): ChoroplethFeatures {
