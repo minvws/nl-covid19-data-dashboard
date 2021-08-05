@@ -7,5 +7,12 @@ import NextLink, { LinkProps } from 'next/link';
 
 export function Link(props: LinkProps & { children?: React.ReactNode }) {
   const { locale = false } = props;
-  return <NextLink {...props} scroll={props.scroll ?? false} locale={locale} />;
+  return (
+    <NextLink
+      {...props}
+      prefetch={false}
+      scroll={props.scroll ?? false}
+      locale={locale}
+    />
+  );
 }
