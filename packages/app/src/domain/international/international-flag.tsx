@@ -20,7 +20,7 @@ export function InternationalFlag({
       alt=""
       css={css({
         border: '1px solid',
-        borderColor: 'lightGrey',
+        borderColor: 'lightGray',
       })}
     />
   );
