@@ -1,12 +1,9 @@
 import css from '@styled-system/css';
-import styled from 'styled-components';
-import { sampleSize } from 'lodash';
 import React from 'react';
-import { ResponsiveValue } from 'styled-system';
+import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
 /** We use the screenreaderCategory so when it reads the first H1 on the page.
