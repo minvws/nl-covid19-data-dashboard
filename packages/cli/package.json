@@ -30,7 +30,7 @@
     "validate-last-values": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-last-values.ts",
     "validate-features": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-features.ts",
     "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts",
-    "generate-sitemap": "ts-node src/scripts/generate-sitemap.ts",
+    "generate-sitemap": "echo 'generate-sitemap is deprecated' && exit 1",
     "strip-unused-locale-keys": "yarn workspace @corona-dashboard/cms lokalize:export && ts-node src/locale/strip-unused-locale-keys.ts && yarn workspace @corona-dashboard/cms lokalize:export && yarn workspace @corona-dashboard/app compile"
   },
   "devDependencies": {

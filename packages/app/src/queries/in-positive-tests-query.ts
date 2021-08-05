@@ -1,6 +1,4 @@
-export function getInPositiveTestsQuery() {
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
-
+export function getInPositiveTestsQuery(locale: string) {
   return `
   *[_type=='in_positiveTestsPage']{
     "usefulLinks": [...pageLinks[]{

@@ -10,7 +10,7 @@ import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { getVaccinePageQuery } from '~/queries/variants-page-query';
+import { getVariantsPageQuery } from '~/queries/variants-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -33,8 +33,8 @@ export const getStaticProps = withFeatureNotFoundPage(
   'nlVariantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    () => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    (context) => {
+      const { locale = 'nl' } = context;
       const siteText = getLocaleFile(locale);
       const data = selectNlPageMetricData('variants')();
       const variants = data.selectedNlData.variants;
@@ -62,10 +62,10 @@ export const getStaticProps = withFeatureNotFoundPage(
       highlight: {
         articles?: ArticleSummary[];
       };
-    }>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    }>((context) => {
+      const { locale = 'nl' } = context;
       return `{
-        "page": ${getVaccinePageQuery()},
+        "page": ${getVariantsPageQuery(locale)},
         "highlight": ${createPageArticlesQuery('variantsPage', locale)}
       }`;
     })

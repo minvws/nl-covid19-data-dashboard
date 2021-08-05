@@ -60,8 +60,8 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     fix_this: ArticlesQueryResult;
     elements: ElementsQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
 
     return `{
       "fix_this": ${createPageArticlesQuery('hospitalPage', locale)},

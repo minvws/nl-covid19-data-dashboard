@@ -8,8 +8,6 @@ import Document, {
 import { ServerStyleSheet } from 'styled-components';
 import xss from 'xss';
 
-const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     /**
@@ -43,7 +41,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang={locale} className="has-no-js">
+      <Html className="has-no-js">
         <Head>
           <script src="/init.js" />
           <Fonts />

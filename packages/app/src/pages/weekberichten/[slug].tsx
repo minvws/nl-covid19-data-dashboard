@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router';
 import { Box } from '~/components/base';
 import { EditorialDetail } from '~/components/editorial-detail';
-import { getClient, getImageSrc, localize } from '~/lib/sanity';
+import { Layout } from '~/domain/layout/layout';
+import { getClient, getImageSrc } from '~/lib/sanity';
 import {
   createGetStaticProps,
   StaticProps,
@@ -11,23 +13,25 @@ import {
 } from '~/static-props/get-data';
 import { Block, Editorial, RichContentBlock } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { Layout } from '~/domain/layout/layout';
 
 const editorialsQuery = `*[_type == 'editorial'] {"slug":slug.current}`;
 
 export async function getStaticPaths() {
-  //@TODO THIS NEED TO COME FROM CONTEXT
-  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-
   const editorialData = await (await getClient()).fetch(editorialsQuery);
-  const editorials = localize<{ slug: string }[]>(editorialData, [
-    locale,
-    'nl',
-  ]);
 
-  const paths = editorials.map((editorial) => ({
-    params: { slug: editorial.slug },
-  }));
+  /**
+   * getStaticPaths needs explicit locale routes to function properly...
+   */
+  const paths = editorialData.flatMap((editorial: { slug: string }) => [
+    {
+      params: { slug: editorial.slug },
+      locale: 'en',
+    },
+    {
+      params: { slug: editorial.slug },
+      locale: 'nl',
+    },
+  ]);
 
   // { fallback: false } means other routes should 404.
   return { paths, fallback: false };
@@ -36,11 +40,9 @@ export async function getStaticPaths() {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Editorial>((context) => {
-    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    // const { locale } = context;
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+    const { locale = 'nl' } = context;
 
-    assert(context?.params?.slug, 'Slug required to retrieve article');
+    assert(context.params?.slug, 'Slug required to retrieve article');
     return `
       *[_type == 'editorial' && slug.current == '${context.params.slug}'][0]{
         ...,
@@ -81,11 +83,12 @@ const EditorialDetailPage = (props: StaticProps<typeof getStaticProps>) => {
   const { content, lastGenerated } = props;
   const { cover } = props.content;
   const { asset } = cover;
+  const { locale = 'nl' } = useRouter();
 
   const imgPath = getImageSrc(asset, 1200);
 
   const metadata = {
-    title: getTitle(props.content.title),
+    title: getTitle(props.content.title, locale),
     description: toPlainText(props.content.intro),
     openGraphImage: imgPath,
     twitterImage: imgPath,
@@ -102,9 +105,9 @@ const EditorialDetailPage = (props: StaticProps<typeof getStaticProps>) => {
 
 export default EditorialDetailPage;
 
-function getTitle(title: string) {
+function getTitle(title: string, locale: string) {
   const suffix =
-    process.env.NEXT_PUBLIC_LOCALE === 'nl'
+    locale === 'nl'
       ? 'Dashboard Coronavirus | Rijksoverheid.nl'
       : 'Dashboard Coronavirus | Government.nl';
 

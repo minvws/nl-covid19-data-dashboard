@@ -32,8 +32,8 @@ export const getStaticProps = createGetStaticProps(
   selectVrPageMetricData('sewer_per_installation', 'sewer'),
   createGetContent<{
     articles?: ArticleSummary[];
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('sewerPage', locale);
   })
 );

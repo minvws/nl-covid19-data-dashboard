@@ -1,5 +1,7 @@
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+require('@next/env').loadEnvConfig('./');
+
 const withPlugins = require('next-compose-plugins');
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -19,6 +21,29 @@ const nextConfig = {
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
    */
   reactStrictMode: true,
+
+  i18n: {
+    // These are all the locales you want to support in
+    // your application
+    locales: ['nl', 'en'],
+    // This is the default locale you want to be used when visiting
+    // a non-locale prefixed path e.g. `/hello` or a (sub)domain that's not mapped to a locale.
+    defaultLocale: 'nl',
+    // When localeDetection is set to false Next.js will no longer automatically
+    // redirect based on the user's preferred locale and will only provide locale information
+    // detected from either the locale based domain or locale path as described above.
+    localeDetection: false,
+
+    /**
+     * Configure english domain when it's available on the environment variables
+     */
+    domains: [
+      {
+        domain: process.env.DOMAIN_EN ?? 'coronadashboard.government.nl',
+        defaultLocale: 'en',
+      },
+    ],
+  },
 
   /**
    * Enable source maps in production, because we want people to report readable

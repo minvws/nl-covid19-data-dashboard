@@ -34,14 +34,18 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const router = useRouter();
 
-  // const { locale = 'nl' } = useRouter(); // if we replace this with process.env.NEXT_PUBLIC_LOCALE, next export should still be possible?
-  const locale = (process.env.NEXT_PUBLIC_LOCALE || 'nl') as LanguageKey;
-
-  const [text, toggleHotReloadButton, dataset] = useLokalizeText(locale);
+  const { locale = 'nl' } = useRouter();
+  const [text, toggleHotReloadButton, dataset] = useLokalizeText(
+    locale as LanguageKey
+  );
 
   assert(text, `Encountered unknown language: ${locale}`);
 
-  const intlContext = useIntlHelperContext(locale, text, dataset);
+  const intlContext = useIntlHelperContext(
+    locale as LanguageKey,
+    text,
+    dataset
+  );
 
   useEffect(() => {
     const handleRouteChange = (pathname: string) => {

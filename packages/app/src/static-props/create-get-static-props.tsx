@@ -138,7 +138,9 @@ export function createGetStaticProps(
 
     const props = promisedProps.reduce((res, val) => ({ ...res, ...val }), {});
 
-    return { props };
+    return {
+      props,
+    };
   };
 }
 

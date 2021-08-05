@@ -1,14 +1,54 @@
 import { assert } from '@corona-dashboard/common';
 import sanityClient from '@sanity/client';
-import fs from 'fs';
 import globby from 'globby';
-import path from 'path';
-import prettier from 'prettier';
-import { features } from '../../../app/src/config/features';
-import { gmData } from '../../../app/src/data/gm';
-import { vrData } from '../../../app/src/data/vr';
-import { logError } from '../utils';
-require('dotenv').config({ path: '../app/.env.local' });
+import { renderToStaticMarkup } from 'react-dom/server';
+import { features } from '~/config';
+import { gmData } from '~/data/gm';
+import { vrData } from '~/data/vr';
+
+const SitemapIndex = () => null;
+
+const Sitemap = ({
+  pages,
+  origin,
+}: {
+  pages: { path: string; priority: number }[];
+  origin: string;
+}) => {
+  return (
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      {pages?.map((page, index) => {
+        return (
+          <url key={index}>
+            <loc>{[origin, page.path].join('')}</loc>
+            <priority>{page.priority}</priority>
+          </url>
+        );
+      })}
+    </urlset>
+  );
+};
+
+export const getServerSideProps = async ({
+  res,
+  locale,
+}: {
+  res: any;
+  locale: string;
+}) => {
+  const domain = locale === 'en' ? 'government.nl' : 'rijksoverheid.nl';
+  const origin = `https://coronadashboard.${domain}`;
+
+  const pages = await getAllPathsWithPriorities();
+
+  res.setHeader('Content-Type', 'text/xml');
+  res.write(renderToStaticMarkup(<Sitemap pages={pages} origin={origin} />));
+  res.end();
+
+  return {
+    props: {},
+  };
+};
 
 const disabledRoutes = features
   .filter((x) => x.isEnabled === false)
@@ -17,15 +57,7 @@ const disabledRoutes = features
 const vrCodes = vrData.map((x) => x.code);
 const gmCodes = gmData.map((x) => x.gemcode);
 
-const publicOutputDirectory = path.resolve(
-  __dirname,
-  '..', // src
-  '..', // cli
-  '..', // packages
-  'app/public'
-);
-
-async function main() {
+async function getAllPathsWithPriorities() {
   assert(
     process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     'Missing NEXT_PUBLIC_SANITY_PROJECT_ID env var'
@@ -38,11 +70,7 @@ async function main() {
     apiVersion: '2021-03-25',
   };
 
-  const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-
   const client = sanityClient(config);
-
-  console.log(`Generating sitemap for locale '${locale}'`);
 
   const slugsQuery = `{
     'articles': *[_type == 'article'] {"slug":slug.current},
@@ -54,13 +82,10 @@ async function main() {
     editorials: { slug: string }[];
   };
 
-  const domain = `${
-    process.env.NEXT_PUBLIC_LOCALE === 'en' ? 'government' : 'rijksoverheid'
-  }`;
-
   // Ignore Next.js specific files and API routes.
   const pages = await globby([
     '../app/src/pages/**/*{.tsx,.mdx}',
+    '!../app/src/pages/sitemap.xml.tsx',
     '!../app/src/pages/404.tsx',
     '!../app/src/pages/500.tsx',
     '!../app/src/pages/_*.tsx',
@@ -138,44 +163,11 @@ async function main() {
     });
   });
 
-  const sitemap = `
-    <?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-      <url>
-        <loc>${`https://coronadashboard.${domain}.nl/`}</loc>
-        <priority>1.00</priority>
-      </url>
-      ${allPathsWithPriorities
-        .map(
-          (p) => `
-                <url>
-                    <loc>${`https://coronadashboard.${domain}.nl${p.path}`}</loc>
-                    <priority>${p.priority}</priority>
-                </url>
-            `
-        )
-        .join('')}
-    </urlset>
-  `;
-
-  console.log('Writing sitemap to ', publicOutputDirectory, sitemap);
-
-  fs.writeFileSync(
-    path.join(publicOutputDirectory, 'sitemap.xml'),
-    prettier.format(sitemap, { parser: 'html' })
-  );
+  return allPathsWithPriorities;
 }
 
 function isParameterizedPath(path: string) {
   return ['code', 'slug'].some((fragment) => path.includes(fragment));
 }
 
-main().then(
-  () => process.exit(0),
-  (err: Error) => {
-    logError(err.message);
-    process.exit(1);
-  }
-);
+export default SitemapIndex;

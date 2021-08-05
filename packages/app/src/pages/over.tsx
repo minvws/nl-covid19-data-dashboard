@@ -20,10 +20,8 @@ interface OverData {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<OverData>((_context) => {
-    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    // const { locale } = context;
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+  createGetContent<OverData>((context) => {
+    const { locale = 'nl' } = context;
     return `
     *[_type == 'overDitDashboard']{
       ...,

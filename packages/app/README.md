@@ -26,10 +26,6 @@ If you want to change locale from `nl` - the default - to `en`, you need to make
 
 **.env.local**
 
-```
-NEXT_PUBLIC_LOCALE=en
-```
-
 The sitemap is dynamically generated when Next.js builds. To improve developer experience, this can be disabled using the `DISABLE_SITEMAP=1` environment variable.
 
 Run `yarn` to install all required packages.
