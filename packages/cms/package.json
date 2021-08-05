@@ -11,7 +11,6 @@
     "test:ci": "yarn run test",
     "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
-    "sync-assets": "ts-node -r dotenv-flow/config scripts/sync-assets.ts",
     "lokalize:export": "ts-node src/lokalize/export.ts",
     "lokalize:apply-json-edits": "ts-node src/lokalize/apply-json-edits.ts",
     "lokalize:generate-types": "ts-node src/lokalize/generate-types.ts",

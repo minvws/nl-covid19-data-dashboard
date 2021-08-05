@@ -31,8 +31,8 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('deceasedPage', locale);
   })
 );

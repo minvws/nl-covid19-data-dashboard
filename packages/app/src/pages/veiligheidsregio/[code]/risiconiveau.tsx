@@ -55,8 +55,8 @@ export const getStaticProps = createGetStaticProps(
     'hospital_nice_sum',
     'tested_overall_sum'
   ),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('escalationLevelPage', locale);
   })
 );

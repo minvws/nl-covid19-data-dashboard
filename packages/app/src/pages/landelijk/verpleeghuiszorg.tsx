@@ -45,8 +45,8 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ nursing_home }) => ({ nursing_home }),
   }),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('nursingHomePage', locale);
   })
 );

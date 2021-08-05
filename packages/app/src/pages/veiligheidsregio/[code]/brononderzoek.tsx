@@ -37,8 +37,8 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     selectVrPageMetricData('situations'),
-    createGetContent<PageArticlesQueryResult>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    createGetContent<PageArticlesQueryResult>((context) => {
+      const { locale = 'nl' } = context;
       return createPageArticlesQuery('situationsPage', locale);
     })
   )

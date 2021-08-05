@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { ArticleSummary, ArticleTeaser } from '~/components/article-teaser';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import {
   articleCategory,
   ArticleCategoryType,
@@ -50,6 +50,7 @@ export function ArticleList({
                 [768, 445],
               ]}
             />
+            <Spacer mb={4} />
           </ArticleBox>
         ))}
     </Box>
@@ -58,6 +59,7 @@ export function ArticleList({
 
 export const ArticleBox = styled.div(
   css({
+    marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',
       sm: 'calc(50% - 16px)',
