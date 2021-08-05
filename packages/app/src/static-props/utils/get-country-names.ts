@@ -1,7 +1,8 @@
+import { GetStaticPropsContext } from 'next';
 import { loadJsonFromDataFile } from './load-json-from-data-file';
 
-export function getCountryNames() {
-  const locale = process.env.NEXT_PUBLIC_LOCALE ?? 'nl';
+export function getCountryNames(context: GetStaticPropsContext) {
+  const { locale = 'nl' } = context;
 
   const names = loadJsonFromDataFile<Record<string, string>>(
     `${locale}-country-names.json`,

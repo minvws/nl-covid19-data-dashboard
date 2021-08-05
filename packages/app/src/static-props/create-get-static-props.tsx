@@ -138,7 +138,13 @@ export function createGetStaticProps(
 
     const props = promisedProps.reduce((res, val) => ({ ...res, ...val }), {});
 
-    return { props };
+    return {
+      props,
+      /**
+       * @TODO revalidation should be disabled for now.
+       * revalidate: 1,
+       */
+    };
   };
 }
 

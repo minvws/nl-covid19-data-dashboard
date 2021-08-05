@@ -27,8 +27,8 @@ import { colors } from '~/style/theme';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('infectiousPeoplePage', locale);
   })
 );

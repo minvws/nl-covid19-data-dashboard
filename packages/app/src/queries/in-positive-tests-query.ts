@@ -1,5 +1,7 @@
-export function getInPositiveTestsQuery() {
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
+import { GetStaticPropsContext } from 'next';
+
+export function getInPositiveTestsQuery(context: GetStaticPropsContext) {
+  const { locale = 'nl' } = context;
 
   return `
   *[_type=='in_positiveTestsPage']{

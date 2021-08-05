@@ -32,8 +32,8 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('deceasedPage', locale);
   })
 );

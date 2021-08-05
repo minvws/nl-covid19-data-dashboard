@@ -1,7 +1,7 @@
-export function getVaccinePageQuery() {
-  //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-  // const { locale } = context;
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
+import { GetStaticPropsContext } from 'next';
+
+export function getVariantsPageQuery(context: GetStaticPropsContext) {
+  const { locale = 'nl' } = context;
 
   return `
   *[_type=='variantsPage']{
