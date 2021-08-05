@@ -61,7 +61,7 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
 
       {article.categories && (
         <ContentBlock>
-          <Box pb={3} pt={3}>
+          <Box pb={2} pt={4}>
             <InlineText color="annotation">
               {siteText.common_actueel.secties.artikelen.tags}
             </InlineText>
@@ -106,7 +106,7 @@ const TagAnchor = styled.a(
   css({
     display: 'block',
     border: '2px solid transparent',
-    mb: 2,
+    mb: 3,
     px: 3,
     py: 2,
     backgroundColor: 'buttonLightBlue',
