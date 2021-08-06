@@ -1,7 +1,7 @@
 import { GetStaticPropsContext } from 'next';
 
 export function getTopicalPageQuery(context: GetStaticPropsContext) {
-  const { locale = 'nl' } = context;
+  const { locale } = context;
 
   return /* groq */ `{
     // Retrieve the latest 3 articles with the highlighted article filtered out:

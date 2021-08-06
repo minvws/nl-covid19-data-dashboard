@@ -29,7 +29,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(),
   createGetContent<MaatregelenData>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `
     {
       'lockdown': *[_type == 'lockdown']{

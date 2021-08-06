@@ -33,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('deceasedPage', locale);
   })
 );

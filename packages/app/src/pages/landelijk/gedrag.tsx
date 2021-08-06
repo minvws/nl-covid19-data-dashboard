@@ -40,7 +40,7 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ behavior }) => ({ behavior }),
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('behaviorPage', locale);
   })
 );

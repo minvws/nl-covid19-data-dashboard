@@ -56,7 +56,7 @@ export const getStaticProps = createGetStaticProps(
     'tested_overall_sum'
   ),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('escalationLevelPage', locale);
   })
 );

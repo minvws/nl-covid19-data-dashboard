@@ -32,7 +32,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       }),
     }),
     createGetContent<PageArticlesQueryResult>((context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       return createPageArticlesQuery('situationsPage', locale);
     })
   )

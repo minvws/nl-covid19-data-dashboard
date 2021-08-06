@@ -51,7 +51,7 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ sewer }) => ({ sewer }),
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
   })
 );

@@ -1,7 +1,7 @@
 import { GetStaticPropsContext } from 'next';
 
 export function getVariantsPageQuery(context: GetStaticPropsContext) {
-  const { locale = 'nl' } = context;
+  const { locale } = context;
 
   return `
   *[_type=='variantsPage']{

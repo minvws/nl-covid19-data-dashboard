@@ -28,7 +28,7 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<ArticleSummary[]>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
 
     return `*[_type == 'article'] | order(publicationDate desc) {
         "title":title.${locale},

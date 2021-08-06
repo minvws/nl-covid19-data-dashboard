@@ -46,7 +46,7 @@ export const getStaticProps = withFeatureNotFoundPage(
         articles?: ArticleSummary[];
       };
     }>((context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       return `{
         "page": ${getVariantsPageQuery(context)},
         "highlight": ${createPageArticlesQuery('variantsPage', locale)}

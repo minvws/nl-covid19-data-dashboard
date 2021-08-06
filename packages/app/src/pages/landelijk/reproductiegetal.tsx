@@ -28,7 +28,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('reproductionPage', locale);
   })
 );

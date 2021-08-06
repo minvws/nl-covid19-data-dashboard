@@ -18,7 +18,7 @@ export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const router = useRouter();
 
-  const { locale = 'nl' } = useRouter();
+  const { locale } = router;
 
   const [text, toggleHotReloadButton, dataset] = useLokalizeText(
     locale as LanguageKey
