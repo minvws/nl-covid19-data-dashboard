@@ -13,7 +13,7 @@ import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
-import { getVaccinePageQuery } from '~/queries/variants-page-query';
+import { getVariantsPageQuery } from '~/queries/variants-page-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -45,10 +45,10 @@ export const getStaticProps = withFeatureNotFoundPage(
       highlight: {
         articles?: ArticleSummary[];
       };
-    }>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    }>((context) => {
+      const { locale = 'nl' } = context;
       return `{
-        "page": ${getVaccinePageQuery()},
+        "page": ${getVariantsPageQuery(context)},
         "highlight": ${createPageArticlesQuery('variantsPage', locale)}
       }`;
     })

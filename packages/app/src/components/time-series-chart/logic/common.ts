@@ -2,7 +2,7 @@ import { TimelineEventConfig } from '../components/timeline';
 
 export interface DataOptions {
   valueAnnotation?: string;
-  forcedMaximumValue?: number;
+  forcedMaximumValue?: number | ((x: number) => number);
   isPercentage?: boolean;
   benchmark?: BenchmarkConfig;
   timespanAnnotations?: TimespanAnnotationConfig[];

@@ -74,8 +74,12 @@ export function SelectCountriesResults() {
           </StyledHitList>
         ) : (
           <StyledNoHits>
-            <Text>{siteText.select_countries.no_countries_found}</Text>
-            <Text>{siteText.select_countries.no_countries_found_hint}</Text>
+            <Text variant="label1">
+              {siteText.select_countries.no_countries_found}
+            </Text>
+            <Text variant="label1">
+              {siteText.select_countries.no_countries_found_hint}
+            </Text>
           </StyledNoHits>
         )}
       </StyledCountriesList>
@@ -112,7 +116,7 @@ const StyledNoHits = styled.div(
   css({
     color: 'gray',
     textAlign: 'center',
-    p: 3,
+    p: 4,
   })
 );
 

@@ -1,7 +1,7 @@
 import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
-import { first, last } from 'lodash';
+import { first, isFunction, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
@@ -220,7 +220,9 @@ export function TimeSeriesChart<
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
-    ? forcedMaximumValue
+    ? isFunction(forcedMaximumValue)
+      ? forcedMaximumValue(calculatedSeriesMax)
+      : forcedMaximumValue
     : calculatedSeriesMax;
 
   const {

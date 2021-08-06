@@ -52,8 +52,8 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
 
     return `{
       "page": ${createPageArticlesQuery('hospitalPage', locale)},

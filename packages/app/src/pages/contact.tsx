@@ -21,8 +21,9 @@ interface ContactData {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<ContactData>((_context) => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+  createGetContent<ContactData>((context) => {
+    const { locale = 'nl' } = context;
+
     return `*[_type == 'contact']{
       title,
       "description": {
