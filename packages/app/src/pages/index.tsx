@@ -2,7 +2,6 @@ import {
   EscalationLevels,
   GmCollectionTestedOverall,
   GmGeoProperties,
-  GmHospitalNiceValue,
   VrCollectionTestedOverall,
   VrGeoProperties,
 } from '@corona-dashboard/common';
@@ -140,9 +139,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <Box>
               <Choropleth
                 map="gm"
-                data={[] as GmHospitalNiceValue[]}
+                data={choropleth.gm.tested_overall}
                 dataConfig={{
-                  metricProperty: 'admissions_on_date_of_admission',
+                  metricProperty: 'infected_per_100k',
                 }}
                 dataOptions={{
                   getLink: () => 'link',

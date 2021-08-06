@@ -1,43 +1,34 @@
-import { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
+import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import Projection from '@visx/geo/lib/projections/Projection';
+import Projection, {
+  ParsedFeature,
+} from '@visx/geo/lib/projections/Projection';
 import { ProjectionPreset } from '@visx/geo/lib/types';
 import { GeoProjection } from 'd3-geo';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
-import { ReactNode, useRef } from 'react';
+import { FocusEvent, ReactNode, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useUniqueId } from '~/utils/use-unique-id';
+import { Box } from '../base';
+import { HoverPathLink, Path } from './components/path';
 import {
-  HoverPathLink,
-  HoverPathLinkProps,
-  Path,
-  PathProps,
-} from './components/path';
-import { CodedGeoProperties, useChoroplethFeatures } from './logic';
-import { useTabInteractiveButton } from './logic/use-tab-interactive-button';
+  ChoroplethDataItem,
+  CHOROPLETH_ASPECT_RATIO,
+  CodedGeoProperties,
+  FitExtent,
+  InferredDataItem,
+  MapType,
+  useChoroplethData,
+  useChoroplethFeatures,
+  useFeatureProps,
+  useFillColor,
+  useTabInteractiveButton,
+} from './logic';
 import { ChoroplethTooltipPlacement } from './tooltips';
-
-/**
- * Sets the projection’s scale and translate to fit the specified GeoJSON object in the center of the given extent.
- * The extent is specified as an array [[x₀, y₀], [x₁, y₁]], where x₀ is the left side of the bounding box,
- * y₀ is the top, x₁ is the right and y₁ is the bottom.
- *
- * (Description taken from ProjectionProps.fitExtent in @visx/Projection.d.ts)
- */
-type FitExtent = [[[number, number], [number, number]], any];
-
-export enum CHOROPLETH_ASPECT_RATIO {
-  nl = 1 / 1.2,
-  in = 1 / 0.775,
-}
-
-export type MapType = 'gm' | 'vr' | 'in';
-
-export type CodeType = 'gmcode' | 'vrcode' | 'country_code';
 
 type DataOptions = {
   getLink: (code: string) => string;
@@ -45,31 +36,33 @@ type DataOptions = {
   selectedCode?: string;
 };
 
-type DataConfig<T extends TimestampedValue> = {
+type OptionalDataConfig<T extends ChoroplethDataItem> = {
   metricProperty: KeysOfType<T, number, true>;
   noDataFillColor?: string;
+  hoverStroke?: string;
+  hoverStrokeWidth?: number;
 };
 
-type NamedValue = {
-  name: string;
-};
+export type DataConfig<T extends ChoroplethDataItem> = Required<
+  OptionalDataConfig<T>
+>;
 
-type ChoroplethProps<T extends TimestampedValue> = {
-  data: T[];
-  dataConfig: DataConfig<T>;
+type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
+  data: K[];
+  dataConfig: OptionalDataConfig<K>;
   dataOptions: DataOptions;
-  map: MapType;
-  tooltipContent: (context: T & NamedValue) => ReactNode;
+  map: T;
+  tooltipContent: (context: InferredDataItem<T>) => ReactNode;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
 };
 
-export function Choropleth<T extends TimestampedValue>(
-  props: ChoroplethProps<T>
+export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
+  props: ChoroplethProps<T, K>
 ) {
   const {
-    data,
-    dataConfig,
+    data: originalData,
+    dataConfig: originalDataConfig,
     dataOptions,
     map,
     minHeight = 500,
@@ -77,18 +70,33 @@ export function Choropleth<T extends TimestampedValue>(
     tooltipPlacement,
   } = props;
 
+  const dataConfig: DataConfig<K> = {
+    metricProperty: originalDataConfig.metricProperty,
+    noDataFillColor: originalDataConfig.noDataFillColor ?? 'white',
+    hoverStroke: originalDataConfig.hoverStroke ?? colors.silver,
+    hoverStrokeWidth: originalDataConfig.hoverStrokeWidth ?? 3,
+  };
+
+  const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
+
   const aspectRatio =
     map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
   const mapProjection = map === 'in' ? 'mercator' : 'mercator';
 
   const { siteText } = useIntl();
+  const hoverRef = useRef<SVGGElement>(null);
   const clipPathId = useUniqueId();
+
   const [
     containerRef,
     { width = minHeight * (1 / aspectRatio), height = minHeight },
   ] = useResizeObserver<HTMLDivElement>();
-  const choroplethFeatures = useChoroplethFeatures(map);
-  const hoverRef = useRef<SVGGElement>(null);
+
+  const choroplethFeatures = useChoroplethFeatures(
+    map,
+    dataOptions.selectedCode
+  );
+
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
       replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
@@ -96,90 +104,105 @@ export function Choropleth<T extends TimestampedValue>(
       })
     );
 
+  const getFillColor = useFillColor(
+    data,
+    map,
+    dataConfig.metricProperty,
+    dataConfig
+  );
+
+  const { area, outline, hover } = useFeatureProps(map, getFillColor);
+
   const fitExtent: FitExtent = [
     [
       [0, 0],
       [width, height],
     ],
-    choroplethFeatures.area,
+    choroplethFeatures.boundingBox,
   ];
 
-  const getAreaFill = () => 'white';
-  const getAreaStroke = () => 'black';
-  const getAreaStrokeWidth = () => 1;
-
   return (
-    <div
-      ref={containerRef}
-      style={{
-        minHeight,
-        maxHeight: '75vh',
-        maxWidth: '100%',
-      }}
-    >
-      <svg
-        role="img"
-        width={width}
-        viewBox={`0 0 ${width} ${height}`}
-        css={css({ display: 'block', bg: 'transparent', width: '100%' })}
+    <Box position="relative" height="100%">
+      {tabInteractiveButton}
+      <div
+        css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
       >
-        <clipPath id={clipPathId}>
-          <rect x={0} y={0} height={height} width={width} />
-        </clipPath>
-        <rect x={0} y={0} width={width} height={height} fill={'none'} rx={14} />
-        <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
-          <MercatorGroup
-            projection={mapProjection}
-            data={choroplethFeatures.area.features}
-            fillMethod={getAreaFill}
-            strokeMethod={getAreaStroke}
-            strokeWidthMethod={getAreaStrokeWidth}
-            fitExtent={fitExtent}
-            PathComponent={Path}
-          />
-          {isDefined(choroplethFeatures.outline) && (
-            <g css={css({ pointerEvents: 'none' })}>
+        <div
+          ref={containerRef}
+          style={{
+            minHeight,
+            maxHeight: '75vh',
+            maxWidth: '100%',
+          }}
+        >
+          <svg
+            role="img"
+            width={width}
+            viewBox={`0 0 ${width} ${height}`}
+            css={css({ display: 'block', bg: 'transparent', width: '100%' })}
+          >
+            <clipPath id={clipPathId}>
+              <rect x={0} y={0} height={height} width={width} />
+            </clipPath>
+            <rect
+              x={0}
+              y={0}
+              width={width}
+              height={height}
+              fill={'none'}
+              rx={14}
+            />
+            <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
               <MercatorGroup
                 projection={mapProjection}
-                data={choroplethFeatures.outline.features}
-                fillMethod={() => 'none'}
-                strokeMethod={() => colors.silver}
-                strokeWidthMethod={() => 0.5}
+                data={choroplethFeatures.area.features}
+                fillMethod={area.fill}
+                strokeMethod={area.stroke}
+                strokeWidthMethod={area.strokeWidth}
                 fitExtent={fitExtent}
-                PathComponent={Path}
               />
+              {isDefined(choroplethFeatures.outline) && (
+                <g css={css({ pointerEvents: 'none' })}>
+                  <MercatorGroup
+                    projection={mapProjection}
+                    data={choroplethFeatures.outline.features}
+                    fillMethod={outline.fill}
+                    strokeMethod={outline.stroke}
+                    strokeWidthMethod={outline.strokeWidth}
+                    fitExtent={fitExtent}
+                  />
+                </g>
+              )}
+              <g ref={hoverRef}>
+                <MercatorHoverGroup
+                  projection={mapProjection}
+                  data={choroplethFeatures.hover.features}
+                  fillMethod={hover.fill}
+                  strokeMethod={hover.stroke}
+                  strokeWidthMethod={hover.strokeWidth}
+                  fitExtent={fitExtent}
+                  isTabInteractive={isTabInteractive}
+                  getTitle={() => 'title'}
+                  getHref={() => 'http://google.com'}
+                  {...anchorEventHandlers}
+                />
+              </g>
             </g>
-          )}
-          {isDefined(choroplethFeatures.hover) && (
-            <g ref={hoverRef}>
-              <MercatorGroup
-                projection={mapProjection}
-                data={choroplethFeatures.hover.features}
-                fillMethod={() => 'none'}
-                strokeMethod={() => colors.silver}
-                strokeWidthMethod={() => 0.5}
-                fitExtent={fitExtent}
-                PathComponent={HoverPathLink}
-                setId={true}
-              />
-            </g>
-          )}
-        </g>
-      </svg>
-    </div>
+          </svg>
+        </div>
+      </div>
+    </Box>
   );
 }
 
-interface MercatorGroupProps {
+type MercatorGroupProps = {
   projection?: ProjectionPreset | (() => GeoProjection);
   data: Feature<MultiPolygon | Polygon, CodedGeoProperties>[];
   fitExtent: FitExtent;
   fillMethod: (code: string) => string;
   strokeMethod: (code: string) => string;
   strokeWidthMethod: (code: string) => number;
-  PathComponent: React.FunctionComponent<PathProps | HoverPathLinkProps>;
-  setId?: boolean;
-}
+};
 
 function MercatorGroup(props: MercatorGroupProps) {
   const {
@@ -189,28 +212,105 @@ function MercatorGroup(props: MercatorGroupProps) {
     fillMethod,
     strokeMethod,
     strokeWidthMethod,
-    PathComponent,
-    setId,
   } = props;
 
   return (
     <Projection projection={projection} data={data} fitExtent={fitExtent}>
       {({ features }) => (
         <g>
-          {features.map(({ feature, path, index }) => {
-            return isPresent(path) ? (
-              <PathComponent
-                id={setId ? feature.properties.code : undefined}
-                key={`${feature.properties.code}_${index}`}
-                pathData={path}
-                fill={fillMethod(feature.properties.code)}
-                stroke={strokeMethod(feature.properties.code)}
-                strokeWidth={strokeWidthMethod(feature.properties.code)}
-              />
-            ) : null;
-          })}
+          {features
+            .filter(hasPath)
+            .map((x) => ({
+              ...x,
+              path: x.path.replace(
+                /\d+\.\d+/g,
+                (x) => Math.round(parseFloat(x)) + ''
+              ),
+            }))
+            .map(({ feature, path, index }) => {
+              return isPresent(path) ? (
+                <Path
+                  key={`${feature.properties.code}_${index}`}
+                  pathData={path}
+                  fill={fillMethod(feature.properties.code)}
+                  stroke={strokeMethod(feature.properties.code)}
+                  strokeWidth={strokeWidthMethod(feature.properties.code)}
+                />
+              ) : null;
+            })}
         </g>
       )}
     </Projection>
   );
 }
+
+type MercatorHoverGroupProps = {
+  getHref?: (code: string) => string;
+  getTitle: (code: string) => string;
+  onFocus: (evt: FocusEvent<HTMLAnchorElement>) => void;
+  onBlur: (evt: FocusEvent<HTMLAnchorElement>) => void;
+  isTabInteractive: boolean;
+} & MercatorGroupProps;
+
+function MercatorHoverGroup(props: MercatorHoverGroupProps) {
+  const {
+    projection = 'mercator',
+    data,
+    fitExtent,
+    fillMethod,
+    strokeMethod,
+    strokeWidthMethod,
+    onFocus,
+    onBlur,
+    isTabInteractive,
+    getHref,
+    getTitle,
+  } = props;
+
+  return (
+    <Projection projection={projection} data={data} fitExtent={fitExtent}>
+      {({ features }) => (
+        <g>
+          {features
+            .filter(hasPath)
+            .map((x) => ({
+              ...x,
+              path: x.path.replace(
+                /\d+\.\d+/g,
+                (x) => Math.round(parseFloat(x)) + ''
+              ),
+            }))
+            .map(({ feature, path, index }) => {
+              const { code } = feature.properties;
+              return isPresent(path) ? (
+                <HoverPathLink
+                  id={code}
+                  key={`${code}_${index}`}
+                  pathData={path}
+                  fill={fillMethod(code)}
+                  stroke={strokeMethod(code)}
+                  strokeWidth={strokeWidthMethod(code)}
+                  isTabInteractive={isTabInteractive}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  title={getTitle(code)}
+                  href={getHref ? getHref(code) : undefined}
+                />
+              ) : null;
+            })}
+        </g>
+      )}
+    </Projection>
+  );
+}
+
+function hasPath(
+  value: ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>
+): value is ParsedFeatureWithPath {
+  return !isDefined(value.path);
+}
+
+type ParsedFeatureWithPath = Omit<
+  ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>,
+  'path'
+> & { path: string };
