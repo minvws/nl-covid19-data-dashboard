@@ -108,7 +108,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
   const { data: VRData, error } = useSWR('/json/VR_COLLECTION.json', fetcher);
-  console.log({ VRData, error });
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
