@@ -9,6 +9,10 @@ import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
+import dynamic from 'next/dynamic';
+
+import useSWR from 'swr';
+
 import GrafiekIcon from '~/assets/chart.svg';
 import GetestIcon from '~/assets/test.svg';
 import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
@@ -18,7 +22,15 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from '~/components/chart-region-controls';
-import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
+import { GmChoropleth } from '~/components/choropleth';
+
+const DynamicVrChoropleth = dynamic(
+  () => import('~/components/choropleth').then((mod) => mod.VrChoropleth),
+  {
+    ssr: false,
+  }
+);
+
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { vrThresholds } from '~/components/choropleth/logic';
 import {
@@ -54,6 +66,7 @@ import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
+
 import {
   createGetStaticProps,
   StaticProps,
@@ -73,10 +86,6 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetChoroplethData({
-    vr: ({ escalation_levels, tested_overall }) => ({
-      escalation_levels,
-      tested_overall,
-    }),
     gm: ({ tested_overall }) => ({ tested_overall }),
   }),
   createGetContent<{
@@ -93,8 +102,13 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
+
+  const { data: VRData, error } = useSWR('/json/VR_COLLECTION.json', fetcher);
+  console.log({ VRData, error });
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -239,35 +253,41 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
               <ChoroplethTwoColumnLayout
                 legendComponent={
-                  <EscalationMapLegenda
-                    data={choropleth.vr}
-                    metricName="escalation_levels"
-                    metricProperty="level"
-                    lastDetermined={
-                      choropleth.vr.escalation_levels[0].last_determined_unix
-                    }
-                  />
+                  <>
+                    {VRData && (
+                      <EscalationMapLegenda
+                        data={VRData}
+                        metricName="escalation_levels"
+                        metricProperty="level"
+                        lastDetermined={
+                          VRData.escalation_levels[0].last_determined_unix
+                        }
+                      />
+                    )}
+                  </>
                 }
               >
                 <Box>
-                  <VrChoropleth
-                    accessibility={{
-                      key: 'topical_escalation_levels_choropleth',
-                    }}
-                    data={choropleth.vr}
-                    getLink={reverseRouter.vr.risiconiveau}
-                    metricName="escalation_levels"
-                    metricProperty="level"
-                    noDataFillColor={unknownLevelColor}
-                    tooltipContent={(
-                      context: VrGeoProperties & EscalationLevels
-                    ) => (
-                      <VrEscalationTooltip
-                        context={context}
-                        getLink={reverseRouter.vr.risiconiveau}
-                      />
-                    )}
-                  />
+                  {VRData && (
+                    <DynamicVrChoropleth
+                      accessibility={{
+                        key: 'topical_escalation_levels_choropleth',
+                      }}
+                      data={VRData}
+                      getLink={reverseRouter.vr.risiconiveau}
+                      metricName="escalation_levels"
+                      metricProperty="level"
+                      noDataFillColor={unknownLevelColor}
+                      tooltipContent={(
+                        context: VrGeoProperties & EscalationLevels
+                      ) => (
+                        <VrEscalationTooltip
+                          context={context}
+                          getLink={reverseRouter.vr.risiconiveau}
+                        />
+                      )}
+                    />
+                  )}
                 </Box>
                 <Box spacing={3}>
                   {text.risiconiveaus.belangrijk_bericht &&
@@ -279,32 +299,34 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                         />
                       </Box>
                     )}
-
-                  <Markdown
-                    content={replaceVariablesInText(
-                      text.risiconiveaus.selecteer_toelichting,
-                      {
-                        last_update: formatDate(
-                          createDate(
-                            choropleth.vr.escalation_levels[0]
-                              .last_determined_unix
+                  {VRData && (
+                    <Markdown
+                      content={replaceVariablesInText(
+                        text.risiconiveaus.selecteer_toelichting,
+                        {
+                          last_update: formatDate(
+                            createDate(
+                              VRData.escalation_levels[0].last_determined_unix
+                            ),
+                            'day-month'
                           ),
-                          'day-month'
-                        ),
-                      }
-                    )}
-                  />
+                        }
+                      )}
+                    />
+                  )}
                 </Box>
               </ChoroplethTwoColumnLayout>
 
               <Spacer mb={4} />
 
-              <EscalationLevelExplanations
-                hasUnknownLevel={some(
-                  choropleth.vr.escalation_levels,
-                  (x) => !isPresent(x)
-                )}
-              />
+              {VRData && (
+                <EscalationLevelExplanations
+                  hasUnknownLevel={some(
+                    VRData.escalation_levels,
+                    (x) => !isPresent(x)
+                  )}
+                />
+              )}
             </TopicalTile>
 
             <TopicalTile>
@@ -341,27 +363,33 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'vr' && (
-                    <VrChoropleth
-                      accessibility={{
-                        key: 'topical_region_tested_overall_choropleth',
-                      }}
-                      data={choropleth.vr}
-                      getLink={reverseRouter.vr.positiefGetesteMensen}
-                      metricName="tested_overall"
-                      metricProperty="infected_per_100k"
-                      tooltipContent={(
-                        context: VrGeoProperties & VrCollectionTestedOverall
-                      ) => <VrPositiveTestedPeopleTooltip context={context} />}
-                    />
+                    <>
+                      {VRData && (
+                        <DynamicVrChoropleth
+                          accessibility={{
+                            key: 'topical_region_tested_overall_choropleth',
+                          }}
+                          data={VRData}
+                          getLink={reverseRouter.vr.positiefGetesteMensen}
+                          metricName="tested_overall"
+                          metricProperty="infected_per_100k"
+                          tooltipContent={(
+                            context: VrGeoProperties & VrCollectionTestedOverall
+                          ) => (
+                            <VrPositiveTestedPeopleTooltip context={context} />
+                          )}
+                        />
+                      )}
+                    </>
                   )}
                 </>
                 <Box spacing={3}>
-                  <Metadata
-                    date={
-                      choropleth.vr.escalation_levels[0].date_of_insertion_unix
-                    }
-                    source={siteText.positief_geteste_personen.bronnen.rivm}
-                  />
+                  {VRData && (
+                    <Metadata
+                      date={VRData.escalation_levels[0].date_of_insertion_unix}
+                      source={siteText.positief_geteste_personen.bronnen.rivm}
+                    />
+                  )}
                   <Text>
                     {siteText.positief_geteste_personen.map_toelichting}
                   </Text>
