@@ -47,6 +47,15 @@ export type DataConfig<T extends ChoroplethDataItem> = Required<
   OptionalDataConfig<T>
 >;
 
+type OptionalBoundingBoxPadding = {
+  left?: number;
+  right?: number;
+  top?: number;
+  bottom?: number;
+};
+
+type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
+
 type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
   data: K[];
   dataConfig: OptionalDataConfig<K>;
@@ -55,6 +64,7 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
   tooltipContent: (context: InferredDataItem<T>) => ReactNode;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
+  boudingBoxPadding?: OptionalBoundingBoxPadding;
 };
 
 export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
@@ -68,6 +78,7 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
     minHeight = 500,
     tooltipContent,
     tooltipPlacement,
+    boudingBoxPadding: originalPadding = {},
   } = props;
 
   const dataConfig: DataConfig<K> = {
@@ -75,6 +86,13 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
     noDataFillColor: originalDataConfig.noDataFillColor ?? 'white',
     hoverStroke: originalDataConfig.hoverStroke ?? colors.silver,
     hoverStrokeWidth: originalDataConfig.hoverStrokeWidth ?? 3,
+  };
+
+  const boudingBoxPadding: BoundingBoxPadding = {
+    left: originalPadding.left ?? 0,
+    right: originalPadding.right ?? 0,
+    top: originalPadding.top ?? 0,
+    bottom: originalPadding.bottom ?? 0,
   };
 
   const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
@@ -115,8 +133,8 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
 
   const fitExtent: FitExtent = [
     [
-      [0, 0],
-      [width, height],
+      [boudingBoxPadding.left, boudingBoxPadding.top],
+      [width - boudingBoxPadding.right, height - boudingBoxPadding.bottom],
     ],
     choroplethFeatures.boundingBox,
   ];
