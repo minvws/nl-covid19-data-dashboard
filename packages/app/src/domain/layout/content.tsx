@@ -1,6 +1,4 @@
-import css from '@styled-system/css';
 import { ReactNode } from 'react';
-import styled from 'styled-components';
 import { Box } from '~/components/base';
 
 interface ContentProps {
@@ -9,17 +7,10 @@ interface ContentProps {
 
 export function Content({ children }: ContentProps) {
   return (
-    <StyledBox>
+    <Box textVariant="body1" bg="white">
       <Box pt={6} pb={5} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
         {children}
       </Box>
-    </StyledBox>
+    </Box>
   );
 }
-
-const StyledBox = styled(Box)(
-  css({
-    bg: 'white',
-    fontSize: '1.125rem',
-  })
-);
