@@ -36,6 +36,11 @@ const handle = app.getRequestHandler();
 const PORT = process.env.EXPRESS_PORT || (isProduction ? 8080 : 3000);
 const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
 
+const STATIC_ASSET_MAX_AGE_IN_SECONDS = 14 * 24 * 60 * 60; // two weeks
+const STATIC_ASSET_HTTP_DATE = new Date(
+  Date.now() + STATIC_ASSET_MAX_AGE_IN_SECONDS * 1000
+).toUTCString();
+
 (async function () {
   await app.prepare();
   const server = express();
@@ -93,7 +98,7 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
         req,
         res
       ) {
-        setResponseHeaders(res);
+        setResponseHeaders(res, SIX_MONTHS_IN_SECONDS, false);
         return responseBuffer;
       }),
     })
@@ -141,10 +146,6 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
       ? "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'"
       : '';
 
-    res.set(
-      'Cache-control',
-      noCache ? 'no-cache, public' : 'public, no-transform'
-    );
     res.set('Content-Security-Policy', contentSecurityPolicy);
     res.set('Referrer-Policy', 'origin');
     res.set('X-Content-Type-Options', 'nosniff');
@@ -155,6 +156,17 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
       `max-age=${maxAge}; includeSubdomains; preload`
     );
     res.set('Permissions-Policy', 'interest-cohort=()');
+
+    if (noCache) {
+      res.set('Cache-control', 'no-cache, public');
+    } else {
+      res.setHeader(
+        'Cache-Control',
+        `public, max-age=${STATIC_ASSET_MAX_AGE_IN_SECONDS}`
+      );
+      res.setHeader('Vary', 'content-type');
+      res.setHeader('Expires', STATIC_ASSET_HTTP_DATE);
+    }
 
     res.removeHeader('via');
     res.removeHeader('X-Powered-By');
