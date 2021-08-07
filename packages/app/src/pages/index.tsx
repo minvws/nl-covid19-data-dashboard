@@ -35,6 +35,7 @@ import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
+import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
@@ -136,21 +137,24 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
 
-            <Box>
-              <Choropleth
-                map="gm"
-                data={choropleth.gm.tested_overall}
-                dataConfig={{
-                  metricProperty: 'infected_per_100k',
-                }}
-                dataOptions={{
-                  getLink: (code: string) =>
-                    `/gemeente/${code}/positief-geteste-mensen`,
-                  highlightSelection: true,
-                  selectedCode: 'GM0820',
-                }}
-              />
-            </Box>
+            <Tile>
+              <ChoroplethTwoColumnLayout>
+                <Choropleth
+                  map="gm"
+                  data={choropleth.gm.tested_overall}
+                  dataConfig={{
+                    metricProperty: 'infected_per_100k',
+                  }}
+                  dataOptions={{
+                    getLink: (code: string) =>
+                      `/gemeente/${code}/positief-geteste-mensen`,
+                    highlightSelection: true,
+                    selectedCode: 'GM0820',
+                  }}
+                />
+                <Box>hai</Box>
+              </ChoroplethTwoColumnLayout>
+            </Tile>
 
             <Box width={{ lg: '65%' }}>
               <Search />

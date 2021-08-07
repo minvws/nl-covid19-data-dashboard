@@ -14,6 +14,7 @@ import { DataConfig, DataOptions } from '..';
 import { TooltipSettings } from '../tooltips/types';
 import { thresholds } from './thresholds';
 import { ChoroplethDataItem, mapToCodeType, MapType } from './types';
+import { useFeatureName } from './use-feature-name';
 import { isCodedValueType } from './utils';
 
 export function useChoroplethTooltip<T extends ChoroplethDataItem>(
@@ -29,6 +30,8 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   const isTouch = useIsTouchDevice();
 
   const codeType = mapToCodeType[map];
+
+  const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
 
   const getItemByCode = useMemo(() => {
     return (code: string) => {
@@ -77,7 +80,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
             dataConfig,
             dataOptions,
             thresholdValues: threshold,
-            featureName: 'Feature name',
+            featureName: getFeatureName(code),
             metricPropertyFormatter: (value: number) => value.toString(),
           },
         });
@@ -108,7 +111,8 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       getItemByCode,
       dataConfig,
       dataOptions,
-      threshold
+      threshold,
+      getFeatureName
     ),
     isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip),
   ] as const;
@@ -121,7 +125,8 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
   getItemByCode: (code: string) => T,
   dataConfig: DataConfig<T>,
   dataOptions: DataOptions,
-  threshold: ChoroplethThresholdsValue[]
+  threshold: ChoroplethThresholdsValue[],
+  getFeatureName: (code: string) => string
 ) => {
   return useCallback(
     (event: React.MouseEvent) => {
@@ -149,14 +154,23 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
               dataConfig,
               dataOptions,
               thresholdValues: threshold,
-              featureName: 'Feature name',
+              featureName: getFeatureName(code),
               metricPropertyFormatter: (value: number) => value.toString(),
             },
           });
         }
       }
     },
-    [timeout, setTooltip, ref]
+    [
+      timeout,
+      setTooltip,
+      ref,
+      getItemByCode,
+      dataConfig,
+      dataOptions,
+      threshold,
+      getFeatureName,
+    ]
   );
 };
 
