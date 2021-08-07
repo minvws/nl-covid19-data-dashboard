@@ -149,9 +149,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   highlightSelection: true,
                   selectedCode: 'GM0820',
                 }}
-                getTooltipContent={(code) => {
-                  return 'tooltip';
-                }}
               />
             </Box>
 

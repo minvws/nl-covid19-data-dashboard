@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth2/logic';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
+import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
 import { CodedGeoJSON, gmGeo, inGeo, nlGeo, vrGeo } from './topology';
 
 export type FeatureType = keyof ChoroplethFeatures;
@@ -21,12 +22,16 @@ export function useChoroplethFeatures(
   return useMemo(() => {
     switch (map) {
       case 'gm': {
-        const filteredGeo = filterBySelectedGmCode(gmGeo, selectedCode);
+        const boundingBoxGeo = filterBoundingBoxBySelectedGmCode(
+          gmGeo,
+          selectedCode
+        );
+        const hoverGeo = filterVrBySelectedGmCode(gmGeo, selectedCode);
         return {
           outline: nlGeo,
-          hover: filteredGeo,
-          area: filteredGeo,
-          boundingBox: selectedCode ? filteredGeo : nlGeo,
+          hover: hoverGeo,
+          area: boundingBoxGeo,
+          boundingBox: selectedCode ? boundingBoxGeo : nlGeo,
         };
       }
       case 'vr': {
@@ -48,7 +53,7 @@ export function useChoroplethFeatures(
   }, [map, selectedCode]);
 }
 
-function filterBySelectedGmCode(
+function filterBoundingBoxBySelectedGmCode(
   geoJson: CodedGeoJSON,
   selectedGmCode?: string
 ) {
@@ -69,6 +74,32 @@ function filterBySelectedGmCode(
     ...geoJson,
     features: geoJson.features.filter((x) =>
       viewBoxMunicipalCodes.includes(x.properties.code)
+    ),
+  };
+}
+
+function filterVrBySelectedGmCode(
+  geoJson: CodedGeoJSON,
+  selectedGmCode?: string
+) {
+  if (!isDefined(selectedGmCode)) {
+    return geoJson;
+  }
+  assert(
+    selectedGmCode.startsWith('GM'),
+    `gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
+  );
+
+  const gmCodes = getVrMunicipalsForMunicipalCode(selectedGmCode);
+  assert(
+    isDefined(gmCodes),
+    `No associated municipal codes found for ${selectedGmCode}`
+  );
+
+  return {
+    ...geoJson,
+    features: geoJson.features.filter((x) =>
+      gmCodes.includes(x.properties.code)
     ),
   };
 }

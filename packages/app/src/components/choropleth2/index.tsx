@@ -1,6 +1,6 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { memo, ReactNode, useMemo, useRef, useState } from 'react';
+import { memo, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -18,7 +18,6 @@ import {
   FitExtent,
   InferredDataItem,
   MapType,
-  TooltipSettings,
   useChoroplethData,
   useChoroplethFeatures,
   useFeatureProps,
@@ -27,12 +26,14 @@ import {
 } from './logic';
 import { useChoroplethTooltip } from './logic/use-choropleth-tooltip';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
+import { TooltipFormatter, TooltipSettings } from './tooltips/types';
 
 const DEFAULT_HOVER_STROKE_WIDTH = 3;
 
 export type DataOptions = {
   isPercentage?: boolean;
   getLink?: (code: string) => string;
+  getFeatureName?: (code: string) => string;
   highlightSelection?: boolean;
   selectedCode?: string;
 };
@@ -64,7 +65,7 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
   dataConfig: OptionalDataConfig<K>;
   dataOptions: DataOptions;
   map: T;
-  getTooltipContent: (context: InferredDataItem<T>) => ReactNode;
+  formatTooltip?: TooltipFormatter<K>;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
   boudingBoxPadding?: OptionalBoundingBoxPadding;
@@ -72,11 +73,11 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
 };
 
 export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
-  getTooltipContent,
+  formatTooltip,
   tooltipPlacement,
   ...props
 }: ChoroplethProps<T, K>) {
-  const [tooltip, setTooltip] = useState<TooltipSettings>();
+  const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
   const isTouch = useIsTouchDevice();
 
   const hoverRef = useRef<SVGGElement>(null);
@@ -98,9 +99,9 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
             left={tooltip.left}
             top={tooltip.top}
             setTooltip={setTooltip}
-          >
-            {getTooltipContent(tooltip.data)}
-          </Tooltip>
+            formatTooltip={formatTooltip}
+            data={tooltip.data}
+          />
         </div>
       )}
     </>
@@ -108,12 +109,9 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
 }
 
 const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
-  props: Omit<
-    ChoroplethProps<T, K>,
-    'getTooltipContent' | 'tooltipPlacement'
-  > & {
+  props: Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
     hoverRef: React.RefObject<SVGGElement>;
-    setTooltip: (tooltip: TooltipSettings | undefined) => void;
+    setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
   }
 ) => JSX.Element | null = memo((props) => {
   const {
@@ -189,6 +187,10 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
   );
 
   const [mouseOverHandler, mouseOutHandler] = useChoroplethTooltip(
+    map,
+    data,
+    dataConfig,
+    dataOptions,
     showTooltipOnFocus,
     setTooltip,
     containerRef

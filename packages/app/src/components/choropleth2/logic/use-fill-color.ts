@@ -13,15 +13,16 @@ export function useFillColor<T extends ChoroplethDataItem>(
   metricProperty: KeysOfType<T, number, true>,
   dataConfig: DataConfig<T>
 ) {
+  const codeType = mapToCodeType[map];
+
   const getValueByCode = useMemo(() => {
-    const codeType = mapToCodeType[map];
     return (code: string) => {
       const item = data
         .filter(isCodedValueType(codeType))
         .find((x) => (x as any)[codeType] === code);
       return item?.[metricProperty];
     };
-  }, [map, metricProperty]);
+  }, [map, metricProperty, codeType]);
 
   const threshold = thresholds[map][metricProperty as string];
   assert(

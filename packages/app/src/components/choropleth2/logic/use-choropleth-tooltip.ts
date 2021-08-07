@@ -1,21 +1,50 @@
+import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import {
   MutableRefObject,
   RefObject,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
 } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
-import { TooltipSettings } from './types';
+import { DataConfig, DataOptions } from '..';
+import { TooltipSettings } from '../tooltips/types';
+import { thresholds } from './thresholds';
+import { ChoroplethDataItem, mapToCodeType, MapType } from './types';
+import { isCodedValueType } from './utils';
 
-export function useChoroplethTooltip(
+export function useChoroplethTooltip<T extends ChoroplethDataItem>(
+  map: MapType,
+  data: T[],
+  dataConfig: DataConfig<T>,
+  dataOptions: DataOptions,
   showTooltipOnFocus: boolean | undefined,
-  setTooltip: (tooltip: TooltipSettings | undefined) => void,
+  setTooltip: (tooltip: TooltipSettings<T> | undefined) => void,
   containerRef: React.RefObject<HTMLDivElement>
 ) {
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
+
+  const codeType = mapToCodeType[map];
+
+  const getItemByCode = useMemo(() => {
+    return (code: string) => {
+      const item = data
+        .filter(isCodedValueType(codeType))
+        .find((x) => (x as any)[codeType] === code);
+      assert(item, `No data item found for code ${code}`);
+      return item;
+    };
+  }, [map, codeType]);
+
+  const threshold = thresholds[map][dataConfig.metricProperty as string];
+  assert(
+    isDefined(threshold),
+    `No threshold configured for map type ${map} and metric property ${dataConfig.metricProperty}`
+  );
 
   useEffect(() => {
     if (!showTooltipOnFocus) {
@@ -31,9 +60,9 @@ export function useChoroplethTooltip(
         return;
       }
 
-      const id = link.getAttribute('data-id');
+      const code = link.getAttribute('data-id');
 
-      if (id) {
+      if (isPresent(code)) {
         const bboxContainer = container.getBoundingClientRect();
         const bboxLink = link.getBoundingClientRect();
         const left = bboxLink.left - bboxContainer.left;
@@ -41,8 +70,16 @@ export function useChoroplethTooltip(
 
         setTooltip({
           left: left + bboxLink.width + 5,
-          top: top,
-          data: id,
+          top,
+          data: {
+            code,
+            dataItem: getItemByCode(code),
+            dataConfig,
+            dataOptions,
+            thresholdValues: threshold,
+            featureName: 'Feature name',
+            metricPropertyFormatter: (value: number) => value.toString(),
+          },
         });
       }
     }
@@ -64,22 +101,34 @@ export function useChoroplethTooltip(
   }, [containerRef, setTooltip, showTooltipOnFocus, isTouch]);
 
   return [
-    createSvgMouseOverHandler(timeout, setTooltip, containerRef),
+    createSvgMouseOverHandler(
+      timeout,
+      setTooltip,
+      containerRef,
+      getItemByCode,
+      dataConfig,
+      dataOptions,
+      threshold
+    ),
     isTouch ? undefined : createSvgMouseOutHandler(timeout, setTooltip),
   ] as const;
 }
 
-const createSvgMouseOverHandler = (
+const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
-  setTooltip: (settings: TooltipSettings | undefined) => void,
-  ref: RefObject<HTMLElement>
+  setTooltip: (settings: TooltipSettings<T> | undefined) => void,
+  ref: RefObject<HTMLElement>,
+  getItemByCode: (code: string) => T,
+  dataConfig: DataConfig<T>,
+  dataOptions: DataOptions,
+  threshold: ChoroplethThresholdsValue[]
 ) => {
   return useCallback(
     (event: React.MouseEvent) => {
       const elm = event.target as HTMLElement | SVGElement;
-      const id = elm.getAttribute('data-id');
+      const code = elm.getAttribute('data-id');
 
-      if (id && ref.current) {
+      if (isPresent(code) && ref.current) {
         if (timeout.current > -1) {
           clearTimeout(timeout.current);
           timeout.current = -1;
@@ -90,11 +139,19 @@ const createSvgMouseOverHandler = (
          */
         const coords = localPoint(ref.current, event);
 
-        if (coords) {
+        if (isPresent(coords)) {
           setTooltip({
             left: coords.x + 5,
             top: coords.y + 5,
-            data: id,
+            data: {
+              code,
+              dataItem: getItemByCode(code),
+              dataConfig,
+              dataOptions,
+              thresholdValues: threshold,
+              featureName: 'Feature name',
+              metricPropertyFormatter: (value: number) => value.toString(),
+            },
           });
         }
       }
@@ -103,9 +160,9 @@ const createSvgMouseOverHandler = (
   );
 };
 
-const createSvgMouseOutHandler = (
+const createSvgMouseOutHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
-  setTooltip: (settings: TooltipSettings | undefined) => void
+  setTooltip: (settings: TooltipSettings<T> | undefined) => void
 ) => {
   return useCallback(() => {
     if (timeout.current < 0) {

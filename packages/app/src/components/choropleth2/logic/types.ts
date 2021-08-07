@@ -8,12 +8,6 @@ import { ParsedFeature } from '@visx/geo/lib/projections/Projection';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { CodedGeoProperties } from './topology';
 
-export type TooltipSettings = {
-  left: number;
-  top: number;
-  data: string;
-};
-
 /**
  * Sets the projection’s scale and translate to fit the specified GeoJSON object in the center of the given extent.
  * The extent is specified as an array [[x₀, y₀], [x₁, y₁]], where x₀ is the left side of the bounding box,
