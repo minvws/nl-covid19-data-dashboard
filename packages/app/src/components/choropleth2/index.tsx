@@ -1,10 +1,12 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { memo, ReactNode, useMemo, useRef } from 'react';
+import { memo, ReactNode, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Box } from '../base';
@@ -16,13 +18,17 @@ import {
   FitExtent,
   InferredDataItem,
   MapType,
+  TooltipSettings,
   useChoroplethData,
   useChoroplethFeatures,
   useFeatureProps,
   useFillColor,
   useTabInteractiveButton,
 } from './logic';
-import { ChoroplethTooltipPlacement } from './tooltips';
+import { useChoroplethTooltip } from './logic/use-choropleth-tooltip';
+import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
+
+const DEFAULT_HOVER_STROKE_WIDTH = 3;
 
 export type DataOptions = {
   isPercentage?: boolean;
@@ -58,26 +64,57 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
   dataConfig: OptionalDataConfig<K>;
   dataOptions: DataOptions;
   map: T;
-  tooltipContent: (context: InferredDataItem<T>) => ReactNode;
+  getTooltipContent: (context: InferredDataItem<T>) => ReactNode;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
   boudingBoxPadding?: OptionalBoundingBoxPadding;
+  showTooltipOnFocus?: boolean;
 };
 
-export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
-  props: ChoroplethProps<T, K>
-) {
+export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
+  getTooltipContent,
+  tooltipPlacement,
+  ...props
+}: ChoroplethProps<T, K>) {
+  const [tooltip, setTooltip] = useState<TooltipSettings>();
+  const isTouch = useIsTouchDevice();
+
+  const hoverRef = useRef<SVGGElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));
+
   return (
     <>
-      <ChoroplethMap {...props} />
+      <ChoroplethMap {...props} setTooltip={setTooltip} hoverRef={hoverRef} />
+
+      {tooltip && (
+        <div
+          ref={tooltipRef}
+          style={{ pointerEvents: isTouch ? 'all' : 'none' }}
+        >
+          <Tooltip
+            placement={tooltipPlacement}
+            left={tooltip.left}
+            top={tooltip.top}
+            setTooltip={setTooltip}
+          >
+            {getTooltipContent(tooltip.data)}
+          </Tooltip>
+        </div>
+      )}
     </>
   );
 }
 
-const DEFAULT_HOVER_STROKE_WIDTH = 3;
-
 const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
-  props: ChoroplethProps<T, K>
+  props: Omit<
+    ChoroplethProps<T, K>,
+    'getTooltipContent' | 'tooltipPlacement'
+  > & {
+    hoverRef: React.RefObject<SVGGElement>;
+    setTooltip: (tooltip: TooltipSettings | undefined) => void;
+  }
 ) => JSX.Element | null = memo((props) => {
   const {
     data: originalData,
@@ -85,9 +122,10 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     dataOptions,
     map,
     minHeight = 500,
-    tooltipContent,
-    tooltipPlacement,
     boudingBoxPadding: originalPadding = {},
+    hoverRef,
+    setTooltip,
+    showTooltipOnFocus,
   } = props;
 
   const dataConfig = {
@@ -116,7 +154,6 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
   const mapProjection = map === 'in' ? 'mercator' : 'mercator';
 
   const { siteText } = useIntl();
-  const hoverRef = useRef<SVGGElement>(null);
   const clipPathId = useUniqueId();
   const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
 
@@ -149,6 +186,12 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     getFillColor,
     dataOptions,
     dataConfig
+  );
+
+  const [mouseOverHandler, mouseOutHandler] = useChoroplethTooltip(
+    showTooltipOnFocus,
+    setTooltip,
+    containerRef
   );
 
   const fitExtent: FitExtent = useMemo(
@@ -189,6 +232,8 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
             width={width}
             viewBox={`0 0 ${width} ${height}`}
             css={css({ display: 'block', bg: 'transparent', width: '100%' })}
+            onMouseMove={mouseOverHandler}
+            onMouseOut={mouseOutHandler}
           >
             <clipPath id={clipPathId}>
               <rect x={0} y={0} height={height} width={width} />
