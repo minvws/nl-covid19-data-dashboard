@@ -43,7 +43,7 @@ export function useFillColor<T extends ChoroplethDataItem>(
   return useCallback(
     (code: string) => {
       const value = getValueByCode(code);
-      return value ? colorScale(value) : dataConfig.noDataFillColor;
+      return isDefined(value) ? colorScale(value) : dataConfig.noDataFillColor;
     },
     [getValueByCode, colorScale]
   );

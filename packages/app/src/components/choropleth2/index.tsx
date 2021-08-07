@@ -6,7 +6,7 @@ import Projection, {
 import { ProjectionPreset } from '@visx/geo/lib/types';
 import { GeoProjection } from 'd3-geo';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
-import { FocusEvent, ReactNode, useRef } from 'react';
+import { FocusEvent, memo, ReactNode, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -70,6 +70,16 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
 export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
   props: ChoroplethProps<T, K>
 ) {
+  return (
+    <>
+      <ChoroplethMap {...props} />
+    </>
+  );
+}
+
+const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
+  props: ChoroplethProps<T, K>
+) => JSX.Element | null = memo((props) => {
   const {
     data: originalData,
     dataConfig: originalDataConfig,
@@ -81,7 +91,7 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
     boudingBoxPadding: originalPadding = {},
   } = props;
 
-  const dataConfig: DataConfig<K> = {
+  const dataConfig = {
     metricProperty: originalDataConfig.metricProperty,
     noDataFillColor: originalDataConfig.noDataFillColor ?? 'white',
     hoverStroke: originalDataConfig.hoverStroke ?? colors.silver,
@@ -114,6 +124,8 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
     map,
     dataOptions.selectedCode
   );
+
+  console.dir(choroplethFeatures);
 
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
@@ -211,7 +223,7 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>(
       </div>
     </Box>
   );
-}
+});
 
 type MercatorGroupProps = {
   projection?: ProjectionPreset | (() => GeoProjection);
@@ -325,7 +337,7 @@ function MercatorHoverGroup(props: MercatorHoverGroupProps) {
 function hasPath(
   value: ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>
 ): value is ParsedFeatureWithPath {
-  return !isDefined(value.path);
+  return isPresent(value.path);
 }
 
 type ParsedFeatureWithPath = Omit<

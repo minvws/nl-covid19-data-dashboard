@@ -1,5 +1,5 @@
+import { MapType } from '~/components/choropleth2/logic';
 import { colors } from '~/style/theme';
-import { MapType } from '..';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
   {
