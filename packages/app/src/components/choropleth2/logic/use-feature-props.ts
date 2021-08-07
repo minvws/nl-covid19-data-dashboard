@@ -17,6 +17,8 @@ type FeaturePropFunctions = {
   strokeWidth: GetFeatureProp<number>;
 };
 
+const DEFAULT_STROKE_WIDTH = 0.5;
+
 export function useFeatureProps<T extends ChoroplethDataItem>(
   map: MapType,
   getFillColor: (code: string) => string,
@@ -33,29 +35,29 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
           stroke:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
               ? () => {
-                  return 'white';
+                  return colors.choroplethFeatureStroke;
                 }
               : (code: string) =>
                   code === dataOptions.selectedCode
                     ? dataConfig.highlightStroke
-                    : 'white',
+                    : colors.choroplethFeatureStroke,
           strokeWidth:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? () => 0.5
+              ? () => DEFAULT_STROKE_WIDTH
               : (code: string) =>
                   code === dataOptions.selectedCode
                     ? dataConfig.highlightStrokeWidth
-                    : 0.5,
+                    : DEFAULT_STROKE_WIDTH,
         },
         hover: {
           fill: () => 'none',
-          stroke: () => 'white',
-          strokeWidth: () => 2,
+          stroke: () => dataConfig.hoverStroke,
+          strokeWidth: () => dataConfig.hoverStrokeWidth,
         },
         outline: {
           fill: () => 'none',
-          stroke: () => colors.silver,
-          strokeWidth: () => 0.5,
+          stroke: () => colors.choroplethOutlineStroke,
+          strokeWidth: () => DEFAULT_STROKE_WIDTH,
         },
       };
     }

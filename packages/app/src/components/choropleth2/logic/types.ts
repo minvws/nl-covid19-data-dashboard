@@ -4,6 +4,9 @@ import {
   KeysOfType,
   VrCollection,
 } from '@corona-dashboard/common';
+import { ParsedFeature } from '@visx/geo/lib/projections/Projection';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
+import { CodedGeoProperties } from './topology';
 
 /**
  * Sets the projection’s scale and translate to fit the specified GeoJSON object in the center of the given extent.
@@ -54,3 +57,8 @@ export type InferredDataItem<T extends MapType> = T extends 'gm'
   : InDataItem;
 
 export type ChoroplethDataItem = GmDataItem | VrDataItem | InDataItem;
+
+export type ParsedFeatureWithPath = Omit<
+  ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>,
+  'path'
+> & { path: string };

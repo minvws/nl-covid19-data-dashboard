@@ -129,6 +129,10 @@ export const colors = {
   cerulean: '#0390D6',
   tooltipIndicator: '#000000',
   buttonLightBlue: '#C2E4F4',
+  choroplethFeatureStroke: '#fff',
+  choroplethOutlineStroke: '#c4c4c4',
+  choroplethHighlightStroke: '#000000',
+  choroplethNoData: '#fff',
 
   data: {
     primary: '#007BC7',
