@@ -55,6 +55,11 @@ function filterBySelectedGmCode(
   if (!isDefined(selectedGmCode)) {
     return geoJson;
   }
+  assert(
+    selectedGmCode.startsWith('GM'),
+    `gm code should be be prefixed by 'GM', this code is not: ${selectedGmCode}`
+  );
+
   const vrInfo = getVrForMunicipalityCode(selectedGmCode);
   assert(vrInfo, `No VR found for GM code ${selectedGmCode}`);
 

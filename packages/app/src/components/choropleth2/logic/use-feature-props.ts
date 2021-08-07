@@ -26,20 +26,20 @@ export function useFeatureProps(
           fill: (code: string) => {
             return getFillColor(code);
           },
-          stroke: (code: string) => {
+          stroke: () => {
             return 'white';
           },
           strokeWidth: (code: string) => 0.5,
         },
         hover: {
-          fill: (code: string) => 'none',
-          stroke: (code: string) => '',
-          strokeWidth: (code: string) => 0,
+          fill: () => 'none',
+          stroke: () => 'white',
+          strokeWidth: () => 2,
         },
         outline: {
-          fill: (code: string) => 'none',
-          stroke: (code: string) => colors.silver,
-          strokeWidth: (code: string) => 0.5,
+          fill: () => 'none',
+          stroke: () => colors.silver,
+          strokeWidth: () => 0.5,
         },
       };
     }

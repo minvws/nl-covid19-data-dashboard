@@ -31,6 +31,7 @@ import {
 import { ChoroplethTooltipPlacement } from './tooltips';
 
 type DataOptions = {
+  isPercentage?: boolean;
   getLink: (code: string) => string;
   highlightSelection?: boolean;
   selectedCode?: string;
@@ -125,8 +126,6 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     dataOptions.selectedCode
   );
 
-  console.dir(choroplethFeatures);
-
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
       replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
@@ -213,7 +212,7 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
                   fitExtent={fitExtent}
                   isTabInteractive={isTabInteractive}
                   getTitle={() => 'title'}
-                  getHref={() => 'http://google.com'}
+                  getHref={dataOptions.getLink}
                   {...anchorEventHandlers}
                 />
               </g>

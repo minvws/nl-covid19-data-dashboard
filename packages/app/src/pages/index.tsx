@@ -144,7 +144,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   metricProperty: 'infected_per_100k',
                 }}
                 dataOptions={{
-                  getLink: () => 'link',
+                  getLink: (code: string) =>
+                    `/gemeente/${code}/positief-geteste-mensen`,
                 }}
                 tooltipContent={() => 'tooltip'}
               />
