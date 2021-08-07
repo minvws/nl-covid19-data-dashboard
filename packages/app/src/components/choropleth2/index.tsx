@@ -30,9 +30,9 @@ import {
 } from './logic';
 import { ChoroplethTooltipPlacement } from './tooltips';
 
-type DataOptions = {
+export type DataOptions = {
   isPercentage?: boolean;
-  getLink: (code: string) => string;
+  getLink?: (code: string) => string;
   highlightSelection?: boolean;
   selectedCode?: string;
 };
@@ -42,6 +42,8 @@ type OptionalDataConfig<T extends ChoroplethDataItem> = {
   noDataFillColor?: string;
   hoverStroke?: string;
   hoverStrokeWidth?: number;
+  highlightStroke?: string;
+  highlightStrokeWidth?: number;
 };
 
 export type DataConfig<T extends ChoroplethDataItem> = Required<
@@ -97,6 +99,8 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     noDataFillColor: originalDataConfig.noDataFillColor ?? 'white',
     hoverStroke: originalDataConfig.hoverStroke ?? colors.silver,
     hoverStrokeWidth: originalDataConfig.hoverStrokeWidth ?? 3,
+    highlightStroke: originalDataConfig.highlightStroke ?? 'black',
+    highlightStrokeWidth: originalDataConfig.highlightStrokeWidth ?? 3,
   };
 
   const boudingBoxPadding: BoundingBoxPadding = {
@@ -140,7 +144,12 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     dataConfig
   );
 
-  const { area, outline, hover } = useFeatureProps(map, getFillColor);
+  const { area, outline, hover } = useFeatureProps(
+    map,
+    getFillColor,
+    dataOptions,
+    dataConfig
+  );
 
   const fitExtent: FitExtent = [
     [

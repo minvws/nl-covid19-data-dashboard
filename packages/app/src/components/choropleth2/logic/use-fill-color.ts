@@ -19,8 +19,7 @@ export function useFillColor<T extends ChoroplethDataItem>(
       const item = data
         .filter(isCodedValueType(codeType))
         .find((x) => (x as any)[codeType] === code);
-      assert(isDefined(item), `No data item for code '${code}' could be found`);
-      return item[metricProperty];
+      return item?.[metricProperty];
     };
   }, [map, metricProperty]);
 

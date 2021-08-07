@@ -1,5 +1,7 @@
 import { MapType } from '~/components/choropleth2/logic';
 import { colors } from '~/style/theme';
+import { DataConfig, DataOptions } from '..';
+import { ChoroplethDataItem } from './types';
 
 type GetFeatureProp<T = string> = (code: string) => T;
 
@@ -15,9 +17,11 @@ type FeaturePropFunctions = {
   strokeWidth: GetFeatureProp<number>;
 };
 
-export function useFeatureProps(
+export function useFeatureProps<T extends ChoroplethDataItem>(
   map: MapType,
-  getFillColor: (code: string) => string
+  getFillColor: (code: string) => string,
+  dataOptions: DataOptions,
+  dataConfig: DataConfig<T>
 ): FeatureProps {
   switch (map) {
     case 'gm': {
@@ -26,10 +30,22 @@ export function useFeatureProps(
           fill: (code: string) => {
             return getFillColor(code);
           },
-          stroke: () => {
-            return 'white';
-          },
-          strokeWidth: (code: string) => 0.5,
+          stroke:
+            !dataOptions.highlightSelection || !dataOptions.selectedCode
+              ? () => {
+                  return 'white';
+                }
+              : (code: string) =>
+                  code === dataOptions.selectedCode
+                    ? dataConfig.highlightStroke
+                    : 'white',
+          strokeWidth:
+            !dataOptions.highlightSelection || !dataOptions.selectedCode
+              ? () => 0.5
+              : (code: string) =>
+                  code === dataOptions.selectedCode
+                    ? dataConfig.highlightStrokeWidth
+                    : 0.5,
         },
         hover: {
           fill: () => 'none',

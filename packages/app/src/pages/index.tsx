@@ -146,6 +146,8 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 dataOptions={{
                   getLink: (code: string) =>
                     `/gemeente/${code}/positief-geteste-mensen`,
+                  highlightSelection: true,
+                  selectedCode: 'GM0820',
                 }}
                 tooltipContent={() => 'tooltip'}
               />
