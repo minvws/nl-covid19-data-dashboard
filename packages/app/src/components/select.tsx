@@ -4,6 +4,8 @@ import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { VisuallyHidden } from './visually-hidden';
 
+import chevronDownUrl from '~/assets/chevron-down.svg';
+
 interface Option<T extends string> {
   value: T;
   label: string;
@@ -114,7 +116,7 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
       p: 2,
       pr: x.isClearable ? '2.4rem' : '2rem',
       pl: x.hasIcon ? '2.4rem' : '0.5rem',
-      background: `url('/images/chevron-down.svg')`,
+      background: `url('${chevronDownUrl}')`,
       backgroundSize: '14px 14px',
       backgroundRepeat: 'no-repeat, repeat',
       backgroundPosition: 'right 0.5em top 60%, 0 0',
