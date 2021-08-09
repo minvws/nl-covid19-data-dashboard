@@ -7,7 +7,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
-import { InternationalFlag } from '~/domain/international/international-flag';
+import { Flag } from '~/domain/international/flag';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InLayout } from '~/domain/layout/in-layout';
@@ -188,8 +188,8 @@ export default function VariantenPage(
                 value={selectedCountryCode}
                 icon={
                   <Box ml={1}>
-                    <InternationalFlag
-                      country_code={selectedCountryCode}
+                    <Flag
+                      countryCode={selectedCountryCode}
                       width={16}
                       height={12}
                     />

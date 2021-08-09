@@ -5,7 +5,7 @@ import CheckedIcon from '~/assets/checked.svg';
 import UncheckedIcon from '~/assets/unchecked.svg';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
-import { InternationalFlag } from '~/domain/international/international-flag';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -49,7 +49,7 @@ export function SelectCountriesResults() {
                     {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
                   </span>
                   <Box mr={2}>
-                    <InternationalFlag country_code={x.id} />
+                    <Flag countryCode={x.id} />
                   </Box>
                   <span
                     css={css({

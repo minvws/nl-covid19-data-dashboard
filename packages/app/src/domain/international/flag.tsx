@@ -1,20 +1,16 @@
 import css from '@styled-system/css';
 
-interface InternationalFlagProps {
-  country_code: string;
+interface FlagProps {
+  countryCode: string;
   width?: number;
   height?: number;
 }
 
-export function InternationalFlag({
-  country_code,
-  width = 17,
-  height = 13,
-}: InternationalFlagProps) {
+export function Flag({ countryCode, width = 17, height = 13 }: FlagProps) {
   return (
     <img
       aria-hidden
-      src={`/icons/flags/${country_code.toLowerCase()}.svg`}
+      src={`/icons/flags/${countryCode.toLowerCase()}.svg`}
       width={width}
       height={height}
       alt=""

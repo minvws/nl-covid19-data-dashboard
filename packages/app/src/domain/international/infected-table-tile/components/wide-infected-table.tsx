@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { inThresholds } from '~/components/choropleth/logic';
 import { InlineText } from '~/components/typography';
-import { InternationalFlag } from '~/domain/international/international-flag';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -143,7 +143,7 @@ function TableRow({
           })}
         >
           <Box mr={2}>
-            <InternationalFlag country_code={item.country_code} />
+            <Flag countryCode={item.country_code} />
           </Box>
           {countryNames[item.country_code.toLocaleLowerCase()]}
         </InlineText>

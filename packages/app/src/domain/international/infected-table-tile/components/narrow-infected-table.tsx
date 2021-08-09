@@ -6,7 +6,7 @@ import { Box } from '~/components/base';
 import { inThresholds } from '~/components/choropleth/logic';
 import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
-import { InternationalFlag } from '~/domain/international/international-flag';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
@@ -113,7 +113,7 @@ function ItemRow({
         })}
       >
         <Box mr={2}>
-          <InternationalFlag country_code={item.country_code} />
+          <Flag countryCode={item.country_code} />
         </Box>
 
         {countryNames[item.country_code.toLocaleLowerCase()]}
