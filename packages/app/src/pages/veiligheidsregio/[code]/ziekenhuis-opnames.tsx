@@ -1,10 +1,10 @@
-import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
+import { GmGeoProperties, GmHospitalNiceValue } from '@corona-dashboard/common';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { gmThresholds } from '~/components/choropleth/logic';
+import { GmHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -16,14 +16,14 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  ArticlesQueryResult,
-  createPageArticlesQuery,
-} from '~/queries/create-page-articles-query';
-import {
   createElementsQuery,
   ElementsQueryResult,
   getTimelineEvents,
-} from '~/queries/create-page-elements-query';
+} from '~/queries/create-elements-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -48,13 +48,13 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
   createGetContent<{
-    fix_this: ArticlesQueryResult;
+    page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
 
     return `{
-      "fix_this": ${createPageArticlesQuery('hospitalPage', locale)},
+      "page": ${createPageArticlesQuery('hospitalPage', locale)},
       "elements": ${createElementsQuery('vr', ['hospital_nice'], locale)}
     }`;
   })
@@ -111,7 +111,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.fix_this.articles}
+            articles={content.page.articles}
           />
 
           <TwoKpiSection>
@@ -142,8 +142,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             description={text.map_toelichting}
             legend={{
               thresholds:
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
+                gmThresholds.hospital_nice.admissions_on_date_of_reporting,
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             }}
@@ -152,7 +151,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <GmChoropleth
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
@@ -162,9 +161,9 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               getLink={reverseRouter.gm.ziekenhuisopnames}
               metricName="hospital_nice"
               metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <HospitalAdmissionsMunicipalTooltip context={context} />
-              )}
+              tooltipContent={(
+                context: GmGeoProperties & GmHospitalNiceValue
+              ) => <GmHospitalAdmissionsTooltip context={context} />}
             />
           </ChoroplethTile>
 

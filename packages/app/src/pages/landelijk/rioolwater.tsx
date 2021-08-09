@@ -1,20 +1,20 @@
 import {
-  GmProperties,
+  GmGeoProperties,
   GmSewerValue,
-  VrProperties,
+  VrGeoProperties,
   VrSewerValue,
 } from '@corona-dashboard/common';
 import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleSummary } from '~/components/article-teaser';
 import { RegionControlOption } from '~/components/chart-region-controls';
+import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { SewerMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/sewer-municipal-tooltip';
-import { SewerRegionalTooltip } from '~/components/choropleth/tooltips/region/sewer-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { vrThresholds } from '~/components/choropleth/logic';
+import {
+  GmSewerTooltip,
+  VrSewerTooltip,
+} from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -23,10 +23,13 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -47,10 +50,8 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ sewer }) => ({ sewer }),
     gm: ({ sewer }) => ({ sewer }),
   }),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('sewerPage', locale);
   })
 );
@@ -63,8 +64,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.rioolwater_metingen;
 
   const sewerAverages = data.sewer;
-  const [selectedMap, setSelectedMap] =
-    useState<RegionControlOption>('municipal');
+  const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -74,7 +74,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.vroege_signalen}
@@ -178,11 +178,11 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
               title: text.legenda_titel,
-              thresholds: regionThresholds.sewer.average,
+              thresholds: vrThresholds.sewer.average,
             }}
           >
-            {selectedMap === 'municipal' ? (
-              <MunicipalityChoropleth
+            {selectedMap === 'gm' ? (
+              <GmChoropleth
                 accessibility={{
                   key: 'sewer_municipal_choropleth',
                 }}
@@ -190,8 +190,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.gm.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={(context: GmProperties & GmSewerValue) => (
-                  <SewerMunicipalTooltip context={context} />
+                tooltipContent={(context: GmGeoProperties & GmSewerValue) => (
+                  <GmSewerTooltip context={context} />
                 )}
               />
             ) : (
@@ -203,14 +203,14 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 getLink={reverseRouter.vr.rioolwater}
                 metricName="sewer"
                 metricProperty="average"
-                tooltipContent={(context: VrProperties & VrSewerValue) => (
-                  <SewerRegionalTooltip context={context} />
+                tooltipContent={(context: VrGeoProperties & VrSewerValue) => (
+                  <VrSewerTooltip context={context} />
                 )}
               />
             )}
           </ChoroplethTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

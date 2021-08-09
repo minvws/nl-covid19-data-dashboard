@@ -1,17 +1,20 @@
 import { InCollectionTestedOverall } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { maxBy } from 'lodash';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { internationalThresholds } from '~/components/choropleth/international-thresholds';
+import { inThresholds } from '~/components/choropleth/logic';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
+import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
 import { BarWithNumber } from './bar-with-number';
+
 interface WideInfectedTableProps {
   data: InCollectionTestedOverall[];
   isExpanded: boolean;
@@ -27,34 +30,33 @@ export function WideInfectedTable({
   countryNames,
   inputValue,
 }: WideInfectedTableProps) {
-  const { siteText } = useIntl();
-  const text = siteText.internationaal_positief_geteste_personen.land_tabel;
+  const intl = useIntl();
+  const text =
+    intl.siteText.internationaal_positief_geteste_personen.land_tabel;
   const highestAverage = maxBy(data, (x) => x.infected_per_100k_average);
+
+  const formatValue = useMemo(() => {
+    const numberOfDecimals = getMaximumNumberOfDecimals(
+      data.map((x) => x.infected_per_100k_average ?? 0)
+    );
+    return (value: number) =>
+      intl.formatPercentage(value, {
+        minimumFractionDigits: numberOfDecimals,
+        maximumFractionDigits: numberOfDecimals,
+      });
+  }, [intl, data]);
 
   return (
     <Box overflow="auto">
       <StyledTable>
         <thead
-          css={css({
-            borderBottom: '1px solid',
-            borderBottomColor: 'silver',
-          })}
+          css={css({ borderBottom: '1px solid', borderBottomColor: 'silver' })}
         >
           <tr>
+            <HeaderCell css={css({ pl: 3 })}>{text.header_land}</HeaderCell>
             <HeaderCell
               css={css({
-                pl: 3,
-              })}
-            >
-              {text.header_land}
-            </HeaderCell>
-            <HeaderCell
-              css={css({
-                width: asResponsiveArray({
-                  sm: 180,
-                  lg: 200,
-                  xl: 210,
-                }),
+                width: asResponsiveArray({ sm: 180, lg: 200, xl: 210 }),
               })}
             >
               {text.header_per_inwoners}
@@ -63,11 +65,7 @@ export function WideInfectedTable({
               css={css({
                 textAlign: 'right',
                 pr: 3,
-                width: asResponsiveArray({
-                  sm: 200,
-                  lg: 220,
-                  xl: 260,
-                }),
+                width: asResponsiveArray({ sm: 200, lg: 220, xl: 260 }),
               })}
             >
               {text.header_totale}
@@ -83,6 +81,7 @@ export function WideInfectedTable({
                   item={item}
                   highestAverage={highestAverage?.infected_per_100k_average}
                   countryNames={countryNames}
+                  formatValue={formatValue}
                 />
               ) : null
             ) : (
@@ -93,6 +92,7 @@ export function WideInfectedTable({
                   item={item}
                   highestAverage={highestAverage?.infected_per_100k_average}
                   countryNames={countryNames}
+                  formatValue={formatValue}
                 />
               )
             )
@@ -107,13 +107,19 @@ interface tableRowProps {
   item: InCollectionTestedOverall;
   highestAverage: number | undefined;
   countryNames: Record<string, string>;
+  formatValue: (value: number) => string;
 }
 
-function TableRow({ item, highestAverage, countryNames }: tableRowProps) {
+function TableRow({
+  item,
+  highestAverage,
+  countryNames,
+  formatValue,
+}: tableRowProps) {
   const { formatNumber } = useIntl();
 
   const filterBelow = getFilteredThresholdValues(
-    internationalThresholds.infected_per_100k_average,
+    inThresholds.infected_per_100k_average,
     item.infected_per_100k_average
   );
 
@@ -155,6 +161,7 @@ function TableRow({ item, highestAverage, countryNames }: tableRowProps) {
             amount={item.infected_per_100k_average}
             percentage={(item.infected_per_100k_average / highestAverage) * 100}
             color={filterBelow.color}
+            formatValue={formatValue}
           />
         )}
       </Cell>
@@ -183,6 +190,7 @@ const HeaderCell = styled.th(
     textAlign: 'left',
     fontWeight: 'normal',
     pb: 2,
+    verticalAlign: 'middle',
   })
 );
 

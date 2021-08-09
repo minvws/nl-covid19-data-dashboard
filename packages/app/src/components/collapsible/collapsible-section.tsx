@@ -3,6 +3,7 @@ import { ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import { Box, BoxProps } from '~/components/base';
 import { useCollapsible } from '~/utils/use-collapsible';
+import { Anchor } from '../typography';
 
 interface CollapsibleSectionProps extends BoxProps {
   summary: string;
@@ -48,14 +49,14 @@ export const CollapsibleSection = ({
         <Summary>
           {summary}
           {id && (
-            <AnchorLink
+            <StyledAnchor
               aria-hidden="true"
               tabIndex={-1}
               onClick={(e) => e.stopPropagation()}
               href={`#${id}`}
             >
               #
-            </AnchorLink>
+            </StyledAnchor>
           )}
           {collapsible.chevron}
         </Summary>
@@ -66,7 +67,7 @@ export const CollapsibleSection = ({
   );
 };
 
-const AnchorLink = styled.a(
+const StyledAnchor = styled(Anchor)(
   css({
     color: 'lightGray',
     px: 3,
@@ -106,10 +107,10 @@ const Summary = styled.button(
       outlineColor: 'blue',
     },
 
-    [AnchorLink]: { opacity: 0 },
+    [StyledAnchor]: { opacity: 0 },
 
     '&:focus, &:hover': {
-      [AnchorLink]: { opacity: 1 },
+      [StyledAnchor]: { opacity: 1 },
     },
   })
 );

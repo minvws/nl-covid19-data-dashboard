@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import {
   EscalationLevelInfoLabel,
-  EscalationLevelLabel
+  EscalationLevelLabel,
 } from '~/components/escalation-level';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { asResponsiveArray } from '~/style/utils';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useCollapsible } from '~/utils/use-collapsible';
@@ -28,7 +28,7 @@ export function VrGroup(props: VrGroupProps) {
     <>
       <Box color="black" minWidth={{ _: '2rem', sm: '13.5rem', lg: '15.5rem' }}>
         {breakpoints.sm ? (
-          <EscalationLevelInfoLabel level={level} fontSize={3} size="medium" />
+          <EscalationLevelInfoLabel level={level} fontSize={6} size="medium" />
         ) : (
           level !== null && <EscalationLevelIcon level={level} size="medium" />
         )}
@@ -72,7 +72,6 @@ const Header = styled.button<{ open?: boolean }>((props) =>
     border: 'none',
     color: 'blue',
     fontFamily: 'body',
-    fontSize: '1.25rem',
     textAlign: 'left',
     cursor: props.onClick ? 'pointer' : 'default',
     borderBottom: '1px solid',

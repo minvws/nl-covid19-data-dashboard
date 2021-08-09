@@ -1,4 +1,4 @@
-import { FeatureCollection, MultiPolygon } from 'geojson';
+import { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 import {
   GmCollection,
   GmDifference,
@@ -76,26 +76,29 @@ export type DifferenceKey =
   | keyof VrDifference
   | keyof GmDifference;
 
-export interface VrProperties {
+export interface VrGeoProperties {
   vrcode: string;
   vrname: string;
 }
-export interface GmProperties {
+export interface GmGeoProperties {
   gemnaam: string;
   gemcode: string;
   gmcode: string;
 }
 
-export type EuropeGeoProperties = { ISO_A3: string };
+export type InGeoProperties = { ISO_A3: string };
 
-export type EuropeGeoJSON = FeatureCollection<
-  MultiPolygon,
-  EuropeGeoProperties
+export type InGeoJSON = FeatureCollection<MultiPolygon, InGeoProperties>;
+
+export type GmGeoJSON = FeatureCollection<
+  MultiPolygon | Polygon,
+  GmGeoProperties
 >;
 
-export type MunicipalGeoJSON = FeatureCollection<MultiPolygon, GmProperties>;
-
-export type VrGeoJSON = FeatureCollection<MultiPolygon, VrProperties>;
+export type VrGeoJSON = FeatureCollection<
+  MultiPolygon | Polygon,
+  VrGeoProperties
+>;
 
 export type ChoroplethThresholdsValue<T extends number = number> = {
   color: string;

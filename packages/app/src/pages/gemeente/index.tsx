@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { Box } from '~/components/base';
-import { MunicipalityNavigationMap } from '~/components/choropleth/municipality-navigation-map';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { GmNavigationMap } from '~/components/choropleth';
+import { TooltipContent } from '~/components/choropleth/tooltips';
 import { Heading, Text } from '~/components/typography';
-import { MunicipalityComboBox } from '~/domain/layout/components/municipality-combo-box';
+import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createGetStaticProps,
@@ -32,19 +32,15 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
-        isLandingPage
-        lastGenerated={lastGenerated}
-        code={code}
-      >
+      <GmLayout isLandingPage lastGenerated={lastGenerated} code={code}>
         {!breakpoints.md && (
           <Box bg="white">
-            <MunicipalityComboBox />
+            <GmComboBox />
           </Box>
         )}
 
         <Box as="article" p={4}>
-          <Heading level={3} as="h1">
+          <Heading level={2} as="h1">
             {siteText.gemeente_index.selecteer_titel}
           </Heading>
           <Text>{siteText.gemeente_index.selecteer_toelichting}</Text>
@@ -58,7 +54,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             maxHeight={960}
             margin="0 auto"
           >
-            <MunicipalityNavigationMap
+            <GmNavigationMap
               tooltipContent={(context) => (
                 <TooltipContent
                   title={context.gemnaam}
@@ -68,7 +64,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             />
           </Box>
         </Box>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

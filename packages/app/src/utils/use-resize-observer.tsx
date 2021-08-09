@@ -3,12 +3,12 @@ import ResizeObserver from 'resize-observer-polyfill';
 import { useCallbackRef } from 'use-callback-ref';
 
 type Size = {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 };
 
-export function useResizeObserver<T extends HTMLElement | SVGSVGElement>() {
-  const [size, setSize] = useState<Size>();
+export function useResizeObserver<T extends HTMLElement | SVGElement>() {
+  const [size, setSize] = useState<Size>({});
 
   const [node, setNode] = useState<T | null>(null);
   const ref = useCallbackRef<T>(null, (node) => setNode(node));
@@ -39,5 +39,5 @@ export function useResizeObserver<T extends HTMLElement | SVGSVGElement>() {
     return () => disconnect();
   }, [disconnect, observe]);
 
-  return { ...size, ref };
+  return [ref, size] as const;
 }

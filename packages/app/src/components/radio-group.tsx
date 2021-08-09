@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { asResponsiveArray } from '~/style/utils';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { Box } from './base';
-interface RadioGroupItem<T extends string> {
+import { InlineText } from './typography';
+
+export interface RadioGroupItem<T extends string> {
   label: string;
   value: T;
 }
@@ -27,7 +29,6 @@ const StyledLabel = styled.label(
   css({
     flex: '0 1 auto',
     color: 'button',
-    fontSize: asResponsiveArray({ _: 1, sm: 2 }),
     textAlign: 'center',
     p: asResponsiveArray({ _: '0.25em 0.5em', xs: '0.2em 1.5em' }),
     borderStyle: 'solid',
@@ -74,7 +75,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
             checked={value === item.value}
           />
           <StyledLabel htmlFor={`radiogroup-${item.value}-${id}-${index}`}>
-            {item.label}
+            <InlineText variant="button3">{item.label}</InlineText>
           </StyledLabel>
         </Fragment>
       ))}

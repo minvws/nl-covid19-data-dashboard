@@ -16,7 +16,7 @@ import { Link } from '~/utils/link';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { useEscalationThresholds } from '../../thresholds';
-import { VrScoreboardData } from '../logic';
+import { VrScoreboardData } from '../types';
 
 interface VrRowProps {
   vrData: VrScoreboardData;
@@ -70,7 +70,7 @@ export function VrRow({
             escalationLevelData.level === null ? undefined : escalationColor
           }
         >
-          <InlineText>{vrData.vrName}</InlineText>
+          <InlineText variant="body1">{vrData.vrName}</InlineText>
         </VrLinkCell>
 
         {(isPresent(escalationLevelData.positive_tested_per_100k) ||

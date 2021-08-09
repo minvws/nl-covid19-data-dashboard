@@ -20,12 +20,13 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
-import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { EscalationLevel } from '../restrictions/type';
+import { EscalationLevel } from '../restrictions/types';
 import { SituationIcon } from '../situations/components/situation-icon';
+import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VrComboBox } from './components/vr-combo-box';
 
 export const vrPageMetricNames = [
@@ -44,7 +45,9 @@ export const vrPageMetricNames = [
 
 export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
 
-export type VrPageMetricData = Pick<Vr, VrRegionPageMetricNames>;
+export type VrPageMetricData = {
+  situationsSidebarValue: SituationsSidebarValue;
+} & Pick<Vr, VrRegionPageMetricNames>;
 
 type VrLayoutProps = {
   lastGenerated: string;
@@ -141,32 +144,41 @@ export function VrLayout(props: VrLayoutProps) {
                 maxWidth={{ _: '38rem', md: undefined }}
                 mx="auto"
               >
-                <Text fontSize={3} fontWeight="bold" px={3} m={0}>
-                  {vrName}
-                </Text>
+                <Box px={3}>
+                  <Text variant={'h3'} fontWeight="bold">
+                    {vrName}
+                  </Text>
+                </Box>
 
-                <Menu>
-                  <MetricMenuButtonLink
-                    href={reverseRouter.vr.maatregelen(code)}
-                    title={siteText.veiligheidsregio_maatregelen.titel_sidebar}
-                    buttonVariant="top"
-                    subtitle={
-                      siteText.veiligheidsregio_maatregelen.subtitel_sidebar
-                    }
-                  />
-                  <MetricMenuButtonLink
-                    href={reverseRouter.vr.risiconiveau(code)}
-                    title={siteText.veiligheidsregio_layout.headings.inschaling}
-                    buttonVariant="bottom"
-                  >
-                    <Box mt={2}>
-                      <EscalationLevelInfoLabel
-                        level={data.escalation_level.level as EscalationLevel}
-                        size="small"
-                        useLevelColor
-                      />
-                    </Box>
-                  </MetricMenuButtonLink>
+                <Menu spacing={4}>
+                  <Box>
+                    <MetricMenuButtonLink
+                      href={reverseRouter.vr.maatregelen(code)}
+                      title={
+                        siteText.veiligheidsregio_maatregelen.titel_sidebar
+                      }
+                      buttonVariant="top"
+                      subtitle={
+                        siteText.veiligheidsregio_maatregelen.subtitel_sidebar
+                      }
+                    />
+                    <MetricMenuButtonLink
+                      href={reverseRouter.vr.risiconiveau(code)}
+                      title={
+                        siteText.veiligheidsregio_layout.headings.inschaling
+                      }
+                      buttonVariant="bottom"
+                    >
+                      <Box mt={2}>
+                        <EscalationLevelInfoLabel
+                          level={data.escalation_level.level as EscalationLevel}
+                          size="small"
+                          useLevelColor
+                        />
+                      </Box>
+                    </MetricMenuButtonLink>
+                  </Box>
+
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings.ziekenhuizen
@@ -190,6 +202,7 @@ export function VrLayout(props: VrLayoutProps) {
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>
+
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings.besmettingen
@@ -238,8 +251,13 @@ export function VrLayout(props: VrLayoutProps) {
                       icon={<SituationIcon id="gathering" />}
                       title={siteText.brononderzoek.titel_sidebar}
                     >
-                      <SidebarKpiValue
-                        title={siteText.brononderzoek.kpi_titel}
+                      <SituationsSidebarMetric
+                        date_start_unix={
+                          data.situationsSidebarValue.date_start_unix
+                        }
+                        date_end_unix={
+                          data.situationsSidebarValue.date_end_unix
+                        }
                       />
                     </MetricMenuItemLink>
                   </CategoryMenu>

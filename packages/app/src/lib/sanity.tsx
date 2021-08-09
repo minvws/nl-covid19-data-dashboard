@@ -8,8 +8,8 @@ import { findClosestSize } from '~/utils/find-closest-size';
 const config: ClientConfig = {
   /**
    * Find your project ID and dataset in `sanity.json` in your studio project.
-   * These are considered “public”, but you can use environment variables
-   * if you want differ between local dev and production.
+   * These are considered “public”, but you can use environment variables if you
+   * want differ between local dev and production.
    *
    * https://nextjs.org/docs/basic-features/environment-variables
    **/
@@ -17,7 +17,7 @@ const config: ClientConfig = {
   projectId: '5mog5ask',
   useCdn: process.env.NODE_ENV === 'production',
   apiVersion: '2021-03-25',
-  withCredentials: process.env.NEXT_PUBLIC_HOT_RELOAD_LOKALIZE === '1',
+  withCredentials: process.env.NEXT_PUBLIC_PHASE === 'develop',
   /**
    * Set useCdn to `false` if your application require the freshest possible
    * data always (potentially slightly slower and a bit more expensive).
@@ -40,10 +40,11 @@ export async function getClient(
 
 // const builder = imageUrlBuilder(client);
 /**
- * Set up a helper function for generating Image URLs with only the asset reference data in your documents.
- * Read more: https://www.sanity.io/docs/image-url
- * CAUTION: This is commented out because we should be talking to our images on our own filesystem!
- * Chances are high this helper will be removed completely!
+ * Set up a helper function for generating Image URLs with only the asset
+ * reference data in your documents. Read more:
+ * https://www.sanity.io/docs/image-url CAUTION: This is commented out because
+ * we should be talking to our images on our own filesystem! Chances are high
+ * this helper will be removed completely!
  **/
 // export const urlFor = (source: SanityImageSource) => builder.image(source);
 
@@ -73,18 +74,18 @@ export function localize<T>(value: T | T[], languages: string[]): T {
 }
 
 /**
- * Utility to get an object which can be spread on an `<img />`-element.
- * It will return the `src`, `srcSet` and `alt`-attributes together with the
- * width and height.
- * It's probably wise to set `height: auto` with css on the image-element itself
- * for a correctly resizing responsive image.
+ * Utility to get an object which can be spread on an `<img />`-element. It will
+ * return the `src`, `srcSet` and `alt`-attributes together with the width and
+ * height. It's probably wise to set `height: auto` with css on the
+ * image-element itself for a correctly resizing responsive image.
  *
- * By default the `src` will resolve the to a size close to the original size.
- * Optionally you can provide a configuration objext to override this size.
+ * By default the `src` will resolve to a size close to the original size.
+ * Optionally you can provide a configuration object to override this size.
  *
- * The configuration object accepts a an array called sizes where you map viewport widths to an image width in pixels.
- * This allows you to override the 1-on-1 matching behavior of srcSet to a tailored one for your image.
- * E.g. Normally a 1024vw viewport will load a 1024px image.
+ * The configuration object accepts an array called sizes where you map viewport
+ * widths to an image width in pixels. This allows you to override the 1-on-1
+ * matching behavior of srcSet to a tailored one for your image. E.g. Normally a
+ * 1024vw viewport will load a 1024px image.
  *
  *
  * Usage:
@@ -106,16 +107,16 @@ export function getImageProps<T extends ImageBlock>(
   const { asset, alt = '' } = node;
   const { metadata } = asset;
 
-  const {
-    defaultWidth = node.asset.metadata.dimensions.width,
-    sizes: sizesOption,
-  } = options;
+  const { defaultWidth = metadata.dimensions.width, sizes: sizesOption } =
+    options;
 
   const width = findClosestSize(defaultWidth, imageResizeTargets);
   const height = width / metadata.dimensions.aspectRatio;
 
   const src = getImageSrc(node.asset, defaultWidth);
-  let srcSet = undefined; //we keep this undefined for SVG's, which don't need srcSets
+
+  /* we keep these undefined for SVGs, which don't need srcSets */
+  let srcSet: undefined | string;
 
   if (asset.extension !== 'svg') {
     /**
@@ -147,16 +148,17 @@ export function getImageProps<T extends ImageBlock>(
 }
 
 export function getFileSrc(asset: SanityFileProps) {
-  return `/cms/files/${asset.assetId}.${asset.extension}`;
+  return `/cms-files/${asset.assetId}.${asset.extension}`;
 }
 
 export function getImageSrc(
   asset: SanityImageProps,
   defaultWidth = asset.metadata.dimensions.width
 ) {
+  const filename = `${asset.assetId}-${asset.metadata.dimensions.width}x${asset.metadata.dimensions.height}.${asset.extension}`;
   if (asset.extension === 'svg') {
-    return `/cms/images/${asset.assetId}.svg`;
+    return `/cms-images/${filename}`;
   }
   const size = findClosestSize(defaultWidth, imageResizeTargets);
-  return `/cms/images/${asset.assetId}-${size}.${asset.extension}`;
+  return `/cms-images/${filename}?w=${size}&q=65&auto=format`;
 }

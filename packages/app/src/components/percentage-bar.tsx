@@ -13,14 +13,6 @@ const Wrapper = styled.div(
   })
 );
 
-const Bar = styled.div<{ height?: number | string; minWidth?: string }>((x) =>
-  css({
-    backgroundColor: 'currentcolor',
-    height: x.height ?? '0.8em',
-    minWidth: x.minWidth,
-  })
-);
-
 export function PercentageBar({ percentage, height }: PercentageProps) {
   const minWidth = percentage > 0 ? '2px' : undefined;
   return (
@@ -33,3 +25,11 @@ export function PercentageBar({ percentage, height }: PercentageProps) {
     </Wrapper>
   );
 }
+
+const Bar = styled.div<{ height?: number | string; minWidth?: string }>((x) =>
+  css({
+    backgroundColor: 'currentcolor',
+    height: x.height ?? '0.8em',
+    minWidth: x.minWidth,
+  })
+);

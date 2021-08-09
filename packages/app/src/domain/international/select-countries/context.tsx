@@ -141,6 +141,7 @@ function useSearchContextValue<T extends Element>(
   useOnClickOutside([containerRef], () => setHasHitFocus(false));
 
   return {
+    selectedCount: countries.filter((x) => x.isSelected).length,
     hits,
     id,
     setHasHitFocus,

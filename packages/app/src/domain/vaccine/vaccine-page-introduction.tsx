@@ -43,7 +43,7 @@ export function VaccinePageIntroduction({
             headingLevel={1}
           />
           <Box spacing={4} px={{ md: 5 }}>
-            <Text fontSize="1.625rem" m={0}>
+            <Text variant="h2" fontWeight="normal">
               {replaceComponentsInText(
                 text.current_amount_of_administrations_text,
                 {
@@ -62,7 +62,7 @@ export function VaccinePageIntroduction({
                 <Heading level={3}>
                   {text.grafiek_gezette_prikken.titel}
                 </Heading>
-                <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
+                <Text>{text.grafiek_gezette_prikken.omschrijving}</Text>
                 <div css={css({ position: 'relative' })}>
                   <VaccineAdministrationsOverTimeChart
                     accessibility={{
@@ -81,7 +81,7 @@ export function VaccinePageIntroduction({
                 <KpiValue
                   absolute={data.vaccine_administered_planned.last_value.doses}
                 />
-                <Text m={0}>
+                <Text>
                   {(() => {
                     /**
                      * We'll render a date range either as:

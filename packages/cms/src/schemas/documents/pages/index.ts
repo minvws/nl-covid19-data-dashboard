@@ -1,5 +1,6 @@
 export * from './behavior-page';
 export * from './cijfer-verantwoording-page';
+export * from './cijfer-verantwoording-groepen-page';
 export * from './contact';
 export * from './deceased-page';
 export * from './disability-care-page';

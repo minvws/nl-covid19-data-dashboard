@@ -84,7 +84,7 @@ export function CoverageProgressBar(props: {
           />
         </svg>
       </Box>
-      <Box display="flex" spacing={2} spacingHorizontal>
+      <Box display="flex" spacingHorizontal={2}>
         <LegendItem
           color={fullColor}
           percentage={fullPercentage}
@@ -131,14 +131,14 @@ function LegendItem({
     <Box display="flex" alignItems="baseline">
       <ColorIndicator color={color} />
       {isDefined(count) ? (
-        <InlineText fontSize={1}>
+        <InlineText variant="label1">
           {`${formatPercentage(percentage, {
             maximumFractionDigits: 1,
             minimumFractionDigits: 1,
           })}% ${label} (${formatNumber(count)})`}
         </InlineText>
       ) : (
-        <InlineText fontSize={1}>
+        <InlineText variant="label1">
           {`${formatPercentage(percentage, {
             maximumFractionDigits: 1,
             minimumFractionDigits: 1,

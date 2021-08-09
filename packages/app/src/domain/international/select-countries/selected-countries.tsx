@@ -89,7 +89,7 @@ const ItemButton = styled.button<{
     py: '3px',
     border: '3px solid',
     borderColor: isActive && !hasRemoveIcon ? color : 'transparent',
-    fontWeight: isActive ? 'bold' : 'normal',
+    fontWeight: 'normal',
     fontFamily: 'inherit',
     position: 'relative',
     outline: 'none',
