@@ -1,14 +1,14 @@
 import { Vr } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import ElderlyIcon from '~/assets/elderly.svg';
-import Gedrag from '~/assets/gedrag.svg';
-import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import GetestIcon from '~/assets/test.svg';
-import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import VirusIcon from '~/assets/virus.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
+import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
+import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
+import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
+import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
+import { ReactComponent as VirusIcon } from '~/assets/virus.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
   Menu,

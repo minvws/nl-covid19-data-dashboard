@@ -8,7 +8,7 @@ import set from 'lodash/set';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Subscription } from 'rxjs';
 import styled from 'styled-components';
-import DatabaseIcon from '~/assets/database.svg';
+import { ReactComponent as DatabaseIcon } from '~/assets/database.svg';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { getClient } from '~/lib/sanity';

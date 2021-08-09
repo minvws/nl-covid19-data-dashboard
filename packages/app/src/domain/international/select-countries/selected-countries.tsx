@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import ResetIcon from '~/assets/reset.svg';
+import { ReactComponent as ResetIcon } from '~/assets/reset.svg';
 import { asResponsiveArray } from '~/style/utils';
 
 interface SelectOption {

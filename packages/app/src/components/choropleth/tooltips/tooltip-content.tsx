@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import Locatie from '~/assets/locatie.svg';
+import { ReactComponent as Locatie } from '~/assets/locatie.svg';
 import { Heading } from '~/components/typography';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 

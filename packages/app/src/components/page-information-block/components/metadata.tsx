@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
-import ChevronIcon from '~/assets/chevron.svg';
-import ClockIcon from '~/assets/clock.svg';
-import DatabaseIcon from '~/assets/database.svg';
-import MeerInformatieIcon from '~/assets/meer-informatie.svg';
+import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
+import { ReactComponent as ClockIcon } from '~/assets/clock.svg';
+import { ReactComponent as DatabaseIcon } from '~/assets/database.svg';
+import { ReactComponent as MeerInformatieIcon } from '~/assets/meer-informatie.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';

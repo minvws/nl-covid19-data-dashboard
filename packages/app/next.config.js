@@ -67,6 +67,9 @@ const nextConfig = {
                 ref: true,
               },
             },
+            {
+              loader: 'file-loader',
+            },
           ],
           issuer: {
             and: [/\.(ts|tsx|js|jsx|md|mdx)$/],

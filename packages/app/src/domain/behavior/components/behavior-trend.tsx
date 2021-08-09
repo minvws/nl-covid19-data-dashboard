@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import Gelijk from '~/assets/gelijk.svg';
-import PijlOmhoog from '~/assets/pijl-omhoog.svg';
-import PijlOmlaag from '~/assets/pijl-omlaag.svg';
+import { ReactComponent as Gelijk } from '~/assets/gelijk.svg';
+import { ReactComponent as PijlOmhoog } from '~/assets/pijl-omhoog.svg';
+import { ReactComponent as PijlOmlaag } from '~/assets/pijl-omlaag.svg';
 import { BehaviorTrendType } from '../logic/behavior-types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';

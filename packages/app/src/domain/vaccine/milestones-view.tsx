@@ -1,7 +1,7 @@
 import { css } from '@styled-system/css';
 import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import VaccineIcon from '~/assets/vaccine.svg';
+import { ReactComponent as VaccineIcon } from '~/assets/vaccine.svg';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Tile } from '~/components/tile';

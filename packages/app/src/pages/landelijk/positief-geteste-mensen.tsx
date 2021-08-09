@@ -6,8 +6,8 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
-import Afname from '~/assets/afname.svg';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Afname } from '~/assets/afname.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
