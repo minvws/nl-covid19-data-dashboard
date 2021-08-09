@@ -1,6 +1,6 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { memo, useMemo, useRef, useState } from 'react';
+import { FocusEvent, memo, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -84,32 +84,50 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
 }: ChoroplethProps<T, K>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
   const isTouch = useIsTouchDevice();
-
+  const { siteText } = useIntl();
   const hoverRef = useRef<SVGGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));
 
-  return (
-    <>
-      <ChoroplethMap {...props} setTooltip={setTooltip} hoverRef={hoverRef} />
+  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
+    useTabInteractiveButton(
+      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
+        subject: siteText.choropleth.gm.plural,
+      })
+    );
 
-      {tooltip && (
-        <div
-          ref={tooltipRef}
-          style={{ pointerEvents: isTouch ? 'all' : 'none' }}
-        >
-          <Tooltip
-            placement={tooltipPlacement}
-            left={tooltip.left}
-            top={tooltip.top}
-            setTooltip={setTooltip}
-            formatTooltip={formatTooltip}
-            data={tooltip.data}
-          />
-        </div>
-      )}
-    </>
+  return (
+    <Box position="relative" height="100%">
+      {tabInteractiveButton}
+      <div
+        css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
+      >
+        <ChoroplethMap
+          {...props}
+          setTooltip={setTooltip}
+          hoverRef={hoverRef}
+          isTabInteractive={isTabInteractive}
+          anchorEventHandlers={anchorEventHandlers}
+        />
+
+        {tooltip && (
+          <div
+            ref={tooltipRef}
+            style={{ pointerEvents: isTouch ? 'all' : 'none' }}
+          >
+            <Tooltip
+              placement={tooltipPlacement}
+              left={tooltip.left}
+              top={tooltip.top}
+              setTooltip={setTooltip}
+              formatTooltip={formatTooltip}
+              data={tooltip.data}
+            />
+          </div>
+        )}
+      </div>
+    </Box>
   );
 }
 
@@ -119,6 +137,11 @@ type ChoroplethMapProps<
 > = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
   hoverRef: React.RefObject<SVGGElement>;
   setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
+  isTabInteractive: boolean;
+  anchorEventHandlers: {
+    onFocus: (evt: FocusEvent<HTMLAnchorElement>) => void;
+    onBlur: (evt: FocusEvent<HTMLAnchorElement>) => void;
+  };
 };
 
 const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
@@ -134,6 +157,8 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     hoverRef,
     setTooltip,
     accessibility,
+    isTabInteractive,
+    anchorEventHandlers,
   } = props;
 
   const dataConfig = {
@@ -162,7 +187,6 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
   const mapProjection = map === 'in' ? 'mercator' : 'mercator';
 
   const annotations = useAccessibilityAnnotations(accessibility);
-  const { siteText } = useIntl();
   const clipPathId = useUniqueId();
   const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
 
@@ -175,13 +199,6 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     map,
     dataOptions.selectedCode
   );
-
-  const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
-    useTabInteractiveButton(
-      replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-        subject: siteText.choropleth.gm.plural,
-      })
-    );
 
   const getFillColor = useFillColor(
     data,
@@ -229,78 +246,73 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
   );
 
   return (
-    <Box position="relative" height="100%">
-      {tabInteractiveButton}
+    <>
+      {annotations.descriptionElement}
       <div
-        css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
+        ref={containerRef}
+        style={{
+          minHeight,
+          maxHeight: '75vh',
+          maxWidth: '100%',
+        }}
       >
-        {annotations.descriptionElement}
-        <div
-          ref={containerRef}
-          style={{
-            minHeight,
-            maxHeight: '75vh',
-            maxWidth: '100%',
-          }}
+        <svg
+          role="img"
+          width={width}
+          viewBox={`0 0 ${width} ${height}`}
+          css={css({ display: 'block', bg: 'transparent', width: '100%' })}
+          onMouseMove={mouseOverHandler}
+          onMouseOut={mouseOutHandler}
         >
-          <svg
-            role="img"
+          <clipPath id={clipPathId}>
+            <rect x={0} y={0} height={height} width={width} />
+          </clipPath>
+          <rect
+            x={0}
+            y={0}
             width={width}
-            viewBox={`0 0 ${width} ${height}`}
-            css={css({ display: 'block', bg: 'transparent', width: '100%' })}
-            onMouseMove={mouseOverHandler}
-            onMouseOut={mouseOutHandler}
-          >
-            <clipPath id={clipPathId}>
-              <rect x={0} y={0} height={height} width={width} />
-            </clipPath>
-            <rect
-              x={0}
-              y={0}
-              width={width}
-              height={height}
-              fill={'none'}
-              rx={14}
+            height={height}
+            fill={'none'}
+            rx={14}
+          />
+          <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
+            <MercatorGroup
+              projection={mapProjection}
+              data={choroplethFeatures.area.features}
+              fillMethod={area.fill}
+              strokeMethod={area.stroke}
+              strokeWidthMethod={area.strokeWidth}
+              fitExtent={fitExtent}
             />
-            <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
-              <MercatorGroup
-                projection={mapProjection}
-                data={choroplethFeatures.area.features}
-                fillMethod={area.fill}
-                strokeMethod={area.stroke}
-                strokeWidthMethod={area.strokeWidth}
-                fitExtent={fitExtent}
-              />
-              {isDefined(choroplethFeatures.outline) && (
-                <g css={css({ pointerEvents: 'none' })}>
-                  <MercatorGroup
-                    projection={mapProjection}
-                    data={choroplethFeatures.outline.features}
-                    fillMethod={outline.fill}
-                    strokeMethod={outline.stroke}
-                    strokeWidthMethod={outline.strokeWidth}
-                    fitExtent={fitExtent}
-                  />
-                </g>
-              )}
-              <g ref={hoverRef}>
-                <MercatorHoverGroup
+            {isDefined(choroplethFeatures.outline) && (
+              <g css={css({ pointerEvents: 'none' })}>
+                <MercatorGroup
                   projection={mapProjection}
-                  data={choroplethFeatures.hover.features}
-                  fillMethod={hover.fill}
-                  strokeMethod={hover.stroke}
-                  strokeWidthMethod={hover.strokeWidth}
+                  data={choroplethFeatures.outline.features}
+                  fillMethod={outline.fill}
+                  strokeMethod={outline.stroke}
+                  strokeWidthMethod={outline.strokeWidth}
                   fitExtent={fitExtent}
-                  isTabInteractive={isTabInteractive}
-                  getTitle={getFeatureName}
-                  getHref={dataOptions.getLink}
-                  {...anchorEventHandlers}
                 />
               </g>
+            )}
+            <g ref={hoverRef}>
+              <MercatorHoverGroup
+                projection={mapProjection}
+                data={choroplethFeatures.hover.features}
+                fillMethod={hover.fill}
+                strokeMethod={hover.stroke}
+                strokeWidthMethod={hover.strokeWidth}
+                fitExtent={fitExtent}
+                isTabInteractive={isTabInteractive}
+                getTitle={getFeatureName}
+                getHref={dataOptions.getLink}
+                {...anchorEventHandlers}
+              />
             </g>
-          </svg>
-        </div>
+          </g>
+        </svg>
       </div>
-    </Box>
+    </>
   );
 });
