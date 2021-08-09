@@ -5,6 +5,7 @@ import { useIntl } from '~/intl';
 import { VisuallyHidden } from './visually-hidden';
 
 import chevronDownUrl from '~/assets/chevron-down.svg';
+import closeUrl from '~/assets/close.svg';
 
 interface Option<T extends string> {
   value: T;
@@ -90,7 +91,7 @@ const ClearButton = styled.button(
     padding: 2,
     textAlign: 'left',
     backgroundColor: 'white',
-    backgroundImage: `url('/images/close.svg')`,
+    backgroundImage: `url('${closeUrl}')`,
     backgroundSize: '24px 24px',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
