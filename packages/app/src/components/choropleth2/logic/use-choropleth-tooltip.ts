@@ -1,13 +1,6 @@
 import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
-import {
-  MutableRefObject,
-  RefObject,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { MutableRefObject, RefObject, useEffect, useMemo, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { DataConfig, DataOptions } from '..';
@@ -41,7 +34,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       assert(item, `No data item found for code ${code}`);
       return item;
     };
-  }, [map, codeType]);
+  }, [codeType, data]);
 
   const threshold = thresholds[map][dataConfig.metricProperty as string];
   assert(
@@ -101,7 +94,17 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       container?.removeEventListener('focusin', handleBubbledFocusIn);
       container?.removeEventListener('focusout', handleBubbledFocusOut);
     };
-  }, [containerRef, setTooltip, showTooltipOnFocus, isTouch]);
+  }, [
+    containerRef,
+    setTooltip,
+    showTooltipOnFocus,
+    isTouch,
+    getFeatureName,
+    dataConfig,
+    dataOptions,
+    getItemByCode,
+    threshold,
+  ]);
 
   return [
     createSvgMouseOverHandler(
@@ -128,59 +131,47 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
   threshold: ChoroplethThresholdsValue[],
   getFeatureName: (code: string) => string
 ) => {
-  return useCallback(
-    (event: React.MouseEvent) => {
-      const elm = event.target as HTMLElement | SVGElement;
-      const code = elm.getAttribute('data-id');
+  return (event: React.MouseEvent) => {
+    const elm = event.target as HTMLElement | SVGElement;
+    const code = elm.getAttribute('data-id');
 
-      if (isPresent(code) && ref.current) {
-        if (timeout.current > -1) {
-          clearTimeout(timeout.current);
-          timeout.current = -1;
-        }
-
-        /**
-         * Pass the DOM node to fix positioning in Firefox
-         */
-        const coords = localPoint(ref.current, event);
-
-        if (isPresent(coords)) {
-          setTooltip({
-            left: coords.x + 5,
-            top: coords.y + 5,
-            data: {
-              code,
-              dataItem: getItemByCode(code),
-              dataConfig,
-              dataOptions,
-              thresholdValues: threshold,
-              featureName: getFeatureName(code),
-              metricPropertyFormatter: (value: number) => value.toString(),
-            },
-          });
-        }
+    if (isPresent(code) && ref.current) {
+      if (timeout.current > -1) {
+        clearTimeout(timeout.current);
+        timeout.current = -1;
       }
-    },
-    [
-      timeout,
-      setTooltip,
-      ref,
-      getItemByCode,
-      dataConfig,
-      dataOptions,
-      threshold,
-      getFeatureName,
-    ]
-  );
+
+      /**
+       * Pass the DOM node to fix positioning in Firefox
+       */
+      const coords = localPoint(ref.current, event);
+
+      if (isPresent(coords)) {
+        setTooltip({
+          left: coords.x + 5,
+          top: coords.y + 5,
+          data: {
+            code,
+            dataItem: getItemByCode(code),
+            dataConfig,
+            dataOptions,
+            thresholdValues: threshold,
+            featureName: getFeatureName(code),
+            metricPropertyFormatter: (value: number) => value.toString(),
+          },
+        });
+      }
+    }
+  };
 };
 
 const createSvgMouseOutHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings<T> | undefined) => void
 ) => {
-  return useCallback(() => {
+  return () => {
     if (timeout.current < 0) {
       timeout.current = window.setTimeout(() => setTooltip(undefined), 10);
     }
-  }, [timeout, setTooltip]);
+  };
 };

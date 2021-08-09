@@ -5,6 +5,10 @@ import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import {
+  AccessibilityDefinition,
+  useAccessibilityAnnotations,
+} from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResizeObserver } from '~/utils/use-resize-observer';
@@ -25,6 +29,7 @@ import {
   useTabInteractiveButton,
 } from './logic';
 import { useChoroplethTooltip } from './logic/use-choropleth-tooltip';
+import { useFeatureName } from './logic/use-feature-name';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
 
@@ -69,6 +74,7 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
   boudingBoxPadding?: OptionalBoundingBoxPadding;
+  accessibility: AccessibilityDefinition;
 };
 
 export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
@@ -107,11 +113,16 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
   );
 }
 
+type ChoroplethMapProps<
+  T extends MapType,
+  K extends InferredDataItem<T>
+> = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
+  hoverRef: React.RefObject<SVGGElement>;
+  setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
+};
+
 const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
-  props: Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
-    hoverRef: React.RefObject<SVGGElement>;
-    setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
-  }
+  props: ChoroplethMapProps<T, K>
 ) => JSX.Element | null = memo((props) => {
   const {
     data: originalData,
@@ -122,6 +133,7 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     boudingBoxPadding: originalPadding = {},
     hoverRef,
     setTooltip,
+    accessibility,
   } = props;
 
   const dataConfig = {
@@ -149,6 +161,7 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
   const mapProjection = map === 'in' ? 'mercator' : 'mercator';
 
+  const annotations = useAccessibilityAnnotations(accessibility);
   const { siteText } = useIntl();
   const clipPathId = useUniqueId();
   const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
@@ -194,6 +207,8 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     containerRef
   );
 
+  const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
+
   const fitExtent: FitExtent = useMemo(
     () => [
       [
@@ -219,6 +234,7 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
       <div
         css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
       >
+        {annotations.descriptionElement}
         <div
           ref={containerRef}
           style={{
@@ -276,7 +292,7 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
                   strokeWidthMethod={hover.strokeWidth}
                   fitExtent={fitExtent}
                   isTabInteractive={isTabInteractive}
-                  getTitle={() => 'title'}
+                  getTitle={getFeatureName}
                   getHref={dataOptions.getLink}
                   {...anchorEventHandlers}
                 />

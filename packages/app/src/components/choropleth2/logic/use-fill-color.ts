@@ -22,7 +22,7 @@ export function useFillColor<T extends ChoroplethDataItem>(
         .find((x) => (x as any)[codeType] === code);
       return item?.[metricProperty];
     };
-  }, [map, metricProperty, codeType]);
+  }, [metricProperty, codeType, data]);
 
   const threshold = thresholds[map][metricProperty as string];
   assert(
@@ -38,13 +38,13 @@ export function useFillColor<T extends ChoroplethDataItem>(
       .range(threshold.map((t) => t.color));
 
     return color;
-  }, [thresholds]);
+  }, [threshold]);
 
   return useCallback(
     (code: string) => {
       const value = getValueByCode(code);
       return isDefined(value) ? colorScale(value) : dataConfig.noDataFillColor;
     },
-    [getValueByCode, colorScale]
+    [getValueByCode, colorScale, dataConfig.noDataFillColor]
   );
 }

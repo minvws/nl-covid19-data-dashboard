@@ -140,6 +140,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
             <Tile>
               <ChoroplethTwoColumnLayout>
                 <Choropleth
+                  accessibility={{
+                    key: 'topical_escalation_levels_choropleth',
+                  }}
                   map="gm"
                   data={choropleth.gm.tested_overall}
                   dataConfig={{
@@ -148,11 +151,25 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   dataOptions={{
                     getLink: (code: string) =>
                       `/gemeente/${code}/positief-geteste-mensen`,
-                    highlightSelection: true,
-                    selectedCode: 'GM0820',
                   }}
                 />
-                <Box>hai</Box>
+                <Box spacing={3}>
+                  <Metadata
+                    date={
+                      choropleth.vr.escalation_levels[0].date_of_insertion_unix
+                    }
+                    source={siteText.positief_geteste_personen.bronnen.rivm}
+                  />
+                  <Text>
+                    {siteText.positief_geteste_personen.map_toelichting}
+                  </Text>
+                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
+                    <ChartRegionControls
+                      value={selectedMap}
+                      onChange={setSelectedMap}
+                    />
+                  </Box>
+                </Box>
               </ChoroplethTwoColumnLayout>
             </Tile>
 
