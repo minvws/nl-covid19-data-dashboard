@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Gedrag from '~/assets/gedrag.svg';
+import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';

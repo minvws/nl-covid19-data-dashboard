@@ -2,7 +2,7 @@ import {
   GmCollectionTestedOverall,
   GmGeoProperties,
 } from '@corona-dashboard/common';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';

@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
-import ChevronIcon from '~/assets/chevron.svg';
+import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
 import { Box } from '../base';
 import { Text } from '../typography';
 

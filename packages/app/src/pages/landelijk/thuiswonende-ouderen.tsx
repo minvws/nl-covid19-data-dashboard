@@ -2,7 +2,7 @@ import {
   VrCollectionElderlyAtHome,
   VrGeoProperties,
 } from '@corona-dashboard/common';
-import ElderlyIcon from '~/assets/elderly.svg';
+import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
