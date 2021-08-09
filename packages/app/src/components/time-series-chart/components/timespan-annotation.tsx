@@ -71,7 +71,7 @@ export function TimespanAnnotation({
             y1="4"
             x2="0"
             y2="0"
-            style={{ stroke: 'white', strokeWidth: 2, strokeDasharray: 2 }}
+            style={{ stroke: 'white', strokeWidth: 4, strokeDasharray: 2 }}
           />
         </pattern>
       )}

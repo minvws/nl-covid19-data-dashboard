@@ -100,7 +100,7 @@ function VariantStackedAreaTileWithData({
   if (timespanAnnotations.length) {
     staticLegendItems.push({
       shape: 'dotted-square',
-      color: 'white',
+      color: 'black',
       label: text.lagere_betrouwbaarheid,
     });
   }

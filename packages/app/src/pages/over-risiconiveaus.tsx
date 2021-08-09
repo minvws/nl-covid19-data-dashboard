@@ -44,8 +44,8 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   }),
-  createGetContent<OverRisiconiveausData>((_) => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+  createGetContent<OverRisiconiveausData>((context) => {
+    const { locale = 'nl' } = context;
     return `*[_type == 'overRisicoNiveaus']{
       "title": title.${locale},
       "description": {

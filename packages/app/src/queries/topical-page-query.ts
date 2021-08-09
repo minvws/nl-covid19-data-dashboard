@@ -1,9 +1,7 @@
 import { GetStaticPropsContext } from 'next';
 
-export function getTopicalPageQuery(_context: GetStaticPropsContext) {
-  //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-  // const { locale } = context;
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
+export function getTopicalPageQuery(context: GetStaticPropsContext) {
+  const { locale = 'nl' } = context;
 
   return /* groq */ `{
     // Retrieve the latest 3 articles with the highlighted article filtered out:

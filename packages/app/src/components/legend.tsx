@@ -94,22 +94,46 @@ const Shape = styled.div<{ color: string }>((x) =>
   })
 );
 
-const DottedSquare = styled(Shape)(
-  css({
-    top: '5px',
-    width: '15px',
-    height: '15px',
-    background: 'white',
-    backgroundImage: 'radial-gradient(black 1px, transparent 0)',
-    backgroundSize: '3px 3px',
-  })
-);
+function DottedSquare({ color }: { color: string }) {
+  return (
+    <Shape color="white" css={css({ top: '3px' })}>
+      <svg width={16} height={16} viewBox={`0 0 ${16} ${16}`}>
+        <defs>
+          <pattern
+            id="dotted_legend"
+            width="4"
+            height="4"
+            patternUnits="userSpaceOnUse"
+          >
+            <line
+              x1="0"
+              y1="4"
+              x2="0"
+              y2="0"
+              style={{ stroke: color, strokeWidth: 4, strokeDasharray: 2 }}
+            />
+          </pattern>
+        </defs>
+        <g>
+          <rect
+            x={0}
+            y={0}
+            fill={`url(#dotted_legend)`}
+            width={16}
+            height={16}
+          />
+        </g>
+      </svg>
+    </Shape>
+  );
+}
 
 const Square = styled(Shape)(
   css({
-    top: '5px',
+    top: '3px',
     width: '15px',
     height: '15px',
+    borderRadius: '2px',
   })
 );
 
