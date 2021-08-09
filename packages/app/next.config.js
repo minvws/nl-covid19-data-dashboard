@@ -69,6 +69,9 @@ const nextConfig = {
             },
             {
               loader: 'file-loader',
+              options: {
+                name: 'static/image/[path][name].[hash].[ext]',
+              },
             },
           ],
           issuer: {
