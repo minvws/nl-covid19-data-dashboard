@@ -6,8 +6,7 @@ import { assert } from './assert';
  * instead of throwing an error when there's a validation error.
  */
 const shouldValidate =
-  typeof window === 'undefined' ||
-  process.env.NEXT_PUBLIC_PHASE !== 'development';
+  typeof window === 'undefined' || process.env.NEXT_PUBLIC_PHASE !== 'develop';
 
 const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 

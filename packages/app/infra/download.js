@@ -2,6 +2,7 @@ const path = require('path');
 const config = { path: path.resolve('.env.local') };
 require('dotenv').config(config);
 const download = require('download');
+const decompress = require('decompress');
 
 const API_URL =
   process.env.API_URL ||
@@ -10,9 +11,16 @@ const API_URL =
 // eslint-disable-next-line no-console
 console.log(`Downloading json data from this location: ${API_URL}`);
 
+const filename = 'latest-data.zip';
+const jsonPath = path.join('.', 'public', 'json');
+const zipPath = path.join(jsonPath, filename);
+
 (async () => {
-  await download(API_URL, './public/json', {
-    extract: true,
-    strip: 1, // strip `/protos`-directory
+  await download(API_URL, jsonPath, {
+    filename: filename,
+  });
+
+  await decompress(zipPath, jsonPath, {
+    strip: 1,
   });
 })();
