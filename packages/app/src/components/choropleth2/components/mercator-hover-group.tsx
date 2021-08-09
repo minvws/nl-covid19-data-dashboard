@@ -1,6 +1,6 @@
 import Projection from '@visx/geo/lib/projections/Projection';
 import { FocusEvent } from 'react';
-import { featureHasPath } from '../logic/feature-has-path';
+import { featureHasPath } from '../logic/utils';
 import { MercatorGroupProps } from './mercator-group';
 import { HoverPathLink } from './path';
 

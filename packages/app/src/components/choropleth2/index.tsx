@@ -69,7 +69,6 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
   boudingBoxPadding?: OptionalBoundingBoxPadding;
-  showTooltipOnFocus?: boolean;
 };
 
 export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
@@ -123,7 +122,6 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     boudingBoxPadding: originalPadding = {},
     hoverRef,
     setTooltip,
-    showTooltipOnFocus,
   } = props;
 
   const dataConfig = {
@@ -191,7 +189,7 @@ const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
     data,
     dataConfig,
     dataOptions,
-    showTooltipOnFocus,
+    isTabInteractive,
     setTooltip,
     containerRef
   );

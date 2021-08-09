@@ -1,8 +1,13 @@
+import { ParsedFeature } from '@visx/geo/lib/projections/Projection';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
+import { isPresent } from 'ts-is-present';
+import { CodedGeoProperties } from './topology';
 import {
   ChoroplethDataItem,
   CodeProp,
   GmDataItem,
   InDataItem,
+  ParsedFeatureWithPath,
   VrDataItem,
 } from './types';
 
@@ -27,4 +32,10 @@ export function isVrData(item: ChoroplethDataItem): item is VrDataItem {
 
 export function isInData(item: ChoroplethDataItem): item is InDataItem {
   return 'country_code' in item;
+}
+
+export function featureHasPath(
+  value: ParsedFeature<Feature<MultiPolygon | Polygon, CodedGeoProperties>>
+): value is ParsedFeatureWithPath {
+  return isPresent(value.path);
 }
