@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import React, { useMemo } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import styled from 'styled-components';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isDefined, isFilled, isPresent } from 'ts-is-present';
 import ChevronIcon from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -329,9 +329,9 @@ function useBehaviorTableData(value: NlBehaviorValue) {
 
         if (
           isPresent(supportPercentage) &&
-          isPresent(supportTrend) &&
+          isDefined(supportTrend) &&
           isPresent(compliancePercentage) &&
-          isPresent(complianceTrend)
+          isDefined(complianceTrend)
         ) {
           return {
             id: x.key,

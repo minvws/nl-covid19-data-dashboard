@@ -5,9 +5,9 @@ import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { useGapsDataAnnotations } from '~/utils/use-gaps-data-annotations';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
-
 interface BehaviorLineChartTileProps {
   values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
@@ -29,6 +29,15 @@ export function BehaviorLineChartTile({
   const selectedSupportValueKey =
     `${currentId}_support` as keyof NlBehaviorValue;
 
+  const timespanAnnotationsGaps = useGapsDataAnnotations(
+    values,
+    selectedComplianceValueKey,
+    'text',
+    'shortLabel'
+  );
+
+  console.log(timespanAnnotationsGaps);
+
   return (
     <ChartTile
       title={chartText.title}
@@ -45,7 +54,7 @@ export function BehaviorLineChartTile({
           values={values}
           seriesConfig={[
             {
-              type: 'line',
+              type: 'gapped-line',
               metricProperty: selectedComplianceValueKey,
               label: chartText.compliance_label,
               shortLabel: chartText.compliance_short_label,
@@ -53,7 +62,7 @@ export function BehaviorLineChartTile({
               color: colors.data.cyan,
             },
             {
-              type: 'line',
+              type: 'gapped-line',
               metricProperty: selectedSupportValueKey,
               label: chartText.support_label,
               shortLabel: chartText.support_short_label,
@@ -61,7 +70,10 @@ export function BehaviorLineChartTile({
               color: colors.data.yellow,
             },
           ]}
-          dataOptions={{ isPercentage: true }}
+          dataOptions={{
+            isPercentage: true,
+            timespanAnnotations: timespanAnnotationsGaps,
+          }}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}
         />

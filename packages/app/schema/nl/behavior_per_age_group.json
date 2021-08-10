@@ -15,6 +15,9 @@
     "wash_hands_compliance": { "$ref": "#/definitions/value" },
     "wash_hands_support": { "$ref": "#/definitions/value" },
 
+    "work_from_home_compliance": { "$ref": "#/definitions/value" },
+    "work_from_home_support": { "$ref": "#/definitions/value" },
+
     "date_of_insertion_unix": { "type": "integer" },
     "date_start_unix": { "type": "integer" },
     "date_end_unix": { "type": "integer" }
