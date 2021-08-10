@@ -217,6 +217,7 @@ function useSeriesConfig(
           strokeWidth: 0,
           fillOpacity: 1,
           mixBlendMode: 'multiply',
+          setNullToZero: true,
         };
       });
 

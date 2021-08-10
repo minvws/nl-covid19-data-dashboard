@@ -142,6 +142,7 @@ export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
   strokeWidth?: number;
   isNonInteractive?: boolean;
   mixBlendMode?: Property.MixBlendMode;
+  setNullToZero?: boolean;
 }
 
 /**
@@ -360,6 +361,8 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
     hasValueAtKey('type', 'gapped-stacked-area' as const)
   );
 
+  // console.log(hasValueOffZeroWhatevre);
+
   const seriesBelowCurrentSeries = getSeriesBelowCurrentSeries(
     stackedAreaDefinitions,
     metricProperty
@@ -369,9 +372,17 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
   const seriesLow = getSeriesData(values, metricProperty);
 
   seriesLow.forEach((seriesSingleValue, index) => {
+    // console.log(seriesSingleValue);
+    // console.log(!('setNullToZero' in seriesConfig[index]));
+
+    // if (seriesConfig[index].hasOwnProperty('setNullToZero')) {
+    //   console.log(seriesConfig[index].setNullToZero);
+    // }
+
     if (!isPresent(seriesSingleValue.__value)) {
       return;
     }
+
     /**
      * The series are rendered from top to bottom. To get the low value of the
      * current series, we will sum up all values of the
@@ -388,7 +399,7 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
     const valueLow = low.__value;
     const valueHigh = isDefined(valueLow)
       ? valueLow + (seriesHigh[index].__value ?? 0)
-      : undefined;
+      : 0;
 
     return {
       __date_unix: low.__date_unix,
