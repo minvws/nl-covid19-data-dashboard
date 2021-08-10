@@ -396,7 +396,9 @@ export const thresholds: Thresholds = {
       ChoroplethThresholdsValue[]
     >),
   },
-  in: {},
+  in: {
+    infected_per_100k_average: positiveTestedThresholds,
+  },
 };
 
 export type ChoroplethThresholdsValue<T extends number = number> = {

@@ -88,13 +88,13 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
           fill: (code: string) => {
             return getFillColor(code);
           },
-          stroke: (code: string) => '',
-          strokeWidth: (code: string) => 0,
+          stroke: (code: string) => colors.white,
+          strokeWidth: (code: string) => DEFAULT_STROKE_WIDTH,
         },
         hover: {
           fill: () => 'none',
-          stroke: (code: string) => '',
-          strokeWidth: (code: string) => 0,
+          stroke: (code: string) => colors.white,
+          strokeWidth: (code: string) => DEFAULT_STROKE_WIDTH,
         },
         outline: {
           fill: () => '',

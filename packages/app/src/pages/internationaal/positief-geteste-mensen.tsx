@@ -5,9 +5,9 @@ import { isDefined } from 'ts-is-present';
 import Getest from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { InChoropleth } from '~/components/choropleth';
 import { inThresholds } from '~/components/choropleth/logic';
 import { InPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth2';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -166,21 +166,24 @@ export default function PositiefGetesteMensenPage(
               ],
             }}
           >
-            <InChoropleth
+            <Choropleth
+              map="in"
               accessibility={{
                 key: 'international_tested_overall_choropleth',
               }}
               data={choroplethData}
-              metricProperty="infected_per_100k_average"
-              tooltipContent={(context) => (
+              dataConfig={{
+                metricProperty: 'infected_per_100k_average',
+              }}
+              dataOptions={{
+                getFeatureName: (code) => countryNames[code],
+              }}
+              formatTooltip={(context) => (
                 <InPositiveTestedPeopleTooltip
                   title={text.choropleth.tooltip_titel}
-                  countryName={
-                    countryNames[context.country_code.toLowerCase()] ||
-                    context.country_code
-                  }
-                  countryCode={context.country_code}
-                  value={context.infected_per_100k_average}
+                  countryName={context.featureName}
+                  countryCode={context.dataItem.country_code}
+                  value={context.dataItem.infected_per_100k_average}
                   comparedName={comparedName}
                   comparedCode={comparedCode}
                   comparedValue={comparedValue}

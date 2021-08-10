@@ -205,7 +205,8 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
 
   const choroplethFeatures = useChoroplethFeatures(
     map,
-    dataOptions.selectedCode
+    dataOptions.selectedCode,
+    data
   );
 
   const getFillColor = useFillColor(

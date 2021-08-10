@@ -5,8 +5,11 @@ import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth2/logic';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
 import { CodedGeoJSON, gmGeo, inGeo, nlGeo, vrGeo } from './topology';
+import { ChoroplethDataItem } from './types';
 
 export type FeatureType = keyof ChoroplethFeatures;
+
+const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
 
 export type ChoroplethFeatures = {
   outline?: CodedGeoJSON;
@@ -15,9 +18,10 @@ export type ChoroplethFeatures = {
   boundingBox: CodedGeoJSON;
 };
 
-export function useChoroplethFeatures(
+export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   map: MapType,
-  selectedCode?: string
+  selectedCode?: string,
+  data: T[]
 ): ChoroplethFeatures {
   return useMemo(() => {
     switch (map) {
@@ -43,10 +47,25 @@ export function useChoroplethFeatures(
         };
       }
       case 'in': {
+        const inData = (data as unknown[]).filter(function (
+          v: any
+        ): v is { country_code: string } {
+          return 'country_code' in v;
+        });
         return {
-          hover: inGeo,
+          hover: {
+            ...inGeo,
+            features: inGeo.features.filter((x) =>
+              inData.some((d) => d.country_code === x.properties.code)
+            ),
+          },
           area: inGeo,
-          boundingBox: nlGeo,
+          boundingBox: {
+            ...inGeo,
+            features: inGeo.features.filter((x) =>
+              boundingBoxCodes.includes(x.properties.code)
+            ),
+          },
         };
       }
     }
