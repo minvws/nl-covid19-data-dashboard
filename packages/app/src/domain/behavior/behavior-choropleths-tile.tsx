@@ -1,14 +1,11 @@
-import {
-  VrCollectionBehavior,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
+import { KeysOfType, VrCollectionBehavior } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { vrThresholds } from '~/components/choropleth/logic';
-import { VrBehaviorTooltip } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth2';
+import { VrBehaviorTooltip } from '~/components/choropleth2/tooltips/vr/vr-behavior-tooltip';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
@@ -131,17 +128,25 @@ function ChoroplethBlock({
           </Box>
         )}
         <ErrorBoundary>
-          <VrChoropleth
-            accessibility={{ key: 'behavior_choropleths' }}
-            data={data}
-            getLink={reverseRouter.vr.gedrag}
-            metricName="behavior"
-            metricProperty={metricProperty}
+          <Choropleth
+            accessibility={{
+              key: 'behavior_choropleths',
+            }}
+            map="vr"
+            data={data.behavior}
+            dataConfig={{
+              metricProperty: metricProperty as unknown as KeysOfType<
+                VrCollectionBehavior,
+                number | null | boolean | undefined,
+                true
+              >,
+              noDataFillColor: colors.page,
+            }}
+            dataOptions={{
+              getLink: reverseRouter.vr.gedrag,
+            }}
             minHeight={!isSmallScreen ? 350 : 400}
-            noDataFillColor={colors.page}
-            tooltipContent={(
-              context: VrCollectionBehavior & VrGeoProperties
-            ) => {
+            formatTooltip={(context) => {
               const currentComplianceValue =
                 `${currentId}_compliance` as keyof VrCollectionBehavior;
               const currentSupportValue =
@@ -156,9 +161,11 @@ function ChoroplethBlock({
                   context={context}
                   currentMetric={currentId}
                   currentComplianceValue={
-                    context[currentComplianceValue] as number
+                    context.dataItem[currentComplianceValue] as number
                   }
-                  currentSupportValue={context[currentSupportValue] as number}
+                  currentSupportValue={
+                    context.dataItem[currentSupportValue] as number
+                  }
                 />
               );
             }}

@@ -1,9 +1,3 @@
-import {
-  GmCollectionTestedOverall,
-  GmGeoProperties,
-  VrCollectionTestedOverall,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
 import Afname from '~/assets/afname.svg';
@@ -11,13 +5,9 @@ import Getest from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
-import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { vrThresholds } from '~/components/choropleth/logic';
-import {
-  GmPositiveTestedPeopleTooltip,
-  VrPositiveTestedPeopleTooltip,
-} from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth2';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -35,21 +25,21 @@ import { useIntl } from '~/intl';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents,
+  getTimelineEvents
 } from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult,
+  PageArticlesQueryResult
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData,
+  selectNlPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -216,31 +206,33 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              * now that is a bridge too far. Let's take it one step at a time.
              */}
             {selectedMap === 'gm' && (
-              <GmChoropleth
+              <Choropleth
+                map="gm"
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
                 }}
-                data={choropleth.gm}
-                getLink={reverseRouter.gm.positiefGetesteMensen}
-                metricName="tested_overall"
-                metricProperty="infected_per_100k"
-                tooltipContent={(
-                  context: GmGeoProperties & GmCollectionTestedOverall
-                ) => <GmPositiveTestedPeopleTooltip context={context} />}
+                data={choropleth.gm.tested_overall}
+                dataConfig={{
+                  metricProperty: 'infected_per_100k',
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.gm.positiefGetesteMensen,
+                }}
               />
             )}
             {selectedMap === 'vr' && (
-              <VrChoropleth
+              <Choropleth
+                map="vr"
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',
                 }}
-                data={choropleth.vr}
-                getLink={reverseRouter.vr.positiefGetesteMensen}
-                metricName="tested_overall"
-                metricProperty="infected_per_100k"
-                tooltipContent={(
-                  context: VrGeoProperties & VrCollectionTestedOverall
-                ) => <VrPositiveTestedPeopleTooltip context={context} />}
+                data={choropleth.vr.tested_overall}
+                dataConfig={{
+                  metricProperty: 'infected_per_100k',
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.vr.positiefGetesteMensen,
+                }}
               />
             )}
           </ChoroplethTile>

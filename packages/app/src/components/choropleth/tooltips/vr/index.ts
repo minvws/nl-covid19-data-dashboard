@@ -1,4 +1,3 @@
-export * from './vr-behavior-tooltip';
 export * from './vr-disability-infected-locations-tooltip';
 export * from './vr-elderly-at-home-tooltip';
 export * from './vr-escalation-tooltip';
