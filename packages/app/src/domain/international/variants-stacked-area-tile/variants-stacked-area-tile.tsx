@@ -86,8 +86,8 @@ function VariantStackedAreaTileWithData({
   /* Static legend contains only the inaccurate item */
   const staticLegendItems: LegendItem[] = [
     {
-      shape: 'square',
-      color: colors.data.underReported,
+      shape: 'outlined-square',
+      color: colors.white,
       label: text.legend_niet_compleet_label,
     },
   ];
