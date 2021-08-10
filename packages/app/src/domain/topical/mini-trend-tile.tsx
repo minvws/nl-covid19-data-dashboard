@@ -1,4 +1,4 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
@@ -11,12 +11,6 @@ import { colors } from '~/style/theme';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
-type NumberProperty<T extends TimestampedValue> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
-
 type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
@@ -27,7 +21,7 @@ type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   title: string;
   text: ReactNode;
   trendData: T[];
-  metricProperty: NumberProperty<T>;
+  metricProperty: KeysOfType<T, number | null, true>;
   href: string;
   areas?: { header: string; chart: string };
 };

@@ -33,4 +33,34 @@ describe('Util: replaceVariablesInText', () => {
     };
     expect(testFunc).toThrow(Error);
   });
+
+  it('Should replace with singular variable using plural command', () => {
+    expect(
+      replaceVariablesInText(
+        '{{admissions_on_date_of_reporting}} {{admissions_on_date_of_reporting, plural, patients}}',
+        {
+          admissions_on_date_of_reporting: 1,
+          patients: {
+            plural: 'patients',
+            singular: 'patient',
+          },
+        }
+      )
+    ).toMatchInlineSnapshot('"1 patient"');
+  });
+
+  it('Should replace with plural variable using plural command', () => {
+    expect(
+      replaceVariablesInText(
+        '{{admissions_on_date_of_reporting}} {{admissions_on_date_of_reporting, plural, patients}}',
+        {
+          admissions_on_date_of_reporting: 2,
+          patients: {
+            plural: 'patients',
+            singular: 'patient',
+          },
+        }
+      )
+    ).toMatchInlineSnapshot('"2 patients"');
+  });
 });

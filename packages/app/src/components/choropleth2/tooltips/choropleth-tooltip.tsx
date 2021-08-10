@@ -29,6 +29,11 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     text as unknown as Record<string, Record<string, Record<string, string>>>
   )[data.map][data.dataConfig.metricProperty as string].content;
 
+  const tooltipVars = {
+    ...data.dataItem,
+    ...data.dataOptions.tooltipVariables,
+  } as Record<string, string | number>;
+
   return (
     <TooltipContent
       title={data.featureName}
@@ -44,10 +49,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
         filterBelow={data.dataItem[data.dataConfig.metricProperty]}
       >
         <Markdown
-          content={replaceVariablesInText(
-            tooltipContent,
-            data.dataItem as unknown as Record<string, string | number>
-          )}
+          content={replaceVariablesInText(tooltipContent, tooltipVars)}
         />
       </TooltipSubject>
     </TooltipContent>

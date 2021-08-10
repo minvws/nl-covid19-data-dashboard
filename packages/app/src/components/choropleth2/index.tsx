@@ -21,6 +21,7 @@ import {
   FitExtent,
   MappedDataItem,
   MapType,
+  Unpack,
   useChoroplethData,
   useChoroplethFeatures,
   useFeatureProps,
@@ -40,9 +41,8 @@ export type DataOptions = {
   getFeatureName?: (code: string) => string;
   highlightSelection?: boolean;
   selectedCode?: string;
+  tooltipVariables?: Record<string, Record<string, string> | string>;
 };
-
-type Unpack<T> = T extends infer U ? U : never;
 
 type OptionalDataConfig<T> = {
   metricProperty: KeysOfType<T, number | null, true>;
@@ -74,7 +74,7 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
   formatTooltip?: TooltipFormatter<K>;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
-  boudingBoxPadding?: OptionalBoundingBoxPadding;
+  boundingBoxPadding?: OptionalBoundingBoxPadding;
   accessibility: AccessibilityDefinition;
 };
 
@@ -154,7 +154,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     dataOptions,
     map,
     minHeight = 500,
-    boudingBoxPadding: originalPadding = {},
+    boundingBoxPadding: originalPadding = {},
     hoverRef,
     setTooltip,
     accessibility,
@@ -176,7 +176,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
       originalDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
   };
 
-  const boudingBoxPadding: BoundingBoxPadding = {
+  const boundingBoxPadding: BoundingBoxPadding = {
     left: originalPadding.left ?? 0,
     right: originalPadding.right ?? 0,
     top: originalPadding.top ?? 0,
@@ -230,18 +230,18 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
   const fitExtent: FitExtent = useMemo(
     () => [
       [
-        [boudingBoxPadding.left, boudingBoxPadding.top],
-        [width - boudingBoxPadding.right, height - boudingBoxPadding.bottom],
+        [boundingBoxPadding.left, boundingBoxPadding.top],
+        [width - boundingBoxPadding.right, height - boundingBoxPadding.bottom],
       ],
       choroplethFeatures.boundingBox,
     ],
     [
       width,
       height,
-      boudingBoxPadding.left,
-      boudingBoxPadding.right,
-      boudingBoxPadding.top,
-      boudingBoxPadding.bottom,
+      boundingBoxPadding.left,
+      boundingBoxPadding.right,
+      boundingBoxPadding.top,
+      boundingBoxPadding.bottom,
       choroplethFeatures.boundingBox,
     ]
   );

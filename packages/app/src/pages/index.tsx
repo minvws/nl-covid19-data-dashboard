@@ -14,6 +14,7 @@ import {
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { vrThresholds } from '~/components/choropleth/logic';
 import { Choropleth } from '~/components/choropleth2';
+import { VrEscalationTooltip } from '~/components/choropleth2/tooltips/vr/vr-escalation-tooltip';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -246,10 +247,14 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     data={choropleth.vr.escalation_levels}
                     dataConfig={{
                       metricProperty: 'level',
+                      noDataFillColor: unknownLevelColor,
                     }}
                     dataOptions={{
                       getLink: reverseRouter.vr.risiconiveau,
                     }}
+                    formatTooltip={(context) => (
+                      <VrEscalationTooltip context={context} />
+                    )}
                   />
                 </Box>
                 <Box spacing={3}>
