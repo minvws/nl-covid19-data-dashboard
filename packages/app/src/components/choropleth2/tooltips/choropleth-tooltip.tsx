@@ -1,3 +1,5 @@
+import { assert } from '@corona-dashboard/common';
+import { isDefined } from 'ts-is-present';
 import { Markdown } from '~/components/markdown';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -23,11 +25,19 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
 
   const subject = (
     text as unknown as Record<string, Record<string, Record<string, string>>>
-  )[data.map][data.dataConfig.metricProperty as string].subject;
+  )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;
+  assert(
+    isDefined(subject),
+    `No tooltip subject found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+  );
 
   const tooltipContent = (
     text as unknown as Record<string, Record<string, Record<string, string>>>
-  )[data.map][data.dataConfig.metricProperty as string].content;
+  )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
+  assert(
+    isDefined(subject),
+    `No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
+  );
 
   const tooltipVars = {
     ...data.dataItem,

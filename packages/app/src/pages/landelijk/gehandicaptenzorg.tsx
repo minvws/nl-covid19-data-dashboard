@@ -1,19 +1,14 @@
-import {
-  VrCollectionDisabilityCare,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
 import Locatie from '~/assets/locaties.svg';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { vrThresholds } from '~/components/choropleth/logic';
-import { VrDisablityInfectedLocationsTooltip } from '~/components/choropleth/tooltips';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { Choropleth } from '~/components/choropleth2';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -223,17 +218,18 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
-            <VrChoropleth
+            <Choropleth
+              map="vr"
               accessibility={{
                 key: 'disability_care_infected_people_choropleth',
               }}
-              data={choropleth.vr}
-              getLink={reverseRouter.vr.gehandicaptenzorg}
-              metricName="disability_care"
-              metricProperty="infected_locations_percentage"
-              tooltipContent={(
-                context: VrGeoProperties & VrCollectionDisabilityCare
-              ) => <VrDisablityInfectedLocationsTooltip context={context} />}
+              data={choropleth.vr.disability_care}
+              dataConfig={{
+                metricProperty: 'infected_locations_percentage',
+              }}
+              dataOptions={{
+                getLink: reverseRouter.vr.gehandicaptenzorg,
+              }}
             />
           </ChoroplethTile>
 

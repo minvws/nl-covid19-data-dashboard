@@ -1,19 +1,14 @@
-import {
-  VrCollectionNursingHome,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
 import CoronaVirus from '~/assets/coronavirus.svg';
 import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { vrThresholds } from '~/components/choropleth/logic';
-import { VrInfectedLocationsTooltip } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth2';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -232,17 +227,19 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
-            <VrChoropleth
+            <Choropleth
+              map="vr"
               accessibility={{
                 key: 'nursing_home_infected_people_choropleth',
               }}
-              data={choropleth.vr}
-              getLink={reverseRouter.vr.verpleeghuiszorg}
-              metricName="nursing_home"
-              metricProperty="infected_locations_percentage"
-              tooltipContent={(
-                context: VrGeoProperties & VrCollectionNursingHome
-              ) => <VrInfectedLocationsTooltip context={context} />}
+              data={choropleth.vr.nursing_home}
+              dataConfig={{
+                metricProperty: 'infected_locations_percentage',
+              }}
+              dataOptions={{
+                isPercentage: true,
+                getLink: reverseRouter.vr.verpleeghuiszorg,
+              }}
             />
           </ChoroplethTile>
 
