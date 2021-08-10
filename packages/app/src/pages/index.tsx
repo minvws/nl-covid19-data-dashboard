@@ -1,10 +1,3 @@
-import {
-  EscalationLevels,
-  GmCollectionTestedOverall,
-  GmGeoProperties,
-  VrCollectionTestedOverall,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
@@ -18,14 +11,8 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from '~/components/chart-region-controls';
-import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { vrThresholds } from '~/components/choropleth/logic';
-import {
-  GmPositiveTestedPeopleTooltip,
-  VrEscalationTooltip,
-  VrPositiveTestedPeopleTooltip,
-} from '~/components/choropleth/tooltips';
 import { Choropleth } from '~/components/choropleth2';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
@@ -35,7 +22,6 @@ import { Markdown } from '~/components/markdown';
 import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
-import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
@@ -136,42 +122,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 href: reverseRouter.nl.index(),
               }}
             />
-
-            <Tile>
-              <ChoroplethTwoColumnLayout>
-                <Choropleth
-                  accessibility={{
-                    key: 'topical_escalation_levels_choropleth',
-                  }}
-                  map="gm"
-                  data={choropleth.gm.tested_overall}
-                  dataConfig={{
-                    metricProperty: 'infected_per_100k',
-                  }}
-                  dataOptions={{
-                    getLink: (code: string) =>
-                      `/gemeente/${code}/positief-geteste-mensen`,
-                  }}
-                />
-                <Box spacing={3}>
-                  <Metadata
-                    date={
-                      choropleth.vr.escalation_levels[0].date_of_insertion_unix
-                    }
-                    source={siteText.positief_geteste_personen.bronnen.rivm}
-                  />
-                  <Text>
-                    {siteText.positief_geteste_personen.map_toelichting}
-                  </Text>
-                  <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
-                    <ChartRegionControls
-                      value={selectedMap}
-                      onChange={setSelectedMap}
-                    />
-                  </Box>
-                </Box>
-              </ChoroplethTwoColumnLayout>
-            </Tile>
 
             <Box width={{ lg: '65%' }}>
               <Search />
@@ -288,23 +238,18 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <VrChoropleth
+                  <Choropleth
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}
-                    data={choropleth.vr}
-                    getLink={reverseRouter.vr.risiconiveau}
-                    metricName="escalation_levels"
-                    metricProperty="level"
-                    noDataFillColor={unknownLevelColor}
-                    tooltipContent={(
-                      context: VrGeoProperties & EscalationLevels
-                    ) => (
-                      <VrEscalationTooltip
-                        context={context}
-                        getLink={reverseRouter.vr.risiconiveau}
-                      />
-                    )}
+                    map="vr"
+                    data={choropleth.vr.escalation_levels}
+                    dataConfig={{
+                      metricProperty: 'level',
+                    }}
+                    dataOptions={{
+                      getLink: reverseRouter.vr.risiconiveau,
+                    }}
                   />
                 </Box>
                 <Box spacing={3}>
@@ -365,31 +310,33 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <>
                   {selectedMap === 'gm' && (
-                    <GmChoropleth
+                    <Choropleth
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
                       }}
-                      data={choropleth.gm}
-                      metricName="tested_overall"
-                      metricProperty="infected_per_100k"
-                      getLink={reverseRouter.gm.positiefGetesteMensen}
-                      tooltipContent={(
-                        context: GmGeoProperties & GmCollectionTestedOverall
-                      ) => <GmPositiveTestedPeopleTooltip context={context} />}
+                      map="gm"
+                      data={choropleth.gm.tested_overall}
+                      dataConfig={{
+                        metricProperty: 'infected_per_100k',
+                      }}
+                      dataOptions={{
+                        getLink: reverseRouter.gm.positiefGetesteMensen,
+                      }}
                     />
                   )}
                   {selectedMap === 'vr' && (
-                    <VrChoropleth
+                    <Choropleth
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
                       }}
-                      data={choropleth.vr}
-                      getLink={reverseRouter.vr.positiefGetesteMensen}
-                      metricName="tested_overall"
-                      metricProperty="infected_per_100k"
-                      tooltipContent={(
-                        context: VrGeoProperties & VrCollectionTestedOverall
-                      ) => <VrPositiveTestedPeopleTooltip context={context} />}
+                      map="vr"
+                      data={choropleth.vr.tested_overall}
+                      dataConfig={{
+                        metricProperty: 'infected_per_100k',
+                      }}
+                      dataOptions={{
+                        getLink: reverseRouter.vr.positiefGetesteMensen,
+                      }}
                     />
                   )}
                 </>

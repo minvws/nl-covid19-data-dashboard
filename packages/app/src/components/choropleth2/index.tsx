@@ -17,10 +17,9 @@ import { Box } from '../base';
 import { MercatorGroup } from './components/mercator-group';
 import { MercatorHoverGroup } from './components/mercator-hover-group';
 import {
-  ChoroplethDataItem,
   CHOROPLETH_ASPECT_RATIO,
   FitExtent,
-  InferredDataItem,
+  MappedDataItem,
   MapType,
   useChoroplethData,
   useChoroplethFeatures,
@@ -43,8 +42,10 @@ export type DataOptions = {
   selectedCode?: string;
 };
 
-type OptionalDataConfig<T extends ChoroplethDataItem> = {
-  metricProperty: KeysOfType<T, number, true>;
+type Unwrap<T> = T extends infer U ? U : never;
+
+type OptionalDataConfig<T> = {
+  metricProperty: KeysOfType<T, number | null, true>;
   noDataFillColor?: string;
   hoverStroke?: string;
   hoverStrokeWidth?: number;
@@ -52,9 +53,7 @@ type OptionalDataConfig<T extends ChoroplethDataItem> = {
   highlightStrokeWidth?: number;
 };
 
-export type DataConfig<T extends ChoroplethDataItem> = Required<
-  OptionalDataConfig<T>
->;
+export type DataConfig<T> = Required<OptionalDataConfig<T>>;
 
 type OptionalBoundingBoxPadding = {
   left?: number;
@@ -65,7 +64,7 @@ type OptionalBoundingBoxPadding = {
 
 type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
-type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
+type ChoroplethProps<T extends MapType, K extends Unwrap<MappedDataItem<T>>> = {
   data: K[];
   dataConfig: OptionalDataConfig<K>;
   dataOptions: DataOptions;
@@ -77,11 +76,10 @@ type ChoroplethProps<T extends MapType, K extends InferredDataItem<T>> = {
   accessibility: AccessibilityDefinition;
 };
 
-export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
-  formatTooltip,
-  tooltipPlacement,
-  ...props
-}: ChoroplethProps<T, K>) {
+export function Choropleth<
+  T extends MapType,
+  K extends Unwrap<MappedDataItem<T>>
+>({ formatTooltip, tooltipPlacement, ...props }: ChoroplethProps<T, K>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
   const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
@@ -133,7 +131,7 @@ export function Choropleth<T extends MapType, K extends InferredDataItem<T>>({
 
 type ChoroplethMapProps<
   T extends MapType,
-  K extends InferredDataItem<T>
+  K extends Unwrap<MappedDataItem<T>>
 > = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
   hoverRef: React.RefObject<SVGGElement>;
   setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
@@ -144,7 +142,7 @@ type ChoroplethMapProps<
   };
 };
 
-const ChoroplethMap: <T extends MapType, K extends InferredDataItem<T>>(
+const ChoroplethMap: <T extends MapType, K extends Unwrap<MappedDataItem<T>>>(
   props: ChoroplethMapProps<T, K>
 ) => JSX.Element | null = memo((props) => {
   const {

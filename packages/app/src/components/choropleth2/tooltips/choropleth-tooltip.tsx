@@ -1,4 +1,6 @@
-import { InlineText } from '~/components/typography';
+import { Markdown } from '~/components/markdown';
+import { useIntl } from '~/intl';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { ChoroplethDataItem } from '../logic';
 import { TooltipContent } from './tooltip-content';
 import { TooltipSubject } from './tooltip-subject';
@@ -12,6 +14,20 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   props: ChoroplethDataItemProps<T>
 ) {
   const { data } = props;
+  const { siteText } = useIntl();
+
+  const text = siteText.choropleth_tooltip;
+
+  type Text = typeof text;
+  type Map = Text[keyof Text];
+
+  const subject = (
+    text as unknown as Record<string, Record<string, Record<string, string>>>
+  )[data.map][data.dataConfig.metricProperty as string].subject;
+
+  const tooltipContent = (
+    text as unknown as Record<string, Record<string, Record<string, string>>>
+  )[data.map][data.dataConfig.metricProperty as string].content;
 
   return (
     <TooltipContent
@@ -23,15 +39,16 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       }
     >
       <TooltipSubject
-        subject={'Subject'}
+        subject={subject}
         thresholdValues={data.thresholdValues}
-        filterBelow={123456}
+        filterBelow={data.dataItem[data.dataConfig.metricProperty]}
       >
-        <InlineText fontWeight="bold">
-          {data.metricPropertyFormatter(
-            data.dataItem[data.dataConfig.metricProperty]
+        <Markdown
+          content={replaceVariablesInText(
+            tooltipContent,
+            data.dataItem as unknown as Record<string, string | number>
           )}
-        </InlineText>
+        />
       </TooltipSubject>
     </TooltipContent>
   );

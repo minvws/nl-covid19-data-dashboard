@@ -64,38 +64,42 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
     case 'vr': {
       return {
         area: {
-          fill: (code: string) => '',
-          stroke: (code: string) => '',
-          strokeWidth: (code: string) => 0,
+          fill: (code: string) => {
+            return getFillColor(code);
+          },
+          stroke: () => colors.choroplethFeatureStroke,
+          strokeWidth: () => DEFAULT_STROKE_WIDTH,
         },
         hover: {
-          fill: (code: string) => '',
-          stroke: (code: string) => '',
-          strokeWidth: (code: string) => 0,
+          fill: () => 'none',
+          stroke: () => dataConfig.hoverStroke,
+          strokeWidth: () => dataConfig.hoverStrokeWidth,
         },
         outline: {
-          fill: (code: string) => '',
-          stroke: (code: string) => '',
-          strokeWidth: (code: string) => 0,
+          fill: () => 'none',
+          stroke: () => colors.choroplethOutlineStroke,
+          strokeWidth: () => DEFAULT_STROKE_WIDTH,
         },
       };
     }
     case 'in': {
       return {
         area: {
-          fill: (code: string) => '',
+          fill: (code: string) => {
+            return getFillColor(code);
+          },
           stroke: (code: string) => '',
           strokeWidth: (code: string) => 0,
         },
         hover: {
-          fill: (code: string) => '',
+          fill: () => 'none',
           stroke: (code: string) => '',
           strokeWidth: (code: string) => 0,
         },
         outline: {
-          fill: (code: string) => '',
-          stroke: (code: string) => '',
-          strokeWidth: (code: string) => 0,
+          fill: () => '',
+          stroke: () => '',
+          strokeWidth: () => 0,
         },
       };
     }

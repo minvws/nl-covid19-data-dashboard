@@ -35,26 +35,40 @@ export const mapToCodeType: Record<MapType, CodeProp> = {
   in: 'country_code',
 };
 
+/**
+ * Select all the item types of all the properties from the InCollection with an array type that has a country_code property
+ */
 export type InDataItem = InCollection[KeysOfType<
   InCollection,
   { country_code: string }[]
 >][number];
 
+/**
+ * Select all the item types of all the properties from the VrCollection with an array type that has a vrcode property
+ */
 export type VrDataItem = VrCollection[KeysOfType<
   VrCollection,
   { vrcode: string }[]
 >][number];
 
+/**
+ * Select all the item types of all the properties from the GmCollection with an array type that has a gmcode property
+ */
 export type GmDataItem = GmCollection[KeysOfType<
   GmCollection,
   { gmcode: string }[]
 >][number];
 
-export type InferredDataItem<T extends MapType> = T extends 'gm'
+/**
+ * Here we map a MapType to a corresponding dataitem type
+ */
+export type MappedDataItem<T extends MapType> = T extends 'gm'
   ? GmDataItem
   : T extends 'vr'
   ? VrDataItem
-  : InDataItem;
+  : T extends 'in'
+  ? InDataItem
+  : never;
 
 export type ChoroplethDataItem = GmDataItem | VrDataItem | InDataItem;
 

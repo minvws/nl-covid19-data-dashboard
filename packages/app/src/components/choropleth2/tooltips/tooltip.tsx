@@ -5,17 +5,16 @@ import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useViewport } from '~/utils/use-viewport';
-import { TooltipSettings } from '../components/choropleth';
 import { ChoroplethDataItem } from '../logic';
 import { ChoroplethTooltip } from './choropleth-tooltip';
-import { TooltipData, TooltipFormatter } from './types';
+import { TooltipData, TooltipFormatter, TooltipSettings } from './types';
 
 export type ChoroplethTooltipPlacement = 'bottom-right' | 'top-center';
 
 type TTooltipProps<T extends ChoroplethDataItem> = {
   left: number;
   top: number;
-  setTooltip: Dispatch<SetStateAction<TooltipSettings | undefined>>;
+  setTooltip: Dispatch<SetStateAction<TooltipSettings<T> | undefined>>;
   placement?: ChoroplethTooltipPlacement;
   formatTooltip?: TooltipFormatter<T>;
   data: TooltipData<T>;
