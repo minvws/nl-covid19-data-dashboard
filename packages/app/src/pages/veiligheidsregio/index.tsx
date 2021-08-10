@@ -1,8 +1,7 @@
-import { EscalationLevels, VrGeoProperties } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
-import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { VrEscalationTooltip } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth2';
+import { VrEscalationTooltip } from '~/components/choropleth2/tooltips/vr/vr-escalation-tooltip';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { Markdown } from '~/components/markdown';
 import { TileList } from '~/components/tile-list';
@@ -94,18 +93,19 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
               </>
             }
           >
-            <VrChoropleth
+            <Choropleth
+              map="vr"
               accessibility={{ key: 'escalation_levels_choropleth' }}
-              data={choropleth.vr}
-              getLink={reverseRouter.vr.index}
-              metricName="escalation_levels"
-              metricProperty="level"
-              noDataFillColor={unknownLevelColor}
-              tooltipContent={(context: VrGeoProperties & EscalationLevels) => (
-                <VrEscalationTooltip
-                  context={context}
-                  getLink={reverseRouter.vr.index}
-                />
+              data={choropleth.vr.escalation_levels}
+              dataConfig={{
+                metricProperty: 'level',
+                noDataFillColor: unknownLevelColor,
+              }}
+              dataOptions={{
+                getLink: reverseRouter.vr.index,
+              }}
+              formatTooltip={(context) => (
+                <VrEscalationTooltip context={context} />
               )}
             />
           </ChoroplethTile>

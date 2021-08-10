@@ -31,7 +31,7 @@ export function useChoroplethFeatures(
           outline: nlGeo,
           hover: hoverGeo,
           area: boundingBoxGeo,
-          boundingBox: selectedCode ? boundingBoxGeo : nlGeo,
+          boundingBox: selectedCode ? hoverGeo : nlGeo,
         };
       }
       case 'vr': {
