@@ -1,17 +1,17 @@
 import {
   ChoroplethThresholdsValue,
   VrCollectionSituations,
-  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { vrThresholds } from '~/components/choropleth/logic';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth2/logic/thresholds';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
@@ -86,22 +86,25 @@ export function SituationsOverviewChoroplethTile({
               description={situation.description}
               key={situation.id}
             >
-              <VrChoropleth
+              <Choropleth
                 accessibility={{ key: 'situations_choropleths' }}
-                data={{ situations: data }}
-                metricName={'situations'}
-                metricProperty={situation.id}
+                map="vr"
+                data={data}
+                dataConfig={{
+                  metricProperty: situation.id,
+                  noDataFillColor: colors.data.underReported,
+                }}
+                dataOptions={{
+                  isPercentage: true,
+                }}
                 minHeight={280}
                 tooltipPlacement="top-center"
-                noDataFillColor={colors.data.underReported}
-                tooltipContent={(
-                  context: VrGeoProperties & VrCollectionSituations
-                ) => (
+                formatTooltip={(context) => (
                   <ChoroplethTooltip
                     isPercentage
-                    value={context[situation.id]}
-                    regionName={context.vrname}
-                    thresholds={vrThresholds.situations[situation.id]}
+                    value={context.dataItem[situation.id]}
+                    regionName={context.featureName}
+                    thresholds={thresholds.vr[situation.id]}
                     noDataFillColor={colors.data.underReported}
                   />
                 )}

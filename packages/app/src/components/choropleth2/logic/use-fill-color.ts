@@ -10,7 +10,7 @@ import { isCodedValueType } from './utils';
 export function useFillColor<T extends ChoroplethDataItem>(
   data: T[],
   map: MapType,
-  metricProperty: KeysOfType<T, number | null, true>,
+  metricProperty: KeysOfType<T, number | null | boolean, true>,
   dataConfig: DataConfig<T>
 ) {
   const codeType = mapToCodeType[map];
@@ -20,7 +20,7 @@ export function useFillColor<T extends ChoroplethDataItem>(
       const item = data
         .filter(isCodedValueType(codeType))
         .find((x) => (x as any)[codeType] === code);
-      return item?.[metricProperty];
+      return isDefined(item) ? Number(item[metricProperty]) : undefined;
     };
   }, [metricProperty, codeType, data]);
 

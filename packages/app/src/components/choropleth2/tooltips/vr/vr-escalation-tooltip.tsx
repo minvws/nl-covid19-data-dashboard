@@ -13,7 +13,6 @@ export function VrEscalationTooltip({
   hideValidFrom = false,
 }: {
   context: TooltipData<EscalationLevels>;
-  getLink?: (code: string) => string;
   hideValidFrom?: boolean;
 }) {
   const { dataItem, dataOptions } = context;

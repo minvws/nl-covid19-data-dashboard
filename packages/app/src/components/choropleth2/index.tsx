@@ -45,7 +45,7 @@ export type DataOptions = {
 };
 
 type OptionalDataConfig<T> = {
-  metricProperty: KeysOfType<T, number | null, true>;
+  metricProperty: KeysOfType<T, number | null | boolean, true>;
   noDataFillColor?: string;
   hoverStroke?: string;
   hoverStrokeWidth?: number;
