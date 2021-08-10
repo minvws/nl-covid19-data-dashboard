@@ -42,7 +42,7 @@ export type DataOptions = {
   selectedCode?: string;
 };
 
-type Unwrap<T> = T extends infer U ? U : never;
+type Unpack<T> = T extends infer U ? U : never;
 
 type OptionalDataConfig<T> = {
   metricProperty: KeysOfType<T, number | null, true>;
@@ -64,7 +64,9 @@ type OptionalBoundingBoxPadding = {
 
 type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
-type ChoroplethProps<T extends MapType, K extends Unwrap<MappedDataItem<T>>> = {
+type UnpackedDataItem<T extends MapType> = Unpack<MappedDataItem<T>>;
+
+type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
   data: K[];
   dataConfig: OptionalDataConfig<K>;
   dataOptions: DataOptions;
@@ -76,10 +78,11 @@ type ChoroplethProps<T extends MapType, K extends Unwrap<MappedDataItem<T>>> = {
   accessibility: AccessibilityDefinition;
 };
 
-export function Choropleth<
-  T extends MapType,
-  K extends Unwrap<MappedDataItem<T>>
->({ formatTooltip, tooltipPlacement, ...props }: ChoroplethProps<T, K>) {
+export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
+  formatTooltip,
+  tooltipPlacement,
+  ...props
+}: ChoroplethProps<T, K>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
   const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
@@ -131,7 +134,7 @@ export function Choropleth<
 
 type ChoroplethMapProps<
   T extends MapType,
-  K extends Unwrap<MappedDataItem<T>>
+  K extends UnpackedDataItem<T>
 > = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
   hoverRef: React.RefObject<SVGGElement>;
   setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
@@ -142,7 +145,7 @@ type ChoroplethMapProps<
   };
 };
 
-const ChoroplethMap: <T extends MapType, K extends Unwrap<MappedDataItem<T>>>(
+const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
   props: ChoroplethMapProps<T, K>
 ) => JSX.Element | null = memo((props) => {
   const {
