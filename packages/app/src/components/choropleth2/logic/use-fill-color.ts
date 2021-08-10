@@ -20,7 +20,9 @@ export function useFillColor<T extends ChoroplethDataItem>(
       const item = data
         .filter(isCodedValueType(codeType))
         .find((x) => (x as any)[codeType] === code);
-      return isDefined(item) ? Number(item[metricProperty]) : undefined;
+      return isDefined(item) && isPresent(item[metricProperty])
+        ? Number(item[metricProperty])
+        : undefined;
     };
   }, [metricProperty, codeType, data]);
 
@@ -43,7 +45,10 @@ export function useFillColor<T extends ChoroplethDataItem>(
   return useCallback(
     (code: string) => {
       const value = getValueByCode(code);
-      return isPresent(value) ? colorScale(value) : dataConfig.noDataFillColor;
+      const result = isPresent(value)
+        ? colorScale(value)
+        : dataConfig.noDataFillColor;
+      return result;
     },
     [getValueByCode, colorScale, dataConfig.noDataFillColor]
   );

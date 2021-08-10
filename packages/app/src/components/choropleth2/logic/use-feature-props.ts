@@ -35,7 +35,7 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
           stroke:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
               ? () => {
-                  return colors.choroplethFeatureStroke;
+                  return dataConfig.areaStroke;
                 }
               : (code: string) =>
                   code === dataOptions.selectedCode
@@ -43,14 +43,14 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
                     : colors.choroplethFeatureStroke,
           strokeWidth:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? () => DEFAULT_STROKE_WIDTH
+              ? () => dataConfig.areaStrokeWidth
               : (code: string) =>
                   code === dataOptions.selectedCode
                     ? dataConfig.highlightStrokeWidth
-                    : DEFAULT_STROKE_WIDTH,
+                    : dataConfig.areaStrokeWidth,
         },
         hover: {
-          fill: () => 'none',
+          fill: () => dataConfig.hoverFill,
           stroke: () => dataConfig.hoverStroke,
           strokeWidth: () => dataConfig.hoverStrokeWidth,
         },
@@ -67,8 +67,8 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
           fill: (code: string) => {
             return getFillColor(code);
           },
-          stroke: () => colors.choroplethFeatureStroke,
-          strokeWidth: () => DEFAULT_STROKE_WIDTH,
+          stroke: () => dataConfig.areaStroke,
+          strokeWidth: () => dataConfig.areaStrokeWidth,
         },
         hover: {
           fill: () => 'none',

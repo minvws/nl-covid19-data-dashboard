@@ -47,10 +47,13 @@ export type DataOptions = {
 type OptionalDataConfig<T> = {
   metricProperty: KeysOfType<T, number | null | boolean | undefined, true>;
   noDataFillColor?: string;
+  hoverFill?: string;
   hoverStroke?: string;
   hoverStrokeWidth?: number;
   highlightStroke?: string;
   highlightStrokeWidth?: number;
+  areaStroke?: string;
+  areaStrokeWidth?: number;
 };
 
 export type DataConfig<T> = Required<OptionalDataConfig<T>>;
@@ -166,6 +169,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     metricProperty: originalDataConfig.metricProperty,
     noDataFillColor:
       originalDataConfig.noDataFillColor ?? colors.choroplethNoData,
+    hoverFill: originalDataConfig.hoverFill ?? 'none',
     hoverStroke:
       originalDataConfig.hoverStroke ?? colors.choroplethFeatureStroke,
     hoverStrokeWidth:
@@ -174,6 +178,9 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
       originalDataConfig.highlightStroke ?? colors.choroplethHighlightStroke,
     highlightStrokeWidth:
       originalDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
+    areaStroke: originalDataConfig.areaStroke ?? colors.choroplethFeatureStroke,
+    areaStrokeWidth:
+      originalDataConfig.areaStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
   };
 
   const boundingBoxPadding: BoundingBoxPadding = {
