@@ -135,7 +135,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                         text.kpi_bedbezetting.description,
                         {
                           percentage: formatPercentage(
-                            bedsLastValue.beds_occupied_covid_percentage
+                            bedsLastValue.beds_occupied_covid_percentage,
+                            { maximumFractionDigits: 1 }
                           ),
                         }
                       )}
