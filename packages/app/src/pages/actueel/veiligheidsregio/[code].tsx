@@ -10,8 +10,8 @@ import { some } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import GetestIcon from '~/assets/test.svg';
-import ZiekenhuisIcon from '~/assets/ziekenhuis.svg';
+import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as ZiekenhuisIcon } from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {

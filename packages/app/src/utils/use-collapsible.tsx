@@ -11,7 +11,7 @@ import {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import ChevronIcon from '~/assets/chevron.svg';
+import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { useUniqueId } from '~/utils/use-unique-id';

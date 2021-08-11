@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import GetestIcon from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { InlineText } from '~/components/typography';

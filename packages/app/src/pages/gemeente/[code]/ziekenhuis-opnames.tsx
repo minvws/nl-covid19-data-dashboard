@@ -1,5 +1,5 @@
 import { GmGeoProperties, GmHospitalNiceValue } from '@corona-dashboard/common';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { GmChoropleth } from '~/components/choropleth/gm-choropleth';

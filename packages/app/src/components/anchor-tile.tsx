@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ExternalLinkIcon from '~/assets/external-link.svg';
+import { ReactComponent as ExternalLinkIcon } from '~/assets/external-link.svg';
 import { Anchor, Heading } from '~/components/typography';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';
