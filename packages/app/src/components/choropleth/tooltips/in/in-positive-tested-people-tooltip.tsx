@@ -1,6 +1,7 @@
 import { Box } from '~/components/base';
 import { inThresholds } from '~/components/choropleth/logic';
 import { InlineText } from '~/components/typography';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { TooltipSubject } from '../tooltip-subject';
 import { TooltipContent } from './tooltip-content';
@@ -73,13 +74,7 @@ function SubjectText({
   return (
     <Box display="flex" width="100%">
       <Box fontWeight={bold ? 'bold' : undefined} spacingHorizontal={2}>
-        <img
-          aria-hidden
-          src={`/icons/flags/${code.toLowerCase()}.svg`}
-          width="17"
-          height="13"
-          alt=""
-        />
+        <Flag countryCode={code} />
         <InlineText>{name}</InlineText>
       </Box>
       <Box ml="auto">
