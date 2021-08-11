@@ -136,7 +136,7 @@ function VariantStackedAreaTileWithData({
               isPercentage: true,
               forcedMaximumValue: 100,
               timespanAnnotations,
-              setNullToZero: true,
+              renderNullAsZero: true,
             }}
             formatTooltip={(context) => {
               /**

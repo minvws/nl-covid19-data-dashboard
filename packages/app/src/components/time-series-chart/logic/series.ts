@@ -142,7 +142,6 @@ export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
   strokeWidth?: number;
   isNonInteractive?: boolean;
   mixBlendMode?: Property.MixBlendMode;
-  setNullToZero?: boolean;
 }
 
 /**
@@ -374,7 +373,10 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
   const seriesLow = getSeriesData(values, metricProperty);
 
   seriesLow.forEach((seriesSingleValue, index) => {
-    if (!dataOptions?.setNullToZero && !isPresent(seriesSingleValue.__value)) {
+    if (
+      !dataOptions?.renderNullAsZero &&
+      !isPresent(seriesSingleValue.__value)
+    ) {
       return;
     }
 
@@ -394,7 +396,7 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
     const valueLow = low.__value;
     const valueHigh = isDefined(valueLow)
       ? valueLow + (seriesHigh[index].__value ?? 0)
-      : dataOptions?.setNullToZero
+      : dataOptions?.renderNullAsZero
       ? 0
       : undefined;
 
