@@ -1,7 +1,8 @@
 import { TimelineEventConfig } from '../components/timeline';
 
 /**
- * The prop setNullToZero only make sense when rendering a gapped-stacked-area, hence why it only works there.
+ * The prop setNullToZero only make sense when rendering a gapped-stacked-area,
+ * hence why it only works in that particular config .
  */
 export interface DataOptions {
   valueAnnotation?: string;
