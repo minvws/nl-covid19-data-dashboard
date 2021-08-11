@@ -53,6 +53,12 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
           return 'country_code' in v;
         });
         return {
+          outline: {
+            ...inGeo,
+            features: inGeo.features.filter(
+              (x) => !inData.some((d) => d.country_code === x.properties.code)
+            ),
+          },
           hover: {
             ...inGeo,
             features: inGeo.features.filter((x) =>

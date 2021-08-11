@@ -189,6 +189,21 @@ export default function PositiefGetesteMensenPage(
                   comparedValue={comparedValue}
                 />
               )}
+              dynamicSizeConfiguration={[
+                {
+                  containerWidth: 600,
+                  sizes: { mapHeight: 650, padding: { top: 20, bottom: 20 } },
+                },
+                {
+                  containerWidth: 400,
+                  sizes: { mapHeight: 400, padding: { top: 15, bottom: 15 } },
+                },
+                {
+                  containerWidth: 300,
+                  sizes: { mapHeight: 300, padding: { top: 5, bottom: 5 } },
+                },
+                { mapHeight: 250, padding: { left: 20, top: 0, bottom: 0 } },
+              ]}
             />
           </EuropeChoroplethTile>
 

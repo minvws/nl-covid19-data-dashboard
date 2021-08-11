@@ -29,6 +29,7 @@ import {
   useTabInteractiveButton,
 } from './logic';
 import { useChoroplethTooltip } from './logic/use-choropleth-tooltip';
+import { useDynamicSize } from './logic/use-dynamic-size';
 import { useFeatureName } from './logic/use-feature-name';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
@@ -58,18 +59,34 @@ type OptionalDataConfig<T> = {
 
 export type DataConfig<T> = Required<OptionalDataConfig<T>>;
 
-type OptionalBoundingBoxPadding = {
+export type OptionalBoundingBoxPadding = {
   left?: number;
   right?: number;
   top?: number;
   bottom?: number;
 };
 
-type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
+export type DynamicSizeConfiguration = {
+  containerWidth: number;
+  sizes: DynamicSizes;
+};
+
+export type DynamicSizes = {
+  mapHeight: number;
+  padding: OptionalBoundingBoxPadding;
+};
+
+export type DynamicSizeConfigurations = [
+  ...DynamicSizeConfiguration[],
+  DynamicSizes
+];
+
+export type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
 type UnpackedDataItem<T extends MapType> = Unpack<MappedDataItem<T>>;
 
 type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
+  accessibility: AccessibilityDefinition;
   data: K[];
   dataConfig: OptionalDataConfig<K>;
   dataOptions: DataOptions;
@@ -78,7 +95,7 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
   boundingBoxPadding?: OptionalBoundingBoxPadding;
-  accessibility: AccessibilityDefinition;
+  dynamicSizeConfiguration?: DynamicSizeConfigurations;
 };
 
 export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
@@ -157,12 +174,13 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     dataOptions,
     map,
     minHeight = 500,
-    boundingBoxPadding: originalPadding = {},
+    boundingBoxPadding = {},
     hoverRef,
     setTooltip,
     accessibility,
     isTabInteractive,
     anchorEventHandlers,
+    dynamicSizeConfiguration,
   } = props;
 
   const dataConfig = {
@@ -183,13 +201,6 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
       originalDataConfig.areaStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
   };
 
-  const boundingBoxPadding: BoundingBoxPadding = {
-    left: originalPadding.left ?? 0,
-    right: originalPadding.right ?? 0,
-    top: originalPadding.top ?? 0,
-    bottom: originalPadding.bottom ?? 0,
-  };
-
   const aspectRatio =
     map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
   const mapProjection = map === 'in' ? 'mercator' : 'mercator';
@@ -202,6 +213,13 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     containerRef,
     { width = minHeight * (1 / aspectRatio), height = minHeight },
   ] = useResizeObserver<HTMLDivElement>();
+
+  const [mapHeight, padding] = useDynamicSize(
+    width,
+    height,
+    boundingBoxPadding,
+    dynamicSizeConfiguration
+  );
 
   const choroplethFeatures = useChoroplethFeatures(
     map,
@@ -238,18 +256,18 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
   const fitExtent: FitExtent = useMemo(
     () => [
       [
-        [boundingBoxPadding.left, boundingBoxPadding.top],
-        [width - boundingBoxPadding.right, height - boundingBoxPadding.bottom],
+        [padding.left, padding.top],
+        [width - padding.right, height - padding.bottom],
       ],
       choroplethFeatures.boundingBox,
     ],
     [
       width,
       height,
-      boundingBoxPadding.left,
-      boundingBoxPadding.right,
-      boundingBoxPadding.top,
-      boundingBoxPadding.bottom,
+      padding.left,
+      padding.right,
+      padding.top,
+      padding.bottom,
       choroplethFeatures.boundingBox,
     ]
   );
@@ -260,7 +278,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
       <div
         ref={containerRef}
         style={{
-          minHeight,
+          minHeight: mapHeight,
           maxHeight: '75vh',
           maxWidth: '100%',
         }}
@@ -268,7 +286,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
         <svg
           role="img"
           width={width}
-          viewBox={`0 0 ${width} ${height}`}
+          viewBox={`0 0 ${width} ${mapHeight}`}
           css={css({ display: 'block', bg: 'transparent', width: '100%' })}
           onMouseMove={mouseOverHandler}
           onMouseOut={mouseOutHandler}
