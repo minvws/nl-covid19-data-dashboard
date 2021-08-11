@@ -5,7 +5,10 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
+import {
+  BehaviorLineChartTile,
+  useBehaviorChartOptions,
+} from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
@@ -56,7 +59,10 @@ export default function BehaviorPageVr(
   const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const chartBehaviorOptions = useBehaviorChartOptions(data.behavior.values);
+  const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
+    chartBehaviorOptions[0]
+  );
   const scrollToRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -144,6 +150,7 @@ export default function BehaviorPageVr(
             }}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            behaviorOptions={chartBehaviorOptions}
           />
 
           <MoreInformation />

@@ -1,4 +1,6 @@
 import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
+import { useMemo } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
@@ -7,12 +9,14 @@ import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { SelectBehavior } from './components/select-behavior';
 import { BehaviorIdentifier } from './logic/behavior-types';
+import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
 
 interface BehaviorLineChartTileProps {
   values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  behaviorOptions?: BehaviorIdentifier[];
 }
 
 export function BehaviorLineChartTile({
@@ -20,6 +24,7 @@ export function BehaviorLineChartTile({
   metadata,
   currentId,
   setCurrentId,
+  behaviorOptions,
 }: BehaviorLineChartTileProps) {
   const { siteText } = useIntl();
   const chartText = siteText.gedrag_common.line_chart;
@@ -36,7 +41,11 @@ export function BehaviorLineChartTile({
       description={chartText.description}
     >
       <Box spacing={4}>
-        <SelectBehavior value={currentId} onChange={setCurrentId} />
+        <SelectBehavior
+          value={currentId}
+          onChange={setCurrentId}
+          options={behaviorOptions}
+        />
 
         <TimeSeriesChart
           accessibility={{
@@ -68,4 +77,27 @@ export function BehaviorLineChartTile({
       </Box>
     </ChartTile>
   );
+}
+
+export function useBehaviorChartOptions(
+  values: NlBehaviorValue[] | VrBehaviorValue[]
+) {
+  const behaviorLookupKeys = useBehaviorLookupKeys();
+
+  return useMemo(() => {
+    return behaviorLookupKeys
+      .map((x) => {
+        const complianceValues = values
+          .map((value) => value[x.complianceKey])
+          .filter(isPresent);
+        const supportValues = values
+          .map((value) => value[x.supportKey])
+          .filter(isPresent);
+
+        if (complianceValues.length && supportValues.length) {
+          return x.key;
+        }
+      })
+      .filter(isDefined);
+  }, [values, behaviorLookupKeys]);
 }
