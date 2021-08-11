@@ -7,7 +7,7 @@ import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
   AccessibilityDefinition,
-  useAccessibilityAnnotations,
+  useAccessibilityAnnotations
 } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
@@ -27,7 +27,7 @@ import {
   useChoroplethFeatures,
   useFeatureProps,
   useFillColor,
-  useTabInteractiveButton,
+  useTabInteractiveButton
 } from './logic';
 import { useChoroplethTooltip } from './logic/use-choropleth-tooltip';
 import { useDynamicSize } from './logic/use-dynamic-size';
@@ -96,6 +96,10 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
   boundingBoxPadding?: OptionalBoundingBoxPadding;
+  /**
+   * This defines an optional set of map heights and paddings based
+   * on a set of given width break points
+   */
   dynamicSizeConfiguration?: DynamicSizeConfigurations;
 };
 
@@ -115,7 +119,7 @@ export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
       replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-        subject: siteText.choropleth.gm.plural,
+        subject: siteText.choropleth.[props.map].plural,
       })
     );
 
@@ -258,7 +262,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     ],
     [
       width,
-      height,
+      mapHeight,
       padding.left,
       padding.right,
       padding.top,

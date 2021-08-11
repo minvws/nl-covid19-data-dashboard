@@ -192,7 +192,7 @@ export default function PositiefGetesteMensenPage(
               dynamicSizeConfiguration={[
                 {
                   containerWidth: 600,
-                  sizes: { mapHeight: 650, padding: { top: 20, bottom: 20 } },
+                  sizes: { mapHeight: 650, padding: { top: 5, bottom: 20 } },
                 },
                 {
                   containerWidth: 400,
