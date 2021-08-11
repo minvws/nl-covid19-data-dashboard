@@ -69,7 +69,7 @@ function Icon({ children }: { children: ReactNode }) {
         width: '2.5rem',
         height: '2.5rem',
         svg: {
-          height: 35,
+          height: '2.25rem',
         },
       })}
     >
