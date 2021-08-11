@@ -1,4 +1,4 @@
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';

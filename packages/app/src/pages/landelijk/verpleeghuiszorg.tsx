@@ -1,6 +1,6 @@
-import CoronaVirus from '~/assets/coronavirus.svg';
-import Locatie from '~/assets/locaties.svg';
-import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
+import { ReactComponent as Locatie } from '~/assets/locaties.svg';
+import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';

@@ -2,6 +2,7 @@ import { Box } from '~/components/base';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
 import { InlineText } from '~/components/typography';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { Flag } from '../flag';
 import { TooltipContent } from './tooltip-content';

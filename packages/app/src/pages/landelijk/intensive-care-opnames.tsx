@@ -1,5 +1,5 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import Arts from '~/assets/arts.svg';
+import { ReactComponent as Arts } from '~/assets/arts.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';

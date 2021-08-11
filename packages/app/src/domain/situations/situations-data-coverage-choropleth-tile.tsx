@@ -1,7 +1,7 @@
 import { VrCollectionSituations } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import Check from '~/assets/check.svg';
-import Cross from '~/assets/cross.svg';
+import { ReactComponent as Check } from '~/assets/check.svg';
+import { ReactComponent as Cross } from '~/assets/cross.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';

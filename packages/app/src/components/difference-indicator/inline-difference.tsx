@@ -1,6 +1,6 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import IconUp from '~/assets/pijl-omhoog.svg';
-import IconDown from '~/assets/pijl-omlaag.svg';
+import { ReactComponent as IconUp } from '~/assets/pijl-omhoog.svg';
+import { ReactComponent as IconDown } from '~/assets/pijl-omlaag.svg';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';

@@ -1,6 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { useState } from 'react';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';

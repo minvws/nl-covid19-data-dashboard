@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Stopwatch from '~/assets/stopwatch.svg';
+import { ReactComponent as Stopwatch } from '~/assets/stopwatch.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
