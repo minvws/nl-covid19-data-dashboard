@@ -18,6 +18,7 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';
 import { useSituations } from './logic/situations';
 
@@ -32,6 +33,8 @@ export function SituationsOverviewChoroplethTile({
   const situations = useSituations();
   const text = intl.siteText.brononderzoek;
   const singleValue = data[0];
+
+  const breakpoints = useBreakpoints();
 
   const [date_from, date_to] = intl.formatDateSpan(
     { seconds: singleValue.date_start_unix },
@@ -91,7 +94,7 @@ export function SituationsOverviewChoroplethTile({
                 data={{ situations: data }}
                 metricName={'situations'}
                 metricProperty={situation.id}
-                minHeight={280}
+                minHeight={breakpoints.sm ? 280 : 260}
                 tooltipPlacement="top-center"
                 noDataFillColor={colors.data.underReported}
                 tooltipContent={(
