@@ -67,6 +67,12 @@ const nextConfig = {
                 ref: true,
               },
             },
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'static/image/[path][name].[hash].[ext]',
+              },
+            },
           ],
           issuer: {
             and: [/\.(ts|tsx|js|jsx|md|mdx)$/],

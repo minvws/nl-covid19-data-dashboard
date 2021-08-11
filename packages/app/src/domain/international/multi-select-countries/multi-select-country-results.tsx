@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import CheckedIcon from '~/assets/checked.svg';
-import UncheckedIcon from '~/assets/unchecked.svg';
+import { ReactComponent as CheckedIcon } from '~/assets/checked.svg';
+import { ReactComponent as UncheckedIcon } from '~/assets/unchecked.svg';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';

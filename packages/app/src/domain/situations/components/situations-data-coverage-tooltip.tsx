@@ -3,8 +3,8 @@ import {
   VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import Check from '~/assets/check.svg';
-import Cross from '~/assets/cross.svg';
+import { ReactComponent as Check } from '~/assets/check.svg';
+import { ReactComponent as Cross } from '~/assets/cross.svg';
 import { Box } from '~/components/base';
 import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
 import { InlineText } from '~/components/typography';

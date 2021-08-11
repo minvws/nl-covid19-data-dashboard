@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components/';
 import { isPresent } from 'ts-is-present';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
