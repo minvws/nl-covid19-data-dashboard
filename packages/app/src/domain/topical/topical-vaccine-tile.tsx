@@ -72,7 +72,7 @@ export function TopicalVaccineTile({ data, areas }: TopicalVaccineProps) {
 const Icon = styled.span(
   css({
     svg: {
-      height: 45,
+      height: '3rem',
       mr: 3,
     },
   })

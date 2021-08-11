@@ -25,7 +25,6 @@ import { useIntl } from '~/intl';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/types';
-import { SituationIcon } from '../situations/components/situation-icon';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VrComboBox } from './components/vr-combo-box';
 
@@ -248,7 +247,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.brononderzoek(code)}
-                      icon={<SituationIcon id="gathering" />}
+                      icon={<Gedrag />}
                       title={siteText.brononderzoek.titel_sidebar}
                     >
                       <SituationsSidebarMetric

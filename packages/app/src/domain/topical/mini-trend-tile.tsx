@@ -106,7 +106,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
 const Icon = styled.span(
   css({
     svg: {
-      height: 45,
+      height: '3rem',
       mr: 3,
       ml: '2px',
     },
