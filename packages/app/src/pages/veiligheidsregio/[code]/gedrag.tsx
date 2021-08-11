@@ -1,3 +1,4 @@
+import { NlBehaviorValue } from '@corona-dashboard/common';
 import { useRef, useState } from 'react';
 import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -59,7 +60,9 @@ export default function BehaviorPageVr(
   const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const chartBehaviorOptions = useBehaviorChartOptions(data.behavior.values);
+  const chartBehaviorOptions = useBehaviorChartOptions<NlBehaviorValue>(
+    data.behavior.values
+  );
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
     chartBehaviorOptions[0]
   );

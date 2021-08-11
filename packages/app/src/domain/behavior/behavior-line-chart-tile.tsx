@@ -79,19 +79,17 @@ export function BehaviorLineChartTile({
   );
 }
 
-export function useBehaviorChartOptions(
-  values: NlBehaviorValue[] | VrBehaviorValue[]
-) {
+export function useBehaviorChartOptions<T>(values: T[]) {
   const behaviorLookupKeys = useBehaviorLookupKeys();
 
   return useMemo(() => {
     return behaviorLookupKeys
       .map((x) => {
         const complianceValues = values
-          .map((value) => value[x.complianceKey])
+          .map((value: any) => value[x.complianceKey])
           .filter(isPresent);
         const supportValues = values
-          .map((value) => value[x.supportKey])
+          .map((value: any) => value[x.supportKey])
           .filter(isPresent);
 
         if (complianceValues.length && supportValues.length) {
