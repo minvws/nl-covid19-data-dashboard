@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
-interface PathProps {
+export interface PathProps {
   pathData: string;
   fill?: string;
   stroke?: string;
@@ -35,7 +35,7 @@ export function Path({
   );
 }
 
-interface HoverPathLinkProps extends PathProps {
+export interface HoverPathLinkProps extends PathProps {
   href?: string;
   title: string;
   isTabInteractive: boolean;
@@ -140,8 +140,8 @@ const StyledHoverPath = styled.path<{
     '&:hover, a:focus &': {
       transitionDuration: '0ms',
       fill: x.fill ?? 'none',
-      stroke: x.stroke ?? '#fff',
-      strokeWidth: x.strokeWidth ?? 3,
+      stroke: x.stroke ?? '#ff0000',
+      strokeWidth: x.strokeWidth ?? 30,
     },
   })
 );

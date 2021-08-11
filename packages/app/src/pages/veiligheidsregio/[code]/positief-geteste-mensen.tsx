@@ -2,9 +2,9 @@ import Afname from '~/assets/afname.svg';
 import Getest from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -251,7 +251,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
-              thresholds: vrThresholds.tested_overall.infected_per_100k,
+              thresholds: thresholds.vr.infected_per_100k,
             }}
           >
             <Choropleth

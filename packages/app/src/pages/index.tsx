@@ -11,10 +11,9 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from '~/components/chart-region-controls';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
-import { VrEscalationTooltip } from '~/components/choropleth2/tooltips/vr/vr-escalation-tooltip';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -26,6 +25,7 @@ import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { Layout } from '~/domain/layout/layout';
 import { ArticleList } from '~/domain/topical/article-list';
 import { ChoroplethTwoColumnLayout } from '~/domain/topical/choropleth-two-column-layout';
@@ -229,9 +229,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <EscalationMapLegenda
-                    data={choropleth.vr}
-                    metricName="escalation_levels"
-                    metricProperty="level"
+                    data={choropleth.vr.escalation_levels}
                     lastDetermined={
                       choropleth.vr.escalation_levels[0].last_determined_unix
                     }
@@ -305,7 +303,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <ChoroplethLegenda
-                    thresholds={vrThresholds.tested_overall.infected_per_100k}
+                    thresholds={thresholds.vr.infected_per_100k}
                     title={
                       siteText.positief_geteste_personen.chloropleth_legenda
                         .titel

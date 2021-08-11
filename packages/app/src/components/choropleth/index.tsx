@@ -18,6 +18,7 @@ import { MercatorGroup } from './components/mercator-group';
 import { MercatorHoverGroup } from './components/mercator-hover-group';
 import {
   CHOROPLETH_ASPECT_RATIO,
+  DEFAULT_STROKE_WIDTH,
   FitExtent,
   MappedDataItem,
   MapType,
@@ -197,8 +198,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     highlightStrokeWidth:
       originalDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
     areaStroke: originalDataConfig.areaStroke ?? colors.choroplethFeatureStroke,
-    areaStrokeWidth:
-      originalDataConfig.areaStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
+    areaStrokeWidth: originalDataConfig.areaStrokeWidth ?? DEFAULT_STROKE_WIDTH,
   };
 
   const aspectRatio =
@@ -223,16 +223,11 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
 
   const choroplethFeatures = useChoroplethFeatures(
     map,
-    dataOptions.selectedCode,
-    data
+    data,
+    dataOptions.selectedCode
   );
 
-  const getFillColor = useFillColor(
-    data,
-    map,
-    dataConfig.metricProperty,
-    dataConfig
-  );
+  const getFillColor = useFillColor(data, map, dataConfig);
 
   const { area, outline, hover } = useFeatureProps(
     map,

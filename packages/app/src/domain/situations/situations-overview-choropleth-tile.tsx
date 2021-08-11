@@ -7,11 +7,10 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { vrThresholds } from '~/components/choropleth/logic';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
-import { Choropleth } from '~/components/choropleth2';
-import { thresholds } from '~/components/choropleth2/logic/thresholds';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
@@ -60,7 +59,7 @@ export function SituationsOverviewChoroplethTile({
           <Box>
             <ChoroplethLegenda
               title={text.situaties_kaarten_overzicht.legenda.titel}
-              thresholds={vrThresholds.situations.gathering}
+              thresholds={thresholds.vr.gathering}
             />
           </Box>
           <Box display="flex" alignItems="flex-end">

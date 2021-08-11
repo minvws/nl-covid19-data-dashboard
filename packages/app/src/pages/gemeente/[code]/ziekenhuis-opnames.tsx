@@ -1,8 +1,8 @@
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { gmThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -151,8 +151,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-              thresholds:
-                gmThresholds.hospital_nice.admissions_on_date_of_reporting,
+              thresholds: thresholds.gm.admissions_on_date_of_reporting,
             }}
           >
             <Choropleth

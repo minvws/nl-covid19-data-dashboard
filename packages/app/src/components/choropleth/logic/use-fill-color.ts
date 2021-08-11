@@ -1,8 +1,8 @@
-import { assert, KeysOfType } from '@corona-dashboard/common';
+import { assert } from '@corona-dashboard/common';
 import { scaleThreshold } from 'd3-scale';
 import { useCallback, useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { DataConfig } from '~/components/choropleth2';
+import { DataConfig } from '~/components/choropleth';
 import { thresholds } from './thresholds';
 import { ChoroplethDataItem, mapToCodeType, MapType } from './types';
 import { isCodedValueType } from './utils';
@@ -10,10 +10,10 @@ import { isCodedValueType } from './utils';
 export function useFillColor<T extends ChoroplethDataItem>(
   data: T[],
   map: MapType,
-  metricProperty: KeysOfType<T, number | null | boolean | undefined, true>,
   dataConfig: DataConfig<T>
 ) {
   const codeType = mapToCodeType[map];
+  const { metricProperty, noDataFillColor } = dataConfig;
 
   const getValueByCode = useMemo(() => {
     return (code: string) => {
@@ -47,11 +47,9 @@ export function useFillColor<T extends ChoroplethDataItem>(
   return useCallback(
     (code: string) => {
       const value = getValueByCode(code);
-      const result = isPresent(value)
-        ? colorScale(value)
-        : dataConfig.noDataFillColor;
+      const result = isPresent(value) ? colorScale(value) : noDataFillColor;
       return result;
     },
-    [getValueByCode, colorScale, dataConfig.noDataFillColor]
+    [getValueByCode, colorScale, noDataFillColor]
   );
 }

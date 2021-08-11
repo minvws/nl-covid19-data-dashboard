@@ -3,9 +3,9 @@ import Locatie from '~/assets/locaties.svg';
 import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -222,8 +222,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               source: infectedLocationsText.bronnen.rivm,
             }}
             legend={{
-              thresholds:
-                vrThresholds.nursing_home.infected_locations_percentage,
+              thresholds: thresholds.vr.infected_locations_percentage,
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >

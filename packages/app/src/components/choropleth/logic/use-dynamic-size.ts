@@ -7,7 +7,7 @@ import {
   DynamicSizeConfigurations,
   DynamicSizes,
   OptionalBoundingBoxPadding,
-} from '~/components/choropleth2';
+} from '~/components/choropleth';
 
 export function useDynamicSize(
   containerWidth: number,

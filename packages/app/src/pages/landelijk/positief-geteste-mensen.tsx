@@ -5,9 +5,9 @@ import Getest from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -25,21 +25,21 @@ import { useIntl } from '~/intl';
 import {
   createElementsQuery,
   ElementsQueryResult,
-  getTimelineEvents
+  getTimelineEvents,
 } from '~/queries/create-elements-query';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult
+  PageArticlesQueryResult,
 } from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlPageMetricData
+  selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -191,7 +191,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             chartRegion={selectedMap}
             legend={{
               title: text.chloropleth_legenda.titel,
-              thresholds: vrThresholds.tested_overall.infected_per_100k,
+              thresholds: thresholds.vr.infected_per_100k,
             }}
           >
             {/**

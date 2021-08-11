@@ -1,12 +1,12 @@
 import { EscalationLevels } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipContent } from '~/components/choropleth/tooltips';
+import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { Text } from '~/components/typography';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { TooltipData } from '../types';
 
 export function VrEscalationTooltip({
   context,

@@ -2,7 +2,7 @@ import Projection from '@visx/geo/lib/projections/Projection';
 import { ProjectionPreset } from '@visx/geo/lib/types';
 import { GeoProjection } from 'd3-geo';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
-import { CodedGeoProperties, FitExtent } from '~/components/choropleth2/logic';
+import { CodedGeoProperties, FitExtent } from '~/components/choropleth/logic';
 import { featureHasPath } from '../logic/utils';
 import { Path } from './path';
 

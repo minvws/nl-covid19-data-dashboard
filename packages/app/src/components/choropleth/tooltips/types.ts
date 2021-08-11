@@ -1,6 +1,6 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
-import { DataConfig, DataOptions } from '~/components/choropleth2';
-import { ChoroplethDataItem, MapType } from '~/components/choropleth2/logic';
+import { DataConfig, DataOptions } from '~/components/choropleth';
+import { ChoroplethDataItem, MapType } from '~/components/choropleth/logic';
 
 export type TooltipSettings<T extends ChoroplethDataItem> = {
   left: number;

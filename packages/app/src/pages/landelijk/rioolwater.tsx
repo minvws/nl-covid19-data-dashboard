@@ -2,9 +2,9 @@ import { useState } from 'react';
 import ExperimenteelIcon from '~/assets/experimenteel.svg';
 import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -168,7 +168,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
               title: text.legenda_titel,
-              thresholds: vrThresholds.sewer.average,
+              thresholds: thresholds.vr.average,
             }}
           >
             {selectedMap === 'gm' ? (

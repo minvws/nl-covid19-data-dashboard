@@ -1,4 +1,4 @@
-import { MapType } from '~/components/choropleth2/logic';
+import { MapType } from '~/components/choropleth/logic';
 import { colors } from '~/style/theme';
 import { DataConfig, DataOptions } from '..';
 import { ChoroplethDataItem } from './types';
@@ -17,7 +17,7 @@ type FeaturePropFunctions = {
   strokeWidth: GetFeatureProp<number>;
 };
 
-const DEFAULT_STROKE_WIDTH = 0.5;
+export const DEFAULT_STROKE_WIDTH = 0.5;
 
 export function useFeatureProps<T extends ChoroplethDataItem>(
   map: MapType,

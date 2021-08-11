@@ -1,7 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth2/logic';
+import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth/logic';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
 import { CodedGeoJSON, gmGeo, inGeo, nlGeo, vrGeo } from './topology';
@@ -20,8 +20,8 @@ export type ChoroplethFeatures = {
 
 export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   map: MapType,
-  selectedCode?: string,
-  data: T[]
+  data: T[],
+  selectedCode?: string
 ): ChoroplethFeatures {
   return useMemo(() => {
     switch (map) {

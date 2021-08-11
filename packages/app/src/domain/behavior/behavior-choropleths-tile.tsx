@@ -2,12 +2,12 @@ import { KeysOfType, VrCollectionBehavior } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
-import { VrBehaviorTooltip } from '~/components/choropleth2/tooltips/vr/vr-behavior-tooltip';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
+import { VrBehaviorTooltip } from '~/domain/behavior/tooltip/vr-behavior-tooltip';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -178,7 +178,7 @@ function ChoroplethBlock({
         maxWidth={300}
       >
         <ChoroplethLegenda
-          thresholds={vrThresholds.behavior[metricProperty]}
+          thresholds={thresholds.vr[metricProperty]}
           title={siteText.gedrag_common.basisregels.header_percentage}
         />
       </Box>

@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipContent } from '~/components/choropleth/tooltips';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 
 type Bounds = {

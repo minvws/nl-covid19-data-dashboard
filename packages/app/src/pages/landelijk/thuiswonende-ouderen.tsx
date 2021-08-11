@@ -1,9 +1,9 @@
 import ElderlyIcon from '~/assets/elderly.svg';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -193,8 +193,7 @@ const ElderlyAtHomeNationalPage = (
               source: text.section_positive_tested.bronnen.rivm,
             }}
             legend={{
-              thresholds:
-                vrThresholds.elderly_at_home.positive_tested_daily_per_100k,
+              thresholds: thresholds.vr.positive_tested_daily_per_100k,
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >

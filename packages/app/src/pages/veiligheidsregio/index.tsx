@@ -1,11 +1,11 @@
 import { Box } from '~/components/base';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { Choropleth } from '~/components/choropleth2';
-import { VrEscalationTooltip } from '~/components/choropleth2/tooltips/vr/vr-escalation-tooltip';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { Markdown } from '~/components/markdown';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
+import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { VrComboBox } from '~/domain/layout/components/vr-combo-box';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
@@ -83,9 +83,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
                   />
                 </Box>
                 <EscalationMapLegenda
-                  data={choropleth.vr}
-                  metricName="escalation_levels"
-                  metricProperty="level"
+                  data={choropleth.vr.escalation_levels}
                   lastDetermined={
                     choropleth.vr.escalation_levels[0].last_determined_unix
                   }

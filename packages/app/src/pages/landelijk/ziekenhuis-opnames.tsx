@@ -3,9 +3,9 @@ import { useState } from 'react';
 import Ziekenhuis from '~/assets/ziekenhuis.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { gmThresholds, vrThresholds } from '~/components/choropleth/logic';
-import { Choropleth } from '~/components/choropleth2';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
@@ -154,8 +154,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'gm'
-                  ? gmThresholds.hospital_nice.admissions_on_date_of_reporting
-                  : vrThresholds.hospital_nice.admissions_on_date_of_reporting,
+                  ? thresholds.gm.admissions_on_date_of_reporting
+                  : thresholds.gm.admissions_on_date_of_reporting,
               title: text.chloropleth_legenda.titel,
             }}
             metadata={{

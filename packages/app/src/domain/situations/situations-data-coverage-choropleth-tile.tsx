@@ -4,7 +4,7 @@ import Check from '~/assets/check.svg';
 import Cross from '~/assets/cross.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth2';
+import { Choropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';

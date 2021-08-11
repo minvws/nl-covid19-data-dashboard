@@ -1,4 +1,4 @@
-import { MapType } from '~/components/choropleth2/logic';
+import { MapType } from '~/components/choropleth/logic';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,

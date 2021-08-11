@@ -1,8 +1,9 @@
 import { Box } from '~/components/base';
-import { inThresholds } from '~/components/choropleth/logic';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { TooltipSubject } from '~/components/choropleth/tooltips';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { TooltipSubject } from '../tooltip-subject';
+import { Flag } from '../flag';
 import { TooltipContent } from './tooltip-content';
 
 type InPositiveTestedPeopleTooltipProps = {
@@ -29,7 +30,7 @@ export function InPositiveTestedPeopleTooltip(
   } = props;
   const { formatPercentage } = useIntl();
 
-  const thresholdValues = inThresholds.infected_per_100k_average;
+  const thresholdValues = thresholds.in.infected_per_100k_average;
 
   const showComparison = countryName !== comparedName;
 
@@ -73,13 +74,7 @@ function SubjectText({
   return (
     <Box display="flex" width="100%">
       <Box fontWeight={bold ? 'bold' : undefined} spacingHorizontal={2}>
-        <img
-          aria-hidden
-          src={`/icons/flags/${code.toLowerCase()}.svg`}
-          width="17"
-          height="13"
-          alt=""
-        />
+        <Flag countryCode={code} />
         <InlineText>{name}</InlineText>
       </Box>
       <Box ml="auto">
