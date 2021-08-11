@@ -62,13 +62,6 @@ export function SelectCountry({
     setInputValue(currentOption.label);
   };
 
-  const handleOnClick = (item: Option) => {
-    setIsOpen(false);
-    onChange(item.value);
-  };
-
-  useOnClickOutside([containerRef], () => handleOnClose());
-
   const { focusIndex, focusRef, setFocusIndex } = useHitSelection({
     isEnabled: isOpen,
     onSelectHit: (index) => {
@@ -80,6 +73,17 @@ export function SelectCountry({
     maxPossibleItems: matchingCountries.length,
     handleOnClose,
   });
+
+  const handleOnClick = (item: Option) => {
+    setIsOpen(false);
+    onChange(item.value);
+  };
+
+  useOnClickOutside([containerRef], () => handleOnClose());
+
+  const handleOnMouseEnter = (index: number) => {
+    setFocusIndex(index);
+  };
 
   /**
    * Every time the user inputs a new value reset the focus index to the beginning of the results.
@@ -137,6 +141,7 @@ export function SelectCountry({
                     ref={hasFocus ? focusRef : null}
                     hasFocus={hasFocus}
                     onClick={() => handleOnClick(item)}
+                    onMouseEnter={() => handleOnMouseEnter(index)}
                   >
                     <img
                       aria-hidden
@@ -203,7 +208,6 @@ const ListItem = styled.li<{ hasFocus?: boolean }>((x) =>
     textAlign: 'left',
 
     '&:hover': {
-      backgroundColor: 'contextualContent',
       cursor: 'pointer',
     },
   })
