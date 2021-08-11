@@ -136,6 +136,7 @@ function VariantStackedAreaTileWithData({
               isPercentage: true,
               forcedMaximumValue: 100,
               timespanAnnotations,
+              setNullToZero: true,
             }}
             formatTooltip={(context) => {
               /**
@@ -217,7 +218,6 @@ function useSeriesConfig(
           strokeWidth: 0,
           fillOpacity: 1,
           mixBlendMode: 'multiply',
-          setNullToZero: true,
         };
       });
 

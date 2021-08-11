@@ -1,5 +1,8 @@
 import { TimelineEventConfig } from '../components/timeline';
 
+/**
+ * The prop setNullToZero only make sense when rendering a gapped-stacked-area, hence why it only works there.
+ */
 export interface DataOptions {
   valueAnnotation?: string;
   forcedMaximumValue?: number | ((x: number) => number);
@@ -8,6 +11,7 @@ export interface DataOptions {
   timespanAnnotations?: TimespanAnnotationConfig[];
   timeAnnotations?: TimeAnnotationConfig[];
   timelineEvents?: TimelineEventConfig[];
+  setNullToZero?: boolean;
 }
 
 export interface BenchmarkConfig {
