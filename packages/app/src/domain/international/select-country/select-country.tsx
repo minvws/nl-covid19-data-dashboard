@@ -82,7 +82,7 @@ export function SelectCountry({
   });
 
   /**
-   * Everytime the user inputs a new value reset the focus index to the beginning of the results.
+   * Every time the user inputs a new value reset the focus index to the beginning of the results.
    */
   useEffect(() => {
     if (inputValue.length > 0 && isOpen) {
@@ -112,7 +112,8 @@ export function SelectCountry({
         aria-labelledby={prefixId}
         isOpen={isOpen}
         /**
-         * Set the currently selected country when opened, otherwise fall back to the currently selected country.
+         * If the dropdown is open set the aria-activedescendant to the highlighted country.
+         * When closed reset it to the current selected country.
          */
         aria-activedescendant={
           isOpen
@@ -200,8 +201,6 @@ const ListItem = styled.li<{ hasFocus?: boolean }>((x) =>
     transitionDuration: x.hasFocus ? '0ms' : '120ms',
     border: 'none',
     textAlign: 'left',
-    fontFamily: 'inherit',
-    fontSize: '1em',
 
     '&:hover': {
       backgroundColor: 'contextualContent',
