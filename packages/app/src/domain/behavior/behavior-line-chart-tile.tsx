@@ -36,8 +36,6 @@ export function BehaviorLineChartTile({
     'shortLabel'
   );
 
-  console.log(timespanAnnotationsGaps);
-
   return (
     <ChartTile
       title={chartText.title}

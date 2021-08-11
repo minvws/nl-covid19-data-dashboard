@@ -13,7 +13,6 @@ export function useGapsDataAnnotations(
   return useMemo(
     () =>
       values
-        .map((item) => {})
         .reduce<TimespanAnnotationConfig[]>(
           (acc, x) => {
             if (!x[key]) {
