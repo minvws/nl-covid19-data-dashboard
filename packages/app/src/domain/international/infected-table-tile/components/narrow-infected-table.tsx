@@ -6,6 +6,7 @@ import { Box } from '~/components/base';
 import { inThresholds } from '~/components/choropleth/logic';
 import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
@@ -111,16 +112,10 @@ function ItemRow({
           alignItems: 'center',
         })}
       >
-        <img
-          aria-hidden
-          src={`/icons/flags/${item.country_code.toLowerCase()}.svg`}
-          width="17"
-          height="13"
-          alt=""
-          css={css({
-            mr: 2,
-          })}
-        />
+        <Box mr={2}>
+          <Flag countryCode={item.country_code} />
+        </Box>
+
         {countryNames[item.country_code.toLocaleLowerCase()]}
       </InlineText>
       <Row

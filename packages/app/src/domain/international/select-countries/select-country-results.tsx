@@ -3,7 +3,9 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as CheckedIcon } from '~/assets/checked.svg';
 import { ReactComponent as UncheckedIcon } from '~/assets/unchecked.svg';
+import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -46,16 +48,9 @@ export function SelectCountriesResults() {
                   <span css={css({ flex: '0 0 24px', mt: 1 })}>
                     {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
                   </span>
-                  <img
-                    aria-hidden
-                    src={`/icons/flags/${x.id.toLowerCase()}.svg`}
-                    width="17"
-                    height="13"
-                    alt=""
-                    css={css({
-                      mr: 2,
-                    })}
-                  />
+                  <Box mr={2}>
+                    <Flag countryCode={x.id} />
+                  </Box>
                   <span
                     css={css({
                       color: 'black',
