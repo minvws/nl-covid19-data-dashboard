@@ -95,6 +95,11 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
   formatTooltip?: TooltipFormatter<K>;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
+  /**
+   * A default set of paddings to be used on the bounding box, if
+   * more control is needed for different screensizes, use the
+   * dynamicSizeConfiguration instead.
+   */
   boundingBoxPadding?: OptionalBoundingBoxPadding;
   /**
    * This defines an optional set of map heights and paddings based
