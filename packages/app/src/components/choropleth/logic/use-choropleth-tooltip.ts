@@ -9,6 +9,9 @@ import {
   useRef,
 } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
+import { useIntl } from '~/intl';
+import { IntlContextProps } from '~/intl/hooks/use-intl';
+import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { DataConfig, DataOptions } from '..';
 import { TooltipSettings } from '../tooltips/types';
@@ -28,6 +31,13 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
 ) {
   const timeout = useRef(-1);
   const isTouch = useIsTouchDevice();
+  const intl = useIntl();
+
+  const metricPropertyFormatter = useMetricPropertyFormatter(
+    data,
+    dataConfig,
+    intl
+  );
 
   const codeType = mapToCodeType[map];
 
@@ -71,17 +81,19 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
         const left = bboxLink.left - bboxContainer.left;
         const top = bboxLink.top - bboxContainer.top;
 
+        const dataItem = getItemByCode(code);
+
         setTooltip({
           left: left + bboxLink.width + 5,
           top,
           data: {
             code,
-            dataItem: getItemByCode(code),
+            dataItem,
             dataConfig,
             dataOptions,
             thresholdValues: threshold,
             featureName: getFeatureName(code),
-            metricPropertyFormatter: (value: number) => value.toString(),
+            metricPropertyFormatter,
             map,
           },
         });
@@ -126,7 +138,8 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
         dataOptions,
         threshold,
         getFeatureName,
-        map
+        map,
+        metricPropertyFormatter
       ),
       [
         timeout,
@@ -156,7 +169,8 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
   dataOptions: DataOptions,
   threshold: ChoroplethThresholdsValue[],
   getFeatureName: (code: string) => string,
-  map: MapType
+  map: MapType,
+  metricPropertyFormatter: (value: number) => string
 ) => {
   return (event: React.MouseEvent) => {
     const elm = event.target as HTMLElement | SVGElement;
@@ -184,7 +198,7 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
             dataOptions,
             thresholdValues: threshold,
             featureName: getFeatureName(code),
-            metricPropertyFormatter: (value: number) => value.toString(),
+            metricPropertyFormatter,
             map,
           },
         });
@@ -206,3 +220,19 @@ const createSvgMouseOutHandler = <T extends ChoroplethDataItem>(
         }
       };
 };
+
+function useMetricPropertyFormatter<T extends ChoroplethDataItem>(
+  data: T[],
+  dataConfig: DataConfig<T>,
+  intl: IntlContextProps
+) {
+  return useMemo(() => {
+    const values = data.map((x) => x[dataConfig.metricProperty]);
+    const numberOfDecimals = getMaximumNumberOfDecimals(values);
+    return (value: number) =>
+      intl.formatPercentage(value, {
+        minimumFractionDigits: numberOfDecimals,
+        maximumFractionDigits: numberOfDecimals,
+      });
+  }, [data, dataConfig, intl]);
+}
