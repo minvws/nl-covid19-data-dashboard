@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { floorModulo } from '~/utils/modulo';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { SelectCountryInput } from './select-country-input';
