@@ -108,6 +108,7 @@ const Icon = styled.span(
     svg: {
       height: 45,
       mr: 3,
+      ml: '2px',
     },
   })
 );

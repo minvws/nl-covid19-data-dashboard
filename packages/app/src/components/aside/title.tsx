@@ -65,6 +65,7 @@ function Icon({ children }: { children: ReactNode }) {
       padding={0}
       marginRight={0}
       css={css({
+        mt: '-3px',
         width: '2.5rem',
         height: '2.5rem',
         svg: {
