@@ -21,10 +21,8 @@ interface AccessibilityPageData {
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<AccessibilityPageData>((_context) => {
-    //@TODO We need to switch this from process.env to context as soon as we use i18n routing
-    // const { locale } = context;
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+  createGetContent<AccessibilityPageData>((context) => {
+    const { locale = 'nl' } = context;
 
     return `*[_type == 'toegankelijkheid']{
       ...,

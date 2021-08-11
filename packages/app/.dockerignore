@@ -2,3 +2,6 @@ node_modules
 build
 .dockerignore
 Dockerfile
+.next
+out
+__mocks__

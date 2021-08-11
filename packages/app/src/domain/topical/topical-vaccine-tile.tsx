@@ -1,7 +1,7 @@
 import { NlVaccineAdministeredTotal } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import Vaccinaties from '~/assets/vaccinaties.svg';
+import { ReactComponent as Vaccinaties } from '~/assets/vaccinaties.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';

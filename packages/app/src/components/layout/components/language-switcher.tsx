@@ -6,12 +6,14 @@ import { Anchor } from '~/components/typography';
 
 export function LanguageSwitcher() {
   const router = useRouter();
-  const locale = process.env.NEXT_PUBLIC_LOCALE;
+  const { locale = 'nl' } = router;
+
+  const [currentPath] = router.asPath.split('?');
 
   return (
     <Box height={55} mt={-55} textAlign="right">
       <LanguageLink
-        href={`https://coronadashboard.rijksoverheid.nl${router.asPath}`}
+        href={`https://coronadashboard.rijksoverheid.nl${currentPath}`}
         lang="nl"
         hrefLang="nl"
         isActive={locale === 'nl'}
@@ -23,7 +25,7 @@ export function LanguageSwitcher() {
       <Separator aria-hidden="true" />
 
       <LanguageLink
-        href={`https://coronadashboard.government.nl${router.asPath}`}
+        href={`https://coronadashboard.government.nl${currentPath}`}
         lang="en-GB"
         hrefLang="en-GB"
         isActive={locale?.startsWith('en') ?? false}

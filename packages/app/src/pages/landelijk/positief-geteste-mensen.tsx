@@ -6,8 +6,8 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useState } from 'react';
-import Experimenteel from '~/assets/experimenteel.svg';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Experimenteel } from '~/assets/experimenteel.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
@@ -66,8 +66,8 @@ export const getStaticProps = createGetStaticProps(
     main: PageArticlesQueryResult;
     ggd: PageArticlesQueryResult;
     elements: ElementsQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
 
     const query = `{
       "main": ${createPageArticlesQuery('positiveTestsPage', locale)},

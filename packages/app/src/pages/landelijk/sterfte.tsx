@@ -1,4 +1,4 @@
-import CoronaVirusIcon from '~/assets/coronavirus.svg';
+import { ReactComponent as CoronaVirusIcon } from '~/assets/coronavirus.svg';
 import { AgeDemographic } from '~/components/age-demographic';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
@@ -32,8 +32,8 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     main: { articles: ArticleSummary[] };
     monitor: { articles: ArticleSummary[] };
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
     return `{
       "main": ${createPageArticlesQuery('deceasedPage', locale)},
       "monitor": ${createPageArticlesQuery(

@@ -2,7 +2,7 @@ import {
   GmCollectionTestedOverall,
   GmGeoProperties,
 } from '@corona-dashboard/common';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -62,8 +62,8 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
     return `{
       "page": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}

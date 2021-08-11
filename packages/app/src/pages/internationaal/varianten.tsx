@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components/';
 import { isPresent } from 'ts-is-present';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -41,8 +41,8 @@ export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    () => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    (context) => {
+      const { locale = 'nl' } = context;
       const countryNames = loadJsonFromDataFile<Record<string, string>>(
         `${locale}-country-names.json`,
         'static-json'
@@ -66,8 +66,8 @@ export const getStaticProps = withFeatureNotFoundPage(
         usefulLinks?: LinkProps[];
       };
       highlight: PageArticlesQueryResult;
-    }>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    }>((context) => {
+      const { locale = 'nl' } = context;
       return `{
         "page": *[_type=='in_variantsPage']{
           "usefulLinks": [...pageLinks[]{

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Getest from '~/assets/test.svg';
-import Varianten from '~/assets/varianten.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
+import { ReactComponent as Varianten } from '~/assets/varianten.svg';
 import {
   CategoryMenu,
   Menu,

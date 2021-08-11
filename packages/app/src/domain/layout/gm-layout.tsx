@@ -2,10 +2,10 @@ import { Gm, GmDifference } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import GetestIcon from '~/assets/test.svg';
-import CoronavirusIcon from '~/assets/coronavirus.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
+import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
+import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
   Menu,

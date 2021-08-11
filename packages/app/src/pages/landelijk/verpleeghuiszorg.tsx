@@ -2,9 +2,9 @@ import {
   VrCollectionNursingHome,
   VrGeoProperties,
 } from '@corona-dashboard/common';
-import CoronaVirus from '~/assets/coronavirus.svg';
-import Locatie from '~/assets/locaties.svg';
-import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
+import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
+import { ReactComponent as Locatie } from '~/assets/locaties.svg';
+import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -45,8 +45,8 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ nursing_home }) => ({ nursing_home }),
   }),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('nursingHomePage', locale);
   })
 );

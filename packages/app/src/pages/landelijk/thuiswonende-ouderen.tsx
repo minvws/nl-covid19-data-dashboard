@@ -2,7 +2,7 @@ import {
   VrCollectionElderlyAtHome,
   VrGeoProperties,
 } from '@corona-dashboard/common';
-import ElderlyIcon from '~/assets/elderly.svg';
+import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -43,8 +43,8 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   }),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('elderlyAtHomePage', locale);
   })
 );

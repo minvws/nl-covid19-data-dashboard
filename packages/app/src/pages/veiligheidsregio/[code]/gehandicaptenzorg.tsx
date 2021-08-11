@@ -1,6 +1,6 @@
-import CoronaVirus from '~/assets/coronavirus.svg';
-import Gehandicaptenzorg from '~/assets/gehandicapte-zorg.svg';
-import Locatie from '~/assets/locaties.svg';
+import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
+import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
+import { ReactComponent as Locatie } from '~/assets/locaties.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -33,8 +33,8 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('disabilityCarePage', locale);
   })
 );

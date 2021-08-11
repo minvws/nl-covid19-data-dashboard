@@ -1,10 +1,10 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
-import VaccinatiesIcon from '~/assets/vaccinaties.svg';
+import { ReactComponent as VaccinatiesIcon } from '~/assets/vaccinaties.svg';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
@@ -60,10 +60,10 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: VaccinationPageQuery;
     highlight: PageArticlesQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale = 'nl' } = context;
     return `{
-      "page": ${getVaccinePageQuery()},
+      "page": ${getVaccinePageQuery(locale)},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
     }`;
   })

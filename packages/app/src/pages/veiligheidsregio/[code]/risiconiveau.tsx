@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import BarChart from '~/assets/bar-chart.svg';
-import Calender from '~/assets/calender.svg';
-import Getest from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
+import { ReactComponent as Calender } from '~/assets/calender.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
@@ -55,8 +55,8 @@ export const getStaticProps = createGetStaticProps(
     'hospital_nice_sum',
     'tested_overall_sum'
   ),
-  createGetContent<PageArticlesQueryResult>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale = 'nl' } = context;
     return createPageArticlesQuery('escalationLevelPage', locale);
   })
 );

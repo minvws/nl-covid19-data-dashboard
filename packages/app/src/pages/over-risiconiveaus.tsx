@@ -3,8 +3,8 @@ import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import BarChart from '~/assets/bar-chart.svg';
-import Calender from '~/assets/calender.svg';
+import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
+import { ReactComponent as Calender } from '~/assets/calender.svg';
 import { Box } from '~/components/base';
 import { VrChoropleth } from '~/components/choropleth';
 import { VrEscalationTooltip } from '~/components/choropleth/tooltips';
@@ -44,8 +44,8 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   }),
-  createGetContent<OverRisiconiveausData>((_) => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE;
+  createGetContent<OverRisiconiveausData>((context) => {
+    const { locale = 'nl' } = context;
     return `*[_type == 'overRisicoNiveaus']{
       "title": title.${locale},
       "description": {
