@@ -8,7 +8,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
 import {
   BehaviorLineChartTile,
-  useBehaviorChartOptions,
+  getBehaviorChartOptions,
 } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
@@ -35,17 +35,33 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale = 'nl' } = context;
     return createPageArticlesQuery('behaviorPage', locale);
-  })
+  }),
+  (context) => {
+    const data = selectVrPageMetricData()(context);
+    const chartBehaviorOptions = getBehaviorChartOptions<NlBehaviorValue>(
+      data.selectedVrData.behavior.values[0]
+    );
+
+    return {
+      ...data,
+      chartBehaviorOptions,
+    };
+  }
 );
 
 export default function BehaviorPageVr(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { lastGenerated, content, selectedVrData: data, vrName } = props;
+  const {
+    lastGenerated,
+    content,
+    selectedVrData: data,
+    vrName,
+    chartBehaviorOptions,
+  } = props;
 
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -60,9 +76,6 @@ export default function BehaviorPageVr(
   const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const chartBehaviorOptions = useBehaviorChartOptions<NlBehaviorValue>(
-    data.behavior.values
-  );
   const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
     chartBehaviorOptions[0]
   );
