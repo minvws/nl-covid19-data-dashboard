@@ -52,7 +52,8 @@ html {
   overflow-anchor: none;
 }
 
-button {
+button,
+select {
   font-size: inherit;
   font-family: ${(x) => x.theme.fonts.body};
 }
