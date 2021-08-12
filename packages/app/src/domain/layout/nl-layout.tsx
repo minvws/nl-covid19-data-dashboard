@@ -2,6 +2,7 @@ import { Nl } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactComponent as Arts } from '~/assets/arts.svg';
+import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
 import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
 import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
@@ -12,7 +13,6 @@ import { ReactComponent as GetestIcon } from '~/assets/test.svg';
 import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
 import { ReactComponent as Varianten } from '~/assets/varianten.svg';
 import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
-import { ReactComponent as VirusIcon } from '~/assets/virus.svg';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { ReactComponent as Ziektegolf } from '~/assets/ziektegolf.svg';
 import {
@@ -30,7 +30,6 @@ import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { SituationIcon } from '../situations/components/situation-icon';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VariantsSidebarMetric } from '../variants/variants-sidebar-metric';
 
@@ -230,7 +229,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.sterfte()}
-                  icon={<VirusIcon />}
+                  icon={<CoronavirusIcon />}
                   title={siteText.sterfte.titel_sidebar}
                 >
                   <SidebarMetric
@@ -255,7 +254,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.brononderzoek()}
-                  icon={<SituationIcon id="gathering" />}
+                  icon={<Gedrag />}
                   title={siteText.brononderzoek.titel_sidebar}
                 >
                   <SituationsSidebarMetric

@@ -1,16 +1,25 @@
 import Projection from '@visx/geo/lib/projections/Projection';
+import { ProjectionPreset } from '@visx/geo/lib/types';
+import { GeoProjection } from 'd3-geo';
+import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { FocusEvent } from 'react';
+import { CodedGeoProperties, FitExtent } from '../logic';
 import { featureHasPath } from '../logic/utils';
-import { MercatorGroupProps } from './mercator-group';
 import { HoverPathLink } from './path';
 
 type MercatorHoverGroupProps = {
+  projection?: ProjectionPreset | (() => GeoProjection);
+  data: Feature<MultiPolygon | Polygon, CodedGeoProperties>[];
+  fitExtent: FitExtent;
+  fillMethod: (code: string, isActivated?: boolean) => string;
+  strokeMethod: (code: string, isActivated?: boolean) => string;
+  strokeWidthMethod: (code: string, isActivated?: boolean) => number;
   getHref?: (code: string) => string;
   getTitle: (code: string) => string;
   onFocus: (evt: FocusEvent<HTMLAnchorElement>) => void;
   onBlur: (evt: FocusEvent<HTMLAnchorElement>) => void;
   isTabInteractive: boolean;
-} & MercatorGroupProps;
+};
 
 export function MercatorHoverGroup(props: MercatorHoverGroupProps) {
   const {

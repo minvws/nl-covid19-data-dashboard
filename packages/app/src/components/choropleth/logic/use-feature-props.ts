@@ -4,7 +4,10 @@ import { DataConfig, DataOptions } from '..';
 import { ChoroplethDataItem } from './types';
 
 type GetFeatureProp<T = string> = (code: string) => T;
-type GetHoverFeatureProp<T = string> = (code: string, isHover?: boolean) => T;
+type GetHoverFeatureProp<T = string> = (
+  code: string,
+  isActivated?: boolean
+) => T;
 
 type FeatureProps = {
   /**
@@ -68,25 +71,25 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
             isHover ? dataConfig.hoverFill : 'none',
           stroke:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? (_code: string, isHover?: boolean) => {
-                  return isHover ? dataConfig.hoverStroke : 'none';
+              ? (_code: string, isActivated?: boolean) => {
+                  return isActivated ? dataConfig.hoverStroke : 'none';
                 }
-              : (code: string, isHover?: boolean) =>
+              : (code: string, isActivated?: boolean) =>
                   code === dataOptions.selectedCode
-                    ? isHover
+                    ? isActivated
                       ? dataConfig.hoverStroke
                       : dataConfig.highlightStroke
-                    : isHover
+                    : isActivated
                     ? dataConfig.hoverStroke
                     : 'none',
           strokeWidth:
             !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? (_code: string, isHover?: boolean) =>
-                  isHover ? dataConfig.hoverStrokeWidth : 0
-              : (code: string, isHover?: boolean) =>
+              ? (_code: string, isActivated?: boolean) =>
+                  isActivated ? dataConfig.hoverStrokeWidth : 0
+              : (code: string, isActivated?: boolean) =>
                   code === dataOptions.selectedCode
                     ? dataConfig.highlightStrokeWidth
-                    : isHover
+                    : isActivated
                     ? dataConfig.hoverStrokeWidth
                     : 0,
         },
@@ -108,10 +111,10 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
         },
         hover: {
           fill: () => 'none',
-          stroke: (_code: string, isHover?: boolean) =>
-            isHover ? dataConfig.hoverStroke : 'none',
-          strokeWidth: (_code: string, isHover?: boolean) =>
-            isHover ? dataConfig.hoverStrokeWidth : 0,
+          stroke: (_code: string, isActivated?: boolean) =>
+            isActivated ? dataConfig.hoverStroke : 'none',
+          strokeWidth: (_code: string, isActivated?: boolean) =>
+            isActivated ? dataConfig.hoverStrokeWidth : 0,
         },
         outline: {
           fill: () => 'none',
@@ -131,9 +134,10 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
         },
         hover: {
           fill: () => 'none',
-          stroke: (_code: string, isHover?: boolean) =>
-            isHover ? colors.body : 'none',
-          strokeWidth: (_code: string, isHover?: boolean) => (isHover ? 1 : 0),
+          stroke: (_code: string, isActivated?: boolean) =>
+            isActivated ? colors.body : 'none',
+          strokeWidth: (_code: string, isActivated?: boolean) =>
+            isActivated ? 1 : 0,
         },
         outline: {
           fill: () => 'none',

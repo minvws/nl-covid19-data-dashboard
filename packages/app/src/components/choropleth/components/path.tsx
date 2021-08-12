@@ -36,9 +36,9 @@ export function Path({
 
 export interface HoverPathLinkProps {
   pathData: string;
-  fill: (code: string) => string;
-  stroke: (code: string) => string;
-  strokeWidth: (code: string) => number;
+  fill: (code: string, isActivated?: boolean) => string;
+  stroke: (code: string, isActivated?: boolean) => string;
+  strokeWidth: (code: string, isActivated?: boolean) => number;
   title: string;
   isTabInteractive: boolean;
   onFocus: (evt: FocusEvent<HTMLAnchorElement>) => void;
@@ -132,9 +132,9 @@ const StyledPath = styled.path<{
 
 const StyledHoverPath = styled.path<{
   isClickable?: boolean;
-  fillMethod: (code: string, isHover?: boolean) => string;
-  strokeMethod: (code: string, isHover?: boolean) => string;
-  strokeWidthMethod: (code: string, isHover?: boolean) => number;
+  fillMethod: (code: string, isActivated?: boolean) => string;
+  strokeMethod: (code: string, isActivated?: boolean) => string;
+  strokeWidthMethod: (code: string, isActivated?: boolean) => number;
   code: string;
 }>((x) =>
   css({

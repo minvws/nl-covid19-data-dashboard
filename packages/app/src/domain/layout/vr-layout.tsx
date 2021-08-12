@@ -7,7 +7,7 @@ import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.
 import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { ReactComponent as GetestIcon } from '~/assets/test.svg';
 import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
-import { ReactComponent as VirusIcon } from '~/assets/virus.svg';
+import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
@@ -25,7 +25,6 @@ import { useIntl } from '~/intl';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/types';
-import { SituationIcon } from '../situations/components/situation-icon';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
 import { VrComboBox } from './components/vr-combo-box';
 
@@ -233,7 +232,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.sterfte(code)}
-                      icon={<VirusIcon />}
+                      icon={<CoronavirusIcon />}
                       title={siteText.veiligheidsregio_sterfte.titel_sidebar}
                     >
                       <SidebarMetric
@@ -248,7 +247,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.brononderzoek(code)}
-                      icon={<SituationIcon id="gathering" />}
+                      icon={<Gedrag />}
                       title={siteText.brononderzoek.titel_sidebar}
                     >
                       <SituationsSidebarMetric

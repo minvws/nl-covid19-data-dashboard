@@ -1,4 +1,6 @@
 import { NlVaccineAdministeredTotal } from '@corona-dashboard/common';
+import css from '@styled-system/css';
+import styled from 'styled-components';
 import { ReactComponent as Vaccinaties } from '~/assets/vaccinaties.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
@@ -25,11 +27,11 @@ export function TopicalVaccineTile({ data, areas }: TopicalVaccineProps) {
   return (
     <>
       <Box gridArea={areas?.header} position="relative" spacing={2} pb={3}>
-        <Box width="3.5rem" height="3.5rem" position="absolute" left={0}>
-          <Vaccinaties />
-        </Box>
         <Heading level={3} as="h2">
-          <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+          <Box as="span" fontWeight="bold" display="flex" alignItems="center">
+            <Icon>
+              <Vaccinaties />
+            </Icon>
             <HeadingLinkWithIcon
               href={reverseRouter.nl.vaccinaties()}
               icon={<ArrowIconRight />}
@@ -66,3 +68,12 @@ export function TopicalVaccineTile({ data, areas }: TopicalVaccineProps) {
     </>
   );
 }
+
+const Icon = styled.span(
+  css({
+    svg: {
+      height: '3rem',
+      mr: 3,
+    },
+  })
+);

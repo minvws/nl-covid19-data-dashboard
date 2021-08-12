@@ -375,9 +375,14 @@ function ListItem({
           alignItems="center"
           minWidth="26px"
           width={26}
-          height={18}
-          mt="2px"
+          height={26}
           mr={2}
+          mt="-0.2rem"
+          css={css({
+            svg: {
+              height: 26,
+            },
+          })}
         >
           {icon}
         </Box>
