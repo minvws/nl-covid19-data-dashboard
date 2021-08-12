@@ -1,8 +1,7 @@
-import css from '@styled-system/css';
-import styled from 'styled-components';
-import { TimestampedValue } from '@corona-dashboard/common';
 import { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
