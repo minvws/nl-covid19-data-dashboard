@@ -39,7 +39,9 @@ export function useDynamicSize(
         return true;
       });
 
-    //This assert cannot ever trigger, since the Tuple will always return the last item, but the compiler doesn't understand this...
+    /**
+     * This assert cannot ever trigger, since the Tuple will always return the last item, but the compiler doesn't understand this...
+     */
     assert(isDefined(result), 'Cannot find valid size');
 
     return isDynamicConfiguration(result)
