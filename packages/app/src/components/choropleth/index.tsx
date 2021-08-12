@@ -68,18 +68,26 @@ export type OptionalBoundingBoxPadding = {
 };
 
 export type DynamicSizeConfiguration = {
+  /**
+   * If the container width is equal or larger than this value, use
+   * the associated height and padding.
+   */
   containerWidth: number;
-  sizes: DynamicSizes;
+  heightAndPadding: HeightAndPadding;
 };
 
-export type DynamicSizes = {
+export type HeightAndPadding = {
   mapHeight: number;
   padding: OptionalBoundingBoxPadding;
 };
 
+/**
+ * An arbitrary number of dynamic size configs, the last item is used as the default.
+ * (So for the smallest container size)
+ */
 export type DynamicSizeConfigurations = [
   ...DynamicSizeConfiguration[],
-  DynamicSizes
+  HeightAndPadding
 ];
 
 export type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
@@ -97,7 +105,7 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
   minHeight?: number;
   /**
    * A default set of paddings to be used on the bounding box, if
-   * more control is needed for different screensizes, use the
+   * more control is needed for different screen sizes, use the
    * dynamicSizeConfiguration instead.
    */
   boundingBoxPadding?: OptionalBoundingBoxPadding;
@@ -108,6 +116,21 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
   dynamicSizeConfiguration?: DynamicSizeConfigurations;
 };
 
+/**
+ * This is a (semi) generic choropleth component that supports a dutch map of municipalities or safetyregions
+ * and a european map.
+ * 
+ * The type of map that will be rendered can be set using the `map` property, setting this prop will automatically
+ * narrow the allowed types for the data prop to just those that are applicable to the specified map type.
+ * 
+ * Using the `dataConfig` prop the metric that is shown can be specified, along with optional settings for the
+ * stroke, fills and strokeWidths of the rendered features.
+ * 
+ * The `dataOptions` prop allows for some extra functional tweaks.
+ * 
+ * Most of the choropleths will work using the generic tooltip, but if something custom is required the `formatTooltip`
+ * prop is there to help out.
+ */
 export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
   formatTooltip,
   tooltipPlacement,

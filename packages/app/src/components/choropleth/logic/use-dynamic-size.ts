@@ -5,7 +5,7 @@ import {
   BoundingBoxPadding,
   DynamicSizeConfiguration,
   DynamicSizeConfigurations,
-  DynamicSizes,
+  HeightAndPadding,
   OptionalBoundingBoxPadding,
 } from '~/components/choropleth';
 
@@ -23,22 +23,33 @@ export function useDynamicSize(
       ] as const;
     }
 
-    const result = dynamicSizeConfiguration.find((item) => {
-      if (isDynamicConfiguration(item)) {
-        return isDefined(containerWidth)
-          ? containerWidth >= item.containerWidth
-          : true;
-      }
-      return true;
-    });
+    console.dir(dynamicSizeConfiguration);
+    const result = dynamicSizeConfiguration
+      .sort((a, b) => {
+        if (isDynamicConfiguration(a) && isDynamicConfiguration(b)) {
+          return b.containerWidth - a.containerWidth;
+        } else if (isDynamicConfiguration(a) && !isDynamicConfiguration(b)) {
+          return -1;
+        }
+        return 1;
+      })
+      .find((item) => {
+        if (isDynamicConfiguration(item)) {
+          return isDefined(containerWidth)
+            ? containerWidth >= item.containerWidth
+            : true;
+        }
+        return true;
+      });
+    console.dir(dynamicSizeConfiguration);
 
     //This assert cannot ever trigger, since the Tuple will always return the last item, but the compiler doesn't understand this...
     assert(isDefined(result), 'Cannot find valid size');
 
     return isDynamicConfiguration(result)
       ? ([
-          result.sizes.mapHeight,
-          addDefaultPaddingValues(result.sizes.padding),
+          result.heightAndPadding.mapHeight,
+          addDefaultPaddingValues(result.heightAndPadding.padding),
         ] as const)
       : ([result.mapHeight, addDefaultPaddingValues(result.padding)] as const);
   }, [
@@ -50,7 +61,7 @@ export function useDynamicSize(
 }
 
 function isDynamicConfiguration(
-  value: DynamicSizeConfiguration | DynamicSizes
+  value: DynamicSizeConfiguration | HeightAndPadding
 ): value is DynamicSizeConfiguration {
   return 'containerWidth' in value;
 }
