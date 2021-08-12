@@ -4,6 +4,7 @@ import { DataConfig, DataOptions } from '..';
 import { ChoroplethDataItem } from './types';
 
 type GetFeatureProp<T = string> = (code: string) => T;
+type GetHoverFeatureProp<T = string> = (code: string, isHover?: boolean) => T;
 
 type FeatureProps = {
   /**
@@ -14,7 +15,11 @@ type FeatureProps = {
   /***
    * Feature props for the features that are shown when hovering over the map
    */
-  hover: FeaturePropFunctions;
+  hover: {
+    fill: GetHoverFeatureProp;
+    stroke: GetHoverFeatureProp;
+    strokeWidth: GetHoverFeatureProp<number>;
+  };
   /**
    * Feature props for the features that represent the outlines of the map
    */
@@ -55,27 +60,35 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
           fill: (code: string) => {
             return getFillColor(code);
           },
-          stroke:
-            !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? () => {
-                  return dataConfig.areaStroke;
-                }
-              : (code: string) =>
-                  code === dataOptions.selectedCode
-                    ? dataConfig.highlightStroke
-                    : colors.choroplethFeatureStroke,
-          strokeWidth:
-            !dataOptions.highlightSelection || !dataOptions.selectedCode
-              ? () => dataConfig.areaStrokeWidth
-              : (code: string) =>
-                  code === dataOptions.selectedCode
-                    ? dataConfig.highlightStrokeWidth
-                    : dataConfig.areaStrokeWidth,
+          stroke: () => dataConfig.areaStroke,
+          strokeWidth: () => dataConfig.areaStrokeWidth,
         },
         hover: {
-          fill: () => dataConfig.hoverFill,
-          stroke: () => dataConfig.hoverStroke,
-          strokeWidth: () => dataConfig.hoverStrokeWidth,
+          fill: (_code: string, isHover?: boolean) =>
+            isHover ? dataConfig.hoverFill : 'none',
+          stroke:
+            !dataOptions.highlightSelection || !dataOptions.selectedCode
+              ? (_code: string, isHover?: boolean) => {
+                  return isHover ? dataConfig.hoverStroke : 'none';
+                }
+              : (code: string, isHover?: boolean) =>
+                  code === dataOptions.selectedCode
+                    ? isHover
+                      ? dataConfig.hoverStroke
+                      : dataConfig.highlightStroke
+                    : isHover
+                    ? dataConfig.hoverStroke
+                    : 'none',
+          strokeWidth:
+            !dataOptions.highlightSelection || !dataOptions.selectedCode
+              ? (_code: string, isHover?: boolean) =>
+                  isHover ? dataConfig.hoverStrokeWidth : 0
+              : (code: string, isHover?: boolean) =>
+                  code === dataOptions.selectedCode
+                    ? dataConfig.highlightStrokeWidth
+                    : isHover
+                    ? dataConfig.hoverStrokeWidth
+                    : 0,
         },
         outline: {
           fill: () => 'none',
@@ -95,8 +108,10 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
         },
         hover: {
           fill: () => 'none',
-          stroke: () => dataConfig.hoverStroke,
-          strokeWidth: () => dataConfig.hoverStrokeWidth,
+          stroke: (_code: string, isHover?: boolean) =>
+            isHover ? dataConfig.hoverStroke : 'none',
+          strokeWidth: (_code: string, isHover?: boolean) =>
+            isHover ? dataConfig.hoverStrokeWidth : 0,
         },
         outline: {
           fill: () => 'none',
@@ -116,8 +131,9 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
         },
         hover: {
           fill: () => 'none',
-          stroke: () => colors.body,
-          strokeWidth: () => 1,
+          stroke: (_code: string, isHover?: boolean) =>
+            isHover ? colors.body : 'none',
+          strokeWidth: (_code: string, isHover?: boolean) => (isHover ? 1 : 0),
         },
         outline: {
           fill: () => 'none',

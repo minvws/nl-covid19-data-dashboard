@@ -35,7 +35,7 @@ import { useFeatureName } from './logic/use-feature-name';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
 
-const DEFAULT_HOVER_STROKE_WIDTH = 3;
+export const DEFAULT_HOVER_STROKE_WIDTH = 3;
 
 export type DataOptions = {
   isPercentage?: boolean;

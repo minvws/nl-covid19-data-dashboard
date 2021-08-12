@@ -47,9 +47,9 @@ export function MercatorHoverGroup(props: MercatorHoverGroupProps) {
                   id={code}
                   key={`${code}_${index}`}
                   pathData={path}
-                  fill={fillMethod(code)}
-                  stroke={strokeMethod(code)}
-                  strokeWidth={strokeWidthMethod(code)}
+                  fill={fillMethod}
+                  stroke={strokeMethod}
+                  strokeWidth={strokeWidthMethod}
                   isTabInteractive={isTabInteractive}
                   onFocus={onFocus}
                   onBlur={onBlur}
