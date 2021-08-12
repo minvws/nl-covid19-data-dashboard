@@ -1,8 +1,8 @@
+import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
-import { SituationIcon } from '~/domain/situations/components/situation-icon';
 import { SituationsDataCoverageChoroplethTile } from '~/domain/situations/situations-data-coverage-choropleth-tile';
 import { SituationsOverviewChoroplethTile } from '~/domain/situations/situations-overview-choropleth-tile';
 import { useIntl } from '~/intl';
@@ -65,7 +65,7 @@ export default function BrononderzoekPage(
               intl.siteText.positief_geteste_personen.titel_sidebar
             }
             title={text.titel}
-            icon={<SituationIcon id="gathering" />}
+            icon={<Gedrag />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

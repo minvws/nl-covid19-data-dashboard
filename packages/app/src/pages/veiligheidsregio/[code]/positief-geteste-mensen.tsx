@@ -2,7 +2,7 @@ import {
   GmCollectionTestedOverall,
   GmGeoProperties,
 } from '@corona-dashboard/common';
-import { ReactComponent as Afname } from '~/assets/afname.svg';
+import { ReactComponent as Experimenteel } from '~/assets/experimenteel.svg';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -284,7 +284,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(ggdText.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Afname />}
+            icon={<Experimenteel />}
             description={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,
