@@ -23,7 +23,6 @@ export function useDynamicSize(
       ] as const;
     }
 
-    console.dir(dynamicSizeConfiguration);
     const result = dynamicSizeConfiguration
       .sort((a, b) => {
         if (isDynamicConfiguration(a) && isDynamicConfiguration(b)) {
@@ -39,7 +38,6 @@ export function useDynamicSize(
         }
         return true;
       });
-    console.dir(dynamicSizeConfiguration);
 
     //This assert cannot ever trigger, since the Tuple will always return the last item, but the compiler doesn't understand this...
     assert(isDefined(result), 'Cannot find valid size');
