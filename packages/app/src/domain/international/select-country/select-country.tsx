@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { floorModulo } from '~/utils/modulo';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { SelectCountryInput } from './select-country-input';
@@ -179,7 +178,8 @@ const OrderedList = styled.ol<{ isOpen: boolean }>((x) =>
 
     width: '100%',
 
-    border: `1px solid silver`,
+    border: `1px solid`,
+    borderColor: 'silver',
     borderTopColor: 'transparent',
     borderBottomLeftRadius: 1,
     borderBottomRightRadius: 1,
@@ -200,7 +200,7 @@ const ListItem = styled.li<{ hasFocus?: boolean }>((x) =>
     display: 'flex',
     alignItems: 'center',
     textDecoration: 'none',
-    color: 'black',
+    color: 'body',
     width: '100%',
     bg: x.hasFocus ? 'contextualContent' : 'white',
     transitionProperty: 'background',

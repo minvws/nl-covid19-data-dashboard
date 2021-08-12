@@ -132,7 +132,6 @@ const IconContainer = styled.span<{ align: 'left' | 'right' }>((x) =>
     color: x.align === 'left' ? 'labelGray' : 'icon',
 
     cursor: x.align === 'right' ? 'pointer' : undefined,
-    zIndex: 9,
   })
 );
 
@@ -143,7 +142,7 @@ const Input = styled.input(
     width: '100%',
     border: `1px solid silver`,
     py: 2,
-    pl: '36px',
+    pl: '2.25rem',
     m: 0,
 
     fontFamily: 'body',
@@ -160,7 +159,7 @@ const Input = styled.input(
     '&:focus': {
       borderColor: 'lightGray',
       outline: '2px dotted',
-      outlineColor: 'blue',
+      outlineColor: 'body',
     },
   })
 );

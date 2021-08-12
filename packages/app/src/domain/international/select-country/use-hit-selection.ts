@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import { useHotkey } from '~/utils/hotkey/use-hotkey';
-import { modulo } from '~/utils/modulo';
+import { positiveModulo } from '~/utils/positive-modulo';
 /**
  * This hook controls the currently selected search result index.
  * It allows the index to be controlled by the keyboard using arrow-navigation.
@@ -28,7 +28,7 @@ export function useHitSelection({
     'up',
     () => {
       const nextIndex = focusIndex - 1;
-      setFocusIndex(modulo(nextIndex, maxPossibleItems));
+      setFocusIndex(positiveModulo(nextIndex, maxPossibleItems));
       maybeScrollIntoView(focusRef.current);
     },
     {
@@ -41,7 +41,7 @@ export function useHitSelection({
     'down',
     () => {
       const nextIndex = focusIndex + 1;
-      setFocusIndex(modulo(nextIndex, maxPossibleItems));
+      setFocusIndex(positiveModulo(nextIndex, maxPossibleItems));
       maybeScrollIntoView(focusRef.current);
     },
     {
