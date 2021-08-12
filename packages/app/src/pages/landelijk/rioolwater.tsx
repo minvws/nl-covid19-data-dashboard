@@ -5,8 +5,8 @@ import {
   VrSewerValue,
 } from '@corona-dashboard/common';
 import { useState } from 'react';
-import ExperimenteelIcon from '~/assets/experimenteel.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
+import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';

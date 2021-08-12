@@ -1,6 +1,6 @@
 import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
-import ChevronIcon from '~/assets/chevron.svg';
+import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { Anchor, InlineText, Text } from '~/components/typography';

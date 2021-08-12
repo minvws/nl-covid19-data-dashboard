@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
 import styled from 'styled-components';
-import ChevronIcon from '~/assets/chevron.svg';
+import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';

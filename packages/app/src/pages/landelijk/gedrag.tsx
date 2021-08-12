@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import Gedrag from '~/assets/gedrag.svg';
+import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';

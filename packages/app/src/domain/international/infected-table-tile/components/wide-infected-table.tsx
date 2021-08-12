@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { inThresholds } from '~/components/choropleth/logic';
 import { InlineText } from '~/components/typography';
+import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -14,7 +15,6 @@ import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decima
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
 import { BarWithNumber } from './bar-with-number';
-
 interface WideInfectedTableProps {
   data: InCollectionTestedOverall[];
   isExpanded: boolean;
@@ -142,16 +142,9 @@ function TableRow({
             alignItems: 'center',
           })}
         >
-          <img
-            aria-hidden
-            src={`/icons/flags/${item.country_code.toLowerCase()}.svg`}
-            width="17"
-            height="13"
-            alt=""
-            css={css({
-              mr: 2,
-            })}
-          />
+          <Box mr={2}>
+            <Flag countryCode={item.country_code} />
+          </Box>
           {countryNames[item.country_code.toLocaleLowerCase()]}
         </InlineText>
       </Cell>
