@@ -34,10 +34,8 @@ export function useDynamicSize(
         return 1;
       })
       .find((item) => {
-        if (isDynamicConfiguration(item)) {
-          return isDefined(containerWidth)
-            ? containerWidth >= item.containerWidth
-            : true;
+        if (isDynamicConfiguration(item) && isDefined(containerWidth)) {
+          containerWidth >= item.containerWidth;
         }
         return true;
       });
