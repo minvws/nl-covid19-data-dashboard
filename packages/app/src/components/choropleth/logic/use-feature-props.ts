@@ -6,8 +6,17 @@ import { ChoroplethDataItem } from './types';
 type GetFeatureProp<T = string> = (code: string) => T;
 
 type FeatureProps = {
+  /**
+   * Feature props for the features of the map that are colored in based on the given data.
+   */
   area: FeaturePropFunctions;
+  /***
+   * Feature props for the features that are shown when hovering over the map
+   */
   hover: FeaturePropFunctions;
+  /**
+   * Feature props for the features that represent the outlines of the map
+   */
   outline: FeaturePropFunctions;
 };
 
@@ -19,6 +28,10 @@ type FeaturePropFunctions = {
 
 export const DEFAULT_STROKE_WIDTH = 0.5;
 
+/**
+ * This hook returns the visual props for the map features based on the specified map type.
+ *
+ */
 export function useFeatureProps<T extends ChoroplethDataItem>(
   map: MapType,
   getFillColor: (code: string) => string,

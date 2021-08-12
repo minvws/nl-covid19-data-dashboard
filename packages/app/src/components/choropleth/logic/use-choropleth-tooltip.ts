@@ -13,6 +13,11 @@ import { ChoroplethDataItem, mapToCodeType, MapType } from './types';
 import { useFeatureName } from './use-feature-name';
 import { isCodedValueType } from './utils';
 
+/**
+ * Offset the tooltip slightly to prevent it from ending up underneath the mouse pointer
+ */
+const DEFAULT_TOOLTIP_OFFSET = 5;
+
 export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   map: MapType,
   data: T[],
@@ -77,7 +82,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
         const dataItem = getItemByCode(code);
 
         setTooltip({
-          left: left + bboxLink.width + 5,
+          left: left + bboxLink.width + DEFAULT_TOOLTIP_OFFSET,
           top,
           data: {
             code,
@@ -167,8 +172,8 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
 
       if (isPresent(coords)) {
         setTooltip({
-          left: coords.x + 5,
-          top: coords.y + 5,
+          left: coords.x + DEFAULT_TOOLTIP_OFFSET,
+          top: coords.y + DEFAULT_TOOLTIP_OFFSET,
           data: {
             code,
             dataItem: getItemByCode(code),
