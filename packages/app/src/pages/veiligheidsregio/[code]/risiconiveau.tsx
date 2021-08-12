@@ -377,6 +377,7 @@ function ListItem({
           width={26}
           height={26}
           mr={2}
+          mt="-0.2rem"
           css={css({
             svg: {
               height: 26,

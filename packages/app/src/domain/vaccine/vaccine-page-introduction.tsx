@@ -48,6 +48,7 @@ export function VaccinePageIntroduction({
               justifyContent="center"
               padding={0}
               margin={0}
+              mt="-0.6rem"
               css={css({
                 svg: {
                   height: '3.5rem',

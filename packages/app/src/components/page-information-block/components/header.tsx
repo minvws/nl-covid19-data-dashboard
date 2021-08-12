@@ -64,7 +64,7 @@ const GridLayout = styled(Box)`
 
 const Icon = styled.span<{ gridArea: 'topIcon' | 'sideIcon' }>((x) =>
   css({
-    mt: '-5px',
+    mt: '-0.6rem',
     mr: 3,
     gridArea: x.gridArea,
     height: '3.5rem',
