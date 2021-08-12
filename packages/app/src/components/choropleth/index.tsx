@@ -118,7 +118,7 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
 
 /**
  * This is a (semi) generic choropleth component that supports a Dutch map of municipalities or safetyregions
- * and a european map.
+ * and a European map.
  *
  * The type of map that will be rendered can be set using the `map` property, setting this prop will automatically
  * narrow the allowed types for the data prop to just those that are applicable to the specified map type.
