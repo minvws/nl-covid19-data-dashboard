@@ -1,11 +1,8 @@
 import css from '@styled-system/css';
-import styled from 'styled-components';
-import { Text } from '../typography';
+import { styledTextVariant } from '../typography';
 
-export const Category = styled(Text)(
+export const Category = styledTextVariant('body1')(
   css({
-    fontSize: 3,
-    lineHeight: 1,
     px: 3,
     mb: 3,
     fontWeight: 'bold',

@@ -69,3 +69,10 @@ export const Heading = styled.h1.attrs((x: HeadingProps & { as?: string }) => ({
   as: x.as ?? (`h${x.level}` as const),
   variant: x.variant ?? (`h${x.level}` as const),
 }))<HeadingProps>(textStyle);
+
+export function styledTextVariant(variant: string, as?: string) {
+  return styled.p.attrs(() => ({
+    as: as ?? 'p',
+    variant,
+  }));
+}

@@ -72,7 +72,6 @@ const StyledAnchor = styled(Anchor)(
     color: 'lightGray',
     px: 3,
     py: 1,
-    fontSize: 2,
     textDecoration: 'none',
     position: 'absolute',
     right: '100%',
