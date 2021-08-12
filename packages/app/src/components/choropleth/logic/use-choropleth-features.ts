@@ -9,7 +9,12 @@ import { ChoroplethDataItem } from './types';
 
 export type FeatureType = keyof ChoroplethFeatures;
 
-const boundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
+/**
+ * These country codes represent the outer most features of the international
+ * map that need to be centered in on. So, roughly the top left, top right
+ * bottom left and bottom right features.
+ */
+const internationalBoundingBoxCodes = ['ISL', 'NOR', 'ESP', 'GRC', 'CYP'];
 
 export type ChoroplethFeatures = {
   outline?: CodedGeoJSON;
@@ -69,7 +74,7 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
           boundingBox: {
             ...inGeo,
             features: inGeo.features.filter((x) =>
-              boundingBoxCodes.includes(x.properties.code)
+              internationalBoundingBoxCodes.includes(x.properties.code)
             ),
           },
         };
