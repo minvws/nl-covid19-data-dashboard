@@ -1,3 +1,4 @@
+import { NlBehaviorValue } from '@corona-dashboard/common';
 import { useRef, useState } from 'react';
 import Gedrag from '~/assets/gedrag.svg';
 import { ArticleSummary } from '~/components/article-teaser';
@@ -6,7 +7,10 @@ import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
-import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
+import {
+  BehaviorLineChartTile,
+  getBehaviorChartOptions,
+} from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorTableTile } from '~/domain/behavior/behavior-table-tile';
 import { MoreInformation } from '~/domain/behavior/components/more-information';
 import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
@@ -29,19 +33,35 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData(),
   createGetContent<{
     articles?: ArticleSummary[];
   }>((context) => {
     const { locale = 'nl' } = context;
     return createPageArticlesQuery('behaviorPage', locale);
-  })
+  }),
+  (context) => {
+    const data = selectVrPageMetricData()(context);
+    const chartBehaviorOptions = getBehaviorChartOptions<NlBehaviorValue>(
+      data.selectedVrData.behavior.values[0]
+    );
+
+    return {
+      ...data,
+      chartBehaviorOptions,
+    };
+  }
 );
 
 export default function BehaviorPageVr(
   props: StaticProps<typeof getStaticProps>
 ) {
-  const { lastGenerated, content, selectedVrData: data, vrName } = props;
+  const {
+    lastGenerated,
+    content,
+    selectedVrData: data,
+    vrName,
+    chartBehaviorOptions,
+  } = props;
 
   const { siteText, formatDateFromSeconds, formatNumber } = useIntl();
 
@@ -56,7 +76,9 @@ export default function BehaviorPageVr(
   const { regionaal_gedrag } = siteText;
   const behaviorLastValue = data.behavior.last_value;
 
-  const [currentId, setCurrentId] = useState<BehaviorIdentifier>('wash_hands');
+  const [currentId, setCurrentId] = useState<BehaviorIdentifier>(
+    chartBehaviorOptions[0]
+  );
   const scrollToRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -144,6 +166,7 @@ export default function BehaviorPageVr(
             }}
             currentId={currentId}
             setCurrentId={setCurrentId}
+            behaviorOptions={chartBehaviorOptions}
           />
 
           <MoreInformation />

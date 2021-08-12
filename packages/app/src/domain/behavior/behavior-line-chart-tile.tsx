@@ -1,5 +1,6 @@
 import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
@@ -8,13 +9,17 @@ import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { SelectBehavior } from './components/select-behavior';
-import { BehaviorIdentifier } from './logic/behavior-types';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from './logic/behavior-types';
 
 interface BehaviorLineChartTileProps {
   values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  behaviorOptions?: BehaviorIdentifier[];
 }
 
 export function BehaviorLineChartTile({
@@ -22,6 +27,7 @@ export function BehaviorLineChartTile({
   metadata,
   currentId,
   setCurrentId,
+  behaviorOptions,
 }: BehaviorLineChartTileProps) {
   const { siteText } = useIntl();
   const chartText = siteText.gedrag_common.line_chart;
@@ -35,7 +41,11 @@ export function BehaviorLineChartTile({
     <ChartTile title={chartText.title} metadata={metadata}>
       <Text css={css({ maxWidth: '30em' })}>{chartText.description}</Text>
       <Box>
-        <SelectBehavior value={currentId} onChange={setCurrentId} />
+        <SelectBehavior
+          value={currentId}
+          onChange={setCurrentId}
+          options={behaviorOptions}
+        />
       </Box>
 
       <Spacer mb={4} />
@@ -71,4 +81,14 @@ export function BehaviorLineChartTile({
       />
     </ChartTile>
   );
+}
+
+export function getBehaviorChartOptions<T>(value: T) {
+  return behaviorIdentifiers
+    .map((key) => {
+      if (`${key}_compliance` in value || `${key}_support` in value) {
+        return key;
+      }
+    })
+    .filter(isDefined);
 }
