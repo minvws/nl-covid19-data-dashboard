@@ -140,7 +140,7 @@ const StyledHoverPath = styled.path<{
     '&:hover, a:focus &': {
       transitionDuration: '0ms',
       fill: x.fill ?? 'none',
-      stroke: x.stroke ?? '#ff0000',
+      stroke: x.stroke ?? '#fff',
       strokeWidth: x.strokeWidth ?? 30,
     },
   })
