@@ -62,7 +62,7 @@ export type GmDataItem = GmCollection[KeysOfType<
 >][number];
 
 /**
- * Here we map a MapType to a corresponding dataitem type
+ * Here we map a MapType to a corresponding DataItem type
  */
 export type MappedDataItem<T extends MapType> = T extends 'gm'
   ? GmDataItem
