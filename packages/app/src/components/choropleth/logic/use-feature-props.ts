@@ -8,6 +8,7 @@ type GetFeatureProp<T = string> = (code: string) => T;
 type FeatureProps = {
   /**
    * Feature props for the features of the map that are colored in based on the given data.
+   * (So the basic functionality of a choropleth)
    */
   area: FeaturePropFunctions;
   /***
@@ -30,6 +31,15 @@ export const DEFAULT_STROKE_WIDTH = 0.5;
 
 /**
  * This hook returns the visual props for the map features based on the specified map type.
+ * Each map type has three 'layers', the area, hover and outline features.
+ *
+ * The area features represent the main choropleth functionality, these features are colored
+ * in based on the given data item and associated threshold.
+ *
+ * The hover features are shown when the mouse pointer is over them (or a touch event triggers).
+ *
+ * The outline is an optional set of features that represent features that just add more visual
+ * detail.
  *
  */
 export function useFeatureProps<T extends ChoroplethDataItem>(
