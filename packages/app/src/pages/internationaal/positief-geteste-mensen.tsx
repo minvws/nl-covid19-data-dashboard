@@ -108,7 +108,7 @@ export default function PositiefGetesteMensenPage(
 
   const comparedCode = 'nld';
   const comparedName = countryNames[comparedCode];
-  const comparedValue = choropleth.in.find(
+  const comparedValue = choroplethData.find(
     (x) => x.country_code.toLocaleLowerCase() === comparedCode
   )?.infected_per_100k_average;
 
