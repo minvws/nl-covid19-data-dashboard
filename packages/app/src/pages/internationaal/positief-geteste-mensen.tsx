@@ -176,7 +176,8 @@ export default function PositiefGetesteMensenPage(
                 metricProperty: 'infected_per_100k_average',
               }}
               dataOptions={{
-                getFeatureName: (code) => countryNames[code],
+                getFeatureName: (code) =>
+                  countryNames[code.toLocaleLowerCase()],
               }}
               formatTooltip={(context) => (
                 <InPositiveTestedPeopleTooltip
