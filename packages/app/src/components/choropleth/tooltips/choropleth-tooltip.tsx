@@ -20,9 +20,6 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
 
   const text = siteText.choropleth_tooltip;
 
-  type Text = typeof text;
-  type Map = Text[keyof Text];
-
   const subject = (
     text as unknown as Record<string, Record<string, Record<string, string>>>
   )[data.map]?.[data.dataConfig.metricProperty as string]?.subject;

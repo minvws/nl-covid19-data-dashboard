@@ -1,13 +1,6 @@
 import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
-import {
-  MutableRefObject,
-  RefObject,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { MutableRefObject, RefObject, useEffect, useMemo, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { IntlContextProps } from '~/intl/hooks/use-intl';
@@ -125,38 +118,23 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
     getItemByCode,
     threshold,
     map,
+    metricPropertyFormatter,
   ]);
 
   return [
-    useCallback(
-      createSvgMouseOverHandler(
-        timeout,
-        setTooltip,
-        containerRef,
-        getItemByCode,
-        dataConfig,
-        dataOptions,
-        threshold,
-        getFeatureName,
-        map,
-        metricPropertyFormatter
-      ),
-      [
-        timeout,
-        setTooltip,
-        containerRef,
-        getItemByCode,
-        dataConfig,
-        dataOptions,
-        threshold,
-        getFeatureName,
-      ]
-    ),
-    useCallback(createSvgMouseOutHandler(timeout, setTooltip, isTouch), [
+    createSvgMouseOverHandler(
       timeout,
       setTooltip,
-      isTouch,
-    ]),
+      containerRef,
+      getItemByCode,
+      dataConfig,
+      dataOptions,
+      threshold,
+      getFeatureName,
+      map,
+      metricPropertyFormatter
+    ),
+    createSvgMouseOutHandler(timeout, setTooltip, isTouch),
   ] as const;
 }
 
@@ -213,7 +191,7 @@ const createSvgMouseOutHandler = <T extends ChoroplethDataItem>(
   isTouch: boolean
 ) => {
   return isTouch
-    ? () => {}
+    ? undefined
     : () => {
         if (timeout.current < 0) {
           timeout.current = window.setTimeout(() => setTooltip(undefined), 10);

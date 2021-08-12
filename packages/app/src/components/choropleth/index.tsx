@@ -7,7 +7,7 @@ import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import {
   AccessibilityDefinition,
-  useAccessibilityAnnotations
+  useAccessibilityAnnotations,
 } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
@@ -27,7 +27,7 @@ import {
   useChoroplethFeatures,
   useFeatureProps,
   useFillColor,
-  useTabInteractiveButton
+  useTabInteractiveButton,
 } from './logic';
 import { useChoroplethTooltip } from './logic/use-choropleth-tooltip';
 import { useDynamicSize } from './logic/use-dynamic-size';
@@ -119,15 +119,15 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
 /**
  * This is a (semi) generic choropleth component that supports a dutch map of municipalities or safetyregions
  * and a european map.
- * 
+ *
  * The type of map that will be rendered can be set using the `map` property, setting this prop will automatically
  * narrow the allowed types for the data prop to just those that are applicable to the specified map type.
- * 
+ *
  * Using the `dataConfig` prop the metric that is shown can be specified, along with optional settings for the
  * stroke, fills and strokeWidths of the rendered features.
- * 
+ *
  * The `dataOptions` prop allows for some extra functional tweaks.
- * 
+ *
  * Most of the choropleths will work using the generic tooltip, but if something custom is required the `formatTooltip`
  * prop is there to help out.
  */
@@ -147,7 +147,7 @@ export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
   const { isTabInteractive, tabInteractiveButton, anchorEventHandlers } =
     useTabInteractiveButton(
       replaceVariablesInText(siteText.choropleth.a11y.tab_navigatie_button, {
-        subject: siteText.choropleth.[props.map].plural,
+        subject: siteText.choropleth[props.map].plural,
       })
     );
 
@@ -284,7 +284,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     () => [
       [
         [padding.left, padding.top],
-        [width - padding.right, height - padding.bottom],
+        [width - padding.right, mapHeight - padding.bottom],
       ],
       choroplethFeatures.boundingBox,
     ],

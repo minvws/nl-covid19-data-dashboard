@@ -75,7 +75,7 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
         };
       }
     }
-  }, [map, selectedCode]);
+  }, [map, selectedCode, data]);
 }
 
 function filterBoundingBoxBySelectedGmCode(
