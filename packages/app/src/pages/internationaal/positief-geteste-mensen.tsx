@@ -5,9 +5,8 @@ import { isDefined } from 'ts-is-present';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { InChoropleth } from '~/components/choropleth';
-import { inThresholds } from '~/components/choropleth/logic';
-import { InPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -21,6 +20,7 @@ import {
   CountryOption,
   SelectCountries,
 } from '~/domain/international/select-countries';
+import { InPositiveTestedPeopleTooltip } from '~/domain/international/tooltip';
 import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
@@ -108,7 +108,7 @@ export default function PositiefGetesteMensenPage(
 
   const comparedCode = 'nld';
   const comparedName = countryNames[comparedCode];
-  const comparedValue = choropleth.in.find(
+  const comparedValue = choroplethData.find(
     (x) => x.country_code.toLocaleLowerCase() === comparedCode
   )?.infected_per_100k_average;
 
@@ -155,7 +155,7 @@ export default function PositiefGetesteMensenPage(
             title={text.choropleth.titel}
             description={text.choropleth.toelichting}
             legend={{
-              thresholds: inThresholds.infected_per_100k_average,
+              thresholds: thresholds.in.infected_per_100k_average,
               title: text.choropleth.legenda_titel,
             }}
             metadata={{
@@ -166,26 +166,54 @@ export default function PositiefGetesteMensenPage(
               ],
             }}
           >
-            <InChoropleth
+            <Choropleth
+              map="in"
               accessibility={{
                 key: 'international_tested_overall_choropleth',
               }}
               data={choroplethData}
-              metricProperty="infected_per_100k_average"
-              tooltipContent={(context) => (
+              dataConfig={{
+                metricProperty: 'infected_per_100k_average',
+              }}
+              dataOptions={{
+                getFeatureName: (code) =>
+                  countryNames[code.toLocaleLowerCase()],
+              }}
+              formatTooltip={(context) => (
                 <InPositiveTestedPeopleTooltip
                   title={text.choropleth.tooltip_titel}
-                  countryName={
-                    countryNames[context.country_code.toLowerCase()] ||
-                    context.country_code
-                  }
-                  countryCode={context.country_code}
-                  value={context.infected_per_100k_average}
+                  countryName={context.featureName}
+                  countryCode={context.dataItem.country_code}
+                  value={context.dataItem.infected_per_100k_average}
                   comparedName={comparedName}
                   comparedCode={comparedCode}
                   comparedValue={comparedValue}
                 />
               )}
+              dynamicSizeConfiguration={[
+                {
+                  containerWidth: 600,
+                  heightAndPadding: {
+                    mapHeight: 650,
+                    padding: { top: 5, bottom: 20 },
+                  },
+                },
+                {
+                  containerWidth: 400,
+                  heightAndPadding: {
+                    mapHeight: 400,
+                    padding: { top: 15, bottom: 15 },
+                  },
+                },
+                {
+                  containerWidth: 300,
+                  heightAndPadding: {
+                    mapHeight: 300,
+                    padding: { top: 5, bottom: 5 },
+                  },
+                },
+                { mapHeight: 250, padding: { left: 20, top: 0, bottom: 0 } },
+              ]}
             />
           </EuropeChoroplethTile>
 

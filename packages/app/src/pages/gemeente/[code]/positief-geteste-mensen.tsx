@@ -1,13 +1,8 @@
-import {
-  GmCollectionTestedOverall,
-  GmGeoProperties,
-} from '@corona-dashboard/common';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
-import { GmChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { gmThresholds } from '~/components/choropleth/logic';
-import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -249,7 +244,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds: gmThresholds.tested_overall.infected_per_100k,
+              thresholds: thresholds.gm.infected_per_100k,
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
             }}
@@ -258,18 +253,20 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <GmChoropleth
+            <Choropleth
+              map="gm"
               accessibility={{
                 key: 'confirmed_cases_choropleth',
               }}
-              selectedCode={data.code}
-              data={choropleth.gm}
-              getLink={reverseRouter.gm.positiefGetesteMensen}
-              metricName="tested_overall"
-              metricProperty="infected_per_100k"
-              tooltipContent={(
-                context: GmGeoProperties & GmCollectionTestedOverall
-              ) => <GmPositiveTestedPeopleTooltip context={context} />}
+              data={choropleth.gm.tested_overall}
+              dataConfig={{
+                metricProperty: 'infected_per_100k',
+              }}
+              dataOptions={{
+                selectedCode: data.code,
+                highlightSelection: true,
+                getLink: reverseRouter.gm.positiefGetesteMensen,
+              }}
             />
           </ChoroplethTile>
         </TileList>

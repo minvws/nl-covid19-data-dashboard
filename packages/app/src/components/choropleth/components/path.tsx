@@ -4,14 +4,13 @@ import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
-interface PathProps {
+export interface PathProps {
   pathData: string;
-  fill?: string;
-  stroke?: string;
-  strokeWidth?: number;
+  fill: string;
+  stroke: string;
+  strokeWidth: number;
   id?: string;
   isClickable?: boolean;
-  isSelected?: boolean;
 }
 
 export function Path({
@@ -35,12 +34,18 @@ export function Path({
   );
 }
 
-interface HoverPathLinkProps extends PathProps {
-  href?: string;
+export interface HoverPathLinkProps {
+  pathData: string;
+  fill: (code: string, isActivated?: boolean) => string;
+  stroke: (code: string, isActivated?: boolean) => string;
+  strokeWidth: (code: string, isActivated?: boolean) => number;
   title: string;
   isTabInteractive: boolean;
   onFocus: (evt: FocusEvent<HTMLAnchorElement>) => void;
   onBlur: (evt: FocusEvent<HTMLAnchorElement>) => void;
+  id: string;
+  isClickable?: boolean;
+  href?: string;
 }
 
 export function HoverPathLink({
@@ -95,18 +100,20 @@ function HoverPath({
   stroke,
   strokeWidth,
   isClickable,
-  isSelected,
-}: PathProps) {
+}: Omit<
+  HoverPathLinkProps,
+  'title' | 'isTabInteractive' | 'href' | 'onFocus' | 'onBlur'
+>) {
   return (
     <StyledHoverPath
       d={pathData}
       shapeRendering="optimizeQuality"
       data-id={id}
+      code={id}
       isClickable={isClickable}
-      fill={fill}
-      stroke={stroke}
-      strokeWidth={strokeWidth}
-      isSelected={isSelected}
+      fillMethod={fill}
+      strokeMethod={stroke}
+      strokeWidthMethod={strokeWidth}
       aria-hidden="true"
     />
   );
@@ -116,32 +123,35 @@ const StyledPath = styled.path<{
   isClickable?: boolean;
 }>((x) =>
   css({
-    fill: x.fill || 'transparent',
+    fill: x.fill,
     stroke: x.stroke,
-    strokeWidth: x.strokeWidth || 0.5,
+    strokeWidth: x.strokeWidth,
     pointerEvents: 'none',
   })
 );
 
 const StyledHoverPath = styled.path<{
   isClickable?: boolean;
-  isSelected?: boolean;
+  fillMethod: (code: string, isActivated?: boolean) => string;
+  strokeMethod: (code: string, isActivated?: boolean) => string;
+  strokeWidthMethod: (code: string, isActivated?: boolean) => number;
+  code: string;
 }>((x) =>
   css({
-    fill: 'transparent',
+    fill: x.fillMethod(x.code),
     transitionProperty: 'fill, stroke, stroke-width',
     transitionDuration: '120ms, 90ms',
     transitionTimingFunction: 'ease-out',
     cursor: x.isClickable ? 'pointer' : 'default',
-    stroke: x.stroke ? (x.isSelected ? '#000' : 'transparent') : 'transparent',
-    strokeWidth: x.isSelected ? 3 : 0,
+    stroke: x.strokeMethod(x.code),
+    strokeWidth: x.strokeWidthMethod(x.code),
     pointerEvents: 'all',
 
     '&:hover, a:focus &': {
       transitionDuration: '0ms',
-      fill: x.fill ?? 'none',
-      stroke: x.stroke ?? '#fff',
-      strokeWidth: x.strokeWidth ?? 3,
+      fill: x.fillMethod(x.code, true),
+      stroke: x.strokeMethod(x.code, true),
+      strokeWidth: x.strokeWidthMethod(x.code, true),
     },
   })
 );

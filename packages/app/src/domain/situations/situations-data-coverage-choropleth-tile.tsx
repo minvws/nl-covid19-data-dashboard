@@ -1,13 +1,10 @@
-import {
-  VrCollectionSituations,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
+import { VrCollectionSituations } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactComponent as Check } from '~/assets/check.svg';
 import { ReactComponent as Cross } from '~/assets/cross.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';
@@ -94,17 +91,24 @@ export function SituationsDataCoverageChoroplethTile({
         >
           <Box height="100%">
             <ErrorBoundary>
-              <VrChoropleth
+              <Choropleth
                 accessibility={{
                   key: 'situations_has_sufficient_data_choropleth',
                 }}
-                data={data}
-                getLink={reverseRouter.vr.brononderzoek}
-                metricName="situations"
-                metricProperty="has_sufficient_data"
-                tooltipContent={(
-                  context: VrGeoProperties & VrCollectionSituations
-                ) => <SituationsDataCoverageTooltip context={context} />}
+                map="vr"
+                data={data.situations}
+                dataConfig={{
+                  metricProperty: 'has_sufficient_data',
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.vr.brononderzoek,
+                  tooltipVariables: {
+                    patients: siteText.choropleth_tooltip.patients,
+                  },
+                }}
+                formatTooltip={(context) => (
+                  <SituationsDataCoverageTooltip context={context} />
+                )}
               />
             </ErrorBoundary>
           </Box>
@@ -113,6 +117,8 @@ export function SituationsDataCoverageChoroplethTile({
     </ChartTile>
   );
 }
+
+// <SituationsDataCoverageTooltip context={context} />
 
 function LegendItem({
   color,

@@ -1,12 +1,10 @@
-import {
-  VrCollectionSituations,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
+import { VrCollectionSituations } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { ReactComponent as Check } from '~/assets/check.svg';
 import { ReactComponent as Cross } from '~/assets/cross.svg';
 import { Box } from '~/components/base';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipContent } from '~/components/choropleth/tooltips';
+import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -15,13 +13,13 @@ import { LegendIcon } from './legend-icon';
 export function SituationsDataCoverageTooltip({
   context,
 }: {
-  context: VrGeoProperties & VrCollectionSituations;
+  context: TooltipData<VrCollectionSituations>;
 }) {
   const { siteText } = useIntl();
   const text = siteText.brononderzoek;
   const reverseRouter = useReverseRouter();
 
-  const { has_sufficient_data } = context;
+  const { has_sufficient_data } = context.dataItem;
 
   const Icon = has_sufficient_data ? Check : Cross;
   const color = has_sufficient_data ? 'data.primary' : 'gray';
@@ -31,8 +29,8 @@ export function SituationsDataCoverageTooltip({
 
   return (
     <TooltipContent
-      title={context.vrname}
-      link={reverseRouter.vr.brononderzoek(context.vrcode)}
+      title={context.featureName}
+      link={reverseRouter.vr.brononderzoek(context.dataItem.vrcode)}
     >
       <Box
         m={0}

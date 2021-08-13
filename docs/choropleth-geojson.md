@@ -39,8 +39,7 @@ Creating the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
 
 1. Right click on the **layer > Properties > Source fields**
 2. Rename (click the pencil to active edit mode):
-   - `statnaam` to `gemnaam`
-   - `statcode` to `gemcode`
+   - `statcode` to `code`
 3. **Apply > Ok**
 4. Right click on the **layer > Export > Save Features As..**
 5. Use the following settings:
@@ -48,15 +47,14 @@ Creating the municipalities data file (**cbs_gemeente_2020_gegeneraliseerd**):
    - File Name: `cbs_gemeente_2020_gegeneraliseerd.geojson`
    - CRS: `EPSG:28992 - Amersfoort / RD New - Projected`
    - Open **"Select fields to export..."**
-     - Select: `gemnaam` and `gemcode`
+     - Select: `code`
 6. Export by clicking **"Ok"**
 
 Creating the safety regions data file (**cbs_veiligheidsregio_2020_gegeneraliseerd**):
 
 1. Right click on the **layer > Properties > Source fields**
 2. Rename (click the pencil to active edit mode):
-   - `statnaam` to `vrname`
-   - `statcode` to `vrcode`
+   - `statcode` to `code`
 3. **Apply > Ok**
 4. Right click on the **layer > Export > Save Features As..**
 5. Use the following settings:
@@ -64,7 +62,7 @@ Creating the safety regions data file (**cbs_veiligheidsregio_2020_gegeneralisee
    - File Name: `cbs_veiligheidsregio_2020_gegeneraliseerd.geojson`
    - CRS: `EPSG:28992 - Amersfoort / RD New - Projected`
    - Open **"Select fields to export..."**
-     - Select: `vrname` and `vrcode`
+     - Select: `code`
 6. Export by clicking **"Ok"**
 
 Creating the Netherlands data file (**cbs_landsdeel_2020_gegeneraliseerd**):
@@ -100,39 +98,44 @@ To make sure the coordinating system is correct we have to convert the exported 
    - Change: `cbs_gemeente_2020_gegeneraliseerd` to `gm_features`
    - Change: `cbs_landsdeel_2020_gegeneraliseerd` to `nl_features`
    - Change: `cbs_veiligheidsregio_2020_gegeneraliseerd` to `vr_features`
-3. Export to TopoJSON > `geography-high-detail.topo.json`;
+3. Export to TopoJSON > `nl-vr-gm-high-detail.topo.json`;
 
 Simplifying (this needs to be separate step; when doing this in the step above the output will not be correct):
 
-1. Upload the output `geography-high-detail.topo.json` to a new instance of [mapshaper.org](https://mapshaper.org/)
+1. Upload the output `nl-vr-gm-high-detail.topo.json` to a new instance of [mapshaper.org](https://mapshaper.org/)
 2. Do for each layer:
    - Select the layer and open the console; simplify using the following command: $ -simplify 27.5%
-3. When all the layers are simplified export to TopoJSON > `geography-simplified.topo.json`
+3. When all the layers are simplified export to TopoJSON > `nl-vr-gm.topo.json`
 4. Add the new data file to the project and update `topology.ts`.
 
 ### Example of the topology.ts file
 
 ```typescript
-import { FeatureCollection, MultiPolygon } from 'geojson';
+import { FeatureCollection, MultiPolygon, Polygon } from 'geojson';
 import * as topojson from 'topojson-client';
+import nlTopology from './nl-vr-gm.topo.json';
 
-// Load all the geographical data including the data entries (regions and municipalities)
-import topology from './geography-simplified.topo.json';
+export type CodedGeoProperties = {
+  code: string;
+};
 
-import { MunicipalGeoJSON, RegionGeoJSON } from './shared';
+export type CodedGeoJSON = FeatureCollection<
+  MultiPolygon | Polygon,
+  CodedGeoProperties
+>;
 
-export const countryGeo = topojson.feature(
-  topology,
-  topology.objects.netherlands
-) as FeatureCollection<MultiPolygon | Polygon>;
+export const nlGeo = topojson.feature(
+  nlTopology,
+  nlTopology.objects.nl_features
+) as CodedGeoJSON;
 
-export const regionGeo = topojson.feature(
-  topology,
-  topology.objects.vr_collection
-) as RegionGeoJSON;
+export const vrGeo = topojson.feature(
+  nlTopology,
+  nlTopology.objects.vr_features
+) as CodedGeoJSON;
 
-export const municipalGeo = topojson.feature(
-  topology,
-  topology.objects.municipalities
-) as MunicipalGeoJSON;
+export const gmGeo = topojson.feature(
+  nlTopology,
+  nlTopology.objects.gm_features
+) as CodedGeoJSON;
 ```

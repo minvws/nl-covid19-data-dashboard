@@ -1,21 +1,11 @@
-import {
-  getLastFilledValue,
-  GmGeoProperties,
-  GmHospitalNiceValue,
-  VrGeoProperties,
-  VrHospitalNiceValue,
-} from '@corona-dashboard/common';
+import { getLastFilledValue } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
-import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { gmThresholds, vrThresholds } from '~/components/choropleth/logic';
-import {
-  GmHospitalAdmissionsTooltip,
-  VrHospitalAdmissionsTooltip,
-} from '~/components/choropleth/tooltips';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
@@ -164,8 +154,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'gm'
-                  ? gmThresholds.hospital_nice.admissions_on_date_of_reporting
-                  : vrThresholds.hospital_nice.admissions_on_date_of_reporting,
+                  ? thresholds.gm.admissions_on_date_of_reporting
+                  : thresholds.gm.admissions_on_date_of_reporting,
               title: text.chloropleth_legenda.titel,
             }}
             metadata={{
@@ -174,31 +164,39 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'gm' && (
-              <GmChoropleth
+              <Choropleth
                 accessibility={{
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
-                data={choropleth.gm}
-                getLink={reverseRouter.gm.ziekenhuisopnames}
-                metricName="hospital_nice"
-                metricProperty="admissions_on_date_of_reporting"
-                tooltipContent={(
-                  context: GmGeoProperties & GmHospitalNiceValue
-                ) => <GmHospitalAdmissionsTooltip context={context} />}
+                map="gm"
+                data={choropleth.gm.hospital_nice}
+                dataConfig={{
+                  metricProperty: 'admissions_on_date_of_reporting',
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.gm.ziekenhuisopnames,
+                  tooltipVariables: {
+                    patients: siteText.choropleth_tooltip.patients,
+                  },
+                }}
               />
             )}
             {selectedMap === 'vr' && (
-              <VrChoropleth
+              <Choropleth
                 accessibility={{
                   key: 'hospital_admissions_region_choropleth',
                 }}
-                data={choropleth.vr}
-                getLink={reverseRouter.vr.ziekenhuisopnames}
-                metricName="hospital_nice"
-                metricProperty="admissions_on_date_of_reporting"
-                tooltipContent={(
-                  context: VrGeoProperties & VrHospitalNiceValue
-                ) => <VrHospitalAdmissionsTooltip context={context} />}
+                map="vr"
+                data={choropleth.vr.hospital_nice}
+                dataConfig={{
+                  metricProperty: 'admissions_on_date_of_reporting',
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.vr.ziekenhuisopnames,
+                  tooltipVariables: {
+                    patients: siteText.choropleth_tooltip.patients,
+                  },
+                }}
               />
             )}
           </ChoroplethTile>

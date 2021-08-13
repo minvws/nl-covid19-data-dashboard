@@ -1,17 +1,12 @@
-import {
-  VrCollectionElderlyAtHome,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
 import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { VrElderlyAtHomeTooltip } from '~/components/choropleth/tooltips';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -198,22 +193,22 @@ const ElderlyAtHomeNationalPage = (
               source: text.section_positive_tested.bronnen.rivm,
             }}
             legend={{
-              thresholds:
-                vrThresholds.elderly_at_home.positive_tested_daily_per_100k,
+              thresholds: thresholds.vr.positive_tested_daily_per_100k,
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >
-            <VrChoropleth
+            <Choropleth
+              map="vr"
               accessibility={{
                 key: 'elderly_at_home_infected_people_choropleth',
               }}
-              data={choropleth.vr}
-              getLink={reverseRouter.vr.thuiswonendeOuderen}
-              metricName="elderly_at_home"
-              metricProperty="positive_tested_daily_per_100k"
-              tooltipContent={(
-                context: VrGeoProperties & VrCollectionElderlyAtHome
-              ) => <VrElderlyAtHomeTooltip context={context} />}
+              data={choropleth.vr.elderly_at_home}
+              dataConfig={{
+                metricProperty: 'positive_tested_daily_per_100k',
+              }}
+              dataOptions={{
+                getLink: reverseRouter.vr.thuiswonendeOuderen,
+              }}
             />
           </ChoroplethTile>
 
