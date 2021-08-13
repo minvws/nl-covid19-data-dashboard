@@ -2,6 +2,7 @@ import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { FocusEvent, memo, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
+import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -13,9 +14,7 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useUniqueId } from '~/utils/use-unique-id';
-import { Box } from '../base';
-import { MercatorGroup } from './components/mercator-group';
-import { MercatorHoverGroup } from './components/mercator-hover-group';
+import { MercatorGroup, MercatorHoverGroup } from './components';
 import {
   CHOROPLETH_ASPECT_RATIO,
   DEFAULT_STROKE_WIDTH,
@@ -25,13 +24,13 @@ import {
   Unpack,
   useChoroplethData,
   useChoroplethFeatures,
+  useChoroplethTooltip,
+  useDynamicSize,
+  useFeatureName,
   useFeatureProps,
   useFillColor,
   useTabInteractiveButton,
 } from './logic';
-import { useChoroplethTooltip } from './logic/use-choropleth-tooltip';
-import { useDynamicSize } from './logic/use-dynamic-size';
-import { useFeatureName } from './logic/use-feature-name';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
 
