@@ -39,3 +39,16 @@ export function featureHasPath(
 ): value is ParsedFeatureWithPath {
   return isPresent(value.path);
 }
+
+/**
+ *  Take the feature path and round each coordinate to create a smaller number, hence decreasing the file size immensely
+ */
+export function truncatePathCoordinate(feature: ParsedFeatureWithPath) {
+  return {
+    ...feature,
+    path: feature.path.replace(
+      /\d+\.\d+/g,
+      (x) => Math.round(parseFloat(x)) + ''
+    ),
+  };
+}
