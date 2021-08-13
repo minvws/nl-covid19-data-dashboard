@@ -166,7 +166,7 @@ const STATIC_ASSET_HTTP_DATE = new Date(
       res.set('Cache-control', 'no-cache, public');
     } else {
       /**
-       * Non-HTML requests are are cached indefinitely and are provided of a hash to be able to cache-bust them.
+       * Non-HTML requests are are cached indefinitely and are provided with a hash to be able to cache-bust them.
        * These are not applied to assets in the public folder. (See headers() in next.config.js for that.)
        */
       res.setHeader(
