@@ -113,7 +113,6 @@ const nextConfig = {
         'unist-util-visit-parents',
         '../../node_modules/unist-util-visit-parents',
       ],
-      ['d3-array', '../../node_modules/d3-geo/node_modules/d3-array'],
       ['d3-color', '../../node_modules/d3-interpolate/node_modules/d3-color'],
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
