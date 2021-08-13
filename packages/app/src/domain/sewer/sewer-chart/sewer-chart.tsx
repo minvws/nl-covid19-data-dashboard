@@ -140,7 +140,14 @@ export function SewerChart({
                     isNonInteractive: true,
                   },
                 ]}
-                formatTooltip={(data) => <LocationTooltip data={data} />}
+                formatTooltip={(data) => {
+                  /**
+                   * Silently fail when unable to find line configuration in location tooltip
+                   */
+                  if (data.config.find((x) => x.type === 'line')) {
+                    return <LocationTooltip data={data} />;
+                  }
+                }}
                 dataOptions={{ valueAnnotation: text.valueAnnotation }}
               />
             ) : (
