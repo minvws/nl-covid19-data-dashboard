@@ -44,6 +44,24 @@ const nextConfig = {
   },
 
   /**
+   * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
+   */
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|png|woff|woff2)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=9999999999, must-revalidate',
+          },
+        ],
+      },
+    ];
+  },
+
+  /**
    * Enable source maps in production, because we want people to report readable
    * stack traces from the error boundaries feature.
    */
