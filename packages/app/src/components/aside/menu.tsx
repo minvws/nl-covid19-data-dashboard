@@ -1,17 +1,14 @@
 import css from '@styled-system/css';
-import {
-  NextRouter,
-  resolveHref,
-} from 'next/dist/next-server/lib/router/router';
-import { useRouter } from 'next/router';
+import { resolveHref } from 'next/dist/shared/lib/router/router';
+import { NextRouter, useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
+import { Box } from '~/components/base';
+import { Anchor, Text } from '~/components/typography';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
-import { Box } from '../base';
-import { Anchor, Text } from '../typography';
 import { AsideTitle } from './title';
 
 type Url = UrlObject | string;
