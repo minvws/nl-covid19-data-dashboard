@@ -54,7 +54,7 @@ export function SidebarKpiValue(props: SidebarKpiValueProps) {
         )}
 
         {isDefined(description) && (
-          <InlineText variant="label1" color="annotation" fontWeight="bold">
+          <InlineText variant="label1" color="annotation">
             {description}
           </InlineText>
         )}

@@ -75,7 +75,7 @@ export function RadioGroup<T extends string>(props: RadioGroupProps<T>) {
             checked={value === item.value}
           />
           <StyledLabel htmlFor={`radiogroup-${item.value}-${id}-${index}`}>
-            <InlineText variant="button3">{item.label}</InlineText>
+            <InlineText variant="button2">{item.label}</InlineText>
           </StyledLabel>
         </Fragment>
       ))}
