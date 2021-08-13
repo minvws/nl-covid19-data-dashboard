@@ -41,7 +41,8 @@ export function featureHasPath(
 }
 
 /**
- *  Take the feature path and round each coordinate to create a smaller number, hence decreasing the file size immensely
+ * Take the feature path and round each coordinate to create a smaller number, hence decreasing the file size immensely.
+ * The extra feature detail isn't needed, since the difference between coordinate 30.4323424323423424 or 30.43 isn't visible.
  */
 export function truncatePathCoordinates(feature: ParsedFeatureWithPath) {
   return {
