@@ -3,7 +3,7 @@ import { ProjectionPreset } from '@visx/geo/lib/types';
 import { GeoProjection } from 'd3-geo';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { CodedGeoProperties, FitExtent } from '~/components/choropleth/logic';
-import { featureHasPath, truncatePathCoordinate } from '../logic/utils';
+import { featureHasPath, truncatePathCoordinates } from '../logic/utils';
 import { Path } from './path';
 
 export type MercatorGroupProps = {
@@ -31,7 +31,7 @@ export function MercatorGroup(props: MercatorGroupProps) {
         <g>
           {features
             .filter(featureHasPath)
-            .map(truncatePathCoordinate)
+            .map(truncatePathCoordinates)
             .map(({ feature, path, index }) => {
               return (
                 <Path

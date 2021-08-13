@@ -4,7 +4,7 @@ import { GeoProjection } from 'd3-geo';
 import { Feature, MultiPolygon, Polygon } from 'geojson';
 import { FocusEvent } from 'react';
 import { CodedGeoProperties, FitExtent } from '../logic';
-import { featureHasPath, truncatePathCoordinate } from '../logic/utils';
+import { featureHasPath, truncatePathCoordinates } from '../logic/utils';
 import { HoverPathLink } from './path';
 
 type MercatorHoverGroupProps = {
@@ -42,7 +42,7 @@ export function MercatorHoverGroup(props: MercatorHoverGroupProps) {
         <g>
           {features
             .filter(featureHasPath)
-            .map(truncatePathCoordinate)
+            .map(truncatePathCoordinates)
             .map(({ feature, path, index }) => {
               const { code } = feature.properties;
               return (
