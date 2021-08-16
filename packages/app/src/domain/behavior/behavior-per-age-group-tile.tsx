@@ -75,8 +75,8 @@ export function BehaviorPerAgeGroup({
                     <React.Fragment key={index}>
                       {supportValue &&
                         complianceValue &&
-                        isDefined(complianceValue[age]) &&
-                        isDefined(supportValue[age]) && (
+                        isPresent(complianceValue[age]) &&
+                        isPresent(supportValue[age]) && (
                           <tr>
                             <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
                             <Cell>
