@@ -1,9 +1,8 @@
-import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
+import { MapType } from '~/components/choropleth/logic';
 import {
   BehaviorIdentifier,
   behaviorIdentifiers,
 } from '~/domain/behavior/logic/behavior-types';
-import { SituationKey } from '~/domain/situations/logic/situations';
 import { colors } from '~/style/theme';
 
 const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
@@ -38,6 +37,95 @@ const positiveTestedThresholds: ChoroplethThresholdsValue[] = [
 ];
 
 const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.underReported,
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 1,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 2,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 3,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 4,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 5,
+  },
+];
+
+const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.underReported,
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 1,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 5,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 8,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 11,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 21,
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 31,
+  },
+];
+
+const sewerThresholds: ChoroplethThresholdsValue[] = [
+  {
+    color: colors.data.underReported,
+    threshold: 0,
+  },
+  {
+    color: colors.data.scale.blue[0],
+    threshold: 0.01,
+  },
+  {
+    color: colors.data.scale.blue[1],
+    threshold: 50,
+  },
+  {
+    color: colors.data.scale.blue[2],
+    threshold: 250,
+  },
+  {
+    color: colors.data.scale.blue[3],
+    threshold: 500,
+  },
+  {
+    color: colors.data.scale.blue[4],
+    threshold: 750,
+  },
+  {
+    color: colors.data.scale.blue[5],
+    threshold: 1000,
+  },
+];
+
+const vrHospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.underReported,
     threshold: 0,
@@ -83,42 +171,14 @@ const escalationThresholds: ChoroplethThresholdsValue<1 | 2 | 3 | 4>[] = [
   },
 ];
 
-const nursingHomeInfectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] =
-  [
-    {
-      color: colors.data.underReported,
-      threshold: 0,
-    },
-    {
-      color: colors.data.scale.blue[0],
-      threshold: 0.1,
-    },
-    {
-      color: colors.data.scale.blue[1],
-      threshold: 10,
-    },
-    {
-      color: colors.data.scale.blue[2],
-      threshold: 20,
-    },
-    {
-      color: colors.data.scale.blue[3],
-      threshold: 30,
-    },
-    {
-      color: colors.data.scale.blue[4],
-      threshold: 40,
-    },
-  ];
-
-const sewerThresholds: ChoroplethThresholdsValue[] = [
+const infectedLocationsPercentageThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.underReported,
     threshold: 0,
   },
   {
     color: colors.data.scale.blue[0],
-    threshold: 0.01,
+    threshold: 0.1,
   },
   {
     color: colors.data.scale.blue[1],
@@ -126,23 +186,15 @@ const sewerThresholds: ChoroplethThresholdsValue[] = [
   },
   {
     color: colors.data.scale.blue[2],
-    threshold: 50,
+    threshold: 20,
   },
   {
     color: colors.data.scale.blue[3],
-    threshold: 100,
+    threshold: 30,
   },
   {
     color: colors.data.scale.blue[4],
-    threshold: 250,
-  },
-  {
-    color: colors.data.scale.blue[5],
-    threshold: 500,
-  },
-  {
-    color: colors.data.scale.blue[6],
-    threshold: 1000,
+    threshold: 40,
   },
 ];
 
@@ -205,37 +257,6 @@ const behaviorSupportThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.scale.yellow[6],
     threshold: 90,
-  },
-];
-
-const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
-  {
-    color: colors.data.underReported,
-    threshold: 0,
-  },
-  {
-    color: colors.data.scale.blue[0],
-    threshold: 0.1,
-  },
-  {
-    color: colors.data.scale.blue[1],
-    threshold: 5,
-  },
-  {
-    color: colors.data.scale.blue[2],
-    threshold: 8,
-  },
-  {
-    color: colors.data.scale.blue[3],
-    threshold: 11,
-  },
-  {
-    color: colors.data.scale.blue[4],
-    threshold: 21,
-  },
-  {
-    color: colors.data.scale.blue[5],
-    threshold: 31,
   },
 ];
 
@@ -333,50 +354,23 @@ const hasSufficientDataThresholds = [
   },
 ];
 
-const behaviorThresholds = {
-  ...(Object.fromEntries(
-    behaviorIdentifiers.map((key) => [
-      `${key}_support`,
-      behaviorSupportThresholds,
-    ])
-  ) as Record<`${BehaviorIdentifier}_support`, ChoroplethThresholdsValue[]>),
-  ...(Object.fromEntries(
-    behaviorIdentifiers.map((key) => [
-      `${key}_compliance`,
-      behaviorComplianceThresholds,
-    ])
-  ) as Record<`${BehaviorIdentifier}_compliance`, ChoroplethThresholdsValue[]>),
-};
+type Thresholds = Record<MapType, Record<string, ChoroplethThresholdsValue[]>>;
 
-export const vrThresholds = {
-  tested_overall: {
+export const thresholds: Thresholds = {
+  gm: {
     infected_per_100k: positiveTestedThresholds,
-  },
-  hospital_nice: {
     admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
-  },
-  escalation_levels: {
-    level: escalationThresholds,
-  },
-  nursing_home: {
-    infected_locations_percentage:
-      nursingHomeInfectedLocationsPercentageThresholds,
-  },
-  disability_care: {
-    infected_locations_percentage:
-      nursingHomeInfectedLocationsPercentageThresholds,
-  },
-  sewer: {
+    elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
   },
-  behavior: behaviorThresholds,
-  elderly_at_home: {
+  vr: {
+    infected_per_100k: positiveTestedThresholds,
+    admissions_on_date_of_reporting: vrHospitalAdmissionsThresholds,
+    level: escalationThresholds,
+    infected_locations_percentage: infectedLocationsPercentageThresholds,
+    average: sewerThresholds,
     positive_tested_daily_per_100k: elderlyAtHomeThresholds,
-  },
-  vaccine: {
     coverage_percentage: vaccineCoverageThresholds,
-  },
-  situations: <Record<SituationKey, ChoroplethThresholdsValue[]>>{
     has_sufficient_data: hasSufficientDataThresholds,
     home_and_visits: situationsThreshold,
     work: situationsThreshold,
@@ -386,5 +380,33 @@ export const vrThresholds = {
     travel: situationsThreshold,
     hospitality: situationsThreshold,
     other: situationsThreshold,
+    ...(Object.fromEntries(
+      behaviorIdentifiers.map((key) => [
+        `${key}_support`,
+        behaviorSupportThresholds,
+      ])
+    ) as Record<`${BehaviorIdentifier}_support`, ChoroplethThresholdsValue[]>),
+    ...(Object.fromEntries(
+      behaviorIdentifiers.map((key) => [
+        `${key}_compliance`,
+        behaviorComplianceThresholds,
+      ])
+    ) as Record<
+      `${BehaviorIdentifier}_compliance`,
+      ChoroplethThresholdsValue[]
+    >),
   },
-} as const;
+  in: {
+    infected_per_100k_average: positiveTestedThresholds,
+  },
+};
+
+export type ChoroplethThresholdsValue<T extends number = number> = {
+  color: string;
+  threshold: T;
+  label?: string;
+  /**
+   * Optionally define the label which explains the "end" of a threshold
+   */
+  endLabel?: string;
+};

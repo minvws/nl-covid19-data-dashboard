@@ -1,19 +1,23 @@
 import { Dispatch, SetStateAction } from 'react';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useBoundingBox } from '~/utils/use-bounding-box';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useViewport } from '~/utils/use-viewport';
-import { TooltipSettings } from '../components/choropleth';
+import { ChoroplethDataItem } from '../logic';
+import { ChoroplethTooltip } from './choropleth-tooltip';
+import { TooltipData, TooltipFormatter, TooltipSettings } from './types';
 
 export type ChoroplethTooltipPlacement = 'bottom-right' | 'top-center';
 
-type TTooltipProps = {
+type TTooltipProps<T extends ChoroplethDataItem> = {
   left: number;
   top: number;
-  setTooltip: Dispatch<SetStateAction<TooltipSettings | undefined>>;
-  children: React.ReactNode;
+  setTooltip: Dispatch<SetStateAction<TooltipSettings<T> | undefined>>;
   placement?: ChoroplethTooltipPlacement;
+  formatTooltip?: TooltipFormatter<T>;
+  data: TooltipData<T>;
 };
 
 const VIEWPORT_PADDING = 10;
@@ -23,16 +27,25 @@ const padding = {
   right: 0,
 };
 
-export function Tooltip({
+export function Tooltip<T extends ChoroplethDataItem>({
   left,
   top,
-  children,
+  formatTooltip,
+  data,
   placement = 'bottom-right',
-}: TTooltipProps) {
+}: TTooltipProps<T>) {
   const viewportSize = useViewport();
   const isMounted = useIsMounted({ delayMs: 10 });
   const [ref, { width = 0, height = 0 }] = useResizeObserver<HTMLDivElement>();
   const [boundingBox, boundingBoxRef] = useBoundingBox<HTMLDivElement>();
+
+  const content = isDefined(formatTooltip) ? (
+    formatTooltip(data)
+  ) : (
+    <ChoroplethTooltip data={data} />
+  );
+
+  if (!content) return null;
 
   /**
    * nudge the top to render the tooltip a little bit on top of the chart
@@ -78,7 +91,7 @@ export function Tooltip({
         borderRadius={1}
         zIndex={1000}
       >
-        {children}
+        {content}
       </Box>
     </div>
   );

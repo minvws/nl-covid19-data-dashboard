@@ -1,7 +1,7 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import IconGelijk from '~/assets/gelijk.svg';
-import IconUp from '~/assets/pijl-omhoog.svg';
-import IconDown from '~/assets/pijl-omlaag.svg';
+import { ReactComponent as IconGelijk } from '~/assets/gelijk.svg';
+import { ReactComponent as IconUp } from '~/assets/pijl-omhoog.svg';
+import { ReactComponent as IconDown } from '~/assets/pijl-omlaag.svg';
 import { Container, IconContainer } from './containers';
 
 export function SidebarDifference({

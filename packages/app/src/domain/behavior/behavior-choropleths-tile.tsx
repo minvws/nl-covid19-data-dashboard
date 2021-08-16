@@ -1,16 +1,14 @@
-import {
-  VrCollectionBehavior,
-  VrGeoProperties,
-} from '@corona-dashboard/common';
+import { KeysOfType, VrCollectionBehavior } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { VrBehaviorTooltip } from '~/components/choropleth/tooltips';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
+import { VrBehaviorTooltip } from '~/domain/behavior/tooltip/vr-behavior-tooltip';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -37,27 +35,28 @@ export function BehaviorChoroplethsTile({
   setCurrentId,
 }: BehaviorChoroplethsTileProps) {
   const { siteText } = useIntl();
-  const firstRegionData = data.behavior[0];
 
-  // Find all the keys that don't exist on VR level but do on NL
-  const keysWithoutData = behaviorIdentifiers.filter(
-    (item) => !Object.keys(firstRegionData).find((a) => a.includes(item))
-  );
+  const keysWithoutData = useMemo(() => {
+    const firstRegionData = data.behavior[0];
 
-  /**
-   * Since e.g. the curfew has no data anymore and returns null that also needs to be filtered out
-   * First we check if there are some keys that contain a value of null
-   * Second we slice everything before the underscore, since only the id name is important and not _support or _compliance
-   * Lastly we remove all the duplicates in the array and add it to all the keys without data
-   */
-  const idsThatContainNull = Object.keys(firstRegionData)
-    .filter(
-      (key) => firstRegionData[key as keyof VrCollectionBehavior] === null
-    )
-    .map((item) => item.slice(0, item.indexOf('_')))
-    .filter((item, pos) => item.indexOf(item) == pos);
+    // Find all the keys that don't exist on VR level but do on NL
+    const keysWithoutData = behaviorIdentifiers.filter(
+      (item) => !Object.keys(firstRegionData).find((a) => a.includes(item))
+    );
 
-  keysWithoutData.push(...(idsThatContainNull as BehaviorIdentifier[]));
+    const keysThatAreAllNull = behaviorIdentifiers.filter((key) => {
+      return data.behavior.every((region) => {
+        return (
+          region[`${key}_compliance` as keyof VrCollectionBehavior] === null &&
+          region[`${key}_support` as keyof VrCollectionBehavior] === null
+        );
+      });
+    });
+
+    keysWithoutData.push(...keysThatAreAllNull);
+
+    return keysWithoutData;
+  }, [data.behavior]);
 
   return (
     <ChartTile title={title} description={description}>
@@ -131,17 +130,25 @@ function ChoroplethBlock({
           </Box>
         )}
         <ErrorBoundary>
-          <VrChoropleth
-            accessibility={{ key: 'behavior_choropleths' }}
-            data={data}
-            getLink={reverseRouter.vr.gedrag}
-            metricName="behavior"
-            metricProperty={metricProperty}
+          <Choropleth
+            accessibility={{
+              key: 'behavior_choropleths',
+            }}
+            map="vr"
+            data={data.behavior}
+            dataConfig={{
+              metricProperty: metricProperty as unknown as KeysOfType<
+                VrCollectionBehavior,
+                number | null | boolean | undefined,
+                true
+              >,
+              noDataFillColor: colors.page,
+            }}
+            dataOptions={{
+              getLink: reverseRouter.vr.gedrag,
+            }}
             minHeight={!isSmallScreen ? 350 : 400}
-            noDataFillColor={colors.page}
-            tooltipContent={(
-              context: VrCollectionBehavior & VrGeoProperties
-            ) => {
+            formatTooltip={(context) => {
               const currentComplianceValue =
                 `${currentId}_compliance` as keyof VrCollectionBehavior;
               const currentSupportValue =
@@ -156,9 +163,11 @@ function ChoroplethBlock({
                   context={context}
                   currentMetric={currentId}
                   currentComplianceValue={
-                    context[currentComplianceValue] as number
+                    context.dataItem[currentComplianceValue] as number
                   }
-                  currentSupportValue={context[currentSupportValue] as number}
+                  currentSupportValue={
+                    context.dataItem[currentSupportValue] as number
+                  }
                 />
               );
             }}
@@ -171,7 +180,7 @@ function ChoroplethBlock({
         maxWidth={300}
       >
         <ChoroplethLegenda
-          thresholds={vrThresholds.behavior[metricProperty]}
+          thresholds={thresholds.vr[metricProperty]}
           title={siteText.gedrag_common.basisregels.header_percentage}
         />
       </Box>

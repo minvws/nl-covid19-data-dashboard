@@ -1,18 +1,23 @@
 import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
-import { useGapsDataAnnotations } from '~/utils/use-gaps-data-annotations';
 import { SelectBehavior } from './components/select-behavior';
-import { BehaviorIdentifier } from './logic/behavior-types';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from './logic/behavior-types';
+
 interface BehaviorLineChartTileProps {
   values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
   currentId: BehaviorIdentifier;
   setCurrentId: React.Dispatch<React.SetStateAction<BehaviorIdentifier>>;
+  behaviorOptions?: BehaviorIdentifier[];
 }
 
 export function BehaviorLineChartTile({
@@ -20,6 +25,7 @@ export function BehaviorLineChartTile({
   metadata,
   currentId,
   setCurrentId,
+  behaviorOptions,
 }: BehaviorLineChartTileProps) {
   const { siteText } = useIntl();
   const chartText = siteText.gedrag_common.line_chart;
@@ -29,13 +35,6 @@ export function BehaviorLineChartTile({
   const selectedSupportValueKey =
     `${currentId}_support` as keyof NlBehaviorValue;
 
-  const timespanAnnotationsGaps = useGapsDataAnnotations(
-    values,
-    selectedComplianceValueKey,
-    'text',
-    'shortLabel'
-  );
-
   return (
     <ChartTile
       title={chartText.title}
@@ -43,7 +42,11 @@ export function BehaviorLineChartTile({
       description={chartText.description}
     >
       <Box spacing={4}>
-        <SelectBehavior value={currentId} onChange={setCurrentId} />
+        <SelectBehavior
+          value={currentId}
+          onChange={setCurrentId}
+          options={behaviorOptions}
+        />
 
         <TimeSeriesChart
           accessibility={{
@@ -70,7 +73,6 @@ export function BehaviorLineChartTile({
           ]}
           dataOptions={{
             isPercentage: true,
-            timespanAnnotations: timespanAnnotationsGaps,
           }}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}
@@ -78,4 +80,14 @@ export function BehaviorLineChartTile({
       </Box>
     </ChartTile>
   );
+}
+
+export function getBehaviorChartOptions<T>(value: T) {
+  return behaviorIdentifiers
+    .map((key) => {
+      if (`${key}_compliance` in value || `${key}_support` in value) {
+        return key;
+      }
+    })
+    .filter(isDefined);
 }

@@ -1,4 +1,4 @@
-import Varianten from '~/assets/varianten.svg';
+import { ReactComponent as Varianten } from '~/assets/varianten.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
