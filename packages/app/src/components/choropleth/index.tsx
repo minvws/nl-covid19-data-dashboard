@@ -45,7 +45,7 @@ export type DataOptions = {
   highlightSelection?: boolean;
   selectedCode?: string;
   tooltipVariables?: Record<string, Record<string, string> | string>;
-  projection: Projection | (() => GeoProjection);
+  projection?: Projection | (() => GeoProjection);
 };
 
 type OptionalDataConfig<T> = {
