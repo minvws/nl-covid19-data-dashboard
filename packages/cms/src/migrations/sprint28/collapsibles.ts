@@ -78,7 +78,7 @@ function createPatch(document: any) {
       patch.patch.set = {
         ...patch.patch.set,
         [x]: {
-          ...contentBlock,
+          _type: contentBlock._type,
           en: contentBlock.en.map((blockItem: any) => {
             if (blockItem._type === 'collapsible') {
               return {
@@ -100,7 +100,8 @@ function createPatch(document: any) {
       patch.patch.set = {
         ...patch.patch.set,
         [x]: {
-          ...contentBlock,
+          ...(patch.patch.set[x] ?? {}),
+          _type: contentBlock._type,
           nl: contentBlock.nl.map((blockItem: any) => {
             if (blockItem._type === 'collapsible') {
               return {
