@@ -10,7 +10,7 @@ import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { TimespanAnnotationConfig } from './common';
+import { DataOptions, TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
 
 export type SeriesConfig<T extends TimestampedValue> = (
@@ -208,11 +208,12 @@ export function isVisible<T extends TimestampedValue>(
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  cutValuesConfig?: CutValuesConfig[]
+  cutValuesConfig?: CutValuesConfig[],
+  dataOptions?: DataOptions
 ) {
   return useMemo(
-    () => getSeriesList(values, seriesConfig, cutValuesConfig),
-    [values, seriesConfig, cutValuesConfig]
+    () => getSeriesList(values, seriesConfig, cutValuesConfig, dataOptions),
+    [values, seriesConfig, cutValuesConfig, dataOptions]
   );
 }
 
@@ -322,7 +323,8 @@ export type SeriesList = SingleSeries[];
 function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  cutValuesConfig?: CutValuesConfig[]
+  cutValuesConfig?: CutValuesConfig[],
+  dataOptions?: DataOptions
 ): SeriesList {
   return seriesConfig.filter(isVisible).map((config) =>
     config.type === 'stacked-area'
@@ -331,7 +333,8 @@ function getSeriesList<T extends TimestampedValue>(
       ? getGappedStackedAreaSeriesData(
           values,
           config.metricProperty,
-          seriesConfig
+          seriesConfig,
+          dataOptions
         )
       : config.type === 'range'
       ? getRangeSeriesData(
@@ -349,7 +352,8 @@ function getSeriesList<T extends TimestampedValue>(
 function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T,
-  seriesConfig: SeriesConfig<T>
+  seriesConfig: SeriesConfig<T>,
+  dataOptions?: DataOptions
 ) {
   /**
    * Stacked area series are rendered from top to bottom. The sum of a Y-value
@@ -369,9 +373,13 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
   const seriesLow = getSeriesData(values, metricProperty);
 
   seriesLow.forEach((seriesSingleValue, index) => {
-    if (!isPresent(seriesSingleValue.__value)) {
+    if (
+      !dataOptions?.renderNullAsZero &&
+      !isPresent(seriesSingleValue.__value)
+    ) {
       return;
     }
+
     /**
      * The series are rendered from top to bottom. To get the low value of the
      * current series, we will sum up all values of the
@@ -388,6 +396,8 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
     const valueLow = low.__value;
     const valueHigh = isDefined(valueLow)
       ? valueLow + (seriesHigh[index].__value ?? 0)
+      : dataOptions?.renderNullAsZero
+      ? 0
       : undefined;
 
     return {
