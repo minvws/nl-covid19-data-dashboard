@@ -1,3 +1,5 @@
+import css from '@styled-system/css';
+import styled from 'styled-components';
 import { TimestampedValue } from '@corona-dashboard/common';
 import { ReactNode } from 'react';
 import { ArrowIconRight } from '~/components/arrow-icon';
@@ -55,11 +57,9 @@ export function MiniTrendTile<T extends TimestampedValue>(
   return (
     <>
       <Box gridArea={areas?.header} position="relative" spacing={2} pb={3}>
-        <Box width="4rem" height="4rem" position="absolute" left={0}>
-          {icon}
-        </Box>
         <Heading level={3} as="h2">
-          <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+          <Box as="span" fontWeight="bold" display="flex" alignItems="center">
+            <Icon>{icon}</Icon>
             <HeadingLinkWithIcon
               href={href}
               icon={<ArrowIconRight />}
@@ -102,3 +102,13 @@ export function MiniTrendTile<T extends TimestampedValue>(
     </>
   );
 }
+
+const Icon = styled.span(
+  css({
+    svg: {
+      height: '3rem',
+      mr: 3,
+      ml: '2px',
+    },
+  })
+);

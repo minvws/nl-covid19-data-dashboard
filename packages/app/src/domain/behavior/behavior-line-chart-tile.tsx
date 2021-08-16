@@ -1,6 +1,5 @@
 import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
-import { useMemo } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { MetadataProps } from '~/components/metadata';
@@ -8,8 +7,10 @@ import { TimeSeriesChart } from '~/components/time-series-chart';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { SelectBehavior } from './components/select-behavior';
-import { BehaviorIdentifier } from './logic/behavior-types';
-import { useBehaviorLookupKeys } from './logic/use-behavior-lookup-keys';
+import {
+  BehaviorIdentifier,
+  behaviorIdentifiers,
+} from './logic/behavior-types';
 
 interface BehaviorLineChartTileProps {
   values: NlBehaviorValue[] | VrBehaviorValue[];
@@ -79,25 +80,12 @@ export function BehaviorLineChartTile({
   );
 }
 
-export function useBehaviorChartOptions(
-  values: NlBehaviorValue[] | VrBehaviorValue[]
-) {
-  const behaviorLookupKeys = useBehaviorLookupKeys();
-
-  return useMemo(() => {
-    return behaviorLookupKeys
-      .map((x) => {
-        const complianceValues = values
-          .map((value) => value[x.complianceKey])
-          .filter(isPresent);
-        const supportValues = values
-          .map((value) => value[x.supportKey])
-          .filter(isPresent);
-
-        if (complianceValues.length && supportValues.length) {
-          return x.key;
-        }
-      })
-      .filter(isDefined);
-  }, [values, behaviorLookupKeys]);
+export function getBehaviorChartOptions<T>(value: T) {
+  return behaviorIdentifiers
+    .map((key) => {
+      if (`${key}_compliance` in value || `${key}_support` in value) {
+        return key;
+      }
+    })
+    .filter(isDefined);
 }
