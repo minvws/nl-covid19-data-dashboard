@@ -56,5 +56,5 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
       </Trend>
     );
   }
-  return <Box paddingLeft={`calc(12px + 0.25rem)`}>-</Box>;
+  return <Box paddingLeft={`calc(12px + 0.25rem)`}>–</Box>;
 }
