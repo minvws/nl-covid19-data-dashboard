@@ -1,5 +1,7 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { Projection } from '@visx/geo/lib/types';
+import { geoConicConformal, GeoProjection } from 'd3-geo';
 import { FocusEvent, memo, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -43,6 +45,7 @@ export type DataOptions = {
   highlightSelection?: boolean;
   selectedCode?: string;
   tooltipVariables?: Record<string, Record<string, string> | string>;
+  projection?: Projection | (() => GeoProjection);
 };
 
 type OptionalDataConfig<T> = {
@@ -234,7 +237,11 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
 
   const aspectRatio =
     map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
-  const mapProjection = map === 'in' ? 'mercator' : 'mercator';
+  const mapProjection = isDefined(dataOptions.projection)
+    ? dataOptions.projection
+    : map === 'in'
+    ? geoConicConformal
+    : 'mercator';
 
   const annotations = useAccessibilityAnnotations(accessibility);
   const clipPathId = useUniqueId();
