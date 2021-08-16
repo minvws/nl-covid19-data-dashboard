@@ -1,8 +1,11 @@
+import { GmCollectionHospitalNice } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { Box } from '~/components/base';
-import { GmNavigationMap } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { Heading, Text } from '~/components/typography';
+import { gmData } from '~/data/gm';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
@@ -12,6 +15,7 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import { getLastGeneratedDate } from '~/static-props/get-data';
+import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -29,6 +33,16 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
   const metadata = {
     ...siteText.gemeente_index.metadata,
   };
+
+  const data = useMemo(() => {
+    return gmData.map<GmCollectionHospitalNice>(
+      (x) =>
+        ({
+          gmcode: x.gemcode,
+          admissions_on_date_of_reporting: null,
+        } as unknown as GmCollectionHospitalNice)
+    );
+  }, []);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -54,11 +68,29 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             maxHeight={960}
             margin="0 auto"
           >
-            <GmNavigationMap
-              tooltipContent={(context) => (
+            <Choropleth
+              accessibility={{
+                key: 'municipality_navigation_map',
+                features: ['keyboard_choropleth'],
+              }}
+              map="gm"
+              data={data}
+              minHeight={650}
+              dataConfig={{
+                metricProperty: 'admissions_on_date_of_reporting',
+                areaStroke: colors.blue,
+                areaStrokeWidth: 0.5,
+                hoverFill: colors.blue,
+                hoverStrokeWidth: 0.5,
+                noDataFillColor: colors.white,
+              }}
+              dataOptions={{
+                getLink: reverseRouter.gm.ziekenhuisopnames,
+              }}
+              formatTooltip={(context) => (
                 <TooltipContent
-                  title={context.gemnaam}
-                  link={reverseRouter.gm.index(context.gmcode)}
+                  title={context.featureName}
+                  link={reverseRouter.gm.index(context.dataItem.gmcode)}
                 />
               )}
             />

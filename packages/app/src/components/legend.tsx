@@ -1,8 +1,14 @@
 import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { colors } from '~/style/theme';
 
-type LegendShape = 'line' | 'square' | 'circle' | 'dotted-square';
+type LegendShape =
+  | 'line'
+  | 'square'
+  | 'circle'
+  | 'dotted-square'
+  | 'outlined-square';
 type LegendLineStyle = 'solid' | 'dashed';
 
 export type LegendItem = {
@@ -37,6 +43,9 @@ export function Legend({ items }: LegendProps) {
           <Item key={i}>
             {item.label}
             {item.shape === 'square' && <Square color={item.color} />}
+            {item.shape === 'outlined-square' && (
+              <OutlinedSquare color={item.color} />
+            )}
             {item.shape === 'dotted-square' && (
               <DottedSquare color={item.color} />
             )}
@@ -127,6 +136,18 @@ function DottedSquare({ color }: { color: string }) {
     </Shape>
   );
 }
+
+const OutlinedSquare = styled(Shape)(
+  css({
+    top: '3px',
+    width: '15px',
+    height: '15px',
+    borderColor: colors.labelGray,
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderRadius: '2px',
+  })
+);
 
 const Square = styled(Shape)(
   css({

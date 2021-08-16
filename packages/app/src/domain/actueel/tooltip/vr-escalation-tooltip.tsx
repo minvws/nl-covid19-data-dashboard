@@ -1,6 +1,7 @@
-import { EscalationLevels, VrGeoProperties } from '@corona-dashboard/common';
+import { EscalationLevels } from '@corona-dashboard/common';
 import { Box } from '~/components/base';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipContent } from '~/components/choropleth/tooltips';
+import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { EscalationLevelIcon } from '~/components/escalation-level-icon';
 import { Text } from '~/components/typography';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
@@ -9,14 +10,13 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function VrEscalationTooltip({
   context,
-  getLink,
   hideValidFrom = false,
 }: {
-  context: VrGeoProperties & EscalationLevels;
-  getLink?: (code: string) => string;
+  context: TooltipData<EscalationLevels>;
   hideValidFrom?: boolean;
 }) {
-  const level = context.level;
+  const { dataItem, dataOptions } = context;
+  const level = dataItem.level;
 
   const { formatDateFromSeconds, siteText } = useIntl();
 
@@ -26,14 +26,16 @@ export function VrEscalationTooltip({
   const validFromText = replaceVariablesInText(
     siteText.escalatie_niveau.valid_from,
     {
-      validFrom: formatDateFromSeconds(context.valid_from_unix, 'day-month'),
+      validFrom: formatDateFromSeconds(dataItem.valid_from_unix, 'day-month'),
     }
   );
 
   return (
     <TooltipContent
-      title={context.vrname}
-      link={getLink ? getLink(context.vrcode) : undefined}
+      title={context.featureName}
+      link={
+        dataOptions.getLink ? dataOptions.getLink(dataItem.vrcode) : undefined
+      }
     >
       <Box display="flex" alignItems="flex-start" spacingHorizontal={2}>
         {level !== null && <EscalationLevelIcon level={level} />}

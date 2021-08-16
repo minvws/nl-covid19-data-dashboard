@@ -1,11 +1,10 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import { ReactComponent as VaccinatiesIcon } from '~/assets/vaccinaties.svg';
-import { Box } from '~/components/base';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
@@ -40,12 +39,6 @@ import {
 import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
-const scaledVaccineIcon = (
-  <Box p={2}>
-    <VaccinatiesIcon />
-  </Box>
-);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -225,7 +218,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={text.bereidheid_section.title}
             description={text.bereidheid_section.description}
             referenceLink={text.bereidheid_section.reference.href}
-            icon={scaledVaccineIcon}
+            icon={<VaccinatiesIcon />}
             metadata={{
               datumsText: text.bereidheid_datums,
               dateOrRange:
@@ -331,7 +324,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             title={text.stock_and_delivery_section.title}
-            icon={scaledVaccineIcon}
+            icon={<VaccinatiesIcon />}
             description={text.stock_and_delivery_section.description}
             referenceLink={text.stock_and_delivery_section.reference.href}
             metadata={{

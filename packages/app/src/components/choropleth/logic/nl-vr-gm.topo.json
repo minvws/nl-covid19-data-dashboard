@@ -14613,138 +14613,87 @@
         {
           "arcs": [[594, 595, 596, -576, 597, 598, 599, 600]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0518",
-            "gemnaam": "'s-Gravenhage"
-          }
+          "properties": { "code": "GM0518" }
         },
         {
           "arcs": [[839, 840, 841, 842, -282, 843]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0796",
-            "gemnaam": "'s-Hertogenbosch"
-          }
+          "properties": { "code": "GM0796" }
         },
         {
           "arcs": [[-27, -23, 1023, -83, 1024, -74, 1025, 1026]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1680",
-            "gemnaam": "Aa en Hunze"
-          }
+          "properties": { "code": "GM1680" }
         },
         {
           "arcs": [[401, 402, 403, 404]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0358",
-            "gemnaam": "Aalsmeer"
-          }
+          "properties": { "code": "GM0358" }
         },
         {
           "arcs": [[178, 179, 180, 181]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0197",
-            "gemnaam": "Aalten"
-          }
+          "properties": { "code": "GM0197" }
         },
         {
           "arcs": [[35, 36, 37, 38, 39]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0059",
-            "gemnaam": "Achtkarspelen"
-          }
+          "properties": { "code": "GM0059" }
         },
         {
           "arcs": [[543, 544, 545, 546]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0482",
-            "gemnaam": "Alblasserdam"
-          }
+          "properties": { "code": "GM0482" }
         },
         {
           "arcs": [[-663, -559, 673, 674]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0613",
-            "gemnaam": "Albrandswaard"
-          }
+          "properties": { "code": "GM0613" }
         },
         {
           "arcs": [[405, 406, 407, 408, 409, 410, 411, 412, 413, 414]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0361",
-            "gemnaam": "Alkmaar"
-          }
+          "properties": { "code": "GM0361" }
         },
         {
           "arcs": [[95, 96, 97, 98, 99]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0141",
-            "gemnaam": "Almelo"
-          }
+          "properties": { "code": "GM0141" }
         },
         {
           "arcs": [[13, 14, 15, 16, 17, 18, 19]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0034",
-            "gemnaam": "Almere"
-          }
+          "properties": { "code": "GM0034" }
         },
         {
           "arcs": [[547, 548, 549, 550, 551, 552, 553, 554, 555]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0484",
-            "gemnaam": "Alphen aan den Rijn"
-          }
+          "properties": { "code": "GM0484" }
         },
         {
           "arcs": [[-825, -829, 1061, -753, 1062, -783]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1723",
-            "gemnaam": "Alphen-Chaam"
-          }
+          "properties": { "code": "GM1723" }
         },
         {
           "arcs": [[-322, -849, -902, -822, -1060, -579, -602, -588]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1959",
-            "gemnaam": "Altena"
-          }
+          "properties": { "code": "GM1959" }
         },
         {
           "arcs": [[40]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0060",
-            "gemnaam": "Ameland"
-          }
+          "properties": { "code": "GM0060" }
         },
         {
           "arcs": [[-288, -204, 337, 338, 339, 340, 341]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0307",
-            "gemnaam": "Amersfoort"
-          }
+          "properties": { "code": "GM0307" }
         },
         {
           "arcs": [[415, 416, 417, -404, 418, 419]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0362",
-            "gemnaam": "Amstelveen"
-          }
+          "properties": { "code": "GM0362" }
         },
         {
           "arcs": [
@@ -14752,708 +14701,444 @@
             [[425, 426, 427, 428, 429, 430, -420, 431, 432]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0363",
-            "gemnaam": "Amsterdam"
-          }
+          "properties": { "code": "GM0363" }
         },
         {
           "arcs": [[182, 183, 184, 185, 186, 187, 188, 189, 190]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0200",
-            "gemnaam": "Apeldoorn"
-          }
+          "properties": { "code": "GM0200" }
         },
         {
           "arcs": [[191, 192, 193, 194, 195, 196, -186, 197]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0202",
-            "gemnaam": "Arnhem"
-          }
+          "properties": { "code": "GM0202" }
         },
         {
           "arcs": [[73, 74, 75, 76]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0106",
-            "gemnaam": "Assen"
-          }
+          "properties": { "code": "GM0106" }
         },
         {
           "arcs": [[746, 747, 748, 749, 750]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0743",
-            "gemnaam": "Asten"
-          }
+          "properties": { "code": "GM0743" }
         },
         {
           "arcs": [[751, 752], [753]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0744",
-            "gemnaam": "Baarle-Nassau"
-          }
+          "properties": { "code": "GM0744" }
         },
         {
           "arcs": [[-341, 342, 343, 344, 345, 346, 347, 348]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0308",
-            "gemnaam": "Baarn"
-          }
+          "properties": { "code": "GM0308" }
         },
         {
           "arcs": [[556, 557, 558, 559, 560]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0489",
-            "gemnaam": "Barendrecht"
-          }
+          "properties": { "code": "GM0489" }
         },
         {
           "arcs": [[-188, 198, 199, 200, 201, 202, 203, 204, 205, 206]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0203",
-            "gemnaam": "Barneveld"
-          }
+          "properties": { "code": "GM0203" }
         },
         {
           "arcs": [[909, 910, 911, 912]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0888",
-            "gemnaam": "Beek"
-          }
+          "properties": { "code": "GM0888" }
         },
         {
           "arcs": [[-926, -935, -970, -976, -941, -910, -1080, 1114]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1954",
-            "gemnaam": "Beekdaelen"
-          }
+          "properties": { "code": "GM1954" }
         },
         {
           "arcs": [[433, 434, 435, -408, 436]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0370",
-            "gemnaam": "Beemster"
-          }
+          "properties": { "code": "GM0370" }
         },
         {
           "arcs": [[913, 914, 915, 916, 917]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0889",
-            "gemnaam": "Beesel"
-          }
+          "properties": { "code": "GM0889" }
         },
         {
           "arcs": [[1110, -929, -946, -274, -293, -1045, -328]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1945",
-            "gemnaam": "Berg en Dal"
-          }
+          "properties": { "code": "GM1945" }
         },
         {
           "arcs": [[-901, -896, 1063, 1064, -805, -899]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1724",
-            "gemnaam": "Bergeijk"
-          }
+          "properties": { "code": "GM1724" }
         },
         {
           "arcs": [[918, 919, 920, -767, 921, 922]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0893",
-            "gemnaam": "Bergen (L.)"
-          }
+          "properties": { "code": "GM0893" }
         },
         {
           "arcs": [[437, -414, 438, 439, 440, 441]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0373",
-            "gemnaam": "Bergen (NH.)"
-          }
+          "properties": { "code": "GM0373" }
         },
         {
           "arcs": [[754, 755, -720, -730, 756]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0748",
-            "gemnaam": "Bergen op Zoom"
-          }
+          "properties": { "code": "GM0748" }
         },
         {
           "arcs": [[-123, 1076, -987, 1077, -276, -1072]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1859",
-            "gemnaam": "Berkelland"
-          }
+          "properties": { "code": "GM1859" }
         },
         {
           "arcs": [[-1030, -892, 1060, -876, -840, -871]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1721",
-            "gemnaam": "Bernheze"
-          }
+          "properties": { "code": "GM1721" }
         },
         {
           "arcs": [[757, 758, 759, 760, 761]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0753",
-            "gemnaam": "Best"
-          }
+          "properties": { "code": "GM0753" }
         },
         {
           "arcs": [[207, 208, 209, 210, 211]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0209",
-            "gemnaam": "Beuningen"
-          }
+          "properties": { "code": "GM0209" }
         },
         {
           "arcs": [[442, 443, 444, 445]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0375",
-            "gemnaam": "Beverwijk"
-          }
+          "properties": { "code": "GM0375" }
         },
         {
           "arcs": [[-806, -1065, 1065, -1006, -865]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1728",
-            "gemnaam": "Bladel"
-          }
+          "properties": { "code": "GM1728" }
         },
         {
           "arcs": [[446, -364, 447, 448, 449, -16]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0376",
-            "gemnaam": "Blaricum"
-          }
+          "properties": { "code": "GM0376" }
         },
         {
           "arcs": [[450, 451, 452, 453, 454, 455, 456, 457]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0377",
-            "gemnaam": "Bloemendaal"
-          }
+          "properties": { "code": "GM0377" }
         },
         {
           "arcs": [[-685, -380, -648, 1093, -594, -680, -548, -641]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1901",
-            "gemnaam": "Bodegraven-Reeuwijk"
-          }
+          "properties": { "code": "GM1901" }
         },
         {
           "arcs": [[762, 763, 764, 765]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0755",
-            "gemnaam": "Boekel"
-          }
+          "properties": { "code": "GM0755" }
         },
         {
           "arcs": [[1027, -86, -84, -1024, -22]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1681",
-            "gemnaam": "Borger-Odoorn"
-          }
+          "properties": { "code": "GM1681" }
         },
         {
           "arcs": [[100, 101, 102, -97, 103]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0147",
-            "gemnaam": "Borne"
-          }
+          "properties": { "code": "GM0147" }
         },
         {
           "arcs": [[692, 693, 694, 695, 696, 697, 698, 699, 700]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0654",
-            "gemnaam": "Borsele"
-          }
+          "properties": { "code": "GM0654" }
         },
         {
           "arcs": [[766, 767, 768, 769, 770]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0756",
-            "gemnaam": "Boxmeer"
-          }
+          "properties": { "code": "GM0756" }
         },
         {
           "arcs": [[771, 772, -761, 773, 774, 775, 776, 777, 778, 779]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0757",
-            "gemnaam": "Boxtel"
-          }
+          "properties": { "code": "GM0757" }
         },
         {
           "arcs": [[780, 781, 782, 783, 784, 785, 786, 787]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0758",
-            "gemnaam": "Breda"
-          }
+          "properties": { "code": "GM0758" }
         },
         {
           "arcs": [[563, 564, 565, 566]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0501",
-            "gemnaam": "Brielle"
-          }
+          "properties": { "code": "GM0501" }
         },
         {
           "arcs": [
             [-1078, -986, -982, -236, -325, -232, -300, -214, -330, -277]
           ],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1876",
-            "gemnaam": "Bronckhorst"
-          }
+          "properties": { "code": "GM1876" }
         },
         {
           "arcs": [[212, 213, 214, 215, -184, 216]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0213",
-            "gemnaam": "Brummen"
-          }
+          "properties": { "code": "GM0213" }
         },
         {
           "arcs": [[923, -908, 924, 925]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0899",
-            "gemnaam": "Brunssum"
-          }
+          "properties": { "code": "GM0899" }
         },
         {
           "arcs": [[354, 355, 356, 357, 358]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0312",
-            "gemnaam": "Bunnik"
-          }
+          "properties": { "code": "GM0312" }
         },
         {
           "arcs": [[359, -289, -342, -349, 360]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0313",
-            "gemnaam": "Bunschoten"
-          }
+          "properties": { "code": "GM0313" }
         },
         {
           "arcs": [[217, 218, 219, 220, 221, 222, 223]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0214",
-            "gemnaam": "Buren"
-          }
+          "properties": { "code": "GM0214" }
         },
         {
           "arcs": [[567, 568, 569, 570]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0502",
-            "gemnaam": "Capelle aan den IJssel"
-          }
+          "properties": { "code": "GM0502" }
         },
         {
           "arcs": [[458, 459, 460, -440, 461, -412]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0383",
-            "gemnaam": "Castricum"
-          }
+          "properties": { "code": "GM0383" }
         },
         {
           "arcs": [[77, 78, 79, 80, 81, 82, 83]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0109",
-            "gemnaam": "Coevorden"
-          }
+          "properties": { "code": "GM0109" }
         },
         {
           "arcs": [[-880, -948, -973, 1046, -1002]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1706",
-            "gemnaam": "Cranendonck"
-          }
+          "properties": { "code": "GM1706" }
         },
         {
           "arcs": [[-770, 1028, -857, -831, -270, -945, -927]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1684",
-            "gemnaam": "Cuijk"
-          }
+          "properties": { "code": "GM1684" }
         },
         {
           "arcs": [[-222, 224, 225, 226, 227, 228]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0216",
-            "gemnaam": "Culemborg"
-          }
+          "properties": { "code": "GM0216" }
         },
         {
           "arcs": [[104, 105, 106, 107, 108]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0148",
-            "gemnaam": "Dalfsen"
-          }
+          "properties": { "code": "GM0148" }
         },
         {
           "arcs": [[-39, -746, 1081]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1891",
-            "gemnaam": "Dantumadiel"
-          }
+          "properties": { "code": "GM1891" }
         },
         {
           "arcs": [[349, 350, 351, 352, 353, -345]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0310",
-            "gemnaam": "De Bilt"
-          }
+          "properties": { "code": "GM0310" }
         },
         {
           "arcs": [[-72, -1050, -157, 1107, -1090, -53, -48]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1940",
-            "gemnaam": "De Fryske Marren"
-          }
+          "properties": { "code": "GM1940" }
         },
         {
           "arcs": [[-539, 743, -686, -643, -532, -417, -523, -423]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0736",
-            "gemnaam": "De Ronde Venen"
-          }
+          "properties": { "code": "GM0736" }
         },
         {
           "arcs": [[-89, -129, -164, -92, 1030]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1690",
-            "gemnaam": "De Wolden"
-          }
+          "properties": { "code": "GM1690" }
         },
         {
           "arcs": [[571, 572, 573, 574, 575]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0503",
-            "gemnaam": "Delft"
-          }
+          "properties": { "code": "GM0503" }
         },
         {
           "arcs": [[493, 494, 495]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0400",
-            "gemnaam": "Den Helder"
-          }
+          "properties": { "code": "GM0400" }
         },
         {
           "arcs": [[788, 789, -747, 790, 791, 792]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0762",
-            "gemnaam": "Deurne"
-          }
+          "properties": { "code": "GM0762" }
         },
         {
           "arcs": [[109, 110, 111, 112, 113]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0150",
-            "gemnaam": "Deventer"
-          }
+          "properties": { "code": "GM0150" }
         },
         {
           "arcs": [[462, 463, -425, 464, -430]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0384",
-            "gemnaam": "Diemen"
-          }
+          "properties": { "code": "GM0384" }
         },
         {
           "arcs": [[-149, -158, -120, -136, -101, -168, 1073]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1774",
-            "gemnaam": "Dinkelland"
-          }
+          "properties": { "code": "GM1774" }
         },
         {
           "arcs": [[229, 230, 231]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0221",
-            "gemnaam": "Doesburg"
-          }
+          "properties": { "code": "GM0221" }
         },
         {
           "arcs": [[232, 233, 234, 235]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0222",
-            "gemnaam": "Doetinchem"
-          }
+          "properties": { "code": "GM0222" }
         },
         {
           "arcs": [[796, 797, 798, 799, 800, 801]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0766",
-            "gemnaam": "Dongen"
-          }
+          "properties": { "code": "GM0766" }
         },
         {
           "arcs": [[576, 577, 578, 579, 580, 581, 582, 583, 584, 585]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0505",
-            "gemnaam": "Dordrecht"
-          }
+          "properties": { "code": "GM0505" }
         },
         {
           "arcs": [[561, -502, -514, 562]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0498",
-            "gemnaam": "Drechterland"
-          }
+          "properties": { "code": "GM0498" }
         },
         {
           "arcs": [[-821, -869, -788, -1055, -580, 1059]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1719",
-            "gemnaam": "Drimmelen"
-          }
+          "properties": { "code": "GM1719" }
         },
         {
           "arcs": [[[331]], [[-143, 332, 333, -29, 334, 335, -153, 336]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0303",
-            "gemnaam": "Dronten"
-          }
+          "properties": { "code": "GM0303" }
         },
         {
           "arcs": [[-209, 236, 237, 238]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0225",
-            "gemnaam": "Druten"
-          }
+          "properties": { "code": "GM0225" }
         },
         {
           "arcs": [[239, 240, 241]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0226",
-            "gemnaam": "Duiven"
-          }
+          "properties": { "code": "GM0226" }
         },
         {
           "arcs": [[-1008, 1055, 1056, 1057, -995]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1711",
-            "gemnaam": "Echt-Susteren"
-          }
+          "properties": { "code": "GM1711" }
         },
         {
           "arcs": [[465, 466, -434, 467, 468]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0385",
-            "gemnaam": "Edam-Volendam"
-          }
+          "properties": { "code": "GM0385" }
         },
         {
           "arcs": [[-187, -197, 242, 243, 244, 245, 246, -199]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0228",
-            "gemnaam": "Ede"
-          }
+          "properties": { "code": "GM0228" }
         },
         {
           "arcs": [[361, -361, -348, 362, 363]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0317",
-            "gemnaam": "Eemnes"
-          }
+          "properties": { "code": "GM0317" }
         },
         {
           "arcs": [[0, 1, 2, 3, 4]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1979",
-            "gemnaam": "Eemsdelta"
-          }
+          "properties": { "code": "GM1979" }
         },
         {
           "arcs": [[802, 803, 804, 805, 806]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0770",
-            "gemnaam": "Eersel"
-          }
+          "properties": { "code": "GM0770" }
         },
         {
           "arcs": [[-1069, 1094, -938, -975]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1903",
-            "gemnaam": "Eijsden-Margraten"
-          }
+          "properties": { "code": "GM1903" }
         },
         {
           "arcs": [[807, 808, 809, 810, 811, -803, 812, -759, 813]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0772",
-            "gemnaam": "Eindhoven"
-          }
+          "properties": { "code": "GM0772" }
         },
         {
           "arcs": [[247, 248, 249, 250, 251]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0230",
-            "gemnaam": "Elburg"
-          }
+          "properties": { "code": "GM0230" }
         },
         {
           "arcs": [[84, -78, 85, 86]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0114",
-            "gemnaam": "Emmen"
-          }
+          "properties": { "code": "GM0114" }
         },
         {
           "arcs": [[[469, 470, 471, 472]], [[473]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0388",
-            "gemnaam": "Enkhuizen"
-          }
+          "properties": { "code": "GM0388" }
         },
         {
           "arcs": [[114, 115, 116, 117, 118, 119]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0153",
-            "gemnaam": "Enschede"
-          }
+          "properties": { "code": "GM0153" }
         },
         {
           "arcs": [[252, 253, -191, 254, -248, 255, 256]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0232",
-            "gemnaam": "Epe"
-          }
+          "properties": { "code": "GM0232" }
         },
         {
           "arcs": [[-189, -207, 257, 258, 259, 260]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0233",
-            "gemnaam": "Ermelo"
-          }
+          "properties": { "code": "GM0233" }
         },
         {
           "arcs": [[814, 815, 816, 817, -786]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0777",
-            "gemnaam": "Etten-Leur"
-          }
+          "properties": { "code": "GM0777" }
         },
         {
           "arcs": [[818, -801, 819, 820, 821]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0779",
-            "gemnaam": "Geertruidenberg"
-          }
+          "properties": { "code": "GM0779" }
         },
         {
           "arcs": [[-837, -882, -1004, -809, -861]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1771",
-            "gemnaam": "Geldrop-Mierlo"
-          }
+          "properties": { "code": "GM1771" }
         },
         {
           "arcs": [[-966, -792, -835, 996, 997, -764, 998]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1652",
-            "gemnaam": "Gemert-Bakel"
-          }
+          "properties": { "code": "GM1652" }
         },
         {
           "arcs": [[-922, -771, 926, 927, 928, 929]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0907",
-            "gemnaam": "Gennep"
-          }
+          "properties": { "code": "GM0907" }
         },
         {
           "arcs": [[822, 823, 824, -782, 825, -799]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0784",
-            "gemnaam": "Gilze en Rijen"
-          }
+          "properties": { "code": "GM0784" }
         },
         {
           "arcs": [
@@ -15461,252 +15146,159 @@
             [[-607, 1098, 1099, 1100, -1053, 1101, -1015, 1102, -1023, 1103]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM1924",
-            "gemnaam": "Goeree-Overflakkee"
-          }
+          "properties": { "code": "GM1924" }
         },
         {
           "arcs": [[701, 702, 703, -701, 704, 705]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0664",
-            "gemnaam": "Goes"
-          }
+          "properties": { "code": "GM0664" }
         },
         {
           "arcs": [[826, 827, 828, -824, 829]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0785",
-            "gemnaam": "Goirle"
-          }
+          "properties": { "code": "GM0785" }
         },
         {
           "arcs": [[-18, 1108, -506, -501, -540, -421, -464, 1109]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1942",
-            "gemnaam": "Gooise Meren"
-          }
+          "properties": { "code": "GM1942" }
         },
         {
           "arcs": [[586, -323, 587, 588, 589]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0512",
-            "gemnaam": "Gorinchem"
-          }
+          "properties": { "code": "GM0512" }
         },
         {
           "arcs": [[590, 591, 592, 593]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0513",
-            "gemnaam": "Gouda"
-          }
+          "properties": { "code": "GM0513" }
         },
         {
           "arcs": [[830, 831, 832, 833, -318, -271]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0786",
-            "gemnaam": "Grave"
-          }
+          "properties": { "code": "GM0786" }
         },
         {
           "arcs": [[5, 6, 7, 8, 9, 10, 11, 12, -4]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0014",
-            "gemnaam": "Groningen"
-          }
+          "properties": { "code": "GM0014" }
         },
         {
           "arcs": [[-956, 1066, -960, 1067, 1068, -974, -968]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1729",
-            "gemnaam": "Gulpen-Wittem"
-          }
+          "properties": { "code": "GM1729" }
         },
         {
           "arcs": [[120, -118, 121, 122, 123]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0158",
-            "gemnaam": "Haaksbergen"
-          }
+          "properties": { "code": "GM0158" }
         },
         {
           "arcs": [[474, 475, -451, 476]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0392",
-            "gemnaam": "Haarlem"
-          }
+          "properties": { "code": "GM0392" }
         },
         {
           "arcs": [
             [-419, -403, 477, 478, 479, 480, -453, 481, -475, 482, 483, -432]
           ],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0394",
-            "gemnaam": "Haarlemmermeer"
-          }
+          "properties": { "code": "GM0394" }
         },
         {
           "arcs": [[-817, -875, 999, -884, 1000]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1655",
-            "gemnaam": "Halderberge"
-          }
+          "properties": { "code": "GM1655" }
         },
         {
           "arcs": [[124, 125, 126, -109, 127, 128, -88, -80]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0160",
-            "gemnaam": "Hardenberg"
-          }
+          "properties": { "code": "GM0160" }
         },
         {
           "arcs": [[-260, 261, -31, 262, 263]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0243",
-            "gemnaam": "Harderwijk"
-          }
+          "properties": { "code": "GM0243" }
         },
         {
           "arcs": [[-589, 601, -578, 602, 603]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0523",
-            "gemnaam": "Hardinxveld-Giessendam"
-          }
+          "properties": { "code": "GM0523" }
         },
         {
           "arcs": [[41, 42, 43]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0072",
-            "gemnaam": "Harlingen"
-          }
+          "properties": { "code": "GM0072" }
         },
         {
           "arcs": [[264, 265, -140, -177]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0244",
-            "gemnaam": "Hattem"
-          }
+          "properties": { "code": "GM0244" }
         },
         {
           "arcs": [[484, 485, -446, 486, -460]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0396",
-            "gemnaam": "Heemskerk"
-          }
+          "properties": { "code": "GM0396" }
         },
         {
           "arcs": [[-482, -452, -476]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0397",
-            "gemnaam": "Heemstede"
-          }
+          "properties": { "code": "GM0397" }
         },
         {
           "arcs": [[-176, 266, -257, 267, -265]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0246",
-            "gemnaam": "Heerde"
-          }
+          "properties": { "code": "GM0246" }
         },
         {
           "arcs": [[44, 45, 46, 47, 48, 49]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0074",
-            "gemnaam": "Heerenveen"
-          }
+          "properties": { "code": "GM0074" }
         },
         {
           "arcs": [[487, -406, 488, 489, 490, 491, 492]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0398",
-            "gemnaam": "Heerhugowaard"
-          }
+          "properties": { "code": "GM0398" }
         },
         {
           "arcs": [[-907, 930, 931, 932, 933, 934, -925]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0917",
-            "gemnaam": "Heerlen"
-          }
+          "properties": { "code": "GM0917" }
         },
         {
           "arcs": [[1001, 1002, -894, -900, -810, 1003, -881]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1658",
-            "gemnaam": "Heeze-Leende"
-          }
+          "properties": { "code": "GM1658" }
         },
         {
           "arcs": [[-462, -439, -413]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0399",
-            "gemnaam": "Heiloo"
-          }
+          "properties": { "code": "GM0399" }
         },
         {
           "arcs": [[129, 130, 131, 132, 133]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0163",
-            "gemnaam": "Hellendoorn"
-          }
+          "properties": { "code": "GM0163" }
         },
         {
           "arcs": [[-565, 604, 605, 606, 607, 608]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0530",
-            "gemnaam": "Hellevoetsluis"
-          }
+          "properties": { "code": "GM0530" }
         },
         {
           "arcs": [[834, -791, -751, 835, 836, 837, 838]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0794",
-            "gemnaam": "Helmond"
-          }
+          "properties": { "code": "GM0794" }
         },
         {
           "arcs": [[609, 610, 611, -545]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0531",
-            "gemnaam": "Hendrik-Ido-Ambacht"
-          }
+          "properties": { "code": "GM0531" }
         },
         {
           "arcs": [[-119, -121, 134, -102, 135]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0164",
-            "gemnaam": "Hengelo"
-          }
+          "properties": { "code": "GM0164" }
         },
         {
           "arcs": [
@@ -15716,50 +15308,32 @@
             [[1128]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM1966",
-            "gemnaam": "Het Hogeland"
-          }
+          "properties": { "code": "GM1966" }
         },
         {
           "arcs": [[268, 269, 270, 271, 272, 273]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0252",
-            "gemnaam": "Heumen"
-          }
+          "properties": { "code": "GM0252" }
         },
         {
           "arcs": [[-283, -843, 844, 845, 846, 847, 848, -321]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0797",
-            "gemnaam": "Heusden"
-          }
+          "properties": { "code": "GM0797" }
         },
         {
           "arcs": [[-481, 613, 614, -454]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0534",
-            "gemnaam": "Hillegom"
-          }
+          "properties": { "code": "GM0534" }
         },
         {
           "arcs": [[849, 850, 851, 852, -827, 853]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0798",
-            "gemnaam": "Hilvarenbeek"
-          }
+          "properties": { "code": "GM0798" }
         },
         {
           "arcs": [[496, 497, -346, -354, 498, 499, 500]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0402",
-            "gemnaam": "Hilversum"
-          }
+          "properties": { "code": "GM0402" }
         },
         {
           "arcs": [
@@ -15767,412 +15341,259 @@
             [[-558, -692, -584, 1120, -1100, 1121, -1105, -674]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM1963",
-            "gemnaam": "Hoeksche Waard"
-          }
+          "properties": { "code": "GM1963" }
         },
         {
           "arcs": [[-135, -124, 1071, -275, 1072, -172, -98, -103]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1735",
-            "gemnaam": "Hof van Twente"
-          }
+          "properties": { "code": "GM1735" }
         },
         {
           "arcs": [[-517, -522, -491, -526, -528, -494, 1095, -1092, 1096]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1911",
-            "gemnaam": "Hollands Kroon"
-          }
+          "properties": { "code": "GM1911" }
         },
         {
           "arcs": [[-81, 87, 88, 89, 90]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0118",
-            "gemnaam": "Hoogeveen"
-          }
+          "properties": { "code": "GM0118" }
         },
         {
           "arcs": [[501, 502, 503, 504]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0405",
-            "gemnaam": "Hoorn"
-          }
+          "properties": { "code": "GM0405" }
         },
         {
           "arcs": [[-920, -964, 978, -789, -965]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1507",
-            "gemnaam": "Horst aan de Maas"
-          }
+          "properties": { "code": "GM1507" }
         },
         {
           "arcs": [[-358, 364, -228, -227, 365, 366, 367]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0321",
-            "gemnaam": "Houten"
-          }
+          "properties": { "code": "GM0321" }
         },
         {
           "arcs": [[-449, -497, 505, 506]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0406",
-            "gemnaam": "Huizen"
-          }
+          "properties": { "code": "GM0406" }
         },
         {
           "arcs": [[709, 710]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0677",
-            "gemnaam": "Hulst"
-          }
+          "properties": { "code": "GM0677" }
         },
         {
           "arcs": [[-391, 397, 398, -376, -378]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0353",
-            "gemnaam": "IJsselstein"
-          }
+          "properties": { "code": "GM0353" }
         },
         {
           "arcs": [[-534, -642, -555, -632, -984, -478, -402]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1884",
-            "gemnaam": "Kaag en Braassem"
-          }
+          "properties": { "code": "GM1884" }
         },
         {
           "arcs": [[[136]], [[137, 138, 139, 140, 141, 142, 143, 144, 145]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0166",
-            "gemnaam": "Kampen"
-          }
+          "properties": { "code": "GM0166" }
         },
         {
           "arcs": [[711, 712, -693, -704, 713]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0678",
-            "gemnaam": "Kapelle"
-          }
+          "properties": { "code": "GM0678" }
         },
         {
           "arcs": [[615, 616, 617, 618, 619, 620]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0537",
-            "gemnaam": "Katwijk"
-          }
+          "properties": { "code": "GM0537" }
         },
         {
           "arcs": [[-931, -906, 935]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0928",
-            "gemnaam": "Kerkrade"
-          }
+          "properties": { "code": "GM0928" }
         },
         {
           "arcs": [[-515, -504, 987, -468, -437, -407, -488, -493, -521]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1598",
-            "gemnaam": "Koggenland"
-          }
+          "properties": { "code": "GM1598" }
         },
         {
           "arcs": [[621, -569, 622]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0542",
-            "gemnaam": "Krimpen aan den IJssel"
-          }
+          "properties": { "code": "GM0542" }
         },
         {
           "arcs": [[-373, 1106, -655, -623, -568, -1083, -591, -1094, -647]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1931",
-            "gemnaam": "Krimpenerwaard"
-          }
+          "properties": { "code": "GM1931" }
         },
         {
           "arcs": [[-839, -864, 1004, -997]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1659",
-            "gemnaam": "Laarbeek"
-          }
+          "properties": { "code": "GM1659" }
         },
         {
           "arcs": [[-860, -893, 1029, -870, -833]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1685",
-            "gemnaam": "Landerd"
-          }
+          "properties": { "code": "GM1685" }
         },
         {
           "arcs": [[905, 906, 907, 908]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0882",
-            "gemnaam": "Landgraaf"
-          }
+          "properties": { "code": "GM0882" }
         },
         {
           "arcs": [[507, -427, 508, 509, 510]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0415",
-            "gemnaam": "Landsmeer"
-          }
+          "properties": { "code": "GM0415" }
         },
         {
           "arcs": [[-489, -415, -438, 511]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0416",
-            "gemnaam": "Langedijk"
-          }
+          "properties": { "code": "GM0416" }
         },
         {
           "arcs": [[988, -661, 989, -687, -551]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1621",
-            "gemnaam": "Lansingerland"
-          }
+          "properties": { "code": "GM1621" }
         },
         {
           "arcs": [[-363, -347, -498, -448]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0417",
-            "gemnaam": "Laren"
-          }
+          "properties": { "code": "GM0417" }
         },
         {
           "arcs": [[50, 51, -49, 52, 53, 54, 55]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0080",
-            "gemnaam": "Leeuwarden"
-          }
+          "properties": { "code": "GM0080" }
         },
         {
           "arcs": [[623, 624, 625, 626, -618, 627, 628, 629]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0546",
-            "gemnaam": "Leiden"
-          }
+          "properties": { "code": "GM0546" }
         },
         {
           "arcs": [[630, 631, -554, 632, -630]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0547",
-            "gemnaam": "Leiderdorp"
-          }
+          "properties": { "code": "GM0547" }
         },
         {
           "arcs": [[-691, -689, -595, -682, -678, -625]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1916",
-            "gemnaam": "Leidschendam-Voorburg"
-          }
+          "properties": { "code": "GM1916" }
         },
         {
           "arcs": [[-335, -35, -20, 976, 977]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0995",
-            "gemnaam": "Lelystad"
-          }
+          "properties": { "code": "GM0995" }
         },
         {
           "arcs": [[-916, -954, 990, 991, -971, -950, 992]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1640",
-            "gemnaam": "Leudal"
-          }
+          "properties": { "code": "GM1640" }
         },
         {
           "arcs": [[368, 369, -338, -203]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0327",
-            "gemnaam": "Leusden"
-          }
+          "properties": { "code": "GM0327" }
         },
         {
           "arcs": [[-314, -240, -329, 1044, -292, 1045, -194]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1705",
-            "gemnaam": "Lingewaard"
-          }
+          "properties": { "code": "GM1705" }
         },
         {
           "arcs": [[-480, 633, 634, -614]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0553",
-            "gemnaam": "Lisse"
-          }
+          "properties": { "code": "GM0553" }
         },
         {
           "arcs": [[274, 275, 276, 277, 278, -111, 279]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0262",
-            "gemnaam": "Lochem"
-          }
+          "properties": { "code": "GM0262" }
         },
         {
           "arcs": [[854, -797, 855, -847]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0809",
-            "gemnaam": "Loon op Zand"
-          }
+          "properties": { "code": "GM0809" }
         },
         {
           "arcs": [[370, 371, 372, 373, 374, 375]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0331",
-            "gemnaam": "Lopik"
-          }
+          "properties": { "code": "GM0331" }
         },
         {
           "arcs": [[146, -116, 147, 148]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0168",
-            "gemnaam": "Losser"
-          }
+          "properties": { "code": "GM0168" }
         },
         {
           "arcs": [[280, 281, 282, 283, 284, 285]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0263",
-            "gemnaam": "Maasdriel"
-          }
+          "properties": { "code": "GM0263" }
         },
         {
           "arcs": [[-953, 993, 994, 995, -991]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1641",
-            "gemnaam": "Maasgouw"
-          }
+          "properties": { "code": "GM1641" }
         },
         {
           "arcs": [[635, 636, 637, 638]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0556",
-            "gemnaam": "Maassluis"
-          }
+          "properties": { "code": "GM0556" }
         },
         {
           "arcs": [[936, 937, 938, 939]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0935",
-            "gemnaam": "Maastricht"
-          }
+          "properties": { "code": "GM0935" }
         },
         {
           "arcs": [[-473, 512, 513, -505, 514, 515, 516, 517]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0420",
-            "gemnaam": "Medemblik"
-          }
+          "properties": { "code": "GM0420" }
         },
         {
           "arcs": [[-911, 940, 941, -940, 942, 943]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0938",
-            "gemnaam": "Meerssen"
-          }
+          "properties": { "code": "GM0938" }
         },
         {
           "arcs": [
             [-1061, -891, -765, -998, -1005, -863, -883, -762, -773, -877]
           ],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1948",
-            "gemnaam": "Meierijstad"
-          }
+          "properties": { "code": "GM1948" }
         },
         {
           "arcs": [[91, 92, 93, 94]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0119",
-            "gemnaam": "Meppel"
-          }
+          "properties": { "code": "GM0119" }
         },
         {
           "arcs": [[714, 715, -705, -700, 716, 717]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0687",
-            "gemnaam": "Middelburg"
-          }
+          "properties": { "code": "GM0687" }
         },
         {
           "arcs": [[-659, -672, -677, -636, -1075, -669, -574]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1842",
-            "gemnaam": "Midden-Delfland"
-          }
+          "properties": { "code": "GM1842" }
         },
         {
           "arcs": [[-1025, -82, -91, -1043, -57, -1040, -75]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1731",
-            "gemnaam": "Midden-Drenthe"
-          }
+          "properties": { "code": "GM1731" }
         },
         {
           "arcs": [[-1086, -795, -28, -1027, -1070, -6, -3]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1952",
-            "gemnaam": "Midden-Groningen"
-          }
+          "properties": { "code": "GM1952" }
         },
         {
           "arcs": [[-832, 856, 857, 858, 859]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0815",
-            "gemnaam": "Mill en Sint Hubert"
-          }
+          "properties": { "code": "GM0815" }
         },
         {
           "arcs": [
@@ -16180,460 +15601,289 @@
             [[-787, -818, -1001, -887, 1051, 1052, 1053, -582, -581, 1054]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM1709",
-            "gemnaam": "Moerdijk"
-          }
+          "properties": { "code": "GM1709" }
         },
         {
           "arcs": [
             [-1117, -590, -604, -673, -651, -547, -652, -1107, -372, -1119]
           ],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1978",
-            "gemnaam": "Molenlanden"
-          }
+          "properties": { "code": "GM1978" }
         },
         {
           "arcs": [[-981, 1115, -326, -234]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1955",
-            "gemnaam": "Montferland"
-          }
+          "properties": { "code": "GM1955" }
         },
         {
           "arcs": [[376, 377, -375, 378, 379, 380]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0335",
-            "gemnaam": "Montfoort"
-          }
+          "properties": { "code": "GM0335" }
         },
         {
           "arcs": [[-928, 944, -269, 945]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0944",
-            "gemnaam": "Mook en Middelaar"
-          }
+          "properties": { "code": "GM0944" }
         },
         {
           "arcs": [[-1071, -210, -239, -709, -306, -219, -385, -312]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1740",
-            "gemnaam": "Neder-Betuwe"
-          }
+          "properties": { "code": "GM1740" }
         },
         {
           "arcs": [[946, 947, -879, -749, 948, 949]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0946",
-            "gemnaam": "Nederweert"
-          }
+          "properties": { "code": "GM0946" }
         },
         {
           "arcs": [[-367, 400, -398, -390]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0356",
-            "gemnaam": "Nieuwegein"
-          }
+          "properties": { "code": "GM0356" }
         },
         {
           "arcs": [[639, 640, -556, 641, -533, 642]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0569",
-            "gemnaam": "Nieuwkoop"
-          }
+          "properties": { "code": "GM0569" }
         },
         {
           "arcs": [[286, -205, 287, 288, 289, -33, 290]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0267",
-            "gemnaam": "Nijkerk"
-          }
+          "properties": { "code": "GM0267" }
         },
         {
           "arcs": [[291, 292, -273, 293, -212, 294]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0268",
-            "gemnaam": "Nijmegen"
-          }
+          "properties": { "code": "GM0268" }
         },
         {
           "arcs": [[-675, 1104, 1105, -605, -564, -664]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1930",
-            "gemnaam": "Nissewaard"
-          }
+          "properties": { "code": "GM1930" }
         },
         {
           "arcs": [[-1126, 1131, -1130, -40, -1082, -745, -56, -1113, 1132]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1970",
-            "gemnaam": "Noardeast-Fryslân"
-          }
+          "properties": { "code": "GM1970" }
         },
         {
           "arcs": [[-1019, 1031, -702, 1032, -733, 1033, -737, 1034]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1695",
-            "gemnaam": "Noord-Beveland"
-          }
+          "properties": { "code": "GM1695" }
         },
         {
           "arcs": [[1038, -76, 1039, -61, -62, 1040, -11]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1699",
-            "gemnaam": "Noordenveld"
-          }
+          "properties": { "code": "GM1699" }
         },
         {
           "arcs": [[[149, -145]], [[150, 151, 152, 153, 154, 155, 156]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0171",
-            "gemnaam": "Noordoostpolder"
-          }
+          "properties": { "code": "GM0171" }
         },
         {
           "arcs": [[-615, -635, 643, -621, 644, -541, -455]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0575",
-            "gemnaam": "Noordwijk"
-          }
+          "properties": { "code": "GM0575" }
         },
         {
           "arcs": [[-838, 860, -808, 861, 862, 863]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0820",
-            "gemnaam": "Nuenen, Gerwen en Nederwetten"
-          }
+          "properties": { "code": "GM0820" }
         },
         {
           "arcs": [[-255, -190, -261, -264, 330, -249]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0302",
-            "gemnaam": "Nunspeet"
-          }
+          "properties": { "code": "GM0302" }
         },
         {
           "arcs": [[-628, -617, 645]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0579",
-            "gemnaam": "Oegstgeest"
-          }
+          "properties": { "code": "GM0579" }
         },
         {
           "arcs": [[-760, -813, -807, 864, -851, 865, -774]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0823",
-            "gemnaam": "Oirschot"
-          }
+          "properties": { "code": "GM0823" }
         },
         {
           "arcs": [[-779, -778, -777, -776, -775, -866, -850, 866, 867]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0824",
-            "gemnaam": "Oisterwijk"
-          }
+          "properties": { "code": "GM0824" }
         },
         {
           "arcs": [[1083, 1084, -796, 1085, -2]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1895",
-            "gemnaam": "Oldambt"
-          }
+          "properties": { "code": "GM1895" }
         },
         {
           "arcs": [[-266, -268, -256, -252, 295, -141]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0269",
-            "gemnaam": "Oldebroek"
-          }
+          "properties": { "code": "GM0269" }
         },
         {
           "arcs": [[-148, -115, 157]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0173",
-            "gemnaam": "Oldenzaal"
-          }
+          "properties": { "code": "GM0173" }
         },
         {
           "arcs": [[-113, -310, -253, -267, -175, -162]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1773",
-            "gemnaam": "Olst-Wijhe"
-          }
+          "properties": { "code": "GM1773" }
         },
         {
           "arcs": [[158, -133, 159, -105, -127]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0175",
-            "gemnaam": "Ommen"
-          }
+          "properties": { "code": "GM0175" }
         },
         {
           "arcs": [[984, -316, -182, -983, 985, 986]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1586",
-            "gemnaam": "Oost Gelre"
-          }
+          "properties": { "code": "GM1586" }
         },
         {
           "arcs": [[-800, -826, -781, 868, -820]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0826",
-            "gemnaam": "Oosterhout"
-          }
+          "properties": { "code": "GM0826" }
         },
         {
           "arcs": [[56, 57, 58, -46, 59, 60]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0085",
-            "gemnaam": "Ooststellingwerf"
-          }
+          "properties": { "code": "GM0085" }
         },
         {
           "arcs": [[-426, 518, 519, -509]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0431",
-            "gemnaam": "Oostzaan"
-          }
+          "properties": { "code": "GM0431" }
         },
         {
           "arcs": [[520, -492, 521, -516]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0432",
-            "gemnaam": "Opmeer"
-          }
+          "properties": { "code": "GM0432" }
         },
         {
           "arcs": [[61, -60, -45, 62, 63]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0086",
-            "gemnaam": "Opsterland"
-          }
+          "properties": { "code": "GM0086" }
         },
         {
           "arcs": [[-319, -834, 869, 870, -844, -281, -707]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0828",
-            "gemnaam": "Oss"
-          }
+          "properties": { "code": "GM0828" }
         },
         {
           "arcs": [[-181, 979, 980, -233, 981, 982]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1509",
-            "gemnaam": "Oude IJsselstreek"
-          }
+          "properties": { "code": "GM1509" }
         },
         {
           "arcs": [[-424, 522, -416, -431, -465]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0437",
-            "gemnaam": "Ouder-Amstel"
-          }
+          "properties": { "code": "GM0437" }
         },
         {
           "arcs": [[-379, -374, 646, 647]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0589",
-            "gemnaam": "Oudewater"
-          }
+          "properties": { "code": "GM0589" }
         },
         {
           "arcs": [[-195, -1046, -295, -211, 1070, -311, -298]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1734",
-            "gemnaam": "Overbetuwe"
-          }
+          "properties": { "code": "GM1734" }
         },
         {
           "arcs": [[648, -586, 649, -610, -544, 650]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0590",
-            "gemnaam": "Papendrecht"
-          }
+          "properties": { "code": "GM0590" }
         },
         {
           "arcs": [[-963, -917, -993, -949, -748, -790, -979]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1894",
-            "gemnaam": "Peel en Maas"
-          }
+          "properties": { "code": "GM1894" }
         },
         {
           "arcs": [[793, -25, -26, 794, 795]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0765",
-            "gemnaam": "Pekela"
-          }
+          "properties": { "code": "GM0765" }
         },
         {
           "arcs": [[-688, -990, -660, -572, -597]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1926",
-            "gemnaam": "Pijnacker-Nootdorp"
-          }
+          "properties": { "code": "GM1926" }
         },
         {
           "arcs": [[523, -511, 524, -435, -467]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0439",
-            "gemnaam": "Purmerend"
-          }
+          "properties": { "code": "GM0439" }
         },
         {
           "arcs": [[-258, -206, -287, 296]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0273",
-            "gemnaam": "Putten"
-          }
+          "properties": { "code": "GM0273" }
         },
         {
           "arcs": [[-106, -160, -132, 160, -114, 161, 162]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0177",
-            "gemnaam": "Raalte"
-          }
+          "properties": { "code": "GM0177" }
         },
         {
           "arcs": [[718, 719, 720, 721, -712, 722]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0703",
-            "gemnaam": "Reimerswaal"
-          }
+          "properties": { "code": "GM0703" }
         },
         {
           "arcs": [[-196, 297, 298, -243]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0274",
-            "gemnaam": "Renkum"
-          }
+          "properties": { "code": "GM0274" }
         },
         {
           "arcs": [[-247, 381, 382, 383, -304, -200]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0339",
-            "gemnaam": "Renswoude"
-          }
+          "properties": { "code": "GM0339" }
         },
         {
           "arcs": [[1005, 1006, -852]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1667",
-            "gemnaam": "Reusel-De Mierden"
-          }
+          "properties": { "code": "GM1667" }
         },
         {
           "arcs": [[299, -231, 300, 301, -192, 302, -215]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0275",
-            "gemnaam": "Rheden"
-          }
+          "properties": { "code": "GM0275" }
         },
         {
           "arcs": [[-245, -313, 384, -218, 385, 386]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0340",
-            "gemnaam": "Rhenen"
-          }
+          "properties": { "code": "GM0340" }
         },
         {
           "arcs": [[651, -546, -612, 652, -561, 653, 654]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0597",
-            "gemnaam": "Ridderkerk"
-          }
+          "properties": { "code": "GM0597" }
         },
         {
           "arcs": [[-1073, -280, -110, -161, -131, -173]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1742",
-            "gemnaam": "Rijssen-Holten"
-          }
+          "properties": { "code": "GM1742" }
         },
         {
           "arcs": [[-575, 668, 669, -598]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0603",
-            "gemnaam": "Rijswijk"
-          }
+          "properties": { "code": "GM0603" }
         },
         {
           "arcs": [[1007, -994, -952, 1008]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1669",
-            "gemnaam": "Roerdalen"
-          }
+          "properties": { "code": "GM1669" }
         },
         {
           "arcs": [[950, 951, 952, 953, -915]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0957",
-            "gemnaam": "Roermond"
-          }
+          "properties": { "code": "GM0957" }
         },
         {
           "arcs": [[-874, 1009, -903, -755, -885, -1000]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1674",
-            "gemnaam": "Roosendaal"
-          }
+          "properties": { "code": "GM1674" }
         },
         {
           "arcs": [
@@ -16643,58 +15893,37 @@
             ]
           ],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0599",
-            "gemnaam": "Rotterdam"
-          }
+          "properties": { "code": "GM0599" }
         },
         {
           "arcs": [[-198, -185, -216, -303]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0277",
-            "gemnaam": "Rozendaal"
-          }
+          "properties": { "code": "GM0277" }
         },
         {
           "arcs": [[-816, 871, 872, 873, 874]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0840",
-            "gemnaam": "Rucphen"
-          }
+          "properties": { "code": "GM0840" }
         },
         {
           "arcs": [[525, -490, -512, -442, 526, -495, 527]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0441",
-            "gemnaam": "Schagen"
-          }
+          "properties": { "code": "GM0441" }
         },
         {
           "arcs": [[303, 304, -201]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0279",
-            "gemnaam": "Scherpenzeel"
-          }
+          "properties": { "code": "GM0279" }
         },
         {
           "arcs": [[-658, 670, 671]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0606",
-            "gemnaam": "Schiedam"
-          }
+          "properties": { "code": "GM0606" }
         },
         {
           "arcs": [[64]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0088",
-            "gemnaam": "Schiermonnikoog"
-          }
+          "properties": { "code": "GM0088" }
         },
         {
           "arcs": [
@@ -16709,330 +15938,207 @@
             ]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM1676",
-            "gemnaam": "Schouwen-Duiveland"
-          }
+          "properties": { "code": "GM1676" }
         },
         {
           "arcs": [[954, 955, 956, -933]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0965",
-            "gemnaam": "Simpelveld"
-          }
+          "properties": { "code": "GM0965" }
         },
         {
           "arcs": [[-769, -967, -999, -763, -890, -858, -1029]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1702",
-            "gemnaam": "Sint Anthonis"
-          }
+          "properties": { "code": "GM1702" }
         },
         {
           "arcs": [[875, 876, -772, 877, -841]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0845",
-            "gemnaam": "Sint-Michielsgestel"
-          }
+          "properties": { "code": "GM0845" }
         },
         {
           "arcs": [[1078, 1079, -913, -959, 1080, -1057]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1883",
-            "gemnaam": "Sittard-Geleen"
-          }
+          "properties": { "code": "GM1883" }
         },
         {
           "arcs": [[-603, -577, -649, 672]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0610",
-            "gemnaam": "Sliedrecht"
-          }
+          "properties": { "code": "GM0610" }
         },
         {
           "arcs": [[-725, 1058]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1714",
-            "gemnaam": "Sluis"
-          }
+          "properties": { "code": "GM1714" }
         },
         {
           "arcs": [[-63, -50, -52, 65, -37, 66]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0090",
-            "gemnaam": "Smallingerland"
-          }
+          "properties": { "code": "GM0090" }
         },
         {
           "arcs": [[-340, 387, -343]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0342",
-            "gemnaam": "Soest"
-          }
+          "properties": { "code": "GM0342" }
         },
         {
           "arcs": [[-750, 878, 879, 880, 881, -836]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0847",
-            "gemnaam": "Someren"
-          }
+          "properties": { "code": "GM0847" }
         },
         {
           "arcs": [[-862, -814, -758, 882]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0848",
-            "gemnaam": "Son en Breugel"
-          }
+          "properties": { "code": "GM0848" }
         },
         {
           "arcs": [[20, 21, 22, 23, 24]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0037",
-            "gemnaam": "Stadskanaal"
-          }
+          "properties": { "code": "GM0037" }
         },
         {
           "arcs": [[163, -128, -108, 164, 165, 166, -93]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0180",
-            "gemnaam": "Staphorst"
-          }
+          "properties": { "code": "GM0180" }
         },
         {
           "arcs": [[-563, -513, -472, 612]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0532",
-            "gemnaam": "Stede Broec"
-          }
+          "properties": { "code": "GM0532" }
         },
         {
           "arcs": [[883, 884, -757, -729, 885, 886]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0851",
-            "gemnaam": "Steenbergen"
-          }
+          "properties": { "code": "GM0851" }
         },
         {
           "arcs": [[-94, -167, 1047, 1048, -151, 1049, -71, -1044]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1708",
-            "gemnaam": "Steenwijkerland"
-          }
+          "properties": { "code": "GM1708" }
         },
         {
           "arcs": [[-912, -944, 957, 958]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0971",
-            "gemnaam": "Stein"
-          }
+          "properties": { "code": "GM0971" }
         },
         {
           "arcs": [[-1038, -1037, -1036, -352, -393, -684, -744, -538]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1904",
-            "gemnaam": "Stichtse Vecht"
-          }
+          "properties": { "code": "GM1904" }
         },
         {
           "arcs": [[[1087]], [[1088, -54, 1089, 1090, 1091, 1092, -42]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM1900",
-            "gemnaam": "Súdwest-Fryslân"
-          }
+          "properties": { "code": "GM1900" }
         },
         {
           "arcs": [[-710, 723, 724, 725]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0715",
-            "gemnaam": "Terneuzen"
-          }
+          "properties": { "code": "GM0715" }
         },
         {
           "arcs": [[67]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0093",
-            "gemnaam": "Terschelling"
-          }
+          "properties": { "code": "GM0093" }
         },
         {
           "arcs": [[[528]], [[529]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0448",
-            "gemnaam": "Texel"
-          }
+          "properties": { "code": "GM0448" }
         },
         {
           "arcs": [[-479, 983, -631, -629, -646, -616, -644, -634]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1525",
-            "gemnaam": "Teylingen"
-          }
+          "properties": { "code": "GM1525" }
         },
         {
           "arcs": [[726, 727, 728, 729, -719, 730]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0716",
-            "gemnaam": "Tholen"
-          }
+          "properties": { "code": "GM0716" }
         },
         {
           "arcs": [[305, 306, 307, -220]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0281",
-            "gemnaam": "Tiel"
-          }
+          "properties": { "code": "GM0281" }
         },
         {
           "arcs": [[-867, -854, -830, -823, -798, -855, -846, 888]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0855",
-            "gemnaam": "Tilburg"
-          }
+          "properties": { "code": "GM0855" }
         },
         {
           "arcs": [[167, -104, -96, 168, 169]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0183",
-            "gemnaam": "Tubbergen"
-          }
+          "properties": { "code": "GM0183" }
         },
         {
           "arcs": [[1041, -169, -100, -174, -134, -159, -126]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1700",
-            "gemnaam": "Twenterand"
-          }
+          "properties": { "code": "GM1700" }
         },
         {
           "arcs": [[-10, -9, -8, -7, 1069, -1026, -77, -1039]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1730",
-            "gemnaam": "Tynaarlo"
-          }
+          "properties": { "code": "GM1730" }
         },
         {
           "arcs": [[-38, -66, -51, 744, 745]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0737",
-            "gemnaam": "Tytsjerksteradiel"
-          }
+          "properties": { "code": "GM0737" }
         },
         {
           "arcs": [[-859, 889, -766, 890, 891, 892]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0856",
-            "gemnaam": "Uden"
-          }
+          "properties": { "code": "GM0856" }
         },
         {
           "arcs": [[-411, 530, -485, -459]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0450",
-            "gemnaam": "Uitgeest"
-          }
+          "properties": { "code": "GM0450" }
         },
         {
           "arcs": [[531, 532, 533, -405, -418]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0451",
-            "gemnaam": "Uithoorn"
-          }
+          "properties": { "code": "GM0451" }
         },
         {
           "arcs": [[170, -155]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0184",
-            "gemnaam": "Urk"
-          }
+          "properties": { "code": "GM0184" }
         },
         {
           "arcs": [[-351, 388, -359, -368, 389, 390, -377, 391, 392]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0344",
-            "gemnaam": "Utrecht"
-          }
+          "properties": { "code": "GM0344" }
         },
         {
           "arcs": [[-395, -383, -394, -386, -224, -397, -356, -400]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1581",
-            "gemnaam": "Utrechtse Heuvelrug"
-          }
+          "properties": { "code": "GM1581" }
         },
         {
           "arcs": [[959, 960]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0981",
-            "gemnaam": "Vaals"
-          }
+          "properties": { "code": "GM0981" }
         },
         {
           "arcs": [[-969, 973, 974, -937, -942, 975]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0994",
-            "gemnaam": "Valkenburg aan de Geul"
-          }
+          "properties": { "code": "GM0994" }
         },
         {
           "arcs": [[893, 894, 895, 896]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0858",
-            "gemnaam": "Valkenswaard"
-          }
+          "properties": { "code": "GM0858" }
         },
         {
           "arcs": [[25, -24, 26, 27]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0047",
-            "gemnaam": "Veendam"
-          }
+          "properties": { "code": "GM0047" }
         },
         {
           "arcs": [[-246, -387, 393, -382]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0345",
-            "gemnaam": "Veenendaal"
-          }
+          "properties": { "code": "GM0345" }
         },
         {
           "arcs": [
@@ -17041,434 +16147,272 @@
             [[736, 737, 738, 739]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0717",
-            "gemnaam": "Veere"
-          }
+          "properties": { "code": "GM0717" }
         },
         {
           "arcs": [[897, 898, -804, -812]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0861",
-            "gemnaam": "Veldhoven"
-          }
+          "properties": { "code": "GM0861" }
         },
         {
           "arcs": [[534, -483, -477, -458, 535, -444]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0453",
-            "gemnaam": "Velsen"
-          }
+          "properties": { "code": "GM0453" }
         },
         {
           "arcs": [[961, -918, 962, 963, -919]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0983",
-            "gemnaam": "Venlo"
-          }
+          "properties": { "code": "GM0983" }
         },
         {
           "arcs": [[-921, 964, -793, 965, 966, -768]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0984",
-            "gemnaam": "Venray"
-          }
+          "properties": { "code": "GM0984" }
         },
         {
           "arcs": [[-226, -1118, 1118, -371, -399, -401, -366]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1961",
-            "gemnaam": "Vijfheerenlanden"
-          }
+          "properties": { "code": "GM1961" }
         },
         {
           "arcs": [[-657, -637, 676, -671]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0622",
-            "gemnaam": "Vlaardingen"
-          }
+          "properties": { "code": "GM0622" }
         },
         {
           "arcs": [[[68]], [[69]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0096",
-            "gemnaam": "Vlieland"
-          }
+          "properties": { "code": "GM0096" }
         },
         {
           "arcs": [[[740, -695]], [[-697, 741]], [[742, -735, -717, -699]]],
           "type": "MultiPolygon",
-          "properties": {
-            "gemcode": "GM0718",
-            "gemnaam": "Vlissingen"
-          }
+          "properties": { "code": "GM0718" }
         },
         {
           "arcs": [[-957, 967, 968, 969, -934]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0986",
-            "gemnaam": "Voerendaal"
-          }
+          "properties": { "code": "GM0986" }
         },
         {
           "arcs": [[677, 678, -626]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0626",
-            "gemnaam": "Voorschoten"
-          }
+          "properties": { "code": "GM0626" }
         },
         {
           "arcs": [[-112, -279, 308, -217, -183, -254, 309]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0285",
-            "gemnaam": "Voorst"
-          }
+          "properties": { "code": "GM0285" }
         },
         {
           "arcs": [[-878, -780, -868, -889, -845, -842]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0865",
-            "gemnaam": "Vught"
-          }
+          "properties": { "code": "GM0865" }
         },
         {
           "arcs": [[-55, -1089, -44, 1111, 1112]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1949",
-            "gemnaam": "Waadhoeke"
-          }
+          "properties": { "code": "GM1949" }
         },
         {
           "arcs": [[899, -897, 900, -898, -811]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0866",
-            "gemnaam": "Waalre"
-          }
+          "properties": { "code": "GM0866" }
         },
         {
           "arcs": [[-848, -856, -802, -819, 901]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0867",
-            "gemnaam": "Waalwijk"
-          }
+          "properties": { "code": "GM0867" }
         },
         {
           "arcs": [[679, -593, 680, -549]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0627",
-            "gemnaam": "Waddinxveen"
-          }
+          "properties": { "code": "GM0627" }
         },
         {
           "arcs": [[310, 311, 312, -244, -299]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0289",
-            "gemnaam": "Wageningen"
-          }
+          "properties": { "code": "GM0289" }
         },
         {
           "arcs": [[-627, -679, 681, -601, 682, -619]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0629",
-            "gemnaam": "Wassenaar"
-          }
+          "properties": { "code": "GM0629" }
         },
         {
           "arcs": [[-466, 887, -428, -508, -524]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0852",
-            "gemnaam": "Waterland"
-          }
+          "properties": { "code": "GM0852" }
         },
         {
           "arcs": [[970, 971, 972, -947]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0988",
-            "gemnaam": "Weert"
-          }
+          "properties": { "code": "GM0988" }
         },
         {
           "arcs": [[-500, 536, 537, 538, -422, 539]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0457",
-            "gemnaam": "Weesp"
-          }
+          "properties": { "code": "GM0457" }
         },
         {
           "arcs": [[-308, -708, -285, -324, -587, 1116, 1117, -225, -221]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1960",
-            "gemnaam": "West Betuwe"
-          }
+          "properties": { "code": "GM1960" }
         },
         {
           "arcs": [[-238, -320, 706, -286, 707, -307, 708]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0668",
-            "gemnaam": "West Maas en Waal"
-          }
+          "properties": { "code": "GM0668" }
         },
         {
           "arcs": [[-12, -1041, -64, -67, -36, 1129, 1130, -1124]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1969",
-            "gemnaam": "Westerkwartier"
-          }
+          "properties": { "code": "GM1969" }
         },
         {
           "arcs": [[1042, -90, -1031, -95, 1043, -73, -58]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1701",
-            "gemnaam": "Westerveld"
-          }
+          "properties": { "code": "GM1701" }
         },
         {
           "arcs": [[313, -193, -302, 314, -241]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0293",
-            "gemnaam": "Westervoort"
-          }
+          "properties": { "code": "GM0293" }
         },
         {
           "arcs": [[1113, -87, -1028, -21, -794, -1085]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1950",
-            "gemnaam": "Westerwolde"
-          }
+          "properties": { "code": "GM1950" }
         },
         {
           "arcs": [[-670, 1074, -639, -656, -668, -667, 1075, -599]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1783",
-            "gemnaam": "Westland"
-          }
+          "properties": { "code": "GM1783" }
         },
         {
           "arcs": [[70, 71, -47, -59, 72]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0098",
-            "gemnaam": "Weststellingwerf"
-          }
+          "properties": { "code": "GM0098" }
         },
         {
           "arcs": [[-566, -609, 675, -665]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0614",
-            "gemnaam": "Westvoorne"
-          }
+          "properties": { "code": "GM0614" }
         },
         {
           "arcs": [[-99, 171, 172, -130, 173]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0189",
-            "gemnaam": "Wierden"
-          }
+          "properties": { "code": "GM0189" }
         },
         {
           "arcs": [[-294, -272, 317, 318, 319, -237, -208]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0296",
-            "gemnaam": "Wijchen"
-          }
+          "properties": { "code": "GM0296" }
         },
         {
           "arcs": [[-499, -353, 1035, 1036, 1037, -537]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1696",
-            "gemnaam": "Wijdemeren"
-          }
+          "properties": { "code": "GM1696" }
         },
         {
           "arcs": [[-223, -229, -365, -357, 396]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0352",
-            "gemnaam": "Wijk bij Duurstede"
-          }
+          "properties": { "code": "GM0352" }
         },
         {
           "arcs": [[-179, 315, 316]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0294",
-            "gemnaam": "Winterswijk"
-          }
+          "properties": { "code": "GM0294" }
         },
         {
           "arcs": [[902, 903, -721, -756]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0873",
-            "gemnaam": "Woensdrecht"
-          }
+          "properties": { "code": "GM0873" }
         },
         {
           "arcs": [[683, -392, -381, 684, -640, 685]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0632",
-            "gemnaam": "Woerden"
-          }
+          "properties": { "code": "GM0632" }
         },
         {
           "arcs": [[-525, -510, -520, -543, -409, -436]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0880",
-            "gemnaam": "Wormerland"
-          }
+          "properties": { "code": "GM0880" }
         },
         {
           "arcs": [[-384, 394, 395, -369, -202, -305]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0351",
-            "gemnaam": "Woudenberg"
-          }
+          "properties": { "code": "GM0351" }
         },
         {
           "arcs": [[-410, 542, -519, -433, -484, -535, -443, -486, -531]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0479",
-            "gemnaam": "Zaanstad"
-          }
+          "properties": { "code": "GM0479" }
         },
         {
           "arcs": [[-284, 320, 321, 322, 323]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0297",
-            "gemnaam": "Zaltbommel"
-          }
+          "properties": { "code": "GM0297" }
         },
         {
           "arcs": [[540, 541, -456]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0473",
-            "gemnaam": "Zandvoort"
-          }
+          "properties": { "code": "GM0473" }
         },
         {
           "arcs": [[28, 29, 30, 31, 32, 33, -14, 34]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0050",
-            "gemnaam": "Zeewolde"
-          }
+          "properties": { "code": "GM0050" }
         },
         {
           "arcs": [[-388, -339, -370, -396, 399, -355, -389, -350, -344]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0355",
-            "gemnaam": "Zeist"
-          }
+          "properties": { "code": "GM0355" }
         },
         {
           "arcs": [[-230, 324, -235, 325, 326, 327, 328, -242, -315, -301]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0299",
-            "gemnaam": "Zevenaar"
-          }
+          "properties": { "code": "GM0299" }
         },
         {
           "arcs": [[-552, 686, 687, -596, 688, 689]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0637",
-            "gemnaam": "Zoetermeer"
-          }
+          "properties": { "code": "GM0637" }
         },
         {
           "arcs": [[-690, 690, -624, -633, -553]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0638",
-            "gemnaam": "Zoeterwoude"
-          }
+          "properties": { "code": "GM0638" }
         },
         {
           "arcs": [[-592, 1082, -571, -662, -989, -550, -681]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1892",
-            "gemnaam": "Zuidplas"
-          }
+          "properties": { "code": "GM1892" }
         },
         {
           "arcs": [[904, -872, -815, -785]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0879",
-            "gemnaam": "Zundert"
-          }
+          "properties": { "code": "GM0879" }
         },
         {
           "arcs": [[-278, 329, -213, -309]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0301",
-            "gemnaam": "Zutphen"
-          }
+          "properties": { "code": "GM0301" }
         },
         {
           "arcs": [[-178, -138, 1086, -1048, -166]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM1896",
-            "gemnaam": "Zwartewaterland"
-          }
+          "properties": { "code": "GM1896" }
         },
         {
           "arcs": [[-650, -585, 691, -557, -653, -611]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0642",
-            "gemnaam": "Zwijndrecht"
-          }
+          "properties": { "code": "GM0642" }
         },
         {
           "arcs": [[-107, -163, 174, 175, 176, -139, 177, -165]],
           "type": "Polygon",
-          "properties": {
-            "gemcode": "GM0193",
-            "gemnaam": "Zwolle"
-          }
+          "properties": { "code": "GM0193" }
         }
       ]
     },
@@ -17530,7 +16474,8 @@
             [[67]],
             [[1122]]
           ],
-          "type": "MultiPolygon"
+          "type": "MultiPolygon",
+          "properties": { "code": "NLD" }
         }
       ]
     },
@@ -17540,34 +16485,22 @@
         {
           "arcs": [[1212, 1213, -1198, 1214, -1210, -1208]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR13",
-            "vrname": "Amsterdam-Amstelland"
-          }
+          "properties": { "code": "VR13" }
         },
         {
           "arcs": [[1267, 1268, -1262, -1261, -1260, -1259, -1258, -1187]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR21",
-            "vrname": "Brabant-Noord"
-          }
+          "properties": { "code": "VR21" }
         },
         {
           "arcs": [[1269, 1270, -1263, -1269]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR22",
-            "vrname": "Brabant-Zuidoost"
-          }
+          "properties": { "code": "VR22" }
         },
         {
           "arcs": [[-1138, -1137, -1136, -1135, 1157, 1158, -1149]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR03",
-            "vrname": "Drenthe"
-          }
+          "properties": { "code": "VR03" }
         },
         {
           "arcs": [
@@ -17581,10 +16514,7 @@
             ]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR25",
-            "vrname": "Flevoland"
-          }
+          "properties": { "code": "VR25" }
         },
         {
           "arcs": [
@@ -17597,34 +16527,22 @@
             [[1156]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR02",
-            "vrname": "Fryslân"
-          }
+          "properties": { "code": "VR02" }
         },
         {
           "arcs": [[-1173, 1178, 1179, 1180, 1181, 1182, 1183]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR07",
-            "vrname": "Gelderland-Midden"
-          }
+          "properties": { "code": "VR07" }
         },
         {
           "arcs": [[-1180, 1184, 1185, 1186, 1187, 1188, 1189, 1190]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR08",
-            "vrname": "Gelderland-Zuid"
-          }
+          "properties": { "code": "VR08" }
         },
         {
           "arcs": [[1215, 1216, 1217, 1218, -1194, -1193, -1192, -1214, 1219]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR14",
-            "vrname": "Gooi en Vechtstreek"
-          }
+          "properties": { "code": "VR14" }
         },
         {
           "arcs": [
@@ -17634,26 +16552,17 @@
             [[1143]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR01",
-            "vrname": "Groningen"
-          }
+          "properties": { "code": "VR01" }
         },
         {
           "arcs": [[1220, 1221, 1222, 1223, 1224]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR15",
-            "vrname": "Haaglanden"
-          }
+          "properties": { "code": "VR15" }
         },
         {
           "arcs": [[-1215, -1197, 1225, 1226, -1225, 1227, -1211]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR16",
-            "vrname": "Hollands Midden"
-          }
+          "properties": { "code": "VR16" }
         },
         {
           "arcs": [
@@ -17666,34 +16575,22 @@
             ]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR04",
-            "vrname": "IJsselland"
-          }
+          "properties": { "code": "VR04" }
         },
         {
           "arcs": [[-1209, 1209, 1210, 1211, -1203]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR12",
-            "vrname": "Kennemerland"
-          }
+          "properties": { "code": "VR12" }
         },
         {
           "arcs": [[1271, 1272, 1273, -1270, -1268, -1186]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR23",
-            "vrname": "Limburg-Noord"
-          }
+          "properties": { "code": "VR23" }
         },
         {
           "arcs": [[1274, -1273]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR24",
-            "vrname": "Zuid-Limburg"
-          }
+          "properties": { "code": "VR24" }
         },
         {
           "arcs": [
@@ -17707,18 +16604,12 @@
             ]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR20",
-            "vrname": "Midden- en West-Brabant"
-          }
+          "properties": { "code": "VR20" }
         },
         {
           "arcs": [[-1171, 1171, 1172, 1173, 1174, 1175, 1176, 1177, -1163]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR06",
-            "vrname": "Noord- en Oost-Gelderland"
-          }
+          "properties": { "code": "VR06" }
         },
         {
           "arcs": [
@@ -17728,10 +16619,7 @@
             [[1205]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR10",
-            "vrname": "Noord-Holland Noord"
-          }
+          "properties": { "code": "VR10" }
         },
         {
           "arcs": [
@@ -17744,36 +16632,24 @@
             ]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR17",
-            "vrname": "Rotterdam-Rijnmond"
-          }
+          "properties": { "code": "VR17" }
         },
         {
           "arcs": [[1169, 1170, -1162]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR05",
-            "vrname": "Twente"
-          }
+          "properties": { "code": "VR05" }
         },
         {
           "arcs": [
             [1191, 1192, 1193, 1194, -1181, -1191, -1190, 1195, 1196, 1197]
           ],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR09",
-            "vrname": "Utrecht"
-          }
+          "properties": { "code": "VR09" }
         },
         {
           "arcs": [[1206, 1207, 1208, -1202]],
           "type": "Polygon",
-          "properties": {
-            "vrcode": "VR11",
-            "vrname": "Zaanstreek-Waterland"
-          }
+          "properties": { "code": "VR11" }
         },
         {
           "arcs": [
@@ -17785,10 +16661,7 @@
             [[1249, -1236, 1250, 1251, 1252, -1238], [1253], [1254], [1255]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR19",
-            "vrname": "Zeeland"
-          }
+          "properties": { "code": "VR19" }
         },
         {
           "arcs": [
@@ -17796,10 +16669,7 @@
             [[-1189, 1240, 1241, 1242, -1232, 1243, -1230, -1226, -1196]]
           ],
           "type": "MultiPolygon",
-          "properties": {
-            "vrcode": "VR18",
-            "vrname": "Zuid-Holland Zuid"
-          }
+          "properties": { "code": "VR18" }
         }
       ]
     }

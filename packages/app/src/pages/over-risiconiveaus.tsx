@@ -1,4 +1,3 @@
-import { EscalationLevels, VrGeoProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
@@ -6,11 +5,11 @@ import styled from 'styled-components';
 import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
 import { ReactComponent as Calender } from '~/assets/calender.svg';
 import { Box } from '~/components/base';
-import { VrChoropleth } from '~/components/choropleth';
-import { VrEscalationTooltip } from '~/components/choropleth/tooltips';
+import { Choropleth } from '~/components/choropleth';
 import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { Scoreboard } from '~/domain/escalation-level/scoreboard';
 import { selectScoreboardData } from '~/domain/escalation-level/scoreboard/select-scoreboard-data';
 import { Layout } from '~/domain/layout/layout';
@@ -153,16 +152,19 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               minHeight={{ _: '20rem', sm: 0 }}
             >
               <ErrorBoundary>
-                <VrChoropleth
+                <Choropleth
+                  map="vr"
                   accessibility={{ key: 'escalation_levels_choropleth' }}
                   minHeight={200}
-                  data={choropleth.vr}
-                  metricName="escalation_levels"
-                  noDataFillColor={unknownLevelColor}
-                  metricProperty="level"
-                  tooltipContent={(
-                    context: VrGeoProperties & EscalationLevels
-                  ) => <VrEscalationTooltip context={context} hideValidFrom />}
+                  data={choropleth.vr.escalation_levels}
+                  dataConfig={{
+                    metricProperty: 'level',
+                    noDataFillColor: unknownLevelColor,
+                  }}
+                  dataOptions={{}}
+                  formatTooltip={(context) => (
+                    <VrEscalationTooltip context={context} hideValidFrom />
+                  )}
                 />
               </ErrorBoundary>
             </Box>

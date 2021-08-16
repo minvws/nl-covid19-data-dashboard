@@ -205,7 +205,12 @@ export function TimeSeriesChart<
     [timespanAnnotations]
   );
 
-  const seriesList = useSeriesList(values, seriesConfig, cutValuesConfig);
+  const seriesList = useSeriesList(
+    values,
+    seriesConfig,
+    cutValuesConfig,
+    dataOptions
+  );
 
   /**
    * The maximum is calculated over all values, because you don't want the
@@ -427,9 +432,9 @@ export function TimeSeriesChart<
             {highlightZero && (
               <rect
                 x={0}
-                y={yScale(0) - 1}
+                y={yScale(0)}
                 width={bounds.width}
-                height={2}
+                height={1}
                 fill="black"
               />
             )}

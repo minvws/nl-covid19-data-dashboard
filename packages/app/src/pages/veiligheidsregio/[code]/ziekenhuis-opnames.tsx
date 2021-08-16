@@ -1,10 +1,8 @@
-import { GmGeoProperties, GmHospitalNiceValue } from '@corona-dashboard/common';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
-import { GmChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { gmThresholds } from '~/components/choropleth/logic';
-import { GmHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -141,8 +139,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds:
-                gmThresholds.hospital_nice.admissions_on_date_of_reporting,
+              thresholds: thresholds.gm.admissions_on_date_of_reporting,
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             }}
@@ -151,19 +148,22 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <GmChoropleth
+            <Choropleth
+              map="gm"
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              selectedCode={selectedMunicipalCode}
-              highlightSelection={false}
-              data={choropleth.gm}
-              getLink={reverseRouter.gm.ziekenhuisopnames}
-              metricName="hospital_nice"
-              metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={(
-                context: GmGeoProperties & GmHospitalNiceValue
-              ) => <GmHospitalAdmissionsTooltip context={context} />}
+              data={choropleth.gm.hospital_nice}
+              dataConfig={{
+                metricProperty: 'admissions_on_date_of_reporting',
+              }}
+              dataOptions={{
+                selectedCode: selectedMunicipalCode,
+                getLink: reverseRouter.gm.ziekenhuisopnames,
+                tooltipVariables: {
+                  patients: siteText.choropleth_tooltip.patients,
+                },
+              }}
             />
           </ChoroplethTile>
 

@@ -34,7 +34,6 @@ const StyledSkipLinkMenu = styled.nav(
 const SkipLink = styled(Anchor)(
   css({
     position: 'absolute',
-    fontSize: 2,
     fontWeight: 'bold',
     width: 'auto',
     px: 4,

@@ -109,7 +109,6 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
       borderStyle: 'solid',
       borderColor: 'lightGray',
       fontFamily: 'body',
-      fontSize: 2,
       appearance: 'none',
       p: 2,
       pr: x.isClearable ? '2.4rem' : '2rem',

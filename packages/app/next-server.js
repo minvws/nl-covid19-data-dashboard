@@ -29,12 +29,18 @@ if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
   throw new Error('Provide NEXT_PUBLIC_SANITY_PROJECT_ID');
 }
 
-const isProduction = process.env.NODE_ENV === 'production';
-const app = next({ dev: !isProduction });
+const IS_PRODUCTION_BUILD = process.env.NODE_ENV === 'production';
+const IS_DEVELOPMENT_PHASE = process.env.NEXT_PUBLIC_PHASE === 'develop';
+const app = next({ dev: !IS_PRODUCTION_BUILD });
 const handle = app.getRequestHandler();
 
-const PORT = process.env.EXPRESS_PORT || (isProduction ? 8080 : 3000);
+const PORT = process.env.EXPRESS_PORT || (IS_PRODUCTION_BUILD ? 8080 : 3000);
 const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}`;
+
+const STATIC_ASSET_MAX_AGE_IN_SECONDS = 14 * 24 * 60 * 60; // two weeks
+const STATIC_ASSET_HTTP_DATE = new Date(
+  Date.now() + STATIC_ASSET_MAX_AGE_IN_SECONDS * 1000
+).toUTCString();
 
 (async function () {
   await app.prepare();
@@ -93,7 +99,7 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
         req,
         res
       ) {
-        setResponseHeaders(res);
+        setResponseHeaders(res, SIX_MONTHS_IN_SECONDS, false);
         return responseBuffer;
       }),
     })
@@ -115,10 +121,10 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
   /**
    * Set these headers for all non-Sanity-cdn routes
    */
-  server.use(function (req, res) {
+  server.use(function (req, res, tick) {
     const isHtml = req.url.indexOf('.') === -1;
     setResponseHeaders(res, SIX_MONTHS_IN_SECONDS, isHtml);
-    return handle(req, res);
+    tick();
   });
 
   server.get('*', function (req, res) {
@@ -137,14 +143,11 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
     maxAge = SIX_MONTHS_IN_SECONDS,
     noCache = false
   ) {
-    const contentSecurityPolicy = isProduction
-      ? "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'"
-      : '';
+    const contentSecurityPolicy =
+      IS_PRODUCTION_BUILD && !IS_DEVELOPMENT_PHASE
+        ? "default-src 'self' statistiek.rijksoverheid.nl; img-src 'self' statistiek.rijksoverheid.nl data:; style-src 'self' 'unsafe-inline'; script-src 'self' statistiek.rijksoverheid.nl; font-src 'self'"
+        : '';
 
-    res.set(
-      'Cache-control',
-      noCache ? 'no-cache, public' : 'public, no-transform'
-    );
     res.set('Content-Security-Policy', contentSecurityPolicy);
     res.set('Referrer-Policy', 'origin');
     res.set('X-Content-Type-Options', 'nosniff');
@@ -155,6 +158,24 @@ const SANITY_PATH = `${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.
       `max-age=${maxAge}; includeSubdomains; preload`
     );
     res.set('Permissions-Policy', 'interest-cohort=()');
+
+    if (noCache) {
+      /**
+       * HTML pages are only cached shortly by the CDN
+       */
+      res.set('Cache-control', 'no-cache, public');
+    } else {
+      /**
+       * Non-HTML requests are are cached indefinitely and are provided with a hash to be able to cache-bust them.
+       * These are not applied to assets in the public folder. (See headers() in next.config.js for that.)
+       */
+      res.setHeader(
+        'Cache-Control',
+        `public, max-age=${STATIC_ASSET_MAX_AGE_IN_SECONDS}`
+      );
+      res.setHeader('Vary', 'content-type');
+      res.setHeader('Expires', STATIC_ASSET_HTTP_DATE);
+    }
 
     res.removeHeader('via');
     res.removeHeader('X-Powered-By');

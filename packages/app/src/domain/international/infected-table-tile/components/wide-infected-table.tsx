@@ -4,7 +4,7 @@ import { maxBy } from 'lodash';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { inThresholds } from '~/components/choropleth/logic';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
@@ -119,7 +119,7 @@ function TableRow({
   const { formatNumber } = useIntl();
 
   const filterBelow = getFilteredThresholdValues(
-    inThresholds.infected_per_100k_average,
+    thresholds.in.infected_per_100k_average,
     item.infected_per_100k_average
   );
 
