@@ -55,7 +55,7 @@ export function BehaviorLineChartTile({
           values={values}
           seriesConfig={[
             {
-              type: 'line',
+              type: 'gapped-line',
               metricProperty: selectedComplianceValueKey,
               label: chartText.compliance_label,
               shortLabel: chartText.compliance_short_label,
@@ -63,7 +63,7 @@ export function BehaviorLineChartTile({
               color: colors.data.cyan,
             },
             {
-              type: 'line',
+              type: 'gapped-line',
               metricProperty: selectedSupportValueKey,
               label: chartText.support_label,
               shortLabel: chartText.support_short_label,
@@ -71,7 +71,9 @@ export function BehaviorLineChartTile({
               color: colors.data.yellow,
             },
           ]}
-          dataOptions={{ isPercentage: true }}
+          dataOptions={{
+            isPercentage: true,
+          }}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}
         />
