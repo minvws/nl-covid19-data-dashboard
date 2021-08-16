@@ -74,3 +74,5 @@ timestamp,action,key
 2021-07-16T19:48:11.631Z,add,internationaal_varianten.lagere_betrouwbaarheid_uitleg
 2021-07-20T14:24:45.582Z,add,internationaal_varianten.geen_percentage_cijfer_tooltip
 2021-07-20T14:24:46.600Z,add,internationaal_varianten.geen_percentage_cijfer
+2021-08-16T10:44:00.282Z,add,gedrag_common.line_chart.tooltip_witte_gaten_beschrijving,4wy7f8NuwuLne309tI5xhE,__
+2021-08-16T10:44:01.287Z,add,gedrag_common.line_chart.tooltip_witte_gaten_label,DWLUotrm23arH2ViSFggy4,__
