@@ -1,8 +1,8 @@
 import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
-import { Box } from '~/components/base';
+import { isDefined, isPresent } from 'ts-is-present';
+import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
@@ -38,14 +38,11 @@ export function BehaviorLineChartTile({
   const selectedSupportValueKey =
     `${currentId}_support` as keyof NlBehaviorValue;
 
-  const complianceValuesHasGap = useTrimValuesAndFindGap(
+  const complianceValuesHasGap = useDataHasGaps(
     values,
     selectedComplianceValueKey
   );
-  const supportValuesHasGap = useTrimValuesAndFindGap(
-    values,
-    selectedSupportValueKey
-  );
+  const supportValuesHasGap = useDataHasGaps(values, selectedSupportValueKey);
 
   return (
     <ChartTile
@@ -54,7 +51,12 @@ export function BehaviorLineChartTile({
       description={chartText.description}
     >
       <Box spacing={4}>
-        <Box display="flex" alignItems="center" flexWrap="wrap">
+        <Box
+          display="flex"
+          alignItems={{ lg: 'center' }}
+          spacing={{ _: 3, lg: 0 }}
+          flexDirection={{ _: 'column', lg: 'row' }}
+        >
           <Box pr={3}>
             <SelectBehavior
               value={currentId}
@@ -64,15 +66,11 @@ export function BehaviorLineChartTile({
           </Box>
 
           {(complianceValuesHasGap || supportValuesHasGap) && (
-            <Box py={2}>
-              <InlineTooltip
-                content={chartText.tooltip_witte_gaten_beschrijving}
-              >
-                <InlineText fontWeight="bold">
-                  {chartText.tooltip_witte_gaten_label}
-                </InlineText>
-              </InlineTooltip>
-            </Box>
+            <InlineTooltip content={chartText.tooltip_witte_gaten_beschrijving}>
+              <InlineText fontWeight="bold">
+                {chartText.tooltip_witte_gaten_label}
+              </InlineText>
+            </InlineTooltip>
           )}
         </Box>
 
@@ -124,17 +122,17 @@ export function getBehaviorChartOptions<T>(value: T) {
  * Trimm all the null values on the left and the right side of the array.
  * If there are still null values left we can assume there is a gap in the data.
  */
-export function useTrimValuesAndFindGap(
+export function useDataHasGaps(
   values: NlBehaviorValue[] | VrBehaviorValue[],
   key: keyof NlBehaviorValue
 ) {
   return useMemo(() => {
-    const trimmedLeftValues = dropWhile(values, (i) => i[key] === null);
+    const trimmedLeftValues = dropWhile(values, (i) => !isPresent(i[key]));
     const trimmedLeftAndRightValues = dropRightWhile(
       trimmedLeftValues,
-      (i) => i[key] === null
+      (i) => !isPresent(i[key])
     );
 
-    return trimmedLeftAndRightValues.some((i) => i[key] === null);
+    return trimmedLeftAndRightValues.some((i) => !isPresent(i[key]));
   }, [key, values]);
 }
