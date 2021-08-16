@@ -56,7 +56,7 @@ export const getStaticProps = withFeatureNotFoundPage(
         articles?: ArticleSummary[];
       };
     }>((context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       return `{
       "page": ${getInPositiveTestsQuery(context)},
       "highlight": ${createPageArticlesQuery('in_positiveTestsPage', locale)}

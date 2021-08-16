@@ -33,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
     main: { articles: ArticleSummary[] };
     monitor: { articles: ArticleSummary[] };
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
       "main": ${createPageArticlesQuery('deceasedPage', locale)},
       "monitor": ${createPageArticlesQuery(

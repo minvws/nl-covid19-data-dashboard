@@ -44,7 +44,7 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   }),
   createGetContent<OverRisiconiveausData>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `*[_type == 'overRisicoNiveaus']{
       "title": title.${locale},
       "description": {

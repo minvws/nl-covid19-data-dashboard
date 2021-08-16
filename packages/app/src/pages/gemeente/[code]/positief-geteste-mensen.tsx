@@ -58,7 +58,7 @@ export const getStaticProps = createGetStaticProps(
     page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
       "page": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}

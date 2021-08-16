@@ -39,7 +39,7 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('elderlyAtHomePage', locale);
   })
 );

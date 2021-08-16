@@ -41,7 +41,7 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ nursing_home }) => ({ nursing_home }),
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('nursingHomePage', locale);
   })
 );

@@ -14,7 +14,7 @@ import {
   ImageBlock,
   InlineAttachment,
   InlineLink,
-  RichContentImageBlock
+  RichContentImageBlock,
 } from '~/types/cms';
 import { assert } from '~/utils/assert';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
@@ -96,7 +96,7 @@ function InlineAttachmentMark(props: {
 function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   const { mark, children } = props;
 
-  const { locale = 'nl' } = useIntl();
+  const { locale } = useIntl();
 
   if (!mark.href) return <>{children}</>;
 
