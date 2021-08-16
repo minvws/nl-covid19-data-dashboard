@@ -1,63 +1,35 @@
 import { CategoricalBarScaleCategory } from '~/components/categorical-bar-scale';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
+import { getMetricConfig } from '~/metric-config';
 
 export function useEscalationThresholds() {
   const { siteText } = useIntl();
   const levels = siteText.escalatie_niveau.types;
 
-  const positiveTestedEscalationThresholds: CategoricalBarScaleCategory[] = [
-    {
-      name: levels['1'].titel,
-      threshold: 0,
-      color: colors.data.scale.magenta[0],
-    },
-    {
-      name: levels['2'].titel,
-      threshold: 35,
-      color: colors.data.scale.magenta[1],
-    },
-    {
-      name: levels['3'].titel,
-      threshold: 100,
-      color: colors.data.scale.magenta[2],
-    },
-    {
-      name: levels['4'].titel,
-      threshold: 250,
-      color: colors.data.scale.magenta[3],
-    },
-    {
-      threshold: 300,
-    },
-  ];
+  const { categoricalBarScale: positiveTestedConfigCategories } =
+    getMetricConfig('vr', 'tested_overall', 'infected_per_100k');
+
+  const { categoricalBarScale: hospitalAdmissionsConfigCategories } =
+    getMetricConfig('vr', 'hospital_nice_sum', 'admissions_per_1m');
+
+  const positiveTestedEscalationThresholds: CategoricalBarScaleCategory[] =
+    positiveTestedConfigCategories?.categories.length
+      ? positiveTestedConfigCategories?.categories.map((category, index) => ({
+          ...category,
+          name: levels[(index + 1).toString()]?.titel,
+        }))
+      : [];
 
   const hospitalAdmissionsEscalationThresholds: CategoricalBarScaleCategory[] =
-    [
-      {
-        name: levels['1'].titel,
-        threshold: 0,
-        color: colors.data.scale.magenta[0],
-      },
-      {
-        name: levels['2'].titel,
-        threshold: 4,
-        color: colors.data.scale.magenta[1],
-      },
-      {
-        name: levels['3'].titel,
-        threshold: 16,
-        color: colors.data.scale.magenta[2],
-      },
-      {
-        name: levels['4'].titel,
-        threshold: 27,
-        color: colors.data.scale.magenta[3],
-      },
-      {
-        threshold: 30,
-      },
-    ];
+    hospitalAdmissionsConfigCategories?.categories.length
+      ? hospitalAdmissionsConfigCategories?.categories.map(
+          (category, index) => ({
+            ...category,
+            name: levels[(index + 1).toString()]?.titel,
+          })
+        )
+      : [];
+
   return {
     positiveTestedEscalationThresholds,
     hospitalAdmissionsEscalationThresholds,
