@@ -21,7 +21,6 @@ export const inlineCollapsible = {
   preview: {
     select: {
       title: 'title',
-      subtitle: 'content',
     },
   },
 };
