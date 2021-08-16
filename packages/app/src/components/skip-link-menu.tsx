@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { Anchor } from './typography';
 
 export function SkipLinkMenu({
   ariaLabel,
@@ -30,10 +31,9 @@ const StyledSkipLinkMenu = styled.nav(
   })
 );
 
-const SkipLink = styled.a(
+const SkipLink = styled(Anchor)(
   css({
     position: 'absolute',
-    fontSize: 2,
     fontWeight: 'bold',
     width: 'auto',
     px: 4,

@@ -6,35 +6,35 @@ import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { Box } from './base';
 
-export interface SelectOption {
-  metricProperty: string;
+export interface SelectOption<T = string> {
+  metricProperty: T;
   label: string;
   color: string;
   shape?: 'line' | 'circle' | 'square';
 }
 
-interface InteractiveLegendProps {
+interface InteractiveLegendProps<T = string> {
   helpText: string;
-  selectOptions: SelectOption[];
-  selection: string[];
-  onToggleItem: (item: string) => void;
+  selectOptions: SelectOption<T>[];
+  selection: T[];
+  onToggleItem: (item: T) => void;
   onReset?: () => void;
 }
 
-export function InteractiveLegend({
+export function InteractiveLegend<T = string>({
   helpText,
   selectOptions,
   selection,
   onToggleItem,
   onReset,
-}: InteractiveLegendProps) {
+}: InteractiveLegendProps<T>) {
   const { siteText } = useIntl();
 
   const hasSelection = selection.length !== 0;
 
   return (
-    <Box mb={2}>
-      <Text fontSize={1} fontWeight="bold" mb={0} mt={2}>
+    <Box>
+      <Text variant="label1" fontWeight="bold">
         {helpText}
       </Text>
       <Legend>
@@ -44,9 +44,11 @@ export function InteractiveLegend({
             return (
               <Item key={item.label}>
                 <ItemButton
+                  as="button"
+                  variant="button3"
                   onClick={() => onToggleItem(item.metricProperty)}
                   isActive={hasSelection && isSelected}
-                  color={item.color}
+                  borderColor={item.color}
                   data-text={item.label}
                 >
                   {item.label}
@@ -100,11 +102,11 @@ const Item = styled.li(
  * :before to render the colored line on hover/focus
  * :after to widen the button to avoid font-weight bold jumps
  */
-const ItemButton = styled.button<{
+const ItemButton = styled(Text)<{
   isActive: boolean;
-  color: string;
+  borderColor: string;
   text?: string;
-}>(({ isActive, color }) =>
+}>(({ isActive, borderColor }) =>
   css({
     appearance: 'none',
     backgroundColor: 'tileGray',
@@ -113,7 +115,7 @@ const ItemButton = styled.button<{
     pl: asResponsiveArray({ _: 25, md: 30 }),
     py: '3px',
     border: '3px solid',
-    borderColor: isActive ? color : 'transparent',
+    borderColor: isActive ? borderColor : 'transparent',
     fontWeight: isActive ? 'bold' : 'normal',
     fontFamily: 'inherit',
     position: 'relative',
@@ -121,12 +123,11 @@ const ItemButton = styled.button<{
     display: 'inline-flex',
     flexDirection: 'column',
     alignItems: 'center',
-    fontSize: 1,
     justifyContent: 'space-between',
     '&:hover,&:focus': {
       '&:before': {
         content: '""',
-        background: color,
+        background: borderColor,
         height: '3px',
         position: 'absolute',
         left: '-3px',
@@ -201,5 +202,6 @@ const Square = styled.div<{ color: string }>(({ color }) =>
     top: '7px',
     width: '11px',
     height: '11px',
+    borderRadius: '2px',
   })
 );

@@ -1,18 +1,23 @@
-import css from '@styled-system/css';
 import { useCallback, useState } from 'react';
-import styled from 'styled-components/';
 import { isPresent } from 'ts-is-present';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
+import { Flag } from '~/domain/international/flag';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
-import { InternationalLayout } from '~/domain/layout/international-layout';
+import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
+import {
+  getInternationalVariantChartData,
+  getInternationalVariantTableData,
+  VariantChartData,
+  VariantTableData,
+} from '~/domain/variants/static-props';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -30,19 +35,14 @@ import {
   getLastGeneratedDate,
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
-import {
-  getInternationalVariantChartData,
-  VariantChartData,
-} from '~/static-props/variants/get-international-variant-chart-data';
-import { getInternationalVariantTableData } from '~/static-props/variants/get-international-variant-table-data';
-import { VariantTableData } from '~/static-props/variants/get-variant-table-data';
 import { LinkProps } from '~/types/cms';
+
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    () => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    (context) => {
+      const { locale } = context;
       const countryNames = loadJsonFromDataFile<Record<string, string>>(
         `${locale}-country-names.json`,
         'static-json'
@@ -66,8 +66,8 @@ export const getStaticProps = withFeatureNotFoundPage(
         usefulLinks?: LinkProps[];
       };
       highlight: PageArticlesQueryResult;
-    }>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    }>((context) => {
+      const { locale } = context;
       return `{
         "page": *[_type=='in_variantsPage']{
           "usefulLinks": [...pageLinks[]{
@@ -142,7 +142,7 @@ export default function VariantenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <InternationalLayout lastGenerated={lastGenerated}>
+      <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             title={text.titel}
@@ -176,33 +176,33 @@ export default function VariantenPage(
           >
             <Box
               alignSelf="flex-start"
-              mt={3}
               display="flex"
               alignItems={{ _: 'flex-start', md: 'center' }}
               flexDirection={{ _: 'column', md: 'row' }}
+              spacing={{ _: 4, md: 0 }}
+              spacingHorizontal={{ md: 3 }}
             >
               <Select
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
                 icon={
-                  <FlagImage
-                    aria-hidden
-                    src={`/icons/flags/${selectedCountryCode.toLowerCase()}.svg`}
-                    width="16"
-                    height="12"
-                    alt=""
-                  />
+                  <Box ml={1}>
+                    <Flag
+                      countryCode={selectedCountryCode}
+                      width={16}
+                      height={12}
+                    />
+                  </Box>
                 }
               />
+
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
-                <Box ml={{ _: 0, md: 3 }} mt={{ _: 3, md: 0 }}>
-                  <WarningTile
-                    message={text.lagere_betrouwbaarheid}
-                    variant="emphasis"
-                    tooltipText={text.lagere_betrouwbaarheid_uitleg}
-                  />
-                </Box>
+                <WarningTile
+                  message={text.lagere_betrouwbaarheid}
+                  variant="emphasis"
+                  tooltipText={text.lagere_betrouwbaarheid_uitleg}
+                />
               )}
             </Box>
           </VariantsTableTile>
@@ -214,7 +214,7 @@ export default function VariantenPage(
               dataSources: [text.bronnen.rivm],
             }}
           >
-            <Box alignSelf="flex-start" mt={1} mb={2}>
+            <Box alignSelf="flex-start">
               <Select
                 options={countryOptions}
                 onChange={onChange}
@@ -223,14 +223,7 @@ export default function VariantenPage(
             </Box>
           </VariantsStackedAreaTile>
         </TileList>
-      </InternationalLayout>
+      </InLayout>
     </Layout>
   );
 }
-
-export const FlagImage = styled.img(
-  css({
-    display: 'block',
-    ml: 1,
-  })
-);

@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import GetestIcon from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { InlineText } from '~/components/typography';
@@ -11,6 +11,8 @@ import { VrGroup } from './components/vr-group';
 import { VrRow } from './components/vr-row';
 import { scoreboardSortOptions, SortIdentifier } from './logic';
 import { ScoreboardRowData } from './types';
+
+import chevronDownMagentaUrl from '~/assets/chevron-down-magenta.svg';
 
 interface ScoreboardProps {
   rows: ScoreboardRowData[];
@@ -86,6 +88,7 @@ export function Scoreboard({
                   value={sortOption}
                 />
               </SelectSortContainer>
+
               {row.vrData
                 .sort(scoreboardSortOptions[sortOption])
                 .map((vr, index) => (
@@ -118,7 +121,7 @@ const SelectSortContainer = styled(Box)(
     },
     select: {
       fontWeight: 'bold',
-      background: `url('/images/chevron-down-magenta.svg')`,
+      background: `url('${chevronDownMagentaUrl}')`,
       backgroundSize: '14px 14px',
       backgroundRepeat: 'no-repeat, repeat',
       backgroundPosition: 'right 0.5em top 60%, 0 0',
@@ -130,7 +133,7 @@ const SelectSortContainer = styled(Box)(
   })
 );
 
-const Headers = () => {
+function Headers() {
   const { siteText } = useIntl();
 
   return (
@@ -138,7 +141,7 @@ const Headers = () => {
       <Box flex="1" display="flex" flexDirection="column" mb={{ _: 2, sm: 0 }}>
         <Box display="flex" alignItems="center">
           <GetestIcon width="32px" height="32px" style={{ minWidth: '24px' }} />
-          <InlineText fontWeight="bold" fontSize={{ _: 2, sm: '18px' }}>
+          <InlineText fontWeight="bold" variant="body1">
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_positive_tests.title
@@ -146,7 +149,7 @@ const Headers = () => {
           </InlineText>
         </Box>
         <Box>
-          <InlineText fontSize={2}>
+          <InlineText>
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_positive_tests.subtitle
@@ -157,7 +160,7 @@ const Headers = () => {
       <Box flex="1" display="flex" flexDirection="column">
         <Box display="flex" alignItems="center">
           <Ziekenhuis width="32px" height="32px" style={{ minWidth: '24px' }} />
-          <InlineText fontWeight="bold" fontSize={{ _: 2, sm: '18px' }}>
+          <InlineText fontWeight="bold" variant="body1">
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_hospital_admissions.title
@@ -165,7 +168,7 @@ const Headers = () => {
           </InlineText>
         </Box>
         <Box>
-          <InlineText fontSize={2}>
+          <InlineText>
             {
               siteText.over_risiconiveaus.scoreboard.current_level
                 .header_hospital_admissions.subtitle
@@ -175,4 +178,4 @@ const Headers = () => {
       </Box>
     </Box>
   );
-};
+}

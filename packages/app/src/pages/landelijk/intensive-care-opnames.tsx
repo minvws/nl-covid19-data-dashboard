@@ -1,5 +1,5 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import Arts from '~/assets/arts.svg';
+import { ReactComponent as Arts } from '~/assets/arts.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -12,7 +12,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import {
   createElementsQuery,
@@ -42,9 +42,8 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
-
+  }>((context) => {
+    const { locale } = context;
     return `{
       "page": ${createPageArticlesQuery('intensiveCarePage', locale)},
       "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
@@ -75,7 +74,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
@@ -136,7 +135,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                         text.kpi_bedbezetting.description,
                         {
                           percentage: formatPercentage(
-                            bedsLastValue.beds_occupied_covid_percentage
+                            bedsLastValue.beds_occupied_covid_percentage,
+                            { maximumFractionDigits: 1 }
                           ),
                         }
                       )}
@@ -251,7 +251,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

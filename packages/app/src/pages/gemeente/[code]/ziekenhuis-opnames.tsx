@@ -1,18 +1,16 @@
-import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
 import {
   createElementsQuery,
@@ -52,8 +50,8 @@ export const getStaticProps = createGetStaticProps(
   createGetContent<{
     page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
-  }>(() => {
-    const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+  }>((context) => {
+    const { locale } = context;
 
     return `{
       "page": ${createPageArticlesQuery('hospitalPage', locale)},
@@ -95,7 +93,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
@@ -153,23 +151,26 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-              thresholds:
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
+              thresholds: thresholds.gm.admissions_on_date_of_reporting,
             }}
           >
-            <MunicipalityChoropleth
+            <Choropleth
+              map="gm"
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              selectedCode={data.code}
-              data={choropleth.gm}
-              getLink={reverseRouter.gm.ziekenhuisopnames}
-              metricName="hospital_nice"
-              metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <HospitalAdmissionsMunicipalTooltip context={context} />
-              )}
+              data={choropleth.gm.hospital_nice}
+              dataConfig={{
+                metricProperty: 'admissions_on_date_of_reporting',
+              }}
+              dataOptions={{
+                selectedCode: data.code,
+                highlightSelection: true,
+                getLink: reverseRouter.gm.ziekenhuisopnames,
+                tooltipVariables: {
+                  patients: siteText.choropleth_tooltip.patients,
+                },
+              }}
             />
           </ChoroplethTile>
 
@@ -222,7 +223,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

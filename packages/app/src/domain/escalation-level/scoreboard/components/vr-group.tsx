@@ -28,7 +28,7 @@ export function VrGroup(props: VrGroupProps) {
     <>
       <Box color="black" minWidth={{ _: '2rem', sm: '13.5rem', lg: '15.5rem' }}>
         {breakpoints.sm ? (
-          <EscalationLevelInfoLabel level={level} fontSize={3} size="medium" />
+          <EscalationLevelInfoLabel level={level} fontSize={6} size="medium" />
         ) : (
           level !== null && <EscalationLevelIcon level={level} size="medium" />
         )}
@@ -72,7 +72,6 @@ const Header = styled.button<{ open?: boolean }>((props) =>
     border: 'none',
     color: 'blue',
     fontFamily: 'body',
-    fontSize: '1.25rem',
     textAlign: 'left',
     cursor: props.onClick ? 'pointer' : 'default',
     borderBottom: '1px solid',

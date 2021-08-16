@@ -12,6 +12,8 @@ import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useSetLinkTabbability } from './logic';
 
+import chevronDownUrl from '~/assets/chevron-down.svg';
+
 interface CollapsibleButtonProps {
   children: React.ReactNode;
   label: string;
@@ -262,7 +264,7 @@ const Chevron = styled.div<{
 }>((x) =>
   css({
     ml: 2,
-    backgroundImage: 'url("/images/chevron-down.svg")',
+    backgroundImage: `url('${chevronDownUrl}')`,
     backgroundSize: '0.9em 0.5em',
     backgroundPosition: '0 50%',
     backgroundRepeat: 'no-repeat',

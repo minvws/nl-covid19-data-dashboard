@@ -49,8 +49,8 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
 
   return (
     <Box position="relative">
-      <div ref={ref}>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <div ref={ref}>
           <AgeDemographicChart
             accessibility={ageDemographicAccessibility}
             coordinates={coordinates}
@@ -61,22 +61,22 @@ export function AgeDemographic<T extends AgeDemographicDefaultValue>({
             metricProperty={metricProperty}
             text={text}
           />
-        </ErrorBoundary>
-      </div>
+        </div>
 
-      <Tooltip
-        controls="age-demographic-chart"
-        tooltipState={tooltipState}
-        width={AGE_GROUP_TOOLTIP_WIDTH}
-      >
-        {tooltipState.value && (
-          <AgeDemographicTooltipContent
-            value={tooltipState.value}
-            metricProperty={metricProperty}
-            text={text}
-          />
-        )}
-      </Tooltip>
+        <Tooltip
+          controls="age-demographic-chart"
+          tooltipState={tooltipState}
+          width={AGE_GROUP_TOOLTIP_WIDTH}
+        >
+          {tooltipState.value && (
+            <AgeDemographicTooltipContent
+              value={tooltipState.value}
+              metricProperty={metricProperty}
+              text={text}
+            />
+          )}
+        </Tooltip>
+      </ErrorBoundary>
     </Box>
   );
 }

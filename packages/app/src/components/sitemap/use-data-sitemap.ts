@@ -4,14 +4,14 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LinkGroupProps } from './link-group';
 
 export function useDataSitemap(
-  base: 'landelijk' | 'veiligheidsregio' | 'gemeente',
+  base: 'nl' | 'vr' | 'gm',
   code?: string,
   data?: Pick<Nl, 'sewer'> | Pick<Vr, 'sewer'> | Pick<Gm, 'sewer'>
 ): LinkGroupProps[] {
   const { siteText } = useIntl();
   const reverseRouter = useReverseRouter();
 
-  if (base === 'gemeente' && code) {
+  if (base === 'gm' && code) {
     return [
       {
         header: siteText.nationaal_layout.headings.besmettingen,
@@ -47,7 +47,7 @@ export function useDataSitemap(
     ];
   }
 
-  if (base === 'veiligheidsregio' && code) {
+  if (base === 'vr' && code) {
     return [
       {
         header: siteText.nationaal_layout.headings.besmettingen,

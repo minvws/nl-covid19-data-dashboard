@@ -1,4 +1,5 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type FAQuestionAndAnswer = {
   content: RichContentBlock[] | null;
@@ -35,7 +36,6 @@ export interface InlineAttachment {
 }
 
 export type Editorial = Record<string, never> & Article;
-
 export interface Article {
   title: string;
   slug: {
@@ -43,6 +43,7 @@ export interface Article {
     _type: 'slug';
     current: string;
   };
+  categories?: CategoriesTypes[];
   cover: ImageBlock;
   summary: Block;
   intro: RichContentBlock[];

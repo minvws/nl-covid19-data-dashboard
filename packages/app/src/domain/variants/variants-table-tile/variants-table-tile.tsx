@@ -3,13 +3,13 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { ErrorBoundary } from '~/components/error-boundary';
+import { ChartTile } from '~/components/chart-tile';
 import { FullscreenChartTile } from '~/components/fullscreen-chart-tile';
 import { Markdown } from '~/components/markdown';
 import { MetadataProps } from '~/components/metadata';
 import { Heading } from '~/components/typography';
+import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { VariantsTable } from './components/variants-table';
 import { TableText } from './types';
@@ -112,20 +112,16 @@ function VariantsTableTileWithData({
   });
 
   return (
-    <FullscreenChartTile metadata={metadata}>
-      <Heading level={3}>{text.titel}</Heading>
-      <Box maxWidth="maxWidthText">
-        <Markdown content={descriptionText} />
-      </Box>
-
+    <ChartTile
+      metadata={metadata}
+      title={text.titel}
+      description={descriptionText}
+    >
       {children}
-
       <Box overflow="auto" mb={3} mt={4}>
-        <ErrorBoundary>
-          <VariantsTable rows={data} text={text} />
-        </ErrorBoundary>
+        <VariantsTable rows={data} text={text} />
       </Box>
-    </FullscreenChartTile>
+    </ChartTile>
   );
 }
 

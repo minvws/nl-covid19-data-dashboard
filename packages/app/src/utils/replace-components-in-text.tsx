@@ -6,8 +6,7 @@ import { ReactNode, Fragment } from 'react';
  * instead of throwing an error when there's a validation error.
  */
 const shouldValidate =
-  typeof window === 'undefined' ||
-  process.env.NEXT_PUBLIC_PHASE !== 'development';
+  typeof window === 'undefined' || process.env.NEXT_PUBLIC_PHASE !== 'develop';
 
 /**
  * Provided text can be filled with placeholders such as
