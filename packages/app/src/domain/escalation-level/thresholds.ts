@@ -6,28 +6,29 @@ export function useEscalationThresholds() {
   const { siteText } = useIntl();
   const levels = siteText.escalatie_niveau.types;
 
-  const { categoricalBarScale: positiveTestedConfigCategories } =
-    getMetricConfig('vr', 'tested_overall', 'infected_per_100k');
+  const { riskCategories: positiveTestedConfigCategories } = getMetricConfig(
+    'vr',
+    'tested_overall',
+    'infected_per_100k'
+  );
 
-  const { categoricalBarScale: hospitalAdmissionsConfigCategories } =
+  const { riskCategories: hospitalAdmissionsConfigCategories } =
     getMetricConfig('vr', 'hospital_nice_sum', 'admissions_per_1m');
 
   const positiveTestedEscalationThresholds: CategoricalBarScaleCategory[] =
-    positiveTestedConfigCategories?.categories.length
-      ? positiveTestedConfigCategories?.categories.map((category, index) => ({
+    positiveTestedConfigCategories?.length
+      ? positiveTestedConfigCategories?.map((category, index) => ({
           ...category,
           name: levels[(index + 1).toString()]?.titel,
         }))
       : [];
 
   const hospitalAdmissionsEscalationThresholds: CategoricalBarScaleCategory[] =
-    hospitalAdmissionsConfigCategories?.categories.length
-      ? hospitalAdmissionsConfigCategories?.categories.map(
-          (category, index) => ({
-            ...category,
-            name: levels[(index + 1).toString()]?.titel,
-          })
-        )
+    hospitalAdmissionsConfigCategories?.length
+      ? hospitalAdmissionsConfigCategories?.map((category, index) => ({
+          ...category,
+          name: levels[(index + 1).toString()]?.titel,
+        }))
       : [];
 
   return {

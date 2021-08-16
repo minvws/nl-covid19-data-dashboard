@@ -7,7 +7,7 @@ export type MetricConfig = {
   isDecimal?: boolean;
   isPercentage?: boolean;
   barScale?: BarScaleConfig;
-  categoricalBarScale?: CategoricalBarScaleConfig;
+  riskCategories?: { color?: string; threshold: number }[];
 };
 
 type BarScaleConfig = {
@@ -15,8 +15,4 @@ type BarScaleConfig = {
   max: number;
   signaalwaarde: number;
   gradient: { color: string; value: number }[];
-};
-
-type CategoricalBarScaleConfig = {
-  categories: { color?: string; threshold: number }[];
 };
