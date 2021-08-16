@@ -1,5 +1,6 @@
 import { NlBehaviorPerAgeGroup } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -75,19 +76,26 @@ export function BehaviorPerAgeGroup({
               </thead>
               <tbody>
                 {AGE_KEYS.map((age, index) => (
-                  <tr key={index}>
-                    <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
-                    <Cell>
-                      <PercentageBar
-                        color={colors.data.cyan}
-                        amount={complianceValue[age]}
-                      />
-                      <PercentageBar
-                        color={colors.data.yellow}
-                        amount={supportValue[age]}
-                      />
-                    </Cell>
-                  </tr>
+                  <Fragment key={index}>
+                    {supportValue &&
+                      complianceValue &&
+                      isPresent(complianceValue[age]) &&
+                      isPresent(supportValue[age]) && (
+                        <tr>
+                          <Cell>{siteText.gedrag_leeftijden.tabel[age]}</Cell>
+                          <Cell>
+                            <PercentageBar
+                              color={colors.data.cyan}
+                              amount={complianceValue[age]}
+                            />
+                            <PercentageBar
+                              color={colors.data.yellow}
+                              amount={supportValue[age]}
+                            />
+                          </Cell>
+                        </tr>
+                      )}
+                  </Fragment>
                 ))}
               </tbody>
             </StyledTable>
