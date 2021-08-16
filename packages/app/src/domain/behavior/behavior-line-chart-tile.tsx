@@ -2,7 +2,7 @@ import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Box, Spacer } from '~/components/base';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
