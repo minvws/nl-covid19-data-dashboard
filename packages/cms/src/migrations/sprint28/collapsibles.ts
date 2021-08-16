@@ -52,15 +52,16 @@ function selectField(info: SchemaInfo) {
 
   const transaction = client.transaction();
 
-  documents.map(createPatch).forEach((x) => console.dir(x));
-  //.forEach((patchInfo) => transaction.patch(patchInfo.id, patchInfo.patch));
+  documents
+    .map(createPatch)
+    .forEach((patchInfo) => transaction.patch(patchInfo.id, patchInfo.patch));
 
   await transaction.commit();
 })().catch((err) => {
   throw err;
 });
 
-const system = ['_type', '_id'];
+const system = ['_type', '_id', '_createdAt', '_id', '_rev', '_updatedAt'];
 
 function createPatch(document: any) {
   const hasAnyCollapsibles = findCollapsibles(document);
@@ -76,33 +77,46 @@ function createPatch(document: any) {
     if (hasCollapsibles(contentBlock.en)) {
       patch.patch.set = {
         ...patch.patch.set,
-        [x]: contentBlock.en.map((blockItem: any) => {
-          if (blockItem._type === 'collapsible') {
-            return {
-              ...blockItem,
-              _type: 'inlineCollapsible',
-              content: blockItem.content?.en.slice() ?? '',
-              title: blockItem.title?.en ?? '',
-            };
-          }
-          return blockItem;
-        }),
+        [x]: {
+          _type: contentBlock._type,
+          en: contentBlock.en.map((blockItem: any) => {
+            if (blockItem._type === 'collapsible') {
+              return {
+                ...blockItem,
+                _type: 'inlineCollapsible',
+                content: {
+                  _type: 'inlineBlock',
+                  inlineBlockContent: blockItem.content?.en.slice() ?? '',
+                },
+                title: blockItem.title?.en ?? '',
+              };
+            }
+            return blockItem;
+          }),
+        },
       };
     }
     if (hasCollapsibles(contentBlock.nl)) {
       patch.patch.set = {
         ...patch.patch.set,
-        [x]: contentBlock.nl.map((blockItem: any) => {
-          if (blockItem._type === 'collapsible') {
-            return {
-              ...blockItem,
-              _type: 'inlineCollapsible',
-              content: blockItem.content?.nl.slice() ?? '',
-              title: blockItem.title?.nl ?? '',
-            };
-          }
-          return blockItem;
-        }),
+        [x]: {
+          ...(patch.patch.set[x] ?? {}),
+          _type: contentBlock._type,
+          nl: contentBlock.nl.map((blockItem: any) => {
+            if (blockItem._type === 'collapsible') {
+              return {
+                ...blockItem,
+                _type: 'inlineCollapsible',
+                content: {
+                  _type: 'inlineBlock',
+                  inlineBlockContent: blockItem.content?.nl.slice() ?? '',
+                },
+                title: blockItem.title?.nl ?? '',
+              };
+            }
+            return blockItem;
+          }),
+        },
       };
     }
     return patch;
