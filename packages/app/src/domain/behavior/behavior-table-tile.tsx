@@ -344,9 +344,9 @@ function useBehaviorTableData(value: NlBehaviorValue) {
 
         if (
           isPresent(supportPercentage) &&
-          isPresent(supportTrend) &&
+          isDefined(supportTrend) &&
           isPresent(compliancePercentage) &&
-          isPresent(complianceTrend)
+          isDefined(complianceTrend)
         ) {
           return {
             id: x.key,
