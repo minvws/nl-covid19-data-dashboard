@@ -59,37 +59,6 @@ const hospitalAdmissionsThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
-const elderlyAtHomeThresholds: ChoroplethThresholdsValue[] = [
-  {
-    color: colors.data.underReported,
-    threshold: 0,
-  },
-  {
-    color: colors.data.scale.blue[0],
-    threshold: 1,
-  },
-  {
-    color: colors.data.scale.blue[1],
-    threshold: 5,
-  },
-  {
-    color: colors.data.scale.blue[2],
-    threshold: 8,
-  },
-  {
-    color: colors.data.scale.blue[3],
-    threshold: 11,
-  },
-  {
-    color: colors.data.scale.blue[4],
-    threshold: 21,
-  },
-  {
-    color: colors.data.scale.blue[5],
-    threshold: 31,
-  },
-];
-
 const sewerThresholds: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.underReported,
@@ -128,7 +97,6 @@ export const gmThresholds = {
   hospital_nice: {
     admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
   },
-  elderly_at_home: elderlyAtHomeThresholds,
   sewer: {
     average: sewerThresholds,
   },

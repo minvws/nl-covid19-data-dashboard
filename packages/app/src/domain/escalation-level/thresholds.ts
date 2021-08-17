@@ -6,13 +6,10 @@ export function useEscalationThresholds() {
   const { siteText } = useIntl();
   const levels = siteText.escalatie_niveau.types;
 
-  const { riskCategories: positiveTestedConfigCategories } = getMetricConfig(
-    'vr',
-    'tested_overall',
-    'infected_per_100k'
-  );
+  const { riskCategoryThresholds: positiveTestedConfigCategories } =
+    getMetricConfig('vr', 'tested_overall', 'infected_per_100k');
 
-  const { riskCategories: hospitalAdmissionsConfigCategories } =
+  const { riskCategoryThresholds: hospitalAdmissionsConfigCategories } =
     getMetricConfig('vr', 'hospital_nice_sum', 'admissions_per_1m');
 
   const positiveTestedEscalationThresholds: CategoricalBarScaleCategory[] =

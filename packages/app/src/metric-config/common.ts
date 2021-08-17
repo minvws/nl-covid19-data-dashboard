@@ -7,7 +7,8 @@ export type MetricConfig = {
   isDecimal?: boolean;
   isPercentage?: boolean;
   barScale?: BarScaleConfig;
-  riskCategories?: { color?: string; threshold: number }[];
+  riskCategoryThresholds?: { color?: string; threshold: number }[];
+  choroplethThresholds?: { color: string; threshold: number }[];
 };
 
 type BarScaleConfig = {

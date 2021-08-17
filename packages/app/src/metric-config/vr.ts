@@ -31,7 +31,7 @@ export const vr: VrConfig = {
           },
         ],
       },
-      riskCategories: [
+      riskCategoryThresholds: [
         {
           threshold: 0,
           color: colors.data.scale.magenta[0],
@@ -56,7 +56,7 @@ export const vr: VrConfig = {
   },
   hospital_nice_sum: {
     admissions_per_1m: {
-      riskCategories: [
+      riskCategoryThresholds: [
         {
           threshold: 0,
           color: colors.data.scale.magenta[0],
