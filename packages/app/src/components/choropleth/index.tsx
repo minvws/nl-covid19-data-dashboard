@@ -317,6 +317,7 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
         }}
       >
         <svg
+          aria-labelledby={annotations.props.ariaDescribedby}
           role="img"
           width={width}
           viewBox={`0 0 ${width} ${mapHeight}`}
