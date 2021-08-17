@@ -23,18 +23,18 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult,
+  PageArticlesQueryResult
 } from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlPageMetricData,
+  selectNlPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
@@ -102,6 +102,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           )}
           <VaccinePageIntroduction data={data} />
+          
           <PageInformationBlock
             description={content.page.pageDescription}
             metadata={{
@@ -116,6 +117,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
           />
+
           {data.vaccine_coverage && (
             <ChartTile
               title={text.grafiek_gevaccineerd_door_de_tijd_heen.titel}
@@ -176,6 +178,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           )}
+
           {vaccinationPerAgeGroupFeature.isEnabled &&
           vaccine_coverage_per_age_group ? (
             <ChartTile
@@ -194,17 +197,22 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           ) : null}
+
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
           />
+
           <MilestonesView
             title={page.title}
             description={page.description}
             milestones={page.milestones}
             expectedMilestones={page.expectedMilestones}
           />
+
           <VaccineAdministrationsKpiSection data={data} />
+
           <Spacer pb={3} />
+
           <PageInformationBlock
             title={text.bereidheid_section.title}
             description={text.bereidheid_section.description}
@@ -221,6 +229,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [],
             }}
           />
+
           <ChartTile
             title={text.grafiek_draagvlak.titel}
             description={text.grafiek_draagvlak.omschrijving}
@@ -309,6 +318,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ]}
             />
           </ChartTile>
+
           <Spacer pb={3} />
 
           <PageInformationBlock
@@ -324,7 +334,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [],
             }}
           />
+
           <VaccineDeliveryBarChart data={data.vaccine_delivery_per_supplier} />
+
           <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
         </TileList>
       </NlLayout>
