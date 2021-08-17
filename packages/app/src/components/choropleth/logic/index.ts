@@ -1,4 +1,3 @@
-export * from './gm-thresholds';
 export * from './in-thresholds';
 export * from './topology';
 export * from './use-choropleth-color-scale';

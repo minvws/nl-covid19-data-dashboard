@@ -2,7 +2,6 @@ import {
   GmCollectionTestedOverall,
   GmGeoProperties,
 } from '@corona-dashboard/common';
-import { gmThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -11,6 +10,7 @@ import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getMetricConfig } from '~/metric-config';
 
 export function GmPositiveTestedPeopleTooltip({
   context,
@@ -22,7 +22,11 @@ export function GmPositiveTestedPeopleTooltip({
   const text = siteText.common.tooltip;
 
   const subject = siteText.choropleth_tooltip.positive_tested_people;
-  const thresholdValues = gmThresholds.tested_overall.infected_per_100k;
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'gm',
+    'tested_overall',
+    'infected_per_100k'
+  );
 
   const { gemnaam, infected_per_100k, infected } = context;
 
@@ -33,7 +37,7 @@ export function GmPositiveTestedPeopleTooltip({
     >
       <TooltipSubject
         subject={subject}
-        thresholdValues={thresholdValues}
+        thresholdValues={choroplethThresholds}
         filterBelow={infected_per_100k}
       >
         <InlineText fontWeight="bold">

@@ -2,6 +2,7 @@ import { get } from 'lodash';
 import { MetricConfig } from './common';
 import { nl } from './nl';
 import { vr } from './vr';
+import { gm } from './gm';
 
 /**
  * This configuration declares properties about data to be used by various
@@ -20,6 +21,7 @@ export type DataScope = 'nl' | 'vr' | 'gm';
 const metricConfig = {
   nl,
   vr,
+  gm,
 } as const;
 
 export function getMetricConfig(

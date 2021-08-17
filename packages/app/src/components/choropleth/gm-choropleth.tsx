@@ -9,6 +9,7 @@ import { ReactNode, useCallback, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import { colors } from '~/style/theme';
 import { DataProps } from '~/types/attributes';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -18,9 +19,7 @@ import {
 } from '~/utils/use-accessibility-annotations';
 import { Choropleth, HoverPathLink, Path } from './components';
 import {
-  getDataThresholds,
   gmGeo,
-  gmThresholds,
   nlGeo,
   useChoroplethColorScale,
   useChoroplethDataDescription,
@@ -92,8 +91,8 @@ export function GmChoropleth<T, K extends GmCollectionMetricName>(
 
   const filteredMunicipalGeo = useBoundingBoxMunicipalities(vrcode);
 
-  const thresholdValues = getDataThresholds(
-    gmThresholds,
+  const { choroplethThresholds: thresholdValues = [] } = getMetricConfig(
+    'gm',
     metricName,
     metricProperty
   );

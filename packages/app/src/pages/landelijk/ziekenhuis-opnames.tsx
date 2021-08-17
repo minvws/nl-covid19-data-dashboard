@@ -11,7 +11,7 @@ import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { GmChoropleth, VrChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { gmThresholds, vrThresholds } from '~/components/choropleth/logic';
+import { vrThresholds } from '~/components/choropleth/logic';
 import {
   GmHospitalAdmissionsTooltip,
   VrHospitalAdmissionsTooltip,
@@ -28,6 +28,7 @@ import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-grou
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -83,6 +84,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const underReportedRange = getBoundaryDateStartUnix(
     dataHospitalNice.values,
     4
+  );
+
+  const { choroplethThresholds: gmChoroplethThresholds = [] } = getMetricConfig(
+    'gm',
+    'hospital_nice',
+    'admissions_on_date_of_reporting'
   );
 
   const bedsLastValue = getLastFilledValue(data.hospital_lcps);
@@ -164,7 +171,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               thresholds:
                 selectedMap === 'gm'
-                  ? gmThresholds.hospital_nice.admissions_on_date_of_reporting
+                  ? gmChoroplethThresholds
                   : vrThresholds.hospital_nice.admissions_on_date_of_reporting,
               title: text.chloropleth_legenda.titel,
             }}

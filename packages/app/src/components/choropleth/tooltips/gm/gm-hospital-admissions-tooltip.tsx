@@ -1,5 +1,4 @@
 import { GmGeoProperties, GmHospitalNiceValue } from '@corona-dashboard/common';
-import { gmThresholds } from '~/components/choropleth/logic';
 import {
   TooltipContent,
   TooltipSubject,
@@ -7,6 +6,7 @@ import {
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getMetricConfig } from '~/metric-config';
 
 export function GmHospitalAdmissionsTooltip({
   context,
@@ -16,8 +16,12 @@ export function GmHospitalAdmissionsTooltip({
   const intl = useIntl();
   const reverseRouter = useReverseRouter();
   const subject = intl.siteText.choropleth_tooltip.hospital_admissions;
-  const thresholdValues =
-    gmThresholds.hospital_nice.admissions_on_date_of_reporting;
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'gm',
+    'hospital_nice',
+    'admissions_on_date_of_reporting'
+  );
 
   const { siteText, formatNumber } = useIntl();
 
@@ -28,7 +32,7 @@ export function GmHospitalAdmissionsTooltip({
     >
       <TooltipSubject
         subject={subject}
-        thresholdValues={thresholdValues}
+        thresholdValues={choroplethThresholds}
         filterBelow={context.admissions_on_date_of_reporting}
       >
         <InlineText fontWeight="bold">

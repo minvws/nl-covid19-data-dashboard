@@ -3,7 +3,6 @@ import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
-import { gmThresholds } from '~/components/choropleth/logic';
 import { GmHospitalAdmissionsTooltip } from '~/components/choropleth/tooltips';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -14,6 +13,7 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -81,6 +81,12 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
   const underReportedRange = getBoundaryDateStartUnix(
     data.hospital_nice.values,
     4
+  );
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'gm',
+    'hospital_nice',
+    'admissions_on_date_of_reporting'
   );
 
   const metadata = {
@@ -153,8 +159,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
-              thresholds:
-                gmThresholds.hospital_nice.admissions_on_date_of_reporting,
+              thresholds: choroplethThresholds,
             }}
           >
             <GmChoropleth
