@@ -42,7 +42,7 @@ export function RichContent({
         );
         return (
           <ContentWrapper>
-            {PortableText.defaultSerializers.types.block(props)}
+            {PortableText.defaultSerializers.types.inlineBlock(props)}
           </ContentWrapper>
         );
       },
