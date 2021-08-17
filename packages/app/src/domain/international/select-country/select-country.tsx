@@ -37,6 +37,11 @@ export function SelectCountry({
   const [isOpen, setIsOpen] = useState(false);
 
   /**
+   * Tracking when the mouse
+   */
+  const [isMouseDown, setIsMouseDown] = useState(false);
+
+  /**
    * The currently selected item, we need to save this so we can always fall back to this country.
    */
   const currentOption = options.filter((item) => item.value === value)[0];
@@ -97,7 +102,7 @@ export function SelectCountry({
   const prefixId = `select_country_${uniqueId}`;
 
   return (
-    <Box position="relative" ref={containerRef}>
+    <Box position="relative">
       <SelectCountryInput
         prefixId={prefixId}
         currentOption={currentOption}
@@ -107,14 +112,18 @@ export function SelectCountry({
         setInputValue={setInputValue}
         handleOnClose={handleOnClose}
         handleOnFocus={handleOnFocus}
+        isMouseDown={isMouseDown}
       />
 
       <OrderedList
+        ref={containerRef}
         id={`${prefixId}_list`}
         tabIndex={-1}
         role="listbox"
         aria-labelledby={prefixId}
         isOpen={isOpen}
+        onMouseDown={() => setIsMouseDown(true)}
+        onMouseUp={() => setIsMouseDown(false)}
         /**
          * If the dropdown is open set the aria-activedescendant to the highlighted country.
          * When closed reset it to the current selected country.
@@ -141,6 +150,7 @@ export function SelectCountry({
                     ref={hasFocus ? focusRef : null}
                     hasFocus={hasFocus}
                     onClick={() => handleOnClick(item)}
+                    onMouseDown={() => handleOnClick(item)}
                     onMouseEnter={() => handleOnMouseEnter(index)}
                   >
                     <img

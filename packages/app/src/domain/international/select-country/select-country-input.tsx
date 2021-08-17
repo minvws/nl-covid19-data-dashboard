@@ -18,6 +18,7 @@ interface SelectCountryInputType {
   inputRef: RefObject<HTMLInputElement>;
   handleOnClose: () => void;
   handleOnFocus: () => void;
+  isMouseDown: boolean;
 }
 
 export function SelectCountryInput({
@@ -29,6 +30,7 @@ export function SelectCountryInput({
   prefixId,
   handleOnFocus,
   inputRef,
+  isMouseDown,
 }: SelectCountryInputType) {
   const { siteText } = useIntl();
 
@@ -36,7 +38,12 @@ export function SelectCountryInput({
    * A small timeout due the fact that otherwise the onClick event fires later than the onBlur.
    * Resulting that the click won't work without the timeout.
    */
-  const handleOnBlur = () => setTimeout(() => handleOnClose(), 100);
+  const handleOnBlur = () => {
+    if (isMouseDown) return;
+    setTimeout(() => {
+      handleOnClose();
+    }, 100);
+  };
 
   return (
     <Box position="relative" minWidth="14rem">
@@ -137,6 +144,8 @@ const IconContainer = styled.span<{ align: 'left' | 'right' }>((x) =>
 
 const Input = styled.input(
   css({
+    appearance: 'none',
+    boxShadow: 'none',
     display: 'inline-block',
 
     width: '100%',
