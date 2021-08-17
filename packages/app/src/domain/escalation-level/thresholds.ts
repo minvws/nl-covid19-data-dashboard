@@ -16,7 +16,7 @@ export function useEscalationThresholds() {
     positiveTestedConfigCategories?.length
       ? positiveTestedConfigCategories?.map((category, index) => ({
           ...category,
-          name: levels[(index + 1).toString()]?.titel,
+          name: levels[index + 1]?.titel,
         }))
       : [];
 
@@ -24,7 +24,7 @@ export function useEscalationThresholds() {
     hospitalAdmissionsConfigCategories?.length
       ? hospitalAdmissionsConfigCategories?.map((category, index) => ({
           ...category,
-          name: levels[(index + 1).toString()]?.titel,
+          name: levels[index + 1]?.titel,
         }))
       : [];
 
