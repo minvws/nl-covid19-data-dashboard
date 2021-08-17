@@ -38,7 +38,7 @@ export function RichContent({
       inlineBlock: (props: unknown) => {
         assert(
           PortableText.defaultSerializers.types?.inlineBlock,
-          'PortableText needs to provide a serializer for block content'
+          'PortableText needs to provide a serializer for inlineBlock content'
         );
         return (
           <ContentWrapper>
