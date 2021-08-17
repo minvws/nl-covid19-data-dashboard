@@ -27,7 +27,9 @@ export function EuropeChoroplethTile(props: EuropeChoroplethTileProps) {
 
   return (
     <ChartTile metadata={metadata} title={title} description={description}>
-      {children}
+      <Box borderWidth="1px" borderColor="border" borderStyle="solid">
+        {children}
+      </Box>
       {legendaComponent && (
         <Box display="flex" justifyContent="flex-start">
           {legendaComponent}

@@ -61,7 +61,7 @@ export function Metadata({
          * should be separate components.
          */
         <Box as="footer" mt={3} mb={mb || { _: 0, sm: -3 }} gridArea="metadata">
-          <Text color="annotation" variant="label2">
+          <Text color="annotation" variant="label1">
             {datumsText && Array.isArray(date) ? (
               replaceVariablesInText(datumsText, {
                 weekStart: formatDateFromSeconds(date[0], 'weekday-medium'),

@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { ReactComponent as Gelijk } from '~/assets/gelijk.svg';
 import { ReactComponent as PijlOmhoog } from '~/assets/pijl-omhoog.svg';
 import { ReactComponent as PijlOmlaag } from '~/assets/pijl-omlaag.svg';
-import { BehaviorTrendType } from '../logic/behavior-types';
+import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
+import { BehaviorTrendType } from '../logic/behavior-types';
 
 interface BehaviorTrendProps {
-  trend: BehaviorTrendType | undefined;
+  trend: BehaviorTrendType | null;
   color?: string;
 }
 
@@ -31,9 +32,6 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
   const { siteText } = useIntl();
   const commonText = siteText.gedrag_common;
 
-  if (trend === undefined) {
-    return <>-</>;
-  }
   if (trend === 'up') {
     return (
       <Trend color={color}>
@@ -50,10 +48,13 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
       </Trend>
     );
   }
-  return (
-    <Trend color={colors.data.neutral}>
-      <Gelijk />
-      {commonText.basisregels.trend_gelijk}
-    </Trend>
-  );
+  if (trend === 'equal') {
+    return (
+      <Trend color={colors.data.neutral}>
+        <Gelijk />
+        {commonText.basisregels.trend_gelijk}
+      </Trend>
+    );
+  }
+  return <Box paddingLeft={`calc(12px + 0.25rem)`}>–</Box>;
 }

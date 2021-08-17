@@ -32,7 +32,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('deceasedPage', locale);
   })
 );

@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
-import { inThresholds } from '~/components/choropleth/logic';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
@@ -90,7 +90,7 @@ function ItemRow({
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
   const filterBelow = getFilteredThresholdValues(
-    inThresholds.infected_per_100k_average,
+    thresholds.in.infected_per_100k_average,
     item.infected_per_100k_average
   );
 

@@ -7,9 +7,7 @@ import {
   useRef,
 } from 'react';
 import { isDefined } from 'ts-is-present';
-import { GmChoropleth } from '~/components/choropleth/gm-choropleth';
-import { InChoropleth } from '~/components/choropleth/in-choropleth';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { StackedChart } from '~/components/stacked-chart';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 
@@ -34,26 +32,12 @@ relevantComponentProps.set(
   ])
 );
 relevantComponentProps.set(
-  VrChoropleth,
-  keyCheck<FunctionComponentProps<typeof VrChoropleth>>([
+  Choropleth,
+  keyCheck<FunctionComponentProps<typeof Choropleth>>([
+    'map',
     'data',
-    'metricName',
-    'metricProperty',
-  ])
-);
-relevantComponentProps.set(
-  GmChoropleth,
-  keyCheck<FunctionComponentProps<typeof GmChoropleth>>([
-    'data',
-    'metricName',
-    'metricProperty',
-  ])
-);
-relevantComponentProps.set(
-  InChoropleth,
-  keyCheck<FunctionComponentProps<typeof InChoropleth>>([
-    'data',
-    'metricProperty',
+    'dataConfig',
+    'dataOptions',
   ])
 );
 relevantComponentProps.set(

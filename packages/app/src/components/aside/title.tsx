@@ -63,13 +63,13 @@ function Icon({ children }: { children: ReactNode }) {
       justifyContent="center"
       alignItems="center"
       padding={0}
-      marginRight={0}
+      mr={0}
+      mt="-3px"
       css={css({
         width: '2.5rem',
         height: '2.5rem',
-        '& svg': {
-          width: '2.5rem',
-          height: '2.5rem',
+        svg: {
+          height: '2.25rem',
         },
       })}
     >

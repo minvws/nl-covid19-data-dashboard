@@ -1,13 +1,8 @@
-import {
-  GmCollectionTestedOverall,
-  GmGeoProperties,
-} from '@corona-dashboard/common';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
-import { GmChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { getMetricConfig } from '~/metric-config';
-import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -63,7 +58,7 @@ export const getStaticProps = createGetStaticProps(
     page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
       "page": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
@@ -263,18 +258,20 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <GmChoropleth
+            <Choropleth
+              map="gm"
               accessibility={{
                 key: 'confirmed_cases_choropleth',
               }}
-              selectedCode={data.code}
-              data={choropleth.gm}
-              getLink={reverseRouter.gm.positiefGetesteMensen}
-              metricName="tested_overall"
-              metricProperty="infected_per_100k"
-              tooltipContent={(
-                context: GmGeoProperties & GmCollectionTestedOverall
-              ) => <GmPositiveTestedPeopleTooltip context={context} />}
+              data={choropleth.gm.tested_overall}
+              dataConfig={{
+                metricProperty: 'infected_per_100k',
+              }}
+              dataOptions={{
+                selectedCode: data.code,
+                highlightSelection: true,
+                getLink: reverseRouter.gm.positiefGetesteMensen,
+              }}
             />
           </ChoroplethTile>
         </TileList>

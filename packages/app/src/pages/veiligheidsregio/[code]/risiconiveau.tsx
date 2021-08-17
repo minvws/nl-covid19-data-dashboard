@@ -56,7 +56,7 @@ export const getStaticProps = createGetStaticProps(
     'tested_overall_sum'
   ),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('escalationLevelPage', locale);
   })
 );
@@ -375,9 +375,14 @@ function ListItem({
           alignItems="center"
           minWidth="26px"
           width={26}
-          height={18}
-          mt="2px"
+          height={26}
           mr={2}
+          mt="-0.2rem"
+          css={css({
+            svg: {
+              height: 26,
+            },
+          })}
         >
           {icon}
         </Box>

@@ -577,6 +577,8 @@ export interface NlBehaviorPerAgeGroup {
   sneeze_cough_elbow_support: NlBehaviorPerAgeGroupValue;
   wash_hands_compliance: NlBehaviorPerAgeGroupValue;
   wash_hands_support: NlBehaviorPerAgeGroupValue;
+  work_from_home_compliance: NlBehaviorPerAgeGroupValue;
+  work_from_home_support: NlBehaviorPerAgeGroupValue;
   date_of_insertion_unix: number;
   date_start_unix: number;
   date_end_unix: number;

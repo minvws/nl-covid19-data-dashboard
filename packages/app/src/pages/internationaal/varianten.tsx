@@ -42,7 +42,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     (context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       const countryNames = loadJsonFromDataFile<Record<string, string>>(
         `${locale}-country-names.json`,
         'static-json'
@@ -67,7 +67,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       };
       highlight: PageArticlesQueryResult;
     }>((context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       return `{
         "page": *[_type=='in_variantsPage']{
           "usefulLinks": [...pageLinks[]{

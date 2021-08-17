@@ -2,13 +2,13 @@ import { ReactNode } from 'react';
 import { ReactComponent as Stopwatch } from '~/assets/stopwatch.svg';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
-import { vrThresholds } from '~/components/choropleth/logic';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/types';
 import { assert } from '~/utils/assert';
+import { thresholds } from './choropleth/logic/thresholds';
 
-const escalationThresholds = vrThresholds.escalation_levels.level;
+const escalationThresholds = thresholds.vr.level;
 
 interface RiskLevelIndicatorProps {
   title: string;

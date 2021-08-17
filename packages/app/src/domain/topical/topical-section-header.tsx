@@ -79,7 +79,7 @@ export function TopicalSectionHeader({
         </Box>
 
         {lastGenerated && (
-          <InlineText color="bodyLight">
+          <InlineText variant="label1" color="bodyLight">
             {replaceComponentsInText(text.common_actueel.laatst_bijgewerkt, {
               date: <RelativeDate dateInSeconds={lastGenerated} />,
               time: formatDateFromSeconds(lastGenerated, 'time'),

@@ -17,8 +17,7 @@ import { IsTouchDeviceContextProvider } from '~/utils/use-is-touch-device';
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const router = useRouter();
-
-  const { locale = 'nl' } = useRouter();
+  const { locale = 'nl' } = router;
 
   const [text, toggleHotReloadButton, dataset] = useLokalizeText(
     locale as LanguageKey

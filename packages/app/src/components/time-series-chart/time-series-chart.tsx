@@ -205,7 +205,12 @@ export function TimeSeriesChart<
     [timespanAnnotations]
   );
 
-  const seriesList = useSeriesList(values, seriesConfig, cutValuesConfig);
+  const seriesList = useSeriesList(
+    values,
+    seriesConfig,
+    cutValuesConfig,
+    dataOptions
+  );
 
   /**
    * The maximum is calculated over all values, because you don't want the

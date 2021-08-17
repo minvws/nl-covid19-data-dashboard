@@ -47,6 +47,7 @@ const hiddenDocTypes = [
   'timeSeries',
   'timelineEvent',
   'contact',
+  'figureExplanationItem',
 ];
 
 export default () =>
