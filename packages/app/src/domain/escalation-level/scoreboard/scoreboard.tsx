@@ -12,6 +12,8 @@ import { VrRow } from './components/vr-row';
 import { scoreboardSortOptions, SortIdentifier } from './logic';
 import { ScoreboardRowData } from './types';
 
+import chevronDownMagentaUrl from '~/assets/chevron-down-magenta.svg';
+
 interface ScoreboardProps {
   rows: ScoreboardRowData[];
   maxHospitalAdmissionsPerMillion: number;
@@ -119,7 +121,7 @@ const SelectSortContainer = styled(Box)(
     },
     select: {
       fontWeight: 'bold',
-      background: `url('/images/chevron-down-magenta.svg')`,
+      background: `url('${chevronDownMagentaUrl}')`,
       backgroundSize: '14px 14px',
       backgroundRepeat: 'no-repeat, repeat',
       backgroundPosition: 'right 0.5em top 60%, 0 0',

@@ -57,7 +57,7 @@ export const getStaticProps = createGetStaticProps(
     ggd: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
 
     const query = `{
       "main": ${createPageArticlesQuery('positiveTestsPage', locale)},

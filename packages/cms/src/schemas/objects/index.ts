@@ -1,5 +1,5 @@
 export * from './collapsible';
-export * from './line-chart';
+export * from './inline-block';
+export * from './inline-collapsible';
 export * from './link';
 export * from './milestone';
-export * from './title-description-block';

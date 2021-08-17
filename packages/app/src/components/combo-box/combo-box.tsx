@@ -16,6 +16,8 @@ import { assert } from '~/utils/assert';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useThrottle } from '~/utils/use-throttle';
 
+import searchUrl from '~/assets/search.svg';
+
 type TOption = {
   displayName?: string;
   name: string;
@@ -142,7 +144,7 @@ const ComboBoxStyles = createGlobalStyle`
 
 [data-reach-combobox]::after {
   content: '';
-  background-image: url('/images/search.svg');
+  background-image: url('${searchUrl}');
   background-size: 1.5em 1.5em;
   height: 1.5em;
   width: 1.5em;

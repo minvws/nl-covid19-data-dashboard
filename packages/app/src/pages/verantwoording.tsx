@@ -27,7 +27,7 @@ interface VerantwoordingData {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<VerantwoordingData>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `*[_type == 'cijferVerantwoording']{
       ...,
       "description": {

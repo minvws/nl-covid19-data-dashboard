@@ -66,18 +66,19 @@ export function getLastGeneratedDate() {
 }
 
 export function createGetContent<T>(
-  queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
+  queryOrQueryGetter:
+    | string
+    | ((context: GetStaticPropsContext & { locale: string }) => string)
 ) {
   return async (context: GetStaticPropsContext) => {
+    const { locale = 'nl' } = context;
     const client = await getClient();
     const query =
       typeof queryOrQueryGetter === 'function'
-        ? queryOrQueryGetter(context)
+        ? queryOrQueryGetter({ locale, ...context })
         : queryOrQueryGetter;
 
     const rawContent = (await client.fetch<T>(query)) ?? {};
-
-    const { locale = 'nl' } = context;
 
     // this function call will mutate `rawContent`
     await replaceReferencesInContent(rawContent, client);

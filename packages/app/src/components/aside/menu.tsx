@@ -11,6 +11,8 @@ import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { AsideTitle } from './title';
 
+import chevronUrl from '~/assets/chevron.svg';
+
 type Url = UrlObject | string;
 
 export function Menu({
@@ -227,7 +229,7 @@ const StyledAnchor = styled(Anchor)<{ isActive: boolean; isButton?: boolean }>(
         content: x.isActive
           ? 'none'
           : asResponsiveArray({ _: 'none', xs: undefined }),
-        backgroundImage: `url('/images/chevron.svg')`,
+        backgroundImage: `url('${chevronUrl}')`,
         // match aspect ratio of chevron.svg
         backgroundSize: '0.6em 1.2em',
         height: '1.2em',

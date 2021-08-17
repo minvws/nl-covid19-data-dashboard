@@ -40,7 +40,7 @@ export const getStaticProps = createGetStaticProps(
     'code'
   ),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
   })
 );

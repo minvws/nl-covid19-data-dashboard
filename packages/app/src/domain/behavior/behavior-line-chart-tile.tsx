@@ -1,9 +1,13 @@
 import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
-import { isDefined } from 'ts-is-present';
+import { dropRightWhile, dropWhile } from 'lodash';
+import { useMemo } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { SelectBehavior } from './components/select-behavior';
@@ -11,7 +15,6 @@ import {
   BehaviorIdentifier,
   behaviorIdentifiers,
 } from './logic/behavior-types';
-
 interface BehaviorLineChartTileProps {
   values: NlBehaviorValue[] | VrBehaviorValue[];
   metadata: MetadataProps;
@@ -35,6 +38,12 @@ export function BehaviorLineChartTile({
   const selectedSupportValueKey =
     `${currentId}_support` as keyof NlBehaviorValue;
 
+  const complianceValuesHasGap = useDataHasGaps(
+    values,
+    selectedComplianceValueKey
+  );
+  const supportValuesHasGap = useDataHasGaps(values, selectedSupportValueKey);
+
   return (
     <ChartTile
       title={chartText.title}
@@ -42,11 +51,28 @@ export function BehaviorLineChartTile({
       description={chartText.description}
     >
       <Box spacing={4}>
-        <SelectBehavior
-          value={currentId}
-          onChange={setCurrentId}
-          options={behaviorOptions}
-        />
+        <Box
+          display="flex"
+          alignItems={{ lg: 'center' }}
+          spacing={{ _: 3, lg: 0 }}
+          flexDirection={{ _: 'column', lg: 'row' }}
+        >
+          <Box pr={3}>
+            <SelectBehavior
+              value={currentId}
+              onChange={setCurrentId}
+              options={behaviorOptions}
+            />
+          </Box>
+
+          {(complianceValuesHasGap || supportValuesHasGap) && (
+            <InlineTooltip content={chartText.tooltip_witte_gaten_beschrijving}>
+              <InlineText fontWeight="bold">
+                {chartText.tooltip_witte_gaten_label}
+              </InlineText>
+            </InlineTooltip>
+          )}
+        </Box>
 
         <TimeSeriesChart
           accessibility={{
@@ -55,7 +81,7 @@ export function BehaviorLineChartTile({
           values={values}
           seriesConfig={[
             {
-              type: 'line',
+              type: 'gapped-line',
               metricProperty: selectedComplianceValueKey,
               label: chartText.compliance_label,
               shortLabel: chartText.compliance_short_label,
@@ -63,7 +89,7 @@ export function BehaviorLineChartTile({
               color: colors.data.cyan,
             },
             {
-              type: 'line',
+              type: 'gapped-line',
               metricProperty: selectedSupportValueKey,
               label: chartText.support_label,
               shortLabel: chartText.support_short_label,
@@ -71,7 +97,9 @@ export function BehaviorLineChartTile({
               color: colors.data.yellow,
             },
           ]}
-          dataOptions={{ isPercentage: true }}
+          dataOptions={{
+            isPercentage: true,
+          }}
           numGridLines={2}
           tickValues={[0, 25, 50, 75, 100]}
         />
@@ -88,4 +116,23 @@ export function getBehaviorChartOptions<T>(value: T) {
       }
     })
     .filter(isDefined);
+}
+
+/**
+ * Trimm all the null values on the left and the right side of the array.
+ * If there are still null values left we can assume there is a gap in the data.
+ */
+export function useDataHasGaps(
+  values: NlBehaviorValue[] | VrBehaviorValue[],
+  key: keyof NlBehaviorValue
+) {
+  return useMemo(() => {
+    const trimmedLeftValues = dropWhile(values, (i) => !isPresent(i[key]));
+    const trimmedLeftAndRightValues = dropRightWhile(
+      trimmedLeftValues,
+      (i) => !isPresent(i[key])
+    );
+
+    return trimmedLeftAndRightValues.some((i) => !isPresent(i[key]));
+  }, [key, values]);
 }
