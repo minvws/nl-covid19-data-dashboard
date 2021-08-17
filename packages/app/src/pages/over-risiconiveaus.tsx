@@ -66,26 +66,6 @@ export const getStaticProps = createGetStaticProps(
           {
             ...,
             "asset": asset->,
-
-            "content": {
-              "_type": "localeCollapsible",
-              "${locale}": [
-                ...content.${locale}[]{
-                  ...,
-                  "asset": asset->,
-
-                  "content": {
-                    "_type": "localeCollapsible",
-                    "${locale}": [
-                      ...content.${locale}[]{
-                        ...,
-                        "asset": asset->
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
            },
         ]
       },

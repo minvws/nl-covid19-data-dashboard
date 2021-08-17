@@ -13,6 +13,13 @@ export type CollapsibleList = {
   group: string;
 };
 
+export type InlineCollapsibleList = {
+  content: {
+    inlineBlockContent: RichContentBlock[] | null;
+  };
+  title: string;
+  group: string;
+};
 export interface SanityFileProps {
   assetId: string;
   extension: string;
