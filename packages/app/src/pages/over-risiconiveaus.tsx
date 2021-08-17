@@ -284,7 +284,6 @@ function ListItem({
         <Box
           display="flex"
           alignItems="center"
-          minWidth="28px"
           width={28}
           height={18}
           mt="2px"
