@@ -66,26 +66,6 @@ export const getStaticProps = createGetStaticProps(
           {
             ...,
             "asset": asset->,
-
-            "content": {
-              "_type": "localeCollapsible",
-              "${locale}": [
-                ...content.${locale}[]{
-                  ...,
-                  "asset": asset->,
-
-                  "content": {
-                    "_type": "localeCollapsible",
-                    "${locale}": [
-                      ...content.${locale}[]{
-                        ...,
-                        "asset": asset->
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
            },
         ]
       },
@@ -108,6 +88,8 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
   const lastValue = scoreboardRows.find((x) => x.vrData.length)?.vrData[0].data;
 
   const unknownLevelColor = useEscalationColor(null);
+
+  console.dir(content.riskLevelExplanations);
 
   return (
     <Layout
