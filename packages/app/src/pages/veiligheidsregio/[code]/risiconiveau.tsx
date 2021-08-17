@@ -373,14 +373,13 @@ function ListItem({
         <Box
           display="flex"
           alignItems="center"
-          minWidth="26px"
-          width={26}
-          height={26}
+          width={28}
+          height={28}
           mr={2}
           mt="-0.2rem"
           css={css({
             svg: {
-              height: 26,
+              height: 28,
             },
           })}
         >
