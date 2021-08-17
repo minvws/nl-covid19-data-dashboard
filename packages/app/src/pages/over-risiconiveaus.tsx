@@ -89,8 +89,6 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
 
   const unknownLevelColor = useEscalationColor(null);
 
-  console.dir(content.riskLevelExplanations);
-
   return (
     <Layout
       {...siteText.over_risiconiveaus_metadata}
