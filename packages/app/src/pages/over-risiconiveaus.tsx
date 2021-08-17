@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
-import { ReactComponent as Calender } from '~/assets/calender.svg';
+import { ReactComponent as Calendar } from '~/assets/calendar.svg';
 import { Box } from '~/components/base';
 import { Choropleth } from '~/components/choropleth';
 import { RichContent } from '~/components/cms/rich-content';
@@ -181,7 +181,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                     siteText.over_risiconiveaus.scoreboard.current_level
                       .last_determined
                   }
-                  icon={<Calender />}
+                  icon={<Calendar />}
                   date={lastValue.last_determined_unix}
                 />
                 <ListItem
@@ -200,7 +200,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                     siteText.over_risiconiveaus.scoreboard.current_level
                       .next_determined
                   }
-                  icon={<Calender />}
+                  icon={<Calendar />}
                   date={lastValue.next_determined_unix}
                 />
               </UnorderedList>
@@ -284,11 +284,16 @@ function ListItem({
         <Box
           display="flex"
           alignItems="center"
-          minWidth="26px"
-          width={26}
+          minWidth="28px"
+          width={28}
           height={18}
           mt="2px"
           mr={2}
+          css={css({
+            svg: {
+              height: 28,
+            },
+          })}
         >
           {icon}
         </Box>
