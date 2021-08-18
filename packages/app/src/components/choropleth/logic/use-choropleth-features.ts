@@ -146,8 +146,6 @@ function filterVrBySelectedGmCode(
 }
 
 function createGeoJson(map: MapType, topoJson: any) {
-  console.dir(topoJson);
-
   const outlineGeo =
     map === 'in'
       ? undefined
