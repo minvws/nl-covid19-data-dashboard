@@ -1,6 +1,7 @@
 import { MetricKeys, Vr } from '@corona-dashboard/common';
-import { MetricConfig } from './common';
+import { positiveTestedBarScale } from './bar-scales';
 import {
+  behaviorThresholds,
   elderlyAtHomeThresholds,
   escalationThresholds,
   hasSufficientDataThresholds,
@@ -10,13 +11,12 @@ import {
   sewerThresholds,
   situationsThreshold,
   vaccineCoverageThresholds,
-  behaviorThresholds,
 } from './choropleth-thresholds';
+import { MetricConfig } from './common';
 import {
-  positiveTestedRiskCategoryThresholds,
   hospitalAdmissionsRiskCategoryThresholds,
+  positiveTestedRiskCategoryThresholds,
 } from './risk-category-thresholds';
-import { positiveTestedBarScale } from './bar-scales';
 
 type VrMetricKey = MetricKeys<Vr>;
 type VrConfig = Partial<Record<VrMetricKey, Record<string, MetricConfig>>>;

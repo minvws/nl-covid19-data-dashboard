@@ -1,15 +1,11 @@
-import { MetricKeys, Gm } from '@corona-dashboard/common';
-import { colors } from '~/style/theme';
-import { MetricConfig } from './common';
+import { Gm, MetricKeys } from '@corona-dashboard/common';
+import { positiveTestedBarScale } from './bar-scales';
 import {
-  positiveTestedThresholds,
   hospitalAdmissionsThresholds,
+  positiveTestedThresholds,
   sewerThresholds,
 } from './choropleth-thresholds';
-
-const GREEN = colors.data.gradient.green;
-const YELLOW = colors.data.gradient.yellow;
-const RED = colors.data.gradient.red;
+import { MetricConfig } from './common';
 
 type GmMetricKey = MetricKeys<Gm>;
 type GmConfig = Partial<Record<GmMetricKey, Record<string, MetricConfig>>>;
@@ -17,25 +13,7 @@ type GmConfig = Partial<Record<GmMetricKey, Record<string, MetricConfig>>>;
 export const gm: GmConfig = {
   tested_overall: {
     infected_per_100k: {
-      barScale: {
-        min: 0,
-        max: 10,
-        signaalwaarde: 7,
-        gradient: [
-          {
-            color: GREEN,
-            value: 0,
-          },
-          {
-            color: YELLOW,
-            value: 7,
-          },
-          {
-            color: RED,
-            value: 10,
-          },
-        ],
-      },
+      barScale: positiveTestedBarScale,
       choroplethThresholds: positiveTestedThresholds,
     },
   },

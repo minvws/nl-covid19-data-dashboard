@@ -1,11 +1,11 @@
 import { MetricKeys, Nl } from '@corona-dashboard/common';
-import { MetricConfig } from './common';
 import {
-  reproductionBarScale,
   hospitalAdmissionsBarScale,
-  positiveTestedBarScale,
   intensiveCareBarScale,
+  positiveTestedBarScale,
+  reproductionBarScale,
 } from './bar-scales';
+import { MetricConfig } from './common';
 
 type NlMetricKey = MetricKeys<Nl>;
 type NlConfig = Partial<Record<NlMetricKey, Record<string, MetricConfig>>>;
