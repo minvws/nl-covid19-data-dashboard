@@ -102,7 +102,7 @@ export function SelectCountry({
   const prefixId = `select_country_${uniqueId}`;
 
   return (
-    <Box position="relative">
+    <Box position="relative" ref={containerRef}>
       <SelectCountryInput
         prefixId={prefixId}
         currentOption={currentOption}
@@ -116,7 +116,6 @@ export function SelectCountry({
       />
 
       <OrderedList
-        ref={containerRef}
         id={`${prefixId}_list`}
         tabIndex={-1}
         role="listbox"

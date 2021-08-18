@@ -138,7 +138,8 @@ const IconContainer = styled.span<{ align: 'left' | 'right' }>((x) =>
     background: 'none',
     color: x.align === 'left' ? 'labelGray' : 'icon',
 
-    cursor: x.align === 'right' ? 'pointer' : undefined,
+    cursor: x.align === 'right' ? 'default' : undefined,
+    pointerEvents: x.align === 'left' ? 'none' : undefined,
   })
 );
 
@@ -157,6 +158,8 @@ const Input = styled.input(
     fontFamily: 'body',
     fontSize: 1,
 
+    cursor: 'default',
+
     '&::-webkit-search-cancel-button': {
       display: 'none',
     },
@@ -169,6 +172,7 @@ const Input = styled.input(
       borderColor: 'lightGray',
       outline: '2px dotted',
       outlineColor: 'body',
+      cursor: 'text',
     },
   })
 );
