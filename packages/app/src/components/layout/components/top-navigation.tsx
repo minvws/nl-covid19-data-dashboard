@@ -50,6 +50,7 @@ export function TopNavigation() {
         key={isWideNav ? 1 : 0}
         role="navigation"
         aria-label={siteText.aria_labels.pagina_keuze}
+        id="main-navigation"
       >
         {collapsible.content(
           <MaxWidth>

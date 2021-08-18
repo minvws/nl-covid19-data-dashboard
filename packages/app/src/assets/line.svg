@@ -1,3 +1,3 @@
-<svg focusable="false" width="12" height="6" stroke="currentColor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+<svg role="img" aria-hidden="true" focusable="false" width="12" height="6" stroke="currentColor" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 0 l12 0" stroke="currentColor" fill="currentColor" stroke-width="6" />
 </svg>

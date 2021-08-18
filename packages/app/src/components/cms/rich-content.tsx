@@ -10,9 +10,9 @@ import { useIntl } from '~/intl';
 import { getFileSrc, PortableText } from '~/lib/sanity';
 import { nestedHtml } from '~/style/preset';
 import {
-  CollapsibleList,
   ImageBlock,
   InlineAttachment,
+  InlineCollapsibleList,
   InlineLink,
   RichContentImageBlock,
 } from '~/types/cms';
@@ -35,6 +35,17 @@ export function RichContent({
   const ContentWrapper = contentWrapper ?? Fragment;
   const serializers = {
     types: {
+      inlineBlock: (props: unknown) => {
+        assert(
+          PortableText.defaultSerializers.types?.inlineBlock,
+          'PortableText needs to provide a serializer for inlineBlock content'
+        );
+        return (
+          <ContentWrapper>
+            {PortableText.defaultSerializers.types.inlineBlock(props)}
+          </ContentWrapper>
+        );
+      },
       block: (props: unknown) => {
         assert(
           PortableText.defaultSerializers.types?.block,
@@ -53,14 +64,14 @@ export function RichContent({
           {...props}
         />
       ),
-      collapsible: (props: { node: CollapsibleList }) => {
-        if (!props.node.content) return null;
+      inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
+        if (!props.node.content.inlineBlockContent) return null;
 
         return (
           <ContentWrapper>
             <CollapsibleSection summary={props.node.title}>
               <Box py={3}>
-                <RichContent blocks={props.node.content} />
+                <RichContent blocks={props.node.content.inlineBlockContent} />
               </Box>
             </CollapsibleSection>
           </ContentWrapper>

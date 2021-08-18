@@ -96,7 +96,7 @@ const StyledTooltipHeader = styled.div(
 const Chevron = styled.div(
   css({
     ml: 3,
-    backgroundImage: 'url("/images/chevron-black.svg")',
+    backgroundImage: 'url("/icons/chevron-black.svg")',
     backgroundSize: '0.5em 0.9em',
     backgroundPosition: '0 50%',
     backgroundRepeat: 'no-repeat',
