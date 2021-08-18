@@ -16,7 +16,9 @@
    history.**
 7. Hit the publish button in the Github release draft. This should tag the
    correct commit in `master`
-8. Run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
+8. Important before running the next step is building the common package to avoid any typescript errors,
+   so run `yarn workspace @corona-dashboard/common build`.
+9. Run the `yarn workspace @corona-dashboard/cms lokalize:sync-after-release`
    script. This script will perform any necessary text mutations for keys that
    have been moved, and also cleans up any deleted texts from the Sanity
    production dataset. For more information [read
