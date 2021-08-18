@@ -9,6 +9,8 @@ const withTranspileModules = require('next-transpile-modules')([
   'd3-geo',
   'd3-array',
   'internmap',
+  'konva',
+  'react-konva',
 ]);
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const path = require('path');

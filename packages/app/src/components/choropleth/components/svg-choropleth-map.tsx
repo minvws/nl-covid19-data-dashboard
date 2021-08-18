@@ -148,7 +148,7 @@ export const SvgChoroplethMap: <
   );
 
   if (!isDefined(choroplethFeatures)) {
-    return <div>Loading...</div>;
+    return <div>Loading data...</div>;
   }
 
   return (

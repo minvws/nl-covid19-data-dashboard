@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { ReactComponent as GrafiekIcon } from '~/assets/chart.svg';
@@ -58,6 +59,11 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const ChoroplethComponent = dynamic(
+  () => import('../components/choropleth').then((mod) => mod.Choropleth),
+  { loading: () => <p>Loading component...</p>, ssr: false }
+) as typeof Choropleth;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -237,7 +243,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <Choropleth
+                  <ChoroplethComponent
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}
@@ -313,7 +319,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <>
                   {selectedMap === 'gm' && (
-                    <Choropleth
+                    <ChoroplethComponent
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
                       }}

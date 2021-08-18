@@ -9,7 +9,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { SvgChoroplethMap } from './components/svg-choropleth-map';
+import { SvgChoroplethMap } from './components';
 import {
   MappedDataItem,
   MapType,
