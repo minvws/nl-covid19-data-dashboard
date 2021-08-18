@@ -4,7 +4,6 @@ import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -19,6 +18,7 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -92,6 +92,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const dataGgdLastValue = data.tested_ggd.last_value;
   const dataGgdValues = data.tested_ggd.values;
   const difference = data.difference;
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'tested_overall',
+    'infected_per_100k'
+  );
 
   const municipalCodes = gmCodesByVrCode[data.code];
   const selectedMunicipalCode = municipalCodes ? municipalCodes[0] : undefined;
@@ -251,7 +257,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
-              thresholds: thresholds.vr.infected_per_100k,
+              thresholds: choroplethThresholds,
             }}
           >
             <Choropleth

@@ -3,6 +3,7 @@ import { MetricConfig } from './common';
 import { nl } from './nl';
 import { vr } from './vr';
 import { gm } from './gm';
+import { inConfig } from './in';
 
 /**
  * This configuration declares properties about data to be used by various
@@ -16,12 +17,13 @@ import { gm } from './gm';
  * The data is scoped at nl/vr/gm, because we can not assume that the same
  * things like min/max/gradients apply everywhere for the same KPI.
  */
-export type DataScope = 'nl' | 'vr' | 'gm';
+export type DataScope = 'nl' | 'vr' | 'gm' | 'in';
 
 const metricConfig = {
   nl,
   vr,
   gm,
+  in: inConfig,
 } as const;
 
 export function getMetricConfig(

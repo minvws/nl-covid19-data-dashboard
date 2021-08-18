@@ -10,10 +10,8 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { DataConfig } from './choropleth';
 import { useFillColor, vrGeo } from './choropleth/logic';
-import { thresholds } from './choropleth/logic/thresholds';
 import { Heading, InlineText, Text } from './typography';
-
-const escalationThresholds = thresholds.vr.level;
+import { getMetricConfig } from '~/metric-config';
 
 interface EscalationMapLegendaProps {
   data: EscalationLevels[];
@@ -23,6 +21,11 @@ interface EscalationMapLegendaProps {
 export function EscalationMapLegenda(props: EscalationMapLegendaProps) {
   const { data, lastDetermined } = props;
   const { siteText, formatDateFromSeconds } = useIntl();
+  const { choroplethThresholds: escalationThresholds = [] } = getMetricConfig(
+    'vr',
+    'escalation_level',
+    'level'
+  );
 
   const unknownLevelColor = useEscalationColor(null);
 

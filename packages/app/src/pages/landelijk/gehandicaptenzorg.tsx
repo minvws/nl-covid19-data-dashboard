@@ -5,7 +5,6 @@ import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -16,6 +15,7 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -58,6 +58,12 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
   const positiveTestedPeopleText =
     siteText.gehandicaptenzorg_positief_geteste_personen;
   const locationDeaths = siteText.gehandicaptenzorg_oversterfte;
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'disability_care',
+    'infected_locations_percentage'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -213,7 +219,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               source: infectedLocationsText.bronnen.rivm,
             }}
             legend={{
-              thresholds: thresholds.vr.infected_locations_percentage,
+              thresholds: choroplethThresholds,
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >

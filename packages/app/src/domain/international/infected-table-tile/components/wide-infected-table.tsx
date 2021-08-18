@@ -4,10 +4,10 @@ import { maxBy } from 'lodash';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
@@ -15,6 +15,7 @@ import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decima
 import { FilterArrayType } from '../infected-table-tile';
 import { MAX_COUNTRIES_START } from '../logic/common';
 import { BarWithNumber } from './bar-with-number';
+
 interface WideInfectedTableProps {
   data: InCollectionTestedOverall[];
   isExpanded: boolean;
@@ -118,8 +119,14 @@ function TableRow({
 }: tableRowProps) {
   const { formatNumber } = useIntl();
 
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'in',
+    'tested_overall',
+    'infected_per_100k_average'
+  );
+
   const filterBelow = getFilteredThresholdValues(
-    thresholds.in.infected_per_100k_average,
+    choroplethThresholds,
     item.infected_per_100k_average
   );
 

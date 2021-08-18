@@ -7,7 +7,6 @@ import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -22,6 +21,7 @@ import { NlLayout } from '~/domain/layout/nl-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
 import { InfectedPerAgeGroup } from '~/domain/tested/infected-per-age-group';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import {
   createElementsQuery,
   ElementsQueryResult,
@@ -86,6 +86,12 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.positief_geteste_personen;
   const ggdText = siteText.positief_geteste_personen_ggd;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
+
+  const { choroplethThresholds: vrChoroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'tested_overall',
+    'infected_per_100k'
+  );
 
   const dataOverallLastValue = data.tested_overall.last_value;
   const dataGgdLastValue = data.tested_ggd.last_value;
@@ -191,7 +197,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             chartRegion={selectedMap}
             legend={{
               title: text.chloropleth_legenda.titel,
-              thresholds: thresholds.vr.infected_per_100k,
+              thresholds: vrChoroplethThresholds,
             }}
           >
             {/**

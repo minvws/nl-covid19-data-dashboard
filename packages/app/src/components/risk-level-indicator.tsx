@@ -5,10 +5,8 @@ import { Box } from '~/components/base';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { Heading, InlineText, Text } from '~/components/typography';
 import { EscalationLevel } from '~/domain/restrictions/types';
+import { getMetricConfig } from '~/metric-config';
 import { assert } from '~/utils/assert';
-import { thresholds } from './choropleth/logic/thresholds';
-
-const escalationThresholds = thresholds.vr.level;
 
 interface RiskLevelIndicatorProps {
   title: string;
@@ -22,6 +20,12 @@ interface RiskLevelIndicatorProps {
 
 export function RiskLevelIndicator(props: RiskLevelIndicatorProps) {
   const { title, description, children, level, levelTitle, href } = props;
+
+  const { choroplethThresholds: escalationThresholds = [] } = getMetricConfig(
+    'vr',
+    'escalation_level',
+    'level'
+  );
 
   const filteredEscalationLevel = escalationThresholds.find(
     (item) => item.threshold === level

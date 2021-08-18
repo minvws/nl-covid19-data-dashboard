@@ -3,6 +3,7 @@ import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { EscalationLevel } from '~/domain/restrictions/types';
 import { colors } from '~/style/theme';
 import { assert } from './assert';
+import { getMetricConfig } from '~/metric-config';
 
 export function useEscalationColor(level: EscalationLevel) {
   return useMemo(() => {
@@ -13,7 +14,11 @@ export function useEscalationColor(level: EscalationLevel) {
       return colors.data.neutral;
     }
 
-    const escalationThresholds = thresholds.vr.level;
+    const { choroplethThresholds: escalationThresholds = [] } = getMetricConfig(
+      'vr',
+      'escalation_level',
+      'level'
+    );
 
     const escalationColor = escalationThresholds.find(
       (threshold) => threshold.threshold === level

@@ -1,9 +1,9 @@
 import { Box } from '~/components/base';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import { TooltipContent } from './tooltip-content';
 
 type InPositiveTestedPeopleTooltipProps = {
@@ -30,13 +30,20 @@ export function InPositiveTestedPeopleTooltip(
   } = props;
   const { formatPercentage } = useIntl();
 
-  const thresholdValues = thresholds.in.infected_per_100k_average;
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'in',
+    'tested_overall',
+    'infected_per_100k_average'
+  );
 
   const showComparison = countryName !== comparedName;
 
   return (
     <TooltipContent title={title}>
-      <TooltipSubject thresholdValues={thresholdValues} filterBelow={value}>
+      <TooltipSubject
+        thresholdValues={choroplethThresholds}
+        filterBelow={value}
+      >
         <SubjectText
           code={countryCode}
           name={countryName}
@@ -46,7 +53,7 @@ export function InPositiveTestedPeopleTooltip(
       </TooltipSubject>
       {showComparison && (
         <TooltipSubject
-          thresholdValues={thresholdValues}
+          thresholdValues={choroplethThresholds}
           filterBelow={comparedValue}
         >
           <SubjectText

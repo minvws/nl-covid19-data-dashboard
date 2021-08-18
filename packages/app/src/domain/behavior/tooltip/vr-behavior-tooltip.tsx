@@ -2,7 +2,6 @@ import { VrCollectionBehavior } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { InlineText, Text } from '~/components/typography';
@@ -10,6 +9,7 @@ import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { useIntl } from '~/intl';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { getMetricConfig } from '~/metric-config';
 
 interface VrBehaviorTooltipProps {
   context: TooltipData<VrCollectionBehavior>;
@@ -31,13 +31,15 @@ export function VrBehaviorTooltip({
   const complianceThresholdKey = `${currentMetric}_compliance` as const;
   const supportThresholdKey = `${currentMetric}_support` as const;
 
+  const behaviorMetricConfig = getMetricConfig('vr', 'behavior');
+
   const complianceFilteredThreshold = getFilteredThresholdValues(
-    thresholds.vr[complianceThresholdKey],
+    behaviorMetricConfig[complianceThresholdKey].choroplethThresholds,
     currentComplianceValue
   );
 
   const supportFilteredThreshold = getFilteredThresholdValues(
-    thresholds.vr[supportThresholdKey],
+    behaviorMetricConfig[supportThresholdKey].choroplethThresholds,
     currentSupportValue
   );
 

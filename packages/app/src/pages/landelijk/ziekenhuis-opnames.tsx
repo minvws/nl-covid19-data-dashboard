@@ -5,7 +5,6 @@ import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageBarScale } from '~/components/page-barscale';
@@ -78,6 +77,11 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
 
   const { choroplethThresholds: gmChoroplethThresholds = [] } = getMetricConfig(
     'gm',
+    'hospital_nice',
+    'admissions_on_date_of_reporting'
+  );
+  const { choroplethThresholds: vrChoroplethThresholds = [] } = getMetricConfig(
+    'vr',
     'hospital_nice',
     'admissions_on_date_of_reporting'
   );
@@ -162,7 +166,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               thresholds:
                 selectedMap === 'gm'
                   ? gmChoroplethThresholds
-                  : thresholds.gm.admissions_on_date_of_reporting,
+                  : vrChoroplethThresholds,
               title: text.chloropleth_legenda.titel,
             }}
             metadata={{

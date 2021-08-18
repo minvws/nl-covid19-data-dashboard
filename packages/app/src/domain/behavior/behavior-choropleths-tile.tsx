@@ -5,7 +5,7 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { getMetricConfig } from '~/metric-config';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
 import { VrBehaviorTooltip } from '~/domain/behavior/tooltip/vr-behavior-tooltip';
@@ -105,6 +105,7 @@ function ChoroplethBlock({
 
   const isSmallScreen = breakpoints.sm;
   const metricProperty = `${currentId}_${behaviorType}` as const;
+  const behaviorMetricConfig = getMetricConfig('vr', 'behavior');
 
   return (
     <Box width={{ _: '100%', lg: '50%' }} spacing={3}>
@@ -180,7 +181,7 @@ function ChoroplethBlock({
         maxWidth={300}
       >
         <ChoroplethLegenda
-          thresholds={thresholds.vr[metricProperty]}
+          thresholds={behaviorMetricConfig[metricProperty].choroplethThresholds}
           title={siteText.gedrag_common.basisregels.header_percentage}
         />
       </Box>

@@ -3,7 +3,7 @@ import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { getMetricConfig } from '~/metric-config';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -58,6 +58,12 @@ const ElderlyAtHomeNationalPage = (
   const elderlyAtHomeDeceasedUnderReportedRange = getBoundaryDateStartUnix(
     elderlyAtHomeData.values,
     7
+  );
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'elderly_at_home',
+    'positive_tested_daily_per_100k'
   );
 
   const { siteText } = useIntl();
@@ -193,7 +199,7 @@ const ElderlyAtHomeNationalPage = (
               source: text.section_positive_tested.bronnen.rivm,
             }}
             legend={{
-              thresholds: thresholds.vr.positive_tested_daily_per_100k,
+              thresholds: choroplethThresholds,
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >

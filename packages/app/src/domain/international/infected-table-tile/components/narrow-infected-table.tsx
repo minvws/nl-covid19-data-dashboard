@@ -3,11 +3,11 @@ import css from '@styled-system/css';
 import { maxBy } from 'lodash';
 import { ReactNode, useMemo } from 'react';
 import { Box } from '~/components/base';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { PercentageBar } from '~/components/percentage-bar';
 import { InlineText } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import { colors } from '~/style/theme';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
@@ -89,8 +89,14 @@ function ItemRow({
   const { siteText } = useIntl();
   const text = siteText.internationaal_positief_geteste_personen.land_tabel;
 
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'in',
+    'tested_overall',
+    'infected_per_100k_average'
+  );
+
   const filterBelow = getFilteredThresholdValues(
-    thresholds.in.infected_per_100k_average,
+    choroplethThresholds,
     item.infected_per_100k_average
   );
 

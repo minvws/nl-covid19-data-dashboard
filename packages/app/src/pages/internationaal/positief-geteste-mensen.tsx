@@ -6,7 +6,6 @@ import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -25,6 +24,7 @@ import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
+import { getMetricConfig } from '~/metric-config';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import { getInPositiveTestsQuery } from '~/queries/in-positive-tests-query';
 import {
@@ -40,7 +40,6 @@ import {
 import { getCountryNames } from '~/static-props/utils/get-country-names';
 import { colors } from '~/style/theme';
 import { InPositiveTestsQuery } from '~/types/cms';
-
 type CompiledCountriesValue = {
   date_start_unix: number;
   date_end_unix: number;
@@ -99,6 +98,11 @@ export default function PositiefGetesteMensenPage(
 
   const intl = useIntl();
   const text = intl.siteText.internationaal_positief_geteste_personen;
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'in',
+    'tested_overall',
+    'infected_per_100k_average'
+  );
 
   const metadata = {
     ...intl.siteText.internationaal_metadata,
@@ -155,7 +159,7 @@ export default function PositiefGetesteMensenPage(
             title={text.choropleth.titel}
             description={text.choropleth.toelichting}
             legend={{
-              thresholds: thresholds.in.infected_per_100k_average,
+              thresholds: choroplethThresholds,
               title: text.choropleth.legenda_titel,
             }}
             metadata={{

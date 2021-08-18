@@ -13,7 +13,7 @@ import {
 } from '~/components/chart-region-controls';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
+import { getMetricConfig } from '~/metric-config';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -101,6 +101,12 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
 
   const text = siteText.gemeente_actueel;
   const gmCode = router.query.code as string;
+
+  const { choroplethThresholds: vrChoroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'tested_overall',
+    'infected_per_100k'
+  );
 
   const vrForMunicipality = getVrForMunicipalityCode(gmCode);
 
@@ -372,7 +378,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <ChoroplethLegenda
-                    thresholds={thresholds.vr.infected_per_100k}
+                    thresholds={vrChoroplethThresholds}
                     title={
                       siteText.positief_geteste_personen.chloropleth_legenda
                         .titel

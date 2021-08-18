@@ -11,9 +11,9 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from '~/components/chart-region-controls';
+import { getMetricConfig } from '~/metric-config';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -92,6 +92,12 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText, formatDate } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'tested_overall',
+    'infected_per_100k'
+  );
 
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
 
@@ -303,7 +309,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <ChoroplethLegenda
-                    thresholds={thresholds.vr.infected_per_100k}
+                    thresholds={choroplethThresholds}
                     title={
                       siteText.positief_geteste_personen.chloropleth_legenda
                         .titel

@@ -4,7 +4,6 @@ import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-moni
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -16,6 +15,7 @@ import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -55,6 +55,12 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   const sewerAverages = data.sewer;
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'sewer',
+    'average'
+  );
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -168,7 +174,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             valueAnnotation={siteText.waarde_annotaties.riool_normalized}
             legend={{
               title: text.legenda_titel,
-              thresholds: thresholds.vr.average,
+              thresholds: choroplethThresholds,
             }}
           >
             {selectedMap === 'gm' ? (

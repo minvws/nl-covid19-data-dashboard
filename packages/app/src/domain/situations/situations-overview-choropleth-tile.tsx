@@ -9,12 +9,12 @@ import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { getMetricConfig } from '~/metric-config';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -32,6 +32,8 @@ export function SituationsOverviewChoroplethTile({
   const situations = useSituations();
   const text = intl.siteText.brononderzoek;
   const singleValue = data[0];
+
+  const situationsConfig = getMetricConfig('vr', 'situations');
 
   const breakpoints = useBreakpoints();
 
@@ -62,7 +64,7 @@ export function SituationsOverviewChoroplethTile({
           <Box>
             <ChoroplethLegenda
               title={text.situaties_kaarten_overzicht.legenda.titel}
-              thresholds={thresholds.vr.gathering}
+              thresholds={situationsConfig.gathering.choroplethThresholds}
             />
           </Box>
           <Box display="flex" alignItems="flex-end">
@@ -106,7 +108,9 @@ export function SituationsOverviewChoroplethTile({
                     isPercentage
                     value={context.dataItem[situation.id]}
                     regionName={context.featureName}
-                    thresholds={thresholds.vr[situation.id]}
+                    thresholds={
+                      situationsConfig[situation.id].choroplethThresholds
+                    }
                     noDataFillColor={colors.data.underReported}
                   />
                 )}

@@ -8,7 +8,7 @@ export type MetricConfig = {
   isPercentage?: boolean;
   barScale?: BarScaleConfig;
   riskCategoryThresholds?: { color?: string; threshold: number }[];
-  choroplethThresholds?: { color: string; threshold: number }[];
+  choroplethThresholds?: ChoroplethThresholdsValue[];
 };
 
 type BarScaleConfig = {
@@ -16,4 +16,14 @@ type BarScaleConfig = {
   max: number;
   signaalwaarde: number;
   gradient: { color: string; value: number }[];
+};
+
+export type ChoroplethThresholdsValue<T extends number = number> = {
+  color: string;
+  threshold: T;
+  label?: string;
+  /**
+   * Optionally define the label which explains the "end" of a threshold
+   */
+  endLabel?: string;
 };

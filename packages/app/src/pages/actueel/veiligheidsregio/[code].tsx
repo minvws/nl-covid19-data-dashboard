@@ -13,7 +13,6 @@ import {
 } from '~/components/chart-region-controls';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
@@ -42,6 +41,7 @@ import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
+import { getMetricConfig } from '~/metric-config';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -99,6 +99,12 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
   const text = siteText.veiligheidsregio_actueel;
   const escalationText = siteText.escalatie_niveau;
   const vrCode = router.query.code as string;
+
+  const { choroplethThresholds = [] } = getMetricConfig(
+    'vr',
+    'tested_overall',
+    'infected_per_100k'
+  );
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
@@ -344,7 +350,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
               <ChoroplethTwoColumnLayout
                 legendComponent={
                   <ChoroplethLegenda
-                    thresholds={thresholds.vr.infected_per_100k}
+                    thresholds={choroplethThresholds}
                     title={
                       siteText.positief_geteste_personen.chloropleth_legenda
                         .titel
