@@ -5,11 +5,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-const withTranspileModules = require('next-transpile-modules')([
-  'd3-geo',
-  'd3-array',
-  'internmap',
-]);
+
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const path = require('path');
 
@@ -144,4 +140,4 @@ const nextConfig = {
 
 const plugins = [withBundleAnalyzer];
 
-module.exports = withPlugins(plugins, withTranspileModules(nextConfig));
+module.exports = withPlugins(plugins, nextConfig);
