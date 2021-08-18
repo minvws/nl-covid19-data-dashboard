@@ -1,10 +1,12 @@
 import { assert } from '@corona-dashboard/common';
 import { useMemo } from 'react';
+import useSWR from 'swr';
+import * as topojson from 'topojson-client';
 import { isDefined } from 'ts-is-present';
 import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth/logic';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { getVrMunicipalsForMunicipalCode } from '~/utils/get-vr-municipals-for-municipal-code';
-import { CodedGeoJSON, gmGeo, inGeo, nlGeo, vrGeo } from './topology';
+import { CodedGeoJSON, gmGeo } from './topology';
 import { ChoroplethDataItem } from './types';
 
 export type FeatureType = keyof ChoroplethFeatures;
@@ -27,28 +29,37 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   map: MapType,
   data: T[],
   selectedCode?: string
-): ChoroplethFeatures {
+): ChoroplethFeatures | undefined {
+  const { data: topoJson, error } = useSWR(`/api/topo-json/${map}`);
+
   return useMemo(() => {
+    if (!isDefined(topoJson)) {
+      return;
+    }
+    const [featureGeo, outlineGeo] = createGeoJson(map, topoJson);
+
     switch (map) {
       case 'gm': {
+        assert(isDefined(outlineGeo), 'outlineGeo is required for map type gm');
         const boundingBoxGeo = filterBoundingBoxBySelectedGmCode(
-          gmGeo,
+          featureGeo,
           selectedCode
         );
         const hoverGeo = filterVrBySelectedGmCode(gmGeo, selectedCode);
         return {
-          outline: nlGeo,
+          outline: outlineGeo,
           hover: hoverGeo,
           area: boundingBoxGeo,
-          boundingBox: selectedCode ? hoverGeo : nlGeo,
+          boundingBox: selectedCode ? hoverGeo : outlineGeo,
         };
       }
       case 'vr': {
+        assert(isDefined(outlineGeo), 'outlineGeo is required for map type vr');
         return {
-          outline: nlGeo,
-          hover: vrGeo,
-          area: vrGeo,
-          boundingBox: nlGeo,
+          outline: outlineGeo,
+          hover: featureGeo,
+          area: featureGeo,
+          boundingBox: outlineGeo,
         };
       }
       case 'in': {
@@ -59,28 +70,28 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
         });
         return {
           outline: {
-            ...inGeo,
-            features: inGeo.features.filter(
+            ...featureGeo,
+            features: featureGeo.features.filter(
               (x) => !inData.some((d) => d.country_code === x.properties.code)
             ),
           },
           hover: {
-            ...inGeo,
-            features: inGeo.features.filter((x) =>
+            ...featureGeo,
+            features: featureGeo.features.filter((x) =>
               inData.some((d) => d.country_code === x.properties.code)
             ),
           },
-          area: inGeo,
+          area: featureGeo,
           boundingBox: {
-            ...inGeo,
-            features: inGeo.features.filter((x) =>
+            ...featureGeo,
+            features: featureGeo.features.filter((x) =>
               internationalBoundingBoxCodes.includes(x.properties.code)
             ),
           },
         };
       }
     }
-  }, [map, selectedCode, data]);
+  }, [map, selectedCode, data, topoJson]);
 }
 
 function filterBoundingBoxBySelectedGmCode(
@@ -132,4 +143,23 @@ function filterVrBySelectedGmCode(
       gmCodes.includes(x.properties.code)
     ),
   };
+}
+
+function createGeoJson(map: MapType, topoJson: any) {
+  console.dir(topoJson);
+
+  const outlineGeo =
+    map === 'in'
+      ? undefined
+      : (topojson.feature(
+          topoJson,
+          topoJson.objects.nl_features
+        ) as CodedGeoJSON);
+
+  const featureGeo = topojson.feature(
+    topoJson,
+    topoJson.objects[`${map}_features`]
+  ) as CodedGeoJSON;
+
+  return [featureGeo, outlineGeo] as const;
 }

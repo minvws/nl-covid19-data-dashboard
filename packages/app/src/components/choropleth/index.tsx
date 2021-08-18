@@ -1,42 +1,23 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Projection } from '@visx/geo/lib/types';
-import { geoConicConformal, GeoProjection } from 'd3-geo';
-import { FocusEvent, memo, useMemo, useRef, useState } from 'react';
-import { isDefined } from 'ts-is-present';
+import { GeoProjection } from 'd3-geo';
+import { useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
-import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import {
-  AccessibilityDefinition,
-  useAccessibilityAnnotations,
-} from '~/utils/use-accessibility-annotations';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { useResizeObserver } from '~/utils/use-resize-observer';
-import { useUniqueId } from '~/utils/use-unique-id';
-import { MercatorGroup, MercatorHoverGroup } from './components';
+import { SvgChoroplethMap } from './components/svg-choropleth-map';
 import {
-  CHOROPLETH_ASPECT_RATIO,
-  DEFAULT_STROKE_WIDTH,
-  FitExtent,
   MappedDataItem,
   MapType,
   Unpack,
-  useChoroplethData,
-  useChoroplethFeatures,
-  useChoroplethTooltip,
-  useDynamicSize,
-  useFeatureName,
-  useFeatureProps,
-  useFillColor,
   useTabInteractiveButton,
 } from './logic';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
 import { TooltipFormatter, TooltipSettings } from './tooltips/types';
-
-export const DEFAULT_HOVER_STROKE_WIDTH = 3;
 
 export type DataOptions = {
   isPercentage?: boolean;
@@ -94,9 +75,14 @@ export type DynamicSizeConfigurations = [
 
 export type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
-type UnpackedDataItem<T extends MapType> = Unpack<MappedDataItem<T>>;
+export type UnpackedDataItem<T extends MapType> = Unpack<MappedDataItem<T>>;
 
-type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
+type RenderTarget = 'svg' | 'canvas';
+
+export type ChoroplethProps<
+  T extends MapType,
+  K extends UnpackedDataItem<T>
+> = {
   accessibility: AccessibilityDefinition;
   data: K[];
   dataConfig: OptionalDataConfig<K>;
@@ -116,6 +102,7 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
    * on a set of given width break points
    */
   dynamicSizeConfiguration?: DynamicSizeConfigurations;
+  renderTarget?: RenderTarget;
 };
 
 /**
@@ -136,6 +123,7 @@ type ChoroplethProps<T extends MapType, K extends UnpackedDataItem<T>> = {
 export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
   formatTooltip,
   tooltipPlacement,
+  renderTarget = 'svg',
   ...props
 }: ChoroplethProps<T, K>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
@@ -159,13 +147,15 @@ export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
       <div
         css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
       >
-        <ChoroplethMap
-          {...props}
-          setTooltip={setTooltip}
-          hoverRef={hoverRef}
-          isTabInteractive={isTabInteractive}
-          anchorEventHandlers={anchorEventHandlers}
-        />
+        {renderTarget === 'svg' && (
+          <SvgChoroplethMap
+            {...props}
+            setTooltip={setTooltip}
+            hoverRef={hoverRef}
+            isTabInteractive={isTabInteractive}
+            anchorEventHandlers={anchorEventHandlers}
+          />
+        )}
 
         {tooltip && (
           <div
@@ -186,194 +176,3 @@ export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
     </Box>
   );
 }
-
-type ChoroplethMapProps<
-  T extends MapType,
-  K extends UnpackedDataItem<T>
-> = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
-  hoverRef: React.RefObject<SVGGElement>;
-  setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
-  isTabInteractive: boolean;
-  anchorEventHandlers: {
-    onFocus: (evt: FocusEvent<HTMLAnchorElement>) => void;
-    onBlur: (evt: FocusEvent<HTMLAnchorElement>) => void;
-  };
-};
-
-const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
-  props: ChoroplethMapProps<T, K>
-) => JSX.Element | null = memo((props) => {
-  const {
-    data: originalData,
-    dataConfig: originalDataConfig,
-    dataOptions,
-    map,
-    minHeight = 500,
-    boundingBoxPadding = {},
-    hoverRef,
-    setTooltip,
-    accessibility,
-    isTabInteractive,
-    anchorEventHandlers,
-    dynamicSizeConfiguration,
-  } = props;
-
-  const dataConfig = {
-    metricProperty: originalDataConfig.metricProperty,
-    noDataFillColor:
-      originalDataConfig.noDataFillColor ?? colors.choroplethNoData,
-    hoverFill: originalDataConfig.hoverFill ?? 'none',
-    hoverStroke:
-      originalDataConfig.hoverStroke ?? colors.choroplethFeatureStroke,
-    hoverStrokeWidth:
-      originalDataConfig.hoverStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
-    highlightStroke:
-      originalDataConfig.highlightStroke ?? colors.choroplethHighlightStroke,
-    highlightStrokeWidth:
-      originalDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
-    areaStroke: originalDataConfig.areaStroke ?? colors.choroplethFeatureStroke,
-    areaStrokeWidth: originalDataConfig.areaStrokeWidth ?? DEFAULT_STROKE_WIDTH,
-  };
-
-  const aspectRatio =
-    map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
-  const mapProjection = isDefined(dataOptions.projection)
-    ? dataOptions.projection
-    : map === 'in'
-    ? geoConicConformal
-    : 'mercator';
-
-  const annotations = useAccessibilityAnnotations(accessibility);
-  const clipPathId = useUniqueId();
-  const data = useChoroplethData(originalData, map, dataOptions.selectedCode);
-
-  const [
-    containerRef,
-    { width = minHeight * (1 / aspectRatio), height = minHeight },
-  ] = useResizeObserver<HTMLDivElement>();
-
-  const [mapHeight, padding] = useDynamicSize(
-    width,
-    height,
-    boundingBoxPadding,
-    dynamicSizeConfiguration
-  );
-
-  const choroplethFeatures = useChoroplethFeatures(
-    map,
-    data,
-    dataOptions.selectedCode
-  );
-
-  const getFillColor = useFillColor(data, map, dataConfig);
-
-  const { area, outline, hover } = useFeatureProps(
-    map,
-    getFillColor,
-    dataOptions,
-    dataConfig
-  );
-
-  const [mouseOverHandler, mouseOutHandler] = useChoroplethTooltip(
-    map,
-    data,
-    dataConfig,
-    dataOptions,
-    isTabInteractive,
-    setTooltip,
-    containerRef
-  );
-
-  const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
-
-  const fitExtent: FitExtent = useMemo(
-    () => [
-      [
-        [padding.left, padding.top],
-        [width - padding.right, mapHeight - padding.bottom],
-      ],
-      choroplethFeatures.boundingBox,
-    ],
-    [
-      width,
-      mapHeight,
-      padding.left,
-      padding.right,
-      padding.top,
-      padding.bottom,
-      choroplethFeatures.boundingBox,
-    ]
-  );
-
-  return (
-    <>
-      {annotations.descriptionElement}
-      <div
-        ref={containerRef}
-        style={{
-          minHeight: mapHeight,
-          maxHeight: '75vh',
-          maxWidth: '100%',
-        }}
-      >
-        <svg
-          aria-labelledby={annotations.props.ariaDescribedby}
-          role="img"
-          width={width}
-          viewBox={`0 0 ${width} ${mapHeight}`}
-          css={css({ display: 'block', bg: 'transparent', width: '100%' })}
-          onMouseMove={mouseOverHandler}
-          onMouseOut={mouseOutHandler}
-        >
-          <clipPath id={clipPathId}>
-            <rect x={0} y={0} height={height} width={width} />
-          </clipPath>
-          <rect
-            x={0}
-            y={0}
-            width={width}
-            height={height}
-            fill={'none'}
-            rx={14}
-          />
-          <g transform={`translate(0,0)`} clipPath={`url(#${clipPathId})`}>
-            <MercatorGroup
-              projection={mapProjection}
-              data={choroplethFeatures.area.features}
-              fillMethod={area.fill}
-              strokeMethod={area.stroke}
-              strokeWidthMethod={area.strokeWidth}
-              fitExtent={fitExtent}
-            />
-            {isDefined(choroplethFeatures.outline) && (
-              <g css={css({ pointerEvents: 'none' })}>
-                <MercatorGroup
-                  projection={mapProjection}
-                  data={choroplethFeatures.outline.features}
-                  fillMethod={outline.fill}
-                  strokeMethod={outline.stroke}
-                  strokeWidthMethod={outline.strokeWidth}
-                  fitExtent={fitExtent}
-                />
-              </g>
-            )}
-            <g ref={hoverRef}>
-              <MercatorHoverGroup
-                projection={mapProjection}
-                data={choroplethFeatures.hover.features}
-                fillMethod={hover.fill}
-                strokeMethod={hover.stroke}
-                strokeWidthMethod={hover.strokeWidth}
-                fitExtent={fitExtent}
-                isTabInteractive={isTabInteractive}
-                getTitle={getFeatureName}
-                getHref={dataOptions.getLink}
-                {...anchorEventHandlers}
-              />
-            </g>
-          </g>
-        </svg>
-      </div>
-    </>
-  );
-});
