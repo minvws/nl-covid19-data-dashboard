@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { useState } from 'react';
-import { ReactComponent as Experimenteel } from '~/assets/experimenteel.svg';
+import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -315,7 +315,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             title={ggdText.titel}
             id="ggd"
-            icon={<Experimenteel />}
+            icon={<GgdTesten />}
             description={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,

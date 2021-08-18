@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
-import { ReactComponent as Calender } from '~/assets/calender.svg';
+import { ReactComponent as Calendar } from '~/assets/calendar.svg';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
@@ -183,7 +183,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                       <UnorderedList>
                         <ListItem
                           title={text.momenteel.last_determined}
-                          icon={<Calender />}
+                          icon={<Calendar />}
                           date={data.escalation_level.last_determined_unix}
                         />
                         <ListItem
@@ -228,7 +228,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                         </ListItem>
                         <ListItem
                           title={text.momenteel.next_determined}
-                          icon={<Calender />}
+                          icon={<Calendar />}
                           date={data.escalation_level.next_determined_unix}
                           isAroundDate
                         />
@@ -373,14 +373,13 @@ function ListItem({
         <Box
           display="flex"
           alignItems="center"
-          minWidth="26px"
-          width={26}
-          height={26}
+          width={28}
+          height={28}
           mr={2}
           mt="-0.2rem"
           css={css({
             svg: {
-              height: 26,
+              height: 28,
             },
           })}
         >
