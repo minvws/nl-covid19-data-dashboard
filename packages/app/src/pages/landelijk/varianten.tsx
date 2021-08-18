@@ -1,4 +1,4 @@
-import Varianten from '~/assets/varianten.svg';
+import { ReactComponent as Varianten } from '~/assets/varianten.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -46,7 +46,7 @@ export const getStaticProps = withFeatureNotFoundPage(
         articles?: ArticleSummary[];
       };
     }>((context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       return `{
         "page": ${getVariantsPageQuery(context)},
         "highlight": ${createPageArticlesQuery('variantsPage', locale)}

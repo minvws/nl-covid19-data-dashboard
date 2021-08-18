@@ -156,7 +156,7 @@ export function BarScale({
                 x={`${scale(signaalwaarde)}%`}
                 y={72}
                 textAnchor={textAlign(scale(signaalwaarde) ?? 0)}
-                css={css({ fill: 'annotation' })}
+                css={css({ fill: 'annotation', fontSize: '0.875rem' })}
               >
                 {text.signaalwaarde}: {`${formatNumber(signaalwaarde)}`}
               </text>
@@ -168,7 +168,7 @@ export function BarScale({
               <text
                 x={`${scale(xMin)}%`}
                 y={64}
-                css={css({ fill: 'annotation' })}
+                css={css({ fill: 'annotation', fontSize: '0.875rem' })}
               >
                 {`${formatNumber(xMin)}`}
               </text>

@@ -29,7 +29,6 @@ export function ArticleList({
       margin={0}
       maxWidth="100%"
       flexWrap="wrap"
-      mt={3}
     >
       {articleSummaries
         .filter(({ categories }) => {
@@ -50,7 +49,7 @@ export function ArticleList({
                 [768, 445],
               ]}
             />
-            <Spacer mb={4} />
+            <Spacer mb={{ _: 4, md: 5 }} />
           </ArticleBox>
         ))}
     </Box>
@@ -59,7 +58,6 @@ export function ArticleList({
 
 export const ArticleBox = styled.div(
   css({
-    marginBottom: 4,
     width: asResponsiveArray({
       _: '100%',
       sm: 'calc(50% - 16px)',

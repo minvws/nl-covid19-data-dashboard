@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import BarChart from '~/assets/bar-chart.svg';
-import Calender from '~/assets/calender.svg';
-import Getest from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
+import { ReactComponent as Calendar } from '~/assets/calendar.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
@@ -56,7 +56,7 @@ export const getStaticProps = createGetStaticProps(
     'tested_overall_sum'
   ),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('escalationLevelPage', locale);
   })
 );
@@ -183,7 +183,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                       <UnorderedList>
                         <ListItem
                           title={text.momenteel.last_determined}
-                          icon={<Calender />}
+                          icon={<Calendar />}
                           date={data.escalation_level.last_determined_unix}
                         />
                         <ListItem
@@ -228,7 +228,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                         </ListItem>
                         <ListItem
                           title={text.momenteel.next_determined}
-                          icon={<Calender />}
+                          icon={<Calendar />}
                           date={data.escalation_level.next_determined_unix}
                           isAroundDate
                         />
@@ -373,11 +373,15 @@ function ListItem({
         <Box
           display="flex"
           alignItems="center"
-          minWidth="26px"
-          width={26}
-          height={18}
-          mt="2px"
+          width={28}
+          height={28}
           mr={2}
+          mt="-0.2rem"
+          css={css({
+            svg: {
+              height: 28,
+            },
+          })}
         >
           {icon}
         </Box>

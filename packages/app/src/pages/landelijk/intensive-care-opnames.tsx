@@ -1,5 +1,5 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import Arts from '~/assets/arts.svg';
+import { ReactComponent as Arts } from '~/assets/arts.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -43,7 +43,7 @@ export const getStaticProps = createGetStaticProps(
     page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
       "page": ${createPageArticlesQuery('intensiveCarePage', locale)},
       "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
@@ -135,7 +135,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                         text.kpi_bedbezetting.description,
                         {
                           percentage: formatPercentage(
-                            bedsLastValue.beds_occupied_covid_percentage
+                            bedsLastValue.beds_occupied_covid_percentage,
+                            { maximumFractionDigits: 1 }
                           ),
                         }
                       )}

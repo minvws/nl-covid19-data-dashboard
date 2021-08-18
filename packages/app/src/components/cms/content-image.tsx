@@ -6,6 +6,7 @@ import { ContentBlock } from '~/components/cms/content-block';
 import { SanityImage } from '~/components/cms/sanity-image';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
+import { Text } from '../typography';
 
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
@@ -28,7 +29,9 @@ export function ContentImage({
   sizes,
 }: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
-    <Caption>{node.caption}</Caption>
+    <Text as="figcaption" variant="body2" textAlign="left">
+      {node.caption}
+    </Text>
   );
 
   const ContentWrapper = contentWrapper ?? Fragment;
@@ -66,10 +69,3 @@ export function ContentImage({
     </ContentWrapper>
   );
 }
-
-const Caption = styled.figcaption(
-  css({
-    textAlign: 'left',
-    fontSize: 2,
-  })
-);

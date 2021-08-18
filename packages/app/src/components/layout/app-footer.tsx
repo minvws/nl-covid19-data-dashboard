@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import ExternalIcon from '~/assets/external-link-2.svg';
+import { ReactComponent as ExternalIcon } from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Markdown } from '~/components/markdown';

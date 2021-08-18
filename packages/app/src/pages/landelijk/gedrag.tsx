@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import Gedrag from '~/assets/gedrag.svg';
+import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -40,7 +40,7 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ behavior }) => ({ behavior }),
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('behaviorPage', locale);
   })
 );

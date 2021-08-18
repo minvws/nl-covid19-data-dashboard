@@ -1,5 +1,5 @@
-import ExperimenteelIcon from '~/assets/experimenteel.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
+import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
+import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -40,7 +40,7 @@ export const getStaticProps = createGetStaticProps(
     'code'
   ),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
   })
 );

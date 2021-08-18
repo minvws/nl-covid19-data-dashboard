@@ -1,7 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import Locatie from '~/assets/locatie.svg';
+import { ReactComponent as Locatie } from '~/assets/locatie.svg';
 import { Box } from '~/components/base';
 import { TooltipData } from '~/components/time-series-chart/components';
 import { VisuallyHidden } from '~/components/visually-hidden';

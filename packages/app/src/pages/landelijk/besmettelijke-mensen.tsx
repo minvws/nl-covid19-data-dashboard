@@ -1,6 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
-import Ziektegolf from '~/assets/ziektegolf.svg';
+import { ReactComponent as Ziektegolf } from '~/assets/ziektegolf.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -28,7 +28,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('infectiousPeoplePage', locale);
   })
 );

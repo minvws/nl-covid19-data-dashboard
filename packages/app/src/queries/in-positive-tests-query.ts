@@ -1,7 +1,7 @@
 import { GetStaticPropsContext } from 'next';
 
 export function getInPositiveTestsQuery(context: GetStaticPropsContext) {
-  const { locale = 'nl' } = context;
+  const { locale } = context;
 
   return `
   *[_type=='in_positiveTestsPage']{

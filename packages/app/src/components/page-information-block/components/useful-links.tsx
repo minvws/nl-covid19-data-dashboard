@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import ChevronLargeIcon from '~/assets/chevron-large.svg';
-import ExternalLinkIcon from '~/assets/external-link-2.svg';
+import { ReactComponent as ChevronLargeIcon } from '~/assets/chevron-large.svg';
+import { ReactComponent as ExternalLinkIcon } from '~/assets/external-link-2.svg';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';

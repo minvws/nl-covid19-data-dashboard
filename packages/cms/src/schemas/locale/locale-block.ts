@@ -1,5 +1,5 @@
-import { Rule } from '~/sanity';
 import { supportedLanguages } from '../../language/supported-languages';
+import { blockFields } from '../objects/block-fields';
 
 export const localeBlock = {
   name: 'localeBlock',
@@ -9,41 +9,6 @@ export const localeBlock = {
     title: lang.title,
     name: lang.id,
     type: 'array',
-    of: [
-      {
-        type: 'block',
-      },
-      {
-        type: 'image',
-        initialValue: {
-          isFullWidth: true,
-        },
-        fields: [
-          {
-            name: 'alt',
-            title: 'Alternatieve tekst (toegankelijkheid)',
-            type: 'string',
-            validation: (rule: Rule) => rule.required(),
-            options: {
-              isHighlighted: true,
-            },
-          },
-          {
-            name: 'isFullWidth',
-            title: 'Afbeelding breed weergeven?',
-            type: 'boolean',
-          },
-          {
-            name: 'caption',
-            title: 'Onderschrift',
-            type: 'text',
-          },
-        ],
-      },
-      {
-        type: 'collapsible',
-        title: 'Inklapbaar blok',
-      },
-    ],
+    of: blockFields,
   })),
 };

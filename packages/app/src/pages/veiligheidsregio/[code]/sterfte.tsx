@@ -1,4 +1,4 @@
-import CoronaVirusIcon from '~/assets/coronavirus.svg';
+import { ReactComponent as CoronaVirusIcon } from '~/assets/coronavirus.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -33,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData('deceased_cbs', 'deceased_rivm'),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('deceasedPage', locale);
   })
 );

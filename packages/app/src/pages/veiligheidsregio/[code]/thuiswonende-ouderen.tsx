@@ -1,4 +1,4 @@
-import ElderlyIcon from '~/assets/elderly.svg';
+import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -33,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
   createGetContent<PageArticlesQueryResult>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return createPageArticlesQuery('elderlyAtHomePage', locale);
   })
 );

@@ -29,7 +29,7 @@ export function VaccineAdministrationsOverTimeChart({
         timeframe="all"
         values={values}
         displayTooltipValueOnly
-        numGridLines={2}
+        numGridLines={3}
         seriesConfig={[
           {
             metricProperty: 'estimated',

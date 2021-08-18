@@ -1,14 +1,13 @@
-import css from '@styled-system/css';
 import { useCallback, useState } from 'react';
-import styled from 'styled-components/';
 import { isPresent } from 'ts-is-present';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
+import { Flag } from '~/domain/international/flag';
 import { countryCodes } from '~/domain/international/select-countries';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InLayout } from '~/domain/layout/in-layout';
@@ -37,12 +36,13 @@ import {
 } from '~/static-props/get-data';
 import { loadJsonFromDataFile } from '~/static-props/utils/load-json-from-data-file';
 import { LinkProps } from '~/types/cms';
+
 export const getStaticProps = withFeatureNotFoundPage(
   'inVariantsPage',
   createGetStaticProps(
     getLastGeneratedDate,
     (context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       const countryNames = loadJsonFromDataFile<Record<string, string>>(
         `${locale}-country-names.json`,
         'static-json'
@@ -67,7 +67,7 @@ export const getStaticProps = withFeatureNotFoundPage(
       };
       highlight: PageArticlesQueryResult;
     }>((context) => {
-      const { locale = 'nl' } = context;
+      const { locale } = context;
       return `{
         "page": *[_type=='in_variantsPage']{
           "usefulLinks": [...pageLinks[]{
@@ -187,13 +187,13 @@ export default function VariantenPage(
                 onChange={onChange}
                 value={selectedCountryCode}
                 icon={
-                  <FlagImage
-                    aria-hidden
-                    src={`/icons/flags/${selectedCountryCode.toLowerCase()}.svg`}
-                    width="16"
-                    height="12"
-                    alt=""
-                  />
+                  <Box ml={1}>
+                    <Flag
+                      countryCode={selectedCountryCode}
+                      width={16}
+                      height={12}
+                    />
+                  </Box>
                 }
               />
 
@@ -227,10 +227,3 @@ export default function VariantenPage(
     </Layout>
   );
 }
-
-export const FlagImage = styled.img(
-  css({
-    display: 'block',
-    ml: 1,
-  })
-);

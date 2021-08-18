@@ -11,7 +11,7 @@ ${tags} {
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
+    font-family: inherit;
     vertical-align: baseline;
   }
 
@@ -52,7 +52,8 @@ html {
   overflow-anchor: none;
 }
 
-button {
+button,
+select {
   font-size: inherit;
   font-family: ${(x) => x.theme.fonts.body};
 }

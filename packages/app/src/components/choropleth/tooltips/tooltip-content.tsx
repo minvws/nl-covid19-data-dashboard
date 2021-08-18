@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import Locatie from '~/assets/locatie.svg';
+import { ReactComponent as Locatie } from '~/assets/locatie.svg';
 import { Heading } from '~/components/typography';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 
@@ -96,7 +96,7 @@ const StyledTooltipHeader = styled.div(
 const Chevron = styled.div(
   css({
     ml: 3,
-    backgroundImage: 'url("/images/chevron-black.svg")',
+    backgroundImage: 'url("/icons/chevron-black.svg")',
     backgroundSize: '0.5em 0.9em',
     backgroundPosition: '0 50%',
     backgroundRepeat: 'no-repeat',

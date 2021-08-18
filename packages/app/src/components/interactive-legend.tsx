@@ -44,9 +44,11 @@ export function InteractiveLegend<T = string>({
             return (
               <Item key={item.label}>
                 <ItemButton
+                  as="button"
+                  variant="button3"
                   onClick={() => onToggleItem(item.metricProperty)}
                   isActive={hasSelection && isSelected}
-                  color={item.color}
+                  borderColor={item.color}
                   data-text={item.label}
                 >
                   {item.label}
@@ -100,11 +102,11 @@ const Item = styled.li(
  * :before to render the colored line on hover/focus
  * :after to widen the button to avoid font-weight bold jumps
  */
-const ItemButton = styled.button<{
+const ItemButton = styled(Text)<{
   isActive: boolean;
-  color: string;
+  borderColor: string;
   text?: string;
-}>(({ isActive, color }) =>
+}>(({ isActive, borderColor }) =>
   css({
     appearance: 'none',
     backgroundColor: 'tileGray',
@@ -113,7 +115,7 @@ const ItemButton = styled.button<{
     pl: asResponsiveArray({ _: 25, md: 30 }),
     py: '3px',
     border: '3px solid',
-    borderColor: isActive ? color : 'transparent',
+    borderColor: isActive ? borderColor : 'transparent',
     fontWeight: isActive ? 'bold' : 'normal',
     fontFamily: 'inherit',
     position: 'relative',
@@ -121,12 +123,11 @@ const ItemButton = styled.button<{
     display: 'inline-flex',
     flexDirection: 'column',
     alignItems: 'center',
-    fontSize: 1,
     justifyContent: 'space-between',
     '&:hover,&:focus': {
       '&:before': {
         content: '""',
-        background: color,
+        background: borderColor,
         height: '3px',
         position: 'absolute',
         left: '-3px',

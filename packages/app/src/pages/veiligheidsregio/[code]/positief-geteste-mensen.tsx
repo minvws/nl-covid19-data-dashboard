@@ -1,15 +1,10 @@
-import {
-  GmCollectionTestedOverall,
-  GmGeoProperties,
-} from '@corona-dashboard/common';
-import Afname from '~/assets/afname.svg';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { GmChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { vrThresholds } from '~/components/choropleth/logic';
-import { GmPositiveTestedPeopleTooltip } from '~/components/choropleth/tooltips';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { Markdown } from '~/components/markdown';
@@ -60,7 +55,7 @@ export const getStaticProps = createGetStaticProps(
     ggd: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
       "main": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "ggd": ${createPageArticlesQuery(
@@ -256,22 +251,22 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             legend={{
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
-              thresholds: vrThresholds.tested_overall.infected_per_100k,
+              thresholds: thresholds.vr.infected_per_100k,
             }}
           >
-            <GmChoropleth
+            <Choropleth
+              map="gm"
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',
               }}
-              selectedCode={selectedMunicipalCode}
-              highlightSelection={false}
-              data={choropleth.gm}
-              getLink={reverseRouter.gm.positiefGetesteMensen}
-              metricName="tested_overall"
-              metricProperty="infected_per_100k"
-              tooltipContent={(
-                context: GmGeoProperties & GmCollectionTestedOverall
-              ) => <GmPositiveTestedPeopleTooltip context={context} />}
+              data={choropleth.gm.tested_overall}
+              dataConfig={{
+                metricProperty: 'infected_per_100k',
+              }}
+              dataOptions={{
+                getLink: reverseRouter.gm.positiefGetesteMensen,
+                selectedCode: selectedMunicipalCode,
+              }}
             />
           </ChoroplethTile>
 
@@ -284,7 +279,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(ggdText.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Afname />}
+            icon={<GgdTesten />}
             description={ggdText.toelichting}
             metadata={{
               datumsText: ggdText.datums,

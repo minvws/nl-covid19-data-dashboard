@@ -1,8 +1,8 @@
 import { VrSituationsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import CheckIcon from '~/assets/check-small.svg';
-import CrossIcon from '~/assets/cross-small.svg';
+import { ReactComponent as CheckIcon } from '~/assets/check-small.svg';
+import { ReactComponent as CrossIcon } from '~/assets/cross-small.svg';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';

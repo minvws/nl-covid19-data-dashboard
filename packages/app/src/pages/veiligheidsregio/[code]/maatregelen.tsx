@@ -34,7 +34,7 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
   createGetContent<MaatregelenData>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
 
     return `
     {

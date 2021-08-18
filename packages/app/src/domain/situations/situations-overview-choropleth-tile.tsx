@@ -1,16 +1,15 @@
 import {
   ChoroplethThresholdsValue,
   VrCollectionSituations,
-  VrGeoProperties,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { VrChoropleth } from '~/components/choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { vrThresholds } from '~/components/choropleth/logic';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { InlineTooltip } from '~/components/inline-tooltip';
@@ -18,6 +17,7 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';
 import { useSituations } from './logic/situations';
 
@@ -32,6 +32,8 @@ export function SituationsOverviewChoroplethTile({
   const situations = useSituations();
   const text = intl.siteText.brononderzoek;
   const singleValue = data[0];
+
+  const breakpoints = useBreakpoints();
 
   const [date_from, date_to] = intl.formatDateSpan(
     { seconds: singleValue.date_start_unix },
@@ -60,7 +62,7 @@ export function SituationsOverviewChoroplethTile({
           <Box>
             <ChoroplethLegenda
               title={text.situaties_kaarten_overzicht.legenda.titel}
-              thresholds={vrThresholds.situations.gathering}
+              thresholds={thresholds.vr.gathering}
             />
           </Box>
           <Box display="flex" alignItems="flex-end">
@@ -86,22 +88,25 @@ export function SituationsOverviewChoroplethTile({
               description={situation.description}
               key={situation.id}
             >
-              <VrChoropleth
+              <Choropleth
                 accessibility={{ key: 'situations_choropleths' }}
-                data={{ situations: data }}
-                metricName={'situations'}
-                metricProperty={situation.id}
-                minHeight={280}
+                map="vr"
+                data={data}
+                dataConfig={{
+                  metricProperty: situation.id,
+                  noDataFillColor: colors.data.underReported,
+                }}
+                dataOptions={{
+                  isPercentage: true,
+                }}
+                minHeight={breakpoints.sm ? 280 : 260}
                 tooltipPlacement="top-center"
-                noDataFillColor={colors.data.underReported}
-                tooltipContent={(
-                  context: VrGeoProperties & VrCollectionSituations
-                ) => (
+                formatTooltip={(context) => (
                   <ChoroplethTooltip
                     isPercentage
-                    value={context[situation.id]}
-                    regionName={context.vrname}
-                    thresholds={vrThresholds.situations[situation.id]}
+                    value={context.dataItem[situation.id]}
+                    regionName={context.featureName}
+                    thresholds={thresholds.vr[situation.id]}
                     noDataFillColor={colors.data.underReported}
                   />
                 )}

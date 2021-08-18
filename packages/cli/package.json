@@ -6,7 +6,7 @@
   "dependencies": {
     "@turf/turf": "^6.5.0",
     "ajv": "^6",
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
     "flat": "^5.0.2",
     "json-schema-to-typescript": "^9",
@@ -16,7 +16,7 @@
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.1",
     "ts-morph": "^11.0.0",
-    "ts-node": "^10.0.0"
+    "ts-node": "^10.2.0"
   },
   "scripts": {
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",

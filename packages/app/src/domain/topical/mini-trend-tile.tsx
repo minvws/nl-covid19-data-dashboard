@@ -1,5 +1,7 @@
-import { TimestampedValue } from '@corona-dashboard/common';
+import { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
+import css from '@styled-system/css';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
@@ -11,12 +13,6 @@ import { colors } from '~/style/theme';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-// This type limits the allowed property names to those with a number type,
-// so its like keyof T, but filtered down to only the appropriate properties.
-type NumberProperty<T extends TimestampedValue> = {
-  [K in keyof T]: T[K] extends number | null ? K : never;
-}[keyof T];
-
 type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
@@ -27,7 +23,7 @@ type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   title: string;
   text: ReactNode;
   trendData: T[];
-  metricProperty: NumberProperty<T>;
+  metricProperty: KeysOfType<T, number | null, true>;
   href: string;
   areas?: { header: string; chart: string };
 };
@@ -55,11 +51,9 @@ export function MiniTrendTile<T extends TimestampedValue>(
   return (
     <>
       <Box gridArea={areas?.header} position="relative" spacing={2} pb={3}>
-        <Box width="4rem" height="4rem" position="absolute" left={0}>
-          {icon}
-        </Box>
         <Heading level={3} as="h2">
-          <Box as="span" display="block" py={2} pl="3.5rem" fontWeight="bold">
+          <Box as="span" fontWeight="bold" display="flex" alignItems="center">
+            <Icon>{icon}</Icon>
             <HeadingLinkWithIcon
               href={href}
               icon={<ArrowIconRight />}
@@ -86,7 +80,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
               timeframe="5weeks"
               values={trendData}
               displayTooltipValueOnly
-              numGridLines={2}
+              numGridLines={3}
               seriesConfig={[
                 {
                   metricProperty,
@@ -102,3 +96,13 @@ export function MiniTrendTile<T extends TimestampedValue>(
     </>
   );
 }
+
+const Icon = styled.span(
+  css({
+    svg: {
+      height: '3rem',
+      mr: 3,
+      ml: '2px',
+    },
+  })
+);

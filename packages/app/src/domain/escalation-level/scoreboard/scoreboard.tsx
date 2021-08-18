@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import GetestIcon from '~/assets/test.svg';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { InlineText } from '~/components/typography';
@@ -11,6 +11,8 @@ import { VrGroup } from './components/vr-group';
 import { VrRow } from './components/vr-row';
 import { scoreboardSortOptions, SortIdentifier } from './logic';
 import { ScoreboardRowData } from './types';
+
+import chevronDownMagentaUrl from '~/assets/chevron-down-magenta.svg';
 
 interface ScoreboardProps {
   rows: ScoreboardRowData[];
@@ -119,7 +121,7 @@ const SelectSortContainer = styled(Box)(
     },
     select: {
       fontWeight: 'bold',
-      background: `url('/images/chevron-down-magenta.svg')`,
+      background: `url('${chevronDownMagentaUrl}')`,
       backgroundSize: '14px 14px',
       backgroundRepeat: 'no-repeat, repeat',
       backgroundPosition: 'right 0.5em top 60%, 0 0',
