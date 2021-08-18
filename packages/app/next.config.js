@@ -9,13 +9,12 @@ const withTranspileModules = require('next-transpile-modules')([
   'd3-geo',
   'd3-array',
   'internmap',
-  'konva',
-  'react-konva',
 ]);
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const path = require('path');
 
 const nextConfig = {
+  experimental: { esmExternals: true },
   /**
    * Enables react strict mode
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode

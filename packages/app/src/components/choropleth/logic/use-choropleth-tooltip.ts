@@ -1,5 +1,7 @@
 import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
+import { KonvaEventObject } from 'konva/lib/Node';
+import { Shape } from 'konva/lib/Shape';
 import { MutableRefObject, RefObject, useEffect, useMemo, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
@@ -17,6 +19,11 @@ import { isCodedValueType } from './utils';
  * Offset the tooltip slightly to prevent it from ending up underneath the mouse pointer
  */
 const DEFAULT_TOOLTIP_OFFSET = 5;
+
+export type ChoroplethTooltipHandlers = [
+  ReturnType<typeof createSvgMouseOverHandler>,
+  ReturnType<typeof createSvgMouseOutHandler>
+];
 
 export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   map: MapType,
@@ -140,7 +147,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       metricPropertyFormatter
     ),
     createSvgMouseOutHandler(timeout, setTooltip, isTouch),
-  ] as const;
+  ] as ChoroplethTooltipHandlers;
 }
 
 const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
@@ -155,9 +162,15 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
   map: MapType,
   metricPropertyFormatter: (value: number) => string
 ) => {
-  return (event: React.MouseEvent) => {
-    const elm = event.target as HTMLElement | SVGElement;
-    const code = elm.getAttribute('data-id');
+  return (event: React.MouseEvent | KonvaEventObject<MouseEvent>) => {
+    const elm = event.target;
+    const code = isDomElement(elm)
+      ? elm.getAttribute('data-id')
+      : (elm as Shape).attrs.id;
+
+    const eventObj = isKonvaEvent(event)
+      ? event.evt
+      : (event as React.MouseEvent);
 
     if (isPresent(code) && ref.current) {
       if (timeout.current > -1) {
@@ -168,7 +181,7 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
       /**
        * Pass the DOM node to fix positioning in Firefox
        */
-      const coords = localPoint(ref.current, event);
+      const coords = localPoint(ref.current, eventObj);
 
       if (isPresent(coords)) {
         setTooltip({
@@ -189,6 +202,14 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
     }
   };
 };
+
+function isDomElement(element: any): element is HTMLElement {
+  return 'getAttribute' in element;
+}
+
+function isKonvaEvent(event: any): event is KonvaEventObject<MouseEvent> {
+  return 'evt' in event;
+}
 
 const createSvgMouseOutHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,

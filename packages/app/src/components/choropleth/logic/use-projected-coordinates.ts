@@ -1,0 +1,78 @@
+import { cleanCoords, flatten, multiPoint, round } from '@turf/turf';
+import { GeoProjection } from 'd3-geo';
+import { Polygon, Position } from 'geojson';
+import { useMemo } from 'react';
+import { isPresent } from 'ts-is-present';
+import { CodedGeoJSON } from './topology';
+
+export type GeoInfo = {
+  code: string;
+  geometry: Polygon;
+};
+
+export function useProjectedCoordinates(
+  geoJson: CodedGeoJSON,
+  geoProjection: () => GeoProjection,
+  width: number,
+  height: number
+) {
+  return useMemo(() => {
+    const polygons = geoJson.features
+      .filter((x) => x.geometry.type === 'Polygon')
+      .map<GeoInfo>((x) => ({
+        code: x.properties.code,
+        geometry: x.geometry as Polygon,
+      }))
+      .concat(
+        geoJson.features
+          .filter((x) => x.geometry.type === 'MultiPolygon')
+          .map((x) => flatten(x))
+          .map((x) => x.features)
+          .flat()
+          .map<GeoInfo>((x) => ({
+            code: x.properties?.code,
+            geometry: x.geometry,
+          }))
+      );
+
+    const geoInfo = polygons.reduce((acc, geoInfo) => {
+      if (!hasCoordinateTuples(geoInfo.geometry.coordinates)) {
+        geoInfo.geometry.coordinates.forEach((x) => {
+          acc.push({
+            ...geoInfo,
+            geometry: {
+              ...geoInfo.geometry,
+              coordinates: [x],
+            },
+          });
+        });
+      } else {
+        acc.push(geoInfo);
+      }
+      return acc;
+    }, [] as GeoInfo[]);
+
+    const projection = geoProjection().fitSize([width, height], geoJson);
+
+    const projectedCoordinates = geoInfo
+      .map((x) => x.geometry.coordinates.flat())
+      .map<[number, number][]>(
+        (c) => cleanCoords(multiPoint(c)).geometry.coordinates
+      )
+      .map<[number, number][]>((coords) =>
+        coords
+          .map((c: [number, number]) => projection(c))
+          .filter(isPresent)
+          .map((x: [number, number]) => [round(x[0], 0), round(x[1], 0)])
+      );
+
+    return [geoInfo, projectedCoordinates] as const;
+  }, [geoJson, width, height, geoProjection]);
+}
+
+function hasCoordinateTuples(array: Position[][] | Position[][][]) {
+  if (Array.isArray(array) && typeof array[0] === 'number') {
+    return true;
+  }
+  return false;
+}

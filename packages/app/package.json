@@ -12,6 +12,7 @@
     "@styled-system/css": "^5.1.5",
     "@styled-system/should-forward-prop": "^5.1.5",
     "@tippyjs/react": "^4.2.5",
+    "@turf/turf": "^6.5.0",
     "@visx/axis": "^1.17.1",
     "@visx/clip-path": "^1.7.0",
     "@visx/curve": "^1.0.0",

@@ -10,9 +10,8 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
 import {
   ChartRegionControls,
-  RegionControlOption,
+  RegionControlOption
 } from '~/components/chart-region-controls';
-import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
@@ -34,7 +33,7 @@ import { Search } from '~/domain/topical/components/search';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
-  WeeklyHighlightProps,
+  WeeklyHighlightProps
 } from '~/domain/topical/highlights-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -46,24 +45,25 @@ import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { GenericChoroplethComponent } from '../components/choropleth';
 
 const ChoroplethComponent = dynamic(
-  () => import('../components/choropleth').then((mod) => mod.Choropleth),
-  { loading: () => <p>Loading component...</p>, ssr: false }
-) as typeof Choropleth;
+  () => import('../components/choropleth'),
+  { ssr: false, loading: () => <p>Loading component...</p> }
+) as GenericChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -320,6 +320,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 <>
                   {selectedMap === 'gm' && (
                     <ChoroplethComponent
+                      renderTarget="canvas"
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
                       }}
@@ -334,7 +335,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'vr' && (
-                    <Choropleth
+                    <ChoroplethComponent
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',
                       }}

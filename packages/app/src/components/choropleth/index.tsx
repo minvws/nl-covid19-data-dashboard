@@ -1,6 +1,5 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Projection } from '@visx/geo/lib/types';
 import { GeoProjection } from 'd3-geo';
 import { useRef, useState } from 'react';
 import { Box } from '~/components/base';
@@ -9,7 +8,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
-import { SvgChoroplethMap } from './components';
+import { ChoroplethMap } from './components/choropleth-map';
 import {
   MappedDataItem,
   MapType,
@@ -26,7 +25,7 @@ export type DataOptions = {
   highlightSelection?: boolean;
   selectedCode?: string;
   tooltipVariables?: Record<string, Record<string, string> | string>;
-  projection?: Projection | (() => GeoProjection);
+  projection?: () => GeoProjection;
 };
 
 type OptionalDataConfig<T> = {
@@ -105,6 +104,8 @@ export type ChoroplethProps<
   renderTarget?: RenderTarget;
 };
 
+export type GenericChoroplethComponent = typeof Choropleth;
+
 /**
  * This is a (semi) generic choropleth component that supports a Dutch map of municipalities or safetyregions
  * and a European map.
@@ -120,16 +121,14 @@ export type ChoroplethProps<
  * Most of the choropleths will work using the generic tooltip, but if something custom is required the `formatTooltip`
  * prop is there to help out.
  */
-export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
-  formatTooltip,
-  tooltipPlacement,
-  renderTarget = 'svg',
-  ...props
-}: ChoroplethProps<T, K>) {
+export default function Choropleth<
+  T extends MapType,
+  K extends UnpackedDataItem<T>
+>({ formatTooltip, tooltipPlacement, ...props }: ChoroplethProps<T, K>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
   const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
-  const hoverRef = useRef<SVGGElement>(null);
+  const hoverRef = useRef<SVGGElement | HTMLElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));
@@ -147,15 +146,13 @@ export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
       <div
         css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
       >
-        {renderTarget === 'svg' && (
-          <SvgChoroplethMap
-            {...props}
-            setTooltip={setTooltip}
-            hoverRef={hoverRef}
-            isTabInteractive={isTabInteractive}
-            anchorEventHandlers={anchorEventHandlers}
-          />
-        )}
+        <ChoroplethMap
+          {...props}
+          setTooltip={setTooltip}
+          hoverRef={hoverRef}
+          isTabInteractive={isTabInteractive}
+          anchorEventHandlers={anchorEventHandlers}
+        />
 
         {tooltip && (
           <div

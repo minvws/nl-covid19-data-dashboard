@@ -9,7 +9,7 @@ type GetHoverFeatureProp<T = string> = (
   isActivated?: boolean
 ) => T;
 
-type FeatureProps = {
+export type FeatureProps = {
   /**
    * Feature props for the features of the map that are colored in based on the given data.
    * (So the basic functionality of a choropleth)
@@ -36,6 +36,8 @@ type FeaturePropFunctions = {
 };
 
 export const DEFAULT_STROKE_WIDTH = 0.5;
+
+export const DEFAULT_HOVER_STROKE_WIDTH = 3;
 
 /**
  * This hook returns the visual props for the map features based on the specified map type.
