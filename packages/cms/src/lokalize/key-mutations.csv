@@ -82,4 +82,6 @@ timestamp,action,key,document_id,move_to
 2021-08-12T09:46:57.629Z,move,choropleth_tooltip.sewer_regional,jF33EuwumlGuwav2FD4IKC,choropleth_tooltip.vr.average.subject
 2021-08-16T10:44:00.282Z,add,gedrag_common.line_chart.tooltip_witte_gaten_beschrijving,4wy7f8NuwuLne309tI5xhE,__
 2021-08-16T10:44:01.287Z,add,gedrag_common.line_chart.tooltip_witte_gaten_label,DWLUotrm23arH2ViSFggy4,__
+2021-08-17T09:51:25.960Z,add,vaccinaties.levering_en_voorradad_datums,m5cl7ciD7CmTUWm5d6Lass,__
+2021-08-17T09:55:23.555Z,move,vaccinaties.levering_en_voorradad_datums,m5cl7ciD7CmTUWm5d6Lass,vaccinaties.levering_en_voorraad_datums
 2021-08-18T09:22:06.995Z,add,search.aria_label,m5cl7ciD7CmTUWm5d7zP2O,__
