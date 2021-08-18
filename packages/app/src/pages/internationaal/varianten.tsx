@@ -4,11 +4,10 @@ import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Select } from '~/components/select';
 import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
-import { Flag } from '~/domain/international/flag';
-import { countryCodes } from '~/domain/international/select-countries';
+import { countryCodes } from '~/domain/international/multi-select-countries';
+import { SelectCountry } from '~/domain/international/select-country';
 import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
@@ -182,19 +181,10 @@ export default function VariantenPage(
               spacing={{ _: 4, md: 0 }}
               spacingHorizontal={{ md: 3 }}
             >
-              <Select
+              <SelectCountry
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}
-                icon={
-                  <Box ml={1}>
-                    <Flag
-                      countryCode={selectedCountryCode}
-                      width={16}
-                      height={12}
-                    />
-                  </Box>
-                }
               />
 
               {isPresent(tableData?.variantTable) && !tableData?.isReliable && (
@@ -215,7 +205,7 @@ export default function VariantenPage(
             }}
           >
             <Box alignSelf="flex-start">
-              <Select
+              <SelectCountry
                 options={countryOptions}
                 onChange={onChange}
                 value={selectedCountryCode}

@@ -80,7 +80,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
               timeframe="5weeks"
               values={trendData}
               displayTooltipValueOnly
-              numGridLines={2}
+              numGridLines={3}
               seriesConfig={[
                 {
                   metricProperty,

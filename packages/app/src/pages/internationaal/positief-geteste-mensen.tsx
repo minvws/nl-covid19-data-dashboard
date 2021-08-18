@@ -18,8 +18,8 @@ import {
   CountryCode,
   countryCodes,
   CountryOption,
-  SelectCountries,
-} from '~/domain/international/select-countries';
+  MultiSelectCountries,
+} from '~/domain/international/multi-select-countries';
 import { InPositiveTestedPeopleTooltip } from '~/domain/international/tooltip';
 import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
@@ -224,7 +224,7 @@ export default function PositiefGetesteMensenPage(
             }}
             description={text.time_graph.description}
           >
-            <SelectCountries
+            <MultiSelectCountries
               countryOptions={countryOptions}
               limit={10}
               alwaysSelectedCodes={['nld']}
@@ -244,7 +244,7 @@ export default function PositiefGetesteMensenPage(
                   disableLegend
                 />
               )}
-            </SelectCountries>
+            </MultiSelectCountries>
           </ChartTile>
 
           <InfectedTableTile
