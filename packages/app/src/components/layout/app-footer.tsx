@@ -24,7 +24,6 @@ export function AppFooter() {
         bg="blue"
         color="white"
         py={5}
-        zIndex={4}
         position="relative"
         id="footer-navigation"
       >

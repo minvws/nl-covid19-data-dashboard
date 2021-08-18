@@ -23,18 +23,18 @@ import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult,
+  PageArticlesQueryResult
 } from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
   getNlData,
-  selectNlPageMetricData,
+  selectNlPageMetricData
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
@@ -101,9 +101,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-
           <VaccinePageIntroduction data={data} />
-
+          
           <PageInformationBlock
             description={content.page.pageDescription}
             metadata={{
@@ -328,7 +327,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             description={text.stock_and_delivery_section.description}
             referenceLink={text.stock_and_delivery_section.reference.href}
             metadata={{
-              datumsText: text.datums,
+              datumsText: text.levering_en_voorraad_datums,
               dateOrRange: data.vaccine_stock.last_value.date_unix,
               dateOfInsertionUnix:
                 data.vaccine_stock.last_value.date_of_insertion_unix,

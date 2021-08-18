@@ -11,7 +11,7 @@ import { useHotkey } from '~/utils/hotkey/use-hotkey';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useSearchContext } from './context';
 
-export function SelectCountriesResults() {
+export function MultiSelectCountriesResults() {
   const {
     id,
     hits,

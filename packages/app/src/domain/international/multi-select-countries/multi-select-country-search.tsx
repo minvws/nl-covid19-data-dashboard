@@ -6,10 +6,10 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { CountryOption, SearchContextProvider } from './context';
-import { SelectCountriesInput } from './select-countries-input';
-import { SelectCountriesResults } from './select-country-results';
+import { MultiSelectCountriesInput } from './mult-select-countries-input';
+import { MultiSelectCountriesResults } from './multi-select-country-results';
 
-export function SelectCountrySearch({
+export function MultiSelectCountrySearch({
   initialValue,
   countries,
   onToggleCountry,
@@ -42,14 +42,14 @@ export function SelectCountrySearch({
         >
           <Box {...context.comboboxProps}>
             <Box position="relative" ref={heightRef}>
-              <SelectCountriesInput />
+              <MultiSelectCountriesInput />
             </Box>
 
             <Box
               boxShadow="tile"
               display={context.showResults ? 'block' : 'none'}
             >
-              <SelectCountriesResults />
+              <MultiSelectCountriesResults />
             </Box>
           </Box>
         </SearchForm>
