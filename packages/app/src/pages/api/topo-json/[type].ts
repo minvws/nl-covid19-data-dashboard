@@ -19,6 +19,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         },
       };
       res.status(200).json(result);
+      break;
     }
     case 'vr': {
       const result = {
@@ -33,9 +34,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         },
       };
       res.status(200).json(result);
+      break;
     }
     case 'in': {
       res.status(200).json(inTopology);
+      break;
     }
     default: {
       res.status(404);
