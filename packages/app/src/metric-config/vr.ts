@@ -1,5 +1,4 @@
 import { MetricKeys, Vr } from '@corona-dashboard/common';
-import { colors } from '~/style/theme';
 import { MetricConfig } from './common';
 import {
   elderlyAtHomeThresholds,
@@ -17,10 +16,7 @@ import {
   positiveTestedRiskCategoryThresholds,
   hospitalAdmissionsRiskCategoryThresholds,
 } from './risk-category-thresholds';
-
-const GREEN = colors.data.gradient.green;
-const YELLOW = colors.data.gradient.yellow;
-const RED = colors.data.gradient.red;
+import { positiveTestedBarScale } from './bar-scales';
 
 type VrMetricKey = MetricKeys<Vr>;
 type VrConfig = Partial<Record<VrMetricKey, Record<string, MetricConfig>>>;
@@ -82,25 +78,7 @@ export const vr: VrConfig = {
   },
   tested_overall: {
     infected_per_100k: {
-      barScale: {
-        min: 0,
-        max: 10,
-        signaalwaarde: 7,
-        gradient: [
-          {
-            color: GREEN,
-            value: 0,
-          },
-          {
-            color: YELLOW,
-            value: 7,
-          },
-          {
-            color: RED,
-            value: 10,
-          },
-        ],
-      },
+      barScale: positiveTestedBarScale,
       riskCategoryThresholds: positiveTestedRiskCategoryThresholds,
       choroplethThresholds: positiveTestedThresholds,
     },
