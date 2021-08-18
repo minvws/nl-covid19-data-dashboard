@@ -15,7 +15,7 @@ import { GetStaticPropsContext } from 'next';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
-import { CountryCode } from '~/domain/international/select-countries';
+import { CountryCode } from '~/domain/international/multi-select-countries';
 import { GmSideBarData } from '~/domain/layout/gm-layout';
 import {
   NlPageMetricNames,
