@@ -1,4 +1,3 @@
-import css from '@styled-system/css';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { CollapsibleButton } from '~/components/collapsible';
@@ -6,7 +5,7 @@ import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { LinkWithIcon } from '~/components/link-with-icon';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
-import { EscalationLevel } from '../restrictions/type';
+import { EscalationLevel } from '../restrictions/types';
 
 type EscalationLevelExplanationProps = {
   level: EscalationLevel;
@@ -23,9 +22,9 @@ function EscalationLevelExplanation(props: EscalationLevelExplanationProps) {
       <Box width="10rem" display="flex" flexGrow={0} flexShrink={0}>
         <EscalationLevelInfoLabel level={level} />
       </Box>
-      <Text mb={0} css={css({ maxWidth: 'maxWidthText' })}>
-        {explanation}
-      </Text>
+      <Box maxWidth="maxWidthText">
+        <Text>{explanation}</Text>
+      </Box>
     </Box>
   );
 }
@@ -66,7 +65,7 @@ export function EscalationLevelExplanations({
             />
           )}
 
-          <Box my={4}>
+          <Box py={3}>
             <LinkWithIcon
               href="/over-risiconiveaus"
               icon={<ArrowIconRight />}

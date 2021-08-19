@@ -12,7 +12,7 @@ import { assert } from '~/utils/assert';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { InlineDifference } from './difference-indicator';
 import { RelativeDate } from './relative-date';
-import { Text } from './typography';
+import { InlineText, Text } from './typography';
 
 type DataKeys = keyof Nl | keyof Vr | keyof Gm;
 
@@ -93,12 +93,18 @@ export function DataDrivenText<T extends DataKeys, K = DataFile<T>>({
             absoluteDateTemplate={siteText.common.absolute_date_template}
           />
         ),
-        propertyValue: <strong>{formatNumber(propertyValue)}</strong>,
+        propertyValue: (
+          <InlineText fontWeight="bold">
+            {formatNumber(propertyValue)}
+          </InlineText>
+        ),
       })}{' '}
       {replaceComponentsInText(differenceTexts, {
         differenceTrend: <InlineDifference value={differenceValue} />,
         differenceAverage: (
-          <strong>{formatNumber(differenceValue.old_value)}</strong>
+          <InlineText fontWeight="bold">
+            {formatNumber(differenceValue.old_value)}
+          </InlineText>
         ),
       })}
     </Text>

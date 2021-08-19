@@ -79,14 +79,7 @@ export function useScales<T extends TimestampedValue>(args: {
     const yScale = scaleLinear({
       domain: [yMin, maximumValue > 0 ? maximumValue : maximumDomainValue],
       range: [bounds.height, 0],
-      /**
-       * Mini trend tiles only use 2 ticks, but that would result in max values
-       * stetching by 100% every time, which is too much in most cases. So here
-       * we increase the nice resolution only for those charts. The number 5 is
-       * chosen so that the max value will still be fairly close to the top grid
-       * line.
-       */
-      nice: numTicks < 3 ? numTicks * 5 : numTicks,
+      nice: numTicks,
       round: true, // round the output values so we render on round pixels
     });
 

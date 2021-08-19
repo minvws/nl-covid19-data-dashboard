@@ -1,11 +1,10 @@
 import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
-import { first } from 'lodash';
-import { last } from 'lodash';
+import { first, isFunction, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useCurrentDate } from '~/utils/current-date-context';
@@ -206,7 +205,12 @@ export function TimeSeriesChart<
     [timespanAnnotations]
   );
 
-  const seriesList = useSeriesList(values, seriesConfig, cutValuesConfig);
+  const seriesList = useSeriesList(
+    values,
+    seriesConfig,
+    cutValuesConfig,
+    dataOptions
+  );
 
   /**
    * The maximum is calculated over all values, because you don't want the
@@ -221,7 +225,9 @@ export function TimeSeriesChart<
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
-    ? forcedMaximumValue
+    ? isFunction(forcedMaximumValue)
+      ? forcedMaximumValue(calculatedSeriesMax)
+      : forcedMaximumValue
     : calculatedSeriesMax;
 
   const {
@@ -369,8 +375,12 @@ export function TimeSeriesChart<
   return (
     <>
       {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+        <>
+          <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
+          <Spacer mb={{ _: 2, sm: 0 }} />
+        </>
       )}
+
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
@@ -427,9 +437,9 @@ export function TimeSeriesChart<
             {highlightZero && (
               <rect
                 x={0}
-                y={yScale(0) - 1}
+                y={yScale(0)}
                 width={bounds.width}
-                height={2}
+                height={1}
                 fill="black"
               />
             )}
@@ -531,8 +541,9 @@ export function TimeSeriesChart<
               display="flex"
               flexDirection={['column', 'row']}
               alignItems="baseline"
+              spacingHorizontal={3}
             >
-              <InlineText pr={3}>{x.label}:</InlineText>
+              <InlineText>{x.label}:</InlineText>
               <Legend items={x.items} />
             </Box>
           ))}

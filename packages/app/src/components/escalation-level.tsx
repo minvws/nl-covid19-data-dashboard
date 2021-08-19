@@ -5,7 +5,7 @@ import {
 } from '~/components/escalation-level-icon';
 import { Text } from '~/components/typography';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useEscalationColor } from '~/utils/use-escalation-color';
@@ -60,8 +60,13 @@ export function EscalationLevelLabel({
     : 'inherit';
 
   return (
-    <Text as="span" fontWeight="bold" fontSize={fontSize} color={color}>
-      {siteText.escalatie_niveau.types[getEscalationLevelIndexKey(level)].titel}
-    </Text>
+    <Box color={color} fontSize={fontSize}>
+      <Text as="span" fontWeight="bold">
+        {
+          siteText.escalatie_niveau.types[getEscalationLevelIndexKey(level)]
+            .titel
+        }
+      </Text>
+    </Box>
   );
 }

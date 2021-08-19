@@ -8,7 +8,7 @@ against their given schema.
 `yarn validate-json-single <schema-name> <json-file>` This validates a single JSON
 file from the `public/json` folder against the given schema.
 
-`yarn generate-typescript` Generates the `src/types/data.d.ts` file based on the
+`yarn generate-typescript` Generates the `src/types/data.ts` file based on the
 JSON schemas.
 
 `yarn validate-last-values` This validates all time series by matching every

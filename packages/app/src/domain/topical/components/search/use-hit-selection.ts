@@ -9,9 +9,6 @@ import { useHotkey } from '~/utils/hotkey/use-hotkey';
  * Additionally:
  * - it will set focus on the corresponding DOM element while navigating with
  *   the arrow-keys.
- * - it will capture "selection"-events triggered with the return-key. These
- *   events can be triggered in combination with a command/control-modifier key
- *   which means the user would like to open the result in a new window.
  */
 export function useHitSelection({
   numberOfHits,

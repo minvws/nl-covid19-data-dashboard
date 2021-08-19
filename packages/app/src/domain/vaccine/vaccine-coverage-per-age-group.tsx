@@ -155,11 +155,7 @@ function formatAgeGroupString(
 
 function VaccinationCoveragePercentage({ value }: { value: string }) {
   return (
-    <InlineText
-      color={colors.data.multiseries.cyan_dark}
-      fontSize={3}
-      fontWeight="bold"
-    >
+    <InlineText variant="h3" color={colors.data.multiseries.cyan_dark}>
       {value}
     </InlineText>
   );
@@ -178,18 +174,13 @@ function AgeGroup({
     <Box display="flex" flexDirection="column">
       {tooltipText ? (
         <InlineTooltip content={tooltipText}>
-          <InlineText fontWeight="bold" fontSize={2}>
-            {range}
-          </InlineText>
+          <InlineText fontWeight="bold">{range}</InlineText>
         </InlineTooltip>
       ) : (
-        <InlineText fontWeight="bold" fontSize={2}>
-          {range}
-        </InlineText>
+        <InlineText fontWeight="bold">{range}</InlineText>
       )}
-      <Box as="span" fontSize={1}>
-        <InlineText>{total}</InlineText>
-      </Box>
+
+      <InlineText variant="label1">{total}</InlineText>
     </Box>
   );
 }

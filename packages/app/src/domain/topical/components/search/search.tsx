@@ -1,16 +1,16 @@
 import css from '@styled-system/css';
 import { forwardRef, ReactNode, useRef } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer/polyfilled';
 import { Box } from '~/components/base';
-import { useIsMounted } from '~/utils/use-is-mounted';
 import { useBreakpoints } from '~/utils/use-breakpoints';
+import { useIsMounted } from '~/utils/use-is-mounted';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { SearchContextProvider } from './context';
 import { SearchInput } from './search-input';
 import { SearchResults } from './search-results';
 
 export function Search({ initialValue }: { initialValue?: string }) {
-  const { height, ref: heightRef } = useResizeObserver<HTMLDivElement>();
+  const [heightRef, { height }] = useResizeObserver<HTMLDivElement>();
   const containerRef = useRef<HTMLFormElement>(null);
 
   const isMounted = useIsMounted();

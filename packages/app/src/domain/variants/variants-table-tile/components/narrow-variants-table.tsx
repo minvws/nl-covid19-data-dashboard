@@ -4,10 +4,9 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
-import { TableText } from '~/domain/variants/variants-table-tile';
+import { InlineText, Text } from '~/components/typography';
+import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import { useCollapsible } from '~/utils/use-collapsible';
 import {
@@ -19,6 +18,7 @@ import {
   VariantNameCell,
 } from '.';
 import { useVariantNameAndDescription } from '../logic/use-variant-name-and-description';
+import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
 
 type NarrowVariantsTableProps = {
@@ -104,8 +104,8 @@ function MobileVariantRow(props: MobileVariantRowProps) {
         <MobileCell colSpan={3}>
           {collapsible.content(
             <Box spacing={2} css={css({ pb: 3 })}>
-              <Box display="flex" flexDirection="row">
-                <InlineText mr={1}>{columnNames.vorige_meting}:</InlineText>
+              <Box display="flex" flexDirection="row" spacingHorizontal={2}>
+                <InlineText>{columnNames.vorige_meting}:</InlineText>
                 {isPresent(row.difference) &&
                 isPresent(row.difference.difference) &&
                 isPresent(row.difference.old_value) ? (
@@ -116,9 +116,7 @@ function MobileVariantRow(props: MobileVariantRowProps) {
                   '-'
                 )}
               </Box>
-              <Box css={css({ color: 'annotation', fontSize: 2 })}>
-                {variantDescription}
-              </Box>
+              <Text color="annotation">{variantDescription}</Text>
             </Box>
           )}
         </MobileCell>

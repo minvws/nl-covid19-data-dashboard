@@ -2,12 +2,11 @@ import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
 import { last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { EuropeChoropleth } from '~/components/choropleth/europe-choropleth';
-import { internationalThresholds } from '~/components/choropleth/international-thresholds';
-import { PositiveTestedPeopleInternationalTooltip } from '~/components/choropleth/tooltips/international/positive-tested-people-international-tooltip';
+import { Choropleth } from '~/components/choropleth';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -19,9 +18,10 @@ import {
   CountryCode,
   countryCodes,
   CountryOption,
-  SelectCountries,
-} from '~/domain/international/select-countries';
-import { InternationalLayout } from '~/domain/layout/international-layout';
+  MultiSelectCountries,
+} from '~/domain/international/multi-select-countries';
+import { InPositiveTestedPeopleTooltip } from '~/domain/international/tooltip';
+import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -55,10 +55,10 @@ export const getStaticProps = withFeatureNotFoundPage(
       highlight: {
         articles?: ArticleSummary[];
       };
-    }>(() => {
-      const locale = process.env.NEXT_PUBLIC_LOCALE || 'nl';
+    }>((context) => {
+      const { locale } = context;
       return `{
-      "page": ${getInPositiveTestsQuery()},
+      "page": ${getInPositiveTestsQuery(context)},
       "highlight": ${createPageArticlesQuery('in_positiveTestsPage', locale)}
     }`;
     }),
@@ -108,7 +108,7 @@ export default function PositiefGetesteMensenPage(
 
   const comparedCode = 'nld';
   const comparedName = countryNames[comparedCode];
-  const comparedValue = choropleth.in.find(
+  const comparedValue = choroplethData.find(
     (x) => x.country_code.toLocaleLowerCase() === comparedCode
   )?.infected_per_100k_average;
 
@@ -133,9 +133,10 @@ export default function PositiefGetesteMensenPage(
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <InternationalLayout lastGenerated={lastGenerated}>
+      <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
+            category={text.categorie}
             title={text.titel}
             icon={<Getest />}
             description={text.pagina_toelichting}
@@ -155,7 +156,7 @@ export default function PositiefGetesteMensenPage(
             title={text.choropleth.titel}
             description={text.choropleth.toelichting}
             legend={{
-              thresholds: internationalThresholds.infected_per_100k_average,
+              thresholds: thresholds.in.infected_per_100k_average,
               title: text.choropleth.legenda_titel,
             }}
             metadata={{
@@ -166,26 +167,54 @@ export default function PositiefGetesteMensenPage(
               ],
             }}
           >
-            <EuropeChoropleth
+            <Choropleth
+              map="in"
               accessibility={{
                 key: 'international_tested_overall_choropleth',
               }}
               data={choroplethData}
-              metricProperty="infected_per_100k_average"
-              tooltipContent={(context) => (
-                <PositiveTestedPeopleInternationalTooltip
+              dataConfig={{
+                metricProperty: 'infected_per_100k_average',
+              }}
+              dataOptions={{
+                getFeatureName: (code) =>
+                  countryNames[code.toLocaleLowerCase()],
+              }}
+              formatTooltip={(context) => (
+                <InPositiveTestedPeopleTooltip
                   title={text.choropleth.tooltip_titel}
-                  countryName={
-                    countryNames[context.country_code.toLowerCase()] ||
-                    context.country_code
-                  }
-                  countryCode={context.country_code}
-                  value={context.infected_per_100k_average}
+                  countryName={context.featureName}
+                  countryCode={context.dataItem.country_code}
+                  value={context.dataItem.infected_per_100k_average}
                   comparedName={comparedName}
                   comparedCode={comparedCode}
                   comparedValue={comparedValue}
                 />
               )}
+              dynamicSizeConfiguration={[
+                {
+                  containerWidth: 600,
+                  heightAndPadding: {
+                    mapHeight: 650,
+                    padding: { top: 5, bottom: 20 },
+                  },
+                },
+                {
+                  containerWidth: 400,
+                  heightAndPadding: {
+                    mapHeight: 400,
+                    padding: { top: 15, bottom: 15 },
+                  },
+                },
+                {
+                  containerWidth: 300,
+                  heightAndPadding: {
+                    mapHeight: 300,
+                    padding: { top: 5, bottom: 5 },
+                  },
+                },
+                { mapHeight: 250, padding: { left: 20, top: 0, bottom: 0 } },
+              ]}
             />
           </EuropeChoroplethTile>
 
@@ -196,33 +225,27 @@ export default function PositiefGetesteMensenPage(
             }}
             description={text.time_graph.description}
           >
-            <>
-              <SelectCountries
-                countryOptions={countryOptions}
-                limit={10}
-                alwaysSelectedCodes={['nld']}
-                defaultSelectedCodes={['bel', 'deu']}
-              >
-                {(selectedCountries, colors) => {
-                  const seriesConfig: LineSeriesDefinition<CompiledCountriesValue>[] =
-                    selectedCountriesToSeriesConfig(
-                      selectedCountries,
-                      countryNames,
-                      colors
-                    );
-                  return (
-                    <TimeSeriesChart
-                      accessibility={{
-                        key: 'international_infected_people_over_time_chart',
-                      }}
-                      values={compiledInternationalData}
-                      seriesConfig={seriesConfig}
-                      disableLegend
-                    />
-                  );
-                }}
-              </SelectCountries>
-            </>
+            <MultiSelectCountries
+              countryOptions={countryOptions}
+              limit={10}
+              alwaysSelectedCodes={['nld']}
+              defaultSelectedCodes={['bel', 'deu']}
+            >
+              {(selectedCountries, colors) => (
+                <TimeSeriesChart
+                  accessibility={{
+                    key: 'international_infected_people_over_time_chart',
+                  }}
+                  values={compiledInternationalData}
+                  seriesConfig={selectedCountriesToSeriesConfig(
+                    selectedCountries,
+                    countryNames,
+                    colors
+                  )}
+                  disableLegend
+                />
+              )}
+            </MultiSelectCountries>
           </ChartTile>
 
           <InfectedTableTile
@@ -237,7 +260,7 @@ export default function PositiefGetesteMensenPage(
             }}
           />
         </TileList>
-      </InternationalLayout>
+      </InLayout>
     </Layout>
   );
 }

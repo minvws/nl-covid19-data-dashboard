@@ -1,13 +1,18 @@
 import { TimelineEventConfig } from '../components/timeline';
 
+/**
+ * The prop renderNullAsZero only make sense when rendering a gapped-stacked-area,
+ * hence why it only works in that particular config .
+ */
 export interface DataOptions {
   valueAnnotation?: string;
-  forcedMaximumValue?: number;
+  forcedMaximumValue?: number | ((x: number) => number);
   isPercentage?: boolean;
   benchmark?: BenchmarkConfig;
   timespanAnnotations?: TimespanAnnotationConfig[];
   timeAnnotations?: TimeAnnotationConfig[];
   timelineEvents?: TimelineEventConfig[];
+  renderNullAsZero?: boolean;
 }
 
 export interface BenchmarkConfig {
