@@ -40,9 +40,11 @@ export function VariantsSidebarMetric({ data }: VariantsSidebarMetricProps) {
           {`${formatPercentage(data.percentage)}% ${variantName}`}
         </InlineText>
 
-        <InlineText variant="label1" color="annotation" fontWeight="bold">
-          {dateText}
-        </InlineText>
+        <Box pt="2px">
+          <InlineText variant="label1" color="annotation">
+            {dateText}
+          </InlineText>
+        </Box>
       </Box>
     </Box>
   );
