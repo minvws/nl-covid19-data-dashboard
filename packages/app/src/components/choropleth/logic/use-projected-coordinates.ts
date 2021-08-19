@@ -4,6 +4,7 @@ import { Polygon, Position } from 'geojson';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { CodedGeoJSON } from './topology';
+import { FitExtent } from './types';
 
 export type GeoInfo = {
   code: string;
@@ -13,8 +14,7 @@ export type GeoInfo = {
 export function useProjectedCoordinates(
   geoJson: CodedGeoJSON,
   geoProjection: () => GeoProjection,
-  width: number,
-  height: number
+  fitExtent: FitExtent
 ) {
   return useMemo(() => {
     const polygons = geoJson.features
@@ -52,7 +52,7 @@ export function useProjectedCoordinates(
       return acc;
     }, [] as GeoInfo[]);
 
-    const projection = geoProjection().fitSize([width, height], geoJson);
+    const projection = geoProjection().fitExtent(fitExtent[0], fitExtent[1]);
 
     const projectedCoordinates = geoInfo
       .map((x) => x.geometry.coordinates.flat())
@@ -67,7 +67,7 @@ export function useProjectedCoordinates(
       );
 
     return [geoInfo, projectedCoordinates] as const;
-  }, [geoJson, width, height, geoProjection]);
+  }, [geoJson, fitExtent, geoProjection]);
 }
 
 function hasCoordinateTuples(array: Position[][] | Position[][][]) {

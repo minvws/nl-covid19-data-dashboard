@@ -30,13 +30,17 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   data: T[],
   selectedCode?: string
 ): ChoroplethFeatures | undefined {
-  const { data: topoJson, error } = useSWR(`/api/topo-json/${map}`);
+  const { data: geoJson } = useSWR<any>(`/api/topo-json/${map}`, (url) =>
+    fetch(url)
+      .then((_) => _.json())
+      .then((_) => createGeoJson(map, _))
+  );
 
   return useMemo(() => {
-    if (!isDefined(topoJson)) {
+    if (!isDefined(geoJson)) {
       return;
     }
-    const [featureGeo, outlineGeo] = createGeoJson(map, topoJson);
+    const [featureGeo, outlineGeo] = geoJson;
 
     switch (map) {
       case 'gm': {
@@ -91,7 +95,7 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
         };
       }
     }
-  }, [map, selectedCode, data, topoJson]);
+  }, [map, selectedCode, data, geoJson]);
 }
 
 function filterBoundingBoxBySelectedGmCode(
