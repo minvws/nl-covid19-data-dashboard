@@ -49,7 +49,7 @@ export const ARTICLE_FIELDS = [
       layout: 'grid',
       list: [
         { title: 'Vaccinaties', value: 'vaccinaties' },
-        { title: 'Infecties', value: 'infecties' },
+        { title: 'besmettingen', value: 'besmettingen' },
         { title: 'Sterfte', value: 'sterfte' },
         { title: 'Ziekenhuizen', value: 'ziekenhuizen' },
         { title: 'Kwetsbare groepen', value: 'kwetsbare_groepen' },
