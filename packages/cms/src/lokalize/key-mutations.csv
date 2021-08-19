@@ -94,3 +94,7 @@ timestamp,action,key,document_id,move_to
 2021-08-19T11:32:38.138Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,kZYjqFJyrN0fPPHPQq27cU,__
 2021-08-19T11:32:38.140Z,move,common_actueel.secties.artikelen.categorie_filters.infecties,kZYjqFJyrN0fPPHPQq27ps,common_actueel.secties.artikelen.categorie_filters.besmettingen
 2021-08-19T11:42:38.315Z,add,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSJoOAs,__
+2021-08-19T11:48:44.908Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSJoOAs,__
+2021-08-19T11:48:44.909Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,kZYjqFJyrN0fPPHPQq27cU,__
+2021-08-19T11:48:44.911Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSHQRMk,__
+2021-08-19T11:55:29.087Z,add,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSJpokU,__
