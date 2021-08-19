@@ -1,7 +1,7 @@
 export const articleCategory = [
   '__alles',
   'vaccinaties',
-  'infecties',
+  'besmettingen',
   'sterfte',
   'ziekenhuizen',
   'kwetsbare_groepen',
