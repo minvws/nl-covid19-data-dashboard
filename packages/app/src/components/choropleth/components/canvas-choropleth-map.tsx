@@ -73,15 +73,12 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     }
   }, []);
 
-  const reset = useCallback(
-    (evt: KonvaEventObject<MouseEvent>) => {
-      setHover(undefined);
-      if (isDefined(mouseOutHandler)) {
-        mouseOutHandler();
-      }
-    },
-    [setHover]
-  );
+  const reset = useCallback(() => {
+    setHover(undefined);
+    if (isDefined(mouseOutHandler)) {
+      mouseOutHandler();
+    }
+  }, [setHover]);
 
   const localContainerRef = useRef<any>(null);
 
