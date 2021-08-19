@@ -136,6 +136,7 @@ export default function PositiefGetesteMensenPage(
       <InLayout lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
+            category={text.categorie}
             title={text.titel}
             icon={<Getest />}
             description={text.pagina_toelichting}

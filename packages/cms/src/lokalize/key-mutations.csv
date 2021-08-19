@@ -85,6 +85,8 @@ timestamp,action,key,document_id,move_to
 2021-08-17T09:51:25.960Z,add,vaccinaties.levering_en_voorradad_datums,m5cl7ciD7CmTUWm5d6Lass,__
 2021-08-17T09:55:23.555Z,move,vaccinaties.levering_en_voorradad_datums,m5cl7ciD7CmTUWm5d6Lass,vaccinaties.levering_en_voorraad_datums
 2021-08-18T09:22:06.995Z,add,search.aria_label,m5cl7ciD7CmTUWm5d7zP2O,__
+2021-08-19T08:59:05.838Z,add,internationaal_positief_geteste_personen.categorie,4wy7f8NuwuLne309tjR3iO,__
+2021-08-19T08:59:07.402Z,add,internationaal_varianten.categorie,4wy7f8NuwuLne309tjR4lE,__
 2021-08-19T08:16:03.720Z,delete,article_strip.new_test_property,kt2ppSPvrPFKtGfS5bNmTZ,__
 2021-08-19T08:16:03.720Z,delete,article_strip.title,jF33EuwumlGuwav2FD4Ffo,__
 2021-08-19T08:16:03.723Z,delete,article_strip_something_else.new_property_without_id,E1TFDu4yOKwABjfAqnBN8Y,__
