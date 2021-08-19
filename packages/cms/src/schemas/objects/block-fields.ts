@@ -48,6 +48,9 @@ export const blockFields = [
   },
   {
     type: 'image',
+    initialValue: {
+      isFullWidth: true,
+    },
     fields: [
       {
         name: 'alt',
