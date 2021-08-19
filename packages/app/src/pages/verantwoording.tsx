@@ -1,3 +1,4 @@
+import groupBy from 'lodash/groupBy';
 import Head from 'next/head';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
@@ -36,11 +37,12 @@ export const getStaticProps = createGetStaticProps(
           {
             ...,
             "asset": asset->
-           },
+          },
         ]
       },
       "collapsibleList": [...collapsibleList[]->
         {
+          "group": group->group.${locale},
           "content": [
               ...content.${locale}[]
               {
@@ -59,6 +61,11 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const { content, lastGenerated } = props;
 
+  const groups = groupBy<CollapsibleList>(
+    content.collapsibleList,
+    (x) => x.group
+  );
+
   return (
     <Layout {...siteText.verantwoording_metadata} lastGenerated={lastGenerated}>
       <Head>
@@ -76,24 +83,37 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
       </Head>
 
       <Content>
-        {content.title && <Heading level={1}>{content.title}</Heading>}
-        {content.description && <RichContent blocks={content.description} />}
-        {content.collapsibleList && (
-          <article>
-            {content.collapsibleList.map((item) => {
-              const id = getSkipLinkId(item.title);
-              return item.content ? (
-                <CollapsibleSection key={id} id={id} summary={item.title}>
-                  {item.content && (
-                    <Box mt={3}>
-                      <RichContent blocks={item.content} />
-                    </Box>
-                  )}
-                </CollapsibleSection>
-              ) : null;
-            })}
-          </article>
-        )}
+        <Box spacing={4}>
+          {content.title && <Heading level={1}>{content.title}</Heading>}
+          {content.description && <RichContent blocks={content.description} />}
+          {Object.entries(groups)
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([group, collapsibleItems]) => (
+              <Box as="article" key={group} spacing={3}>
+                <Heading level={3} as="h2">
+                  {group}
+                </Heading>
+                <div>
+                  {collapsibleItems
+                    .sort((a, b) => a.title.localeCompare(b.title))
+                    .map((item) => {
+                      const id = getSkipLinkId(item.title);
+                      return item.content ? (
+                        <CollapsibleSection
+                          key={id}
+                          id={id}
+                          summary={item.title}
+                        >
+                          <Box pt={2} pb={4}>
+                            <RichContent blocks={item.content} />
+                          </Box>
+                        </CollapsibleSection>
+                      ) : null;
+                    })}
+                </div>
+              </Box>
+            ))}
+        </Box>
       </Content>
     </Layout>
   );

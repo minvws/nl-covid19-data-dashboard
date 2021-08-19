@@ -1,18 +1,17 @@
-import { EscalationLevels, VrProperties } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import BarChart from '~/assets/bar-chart.svg';
-import Calender from '~/assets/calender.svg';
+import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
+import { ReactComponent as Calendar } from '~/assets/calendar.svg';
 import { Box } from '~/components/base';
-import { EscalationRegionalTooltip } from '~/components/choropleth/tooltips/region/escalation-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { Choropleth } from '~/components/choropleth';
 import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
+import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { Scoreboard } from '~/domain/escalation-level/scoreboard';
-import { selectScoreboardData } from '~/domain/escalation-level/scoreboard/data-selection/select-scoreboard-data';
+import { selectScoreboardData } from '~/domain/escalation-level/scoreboard/select-scoreboard-data';
 import { Layout } from '~/domain/layout/layout';
 import { useIntl } from '~/intl';
 import {
@@ -67,26 +66,6 @@ export const getStaticProps = createGetStaticProps(
           {
             ...,
             "asset": asset->,
-
-            "content": {
-              "_type": "localeCollapsible",
-              "${locale}": [
-                ...content.${locale}[]{
-                  ...,
-                  "asset": asset->,
-
-                  "content": {
-                    "_type": "localeCollapsible",
-                    "${locale}": [
-                      ...content.${locale}[]{
-                        ...,
-                        "asset": asset->
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
            },
         ]
       },
@@ -129,48 +108,49 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
         />
       </Head>
       <Content>
-        <Box pb={3} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
+        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto" spacing={4}>
           <Heading level={1}>{content.title}</Heading>
-          <RichContent blocks={content.description} />
+          <Box textVariant="body1">
+            <RichContent blocks={content.description} />
+          </Box>
         </Box>
+
         <Box
           display="flex"
-          py={{ _: 2, sm: 4 }}
+          pt={4}
           px={{ _: 3, sm: 0 }}
           borderTopStyle="solid"
           borderTopWidth="1px"
           borderTopColor="lightGray"
           flexDirection={{ _: 'column', sm: 'row' }}
+          spacing={{ _: 4, md: 0 }}
         >
-          <Box display="flex" justifyContent="center" py={{ _: 2, sm: 0 }}>
+          <Box display="flex" justifyContent="center">
             <Box
               p={1}
               minWidth={{ _: '30rem', sm: '17.25rem', lg: '20rem' }}
               minHeight={{ _: '20rem', sm: 0 }}
-              flex={0}
             >
               <ErrorBoundary>
-                <VrChoropleth
+                <Choropleth
+                  map="vr"
                   accessibility={{ key: 'escalation_levels_choropleth' }}
                   minHeight={200}
-                  data={choropleth.vr}
-                  metricName="escalation_levels"
-                  noDataFillColor={unknownLevelColor}
-                  metricProperty="level"
-                  tooltipContent={(
-                    context: VrProperties & EscalationLevels
-                  ) => (
-                    <EscalationRegionalTooltip
-                      context={context}
-                      hideValidFrom
-                    />
+                  data={choropleth.vr.escalation_levels}
+                  dataConfig={{
+                    metricProperty: 'level',
+                    noDataFillColor: unknownLevelColor,
+                  }}
+                  dataOptions={{}}
+                  formatTooltip={(context) => (
+                    <VrEscalationTooltip context={context} hideValidFrom />
                   )}
                 />
               </ErrorBoundary>
             </Box>
           </Box>
-          <Box pr={{ md: 4 }} flex={1} maxWidth="maxWidthText">
-            <Heading level={3} as={'h2'}>
+          <Box flex={1} maxWidth="maxWidthText" spacing={3}>
+            <Heading level={3} as="h2">
               {content.scoreBoardTitle}
             </Heading>
             <Text>{content.scoreBoardDescription}</Text>
@@ -181,7 +161,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                     siteText.over_risiconiveaus.scoreboard.current_level
                       .last_determined
                   }
-                  icon={<Calender />}
+                  icon={<Calendar />}
                   date={lastValue.last_determined_unix}
                 />
                 <ListItem
@@ -200,7 +180,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                     siteText.over_risiconiveaus.scoreboard.current_level
                       .next_determined
                   }
-                  icon={<Calender />}
+                  icon={<Calendar />}
                   date={lastValue.next_determined_unix}
                 />
               </UnorderedList>
@@ -212,7 +192,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
           maxHospitalAdmissionsPerMillion={maxHospitalAdmissionsPerMillion}
           maxPositiveTestedPer100k={maxPositiveTestedPer100k}
         />
-        <Box mt={5} px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
+        <Box px={{ _: 3, sm: 0 }} maxWidth="maxWidthText" mx="auto">
           <RichContent blocks={content.riskLevelExplanations} />
         </Box>
       </Content>
@@ -228,8 +208,15 @@ interface ContentProps {
 
 function Content({ children }: ContentProps) {
   return (
-    <Box bg="white" fontSize={{ md: '1.125rem' }}>
-      <Box pt={5} pb={5} px={{ _: 3, sm: 0 }} maxWidth="infoWidth" mx="auto">
+    <Box bg="white">
+      <Box
+        pt={5}
+        pb={5}
+        px={{ _: 3, sm: 0 }}
+        maxWidth="infoWidth"
+        mx="auto"
+        spacing={4}
+      >
         {children}
       </Box>
     </Box>
@@ -277,16 +264,19 @@ function ListItem({
         <Box
           display="flex"
           alignItems="center"
-          minWidth="26px"
-          width={26}
+          width={28}
           height={18}
           mt="2px"
           mr={2}
+          css={css({
+            svg: {
+              height: 28,
+            },
+          })}
         >
           {icon}
         </Box>
         <Text
-          m={0}
           css={css({
             display: asResponsiveArray({ _: 'block', xs: 'flex' }),
             flexWrap: 'wrap',

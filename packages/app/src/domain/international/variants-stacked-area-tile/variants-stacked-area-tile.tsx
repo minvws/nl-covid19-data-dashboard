@@ -3,6 +3,7 @@ import css from '@styled-system/css';
 import { ReactNode, useMemo } from 'react';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
@@ -10,12 +11,13 @@ import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { GappedStackedAreaSeriesDefinition } from '~/components/time-series-chart/logic';
+import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
 import { SiteText } from '~/locale';
-import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
+import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
 type VariantsStackedAreaTileProps = {
   values?: VariantChartValue[] | null;
@@ -52,7 +54,7 @@ export function VariantsStackedAreaTile({
   );
 }
 
-const alwayEnabled: string[] = [];
+const alwayEnabled: (keyof VariantChartValue)[] = [];
 
 type VariantStackedAreaTileWithDataProps = {
   values: VariantChartValue[];
@@ -66,13 +68,15 @@ function VariantStackedAreaTileWithData({
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
   const { siteText } = useIntl();
-  const { list, toggle, clear } = useList<string>(alwayEnabled);
+  const { list, toggle, clear } =
+    useList<keyof VariantChartValue>(alwayEnabled);
 
   const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
   const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
     text,
     values
   );
+
   const filteredConfig = useFilteredSeriesConfig(
     seriesConfig,
     otherConfig,
@@ -82,11 +86,24 @@ function VariantStackedAreaTileWithData({
   /* Static legend contains only the inaccurate item */
   const staticLegendItems: LegendItem[] = [
     {
-      shape: 'square',
-      color: colors.data.underReported,
+      shape: 'outlined-square',
+      color: colors.white,
       label: text.legend_niet_compleet_label,
     },
   ];
+
+  const timespanAnnotations = useUnreliableDataAnnotations(
+    values,
+    text.lagere_betrouwbaarheid
+  );
+
+  if (timespanAnnotations.length) {
+    staticLegendItems.push({
+      shape: 'dotted-square',
+      color: 'black',
+      label: text.lagere_betrouwbaarheid,
+    });
+  }
 
   return (
     <ChartTile
@@ -98,6 +115,7 @@ function VariantStackedAreaTileWithData({
       {(timeframe) => (
         <>
           {children}
+          {children && <Spacer mb={3} />}
           <InteractiveLegend
             helpText={text.legend_help_tekst}
             selectOptions={selectOptions}
@@ -105,6 +123,7 @@ function VariantStackedAreaTileWithData({
             onToggleItem={toggle}
             onReset={clear}
           />
+          <Spacer mb={2} />
           <TimeSeriesChart
             accessibility={{
               key: 'variants_stacked_area_over_time_chart',
@@ -116,6 +135,8 @@ function VariantStackedAreaTileWithData({
             dataOptions={{
               isPercentage: true,
               forcedMaximumValue: 100,
+              timespanAnnotations,
+              renderNullAsZero: true,
             }}
             formatTooltip={(context) => {
               /**
@@ -174,9 +195,10 @@ function useSeriesConfig(
   values: VariantChartValue[]
 ) {
   return useMemo(() => {
-    const baseVariantsFiltered = Object.keys(values[0]).filter(
-      (x) => x.endsWith('_percentage') && x !== 'other_percentage'
-    );
+    const baseVariantsFiltered = values
+      .flatMap((x) => Object.keys(x))
+      .filter((x, index, array) => array.indexOf(x) === index) // de-dupe
+      .filter((x) => x.endsWith('_percentage') && x !== 'other_percentage');
 
     /* Enrich config with dynamic data / locale */
     const seriesConfig: GappedStackedAreaSeriesDefinition<VariantChartValue>[] =
@@ -193,7 +215,9 @@ function useSeriesConfig(
           color,
           label: variantKey,
           shape: 'square',
+          strokeWidth: 0,
           fillOpacity: 1,
+          mixBlendMode: 'multiply',
         };
       });
 
@@ -204,6 +228,8 @@ function useSeriesConfig(
       fillOpacity: 1,
       shape: 'square',
       color: colors.lightGray,
+      strokeWidth: 0,
+      mixBlendMode: 'multiply',
     } as GappedStackedAreaSeriesDefinition<VariantChartValue>;
 
     const selectOptions = [...seriesConfig, otherConfig];

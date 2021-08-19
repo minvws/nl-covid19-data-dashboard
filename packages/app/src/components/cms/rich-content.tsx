@@ -1,22 +1,25 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import css from '@styled-system/css';
 import { Fragment, FunctionComponent, ReactNode } from 'react';
+import styled from 'styled-components';
+import { Box } from '~/components/base';
+import { CollapsibleSection } from '~/components/collapsible';
+import { ErrorBoundary } from '~/components/error-boundary';
+import { ExternalLink } from '~/components/external-link';
+import { useIntl } from '~/intl';
 import { getFileSrc, PortableText } from '~/lib/sanity';
+import { nestedHtml } from '~/style/preset';
 import {
-  CollapsibleList,
   ImageBlock,
   InlineAttachment,
+  InlineCollapsibleList,
   InlineLink,
   RichContentImageBlock,
 } from '~/types/cms';
 import { assert } from '~/utils/assert';
-import { Box } from '../base';
-import { CollapsibleSection } from '../collapsible';
-import { ErrorBoundary } from '../error-boundary';
-import { ContentImage } from './content-image';
-import { ExternalLink } from '~/components/external-link';
-import { Link } from '~/utils/link';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
-import { useIntl } from '~/intl';
+import { Link } from '~/utils/link';
+import { ContentImage } from './content-image';
 
 interface RichContentProps {
   blocks: PortableTextEntry[];
@@ -32,6 +35,17 @@ export function RichContent({
   const ContentWrapper = contentWrapper ?? Fragment;
   const serializers = {
     types: {
+      inlineBlock: (props: unknown) => {
+        assert(
+          PortableText.defaultSerializers.types?.inlineBlock,
+          'PortableText needs to provide a serializer for inlineBlock content'
+        );
+        return (
+          <ContentWrapper>
+            {PortableText.defaultSerializers.types.inlineBlock(props)}
+          </ContentWrapper>
+        );
+      },
       block: (props: unknown) => {
         assert(
           PortableText.defaultSerializers.types?.block,
@@ -50,14 +64,14 @@ export function RichContent({
           {...props}
         />
       ),
-      collapsible: (props: { node: CollapsibleList }) => {
-        if (!props.node.content) return null;
+      inlineCollapsible: (props: { node: InlineCollapsibleList }) => {
+        if (!props.node.content.inlineBlockContent) return null;
 
         return (
           <ContentWrapper>
             <CollapsibleSection summary={props.node.title}>
-              <Box mt={3}>
-                <RichContent blocks={props.node.content} />
+              <Box py={3}>
+                <RichContent blocks={props.node.content.inlineBlockContent} />
               </Box>
             </CollapsibleSection>
           </ContentWrapper>
@@ -72,7 +86,7 @@ export function RichContent({
 
   return (
     <ErrorBoundary>
-      <PortableText blocks={blocks} serializers={serializers} />
+      <StyledPortableText blocks={blocks} serializers={serializers} />
     </ErrorBoundary>
   );
 }
@@ -93,7 +107,7 @@ function InlineAttachmentMark(props: {
 function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
   const { mark, children } = props;
 
-  const { locale = 'nl' } = useIntl();
+  const { locale } = useIntl();
 
   if (!mark.href) return <>{children}</>;
 
@@ -105,3 +119,5 @@ function InlineLinkMark(props: { children: ReactNode; mark: InlineLink }) {
     </Link>
   );
 }
+
+const StyledPortableText = styled(PortableText)(css(nestedHtml));

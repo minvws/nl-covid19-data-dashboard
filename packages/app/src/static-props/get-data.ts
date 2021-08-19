@@ -10,32 +10,31 @@ import {
   VrCollection,
 } from '@corona-dashboard/common';
 import { SanityClient } from '@sanity/client';
-import fs from 'fs';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
-import getConfig from 'next/config';
-import path from 'path';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
-import { CountryCode } from '~/domain/international/select-countries';
-import { MunicipalSideBarData } from '~/domain/layout/municipality-layout';
+import { CountryCode } from '~/domain/international/multi-select-countries';
+import { GmSideBarData } from '~/domain/layout/gm-layout';
 import {
   NlPageMetricNames,
   nlPageMetricNames,
-} from '~/domain/layout/national-layout';
+} from '~/domain/layout/nl-layout';
 import {
   vrPageMetricNames,
   VrRegionPageMetricNames,
 } from '~/domain/layout/vr-layout';
-import { getClient, localize } from '~/lib/sanity';
-import { SiteText } from '~/locale';
-import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 import {
   getVariantSidebarValue,
   VariantSidebarValue,
-} from './variants/get-variant-sidebar-value';
-const { serverRuntimeConfig } = getConfig();
+} from '~/domain/variants/static-props';
+import { getClient, localize } from '~/lib/sanity';
+import {
+  getSituationsSidebarValue,
+  SituationsSidebarValue,
+} from './situations/get-situations-sidebar-value';
+import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
 
 /**
  * Usage:
@@ -67,17 +66,19 @@ export function getLastGeneratedDate() {
 }
 
 export function createGetContent<T>(
-  queryOrQueryGetter: string | ((context: GetStaticPropsContext) => string)
+  queryOrQueryGetter:
+    | string
+    | ((context: GetStaticPropsContext & { locale: string }) => string)
 ) {
   return async (context: GetStaticPropsContext) => {
+    const { locale = 'nl' } = context;
     const client = await getClient();
     const query =
       typeof queryOrQueryGetter === 'function'
-        ? queryOrQueryGetter(context)
+        ? queryOrQueryGetter({ locale, ...context })
         : queryOrQueryGetter;
 
     const rawContent = (await client.fetch<T>(query)) ?? {};
-    const { locale = 'nl' } = context;
 
     // this function call will mutate `rawContent`
     await replaceReferencesInContent(rawContent, client);
@@ -160,8 +161,14 @@ export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
            */
           data[p] ?? null
         ),
-      { variantSidebarValue: getVariantSidebarValue(data.variants) } as {
+      {
+        variantSidebarValue: getVariantSidebarValue(data.variants),
+        situationsSidebarValue: getSituationsSidebarValue(
+          json.vrCollection.situations
+        ),
+      } as {
         variantSidebarValue: VariantSidebarValue;
+        situationsSidebarValue: SituationsSidebarValue;
       } & Pick<Nl, T>
     );
 
@@ -200,7 +207,13 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
 
     const selectedVrData = metrics.reduce(
       (acc, p) => set(acc, p, vrData.data[p]),
-      {} as Pick<Vr, T>
+      {
+        situationsSidebarValue: getSituationsSidebarValue(
+          json.vrCollection.situations
+        ),
+      } as {
+        situationsSidebarValue: SituationsSidebarValue;
+      } & Pick<Vr, T>
     );
 
     return { selectedVrData, vrName: vrData.vrName };
@@ -257,7 +270,7 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
   return (context: GetStaticPropsContext) => {
     const gmData = getGmData(context);
 
-    const sideBarData: MunicipalSideBarData = {
+    const sideBarData: GmSideBarData = {
       deceased_rivm: { last_value: gmData.data.deceased_rivm.last_value },
       hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
       tested_overall: { last_value: gmData.data.tested_overall.last_value },
@@ -331,16 +344,4 @@ export function getInData(countryCodes: CountryCode[]) {
       internationalData: Record<CountryCode, In>;
     };
   };
-}
-
-export function getLocaleFile(locale: string) {
-  const content = fs.readFileSync(
-    path.join(
-      serverRuntimeConfig.PROJECT_ROOT,
-      `src/locale/${locale}_export.json`
-    ),
-    { encoding: 'utf-8' }
-  );
-
-  return JSON.parse(content) as SiteText;
 }

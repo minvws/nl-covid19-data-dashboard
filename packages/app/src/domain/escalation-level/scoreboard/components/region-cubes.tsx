@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { InlineText } from '~/components/typography';
-import { EscalationLevel } from '~/domain/restrictions/type';
+import { EscalationLevel } from '~/domain/restrictions/types';
 import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
 import { useEscalationColor } from '~/utils/use-escalation-color';
@@ -31,7 +31,7 @@ export function RegionCubes({
       : regionLabels.none;
 
   return (
-    <Box display={{ sm: 'flex' }} flexWrap="wrap">
+    <Box display={{ sm: 'flex' }} flexWrap="wrap" alignItems="center">
       {count > 0 && (
         <Container>
           {items.map((_, index) => (
@@ -39,7 +39,7 @@ export function RegionCubes({
           ))}
         </Container>
       )}
-      <InlineText color="black" fontSize={2}>
+      <InlineText variant="body2">
         {count > 0 ? count : undefined} {regionLabel}
       </InlineText>
     </Box>
@@ -57,9 +57,9 @@ const Cube = styled.div<{ color: string }>((x) =>
   css({
     display: 'inline-block',
     mr: '1px',
-    minWidth: asResponsiveArray({ _: '0.5em', md: '1em' }),
-    width: asResponsiveArray({ _: '0.5em', md: '1em' }),
-    height: '1em',
+    minWidth: asResponsiveArray({ _: '0.75rem', md: '1.25rem' }),
+    width: asResponsiveArray({ _: '0.75rem', md: '1.25rem' }),
+    height: '1.25rem',
     bg: x.color,
     '&:first-child': {
       borderTopLeftRadius: '3px',

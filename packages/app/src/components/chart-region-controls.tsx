@@ -1,7 +1,7 @@
-import { RadioGroup } from '~/components/radio-group';
+import { RadioGroup, RadioGroupItem } from '~/components/radio-group';
 import { useIntl } from '~/intl';
 
-export type RegionControlOption = 'municipal' | 'region';
+export type RegionControlOption = 'gm' | 'vr';
 
 interface ChartRegionControlsProps {
   value: RegionControlOption;
@@ -13,14 +13,14 @@ export function ChartRegionControls(props: ChartRegionControlsProps) {
 
   const { value, onChange } = props;
 
-  const items = [
+  const items: RadioGroupItem<RegionControlOption>[] = [
     {
       label: siteText.charts.region_controls.municipal,
-      value: 'municipal' as RegionControlOption,
+      value: 'gm',
     },
     {
       label: siteText.charts.region_controls.region,
-      value: 'region' as RegionControlOption,
+      value: 'vr',
     },
   ];
 

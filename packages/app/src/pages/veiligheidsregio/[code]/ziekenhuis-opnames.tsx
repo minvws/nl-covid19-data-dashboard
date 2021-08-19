@@ -1,10 +1,8 @@
-import { GmHospitalNiceValue, GmProperties } from '@corona-dashboard/common';
-import Ziekenhuis from '~/assets/ziekenhuis.svg';
+import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { HospitalAdmissionsMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/municipal-hospital-admissions-tooltip';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -16,14 +14,14 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
 import {
-  ArticlesQueryResult,
-  createPageArticlesQuery,
-} from '~/queries/create-page-articles-query';
-import {
   createElementsQuery,
   ElementsQueryResult,
   getTimelineEvents,
-} from '~/queries/create-page-elements-query';
+} from '~/queries/create-elements-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -48,13 +46,13 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
   createGetContent<{
-    fix_this: ArticlesQueryResult;
+    page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
 
     return `{
-      "fix_this": ${createPageArticlesQuery('hospitalPage', locale)},
+      "page": ${createPageArticlesQuery('hospitalPage', locale)},
       "elements": ${createElementsQuery('vr', ['hospital_nice'], locale)}
     }`;
   })
@@ -111,7 +109,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.fix_this.articles}
+            articles={content.page.articles}
           />
 
           <TwoKpiSection>
@@ -141,9 +139,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds:
-                municipalThresholds.hospital_nice
-                  .admissions_on_date_of_reporting,
+              thresholds: thresholds.gm.admissions_on_date_of_reporting,
               title:
                 siteText.ziekenhuisopnames_per_dag.chloropleth_legenda.titel,
             }}
@@ -152,19 +148,22 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <Choropleth
+              map="gm"
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
-              selectedCode={selectedMunicipalCode}
-              highlightSelection={false}
-              data={choropleth.gm}
-              getLink={reverseRouter.gm.ziekenhuisopnames}
-              metricName="hospital_nice"
-              metricProperty="admissions_on_date_of_reporting"
-              tooltipContent={(context: GmProperties & GmHospitalNiceValue) => (
-                <HospitalAdmissionsMunicipalTooltip context={context} />
-              )}
+              data={choropleth.gm.hospital_nice}
+              dataConfig={{
+                metricProperty: 'admissions_on_date_of_reporting',
+              }}
+              dataOptions={{
+                selectedCode: selectedMunicipalCode,
+                getLink: reverseRouter.gm.ziekenhuisopnames,
+                tooltipVariables: {
+                  patients: siteText.choropleth_tooltip.patients,
+                },
+              }}
             />
           </ChoroplethTile>
 

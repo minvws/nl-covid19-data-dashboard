@@ -1,10 +1,10 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { css, SystemStyleObject } from '@styled-system/css';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
 import { ValueAnnotation } from '~/components/value-annotation';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Box } from './base';
-import { Heading } from './typography';
+import { Text } from './typography';
 
 interface ChoroplethLegendaProps {
   title: string;
@@ -17,19 +17,17 @@ export function ChoroplethLegenda({
   thresholds,
   valueAnnotation,
 }: ChoroplethLegendaProps) {
-  const { width: itemWidth = 0, ref: itemRef } =
-    useResizeObserver<HTMLLIElement>();
-  const { width: endLabelWidth = 0, ref: endLabelRef } =
-    useResizeObserver<HTMLSpanElement>();
+  const [itemRef, itemSize] = useResizeObserver<HTMLLIElement>();
+  const [endLabelRef, endLabelSize] = useResizeObserver<HTMLSpanElement>();
 
   return (
-    <Box width="100%" pr={`${endLabelWidth / 2}px`}>
-      {title && <Heading level={4}>{title}</Heading>}
-      <List hasValueAnnotation={valueAnnotation ? true : false}>
+    <Box width="100%" pr={`${endLabelSize.width ?? 0 / 2}px`} spacing={2}>
+      {title && <Text variant="subtitle1">{title}</Text>}
+      <List>
         {thresholds.map(({ color, threshold, label, endLabel }, index) => {
           const isFirst = index === 0;
           const isLast = index === thresholds.length - 1;
-          const displayLabel = itemWidth > 35 || index % 2 === 0;
+          const displayLabel = (itemSize.width ?? 0) > 35 || index % 2 === 0;
 
           return (
             <Item
@@ -55,14 +53,13 @@ export function ChoroplethLegenda({
   );
 }
 
-const List = styled.ul<{ hasValueAnnotation?: boolean }>((x) =>
+const List = styled.ul(
   css({
     width: '100%',
     marginTop: 0,
     paddingLeft: 0,
     listStyle: 'none',
     display: 'flex',
-    mb: x.hasValueAnnotation ? 2 : 0,
   })
 );
 

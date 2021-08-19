@@ -14,27 +14,11 @@ import theme from '~/style/theme';
 import { BreakpointContextProvider } from '~/utils/use-breakpoints';
 import { IsTouchDeviceContextProvider } from '~/utils/use-is-touch-device';
 
-if (typeof window !== 'undefined') {
-  require('proxy-polyfill/proxy.min.js');
-
-  if (process.env.NODE_ENV === 'development') {
-    /**
-     * this polyfill allows next.js to show runtime errors in IE11
-     */
-    require('@webcomponents/shadydom');
-  }
-
-  if (!window.ResizeObserver) {
-    const ResizeObserver = require('resize-observer-polyfill').default;
-    window.ResizeObserver = ResizeObserver;
-  }
-}
-
 export default function App(props: AppProps) {
   const { Component, pageProps } = props;
   const router = useRouter();
+  const { locale = 'nl' } = router;
 
-  const { locale = 'nl' } = useRouter();
   const [text, toggleHotReloadButton, dataset] = useLokalizeText(
     locale as LanguageKey
   );

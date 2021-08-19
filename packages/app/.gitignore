@@ -36,3 +36,4 @@ yarn-error.log*
 /debug.log
 
 src/locale/*_export.json
+src/locale/site-text.d.ts

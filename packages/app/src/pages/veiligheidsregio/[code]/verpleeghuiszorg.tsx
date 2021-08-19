@@ -1,12 +1,11 @@
-import CoronaVirus from '~/assets/coronavirus.svg';
-import Locatie from '~/assets/locaties.svg';
-import Verpleeghuiszorg from '~/assets/verpleeghuiszorg.svg';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
+import { ReactComponent as Locatie } from '~/assets/locaties.svg';
+import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -14,7 +13,10 @@ import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -32,10 +34,8 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData(),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
-    const { locale = 'nl' } = context;
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale } = context;
     return createPageArticlesQuery('nursingHomePage', locale);
   })
 );
@@ -172,7 +172,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             id="besmette-locaties"
@@ -250,7 +250,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             id="sterfte"

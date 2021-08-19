@@ -1,19 +1,17 @@
 import { TimeframeOption, TimestampedValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useTooltip } from '@visx/tooltip';
-import { isFunction } from 'lodash';
+import { first, isFunction, last } from 'lodash';
 import { useCallback, useEffect, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Box } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
 import { ValueAnnotation } from '~/components/value-annotation';
-import { useFeature } from '~/lib/features';
 import { useCurrentDate } from '~/utils/current-date-context';
 import {
   AccessibilityDefinition,
   addAccessibilityFeatures,
 } from '~/utils/use-accessibility-annotations';
-import { useIsMounted } from '~/utils/use-is-mounted';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import { useUniqueId } from '../../utils/use-unique-id';
@@ -37,6 +35,7 @@ import { Timeline, TimelineEventHighlight } from './components/timeline';
 import { useTimelineState } from './components/timeline/logic';
 import {
   calculateSeriesMaximum,
+  calculateSeriesMinimum,
   COLLAPSE_Y_AXIS_THRESHOLD,
   DataOptions,
   extractCutValuesConfig,
@@ -53,7 +52,6 @@ import {
   useValuesInTimeframe,
   useValueWidth,
 } from './logic';
-import { createTimelineEventsMockData } from './mock-timeline-events';
 export type { SeriesConfig } from './logic';
 
 /**
@@ -152,7 +150,7 @@ export function TimeSeriesChart<
   minHeight = 250,
   timeframe = 'all',
   formatTooltip,
-  dataOptions: _dataOptions,
+  dataOptions,
   showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
@@ -175,31 +173,6 @@ export function TimeSeriesChart<
 
   const today = useCurrentDate();
   const chartId = useUniqueId();
-
-  /**
-   * @TODO clean up mock data
-   * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-   */
-  const hasTimelineMockDataFeature = useFeature('timelineMockData');
-  const isMounted = useIsMounted();
-  const timelineEventsMock = useMemo(
-    () =>
-      isMounted
-        ? createTimelineEventsMockData(allValues, timeframe, today)
-        : undefined,
-    [allValues, timeframe, today, isMounted]
-  );
-  const dataOptions = useMemo(
-    () =>
-      hasTimelineMockDataFeature.isEnabled
-        ? ({
-            ..._dataOptions,
-            timelineEvents: _dataOptions?.timelineEvents || timelineEventsMock,
-          } as DataOptions)
-        : _dataOptions,
-    [_dataOptions, hasTimelineMockDataFeature, timelineEventsMock]
-  );
-  /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
 
   const {
     valueAnnotation,
@@ -232,21 +205,23 @@ export function TimeSeriesChart<
     [timespanAnnotations]
   );
 
-  const seriesList = useSeriesList(values, seriesConfig, cutValuesConfig);
+  const seriesList = useSeriesList(
+    values,
+    seriesConfig,
+    cutValuesConfig,
+    dataOptions
+  );
 
   /**
    * The maximum is calculated over all values, because you don't want the
    * y-axis scaling to change when toggling the timeframe setting.
    */
-  const calculatedSeriesMax = useMemo(
-    () =>
-      calculateSeriesMaximum(
-        seriesList,
-        seriesConfig,
-        benchmark?.value,
-        isPercentage
-      ),
-    [seriesList, seriesConfig, benchmark?.value, isPercentage]
+  const [calculatedSeriesMin, calculatedSeriesMax] = useMemo(
+    () => [
+      calculateSeriesMinimum(seriesList, seriesConfig, benchmark?.value),
+      calculateSeriesMaximum(seriesList, seriesConfig, benchmark?.value),
+    ],
+    [seriesList, seriesConfig, benchmark?.value]
   );
 
   const seriesMax = isDefined(forcedMaximumValue)
@@ -267,6 +242,7 @@ export function TimeSeriesChart<
   } = useScales({
     values,
     maximumValue: seriesMax,
+    minimumValue: calculatedSeriesMin,
     bounds,
     numTicks: yTickValues?.length || numGridLines,
   });
@@ -392,11 +368,19 @@ export function TimeSeriesChart<
     'keyboard_time_series_chart',
   ]);
 
+  const highlightZero =
+    (first(yScale.domain()) as number) < 0 &&
+    (last(yScale.domain()) as number) > 0;
+
   return (
     <>
       {valueAnnotation && (
-        <ValueAnnotation mb={2}>{valueAnnotation}</ValueAnnotation>
+        <>
+          <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
+          <Spacer mb={{ _: 2, sm: 0 }} />
+        </>
       )}
+
       <ResponsiveContainer>
         <Box position="relative" css={css({ userSelect: 'none' })}>
           <ChartContainer
@@ -443,9 +427,22 @@ export function TimeSeriesChart<
               getY1={getY1}
               bounds={bounds}
               yScale={yScale}
-              benchmark={benchmark}
               chartId={chartId}
             />
+
+            {/**
+             * Highlight 0 on the y-axis when there are positive and
+             * negative values
+             */}
+            {highlightZero && (
+              <rect
+                x={0}
+                y={yScale(0)}
+                width={bounds.width}
+                height={1}
+                fill="black"
+              />
+            )}
 
             {benchmark && (
               <Benchmark
@@ -462,7 +459,6 @@ export function TimeSeriesChart<
              */}
             {timespanAnnotations?.map((x, index) => (
               <TimespanAnnotation
-                chartId={chartId}
                 key={index}
                 domain={xScale.domain() as [number, number]}
                 getX={getX}
@@ -545,8 +541,9 @@ export function TimeSeriesChart<
               display="flex"
               flexDirection={['column', 'row']}
               alignItems="baseline"
+              spacingHorizontal={3}
             >
-              <InlineText pr={3}>{x.label}:</InlineText>
+              <InlineText>{x.label}:</InlineText>
               <Legend items={x.items} />
             </Box>
           ))}

@@ -1,13 +1,12 @@
-import css from '@styled-system/css';
 import React from 'react';
-import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
+import { useIntl } from '~/intl';
 import { Link } from '~/utils/link';
+import { Anchor } from '../typography';
 import { LanguageSwitcher } from './components/language-switcher';
 import { Logo } from './components/logo';
 import { TopNavigation } from './components/top-navigation';
-import { useIntl } from '~/intl';
 
 export function AppHeader() {
   const { siteText } = useIntl();
@@ -29,9 +28,11 @@ export function AppHeader() {
           pl={{ _: 3, sm: 4 }}
           pr={{ _: 3, sm: 4, md: 3 }}
         >
-          <Box py={[2, 2, 2, 3]} lineHeight={'1em'} fontWeight="bold">
+          <Box py={[2, 2, 2, 3]}>
             <Link href="/" passHref>
-              <TextLogoLink>{siteText.header.title}</TextLogoLink>
+              <Anchor color="white" variant="h3">
+                {siteText.header.title}
+              </Anchor>
             </Link>
           </Box>
 
@@ -41,12 +42,3 @@ export function AppHeader() {
     </Box>
   );
 }
-
-const TextLogoLink = styled.a(
-  css({
-    color: 'white',
-    fontSize: 3,
-    textDecoration: 'none',
-    lineHeight: 2,
-  })
-);

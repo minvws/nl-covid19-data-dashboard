@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
-import { TooltipContent } from '~/components/choropleth/tooltips/tooltip-content';
+import { TooltipContent } from '~/components/choropleth/tooltips';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 
 type Bounds = {
   left: number;
@@ -31,7 +31,7 @@ const TooltipContainer = styled.div(
 );
 
 export function Tooltip({ children, title, x, y, bounds }: TooltipProps) {
-  const { width = 0, height = 0, ref } = useResizeObserver<HTMLDivElement>();
+  const [ref, { width = 0, height = 0 }] = useResizeObserver<HTMLDivElement>();
 
   const left = Math.min(bounds.right - width, Math.max(0, x - width / 2));
   const top = y - height - 30;

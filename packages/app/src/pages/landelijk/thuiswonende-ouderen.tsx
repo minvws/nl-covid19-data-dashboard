@@ -1,26 +1,23 @@
-import {
-  VrCollectionElderlyAtHome,
-  VrProperties,
-} from '@corona-dashboard/common';
-import ElderlyIcon from '~/assets/elderly.svg';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { ElderlyAtHomeRegionalTooltip } from '~/components/choropleth/tooltips/region/elderly-at-home-regional-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -41,10 +38,8 @@ export const getStaticProps = createGetStaticProps(
   createGetChoroplethData({
     vr: ({ elderly_at_home }) => ({ elderly_at_home }),
   }),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
-    const { locale = 'nl' } = context;
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale } = context;
     return createPageArticlesQuery('elderlyAtHomePage', locale);
   })
 );
@@ -78,7 +73,7 @@ const ElderlyAtHomeNationalPage = (
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
@@ -198,26 +193,26 @@ const ElderlyAtHomeNationalPage = (
               source: text.section_positive_tested.bronnen.rivm,
             }}
             legend={{
-              thresholds:
-                regionThresholds.elderly_at_home.positive_tested_daily_per_100k,
+              thresholds: thresholds.vr.positive_tested_daily_per_100k,
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >
-            <VrChoropleth
+            <Choropleth
+              map="vr"
               accessibility={{
                 key: 'elderly_at_home_infected_people_choropleth',
               }}
-              data={choropleth.vr}
-              getLink={reverseRouter.vr.thuiswonendeOuderen}
-              metricName="elderly_at_home"
-              metricProperty="positive_tested_daily_per_100k"
-              tooltipContent={(
-                context: VrProperties & VrCollectionElderlyAtHome
-              ) => <ElderlyAtHomeRegionalTooltip context={context} />}
+              data={choropleth.vr.elderly_at_home}
+              dataConfig={{
+                metricProperty: 'positive_tested_daily_per_100k',
+              }}
+              dataOptions={{
+                getLink: reverseRouter.vr.thuiswonendeOuderen,
+              }}
             />
           </ChoroplethTile>
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             title={text.section_deceased.title}
@@ -300,7 +295,7 @@ const ElderlyAtHomeNationalPage = (
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

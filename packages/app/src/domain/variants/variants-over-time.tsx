@@ -1,15 +1,18 @@
 import { TimeframeOption } from '@corona-dashboard/common';
 import { useMemo } from 'react';
+import { Spacer } from '~/components/base';
 import { InteractiveLegend } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import {
+  calculateSeriesMaximum,
   LineSeriesDefinition,
   SeriesConfig,
+  useSeriesList,
 } from '~/components/time-series-chart/logic';
 import { InlineText } from '~/components/typography';
+import { VariantChartValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantChartValue } from '~/static-props/variants/get-variant-chart-data';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useList } from '~/utils/use-list';
@@ -74,6 +77,11 @@ export function VariantsOverTime({
   /* Static legend contains only the inaccurate item */
   const staticLegendItems: LegendItem[] = [underReportedLegendItem];
 
+  const seriesList = useSeriesList(values, chartConfig);
+  const maximum = calculateSeriesMaximum(seriesList, chartConfig);
+  const forcedMaximumValue =
+    maximum <= 10 ? 10 : maximum >= 80 ? 100 : undefined;
+
   if (!values.length) {
     return null;
   }
@@ -87,7 +95,8 @@ export function VariantsOverTime({
         onToggleItem={toggle}
         onReset={clear}
       />
-      <InlineText fontSize="12px" fontWeight="bold" color="data.axisLabels">
+      <Spacer mb={2} />
+      <InlineText variant="label2" fontWeight="bold" color="data.axisLabels">
         {text.percentage_gevonden_varianten}
       </InlineText>
       <TimeSeriesChart
@@ -98,6 +107,7 @@ export function VariantsOverTime({
         disableLegend
         dataOptions={{
           isPercentage: true,
+          forcedMaximumValue,
           timespanAnnotations: [
             {
               start: underReportedDateStart,

@@ -1,18 +1,16 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
-import VaccinatiesIcon from '~/assets/vaccinaties.svg';
-import { ArticleSummary } from '~/components/article-teaser';
-import { Box } from '~/components/base';
+import { ReactComponent as VaccinatiesIcon } from '~/assets/vaccinaties.svg';
+import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
@@ -23,7 +21,10 @@ import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduct
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
@@ -38,12 +39,6 @@ import {
 import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-
-const scaledVaccineIcon = (
-  <Box p={2}>
-    <VaccinatiesIcon />
-  </Box>
-);
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -64,11 +59,9 @@ export const getStaticProps = createGetStaticProps(
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
     page: VaccinationPageQuery;
-    highlight: {
-      articles?: ArticleSummary[];
-    };
+    highlight: PageArticlesQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
       "page": ${getVaccinePageQuery(locale)},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
@@ -99,7 +92,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
             <WarningTile
@@ -108,7 +101,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-
           <VaccinePageIntroduction data={data} />
 
           <PageInformationBlock
@@ -133,7 +125,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 text.grafiek_gevaccineerd_door_de_tijd_heen.omschrijving
               }
               metadata={{
-                date: data.vaccine_coverage.last_value.date_of_insertion_unix,
                 source: text.bronnen.rivm,
               }}
             >
@@ -167,6 +158,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'stacked-area',
                     metricProperty: 'partially_vaccinated',
                     color: colors.data.primary,
+                    mixBlendMode: 'multiply',
                     fillOpacity: 1,
                   },
                   {
@@ -179,6 +171,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                     type: 'stacked-area',
                     metricProperty: 'fully_vaccinated',
                     color: colors.data.secondary,
+                    mixBlendMode: 'multiply',
                     fillOpacity: 1,
                   },
                 ]}
@@ -218,13 +211,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineAdministrationsKpiSection data={data} />
 
-          <Spacer amount={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={text.bereidheid_section.title}
             description={text.bereidheid_section.description}
             referenceLink={text.bereidheid_section.reference.href}
-            icon={scaledVaccineIcon}
+            icon={<VaccinatiesIcon />}
             metadata={{
               datumsText: text.bereidheid_datums,
               dateOrRange:
@@ -248,93 +241,94 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               ],
             }}
           >
-            <section>
-              <KpiValue
-                percentage={
-                  data.vaccine_vaccinated_or_support.last_value
-                    .percentage_average
-                }
-              />
-              <Text mt={0}>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
-            </section>
-
-            <TimeSeriesChart
-              accessibility={{
-                key: 'vaccines_support_over_time_chart',
-              }}
-              tooltipTitle={text.grafiek_draagvlak.titel}
-              values={data.vaccine_vaccinated_or_support.values}
-              numGridLines={20}
-              tickValues={[0, 25, 50, 75, 100]}
-              dataOptions={{
-                isPercentage: true,
-                forcedMaximumValue: 100,
-              }}
-              seriesConfig={[
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_70_plus',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '70+' }
-                  ),
-                  color: colors.data.multiseries.magenta,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_55_69',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '55 - 69' }
-                  ),
-                  color: colors.data.multiseries.orange,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_40_54',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '40 - 54' }
-                  ),
-                  color: colors.data.multiseries.turquoise,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_25_39',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '25 - 39' }
-                  ),
-                  color: colors.data.multiseries.yellow,
-                },
-                {
-                  type: 'line',
-                  metricProperty: 'percentage_16_24',
-                  label: replaceVariablesInText(
-                    text.grafiek_draagvlak.leeftijd_jaar,
-                    { ageGroup: '16 - 24' }
-                  ),
-                  color: colors.data.multiseries.cyan,
-                },
-                {
-                  type: 'invisible',
-                  metricProperty: 'percentage_average',
-                  label: siteText.common.totaal,
+            <Box spacing={3}>
+              <section>
+                <KpiValue
+                  percentage={
+                    data.vaccine_vaccinated_or_support.last_value
+                      .percentage_average
+                  }
+                />
+                <Text>{text.grafiek_draagvlak.kpi_omschrijving}</Text>
+              </section>
+              <TimeSeriesChart
+                accessibility={{
+                  key: 'vaccines_support_over_time_chart',
+                }}
+                tooltipTitle={text.grafiek_draagvlak.titel}
+                values={data.vaccine_vaccinated_or_support.values}
+                numGridLines={20}
+                tickValues={[0, 25, 50, 75, 100]}
+                dataOptions={{
                   isPercentage: true,
-                },
-              ]}
-            />
+                  forcedMaximumValue: 100,
+                }}
+                seriesConfig={[
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_70_plus',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '70+' }
+                    ),
+                    color: colors.data.multiseries.magenta,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_55_69',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '55 - 69' }
+                    ),
+                    color: colors.data.multiseries.orange,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_40_54',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '40 - 54' }
+                    ),
+                    color: colors.data.multiseries.turquoise,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_25_39',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '25 - 39' }
+                    ),
+                    color: colors.data.multiseries.yellow,
+                  },
+                  {
+                    type: 'line',
+                    metricProperty: 'percentage_16_24',
+                    label: replaceVariablesInText(
+                      text.grafiek_draagvlak.leeftijd_jaar,
+                      { ageGroup: '16 - 24' }
+                    ),
+                    color: colors.data.multiseries.cyan,
+                  },
+                  {
+                    type: 'invisible',
+                    metricProperty: 'percentage_average',
+                    label: siteText.common.totaal,
+                    isPercentage: true,
+                  },
+                ]}
+              />
+            </Box>
           </ChartTile>
 
-          <Spacer amount={3} />
+          <Spacer pb={3} />
 
           <PageInformationBlock
             title={text.stock_and_delivery_section.title}
-            icon={scaledVaccineIcon}
+            icon={<VaccinatiesIcon />}
             description={text.stock_and_delivery_section.description}
             referenceLink={text.stock_and_delivery_section.reference.href}
             metadata={{
-              datumsText: text.datums,
+              datumsText: text.levering_en_voorraad_datums,
               dateOrRange: data.vaccine_stock.last_value.date_unix,
               dateOfInsertionUnix:
                 data.vaccine_stock.last_value.date_of_insertion_unix,
@@ -346,7 +340,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <VaccineStockPerSupplierChart values={data.vaccine_stock.values} />
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

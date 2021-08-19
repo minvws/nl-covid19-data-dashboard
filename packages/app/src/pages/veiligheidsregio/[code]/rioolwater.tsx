@@ -1,6 +1,5 @@
-import ExperimenteelIcon from '~/assets/experimenteel.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
+import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -12,7 +11,10 @@ import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -30,10 +32,8 @@ export { getStaticPaths } from '~/static-paths/vr';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectVrPageMetricData('sewer_per_installation', 'sewer'),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
-    const { locale = 'nl' } = context;
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
   })
 );

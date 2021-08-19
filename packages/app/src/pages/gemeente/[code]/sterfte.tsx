@@ -1,5 +1,4 @@
-import CoronaVirusIcon from '~/assets/coronavirus.svg';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ReactComponent as CoronaVirusIcon } from '~/assets/coronavirus.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -8,10 +7,13 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -22,7 +24,6 @@ import {
   selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export { getStaticPaths } from '~/static-paths/gm';
@@ -30,10 +31,8 @@ export { getStaticPaths } from '~/static-paths/gm';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
-    const { locale = 'nl' } = context;
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale } = context;
     return createPageArticlesQuery('deceasedPage', locale);
   })
 );
@@ -49,10 +48,6 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   const { siteText } = useIntl();
   const text = siteText.gemeente_sterfte;
-  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
-    dataRivm.values,
-    4
-  );
 
   const metadata = {
     ...siteText.gemeente_index.metadata,
@@ -66,7 +61,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={code}
         difference={difference}
@@ -164,26 +159,11 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataRivmUnderReportedDateStart,
-                      end: Infinity,
-                      label:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'covid_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

@@ -8,14 +8,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withTranspileModules = require('next-transpile-modules')([
   'd3-geo',
   'd3-array',
+  'internmap',
 ]);
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const path = require('path');
 
 const nextConfig = {
-  serverRuntimeConfig: {
-    PROJECT_ROOT: __dirname,
-  },
   /**
    * Enables react strict mode
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
@@ -46,6 +44,24 @@ const nextConfig = {
   },
 
   /**
+   * More header management is done by the next.server.js for the HTML pages and JS/CSS assets.
+   */
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|png|woff|woff2)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=9999999999, must-revalidate',
+          },
+        ],
+      },
+    ];
+  },
+
+  /**
    * Enable source maps in production, because we want people to report readable
    * stack traces from the error boundaries feature.
    */
@@ -67,6 +83,12 @@ const nextConfig = {
                  * Forward ref to the root SVG tag
                  */
                 ref: true,
+              },
+            },
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'static/image/[path][name].[hash].[ext]',
               },
             },
           ],
@@ -91,7 +113,6 @@ const nextConfig = {
         'unist-util-visit-parents',
         '../../node_modules/unist-util-visit-parents',
       ],
-      ['d3-array', '../../node_modules/d3-geo/node_modules/d3-array'],
       ['d3-color', '../../node_modules/d3-interpolate/node_modules/d3-color'],
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-interpolate'],

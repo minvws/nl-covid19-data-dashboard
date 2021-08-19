@@ -2,21 +2,24 @@ import {
   NlHospitalNicePerAgeGroupValue,
   NlIntensiveCareNicePerAgeGroupValue,
 } from '@corona-dashboard/common';
-import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
+import { ErrorBoundary } from '~/components/error-boundary';
 import {
   InteractiveLegend,
   SelectOption,
 } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
 import { TimeSeriesChart } from '~/components/time-series-chart';
+import { SeriesIcon } from '~/components/time-series-chart/components/series-icon';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
 import { LineSeriesDefinition } from '~/components/time-series-chart/logic';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
+import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useList } from '~/utils/use-list';
 import { BASE_SERIES_CONFIG } from './series-config';
+import { Spacer } from '~/components/base';
 
 type NLHospitalAdmissionPerAgeGroupValue =
   | NlIntensiveCareNicePerAgeGroupValue
@@ -60,12 +63,6 @@ export function AdmissionsPerAgeGroup({
       };
     });
 
-  const underReportedLegendItem: LegendItem = {
-    shape: 'square',
-    color: colors.data.underReported,
-    label: text.line_chart_legend_inaccurate_label,
-  };
-
   /**
    * Chart:
    * - when nothing selected: all items
@@ -83,23 +80,26 @@ export function AdmissionsPerAgeGroup({
   );
 
   /* Static legend contains always enabled items and the under reported item */
-  const staticLegendItems: LegendItem[] = seriesConfig
+  const staticLegendItems = seriesConfig
     .filter((item) => alwayEnabled.includes(item.metricProperty))
-    .map(
-      (item): LegendItem => ({
-        label: item.label,
-        shape: item.type,
-        color: item.color,
-        style: item.style,
-      })
-    )
-    .concat([underReportedLegendItem]);
+    .map<LegendItem>((item) => ({
+      label: item.label,
+      shape: 'custom' as const,
+      shapeComponent: <SeriesIcon config={item} />,
+    }))
+    .concat([
+      {
+        shape: 'square' as const,
+        color: colors.data.underReported,
+        label: text.line_chart_legend_inaccurate_label,
+      },
+    ]);
 
   /* Conditionally let tooltip span over multiple columns */
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
-    <>
+    <ErrorBoundary>
       <InteractiveLegend
         helpText={text.legend_help_text}
         selectOptions={interactiveLegendOptions}
@@ -107,6 +107,7 @@ export function AdmissionsPerAgeGroup({
         onToggleItem={toggle}
         onReset={clear}
       />
+      <Spacer mb={2} />
       <TimeSeriesChart
         accessibility={accessibility}
         values={values}
@@ -129,6 +130,6 @@ export function AdmissionsPerAgeGroup({
         }}
       />
       <Legend items={staticLegendItems} />
-    </>
+    </ErrorBoundary>
   );
 }

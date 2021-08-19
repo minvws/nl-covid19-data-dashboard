@@ -1,6 +1,5 @@
-import ExperimenteelIcon from '~/assets/experimenteel.svg';
-import RioolwaterMonitoring from '~/assets/rioolwater-monitoring.svg';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
+import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -9,11 +8,14 @@ import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { SewerChart } from '~/domain/sewer/sewer-chart';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -37,10 +39,8 @@ export const getStaticProps = createGetStaticProps(
     'difference',
     'code'
   ),
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
-    const { locale = 'nl' } = context;
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
   })
 );
@@ -81,7 +81,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
@@ -208,7 +208,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           />
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

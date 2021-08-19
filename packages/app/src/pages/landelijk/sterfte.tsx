@@ -1,18 +1,18 @@
-import CoronaVirusIcon from '~/assets/coronavirus.svg';
+import { ReactComponent as CoronaVirusIcon } from '~/assets/coronavirus.svg';
 import { AgeDemographic } from '~/components/age-demographic';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/spacer';
+import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { DeceasedMonitorSection } from '~/domain/deceased/deceased-monitor-section';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
 import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
 import {
@@ -25,7 +25,6 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
-import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -34,7 +33,7 @@ export const getStaticProps = createGetStaticProps(
     main: { articles: ArticleSummary[] };
     monitor: { articles: ArticleSummary[] };
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
       "main": ${createPageArticlesQuery('deceasedPage', locale)},
       "monitor": ${createPageArticlesQuery(
@@ -54,11 +53,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
   const dataDeceasedPerAgeGroup = data.deceased_rivm_per_age_group;
   const content = props.content;
 
-  const dataRivmUnderReportedDateStart = getBoundaryDateStartUnix(
-    dataRivm.values,
-    4
-  );
-
   const { siteText } = useIntl();
 
   const text = siteText.sterfte;
@@ -71,7 +65,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
@@ -161,21 +155,6 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                     color: colors.data.primary,
                   },
                 ]}
-                dataOptions={{
-                  timespanAnnotations: [
-                    {
-                      start: dataRivmUnderReportedDateStart,
-                      end: Infinity,
-                      label:
-                        text.section_deceased_rivm
-                          .line_chart_covid_daily_legend_inaccurate_label,
-                      shortLabel: siteText.common.incomplete,
-                      cutValuesForMetricProperties: [
-                        'covid_daily_moving_average',
-                      ],
-                    },
-                  ],
-                }}
               />
             )}
           </ChartTile>
@@ -199,7 +178,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             />
           </ChartTile>
 
-          <Spacer amount={3} />
+          <Spacer mb={3} />
 
           <PageInformationBlock
             title={siteText.section_sterftemonitor.title}
@@ -224,7 +203,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
             showCauseMessage
           />
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

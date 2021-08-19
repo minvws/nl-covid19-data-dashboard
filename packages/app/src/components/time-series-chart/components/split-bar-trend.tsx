@@ -18,6 +18,7 @@ type BarTrendProps = {
   bounds: Bounds;
   fillOpacity?: number;
   bandPadding?: number;
+  id: string;
 };
 
 export function SplitBarTrend({
@@ -29,6 +30,7 @@ export function SplitBarTrend({
   bounds,
   bandPadding = 0.2,
   yScale,
+  id,
 }: BarTrendProps) {
   const nonNullSeries = useMemo(
     () => series.filter((x) => isPresent(x.__value)),
@@ -51,6 +53,7 @@ export function SplitBarTrend({
    * mobile screens.
    */
   const barWidth = Math.max(xScale.bandwidth(), 1);
+  const zeroPosition = getY({ __value: 0, __date_unix: 0 });
 
   const gradientId = useUniqueId();
 
@@ -62,17 +65,24 @@ export function SplitBarTrend({
         splitPoints={splitPoints}
       />
 
-      {nonNullSeries.map((item, index) => (
-        <rect
-          key={index}
-          x={getX(item) - barWidth / 2}
-          y={getY(item)}
-          height={bounds.height - getY(item)}
-          width={barWidth}
-          fill={`url(#${gradientId})`}
-          opacity={fillOpacity}
-        />
-      ))}
+      {nonNullSeries.map((item, index) => {
+        const x = getX(item) - barWidth / 2;
+        const y = Math.min(zeroPosition, getY(item));
+        const barHeight = Math.abs(zeroPosition - getY(item));
+
+        return (
+          <rect
+            key={index}
+            id={id}
+            x={x}
+            y={y}
+            height={barHeight}
+            width={barWidth}
+            fill={`url(#${gradientId})`}
+            opacity={fillOpacity}
+          />
+        );
+      })}
     </>
   );
 }

@@ -2,6 +2,7 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { Anchor } from '~/components/typography';
 
 export function LanguageSwitcher() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export function LanguageSwitcher() {
         NL
       </LanguageLink>
 
-      <Separator />
+      <Separator aria-hidden="true" />
 
       <LanguageLink
         href={`https://coronadashboard.government.nl${currentPath}`}
@@ -35,14 +36,18 @@ export function LanguageSwitcher() {
     </Box>
   );
 }
-const Separator = styled.span.attrs({ 'aria-hidden': 'true', children: '|' })(
+const Separator = styled.span(
   css({
     mx: 2,
     display: 'inline-block',
+
+    '&:after': {
+      content: '"|"',
+    },
   })
 );
 
-const LanguageLink = styled.a<{ isActive: boolean }>((x) =>
+const LanguageLink = styled(Anchor)<{ isActive: boolean }>((x) =>
   css({
     borderBottom: '2px solid',
     borderBottomColor: x.isActive ? 'button' : 'transparent',

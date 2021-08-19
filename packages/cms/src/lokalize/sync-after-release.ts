@@ -1,10 +1,10 @@
 /**
  * THIS SCRIPT WILL POTENTIALLY BREAK PRODUCTION BUILD IF RAN HALFWAY SPRINT
  *
- * This script prunes any LokalizeText documents from the production dataset
- * that are not present in the development dataset anymore. It is purely a
- * cleanup mechanism, as additional unused keys have no effect on the
- * application.
+ * This script will finalize move mutations and also prunes any LokalizeText
+ * documents from the production dataset that are not present in the development
+ * dataset anymore. The latter is purely a cleanup mechanism, as additional
+ * unused keys have no effect on the application.
  *
  * This code should be executed only right after a major release at which point
  * we can be fairly certain that whatever keys are not in the development
@@ -18,21 +18,19 @@
  * the assumption that it can not hurt to inject a new key to production that
  * has been created around release time since these documents typically contain
  * placeholder texts.
- *
- * @TODO to make this completely convenient and less scary we could choose to
- * move these documents to a different type (e.g. "lokalizeText__deprecated"),
- * instead of deleting them. If we then by accident delete a production key that
- * is still in use, we can run a script to simply restore the last batch of
- * moved documents. Not sure if Sanity allows you to update a document by
- * changing its _type field, but we can be a bit more clever about it.
  */
 
+import { LokalizeText } from '@corona-dashboard/app/src/types/cms';
 import { assert } from '@corona-dashboard/common';
 import { difference } from 'lodash';
 import prompts from 'prompts';
 import { getClient } from '../client';
-import { clearMutationsLogFile } from './logic';
-import { LokalizeText } from './types';
+import {
+  clearMutationsLogFile,
+  finalizeMoveMutations,
+  getCollapsedMoveMutations,
+  readTextMutations,
+} from './logic';
 
 (async function run() {
   {
@@ -50,6 +48,11 @@ import { LokalizeText } from './types';
       process.exit(0);
     }
   }
+
+  const mutations = await readTextMutations();
+  const moveMutations = getCollapsedMoveMutations(mutations);
+
+  await finalizeMoveMutations('production', moveMutations);
 
   /**
    * Only query published documents, we do not want to inject drafts from

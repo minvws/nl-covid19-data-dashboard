@@ -1,26 +1,60 @@
 import css from '@styled-system/css';
-import { ReactNode, useState } from 'react';
+import { isFunction } from 'lodash';
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
+import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
+import { spacingStyle } from '~/style/functions/spacing';
+import { asResponsiveArray } from '~/style/utils';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { Box } from '../base';
 import { Markdown } from '../markdown';
 import { InlineText } from '../typography';
+import { useComponentPropsReport } from './logic/use-component-props-report';
 
-export function ErrorBoundary({ children = null }: { children: ReactNode }) {
+const PropsReportContext = createContext<
+  () => Record<string, unknown> | undefined
+>(() => undefined);
+
+type ErrorBoundaryProps = {
+  children: ReactNode;
+  extraComponentInfoReport?:
+    | Record<string, unknown>
+    | (() => Record<string, unknown> | undefined);
+};
+
+export function ErrorBoundary({
+  children = null,
+  extraComponentInfoReport,
+}: ErrorBoundaryProps) {
+  const additionalProps = isFunction(extraComponentInfoReport)
+    ? extraComponentInfoReport()
+    : extraComponentInfoReport;
+
+  const [extractPropsFromChildren, propsReportCallback] =
+    useComponentPropsReport(additionalProps);
+
+  useMemo(() => {
+    extractPropsFromChildren(children);
+  }, [extractPropsFromChildren, children]);
+
   return (
-    <ReactErrorBoundary FallbackComponent={ErrorFallback}>
-      {children}
-    </ReactErrorBoundary>
+    <PropsReportContext.Provider value={propsReportCallback}>
+      <ReactErrorBoundary FallbackComponent={ErrorFallback}>
+        {children}
+      </ReactErrorBoundary>
+    </PropsReportContext.Provider>
   );
 }
 
 function ErrorFallback({ error }: { error: Error }) {
   const { siteText } = useIntl();
-  const [clipboardState, setClipboardState] =
-    useState<'init' | 'copied' | 'error'>('init');
-  const errorReport = formatErrorReport(error);
+  const [clipboardState, setClipboardState] = useState<
+    'init' | 'copied' | 'error'
+  >('init');
+  const propsReport = useContext(PropsReportContext);
+  const errorReport = formatErrorReport(error, propsReport());
 
   async function copyErrorReport() {
     setClipboardState('init');
@@ -35,8 +69,7 @@ function ErrorFallback({ error }: { error: Error }) {
   const mail = siteText.common.foutmelding_email_adres;
 
   const subject = encodeURIComponent('Foutmelding op corona dashboard');
-  const body = encodeURIComponent(errorReport);
-  const markdownEmail = `[${mail}](mailto:${mail}?subject=${subject}&body=${body})`;
+  const markdownEmail = `[${mail}](mailto:${mail}?subject=${subject})`;
 
   return (
     <ErrorBox>
@@ -49,24 +82,27 @@ function ErrorFallback({ error }: { error: Error }) {
         <Button onClick={() => copyErrorReport()}>
           {siteText.common.kopieer_foutmelding}
         </Button>
+
         {clipboardState === 'copied' && (
-          <InlineText m={0}>
-            {siteText.common.foutmelding_is_gekopieerd}
+          <InlineText>{siteText.common.foutmelding_is_gekopieerd}</InlineText>
+        )}
+        {clipboardState === 'error' && (
+          <InlineText color="red">
+            {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
           </InlineText>
         )}
       </Box>
-      {clipboardState === 'error' && (
-        <InlineText color="red" fontStyle="italic">
-          {siteText.common.foutmelding_kon_niet_gekopieerd_worden}
-        </InlineText>
-      )}
+
       <ErrorReport>{errorReport}</ErrorReport>
     </ErrorBox>
   );
 }
 
-function formatErrorReport(error: Error) {
-  return [
+function formatErrorReport(
+  error: Error,
+  componentProps?: Record<string, unknown>
+) {
+  const report = [
     `url: ${window.location.href}`,
     `platform: ${navigator.platform}`,
     `user agent: ${navigator.userAgent}`,
@@ -77,7 +113,18 @@ function formatErrorReport(error: Error) {
     `message: ${error.message}`,
     `stacktrace:`,
     error.stack ?? 'No stack trace available',
-  ].join('\n');
+  ];
+
+  if (isDefined(componentProps)) {
+    report.push('component props:');
+    for (const prop in componentProps) {
+      report.push(
+        `${prop}: ${JSON.stringify(componentProps[prop], null, '\t')}`
+      );
+    }
+  }
+
+  return report.join('\n');
 }
 
 const ErrorBox = styled.div.attrs({
@@ -89,6 +136,9 @@ const ErrorBox = styled.div.attrs({
     borderColor: 'red',
     padding: 2,
     borderRadius: '8px',
+    maxHeight: asResponsiveArray({ _: '200px', md: '600px' }),
+    overflow: 'auto',
+    ...spacingStyle(3),
   })
 );
 

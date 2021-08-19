@@ -46,6 +46,7 @@ export function SeriesIcon<T extends TimestampedValue>({
         />
       );
     case 'stacked-area':
+    case 'gapped-stacked-area':
       return (
         <StackedAreaTrendIcon
           color={config.color}

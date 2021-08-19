@@ -1,4 +1,8 @@
-export function getVariantsPageQuery(locale: string) {
+import { GetStaticPropsContext } from 'next';
+
+export function getVariantsPageQuery(context: GetStaticPropsContext) {
+  const { locale } = context;
+
   return `
   *[_type=='variantsPage']{
     "pageLinks": [...pageLinks[]{

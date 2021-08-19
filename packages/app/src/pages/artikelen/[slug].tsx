@@ -40,7 +40,7 @@ export async function getStaticPaths() {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Article>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
 
     assert(context?.params?.slug, 'Slug required to retrieve article');
     return `*[_type == 'article' && slug.current == '${context.params.slug}']{
@@ -50,6 +50,7 @@ export const getStaticProps = createGetStaticProps(
         ...cover,
         "asset": cover.asset->
       },
+      categories,
       "intro": {
         ...intro,
         "${locale}": [
