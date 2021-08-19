@@ -78,6 +78,10 @@ export function PageInformationBlock({
               display={{ md: 'grid' }}
               gridTemplateColumns="repeat(2, 1fr)"
               width="100%"
+              spacing={{
+                _: usefulLinks && usefulLinks.length > 0 ? 0 : 3,
+                md: 0,
+              }}
               css={css({
                 columnGap: 4,
               })}
