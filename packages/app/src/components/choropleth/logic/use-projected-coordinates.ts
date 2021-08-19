@@ -1,4 +1,6 @@
-import { cleanCoords, flatten, multiPoint, round } from '@turf/turf';
+import cleanCoords from '@turf/clean-coords';
+import flatten from '@turf/flatten';
+import { multiPoint, round } from '@turf/helpers';
 import { GeoProjection } from 'd3-geo';
 import { Polygon, Position } from 'geojson';
 import { useMemo } from 'react';
