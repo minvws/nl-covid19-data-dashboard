@@ -9,7 +9,7 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
 import {
   ChartRegionControls,
-  RegionControlOption,
+  RegionControlOption
 } from '~/components/chart-region-controls';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
@@ -33,7 +33,7 @@ import { Search } from '~/domain/topical/components/search';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
-  WeeklyHighlightProps,
+  WeeklyHighlightProps
 } from '~/domain/topical/highlights-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -45,13 +45,13 @@ import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData,
+  selectNlData
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
