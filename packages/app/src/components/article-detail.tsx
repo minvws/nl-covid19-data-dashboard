@@ -50,7 +50,6 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
       </ContentBlock>
       {!!article.content?.length && (
         <Box
-          fontSize="1.125rem"
           // Since you can't serialize unordered lists we have to position them here in the container
           css={css({
             ul: {
