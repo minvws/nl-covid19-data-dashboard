@@ -86,33 +86,25 @@ const Verantwoording = (props: StaticProps<typeof getStaticProps>) => {
         <Box spacing={4}>
           {content.title && <Heading level={1}>{content.title}</Heading>}
           {content.description && <RichContent blocks={content.description} />}
-          {Object.entries(groups)
-            .sort((a, b) => a[0].localeCompare(b[0]))
-            .map(([group, collapsibleItems]) => (
-              <Box as="article" key={group} spacing={3}>
-                <Heading level={3} as="h2">
-                  {group}
-                </Heading>
-                <div>
-                  {collapsibleItems
-                    .sort((a, b) => a.title.localeCompare(b.title))
-                    .map((item) => {
-                      const id = getSkipLinkId(item.title);
-                      return item.content ? (
-                        <CollapsibleSection
-                          key={id}
-                          id={id}
-                          summary={item.title}
-                        >
-                          <Box pt={2} pb={4}>
-                            <RichContent blocks={item.content} />
-                          </Box>
-                        </CollapsibleSection>
-                      ) : null;
-                    })}
-                </div>
-              </Box>
-            ))}
+          {Object.entries(groups).map(([group, collapsibleItems]) => (
+            <Box as="article" key={group} spacing={3}>
+              <Heading level={3} as="h2">
+                {group}
+              </Heading>
+              <div>
+                {collapsibleItems.map((item) => {
+                  const id = getSkipLinkId(item.title);
+                  return item.content ? (
+                    <CollapsibleSection key={id} id={id} summary={item.title}>
+                      <Box pt={2} pb={4}>
+                        <RichContent blocks={item.content} />
+                      </Box>
+                    </CollapsibleSection>
+                  ) : null;
+                })}
+              </div>
+            </Box>
+          ))}
         </Box>
       </Content>
     </Layout>
