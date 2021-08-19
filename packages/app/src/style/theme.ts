@@ -28,21 +28,25 @@ const fonts = {
 
 // prettier-ignore
 const fontSizes = [
-  '0.6875rem',  // 11px, used in chart dates labels
-  '0.875rem',   // 14px, made up to fill the gap.
-  '1rem',       // 16px
-  '1.42383rem', // 22.78128px
-  '2rem',       // 32px
-  '2.02729rem', // 32.43664px
+  '0.75rem',    // 0 -> 12px
+  '0.875rem',   // 1 -> 14px
+  '1rem',       // 2 -> 16px
+  '1.125rem',   // 3 -> 18px
+  '1.1875rem',  // 4 -> 19px
+  '1.25rem',    // 5 -> 20px
+  '1.375rem',   // 6 -> 22px
+  '1.75rem',    // 7 -> 28px
+  '2rem',       // 8 -> 32px
+  '2.25rem',    // 9 -> 36px
 ] as const;
 
-const fontWeights = {
+export const fontWeights = {
   normal: 400,
   bold: 600,
   heavy: 700,
 } as const;
 
-const lineHeights = [1.2, 1.4, 1.5] as const;
+const lineHeights = [1.2, 1.3, 1.5] as const;
 
 /**
  * Breakpoints used in original code and their em equivalent
@@ -68,7 +72,6 @@ interface Breakpoints extends Array<string> {
 
 // @ts-expect-error ignore error, missing props are assigned after this line
 const breakpoints: Breakpoints = ['26em', '48em', '60em', '75em', '100em'];
-
 breakpoints.xs = breakpoints[0]; // ~420px
 breakpoints.sm = breakpoints[1]; // ~768px
 breakpoints.md = breakpoints[2]; // ~960px
@@ -88,15 +91,18 @@ const multiseries = {
   cyan_dark: '#005082',
   yellow: '#FFC000',
   yellow_dark: '#CF9C00',
-  turquoise: '#00BBB5',
-  turquoise_dark: '#089792',
+  turquoise: '#00BB95',
+  turquoise_dark: '#008372',
   orange: '#E37321',
   orange_dark: '#A14E00',
   magenta: '#D360E5',
   magenta_dark: '#9515AA',
 };
 
+export type Color = keyof typeof colors | `data.${keyof typeof colors['data']}`;
+
 export const colors = {
+  white: '#fff',
   body: '#000000',
   bodyLight: '#555555',
   page: '#f3f3f3',
@@ -122,6 +128,11 @@ export const colors = {
   contextualContent: '#e5eff8',
   cerulean: '#0390D6',
   tooltipIndicator: '#000000',
+  buttonLightBlue: '#C2E4F4',
+  choroplethFeatureStroke: '#fff',
+  choroplethOutlineStroke: '#c4c4c4',
+  choroplethHighlightStroke: '#000000',
+  choroplethNoData: '#fff',
 
   data: {
     primary: '#007BC7',

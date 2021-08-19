@@ -4,6 +4,9 @@ import { isDefined } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { VisuallyHidden } from './visually-hidden';
 
+import chevronDownUrl from '~/assets/chevron-down.svg';
+import closeUrl from '~/assets/close.svg';
+
 interface Option<T extends string> {
   value: T;
   label: string;
@@ -69,15 +72,14 @@ const Container = styled.div(css({ position: 'relative', maxWidth: '100%' }));
 const Icon = styled.span(
   css({
     pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
     position: 'absolute',
     left: 0,
     top: 0,
-    svg: {
-      width: 25,
-      height: 25,
-      my: 1,
-      ml: 2,
-    },
+    minHeight: '100%',
+    py: 1,
+    pl: 2,
   })
 );
 
@@ -89,7 +91,7 @@ const ClearButton = styled.button(
     padding: 2,
     textAlign: 'left',
     backgroundColor: 'white',
-    backgroundImage: `url('/images/close.svg')`,
+    backgroundImage: `url('${closeUrl}')`,
     backgroundSize: '24px 24px',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
@@ -110,12 +112,11 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
       borderStyle: 'solid',
       borderColor: 'lightGray',
       fontFamily: 'body',
-      fontSize: 2,
       appearance: 'none',
       p: 2,
       pr: x.isClearable ? '2.4rem' : '2rem',
       pl: x.hasIcon ? '2.4rem' : '0.5rem',
-      background: `url('/images/chevron-down.svg')`,
+      background: `url('${chevronDownUrl}')`,
       backgroundSize: '14px 14px',
       backgroundRepeat: 'no-repeat, repeat',
       backgroundPosition: 'right 0.5em top 60%, 0 0',

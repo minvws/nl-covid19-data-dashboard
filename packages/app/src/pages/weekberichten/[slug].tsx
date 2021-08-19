@@ -40,7 +40,7 @@ export async function getStaticPaths() {
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   createGetContent<Editorial>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
 
     assert(context.params?.slug, 'Slug required to retrieve article');
     return `
@@ -79,7 +79,9 @@ export const getStaticProps = createGetStaticProps(
   })
 );
 
-const EditorialDetailPage = (props: StaticProps<typeof getStaticProps>) => {
+export default function EditorialDetailPage(
+  props: StaticProps<typeof getStaticProps>
+) {
   const { content, lastGenerated } = props;
   const { cover } = props.content;
   const { asset } = cover;
@@ -101,9 +103,7 @@ const EditorialDetailPage = (props: StaticProps<typeof getStaticProps>) => {
       </Box>
     </Layout>
   );
-};
-
-export default EditorialDetailPage;
+}
 
 function getTitle(title: string, locale: string) {
   const suffix =

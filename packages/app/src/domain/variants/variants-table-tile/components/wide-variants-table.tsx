@@ -2,9 +2,8 @@ import { DifferenceDecimal } from '@corona-dashboard/common';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
-import { TableText } from '~/domain/variants/variants-table-tile';
+import { VariantRow } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
-import { VariantRow } from '~/static-props/variants/get-variant-table-data';
 import { getMaximumNumberOfDecimals } from '~/utils/get-maximum-number-of-decimals';
 import {
   Cell,
@@ -14,9 +13,10 @@ import {
   VariantDifference,
   VariantNameCell,
 } from '.';
+import { TableText } from '../types';
 import { NoPercentageData } from './no-percentage-data';
 
-const columnKeys = ['variant_titel', 'percentage', 'vorige_meeting'] as const;
+const columnKeys = ['variant_titel', 'percentage', 'vorige_meting'] as const;
 
 type WideVariantsTableProps = {
   rows: VariantRow[];
@@ -50,11 +50,7 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
       <tbody>
         {rows.map((row) => (
           <tr key={row.variant}>
-            <VariantNameCell
-              variant={row.variant}
-              text={text}
-              countryOfOrigin={row.countryOfOrigin}
-            />
+            <VariantNameCell variant={row.variant} text={text} />
             <Cell>
               {isPresent(row.percentage) ? (
                 <Box maxWidth="20em">

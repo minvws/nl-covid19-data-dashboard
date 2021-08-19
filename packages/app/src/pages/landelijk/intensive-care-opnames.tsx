@@ -1,5 +1,5 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import Arts from '~/assets/arts.svg';
+import { ReactComponent as Arts } from '~/assets/arts.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -12,17 +12,17 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
-import { NationalLayout } from '~/domain/layout/national-layout';
+import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
-import {
-  ArticlesQueryResult,
-  createPageArticlesQuery,
-} from '~/queries/create-page-articles-query';
 import {
   createElementsQuery,
   ElementsQueryResult,
   getTimelineEvents,
-} from '~/queries/create-page-elements-query';
+} from '~/queries/create-elements-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -40,12 +40,12 @@ export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
-    fix_this: ArticlesQueryResult;
+    page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
-      "fix_this": ${createPageArticlesQuery('intensiveCarePage', locale)},
+      "page": ${createPageArticlesQuery('intensiveCarePage', locale)},
       "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
     }`;
   })
@@ -74,7 +74,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <NationalLayout data={data} lastGenerated={lastGenerated}>
+      <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.ziekenhuizen}
@@ -89,7 +89,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            articles={content.fix_this.articles}
+            articles={content.page.articles}
           />
 
           <TwoKpiSection>
@@ -135,7 +135,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                         text.kpi_bedbezetting.description,
                         {
                           percentage: formatPercentage(
-                            bedsLastValue.beds_occupied_covid_percentage
+                            bedsLastValue.beds_occupied_covid_percentage,
+                            { maximumFractionDigits: 1 }
                           ),
                         }
                       )}
@@ -250,7 +251,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
             )}
           </ChartTile>
         </TileList>
-      </NationalLayout>
+      </NlLayout>
     </Layout>
   );
 };

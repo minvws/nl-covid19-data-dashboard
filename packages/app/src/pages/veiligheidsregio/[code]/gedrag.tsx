@@ -1,7 +1,6 @@
 import { NlBehaviorValue } from '@corona-dashboard/common';
 import { useRef, useState } from 'react';
-import Gedrag from '~/assets/gedrag.svg';
-import { ArticleSummary } from '~/components/article-teaser';
+import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
@@ -17,7 +16,10 @@ import { BehaviorIdentifier } from '~/domain/behavior/logic/behavior-types';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
 import { useIntl } from '~/intl';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -33,10 +35,8 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  createGetContent<{
-    articles?: ArticleSummary[];
-  }>((context) => {
-    const { locale = 'nl' } = context;
+  createGetContent<PageArticlesQueryResult>((context) => {
+    const { locale } = context;
     return createPageArticlesQuery('behaviorPage', locale);
   }),
   (context) => {

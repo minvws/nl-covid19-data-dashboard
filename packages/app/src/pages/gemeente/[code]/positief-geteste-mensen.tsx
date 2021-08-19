@@ -1,13 +1,8 @@
-import {
-  GmCollectionTestedOverall,
-  GmProperties,
-} from '@corona-dashboard/common';
-import Getest from '~/assets/test.svg';
+import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
-import { municipalThresholds } from '~/components/choropleth/municipal-thresholds';
-import { MunicipalityChoropleth } from '~/components/choropleth/municipality-choropleth';
-import { PositiveTestedPeopleMunicipalTooltip } from '~/components/choropleth/tooltips/municipal/positive-tested-people-municipal-tooltip';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -17,18 +12,18 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
-import { MunicipalityLayout } from '~/domain/layout/municipality-layout';
 import { useIntl } from '~/intl';
-import {
-  ArticlesQueryResult,
-  createPageArticlesQuery,
-} from '~/queries/create-page-articles-query';
 import {
   createElementsQuery,
   ElementsQueryResult,
   getTimelineEvents,
-} from '~/queries/create-page-elements-query';
+} from '~/queries/create-elements-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -60,12 +55,12 @@ export const getStaticProps = createGetStaticProps(
     }),
   }),
   createGetContent<{
-    fix_this: ArticlesQueryResult;
+    page: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
-    const { locale = 'nl' } = context;
+    const { locale } = context;
     return `{
-      "fix_this": ${createPageArticlesQuery('positiveTestsPage', locale)},
+      "page": ${createPageArticlesQuery('positiveTestsPage', locale)},
       "elements": ${createElementsQuery('gm', ['tested_overall'], locale)}
     }`;
   })
@@ -99,7 +94,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
-      <MunicipalityLayout
+      <GmLayout
         data={sideBarData}
         code={data.code}
         difference={data.difference}
@@ -121,7 +116,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.fix_this.articles}
+            articles={content.page.articles}
           />
 
           <TwoKpiSection>
@@ -249,7 +244,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             })}
             description={text.map_toelichting}
             legend={{
-              thresholds: municipalThresholds.tested_overall.infected_per_100k,
+              thresholds: thresholds.gm.infected_per_100k,
               title:
                 siteText.positief_geteste_personen.chloropleth_legenda.titel,
             }}
@@ -258,22 +253,24 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <MunicipalityChoropleth
+            <Choropleth
+              map="gm"
               accessibility={{
                 key: 'confirmed_cases_choropleth',
               }}
-              selectedCode={data.code}
-              data={choropleth.gm}
-              getLink={reverseRouter.gm.positiefGetesteMensen}
-              metricName="tested_overall"
-              metricProperty="infected_per_100k"
-              tooltipContent={(
-                context: GmProperties & GmCollectionTestedOverall
-              ) => <PositiveTestedPeopleMunicipalTooltip context={context} />}
+              data={choropleth.gm.tested_overall}
+              dataConfig={{
+                metricProperty: 'infected_per_100k',
+              }}
+              dataOptions={{
+                selectedCode: data.code,
+                highlightSelection: true,
+                getLink: reverseRouter.gm.positiefGetesteMensen,
+              }}
             />
           </ChoroplethTile>
         </TileList>
-      </MunicipalityLayout>
+      </GmLayout>
     </Layout>
   );
 };

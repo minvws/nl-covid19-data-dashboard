@@ -1,16 +1,16 @@
 import css from '@styled-system/css';
-import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Close from '~/assets/close.svg';
-import Menu from '~/assets/menu.svg';
+import { ReactComponent as Close } from '~/assets/close.svg';
+import { ReactComponent as Menu } from '~/assets/menu.svg';
 import { MaxWidth } from '~/components/max-width';
+import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { Link } from '~/utils/link';
-import { useIsMounted } from '~/utils/use-is-mounted';
+import { useCollapsible } from '~/utils/use-collapsible';
 import { useMediaQuery } from '~/utils/use-media-query';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
@@ -19,14 +19,11 @@ const wideNavBreakpoint = 'screen and (min-width: 1024px)';
 export function TopNavigation() {
   const isWideNav = useMediaQuery(wideNavBreakpoint);
   const router = useRouter();
-  const isMounted = useIsMounted();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+  const collapsible = useCollapsible({ isOpen: isWideNav });
 
   const internationalFeature = useFeature('inHomePage');
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
@@ -37,74 +34,64 @@ export function TopNavigation() {
           '.has-no-js &': { display: 'none' },
         })}
       >
-        <NavToggle
-          onClick={toggleMenu}
-          aria-expanded={isMenuOpen}
-          aria-controls="main-navigation"
-        >
-          {isMenuOpen ? <Close /> : <Menu />}
-          <VisuallyHidden>
-            {isMenuOpen
-              ? siteText.nav.menu.close_menu
-              : siteText.nav.menu.open_menu}
-          </VisuallyHidden>
-        </NavToggle>
+        {collapsible.button(
+          <NavToggle>
+            {collapsible.isOpen ? <Close /> : <Menu />}
+            <VisuallyHidden>
+              {collapsible.isOpen
+                ? siteText.nav.menu.close_menu
+                : siteText.nav.menu.open_menu}
+            </VisuallyHidden>
+          </NavToggle>
+        )}
       </div>
 
       <NavWrapper
         key={isWideNav ? 1 : 0}
-        id="main-navigation"
         role="navigation"
         aria-label={siteText.aria_labels.pagina_keuze}
-        initial={{
-          height: 0,
-          opacity: 1,
-        }}
-        animate={
-          isMounted && {
-            height: isMenuOpen || isWideNav ? 'auto' : 0,
-            opacity: isMenuOpen || isWideNav ? 1 : 0,
-          }
-        }
+        id="main-navigation"
       >
-        <MaxWidth>
-          <NavList>
-            <NavItem
-              href="/"
-              isActive={
-                router.pathname === '/' ||
-                router.pathname.startsWith('/actueel')
-              }
-            >
-              {siteText.nav.links.actueel}
-            </NavItem>
-            <NavItem
-              href={reverseRouter.nl.index()}
-              isActive={router.pathname.startsWith('/landelijk')}
-            >
-              {siteText.nav.links.index}
-            </NavItem>
-            <NavItem href={reverseRouter.vr.index()}>
-              {siteText.nav.links.veiligheidsregio}
-            </NavItem>
-            <NavItem href={reverseRouter.gm.index()}>
-              {siteText.nav.links.gemeente}
-            </NavItem>
-
-            {internationalFeature.isEnabled ? (
+        {collapsible.content(
+          <MaxWidth>
+            <NavList>
               <NavItem
-                href={reverseRouter.in.index()}
-                isActive={router.pathname.startsWith('/internationaal')}
+                href="/"
+                isActive={
+                  router.pathname === '/' ||
+                  router.pathname.startsWith('/actueel')
+                }
               >
-                {siteText.nav.links.internationaal}
+                {siteText.nav.links.actueel}
               </NavItem>
-            ) : null}
+              <NavItem
+                href={reverseRouter.nl.index()}
+                isActive={router.pathname.startsWith('/landelijk')}
+              >
+                {siteText.nav.links.index}
+              </NavItem>
+              <NavItem href={reverseRouter.vr.index()}>
+                {siteText.nav.links.veiligheidsregio}
+              </NavItem>
+              <NavItem href={reverseRouter.gm.index()}>
+                {siteText.nav.links.gemeente}
+              </NavItem>
 
-            <NavItem href={reverseRouter.algemeen.over()}>
-              {siteText.nav.links.over}
-            </NavItem>
-          </NavList>
-        </MaxWidth>
+              {internationalFeature.isEnabled ? (
+                <NavItem
+                  href={reverseRouter.in.index()}
+                  isActive={router.pathname.startsWith('/internationaal')}
+                >
+                  {siteText.nav.links.internationaal}
+                </NavItem>
+              ) : null}
+
+              <NavItem href={reverseRouter.algemeen.over()}>
+                {siteText.nav.links.over}
+              </NavItem>
+            </NavList>
+          </MaxWidth>
+        )}
       </NavWrapper>
     </>
   );
@@ -149,31 +136,13 @@ const NavToggle = styled.button(
   })
 );
 
-const NavWrapper = styled(motion.nav)(
+const NavWrapper = styled.nav(
   css({
     display: 'block',
     width: '100%',
     borderTopWidth: '1px',
     p: 0,
     overflow: 'hidden',
-
-    '.has-no-js &': {
-      height: 'auto !important',
-      maxHeight: 0,
-      opacity: 0,
-      animation: `show-menu 1s forwards`,
-      animationDelay: '1s',
-    },
-
-    [`@keyframes show-menu`]: {
-      from: {
-        maxHeight: 0,
-      },
-      to: {
-        opacity: 1,
-        maxHeight: '1000px',
-      },
-    },
 
     [`@media ${wideNavBreakpoint}`]: {
       height: 'auto !important',
@@ -219,7 +188,7 @@ const StyledListItem = styled.li(
   })
 );
 
-const NavLink = styled.a<{ isActive: boolean }>((x) =>
+const NavLink = styled(Anchor)<{ isActive: boolean }>((x) =>
   css({
     display: 'block',
     whiteSpace: 'nowrap',

@@ -1,9 +1,11 @@
 import { NlTestedPerAgeGroupValue } from '@corona-dashboard/common';
+import { ErrorBoundary } from '~/components/error-boundary';
 import {
   InteractiveLegend,
   SelectOption,
 } from '~/components/interactive-legend';
 import { Legend, LegendItem } from '~/components/legend';
+import { Spacer } from '~/components/base';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { SeriesIcon } from '~/components/time-series-chart/components/series-icon';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
@@ -90,7 +92,7 @@ export function InfectedPerAgeGroup({
   const hasTwoColumns = list.length === 0 || list.length > 4;
 
   return (
-    <>
+    <ErrorBoundary>
       <InteractiveLegend
         helpText={text.legend_help_text}
         selectOptions={interactiveLegendOptions}
@@ -98,6 +100,7 @@ export function InfectedPerAgeGroup({
         onToggleItem={toggle}
         onReset={clear}
       />
+      <Spacer mb={2} />
       <TimeSeriesChart
         accessibility={accessibility}
         values={values}
@@ -109,6 +112,7 @@ export function InfectedPerAgeGroup({
           <TooltipSeriesList data={data} hasTwoColumns={hasTwoColumns} />
         )}
         dataOptions={{
+          valueAnnotation: text.value_annotation,
           timespanAnnotations: [
             {
               start: underReportedDateStart,
@@ -120,6 +124,6 @@ export function InfectedPerAgeGroup({
         }}
       />
       <Legend items={staticLegendItems} />
-    </>
+    </ErrorBoundary>
   );
 }

@@ -29,7 +29,7 @@ export function SelectBehavior({
     <Select
       value={value}
       onChange={onChange}
-      icon={<BehaviorIcon name={value} size={20} />}
+      icon={<BehaviorIcon name={value} size={25} />}
       options={selectOptions}
     />
   );

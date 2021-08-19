@@ -1,14 +1,13 @@
 import { NlBehaviorValue, VrBehaviorValue } from '@corona-dashboard/common';
-import css from '@styled-system/css';
 import { dropRightWhile, dropWhile } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Box, Spacer } from '~/components/base';
+import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { InlineTooltip } from '~/components/inline-tooltip';
 import { MetadataProps } from '~/components/metadata';
 import { TimeSeriesChart } from '~/components/time-series-chart';
-import { InlineText, Text } from '~/components/typography';
+import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { SelectBehavior } from './components/select-behavior';
@@ -46,62 +45,65 @@ export function BehaviorLineChartTile({
   const supportValuesHasGap = useDataHasGaps(values, selectedSupportValueKey);
 
   return (
-    <ChartTile title={chartText.title} metadata={metadata}>
-      <Text css={css({ maxWidth: '30em' })}>{chartText.description}</Text>
-      <Box
-        display="flex"
-        alignItems={{ lg: 'center' }}
-        spacing={{ _: 3, lg: 0 }}
-        flexDirection={{ _: 'column', lg: 'row' }}
-      >
-        <Box pr={3}>
-          <SelectBehavior
-            value={currentId}
-            onChange={setCurrentId}
-            options={behaviorOptions}
-          />
+    <ChartTile
+      title={chartText.title}
+      metadata={metadata}
+      description={chartText.description}
+    >
+      <Box spacing={4}>
+        <Box
+          display="flex"
+          alignItems={{ lg: 'center' }}
+          spacing={{ _: 3, lg: 0 }}
+          flexDirection={{ _: 'column', lg: 'row' }}
+        >
+          <Box pr={3}>
+            <SelectBehavior
+              value={currentId}
+              onChange={setCurrentId}
+              options={behaviorOptions}
+            />
+          </Box>
+
+          {(complianceValuesHasGap || supportValuesHasGap) && (
+            <InlineTooltip content={chartText.tooltip_witte_gaten_beschrijving}>
+              <InlineText fontWeight="bold">
+                {chartText.tooltip_witte_gaten_label}
+              </InlineText>
+            </InlineTooltip>
+          )}
         </Box>
 
-        {(complianceValuesHasGap || supportValuesHasGap) && (
-          <InlineTooltip content={chartText.tooltip_witte_gaten_beschrijving}>
-            <InlineText fontWeight="bold">
-              {chartText.tooltip_witte_gaten_label}
-            </InlineText>
-          </InlineTooltip>
-        )}
+        <TimeSeriesChart
+          accessibility={{
+            key: 'behavior_line_chart',
+          }}
+          values={values}
+          seriesConfig={[
+            {
+              type: 'gapped-line',
+              metricProperty: selectedComplianceValueKey,
+              label: chartText.compliance_label,
+              shortLabel: chartText.compliance_short_label,
+              strokeWidth: 3,
+              color: colors.data.cyan,
+            },
+            {
+              type: 'gapped-line',
+              metricProperty: selectedSupportValueKey,
+              label: chartText.support_label,
+              shortLabel: chartText.support_short_label,
+              strokeWidth: 3,
+              color: colors.data.yellow,
+            },
+          ]}
+          dataOptions={{
+            isPercentage: true,
+          }}
+          numGridLines={2}
+          tickValues={[0, 25, 50, 75, 100]}
+        />
       </Box>
-
-      <Spacer mb={4} />
-
-      <TimeSeriesChart
-        accessibility={{
-          key: 'behavior_line_chart',
-        }}
-        values={values}
-        seriesConfig={[
-          {
-            type: 'gapped-line',
-            metricProperty: selectedComplianceValueKey,
-            label: chartText.compliance_label,
-            shortLabel: chartText.compliance_short_label,
-            strokeWidth: 3,
-            color: colors.data.cyan,
-          },
-          {
-            type: 'gapped-line',
-            metricProperty: selectedSupportValueKey,
-            label: chartText.support_label,
-            shortLabel: chartText.support_short_label,
-            strokeWidth: 3,
-            color: colors.data.yellow,
-          },
-        ]}
-        dataOptions={{
-          isPercentage: true,
-        }}
-        numGridLines={2}
-        tickValues={[0, 25, 50, 75, 100]}
-      />
     </ChartTile>
   );
 }

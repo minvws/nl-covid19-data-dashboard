@@ -4,11 +4,10 @@ import { matchSorter } from 'match-sorter';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
 import { Metadata, MetadataProps } from '~/components/metadata';
 import { SearchInput } from '~/components/search-input';
 import { Select } from '~/components/select';
-import { Tile } from '~/components/tile';
-import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { NarrowInfectedTable } from './components/narrow-infected-table';
@@ -92,50 +91,37 @@ export function InfectedTableTile({
   }, [filterArray, inputValue, countryNames]);
 
   return (
-    <Tile>
-      <Heading level={3}>{text.title}</Heading>
-      <Box maxWidth="maxWidthText">
-        <Text>{text.description}</Text>
-      </Box>
-      <Box
-        display="flex"
-        flexDirection={{ _: 'column', lg: 'row' }}
-        justifyContent="space-between"
-        mb={4}
-      >
-        <Box mb={{ _: 3, lg: 0 }}>
+    <ChartTile title={text.title} description={text.description}>
+      <Box spacing={3}>
+        <Box
+          display="flex"
+          flexDirection={{ _: 'column', lg: 'row' }}
+          justifyContent="space-between"
+          spacing={{ _: 3, md: 0 }}
+        >
           <SearchInput
             value={inputValue}
             setValue={setInputValue}
             placeholderText={text.search.placeholder}
           />
-        </Box>
 
-        <Box
-          display="flex"
-          alignItems={{ lg: 'center' }}
-          flexDirection={{ _: 'column', lg: 'row' }}
-        >
-          <label
-            css={css({
-              pr: 2,
-              fontSize: 1,
-            })}
+          <Box
+            display="flex"
+            alignItems={{ lg: 'center' }}
+            flexDirection={{ _: 'column', lg: 'row' }}
           >
-            {text.sorteer_op}
-          </label>
-          <Select
-            options={sortOptions}
-            onChange={setSortOption}
-            value={sortOption}
-          />
+            <label css={css({ pr: 2, fontSize: 1 })}>{text.sorteer_op}</label>
+            <Select
+              options={sortOptions}
+              onChange={setSortOption}
+              value={sortOption}
+            />
+          </Box>
         </Box>
-      </Box>
 
-      <Box mb={{ _: 2, sm: 3 }}>
         {breakpoints.sm ? (
           <WideInfectedTable
-            data={data.sort(positiveTestedSortOptions[sortOption])}
+            data={[...data].sort(positiveTestedSortOptions[sortOption])}
             isExpanded={isExpanded}
             matchingCountries={matchingCountries}
             countryNames={countryNames}
@@ -143,25 +129,24 @@ export function InfectedTableTile({
           />
         ) : (
           <NarrowInfectedTable
-            data={data.sort(positiveTestedSortOptions[sortOption])}
+            data={[...data].sort(positiveTestedSortOptions[sortOption])}
             isExpanded={isExpanded}
             matchingCountries={matchingCountries}
             countryNames={countryNames}
             inputValue={inputValue}
           />
         )}
+
+        {matchingCountries.length > data.length && (
+          <Box display="flex" pl={{ _: 2, sm: 3 }}>
+            <ExpandButton onClick={() => setIsExpanded(!isExpanded)}>
+              {isExpanded ? text.toon_minder : text.toon_meer}
+            </ExpandButton>
+          </Box>
+        )}
       </Box>
-
-      {matchingCountries.length > data.length && (
-        <Box display="flex" pl={{ _: 2, sm: 3 }} my={{ _: 3, sm: 2 }}>
-          <ExpandButton onClick={() => setIsExpanded(!isExpanded)}>
-            {isExpanded ? text.toon_minder : text.toon_meer}
-          </ExpandButton>
-        </Box>
-      )}
-
       <Metadata {...metadata} isTileFooter />
-    </Tile>
+    </ChartTile>
   );
 }
 

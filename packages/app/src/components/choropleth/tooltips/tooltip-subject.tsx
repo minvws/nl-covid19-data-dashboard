@@ -1,13 +1,14 @@
 import { ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { css } from '@styled-system/css';
 import { ReactNode } from 'react';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { getFilteredThresholdValues } from '~/utils/get-filtered-threshold-values';
 
 interface TooltipSubjectProps {
   subject?: string;
-  thresholdValues: ChoroplethThresholdsValue[];
+  thresholdValues?: ChoroplethThresholdsValue[];
   filterBelow: number | null;
   children: ReactNode;
   noDataFillColor?: string;
@@ -21,21 +22,18 @@ export function TooltipSubject({
   noDataFillColor,
 }: TooltipSubjectProps) {
   const color =
-    filterBelow === null
+    !isPresent(filterBelow) && isDefined(thresholdValues)
       ? noDataFillColor || getFilteredThresholdValues(thresholdValues, 0).color
-      : getFilteredThresholdValues(thresholdValues, filterBelow).color;
+      : isPresent(filterBelow) && isDefined(thresholdValues)
+      ? getFilteredThresholdValues(thresholdValues, filterBelow).color
+      : noDataFillColor;
 
   return (
-    <>
-      {subject && (
-        <Text m={0} mb={1} fontWeight="bold">
-          {subject}
-        </Text>
-      )}
+    <Box spacing={1}>
+      {subject && <Text fontWeight="bold">{subject}</Text>}
       <Box
         m={0}
-        spacing={2}
-        spacingHorizontal
+        spacingHorizontal={2}
         css={css({
           display: 'flex',
           alignItems: 'center',
@@ -52,6 +50,6 @@ export function TooltipSubject({
           backgroundColor={color}
         />
       </Box>
-    </>
+    </Box>
   );
 }

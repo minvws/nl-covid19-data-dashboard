@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { useEffect, useRef, useState } from 'react';
-import CloseIcon from '~/assets/close-thin.svg';
-import ExpandIcon from '~/assets/expand.svg';
+import { ReactComponent as CloseIcon } from '~/assets/close-thin.svg';
+import { ReactComponent as ExpandIcon } from '~/assets/expand.svg';
 import { Tile } from '~/components/tile';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -15,9 +15,11 @@ import { Modal } from './modal';
 export function FullscreenChartTile({
   children,
   metadata,
+  disabled,
 }: {
   children: React.ReactNode;
   metadata?: MetadataProps;
+  disabled?: boolean;
 }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wasFullscreen = usePrevious(isFullscreen);
@@ -49,7 +51,7 @@ export function FullscreenChartTile({
         </>
       )}
 
-      {breakpoints.md && (
+      {!disabled && breakpoints.md && (
         <div
           css={css({
             position: 'absolute',
@@ -83,7 +85,7 @@ export function FullscreenChartTile({
     <>
       <div>{tile}</div>
 
-      {breakpoints.md && isFullscreen && (
+      {!disabled && breakpoints.md && isFullscreen && (
         <Modal
           id="chart-tile-container"
           onClose={() => setIsFullscreen(false)}

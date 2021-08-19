@@ -1,4 +1,4 @@
-import { ArticleSummary } from '~/components/article-teaser';
+import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -9,13 +9,15 @@ import { TwoKpiSection } from '~/components/two-kpi-section';
 import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
-import { SituationIcon } from '~/domain/situations/components/situation-icon';
 import { SituationsDataCoverageTile } from '~/domain/situations/situations-data-coverage-tile';
 import { SituationsOverTimeChart } from '~/domain/situations/situations-over-time-chart';
 import { SituationsTableTile } from '~/domain/situations/situations-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
-import { createPageArticlesQuery } from '~/queries/create-page-articles-query';
+import {
+  createPageArticlesQuery,
+  PageArticlesQueryResult,
+} from '~/queries/create-page-articles-query';
 import {
   createGetStaticProps,
   StaticProps,
@@ -35,10 +37,8 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     selectVrPageMetricData('situations'),
-    createGetContent<{
-      articles?: ArticleSummary[];
-    }>((context) => {
-      const { locale = 'nl' } = context;
+    createGetContent<PageArticlesQueryResult>((context) => {
+      const { locale } = context;
       return createPageArticlesQuery('situationsPage', locale);
     })
   )
@@ -84,7 +84,7 @@ export default function BrononderzoekPage(
                 location: vrName,
               }
             )}
-            icon={<SituationIcon id="gathering" />}
+            icon={<Gedrag />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

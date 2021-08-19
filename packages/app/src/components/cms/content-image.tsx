@@ -2,10 +2,11 @@ import css from '@styled-system/css';
 import { Fragment, FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
+import { ContentBlock } from '~/components/cms/content-block';
 import { SanityImage } from '~/components/cms/sanity-image';
-import { MaxWidth } from '~/components/max-width';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock, RichContentImageBlock } from '~/types/cms';
+import { Text } from '../typography';
 
 interface ContentImageProps {
   node: ImageBlock | RichContentImageBlock;
@@ -28,21 +29,25 @@ export function ContentImage({
   sizes,
 }: ContentImageProps) {
   const caption = 'caption' in node && node.caption && (
-    <Caption>{node.caption}</Caption>
+    <Text as="figcaption" variant="body2" textAlign="left">
+      {node.caption}
+    </Text>
   );
 
   const ContentWrapper = contentWrapper ?? Fragment;
 
   return 'isFullWidth' in node && node.isFullWidth ? (
-    <Box bg="page" p={4}>
-      <MaxWidth textAlign="center">
-        <Box
-          as="figure"
-          role="group"
-          spacing={3}
-          display="inline-block"
-          maxWidth={IMAGE_MAX_WIDTH}
-        >
+    <Box bg="page" p={4} width="100%">
+      <Box
+        as="figure"
+        role="group"
+        spacing={3}
+        display="flex"
+        maxWidth={IMAGE_MAX_WIDTH}
+        mx="auto"
+        textAlign="center"
+      >
+        <ContentBlock>
           <SanityImageTile
             {...getImageProps(node, {
               sizes: [[IMAGE_MAX_WIDTH, IMAGE_MAX_WIDTH]],
@@ -50,8 +55,8 @@ export function ContentImage({
           />
 
           {caption}
-        </Box>
-      </MaxWidth>
+        </ContentBlock>
+      </Box>
     </Box>
   ) : (
     <ContentWrapper>
@@ -64,10 +69,3 @@ export function ContentImage({
     </ContentWrapper>
   );
 }
-
-const Caption = styled.figcaption(
-  css({
-    textAlign: 'left',
-    fontSize: 2,
-  })
-);

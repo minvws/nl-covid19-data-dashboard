@@ -1,14 +1,14 @@
-import { VrCollectionBehavior, VrProperties } from '@corona-dashboard/common';
+import { KeysOfType, VrCollectionBehavior } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
+import { ChartTile } from '~/components/chart-tile';
+import { Choropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
-import { regionThresholds } from '~/components/choropleth/region-thresholds';
-import { BehaviorTooltip } from '~/components/choropleth/tooltips/region/behavior-tooltip';
-import { VrChoropleth } from '~/components/choropleth/vr-choropleth';
+import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { ErrorBoundary } from '~/components/error-boundary';
-import { Tile } from '~/components/tile';
 import { Heading, Text } from '~/components/typography';
+import { VrBehaviorTooltip } from '~/domain/behavior/tooltip/vr-behavior-tooltip';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
@@ -59,34 +59,28 @@ export function BehaviorChoroplethsTile({
   }, [data.behavior]);
 
   return (
-    <Tile>
-      <Heading level={3}>{title}</Heading>
-      <Box maxWidth="maxWidthText">
-        <Text>{description}</Text>
-      </Box>
-
-      <Box mb={4}>
+    <ChartTile title={title} description={description}>
+      <Box spacing={4} height="100%">
         <SelectBehavior value={currentId} onChange={setCurrentId} />
-      </Box>
+        <Box display="flex" flexWrap="wrap" spacing={{ _: 4, md: 0 }}>
+          <ChoroplethBlock
+            title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
+            data={data}
+            behaviorType="compliance"
+            currentId={currentId}
+            keysWithoutData={keysWithoutData}
+          />
 
-      <Box display="flex" flexWrap="wrap" spacing={{ _: 4, lg: undefined }}>
-        <ChoroplethBlock
-          title={siteText.nl_gedrag.verdeling_in_nederland.compliance_title}
-          data={data}
-          behaviorType="compliance"
-          currentId={currentId}
-          keysWithoutData={keysWithoutData}
-        />
-
-        <ChoroplethBlock
-          title={siteText.nl_gedrag.verdeling_in_nederland.support_title}
-          data={data}
-          behaviorType="support"
-          currentId={currentId}
-          keysWithoutData={keysWithoutData}
-        />
+          <ChoroplethBlock
+            title={siteText.nl_gedrag.verdeling_in_nederland.support_title}
+            data={data}
+            behaviorType="support"
+            currentId={currentId}
+            keysWithoutData={keysWithoutData}
+          />
+        </Box>
       </Box>
-    </Tile>
+    </ChartTile>
   );
 }
 
@@ -113,10 +107,11 @@ function ChoroplethBlock({
   const metricProperty = `${currentId}_${behaviorType}` as const;
 
   return (
-    <Box width={{ _: '100%', lg: '50%' }}>
-      <Heading level={4} textAlign="center">
+    <Box width={{ _: '100%', lg: '50%' }} spacing={3}>
+      <Heading level={5} as="h4" textAlign="center">
         {title}
       </Heading>
+
       <Box position="relative">
         {keysWithoutData.includes(currentId) && (
           <Box
@@ -129,21 +124,31 @@ function ChoroplethBlock({
             height="100%"
             css={css({ zIndex: 9 })}
           >
-            <Text textAlign="center" m={0} css={css({ maxWidth: '300px' })}>
+            <Text textAlign="center" css={css({ maxWidth: '300px' })}>
               {siteText.nl_gedrag.verdeling_in_nederland.geen_beschikbare_data}
             </Text>
           </Box>
         )}
         <ErrorBoundary>
-          <VrChoropleth
-            accessibility={{ key: 'behavior_choropleths' }}
-            data={data}
-            getLink={reverseRouter.vr.gedrag}
-            metricName="behavior"
-            metricProperty={metricProperty}
+          <Choropleth
+            accessibility={{
+              key: 'behavior_choropleths',
+            }}
+            map="vr"
+            data={data.behavior}
+            dataConfig={{
+              metricProperty: metricProperty as unknown as KeysOfType<
+                VrCollectionBehavior,
+                number | null | boolean | undefined,
+                true
+              >,
+              noDataFillColor: colors.page,
+            }}
+            dataOptions={{
+              getLink: reverseRouter.vr.gedrag,
+            }}
             minHeight={!isSmallScreen ? 350 : 400}
-            noDataFillColor={colors.page}
-            tooltipContent={(context: VrCollectionBehavior & VrProperties) => {
+            formatTooltip={(context) => {
               const currentComplianceValue =
                 `${currentId}_compliance` as keyof VrCollectionBehavior;
               const currentSupportValue =
@@ -153,14 +158,16 @@ function ChoroplethBlock({
               if (keysWithoutData.includes(currentId)) return null;
 
               return (
-                <BehaviorTooltip
+                <VrBehaviorTooltip
                   behaviorType={behaviorType}
                   context={context}
                   currentMetric={currentId}
                   currentComplianceValue={
-                    context[currentComplianceValue] as number
+                    context.dataItem[currentComplianceValue] as number
                   }
-                  currentSupportValue={context[currentSupportValue] as number}
+                  currentSupportValue={
+                    context.dataItem[currentSupportValue] as number
+                  }
                 />
               );
             }}
@@ -173,7 +180,7 @@ function ChoroplethBlock({
         maxWidth={300}
       >
         <ChoroplethLegenda
-          thresholds={regionThresholds.behavior[metricProperty]}
+          thresholds={thresholds.vr[metricProperty]}
           title={siteText.gedrag_common.basisregels.header_percentage}
         />
       </Box>

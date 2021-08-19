@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import WarningIcon from '~/assets/warning.svg';
+import { ReactComponent as WarningIcon } from '~/assets/warning.svg';
 import { WithTooltip } from '~/lib/tooltip';
 import { Box } from './base';
 import { Markdown } from './markdown';
@@ -39,7 +39,7 @@ export function WarningTile({
           <WithTooltip content={tooltipText}>
             <Content
               variant={variant}
-              tabIndex={0}
+              tabIndex={isDefined(tooltipText) ? 1 : undefined}
               hasTooltip={isDefined(tooltipText)}
             >
               <Markdown content={message} />

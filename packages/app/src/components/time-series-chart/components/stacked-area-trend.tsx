@@ -1,9 +1,9 @@
 import { LinePath } from '@visx/shape';
 import { Threshold } from '@visx/threshold';
+import { Property } from 'csstype';
 import { useMemo } from 'react';
 import { isPresent } from 'ts-is-present';
 import { Bounds, SeriesDoubleValue, SeriesItem } from '../logic';
-
 const DEFAULT_FILL_OPACITY = 0.6;
 
 type StackedAreaTrendProps = {
@@ -16,6 +16,7 @@ type StackedAreaTrendProps = {
   getY0: (v: SeriesDoubleValue) => number;
   getY1: (v: SeriesDoubleValue) => number;
   id: string;
+  mixBlendMode?: Property.MixBlendMode;
 };
 
 export function StackedAreaTrend({
@@ -28,6 +29,7 @@ export function StackedAreaTrend({
   fillOpacity = DEFAULT_FILL_OPACITY,
   strokeWidth = 2,
   id,
+  mixBlendMode,
 }: StackedAreaTrendProps) {
   const nonNullSeries = useMemo(
     () =>
@@ -51,6 +53,7 @@ export function StackedAreaTrend({
           fill: color,
           fillOpacity,
           id,
+          style: { mixBlendMode },
         }}
         /**
          * When "value a" becomes higher than "value b", this will render the fill
@@ -61,6 +64,7 @@ export function StackedAreaTrend({
         aboveAreaProps={{
           fill: color,
           fillOpacity,
+          style: { mixBlendMode },
         }}
       />
 

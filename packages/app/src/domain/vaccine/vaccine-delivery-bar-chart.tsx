@@ -47,11 +47,16 @@ export function VaccineDeliveryBarChart({
     <ChartTile
       title={text.titel}
       metadata={{
-        date: data.last_value.date_of_report_unix,
         source: intl.siteText.vaccinaties.bronnen.rivm,
       }}
     >
-      <Box mb={3} display="flex" flexDirection="column" alignItems="flex-start">
+      <Box
+        mb={3}
+        display="flex"
+        flexDirection="column"
+        alignItems="flex-start"
+        spacing={3}
+      >
         <Box maxWidth={560}>
           <Text>{text.omschrijving}</Text>
         </Box>
@@ -62,6 +67,7 @@ export function VaccineDeliveryBarChart({
           items={timeframeOptions}
         />
       </Box>
+
       <StackedChart
         accessibility={{
           key: 'vaccine_delivery_bar_chart',

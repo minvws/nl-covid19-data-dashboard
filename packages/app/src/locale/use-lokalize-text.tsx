@@ -8,7 +8,7 @@ import set from 'lodash/set';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Subscription } from 'rxjs';
 import styled from 'styled-components';
-import DatabaseIcon from '~/assets/database.svg';
+import { ReactComponent as DatabaseIcon } from '~/assets/database.svg';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { getClient } from '~/lib/sanity';
@@ -36,8 +36,9 @@ export function useLokalizeText(initialLocale: LanguageKey) {
   const [text, setText] = useState<SiteText>(languages[locale]);
   const lokalizeTextsRef = useRef<SanityDocument<LokalizeText>[]>([]);
 
-  const [dataset, setDataset] = useState<typeof datasets[number]>(
-    process.env.NEXT_PUBLIC_SANITY_DATASET as 'development'
+  const [dataset, setDataset] = useState<Dataset>(
+    (process.env.NEXT_PUBLIC_SANITY_DATASET as Dataset | undefined) ??
+      'development'
   );
 
   const toggleButton = enableHotReload ? (

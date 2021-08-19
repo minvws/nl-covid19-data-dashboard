@@ -1,8 +1,7 @@
 import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import VaccinatieIcon from '~/assets/vaccinaties.svg';
+import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
 import { Box } from '~/components/base';
-import { HeadingWithIcon } from '~/components/heading-with-icon';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -37,13 +36,33 @@ export function VaccinePageIntroduction({
     <Box spacing={4}>
       <Tile>
         <Box spacing={3}>
-          <HeadingWithIcon
-            icon={<VaccinatieIcon />}
-            title={text.title}
-            headingLevel={1}
-          />
+          <Box
+            display="flex"
+            flexDirection="row"
+            flexWrap="nowrap"
+            alignItems="center"
+          >
+            <Box
+              flex="0 0 4rem"
+              display="flex"
+              justifyContent="center"
+              padding={0}
+              margin={0}
+              mt="-0.6rem"
+              css={css({
+                svg: {
+                  height: '3.5rem',
+                },
+              })}
+            >
+              <VaccinatieIcon />
+            </Box>
+            <Heading level={1} hyphens="auto">
+              {text.title}
+            </Heading>
+          </Box>
           <Box spacing={4} px={{ md: 5 }}>
-            <Text fontSize="1.625rem" m={0}>
+            <Text variant="h2" fontWeight="normal">
               {replaceComponentsInText(
                 text.current_amount_of_administrations_text,
                 {
@@ -62,7 +81,7 @@ export function VaccinePageIntroduction({
                 <Heading level={3}>
                   {text.grafiek_gezette_prikken.titel}
                 </Heading>
-                <Text m={0}>{text.grafiek_gezette_prikken.omschrijving}</Text>
+                <Text>{text.grafiek_gezette_prikken.omschrijving}</Text>
                 <div css={css({ position: 'relative' })}>
                   <VaccineAdministrationsOverTimeChart
                     accessibility={{
@@ -81,7 +100,7 @@ export function VaccinePageIntroduction({
                 <KpiValue
                   absolute={data.vaccine_administered_planned.last_value.doses}
                 />
-                <Text m={0}>
+                <Text>
                   {(() => {
                     /**
                      * We'll render a date range either as:

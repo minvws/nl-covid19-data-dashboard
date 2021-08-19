@@ -1,4 +1,8 @@
-export function getInPositiveTestsQuery(locale: string) {
+import { GetStaticPropsContext } from 'next';
+
+export function getInPositiveTestsQuery(context: GetStaticPropsContext) {
+  const { locale } = context;
+
   return `
   *[_type=='in_positiveTestsPage']{
     "usefulLinks": [...pageLinks[]{

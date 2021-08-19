@@ -18,6 +18,7 @@ export function ChartTimeControls(props: ChartTimeControlsProps) {
     all: siteText.charts.time_controls['all'],
     week: siteText.charts.time_controls['week'],
   };
+
   const items = timeframeOptions.map((key) => ({
     label: labelMap[key],
     value: key,

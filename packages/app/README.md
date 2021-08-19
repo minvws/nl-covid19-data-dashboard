@@ -1,54 +1,80 @@
-# NL COVID-19 Data Dashboard
+# NL Coronavirus Dashboard - App
 
-The dashboard provides information on the outbreak and prevalence of COVID-19 in The Netherlands. It combines measured and modelled data from various sources to give a broad perspective on the subject. This is still in development, which means no conclusions may be drawn from it. Further improvements in accessibility, functionality and data will be made in the future.
+The main application that contains the front-end part of the dashboard. This
+React application uses Next.js as its framework.
 
-## Disclaimer
+## Configure
 
-This dashboard is developed and maintained by a different team than the NL COVID-19 Notification App. They are separate projects. If you want to get in touch with the team, please join the CODE for NL Slack and join the channel `#coronadashboard`.
+First run `yarn install` or simply `yarn` at the root of the repository if you
+haven't already. This installs all the dependencies for all of the packages.
 
-Tamas Erkelens from the Municipality of Amsterdam is contact person for the project team that made the dashboard.
+Then from `packages/app` you can run:
 
-[CODE For NL Slack](https://doemee.codefor.nl)
+1. `yarn download`
+2. `yarn workspace corona-dashboard/cms lokalize:export`
+3. `yarn dev`
 
-## Development & Contribution process
+These steps are described in more detail below.
 
-The core team works directly from this open-source repository. If you plan to propose changes, we recommend to open an issue beforehand where we can discuss your planned changes. This increases the chance that we might be able to use your contribution (or it avoids doing work if there are reasons why we wouldn't be able to use it).
+### JSON Data
 
-## Setup
+Run `yarn download` to download & install the JSON data files from production in
+`packages/app/public/json`
 
-This application uses Next.js as framework, which builds the pages of the application as static exports. ~~We use Preact in production to keep the bundle as small as possible.~~ We would like to use Preact, but we found out some bugs only occured when using Preact. For now, we've reverted to normal React. We'll enable Preact again once we find out why Reach UI's components do not play nice with Preact.
+The calculations for the data can be found in
+[nl-covid19-data-backend-processing](https://github.com/minvws/nl-covid19-data-backend-processing).
 
-We are using Next.js with static site generation. This means sometimes it can be a bit more complex to query data when you compare it against a solution such as SWR or react-query, but static builds are better for performance.
+### CMS Dataset
 
-To get the data files from production into your local environment, run `yarn download`.
+By default the site builds using the development dataset. If you would like the
+production content instead you can create a `.env.local` file in `packages/app`
+with the following content:
 
-If you want to change locale from `nl` - the default - to `en`, you need to make a `.env.local` file.
+```sh
+NEXT_PUBLIC_SANITY_DATASET=production
+```
 
-**.env.local**
+The "Lokalize" part of Sanity is exported and consumed by the app as JSON. You will
+need to run this script regularly as an outdated JSON file will result in
+compile or build-time errors.
 
-The sitemap is dynamically generated when Next.js builds. To improve developer experience, this can be disabled using the `DISABLE_SITEMAP=1` environment variable.
+`yarn workspace corona-dashboard/cms lokalize:export`
 
-Run `yarn` to install all required packages.
+Alternatively you can run this from `packages/cms` as `yarn lokalize:export`
 
-### Data
+To learn more about the rationale behind Lokalize and how it works [read the documentation](/packages/cms/README.md#lokalize-texts).
 
-The calculations for the data can be found in [nl-covid19-data-backend-processing](https://github.com/minvws/nl-covid19-data-backend-processing).
+### Locale
+
+By default, the site builds the Dutch version. If you would like to build the English
+version instead, you can create a `.env.local` file in `packages/app` with the
+following content:
+
+```sh
+NEXT_PUBLIC_LOCALE=en
+```
+
+## Running a Production Build
+
+In order to build and serve the site as if it were a production environment, you
+need to have a `.env.local` file in `packages/app` with the following content:
+
+```sh
+NEXT_PUBLIC_COMMIT_ID=__commit_id_placeholder
+```
+
+The value doesn't actually matter, so it can be anything.
+
+To build a production version you can run `yarn build`, and after that `yarn start` to
+serve the built files.
 
 ## Available Scripts
 
-In the project directory, you can run:
+There are several scripts available via `yarn [scriptName]`.
 
-`yarn dev`
-Runs the app in the development mode. Open http://localhost:3000 to view it in the browser.
-
-`yarn build`
-Builds the app for production to the out folder. It correctly bundles React in production mode and optimizes the build for the best performance. All pages are output as static HTML files through next export, ready to be served on any static file server.
-
-`yarn download`
-This downloads the latest data files from the production server and places the data in the `public/json` folder.
-
-`yarn copy-fixtures`
-Copies the required json files from the `public/json` folder to the `src/pages-tests/fixtures` directory and prunes the necessary files of unneeded data.
-
-`yarn test`
-Runs the unit test suite.
+- `dev` Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view
+  it in the browser.
+- `build` Builds the app for production to the `out` folder.
+- `download` This downloads the latest data files from the production server and
+  places the data in the `public/json` folder.
+- `test` Runs the unit tests.

@@ -1,11 +1,11 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
 import styled from 'styled-components';
-import ChevronIcon from '~/assets/chevron.svg';
+import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { SanityImage } from '~/components/cms/sanity-image';
-import { InlineText } from '~/components/typography';
+import { Anchor, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { getImageProps } from '~/lib/sanity';
 import { ImageBlock } from '~/types/cms';
@@ -19,15 +19,8 @@ export function Articles({ articles }: ArticlesProps) {
   const { siteText } = useIntl();
 
   return (
-    <Box>
-      <InlineText
-        mb={3}
-        fontSize={2}
-        fontWeight="bold"
-        css={css({ display: 'block' })}
-      >
-        {siteText.informatie_header.artikelen}
-      </InlineText>
+    <Box spacing={3}>
+      <Text variant="subtitle1">{siteText.informatie_header.artikelen}</Text>
       <Box spacing={3}>
         {articles.map((article, index) => (
           <ArticleItem
@@ -53,7 +46,7 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
 
   return (
     <Link passHref href={`/artikelen/${slug}`}>
-      <StyledLink>
+      <StyledAnchor>
         <Box width={100} minWidth={100} maxHeight={66} overflow="hidden">
           <SanityImage
             {...getImageProps(cover, {
@@ -71,24 +64,25 @@ function ArticleItem({ slug, cover, title }: ArticleItemProps) {
                       position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
+                      pr: 1,
                     })}
                   >
                     {word}
                     <ChevronIcon />
                   </InlineText>
                 ) : (
-                  `${word} `
+                  <InlineText>{`${word} `}</InlineText>
                 )}
               </Fragment>
             ))}
           </StyledText>
         </Box>
-      </StyledLink>
+      </StyledAnchor>
     </Link>
   );
 }
 
-const StyledLink = styled.a(
+const StyledAnchor = styled(Anchor)(
   css({
     color: 'blue',
     textDecoration: 'none',
@@ -109,7 +103,7 @@ const StyledText = styled.p(
     },
 
     svg: {
-      marginLeft: '2px',
+      marginLeft: 1,
       width: 12,
       height: 12,
     },

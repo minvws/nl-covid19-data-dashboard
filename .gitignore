@@ -22,3 +22,6 @@ exports
 /cypress/videos
 
 .vercel
+
+# Sanity backups
+*.ndjson

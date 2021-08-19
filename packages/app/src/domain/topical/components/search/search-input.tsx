@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
-import CloseIcon from '~/assets/close.svg';
-import SearchIcon from '~/assets/search-icon.svg';
+import { ReactComponent as CloseIcon } from '~/assets/close.svg';
+import { ReactComponent as SearchIcon } from '~/assets/search-icon.svg';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
@@ -68,7 +68,7 @@ const StyledSearchInput = styled.input(
     border: `solid`,
     borderWidth: '1px',
     borderColor: 'lightGray',
-    fontSize: ['1rem', null, null, '1.125rem'],
+    fontSize: 2,
     appearance: 'none',
     m: 0,
     '&::-webkit-search-cancel-button': {

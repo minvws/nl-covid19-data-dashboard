@@ -1,4 +1,5 @@
 import { PortableTextEntry } from '@sanity/block-content-to-react';
+import { CategoriesTypes } from '~/domain/topical/common/categories';
 
 export type FAQuestionAndAnswer = {
   content: RichContentBlock[] | null;
@@ -9,8 +10,16 @@ export type FAQuestionAndAnswer = {
 export type CollapsibleList = {
   content: RichContentBlock[] | null;
   title: string;
+  group: string;
 };
 
+export type InlineCollapsibleList = {
+  content: {
+    inlineBlockContent: RichContentBlock[] | null;
+  };
+  title: string;
+  group: string;
+};
 export interface SanityFileProps {
   assetId: string;
   extension: string;
@@ -34,7 +43,6 @@ export interface InlineAttachment {
 }
 
 export type Editorial = Record<string, never> & Article;
-
 export interface Article {
   title: string;
   slug: {
@@ -42,6 +50,7 @@ export interface Article {
     _type: 'slug';
     current: string;
   };
+  categories?: CategoriesTypes[];
   cover: ImageBlock;
   summary: Block;
   intro: RichContentBlock[];
@@ -143,22 +152,21 @@ export type TitleDescriptionBlock = {
   description: RichContentBlock[];
   title: string;
 };
-
 export interface LokalizeText {
   _type: 'lokalizeText';
   _id: string;
   _createdAt: string;
   _updatedAt: string;
-
   key: string;
   subject: string;
-  path: string;
-  text: {
-    nl: string | undefined;
-    en: string | undefined;
-  };
   should_display_empty: boolean;
   is_newly_added: boolean;
+  publish_count: number;
+  text: {
+    _type: 'localeText';
+    nl?: string;
+    en?: string;
+  };
 }
 
 export type VaccinationPageQuery = {

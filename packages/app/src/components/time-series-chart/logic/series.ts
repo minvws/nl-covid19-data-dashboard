@@ -5,11 +5,12 @@ import {
   TimeframeOption,
   TimestampedValue,
 } from '@corona-dashboard/common';
+import { Property } from 'csstype';
 import { omit } from 'lodash';
 import { useMemo } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { useCurrentDate } from '~/utils/current-date-context';
-import { TimespanAnnotationConfig } from './common';
+import { DataOptions, TimespanAnnotationConfig } from './common';
 import { SplitPoint } from './split';
 
 export type SeriesConfig<T extends TimestampedValue> = (
@@ -88,8 +89,6 @@ export interface BarSeriesDefinition<T extends TimestampedValue>
   shortLabel?: string;
   color: string;
   fillOpacity?: number;
-  aboveBenchmarkColor?: string;
-  aboveBenchmarkFillOpacity?: number;
   isNonInteractive?: boolean;
 }
 
@@ -128,6 +127,7 @@ export interface StackedAreaSeriesDefinition<T extends TimestampedValue>
   fillOpacity?: number;
   strokeWidth?: number;
   isNonInteractive?: boolean;
+  mixBlendMode?: Property.MixBlendMode;
 }
 
 export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
@@ -141,6 +141,7 @@ export interface GappedStackedAreaSeriesDefinition<T extends TimestampedValue>
   fillOpacity?: number;
   strokeWidth?: number;
   isNonInteractive?: boolean;
+  mixBlendMode?: Property.MixBlendMode;
 }
 
 /**
@@ -207,11 +208,12 @@ export function isVisible<T extends TimestampedValue>(
 export function useSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  cutValuesConfig?: CutValuesConfig[]
+  cutValuesConfig?: CutValuesConfig[],
+  dataOptions?: DataOptions
 ) {
   return useMemo(
-    () => getSeriesList(values, seriesConfig, cutValuesConfig),
-    [values, seriesConfig, cutValuesConfig]
+    () => getSeriesList(values, seriesConfig, cutValuesConfig, dataOptions),
+    [values, seriesConfig, cutValuesConfig, dataOptions]
   );
 }
 
@@ -235,8 +237,7 @@ export function useValuesInTimeframe<T extends TimestampedValue>(
 export function calculateSeriesMaximum<T extends TimestampedValue>(
   seriesList: SeriesList,
   seriesConfig: SeriesConfig<T>,
-  benchmarkValue = -Infinity,
-  isPercentage?: boolean
+  benchmarkValue = -Infinity
 ) {
   const values = seriesList
     .filter((_, index) => isVisible(seriesConfig[index]))
@@ -259,16 +260,38 @@ export function calculateSeriesMaximum<T extends TimestampedValue>(
 
   const maximumValue = Math.max(overallMaximum, artificialMax);
 
-  /**
-   * When the maximum value is 80% or more for percentages it shows a 0 - 100 scale
-   * same goes when a percentage is below 10% it has a 0 - 10 scale.
-   */
-  if (isPercentage) {
-    if (maximumValue >= 80) return 100;
-    if (maximumValue <= 10) return 10;
-  }
-
   return maximumValue;
+}
+
+/**
+ * From all the defined values, extract the lowest number so we know how to
+ * scale the y-axis. We need to do this for each of the keys that are used to
+ * render lines, so that the axis scales with whatever key contains the lowest.
+ */
+export function calculateSeriesMinimum<T extends TimestampedValue>(
+  seriesList: SeriesList,
+  seriesConfig: SeriesConfig<T>,
+  benchmarkValue = -Infinity
+) {
+  const values = seriesList
+    .filter((_, index) => isVisible(seriesConfig[index]))
+    .flatMap((series) =>
+      series.flatMap((x: SeriesSingleValue | SeriesDoubleValue) =>
+        isSeriesSingleValue(x) ? x.__value : [x.__value_a, x.__value_b]
+      )
+    )
+    .filter(isDefined);
+
+  const overallMinimum = Math.min(...values);
+
+  const artificialMin =
+    overallMinimum > benchmarkValue
+      ? benchmarkValue - Math.abs(benchmarkValue)
+      : 0;
+
+  const minimumValue = Math.max(overallMinimum, artificialMin);
+
+  return minimumValue;
 }
 
 export type SeriesItem = {
@@ -300,7 +323,8 @@ export type SeriesList = SingleSeries[];
 function getSeriesList<T extends TimestampedValue>(
   values: T[],
   seriesConfig: SeriesConfig<T>,
-  cutValuesConfig?: CutValuesConfig[]
+  cutValuesConfig?: CutValuesConfig[],
+  dataOptions?: DataOptions
 ): SeriesList {
   return seriesConfig.filter(isVisible).map((config) =>
     config.type === 'stacked-area'
@@ -309,7 +333,8 @@ function getSeriesList<T extends TimestampedValue>(
       ? getGappedStackedAreaSeriesData(
           values,
           config.metricProperty,
-          seriesConfig
+          seriesConfig,
+          dataOptions
         )
       : config.type === 'range'
       ? getRangeSeriesData(
@@ -327,7 +352,8 @@ function getSeriesList<T extends TimestampedValue>(
 function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
   values: T[],
   metricProperty: keyof T,
-  seriesConfig: SeriesConfig<T>
+  seriesConfig: SeriesConfig<T>,
+  dataOptions?: DataOptions
 ) {
   /**
    * Stacked area series are rendered from top to bottom. The sum of a Y-value
@@ -347,9 +373,13 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
   const seriesLow = getSeriesData(values, metricProperty);
 
   seriesLow.forEach((seriesSingleValue, index) => {
-    if (!isPresent(seriesSingleValue.__value)) {
+    if (
+      !dataOptions?.renderNullAsZero &&
+      !isPresent(seriesSingleValue.__value)
+    ) {
       return;
     }
+
     /**
      * The series are rendered from top to bottom. To get the low value of the
      * current series, we will sum up all values of the
@@ -366,6 +396,8 @@ function getGappedStackedAreaSeriesData<T extends TimestampedValue>(
     const valueLow = low.__value;
     const valueHigh = isDefined(valueLow)
       ? valueLow + (seriesHigh[index].__value ?? 0)
+      : dataOptions?.renderNullAsZero
+      ? 0
       : undefined;
 
     return {
