@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { Getest } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import {
   CategoryMenu,
@@ -167,7 +167,7 @@ export function GmLayout(props: GmLayoutProps) {
                       >
                         <MetricMenuItemLink
                           href={reverseRouter.gm.positiefGetesteMensen(code)}
-                          icon={<GetestIcon />}
+                          icon={<Test />}
                           title={
                             siteText.gemeente_positief_geteste_personen
                               .titel_sidebar
@@ -185,7 +185,7 @@ export function GmLayout(props: GmLayoutProps) {
 
                         <MetricMenuItemLink
                           href={reverseRouter.gm.sterfte(code)}
-                          icon={<CoronavirusIcon />}
+                          icon={<Coronavirus />}
                           title={
                             siteText.veiligheidsregio_sterfte.titel_sidebar
                           }

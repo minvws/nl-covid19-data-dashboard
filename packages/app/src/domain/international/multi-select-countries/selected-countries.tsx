@@ -41,7 +41,7 @@ export function SelectedCountries({
               {item.shape === 'line' && <Line color={item.color} />}
               {isDefined(onRemoveItem) && (
                 <RemoveIconWrapper>
-                  <ResetIcon />
+                  <Reset />
                 </RemoveIconWrapper>
               )}
             </ItemButton>

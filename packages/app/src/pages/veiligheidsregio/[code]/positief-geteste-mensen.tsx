@@ -1,5 +1,6 @@
 import { GgdTesten } from '@corona-dashboard/icons';
-import { Getest } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
@@ -118,7 +119,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

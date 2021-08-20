@@ -217,7 +217,7 @@ function DescriptionWithIcon({
               <InlineText css={css({ display: 'flex', position: 'relative' })}>
                 {word}
                 <Box position="absolute" right={-14} top={0}>
-                  <ChevronIcon width="7px" />
+                  <Chevron width="7px" />
                 </Box>
               </InlineText>
             ) : (

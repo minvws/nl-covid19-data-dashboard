@@ -143,7 +143,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
   };
 }
 
-const MotionChevron = styled(motion(ChevronIcon))(
+const MotionChevron = styled(motion(Chevron))(
   css({
     backgroundSize: '1.4em 0.9em',
     backgroundPosition: '0 50%',

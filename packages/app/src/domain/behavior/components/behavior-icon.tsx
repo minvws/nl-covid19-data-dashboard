@@ -1,28 +1,28 @@
-import { curfew } from '@corona-dashboard/icons';
-import { wash_hands } from '@corona-dashboard/icons';
-import { keep_distance } from '@corona-dashboard/icons';
-import { work_from_home } from '@corona-dashboard/icons';
-import { avoid_crowds } from '@corona-dashboard/icons';
-import { symptoms_stay_home_if_mandatory } from '@corona-dashboard/icons';
-import { symptoms_get_tested } from '@corona-dashboard/icons';
-import { wear_mask_public_indoors } from '@corona-dashboard/icons';
-import { wear_mask_public_transport } from '@corona-dashboard/icons';
-import { sneeze_cough_elbow } from '@corona-dashboard/icons';
-import { max_visitors } from '@corona-dashboard/icons';
+import { Curfew } from '@corona-dashboard/icons';
+import { WashHands } from '@corona-dashboard/icons';
+import { KeepDistance } from '@corona-dashboard/icons';
+import { WorkFromHome } from '@corona-dashboard/icons';
+import { AvoidCrowds } from '@corona-dashboard/icons';
+import { SymptomsStayHome } from '@corona-dashboard/icons';
+import { SymptomsGetTested } from '@corona-dashboard/icons';
+import { WearMaskPublicIndoors } from '@corona-dashboard/icons';
+import { WearMaskPublicTransport } from '@corona-dashboard/icons';
+import { SneezeCoughElbow } from '@corona-dashboard/icons';
+import { MaxVisitors } from '@corona-dashboard/icons';
 import { BehaviorIdentifier } from '../logic/behavior-types';
 
-const icons: Record<BehaviorIdentifier, typeof curfew> = {
-  curfew,
-  wash_hands,
-  keep_distance,
-  work_from_home,
-  avoid_crowds,
-  symptoms_stay_home_if_mandatory,
-  symptoms_get_tested,
-  wear_mask_public_indoors,
-  wear_mask_public_transport,
-  sneeze_cough_elbow,
-  max_visitors,
+const icons: Record<BehaviorIdentifier, typeof Curfew> = {
+  curfew: Curfew,
+  wash_hands: WashHands,
+  keep_distance: KeepDistance,
+  work_from_home: WorkFromHome,
+  avoid_crowds: AvoidCrowds,
+  symptoms_stay_home_if_mandatory: SymptomsStayHome,
+  symptoms_get_tested: SymptomsGetTested,
+  wear_mask_public_indoors: WearMaskPublicIndoors,
+  wear_mask_public_transport: WearMaskPublicTransport,
+  sneeze_cough_elbow: SneezeCoughElbow,
+  max_visitors: MaxVisitors,
 };
 
 interface BehaviorIconProps {

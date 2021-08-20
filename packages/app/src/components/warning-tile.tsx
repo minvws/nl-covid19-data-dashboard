@@ -21,7 +21,7 @@ interface WarningMessageProps {
 export function WarningTile({
   message,
   variant = 'default',
-  icon = WarningIcon,
+  icon = Warning,
   isFullWidth,
   tooltipText,
 }: WarningMessageProps) {

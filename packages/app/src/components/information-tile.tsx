@@ -12,7 +12,7 @@ interface InformationTileProps {
 
 export function InformationTile({
   message,
-  icon = InformationIcon,
+  icon = Information,
   isFullWidth = true,
 }: InformationTileProps) {
   const Icon = icon;

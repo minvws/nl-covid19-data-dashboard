@@ -16,7 +16,7 @@ export function MultiSelectCountriesInput() {
   return (
     <Box position="relative">
       <IconContainer align="left">
-        <SearchIcon />
+        <Search />
       </IconContainer>
 
       {inputProps.value && (

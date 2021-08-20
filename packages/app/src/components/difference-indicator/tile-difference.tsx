@@ -39,7 +39,7 @@ export function TileDifference({
     return (
       <Container>
         <IconContainer color="red" mr={1}>
-          <IconUp />
+          <Up />
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString}
@@ -58,7 +58,7 @@ export function TileDifference({
     return (
       <Container>
         <IconContainer color="data.primary" mr={1}>
-          <IconDown />
+          <Down />
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString}
@@ -74,7 +74,7 @@ export function TileDifference({
   return (
     <Container>
       <IconContainer color="data.neutral" mr={1}>
-        <IconGelijk />
+        <Gelijk />
       </IconContainer>
       <InlineText>
         {text.gelijk}

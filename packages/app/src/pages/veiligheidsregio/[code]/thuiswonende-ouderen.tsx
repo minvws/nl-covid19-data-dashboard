@@ -80,7 +80,7 @@ const ElderlyAtHomeRegionalPage = (
             title={replaceVariablesInText(text.section_positive_tested.title, {
               safetyRegion: vrName,
             })}
-            icon={<ElderlyIcon />}
+            icon={<Elderly />}
             description={replaceVariablesInText(
               text.section_positive_tested.description,
               {
@@ -193,7 +193,7 @@ const ElderlyAtHomeRegionalPage = (
             title={replaceVariablesInText(text.section_deceased.title, {
               safetyRegion: vrName,
             })}
-            icon={<ElderlyIcon />}
+            icon={<Elderly />}
             description={replaceVariablesInText(
               text.section_deceased.description,
               {

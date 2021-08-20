@@ -1,5 +1,5 @@
-import { CoronaVirus } from '@corona-dashboard/icons';
-import { Gehandicaptenzorg } from '@corona-dashboard/icons';
+import { Coronavirus } from '@corona-dashboard/icons';
+import { GehandicaptenZorg } from '@corona-dashboard/icons';
 import { Locatie } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
@@ -78,7 +78,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(positiveTestPeopleText.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Gehandicaptenzorg />}
+            icon={<GehandicaptenZorg />}
             description={replaceVariablesInText(
               positiveTestPeopleText.pagina_toelichting,
               {
@@ -245,7 +245,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(mortalityText.titel, {
               safetyRegion: vrName,
             })}
-            icon={<CoronaVirus />}
+            icon={<Coronavirus />}
             description={mortalityText.pagina_toelichting}
             metadata={{
               datumsText: mortalityText.datums,

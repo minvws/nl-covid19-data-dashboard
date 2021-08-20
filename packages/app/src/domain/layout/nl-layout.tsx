@@ -5,12 +5,12 @@ import { Arts } from '@corona-dashboard/icons';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { Elderly } from '@corona-dashboard/icons';
 import { Gedrag } from '@corona-dashboard/icons';
-import { Gehandicaptenzorg } from '@corona-dashboard/icons';
+import { GehandicaptenZorg } from '@corona-dashboard/icons';
 import { Phone } from '@corona-dashboard/icons';
-import { Repro } from '@corona-dashboard/icons';
+import { Reproductiegetal } from '@corona-dashboard/icons';
 import { RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { Getest } from '@corona-dashboard/icons';
-import { Vaccinatie } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+import { Vaccinaties } from '@corona-dashboard/icons';
 import { Varianten } from '@corona-dashboard/icons';
 import { Verpleeghuiszorg } from '@corona-dashboard/icons';
 import { Ziekenhuis } from '@corona-dashboard/icons';
@@ -132,7 +132,7 @@ export function NlLayout(props: NlLayoutProps) {
               >
                 <MetricMenuItemLink
                   href={reverseRouter.nl.vaccinaties()}
-                  icon={<VaccinatieIcon />}
+                  icon={<Vaccinaties />}
                   title={siteText.vaccinaties.titel_sidebar}
                 >
                   <SidebarMetric
@@ -192,7 +192,7 @@ export function NlLayout(props: NlLayoutProps) {
               >
                 <MetricMenuItemLink
                   href={reverseRouter.nl.positiefGetesteMensen()}
-                  icon={<GetestIcon />}
+                  icon={<Test />}
                   title={siteText.positief_geteste_personen.titel_sidebar}
                 >
                   <SidebarMetric
@@ -212,7 +212,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.reproductiegetal()}
-                  icon={<ReproIcon />}
+                  icon={<Reproductiegetal />}
                   title={siteText.reproductiegetal.titel_sidebar}
                 >
                   <SidebarMetric
@@ -229,7 +229,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.sterfte()}
-                  icon={<CoronavirusIcon />}
+                  icon={<Coronavirus />}
                   title={siteText.sterfte.titel_sidebar}
                 >
                   <SidebarMetric
@@ -311,7 +311,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.gehandicaptenzorg()}
-                  icon={<Gehandicaptenzorg />}
+                  icon={<GehandicaptenZorg />}
                   title={
                     siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar
                   }
@@ -328,7 +328,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.thuiswonendeOuderen()}
-                  icon={<ElderlyIcon />}
+                  icon={<Elderly />}
                   title={siteText.thuiswonende_ouderen.titel_sidebar}
                 >
                   <SidebarMetric

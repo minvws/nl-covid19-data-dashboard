@@ -1,6 +1,6 @@
 import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { Vaccinatie } from '@corona-dashboard/icons';
+import { Vaccinaties } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
@@ -55,7 +55,7 @@ export function VaccinePageIntroduction({
                 },
               })}
             >
-              <VaccinatieIcon />
+              <Vaccinaties />
             </Box>
             <Heading level={1} hyphens="auto">
               {text.title}

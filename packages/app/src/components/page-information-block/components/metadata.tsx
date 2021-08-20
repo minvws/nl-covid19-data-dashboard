@@ -60,14 +60,14 @@ export function Metadata({
     <Box spacing={2}>
       <Box display="flex" alignItems="flex-start" color="annotation">
         <Box as="span" minWidth="1.8rem">
-          <ClockIcon aria-hidden color={colors.annotation} />
+          <Clock aria-hidden color={colors.annotation} />
         </Box>
         <Text variant="label1">{dateText}</Text>
       </Box>
 
       {dataSources.length > 0 && (
         <MetadataItem
-          icon={<DatabaseIcon aria-hidden />}
+          icon={<Database aria-hidden />}
           items={dataSources}
           label={referenceLink ? siteText.informatie_header.bron : text.source}
           accessibilityText={siteText.accessibility.text_source}
@@ -78,14 +78,14 @@ export function Metadata({
 
       {referenceLink && (
         <MetadataReference
-          icon={<MeerInformatieIcon aria-hidden />}
+          icon={<MeerInformatie aria-hidden />}
           referenceLink={referenceLink}
         />
       )}
 
       {moreInformationLabel && (
         <MetadataItem
-          icon={<MeerInformatieIcon aria-hidden />}
+          icon={<MeerInformatie aria-hidden />}
           items={moreInformationLink ? [moreInformationLink] : []}
           label={moreInformationLabel}
         />
@@ -233,7 +233,7 @@ function MetadataReference({ icon, referenceLink }: metadataReferenceProps) {
                   })}
                 >
                   {word}&nbsp;
-                  <ChevronIcon width={10} height={10} />
+                  <Chevron width={10} height={10} />
                 </span>
               ) : (
                 <span>{`${word} `}</span>

@@ -15,12 +15,15 @@ const svgDir = path.join(rootDir, 'src/svg');
 const svgIcons = {};
 
 fs.readdirSync(svgDir).forEach((file) => {
-  const key = file.slice(0, -4);
-  const data = fs.readFileSync(
-    path.resolve(__dirname, '..', `src/svg/${file}`),
-    'utf8'
-  );
-  svgIcons[key] = data;
+  const extension = path.extname(file);
+  if (extension === '.svg') {
+    const key = file.slice(0, -4);
+    const data = fs.readFileSync(
+      path.resolve(__dirname, '..', `src/svg/${file}`),
+      'utf8'
+    );
+    svgIcons[key] = data;
+  }
 });
 
 const icons = Object.keys(svgIcons);
@@ -66,6 +69,8 @@ const attrsToString = (attrs) => {
 icons.forEach((i) => {
   const location = path.join(rootDir, 'src/icons', `${i}.js`);
   const ComponentName = upperCamelCase(i);
+
+  console.log('Now parsing', location, ComponentName);
 
   const parsedSvg = parseSync(svgIcons[i]);
   const svgWidth = parsedSvg.attributes.width || 36;

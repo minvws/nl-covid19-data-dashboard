@@ -49,7 +49,7 @@ export function SelectCountryInput({
     <Box position="relative" minWidth="14rem">
       <IconContainer align="left">
         {isOpen ? (
-          <SearchIcon />
+          <Search />
         ) : (
           <img
             aria-hidden
@@ -98,7 +98,7 @@ export function SelectCountryInput({
               },
             })}
           >
-            <ChevronIcon />
+            <Chevron />
           </Box>
         )}
       </IconContainer>

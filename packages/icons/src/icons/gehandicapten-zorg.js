@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const GehandicapteZorg = forwardRef(
+const GehandicaptenZorg = forwardRef(
   ({ color = 'currentColor', size = 36, ...rest }, ref) => {
     return (
       <svg
@@ -20,11 +20,11 @@ const GehandicapteZorg = forwardRef(
   }
 );
 
-GehandicapteZorg.propTypes = {
+GehandicaptenZorg.propTypes = {
   color: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-GehandicapteZorg.displayName = 'GehandicapteZorg';
+GehandicaptenZorg.displayName = 'GehandicaptenZorg';
 
-export default GehandicapteZorg;
+export default GehandicaptenZorg;

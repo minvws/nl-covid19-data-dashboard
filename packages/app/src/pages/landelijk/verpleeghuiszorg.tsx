@@ -1,4 +1,4 @@
-import { CoronaVirus } from '@corona-dashboard/icons';
+import { Coronavirus } from '@corona-dashboard/icons';
 import { Locatie } from '@corona-dashboard/icons';
 import { Verpleeghuiszorg } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
@@ -274,7 +274,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             id="sterfte"
             title={deceased.titel}
-            icon={<CoronaVirus />}
+            icon={<Coronavirus />}
             description={deceased.pagina_toelichting}
             metadata={{
               datumsText: deceased.datums,

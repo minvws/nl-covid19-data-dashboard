@@ -46,7 +46,7 @@ export function MultiSelectCountriesResults() {
                   isLimitReached={isLimitReached}
                 >
                   <span css={css({ flex: '0 0 24px', mt: 1 })}>
-                    {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
+                    {x.data.isSelected ? <Checked /> : <Unchecked />}
                   </span>
                   <Box mr={2}>
                     <Flag countryCode={x.id} />

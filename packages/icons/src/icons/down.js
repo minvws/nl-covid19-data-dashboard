@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const PijlOmlaag = forwardRef(
+const Down = forwardRef(
   ({ color = 'currentColor', size = 36, ...rest }, ref) => {
     return (
       <svg
@@ -23,11 +23,11 @@ const PijlOmlaag = forwardRef(
   }
 );
 
-PijlOmlaag.propTypes = {
+Down.propTypes = {
   color: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-PijlOmlaag.displayName = 'PijlOmlaag';
+Down.displayName = 'Down';
 
-export default PijlOmlaag;
+export default Down;

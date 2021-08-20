@@ -210,7 +210,7 @@ function ToggleButton({
     <Container isActive={isActive}>
       <DisplayOnHover>{isActive && children}</DisplayOnHover>
       <StyledToggleButton isActive={isActive} color={color} onClick={onClick}>
-        <DatabaseIcon
+        <Database
           style={{
             width: 20,
             height: 20,

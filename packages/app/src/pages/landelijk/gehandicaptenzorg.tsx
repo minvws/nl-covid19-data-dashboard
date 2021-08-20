@@ -1,5 +1,5 @@
-import { CoronaVirus } from '@corona-dashboard/icons';
-import { Gehandicaptenzorg } from '@corona-dashboard/icons';
+import { Coronavirus } from '@corona-dashboard/icons';
+import { GehandicaptenZorg } from '@corona-dashboard/icons';
 import { Locatie } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
@@ -75,7 +75,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
             }
             title={positiveTestedPeopleText.titel}
-            icon={<Gehandicaptenzorg />}
+            icon={<GehandicaptenZorg />}
             description={positiveTestedPeopleText.pagina_toelichting}
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
@@ -264,7 +264,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             id="sterfte"
             title={locationDeaths.titel}
-            icon={<CoronaVirus />}
+            icon={<Coronavirus />}
             description={locationDeaths.pagina_toelichting}
             metadata={{
               datumsText: locationDeaths.datums,

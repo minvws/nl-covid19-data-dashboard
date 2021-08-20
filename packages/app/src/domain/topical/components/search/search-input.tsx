@@ -19,7 +19,7 @@ export function SearchInput() {
   return (
     <Box position="relative">
       <IconContainer align="left">
-        <SearchIcon />
+        <Search />
       </IconContainer>
 
       {inputProps.value && (

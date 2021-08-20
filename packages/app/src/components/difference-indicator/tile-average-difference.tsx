@@ -1,7 +1,7 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { IconGelijk } from '@corona-dashboard/icons';
-import { IconUp } from '@corona-dashboard/icons';
-import { IconDown } from '@corona-dashboard/icons';
+import { Gelijk } from '@corona-dashboard/icons';
+import { Up } from '@corona-dashboard/icons';
+import { Down } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
@@ -26,7 +26,7 @@ export function TileAverageDifference({
     return (
       <Container>
         <IconContainer color="red">
-          <IconUp />
+          <Up />
         </IconContainer>
         <InlineText fontWeight="bold">
           {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.hoger}{' '}
@@ -42,7 +42,7 @@ export function TileAverageDifference({
     return (
       <Container>
         <IconContainer color="data.primary">
-          <IconDown />
+          <Down />
         </IconContainer>
         <InlineText fontWeight="bold">
           {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.lager}{' '}
@@ -57,7 +57,7 @@ export function TileAverageDifference({
   return (
     <Container>
       <IconContainer color="data.neutral">
-        <IconGelijk />
+        <Gelijk />
       </IconContainer>
       <InlineText fontWeight="bold">
         {siteText.toe_en_afname.gelijk}{' '}

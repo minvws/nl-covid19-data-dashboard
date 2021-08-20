@@ -1,4 +1,4 @@
-import { CoronaVirus } from '@corona-dashboard/icons';
+import { Coronavirus } from '@corona-dashboard/icons';
 import { Locatie } from '@corona-dashboard/icons';
 import { Verpleeghuiszorg } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
@@ -257,7 +257,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(deceased.titel, {
               safetyRegion: vrName,
             })}
-            icon={<CoronaVirus />}
+            icon={<Coronavirus />}
             description={deceased.pagina_toelichting}
             metadata={{
               datumsText: deceased.datums,

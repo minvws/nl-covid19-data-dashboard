@@ -3,9 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Elderly } from '@corona-dashboard/icons';
 import { Gedrag } from '@corona-dashboard/icons';
-import { Gehandicaptenzorg } from '@corona-dashboard/icons';
+import { GehandicaptenZorg } from '@corona-dashboard/icons';
 import { RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { Getest } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
 import { Verpleeghuiszorg } from '@corona-dashboard/icons';
 import { Coronavirus } from '@corona-dashboard/icons';
 import { Ziekenhuis } from '@corona-dashboard/icons';
@@ -209,7 +209,7 @@ export function VrLayout(props: VrLayoutProps) {
                   >
                     <MetricMenuItemLink
                       href={reverseRouter.vr.positiefGetesteMensen(code)}
-                      icon={<GetestIcon />}
+                      icon={<Test />}
                       title={
                         siteText.veiligheidsregio_positief_geteste_personen
                           .titel_sidebar
@@ -232,7 +232,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.sterfte(code)}
-                      icon={<CoronavirusIcon />}
+                      icon={<Coronavirus />}
                       title={siteText.veiligheidsregio_sterfte.titel_sidebar}
                     >
                       <SidebarMetric
@@ -304,7 +304,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.gehandicaptenzorg(code)}
-                      icon={<Gehandicaptenzorg />}
+                      icon={<GehandicaptenZorg />}
                       title={
                         siteText.gehandicaptenzorg_besmette_locaties
                           .titel_sidebar
@@ -322,7 +322,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.thuiswonendeOuderen(code)}
-                      icon={<ElderlyIcon />}
+                      icon={<Elderly />}
                       title={
                         siteText.veiligheidsregio_thuiswonende_ouderen
                           .titel_sidebar

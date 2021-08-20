@@ -81,7 +81,7 @@ export function MilestonesView(props: MilestoneViewProps) {
               {list[index + 1] ? (
                 <ListItem>
                   <CircleIcon>
-                    <VaccineIcon />
+                    <Vaccine />
                   </CircleIcon>
                   <Box pl="3" maxWidth="maxWidthText" width="100%">
                     <InlineText
@@ -106,7 +106,7 @@ export function MilestonesView(props: MilestoneViewProps) {
               ) : (
                 <ListItemLast>
                   <CircleIcon isLast={true}>
-                    <VaccineIcon />
+                    <Vaccine />
                   </CircleIcon>
                   <Box
                     pl="3"

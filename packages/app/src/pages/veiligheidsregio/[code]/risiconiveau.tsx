@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
 import { BarChart } from '@corona-dashboard/icons';
 import { Calendar } from '@corona-dashboard/icons';
-import { Getest } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import {
@@ -197,7 +198,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                           <UnorderedList>
                             <ListItem
                               title={text.momenteel.positive_tests.title}
-                              icon={<Getest />}
+                              icon={<Test />}
                             >
                               <DataDescription
                                 description={
@@ -257,7 +258,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   <HeadingWithIcon
                     title={text.positieve_testen.title}
                     headingLevel={4}
-                    icon={<Getest />}
+                    icon={<Test />}
                   />
                 </Box>
                 <Box spacingHorizontal={2}>

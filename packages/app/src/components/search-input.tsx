@@ -26,7 +26,7 @@ export function SearchInput({
   return (
     <Box position="relative" width="15rem">
       <IconContainer align="left">
-        <SearchIcon />
+        <Search />
       </IconContainer>
 
       {value.length > 0 && (

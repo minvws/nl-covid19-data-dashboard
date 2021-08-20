@@ -110,7 +110,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
+          <WarningTile message={text.warning_method} icon={Experimenteel} />
 
           <TwoKpiSection>
             <KpiTile
