@@ -17,8 +17,8 @@ const Chevron = forwardRef(
         <path
           d="M1 17L9 9L1 1"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
       </svg>
     );

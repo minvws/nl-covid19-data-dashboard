@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { AfstandSporten } from '@corona-dashboard/icons';
-
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';
@@ -87,10 +85,6 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   return (
     <Layout {...siteText.articles_metadata} lastGenerated={lastGenerated}>
       <Box backgroundColor="white" py={{ _: 4, md: 5 }}>
-        <AfstandSporten color="red" />
-        <AfstandSporten size="30" />
-        <AfstandSporten size="100" />
-
         <MaxWidth px={{ _: 3, lg: 4 }}>
           <Box pb={2}>
             <Heading level={2} as="h1">

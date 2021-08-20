@@ -18,7 +18,7 @@ const Line = forwardRef(
           d="M0 0 l12 0"
           stroke="currentColor"
           fill="currentColor"
-          stroke-width="6"
+          strokeWidth="6"
         />
       </svg>
     );

@@ -17,7 +17,7 @@ const CheckSmall = forwardRef(
         <path
           d="M7.30273 10.8671L11.0734 14.6946L17.1626 6.74219"
           stroke="currentColor"
-          stroke-width="2"
+          strokeWidth="2"
         />
       </svg>
     );

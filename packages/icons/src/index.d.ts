@@ -32,6 +32,7 @@ export const Chart: Icon;
 export const CheckSmall: Icon;
 export const Check: Icon;
 export const Checked: Icon;
+export const ChevronDownMagenta: Icon;
 export const ChevronDown: Icon;
 export const ChevronLarge: Icon;
 export const Chevron: Icon;

@@ -15,9 +15,9 @@ const Check = forwardRef(
         {...rest}
       >
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
           d="M21.249 5.77521L10.2011 20.2033L2.7511 12.6409L5.06981 10.3566L9.89271 15.2523L18.6647 3.79639L21.249 5.77521Z"
+          fillRule="evenodd"
+          clipRule="evenodd"
         />
       </svg>
     );

@@ -17,8 +17,8 @@ const WhiteArrowLg = forwardRef(
         <path
           d="M1 1l10 10L1 21"
           stroke="#fff"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
       </svg>
     );

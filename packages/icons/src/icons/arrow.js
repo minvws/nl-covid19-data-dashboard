@@ -17,8 +17,8 @@ const Arrow = forwardRef(
         <path
           d="M11 1L6 6 1 1"
           stroke="currentcolor"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
       </svg>
     );

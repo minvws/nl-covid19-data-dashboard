@@ -23,6 +23,7 @@ export { default as Chart } from './icons/chart';
 export { default as CheckSmall } from './icons/check-small';
 export { default as Check } from './icons/check';
 export { default as Checked } from './icons/checked';
+export { default as ChevronDownMagenta } from './icons/chevron-down-magenta';
 export { default as ChevronDown } from './icons/chevron-down';
 export { default as ChevronLarge } from './icons/chevron-large';
 export { default as Chevron } from './icons/chevron';

@@ -18,8 +18,8 @@ const ChevronDown = forwardRef(
           transform="rotate(90, 9, 9)"
           d="M1 17L9 9L1 1"
           stroke="#01689B"
-          stroke-width="2"
-          stroke-linecap="round"
+          strokeWidth="2"
+          strokeLinecap="round"
         />
       </svg>
     );

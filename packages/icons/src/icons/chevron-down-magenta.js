@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const CrossSmall = forwardRef(
+const ChevronDownMagenta = forwardRef(
   ({ color = 'currentColor', size = 36, ...rest }, ref) => {
     return (
       <svg
@@ -9,31 +9,28 @@ const CrossSmall = forwardRef(
         xmlns="http://www.w3.org/2000/svg"
         width={size}
         height={size}
-        viewBox="0 0 23 23"
+        viewBox="0 0 18 11"
         fill="currentColor"
         stroke="none"
         {...rest}
       >
         <path
-          d="M15.1826 6.96094L6.64941 15.4934"
-          stroke="currentColor"
+          transform="rotate(90, 9, 9)"
+          d="M1 17L9 9L1 1"
+          stroke="#cd005a"
           strokeWidth="2"
-        />
-        <path
-          d="M6.64941 6.96094L15.1819 15.4941"
-          stroke="currentColor"
-          strokeWidth="2"
+          strokeLinecap="round"
         />
       </svg>
     );
   }
 );
 
-CrossSmall.propTypes = {
+ChevronDownMagenta.propTypes = {
   color: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-CrossSmall.displayName = 'CrossSmall';
+ChevronDownMagenta.displayName = 'ChevronDownMagenta';
 
-export default CrossSmall;
+export default ChevronDownMagenta;

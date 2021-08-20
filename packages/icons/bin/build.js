@@ -70,11 +70,30 @@ icons.forEach((i) => {
   const location = path.join(rootDir, 'src/icons', `${i}.js`);
   const ComponentName = upperCamelCase(i);
 
-  console.log('Now parsing', location, ComponentName);
-
   const parsedSvg = parseSync(svgIcons[i]);
   const svgWidth = parsedSvg.attributes.width || 36;
   const svgHeight = parsedSvg.attributes.height || 36;
+
+  parsedSvg.children = parsedSvg.children.map((child) => {
+    const copy = child;
+    if (copy.attributes['stroke-width']) {
+      copy.attributes.strokeWidth = copy.attributes['stroke-width'];
+      delete copy.attributes['stroke-width'];
+    }
+    if (copy.attributes['stroke-linecap']) {
+      copy.attributes.strokeLinecap = copy.attributes['stroke-linecap'];
+      delete copy.attributes['stroke-linecap'];
+    }
+    if (copy.attributes['fill-rule']) {
+      copy.attributes.fillRule = copy.attributes['fill-rule'];
+      delete copy.attributes['fill-rule'];
+    }
+    if (copy.attributes['clip-rule']) {
+      copy.attributes.clipRule = copy.attributes['clip-rule'];
+      delete copy.attributes['clip-rule'];
+    }
+    return copy;
+  });
 
   const iconWithoutWrapper = stringify(parsedSvg.children);
 

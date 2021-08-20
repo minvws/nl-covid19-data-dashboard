@@ -17,8 +17,8 @@ const Close = forwardRef(
         <path
           d="M11 11L18 18M25 11L18 18M25 25L18 18M11 25L18 18"
           stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
         />
       </svg>
     );
