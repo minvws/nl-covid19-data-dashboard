@@ -11,7 +11,7 @@ const OntmoetingenBezoek = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M18.4138 17.1512V22.2822H15.269C15.6 19.965 16.7586 18.3098 18.4138 17.1512Z" />

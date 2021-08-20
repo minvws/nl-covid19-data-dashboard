@@ -11,7 +11,7 @@ const Stap1HorecaSportaccomodaties = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M17.986 18.8652C17.483 18.8652 16.98 19.3682 16.98 19.8712C16.98 20.2065 17.1477 20.5418 17.483 20.7095V22.8891H18.8243V20.7095C18.992 20.5418 19.1596 20.2065 19.1596 19.8712C19.1596 19.3682 18.6566 18.8652 17.986 18.8652Z" />

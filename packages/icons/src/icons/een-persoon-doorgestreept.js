@@ -11,7 +11,7 @@ const EenPersoonDoorgestreept = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M17.4743 9.34802C18.8026 9.34802 19.5616 8.37589 19.5616 7.01491C19.5616 5.4595 18.8026 4.68179 17.4743 4.68179C16.1461 4.68179 15.3871 5.65392 15.3871 7.01491C15.3871 8.57032 16.1461 9.34802 17.4743 9.34802Z" />

@@ -11,7 +11,7 @@ const BasisregelsTesten = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path

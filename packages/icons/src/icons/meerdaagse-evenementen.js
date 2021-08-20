@@ -11,7 +11,7 @@ const MeerdaagseEvenementen = forwardRef(
         height={size}
         viewBox="0 0 37 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M17.0039 17.6162H20.0976V19.9299H17.0039V17.6162Z" />

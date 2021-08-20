@@ -11,7 +11,7 @@ const HorecaEvenementen = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M18.0465 7.53093L21.5129 6.31769C21.6862 6.31769 21.6862 5.97105 21.5129 5.97105L18.0465 4.75781C17.8732 4.75781 17.6998 4.75781 17.6998 4.93113V7.35761C17.6998 7.53093 17.8732 7.70425 18.0465 7.53093Z" />

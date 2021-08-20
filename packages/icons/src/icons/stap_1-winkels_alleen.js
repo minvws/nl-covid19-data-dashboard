@@ -11,7 +11,7 @@ const Stap1WinkelsAlleen = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M16.7972 10.2218C18.1518 10.2218 18.9044 9.31869 18.9044 7.96406C18.9044 6.45893 18.1518 5.70636 16.7972 5.70636C15.4426 5.70636 14.8405 6.60944 14.8405 7.96406C14.8405 9.4692 15.5931 10.2218 16.7972 10.2218Z" />

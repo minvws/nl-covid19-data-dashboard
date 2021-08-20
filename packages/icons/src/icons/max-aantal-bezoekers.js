@@ -11,7 +11,7 @@ const MaxAantalBezoekers = forwardRef(
         height={size}
         viewBox="0 0 37 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path

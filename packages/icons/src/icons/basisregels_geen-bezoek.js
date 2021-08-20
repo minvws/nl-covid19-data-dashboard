@@ -11,7 +11,7 @@ const BasisregelsGeenBezoek = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M15.6383 9.59175C16.8952 9.59175 17.5237 8.74028 17.5237 7.46308C17.5237 5.97301 16.6857 5.33441 15.6383 5.33441C14.3813 5.33441 13.7528 6.18588 13.7528 7.46308C13.7528 8.95315 14.5908 9.59175 15.6383 9.59175Z" />

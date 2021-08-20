@@ -11,7 +11,7 @@ const Contactberoepen = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M16.6287 16.0235C17.2143 15.5842 17.9463 16.6091 17.9463 16.6091C17.9463 16.6091 17.2143 17.3412 16.6287 17.3412C16.043 17.3412 15.311 16.6091 15.311 16.6091C15.311 16.6091 16.043 15.5842 16.6287 16.0235Z" />

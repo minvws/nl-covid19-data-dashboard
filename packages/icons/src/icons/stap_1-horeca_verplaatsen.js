@@ -11,7 +11,7 @@ const Stap1HorecaVerplaatsen = forwardRef(
         height={size}
         viewBox="0 0 36 36"
         fill="currentColor"
-        stroke={color}
+        stroke="none"
         {...rest}
       >
         <path d="M11.227 10.2816C12.7395 10.0925 13.4958 8.769 13.3068 7.25641C12.9286 5.55475 11.7942 4.79845 10.2816 4.98753C8.76899 5.36568 8.0127 6.50012 8.20177 8.01271C8.57992 9.71437 9.52529 10.6597 11.227 10.2816Z" />

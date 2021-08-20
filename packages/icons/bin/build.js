@@ -52,7 +52,7 @@ fs.writeFileSync(
 const attrsToString = (attrs) => {
   return Object.keys(attrs)
     .map((key) => {
-      if (key === 'width' || key === 'height' || key === 'stroke') {
+      if (key === 'width' || key === 'height') {
         return key + '={' + attrs[key] + '}';
       }
       if (key === 'rest') {
@@ -79,7 +79,7 @@ icons.forEach((i) => {
     height: 'size',
     viewBox: `0 0 ${svgWidth} ${svgHeight}`,
     fill: 'currentColor',
-    stroke: 'color',
+    stroke: 'none',
     rest: '...rest',
   };
 
