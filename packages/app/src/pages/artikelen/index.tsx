@@ -54,7 +54,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
      * Find all the categorires that are currently being used in articles,
      * to later check if we still need it for the menu items.
      */
-    const avaliableCategories = [
+    const availableCategories = [
       '__alles',
       ...new Set(content.map((item) => item.categories).flat()),
     ];
@@ -70,7 +70,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
         };
       })
       .filter((item) => {
-        return avaliableCategories.includes(item.value);
+        return availableCategories.includes(item.value);
       });
   }, [siteText, content]);
 
