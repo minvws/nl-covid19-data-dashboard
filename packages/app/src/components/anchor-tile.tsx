@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ReactComponent as ExternalLinkIcon } from '~/assets/external-link.svg';
+import { ExternalLink as ExternalLinkIcon } from '@corona-dashboard/icons';
 import { Anchor, Heading } from '~/components/typography';
 import { Link } from '~/utils/link';
 import { ExternalLink } from './external-link';

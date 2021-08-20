@@ -1,4 +1,4 @@
-import { ReactComponent as Arts } from '~/assets/arts.svg';
+import { Arts } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';

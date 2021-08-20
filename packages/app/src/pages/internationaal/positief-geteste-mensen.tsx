@@ -2,7 +2,7 @@ import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
 import { last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { Getest } from '@corona-dashboard/icons';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';

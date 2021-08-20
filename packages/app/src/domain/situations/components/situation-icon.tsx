@@ -1,11 +1,11 @@
-import { ReactComponent as gathering } from '~/assets/situations/gathering.svg';
-import { ReactComponent as health_care } from '~/assets/situations/health_care.svg';
-import { ReactComponent as home_and_visits } from '~/assets/situations/home_and_visits.svg';
-import { ReactComponent as hospitality } from '~/assets/situations/hospitality.svg';
-import { ReactComponent as other } from '~/assets/situations/other.svg';
-import { ReactComponent as school_and_day_care } from '~/assets/situations/school_and_day_care.svg';
-import { ReactComponent as travel } from '~/assets/situations/travel.svg';
-import { ReactComponent as work } from '~/assets/situations/work.svg';
+import { gathering } from '@corona-dashboard/icons';
+import { health_care } from '@corona-dashboard/icons';
+import { home_and_visits } from '@corona-dashboard/icons';
+import { hospitality } from '@corona-dashboard/icons';
+import { other } from '@corona-dashboard/icons';
+import { school_and_day_care } from '@corona-dashboard/icons';
+import { travel } from '@corona-dashboard/icons';
+import { work } from '@corona-dashboard/icons';
 import { SituationKey } from '../logic/situations';
 
 const icons = {

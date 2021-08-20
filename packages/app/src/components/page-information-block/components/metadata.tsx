@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
 import { Fragment } from 'react';
-import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
-import { ReactComponent as ClockIcon } from '~/assets/clock.svg';
-import { ReactComponent as DatabaseIcon } from '~/assets/database.svg';
-import { ReactComponent as MeerInformatieIcon } from '~/assets/meer-informatie.svg';
+import { Chevron } from '@corona-dashboard/icons';
+import { Clock } from '@corona-dashboard/icons';
+import { Database } from '@corona-dashboard/icons';
+import { MeerInformatie } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';

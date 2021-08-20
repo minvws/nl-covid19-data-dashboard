@@ -1,5 +1,5 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import { ReactComponent as Repro } from '~/assets/reproductiegetal.svg';
+import { Repro } from '@corona-dashboard/icons';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';

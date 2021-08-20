@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
-import { ReactComponent as InformationIcon } from '~/assets/information.svg';
+import { Information } from '@corona-dashboard/icons';
 import { Box } from './base';
 import { WarningTile } from './warning-tile';
 

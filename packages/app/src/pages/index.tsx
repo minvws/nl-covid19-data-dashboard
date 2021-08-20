@@ -2,9 +2,9 @@ import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ReactComponent as GrafiekIcon } from '~/assets/chart.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as ZiekenhuisIcon } from '~/assets/ziekenhuis.svg';
+import { Grafiek } from '@corona-dashboard/icons';
+import { Getest } from '@corona-dashboard/icons';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
 import {

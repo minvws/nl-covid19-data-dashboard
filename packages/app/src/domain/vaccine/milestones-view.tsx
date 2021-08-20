@@ -1,7 +1,7 @@
 import { css } from '@styled-system/css';
 import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as VaccineIcon } from '~/assets/vaccine.svg';
+import { Vaccine } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Tile } from '~/components/tile';

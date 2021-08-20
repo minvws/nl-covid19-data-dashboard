@@ -1,6 +1,6 @@
-import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
-import { ReactComponent as Locatie } from '~/assets/locaties.svg';
-import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
+import { CoronaVirus } from '@corona-dashboard/icons';
+import { Locatie } from '@corona-dashboard/icons';
+import { Verpleeghuiszorg } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';

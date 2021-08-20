@@ -1,7 +1,7 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { ReactComponent as ExternalLinkIcon } from '~/assets/external-link.svg';
-import { ReactComponent as Phone } from '~/assets/phone.svg';
+import { ExternalLink } from '@corona-dashboard/icons';
+import { Phone } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';

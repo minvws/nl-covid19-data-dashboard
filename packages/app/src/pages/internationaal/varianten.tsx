@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { isPresent } from 'ts-is-present';
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { Getest } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';

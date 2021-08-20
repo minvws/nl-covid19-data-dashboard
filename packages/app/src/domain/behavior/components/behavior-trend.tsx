@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ReactComponent as Gelijk } from '~/assets/gelijk.svg';
-import { ReactComponent as PijlOmhoog } from '~/assets/pijl-omhoog.svg';
-import { ReactComponent as PijlOmlaag } from '~/assets/pijl-omlaag.svg';
+import { Gelijk } from '@corona-dashboard/icons';
+import { PijlOmhoog } from '@corona-dashboard/icons';
+import { PijlOmlaag } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';

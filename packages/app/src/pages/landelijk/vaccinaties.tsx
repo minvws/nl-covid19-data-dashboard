@@ -1,6 +1,6 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
-import { ReactComponent as VaccinatiesIcon } from '~/assets/vaccinaties.svg';
+import { Vaccinaties } from '@corona-dashboard/icons';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';

@@ -1,20 +1,20 @@
 import { Nl } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactComponent as Arts } from '~/assets/arts.svg';
-import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
-import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
-import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
-import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
-import { ReactComponent as Phone } from '~/assets/phone.svg';
-import { ReactComponent as ReproIcon } from '~/assets/reproductiegetal.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
-import { ReactComponent as Varianten } from '~/assets/varianten.svg';
-import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
-import { ReactComponent as Ziektegolf } from '~/assets/ziektegolf.svg';
+import { Arts } from '@corona-dashboard/icons';
+import { Coronavirus } from '@corona-dashboard/icons';
+import { Elderly } from '@corona-dashboard/icons';
+import { Gedrag } from '@corona-dashboard/icons';
+import { Gehandicaptenzorg } from '@corona-dashboard/icons';
+import { Phone } from '@corona-dashboard/icons';
+import { Repro } from '@corona-dashboard/icons';
+import { RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { Getest } from '@corona-dashboard/icons';
+import { Vaccinatie } from '@corona-dashboard/icons';
+import { Varianten } from '@corona-dashboard/icons';
+import { Verpleeghuiszorg } from '@corona-dashboard/icons';
+import { Ziekenhuis } from '@corona-dashboard/icons';
+import { Ziektegolf } from '@corona-dashboard/icons';
 import {
   CategoryMenu,
   Menu,

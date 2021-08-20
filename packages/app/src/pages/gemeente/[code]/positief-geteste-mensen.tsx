@@ -1,4 +1,4 @@
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { Getest } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';

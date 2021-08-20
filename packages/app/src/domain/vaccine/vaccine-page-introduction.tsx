@@ -1,6 +1,6 @@
 import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
+import { Vaccinatie } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';

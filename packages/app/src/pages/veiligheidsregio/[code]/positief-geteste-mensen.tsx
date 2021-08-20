@@ -1,5 +1,5 @@
-import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { GgdTesten } from '@corona-dashboard/icons';
+import { Getest } from '@corona-dashboard/icons';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';

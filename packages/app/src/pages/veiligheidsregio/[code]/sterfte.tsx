@@ -1,4 +1,4 @@
-import { ReactComponent as CoronaVirusIcon } from '~/assets/coronavirus.svg';
+import { CoronaVirus } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';

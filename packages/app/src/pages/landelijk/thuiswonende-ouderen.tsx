@@ -1,4 +1,4 @@
-import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
+import { Elderly } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';

@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
-import { ReactComponent as Calendar } from '~/assets/calendar.svg';
-import { ReactComponent as Getest } from '~/assets/test.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { BarChart } from '@corona-dashboard/icons';
+import { Calendar } from '@corona-dashboard/icons';
+import { Getest } from '@corona-dashboard/icons';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,

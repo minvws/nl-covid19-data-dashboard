@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 
+import { AfstandSporten } from '@corona-dashboard/icons';
+
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import { MaxWidth } from '~/components/max-width';

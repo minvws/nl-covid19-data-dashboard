@@ -1,7 +1,7 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { ReactComponent as IconGelijk } from '~/assets/gelijk.svg';
-import { ReactComponent as IconUp } from '~/assets/pijl-omhoog.svg';
-import { ReactComponent as IconDown } from '~/assets/pijl-omlaag.svg';
+import { Gelijk } from '@corona-dashboard/icons';
+import { Up } from '@corona-dashboard/icons';
+import { Down } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';

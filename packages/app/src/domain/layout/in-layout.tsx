@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactComponent as Getest } from '~/assets/test.svg';
-import { ReactComponent as Varianten } from '~/assets/varianten.svg';
+import { Getest } from '@corona-dashboard/icons';
+import { Varianten } from '@corona-dashboard/icons';
 import {
   CategoryMenu,
   Menu,
