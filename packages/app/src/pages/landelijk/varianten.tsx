@@ -2,13 +2,13 @@ import { ReactComponent as Varianten } from '~/assets/varianten.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
-import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import {
   getVariantChartData,
   getVariantTableData,
 } from '~/domain/variants/static-props';
+import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
