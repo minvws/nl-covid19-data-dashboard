@@ -55,11 +55,7 @@
           "pattern": "^[0-9]*-[0-9]*$"
         },
         "partially_or_fully_vaccinated_percentage_label": {
-          "enum": [
-            null,
-            "0-10%",
-            "90-100%"
-          ]
+          "type": ["string", "null"]
         },
         "date_unix": {
           "type": "integer"

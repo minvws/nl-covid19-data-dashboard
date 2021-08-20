@@ -120,7 +120,7 @@ export interface GmCollection {
   hospital_nice: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
-  vaccine_coverage_per_age_group?: GmCollectionVaccineCoveragePerAgeGroup[];
+  vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface GmCollectionHospitalNice {
   date_unix: number;
@@ -154,7 +154,7 @@ export interface GmCollectionVaccineCoveragePerAgeGroupValue {
   partially_vaccinated_percentage: number | null;
   partially_or_fully_vaccinated_percentage: number | null;
   birthyear_range: string;
-  partially_or_fully_vaccinated_percentage_label: null | "0-10%" | "90-100%";
+  partially_or_fully_vaccinated_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
@@ -1361,7 +1361,7 @@ export interface VrCollectionVaccineCoveragePerAgeGroupValue {
   partially_vaccinated_percentage: number | null;
   partially_or_fully_vaccinated_percentage: number | null;
   birthyear_range: string;
-  partially_or_fully_vaccinated_percentage_label: null | "0-10%" | "90-100%";
+  partially_or_fully_vaccinated_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
