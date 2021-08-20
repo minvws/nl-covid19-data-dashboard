@@ -10,8 +10,9 @@ import { ArticleSummary } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
 import {
   ChartRegionControls,
-  RegionControlOption
+  RegionControlOption,
 } from '~/components/chart-region-controls';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
@@ -33,7 +34,7 @@ import { Search } from '~/domain/topical/components/search';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
-  WeeklyHighlightProps
+  WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -45,20 +46,19 @@ import { useFeature } from '~/lib/features';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { ChoroplethComponent } from '../components/choropleth';
 
 const DynamicChoropleth = dynamic(
   () => import('../components/choropleth').then((mod) => mod.Choropleth),
