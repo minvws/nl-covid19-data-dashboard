@@ -211,16 +211,15 @@ function useSeriesConfig(
 
         assert(color, `No color found found for variant: ${variantKey}`);
 
-        const variantName = variantKey.split('_')[0];
+        const variantName = variantKey.split(
+          '_'
+        )[0] as keyof typeof siteText.covid_varianten.varianten;
 
         return {
           type: 'gapped-stacked-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label:
-            siteText.covid_varianten.varianten[
-              variantName as keyof `${variantName}`
-            ],
+          label: siteText.covid_varianten.varianten[variantName],
           shape: 'square',
           strokeWidth: 0,
           fillOpacity: 1,
