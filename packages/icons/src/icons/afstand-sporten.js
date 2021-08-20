@@ -9,8 +9,8 @@ const AfstandSporten = forwardRef(
         xmlns="http://www.w3.org/2000/svg"
         width={size}
         height={size}
-        viewBox="0 0 36 36"
-        fill="none"
+        viewBox="0 0 37 36"
+        fill="currentColor"
         stroke={color}
         {...rest}
       >

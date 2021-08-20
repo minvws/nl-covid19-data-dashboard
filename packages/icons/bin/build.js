@@ -5,6 +5,9 @@ const fs = require('fs');
 const format = require('prettier-eslint');
 const upperCamelCase = require('uppercamelcase');
 
+// const { parse } = require('svg-parser');
+const { parseSync, stringify } = require('svgson');
+
 const rootDir = path.join(__dirname, '..');
 
 const svgDir = path.join(rootDir, 'src/svg');
@@ -62,17 +65,21 @@ const attrsToString = (attrs) => {
 
 icons.forEach((i) => {
   const location = path.join(rootDir, 'src/icons', `${i}.js`);
-  const ComponentName = i === 'github' ? 'GitHub' : upperCamelCase(i);
+  const ComponentName = upperCamelCase(i);
+
+  const parsedSvg = parseSync(svgIcons[i]);
+  const svgWidth = parsedSvg.attributes.width || 36;
+  const svgHeight = parsedSvg.attributes.height || 36;
+
+  const iconWithoutWrapper = stringify(parsedSvg.children);
+
   const defaultAttrs = {
     xmlns: 'http://www.w3.org/2000/svg',
     width: 'size',
     height: 'size',
-    viewBox: '0 0 36 36',
-    fill: 'none',
+    viewBox: `0 0 ${svgWidth} ${svgHeight}`,
+    fill: 'currentColor',
     stroke: 'color',
-    // strokeWidth: 2,
-    // strokeLinecap: 'round',
-    // strokeLinejoin: 'round',
     rest: '...rest',
   };
 
@@ -83,8 +90,8 @@ icons.forEach((i) => {
 
     const ${ComponentName} = forwardRef(({ color = 'currentColor', size = 36, ...rest }, ref) => {
       return (
-        <svg ref={ref} ${attrsToString(defaultAttrs)}>
-          ${svgIcons[i]}
+        <svg ref={ref} ${attrsToString(defaultAttrs)} >
+          ${iconWithoutWrapper}
         </svg>
       )
     });
@@ -116,6 +123,7 @@ icons.forEach((i) => {
 
   fs.writeFileSync(location, component, 'utf-8');
 
+  // eslint-disable-next-line no-console
   console.log('Successfully built', ComponentName);
 
   const exportString = `export { default as ${ComponentName} } from './icons/${i}';\r\n`;

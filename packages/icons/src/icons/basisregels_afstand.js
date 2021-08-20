@@ -10,7 +10,7 @@ const BasisregelsAfstand = forwardRef(
         width={size}
         height={size}
         viewBox="0 0 36 36"
-        fill="none"
+        fill="currentColor"
         stroke={color}
         {...rest}
       >
