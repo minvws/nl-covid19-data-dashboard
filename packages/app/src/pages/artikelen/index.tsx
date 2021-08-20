@@ -69,9 +69,7 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
           value: id,
         };
       })
-      .filter((item) => {
-        return availableCategories.includes(item.value);
-      });
+      .filter((item) => availableCategories.includes(item.value));
   }, [siteText, content]);
 
   const handleCategoryFilter = useCallback(
