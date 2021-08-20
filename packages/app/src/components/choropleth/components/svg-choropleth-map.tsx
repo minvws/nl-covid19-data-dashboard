@@ -16,14 +16,16 @@ import { MercatorGroup } from './mercator-group';
 import { MercatorHoverGroup } from './mercator-hover-group';
 
 export type GenericChoroplethMapProps = {
-  containerRef: MutableRefObject<HTMLDivElement | null>;
-  hoverRef: MutableRefObject<SVGGElement | HTMLElement>;
+  containerRef: MutableRefObject<HTMLElement>;
+  hoverRef: React.RefObject<SVGGElement | HTMLElement>;
+  anchorsRef: React.RefObject<HTMLDivElement>;
   dataOptions: DataOptions;
   width: number;
   height: number;
   annotations: AccessibilityAnnotations;
-  mouseOverHandler: ChoroplethTooltipHandlers[0];
-  mouseOutHandler: ChoroplethTooltipHandlers[1];
+  featureOverHandler: ChoroplethTooltipHandlers[0];
+  featureOutHandler: ChoroplethTooltipHandlers[1];
+  tooltipTrigger: ChoroplethTooltipHandlers[2];
   mapProjection: () => GeoProjection;
   choroplethFeatures: ChoroplethFeatures;
   featureProps: FeatureProps;
@@ -41,8 +43,8 @@ export const SvgChoroplethMap = (props: GenericChoroplethMapProps) => {
     width,
     height,
     annotations,
-    mouseOverHandler,
-    mouseOutHandler,
+    featureOverHandler,
+    featureOutHandler,
     mapProjection,
     choroplethFeatures,
     featureProps,
@@ -70,8 +72,8 @@ export const SvgChoroplethMap = (props: GenericChoroplethMapProps) => {
         width={width}
         viewBox={`0 0 ${width} ${height}`}
         css={css({ display: 'block', bg: 'transparent', width: '100%' })}
-        onMouseMove={mouseOverHandler}
-        onMouseOut={mouseOutHandler}
+        onMouseMove={featureOverHandler}
+        onMouseOut={featureOutHandler}
       >
         <clipPath id={clipPathId}>
           <rect x={0} y={0} height={height} width={width} />

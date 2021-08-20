@@ -2,7 +2,14 @@ import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { Shape } from 'konva/lib/Shape';
-import { MutableRefObject, RefObject, useEffect, useMemo, useRef } from 'react';
+import {
+  FocusEvent,
+  MutableRefObject,
+  RefObject,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { IntlContextProps } from '~/intl/hooks/use-intl';
@@ -21,8 +28,9 @@ import { isCodedValueType } from './utils';
 const DEFAULT_TOOLTIP_OFFSET = 5;
 
 export type ChoroplethTooltipHandlers = [
-  ReturnType<typeof createSvgMouseOverHandler>,
-  ReturnType<typeof createSvgMouseOutHandler>
+  ReturnType<typeof createFeatureMouseOverHandler>,
+  ReturnType<typeof createFeatureMouseOutHandler>,
+  ReturnType<typeof createTooltipTrigger>
 ];
 
 export function useChoroplethTooltip<T extends ChoroplethDataItem>(
@@ -134,7 +142,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   ]);
 
   return [
-    createSvgMouseOverHandler(
+    createFeatureMouseOverHandler(
       timeout,
       setTooltip,
       containerRef,
@@ -146,11 +154,56 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       map,
       metricPropertyFormatter
     ),
-    createSvgMouseOutHandler(timeout, setTooltip, isTouch),
+    createFeatureMouseOutHandler(timeout, setTooltip, isTouch),
+    createTooltipTrigger(
+      setTooltip,
+      getItemByCode,
+      dataConfig,
+      dataOptions,
+      threshold,
+      getFeatureName,
+      map,
+      metricPropertyFormatter
+    ),
   ] as ChoroplethTooltipHandlers;
 }
 
-const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
+type HoverInfo = { code: string; x: number; y: number };
+
+const createTooltipTrigger = <T extends ChoroplethDataItem>(
+  setTooltip: (settings: TooltipSettings<T> | undefined) => void,
+  getItemByCode: (code: string) => T,
+  dataConfig: DataConfig<T>,
+  dataOptions: DataOptions,
+  threshold: ChoroplethThresholdsValue[],
+  getFeatureName: (code: string) => string,
+  map: MapType,
+  metricPropertyFormatter: (value: number) => string
+) => {
+  return (hoverInfo?: HoverInfo) => {
+    if (!isDefined(hoverInfo)) {
+      return setTooltip(undefined);
+    }
+
+    const { code, x, y } = hoverInfo;
+    setTooltip({
+      left: x,
+      top: y,
+      data: {
+        code,
+        dataItem: getItemByCode(code),
+        dataConfig,
+        dataOptions,
+        thresholdValues: threshold,
+        featureName: getFeatureName(code),
+        metricPropertyFormatter,
+        map,
+      },
+    });
+  };
+};
+
+const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
   ref: RefObject<HTMLElement>,
@@ -211,7 +264,7 @@ function isKonvaEvent(event: any): event is KonvaEventObject<MouseEvent> {
   return 'evt' in event;
 }
 
-const createSvgMouseOutHandler = <T extends ChoroplethDataItem>(
+const createFeatureMouseOutHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
   isTouch: boolean

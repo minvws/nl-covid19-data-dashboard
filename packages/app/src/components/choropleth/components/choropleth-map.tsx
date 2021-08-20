@@ -33,6 +33,7 @@ type ChoroplethMapProps<
   K extends UnpackedDataItem<T>
 > = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
   hoverRef: React.RefObject<SVGGElement | HTMLElement>;
+  anchorsRef: React.RefObject<HTMLDivElement>;
   setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
   isTabInteractive: boolean;
   anchorEventHandlers: AnchorEventHandler;
@@ -49,6 +50,7 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     minHeight = 500,
     boundingBoxPadding = {},
     hoverRef,
+    anchorsRef,
     setTooltip,
     accessibility,
     isTabInteractive,
@@ -113,15 +115,16 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     dataConfig
   );
 
-  const [mouseOverHandler, mouseOutHandler] = useChoroplethTooltip(
-    map,
-    data,
-    dataConfig,
-    dataOptions,
-    isTabInteractive,
-    setTooltip,
-    containerRef
-  );
+  const [featureOverHandler, featureOutHandler, tooltipTrigger] =
+    useChoroplethTooltip(
+      map,
+      data,
+      dataConfig,
+      dataOptions,
+      isTabInteractive,
+      setTooltip,
+      containerRef
+    );
 
   const getFeatureName = useFeatureName(map, dataOptions.getFeatureName);
 
@@ -157,12 +160,14 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
       <RenderComponent
         containerRef={containerRef}
         hoverRef={hoverRef}
+        anchorsRef={anchorsRef}
         dataOptions={dataOptions}
         width={width}
         height={mapHeight}
         annotations={annotations}
-        mouseOverHandler={mouseOverHandler}
-        mouseOutHandler={mouseOutHandler}
+        featureOverHandler={featureOverHandler}
+        featureOutHandler={featureOutHandler}
+        tooltipTrigger={tooltipTrigger}
         mapProjection={mapProjection}
         choroplethFeatures={choroplethFeatures}
         featureProps={featureProps}

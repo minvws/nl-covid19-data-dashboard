@@ -1,27 +1,29 @@
+import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
-import { Layer, Line, Rect, Stage } from 'react-konva';
-import { Html } from 'react-konva-utils';
-import { isDefined } from 'ts-is-present';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Group, Layer, Line, Rect, Stage } from 'react-konva';
+import { isDefined, isPresent } from 'ts-is-present';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { DataOptions } from '..';
-import { FeatureProps } from '../logic';
+import { ChoroplethTooltipHandlers, FeatureProps } from '../logic';
 import {
   GeoInfo,
   useProjectedCoordinates,
 } from '../logic/use-projected-coordinates';
+import { AnchorEventHandler } from './choropleth-map';
 import { GenericChoroplethMapProps } from './svg-choropleth-map';
 
 export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const {
     containerRef,
-    hoverRef,
     dataOptions,
     width,
     height,
     annotations,
-    mouseOverHandler,
-    mouseOutHandler,
+    featureOverHandler,
+    featureOutHandler,
+    tooltipTrigger,
     mapProjection,
     choroplethFeatures,
     featureProps,
@@ -29,10 +31,12 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     anchorEventHandlers,
     isTabInteractive,
     getFeatureName,
+    anchorsRef,
   } = props;
 
   const [hover, setHover] = useState<[number, number][][]>();
   const [hoverCode, setHoverCode] = useState<string>();
+  const [keyboardActive, setKeyboardActive] = useState(false);
 
   const [geoInfo, projectedCoordinates] = useProjectedCoordinates(
     choroplethFeatures.area,
@@ -41,7 +45,12 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   );
 
   const selectFeature = useCallback(
-    (code: string) => {
+    (code: string | undefined, isKeyboardAction: boolean = false) => {
+      setKeyboardActive(isKeyboardAction);
+      if (!isDefined(code)) {
+        return;
+      }
+
       const featureIndexes = geoInfo
         .map((x, i) => (x.code === code ? i : undefined))
         .filter(isDefined);
@@ -49,8 +58,8 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         featureIndexes.includes(i)
       );
 
-      setHover(newValues);
       setHoverCode(code);
+      setHover(newValues);
     },
     [setHover, geoInfo, projectedCoordinates]
   );
@@ -66,7 +75,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
       selectFeature(evt.target.attrs.id);
 
-      mouseOverHandler(evt);
+      featureOverHandler(evt);
     },
     [setHover]
   );
@@ -81,8 +90,8 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const reset = useCallback(() => {
     setHover(undefined);
     setHoverCode(undefined);
-    if (isDefined(mouseOutHandler)) {
-      mouseOutHandler();
+    if (isDefined(featureOutHandler)) {
+      featureOutHandler();
     }
   }, [setHover]);
 
@@ -92,43 +101,84 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     containerRef.current = localContainerRef.current?.content;
   }, []);
 
+  useEffect(() => {
+    if (!keyboardActive) {
+      return;
+    }
+    const { current } = hoveredRef;
+    tooltipTrigger();
+    if (isPresent(current) && isDefined(hoverCode)) {
+      const box = current.getClientRect();
+      const x = Math.round(box.x + box.width / 2);
+      const y = Math.round(box.y + box.height / 2);
+      tooltipTrigger({ code: hoverCode, x, y });
+    }
+  });
+
+  const hoveredRef = useRef<Konva.Group>(null);
+  const { getLink } = dataOptions;
+
   return (
-    <Stage
-      width={width}
-      height={height}
-      ref={localContainerRef}
-      onMouseOut={mouseOutHandler}
-    >
-      <Features
+    <>
+      {isDefined(getLink) && isPresent(anchorsRef.current) && (
+        <>
+          {createPortal(
+            <AnchorLinks
+              isTabInteractive={isTabInteractive}
+              geoInfo={geoInfo}
+              getLink={getLink}
+              getFeatureName={getFeatureName}
+              anchorEventHandlers={anchorEventHandlers}
+              selectFeature={selectFeature}
+            />,
+            anchorsRef.current
+          )}
+        </>
+      )}
+
+      <Stage
         width={width}
         height={height}
-        geoInfo={geoInfo}
-        projectedCoordinates={projectedCoordinates}
-        handleMove={handleMove}
-        handleClick={handleClick}
-        reset={reset}
-        selectFeature={selectFeature}
-        featureProps={featureProps}
-        isTabInteractive={isTabInteractive}
-        getFeatureName={getFeatureName}
-        dataOptions={dataOptions}
-      />
-      <Layer listening={false}>
-        {isDefined(hoverCode) &&
-          hover?.map((x, i) => (
-            <Line
-              key={i}
-              x={0}
-              y={0}
-              points={x.flat()}
-              tension={0.5}
-              strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
-              closed
-              stroke={featureProps.hover.stroke(hoverCode, true)}
-            />
-          ))}
-      </Layer>
-    </Stage>
+        ref={localContainerRef}
+        onMouseOut={featureOutHandler}
+        role="img"
+      >
+        <Features
+          width={width}
+          height={height}
+          geoInfo={geoInfo}
+          projectedCoordinates={projectedCoordinates}
+          handleMove={handleMove}
+          handleClick={handleClick}
+          reset={reset}
+          selectFeature={selectFeature}
+          mouseOverHandler={featureOverHandler}
+          featureProps={featureProps}
+          isTabInteractive={isTabInteractive}
+          getFeatureName={getFeatureName}
+          dataOptions={dataOptions}
+          anchorEventHandlers={anchorEventHandlers}
+        />
+        <Layer listening={false}>
+          {isDefined(hoverCode) && (
+            <Group ref={hoveredRef}>
+              {hover?.map((x, i) => (
+                <Line
+                  key={i}
+                  x={0}
+                  y={0}
+                  points={x.flat()}
+                  tension={0.5}
+                  strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
+                  closed
+                  stroke={featureProps.hover.stroke(hoverCode, true)}
+                />
+              ))}
+            </Group>
+          )}
+        </Layer>
+      </Stage>
+    </>
   );
 };
 
@@ -139,12 +189,14 @@ type FeaturesProps = {
   handleClick: any;
   reset: any;
   selectFeature: (code: string) => void;
+  mouseOverHandler: ChoroplethTooltipHandlers[0];
   featureProps: FeatureProps;
   width: number;
   height: number;
   isTabInteractive: boolean;
   getFeatureName: (code: string) => string;
   dataOptions: DataOptions;
+  anchorEventHandlers: AnchorEventHandler;
 };
 
 const Features = memo((props: FeaturesProps) => {
@@ -154,13 +206,9 @@ const Features = memo((props: FeaturesProps) => {
     handleMove,
     reset,
     handleClick,
-    selectFeature,
     featureProps,
     height,
     width,
-    isTabInteractive,
-    getFeatureName,
-    dataOptions,
   } = props;
 
   const getFillColor = useCallback((code: string, index: number) => {
@@ -181,57 +229,87 @@ const Features = memo((props: FeaturesProps) => {
     return featureProps.area.fill(code);
   }, []);
 
-  const { getLink } = dataOptions;
-
   return (
-    <Layer>
-      <Rect width={width} height={height} onMouseOver={reset} />
+    <>
+      <Layer>
+        <Rect width={width} height={height} onMouseOver={reset} />
 
-      {projectedCoordinates.map((x, i) => (
-        <Line
-          closed
-          id={geoInfo[i].code}
-          key={i}
-          x={0}
-          y={0}
-          tension={0.5}
-          lineJoin={'round'}
-          strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
-          points={x.flat()}
-          fill={getFillColor(geoInfo[i].code, i)}
-          stroke={featureProps.area.stroke(geoInfo[i].code)}
-          onMouseOver={handleMove}
-          onClick={handleClick}
-        />
-      ))}
-      {isDefined(getLink) && (
-        <Html
-          divProps={{
-            position: 'relative',
-          }}
-        >
-          <VisuallyHidden>
-            <div tabIndex={isTabInteractive ? 0 : -1}>
-              {geoInfo
-                .filter(
-                  (x, i, arr) => i === arr.findIndex((y) => x.code === y.code)
-                )
-                .map((x, i) => (
-                  <a
-                    key={i}
-                    tabIndex={isTabInteractive ? i + 1 : -1}
-                    href={getLink(x.code)}
-                    onFocus={() => {
-                      selectFeature(x.code);
-                    }}
-                  >
-                    {getFeatureName(x.code)}
-                  </a>
-                ))}
-            </div>
-          </VisuallyHidden>
-        </Html>
-      )}
-    </Layer>
+        {projectedCoordinates.map((x, i) => (
+          <Line
+            closed
+            id={geoInfo[i].code}
+            key={i}
+            x={0}
+            y={0}
+            tension={0.5}
+            lineJoin={'round'}
+            strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
+            points={x.flat()}
+            fill={getFillColor(geoInfo[i].code, i)}
+            stroke={featureProps.area.stroke(geoInfo[i].code)}
+            onMouseOver={handleMove}
+            onClick={handleClick}
+          />
+        ))}
+      </Layer>
+    </>
   );
 });
+
+type AnchorLinksProps = {
+  isTabInteractive: boolean;
+  geoInfo: GeoInfo[];
+  getLink: (code: string) => string;
+  getFeatureName: (code: string) => string;
+  anchorEventHandlers: AnchorEventHandler;
+  selectFeature: (code: string | undefined, isKeyboardAction?: boolean) => void;
+};
+
+function AnchorLinks(props: AnchorLinksProps) {
+  const {
+    isTabInteractive,
+    geoInfo,
+    getLink,
+    getFeatureName,
+    selectFeature,
+    anchorEventHandlers,
+  } = props;
+
+  const anchorInfo = useMemo(() => {
+    return geoInfo
+      .slice()
+      .filter((x, i, arr) => i === arr.findIndex((y) => x.code === y.code))
+      .sort((a, b) =>
+        getFeatureName(a.code).localeCompare(
+          getFeatureName(b.code),
+          undefined,
+          { sensitivity: 'accent' }
+        )
+      );
+  }, [geoInfo, getFeatureName]);
+
+  return (
+    <VisuallyHidden>
+      <div tabIndex={isTabInteractive ? 0 : -1}>
+        {anchorInfo.map((x, i) => (
+          <a
+            data-id={x.code}
+            key={i}
+            tabIndex={i + 1}
+            href={getLink(x.code)}
+            onFocus={(event) => {
+              anchorEventHandlers.onFocus(event);
+              selectFeature(x.code, true);
+            }}
+            onBlur={(event) => {
+              anchorEventHandlers.onBlur(event);
+              selectFeature(undefined, true);
+            }}
+          >
+            {getFeatureName(x.code)}
+          </a>
+        ))}
+      </div>
+    </VisuallyHidden>
+  );
+}

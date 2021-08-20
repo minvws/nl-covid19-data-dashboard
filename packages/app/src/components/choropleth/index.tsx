@@ -140,14 +140,18 @@ export default function Choropleth<
       })
     );
 
+  const anchorsRef = useRef<HTMLDivElement>(null);
+
   return (
     <Box position="relative" height="100%">
       {tabInteractiveButton}
       <div
         css={css({ bg: 'transparent', position: 'relative', height: '100%' })}
       >
+        <div ref={anchorsRef} />
         <ChoroplethMap
           {...props}
+          anchorsRef={anchorsRef}
           setTooltip={setTooltip}
           hoverRef={hoverRef}
           isTabInteractive={isTabInteractive}
