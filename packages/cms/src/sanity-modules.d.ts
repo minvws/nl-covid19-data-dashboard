@@ -1,6 +1,6 @@
 declare module 'braille';
 declare module 'part:@sanity/form-builder/patch-event' {
-  export * from '@sanity/form-builder/lib/PatchEvent';
+  export { PatchEvent, patch, set, unset } from PE;
 }
 
 declare module '@sanity/cli/lib/util/getUserConfig';

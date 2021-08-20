@@ -3,7 +3,7 @@ import { matchSorter } from 'match-sorter';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
-import { InlineText } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { useUniqueId } from '~/utils/use-unique-id';
@@ -172,7 +172,14 @@ export function SelectCountry({
               })}
           </>
         ) : (
-          <ListItem>{siteText.select_countries.no_countries_found}</ListItem>
+          <StyledNoHits>
+            <Text variant="label1">
+              {siteText.select_countries.no_countries_found}
+            </Text>
+            <Text variant="label1">
+              {siteText.select_countries.no_countries_found_hint}
+            </Text>
+          </StyledNoHits>
         )}
       </OrderedList>
     </Box>
@@ -220,5 +227,13 @@ const ListItem = styled.li<{ hasFocus?: boolean }>((x) =>
     '&:hover': {
       cursor: 'pointer',
     },
+  })
+);
+
+const StyledNoHits = styled.div(
+  css({
+    color: 'gray',
+    textAlign: 'center',
+    p: 4,
   })
 );

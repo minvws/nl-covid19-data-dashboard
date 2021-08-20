@@ -49,14 +49,19 @@ export function ArticleDetail({ article }: ArticleDetailProps) {
         />
       </ContentBlock>
       {!!article.content?.length && (
-        <ContentBlock>
-          <Box textVariant="body1">
-            <RichContent
-              blocks={article.content}
-              contentWrapper={ContentBlock}
-            />
-          </Box>
-        </ContentBlock>
+        <Box
+          // Since you can't serialize unordered lists we have to position them here in the container
+          css={css({
+            ul: {
+              mx: 'auto',
+              maxWidth: 'contentWidth',
+              pr: 4,
+              pl: 5,
+            },
+          })}
+        >
+          <RichContent blocks={article.content} contentWrapper={ContentBlock} />
+        </Box>
       )}
 
       {article.categories && (

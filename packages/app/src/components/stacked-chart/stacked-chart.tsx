@@ -490,7 +490,7 @@ export function StackedChart<T extends TimestampedValue>(
       {valueAnnotation && (
         <>
           <ValueAnnotation>{valueAnnotation}</ValueAnnotation>
-          <Spacer mb={2} />
+          <Spacer mb={{ _: 2, sm: 0 }} />
         </>
       )}
       <Box height="100%">
