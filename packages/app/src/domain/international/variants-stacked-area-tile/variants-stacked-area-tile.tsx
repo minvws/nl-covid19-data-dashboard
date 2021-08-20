@@ -194,6 +194,8 @@ function useSeriesConfig(
   text: SiteText['internationaal_varianten']['varianten_over_tijd_grafiek'],
   values: VariantChartValue[]
 ) {
+  const { siteText } = useIntl();
+
   return useMemo(() => {
     const baseVariantsFiltered = values
       .flatMap((x) => Object.keys(x))
@@ -209,11 +211,15 @@ function useSeriesConfig(
 
         assert(color, `No color found found for variant: ${variantKey}`);
 
+        const variantName = variantKey.split(
+          '_'
+        )[0] as keyof typeof siteText.covid_varianten.varianten;
+
         return {
           type: 'gapped-stacked-area',
           metricProperty: variantKey as keyof VariantChartValue,
           color,
-          label: variantKey,
+          label: siteText.covid_varianten.varianten[variantName],
           shape: 'square',
           strokeWidth: 0,
           fillOpacity: 1,
@@ -235,7 +241,7 @@ function useSeriesConfig(
     const selectOptions = [...seriesConfig, otherConfig];
 
     return [seriesConfig, otherConfig, selectOptions] as const;
-  }, [values, text]);
+  }, [values, text, siteText]);
 }
 
 const NoDataBox = styled.div(
