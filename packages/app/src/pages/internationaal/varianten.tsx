@@ -8,7 +8,6 @@ import { TileList } from '~/components/tile-list';
 import { WarningTile } from '~/components/warning-tile';
 import { countryCodes } from '~/domain/international/multi-select-countries';
 import { SelectCountry } from '~/domain/international/select-country';
-import { VariantsStackedAreaTile } from '~/domain/international/variants-stacked-area-tile';
 import { InLayout } from '~/domain/layout/in-layout';
 import { Layout } from '~/domain/layout/layout';
 import {
@@ -17,6 +16,7 @@ import {
   VariantChartData,
   VariantTableData,
 } from '~/domain/variants/static-props';
+import { VariantsStackedAreaTile } from '~/domain/variants/variants-stacked-area-tile';
 import { VariantsTableTile } from '~/domain/variants/variants-table-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
