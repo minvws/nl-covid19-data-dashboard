@@ -50,16 +50,27 @@ const ArticlesOverview = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
 
   const sortOptions = useMemo(() => {
-    return articleCategory.map((id) => {
-      const label =
-        siteText.common_actueel.secties.artikelen.categorie_filters[id];
+    /**
+     * Find all the categorires that are currently being used in articles,
+     * to later check if we still need it for the menu items.
+     */
+    const availableCategories = [
+      '__alles',
+      ...new Set(content.map((item) => item.categories).flat()),
+    ];
 
-      return {
-        label,
-        value: id,
-      };
-    });
-  }, [siteText]);
+    return articleCategory
+      .map((id) => {
+        const label =
+          siteText.common_actueel.secties.artikelen.categorie_filters[id];
+
+        return {
+          label,
+          value: id,
+        };
+      })
+      .filter((item) => availableCategories.includes(item.value));
+  }, [siteText, content]);
 
   const handleCategoryFilter = useCallback(
     function setNewParam(item: ArticleCategoryType) {
