@@ -14,10 +14,10 @@ import {
   useChoroplethData,
   useChoroplethFeatures,
   useChoroplethTooltip,
-  useDynamicSize,
   useFeatureName,
   useFeatureProps,
   useFillColor,
+  useRespponsiveSize,
 } from '../logic';
 import { TooltipSettings } from '../tooltips/types';
 import { CanvasChoroplethMap } from './canvas-choropleth-map';
@@ -55,7 +55,7 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     accessibility,
     isTabInteractive,
     anchorEventHandlers,
-    dynamicSizeConfiguration,
+    responsiveSizeConfiguration: dynamicSizeConfiguration,
     renderTarget = 'svg',
   } = props;
 
@@ -93,7 +93,7 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     { width = minHeight * (1 / aspectRatio), height = minHeight },
   ] = useResizeObserver<HTMLDivElement>();
 
-  const [mapHeight, padding] = useDynamicSize(
+  const [mapHeight, padding] = useRespponsiveSize(
     width,
     height,
     boundingBoxPadding,

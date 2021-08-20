@@ -58,12 +58,15 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { GenericChoroplethComponent } from '../components/choropleth';
+import { ChoroplethComponent } from '../components/choropleth';
 
-const ChoroplethComponent = dynamic(() => import('../components/choropleth'), {
-  ssr: false,
-  loading: () => <p>Loading component...</p>,
-}) as GenericChoroplethComponent;
+const DynamicChoropleth = dynamic(
+  () => import('../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -243,7 +246,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <ChoroplethComponent
+                  <DynamicChoropleth
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}
@@ -319,7 +322,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <>
                   {selectedMap === 'gm' && (
-                    <ChoroplethComponent
+                    <DynamicChoropleth
                       renderTarget="canvas"
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
@@ -335,7 +338,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'vr' && (
-                    <ChoroplethComponent
+                    <DynamicChoropleth
                       renderTarget="canvas"
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',

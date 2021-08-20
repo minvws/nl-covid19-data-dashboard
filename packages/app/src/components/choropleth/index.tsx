@@ -49,7 +49,7 @@ export type OptionalBoundingBoxPadding = {
   bottom?: number;
 };
 
-export type DynamicSizeConfiguration = {
+export type ResponsiveSizeSettings = {
   /**
    * If the container width is equal or larger than this value, use
    * the associated height and padding.
@@ -67,8 +67,8 @@ export type HeightAndPadding = {
  * An arbitrary number of dynamic size configs, the last item is used as the default.
  * (So for the smallest container size)
  */
-export type DynamicSizeConfigurations = [
-  ...DynamicSizeConfiguration[],
+export type ResponsiveSizeConfiguration = [
+  ...ResponsiveSizeSettings[],
   HeightAndPadding
 ];
 
@@ -100,14 +100,14 @@ export type ChoroplethProps<
    * This defines an optional set of map heights and paddings based
    * on a set of given width break points
    */
-  dynamicSizeConfiguration?: DynamicSizeConfigurations;
+  responsiveSizeConfiguration?: ResponsiveSizeConfiguration;
   renderTarget?: RenderTarget;
 };
 
-export type GenericChoroplethComponent = typeof Choropleth;
+export type ChoroplethComponent = typeof Choropleth;
 
 /**
- * This is a (semi) generic choropleth component that supports a Dutch map of municipalities or safetyregions
+ * This is a (semi) generic choropleth component that supports a Dutch map of municipalities or safety regions
  * and a European map.
  *
  * The type of map that will be rendered can be set using the `map` property, setting this prop will automatically
@@ -121,10 +121,11 @@ export type GenericChoroplethComponent = typeof Choropleth;
  * Most of the choropleths will work using the generic tooltip, but if something custom is required the `formatTooltip`
  * prop is there to help out.
  */
-export default function Choropleth<
-  T extends MapType,
-  K extends UnpackedDataItem<T>
->({ formatTooltip, tooltipPlacement, ...props }: ChoroplethProps<T, K>) {
+export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
+  formatTooltip,
+  tooltipPlacement,
+  ...props
+}: ChoroplethProps<T, K>) {
   const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
   const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();

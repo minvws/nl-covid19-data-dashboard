@@ -1,5 +1,6 @@
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/lib/Node';
+import { useRouter } from 'next/router';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Group, Layer, Line, Rect, Stage } from 'react-konva';
@@ -37,6 +38,8 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const [hover, setHover] = useState<[number, number][][]>();
   const [hoverCode, setHoverCode] = useState<string>();
   const [keyboardActive, setKeyboardActive] = useState(false);
+
+  const router = useRouter();
 
   const [geoInfo, projectedCoordinates] = useProjectedCoordinates(
     choroplethFeatures.area,
@@ -82,8 +85,11 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
   const handleClick = useCallback((evt: KonvaEventObject<MouseEvent>) => {
     evt.cancelBubble = true;
+    console.dir(evt.target.attrs);
+    console.dir(dataOptions.getLink);
     if (isDefined(evt.target.attrs.id) && isDefined(dataOptions.getLink)) {
-      dataOptions.getLink(evt.target.attrs.id);
+      const link = dataOptions.getLink(evt.target.attrs.id);
+      router.push(link);
     }
   }, []);
 
@@ -233,24 +239,23 @@ const Features = memo((props: FeaturesProps) => {
     <>
       <Layer>
         <Rect width={width} height={height} onMouseOver={reset} />
-
-        {projectedCoordinates.map((x, i) => (
-          <Line
-            closed
-            id={geoInfo[i].code}
-            key={i}
-            x={0}
-            y={0}
-            tension={0.5}
-            lineJoin={'round'}
-            strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
-            points={x.flat()}
-            fill={getFillColor(geoInfo[i].code, i)}
-            stroke={featureProps.area.stroke(geoInfo[i].code)}
-            onMouseOver={handleMove}
-            onClick={handleClick}
-          />
-        ))}
+        <Group onMouseOver={handleMove} onClick={handleClick}>
+          {projectedCoordinates.map((x, i) => (
+            <Line
+              closed
+              id={geoInfo[i].code}
+              key={i}
+              x={0}
+              y={0}
+              tension={0.5}
+              lineJoin={'round'}
+              strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
+              points={x.flat()}
+              fill={getFillColor(geoInfo[i].code, i)}
+              stroke={featureProps.area.stroke(geoInfo[i].code)}
+            />
+          ))}
+        </Group>
       </Layer>
     </>
   );

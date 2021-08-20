@@ -1,11 +1,12 @@
 import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
 import { last } from 'lodash';
+import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -40,6 +41,14 @@ import {
 import { getCountryNames } from '~/static-props/utils/get-country-names';
 import { colors } from '~/style/theme';
 import { InPositiveTestsQuery } from '~/types/cms';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 type CompiledCountriesValue = {
   date_start_unix: number;
@@ -166,7 +175,8 @@ export default function PositiefGetesteMensenPage(
               ],
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="in"
               accessibility={{
                 key: 'international_tested_overall_choropleth',
@@ -190,7 +200,7 @@ export default function PositiefGetesteMensenPage(
                   comparedValue={comparedValue}
                 />
               )}
-              dynamicSizeConfiguration={[
+              responsiveSizeConfiguration={[
                 {
                   containerWidth: 600,
                   heightAndPadding: {
