@@ -32,7 +32,7 @@ export const cijferVerantwoordingItem = {
   preview: {
     select: {
       title: 'title.nl',
-      subtitle: 'content.nl',
+      subtitle: 'group.group.nl',
     },
   },
 };
