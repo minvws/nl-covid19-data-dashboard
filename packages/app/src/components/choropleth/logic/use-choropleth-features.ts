@@ -30,7 +30,9 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   data: T[],
   selectedCode?: string
 ): ChoroplethFeatures | undefined {
-  const { data: geoJson } = useSWR<any>(`/api/topo-json/${map}`, (url) =>
+  const { data: geoJson } = useSWR<
+    readonly [CodedGeoJSON, CodedGeoJSON | undefined]
+  >(`/api/topo-json/${map}`, (url) =>
     fetch(url)
       .then((_) => _.json())
       .then((_) => createGeoJson(map, _))

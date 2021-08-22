@@ -32,8 +32,8 @@ type ChoroplethMapProps<
   T extends MapType,
   K extends UnpackedDataItem<T>
 > = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
-  hoverRef: React.RefObject<SVGGElement | HTMLElement>;
-  anchorsRef: React.RefObject<HTMLDivElement>;
+  hoverRef: React.RefObject<SVGGElement | null>;
+  anchorsRef: React.RefObject<HTMLDivElement | null>;
   setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
   isTabInteractive: boolean;
   anchorEventHandlers: AnchorEventHandler;

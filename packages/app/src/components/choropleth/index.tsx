@@ -129,7 +129,7 @@ export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
   const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
   const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
-  const hoverRef = useRef<SVGGElement | HTMLElement>(null);
+  const hoverRef = useRef<SVGGElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   useOnClickOutside([tooltipRef, hoverRef], () => setTooltip(undefined));

@@ -16,7 +16,7 @@
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.1",
     "ts-morph": "^11.0.0",
-    "ts-node": "^10.2.0"
+    "ts-node": "^10.2.1"
   },
   "scripts": {
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",

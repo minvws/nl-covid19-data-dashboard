@@ -114,10 +114,7 @@ const nextConfig = {
         'unist-util-visit-parents',
         '../../node_modules/unist-util-visit-parents',
       ],
-      ['d3-color', '../../node_modules/d3-interpolate/node_modules/d3-color'],
-      ['d3-geo', '../../node_modules/d3-geo'],
-      ['d3-interpolate', '../../node_modules/d3-interpolate'],
-      ['balanced-match', '../../node_modules/balanced-match'],
+      ['strip-ansi', '../../node_modules/strip-ansi'],
     ];
 
     duplicatePackageResolves.forEach(([packageName, resolvedPath]) => {
@@ -130,14 +127,14 @@ const nextConfig = {
         paths: true,
       })
     );
-    if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(
-        new DuplicatePackageCheckerPlugin({
-          verbose: true,
-          showHelp: true,
-        })
-      );
-    }
+    //if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(
+      new DuplicatePackageCheckerPlugin({
+        verbose: true,
+        showHelp: true,
+      })
+    );
+    //}
 
     return config;
   },

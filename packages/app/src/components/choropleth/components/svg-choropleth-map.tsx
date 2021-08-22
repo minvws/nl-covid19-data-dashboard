@@ -16,9 +16,9 @@ import { MercatorGroup } from './mercator-group';
 import { MercatorHoverGroup } from './mercator-hover-group';
 
 export type GenericChoroplethMapProps = {
-  containerRef: MutableRefObject<HTMLElement>;
-  hoverRef: React.RefObject<SVGGElement | HTMLElement>;
-  anchorsRef: React.RefObject<HTMLDivElement>;
+  containerRef: MutableRefObject<HTMLDivElement | null>;
+  hoverRef: MutableRefObject<SVGGElement | null>;
+  anchorsRef: MutableRefObject<HTMLDivElement | null>;
   dataOptions: DataOptions;
   width: number;
   height: number;

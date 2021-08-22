@@ -2,14 +2,7 @@ import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
 import { KonvaEventObject } from 'konva/lib/Node';
 import { Shape } from 'konva/lib/Shape';
-import {
-  FocusEvent,
-  MutableRefObject,
-  RefObject,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { MutableRefObject, RefObject, useEffect, useMemo, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { IntlContextProps } from '~/intl/hooks/use-intl';
@@ -79,16 +72,19 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
     }
 
     const container = containerRef.current;
+    if (!isPresent(container)) {
+      return;
+    }
 
-    function handleBubbledFocusIn(event: FocusEvent) {
+    function handleBubbledFocusIn(event: FocusEvent): any {
       const link = event.target as HTMLAnchorElement;
-      if (!container || !link) {
+      if (!isDefined(link)) {
         return;
       }
 
       const code = link.getAttribute('data-id');
 
-      if (isPresent(code)) {
+      if (isPresent(code) && isPresent(container)) {
         const bboxContainer = container.getBoundingClientRect();
         const bboxLink = link.getBoundingClientRect();
         const left = bboxLink.left - bboxContainer.left;
@@ -120,12 +116,12 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
     /**
      * `focusin` and `focusout` events bubble whereas `focus` doesn't
      */
-    container?.addEventListener('focusin', handleBubbledFocusIn);
-    container?.addEventListener('focusout', handleBubbledFocusOut);
+    container.addEventListener('focusin', handleBubbledFocusIn);
+    container.addEventListener('focusout', handleBubbledFocusOut);
 
     return () => {
-      container?.removeEventListener('focusin', handleBubbledFocusIn);
-      container?.removeEventListener('focusout', handleBubbledFocusOut);
+      container.removeEventListener('focusin', handleBubbledFocusIn);
+      container.removeEventListener('focusout', handleBubbledFocusOut);
     };
   }, [
     containerRef,
