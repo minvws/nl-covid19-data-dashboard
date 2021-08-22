@@ -21,7 +21,6 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     dataOptions,
     width,
     height,
-    annotations,
     featureOverHandler,
     featureOutHandler,
     tooltipTrigger,
@@ -48,7 +47,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   );
 
   const selectFeature = useCallback(
-    (code: string | undefined, isKeyboardAction: boolean = false) => {
+    (code: string | undefined, isKeyboardAction = false) => {
       setKeyboardActive(isKeyboardAction);
       if (!isDefined(code)) {
         return;
@@ -80,18 +79,19 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
       featureOverHandler(evt);
     },
-    [setHover]
+    [setHover, selectFeature, featureOverHandler]
   );
 
-  const handleClick = useCallback((evt: KonvaEventObject<MouseEvent>) => {
-    evt.cancelBubble = true;
-    console.dir(evt.target.attrs);
-    console.dir(dataOptions.getLink);
-    if (isDefined(evt.target.attrs.id) && isDefined(dataOptions.getLink)) {
-      const link = dataOptions.getLink(evt.target.attrs.id);
-      router.push(link);
-    }
-  }, []);
+  const handleClick = useCallback(
+    (evt: KonvaEventObject<MouseEvent>) => {
+      evt.cancelBubble = true;
+      if (isDefined(evt.target.attrs.id) && isDefined(dataOptions.getLink)) {
+        const link = dataOptions.getLink(evt.target.attrs.id);
+        router.push(link);
+      }
+    },
+    [router, dataOptions]
+  );
 
   const reset = useCallback(() => {
     setHover(undefined);
@@ -99,13 +99,15 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     if (isDefined(featureOutHandler)) {
       featureOutHandler();
     }
-  }, [setHover]);
+  }, [setHover, setHoverCode, featureOutHandler]);
 
   const localContainerRef = useRef<any>(null);
 
   useEffect(() => {
     containerRef.current = localContainerRef.current?.content;
-  }, []);
+  }, [containerRef]);
+
+  const hoveredRef = useRef<Konva.Group>(null);
 
   useEffect(() => {
     if (!keyboardActive) {
@@ -119,9 +121,8 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
       const y = Math.round(box.y + box.height / 2);
       tooltipTrigger({ code: hoverCode, x, y });
     }
-  });
+  }, [hoverCode, hoveredRef, tooltipTrigger, keyboardActive]);
 
-  const hoveredRef = useRef<Konva.Group>(null);
   const { getLink } = dataOptions;
 
   return (
@@ -217,23 +218,26 @@ const Features = memo((props: FeaturesProps) => {
     width,
   } = props;
 
-  const getFillColor = useCallback((code: string, index: number) => {
-    /**
-     * So, this is a hack. For some reason, parts of the waters of Zeeland are treated
-     * as features on the safety region map and would therefore get colored in, which is incorrect.
-     * This manually checks whether the feature is a piece of land or water. (The indexes
-     * were determined by investigating the converted data)
-     */
-    if (code === 'VR19') {
-      const vr19s = geoInfo.filter((x) => x.code === 'VR19');
-      const idx = vr19s.indexOf(geoInfo[index]);
-      if (idx === 5 || idx === 0) {
-        return featureProps.area.fill(code);
+  const getFillColor = useCallback(
+    (code: string, index: number) => {
+      /**
+       * So, this is a hack. For some reason, parts of the waters of Zeeland are treated
+       * as features on the safety region map and would therefore get colored in, which is incorrect.
+       * This manually checks whether the feature is a piece of land or water. (The indexes
+       * were determined by investigating the converted data)
+       */
+      if (code === 'VR19') {
+        const vr19s = geoInfo.filter((x) => x.code === 'VR19');
+        const idx = vr19s.indexOf(geoInfo[index]);
+        if (idx === 5 || idx === 0) {
+          return featureProps.area.fill(code);
+        }
+        return 'white';
       }
-      return 'white';
-    }
-    return featureProps.area.fill(code);
-  }, []);
+      return featureProps.area.fill(code);
+    },
+    [featureProps.area, geoInfo]
+  );
 
   return (
     <>

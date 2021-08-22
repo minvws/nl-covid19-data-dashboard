@@ -4,7 +4,7 @@ import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
 import { hash } from '~/utils/api/hash';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { param } = req.query;
+  //const { param } = req.query;
 
   const stage = new Konva.Stage({
     container: 'div',
