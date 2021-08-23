@@ -84,7 +84,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   );
 
   const handleMouseOver = useCallback(
-    (evt: KonvaEventObject<MouseEvent>) => {
+    (evt: KonvaEventObject<MouseEvent | TouchEvent>) => {
       evt.cancelBubble = true;
 
       if (!isDefined(evt.target.attrs.id)) {
@@ -100,7 +100,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   );
 
   const handleMouseClick = useCallback(
-    (evt: KonvaEventObject<MouseEvent>) => {
+    (evt: KonvaEventObject<MouseEvent | TouchEvent>) => {
       evt.cancelBubble = true;
       if (isDefined(evt.target.attrs.id) && isDefined(dataOptions.getLink)) {
         const link = dataOptions.getLink(evt.target.attrs.id);

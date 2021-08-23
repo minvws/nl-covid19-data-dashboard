@@ -1,7 +1,7 @@
 import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
-import { KonvaEventObject } from 'konva/lib/Node';
-import { Shape } from 'konva/lib/Shape';
+import { KonvaEventObject } from 'konva/types/Node';
+import { Shape } from 'konva/types/Shape';
 import { MutableRefObject, RefObject, useEffect, useMemo, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
@@ -211,7 +211,9 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   map: MapType,
   metricPropertyFormatter: (value: number) => string
 ) => {
-  return (event: React.MouseEvent | KonvaEventObject<MouseEvent>) => {
+  return (
+    event: React.MouseEvent | KonvaEventObject<MouseEvent | TouchEvent>
+  ) => {
     const elm = event.target;
     const code = isDomElement(elm)
       ? elm.getAttribute('data-id')
@@ -256,7 +258,9 @@ function isDomElement(element: any): element is HTMLElement {
   return 'getAttribute' in element;
 }
 
-function isKonvaEvent(event: any): event is KonvaEventObject<MouseEvent> {
+function isKonvaEvent(
+  event: any
+): event is KonvaEventObject<MouseEvent | TouchEvent> {
   return 'evt' in event;
 }
 
