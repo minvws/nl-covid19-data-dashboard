@@ -1,8 +1,8 @@
 import { GmCollectionHospitalNice } from '@corona-dashboard/common';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
-import { Choropleth } from '~/components/choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips';
 import { Heading, Text } from '~/components/typography';
 import { gmData } from '~/data/gm';
@@ -18,6 +18,15 @@ import { getLastGeneratedDate } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { ChoroplethComponent } from '../../components/choropleth';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -68,7 +77,8 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             maxHeight={960}
             margin="0 auto"
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               accessibility={{
                 key: 'municipality_navigation_map',
                 features: ['keyboard_choropleth'],

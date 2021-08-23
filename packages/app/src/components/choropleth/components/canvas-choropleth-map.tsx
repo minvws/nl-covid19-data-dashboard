@@ -1,5 +1,5 @@
 import Konva from 'konva';
-import { KonvaEventObject } from 'konva/lib/Node';
+import { KonvaEventObject } from 'konva/types/Node';
 import { useRouter } from 'next/router';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -149,6 +149,9 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         ref={localContainerRef}
         onMouseOut={featureOutHandler}
         role="img"
+        style={{
+          overflow: 'hidden',
+        }}
       >
         <Features
           width={width}

@@ -14,7 +14,6 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const path = require('path');
 
 const nextConfig = {
-  experimental: { esmExternals: true },
   /**
    * Enables react strict mode
    * https://nextjs.org/docs/api-reference/next.config.js/react-strict-mode
@@ -114,7 +113,10 @@ const nextConfig = {
         'unist-util-visit-parents',
         '../../node_modules/unist-util-visit-parents',
       ],
-      ['strip-ansi', '../../node_modules/strip-ansi'],
+      ['d3-color', '../../node_modules/d3-interpolate/node_modules/d3-color'],
+      ['d3-geo', '../../node_modules/d3-geo'],
+      ['d3-interpolate', '../../node_modules/d3-interpolate'],
+      ['balanced-match', '../../node_modules/balanced-match'],
     ];
 
     duplicatePackageResolves.forEach(([packageName, resolvedPath]) => {
@@ -127,14 +129,14 @@ const nextConfig = {
         paths: true,
       })
     );
-    //if (process.env.NODE_ENV === 'production') {
-    config.plugins.push(
-      new DuplicatePackageCheckerPlugin({
-        verbose: true,
-        showHelp: true,
-      })
-    );
-    //}
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new DuplicatePackageCheckerPlugin({
+          verbose: true,
+          showHelp: true,
+        })
+      );
+    }
 
     return config;
   },

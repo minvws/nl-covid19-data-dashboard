@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -36,6 +37,14 @@ import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export { getStaticPaths } from '~/static-paths/gm';
 
@@ -154,7 +163,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               thresholds: thresholds.gm.admissions_on_date_of_reporting,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'hospital_admissions_choropleth',
