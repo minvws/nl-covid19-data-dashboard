@@ -18,7 +18,7 @@
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"
     },
-    "vaccine_coverage_per_age_group_18_plus": {
+    "vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus": {
       "$ref": "#/definitions/diff_decimal"
     }
   },
@@ -27,7 +27,7 @@
     "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
     "deceased_rivm__covid_daily",
-    "vaccine_coverage_per_age_group_18_plus"
+    "vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus"
   ],
   "additionalProperties": false,
   "definitions": {

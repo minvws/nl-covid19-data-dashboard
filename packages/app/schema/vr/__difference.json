@@ -42,7 +42,7 @@
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"
     },
-    "vaccine_coverage_per_age_group_18_plus": {
+    "vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus": {
       "$ref": "#/definitions/diff_decimal"
     }
   },
@@ -60,7 +60,7 @@
     "disability_care__infected_locations_total",
     "elderly_at_home__positive_tested_daily",
     "deceased_rivm__covid_daily",
-    "vaccine_coverage_per_age_group_18_plus"
+    "vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus"
   ],
   "additionalProperties": false,
   "definitions": {

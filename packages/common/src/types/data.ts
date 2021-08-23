@@ -39,7 +39,7 @@ export interface GmDifference {
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceDecimal;
   deceased_rivm__covid_daily: DifferenceInteger;
-  vaccine_coverage_per_age_group_18_plus: DifferenceDecimal;
+  vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -970,7 +970,7 @@ export interface VrDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
-  vaccine_coverage_per_age_group_18_plus: DifferenceDecimal;
+  vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
