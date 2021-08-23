@@ -1,8 +1,7 @@
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { Test } from '@corona-dashboard/icons';
-import { Ziekenhuis } from '@corona-dashboard/icons';
+import { Test, Ziekenhuis } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { InlineText } from '~/components/typography';
