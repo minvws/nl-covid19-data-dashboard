@@ -177,3 +177,5 @@ icons.forEach((i) => {
     'utf-8'
   );
 });
+
+console.log('Done writing Icons');
