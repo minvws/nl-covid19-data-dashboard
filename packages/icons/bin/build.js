@@ -161,7 +161,7 @@ icons.forEach((i) => {
   fs.writeFileSync(location, component, 'utf-8');
 
   // eslint-disable-next-line no-console
-  console.log('Successfully built', ComponentName);
+  // console.log('Successfully built', ComponentName);
 
   const exportString = `export { default as ${ComponentName} } from './icons/${i}';\r\n`;
   fs.appendFileSync(

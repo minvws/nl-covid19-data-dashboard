@@ -8,8 +8,8 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "rm -rf src/icons && node bin/build.js",
-    "build:es": "rm -rf dist && babel src --out-dir dist --copy-files",
+    "compile": "rimraf src/icons && node bin/build.js",
+    "build:es": "rimraf dist && babel src --out-dir dist --copy-files --scripts-prepend-node-path",
     "build": "concurrently \"npm:build:*\"",
     "lint": "echo 'Linting disabled for the icons package'"
   },
@@ -36,6 +36,7 @@
     "eslint-plugin-react": "^7.14.2",
     "lodash": "^4.17.21",
     "prettier-eslint": "^9.0.0",
+    "rimraf": "^3.0.2",
     "rollup": "^2.3.3",
     "rollup-plugin-babel": "^4.3.3",
     "svgson": "^5.2.1",
