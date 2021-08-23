@@ -28,6 +28,7 @@ import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
@@ -89,6 +90,10 @@ export function NlLayout(props: NlLayoutProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+
+  const { isEnabled: isGpSuspicionsHistorical } = useFeature(
+    'nlGpSuspicionsIsHistorical'
+  );
 
   return (
     <>
@@ -365,14 +370,20 @@ export function NlLayout(props: NlLayoutProps) {
                   icon={<Arts />}
                   title={siteText.verdenkingen_huisartsen.titel_sidebar}
                 >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="doctor"
-                    metricProperty="covid_symptoms"
-                    localeTextKey="verdenkingen_huisartsen"
-                    differenceKey="doctor__covid_symptoms"
-                  />
+                  {isGpSuspicionsHistorical ? (
+                    <SidebarKpiValue
+                      title={siteText.verdenkingen_huisartsen.kpi_titel}
+                    />
+                  ) : (
+                    <SidebarMetric
+                      data={data}
+                      scope="nl"
+                      metricName="doctor"
+                      metricProperty="covid_symptoms"
+                      localeTextKey="verdenkingen_huisartsen"
+                      differenceKey="doctor__covid_symptoms"
+                    />
+                  )}
                 </MetricMenuItemLink>
               </CategoryMenu>
 
