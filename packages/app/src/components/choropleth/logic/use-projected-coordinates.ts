@@ -54,6 +54,8 @@ export function useProjectedCoordinates(
       return acc;
     }, [] as GeoInfo[]);
 
+    console.dir(fitExtent);
+
     const projection = geoProjection().fitExtent(fitExtent[0], fitExtent[1]);
 
     const projectedCoordinates = geoInfo

@@ -50,7 +50,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const router = useRouter();
 
   const [geoInfo, projectedCoordinates] = useProjectedCoordinates(
-    choroplethFeatures.area,
+    choroplethFeatures.hover,
     mapProjection,
     fitExtent
   );
@@ -116,12 +116,6 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     }
   }, [setHover, setHoverCode, featureOutHandler]);
 
-  const localContainerRef = useRef<any>(null);
-
-  useEffect(() => {
-    containerRef.current = localContainerRef.current?.content;
-  }, [containerRef]);
-
   const hoveredRef = useRef<Konva.Group>(null);
 
   useEffect(() => {
@@ -157,43 +151,50 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           )}
         </>
       )}
-
-      <Stage
-        width={width}
-        height={height}
-        ref={localContainerRef}
-        onMouseOut={featureOutHandler}
-        role="img"
+      <div
+        ref={containerRef}
         style={{
-          overflow: 'hidden',
-          border: '1px solid black',
+          minHeight: height,
+          maxHeight: '75vh',
+          maxWidth: '100%',
         }}
       >
-        <Features
+        <Stage
           width={width}
           height={height}
-          geoInfo={geoInfo}
-          projectedCoordinates={projectedCoordinates}
-          handleMove={handleMove}
-          handleClick={handleClick}
-          reset={reset}
-          selectFeature={selectFeature}
-          featureProps={featureProps}
-          dataOptions={dataOptions}
+          onMouseOut={featureOutHandler}
+          role="img"
+          style={{
+            overflow: 'hidden',
+            border: '1px solid black',
+          }}
         >
-          <HighlightedFeature
-            feature={highlight}
+          <Features
+            width={width}
+            height={height}
+            geoInfo={geoInfo}
+            projectedCoordinates={projectedCoordinates}
+            handleMove={handleMove}
+            handleClick={handleClick}
+            reset={reset}
+            selectFeature={selectFeature}
             featureProps={featureProps}
-            code={dataOptions.selectedCode}
+            dataOptions={dataOptions}
+          >
+            <HighlightedFeature
+              feature={highlight}
+              featureProps={featureProps}
+              code={dataOptions.selectedCode}
+            />
+          </Features>
+          <HoveredFeature
+            hoveredRef={hoveredRef}
+            hover={hover}
+            hoverCode={hoverCode}
+            featureProps={featureProps}
           />
-        </Features>
-        <HoveredFeature
-          hoveredRef={hoveredRef}
-          hover={hover}
-          hoverCode={hoverCode}
-          featureProps={featureProps}
-        />
-      </Stage>
+        </Stage>
+      </div>
     </>
   );
 };

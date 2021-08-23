@@ -47,7 +47,7 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
     switch (map) {
       case 'gm': {
         assert(isDefined(outlineGeo), 'outlineGeo is required for map type gm');
-        const boundingBoxGeo = filterBoundingBoxBySelectedGmCode(
+        const surroundingGeo = filterSurroundingFeaturesBySelectedGmCode(
           featureGeo,
           selectedCode
         );
@@ -55,8 +55,8 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
         return {
           outline: outlineGeo,
           hover: hoverGeo,
-          area: boundingBoxGeo,
-          boundingBox: selectedCode ? hoverGeo : outlineGeo,
+          area: surroundingGeo,
+          boundingBox: hoverGeo,
         };
       }
       case 'vr': {
@@ -100,7 +100,7 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   }, [map, selectedCode, data, geoJson]);
 }
 
-function filterBoundingBoxBySelectedGmCode(
+function filterSurroundingFeaturesBySelectedGmCode(
   geoJson: CodedGeoJSON,
   selectedGmCode?: string
 ) {
