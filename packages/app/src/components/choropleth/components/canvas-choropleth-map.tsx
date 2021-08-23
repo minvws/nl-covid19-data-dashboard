@@ -24,6 +24,8 @@ import {
 import { AnchorEventHandler } from './choropleth-map';
 import { GenericChoroplethMapProps } from './svg-choropleth-map';
 
+Konva.pixelRatio = 1;
+
 export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const {
     containerRef,
@@ -81,7 +83,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     [setHover, geoInfo, projectedCoordinates]
   );
 
-  const handleMove = useCallback(
+  const handleMouseOver = useCallback(
     (evt: KonvaEventObject<MouseEvent>) => {
       evt.cancelBubble = true;
 
@@ -97,7 +99,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     [setHover, selectFeature, featureOverHandler]
   );
 
-  const handleClick = useCallback(
+  const handleMouseClick = useCallback(
     (evt: KonvaEventObject<MouseEvent>) => {
       evt.cancelBubble = true;
       if (isDefined(evt.target.attrs.id) && isDefined(dataOptions.getLink)) {
@@ -114,9 +116,13 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     if (isDefined(featureOutHandler)) {
       featureOutHandler();
     }
+    if (isPresent(stageRef.current)) {
+      stageRef.current.container().style.cursor = 'default';
+    }
   }, [setHover, setHoverCode, featureOutHandler]);
 
   const hoveredRef = useRef<Konva.Group>(null);
+  const stageRef = useRef<Konva.Stage>(null);
 
   useEffect(() => {
     if (!keyboardActive) {
@@ -131,6 +137,12 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
       tooltipTrigger({ code: hoverCode, x, y });
     }
   }, [hoverCode, hoveredRef, tooltipTrigger, keyboardActive]);
+
+  const handleMouseEnter = useCallback(() => {
+    if (isPresent(stageRef.current)) {
+      stageRef.current.container().style.cursor = 'pointer';
+    }
+  }, [stageRef]);
 
   const { getLink } = dataOptions;
 
@@ -160,13 +172,13 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         }}
       >
         <Stage
+          ref={stageRef}
           width={width}
           height={height}
           onMouseOut={featureOutHandler}
           role="img"
           style={{
             overflow: 'hidden',
-            border: '1px solid black',
           }}
         >
           <Features
@@ -174,8 +186,9 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
             height={height}
             geoInfo={geoInfo}
             projectedCoordinates={projectedCoordinates}
-            handleMove={handleMove}
-            handleClick={handleClick}
+            handleMouseOver={handleMouseOver}
+            handleMouseClick={handleMouseClick}
+            handleMouseEnter={handleMouseEnter}
             reset={reset}
             selectFeature={selectFeature}
             featureProps={featureProps}
@@ -264,9 +277,10 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
 type FeaturesProps = {
   projectedCoordinates: [number, number][][];
   geoInfo: GeoInfo[];
-  handleMove: any;
-  handleClick: any;
-  reset: any;
+  handleMouseOver: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
+  handleMouseClick: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
+  handleMouseEnter: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
+  reset: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
   selectFeature: (code: string) => void;
   featureProps: FeatureProps;
   height: number;
@@ -279,8 +293,9 @@ const Features = memo((props: FeaturesProps) => {
   const {
     projectedCoordinates,
     geoInfo,
-    handleMove,
-    handleClick,
+    handleMouseOver,
+    handleMouseClick,
+    handleMouseEnter,
     reset,
     featureProps,
     height,
@@ -321,10 +336,17 @@ const Features = memo((props: FeaturesProps) => {
   return (
     <>
       <Layer>
-        <Rect width={width} height={height} onMouseOver={reset} />
-        <Group onMouseOver={handleMove} onClick={handleClick}>
+        <Rect width={width} height={height} onTap={reset} />
+        <Group
+          onMouseOver={handleMouseOver}
+          onClick={handleMouseClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={reset}
+          onTap={handleMouseOver}
+        >
           {projectedCoordinates.map((x, i) => (
             <Line
+              perfectDrawEnabled={false}
               closed
               id={geoInfo[i].code}
               key={i}
