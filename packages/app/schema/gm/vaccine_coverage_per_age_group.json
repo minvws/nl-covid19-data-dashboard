@@ -18,7 +18,6 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "age_group_percentage",
         "age_group_range",
         "fully_vaccinated_percentage",
         "partially_vaccinated_percentage",
@@ -37,9 +36,6 @@
             "12-17",
             "18+"
           ]
-        },
-        "age_group_percentage": {
-          "type":[ "integer", "null"]
         },
         "fully_vaccinated_percentage": {
           "type":[ "integer", "null"]

@@ -18,7 +18,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "age_group_percentage",
+        "vrcode",
         "age_group_range",
         "fully_vaccinated_percentage",
         "partially_vaccinated_percentage",
@@ -30,6 +30,10 @@
         "date_of_report_unix"
       ],
       "properties": {
+        "vrcode": {
+          "type": "string",
+          "pattern": "^VR[0-9]+$"
+        },
         "age_group_range": {
           "type": "string",
           "enum": [
@@ -37,9 +41,6 @@
             "12-17",
             "18+"
           ]
-        },
-        "age_group_percentage": {
-          "type":[ "integer", "null"]
         },
         "fully_vaccinated_percentage": {
           "type":[ "integer", "null"]
