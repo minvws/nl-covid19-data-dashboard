@@ -1,16 +1,14 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const Up = forwardRef(({ color = 'currentColor', size = 36, ...rest }, ref) => {
+const Up = forwardRef(({ ...rest }, ref) => {
   return (
     <svg
       ref={ref}
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 36 36"
-      fill="currentColor"
-      stroke="none"
+      role="img"
+      focusable="false"
+      viewBox="0 0 24 24"
+      fill="none"
       {...rest}
     >
       <path
@@ -22,8 +20,11 @@ const Up = forwardRef(({ color = 'currentColor', size = 36, ...rest }, ref) => {
 });
 
 Up.propTypes = {
-  color: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  // color: PropTypes.string,
+  // size: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.number
+  // ]),
 };
 
 Up.displayName = 'Up';

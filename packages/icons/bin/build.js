@@ -4,8 +4,9 @@ const path = require('path');
 const fs = require('fs');
 const format = require('prettier-eslint');
 const upperCamelCase = require('uppercamelcase');
+const camelCase = require('camelcase');
+const lodash = require('lodash');
 
-// const { parse } = require('svg-parser');
 const { parseSync, stringify } = require('svgson');
 
 const rootDir = path.join(__dirname, '..');
@@ -38,8 +39,8 @@ const initialTypeDefinitions = `/// <reference types="react" />
 import { FC, SVGAttributes } from 'react';
 
 export interface IconProps extends SVGAttributes<SVGElement> {
-  color?: string;
-  size?: string | number;
+  // color?: string;
+  // size?: string | number;
 }
 
 export type Icon = FC<IconProps>;
@@ -52,18 +53,38 @@ fs.writeFileSync(
   'utf-8'
 );
 
+// We want our icons to predictable in usage. That means we filter out properties that we think
+// should be applied at an instance level instead of at a source level. E.g. we don't want to set
+// focusable=false or aria-hidden=true in the source SVG files
+const allowedAttributes = [
+  'width',
+  'height',
+  'fill',
+  'stroke',
+  'viewBox',
+  'role',
+  'focusable',
+  'rest',
+];
+
 const attrsToString = (attrs) => {
-  return Object.keys(attrs)
-    .map((key) => {
-      if (key === 'width' || key === 'height') {
-        return key + '={' + attrs[key] + '}';
-      }
-      if (key === 'rest') {
-        return '{...rest}';
-      }
-      return key + '="' + attrs[key] + '"';
-    })
-    .join(' ');
+  return (
+    Object.keys(attrs)
+      // Remove all excluded keys because we want clean, predictable components
+      .filter((key) => {
+        return allowedAttributes.includes(key);
+      })
+      .map((key) => {
+        if (key === 'width' || key === 'height') {
+          return key + '={' + attrs[key] + '}';
+        }
+        if (key === 'rest') {
+          return '{...rest}';
+        }
+        return key + '="' + attrs[key] + '"';
+      })
+      .join(' ')
+  );
 };
 
 icons.forEach((i) => {
@@ -71,39 +92,31 @@ icons.forEach((i) => {
   const ComponentName = upperCamelCase(i);
 
   const parsedSvg = parseSync(svgIcons[i]);
-  const svgWidth = parsedSvg.attributes.width || 36;
-  const svgHeight = parsedSvg.attributes.height || 36;
+  const { attributes } = parsedSvg;
 
+  /**
+   * All keys in React need to be camelCased in order to work
+   * We loop over the attributes and rename them automatically with the camelcase package
+   */
   parsedSvg.children = parsedSvg.children.map((child) => {
     const copy = child;
-    if (copy.attributes['stroke-width']) {
-      copy.attributes.strokeWidth = copy.attributes['stroke-width'];
-      delete copy.attributes['stroke-width'];
-    }
-    if (copy.attributes['stroke-linecap']) {
-      copy.attributes.strokeLinecap = copy.attributes['stroke-linecap'];
-      delete copy.attributes['stroke-linecap'];
-    }
-    if (copy.attributes['fill-rule']) {
-      copy.attributes.fillRule = copy.attributes['fill-rule'];
-      delete copy.attributes['fill-rule'];
-    }
-    if (copy.attributes['clip-rule']) {
-      copy.attributes.clipRule = copy.attributes['clip-rule'];
-      delete copy.attributes['clip-rule'];
-    }
+    copy.attributes = lodash.mapKeys(copy.attributes, (_value, key) => {
+      return camelCase(key);
+    });
+
     return copy;
   });
 
+  // Stringify the children so we can wrap it in a SVG container later
   const iconWithoutWrapper = stringify(parsedSvg.children);
 
+  // There's almost no benefit to the manual SVG containing element so far.
+  // The problem is we didn't output all SVG's as paths. Some use strokes and some use fills.
+  // If we make sure we outline all components, we can use fill and stroke in a predictable manner.
+  // Now... not so much.
   const defaultAttrs = {
     xmlns: 'http://www.w3.org/2000/svg',
-    width: 'size',
-    height: 'size',
-    viewBox: `0 0 ${svgWidth} ${svgHeight}`,
-    fill: 'currentColor',
-    stroke: 'none',
+    ...attributes,
     rest: '...rest',
   };
 
@@ -112,7 +125,7 @@ icons.forEach((i) => {
     import PropTypes from 'prop-types';
 
 
-    const ${ComponentName} = forwardRef(({ color = 'currentColor', size = 36, ...rest }, ref) => {
+    const ${ComponentName} = forwardRef(({ ...rest }, ref) => {
       return (
         <svg ref={ref} ${attrsToString(defaultAttrs)} >
           ${iconWithoutWrapper}
@@ -121,11 +134,11 @@ icons.forEach((i) => {
     });
 
     ${ComponentName}.propTypes = {
-      color: PropTypes.string,
-      size: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-      ]),
+      // color: PropTypes.string,
+      // size: PropTypes.oneOfType([
+      //   PropTypes.string,
+      //   PropTypes.number
+      // ]),
     }
 
     ${ComponentName}.displayName = '${ComponentName}'
