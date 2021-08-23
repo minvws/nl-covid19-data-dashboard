@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
 import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
@@ -17,6 +18,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -77,6 +79,7 @@ export function GmLayout(props: GmLayoutProps) {
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
+  const vaccinationFeature = useFeature('gmVaccinationPage');
 
   const showMetricLinks = router.route !== '/gemeente';
 
@@ -141,6 +144,27 @@ export function GmLayout(props: GmLayoutProps) {
                 <Menu spacing={4}>
                   {sidebarData && (
                     <>
+                      {vaccinationFeature.isEnabled && (
+                        <CategoryMenu
+                          title={siteText.gemeente_layout.headings.vaccinaties}
+                        >
+                          <MetricMenuItemLink
+                            href={reverseRouter.gm.vaccinaties(code)}
+                            icon={<VaccinatieIcon />}
+                            title={siteText.gemeente_vaccinaties.titel_sidebar}
+                          >
+                            {/* <SidebarMetric
+                              data={sidebarData}
+                              scope="gm"
+                              metricName="hospital_nice"
+                              metricProperty="admissions_on_date_of_reporting"
+                              localeTextKey="gemeente_vaccinaties"
+                              differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
+                            /> */}
+                          </MetricMenuItemLink>
+                        </CategoryMenu>
+                      )}
+
                       <CategoryMenu
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
                       >
