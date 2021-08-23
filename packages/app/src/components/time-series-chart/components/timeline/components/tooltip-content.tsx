@@ -112,7 +112,7 @@ function ChevronButton({
       style={{ transform: rotate ? 'rotate(180deg)' : undefined }}
     >
       <IconButton title={title} onClick={onClick} size={13} padding={2}>
-        <Chevron aria-hidden />
+        <Chevron aria-hidden={true} />
       </IconButton>
     </Box>
   );

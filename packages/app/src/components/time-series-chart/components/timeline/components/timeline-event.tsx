@@ -8,6 +8,7 @@ import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { TimelineEventXOffset } from '../logic';
 import { TimelineMarker } from './timeline-marker';
 
@@ -103,7 +104,13 @@ function TooltipTrigger({
 }) {
   const breakpoints = useBreakpoints();
   const isTouch = useIsTouchDevice();
-  const contentWithRef = <div ref={contentRef}>{content}</div>;
+  const uniqueId = useUniqueId();
+
+  const contentWithRef = (
+    <div ref={contentRef} id={uniqueId}>
+      {content}
+    </div>
+  );
 
   return (
     <WithTooltip
@@ -125,10 +132,10 @@ function TooltipTrigger({
          */
         onBlur={isTouch ? undefined : onBlur}
         /**
-         * Somehow without the aria-role='text' the screenreader won't read the
+         * Somehow without the role='text' the screenreader won't read the
          * tooltip content..?
          */
-        aria-role="text"
+        aria-labelledby={uniqueId}
       >
         {children}
       </div>
