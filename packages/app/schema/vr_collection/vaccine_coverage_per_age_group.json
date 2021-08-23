@@ -21,13 +21,10 @@
         "vrcode",
         "age_group_range",
         "fully_vaccinated_percentage",
-        "partially_vaccinated_percentage",
-        "partially_or_fully_vaccinated_percentage",
         "birthyear_range",
-        "partially_or_fully_vaccinated_percentage_label",
+        "fully_vaccinated_percentage_label",
         "date_of_insertion_unix",
-        "date_unix",
-        "date_of_report_unix"
+        "date_unix"
       ],
       "properties": {
         "vrcode": {
@@ -45,26 +42,18 @@
         "fully_vaccinated_percentage": {
           "type":[ "integer", "null"]
         },
-        "partially_vaccinated_percentage": {
-          "type":[ "integer", "null"]
-        },
-        "partially_or_fully_vaccinated_percentage": {
-          "type":[ "integer", "null"]
-        },
         "birthyear_range": {
           "type": "string",
           "pattern": "^[0-9]*-[0-9]*$"
         },
-        "partially_or_fully_vaccinated_percentage_label": {
-          "type": ["string", "null"]
+        "fully_vaccinated_percentage_label": {
+          "type": ["string", "null"],
+          "pattern": "^([0-9]+-)*[0-9]+$"
         },
         "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
-          "type": "integer"
-        },
-        "date_of_report_unix": {
           "type": "integer"
         }
       }

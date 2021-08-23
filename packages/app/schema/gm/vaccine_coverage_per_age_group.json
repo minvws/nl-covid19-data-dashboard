@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "gm_vaccine_coverage_per_age_group",
   "type": "object",
-  "required": ["values", "last_value"],
+  "required": ["last_value"],
   "additionalProperties": false,
   "properties": {
     "values": {
@@ -10,6 +10,9 @@
       "items": {
         "$ref": "#/definitions/value"
       }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
     }
   },
   "definitions": {
@@ -20,13 +23,12 @@
       "required": [
         "age_group_range",
         "fully_vaccinated_percentage",
-        "partially_vaccinated_percentage",
-        "partially_or_fully_vaccinated_percentage",
+        "has_1_shot_percentage",
+        "fully_vaccinated_percentage_label",
+        "has_1_shot_percentage_label",
         "birthyear_range",
-        "partially_or_fully_vaccinated_percentage_label",
         "date_of_insertion_unix",
-        "date_unix",
-        "date_of_report_unix"
+        "date_unix"
       ],
       "properties": {
         "age_group_range": {
@@ -40,26 +42,25 @@
         "fully_vaccinated_percentage": {
           "type":[ "integer", "null"]
         },
-        "partially_vaccinated_percentage": {
-          "type":[ "integer", "null"]
-        },
-        "partially_or_fully_vaccinated_percentage": {
+        "has_1_shot_percentage": {
           "type":[ "integer", "null"]
         },
         "birthyear_range": {
           "type": "string",
           "pattern": "^[0-9]*-[0-9]*$"
         },
-        "partially_or_fully_vaccinated_percentage_label": {
-          "type": ["string", "null"]
+        "fully_vaccinated_percentage_label": {
+          "type": ["string", "null"],
+          "pattern": "^([0-9]+-)*[0-9]+$"
+        },
+        "has_1_shot_percentage_label": {
+          "type": ["string", "null"],
+          "pattern": "^([0-9]+-)*[0-9]+$"
         },
         "date_unix": {
           "type": "integer"
         },
         "date_of_insertion_unix": {
-          "type": "integer"
-        },
-        "date_of_report_unix": {
           "type": "integer"
         }
       }

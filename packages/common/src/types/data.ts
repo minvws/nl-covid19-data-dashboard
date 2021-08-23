@@ -114,18 +114,18 @@ export interface GmVaccineCoverageValue {
   date_of_insertion_unix: number;
 }
 export interface GmVaccineCoveragePerAgeGroup {
-  values: GmVaccineCoveragePerAgeGroupValue[];
+  values?: GmVaccineCoveragePerAgeGroupValue[];
+  last_value: GmVaccineCoveragePerAgeGroupValue;
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
-  partially_vaccinated_percentage: number | null;
-  partially_or_fully_vaccinated_percentage: number | null;
+  has_1_shot_percentage: number | null;
   birthyear_range: string;
-  partially_or_fully_vaccinated_percentage_label: string | null;
+  fully_vaccinated_percentage_label: string | null;
+  has_1_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
-  date_of_report_unix: number;
 }
 
 export interface GmCollection {
@@ -164,16 +164,13 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   values: GmCollectionVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmCollectionVaccineCoveragePerAgeGroupValue {
-  gmcode: string;
+  vrcode: string;
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
-  partially_vaccinated_percentage: number | null;
-  partially_or_fully_vaccinated_percentage: number | null;
   birthyear_range: string;
-  partially_or_fully_vaccinated_percentage_label: string | null;
+  fully_vaccinated_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
-  date_of_report_unix: number;
 }
 
 export interface In {
@@ -1237,18 +1234,18 @@ export interface VrSituationsValue {
   other: number | null;
 }
 export interface VrVaccineCoveragePerAgeGroup {
-  values: VrVaccineCoveragePerAgeGroupValue[];
+  values?: VrVaccineCoveragePerAgeGroupValue[];
+  last_value: VrVaccineCoveragePerAgeGroupValue;
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
-  partially_vaccinated_percentage: number | null;
-  partially_or_fully_vaccinated_percentage: number | null;
+  has_1_shot_percentage: number | null;
   birthyear_range: string;
-  partially_or_fully_vaccinated_percentage_label: string | null;
+  fully_vaccinated_percentage_label: string | null;
+  has_1_shot_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
-  date_of_report_unix: number;
 }
 
 export interface VrCollection {
@@ -1390,11 +1387,8 @@ export interface VrCollectionVaccineCoveragePerAgeGroupValue {
   vrcode: string;
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
-  partially_vaccinated_percentage: number | null;
-  partially_or_fully_vaccinated_percentage: number | null;
   birthyear_range: string;
-  partially_or_fully_vaccinated_percentage_label: string | null;
+  fully_vaccinated_percentage_label: string | null;
   date_unix: number;
   date_of_insertion_unix: number;
-  date_of_report_unix: number;
 }
