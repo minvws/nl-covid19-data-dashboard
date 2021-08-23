@@ -1,13 +1,22 @@
 import Konva from 'konva';
 import { KonvaEventObject } from 'konva/types/Node';
 import { useRouter } from 'next/router';
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  memo,
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { Group, Layer, Line, Rect, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { DataOptions } from '..';
-import { ChoroplethTooltipHandlers, FeatureProps } from '../logic';
+import { FeatureProps } from '../logic';
+import { useHighlightedFeature } from '../logic/use-highlighted-feature';
 import {
   GeoInfo,
   useProjectedCoordinates,
@@ -44,6 +53,12 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     choroplethFeatures.area,
     mapProjection,
     fitExtent
+  );
+
+  const highlight = useHighlightedFeature(
+    geoInfo,
+    projectedCoordinates,
+    dataOptions
   );
 
   const selectFeature = useCallback(
@@ -151,6 +166,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         role="img"
         style={{
           overflow: 'hidden',
+          border: '1px solid black',
         }}
       >
         <Features
@@ -162,35 +178,87 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           handleClick={handleClick}
           reset={reset}
           selectFeature={selectFeature}
-          mouseOverHandler={featureOverHandler}
           featureProps={featureProps}
-          isTabInteractive={isTabInteractive}
-          getFeatureName={getFeatureName}
           dataOptions={dataOptions}
-          anchorEventHandlers={anchorEventHandlers}
+        >
+          <HighlightedFeature
+            feature={highlight}
+            featureProps={featureProps}
+            code={dataOptions.selectedCode}
+          />
+        </Features>
+        <HoveredFeature
+          hoveredRef={hoveredRef}
+          hover={hover}
+          hoverCode={hoverCode}
+          featureProps={featureProps}
         />
-        <Layer listening={false}>
-          {isDefined(hoverCode) && (
-            <Group ref={hoveredRef}>
-              {hover?.map((x, i) => (
-                <Line
-                  key={i}
-                  x={0}
-                  y={0}
-                  points={x.flat()}
-                  tension={0.5}
-                  strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
-                  closed
-                  stroke={featureProps.hover.stroke(hoverCode, true)}
-                />
-              ))}
-            </Group>
-          )}
-        </Layer>
       </Stage>
     </>
   );
 };
+
+type HighlightedFeatureProps = {
+  feature: [number, number][][] | undefined;
+  featureProps: FeatureProps;
+  code: string | undefined;
+};
+
+const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
+  const { feature, featureProps, code } = props;
+  if (!isDefined(feature) || !isDefined(code)) {
+    return null;
+  }
+
+  return (
+    <Group>
+      {feature.map((x, i) => (
+        <Line
+          key={i}
+          x={0}
+          y={0}
+          points={x.flat()}
+          strokeWidth={featureProps.hover.strokeWidth(code, true)}
+          closed
+          stroke={featureProps.hover.stroke(code, false)}
+        />
+      ))}
+    </Group>
+  );
+});
+
+type HoveredFeatureProps = {
+  hoveredRef: RefObject<Konva.Group>;
+  hover: [number, number][][] | undefined;
+  hoverCode: string | undefined;
+  featureProps: FeatureProps;
+};
+
+const HoveredFeature = memo((props: HoveredFeatureProps) => {
+  const { hoveredRef, hover, hoverCode, featureProps } = props;
+
+  if (!isDefined(hoverCode) || !isDefined(hover)) {
+    return null;
+  }
+
+  return (
+    <Layer listening={false}>
+      <Group ref={hoveredRef}>
+        {hover.map((x, i) => (
+          <Line
+            key={i}
+            x={0}
+            y={0}
+            points={x.flat()}
+            strokeWidth={featureProps.hover.strokeWidth(hoverCode, true)}
+            closed
+            stroke={featureProps.hover.stroke(hoverCode, true)}
+          />
+        ))}
+      </Group>
+    </Layer>
+  );
+});
 
 type FeaturesProps = {
   projectedCoordinates: [number, number][][];
@@ -199,14 +267,11 @@ type FeaturesProps = {
   handleClick: any;
   reset: any;
   selectFeature: (code: string) => void;
-  mouseOverHandler: ChoroplethTooltipHandlers[0];
   featureProps: FeatureProps;
-  width: number;
   height: number;
-  isTabInteractive: boolean;
-  getFeatureName: (code: string) => string;
+  width: number;
   dataOptions: DataOptions;
-  anchorEventHandlers: AnchorEventHandler;
+  children: any;
 };
 
 const Features = memo((props: FeaturesProps) => {
@@ -214,11 +279,13 @@ const Features = memo((props: FeaturesProps) => {
     projectedCoordinates,
     geoInfo,
     handleMove,
-    reset,
     handleClick,
+    reset,
     featureProps,
     height,
     width,
+    dataOptions,
+    children,
   } = props;
 
   const getFillColor = useCallback(
@@ -242,6 +309,14 @@ const Features = memo((props: FeaturesProps) => {
     [featureProps.area, geoInfo]
   );
 
+  const getStroke = useCallback(
+    (code: string) => {
+      dataOptions.selectedCode;
+      return featureProps.area.stroke(code);
+    },
+    [dataOptions, featureProps.area]
+  );
+
   return (
     <>
       <Layer>
@@ -254,15 +329,14 @@ const Features = memo((props: FeaturesProps) => {
               key={i}
               x={0}
               y={0}
-              tension={0.5}
-              lineJoin={'round'}
               strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
               points={x.flat()}
               fill={getFillColor(geoInfo[i].code, i)}
-              stroke={featureProps.area.stroke(geoInfo[i].code)}
+              stroke={getStroke(geoInfo[i].code)}
             />
           ))}
         </Group>
+        {children}
       </Layer>
     </>
   );
