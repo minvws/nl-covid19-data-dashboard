@@ -17,6 +17,7 @@ export interface Gm {
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
+  vaccine_coverage_per_age_group?: GmVaccineCoveragePerAgeGroup;
 }
 export interface GmStaticValues {
   population_count: number;
@@ -111,6 +112,21 @@ export interface GmVaccineCoverageValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface GmVaccineCoveragePerAgeGroup {
+  values: GmVaccineCoveragePerAgeGroupValue[];
+}
+export interface GmVaccineCoveragePerAgeGroupValue {
+  age_group_range: "12+" | "12-17" | "18+";
+  age_group_percentage: number | null;
+  fully_vaccinated_percentage: number | null;
+  partially_vaccinated_percentage: number | null;
+  partially_or_fully_vaccinated_percentage: number | null;
+  birthyear_range: string;
+  partially_or_fully_vaccinated_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+}
 
 export interface GmCollection {
   last_generated: string;
@@ -120,7 +136,7 @@ export interface GmCollection {
   hospital_nice: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
-  vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
+  vaccine_coverage_per_age_group?: GmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface GmCollectionHospitalNice {
   date_unix: number;
@@ -935,6 +951,7 @@ export interface Vr {
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
   situations: VrSituations;
+  vaccine_coverage_per_age_group?: VrVaccineCoveragePerAgeGroup;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1218,6 +1235,21 @@ export interface VrSituationsValue {
   hospitality: number | null;
   other: number | null;
 }
+export interface VrVaccineCoveragePerAgeGroup {
+  values: VrVaccineCoveragePerAgeGroupValue[];
+}
+export interface VrVaccineCoveragePerAgeGroupValue {
+  age_group_range: "12+" | "12-17" | "18+";
+  age_group_percentage: number | null;
+  fully_vaccinated_percentage: number | null;
+  partially_vaccinated_percentage: number | null;
+  partially_or_fully_vaccinated_percentage: number | null;
+  birthyear_range: string;
+  partially_or_fully_vaccinated_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+  date_of_report_unix: number;
+}
 
 export interface VrCollection {
   last_generated: string;
@@ -1233,7 +1265,7 @@ export interface VrCollection {
   disability_care: VrCollectionDisabilityCare[];
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
-  vaccine_coverage_per_age_group: VrCollectionVaccineCoveragePerAgeGroup[];
+  vaccine_coverage_per_age_group?: VrCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface VrCollectionHospitalNice {
   date_unix: number;

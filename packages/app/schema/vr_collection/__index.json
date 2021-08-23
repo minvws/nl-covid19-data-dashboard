@@ -16,8 +16,7 @@
     "elderly_at_home",
     "disability_care",
     "sewer",
-    "situations",
-    "vaccine_coverage_per_age_group"
+    "situations"
   ],
   "properties": {
     "last_generated": {
