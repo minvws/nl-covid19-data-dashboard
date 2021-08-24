@@ -193,16 +193,7 @@ export function VrLayout(props: VrLayoutProps) {
                         title={
                           siteText.veiligheidsregio_vaccinaties.titel_sidebar
                         }
-                      >
-                        {/* <SidebarMetric
-                          data={data}
-                          scope="vr"
-                          metricName="vaccine_coverage_per_age_group"
-                          metricProperty="fully_vaccinated_percentage"
-                          localeTextKey="veiligheidsregio_vaccinaties"
-                          differenceKey="vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus"
-                        /> */}
-                      </MetricMenuItemLink>
+                      ></MetricMenuItemLink>
                     </CategoryMenu>
                   )}
 

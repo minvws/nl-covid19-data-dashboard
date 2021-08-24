@@ -152,16 +152,7 @@ export function GmLayout(props: GmLayoutProps) {
                             href={reverseRouter.gm.vaccinaties(code)}
                             icon={<VaccinatieIcon />}
                             title={siteText.gemeente_vaccinaties.titel_sidebar}
-                          >
-                            {/* <SidebarMetric
-                              data={sidebarData}
-                              scope="gm"
-                              metricName="hospital_nice"
-                              metricProperty="admissions_on_date_of_reporting"
-                              localeTextKey="gemeente_vaccinaties"
-                              differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
-                            /> */}
-                          </MetricMenuItemLink>
+                          ></MetricMenuItemLink>
                         </CategoryMenu>
                       )}
 

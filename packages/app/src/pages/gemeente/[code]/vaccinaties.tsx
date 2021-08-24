@@ -27,7 +27,7 @@ export const getStaticProps = withFeatureNotFoundPage(
   'gmVaccinationPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectGmPageMetricData('deceased_rivm', 'difference', 'code'),
+    selectGmPageMetricData('difference', 'code'),
     createGetContent<{
       page: VaccinationPageQuery;
       highlight: PageArticlesQueryResult;
