@@ -18,7 +18,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "vrcode",
+        "gmcode",
         "age_group_range",
         "fully_vaccinated_percentage",
         "birthyear_range",
@@ -27,9 +27,9 @@
         "date_unix"
       ],
       "properties": {
-        "vrcode": {
+        "gmcode": {
           "type": "string",
-          "pattern": "^VR[0-9]+$"
+          "pattern": "^GM[0-9]+$"
         },
         "age_group_range": {
           "type": "string",
