@@ -193,7 +193,11 @@ export function VrLayout(props: VrLayoutProps) {
                         title={
                           siteText.veiligheidsregio_vaccinaties.titel_sidebar
                         }
-                      ></MetricMenuItemLink>
+                      >
+                        {
+                          // @TODO add vaccine sidebar metric once the data is avaliable
+                        }
+                      </MetricMenuItemLink>
                     </CategoryMenu>
                   )}
 

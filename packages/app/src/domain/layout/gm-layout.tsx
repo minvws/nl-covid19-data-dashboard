@@ -152,7 +152,11 @@ export function GmLayout(props: GmLayoutProps) {
                             href={reverseRouter.gm.vaccinaties(code)}
                             icon={<VaccinatieIcon />}
                             title={siteText.gemeente_vaccinaties.titel_sidebar}
-                          ></MetricMenuItemLink>
+                          >
+                            {
+                              // @TODO add vaccine sidebar metric once the data is avaliable
+                            }
+                          </MetricMenuItemLink>
                         </CategoryMenu>
                       )}
 
