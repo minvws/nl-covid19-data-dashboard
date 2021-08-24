@@ -27,24 +27,20 @@
         "date_unix"
       ],
       "properties": {
-        "gmcode": {
+        "vrcode": {
           "type": "string",
-          "pattern": "^GM[0-9]+$"
+          "pattern": "^VR[0-9]+$"
         },
         "age_group_range": {
           "type": "string",
-          "enum": [
-            "12+",
-            "12-17",
-            "18+"
-          ]
+          "enum": ["12+", "12-17", "18+"]
         },
         "fully_vaccinated_percentage": {
-          "type":[ "integer", "null"]
+          "type": ["integer", "null"]
         },
         "birthyear_range": {
           "type": "string",
-          "pattern": "^[0-9]*-[0-9]*$"
+          "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
         },
         "fully_vaccinated_percentage_label": {
           "type": ["string", "null"],
