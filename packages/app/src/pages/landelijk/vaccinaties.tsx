@@ -92,13 +92,15 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
-  const { vaccine_coverage_per_age_group } = data;
+  const { vaccine_coverage_per_age_group, choropleth } = data;
 
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  console.log(choropleth);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
