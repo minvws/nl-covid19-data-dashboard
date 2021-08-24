@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "gm_vaccine_coverage_per_age_group",
   "type": "object",
-  "required": ["last_value"],
+  "required": ["values", "last_value"],
   "additionalProperties": false,
   "properties": {
     "values": {
@@ -33,21 +33,17 @@
       "properties": {
         "age_group_range": {
           "type": "string",
-          "enum": [
-            "12+",
-            "12-17",
-            "18+"
-          ]
+          "enum": ["12+", "12-17", "18+"]
         },
         "fully_vaccinated_percentage": {
-          "type":[ "integer", "null"]
+          "type": ["integer", "null"]
         },
         "has_1_shot_percentage": {
-          "type":[ "integer", "null"]
+          "type": ["integer", "null"]
         },
         "birthyear_range": {
           "type": "string",
-          "pattern": "^[0-9]*-[0-9]*$"
+          "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
         },
         "fully_vaccinated_percentage_label": {
           "type": ["string", "null"],
