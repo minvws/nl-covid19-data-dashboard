@@ -16,7 +16,8 @@
     "elderly_at_home",
     "disability_care",
     "sewer",
-    "situations"
+    "situations",
+    "vaccine_coverage_per_age_group"
   ],
   "properties": {
     "last_generated": {
@@ -103,6 +104,14 @@
       "maxItems": 25,
       "items": {
         "$ref": "situations.json"
+      }
+    },
+    "vaccine_coverage_per_age_group": {
+      "type": "array",
+      "minItems": 25,
+      "maxItems": 25,
+      "items": {
+        "$ref": "vaccine_coverage_per_age_group.json"
       }
     }
   }
