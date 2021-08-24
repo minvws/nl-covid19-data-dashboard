@@ -114,7 +114,7 @@ export interface GmVaccineCoverageValue {
   date_of_insertion_unix: number;
 }
 export interface GmVaccineCoveragePerAgeGroup {
-  values?: GmVaccineCoveragePerAgeGroupValue[];
+  values: GmVaccineCoveragePerAgeGroupValue[];
   last_value: GmVaccineCoveragePerAgeGroupValue;
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
@@ -164,7 +164,7 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   values: GmCollectionVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmCollectionVaccineCoveragePerAgeGroupValue {
-  vrcode: string;
+  vrcode?: string;
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   birthyear_range: string;
@@ -1234,7 +1234,7 @@ export interface VrSituationsValue {
   other: number | null;
 }
 export interface VrVaccineCoveragePerAgeGroup {
-  values?: VrVaccineCoveragePerAgeGroupValue[];
+  values: VrVaccineCoveragePerAgeGroupValue[];
   last_value: VrVaccineCoveragePerAgeGroupValue;
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
