@@ -1,14 +1,11 @@
 import { geoConicConformal, geoMercator } from 'd3-geo';
 import { FocusEvent, memo, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { colors } from '~/style/theme';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { ChoroplethProps, UnpackedDataItem } from '..';
 import {
   CHOROPLETH_ASPECT_RATIO,
-  DEFAULT_HOVER_STROKE_WIDTH,
-  DEFAULT_STROKE_WIDTH,
   FitExtent,
   MapType,
   useChoroplethData,
@@ -17,8 +14,9 @@ import {
   useFeatureName,
   useFeatureProps,
   useFillColor,
-  useRespponsiveSize,
+  useResponsiveSize,
 } from '../logic';
+import { createDataConfig } from '../logic/create-data-config';
 import { TooltipSettings } from '../tooltips/types';
 import { CanvasChoroplethMap } from './canvas-choropleth-map';
 import { SvgChoroplethMap } from './svg-choropleth-map';
@@ -44,7 +42,7 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
 ) => JSX.Element | null = memo((props) => {
   const {
     data: originalData,
-    dataConfig: originalDataConfig,
+    dataConfig: partialDataConfig,
     dataOptions,
     map,
     minHeight = 500,
@@ -59,22 +57,7 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     renderTarget = 'svg',
   } = props;
 
-  const dataConfig = {
-    metricProperty: originalDataConfig.metricProperty,
-    noDataFillColor:
-      originalDataConfig.noDataFillColor ?? colors.choroplethNoData,
-    hoverFill: originalDataConfig.hoverFill ?? 'none',
-    hoverStroke:
-      originalDataConfig.hoverStroke ?? colors.choroplethFeatureStroke,
-    hoverStrokeWidth:
-      originalDataConfig.hoverStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
-    highlightStroke:
-      originalDataConfig.highlightStroke ?? colors.choroplethHighlightStroke,
-    highlightStrokeWidth:
-      originalDataConfig.highlightStrokeWidth ?? DEFAULT_HOVER_STROKE_WIDTH,
-    areaStroke: originalDataConfig.areaStroke ?? colors.choroplethFeatureStroke,
-    areaStrokeWidth: originalDataConfig.areaStrokeWidth ?? DEFAULT_STROKE_WIDTH,
-  };
+  const dataConfig = createDataConfig(partialDataConfig);
 
   const aspectRatio =
     map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
@@ -93,7 +76,7 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
     { width = minHeight * (1 / aspectRatio), height = minHeight },
   ] = useResizeObserver<HTMLDivElement>();
 
-  const [mapHeight, padding] = useRespponsiveSize(
+  const [mapHeight, padding] = useResponsiveSize(
     width,
     height,
     boundingBoxPadding,

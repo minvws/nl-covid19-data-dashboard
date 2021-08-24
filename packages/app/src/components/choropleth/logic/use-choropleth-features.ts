@@ -42,62 +42,72 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
     if (!isDefined(geoJson)) {
       return;
     }
-    const [featureGeo, outlineGeo] = geoJson;
 
-    switch (map) {
-      case 'gm': {
-        assert(isDefined(outlineGeo), 'outlineGeo is required for map type gm');
-        const surroundingGeo = filterSurroundingFeaturesBySelectedGmCode(
-          featureGeo,
-          selectedCode
-        );
-        const hoverGeo = filterVrBySelectedGmCode(gmGeo, selectedCode);
-        return {
-          outline: outlineGeo,
-          hover: hoverGeo,
-          area: surroundingGeo,
-          boundingBox: hoverGeo,
-        };
-      }
-      case 'vr': {
-        assert(isDefined(outlineGeo), 'outlineGeo is required for map type vr');
-        return {
-          outline: outlineGeo,
-          hover: featureGeo,
-          area: featureGeo,
-          boundingBox: outlineGeo,
-        };
-      }
-      case 'in': {
-        const inData = (data as unknown[]).filter(function (
-          v: any
-        ): v is { country_code: string } {
-          return 'country_code' in v;
-        });
-        return {
-          outline: {
-            ...featureGeo,
-            features: featureGeo.features.filter(
-              (x) => !inData.some((d) => d.country_code === x.properties.code)
-            ),
-          },
-          hover: {
-            ...featureGeo,
-            features: featureGeo.features.filter((x) =>
-              inData.some((d) => d.country_code === x.properties.code)
-            ),
-          },
-          area: featureGeo,
-          boundingBox: {
-            ...featureGeo,
-            features: featureGeo.features.filter((x) =>
-              internationalBoundingBoxCodes.includes(x.properties.code)
-            ),
-          },
-        };
-      }
-    }
+    return getChoroplethFeatures(map, data, geoJson, selectedCode);
   }, [map, selectedCode, data, geoJson]);
+}
+
+export function getChoroplethFeatures<T extends ChoroplethDataItem>(
+  map: MapType,
+  data: T[],
+  geoJson: readonly [CodedGeoJSON, CodedGeoJSON | undefined],
+  selectedCode?: string
+) {
+  const [featureGeo, outlineGeo] = geoJson;
+
+  switch (map) {
+    case 'gm': {
+      assert(isDefined(outlineGeo), 'outlineGeo is required for map type gm');
+      const surroundingGeo = filterSurroundingFeaturesBySelectedGmCode(
+        featureGeo,
+        selectedCode
+      );
+      const hoverGeo = filterVrBySelectedGmCode(gmGeo, selectedCode);
+      return {
+        outline: outlineGeo,
+        hover: hoverGeo,
+        area: surroundingGeo,
+        boundingBox: hoverGeo,
+      };
+    }
+    case 'vr': {
+      assert(isDefined(outlineGeo), 'outlineGeo is required for map type vr');
+      return {
+        outline: outlineGeo,
+        hover: featureGeo,
+        area: featureGeo,
+        boundingBox: outlineGeo,
+      };
+    }
+    case 'in': {
+      const inData = (data as unknown[]).filter(function (
+        v: any
+      ): v is { country_code: string } {
+        return 'country_code' in v;
+      });
+      return {
+        outline: {
+          ...featureGeo,
+          features: featureGeo.features.filter(
+            (x) => !inData.some((d) => d.country_code === x.properties.code)
+          ),
+        },
+        hover: {
+          ...featureGeo,
+          features: featureGeo.features.filter((x) =>
+            inData.some((d) => d.country_code === x.properties.code)
+          ),
+        },
+        area: featureGeo,
+        boundingBox: {
+          ...featureGeo,
+          features: featureGeo.features.filter((x) =>
+            internationalBoundingBoxCodes.includes(x.properties.code)
+          ),
+        },
+      };
+    }
+  }
 }
 
 function filterSurroundingFeaturesBySelectedGmCode(

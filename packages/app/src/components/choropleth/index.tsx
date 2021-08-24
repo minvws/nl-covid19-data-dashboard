@@ -28,7 +28,7 @@ export type DataOptions = {
   projection?: () => GeoProjection;
 };
 
-type OptionalDataConfig<T> = {
+export type OptionalDataConfig<T> = {
   metricProperty: KeysOfType<T, number | null | boolean | undefined, true>;
   noDataFillColor?: string;
   hoverFill?: string;

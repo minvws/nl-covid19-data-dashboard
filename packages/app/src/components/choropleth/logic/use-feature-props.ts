@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { MapType } from '~/components/choropleth/logic';
 import { colors } from '~/style/theme';
 import { DataConfig, DataOptions } from '..';
@@ -53,6 +54,18 @@ export const DEFAULT_HOVER_STROKE_WIDTH = 3;
  *
  */
 export function useFeatureProps<T extends ChoroplethDataItem>(
+  map: MapType,
+  getFillColor: (code: string) => string,
+  dataOptions: DataOptions,
+  dataConfig: DataConfig<T>
+): FeatureProps {
+  return useMemo(
+    () => getFeatureProps(map, getFillColor, dataOptions, dataConfig),
+    [map, getFillColor, dataOptions, dataConfig]
+  );
+}
+
+export function getFeatureProps<T extends ChoroplethDataItem>(
   map: MapType,
   getFillColor: (code: string) => string,
   dataOptions: DataOptions,

@@ -9,7 +9,7 @@ import {
   ResponsiveSizeSettings,
 } from '~/components/choropleth';
 
-export function useRespponsiveSize(
+export function useResponsiveSize(
   containerWidth: number,
   containerDefaultHeight: number,
   boundingBoxPadding: OptionalBoundingBoxPadding,

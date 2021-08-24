@@ -325,14 +325,6 @@ const Features = memo((props: FeaturesProps) => {
     [featureProps.area, geoInfo]
   );
 
-  const getStroke = useCallback(
-    (code: string) => {
-      dataOptions.selectedCode;
-      return featureProps.area.stroke(code);
-    },
-    [dataOptions, featureProps.area]
-  );
-
   return (
     <>
       <Layer>
@@ -355,7 +347,7 @@ const Features = memo((props: FeaturesProps) => {
               strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
               points={x.flat()}
               fill={getFillColor(geoInfo[i].code, i)}
-              stroke={getStroke(geoInfo[i].code)}
+              stroke={featureProps.area.stroke(geoInfo[i].code)}
             />
           ))}
         </Group>

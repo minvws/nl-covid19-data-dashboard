@@ -1,16 +1,114 @@
+import { assert } from '@corona-dashboard/common';
+import { geoConicConformal, geoMercator } from 'd3-geo';
+import fs from 'fs';
 import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
+import path from 'path';
+import { DataConfig, DataOptions } from '~/components/choropleth';
+import {
+  ChoroplethDataItem,
+  CHOROPLETH_ASPECT_RATIO,
+  FitExtent,
+  getChoroplethFeatures,
+  getFeatureProps,
+  getFillColor,
+  gmGeo,
+  inGeo,
+  MapType,
+  nlGeo,
+  vrGeo,
+} from '~/components/choropleth/logic';
+import { createDataConfig } from '~/components/choropleth/logic/create-data-config';
+import { getProjectedCoordinates } from '~/components/choropleth/logic/use-projected-coordinates';
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
 import { hash } from '~/utils/api/hash';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  //const { param } = req.query;
+  const { param } = req.query;
+  const [map, metric, property, heightStr] = param as [
+    MapType,
+    string,
+    string,
+    number
+  ];
+  const height = Number(heightStr);
+
+  const dataConfig: DataConfig<any> = createDataConfig<any>({
+    metricProperty: property,
+  });
+
+  const dataOptions: DataOptions = {};
+
+  const aspectRatio =
+    map === 'in' ? CHOROPLETH_ASPECT_RATIO.in : CHOROPLETH_ASPECT_RATIO.nl;
+
+  const mapProjection = map === 'in' ? geoConicConformal : geoMercator;
+
+  const width = height * (1 / aspectRatio);
+
+  const geoJson = createGeoJson(map);
+  const data = loadChoroplethData(map, metric, property);
+
+  const features = getChoroplethFeatures(map, data, geoJson);
+
+  const fColor = getFillColor(data, map, dataConfig);
+  const fillColor = (code: string, index: number) => {
+    if (code === 'VR19') {
+      const vr19s = geoInfo.filter((x) => x.code === 'VR19');
+      const idx = vr19s.indexOf(geoInfo[index]);
+      if (idx === 5 || idx === 0) {
+        return featureProps.area.fill(code);
+      }
+      return 'white';
+    }
+    return featureProps.area.fill(code);
+  };
+
+  const featureProps = getFeatureProps(map, fColor, dataOptions, dataConfig);
+
+  const fitExtent: FitExtent = [
+    [
+      [0, 0],
+      [width, height],
+    ],
+    features.boundingBox,
+  ];
+
+  const [geoInfo, projectedCoordinates] = getProjectedCoordinates(
+    features.hover,
+    mapProjection,
+    fitExtent
+  );
 
   const stage = new Konva.Stage({
-    container: 'div',
-    width: 500,
-    height: 500,
+    width,
+    height,
   });
+
+  const layer = new Konva.Layer();
+  layer.add(
+    new Konva.Rect({
+      x: 0,
+      y: 0,
+      fill: 'white',
+      width,
+      height,
+    })
+  );
+  projectedCoordinates.forEach((x, i) => {
+    const line = new Konva.Line({
+      perfectDrawEnabled: true,
+      closed: true,
+      x: 0,
+      y: 0,
+      strokeWidth: featureProps.area.strokeWidth(geoInfo[i].code),
+      points: x.flat(),
+      fill: fillColor(geoInfo[i].code, i),
+      stroke: featureProps.area.stroke(geoInfo[i].code),
+    });
+    layer.add(line);
+  });
+  stage.add(layer);
 
   const dataUrl = stage.toDataURL();
   const blob = dataUrltoBlob(dataUrl);
@@ -27,4 +125,26 @@ function send(res: NextApiResponse, blob: Buffer, eTag: string) {
 
   res.status(200);
   res.end(blob);
+}
+
+function createGeoJson(map: MapType) {
+  const outlineGeo = map === 'in' ? undefined : nlGeo;
+  assert(
+    map === 'in' || map === 'vr' || map === 'gm',
+    `Unknown maptype: ${map}`
+  );
+
+  const featureGeo = map === 'in' ? inGeo : map === 'vr' ? vrGeo : gmGeo;
+
+  return [featureGeo, outlineGeo] as const;
+}
+
+const publicJsonPath = path.resolve(__dirname, '../../../../../public/json');
+
+function loadChoroplethData(map: MapType, metric: string, property: string) {
+  const filename = `${map.toUpperCase()}_COLLECTION.json`;
+  const content = JSON.parse(
+    fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
+  );
+  return content[metric] as ChoroplethDataItem[];
 }
