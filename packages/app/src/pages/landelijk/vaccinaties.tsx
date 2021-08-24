@@ -9,7 +9,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
-import { coveragePerGm as coverageChoroplethMockData } from '~/data/VWS_COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd';
+import { coveragePerRegion } from '~/data/VWS_COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
@@ -72,9 +72,9 @@ export const getStaticProps = createGetStaticProps(
   }),
   createGetChoroplethData({
     gm: ({ vaccine_coverage_per_age_group }) =>
-      vaccine_coverage_per_age_group ?? coverageChoroplethMockData('gm'),
+      vaccine_coverage_per_age_group ?? coveragePerRegion('gm'),
     vr: ({ vaccine_coverage_per_age_group }) =>
-      vaccine_coverage_per_age_group ?? coverageChoroplethMockData('vr'),
+      vaccine_coverage_per_age_group ?? coveragePerRegion('vr'),
   })
 );
 

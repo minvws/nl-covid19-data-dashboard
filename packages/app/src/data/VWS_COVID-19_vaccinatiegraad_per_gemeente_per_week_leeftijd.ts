@@ -1,6 +1,9 @@
-import type { GmCollectionVaccineCoveragePerAgeGroup, GmCollectionVaccineCoveragePerAgeGroupValue, VrCollectionVaccineCoveragePerAgeGroup } from '@corona-dashboard/common';
-import { hasValueAtKey, isDefined } from 'ts-is-present';
-
+//@ts-nocheck
+import type {
+  GmCollectionVaccineCoveragePerAgeGroup,
+  VrCollectionVaccineCoveragePerAgeGroup,
+} from '@corona-dashboard/common';
+import { hasValueAtKey } from 'ts-is-present';
 const csv =
   `Version;Date_of_report;Date_of_statistics;Region_level;Region_code;Region_name;Birth_year;Vaccination_coverage_partly;Vaccination_coverage_completed
 1;2021-08-17 10:30:00;2021-01-04;Gemeente;GM0014;Groningen;<=2009;<=10;<=10
@@ -35817,8 +35820,9 @@ const csv =
 1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR24;Limburg-Zuid;2004-2009;46;15
 1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR25;Flevoland;<=2009;68;55
 1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR25;Flevoland;<2004;71;60
-1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR25;Flevoland;2004-2009;32;<=10
-`.split('\n');
+1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR25;Flevoland;2004-2009;32;<=10`.split(
+    '\n'
+  );
 
 const keys = csv.slice(0)[0].split(';');
 const values = csv.slice(1);
@@ -35846,28 +35850,48 @@ function toObject(value: typeof values[number]) {
   ) as CSVData;
 }
 
-export function coveragePerRegion<T extends 'vr' | 'gm'>(
+enum Region {
+  vr = 'vr',
+  gm = 'gm',
+}
+
+export function coveragePerRegion<T>(
   region: T
-): T extends 'vr' ? VrCollectionVaccineCoveragePerAgeGroup[] : GmCollectionVaccineCoveragePerAgeGroup[]  {
-  return values
-    .map(toObject)
-    .filter(
-      hasValueAtKey(
-        'Region_level',
-        region === 'vr' ? 'Veiligheidsregio' : 'Gemeente'
+): T extends Region.vr
+  ? VrCollectionVaccineCoveragePerAgeGroup[]
+  : GmCollectionVaccineCoveragePerAgeGroup[] {
+  return (
+    data
+      // filter by region
+      .filter(
+        hasValueAtKey(
+          'Region_level',
+          region === 'vr' ? 'Veiligheidsregio' : 'Gemeente'
+        )
       )
-    )
-    .map((el) => {
-      return {
-        [region === 'vr' ? 'vrcode' : 'gmcode']: el.Region_code,
-        age_group_range: getAgeGroupRange(el.Birth_year),
-        fully_vaccinated_percentage: parseInt(el.Vaccination_coverage_completed, 10),
-        fully_vaccinated_percentage_label: null,
-        birthyear_range: el.Birth_year,
-        date_unix: new Date(el.Date_of_report).getTime() / 1000,
-        date_of_insertion_unix: new Date(el.Date_of_statistics).getTime() / 1000
-      };
-    });
+      // filter by latest date
+      .filter(hasValueAtKey('Date_of_statistics', '2021-08-09'))
+      // map to proper shape
+      .map((el) => {
+        return {
+          [region === 'vr' ? 'vrcode' : 'gmcode']: el.Region_code,
+          age_group_range: getAgeGroupRange(el.Birth_year),
+          birthyear_range: el.Birth_year,
+          date_unix: new Date(el.Date_of_report).getTime() / 1000,
+          date_of_insertion_unix:
+            new Date(el.Date_of_statistics).getTime() / 1000,
+          ...getValue(el),
+        };
+      })
+  );
+}
+
+function getValue(el) {
+  const n = Number(el.Vaccination_coverage_completed);
+  if (!Number.isNaN(n)) return { fully_vaccinated_percentage: n };
+  return {
+    fully_vaccinated_percentage_label: el.Vaccination_coverage_completed,
+  };
 }
 
 function getAgeGroupRange(str: string): '18+' | '12+' | '12-17' {
