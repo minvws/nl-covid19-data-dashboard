@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "vr_collection_vaccine_coverage_per_age_group",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "vrcode",
     "age_group_range",
@@ -11,7 +12,6 @@
     "date_of_insertion_unix",
     "date_unix"
   ],
-  "additionalProperties": false,
   "properties": {
     "vrcode": {
       "type": "string",

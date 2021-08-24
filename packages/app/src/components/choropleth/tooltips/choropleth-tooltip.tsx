@@ -32,7 +32,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     text as unknown as Record<string, Record<string, Record<string, string>>>
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
-    isDefined(subject),
+    isDefined(tooltipContent),
     `No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
