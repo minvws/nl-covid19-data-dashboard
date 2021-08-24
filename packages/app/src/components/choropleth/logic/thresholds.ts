@@ -362,6 +362,7 @@ export const thresholds: Thresholds = {
     admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
+    vaccination_coverage_percentage: vaccineCoverageThresholds,
   },
   vr: {
     infected_per_100k: positiveTestedThresholds,

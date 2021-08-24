@@ -35837,6 +35837,7 @@ export const coveragePerGm: GmCollectionVaccineCoveragePerAgeGroupValue[] =
         fully,
       ] = str.split(';');
       if (region_level === 'Veiligheidsregio') return;
+      if (!region_code) return;
 
       return {
         gmcode: region_code,
@@ -35850,7 +35851,7 @@ export const coveragePerGm: GmCollectionVaccineCoveragePerAgeGroupValue[] =
     })
     .filter(isDefined);
 
-const getAgeGroupRange = (str: string): '18+' | '12+' | '12-17' => {
+function getAgeGroupRange(str: string): '18+' | '12+' | '12-17' {
   switch (str) {
     case '<=2009':
       return '12+';
@@ -35860,4 +35861,4 @@ const getAgeGroupRange = (str: string): '18+' | '12+' | '12-17' => {
     default:
       return '18+';
   }
-};
+}

@@ -16,6 +16,7 @@ import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selec
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
+import { VaccineCoveragePerMunicipality } from '~/domain/vaccine/vaccine-coverage-per-municipality';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
@@ -82,6 +83,7 @@ export const getStaticProps = createGetStaticProps(
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     content,
+    choropleth,
     selectedNlData: data,
     lastGenerated,
     deliveryAndAdministration,
@@ -92,15 +94,13 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
-  const { vaccine_coverage_per_age_group, choropleth } = data;
+  const { vaccine_coverage_per_age_group } = data;
 
   const metadata = {
     ...siteText.nationaal_metadata,
     title: text.metadata.title,
     description: text.metadata.description,
   };
-
-  console.log(choropleth);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -190,6 +190,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               />
             </ChartTile>
           )}
+
+          <VaccineCoveragePerMunicipality data={choropleth.gm} />
 
           {vaccinationPerAgeGroupFeature.isEnabled &&
           vaccine_coverage_per_age_group ? (
