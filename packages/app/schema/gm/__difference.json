@@ -17,17 +17,13 @@
     },
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"
-    },
-    "vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus": {
-      "$ref": "#/definitions/diff_decimal"
     }
   },
   "required": [
     "tested_overall__infected_per_100k_moving_average",
     "tested_overall__infected_moving_average",
     "hospital_nice__admissions_on_date_of_reporting_moving_average",
-    "deceased_rivm__covid_daily",
-    "vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus"
+    "deceased_rivm__covid_daily"
   ],
   "additionalProperties": false,
   "definitions": {
