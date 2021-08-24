@@ -164,7 +164,7 @@ export interface GmCollectionVaccineCoveragePerAgeGroup {
   values: GmCollectionVaccineCoveragePerAgeGroupValue[];
 }
 export interface GmCollectionVaccineCoveragePerAgeGroupValue {
-  vrcode: string;
+  gmcode: string;
   age_group_range: "12+" | "12-17" | "18+";
   fully_vaccinated_percentage: number | null;
   birthyear_range: string;

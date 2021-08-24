@@ -1,4 +1,7 @@
-Version;Date_of_report;Date_of_statistics;Region_level;Region_code;Region_name;Birth_year;Vaccination_coverage_partly;Vaccination_coverage_completed
+import type { GmCollectionVaccineCoveragePerAgeGroupValue } from "@corona-dashboard/common";
+import { isDefined } from "ts-is-present";
+
+export const coveragePerGm: GmCollectionVaccineCoveragePerAgeGroupValue[] = `Version;Date_of_report;Date_of_statistics;Region_level;Region_code;Region_name;Birth_year;Vaccination_coverage_partly;Vaccination_coverage_completed
 1;2021-08-17 10:30:00;2021-01-04;Gemeente;GM0014;Groningen;<=2009;<=10;<=10
 1;2021-08-17 10:30:00;2021-01-04;Gemeente;GM0014;Groningen;<2004;<=10;<=10
 1;2021-08-17 10:30:00;2021-01-04;Gemeente;GM0014;Groningen;2004-2009;<=10;<=10
@@ -35814,3 +35817,31 @@ Version;Date_of_report;Date_of_statistics;Region_level;Region_code;Region_name;B
 1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR25;Flevoland;<=2009;68;55
 1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR25;Flevoland;<2004;71;60
 1;2021-08-17 10:30:00;2021-08-09;Veiligheidsregio;VR25;Flevoland;2004-2009;32;<=10
+`.split('\n').slice(1).map(str => {
+  const [_, date_reported, date_insertion, region_level, region_code, __, birth_year, ___, fully] = str.split(';');
+  if (region_level === 'Veiligheidsregio') return;
+
+  return {
+    gmcode: region_code,
+    age_group_range: getAgeGroupRange(birth_year),
+    fully_vaccinated_percentage: parseInt(fully, 10),
+    fully_vaccinated_percentage_label: 'Volledig gevaccineerd',
+    birthyear_range: birth_year,
+    date_unix: new Date(date_reported).getTime() / 1000,
+    date_of_insertion_unix: new Date(date_insertion).getTime() / 1000,
+  }
+}).filter(isDefined);
+
+const getAgeGroupRange = (str: string): "18+" | "12+" | "12-17" => {
+  switch(str) {
+    case '<=2009': return '12+';
+    case '2004-2009': return '12-17';
+    case '<2004':
+    default: return '18+';
+  }
+}
+
+const getBirthYearRange = (str: string) => {
+  switch(str) {
+    case '<2004': return '2004';
+    case '<=2009': return '2009';

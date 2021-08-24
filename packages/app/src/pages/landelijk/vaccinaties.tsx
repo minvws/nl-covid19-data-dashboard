@@ -9,6 +9,7 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
+import { coveragePerGm } from '~/data/VWS_COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
@@ -31,6 +32,7 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
+  createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
@@ -40,21 +42,25 @@ import { colors } from '~/style/theme';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
+function createMockData() {
+  return { values: coveragePerGm };
+}
+
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(
-    'vaccine_stock',
-    'vaccine_delivery_per_supplier',
-    'vaccine_coverage_per_age_group',
-    'vaccine_vaccinated_or_support',
-    'vaccine_administered_total',
-    'vaccine_administered_planned',
-    'vaccine_administered_rate_moving_average',
-    'vaccine_administered_ggd',
-    'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor',
-    'vaccine_coverage'
+    'vaccine_administered_ggd',
+    'vaccine_administered_hospitals_and_care_institutions',
+    'vaccine_administered_planned',
+    'vaccine_administered_rate_moving_average',
+    'vaccine_administered_total',
+    'vaccine_coverage_per_age_group',
+    'vaccine_coverage',
+    'vaccine_delivery_per_supplier',
+    'vaccine_stock',
+    'vaccine_vaccinated_or_support'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
@@ -66,6 +72,10 @@ export const getStaticProps = createGetStaticProps(
       "page": ${getVaccinePageQuery(locale)},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
     }`;
+  }),
+  createGetChoroplethData({
+    gm: ({ vaccine_coverage_per_age_group }) =>
+      vaccine_coverage_per_age_group ?? createMockData(),
   })
 );
 

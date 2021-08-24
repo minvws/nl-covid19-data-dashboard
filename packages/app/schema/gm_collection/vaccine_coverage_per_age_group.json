@@ -2,7 +2,9 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "gm_collection_vaccine_coverage_per_age_group",
   "type": "object",
-  "required": ["values"],
+  "required": [
+    "values"
+  ],
   "additionalProperties": false,
   "properties": {
     "values": {
@@ -18,7 +20,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "vrcode",
+        "gmcode",
         "age_group_range",
         "fully_vaccinated_percentage",
         "birthyear_range",
@@ -27,7 +29,7 @@
         "date_unix"
       ],
       "properties": {
-        "vrcode": {
+        "gmcode": {
           "type": "string",
           "pattern": "^VR[0-9]+$"
         },
@@ -40,14 +42,20 @@
           ]
         },
         "fully_vaccinated_percentage": {
-          "type":[ "integer", "null"]
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "birthyear_range": {
           "type": "string",
           "pattern": "^[0-9]*-[0-9]*$"
         },
         "fully_vaccinated_percentage_label": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "pattern": "^([0-9]+-)*[0-9]+$"
         },
         "date_unix": {
