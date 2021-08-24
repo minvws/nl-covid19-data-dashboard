@@ -1,4 +1,1 @@
-declare module 'konva-node' {
-  import Konva from 'konva';
-  export = Konva;
-}
+declare module 'konva-node';
