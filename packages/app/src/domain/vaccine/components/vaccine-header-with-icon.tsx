@@ -11,9 +11,9 @@ export function VaccineHeaderWithIcon({ title }: VaccineHeaderWithIcon) {
   return (
     <Box
       display="flex"
-      flexDirection="row"
+      flexDirection={{ _: 'column', md: 'row' }}
       flexWrap="nowrap"
-      alignItems="center"
+      alignItems={{ _: 'flex-start', md: 'center' }}
     >
       <Box
         flex="0 0 4rem"
