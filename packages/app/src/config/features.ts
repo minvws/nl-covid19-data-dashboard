@@ -35,4 +35,14 @@ export const features: Feature[] = [
     dataScopes: ['in'],
     metricName: 'variants',
   },
+  {
+    name: 'vrVaccinationPage',
+    isEnabled: true,
+    dataScopes: ['vr_collection'],
+  },
+  {
+    name: 'gmVaccinationPage',
+    isEnabled: true,
+    dataScopes: ['gm_collection'],
+  },
 ];

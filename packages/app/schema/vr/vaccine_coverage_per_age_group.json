@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "vr_vaccine_coverage_per_age_group",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  },
+  "definitions": {
+    "value": {
+      "title": "vr_vaccine_coverage_per_age_group_value",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "age_group_range",
+        "fully_vaccinated_percentage",
+        "has_1_shot_percentage",
+        "fully_vaccinated_percentage_label",
+        "has_1_shot_percentage_label",
+        "birthyear_range",
+        "date_of_insertion_unix",
+        "date_unix"
+      ],
+      "properties": {
+        "age_group_range": {
+          "type": "string",
+          "enum": ["12+", "12-17", "18+"]
+        },
+        "fully_vaccinated_percentage": {
+          "type": ["integer", "null"]
+        },
+        "has_1_shot_percentage": {
+          "type": ["integer", "null"]
+        },
+        "birthyear_range": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{4}$|^-[0-9]{4}$|^[0-9]{4}-$"
+        },
+        "fully_vaccinated_percentage_label": {
+          "type": ["string", "null"],
+          "pattern": "^([0-9]+-)*[0-9]+$"
+        },
+        "has_1_shot_percentage_label": {
+          "type": ["string", "null"],
+          "pattern": "^([0-9]+-)*[0-9]+$"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

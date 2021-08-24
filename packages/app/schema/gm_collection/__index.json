@@ -10,7 +10,8 @@
     "code",
     "hospital_nice",
     "tested_overall",
-    "sewer"
+    "sewer",
+    "vaccine_coverage_per_age_group"
   ],
   "properties": {
     "last_generated": {
@@ -47,6 +48,13 @@
       "maxItems": 355,
       "items": {
         "$ref": "sewer.json"
+      }
+    },
+    "vaccine_coverage_per_age_group": {
+      "type": "array",
+      "maxItems": 355,
+      "items": {
+        "$ref": "vaccine_coverage_per_age_group.json"
       }
     }
   }
