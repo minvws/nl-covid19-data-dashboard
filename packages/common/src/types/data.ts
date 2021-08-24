@@ -39,7 +39,6 @@ export interface GmDifference {
   hospital_nice__admissions_on_date_of_reporting_moving_average: DifferenceDecimal;
   sewer__average?: DifferenceDecimal;
   deceased_rivm__covid_daily: DifferenceInteger;
-  vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;
@@ -869,7 +868,7 @@ export interface NlVaccineCoveragePerAgeGroup {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 export interface NlVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "18+" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "65-69" | "70-79" | "80+";
+  age_group_range: "12+" | "18+" | "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
@@ -880,6 +879,7 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
+  birthyear_range: string;
 }
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];
@@ -964,7 +964,6 @@ export interface VrDifference {
   disability_care__infected_locations_total: DifferenceInteger;
   elderly_at_home__positive_tested_daily: DifferenceInteger;
   deceased_rivm__covid_daily: DifferenceInteger;
-  vaccine_coverage_per_age_group_fully_vaccinated_percentage_18_plus: DifferenceDecimal;
 }
 export interface DifferenceDecimal {
   old_value: number;

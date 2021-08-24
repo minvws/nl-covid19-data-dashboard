@@ -17,17 +17,17 @@ type Props = {
 };
 
 const SORTING_ORDER = [
-  '80+',
-  '70-79',
-  '65-69',
-  '50-59',
-  '40-49',
-  '30-39',
-  '18-29',
-  '12-17',
-  '18+',
   '12+',
-];
+  '18+',
+  '12-17',
+  '18-30',
+  '31-40',
+  '41-50',
+  '51-60',
+  '61-70',
+  '71-80',
+  '81+',
+].reverse();
 
 function getSortingOrder(ageGroup: string) {
   const index = SORTING_ORDER.findIndex((x) => x === ageGroup);

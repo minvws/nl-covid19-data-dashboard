@@ -1,4 +1,7 @@
-import { NlVaccineCoverageValue } from '@corona-dashboard/common';
+import {
+  NlVaccineCoveragePerAgeGroupValue,
+  NlVaccineCoverageValue,
+} from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
 import { ReactComponent as VaccinatiesIcon } from '~/assets/vaccinaties.svg';
 import { Box, Spacer } from '~/components/base';
@@ -82,7 +85,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
-  const { vaccine_coverage_per_age_group } = data;
+  const vaccine_coverage_per_age_group = mockCoverageData();
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -354,4 +357,50 @@ function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
     date_start_unix: undefined,
     date_end_unix: undefined,
   }));
+}
+
+// TODO: remove this when data is available
+function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
+  const values = [
+    '12+',
+    '18+',
+    '12-17',
+    '18-30',
+    '31-40',
+    '41-50',
+    '51-60',
+    '61-70',
+    '71-80',
+    '81+',
+  ]
+    .map(createCoverageRow)
+    .reverse();
+
+  values[2].fully_vaccinated = 0;
+  values[2].fully_vaccinated_percentage = 0;
+
+  return { values };
+
+  function createCoverageRow(
+    ageGroup: string
+  ): NlVaccineCoveragePerAgeGroupValue {
+    const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
+    const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+    const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+
+    return {
+      age_group_range: ageGroup,
+      age_group_percentage: Math.floor(Math.random() * 100) + 1,
+      age_group_total: ageGroupTotal,
+      fully_vaccinated: fullyVaccinated,
+      partially_vaccinated: partiallyVaccinated,
+      fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
+      partially_vaccinated_percentage:
+        (partiallyVaccinated / ageGroupTotal) * 100,
+      partially_or_fully_vaccinated_percentage: 0,
+      date_of_insertion_unix: 1616544000,
+      date_of_report_unix: 1616544000,
+      date_unix: 1616544000,
+    };
+  }
 }
