@@ -6,7 +6,8 @@ import { JSONObject, JSONValue } from './types';
 
 export function createChoroplethValidation(
   choroplethCollectionPath: string,
-  codeProperty: string
+  codeProperty: string,
+  excludedProperties: string[] = []
 ) {
   if (!fs.existsSync(choroplethCollectionPath)) {
     console.warn(
@@ -27,7 +28,8 @@ export function createChoroplethValidation(
       path.basename(choroplethCollectionPath),
       collectionJson,
       codeProperty,
-      input
+      input,
+      excludedProperties
     );
 }
 
@@ -48,9 +50,14 @@ export const validateChoroplethValues = (
   collectionJsonFilename: string, // GM_COLLECTION.json|VR_COLLECTION.json|IN_COLLECTION.json
   collectionJson: JSONObject, // The contents of the aforementioned json file
   codeProperty: string, //the gmcode, vrcode, country_code property name
-  input: JSONObject // contents of a GM***.json or VR***.json or IN_***.json file
+  input: JSONObject, // contents of a GM***.json or VR***.json or IN_***.json file
+  excludedProperties: string[] //List of properties on the collectionJson that need to be skipped
 ): string[] | undefined => {
-  const commonDataProperties = getCommonDataProperties(input, collectionJson);
+  const commonDataProperties = getCommonDataProperties(
+    input,
+    collectionJson,
+    excludedProperties
+  );
   const filePrefix = collectionJsonFilename.startsWith('IN_') ? 'IN_' : '';
 
   const code = input.code;
@@ -114,9 +121,15 @@ function getCommonProperties(left: UnknownObject, right: UnknownObject) {
   return Object.keys(left).filter((key) => right.hasOwnProperty(key));
 }
 
-function getCommonDataProperties(left: UnknownObject, right: UnknownObject) {
+function getCommonDataProperties(
+  left: UnknownObject,
+  right: UnknownObject,
+  excludedProperties: string[]
+) {
   return Object.entries(left)
     .filter(([, values]) => typeof values === 'object')
     .map(([key]) => key)
-    .filter((key) => right.hasOwnProperty(key));
+    .filter(
+      (key) => right.hasOwnProperty(key) && !excludedProperties.includes(key)
+    );
 }
