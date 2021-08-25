@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import meow from 'meow';
 import prompts from 'prompts';
 import { getClient } from '../client';
 
@@ -12,8 +13,34 @@ type LokalizeText = {
   };
 };
 
+const cli = meow(
+  `
+      Usage
+        $ lokalize:dedupe
+  
+      Options
+        --drafts Include draft documents
+        --dataset Define dataset to export, default is "development"
+  
+      Examples
+        $ lokalize:dedupe --dataset=production
+  `,
+  {
+    flags: {
+      dataset: {
+        type: 'string',
+        default: 'development',
+      },
+      cleanJson: {
+        type: 'boolean',
+      },
+    },
+  }
+);
+
 (async function run() {
-  const sanityClient = getClient('development');
+  const dataset = cli.flags.dataset;
+  const sanityClient = getClient(dataset);
 
   const texts = await sanityClient.fetch<LokalizeText[]>(
     "*[_type == 'lokalizeText' && !(_id in path('drafts.**'))]{_id, key, text}"
