@@ -75,11 +75,6 @@ timestamp,action,key,document_id,move_to
 2021-08-12T09:46:55.588Z,add,choropleth_tooltip.vr.infected_locations_percentage.content,WcslWj37E82J6PAznCRyfn,__
 2021-08-12T09:46:56.597Z,add,choropleth_tooltip.vr.positive_tested_daily_per_100k.content,WcslWj37E82J6PAznCRysm,__
 2021-08-12T09:46:57.626Z,add,choropleth_tooltip.vr.average.content,q6JNEIlv8e5jJVtFa0WqSZ,__
-2021-08-12T09:46:57.627Z,move,choropleth_tooltip.positive_tested_people,jF33EuwumlGuwav2FD4IDU,choropleth_tooltip.gm.infected_per_100k.subject
-2021-08-12T09:46:57.627Z,move,choropleth_tooltip.hospital_admissions,jF33EuwumlGuwav2FD4IFA,choropleth_tooltip.gm.admissions_on_date_of_reporting.subject
-2021-08-12T09:46:57.628Z,move,choropleth_tooltip.infected_locations,jF33EuwumlGuwav2FD4IGq,choropleth_tooltip.vr.infected_locations_percentage.subject
-2021-08-12T09:46:57.628Z,move,choropleth_tooltip.elderly_at_home,jF33EuwumlGuwav2FD4IIW,choropleth_tooltip.vr.positive_tested_daily_per_100k.subject
-2021-08-12T09:46:57.629Z,move,choropleth_tooltip.sewer_regional,jF33EuwumlGuwav2FD4IKC,choropleth_tooltip.vr.average.subject
 2021-08-16T10:44:00.282Z,add,gedrag_common.line_chart.tooltip_witte_gaten_beschrijving,4wy7f8NuwuLne309tI5xhE,__
 2021-08-16T10:44:01.287Z,add,gedrag_common.line_chart.tooltip_witte_gaten_label,DWLUotrm23arH2ViSFggy4,__
 2021-08-17T09:51:25.960Z,add,vaccinaties.levering_en_voorradad_datums,m5cl7ciD7CmTUWm5d6Lass,__
