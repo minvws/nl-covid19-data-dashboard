@@ -94,7 +94,9 @@ import {
           documentId: document._id,
         });
       } else {
-        console.warn(`A lokalize document with key ${key} already exists.`);
+        console.warn(
+          `A lokalize document with key ${key} already exists. Skipped adding a new one.`
+        );
       }
     }
 
