@@ -14,7 +14,6 @@ import { createPortal } from 'react-dom';
 import { Group, Layer, Line, Rect, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
 import { VisuallyHidden } from '~/components/visually-hidden';
-import { DataOptions } from '..';
 import { FeatureProps } from '../logic';
 import { useHighlightedFeature } from '../logic/use-highlighted-feature';
 import {
@@ -53,6 +52,12 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
   const [geoInfo, projectedCoordinates] = useProjectedCoordinates(
     choroplethFeatures.hover,
+    mapProjection,
+    fitExtent
+  );
+
+  const [outlinGeoInfo, outlineProjectedCoordinates] = useProjectedCoordinates(
+    choroplethFeatures.outline,
     mapProjection,
     fitExtent
   );
@@ -181,6 +186,13 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
             overflow: 'hidden',
           }}
         >
+          <Outlines
+            width={width}
+            height={height}
+            geoInfo={outlinGeoInfo}
+            projectedCoordinates={outlineProjectedCoordinates}
+            featureProps={featureProps}
+          />
           <Features
             width={width}
             height={height}
@@ -192,7 +204,6 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
             reset={reset}
             selectFeature={selectFeature}
             featureProps={featureProps}
-            dataOptions={dataOptions}
           >
             <HighlightedFeature
               feature={highlight}
@@ -276,6 +287,22 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
   );
 });
 
+type OutlinesProps = {
+  projectedCoordinates: [number, number][][];
+  geoInfo: GeoInfo[];
+  featureProps: FeatureProps;
+  height: number;
+  width: number;
+};
+
+const Outlines = memo((props: OutlinesProps) => {
+  const { projectedCoordinates, geoInfo, featureProps, height, width } = props;
+  if (!geoInfo.length) {
+    return null;
+  }
+  return <Layer />;
+});
+
 type FeaturesProps = {
   projectedCoordinates: [number, number][][];
   geoInfo: GeoInfo[];
@@ -287,7 +314,6 @@ type FeaturesProps = {
   featureProps: FeatureProps;
   height: number;
   width: number;
-  dataOptions: DataOptions;
   children: any;
 };
 
@@ -302,7 +328,6 @@ const Features = memo((props: FeaturesProps) => {
     featureProps,
     height,
     width,
-    dataOptions,
     children,
   } = props;
 
@@ -396,6 +421,7 @@ function AnchorLinks(props: AnchorLinksProps) {
       <div tabIndex={isTabInteractive ? 0 : -1}>
         {anchorInfo.map((x, i) => (
           <a
+            title={getFeatureName(x.code)}
             data-id={x.code}
             key={i}
             tabIndex={i + 1}

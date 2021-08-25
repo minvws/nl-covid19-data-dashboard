@@ -4,7 +4,7 @@ import { multiPoint, round } from '@turf/helpers';
 import { GeoProjection } from 'd3-geo';
 import { Polygon, Position } from 'geojson';
 import { useMemo } from 'react';
-import { isPresent } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { CodedGeoJSON } from './topology';
 import { FitExtent } from './types';
 
@@ -14,7 +14,7 @@ export type GeoInfo = {
 };
 
 export function useProjectedCoordinates(
-  geoJson: CodedGeoJSON,
+  geoJson: CodedGeoJSON | undefined,
   geoProjection: () => GeoProjection,
   fitExtent: FitExtent
 ) {
@@ -25,10 +25,14 @@ export function useProjectedCoordinates(
 }
 
 export function getProjectedCoordinates(
-  geoJson: CodedGeoJSON,
+  geoJson: CodedGeoJSON | undefined,
   geoProjection: () => GeoProjection,
   fitExtent: FitExtent
 ) {
+  if (!isDefined(geoJson)) {
+    return [[] as GeoInfo[], [] as [number, number][][]] as const;
+  }
+
   const polygons = geoJson.features
     .filter((x) => x.geometry.type === 'Polygon')
     .map<GeoInfo>((x) => ({
