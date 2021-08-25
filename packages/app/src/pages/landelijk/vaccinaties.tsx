@@ -361,20 +361,31 @@ function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
 
 // TODO: remove this when data is available
 function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
+  const birthyearRangeValues = [
+    '-1940',
+    '1941-1950',
+    '1951-1960',
+    '1961-1970',
+    '1971-1980',
+    '1981-1990',
+    '1991-2003',
+    '2004-2009',
+    '-2003',
+    '-2009',
+  ];
+
   const values = [
-    '12+',
-    '18+',
-    '12-17',
-    '18-30',
-    '31-40',
-    '41-50',
-    '51-60',
-    '61-70',
-    '71-80',
     '81+',
-  ]
-    .map(createCoverageRow)
-    .reverse();
+    '71-80',
+    '61-70',
+    '51-60',
+    '41-50',
+    '31-40',
+    '18-30',
+    '12-17',
+    '18+',
+    '12+',
+  ].map((value, index) => createCoverageRow(value, index));
 
   values[2].fully_vaccinated = 0;
   values[2].fully_vaccinated_percentage = 0;
@@ -382,7 +393,8 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   return { values };
 
   function createCoverageRow(
-    ageGroup: string
+    ageGroup: any,
+    index: number
   ): NlVaccineCoveragePerAgeGroupValue {
     const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
     const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
@@ -399,6 +411,7 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
         (partiallyVaccinated / ageGroupTotal) * 100,
       partially_or_fully_vaccinated_percentage: 0,
       date_of_insertion_unix: 1616544000,
+      birthyear_range: birthyearRangeValues[index],
       date_of_report_unix: 1616544000,
       date_unix: 1616544000,
     };

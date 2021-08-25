@@ -120,3 +120,6 @@ timestamp,action,key,document_id,move_to
 2021-08-24T10:08:18.710Z,add,gemeente_vaccinaties.introductie_sectie.titel,m5cl7ciD7CmTUWm5dGzNsY,__
 2021-08-24T10:08:19.721Z,add,gemeente_vaccinaties.metadata.description,DWLUotrm23arH2ViSPFMzI,__
 2021-08-24T10:08:20.928Z,add,gemeente_vaccinaties.metadata.title,DWLUotrm23arH2ViSPFN4o,__
+2021-08-25T08:31:47.318Z,add,vaccinaties.vaccination_coverage.templates.birthyears.earlier,4wy7f8NuwuLne309uVoQ3w,__
+2021-08-25T08:31:48.333Z,add,vaccinaties.vaccination_coverage.templates.birthyears.later,m5cl7ciD7CmTUWm5dIZqCe,__
+2021-08-25T08:31:49.355Z,add,vaccinaties.vaccination_coverage.templates.birthyears.range,4wy7f8NuwuLne309uVoQpU,__
