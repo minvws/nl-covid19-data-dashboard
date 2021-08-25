@@ -12,6 +12,7 @@
     "compile": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
     "lokalize:export": "ts-node src/lokalize/export.ts",
+    "lokalize:dedupe": "ts-node src/lokalize/clean-duplicates.ts",
     "lokalize:apply-json-edits": "ts-node src/lokalize/apply-json-edits.ts",
     "lokalize:generate-types": "ts-node src/lokalize/generate-types.ts",
     "lokalize:sync-after-release": "ts-node src/lokalize/sync-after-release.ts",

@@ -1,6 +1,5 @@
 import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
 import { Box } from '~/components/base';
 import { KpiValue } from '~/components/kpi-value';
 import { Tile } from '~/components/tile';
@@ -9,10 +8,10 @@ import { Heading, InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { VaccineHeaderWithIcon } from './components/vaccine-header-with-icon';
 import { VaccineTicker } from './components/vaccine-ticker';
 import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
-
-interface VaccinePageIntroductionProps {
+interface VaccinePageIntroductionNlProps {
   data: Pick<
     Nl,
     | 'vaccine_administered_planned'
@@ -21,9 +20,9 @@ interface VaccinePageIntroductionProps {
   >;
 }
 
-export function VaccinePageIntroduction({
+export function VaccinePageIntroductionNl({
   data,
-}: VaccinePageIntroductionProps) {
+}: VaccinePageIntroductionNlProps) {
   const { siteText, formatPercentage, formatDate } = useIntl();
   const text = siteText.vaccinaties;
 
@@ -35,32 +34,9 @@ export function VaccinePageIntroduction({
   return (
     <Box spacing={4}>
       <Tile>
+        <VaccineHeaderWithIcon title={text.title} />
+
         <Box spacing={3}>
-          <Box
-            display="flex"
-            flexDirection="row"
-            flexWrap="nowrap"
-            alignItems="center"
-          >
-            <Box
-              flex="0 0 4rem"
-              display="flex"
-              justifyContent="center"
-              padding={0}
-              margin={0}
-              mt="-0.6rem"
-              css={css({
-                svg: {
-                  height: '3.5rem',
-                },
-              })}
-            >
-              <VaccinatieIcon />
-            </Box>
-            <Heading level={1} hyphens="auto">
-              {text.title}
-            </Heading>
-          </Box>
           <Box spacing={4} px={{ md: 5 }}>
             <Text variant="h2" fontWeight="normal">
               {replaceComponentsInText(

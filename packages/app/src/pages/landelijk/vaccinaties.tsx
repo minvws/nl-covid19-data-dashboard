@@ -17,7 +17,7 @@ import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-admin
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -101,7 +101,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-          <VaccinePageIntroduction data={data} />
+          <VaccinePageIntroductionNl data={data} />
 
           <PageInformationBlock
             description={content.page.pageDescription}
