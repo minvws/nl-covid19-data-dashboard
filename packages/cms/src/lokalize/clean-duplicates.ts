@@ -19,11 +19,6 @@ type LokalizeText = {
     "*[_type == 'lokalizeText' && !(_id in path('drafts.**'))]{_id, key, text}"
   );
 
-  if (!texts) {
-    console.log('No duplicates found!');
-    process.exit(0);
-  }
-
   const duplicates = texts.reduce<Record<string, LokalizeText[]>>(
     (aggr: any, text: any) => {
       if (!aggr[text.key]) {
@@ -40,6 +35,11 @@ type LokalizeText = {
       delete duplicates[key];
     }
   });
+
+  if (Object.keys(duplicates).length === 0) {
+    console.log('No duplicate keys found...');
+    process.exit(0);
+  }
 
   const choices = Object.entries(duplicates)
     .map(([key, duplicates]) => {
