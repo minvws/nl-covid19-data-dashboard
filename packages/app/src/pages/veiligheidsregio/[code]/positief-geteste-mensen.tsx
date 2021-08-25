@@ -106,8 +106,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
-  console.log(difference.tested_ggd__infected_percentage_moving_average);
-
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
