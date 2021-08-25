@@ -78,7 +78,7 @@ export function TileDifference({
       </IconContainer>
       <InlineText>
         {text.gelijk}
-        {isPercentage ? '%' : ''} {timespanTextNode}
+        {timespanTextNode}
       </InlineText>
     </Container>
   );
