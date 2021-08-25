@@ -398,7 +398,9 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
   ): NlVaccineCoveragePerAgeGroupValue {
     const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
     const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-    const partiallyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
+    const partiallyVaccinated = Math.floor(
+      Math.random() * (ageGroupTotal - fullyVaccinated) + 1
+    );
 
     return {
       age_group_range: ageGroup,
