@@ -57,6 +57,12 @@ export const validateChoroplethValues = (
 
   const results = commonDataProperties
     .map((propertyName) => {
+      if (!Array.isArray(collectionJson[propertyName])) {
+        throw new Error(
+          `${propertyName} in ${collectionJsonFilename} is not an array property!`
+        );
+      }
+
       const collectionValue = (
         collectionJson[propertyName] as JSONValue[]
       )?.find((x: any) => x[codeProperty] === code) as UnknownObject;
