@@ -35,7 +35,9 @@ export function LocationTooltip({
         <b>{config.label}</b>
         <Box mx={2}>{siteText.waarde_annotaties.per_100_000_inwoners}:</Box>
 
-        <b>{formatNumber(data.value.selected_installation_rna_normalized)}</b>
+        <b>
+          {formatNumber(data.value.selected_installation_rna_normalized, 0)}
+        </b>
       </Box>
     </>
   );

@@ -106,6 +106,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     }),
   };
 
+  console.log(difference.tested_ggd__infected_percentage_moving_average);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>
@@ -129,7 +131,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             referenceLink={text.reference.href}
             articles={content.main.articles}
           />
-
           <TwoKpiSection>
             <KpiTile
               title={text.kpi_titel}
@@ -147,9 +148,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   }
                   isMovingAverageDifference
                 />
-
                 <Markdown content={text.kpi_toelichting} />
-
                 <Box>
                   <Text variant="body2" fontWeight="bold">
                     {replaceComponentsInText(ggdText.summary_title, {
@@ -186,7 +185,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               <Text>{text.barscale_toelichting}</Text>
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             title={text.linechart_titel}
             description={text.linechart_toelichting}
@@ -238,7 +236,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
-
           <ChoroplethTile
             title={replaceVariablesInText(text.map_titel, {
               safetyRegion: vrName,
@@ -269,11 +266,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               }}
             />
           </ChoroplethTile>
-
           <GNumberBarChartTile data={data.g_number} />
-
           <Spacer mb={3} />
-
           <PageInformationBlock
             id="ggd"
             title={replaceVariablesInText(ggdText.titel, {
@@ -340,7 +334,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               </Text>
             </KpiTile>
           </TwoKpiSection>
-
           <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_percentage_titel}
@@ -384,7 +377,6 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
           </ChartTile>
-
           <ChartTile
             timeframeOptions={['all', '5weeks']}
             title={ggdText.linechart_totaltests_titel}

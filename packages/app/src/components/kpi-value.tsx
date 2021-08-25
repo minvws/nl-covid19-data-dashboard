@@ -64,14 +64,14 @@ export function KpiValue({
     <Box mb={3}>
       {isDefined(percentage) && isDefined(absolute) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${(formatNumber(absolute), numFractionDigits)} (${formatPercentage(
+          {`${formatNumber(absolute, numFractionDigits)} (${formatPercentage(
             percentage,
             numFractionDigits
           )}%)`}
         </StyledValue>
       ) : isDefined(percentage) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${(formatPercentage(percentage), numFractionDigits)}%`}
+          {`${formatPercentage(percentage, numFractionDigits)}%`}
         </StyledValue>
       ) : isDefined(text) ? (
         <StyledValue color={color} {...otherProps}>
@@ -79,7 +79,7 @@ export function KpiValue({
         </StyledValue>
       ) : (
         <StyledValue color={color} {...otherProps}>
-          {formatNumber(absolute, 0)}asdfsa
+          {formatNumber(absolute, numFractionDigits)}
         </StyledValue>
       )}
 
