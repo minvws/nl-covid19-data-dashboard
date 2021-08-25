@@ -198,6 +198,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
               feature={highlight}
               featureProps={featureProps}
               code={dataOptions.selectedCode}
+              hoverCode={hoverCode}
             />
           </Features>
           <HoveredFeature
@@ -216,16 +217,17 @@ type HighlightedFeatureProps = {
   feature: [number, number][][] | undefined;
   featureProps: FeatureProps;
   code: string | undefined;
+  hoverCode: string | undefined;
 };
 
 const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
-  const { feature, featureProps, code } = props;
-  if (!isDefined(feature) || !isDefined(code)) {
+  const { feature, featureProps, code, hoverCode } = props;
+  if (!isDefined(feature) || !isDefined(code) || hoverCode === code) {
     return null;
   }
 
   return (
-    <Group>
+    <Group listening={false}>
       {feature.map((x, i) => (
         <Line
           key={i}
