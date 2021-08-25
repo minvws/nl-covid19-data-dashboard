@@ -79,6 +79,20 @@ a {
   outline-offset: 0;
 }
 
+/**
+ * Remove visible focus outline when modern browsers support focus-visible.
+ * With this, focus will only show when navigating by eg keyboard.
+ */
+@supports selector(:focus-visible) {
+  *:focus {
+    outline: none;
+  }
+
+  *:focus:focus-visible {
+    outline: 2px dotted currentColor;
+  }
+}
+
 button::-moz-focus-inner {
   border: 0;
 }
