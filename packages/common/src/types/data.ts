@@ -114,7 +114,6 @@ export interface GmVaccineCoverageValue {
 }
 export interface GmVaccineCoveragePerAgeGroup {
   values: GmVaccineCoveragePerAgeGroupValue[];
-  last_value: GmVaccineCoveragePerAgeGroupValue;
 }
 export interface GmVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "12-17" | "18+";
@@ -1231,7 +1230,6 @@ export interface VrSituationsValue {
 }
 export interface VrVaccineCoveragePerAgeGroup {
   values: VrVaccineCoveragePerAgeGroupValue[];
-  last_value: VrVaccineCoveragePerAgeGroupValue;
 }
 export interface VrVaccineCoveragePerAgeGroupValue {
   age_group_range: "12+" | "12-17" | "18+";
