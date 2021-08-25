@@ -9,17 +9,18 @@ import { Container, IconContainer } from './containers';
 export function TileDifference({
   value,
   isDecimal,
-  staticTimespan,
   maximumFractionDigits,
   isPercentage,
+  showOldDateUnix,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   maximumFractionDigits?: number;
-  staticTimespan?: string;
   isPercentage?: boolean;
+  showOldDateUnix?: boolean;
 }) {
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+    useIntl();
   const text = siteText.toe_en_afname;
 
   const { difference } = value;
@@ -31,10 +32,14 @@ export function TileDifference({
       )
     : formatNumber(Math.abs(difference));
 
-  const timespanTextNode = staticTimespan ?? text.vorige_waarde;
+  const timespanTextNode = showOldDateUnix
+    ? formatDateFromSeconds(value.old_date_unix)
+    : text.vorige_waarde;
 
   if (difference > 0) {
-    const splitText = text.toename.split(' ');
+    const splitText = showOldDateUnix
+      ? text.hoger.split(' ')
+      : text.toename.split(' ');
 
     return (
       <Container>
@@ -53,7 +58,9 @@ export function TileDifference({
   }
 
   if (difference < 0) {
-    const splitText = text.afname.split(' ');
+    const splitText = showOldDateUnix
+      ? text.lager.split(' ')
+      : text.afname.split(' ');
 
     return (
       <Container>
