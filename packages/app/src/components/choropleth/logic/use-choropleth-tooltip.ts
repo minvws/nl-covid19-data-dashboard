@@ -212,10 +212,6 @@ function useMetricPropertyFormatter<T extends ChoroplethDataItem>(
   return useMemo(() => {
     const values = data.map((x) => x[dataConfig.metricProperty]);
     const numberOfDecimals = getMaximumNumberOfDecimals(values);
-    return (value: number) =>
-      intl.formatPercentage(value, {
-        minimumFractionDigits: numberOfDecimals,
-        maximumFractionDigits: numberOfDecimals,
-      });
+    return (value: number) => intl.formatPercentage(value, numberOfDecimals);
   }, [data, dataConfig, intl]);
 }

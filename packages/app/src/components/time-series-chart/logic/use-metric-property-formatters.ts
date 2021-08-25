@@ -19,11 +19,7 @@ export function useMetricPropertyFormatters<T extends TimestampedValue>(
   return useMemo(() => {
     function createFormatter(values: number[]) {
       const numberOfDecimals = getMaximumNumberOfDecimals(values);
-      return (value: number) =>
-        intl.formatPercentage(value, {
-          minimumFractionDigits: numberOfDecimals,
-          maximumFractionDigits: numberOfDecimals,
-        });
+      return (value: number) => intl.formatPercentage(value, numberOfDecimals);
     }
 
     return seriesConfig.reduce((result, config) => {

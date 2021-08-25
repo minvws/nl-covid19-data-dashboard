@@ -19,6 +19,7 @@ interface KpiValueProps {
   text?: string;
   color?: string;
   isMovingAverageDifference?: boolean;
+  numFractionDigits?: number;
 }
 
 /**
@@ -54,6 +55,7 @@ export function KpiValue({
   text,
   color = 'data.primary',
   isMovingAverageDifference,
+  numFractionDigits,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -62,11 +64,14 @@ export function KpiValue({
     <Box mb={3}>
       {isDefined(percentage) && isDefined(absolute) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
+          {`${(formatNumber(absolute), numFractionDigits)} (${formatPercentage(
+            percentage,
+            numFractionDigits
+          )}%)`}
         </StyledValue>
       ) : isDefined(percentage) ? (
         <StyledValue color={color} {...otherProps}>
-          {`${formatPercentage(percentage)}%`}
+          {`${(formatPercentage(percentage), numFractionDigits)}%`}
         </StyledValue>
       ) : isDefined(text) ? (
         <StyledValue color={color} {...otherProps}>
@@ -74,7 +79,7 @@ export function KpiValue({
         </StyledValue>
       ) : (
         <StyledValue color={color} {...otherProps}>
-          {formatNumber(absolute)}
+          {formatNumber(absolute, 0)}asdfsa
         </StyledValue>
       )}
 
@@ -83,12 +88,14 @@ export function KpiValue({
           <TileAverageDifference
             value={difference}
             isPercentage={isDefined(percentage)}
+            numFractionDigits={numFractionDigits}
           />
         ) : (
           <TileDifference
             value={difference}
             staticTimespan={differenceStaticTimespan}
             isPercentage={isDefined(percentage)}
+            numFractionDigits={numFractionDigits}
           />
         ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

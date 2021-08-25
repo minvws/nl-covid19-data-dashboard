@@ -132,17 +132,13 @@ function LegendItem({
       <ColorIndicator color={color} />
       {isDefined(count) ? (
         <InlineText variant="label1">
-          {`${formatPercentage(percentage, {
-            maximumFractionDigits: 1,
-            minimumFractionDigits: 1,
-          })}% ${label} (${formatNumber(count)})`}
+          {`${formatPercentage(percentage, 1)}% ${label} (${formatNumber(
+            count
+          )})`}
         </InlineText>
       ) : (
         <InlineText variant="label1">
-          {`${formatPercentage(percentage, {
-            maximumFractionDigits: 1,
-            minimumFractionDigits: 1,
-          })}% ${label}`}
+          {`${formatPercentage(percentage, 1)}% ${label}`}
         </InlineText>
       )}
     </Box>

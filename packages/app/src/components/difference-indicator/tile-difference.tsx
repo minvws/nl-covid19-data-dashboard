@@ -10,14 +10,14 @@ export function TileDifference({
   value,
   isDecimal,
   staticTimespan,
-  maximumFractionDigits,
   isPercentage,
+  numFractionDigits,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
-  maximumFractionDigits?: number;
   staticTimespan?: string;
   isPercentage?: boolean;
+  numFractionDigits?: number;
 }) {
   const { siteText, formatNumber, formatPercentage } = useIntl();
   const text = siteText.toe_en_afname;
@@ -25,11 +25,8 @@ export function TileDifference({
   const { difference } = value;
 
   const differenceFormattedString = isDecimal
-    ? formatPercentage(
-        Math.abs(difference),
-        maximumFractionDigits ? { maximumFractionDigits } : undefined
-      )
-    : formatNumber(Math.abs(difference));
+    ? formatPercentage(Math.abs(difference), numFractionDigits)
+    : formatNumber(Math.abs(difference), numFractionDigits);
 
   const timespanTextNode = staticTimespan ?? text.vorige_waarde;
 

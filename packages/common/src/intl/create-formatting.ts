@@ -68,6 +68,25 @@ export function createFormatting(
     numFractionDigits?: number
   ): string {
     if (typeof value === 'undefined' || value === null) return '-';
+
+    // const options = numFractionDigits
+    //   ? {
+    //       minimumFractionDigits: numFractionDigits,
+    //       maximumFractionDigits: numFractionDigits,
+    //     }
+    //   : undefined;
+
+    const options = numFractionDigits
+      ? {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
+        }
+      : undefined;
+
+    return Intl.NumberFormat(languageTag, options).format(Number(value));
+  }
+
+  function formatPercentage(value: number, numFractionDigits?: number) {
     const options = numFractionDigits
       ? {
           maximumFractionDigits: numFractionDigits,
@@ -75,16 +94,6 @@ export function createFormatting(
         }
       : undefined;
 
-    return Intl.NumberFormat(languageTag, options).format(Number(value));
-  }
-
-  function formatPercentage(
-    value: number,
-    options?: {
-      maximumFractionDigits?: number;
-      minimumFractionDigits?: number;
-    }
-  ) {
     return new Intl.NumberFormat(languageTag, options).format(value);
   }
 

@@ -11,11 +11,6 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
   const { siteText, formatPercentage } = useIntl();
   const diffText = siteText.covid_varianten.varianten_tabel.verschil;
 
-  const options = {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
-  };
-
   if (value === undefined) {
     return <>-</>;
   }
@@ -23,7 +18,7 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmhoog />
-        {formatPercentage(value.difference, options)} {diffText.meer}
+        {formatPercentage(value.difference, 1)} {diffText.meer}
       </Difference>
     );
   }
@@ -31,7 +26,7 @@ export function VariantDifference({ value }: { value: DifferenceDecimal }) {
     return (
       <Difference color={colors.body}>
         <PijlOmlaag />
-        {formatPercentage(-value.difference, options)} {diffText.minder}
+        {formatPercentage(-value.difference, 1)} {diffText.minder}
       </Difference>
     );
   }

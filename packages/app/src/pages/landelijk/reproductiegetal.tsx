@@ -88,7 +88,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="index_average"
                 localeTextKey="reproductiegetal"
                 differenceKey="reproduction__index_average"
-                differenceFractionDigits={2}
+                numFractionDigits={2}
               />
               <Text>{text.barscale_toelichting}</Text>
             </KpiWithIllustrationTile>

@@ -136,7 +136,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                         {
                           percentage: formatPercentage(
                             bedsLastValue.beds_occupied_covid_percentage,
-                            { maximumFractionDigits: 1 }
+                            1
                           ),
                         }
                       )}

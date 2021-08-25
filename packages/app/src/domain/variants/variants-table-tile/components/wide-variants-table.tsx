@@ -31,11 +31,7 @@ export function WideVariantsTable(props: WideVariantsTableProps) {
     const numberOfDecimals = getMaximumNumberOfDecimals(
       rows.map((x) => x.percentage ?? 0)
     );
-    return (value: number) =>
-      intl.formatPercentage(value, {
-        minimumFractionDigits: numberOfDecimals,
-        maximumFractionDigits: numberOfDecimals,
-      });
+    return (value: number) => intl.formatPercentage(value, numberOfDecimals);
   }, [intl, rows]);
 
   return (

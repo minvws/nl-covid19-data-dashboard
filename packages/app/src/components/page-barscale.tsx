@@ -31,7 +31,7 @@ interface PageBarScaleProps<T> {
   metricProperty: string;
   differenceKey?: string;
   differenceStaticTimespan?: string;
-  differenceFractionDigits?: number;
+  numFractionDigits?: number;
   currentValue?: number;
   isMovingAverageDifference?: boolean;
 }
@@ -44,7 +44,7 @@ export function PageBarScale<T>({
   localeTextKey,
   differenceKey,
   differenceStaticTimespan,
-  differenceFractionDigits,
+  numFractionDigits,
   isMovingAverageDifference,
 }: PageBarScaleProps<T>) {
   const { siteText } = useIntl();
@@ -142,7 +142,7 @@ export function PageBarScale<T>({
             value={differenceValue}
             isDecimal={config.isDecimal}
             staticTimespan={differenceStaticTimespan}
-            maximumFractionDigits={differenceFractionDigits}
+            numFractionDigits={numFractionDigits}
           />
         ))}
     </Box>

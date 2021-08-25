@@ -35,11 +35,7 @@ export function NarrowInfectedTable({
     const numberOfDecimals = getMaximumNumberOfDecimals(
       data.map((x) => x.infected_per_100k_average ?? 0)
     );
-    return (value: number) =>
-      intl.formatPercentage(value, {
-        minimumFractionDigits: numberOfDecimals,
-        maximumFractionDigits: numberOfDecimals,
-      });
+    return (value: number) => intl.formatPercentage(value, numberOfDecimals);
   }, [intl, data]);
 
   return (

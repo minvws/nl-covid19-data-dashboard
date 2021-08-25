@@ -83,10 +83,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
                 <VaccinationCoveragePercentage
                   value={`${formatPercentage(
                     value.fully_vaccinated_percentage,
-                    {
-                      maximumFractionDigits: 1,
-                      minimumFractionDigits: 1,
-                    }
+                    1
                   )}%`}
                 />
                 <CoverageProgressBar

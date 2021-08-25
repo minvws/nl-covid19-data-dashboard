@@ -47,7 +47,7 @@ export const getStaticProps = createGetStaticProps(
 );
 
 const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
-  const { siteText } = useIntl();
+  const { siteText, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
@@ -61,6 +61,15 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  console.log(
+    Intl.NumberFormat('nl-NL', {
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    }).format(444.343234)
+  );
+
+  console.log(formatNumber(1232.234, 0));
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -105,6 +114,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={sewerAverages.last_value.average}
                 valueAnnotation={siteText.waarde_annotaties.riool_normalized}
                 difference={data.difference.sewer__average}
+                numFractionDigits={0}
               />
             </KpiTile>
 
