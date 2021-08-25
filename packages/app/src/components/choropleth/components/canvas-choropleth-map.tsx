@@ -56,7 +56,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     fitExtent
   );
 
-  const [outlinGeoInfo, outlineProjectedCoordinates] = useProjectedCoordinates(
+  const [, outlineProjectedCoordinates] = useProjectedCoordinates(
     choroplethFeatures.outline,
     mapProjection,
     fitExtent
@@ -189,7 +189,6 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           <Outlines
             width={width}
             height={height}
-            geoInfo={outlinGeoInfo}
             projectedCoordinates={outlineProjectedCoordinates}
             featureProps={featureProps}
           />
@@ -289,18 +288,33 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
 
 type OutlinesProps = {
   projectedCoordinates: [number, number][][];
-  geoInfo: GeoInfo[];
   featureProps: FeatureProps;
   height: number;
   width: number;
 };
 
 const Outlines = memo((props: OutlinesProps) => {
-  const { projectedCoordinates, geoInfo, featureProps, height, width } = props;
-  if (!geoInfo.length) {
+  const { projectedCoordinates, featureProps, height, width } = props;
+  if (!projectedCoordinates.length) {
     return null;
   }
-  return <Layer />;
+  return (
+    <Layer>
+      {projectedCoordinates.map((x, i) => (
+        <Line
+          perfectDrawEnabled={false}
+          closed
+          key={i}
+          x={0}
+          y={0}
+          strokeWidth={featureProps.outline.strokeWidth('')}
+          points={x.flat()}
+          fill={featureProps.outline.fill('')}
+          stroke={featureProps.outline.stroke('')}
+        />
+      ))}
+    </Layer>
+  );
 });
 
 type FeaturesProps = {
