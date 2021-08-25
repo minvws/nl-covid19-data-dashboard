@@ -48,7 +48,7 @@
         },
         "has_1_shot_percentage_label": {
           "type": ["string", "null"],
-          "pattern": "^([0-9]+-)*[0-9]+$"
+          "pattern": "^([><][=][0-9]{1,2})$"
         },
         "date_unix": {
           "type": "integer"
