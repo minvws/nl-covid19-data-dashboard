@@ -3,6 +3,15 @@ import meow from 'meow';
 import prompts from 'prompts';
 import { getClient } from '../client';
 
+/**
+ * This tool should ideally never needed to be used. It was written after some bugs were determined in the
+ * apply-json-edits script where sometimes duplicate keys ended up in the Sanity dataset, and this tool
+ * allowed for an easy way to fix those errors.
+ *
+ * After the apply-json-edits script was fixed, duplicates shouldn't occur anymore. But, if for some reason
+ * they happen again, this tool can assist in making fixes.
+ *
+ */
 type LokalizeText = {
   _id: string;
   key: string;
