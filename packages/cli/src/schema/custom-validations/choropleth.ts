@@ -73,6 +73,10 @@ export const validateChoroplethValues = (
 
       const lastValue = (input[propertyName] as { last_value: UnknownObject })
         .last_value;
+      if (!isDefined(lastValue)) {
+        return `No last_value property exists on ${propertyName}`;
+      }
+
       return validateCommonPropertyEquality(
         lastValue,
         collectionValue,

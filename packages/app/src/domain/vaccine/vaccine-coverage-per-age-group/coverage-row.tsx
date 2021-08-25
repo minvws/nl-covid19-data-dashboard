@@ -77,11 +77,12 @@ function DesktopCoverageRow(props: RowProps) {
 
   return (
     <Row>
-      <Box flex={0.4}>{children[0]}</Box>
+      <Box flex={0.55}>{children[0]}</Box>
       <Box
         flex={0.4}
         display="flex"
         justifyContent="flex-end"
+        alignItems="center"
         mr={{ _: 3, lg: 4, xl: 5 }}
       >
         {children[1]}
@@ -98,7 +99,7 @@ function DesktopHeaderRow(props: RowProps) {
 
   return (
     <Row>
-      <Box flex={0.4}>{children[0]}</Box>
+      <Box flex={0.55}>{children[0]}</Box>
       <Box
         flex={0.4}
         display="flex"
