@@ -45,6 +45,8 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install packages
         run: yarn install
+      - name: Build icon package
+        run: yarn workspace @corona-dashboard/icons compile && yarn workspace @corona-dashboard/icons build
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
       - name: Export texts (develop)
