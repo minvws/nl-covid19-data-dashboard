@@ -1,5 +1,5 @@
 import css from '@styled-system/css';
-import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
+import { Vaccinaties as VaccinatieIcon } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { Heading } from '~/components/typography';
 

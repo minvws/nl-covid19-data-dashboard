@@ -68,21 +68,17 @@ export function Icon(props: IconProps) {
         >
           <Box padding={4}>
             <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
-              {allIcons.map(([id, GridIcon]) => {
-                const GridIcon = src;
-
-                return (
-                  <Flex
-                    key={id}
-                    direction="column"
-                    align="center"
-                    onClick={(event) => onChange(createPatchFrom(id))}
-                  >
-                    <GridIcon />
-                    <Radio checked={value === id} readOnly />
-                  </Flex>
-                );
-              })}
+              {allIcons.map(([id, GridIcon]) => (
+                <Flex
+                  key={id}
+                  direction="column"
+                  align="center"
+                  onClick={(event) => onChange(createPatchFrom(id))}
+                >
+                  <GridIcon />
+                  <Radio checked={value === id} readOnly />
+                </Flex>
+              ))}
 
               <Flex
                 direction="column"
