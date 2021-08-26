@@ -1,7 +1,5 @@
 import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { localPoint } from '@visx/event';
-import { KonvaEventObject } from 'konva/types/Node';
-import { Shape } from 'konva/types/Shape';
 import { MutableRefObject, RefObject, useEffect, useMemo, useRef } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
@@ -211,17 +209,9 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   map: MapType,
   metricPropertyFormatter: (value: number) => string
 ) => {
-  return (
-    event: React.MouseEvent | KonvaEventObject<MouseEvent | TouchEvent>
-  ) => {
-    const elm = event.target;
-    const code = isDomElement(elm)
-      ? elm.getAttribute('data-id')
-      : (elm as Shape).attrs.id;
-
-    const eventObj = isKonvaEvent(event)
-      ? event.evt
-      : (event as React.MouseEvent);
+  return (event: React.MouseEvent<HTMLElement>) => {
+    const elm = event.target as HTMLElement;
+    const code = elm.getAttribute('data-id');
 
     if (isPresent(code) && ref.current) {
       if (timeout.current > -1) {
@@ -232,7 +222,7 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
       /**
        * Pass the DOM node to fix positioning in Firefox
        */
-      const coords = localPoint(ref.current, eventObj);
+      const coords = localPoint(ref.current, event);
 
       if (isPresent(coords)) {
         setTooltip({
@@ -253,16 +243,6 @@ const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
     }
   };
 };
-
-function isDomElement(element: any): element is HTMLElement {
-  return 'getAttribute' in element;
-}
-
-function isKonvaEvent(
-  event: any
-): event is KonvaEventObject<MouseEvent | TouchEvent> {
-  return 'evt' in event;
-}
 
 const createFeatureMouseOutHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,

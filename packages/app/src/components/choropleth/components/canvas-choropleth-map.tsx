@@ -1,19 +1,18 @@
 import Konva from 'konva';
-import { KonvaEventObject } from 'konva/types/Node';
-import { useRouter } from 'next/router';
 import {
   memo,
+  MouseEvent,
   RefObject,
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { Group, Layer, Line, Rect, Stage } from 'react-konva';
+import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
-import { VisuallyHidden } from '~/components/visually-hidden';
+import { useIsTouchDevice } from '~/utils/use-is-touch-device';
+import { useUniqueId } from '~/utils/use-unique-id';
 import { FeatureProps } from '../logic';
 import { useHighlightedFeature } from '../logic/use-highlighted-feature';
 import {
@@ -48,8 +47,6 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const [hoverCode, setHoverCode] = useState<string>();
   const [keyboardActive, setKeyboardActive] = useState(false);
 
-  const router = useRouter();
-
   const [geoInfo, geoInfoLookup] = useProjectedCoordinates(
     choroplethFeatures.hover,
     mapProjection,
@@ -78,42 +75,20 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   );
 
   const handleMouseOver = useCallback(
-    (evt: KonvaEventObject<MouseEvent | TouchEvent>) => {
-      evt.cancelBubble = true;
-
-      if (!isDefined(evt.target.attrs.id)) {
+    (evt: MouseEvent<HTMLAreaElement>) => {
+      const areaElm = evt.target as HTMLAreaElement;
+      const code = areaElm.getAttribute('data-id');
+      if (!isPresent(code)) {
         setHover(undefined);
         setHoverCode(undefined);
+        tooltipTrigger();
+      } else {
+        selectFeature(code);
+        featureOverHandler(evt);
       }
-
-      selectFeature(evt.target.attrs.id);
-
-      featureOverHandler(evt);
     },
     [setHover, selectFeature, featureOverHandler]
   );
-
-  const handleMouseClick = useCallback(
-    (evt: KonvaEventObject<MouseEvent | TouchEvent>) => {
-      evt.cancelBubble = true;
-      if (isDefined(evt.target.attrs.id) && isDefined(dataOptions.getLink)) {
-        const link = dataOptions.getLink(evt.target.attrs.id);
-        router.push(link);
-      }
-    },
-    [router, dataOptions]
-  );
-
-  const removeHover = useCallback(() => {
-    setHover(undefined);
-    setHoverCode(undefined);
-    if (isDefined(featureOutHandler)) {
-      featureOutHandler();
-    }
-    if (isPresent(stageRef.current)) {
-      stageRef.current.container().style.cursor = 'default';
-    }
-  }, [setHover, setHoverCode, featureOutHandler]);
 
   const hoveredRef = useRef<Konva.Group>(null);
   const stageRef = useRef<Konva.Stage>(null);
@@ -139,26 +114,26 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     }
   }, [hoverCode, hoveredRef, tooltipTrigger, keyboardActive]);
 
-  const handleMouseEnter = useCallback(() => {
-    if (isPresent(stageRef.current)) {
-      stageRef.current.container().style.cursor = 'pointer';
-    }
-  }, [stageRef]);
-
   const { getLink } = dataOptions;
+
+  const mapId = useUniqueId();
 
   return (
     <>
       {isDefined(getLink) && isPresent(anchorsRef.current) && (
         <>
           {createPortal(
-            <AnchorLinks
+            <AreaMap
+              width={width}
+              height={height}
               isTabInteractive={isTabInteractive}
               geoInfo={geoInfo}
               getLink={getLink}
               getFeatureName={getFeatureName}
               anchorEventHandlers={anchorEventHandlers}
               selectFeature={selectFeature}
+              id={mapId}
+              handleMouseOver={handleMouseOver}
             />,
             anchorsRef.current
           )}
@@ -170,16 +145,21 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           minHeight: height,
           maxHeight: '75vh',
           maxWidth: '100%',
+          position: 'relative',
         }}
+        onMouseOut={featureOutHandler}
       >
         <Stage
+          listening={false}
           ref={stageRef}
           width={width}
           height={height}
-          onMouseOut={featureOutHandler}
           role="img"
           style={{
             overflow: 'hidden',
+            position: 'absolute',
+            left: 0,
+            right: 0,
           }}
         >
           <Outlines
@@ -188,17 +168,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
             geoInfo={outlineGeoInfo}
             featureProps={featureProps}
           />
-          <Features
-            width={width}
-            height={height}
-            geoInfo={geoInfo}
-            handleMouseOver={handleMouseOver}
-            handleMouseClick={handleMouseClick}
-            handleMouseEnter={handleMouseEnter}
-            removeHover={removeHover}
-            selectFeature={selectFeature}
-            featureProps={featureProps}
-          >
+          <Features geoInfo={geoInfo} featureProps={featureProps}>
             <HighlightedFeature
               feature={highlight}
               featureProps={featureProps}
@@ -213,6 +183,15 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
             featureProps={featureProps}
           />
         </Stage>
+        <div style={{ position: 'absolute', left: 0, right: 0 }}>
+          <img
+            aria-hidden="true"
+            src={`data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC`}
+            width={width}
+            height={height}
+            useMap={`#${mapId}`}
+          />
+        </div>
       </div>
     </>
   );
@@ -235,6 +214,7 @@ const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
     <Group listening={false}>
       {feature.map((x, i) => (
         <Line
+          listening={false}
           key={i}
           x={0}
           y={0}
@@ -264,9 +244,10 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
 
   return (
     <Layer listening={false}>
-      <Group ref={hoveredRef}>
+      <Group ref={hoveredRef} listening={false}>
         {hover.map((x, i) => (
           <Line
+            listening={false}
             key={i}
             x={0}
             y={0}
@@ -294,9 +275,10 @@ const Outlines = memo((props: OutlinesProps) => {
     return null;
   }
   return (
-    <Layer>
+    <Layer listening={false}>
       {geoInfo.map((x, i) => (
         <Line
+          listening={false}
           perfectDrawEnabled={false}
           closed
           key={i}
@@ -313,29 +295,12 @@ const Outlines = memo((props: OutlinesProps) => {
 
 type FeaturesProps = {
   geoInfo: ProjectedGeoInfo[];
-  handleMouseOver: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
-  handleMouseClick: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
-  handleMouseEnter: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
-  removeHover: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
-  selectFeature: (code: string) => void;
   featureProps: FeatureProps;
-  height: number;
-  width: number;
   children: any;
 };
 
 const Features = memo((props: FeaturesProps) => {
-  const {
-    geoInfo,
-    handleMouseOver,
-    handleMouseClick,
-    handleMouseEnter,
-    removeHover: reset,
-    featureProps,
-    height,
-    width,
-    children,
-  } = props;
+  const { geoInfo, featureProps, children } = props;
 
   const getFillColor = useCallback(
     (code: string, index: number) => {
@@ -364,27 +329,21 @@ const Features = memo((props: FeaturesProps) => {
 
   return (
     <>
-      <Layer>
-        <Rect width={width} height={height} onTap={reset} />
-        <Group
-          onMouseOver={handleMouseOver}
-          onClick={handleMouseClick}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={reset}
-          onTap={handleMouseOver}
-        >
+      <Layer listening={false}>
+        <Group listening={false}>
           {geoInfo.map((x, i) => (
             <Line
+              listening={false}
               perfectDrawEnabled={false}
               closed
-              id={geoInfo[i].code}
+              id={x.code}
               key={i}
               x={0}
               y={0}
-              strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
+              strokeWidth={featureProps.area.strokeWidth(x.code)}
               points={x.coordinates.flat()}
-              fill={getFillColor(geoInfo[i].code, i)}
-              stroke={featureProps.area.stroke(geoInfo[i].code)}
+              fill={getFillColor(x.code, i)}
+              stroke={featureProps.area.stroke(x.code)}
             />
           ))}
         </Group>
@@ -394,16 +353,20 @@ const Features = memo((props: FeaturesProps) => {
   );
 });
 
-type AnchorLinksProps = {
+type AreaMapProps = {
   isTabInteractive: boolean;
   geoInfo: ProjectedGeoInfo[];
   getLink: (code: string) => string;
   getFeatureName: (code: string) => string;
   anchorEventHandlers: AnchorEventHandler;
   selectFeature: (code: string | undefined, isKeyboardAction?: boolean) => void;
+  id: string;
+  handleMouseOver: any;
+  height: number;
+  width: number;
 };
 
-function AnchorLinks(props: AnchorLinksProps) {
+function AreaMap(props: AreaMapProps) {
   const {
     isTabInteractive,
     geoInfo,
@@ -411,44 +374,44 @@ function AnchorLinks(props: AnchorLinksProps) {
     getFeatureName,
     selectFeature,
     anchorEventHandlers,
+    id,
+    handleMouseOver,
+    height,
+    width,
   } = props;
 
-  const anchorInfo = useMemo(() => {
-    return geoInfo
-      .slice()
-      .filter((x, i, arr) => i === arr.findIndex((y) => x.code === y.code))
-      .sort((a, b) =>
-        getFeatureName(a.code).localeCompare(
-          getFeatureName(b.code),
-          undefined,
-          { sensitivity: 'accent' }
-        )
-      );
-  }, [geoInfo, getFeatureName]);
+  const isTouch = useIsTouchDevice();
 
   return (
-    <VisuallyHidden>
-      <div tabIndex={isTabInteractive ? 0 : -1}>
-        {anchorInfo.map((x, i) => (
-          <a
-            title={getFeatureName(x.code)}
-            data-id={x.code}
-            key={i}
-            tabIndex={i + 1}
-            href={getLink(x.code)}
-            onFocus={(event) => {
-              anchorEventHandlers.onFocus(event);
-              selectFeature(x.code, true);
-            }}
-            onBlur={(event) => {
-              anchorEventHandlers.onBlur(event);
-              selectFeature(undefined, true);
-            }}
-          >
-            {getFeatureName(x.code)}
-          </a>
-        ))}
-      </div>
-    </VisuallyHidden>
+    <map name={id} tabIndex={isTabInteractive ? 0 : -1}>
+      {geoInfo.map((x, i) => (
+        <area
+          style={{
+            cursor: 'pointer',
+          }}
+          tabIndex={i + 1}
+          aria-label={getFeatureName(x.code)}
+          key={i}
+          data-id={x.code}
+          shape="poly"
+          coords={x.coordinates.flat().join(',')}
+          href={isTouch ? getLink(x.code) : undefined}
+          onMouseEnter={handleMouseOver}
+          onFocus={(event) => {
+            anchorEventHandlers.onFocus(event);
+            selectFeature(x.code, true);
+          }}
+          onBlur={(event) => {
+            anchorEventHandlers.onBlur(event);
+            selectFeature(undefined, true);
+          }}
+        />
+      ))}
+      <area
+        shape="rect"
+        coords={`0,0,${width},${height}`}
+        onMouseEnter={handleMouseOver}
+      />
+    </map>
   );
 }
