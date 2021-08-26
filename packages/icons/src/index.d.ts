@@ -37,6 +37,7 @@ export const ChevronDown: Icon;
 export const ChevronLarge: Icon;
 export const Chevron: Icon;
 export const Clock: Icon;
+export const CloseThick: Icon;
 export const Close: Icon;
 export const Contactberoepen: Icon;
 export const Coronavirus: Icon;

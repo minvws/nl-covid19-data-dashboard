@@ -28,6 +28,7 @@ export { default as ChevronDown } from './icons/chevron-down';
 export { default as ChevronLarge } from './icons/chevron-large';
 export { default as Chevron } from './icons/chevron';
 export { default as Clock } from './icons/clock';
+export { default as CloseThick } from './icons/close-thick';
 export { default as Close } from './icons/close';
 export { default as Contactberoepen } from './icons/contactberoepen';
 export { default as Coronavirus } from './icons/coronavirus';
