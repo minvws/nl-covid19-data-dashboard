@@ -286,6 +286,9 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
       hospital_nice: { last_value: gmData.data.hospital_nice.last_value },
       tested_overall: { last_value: gmData.data.tested_overall.last_value },
       sewer: { last_value: gmData.data.sewer.last_value },
+      vaccine_coverage_per_age_group: {
+        values: gmData.data.vaccine_coverage_per_age_group.values,
+      },
     };
 
     const selectedGmData = metrics.reduce(

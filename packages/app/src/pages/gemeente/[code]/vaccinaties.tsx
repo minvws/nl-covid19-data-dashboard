@@ -1,3 +1,4 @@
+import { GmVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { GmLayout } from '~/domain/layout/gm-layout';
@@ -27,7 +28,11 @@ export const getStaticProps = withFeatureNotFoundPage(
   'gmVaccinationPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectGmPageMetricData('difference', 'code'),
+    selectGmPageMetricData(
+      'difference',
+      'code',
+      'vaccine_coverage_per_age_group'
+    ),
     createGetContent<{
       page: VaccinationPageQuery;
       highlight: PageArticlesQueryResult;
@@ -47,7 +52,7 @@ export const VaccinationsGmPage = (
   const {
     sideBarData,
     municipalityName,
-    selectedGmData: { difference, code },
+    selectedGmData: { difference, code, vaccine_coverage_per_age_group },
     content,
     lastGenerated,
   } = props;
@@ -65,6 +70,13 @@ export const VaccinationsGmPage = (
     }),
   };
 
+  /**
+   * Filter out only the the 18 plus value to show in the sidebar
+   */
+  const filteredAgeGroup = vaccine_coverage_per_age_group.values.filter(
+    (item) => item.age_group_range === '18+'
+  )[0] as GmVaccineCoveragePerAgeGroupValue;
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <GmLayout
@@ -81,15 +93,15 @@ export const VaccinationsGmPage = (
             })}
             description={text.introductie_sectie.beschrijving}
             kpiTitle={text.introductie_sectie.kpi_titel}
-            kpiValue={9999999}
+            kpiValue={filteredAgeGroup.fully_vaccinated_percentage}
           />
 
           <PageInformationBlock
             description={text.informatie_blok.beschrijving}
             metadata={{
               datumsText: text.informatie_blok.datums,
-              dateOrRange: 1629798465,
-              dateOfInsertionUnix: 1629798465,
+              dateOrRange: filteredAgeGroup.date_unix,
+              dateOfInsertionUnix: filteredAgeGroup.date_of_insertion_unix,
               dataSources: [],
             }}
             usefulLinks={content.page.usefulLinks}

@@ -1,3 +1,4 @@
+import { VrVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
@@ -59,7 +60,12 @@ export const VaccinationsVrPage = (
     }),
   };
 
-  console.log(data);
+  /**
+   * Filter out only the the 18 plus value to show in the sidebar
+   */
+  const filteredAgeGroup = data.vaccine_coverage_per_age_group.values.filter(
+    (item) => item.age_group_range === '18+'
+  )[0] as VrVaccineCoveragePerAgeGroupValue;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -71,15 +77,15 @@ export const VaccinationsVrPage = (
             })}
             description={text.introductie_sectie.beschrijving}
             kpiTitle={text.introductie_sectie.kpi_titel}
-            kpiValue={9999999}
+            kpiValue={filteredAgeGroup.fully_vaccinated_percentage}
           />
 
           <PageInformationBlock
             description={text.informatie_blok.beschrijving}
             metadata={{
               datumsText: text.informatie_blok.datums,
-              dateOrRange: 1629798465,
-              dateOfInsertionUnix: 1629798465,
+              dateOrRange: filteredAgeGroup.date_unix,
+              dateOfInsertionUnix: filteredAgeGroup.date_of_insertion_unix,
               dataSources: [],
             }}
             usefulLinks={content.page.usefulLinks}

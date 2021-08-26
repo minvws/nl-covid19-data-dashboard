@@ -1,21 +1,8 @@
-import {
-  GmCollectionVaccineCoveragePerAgeGroup,
-  GmVaccineCoveragePerAgeGroup,
-  NlVaccineCoveragePerAgeGroup,
-  NlVaccineCoveragePerAgeGroupValue,
-  VrCollectionVaccineCoveragePerAgeGroup,
-  VrVaccineCoveragePerAgeGroup,
-} from '@corona-dashboard/common';
+import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 
 export function getCoveragePerAgeGroupLatestValues(
   values: NlVaccineCoveragePerAgeGroupValue[]
-  // | VrVaccineCoveragePerAgeGroup
-  // | VrCollectionVaccineCoveragePerAgeGroup
-  // | GmVaccineCoveragePerAgeGroup
-  // | GmCollectionVaccineCoveragePerAgeGroup
 ) {
-  // console.log(data);
-
   /**
    * Get all the unique age groups in the data.
    */
