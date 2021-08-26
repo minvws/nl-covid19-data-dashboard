@@ -153,3 +153,9 @@ timestamp,action,key,document_id,move_to
 2021-08-25T10:16:29.645Z,delete,choropleth_tooltip.infected_locations,m5cl7ciD7CmTUWm5d6tQqX,__
 2021-08-25T10:16:29.646Z,delete,choropleth_tooltip.positive_tested_people,DWLUotrm23arH2ViSHOq3W,__
 2021-08-25T10:16:29.646Z,delete,choropleth_tooltip.sewer_regional,m5cl7ciD7CmTUWm5d6tOZr,__
+2021-08-26T11:59:49.104Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.gm,m5cl7ciD7CmTUWm5dKcsiv,__
+2021-08-26T11:59:50.195Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.vr,DWLUotrm23arH2ViSS30TU,__
+2021-08-26T11:59:51.146Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.title,m5cl7ciD7CmTUWm5dKcsxw,__
+2021-08-26T11:59:52.160Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.dropdown_label,m5cl7ciD7CmTUWm5dKct90,__
+2021-08-26T11:59:52.174Z,delete,vaccinaties.choropleth_vaccinatie_graad_per_gm.title,m5cl7ciD7CmTUWm5dFcrlA,__
+2021-08-26T12:13:23.967Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.titel,m5cl7ciD7CmTUWm5dKee56,__

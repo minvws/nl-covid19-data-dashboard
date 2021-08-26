@@ -110,20 +110,32 @@ export function VaccineCoveragePerMunicipality({
     [siteText.vaccinaties.age_groups, siteText.vaccinaties.birthyear_ranges]
   );
 
+  const variables = {
+    regio: siteText.vaccinaties.choropleth_vaccinatie_graad_per_gm[selectedMap],
+  };
+
   return (
     <ChoroplethTile
-      title={siteText.vaccinaties.choropleth_vaccinatie_graad_per_gm.title}
+      title={replaceVariablesInText(
+        siteText.vaccinaties.choropleth_vaccinatie_graad_per_gm.titel,
+        variables
+      )}
       description={
         <>
           <Text>
-            {
+            {replaceVariablesInText(
               siteText.vaccinaties.choropleth_vaccinatie_graad_per_gm
-                .description
-            }
+                .description,
+              variables
+            )}
           </Text>
 
           <RichContentSelect
-            label={'Selecteer leeftijdsgroep'}
+            label={
+              siteText.vaccinaties.choropleth_vaccinatie_graad_per_gm
+                .dropdown_label
+            }
+            visuallyHiddenLabel
             initialValue={'18+'}
             options={options}
             onChange={(option) => setSelectedAgeGroup(option.value)}

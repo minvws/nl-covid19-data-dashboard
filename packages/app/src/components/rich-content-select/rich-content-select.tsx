@@ -37,7 +37,7 @@ export function RichContentSelect<T extends string>(
   } = useRichContentSelect(options, onChange, initialValue);
 
   return (
-    <Box>
+    <Box css={css({ pb: 3 })}>
       {visuallyHiddenLabel ? (
         <VisuallyHidden as="label" id={labelId}>
           {typeof label === 'string' ? <InlineText>{label}</InlineText> : label}

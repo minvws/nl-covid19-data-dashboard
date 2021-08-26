@@ -339,8 +339,15 @@ export function useRichContentSelect<T extends string>(
           'aria-activedescendant': `${listBoxId}-${activeIndex}`,
           tabIndex: 0,
           onBlur: () => {
-            if (ignoreBlur) setIgnoreBlur(false);
-            if (expanded) updateExpandedState(false, false);
+            if (ignoreBlur) {
+              setIgnoreBlur(false);
+              return;
+            }
+
+            if (expanded) {
+              selectOption(activeIndex);
+              updateExpandedState(false, false);
+            }
           },
           onClick: () => updateExpandedState(!expanded, false),
           onKeyDown: handleKeyDown,

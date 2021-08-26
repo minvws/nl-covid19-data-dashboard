@@ -40,7 +40,7 @@ export function replaceVariablesInText(
       isDefined(translation),
       `Missing a locale text with placeholders for: ${Object.keys(
         variables
-      ).join(',')}`
+      ).join(',')} in: "${translation}"`
     );
   }
 
