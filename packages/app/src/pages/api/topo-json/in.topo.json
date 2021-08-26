@@ -14384,7 +14384,6 @@
           "type": "Polygon",
           "properties": { "code": "MDA" }
         },
-        { "type": null, "properties": { "code": "VAT" } },
         {
           "arcs": [
             [
@@ -14573,7 +14572,6 @@
           "type": "Polygon",
           "properties": { "code": "MAR" }
         },
-        { "type": null, "properties": { "code": "ESB" } },
         {
           "arcs": [
             [[-659, 675, 676, 677]],
@@ -14588,7 +14586,6 @@
           "properties": { "code": "AZE" }
         },
         { "arcs": [[700]], "type": "Polygon", "properties": { "code": "CYP" } },
-        { "type": null, "properties": { "code": "BHR" } },
         {
           "arcs": [
             [
@@ -14697,7 +14694,6 @@
           "type": "Polygon",
           "properties": { "code": "SYR" }
         },
-        { "type": null, "properties": { "code": "QAT" } },
         {
           "arcs": [
             [
@@ -14918,7 +14914,6 @@
           "type": "MultiPolygon",
           "properties": { "code": "ESP" }
         },
-        { "type": null, "properties": { "code": "GIB" } },
         {
           "arcs": [
             [
@@ -14980,7 +14975,6 @@
           "type": "MultiPolygon",
           "properties": { "code": "LTU" }
         },
-        { "type": null, "properties": { "code": "MCO" } },
         {
           "arcs": [
             [

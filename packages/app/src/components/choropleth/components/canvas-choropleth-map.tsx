@@ -120,7 +120,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
   return (
     <>
-      {isDefined(getLink) && isPresent(anchorsRef.current) && (
+      {isPresent(anchorsRef.current) && (
         <>
           {createPortal(
             <AreaMap
@@ -348,7 +348,7 @@ const Features = memo((props: FeaturesProps) => {
 type AreaMapProps = {
   isTabInteractive: boolean;
   geoInfo: ProjectedGeoInfo[];
-  getLink: (code: string) => string;
+  getLink?: (code: string) => string;
   getFeatureName: (code: string) => string;
   anchorEventHandlers: AnchorEventHandler;
   selectFeature: (code: string | undefined, isKeyboardAction?: boolean) => void;
@@ -391,7 +391,7 @@ function AreaMap(props: AreaMapProps) {
           data-id={x.code}
           shape="poly"
           coords={x.coordinates.flat().join(',')}
-          href={!isTouch ? getLink(x.code) : undefined}
+          href={!isTouch && isDefined(getLink) ? getLink(x.code) : undefined}
           onFocus={(event) => {
             anchorEventHandlers.onFocus(event);
             selectFeature(x.code, true);
