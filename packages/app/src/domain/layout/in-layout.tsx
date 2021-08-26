@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactComponent as Getest } from '~/assets/test.svg';
-import { ReactComponent as Varianten } from '~/assets/varianten.svg';
+import { Test } from '@corona-dashboard/icons';
+import { Varianten } from '@corona-dashboard/icons';
 import {
   CategoryMenu,
   Menu,
@@ -62,7 +62,7 @@ export function InLayout(props: InLayoutProps) {
                     siteText.internationaal_positief_geteste_personen
                       .titel_sidebar
                   }
-                  icon={<Getest />}
+                  icon={<Test />}
                 />
                 <MetricMenuItemLink
                   href={reverseRouter.in.varianten()}

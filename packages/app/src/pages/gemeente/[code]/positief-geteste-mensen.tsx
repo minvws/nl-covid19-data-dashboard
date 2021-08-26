@@ -1,4 +1,5 @@
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { Test } from '@corona-dashboard/icons';
+
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -107,7 +108,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               municipality: municipalityName,
             })}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

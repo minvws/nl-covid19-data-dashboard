@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { MouseEvent, useRef } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as CloseIcon } from '~/assets/close.svg';
-import { ReactComponent as SearchIcon } from '~/assets/search-icon-bold.svg';
+import { Close } from '@corona-dashboard/icons';
+import { Search } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
@@ -16,7 +16,7 @@ export function MultiSelectCountriesInput() {
   return (
     <Box position="relative">
       <IconContainer align="left">
-        <SearchIcon />
+        <Search />
       </IconContainer>
 
       {inputProps.value && (
@@ -36,7 +36,7 @@ export function MultiSelectCountriesInput() {
           })}
         >
           <VisuallyHidden>{siteText.select_countries.clear}</VisuallyHidden>
-          <CloseIcon />
+          <Close />
         </IconContainer>
       )}
 

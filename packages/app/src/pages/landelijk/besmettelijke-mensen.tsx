@@ -1,6 +1,6 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { isEmpty } from 'lodash';
-import { ReactComponent as Ziektegolf } from '~/assets/ziektegolf.svg';
+import { Ziektegolf } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';

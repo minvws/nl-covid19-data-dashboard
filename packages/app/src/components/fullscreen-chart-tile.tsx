@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import { useEffect, useRef, useState } from 'react';
-import { ReactComponent as CloseIcon } from '~/assets/close-thin.svg';
-import { ReactComponent as ExpandIcon } from '~/assets/expand.svg';
+import { Close } from '@corona-dashboard/icons';
+import { Expand } from '@corona-dashboard/icons';
 import { Tile } from '~/components/tile';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -74,7 +74,7 @@ export function FullscreenChartTile({
             onClick={() => setIsFullscreen((x) => !x)}
             size={36}
           >
-            {isFullscreen ? <CloseIcon /> : <ExpandIcon />}
+            {isFullscreen ? <Close /> : <Expand />}
           </IconButton>
         </div>
       )}

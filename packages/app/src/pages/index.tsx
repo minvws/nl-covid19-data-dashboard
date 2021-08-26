@@ -2,9 +2,10 @@ import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ReactComponent as GrafiekIcon } from '~/assets/chart.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as ZiekenhuisIcon } from '~/assets/ziekenhuis.svg';
+import { Chart } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
 import {
@@ -145,7 +146,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   />
                 }
-                icon={<GetestIcon />}
+                icon={<Test />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.nl.positiefGetesteMensen()}
@@ -166,7 +167,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   />
                 }
-                icon={<ZiekenhuisIcon />}
+                icon={<Ziekenhuis />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.nl.ziekenhuisopnames()}
@@ -178,7 +179,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
-              icon={<GrafiekIcon />}
+              icon={<Chart />}
             >
               <Sitemap
                 quickLinksHeader={text.quick_links.header}

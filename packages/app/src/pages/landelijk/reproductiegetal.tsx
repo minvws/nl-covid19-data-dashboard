@@ -1,5 +1,5 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
-import { ReactComponent as Repro } from '~/assets/reproductiegetal.svg';
+import { Reproductiegetal } from '@corona-dashboard/icons';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -55,7 +55,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
             category={siteText.nationaal_layout.headings.besmettingen}
             screenReaderCategory={siteText.reproductiegetal.titel_sidebar}
             title={text.titel}
-            icon={<Repro />}
+            icon={<Reproductiegetal />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
