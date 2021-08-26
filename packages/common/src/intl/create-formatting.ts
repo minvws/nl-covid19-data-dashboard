@@ -55,6 +55,8 @@ function parseDateDefinition(dateDefinition: DateDefinition) {
   throw new Error(`Unknown date input: ${JSON.stringify(dateDefinition)}`);
 }
 
+export type DataFormatters = ReturnType<typeof createFormatting>;
+
 export function createFormatting(
   languageTag: string,
   text: {

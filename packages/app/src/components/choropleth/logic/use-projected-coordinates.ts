@@ -8,11 +8,21 @@ import { isDefined, isPresent } from 'ts-is-present';
 import { CodedGeoJSON } from './topology';
 import { FitExtent } from './types';
 
-export type GeoInfo = {
+type GeoPolygons = {
   code: string;
   geometry: Polygon;
 };
 
+export type ProjectedGeoInfo = {
+  code: string;
+  coordinates: [number, number][];
+};
+
+/**
+ * This hook transforms the given CodedGeoJSON to a list and lookup of feature codes
+ * and their corresponding cartesian coordinates tuples which can
+ * be used to draw onto a canvas.
+ */
 export function useProjectedCoordinates(
   geoJson: CodedGeoJSON | undefined,
   geoProjection: () => GeoProjection,
@@ -30,12 +40,19 @@ export function getProjectedCoordinates(
   fitExtent: FitExtent
 ) {
   if (!isDefined(geoJson)) {
-    return [[] as GeoInfo[], [] as [number, number][][]] as const;
+    return [
+      [] as ProjectedGeoInfo[],
+      {} as Record<string, [number, number][][]>,
+    ] as const;
   }
 
+  /**
+   * The GeoJson consists of combination of Polygon and MultiPolygon geometries,
+   * so here we first normalize this to a list of just Polygons.
+   */
   const polygons = geoJson.features
     .filter((x) => x.geometry.type === 'Polygon')
-    .map<GeoInfo>((x) => ({
+    .map<GeoPolygons>((x) => ({
       code: x.properties.code,
       geometry: x.geometry as Polygon,
     }))
@@ -45,12 +62,17 @@ export function getProjectedCoordinates(
         .map((x) => flatten(x))
         .map((x) => x.features)
         .flat()
-        .map<GeoInfo>((x) => ({
+        .map<GeoPolygons>((x) => ({
           code: x.properties?.code,
           geometry: x.geometry,
         }))
     );
 
+  /**
+   * tuple.flatten() doesn't properly flatten deeply nested Multipolygons,
+   * so here we check if the coordinates consist of number tuples, if not,
+   * we can assume it's a deeper nested polygon and extract the tuples.
+   */
   const geoInfo = polygons.reduce((acc, geoInfo) => {
     if (!hasCoordinateTuples(geoInfo.geometry.coordinates)) {
       geoInfo.geometry.coordinates.forEach((x) => {
@@ -66,10 +88,18 @@ export function getProjectedCoordinates(
       acc.push(geoInfo);
     }
     return acc;
-  }, [] as GeoInfo[]);
+  }, [] as GeoPolygons[]);
 
+  /**
+   * Create the method that will translate the lat and lon coordinates to cartesian
+   * coordinates within our container.
+   */
   const projection = geoProjection().fitExtent(fitExtent[0], fitExtent[1]);
 
+  /**
+   * First we clean the given geojson coordinates by removing any unnecessary ones,
+   * then we perform the projection and round the coordinates to whole numbers.
+   */
   const projectedCoordinates = geoInfo
     .map((x) => x.geometry.coordinates.flat())
     .map<[number, number][]>(
@@ -82,7 +112,21 @@ export function getProjectedCoordinates(
         .map((x: [number, number]) => [round(x[0], 0), round(x[1], 0)])
     );
 
-  return [geoInfo, projectedCoordinates] as const;
+  const projections = geoInfo.map<ProjectedGeoInfo>((x, i) => ({
+    code: x.code,
+    coordinates: projectedCoordinates[i],
+  }));
+
+  return [
+    projections,
+    projections.reduce((aggr, item) => {
+      if (!isDefined(aggr[item.code])) {
+        aggr[item.code] = [];
+      }
+      aggr[item.code].push(item.coordinates);
+      return aggr;
+    }, {} as Record<string, [number, number][][]>),
+  ] as const;
 }
 
 function hasCoordinateTuples(array: Position[][] | Position[][][]) {

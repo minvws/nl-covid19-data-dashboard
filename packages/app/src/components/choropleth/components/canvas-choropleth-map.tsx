@@ -17,7 +17,7 @@ import { VisuallyHidden } from '~/components/visually-hidden';
 import { FeatureProps } from '../logic';
 import { useHighlightedFeature } from '../logic/use-highlighted-feature';
 import {
-  GeoInfo,
+  ProjectedGeoInfo,
   useProjectedCoordinates,
 } from '../logic/use-projected-coordinates';
 import { AnchorEventHandler } from './choropleth-map';
@@ -50,23 +50,19 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
   const router = useRouter();
 
-  const [geoInfo, projectedCoordinates] = useProjectedCoordinates(
+  const [geoInfo, geoInfoLookup] = useProjectedCoordinates(
     choroplethFeatures.hover,
     mapProjection,
     fitExtent
   );
 
-  const [, outlineProjectedCoordinates] = useProjectedCoordinates(
+  const [outlineGeoInfo] = useProjectedCoordinates(
     choroplethFeatures.outline,
     mapProjection,
     fitExtent
   );
 
-  const highlight = useHighlightedFeature(
-    geoInfo,
-    projectedCoordinates,
-    dataOptions
-  );
+  const highlight = useHighlightedFeature(geoInfo, dataOptions);
 
   const selectFeature = useCallback(
     (code: string | undefined, isKeyboardAction = false) => {
@@ -75,17 +71,10 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         return;
       }
 
-      const featureIndexes = geoInfo
-        .map((x, i) => (x.code === code ? i : undefined))
-        .filter(isDefined);
-      const newValues = projectedCoordinates.filter((_x, i) =>
-        featureIndexes.includes(i)
-      );
-
       setHoverCode(code);
-      setHover(newValues);
+      setHover(geoInfoLookup[code]);
     },
-    [setHover, geoInfo, projectedCoordinates]
+    [setHover, geoInfo]
   );
 
   const handleMouseOver = useCallback(
@@ -189,14 +178,13 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           <Outlines
             width={width}
             height={height}
-            projectedCoordinates={outlineProjectedCoordinates}
+            geoInfo={outlineGeoInfo}
             featureProps={featureProps}
           />
           <Features
             width={width}
             height={height}
             geoInfo={geoInfo}
-            projectedCoordinates={projectedCoordinates}
             handleMouseOver={handleMouseOver}
             handleMouseClick={handleMouseClick}
             handleMouseEnter={handleMouseEnter}
@@ -287,20 +275,20 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
 });
 
 type OutlinesProps = {
-  projectedCoordinates: [number, number][][];
+  geoInfo: ProjectedGeoInfo[];
   featureProps: FeatureProps;
   height: number;
   width: number;
 };
 
 const Outlines = memo((props: OutlinesProps) => {
-  const { projectedCoordinates, featureProps, height, width } = props;
-  if (!projectedCoordinates.length) {
+  const { geoInfo, featureProps, height, width } = props;
+  if (!geoInfo.length) {
     return null;
   }
   return (
     <Layer>
-      {projectedCoordinates.map((x, i) => (
+      {geoInfo.map((x, i) => (
         <Line
           perfectDrawEnabled={false}
           closed
@@ -308,8 +296,7 @@ const Outlines = memo((props: OutlinesProps) => {
           x={0}
           y={0}
           strokeWidth={featureProps.outline.strokeWidth('')}
-          points={x.flat()}
-          fill={featureProps.outline.fill('')}
+          points={x.coordinates.flat()}
           stroke={featureProps.outline.stroke('')}
         />
       ))}
@@ -318,8 +305,7 @@ const Outlines = memo((props: OutlinesProps) => {
 });
 
 type FeaturesProps = {
-  projectedCoordinates: [number, number][][];
-  geoInfo: GeoInfo[];
+  geoInfo: ProjectedGeoInfo[];
   handleMouseOver: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
   handleMouseClick: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
   handleMouseEnter: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
@@ -333,7 +319,6 @@ type FeaturesProps = {
 
 const Features = memo((props: FeaturesProps) => {
   const {
-    projectedCoordinates,
     geoInfo,
     handleMouseOver,
     handleMouseClick,
@@ -377,7 +362,7 @@ const Features = memo((props: FeaturesProps) => {
           onMouseLeave={reset}
           onTap={handleMouseOver}
         >
-          {projectedCoordinates.map((x, i) => (
+          {geoInfo.map((x, i) => (
             <Line
               perfectDrawEnabled={false}
               closed
@@ -386,7 +371,7 @@ const Features = memo((props: FeaturesProps) => {
               x={0}
               y={0}
               strokeWidth={featureProps.area.strokeWidth(geoInfo[i].code)}
-              points={x.flat()}
+              points={x.coordinates.flat()}
               fill={getFillColor(geoInfo[i].code, i)}
               stroke={featureProps.area.stroke(geoInfo[i].code)}
             />
@@ -400,7 +385,7 @@ const Features = memo((props: FeaturesProps) => {
 
 type AnchorLinksProps = {
   isTabInteractive: boolean;
-  geoInfo: GeoInfo[];
+  geoInfo: ProjectedGeoInfo[];
   getLink: (code: string) => string;
   getFeatureName: (code: string) => string;
   anchorEventHandlers: AnchorEventHandler;
