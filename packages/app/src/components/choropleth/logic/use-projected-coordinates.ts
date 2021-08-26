@@ -51,14 +51,14 @@ export function getProjectedCoordinates(
    * so here we first normalize this to a list of just Polygons.
    */
   const polygons = geoJson.features
-    .filter((x) => x.geometry.type === 'Polygon')
+    .filter((x) => x.geometry?.type === 'Polygon')
     .map<GeoPolygons>((x) => ({
       code: x.properties.code,
       geometry: x.geometry as Polygon,
     }))
     .concat(
       geoJson.features
-        .filter((x) => x.geometry.type === 'MultiPolygon')
+        .filter((x) => x.geometry?.type === 'MultiPolygon')
         .map((x) => flatten(x))
         .map((x) => x.features)
         .flat()
