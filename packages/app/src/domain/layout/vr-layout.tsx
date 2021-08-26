@@ -1,13 +1,14 @@
 import { Vr } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
 import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
 import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
 import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
 import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { ReactComponent as GetestIcon } from '~/assets/test.svg';
+import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
 import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
-import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import {
   CategoryMenu,
@@ -22,6 +23,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/types';
@@ -88,6 +90,7 @@ export function VrLayout(props: VrLayoutProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+  const vaccinationFeature = useFeature('vrVaccinationPage');
 
   const code = router.query.code as string;
 
@@ -177,6 +180,26 @@ export function VrLayout(props: VrLayoutProps) {
                       </Box>
                     </MetricMenuButtonLink>
                   </Box>
+
+                  {vaccinationFeature.isEnabled && (
+                    <CategoryMenu
+                      title={
+                        siteText.veiligheidsregio_layout.headings.vaccinaties
+                      }
+                    >
+                      <MetricMenuItemLink
+                        href={reverseRouter.vr.vaccinaties(code)}
+                        icon={<VaccinatieIcon />}
+                        title={
+                          siteText.veiligheidsregio_vaccinaties.titel_sidebar
+                        }
+                      >
+                        {
+                          // @TODO add vaccine sidebar metric once the data is avaliable
+                        }
+                      </MetricMenuItemLink>
+                    </CategoryMenu>
+                  )}
 
                   <CategoryMenu
                     title={

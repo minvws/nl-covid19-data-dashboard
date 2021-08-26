@@ -9,21 +9,21 @@ import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { CoverageProgressBar } from './components/coverage-progress-bar';
-import { CoverageRow, HeaderRow } from './components/coverage-row';
+import { CoverageProgressBar } from './coverage-progress-bar';
+import { CoverageRow, HeaderRow } from './coverage-row';
 
 type Props = {
   values: NlVaccineCoveragePerAgeGroupValue[];
 };
 
 const SORTING_ORDER = [
-  '80+',
-  '70-79',
-  '65-69',
-  '50-59',
-  '40-49',
-  '30-39',
-  '18-29',
+  '81+',
+  '71-80',
+  '61-70',
+  '51-60',
+  '41-50',
+  '31-40',
+  '18-30',
   '12-17',
   '18+',
   '12+',
@@ -79,6 +79,10 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
                       value.age_group_range
                     ]
                   }
+                  birthyear_range={formatBirthyearRangeString(
+                    value.birthyear_range,
+                    templates.birthyears
+                  )}
                 />
                 <VaccinationCoveragePercentage
                   value={`${formatPercentage(
@@ -153,6 +157,49 @@ function formatAgeGroupString(
   }
 }
 
+/**
+ * Format the birthyear range these rules:
+ *
+ * We could get 3 variants back from the data:
+ * -2003, 2003-2006 and 20036
+ *
+ * If the group includes a hyphen (-) at the start it is considered 2003 or earlier
+ *
+ * If the group includes a hyphen (-) at the end it is considered 2003 or later
+ *
+ * Otherwise the year will just be the full range with both birthyears.
+ */
+
+function formatBirthyearRangeString(
+  birthyearRange: string,
+  templates: {
+    earlier: string;
+    later: string;
+    range: string;
+  }
+) {
+  const splittedBirthyear = birthyearRange.split('-');
+
+  switch (true) {
+    case birthyearRange.startsWith('-'): {
+      return replaceVariablesInText(templates.earlier, {
+        birthyear: splittedBirthyear[1],
+      });
+    }
+    case birthyearRange.endsWith('-'): {
+      return replaceVariablesInText(templates.later, {
+        birthyear: splittedBirthyear[0],
+      });
+    }
+    default: {
+      return replaceVariablesInText(templates.range, {
+        birthyearStart: splittedBirthyear[0],
+        birthyearEnd: splittedBirthyear[1],
+      });
+    }
+  }
+}
+
 function VaccinationCoveragePercentage({ value }: { value: string }) {
   return (
     <InlineText variant="h3" color={colors.data.multiseries.cyan_dark}>
@@ -165,10 +212,12 @@ function AgeGroup({
   range,
   total,
   tooltipText,
+  birthyear_range,
 }: {
   range: string;
   total: string;
   tooltipText?: string;
+  birthyear_range: string;
 }) {
   return (
     <Box display="flex" flexDirection="column">
@@ -180,7 +229,9 @@ function AgeGroup({
         <InlineText fontWeight="bold">{range}</InlineText>
       )}
 
-      <InlineText variant="label1">{total}</InlineText>
+      <InlineText variant="label1">
+        {birthyear_range}: {total}
+      </InlineText>
     </Box>
   );
 }

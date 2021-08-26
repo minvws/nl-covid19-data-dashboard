@@ -79,14 +79,25 @@ import {
        * First create the document in Sanity, so that we can store the document
        * id in the mutations log. We need this id later to sync to production,
        * because both datasets share their document ids for lokalize texts.
+       *
+       * If a document with the given key already exists we log a warning.
        */
-      const document = await devClient.create(createTextDocument(key, text));
+      const count = await devClient.fetch(
+        `count(*[_type == 'lokalizeText' && key == '${key}'])`
+      );
+      if (count === 0) {
+        const document = await devClient.create(createTextDocument(key, text));
 
-      await appendTextMutation({
-        action: 'add',
-        key,
-        documentId: document._id,
-      });
+        await appendTextMutation({
+          action: 'add',
+          key,
+          documentId: document._id,
+        });
+      } else {
+        console.warn(
+          `A lokalize document with key ${key} already exists. Skipped adding a new one.`
+        );
+      }
     }
 
     if (choice.type === 'move') {
