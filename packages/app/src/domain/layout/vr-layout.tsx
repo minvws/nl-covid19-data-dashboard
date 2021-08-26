@@ -8,7 +8,7 @@ import { RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { Test } from '@corona-dashboard/icons';
 import { Verpleeghuiszorg } from '@corona-dashboard/icons';
 import { Coronavirus } from '@corona-dashboard/icons';
-import { Ziekenhuis } from '@corona-dashboard/icons';
+import { Ziekenhuis, Vaccinaties } from '@corona-dashboard/icons';
 import {
   CategoryMenu,
   Menu,
@@ -22,6 +22,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/types';
@@ -88,6 +89,7 @@ export function VrLayout(props: VrLayoutProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+  const vaccinationFeature = useFeature('vrVaccinationPage');
 
   const code = router.query.code as string;
 
@@ -177,6 +179,26 @@ export function VrLayout(props: VrLayoutProps) {
                       </Box>
                     </MetricMenuButtonLink>
                   </Box>
+
+                  {vaccinationFeature.isEnabled && (
+                    <CategoryMenu
+                      title={
+                        siteText.veiligheidsregio_layout.headings.vaccinaties
+                      }
+                    >
+                      <MetricMenuItemLink
+                        href={reverseRouter.vr.vaccinaties(code)}
+                        icon={<Vaccinaties />}
+                        title={
+                          siteText.veiligheidsregio_vaccinaties.titel_sidebar
+                        }
+                      >
+                        {
+                          // @TODO add vaccine sidebar metric once the data is avaliable
+                        }
+                      </MetricMenuItemLink>
+                    </CategoryMenu>
+                  )}
 
                   <CategoryMenu
                     title={

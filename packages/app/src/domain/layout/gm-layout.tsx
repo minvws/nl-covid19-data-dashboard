@@ -6,6 +6,8 @@ import { Coronavirus } from '@corona-dashboard/icons';
 import { RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { Test } from '@corona-dashboard/icons';
 import { Ziekenhuis } from '@corona-dashboard/icons';
+import { Vaccinaties } from '@corona-dashboard/icons';
+
 import {
   CategoryMenu,
   Menu,
@@ -17,6 +19,7 @@ import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -77,6 +80,7 @@ export function GmLayout(props: GmLayoutProps) {
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
+  const vaccinationFeature = useFeature('gmVaccinationPage');
 
   const showMetricLinks = router.route !== '/gemeente';
 
@@ -141,6 +145,22 @@ export function GmLayout(props: GmLayoutProps) {
                 <Menu spacing={4}>
                   {sidebarData && (
                     <>
+                      {vaccinationFeature.isEnabled && (
+                        <CategoryMenu
+                          title={siteText.gemeente_layout.headings.vaccinaties}
+                        >
+                          <MetricMenuItemLink
+                            href={reverseRouter.gm.vaccinaties(code)}
+                            icon={<Vaccinaties />}
+                            title={siteText.gemeente_vaccinaties.titel_sidebar}
+                          >
+                            {
+                              // @TODO add vaccine sidebar metric once the data is avaliable
+                            }
+                          </MetricMenuItemLink>
+                        </CategoryMenu>
+                      )}
+
                       <CategoryMenu
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
                       >

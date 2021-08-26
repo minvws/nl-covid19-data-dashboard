@@ -51,9 +51,10 @@ export function useReverseRouter() {
       vr: {
         index: (code?: string) =>
           code
-            ? reverseRouter.vr.risiconiveau(code) + openMenuSuffix
+            ? reverseRouter.vr.vaccinaties(code) + openMenuSuffix
             : '/veiligheidsregio',
         maatregelen: (code: string) => `/veiligheidsregio/${code}/maatregelen`,
+        vaccinaties: (code: string) => `/veiligheidsregio/${code}/vaccinaties`,
         risiconiveau: (code: string) =>
           `/veiligheidsregio/${code}/risiconiveau`,
         positiefGetesteMensen: (code: string) =>
@@ -76,7 +77,7 @@ export function useReverseRouter() {
       gm: {
         index: (code?: string) =>
           code
-            ? reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
+            ? reverseRouter.gm.vaccinaties(code) + openMenuSuffix
             : `/gemeente`,
         positiefGetesteMensen: (code: string) =>
           `/gemeente/${code}/positief-geteste-mensen`,
@@ -84,6 +85,7 @@ export function useReverseRouter() {
         ziekenhuisopnames: (code: string) =>
           `/gemeente/${code}/ziekenhuis-opnames`,
         rioolwater: (code: string) => `/gemeente/${code}/rioolwater`,
+        vaccinaties: (code: string) => `/gemeente/${code}/vaccinaties`,
       },
     } as const;
 
