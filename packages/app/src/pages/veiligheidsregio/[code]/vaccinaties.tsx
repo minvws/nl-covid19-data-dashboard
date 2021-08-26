@@ -59,6 +59,8 @@ export const VaccinationsVrPage = (
     }),
   };
 
+  console.log(data);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <VrLayout data={data} vrName={vrName} lastGenerated={lastGenerated}>

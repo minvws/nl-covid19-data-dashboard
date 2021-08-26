@@ -12,6 +12,7 @@ import {
 import { SanityClient } from '@sanity/client';
 import set from 'lodash/set';
 import { GetStaticPropsContext } from 'next';
+import { isDefined } from 'ts-is-present';
 import { AsyncWalkBuilder } from 'walkjs';
 import { gmData } from '~/data/gm';
 import { vrData } from '~/data/vr';
@@ -35,7 +36,7 @@ import {
   SituationsSidebarValue,
 } from './situations/get-situations-sidebar-value';
 import { loadJsonFromDataFile } from './utils/load-json-from-data-file';
-
+import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-per-age-group-latets-values';
 /**
  * Usage:
  *
@@ -149,6 +150,16 @@ export function selectNlPageMetricData<T extends keyof Nl = NlPageMetricNames>(
 export function selectNlData<T extends keyof Nl = never>(...metrics: T[]) {
   return () => {
     const { data } = getNlData();
+
+    /**
+     * Instead of getting the full timeseries we are getting the latest value only per age group.
+     */
+    if (isDefined(data.vaccine_coverage_per_age_group)) {
+      data.vaccine_coverage_per_age_group.values =
+        getCoveragePerAgeGroupLatestValues(
+          data.vaccine_coverage_per_age_group.values
+        );
+    }
 
     const selectedNlData = metrics.reduce(
       (acc, p) =>
