@@ -1,6 +1,6 @@
 import { NlBehaviorValue } from '@corona-dashboard/common';
 import { useRef, useState } from 'react';
-import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
+import { Gedrag } from '@corona-dashboard/icons';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';

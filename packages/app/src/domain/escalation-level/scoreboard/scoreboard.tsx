@@ -1,8 +1,7 @@
 import css from '@styled-system/css';
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { Test, Ziekenhuis } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { Select } from '~/components/select';
 import { InlineText } from '~/components/typography';
@@ -140,7 +139,7 @@ function Headers() {
     <Box display={{ sm: 'flex' }} width="100%" alignItems="center">
       <Box flex="1" display="flex" flexDirection="column" mb={{ _: 2, sm: 0 }}>
         <Box display="flex" alignItems="center">
-          <GetestIcon width="32px" height="32px" style={{ minWidth: '24px' }} />
+          <Test width="32px" height="32px" style={{ minWidth: '24px' }} />
           <InlineText fontWeight="bold" variant="body1">
             {
               siteText.over_risiconiveaus.scoreboard.current_level

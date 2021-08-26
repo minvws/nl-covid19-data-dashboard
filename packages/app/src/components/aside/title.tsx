@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
-import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
+import { Chevron } from '@corona-dashboard/icons';
 import { Box } from '../base';
 import { Text } from '../typography';
 
@@ -42,7 +42,7 @@ export function AsideTitle(props: TitleProps) {
             })}
           >
             {title}
-            {showArrow && <ChevronIcon />}
+            {showArrow && <Chevron />}
           </span>
         </Text>
         <Text>{subtitle}</Text>

@@ -11,7 +11,7 @@ import {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
+import { Chevron } from '@corona-dashboard/icons';
 import { Box, MotionBox } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { useUniqueId } from '~/utils/use-unique-id';
@@ -143,7 +143,7 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
   };
 }
 
-const MotionChevron = styled(motion(ChevronIcon))(
+const MotionChevron = styled(motion(Chevron))(
   css({
     backgroundSize: '1.4em 0.9em',
     backgroundPosition: '0 50%',

@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as CheckedIcon } from '~/assets/checked.svg';
-import { ReactComponent as UncheckedIcon } from '~/assets/unchecked.svg';
+import { Checked } from '@corona-dashboard/icons';
+import { Unchecked } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { Text } from '~/components/typography';
 import { Flag } from '~/domain/international/flag';
@@ -46,7 +46,7 @@ export function MultiSelectCountriesResults() {
                   isLimitReached={isLimitReached}
                 >
                   <span css={css({ flex: '0 0 24px', mt: 1 })}>
-                    {x.data.isSelected ? <CheckedIcon /> : <UncheckedIcon />}
+                    {x.data.isSelected ? <Checked /> : <Unchecked />}
                   </span>
                   <Box mr={2}>
                     <Flag countryCode={x.id} />

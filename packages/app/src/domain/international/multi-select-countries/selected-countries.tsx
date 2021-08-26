@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import { ReactComponent as ResetIcon } from '~/assets/reset.svg';
+import { Reset } from '@corona-dashboard/icons';
 import { asResponsiveArray } from '~/style/utils';
 
 interface SelectOption {
@@ -41,7 +41,7 @@ export function SelectedCountries({
               {item.shape === 'line' && <Line color={item.color} />}
               {isDefined(onRemoveItem) && (
                 <RemoveIconWrapper>
-                  <ResetIcon />
+                  <Reset />
                 </RemoveIconWrapper>
               )}
             </ItemButton>

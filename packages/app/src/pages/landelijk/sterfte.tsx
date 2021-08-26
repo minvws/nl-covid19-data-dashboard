@@ -1,4 +1,4 @@
-import { ReactComponent as CoronaVirusIcon } from '~/assets/coronavirus.svg';
+import { Coronavirus } from '@corona-dashboard/icons';
 import { AgeDemographic } from '~/components/age-demographic';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
@@ -70,7 +70,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             category={siteText.nationaal_layout.headings.besmettingen}
             title={text.section_deceased_rivm.title}
-            icon={<CoronaVirusIcon />}
+            icon={<Coronavirus />}
             description={text.section_deceased_rivm.description}
             referenceLink={text.section_deceased_rivm.reference.href}
             metadata={{
@@ -182,7 +182,7 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             title={siteText.section_sterftemonitor.title}
-            icon={<CoronaVirusIcon />}
+            icon={<Coronavirus />}
             description={siteText.section_sterftemonitor.description}
             referenceLink={siteText.section_sterftemonitor.reference.href}
             metadata={{

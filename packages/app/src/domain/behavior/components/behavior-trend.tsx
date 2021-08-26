@@ -1,8 +1,8 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ReactComponent as Gelijk } from '~/assets/gelijk.svg';
-import { ReactComponent as PijlOmhoog } from '~/assets/pijl-omhoog.svg';
-import { ReactComponent as PijlOmlaag } from '~/assets/pijl-omlaag.svg';
+import { Gelijk } from '@corona-dashboard/icons';
+import { Up } from '@corona-dashboard/icons';
+import { Down } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -35,7 +35,7 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
   if (trend === 'up') {
     return (
       <Trend color={color}>
-        <PijlOmhoog />
+        <Up />
         {commonText.basisregels.trend_hoger}
       </Trend>
     );
@@ -43,7 +43,7 @@ export function BehaviorTrend({ trend, color }: BehaviorTrendProps) {
   if (trend === 'down') {
     return (
       <Trend color={color}>
-        <PijlOmlaag />
+        <Down />
         {commonText.basisregels.trend_lager}
       </Trend>
     );

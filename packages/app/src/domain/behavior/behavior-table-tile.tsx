@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import styled from 'styled-components';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
+import { Chevron } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { PercentageBar } from '~/components/percentage-bar';
@@ -217,7 +217,7 @@ function DescriptionWithIcon({
               <InlineText css={css({ display: 'flex', position: 'relative' })}>
                 {word}
                 <Box position="absolute" right={-14} top={0}>
-                  <ChevronIcon width="7px" />
+                  <Chevron width="7px" />
                 </Box>
               </InlineText>
             ) : (
