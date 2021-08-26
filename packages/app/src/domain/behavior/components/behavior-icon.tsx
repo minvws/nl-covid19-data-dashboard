@@ -1,28 +1,28 @@
-import { ReactComponent as curfew } from '~/assets/gedrag/curfew.svg';
-import { ReactComponent as wash_hands } from '~/assets/gedrag/wash_hands.svg';
-import { ReactComponent as keep_distance } from '~/assets/gedrag/keep_distance.svg';
-import { ReactComponent as work_from_home } from '~/assets/gedrag/work_from_home.svg';
-import { ReactComponent as avoid_crowds } from '~/assets/gedrag/avoid_crowds.svg';
-import { ReactComponent as symptoms_stay_home_if_mandatory } from '~/assets/gedrag/symptoms_stay_home.svg';
-import { ReactComponent as symptoms_get_tested } from '~/assets/gedrag/symptoms_get_tested.svg';
-import { ReactComponent as wear_mask_public_indoors } from '~/assets/gedrag/wear_mask_public_indoors.svg';
-import { ReactComponent as wear_mask_public_transport } from '~/assets/gedrag/wear_mask_public_transport.svg';
-import { ReactComponent as sneeze_cough_elbow } from '~/assets/gedrag/sneeze_cough_elbow.svg';
-import { ReactComponent as max_visitors } from '~/assets/gedrag/max_visitors.svg';
+import { Curfew } from '@corona-dashboard/icons';
+import { WashHands } from '@corona-dashboard/icons';
+import { KeepDistance } from '@corona-dashboard/icons';
+import { WorkFromHome } from '@corona-dashboard/icons';
+import { AvoidCrowds } from '@corona-dashboard/icons';
+import { SymptomsStayHome } from '@corona-dashboard/icons';
+import { SymptomsGetTested } from '@corona-dashboard/icons';
+import { WearMaskPublicIndoors } from '@corona-dashboard/icons';
+import { WearMaskPublicTransport } from '@corona-dashboard/icons';
+import { SneezeCoughElbow } from '@corona-dashboard/icons';
+import { MaxVisitors } from '@corona-dashboard/icons';
 import { BehaviorIdentifier } from '../logic/behavior-types';
 
-const icons: Record<BehaviorIdentifier, typeof curfew> = {
-  curfew,
-  wash_hands,
-  keep_distance,
-  work_from_home,
-  avoid_crowds,
-  symptoms_stay_home_if_mandatory,
-  symptoms_get_tested,
-  wear_mask_public_indoors,
-  wear_mask_public_transport,
-  sneeze_cough_elbow,
-  max_visitors,
+const icons: Record<BehaviorIdentifier, typeof Curfew> = {
+  curfew: Curfew,
+  wash_hands: WashHands,
+  keep_distance: KeepDistance,
+  work_from_home: WorkFromHome,
+  avoid_crowds: AvoidCrowds,
+  symptoms_stay_home_if_mandatory: SymptomsStayHome,
+  symptoms_get_tested: SymptomsGetTested,
+  wear_mask_public_indoors: WearMaskPublicIndoors,
+  wear_mask_public_transport: WearMaskPublicTransport,
+  sneeze_cough_elbow: SneezeCoughElbow,
+  max_visitors: MaxVisitors,
 };
 
 interface BehaviorIconProps {

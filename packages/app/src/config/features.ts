@@ -3,7 +3,7 @@ import type { Feature } from '@corona-dashboard/common';
 export const features: Feature[] = [
   {
     name: 'vaccinationPerAgeGroup',
-    isEnabled: false,
+    isEnabled: true,
     dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
   },
@@ -38,5 +38,15 @@ export const features: Feature[] = [
   {
     name: 'nlGpSuspicionsIsHistorical',
     isEnabled: true,
+  },
+  {
+    name: 'vrVaccinationPage',
+    isEnabled: true,
+    dataScopes: ['vr_collection'],
+  },
+  {
+    name: 'gmVaccinationPage',
+    isEnabled: true,
+    dataScopes: ['gm_collection'],
   },
 ];

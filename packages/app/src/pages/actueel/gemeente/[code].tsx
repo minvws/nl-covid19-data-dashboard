@@ -3,8 +3,8 @@ import { isEmpty, some } from 'lodash';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as ZiekenhuisIcon } from '~/assets/ziekenhuis.svg';
+import { Test } from '@corona-dashboard/icons';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {
@@ -181,7 +181,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   />
                 }
-                icon={<GetestIcon />}
+                icon={<Test />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.gm.positiefGetesteMensen(gmCode)}
@@ -202,7 +202,7 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   />
                 }
-                icon={<ZiekenhuisIcon />}
+                icon={<Ziekenhuis />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.gm.ziekenhuisopnames(gmCode)}

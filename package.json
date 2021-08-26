@@ -6,7 +6,7 @@
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
     "clean": "rimraf .build-cache && yarn workspace @corona-dashboard/common clean && yarn workspace @corona-dashboard/app clean",
-    "compile": "yarn workspace @corona-dashboard/common build && yarn workspaces run compile",
+    "compile": "yarn workspace @corona-dashboard/icons compile && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/common compile && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/e2e compile && yarn workspace @corona-dashboard/cli compile",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
     "dev": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/app dev",
@@ -23,7 +23,12 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/cli",
+      "packages/common",
+      "packages/e2e",
+      "packages/icons",
+      "packages/cms",
+      "packages/app"
     ]
   },
   "dependencies": {}

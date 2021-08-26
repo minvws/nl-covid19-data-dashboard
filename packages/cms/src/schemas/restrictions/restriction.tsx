@@ -5,6 +5,8 @@ import {
   restrictionIcons,
 } from '../../components/icons/icons';
 
+import { Icon as TIcon } from '@corona-dashboard/icons';
+
 export const restriction = {
   type: 'object',
   title: 'Maatregel',
@@ -30,14 +32,11 @@ export const restriction = {
       icon: 'icon',
     },
     prepare({ title, icon }: { icon: RestrictionIcon; title: string }) {
+      const TheIcon = restrictionIcons[icon] as TIcon;
+
       return {
         title: title,
-        media: (
-          <img
-            src={restrictionIcons[icon] || undefined}
-            alt="Selection icon for restriction"
-          />
-        ),
+        media: icon ? <TheIcon /> : null,
       };
     },
   },

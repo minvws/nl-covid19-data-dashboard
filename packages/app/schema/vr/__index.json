@@ -98,6 +98,9 @@
     },
     "situations": {
       "$ref": "situations.json"
+    },
+    "vaccine_coverage_per_age_group": {
+      "$ref": "vaccine_coverage_per_age_group.json"
     }
   }
 }

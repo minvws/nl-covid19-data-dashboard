@@ -8,7 +8,7 @@ import set from 'lodash/set';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Subscription } from 'rxjs';
 import styled from 'styled-components';
-import { ReactComponent as DatabaseIcon } from '~/assets/database.svg';
+import { Database } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { getClient } from '~/lib/sanity';
@@ -210,7 +210,7 @@ function ToggleButton({
     <Container isActive={isActive}>
       <DisplayOnHover>{isActive && children}</DisplayOnHover>
       <StyledToggleButton isActive={isActive} color={color} onClick={onClick}>
-        <DatabaseIcon
+        <Database
           style={{
             width: 20,
             height: 20,

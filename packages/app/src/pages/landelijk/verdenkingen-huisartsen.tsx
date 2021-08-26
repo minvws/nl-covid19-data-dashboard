@@ -1,5 +1,6 @@
+import { Arts } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
-import { ReactComponent as Arts } from '~/assets/arts.svg';
+import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -68,7 +69,7 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
 
           {isGpSuspicionsHistorical &&
             text.belangrijk_bericht &&
-            !isEmpty(text.belangrijk_bericht) && (
+            isPresent(text.belangrijk_bericht) && (
               <WarningTile
                 isFullWidth
                 message={text.belangrijk_bericht}

@@ -1,6 +1,6 @@
 import { MouseEvent, TouchEvent } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
+import { Chevron } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { IconButton } from '~/components/icon-button';
 import { Anchor, InlineText, Text } from '~/components/typography';
@@ -112,7 +112,7 @@ function ChevronButton({
       style={{ transform: rotate ? 'rotate(180deg)' : undefined }}
     >
       <IconButton title={title} onClick={onClick} size={13} padding={2}>
-        <ChevronIcon aria-hidden={true} />
+        <Chevron aria-hidden={true} />
       </IconButton>
     </Box>
   );
