@@ -1,6 +1,9 @@
-import { Coronavirus } from '@corona-dashboard/icons';
+import {
+  Coronavirus,
+  GehandicaptenZorg,
+  Locatie,
+} from '@corona-dashboard/icons';
 import dynamic from 'next/dynamic';
-import { Locatie } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethComponent } from '~/components/choropleth';

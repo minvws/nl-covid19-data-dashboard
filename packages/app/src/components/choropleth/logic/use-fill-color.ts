@@ -1,6 +1,6 @@
 import { assert, ChoroplethThresholdsValue } from '@corona-dashboard/common';
 import { scaleThreshold } from 'd3-scale';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
 import { DataConfig } from '~/components/choropleth';
 import { thresholds } from './thresholds';
@@ -28,8 +28,8 @@ export function useFillColor<T extends ChoroplethDataItem>(
 
   const colorScale = useMemo(() => createColorScale(threshold), [threshold]);
 
-  return useCallback(
-    createGetFillColor(getValueByCode, colorScale, noDataFillColor),
+  return useMemo(
+    () => createGetFillColor(getValueByCode, colorScale, noDataFillColor),
     [getValueByCode, colorScale, noDataFillColor]
   );
 }

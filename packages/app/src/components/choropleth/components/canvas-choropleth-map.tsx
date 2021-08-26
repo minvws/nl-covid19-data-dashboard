@@ -71,7 +71,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
       setHoverCode(code);
       setHover(geoInfoLookup[code]);
     },
-    [setHover, geoInfo]
+    [setHover, geoInfoLookup]
   );
 
   const handleMouseOver = useCallback(
@@ -87,7 +87,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         featureOverHandler(evt);
       }
     },
-    [setHover, selectFeature, featureOverHandler]
+    [setHover, selectFeature, featureOverHandler, tooltipTrigger]
   );
 
   const hoveredRef = useRef<Konva.Group>(null);
@@ -162,12 +162,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
             right: 0,
           }}
         >
-          <Outlines
-            width={width}
-            height={height}
-            geoInfo={outlineGeoInfo}
-            featureProps={featureProps}
-          />
+          <Outlines geoInfo={outlineGeoInfo} featureProps={featureProps} />
           <Features geoInfo={geoInfo} featureProps={featureProps}>
             <HighlightedFeature
               feature={highlight}
@@ -265,12 +260,10 @@ const HoveredFeature = memo((props: HoveredFeatureProps) => {
 type OutlinesProps = {
   geoInfo: ProjectedGeoInfo[];
   featureProps: FeatureProps;
-  height: number;
-  width: number;
 };
 
 const Outlines = memo((props: OutlinesProps) => {
-  const { geoInfo, featureProps, height, width } = props;
+  const { geoInfo, featureProps } = props;
   if (!geoInfo.length) {
     return null;
   }
