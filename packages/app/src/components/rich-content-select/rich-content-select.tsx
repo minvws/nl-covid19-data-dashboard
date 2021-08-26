@@ -1,7 +1,6 @@
 import css from '@styled-system/css';
 import { isPresent } from 'ts-is-present';
 import { ReactComponent as ArrowIcon } from '~/assets/arrow.svg';
-import { assert } from '~/utils/assert';
 import { Box } from '../base';
 import { InlineText, Text } from '../typography';
 import { VisuallyHidden } from '../visually-hidden';
@@ -10,10 +9,10 @@ import { useRichContentSelect } from './logic/use-select';
 import { Option } from './types';
 
 type RichContentSelectProps<T extends string> = {
-  options: Option<T>[];
   initialValue?: T;
+  label: string;
   onChange: (option: Option<T>) => void;
-  label: string | React.ReactNode;
+  options: Option<T>[];
   visuallyHiddenLabel?: boolean;
 };
 
@@ -28,9 +27,6 @@ export function RichContentSelect<T extends string>(
   props: RichContentSelectProps<T>
 ) {
   const { label, options, onChange, initialValue, visuallyHiddenLabel } = props;
-
-  assert(Array.isArray(options), 'options must be an array');
-  assert(typeof label === 'string', 'label must be a string');
 
   const {
     labelId,

@@ -1,5 +1,4 @@
 import { isPresent } from 'ts-is-present';
-import { assert } from '~/utils/assert';
 
 type BirthYearRange = {
   type: 'before' | 'between' | 'after';
@@ -17,8 +16,6 @@ type BirthYearRange = {
  * This function parses the birth year range and returns the start and end
  */
 export function parseBirthyearRange(str: string): BirthYearRange | null {
-  assert(typeof str === 'string', 'birthyear range must be a string');
-
   const regex = /^(-*)([0-9]{4})(-*)([0-9]{4})*$/;
   const match = regex.exec(str);
 

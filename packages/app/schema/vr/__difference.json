@@ -41,7 +41,7 @@
     },
     "deceased_rivm__covid_daily": {
       "$ref": "#/definitions/diff_integer"
-    },
+    }
   },
   "required": [
     "tested_overall__infected_per_100k_moving_average",
@@ -77,12 +77,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_unix",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -102,12 +97,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_unix",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }
