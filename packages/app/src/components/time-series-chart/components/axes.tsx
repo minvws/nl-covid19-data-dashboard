@@ -70,7 +70,7 @@ function createTimeTicks(start: number, end: number, count: number) {
     return [start, end];
   }
 
-  let ticks: number[] = [];
+  const ticks: number[] = [];
   const stepCount = count - 1;
   const step = Math.floor((end - start) / stepCount);
   for (let i = 0; i < stepCount; i++) {
