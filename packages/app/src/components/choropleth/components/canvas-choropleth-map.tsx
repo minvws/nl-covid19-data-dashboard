@@ -389,7 +389,7 @@ function AreaMap(props: AreaMapProps) {
           shape="poly"
           coords={x.coordinates.flat().join(',')}
           href={!isTouch ? getLink(x.code) : undefined}
-          onMouseEnter={handleMouseOver}
+          onMouseMove={handleMouseOver}
           onFocus={(event) => {
             anchorEventHandlers.onFocus(event);
             selectFeature(x.code, true);
