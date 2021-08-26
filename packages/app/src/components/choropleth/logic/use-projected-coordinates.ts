@@ -69,7 +69,7 @@ export function getProjectedCoordinates(
     );
 
   /**
-   * tuple.flatten() doesn't properly flatten deeply nested Multipolygons,
+   * turf.flatten() doesn't properly flatten deeply nested Multipolygons,
    * so here we check if the coordinates consist of number tuples, if not,
    * we can assume it's a deeper nested polygon and extract the tuples.
    */
