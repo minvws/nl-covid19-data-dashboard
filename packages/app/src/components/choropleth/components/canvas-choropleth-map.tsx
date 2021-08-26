@@ -326,6 +326,7 @@ const Features = memo((props: FeaturesProps) => {
         <Group listening={false}>
           {geoInfo.map((x, i) => (
             <Line
+              key={i}
               listening={false}
               perfectDrawEnabled={false}
               closed
