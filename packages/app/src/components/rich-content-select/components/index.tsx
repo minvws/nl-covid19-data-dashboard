@@ -22,7 +22,7 @@ export const SelectBox = styled(Box)(
   })
 );
 
-export const ListBox = styled(Box)((p) =>
+export const ListBox = styled(Box)(
   css({
     backgroundColor: 'white',
     position: 'absolute',
