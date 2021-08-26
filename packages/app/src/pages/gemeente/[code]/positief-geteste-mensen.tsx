@@ -1,5 +1,6 @@
 import { Test } from '@corona-dashboard/icons';
-import dynamic from 'next/dynamic';import { ChartTile } from '~/components/chart-tile';
+import dynamic from 'next/dynamic';
+import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
@@ -262,6 +263,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             <DynamicChoropleth
+              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'confirmed_cases_choropleth',

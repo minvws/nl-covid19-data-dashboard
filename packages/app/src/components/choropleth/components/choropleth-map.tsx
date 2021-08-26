@@ -22,8 +22,8 @@ import { CanvasChoroplethMap } from './canvas-choropleth-map';
 import { SvgChoroplethMap } from './svg-choropleth-map';
 
 export type AnchorEventHandler = {
-  onFocus: (evt: FocusEvent<HTMLAnchorElement | HTMLAreaElement>) => void;
-  onBlur: (evt: FocusEvent<HTMLAnchorElement | HTMLAreaElement>) => void;
+  onFocus: (evt: FocusEvent<HTMLElement>) => void;
+  onBlur: (evt: FocusEvent<HTMLElement>) => void;
 };
 
 type ChoroplethMapProps<

@@ -75,8 +75,8 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   );
 
   const handleMouseOver = useCallback(
-    (evt: MouseEvent<HTMLAreaElement>) => {
-      const areaElm = evt.target as HTMLAreaElement;
+    (evt: MouseEvent<HTMLElement>) => {
+      const areaElm = evt.target as HTMLElement;
       const code = areaElm.getAttribute('data-id');
       if (!isPresent(code)) {
         setHover(undefined);
@@ -330,7 +330,6 @@ const Features = memo((props: FeaturesProps) => {
               perfectDrawEnabled={false}
               closed
               id={x.code}
-              key={i}
               x={0}
               y={0}
               strokeWidth={featureProps.area.strokeWidth(x.code)}
@@ -354,7 +353,7 @@ type AreaMapProps = {
   anchorEventHandlers: AnchorEventHandler;
   selectFeature: (code: string | undefined, isKeyboardAction?: boolean) => void;
   id: string;
-  handleMouseOver: any;
+  handleMouseOver: (event: MouseEvent<HTMLElement>) => void;
   height: number;
   width: number;
 };
@@ -376,7 +375,11 @@ function AreaMap(props: AreaMapProps) {
   const isTouch = useIsTouchDevice();
 
   return (
-    <map name={id} tabIndex={isTabInteractive ? 0 : -1}>
+    <map
+      name={id}
+      tabIndex={isTabInteractive ? 0 : -1}
+      onMouseMove={handleMouseOver}
+    >
       {geoInfo.map((x, i) => (
         <area
           style={{
@@ -384,12 +387,11 @@ function AreaMap(props: AreaMapProps) {
           }}
           tabIndex={i + 1}
           aria-label={getFeatureName(x.code)}
-          key={i}
+          key={`${x.code}_${i}`}
           data-id={x.code}
           shape="poly"
           coords={x.coordinates.flat().join(',')}
           href={!isTouch ? getLink(x.code) : undefined}
-          onMouseMove={handleMouseOver}
           onFocus={(event) => {
             anchorEventHandlers.onFocus(event);
             selectFeature(x.code, true);
