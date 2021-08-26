@@ -104,7 +104,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     [router, dataOptions]
   );
 
-  const reset = useCallback(() => {
+  const removeHover = useCallback(() => {
     setHover(undefined);
     setHoverCode(undefined);
     if (isDefined(featureOutHandler)) {
@@ -122,8 +122,15 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     if (!keyboardActive) {
       return;
     }
-    const { current } = hoveredRef;
+
     tooltipTrigger();
+
+    const { current } = hoveredRef;
+
+    /**
+     * Determine the center of the given feature and use that
+     * as the left top coordinate for the tooltip to appear at.
+     */
     if (isPresent(current) && isDefined(hoverCode)) {
       const box = current.getClientRect();
       const x = Math.round(box.x + box.width / 2);
@@ -188,7 +195,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
             handleMouseOver={handleMouseOver}
             handleMouseClick={handleMouseClick}
             handleMouseEnter={handleMouseEnter}
-            reset={reset}
+            removeHover={removeHover}
             selectFeature={selectFeature}
             featureProps={featureProps}
           >
@@ -309,7 +316,7 @@ type FeaturesProps = {
   handleMouseOver: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
   handleMouseClick: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
   handleMouseEnter: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
-  reset: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
+  removeHover: (evt: KonvaEventObject<MouseEvent | TouchEvent>) => void;
   selectFeature: (code: string) => void;
   featureProps: FeatureProps;
   height: number;
@@ -323,7 +330,7 @@ const Features = memo((props: FeaturesProps) => {
     handleMouseOver,
     handleMouseClick,
     handleMouseEnter,
-    reset,
+    removeHover: reset,
     featureProps,
     height,
     width,
@@ -335,8 +342,12 @@ const Features = memo((props: FeaturesProps) => {
       /**
        * So, this is a hack. For some reason, parts of the waters of Zeeland are treated
        * as features on the safety region map and would therefore get colored in, which is incorrect.
+       *
+       * It happens somewhere in the logic where we convert the geojson into streams of simple
+       * cartesian coordinates, but unfortunately I haven't been able to figure out what the mistake is.
+       *
        * This manually checks whether the feature is a piece of land or water. (The indexes
-       * were determined by investigating the converted data)
+       * were determined by investigating the converted data manually)
        */
       if (code === 'VR19') {
         const vr19s = geoInfo.filter((x) => x.code === 'VR19');
