@@ -5,6 +5,7 @@
  * props. It might be easier to just create 2 or 3 different types of axes
  * layouts by forking this component.
  */
+import { TimeframeOption } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import { GridRows } from '@visx/grid';
@@ -15,6 +16,7 @@ import { memo, Ref, useCallback } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
+import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMounted } from '~/utils/use-is-mounted';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
@@ -33,13 +35,14 @@ type AxesProps = {
    */
   numGridLines: number;
   showWeekNumbers?: boolean;
+  timeframe: TimeframeOption;
   /**
    * This ref can be used for measuring the width of the Y-axis to automagically
    * calculate a left-padding.
    */
   yAxisRef?: Ref<SVGGElement>;
   yTickValues?: number[];
-  xTickValues: [number, number];
+  timeDomain: [number, number];
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -62,6 +65,22 @@ type AxesProps = {
   hasAllZeroValues?: boolean;
 };
 
+function createTimeTicks(start: number, end: number, count: number) {
+  if (count <= 2) {
+    return [start, end];
+  }
+
+  const ticks: number[] = [];
+  const stepCount = count - 1;
+  const step = Math.floor((end - start) / stepCount);
+  for (let i = 0; i < stepCount; i++) {
+    ticks.push(start + i * step);
+  }
+  ticks.push(end);
+
+  return ticks;
+}
+
 export type AnyTickFormatter = (value: any) => string;
 
 export const Axes = memo(function Axes({
@@ -71,16 +90,18 @@ export const Axes = memo(function Axes({
   isPercentage,
   xScale,
   yScale,
+  timeframe,
   yTickValues,
-  xTickValues,
+  timeDomain,
   formatYTickValue,
   yAxisRef,
   isYAxisCollapsed,
   xRangePadding,
   hasAllZeroValues: allZeroValues,
 }: AxesProps) {
-  const [startUnix, endUnix] = xTickValues;
+  const [startUnix, endUnix] = timeDomain;
   const isMounted = useIsMounted();
+  const breakpoints = useBreakpoints();
 
   const {
     formatDateFromSeconds,
@@ -103,8 +124,11 @@ export const Axes = memo(function Axes({
     [formatPercentage]
   );
 
+  const xTickNumber = breakpoints.sm ? (timeframe === 'all' ? 6 : 5) : 3;
+  const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
+
   const formatXAxis = useCallback(
-    (date_unix: number) => {
+    (date_unix: number, index: number) => {
       /**
        * Display relative dates when it's today or yesterday
        */
@@ -120,11 +144,30 @@ export const Axes = memo(function Axes({
 
       const isMultipleYearSpan = startYear !== endYear;
 
-      return isMultipleYearSpan && [startUnix, endUnix].includes(date_unix)
-        ? formatDateFromSeconds(date_unix, 'axis-with-year')
-        : formatDateFromSeconds(date_unix, 'axis');
+      if ([startUnix, endUnix].includes(date_unix)) {
+        return isMultipleYearSpan
+          ? formatDateFromSeconds(date_unix, 'axis-with-year')
+          : formatDateFromSeconds(date_unix, 'axis');
+      } else {
+        const previousDate = xTicks[index - 1];
+        const previousYear =
+          !!previousDate && createDate(previousDate).getFullYear();
+        const currentYear = createDate(date_unix).getFullYear();
+        const isNewYear = previousYear !== currentYear;
+
+        return isNewYear
+          ? formatDateFromSeconds(date_unix, 'axis-with-year')
+          : formatDateFromSeconds(date_unix, 'axis');
+      }
     },
-    [isMounted, formatRelativeDate, startUnix, endUnix, formatDateFromSeconds]
+    [
+      isMounted,
+      formatRelativeDate,
+      startUnix,
+      endUnix,
+      formatDateFromSeconds,
+      xTicks,
+    ]
   );
 
   /**
@@ -132,8 +175,8 @@ export const Axes = memo(function Axes({
    * centered on the x-axis tick. Usually a short date has a 2 digit number plus
    * a space plus a three character month, which makes 6.
    */
-  const isLongStartLabel = formatXAxis(startUnix).length > 6;
-  const isLongEndLabel = formatXAxis(endUnix).length > 6;
+  const isLongStartLabel = formatXAxis(startUnix, 0).length > 6;
+  const isLongEndLabel = formatXAxis(endUnix, xTickNumber - 1).length > 6;
 
   /**
    * We make an exception for the situation where all the values in the chart are zero.
@@ -184,7 +227,7 @@ export const Axes = memo(function Axes({
 
       <AxisBottom
         scale={xScale}
-        tickValues={xTickValues}
+        tickValues={xTicks}
         tickFormat={formatXAxis as AnyTickFormatter}
         top={bounds.height}
         stroke={colors.silver}
