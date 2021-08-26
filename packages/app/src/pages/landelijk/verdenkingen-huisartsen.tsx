@@ -1,5 +1,4 @@
 import { Arts } from '@corona-dashboard/icons';
-import { isEmpty } from 'lodash';
 import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
