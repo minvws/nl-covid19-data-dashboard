@@ -12,12 +12,14 @@ export function TileDifference({
   maximumFractionDigits,
   isPercentage,
   showOldDateUnix,
+  hasHigherLowerText,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   maximumFractionDigits?: number;
   isPercentage?: boolean;
   showOldDateUnix?: boolean;
+  hasHigherLowerText?: boolean;
 }) {
   const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
@@ -37,7 +39,7 @@ export function TileDifference({
     : text.vorige_waarde;
 
   if (difference > 0) {
-    const splitText = showOldDateUnix
+    const splitText = hasHigherLowerText
       ? text.hoger.split(' ')
       : text.toename.split(' ');
 
@@ -58,7 +60,7 @@ export function TileDifference({
   }
 
   if (difference < 0) {
-    const splitText = showOldDateUnix
+    const splitText = hasHigherLowerText
       ? text.lager.split(' ')
       : text.afname.split(' ');
 

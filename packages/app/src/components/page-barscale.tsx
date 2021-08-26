@@ -34,6 +34,7 @@ interface PageBarScaleProps<T> {
   currentValue?: number;
   isMovingAverageDifference?: boolean;
   showOldDateUnix?: boolean;
+  hasHigherLowerText?: boolean;
 }
 
 export function PageBarScale<T>({
@@ -46,6 +47,7 @@ export function PageBarScale<T>({
   differenceFractionDigits,
   isMovingAverageDifference,
   showOldDateUnix,
+  hasHigherLowerText,
 }: PageBarScaleProps<T>) {
   const { siteText } = useIntl();
 
@@ -143,6 +145,7 @@ export function PageBarScale<T>({
             isDecimal={config.isDecimal}
             maximumFractionDigits={differenceFractionDigits}
             showOldDateUnix={showOldDateUnix}
+            hasHigherLowerText={hasHigherLowerText}
           />
         ))}
     </Box>
