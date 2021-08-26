@@ -1,9 +1,10 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -40,6 +41,14 @@ import {
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -164,7 +173,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'gm' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 accessibility={{
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
@@ -182,7 +192,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'vr' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 accessibility={{
                   key: 'hospital_admissions_region_choropleth',
                 }}

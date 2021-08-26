@@ -1,8 +1,9 @@
+import dynamic from 'next/dynamic';
 import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -43,6 +44,14 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -254,7 +263,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               thresholds: thresholds.vr.infected_per_100k,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',

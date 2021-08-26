@@ -1,8 +1,9 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
 import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -32,6 +33,14 @@ import {
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -172,7 +181,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'gm' ? (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="gm"
                 accessibility={{
                   key: 'sewer_municipal_choropleth',
@@ -186,7 +196,8 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             ) : (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="vr"
                 accessibility={{
                   key: 'sewer_region_choropleth',

@@ -1,5 +1,6 @@
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
@@ -11,7 +12,7 @@ import {
   ChartRegionControls,
   RegionControlOption,
 } from '~/components/chart-region-controls';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
@@ -61,6 +62,14 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/gm';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -301,7 +310,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <Choropleth
+                  <DynamicChoropleth
+                    renderTarget="canvas"
                     map="vr"
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
@@ -382,7 +392,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <>
                   {selectedMap === 'gm' && (
-                    <Choropleth
+                    <DynamicChoropleth
+                      renderTarget="canvas"
                       map="gm"
                       accessibility={{
                         key: 'topical_municipal_tested_overall_choropleth',
@@ -397,7 +408,8 @@ const TopicalMunicipality = (props: StaticProps<typeof getStaticProps>) => {
                     />
                   )}
                   {selectedMap === 'vr' && (
-                    <Choropleth
+                    <DynamicChoropleth
+                      renderTarget="canvas"
                       map="vr"
                       accessibility={{
                         key: 'topical_region_tested_overall_choropleth',

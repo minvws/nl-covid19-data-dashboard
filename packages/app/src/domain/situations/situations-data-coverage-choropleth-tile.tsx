@@ -1,10 +1,11 @@
 import { VrCollectionSituations } from '@corona-dashboard/common';
 import css from '@styled-system/css';
+import dynamic from 'next/dynamic';
 import { ReactComponent as Check } from '~/assets/check.svg';
 import { ReactComponent as Cross } from '~/assets/cross.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';
@@ -14,6 +15,14 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './components/legend-icon';
 import { SituationsDataCoverageTooltip } from './components/situations-data-coverage-tooltip';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 interface SituationsDataCoverageChoroplethTileProps {
   data: {
@@ -91,7 +100,8 @@ export function SituationsDataCoverageChoroplethTile({
         >
           <Box height="100%">
             <ErrorBoundary>
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 accessibility={{
                   key: 'situations_has_sufficient_data_choropleth',
                 }}
@@ -117,8 +127,6 @@ export function SituationsDataCoverageChoroplethTile({
     </ChartTile>
   );
 }
-
-// <SituationsDataCoverageTooltip context={context} />
 
 function LegendItem({
   color,

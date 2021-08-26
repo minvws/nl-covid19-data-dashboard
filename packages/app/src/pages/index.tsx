@@ -247,6 +247,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               >
                 <Box>
                   <DynamicChoropleth
+                    renderTarget="canvas"
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}

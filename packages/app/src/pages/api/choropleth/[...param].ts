@@ -54,8 +54,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const fColor = getFillColor(data, map, dataConfig);
   const fillColor = (code: string, index: number) => {
     if (code === 'VR19') {
-      const vr19s = geoInfo.filter((x) => x.code === 'VR19');
-      const idx = vr19s.indexOf(geoInfo[index]);
+      const vr19s = projectedGeoInfo.filter((x) => x.code === 'VR19');
+      const idx = vr19s.indexOf(projectedGeoInfo[index]);
       if (idx === 5 || idx === 0) {
         return featureProps.area.fill(code);
       }
@@ -74,7 +74,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     features.boundingBox,
   ];
 
-  const [geoInfo, projectedCoordinates] = getProjectedCoordinates(
+  const [projectedGeoInfo] = getProjectedCoordinates(
     features.hover,
     mapProjection,
     fitExtent
@@ -95,16 +95,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       height,
     })
   );
-  projectedCoordinates.forEach((x, i) => {
+  projectedGeoInfo.forEach((x, i) => {
     const line = new Konva.Line({
       perfectDrawEnabled: true,
       closed: true,
       x: 0,
       y: 0,
-      strokeWidth: featureProps.area.strokeWidth(geoInfo[i].code),
-      points: x.flat(),
-      fill: fillColor(geoInfo[i].code, i),
-      stroke: featureProps.area.stroke(geoInfo[i].code),
+      strokeWidth: featureProps.area.strokeWidth(x.code),
+      points: x.coordinates.flat(),
+      fill: fillColor(x.code, i),
+      stroke: featureProps.area.stroke(x.code),
     });
     layer.add(line);
   });

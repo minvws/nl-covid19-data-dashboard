@@ -1,9 +1,10 @@
+import dynamic from 'next/dynamic';
 import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
 import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
 import { ReactComponent as Locatie } from '~/assets/locaties.svg';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -33,6 +34,14 @@ import {
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -217,7 +226,8 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="vr"
               accessibility={{
                 key: 'disability_care_infected_people_choropleth',

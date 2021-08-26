@@ -1,11 +1,12 @@
 import css from '@styled-system/css';
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
 import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -44,6 +45,14 @@ import {
 import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
+const DynamicChoropleth = dynamic(
+  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
+  {
+    ssr: false,
+    loading: () => <p>Loading component...</p>,
+  }
+) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -206,7 +215,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              * now that is a bridge too far. Let's take it one step at a time.
              */}
             {selectedMap === 'gm' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="gm"
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
@@ -221,7 +231,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'vr' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="vr"
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',

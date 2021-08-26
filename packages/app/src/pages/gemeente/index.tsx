@@ -70,8 +70,8 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
           <Box
             display="flex"
+            flex="1 1 100%"
             justifyContent="center"
-            width="100%"
             height="120vw"
             maxWidth={750}
             maxHeight={960}
