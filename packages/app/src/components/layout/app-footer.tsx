@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ExternalIcon } from '~/assets/external-link-2.svg';
+import { External } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Markdown } from '~/components/markdown';
@@ -119,7 +119,7 @@ function Item({
       {isExternal ? (
         <>
           <IconContainer>
-            <ExternalIcon />
+            <External />
           </IconContainer>
           <ExternalLink color="white" href={href} underline="hover">
             {children}

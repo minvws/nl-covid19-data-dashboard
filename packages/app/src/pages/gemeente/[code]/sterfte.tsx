@@ -1,4 +1,4 @@
-import { ReactComponent as CoronaVirusIcon } from '~/assets/coronavirus.svg';
+import { Coronavirus } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -74,7 +74,7 @@ const DeceasedMunicipalPage = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.section_deceased_rivm.title, {
               municipalityName,
             })}
-            icon={<CoronaVirusIcon />}
+            icon={<Coronavirus />}
             description={text.section_deceased_rivm.description}
             referenceLink={text.section_deceased_rivm.reference.href}
             metadata={{

@@ -1,7 +1,7 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { ReactComponent as IconGelijk } from '~/assets/gelijk.svg';
-import { ReactComponent as IconUp } from '~/assets/pijl-omhoog.svg';
-import { ReactComponent as IconDown } from '~/assets/pijl-omlaag.svg';
+import { Gelijk } from '@corona-dashboard/icons';
+import { Up } from '@corona-dashboard/icons';
+import { Down } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
@@ -39,7 +39,7 @@ export function TileDifference({
     return (
       <Container>
         <IconContainer color="red" mr={1}>
-          <IconUp />
+          <Up />
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString}
@@ -58,7 +58,7 @@ export function TileDifference({
     return (
       <Container>
         <IconContainer color="data.primary" mr={1}>
-          <IconDown />
+          <Down />
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString}
@@ -74,7 +74,7 @@ export function TileDifference({
   return (
     <Container>
       <IconContainer color="data.neutral" mr={1}>
-        <IconGelijk />
+        <Gelijk />
       </IconContainer>
       <InlineText>
         {text.gelijk}

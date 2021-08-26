@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
+import { Experimenteel } from '@corona-dashboard/icons';
+import { RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
@@ -86,7 +86,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
+          <WarningTile message={text.warning_method} icon={Experimenteel} />
 
           <TwoKpiSection>
             <KpiTile
