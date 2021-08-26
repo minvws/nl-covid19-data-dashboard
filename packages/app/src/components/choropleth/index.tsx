@@ -2,7 +2,6 @@ import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Projection } from '@visx/geo/lib/types';
 import { geoConicConformal, GeoProjection } from 'd3-geo';
-import { ScaleThreshold } from 'd3-scale';
 import { FocusEvent, memo, useMemo, useRef, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
@@ -51,10 +50,6 @@ export type DataOptions = {
 
 type OptionalDataConfig<T> = {
   metricProperty: KeysOfType<T, number | null | boolean | undefined, true>;
-  getCustomFillColor?: (
-    item: T,
-    colorScale: ScaleThreshold<number, string>
-  ) => string;
   noDataFillColor?: string;
   hoverFill?: string;
   hoverStroke?: string;
@@ -65,10 +60,7 @@ type OptionalDataConfig<T> = {
   areaStrokeWidth?: number;
 };
 
-export type DataConfig<T> = Optional<
-  Required<OptionalDataConfig<T>>,
-  'getCustomFillColor'
->;
+export type DataConfig<T> = Required<OptionalDataConfig<T>>;
 
 export type OptionalBoundingBoxPadding = {
   left?: number;
@@ -228,7 +220,6 @@ const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
 
   const dataConfig = {
     metricProperty: originalDataConfig.metricProperty,
-    getCustomFillColor: originalDataConfig.getCustomFillColor,
     noDataFillColor:
       originalDataConfig.noDataFillColor ?? colors.choroplethNoData,
     hoverFill: originalDataConfig.hoverFill ?? 'none',

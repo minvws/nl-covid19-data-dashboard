@@ -130,3 +130,10 @@ timestamp,action,key,document_id,move_to
 2021-08-24T11:22:18.833Z,add,choropleth_tooltip.vr.average.subject,4wy7f8NuwuLne309uNnqLI,__
 2021-08-24T11:22:19.847Z,add,choropleth_tooltip.gm.admissions_on_date_of_reporting.subject,m5cl7ciD7CmTUWm5dH6SaI,__
 2021-08-24T11:22:20.864Z,add,choropleth_tooltip.gm.infected_per_100k.subject,DWLUotrm23arH2ViSPL0Qo,__
+2021-08-26T09:40:46.375Z,add,choropleth_tooltip.vr.fully_vaccinated_percentage.>,4wy7f8NuwuLne309ufh0cu,__
+2021-08-26T09:40:47.387Z,add,choropleth_tooltip.vr.fully_vaccinated_percentage.<,m5cl7ciD7CmTUWm5dKP8ND,__
+2021-08-26T09:40:48.405Z,add,choropleth_tooltip.gm.fully_vaccinated_percentage.>,DWLUotrm23arH2ViSRs2L8,__
+2021-08-26T09:40:49.418Z,add,choropleth_tooltip.gm.fully_vaccinated_percentage.<,DWLUotrm23arH2ViSRs2My,__
+2021-08-26T09:40:50.444Z,add,vaccinaties.birthyear_ranges.before,m5cl7ciD7CmTUWm5dKP8fO,__
+2021-08-26T09:40:51.467Z,add,vaccinaties.birthyear_ranges.between,DWLUotrm23arH2ViSRs2Rs,__
+2021-08-26T09:40:52.844Z,add,vaccinaties.birthyear_ranges.after,DWLUotrm23arH2ViSRs2Uw,__

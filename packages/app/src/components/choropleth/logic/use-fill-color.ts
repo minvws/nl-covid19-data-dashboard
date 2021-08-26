@@ -13,7 +13,7 @@ export function useFillColor<T extends ChoroplethDataItem>(
   dataConfig: DataConfig<T>
 ) {
   const codeType = mapToCodeType[map];
-  const { metricProperty, noDataFillColor, getCustomFillColor } = dataConfig;
+  const { metricProperty, noDataFillColor } = dataConfig;
 
   const getValueByCode = useMemo(() => {
     return (code: string) => {
@@ -27,18 +27,6 @@ export function useFillColor<T extends ChoroplethDataItem>(
         : undefined;
     };
   }, [metricProperty, codeType, data]);
-
-  const getItemByCode = useCallback(
-    (code) => {
-      const item = data
-        .filter(isCodedValueType(codeType))
-        .find(
-          (x) => (x as unknown as Record<string, string>)[codeType] === code
-        );
-      return isDefined(item) ? item : undefined;
-    },
-    [codeType, data]
-  );
 
   const threshold = thresholds[map][metricProperty as string];
   assert(
@@ -58,22 +46,9 @@ export function useFillColor<T extends ChoroplethDataItem>(
 
   return useCallback(
     (code: string) => {
-      if (isPresent(getCustomFillColor)) {
-        const item = getItemByCode(code);
-        return isPresent(item)
-          ? getCustomFillColor(item, colorScale)
-          : noDataFillColor;
-      } else {
-        const value = getValueByCode(code);
-        return isPresent(value) ? colorScale(value) : noDataFillColor;
-      }
+      const value = getValueByCode(code);
+      return isPresent(value) ? colorScale(value) : noDataFillColor;
     },
-    [
-      getValueByCode,
-      getCustomFillColor,
-      noDataFillColor,
-      colorScale,
-      getItemByCode,
-    ]
+    [getValueByCode, noDataFillColor, colorScale]
   );
 }
