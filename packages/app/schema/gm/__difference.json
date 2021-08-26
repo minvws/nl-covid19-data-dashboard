@@ -44,12 +44,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_unix",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     },
     "diff_decimal": {
@@ -69,12 +64,7 @@
           "type": "integer"
         }
       },
-      "required": [
-        "old_value",
-        "difference",
-        "old_date_unix",
-        "new_date_unix"
-      ],
+      "required": ["old_value", "difference", "old_date_unix", "new_date_unix"],
       "additionalProperties": false
     }
   }
