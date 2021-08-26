@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { isPresent } from 'ts-is-present';
-import { ReactComponent as ArrowIcon } from '~/assets/arrow.svg';
+import { Arrow as ArrowIcon } from '@corona-dashboard/icons';
 import { Box } from '../base';
 import { InlineText, Text } from '../typography';
 import { VisuallyHidden } from '../visually-hidden';
