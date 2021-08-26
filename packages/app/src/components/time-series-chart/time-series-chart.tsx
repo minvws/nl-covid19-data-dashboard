@@ -255,7 +255,7 @@ export function TimeSeriesChart<
 
   const splitLegendGroups = useSplitLegendGroups(seriesConfig);
 
-  const xTickValues = useMemo(
+  const timeDomain = useMemo(
     () => getTimeDomain({ values, today, withPadding: false }),
     [values, today]
   );
@@ -396,8 +396,9 @@ export function TimeSeriesChart<
             <Axes
               bounds={bounds}
               numGridLines={numGridLines}
+              timeframe={timeframe}
               yTickValues={yTickValues}
-              xTickValues={xTickValues}
+              timeDomain={timeDomain}
               formatYTickValue={formatYTickValue}
               xScale={xScale}
               yScale={yScale}
