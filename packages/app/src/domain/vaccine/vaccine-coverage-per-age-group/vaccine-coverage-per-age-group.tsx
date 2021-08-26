@@ -161,7 +161,7 @@ function formatAgeGroupString(
  * Format the birthyear range these rules:
  *
  * We could get 3 variants back from the data:
- * -2003, 2003-2006 and 20036
+ * -2003, 2003-2006 and 2003-
  *
  * If the group includes a hyphen (-) at the start it is considered 2003 or earlier
  *

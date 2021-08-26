@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "dependencies": {
+    "@corona-dashboard/icons": "0.0.0",
     "@charlietango/use-focus-trap": "^1.3.0",
     "@reach/combobox": "^0.16.1",
     "@reach/disclosure": "^0.16.0",

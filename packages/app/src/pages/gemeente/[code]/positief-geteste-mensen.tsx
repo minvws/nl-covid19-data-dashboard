@@ -1,6 +1,5 @@
-import dynamic from 'next/dynamic';
-import { ReactComponent as Getest } from '~/assets/test.svg';
-import { ChartTile } from '~/components/chart-tile';
+import { Test } from '@corona-dashboard/icons';
+import dynamic from 'next/dynamic';import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
@@ -116,7 +115,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               municipality: municipalityName,
             })}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

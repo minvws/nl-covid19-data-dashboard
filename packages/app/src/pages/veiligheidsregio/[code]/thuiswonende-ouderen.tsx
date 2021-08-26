@@ -1,4 +1,4 @@
-import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
+import { Elderly } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -80,7 +80,7 @@ const ElderlyAtHomeRegionalPage = (
             title={replaceVariablesInText(text.section_positive_tested.title, {
               safetyRegion: vrName,
             })}
-            icon={<ElderlyIcon />}
+            icon={<Elderly />}
             description={replaceVariablesInText(
               text.section_positive_tested.description,
               {
@@ -193,7 +193,7 @@ const ElderlyAtHomeRegionalPage = (
             title={replaceVariablesInText(text.section_deceased.title, {
               safetyRegion: vrName,
             })}
-            icon={<ElderlyIcon />}
+            icon={<Elderly />}
             description={replaceVariablesInText(
               text.section_deceased.description,
               {

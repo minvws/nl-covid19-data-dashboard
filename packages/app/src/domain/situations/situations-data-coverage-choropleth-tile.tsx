@@ -1,9 +1,8 @@
 import { VrCollectionSituations } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import dynamic from 'next/dynamic';
-import { ReactComponent as Check } from '~/assets/check.svg';
-import { ReactComponent as Cross } from '~/assets/cross.svg';
-import { Box, Spacer } from '~/components/base';
+import { Check } from '@corona-dashboard/icons';
+import { Cross } from '@corona-dashboard/icons';import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethComponent } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';

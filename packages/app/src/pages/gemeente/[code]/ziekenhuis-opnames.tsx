@@ -1,6 +1,5 @@
-import dynamic from 'next/dynamic';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
-import { ChartTile } from '~/components/chart-tile';
+import { Ziekenhuis } from '@corona-dashboard/icons';
+import dynamic from 'next/dynamic';import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethComponent } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';

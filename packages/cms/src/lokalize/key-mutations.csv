@@ -93,6 +93,9 @@ timestamp,action,key,document_id,move_to
 2021-08-19T11:48:44.909Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,kZYjqFJyrN0fPPHPQq27cU,__
 2021-08-19T11:48:44.911Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSHQRMk,__
 2021-08-19T11:55:29.087Z,add,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSJpokU,__
+2021-08-23T10:13:46.352Z,add,verdenkingen_huisartsen.belangrijke_text,m5cl7ciD7CmTUWm5dFOySe,__
+2021-08-23T10:40:23.238Z,add,verdenkingen_huisartsen.belangrijk_bericht,4wy7f8NuwuLne309uEanl2,__
+2021-08-23T10:40:23.240Z,delete,verdenkingen_huisartsen.belangrijke_text,m5cl7ciD7CmTUWm5dFOySe,__
 2021-08-24T06:40:29.800Z,add,veiligheidsregio_layout.headings.vaccinaties,m5cl7ciD7CmTUWm5dGjo2b,__
 2021-08-24T06:40:30.814Z,add,veiligheidsregio_vaccinaties.titel_sidebar,m5cl7ciD7CmTUWm5dGjo4y,__
 2021-08-24T06:49:19.320Z,add,veiligheidsregio_vaccinaties.titel_kpi,m5cl7ciD7CmTUWm5dGkg7w,__

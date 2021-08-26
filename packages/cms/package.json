@@ -23,6 +23,7 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
+    "@corona-dashboard/icons": "0.0.0",
     "@sanity/base": "^2.15.1",
     "@sanity/components": "^2.14.0",
     "@sanity/core": "^2.15.0",

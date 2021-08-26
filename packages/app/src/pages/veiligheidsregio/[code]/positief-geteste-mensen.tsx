@@ -1,6 +1,7 @@
+import { GgdTesten } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+
 import dynamic from 'next/dynamic';
-import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
-import { ReactComponent as Getest } from '~/assets/test.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethComponent } from '~/components/choropleth';
@@ -127,7 +128,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

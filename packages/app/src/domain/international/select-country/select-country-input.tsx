@@ -1,9 +1,9 @@
 import css from '@styled-system/css';
 import { Dispatch, RefObject, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ChevronIcon } from '~/assets/chevron.svg';
-import { ReactComponent as CloseIcon } from '~/assets/close.svg';
-import { ReactComponent as SearchIcon } from '~/assets/search-icon-bold.svg';
+import { Chevron } from '@corona-dashboard/icons';
+import { Close } from '@corona-dashboard/icons';
+import { Search } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { useIntl } from '~/intl';
@@ -49,7 +49,7 @@ export function SelectCountryInput({
     <Box position="relative" minWidth="14rem">
       <IconContainer align="left">
         {isOpen ? (
-          <SearchIcon />
+          <Search />
         ) : (
           <img
             aria-hidden
@@ -76,7 +76,7 @@ export function SelectCountryInput({
               })}
             >
               <VisuallyHidden>{siteText.select_countries.clear}</VisuallyHidden>
-              <CloseIcon />
+              <Close />
             </Box>
           )
         ) : (
@@ -98,7 +98,7 @@ export function SelectCountryInput({
               },
             })}
           >
-            <ChevronIcon />
+            <Chevron />
           </Box>
         )}
       </IconContainer>

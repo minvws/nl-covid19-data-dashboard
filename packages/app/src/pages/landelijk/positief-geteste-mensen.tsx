@@ -1,8 +1,9 @@
 import css from '@styled-system/css';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { GgdTesten } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
@@ -116,7 +117,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               siteText.positief_geteste_personen.titel_sidebar
             }
             title={text.titel}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,

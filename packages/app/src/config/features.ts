@@ -1,4 +1,4 @@
-import { Feature } from '@corona-dashboard/common';
+import type { Feature } from '@corona-dashboard/common';
 
 export const features: Feature[] = [
   {
@@ -34,6 +34,10 @@ export const features: Feature[] = [
     isEnabled: true,
     dataScopes: ['in'],
     metricName: 'variants',
+  },
+  {
+    name: 'nlGpSuspicionsIsHistorical',
+    isEnabled: true,
   },
   {
     name: 'vrVaccinationPage',

@@ -3,7 +3,8 @@ import { last } from 'lodash';
 import dynamic from 'next/dynamic';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { Test } from '@corona-dashboard/icons';
+
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { ChoroplethComponent } from '~/components/choropleth';
@@ -147,7 +148,7 @@ export default function PositiefGetesteMensenPage(
           <PageInformationBlock
             category={text.categorie}
             title={text.titel}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               ...internationalMetadataDatums,

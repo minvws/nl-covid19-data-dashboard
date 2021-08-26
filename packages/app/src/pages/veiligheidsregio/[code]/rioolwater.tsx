@@ -1,5 +1,5 @@
-import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
+import { Experimenteel } from '@corona-dashboard/icons';
+import { RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -82,7 +82,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
+          <WarningTile message={text.warning_method} icon={Experimenteel} />
 
           <TwoKpiSection>
             <KpiTile
