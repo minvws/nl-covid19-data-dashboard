@@ -9,6 +9,7 @@
     "dist/**/*"
   ],
   "scripts": {
+    "bootstrap": "yarn build",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",

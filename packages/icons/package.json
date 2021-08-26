@@ -7,6 +7,7 @@
   "sideEffects": false,
   "typings": "dist/index.d.ts",
   "scripts": {
+    "bootstrap": "yarn compile && yarn build",
     "test": "echo \"Error: no test specified\" && exit 0",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli' && exit 0",
     "compile": "rimraf src/icons && node bin/build.js",

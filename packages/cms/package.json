@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "scripts": {
+    "bootstrap": "yarn lokalize:export",
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
