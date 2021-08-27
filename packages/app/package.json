@@ -123,6 +123,7 @@
   },
   "scripts": {
     "analyze": "cross-env ANALYZE=true yarn build",
+    "bootstrap": "yarn download",
     "export": "next export",
     "dev": "run-p dev:*",
     "dev:next": "node next-server.js",
@@ -134,8 +135,7 @@
     "test:ci": "jest --ci",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
-    "compile": "tsc --pretty --noEmit",
-    "type-check": "tsc --pretty --noEmit",
+    "typecheck": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
     "clean": "rimraf .next"
   },

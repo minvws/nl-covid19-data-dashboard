@@ -9,11 +9,13 @@
     "dist/**/*"
   ],
   "scripts": {
+    "bootstrap": "yarn build",
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "del-cli dist tsconfig.tsbuildinfo",
-    "compile": "tsc -b .",
+    "typecheck": "tsc --noEmit",
+    "prebuild": "tsc -b .",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "format": "prettier --write \"src/**/*.{ts,tsx,md,json,yml}\" \"*.{js,json,md,yml}\" \"!src/types/data.ts\"",
     "type-check": "tsc --pretty --noEmit"

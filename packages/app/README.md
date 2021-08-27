@@ -10,11 +10,14 @@ haven't already. This installs all the dependencies for all of the packages.
 
 Then from `packages/app` you can run:
 
-1. `yarn download`
-2. `yarn workspace corona-dashboard/cms lokalize:export`
-3. `yarn dev`
+1. `yarn bootstrap`
+2. `yarn dev`
 
 These steps are described in more detail below.
+
+### Yarn Bootstrap
+
+Run `yarn bootstrap` to walk over the packages and install/prebuild all requirements. Right now, it will download a fresh dataset from production, export the texts from lokalize (development dataset) and build the common and icons packages for use by the app package.
 
 ### JSON Data
 
