@@ -1,4 +1,4 @@
-import { KeysOfType } from '@corona-dashboard/common';
+import { KeysOfType, Unpack } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Projection } from '@visx/geo/lib/types';
 import { geoConicConformal, GeoProjection } from 'd3-geo';
@@ -23,7 +23,6 @@ import {
   FitExtent,
   MappedDataItem,
   MapType,
-  Unpack,
   useChoroplethData,
   useChoroplethFeatures,
   useChoroplethTooltip,

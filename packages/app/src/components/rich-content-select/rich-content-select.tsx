@@ -7,9 +7,10 @@ import { VisuallyHidden } from '../visually-hidden';
 import { ListBox, ListBoxOption, SelectBox, SelectBoxRoot } from './components';
 import { useRichContentSelect } from './logic/use-select';
 import { Option } from './types';
+import { Unpack } from '@corona-dashboard/common';
 
 type RichContentSelectProps<T extends string> = {
-  initialValue?: T;
+  initialValue?: Unpack<T>;
   label: string;
   onChange: (option: Option<T>) => void;
   options: Option<T>[];
