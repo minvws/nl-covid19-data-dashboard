@@ -123,3 +123,4 @@ timestamp,action,key,document_id,move_to
 2021-08-25T10:16:29.645Z,delete,choropleth_tooltip.infected_locations,m5cl7ciD7CmTUWm5d6tQqX,__
 2021-08-25T10:16:29.646Z,delete,choropleth_tooltip.positive_tested_people,DWLUotrm23arH2ViSHOq3W,__
 2021-08-25T10:16:29.646Z,delete,choropleth_tooltip.sewer_regional,m5cl7ciD7CmTUWm5d6tOZr,__
+2021-08-27T13:37:05.595Z,add,vaccinaties.grafiek_leveringen.totaal,m5cl7ciD7CmTUWm5dMamuT,__

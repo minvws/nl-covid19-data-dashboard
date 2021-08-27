@@ -35,8 +35,15 @@ import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
-import { Tooltip, TooltipData } from '../time-series-chart/components';
+import {
+  DateSpanMarker,
+  Overlay,
+  Tooltip,
+  TooltipData,
+  TooltipFormatter,
+} from '../time-series-chart/components';
 import { TooltipSeriesList } from '../time-series-chart/components/tooltip/tooltip-series-list';
+import { TimespanAnnotationConfig } from '../time-series-chart/logic';
 import {
   calculateSeriesMaximum,
   getSeriesData,
@@ -54,26 +61,22 @@ type AnyTickFormatter = (value: any) => string;
 let tooltipTimeout: number;
 let hoverTimeout: number;
 
-/**
- * The TooltipFormatter returns the content for the tooltip.
- *
- * By passing the SeriesValue (which is an object with all trend values that are
- * showing in the chart with the date), plus the key for which the hover is
- * showing data, the formatter has all the information it needs to render any
- * kind of tooltip
- */
-type TooltipFormatter = (
-  value: SeriesValue,
-  key: string,
-  color?: string
-) => JSX.Element;
-
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-type Config<T extends TimestampedValue> = {
+type Config<T extends TimestampedValue> =
+  | VisibleBarConfig<T>
+  | InvisibleBarConfig<T>;
+
+type VisibleBarConfig<T extends TimestampedValue> = {
   metricProperty: keyof T;
   label: string;
   color: string;
+};
+
+type InvisibleBarConfig<T extends TimestampedValue> = {
+  type: 'invisible';
+  metricProperty: keyof T;
+  label: string;
 };
 
 type StackedChartProps<T extends TimestampedValue> = {
@@ -83,11 +86,26 @@ type StackedChartProps<T extends TimestampedValue> = {
   valueAnnotation?: string;
   initialWidth?: number;
   expectedLabel: string;
-  formatTooltip?: TooltipFormatter;
+  formatTooltip?: TooltipFormatter<T & StackedBarTooltipData>;
   isPercentage?: boolean;
   formatXAxis?: TickFormatter<Date>;
   formatTickValue?: (value: number) => string;
   timeframe?: TimeframeOption;
+};
+
+type BarRenderData = {
+  x: number;
+  width: number;
+  index: number;
+  color: string;
+  height: number;
+  key: string;
+};
+
+export type StackedBarTooltipData = {
+  bar: BarRenderData;
+  isHatched: boolean;
+  date_unix: number;
 };
 
 /**
@@ -111,6 +129,7 @@ export function StackedChart<T extends TimestampedValue>(
     isPercentage,
     expectedLabel,
     formatTickValue: formatYTickValue,
+    formatTooltip,
     valueAnnotation,
     timeframe = 'all',
   } = props;
@@ -118,6 +137,18 @@ export function StackedChart<T extends TimestampedValue>(
   const breakpoints = useBreakpoints();
   const isExtraSmallScreen = !breakpoints.sm;
   const isTinyScreen = !breakpoints.xs;
+
+  const isVisible = useCallback(function (
+    configValue: Config<T>
+  ): configValue is VisibleBarConfig<T> {
+    return !('type' in configValue);
+  },
+  []);
+
+  const chartConfig = useMemo(
+    () => config.filter(isVisible),
+    [config, isVisible]
+  );
 
   const minHeight = isExtraSmallScreen ? 200 : 400;
 
@@ -138,7 +169,7 @@ export function StackedChart<T extends TimestampedValue>(
     showTooltip,
     hideTooltip,
     tooltipOpen,
-  } = useTooltip<TooltipData<T>>();
+  } = useTooltip<TooltipData<T & StackedBarTooltipData>>();
 
   const isMountedRef = useIsMountedRef();
 
@@ -156,8 +187,8 @@ export function StackedChart<T extends TimestampedValue>(
   );
 
   const metricProperties = useMemo(
-    () => config.map((x) => x.metricProperty),
-    [config]
+    () => chartConfig.map((x) => x.metricProperty),
+    [chartConfig]
   );
 
   const today = useCurrentDate();
@@ -177,9 +208,9 @@ export function StackedChart<T extends TimestampedValue>(
   const colorScale = useMemo(() => {
     return scaleOrdinal<string, string>({
       domain: metricProperties as string[],
-      range: config.map((x) => x.color),
+      range: chartConfig.map((x) => x.color),
     });
-  }, [config, metricProperties]);
+  }, [chartConfig, metricProperties]);
 
   /**
    * This is a bit of a hack for now because this chart should be replaced by
@@ -196,8 +227,8 @@ export function StackedChart<T extends TimestampedValue>(
    * abstraction for this so that we can set the colors directly on the DOM
    * elements similar to how bars are rendered.
    */
-  const legendaItems = useMemo(() => {
-    const barItems = config.map(({ color, label }) => {
+  const legendItems = useMemo(() => {
+    const barItems = chartConfig.map(({ color, label }) => {
       return {
         color: color,
         label: label,
@@ -219,7 +250,7 @@ export function StackedChart<T extends TimestampedValue>(
         shapeComponent: <HatchedSquare />,
       },
     ];
-  }, [config, expectedLabel]);
+  }, [chartConfig, expectedLabel]);
 
   /**
    * Date range labels (eg "28 okt - 3 dec") are ~85 px wide. Use that number
@@ -259,9 +290,10 @@ export function StackedChart<T extends TimestampedValue>(
     [formatDate, formatDateSpan, isNarrowChart, numOfFittingLabels]
   );
 
-  const formatTooltip2: any = useCallback((context: SeriesValue) => {
-    return <TooltipSeriesList data={context} />;
-  }, []);
+  const defaultFormatTooltip: TooltipFormatter<T & StackedBarTooltipData> =
+    useCallback((context: TooltipData<T & StackedBarTooltipData>) => {
+      return <TooltipSeriesList data={context} />;
+    }, []);
 
   const formatYAxis = useCallback(
     (y: number) => {
@@ -287,10 +319,7 @@ export function StackedChart<T extends TimestampedValue>(
    * SeriesValue, which can be passed to the tooltip.
    */
   const handleHover = useCallback(
-    function handleHover(
-      event: HoverEvent,
-      bar: { width: number; x: number; index: number }
-    ) {
+    function handleHover(event: HoverEvent, bar: BarRenderData) {
       const isLeave = event.type === 'mouseleave';
 
       if (isLeave) {
@@ -308,20 +337,25 @@ export function StackedChart<T extends TimestampedValue>(
         tooltipTop: 0,
 
         tooltipData: {
-          /**
-           * The tooltip gets passed the original data value, plus the
-           * nearest/active hover property and the full series configuration.
-           * With these three arguments we should be able to render any sort of
-           * tooltip.
-           *
-           * If we are hovering a timespanAnnotation, we use that data to cut
-           * out any property values that should be blocked from the tooltip.
-           */
+          timespanAnnotation:
+            bar.index >= hatchedFromIndex
+              ? ({
+                  label: 'Verwacht',
+                } as TimespanAnnotationConfig)
+              : undefined,
           value: {
+            bar,
+            isHatched: bar.index >= hatchedFromIndex,
             date_unix: series[bar.index].__date.getTime() / 1000,
-            ...series[bar.index],
-          } as any,
-          config: config.map((x) => ({ ...x, type: 'bar' })) as any,
+            ...valuesInTimeframe[bar.index],
+          },
+          config: [
+            ...(config.map((x) => ({
+              ...x,
+              type: 'bar',
+              fillOpacity: 1,
+            })) as any),
+          ],
           options: {
             isPercentage: false,
           },
@@ -330,7 +364,15 @@ export function StackedChart<T extends TimestampedValue>(
         },
       });
     },
-    [hideTooltip, showTooltip, isMountedRef, config, series]
+    [
+      hideTooltip,
+      showTooltip,
+      isMountedRef,
+      config,
+      series,
+      hatchedFromIndex,
+      valuesInTimeframe,
+    ]
   );
 
   if (isEmpty(series)) {
@@ -514,19 +556,27 @@ export function StackedChart<T extends TimestampedValue>(
             </svg>
           </Box>
           {tooltipOpen && tooltipData && (
-            <Tooltip
-              data={tooltipData}
-              left={tooltipLeft}
-              top={tooltipTop}
-              formatTooltip={formatTooltip2}
-              bounds={bounds}
-              padding={padding}
-            />
+            <>
+              <Tooltip
+                data={tooltipData}
+                left={tooltipLeft}
+                top={tooltipTop}
+                formatTooltip={formatTooltip ?? defaultFormatTooltip}
+                bounds={bounds}
+                padding={padding}
+              />
+              <Overlay bounds={bounds} padding={padding}>
+                <DateSpanMarker
+                  width={tooltipData.value.bar.width}
+                  point={{ x: tooltipLeft }}
+                />
+              </Overlay>
+            </>
           )}
         </ResponsiveContainer>
       </Box>
       <Box pl={`${padding.left}px`}>
-        <Legend items={legendaItems} />
+        <Legend items={legendItems} />
       </Box>
     </>
   );
