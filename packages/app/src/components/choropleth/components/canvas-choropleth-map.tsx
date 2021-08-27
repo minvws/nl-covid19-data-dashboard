@@ -8,7 +8,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { createPortal } from 'react-dom';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
@@ -41,7 +40,6 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
     anchorEventHandlers,
     isTabInteractive,
     getFeatureName,
-    anchorsRef,
   } = props;
 
   const [hover, setHover] = useState<[number, number][][]>();
@@ -119,29 +117,20 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
   const mapId = useUniqueId();
 
-  console.log(annotations.props.ariaDescribedby);
-
   return (
     <>
-      {isPresent(anchorsRef.current) && (
-        <>
-          {createPortal(
-            <AreaMap
-              width={width}
-              height={height}
-              isTabInteractive={isTabInteractive}
-              geoInfo={geoInfo}
-              getLink={getLink}
-              getFeatureName={getFeatureName}
-              anchorEventHandlers={anchorEventHandlers}
-              selectFeature={selectFeature}
-              id={mapId}
-              handleMouseOver={handleMouseOver}
-            />,
-            anchorsRef.current
-          )}
-        </>
-      )}
+      <AreaMap
+        width={width}
+        height={height}
+        isTabInteractive={isTabInteractive}
+        geoInfo={geoInfo}
+        getLink={getLink}
+        getFeatureName={getFeatureName}
+        anchorEventHandlers={anchorEventHandlers}
+        selectFeature={selectFeature}
+        id={mapId}
+        handleMouseOver={handleMouseOver}
+      />
       <div
         ref={containerRef}
         style={{
@@ -390,7 +379,7 @@ function AreaMap(props: AreaMapProps) {
           style={{
             cursor: 'pointer',
           }}
-          tabIndex={i + 1}
+          tabIndex={2}
           aria-label={getFeatureName(x.code)}
           key={`${x.code}_${i}`}
           data-id={x.code}
