@@ -119,6 +119,8 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
 
   const mapId = useUniqueId();
 
+  console.log(annotations.props.ariaDescribedby);
+
   return (
     <>
       {isPresent(anchorsRef.current) && (
@@ -149,14 +151,14 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           position: 'relative',
         }}
         onMouseOut={featureOutHandler}
+        role="img"
+        {...annotations.props}
       >
         <Stage
-          aria-labelledby={annotations.props.ariaDescribedby}
           listening={false}
           ref={stageRef}
           width={width}
           height={height}
-          role="img"
           style={{
             overflow: 'hidden',
             position: 'absolute',
