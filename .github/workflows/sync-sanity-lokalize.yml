@@ -21,6 +21,8 @@ jobs:
 
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
+      - name: Build icons module
+        run: yarn workspace @corona-dashboard/icons build
       - name: Synchronize texts
         run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
         env:
