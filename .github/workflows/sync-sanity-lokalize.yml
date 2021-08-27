@@ -27,5 +27,5 @@ jobs:
           SANITY_TOKEN: ${{ secrets.sanity_token }}
       - name: Export production texts
         run: yarn workspace @corona-dashboard/cms lokalize:export --dataset=production --clean-json
-      - name: Compile all code with production texts
-        run: yarn workspace @corona-dashboard/app compile
+      - name: Typecheck all code with production texts
+        run: yarn workspace @corona-dashboard/app typecheck
