@@ -51,6 +51,7 @@ export default function App(props: AppProps) {
     <>
       <Head>
         <meta
+          key="viewport"
           name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no"
         />

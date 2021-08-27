@@ -210,7 +210,7 @@ const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
       {feature.map((x, i) => (
         <Line
           listening={false}
-          key={i}
+          key={`${x.code}_${i}`}
           x={0}
           y={0}
           points={x.flat()}
@@ -274,7 +274,7 @@ const Outlines = memo((props: OutlinesProps) => {
           listening={false}
           perfectDrawEnabled={false}
           closed
-          key={i}
+          key={`${x.code}_${i}`}
           x={0}
           y={0}
           strokeWidth={featureProps.outline.strokeWidth('')}
@@ -326,7 +326,7 @@ const Features = memo((props: FeaturesProps) => {
         <Group listening={false}>
           {geoInfo.map((x, i) => (
             <Line
-              key={i}
+              key={`${x.code}_${i}`}
               listening={false}
               perfectDrawEnabled={false}
               closed
