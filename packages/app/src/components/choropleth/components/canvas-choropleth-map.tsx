@@ -27,6 +27,7 @@ Konva.pixelRatio = 1;
 export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const {
     containerRef,
+    annotations,
     dataOptions,
     width,
     height,
@@ -150,6 +151,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         onMouseOut={featureOutHandler}
       >
         <Stage
+          aria-labelledby={annotations.props.ariaDescribedby}
           listening={false}
           ref={stageRef}
           width={width}
@@ -210,7 +212,7 @@ const HighlightedFeature = memo((props: HighlightedFeatureProps) => {
       {feature.map((x, i) => (
         <Line
           listening={false}
-          key={`${x.code}_${i}`}
+          key={i}
           x={0}
           y={0}
           points={x.flat()}
