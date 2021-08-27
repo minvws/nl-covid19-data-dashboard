@@ -21,7 +21,7 @@ import {
 import { AnchorEventHandler } from './choropleth-map';
 import { GenericChoroplethMapProps } from './svg-choropleth-map';
 
-Konva.pixelRatio = 1;
+Konva.pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
 
 export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const {
