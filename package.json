@@ -7,7 +7,7 @@
     "test:ci": "yarn workspaces run test:ci",
     "bootstrap": "yarn workspaces run bootstrap",
     "clean": "rimraf .build-cache && yarn workspaces run clean",
-    "compile": "yarn workspaces run compile",
+    "typecheck": "yarn workspaces run typecheck",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
     "dev": "yarn workspace @corona-dashboard/app dev & yarn workspace @corona-dashboard/cms dev",

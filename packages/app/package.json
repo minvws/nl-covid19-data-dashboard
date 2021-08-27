@@ -136,7 +136,7 @@
     "test:ci": "jest --ci",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
-    "compile": "tsc --pretty --noEmit",
+    "typecheck": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
     "clean": "rimraf .next"
   },
