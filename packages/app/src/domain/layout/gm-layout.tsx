@@ -2,11 +2,12 @@ import { Gm, GmDifference } from '@corona-dashboard/common';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { Coronavirus } from '@corona-dashboard/icons';
+import { RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+import { Ziekenhuis } from '@corona-dashboard/icons';
+import { Vaccinaties } from '@corona-dashboard/icons';
+
 import {
   CategoryMenu,
   Menu,
@@ -150,7 +151,7 @@ export function GmLayout(props: GmLayoutProps) {
                         >
                           <MetricMenuItemLink
                             href={reverseRouter.gm.vaccinaties(code)}
-                            icon={<VaccinatieIcon />}
+                            icon={<Vaccinaties />}
                             title={siteText.gemeente_vaccinaties.titel_sidebar}
                           >
                             {
@@ -186,7 +187,7 @@ export function GmLayout(props: GmLayoutProps) {
                       >
                         <MetricMenuItemLink
                           href={reverseRouter.gm.positiefGetesteMensen(code)}
-                          icon={<GetestIcon />}
+                          icon={<Test />}
                           title={
                             siteText.gemeente_positief_geteste_personen
                               .titel_sidebar
@@ -204,7 +205,7 @@ export function GmLayout(props: GmLayoutProps) {
 
                         <MetricMenuItemLink
                           href={reverseRouter.gm.sterfte(code)}
-                          icon={<CoronavirusIcon />}
+                          icon={<Coronavirus />}
                           title={
                             siteText.veiligheidsregio_sterfte.titel_sidebar
                           }

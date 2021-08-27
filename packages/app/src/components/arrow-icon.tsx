@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { ReactComponent as ArrowIcon } from '~/assets/arrow.svg';
+import { Arrow } from '@corona-dashboard/icons';
 
-export const ArrowIconRight = styled(ArrowIcon)`
+export const ArrowIconRight = styled(Arrow)`
   transform: rotate(-90deg);
 `;
 
-export const ArrowIconLeft = styled(ArrowIcon)`
+export const ArrowIconLeft = styled(Arrow)`
   transform: rotate(90deg);
 `;

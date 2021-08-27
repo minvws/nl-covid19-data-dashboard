@@ -2,7 +2,7 @@ import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import { ReactComponent as WarningIcon } from '~/assets/warning.svg';
+import { Warning } from '@corona-dashboard/icons';
 import { WithTooltip } from '~/lib/tooltip';
 import { Box } from './base';
 import { Markdown } from './markdown';
@@ -21,7 +21,7 @@ interface WarningMessageProps {
 export function WarningTile({
   message,
   variant = 'default',
-  icon = WarningIcon,
+  icon = Warning,
   isFullWidth,
   tooltipText,
 }: WarningMessageProps) {

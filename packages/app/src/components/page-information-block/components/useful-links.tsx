@@ -1,7 +1,7 @@
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ReactComponent as ChevronLargeIcon } from '~/assets/chevron-large.svg';
-import { ReactComponent as ExternalLinkIcon } from '~/assets/external-link-2.svg';
+import { ChevronLarge } from '@corona-dashboard/icons';
+import { External as ExternalIcon } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { ExternalLink } from '~/components/external-link';
 import { Anchor, InlineText, Text } from '~/components/typography';
@@ -29,15 +29,12 @@ export function UsefulLinks({ links }: usefulLinksProps) {
           <ListItem key={index}>
             {isAbsoluteUrl(link.href) ? (
               <ExternalLink href={link.href} underline="hover">
-                <TitleWithIcon title={link.title} icon={<ExternalLinkIcon />} />
+                <TitleWithIcon title={link.title} icon={<ExternalIcon />} />
               </ExternalLink>
             ) : (
               <Link href={link.href} passHref>
                 <Anchor underline="hover">
-                  <TitleWithIcon
-                    title={link.title}
-                    icon={<ChevronLargeIcon />}
-                  />
+                  <TitleWithIcon title={link.title} icon={<ChevronLarge />} />
                 </Anchor>
               </Link>
             )}

@@ -1,4 +1,4 @@
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';

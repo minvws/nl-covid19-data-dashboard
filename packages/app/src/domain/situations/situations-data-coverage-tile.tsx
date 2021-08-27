@@ -1,8 +1,8 @@
 import { VrSituationsValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
-import { ReactComponent as CheckIcon } from '~/assets/check-small.svg';
-import { ReactComponent as CrossIcon } from '~/assets/cross-small.svg';
+import { Check } from '@corona-dashboard/icons';
+import { Cross } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { Markdown } from '~/components/markdown';
 import { Tile } from '~/components/tile';
@@ -31,7 +31,7 @@ export function SituationsDataCoverageTile({
         <Heading level={3}>{text.titel}</Heading>
         <CoverageIndicator hasSufficientData={data.has_sufficient_data}>
           <IndicatorCircle>
-            {data.has_sufficient_data ? <CheckIcon /> : <CrossIcon />}
+            {data.has_sufficient_data ? <Check /> : <Cross />}
           </IndicatorCircle>
           {data.has_sufficient_data
             ? text.titel_genoeg_dekking

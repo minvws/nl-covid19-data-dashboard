@@ -17,6 +17,6 @@
       "path": "../common"
     }
   ],
-  "include": ["next-env.d.ts", "src"],
+  "include": ["next-env.d.ts", "src", "src/**/*.json"],
   "exclude": ["node_modules"]
 }

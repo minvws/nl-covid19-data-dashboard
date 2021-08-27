@@ -62,9 +62,10 @@ export function clearMutationsLogFile() {
   try {
     fs.writeFileSync(MUTATIONS_LOG_FILE, CSV_HEADER);
   } catch (err) {
-    console.error(
-      `Failed to clear mutations log file ${MUTATIONS_LOG_FILE}: ${err.message}`
-    );
+    if (err instanceof Error)
+      console.error(
+        `Failed to clear mutations log file ${MUTATIONS_LOG_FILE}: ${err.message}`
+      );
   }
 }
 
@@ -84,9 +85,10 @@ export function appendTextMutation(args: {
 
     fs.appendFileSync(MUTATIONS_LOG_FILE, line);
   } catch (err) {
-    console.error(
-      `Failed to write mutation to file ${MUTATIONS_LOG_FILE}: ${err.message}`
-    );
+    if (err instanceof Error)
+      console.error(
+        `Failed to write mutation to file ${MUTATIONS_LOG_FILE}: ${err.message}`
+      );
   }
 }
 
@@ -362,7 +364,10 @@ export async function finalizeMoveMutations(
         },
       });
     } catch (err) {
-      console.error(`Move failed for document ${document_id}: ${err.message}`);
+      if (err instanceof Error)
+        console.error(
+          `Move failed for document ${document_id}: ${err.message}`
+        );
     }
   }
 

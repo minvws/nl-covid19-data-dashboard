@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
-import { ReactComponent as InformationIcon } from '~/assets/information.svg';
+import { Information } from '@corona-dashboard/icons';
 import { Box } from './base';
 import { WarningTile } from './warning-tile';
 
@@ -12,7 +12,7 @@ interface InformationTileProps {
 
 export function InformationTile({
   message,
-  icon = InformationIcon,
+  icon = Information,
   isFullWidth = true,
 }: InformationTileProps) {
   const Icon = icon;

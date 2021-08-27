@@ -54,7 +54,8 @@ export function getSchemaInfo(
       customValidations: [
         createChoroplethValidation(
           path.join(defaultJsonDirectory, 'VR_COLLECTION.json'),
-          'vrcode'
+          'vrcode',
+          ['vaccine_coverage_per_age_group']
         ),
         validateMovingAverages,
       ],
@@ -66,7 +67,8 @@ export function getSchemaInfo(
       customValidations: [
         createChoroplethValidation(
           path.join(defaultJsonDirectory, 'GM_COLLECTION.json'),
-          'gmcode'
+          'gmcode',
+          ['vaccine_coverage_per_age_group']
         ),
         validateMovingAverages,
       ],
