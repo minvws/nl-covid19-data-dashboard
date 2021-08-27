@@ -11,7 +11,8 @@ export function loadRootSchema(schemaPath: string) {
       })
     );
   } catch (e) {
-    throw new Error(`Error while parsing file ${schemaPath}:\n${e.message}`);
+    if (e instanceof Error)
+      throw new Error(`Error while parsing file ${schemaPath}:\n${e.message}`);
   }
 }
 
