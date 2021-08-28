@@ -24,6 +24,13 @@ import { GenericChoroplethMapProps } from './svg-choropleth-map';
 Konva.pixelRatio =
   typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1;
 
+/**
+ * This is one transparent pixel encoded in a dataUrl. This is used for the image overlay on top of the canvas that
+ * uses the area map to detect feature mouse overs
+ */
+const oneTransparentPixelImage =
+  'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC';
+
 export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
   const {
     containerRef,
@@ -175,7 +182,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
         <div style={{ position: 'absolute', left: 0, right: 0 }}>
           <img
             aria-hidden="true"
-            src={`data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAACAAAFAAGq1chRAAAAAElFTkSuQmCC`}
+            src={oneTransparentPixelImage}
             width={width}
             height={height}
             useMap={`#${mapId}`}
