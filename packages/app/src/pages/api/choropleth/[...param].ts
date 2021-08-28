@@ -87,7 +87,7 @@ function createGeoJson(map: MapType) {
   return [featureGeo, outlineGeo] as const;
 }
 
-function loadChoroplethData(map: MapType, metric: string, property: string) {
+function loadChoroplethData(map: MapType, metric: string) {
   const filename = `${map.toUpperCase()}_COLLECTION.json`;
   const content = JSON.parse(
     fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
@@ -124,7 +124,7 @@ function generateChoroplethImage(
   const width = height * (1 / aspectRatio);
 
   const geoJson = createGeoJson(map);
-  const data = loadChoroplethData(map, metric, property);
+  const data = loadChoroplethData(map, metric);
 
   const features = getChoroplethFeatures(map, data, geoJson);
 
