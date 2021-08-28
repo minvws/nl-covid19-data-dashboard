@@ -1,5 +1,11 @@
+/**
+ * Convert the given base64 string to binary
+ */
 const atob = (a: string) => Buffer.from(a, 'base64').toString('binary');
 
+/**
+ * Convert the given dataUrl to a binary Buffer
+ */
 export function dataUrltoBlob(dataUrl: string) {
   const byteString = atob(dataUrl.split(',')[1]);
 
