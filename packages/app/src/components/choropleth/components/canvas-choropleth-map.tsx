@@ -10,6 +10,7 @@ import {
 } from 'react';
 import { Group, Layer, Line, Stage } from 'react-konva';
 import { isDefined, isPresent } from 'ts-is-present';
+import { colors } from '~/style/theme';
 import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useUniqueId } from '~/utils/use-unique-id';
 import { FeatureProps } from '../logic';
@@ -314,7 +315,7 @@ const Features = memo((props: FeaturesProps) => {
         if (idx === 5 || idx === 0) {
           return featureProps.area.fill(code);
         }
-        return 'white';
+        return colors.white;
       }
       return featureProps.area.fill(code);
     },
