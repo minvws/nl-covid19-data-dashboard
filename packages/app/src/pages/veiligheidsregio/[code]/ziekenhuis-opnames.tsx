@@ -1,7 +1,6 @@
 import { Ziekenhuis } from '@corona-dashboard/icons';
-import dynamic from 'next/dynamic';
 import { ChartTile } from '~/components/chart-tile';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -39,14 +38,6 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export { getStaticPaths } from '~/static-paths/vr';
-
-const DynamicChoropleth = dynamic(
-  () => import('../../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -165,6 +156,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               }}
               data={choropleth.gm.hospital_nice}
               dataConfig={{
+                metricName: 'hospital_nice',
                 metricProperty: 'admissions_on_date_of_reporting',
               }}
               dataOptions={{

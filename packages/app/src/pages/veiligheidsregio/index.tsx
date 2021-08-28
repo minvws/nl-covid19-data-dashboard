@@ -1,6 +1,5 @@
-import dynamic from 'next/dynamic';
 import { Box } from '~/components/base';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { Markdown } from '~/components/markdown';
@@ -31,14 +30,6 @@ export const getStaticProps = createGetStaticProps(
     vr: ({ escalation_levels }) => ({ escalation_levels }),
   })
 );
-
-const DynamicChoropleth = dynamic(
-  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
   const breakpoints = useBreakpoints();
@@ -106,6 +97,7 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
               accessibility={{ key: 'escalation_levels_choropleth' }}
               data={choropleth.vr.escalation_levels}
               dataConfig={{
+                metricName: 'escalation_levels',
                 metricProperty: 'level',
                 noDataFillColor: unknownLevelColor,
               }}

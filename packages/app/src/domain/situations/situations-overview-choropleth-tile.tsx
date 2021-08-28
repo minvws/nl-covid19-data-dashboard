@@ -3,12 +3,11 @@ import {
   VrCollectionSituations,
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
-import dynamic from 'next/dynamic';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
@@ -21,14 +20,6 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { SituationIcon } from './components/situation-icon';
 import { useSituations } from './logic/situations';
-
-const DynamicChoropleth = dynamic(
-  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 interface SmallMultiplesChoroplethTileProps {
   data: VrCollectionSituations[];
@@ -103,6 +94,7 @@ export function SituationsOverviewChoroplethTile({
                 map="vr"
                 data={data}
                 dataConfig={{
+                  metricName: 'situations',
                   metricProperty: situation.id,
                   noDataFillColor: colors.data.underReported,
                 }}

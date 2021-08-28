@@ -3,10 +3,9 @@ import {
   GehandicaptenZorg,
   Locatie,
 } from '@corona-dashboard/icons';
-import dynamic from 'next/dynamic';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -36,14 +35,6 @@ import {
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-
-const DynamicChoropleth = dynamic(
-  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -236,6 +227,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               }}
               data={choropleth.vr.disability_care}
               dataConfig={{
+                metricName: 'disability_care',
                 metricProperty: 'infected_locations_percentage',
               }}
               dataOptions={{

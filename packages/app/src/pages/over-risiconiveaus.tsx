@@ -1,12 +1,10 @@
+import { BarChart, Calendar } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { BarChart } from '@corona-dashboard/icons';
-import { Calendar } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -28,14 +26,6 @@ import { asResponsiveArray } from '~/style/utils';
 import { CollapsibleList, RichContentBlock } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
-
-const DynamicChoropleth = dynamic(
-  () => import('../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 interface OverRisiconiveausData {
   title: string;
@@ -148,6 +138,7 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
                   minHeight={200}
                   data={choropleth.vr.escalation_levels}
                   dataConfig={{
+                    metricName: 'escalation_levels',
                     metricProperty: 'level',
                     noDataFillColor: unknownLevelColor,
                   }}

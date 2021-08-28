@@ -3,11 +3,11 @@ import { FocusEvent, memo, useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import { useAccessibilityAnnotations } from '~/utils/use-accessibility-annotations';
 import { useResizeObserver } from '~/utils/use-resize-observer';
-import { ChoroplethProps, UnpackedDataItem } from '..';
+import { ChoroplethProps } from '..';
 import {
+  ChoroplethDataItem,
   CHOROPLETH_ASPECT_RATIO,
   FitExtent,
-  MapType,
   useChoroplethData,
   useChoroplethFeatures,
   useChoroplethTooltip,
@@ -26,18 +26,18 @@ export type AnchorEventHandler = {
   onBlur: (evt: FocusEvent<HTMLElement>) => void;
 };
 
-type ChoroplethMapProps<
-  T extends MapType,
-  K extends UnpackedDataItem<T>
-> = Omit<ChoroplethProps<T, K>, 'formatTooltip' | 'tooltipPlacement'> & {
+type ChoroplethMapProps<T extends ChoroplethDataItem> = Omit<
+  ChoroplethProps<T>,
+  'formatTooltip' | 'tooltipPlacement'
+> & {
   hoverRef: React.RefObject<SVGGElement | null>;
-  setTooltip: (tooltip: TooltipSettings<K> | undefined) => void;
+  setTooltip: (tooltip: TooltipSettings<T> | undefined) => void;
   isTabInteractive: boolean;
   anchorEventHandlers: AnchorEventHandler;
 };
 
-export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
-  props: ChoroplethMapProps<T, K>
+export const ChoroplethMap: <T extends ChoroplethDataItem>(
+  props: ChoroplethMapProps<T>
 ) => JSX.Element | null = memo((props) => {
   const {
     data: originalData,
@@ -129,7 +129,11 @@ export const ChoroplethMap: <T extends MapType, K extends UnpackedDataItem<T>>(
   );
 
   if (!isDefined(choroplethFeatures)) {
-    return <div>Loading data...</div>;
+    return (
+      <img
+        src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
+      />
+    );
   }
 
   const RenderComponent =

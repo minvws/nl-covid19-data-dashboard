@@ -1,7 +1,7 @@
 import { Elderly } from '@corona-dashboard/icons';
-import dynamic from 'next/dynamic';import { Spacer } from '~/components/base';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -31,14 +31,6 @@ import {
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-
-const DynamicChoropleth = dynamic(
-  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -213,6 +205,7 @@ const ElderlyAtHomeNationalPage = (
               }}
               data={choropleth.vr.elderly_at_home}
               dataConfig={{
+                metricName: 'elderly_at_home',
                 metricProperty: 'positive_tested_daily_per_100k',
               }}
               dataOptions={{

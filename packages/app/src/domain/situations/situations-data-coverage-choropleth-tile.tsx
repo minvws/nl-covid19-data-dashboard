@@ -1,10 +1,9 @@
 import { VrCollectionSituations } from '@corona-dashboard/common';
+import { Check, Cross } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
-import dynamic from 'next/dynamic';
-import { Check } from '@corona-dashboard/icons';
-import { Cross } from '@corona-dashboard/icons';import { Box, Spacer } from '~/components/base';
+import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';
@@ -14,14 +13,6 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { LegendIcon } from './components/legend-icon';
 import { SituationsDataCoverageTooltip } from './components/situations-data-coverage-tooltip';
-
-const DynamicChoropleth = dynamic(
-  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 interface SituationsDataCoverageChoroplethTileProps {
   data: {
@@ -107,6 +98,7 @@ export function SituationsDataCoverageChoroplethTile({
                 map="vr"
                 data={data.situations}
                 dataConfig={{
+                  metricName: 'situations',
                   metricProperty: 'has_sufficient_data',
                 }}
                 dataOptions={{

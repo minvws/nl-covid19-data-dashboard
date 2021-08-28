@@ -1,10 +1,7 @@
-import { GgdTesten } from '@corona-dashboard/icons';
-import { Test } from '@corona-dashboard/icons';
-
-import dynamic from 'next/dynamic';
+import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -44,15 +41,8 @@ import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-export { getStaticPaths } from '~/static-paths/vr';
 
-const DynamicChoropleth = dynamic(
-  () => import('../../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -272,6 +262,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               }}
               data={choropleth.gm.tested_overall}
               dataConfig={{
+                metricName: 'tested_overall',
                 metricProperty: 'infected_per_100k',
               }}
               dataOptions={{

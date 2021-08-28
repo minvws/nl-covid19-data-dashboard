@@ -1,6 +1,8 @@
 import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { GeoProjection } from 'd3-geo';
+import withLoadingProps from 'next-dynamic-loading-props';
+import dynamic from 'next/dynamic';
 import { useRef, useState } from 'react';
 import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
@@ -10,9 +12,9 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { ChoroplethMap } from './components/choropleth-map';
 import {
-  MappedDataItem,
-  MapType,
-  Unpack,
+  ChoroplethDataItem,
+  InferedDataCollection,
+  InferedMapType,
   useTabInteractiveButton,
 } from './logic';
 import { ChoroplethTooltipPlacement, Tooltip } from './tooltips';
@@ -28,7 +30,8 @@ export type DataOptions = {
   projection?: () => GeoProjection;
 };
 
-export type OptionalDataConfig<T> = {
+export type OptionalDataConfig<T extends ChoroplethDataItem> = {
+  metricName: KeysOfType<InferedDataCollection<T>, T[]>;
   metricProperty: KeysOfType<T, number | null | boolean | undefined, true>;
   noDataFillColor?: string;
   hoverFill?: string;
@@ -40,7 +43,9 @@ export type OptionalDataConfig<T> = {
   areaStrokeWidth?: number;
 };
 
-export type DataConfig<T> = Required<OptionalDataConfig<T>>;
+export type DataConfig<T extends ChoroplethDataItem> = Required<
+  OptionalDataConfig<T>
+>;
 
 export type OptionalBoundingBoxPadding = {
   left?: number;
@@ -74,20 +79,15 @@ export type ResponsiveSizeConfiguration = [
 
 export type BoundingBoxPadding = Required<OptionalBoundingBoxPadding>;
 
-export type UnpackedDataItem<T extends MapType> = Unpack<MappedDataItem<T>>;
-
 type RenderTarget = 'svg' | 'canvas';
 
-export type ChoroplethProps<
-  T extends MapType,
-  K extends UnpackedDataItem<T>
-> = {
+export type ChoroplethProps<T extends ChoroplethDataItem> = {
   accessibility: AccessibilityDefinition;
-  data: K[];
-  dataConfig: OptionalDataConfig<K>;
+  data: T[];
+  dataConfig: OptionalDataConfig<T>;
   dataOptions: DataOptions;
-  map: T;
-  formatTooltip?: TooltipFormatter<K>;
+  map: InferedMapType<T>;
+  formatTooltip?: TooltipFormatter<T>;
   tooltipPlacement?: ChoroplethTooltipPlacement;
   minHeight?: number;
   /**
@@ -121,12 +121,12 @@ export type ChoroplethComponent = typeof Choropleth;
  * Most of the choropleths will work using the generic tooltip, but if something custom is required the `formatTooltip`
  * prop is there to help out.
  */
-export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
+export function Choropleth<T extends ChoroplethDataItem>({
   formatTooltip,
   tooltipPlacement,
   ...props
-}: ChoroplethProps<T, K>) {
-  const [tooltip, setTooltip] = useState<TooltipSettings<K>>();
+}: ChoroplethProps<T>) {
+  const [tooltip, setTooltip] = useState<TooltipSettings<T>>();
   const isTouch = useIsTouchDevice();
   const { siteText } = useIntl();
   const hoverRef = useRef<SVGGElement>(null);
@@ -174,3 +174,17 @@ export function Choropleth<T extends MapType, K extends UnpackedDataItem<T>>({
     </Box>
   );
 }
+
+export const DynamicChoropleth = withLoadingProps((useLoadingingProps) =>
+  dynamic(() => import('./').then((mod) => mod.Choropleth), {
+    ssr: false,
+    loading: () => {
+      const { map, dataConfig, minHeight = 500 } = useLoadingingProps();
+      return (
+        <img
+          src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
+        />
+      );
+    },
+  })
+) as ChoroplethComponent;

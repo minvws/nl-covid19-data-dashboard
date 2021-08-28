@@ -1,5 +1,4 @@
 import { GmCollectionHospitalNice } from '@corona-dashboard/common';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
@@ -18,15 +17,7 @@ import { getLastGeneratedDate } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-import { ChoroplethComponent } from '../../components/choropleth';
-
-const DynamicChoropleth = dynamic(
-  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
+import { DynamicChoropleth } from '../../components/choropleth';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -75,7 +66,6 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
             height="120vw"
             maxWidth={750}
             maxHeight={960}
-            margin="0 auto"
           >
             <DynamicChoropleth
               renderTarget="canvas"
@@ -87,6 +77,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
               data={data}
               minHeight={650}
               dataConfig={{
+                metricName: 'gemeente' as any,
                 metricProperty: 'admissions_on_date_of_reporting',
                 areaStroke: colors.blue,
                 areaStrokeWidth: 0.5,

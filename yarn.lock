@@ -13851,6 +13851,11 @@ next-compose-plugins@^2.2.0:
   resolved "https://registry.yarnpkg.com/next-compose-plugins/-/next-compose-plugins-2.2.1.tgz#020fc53f275a7e719d62521bef4300fbb6fde5ab"
   integrity sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==
 
+next-dynamic-loading-props@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/next-dynamic-loading-props/-/next-dynamic-loading-props-0.1.1.tgz#161a4cc2792a7fb6ce2ecd304afbcdd6d81bb0fc"
+  integrity sha512-XHMqo/NWL/D2IW6nv18fEJGyEjjIGfyTQd4DVb445u7ibGUznBCQrIz3SRQAqXxm5flYFZ1lxX7UJPR03el0Uw==
+
 next-tick@1, next-tick@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"

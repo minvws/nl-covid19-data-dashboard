@@ -1,9 +1,7 @@
-import dynamic from 'next/dynamic';
+import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { useState } from 'react';
-import { Experimenteel } from '@corona-dashboard/icons';
-import { RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -33,14 +31,6 @@ import {
 } from '~/static-props/get-data';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-
-const DynamicChoropleth = dynamic(
-  () => import('../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -189,6 +179,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 data={choropleth.gm.sewer}
                 dataConfig={{
+                  metricName: 'sewer',
                   metricProperty: 'average',
                 }}
                 dataOptions={{
@@ -204,6 +195,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
                 data={choropleth.vr.sewer}
                 dataConfig={{
+                  metricName: 'sewer',
                   metricProperty: 'average',
                 }}
                 dataOptions={{

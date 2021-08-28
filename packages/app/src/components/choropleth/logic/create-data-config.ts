@@ -1,12 +1,16 @@
 import { colors } from '~/style/theme';
 import { OptionalDataConfig } from '..';
+import { ChoroplethDataItem } from './types';
 import {
   DEFAULT_HOVER_STROKE_WIDTH,
   DEFAULT_STROKE_WIDTH,
 } from './use-feature-props';
 
-export function createDataConfig<T>(partialDataConfig: OptionalDataConfig<T>) {
+export function createDataConfig<T extends ChoroplethDataItem>(
+  partialDataConfig: OptionalDataConfig<T>
+) {
   return {
+    metricName: partialDataConfig.metricName ?? '',
     metricProperty: partialDataConfig.metricProperty,
     noDataFillColor:
       partialDataConfig.noDataFillColor ?? colors.choroplethNoData,

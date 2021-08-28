@@ -23,6 +23,14 @@ import { getProjectedCoordinates } from '~/components/choropleth/logic/use-proje
 import { dataUrltoBlob } from '~/utils/api/data-url-to-blob';
 import { hash } from '~/utils/api/hash';
 
+const publicPath = path.resolve(__dirname, '../../../../../public');
+const publicJsonPath = path.resolve(publicPath, 'json');
+const publicImgPath = path.resolve(publicPath, 'images', 'choropleth');
+
+if (!fs.existsSync(publicImgPath)) {
+  fs.mkdirSync(publicImgPath, { recursive: true });
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { param } = req.query;
   const [map, metric, property, heightStr] = param as [
@@ -31,9 +39,78 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     string,
     number
   ];
+
   const height = Number(heightStr);
 
+  if (height < 50 || height > 850) {
+    res.status(400);
+    res.end();
+    return;
+  }
+
+  const filename = `${metric}_${property}_${map}_${height}.png`;
+
+  if (fs.existsSync(path.join(publicImgPath, filename))) {
+    res.redirect(`/images/choropleth/${filename}`);
+    return;
+  }
+
+  const [blob, eTag] = generateChoroplethImage(
+    metric,
+    property,
+    map,
+    height,
+    filename
+  );
+
+  send(res, blob, eTag);
+}
+
+function send(res: NextApiResponse, blob: Buffer, eTag: string) {
+  res.setHeader('ETag', eTag);
+  res.setHeader('Content-Type', 'image/png');
+  res.setHeader('Vary', 'Accept-Encoding');
+
+  res.status(200);
+  res.end(blob);
+}
+
+function createGeoJson(map: MapType) {
+  const outlineGeo = map === 'in' ? undefined : nlGeo;
+  assert(
+    map === 'in' || map === 'vr' || map === 'gm',
+    `Unknown maptype: ${map}`
+  );
+
+  const featureGeo = map === 'in' ? inGeo : map === 'vr' ? vrGeo : gmGeo;
+
+  return [featureGeo, outlineGeo] as const;
+}
+
+function loadChoroplethData(map: MapType, metric: string, property: string) {
+  const filename = `${map.toUpperCase()}_COLLECTION.json`;
+  const content = JSON.parse(
+    fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
+  );
+  if (metric !== 'gemeente') {
+    return content[metric] as ChoroplethDataItem[];
+  }
+  const data = content['tested_overall'];
+  return data.map((x: any) => ({
+    gmcode: x.gemcode,
+    admissions_on_date_of_reporting: null,
+  })) as ChoroplethDataItem[];
+}
+
+function generateChoroplethImage(
+  metric: string,
+  property: string,
+  map: MapType,
+  height: number,
+  filename: string
+) {
   const dataConfig: DataConfig<any> = createDataConfig<any>({
+    metricName: metric as any,
     metricProperty: property,
   });
 
@@ -47,7 +124,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const width = height * (1 / aspectRatio);
 
   const geoJson = createGeoJson(map);
-  const data = loadChoroplethData(map, metric);
+  const data = loadChoroplethData(map, metric, property);
 
   const features = getChoroplethFeatures(map, data, geoJson);
 
@@ -95,6 +172,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       height,
     })
   );
+
   projectedGeoInfo.forEach((x, i) => {
     const line = new Konva.Line({
       perfectDrawEnabled: true,
@@ -114,37 +192,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const blob = dataUrltoBlob(dataUrl);
   const eTag = hash(dataUrl);
 
-  send(res, blob, eTag);
-}
+  fs.writeFileSync(path.join(publicImgPath, filename), blob);
 
-function send(res: NextApiResponse, blob: Buffer, eTag: string) {
-  res.setHeader('Cache-Control', 'public, no-cache');
-  res.setHeader('ETag', eTag);
-  res.setHeader('Content-Type', 'image/png');
-  res.setHeader('Vary', 'Accept-Encoding');
-
-  res.status(200);
-  res.end(blob);
-}
-
-function createGeoJson(map: MapType) {
-  const outlineGeo = map === 'in' ? undefined : nlGeo;
-  assert(
-    map === 'in' || map === 'vr' || map === 'gm',
-    `Unknown maptype: ${map}`
-  );
-
-  const featureGeo = map === 'in' ? inGeo : map === 'vr' ? vrGeo : gmGeo;
-
-  return [featureGeo, outlineGeo] as const;
-}
-
-const publicJsonPath = path.resolve(__dirname, '../../../../../public/json');
-
-function loadChoroplethData(map: MapType, metric: string) {
-  const filename = `${map.toUpperCase()}_COLLECTION.json`;
-  const content = JSON.parse(
-    fs.readFileSync(path.join(publicJsonPath, filename), { encoding: 'utf-8' })
-  );
-  return content[metric] as ChoroplethDataItem[];
+  return [blob, eTag] as const;
 }

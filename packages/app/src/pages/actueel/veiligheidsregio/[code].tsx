@@ -1,19 +1,16 @@
+import { Test, Ziekenhuis } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { some } from 'lodash';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { Test } from '@corona-dashboard/icons';
-
-import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
 import {
   ChartRegionControls,
   RegionControlOption,
 } from '~/components/chart-region-controls';
-import { ChoroplethComponent } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
@@ -60,15 +57,8 @@ import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-export { getStaticPaths } from '~/static-paths/vr';
 
-const DynamicChoropleth = dynamic(
-  () => import('../../../components/choropleth').then((mod) => mod.Choropleth),
-  {
-    ssr: false,
-    loading: () => <p>Loading component...</p>,
-  }
-) as ChoroplethComponent;
+export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -298,6 +288,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     }}
                     data={choropleth.vr.escalation_levels}
                     dataConfig={{
+                      metricName: 'escalation_levels',
                       metricProperty: 'level',
                       noDataFillColor: unknownLevelColor,
                     }}
@@ -373,6 +364,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       }}
                       data={choropleth.gm.tested_overall}
                       dataConfig={{
+                        metricName: 'tested_overall',
                         metricProperty: 'infected_per_100k',
                       }}
                       dataOptions={{
@@ -389,6 +381,7 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                       }}
                       data={choropleth.vr.tested_overall}
                       dataConfig={{
+                        metricName: 'tested_overall',
                         metricProperty: 'infected_per_100k',
                       }}
                       dataOptions={{
