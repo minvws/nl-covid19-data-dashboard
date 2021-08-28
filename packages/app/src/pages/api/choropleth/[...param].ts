@@ -63,10 +63,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     filename
   );
 
-  send(res, blob, eTag);
-}
-
-function send(res: NextApiResponse, blob: Buffer, eTag: string) {
   res.setHeader('ETag', eTag);
   res.setHeader('Content-Type', 'image/png');
   res.setHeader('Vary', 'Accept-Encoding');
