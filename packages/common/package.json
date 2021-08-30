@@ -14,7 +14,7 @@
     "test:ci": "jest --ci",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "del-cli dist tsconfig.tsbuildinfo",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --pretty --noEmit",
     "prebuild": "tsc -b .",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
     "format": "prettier --write \"src/**/*.{ts,tsx,md,json,yml}\" \"*.{js,json,md,yml}\" \"!src/types/data.ts\"",
