@@ -13,6 +13,8 @@ COPY packages/app/package.json ./packages/app/
 COPY packages/cli/package.json ./packages/cli/
 COPY packages/cms/package.json ./packages/cms/
 COPY packages/common/package.json ./packages/common/
+COPY packages/icons/package.json ./packages/icons/
+
 RUN yarn install --frozen-lockfile --production=false
 
 # Layer cache for rebuilds without sourcecode changes.
