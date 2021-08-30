@@ -159,12 +159,12 @@ export function VaccineCoveragePerMunicipality({
             hasValueAtKey('age_group_range', selectedAgeGroup)
           )}
           dataConfig={{
+            metricName: 'vaccine_coverage_per_age_group',
             metricProperty: 'fully_vaccinated_percentage',
           }}
           dataOptions={{
             isPercentage: true,
-            // TODO: replace with vaccinaties pagina
-            getLink: (gmcode) => reverseRouter.gm.index(gmcode),
+            getLink: (gmcode) => reverseRouter.gm.vaccinaties(gmcode),
             tooltipVariables: {
               age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
             },
@@ -186,12 +186,12 @@ export function VaccineCoveragePerMunicipality({
             hasValueAtKey('age_group_range', selectedAgeGroup)
           )}
           dataConfig={{
+            metricName: 'vaccine_coverage_per_age_group',
             metricProperty: 'fully_vaccinated_percentage',
           }}
           dataOptions={{
             isPercentage: true,
-            // TODO: replace with vaccinaties pagina
-            getLink: (gmcode) => reverseRouter.vr.index(gmcode),
+            getLink: (vrcode) => reverseRouter.vr.vaccinaties(vrcode),
             tooltipVariables: {
               age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
             },
