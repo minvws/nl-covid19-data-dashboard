@@ -16,7 +16,16 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   props: ChoroplethDataItemProps<T>
 ) {
   const { data } = props;
-  const { siteText } = useIntl();
+  const {
+    siteText,
+    formatNumber,
+    formatPercentage,
+    formatDate,
+    formatDateFromSeconds,
+    formatDateFromMilliseconds,
+    formatRelativeDate,
+    formatDateSpan,
+  } = useIntl();
 
   const text = siteText.choropleth_tooltip;
 
@@ -51,12 +60,20 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       }
     >
       <TooltipSubject
-        subject={subject}
+        subject={replaceVariablesInText(subject, tooltipVars)}
         thresholdValues={data.thresholdValues}
         filterBelow={data.dataItem[data.dataConfig.metricProperty]}
       >
         <Markdown
-          content={replaceVariablesInText(tooltipContent, tooltipVars)}
+          content={replaceVariablesInText(tooltipContent, tooltipVars, {
+            formatNumber,
+            formatPercentage,
+            formatDate,
+            formatDateFromSeconds,
+            formatDateFromMilliseconds,
+            formatRelativeDate,
+            formatDateSpan,
+          })}
         />
       </TooltipSubject>
     </TooltipContent>

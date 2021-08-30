@@ -1,12 +1,11 @@
 import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
+import { Test } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { Test } from '@corona-dashboard/icons';
-
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -168,13 +167,15 @@ export default function PositiefGetesteMensenPage(
               ],
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="in"
               accessibility={{
                 key: 'international_tested_overall_choropleth',
               }}
               data={choroplethData}
               dataConfig={{
+                metricName: 'tested_overall',
                 metricProperty: 'infected_per_100k_average',
               }}
               dataOptions={{
@@ -192,7 +193,7 @@ export default function PositiefGetesteMensenPage(
                   comparedValue={comparedValue}
                 />
               )}
-              dynamicSizeConfiguration={[
+              responsiveSizeConfiguration={[
                 {
                   containerWidth: 600,
                   heightAndPadding: {

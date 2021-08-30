@@ -1,9 +1,11 @@
-import { Coronavirus } from '@corona-dashboard/icons';
-import { GehandicaptenZorg } from '@corona-dashboard/icons';
-import { Locatie } from '@corona-dashboard/icons';
+import {
+  Coronavirus,
+  GehandicaptenZorg,
+  Locatie,
+} from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -217,13 +219,15 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="vr"
               accessibility={{
                 key: 'disability_care_infected_people_choropleth',
               }}
               data={choropleth.vr.disability_care}
               dataConfig={{
+                metricName: 'disability_care',
                 metricProperty: 'infected_locations_percentage',
               }}
               dataOptions={{

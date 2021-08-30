@@ -15,7 +15,6 @@ interface KpiValueProps {
   percentage?: number;
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
-  differenceStaticTimespan?: string;
   text?: string;
   color?: string;
   isMovingAverageDifference?: boolean;
@@ -50,7 +49,6 @@ export function KpiValue({
   percentage,
   valueAnnotation,
   difference,
-  differenceStaticTimespan,
   text,
   color = 'data.primary',
   isMovingAverageDifference,
@@ -87,7 +85,6 @@ export function KpiValue({
         ) : (
           <TileDifference
             value={difference}
-            staticTimespan={differenceStaticTimespan}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
           />
         ))}

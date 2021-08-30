@@ -30,10 +30,11 @@ interface PageBarScaleProps<T> {
   metricName: MetricKeys<T>;
   metricProperty: string;
   differenceKey?: string;
-  differenceStaticTimespan?: string;
   differenceFractionDigits?: number;
   currentValue?: number;
   isMovingAverageDifference?: boolean;
+  showOldDateUnix?: boolean;
+  hasHigherLowerText?: boolean;
 }
 
 export function PageBarScale<T>({
@@ -43,9 +44,10 @@ export function PageBarScale<T>({
   metricProperty,
   localeTextKey,
   differenceKey,
-  differenceStaticTimespan,
   differenceFractionDigits,
   isMovingAverageDifference,
+  showOldDateUnix,
+  hasHigherLowerText,
 }: PageBarScaleProps<T>) {
   const { siteText } = useIntl();
 
@@ -141,8 +143,9 @@ export function PageBarScale<T>({
           <TileDifference
             value={differenceValue}
             isDecimal={config.isDecimal}
-            staticTimespan={differenceStaticTimespan}
             maximumFractionDigits={differenceFractionDigits}
+            showOldDateUnix={showOldDateUnix}
+            hasHigherLowerText={hasHigherLowerText}
           />
         ))}
     </Box>

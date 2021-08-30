@@ -40,6 +40,13 @@ const cli = meow(
 (async function run() {
   const dataset = cli.flags.dataset;
 
+  console.log(
+    `We are exporting the shortcopy and translations from the ${dataset} dataset`
+  );
+  console.log(
+    `There's a chance this command will fail if you don't have a valid Sanity token set in packages/cms/.env.local`
+  );
+
   const referenceTexts = await readReferenceTexts();
 
   if (referenceTexts) {

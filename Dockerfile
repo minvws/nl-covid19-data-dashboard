@@ -12,7 +12,9 @@ COPY package.json yarn.lock ./
 COPY packages/app/package.json ./packages/app/
 COPY packages/cli/package.json ./packages/cli/
 COPY packages/cms/package.json ./packages/cms/
-COPY packages/common/package.json packages/common/yarn.lock ./packages/common/
+COPY packages/common/package.json ./packages/common/
+COPY packages/icons/package.json ./packages/icons/
+
 RUN yarn install --frozen-lockfile --production=false
 
 # Layer cache for rebuilds without sourcecode changes.
@@ -20,7 +22,8 @@ RUN yarn install --frozen-lockfile --production=false
 FROM deps as builder
 COPY . .
 RUN yarn workspace @corona-dashboard/common build \
-&& yarn workspace @corona-dashboard/cli generate-typescript
+&& yarn workspace @corona-dashboard/cli generate-typescript \
+&& yarn workspace @corona-dashboard/icons build
 
 # Map arguments to environment variables
 ARG ARG_NEXT_PUBLIC_SANITY_DATASET
