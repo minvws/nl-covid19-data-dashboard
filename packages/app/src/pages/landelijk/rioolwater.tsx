@@ -1,8 +1,7 @@
+import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { useState } from 'react';
-import { Experimenteel } from '@corona-dashboard/icons';
-import { RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -172,13 +171,15 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'gm' ? (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="gm"
                 accessibility={{
                   key: 'sewer_municipal_choropleth',
                 }}
                 data={choropleth.gm.sewer}
                 dataConfig={{
+                  metricName: 'sewer',
                   metricProperty: 'average',
                 }}
                 dataOptions={{
@@ -186,13 +187,15 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             ) : (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="vr"
                 accessibility={{
                   key: 'sewer_region_choropleth',
                 }}
                 data={choropleth.vr.sewer}
                 dataConfig={{
+                  metricName: 'sewer',
                   metricProperty: 'average',
                 }}
                 dataOptions={{

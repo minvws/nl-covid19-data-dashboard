@@ -1,6 +1,7 @@
 import { assert } from '@corona-dashboard/common';
 import '@reach/combobox/styles.css';
 import { AppProps } from 'next/app';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
@@ -47,17 +48,26 @@ export default function App(props: AppProps) {
   }, [router]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <IntlContext.Provider value={intlContext}>
-        <GlobalStyle />
-        <BreakpointContextProvider>
-          <IsTouchDeviceContextProvider>
-            <Component {...pageProps} />
-          </IsTouchDeviceContextProvider>
-        </BreakpointContextProvider>
-      </IntlContext.Provider>
-      {toggleHotReloadButton}
-    </ThemeProvider>
+    <>
+      <Head>
+        <meta
+          key="viewport"
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <IntlContext.Provider value={intlContext}>
+          <GlobalStyle />
+          <BreakpointContextProvider>
+            <IsTouchDeviceContextProvider>
+              <Component {...pageProps} />
+            </IsTouchDeviceContextProvider>
+          </BreakpointContextProvider>
+        </IntlContext.Provider>
+        {toggleHotReloadButton}
+      </ThemeProvider>
+    </>
   );
 }
 

@@ -20,6 +20,10 @@ type AccesssibilityFeature =
  * more generic descriptions of interactive features are added to them.
  */
 
+export type AccessibilityAnnotations = ReturnType<
+  typeof useAccessibilityAnnotations
+>;
+
 export function useAccessibilityAnnotations(
   definition: AccessibilityDefinition
 ) {
