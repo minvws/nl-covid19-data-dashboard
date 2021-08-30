@@ -165,3 +165,6 @@ timestamp,action,key,document_id,move_to
 2021-08-30T06:52:54.329Z,add,vaccinaties.vr_choropleth_vaccinatie_graad.title,4wy7f8NuwuLne309vCRY2q,__
 2021-08-30T06:52:55.251Z,add,vaccinaties.vr_choropleth_vaccinatie_graad.description,4wy7f8NuwuLne309vCRZ1M,__
 2021-08-30T06:52:56.274Z,add,vaccinaties.vr_choropleth_vaccinatie_graad.legend_title,m5cl7ciD7CmTUWm5dQM4RC,__
+2021-08-30T07:22:54.232Z,add,vaccinaties.gm_choropleth_vaccinatie_graad.description,DWLUotrm23arH2ViSWTIzG,__
+2021-08-30T07:22:55.247Z,add,vaccinaties.gm_choropleth_vaccinatie_graad.legend_title,DWLUotrm23arH2ViSWTJ3Y,__
+2021-08-30T07:22:56.264Z,add,vaccinaties.gm_choropleth_vaccinatie_graad.title,4wy7f8NuwuLne309vCbZJM,__

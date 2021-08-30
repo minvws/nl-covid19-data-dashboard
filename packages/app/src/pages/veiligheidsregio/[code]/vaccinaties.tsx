@@ -149,6 +149,7 @@ export const VaccinationsVrPage = (
               dataOptions={{
                 getLink: reverseRouter.gm.vaccinaties,
                 selectedCode: selectedGmCode,
+                highlightSelection: true,
                 tooltipVariables: {
                   age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
                 },
