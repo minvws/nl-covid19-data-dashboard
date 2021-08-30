@@ -43,7 +43,6 @@ import {
   TooltipFormatter,
 } from '../time-series-chart/components';
 import { TooltipSeriesList } from '../time-series-chart/components/tooltip/tooltip-series-list';
-import { TimespanAnnotationConfig } from '../time-series-chart/logic';
 import {
   calculateSeriesMaximum,
   getSeriesData,
