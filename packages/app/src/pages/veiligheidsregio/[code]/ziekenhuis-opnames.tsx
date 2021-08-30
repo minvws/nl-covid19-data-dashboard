@@ -1,6 +1,6 @@
 import { Ziekenhuis } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -148,13 +148,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'hospital_admissions_choropleth',
               }}
               data={choropleth.gm.hospital_nice}
               dataConfig={{
+                metricName: 'hospital_nice',
                 metricProperty: 'admissions_on_date_of_reporting',
               }}
               dataOptions={{

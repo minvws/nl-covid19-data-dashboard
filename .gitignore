@@ -26,3 +26,4 @@ exports
 
 # Sanity backups
 *.ndjson
+/packages/app/public/images/choropleth
