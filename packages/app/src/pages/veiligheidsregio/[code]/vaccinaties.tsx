@@ -2,22 +2,23 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';
 import { VrLayout } from '~/domain/layout/vr-layout';
+import { VaccineCoveragePerAgeGroupVrGm } from '~/domain/vaccine/vaccine-coverage-per-age-group-vr-gm';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
   createPageArticlesQuery,
-  PageArticlesQueryResult,
+  PageArticlesQueryResult
 } from '~/queries/create-page-articles-query';
 import { getVaccinePageQuery } from '~/queries/vaccine-page-query';
 import {
   createGetStaticProps,
-  StaticProps,
+  StaticProps
 } from '~/static-props/create-get-static-props';
 import {
   createGetContent,
   getLastGeneratedDate,
-  selectVrPageMetricData,
+  selectVrPageMetricData
 } from '~/static-props/get-data';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
@@ -84,6 +85,8 @@ export const VaccinationsVrPage = (
             referenceLink={text.informatie_blok.reference.href}
             articles={content.highlight.articles}
           />
+
+          <VaccineCoveragePerAgeGroupVrGm/>
         </TileList>
       </VrLayout>
     </Layout>
