@@ -1,4 +1,4 @@
-import { KeysOfType, Unpack } from '@corona-dashboard/common';
+import { KeysOfType } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { GeoProjection } from 'd3-geo';
 import withLoadingProps from 'next-dynamic-loading-props';
@@ -12,18 +12,6 @@ import { useIsTouchDevice } from '~/utils/use-is-touch-device';
 import { useOnClickOutside } from '~/utils/use-on-click-outside';
 import { ChoroplethMap } from './components/choropleth-map';
 import {
-  CHOROPLETH_ASPECT_RATIO,
-  DEFAULT_STROKE_WIDTH,
-  FitExtent,
-  MappedDataItem,
-  MapType,
-  useChoroplethData,
-  useChoroplethFeatures,
-  useChoroplethTooltip,
-  useDynamicSize,
-  useFeatureName,
-  useFeatureProps,
-  useFillColor,
   ChoroplethDataItem,
   InferedDataCollection,
   InferedMapType,
