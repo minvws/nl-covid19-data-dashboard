@@ -5,11 +5,12 @@
   "scripts": {
     "test": "yarn workspaces run test",
     "test:ci": "yarn workspaces run test:ci",
-    "clean": "rimraf .build-cache && yarn workspace @corona-dashboard/common clean && yarn workspace @corona-dashboard/app clean",
-    "compile": "yarn workspace @corona-dashboard/icons compile && yarn workspace @corona-dashboard/icons build && yarn workspace @corona-dashboard/common compile && yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/e2e compile && yarn workspace @corona-dashboard/cli compile",
+    "bootstrap": "yarn workspaces run bootstrap",
+    "clean": "rimraf .build-cache && yarn workspaces run clean",
+    "typecheck": "yarn workspaces run typecheck",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
-    "dev": "yarn workspace @corona-dashboard/common build && yarn workspace @corona-dashboard/app dev",
+    "dev": "yarn workspace @corona-dashboard/app dev & yarn workspace @corona-dashboard/cms dev",
     "download": "yarn workspace @corona-dashboard/app download",
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json-all": "yarn workspace @corona-dashboard/cli validate-json-all",
@@ -19,7 +20,8 @@
     "generate-typescript": "yarn workspace @corona-dashboard/cli generate-typescript",
     "e2e": "yarn workspace @corona-dashboard/e2e e2e",
     "e2e:ci": "yarn workspace @corona-dashboard/e2e e2e:ci",
-    "cms": "yarn workspace @corona-dashboard/cms start"
+    "cms": "yarn workspace @corona-dashboard/cms start",
+    "type-check": "yarn workspaces run type-check"
   },
   "workspaces": {
     "packages": [

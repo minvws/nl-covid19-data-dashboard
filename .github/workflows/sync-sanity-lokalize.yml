@@ -21,11 +21,13 @@ jobs:
 
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
+      - name: Build icons module
+        run: yarn workspace @corona-dashboard/icons build
       - name: Synchronize texts
         run: yarn workspace @corona-dashboard/cms lokalize:sync-after-feature
         env:
           SANITY_TOKEN: ${{ secrets.sanity_token }}
       - name: Export production texts
         run: yarn workspace @corona-dashboard/cms lokalize:export --dataset=production --clean-json
-      - name: Compile all code with production texts
-        run: yarn workspace @corona-dashboard/app compile
+      - name: Typecheck all code with production texts
+        run: yarn workspace @corona-dashboard/app typecheck

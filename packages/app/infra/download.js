@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const path = require('path');
 const config = { path: path.resolve('.env.local') };
 require('dotenv').config(config);
@@ -8,7 +10,12 @@ const API_URL =
   process.env.API_URL ||
   'https://coronadashboard.rijksoverheid.nl/json/latest-data.zip';
 
-// eslint-disable-next-line no-console
+console.log(
+  'The download command will read the download URL from your .env.local settings'
+);
+console.log(
+  'If you want to download from a different URL than the default, make sure to set the API_URL ENV var'
+);
 console.log(`Downloading json data from this location: ${API_URL}`);
 
 const filename = 'latest-data.zip';

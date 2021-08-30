@@ -20,7 +20,8 @@ RUN yarn install --frozen-lockfile --production=false
 FROM deps as builder
 COPY . .
 RUN yarn workspace @corona-dashboard/common build \
-&& yarn workspace @corona-dashboard/cli generate-typescript
+&& yarn workspace @corona-dashboard/cli generate-typescript \
+&& yarn workspace @corona-dashboard/icons build
 
 # Map arguments to environment variables
 ARG ARG_NEXT_PUBLIC_SANITY_DATASET
