@@ -1,13 +1,13 @@
-import { Unpack } from '@corona-dashboard/common';
-import { Arrow as ArrowIcon } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { isPresent } from 'ts-is-present';
+import { Arrow as ArrowIcon } from '@corona-dashboard/icons';
 import { Box } from '../base';
 import { InlineText, Text } from '../typography';
 import { VisuallyHidden } from '../visually-hidden';
 import { ListBox, ListBoxOption, SelectBox, SelectBoxRoot } from './components';
 import { useRichContentSelect } from './logic/use-select';
 import { Option } from './types';
+import { Unpack } from '@corona-dashboard/common';
 
 type RichContentSelectProps<T extends string> = {
   initialValue?: Unpack<T>;

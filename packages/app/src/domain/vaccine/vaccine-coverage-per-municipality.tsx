@@ -137,7 +137,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
 ) {
   const { data, getSecondaryMetric } = props;
 
-  const { siteText } = useIntl();
+  const { siteText, formatPercentage } = useIntl();
   const text = siteText.choropleth_tooltip;
 
   const value = useMemo(():
@@ -181,7 +181,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   let tooltipValue = null;
   if (typeof value === 'number') {
     filterBelow = value;
-    tooltipValue = value + '%';
+    tooltipValue = formatPercentage(value) + '%';
   } else if (value !== null && 'sign' in value) {
     filterBelow = value.value;
 
@@ -194,7 +194,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     );
 
     tooltipValue = replaceVariablesInText(tooltipValueContent, {
-      value: value.value + '%',
+      value: formatPercentage(value.value) + '%',
     });
   }
 
