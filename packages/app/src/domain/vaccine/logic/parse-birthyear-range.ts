@@ -17,7 +17,7 @@ type BirthYearRange = {
  */
 export function parseBirthyearRange(str: string): BirthYearRange | null {
   const regex = /^(-*)([0-9]{4})(-*)([0-9]{4})*$/;
-  const match = regex.exec(str);
+  const match = str.match(regex);
 
   if (isPresent(match)) {
     const [
