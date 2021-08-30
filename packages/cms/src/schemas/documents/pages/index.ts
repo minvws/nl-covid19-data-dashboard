@@ -23,3 +23,4 @@ export * from './vaccinations-page';
 export * from './variants-page';
 export * from './veelgestelde-vragen-groepen-page';
 export * from './veelgestelde-vragen-page';
+export * from './page';
