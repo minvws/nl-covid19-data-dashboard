@@ -1,6 +1,6 @@
 import { createFormatting } from '@corona-dashboard/common';
 import { useContext, useMemo } from 'react';
-import { SiteText, LanguageKey } from '~/locale';
+import { LanguageKey, SiteText } from '~/locale';
 import { Dataset } from '~/locale/use-lokalize-text';
 import { IntlContext } from '..';
 
