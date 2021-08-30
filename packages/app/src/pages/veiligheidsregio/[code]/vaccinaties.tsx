@@ -144,6 +144,7 @@ export const VaccinationsVrPage = (
                 hasValueAtKey('age_group_range', selectedAgeGroup)
               )}
               dataConfig={{
+                metricName: 'vaccine_coverage_per_age_group',
                 metricProperty: 'fully_vaccinated_percentage',
               }}
               dataOptions={{
