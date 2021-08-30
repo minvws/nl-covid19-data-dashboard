@@ -3,37 +3,40 @@ import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
 import {
   BoundingBoxPadding,
-  DynamicSizeConfiguration,
-  DynamicSizeConfigurations,
   HeightAndPadding,
   OptionalBoundingBoxPadding,
+  ResponsiveSizeConfiguration,
+  ResponsiveSizeSettings,
 } from '~/components/choropleth';
 
-export function useDynamicSize(
+export function useResponsiveSize(
   containerWidth: number,
   containerDefaultHeight: number,
   boundingBoxPadding: OptionalBoundingBoxPadding,
-  dynamicSizeConfiguration?: DynamicSizeConfigurations
+  responsiveSizeConfiguration?: ResponsiveSizeConfiguration
 ) {
   return useMemo(() => {
-    if (!isDefined(dynamicSizeConfiguration)) {
+    if (!isDefined(responsiveSizeConfiguration)) {
       return [
         containerDefaultHeight,
         addDefaultPaddingValues(boundingBoxPadding),
       ] as const;
     }
 
-    const result = dynamicSizeConfiguration
+    const result = responsiveSizeConfiguration
       .sort((a, b) => {
-        if (isDynamicConfiguration(a) && isDynamicConfiguration(b)) {
+        if (isResponsiveConfiguration(a) && isResponsiveConfiguration(b)) {
           return b.containerWidth - a.containerWidth;
-        } else if (isDynamicConfiguration(a) && !isDynamicConfiguration(b)) {
+        } else if (
+          isResponsiveConfiguration(a) &&
+          !isResponsiveConfiguration(b)
+        ) {
           return -1;
         }
         return 1;
       })
       .find((item) => {
-        if (isDynamicConfiguration(item) && isDefined(containerWidth)) {
+        if (isResponsiveConfiguration(item) && isDefined(containerWidth)) {
           containerWidth >= item.containerWidth;
         }
         return true;
@@ -44,23 +47,23 @@ export function useDynamicSize(
      */
     assert(isDefined(result), 'Cannot find valid size');
 
-    return isDynamicConfiguration(result)
+    return isResponsiveConfiguration(result)
       ? ([
           result.heightAndPadding.mapHeight,
           addDefaultPaddingValues(result.heightAndPadding.padding),
         ] as const)
       : ([result.mapHeight, addDefaultPaddingValues(result.padding)] as const);
   }, [
-    dynamicSizeConfiguration,
+    responsiveSizeConfiguration,
     boundingBoxPadding,
     containerDefaultHeight,
     containerWidth,
   ]);
 }
 
-function isDynamicConfiguration(
-  value: DynamicSizeConfiguration | HeightAndPadding
-): value is DynamicSizeConfiguration {
+function isResponsiveConfiguration(
+  value: ResponsiveSizeSettings | HeightAndPadding
+): value is ResponsiveSizeSettings {
   return 'containerWidth' in value;
 }
 

@@ -3,7 +3,7 @@ import css from '@styled-system/css';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { ErrorBoundary } from '~/components/error-boundary';
@@ -130,13 +130,14 @@ function ChoroplethBlock({
           </Box>
         )}
         <ErrorBoundary>
-          <Choropleth
+          <DynamicChoropleth
             accessibility={{
               key: 'behavior_choropleths',
             }}
             map="vr"
             data={data.behavior}
             dataConfig={{
+              metricName: 'behavior',
               metricProperty: metricProperty as unknown as KeysOfType<
                 VrCollectionBehavior,
                 number | null | boolean | undefined,

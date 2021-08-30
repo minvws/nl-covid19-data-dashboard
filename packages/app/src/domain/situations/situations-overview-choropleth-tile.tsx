@@ -7,7 +7,7 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { TooltipSubject } from '~/components/choropleth/tooltips';
@@ -88,11 +88,13 @@ export function SituationsOverviewChoroplethTile({
               description={situation.description}
               key={situation.id}
             >
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 accessibility={{ key: 'situations_choropleths' }}
                 map="vr"
                 data={data}
                 dataConfig={{
+                  metricName: 'situations',
                   metricProperty: situation.id,
                   noDataFillColor: colors.data.underReported,
                 }}

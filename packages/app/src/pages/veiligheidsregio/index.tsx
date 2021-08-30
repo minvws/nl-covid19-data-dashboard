@@ -1,5 +1,5 @@
 import { Box } from '~/components/base';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { EscalationMapLegenda } from '~/components/escalation-map-legenda';
 import { Markdown } from '~/components/markdown';
@@ -91,11 +91,13 @@ const VrIndexPage = (props: StaticProps<typeof getStaticProps>) => {
               </>
             }
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="vr"
               accessibility={{ key: 'escalation_levels_choropleth' }}
               data={choropleth.vr.escalation_levels}
               dataConfig={{
+                metricName: 'escalation_levels',
                 metricProperty: 'level',
                 noDataFillColor: unknownLevelColor,
               }}
