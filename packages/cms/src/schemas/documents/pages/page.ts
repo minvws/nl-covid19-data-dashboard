@@ -29,8 +29,26 @@ export const page = {
       of: [{ type: 'reference', to: { type: 'article' } }],
       // validation: (rule: Rule) => rule.required().unique().max(2),
       hidden: ({ document }) => {
-        console.log(document);
         return !document?.showArticles;
+      },
+    },
+
+    {
+      name: 'showLinks',
+      title: 'Toon relevante links?',
+      description: 'Links naar andere interessante onderwerpen laten zien?',
+      type: 'boolean',
+    },
+    {
+      title: "'Ook interessant' links",
+      description: 'Maximaal 4 links naar interessante onderwerpen.',
+      name: 'pageLinks',
+      type: 'array',
+      of: [{ type: 'link' }],
+      //   validation: (rule: Rule) => rule.required().min(1).max(4),
+
+      hidden: ({ document }) => {
+        return !document?.showLinks;
       },
     },
   ],
