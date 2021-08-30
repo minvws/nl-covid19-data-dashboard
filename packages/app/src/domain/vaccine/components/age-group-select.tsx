@@ -65,9 +65,7 @@ export function AgeGroupSelect(props: AgeGroupSelectProps) {
 
   return (
     <RichContentSelect
-      label={
-        siteText.vaccinaties.choropleth_vaccinatie_graad_per_gm.dropdown_label
-      }
+      label={siteText.vaccinaties.age_group_dropdown.label}
       visuallyHiddenLabel
       initialValue={initialValue}
       options={options}
