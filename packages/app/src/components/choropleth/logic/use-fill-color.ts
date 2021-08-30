@@ -26,30 +26,11 @@ export function useFillColor<T extends ChoroplethDataItem>(
     `No threshold configured for map type ${map} and metric property ${metricProperty}`
   );
 
-<<<<<<< HEAD
-  const colorScale = useMemo(() => {
-    const domain = threshold.map((t) => t.threshold);
-    domain.shift();
-    const color = scaleThreshold<number, string>()
-      .domain(domain)
-      .range(threshold.map((t) => t.color));
-
-    return color;
-  }, [threshold]);
-
-  return useCallback(
-    (code: string) => {
-      const value = getValueByCode(code);
-      return isPresent(value) ? colorScale(value) : noDataFillColor;
-    },
-    [getValueByCode, noDataFillColor, colorScale]
-=======
   const colorScale = useMemo(() => createColorScale(threshold), [threshold]);
 
   return useMemo(
     () => createGetFillColor(getValueByCode, colorScale, noDataFillColor),
     [getValueByCode, colorScale, noDataFillColor]
->>>>>>> develop
   );
 }
 
