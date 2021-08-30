@@ -1,10 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { hasValueAtKey, isPresent } from 'ts-is-present';
 import { Choropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { RichContentSelect } from '~/components/rich-content-select';
 import { TileList } from '~/components/tile-list';
 import { Text } from '~/components/typography';
 import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
