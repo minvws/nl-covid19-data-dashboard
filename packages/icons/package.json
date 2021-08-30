@@ -11,12 +11,11 @@
     "clean": "rimraf src/icons dist build src/index.d.ts src/index.js",
     "test": "echo \"Error: no test specified\" && exit 0",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli' && exit 0",
-    "typecheck": "echo 'No typecheck command available for @corona-dashboard/cli' && exit 0",
+    "typecheck": "exit 0",
     "prebuild": "rimraf src/icons && node bin/build.js",
     "build:es": "rimraf dist && babel src --out-dir dist --copy-files",
     "build": "concurrently \"npm:build:*\"",
-    "lint": "echo 'Linting disabled for the icons package'",
-    "type-check": "exit 0"
+    "lint": "echo 'Linting disabled for the icons package'"
   },
   "files": [
     "dist",

@@ -1,3 +1,4 @@
+import { Unpack } from '@corona-dashboard/common';
 import {
   KeyboardEventHandler,
   MouseEvent,
@@ -28,7 +29,7 @@ enum Actions {
 export function useRichContentSelect<T extends string>(
   options: Option<T>[],
   onChange: (option: Option<T>) => void,
-  initialValue?: T
+  initialValue?: Unpack<T>
 ) {
   const comboboxRef = useRef<HTMLDivElement>(null);
   const listBoxRef = useRef<HTMLDivElement>(null);
