@@ -180,3 +180,6 @@ timestamp,action,key,document_id,move_to
 2021-08-30T10:20:33.399Z,delete,vaccinaties.choropleth_vaccinatie_graad_per_gm.legenda_titel,DWLUotrm23arH2ViSP7a9G,__
 2021-08-30T10:20:33.401Z,delete,vaccinaties.choropleth_vaccinatie_graad_per_gm.titel,m5cl7ciD7CmTUWm5dKee56,__
 2021-08-30T10:20:33.403Z,delete,vaccinaties.choropleth_vaccinatie_graad_per_gm.vr,DWLUotrm23arH2ViSS30TU,__
+2021-08-30T10:28:16.077Z,add,vaccinaties.age_group_dropdown.label,4wy7f8NuwuLne309vDxaRI,__
+2021-08-30T10:28:16.082Z,delete,vaccinaties.choropleth_vaccinatie_graad_per_gm.legenda_titel,DWLUotrm23arH2ViSP7a9G,__
+2021-08-30T10:28:16.085Z,delete,vaccinaties.nl_choropleth_vaccinatie_graad.dropdown_label,4wy7f8NuwuLne309vDtuo4,__
