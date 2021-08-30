@@ -14,8 +14,21 @@ COPY packages/cli/package.json ./packages/cli/
 COPY packages/cms/package.json ./packages/cms/
 COPY packages/common/package.json ./packages/common/
 COPY packages/icons/package.json ./packages/icons/
-
-RUN yarn install --frozen-lockfile --production=false
+RUN apk --no-cache --virtual build-dependencies --update add \
+    sudo \
+    curl \
+    build-base \
+    g++ \
+    libpng \
+    libpng-dev \
+    jpeg-dev \
+    pango-dev \
+    cairo-dev \
+    giflib-dev \
+    python3 \
+    && yarn install --frozen-lockfile --production=false \
+    && apk del build-dependencies \
+    ;
 
 # Layer cache for rebuilds without sourcecode changes.
 # This relies on the JSONS being downloaded by the builder.
