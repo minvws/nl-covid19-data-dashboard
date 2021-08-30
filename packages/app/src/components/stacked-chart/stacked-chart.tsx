@@ -337,25 +337,17 @@ export function StackedChart<T extends TimestampedValue>(
         tooltipTop: 0,
 
         tooltipData: {
-          timespanAnnotation:
-            bar.index >= hatchedFromIndex
-              ? ({
-                  label: 'Verwacht',
-                } as TimespanAnnotationConfig)
-              : undefined,
           value: {
             bar,
             isHatched: bar.index >= hatchedFromIndex,
             date_unix: series[bar.index].__date.getTime() / 1000,
             ...valuesInTimeframe[bar.index],
           },
-          config: [
-            ...(config.map((x) => ({
-              ...x,
-              type: 'bar',
-              fillOpacity: 1,
-            })) as any),
-          ],
+          config: config.map((x) => ({
+            ...x,
+            type: 'bar',
+            fillOpacity: 1,
+          })) as any,
           options: {
             isPercentage: false,
           },
