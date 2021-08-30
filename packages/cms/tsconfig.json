@@ -8,5 +8,5 @@
       "~/*": ["src/*"]
     }
   },
-  "references": [{ "path": "../common" }, { "path": "../icons" }]
+  "references": [{ "path": "../common" }]
 }
