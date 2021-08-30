@@ -1,7 +1,22 @@
+import { useState } from 'react';
+import { hasValueAtKey, isPresent } from 'ts-is-present';
+import { Choropleth } from '~/components/choropleth';
+import { ChoroplethTile } from '~/components/choropleth-tile';
+import { thresholds } from '~/components/choropleth/logic';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
+import { Text } from '~/components/typography';
+import { gmCodesByVrCode } from '~/data/gm-codes-by-vr-code';
+import { vrCodeByGmCode } from '~/data/vr-code-by-gm-code';
 import { GmLayout } from '~/domain/layout/gm-layout';
 import { Layout } from '~/domain/layout/layout';
+import {
+  AgeGroup,
+  AgeGroupSelect,
+} from '~/domain/vaccine/components/age-group-select';
+import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
+import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
+import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-per-municipality';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -15,12 +30,14 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
+  createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   selectGmPageMetricData,
 } from '~/static-props/get-data';
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { useReverseRouter } from '~/utils/use-reverse-router';
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = withFeatureNotFoundPage(
@@ -28,6 +45,20 @@ export const getStaticProps = withFeatureNotFoundPage(
   createGetStaticProps(
     getLastGeneratedDate,
     selectGmPageMetricData('difference', 'code'),
+    createGetChoroplethData({
+      gm: ({ vaccine_coverage_per_age_group }, ctx) => {
+        const vrCode = vrCodeByGmCode[ctx.params?.code as 'string'];
+        return {
+          vaccine_coverage_per_age_group: selectVaccineCoverageData(
+            isPresent(ctx.params?.code)
+              ? vaccine_coverage_per_age_group.filter((el) =>
+                  gmCodesByVrCode[vrCode].includes(el.gmcode)
+                )
+              : vaccine_coverage_per_age_group
+          ),
+        };
+      },
+    }),
     createGetContent<{
       page: VaccinationPageQuery;
       highlight: PageArticlesQueryResult;
@@ -45,6 +76,7 @@ export const VaccinationsGmPage = (
   props: StaticProps<typeof getStaticProps>
 ) => {
   const {
+    choropleth,
     sideBarData,
     municipalityName,
     selectedGmData: { difference, code },
@@ -52,6 +84,8 @@ export const VaccinationsGmPage = (
     lastGenerated,
   } = props;
   const { siteText } = useIntl();
+  const reverseRouter = useReverseRouter();
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
 
   const text = siteText.gemeente_vaccinaties;
 
@@ -83,6 +117,58 @@ export const VaccinationsGmPage = (
             kpiTitle={text.introductie_sectie.kpi_titel}
             kpiValue={9999999}
           />
+
+          <ChoroplethTile
+            title={replaceVariablesInText(
+              siteText.vaccinaties.gm_choropleth_vaccinatie_graad.title,
+              { gm: municipalityName }
+            )}
+            description={
+              <>
+                <Text>
+                  {replaceVariablesInText(
+                    siteText.vaccinaties.gm_choropleth_vaccinatie_graad
+                      .description,
+                    { gm: municipalityName }
+                  )}
+                </Text>
+
+                <AgeGroupSelect onChange={setSelectedAgeGroup} />
+              </>
+            }
+            legend={{
+              thresholds: thresholds.gm.fully_vaccinated_percentage,
+              title:
+                siteText.vaccinaties.vr_choropleth_vaccinatie_graad
+                  .legend_title,
+            }}
+          >
+            <Choropleth
+              accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
+              map="gm"
+              data={choropleth.gm.vaccine_coverage_per_age_group.filter(
+                hasValueAtKey('age_group_range', selectedAgeGroup)
+              )}
+              dataConfig={{
+                metricName: 'vaccine_coverage_per_age_group',
+                metricProperty: 'fully_vaccinated_percentage',
+              }}
+              dataOptions={{
+                getLink: reverseRouter.gm.vaccinaties,
+                highlightSelection: true,
+                selectedCode: code,
+                tooltipVariables: {
+                  age_group: siteText.vaccinaties.age_groups[selectedAgeGroup],
+                },
+              }}
+              formatTooltip={(context) => (
+                <ChoroplethTooltip
+                  data={context}
+                  getSecondaryMetric={getSecondaryMetric}
+                />
+              )}
+            />
+          </ChoroplethTile>
 
           <PageInformationBlock
             description={text.informatie_blok.beschrijving}

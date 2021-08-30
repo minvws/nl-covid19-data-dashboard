@@ -1,12 +1,10 @@
+import { GgdTesten, Test } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { useState } from 'react';
-import { GgdTesten } from '@corona-dashboard/icons';
-import { Test } from '@corona-dashboard/icons';
-
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -207,13 +205,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
              * now that is a bridge too far. Let's take it one step at a time.
              */}
             {selectedMap === 'gm' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="gm"
                 accessibility={{
                   key: 'confirmed_cases_municipal_choropleth',
                 }}
                 data={choropleth.gm.tested_overall}
                 dataConfig={{
+                  metricName: 'tested_overall',
                   metricProperty: 'infected_per_100k',
                 }}
                 dataOptions={{
@@ -222,13 +222,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'vr' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="vr"
                 accessibility={{
                   key: 'confirmed_cases_region_choropleth',
                 }}
                 data={choropleth.vr.tested_overall}
                 dataConfig={{
+                  metricName: 'tested_overall',
                   metricProperty: 'infected_per_100k',
                 }}
                 dataOptions={{

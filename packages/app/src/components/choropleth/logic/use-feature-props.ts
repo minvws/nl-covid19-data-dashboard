@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { MapType } from '~/components/choropleth/logic';
 import { colors } from '~/style/theme';
 import { DataConfig, DataOptions } from '..';
@@ -9,7 +10,7 @@ type GetHoverFeatureProp<T = string> = (
   isActivated?: boolean
 ) => T;
 
-type FeatureProps = {
+export type FeatureProps = {
   /**
    * Feature props for the features of the map that are colored in based on the given data.
    * (So the basic functionality of a choropleth)
@@ -37,6 +38,8 @@ type FeaturePropFunctions = {
 
 export const DEFAULT_STROKE_WIDTH = 0.5;
 
+export const DEFAULT_HOVER_STROKE_WIDTH = 3;
+
 /**
  * This hook returns the visual props for the map features based on the specified map type.
  * Each map type has three 'layers', the area, hover and outline features.
@@ -51,6 +54,18 @@ export const DEFAULT_STROKE_WIDTH = 0.5;
  *
  */
 export function useFeatureProps<T extends ChoroplethDataItem>(
+  map: MapType,
+  getFillColor: (code: string) => string,
+  dataOptions: DataOptions,
+  dataConfig: DataConfig<T>
+): FeatureProps {
+  return useMemo(
+    () => getFeatureProps(map, getFillColor, dataOptions, dataConfig),
+    [map, getFillColor, dataOptions, dataConfig]
+  );
+}
+
+export function getFeatureProps<T extends ChoroplethDataItem>(
   map: MapType,
   getFillColor: (code: string) => string,
   dataOptions: DataOptions,
@@ -94,7 +109,7 @@ export function useFeatureProps<T extends ChoroplethDataItem>(
                     : 0,
         },
         outline: {
-          fill: () => 'none',
+          fill: () => 'transparent',
           stroke: () => colors.choroplethOutlineStroke,
           strokeWidth: () => DEFAULT_STROKE_WIDTH,
         },

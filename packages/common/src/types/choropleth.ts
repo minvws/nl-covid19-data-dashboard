@@ -111,3 +111,5 @@ export type ChoroplethThresholdsValue<T extends number = number> = {
 };
 
 export type Dictionary<T> = Partial<Record<string, T>>;
+
+export type Unpack<T> = T extends infer U ? U : never;

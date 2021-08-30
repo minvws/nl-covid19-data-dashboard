@@ -128,7 +128,6 @@ export async function generateTypes() {
     { parser: 'typescript' }
   );
 
-
   return new Promise<void>((resolve, reject) =>
     fs.writeFile(
       path.join(localeDirectory, 'site-text.d.ts'),

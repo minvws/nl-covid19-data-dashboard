@@ -37,6 +37,17 @@ multiple packages.
 - `common`: Commonly shared code that multiple packages are using, like types
   and utils.
 - `e2e`: End-to-end tests using Cypress
+- `icons`: A React icon component library, used by the CMS and by app
+
+## Getting started (quickly)
+
+You can run these commands to quickly get started. We advise you to read what's happening behind the scenes by reading the [app README](/packages/app/README.md)
+
+```
+$ yarn
+$ yarn bootstrap
+$ yarn dev
+```
 
 ## Usage
 
