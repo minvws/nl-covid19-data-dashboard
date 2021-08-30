@@ -289,6 +289,14 @@ const vaccineCoverageThresholds: ChoroplethThresholdsValue[] = [
   },
 ];
 
+const vaccineCoveragePercentageThresholds: ChoroplethThresholdsValue[] = [
+  { color: colors.data.scale.blue[0], threshold: 0, label: '0%' },
+  { color: colors.data.scale.blue[1], threshold: 20, label: '20%' },
+  { color: colors.data.scale.blue[2], threshold: 40, label: '40%' },
+  { color: colors.data.scale.blue[3], threshold: 60, label: '60%' },
+  { color: colors.data.scale.blue[4], threshold: 80, label: '80%' },
+];
+
 const situationsThreshold: ChoroplethThresholdsValue[] = [
   {
     color: colors.data.scale.blueDetailed[0],
@@ -362,6 +370,7 @@ export const thresholds: Thresholds = {
     admissions_on_date_of_reporting: hospitalAdmissionsThresholds,
     elderly_at_home: elderlyAtHomeThresholds,
     average: sewerThresholds,
+    fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
   },
   vr: {
     infected_per_100k: positiveTestedThresholds,
@@ -379,6 +388,7 @@ export const thresholds: Thresholds = {
     gathering: situationsThreshold,
     travel: situationsThreshold,
     hospitality: situationsThreshold,
+    fully_vaccinated_percentage: vaccineCoveragePercentageThresholds,
     other: situationsThreshold,
     ...(Object.fromEntries(
       behaviorIdentifiers.map((key) => [

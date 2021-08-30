@@ -93,6 +93,36 @@ timestamp,action,key,document_id,move_to
 2021-08-19T11:48:44.909Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,kZYjqFJyrN0fPPHPQq27cU,__
 2021-08-19T11:48:44.911Z,delete,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSHQRMk,__
 2021-08-19T11:55:29.087Z,add,common_actueel.secties.artikelen.categorie_filters.__alles,DWLUotrm23arH2ViSJpokU,__
+2021-08-24T08:16:00.184Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.legenda_titel,DWLUotrm23arH2ViSP7SGm,__
+2021-08-24T08:18:21.402Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.legenda_titel,DWLUotrm23arH2ViSP7a9G,__
+2021-08-24T08:18:21.442Z,move,vaccinaties. choropleth_vaccinatie_graad_per_gm.description,4wy7f8NuwuLne309uFgxmG,vaccinaties.choropleth_vaccinatie_graad_per_gm.description
+2021-08-24T08:18:21.444Z,move,vaccinaties. choropleth_vaccinatie_graad_per_gm.title,m5cl7ciD7CmTUWm5dFcrlA,vaccinaties.choropleth_vaccinatie_graad_per_gm.title
+2021-08-24T08:31:42.638Z,add,accessibility.charts.vaccine_coverage_nl_choropleth.description,DWLUotrm23arH2ViSP8Fbm,__
+2021-08-24T08:31:43.587Z,add,accessibility.charts.vaccine_coverage_nl_choropleth.label,m5cl7ciD7CmTUWm5dGqsPn,__
+2021-08-24T08:59:40.896Z,add,choropleth_tooltip.gm.fully_vaccinated_percentage.subject,DWLUotrm23arH2ViSPAOZK,__
+2021-08-24T08:59:41.862Z,add,choropleth_tooltip.gm.fully_vaccinated_percentage.content,4wy7f8NuwuLne309uMe0gq,__
+2021-08-24T09:08:39.702Z,add,choropleth_tooltip.vr.fully_vaccinated_percentage.content,4wy7f8NuwuLne309uMhRTM,__
+2021-08-24T09:08:40.716Z,add,choropleth_tooltip.vr.fully_vaccinated_percentage.subject,4wy7f8NuwuLne309uMhRxc,__
+2021-08-24T09:11:31.211Z,add,vaccinaties.age_groups.12+,DWLUotrm23arH2ViSPB36E,__
+2021-08-24T09:11:32.003Z,add,vaccinaties.age_groups.12-17,DWLUotrm23arH2ViSPB3O0,__
+2021-08-24T09:11:32.992Z,add,vaccinaties.age_groups.18+,DWLUotrm23arH2ViSPB3n8,__
+2021-08-24T11:19:14.410Z,delete,choropleth_tooltip.vr.positive_tested_daily_per_100k.subject,4wy7f8NuwuLne309tU7PdQ,__
+2021-08-24T11:19:14.411Z,delete,choropleth_tooltip.vr.infected_locations_percentage.subject,m5cl7ciD7CmTUWm5d6tQqX,__
+2021-08-24T11:19:14.419Z,delete,choropleth_tooltip.vr.average.subject,m5cl7ciD7CmTUWm5d6tOZr,__
+2021-08-24T11:19:14.422Z,delete,choropleth_tooltip.gm.admissions_on_date_of_reporting.subject,m5cl7ciD7CmTUWm5d6tKyz,__
+2021-08-24T11:19:14.424Z,delete,choropleth_tooltip.gm.infected_per_100k.subject,DWLUotrm23arH2ViSHOq3W,__
+2021-08-24T11:22:16.831Z,add,choropleth_tooltip.vr.positive_tested_daily_per_100k.subject,DWLUotrm23arH2ViSPKzwA,__
+2021-08-24T11:22:17.849Z,add,choropleth_tooltip.vr.infected_locations_percentage.subject,m5cl7ciD7CmTUWm5dH6RnI,__
+2021-08-24T11:22:18.833Z,add,choropleth_tooltip.vr.average.subject,4wy7f8NuwuLne309uNnqLI,__
+2021-08-24T11:22:19.847Z,add,choropleth_tooltip.gm.admissions_on_date_of_reporting.subject,m5cl7ciD7CmTUWm5dH6SaI,__
+2021-08-24T11:22:20.864Z,add,choropleth_tooltip.gm.infected_per_100k.subject,DWLUotrm23arH2ViSPL0Qo,__
+2021-08-26T09:40:46.375Z,add,choropleth_tooltip.vr.fully_vaccinated_percentage.>,4wy7f8NuwuLne309ufh0cu,__
+2021-08-26T09:40:47.387Z,add,choropleth_tooltip.vr.fully_vaccinated_percentage.<,m5cl7ciD7CmTUWm5dKP8ND,__
+2021-08-26T09:40:48.405Z,add,choropleth_tooltip.gm.fully_vaccinated_percentage.>,DWLUotrm23arH2ViSRs2L8,__
+2021-08-26T09:40:49.418Z,add,choropleth_tooltip.gm.fully_vaccinated_percentage.<,DWLUotrm23arH2ViSRs2My,__
+2021-08-26T09:40:50.444Z,add,vaccinaties.birthyear_ranges.before,m5cl7ciD7CmTUWm5dKP8fO,__
+2021-08-26T09:40:51.467Z,add,vaccinaties.birthyear_ranges.between,DWLUotrm23arH2ViSRs2Rs,__
+2021-08-26T09:40:52.844Z,add,vaccinaties.birthyear_ranges.after,DWLUotrm23arH2ViSRs2Uw,__
 2021-08-23T10:13:46.352Z,add,verdenkingen_huisartsen.belangrijke_text,m5cl7ciD7CmTUWm5dFOySe,__
 2021-08-23T10:40:23.238Z,add,verdenkingen_huisartsen.belangrijk_bericht,4wy7f8NuwuLne309uEanl2,__
 2021-08-23T10:40:23.240Z,delete,verdenkingen_huisartsen.belangrijke_text,m5cl7ciD7CmTUWm5dFOySe,__
@@ -126,3 +156,9 @@ timestamp,action,key,document_id,move_to
 2021-08-25T10:16:29.645Z,delete,choropleth_tooltip.infected_locations,m5cl7ciD7CmTUWm5d6tQqX,__
 2021-08-25T10:16:29.646Z,delete,choropleth_tooltip.positive_tested_people,DWLUotrm23arH2ViSHOq3W,__
 2021-08-25T10:16:29.646Z,delete,choropleth_tooltip.sewer_regional,m5cl7ciD7CmTUWm5d6tOZr,__
+2021-08-26T11:59:49.104Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.gm,m5cl7ciD7CmTUWm5dKcsiv,__
+2021-08-26T11:59:50.195Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.vr,DWLUotrm23arH2ViSS30TU,__
+2021-08-26T11:59:51.146Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.title,m5cl7ciD7CmTUWm5dKcsxw,__
+2021-08-26T11:59:52.160Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.dropdown_label,m5cl7ciD7CmTUWm5dKct90,__
+2021-08-26T11:59:52.174Z,delete,vaccinaties.choropleth_vaccinatie_graad_per_gm.title,m5cl7ciD7CmTUWm5dFcrlA,__
+2021-08-26T12:13:23.967Z,add,vaccinaties.choropleth_vaccinatie_graad_per_gm.titel,m5cl7ciD7CmTUWm5dKee56,__

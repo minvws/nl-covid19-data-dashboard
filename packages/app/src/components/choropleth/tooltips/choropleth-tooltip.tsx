@@ -60,7 +60,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       }
     >
       <TooltipSubject
-        subject={subject}
+        subject={replaceVariablesInText(subject, tooltipVars)}
         thresholdValues={data.thresholdValues}
         filterBelow={data.dataItem[data.dataConfig.metricProperty]}
       >
