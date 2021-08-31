@@ -1,10 +1,8 @@
 import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { last } from 'lodash';
-import { useCallback } from 'react';
-import { useRef } from 'react';
 import { useMemo } from 'react';
-import { isDefined, isPresent } from 'ts-is-present';
+import { isDefined } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';

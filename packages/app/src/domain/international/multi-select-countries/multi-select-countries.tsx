@@ -1,7 +1,6 @@
 import css, { SystemStyleObject } from '@styled-system/css';
 import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { isPresent } from 'ts-is-present';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { CountryOption } from './context';
