@@ -1,20 +1,22 @@
 import { Nl } from '@corona-dashboard/common';
+import {
+  Arts,
+  Coronavirus,
+  Elderly,
+  Gedrag,
+  GehandicaptenZorg,
+  Phone,
+  Reproductiegetal,
+  RioolwaterMonitoring,
+  Test,
+  Vaccinaties,
+  Varianten,
+  Verpleeghuiszorg,
+  Ziekenhuis,
+  Ziektegolf,
+} from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Arts } from '@corona-dashboard/icons';
-import { Coronavirus } from '@corona-dashboard/icons';
-import { Elderly } from '@corona-dashboard/icons';
-import { Gedrag } from '@corona-dashboard/icons';
-import { GehandicaptenZorg } from '@corona-dashboard/icons';
-import { Phone } from '@corona-dashboard/icons';
-import { Reproductiegetal } from '@corona-dashboard/icons';
-import { RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { Test } from '@corona-dashboard/icons';
-import { Vaccinaties } from '@corona-dashboard/icons';
-import { Varianten } from '@corona-dashboard/icons';
-import { Verpleeghuiszorg } from '@corona-dashboard/icons';
-import { Ziekenhuis } from '@corona-dashboard/icons';
-import { Ziektegolf } from '@corona-dashboard/icons';
 import {
   CategoryMenu,
   Menu,
@@ -90,6 +92,10 @@ export function NlLayout(props: NlLayoutProps) {
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+
+  data.difference.sewer__average.difference = Math.round(
+    data.difference.sewer__average.difference
+  );
 
   const { isEnabled: isGpSuspicionsHistorical } = useFeature(
     'nlGpSuspicionsIsHistorical'
