@@ -2,8 +2,8 @@ import {
   NlVaccineCoveragePerAgeGroupValue,
   NlVaccineCoverageValue,
 } from '@corona-dashboard/common';
-import { isEmpty } from 'lodash';
 import { Vaccinaties } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -395,8 +395,6 @@ function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
     '31-40',
     '18-30',
     '12-17',
-    '18+',
-    '12+',
   ].map((value, index) => createCoverageRow(value, index));
 
   values[2].fully_vaccinated = 0;

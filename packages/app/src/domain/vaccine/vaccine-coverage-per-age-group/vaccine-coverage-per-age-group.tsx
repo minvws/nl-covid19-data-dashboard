@@ -25,8 +25,6 @@ const SORTING_ORDER = [
   '31-40',
   '18-30',
   '12-17',
-  '18+',
-  '12+',
 ];
 
 function getSortingOrder(ageGroup: string) {
@@ -61,7 +59,6 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
         .map((value, index) => {
           return (
             <Fragment key={index}>
-              {index === values.length - 2 ? <Box pt={4} /> : null}
               <CoverageRow key={value.age_group_range}>
                 <AgeGroup
                   range={formatAgeGroupString(
@@ -126,7 +123,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
  * @returns
  */
 function formatAgeGroupString(
-  ageGroup: string,
+  ageGroup: NlVaccineCoveragePerAgeGroupValue['age_group_range'],
   templates: {
     oldest: string;
     group: string;
@@ -141,11 +138,6 @@ function formatAgeGroupString(
         age_low,
         age_high,
       });
-    }
-    case ageGroup === '18+':
-    case ageGroup === '12+': {
-      const age = ageGroup.replace('+', '');
-      return replaceVariablesInText(templates.total, { age });
     }
     case ageGroup.includes('+'): {
       const age = ageGroup.replace('+', '');
