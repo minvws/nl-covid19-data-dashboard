@@ -10,7 +10,7 @@ interface VaccinePageIntroductionVrGm {
   title: string;
   description: string;
   kpiTitle: string;
-  kpiValue: number;
+  kpiValue: number | null;
 }
 
 export function VaccinePageIntroductionVrGm({

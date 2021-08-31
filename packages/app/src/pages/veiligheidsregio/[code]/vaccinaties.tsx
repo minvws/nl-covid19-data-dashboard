@@ -100,9 +100,16 @@ export const VaccinationsVrPage = (
   /**
    * Filter out only the the 18 plus value to show in the sidebar
    */
-  const filteredAgeGroup = data.vaccine_coverage_per_age_group.values.filter(
+
+  const parsedVaccineCoverageData = selectVaccineCoverageData(
+    data.vaccine_coverage_per_age_group.values
+  );
+
+  const filteredAgeGroup = parsedVaccineCoverageData.filter(
     (item) => item.age_group_range === '18+'
   )[0] as VrVaccineCoveragePerAgeGroupValue;
+
+  console.log(filteredAgeGroup);
 
   const gmCodes = gmCodesByVrCode[data.code];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
