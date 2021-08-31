@@ -1,5 +1,5 @@
 import css, { SystemStyleObject } from '@styled-system/css';
-import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
@@ -8,32 +8,10 @@ import { CountryOption } from './context';
 import { CountryCode } from './country-code';
 import { MultiSelectCountrySearch } from './multi-select-country-search';
 import { SelectedCountries } from './selected-countries';
-
-const {
-  cyan,
-  turquoise,
-  yellow,
-  orange,
-  magenta,
-  cyan_dark,
-  turquoise_dark,
-  yellow_dark,
-  orange_dark,
-  magenta_dark,
-} = colors.data.multiseries;
-
-const ORDERED_COLORS = [
-  cyan,
-  turquoise,
-  yellow,
-  orange,
-  magenta,
-  cyan_dark,
-  turquoise_dark,
-  yellow_dark,
-  orange_dark,
-  magenta_dark,
-];
+import {
+  ORDERED_COLORS,
+  useMapCountryToColor,
+} from './use-map-country-to-color';
 
 interface MultiSelectCountriesProps {
   countryOptions: CountryOption[];
@@ -44,38 +22,6 @@ interface MultiSelectCountriesProps {
   limit?: number;
   alwaysSelectedCodes: CountryCode[];
   defaultSelectedCodes: CountryCode[];
-}
-
-function useMapCountryToColor(selectedCountries: CountryCode[]) {
-  // Create an instance variable to track country-color mapping.
-  const countryCodeToColor = useRef(
-    new Map<CountryCode, string>(
-      // Set the initial value
-      selectedCountries.map((countryCode: CountryCode, index: number) => [
-        countryCode,
-        ORDERED_COLORS[index],
-      ])
-    )
-  );
-
-  const getColor = useCallback((countryCode: CountryCode) => {
-    return countryCodeToColor.current.get(countryCode) as string;
-  }, []);
-
-  const toggleColor = useCallback((countryCode: CountryCode) => {
-    if (countryCodeToColor.current.has(countryCode)) {
-      countryCodeToColor.current.delete(countryCode);
-    } else {
-      const currentColors = [...countryCodeToColor.current.values()];
-      // find the first unused color
-      const color = ORDERED_COLORS.find(
-        (color) => !currentColors.includes(color)
-      );
-      countryCodeToColor.current.set(countryCode, color as string);
-    }
-  }, []);
-
-  return { getColor, toggleColor };
 }
 
 export function MultiSelectCountries({
