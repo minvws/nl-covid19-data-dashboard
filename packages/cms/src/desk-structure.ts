@@ -127,11 +127,10 @@ export default () =>
                   S.documentTypeList('articlePage')
                     .title('Article pages')
                     .child((documentId) => {
-                      console.log(documentId);
                       return S.documentList()
                         .title('Related items')
                         .filter(
-                          '_type == "articlePageArticle" && page._ref == $documentId'
+                          '_type == "articlePageArticle" && page._ref == $documentId || _type == "articlePage" && page._id == $documentId'
                         )
                         .params({ documentId });
                     })
