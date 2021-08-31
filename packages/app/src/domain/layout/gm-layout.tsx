@@ -1,13 +1,15 @@
 import { Gm, GmDifference } from '@corona-dashboard/common';
+import {
+  Coronavirus,
+  RioolwaterMonitoring,
+  Test,
+  Vaccinaties,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { Coronavirus } from '@corona-dashboard/icons';
-import { RioolwaterMonitoring } from '@corona-dashboard/icons';
-import { Test } from '@corona-dashboard/icons';
-import { Ziekenhuis } from '@corona-dashboard/icons';
-import { Vaccinaties } from '@corona-dashboard/icons';
-
+import { isDefined } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,
@@ -72,10 +74,17 @@ type GmLayoutProps = {
  */
 export function GmLayout(props: GmLayoutProps) {
   const { children, data, municipalityName, code, difference } = props;
-  const sidebarData = useMemo(
-    () => ({ ...data, difference }),
-    [data, difference]
-  );
+  const sidebarData = useMemo(() => {
+    if (isDefined(difference) && isDefined(difference.sewer__average)) {
+      difference.sewer__average.difference = Math.round(
+        difference.sewer__average.difference
+      );
+      difference.sewer__average.old_value = Math.round(
+        difference.sewer__average.old_value
+      );
+    }
+    return { ...data, difference };
+  }, [data, difference]);
 
   const { siteText } = useIntl();
   const router = useRouter();

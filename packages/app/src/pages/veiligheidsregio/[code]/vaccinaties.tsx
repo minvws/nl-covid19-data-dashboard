@@ -112,10 +112,23 @@ export const VaccinationsVrPage = (
             kpiValue={9999999}
           />
 
+          <PageInformationBlock
+            description={text.informatie_blok.beschrijving}
+            metadata={{
+              datumsText: text.informatie_blok.datums,
+              dateOrRange: 1629798465,
+              dateOfInsertionUnix: 1629798465,
+              dataSources: [],
+            }}
+            usefulLinks={content.page.usefulLinks}
+            referenceLink={text.informatie_blok.reference.href}
+            articles={content.highlight.articles}
+          />
+
           <ChoroplethTile
             title={replaceVariablesInText(
               siteText.vaccinaties.vr_choropleth_vaccinatie_graad.title,
-              { vr: vrName }
+              { veiligheidsRegioNaam: vrName }
             )}
             description={
               <>
@@ -123,7 +136,7 @@ export const VaccinationsVrPage = (
                   {replaceVariablesInText(
                     siteText.vaccinaties.vr_choropleth_vaccinatie_graad
                       .description,
-                    { veiligheidsregio: vrName }
+                    { veiligheidsRegioNaam: vrName }
                   )}
                 </Text>
 
@@ -163,19 +176,6 @@ export const VaccinationsVrPage = (
               )}
             />
           </ChoroplethTile>
-
-          <PageInformationBlock
-            description={text.informatie_blok.beschrijving}
-            metadata={{
-              datumsText: text.informatie_blok.datums,
-              dateOrRange: 1629798465,
-              dateOfInsertionUnix: 1629798465,
-              dataSources: [],
-            }}
-            usefulLinks={content.page.usefulLinks}
-            referenceLink={text.informatie_blok.reference.href}
-            articles={content.highlight.articles}
-          />
         </TileList>
       </VrLayout>
     </Layout>

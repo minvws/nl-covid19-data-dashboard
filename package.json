@@ -10,7 +10,7 @@
     "typecheck": "yarn workspaces run typecheck",
     "lint": "yarn workspaces run lint",
     "format": "yarn workspaces run format",
-    "dev": "yarn workspace @corona-dashboard/app dev & yarn workspace @corona-dashboard/cms dev",
+    "dev": "yarn workspace @corona-dashboard/app dev & yarn workspace @corona-dashboard/cms dev & yarn workspace @corona-dashboard/common dev",
     "download": "yarn workspace @corona-dashboard/app download",
     "start": "yarn workspace @corona-dashboard/app start",
     "validate-json-all": "yarn workspace @corona-dashboard/cli validate-json-all",
