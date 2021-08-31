@@ -21,6 +21,7 @@
   "scripts": {
     "bootstrap": "echo 'No bootstrap command available for @corona-dashboard/cli'",
     "clean": "echo 'No clean command available for @corona-dashboard/cli'",
+    "nuke": "yarn clean && npx rimraf node_modules",
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",
     "test": "echo 'No tests available for @corona-dashboard/cli'",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli'",

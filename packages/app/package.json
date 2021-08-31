@@ -145,7 +145,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --pretty --noEmit",
     "download": "node ./infra/download.js",
-    "clean": "rimraf .next"
+    "clean": "npx rimraf .next",
+    "nuke": "yarn clean && npx rimraf node_modules"
   },
   "browserslist": [
     "defaults",

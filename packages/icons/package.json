@@ -8,12 +8,13 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "bootstrap": "yarn build",
-    "clean": "rimraf src/icons dist build src/index.d.ts src/index.js",
+    "clean": "npx rimraf src/icons dist build src/index.d.ts src/index.js",
+    "nuke": "yarn clean && npx rimraf node_modules",
     "test": "echo \"Error: no test specified\" && exit 0",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli' && exit 0",
     "typecheck": "exit 0",
-    "prebuild": "rimraf src/icons && node bin/build.js",
-    "build:es": "rimraf dist && babel src --out-dir dist --copy-files",
+    "prebuild": "npx rimraf src/icons && node bin/build.js",
+    "build:es": "npx rimraf dist && babel src --out-dir dist --copy-files",
     "build": "concurrently \"npm:build:*\"",
     "lint": "echo 'Linting disabled for the icons package'"
   },
