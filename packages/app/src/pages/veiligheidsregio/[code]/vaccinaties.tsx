@@ -140,10 +140,23 @@ export const VaccinationsVrPage = (
             articles={content.highlight.articles}
           />
 
+          <PageInformationBlock
+            description={text.informatie_blok.beschrijving}
+            metadata={{
+              datumsText: text.informatie_blok.datums,
+              dateOrRange: 1629798465,
+              dateOfInsertionUnix: 1629798465,
+              dataSources: [],
+            }}
+            usefulLinks={content.page.usefulLinks}
+            referenceLink={text.informatie_blok.reference.href}
+            articles={content.highlight.articles}
+          />
+
           <ChoroplethTile
             title={replaceVariablesInText(
               siteText.vaccinaties.vr_choropleth_vaccinatie_graad.title,
-              { vr: vrName }
+              { veiligheidsRegioNaam: vrName }
             )}
             description={
               <>
@@ -151,7 +164,7 @@ export const VaccinationsVrPage = (
                   {replaceVariablesInText(
                     siteText.vaccinaties.vr_choropleth_vaccinatie_graad
                       .description,
-                    { veiligheidsregio: vrName }
+                    { veiligheidsRegioNaam: vrName }
                   )}
                 </Text>
 

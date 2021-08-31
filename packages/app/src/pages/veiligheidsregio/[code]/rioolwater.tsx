@@ -1,5 +1,4 @@
-import { Experimenteel } from '@corona-dashboard/icons';
-import { RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -31,7 +30,31 @@ export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectVrPageMetricData('sewer_per_installation', 'sewer'),
+  (context) => {
+    const data = selectVrPageMetricData('sewer_per_installation')(context);
+    data.selectedVrData.sewer.values = data.selectedVrData.sewer.values.map(
+      (x) => ({
+        ...x,
+        average: Math.round(x.average),
+      })
+    );
+    data.selectedVrData.sewer.last_value = {
+      ...data.selectedVrData.sewer.last_value,
+      average: Math.round(data.selectedVrData.sewer.last_value.average),
+    };
+    data.selectedVrData.difference.sewer__average.difference = Math.round(
+      data.selectedVrData.difference.sewer__average.difference
+    );
+
+    data.selectedVrData.sewer_per_installation.values.forEach((x) => {
+      x.values = x.values.map((x) => ({
+        ...x,
+        rna_normalized: Math.round(x.rna_normalized),
+      }));
+    });
+
+    return data;
+  },
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);

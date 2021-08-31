@@ -12,6 +12,7 @@ import {
 } from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { isDefined } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,
@@ -90,6 +91,16 @@ type VrLayoutProps = {
  */
 export function VrLayout(props: VrLayoutProps) {
   const { children, data, vrName } = props;
+
+  if (isDefined(data)) {
+    data.difference.sewer__average.difference = Math.round(
+      data.difference.sewer__average.difference
+    );
+    data.difference.sewer__average.old_value = Math.round(
+      data.difference.sewer__average.old_value
+    );
+    data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
+  }
 
   const router = useRouter();
   const reverseRouter = useReverseRouter();
