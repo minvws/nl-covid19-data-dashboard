@@ -184,6 +184,12 @@ timestamp,action,key,document_id,move_to
 2021-08-30T10:28:16.077Z,add,vaccinaties.age_group_dropdown.label,4wy7f8NuwuLne309vDxaRI,__
 2021-08-30T10:28:16.082Z,delete,vaccinaties.choropleth_vaccinatie_graad_per_gm.legenda_titel,DWLUotrm23arH2ViSP7a9G,__
 2021-08-30T10:28:16.085Z,delete,vaccinaties.nl_choropleth_vaccinatie_graad.dropdown_label,4wy7f8NuwuLne309vDtuo4,__
+2021-08-30T12:37:13.493Z,add,covid_varianten.varianten_over_tijd_grafiek.lagere_betrouwbaarheid,xeeXS0RPNTOe6jONl0bUeY,__
+2021-08-30T12:37:14.512Z,add,covid_varianten.varianten_over_tijd_grafiek.legend_help_tekst,rViLqMuzbcTEh1HjxgilPs,__
+2021-08-30T12:37:15.489Z,add,covid_varianten.varianten_over_tijd_grafiek.legend_niet_compleet_label,xeeXS0RPNTOe6jONl0bVjc,__
+2021-08-30T12:37:16.565Z,add,covid_varianten.varianten_over_tijd_grafiek.titel,IdUyaapVWcyKHaD1kMhugB,__
+2021-08-30T12:37:17.895Z,add,covid_varianten.varianten_over_tijd_grafiek.toelichting,xeeXS0RPNTOe6jONl0bWaJ,__
+2021-08-30T12:37:18.918Z,add,covid_varianten.varianten_over_tijd_grafiek.tooltip_labels.other_percentage,xeeXS0RPNTOe6jONl0bX7q,__
 2021-08-24T06:40:29.800Z,add,veiligheidsregio_layout.headings.vaccinaties,m5cl7ciD7CmTUWm5dGjo2b,__
 2021-08-24T06:40:30.814Z,add,veiligheidsregio_vaccinaties.titel_sidebar,m5cl7ciD7CmTUWm5dGjo4y,__
 2021-08-24T06:49:19.320Z,add,veiligheidsregio_vaccinaties.titel_kpi,m5cl7ciD7CmTUWm5dGkg7w,__
