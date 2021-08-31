@@ -16,7 +16,6 @@ const cli = meow(
       $ lokalize:export
 
     Options
-      --drafts Include draft documents
       --dataset Define dataset to export, default is "development"
       --clean-json Export without document-ids in the keys
 
