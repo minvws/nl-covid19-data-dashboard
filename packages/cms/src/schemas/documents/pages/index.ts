@@ -8,4 +8,6 @@ export * from './topical-page';
 export * from './vaccinations-page';
 export * from './veelgestelde-vragen-groepen-page';
 export * from './veelgestelde-vragen-page';
-export * from './page';
+
+export * from './article-page';
+export * from './article-page-articles';

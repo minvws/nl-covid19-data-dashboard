@@ -116,23 +116,32 @@ export default () =>
         ),
 
       S.listItem()
-        .title('Generic pages')
-        .icon(BsTable)
+        .title('DIY Pages')
         .child(
           S.list()
-            .title('Generic pages')
+            .title('Filters')
             .items([
-              addListItem(RiPagesFill, 'Reproductiegetal', 'page'),
-              addListItem(RiPagesFill, 'Covid varianten', 'page'),
-              addListItem(RiPagesFill, 'Rioolwater', 'page'),
-              addListItem(
-                RiPagesFill,
-                'Positieve testen internationaal',
-                'page'
-              ),
+              S.listItem()
+                .title('All article pages')
+                .child(
+                  S.documentTypeList('articlePage')
+                    .title('Article pages')
+                    .child((documentId) => {
+                      console.log(documentId);
+                      return S.documentList()
+                        .title('Related items')
+                        .filter(
+                          '_type == "articlePageArticle" && page._ref == $documentId'
+                        )
+                        .params({ documentId });
+                    })
+                ),
             ])
         ),
 
+      S.listItem()
+        .title('Article pages')
+        .child(S.documentTypeList('articlePage').title('Article pages')),
       S.listItem()
         .title('Customized pages')
         .icon(BsTable)
