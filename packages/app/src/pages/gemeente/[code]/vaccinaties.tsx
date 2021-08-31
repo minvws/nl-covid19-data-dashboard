@@ -121,7 +121,7 @@ export const VaccinationsGmPage = (
           <ChoroplethTile
             title={replaceVariablesInText(
               siteText.vaccinaties.gm_choropleth_vaccinatie_graad.title,
-              { gm: municipalityName }
+              { gemeenteNaam: municipalityName }
             )}
             description={
               <>
@@ -129,7 +129,7 @@ export const VaccinationsGmPage = (
                   {replaceVariablesInText(
                     siteText.vaccinaties.gm_choropleth_vaccinatie_graad
                       .description,
-                    { gm: municipalityName }
+                    { gemeenteNaam: municipalityName }
                   )}
                 </Text>
 

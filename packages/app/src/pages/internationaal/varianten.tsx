@@ -200,6 +200,7 @@ export default function VariantenPage(
           </VariantsTableTile>
 
           <VariantsStackedAreaTile
+            text={text.varianten_over_tijd_grafiek}
             noDataMessage={noDataMessageChart}
             values={chartData?.variantChart}
             metadata={{
