@@ -131,7 +131,7 @@
   },
   "scripts": {
     "analyze": "cross-env ANALYZE=true yarn build",
-    "bootstrap": "yarn download",
+    "bootstrap": "exit 0",
     "export": "next export",
     "dev": "run-p dev:*",
     "dev:next": "node next-server.js",
