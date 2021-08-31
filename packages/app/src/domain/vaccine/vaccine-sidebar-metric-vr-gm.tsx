@@ -2,10 +2,12 @@ import {
   GmVaccineCoveragePerAgeGroupValue,
   VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { parseFullyVaccinatedPercentageLabel } from './logic/parse-fully-vaccinated-percentage-label';
 interface VariantsSidebarMetricProps {
   data:
     | VrVaccineCoveragePerAgeGroupValue[]
@@ -25,11 +27,18 @@ export function VaccineSidebarMetricVrGm({
    */
   const filteredAgeGroup = data.filter(
     (item) => item.age_group_range === '18+'
-  )[0] as VrVaccineCoveragePerAgeGroupValue;
+  )[0] as VrVaccineCoveragePerAgeGroupValue | GmVaccineCoveragePerAgeGroupValue;
 
   const dateText = replaceVariablesInText(commonText.dateOfReport, {
     dateOfReport: formatDateFromSeconds(filteredAgeGroup.date_unix, 'medium'),
   });
+
+  let parsedVaccinatedLabel;
+  if (isPresent(filteredAgeGroup.fully_vaccinated_percentage_label)) {
+    parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(
+      filteredAgeGroup.fully_vaccinated_percentage_label
+    );
+  }
 
   return (
     <Box width="100%" minHeight="4rem" spacing={2}>
@@ -42,7 +51,23 @@ export function VaccineSidebarMetricVrGm({
         spacingHorizontal={2}
       >
         <InlineText variant="h3">
-          {`${formatPercentage(filteredAgeGroup.fully_vaccinated_percentage)}%`}
+          {isPresent(parsedVaccinatedLabel)
+            ? parsedVaccinatedLabel.sign === '>'
+              ? replaceVariablesInText(
+                  siteText.vaccinaties_common.labels.meer_dan,
+                  {
+                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
+                  }
+                )
+              : replaceVariablesInText(
+                  siteText.vaccinaties_common.labels.minder_dan,
+                  {
+                    value: formatPercentage(parsedVaccinatedLabel.value) + '%',
+                  }
+                )
+            : `${formatPercentage(
+                filteredAgeGroup.fully_vaccinated_percentage as number
+              )}%`}
         </InlineText>
 
         <Box pt="2px">

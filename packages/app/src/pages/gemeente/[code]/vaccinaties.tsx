@@ -17,7 +17,7 @@ import {
 } from '~/domain/vaccine/components/age-group-select';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
-import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-per-municipality';
+import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-per-gm';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -127,7 +127,7 @@ export const VaccinationsGmPage = (
             })}
             description={text.introductie_sectie.beschrijving}
             kpiTitle={text.introductie_sectie.kpi_titel}
-            kpiValue={filteredAgeGroup.fully_vaccinated_percentage}
+            data={filteredAgeGroup}
           />
 
           <ChoroplethTile

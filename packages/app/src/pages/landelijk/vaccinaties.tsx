@@ -1,6 +1,6 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
-import { isEmpty } from 'lodash';
 import { Vaccinaties } from '@corona-dashboard/icons';
+import { isEmpty } from 'lodash';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -16,7 +16,7 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoveragePerMunicipality } from '~/domain/vaccine/vaccine-coverage-per-municipality';
+import { VaccineCoveragePerGm } from '~/domain/vaccine/vaccine-coverage-per-gm';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
@@ -188,7 +188,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <VaccineCoveragePerMunicipality data={choropleth} />
+          <VaccineCoveragePerGm data={choropleth} />
 
           {vaccinationPerAgeGroupFeature.isEnabled &&
           data.vaccine_coverage_per_age_group ? (

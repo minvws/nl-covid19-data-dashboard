@@ -4,7 +4,7 @@ import {
   VrVaccineCoveragePerAgeGroupValue,
 } from '@corona-dashboard/common';
 import { isPresent } from 'ts-is-present';
-import { parseLabel } from '../logic/parse-fully-vaccinated-percentage-label';
+import { parseFullyVaccinatedPercentageLabel } from '../logic/parse-fully-vaccinated-percentage-label';
 
 export function selectVaccineCoverageData<
   T extends
@@ -14,7 +14,9 @@ export function selectVaccineCoverageData<
 >(data: T[]) {
   return data.map((el) => {
     if (isPresent(el.fully_vaccinated_percentage_label)) {
-      const result = parseLabel(el.fully_vaccinated_percentage_label);
+      const result = parseFullyVaccinatedPercentageLabel(
+        el.fully_vaccinated_percentage_label
+      );
 
       if (isPresent(result)) {
         return {
