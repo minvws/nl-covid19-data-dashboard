@@ -61,6 +61,16 @@ const nextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/landelijk',
+        destination: '/landelijk/vaccinaties',
+        permanent: false,
+      },
+    ];
+  },
+
   /**
    * Enable source maps in production, because we want people to report readable
    * stack traces from the error boundaries feature.
