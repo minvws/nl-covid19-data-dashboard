@@ -66,7 +66,7 @@ const nextConfig = {
       {
         source: '/landelijk',
         destination: '/landelijk/vaccinaties',
-        permanent: true,
+        permanent: false,
       },
     ];
   },
