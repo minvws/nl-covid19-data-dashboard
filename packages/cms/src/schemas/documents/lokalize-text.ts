@@ -124,10 +124,6 @@ function getFaultyParameterPlaceholders(text = '') {
       if (!match || match[0] !== matchInfo[0]) {
         return matchInfo[0];
       }
-      const whitespaceMatch = matchInfo[0].match(/\s/);
-      if (whitespaceMatch) {
-        return matchInfo[0];
-      }
       return;
     })
     .filter(isDefined);

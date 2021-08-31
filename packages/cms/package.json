@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@corona-dashboard/icons": "0.0.0",
-    "@sanity/base": "^2.15.1",
+    "@sanity/base": "^2.17.1",
     "@sanity/components": "^2.14.0",
-    "@sanity/core": "^2.15.0",
-    "@sanity/dashboard": "^2.15.1",
-    "@sanity/default-layout": "^2.15.1",
-    "@sanity/default-login": "^2.15.0",
-    "@sanity/desk-tool": "^2.15.2",
+    "@sanity/core": "^2.17.1",
+    "@sanity/dashboard": "^2.17.1",
+    "@sanity/default-layout": "^2.17.1",
+    "@sanity/default-login": "^2.17.1",
+    "@sanity/desk-tool": "^2.17.1",
     "@sanity/production-preview": "^2.15.0",
     "@sanity/ui": "^0.36.2",
     "@sanity/vision": "^2.15.0",
@@ -58,7 +58,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.15.0",
+    "@sanity/cli": "^2.17.1",
     "@types/download": "^6.2.4",
     "@types/flat": "^5.0.1",
     "@types/fs-extra": "^9.0.6",

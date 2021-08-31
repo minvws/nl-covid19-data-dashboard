@@ -1,6 +1,6 @@
 import { assert } from '@corona-dashboard/common';
 import { useMemo } from 'react';
-import useSWR, { mutate } from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { feature as topojsonFeature } from 'topojson-client';
 import { isDefined } from 'ts-is-present';
 import { MapType, vrBoundingBoxGmCodes } from '~/components/choropleth/logic';
@@ -10,14 +10,6 @@ import { CodedGeoJSON, gmGeo } from './topology';
 import { ChoroplethDataItem } from './types';
 
 export type FeatureType = keyof ChoroplethFeatures;
-
-const useSWROptions = {
-  revalidateOnFocus: false,
-  revalidateOnReconnect: false,
-  refreshWhenOffline: false,
-  refreshWhenHidden: false,
-  refreshInterval: 0,
-};
 
 /**
  * These country codes represent the outer most features of the international
@@ -38,19 +30,13 @@ export function useChoroplethFeatures<T extends ChoroplethDataItem>(
   data: T[],
   selectedCode?: string
 ): ChoroplethFeatures | undefined {
-  const { data: geoJson } = useSWR<
+  const { data: geoJson } = useSWRImmutable<
     readonly [CodedGeoJSON, CodedGeoJSON | undefined]
-  >(
-    `/api/topo-json/${map}`,
-    (url) =>
-      fetch(url)
-        .then((_) => _.json())
-        .then((_) => createGeoJson(map, _)),
-    useSWROptions
+  >(`/api/topo-json/${map}`, (url: string) =>
+    fetch(url)
+      .then((_) => _.json())
+      .then((_) => createGeoJson(map, _))
   );
-  if (!isDefined(geoJson)) {
-    mutate(`/api/topo-json/${map}`);
-  }
 
   return useMemo(() => {
     if (!isDefined(geoJson)) {
