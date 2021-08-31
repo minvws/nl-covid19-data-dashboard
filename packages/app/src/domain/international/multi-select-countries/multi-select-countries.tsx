@@ -3,6 +3,7 @@ import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
+import { assert } from '~/utils/assert';
 import { CountryOption } from './context';
 import { CountryCode } from './country-code';
 import { MultiSelectCountrySearch } from './multi-select-country-search';
@@ -84,6 +85,11 @@ export function MultiSelectCountries({
   alwaysSelectedCodes,
   defaultSelectedCodes,
 }: MultiSelectCountriesProps) {
+  assert(
+    limit ? limit <= ORDERED_COLORS.length : !limit,
+    'limit cannot be higher than the # of specified colors'
+  );
+
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>(
     defaultSelectedCodes ?? []
   );
