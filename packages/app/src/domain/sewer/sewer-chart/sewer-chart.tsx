@@ -163,7 +163,9 @@ export function SewerChart({
                     splitPoints: averageSplitPoints,
                   },
                 ]}
-                dataOptions={{ valueAnnotation: text.valueAnnotation }}
+                dataOptions={{
+                  valueAnnotation: text.valueAnnotation,
+                }}
               />
             )
           }

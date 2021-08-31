@@ -73,7 +73,7 @@ export function Icon(props: IconProps) {
                   key={id}
                   direction="column"
                   align="center"
-                  onClick={(event) => onChange(createPatchFrom(id))}
+                  onClick={() => onChange(createPatchFrom(id))}
                 >
                   <GridIcon />
                   <Radio checked={value === id} readOnly />

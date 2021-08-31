@@ -115,6 +115,7 @@ export default function CovidVariantenPage(
           />
 
           <VariantsStackedAreaTile
+            text={text.varianten_over_tijd_grafiek}
             values={variantChart}
             metadata={{
               dataSources: [text.bronnen.rivm],
