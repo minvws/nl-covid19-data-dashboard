@@ -1,8 +1,10 @@
 import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
 import { Test } from '@corona-dashboard/icons';
 import { last } from 'lodash';
+import { useCallback } from 'react';
+import { useRef } from 'react';
 import { useMemo } from 'react';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -233,7 +235,7 @@ export default function PositiefGetesteMensenPage(
               alwaysSelectedCodes={['nld']}
               defaultSelectedCodes={['bel', 'deu']}
             >
-              {(selectedCountries, colors) => (
+              {(selectedCountries, getColor) => (
                 <TimeSeriesChart
                   accessibility={{
                     key: 'international_infected_people_over_time_chart',
@@ -242,7 +244,7 @@ export default function PositiefGetesteMensenPage(
                   seriesConfig={selectedCountriesToSeriesConfig(
                     selectedCountries,
                     countryNames,
-                    colors
+                    getColor
                   )}
                   disableLegend
                 />
@@ -309,7 +311,7 @@ function compileInternationalData(data: Record<string, In>) {
 function selectedCountriesToSeriesConfig(
   selectedCountries: CountryCode[],
   countryNames: Record<CountryCode, string>,
-  selectionColors: string[]
+  getColor: (countryCode: CountryCode) => string
 ): LineSeriesDefinition<CompiledCountriesValue>[] {
   return [
     {
@@ -319,11 +321,11 @@ function selectedCountriesToSeriesConfig(
       color: colors.data.neutral,
     } as LineSeriesDefinition<CompiledCountriesValue>,
   ].concat(
-    selectedCountries.map((countryCode, index) => ({
+    selectedCountries.map((countryCode) => ({
       type: 'line' as const,
       metricProperty: countryCode,
       label: countryNames[countryCode],
-      color: selectionColors[index],
+      color: getColor(countryCode),
     }))
   );
 }

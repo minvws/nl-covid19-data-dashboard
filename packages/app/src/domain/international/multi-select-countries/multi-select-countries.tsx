@@ -1,6 +1,7 @@
 import css, { SystemStyleObject } from '@styled-system/css';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { CountryOption } from './context';
@@ -36,10 +37,45 @@ const ORDERED_COLORS = [
 
 interface MultiSelectCountriesProps {
   countryOptions: CountryOption[];
-  children: (selectedCountries: CountryCode[], colors: string[]) => ReactNode;
+  children: (
+    selectedCountries: CountryCode[],
+    getColor: (countryCode: CountryCode) => string
+  ) => ReactNode;
   limit?: number;
   alwaysSelectedCodes: CountryCode[];
   defaultSelectedCodes: CountryCode[];
+}
+
+function useMapCountryToColor(selectedCountries: CountryCode[]) {
+  // Create an instance variable to track country-color mapping.
+  const countryCodeToColor = useRef(
+    new Map<CountryCode, string>(
+      // Set the initial value
+      selectedCountries.map((countryCode: CountryCode, index: number) => [
+        countryCode,
+        ORDERED_COLORS[index],
+      ])
+    )
+  );
+
+  const getColor = useCallback((countryCode: CountryCode) => {
+    return countryCodeToColor.current.get(countryCode) as string;
+  }, []);
+
+  const toggleColor = useCallback((countryCode: CountryCode) => {
+    if (countryCodeToColor.current.has(countryCode)) {
+      countryCodeToColor.current.delete(countryCode);
+    } else {
+      const currentColors = [...countryCodeToColor.current.values()];
+      // find the first unused color
+      const color = ORDERED_COLORS.find(
+        (color) => !currentColors.includes(color)
+      );
+      countryCodeToColor.current.set(countryCode, color as string);
+    }
+  }, []);
+
+  return { getColor, toggleColor };
 }
 
 export function MultiSelectCountries({
@@ -52,6 +88,8 @@ export function MultiSelectCountries({
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>(
     defaultSelectedCodes ?? []
   );
+
+  const { getColor, toggleColor } = useMapCountryToColor(selectedCountries);
 
   function handleToggleCountry(countryData: CountryOption) {
     if (selectedCountries.includes(countryData.code)) {
@@ -66,6 +104,8 @@ export function MultiSelectCountries({
       }
       setSelectedCountries([...selectedCountries, countryData.code]);
     }
+
+    toggleColor(countryData.code);
   }
 
   const countries: CountryOption[] = useMemo(() => {
@@ -77,9 +117,9 @@ export function MultiSelectCountries({
       }));
   }, [countryOptions, selectedCountries, alwaysSelectedCodes]);
 
-  const selectOptions = selectedCountries.map((countryCode, index) => ({
+  const selectOptions = selectedCountries.map((countryCode) => ({
     metricProperty: countryCode,
-    color: ORDERED_COLORS[index],
+    color: getColor(countryCode),
     label:
       countryOptions.find((x) => x.code === countryCode)?.name ?? countryCode,
     shape: 'line' as const,
@@ -109,7 +149,7 @@ export function MultiSelectCountries({
           }
         />
       </List>
-      {children(selectedCountries, ORDERED_COLORS)}
+      {children(selectedCountries, getColor)}
     </>
   );
 }
