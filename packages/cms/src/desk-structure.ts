@@ -40,6 +40,7 @@ const hiddenDocTypes = [
   'vaccinationsPage',
   'variantsPage',
   'toegankelijkheid',
+  'escalationLevelPage',
   'lokalizeSubject',
   'lokalizeString',
   'lokalizeText',
@@ -47,7 +48,6 @@ const hiddenDocTypes = [
   'timelineEvent',
   'contact',
   'cijferVerantwoordingItem',
-  'media.tag',
 ];
 
 export default () =>
@@ -114,41 +114,33 @@ export default () =>
               ),
             ])
         ),
-
-      S.listItem()
-        .title('Generic pages')
-        .icon(BsTable)
-        .child(
-          S.list()
-            .title('Generic pages')
-            .items([
-              addListItem(RiPagesFill, 'Reproductiegetal', 'page'),
-              addListItem(RiPagesFill, 'Covid varianten', 'page'),
-              addListItem(RiPagesFill, 'Rioolwater', 'page'),
-              addListItem(
-                RiPagesFill,
-                'Positieve testen internationaal',
-                'page'
-              ),
-            ])
-        ),
-
-      S.listItem()
-        .title('Customized pages')
-        .icon(BsTable)
-        .child(
-          S.list()
-            .title('Customized pages')
-            .items([
-              addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
-              addListItem(
-                GrCircleInformation,
-                'Toegankelijkheid',
-                'toegankelijkheid'
-              ),
-              addListItem(RiPagesFill, 'Contact', 'contact'),
-            ])
-        ),
+      addListItem(
+        RiPagesFill,
+        'Inschaling risiconiveau',
+        'escalationLevelPage'
+      ),
+      addListItem(RiPagesFill, 'Sterfte', 'deceasedPage'),
+      addListItem(RiPagesFill, 'Brononderzoek GGD', 'situationsPage'),
+      addListItem(RiPagesFill, 'Gedrag en naleving', 'behaviorPage'),
+      addListItem(RiPagesFill, 'Ziekenhuis opnames', 'hospitalPage'),
+      addListItem(RiPagesFill, 'Verpleeghuiszorg', 'nursingHomePage'),
+      addListItem(RiPagesFill, 'Gehandicaptenzorg', 'disabilityCarePage'),
+      addListItem(RiPagesFill, 'Thuiswonend 70-plus', 'elderlyAtHomePage'),
+      addListItem(RiPagesFill, 'Besmettelijke mensen', 'infectiousPeoplePage'),
+      addListItem(RiPagesFill, 'IC opnames', 'intensiveCarePage'),
+      addListItem(RiPagesFill, 'Positieve testen', 'positiveTestsPage'),
+      addListItem(
+        RiPagesFill,
+        'Positieve testen internationaal',
+        'in_positiveTestsPage'
+      ),
+      addListItem(RiPagesFill, 'Varianten internationaal', 'in_variantsPage'),
+      addListItem(RiPagesFill, 'Reproductiegetal', 'reproductionPage'),
+      addListItem(RiPagesFill, 'Covid varianten', 'variantsPage'),
+      addListItem(RiPagesFill, 'Rioolwater', 'sewerPage'),
+      addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
+      addListItem(GrCircleInformation, 'Toegankelijkheid', 'toegankelijkheid'),
+      addListItem(RiPagesFill, 'Contact', 'contact'),
 
       S.divider(),
 
