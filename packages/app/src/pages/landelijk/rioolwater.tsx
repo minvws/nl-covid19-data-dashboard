@@ -34,7 +34,24 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  () => {
+    const data = selectNlPageMetricData()();
+    data.selectedNlData.sewer.values = data.selectedNlData.sewer.values.map(
+      (x) => ({
+        ...x,
+        average: Math.round(x.average),
+      })
+    );
+    data.selectedNlData.sewer.last_value = {
+      ...data.selectedNlData.sewer.last_value,
+      average: Math.round(data.selectedNlData.sewer.last_value.average),
+    };
+    data.selectedNlData.difference.sewer__average.difference = Math.round(
+      data.selectedNlData.difference.sewer__average.difference
+    );
+
+    return data;
+  },
   createGetChoroplethData({
     vr: ({ sewer }) => ({ sewer }),
     gm: ({ sewer }) => ({ sewer }),

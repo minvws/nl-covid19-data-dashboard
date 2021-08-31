@@ -7,7 +7,7 @@ import React, { useMemo, useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { ChoroplethDataItem, thresholds } from '~/components/choropleth/logic';
 import {
@@ -70,8 +70,9 @@ export function VaccineCoveragePerMunicipality({
       onChartRegionChange={setSelectedMap}
     >
       {selectedMap === 'gm' && (
-        <Choropleth
+        <DynamicChoropleth
           map={'gm'}
+          renderTarget="canvas"
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
           data={data.gm.filter(
             hasValueAtKey('age_group_range', selectedAgeGroup)
@@ -97,8 +98,9 @@ export function VaccineCoveragePerMunicipality({
       )}
 
       {selectedMap === 'vr' && (
-        <Choropleth
+        <DynamicChoropleth
           map={'vr'}
+          renderTarget="canvas"
           accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
           data={data.vr.filter(
             hasValueAtKey('age_group_range', selectedAgeGroup)
