@@ -1,6 +1,6 @@
 import { StructureBuilder as S } from '@sanity/structure';
 import { BsCardChecklist, BsLockFill, BsMap, BsTable } from 'react-icons/bs';
-import { GrCircleInformation, GrDashboard } from 'react-icons/gr';
+import { GrCircleInformation, GrDashboard, GrDocument } from 'react-icons/gr';
 import { MdQuestionAnswer } from 'react-icons/md';
 import { RiPagesFill } from 'react-icons/ri';
 import 'sanity-mobile-preview/dist/index.css?raw';
@@ -116,45 +116,27 @@ export default () =>
         ),
 
       S.listItem()
-        .title('DIY Pages')
+        .title(`Pagina's`)
+        .icon(GrDocument)
+
         .child(
           S.list()
             .title('Filters')
             .items([
               S.listItem()
-                .title('All article pages')
+                .title(`Pagina's met gerelateerde artikelen en links`)
                 .child(
                   S.documentTypeList('articlePage')
-                    .title('Article pages')
+                    .title('Kies een pagina')
                     .child((documentId) => {
                       return S.documentList()
-                        .title('Related items')
+                        .title(`Pagina's en gerelateerde documenten`)
                         .filter(
                           '_type == "articlePageArticle" && page._ref == $documentId || _type == "articlePage" && page._id == $documentId'
                         )
                         .params({ documentId });
                     })
                 ),
-            ])
-        ),
-
-      S.listItem()
-        .title('Article pages')
-        .child(S.documentTypeList('articlePage').title('Article pages')),
-      S.listItem()
-        .title('Customized pages')
-        .icon(BsTable)
-        .child(
-          S.list()
-            .title('Customized pages')
-            .items([
-              addListItem(RiPagesFill, 'Vaccinaties', 'vaccinationsPage'),
-              addListItem(
-                GrCircleInformation,
-                'Toegankelijkheid',
-                'toegankelijkheid'
-              ),
-              addListItem(RiPagesFill, 'Contact', 'contact'),
             ])
         ),
 
