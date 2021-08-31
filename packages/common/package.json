@@ -14,6 +14,7 @@
     "test:ci": "jest --ci",
     "build": "tsc && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "clean": "del-cli dist tsconfig.tsbuildinfo",
+    "nuke": "yarn clean && npx rimraf node_modules",
     "typecheck": "tsc --noEmit",
     "prebuild": "tsc -b .",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",
