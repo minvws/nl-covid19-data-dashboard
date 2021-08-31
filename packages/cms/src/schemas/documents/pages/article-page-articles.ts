@@ -14,4 +14,27 @@ export const pageArticles = {
     },
     HIGHLIGHTED_ARTICLES,
   ],
+  preview: {
+    select: {
+      article0: 'articles.0.title.nl',
+      article1: 'articles.1.title.nl',
+      article2: 'articles.2.title.nl',
+      article3: 'articles.3.title.nl',
+    },
+    prepare(selection: any) {
+      const { article0, article1, article2 } = selection;
+
+      const articles = [article0, article1, article2].filter(Boolean);
+      const title = articles.length > 0 ? `${articles.join(', ')}` : '';
+      const subtitle =
+        articles.length > 0
+          ? `${articles.length + 1} artikelen`
+          : 'Geen artikelen';
+
+      return {
+        title,
+        subtitle,
+      };
+    },
+  },
 };
