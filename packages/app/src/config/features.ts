@@ -51,7 +51,7 @@ export const features: Feature[] = [
   },
   {
     name: 'nlVaccinationChoropleth',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['gm_collection'],
   },
 ];
