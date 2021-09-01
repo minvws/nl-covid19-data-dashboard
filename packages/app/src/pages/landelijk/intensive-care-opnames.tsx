@@ -109,7 +109,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                 isMovingAverageDifference
               />
-              <Text>{text.extra_uitleg}</Text>
+              <Markdown content={text.extra_uitleg} />
             </KpiTile>
 
             <KpiTile
