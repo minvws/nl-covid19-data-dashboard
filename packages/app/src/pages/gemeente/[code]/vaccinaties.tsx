@@ -1,3 +1,4 @@
+import { GmVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -16,7 +17,7 @@ import {
 } from '~/domain/vaccine/components/age-group-select';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
-import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-per-municipality';
+import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-per-gm';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -44,7 +45,11 @@ export const getStaticProps = withFeatureNotFoundPage(
   'gmVaccinationPage',
   createGetStaticProps(
     getLastGeneratedDate,
-    selectGmPageMetricData('difference', 'code'),
+    selectGmPageMetricData(
+      'difference',
+      'code',
+      'vaccine_coverage_per_age_group'
+    ),
     createGetChoroplethData({
       gm: ({ vaccine_coverage_per_age_group }, ctx) => {
         const vrCode = isPresent(ctx.params?.code)
@@ -81,7 +86,7 @@ export const VaccinationsGmPage = (
     choropleth,
     sideBarData,
     municipalityName,
-    selectedGmData: { difference, code },
+    selectedGmData: { difference, code, vaccine_coverage_per_age_group },
     content,
     lastGenerated,
   } = props;
@@ -94,12 +99,19 @@ export const VaccinationsGmPage = (
   const metadata = {
     ...siteText.gemeente_vaccinaties.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      gemeenteNaam: municipalityName,
+      municipalityName: municipalityName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      gemeenteNaam: municipalityName,
+      municipalityName: municipalityName,
     }),
   };
+
+  /**
+   * Filter out only the the 18 plus value to show in the sidebar
+   */
+  const filteredAgeGroup = vaccine_coverage_per_age_group.values.filter(
+    (item) => item.age_group_range === '18+'
+  )[0] as GmVaccineCoveragePerAgeGroupValue;
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -113,17 +125,17 @@ export const VaccinationsGmPage = (
         <TileList>
           <VaccinePageIntroductionVrGm
             title={replaceVariablesInText(text.introductie_sectie.titel, {
-              gemeenteNaam: municipalityName,
+              municipalityName: municipalityName,
             })}
             description={text.introductie_sectie.beschrijving}
             kpiTitle={text.introductie_sectie.kpi_titel}
-            kpiValue={9999999}
+            data={filteredAgeGroup}
           />
 
           <ChoroplethTile
             title={replaceVariablesInText(
               siteText.vaccinaties.gm_choropleth_vaccinatie_graad.title,
-              { gemeenteNaam: municipalityName }
+              { municipalityName: municipalityName }
             )}
             description={
               <>
@@ -131,7 +143,7 @@ export const VaccinationsGmPage = (
                   {replaceVariablesInText(
                     siteText.vaccinaties.gm_choropleth_vaccinatie_graad
                       .description,
-                    { gemeenteNaam: municipalityName }
+                    { municipalityName: municipalityName }
                   )}
                 </Text>
 
@@ -177,8 +189,8 @@ export const VaccinationsGmPage = (
             description={text.informatie_blok.beschrijving}
             metadata={{
               datumsText: text.informatie_blok.datums,
-              dateOrRange: 1629798465,
-              dateOfInsertionUnix: 1629798465,
+              dateOrRange: filteredAgeGroup.date_unix,
+              dateOfInsertionUnix: filteredAgeGroup.date_of_insertion_unix,
               dataSources: [],
             }}
             usefulLinks={content.page.usefulLinks}

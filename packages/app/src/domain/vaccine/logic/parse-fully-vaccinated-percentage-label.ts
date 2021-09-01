@@ -1,6 +1,6 @@
 import { isPresent } from 'ts-is-present';
 
-export const parseLabel = (
+export const parseFullyVaccinatedPercentageLabel = (
   label: string
 ): { sign: string; value: number } | null => {
   const regex = /([<>])[=]([0,9]{1,2})/;

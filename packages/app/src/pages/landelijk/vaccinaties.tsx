@@ -1,7 +1,4 @@
-import {
-  NlVaccineCoveragePerAgeGroupValue,
-  NlVaccineCoverageValue,
-} from '@corona-dashboard/common';
+import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
 import { Box, Spacer } from '~/components/base';
@@ -19,7 +16,7 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoveragePerMunicipality } from '~/domain/vaccine/vaccine-coverage-per-municipality';
+import { VaccineCoveragePerGm } from '~/domain/vaccine/vaccine-coverage-per-gm';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
@@ -95,7 +92,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
-  const vaccine_coverage_per_age_group = mockCoverageData();
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -192,10 +188,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <VaccineCoveragePerMunicipality data={choropleth} />
+          <VaccineCoveragePerGm data={choropleth} />
 
           {vaccinationPerAgeGroupFeature.isEnabled &&
-          vaccine_coverage_per_age_group ? (
+          data.vaccine_coverage_per_age_group ? (
             <ChartTile
               title={siteText.vaccinaties.vaccination_coverage.title}
               description={
@@ -203,12 +199,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }
               metadata={{
                 datumsText: text.datums,
-                date: vaccine_coverage_per_age_group.values[0].date_unix,
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
               }}
             >
               <VaccineCoveragePerAgeGroup
-                values={vaccine_coverage_per_age_group.values}
+                values={data.vaccine_coverage_per_age_group.values}
               />
             </ChartTile>
           ) : null}
@@ -369,63 +365,4 @@ function transformToDayTimestamps(values: NlVaccineCoverageValue[]) {
     date_start_unix: undefined,
     date_end_unix: undefined,
   }));
-}
-
-// TODO: remove this when data is available
-function mockCoverageData(): { values: NlVaccineCoveragePerAgeGroupValue[] } {
-  const birthyearRangeValues = [
-    '-1940',
-    '1941-1950',
-    '1951-1960',
-    '1961-1970',
-    '1971-1980',
-    '1981-1990',
-    '1991-2003',
-    '2004-2009',
-    '-2003',
-    '-2009',
-  ];
-
-  const values = [
-    '81+',
-    '71-80',
-    '61-70',
-    '51-60',
-    '41-50',
-    '31-40',
-    '18-30',
-    '12-17',
-  ].map((value, index) => createCoverageRow(value, index));
-
-  values[2].fully_vaccinated = 0;
-  values[2].fully_vaccinated_percentage = 0;
-
-  return { values };
-
-  function createCoverageRow(
-    ageGroup: any,
-    index: number
-  ): NlVaccineCoveragePerAgeGroupValue {
-    const ageGroupTotal = Math.floor(Math.random() * 17000000) + 1000000;
-    const fullyVaccinated = Math.floor(Math.random() * ageGroupTotal) + 1;
-    const partiallyVaccinated = Math.floor(
-      Math.random() * (ageGroupTotal - fullyVaccinated) + 1
-    );
-
-    return {
-      age_group_range: ageGroup,
-      age_group_percentage: Math.floor(Math.random() * 100) + 1,
-      age_group_total: ageGroupTotal,
-      fully_vaccinated: fullyVaccinated,
-      partially_vaccinated: partiallyVaccinated,
-      fully_vaccinated_percentage: (fullyVaccinated / ageGroupTotal) * 100,
-      partially_vaccinated_percentage:
-        (partiallyVaccinated / ageGroupTotal) * 100,
-      partially_or_fully_vaccinated_percentage: 0,
-      date_of_insertion_unix: 1616544000,
-      birthyear_range: birthyearRangeValues[index],
-      date_of_report_unix: 1616544000,
-      date_unix: 1616544000,
-    };
-  }
 }
