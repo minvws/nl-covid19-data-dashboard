@@ -1,4 +1,3 @@
-
 {
   "name": "corona-dashboard",
   "private": true,
@@ -23,7 +22,7 @@
     "e2e": "yarn workspace @corona-dashboard/e2e e2e",
     "e2e:ci": "yarn workspace @corona-dashboard/e2e e2e:ci",
     "cms": "yarn workspace @corona-dashboard/cms start",
-    "type-check": "yarn workspaces run type-check"
+    "preinstall": "npx yarn-deduplicate yarn.lock"
   },
   "workspaces": {
     "packages": [
