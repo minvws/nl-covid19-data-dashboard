@@ -118,7 +118,6 @@ export default () =>
       S.listItem()
         .title(`Pagina's`)
         .icon(GrDocument)
-
         .child(
           S.list()
             .title('Filters')
@@ -132,7 +131,11 @@ export default () =>
                       return S.documentList()
                         .title(`Pagina's en gerelateerde documenten`)
                         .filter(
-                          '_type == "articlePageArticle" && page._ref == $documentId || _type == "articlePage" && page._id == $documentId'
+                          `
+                            _type == "articlePage" && page._id == $documentId ||
+                            _type == "articlePageArticle" && page._ref == $documentId ||
+                            _type == "articlePageLinks" && page._ref == $documentId
+                          `
                         )
                         .params({ documentId });
                     })

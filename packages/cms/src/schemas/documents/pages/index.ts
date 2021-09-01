@@ -11,3 +11,4 @@ export * from './veelgestelde-vragen-page';
 
 export * from './article-page';
 export * from './article-page-articles';
+export * from './article-page-links';
