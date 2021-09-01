@@ -1,9 +1,12 @@
 import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
+import { GrArticle } from 'react-icons/gr';
 
 export const pageArticles = {
   title: 'Page Articles',
   name: 'articlePageArticle',
   type: 'document',
+  icon: GrArticle,
+
   fields: [
     {
       name: 'page',

@@ -1,9 +1,11 @@
 import { Rule } from '~/sanity';
+import { AiOutlineLink } from 'react-icons/ai';
 
 export const pageLinks = {
   title: 'Page Links',
   name: 'articlePageLinks',
   type: 'document',
+  icon: AiOutlineLink,
   fields: [
     {
       name: 'page',
