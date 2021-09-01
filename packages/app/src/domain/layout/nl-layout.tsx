@@ -1,20 +1,22 @@
 import { Nl } from '@corona-dashboard/common';
+import {
+  Arts,
+  Coronavirus,
+  Elderly,
+  Gedrag,
+  GehandicaptenZorg,
+  Phone,
+  Reproductiegetal,
+  RioolwaterMonitoring,
+  Test,
+  Vaccinaties,
+  Varianten,
+  Verpleeghuiszorg,
+  Ziekenhuis,
+  Ziektegolf,
+} from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactComponent as Arts } from '~/assets/arts.svg';
-import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
-import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
-import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
-import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
-import { ReactComponent as Phone } from '~/assets/phone.svg';
-import { ReactComponent as ReproIcon } from '~/assets/reproductiegetal.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as VaccinatieIcon } from '~/assets/vaccinaties.svg';
-import { ReactComponent as Varianten } from '~/assets/varianten.svg';
-import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
-import { ReactComponent as Ziektegolf } from '~/assets/ziektegolf.svg';
 import {
   CategoryMenu,
   Menu,
@@ -28,6 +30,7 @@ import { SidebarMetric } from '~/components/sidebar-metric';
 import { SidebarKpiValue } from '~/components/sidebar-metric/sidebar-kpi-value';
 import { VariantSidebarValue } from '~/domain/variants/static-props';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { SituationsSidebarMetric } from '../situations/situations-sidebar-metric';
@@ -90,6 +93,18 @@ export function NlLayout(props: NlLayoutProps) {
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
 
+  data.difference.sewer__average.difference = Math.round(
+    data.difference.sewer__average.difference
+  );
+  data.difference.sewer__average.old_value = Math.round(
+    data.difference.sewer__average.old_value
+  );
+  data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
+
+  const { isEnabled: isGpSuspicionsHistorical } = useFeature(
+    'nlGpSuspicionsIsHistorical'
+  );
+
   return (
     <>
       <Head>
@@ -132,7 +147,7 @@ export function NlLayout(props: NlLayoutProps) {
               >
                 <MetricMenuItemLink
                   href={reverseRouter.nl.vaccinaties()}
-                  icon={<VaccinatieIcon />}
+                  icon={<Vaccinaties />}
                   title={siteText.vaccinaties.titel_sidebar}
                 >
                   <SidebarMetric
@@ -192,7 +207,7 @@ export function NlLayout(props: NlLayoutProps) {
               >
                 <MetricMenuItemLink
                   href={reverseRouter.nl.positiefGetesteMensen()}
-                  icon={<GetestIcon />}
+                  icon={<Test />}
                   title={siteText.positief_geteste_personen.titel_sidebar}
                 >
                   <SidebarMetric
@@ -212,7 +227,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.reproductiegetal()}
-                  icon={<ReproIcon />}
+                  icon={<Reproductiegetal />}
                   title={siteText.reproductiegetal.titel_sidebar}
                 >
                   <SidebarMetric
@@ -229,7 +244,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.sterfte()}
-                  icon={<CoronavirusIcon />}
+                  icon={<Coronavirus />}
                   title={siteText.sterfte.titel_sidebar}
                 >
                   <SidebarMetric
@@ -311,7 +326,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.gehandicaptenzorg()}
-                  icon={<Gehandicaptenzorg />}
+                  icon={<GehandicaptenZorg />}
                   title={
                     siteText.gehandicaptenzorg_besmette_locaties.titel_sidebar
                   }
@@ -328,7 +343,7 @@ export function NlLayout(props: NlLayoutProps) {
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.thuiswonendeOuderen()}
-                  icon={<ElderlyIcon />}
+                  icon={<Elderly />}
                   title={siteText.thuiswonende_ouderen.titel_sidebar}
                 >
                   <SidebarMetric
@@ -365,14 +380,20 @@ export function NlLayout(props: NlLayoutProps) {
                   icon={<Arts />}
                   title={siteText.verdenkingen_huisartsen.titel_sidebar}
                 >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="doctor"
-                    metricProperty="covid_symptoms"
-                    localeTextKey="verdenkingen_huisartsen"
-                    differenceKey="doctor__covid_symptoms"
-                  />
+                  {isGpSuspicionsHistorical ? (
+                    <SidebarKpiValue
+                      title={siteText.verdenkingen_huisartsen.kpi_titel}
+                    />
+                  ) : (
+                    <SidebarMetric
+                      data={data}
+                      scope="nl"
+                      metricName="doctor"
+                      metricProperty="covid_symptoms"
+                      localeTextKey="verdenkingen_huisartsen"
+                      differenceKey="doctor__covid_symptoms"
+                    />
+                  )}
                 </MetricMenuItemLink>
               </CategoryMenu>
 

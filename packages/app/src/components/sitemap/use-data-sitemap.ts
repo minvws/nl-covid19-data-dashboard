@@ -152,6 +152,10 @@ export function useDataSitemap(
           href: reverseRouter.nl.varianten(),
         },
         {
+          text: siteText.brononderzoek.titel_sidebar,
+          href: reverseRouter.nl.brononderzoek(),
+        },
+        {
           text: siteText.besmettelijke_personen.titel_sidebar,
           href: reverseRouter.nl.besmettelijkeMensen(),
         },

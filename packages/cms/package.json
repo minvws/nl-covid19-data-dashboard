@@ -4,14 +4,18 @@
   "version": "0.0.0",
   "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
   "scripts": {
-    "start": "sanity start",
+    "bootstrap": "yarn lokalize:export",
+    "clean": "npx rimraf dist .sanity-asset-cache .lokalize-reference",
+    "nuke": "yarn clean && npx rimraf node_modules",
+    "dev": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
     "test": "sanity check",
     "test:ci": "yarn run test",
-    "compile": "tsc --pretty --noEmit",
+    "typecheck": "tsc --pretty --noEmit",
     "lint": "echo '@TODO add eslint'",
     "lokalize:export": "ts-node src/lokalize/export.ts",
+    "lokalize:dedupe": "ts-node src/lokalize/clean-duplicates.ts",
     "lokalize:apply-json-edits": "ts-node src/lokalize/apply-json-edits.ts",
     "lokalize:generate-types": "ts-node src/lokalize/generate-types.ts",
     "lokalize:sync-after-release": "ts-node src/lokalize/sync-after-release.ts",
@@ -22,15 +26,16 @@
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
   "dependencies": {
-    "@sanity/base": "^2.15.1",
+    "@corona-dashboard/icons": "0.0.0",
+    "@sanity/base": "^2.17.1",
     "@sanity/components": "^2.14.0",
-    "@sanity/core": "^2.15.0",
-    "@sanity/dashboard": "^2.15.1",
-    "@sanity/default-layout": "^2.15.1",
-    "@sanity/default-login": "^2.15.0",
-    "@sanity/desk-tool": "^2.15.2",
+    "@sanity/core": "^2.17.1",
+    "@sanity/dashboard": "^2.17.1",
+    "@sanity/default-layout": "^2.17.1",
+    "@sanity/default-login": "^2.17.1",
+    "@sanity/desk-tool": "^2.17.1",
     "@sanity/production-preview": "^2.15.0",
-    "@sanity/ui": "^0.34.4",
+    "@sanity/ui": "^0.36.2",
     "@sanity/vision": "^2.15.0",
     "braille": "^1.1.0",
     "change-case": "^4.1.2",
@@ -54,7 +59,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.15.0",
+    "@sanity/cli": "^2.17.1",
     "@types/download": "^6.2.4",
     "@types/flat": "^5.0.1",
     "@types/fs-extra": "^9.0.6",
@@ -64,6 +69,7 @@
     "dotenv-flow": "^3.2.0",
     "fast-csv": "^4.3.6",
     "meow": "^9.0.0",
-    "ts-node": "^10.2.0"
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
   }
 }

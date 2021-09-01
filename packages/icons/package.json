@@ -1,0 +1,56 @@
+{
+  "name": "@corona-dashboard/icons",
+  "version": "0.0.0",
+  "description": "React ready Corona Dashboard Icons",
+  "main": "build/index.js",
+  "module": "dist/index.js",
+  "sideEffects": false,
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "bootstrap": "yarn build",
+    "clean": "npx rimraf src/icons dist build src/index.d.ts src/index.js",
+    "nuke": "yarn clean && npx rimraf node_modules",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "test:ci": "echo 'No tests available for @corona-dashboard/cli' && exit 0",
+    "typecheck": "exit 0",
+    "prebuild": "npx rimraf src/icons && node bin/build.js",
+    "build:es": "npx rimraf dist && babel src --out-dir dist --copy-files",
+    "build": "concurrently \"npm:build:*\"",
+    "lint": "echo 'Linting disabled for the icons package'"
+  },
+  "files": [
+    "dist",
+    "es"
+  ],
+  "license": "EUROPEAN UNION PUBLIC LICENCE v. 1.2",
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "camelcase": "^6.2.0",
+    "concurrently": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "lodash": "^4.17.21",
+    "prettier-eslint": "^9.0.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.3.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "svgson": "^5.2.1",
+    "uppercamelcase": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6 || ^17"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  }
+}

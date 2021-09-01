@@ -10,7 +10,8 @@
     "code",
     "hospital_nice",
     "tested_overall",
-    "sewer"
+    "sewer",
+    "vaccine_coverage_per_age_group"
   ],
   "properties": {
     "last_generated": {
@@ -18,15 +19,21 @@
     },
     "proto_name": {
       "type": "string",
-      "enum": ["GM_COLLECTION"]
+      "enum": [
+        "GM_COLLECTION"
+      ]
     },
     "name": {
       "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "const": {
+        "$data": "1/proto_name"
+      }
     },
     "code": {
       "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "const": {
+        "$data": "1/proto_name"
+      }
     },
     "hospital_nice": {
       "type": "array",
@@ -47,6 +54,13 @@
       "maxItems": 355,
       "items": {
         "$ref": "sewer.json"
+      }
+    },
+    "vaccine_coverage_per_age_group": {
+      "type": "array",
+      "maxItems": 1065,
+      "items": {
+        "$ref": "vaccine_coverage_per_age_group.json"
       }
     }
   }

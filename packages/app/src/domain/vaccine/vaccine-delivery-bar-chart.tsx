@@ -1,10 +1,22 @@
-import { NlVaccineDeliveryPerSupplier } from '@corona-dashboard/common';
-import { useState } from 'react';
+import {
+  NlVaccineDeliveryPerSupplier,
+  NlVaccineDeliveryPerSupplierValue,
+} from '@corona-dashboard/common';
+import { useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { RadioGroup } from '~/components/radio-group';
-import { StackedChart } from '~/components/stacked-chart';
+import {
+  StackedBarTooltipData,
+  StackedChart,
+} from '~/components/stacked-chart';
+import {
+  TooltipData,
+  TooltipFormatter,
+} from '~/components/time-series-chart/components';
+import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
+import { TimespanAnnotationConfig } from '~/components/time-series-chart/logic';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -33,15 +45,38 @@ export function VaccineDeliveryBarChart({
       value: 'all' as Timeframe,
     },
     {
-      label:
-        intl.siteText.vaccinaties.grafiek_leveringen
-          .timeframe_recent_en_verwacht,
+      label: text.timeframe_recent_en_verwacht,
       value: 'recent_and_coming' as Timeframe,
     },
   ];
 
   const productNames =
     intl.siteText.vaccinaties.data.vaccination_chart.product_names;
+
+  const formatTooltip: TooltipFormatter<
+    NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
+  > = useCallback(
+    (
+      context: TooltipData<
+        NlVaccineDeliveryPerSupplierValue & StackedBarTooltipData
+      >
+    ) => {
+      const data = {
+        ...context,
+
+        timespanAnnotation: context.value.isHatched
+          ? ({
+              label:
+                intl.siteText.vaccinaties.data.vaccination_chart.legend
+                  .expected,
+            } as TimespanAnnotationConfig)
+          : undefined,
+      };
+
+      return <TooltipSeriesList data={data} />;
+    },
+    [intl.siteText.vaccinaties.data.vaccination_chart.legend.expected]
+  );
 
   return (
     <ChartTile
@@ -103,10 +138,17 @@ export function VaccineDeliveryBarChart({
                 label: productNames.janssen,
               }
             : undefined,
+          {
+            metricProperty: 'total' as const,
+            color: 'transparent',
+            type: 'invisible',
+            label: text.totaal,
+          },
         ].filter(isDefined)}
         expectedLabel={
           intl.siteText.vaccinaties.data.vaccination_chart.legend.expected
         }
+        formatTooltip={formatTooltip}
       />
     </ChartTile>
   );

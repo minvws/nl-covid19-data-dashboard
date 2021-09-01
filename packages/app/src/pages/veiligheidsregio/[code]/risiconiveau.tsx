@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
-import { ReactComponent as Calendar } from '~/assets/calendar.svg';
-import { ReactComponent as Getest } from '~/assets/test.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { BarChart } from '@corona-dashboard/icons';
+import { Calendar } from '@corona-dashboard/icons';
+import { Test } from '@corona-dashboard/icons';
+
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
@@ -197,7 +198,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                           <UnorderedList>
                             <ListItem
                               title={text.momenteel.positive_tests.title}
-                              icon={<Getest />}
+                              icon={<Test />}
                             >
                               <DataDescription
                                 description={
@@ -257,7 +258,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   <HeadingWithIcon
                     title={text.positieve_testen.title}
                     headingLevel={4}
-                    icon={<Getest />}
+                    icon={<Test />}
                   />
                 </Box>
                 <Box spacingHorizontal={2}>

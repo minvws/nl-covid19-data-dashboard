@@ -1,4 +1,4 @@
-import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
+import { Gedrag } from '@corona-dashboard/icons';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { Layout } from '~/domain/layout/layout';

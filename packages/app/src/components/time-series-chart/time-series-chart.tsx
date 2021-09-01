@@ -114,6 +114,7 @@ type TimeSeriesChartProps<
   numGridLines?: number;
   showWeekNumbers?: boolean;
   tickValues?: number[];
+  xTickNumber?: number;
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
   /**
@@ -154,6 +155,7 @@ export function TimeSeriesChart<
   showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
+  xTickNumber,
   formatTickValue: formatYTickValue,
   paddingLeft,
   tooltipTitle,
@@ -255,7 +257,7 @@ export function TimeSeriesChart<
 
   const splitLegendGroups = useSplitLegendGroups(seriesConfig);
 
-  const xTickValues = useMemo(
+  const timeDomain = useMemo(
     () => getTimeDomain({ values, today, withPadding: false }),
     [values, today]
   );
@@ -396,8 +398,10 @@ export function TimeSeriesChart<
             <Axes
               bounds={bounds}
               numGridLines={numGridLines}
+              timeframe={timeframe}
               yTickValues={yTickValues}
-              xTickValues={xTickValues}
+              timeDomain={timeDomain}
+              xTickNumber={xTickNumber}
               formatYTickValue={formatYTickValue}
               xScale={xScale}
               yScale={yScale}

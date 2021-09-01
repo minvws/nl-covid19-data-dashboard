@@ -12,15 +12,41 @@ COPY package.json yarn.lock ./
 COPY packages/app/package.json ./packages/app/
 COPY packages/cli/package.json ./packages/cli/
 COPY packages/cms/package.json ./packages/cms/
-COPY packages/common/package.json packages/common/yarn.lock ./packages/common/
-RUN yarn install --frozen-lockfile --production=false
+COPY packages/common/package.json ./packages/common/
+COPY packages/icons/package.json ./packages/icons/
+RUN apk add --no-cache --virtual build-dependencies \
+      python3 \
+      g++ \
+      build-base \
+      cairo-dev \
+      jpeg-dev \
+      pango-dev \
+      musl-dev \
+      giflib-dev \
+      pixman-dev \
+      pangomm-dev \
+      libjpeg-turbo-dev \
+      freetype-dev \
+    && yarn install --frozen-lockfile --production=false \
+    && apk del build-dependencies \
+    && apk add --no-cache \
+      cairo \
+      jpeg \
+      pango \
+      musl \
+      giflib \
+      pixman \
+      pangomm \
+      libjpeg-turbo \
+      freetype
 
 # Layer cache for rebuilds without sourcecode changes.
 # This relies on the JSONS being downloaded by the builder.
 FROM deps as builder
 COPY . .
 RUN yarn workspace @corona-dashboard/common build \
-&& yarn workspace @corona-dashboard/cli generate-typescript
+&& yarn workspace @corona-dashboard/cli generate-typescript \
+&& yarn workspace @corona-dashboard/icons build
 
 # Map arguments to environment variables
 ARG ARG_NEXT_PUBLIC_SANITY_DATASET

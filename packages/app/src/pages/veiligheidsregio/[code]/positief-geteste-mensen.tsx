@@ -1,8 +1,7 @@
-import { ReactComponent as GgdTesten } from '~/assets/ggd-testen.svg';
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { GgdTesten, Test } from '@corona-dashboard/icons';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -42,6 +41,7 @@ import { colors } from '~/style/theme';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -118,7 +118,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               safetyRegion: vrName,
             })}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
@@ -254,13 +254,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               thresholds: thresholds.vr.infected_per_100k,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'confirmed_cases_infected_people_choropleth',
               }}
               data={choropleth.gm.tested_overall}
               dataConfig={{
+                metricName: 'tested_overall',
                 metricProperty: 'infected_per_100k',
               }}
               dataOptions={{

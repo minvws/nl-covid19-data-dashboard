@@ -1,4 +1,5 @@
-import { ReactComponent as Arts } from '~/assets/arts.svg';
+import { Arts } from '@corona-dashboard/icons';
+import { isPresent } from 'ts-is-present';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -7,9 +8,11 @@ import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Text } from '~/components/typography';
+import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import {
   createGetStaticProps,
   StaticProps,
@@ -38,6 +41,10 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  const { isEnabled: isGpSuspicionsHistorical } = useFeature(
+    'nlGpSuspicionsIsHistorical'
+  );
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout data={data} lastGenerated={lastGenerated}>
@@ -58,6 +65,16 @@ const SuspectedPatients = (props: StaticProps<typeof getStaticProps>) => {
             }}
             referenceLink={text.reference.href}
           />
+
+          {isGpSuspicionsHistorical &&
+            text.belangrijk_bericht &&
+            isPresent(text.belangrijk_bericht) && (
+              <WarningTile
+                isFullWidth
+                message={text.belangrijk_bericht}
+                variant="emphasis"
+              />
+            )}
 
           <TwoKpiSection>
             <KpiTile

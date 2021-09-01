@@ -3,40 +3,22 @@ import { ReactNode, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { colors } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
+import { assert } from '~/utils/assert';
 import { CountryOption } from './context';
 import { CountryCode } from './country-code';
 import { MultiSelectCountrySearch } from './multi-select-country-search';
 import { SelectedCountries } from './selected-countries';
-
-const {
-  cyan,
-  turquoise,
-  yellow,
-  orange,
-  magenta,
-  cyan_dark,
-  turquoise_dark,
-  yellow_dark,
-  orange_dark,
-  magenta_dark,
-} = colors.data.multiseries;
-
-const ORDERED_COLORS = [
-  cyan,
-  turquoise,
-  yellow,
-  orange,
-  magenta,
-  cyan_dark,
-  turquoise_dark,
-  yellow_dark,
-  orange_dark,
-  magenta_dark,
-];
+import {
+  ORDERED_COLORS,
+  useMapCountryToColor,
+} from './use-map-country-to-color';
 
 interface MultiSelectCountriesProps {
   countryOptions: CountryOption[];
-  children: (selectedCountries: CountryCode[], colors: string[]) => ReactNode;
+  children: (
+    selectedCountries: CountryCode[],
+    getColor: (countryCode: CountryCode) => string
+  ) => ReactNode;
   limit?: number;
   alwaysSelectedCodes: CountryCode[];
   defaultSelectedCodes: CountryCode[];
@@ -49,9 +31,16 @@ export function MultiSelectCountries({
   alwaysSelectedCodes,
   defaultSelectedCodes,
 }: MultiSelectCountriesProps) {
+  assert(
+    limit ? limit <= ORDERED_COLORS.length : !limit,
+    'limit cannot be higher than the # of specified colors'
+  );
+
   const [selectedCountries, setSelectedCountries] = useState<CountryCode[]>(
     defaultSelectedCodes ?? []
   );
+
+  const { getColor, toggleColor } = useMapCountryToColor(selectedCountries);
 
   function handleToggleCountry(countryData: CountryOption) {
     if (selectedCountries.includes(countryData.code)) {
@@ -66,6 +55,8 @@ export function MultiSelectCountries({
       }
       setSelectedCountries([...selectedCountries, countryData.code]);
     }
+
+    toggleColor(countryData.code);
   }
 
   const countries: CountryOption[] = useMemo(() => {
@@ -77,9 +68,9 @@ export function MultiSelectCountries({
       }));
   }, [countryOptions, selectedCountries, alwaysSelectedCodes]);
 
-  const selectOptions = selectedCountries.map((countryCode, index) => ({
+  const selectOptions = selectedCountries.map((countryCode) => ({
     metricProperty: countryCode,
-    color: ORDERED_COLORS[index],
+    color: getColor(countryCode),
     label:
       countryOptions.find((x) => x.code === countryCode)?.name ?? countryCode,
     shape: 'line' as const,
@@ -109,7 +100,7 @@ export function MultiSelectCountries({
           }
         />
       </List>
-      {children(selectedCountries, ORDERED_COLORS)}
+      {children(selectedCountries, getColor)}
     </>
   );
 }

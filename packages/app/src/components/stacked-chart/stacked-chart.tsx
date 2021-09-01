@@ -9,25 +9,20 @@ import {
 } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { AxisBottom, AxisLeft, TickFormatter } from '@visx/axis';
-import { localPoint } from '@visx/event';
 import { GridRows } from '@visx/grid';
 import { Group } from '@visx/group';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@visx/scale';
 import { BarStack, Line } from '@visx/shape';
-import { SeriesPoint } from '@visx/shape/lib/types';
 import { Text } from '@visx/text';
 /**
  * useTooltipInPortal will not work for IE11 at the moment. See this issue
  * https://github.com/airbnb/visx/issues/904
  */
-import { defaultStyles, TooltipWithBounds, useTooltip } from '@visx/tooltip';
-import { isEmpty, set } from 'lodash';
-import { transparentize } from 'polished';
-import { MouseEvent, TouchEvent, useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
+import { useTooltip } from '@visx/tooltip';
+import { isEmpty } from 'lodash';
+import { MouseEvent, TouchEvent, useCallback, useMemo } from 'react';
 import { Box, Spacer } from '~/components/base';
 import { Legend } from '~/components/legend';
-import { InlineText } from '~/components/typography';
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -41,20 +36,19 @@ import { useIsMountedRef } from '~/utils/use-is-mounted-ref';
 import { useResizeObserver } from '~/utils/use-resize-observer';
 import { useResponsiveContainer } from '~/utils/use-responsive-container';
 import {
+  DateSpanMarker,
+  Overlay,
+  Tooltip,
+  TooltipData,
+  TooltipFormatter,
+} from '../time-series-chart/components';
+import { TooltipSeriesList } from '../time-series-chart/components/tooltip/tooltip-series-list';
+import {
   calculateSeriesMaximum,
   getSeriesData,
-  getTotalSumForMetricProperty,
   getWeekInfo,
   SeriesValue,
 } from './logic';
-
-const tooltipStyles = {
-  ...defaultStyles,
-  padding: 0,
-  zIndex: 100,
-};
-
-const NO_HOVER_INDEX = -1;
 
 type AnyTickFormatter = (value: any) => string;
 
@@ -66,43 +60,22 @@ type AnyTickFormatter = (value: any) => string;
 let tooltipTimeout: number;
 let hoverTimeout: number;
 
-/**
- * The TooltipData is used by the hover handler to show and position the
- * Tooltip. A subsection of this data is then passed on to the ToolTipFormatter,
- * since that function only requires information to render its contents which
- * isn't position dependent.
- */
-type TooltipData = {
-  bar: SeriesPoint<SeriesValue>;
-  key: string;
-  index: number;
-  height: number;
-  width: number;
-  x: number;
-  y: number;
-  color: string;
-};
-
-/**
- * The TooltipFormatter returns the content for the tooltip.
- *
- * By passing the SeriesValue (which is an object with all trend values that are
- * showing in the chart with the date), plus the key for which the hover is
- * showing data, the formatter has all the information it needs to render any
- * kind of tooltip
- */
-type TooltipFormatter = (
-  value: SeriesValue,
-  key: string,
-  color?: string
-) => JSX.Element;
-
 type HoverEvent = TouchEvent<SVGElement> | MouseEvent<SVGElement>;
 
-type Config<T extends TimestampedValue> = {
+type Config<T extends TimestampedValue> =
+  | VisibleBarConfig<T>
+  | InvisibleBarConfig<T>;
+
+type VisibleBarConfig<T extends TimestampedValue> = {
   metricProperty: keyof T;
   label: string;
   color: string;
+};
+
+type InvisibleBarConfig<T extends TimestampedValue> = {
+  type: 'invisible';
+  metricProperty: keyof T;
+  label: string;
 };
 
 type StackedChartProps<T extends TimestampedValue> = {
@@ -112,11 +85,26 @@ type StackedChartProps<T extends TimestampedValue> = {
   valueAnnotation?: string;
   initialWidth?: number;
   expectedLabel: string;
-  formatTooltip?: TooltipFormatter;
+  formatTooltip?: TooltipFormatter<T & StackedBarTooltipData>;
   isPercentage?: boolean;
   formatXAxis?: TickFormatter<Date>;
   formatTickValue?: (value: number) => string;
   timeframe?: TimeframeOption;
+};
+
+type BarRenderData = {
+  x: number;
+  width: number;
+  index: number;
+  color: string;
+  height: number;
+  key: string;
+};
+
+export type StackedBarTooltipData = {
+  bar: BarRenderData;
+  isHatched: boolean;
+  date_unix: number;
 };
 
 /**
@@ -140,6 +128,7 @@ export function StackedChart<T extends TimestampedValue>(
     isPercentage,
     expectedLabel,
     formatTickValue: formatYTickValue,
+    formatTooltip,
     valueAnnotation,
     timeframe = 'all',
   } = props;
@@ -148,6 +137,18 @@ export function StackedChart<T extends TimestampedValue>(
   const isExtraSmallScreen = !breakpoints.sm;
   const isTinyScreen = !breakpoints.xs;
 
+  const isVisible = useCallback(function (
+    configValue: Config<T>
+  ): configValue is VisibleBarConfig<T> {
+    return !('type' in configValue);
+  },
+  []);
+
+  const chartConfig = useMemo(
+    () => config.filter(isVisible),
+    [config, isVisible]
+  );
+
   const minHeight = isExtraSmallScreen ? 200 : 400;
 
   const { ResponsiveContainer, width, height } = useResponsiveContainer(
@@ -155,13 +156,8 @@ export function StackedChart<T extends TimestampedValue>(
     minHeight
   );
 
-  const {
-    siteText,
-    formatNumber,
-    formatDate,
-    formatPercentage,
-    formatDateSpan,
-  } = useIntl();
+  const { formatNumber, formatDate, formatPercentage, formatDateSpan } =
+    useIntl();
 
   const annotations = useAccessibilityAnnotations(accessibility);
 
@@ -172,7 +168,7 @@ export function StackedChart<T extends TimestampedValue>(
     showTooltip,
     hideTooltip,
     tooltipOpen,
-  } = useTooltip<TooltipData>();
+  } = useTooltip<TooltipData<T & StackedBarTooltipData>>();
 
   const isMountedRef = useIsMountedRef();
 
@@ -190,8 +186,8 @@ export function StackedChart<T extends TimestampedValue>(
   );
 
   const metricProperties = useMemo(
-    () => config.map((x) => x.metricProperty),
-    [config]
+    () => chartConfig.map((x) => x.metricProperty),
+    [chartConfig]
   );
 
   const today = useCurrentDate();
@@ -208,19 +204,12 @@ export function StackedChart<T extends TimestampedValue>(
 
   const seriesMax = useMemo(() => calculateSeriesMaximum(series), [series]);
 
-  const [hoveredIndex, setHoveredIndex] = useState(NO_HOVER_INDEX);
-
   const colorScale = useMemo(() => {
     return scaleOrdinal<string, string>({
       domain: metricProperties as string[],
-      range: config.map((x) => x.color),
+      range: chartConfig.map((x) => x.color),
     });
-  }, [config, metricProperties]);
-
-  const hoverColors = useMemo(
-    () => config.map((x) => transparentize(0.6, x.color)),
-    [config]
-  );
+  }, [chartConfig, metricProperties]);
 
   /**
    * This is a bit of a hack for now because this chart should be replaced by
@@ -237,20 +226,11 @@ export function StackedChart<T extends TimestampedValue>(
    * abstraction for this so that we can set the colors directly on the DOM
    * elements similar to how bars are rendered.
    */
-  const legendaItems = useMemo(() => {
-    const barItems = config.map((x) => {
-      const itemIndex = metricProperties.findIndex(
-        (v) => v === x.metricProperty
-      );
-
+  const legendItems = useMemo(() => {
+    const barItems = chartConfig.map(({ color, label }) => {
       return {
-        color:
-          hoveredIndex === NO_HOVER_INDEX
-            ? x.color
-            : hoveredIndex === itemIndex
-            ? x.color
-            : hoverColors[itemIndex],
-        label: x.label,
+        color: color,
+        label: label,
         shape: 'square' as const,
       };
     });
@@ -269,16 +249,7 @@ export function StackedChart<T extends TimestampedValue>(
         shapeComponent: <HatchedSquare />,
       },
     ];
-  }, [config, hoveredIndex, metricProperties, hoverColors, expectedLabel]);
-
-  const labelByKey = useMemo(
-    () =>
-      config.reduce(
-        (acc, x) => set(acc, x.metricProperty, x.label),
-        {} as Record<string, string>
-      ),
-    [config]
-  );
+  }, [chartConfig, expectedLabel]);
 
   /**
    * Date range labels (eg "28 okt - 3 dec") are ~85 px wide. Use that number
@@ -318,90 +289,10 @@ export function StackedChart<T extends TimestampedValue>(
     [formatDate, formatDateSpan, isNarrowChart, numOfFittingLabels]
   );
 
-  /**
-   * Calculate the sum of every property over the whole x-axis range.
-   *
-   * @TODO this logic is probably very specific to the vaccine availability
-   * chart so it should probably be moved outside once we start re-using this
-   * stacked chart for other things.
-   */
-  const seriesSumByKey = useMemo(
-    () =>
-      config.reduce(
-        (acc, x) =>
-          set(
-            acc,
-            x.metricProperty,
-            getTotalSumForMetricProperty(
-              series as unknown as Record<string, number>[],
-              x.metricProperty as string
-            )
-          ),
-        {} as Record<string, number>
-      ),
-    [config, series]
-  );
-
-  /**
-   * This format function should be moved outside of the chart if we want to
-   * make this component reusable. But it depends on a lot of calculated data
-   * like seriesSum and labelByKey, so it would make the calling context quite
-   * messy if not done in a good way.
-   *
-   * I'm leaving that as an exercise for later.
-   */
-  const formatTooltip = useCallback(
-    (data: SeriesValue, key: string, color: string) => {
-      const date = getDate(data);
-
-      const { weekStartDate, weekEndDate } = getWeekInfo(date);
-
-      const allDates = series.map(getDate);
-
-      const { weekStartDate: weekStartDateAll } = getWeekInfo(allDates[0]);
-      const { weekEndDate: weekEndDateAll } = getWeekInfo(
-        allDates[allDates.length - 1]
-      );
-
-      const [startSingle, endSingle] = formatDateSpan(
-        weekStartDate,
-        weekEndDate,
-        'axis'
-      );
-      const [startAll, endAll] = formatDateSpan(
-        weekStartDateAll,
-        weekEndDateAll,
-        'axis'
-      );
-
-      return (
-        <Box p={2} as="section" position="relative" spacing={2}>
-          <Box display="flex" alignItems="center" mb={2} spacingHorizontal={2}>
-            <Square color={color} />
-            <InlineText fontWeight="bold">{labelByKey[key]}</InlineText>
-          </Box>
-          <Box>
-            <InlineText fontWeight="bold">{`${startSingle} - ${endSingle}: `}</InlineText>
-            {formatNumber(data[key])}
-          </Box>
-          <Box>
-            <InlineText fontWeight="bold">{`${startAll} - ${endAll}: `}</InlineText>
-            {formatNumber(seriesSumByKey[key])}
-            {!isTinyScreen && ' ' + siteText.waarde_annotaties.totaal}
-          </Box>
-        </Box>
-      );
-    },
-    [
-      series,
-      formatDateSpan,
-      labelByKey,
-      formatNumber,
-      seriesSumByKey,
-      isTinyScreen,
-      siteText.waarde_annotaties.totaal,
-    ]
-  );
+  const defaultFormatTooltip: TooltipFormatter<T & StackedBarTooltipData> =
+    useCallback((context: TooltipData<T & StackedBarTooltipData>) => {
+      return <TooltipSeriesList data={context} />;
+    }, []);
 
   const formatYAxis = useCallback(
     (y: number) => {
@@ -425,23 +316,14 @@ export function StackedChart<T extends TimestampedValue>(
    * Every chart stack/column gets its own mouse handler, which is then tied to
    * the bar variable via closure. This bar data contains also the original
    * SeriesValue, which can be passed to the tooltip.
-   *
-   * @TODO wrap in useCallback?
    */
   const handleHover = useCallback(
-    function handleHover(
-      event: HoverEvent,
-      tooltipData: TooltipData,
-      hoverIndex: number
-    ) {
+    function handleHover(event: HoverEvent, bar: BarRenderData) {
       const isLeave = event.type === 'mouseleave';
 
       if (isLeave) {
         tooltipTimeout = window.setTimeout(() => {
           if (isMountedRef.current) hideTooltip();
-        }, 300);
-        hoverTimeout = window.setTimeout(() => {
-          if (isMountedRef.current) setHoveredIndex(NO_HOVER_INDEX);
         }, 300);
         return;
       }
@@ -449,17 +331,39 @@ export function StackedChart<T extends TimestampedValue>(
       if (tooltipTimeout) clearTimeout(tooltipTimeout);
       if (hoverTimeout) clearTimeout(hoverTimeout);
 
-      setHoveredIndex(hoverIndex);
-
-      // @ts-expect-error
-      const coords = localPoint(event.target.ownerSVGElement, event);
       showTooltip({
-        tooltipLeft: coords?.x || 0,
-        tooltipTop: coords?.y || 0,
-        tooltipData,
+        tooltipLeft: bar.x + Math.round(bar.width / 2) + 0.5,
+        tooltipTop: 0,
+
+        tooltipData: {
+          value: {
+            bar,
+            isHatched: bar.index >= hatchedFromIndex,
+            date_unix: series[bar.index].__date.getTime() / 1000,
+            ...valuesInTimeframe[bar.index],
+          },
+          config: config.map((x) => ({
+            ...x,
+            type: 'bar',
+            fillOpacity: 1,
+          })) as any,
+          options: {
+            isPercentage: false,
+          },
+          metricPropertyFormatters: {} as any,
+          configIndex: bar.index,
+        },
       });
     },
-    [hideTooltip, showTooltip, isMountedRef]
+    [
+      hideTooltip,
+      showTooltip,
+      isMountedRef,
+      config,
+      series,
+      hatchedFromIndex,
+      valuesInTimeframe,
+    ]
   );
 
   if (isEmpty(series)) {
@@ -577,19 +481,14 @@ export function StackedChart<T extends TimestampedValue>(
                     barStacks.map((barStack) =>
                       barStack.bars.map((bar) => {
                         const barId = `bar-stack-${barStack.index}-${bar.index}`;
-                        const fillColor =
-                          hoveredIndex === NO_HOVER_INDEX
-                            ? bar.color
-                            : barStack.index === hoveredIndex
-                            ? bar.color
-                            : hoverColors[barStack.index];
+                        const fillColor = bar.color;
 
                         /**
                          * Capture the bar data for the hover handler using a
                          * closure for each bar.
                          */
                         const handleHoverWithBar = (event: HoverEvent) =>
-                          handleHover(event, bar, barStack.index);
+                          handleHover(event, bar);
 
                         return (
                           <Group key={barId}>
@@ -647,33 +546,28 @@ export function StackedChart<T extends TimestampedValue>(
               </Group>
             </svg>
           </Box>
-
           {tooltipOpen && tooltipData && (
-            <TooltipWithBounds
-              left={tooltipLeft}
-              top={tooltipTop}
-              style={tooltipStyles}
-              offsetLeft={isTinyScreen ? 0 : 10}
-            >
-              <TooltipContainer>
-                {props.formatTooltip
-                  ? props.formatTooltip(
-                      tooltipData.bar.data,
-                      tooltipData.key,
-                      tooltipData.color
-                    )
-                  : formatTooltip(
-                      tooltipData.bar.data,
-                      tooltipData.key,
-                      tooltipData.color
-                    )}
-              </TooltipContainer>
-            </TooltipWithBounds>
+            <>
+              <Tooltip
+                data={tooltipData}
+                left={tooltipLeft}
+                top={tooltipTop}
+                formatTooltip={formatTooltip ?? defaultFormatTooltip}
+                bounds={bounds}
+                padding={padding}
+              />
+              <Overlay bounds={bounds} padding={padding}>
+                <DateSpanMarker
+                  width={tooltipData.value.bar.width}
+                  point={{ x: tooltipLeft }}
+                />
+              </Overlay>
+            </>
           )}
         </ResponsiveContainer>
       </Box>
       <Box pl={`${padding.left}px`}>
-        <Legend items={legendaItems} />
+        <Legend items={legendItems} />
       </Box>
     </>
   );
@@ -688,36 +582,6 @@ export function StackedChart<T extends TimestampedValue>(
 function getDate(x: SeriesValue) {
   return x.__date;
 }
-
-/**
- * TooltipContainer from LineChart did not seem to be very compatible with the
- * design for this chart, so this is something to look at later.
- */
-const TooltipContainer = styled.div(
-  css({
-    pointerEvents: 'none',
-    whiteSpace: 'nowrap',
-    minWidth: 72,
-    color: 'body',
-    backgroundColor: 'white',
-    lineHeight: 2,
-    borderColor: 'border',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    px: 2,
-    py: 1,
-    fontSize: 1,
-  })
-);
-
-const Square = styled.span<{ color: string }>((x) =>
-  css({
-    display: 'inline-block',
-    backgroundColor: x.color,
-    width: 15,
-    height: 15,
-  })
-);
 
 function HatchedSquare() {
   return (

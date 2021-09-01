@@ -2,8 +2,7 @@ import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as Close } from '~/assets/close.svg';
-import { ReactComponent as Menu } from '~/assets/menu.svg';
+import { CloseThick, Menu } from '@corona-dashboard/icons';
 import { MaxWidth } from '~/components/max-width';
 import { Anchor } from '~/components/typography';
 import { VisuallyHidden } from '~/components/visually-hidden';
@@ -36,7 +35,7 @@ export function TopNavigation() {
       >
         {collapsible.button(
           <NavToggle>
-            {collapsible.isOpen ? <Close /> : <Menu />}
+            {collapsible.isOpen ? <CloseThick /> : <Menu />}
             <VisuallyHidden>
               {collapsible.isOpen
                 ? siteText.nav.menu.close_menu

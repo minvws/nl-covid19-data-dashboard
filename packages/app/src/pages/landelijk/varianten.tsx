@@ -1,4 +1,4 @@
-import { ReactComponent as Varianten } from '~/assets/varianten.svg';
+import { Varianten } from '@corona-dashboard/icons';
 import { ArticleSummary } from '~/components/article-teaser';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
@@ -115,6 +115,7 @@ export default function CovidVariantenPage(
           />
 
           <VariantsStackedAreaTile
+            text={text.varianten_over_tijd_grafiek}
             values={variantChart}
             metadata={{
               dataSources: [text.bronnen.rivm],

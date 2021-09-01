@@ -2,8 +2,8 @@ import { GmCollectionHospitalNice } from '@corona-dashboard/common';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { Box } from '~/components/base';
-import { Choropleth } from '~/components/choropleth';
 import { TooltipContent } from '~/components/choropleth/tooltips';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, Text } from '~/components/typography';
 import { gmData } from '~/data/gm';
 import { GmComboBox } from '~/domain/layout/components/gm-combo-box';
@@ -18,6 +18,7 @@ import { getLastGeneratedDate } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { DynamicChoropleth } from '../../components/choropleth';
 
 export const getStaticProps = createGetStaticProps(getLastGeneratedDate);
 
@@ -61,39 +62,44 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
 
           <Box
             display="flex"
+            flex="1"
             justifyContent="center"
-            width="100%"
             height="120vw"
             maxWidth={750}
             maxHeight={960}
-            margin="0 auto"
+            flexDirection="column"
+            spacing={3}
           >
-            <Choropleth
-              accessibility={{
-                key: 'municipality_navigation_map',
-                features: ['keyboard_choropleth'],
-              }}
-              map="gm"
-              data={data}
-              minHeight={650}
-              dataConfig={{
-                metricProperty: 'admissions_on_date_of_reporting',
-                areaStroke: colors.blue,
-                areaStrokeWidth: 0.5,
-                hoverFill: colors.blue,
-                hoverStrokeWidth: 0.5,
-                noDataFillColor: colors.white,
-              }}
-              dataOptions={{
-                getLink: reverseRouter.gm.ziekenhuisopnames,
-              }}
-              formatTooltip={(context) => (
-                <TooltipContent
-                  title={context.featureName}
-                  link={reverseRouter.gm.index(context.dataItem.gmcode)}
-                />
-              )}
-            />
+            <ErrorBoundary>
+              <DynamicChoropleth
+                renderTarget="canvas"
+                accessibility={{
+                  key: 'municipality_navigation_map',
+                  features: ['keyboard_choropleth'],
+                }}
+                map="gm"
+                data={data}
+                minHeight={650}
+                dataConfig={{
+                  metricName: 'gemeente' as any,
+                  metricProperty: 'admissions_on_date_of_reporting',
+                  areaStroke: colors.blue,
+                  areaStrokeWidth: 0.5,
+                  hoverFill: colors.blue,
+                  hoverStrokeWidth: 0.5,
+                  noDataFillColor: colors.white,
+                }}
+                dataOptions={{
+                  getLink: reverseRouter.gm.index,
+                }}
+                formatTooltip={(context) => (
+                  <TooltipContent
+                    title={context.featureName}
+                    link={reverseRouter.gm.index(context.dataItem.gmcode)}
+                  />
+                )}
+              />
+            </ErrorBoundary>
           </Box>
         </Box>
       </GmLayout>

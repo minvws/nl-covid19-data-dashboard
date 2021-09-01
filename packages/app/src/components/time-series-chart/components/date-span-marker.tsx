@@ -16,7 +16,7 @@ const Container = styled.div`
 `;
 
 interface DateSpanMarkerProps<T extends TimestampedValue> {
-  point: HoveredPoint<T>;
+  point: HoveredPoint<T> | { x: number };
   width: number;
 }
 

@@ -2,8 +2,8 @@ import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { Test } from '@corona-dashboard/icons';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
@@ -87,7 +87,7 @@ export function VrRow({
                 thresholds={positiveTestedEscalationThresholds}
                 maxValue={maxPositiveTestedPer100k}
                 icon={
-                  <GetestIcon
+                  <Test
                     width="24px"
                     height="24px"
                     style={{ minWidth: '24px' }}

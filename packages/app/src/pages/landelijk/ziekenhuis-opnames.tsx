@@ -1,9 +1,9 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
+import { Ziekenhuis } from '@corona-dashboard/icons';
 import { useState } from 'react';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -164,13 +164,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'gm' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 accessibility={{
                   key: 'hospital_admissions_municipal_choropleth',
                 }}
                 map="gm"
                 data={choropleth.gm.hospital_nice}
                 dataConfig={{
+                  metricName: 'hospital_nice',
                   metricProperty: 'admissions_on_date_of_reporting',
                 }}
                 dataOptions={{
@@ -182,13 +184,15 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               />
             )}
             {selectedMap === 'vr' && (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 accessibility={{
                   key: 'hospital_admissions_region_choropleth',
                 }}
                 map="vr"
                 data={choropleth.vr.hospital_nice}
                 dataConfig={{
+                  metricName: 'hospital_nice',
                   metricProperty: 'admissions_on_date_of_reporting',
                 }}
                 dataOptions={{

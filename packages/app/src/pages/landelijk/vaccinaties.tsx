@@ -1,6 +1,6 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
+import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
-import { ReactComponent as VaccinatiesIcon } from '~/assets/vaccinaties.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -12,12 +12,14 @@ import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selection/select-delivery-and-administration-data';
+import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
+import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
-import { VaccinePageIntroduction } from '~/domain/vaccine/vaccine-page-introduction';
+import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
@@ -31,6 +33,7 @@ import {
   StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
+  createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
   getNlData,
@@ -43,18 +46,18 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData(
-    'vaccine_stock',
-    'vaccine_delivery_per_supplier',
-    'vaccine_coverage_per_age_group',
-    'vaccine_vaccinated_or_support',
-    'vaccine_administered_total',
-    'vaccine_administered_planned',
-    'vaccine_administered_rate_moving_average',
-    'vaccine_administered_ggd',
-    'vaccine_administered_hospitals_and_care_institutions',
     'vaccine_administered_doctors',
     'vaccine_administered_ggd_ghor',
-    'vaccine_coverage'
+    'vaccine_administered_ggd',
+    'vaccine_administered_hospitals_and_care_institutions',
+    'vaccine_administered_planned',
+    'vaccine_administered_rate_moving_average',
+    'vaccine_administered_total',
+    'vaccine_coverage_per_age_group',
+    'vaccine_coverage',
+    'vaccine_delivery_per_supplier',
+    'vaccine_stock',
+    'vaccine_vaccinated_or_support'
   ),
   () => selectDeliveryAndAdministrationData(getNlData().data),
   createGetContent<{
@@ -66,23 +69,30 @@ export const getStaticProps = createGetStaticProps(
       "page": ${getVaccinePageQuery(locale)},
       "highlight": ${createPageArticlesQuery('vaccinationsPage', locale)}
     }`;
+  }),
+  createGetChoroplethData({
+    gm: ({ vaccine_coverage_per_age_group }) =>
+      selectVaccineCoverageData(vaccine_coverage_per_age_group),
+    vr: ({ vaccine_coverage_per_age_group }) =>
+      selectVaccineCoverageData(vaccine_coverage_per_age_group),
   })
 );
 
 const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   const {
     content,
+    choropleth,
     selectedNlData: data,
     lastGenerated,
     deliveryAndAdministration,
   } = props;
 
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
+  const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
 
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
   const { page } = content;
-  const { vaccine_coverage_per_age_group } = data;
 
   const metadata = {
     ...siteText.nationaal_metadata,
@@ -101,7 +111,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
-          <VaccinePageIntroduction data={data} />
+          <VaccinePageIntroductionNl data={data} />
 
           <PageInformationBlock
             description={content.page.pageDescription}
@@ -179,8 +189,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
+          {vaccinationChoroplethFeature.isEnabled && (
+            <VaccineCoverageChoroplethPerGm data={choropleth} />
+          )}
+
           {vaccinationPerAgeGroupFeature.isEnabled &&
-          vaccine_coverage_per_age_group ? (
+          data.vaccine_coverage_per_age_group ? (
             <ChartTile
               title={siteText.vaccinaties.vaccination_coverage.title}
               description={
@@ -188,12 +202,12 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               }
               metadata={{
                 datumsText: text.datums,
-                date: vaccine_coverage_per_age_group.values[0].date_unix,
+                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
                 source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
               }}
             >
               <VaccineCoveragePerAgeGroup
-                values={vaccine_coverage_per_age_group.values}
+                values={data.vaccine_coverage_per_age_group.values}
               />
             </ChartTile>
           ) : null}
@@ -217,7 +231,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             title={text.bereidheid_section.title}
             description={text.bereidheid_section.description}
             referenceLink={text.bereidheid_section.reference.href}
-            icon={<VaccinatiesIcon />}
+            icon={<Vaccinaties />}
             metadata={{
               datumsText: text.bereidheid_datums,
               dateOrRange:
@@ -324,7 +338,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           <PageInformationBlock
             title={text.stock_and_delivery_section.title}
-            icon={<VaccinatiesIcon />}
+            icon={<Vaccinaties />}
             description={text.stock_and_delivery_section.description}
             referenceLink={text.stock_and_delivery_section.reference.href}
             metadata={{

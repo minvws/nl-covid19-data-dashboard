@@ -50,11 +50,11 @@ export function useScales<T extends TimestampedValue>(args: {
         xScale: scaleLinear({
           domain: [start, end],
           range: [0, bounds.width],
-        }),
+        }) as ScaleLinear<number, number>,
         yScale: scaleLinear({
           domain: [yMin, yMax],
           range: [bounds.height, 0],
-        }),
+        }) as ScaleLinear<number, number>,
         getX: (_x: SeriesItem) => 0,
         getY: (_x: SeriesSingleValue) => 0,
         getY0: (_x: SeriesDoubleValue) => 0,
@@ -75,7 +75,7 @@ export function useScales<T extends TimestampedValue>(args: {
      * In that particular case calling yScale(0) will return the (bounds.height / 2), instead of just bounds.height.
      * A work-around turns out to be setting the max value to Infinity.
      */
-    const maximumDomainValue = maximumValue > 0 ? maximumValue : Infinity;
+    const maximumDomainValue = maximumValue > 0 ? maximumValue : 10;
     const yScale = scaleLinear({
       domain: [yMin, maximumValue > 0 ? maximumValue : maximumDomainValue],
       range: [bounds.height, 0],

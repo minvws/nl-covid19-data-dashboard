@@ -1,7 +1,7 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { ReactComponent as IconGelijk } from '~/assets/gelijk.svg';
-import { ReactComponent as IconUp } from '~/assets/pijl-omhoog.svg';
-import { ReactComponent as IconDown } from '~/assets/pijl-omlaag.svg';
+import { Gelijk } from '@corona-dashboard/icons';
+import { Up } from '@corona-dashboard/icons';
+import { Down } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
@@ -9,17 +9,20 @@ import { Container, IconContainer } from './containers';
 export function TileDifference({
   value,
   isDecimal,
-  staticTimespan,
   maximumFractionDigits,
   isPercentage,
+  showOldDateUnix,
+  hasHigherLowerText,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   maximumFractionDigits?: number;
-  staticTimespan?: string;
   isPercentage?: boolean;
+  showOldDateUnix?: boolean;
+  hasHigherLowerText?: boolean;
 }) {
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+    useIntl();
   const text = siteText.toe_en_afname;
 
   const { difference } = value;
@@ -31,15 +34,19 @@ export function TileDifference({
       )
     : formatNumber(Math.abs(difference));
 
-  const timespanTextNode = staticTimespan ?? text.vorige_waarde;
+  const timespanTextNode = showOldDateUnix
+    ? formatDateFromSeconds(value.old_date_unix)
+    : text.vorige_waarde;
 
   if (difference > 0) {
-    const splitText = text.toename.split(' ');
+    const splitText = hasHigherLowerText
+      ? text.hoger.split(' ')
+      : text.toename.split(' ');
 
     return (
       <Container>
         <IconContainer color="red" mr={1}>
-          <IconUp />
+          <Up />
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString}
@@ -53,12 +60,14 @@ export function TileDifference({
   }
 
   if (difference < 0) {
-    const splitText = text.afname.split(' ');
+    const splitText = hasHigherLowerText
+      ? text.lager.split(' ')
+      : text.afname.split(' ');
 
     return (
       <Container>
         <IconContainer color="data.primary" mr={1}>
-          <IconDown />
+          <Down />
         </IconContainer>
         <InlineText fontWeight="bold">
           {differenceFormattedString}
@@ -74,7 +83,7 @@ export function TileDifference({
   return (
     <Container>
       <IconContainer color="data.neutral" mr={1}>
-        <IconGelijk />
+        <Gelijk />
       </IconContainer>
       <InlineText>
         {text.gelijk}

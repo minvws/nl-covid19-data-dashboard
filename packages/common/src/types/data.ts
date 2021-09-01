@@ -17,6 +17,7 @@ export interface Gm {
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
   vaccine_coverage?: GmVaccineCoverage;
+  vaccine_coverage_per_age_group: GmVaccineCoveragePerAgeGroup;
 }
 export interface GmStaticValues {
   population_count: number;
@@ -111,6 +112,19 @@ export interface GmVaccineCoverageValue {
   date_end_unix: number;
   date_of_insertion_unix: number;
 }
+export interface GmVaccineCoveragePerAgeGroup {
+  values: GmVaccineCoveragePerAgeGroupValue[];
+}
+export interface GmVaccineCoveragePerAgeGroupValue {
+  age_group_range: "12+" | "12-17" | "18+";
+  fully_vaccinated_percentage: number | null;
+  has_1_shot_percentage: number | null;
+  birthyear_range: string;
+  fully_vaccinated_percentage_label: string | null;
+  has_1_shot_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface GmCollection {
   last_generated: string;
@@ -120,6 +134,7 @@ export interface GmCollection {
   hospital_nice: GmCollectionHospitalNice[];
   tested_overall: GmCollectionTestedOverall[];
   sewer: GmCollectionSewer[];
+  vaccine_coverage_per_age_group: GmCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface GmCollectionHospitalNice {
   date_unix: number;
@@ -141,6 +156,15 @@ export interface GmCollectionSewer {
   gmcode: string;
   average: number;
   total_installation_count: number;
+  date_of_insertion_unix: number;
+}
+export interface GmCollectionVaccineCoveragePerAgeGroup {
+  gmcode: string;
+  age_group_range: "12+" | "12-17" | "18+";
+  fully_vaccinated_percentage: number | null;
+  birthyear_range: string;
+  fully_vaccinated_percentage_label: string | null;
+  date_unix: number;
   date_of_insertion_unix: number;
 }
 
@@ -843,7 +867,7 @@ export interface NlVaccineCoveragePerAgeGroup {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 export interface NlVaccineCoveragePerAgeGroupValue {
-  age_group_range: "12+" | "18+" | "12-17" | "18-29" | "30-39" | "40-49" | "50-59" | "65-69" | "70-79" | "80+";
+  age_group_range: "12-17" | "18-30" | "31-40" | "41-50" | "51-60" | "61-70" | "71-80" | "81+";
   age_group_percentage: number;
   age_group_total: number;
   fully_vaccinated: number;
@@ -854,6 +878,7 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   date_unix: number;
   date_of_insertion_unix: number;
   date_of_report_unix: number;
+  birthyear_range: string;
 }
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];
@@ -919,6 +944,7 @@ export interface Vr {
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
   situations: VrSituations;
+  vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1202,6 +1228,19 @@ export interface VrSituationsValue {
   hospitality: number | null;
   other: number | null;
 }
+export interface VrVaccineCoveragePerAgeGroup {
+  values: VrVaccineCoveragePerAgeGroupValue[];
+}
+export interface VrVaccineCoveragePerAgeGroupValue {
+  age_group_range: "12+" | "12-17" | "18+";
+  fully_vaccinated_percentage: number | null;
+  has_1_shot_percentage: number | null;
+  birthyear_range: string;
+  fully_vaccinated_percentage_label: string | null;
+  has_1_shot_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 
 export interface VrCollection {
   last_generated: string;
@@ -1217,6 +1256,7 @@ export interface VrCollection {
   disability_care: VrCollectionDisabilityCare[];
   elderly_at_home: VrCollectionElderlyAtHome[];
   situations: VrCollectionSituations[];
+  vaccine_coverage_per_age_group: VrCollectionVaccineCoveragePerAgeGroup[];
 }
 export interface VrCollectionHospitalNice {
   date_unix: number;
@@ -1333,4 +1373,13 @@ export interface VrCollectionSituations {
   travel: number | null;
   hospitality: number | null;
   other: number | null;
+}
+export interface VrCollectionVaccineCoveragePerAgeGroup {
+  vrcode: string;
+  age_group_range: "12+" | "12-17" | "18+";
+  fully_vaccinated_percentage: number | null;
+  birthyear_range: string;
+  fully_vaccinated_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
 }

@@ -1,10 +1,9 @@
 import { VrCollectionSituations } from '@corona-dashboard/common';
+import { Check, Cross } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
-import { ReactComponent as Check } from '~/assets/check.svg';
-import { ReactComponent as Cross } from '~/assets/cross.svg';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Markdown } from '~/components/markdown';
 import { Text } from '~/components/typography';
@@ -91,13 +90,15 @@ export function SituationsDataCoverageChoroplethTile({
         >
           <Box height="100%">
             <ErrorBoundary>
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 accessibility={{
                   key: 'situations_has_sufficient_data_choropleth',
                 }}
                 map="vr"
                 data={data.situations}
                 dataConfig={{
+                  metricName: 'situations',
                   metricProperty: 'has_sufficient_data',
                 }}
                 dataOptions={{
@@ -117,8 +118,6 @@ export function SituationsDataCoverageChoroplethTile({
     </ChartTile>
   );
 }
-
-// <SituationsDataCoverageTooltip context={context} />
 
 function LegendItem({
   color,

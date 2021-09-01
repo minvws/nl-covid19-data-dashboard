@@ -1,14 +1,18 @@
 import { Vr } from '@corona-dashboard/common';
+import {
+  Coronavirus,
+  Elderly,
+  Gedrag,
+  GehandicaptenZorg,
+  RioolwaterMonitoring,
+  Test,
+  Vaccinaties,
+  Verpleeghuiszorg,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
-import { ReactComponent as Gedrag } from '~/assets/gedrag.svg';
-import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
-import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { isDefined } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,
@@ -21,7 +25,9 @@ import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
+import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { EscalationLevel } from '../restrictions/types';
@@ -40,6 +46,7 @@ export const vrPageMetricNames = [
   'sewer',
   'behavior',
   'difference',
+  'vaccine_coverage_per_age_group',
 ] as const;
 
 export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
@@ -85,9 +92,20 @@ type VrLayoutProps = {
 export function VrLayout(props: VrLayoutProps) {
   const { children, data, vrName } = props;
 
+  if (isDefined(data)) {
+    data.difference.sewer__average.difference = Math.round(
+      data.difference.sewer__average.difference
+    );
+    data.difference.sewer__average.old_value = Math.round(
+      data.difference.sewer__average.old_value
+    );
+    data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
+  }
+
   const router = useRouter();
   const reverseRouter = useReverseRouter();
   const { siteText } = useIntl();
+  const vaccinationFeature = useFeature('vrVaccinationPage');
 
   const code = router.query.code as string;
 
@@ -178,6 +196,30 @@ export function VrLayout(props: VrLayoutProps) {
                     </MetricMenuButtonLink>
                   </Box>
 
+                  {vaccinationFeature.isEnabled &&
+                    data.vaccine_coverage_per_age_group && (
+                      <CategoryMenu
+                        title={
+                          siteText.veiligheidsregio_layout.headings.vaccinaties
+                        }
+                      >
+                        <MetricMenuItemLink
+                          href={reverseRouter.vr.vaccinaties(code)}
+                          icon={<Vaccinaties />}
+                          title={
+                            siteText.veiligheidsregio_vaccinaties.titel_sidebar
+                          }
+                        >
+                          <VaccineSidebarMetricVrGm
+                            data={data.vaccine_coverage_per_age_group.values}
+                            description={
+                              siteText.veiligheidsregio_vaccinaties.titel_kpi
+                            }
+                          />
+                        </MetricMenuItemLink>
+                      </CategoryMenu>
+                    )}
+
                   <CategoryMenu
                     title={
                       siteText.veiligheidsregio_layout.headings.ziekenhuizen
@@ -209,7 +251,7 @@ export function VrLayout(props: VrLayoutProps) {
                   >
                     <MetricMenuItemLink
                       href={reverseRouter.vr.positiefGetesteMensen(code)}
-                      icon={<GetestIcon />}
+                      icon={<Test />}
                       title={
                         siteText.veiligheidsregio_positief_geteste_personen
                           .titel_sidebar
@@ -232,7 +274,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.sterfte(code)}
-                      icon={<CoronavirusIcon />}
+                      icon={<Coronavirus />}
                       title={siteText.veiligheidsregio_sterfte.titel_sidebar}
                     >
                       <SidebarMetric
@@ -304,7 +346,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.gehandicaptenzorg(code)}
-                      icon={<Gehandicaptenzorg />}
+                      icon={<GehandicaptenZorg />}
                       title={
                         siteText.gehandicaptenzorg_besmette_locaties
                           .titel_sidebar
@@ -322,7 +364,7 @@ export function VrLayout(props: VrLayoutProps) {
 
                     <MetricMenuItemLink
                       href={reverseRouter.vr.thuiswonendeOuderen(code)}
-                      icon={<ElderlyIcon />}
+                      icon={<Elderly />}
                       title={
                         siteText.veiligheidsregio_thuiswonende_ouderen
                           .titel_sidebar

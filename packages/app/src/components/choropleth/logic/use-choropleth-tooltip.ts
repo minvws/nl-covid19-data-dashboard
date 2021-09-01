@@ -18,6 +18,12 @@ import { isCodedValueType } from './utils';
  */
 const DEFAULT_TOOLTIP_OFFSET = 5;
 
+export type ChoroplethTooltipHandlers = [
+  ReturnType<typeof createFeatureMouseOverHandler>,
+  ReturnType<typeof createFeatureMouseOutHandler>,
+  ReturnType<typeof createTooltipTrigger>
+];
+
 export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   map: MapType,
   data: T[],
@@ -64,16 +70,19 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
     }
 
     const container = containerRef.current;
+    if (!isPresent(container)) {
+      return;
+    }
 
-    function handleBubbledFocusIn(event: FocusEvent) {
+    function handleBubbledFocusIn(event: FocusEvent): any {
       const link = event.target as HTMLAnchorElement;
-      if (!container || !link) {
+      if (!isDefined(link)) {
         return;
       }
 
       const code = link.getAttribute('data-id');
 
-      if (isPresent(code)) {
+      if (isPresent(code) && isPresent(container)) {
         const bboxContainer = container.getBoundingClientRect();
         const bboxLink = link.getBoundingClientRect();
         const left = bboxLink.left - bboxContainer.left;
@@ -105,12 +114,12 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
     /**
      * `focusin` and `focusout` events bubble whereas `focus` doesn't
      */
-    container?.addEventListener('focusin', handleBubbledFocusIn);
-    container?.addEventListener('focusout', handleBubbledFocusOut);
+    container.addEventListener('focusin', handleBubbledFocusIn);
+    container.addEventListener('focusout', handleBubbledFocusOut);
 
     return () => {
-      container?.removeEventListener('focusin', handleBubbledFocusIn);
-      container?.removeEventListener('focusout', handleBubbledFocusOut);
+      container.removeEventListener('focusin', handleBubbledFocusIn);
+      container.removeEventListener('focusout', handleBubbledFocusOut);
     };
   }, [
     containerRef,
@@ -127,7 +136,7 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
   ]);
 
   return [
-    createSvgMouseOverHandler(
+    createFeatureMouseOverHandler(
       timeout,
       setTooltip,
       containerRef,
@@ -139,11 +148,56 @@ export function useChoroplethTooltip<T extends ChoroplethDataItem>(
       map,
       metricPropertyFormatter
     ),
-    createSvgMouseOutHandler(timeout, setTooltip, isTouch),
-  ] as const;
+    createFeatureMouseOutHandler(timeout, setTooltip, isTouch),
+    createTooltipTrigger(
+      setTooltip,
+      getItemByCode,
+      dataConfig,
+      dataOptions,
+      threshold,
+      getFeatureName,
+      map,
+      metricPropertyFormatter
+    ),
+  ] as ChoroplethTooltipHandlers;
 }
 
-const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
+type HoverInfo = { code: string; x: number; y: number };
+
+const createTooltipTrigger = <T extends ChoroplethDataItem>(
+  setTooltip: (settings: TooltipSettings<T> | undefined) => void,
+  getItemByCode: (code: string) => T,
+  dataConfig: DataConfig<T>,
+  dataOptions: DataOptions,
+  threshold: ChoroplethThresholdsValue[],
+  getFeatureName: (code: string) => string,
+  map: MapType,
+  metricPropertyFormatter: (value: number) => string
+) => {
+  return (hoverInfo?: HoverInfo) => {
+    if (!isDefined(hoverInfo)) {
+      return setTooltip(undefined);
+    }
+
+    const { code, x, y } = hoverInfo;
+    setTooltip({
+      left: x,
+      top: y,
+      data: {
+        code,
+        dataItem: getItemByCode(code),
+        dataConfig,
+        dataOptions,
+        thresholdValues: threshold,
+        featureName: getFeatureName(code),
+        metricPropertyFormatter,
+        map,
+      },
+    });
+  };
+};
+
+const createFeatureMouseOverHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
   ref: RefObject<HTMLElement>,
@@ -155,8 +209,8 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
   map: MapType,
   metricPropertyFormatter: (value: number) => string
 ) => {
-  return (event: React.MouseEvent) => {
-    const elm = event.target as HTMLElement | SVGElement;
+  return (event: React.MouseEvent<HTMLElement | SVGElement>) => {
+    const elm = event.target as HTMLElement;
     const code = elm.getAttribute('data-id');
 
     if (isPresent(code) && ref.current) {
@@ -190,7 +244,7 @@ const createSvgMouseOverHandler = <T extends ChoroplethDataItem>(
   };
 };
 
-const createSvgMouseOutHandler = <T extends ChoroplethDataItem>(
+const createFeatureMouseOutHandler = <T extends ChoroplethDataItem>(
   timeout: MutableRefObject<number>,
   setTooltip: (settings: TooltipSettings<T> | undefined) => void,
   isTouch: boolean

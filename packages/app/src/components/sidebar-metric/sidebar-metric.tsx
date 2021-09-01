@@ -138,9 +138,10 @@ export function SidebarMetric<T extends { difference: unknown }>({
             });
     }
   } catch (err) {
-    throw new Error(
-      `Failed to format description for ${metricName}:${metricProperty}, likely due to a timestamp week/day configuration mismatch. Error: ${err.message}`
-    );
+    if (err instanceof Error)
+      throw new Error(
+        `Failed to format description for ${metricName}:${metricProperty}, likely due to a timestamp week/day configuration mismatch. Error: ${err.message}`
+      );
   }
 
   const differenceValue = differenceKey

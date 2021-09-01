@@ -1,8 +1,7 @@
+import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
 import { useState } from 'react';
-import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
 import { RegionControlOption } from '~/components/chart-region-controls';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -35,10 +34,37 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectNlPageMetricData(),
+  () => {
+    const data = selectNlPageMetricData()();
+    data.selectedNlData.sewer.values = data.selectedNlData.sewer.values.map(
+      (x) => ({
+        ...x,
+        average: Math.round(x.average),
+      })
+    );
+    data.selectedNlData.sewer.last_value = {
+      ...data.selectedNlData.sewer.last_value,
+      average: Math.round(data.selectedNlData.sewer.last_value.average),
+    };
+    data.selectedNlData.difference.sewer__average.difference = Math.round(
+      data.selectedNlData.difference.sewer__average.difference
+    );
+
+    return data;
+  },
   createGetChoroplethData({
-    vr: ({ sewer }) => ({ sewer }),
-    gm: ({ sewer }) => ({ sewer }),
+    vr: ({ sewer }) => {
+      const roundedSewer = sewer.map((x) => {
+        return { ...x, average: Math.round(x.average) };
+      });
+      return { sewer: roundedSewer };
+    },
+    gm: ({ sewer }) => {
+      const roundedSewer = sewer.map((x) => {
+        return { ...x, average: Math.round(x.average) };
+      });
+      return { sewer: roundedSewer };
+    },
   }),
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
@@ -86,7 +112,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
+          <WarningTile message={text.warning_method} icon={Experimenteel} />
 
           <TwoKpiSection>
             <KpiTile
@@ -172,13 +198,15 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             }}
           >
             {selectedMap === 'gm' ? (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="gm"
                 accessibility={{
                   key: 'sewer_municipal_choropleth',
                 }}
                 data={choropleth.gm.sewer}
                 dataConfig={{
+                  metricName: 'sewer',
                   metricProperty: 'average',
                 }}
                 dataOptions={{
@@ -186,13 +214,15 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
                 }}
               />
             ) : (
-              <Choropleth
+              <DynamicChoropleth
+                renderTarget="canvas"
                 map="vr"
                 accessibility={{
                   key: 'sewer_region_choropleth',
                 }}
                 data={choropleth.vr.sewer}
                 dataConfig={{
+                  metricName: 'sewer',
                   metricProperty: 'average',
                 }}
                 dataOptions={{
