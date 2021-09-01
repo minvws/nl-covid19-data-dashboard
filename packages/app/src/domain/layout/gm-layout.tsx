@@ -20,6 +20,7 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
+import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
@@ -32,6 +33,10 @@ export type GmSideBarData = {
   deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
   hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
   sewer: Pick<Gm['sewer'], 'last_value'>;
+  vaccine_coverage_per_age_group: Pick<
+    Gm['vaccine_coverage_per_age_group'],
+    'values'
+  >;
 };
 
 type GmLayoutProps = {
@@ -152,7 +157,7 @@ export function GmLayout(props: GmLayoutProps) {
                 </Box>
 
                 <Menu spacing={4}>
-                  {sidebarData && (
+                  {sidebarData && data?.vaccine_coverage_per_age_group && (
                     <>
                       {vaccinationFeature.isEnabled && (
                         <CategoryMenu
@@ -163,9 +168,12 @@ export function GmLayout(props: GmLayoutProps) {
                             icon={<Vaccinaties />}
                             title={siteText.gemeente_vaccinaties.titel_sidebar}
                           >
-                            {
-                              // @TODO add vaccine sidebar metric once the data is avaliable
-                            }
+                            <VaccineSidebarMetricVrGm
+                              data={data.vaccine_coverage_per_age_group.values}
+                              description={
+                                siteText.gemeente_vaccinaties.titel_kpi
+                              }
+                            />
                           </MetricMenuItemLink>
                         </CategoryMenu>
                       )}

@@ -25,6 +25,7 @@ import { EscalationLevelInfoLabel } from '~/components/escalation-level';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
+import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { SituationsSidebarValue } from '~/static-props/situations/get-situations-sidebar-value';
@@ -45,6 +46,7 @@ export const vrPageMetricNames = [
   'sewer',
   'behavior',
   'difference',
+  'vaccine_coverage_per_age_group',
 ] as const;
 
 export type VrRegionPageMetricNames = typeof vrPageMetricNames[number];
@@ -194,25 +196,29 @@ export function VrLayout(props: VrLayoutProps) {
                     </MetricMenuButtonLink>
                   </Box>
 
-                  {vaccinationFeature.isEnabled && (
-                    <CategoryMenu
-                      title={
-                        siteText.veiligheidsregio_layout.headings.vaccinaties
-                      }
-                    >
-                      <MetricMenuItemLink
-                        href={reverseRouter.vr.vaccinaties(code)}
-                        icon={<Vaccinaties />}
+                  {vaccinationFeature.isEnabled &&
+                    data.vaccine_coverage_per_age_group && (
+                      <CategoryMenu
                         title={
-                          siteText.veiligheidsregio_vaccinaties.titel_sidebar
+                          siteText.veiligheidsregio_layout.headings.vaccinaties
                         }
                       >
-                        {
-                          // @TODO add vaccine sidebar metric once the data is avaliable
-                        }
-                      </MetricMenuItemLink>
-                    </CategoryMenu>
-                  )}
+                        <MetricMenuItemLink
+                          href={reverseRouter.vr.vaccinaties(code)}
+                          icon={<Vaccinaties />}
+                          title={
+                            siteText.veiligheidsregio_vaccinaties.titel_sidebar
+                          }
+                        >
+                          <VaccineSidebarMetricVrGm
+                            data={data.vaccine_coverage_per_age_group.values}
+                            description={
+                              siteText.veiligheidsregio_vaccinaties.titel_kpi
+                            }
+                          />
+                        </MetricMenuItemLink>
+                      </CategoryMenu>
+                    )}
 
                   <CategoryMenu
                     title={

@@ -1,3 +1,4 @@
+import { VrVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { hasValueAtKey, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -15,7 +16,7 @@ import {
 } from '~/domain/vaccine/components/age-group-select';
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
-import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-per-municipality';
+import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-per-gm';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
@@ -96,6 +97,13 @@ export const VaccinationsVrPage = (
     }),
   };
 
+  /**
+   * Filter out only the the 18 plus value to show in the sidebar
+   */
+  const filteredAgeGroup = data.vaccine_coverage_per_age_group.values.filter(
+    (item) => item.age_group_range === '18+'
+  )[0] as VrVaccineCoveragePerAgeGroupValue;
+
   const gmCodes = gmCodesByVrCode[data.code];
   const selectedGmCode = gmCodes ? gmCodes[0] : undefined;
 
@@ -109,15 +117,15 @@ export const VaccinationsVrPage = (
             })}
             description={text.introductie_sectie.beschrijving}
             kpiTitle={text.introductie_sectie.kpi_titel}
-            kpiValue={9999999}
+            data={filteredAgeGroup}
           />
 
           <PageInformationBlock
             description={text.informatie_blok.beschrijving}
             metadata={{
               datumsText: text.informatie_blok.datums,
-              dateOrRange: 1629798465,
-              dateOfInsertionUnix: 1629798465,
+              dateOrRange: filteredAgeGroup.date_unix,
+              dateOfInsertionUnix: filteredAgeGroup.date_of_insertion_unix,
               dataSources: [],
             }}
             usefulLinks={content.page.usefulLinks}

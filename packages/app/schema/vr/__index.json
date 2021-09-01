@@ -23,7 +23,8 @@
     "tested_overall_sum",
     "hospital_nice_sum",
     "g_number",
-    "situations"
+    "situations",
+    "vaccine_coverage_per_age_group"
   ],
   "additionalProperties": false,
   "properties": {
