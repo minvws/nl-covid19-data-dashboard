@@ -45,13 +45,7 @@ export function createPageArticlesQuery(
       },
       "linkLists": *[_type=='articlePageLinks' && references(^._id)] {
         links []->{
-          "title":title.${locale},
-          slug,
-          "summary":summary.${locale},
-          "cover": {
-            ...cover,
-            "asset": cover.asset->
-          }
+          ...
         }
       }
     }[0]`;

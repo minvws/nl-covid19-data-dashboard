@@ -93,6 +93,8 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     description: text.metadata.description,
   };
 
+  console.log(content);
+
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout data={data} lastGenerated={lastGenerated}>
