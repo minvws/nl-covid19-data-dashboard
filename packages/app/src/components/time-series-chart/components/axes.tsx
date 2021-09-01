@@ -43,6 +43,7 @@ type AxesProps = {
   yAxisRef?: Ref<SVGGElement>;
   yTickValues?: number[];
   timeDomain: [number, number];
+  xTickNumber?: number;
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -93,6 +94,7 @@ export const Axes = memo(function Axes({
   timeframe,
   yTickValues,
   timeDomain,
+  xTickNumber,
   formatYTickValue,
   yAxisRef,
   isYAxisCollapsed,
@@ -124,7 +126,8 @@ export const Axes = memo(function Axes({
     [formatPercentage]
   );
 
-  const xTickNumber = breakpoints.sm ? (timeframe === 'all' ? 6 : 5) : 3;
+  xTickNumber =
+    xTickNumber ?? (breakpoints.sm ? (timeframe === 'all' ? 6 : 5) : 3);
   const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
 
   const formatXAxis = useCallback(
