@@ -1,6 +1,6 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { ReactComponent as IconUp } from '~/assets/pijl-omhoog.svg';
-import { ReactComponent as IconDown } from '~/assets/pijl-omlaag.svg';
+import { Up } from '@corona-dashboard/icons';
+import { Down } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
@@ -18,7 +18,7 @@ export function InlineDifference({
       <Container>
         <InlineText fontWeight="bold">{text.trend_hoger}</InlineText>
         <IconContainer color="red">
-          <IconUp />
+          <Up />
         </IconContainer>
       </Container>
     );
@@ -27,7 +27,7 @@ export function InlineDifference({
       <Container>
         <InlineText fontWeight="bold">{text.trend_lager}</InlineText>
         <IconContainer color="data.primary">
-          <IconDown />
+          <Down />
         </IconContainer>
       </Container>
     );

@@ -1,9 +1,11 @@
-import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
-import { ReactComponent as Gehandicaptenzorg } from '~/assets/gehandicapte-zorg.svg';
-import { ReactComponent as Locatie } from '~/assets/locaties.svg';
+import {
+  Coronavirus,
+  GehandicaptenZorg,
+  Locatie,
+} from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -75,7 +77,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               siteText.verpleeghuis_positief_geteste_personen.titel_sidebar
             }
             title={positiveTestedPeopleText.titel}
-            icon={<Gehandicaptenzorg />}
+            icon={<GehandicaptenZorg />}
             description={positiveTestedPeopleText.pagina_toelichting}
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
@@ -217,13 +219,15 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="vr"
               accessibility={{
                 key: 'disability_care_infected_people_choropleth',
               }}
               data={choropleth.vr.disability_care}
               dataConfig={{
+                metricName: 'disability_care',
                 metricProperty: 'infected_locations_percentage',
               }}
               dataOptions={{
@@ -264,7 +268,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             id="sterfte"
             title={locationDeaths.titel}
-            icon={<CoronaVirus />}
+            icon={<Coronavirus />}
             description={locationDeaths.pagina_toelichting}
             metadata={{
               datumsText: locationDeaths.datums,

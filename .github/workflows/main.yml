@@ -45,6 +45,8 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install packages
         run: yarn install
+      - name: Build icon package
+        run: yarn workspace @corona-dashboard/icons build
       - name: Build common module
         run: yarn workspace @corona-dashboard/common build
       - name: Export texts (develop)
@@ -53,8 +55,8 @@ jobs:
       - name: Export texts (production)
         if: ${{ env.BRANCH_NAME == 'master' }}
         run: yarn workspace @corona-dashboard/cms lokalize:export --dataset="production" --clean-json
-      - name: Compile all code
-        run: yarn compile
+      - name: Typecheck all code
+        run: yarn typecheck
 
   test:
     runs-on: ubuntu-latest

@@ -14,7 +14,8 @@ import {
 import { PatchEvent, set, unset } from 'part:@sanity/form-builder/patch-event';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
-import { RestrictionIcon, restrictionIcons } from './icons';
+import { restrictionIcons, RestrictionIcon } from './icons';
+import { Icon as TIcon } from '@corona-dashboard/icons';
 
 function createPatchFrom(value: string) {
   return PatchEvent.from(value === '' ? unset() : set(String(value)));
@@ -36,7 +37,9 @@ export function Icon(props: IconProps) {
 
   var allIcons = Object.entries(restrictionIcons)
     // hide empty icons
-    .filter((entry) => entry[1]) as [RestrictionIcon, string][];
+    .filter((entry) => entry[1]) as [string, TIcon][];
+
+  const TheIcon = restrictionIcons[value] as TIcon;
 
   return (
     <ThemeProvider theme={studioTheme}>
@@ -48,11 +51,7 @@ export function Icon(props: IconProps) {
           <Text>Er is geen icoon geselecteerd</Text>
         ) : (
           <Box>
-            <img
-              src={restrictionIcons[value] || undefined}
-              width="36"
-              height="36"
-            />
+            <TheIcon />
           </Box>
         )}
 
@@ -69,14 +68,14 @@ export function Icon(props: IconProps) {
         >
           <Box padding={4}>
             <Grid columns={[4, 6]} gap={[1, 1, 2, 3]}>
-              {allIcons.map(([id, src]) => (
+              {allIcons.map(([id, GridIcon]) => (
                 <Flex
                   key={id}
                   direction="column"
                   align="center"
-                  onClick={(event) => onChange(createPatchFrom(id))}
+                  onClick={() => onChange(createPatchFrom(id))}
                 >
-                  <img src={src} width="36" height="36" />
+                  <GridIcon />
                   <Radio checked={value === id} readOnly />
                 </Flex>
               ))}

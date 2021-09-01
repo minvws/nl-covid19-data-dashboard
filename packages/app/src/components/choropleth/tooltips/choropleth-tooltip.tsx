@@ -16,7 +16,16 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
   props: ChoroplethDataItemProps<T>
 ) {
   const { data } = props;
-  const { siteText } = useIntl();
+  const {
+    siteText,
+    formatNumber,
+    formatPercentage,
+    formatDate,
+    formatDateFromSeconds,
+    formatDateFromMilliseconds,
+    formatRelativeDate,
+    formatDateSpan,
+  } = useIntl();
 
   const text = siteText.choropleth_tooltip;
 
@@ -32,7 +41,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     text as unknown as Record<string, Record<string, Record<string, string>>>
   )[data.map]?.[data.dataConfig.metricProperty as string]?.content;
   assert(
-    isDefined(subject),
+    isDefined(tooltipContent),
     `No tooltip content found in siteText.choropleth_tooltip.${data.map}.${data.dataConfig.metricProperty}`
   );
 
@@ -51,12 +60,20 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       }
     >
       <TooltipSubject
-        subject={subject}
+        subject={replaceVariablesInText(subject, tooltipVars)}
         thresholdValues={data.thresholdValues}
         filterBelow={data.dataItem[data.dataConfig.metricProperty]}
       >
         <Markdown
-          content={replaceVariablesInText(tooltipContent, tooltipVars)}
+          content={replaceVariablesInText(tooltipContent, tooltipVars, {
+            formatNumber,
+            formatPercentage,
+            formatDate,
+            formatDateFromSeconds,
+            formatDateFromMilliseconds,
+            formatRelativeDate,
+            formatDateSpan,
+          })}
         />
       </TooltipSubject>
     </TooltipContent>

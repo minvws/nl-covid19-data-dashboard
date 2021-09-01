@@ -16,15 +16,18 @@
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.1",
     "ts-morph": "^11.0.0",
-    "ts-node": "^10.2.0"
+    "ts-node": "^10.2.1"
   },
   "scripts": {
+    "bootstrap": "echo 'No bootstrap command available for @corona-dashboard/cli'",
+    "clean": "echo 'No clean command available for @corona-dashboard/cli'",
+    "nuke": "yarn clean && npx rimraf node_modules",
     "build": "echo 'No build available because @corona-dashboard/cli is not meant for direct consumption'",
     "test": "echo 'No tests available for @corona-dashboard/cli'",
     "test:ci": "echo 'No tests available for @corona-dashboard/cli'",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\"",
     "lint": "echo 'No linter configured for @corona-dashboard/cli'",
-    "compile": "tsc --noEmit",
+    "typecheck": "tsc --pretty --noEmit",
     "calculate-boundingboxes": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/calculate-bounding-box-municipalities.ts",
     "validate-json": "yarn workspace @corona-dashboard/common build && yarn run validate-json-all",
     "validate-json-all": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-all.ts",
@@ -36,6 +39,7 @@
   },
   "devDependencies": {
     "@types/meow": "^5.0.0",
-    "@types/topojson-client": "^3.1.0"
+    "@types/topojson-client": "^3.1.0",
+    "typescript": "^4.4.2"
   }
 }

@@ -1,6 +1,6 @@
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { Test } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleContent } from '~/components/collapsible';
@@ -107,7 +107,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.titel, {
               municipality: municipalityName,
             })}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
@@ -253,13 +253,15 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               source: text.bronnen.rivm,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="gm"
               accessibility={{
                 key: 'confirmed_cases_choropleth',
               }}
               data={choropleth.gm.tested_overall}
               dataConfig={{
+                metricName: 'tested_overall',
                 metricProperty: 'infected_per_100k',
               }}
               dataOptions={{

@@ -1,11 +1,15 @@
 import { Gm, GmDifference } from '@corona-dashboard/common';
+import {
+  Coronavirus,
+  RioolwaterMonitoring,
+  Test,
+  Vaccinaties,
+  Ziekenhuis,
+} from '@corona-dashboard/icons';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import { ReactComponent as CoronavirusIcon } from '~/assets/coronavirus.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as Ziekenhuis } from '~/assets/ziekenhuis.svg';
+import { isDefined } from 'ts-is-present';
 import {
   CategoryMenu,
   Menu,
@@ -16,7 +20,9 @@ import { ErrorBoundary } from '~/components/error-boundary';
 import { AppContent } from '~/components/layout/app-content';
 import { SidebarMetric } from '~/components/sidebar-metric';
 import { Text } from '~/components/typography';
+import { VaccineSidebarMetricVrGm } from '~/domain/vaccine/vaccine-sidebar-metric-vr-gm';
 import { useIntl } from '~/intl';
+import { useFeature } from '~/lib/features';
 import { getVrForMunicipalityCode } from '~/utils/get-vr-for-municipality-code';
 import { Link } from '~/utils/link';
 import { useReverseRouter } from '~/utils/use-reverse-router';
@@ -27,6 +33,10 @@ export type GmSideBarData = {
   deceased_rivm: Pick<Gm['deceased_rivm'], 'last_value'>;
   hospital_nice: Pick<Gm['hospital_nice'], 'last_value'>;
   sewer: Pick<Gm['sewer'], 'last_value'>;
+  vaccine_coverage_per_age_group: Pick<
+    Gm['vaccine_coverage_per_age_group'],
+    'values'
+  >;
 };
 
 type GmLayoutProps = {
@@ -69,14 +79,25 @@ type GmLayoutProps = {
  */
 export function GmLayout(props: GmLayoutProps) {
   const { children, data, municipalityName, code, difference } = props;
-  const sidebarData = useMemo(
-    () => ({ ...data, difference }),
-    [data, difference]
-  );
+  const sidebarData = useMemo(() => {
+    if (isDefined(difference) && isDefined(difference.sewer__average)) {
+      difference.sewer__average.difference = Math.round(
+        difference.sewer__average.difference
+      );
+      difference.sewer__average.old_value = Math.round(
+        difference.sewer__average.old_value
+      );
+    }
+    if (isDefined(data)) {
+      data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
+    }
+    return { ...data, difference };
+  }, [data, difference]);
 
   const { siteText } = useIntl();
   const router = useRouter();
   const reverseRouter = useReverseRouter();
+  const vaccinationFeature = useFeature('gmVaccinationPage');
 
   const showMetricLinks = router.route !== '/gemeente';
 
@@ -139,8 +160,27 @@ export function GmLayout(props: GmLayoutProps) {
                 </Box>
 
                 <Menu spacing={4}>
-                  {sidebarData && (
+                  {sidebarData && data?.vaccine_coverage_per_age_group && (
                     <>
+                      {vaccinationFeature.isEnabled && (
+                        <CategoryMenu
+                          title={siteText.gemeente_layout.headings.vaccinaties}
+                        >
+                          <MetricMenuItemLink
+                            href={reverseRouter.gm.vaccinaties(code)}
+                            icon={<Vaccinaties />}
+                            title={siteText.gemeente_vaccinaties.titel_sidebar}
+                          >
+                            <VaccineSidebarMetricVrGm
+                              data={data.vaccine_coverage_per_age_group.values}
+                              description={
+                                siteText.gemeente_vaccinaties.titel_kpi
+                              }
+                            />
+                          </MetricMenuItemLink>
+                        </CategoryMenu>
+                      )}
+
                       <CategoryMenu
                         title={siteText.gemeente_layout.headings.ziekenhuizen}
                       >
@@ -167,7 +207,7 @@ export function GmLayout(props: GmLayoutProps) {
                       >
                         <MetricMenuItemLink
                           href={reverseRouter.gm.positiefGetesteMensen(code)}
-                          icon={<GetestIcon />}
+                          icon={<Test />}
                           title={
                             siteText.gemeente_positief_geteste_personen
                               .titel_sidebar
@@ -185,7 +225,7 @@ export function GmLayout(props: GmLayoutProps) {
 
                         <MetricMenuItemLink
                           href={reverseRouter.gm.sterfte(code)}
-                          icon={<CoronavirusIcon />}
+                          icon={<Coronavirus />}
                           title={
                             siteText.veiligheidsregio_sterfte.titel_sidebar
                           }

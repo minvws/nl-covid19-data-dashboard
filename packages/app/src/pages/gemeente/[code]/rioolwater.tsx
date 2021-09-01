@@ -1,5 +1,5 @@
-import { ReactComponent as ExperimenteelIcon } from '~/assets/experimenteel.svg';
-import { ReactComponent as RioolwaterMonitoring } from '~/assets/rioolwater-monitoring.svg';
+import { Experimenteel, RioolwaterMonitoring } from '@corona-dashboard/icons';
+import { isDefined } from 'ts-is-present';
 import { CollapsibleContent } from '~/components/collapsible';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -32,13 +32,41 @@ export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
-  selectGmPageMetricData(
-    'sewer_per_installation',
-    'static_values',
-    'sewer',
-    'difference',
-    'code'
-  ),
+  (context) => {
+    const data = selectGmPageMetricData(
+      'sewer_per_installation',
+      'static_values',
+      'sewer',
+      'difference',
+      'code'
+    )(context);
+    data.selectedGmData.sewer.values = data.selectedGmData.sewer.values.map(
+      (x) => ({
+        ...x,
+        average: Math.round(x.average),
+      })
+    );
+    data.selectedGmData.sewer.last_value = {
+      ...data.selectedGmData.sewer.last_value,
+      average: Math.round(data.selectedGmData.sewer.last_value.average),
+    };
+    if (isDefined(data.selectedGmData.difference.sewer__average)) {
+      data.selectedGmData.difference.sewer__average.difference = Math.round(
+        data.selectedGmData.difference.sewer__average.difference
+      );
+    }
+
+    if (isDefined(data.selectedGmData.sewer_per_installation)) {
+      data.selectedGmData.sewer_per_installation.values.forEach((x) => {
+        x.values = x.values.map((x) => ({
+          ...x,
+          rna_normalized: Math.round(x.rna_normalized),
+        }));
+      });
+    }
+
+    return data;
+  },
   createGetContent<PageArticlesQueryResult>((context) => {
     const { locale } = context;
     return createPageArticlesQuery('sewerPage', locale);
@@ -110,7 +138,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             articles={content.articles}
           />
 
-          <WarningTile message={text.warning_method} icon={ExperimenteelIcon} />
+          <WarningTile message={text.warning_method} icon={Experimenteel} />
 
           <TwoKpiSection>
             <KpiTile

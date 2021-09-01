@@ -1,7 +1,7 @@
 import { css } from '@styled-system/css';
 import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as VaccineIcon } from '~/assets/vaccine.svg';
+import { Vaccine } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import { RichContent } from '~/components/cms/rich-content';
 import { Tile } from '~/components/tile';
@@ -81,7 +81,7 @@ export function MilestonesView(props: MilestoneViewProps) {
               {list[index + 1] ? (
                 <ListItem>
                   <CircleIcon>
-                    <VaccineIcon />
+                    <Vaccine />
                   </CircleIcon>
                   <Box pl="3" maxWidth="maxWidthText" width="100%">
                     <InlineText
@@ -106,7 +106,7 @@ export function MilestonesView(props: MilestoneViewProps) {
               ) : (
                 <ListItemLast>
                   <CircleIcon isLast={true}>
-                    <VaccineIcon />
+                    <Vaccine />
                   </CircleIcon>
                   <Box
                     pl="3"

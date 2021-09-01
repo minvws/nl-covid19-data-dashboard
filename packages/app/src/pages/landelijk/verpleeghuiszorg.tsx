@@ -1,9 +1,11 @@
-import { ReactComponent as CoronaVirus } from '~/assets/coronavirus.svg';
-import { ReactComponent as Locatie } from '~/assets/locaties.svg';
-import { ReactComponent as Verpleeghuiszorg } from '~/assets/verpleeghuiszorg.svg';
+import {
+  Coronavirus,
+  Locatie,
+  Verpleeghuiszorg,
+} from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -226,13 +228,15 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
               title: infectedLocationsText.chloropleth_legenda.titel,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="vr"
               accessibility={{
                 key: 'nursing_home_infected_people_choropleth',
               }}
               data={choropleth.vr.nursing_home}
               dataConfig={{
+                metricName: 'nursing_home',
                 metricProperty: 'infected_locations_percentage',
               }}
               dataOptions={{
@@ -274,7 +278,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
           <PageInformationBlock
             id="sterfte"
             title={deceased.titel}
-            icon={<CoronaVirus />}
+            icon={<Coronavirus />}
             description={deceased.pagina_toelichting}
             metadata={{
               datumsText: deceased.datums,

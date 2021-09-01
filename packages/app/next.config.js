@@ -61,6 +61,16 @@ const nextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/landelijk',
+        destination: '/landelijk/vaccinaties',
+        permanent: false,
+      },
+    ];
+  },
+
   /**
    * Enable source maps in production, because we want people to report readable
    * stack traces from the error boundaries feature.
@@ -70,33 +80,16 @@ const nextConfig = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      oneOf: [
-        {
-          use: [
-            {
-              loader: '@svgr/webpack',
-              options: {
-                typescript: false,
-                dimensions: true,
-                svgo: false,
-                /**
-                 * Forward ref to the root SVG tag
-                 */
-                ref: true,
-              },
-            },
-            {
-              loader: 'file-loader',
-              options: {
-                name: 'static/image/[path][name].[hash].[ext]',
-              },
-            },
-          ],
-          issuer: {
-            and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
-          },
+      type: 'asset',
+      use: 'svgo-loader',
+      generator: {
+        filename: 'static/image/[name].[hash][ext]',
+      },
+      parser: {
+        dataUrlCondition: {
+          maxSize: 2 * 1024, // only inline SVG's < 2kB
         },
-      ],
+      },
     });
 
     config.resolve.alias = {

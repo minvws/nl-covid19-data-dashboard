@@ -1,7 +1,7 @@
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { ReactComponent as ExternalLinkIcon } from '~/assets/external-link.svg';
-import { ReactComponent as Phone } from '~/assets/phone.svg';
+import { External } from '@corona-dashboard/icons';
+import { Phone } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -105,7 +105,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               <Link href={corona_melder_app.rapport.link.href} passHref>
                 <a target="_blank" css={css({ display: 'flex' })}>
                   <IconContainer>
-                    <ExternalLinkIcon />
+                    <External />
                   </IconContainer>
                   <span css={css({ maxWidth: 200 })}>
                     {corona_melder_app.rapport.link.text}

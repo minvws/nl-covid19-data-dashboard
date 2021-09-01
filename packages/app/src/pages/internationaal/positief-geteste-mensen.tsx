@@ -1,11 +1,11 @@
 import { assert, In, InTestedOverallValue } from '@corona-dashboard/common';
+import { Test } from '@corona-dashboard/icons';
 import { last } from 'lodash';
 import { useMemo } from 'react';
 import { isDefined } from 'ts-is-present';
-import { ReactComponent as Getest } from '~/assets/test.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -138,7 +138,7 @@ export default function PositiefGetesteMensenPage(
           <PageInformationBlock
             category={text.categorie}
             title={text.titel}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               ...internationalMetadataDatums,
@@ -167,13 +167,15 @@ export default function PositiefGetesteMensenPage(
               ],
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="in"
               accessibility={{
                 key: 'international_tested_overall_choropleth',
               }}
               data={choroplethData}
               dataConfig={{
+                metricName: 'tested_overall',
                 metricProperty: 'infected_per_100k_average',
               }}
               dataOptions={{
@@ -191,7 +193,7 @@ export default function PositiefGetesteMensenPage(
                   comparedValue={comparedValue}
                 />
               )}
-              dynamicSizeConfiguration={[
+              responsiveSizeConfiguration={[
                 {
                   containerWidth: 600,
                   heightAndPadding: {
@@ -231,7 +233,7 @@ export default function PositiefGetesteMensenPage(
               alwaysSelectedCodes={['nld']}
               defaultSelectedCodes={['bel', 'deu']}
             >
-              {(selectedCountries, colors) => (
+              {(selectedCountries, getColor) => (
                 <TimeSeriesChart
                   accessibility={{
                     key: 'international_infected_people_over_time_chart',
@@ -240,7 +242,7 @@ export default function PositiefGetesteMensenPage(
                   seriesConfig={selectedCountriesToSeriesConfig(
                     selectedCountries,
                     countryNames,
-                    colors
+                    getColor
                   )}
                   disableLegend
                 />
@@ -307,7 +309,7 @@ function compileInternationalData(data: Record<string, In>) {
 function selectedCountriesToSeriesConfig(
   selectedCountries: CountryCode[],
   countryNames: Record<CountryCode, string>,
-  selectionColors: string[]
+  getColor: (countryCode: CountryCode) => string
 ): LineSeriesDefinition<CompiledCountriesValue>[] {
   return [
     {
@@ -317,11 +319,11 @@ function selectedCountriesToSeriesConfig(
       color: colors.data.neutral,
     } as LineSeriesDefinition<CompiledCountriesValue>,
   ].concat(
-    selectedCountries.map((countryCode, index) => ({
+    selectedCountries.map((countryCode) => ({
       type: 'line' as const,
       metricProperty: countryCode,
       label: countryNames[countryCode],
-      color: selectionColors[index],
+      color: getColor(countryCode),
     }))
   );
 }

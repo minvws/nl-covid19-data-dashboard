@@ -1,7 +1,7 @@
-import { ReactComponent as ElderlyIcon } from '~/assets/elderly.svg';
+import { Elderly } from '@corona-dashboard/icons';
 import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
@@ -79,7 +79,7 @@ const ElderlyAtHomeNationalPage = (
             category={siteText.nationaal_layout.headings.kwetsbare_groepen}
             screenReaderCategory={siteText.thuiswonende_ouderen.titel_sidebar}
             title={text.section_positive_tested.title}
-            icon={<ElderlyIcon />}
+            icon={<Elderly />}
             description={text.section_positive_tested.description}
             metadata={{
               datumsText: text.section_positive_tested.datums,
@@ -197,13 +197,15 @@ const ElderlyAtHomeNationalPage = (
               title: text.section_positive_tested.choropleth_daily_legenda,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               map="vr"
               accessibility={{
                 key: 'elderly_at_home_infected_people_choropleth',
               }}
               data={choropleth.vr.elderly_at_home}
               dataConfig={{
+                metricName: 'elderly_at_home',
                 metricProperty: 'positive_tested_daily_per_100k',
               }}
               dataOptions={{
@@ -216,7 +218,7 @@ const ElderlyAtHomeNationalPage = (
 
           <PageInformationBlock
             title={text.section_deceased.title}
-            icon={<ElderlyIcon />}
+            icon={<Elderly />}
             description={text.section_deceased.description}
             metadata={{
               datumsText: text.section_deceased.datums,

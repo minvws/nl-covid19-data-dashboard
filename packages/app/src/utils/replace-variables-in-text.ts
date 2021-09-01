@@ -1,3 +1,4 @@
+import { DataFormatters } from '@corona-dashboard/common';
 import { isDefined } from 'ts-is-present';
 import { assert } from './assert';
 
@@ -11,8 +12,8 @@ const shouldValidate =
 const curlyBracketRegex = /\{\{(.+?)\}\}/g;
 
 /**
- * Small utility that accepts a translation string with placeholders
- * for variabels. For example:
+ * Utility that accepts a translation string with placeholders
+ * for variables. For example:
  * "An example placeholder string with {{type}} brackets"
  * Where everything between curly brackets is accepted as a placeholder
  * for a variable. The second argument is an object with keys representing
@@ -25,24 +26,23 @@ const curlyBracketRegex = /\{\{(.+?)\}\}/g;
  * @param translation - Translation string with curly brackets for variables.
  * @param variables - An object with keys representing any variable available for replacement.
  */
-
-// { [key: string]: string | number | undefined }
-
 export function replaceVariablesInText(
   translation: string,
   variables: Record<
     string,
     string | number | undefined | Record<string, string | number | undefined>
-  >
+  >,
+  formatters?: DataFormatters
 ) {
   if (shouldValidate) {
     assert(
       isDefined(translation),
       `Missing a locale text with placeholders for: ${Object.keys(
         variables
-      ).join(',')}`
+      ).join(',')} in: "${translation}"`
     );
   }
+  const formatterNames = isDefined(formatters) ? Object.keys(formatters) : [];
 
   return translation.replace(
     curlyBracketRegex,
@@ -53,26 +53,26 @@ export function replaceVariablesInText(
         .map((x) => x.trim());
 
       if (isDefined(command)) {
-        switch (command) {
-          case 'plural': {
-            if (!isDefined(variables[trimmedName])) {
-              throw new Error(
-                `No value was supplied for command count value ${trimmedName} in ${Object.keys(
-                  variables
-                ).join(',')}. Text: ${translation}`
-              );
-            }
-            if (!isDefined(variables[commandArgument])) {
-              throw new Error(
-                `No value was supplied for plural command argument ${commandArgument} in ${Object.keys(
-                  variables
-                ).join(',')}. Text: ${translation}`
-              );
-            }
-            return pluralize(
-              variables[trimmedName] as number,
-              variables[commandArgument] as { plural: string; singular: string }
+        switch (true) {
+          case command === 'plural': {
+            return executePluralize(
+              variables,
+              trimmedName,
+              translation,
+              commandArgument
             );
+          }
+          case formatterNames.includes(command): {
+            return isDefined(formatters)
+              ? executeFormat(
+                  variables,
+                  trimmedName,
+                  translation,
+                  formatters[command as unknown as keyof DataFormatters] as (
+                    value: unknown
+                  ) => string
+                )
+              : '';
           }
           default: {
             throw new Error(`Unknown command encountered: ${command}`);
@@ -93,6 +93,55 @@ export function replaceVariablesInText(
         ).join(',')}. Text: ${translation}`
       );
     }
+  );
+}
+
+function executeFormat(
+  variables: Record<
+    string,
+    string | number | Record<string, string | number | undefined> | undefined
+  >,
+  trimmedName: string,
+  translation: string,
+  formatter: (value: unknown) => string
+) {
+  if (!isDefined(variables[trimmedName])) {
+    throw new Error(
+      `No value was supplied for command number value ${trimmedName} in ${Object.keys(
+        variables
+      ).join(',')}. Text: ${translation}`
+    );
+  }
+
+  return formatter(variables[trimmedName]);
+}
+
+function executePluralize(
+  variables: Record<
+    string,
+    string | number | Record<string, string | number | undefined> | undefined
+  >,
+  trimmedName: string,
+  translation: string,
+  commandArgument: string
+) {
+  if (!isDefined(variables[trimmedName])) {
+    throw new Error(
+      `No value was supplied for command count value ${trimmedName} in ${Object.keys(
+        variables
+      ).join(',')}. Text: ${translation}`
+    );
+  }
+  if (!isDefined(variables[commandArgument])) {
+    throw new Error(
+      `No value was supplied for plural command argument ${commandArgument} in ${Object.keys(
+        variables
+      ).join(',')}. Text: ${translation}`
+    );
+  }
+  return pluralize(
+    variables[trimmedName] as number,
+    variables[commandArgument] as { plural: string; singular: string }
   );
 }
 

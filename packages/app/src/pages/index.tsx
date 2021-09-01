@@ -1,18 +1,21 @@
+import {
+  GmCollectionTestedOverall,
+  VrCollectionTestedOverall,
+} from '@corona-dashboard/common';
+import { Chart, Test, Ziekenhuis } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { isDefined, isPresent } from 'ts-is-present';
-import { ReactComponent as GrafiekIcon } from '~/assets/chart.svg';
-import { ReactComponent as GetestIcon } from '~/assets/test.svg';
-import { ReactComponent as ZiekenhuisIcon } from '~/assets/ziekenhuis.svg';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box, Spacer } from '~/components/base';
 import {
   ChartRegionControls,
-  RegionControlOption
+  RegionControlOption,
 } from '~/components/chart-region-controls';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth, OptionalDataConfig } from '~/components/choropleth';
 import { ChoroplethLegenda } from '~/components/choropleth-legenda';
+import { InferedMapType } from '~/components/choropleth/logic';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { CollapsibleButton } from '~/components/collapsible';
 import { DataDrivenText } from '~/components/data-driven-text';
@@ -33,7 +36,7 @@ import { Search } from '~/domain/topical/components/search';
 import { EscalationLevelExplanations } from '~/domain/topical/escalation-level-explanations';
 import {
   HighlightsTile,
-  WeeklyHighlightProps
+  WeeklyHighlightProps,
 } from '~/domain/topical/highlights-tile';
 import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
@@ -42,16 +45,17 @@ import { TopicalTile } from '~/domain/topical/topical-tile';
 import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
+import { SiteText } from '~/locale';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
-  StaticProps
+  StaticProps,
 } from '~/static-props/create-get-static-props';
 import {
   createGetChoroplethData,
   createGetContent,
   getLastGeneratedDate,
-  selectNlData
+  selectNlData,
 } from '~/static-props/get-data';
 import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
@@ -82,6 +86,16 @@ export const getStaticProps = createGetStaticProps(
   )
 );
 
+type ChoroplethConfig<
+  T extends GmCollectionTestedOverall | VrCollectionTestedOverall
+> = {
+  dataConfig: OptionalDataConfig<T>;
+  accessibility: keyof SiteText['accessibility']['charts'];
+  map: InferedMapType<T>;
+  data: T[];
+  getLink: (code: string) => string;
+};
+
 const Home = (props: StaticProps<typeof getStaticProps>) => {
   const { selectedNlData: data, choropleth, content, lastGenerated } = props;
 
@@ -103,6 +117,32 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
     title: text.metadata.title,
     description: text.metadata.description,
   };
+
+  const choroplethConfig = useMemo<
+    ChoroplethConfig<GmCollectionTestedOverall | VrCollectionTestedOverall>
+  >(() => {
+    return {
+      dataConfig: {
+        metricName: 'tested_overall',
+        metricProperty: 'infected_per_100k',
+      },
+      accessibility:
+        selectedMap === 'gm'
+          ? 'topical_municipal_tested_overall_choropleth'
+          : 'topical_region_tested_overall_choropleth',
+      map: selectedMap as InferedMapType<
+        GmCollectionTestedOverall | VrCollectionTestedOverall
+      >,
+      data:
+        selectedMap === 'gm'
+          ? choropleth.gm.tested_overall
+          : choropleth.vr.tested_overall,
+      getLink:
+        selectedMap === 'gm'
+          ? reverseRouter.gm.positiefGetesteMensen
+          : reverseRouter.vr.positiefGetesteMensen,
+    };
+  }, [selectedMap, choropleth, reverseRouter]);
 
   return (
     <Layout {...metadata} lastGenerated={lastGenerated}>
@@ -145,7 +185,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   />
                 }
-                icon={<GetestIcon />}
+                icon={<Test />}
                 trendData={dataInfectedTotal.values}
                 metricProperty="infected"
                 href={reverseRouter.nl.positiefGetesteMensen()}
@@ -166,7 +206,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     }
                   />
                 }
-                icon={<ZiekenhuisIcon />}
+                icon={<Ziekenhuis />}
                 trendData={dataHospitalIntake.values}
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.nl.ziekenhuisopnames()}
@@ -178,7 +218,7 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
             <CollapsibleButton
               label={siteText.common_actueel.overview_links_header}
-              icon={<GrafiekIcon />}
+              icon={<Chart />}
             >
               <Sitemap
                 quickLinksHeader={text.quick_links.header}
@@ -237,13 +277,15 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 }
               >
                 <Box>
-                  <Choropleth
+                  <DynamicChoropleth
+                    renderTarget="canvas"
                     accessibility={{
                       key: 'topical_escalation_levels_choropleth',
                     }}
                     map="vr"
                     data={choropleth.vr.escalation_levels}
                     dataConfig={{
+                      metricName: 'escalation_levels',
                       metricProperty: 'level',
                       noDataFillColor: unknownLevelColor,
                     }}
@@ -311,38 +353,18 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   />
                 }
               >
-                <>
-                  {selectedMap === 'gm' && (
-                    <Choropleth
-                      accessibility={{
-                        key: 'topical_municipal_tested_overall_choropleth',
-                      }}
-                      map="gm"
-                      data={choropleth.gm.tested_overall}
-                      dataConfig={{
-                        metricProperty: 'infected_per_100k',
-                      }}
-                      dataOptions={{
-                        getLink: reverseRouter.gm.positiefGetesteMensen,
-                      }}
-                    />
-                  )}
-                  {selectedMap === 'vr' && (
-                    <Choropleth
-                      accessibility={{
-                        key: 'topical_region_tested_overall_choropleth',
-                      }}
-                      map="vr"
-                      data={choropleth.vr.tested_overall}
-                      dataConfig={{
-                        metricProperty: 'infected_per_100k',
-                      }}
-                      dataOptions={{
-                        getLink: reverseRouter.vr.positiefGetesteMensen,
-                      }}
-                    />
-                  )}
-                </>
+                <DynamicChoropleth
+                  renderTarget="canvas"
+                  accessibility={{
+                    key: choroplethConfig.accessibility,
+                  }}
+                  map={choroplethConfig.map}
+                  data={choroplethConfig.data}
+                  dataConfig={choroplethConfig.dataConfig}
+                  dataOptions={{
+                    getLink: choroplethConfig.getLink,
+                  }}
+                />
                 <Box spacing={3}>
                   <Metadata
                     date={

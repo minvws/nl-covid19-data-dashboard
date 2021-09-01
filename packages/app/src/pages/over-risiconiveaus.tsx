@@ -1,11 +1,10 @@
+import { BarChart, Calendar } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import Head from 'next/head';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as BarChart } from '~/assets/bar-chart.svg';
-import { ReactComponent as Calendar } from '~/assets/calendar.svg';
 import { Box } from '~/components/base';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { RichContent } from '~/components/cms/rich-content';
 import { ErrorBoundary } from '~/components/error-boundary';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -132,12 +131,14 @@ const OverRisicoNiveaus = (props: StaticProps<typeof getStaticProps>) => {
               minHeight={{ _: '20rem', sm: 0 }}
             >
               <ErrorBoundary>
-                <Choropleth
+                <DynamicChoropleth
+                  renderTarget="canvas"
                   map="vr"
                   accessibility={{ key: 'escalation_levels_choropleth' }}
                   minHeight={200}
                   data={choropleth.vr.escalation_levels}
                   dataConfig={{
+                    metricName: 'escalation_levels',
                     metricProperty: 'level',
                     noDataFillColor: unknownLevelColor,
                   }}

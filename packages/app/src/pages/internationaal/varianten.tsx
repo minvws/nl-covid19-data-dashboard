@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { isPresent } from 'ts-is-present';
-import { ReactComponent as Getest } from '~/assets/test.svg';
+import { Test } from '@corona-dashboard/icons';
+
 import { Box } from '~/components/base';
 import { InformationTile } from '~/components/information-tile';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -146,7 +147,7 @@ export default function VariantenPage(
           <PageInformationBlock
             category={text.categorie}
             title={text.titel}
-            icon={<Getest />}
+            icon={<Test />}
             description={text.pagina_toelichting}
             metadata={{
               dateOrRange: {
@@ -199,6 +200,7 @@ export default function VariantenPage(
           </VariantsTableTile>
 
           <VariantsStackedAreaTile
+            text={text.varianten_over_tijd_grafiek}
             noDataMessage={noDataMessageChart}
             values={chartData?.variantChart}
             metadata={{
