@@ -15,6 +15,8 @@ import { assert } from '~/utils/assert';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { parseBirthyearRange } from './logic/parse-birthyear-range';
 import { parseFullyVaccinatedPercentageLabel } from './logic/parse-fully-vaccinated-percentage-label';
+
+const SORT_ORDER = ['18+', '12-17', '12+'];
 interface VaccineCoveragePerAgeGroupVrGmProps {
   title: string;
   description: string;
@@ -37,6 +39,12 @@ export function VaccineCoveragePerAgeGroupVrGm({
   data,
 }: VaccineCoveragePerAgeGroupVrGmProps) {
   const { siteText } = useIntl();
+
+  const sortedData = data.sort(
+    (a, b) =>
+      SORT_ORDER.indexOf(a.age_group_range) -
+      SORT_ORDER.indexOf(b.age_group_range)
+  );
 
   return (
     <ChartTile title={title} description={description}>
@@ -66,7 +74,7 @@ export function VaccineCoveragePerAgeGroupVrGm({
             </Row>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {sortedData.map((item, index) => (
               <Row key={index}>
                 <Cell>
                   <Box
