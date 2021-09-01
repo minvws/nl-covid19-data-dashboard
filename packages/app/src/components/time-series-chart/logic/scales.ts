@@ -50,11 +50,11 @@ export function useScales<T extends TimestampedValue>(args: {
         xScale: scaleLinear({
           domain: [start, end],
           range: [0, bounds.width],
-        }),
+        }) as ScaleLinear<number, number>,
         yScale: scaleLinear({
           domain: [yMin, yMax],
           range: [bounds.height, 0],
-        }),
+        }) as ScaleLinear<number, number>,
         getX: (_x: SeriesItem) => 0,
         getY: (_x: SeriesSingleValue) => 0,
         getY0: (_x: SeriesDoubleValue) => 0,

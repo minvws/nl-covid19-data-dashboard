@@ -13,7 +13,7 @@ export function useChoroplethData<T extends ChoroplethDataItem>(
   return useMemo(() => {
     if (map === 'gm' && isDefined(selectedCode)) {
       const gmCodes = getVrMunicipalsForMunicipalCode(selectedCode);
-      assert(gmCodes, `No VR GM codes for GM code ${selectedCode}`);
+      assert(isDefined(gmCodes), `No VR GM codes for GM code ${selectedCode}`);
       return data
         .filter(isGmData)
         .filter((x) => gmCodes.includes((x as GmDataItem).gmcode));
