@@ -28,7 +28,6 @@ const cli = meow(
         $ lokalize:dedupe
   
       Options
-        --drafts Include draft documents
         --dataset Define dataset to export, default is "development"
   
       Examples
@@ -39,9 +38,6 @@ const cli = meow(
       dataset: {
         type: 'string',
         default: 'development',
-      },
-      cleanJson: {
-        type: 'boolean',
       },
     },
   }

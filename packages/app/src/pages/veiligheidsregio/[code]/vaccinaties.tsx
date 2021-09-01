@@ -1,7 +1,7 @@
 import { VrVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { useState } from 'react';
 import { hasValueAtKey, isPresent } from 'ts-is-present';
-import { Choropleth } from '~/components/choropleth';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -158,7 +158,8 @@ export const VaccinationsVrPage = (
                   .legend_title,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               map="gm"
               data={choropleth.gm.vaccine_coverage_per_age_group.filter(

@@ -18,6 +18,7 @@
   "scripts": {
     "bootstrap": "echo 'No bootstrap command available for @corona-dashboard/e2e'",
     "clean": "echo 'No clean command available for @corona-dashboard/e2e'",
+    "nuke": "yarn clean && npx rimraf node_modules",
     "lint": "echo 'No linter configured for @corona-dashboard/e2e'",
     "typecheck": "tsc --pretty --noEmit",
     "test:ci": "echo 'No unit tests available for @corona-dashboard/e2e'",

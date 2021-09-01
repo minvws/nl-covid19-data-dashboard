@@ -1,7 +1,7 @@
 import { GmVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import { useState } from 'react';
-import { hasValueAtKey, isPresent } from 'ts-is-present';
-import { Choropleth } from '~/components/choropleth';
+import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
+import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
 import { PageInformationBlock } from '~/components/page-information-block';
@@ -39,7 +39,7 @@ import {
 import { VaccinationPageQuery } from '~/types/cms';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
-export { getStaticPaths } from '~/static-paths/vr';
+export { getStaticPaths } from '~/static-paths/gm';
 
 export const getStaticProps = withFeatureNotFoundPage(
   'gmVaccinationPage',
@@ -52,10 +52,12 @@ export const getStaticProps = withFeatureNotFoundPage(
     ),
     createGetChoroplethData({
       gm: ({ vaccine_coverage_per_age_group }, ctx) => {
-        const vrCode = vrCodeByGmCode[ctx.params?.code as 'string'];
+        const vrCode = isPresent(ctx.params?.code)
+          ? vrCodeByGmCode[ctx.params?.code as 'string']
+          : undefined;
         return {
           vaccine_coverage_per_age_group: selectVaccineCoverageData(
-            isPresent(ctx.params?.code)
+            isDefined(vrCode)
               ? vaccine_coverage_per_age_group.filter((el) =>
                   gmCodesByVrCode[vrCode].includes(el.gmcode)
                 )
@@ -155,7 +157,8 @@ export const VaccinationsGmPage = (
                   .legend_title,
             }}
           >
-            <Choropleth
+            <DynamicChoropleth
+              renderTarget="canvas"
               accessibility={{ key: 'vaccine_coverage_nl_choropleth' }}
               map="gm"
               data={choropleth.gm.vaccine_coverage_per_age_group.filter(
