@@ -96,6 +96,10 @@ export function useCollapsible(options: { isOpen?: boolean } = {}) {
       width="100%"
       overflow="hidden"
       animate={isOpen ? 'open' : 'rest'}
+      transition={{
+        duration: 0.2,
+        ease: 'easeInOut',
+      }}
       initial={options.isOpen ? 'open' : undefined}
       css={css({
         height: 0,
