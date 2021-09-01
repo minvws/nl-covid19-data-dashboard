@@ -2,6 +2,7 @@
   "definitions": {
     "value": {
       "title": "vr_tested_overall_value",
+      "type": "object",
       "additionalProperties": false,
       "required": [
         "date_unix",

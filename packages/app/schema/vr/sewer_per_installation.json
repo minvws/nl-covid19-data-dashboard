@@ -2,6 +2,7 @@
   "definitions": {
     "installation": {
       "title": "vr_sewer_per_installation_installation",
+      "type": "object",
       "additionalProperties": false,
       "required": ["rwzi_awzi_name", "values", "last_value"],
       "properties": {
@@ -21,6 +22,7 @@
     },
     "value": {
       "title": "vr_sewer_per_installation_value",
+      "type": "object",
       "additionalProperties": false,
       "required": ["date_unix", "rna_normalized", "date_of_insertion_unix"],
       "properties": {

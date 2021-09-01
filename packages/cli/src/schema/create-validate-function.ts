@@ -1,4 +1,4 @@
-import Ajv, { ValidateFunction } from 'ajv';
+import Ajv, { AnySchemaObject, ValidateFunction } from 'ajv';
 import fs from 'fs';
 import path from 'path';
 import { equalsRootProperty } from './keywords';
@@ -35,17 +35,16 @@ export function createValidateFunction(
 
 function compileValidator(
   rootSchema: object,
-  loadSchema: (
-    uri: string,
-    cb?: (err: Error, schema: object) => void
-  ) => PromiseLike<object | boolean>
+  loadSchema: (uri: string) => Promise<AnySchemaObject>
 ) {
   const validator = new Ajv({
     loadSchema: loadSchema,
     $data: true,
     allErrors: true,
   });
-  validator.addKeyword('equalsRootProperty', equalsRootProperty);
+
+  validator.addKeyword(equalsRootProperty);
+
   return validator.compileAsync(rootSchema).then((validate) => {
     return validate;
   }) as Promise<ValidateFunction>;

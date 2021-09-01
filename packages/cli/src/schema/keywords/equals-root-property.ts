@@ -1,3 +1,5 @@
+import type { FuncKeywordDefinition } from 'ajv';
+
 /**
  * This keyword checks whether a property of a sub property equals
  * that of the value of the root object.
@@ -7,8 +9,10 @@
  * added to a different one.
  *
  */
-export const equalsRootProperty = {
+export const equalsRootProperty: FuncKeywordDefinition = {
+  keyword: 'equalsRootProperty',
   type: 'string',
+  errors: true,
   validate: function validateRootPropertyEquality(
     schema: any,
     data: any,
@@ -37,5 +41,4 @@ export const equalsRootProperty = {
     }
     return true;
   },
-  errors: true,
 };
