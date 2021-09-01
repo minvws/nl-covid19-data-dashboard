@@ -26,6 +26,12 @@ function disableFeatureFlagMetrics(schema: any, features: Feature[]) {
   if (isDefined(schema.required)) {
     const required = schema.required as string[];
     features.forEach((x) => {
+      if (!isDefined(x.dataScopes)) {
+        return;
+      }
+      if (!x.dataScopes.includes(schema.title)) {
+        return;
+      }
       if (isDefined(x.metricName)) {
         const index = required.indexOf(x.metricName);
         if (index > -1) {
