@@ -8,7 +8,6 @@ import { createFlatTexts, removeIdsFromKeys } from '@corona-dashboard/common';
 import flatten, { unflatten } from 'flat';
 import fs from 'fs-extra';
 import mapValues from 'lodash/mapValues';
-import { outdent } from 'outdent';
 import path from 'path';
 import prettier from 'prettier';
 import { readTextMutations } from '.';
@@ -47,7 +46,7 @@ export async function exportLokalizeTexts({
   const client = getClient(dataset);
 
   const documents: LokalizeText[] = await client.fetch(
-    `*[_type == 'lokalizeText'] | order(key asc)`
+    `*[_type == 'lokalizeText' && !(_id in path('drafts.**'))] | order(key asc)`
   );
 
   const mutations = await readTextMutations();
@@ -127,7 +126,6 @@ export async function generateTypes() {
     `,
     { parser: 'typescript' }
   );
-
 
   return new Promise<void>((resolve, reject) =>
     fs.writeFile(

@@ -177,6 +177,7 @@ const ComboBoxStyles = createGlobalStyle`
   width: 100%;
   padding: 0.75em 1em;
   padding-left: 2.5em;
+  font-family: inherit;
   font-size: ${(x) => x.theme.fontSizes[2]} ;
   border: 1px solid #c4c4c4;
 }

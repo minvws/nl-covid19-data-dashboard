@@ -19,7 +19,12 @@ import { assert } from '~/utils/assert';
 import { useList } from '~/utils/use-list';
 import { useUnreliableDataAnnotations } from './logic/use-unreliable-data-annotations';
 
+type VariantsStackedAreaTileText =
+  | SiteText['covid_varianten']['varianten_over_tijd_grafiek']
+  | SiteText['internationaal_varianten']['varianten_over_tijd_grafiek'];
+
 type VariantsStackedAreaTileProps = {
+  text: VariantsStackedAreaTileText;
   values?: VariantChartValue[] | null;
   metadata: MetadataProps;
   children?: ReactNode;
@@ -31,10 +36,8 @@ export function VariantsStackedAreaTile({
   metadata,
   children = null,
   noDataMessage = '',
+  text,
 }: VariantsStackedAreaTileProps) {
-  const { siteText } = useIntl();
-  const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
-
   if (!isPresent(values)) {
     return (
       <ChartTile
@@ -48,7 +51,11 @@ export function VariantsStackedAreaTile({
     );
   }
   return (
-    <VariantStackedAreaTileWithData values={values} metadata={metadata}>
+    <VariantStackedAreaTileWithData
+      text={text}
+      values={values}
+      metadata={metadata}
+    >
       {children}
     </VariantStackedAreaTileWithData>
   );
@@ -57,21 +64,21 @@ export function VariantsStackedAreaTile({
 const alwayEnabled: (keyof VariantChartValue)[] = [];
 
 type VariantStackedAreaTileWithDataProps = {
+  text: VariantsStackedAreaTileText;
   values: VariantChartValue[];
   metadata: MetadataProps;
   children?: ReactNode;
 };
 
 function VariantStackedAreaTileWithData({
+  text,
   values,
   metadata,
   children = null,
 }: VariantStackedAreaTileWithDataProps) {
-  const { siteText } = useIntl();
   const { list, toggle, clear } =
     useList<keyof VariantChartValue>(alwayEnabled);
 
-  const text = siteText.internationaal_varianten.varianten_over_tijd_grafiek;
   const [seriesConfig, otherConfig, selectOptions] = useSeriesConfig(
     text,
     values
@@ -191,7 +198,7 @@ function useFilteredSeriesConfig(
 }
 
 function useSeriesConfig(
-  text: SiteText['internationaal_varianten']['varianten_over_tijd_grafiek'],
+  text: VariantsStackedAreaTileText,
   values: VariantChartValue[]
 ) {
   const { siteText } = useIntl();

@@ -25,15 +25,21 @@
     },
     "proto_name": {
       "type": "string",
-      "enum": ["VR_COLLECTION"]
+      "enum": [
+        "VR_COLLECTION"
+      ]
     },
     "name": {
       "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "const": {
+        "$data": "1/proto_name"
+      }
     },
     "code": {
       "type": "string",
-      "const": { "$data": "1/proto_name" }
+      "const": {
+        "$data": "1/proto_name"
+      }
     },
     "hospital_nice": {
       "type": "array",
