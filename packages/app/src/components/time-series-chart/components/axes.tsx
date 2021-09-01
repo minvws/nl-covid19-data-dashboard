@@ -126,8 +126,16 @@ export const Axes = memo(function Axes({
     [formatPercentage]
   );
 
-  xTickNumber =
-    xTickNumber ?? (breakpoints.sm ? (timeframe === 'all' ? 6 : 5) : 3);
+  if (!xTickNumber) {
+    const preferredDateTicks = breakpoints.sm
+      ? timeframe === 'all'
+        ? 6
+        : 5
+      : 3;
+    const fullDaysInDomain = Math.floor((endUnix - startUnix) / 86400);
+    xTickNumber = Math.max(Math.min(fullDaysInDomain, preferredDateTicks), 2);
+  }
+
   const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
 
   const formatXAxis = useCallback(
