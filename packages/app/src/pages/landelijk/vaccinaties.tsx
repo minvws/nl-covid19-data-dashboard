@@ -88,6 +88,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
+  const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
 
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
@@ -188,7 +189,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <VaccineCoverageChoroplethPerGm data={choropleth} />
+          {vaccinationChoroplethFeature.isEnabled && (
+            <VaccineCoverageChoroplethPerGm data={choropleth} />
+          )}
 
           {vaccinationPerAgeGroupFeature.isEnabled &&
           data.vaccine_coverage_per_age_group ? (
