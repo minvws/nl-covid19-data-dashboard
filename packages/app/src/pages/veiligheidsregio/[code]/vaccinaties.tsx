@@ -89,10 +89,10 @@ export const VaccinationsVrPage = (
   const metadata = {
     ...siteText.veiligheidsregio_vaccinaties.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      veiligheidsRegioNaam: vrName,
+      safetyRegionName: vrName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      veiligheidsRegioNaam: vrName,
+      safetyRegionName: vrName,
     }),
   };
 
@@ -105,7 +105,7 @@ export const VaccinationsVrPage = (
         <TileList>
           <VaccinePageIntroductionVrGm
             title={replaceVariablesInText(text.introductie_sectie.titel, {
-              veiligheidsRegioNaam: vrName,
+              safetyRegionName: vrName,
             })}
             description={text.introductie_sectie.beschrijving}
             kpiTitle={text.introductie_sectie.kpi_titel}
@@ -128,7 +128,7 @@ export const VaccinationsVrPage = (
           <ChoroplethTile
             title={replaceVariablesInText(
               siteText.vaccinaties.vr_choropleth_vaccinatie_graad.title,
-              { veiligheidsRegioNaam: vrName }
+              { safetyRegionName: vrName }
             )}
             description={
               <>
@@ -136,7 +136,7 @@ export const VaccinationsVrPage = (
                   {replaceVariablesInText(
                     siteText.vaccinaties.vr_choropleth_vaccinatie_graad
                       .description,
-                    { veiligheidsRegioNaam: vrName }
+                    { safetyRegionName: vrName }
                   )}
                 </Text>
 

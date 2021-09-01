@@ -94,10 +94,10 @@ export const VaccinationsGmPage = (
   const metadata = {
     ...siteText.gemeente_vaccinaties.metadata,
     title: replaceVariablesInText(text.metadata.title, {
-      gemeenteNaam: municipalityName,
+      municipalityName: municipalityName,
     }),
     description: replaceVariablesInText(text.metadata.description, {
-      gemeenteNaam: municipalityName,
+      municipalityName: municipalityName,
     }),
   };
 
@@ -113,7 +113,7 @@ export const VaccinationsGmPage = (
         <TileList>
           <VaccinePageIntroductionVrGm
             title={replaceVariablesInText(text.introductie_sectie.titel, {
-              gemeenteNaam: municipalityName,
+              municipalityName: municipalityName,
             })}
             description={text.introductie_sectie.beschrijving}
             kpiTitle={text.introductie_sectie.kpi_titel}
@@ -123,7 +123,7 @@ export const VaccinationsGmPage = (
           <ChoroplethTile
             title={replaceVariablesInText(
               siteText.vaccinaties.gm_choropleth_vaccinatie_graad.title,
-              { gemeenteNaam: municipalityName }
+              { municipalityName: municipalityName }
             )}
             description={
               <>
@@ -131,7 +131,7 @@ export const VaccinationsGmPage = (
                   {replaceVariablesInText(
                     siteText.vaccinaties.gm_choropleth_vaccinatie_graad
                       .description,
-                    { gemeenteNaam: municipalityName }
+                    { municipalityName: municipalityName }
                   )}
                 </Text>
 
