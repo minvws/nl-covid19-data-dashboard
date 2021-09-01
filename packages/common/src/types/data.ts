@@ -944,7 +944,7 @@ export interface Vr {
   hospital_nice_sum: VrHospitalNiceSum;
   vaccine_coverage?: VrVaccineCoverage;
   situations: VrSituations;
-  vaccine_coverage_per_age_group?: VrVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
 }
 export interface VrStaticValues {
   population_count: number;
