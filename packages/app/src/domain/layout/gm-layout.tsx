@@ -88,6 +88,9 @@ export function GmLayout(props: GmLayoutProps) {
         difference.sewer__average.old_value
       );
     }
+    if (isDefined(data)) {
+      data.sewer.last_value.average = Math.round(data.sewer.last_value.average);
+    }
     return { ...data, difference };
   }, [data, difference]);
 
