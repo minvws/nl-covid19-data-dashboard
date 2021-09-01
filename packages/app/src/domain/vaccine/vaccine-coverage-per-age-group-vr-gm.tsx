@@ -24,7 +24,7 @@ interface VaccineCoveragePerAgeGroupVrGmProps {
   topLabels: {
     agegroups: string;
     vaccination_coverage: string;
-    with_1_shot: string;
+    with_one_shot: string;
   };
   data:
     | VrVaccineCoveragePerAgeGroupValue[]
@@ -69,7 +69,7 @@ export function VaccineCoveragePerAgeGroupVrGm({
                   textAlign: 'right',
                 })}
               >
-                {topLabels.with_1_shot}
+                {topLabels.with_one_shot}
               </HeaderCell>
             </Row>
           </thead>
