@@ -47,6 +47,9 @@ const hiddenDocTypes = [
   'timelineEvent',
   'contact',
   'cijferVerantwoordingItem',
+  'articlePage',
+  'articlePageArticle',
+  'articlePageLinks',
   'media.tag',
 ];
 
