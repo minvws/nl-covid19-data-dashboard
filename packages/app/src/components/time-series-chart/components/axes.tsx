@@ -13,6 +13,7 @@ import { scaleLinear } from '@visx/scale';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
+import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
@@ -43,6 +44,7 @@ type AxesProps = {
   yAxisRef?: Ref<SVGGElement>;
   yTickValues?: number[];
   timeDomain: [number, number];
+  xTickNumber?: number;
   formatYTickValue?: (value: number) => string;
 
   /**
@@ -93,6 +95,7 @@ export const Axes = memo(function Axes({
   timeframe,
   yTickValues,
   timeDomain,
+  xTickNumber,
   formatYTickValue,
   yAxisRef,
   isYAxisCollapsed,
@@ -124,12 +127,16 @@ export const Axes = memo(function Axes({
     [formatPercentage]
   );
 
-  const preferredDateTicks = breakpoints.sm ? (timeframe === 'all' ? 6 : 5) : 3;
-  const fullDaysInDomain = Math.floor((endUnix - startUnix) / 86400);
-  const xTickNumber = Math.max(
-    Math.min(fullDaysInDomain, preferredDateTicks),
-    2
-  );
+  if (!isPresent(xTickNumber)) {
+    const preferredDateTicks = breakpoints.sm
+      ? timeframe === 'all'
+        ? 6
+        : 5
+      : 3;
+    const fullDaysInDomain = Math.floor((endUnix - startUnix) / 86400);
+    xTickNumber = Math.max(Math.min(fullDaysInDomain, preferredDateTicks), 2);
+  }
+
   const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
 
   const formatXAxis = useCallback(
