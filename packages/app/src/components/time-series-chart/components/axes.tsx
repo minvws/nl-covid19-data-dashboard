@@ -13,6 +13,7 @@ import { scaleLinear } from '@visx/scale';
 import { ScaleBand, ScaleLinear } from 'd3-scale';
 import { differenceInDays } from 'date-fns';
 import { memo, Ref, useCallback } from 'react';
+import { isPresent } from 'ts-is-present';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
@@ -126,7 +127,7 @@ export const Axes = memo(function Axes({
     [formatPercentage]
   );
 
-  if (!xTickNumber) {
+  if (!isPresent(xTickNumber)) {
     const preferredDateTicks = breakpoints.sm
       ? timeframe === 'all'
         ? 6
