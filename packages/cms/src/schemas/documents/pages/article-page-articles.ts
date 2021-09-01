@@ -27,9 +27,7 @@ export const pageArticles = {
       const articles = [article0, article1, article2].filter(Boolean);
       const title = articles.length > 0 ? `${articles.join(', ')}` : '';
       const subtitle =
-        articles.length > 0
-          ? `${articles.length + 1} artikelen`
-          : 'Geen artikelen';
+        articles.length > 0 ? `${articles.length} artikelen` : 'Geen artikelen';
 
       return {
         title,

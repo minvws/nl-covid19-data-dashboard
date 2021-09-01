@@ -32,7 +32,7 @@ export const pageLinks = {
       const links = [link0, link1, link2].filter(Boolean);
       const title = links.length > 0 ? `${links.join(', ')}` : '';
       const subtitle =
-        links.length > 0 ? `${links.length + 1} links` : 'Geen links';
+        links.length > 0 ? `${links.length} links` : 'Geen links';
 
       return {
         title,
