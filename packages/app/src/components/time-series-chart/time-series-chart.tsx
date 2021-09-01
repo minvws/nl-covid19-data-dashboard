@@ -396,6 +396,7 @@ export function TimeSeriesChart<
             <Axes
               bounds={bounds}
               numGridLines={numGridLines}
+              timeframe={timeframe}
               yTickValues={yTickValues}
               timeDomain={timeDomain}
               formatYTickValue={formatYTickValue}

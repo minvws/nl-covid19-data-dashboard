@@ -90,6 +90,7 @@ export const Axes = memo(function Axes({
   isPercentage,
   xScale,
   yScale,
+  timeframe,
   yTickValues,
   timeDomain,
   formatYTickValue,
