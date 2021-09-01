@@ -96,24 +96,6 @@ const nextConfig = {
       ...config.resolve.alias,
     };
 
-    //   @sanity/generate-help-url
-    //   Multiple versions of @sanity/generate-help-url found:
-    //     0.140.0 /Users/nick/dev/nl-covid19-data-dashboard/~/@sanity/block-content-to-hyperscript/~/@sanity/generate-help-url from /Users/nick/dev/nl-covid19-data-dashboard/~/@sanity/block-content-to-hyperscript/lib/getImageUrl.js
-    //     2.15.0 /Users/nick/dev/nl-covid19-data-dashboard/~/@sanity/generate-help-url from ./~/@sanity/client/lib/config.js
-
-    // d3-array
-    //   Multiple versions of d3-array found:
-    //     2.12.1 /Users/nick/dev/nl-covid19-data-dashboard/~/d3-scale/~/d3-array from /Users/nick/dev/nl-covid19-data-dashboard/~/d3-scale/src/linear.js
-    //     3.0.2 /Users/nick/dev/nl-covid19-data-dashboard/~/d3-geo/~/d3-array from /Users/nick/dev/nl-covid19-data-dashboard/~/d3-geo/src/area.js
-
-    // internmap
-    //   Multiple versions of internmap found:
-    //     1.0.1 /Users/nick/dev/nl-covid19-data-dashboard/~/d3-scale/~/internmap from /Users/nick/dev/nl-covid19-data-dashboard/~/d3-scale/~/d3-array/src/index.js
-    //     2.0.1 /Users/nick/dev/nl-covid19-data-dashboard/~/internmap from /Users/nick/dev/nl-covid19-data-dashboard/~/d3-geo/~/d3-array/src/index.js
-
-    // Check how you can resolve duplicate packages:
-    // https://github.com/darrenscerri/duplicate-package-checker-webpack-plugin#resolving-duplicate-packages-in-your-bundle
-
     const duplicatePackageResolves = [
       [
         '@emotion/memoize',
