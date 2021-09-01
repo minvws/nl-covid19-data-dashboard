@@ -11,7 +11,6 @@ export const partialColor = colors.data.multiseries.cyan;
 export const fullColor = colors.data.multiseries.cyan_dark;
 
 const MARKER_WIDTH = 7;
-const BASE_LINE_HEIGHT = 3;
 
 export function CoverageProgressBar(props: {
   partialCount: number;
@@ -47,9 +46,9 @@ export function CoverageProgressBar(props: {
           <g>
             <rect
               x={0}
-              y={containerHeight - BASE_LINE_HEIGHT}
+              y={containerHeight - barHeight}
               width="100%"
-              height={BASE_LINE_HEIGHT}
+              height={barHeight}
               fill="#C1C1C1"
             />
 
@@ -67,21 +66,25 @@ export function CoverageProgressBar(props: {
               height={barHeight}
               fill={partialColor}
             />
-            <rect
-              x={`${fullPercentage}%`}
-              y={containerHeight - barHeight}
-              width={2}
-              height={barHeight}
-              fill="white"
-            />
+            {fullPercentage && partialPercentage && (
+              <rect
+                x={`${fullPercentage}%`}
+                y={containerHeight - barHeight}
+                width={1}
+                height={barHeight}
+                fill="white"
+              />
+            )}
+            {partialPercentage && (
+              <rect
+                x={`${fullPercentage + partialPercentage}%`}
+                y={containerHeight - barHeight}
+                width={1}
+                height={barHeight}
+                fill="white"
+              />
+            )}
           </g>
-          <rect
-            x={`${fullPercentage + partialPercentage}%`}
-            y={0}
-            width={MARKER_WIDTH}
-            height={markerHeight}
-            fill="black"
-          />
         </svg>
       </Box>
       <Box display="flex" spacingHorizontal={2}>
