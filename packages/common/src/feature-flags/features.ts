@@ -1,4 +1,4 @@
-import type { Feature } from '@corona-dashboard/common';
+import { Feature } from '~/types';
 
 export const features: Feature[] = [
   {

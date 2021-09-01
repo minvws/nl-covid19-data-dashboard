@@ -1,18 +1,46 @@
+import { Feature, features } from '@corona-dashboard/common';
 import Ajv, { ValidateFunction } from 'ajv';
 import fs from 'fs';
 import path from 'path';
+import { isDefined } from 'ts-is-present';
 import { equalsRootProperty } from './keywords';
+
+const disabledMetrics = features.filter((x) => !x.isEnabled);
 
 export function loadRootSchema(schemaPath: string) {
   try {
-    return JSON.parse(
+    const schema = JSON.parse(
       fs.readFileSync(schemaPath, {
         encoding: 'utf8',
       })
     );
+    disableFeatureFlagMetrics(schema, disabledMetrics);
+    return schema;
   } catch (e) {
     if (e instanceof Error)
       throw new Error(`Error while parsing file ${schemaPath}:\n${e.message}`);
+  }
+}
+
+function disableFeatureFlagMetrics(schema: any, features: Feature[]) {
+  if (isDefined(schema.required)) {
+    const required = schema.required as string[];
+    features.forEach((x) => {
+      if (isDefined(x.metricName)) {
+        const index = required.indexOf(x.metricName);
+        if (index > -1) {
+          required.splice(index, 1);
+        }
+      }
+      if (isDefined(x.metricProperties)) {
+        x.metricProperties.forEach((x) => {
+          const index = required.indexOf(x);
+          if (index > -1) {
+            required.splice(index, 1);
+          }
+        });
+      }
+    });
   }
 }
 
@@ -61,5 +89,9 @@ export function loadSchema(basePath: string, uri: string): Promise<any> {
     .readFile(path.join(basePath, uri), {
       encoding: 'utf8',
     })
-    .then((data: string) => JSON.parse(data));
+    .then((data: string) => {
+      const schema = JSON.parse(data);
+      disableFeatureFlagMetrics(schema, disabledMetrics);
+      return schema;
+    });
 }

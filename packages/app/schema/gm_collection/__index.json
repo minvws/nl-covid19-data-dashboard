@@ -10,7 +10,8 @@
     "code",
     "hospital_nice",
     "tested_overall",
-    "sewer"
+    "sewer",
+    "vaccine_coverage_per_age_group"
   ],
   "properties": {
     "last_generated": {
