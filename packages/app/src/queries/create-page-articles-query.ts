@@ -1,6 +1,9 @@
 import { ArticleSummary } from '~/components/article-teaser';
 
-type ArticlePageType =
+/**
+ * We might want to remove this, because it locks you in a specific set of pages?
+ */
+type PageIdentifier =
   | 'deceasedPage'
   | 'behaviorPage'
   | 'hospitalPage'
@@ -20,29 +23,35 @@ type ArticlePageType =
   | 'infectiousPeoplePage';
 
 /**
- * This query fetches the articles field from a page type document. Pages in the
- * CMS are set up so that each page has their own unique type name and so only
- * one should exist for each. This is why the query uses [0] at the end, because
- * a query by type returns a list of results but only one should ever exist.
- *
- * Usually in a document store you would expect multiple pages to share the same
- * type and only differ in the way the instance is filled, but this is not the
- * case in how it is currently set up.
+ * This query fetches an article page with a specific slug.
  */
 export function createPageArticlesQuery(
-  pageTypeName: ArticlePageType,
-  locale: string,
-  articlesFieldName = 'articles'
+  pageIdentifier: PageIdentifier,
+  locale: string
 ) {
   const query = `
-    *[_type == '${pageTypeName}']{
-      "articles": ${articlesFieldName}[]->{
-        "title":title.${locale},
-        slug,
-        "summary":summary.${locale},
-        "cover": {
-          ...cover,
-          "asset": cover.asset->
+    *[_type == 'articlePage' && slug.current == '${pageIdentifier}']{
+
+      "articleLists": *[_type=='articlePageArticle' && references(^._id)] {
+        articles[] -> {
+          "title":title.${locale},
+          slug,
+          "summary":summary.${locale},
+          "cover": {
+            ...cover,
+            "asset": cover.asset->
+          }
+        }
+      },
+      "linkLists": *[_type=='articlePageLinks' && references(^._id)] {
+        links []->{
+          "title":title.${locale},
+          slug,
+          "summary":summary.${locale},
+          "cover": {
+            ...cover,
+            "asset": cover.asset->
+          }
         }
       }
     }[0]`;
