@@ -1,90 +1,183 @@
+import {
+  GmVaccineCoveragePerAgeGroupValue,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import styled from 'styled-components';
+import { isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { Markdown } from '~/components/markdown';
 import { InlineText } from '~/components/typography';
+import { useIntl } from '~/intl';
 import { asResponsiveArray } from '~/style/utils';
-export function VaccineCoveragePerAgeGroupVrGm() {
+import { assert } from '~/utils/assert';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { parseBirthyearRange } from './logic/parse-birthyear-range';
+import { parseFullyVaccinatedPercentageLabel } from './logic/parse-fully-vaccinated-percentage-label';
+interface VaccineCoveragePerAgeGroupVrGmProps {
+  title: string;
+  description: string;
+  annotation_description?: string;
+  topLabels: {
+    agegroups: string;
+    vaccination_coverage: string;
+    with_1_shot: string;
+  };
+  data:
+    | VrVaccineCoveragePerAgeGroupValue[]
+    | GmVaccineCoveragePerAgeGroupValue[];
+}
+
+export function VaccineCoveragePerAgeGroupVrGm({
+  title,
+  description,
+  annotation_description,
+  topLabels,
+  data,
+}: VaccineCoveragePerAgeGroupVrGmProps) {
+  const { siteText } = useIntl();
+
   return (
-    <ChartTile title={'title'} description={'description'}>
+    <ChartTile title={title} description={description}>
       <Box overflow="auto" spacing={3}>
         <StyledTable>
           <thead>
-            <Row>
-              <HeaderCell>Leeftijdsgroep</HeaderCell>
+            <Row
+              css={css({
+                borderTop: 'none',
+              })}
+            >
+              <HeaderCell>{topLabels.agegroups}</HeaderCell>
               <HeaderCell
                 css={css({
                   textAlign: 'right',
                 })}
               >
-                Vaccinatiegraad binnen groep
+                {topLabels.vaccination_coverage}
               </HeaderCell>
               <HeaderCell
                 css={css({
                   textAlign: 'right',
                 })}
               >
-                Aantal mensen met tenminste 1 prik*
+                {topLabels.with_1_shot}
               </HeaderCell>
             </Row>
           </thead>
           <tbody>
-            <Row>
-              <Cell>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  fontWeight="bold"
-                  textAlign="left"
-                >
-                  18 jaar en ouder
-                  <InlineText fontWeight="normal" variant="label2">
-                    2003 en eerder
+            {data.map((item, index) => (
+              <Row key={index}>
+                <Cell>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    fontWeight="bold"
+                    textAlign="left"
+                  >
+                    {siteText.vaccinaties.age_groups[item.age_group_range]}
+                    <InlineText fontWeight="normal" variant="label2">
+                      <InlineTextBirthyear
+                        birthyearRange={item.birthyear_range}
+                      />
+                    </InlineText>
+                  </Box>
+                </Cell>
+                <Cell>
+                  <InlineText fontWeight="bold">
+                    <ParseText
+                      value={item.fully_vaccinated_percentage}
+                      label={item.fully_vaccinated_percentage_label}
+                      hasBoldText
+                    />
                   </InlineText>
-                </Box>
-              </Cell>
-              <Cell>
-                <InlineText fontWeight="bold">79%</InlineText>
-              </Cell>
+                </Cell>
 
-              <Cell>90% of meer</Cell>
-            </Row>
-
-            <Row>
-              <Cell>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  fontWeight="bold"
-                  textAlign="left"
-                >
-                  18 jaar en ouder
-                  <InlineText fontWeight="normal" variant="label2">
-                    2003 en eerder
-                  </InlineText>
-                </Box>
-              </Cell>
-              <Cell>
-                <InlineText fontWeight="bold">79%</InlineText>
-              </Cell>
-
-              <Cell>90% of meer</Cell>
-            </Row>
+                <Cell>
+                  <ParseText
+                    value={item.has_1_shot_percentage}
+                    label={item.has_1_shot_percentage_label}
+                  />
+                </Cell>
+              </Row>
+            ))}
           </tbody>
         </StyledTable>
 
-        <Box maxWidth="maxWidthText" color="annotation">
-          <Markdown
-            content="&ast; Onder deze groep vallen alle mensen die minstens 1 prik hebben
-            gehad. Dit kunnen ook mensen zijn die inmiddels een tweede prik
-            hebben gehad of mensen die maar 1 prik hebben gehaald vanwege een
-            doorgemaakte besmetting. Lees hier meer over in de
-            [cijferverantwoording](https://www.google.com)"
-          ></Markdown>
-        </Box>
+        {annotation_description && (
+          <Box maxWidth="maxWidthText" color="annotation">
+            <Markdown content={annotation_description} />
+          </Box>
+        )}
       </Box>
     </ChartTile>
+  );
+}
+
+interface ParseBirthyearRangeProps {
+  birthyearRange: string;
+}
+
+function InlineTextBirthyear({ birthyearRange }: ParseBirthyearRangeProps) {
+  const { siteText } = useIntl();
+
+  const parsedBirthyearRange = parseBirthyearRange(birthyearRange);
+
+  assert(
+    parsedBirthyearRange,
+    `There is something wrong with parsing the birthyear range: ${birthyearRange}`
+  );
+
+  return (
+    <InlineText fontWeight="normal" variant="label2">
+      {replaceVariablesInText(
+        siteText.vaccinaties.birthyear_ranges[parsedBirthyearRange.type],
+        parsedBirthyearRange
+      )}
+    </InlineText>
+  );
+}
+
+interface ParseTextProps {
+  value: number | null;
+  label: string | null;
+  hasBoldText?: boolean;
+}
+
+function ParseText({ value, label, hasBoldText }: ParseTextProps) {
+  const { formatPercentage, siteText } = useIntl();
+
+  if (isPresent(label)) {
+    const parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
+
+    assert(
+      parsedVaccinatedLabel,
+      `There is something wrong with parsing the label: ${label}`
+    );
+
+    return (
+      <InlineText fontWeight={hasBoldText ? 'bold' : 'normal'}>
+        {parsedVaccinatedLabel.sign === '>'
+          ? replaceVariablesInText(
+              siteText.vaccinaties_common.labels.meer_dan,
+              {
+                value: formatPercentage(parsedVaccinatedLabel.value) + '%',
+              }
+            )
+          : replaceVariablesInText(
+              siteText.vaccinaties_common.labels.minder_dan,
+              {
+                value: formatPercentage(parsedVaccinatedLabel.value) + '%',
+              }
+            )}
+      </InlineText>
+    );
+  }
+
+  return (
+    <InlineText
+      fontWeight={hasBoldText ? 'bold' : 'normal'}
+    >{`${formatPercentage(value as number)}%`}</InlineText>
   );
 }
 

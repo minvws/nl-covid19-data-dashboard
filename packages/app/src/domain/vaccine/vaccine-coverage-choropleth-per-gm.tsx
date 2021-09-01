@@ -23,14 +23,16 @@ import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
 import { getSecondaryMetric } from './logic/get-secondary-metric';
 
-interface VaccineCoveragePerGmProps {
+interface VaccineCoverageChoroplethPerGmProps {
   data: {
     gm: GmCollectionVaccineCoveragePerAgeGroup[];
     vr: VrCollectionVaccineCoveragePerAgeGroup[];
   };
 }
 
-export function VaccineCoveragePerGm({ data }: VaccineCoveragePerGmProps) {
+export function VaccineCoverageChoroplethPerGm({
+  data,
+}: VaccineCoverageChoroplethPerGmProps) {
   const { siteText } = useIntl();
   const [selectedMap, setSelectedMap] = useState<RegionControlOption>('gm');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<AgeGroup>('18+');
