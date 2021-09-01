@@ -90,7 +90,7 @@ const Municipality = (props: StaticProps<typeof getStaticProps>) => {
                   noDataFillColor: colors.white,
                 }}
                 dataOptions={{
-                  getLink: reverseRouter.gm.ziekenhuisopnames,
+                  getLink: reverseRouter.gm.index,
                 }}
                 formatTooltip={(context) => (
                   <TooltipContent
