@@ -11,7 +11,6 @@ export const partialColor = colors.data.multiseries.cyan;
 export const fullColor = colors.data.multiseries.cyan_dark;
 
 const MARKER_WIDTH = 7;
-const BASE_LINE_HEIGHT = 3;
 
 export function CoverageProgressBar(props: {
   partialCount: number;
