@@ -1,3 +1,4 @@
+export * from './config';
 export * from './data-sorting';
 export * from './feature-flags';
 export * from './intl';
