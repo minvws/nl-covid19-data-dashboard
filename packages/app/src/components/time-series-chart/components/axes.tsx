@@ -16,8 +16,8 @@ import { memo, Ref, useCallback } from 'react';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
 import { createDate } from '~/utils/create-date';
-import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useIsMounted } from '~/utils/use-is-mounted';
+import { useResizeObserver } from '~/utils/use-resize-observer';
 import { Bounds } from '../logic';
 import { WeekNumbers } from './week-numbers';
 
@@ -101,7 +101,7 @@ export const Axes = memo(function Axes({
 }: AxesProps) {
   const [startUnix, endUnix] = timeDomain;
   const isMounted = useIsMounted();
-  const breakpoints = useBreakpoints();
+  const [axesRef, axesSize] = useResizeObserver<SVGGElement>();
 
   const {
     formatDateFromSeconds,
@@ -124,7 +124,8 @@ export const Axes = memo(function Axes({
     [formatPercentage]
   );
 
-  const xTickNumber = breakpoints.sm ? (timeframe === 'all' ? 6 : 5) : 3;
+  // Make sure each tick has 130px of space so it does not get too crowded
+  const xTickNumber = Math.floor((axesSize.width ?? 600) / 130);
   const xTicks = createTimeTicks(startUnix, endUnix, xTickNumber);
 
   const formatXAxis = useCallback(
@@ -193,7 +194,7 @@ export const Axes = memo(function Axes({
   const numDarkGridLines = allZeroValues ? 1 : numGridLines;
 
   return (
-    <g css={css({ pointerEvents: 'none' })}>
+    <g ref={axesRef} css={css({ pointerEvents: 'none' })}>
       <GridRows
         /**
          * Lighter gray grid lines are used for the lines that have no label on
