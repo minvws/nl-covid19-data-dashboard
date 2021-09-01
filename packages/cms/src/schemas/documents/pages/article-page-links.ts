@@ -1,3 +1,5 @@
+import { Rule } from '~/sanity';
+
 export const pageLinks = {
   title: 'Page Links',
   name: 'articlePageLinks',
@@ -16,7 +18,7 @@ export const pageLinks = {
       name: 'links',
       type: 'array',
       of: [{ type: 'link' }],
-      // validation: (rule: Rule) => rule.required().min(1).max(4),
+      validation: (rule: Rule) => rule.required().min(1).max(4),
     },
   ],
   preview: {
