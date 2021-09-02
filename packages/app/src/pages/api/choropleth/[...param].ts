@@ -4,6 +4,7 @@ import fs from 'fs';
 import Konva from 'konva-node';
 import { NextApiRequest, NextApiResponse } from 'next/dist/shared/lib/utils';
 import path from 'path';
+import { isDefined } from 'ts-is-present';
 import { DataConfig, DataOptions } from '~/components/choropleth';
 import {
   ChoroplethDataItem,
@@ -33,11 +34,12 @@ if (!fs.existsSync(publicImgPath)) {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { param } = req.query;
-  const [map, metric, property, heightStr] = param as [
+  const [map, metric, property, heightStr, selectedCode] = param as [
     MapType,
     string,
     string,
-    number
+    number,
+    string | undefined
   ];
 
   const height = Number(heightStr);
@@ -48,7 +50,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const filename = `${metric}_${property}_${map}_${height}.png`;
+  const suffix = isDefined(selectedCode) ? `_${selectedCode}` : '';
+  const filename = `${metric}_${property}_${map}_${height}${suffix}.png`;
 
   if (fs.existsSync(path.join(publicImgPath, filename))) {
     res.redirect(`/images/choropleth/${filename}`);
@@ -60,7 +63,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     property,
     map,
     height,
-    filename
+    filename,
+    selectedCode
   );
 
   res.setHeader('ETag', eTag);
@@ -103,7 +107,8 @@ function generateChoroplethImage(
   property: string,
   map: MapType,
   height: number,
-  filename: string
+  filename: string,
+  selectedCode?: string
 ) {
   const dataConfig: DataConfig<any> = createDataConfig<any>({
     metricName: metric as any,
@@ -122,7 +127,7 @@ function generateChoroplethImage(
   const geoJson = createGeoJson(map);
   const data = loadChoroplethData(map, metric);
 
-  const features = getChoroplethFeatures(map, data, geoJson);
+  const features = getChoroplethFeatures(map, data, geoJson, selectedCode);
 
   const fColor = getFillColor(data, map, dataConfig);
   const fillColor = (code: string, index: number) => {

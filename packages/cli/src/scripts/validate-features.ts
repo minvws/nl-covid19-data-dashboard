@@ -1,9 +1,14 @@
-import { assert, Feature, JsonDataScope } from '@corona-dashboard/common';
+import {
+  assert,
+  Feature,
+  features,
+  JsonDataScope,
+} from '@corona-dashboard/common';
 import { get, isEmpty } from 'lodash';
 import meow from 'meow';
 import path from 'path';
 import { isDefined } from 'ts-is-present';
-import { defaultJsonDirectory, featureFlagsConfigFile } from '../config';
+import { defaultJsonDirectory } from '../config';
 import { getSchemaInfo, SchemaInfo } from '../schema/schema-info';
 import { logError, logSuccess, readObjectFromJsonFile } from '../utils';
 
@@ -47,16 +52,6 @@ async function main() {
   const schemaInfo = getSchemaInfo(directory);
 
   const allFailures: Failure[] = [];
-
-  /**
-   * The features configuration is imported dynamically here. We could include
-   * it in the common bundle and import from there, but it feels a little
-   * annoying having to place an app configuration in the common bundle and
-   * build it before it becomes effective.
-   */
-  const { features } = (await import(featureFlagsConfigFile)) as {
-    features: Feature[];
-  };
 
   for (const feature of features) {
     if (isVerbose) {

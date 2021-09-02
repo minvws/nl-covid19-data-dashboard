@@ -1,9 +1,13 @@
 import { useMemo } from 'react';
+import { useFeature } from '~/lib/features';
 import { useBreakpoints } from './use-breakpoints';
 
 export function useReverseRouter() {
   const breakpoints = useBreakpoints();
   const openMenuSuffix = !breakpoints.md ? '?menu=1' : '';
+
+  const vaccinationVrPagefeature = useFeature('vrVaccinationPage');
+  const vaccinationGmPagefeature = useFeature('gmVaccinationPage');
 
   return useMemo(() => {
     const reverseRouter = {
@@ -51,7 +55,9 @@ export function useReverseRouter() {
       vr: {
         index: (code?: string) =>
           code
-            ? reverseRouter.vr.vaccinaties(code) + openMenuSuffix
+            ? vaccinationVrPagefeature.isEnabled
+              ? reverseRouter.vr.vaccinaties(code) + openMenuSuffix
+              : reverseRouter.vr.risiconiveau(code) + openMenuSuffix
             : '/veiligheidsregio',
         maatregelen: (code: string) => `/veiligheidsregio/${code}/maatregelen`,
         vaccinaties: (code: string) => `/veiligheidsregio/${code}/vaccinaties`,
@@ -77,7 +83,9 @@ export function useReverseRouter() {
       gm: {
         index: (code?: string) =>
           code
-            ? reverseRouter.gm.vaccinaties(code) + openMenuSuffix
+            ? vaccinationGmPagefeature.isEnabled
+              ? reverseRouter.gm.vaccinaties(code) + openMenuSuffix
+              : reverseRouter.gm.ziekenhuisopnames(code) + openMenuSuffix
             : `/gemeente`,
         positiefGetesteMensen: (code: string) =>
           `/gemeente/${code}/positief-geteste-mensen`,
@@ -90,5 +98,5 @@ export function useReverseRouter() {
     } as const;
 
     return reverseRouter;
-  }, [openMenuSuffix]);
+  }, [openMenuSuffix, vaccinationVrPagefeature, vaccinationGmPagefeature]);
 }

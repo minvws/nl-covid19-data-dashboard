@@ -78,6 +78,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
               initialWidth={400}
               minHeight={sm ? 180 : 140}
               timeframe="5weeks"
+              xTickNumber={2}
               values={trendData}
               displayTooltipValueOnly
               numGridLines={3}

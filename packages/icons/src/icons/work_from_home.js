@@ -13,7 +13,6 @@ const WorkFromHome = forwardRef(({ ...rest }, ref) => {
       fill="currentColor"
       {...rest}
     >
-      <path fill="#fff" d="M0 0h32v32H0z" />
       <path
         d="M18.173 11.772l-5.772-1.38 3.137 4.768.502-1.38 1.882 1.129.753-1.13-1.882-1.129 1.38-.878z"
         fill="currentColor"
