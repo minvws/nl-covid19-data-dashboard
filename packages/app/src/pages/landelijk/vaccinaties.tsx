@@ -1,6 +1,7 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
+import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -71,10 +72,18 @@ export const getStaticProps = createGetStaticProps(
     }`;
   }),
   createGetChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group }) =>
-      selectVaccineCoverageData(vaccine_coverage_per_age_group),
-    vr: ({ vaccine_coverage_per_age_group }) =>
-      selectVaccineCoverageData(vaccine_coverage_per_age_group),
+    gm: ({ vaccine_coverage_per_age_group }) => {
+      if (isDefined(vaccine_coverage_per_age_group)) {
+        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
+      }
+      return vaccine_coverage_per_age_group ?? null;
+    },
+    vr: ({ vaccine_coverage_per_age_group }) => {
+      if (isDefined(vaccine_coverage_per_age_group)) {
+        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
+      }
+      return vaccine_coverage_per_age_group ?? null;
+    },
   })
 );
 
