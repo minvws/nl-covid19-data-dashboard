@@ -2,8 +2,7 @@ import {
   NlVaccineDeliveryPerSupplier,
   NlVaccineDeliveryPerSupplierValue,
 } from '@corona-dashboard/common';
-import { useCallback } from 'react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { isDefined } from 'ts-is-present';
 import { Box } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';

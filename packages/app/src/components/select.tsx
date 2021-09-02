@@ -52,7 +52,6 @@ export function Select<T extends string>({
           </option>
         ))}
       </StyledSelect>
-
       {onClear && value && (
         <ClearButton
           onClick={() => onClear && onClear()}
@@ -61,7 +60,6 @@ export function Select<T extends string>({
           <VisuallyHidden>{siteText.common.clear_select_input}</VisuallyHidden>
         </ClearButton>
       )}
-
       {isDefined(icon) && <Icon>{icon}</Icon>}
     </Container>
   );
@@ -117,9 +115,9 @@ const StyledSelect = styled.select<{ isClearable: boolean; hasIcon: boolean }>(
       pr: x.isClearable ? '2.4rem' : '2rem',
       pl: x.hasIcon ? '2.4rem' : '0.5rem',
       background: `url('${chevronDownUrl}')`,
-      backgroundSize: '14px 14px',
+      backgroundSize: '18px 12px',
       backgroundRepeat: 'no-repeat, repeat',
-      backgroundPosition: 'right 0.5em top 60%, 0 0',
+      backgroundPosition: 'right 0.6em top 55%, 0 0',
       '&:focus': {
         borderColor: 'lightGray',
         outline: '2px dotted',

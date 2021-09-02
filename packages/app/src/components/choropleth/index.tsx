@@ -179,10 +179,17 @@ export const DynamicChoropleth = withLoadingProps((getLoadingProps) =>
   dynamic(() => import('./').then((mod) => mod.Choropleth), {
     ssr: false,
     loading: () => {
-      const { map, dataConfig, minHeight = 500 } = getLoadingProps();
+      const {
+        map,
+        dataConfig,
+        minHeight = 500,
+        dataOptions,
+      } = getLoadingProps();
       return (
         <img
-          src={`/api/choropleth/${map}/${dataConfig.metricName}/${dataConfig.metricProperty}/${minHeight}`}
+          src={`/api/choropleth/${map}/${dataConfig.metricName}/${
+            dataConfig.metricProperty
+          }/${minHeight}/${dataOptions.selectedCode ?? ''}`}
         />
       );
     },

@@ -19,9 +19,7 @@
     },
     "proto_name": {
       "type": "string",
-      "enum": [
-        "GM_COLLECTION"
-      ]
+      "enum": ["GM_COLLECTION"]
     },
     "name": {
       "type": "string",
