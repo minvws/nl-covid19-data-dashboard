@@ -1,4 +1,7 @@
-import { GmVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  GmCollectionVaccineCoveragePerAgeGroup,
+  GmVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 import { useState } from 'react';
 import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
@@ -53,6 +56,12 @@ export const getStaticProps = withFeatureNotFoundPage(
     ),
     createGetChoroplethData({
       gm: ({ vaccine_coverage_per_age_group }, ctx) => {
+        if (!isDefined(vaccine_coverage_per_age_group)) {
+          return {
+            vaccine_coverage_per_age_group:
+              null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
+          };
+        }
         const vrCode = isPresent(ctx.params?.code)
           ? vrCodeByGmCode[ctx.params?.code as 'string']
           : undefined;

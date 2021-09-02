@@ -1,6 +1,9 @@
-import { VrVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
+import {
+  GmCollectionVaccineCoveragePerAgeGroup,
+  VrVaccineCoveragePerAgeGroupValue,
+} from '@corona-dashboard/common';
 import { useState } from 'react';
-import { hasValueAtKey, isPresent } from 'ts-is-present';
+import { hasValueAtKey, isDefined, isPresent } from 'ts-is-present';
 import { DynamicChoropleth } from '~/components/choropleth';
 import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic';
@@ -48,15 +51,25 @@ export const getStaticProps = withFeatureNotFoundPage(
     getLastGeneratedDate,
     selectVrPageMetricData(),
     createGetChoroplethData({
-      gm: ({ vaccine_coverage_per_age_group }, ctx) => ({
-        vaccine_coverage_per_age_group: selectVaccineCoverageData(
-          isPresent(ctx.params?.code)
-            ? vaccine_coverage_per_age_group.filter((el) =>
-                gmCodesByVrCode[ctx.params?.code as string].includes(el.gmcode)
-              )
-            : vaccine_coverage_per_age_group
-        ),
-      }),
+      gm: ({ vaccine_coverage_per_age_group }, ctx) => {
+        if (!isDefined(vaccine_coverage_per_age_group)) {
+          return {
+            vaccine_coverage_per_age_group:
+              null as unknown as GmCollectionVaccineCoveragePerAgeGroup[],
+          };
+        }
+        return {
+          vaccine_coverage_per_age_group: selectVaccineCoverageData(
+            isPresent(ctx.params?.code)
+              ? vaccine_coverage_per_age_group.filter((el) =>
+                  gmCodesByVrCode[ctx.params?.code as string].includes(
+                    el.gmcode
+                  )
+                )
+              : vaccine_coverage_per_age_group
+          ),
+        };
+      },
     }),
     createGetContent<{
       page: VaccinationPageQuery;
