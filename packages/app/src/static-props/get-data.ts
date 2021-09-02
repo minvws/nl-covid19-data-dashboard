@@ -217,7 +217,7 @@ export function selectVrData<T extends keyof Vr = never>(...metrics: T[]) {
     const vrData = getVrData(context);
 
     const selectedVrData = metrics.reduce(
-      (acc, p) => set(acc, p, vrData.data[p]),
+      (acc, p) => set(acc, p, vrData.data[p] ?? null),
       {
         situationsSidebarValue: getSituationsSidebarValue(
           json.vrCollection.situations
@@ -287,7 +287,7 @@ export function selectGmData<T extends keyof Gm = never>(...metrics: T[]) {
       tested_overall: { last_value: gmData.data.tested_overall.last_value },
       sewer: { last_value: gmData.data.sewer.last_value },
       vaccine_coverage_per_age_group: {
-        values: gmData.data.vaccine_coverage_per_age_group.values,
+        values: gmData.data.vaccine_coverage_per_age_group?.values ?? null,
       },
     };
 
