@@ -1,10 +1,7 @@
 /// <reference types="react" />
 import { FC, SVGAttributes } from 'react';
 
-export interface IconProps extends SVGAttributes<SVGElement> {
-  // color?: string;
-  // size?: string | number;
-}
+export interface IconProps extends SVGAttributes<SVGElement> {}
 
 export type Icon = FC<IconProps>;
 export const AfstandSporten: Icon;

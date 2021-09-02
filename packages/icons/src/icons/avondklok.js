@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Avondklok = forwardRef(({ ...rest }, ref) => {
   return (
@@ -28,14 +27,6 @@ const Avondklok = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Avondklok.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Avondklok.displayName = 'Avondklok';
 

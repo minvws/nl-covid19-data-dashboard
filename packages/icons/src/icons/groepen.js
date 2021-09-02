@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Groepen = forwardRef(({ ...rest }, ref) => {
   return (
@@ -19,14 +18,6 @@ const Groepen = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Groepen.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Groepen.displayName = 'Groepen';
 

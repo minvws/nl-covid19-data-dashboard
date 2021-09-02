@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Toegangsbewijzen = forwardRef(({ ...rest }, ref) => {
   return (
@@ -28,14 +27,6 @@ const Toegangsbewijzen = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Toegangsbewijzen.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Toegangsbewijzen.displayName = 'Toegangsbewijzen';
 

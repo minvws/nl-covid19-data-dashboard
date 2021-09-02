@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Database = forwardRef(({ ...rest }, ref) => {
   return (
@@ -34,14 +33,6 @@ const Database = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Database.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Database.displayName = 'Database';
 

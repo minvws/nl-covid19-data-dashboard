@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const BasisregelsHandenwassen = forwardRef(({ ...rest }, ref) => {
   return (
@@ -31,14 +30,6 @@ const BasisregelsHandenwassen = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-BasisregelsHandenwassen.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 BasisregelsHandenwassen.displayName = 'BasisregelsHandenwassen';
 

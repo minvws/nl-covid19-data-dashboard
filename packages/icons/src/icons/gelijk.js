@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Gelijk = forwardRef(({ ...rest }, ref) => {
   return (
@@ -15,14 +14,6 @@ const Gelijk = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Gelijk.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Gelijk.displayName = 'Gelijk';
 

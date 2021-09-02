@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Binnensporten = forwardRef(({ ...rest }, ref) => {
   return (
@@ -16,14 +15,6 @@ const Binnensporten = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Binnensporten.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Binnensporten.displayName = 'Binnensporten';
 

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Gedrag = forwardRef(({ ...rest }, ref) => {
   return (
@@ -18,14 +17,6 @@ const Gedrag = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Gedrag.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Gedrag.displayName = 'Gedrag';
 

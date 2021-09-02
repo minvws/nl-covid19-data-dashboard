@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const HealthCare = forwardRef(({ ...rest }, ref) => {
   return (
@@ -17,14 +16,6 @@ const HealthCare = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-HealthCare.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 HealthCare.displayName = 'HealthCare';
 

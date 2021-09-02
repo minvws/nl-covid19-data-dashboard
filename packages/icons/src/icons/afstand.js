@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Afstand = forwardRef(({ ...rest }, ref) => {
   return (
@@ -20,14 +19,6 @@ const Afstand = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Afstand.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Afstand.displayName = 'Afstand';
 
