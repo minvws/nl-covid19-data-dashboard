@@ -23,7 +23,10 @@ import { logError, logSuccess } from '../utils';
  *
  */
 function loadStrippedSchema(metricName: string, basePath: string) {
-  const strippedSchema = loadRootSchema(path.join(basePath, `__index.json`));
+  const strippedSchema = loadRootSchema(
+    path.join(basePath, `__index.json`),
+    true
+  );
 
   if (!isDefined(strippedSchema.properties[metricName])) {
     logError(
@@ -106,37 +109,39 @@ let rootSchema = metricName
   ? loadStrippedSchema(metricName, schemaBasePath)
   : '__index.json';
 
-createValidateFunction(rootSchema, schemaBasePath).then((validateFunction) => {
-  const fileName = path.join(jsonBasePath, jsonFileName);
-  const schemaInfo = schemaInformation[schemaName];
+createValidateFunction(rootSchema, schemaBasePath, true).then(
+  (validateFunction) => {
+    const fileName = path.join(jsonBasePath, jsonFileName);
+    const schemaInfo = schemaInformation[schemaName];
 
-  const contentAsString = fs.readFileSync(fileName, {
-    encoding: 'utf8',
-  });
+    const contentAsString = fs.readFileSync(fileName, {
+      encoding: 'utf8',
+    });
 
-  try {
-    const jsonData: JSONObject = JSON.parse(contentAsString);
+    try {
+      const jsonData: JSONObject = JSON.parse(contentAsString);
 
-    sortTimeSeriesInDataInPlace(jsonData);
+      sortTimeSeriesInDataInPlace(jsonData);
 
-    const { isValid, schemaErrors } = executeValidations(
-      validateFunction,
-      jsonData,
-      schemaInfo
-    );
+      const { isValid, schemaErrors } = executeValidations(
+        validateFunction,
+        jsonData,
+        schemaInfo
+      );
 
-    if (!isValid) {
-      console.error(schemaErrors);
-      logError(`  ${jsonFileName} is invalid  \n`);
+      if (!isValid) {
+        console.error(schemaErrors);
+        logError(`  ${jsonFileName} is invalid  \n`);
+        process.exit(1);
+      }
+    } catch (e) {
+      console.group();
+      console.error(e);
+      logError(`  ${fileName} cannot be parsed  \n`);
+      console.groupEnd();
       process.exit(1);
     }
-  } catch (e) {
-    console.group();
-    console.error(e);
-    logError(`  ${fileName} cannot be parsed  \n`);
-    console.groupEnd();
-    process.exit(1);
-  }
 
-  logSuccess(`  ${jsonFileName} is valid  \n`);
-});
+    logSuccess(`  ${jsonFileName} is valid  \n`);
+  }
+);

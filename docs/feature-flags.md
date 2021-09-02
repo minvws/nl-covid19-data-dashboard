@@ -72,14 +72,11 @@ export const getStaticProps = withFeatureNotFoundPage(
 
 ## Validation
 
-It is only possible to toggle features when the data is defined as optional in
-our schema's, but as a result our standard validation doesn't warn us when data
-is missing.
-
-To solve this we run an extra build-time feature validation to ensure that:
-
-- Data for features that are enabled should be present in the dataset
-- Data for features that are disabled should _not_ be present in the dataset
+In `create-validate-function.ts` the feature flags are loaded as well, and based
+on this information the specified metrics are removed from the required list.
+Making them effectively optional at validation time. But required during the
+typescript generation. So, that way a feature can be turned off while the compiler
+remains happy and you don't need to riddle your code with undefined checks.
 
 For this reason it is important to declare what data belongs to the feature, via
 the options `dataScopes`, `metricName` and optionally `metricProperty`.
