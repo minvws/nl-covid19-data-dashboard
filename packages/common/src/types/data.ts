@@ -279,7 +279,7 @@ export interface Nl {
   vaccine_administered_total: NlVaccineAdministeredTotal;
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
-  vaccine_coverage_per_age_group?: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
   vaccine_stock: NlVaccineStock;
   variants?: NlVariants;
 }
