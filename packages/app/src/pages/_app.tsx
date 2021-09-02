@@ -33,13 +33,7 @@ export default function App(props: AppProps) {
   );
 
   useEffect(() => {
-    const handleRouteChange = (pathname: string) => {
-      piwik.pageview();
-
-      if (!pathname.includes('#')) {
-        scrollToTop();
-      }
-    };
+    const handleRouteChange = () => piwik.pageview();
 
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
@@ -69,13 +63,4 @@ export default function App(props: AppProps) {
       </ThemeProvider>
     </>
   );
-}
-
-function scrollToTop() {
-  const navigationBar = document.querySelector(
-    '#main-navigation'
-  ) as HTMLElement | null;
-  const offset = navigationBar?.offsetTop ?? 0;
-
-  window.scrollTo(0, window.scrollY >= offset ? offset : 0);
 }
