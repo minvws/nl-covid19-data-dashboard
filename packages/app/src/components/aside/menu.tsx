@@ -4,14 +4,13 @@ import { NextRouter, useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { UrlObject } from 'url';
+import chevronUrl from '~/assets/chevron.svg';
 import { Box } from '~/components/base';
 import { Anchor, Text } from '~/components/typography';
 import { SpaceValue } from '~/style/theme';
 import { asResponsiveArray } from '~/style/utils';
 import { Link } from '~/utils/link';
 import { AsideTitle } from './title';
-
-import chevronUrl from '~/assets/chevron.svg';
 
 type Url = UrlObject | string;
 
@@ -96,7 +95,7 @@ export function MetricMenuItemLink({
 
   return (
     <MetricMenuItem>
-      <Link href={href} passHref>
+      <Link href={href} scrollBehavior="smooth" passHref>
         <StyledAnchor isActive={isActive}>{content}</StyledAnchor>
       </Link>
     </MetricMenuItem>
@@ -123,7 +122,7 @@ export function MetricMenuButtonLink({
 
   return (
     <MetricMenuButton isActive={isActive} buttonVariant={buttonVariant}>
-      <Link href={href} passHref>
+      <Link href={href} scrollBehavior="smooth" passHref>
         <StyledAnchor isButton={true} isActive={isActive}>
           <AsideTitle title={title} subtitle={subtitle} />
           {children && <ChildrenWrapper>{children}</ChildrenWrapper>}
