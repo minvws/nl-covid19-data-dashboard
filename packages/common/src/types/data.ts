@@ -437,12 +437,8 @@ export interface NlSewer {
 }
 export interface NlSewerValue {
   average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
   date_of_insertion_unix: number;
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
 }
 export interface NlHospitalNice {
   values: NlHospitalNiceValue[];
@@ -991,12 +987,8 @@ export interface VrSewer {
   last_value: VrSewerValue;
 }
 export interface VrSewerValue {
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   average: number;
-  total_number_of_samples: number;
-  sampled_installation_count: number;
-  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface VrSewerPerInstallation {
@@ -1295,11 +1287,9 @@ export interface VrCollectionNursingHome {
   vrcode: string;
 }
 export interface VrCollectionSewer {
-  date_start_unix: number;
-  date_end_unix: number;
+  date_unix: number;
   vrcode: string;
   average: number;
-  total_installation_count: number;
   date_of_insertion_unix: number;
 }
 export interface VrCollectionBehavior {
