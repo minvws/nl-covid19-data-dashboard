@@ -23,7 +23,7 @@ import { Metadata } from '~/components/metadata';
 import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { Anchor, Text } from '~/components/typography';
+import { Anchor } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';

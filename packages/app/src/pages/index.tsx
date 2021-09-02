@@ -26,7 +26,6 @@ import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { Layout } from '~/domain/layout/layout';
