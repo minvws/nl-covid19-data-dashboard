@@ -101,6 +101,10 @@ const nextConfig = {
         '@emotion/memoize',
         '../../node_modules/@styled-system/should-forward-prop/node_modules/@emotion/memoize',
       ],
+      [
+        '@sanity/generate-help-url',
+        '../../node_modules/@sanity/generate-help-url',
+      ],
       ['react-is', '../../node_modules/react-is'],
       [
         'unist-util-visit-parents',
@@ -109,6 +113,8 @@ const nextConfig = {
       ['d3-color', '../../node_modules/d3-interpolate/node_modules/d3-color'],
       ['d3-geo', '../../node_modules/d3-geo'],
       ['d3-interpolate', '../../node_modules/d3-interpolate'],
+      ['d3-array', './node_modules/d3-array'],
+      ['internmap', '../../node_modules/internmap'],
       ['balanced-match', '../../node_modules/balanced-match'],
     ];
 
