@@ -21,7 +21,7 @@
     "lokalize:sync-after-release": "ts-node src/lokalize/sync-after-release.ts",
     "lokalize:sync-after-feature": "ts-node src/lokalize/sync-after-feature.ts",
     "lokalize:sync-prd-to-dev": "ts-node src/lokalize/sync-prd-to-dev.ts",
-    "lokalize:strip-unused-keys": "yarn lokalize:export --clean-json && ts-node src/lokalize/strip-unused-keys.ts && yarn lokalize:export --clean-json && yarn workspace @corona-dashboard/app compile",
+    "lokalize:strip-unused-keys": "yarn lokalize:export --clean-json && ts-node src/lokalize/strip-unused-keys.ts && yarn lokalize:export --clean-json && yarn workspace @corona-dashboard/app typecheck",
     "elements:add": "ts-node src/elements/add.ts",
     "format": "prettier --write \"src/**/*.{js,ts,tsx}\" \"*.{js,json,md,yml}\""
   },
@@ -56,6 +56,7 @@
     "sanity-plugin-tabs": "^2.0.1",
     "sanity-secrets": "^0.0.5",
     "ts-is-present": "^1.2.1",
+    "ts-morph": "^12.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
