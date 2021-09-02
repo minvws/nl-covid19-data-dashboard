@@ -13,6 +13,11 @@ module.exports = {
       configFile: path.resolve(__dirname, '.babelrc'),
     },
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   env: {
     node: true,
     browser: true,
