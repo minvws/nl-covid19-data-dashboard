@@ -23,7 +23,10 @@ import { logError, logSuccess } from '../utils';
  *
  */
 function loadStrippedSchema(metricName: string, basePath: string) {
-  const strippedSchema = loadRootSchema(path.join(basePath, `__index.json`));
+  const strippedSchema = loadRootSchema(
+    path.join(basePath, `__index.json`),
+    true
+  );
 
   if (!isDefined(strippedSchema.properties[metricName])) {
     logError(
@@ -106,7 +109,7 @@ let rootSchema = metricName
   ? loadStrippedSchema(metricName, schemaBasePath)
   : '__index.json';
 
-createValidateFunction(rootSchema, schemaBasePath, false).then(
+createValidateFunction(rootSchema, schemaBasePath, true).then(
   (validateFunction) => {
     const fileName = path.join(jsonBasePath, jsonFileName);
     const schemaInfo = schemaInformation[schemaName];
