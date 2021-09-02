@@ -7,14 +7,19 @@ import { equalsRootProperty } from './keywords';
 
 const disabledMetrics = features.filter((x) => !x.isEnabled);
 
-export function loadRootSchema(schemaPath: string) {
+export function loadRootSchema(
+  schemaPath: string,
+  skipFeatureDisable: boolean
+) {
   try {
     const schema = JSON.parse(
       fs.readFileSync(schemaPath, {
         encoding: 'utf8',
       })
     );
-    disableFeatureFlagMetrics(schema, disabledMetrics);
+    if (!skipFeatureDisable) {
+      disableFeatureFlagMetrics(schema, disabledMetrics);
+    }
     return schema;
   } catch (e) {
     if (e instanceof Error)
@@ -57,14 +62,21 @@ function disableFeatureFlagMetrics(schema: any, features: Feature[]) {
  */
 export function createValidateFunction(
   schemaOrFilename: string | object,
-  schemaBasePath: string
+  schemaBasePath: string,
+  skipFeatureDisable: boolean = false
 ) {
   const schema =
     typeof schemaOrFilename === 'string'
-      ? loadRootSchema(path.join(schemaBasePath, schemaOrFilename))
+      ? loadRootSchema(
+          path.join(schemaBasePath, schemaOrFilename),
+          skipFeatureDisable
+        )
       : schemaOrFilename;
 
-  return compileValidator(schema, loadSchema.bind(null, schemaBasePath));
+  return compileValidator(
+    schema,
+    loadSchema.bind(null, schemaBasePath, skipFeatureDisable)
+  );
 }
 
 function compileValidator(
@@ -90,14 +102,20 @@ function compileValidator(
  * @param basePath The given base directory name
  * @param uri The given filename
  */
-export function loadSchema(basePath: string, uri: string): Promise<any> {
+export function loadSchema(
+  basePath: string,
+  skipFeatureDisable: boolean,
+  uri: string
+): Promise<any> {
   return fs.promises
     .readFile(path.join(basePath, uri), {
       encoding: 'utf8',
     })
     .then((data: string) => {
       const schema = JSON.parse(data);
-      disableFeatureFlagMetrics(schema, disabledMetrics);
+      if (!skipFeatureDisable) {
+        disableFeatureFlagMetrics(schema, disabledMetrics);
+      }
       return schema;
     });
 }
