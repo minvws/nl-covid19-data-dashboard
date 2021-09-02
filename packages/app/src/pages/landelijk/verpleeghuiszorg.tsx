@@ -10,6 +10,7 @@ import { ChoroplethTile } from '~/components/choropleth-tile';
 import { thresholds } from '~/components/choropleth/logic/thresholds';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
@@ -80,7 +81,9 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
             }
             title={positiveTestedPeopleText.titel}
             icon={<Verpleeghuiszorg />}
-            description={positiveTestedPeopleText.pagina_toelichting}
+            description={
+              <Markdown content={positiveTestedPeopleText.pagina_toelichting} />
+            }
             metadata={{
               datumsText: positiveTestedPeopleText.datums,
               dateOrRange: nursinghomeDataLastValue.date_unix,

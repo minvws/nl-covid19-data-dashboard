@@ -25,6 +25,7 @@ import {
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
+import { Markdown } from '~/components/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -79,7 +80,9 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
                 difference={data.difference.corona_melder_app_warning__count}
               />
 
-              <Text>{corona_melder_app.waarschuwingen.description}</Text>
+              <Markdown
+                content={corona_melder_app.waarschuwingen.description}
+              />
               <Text>
                 {replaceComponentsInText(
                   corona_melder_app.waarschuwingen.total,

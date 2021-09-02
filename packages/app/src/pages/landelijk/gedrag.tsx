@@ -109,7 +109,7 @@ export default function BehaviorPage(
             <Tile>
               <Box spacing={3}>
                 <Heading level={3}>{nl_gedrag.onderzoek_uitleg.titel}</Heading>
-                <Text>{nl_gedrag.onderzoek_uitleg.toelichting}</Text>
+                <Markdown content={nl_gedrag.onderzoek_uitleg.toelichting} />
               </Box>
             </Tile>
 
