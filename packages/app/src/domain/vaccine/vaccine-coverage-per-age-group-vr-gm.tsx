@@ -47,7 +47,14 @@ export function VaccineCoveragePerAgeGroupVrGm({
   );
 
   return (
-    <ChartTile title={title} description={description}>
+    <ChartTile
+      title={title}
+      description={description}
+      metadata={{
+        source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+        date: data[0].date_unix,
+      }}
+    >
       <Box overflow="auto" spacing={3}>
         <StyledTable>
           <thead>
