@@ -1,6 +1,7 @@
 import { NlVaccineCoverageValue } from '@corona-dashboard/common';
 import { Vaccinaties } from '@corona-dashboard/icons';
 import { isEmpty } from 'lodash';
+import { isDefined } from 'ts-is-present';
 import { Box, Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -15,8 +16,8 @@ import { selectDeliveryAndAdministrationData } from '~/domain/vaccine/data-selec
 import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/select-vaccine-coverage-data';
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
+import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
-import { VaccineCoveragePerGm } from '~/domain/vaccine/vaccine-coverage-per-gm';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
@@ -71,10 +72,18 @@ export const getStaticProps = createGetStaticProps(
     }`;
   }),
   createGetChoroplethData({
-    gm: ({ vaccine_coverage_per_age_group }) =>
-      selectVaccineCoverageData(vaccine_coverage_per_age_group),
-    vr: ({ vaccine_coverage_per_age_group }) =>
-      selectVaccineCoverageData(vaccine_coverage_per_age_group),
+    gm: ({ vaccine_coverage_per_age_group }) => {
+      if (isDefined(vaccine_coverage_per_age_group)) {
+        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
+      }
+      return vaccine_coverage_per_age_group ?? null;
+    },
+    vr: ({ vaccine_coverage_per_age_group }) => {
+      if (isDefined(vaccine_coverage_per_age_group)) {
+        return selectVaccineCoverageData(vaccine_coverage_per_age_group);
+      }
+      return vaccine_coverage_per_age_group ?? null;
+    },
   })
 );
 
@@ -88,6 +97,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
+  const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
 
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
@@ -188,7 +198,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          <VaccineCoveragePerGm data={choropleth} />
+          {vaccinationChoroplethFeature.isEnabled && (
+            <VaccineCoverageChoroplethPerGm data={choropleth} />
+          )}
 
           {vaccinationPerAgeGroupFeature.isEnabled &&
           data.vaccine_coverage_per_age_group ? (

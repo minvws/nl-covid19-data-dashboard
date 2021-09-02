@@ -114,6 +114,7 @@ type TimeSeriesChartProps<
   numGridLines?: number;
   showWeekNumbers?: boolean;
   tickValues?: number[];
+  xTickNumber?: number;
   formatTickValue?: (value: number) => string;
   paddingLeft?: number;
   /**
@@ -154,6 +155,7 @@ export function TimeSeriesChart<
   showWeekNumbers,
   numGridLines = 4,
   tickValues: yTickValues,
+  xTickNumber,
   formatTickValue: formatYTickValue,
   paddingLeft,
   tooltipTitle,
@@ -399,6 +401,7 @@ export function TimeSeriesChart<
               timeframe={timeframe}
               yTickValues={yTickValues}
               timeDomain={timeDomain}
+              xTickNumber={xTickNumber}
               formatYTickValue={formatYTickValue}
               xScale={xScale}
               yScale={yScale}

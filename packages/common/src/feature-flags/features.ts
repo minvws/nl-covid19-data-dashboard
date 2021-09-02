@@ -1,9 +1,9 @@
-import type { Feature } from '@corona-dashboard/common';
+import { Feature } from '~/types';
 
 export const features: Feature[] = [
   {
     name: 'vaccinationPerAgeGroup',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
   },
@@ -21,17 +21,17 @@ export const features: Feature[] = [
   },
   {
     name: 'inHomePage',
-    isEnabled: true,
+    isEnabled: false,
   },
   {
     name: 'inPositiveTestsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in', 'in_collection'],
     metricName: 'tested_overall',
   },
   {
     name: 'inVariantsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in'],
     metricName: 'variants',
   },
@@ -41,12 +41,20 @@ export const features: Feature[] = [
   },
   {
     name: 'vrVaccinationPage',
-    isEnabled: true,
-    dataScopes: ['vr_collection'],
+    isEnabled: false,
+    dataScopes: ['vr', 'vr_collection'],
+    metricName: 'vaccine_coverage_per_age_group',
   },
   {
     name: 'gmVaccinationPage',
-    isEnabled: true,
-    dataScopes: ['gm_collection'],
+    isEnabled: false,
+    dataScopes: ['gm', 'gm_collection'],
+    metricName: 'vaccine_coverage_per_age_group',
+  },
+  {
+    name: 'nlVaccinationChoropleth',
+    isEnabled: false,
+    dataScopes: ['gm_collection', 'vr_collection'],
+    metricName: 'vaccine_coverage_per_age_group',
   },
 ];

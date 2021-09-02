@@ -14,21 +14,31 @@ COPY packages/cli/package.json ./packages/cli/
 COPY packages/cms/package.json ./packages/cms/
 COPY packages/common/package.json ./packages/common/
 COPY packages/icons/package.json ./packages/icons/
-RUN apk --no-cache --virtual build-dependencies --update add \
-    sudo \
-    curl \
-    build-base \
-    g++ \
-    libpng \
-    libpng-dev \
-    jpeg-dev \
-    pango-dev \
-    cairo-dev \
-    giflib-dev \
-    python3 \
+RUN apk add --no-cache --virtual build-dependencies \
+      python3 \
+      g++ \
+      build-base \
+      cairo-dev \
+      jpeg-dev \
+      pango-dev \
+      musl-dev \
+      giflib-dev \
+      pixman-dev \
+      pangomm-dev \
+      libjpeg-turbo-dev \
+      freetype-dev \
     && yarn install --frozen-lockfile --production=false \
     && apk del build-dependencies \
-    ;
+    && apk add --no-cache \
+      cairo \
+      jpeg \
+      pango \
+      musl \
+      giflib \
+      pixman \
+      pangomm \
+      libjpeg-turbo \
+      freetype
 
 # Layer cache for rebuilds without sourcecode changes.
 # This relies on the JSONS being downloaded by the builder.
@@ -58,7 +68,6 @@ FROM builder
 RUN yarn download \
 && yarn workspace @corona-dashboard/cli validate-json-all \
 && yarn workspace @corona-dashboard/cli validate-last-values --fail-early \
-&& yarn workspace @corona-dashboard/cli validate-features --fail-early \
 && yarn workspace @corona-dashboard/cms lokalize:export --dataset=$NEXT_PUBLIC_SANITY_DATASET \
 && yarn workspace @corona-dashboard/app build \
 && addgroup -g 1001 -S nodejs \

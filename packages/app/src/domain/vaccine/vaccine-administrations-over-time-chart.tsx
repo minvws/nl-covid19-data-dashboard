@@ -28,6 +28,7 @@ export function VaccineAdministrationsOverTimeChart({
         minHeight={sm ? 180 : 140}
         timeframe="all"
         values={values}
+        xTickNumber={2}
         displayTooltipValueOnly
         numGridLines={3}
         seriesConfig={[
