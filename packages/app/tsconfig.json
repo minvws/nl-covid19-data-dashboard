@@ -17,6 +17,11 @@
       "path": "../common"
     }
   ],
-  "include": ["next-env.d.ts", "src", "src/**/*.json"],
+  "include": [
+    "next-env.d.ts",
+    "src",
+    "src/**/*.json",
+    "../common/src/feature-flags"
+  ],
   "exclude": ["node_modules"]
 }
