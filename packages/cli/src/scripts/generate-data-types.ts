@@ -49,7 +49,8 @@ async function generateTypeScriptFromSchema(schemaName: string) {
 
   const validate = await createValidateFunction(
     '__index.json',
-    path.join(schemaDirectory, schemaName)
+    path.join(schemaDirectory, schemaName),
+    true
   );
 
   const typeDefinition = await compile(

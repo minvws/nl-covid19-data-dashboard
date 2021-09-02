@@ -1,11 +1,10 @@
-import { assert, Feature } from '@corona-dashboard/common';
-import { hasValueAtKey } from 'ts-is-present';
 /**
  * We could provide features via the Context API, but since this doesn't change
  * at runtime I don't see any advantage doing so. An import is the most basic
  * implementation.
  */
-import { features } from '~/config';
+import { assert, Feature, features } from '@corona-dashboard/common';
+import { hasValueAtKey } from 'ts-is-present';
 
 export function useFeature(name: string): Feature {
   const feature = features.find(hasValueAtKey('name', name));

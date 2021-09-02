@@ -45,7 +45,8 @@
     "vaccine_administered_rate_moving_average",
     "vaccine_administered_planned",
     "vaccine_stock",
-    "vaccine_delivery_per_supplier"
+    "vaccine_delivery_per_supplier",
+    "vaccine_coverage_per_age_group"
   ],
   "additionalProperties": false,
   "properties": {
