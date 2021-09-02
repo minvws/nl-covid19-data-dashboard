@@ -24,7 +24,7 @@ export function Link({ scrollBehavior = 'auto', ...props }: LinkProps) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
 
-    // Default is 'smooth' through CSS so anchor links have smooth scroll as
+    // Default is 'smooth' through CSS so hash links have smooth scroll as
     // well, so we have to temporarily overwrite it if it is 'auto' to get an
     // instant scroll.
     if (scrollBehavior === 'auto') {
