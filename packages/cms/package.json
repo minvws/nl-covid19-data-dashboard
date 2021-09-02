@@ -43,7 +43,6 @@
     "flat": "^5.0.2",
     "fs-extra": "^10.0.0",
     "outdent": "^0.8.0",
-    "p-queue": "^6",
     "prompts": "^2.4.0",
     "prop-types": "^15.6",
     "react": "^17.0.1",
