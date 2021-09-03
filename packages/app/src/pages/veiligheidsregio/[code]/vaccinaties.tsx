@@ -181,6 +181,10 @@ export const VaccinationsVrPage = (
                 siteText.vaccinaties.vr_choropleth_vaccinatie_graad
                   .legend_title,
             }}
+            metadata={{
+              source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+              date: choropleth.gm.vaccine_coverage_per_age_group[0].date_unix,
+            }}
           >
             <DynamicChoropleth
               renderTarget="canvas"
