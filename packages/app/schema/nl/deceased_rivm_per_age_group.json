@@ -22,6 +22,7 @@
         "covid_percentage",
         "date_of_insertion_unix"
       ],
+      "additionalProperties": false,
       "properties": {
         "age_group_range": {
           "type": "string"
