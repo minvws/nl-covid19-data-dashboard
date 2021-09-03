@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const External = forwardRef(({ ...rest }, ref) => {
   return (
@@ -17,14 +16,6 @@ const External = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-External.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 External.displayName = 'External';
 

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const BasisregelsAfstand = forwardRef(({ ...rest }, ref) => {
   return (
@@ -63,14 +62,6 @@ const BasisregelsAfstand = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-BasisregelsAfstand.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 BasisregelsAfstand.displayName = 'BasisregelsAfstand';
 

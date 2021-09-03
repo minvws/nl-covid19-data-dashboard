@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const RioolwaterMonitoring = forwardRef(({ ...rest }, ref) => {
   return (
@@ -26,14 +25,6 @@ const RioolwaterMonitoring = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-RioolwaterMonitoring.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 RioolwaterMonitoring.displayName = 'RioolwaterMonitoring';
 

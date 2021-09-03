@@ -1,0 +1,6 @@
+module.exports = {
+  singleQuote: true,
+  trailingComma: 'es5',
+  bracketSpacing: true,
+  parser: 'babel',
+};

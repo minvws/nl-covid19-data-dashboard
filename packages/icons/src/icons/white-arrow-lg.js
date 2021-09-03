@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const WhiteArrowLg = forwardRef(({ ...rest }, ref) => {
   return (
@@ -20,14 +19,6 @@ const WhiteArrowLg = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-WhiteArrowLg.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 WhiteArrowLg.displayName = 'WhiteArrowLg';
 

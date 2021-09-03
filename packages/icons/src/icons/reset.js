@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Reset = forwardRef(({ ...rest }, ref) => {
   return (
@@ -31,14 +30,6 @@ const Reset = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Reset.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Reset.displayName = 'Reset';
 

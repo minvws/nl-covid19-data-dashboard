@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const GgdTesten = forwardRef(({ ...rest }, ref) => {
   return (
@@ -15,14 +14,6 @@ const GgdTesten = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-GgdTesten.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 GgdTesten.displayName = 'GgdTesten';
 

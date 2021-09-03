@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const BasisregelsElleboog = forwardRef(({ ...rest }, ref) => {
   return (
@@ -19,14 +18,6 @@ const BasisregelsElleboog = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-BasisregelsElleboog.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 BasisregelsElleboog.displayName = 'BasisregelsElleboog';
 

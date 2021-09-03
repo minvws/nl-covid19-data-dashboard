@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Overig = forwardRef(({ ...rest }, ref) => {
   return (
@@ -11,14 +10,6 @@ const Overig = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Overig.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Overig.displayName = 'Overig';
 

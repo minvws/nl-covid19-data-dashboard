@@ -15,7 +15,6 @@
     "p-memoize": "^4.0.1",
     "topojson-client": "^3.1.0",
     "ts-is-present": "^1.2.1",
-    "ts-morph": "^11.0.0",
     "ts-node": "^10.2.1"
   },
   "scripts": {
@@ -34,8 +33,7 @@
     "validate-json-single": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-single.ts",
     "validate-last-values": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-last-values.ts",
     "validate-features": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-features.ts",
-    "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts",
-    "strip-unused-locale-keys": "yarn workspace @corona-dashboard/cms lokalize:export && ts-node src/locale/strip-unused-locale-keys.ts && yarn workspace @corona-dashboard/cms lokalize:export && yarn workspace @corona-dashboard/app compile"
+    "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts"
   },
   "devDependencies": {
     "@types/meow": "^6.0.0",

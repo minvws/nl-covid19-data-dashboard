@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const SearchIcon = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const SearchIcon = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-SearchIcon.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 SearchIcon.displayName = 'SearchIcon';
 

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Search = forwardRef(({ ...rest }, ref) => {
   return (
@@ -16,14 +15,6 @@ const Search = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Search.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Search.displayName = 'Search';
 
