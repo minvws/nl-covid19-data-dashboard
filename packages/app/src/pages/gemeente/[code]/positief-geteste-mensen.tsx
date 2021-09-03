@@ -242,7 +242,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
             title={replaceVariablesInText(text.map_titel, {
               municipality: municipalityName,
             })}
-            description={text.map_toelichting}
+            description={<Markdown content={text.map_toelichting} />}
             legend={{
               thresholds: thresholds.gm.infected_per_100k,
               title:

@@ -185,7 +185,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
               date: dataOverallLastValue.date_unix,
               source: text.bronnen.rivm,
             }}
-            description={text.map_toelichting}
+            description={<Markdown content={text.map_toelichting} />}
             onChartRegionChange={setSelectedMap}
             chartRegion={selectedMap}
             legend={{

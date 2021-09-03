@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const CloseThick = forwardRef(({ ...rest }, ref) => {
   return (
@@ -22,14 +21,6 @@ const CloseThick = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-CloseThick.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 CloseThick.displayName = 'CloseThick';
 

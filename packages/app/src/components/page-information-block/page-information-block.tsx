@@ -1,4 +1,6 @@
 import css from '@styled-system/css';
+import { ReactNode } from 'react';
+import { isValidElement } from 'react';
 import styled from 'styled-components';
 import { ArticleSummary } from '~/components/article-teaser';
 import { Box } from '~/components/base';
@@ -14,7 +16,7 @@ import { UsefulLinks } from './components/useful-links';
 interface InformationBlockProps {
   title?: string;
   icon?: JSX.Element;
-  description?: string | RichContentBlock[];
+  description?: string | RichContentBlock[] | ReactNode;
   articles?: ArticleSummary[];
   usefulLinks?: {
     title: string;
@@ -52,10 +54,12 @@ export function PageInformationBlock({
 
   const DescriptionBlock = description ? (
     <Box maxWidth="maxWidthText">
-      {typeof description === 'string' ? (
+      {isValidElement(description) ? (
+        description
+      ) : typeof description === 'string' ? (
         <Text>{description}</Text>
       ) : (
-        <RichContent blocks={description} />
+        <RichContent blocks={description as RichContentBlock[]} />
       )}
     </Box>
   ) : null;

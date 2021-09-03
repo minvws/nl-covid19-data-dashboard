@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Klok2100 = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const Klok2100 = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Klok2100.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Klok2100.displayName = 'Klok2100';
 

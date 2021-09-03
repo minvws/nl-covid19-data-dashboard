@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Phone = forwardRef(({ ...rest }, ref) => {
   return (
@@ -15,14 +14,6 @@ const Phone = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Phone.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Phone.displayName = 'Phone';
 

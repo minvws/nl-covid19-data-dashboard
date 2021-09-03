@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Bibliotheken = forwardRef(({ ...rest }, ref) => {
   return (
@@ -16,14 +15,6 @@ const Bibliotheken = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Bibliotheken.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Bibliotheken.displayName = 'Bibliotheken';
 

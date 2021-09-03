@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Check = forwardRef(({ ...rest }, ref) => {
   return (
@@ -21,14 +20,6 @@ const Check = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Check.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Check.displayName = 'Check';
 

@@ -1,11 +1,11 @@
 import { getLastFilledValue } from '@corona-dashboard/common';
 import { Reproductiegetal } from '@corona-dashboard/icons';
 import { KpiWithIllustrationTile } from '~/components/kpi-with-illustration-tile';
+import { Markdown } from '~/components/markdown';
 import { PageBarScale } from '~/components/page-barscale';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { ReproductionChartTile } from '~/domain/tested/reproduction-chart-tile';
@@ -92,7 +92,7 @@ const ReproductionIndex = (props: StaticProps<typeof getStaticProps>) => {
                 showOldDateUnix
                 hasHigherLowerText
               />
-              <Text>{text.barscale_toelichting}</Text>
+              <Markdown content={text.barscale_toelichting} />
             </KpiWithIllustrationTile>
           </TwoKpiSection>
 

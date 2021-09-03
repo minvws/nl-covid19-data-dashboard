@@ -6,7 +6,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Heading, Text } from '~/components/typography';
+import { Heading } from '~/components/typography';
 import { BehaviorChoroplethsTile } from '~/domain/behavior/behavior-choropleths-tile';
 import { BehaviorLineChartTile } from '~/domain/behavior/behavior-line-chart-tile';
 import { BehaviorPerAgeGroup } from '~/domain/behavior/behavior-per-age-group-tile';
@@ -109,7 +109,7 @@ export default function BehaviorPage(
             <Tile>
               <Box spacing={3}>
                 <Heading level={3}>{nl_gedrag.onderzoek_uitleg.titel}</Heading>
-                <Text>{nl_gedrag.onderzoek_uitleg.toelichting}</Text>
+                <Markdown content={nl_gedrag.onderzoek_uitleg.toelichting} />
               </Box>
             </Tile>
 

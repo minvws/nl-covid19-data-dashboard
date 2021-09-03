@@ -2,6 +2,7 @@
   "definitions": {
     "value": {
       "title": "in_tested_overall_value",
+      "type": "object",
       "additionalProperties": false,
       "required": [
         "infected",

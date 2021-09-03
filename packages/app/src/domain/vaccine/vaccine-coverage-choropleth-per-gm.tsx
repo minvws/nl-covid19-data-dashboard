@@ -65,7 +65,10 @@ export function VaccineCoverageChoroplethPerGm({
         title:
           siteText.vaccinaties.nl_choropleth_vaccinatie_graad.legenda_titel,
       }}
-      metadata={{ source: siteText.brononderzoek.bronnen.rivm }}
+      metadata={{
+        source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
+        date: data[selectedMap][0].date_unix,
+      }}
       chartRegion={selectedMap}
       onChartRegionChange={setSelectedMap}
     >

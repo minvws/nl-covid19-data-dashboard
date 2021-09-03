@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 
 const Notification = forwardRef(({ ...rest }, ref) => {
   return (
@@ -26,14 +25,6 @@ const Notification = forwardRef(({ ...rest }, ref) => {
     </svg>
   );
 });
-
-Notification.propTypes = {
-  // color: PropTypes.string,
-  // size: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number
-  // ]),
-};
 
 Notification.displayName = 'Notification';
 
