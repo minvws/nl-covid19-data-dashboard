@@ -1,13 +1,9 @@
+import { BarChart, Calendar, Test, Ziekenhuis } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { isPresent } from 'ts-is-present';
-import { BarChart } from '@corona-dashboard/icons';
-import { Calendar } from '@corona-dashboard/icons';
-import { Test } from '@corona-dashboard/icons';
-
-import { Ziekenhuis } from '@corona-dashboard/icons';
 import { Box } from '~/components/base';
 import {
   CategoricalBarScale,
@@ -47,6 +43,7 @@ import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 import { useEscalationColor } from '~/utils/use-escalation-color';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+
 export { getStaticPaths } from '~/static-paths/vr';
 
 export const getStaticProps = createGetStaticProps(
@@ -180,6 +177,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                       width={{ _: '100%', lg: '50%' }}
                       pl={{ _: 0, lg: 3 }}
                       mb={3}
+                      mt={{ _: 3, lg: 0 }}
                     >
                       <UnorderedList>
                         <ListItem
