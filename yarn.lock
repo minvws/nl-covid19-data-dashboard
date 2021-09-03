@@ -4106,10 +4106,10 @@
   resolved "https://registry.yarnpkg.com/@types/diff-match-patch/-/diff-match-patch-1.0.32.tgz#d9c3b8c914aa8229485351db4865328337a3d09f"
   integrity sha512-bPYT5ECFiblzsVzyURaNhljBH2Gh1t9LowgUwciMrNAhFewLkHT2H0Mto07Y4/3KCOGZHRQll3CTtQZ0X11D/A==
 
-"@types/download@^6.2.4":
-  version "6.2.4"
-  resolved "https://registry.yarnpkg.com/@types/download/-/download-6.2.4.tgz#d9fb74defe20d75f59a38a9b5b0eb5037d37161a"
-  integrity sha512-Lo5dy3ai6LNnbL663sgdzqL1eib11u1yKH6w3v3IXEOO4kRfQpMn1qWUTaumcHLACjFp1RcBx9tUXEvJoR3vcA==
+"@types/download@^8.0.0":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@types/download/-/download-8.0.1.tgz#9653e0deb52f1b47f659e8e8be1651c8515bc0a7"
+  integrity sha512-t5DjMD6Y1DxjXtEHl7Kt+nQn9rOmVLYD8p4Swrcc5QpgyqyqR2gXTIK6RwwMnNeFJ+ZIiIW789fQKzCrK7AOFA==
   dependencies:
     "@types/decompress" "*"
     "@types/got" "^8"
@@ -4285,24 +4285,17 @@
   resolved "https://registry.yarnpkg.com/@types/memoize-one/-/memoize-one-3.1.2.tgz#0c6e21d603b83e6fed22945129d264a236d48979"
   integrity sha512-A5ydEHaD2xdUbrXlAjF2TifOkYq7TJXU+5t7rLqBGfispKdJJoZnWwPQPyvjh0exxGTTO1ugLB+5jL9P3DQh5w==
 
-"@types/meow@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@types/meow/-/meow-5.0.0.tgz#60653cc3c3f91d6af3a131bd82614acf9b530357"
-  integrity sha512-csdM22P8TFF5KwuHseifUBOzWiGtiLfYmQosrKPGpA/xdK3o3PNo3+4YOpiJ5BQBshwO2kuhdJ7NoAitQ6m/jg==
+"@types/meow@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/meow/-/meow-6.0.0.tgz#28b0cf9eebc7503eb97d22351815ae25ba159a24"
+  integrity sha512-RzAdIcBCzg6A61SjQGmQHsJ6nEIsGdd2cAw/MAdBwwI0SZg4iGbtpto44BkY6Vq8SDsiqcCV2DowmHj8v+K1gw==
   dependencies:
-    "@types/minimist-options" "*"
+    meow "*"
 
 "@types/minimatch@*":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.5.tgz#1001cc5e6a3704b83c236027e77f2f58ea010f40"
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
-
-"@types/minimist-options@*":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/minimist-options/-/minimist-options-4.0.1.tgz#2c3da82e60b77c5b557f05acc76c4098a8a5040f"
-  integrity sha512-FvjfzM3GVk+izwv2jhbpkH6bw9NZhrbqObFDqoNTEfHalG5i42Ff8nZ0inB0GyACQCShtytOEBDnfEG9RPX36w==
-  dependencies:
-    minimist-options "*"
 
 "@types/minimist@^1.2.0", "@types/minimist@^1.2.2":
   version "1.2.2"
@@ -4327,10 +4320,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.11.tgz#82d266d657aec5ff01ca59f2ffaff1bb43f7bf0f"
   integrity sha512-n2OQ+0Bz6WEsUjrvcHD1xZ8K+Kgo4cn9/w94s1bJS690QMUWfJPW/m7CCb7gPkA1fcYwL2UpjXP/rq/Eo41m6w==
 
-"@types/node@^15.12.5":
-  version "15.14.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.14.9.tgz#bc43c990c3c9be7281868bbc7b8fdd6e2b57adfa"
-  integrity sha512-qjd88DrCxupx/kJD5yQgZdcYKZKSIGBVDIBE1/LTGcNm3d2Np/jxojkdePDdfnBHJc5W7vSMpbJ1aB7p/Py69A==
+"@types/node@^16.0.0":
+  version "16.7.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.10.tgz#7aa732cc47341c12a16b7d562f519c2383b6d4fc"
+  integrity sha512-S63Dlv4zIPb8x6MMTgDq5WWRJQe56iBEY0O3SOFA9JrRienkOVDXSXBjjJw6HTNQYSE2JI6GMCR6LVbIMHJVvA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -5053,7 +5046,7 @@ ajv@^5.0.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-ajv@^6, ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5, ajv@^6.9.1:
+ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.12.5, ajv@^6.9.1:
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
   integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
@@ -5063,7 +5056,7 @@ ajv@^6, ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4, ajv@^6.1
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-ajv@^8.0.1:
+ajv@^8, ajv@^8.0.1:
   version "8.6.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.6.2.tgz#2fb45e0e5fcbc0813326c1c3da535d1881bb0571"
   integrity sha512-9807RlWAgT564wT+DjeyU5OFMPjmzxVobvDFmNAhY+5zD6A2ly3jDp6sgnfyDtlIQ+7H97oc/DGCzzfu9rjw9w==
@@ -13341,7 +13334,7 @@ mendoza@^2.1.1:
   resolved "https://registry.yarnpkg.com/mendoza/-/mendoza-2.1.1.tgz#19ad4efc3f424439d895e1f1841818a4e268af55"
   integrity sha512-8f3Se8HDfobXCsdESXZBSSYcVzIRi+cMIEmz/SR4bjgFEjHJaXzrsBYr+vyrFGEtK5xTpCcU+DiwxWJV6hCuhQ==
 
-meow@^10.1.0:
+meow@*, meow@^10.1.0:
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/meow/-/meow-10.1.1.tgz#87fa665f18e727024116d456e725f69033ca6d8f"
   integrity sha512-uzOAEBTGujHAD6bVzIQQk5kDTgatxmpVmr1pj9QhwsHLEG2AiB+9F08/wmjrZIk4h5pWxERd7+jqGZywYx3ZFw==
@@ -13521,7 +13514,7 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist-options@*, minimist-options@4.1.0:
+minimist-options@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/minimist-options/-/minimist-options-4.1.0.tgz#c0655713c53a8a2ebd77ffa247d342c40f010619"
   integrity sha512-Q4r8ghd80yhO/0j1O3B2BjweX3fiHg9cdOwjJd2J76Q135c+NDxGCqdYKQ1SKBuFfgWbAUzBfvYjPUEeNgqN1A==

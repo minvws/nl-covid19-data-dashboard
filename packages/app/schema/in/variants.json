@@ -15,6 +15,7 @@
   "definitions": {
     "variant": {
       "title": "in_variants_variant",
+      "type": "object",
       "additionalProperties": false,
       "required": ["name", "values", "last_value"],
       "properties": {
@@ -34,6 +35,7 @@
     },
     "value": {
       "title": "in_variants_variant_value",
+      "type": "object",
       "additionalProperties": false,
       "required": [
         "percentage",
