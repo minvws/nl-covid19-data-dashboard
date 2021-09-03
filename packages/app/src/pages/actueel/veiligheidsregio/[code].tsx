@@ -23,7 +23,7 @@ import { Metadata } from '~/components/metadata';
 import { RiskLevelIndicator } from '~/components/risk-level-indicator';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { Anchor, Text } from '~/components/typography';
+import { Anchor } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { getEscalationLevelIndexKey } from '~/domain/escalation-level/get-escalation-level-index-key';
@@ -397,11 +397,9 @@ const TopicalVr = (props: StaticProps<typeof getStaticProps>) => {
                     }
                     source={siteText.positief_geteste_personen.bronnen.rivm}
                   />
-
-                  <Text>
-                    {siteText.positief_geteste_personen.map_toelichting}
-                  </Text>
-
+                  <Markdown
+                    content={siteText.positief_geteste_personen.map_toelichting}
+                  />
                   <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
                     <ChartRegionControls
                       value={selectedMap}

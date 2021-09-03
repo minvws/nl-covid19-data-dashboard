@@ -25,6 +25,7 @@ import {
   selectNlPageMetricData,
 } from '~/static-props/get-data';
 import { colors } from '~/style/theme';
+import { Markdown } from '~/components/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -95,9 +96,9 @@ const DeceasedNationalPage = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataRivm.last_value.covid_daily}
                 difference={data.difference.deceased_rivm__covid_daily}
               />
-              <Text>
-                {text.section_deceased_rivm.kpi_covid_daily_description}
-              </Text>
+              <Markdown
+                content={text.section_deceased_rivm.kpi_covid_daily_description}
+              />
             </KpiTile>
             <KpiTile
               title={text.section_deceased_rivm.kpi_covid_total_title}

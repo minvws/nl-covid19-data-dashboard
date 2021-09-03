@@ -9,7 +9,6 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { AdmissionsPerAgeGroup } from '~/domain/hospital/admissions-per-age-group';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -109,7 +108,7 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
                 differenceKey="intensive_care_nice__admissions_on_date_of_reporting_moving_average"
                 isMovingAverageDifference
               />
-              <Text>{text.extra_uitleg}</Text>
+              <Markdown content={text.extra_uitleg} />
             </KpiTile>
 
             <KpiTile

@@ -26,7 +26,6 @@ import { MaxWidth } from '~/components/max-width';
 import { Metadata } from '~/components/metadata';
 import { Sitemap, useDataSitemap } from '~/components/sitemap';
 import { TileList } from '~/components/tile-list';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { VrEscalationTooltip } from '~/domain/actueel/tooltip/vr-escalation-tooltip';
 import { Layout } from '~/domain/layout/layout';
@@ -372,9 +371,9 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                     }
                     source={siteText.positief_geteste_personen.bronnen.rivm}
                   />
-                  <Text>
-                    {siteText.positief_geteste_personen.map_toelichting}
-                  </Text>
+                  <Markdown
+                    content={siteText.positief_geteste_personen.map_toelichting}
+                  />
                   <Box css={css({ '> div': { justifyContent: 'flex-start' } })}>
                     <ChartRegionControls
                       value={selectedMap}
