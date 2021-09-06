@@ -53,8 +53,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const suffix = isDefined(selectedCode) ? `_${selectedCode}` : '';
   const filename = `${metric}_${property}_${map}_${height}${suffix}.png`;
 
-  if (fs.existsSync(path.join(publicImgPath, filename))) {
-    res.redirect(`/images/choropleth/${filename}`);
+  const fullImageFilePath = path.join(publicImgPath, filename);
+  if (fs.existsSync(fullImageFilePath)) {
+    const blob = fs.readFileSync(fullImageFilePath);
+    const eTag = hash(blob);
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Vary', 'Accept-Encoding');
+    res.setHeader('ETag', eTag);
+    res.status(200);
+    res.end(blob);
     return;
   }
 

@@ -15,7 +15,7 @@ import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Anchor, InlineText, Text } from '~/components/typography';
+import { InlineText, Text } from '~/components/typography';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
 import { GNumberBarChartTile } from '~/domain/tested/g-number-bar-chart-tile';
@@ -150,9 +150,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                     ),
                   })}
                 </Text>
-                <Anchor underline="hover" href="#ggd">
-                  {ggdText.summary_link_cta}
-                </Anchor>
+                <Markdown content={ggdText.summary_link_cta} />
               </Box>
             </KpiTile>
 
