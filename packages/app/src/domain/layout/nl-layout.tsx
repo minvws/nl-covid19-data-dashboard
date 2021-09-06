@@ -279,16 +279,6 @@ export function NlLayout(props: NlLayoutProps) {
                     date_end_unix={data.situationsSidebarValue.date_end_unix}
                   />
                 </MetricMenuItemLink>
-
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.besmettelijkeMensen()}
-                  icon={<Ziektegolf />}
-                  title={siteText.besmettelijke_personen.titel_sidebar}
-                >
-                  <SidebarKpiValue
-                    title={siteText.besmettelijke_personen.kpi_titel}
-                  />
-                </MetricMenuItemLink>
               </CategoryMenu>
 
               <CategoryMenu title={siteText.nationaal_layout.headings.gedrag}>
@@ -374,6 +364,35 @@ export function NlLayout(props: NlLayoutProps) {
                     annotationKey="riool_normalized"
                   />
                 </MetricMenuItemLink>
+              </CategoryMenu>
+
+              <CategoryMenu title={siteText.nationaal_layout.headings.overig}>
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.coronamelder()}
+                  icon={<Phone />}
+                  title={siteText.corona_melder_app.sidebar.titel}
+                >
+                  <SidebarMetric
+                    data={data}
+                    scope="nl"
+                    metricName="corona_melder_app_warning"
+                    metricProperty="count"
+                    localeTextKey="corona_melder_app"
+                    differenceKey="corona_melder_app_warning__count"
+                  />
+                </MetricMenuItemLink>
+              </CategoryMenu>
+
+              <CategoryMenu title={siteText.nationaal_layout.headings.archief}>
+                <MetricMenuItemLink
+                  href={reverseRouter.nl.besmettelijkeMensen()}
+                  icon={<Ziektegolf />}
+                  title={siteText.besmettelijke_personen.titel_sidebar}
+                >
+                  <SidebarKpiValue
+                    title={siteText.besmettelijke_personen.kpi_titel}
+                  />
+                </MetricMenuItemLink>
 
                 <MetricMenuItemLink
                   href={reverseRouter.nl.verdenkingenHuisartsen()}
@@ -394,23 +413,6 @@ export function NlLayout(props: NlLayoutProps) {
                       differenceKey="doctor__covid_symptoms"
                     />
                   )}
-                </MetricMenuItemLink>
-              </CategoryMenu>
-
-              <CategoryMenu title={siteText.nationaal_layout.headings.overig}>
-                <MetricMenuItemLink
-                  href={reverseRouter.nl.coronamelder()}
-                  icon={<Phone />}
-                  title={siteText.corona_melder_app.sidebar.titel}
-                >
-                  <SidebarMetric
-                    data={data}
-                    scope="nl"
-                    metricName="corona_melder_app_warning"
-                    metricProperty="count"
-                    localeTextKey="corona_melder_app"
-                    differenceKey="corona_melder_app_warning__count"
-                  />
                 </MetricMenuItemLink>
               </CategoryMenu>
             </Menu>
