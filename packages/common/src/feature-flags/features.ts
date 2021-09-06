@@ -3,7 +3,7 @@ import { Feature } from '~/types';
 export const features: Feature[] = [
   {
     name: 'vaccinationPerAgeGroup',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group',
   },
@@ -21,17 +21,17 @@ export const features: Feature[] = [
   },
   {
     name: 'inHomePage',
-    isEnabled: true,
+    isEnabled: false,
   },
   {
     name: 'inPositiveTestsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in', 'in_collection'],
     metricName: 'tested_overall',
   },
   {
     name: 'inVariantsPage',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['in'],
     metricName: 'variants',
   },
@@ -59,13 +59,13 @@ export const features: Feature[] = [
   },
   {
     name: 'gmRankingHospital',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['gm'],
     metricName: 'hospital_nice_sum',
   },
   {
     name: 'gmRankingTested',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['gm'],
     metricName: 'tested_overall_sum',
   },
