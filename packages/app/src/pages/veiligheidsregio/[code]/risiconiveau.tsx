@@ -130,8 +130,13 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
           />
 
           <ChartTile title={text.current_escalation_level} disableFullscreen>
-            <Box display="flex" flexDirection={{ _: 'column', lg: 'row' }}>
-              <Box width={{ _: '100%', lg: '50%' }} pr={{ _: 0, lg: 3 }}>
+            <Box
+              display="flex"
+              flexDirection={{ _: 'column', lg: 'row' }}
+              spacing={{ _: 3, lg: 0 }}
+              spacingHorizontal={{ _: 0, lg: 4 }}
+            >
+              <Box width={{ _: '100%', lg: '50%' }}>
                 <Box mb={3}>
                   <EscalationLevelInfoLabel
                     level={currentLevel}
@@ -173,12 +178,7 @@ const RegionalRestrictions = (props: StaticProps<typeof getStaticProps>) => {
                   isPresent(
                     data.escalation_level.hospital_admissions_per_million
                   ) && (
-                    <Box
-                      width={{ _: '100%', lg: '50%' }}
-                      pl={{ _: 0, lg: 3 }}
-                      mb={3}
-                      mt={{ _: 3, lg: 0 }}
-                    >
+                    <Box width={{ _: '100%', lg: '50%' }} mb={3}>
                       <UnorderedList>
                         <ListItem
                           title={text.momenteel.last_determined}
