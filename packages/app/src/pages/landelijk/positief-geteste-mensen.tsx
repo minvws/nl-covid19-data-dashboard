@@ -1,5 +1,4 @@
 import { GgdTesten, Test } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
 import { useState } from 'react';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
