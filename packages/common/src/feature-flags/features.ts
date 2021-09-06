@@ -59,13 +59,13 @@ export const features: Feature[] = [
   },
   {
     name: 'gmRankingHospital',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['gm'],
     metricName: 'hospital_nice_sum',
   },
   {
     name: 'gmRankingTested',
-    isEnabled: true,
+    isEnabled: false,
     dataScopes: ['gm'],
     metricName: 'tested_overall_sum',
   },
