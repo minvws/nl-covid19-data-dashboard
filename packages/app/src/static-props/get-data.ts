@@ -31,6 +31,7 @@ import {
   VariantSidebarValue,
 } from '~/domain/variants/static-props';
 import { getClient, localize } from '~/lib/sanity';
+import { initializeFeatureFlaggedData } from './feature-flags/initialize-feature-flagged-data';
 import {
   getSituationsSidebarValue,
   SituationsSidebarValue,
@@ -50,13 +51,18 @@ import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-
  */
 
 const json = {
-  nl: loadJsonFromDataFile<Nl>('NL.json'),
-  vrCollection: loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'),
-  gmCollection: loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
-  inCollection: loadJsonFromDataFile<InCollection>(
-    'IN_COLLECTION.json',
-    undefined,
-    true
+  nl: initializeFeatureFlaggedData(loadJsonFromDataFile<Nl>('NL.json'), 'nl'),
+  vrCollection: initializeFeatureFlaggedData(
+    loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'),
+    'vr'
+  ),
+  gmCollection: initializeFeatureFlaggedData(
+    loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
+    'gm'
+  ),
+  inCollection: initializeFeatureFlaggedData(
+    loadJsonFromDataFile<InCollection>('IN_COLLECTION.json', undefined, true),
+    'in'
   ),
 };
 
