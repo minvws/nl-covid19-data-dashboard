@@ -132,7 +132,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                   .date_of_insertion_unix,
               dataSources: [],
             }}
-            usefulLinks={content.page.usefulLinks}
+            pageLinks={content.page.pageLinks}
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
           />

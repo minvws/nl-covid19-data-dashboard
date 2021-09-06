@@ -1,5 +1,6 @@
 import { Rule } from '~/sanity';
 import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
+import { PAGE_LINKS } from '../../fields/page-links';
 
 export const vaccinationsPage = {
   title: 'Vaccinaties pagina',
@@ -12,14 +13,7 @@ export const vaccinationsPage = {
       name: 'pageDescription',
       type: 'localeBlock',
     },
-    {
-      title: "'Ook interessant' links",
-      description: 'Maximaal 4 links naar interessante onderwerpen.',
-      name: 'usefulLinks',
-      type: 'array',
-      of: [{ type: 'link' }],
-      validation: (rule: Rule) => rule.required().min(1).max(4),
-    },
+    PAGE_LINKS,
     {
       fieldset: 'milestones',
       name: 'title',
