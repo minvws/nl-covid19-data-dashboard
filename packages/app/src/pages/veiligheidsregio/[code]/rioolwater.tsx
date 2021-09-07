@@ -93,10 +93,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
-              dateOrRange: {
-                start: sewerAverages.last_value.date_start_unix,
-                end: sewerAverages.last_value.date_end_unix,
-              },
+              dateOrRange: sewerAverages.last_value.date_unix,
               dateOfInsertionUnix:
                 sewerAverages.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
@@ -112,10 +109,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
+                date: sewerAverages.last_value.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
@@ -128,35 +122,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
 
             <KpiTile
-              title={text.total_measurements_title}
-              description={text.total_measurements_description}
-              metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="total_number_of_samples"
-                absolute={sewerAverages.last_value.total_number_of_samples}
-              />
-              <Text>
-                {replaceComponentsInText(text.total_measurements_locations, {
-                  sampled_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.sampled_installation_count}
-                    </strong>
-                  ),
-                  total_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.total_installation_count}
-                    </strong>
-                  ),
-                })}
-              </Text>
-            </KpiTile>
+              title={text.tile_explanation_title}
+              description={text.tile_explanation_description}
+            />
           </TwoKpiSection>
 
           <SewerChart

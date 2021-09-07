@@ -13,6 +13,7 @@ import {
 import { set } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 import { SelectProps } from '~/components/select';
+import { isDefined } from 'ts-is-present';
 
 type MergedValue = {
   average: number | null;
@@ -58,8 +59,10 @@ export function mergeData(
      * the values are displayed when just viewing averages, and for this merged
      * set we'll need to use single dates.
      */
-    const date_unix =
-      value.date_start_unix + (value.date_end_unix - value.date_start_unix) / 2;
+    const date_unix = isDefined(value.date_unix)
+      ? value.date_unix
+      : value.date_start_unix +
+        (value.date_end_unix - value.date_start_unix) / 2;
 
     const existingValue = mergedValuesByTimestamp[date_unix] as
       | MergedValue
