@@ -45,6 +45,10 @@ import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-ad
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { SiteText } from '~/locale';
+import {
+  ElementsQueryResult,
+  getWarning,
+} from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -76,6 +80,7 @@ export const getStaticProps = createGetStaticProps(
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
+    elements: ElementsQueryResult;
   }>(getTopicalPageQuery),
   selectNlData(
     'tested_overall',
@@ -190,6 +195,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected"
                 href={reverseRouter.nl.positiefGetesteMensen()}
                 accessibility={{ key: 'topical_tested_overall' }}
+                warning={getWarning(
+                  content.elements.timeSeries,
+                  'tested_overall'
+                )}
               />
 
               <MiniTrendTile
@@ -211,6 +220,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}
+                warning={getWarning(
+                  content.elements.timeSeries,
+                  'hospital_nice'
+                )}
               />
 
               <MiniTrendTile
@@ -240,6 +253,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 trendData={dataVaccines.values}
                 metricProperty="estimated"
                 href={reverseRouter.nl.vaccinaties()}
+                warning={getWarning(
+                  content.elements.timeSeries,
+                  'vaccine_administered_total'
+                )}
               />
             </MiniTrendTileLayout>
 

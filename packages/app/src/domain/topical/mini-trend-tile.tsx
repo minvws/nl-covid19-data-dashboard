@@ -1,10 +1,12 @@
 import { KeysOfType, TimestampedValue } from '@corona-dashboard/common';
+import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ArrowIconRight } from '~/components/arrow-icon';
 import { Box } from '~/components/base';
 import { ErrorBoundary } from '~/components/error-boundary';
+import { InlineTooltip } from '~/components/inline-tooltip';
 import { HeadingLinkWithIcon } from '~/components/link-with-icon';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { Heading, Text } from '~/components/typography';
@@ -21,6 +23,7 @@ type MiniTrendTileBaseProps<T extends TimestampedValue> = {
   metricProperty: KeysOfType<T, number | null, true>;
   href: string;
   areas?: { header: string; chart: string };
+  warning?: string;
 };
 
 type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> =
@@ -41,17 +44,10 @@ type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> =
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>
 ) {
-  const { formatNumber } = useIntl();
+  const { formatNumber, siteText } = useIntl();
 
-  const {
-    icon,
-    title,
-    text,
-    trendData,
-    metricProperty,
-    href,
-    areas,
-  } = props;
+  const { icon, title, text, trendData, metricProperty, href, areas, warning } =
+    props;
 
   const value = trendData[trendData.length - 1][metricProperty];
 
@@ -74,6 +70,13 @@ export function MiniTrendTile<T extends TimestampedValue>(
         </Heading>
         <Text variant="h1" data-cy={metricProperty}>
           {formatNumber(value as unknown as number)}
+          {warning && (
+            <InlineTooltip content={warning}>
+              <WarningIconWrapper aria-label={siteText.aria_labels.warning}>
+                <Warning />
+              </WarningIconWrapper>
+            </InlineTooltip>
+          )}
         </Text>
 
         <Box>{text}</Box>
@@ -85,24 +88,24 @@ export function MiniTrendTile<T extends TimestampedValue>(
             {'chart' in props ? (
               props.chart
             ) : (
-            <TimeSeriesChart
+              <TimeSeriesChart
                 accessibility={props.accessibility}
-              initialWidth={400}
-              minHeight={sm ? 180 : 140}
-              timeframe="5weeks"
-              xTickNumber={2}
-              values={trendData}
-              displayTooltipValueOnly
-              numGridLines={3}
-              seriesConfig={[
-                {
-                  metricProperty,
-                  type: 'area',
-                  label: title,
-                  color: colors.data.primary,
-                },
-              ]}
-            />
+                initialWidth={400}
+                minHeight={sm ? 180 : 140}
+                timeframe="5weeks"
+                xTickNumber={2}
+                values={trendData}
+                displayTooltipValueOnly
+                numGridLines={3}
+                seriesConfig={[
+                  {
+                    metricProperty,
+                    type: 'area',
+                    label: title,
+                    color: colors.data.primary,
+                  },
+                ]}
+              />
             )}
           </ErrorBoundary>
         </div>
@@ -117,6 +120,23 @@ const Icon = styled.span(
       height: '3rem',
       mr: 3,
       ml: '2px',
+    },
+  })
+);
+
+const WarningIconWrapper = styled.span(
+  css({
+    display: 'inline-flex',
+    width: '1em',
+    height: '1em',
+    marginLeft: 2,
+    backgroundColor: 'warningYellow',
+    borderRadius: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    svg: {
+      fill: 'black',
     },
   })
 );
