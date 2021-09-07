@@ -9,7 +9,6 @@ import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { TileList } from '~/components/tile-list';
 import { TwoKpiSection } from '~/components/two-kpi-section';
-import { Text } from '~/components/typography';
 import { WarningTile } from '~/components/warning-tile';
 import { Layout } from '~/domain/layout/layout';
 import { NlLayout } from '~/domain/layout/nl-layout';
@@ -29,7 +28,6 @@ import {
   getLastGeneratedDate,
   selectNlPageMetricData,
 } from '~/static-props/get-data';
-import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 
 export const getStaticProps = createGetStaticProps(
@@ -100,10 +98,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             description={text.pagina_toelichting}
             metadata={{
               datumsText: text.datums,
-              dateOrRange: {
-                start: sewerAverages.last_value.date_start_unix,
-                end: sewerAverages.last_value.date_end_unix,
-              },
+              dateOrRange: sewerAverages.last_value.date_unix,
               dateOfInsertionUnix:
                 sewerAverages.last_value.date_of_insertion_unix,
               dataSources: [text.bronnen.rivm],
@@ -119,10 +114,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
               title={text.barscale_titel}
               description={text.extra_uitleg}
               metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
+                date: sewerAverages.last_value.date_unix,
                 source: text.bronnen.rivm,
               }}
             >
@@ -135,35 +127,9 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             </KpiTile>
 
             <KpiTile
-              title={text.total_measurements_title}
-              description={text.total_measurements_description}
-              metadata={{
-                date: [
-                  sewerAverages.last_value.date_start_unix,
-                  sewerAverages.last_value.date_end_unix,
-                ],
-                source: text.bronnen.rivm,
-              }}
-            >
-              <KpiValue
-                data-cy="total_number_of_samples"
-                absolute={sewerAverages.last_value.total_number_of_samples}
-              />
-              <Text>
-                {replaceComponentsInText(text.total_measurements_locations, {
-                  sampled_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.sampled_installation_count}
-                    </strong>
-                  ),
-                  total_installation_count: (
-                    <strong>
-                      {sewerAverages.last_value.total_installation_count}
-                    </strong>
-                  ),
-                })}
-              </Text>
-            </KpiTile>
+              title={text.tile_explanation_title}
+              description={text.tile_explanation_description}
+            />
           </TwoKpiSection>
 
           <SewerChart
@@ -183,10 +149,7 @@ const SewerWater = (props: StaticProps<typeof getStaticProps>) => {
             title={text.map_titel}
             description={text.map_toelichting}
             metadata={{
-              date: [
-                sewerAverages.last_value.date_start_unix,
-                sewerAverages.last_value.date_end_unix,
-              ],
+              date: sewerAverages.last_value.date_unix,
               source: text.bronnen.rivm,
             }}
             onChartRegionChange={setSelectedMap}
