@@ -1,7 +1,5 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Gelijk } from '@corona-dashboard/icons';
-import { Up } from '@corona-dashboard/icons';
-import { Down } from '@corona-dashboard/icons';
+import { Down, Gelijk, Up } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
@@ -12,14 +10,14 @@ export function TileDifference({
   maximumFractionDigits,
   isPercentage,
   showOldDateUnix,
-  hasHigherLowerText,
+  isAmount,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isDecimal?: boolean;
   maximumFractionDigits?: number;
   isPercentage?: boolean;
   showOldDateUnix?: boolean;
-  hasHigherLowerText?: boolean;
+  isAmount: boolean;
 }) {
   const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
     useIntl();
@@ -39,9 +37,9 @@ export function TileDifference({
     : text.vorige_waarde;
 
   if (difference > 0) {
-    const splitText = hasHigherLowerText
-      ? text.hoger.split(' ')
-      : text.toename.split(' ');
+    const splitText = isAmount
+      ? text.toename.split(' ')
+      : text.hoger.split(' ');
 
     return (
       <Container>
@@ -60,9 +58,7 @@ export function TileDifference({
   }
 
   if (difference < 0) {
-    const splitText = hasHigherLowerText
-      ? text.lager.split(' ')
-      : text.afname.split(' ');
+    const splitText = isAmount ? text.afname.split(' ') : text.lager.split(' ');
 
     return (
       <Container>

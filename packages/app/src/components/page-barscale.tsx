@@ -23,19 +23,29 @@ import { TileAverageDifference, TileDifference } from './difference-indicator';
  *
  * I think we can come up with a better name, maybe later.
  */
-interface PageBarScaleProps<T> {
+interface PageBarScaleBaseProps<T> {
   scope: DataScope;
   data: T;
   localeTextKey: keyof SiteText;
   metricName: MetricKeys<T>;
   metricProperty: string;
-  differenceKey?: string;
   differenceFractionDigits?: number;
   currentValue?: number;
   isMovingAverageDifference?: boolean;
   showOldDateUnix?: boolean;
-  hasHigherLowerText?: boolean;
 }
+
+type DifferenceProps =
+  | {
+      differenceKey?: never;
+      isAmount?: boolean;
+    }
+  | {
+      differenceKey: string;
+      isAmount: boolean;
+    };
+
+type PageBarScaleProps<T> = PageBarScaleBaseProps<T> & DifferenceProps;
 
 export function PageBarScale<T>({
   data,
@@ -47,7 +57,7 @@ export function PageBarScale<T>({
   differenceFractionDigits,
   isMovingAverageDifference,
   showOldDateUnix,
-  hasHigherLowerText,
+  isAmount,
 }: PageBarScaleProps<T>) {
   const { siteText } = useIntl();
 
@@ -137,15 +147,16 @@ export function PageBarScale<T>({
       />
 
       {isDefined(differenceKey) &&
+        isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <TileAverageDifference value={differenceValue} />
+          <TileAverageDifference value={differenceValue} isAmount={isAmount} />
         ) : (
           <TileDifference
             value={differenceValue}
             isDecimal={config.isDecimal}
             maximumFractionDigits={differenceFractionDigits}
             showOldDateUnix={showOldDateUnix}
-            hasHigherLowerText={hasHigherLowerText}
+            isAmount={isAmount}
           />
         ))}
     </Box>

@@ -123,6 +123,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 localeTextKey="ziekenhuisopnames_per_dag"
                 differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                 isMovingAverageDifference
+                isAmount
               />
             </KpiTile>
 
@@ -141,6 +142,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   difference={
                     data.difference.hospital_lcps__beds_occupied_covid
                   }
+                  isAmount
                 />
               )}
             </KpiTile>
