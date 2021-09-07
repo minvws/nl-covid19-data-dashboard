@@ -2,7 +2,7 @@ import {
   GmCollectionTestedOverall,
   VrCollectionTestedOverall,
 } from '@corona-dashboard/common';
-import { Chart, Test, Ziekenhuis } from '@corona-dashboard/icons';
+import { Chart, Test, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useMemo, useState } from 'react';
@@ -41,7 +41,7 @@ import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
+import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { SiteText } from '~/locale';
@@ -100,9 +100,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+  const dataVaccines = data.vaccine_administered_total;
   const dataSitemap = useDataSitemap('nl');
 
-  const { siteText, formatDate } = useIntl();
+  const { siteText, formatDate, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
@@ -212,7 +213,34 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 accessibility={{ key: 'topical_hospital_nice' }}
               />
 
-              <TopicalVaccineTile data={data.vaccine_administered_total} />
+              <MiniTrendTile
+                chart={
+                  <VaccineAdministrationsOverTimeChart
+                    accessibility={{
+                      key: 'topical_vaccine_administrations_over_time',
+                    }}
+                    title={text.mini_trend_tiles.toegediende_vaccins.title}
+                    values={dataVaccines.values}
+                  />
+                }
+                title={text.mini_trend_tiles.toegediende_vaccins.title}
+                text={replaceComponentsInText(
+                  text.mini_trend_tiles.toegediende_vaccins.administered_tests,
+                  {
+                    administeredVaccines: (
+                      <strong>
+                        {formatNumber(
+                          data.vaccine_administered_total.last_value.estimated
+                        )}
+                      </strong>
+                    ),
+                  }
+                )}
+                icon={<Vaccinaties />}
+                trendData={dataVaccines.values}
+                metricProperty="estimated"
+                href={reverseRouter.nl.vaccinaties()}
+              />
             </MiniTrendTileLayout>
 
             <CollapsibleButton
