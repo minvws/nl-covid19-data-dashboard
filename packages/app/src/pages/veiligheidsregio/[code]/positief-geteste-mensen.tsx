@@ -81,7 +81,8 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
     lastGenerated,
   } = props;
 
-  const { siteText, formatNumber, formatPercentage } = useIntl();
+  const { siteText, formatNumber, formatPercentage, formatDateFromSeconds } =
+    useIntl();
 
   const reverseRouter = useReverseRouter();
 
@@ -157,6 +158,10 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                         <InlineText color="data.primary">{`${formatPercentage(
                           dataGgdLastValue.infected_percentage
                         )}%`}</InlineText>
+                      ),
+                      dateTo: formatDateFromSeconds(
+                        dataGgdLastValue.date_unix,
+                        'weekday-medium'
                       ),
                     })}
                   </Text>

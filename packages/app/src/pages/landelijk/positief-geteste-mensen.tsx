@@ -1,5 +1,4 @@
 import { GgdTesten, Test } from '@corona-dashboard/icons';
-import css from '@styled-system/css';
 import { useState } from 'react';
 import { Box, Spacer } from '~/components/base';
 import { RegionControlOption } from '~/components/chart-region-controls';
@@ -139,10 +138,9 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 <Text variant="body2" fontWeight="bold">
                   {replaceComponentsInText(ggdText.summary_text, {
                     percentage: (
-                      <span css={css({ color: 'data.primary' })}>
-                        {formatPercentage(dataGgdLastValue.infected_percentage)}
-                        %
-                      </span>
+                      <InlineText color="data.primary">{`${formatPercentage(
+                        dataGgdLastValue.infected_percentage
+                      )}%`}</InlineText>
                     ),
                     dateTo: formatDateFromSeconds(
                       dataGgdLastValue.date_unix,
