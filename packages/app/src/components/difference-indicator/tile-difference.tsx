@@ -49,11 +49,12 @@ export function TileDifference({
           <Up />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {differenceFormattedString}
-          {isPercentage ? '%' : ''} {splitText[0]}
+          {`${differenceFormattedString}${isPercentage ? '%' : ''} ${
+            splitText[0]
+          }`}
         </InlineText>{' '}
         <InlineText color="annotation">
-          {splitText[1]} {timespanTextNode}
+          {`${splitText[1]} ${timespanTextNode}`}
         </InlineText>
       </Container>
     );
@@ -70,12 +71,11 @@ export function TileDifference({
           <Down />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {differenceFormattedString}
-          {isPercentage ? '%' : ''} {splitText[0]}
+          {`${differenceFormattedString}${isPercentage ? '%' : ''} ${
+            splitText[0]
+          }`}
         </InlineText>{' '}
-        <InlineText>
-          {splitText[1]} {timespanTextNode}
-        </InlineText>
+        <InlineText>{`${splitText[1]} ${timespanTextNode}`}</InlineText>
       </Container>
     );
   }
@@ -85,9 +85,7 @@ export function TileDifference({
       <IconContainer color="data.neutral" mr={1}>
         <Gelijk />
       </IconContainer>
-      <InlineText>
-        {text.gelijk} {timespanTextNode}
-      </InlineText>
+      <InlineText>{`${text.gelijk} ${timespanTextNode}`}</InlineText>
     </Container>
   );
 }
