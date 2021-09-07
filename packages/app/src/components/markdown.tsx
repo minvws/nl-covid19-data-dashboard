@@ -49,6 +49,8 @@ const renderers = {
     </DisplayOnMatchingQueryCode>
   ),
 
+  paragraph: 'span',
+
   /**
    * The blockquote element is hijacked for displaying "warning" messages.
    */
