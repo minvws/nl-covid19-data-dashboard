@@ -13,12 +13,7 @@ import { colors } from '~/style/theme';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 import { useBreakpoints } from '~/utils/use-breakpoints';
 
-type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
-  /**
-   * The mandatory AccessibilityDefinition provides a reference to annotate the
-   * graph with a label and description.
-   */
-  accessibility: AccessibilityDefinition;
+type MiniTrendTileBaseProps<T extends TimestampedValue> = {
   icon: JSX.Element;
   title: string;
   text: ReactNode;
@@ -27,6 +22,21 @@ type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   href: string;
   areas?: { header: string; chart: string };
 };
+
+type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> =
+  MiniTrendTileBaseProps<T> &
+    (
+      | {
+          /**
+           * The mandatory AccessibilityDefinition provides a reference to annotate the
+           * graph with a label and description.
+           */
+          accessibility: AccessibilityDefinition;
+        }
+      | {
+          chart: ReactNode;
+        }
+    );
 
 export function MiniTrendTile<T extends TimestampedValue>(
   props: MiniTrendTileProps<T>
@@ -41,7 +51,6 @@ export function MiniTrendTile<T extends TimestampedValue>(
     metricProperty,
     href,
     areas,
-    accessibility,
   } = props;
 
   const value = trendData[trendData.length - 1][metricProperty];
@@ -73,8 +82,11 @@ export function MiniTrendTile<T extends TimestampedValue>(
       <Box gridArea={areas?.chart} pb={{ _: '1.5rem', md: 0 }}>
         <div>
           <ErrorBoundary>
+            {'chart' in props ? (
+              props.chart
+            ) : (
             <TimeSeriesChart
-              accessibility={accessibility}
+                accessibility={props.accessibility}
               initialWidth={400}
               minHeight={sm ? 180 : 140}
               timeframe="5weeks"
@@ -91,6 +103,7 @@ export function MiniTrendTile<T extends TimestampedValue>(
                 },
               ]}
             />
+            )}
           </ErrorBoundary>
         </div>
       </Box>
