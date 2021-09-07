@@ -12,9 +12,9 @@ export interface Gm {
   static_values: GmStaticValues;
   deceased_rivm: GmDeceasedRivm;
   difference: GmDifference;
-  hospital_nice_sum?: GmHospitalNiceSum;
+  hospital_nice_sum: GmHospitalNiceSum;
   hospital_nice: GmHospitalNice;
-  tested_overall_sum?: GmTestedOverallSum;
+  tested_overall_sum: GmTestedOverallSum;
   tested_overall: GmTestedOverall;
   sewer: GmSewer;
   sewer_per_installation?: GmSewerPerInstallation;
@@ -671,7 +671,6 @@ export interface NlDeceasedRivmPerAgeGroupValue {
   covid_percentage: number;
   date_unix?: number;
   date_of_insertion_unix: number;
-  [k: string]: unknown;
 }
 export interface NlDeceasedCbs {
   values: NlDeceasedCbsValue[];
