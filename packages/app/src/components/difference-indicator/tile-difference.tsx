@@ -86,8 +86,7 @@ export function TileDifference({
         <Gelijk />
       </IconContainer>
       <InlineText>
-        {text.gelijk}
-        {timespanTextNode}
+        {text.gelijk} {timespanTextNode}
       </InlineText>
     </Container>
   );
