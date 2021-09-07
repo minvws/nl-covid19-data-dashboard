@@ -51,18 +51,21 @@ import { getCoveragePerAgeGroupLatestValues } from './vaccinations/get-coverage-
  */
 
 const json = {
-  nl: initializeFeatureFlaggedData(loadJsonFromDataFile<Nl>('NL.json'), 'nl'),
-  vrCollection: initializeFeatureFlaggedData(
+  nl: initializeFeatureFlaggedData<Nl>(
+    loadJsonFromDataFile<Nl>('NL.json'),
+    'nl'
+  ),
+  vrCollection: initializeFeatureFlaggedData<VrCollection>(
     loadJsonFromDataFile<VrCollection>('VR_COLLECTION.json'),
-    'vr'
+    'vr_collection'
   ),
-  gmCollection: initializeFeatureFlaggedData(
+  gmCollection: initializeFeatureFlaggedData<GmCollection>(
     loadJsonFromDataFile<GmCollection>('GM_COLLECTION.json'),
-    'gm'
+    'gm_collection'
   ),
-  inCollection: initializeFeatureFlaggedData(
+  inCollection: initializeFeatureFlaggedData<InCollection>(
     loadJsonFromDataFile<InCollection>('IN_COLLECTION.json', undefined, true),
-    'in'
+    'in_collection'
   ),
 };
 
@@ -260,7 +263,10 @@ export function getVrName(code: string) {
 }
 
 export function loadAndSortVrData(vrcode: string) {
-  const data = loadJsonFromDataFile<Vr>(`${vrcode}.json`);
+  const data = initializeFeatureFlaggedData<Vr>(
+    loadJsonFromDataFile<Vr>(`${vrcode}.json`),
+    'vr'
+  );
 
   sortTimeSeriesInDataInPlace(data, { setDatesToMiddleOfDay: true });
 
@@ -317,7 +323,10 @@ function getGmData(context: GetStaticPropsContext) {
     throw Error('No valid gmcode found in context');
   }
 
-  const data = loadJsonFromDataFile<Gm>(`${code}.json`);
+  const data = initializeFeatureFlaggedData<Gm>(
+    loadJsonFromDataFile<Gm>(`${code}.json`),
+    'gm'
+  );
 
   const municipalityName = gmData.find((x) => x.gemcode === code)?.name || '';
 
@@ -352,8 +361,9 @@ export function getInData(countryCodes: CountryCode[]) {
   return function () {
     const internationalData: Record<string, In> = {};
     countryCodes.forEach((countryCode) => {
-      const data = loadJsonFromDataFile<In>(
-        `IN_${countryCode.toUpperCase()}.json`
+      const data = initializeFeatureFlaggedData<In>(
+        loadJsonFromDataFile<In>(`IN_${countryCode.toUpperCase()}.json`),
+        'in'
       );
 
       sortTimeSeriesInDataInPlace(data);

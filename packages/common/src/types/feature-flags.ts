@@ -1,12 +1,24 @@
-export interface Feature {
+export function isSimpleFeature(feature: Feature): feature is SimpleFeature {
+  return !('dataScopes' in feature);
+}
+
+export function isVerboseFeature(feature: Feature): feature is VerboseFeature {
+  return 'dataScopes' in feature;
+}
+
+export type Feature = SimpleFeature | VerboseFeature;
+
+export type SimpleFeature = {
   name: string;
   isEnabled: boolean;
+};
 
+export type VerboseFeature = {
   /**
    * Metric scope defines the files in which we enforce the (non-)existence of
    * metricNames.
    */
-  dataScopes?: JsonDataScope[];
+  dataScopes: JsonDataScope[];
 
   /**
    * A metricName is the root-level schema property used to hold the data in the
@@ -14,7 +26,7 @@ export interface Feature {
    * the code and API simple. If your feature is using more than one metric
    * name, simply split it into multiple named features.
    */
-  metricName?: string;
+  metricName: string;
 
   /**
    * If the feature was built on new metric properties of an existing metric
@@ -23,7 +35,7 @@ export interface Feature {
    * feature is disabled.
    */
   metricProperties?: string[];
-}
+} & SimpleFeature;
 
 export type MetricScope = 'in' | 'nl' | 'vr' | 'gm';
 export type JsonDataScope =
