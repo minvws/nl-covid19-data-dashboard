@@ -171,11 +171,19 @@ export interface LokalizeText {
 
 export type VaccinationPageQuery = {
   pageDescription: RichContentBlock[];
-  usefulLinks: LinkProps[];
+  pageLinks: LinkProps[];
   title: string;
   description: RichContentBlock[];
   milestones: Milestones[];
   expectedMilestones: ExpectedMilestones[];
+};
+
+export type HospitalAdmissionsPageQuery = {
+  pageLinks: LinkProps[];
+};
+
+export type IntakeHospitalPageQuery = {
+  pageLinks: LinkProps[];
 };
 
 export type InlineLink = {
@@ -194,5 +202,5 @@ export type VariantsPageQuery = {
 };
 
 export type InPositiveTestsQuery = {
-  usefulLinks?: LinkProps[];
+  pageLinks?: LinkProps[];
 };

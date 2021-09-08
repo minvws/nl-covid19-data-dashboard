@@ -107,6 +107,7 @@ const ElderlyAtHomeNationalPage = (
                 difference={
                   data.difference.elderly_at_home__positive_tested_daily
                 }
+                isAmount
               />
               <Markdown
                 content={text.section_positive_tested.kpi_daily_description}

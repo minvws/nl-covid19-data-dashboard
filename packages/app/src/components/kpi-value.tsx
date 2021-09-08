@@ -10,15 +10,27 @@ import {
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 
-interface KpiValueProps {
+interface KpiValueBaseProps {
   absolute?: number | null;
   percentage?: number | null;
   valueAnnotation?: string;
-  difference?: DifferenceDecimal | DifferenceInteger;
   text?: string;
   color?: string;
   isMovingAverageDifference?: boolean;
+  differenceFractionDigits?: number;
 }
+
+type DifferenceProps =
+  | {
+      difference?: never;
+      isAmount?: boolean;
+    }
+  | {
+      difference: DifferenceDecimal | DifferenceInteger;
+      isAmount: boolean;
+    };
+
+type KpiValueProps = KpiValueBaseProps & DifferenceProps;
 
 /**
  * When we need to style something specific there is no real reason to use the
@@ -52,6 +64,8 @@ export function KpiValue({
   text,
   color = 'data.primary',
   isMovingAverageDifference,
+  isAmount,
+  differenceFractionDigits,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -81,15 +95,20 @@ export function KpiValue({
       )}
 
       {isDefined(difference) &&
+        isDefined(isAmount) &&
         (isMovingAverageDifference ? (
           <TileAverageDifference
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
+            isAmount={isAmount}
+            maximumFractionDigits={differenceFractionDigits}
           />
         ) : (
           <TileDifference
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
+            isAmount={isAmount}
+            maximumFractionDigits={differenceFractionDigits}
           />
         ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

@@ -150,7 +150,7 @@ export const VaccinationsGmPage = (
               dateOfInsertionUnix: filteredAgeGroup.date_of_insertion_unix,
               dataSources: [],
             }}
-            usefulLinks={content.page.usefulLinks}
+            pageLinks={content.page.pageLinks}
             referenceLink={text.informatie_blok.reference.href}
             articles={content.highlight.articles}
           />

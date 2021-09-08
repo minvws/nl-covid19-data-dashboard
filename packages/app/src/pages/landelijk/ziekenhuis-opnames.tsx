@@ -40,6 +40,8 @@ import {
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { HospitalAdmissionsPageQuery } from '~/types/cms';
+import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -49,13 +51,15 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
   createGetContent<{
-    page: PageArticlesQueryResult;
+    page: HospitalAdmissionsPageQuery;
+    highlight: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
 
     return `{
-      "page": ${createPageArticlesQuery('hospitalPage', locale)},
+      "page": ${getHospitalAdmissionsPageQuery(context)},
+      "highlight": ${createPageArticlesQuery('hospitalPage', locale)},
       "elements": ${createElementsQuery('nl', ['hospital_nice'], locale)}
     }`;
   })
@@ -103,7 +107,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            pageLinks={content.page.pageLinks}
+            articles={content.highlight.articles}
           />
 
           <TwoKpiSection>
@@ -123,6 +128,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                 localeTextKey="ziekenhuisopnames_per_dag"
                 differenceKey="hospital_nice__admissions_on_date_of_reporting_moving_average"
                 isMovingAverageDifference
+                isAmount
               />
             </KpiTile>
 
@@ -141,6 +147,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                   difference={
                     data.difference.hospital_lcps__beds_occupied_covid
                   }
+                  isAmount
                 />
               )}
             </KpiTile>

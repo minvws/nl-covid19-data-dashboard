@@ -1,10 +1,10 @@
+import { External, Phone } from '@corona-dashboard/icons';
 import { css } from '@styled-system/css';
 import styled from 'styled-components';
-import { External } from '@corona-dashboard/icons';
-import { Phone } from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
+import { Markdown } from '~/components/markdown';
 import { PageInformationBlock } from '~/components/page-information-block';
 import { Tile } from '~/components/tile';
 import { TileList } from '~/components/tile-list';
@@ -25,7 +25,6 @@ import {
 import { colors } from '~/style/theme';
 import { Link } from '~/utils/link';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
-import { Markdown } from '~/components/markdown';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
@@ -78,6 +77,7 @@ const CoronamelderPage = (props: StaticProps<typeof getStaticProps>) => {
               <KpiValue
                 absolute={warningLastValue.count}
                 difference={data.difference.corona_melder_app_warning__count}
+                isAmount
               />
 
               <Markdown

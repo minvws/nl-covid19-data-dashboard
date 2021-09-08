@@ -1,71 +1,93 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Gelijk } from '@corona-dashboard/icons';
-import { Up } from '@corona-dashboard/icons';
-import { Down } from '@corona-dashboard/icons';
+import { Down, Gelijk, Up } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
+import css from '@styled-system/css';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
+import { Markdown } from '~/components/markdown';
+import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 
 export function TileAverageDifference({
   value,
   isPercentage,
+  isAmount,
+  maximumFractionDigits,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isPercentage?: boolean;
+  isAmount: boolean;
+  maximumFractionDigits?: number;
 }) {
-  const { difference, old_value } = value;
   const { siteText, formatNumber } = useIntl();
+  const { difference, old_value } = value;
+  const text = siteText.toe_en_afname;
 
-  const oldValue = (
-    <InlineText fontWeight="bold">{` (${formatNumber(old_value)}${
-      isPercentage ? '%' : ''
-    })`}</InlineText>
+  const formattedDifference = formatNumber(
+    Math.abs(difference),
+    maximumFractionDigits ? maximumFractionDigits : undefined
   );
 
-  if (difference > 0)
-    return (
-      <Container>
-        <IconContainer color="red">
-          <Up />
-        </IconContainer>
-        <InlineText fontWeight="bold">
-          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.hoger}{' '}
-        </InlineText>
-        <InlineText>
-          {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {oldValue}
-        </InlineText>
-      </Container>
-    );
+  let content;
+  let containerWithIcon;
 
-  if (difference < 0)
-    return (
-      <Container>
-        <IconContainer color="data.primary">
-          <Down />
-        </IconContainer>
-        <InlineText fontWeight="bold">
-          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.lager}{' '}
-        </InlineText>
-        <InlineText>
-          {siteText.toe_en_afname.zeven_daags_gemiddelde}
-          {oldValue}
-        </InlineText>
-      </Container>
+  if (difference > 0) {
+    content = isAmount
+      ? text.zeven_daags_gemiddelde_waarde_meer
+      : text.zeven_daags_gemiddelde_waarde_hoger;
+
+    containerWithIcon = <ContainerWithIcon icon={<Up />} color="red" />;
+  }
+
+  if (difference < 0) {
+    content = isAmount
+      ? text.zeven_daags_gemiddelde_waarde_minder
+      : text.zeven_daags_gemiddelde_waarde_lager;
+
+    containerWithIcon = (
+      <ContainerWithIcon icon={<Down />} color="data.primary" />
     );
+  }
+
+  if (!content) {
+    content = text.zeven_daags_gemiddelde_waarde_gelijk;
+
+    containerWithIcon = (
+      <ContainerWithIcon icon={<Gelijk />} color="data.neutral" />
+    );
+  }
 
   return (
-    <Container>
-      <IconContainer color="data.neutral">
-        <Gelijk />
-      </IconContainer>
-      <InlineText fontWeight="bold">
-        {siteText.toe_en_afname.gelijk}{' '}
-      </InlineText>
-      <InlineText>
-        {siteText.toe_en_afname.zeven_daags_gemiddelde}
-        {oldValue}
-      </InlineText>
+    <Container
+      css={css({
+        display: 'flex',
+      })}
+    >
+      {containerWithIcon}
+      <Markdown
+        renderersOverrides={{
+          paragraph: 'span',
+          strong: (props) => (
+            <InlineText fontWeight="bold">{props.children}</InlineText>
+          ),
+        }}
+        content={replaceVariablesInText(content, {
+          amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
+          totalAverage: old_value,
+        })}
+      />
     </Container>
   );
+
+  interface ContainerWithIconsProps {
+    icon: React.ReactNode;
+    color: string;
+  }
+
+  function ContainerWithIcon({ icon, color }: ContainerWithIconsProps) {
+    return (
+      <IconContainer color={color} mr={1}>
+        {icon}
+      </IconContainer>
+    );
+  }
 }
