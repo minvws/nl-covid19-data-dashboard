@@ -202,7 +202,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
       value: formatPercentage(value.value) + '%',
     });
   } else if (value === null) {
-    tooltipValue = '-';
+    tooltipValue = '–';
   }
 
   return (

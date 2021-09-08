@@ -1,7 +1,7 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
 import styled from 'styled-components';
 import { color } from 'styled-system';
-import { isDefined } from 'ts-is-present';
+import { isDefined, isPresent } from 'ts-is-present';
 import { Box } from '~/components/base';
 import {
   TileAverageDifference,
@@ -11,8 +11,8 @@ import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 
 interface KpiValueProps {
-  absolute?: number;
-  percentage?: number;
+  absolute?: number | null;
+  percentage?: number | null;
   valueAnnotation?: string;
   difference?: DifferenceDecimal | DifferenceInteger;
   text?: string;
@@ -58,11 +58,11 @@ export function KpiValue({
 
   return (
     <Box mb={3}>
-      {isDefined(percentage) && isDefined(absolute) ? (
+      {isPresent(percentage) && isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
           {`${formatNumber(absolute)} (${formatPercentage(percentage)}%)`}
         </StyledValue>
-      ) : isDefined(percentage) ? (
+      ) : isPresent(percentage) ? (
         <StyledValue color={color} {...otherProps}>
           {`${formatPercentage(percentage)}%`}
         </StyledValue>
@@ -70,9 +70,13 @@ export function KpiValue({
         <StyledValue color={color} {...otherProps}>
           {text}
         </StyledValue>
-      ) : (
+      ) : isPresent(absolute) ? (
         <StyledValue color={color} {...otherProps}>
           {formatNumber(absolute)}
+        </StyledValue>
+      ) : (
+        <StyledValue color={color} {...otherProps}>
+          –
         </StyledValue>
       )}
 

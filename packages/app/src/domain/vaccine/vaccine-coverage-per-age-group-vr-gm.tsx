@@ -164,7 +164,7 @@ function ParseText({ value, label, hasBoldText }: ParseTextProps) {
 
   if (!isPresent(value)) {
     return (
-      <InlineText fontWeight={hasBoldText ? 'bold' : 'normal'}>-</InlineText>
+      <InlineText fontWeight={hasBoldText ? 'bold' : 'normal'}>–</InlineText>
     );
   }
 
