@@ -133,6 +133,7 @@ export const colors = {
   choroplethOutlineStroke: '#c4c4c4',
   choroplethHighlightStroke: '#000000',
   choroplethNoData: '#fff',
+  warningYellow: '#fee670',
 
   data: {
     primary: '#007BC7',

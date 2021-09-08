@@ -1,8 +1,8 @@
+import { Warning } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import { isDefined } from 'ts-is-present';
-import { Warning } from '@corona-dashboard/icons';
 import { WithTooltip } from '~/lib/tooltip';
 import { Box } from './base';
 import { Markdown } from './markdown';
@@ -75,7 +75,7 @@ const WarningBox = styled(Box)<{ variant: WarningMessageVariant }>(
       alignItems: 'center',
       justifyContent: 'center',
       flex: '0 0 auto',
-      backgroundColor: variant === 'emphasis' ? '#FEE670' : 'white',
+      backgroundColor: variant === 'emphasis' ? 'warningYellow' : 'white',
       borderBottomLeftRadius: 1,
       borderTopLeftRadius: 1,
     });
