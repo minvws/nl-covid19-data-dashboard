@@ -64,7 +64,7 @@ export function TileDifference({
     >
       {containerWithIcon}
       <Markdown
-        rendererOverrides={{
+        renderersOverrides={{
           paragraph: 'span',
           strong: (props) => (
             <InlineText fontWeight="bold">{props.children}</InlineText>
