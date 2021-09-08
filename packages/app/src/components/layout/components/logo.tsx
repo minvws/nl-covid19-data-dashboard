@@ -66,7 +66,5 @@ const LogoImage = styled.img(
   css({
     width: '100%',
     height: '100%',
-    // marginLeft: asResponsiveArray({ xs: -50 }),
-    // transform: asResponsiveArray({ xs: 'translateX(50%)' }),
   })
 );
