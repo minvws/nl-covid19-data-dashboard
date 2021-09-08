@@ -11,14 +11,14 @@ import { asResponsiveArray } from '~/style/utils';
 import { isAbsoluteUrl } from '~/utils/is-absolute-url';
 import { Link } from '~/utils/link';
 
-interface usefulLinksProps {
+interface pageLinksProps {
   links: {
     title: string;
     href: string;
   }[];
 }
 
-export function UsefulLinks({ links }: usefulLinksProps) {
+export function PageLinks({ links }: pageLinksProps) {
   const { siteText } = useIntl();
 
   return (

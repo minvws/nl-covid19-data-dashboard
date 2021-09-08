@@ -147,7 +147,7 @@ export default function PositiefGetesteMensenPage(
             }}
             referenceLink={text.reference.href}
             articles={content.highlight.articles}
-            usefulLinks={content.page.usefulLinks}
+            pageLinks={content.page.pageLinks}
           />
 
           <InformationTile message={text.informatie_tegel} />

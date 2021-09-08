@@ -34,17 +34,21 @@ import {
 import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
+import { IntakeHospitalPageQuery } from '~/types/cms';
+import { getIntakeHospitalPageQuery } from '~/queries/intake-hospital-page-query';
 
 export const getStaticProps = createGetStaticProps(
   getLastGeneratedDate,
   selectNlPageMetricData('intensive_care_lcps'),
   createGetContent<{
-    page: PageArticlesQueryResult;
+    page: IntakeHospitalPageQuery;
+    highlight: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
     return `{
-      "page": ${createPageArticlesQuery('intensiveCarePage', locale)},
+      "page": ${getIntakeHospitalPageQuery(context)},
+      "highlight": ${createPageArticlesQuery('intensiveCarePage', locale)},
       "elements": ${createElementsQuery('nl', ['intensive_care_nice'], locale)}
     }`;
   })
@@ -88,7 +92,8 @@ const IntakeIntensiveCare = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.nice, text.bronnen.lnaz],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            pageLinks={content.page.pageLinks}
+            articles={content.highlight.articles}
           />
 
           <TwoKpiSection>
