@@ -272,6 +272,56 @@ describe('initializeFeatureFlaggedData', () => {
       test3: 'test',
     });
   });
+
+  it("should initialize the enum properties on a GM_COLLECTION metric if they don't exist", () => {
+    featureFlagConstantsMock.disabledMetrics = [
+      {
+        name: 'test',
+        isEnabled: false,
+        dataScopes: ['vr_collection'],
+        metricName: 'testCollection',
+        metricProperties: ['test1', 'test2'],
+      },
+    ] as Feature[];
+
+    const vrCollection: any = {
+      last_generated: '1630502291',
+      proto_name: 'VR_COLLECTION',
+      name: 'VR_COLLECTION',
+      code: 'VR_COLLECTION',
+      testCollection: [{ test3: 'test' }, { test3: 'test' }, { test3: 'test' }],
+    };
+
+    loadJsonFromFileSpy.mockImplementation((...args) => {
+      const pathStr = args[0] as string;
+      if (pathStr.endsWith('__index.json')) {
+        return vrCollectionSchema;
+      }
+      if (pathStr.endsWith('testCollection')) {
+        return vrCollectionTestCollectionEnumSchema;
+      }
+    });
+
+    initializeFeatureFlaggedData(vrCollection, 'vr_collection');
+
+    expect(vrCollection.testCollection).toBeDefined();
+    expect(vrCollection.testCollection.length).toEqual(3);
+    expect(vrCollection.testCollection[0]).toEqual({
+      test1: 'enum1',
+      test2: true,
+      test3: 'test',
+    });
+    expect(vrCollection.testCollection[1]).toEqual({
+      test1: 'enum1',
+      test2: true,
+      test3: 'test',
+    });
+    expect(vrCollection.testCollection[2]).toEqual({
+      test1: 'enum1',
+      test2: true,
+      test3: 'test',
+    });
+  });
 });
 
 /**
@@ -398,6 +448,24 @@ const vrCollectionTestCollectionSchema = {
   properties: {
     test1: {
       type: 'integer',
+    },
+    test2: {
+      type: 'boolean',
+    },
+    test3: {
+      type: 'string',
+    },
+  },
+};
+const vrCollectionTestCollectionEnumSchema = {
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  type: 'object',
+  title: 'gm_collection_test_collection',
+  additionalProperties: false,
+  required: ['test1', 'test2', 'test3'],
+  properties: {
+    test1: {
+      enum: ['enum1', 'enum2', 'enum3'],
     },
     test2: {
       type: 'boolean',
