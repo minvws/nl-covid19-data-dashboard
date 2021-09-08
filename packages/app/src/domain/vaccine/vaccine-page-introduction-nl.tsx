@@ -1,7 +1,9 @@
 import { Nl } from '@corona-dashboard/common';
 import css from '@styled-system/css';
 import { Box } from '~/components/base';
+import { ErrorBoundary } from '~/components/error-boundary';
 import { KpiValue } from '~/components/kpi-value';
+import { MiniTrendChart } from '~/components/mini-trend-chart';
 import { Tile } from '~/components/tile';
 import { TwoKpiSection } from '~/components/two-kpi-section';
 import { Heading, InlineText, Text } from '~/components/typography';
@@ -10,7 +12,6 @@ import { createDate } from '~/utils/create-date';
 import { replaceComponentsInText } from '~/utils/replace-components-in-text';
 import { VaccineHeaderWithIcon } from './components/vaccine-header-with-icon';
 import { VaccineTicker } from './components/vaccine-ticker';
-import { VaccineAdministrationsOverTimeChart } from './vaccine-administrations-over-time-chart';
 interface VaccinePageIntroductionNlProps {
   data: Pick<
     Nl,
@@ -59,13 +60,17 @@ export function VaccinePageIntroductionNl({
                 </Heading>
                 <Text>{text.grafiek_gezette_prikken.omschrijving}</Text>
                 <div css={css({ position: 'relative' })}>
-                  <VaccineAdministrationsOverTimeChart
-                    accessibility={{
-                      key: 'vaccine_introduction_administrations_over_time',
-                    }}
-                    title={text.grafiek_gezette_prikken.titel}
-                    values={data.vaccine_administered_total.values}
-                  />
+                  <ErrorBoundary>
+                    <MiniTrendChart
+                      accessibility={{
+                        key: 'vaccine_introduction_administrations_over_time',
+                      }}
+                      metricProperty="estimated"
+                      timeframe="all"
+                      title={text.grafiek_gezette_prikken.titel}
+                      values={data.vaccine_administered_total.values}
+                    />
+                  </ErrorBoundary>
                 </div>
               </Box>
 

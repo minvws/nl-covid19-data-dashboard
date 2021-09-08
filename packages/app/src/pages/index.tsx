@@ -41,7 +41,6 @@ import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { VaccineAdministrationsOverTimeChart } from '~/domain/vaccine/vaccine-administrations-over-time-chart';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { SiteText } from '~/locale';
@@ -227,15 +226,6 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
               />
 
               <MiniTrendTile
-                chart={
-                  <VaccineAdministrationsOverTimeChart
-                    accessibility={{
-                      key: 'topical_vaccine_administrations_over_time',
-                    }}
-                    title={text.mini_trend_tiles.toegediende_vaccins.title}
-                    values={dataVaccines.values}
-                  />
-                }
                 title={text.mini_trend_tiles.toegediende_vaccins.title}
                 text={replaceComponentsInText(
                   text.mini_trend_tiles.toegediende_vaccins.administered_tests,
@@ -250,7 +240,11 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                   }
                 )}
                 icon={<Vaccinaties />}
+                timeframe="all"
                 trendData={dataVaccines.values}
+                accessibility={{
+                  key: 'topical_vaccine_administrations_over_time',
+                }}
                 metricProperty="estimated"
                 href={reverseRouter.nl.vaccinaties()}
                 warning={getWarning(
