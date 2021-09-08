@@ -169,49 +169,6 @@ describe('initializeFeatureFlaggedData', () => {
     });
   });
 
-  it("should add the specified metric property on GM if it doesn't exist", () => {
-    featureFlagConstantsMock.disabledMetrics = [
-      {
-        name: 'test',
-        isEnabled: false,
-        dataScopes: ['gm'],
-        metricName: 'testCollection',
-      },
-    ];
-
-    const gm: any = {
-      last_generated: '1630502291',
-      proto_name: 'GM001',
-      name: 'GM001',
-      code: 'GM001',
-      testCollection: {
-        values: [{ test: true }, { test: true }],
-        last_value: { test: true },
-      },
-    };
-
-    loadJsonFromFileSpy.mockImplementation((...args) => {
-      const pathStr = args[0] as string;
-
-      if (pathStr.endsWith('__index.json')) {
-        return gmSchema;
-      }
-
-      if (pathStr.endsWith('testCollection')) {
-        return gmTestCollectionSchema;
-      }
-    });
-
-    initializeFeatureFlaggedData(gm, 'gm');
-
-    expect(gm.testCollection).toBeDefined();
-    expect(gm.testCollection.values).toBeDefined();
-    expect(gm.testCollection.values.length).toEqual(2);
-    expect(gm.testCollection.last_value).toEqual({
-      test: true,
-    });
-  });
-
   it("should initialize the metric properties on a GM_COLLECTION metric if they don't exist", () => {
     featureFlagConstantsMock.disabledMetrics = [
       {

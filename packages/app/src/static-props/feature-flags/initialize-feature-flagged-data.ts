@@ -11,7 +11,7 @@ import {
 } from '~/static-props/feature-flags/feature-flag-constants';
 import { loadJsonFromFile } from '~/static-props/utils/load-json-from-file';
 
-type AjvPropertyDef = { type?: MetricType; $ref: string };
+type AjvPropertyDef = { type?: MetricType; $ref: string; enum?: any[] };
 
 type AjvSchema = {
   $schema: string;
@@ -129,7 +129,7 @@ function initializeRef(schema: AjvSchema): any {
   );
 }
 
-function initializeSimpleProp(type: string) {
+function initializeSimpleProp(type: SimpleMetricType) {
   switch (type) {
     case 'boolean':
       return true;
@@ -145,17 +145,21 @@ function initializeSimpleProp(type: string) {
   }
 }
 
-function isStringPropType(value: any): value is string {
-  return typeof value === 'string';
+function isStringPropType(value: any): value is SimpleMetricType {
+  return typeof value === 'string' && value !== 'ref' && value !== 'null';
 }
 
 function initializeProperty(prop: AjvPropertyDef, schema: AjvSchema) {
+  if (isDefined(prop.enum) && prop.enum.length) {
+    return prop.enum[0];
+  }
+
   if (isStringPropType(prop.type)) {
     return initializeSimpleProp(prop.type);
   }
 
   if (Array.isArray(prop.type)) {
-    return initializeSimpleProp(prop.type[0] as string);
+    return initializeSimpleProp(prop.type[0] as SimpleMetricType);
   }
 
   if (isDefined(prop.$ref) && prop.$ref.startsWith('#')) {
@@ -193,12 +197,12 @@ function getMetricType(schema: AjvSchema, metricName: string) {
   return propertyDef.type ?? 'ref';
 }
 
-type MetricType =
+type SimpleMetricType =
   | 'array'
   | 'object'
   | 'string'
   | 'integer'
   | 'number'
-  | 'ref'
-  | 'null'
-  | MetricType[];
+  | 'boolean';
+
+type MetricType = SimpleMetricType | 'ref' | 'null' | MetricType[];
