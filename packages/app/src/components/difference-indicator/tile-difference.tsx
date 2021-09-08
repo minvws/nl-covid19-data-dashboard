@@ -49,7 +49,7 @@ export function TileDifference({
   }
 
   if (!content) {
-    content = text.gelijk;
+    content = text.waarde_gelijk;
 
     containerWithIcon = (
       <ContainerWithIcon icon={<Gelijk />} color="data.neutral" />
@@ -72,7 +72,7 @@ export function TileDifference({
         }}
         content={replaceVariablesInText(
           `${content} ${
-            showOldDateUnix ? text.dan_waarde_datum : text.vorige_waarde
+            showOldDateUnix ? text.dan_waarde_datum : text.waarde_gelijk
           }`,
           {
             amount: `${formattedDifference}${isPercentage ? '%' : ''}`,

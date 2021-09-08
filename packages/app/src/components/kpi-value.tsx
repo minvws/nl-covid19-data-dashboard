@@ -17,6 +17,7 @@ interface KpiValueBaseProps {
   text?: string;
   color?: string;
   isMovingAverageDifference?: boolean;
+  differenceFractionDigits?: number;
 }
 
 type DifferenceProps =
@@ -64,6 +65,7 @@ export function KpiValue({
   color = 'data.primary',
   isMovingAverageDifference,
   isAmount,
+  differenceFractionDigits,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -95,12 +97,14 @@ export function KpiValue({
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
             isAmount={isAmount}
+            maximumFractionDigits={differenceFractionDigits}
           />
         ) : (
           <TileDifference
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
             isAmount={isAmount}
+            maximumFractionDigits={differenceFractionDigits}
           />
         ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}
