@@ -17,7 +17,7 @@ import { Heading, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { AccessibilityDefinition } from '~/utils/use-accessibility-annotations';
 
-type MiniTrendTileProps<T extends TimestampedValue> = {
+type MiniTrendTileProps<T extends TimestampedValue = TimestampedValue> = {
   /**
    * The mandatory AccessibilityDefinition provides a reference to annotate the
    * graph with a label and description.

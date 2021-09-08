@@ -16,7 +16,7 @@ type MiniTrendChartProps<T> = {
   values: T[];
 };
 
-export function MiniTrendChart<T extends TimestampedValue>({
+export function MiniTrendChart<T extends TimestampedValue = TimestampedValue>({
   accessibility,
   metricProperty,
   timeframe = '5weeks',
