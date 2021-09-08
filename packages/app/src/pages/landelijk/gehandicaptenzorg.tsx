@@ -104,6 +104,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.disability_care__newly_infected_people
                 }
+                isAmount
               />
             </KpiTile>
           </TwoKpiSection>
@@ -188,6 +189,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.disability_care__infected_locations_total
                 }
+                isAmount
               />
               <Text>{infectedLocationsText.kpi_toelichting}</Text>
             </KpiTile>

@@ -1,6 +1,8 @@
-import { Coronavirus } from '@corona-dashboard/icons';
-import { GehandicaptenZorg } from '@corona-dashboard/icons';
-import { Locatie } from '@corona-dashboard/icons';
+import {
+  Coronavirus,
+  GehandicaptenZorg,
+  Locatie,
+} from '@corona-dashboard/icons';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
@@ -110,6 +112,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.disability_care__newly_infected_people
                 }
+                isAmount
               />
             </KpiTile>
           </TwoKpiSection>
@@ -193,6 +196,7 @@ const DisabilityCare = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.disability_care__infected_locations_total
                 }
+                isAmount
               />
               <Text>{locationsText.kpi_toelichting}</Text>
             </KpiTile>

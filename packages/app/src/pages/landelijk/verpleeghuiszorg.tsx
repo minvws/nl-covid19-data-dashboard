@@ -108,6 +108,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 data-cy="newly_infected_people"
                 absolute={nursinghomeDataLastValue.newly_infected_people}
                 difference={data.difference.nursing_home__newly_infected_people}
+                isAmount
               />
             </KpiTile>
           </TwoKpiSection>
@@ -200,6 +201,7 @@ const NursingHomeCare = (props: StaticProps<typeof getStaticProps>) => {
                 difference={
                   data.difference.nursing_home__infected_locations_total
                 }
+                isAmount
               />
               <Text>{infectedLocationsText.kpi_toelichting}</Text>
             </KpiTile>

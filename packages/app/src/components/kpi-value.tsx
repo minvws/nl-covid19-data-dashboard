@@ -10,15 +10,26 @@ import {
 import { ValueAnnotation } from '~/components/value-annotation';
 import { useIntl } from '~/intl';
 
-interface KpiValueProps {
+interface KpiValueBaseProps {
   absolute?: number;
   percentage?: number;
   valueAnnotation?: string;
-  difference?: DifferenceDecimal | DifferenceInteger;
   text?: string;
   color?: string;
   isMovingAverageDifference?: boolean;
 }
+
+type DifferenceProps =
+  | {
+      difference?: never;
+      isAmount?: boolean;
+    }
+  | {
+      difference: DifferenceDecimal | DifferenceInteger;
+      isAmount: boolean;
+    };
+
+type KpiValueProps = KpiValueBaseProps & DifferenceProps;
 
 /**
  * When we need to style something specific there is no real reason to use the
@@ -52,6 +63,7 @@ export function KpiValue({
   text,
   color = 'data.primary',
   isMovingAverageDifference,
+  isAmount,
   ...otherProps
 }: KpiValueProps) {
   const { formatPercentage, formatNumber } = useIntl();
@@ -77,15 +89,18 @@ export function KpiValue({
       )}
 
       {isDefined(difference) &&
+        isDefined(isAmount) &&
         (isMovingAverageDifference ? (
           <TileAverageDifference
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
+            isAmount={isAmount}
           />
         ) : (
           <TileDifference
             value={difference}
             isPercentage={isDefined(percentage) && !isDefined(absolute)}
+            isAmount={isAmount}
           />
         ))}
       {valueAnnotation && <ValueAnnotation>{valueAnnotation}</ValueAnnotation>}

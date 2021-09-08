@@ -134,6 +134,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     .hospital_nice__admissions_on_date_of_reporting_moving_average
                 }
                 isMovingAverageDifference
+                isAmount
               />
             </KpiTile>
           </TwoKpiSection>
