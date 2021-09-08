@@ -23,8 +23,8 @@ export function Logo() {
           position="relative"
           css={css({
             /**
-             * The logo has a bit of spacing on the right, with this clip path we're slicing
-             * a part of it so the user can only click only on the logo.
+             * The logo has a bit of empty space on the right, with this clip path we're slicing
+             * of that part so the user can only click on the logo.
              */
             clipPath: asResponsiveArray({
               xs: 'polygon(0 0, 155px 0, 155px 100%, 0% 100%)',
