@@ -1,7 +1,5 @@
 import { DifferenceDecimal, DifferenceInteger } from '@corona-dashboard/common';
-import { Gelijk } from '@corona-dashboard/icons';
-import { Up } from '@corona-dashboard/icons';
-import { Down } from '@corona-dashboard/icons';
+import { Down, Gelijk, Up } from '@corona-dashboard/icons';
 import { InlineText } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { Container, IconContainer } from './containers';
@@ -9,9 +7,11 @@ import { Container, IconContainer } from './containers';
 export function TileAverageDifference({
   value,
   isPercentage,
+  isAmount,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   isPercentage?: boolean;
+  isAmount: boolean;
 }) {
   const { difference, old_value } = value;
   const { siteText, formatNumber } = useIntl();
@@ -22,6 +22,8 @@ export function TileAverageDifference({
     })`}</InlineText>
   );
 
+  const text = siteText.toe_en_afname;
+
   if (difference > 0)
     return (
       <Container>
@@ -29,10 +31,11 @@ export function TileAverageDifference({
           <Up />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.hoger}{' '}
+          {formatNumber(Math.abs(difference))}{' '}
+          {isAmount ? text.toename : text.hoger}{' '}
         </InlineText>
         <InlineText>
-          {siteText.toe_en_afname.zeven_daags_gemiddelde}
+          {text.zeven_daags_gemiddelde}
           {oldValue}
         </InlineText>
       </Container>
@@ -45,10 +48,11 @@ export function TileAverageDifference({
           <Down />
         </IconContainer>
         <InlineText fontWeight="bold">
-          {formatNumber(Math.abs(difference))} {siteText.toe_en_afname.lager}{' '}
+          {formatNumber(Math.abs(difference))}{' '}
+          {isAmount ? text.afname : text.lager}{' '}
         </InlineText>
         <InlineText>
-          {siteText.toe_en_afname.zeven_daags_gemiddelde}
+          {text.zeven_daags_gemiddelde}
           {oldValue}
         </InlineText>
       </Container>
@@ -59,11 +63,9 @@ export function TileAverageDifference({
       <IconContainer color="data.neutral">
         <Gelijk />
       </IconContainer>
-      <InlineText fontWeight="bold">
-        {siteText.toe_en_afname.gelijk}{' '}
-      </InlineText>
+      <InlineText fontWeight="bold">{text.gelijk} </InlineText>
       <InlineText>
-        {siteText.toe_en_afname.zeven_daags_gemiddelde}
+        {text.zeven_daags_gemiddelde}
         {oldValue}
       </InlineText>
     </Container>

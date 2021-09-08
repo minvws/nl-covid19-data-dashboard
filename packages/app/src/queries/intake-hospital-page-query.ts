@@ -1,10 +1,10 @@
 import { GetStaticPropsContext } from 'next';
 
-export function getInPositiveTestsQuery(context: GetStaticPropsContext) {
+export function getIntakeHospitalPageQuery(context: GetStaticPropsContext) {
   const { locale } = context;
 
   return `
-  *[_type=='in_positiveTestsPage']{
+  *[_type=='intensiveCarePage']{
     "pageLinks": [...pageLinks[]{
       "title": title.${locale},
       "href": href,

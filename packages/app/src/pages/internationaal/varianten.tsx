@@ -63,14 +63,14 @@ export const getStaticProps = withFeatureNotFoundPage(
     },
     createGetContent<{
       page: {
-        usefulLinks?: LinkProps[];
+        pageLinks?: LinkProps[];
       };
       highlight: PageArticlesQueryResult;
     }>((context) => {
       const { locale } = context;
       return `{
         "page": *[_type=='in_variantsPage']{
-          "usefulLinks": [...pageLinks[]{
+          "pageLinks": [...pageLinks[]{
             "title": title.${locale},
             "href": href,
           }]
@@ -162,7 +162,7 @@ export default function VariantenPage(
             }}
             referenceLink={text.reference.href}
             articles={content.highlight?.articles}
-            usefulLinks={content.page?.usefulLinks}
+            pageLinks={content.page?.pageLinks}
           />
 
           <InformationTile message={text.informatie_tegel} />

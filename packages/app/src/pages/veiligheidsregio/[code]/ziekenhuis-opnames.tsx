@@ -36,6 +36,8 @@ import { colors } from '~/style/theme';
 import { getBoundaryDateStartUnix } from '~/utils/get-trailing-date-range';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
+import { HospitalAdmissionsPageQuery } from '~/types/cms';
+import { getHospitalAdmissionsPageQuery } from '~/queries/hospital-admissions-page-query';
 
 export { getStaticPaths } from '~/static-paths/vr';
 
@@ -46,13 +48,15 @@ export const getStaticProps = createGetStaticProps(
     gm: ({ hospital_nice }) => ({ hospital_nice }),
   }),
   createGetContent<{
-    page: PageArticlesQueryResult;
+    page: HospitalAdmissionsPageQuery;
+    highlight: PageArticlesQueryResult;
     elements: ElementsQueryResult;
   }>((context) => {
     const { locale } = context;
 
     return `{
-      "page": ${createPageArticlesQuery('hospitalPage', locale)},
+      "page": ${getHospitalAdmissionsPageQuery(context)},
+      "highlight": ${createPageArticlesQuery('hospitalPage', locale)},
       "elements": ${createElementsQuery('vr', ['hospital_nice'], locale)}
     }`;
   })
@@ -109,7 +113,8 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
               dataSources: [text.bronnen.rivm],
             }}
             referenceLink={text.reference.href}
-            articles={content.page.articles}
+            pageLinks={content.page.pageLinks}
+            articles={content.highlight.articles}
           />
 
           <TwoKpiSection>
@@ -129,6 +134,7 @@ const IntakeHospital = (props: StaticProps<typeof getStaticProps>) => {
                     .hospital_nice__admissions_on_date_of_reporting_moving_average
                 }
                 isMovingAverageDifference
+                isAmount
               />
             </KpiTile>
           </TwoKpiSection>

@@ -1,9 +1,9 @@
 import { Elderly } from '@corona-dashboard/icons';
+import { Spacer } from '~/components/base';
 import { ChartTile } from '~/components/chart-tile';
 import { KpiTile } from '~/components/kpi-tile';
 import { KpiValue } from '~/components/kpi-value';
 import { PageInformationBlock } from '~/components/page-information-block';
-import { Spacer } from '~/components/base';
 import { TileList } from '~/components/tile-list';
 import { TimeSeriesChart } from '~/components/time-series-chart';
 import { TwoKpiSection } from '~/components/two-kpi-section';
@@ -110,6 +110,7 @@ const ElderlyAtHomeRegionalPage = (
                 data-cy="positive_tested_daily"
                 absolute={elderly_at_home.last_value.positive_tested_daily}
                 difference={difference.elderly_at_home__positive_tested_daily}
+                isAmount
               />
               <Text>{text.section_positive_tested.kpi_daily_description}</Text>
             </KpiTile>

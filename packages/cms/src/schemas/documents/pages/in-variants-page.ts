@@ -1,19 +1,9 @@
-import { Rule } from '~/sanity';
 import { HIGHLIGHTED_ARTICLES } from '../../fields/highlighted-articles';
+import { PAGE_LINKS } from '../../fields/page-links';
 
 export const in_variantsPage = {
   title: 'Varianten Internationaal',
   name: 'in_variantsPage',
   type: 'document',
-  fields: [
-    HIGHLIGHTED_ARTICLES,
-    {
-      title: "'Ook interessant' links",
-      description: 'Maximaal 4 links naar interessante onderwerpen.',
-      name: 'pageLinks',
-      type: 'array',
-      of: [{ type: 'link' }],
-      validation: (rule: Rule) => rule.required().min(1).max(4),
-    },
-  ],
+  fields: [HIGHLIGHTED_ARTICLES, PAGE_LINKS],
 };

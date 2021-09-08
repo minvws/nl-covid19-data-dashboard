@@ -130,6 +130,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataOverallLastValue.infected}
                 difference={difference.tested_overall__infected_moving_average}
                 isMovingAverageDifference
+                isAmount
               />
 
               <Markdown content={text.kpi_toelichting} />
@@ -168,6 +169,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 localeTextKey="positief_geteste_personen"
                 differenceKey="tested_overall__infected_per_100k_moving_average"
                 isMovingAverageDifference
+                isAmount
               />
 
               <Text>{text.barscale_toelichting}</Text>
@@ -339,6 +341,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                 absolute={dataGgdLastValue.tested_total}
                 difference={difference.tested_ggd__tested_total_moving_average}
                 isMovingAverageDifference
+                isAmount
               />
               <Text>{ggdText.totaal_getest_week_uitleg}</Text>
             </KpiTile>
@@ -357,6 +360,7 @@ const PositivelyTestedPeople = (props: StaticProps<typeof getStaticProps>) => {
                   difference.tested_ggd__infected_percentage_moving_average
                 }
                 isMovingAverageDifference
+                isAmount={false}
               />
 
               <Text>{ggdText.positief_getest_week_uitleg}</Text>

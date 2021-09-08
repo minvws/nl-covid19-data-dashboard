@@ -14,13 +14,13 @@ export function TileDifference({
   maximumFractionDigits,
   isPercentage,
   showOldDateUnix,
-  hasHigherLowerText,
+  isAmount,
 }: {
   value: DifferenceDecimal | DifferenceInteger;
   maximumFractionDigits?: number;
   isPercentage?: boolean;
   showOldDateUnix?: boolean;
-  hasHigherLowerText?: boolean;
+  isAmount: boolean;
 }) {
   const { siteText, formatNumber, formatDateFromSeconds } = useIntl();
   const text = siteText.toe_en_afname;
@@ -35,13 +35,13 @@ export function TileDifference({
   let containerWithIcon;
 
   if (difference > 0) {
-    content = hasHigherLowerText ? text.waarde_hoger : text.waarde_meer;
+    content = isAmount ? text.waarde_hoger : text.waarde_meer;
 
     containerWithIcon = <ContainerWithIcon icon={<Up />} color="red" />;
   }
 
   if (difference < 0) {
-    content = hasHigherLowerText ? text.waarde_lager : text.waarde_minder;
+    content = isAmount ? text.waarde_lager : text.waarde_minder;
 
     containerWithIcon = (
       <ContainerWithIcon icon={<Down />} color="data.primary" />
