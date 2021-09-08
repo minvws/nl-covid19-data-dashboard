@@ -32,24 +32,28 @@ export function TileDifference({
   );
 
   let content;
-  let icon;
+  let containerWithIcon;
 
   if (difference > 0) {
     content = hasHigherLowerText ? text.waarde_hoger : text.waarde_meer;
 
-    icon = <ContainerWithIcon icon={<Up />} color={'red'} />;
+    containerWithIcon = <ContainerWithIcon icon={<Up />} color={'red'} />;
   }
 
   if (difference < 0) {
     content = hasHigherLowerText ? text.waarde_lager : text.waarde_minder;
 
-    icon = <ContainerWithIcon icon={<Down />} color={'data.primary'} />;
+    containerWithIcon = (
+      <ContainerWithIcon icon={<Down />} color={'data.primary'} />
+    );
   }
 
   if (!content) {
     content = text.gelijk;
 
-    icon = <ContainerWithIcon icon={<Gelijk />} color={'data.neutral'} />;
+    containerWithIcon = (
+      <ContainerWithIcon icon={<Gelijk />} color={'data.neutral'} />
+    );
   }
 
   return (
@@ -58,7 +62,7 @@ export function TileDifference({
         display: 'flex',
       })}
     >
-      {icon}
+      {containerWithIcon}
       <Markdown
         rendererOptions={{
           paragraph: 'span',
