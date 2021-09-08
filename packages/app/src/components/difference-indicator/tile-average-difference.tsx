@@ -32,16 +32,16 @@ export function TileAverageDifference({
 
   if (difference > 0) {
     content = isAmount
-      ? text.zeven_daags_gemiddelde_waarde_hoger
-      : text.zeven_daags_gemiddelde_waarde_meer;
+      ? text.zeven_daags_gemiddelde_waarde_meer
+      : text.zeven_daags_gemiddelde_waarde_hoger;
 
     containerWithIcon = <ContainerWithIcon icon={<Up />} color="red" />;
   }
 
   if (difference < 0) {
     content = isAmount
-      ? text.zeven_daags_gemiddelde_waarde_lager
-      : text.zeven_daags_gemiddelde_waarde_minder;
+      ? text.zeven_daags_gemiddelde_waarde_minder
+      : text.zeven_daags_gemiddelde_waarde_lager;
 
     containerWithIcon = (
       <ContainerWithIcon icon={<Down />} color="data.primary" />
