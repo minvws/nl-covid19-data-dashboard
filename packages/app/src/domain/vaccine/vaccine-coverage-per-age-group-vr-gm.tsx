@@ -162,6 +162,12 @@ interface ParseTextProps {
 function ParseText({ value, label, hasBoldText }: ParseTextProps) {
   const { formatPercentage, siteText } = useIntl();
 
+  if (!isPresent(value)) {
+    return (
+      <InlineText fontWeight={hasBoldText ? 'bold' : 'normal'}>-</InlineText>
+    );
+  }
+
   if (isPresent(label)) {
     const parsedVaccinatedLabel = parseFullyVaccinatedPercentageLabel(label);
 

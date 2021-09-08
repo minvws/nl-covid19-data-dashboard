@@ -63,10 +63,10 @@ export function VaccinePageIntroductionVrGm({
                       )
                 }
               />
+            ) : isPresent(data.fully_vaccinated_percentage) ? (
+              <KpiValue percentage={data.fully_vaccinated_percentage} />
             ) : (
-              <KpiValue
-                percentage={data.fully_vaccinated_percentage as number}
-              />
+              <KpiValue text="-" />
             )}
             <Markdown content={description} />
           </Box>
