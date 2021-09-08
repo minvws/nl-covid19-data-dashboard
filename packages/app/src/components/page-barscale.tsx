@@ -153,7 +153,6 @@ export function PageBarScale<T>({
         ) : (
           <TileDifference
             value={differenceValue}
-            isDecimal={config.isDecimal}
             maximumFractionDigits={differenceFractionDigits}
             showOldDateUnix={showOldDateUnix}
             isAmount={isAmount}

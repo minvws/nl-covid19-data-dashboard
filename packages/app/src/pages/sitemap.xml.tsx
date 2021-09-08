@@ -103,7 +103,7 @@ async function getAllPathsWithPriorities() {
     { path: 'regio', value: 0.8 },
   ];
 
-  const pathsWithPriorities = pathsFromPages.map((path) => {
+  const pathsWithPriorities = pathsFromPages.map((path: string) => {
     const priority = priorities.find((priority) =>
       path.includes(priority.path)
     );

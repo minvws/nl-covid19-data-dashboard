@@ -10,9 +10,10 @@ import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 import { Anchor } from './typography';
-
+import { ElementType } from 'react';
 interface MarkdownProps {
   content: string;
+  renderersOverrides?: { [nodeType: string]: ElementType };
 }
 interface LinkProps {
   children: ReactNode;
@@ -57,10 +58,18 @@ const renderers = {
   },
 };
 
-export function Markdown({ content }: MarkdownProps) {
+export function Markdown({ content, renderersOverrides }: MarkdownProps) {
   const { dataset } = useIntl();
   const source = dataset === 'keys' ? `✅${content}` : content;
-  return <StyledReactMarkdown source={source} renderers={renderers} />;
+  return (
+    <StyledReactMarkdown
+      source={source}
+      renderers={{
+        ...renderers,
+        ...renderersOverrides,
+      }}
+    />
+  );
 }
 
 const StyledReactMarkdown = styled(ReactMarkdown)(css(nestedHtml));
