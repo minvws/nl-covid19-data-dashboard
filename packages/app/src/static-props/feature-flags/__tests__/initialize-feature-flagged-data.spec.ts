@@ -10,6 +10,10 @@ const loadJsonFromFileSpy = jest.spyOn(
 );
 
 describe('initializeFeatureFlaggedData', () => {
+  beforeEach(() => {
+    loadJsonFromFileSpy.mockReset();
+  });
+
   it("should add an empty array to a GM_COLLECTION if it doesn't exist", () => {
     featureFlagConstantsMock.disabledMetrics = [
       {
@@ -165,6 +169,49 @@ describe('initializeFeatureFlaggedData', () => {
     });
   });
 
+  it("should add the specified metric property on GM if it doesn't exist", () => {
+    featureFlagConstantsMock.disabledMetrics = [
+      {
+        name: 'test',
+        isEnabled: false,
+        dataScopes: ['gm'],
+        metricName: 'testCollection',
+      },
+    ];
+
+    const gm: any = {
+      last_generated: '1630502291',
+      proto_name: 'GM001',
+      name: 'GM001',
+      code: 'GM001',
+      testCollection: {
+        values: [{ test: true }, { test: true }],
+        last_value: { test: true },
+      },
+    };
+
+    loadJsonFromFileSpy.mockImplementation((...args) => {
+      const pathStr = args[0] as string;
+
+      if (pathStr.endsWith('__index.json')) {
+        return gmSchema;
+      }
+
+      if (pathStr.endsWith('testCollection')) {
+        return gmTestCollectionSchema;
+      }
+    });
+
+    initializeFeatureFlaggedData(gm, 'gm');
+
+    expect(gm.testCollection).toBeDefined();
+    expect(gm.testCollection.values).toBeDefined();
+    expect(gm.testCollection.values.length).toEqual(2);
+    expect(gm.testCollection.last_value).toEqual({
+      test: true,
+    });
+  });
+
   it("should initialize the metric properties on a GM_COLLECTION metric if they don't exist", () => {
     featureFlagConstantsMock.disabledMetrics = [
       {
@@ -211,6 +258,60 @@ describe('initializeFeatureFlaggedData', () => {
     expect(vrCollection.testCollection[2]).toEqual({
       test1: 0,
       test2: true,
+      test3: 'test',
+    });
+  });
+
+  it('should do nothing if the specified metric properties already exist in the GM_COLLECTION items', () => {
+    featureFlagConstantsMock.disabledMetrics = [
+      {
+        name: 'test',
+        isEnabled: false,
+        dataScopes: ['vr_collection'],
+        metricName: 'testCollection',
+        metricProperties: ['test1', 'test2'],
+      },
+    ] as Feature[];
+
+    const vrCollection: any = {
+      last_generated: '1630502291',
+      proto_name: 'VR_COLLECTION',
+      name: 'VR_COLLECTION',
+      code: 'VR_COLLECTION',
+      testCollection: [
+        { test1: 100, test2: false, test3: 'test' },
+        { test1: 200, test2: true, test3: 'test' },
+        { test1: 300, test2: false, test3: 'test' },
+      ],
+    };
+
+    loadJsonFromFileSpy.mockImplementation((...args) => {
+      const pathStr = args[0] as string;
+      if (pathStr.endsWith('__index.json')) {
+        return vrCollectionSchema;
+      }
+      if (pathStr.endsWith('testCollection')) {
+        return vrCollectionTestCollectionSchema;
+      }
+    });
+
+    initializeFeatureFlaggedData(vrCollection, 'vr_collection');
+
+    expect(vrCollection.testCollection).toBeDefined();
+    expect(vrCollection.testCollection.length).toEqual(3);
+    expect(vrCollection.testCollection[0]).toEqual({
+      test1: 100,
+      test2: false,
+      test3: 'test',
+    });
+    expect(vrCollection.testCollection[1]).toEqual({
+      test1: 200,
+      test2: true,
+      test3: 'test',
+    });
+    expect(vrCollection.testCollection[2]).toEqual({
+      test1: 300,
+      test2: false,
       test3: 'test',
     });
   });

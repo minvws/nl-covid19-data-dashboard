@@ -23,6 +23,27 @@ type AjvSchema = {
   definitions?: Record<string, AjvSchema>;
 };
 
+/**
+ * This method receives a dashboard data file (one from the public/json folder),
+ * it then searches for **disabled** feature flags that are associated with the
+ * specified data file and generates default data where it doesn't exist yet.
+ *
+ * For example, if a feature flag is exists for data scope GM_COLLECTION with the
+ * metric name 'infections'. This method will check if the property already exists
+ * and if not, it will assign an empty array to this property.
+ * Specifying metric properties is also supported, so if the array data already
+ * exists, but a new number property called, for example, 'number_of_people' is defined
+ * by the feature flag, this property will be assigned a zero if it doesn't exist yet.
+ *
+ * This way, in the `getStaticProps` logic there won't be a need to add any
+ * kind of `if featureFlag.foo === true` logic, since the data is initialized with
+ * empty values any kind of data shaping won't fail, it will just result in more
+ * empty data.
+ *
+ * Note: The available schema's are used to initialize the property values with
+ * correct data types.
+ *
+ */
 export function initializeFeatureFlaggedData<T>(
   jsonData: T,
   scope: JsonDataScope
@@ -36,7 +57,7 @@ export function initializeFeatureFlaggedData<T>(
   return jsonData;
 }
 
-export function initializeFeatureFlagDataItem(
+function initializeFeatureFlagDataItem(
   feature: VerboseFeature,
   scope: JsonDataScope,
   jsonData: any
@@ -75,6 +96,11 @@ function initializeMetricProperties(
   const metrics = Array.isArray(metric) ? metric : [metric];
   metrics.forEach((m) => {
     propertyNames.forEach((x) => {
+      if (!isDefined(metricSchema.properties[x])) {
+        throw new Error(
+          `metric property ${x} not defined in ${metricSchema.title}`
+        );
+      }
       if (!isDefined(m[x])) {
         m[x] = initializeProperty(metricSchema.properties[x], metricSchema);
       }
@@ -92,24 +118,29 @@ function initializeRef(schema: AjvSchema): any {
   }
 
   return Object.fromEntries(
-    schema.required.map((x) => [
-      x,
-      initializeProperty(schema.properties[x], schema),
-    ])
+    schema.required.map((x) => {
+      if (!isDefined(schema.properties[x])) {
+        throw new Error(
+          `metric property '${x}' not defined in ${schema.title}`
+        );
+      }
+      return [x, initializeProperty(schema.properties[x], schema)];
+    })
   );
 }
 
 function initializeSimpleProp(type: string) {
-  switch (true) {
-    case type === 'boolean':
+  switch (type) {
+    case 'boolean':
       return true;
-    case type === 'array':
+    case 'array':
       return [];
-    case type === 'string':
+    case 'string':
       return '';
-    case type === 'number' || type === 'integer':
+    case 'number':
+    case 'integer':
       return 0;
-    case type === 'object':
+    case 'object':
       return {};
   }
 }
@@ -122,9 +153,11 @@ function initializeProperty(prop: AjvPropertyDef, schema: AjvSchema) {
   if (isStringPropType(prop.type)) {
     return initializeSimpleProp(prop.type);
   }
+
   if (Array.isArray(prop.type)) {
     return initializeSimpleProp(prop.type[0] as string);
   }
+
   if (isDefined(prop.$ref) && prop.$ref.startsWith('#')) {
     const key = prop.$ref.split('/').pop();
     if (
@@ -142,11 +175,7 @@ function initializeProperty(prop: AjvPropertyDef, schema: AjvSchema) {
 function getSchema(feature: VerboseFeature, scope: JsonDataScope) {
   const rootSchemaPath = path.join(schemaRootPath, scope, '__index.json');
   const rootSchema = loadJsonFromFile<AjvSchema>(rootSchemaPath);
-  const metricSchemaPath = path.join(
-    schemaRootPath,
-    `${scope}`,
-    feature.metricName
-  );
+  const metricSchemaPath = path.join(schemaRootPath, scope, feature.metricName);
   const metricSchema = loadJsonFromFile<AjvSchema>(metricSchemaPath);
   return [rootSchema, metricSchema] as const;
 }
