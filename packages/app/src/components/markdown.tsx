@@ -10,9 +10,10 @@ import { Link } from '~/utils/link';
 import { DisplayOnMatchingQueryCode } from './display-on-matching-query-code';
 import { Message } from './message';
 import { Anchor } from './typography';
-
+import { ElementType } from 'react';
 interface MarkdownProps {
   content: string;
+  rendererOptions?: { [nodeType: string]: ElementType };
 }
 interface LinkProps {
   children: ReactNode;
@@ -49,8 +50,6 @@ const renderers = {
     </DisplayOnMatchingQueryCode>
   ),
 
-  paragraph: 'span',
-
   /**
    * The blockquote element is hijacked for displaying "warning" messages.
    */
@@ -59,10 +58,18 @@ const renderers = {
   },
 };
 
-export function Markdown({ content }: MarkdownProps) {
+export function Markdown({ content, rendererOptions }: MarkdownProps) {
   const { dataset } = useIntl();
   const source = dataset === 'keys' ? `✅${content}` : content;
-  return <StyledReactMarkdown source={source} renderers={renderers} />;
+  return (
+    <StyledReactMarkdown
+      source={source}
+      renderers={{
+        ...renderers,
+        ...rendererOptions,
+      }}
+    />
+  );
 }
 
 const StyledReactMarkdown = styled(ReactMarkdown)(css(nestedHtml));
