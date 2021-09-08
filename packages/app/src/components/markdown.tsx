@@ -13,7 +13,7 @@ import { Anchor } from './typography';
 import { ElementType } from 'react';
 interface MarkdownProps {
   content: string;
-  rendererOptions?: { [nodeType: string]: ElementType };
+  renderersOptions?: { [nodeType: string]: ElementType };
 }
 interface LinkProps {
   children: ReactNode;
@@ -58,7 +58,7 @@ const renderers = {
   },
 };
 
-export function Markdown({ content, rendererOptions }: MarkdownProps) {
+export function Markdown({ content, renderersOptions }: MarkdownProps) {
   const { dataset } = useIntl();
   const source = dataset === 'keys' ? `✅${content}` : content;
   return (
@@ -66,7 +66,7 @@ export function Markdown({ content, rendererOptions }: MarkdownProps) {
       source={source}
       renderers={{
         ...renderers,
-        ...rendererOptions,
+        ...renderersOptions,
       }}
     />
   );
