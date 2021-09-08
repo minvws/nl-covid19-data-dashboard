@@ -5,3 +5,16 @@ timestamp,action,key,document_id,move_to
 2021-09-08T08:46:40.740Z,add,toe_en_afname.waarde_lager,u2w2cmKrEkkhu4TKoNjcee,__
 2021-09-08T08:46:42.059Z,add,toe_en_afname.waarde_minder,oFxmVAb3WhH1wXDkdmrhr4,__
 2021-09-08T08:46:43.525Z,add,toe_en_afname.dan_waarde_datum,srBRCALrLz9Y3ZpBD68tp7,__
+2021-09-08T10:13:01.031Z,add,toe_en_afname.waarde_gelijk,srBRCALrLz9Y3ZpBD6TYII,__
+2021-09-08T10:35:20.019Z,add,toe_en_afname.zeven_daags_gemiddelde_waarde_hoger,oFxmVAb3WhH1wXDkdn0zrU,__
+2021-09-08T10:35:21.043Z,add,toe_en_afname.zeven_daags_gemiddelde_waarde_meer,u2w2cmKrEkkhu4TKoO7xpL,__
+2021-09-08T10:35:22.067Z,add,toe_en_afname.zeven_daags_gemiddelde_waarde_lager,u2w2cmKrEkkhu4TKoO7xva,__
+2021-09-08T10:35:23.091Z,add,toe_en_afname.zeven_daags_gemiddelde_waarde_minder,srBRCALrLz9Y3ZpBD6Zpv9,__
+2021-09-08T10:35:24.012Z,add,toe_en_afname.zeven_daags_gemiddelde_waarde_gelijk,srBRCALrLz9Y3ZpBD6Zq1s,__
+2021-09-08T10:35:24.013Z,delete,toe_en_afname.afname,jF33EuwumlGuwav2FD3uDc,__
+2021-09-08T10:35:24.013Z,delete,toe_en_afname.gelijk,jF33EuwumlGuwav2FD3uFI,__
+2021-09-08T10:35:24.013Z,delete,toe_en_afname.hoger,p4JeWnX1BdBjLeRfpOCEGE,__
+2021-09-08T10:35:24.014Z,delete,toe_en_afname.lager,p4JeWnX1BdBjLeRfpOCJjC,__
+2021-09-08T10:35:24.014Z,delete,toe_en_afname.toename,jF33EuwumlGuwav2FD3uBw,__
+2021-09-08T10:35:24.014Z,delete,toe_en_afname.vorige_waarde,jF33EuwumlGuwav2FD3uW4,__
+2021-09-08T10:35:24.014Z,delete,toe_en_afname.zeven_daags_gemiddelde,6QpSQ1LKij6fvuYEHTebU7,__

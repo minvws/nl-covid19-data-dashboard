@@ -149,7 +149,11 @@ export function PageBarScale<T>({
       {isDefined(differenceKey) &&
         isDefined(isAmount) &&
         (isMovingAverageDifference ? (
-          <TileAverageDifference value={differenceValue} isAmount={isAmount} />
+          <TileAverageDifference
+            value={differenceValue}
+            isAmount={isAmount}
+            maximumFractionDigits={differenceFractionDigits}
+          />
         ) : (
           <TileDifference
             value={differenceValue}

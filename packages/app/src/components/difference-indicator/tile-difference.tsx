@@ -35,13 +35,13 @@ export function TileDifference({
   let containerWithIcon;
 
   if (difference > 0) {
-    content = isAmount ? text.waarde_hoger : text.waarde_meer;
+    content = isAmount ? text.waarde_meer : text.waarde_hoger;
 
     containerWithIcon = <ContainerWithIcon icon={<Up />} color="red" />;
   }
 
   if (difference < 0) {
-    content = isAmount ? text.waarde_lager : text.waarde_minder;
+    content = isAmount ? text.waarde_minder : text.waarde_lager;
 
     containerWithIcon = (
       <ContainerWithIcon icon={<Down />} color="data.primary" />
@@ -49,7 +49,7 @@ export function TileDifference({
   }
 
   if (!content) {
-    content = text.gelijk;
+    content = text.waarde_gelijk;
 
     containerWithIcon = (
       <ContainerWithIcon icon={<Gelijk />} color="data.neutral" />
@@ -72,7 +72,7 @@ export function TileDifference({
         }}
         content={replaceVariablesInText(
           `${content} ${
-            showOldDateUnix ? text.dan_waarde_datum : text.vorige_waarde
+            showOldDateUnix ? text.dan_waarde_datum : text.waarde_gelijk
           }`,
           {
             amount: `${formattedDifference}${isPercentage ? '%' : ''}`,
