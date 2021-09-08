@@ -37,14 +37,14 @@ export function TileDifference({
   if (difference > 0) {
     content = hasHigherLowerText ? text.waarde_hoger : text.waarde_meer;
 
-    containerWithIcon = <ContainerWithIcon icon={<Up />} color={'red'} />;
+    containerWithIcon = <ContainerWithIcon icon={<Up />} color="red" />;
   }
 
   if (difference < 0) {
     content = hasHigherLowerText ? text.waarde_lager : text.waarde_minder;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Down />} color={'data.primary'} />
+      <ContainerWithIcon icon={<Down />} color="data.primary" />
     );
   }
 
@@ -52,7 +52,7 @@ export function TileDifference({
     content = text.gelijk;
 
     containerWithIcon = (
-      <ContainerWithIcon icon={<Gelijk />} color={'data.neutral'} />
+      <ContainerWithIcon icon={<Gelijk />} color="data.neutral" />
     );
   }
 
