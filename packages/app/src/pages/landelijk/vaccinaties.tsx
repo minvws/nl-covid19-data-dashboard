@@ -22,6 +22,7 @@ import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vac
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
+import { VaccineGradeToggleTile } from '~/domain/vaccine/vaccine-grade-toggle-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
@@ -120,6 +121,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
+
           <VaccinePageIntroductionNl data={data} />
 
           <PageInformationBlock
@@ -201,6 +203,19 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
+
+          <VaccineGradeToggleTile
+            title={text.vaccination_grade_toggle_tile.title}
+            topLabels={text.vaccination_grade_toggle_tile.top_labels}
+            source={text.vaccination_grade_toggle_tile.source}
+            ageGroupText={{
+              age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
+              age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
+            }}
+            descriptionFooter={
+              text.vaccination_grade_toggle_tile.description_footer
+            }
+          />
 
           {vaccinationPerAgeGroupFeature.isEnabled &&
           data.vaccine_coverage_per_age_group ? (

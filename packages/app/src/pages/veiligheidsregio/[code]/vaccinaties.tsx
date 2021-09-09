@@ -22,6 +22,7 @@ import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric'
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroupVrGm } from '~/domain/vaccine/vaccine-coverage-per-age-group-vr-gm';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
+import { VaccineGradeToggleTile } from '~/domain/vaccine/vaccine-grade-toggle-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
 import {
@@ -145,6 +146,19 @@ export const VaccinationsVrPage = (
             pageLinks={content.page.pageLinks}
             referenceLink={text.informatie_blok.reference.href}
             articles={content.highlight.articles}
+          />
+
+          <VaccineGradeToggleTile
+            title={text.vaccination_grade_toggle_tile.title}
+            topLabels={text.vaccination_grade_toggle_tile.top_labels}
+            source={text.vaccination_grade_toggle_tile.source}
+            ageGroupText={{
+              age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
+              age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
+            }}
+            descriptionFooter={
+              text.vaccination_grade_toggle_tile.description_footer
+            }
           />
 
           <VaccineCoveragePerAgeGroupVrGm
