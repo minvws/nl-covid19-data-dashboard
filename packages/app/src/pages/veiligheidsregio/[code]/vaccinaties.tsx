@@ -22,9 +22,10 @@ import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric'
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccineCoveragePerAgeGroupVrGm } from '~/domain/vaccine/vaccine-coverage-per-age-group-vr-gm';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
-import { VaccineGradeToggleTile } from '~/domain/vaccine/vaccine-grade-toggle-tile';
+import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
+import { useFeature } from '~/lib/features';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -112,6 +113,12 @@ export const VaccinationsVrPage = (
     }),
   };
 
+  const vaccineCoverageEstimatedFeature = useFeature(
+    'vrVaccineCoverageEstimated'
+  );
+
+  console.log(vaccineCoverageEstimatedFeature);
+
   /**
    * Filter out only the the 18 plus value to show in the sidebar
    */
@@ -148,18 +155,20 @@ export const VaccinationsVrPage = (
             articles={content.highlight.articles}
           />
 
-          <VaccineGradeToggleTile
-            title={text.vaccination_grade_toggle_tile.title}
-            topLabels={text.vaccination_grade_toggle_tile.top_labels}
-            source={text.vaccination_grade_toggle_tile.source}
-            ageGroupText={{
-              age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
-              age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
-            }}
-            descriptionFooter={
-              text.vaccination_grade_toggle_tile.description_footer
-            }
-          />
+          {vaccineCoverageEstimatedFeature.isEnabled && (
+            <VaccineCoverageToggleTile
+              title={text.vaccination_grade_toggle_tile.title}
+              topLabels={text.vaccination_grade_toggle_tile.top_labels}
+              source={text.vaccination_grade_toggle_tile.source}
+              ageGroupText={{
+                age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
+                age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
+              }}
+              descriptionFooter={
+                text.vaccination_grade_toggle_tile.description_footer
+              }
+            />
+          )}
 
           <VaccineCoveragePerAgeGroupVrGm
             title={text.vaccination_coverage_per_age_group.title}

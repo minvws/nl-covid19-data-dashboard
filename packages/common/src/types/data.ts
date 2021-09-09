@@ -907,10 +907,10 @@ export interface NlVaccineCoveragePerAgeGroupEstimatedValue {
   last_value: NlVaccineCoveragePerAgeGroupEstimated;
 }
 export interface NlVaccineCoveragePerAgeGroupEstimated {
-  age_18_plus_total: number;
+  age_18_plus_fully_vaccinated: number;
   age_18_plus_has_one_shot: number;
   age_18_plus_birthyear: string;
-  age_12_plus_total: number;
+  age_12_plus_fully_vaccinated: number;
   age_12_plus_has_one_shot: number;
   age_12_plus_birthyear: string;
   date_unix: number;
@@ -1283,10 +1283,10 @@ export interface VrVaccineCoveragePerAgeGroupEstimated {
   last_value: VrVaccineCoveragePerAgeGroupEstimatedValue;
 }
 export interface VrVaccineCoveragePerAgeGroupEstimatedValue {
-  age_18_plus_total: number;
+  age_18_plus_fully_vaccinated: number;
   age_18_plus_has_one_shot: number;
   age_18_plus_birthyear: string;
-  age_12_plus_total: number;
+  age_12_plus_fully_vaccinated: number;
   age_12_plus_has_one_shot: number;
   age_12_plus_birthyear: string;
   date_unix: number;

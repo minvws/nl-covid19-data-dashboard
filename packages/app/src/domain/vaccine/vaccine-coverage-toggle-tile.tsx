@@ -18,7 +18,7 @@ type AgeGroupTypes = {
   label: string;
 };
 
-interface VaccineGradeToggleTileProps {
+interface VaccineCoverageToggleTileProps {
   title: string;
   topLabels: {
     one_shot: string;
@@ -35,19 +35,22 @@ interface VaccineGradeToggleTileProps {
   descriptionFooter: string;
 }
 
-export function VaccineGradeToggleTile({
+export function VaccineCoverageToggleTile({
   title,
   topLabels,
   source,
   ageGroupText,
   descriptionFooter,
-}: VaccineGradeToggleTileProps) {
+}: VaccineCoverageToggleTileProps) {
+  /**
+   * @TODO: remove mock data
+   */
   const data = {
     date_unix: 123456789,
-    age_18_plus_total: 123456,
+    age_18_plus_fully_vaccinated: 123456,
     age_18_plus_has_one_shot: 654312,
     age_18_plus_birthyear: '-2003',
-    age_12_plus_total: 654312,
+    age_12_plus_fully_vaccinated: 654312,
     age_12_plus_has_one_shot: 123456,
     age_12_plus_birthyear: '-2009',
   };
@@ -86,7 +89,7 @@ export function VaccineGradeToggleTile({
             <>
               <AgeGroupBlock
                 title={topLabels.one_shot}
-                kpiValue={data.age_18_plus_total}
+                kpiValue={data.age_18_plus_fully_vaccinated}
                 description={
                   ageGroupText.age_18_plus.description_vaccination_one_shot
                 }
@@ -105,8 +108,8 @@ export function VaccineGradeToggleTile({
           {selectedTab === ageGroupText.age_12_plus.label && (
             <>
               <AgeGroupBlock
-                title={topLabels.vaccination_one_shot}
-                kpiValue={data.age_12_plus_total}
+                title={topLabels.one_shot}
+                kpiValue={data.age_12_plus_fully_vaccinated}
                 description={
                   ageGroupText.age_12_plus.description_vaccination_one_shot
                 }

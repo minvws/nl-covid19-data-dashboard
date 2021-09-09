@@ -69,4 +69,16 @@ export const features: Feature[] = [
     dataScopes: ['gm'],
     metricName: 'tested_overall_sum',
   },
+  {
+    name: 'nlVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['vr'],
+    metricName: 'vaccine_coverage_per_age_group_estimated',
+  },
+  {
+    name: 'vrVaccineCoverageEstimated',
+    isEnabled: true,
+    dataScopes: ['vr'],
+    metricName: 'vaccine_coverage_per_age_group_estimated',
+  },
 ];
