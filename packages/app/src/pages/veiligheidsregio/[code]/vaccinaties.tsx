@@ -117,8 +117,6 @@ export const VaccinationsVrPage = (
     'vrVaccineCoverageEstimated'
   );
 
-  console.log(vaccineCoverageEstimatedFeature);
-
   /**
    * Filter out only the the 18 plus value to show in the sidebar
    */
