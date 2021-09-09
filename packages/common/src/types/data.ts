@@ -302,6 +302,7 @@ export interface Nl {
   vaccine_administered_rate_moving_average: NlVaccineAdministeredRateMovingAverage;
   vaccine_administered_planned: NlVaccineAdministeredPlanned;
   vaccine_coverage_per_age_group: NlVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_estimated: NlVaccineCoveragePerAgeGroupEstimatedValue;
   vaccine_stock: NlVaccineStock;
   variants?: NlVariants;
 }
@@ -901,6 +902,20 @@ export interface NlVaccineCoveragePerAgeGroupValue {
   date_of_report_unix: number;
   birthyear_range: string;
 }
+export interface NlVaccineCoveragePerAgeGroupEstimatedValue {
+  values: NlVaccineCoveragePerAgeGroupEstimated[];
+  last_value: NlVaccineCoveragePerAgeGroupEstimated;
+}
+export interface NlVaccineCoveragePerAgeGroupEstimated {
+  age_18_plus_total: number;
+  age_18_plus_has_one_shot: number;
+  age_18_plus_birthyear: string;
+  age_12_plus_total: number;
+  age_12_plus_has_one_shot: number;
+  age_12_plus_birthyear: string;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
 export interface NlVaccineStock {
   values: NlVaccineStockValue[];
   last_value: NlVaccineStockValue;
@@ -966,6 +981,7 @@ export interface Vr {
   vaccine_coverage?: VrVaccineCoverage;
   situations: VrSituations;
   vaccine_coverage_per_age_group: VrVaccineCoveragePerAgeGroup;
+  vaccine_coverage_per_age_group_estimated: VrVaccineCoveragePerAgeGroupEstimated;
 }
 export interface VrStaticValues {
   population_count: number;
@@ -1259,6 +1275,20 @@ export interface VrVaccineCoveragePerAgeGroupValue {
   birthyear_range: string;
   fully_vaccinated_percentage_label: string | null;
   has_1_shot_percentage_label: string | null;
+  date_unix: number;
+  date_of_insertion_unix: number;
+}
+export interface VrVaccineCoveragePerAgeGroupEstimated {
+  values: VrVaccineCoveragePerAgeGroupEstimatedValue[];
+  last_value: VrVaccineCoveragePerAgeGroupEstimatedValue;
+}
+export interface VrVaccineCoveragePerAgeGroupEstimatedValue {
+  age_18_plus_total: number;
+  age_18_plus_has_one_shot: number;
+  age_18_plus_birthyear: string;
+  age_12_plus_total: number;
+  age_12_plus_has_one_shot: number;
+  age_12_plus_birthyear: string;
   date_unix: number;
   date_of_insertion_unix: number;
 }
