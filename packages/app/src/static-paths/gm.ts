@@ -11,6 +11,6 @@ export function getStaticPaths() {
   return {
     paths,
     // other routes should load on-demand
-    fallback: 'blocking',
+    fallback: false,
   };
 }
