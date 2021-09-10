@@ -91,8 +91,8 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
                   )}%`}
                 />
                 <CoverageProgressBar
-                  partialCount={value.partially_vaccinated}
-                  partialPercentage={value.partially_vaccinated_percentage}
+                  hasOneShotCount={value.has_one_shot}
+                  hasOneShotPercentage={value.has_one_shot_percentage}
                   fullCount={value.fully_vaccinated}
                   fullPercentage={value.fully_vaccinated_percentage}
                   total={value.age_group_total}

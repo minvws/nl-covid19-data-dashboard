@@ -110,8 +110,8 @@ export function VaccineCoveragePerAgeGroupVrGm({
 
                 <Cell>
                   <ParseText
-                    value={item.has_1_shot_percentage}
-                    label={item.has_1_shot_percentage_label}
+                    value={item.has_one_shot_percentage}
+                    label={item.has_one_shot_percentage_label}
                   />
                 </Cell>
               </Row>

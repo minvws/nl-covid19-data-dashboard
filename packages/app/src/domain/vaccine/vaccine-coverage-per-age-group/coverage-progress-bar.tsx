@@ -13,13 +13,14 @@ export const fullColor = colors.data.multiseries.cyan_dark;
 const MARKER_WIDTH = 7;
 
 export function CoverageProgressBar(props: {
-  partialCount: number;
-  partialPercentage: number;
+  hasOneShotCount: number;
+  hasOneShotPercentage: number;
   fullCount: number;
   fullPercentage: number;
   total: number;
 }) {
-  const { partialCount, fullCount, fullPercentage, partialPercentage } = props;
+  const { hasOneShotCount, fullCount, fullPercentage, hasOneShotPercentage } =
+    props;
   const { siteText } = useIntl();
   const { partially: partialLabel, fully: fullLabel } =
     siteText.vaccinaties.vaccination_coverage;
@@ -62,11 +63,11 @@ export function CoverageProgressBar(props: {
             <rect
               x={`${fullPercentage}%`}
               y={containerHeight - barHeight}
-              width={`${partialPercentage}%`}
+              width={`${hasOneShotPercentage}%`}
               height={barHeight}
               fill={partialColor}
             />
-            {fullPercentage && partialPercentage && (
+            {fullPercentage && hasOneShotPercentage && (
               <rect
                 x={`${fullPercentage}%`}
                 y={containerHeight - barHeight}
@@ -75,9 +76,9 @@ export function CoverageProgressBar(props: {
                 fill="white"
               />
             )}
-            {partialPercentage && (
+            {hasOneShotPercentage && (
               <rect
-                x={`${fullPercentage + partialPercentage}%`}
+                x={`${fullPercentage + hasOneShotPercentage}%`}
                 y={containerHeight - barHeight}
                 width={1}
                 height={barHeight}
@@ -96,9 +97,9 @@ export function CoverageProgressBar(props: {
         />
         <LegendItem
           color={partialColor}
-          percentage={partialPercentage}
+          percentage={hasOneShotPercentage}
           label={partialLabel}
-          count={showCount ? partialCount : undefined}
+          count={showCount ? hasOneShotCount : undefined}
         />
       </Box>
     </Box>
