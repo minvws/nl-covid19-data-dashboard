@@ -18,6 +18,7 @@ import { TooltipData } from '~/components/choropleth/tooltips/types';
 import { Markdown } from '~/components/markdown';
 import { InlineText, Text } from '~/components/typography';
 import { useIntl } from '~/intl';
+import { colors } from '~/style/theme';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { useReverseRouter } from '~/utils/use-reverse-router';
 import { AgeGroup, AgeGroupSelect } from './components/age-group-select';
@@ -200,6 +201,8 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
     tooltipValue = replaceVariablesInText(tooltipValueContent, {
       value: formatPercentage(value.value) + '%',
     });
+  } else if (value === null) {
+    tooltipValue = '–';
   }
 
   return (
@@ -215,6 +218,7 @@ export function ChoroplethTooltip<T extends ChoroplethDataItem>(
         subject={replaceVariablesInText(subject, tooltipVars)}
         thresholdValues={data.thresholdValues}
         filterBelow={filterBelow}
+        noDataFillColor={colors.choroplethNoData}
       >
         <Box
           flexGrow={1}
