@@ -72,7 +72,7 @@ export const features: Feature[] = [
   {
     name: 'nlVaccineCoverageEstimated',
     isEnabled: true,
-    dataScopes: ['vr'],
+    dataScopes: ['nl'],
     metricName: 'vaccine_coverage_per_age_group_estimated',
   },
   {
