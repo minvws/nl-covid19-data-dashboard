@@ -62,11 +62,47 @@ const nextConfig = {
     ];
   },
 
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: '/gemeente/(g|G)(m|M):nr(\\d{4})/:page*',
+          destination: '/gemeente/GM:nr/:page*',
+        },
+        {
+          source: '/veiligheidsregio/(v|V)(r|R):nr(\\d{2})/:page*',
+          destination: '/veiligheidsregio/VR:nr/:page*',
+        },
+      ],
+    };
+  },
+
   async redirects() {
     return [
       {
         source: '/landelijk',
         destination: '/landelijk/vaccinaties',
+        permanent: false,
+      },
+      {
+        source: '/apple-touch-icon-120x120-precomposed.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/apple-touch-icon-120x120.png',
+        destination: '/images/touch-icon.png',
+        permanent: false,
+      },
+      {
+        source: '/gemeente/:vr(vr|VR|vR|Vr):nr(\\d{2}):slash(/{0,1}):page*',
+        destination: '/veiligheidsregio/VR:nr',
+        permanent: false,
+      },
+      {
+        source:
+          '/veiligheidsregio/:gm(gm|GM|gM|Gm):nr(\\d{4}):slash(/{0,1}):page*',
+        destination: '/gemeente/GM:nr',
         permanent: false,
       },
     ];
