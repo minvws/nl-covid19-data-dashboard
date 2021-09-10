@@ -38,6 +38,8 @@ function getSortingOrder(ageGroup: string) {
 export function VaccineCoveragePerAgeGroup(props: Props) {
   const { values } = props;
 
+  console.log(values);
+
   const { siteText, formatPercentage, formatNumber } = useIntl();
   const { headers } = siteText.vaccinaties.vaccination_coverage;
   const { templates, age_group_tooltips } =

@@ -11,6 +11,8 @@ export const partialColor = colors.data.multiseries.cyan;
 export const fullColor = colors.data.multiseries.cyan_dark;
 
 const MARKER_WIDTH = 7;
+const BAR_HORIZONTAL_SPACING = 5;
+const BAR_HEIGHT = 11;
 
 export function CoverageProgressBar(props: {
   partialCount: number;
@@ -25,11 +27,12 @@ export function CoverageProgressBar(props: {
     siteText.vaccinaties.vaccination_coverage;
   const breakpoints = useBreakpoints(true);
 
-  const barHeight = 11;
   const showCount = breakpoints.md;
 
-  const markerHeight = barHeight + MARKER_WIDTH;
-  const containerHeight = markerHeight;
+  const markerHeight = BAR_HEIGHT;
+  const containerHeight = markerHeight * 2 + BAR_HORIZONTAL_SPACING;
+
+  console.log(partialPercentage, fullPercentage);
 
   return (
     <Box width="100%" spacing={1}>
@@ -44,15 +47,16 @@ export function CoverageProgressBar(props: {
           })}
         >
           <g>
+            <rect x={0} y={0} width="100%" height={BAR_HEIGHT} fill="#C1C1C1" />
             <rect
               x={0}
-              y={containerHeight - barHeight}
+              y={containerHeight - BAR_HEIGHT}
               width="100%"
-              height={barHeight}
+              height={BAR_HEIGHT}
               fill="#C1C1C1"
             />
 
-            <rect
+            {/* <rect
               x={0}
               y={containerHeight - barHeight}
               width={`${fullPercentage}%`}
@@ -83,11 +87,11 @@ export function CoverageProgressBar(props: {
                 height={barHeight}
                 fill="white"
               />
-            )}
+            )} */}
           </g>
         </svg>
       </Box>
-      <Box display="flex" spacingHorizontal={2}>
+      {/* <Box display="flex" spacingHorizontal={2}>
         <LegendItem
           color={fullColor}
           percentage={fullPercentage}
@@ -100,7 +104,7 @@ export function CoverageProgressBar(props: {
           label={partialLabel}
           count={showCount ? partialCount : undefined}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 }

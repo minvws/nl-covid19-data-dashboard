@@ -87,7 +87,7 @@ function DesktopCoverageRow(props: RowProps) {
       >
         {children[1]}
       </Box>
-      <Box flex={1} display="flex" alignItems="flex-end">
+      <Box flex={1} display="flex" alignItems="center">
         {children[2]}
       </Box>
     </Row>
