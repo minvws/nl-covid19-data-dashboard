@@ -58,6 +58,7 @@ describe('initializeFeatureFlaggedData', () => {
     ];
 
     const initialValues = [{ test: true }, { test: true }];
+    const testValues = JSON.parse(JSON.stringify(initialValues));
 
     const gmCollection: any = {
       last_generated: '1630502291',
@@ -79,7 +80,7 @@ describe('initializeFeatureFlaggedData', () => {
 
     initializeFeatureFlaggedData(gmCollection, 'gm_collection');
 
-    expect(gmCollection.testCollection).toEqual(initialValues);
+    expect(gmCollection.testCollection).toEqual(testValues);
   });
 
   it("should add an empty metric to a GM if it doesn't exist", () => {
@@ -141,6 +142,7 @@ describe('initializeFeatureFlaggedData', () => {
       values: [{ test: true }, { test: true }],
       last_value: { test: true },
     };
+    const testValues = JSON.parse(JSON.stringify(initialValues));
 
     const gm: any = {
       last_generated: '1630502291',
@@ -164,7 +166,7 @@ describe('initializeFeatureFlaggedData', () => {
 
     initializeFeatureFlaggedData(gm, 'gm');
 
-    expect(gm.testCollection).toEqual(initialValues);
+    expect(gm.testCollection).toEqual(testValues);
   });
 
   it("should initialize the metric properties on a VR_COLLECTION metric if they don't exist", () => {
@@ -233,6 +235,7 @@ describe('initializeFeatureFlaggedData', () => {
       { test1: 200, test2: true, test3: 'test' },
       { test1: 300, test2: false, test3: 'test' },
     ];
+    const testValues = JSON.parse(JSON.stringify(initialValues));
 
     const vrCollection: any = {
       last_generated: '1630502291',
@@ -254,7 +257,7 @@ describe('initializeFeatureFlaggedData', () => {
 
     initializeFeatureFlaggedData(vrCollection, 'vr_collection');
 
-    expect(vrCollection.testCollection).toEqual(initialValues);
+    expect(vrCollection.testCollection).toEqual(testValues);
   });
 
   it("should initialize the enum properties on a VR_COLLECTION metric if they don't exist", () => {
