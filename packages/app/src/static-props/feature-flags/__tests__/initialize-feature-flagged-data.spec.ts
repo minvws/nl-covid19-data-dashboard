@@ -167,7 +167,7 @@ describe('initializeFeatureFlaggedData', () => {
     expect(gm.testCollection).toEqual(initialValues);
   });
 
-  it("should initialize the metric properties on a GM_COLLECTION metric if they don't exist", () => {
+  it("should initialize the metric properties on a VR_COLLECTION metric if they don't exist", () => {
     featureFlagConstantsMock.disabledMetrics = [
       {
         name: 'test',
