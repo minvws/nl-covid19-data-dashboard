@@ -57,12 +57,14 @@ describe('initializeFeatureFlaggedData', () => {
       },
     ];
 
+    const initialValues = [{ test: true }, { test: true }];
+
     const gmCollection: any = {
       last_generated: '1630502291',
       proto_name: 'GM_COLLECTION',
       name: 'GM_COLLECTION',
       code: 'GM_COLLECTION',
-      testCollection: [{ test: true }, { test: true }],
+      testCollection: initialValues,
     };
 
     loadJsonFromFileSpy.mockImplementation((...args) => {
@@ -77,8 +79,7 @@ describe('initializeFeatureFlaggedData', () => {
 
     initializeFeatureFlaggedData(gmCollection, 'gm_collection');
 
-    expect(gmCollection.testCollection).toBeDefined();
-    expect(gmCollection.testCollection.length).toEqual(2);
+    expect(gmCollection.testCollection).toEqual(initialValues);
   });
 
   it("should add an empty metric to a GM if it doesn't exist", () => {
@@ -136,15 +137,17 @@ describe('initializeFeatureFlaggedData', () => {
       },
     ];
 
+    const initialValues = {
+      values: [{ test: true }, { test: true }],
+      last_value: { test: true },
+    };
+
     const gm: any = {
       last_generated: '1630502291',
       proto_name: 'GM001',
       name: 'GM001',
       code: 'GM001',
-      testCollection: {
-        values: [{ test: true }, { test: true }],
-        last_value: { test: true },
-      },
+      testCollection: initialValues,
     };
 
     loadJsonFromFileSpy.mockImplementation((...args) => {
@@ -161,12 +164,7 @@ describe('initializeFeatureFlaggedData', () => {
 
     initializeFeatureFlaggedData(gm, 'gm');
 
-    expect(gm.testCollection).toBeDefined();
-    expect(gm.testCollection.values).toBeDefined();
-    expect(gm.testCollection.values.length).toEqual(2);
-    expect(gm.testCollection.last_value).toEqual({
-      test: true,
-    });
+    expect(gm.testCollection).toEqual(initialValues);
   });
 
   it("should initialize the metric properties on a GM_COLLECTION metric if they don't exist", () => {
@@ -219,7 +217,7 @@ describe('initializeFeatureFlaggedData', () => {
     });
   });
 
-  it('should do nothing if the specified metric properties already exist in the GM_COLLECTION items', () => {
+  it('should do nothing if the specified metric properties already exist in the VR_COLLECTION items', () => {
     featureFlagConstantsMock.disabledMetrics = [
       {
         name: 'test',
@@ -230,16 +228,18 @@ describe('initializeFeatureFlaggedData', () => {
       },
     ] as Feature[];
 
+    const initialValues = [
+      { test1: 100, test2: false, test3: 'test' },
+      { test1: 200, test2: true, test3: 'test' },
+      { test1: 300, test2: false, test3: 'test' },
+    ];
+
     const vrCollection: any = {
       last_generated: '1630502291',
       proto_name: 'VR_COLLECTION',
       name: 'VR_COLLECTION',
       code: 'VR_COLLECTION',
-      testCollection: [
-        { test1: 100, test2: false, test3: 'test' },
-        { test1: 200, test2: true, test3: 'test' },
-        { test1: 300, test2: false, test3: 'test' },
-      ],
+      testCollection: initialValues,
     };
 
     loadJsonFromFileSpy.mockImplementation((...args) => {
@@ -254,26 +254,10 @@ describe('initializeFeatureFlaggedData', () => {
 
     initializeFeatureFlaggedData(vrCollection, 'vr_collection');
 
-    expect(vrCollection.testCollection).toBeDefined();
-    expect(vrCollection.testCollection.length).toEqual(3);
-    expect(vrCollection.testCollection[0]).toEqual({
-      test1: 100,
-      test2: false,
-      test3: 'test',
-    });
-    expect(vrCollection.testCollection[1]).toEqual({
-      test1: 200,
-      test2: true,
-      test3: 'test',
-    });
-    expect(vrCollection.testCollection[2]).toEqual({
-      test1: 300,
-      test2: false,
-      test3: 'test',
-    });
+    expect(vrCollection.testCollection).toEqual(initialValues);
   });
 
-  it("should initialize the enum properties on a GM_COLLECTION metric if they don't exist", () => {
+  it("should initialize the enum properties on a VR_COLLECTION metric if they don't exist", () => {
     featureFlagConstantsMock.disabledMetrics = [
       {
         name: 'test',
