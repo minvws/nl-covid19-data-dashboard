@@ -32,7 +32,6 @@
     "validate-json-all": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-all.ts",
     "validate-json-single": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-json-single.ts",
     "validate-last-values": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-last-values.ts",
-    "validate-features": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/validate-features.ts",
     "generate-typescript": "yarn workspace @corona-dashboard/common build && ts-node src/scripts/generate-data-types.ts"
   },
   "devDependencies": {

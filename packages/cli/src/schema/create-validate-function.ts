@@ -1,4 +1,4 @@
-import { Feature, features } from '@corona-dashboard/common';
+import { Feature, features, isVerboseFeature } from '@corona-dashboard/common';
 import Ajv, { AnySchemaObject, ValidateFunction } from 'ajv';
 import fs from 'fs';
 import path from 'path';
@@ -30,10 +30,7 @@ export function loadRootSchema(
 function disableFeatureFlagMetrics(schema: any, features: Feature[]) {
   if (isDefined(schema.required)) {
     const required = schema.required as string[];
-    features.forEach((x) => {
-      if (!isDefined(x.dataScopes)) {
-        return;
-      }
+    features.filter(isVerboseFeature).forEach((x) => {
       if (!x.dataScopes.includes(schema.title)) {
         return;
       }
