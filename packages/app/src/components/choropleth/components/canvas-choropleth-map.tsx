@@ -146,6 +146,7 @@ export const CanvasChoroplethMap = (props: GenericChoroplethMapProps) => {
           minHeight: height,
           maxHeight: '75vh',
           maxWidth: '100%',
+          height: '100%',
           position: 'relative',
         }}
         onMouseOut={featureOutHandler}
