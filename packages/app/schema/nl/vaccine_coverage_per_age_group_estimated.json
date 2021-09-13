@@ -1,0 +1,63 @@
+{
+  "definitions": {
+    "value": {
+      "title": "nl_vaccine_coverage_per_age_group_estimated",
+      "type": "object",
+      "required": [
+        "age_18_plus_fully_vaccinated",
+        "age_18_plus_has_one_shot",
+        "age_18_plus_birthyear",
+        "age_12_plus_fully_vaccinated",
+        "age_12_plus_has_one_shot",
+        "age_12_plus_birthyear",
+        "date_of_insertion_unix",
+        "date_unix"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "age_18_plus_fully_vaccinated": {
+          "type": "integer"
+        },
+        "age_18_plus_has_one_shot": {
+          "type": "integer"
+        },
+        "age_18_plus_birthyear": {
+          "type": "string",
+          "pattern": "^-[0-9]{4}"
+        },
+        "age_12_plus_fully_vaccinated": {
+          "type": "integer"
+        },
+        "age_12_plus_has_one_shot": {
+          "type": "integer"
+        },
+        "age_12_plus_birthyear": {
+          "type": "string",
+          "pattern": "^-[0-9]{4}"
+        },
+        "date_unix": {
+          "type": "integer"
+        },
+        "date_of_insertion_unix": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "nl_vaccine_coverage_per_age_group_estimated_value",
+  "type": "object",
+  "required": ["values", "last_value"],
+  "additionalProperties": false,
+  "properties": {
+    "values": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/value"
+      }
+    },
+    "last_value": {
+      "$ref": "#/definitions/value"
+    }
+  }
+}

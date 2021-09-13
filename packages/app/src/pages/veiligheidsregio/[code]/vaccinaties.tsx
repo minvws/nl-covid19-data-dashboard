@@ -21,8 +21,10 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { getSecondaryMetric } from '~/domain/vaccine/logic/get-secondary-metric';
 import { ChoroplethTooltip } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
 import { VaccinePageIntroductionVrGm } from '~/domain/vaccine/vaccine-page-introduction-vr-gm';
+import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
 import { withFeatureNotFoundPage } from '~/lib/features';
+import { useFeature } from '~/lib/features';
 import {
   createPageArticlesQuery,
   PageArticlesQueryResult,
@@ -110,6 +112,10 @@ export const VaccinationsVrPage = (
     }),
   };
 
+  const vaccineCoverageEstimatedFeature = useFeature(
+    'vrVaccineCoverageEstimated'
+  );
+
   /**
    * Filter out only the the 18 plus value to show in the sidebar
    */
@@ -145,6 +151,21 @@ export const VaccinationsVrPage = (
             referenceLink={text.informatie_blok.reference.href}
             articles={content.highlight.articles}
           />
+
+          {vaccineCoverageEstimatedFeature.isEnabled && (
+            <VaccineCoverageToggleTile
+              title={text.vaccination_grade_toggle_tile.title}
+              topLabels={text.vaccination_grade_toggle_tile.top_labels}
+              source={text.vaccination_grade_toggle_tile.source}
+              ageGroupText={{
+                age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
+                age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
+              }}
+              descriptionFooter={
+                text.vaccination_grade_toggle_tile.description_footer
+              }
+            />
+          )}
 
           <ChoroplethTile
             title={replaceVariablesInText(

@@ -21,6 +21,7 @@ import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vac
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
+import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
@@ -96,6 +97,9 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
   } = props;
 
   const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
+  const vaccineCoverageEstimatedFeature = useFeature(
+    'nlVaccineCoverageEstimated'
+  );
 
   const { siteText } = useIntl();
   const text = siteText.vaccinaties;
@@ -118,6 +122,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
               variant="emphasis"
             />
           )}
+
           <VaccinePageIntroductionNl data={data} />
 
           <PageInformationBlock
@@ -198,6 +203,21 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
 
           {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
+          )}
+
+          {vaccineCoverageEstimatedFeature.isEnabled && (
+            <VaccineCoverageToggleTile
+              title={text.vaccination_grade_toggle_tile.title}
+              topLabels={text.vaccination_grade_toggle_tile.top_labels}
+              source={text.vaccination_grade_toggle_tile.source}
+              ageGroupText={{
+                age_18_plus: text.vaccination_grade_toggle_tile.age_18_plus,
+                age_12_plus: text.vaccination_grade_toggle_tile.age_12_plus,
+              }}
+              descriptionFooter={
+                text.vaccination_grade_toggle_tile.description_footer
+              }
+            />
           )}
 
           <VaccineDeliveryAndAdministrationsAreaChart
