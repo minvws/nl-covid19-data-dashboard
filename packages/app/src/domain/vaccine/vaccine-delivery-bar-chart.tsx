@@ -16,7 +16,6 @@ import {
   TooltipFormatter,
 } from '~/components/time-series-chart/components';
 import { TooltipSeriesList } from '~/components/time-series-chart/components/tooltip/tooltip-series-list';
-import { TimespanAnnotationConfig } from '~/components/time-series-chart/logic';
 import { Text } from '~/components/typography';
 import { useIntl } from '~/intl';
 import { colors } from '~/style/theme';
@@ -32,21 +31,23 @@ export function VaccineDeliveryBarChart({
   const text = intl.siteText.vaccinaties.grafiek_leveringen;
   const [timeframe, setTimeframe] = useState<Timeframe>('recent_and_coming');
 
+  data.values = data.values.filter((x) => !x.is_estimate);
+
   /**
    * The timeframe `recent_and_coming` should display 4 delivered values
    * and 4 expected values. We'll find the index of the first estimated value
    * and slice values based on that index.
    */
-  const estimateIndex = data.values.findIndex((value) => value.is_estimate);
+  // const estimateIndex = data.values.findIndex((value) => value.is_estimate);
 
   const timeframeOptions = [
     {
       label: intl.siteText.charts.time_controls.all,
-      value: 'all' as Timeframe,
+      value: 'all',
     },
     {
       label: text.timeframe_recent_en_verwacht,
-      value: 'recent_and_coming' as Timeframe,
+      value: 'recent_and_coming',
     },
   ];
 
@@ -63,14 +64,6 @@ export function VaccineDeliveryBarChart({
     ) => {
       const data = {
         ...context,
-
-        timespanAnnotation: context.value.isHatched
-          ? ({
-              label:
-                intl.siteText.vaccinaties.data.vaccination_chart.legend
-                  .expected,
-            } as TimespanAnnotationConfig)
-          : undefined,
       };
 
       return <TooltipSeriesList data={data} />;
@@ -98,7 +91,7 @@ export function VaccineDeliveryBarChart({
 
         <RadioGroup
           value={timeframe}
-          onChange={(x) => setTimeframe(x)}
+          onChange={(x) => setTimeframe(x as Timeframe)}
           items={timeframeOptions}
         />
       </Box>
@@ -111,7 +104,7 @@ export function VaccineDeliveryBarChart({
         values={
           timeframe === 'all'
             ? data.values
-            : data.values.slice(estimateIndex - 4, estimateIndex + 4)
+            : data.values.slice(data.values.length - 6)
         }
         valueAnnotation={intl.siteText.waarde_annotaties.x_100k}
         formatTickValue={(x) => `${x / 100_000}`}
@@ -145,9 +138,6 @@ export function VaccineDeliveryBarChart({
             label: text.totaal,
           },
         ].filter(isDefined)}
-        expectedLabel={
-          intl.siteText.vaccinaties.data.vaccination_chart.legend.expected
-        }
         formatTooltip={formatTooltip}
       />
     </ChartTile>

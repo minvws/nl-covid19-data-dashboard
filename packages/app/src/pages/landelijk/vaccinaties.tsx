@@ -17,11 +17,11 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
+import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
 import { VaccineStockPerSupplierChart } from '~/domain/vaccine/vaccine-stock-per-supplier-chart';
-import { VaccineCoverageToggleTile } from '~/domain/vaccine/vaccine-coverage-toggle-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import {
