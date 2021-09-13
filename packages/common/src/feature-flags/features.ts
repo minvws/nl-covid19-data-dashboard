@@ -75,4 +75,22 @@ export const features: Feature[] = [
     dataScopes: ['vr'],
     metricName: 'vaccine_coverage_per_age_group_estimated',
   },
+  {
+    name: 'nlVaccinationPerAgeGroup',
+    isEnabled: true,
+    dataScopes: ['nl'],
+    metricName: 'vaccine_coverage_per_age_group_estimated',
+  },
+  {
+    name: 'vrVaccinationPerAgeGroup',
+    isEnabled: false,
+    dataScopes: ['vr'],
+    metricName: 'vaccine_coverage_per_age_group_estimated',
+  },
+  {
+    name: 'gmVaccinationPerAgeGroup',
+    isEnabled: false,
+    dataScopes: ['gm'],
+    metricName: 'vaccine_coverage_per_age_group_estimated',
+  },
 ];
