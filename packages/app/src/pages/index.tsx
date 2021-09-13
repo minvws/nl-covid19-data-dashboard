@@ -2,7 +2,7 @@ import {
   GmCollectionTestedOverall,
   VrCollectionTestedOverall,
 } from '@corona-dashboard/common';
-import { Chart, Test, Ziekenhuis } from '@corona-dashboard/icons';
+import { Chart, Test, Vaccinaties, Ziekenhuis } from '@corona-dashboard/icons';
 import css from '@styled-system/css';
 import { isEmpty, some } from 'lodash';
 import { useMemo, useState } from 'react';
@@ -41,10 +41,13 @@ import { MiniTrendTile } from '~/domain/topical/mini-trend-tile';
 import { MiniTrendTileLayout } from '~/domain/topical/mini-trend-tile-layout';
 import { TopicalSectionHeader } from '~/domain/topical/topical-section-header';
 import { TopicalTile } from '~/domain/topical/topical-tile';
-import { TopicalVaccineTile } from '~/domain/topical/topical-vaccine-tile';
 import { useIntl } from '~/intl';
 import { useFeature } from '~/lib/features';
 import { SiteText } from '~/locale';
+import {
+  ElementsQueryResult,
+  getWarning,
+} from '~/queries/create-elements-query';
 import { getTopicalPageQuery } from '~/queries/topical-page-query';
 import {
   createGetStaticProps,
@@ -76,6 +79,7 @@ export const getStaticProps = createGetStaticProps(
     articles?: ArticleSummary[];
     weeklyHighlight?: WeeklyHighlightProps;
     highlights?: HighlightTeaserProps[];
+    elements: ElementsQueryResult;
   }>(getTopicalPageQuery),
   selectNlData(
     'tested_overall',
@@ -100,9 +104,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
 
   const dataInfectedTotal = data.tested_overall;
   const dataHospitalIntake = data.hospital_nice;
+  const dataVaccines = data.vaccine_administered_total;
   const dataSitemap = useDataSitemap('nl');
 
-  const { siteText, formatDate } = useIntl();
+  const { siteText, formatDate, formatNumber } = useIntl();
   const reverseRouter = useReverseRouter();
   const text = siteText.nationaal_actueel;
 
@@ -189,6 +194,10 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="infected"
                 href={reverseRouter.nl.positiefGetesteMensen()}
                 accessibility={{ key: 'topical_tested_overall' }}
+                warning={getWarning(
+                  content.elements.timeSeries,
+                  'tested_overall'
+                )}
               />
 
               <MiniTrendTile
@@ -210,9 +219,39 @@ const Home = (props: StaticProps<typeof getStaticProps>) => {
                 metricProperty="admissions_on_date_of_reporting"
                 href={reverseRouter.nl.ziekenhuisopnames()}
                 accessibility={{ key: 'topical_hospital_nice' }}
+                warning={getWarning(
+                  content.elements.timeSeries,
+                  'hospital_nice'
+                )}
               />
 
-              <TopicalVaccineTile data={data.vaccine_administered_total} />
+              <MiniTrendTile
+                title={text.mini_trend_tiles.toegediende_vaccins.title}
+                text={replaceComponentsInText(
+                  text.mini_trend_tiles.toegediende_vaccins.administered_tests,
+                  {
+                    administeredVaccines: (
+                      <strong>
+                        {formatNumber(
+                          data.vaccine_administered_total.last_value.estimated
+                        )}
+                      </strong>
+                    ),
+                  }
+                )}
+                icon={<Vaccinaties />}
+                timeframe="all"
+                trendData={dataVaccines.values}
+                accessibility={{
+                  key: 'topical_vaccine_administrations_over_time',
+                }}
+                metricProperty="estimated"
+                href={reverseRouter.nl.vaccinaties()}
+                warning={getWarning(
+                  content.elements.timeSeries,
+                  'vaccine_administered_total'
+                )}
+              />
             </MiniTrendTileLayout>
 
             <CollapsibleButton

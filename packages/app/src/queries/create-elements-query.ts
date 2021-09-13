@@ -25,7 +25,8 @@ export function createElementsQuery(
           'description': description.${locale},
           date,
           dateEnd
-        }
+        },
+        warning
       },
       'kpi': *[
         _type == 'kpi'
@@ -55,6 +56,7 @@ type CmsTimeSeriesElement = {
   metricName: string;
   metricProperty: string | null;
   timelineEvents: CmsTimelineEventConfig[];
+  warning: string | null;
 };
 
 type CmsKpiElement = {
@@ -89,4 +91,13 @@ export function getTimelineEvents(
         end: x.dateEnd ? new Date(x.dateEnd).getTime() / 1000 : undefined,
       }))
     : undefined;
+}
+
+export function getWarning(
+  elements: CmsTimeSeriesElement[],
+  metricName: string
+) {
+  return (
+    elements.find((x) => x.metricName === metricName)?.warning || undefined
+  );
 }

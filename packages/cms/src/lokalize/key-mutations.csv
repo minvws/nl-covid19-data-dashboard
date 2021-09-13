@@ -1,4 +1,5 @@
 timestamp,action,key,document_id,move_to
+2021-09-07T07:59:07.147Z,add,aria_labels.warning,srBRCALrLz9Y3ZpBD1IT8W,__
 2021-09-06T09:52:56.741Z,add,nationaal_layout.headings.archief,srBRCALrLz9Y3ZpBCxW7jO,__
 2021-09-08T08:46:38.098Z,add,toe_en_afname.waarde_hoger,oFxmVAb3WhH1wXDkdmrhY7,__
 2021-09-08T08:46:39.531Z,add,toe_en_afname.waarde_meer,u2w2cmKrEkkhu4TKoNjc7M,__
@@ -42,3 +43,5 @@ timestamp,action,key,document_id,move_to
 2021-09-09T10:53:20.610Z,add,veiligheidsregio_vaccinaties.vaccination_grade_toggle_tile.age_12_plus.description_vaccination_one_shot,iLvivnjMZ7igG7VqAgygvY,__
 2021-09-09T10:53:21.621Z,add,veiligheidsregio_vaccinaties.vaccination_grade_toggle_tile.age_12_plus.description_vaccination_grade,iLvivnjMZ7igG7VqAgyh3O,__
 2021-09-09T10:53:22.637Z,add,veiligheidsregio_vaccinaties.vaccination_grade_toggle_tile.description_footer,qjZwg5QUJcN8JoCoxxDHxs,__
+2021-09-09T12:10:43.010Z,add,notfound_titel.text,iLvivnjMZ7igG7VqAhIRUg,__
+2021-09-09T12:10:44.159Z,add,notfound_beschrijving.text,qjZwg5QUJcN8JoCoxxlRig,__

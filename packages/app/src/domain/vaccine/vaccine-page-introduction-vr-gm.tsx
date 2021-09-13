@@ -64,9 +64,7 @@ export function VaccinePageIntroductionVrGm({
                 }
               />
             ) : (
-              <KpiValue
-                percentage={data.fully_vaccinated_percentage as number}
-              />
+              <KpiValue percentage={data.fully_vaccinated_percentage} />
             )}
             <Markdown content={description} />
           </Box>
