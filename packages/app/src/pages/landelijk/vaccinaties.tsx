@@ -17,7 +17,6 @@ import { selectVaccineCoverageData } from '~/domain/vaccine/data-selection/selec
 import { MilestonesView } from '~/domain/vaccine/milestones-view';
 import { VaccineAdministrationsKpiSection } from '~/domain/vaccine/vaccine-administrations-kpi-section';
 import { VaccineCoverageChoroplethPerGm } from '~/domain/vaccine/vaccine-coverage-choropleth-per-gm';
-import { VaccineCoveragePerAgeGroup } from '~/domain/vaccine/vaccine-coverage-per-age-group';
 import { VaccineDeliveryAndAdministrationsAreaChart } from '~/domain/vaccine/vaccine-delivery-and-administrations-area-chart';
 import { VaccineDeliveryBarChart } from '~/domain/vaccine/vaccine-delivery-bar-chart';
 import { VaccinePageIntroductionNl } from '~/domain/vaccine/vaccine-page-introduction-nl';
@@ -96,7 +95,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     deliveryAndAdministration,
   } = props;
 
-  const vaccinationPerAgeGroupFeature = useFeature('vaccinationPerAgeGroup');
   const vaccinationChoroplethFeature = useFeature('nlVaccinationChoropleth');
 
   const { siteText } = useIntl();
@@ -201,25 +199,6 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
           {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
-
-          {vaccinationPerAgeGroupFeature.isEnabled &&
-          data.vaccine_coverage_per_age_group ? (
-            <ChartTile
-              title={siteText.vaccinaties.vaccination_coverage.title}
-              description={
-                siteText.vaccinaties.vaccination_coverage.toelichting
-              }
-              metadata={{
-                datumsText: text.datums,
-                date: data.vaccine_coverage_per_age_group.values[0].date_unix,
-                source: siteText.vaccinaties.vaccination_coverage.bronnen.rivm,
-              }}
-            >
-              <VaccineCoveragePerAgeGroup
-                values={data.vaccine_coverage_per_age_group.values}
-              />
-            </ChartTile>
-          ) : null}
 
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}

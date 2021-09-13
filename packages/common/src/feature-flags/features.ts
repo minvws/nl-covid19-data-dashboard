@@ -2,12 +2,6 @@ import { Feature } from '~/types';
 
 export const features: Feature[] = [
   {
-    name: 'vaccinationPerAgeGroup',
-    isEnabled: false,
-    dataScopes: ['nl'],
-    metricName: 'vaccine_coverage_per_age_group',
-  },
-  {
     name: 'situationsPage',
     isEnabled: true,
     dataScopes: ['vr', 'vr_collection'],

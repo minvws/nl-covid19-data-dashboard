@@ -21,3 +21,15 @@ timestamp,action,key,document_id,move_to
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.zeven_daags_gemiddelde,6QpSQ1LKij6fvuYEHTebU7,__
 2021-09-09T12:10:43.010Z,add,notfound_titel.text,iLvivnjMZ7igG7VqAhIRUg,__
 2021-09-09T12:10:44.159Z,add,notfound_beschrijving.text,qjZwg5QUJcN8JoCoxxlRig,__
+2021-09-13T13:44:59.643Z,delete,gemeente_vaccinaties.vaccination_coverage_per_age_group.annotation_description,xeeXS0RPNTOe6jONlMcSt3,__
+2021-09-13T13:44:59.644Z,delete,gemeente_vaccinaties.vaccination_coverage_per_age_group.description,rViLqMuzbcTEh1Hjy1HR8s,__
+2021-09-13T13:44:59.644Z,delete,gemeente_vaccinaties.vaccination_coverage_per_age_group.title,xeeXS0RPNTOe6jONlMcRnz,__
+2021-09-13T13:44:59.644Z,delete,gemeente_vaccinaties.vaccination_coverage_per_age_group.top_labels.agegroups,rViLqMuzbcTEh1Hjy1HObN,__
+2021-09-13T13:44:59.644Z,delete,gemeente_vaccinaties.vaccination_coverage_per_age_group.top_labels.vaccination_coverage,xeeXS0RPNTOe6jONlMcQZL,__
+2021-09-13T13:44:59.644Z,delete,gemeente_vaccinaties.vaccination_coverage_per_age_group.top_labels.with_one_shot,IdUyaapVWcyKHaD1kYCG9H,__
+2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.annotation_description,IdUyaapVWcyKHaD1kYCIfl,__
+2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.description,IdUyaapVWcyKHaD1kYCIER,__
+2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.title,rViLqMuzbcTEh1Hjy1HTON,__
+2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.agegroups,xeeXS0RPNTOe6jONlMcToX,__
+2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.vaccination_coverage,rViLqMuzbcTEh1Hjy1HSNN,__
+2021-09-13T13:44:59.645Z,delete,veiligheidsregio_vaccinaties.vaccination_coverage_per_age_group.top_labels.with_one_shot,xeeXS0RPNTOe6jONlMcV3B,__
