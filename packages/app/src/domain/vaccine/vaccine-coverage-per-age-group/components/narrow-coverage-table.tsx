@@ -2,10 +2,10 @@ import { Box } from '~/components/base';
 import { useIntl } from '~/intl';
 import { InlineText } from '~/components/typography';
 import { AgeGroup } from './age-group';
-import { formatBirthyearRangeString } from './logic/format-birthyear-range-string';
+import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
-import { formatAgeGroupString } from './logic/format-age-group-string';
-import { COLOR_HAS_ONE_SHOT, COLOR_FULLY_VACCINATED } from './common';
+import { formatAgeGroupString } from '../logic/format-age-group-string';
+import { COLOR_HAS_ONE_SHOT, COLOR_FULLY_VACCINATED } from '../common';
 import { asResponsiveArray } from '~/style/utils';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 import css from '@styled-system/css';
@@ -14,7 +14,7 @@ interface NarrowCoverageRow {
   values: NlVaccineCoveragePerAgeGroupValue[];
 }
 
-export function NarrowCoverageRow({ values }: NarrowCoverageRow) {
+export function NarrowCoverageTable({ values }: NarrowCoverageRow) {
   const { siteText, formatNumber } = useIntl();
   const { headers } = siteText.vaccinaties.vaccination_coverage;
   const { templates, age_group_tooltips } =

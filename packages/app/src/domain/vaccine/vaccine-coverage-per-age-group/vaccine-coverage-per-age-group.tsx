@@ -15,8 +15,8 @@ import css from '@styled-system/css';
 import { formatAgeGroupString } from './logic/format-age-group-string';
 import { formatBirthyearRangeString } from './logic/format-birthyear-range-string';
 import { PercentageBar } from '~/components/percentage-bar';
-import { NarrowCoverageRow } from '~/domain/vaccine/vaccine-coverage-per-age-group/narrow-coverage-row';
-import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/wide-coverage-table';
+import { NarrowCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/narrow-coverage-table';
+import { WideCoverageTable } from '~/domain/vaccine/vaccine-coverage-per-age-group/components/wide-coverage-table';
 import styled from 'styled-components';
 import { ChartTile } from '~/components/chart-tile';
 
@@ -49,9 +49,6 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
   console.log(values);
 
   const { siteText, formatPercentage, formatNumber } = useIntl();
-  const { headers } = siteText.vaccinaties.vaccination_coverage;
-  const { templates, age_group_tooltips } =
-    siteText.vaccinaties.vaccination_coverage;
 
   const sortedValues = values.sort(
     (a, b) =>
@@ -62,7 +59,7 @@ export function VaccineCoveragePerAgeGroup(props: Props) {
       {breakpoints.md ? (
         <WideCoverageTable values={sortedValues} />
       ) : (
-        <NarrowCoverageRow values={sortedValues} />
+        <NarrowCoverageTable values={sortedValues} />
       )}
     </ChartTile>
   );

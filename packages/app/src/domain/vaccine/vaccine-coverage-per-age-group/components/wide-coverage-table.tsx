@@ -5,11 +5,11 @@ import { asResponsiveArray } from '~/style/utils';
 import { useIntl } from '~/intl';
 import { InlineText } from '~/components/typography';
 import { AgeGroup } from './age-group';
-import { formatAgeGroupString } from './logic/format-age-group-string';
-import { formatBirthyearRangeString } from './logic/format-birthyear-range-string';
+import { formatAgeGroupString } from '../logic/format-age-group-string';
+import { formatBirthyearRangeString } from '../logic/format-birthyear-range-string';
 import { replaceVariablesInText } from '~/utils/replace-variables-in-text';
 import { PercentageBar } from '~/components/percentage-bar';
-import { COLOR_HAS_ONE_SHOT, COLOR_FULLY_VACCINATED } from './common';
+import { COLOR_HAS_ONE_SHOT, COLOR_FULLY_VACCINATED } from '../common';
 import { NlVaccineCoveragePerAgeGroupValue } from '@corona-dashboard/common';
 
 interface WideCoverageTable {
