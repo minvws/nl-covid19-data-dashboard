@@ -60,6 +60,15 @@ export function sortTimeSeriesInDataInPlace<T>(
       return;
     }
 
+    if (!Array.isArray(nestedSeries.values)) {
+      /**
+       * It can happen that we get incomplete json data and assuming that values
+       * exists here might crash the app
+       */
+      console.error('sewer_per_installation.values is not an array');
+      return;
+    }
+
     nestedSeries.values = nestedSeries.values.map((x, index) => {
       if (!x.values) {
         /**
@@ -67,7 +76,7 @@ export function sortTimeSeriesInDataInPlace<T>(
          * exists here might crash the app
          */
         console.error(
-          `nestedSeries ${index} does not have a values collection`
+          `sewer_per_installation.values[${index}] does not have a values collection`
         );
         return x;
       }
