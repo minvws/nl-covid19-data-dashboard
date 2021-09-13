@@ -4,7 +4,7 @@ export const features: Feature[] = [
   {
     name: 'vaccinationPerAgeGroup',
     isEnabled: false,
-    dataScopes: ['nl'],
+    dataScopes: ['nl', 'vr', 'gm'],
     metricName: 'vaccine_coverage_per_age_group',
   },
   {
