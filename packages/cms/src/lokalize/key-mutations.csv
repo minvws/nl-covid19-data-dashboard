@@ -19,3 +19,7 @@ timestamp,action,key,document_id,move_to
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.toename,jF33EuwumlGuwav2FD3uBw,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.vorige_waarde,jF33EuwumlGuwav2FD3uW4,__
 2021-09-08T10:35:24.014Z,delete,toe_en_afname.zeven_daags_gemiddelde,6QpSQ1LKij6fvuYEHTebU7,__
+2021-09-10T11:27:45.709Z,delete,vaccinaties.vaccination_coverage.fully,jF33EuwumlGuwav2FD46L6,__
+2021-09-10T11:27:45.710Z,delete,vaccinaties.vaccination_coverage.partially,jF33EuwumlGuwav2FD46JQ,__
+2021-09-10T12:10:30.121Z,add,vaccinaties.vaccination_coverage.headers.first_shot,TfQKtohu9HBbEmilvF8j6l,__
+2021-09-10T12:10:30.123Z,delete,vaccinaties.vaccination_coverage.headers.progress,jF33EuwumlGuwav2FD46B2,__

@@ -113,6 +113,10 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
     <Layout {...metadata} lastGenerated={lastGenerated}>
       <NlLayout data={data} lastGenerated={lastGenerated}>
         <TileList>
+          <VaccineCoveragePerAgeGroup
+            values={data.vaccine_coverage_per_age_group.values}
+          />
+
           {text.belangrijk_bericht && !isEmpty(text.belangrijk_bericht) && (
             <WarningTile
               isFullWidth
@@ -198,7 +202,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
             </ChartTile>
           )}
 
-          {vaccinationChoroplethFeature.isEnabled && (
+          {/* {vaccinationChoroplethFeature.isEnabled && (
             <VaccineCoverageChoroplethPerGm data={choropleth} />
           )}
 
@@ -219,7 +223,7 @@ const VaccinationPage = (props: StaticProps<typeof getStaticProps>) => {
                 values={data.vaccine_coverage_per_age_group.values}
               />
             </ChartTile>
-          ) : null}
+          ) : null} */}
 
           <VaccineDeliveryAndAdministrationsAreaChart
             data={deliveryAndAdministration}
