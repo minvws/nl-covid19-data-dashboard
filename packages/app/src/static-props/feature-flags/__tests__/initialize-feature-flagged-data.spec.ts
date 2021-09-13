@@ -36,7 +36,7 @@ describe('initializeFeatureFlaggedData', () => {
       if (pathStr.endsWith('__index.json')) {
         return gmCollectionSchema;
       }
-      if (pathStr.endsWith('testCollection')) {
+      if (pathStr.endsWith('testCollection.json')) {
         return gmCollectionTestCollectionSchema;
       }
     });
@@ -73,7 +73,7 @@ describe('initializeFeatureFlaggedData', () => {
       if (pathStr.endsWith('__index.json')) {
         return gmCollectionSchema;
       }
-      if (pathStr.endsWith('testCollection')) {
+      if (pathStr.endsWith('testCollection.json')) {
         return gmCollectionTestCollectionSchema;
       }
     });
@@ -107,7 +107,7 @@ describe('initializeFeatureFlaggedData', () => {
         return gmSchema;
       }
 
-      if (pathStr.endsWith('testCollection')) {
+      if (pathStr.endsWith('testCollection.json')) {
         return gmTestCollectionSchema;
       }
     });
@@ -159,7 +159,7 @@ describe('initializeFeatureFlaggedData', () => {
         return gmSchema;
       }
 
-      if (pathStr.endsWith('testCollection')) {
+      if (pathStr.endsWith('testCollection.json')) {
         return gmTestCollectionSchema;
       }
     });
@@ -193,7 +193,7 @@ describe('initializeFeatureFlaggedData', () => {
       if (pathStr.endsWith('__index.json')) {
         return vrCollectionSchema;
       }
-      if (pathStr.endsWith('testCollection')) {
+      if (pathStr.endsWith('testCollection.json')) {
         return vrCollectionTestCollectionSchema;
       }
     });
@@ -250,7 +250,7 @@ describe('initializeFeatureFlaggedData', () => {
       if (pathStr.endsWith('__index.json')) {
         return vrCollectionSchema;
       }
-      if (pathStr.endsWith('testCollection')) {
+      if (pathStr.endsWith('testCollection.json')) {
         return vrCollectionTestCollectionSchema;
       }
     });
@@ -284,7 +284,7 @@ describe('initializeFeatureFlaggedData', () => {
       if (pathStr.endsWith('__index.json')) {
         return vrCollectionSchema;
       }
-      if (pathStr.endsWith('testCollection')) {
+      if (pathStr.endsWith('testCollection.json')) {
         return vrCollectionTestCollectionEnumSchema;
       }
     });

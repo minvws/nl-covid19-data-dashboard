@@ -179,7 +179,11 @@ function initializeProperty(prop: AjvPropertyDef, schema: AjvSchema) {
 function getSchema(feature: VerboseFeature, scope: JsonDataScope) {
   const rootSchemaPath = path.join(schemaRootPath, scope, '__index.json');
   const rootSchema = loadJsonFromFile<AjvSchema>(rootSchemaPath);
-  const metricSchemaPath = path.join(schemaRootPath, scope, feature.metricName);
+  const metricSchemaPath = path.join(
+    schemaRootPath,
+    scope,
+    `${feature.metricName}.json`
+  );
   const metricSchema = loadJsonFromFile<AjvSchema>(metricSchemaPath);
   return [rootSchema, metricSchema] as const;
 }
